@@ -19,21 +19,10 @@ U 1 1 611FC86D
 P 5600 1600
 F 0 "D2" V 5646 1520 50  0000 R CNN
 F 1 "D_Zener" V 5555 1520 50  0001 R CNN
-F 2 "" H 5600 1600 50  0001 C CNN
+F 2 "Diode_THT:D_A-405_P7.62mm_Horizontal" H 5600 1600 50  0001 C CNN
 F 3 "~" H 5600 1600 50  0001 C CNN
 	1    5600 1600
 	0    1    1    0   
-$EndComp
-$Comp
-L Regulator_Linear:LM7805_TO220 U3
-U 1 1 611FDFDA
-P 6450 1850
-F 0 "U3" H 6450 2092 50  0000 C CNN
-F 1 "LM7805_TO220" H 6450 2001 50  0001 C CNN
-F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 6450 2075 50  0001 C CIN
-F 3 "https://www.onsemi.cn/PowerSolutions/document/MC7800-D.PDF" H 6450 1800 50  0001 C CNN
-	1    6450 1850
-	-1   0    0    1   
 $EndComp
 $Comp
 L Device:R R1
@@ -54,7 +43,7 @@ U 1 1 611FCE23
 P 5300 1900
 F 0 "D1" V 5346 1820 50  0000 R CNN
 F 1 "D_Zener" V 5255 1820 50  0001 R CNN
-F 2 "" H 5300 1900 50  0001 C CNN
+F 2 "Diode_THT:D_A-405_P7.62mm_Horizontal" H 5300 1900 50  0001 C CNN
 F 3 "~" H 5300 1900 50  0001 C CNN
 	1    5300 1900
 	-1   0    0    1   
@@ -123,7 +112,7 @@ U 1 1 612261DA
 P 3200 5750
 F 0 "U1" V 3200 6828 50  0000 L CNN
 F 1 "Pico" V 3245 6828 50  0001 L CNN
-F 2 "RPi_Pico:RPi_Pico_SMD_TH" V 3200 5750 50  0001 C CNN
+F 2 "MCU_RaspberryPi_and_Boards:RPi_Pico_SMD_TH" V 3200 5750 50  0001 C CNN
 F 3 "" H 3200 5750 50  0001 C CNN
 	1    3200 5750
 	0    1    1    0   
@@ -321,7 +310,7 @@ U 1 1 612D58FF
 P 7900 1250
 F 0 "J1" V 7962 1294 50  0000 L CNN
 F 1 "Conn_01x02_Male" V 8053 1294 50  0000 L CNN
-F 2 "" H 7900 1250 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 7900 1250 50  0001 C CNN
 F 3 "~" H 7900 1250 50  0001 C CNN
 	1    7900 1250
 	-1   0    0    1   
@@ -429,5 +418,16 @@ F 2 "" H 4250 3300 50  0001 C CNN
 F 3 "~" H 4250 3300 50  0001 C CNN
 	1    4250 3300
 	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Linear:L7805 U3
+U 1 1 61326C9A
+P 6450 1850
+F 0 "U3" H 6450 2000 50  0000 C CNN
+F 1 "L7805" H 6450 2090 50  0001 C CNN
+F 2 "" H 6475 1700 50  0001 L CIN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 6450 1800 50  0001 C CNN
+	1    6450 1850
+	-1   0    0    1   
 $EndComp
 $EndSCHEMATC

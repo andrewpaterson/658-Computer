@@ -84,7 +84,7 @@ U 1 1 612226BC
 P 5700 1350
 F 0 "U2" V 5700 2094 50  0000 L CNN
 F 1 "RC1602A" V 5745 2094 50  0001 L CNN
-F 2 "Display:RC1602A" H 5800 550 50  0001 C CNN
+F 2 "Microtips LCD:NMTC-S16205" H 5800 550 50  0001 C CNN
 F 3 "http://www.raystar-optronics.com/down.php?ProID=18" H 5800 1250 50  0001 C CNN
 	1    5700 1350
 	0    -1   -1   0   
@@ -114,10 +114,8 @@ NoConn ~ 950  2700
 NoConn ~ 950  2800
 NoConn ~ 950  2900
 NoConn ~ 950  3200
-NoConn ~ 2350 2500
 NoConn ~ 6000 950 
 NoConn ~ 5900 950 
-NoConn ~ 2350 3000
 $Comp
 L power:PWR_FLAG #FLG0102
 U 1 1 612CF214
@@ -329,14 +327,10 @@ F 3 "" H 1650 2250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	550  3000 800  3000
-Wire Wire Line
-	900  3100 900  650 
 Connection ~ 900  3100
 Wire Wire Line
 	800  3000 800  2500
 Connection ~ 800  3000
-Wire Wire Line
-	800  3000 950  3000
 Wire Wire Line
 	950  2500 800  2500
 Connection ~ 800  2500
@@ -1151,10 +1145,6 @@ Wire Wire Line
 	450  3350 2600 3350
 Wire Wire Line
 	350  3400 2600 3400
-Wire Wire Line
-	2350 3200 2350 3300
-Wire Wire Line
-	2350 3300 2600 3300
 Entry Wire Line
 	2600 3400 2700 3300
 Entry Wire Line
@@ -1173,8 +1163,6 @@ Entry Wire Line
 	4500 2850 4400 2750
 Wire Bus Line
 	4650 2850 4500 2850
-Wire Wire Line
-	2350 3100 2550 3100
 Wire Wire Line
 	2550 3100 2550 5250
 Wire Wire Line
@@ -1237,21 +1225,21 @@ Wire Wire Line
 NoConn ~ 4350 2250
 NoConn ~ 4350 2150
 NoConn ~ 4350 2050
-Text Label 750  1300 0    50   ~ 0
-L0
-Text Label 750  1400 0    50   ~ 0
-L1
-Text Label 750  1600 0    50   ~ 0
-L2
-Text Label 750  1700 0    50   ~ 0
-L3
-Text Label 750  1800 0    50   ~ 0
-L4
-Text Label 750  1900 0    50   ~ 0
-L5
-Text Label 750  2100 0    50   ~ 0
-L6
 Text Label 750  2300 0    50   ~ 0
+L0
+Text Label 750  2100 0    50   ~ 0
+L1
+Text Label 750  1900 0    50   ~ 0
+L2
+Text Label 750  1800 0    50   ~ 0
+L3
+Text Label 750  1700 0    50   ~ 0
+L4
+Text Label 750  1600 0    50   ~ 0
+L5
+Text Label 750  1400 0    50   ~ 0
+L6
+Text Label 750  1300 0    50   ~ 0
 L7
 Text Label 6300 3750 0    50   ~ 0
 L0
@@ -1332,7 +1320,7 @@ Wire Wire Line
 	350  2450 350  3400
 Wire Wire Line
 	950  2450 950  2400
-Text Label 2350 3300 0    50   ~ 0
+Text Label 2500 1300 0    50   ~ 0
 CS0
 Text Label 750  2450 0    50   ~ 0
 CS1
@@ -1367,37 +1355,33 @@ Connection ~ 4600 3550
 Wire Wire Line
 	4600 3550 5900 3550
 Entry Wire Line
+	2550 2400 2450 2500
+Entry Wire Line
 	2550 2500 2450 2600
 Entry Wire Line
 	2550 2600 2450 2700
 Entry Wire Line
 	2550 2700 2450 2800
-Entry Wire Line
-	2550 2800 2450 2900
 Wire Wire Line
 	2450 2600 2350 2600
 Wire Wire Line
 	2450 2700 2350 2700
 Wire Wire Line
-	2450 2800 2350 2800
-Wire Wire Line
-	2350 2900 2450 2900
+	2350 2800 2450 2800
+Entry Wire Line
+	2550 1900 2450 2000
 Entry Wire Line
 	2550 2000 2450 2100
 Entry Wire Line
 	2550 2100 2450 2200
 Entry Wire Line
 	2550 2200 2450 2300
-Entry Wire Line
-	2550 2300 2450 2400
 Wire Wire Line
 	2450 2100 2350 2100
 Wire Wire Line
 	2450 2200 2350 2200
 Wire Wire Line
-	2450 2300 2350 2300
-Wire Wire Line
-	2350 2400 2450 2400
+	2350 2300 2450 2300
 Entry Wire Line
 	6200 1850 6100 1950
 Entry Wire Line
@@ -1450,26 +1434,24 @@ Text Label 6100 1850 0    50   ~ 0
 DB6
 Text Label 6200 1850 0    50   ~ 0
 DB7
-Text Label 2450 2900 0    50   ~ 0
+Text Label 2450 2000 0    50   ~ 0
 DB0
-Text Label 2450 2800 0    50   ~ 0
-DB1
-Text Label 2450 2700 0    50   ~ 0
-DB2
-Text Label 2450 2600 0    50   ~ 0
-DB3
-Text Label 2450 2400 0    50   ~ 0
-DB4
-Text Label 2450 2300 0    50   ~ 0
-DB5
-Text Label 2450 2200 0    50   ~ 0
-DB6
 Text Label 2450 2100 0    50   ~ 0
+DB1
+Text Label 2450 2200 0    50   ~ 0
+DB2
+Text Label 2450 2300 0    50   ~ 0
+DB3
+Text Label 2450 2500 0    50   ~ 0
+DB4
+Text Label 2450 2600 0    50   ~ 0
+DB5
+Text Label 2450 2700 0    50   ~ 0
+DB6
+Text Label 2450 2800 0    50   ~ 0
 DB7
 Wire Wire Line
-	2350 1900 2450 1900
-Wire Wire Line
-	2450 1900 2450 1850
+	2450 1800 2450 1850
 Wire Wire Line
 	2450 1850 5400 1850
 Wire Wire Line
@@ -1477,11 +1459,9 @@ Wire Wire Line
 Wire Wire Line
 	5300 1750 5300 1800
 Wire Wire Line
-	5300 1800 2350 1800
+	4650 1700 2350 1700
 Wire Wire Line
-	2350 1700 4700 1700
-Wire Wire Line
-	4700 1700 4700 1750
+	2350 1600 4700 1600
 Wire Wire Line
 	4700 1750 5200 1750
 $Comp
@@ -1506,9 +1486,6 @@ Connection ~ 3850 3050
 NoConn ~ 3350 2250
 NoConn ~ 3350 2150
 NoConn ~ 3350 2050
-NoConn ~ 2350 1600
-NoConn ~ 2350 1400
-NoConn ~ 2350 1300
 $Comp
 L power:PWR_FLAG #FLG0105
 U 1 1 61E8CD4A
@@ -1529,13 +1506,13 @@ Text Label 3000 2550 0    50   ~ 0
 CE2
 Text Label 3000 2450 0    50   ~ 0
 CE3
-Text Label 2450 3100 0    50   ~ 0
+Text Label 2500 1400 0    50   ~ 0
 LE
-Text Label 2400 1700 0    50   ~ 0
+Text Label 2400 1600 0    50   ~ 0
 RS
-Text Label 2400 1800 0    50   ~ 0
+Text Label 2400 1700 0    50   ~ 0
 RW
-Text Label 2400 1900 0    50   ~ 0
+Text Label 2400 1800 0    50   ~ 0
 E
 Text Label 550  7100 0    50   ~ 0
 P1
@@ -1791,7 +1768,7 @@ Wire Wire Line
 Wire Wire Line
 	3950 6650 3950 7100
 Text Label 3950 7100 0    50   ~ 0
-P3
+P33
 Text Label 4050 7100 0    50   ~ 0
 P34
 Text Label 4150 7100 0    50   ~ 0
@@ -1820,7 +1797,7 @@ $EndComp
 Wire Wire Line
 	4250 6800 4250 7100
 Wire Wire Line
-	800  550  6450 550 
+	800  550  3200 550 
 Wire Wire Line
 	6450 750  6450 550 
 Connection ~ 6450 750 
@@ -2008,6 +1985,158 @@ Wire Wire Line
 	9400 4850 9000 4850
 Wire Wire Line
 	9000 4850 9000 4750
+Text Label 3000 2350 0    50   ~ 0
+CE4
+Wire Wire Line
+	2350 1400 2600 1400
+Wire Wire Line
+	2600 1400 2600 3100
+Wire Wire Line
+	2600 3100 2550 3100
+Wire Wire Line
+	2350 1300 2650 1300
+Wire Wire Line
+	2650 1300 2650 3150
+Wire Wire Line
+	2650 3150 2600 3150
+Wire Wire Line
+	2600 3150 2600 3300
+Wire Wire Line
+	4700 1600 4700 1750
+Wire Wire Line
+	5300 1800 4650 1800
+Wire Wire Line
+	4650 1800 4650 1700
+Wire Wire Line
+	2450 1800 2350 1800
+NoConn ~ 2350 2500
+Wire Wire Line
+	2350 1900 2450 1900
+Wire Wire Line
+	2450 1900 2450 2000
+Wire Wire Line
+	2350 2400 2450 2400
+Wire Wire Line
+	2450 2400 2450 2500
+Text Label 5500 850  0    50   ~ 0
+V0
+$Comp
+L Device:LED D4
+U 1 1 615F9EE9
+P 2900 1200
+F 0 "D4" H 2893 945 50  0000 C CNN
+F 1 "LED" H 2893 1036 50  0000 C CNN
+F 2 "LED_THT:LED_D5.0mm" H 2900 1200 50  0001 C CNN
+F 3 "~" H 2900 1200 50  0001 C CNN
+	1    2900 1200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R43
+U 1 1 615F9EEF
+P 3050 1350
+F 0 "R43" V 3050 1350 50  0000 C CNN
+F 1 "R" V 2934 1350 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2980 1350 50  0001 C CNN
+F 3 "~" H 3050 1350 50  0001 C CNN
+	1    3050 1350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2350 2900 3200 2900
+Wire Wire Line
+	3200 2900 3200 1350
+Wire Wire Line
+	2350 3100 2400 3100
+Wire Wire Line
+	2400 3100 2400 2950
+Wire Wire Line
+	2400 2950 3250 2950
+Wire Wire Line
+	3250 2950 3250 1650
+Wire Wire Line
+	2350 3200 2450 3200
+Wire Wire Line
+	2450 3200 2450 3000
+Wire Wire Line
+	2450 3000 3300 3000
+Wire Wire Line
+	3300 3000 3300 1350
+$Comp
+L Device:LED D6
+U 1 1 616F36F7
+P 3600 1200
+F 0 "D6" H 3593 945 50  0000 C CNN
+F 1 "LED" H 3593 1036 50  0000 C CNN
+F 2 "LED_THT:LED_D5.0mm" H 3600 1200 50  0001 C CNN
+F 3 "~" H 3600 1200 50  0001 C CNN
+	1    3600 1200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R45
+U 1 1 616F36FD
+P 3450 1350
+F 0 "R45" V 3450 1350 50  0000 C CNN
+F 1 "R" V 3334 1350 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3380 1350 50  0001 C CNN
+F 3 "~" H 3450 1350 50  0001 C CNN
+	1    3450 1350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D5
+U 1 1 61748FEB
+P 3250 1200
+F 0 "D5" H 3243 945 50  0000 C CNN
+F 1 "LED" V 3243 1036 50  0000 C CNN
+F 2 "LED_THT:LED_D5.0mm" H 3250 1200 50  0001 C CNN
+F 3 "~" H 3250 1200 50  0001 C CNN
+	1    3250 1200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R44
+U 1 1 61748FF1
+P 3250 1500
+F 0 "R44" V 3250 1500 50  0000 C CNN
+F 1 "R" V 3134 1500 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3180 1500 50  0001 C CNN
+F 3 "~" H 3250 1500 50  0001 C CNN
+	1    3250 1500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 1050 2900 950 
+Wire Wire Line
+	2900 950  3200 950 
+Wire Wire Line
+	3200 950  3200 550 
+Connection ~ 3200 550 
+Wire Wire Line
+	3200 550  3250 550 
+Wire Wire Line
+	3250 1050 3250 550 
+Connection ~ 3250 550 
+Wire Wire Line
+	3250 550  3300 550 
+Connection ~ 3300 550 
+Wire Wire Line
+	3300 550  6450 550 
+Wire Wire Line
+	3300 950  3300 550 
+Wire Wire Line
+	3300 950  3600 950 
+Wire Wire Line
+	3600 950  3600 1050
+Text Label 2700 650  0    50   ~ 0
+5V
+Wire Wire Line
+	900  650  900  3100
+Wire Wire Line
+	800  3000 950  3000
+Wire Wire Line
+	950  3000 2350 3000
 Wire Bus Line
 	4500 2650 4500 2850
 Wire Bus Line
@@ -2023,13 +2152,12 @@ Wire Bus Line
 Wire Bus Line
 	6400 3600 7100 3600
 Wire Bus Line
-	2550 1900 2550 2800
-Wire Bus Line
 	8100 3600 8800 3600
 Wire Bus Line
 	4950 1950 6100 1950
 Wire Bus Line
+	2550 1900 2550 2800
+Wire Bus Line
 	600  1400 600  3750
-Text Label 3000 2350 0    50   ~ 0
-CE4
+Connection ~ 950  3000
 $EndSCHEMATC

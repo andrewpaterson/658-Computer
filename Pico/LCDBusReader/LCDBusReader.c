@@ -123,7 +123,7 @@ void put_display(uint writeMask, uint readMask, bool displayOn, bool cursorOn, b
 
 void put_shift(uint writeMask, uint readMask, bool increment, bool shiftDisplay)
 {
-    uint entry =  0b00000100;  //Display on; cursor on; blink off
+    uint entry =  0b00000100;
     uint e1 = increment ?   0b00000010 : 0;
     uint e0 = shiftDisplay ? 0b00000001 : 0;
     
@@ -136,21 +136,40 @@ void put_clear(uint writeMask, uint readMask)
     put(writeMask, readMask, false, false, 0b00000001, 1530);
 }
 
-void put_string(uint writeMask, uint readMask, char* sz)
+void put_string(uint writeMask, uint readMask, char* sz, int maxLength)
 {
-    char*   pc;
-
-    pc = sz;
-    while (*pc)
+    char*   pc = sz;
+    int     length = 0;
+    
+    while (*pc && length < maxLength)
     {
         put(writeMask, readMask, true, false, *pc, 43);
         pc++;
+        length++;
     }
+}
+
+void put_display_address(uint writeMask, uint readMask, uint address)
+{
+    uint ddAddress = 0b10000000 | address;
+    
+    put(writeMask, readMask, false, false, ddAddress, 39);
+}
+
+void put_lines(uint writeMask, uint readMask, char* szLine1, char* szLine2)
+{
+
+    char*   pc;
+
+    put_display_address(writeMask, readMask, 0x00);
+    put_string(writeMask, readMask, szLine1, 16);
+    put_display_address(writeMask, readMask, 0x40);
+    put_string(writeMask, readMask, szLine2, 16);
 }
 
 int main() 
 {
-    bi_decl(bi_program_description("This is a test binary."));
+    bi_decl(bi_program_description("LCD Display."));
 
     stdio_init_all();
 
@@ -184,12 +203,12 @@ int main()
         gpio_put(PIN_LED, led);
         
         put_clear(writeMask, commandMask);
-        put_string(writeMask, commandMask, "Age of Chaos");
-        sleep_us_high_power(1000000);
+        put_lines(writeMask, commandMask, "In the Age of Chaos", "Two factions battled");
+        sleep_us_high_power(500000);
 
         put_clear(writeMask, commandMask);
-        put_string(writeMask, commandMask, "Orcs and Humans");
-        sleep_us_high_power(1000000);
+        put_lines(writeMask, commandMask, "  WarCraft", "Orcs and Humans");
+        sleep_us_high_power(500000);
         led = !led;
     }
 }

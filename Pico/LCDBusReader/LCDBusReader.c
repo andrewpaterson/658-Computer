@@ -15,6 +15,8 @@ const uint PIN_DB5 = 8;
 const uint PIN_DB6 = 7;
 const uint PIN_DB7 = 6;
 const uint PIN_LED = 25;
+const uint PIN_READ1 = 16;
+const uint PIN_READ2 = 17;
 
 const uint eCycleTime = 1;
 
@@ -186,7 +188,11 @@ int main()
     gpio_set_dir_out_masked(writeMask);
 
     gpio_init(PIN_LED);
+    gpio_init(PIN_READ1);
+    gpio_init(PIN_READ2);
     gpio_set_dir(PIN_LED, true);
+    gpio_set_dir(PIN_READ1, false);
+    gpio_set_dir(PIN_READ2, false);
 
     //Function must be 'put' 3 times to ensure that it is in the correct state.
     put_function(writeMask, commandMask, true, true, false);
@@ -197,18 +203,30 @@ int main()
 
     put_shift(writeMask, commandMask, true, false);
 
+    char* szRead1;
+    char* szRead2;
+
     bool led = true;
     while(true)
     {
         gpio_put(PIN_LED, led);
         
-        put_clear(writeMask, commandMask);
-        put_lines(writeMask, commandMask, "In the Age of Chaos", "Two factions battled");
-        sleep_us_high_power(500000);
+        bool val1 = gpio_get(PIN_READ1);
+        bool val2 = gpio_get(PIN_READ2);
+        if (val1)
+            szRead1 = "Pin 16: True";
+        else
+            szRead1 = "Pin 16: False";
+
+        if (val2)
+            szRead2 = "Pin 17: True";
+        else
+            szRead2 = "Pin 17: False";
 
         put_clear(writeMask, commandMask);
-        put_lines(writeMask, commandMask, "  WarCraft", "Orcs and Humans");
-        sleep_us_high_power(500000);
+        put_lines(writeMask, commandMask, szRead1, szRead2);
+
+        sleep_us_high_power(10000);
         led = !led;
     }
 }

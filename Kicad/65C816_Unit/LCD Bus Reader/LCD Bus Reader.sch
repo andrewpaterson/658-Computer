@@ -351,12 +351,12 @@ Wire Wire Line
 $Comp
 L Device:R R3
 U 1 1 612E41A6
-P 550 7250
-F 0 "R3" V 550 7250 50  0000 C CNN
-F 1 "R" V 434 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 480 7250 50  0001 C CNN
-F 3 "~" H 550 7250 50  0001 C CNN
-	1    550  7250
+P 550 7550
+F 0 "R3" V 550 7550 50  0000 C CNN
+F 1 "R" V 434 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 480 7550 50  0001 C CNN
+F 3 "~" H 550 7550 50  0001 C CNN
+	1    550  7550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -366,342 +366,342 @@ Wire Wire Line
 $Comp
 L Device:R R4
 U 1 1 612EB595
-P 650 7250
-F 0 "R4" V 650 7250 50  0000 C CNN
-F 1 "R" V 534 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 580 7250 50  0001 C CNN
-F 3 "~" H 650 7250 50  0001 C CNN
-	1    650  7250
+P 650 7550
+F 0 "R4" V 650 7550 50  0000 C CNN
+F 1 "R" V 534 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 580 7550 50  0001 C CNN
+F 3 "~" H 650 7550 50  0001 C CNN
+	1    650  7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R5
 U 1 1 612ED660
-P 750 7250
-F 0 "R5" V 750 7250 50  0000 C CNN
-F 1 "R" V 634 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 680 7250 50  0001 C CNN
-F 3 "~" H 750 7250 50  0001 C CNN
-	1    750  7250
+P 750 7550
+F 0 "R5" V 750 7550 50  0000 C CNN
+F 1 "R" V 634 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 680 7550 50  0001 C CNN
+F 3 "~" H 750 7550 50  0001 C CNN
+	1    750  7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R6
 U 1 1 612ED666
-P 850 7250
-F 0 "R6" V 850 7250 50  0000 C CNN
-F 1 "R" V 734 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 780 7250 50  0001 C CNN
-F 3 "~" H 850 7250 50  0001 C CNN
-	1    850  7250
+P 850 7550
+F 0 "R6" V 850 7550 50  0000 C CNN
+F 1 "R" V 734 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 780 7550 50  0001 C CNN
+F 3 "~" H 850 7550 50  0001 C CNN
+	1    850  7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R7
 U 1 1 612EF989
-P 950 7250
-F 0 "R7" V 950 7250 50  0000 C CNN
-F 1 "R" V 834 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 880 7250 50  0001 C CNN
-F 3 "~" H 950 7250 50  0001 C CNN
-	1    950  7250
+P 950 7550
+F 0 "R7" V 950 7550 50  0000 C CNN
+F 1 "R" V 834 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 880 7550 50  0001 C CNN
+F 3 "~" H 950 7550 50  0001 C CNN
+	1    950  7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R8
 U 1 1 612EF98F
-P 1050 7250
-F 0 "R8" V 1050 7250 50  0000 C CNN
-F 1 "R" V 934 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 980 7250 50  0001 C CNN
-F 3 "~" H 1050 7250 50  0001 C CNN
-	1    1050 7250
+P 1050 7550
+F 0 "R8" V 1050 7550 50  0000 C CNN
+F 1 "R" V 934 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 980 7550 50  0001 C CNN
+F 3 "~" H 1050 7550 50  0001 C CNN
+	1    1050 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R9
 U 1 1 612EF995
-P 1150 7250
-F 0 "R9" V 1150 7250 50  0000 C CNN
-F 1 "R" V 1034 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1080 7250 50  0001 C CNN
-F 3 "~" H 1150 7250 50  0001 C CNN
-	1    1150 7250
+P 1150 7550
+F 0 "R9" V 1150 7550 50  0000 C CNN
+F 1 "R" V 1034 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1080 7550 50  0001 C CNN
+F 3 "~" H 1150 7550 50  0001 C CNN
+	1    1150 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R10
 U 1 1 612EF99B
-P 1250 7250
-F 0 "R10" V 1250 7250 50  0000 C CNN
-F 1 "R" V 1134 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1180 7250 50  0001 C CNN
-F 3 "~" H 1250 7250 50  0001 C CNN
-	1    1250 7250
+P 1250 7550
+F 0 "R10" V 1250 7550 50  0000 C CNN
+F 1 "R" V 1134 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1180 7550 50  0001 C CNN
+F 3 "~" H 1250 7550 50  0001 C CNN
+	1    1250 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R11
 U 1 1 612F1FE0
-P 1350 7250
-F 0 "R11" V 1350 7250 50  0000 C CNN
-F 1 "R" V 1234 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1280 7250 50  0001 C CNN
-F 3 "~" H 1350 7250 50  0001 C CNN
-	1    1350 7250
+P 1350 7550
+F 0 "R11" V 1350 7550 50  0000 C CNN
+F 1 "R" V 1234 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1280 7550 50  0001 C CNN
+F 3 "~" H 1350 7550 50  0001 C CNN
+	1    1350 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R12
 U 1 1 612F1FE6
-P 1450 7250
-F 0 "R12" V 1450 7250 50  0000 C CNN
-F 1 "R" V 1334 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1380 7250 50  0001 C CNN
-F 3 "~" H 1450 7250 50  0001 C CNN
-	1    1450 7250
+P 1450 7550
+F 0 "R12" V 1450 7550 50  0000 C CNN
+F 1 "R" V 1334 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1380 7550 50  0001 C CNN
+F 3 "~" H 1450 7550 50  0001 C CNN
+	1    1450 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R13
 U 1 1 612F1FEC
-P 1550 7250
-F 0 "R13" V 1550 7250 50  0000 C CNN
-F 1 "R" V 1434 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1480 7250 50  0001 C CNN
-F 3 "~" H 1550 7250 50  0001 C CNN
-	1    1550 7250
+P 1550 7550
+F 0 "R13" V 1550 7550 50  0000 C CNN
+F 1 "R" V 1434 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1480 7550 50  0001 C CNN
+F 3 "~" H 1550 7550 50  0001 C CNN
+	1    1550 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R14
 U 1 1 612F1FF2
-P 1650 7250
-F 0 "R14" V 1650 7250 50  0000 C CNN
-F 1 "R" V 1534 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1580 7250 50  0001 C CNN
-F 3 "~" H 1650 7250 50  0001 C CNN
-	1    1650 7250
+P 1650 7550
+F 0 "R14" V 1650 7550 50  0000 C CNN
+F 1 "R" V 1534 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1580 7550 50  0001 C CNN
+F 3 "~" H 1650 7550 50  0001 C CNN
+	1    1650 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R15
 U 1 1 612F1FF8
-P 1750 7250
-F 0 "R15" V 1750 7250 50  0000 C CNN
-F 1 "R" V 1634 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1680 7250 50  0001 C CNN
-F 3 "~" H 1750 7250 50  0001 C CNN
-	1    1750 7250
+P 1750 7550
+F 0 "R15" V 1750 7550 50  0000 C CNN
+F 1 "R" V 1634 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1680 7550 50  0001 C CNN
+F 3 "~" H 1750 7550 50  0001 C CNN
+	1    1750 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R16
 U 1 1 612F1FFE
-P 1850 7250
-F 0 "R16" V 1850 7250 50  0000 C CNN
-F 1 "R" V 1734 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1780 7250 50  0001 C CNN
-F 3 "~" H 1850 7250 50  0001 C CNN
-	1    1850 7250
+P 1850 7550
+F 0 "R16" V 1850 7550 50  0000 C CNN
+F 1 "R" V 1734 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1780 7550 50  0001 C CNN
+F 3 "~" H 1850 7550 50  0001 C CNN
+	1    1850 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R17
 U 1 1 612F2004
-P 1950 7250
-F 0 "R17" V 1950 7250 50  0000 C CNN
-F 1 "R" V 1834 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1880 7250 50  0001 C CNN
-F 3 "~" H 1950 7250 50  0001 C CNN
-	1    1950 7250
+P 1950 7550
+F 0 "R17" V 1950 7550 50  0000 C CNN
+F 1 "R" V 1834 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1880 7550 50  0001 C CNN
+F 3 "~" H 1950 7550 50  0001 C CNN
+	1    1950 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R18
 U 1 1 612F200A
-P 2050 7250
-F 0 "R18" V 2050 7250 50  0000 C CNN
-F 1 "R" V 1934 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1980 7250 50  0001 C CNN
-F 3 "~" H 2050 7250 50  0001 C CNN
-	1    2050 7250
+P 2050 7550
+F 0 "R18" V 2050 7550 50  0000 C CNN
+F 1 "R" V 1934 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 1980 7550 50  0001 C CNN
+F 3 "~" H 2050 7550 50  0001 C CNN
+	1    2050 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R19
 U 1 1 612F6735
-P 2150 7250
-F 0 "R19" V 2150 7250 50  0000 C CNN
-F 1 "R" V 2034 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2080 7250 50  0001 C CNN
-F 3 "~" H 2150 7250 50  0001 C CNN
-	1    2150 7250
+P 2150 7550
+F 0 "R19" V 2150 7550 50  0000 C CNN
+F 1 "R" V 2034 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2080 7550 50  0001 C CNN
+F 3 "~" H 2150 7550 50  0001 C CNN
+	1    2150 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R20
 U 1 1 612F673B
-P 2250 7250
-F 0 "R20" V 2250 7250 50  0000 C CNN
-F 1 "R" V 2134 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2180 7250 50  0001 C CNN
-F 3 "~" H 2250 7250 50  0001 C CNN
-	1    2250 7250
+P 2250 7550
+F 0 "R20" V 2250 7550 50  0000 C CNN
+F 1 "R" V 2134 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2180 7550 50  0001 C CNN
+F 3 "~" H 2250 7550 50  0001 C CNN
+	1    2250 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R21
 U 1 1 612F6741
-P 2350 7250
-F 0 "R21" V 2350 7250 50  0000 C CNN
-F 1 "R" V 2234 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2280 7250 50  0001 C CNN
-F 3 "~" H 2350 7250 50  0001 C CNN
-	1    2350 7250
+P 2350 7550
+F 0 "R21" V 2350 7550 50  0000 C CNN
+F 1 "R" V 2234 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2280 7550 50  0001 C CNN
+F 3 "~" H 2350 7550 50  0001 C CNN
+	1    2350 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R22
 U 1 1 612F6747
-P 2450 7250
-F 0 "R22" V 2450 7250 50  0000 C CNN
-F 1 "R" V 2334 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2380 7250 50  0001 C CNN
-F 3 "~" H 2450 7250 50  0001 C CNN
-	1    2450 7250
+P 2450 7550
+F 0 "R22" V 2450 7550 50  0000 C CNN
+F 1 "R" V 2334 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2380 7550 50  0001 C CNN
+F 3 "~" H 2450 7550 50  0001 C CNN
+	1    2450 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R23
 U 1 1 612F674D
-P 2550 7250
-F 0 "R23" V 2550 7250 50  0000 C CNN
-F 1 "R" V 2434 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2480 7250 50  0001 C CNN
-F 3 "~" H 2550 7250 50  0001 C CNN
-	1    2550 7250
+P 2550 7550
+F 0 "R23" V 2550 7550 50  0000 C CNN
+F 1 "R" V 2434 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2480 7550 50  0001 C CNN
+F 3 "~" H 2550 7550 50  0001 C CNN
+	1    2550 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R24
 U 1 1 612F6753
-P 2650 7250
-F 0 "R24" V 2650 7250 50  0000 C CNN
-F 1 "R" V 2534 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2580 7250 50  0001 C CNN
-F 3 "~" H 2650 7250 50  0001 C CNN
-	1    2650 7250
+P 2650 7550
+F 0 "R24" V 2650 7550 50  0000 C CNN
+F 1 "R" V 2534 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2580 7550 50  0001 C CNN
+F 3 "~" H 2650 7550 50  0001 C CNN
+	1    2650 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R25
 U 1 1 612F6759
-P 2750 7250
-F 0 "R25" V 2750 7250 50  0000 C CNN
-F 1 "R" V 2634 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2680 7250 50  0001 C CNN
-F 3 "~" H 2750 7250 50  0001 C CNN
-	1    2750 7250
+P 2750 7550
+F 0 "R25" V 2750 7550 50  0000 C CNN
+F 1 "R" V 2634 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2680 7550 50  0001 C CNN
+F 3 "~" H 2750 7550 50  0001 C CNN
+	1    2750 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R26
 U 1 1 612F675F
-P 2850 7250
-F 0 "R26" V 2850 7250 50  0000 C CNN
-F 1 "R" V 2734 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2780 7250 50  0001 C CNN
-F 3 "~" H 2850 7250 50  0001 C CNN
-	1    2850 7250
+P 2850 7550
+F 0 "R26" V 2850 7550 50  0000 C CNN
+F 1 "R" V 2734 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2780 7550 50  0001 C CNN
+F 3 "~" H 2850 7550 50  0001 C CNN
+	1    2850 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R27
 U 1 1 612F6765
-P 3050 7250
-F 0 "R27" V 3050 7250 50  0000 C CNN
-F 1 "R" V 2934 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2980 7250 50  0001 C CNN
-F 3 "~" H 3050 7250 50  0001 C CNN
-	1    3050 7250
+P 3050 7550
+F 0 "R27" V 3050 7550 50  0000 C CNN
+F 1 "R" V 2934 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2980 7550 50  0001 C CNN
+F 3 "~" H 3050 7550 50  0001 C CNN
+	1    3050 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R28
 U 1 1 612F676B
-P 3150 7250
-F 0 "R28" V 3150 7250 50  0000 C CNN
-F 1 "R" V 3034 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3080 7250 50  0001 C CNN
-F 3 "~" H 3150 7250 50  0001 C CNN
-	1    3150 7250
+P 3150 7550
+F 0 "R28" V 3150 7550 50  0000 C CNN
+F 1 "R" V 3034 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3080 7550 50  0001 C CNN
+F 3 "~" H 3150 7550 50  0001 C CNN
+	1    3150 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R29
 U 1 1 612F6771
-P 3250 7250
-F 0 "R29" V 3250 7250 50  0000 C CNN
-F 1 "R" V 3134 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3180 7250 50  0001 C CNN
-F 3 "~" H 3250 7250 50  0001 C CNN
-	1    3250 7250
+P 3250 7550
+F 0 "R29" V 3250 7550 50  0000 C CNN
+F 1 "R" V 3134 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3180 7550 50  0001 C CNN
+F 3 "~" H 3250 7550 50  0001 C CNN
+	1    3250 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R30
 U 1 1 612F6777
-P 3350 7250
-F 0 "R30" V 3350 7250 50  0000 C CNN
-F 1 "R" V 3234 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3280 7250 50  0001 C CNN
-F 3 "~" H 3350 7250 50  0001 C CNN
-	1    3350 7250
+P 3350 7550
+F 0 "R30" V 3350 7550 50  0000 C CNN
+F 1 "R" V 3234 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3280 7550 50  0001 C CNN
+F 3 "~" H 3350 7550 50  0001 C CNN
+	1    3350 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R31
 U 1 1 612F677D
-P 3450 7250
-F 0 "R31" V 3450 7250 50  0000 C CNN
-F 1 "R" V 3334 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3380 7250 50  0001 C CNN
-F 3 "~" H 3450 7250 50  0001 C CNN
-	1    3450 7250
+P 3450 7550
+F 0 "R31" V 3450 7550 50  0000 C CNN
+F 1 "R" V 3334 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3380 7550 50  0001 C CNN
+F 3 "~" H 3450 7550 50  0001 C CNN
+	1    3450 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R32
 U 1 1 612F6783
-P 3550 7250
-F 0 "R32" V 3550 7250 50  0000 C CNN
-F 1 "R" V 3434 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3480 7250 50  0001 C CNN
-F 3 "~" H 3550 7250 50  0001 C CNN
-	1    3550 7250
+P 3550 7550
+F 0 "R32" V 3550 7550 50  0000 C CNN
+F 1 "R" V 3434 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3480 7550 50  0001 C CNN
+F 3 "~" H 3550 7550 50  0001 C CNN
+	1    3550 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R33
 U 1 1 612F6789
-P 3650 7250
-F 0 "R33" V 3650 7250 50  0000 C CNN
-F 1 "R" V 3534 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3580 7250 50  0001 C CNN
-F 3 "~" H 3650 7250 50  0001 C CNN
-	1    3650 7250
+P 3650 7550
+F 0 "R33" V 3650 7550 50  0000 C CNN
+F 1 "R" V 3534 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3580 7550 50  0001 C CNN
+F 3 "~" H 3650 7550 50  0001 C CNN
+	1    3650 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R34
 U 1 1 612F678F
-P 3750 7250
-F 0 "R34" V 3750 7250 50  0000 C CNN
-F 1 "R" V 3634 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3680 7250 50  0001 C CNN
-F 3 "~" H 3750 7250 50  0001 C CNN
-	1    3750 7250
+P 3750 7550
+F 0 "R34" V 3750 7550 50  0000 C CNN
+F 1 "R" V 3634 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3680 7550 50  0001 C CNN
+F 3 "~" H 3750 7550 50  0001 C CNN
+	1    3750 7550
 	1    0    0    -1  
 $EndComp
 Connection ~ 8250 1950
@@ -1644,23 +1644,23 @@ L7
 $Comp
 L Connector:Conn_01x24_Male J2
 U 1 1 61334E31
-P 1650 7600
-F 0 "J2" V 1577 7528 50  0000 C CNN
-F 1 "Conn_01x24_Male" V 1486 7528 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x24_P2.54mm_Vertical" H 1650 7600 50  0001 C CNN
-F 3 "~" H 1650 7600 50  0001 C CNN
-	1    1650 7600
+P 1650 7900
+F 0 "J2" V 1577 7828 50  0000 C CNN
+F 1 "Conn_01x24_Male" V 1486 7828 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x24_P2.54mm_Vertical" H 1650 7900 50  0001 C CNN
+F 3 "~" H 1650 7900 50  0001 C CNN
+	1    1650 7900
 	0    -1   -1   0   
 $EndComp
 $Comp
 L Connector:Conn_01x08_Male J4
 U 1 1 613A4610
-P 3350 7600
-F 0 "J4" V 3277 7528 50  0000 C CNN
-F 1 "Conn_01x08_Male" V 3186 7528 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 3350 7600 50  0001 C CNN
-F 3 "~" H 3350 7600 50  0001 C CNN
-	1    3350 7600
+P 3350 7900
+F 0 "J4" V 3277 7828 50  0000 C CNN
+F 1 "Conn_01x08_Male" V 3186 7828 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 3350 7900 50  0001 C CNN
+F 3 "~" H 3350 7900 50  0001 C CNN
+	1    3350 7900
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
@@ -1668,89 +1668,89 @@ Wire Wire Line
 $Comp
 L Device:R R35
 U 1 1 61582FC1
-P 3950 7250
-F 0 "R35" V 3950 7250 50  0000 C CNN
-F 1 "R" V 3834 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3880 7250 50  0001 C CNN
-F 3 "~" H 3950 7250 50  0001 C CNN
-	1    3950 7250
+P 3950 7550
+F 0 "R35" V 3950 7550 50  0000 C CNN
+F 1 "R" V 3834 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3880 7550 50  0001 C CNN
+F 3 "~" H 3950 7550 50  0001 C CNN
+	1    3950 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R36
 U 1 1 61582FC7
-P 4050 7250
-F 0 "R36" V 4050 7250 50  0000 C CNN
-F 1 "R" V 3934 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3980 7250 50  0001 C CNN
-F 3 "~" H 4050 7250 50  0001 C CNN
-	1    4050 7250
+P 4050 7550
+F 0 "R36" V 4050 7550 50  0000 C CNN
+F 1 "R" V 3934 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 3980 7550 50  0001 C CNN
+F 3 "~" H 4050 7550 50  0001 C CNN
+	1    4050 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R37
 U 1 1 61582FCD
-P 4150 7250
-F 0 "R37" V 4150 7250 50  0000 C CNN
-F 1 "R" V 4034 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4080 7250 50  0001 C CNN
-F 3 "~" H 4150 7250 50  0001 C CNN
-	1    4150 7250
+P 4150 7550
+F 0 "R37" V 4150 7550 50  0000 C CNN
+F 1 "R" V 4034 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4080 7550 50  0001 C CNN
+F 3 "~" H 4150 7550 50  0001 C CNN
+	1    4150 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R38
 U 1 1 61582FD3
-P 4250 7250
-F 0 "R38" V 4250 7250 50  0000 C CNN
-F 1 "R" V 4134 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4180 7250 50  0001 C CNN
-F 3 "~" H 4250 7250 50  0001 C CNN
-	1    4250 7250
+P 4250 7550
+F 0 "R38" V 4250 7550 50  0000 C CNN
+F 1 "R" V 4134 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4180 7550 50  0001 C CNN
+F 3 "~" H 4250 7550 50  0001 C CNN
+	1    4250 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R39
 U 1 1 61582FD9
-P 4350 7250
-F 0 "R39" V 4350 7250 50  0000 C CNN
-F 1 "R" V 4234 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4280 7250 50  0001 C CNN
-F 3 "~" H 4350 7250 50  0001 C CNN
-	1    4350 7250
+P 4350 7550
+F 0 "R39" V 4350 7550 50  0000 C CNN
+F 1 "R" V 4234 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4280 7550 50  0001 C CNN
+F 3 "~" H 4350 7550 50  0001 C CNN
+	1    4350 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R40
 U 1 1 61582FDF
-P 4450 7250
-F 0 "R40" V 4450 7250 50  0000 C CNN
-F 1 "R" V 4334 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4380 7250 50  0001 C CNN
-F 3 "~" H 4450 7250 50  0001 C CNN
-	1    4450 7250
+P 4450 7550
+F 0 "R40" V 4450 7550 50  0000 C CNN
+F 1 "R" V 4334 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4380 7550 50  0001 C CNN
+F 3 "~" H 4450 7550 50  0001 C CNN
+	1    4450 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R41
 U 1 1 61582FE5
-P 4550 7250
-F 0 "R41" V 4550 7250 50  0000 C CNN
-F 1 "R" V 4434 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4480 7250 50  0001 C CNN
-F 3 "~" H 4550 7250 50  0001 C CNN
-	1    4550 7250
+P 4550 7550
+F 0 "R41" V 4550 7550 50  0000 C CNN
+F 1 "R" V 4434 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4480 7550 50  0001 C CNN
+F 3 "~" H 4550 7550 50  0001 C CNN
+	1    4550 7550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R42
 U 1 1 61582FEB
-P 4650 7250
-F 0 "R42" V 4650 7250 50  0000 C CNN
-F 1 "R" V 4534 7250 50  0001 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4580 7250 50  0001 C CNN
-F 3 "~" H 4650 7250 50  0001 C CNN
-	1    4650 7250
+P 4650 7550
+F 0 "R42" V 4650 7550 50  0000 C CNN
+F 1 "R" V 4534 7550 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4580 7550 50  0001 C CNN
+F 3 "~" H 4650 7550 50  0001 C CNN
+	1    4650 7550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1786,12 +1786,12 @@ P40
 $Comp
 L Connector:Conn_01x08_Male J5
 U 1 1 61583001
-P 4250 7600
-F 0 "J5" V 4177 7528 50  0000 C CNN
-F 1 "Conn_01x08_Male" V 4086 7528 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 4250 7600 50  0001 C CNN
-F 3 "~" H 4250 7600 50  0001 C CNN
-	1    4250 7600
+P 4250 7900
+F 0 "J5" V 4177 7828 50  0000 C CNN
+F 1 "Conn_01x08_Male" V 4086 7828 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 4250 7900 50  0001 C CNN
+F 3 "~" H 4250 7900 50  0001 C CNN
+	1    4250 7900
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
@@ -2137,6 +2137,447 @@ Wire Wire Line
 	800  3000 950  3000
 Wire Wire Line
 	950  3000 2350 3000
+Connection ~ 950  3000
+$Comp
+L Diode:1N4148 D7
+U 1 1 612A0673
+P 550 7250
+F 0 "D7" V 550 7300 50  0000 R CNN
+F 1 "1N4148" V 505 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 550 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 550 7250 50  0001 C CNN
+	1    550  7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D8
+U 1 1 61458387
+P 650 7250
+F 0 "D8" V 650 7300 50  0000 R CNN
+F 1 "1N4148" V 605 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 650 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 650 7250 50  0001 C CNN
+	1    650  7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D9
+U 1 1 61485CA5
+P 750 7250
+F 0 "D9" V 750 7300 50  0000 R CNN
+F 1 "1N4148" V 705 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 750 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 750 7250 50  0001 C CNN
+	1    750  7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D10
+U 1 1 614B34B0
+P 850 7250
+F 0 "D10" V 850 7300 50  0000 R CNN
+F 1 "1N4148" V 805 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 850 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 850 7250 50  0001 C CNN
+	1    850  7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D11
+U 1 1 614E38C6
+P 950 7250
+F 0 "D11" V 950 7300 50  0000 R CNN
+F 1 "1N4148" V 905 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 950 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 950 7250 50  0001 C CNN
+	1    950  7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D12
+U 1 1 614E38CC
+P 1050 7250
+F 0 "D12" V 1050 7300 50  0000 R CNN
+F 1 "1N4148" V 1005 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1050 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1050 7250 50  0001 C CNN
+	1    1050 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D13
+U 1 1 614E38D2
+P 1150 7250
+F 0 "D13" V 1150 7300 50  0000 R CNN
+F 1 "1N4148" V 1105 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1150 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1150 7250 50  0001 C CNN
+	1    1150 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D14
+U 1 1 614E38D8
+P 1250 7250
+F 0 "D14" V 1250 7300 50  0000 R CNN
+F 1 "1N4148" V 1205 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1250 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1250 7250 50  0001 C CNN
+	1    1250 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D39
+U 1 1 6151ABC0
+P 3950 7250
+F 0 "D39" V 3950 7300 50  0000 R CNN
+F 1 "1N4148" V 3905 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3950 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3950 7250 50  0001 C CNN
+	1    3950 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D40
+U 1 1 6151ABC6
+P 4050 7250
+F 0 "D40" V 4050 7300 50  0000 R CNN
+F 1 "1N4148" V 4005 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4050 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4050 7250 50  0001 C CNN
+	1    4050 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D41
+U 1 1 6151ABCC
+P 4150 7250
+F 0 "D41" V 4150 7300 50  0000 R CNN
+F 1 "1N4148" V 4105 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4150 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4150 7250 50  0001 C CNN
+	1    4150 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D42
+U 1 1 6151ABD2
+P 4250 7250
+F 0 "D42" V 4250 7300 50  0000 R CNN
+F 1 "1N4148" V 4205 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4250 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4250 7250 50  0001 C CNN
+	1    4250 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D43
+U 1 1 6151ABD8
+P 4350 7250
+F 0 "D43" V 4350 7300 50  0000 R CNN
+F 1 "1N4148" V 4305 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4350 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4350 7250 50  0001 C CNN
+	1    4350 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D44
+U 1 1 6151ABDE
+P 4450 7250
+F 0 "D44" V 4450 7300 50  0000 R CNN
+F 1 "1N4148" V 4405 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4450 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4450 7250 50  0001 C CNN
+	1    4450 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D45
+U 1 1 6151ABE4
+P 4550 7250
+F 0 "D45" V 4550 7300 50  0000 R CNN
+F 1 "1N4148" V 4505 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4550 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4550 7250 50  0001 C CNN
+	1    4550 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D46
+U 1 1 6151ABEA
+P 4650 7250
+F 0 "D46" V 4650 7300 50  0000 R CNN
+F 1 "1N4148" V 4605 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 4650 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4650 7250 50  0001 C CNN
+	1    4650 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D31
+U 1 1 6154C552
+P 3050 7250
+F 0 "D31" V 3050 7300 50  0000 R CNN
+F 1 "1N4148" V 3005 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3050 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3050 7250 50  0001 C CNN
+	1    3050 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D32
+U 1 1 6154C558
+P 3150 7250
+F 0 "D32" V 3150 7300 50  0000 R CNN
+F 1 "1N4148" V 3105 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3150 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3150 7250 50  0001 C CNN
+	1    3150 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D33
+U 1 1 6154C55E
+P 3250 7250
+F 0 "D33" V 3250 7300 50  0000 R CNN
+F 1 "1N4148" V 3205 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3250 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3250 7250 50  0001 C CNN
+	1    3250 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D34
+U 1 1 6154C564
+P 3350 7250
+F 0 "D34" V 3350 7300 50  0000 R CNN
+F 1 "1N4148" V 3305 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3350 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3350 7250 50  0001 C CNN
+	1    3350 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D35
+U 1 1 6154C56A
+P 3450 7250
+F 0 "D35" V 3450 7300 50  0000 R CNN
+F 1 "1N4148" V 3405 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3450 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3450 7250 50  0001 C CNN
+	1    3450 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D36
+U 1 1 6154C570
+P 3550 7250
+F 0 "D36" V 3550 7300 50  0000 R CNN
+F 1 "1N4148" V 3505 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3550 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3550 7250 50  0001 C CNN
+	1    3550 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D37
+U 1 1 6154C576
+P 3650 7250
+F 0 "D37" V 3650 7300 50  0000 R CNN
+F 1 "1N4148" V 3605 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3650 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3650 7250 50  0001 C CNN
+	1    3650 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D38
+U 1 1 6154C57C
+P 3750 7250
+F 0 "D38" V 3750 7300 50  0000 R CNN
+F 1 "1N4148" V 3705 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 3750 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 3750 7250 50  0001 C CNN
+	1    3750 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D23
+U 1 1 6157FE16
+P 2150 7250
+F 0 "D23" V 2150 7300 50  0000 R CNN
+F 1 "1N4148" V 2105 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2150 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2150 7250 50  0001 C CNN
+	1    2150 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D24
+U 1 1 6157FE1C
+P 2250 7250
+F 0 "D24" V 2250 7300 50  0000 R CNN
+F 1 "1N4148" V 2205 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2250 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2250 7250 50  0001 C CNN
+	1    2250 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D25
+U 1 1 6157FE22
+P 2350 7250
+F 0 "D25" V 2350 7300 50  0000 R CNN
+F 1 "1N4148" V 2305 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2350 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2350 7250 50  0001 C CNN
+	1    2350 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D26
+U 1 1 6157FE28
+P 2450 7250
+F 0 "D26" V 2450 7300 50  0000 R CNN
+F 1 "1N4148" V 2405 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2450 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2450 7250 50  0001 C CNN
+	1    2450 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D27
+U 1 1 6157FE2E
+P 2550 7250
+F 0 "D27" V 2550 7300 50  0000 R CNN
+F 1 "1N4148" V 2505 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2550 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2550 7250 50  0001 C CNN
+	1    2550 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D28
+U 1 1 6157FE34
+P 2650 7250
+F 0 "D28" V 2650 7300 50  0000 R CNN
+F 1 "1N4148" V 2605 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2650 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2650 7250 50  0001 C CNN
+	1    2650 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D29
+U 1 1 6157FE3A
+P 2750 7250
+F 0 "D29" V 2750 7300 50  0000 R CNN
+F 1 "1N4148" V 2705 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2750 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2750 7250 50  0001 C CNN
+	1    2750 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D30
+U 1 1 6157FE40
+P 2850 7250
+F 0 "D30" V 2850 7300 50  0000 R CNN
+F 1 "1N4148" V 2805 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2850 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2850 7250 50  0001 C CNN
+	1    2850 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D15
+U 1 1 615B154A
+P 1350 7250
+F 0 "D15" V 1350 7300 50  0000 R CNN
+F 1 "1N4148" V 1305 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1350 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1350 7250 50  0001 C CNN
+	1    1350 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D16
+U 1 1 615B1550
+P 1450 7250
+F 0 "D16" V 1450 7300 50  0000 R CNN
+F 1 "1N4148" V 1405 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1450 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1450 7250 50  0001 C CNN
+	1    1450 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D17
+U 1 1 615B1556
+P 1550 7250
+F 0 "D17" V 1550 7300 50  0000 R CNN
+F 1 "1N4148" V 1505 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1550 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1550 7250 50  0001 C CNN
+	1    1550 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D18
+U 1 1 615B155C
+P 1650 7250
+F 0 "D18" V 1650 7300 50  0000 R CNN
+F 1 "1N4148" V 1605 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1650 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1650 7250 50  0001 C CNN
+	1    1650 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D19
+U 1 1 615B1562
+P 1750 7250
+F 0 "D19" V 1750 7300 50  0000 R CNN
+F 1 "1N4148" V 1705 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1750 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1750 7250 50  0001 C CNN
+	1    1750 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D20
+U 1 1 615B1568
+P 1850 7250
+F 0 "D20" V 1850 7300 50  0000 R CNN
+F 1 "1N4148" V 1805 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1850 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1850 7250 50  0001 C CNN
+	1    1850 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D21
+U 1 1 615B156E
+P 1950 7250
+F 0 "D21" V 1950 7300 50  0000 R CNN
+F 1 "1N4148" V 1905 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 1950 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 1950 7250 50  0001 C CNN
+	1    1950 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148 D22
+U 1 1 615B1574
+P 2050 7250
+F 0 "D22" V 2050 7300 50  0000 R CNN
+F 1 "1N4148" V 2005 7170 50  0001 R CNN
+F 2 "Diode_THT:D_T-1_P5.08mm_Horizontal" H 2050 7075 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2050 7250 50  0001 C CNN
+	1    2050 7250
+	0    -1   -1   0   
+$EndComp
 Wire Bus Line
 	4500 2650 4500 2850
 Wire Bus Line
@@ -2159,5 +2600,4 @@ Wire Bus Line
 	2550 1900 2550 2800
 Wire Bus Line
 	600  1400 600  3750
-Connection ~ 950  3000
 $EndSCHEMATC

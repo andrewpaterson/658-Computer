@@ -271,17 +271,6 @@ Connection ~ 8300 700
 Wire Wire Line
 	8300 700  8550 700 
 $Comp
-L 74xx:74LS138 U5
-U 1 1 61290E85
-P 3850 2450
-F 0 "U5" H 3850 1569 50  0000 C CNN
-F 1 "74LS138" H 3850 1660 50  0000 C CNN
-F 2 "Package_SO:SO-16_3.9x9.9mm_P1.27mm" H 3850 2450 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS138" H 3850 2450 50  0001 C CNN
-	1    3850 2450
-	-1   0    0    1   
-$EndComp
-$Comp
 L 74xx:74LS373 U4
 U 1 1 61291DCE
 P 3400 4550
@@ -347,7 +336,7 @@ Connection ~ 800  1500
 Wire Wire Line
 	800  1500 800  2000
 Wire Wire Line
-	900  650  4950 650 
+	900  650  2650 650 
 $Comp
 L Device:R R3
 U 1 1 612E41A6
@@ -1222,9 +1211,6 @@ Wire Wire Line
 	5600 5050 5600 5150
 Wire Wire Line
 	4450 5200 7300 5200
-NoConn ~ 4350 2250
-NoConn ~ 4350 2150
-NoConn ~ 4350 2050
 Text Label 750  2300 0    50   ~ 0
 L0
 Text Label 750  2100 0    50   ~ 0
@@ -1350,7 +1336,7 @@ Wire Wire Line
 Wire Wire Line
 	3850 1750 4600 1750
 Wire Wire Line
-	4600 1750 4600 3050
+	4600 1750 4600 2050
 Connection ~ 4600 3550
 Wire Wire Line
 	4600 3550 5900 3550
@@ -1482,10 +1468,6 @@ Wire Wire Line
 	4600 3050 4600 3550
 Wire Wire Line
 	4100 3050 3850 3050
-Connection ~ 3850 3050
-NoConn ~ 3350 2250
-NoConn ~ 3350 2150
-NoConn ~ 3350 2050
 $Comp
 L power:PWR_FLAG #FLG0105
 U 1 1 61E8CD4A
@@ -2122,8 +2104,6 @@ Wire Wire Line
 	3250 550  3300 550 
 Connection ~ 3300 550 
 Wire Wire Line
-	3300 550  6450 550 
-Wire Wire Line
 	3300 950  3300 550 
 Wire Wire Line
 	3300 950  3600 950 
@@ -2578,6 +2558,113 @@ F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 2050 
 	1    2050 7250
 	0    -1   -1   0   
 $EndComp
+Wire Wire Line
+	4450 2250 4350 2250
+Wire Wire Line
+	3300 550  6450 550 
+Wire Wire Line
+	4600 2150 4350 2150
+Connection ~ 4600 2150
+Wire Wire Line
+	4600 2150 4600 3050
+Wire Wire Line
+	4600 2050 4350 2050
+Connection ~ 4600 2050
+Wire Wire Line
+	4600 2050 4600 2150
+Wire Wire Line
+	4450 2250 4450 1000
+$Comp
+L Device:R R46
+U 1 1 613DB2D0
+P 4450 850
+F 0 "R46" V 4450 850 50  0000 C CNN
+F 1 "R" V 4334 850 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 4380 850 50  0001 C CNN
+F 3 "~" H 4450 850 50  0001 C CNN
+	1    4450 850 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4450 650  4450 700 
+Connection ~ 4450 650 
+Wire Wire Line
+	4450 650  4950 650 
+Connection ~ 3850 3050
+$Comp
+L Device:R R49
+U 1 1 6149EEE0
+P 2850 850
+F 0 "R49" V 2850 850 50  0000 C CNN
+F 1 "R" V 2734 850 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2780 850 50  0001 C CNN
+F 3 "~" H 2850 850 50  0001 C CNN
+	1    2850 850 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R48
+U 1 1 614CE09B
+P 2750 850
+F 0 "R48" V 2750 850 50  0000 C CNN
+F 1 "R" V 2634 850 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2680 850 50  0001 C CNN
+F 3 "~" H 2750 850 50  0001 C CNN
+	1    2750 850 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R47
+U 1 1 614FD36E
+P 2650 850
+F 0 "R47" V 2650 850 50  0000 C CNN
+F 1 "R" V 2534 850 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 2580 850 50  0001 C CNN
+F 3 "~" H 2650 850 50  0001 C CNN
+	1    2650 850 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 700  2650 650 
+Wire Wire Line
+	2750 700  2750 650 
+Wire Wire Line
+	2850 700  2850 650 
+Connection ~ 2650 650 
+Wire Wire Line
+	2650 650  2750 650 
+Connection ~ 2750 650 
+Wire Wire Line
+	2750 650  2850 650 
+Connection ~ 2850 650 
+Wire Wire Line
+	2850 650  4450 650 
+Wire Wire Line
+	2650 1000 2650 1100
+Wire Wire Line
+	2650 1100 2700 1100
+Wire Wire Line
+	2700 1100 2700 2250
+Wire Wire Line
+	2700 2250 3350 2250
+Wire Wire Line
+	2750 1000 2750 2150
+Wire Wire Line
+	2750 2150 3350 2150
+Wire Wire Line
+	3350 2050 2800 2050
+Wire Wire Line
+	2800 2050 2800 1100
+Wire Wire Line
+	2800 1100 2850 1100
+Wire Wire Line
+	2850 1000 2850 1100
+Text Label 3000 2250 0    50   ~ 0
+CE5
+Text Label 3000 2150 0    50   ~ 0
+CE6
+Text Label 3000 2050 0    50   ~ 0
+CE7
 Wire Bus Line
 	4500 2650 4500 2850
 Wire Bus Line
@@ -2600,4 +2687,21 @@ Wire Bus Line
 	2550 1900 2550 2800
 Wire Bus Line
 	600  1400 600  3750
+Text Label 4400 2250 0    50   ~ 0
+DET3
+Text Label 4400 2150 0    50   ~ 0
+DEF2
+Text Label 4400 2050 0    50   ~ 0
+DEF1
+$Comp
+L 74xx:74LS138 U5
+U 1 1 61290E85
+P 3850 2450
+F 0 "U5" H 3850 1569 50  0000 C CNN
+F 1 "74LS138" H 3850 1660 50  0000 C CNN
+F 2 "Package_SO:SO-16_3.9x9.9mm_P1.27mm" H 3850 2450 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS138" H 3850 2450 50  0001 C CNN
+	1    3850 2450
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

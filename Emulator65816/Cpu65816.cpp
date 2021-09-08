@@ -132,13 +132,13 @@ bool Cpu65816::executeNextInstruction()
             mStack.push16Bit(mProgramAddress.getOffset());
             mStack.push8Bit(mCpuStatus.getRegisterValue());
             mCpuStatus.setInterruptDisableFlag();
-            mProgramAddress = Address(0x00,mSystemBus.readTwoBytes(Address(0x00,0xFFEE)));
+            mProgramAddress = Address(0x00,mSystemBus.readTwoBytes(Address(0x00, mNativeInterrupts->interruptRequest)));
         } else
 {
             mStack.push16Bit(mProgramAddress.getOffset());
             mStack.push8Bit(mCpuStatus.getRegisterValue());
             mCpuStatus.setInterruptDisableFlag();
-            mProgramAddress = Address(0x00,mSystemBus.readTwoBytes(Address(0x00,0xFFFE)));
+            mProgramAddress = Address(0x00,mSystemBus.readTwoBytes(Address(0x00, mEmulationInterrupts->brkIrq)));
         }
     }
 

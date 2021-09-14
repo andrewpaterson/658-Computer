@@ -17,6 +17,7 @@ public abstract class AbstractCore
   public static final byte P_1_BIT = 0x20;
   public static final byte P_V_BIT = 0x40;
   public static final byte P_N_BIT = (byte) 0x80;
+
   protected Logi6502 parent;
   protected InstanceState cis;
   protected byte a, x, y, p, s, data;
@@ -29,6 +30,7 @@ public abstract class AbstractCore
   protected short intendedA;
   protected byte intendedD;
   protected boolean intendedRWB;
+
   public AbstractCore(Logi6502 parent)
   {
     this.parent = parent;
@@ -81,22 +83,7 @@ public abstract class AbstractCore
 
   protected void simplePUpdateNZC(int result)
   {
-    if ((result & 0xFF) == 0)
-    {
-      p |= P_Z_BIT;
-    }
-    else
-    {
-      p &= ~P_Z_BIT;
-    }
-    if ((result & 0x80) != 0)
-    {
-      p |= P_N_BIT;
-    }
-    else
-    {
-      p &= ~P_N_BIT;
-    }
+    simplePUpdateNZ(result);
     if ((result & 0x100) != 0)
     {
       p |= P_C_BIT;

@@ -165,7 +165,6 @@ public class W6502Opcodes
   public static final byte BBS_relative_bit_branch_3 = (byte) 0xBF;
   public static final byte CPY_immediate = (byte) 0xC0;
   public static final byte CMP_zero_page_x_indirect = (byte) 0xC1;
-  public static final byte NOP_immediate = (byte) 0xC2;
   public static final byte CPY_zero_page = (byte) 0xC4;
   public static final byte CMP_zero_page = (byte) 0xC5;
   public static final byte DEC_zero_page = (byte) 0xC6;

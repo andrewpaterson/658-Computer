@@ -3852,7 +3852,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0x9e:
+      case STZ_absolute_x:
         switch (cycle)
         {
           case 1:
@@ -3891,7 +3891,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0x9f:
+      case BBS_relative_bit_branch_1:
         switch (cycle)
         {
           case 1:
@@ -3917,7 +3917,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xa0:
+      case LDY_immediate:
         if (cycle == 1)
         {
           updateZeroAndNegativeStatus(data);
@@ -3925,7 +3925,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xa1:
+      case LDA_zero_page_x_indirect:
         switch (cycle)
         {
           case 1:
@@ -3958,7 +3958,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xa2:
+      case LDX_immediate:
         if (cycle == 1)
         {
           updateZeroAndNegativeStatus(data);
@@ -3966,7 +3966,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xa4:
+      case LDY_zero_page:
         switch (cycle)
         {
           case 1:
@@ -3984,7 +3984,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xa5:
+      case LDA_zero_page:
         switch (cycle)
         {
           case 1:
@@ -4002,7 +4002,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xa6:
+      case LDX_zero_page:
         switch (cycle)
         {
           case 1:
@@ -4020,7 +4020,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xa7:
+      case SMB_zero_page_2:
         switch (cycle)
         {
           case 1:
@@ -4047,7 +4047,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xa8:
+      case TAY_implied:
         if (cycle == 1)
         {
           programCounter--;
@@ -4056,7 +4056,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xa9:
+      case LDA_immediate:
         if (cycle == 1)
         {
           updateZeroAndNegativeStatus(data);
@@ -4064,7 +4064,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xaa:
+      case TAX_implied:
         if (cycle == 1)
         {
           programCounter--;
@@ -4073,7 +4073,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xac:
+      case LDY_absolute:
         switch (cycle)
         {
           case 1:
@@ -4096,7 +4096,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xad:
+      case LDA_absolute:
         switch (cycle)
         {
           case 1:
@@ -4119,7 +4119,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xae:
+      case LDX_absolute:
         switch (cycle)
         {
           case 1:
@@ -4142,7 +4142,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xaf:
+      case BBS_relative_bit_branch_2:
         switch (cycle)
         {
           case 1:
@@ -4168,7 +4168,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb0:
+      case Branch_relative_C_BIT_C_BIT:
         switch (cycle)
         {
           case 1:
@@ -4199,7 +4199,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb1:
+      case LDA_zero_page_indirect_y:
         switch (cycle)
         {
           case 1:
@@ -4244,7 +4244,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb2:
+      case LDA_zero_page_indirect:
         switch (cycle)
         {
           case 1:
@@ -4272,7 +4272,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb4:
+      case LDY_zero_page_x:
         switch (cycle)
         {
           case 1:
@@ -4295,7 +4295,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb5:
+      case LDA_zero_page_x:
         switch (cycle)
         {
           case 1:
@@ -4318,7 +4318,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb6:
+      case LDX_zero_page_y:
         switch (cycle)
         {
           case 1:
@@ -4342,7 +4342,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb7:
+      case SMB_zero_page_3:
         switch (cycle)
         {
           case 1:
@@ -4369,7 +4369,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xb8:
+      case CLV_implied:
         if (cycle == 1)
         {
           programCounter--;
@@ -4377,7 +4377,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xb9:
+      case LDA_absolute_y:
         switch (cycle)
         {
           case 1:
@@ -4417,7 +4417,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xba:
+      case TSX_implied:
         if (cycle == 1)
         {
           programCounter--;
@@ -4426,7 +4426,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xbc:
+      case LDY_absolute_x:
         switch (cycle)
         {
           case 1:
@@ -4466,7 +4466,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xbd:
+      case LDA_absolute_x:
         switch (cycle)
         {
           case 1:
@@ -4506,7 +4506,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xbe:
+      case LDX_absolute_y:
         switch (cycle)
         {
           case 1:
@@ -4546,7 +4546,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xbf:
+      case BBS_relative_bit_branch_3:
         switch (cycle)
         {
           case 1:
@@ -4572,7 +4572,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xc0:
+      case CPY_immediate:
         if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
@@ -4580,7 +4580,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xc1:
+      case CMP_zero_page_x_indirect:
         switch (cycle)
         {
           case 1:
@@ -4615,10 +4615,9 @@ public class W65C02
         break;
       case (byte) 0xc2:
       case (byte) 0xe2:
-
         cycle = -1;
         return;
-      case (byte) 0xc4:
+      case CPY_zero_page:
         switch (cycle)
         {
           case 1:
@@ -4636,7 +4635,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xc5:
+      case CMP_zero_page:
         switch (cycle)
         {
           case 1:
@@ -4654,7 +4653,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xc6:
+      case DEC_zero_page:
         switch (cycle)
         {
           case 1:
@@ -4683,7 +4682,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xc7:
+      case SMB_zero_page_4:
         switch (cycle)
         {
           case 1:
@@ -4710,7 +4709,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xc8:
+      case INC_implied_y:
         if (cycle == 1)
         {
           programCounter--;
@@ -4721,7 +4720,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xc9:
+      case CMP_immediate:
         if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
@@ -4729,7 +4728,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xca:
+      case DEC_implied_x:
         if (cycle == 1)
         {
           programCounter--;
@@ -4740,7 +4739,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xcb:
+      case WAI_implied:
         switch (cycle)
         {
           case 1:
@@ -4765,7 +4764,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xcc:
+      case CPY_absolute:
         switch (cycle)
         {
           case 1:
@@ -4788,7 +4787,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xcd:
+      case CMP_absolute:
         switch (cycle)
         {
           case 1:
@@ -4811,7 +4810,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xce:
+      case DEC_absolute:
         switch (cycle)
         {
           case 1:
@@ -4845,7 +4844,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xcf:
+      case BBS_relative_bit_branch_4:
         switch (cycle)
         {
           case 1:
@@ -4871,7 +4870,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd0:
+      case Branch_relative_Z_BIT_0:
         switch (cycle)
         {
           case 1:
@@ -4902,7 +4901,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd1:
+      case CMP_zero_page_indirect_y:
         switch (cycle)
         {
           case 1:
@@ -4947,7 +4946,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd2:
+      case CMP_zero_page_indirect:
         switch (cycle)
         {
           case 1:
@@ -4975,7 +4974,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd5:
+      case CMP_zero_page_x:
         switch (cycle)
         {
           case 1:
@@ -4998,7 +4997,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd6:
+      case DEC_zero_page_x:
         switch (cycle)
         {
           case 1:
@@ -5034,7 +5033,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd7:
+      case SMB_zero_page_5:
         switch (cycle)
         {
           case 1:
@@ -5061,7 +5060,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) 0xd8:
+      case CLD_implied:
         if (cycle == 1)
         {
           programCounter--;
@@ -5069,7 +5068,7 @@ public class W65C02
         }
         cycle = -1;
         return;
-      case (byte) 0xd9:
+      case CMP_absolute_y:
         switch (cycle)
         {
           case 1:
@@ -5109,7 +5108,7 @@ public class W65C02
             return;
         }
         break;
-      case (byte) PHX_implied:
+      case PHX_implied:
         switch (cycle)
         {
           case 1:

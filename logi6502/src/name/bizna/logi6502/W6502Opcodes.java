@@ -2,20 +2,20 @@ package name.bizna.logi6502;
 
 public class W6502Opcodes
 {
-  public static final byte BRK_immediate = (byte) 0x00;
+  public static final byte BRK = (byte) 0x00;
   public static final byte ORA_zero_page_x_indirect = (byte) 0x01;
   public static final byte TSB_zero_page = (byte) 0x04;
   public static final byte ORA_zero_page = (byte) 0x05;
   public static final byte ASL_zero_page = (byte) 0x06;
   public static final byte RMB_zero_page_0 = (byte) 0x07;
-  public static final byte PHP_implied = (byte) 0x08;
+  public static final byte Push_processor_status = (byte) 0x08;
   public static final byte ORA_immediate = (byte) 0x09;
   public static final byte ASL_implied_a = (byte) 0x0A;
   public static final byte TSB_absolute = (byte) 0x0C;
   public static final byte ORA_absolute = (byte) 0x0D;
   public static final byte ASL_absolute = (byte) 0x0E;
   public static final byte BBR_relative_bit_branch_0 = (byte) 0x0F;
-  public static final byte Branch_relative_N_BIT_0 = (byte) 0x10;
+  public static final byte Branch_relative_Not_Negative = (byte) 0x10;
   public static final byte ORA_zero_page_indirect_y = (byte) 0x11;
   public static final byte ORA_zero_page_indirect = (byte) 0x12;
   public static final byte TRB_zero_page = (byte) 0x14;
@@ -42,7 +42,7 @@ public class W6502Opcodes
   public static final byte AND_absolute = (byte) 0x2D;
   public static final byte ROL_absolute = (byte) 0x2E;
   public static final byte BBR_relative_bit_branch_2 = (byte) 0x2F;
-  public static final byte Branch_relative_N_BIT_N_BIT = (byte) 0x30;
+  public static final byte Branch_relative_Negative = (byte) 0x30;
   public static final byte AND_zero_page_indirect_y = (byte) 0x31;
   public static final byte AND_zero_page_indirect = (byte) 0x32;
   public static final byte BIT_zero_page_x = (byte) 0x34;
@@ -68,7 +68,7 @@ public class W6502Opcodes
   public static final byte EOR_absolute = (byte) 0x4D;
   public static final byte LSR_absolute = (byte) 0x4E;
   public static final byte BBR_relative_bit_branch_4 = (byte) 0x4F;
-  public static final byte Branch_relative_V_BIT_0 = (byte) 0x50;
+  public static final byte Branch_relative_Not_Overflow = (byte) 0x50;
   public static final byte EOR_zero_page_indirect_y = (byte) 0x51;
   public static final byte EOR_zero_page_indirect = (byte) 0x52;
   public static final byte EOR_zero_page_x = (byte) 0x55;
@@ -94,7 +94,7 @@ public class W6502Opcodes
   public static final byte ADC_absolute = (byte) 0x6D;
   public static final byte ROR_absolute = (byte) 0x6E;
   public static final byte BBR_relative_bit_branch_6 = (byte) 0x6F;
-  public static final byte Branch_relative_V_BIT_V_BIT = (byte) 0x70;
+  public static final byte Branch_relative_Overflow = (byte) 0x70;
   public static final byte ADC_zero_page_indirect_y = (byte) 0x71;
   public static final byte ADC_zero_page_indirect = (byte) 0x72;
   public static final byte STZ_zero_page_x = (byte) 0x74;
@@ -108,7 +108,7 @@ public class W6502Opcodes
   public static final byte ADC_absolute_x = (byte) 0x7D;
   public static final byte ROR_absolute_x = (byte) 0x7E;
   public static final byte BBR_relative_bit_branch_7 = (byte) 0x7F;
-  public static final byte Branch_relative_0_0 = (byte) 0x80;
+  public static final byte Branch_relative_always = (byte) 0x80;
   public static final byte STA_zero_page_x_indirect = (byte) 0x81;
   public static final byte STY_zero_page = (byte) 0x84;
   public static final byte STA_zero_page = (byte) 0x85;
@@ -121,7 +121,7 @@ public class W6502Opcodes
   public static final byte STA_absolute = (byte) 0x8D;
   public static final byte STX_absolute = (byte) 0x8E;
   public static final byte BBS_relative_bit_branch_0 = (byte) 0x8F;
-  public static final byte Branch_relative_C_BIT_0 = (byte) 0x90;
+  public static final byte Branch_relative_Not_Carry = (byte) 0x90;
   public static final byte STA_zero_page_indirect_y = (byte) 0x91;
   public static final byte STA_zero_page_indirect = (byte) 0x92;
   public static final byte STY_zero_page_x = (byte) 0x94;
@@ -149,7 +149,7 @@ public class W6502Opcodes
   public static final byte LDA_absolute = (byte) 0xAD;
   public static final byte LDX_absolute = (byte) 0xAE;
   public static final byte BBS_relative_bit_branch_2 = (byte) 0xAF;
-  public static final byte Branch_relative_C_BIT_C_BIT = (byte) 0xB0;
+  public static final byte Branch_relative_Carry = (byte) 0xB0;
   public static final byte LDA_zero_page_indirect_y = (byte) 0xB1;
   public static final byte LDA_zero_page_indirect = (byte) 0xB2;
   public static final byte LDY_zero_page_x = (byte) 0xB4;
@@ -177,7 +177,7 @@ public class W6502Opcodes
   public static final byte CMP_absolute = (byte) 0xCD;
   public static final byte DEC_absolute = (byte) 0xCE;
   public static final byte BBS_relative_bit_branch_4 = (byte) 0xCF;
-  public static final byte Branch_relative_Z_BIT_0 = (byte) 0xD0;
+  public static final byte Branch_relative_Not_Zero = (byte) 0xD0;
   public static final byte CMP_zero_page_indirect_y = (byte) 0xD1;
   public static final byte CMP_zero_page_indirect = (byte) 0xD2;
   public static final byte CMP_zero_page_x = (byte) 0xD5;
@@ -203,7 +203,7 @@ public class W6502Opcodes
   public static final byte SBC_absolute = (byte) 0xED;
   public static final byte INC_absolute = (byte) 0xEE;
   public static final byte BBS_relative_bit_branch_6 = (byte) 0xEF;
-  public static final byte Branch_relative_Z_BIT_Z_BIT = (byte) 0xF0;
+  public static final byte Branch_relative_Zero = (byte) 0xF0;
   public static final byte SBC_zero_page_indirect_y = (byte) 0xF1;
   public static final byte SBC_zero_page_indirect = (byte) 0xF2;
   public static final byte SBC_zero_page_x = (byte) 0xF5;

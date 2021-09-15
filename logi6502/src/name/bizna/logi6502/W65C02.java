@@ -24,7 +24,7 @@ public class W65C02
   {
     switch (fetchedOpcode)
     {
-      case BRK_immediate:
+      case BRK:
         switch (cycle)
         {
           case 1:
@@ -197,7 +197,7 @@ public class W65C02
             return;
         }
         break;
-      case PHP_implied:
+      case Push_processor_status:
         switch (cycle)
         {
           case 1:
@@ -224,12 +224,7 @@ public class W65C02
       case ASL_implied_a:
         if (cycle == 1)
         {
-          programCounter--;
-          data = accumulator;
-          short result = (short) ((data & 0xFF) << 1);
-          data = (byte) result;
-          updateCarryStatus(result);
-          accumulator = data;
+          accumulatorShiftLeft();
         }
         cycle = -1;
         return;
@@ -330,46 +325,24 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & 1) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(0);
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_N_BIT_0:
+      case Branch_relative_Not_Negative:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_N_BIT) == 0;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_N_BIT, 0);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -611,7 +584,7 @@ public class W65C02
         {
           programCounter--;
           data = accumulator;
-          ++data;
+          data++;
           updateZeroAndNegativeStatus(data);
           accumulator = data;
         }
@@ -751,15 +724,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 1)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(1);
           }
           default:
             cycle = -1;
@@ -1050,46 +1015,24 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 2)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(2);
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_N_BIT_N_BIT:
+      case Branch_relative_Negative:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_N_BIT) == P_N_BIT;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_N_BIT, P_N_BIT);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -1482,15 +1425,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 3)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(3);
           }
           default:
             cycle = -1;
@@ -1773,46 +1708,24 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 4)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(4);
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_V_BIT_0:
+      case Branch_relative_Not_Overflow:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_V_BIT) == 0;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_V_BIT, 0);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -2186,15 +2099,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 5)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(5);
           }
           default:
             cycle = -1;
@@ -2642,46 +2547,24 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 6)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(6);
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_V_BIT_V_BIT:
+      case Branch_relative_Overflow:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_V_BIT) == P_V_BIT;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_V_BIT, P_V_BIT);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -3253,22 +3136,14 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 7)) == 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranchOnDataBit(7);
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_0_0:
+      case Branch_relative_always:
         switch (cycle)
         {
           case 1:
@@ -3289,10 +3164,7 @@ public class W65C02
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -3525,41 +3397,24 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_C_BIT_0:
+      case Branch_relative_Not_Carry:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_C_BIT) == 0;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_C_BIT, 0);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -3907,10 +3762,7 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 1)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -4158,41 +4010,24 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 2)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_C_BIT_C_BIT:
+      case Branch_relative_Carry:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_C_BIT) == P_C_BIT;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_C_BIT, P_C_BIT);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -4562,10 +4397,7 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 3)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -4714,7 +4546,7 @@ public class W65C02
         {
           programCounter--;
           data = yIndex;
-          ++data;
+          data++;
           updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
@@ -4860,41 +4692,24 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 4)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_Z_BIT_0:
+      case Branch_relative_Not_Zero:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_Z_BIT) == 0;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_Z_BIT, 0);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -5274,10 +5089,7 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 5)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -5442,7 +5254,7 @@ public class W65C02
           }
           case 3:
           {
-            ++data;
+            data++;
             updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
@@ -5488,7 +5300,7 @@ public class W65C02
         {
           programCounter--;
           data = xIndex;
-          ++data;
+          data++;
           updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
@@ -5639,7 +5451,7 @@ public class W65C02
           }
           case 4:
           {
-            ++data;
+            data++;
             updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
@@ -5669,41 +5481,24 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 6)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
             return;
         }
         break;
-      case Branch_relative_Z_BIT_Z_BIT:
+      case Branch_relative_Zero:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (programCounter + data);
-            takingBranch = (processorStatus & P_Z_BIT) == P_Z_BIT;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            determineTakeBranchOnProcessorStatusBit(P_Z_BIT, P_Z_BIT);
             break;
           }
           case 2:
           {
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -5945,7 +5740,7 @@ public class W65C02
           }
           case 4:
           {
-            ++data;
+            data++;
             updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
@@ -6224,7 +6019,7 @@ public class W65C02
           }
           case 5:
           {
-            ++data;
+            data++;
             updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
@@ -6254,10 +6049,7 @@ public class W65C02
             address = (short) (programCounter + off);
             wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 7)) != 0;
-            if (takingBranch)
-            {
-              programCounter = address;
-            }
+            takeBranch();
           }
           default:
             cycle = -1;
@@ -6312,6 +6104,50 @@ public class W65C02
           programCounter--;
         }
         cycle = -1;
+    }
+  }
+
+  private void takeBranch()
+  {
+    if (takingBranch)
+    {
+      programCounter = address;
+    }
+  }
+
+  private void accumulatorShiftLeft()
+  {
+    programCounter--;
+    data = accumulator;
+    short result = (short) ((data & 0xFF) << 1);
+    data = (byte) result;
+    updateCarryStatus(result);
+    accumulator = data;
+  }
+
+  private void takeBranchOnDataBit(int bit)
+  {
+    byte offset = data;
+    data = (byte) address;
+    address = (short) (programCounter + offset);
+    wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
+    takingBranch = (data & (1 << bit)) == 0;
+    takeBranch();
+  }
+
+  private void determineTakeBranchOnProcessorStatusBit(byte processorStatusBit, int testBit)
+  {
+    address = (short) (programCounter + data);
+    takingBranch = (processorStatus & processorStatusBit) == testBit;
+    boolean doFixup = (programCounter >> 8) != (address >> 8);
+    if (doFixup)
+    {
+      wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
+    }
+    else
+    {
+      cycle++;
+      doInstruction();
     }
   }
 

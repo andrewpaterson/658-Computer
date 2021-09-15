@@ -4,7 +4,7 @@ import com.cburch.logisim.instance.InstanceState;
 
 import java.util.Random;
 
-import static name.bizna.logi6502.W6502Opcodes.BRK_immediate;
+import static name.bizna.logi6502.W6502Opcodes.BRK;
 import static name.bizna.logi6502.W6502Opcodes.WAI_implied;
 
 public abstract class AbstractCore
@@ -12,13 +12,13 @@ public abstract class AbstractCore
   public static final short IRQ_VECTOR = (short) 0xFFFE;
   public static final short RESET_VECTOR = (short) 0xFFFC;
   public static final short NMI_VECTOR = (short) 0xFFFA;
-  public static final byte P_C_BIT = 0x01;
-  public static final byte P_Z_BIT = 0x02;
-  public static final byte P_I_BIT = 0x04;
-  public static final byte P_D_BIT = 0x08;
-  public static final byte P_B_BIT = 0x10;
-  public static final byte P_1_BIT = 0x20;
-  public static final byte P_V_BIT = 0x40;
+  public static final byte P_C_BIT = (byte) 0x01;
+  public static final byte P_Z_BIT = (byte) 0x02;
+  public static final byte P_I_BIT = (byte) 0x04;
+  public static final byte P_D_BIT = (byte) 0x08;
+  public static final byte P_B_BIT = (byte) 0x10;
+  public static final byte P_1_BIT = (byte) 0x20;
+  public static final byte P_V_BIT = (byte) 0x40;
   public static final byte P_N_BIT = (byte) 0x80;
 
   protected Logi6502 parent;
@@ -100,7 +100,7 @@ public abstract class AbstractCore
   public void reset(InstanceState cis)
   {
     stopped = false;
-    fetchedOpcode = BRK_immediate;
+    fetchedOpcode = BRK;
     cycle = 1;
     processorStatus |= P_I_BIT;
     processorStatus &= ~P_D_BIT;
@@ -195,13 +195,13 @@ public abstract class AbstractCore
           {
             vectorToPull = NMI_VECTOR;
             programCounter -= 2;
-            fetchedOpcode = BRK_immediate;
+            fetchedOpcode = BRK;
           }
           else if (parent.getIRQB(instanceState) && (processorStatus & P_I_BIT) == 0)
           {
             vectorToPull = IRQ_VECTOR;
             programCounter -= 2;
-            fetchedOpcode = BRK_immediate;
+            fetchedOpcode = BRK;
           }
           else
           {

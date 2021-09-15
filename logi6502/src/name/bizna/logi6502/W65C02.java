@@ -5,8 +5,6 @@ package name.bizna.logi6502;
  * pointless!
  */
 
-import static name.bizna.logi6502.W6502Opcodes.*;
-
 /**
  * This core strictly emulates a Western Design Center-branded W65C02 or
  * W65C02S. This includes the \"Rockwell bit extensions\".
@@ -24,17 +22,17 @@ public class W65C02
   {
     switch (fetchedOpcode)
     {
-      case Brk:
-        switch (stage)
+      case W6502Opcodes.BRK_immediate:
+        switch (cycle)
         {
           case 1:
           {
-            wantPush((byte) (pc >> 8));
+            wantPush((byte) (programCounter >> 8));
             break;
           }
           case 2:
           {
-            wantPush((byte) pc);
+            wantPush((byte) programCounter);
             break;
           }
           case 3:
@@ -52,66 +50,59 @@ public class W65C02
           }
           case 5:
           {
-            pc = (short) (data & 0xFF);
+            programCounter = (short) (data & 0xFF);
             wantRead((short) (vectorToPull + 1));
             vectorToPull = IRQ_VECTOR;
             break;
           }
           case 6:
           {
-            pc |= data << 8;
+            programCounter |= data << 8;
             wantVPB(false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case Ora_ZpX_:
-        switch (stage)
+      case W6502Opcodes.ORA_zero_page_x_indirect:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case TsbZp:
-        switch (stage)
+      case W6502Opcodes.TSB_zero_page:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -121,16 +112,7 @@ public class W65C02
           }
           case 3:
           {
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
-            data |= accumulator;
-            wantWrite(address, data);
+            OrAccumulator();
             break;
           }
           case 4:
@@ -138,37 +120,33 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case OraZp:
-        switch (stage)
+      case W6502Opcodes.ORA_zero_page:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case AslZp:
-        switch (stage)
+      case W6502Opcodes.ASL_zero_page:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -178,10 +156,7 @@ public class W65C02
           }
           case 3:
           {
-            short result = (short) ((data & 0xFF) << 1);
-            data = (byte) result;
-            simplePUpdateNZC(result);
-            wantWrite(address, data);
+            shiftDataLeft();
             break;
           }
           case 4:
@@ -189,17 +164,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case Slo:
-        switch (stage)
+      case W6502Opcodes.RMB_zero_page_0:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -217,16 +191,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case Php:
-        switch (stage)
+      case W6502Opcodes.PHP_implied:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPush(processorStatus);
             break;
           }
@@ -234,44 +208,40 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case OraImm:
-        if (stage == 1)
+      case W6502Opcodes.ORA_immediate:
+        if (cycle == 1)
         {
-          accumulator |= data;
-          simplePUpdateNZ(accumulator);
+          accumulatorOrData();
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case Asl:
-        if (stage == 1)
+      case W6502Opcodes.ASL_implied_a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = accumulator;
           short result = (short) ((data & 0xFF) << 1);
           data = (byte) result;
-          simplePUpdateNZC(result);
+          updateCarryStatus(result);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 12:
-        switch (stage)
+      case (byte) 0xc:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -281,16 +251,7 @@ public class W65C02
           }
           case 4:
           {
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
-            data |= accumulator;
-            wantWrite(address, data);
+            OrAccumulator();
             break;
           }
           case 5:
@@ -298,49 +259,43 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 13:
-        switch (stage)
+      case (byte) 0xd:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 14:
-        switch (stage)
+      case (byte) 0x0e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -350,10 +305,7 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) ((data & 0xFF) << 1);
-            data = (byte) result;
-            simplePUpdateNZC(result);
-            wantWrite(address, data);
+            shiftDataLeft();
             break;
           }
           case 5:
@@ -361,51 +313,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 15:
-        switch (stage)
+      case (byte) 0x0f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & 1) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 16:
-        switch (stage)
+      case (byte) 0x10:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_N_BIT) == 0;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -414,42 +366,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 17:
-        switch (stage)
+      case (byte) 0x11:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -461,53 +411,46 @@ public class W65C02
           }
           case 5:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 18:
-        switch (stage)
+      case (byte) 0x12:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 20:
-        switch (stage)
+      case (byte) 0x14:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -517,14 +460,7 @@ public class W65C02
           }
           case 3:
           {
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
+            updateZeroStatus();
             data &= ~accumulator;
             wantWrite(address, data);
             break;
@@ -534,47 +470,43 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 21:
-        switch (stage)
+      case (byte) 0x15:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 22:
-        switch (stage)
+      case (byte) 0x16:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             parent.setMLB(instanceState, true);
             wantRead(address);
             break;
@@ -586,10 +518,7 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) ((data & 0xFF) << 1);
-            data = (byte) result;
-            simplePUpdateNZC(result);
-            wantWrite(address, data);
+            shiftDataLeft();
             break;
           }
           case 5:
@@ -597,17 +526,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 23:
-        switch (stage)
+      case (byte) 0x17:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -625,40 +553,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 24:
-        if (stage == 1)
+      case (byte) 0x18:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus &= ~P_C_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 25:
-        switch (stage)
+      case (byte) 0x19:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -670,39 +597,35 @@ public class W65C02
           }
           case 4:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 26:
-        if (stage == 1)
+      case (byte) 0x1a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = accumulator;
           ++data;
-          simplePUpdateNZ(data);
+          updateZeroAndNegativeStatus(data);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 28:
-        switch (stage)
+      case (byte) 0x1c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -712,14 +635,7 @@ public class W65C02
           }
           case 4:
           {
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
+            updateZeroStatus();
             data &= ~accumulator;
             wantWrite(address, data);
             break;
@@ -729,32 +645,31 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 29:
-        switch (stage)
+      case (byte) 0x1d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -766,36 +681,34 @@ public class W65C02
           }
           case 4:
           {
-            accumulator |= data;
-            simplePUpdateNZ(accumulator);
+            accumulatorOrData();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 30:
-        switch (stage)
+      case (byte) 0x1e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -813,10 +726,7 @@ public class W65C02
           }
           case 5:
           {
-            short result = (short) ((data & 0xFF) << 1);
-            data = (byte) result;
-            simplePUpdateNZC(result);
-            wantWrite(address, data);
+            shiftDataLeft();
             break;
           }
           case 6:
@@ -824,154 +734,139 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 31:
-        switch (stage)
+      case (byte) 0x1f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 1)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 32:
-        switch (stage)
+      case (byte) 0x20:
+        switch (cycle)
         {
           case 1:
           {
             address = (short) (data & 0xFF);
-            wantPush((byte) (pc >> 8));
+            wantPush((byte) (programCounter >> 8));
             break;
           }
           case 2:
           {
-            wantPush((byte) pc);
+            wantPush((byte) programCounter);
             break;
           }
           case 3:
           {
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 4:
           {
             address |= (short) (data << 8);
-            pc = address;
+            programCounter = address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 33:
-        switch (stage)
+      case (byte) 0x21:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 36:
-        switch (stage)
+      case (byte) 0x24:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             processorStatus = (byte) ((processorStatus & 0x3F) | (data & 0xC0));
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
+            updateZeroStatus();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
-      case (byte) 37:
-        switch (stage)
+      case (byte) 0x25:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 38:
-        switch (stage)
+      case (byte) 0x26:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -981,9 +876,9 @@ public class W65C02
           }
           case 3:
           {
-            short result = (short) (((data & 0xFF) << 1) | (((processorStatus & P_C_BIT) != 0) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
             data = (byte) result;
-            simplePUpdateNZC(result);
+            updateCarryStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -992,17 +887,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 39:
-        switch (stage)
+      case (byte) 0x27:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -1020,16 +914,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 40:
-        switch (stage)
+      case (byte) 0x28:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPop();
             break;
           }
@@ -1038,101 +932,87 @@ public class W65C02
             processorStatus = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 41:
-        if (stage == 1)
+      case (byte) 0x29:
+        if (cycle == 1)
         {
           accumulator &= data;
-          simplePUpdateNZ(accumulator);
+          updateZeroAndNegativeStatus(accumulator);
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 42:
-        if (stage == 1)
+      case (byte) 0x2a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = accumulator;
-          short result = (short) (((data & 0xFF) << 1) | (((processorStatus & P_C_BIT) != 0) ? 1 : 0));
+          short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
           data = (byte) result;
-          simplePUpdateNZC(result);
+          updateCarryStatus(result);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 44:
-        switch (stage)
+      case (byte) 0x2c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             processorStatus = (byte) ((processorStatus & 0x3F) | (data & 0xC0));
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
+            updateZeroStatus();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 45:
-        switch (stage)
+      case (byte) 0x2d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 46:
-        switch (stage)
+      case (byte) 0x2e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -1142,9 +1022,9 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) << 1) | (((processorStatus & P_C_BIT) != 0) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
             data = (byte) result;
-            simplePUpdateNZC(result);
+            updateCarryStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -1153,51 +1033,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 47:
-        switch (stage)
+      case (byte) 0x2f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 2)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 48:
-        switch (stage)
+      case (byte) 0x30:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_N_BIT) == P_N_BIT;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1206,42 +1086,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 49:
-        switch (stage)
+      case (byte) 0x31:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1254,113 +1132,98 @@ public class W65C02
           case 5:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 50:
-        switch (stage)
+      case (byte) 0x32:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 52:
-        switch (stage)
+      case (byte) 0x34:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
             processorStatus = (byte) ((processorStatus & 0x3F) | (data & 0xC0));
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
+            updateZeroStatus();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 53:
-        switch (stage)
+      case (byte) 0x35:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 54:
-        switch (stage)
+      case (byte) 0x36:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             parent.setMLB(instanceState, true);
             wantRead(address);
             break;
@@ -1372,9 +1235,9 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) << 1) | (((processorStatus & P_C_BIT) != 0) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
             data = (byte) result;
-            simplePUpdateNZC(result);
+            updateCarryStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -1383,17 +1246,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 55:
-        switch (stage)
+      case (byte) 0x37:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -1411,40 +1273,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 56:
-        if (stage == 1)
+      case (byte) 0x38:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus |= P_C_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 57:
-        switch (stage)
+      case (byte) 0x39:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1457,46 +1318,45 @@ public class W65C02
           case 4:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 58:
-        if (stage == 1)
+      case (byte) 0x3a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = accumulator;
-          --data;
-          simplePUpdateNZ(data);
+          data--;
+          updateZeroAndNegativeStatus(data);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 60:
-        switch (stage)
+      case (byte) 0x3c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1509,42 +1369,34 @@ public class W65C02
           case 4:
           {
             processorStatus = (byte) ((processorStatus & 0x3F) | (data & 0xC0));
-            if ((data & accumulator) != 0)
-            {
-              processorStatus &= ~P_Z_BIT;
-            }
-            else
-            {
-              processorStatus |= P_Z_BIT;
-            }
+            updateZeroStatus();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 61:
-        switch (stage)
+      case (byte) 0x3d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1557,35 +1409,34 @@ public class W65C02
           case 4:
           {
             accumulator &= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 62:
-        switch (stage)
+      case (byte) 0x3e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1603,9 +1454,9 @@ public class W65C02
           }
           case 5:
           {
-            short result = (short) (((data & 0xFF) << 1) | (((processorStatus & P_C_BIT) != 0) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
             data = (byte) result;
-            simplePUpdateNZC(result);
+            updateCarryStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -1614,43 +1465,43 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 63:
-        switch (stage)
+      case (byte) 0x3f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 3)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 64:
-        switch (stage)
+      case (byte) 0x40:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
-            address = pc;
+            programCounter--;
+            address = programCounter;
             wantRead(address);
             break;
           }
@@ -1667,88 +1518,81 @@ public class W65C02
           }
           case 4:
           {
-            pc = (short) (data & 0xFF);
+            programCounter = (short) (data & 0xFF);
             wantPop();
             break;
           }
           case 5:
           {
-            pc |= (short) (data << 8);
-            wantRead(pc);
+            programCounter |= (short) (data << 8);
+            wantRead(programCounter);
             break;
           }
           case 6:
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 65:
-        switch (stage)
+      case (byte) 0x41:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 69:
-        switch (stage)
+      case (byte) 0x45:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 70:
-        switch (stage)
+      case (byte) 0x46:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -1758,17 +1602,10 @@ public class W65C02
           }
           case 3:
           {
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            updateCarryStatus();
             short result = (short) ((data & 0xFF) >> 1);
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -1777,17 +1614,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 71:
-        switch (stage)
+      case (byte) 0x47:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -1805,16 +1641,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 72:
-        switch (stage)
+      case (byte) 0x48:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPush(accumulator);
             break;
           }
@@ -1822,96 +1658,83 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 73:
-        if (stage == 1)
+      case (byte) 0x49:
+        if (cycle == 1)
         {
           accumulator ^= data;
-          simplePUpdateNZ(accumulator);
+          updateZeroAndNegativeStatus(accumulator);
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 74:
-        if (stage == 1)
+      case (byte) 0x4a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = accumulator;
-          if ((data & 1) != 0)
-          {
-            processorStatus |= P_C_BIT;
-          }
-          else
-          {
-            processorStatus &= ~P_C_BIT;
-          }
+          updateCarryStatus();
           short result = (short) ((data & 0xFF) >> 1);
           data = (byte) result;
-          simplePUpdateNZ(result);
+          updateZeroAndNegativeStatus(result);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 76:
-        switch (stage)
+      case (byte) 0x4c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            pc = address;
+            programCounter = address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 77:
-        switch (stage)
+      case (byte) 0x4d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 78:
-        switch (stage)
+      case (byte) 0x4e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -1921,17 +1744,10 @@ public class W65C02
           }
           case 4:
           {
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            updateCarryStatus();
             short result = (short) ((data & 0xFF) >> 1);
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -1940,51 +1756,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 79:
-        switch (stage)
+      case (byte) 0x4f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 4)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 80:
-        switch (stage)
+      case (byte) 0x50:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_V_BIT) == 0;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -1993,42 +1809,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 81:
-        switch (stage)
+      case (byte) 0x51:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2041,100 +1855,93 @@ public class W65C02
           case 5:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 82:
-        switch (stage)
+      case (byte) 0x52:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 84:
-      case (byte) 212:
-        switch (stage)
+      case (byte) 0x54:
+      case (byte) 0xd4:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 85:
-        switch (stage)
+      case (byte) 0x55:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 86:
-        switch (stage)
+      case (byte) 0x56:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             parent.setMLB(instanceState, true);
             wantRead(address);
             break;
@@ -2146,17 +1953,10 @@ public class W65C02
           }
           case 4:
           {
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            updateCarryStatus();
             short result = (short) ((data & 0xFF) >> 1);
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -2165,17 +1965,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 87:
-        switch (stage)
+      case (byte) 0x57:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -2193,40 +1992,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 88:
-        if (stage == 1)
+      case (byte) 0x58:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus &= ~P_I_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 89:
-        switch (stage)
+      case (byte) 0x59:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2239,19 +2037,19 @@ public class W65C02
           case 4:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 90:
-        switch (stage)
+      case (byte) 0x5a:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPush(yIndex);
             break;
           }
@@ -2260,17 +2058,16 @@ public class W65C02
             yIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 92:
-        switch (stage)
+      case (byte) 0x5c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
@@ -2278,32 +2075,31 @@ public class W65C02
             address |= (short) (data << 8);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 93:
-        switch (stage)
+      case (byte) 0x5d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2316,35 +2112,34 @@ public class W65C02
           case 4:
           {
             accumulator ^= data;
-            simplePUpdateNZ(accumulator);
+            updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 94:
-        switch (stage)
+      case (byte) 0x5e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2362,17 +2157,10 @@ public class W65C02
           }
           case 5:
           {
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            updateCarryStatus();
             short result = (short) ((data & 0xFF) >> 1);
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -2381,43 +2169,43 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 95:
-        switch (stage)
+      case (byte) 0x5f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 5)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 96:
-        switch (stage)
+      case (byte) 0x60:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
-            address = pc;
+            programCounter--;
+            address = programCounter;
             wantRead(address);
             break;
           }
@@ -2433,57 +2221,53 @@ public class W65C02
           }
           case 4:
           {
-            pc = (short) (data & 0xFF);
+            programCounter = (short) (data & 0xFF);
             wantPop();
             break;
           }
           case 5:
           {
-            pc |= (short) data << 8;
+            programCounter |= (short) data << 8;
             break;
           }
           case 6:
           {
-            ++pc;
+            ++programCounter;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 97:
-        switch (stage)
+      case (byte) 0x61:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -2498,7 +2282,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2513,16 +2297,16 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 100:
-        switch (stage)
+      case (byte) 0x64:
+        switch (cycle)
         {
           case 1:
           {
@@ -2535,25 +2319,24 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 101:
-        switch (stage)
+      case (byte) 0x65:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -2568,7 +2351,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2583,22 +2366,20 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 102:
-        switch (stage)
+      case (byte) 0x66:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -2608,17 +2389,10 @@ public class W65C02
           }
           case 3:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (((processorStatus & P_C_BIT) != 0) ? 0x80 : 0));
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
+            updateCarryStatus();
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -2627,17 +2401,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 103:
-        switch (stage)
+      case (byte) 0x67:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -2655,16 +2428,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 104:
-        switch (stage)
+      case (byte) 0x68:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPop();
             break;
           }
@@ -2673,19 +2446,19 @@ public class W65C02
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 105:
-        switch (stage)
+      case (byte) 0x69:
+        switch (cycle)
         {
           case 1:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -2700,7 +2473,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2715,86 +2488,74 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 106:
-        if (stage == 1)
+      case (byte) 0x6a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = accumulator;
-          short result = (short) (((data & 0xFF) >> 1) | (((processorStatus & P_C_BIT) != 0) ? 0x80 : 0));
-          if ((data & 1) != 0)
-          {
-            processorStatus |= P_C_BIT;
-          }
-          else
-          {
-            processorStatus &= ~P_C_BIT;
-          }
+          short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
+          updateCarryStatus();
           data = (byte) result;
-          simplePUpdateNZ(result);
+          updateZeroAndNegativeStatus(result);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 108:
-        switch (stage)
+      case (byte) 0x6c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
             address |= (short) (data << 8);
-            pc = address;
+            programCounter = address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 109:
-        switch (stage)
+      case (byte) 0x6d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -2809,7 +2570,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2824,28 +2585,25 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 110:
-        switch (stage)
+      case (byte) 0x6e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -2855,17 +2613,10 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (((processorStatus & P_C_BIT) != 0) ? 0x80 : 0));
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
+            updateCarryStatus();
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -2874,51 +2625,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 111:
-        switch (stage)
+      case (byte) 0x6f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 6)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 112:
-        switch (stage)
+      case (byte) 0x70:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_V_BIT) == P_V_BIT;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2927,42 +2678,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 113:
-        switch (stage)
+      case (byte) 0x71:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -2975,9 +2724,9 @@ public class W65C02
           case 5:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -2992,7 +2741,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3007,41 +2756,38 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 114:
-        switch (stage)
+      case (byte) 0x72:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -3056,7 +2802,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3071,26 +2817,25 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 116:
-        switch (stage)
+      case (byte) 0x74:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             data = 0x00;
             wantWrite(address, data);
             break;
@@ -3099,31 +2844,29 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 117:
-        switch (stage)
+      case (byte) 0x75:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -3138,7 +2881,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3153,26 +2896,25 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 118:
-        switch (stage)
+      case (byte) 0x76:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             parent.setMLB(instanceState, true);
             wantRead(address);
             break;
@@ -3184,17 +2926,10 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (((processorStatus & P_C_BIT) != 0) ? 0x80 : 0));
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
+            updateCarryStatus();
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -3203,17 +2938,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 119:
-        switch (stage)
+      case (byte) 0x77:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -3231,40 +2965,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 120:
-        if (stage == 1)
+      case (byte) 0x78:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus |= P_I_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 121:
-        switch (stage)
+      case (byte) 0x79:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3277,9 +3010,9 @@ public class W65C02
           case 4:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -3294,7 +3027,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3309,20 +3042,20 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 122:
-        switch (stage)
+      case (byte) 0x7a:
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPop();
             break;
           }
@@ -3331,32 +3064,31 @@ public class W65C02
             yIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 124:
-        switch (stage)
+      case (byte) 0x7c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3368,42 +3100,40 @@ public class W65C02
           }
           case 4:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 5:
           {
             address |= (short) (data << 8);
-            pc = address;
+            programCounter = address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 125:
-        switch (stage)
+      case (byte) 0x7d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3416,9 +3146,9 @@ public class W65C02
           case 4:
           {
             address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -3433,7 +3163,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3448,36 +3178,35 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 126:
-        switch (stage)
+      case (byte) 0x7e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3495,17 +3224,10 @@ public class W65C02
           }
           case 5:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (((processorStatus & P_C_BIT) != 0) ? 0x80 : 0));
-            if ((data & 1) != 0)
-            {
-              processorStatus |= P_C_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_C_BIT;
-            }
+            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
+            updateCarryStatus();
             data = (byte) result;
-            simplePUpdateNZ(result);
+            updateZeroAndNegativeStatus(result);
             wantWrite(address, data);
             break;
           }
@@ -3514,51 +3236,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 127:
-        switch (stage)
+      case (byte) 0x7f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 7)) == 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 128:
-        switch (stage)
+      case (byte) 0x80:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = true;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3567,33 +3289,30 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 129:
-        switch (stage)
+      case (byte) 0x81:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
@@ -3607,12 +3326,12 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 132:
-        switch (stage)
+      case (byte) 0x84:
+        switch (cycle)
         {
           case 1:
           {
@@ -3625,12 +3344,12 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 133:
-        switch (stage)
+      case (byte) 0x85:
+        switch (cycle)
         {
           case 1:
           {
@@ -3643,12 +3362,12 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 134:
-        switch (stage)
+      case (byte) 0x86:
+        switch (cycle)
         {
           case 1:
           {
@@ -3661,17 +3380,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 135:
-        switch (stage)
+      case (byte) 0x87:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -3689,51 +3407,43 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 136:
-        if (stage == 1)
+      case (byte) 0x88:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = yIndex;
-          --data;
-          simplePUpdateNZ(data);
+          data--;
+          updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 137:
-        if (stage == 1)
+      case (byte) 0x89:
+        if (cycle == 1)
         {
-          if ((data & accumulator) != 0)
-          {
-            processorStatus &= ~P_Z_BIT;
-          }
-          else
-          {
-            processorStatus |= P_Z_BIT;
-          }
+          updateZeroStatus();
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 138:
-        if (stage == 1)
+      case (byte) 0x8a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           accumulator = xIndex;
-          simplePUpdateNZ(accumulator);
+          updateZeroAndNegativeStatus(accumulator);
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 140:
-        switch (stage)
+      case (byte) 0x8c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
@@ -3747,17 +3457,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 141:
-        switch (stage)
+      case (byte) 0x8d:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
@@ -3771,17 +3480,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 142:
-        switch (stage)
+      case (byte) 0x8e:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
@@ -3795,51 +3503,51 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 143:
-        switch (stage)
+      case (byte) 0x8f:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 144:
-        switch (stage)
+      case (byte) 0x90:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_C_BIT) == 0;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3848,42 +3556,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 145:
-        switch (stage)
+      case (byte) 0x91:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -3898,23 +3604,21 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 146:
-        switch (stage)
+      case (byte) 0x92:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
@@ -3928,22 +3632,21 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 148:
-        switch (stage)
+      case (byte) 0x94:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             data = yIndex;
             wantWrite(address, data);
             break;
@@ -3952,22 +3655,21 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 149:
-        switch (stage)
+      case (byte) 0x95:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             data = accumulator;
             wantWrite(address, data);
             break;
@@ -3976,17 +3678,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 150:
-        switch (stage)
+      case (byte) 0x96:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -4000,17 +3701,16 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 151:
-        switch (stage)
+      case (byte) 0x97:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -4028,41 +3728,40 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 152:
-        if (stage == 1)
+      case (byte) 0x98:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           accumulator = yIndex;
-          simplePUpdateNZ(accumulator);
+          updateZeroAndNegativeStatus(accumulator);
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 153:
-        switch (stage)
+      case (byte) 0x99:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4077,25 +3776,24 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 154:
-        if (stage == 1)
+      case (byte) 0x9a:
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           stack = xIndex;
         }
-        stage = -1;
+        cycle = -1;
         return;
-      case (byte) 156:
-        switch (stage)
+      case (byte) 0x9c:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
@@ -4109,32 +3807,31 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 157:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4149,32 +3846,31 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 158:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4189,153 +3885,145 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 159:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 1)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 160:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          simplePUpdateNZ(data);
+          updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 161:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 162:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          simplePUpdateNZ(data);
+          updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 164:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             yIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 165:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 166:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             xIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 167:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -4353,152 +4041,146 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 168:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           yIndex = accumulator;
-          simplePUpdateNZ(yIndex);
+          updateZeroAndNegativeStatus(yIndex);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 169:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          simplePUpdateNZ(data);
+          updateZeroAndNegativeStatus(data);
           accumulator = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 170:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           xIndex = accumulator;
-          simplePUpdateNZ(xIndex);
+          updateZeroAndNegativeStatus(xIndex);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 172:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             yIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 173:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 174:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             xIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 175:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 2)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 176:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_C_BIT) == P_C_BIT;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4507,42 +4189,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 177:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4554,102 +4234,94 @@ public class W65C02
           }
           case 5:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 178:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 180:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             yIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 181:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 182:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -4660,21 +4332,20 @@ public class W65C02
           }
           case 3:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             xIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 183:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -4692,40 +4363,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 184:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus &= ~P_V_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 185:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4737,45 +4407,44 @@ public class W65C02
           }
           case 4:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 186:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           xIndex = stack;
-          simplePUpdateNZ(xIndex);
+          updateZeroAndNegativeStatus(xIndex);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 188:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4787,36 +4456,35 @@ public class W65C02
           }
           case 4:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             yIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 189:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4828,36 +4496,35 @@ public class W65C02
           }
           case 4:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             accumulator = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 190:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -4869,136 +4536,128 @@ public class W65C02
           }
           case 4:
           {
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             xIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 191:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 3)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 192:
-        if (stage == 1)
+        if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
-          simplePUpdateNZC(address);
+          updateCarryStatus(address);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 193:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 194:
       case (byte) 226:
 
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 196:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 197:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 198:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -5008,8 +4667,8 @@ public class W65C02
           }
           case 3:
           {
-            --data;
-            simplePUpdateNZ(data);
+            data--;
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -5018,17 +4677,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 199:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -5046,46 +4704,46 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 200:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = yIndex;
           ++data;
-          simplePUpdateNZ(data);
+          updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 201:
-        if (stage == 1)
+        if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-          simplePUpdateNZC(address);
+          updateCarryStatus(address);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 202:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = xIndex;
-          --data;
-          simplePUpdateNZ(data);
+          data--;
+          updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 203:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             parent.setRDY(instanceState, false);
             break;
           }
@@ -5093,7 +4751,7 @@ public class W65C02
           {
             if (!parent.getIRQB(instanceState) && !(parent.getNMIB(instanceState) && !previousNMI))
             {
-              --stage;
+              --cycle;
             }
             break;
           }
@@ -5101,74 +4759,67 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 204:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 205:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 206:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -5178,8 +4829,8 @@ public class W65C02
           }
           case 4:
           {
-            --data;
-            simplePUpdateNZ(data);
+            data--;
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -5188,51 +4839,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 207:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 4)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 208:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_Z_BIT) == 0;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5241,42 +4892,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 209:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5289,81 +4938,75 @@ public class W65C02
           case 5:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 210:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 213:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 214:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             parent.setMLB(instanceState, true);
             wantRead(address);
             break;
@@ -5375,8 +5018,8 @@ public class W65C02
           }
           case 4:
           {
-            --data;
-            simplePUpdateNZ(data);
+            data--;
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -5385,17 +5028,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 215:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -5413,40 +5055,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 216:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus &= ~P_D_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 217:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5459,19 +5100,19 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 218:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPush(xIndex);
             break;
           }
@@ -5479,40 +5120,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 219:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           stopped = true;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 220:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5521,32 +5161,31 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 221:
-        switch (stage)
+      case (byte) 0xdd:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5559,35 +5198,34 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 222:
-        switch (stage)
+      case (byte) 0xde:
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5605,8 +5243,8 @@ public class W65C02
           }
           case 5:
           {
-            --data;
-            simplePUpdateNZ(data);
+            data--;
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -5615,77 +5253,73 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 223:
-        switch (stage)
+      case (byte) 0xdf:
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 5)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
-      case (byte) 224:
-        if (stage == 1)
+      case (byte) 0xe0:
+        if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
-          simplePUpdateNZC(address);
+          updateCarryStatus(address);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 0xe1:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 5:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -5700,7 +5334,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5715,48 +5349,46 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xe4:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xe5:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -5771,7 +5403,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5786,22 +5418,20 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xe6:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressLowSetMLB();
             break;
           }
           case 2:
@@ -5812,7 +5442,7 @@ public class W65C02
           case 3:
           {
             ++data;
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -5821,17 +5451,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xe7:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -5849,30 +5478,30 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xe8:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           data = xIndex;
           ++data;
-          simplePUpdateNZ(data);
+          updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 0xe9:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -5887,7 +5516,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5902,60 +5531,56 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xec:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xed:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -5970,7 +5595,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -5985,28 +5610,25 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xee:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            parent.setMLB(instanceState, true);
-            wantRead(address);
+            readAddressHighSetMLB();
             break;
           }
           case 3:
@@ -6017,7 +5639,7 @@ public class W65C02
           case 4:
           {
             ++data;
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -6026,51 +5648,51 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xef:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 6)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xf0:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (pc + data);
+            address = (short) (programCounter + data);
             takingBranch = (processorStatus & P_Z_BIT) == P_Z_BIT;
-            boolean doFixup = (pc >> 8) != (address >> 8);
+            boolean doFixup = (programCounter >> 8) != (address >> 8);
             if (doFixup)
             {
-              wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6079,42 +5701,40 @@ public class W65C02
           {
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xf1:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6127,9 +5747,9 @@ public class W65C02
           case 5:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -6144,7 +5764,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6159,41 +5779,38 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xf2:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            wantRead((short) (address + 1));
-            address = (short) (data & 0xFF);
+            readNextAddressAddressLowFromData();
             break;
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            wantRead(address);
+            addressHighFromDataReadAddress();
             break;
           }
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -6208,7 +5825,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6223,54 +5840,51 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xf4:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          address = (short) (data & 0xFF);
-          wantRead(address);
+          addressLowFromDataReadAddress();
         }
-        else if (stage == 2)
+        else if (cycle == 2)
         {
-          address += xIndex & 0xFF;
+          address = offsetAddressByX();
 
-          stage = -1;
+          cycle = -1;
           return;
         }
         else
         {
-          stage = -1;
+          cycle = -1;
           return;
         }
         break;
       case (byte) 0xf5:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
-            wantRead(address);
+            offsetAddressByXReadAddress();
             break;
           }
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -6285,7 +5899,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6300,26 +5914,25 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xf6:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
           {
-            address += xIndex & 0xFF;
+            address = offsetAddressByX();
             parent.setMLB(instanceState, true);
             wantRead(address);
             break;
@@ -6332,7 +5945,7 @@ public class W65C02
           case 4:
           {
             ++data;
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -6341,17 +5954,16 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xf7:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(address);
+            addressLowFromDataReadAddress();
             break;
           }
           case 2:
@@ -6369,40 +5981,39 @@ public class W65C02
           {
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 248:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
           processorStatus |= P_D_BIT;
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 0xf9:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (yIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = offsetAddressByY();
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6415,9 +6026,9 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -6432,7 +6043,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6447,20 +6058,20 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xfa:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            --pc;
+            programCounter--;
             wantPop();
             break;
           }
@@ -6469,61 +6080,59 @@ public class W65C02
             xIndex = data;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xfc:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          address = (short) (data & 0xFF);
-          wantRead(pc++);
+          addressLowFromDataReadProgramCounter();
         }
-        else if (stage == 2)
+        else if (cycle == 2)
         {
           address |= (short) (data << 8);
-          short neu = (short) (address + (xIndex & 0xFF));
-          boolean doFixup = (address >> 8) != (neu >> 8);
-          address = neu;
+          short offsetAddress = (short) (address + (xIndex & 0xFF));
+          boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+          address = offsetAddress;
           if (doFixup)
           {
             wantRead((short) (address - 0x100));
           }
           if (!doFixup)
           {
-            ++stage;
+            cycle++;
             doInstruction();
           }
         }
         else
         {
 
-          stage = -1;
+          cycle = -1;
           return;
         }
         break;
       case (byte) 0xfd:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6536,9 +6145,9 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if ((processorStatus & P_C_BIT) != 0)
+            if (isCarrySet())
             {
-              ++address;
+              address++;
             }
             if ((processorStatus & P_D_BIT) != 0)
             {
@@ -6553,7 +6162,7 @@ public class W65C02
             }
             if ((processorStatus & P_D_BIT) == 0)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6568,36 +6177,35 @@ public class W65C02
             {
               processorStatus &= ~P_V_BIT;
             }
-            simplePUpdateNZC(address);
+            updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xfe:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantRead(pc++);
+            addressLowFromDataReadProgramCounter();
             break;
           }
           case 2:
           {
             address |= (short) (data << 8);
-            short neu = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (neu >> 8);
-            address = neu;
+            short offsetAddress = (short) (address + (xIndex & 0xFF));
+            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+            address = offsetAddress;
             if (doFixup)
             {
               wantRead((short) (address - 0x100));
             }
             if (!doFixup)
             {
-              ++stage;
+              cycle++;
               doInstruction();
             }
             break;
@@ -6616,7 +6224,7 @@ public class W65C02
           case 5:
           {
             ++data;
-            simplePUpdateNZ(data);
+            updateZeroAndNegativeStatus(data);
             wantWrite(address, data);
             break;
           }
@@ -6625,33 +6233,33 @@ public class W65C02
             parent.setMLB(instanceState, false);
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
       case (byte) 0xff:
-        switch (stage)
+        switch (cycle)
         {
           case 1:
           {
             address = data;
-            wantRead(pc++);
+            wantRead(programCounter++);
             break;
           }
           case 2:
           {
             byte off = data;
             data = (byte) address;
-            address = (short) (pc + off);
-            wantRead((short) ((pc & 0xFF00) | (address & 0xFF)));
+            address = (short) (programCounter + off);
+            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
             takingBranch = (data & (1 << 7)) != 0;
             if (takingBranch)
             {
-              pc = address;
+              programCounter = address;
             }
           }
           default:
-            stage = -1;
+            cycle = -1;
             return;
         }
         break;
@@ -6661,11 +6269,11 @@ public class W65C02
       case (byte) 0x82:
       case (byte) 0x42:
       case (byte) 0x44:
-        if (stage == 1)
+        if (cycle == 1)
         {
           address = (short) (data & 0xFF);
         }
-        stage = -1;
+        cycle = -1;
         return;
       case (byte) 0x03:
       case (byte) 0x23:
@@ -6698,12 +6306,104 @@ public class W65C02
       case (byte) 0xc3:
       case (byte) 0xd3:
       case (byte) 0xe3:
-        if (stage == 1)
+        if (cycle == 1)
         {
-          --pc;
+          programCounter--;
         }
-        stage = -1;
+        cycle = -1;
     }
+  }
+
+  private boolean isCarrySet()
+  {
+    return (processorStatus & P_C_BIT) != 0;
+  }
+
+  private void updateCarryStatus()
+  {
+    if ((data & 1) != 0)
+    {
+      processorStatus |= P_C_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_C_BIT;
+    }
+  }
+
+  private short offsetAddressByY()
+  {
+    return (short) (address + (yIndex & 0xFF));
+  }
+
+  private short offsetAddressByX()
+  {
+    return (short) (address + (xIndex & 0xFF));
+  }
+
+  private void accumulatorOrData()
+  {
+    accumulator |= data;
+    updateZeroAndNegativeStatus(accumulator);
+  }
+
+  private void addressLowFromDataReadProgramCounter()
+  {
+    address = (short) (data & 0xFF);
+    wantRead(programCounter++);
+  }
+
+  private void OrAccumulator()
+  {
+    updateZeroStatus();
+    data |= accumulator;
+    wantWrite(address, data);
+  }
+
+  private void addressHighFromDataReadAddress()
+  {
+    address |= (short) (data << 8);
+    wantRead(address);
+  }
+
+  private void addressLowFromDataReadAddress()
+  {
+    address = (short) (data & 0xFF);
+    wantRead(address);
+  }
+
+  private void readNextAddressAddressLowFromData()
+  {
+    wantRead((short) (address + 1));
+    address = (short) (data & 0xFF);
+  }
+
+  private void offsetAddressByXReadAddress()
+  {
+    address = offsetAddressByX();
+    wantRead(address);
+  }
+
+  private void readAddressHighSetMLB()
+  {
+    address |= (short) (data << 8);
+    parent.setMLB(instanceState, true);
+    wantRead(address);
+  }
+
+  private void readAddressLowSetMLB()
+  {
+    address = (short) (data & 0xFF);
+    parent.setMLB(instanceState, true);
+    wantRead(address);
+  }
+
+  private void shiftDataLeft()
+  {
+    short result = (short) ((data & 0xFF) << 1);
+    data = (byte) result;
+    updateCarryStatus(result);
+    wantWrite(address, data);
   }
 }
 

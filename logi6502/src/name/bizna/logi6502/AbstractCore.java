@@ -4,8 +4,8 @@ import com.cburch.logisim.instance.InstanceState;
 
 import java.util.Random;
 
-import static name.bizna.logi6502.W6502Opcodes.Brk;
-import static name.bizna.logi6502.W6502Opcodes.Wai;
+import static name.bizna.logi6502.W6502Opcodes.BRK_immediate;
+import static name.bizna.logi6502.W6502Opcodes.WAI_implied;
 
 public abstract class AbstractCore
 {
@@ -25,9 +25,9 @@ public abstract class AbstractCore
   protected InstanceState instanceState;
   protected byte accumulator, xIndex, yIndex, processorStatus, stack, data;
   protected short address;
-  protected byte fetchedOpcode, stage;
+  protected byte fetchedOpcode, cycle;
   protected short vectorToPull = IRQ_VECTOR;
-  protected short pc;
+  protected short programCounter;
   protected boolean stopped = true;
   protected boolean previousNMI = false, previousSO = false, previousClock = true, takingBranch = false, wantingSync, wantingVectorPull;
   protected short intendedAddress;
@@ -51,10 +51,10 @@ public abstract class AbstractCore
     stack = corr[4];
     data = corr[5];
     fetchedOpcode = corr[6];
-    stage = corr[7];
+    cycle = corr[7];
     address = (short) ((corr[8] & 0xFF) | corr[9] << 8);
     intendedAddress = address;
-    pc = (short) ((corr[10] & 0xFF) | corr[11] << 8);
+    programCounter = (short) ((corr[10] & 0xFF) | corr[11] << 8);
     intendedRWB = false;
     previousNMI = true;
     previousSO = true;
@@ -64,7 +64,7 @@ public abstract class AbstractCore
 
   abstract protected void doInstruction();
 
-  protected void simplePUpdateNZ(int result)
+  protected void updateZeroAndNegativeStatus(int result)
   {
     if ((result & 0xFF) == 0)
     {
@@ -84,9 +84,9 @@ public abstract class AbstractCore
     }
   }
 
-  protected void simplePUpdateNZC(int result)
+  protected void updateCarryStatus(int result)
   {
-    simplePUpdateNZ(result);
+    updateZeroAndNegativeStatus(result);
     if ((result & 0x100) != 0)
     {
       processorStatus |= P_C_BIT;
@@ -100,8 +100,8 @@ public abstract class AbstractCore
   public void reset(InstanceState cis)
   {
     stopped = false;
-    fetchedOpcode = Brk;
-    stage = 1;
+    fetchedOpcode = BRK_immediate;
+    cycle = 1;
     processorStatus |= P_I_BIT;
     processorStatus &= ~P_D_BIT;
     previousNMI = true;
@@ -158,7 +158,7 @@ public abstract class AbstractCore
       reset(instanceState);
     }
     boolean isReady = parent.getRDY(instanceState);
-    if (!isReady && !stopped && fetchedOpcode == Wai && stage == 2)
+    if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
     {
       parent.setRDY(instanceState, true);
     }
@@ -181,46 +181,46 @@ public abstract class AbstractCore
       }
       do
       {
-        wantingSync = stage < 0;
-        if (stage < 0)
+        wantingSync = cycle < 0;
+        if (cycle < 0)
         {
-          wantRead(pc++);
-          ++stage;
+          wantRead(programCounter++);
+          ++cycle;
         }
-        else if (stage == 0)
+        else if (cycle == 0)
         {
-          wantRead(pc++);
+          wantRead(programCounter++);
           boolean nmi = parent.getNMIB(instanceState);
           if (nmi && !previousNMI)
           {
             vectorToPull = NMI_VECTOR;
-            pc -= 2;
-            fetchedOpcode = Brk;
+            programCounter -= 2;
+            fetchedOpcode = BRK_immediate;
           }
           else if (parent.getIRQB(instanceState) && (processorStatus & P_I_BIT) == 0)
           {
             vectorToPull = IRQ_VECTOR;
-            pc -= 2;
-            fetchedOpcode = Brk;
+            programCounter -= 2;
+            fetchedOpcode = BRK_immediate;
           }
           else
           {
             fetchedOpcode = parent.getD(instanceState);
           }
           previousNMI = nmi;
-          ++stage;
+          ++cycle;
         }
         else
         {
           data = parent.getD(instanceState);
           doInstruction();
-          if (stage >= 0)
+          if (cycle >= 0)
           {
-            ++stage;
+            ++cycle;
           }
         }
       }
-      while (stage < 0 && !stopped);
+      while (cycle < 0 && !stopped);
     }
     else if (clockHigh && !previousClock)
     {
@@ -238,6 +238,18 @@ public abstract class AbstractCore
     }
     this.instanceState = null;
     previousClock = clockHigh;
+  }
+
+  protected void updateZeroStatus()
+  {
+    if ((data & accumulator) != 0)
+    {
+      processorStatus &= ~P_Z_BIT;
+    }
+    else
+    {
+      processorStatus |= P_Z_BIT;
+    }
   }
 }
 

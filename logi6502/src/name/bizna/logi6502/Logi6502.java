@@ -1,6 +1,7 @@
 package name.bizna.logi6502;
 
 import com.cburch.logisim.data.Bounds;
+import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -18,6 +19,20 @@ public abstract class Logi6502
   public Logi6502(String name)
   {
     super(name);
+  }
+
+  void paintPorts(InstancePainter painter, PortInfo[] portInfos, int pinsPerSide)
+  {
+    int n = 0;
+    for (int i = 0; i < portInfos.length; ++i)
+    {
+      if (portInfos[i] != null)
+      {
+        Direction dir = i < pinsPerSide ? Direction.EAST : Direction.WEST;
+        painter.drawPort(n, portInfos[i].name, dir);
+        ++n;
+      }
+    }
   }
 
   protected abstract boolean getRESB(InstanceState i);

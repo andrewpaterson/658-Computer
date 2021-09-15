@@ -4,6 +4,9 @@ import com.cburch.logisim.instance.InstanceState;
 
 import java.util.Random;
 
+import static name.bizna.logi6502.W6502Opcodes.Brk;
+import static name.bizna.logi6502.W6502Opcodes.Wai;
+
 public abstract class AbstractCore
 {
   public static final short IRQ_VECTOR = (short) 0xFFFE;
@@ -19,16 +22,16 @@ public abstract class AbstractCore
   public static final byte P_N_BIT = (byte) 0x80;
 
   protected Logi6502 parent;
-  protected InstanceState cis;
-  protected byte a, x, y, p, s, data;
-  protected short ea;
+  protected InstanceState instanceState;
+  protected byte accumulator, xIndex, yIndex, processorStatus, stack, data;
+  protected short address;
   protected byte fetchedOpcode, stage;
   protected short vectorToPull = IRQ_VECTOR;
   protected short pc;
   protected boolean stopped = true;
-  protected boolean previousNMI = false, previousSO = false, previousClock = true, taking_branch = false, wanting_sync, wanting_vpb;
-  protected short intendedA;
-  protected byte intendedD;
+  protected boolean previousNMI = false, previousSO = false, previousClock = true, takingBranch = false, wantingSync, wantingVectorPull;
+  protected short intendedAddress;
+  protected byte intendedData;
   protected boolean intendedRWB;
 
   public AbstractCore(Logi6502 parent)
@@ -41,22 +44,22 @@ public abstract class AbstractCore
     Random r = new Random();
     byte[] corr = new byte[12];
     r.nextBytes(corr);
-    a = corr[0];
-    x = corr[1];
-    y = corr[2];
-    p = corr[3];
-    s = corr[4];
+    accumulator = corr[0];
+    xIndex = corr[1];
+    yIndex = corr[2];
+    processorStatus = corr[3];
+    stack = corr[4];
     data = corr[5];
     fetchedOpcode = corr[6];
     stage = corr[7];
-    ea = (short) ((corr[8] & 0xFF) | corr[9] << 8);
-    intendedA = ea;
+    address = (short) ((corr[8] & 0xFF) | corr[9] << 8);
+    intendedAddress = address;
     pc = (short) ((corr[10] & 0xFF) | corr[11] << 8);
     intendedRWB = false;
     previousNMI = true;
     previousSO = true;
-    wanting_sync = false;
-    wanting_vpb = false;
+    wantingSync = false;
+    wantingVectorPull = false;
   }
 
   abstract protected void doInstruction();
@@ -65,19 +68,19 @@ public abstract class AbstractCore
   {
     if ((result & 0xFF) == 0)
     {
-      p |= P_Z_BIT;
+      processorStatus |= P_Z_BIT;
     }
     else
     {
-      p &= ~P_Z_BIT;
+      processorStatus &= ~P_Z_BIT;
     }
     if ((result & 0x80) != 0)
     {
-      p |= P_N_BIT;
+      processorStatus |= P_N_BIT;
     }
     else
     {
-      p &= ~P_N_BIT;
+      processorStatus &= ~P_N_BIT;
     }
   }
 
@@ -86,86 +89,26 @@ public abstract class AbstractCore
     simplePUpdateNZ(result);
     if ((result & 0x100) != 0)
     {
-      p |= P_C_BIT;
+      processorStatus |= P_C_BIT;
     }
     else
     {
-      p &= ~P_C_BIT;
+      processorStatus &= ~P_C_BIT;
     }
-  }
-
-  public byte readA()
-  {
-    return a;
-  }
-
-  public byte readX()
-  {
-    return x;
-  }
-
-  public byte readY()
-  {
-    return y;
-  }
-
-  public byte readP()
-  {
-    return p;
-  }
-
-  public byte readS()
-  {
-    return s;
-  }
-
-  public short readPC()
-  {
-    return pc;
-  }
-
-  public void writeA(byte nu)
-  {
-    a = nu;
-  }
-
-  public void writeX(byte nu)
-  {
-    x = nu;
-  }
-
-  public void writeY(byte nu)
-  {
-    y = nu;
-  }
-
-  public void writeP(byte nu)
-  {
-    p = nu;
-  }
-
-  public void writeS(byte nu)
-  {
-    s = nu;
-  }
-
-  public void writePC(short nu)
-  {
-    pc = nu;
   }
 
   public void reset(InstanceState cis)
   {
     stopped = false;
-    fetchedOpcode = 0;
+    fetchedOpcode = Brk;
     stage = 1;
-    p |= P_I_BIT;
-    p &= ~P_D_BIT;
+    processorStatus |= P_I_BIT;
+    processorStatus &= ~P_D_BIT;
     previousNMI = true;
     vectorToPull = RESET_VECTOR;
-    wanting_vpb = false;
+    wantingVectorPull = false;
     parent.setVPB(cis, false);
-    wanting_sync = false;
+    wantingSync = false;
     parent.setSYNC(cis, false);
     parent.setMLB(cis, false);
     parent.setRDY(cis, true);
@@ -173,14 +116,14 @@ public abstract class AbstractCore
 
   protected void wantRead(short address)
   {
-    intendedA = address;
+    intendedAddress = address;
     intendedRWB = true;
   }
 
   protected void wantWrite(short address, byte data)
   {
-    intendedA = address;
-    intendedD = data;
+    intendedAddress = address;
+    intendedData = data;
     intendedRWB = false;
   }
 
@@ -188,57 +131,57 @@ public abstract class AbstractCore
   {
     if (vectorToPull == RESET_VECTOR)
     {
-      wantRead((short) (0x0100 | (s & 0xFF)));
+      wantRead((short) (0x0100 | (stack & 0xFF)));
     }
     else
     {
-      wantWrite((short) (0x0100 | (s & 0xFF)), data);
+      wantWrite((short) (0x0100 | (stack & 0xFF)), data);
     }
-    --s;
+    --stack;
   }
 
   protected void wantPop()
   {
-    ++s;
-    wantRead((short) (0x0100 | (s & 0xFF)));
+    ++stack;
+    wantRead((short) (0x0100 | (stack & 0xFF)));
   }
 
   protected void wantVPB(boolean want)
   {
-    wanting_vpb = want;
+    wantingVectorPull = want;
   }
 
-  public void goh(InstanceState cis, boolean isResetting, boolean clockIsHigh)
+  public void goh(InstanceState instanceState, boolean isResetting, boolean clockHigh)
   {
     if (isResetting)
     {
-      reset(cis);
+      reset(instanceState);
     }
-    boolean isReady = parent.getRDY(cis);
-    if (!isReady && !stopped && fetchedOpcode == 0xCB && stage == 2)
+    boolean isReady = parent.getRDY(instanceState);
+    if (!isReady && !stopped && fetchedOpcode == Wai && stage == 2)
     {
-      parent.setRDY(cis, true);
+      parent.setRDY(instanceState, true);
     }
     if (stopped || !isReady)
     {
       return;
     }
-    this.cis = cis;
-    if (!clockIsHigh && previousClock)
+    this.instanceState = instanceState;
+    if (!clockHigh && previousClock)
     {
       // falling edge
-      boolean so = parent.getSOB(cis);
+      boolean so = parent.getSOB(instanceState);
       if (so != previousSO)
       {
         if (so)
         {
-          p |= P_V_BIT;
+          processorStatus |= P_V_BIT;
         }
         previousSO = so;
       }
       do
       {
-        wanting_sync = stage < 0;
+        wantingSync = stage < 0;
         if (stage < 0)
         {
           wantRead(pc++);
@@ -247,29 +190,29 @@ public abstract class AbstractCore
         else if (stage == 0)
         {
           wantRead(pc++);
-          boolean nmi = parent.getNMIB(cis);
+          boolean nmi = parent.getNMIB(instanceState);
           if (nmi && !previousNMI)
           {
             vectorToPull = NMI_VECTOR;
             pc -= 2;
-            fetchedOpcode = 0x00; // BRK
+            fetchedOpcode = Brk;
           }
-          else if (parent.getIRQB(cis) && (p & P_I_BIT) == 0)
+          else if (parent.getIRQB(instanceState) && (processorStatus & P_I_BIT) == 0)
           {
             vectorToPull = IRQ_VECTOR;
             pc -= 2;
-            fetchedOpcode = 0x00; // BRK
+            fetchedOpcode = Brk;
           }
           else
           {
-            fetchedOpcode = parent.getD(cis);
+            fetchedOpcode = parent.getD(instanceState);
           }
           previousNMI = nmi;
           ++stage;
         }
         else
         {
-          data = parent.getD(cis);
+          data = parent.getD(instanceState);
           doInstruction();
           if (stage >= 0)
           {
@@ -279,22 +222,22 @@ public abstract class AbstractCore
       }
       while (stage < 0 && !stopped);
     }
-    else if (clockIsHigh && !previousClock)
+    else if (clockHigh && !previousClock)
     {
       // rising edge, apply outputs
       if (intendedRWB)
       {
-        parent.doRead(cis, intendedA);
+        parent.doRead(instanceState, intendedAddress);
       }
       else
       {
-        parent.doWrite(cis, intendedA, intendedD);
+        parent.doWrite(instanceState, intendedAddress, intendedData);
       }
-      parent.setSYNC(cis, wanting_sync);
-      parent.setVPB(cis, wanting_vpb);
+      parent.setSYNC(instanceState, wantingSync);
+      parent.setVPB(instanceState, wantingVectorPull);
     }
-    this.cis = null;
-    previousClock = clockIsHigh;
+    this.instanceState = null;
+    previousClock = clockHigh;
   }
 }
 

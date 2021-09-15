@@ -2,7 +2,6 @@ package name.bizna.logi6502;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Bounds;
-import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -52,11 +51,6 @@ public class Logi6502Expert
   public static final int PORT_RESB = 12;
   public static final int NUM_PINS = 14;
 
-  static
-  {
-    assert (PINS_PER_SIDE * 2 == NUM_PINS);
-  }
-
   public Logi6502Expert()
   {
     super("W65C02S (Expert)");
@@ -68,16 +62,7 @@ public class Logi6502Expert
   public void paintInstance(InstancePainter painter)
   {
     painter.drawBounds();
-    int n = 0;
-    for (int i = 0; i < portInfos.length; ++i)
-    {
-      if (portInfos[i] != null)
-      {
-        Direction dir = i < PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
-        painter.drawPort(n, portInfos[i].name, dir);
-        ++n;
-      }
-    }
+    paintPorts(painter, portInfos, PINS_PER_SIDE);
     super.paintInstance(painter);
   }
 
@@ -133,25 +118,23 @@ public class Logi6502Expert
   @Override
   public void doRead(InstanceState i, short a)
   {
-    if (!checkBE(i))
+    if (checkBE(i))
     {
-      return;
+      doAddr(i, a);
+      i.setPort(PORT_D, Value.createUnknown(BitWidth.create(8)), 9);
+      boolPort(i, PORT_RWB, true, 9);
     }
-    doAddr(i, a);
-    i.setPort(PORT_D, Value.createUnknown(BitWidth.create(8)), 9);
-    boolPort(i, PORT_RWB, true, 9);
   }
 
   @Override
   public void doWrite(InstanceState i, short a, byte data)
   {
-    if (!checkBE(i))
+    if (checkBE(i))
     {
-      return;
+      doAddr(i, a);
+      i.setPort(PORT_D, Value.createKnown(BitWidth.create(8), data), 15);
+      boolPort(i, PORT_RWB, false, 9);
     }
-    doAddr(i, a);
-    i.setPort(PORT_D, Value.createKnown(BitWidth.create(8), data), 15);
-    boolPort(i, PORT_RWB, false, 9);
   }
 
   @Override

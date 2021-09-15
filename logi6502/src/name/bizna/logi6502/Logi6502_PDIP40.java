@@ -1,7 +1,6 @@
 package name.bizna.logi6502;
 
 import com.cburch.logisim.data.Bounds;
-import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -215,16 +214,7 @@ public class Logi6502_PDIP40
     GraphicsUtil.switchToWidth(g, 1);
     Font oldFont = g.getFont();
     g.setFont(oldFont.deriveFont(9.0f));
-    int n = 0;
-    for (int i = 0; i < portInfos.length; ++i)
-    {
-      if (portInfos[i] != null)
-      {
-        Direction dir = i < PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
-        painter.drawPort(n, portInfos[i].name, dir);
-        ++n;
-      }
-    }
+    paintPorts(painter, portInfos, PINS_PER_SIDE);
     g.setFont(oldFont);
     super.paintInstance(painter);
   }

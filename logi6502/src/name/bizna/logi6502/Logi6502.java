@@ -35,31 +35,31 @@ public abstract class Logi6502
     }
   }
 
-  protected abstract boolean getRESB(InstanceState i);
+  protected abstract boolean isReset(InstanceState i);
 
   protected abstract boolean getPHI2(InstanceState i);
 
-  public boolean getRDY(InstanceState i)
+  public boolean isReady(InstanceState i)
   {
     return true;
   }
 
-  public boolean getSOB(InstanceState i)
+  public boolean isOverflow(InstanceState i)
   {
     return false;
   }
 
-  public abstract boolean getIRQB(InstanceState i);
+  public abstract boolean isInterruptRequest(InstanceState i);
 
-  public abstract boolean getNMIB(InstanceState i);
+  public abstract boolean isNonMaskableInterrupt(InstanceState i);
 
   public abstract void doRead(InstanceState i, short a);
 
   public abstract void doWrite(InstanceState i, short a, byte data);
 
-  public abstract byte getD(InstanceState i);
+  public abstract byte getDataFromPort(InstanceState i);
 
-  public void setRDY(InstanceState i, boolean x)
+  public void setReady(InstanceState i, boolean x)
   {
   }
 
@@ -67,7 +67,7 @@ public abstract class Logi6502
   {
   }
 
-  public void setSYNC(InstanceState i, boolean x)
+  public void setSync(InstanceState i, boolean x)
   {
     System.out.println("SyncPSYCH");
   }
@@ -80,7 +80,7 @@ public abstract class Logi6502
   public void propagate(InstanceState state)
   {
     CoreState core = CoreState.get(state, this);
-    core.goh(state, getRESB(state), getPHI2(state));
+    core.tick(state, isReset(state), getPHI2(state));
   }
 
   @Override

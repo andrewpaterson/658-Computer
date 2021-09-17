@@ -47,14 +47,14 @@ public class Logi6502_PDIP40
   private static final int NOTCH_HEIGHT = 12;
   private static final PortInfo[] portInfos = new PortInfo[]{
       // Left side, top to bottom
-      PortInfo.simpleOutput("VPB#"),
-      PortInfo.simpleBidi("RDY"),
-      PortInfo.simpleOutput("PHI1O"),
-      PortInfo.simpleInput("IRQB#"),
-      PortInfo.simpleOutput("MLB#"),
-      PortInfo.simpleInput("NMIB#"),
-      PortInfo.simpleOutput("SYNC"),
-      PortInfo.simpleInput("VDD"),
+      PortInfo.exclusiveOutput("VPB#"),
+      PortInfo.sharedBidirectional("RDY"),
+      PortInfo.exclusiveOutput("PHI1O"),
+      PortInfo.sharedInput("IRQB#"),
+      PortInfo.exclusiveOutput("MLB#"),
+      PortInfo.sharedInput("NMIB#"),
+      PortInfo.exclusiveOutput("SYNC"),
+      PortInfo.sharedInput("VDD"),
       PortInfo.sharedOutput("A0"),
       PortInfo.sharedOutput("A1"),
       PortInfo.sharedOutput("A2"),
@@ -68,26 +68,26 @@ public class Logi6502_PDIP40
       PortInfo.sharedOutput("A10"),
       PortInfo.sharedOutput("A11"),
       // Right side, bottom to top
-      PortInfo.simpleInput("VSS"),
+      PortInfo.sharedInput("VSS"),
       PortInfo.sharedOutput("A12"),
       PortInfo.sharedOutput("A13"),
       PortInfo.sharedOutput("A14"),
       PortInfo.sharedOutput("A15"),
-      PortInfo.simpleBidi("D7"),
-      PortInfo.simpleBidi("D6"),
-      PortInfo.simpleBidi("D5"),
-      PortInfo.simpleBidi("D4"),
-      PortInfo.simpleBidi("D3"),
-      PortInfo.simpleBidi("D2"),
-      PortInfo.simpleBidi("D1"),
-      PortInfo.simpleBidi("D0"),
+      PortInfo.sharedBidirectional("D7"),
+      PortInfo.sharedBidirectional("D6"),
+      PortInfo.sharedBidirectional("D5"),
+      PortInfo.sharedBidirectional("D4"),
+      PortInfo.sharedBidirectional("D3"),
+      PortInfo.sharedBidirectional("D2"),
+      PortInfo.sharedBidirectional("D1"),
+      PortInfo.sharedBidirectional("D0"),
       PortInfo.sharedOutput("RWB#"),
-      PortInfo.simpleInput("NC"),
-      PortInfo.simpleInput("BE"),
-      PortInfo.simpleInput("PHI2"),
-      PortInfo.simpleInput("SOB#"),
-      PortInfo.simpleInput("PHI2O"),
-      PortInfo.simpleInput("RESB#")
+      PortInfo.sharedInput("NC"),
+      PortInfo.sharedInput("BE"),
+      PortInfo.sharedInput("PHI2"),
+      PortInfo.sharedInput("SOB#"),
+      PortInfo.sharedInput("PHI2O"),
+      PortInfo.sharedInput("RESB#")
   };
   // real pin numbers minus 1
   public static final int PORT_VPB = 0;
@@ -220,7 +220,7 @@ public class Logi6502_PDIP40
   }
 
   @Override
-  protected boolean getRESB(InstanceState i)
+  protected boolean isReset(InstanceState i)
   {
     return i.getPortValue(PORT_RESB) != Value.TRUE;
   }
@@ -248,13 +248,13 @@ public class Logi6502_PDIP40
   }
 
   @Override
-  public boolean getIRQB(InstanceState i)
+  public boolean isInterruptRequest(InstanceState i)
   {
     return i.getPortValue(PORT_IRQB) == Value.FALSE;
   }
 
   @Override
-  public boolean getNMIB(InstanceState i)
+  public boolean isNonMaskableInterrupt(InstanceState i)
   {
     return i.getPortValue(PORT_NMIB) == Value.FALSE;
   }
@@ -329,7 +329,7 @@ public class Logi6502_PDIP40
   }
 
   @Override
-  public byte getD(InstanceState i)
+  public byte getDataFromPort(InstanceState i)
   {
     byte ret = 0;
     for (int n = 0; n < 8; ++n)
@@ -354,19 +354,19 @@ public class Logi6502_PDIP40
   }
 
   @Override
-  public boolean getRDY(InstanceState i)
+  public boolean isReady(InstanceState i)
   {
     return i.getPortValue(PORT_RDY) != Value.FALSE;
   }
 
   @Override
-  public boolean getSOB(InstanceState i)
+  public boolean isOverflow(InstanceState i)
   {
     return i.getPortValue(PORT_SOB) == Value.FALSE;
   }
 
   @Override
-  public void setRDY(InstanceState i, boolean x)
+  public void setReady(InstanceState i, boolean x)
   {
     i.setPort(PORT_RDY, x ? Value.UNKNOWN : Value.FALSE, 9);
   }
@@ -378,7 +378,7 @@ public class Logi6502_PDIP40
   }
 
   @Override
-  public void setSYNC(InstanceState i, boolean x)
+  public void setSync(InstanceState i, boolean x)
   {
     boolPort(i, PORT_SYNC, x, 6);
   }

@@ -21,17 +21,17 @@ public class Logi6502Simple
   private static final int PIN_STOP_Y = BOT_Y - V_MARGIN;
   private static final PortInfo[] portInfos = new PortInfo[]{
       // Left side, top to bottom
-      PortInfo.simpleInput("PHI2"),
-      PortInfo.simpleInput("IRQB#"),
-      PortInfo.simpleInput("NMIB#"),
-      PortInfo.simpleInput("RESB#"),
+      PortInfo.sharedInput("PHI2"),
+      PortInfo.sharedInput("IRQB#"),
+      PortInfo.sharedInput("NMIB#"),
+      PortInfo.sharedInput("RESB#"),
       null,
       // Right side, bottom to top
       PortInfo.sharedOutput("A", 16),
-      PortInfo.simpleBidi("D", 8),
+      PortInfo.sharedBidirectional("D", 8),
       PortInfo.sharedOutput("RWB"),
-      PortInfo.simpleOutput("VPB#"),
-      PortInfo.simpleOutput("SYNC"),
+      PortInfo.exclusiveOutput("VPB#"),
+      PortInfo.exclusiveOutput("SYNC"),
       };
   public static final int PORT_PHI2 = 0;
   public static final int PORT_IRQB = 1;
@@ -81,7 +81,7 @@ public class Logi6502Simple
   }
 
   @Override
-  protected boolean getRESB(InstanceState i)
+  protected boolean isReset(InstanceState i)
   {
     return i.getPortValue(PORT_RESB) != Value.TRUE;
   }
@@ -93,13 +93,13 @@ public class Logi6502Simple
   }
 
   @Override
-  public boolean getIRQB(InstanceState i)
+  public boolean isInterruptRequest(InstanceState i)
   {
     return i.getPortValue(PORT_IRQB) == Value.FALSE;
   }
 
   @Override
-  public boolean getNMIB(InstanceState i)
+  public boolean isNonMaskableInterrupt(InstanceState i)
   {
     return i.getPortValue(PORT_NMIB) == Value.FALSE;
   }
@@ -131,7 +131,7 @@ public class Logi6502Simple
   }
 
   @Override
-  public byte getD(InstanceState i)
+  public byte getDataFromPort(InstanceState i)
   {
     return (byte) i.getPortValue(PORT_D).toLongValue();
   }
@@ -143,7 +143,7 @@ public class Logi6502Simple
   }
 
   @Override
-  public void setSYNC(InstanceState i, boolean x)
+  public void setSync(InstanceState i, boolean x)
   {
     boolPort(i, PORT_SYNC, x, 6);
   }

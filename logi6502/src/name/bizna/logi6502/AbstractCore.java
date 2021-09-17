@@ -109,9 +109,9 @@ public abstract class AbstractCore
     wantingVectorPull = false;
     parent.setVPB(cis, false);
     wantingSync = false;
-    parent.setSYNC(cis, false);
+    parent.setSync(cis, false);
     parent.setMLB(cis, false);
-    parent.setRDY(cis, true);
+    parent.setReady(cis, true);
   }
 
   protected void wantRead(short address)
@@ -151,16 +151,17 @@ public abstract class AbstractCore
     wantingVectorPull = want;
   }
 
-  public void goh(InstanceState instanceState, boolean isResetting, boolean clockHigh)
+  public void tick(InstanceState instanceState, boolean isResetting, boolean clockHigh)
   {
     if (isResetting)
     {
       reset(instanceState);
     }
-    boolean isReady = parent.getRDY(instanceState);
+
+    boolean isReady = parent.isReady(instanceState);
     if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
     {
-      parent.setRDY(instanceState, true);
+      parent.setReady(instanceState, true);
     }
     if (stopped || !isReady)
     {
@@ -170,7 +171,7 @@ public abstract class AbstractCore
     if (!clockHigh && previousClock)
     {
       // falling edge
-      boolean so = parent.getSOB(instanceState);
+      boolean so = parent.isOverflow(instanceState);
       if (so != previousSO)
       {
         if (so)
@@ -190,14 +191,14 @@ public abstract class AbstractCore
         else if (cycle == 0)
         {
           wantRead(programCounter++);
-          boolean nmi = parent.getNMIB(instanceState);
+          boolean nmi = parent.isNonMaskableInterrupt(instanceState);
           if (nmi && !previousNMI)
           {
             vectorToPull = NMI_VECTOR;
             programCounter -= 2;
             fetchedOpcode = BRK;
           }
-          else if (parent.getIRQB(instanceState) && (processorStatus & P_I_BIT) == 0)
+          else if (parent.isInterruptRequest(instanceState) && (processorStatus & P_I_BIT) == 0)
           {
             vectorToPull = IRQ_VECTOR;
             programCounter -= 2;
@@ -205,14 +206,14 @@ public abstract class AbstractCore
           }
           else
           {
-            fetchedOpcode = parent.getD(instanceState);
+            fetchedOpcode = parent.getDataFromPort(instanceState);
           }
           previousNMI = nmi;
           ++cycle;
         }
         else
         {
-          data = parent.getD(instanceState);
+          data = parent.getDataFromPort(instanceState);
           doInstruction();
           if (cycle >= 0)
           {
@@ -233,7 +234,7 @@ public abstract class AbstractCore
       {
         parent.doWrite(instanceState, intendedAddress, intendedData);
       }
-      parent.setSYNC(instanceState, wantingSync);
+      parent.setSync(instanceState, wantingSync);
       parent.setVPB(instanceState, wantingVectorPull);
     }
     this.instanceState = null;

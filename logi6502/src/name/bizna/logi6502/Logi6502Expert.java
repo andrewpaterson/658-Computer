@@ -20,21 +20,21 @@ public class Logi6502Expert
   private static final int PIN_STOP_Y = BOT_Y - V_MARGIN;
   private static final PortInfo[] portInfos = new PortInfo[]{
       // Left side, top to bottom
-      PortInfo.simpleOutput("VPB#"),
-      PortInfo.simpleBidi("RDY"),
-      PortInfo.simpleInput("IRQB#"),
-      PortInfo.simpleOutput("MLB#"),
-      PortInfo.simpleInput("NMIB#"),
-      PortInfo.simpleOutput("SYNC"),
+      PortInfo.exclusiveOutput("VPB#"),
+      PortInfo.sharedBidirectional("RDY"),
+      PortInfo.sharedInput("IRQB#"),
+      PortInfo.exclusiveOutput("MLB#"),
+      PortInfo.sharedInput("NMIB#"),
+      PortInfo.exclusiveOutput("SYNC"),
       null,
       // Right side, bottom to top
       PortInfo.sharedOutput("A", 16),
-      PortInfo.simpleBidi("D", 8),
+      PortInfo.sharedBidirectional("D", 8),
       PortInfo.sharedOutput("RWB"),
-      PortInfo.simpleInput("BE"),
-      PortInfo.simpleInput("PHI2"),
-      PortInfo.simpleInput("SOB#"),
-      PortInfo.simpleInput("RESB#")
+      PortInfo.sharedInput("BE"),
+      PortInfo.sharedInput("PHI2"),
+      PortInfo.sharedInput("SOB#"),
+      PortInfo.sharedInput("RESB#")
   };
   public static final int PORT_VPB = 0;
   public static final int PORT_RDY = 1;
@@ -42,14 +42,13 @@ public class Logi6502Expert
   public static final int PORT_MLB = 3;
   public static final int PORT_NMIB = 4;
   public static final int PORT_SYNC = 5;
-  public static final int PORT_A = 6;
-  public static final int PORT_D = 7;
+  public static final int PORT_AddressBus = 6;
+  public static final int PORT_DataBus = 7;
   public static final int PORT_RWB = 8;
   public static final int PORT_BE = 9;
   public static final int PORT_PHI2 = 10;
   public static final int PORT_SOB = 11;
   public static final int PORT_RESB = 12;
-  public static final int NUM_PINS = 14;
 
   public Logi6502Expert()
   {
@@ -67,46 +66,46 @@ public class Logi6502Expert
   }
 
   @Override
-  protected boolean getRESB(InstanceState i)
+  protected boolean isReset(InstanceState instanceState)
   {
-    return i.getPortValue(PORT_RESB) != Value.TRUE;
+    return instanceState.getPortValue(PORT_RESB) != Value.TRUE;
   }
 
   @Override
-  protected boolean getPHI2(InstanceState i)
+  protected boolean getPHI2(InstanceState instanceState)
   {
-    return i.getPortValue(PORT_PHI2) != Value.FALSE;
+    return instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
   }
 
   @Override
-  public boolean getIRQB(InstanceState i)
+  public boolean isInterruptRequest(InstanceState instanceState)
   {
-    return i.getPortValue(PORT_IRQB) == Value.FALSE;
+    return instanceState.getPortValue(PORT_IRQB) == Value.FALSE;
   }
 
   @Override
-  public boolean getNMIB(InstanceState i)
+  public boolean isNonMaskableInterrupt(InstanceState instanceState)
   {
-    return i.getPortValue(PORT_NMIB) == Value.FALSE;
+    return instanceState.getPortValue(PORT_NMIB) == Value.FALSE;
   }
 
-  private void boolPort(InstanceState i, int port, boolean value, int delay)
+  private void setPort(InstanceState instanceState, int port, boolean value, int delay)
   {
-    i.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
+    instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
   }
 
-  private void doAddr(InstanceState i, short a)
+  private void setAddressPort(InstanceState instanceState, short a)
   {
-    i.setPort(PORT_A, Value.createKnown(BitWidth.create(16), a), 12);
+    instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), a), 12);
   }
 
-  private boolean checkBE(InstanceState i)
+  private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
   {
-    if (i.getPortValue(PORT_BE) == Value.FALSE)
+    if (instanceState.getPortValue(PORT_BE) == Value.FALSE)
     {
-      i.setPort(PORT_A, Value.createUnknown(BitWidth.create(16)), 12);
-      i.setPort(PORT_D, Value.createUnknown(BitWidth.create(8)), 12);
-      i.setPort(PORT_RWB, Value.UNKNOWN, 12);
+      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
+      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 12);
       return false;
     }
     else
@@ -116,66 +115,67 @@ public class Logi6502Expert
   }
 
   @Override
-  public void doRead(InstanceState i, short a)
+  public void doRead(InstanceState instanceState, short address)
   {
-    if (checkBE(i))
+    if (updateBussesEnabledFromNotBusEnabled(instanceState))
     {
-      doAddr(i, a);
-      i.setPort(PORT_D, Value.createUnknown(BitWidth.create(8)), 9);
-      boolPort(i, PORT_RWB, true, 9);
+      setAddressPort(instanceState, address);
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
+      setPort(instanceState, PORT_RWB, true, 9);
     }
   }
 
   @Override
-  public void doWrite(InstanceState i, short a, byte data)
+  public void doWrite(InstanceState instanceState, short address, byte data)
   {
-    if (checkBE(i))
+    if (updateBussesEnabledFromNotBusEnabled(instanceState))
     {
-      doAddr(i, a);
-      i.setPort(PORT_D, Value.createKnown(BitWidth.create(8), data), 15);
-      boolPort(i, PORT_RWB, false, 9);
+      setAddressPort(instanceState, address);
+      instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+      setPort(instanceState, PORT_RWB, false, 9);
     }
   }
 
   @Override
-  public byte getD(InstanceState i)
+  public byte getDataFromPort(InstanceState instanceState)
   {
-    return (byte) i.getPortValue(PORT_D).toLongValue();
+    return (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
   }
 
   @Override
-  public boolean getRDY(InstanceState i)
+  public boolean isReady(InstanceState instanceState)
   {
-    return i.getPortValue(PORT_RDY) != Value.FALSE;
+    return instanceState.getPortValue(PORT_RDY) != Value.FALSE;
   }
 
   @Override
-  public boolean getSOB(InstanceState i)
+  public boolean isOverflow(InstanceState instanceState)
   {
-    return i.getPortValue(PORT_SOB) == Value.FALSE;
+    return instanceState.getPortValue(PORT_SOB) == Value.FALSE;
   }
 
   @Override
-  public void setRDY(InstanceState i, boolean x)
+  public void setReady(InstanceState instanceState, boolean ready)
   {
-    i.setPort(PORT_RDY, x ? Value.UNKNOWN : Value.FALSE, 9);
+    instanceState.setPort(PORT_RDY, ready ? Value.UNKNOWN : Value.FALSE, 9);
   }
 
   @Override
-  public void setVPB(InstanceState i, boolean x)
+  public void setVPB(InstanceState instanceState, boolean vectorPull)
   {
-    boolPort(i, PORT_VPB, !x, 6);
+    setPort(instanceState, PORT_VPB, !vectorPull, 6);
   }
 
   @Override
-  public void setSYNC(InstanceState i, boolean x)
+  public void setSync(InstanceState instanceState, boolean sync)
   {
-    boolPort(i, PORT_SYNC, x, 6);
+    setPort(instanceState, PORT_SYNC, sync, 6);
   }
 
   @Override
-  public void setMLB(InstanceState i, boolean x)
+  public void setMLB(InstanceState instanceState, boolean mlb)
   {
-    boolPort(i, PORT_MLB, x, 6);
+    setPort(instanceState, PORT_MLB, mlb, 6);
   }
 }
+

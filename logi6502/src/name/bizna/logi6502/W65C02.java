@@ -325,7 +325,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(0);
+            takeBranchOnDataBitNotSet(0);
           }
           default:
             cycle = -1;
@@ -724,7 +724,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(1);
+            takeBranchOnDataBitNotSet(1);
           }
           default:
             cycle = -1;
@@ -1015,7 +1015,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(2);
+            takeBranchOnDataBitNotSet(2);
           }
           default:
             cycle = -1;
@@ -1425,7 +1425,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(3);
+            takeBranchOnDataBitNotSet(3);
           }
           default:
             cycle = -1;
@@ -1708,7 +1708,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(4);
+            takeBranchOnDataBitNotSet(4);
           }
           default:
             cycle = -1;
@@ -2099,7 +2099,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(5);
+            takeBranchOnDataBitNotSet(5);
           }
           default:
             cycle = -1;
@@ -2547,7 +2547,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(6);
+            takeBranchOnDataBitNotSet(6);
           }
           default:
             cycle = -1;
@@ -3136,7 +3136,7 @@ public class W65C02
           }
           case 2:
           {
-            takeBranchOnDataBit(7);
+            takeBranchOnDataBitNotSet(7);
           }
           default:
             cycle = -1;
@@ -3757,12 +3757,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 1)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(1);
           }
           default:
             cycle = -1;
@@ -4005,12 +4000,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 2)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(2);
           }
           default:
             cycle = -1;
@@ -4392,12 +4382,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 3)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(3);
           }
           default:
             cycle = -1;
@@ -4577,12 +4562,12 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            parent.setRDY(instanceState, false);
+            parent.setReady(instanceState, false);
             break;
           }
           case 2:
           {
-            if (!parent.getIRQB(instanceState) && !(parent.getNMIB(instanceState) && !previousNMI))
+            if (!parent.isInterruptRequest(instanceState) && !(parent.isNonMaskableInterrupt(instanceState) && !previousNMI))
             {
               --cycle;
             }
@@ -4687,12 +4672,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 4)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(4);
           }
           default:
             cycle = -1;
@@ -5084,12 +5064,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 5)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(5);
           }
           default:
             cycle = -1;
@@ -5476,12 +5451,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 6)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(6);
           }
           default:
             cycle = -1;
@@ -6044,12 +6014,7 @@ public class W65C02
           }
           case 2:
           {
-            byte off = data;
-            data = (byte) address;
-            address = (short) (programCounter + off);
-            wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            takingBranch = (data & (1 << 7)) != 0;
-            takeBranch();
+            takeBranchOnDataBitSet(7);
           }
           default:
             cycle = -1;
@@ -6125,7 +6090,17 @@ public class W65C02
     accumulator = data;
   }
 
-  private void takeBranchOnDataBit(int bit)
+  private void takeBranchOnDataBitSet(int bit)
+  {
+    byte offset = data;
+    data = (byte) address;
+    address = (short) (programCounter + offset);
+    wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
+    takingBranch = (data & (1 << bit)) != 0;
+    takeBranch();
+  }
+
+  private void takeBranchOnDataBitNotSet(int bit)
   {
     byte offset = data;
     data = (byte) address;

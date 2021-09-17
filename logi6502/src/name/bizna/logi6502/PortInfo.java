@@ -13,27 +13,17 @@ public class PortInfo
     this.bitWidth = bitWidth;
   }
 
-  public static PortInfo simpleOutput(String name, int pins)
-  {
-    return new PortInfo(name, "output", "exclusive", pins);
-  }
-
   public static PortInfo sharedOutput(String name, int pins)
   {
     return new PortInfo(name, "output", "shared", pins);
   }
 
-  public static PortInfo simpleInput(String name, int pins)
-  {
-    return new PortInfo(name, "input", "shared", pins);
-  }
-
-  public static PortInfo simpleBidi(String name, int pins)
+  public static PortInfo sharedBidirectional(String name, int pins)
   {
     return new PortInfo(name, "inout", "shared", pins);
   }
 
-  public static PortInfo simpleOutput(String name)
+  public static PortInfo exclusiveOutput(String name)
   {
     return new PortInfo(name, "output", "exclusive", 1);
   }
@@ -43,13 +33,14 @@ public class PortInfo
     return new PortInfo(name, "output", "shared", 1);
   }
 
-  public static PortInfo simpleInput(String name)
+  public static PortInfo sharedInput(String name)
   {
     return new PortInfo(name, "input", "shared", 1);
   }
 
-  public static PortInfo simpleBidi(String name)
+  public static PortInfo sharedBidirectional(String name)
   {
     return new PortInfo(name, "inout", "shared", 1);
   }
 }
+

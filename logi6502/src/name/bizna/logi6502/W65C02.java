@@ -1,25 +1,86 @@
 package name.bizna.logi6502;
 
-/*
- * NOTE: This source file is automatically generated! Manually editing it is
- * pointless!
- */
+import com.cburch.logisim.instance.InstanceState;
+
+import java.util.Random;
 
 import static name.bizna.logi6502.W6502Opcodes.*;
 
-/**
- * This core strictly emulates a Western Design Center-branded W65C02 or
- * W65C02S. This includes the \"Rockwell bit extensions\".
- */
 public class W65C02
-    extends AbstractCore
 {
+  public static final short IRQ_VECTOR = (short) 0xFFFE;
+  public static final short RESET_VECTOR = (short) 0xFFFC;
+  public static final short NMI_VECTOR = (short) 0xFFFA;
+  public static final byte P_C_BIT = (byte) 0x01;
+  public static final byte P_Z_BIT = (byte) 0x02;
+  public static final byte P_I_BIT = (byte) 0x04;
+  public static final byte P_D_BIT = (byte) 0x08;
+  public static final byte P_B_BIT = (byte) 0x10;
+  public static final byte P_V_BIT = (byte) 0x40;
+  public static final byte P_N_BIT = (byte) 0x80;
+
+  protected Logi6502 parent;
+  protected InstanceState instanceState;
+
+  protected byte cycle;
+
+  protected byte accumulator;
+  protected byte xIndex;
+  protected byte yIndex;
+  protected byte processorStatus;
+  protected byte stack;
+  protected byte data;
+  protected short address;
+  protected short vectorToPull;
+  protected short programCounter;
+  protected byte fetchedOpcode;
+
+  protected boolean stopped;
+  protected boolean previousNMI;
+  protected boolean previousOverflow;
+  protected boolean previousClock;
+  protected boolean takingBranch;
+  protected boolean wantingSync;
+  protected boolean wantingVectorPull;
+
+  protected short intendedAddress;
+  protected byte intendedData;
+  protected boolean intendedRWB;
+
   public W65C02(Logi6502 parent)
   {
-    super(parent);
+    this.parent = parent;
+    previousNMI = false;
+    previousOverflow = false;
+    previousClock = true;
+    takingBranch = false;
+    vectorToPull = IRQ_VECTOR;
+    stopped = true;
   }
 
-  @Override
+  public void shred()
+  {
+    Random r = new Random();
+    byte[] corr = new byte[12];
+    r.nextBytes(corr);
+    accumulator = corr[0];
+    xIndex = corr[1];
+    yIndex = corr[2];
+    processorStatus = corr[3];
+    stack = corr[4];
+    data = corr[5];
+    fetchedOpcode = corr[6];
+    cycle = corr[7];
+    address = (short) ((corr[8] & 0xFF) | corr[9] << 8);
+    intendedAddress = address;
+    programCounter = (short) ((corr[10] & 0xFF) | corr[11] << 8);
+    intendedRWB = false;
+    previousNMI = true;
+    previousOverflow = true;
+    wantingSync = false;
+    wantingVectorPull = false;
+  }
+
   protected void doInstruction()
   {
     switch (fetchedOpcode)
@@ -29,17 +90,17 @@ public class W65C02
         {
           case 1:
           {
-            wantPush(programCounterHighByte());
+            pushToStack(programCounterHighByte());
             break;
           }
           case 2:
           {
-            wantPush(programCounterLowByte());
+            pushToStack(programCounterLowByte());
             break;
           }
           case 3:
           {
-            wantPush((byte) isBreakBit());
+            pushToStack((byte) isBreakBit());
             break;
           }
           case 4:
@@ -92,7 +153,7 @@ public class W65C02
           }
           case 5:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -114,7 +175,7 @@ public class W65C02
           }
           case 3:
           {
-            OrAccumulator();
+            orMemoryWithAccumulator();
             break;
           }
           case 4:
@@ -136,7 +197,7 @@ public class W65C02
           }
           case 2:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -203,7 +264,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPush(processorStatus);
+            pushToStack(processorStatus);
             break;
           }
           case 2:
@@ -217,7 +278,7 @@ public class W65C02
       case ORA_immediate:
         if (cycle == 1)
         {
-          accumulatorOrData();
+          orAccumulatorWithMemory();
         }
         doneInstruction();
         return;
@@ -248,7 +309,7 @@ public class W65C02
           }
           case 4:
           {
-            OrAccumulator();
+            orMemoryWithAccumulator();
             break;
           }
           case 5:
@@ -275,7 +336,7 @@ public class W65C02
           }
           case 3:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -373,7 +434,7 @@ public class W65C02
           }
           case 5:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -400,7 +461,7 @@ public class W65C02
           }
           case 4:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -449,7 +510,7 @@ public class W65C02
           }
           case 3:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -466,9 +527,7 @@ public class W65C02
           }
           case 2:
           {
-            address = offsetAddressByX();
-            setMemoryLock(true);
-            wantRead(address);
+            readAddressOffsetByXSetMLB();
             break;
           }
           case 3:
@@ -545,7 +604,7 @@ public class W65C02
           }
           case 4:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -555,7 +614,7 @@ public class W65C02
       case INC_implied_a:
         if (cycle == 1)
         {
-          Increment();
+          IncrementAccumulator();
         }
         doneInstruction();
         return;
@@ -611,7 +670,7 @@ public class W65C02
           }
           case 4:
           {
-            accumulatorOrData();
+            orAccumulatorWithMemory();
           }
           default:
             doneInstruction();
@@ -679,12 +738,12 @@ public class W65C02
           case 1:
           {
             address = dataLowByte();
-            wantPush(programCounterHighByte());
+            pushToStack(programCounterHighByte());
             break;
           }
           case 2:
           {
-            wantPush(programCounterLowByte());
+            pushToStack(programCounterLowByte());
             break;
           }
           case 3:
@@ -727,7 +786,7 @@ public class W65C02
           case 5:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -762,7 +821,7 @@ public class W65C02
           case 2:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -786,7 +845,7 @@ public class W65C02
           {
             short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
-            updateCarryStatus(result);
+            updateCarry(result);
             wantWrite(address, data);
             break;
           }
@@ -832,7 +891,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPop();
+            popFromStack();
             break;
           }
           case 2:
@@ -848,7 +907,7 @@ public class W65C02
         if (cycle == 1)
         {
           accumulator &= data;
-          updateZeroAndNegativeStatus(accumulator);
+          updateZeroAndNegative(accumulator);
         }
         doneInstruction();
         return;
@@ -859,7 +918,7 @@ public class W65C02
           data = accumulator;
           short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
           data = (byte) result;
-          updateCarryStatus(result);
+          updateCarry(result);
           accumulator = data;
         }
         doneInstruction();
@@ -903,7 +962,7 @@ public class W65C02
           case 3:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -932,7 +991,7 @@ public class W65C02
           {
             short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
-            updateCarryStatus(result);
+            updateCarry(result);
             wantWrite(address, data);
             break;
           }
@@ -1005,7 +1064,7 @@ public class W65C02
           case 5:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1033,7 +1092,7 @@ public class W65C02
           case 4:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1079,7 +1138,7 @@ public class W65C02
           case 3:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1096,9 +1155,7 @@ public class W65C02
           }
           case 2:
           {
-            address = offsetAddressByX();
-            setMemoryLock(true);
-            wantRead(address);
+            readAddressOffsetByXSetMLB();
             break;
           }
           case 3:
@@ -1110,7 +1167,7 @@ public class W65C02
           {
             short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
-            updateCarryStatus(result);
+            updateCarry(result);
             wantWrite(address, data);
             break;
           }
@@ -1179,7 +1236,7 @@ public class W65C02
           case 4:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1189,11 +1246,7 @@ public class W65C02
       case DEC_implied_a:
         if (cycle == 1)
         {
-          programCounter--;
-          data = accumulator;
-          data--;
-          updateZeroAndNegativeStatus(data);
-          accumulator = data;
+          DecrementAccumulator();
         }
         doneInstruction();
         return;
@@ -1246,7 +1299,7 @@ public class W65C02
           case 4:
           {
             accumulator &= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1281,7 +1334,7 @@ public class W65C02
           {
             short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
-            updateCarryStatus(result);
+            updateCarry(result);
             wantWrite(address, data);
             break;
           }
@@ -1323,19 +1376,19 @@ public class W65C02
           }
           case 2:
           {
-            wantPop();
+            popFromStack();
             break;
           }
           case 3:
           {
             processorStatus = data;
-            wantPop();
+            popFromStack();
             break;
           }
           case 4:
           {
             programCounter = dataLowByte();
-            wantPop();
+            popFromStack();
             break;
           }
           case 5:
@@ -1378,7 +1431,7 @@ public class W65C02
           case 5:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1396,7 +1449,7 @@ public class W65C02
           case 2:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1463,7 +1516,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPush(accumulator);
+            pushToStack(accumulator);
             break;
           }
           case 2:
@@ -1478,7 +1531,7 @@ public class W65C02
         if (cycle == 1)
         {
           accumulator ^= data;
-          updateZeroAndNegativeStatus(accumulator);
+          updateZeroAndNegative(accumulator);
         }
         doneInstruction();
         return;
@@ -1490,7 +1543,7 @@ public class W65C02
           updateCarryStatus();
           short result = (short) ((data & 0xFF) >> 1);
           data = (byte) result;
-          updateZeroAndNegativeStatus(result);
+          updateZeroAndNegative(result);
           accumulator = data;
         }
         doneInstruction();
@@ -1528,7 +1581,7 @@ public class W65C02
           case 3:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1627,7 +1680,7 @@ public class W65C02
           case 5:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1655,7 +1708,7 @@ public class W65C02
           case 4:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1696,7 +1749,7 @@ public class W65C02
           case 3:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1713,9 +1766,7 @@ public class W65C02
           }
           case 2:
           {
-            address = offsetAddressByX();
-            setMemoryLock(true);
-            wantRead(address);
+            readAddressOffsetByXSetMLB();
             break;
           }
           case 3:
@@ -1793,7 +1844,7 @@ public class W65C02
           case 4:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1806,7 +1857,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPush(yIndex);
+            pushToStack(yIndex);
             break;
           }
           case 2:
@@ -1856,7 +1907,7 @@ public class W65C02
           case 4:
           {
             accumulator ^= data;
-            updateZeroAndNegativeStatus(accumulator);
+            updateZeroAndNegative(accumulator);
           }
           default:
             doneInstruction();
@@ -1935,13 +1986,13 @@ public class W65C02
           }
           case 3:
           {
-            wantPop();
+            popFromStack();
             break;
           }
           case 4:
           {
             programCounter = dataLowByte();
-            wantPop();
+            popFromStack();
             break;
           }
           case 5:
@@ -1989,7 +2040,7 @@ public class W65C02
           case 6:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2032,7 +2083,7 @@ public class W65C02
           {
             boolean overflow = (xorAddressTestHighBit()) != 0;
             setOverflow(overflow);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2055,7 +2106,7 @@ public class W65C02
           }
           case 3:
           {
-            rotateRight();
+            rotateMemoryRight();
             break;
           }
           case 4:
@@ -2100,7 +2151,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPop();
+            popFromStack();
             break;
           }
           case 2:
@@ -2123,7 +2174,7 @@ public class W65C02
           case 2:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2139,7 +2190,7 @@ public class W65C02
           short result = (short) (((data & 0xFF) >> 1) | (isCarry() ? 0x80 : 0));
           updateCarryStatus();
           data = (byte) result;
-          updateZeroAndNegativeStatus(result);
+          updateZeroAndNegative(result);
           accumulator = data;
         }
         doneInstruction();
@@ -2192,7 +2243,7 @@ public class W65C02
           case 4:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2220,7 +2271,7 @@ public class W65C02
           }
           case 4:
           {
-            rotateRight();
+            rotateMemoryRight();
             break;
           }
           case 5:
@@ -2297,7 +2348,7 @@ public class W65C02
           case 6:
           {
             setOverflow(xorAddressTestHighBit() != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2331,7 +2382,7 @@ public class W65C02
           case 5:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2383,7 +2434,7 @@ public class W65C02
           case 4:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2401,9 +2452,7 @@ public class W65C02
           }
           case 2:
           {
-            address = offsetAddressByX();
-            setMemoryLock(true);
-            wantRead(address);
+            readAddressOffsetByXSetMLB();
             break;
           }
           case 3:
@@ -2413,7 +2462,7 @@ public class W65C02
           }
           case 4:
           {
-            rotateRight();
+            rotateMemoryRight();
             break;
           }
           case 5:
@@ -2486,7 +2535,7 @@ public class W65C02
           case 5:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2500,7 +2549,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPop();
+            popFromStack();
             break;
           }
           case 2:
@@ -2570,7 +2619,7 @@ public class W65C02
           case 5:
           {
             setOverflow((xorAddressTestHighBit()) != 0);
-            updateCarryStatus(address);
+            updateCarry(address);
             accumulator = (byte) address;
           }
           default:
@@ -2604,7 +2653,7 @@ public class W65C02
           }
           case 5:
           {
-            rotateRight();
+            rotateMemoryRight();
             break;
           }
           case 6:
@@ -2771,7 +2820,7 @@ public class W65C02
           programCounter--;
           data = yIndex;
           data--;
-          updateZeroAndNegativeStatus(data);
+          updateZeroAndNegative(data);
           yIndex = data;
         }
         doneInstruction();
@@ -2788,7 +2837,7 @@ public class W65C02
         {
           programCounter--;
           accumulator = xIndex;
-          updateZeroAndNegativeStatus(accumulator);
+          updateZeroAndNegative(accumulator);
         }
         doneInstruction();
         return;
@@ -3061,7 +3110,7 @@ public class W65C02
         {
           programCounter--;
           accumulator = yIndex;
-          updateZeroAndNegativeStatus(accumulator);
+          updateZeroAndNegative(accumulator);
         }
         doneInstruction();
         return;
@@ -3197,7 +3246,7 @@ public class W65C02
       case LDY_immediate:
         if (cycle == 1)
         {
-          updateZeroAndNegativeStatus(data);
+          updateZeroAndNegative(data);
           yIndex = data;
         }
         doneInstruction();
@@ -3227,7 +3276,7 @@ public class W65C02
           }
           case 5:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3238,8 +3287,7 @@ public class W65C02
       case LDX_immediate:
         if (cycle == 1)
         {
-          updateZeroAndNegativeStatus(data);
-          xIndex = data;
+          loadX();
         }
         doneInstruction();
         return;
@@ -3253,7 +3301,7 @@ public class W65C02
           }
           case 2:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             yIndex = data;
           }
           default:
@@ -3271,7 +3319,7 @@ public class W65C02
           }
           case 2:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3289,8 +3337,7 @@ public class W65C02
           }
           case 2:
           {
-            updateZeroAndNegativeStatus(data);
-            xIndex = data;
+            loadX();
           }
           default:
             doneInstruction();
@@ -3329,14 +3376,14 @@ public class W65C02
         {
           programCounter--;
           yIndex = accumulator;
-          updateZeroAndNegativeStatus(yIndex);
+          updateZeroAndNegative(yIndex);
         }
         doneInstruction();
         return;
       case LDA_immediate:
         if (cycle == 1)
         {
-          updateZeroAndNegativeStatus(data);
+          updateZeroAndNegative(data);
           accumulator = data;
         }
         doneInstruction();
@@ -3346,7 +3393,7 @@ public class W65C02
         {
           programCounter--;
           xIndex = accumulator;
-          updateZeroAndNegativeStatus(xIndex);
+          updateZeroAndNegative(xIndex);
         }
         doneInstruction();
         return;
@@ -3365,7 +3412,7 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             yIndex = data;
           }
           default:
@@ -3388,7 +3435,7 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3411,8 +3458,7 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroAndNegativeStatus(data);
-            xIndex = data;
+            loadX();
           }
           default:
             doneInstruction();
@@ -3478,7 +3524,7 @@ public class W65C02
           }
           case 5:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3506,7 +3552,7 @@ public class W65C02
           }
           case 4:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3529,7 +3575,7 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             yIndex = data;
           }
           default:
@@ -3552,7 +3598,7 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3576,8 +3622,7 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroAndNegativeStatus(data);
-            xIndex = data;
+            loadX();
           }
           default:
             doneInstruction();
@@ -3639,7 +3684,7 @@ public class W65C02
           }
           case 4:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3650,9 +3695,7 @@ public class W65C02
       case TSX_implied:
         if (cycle == 1)
         {
-          programCounter--;
-          xIndex = stack;
-          updateZeroAndNegativeStatus(xIndex);
+          transferStackToX();
         }
         doneInstruction();
         return;
@@ -3676,7 +3719,7 @@ public class W65C02
           }
           case 4:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             yIndex = data;
           }
           default:
@@ -3704,7 +3747,7 @@ public class W65C02
           }
           case 4:
           {
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             accumulator = data;
           }
           default:
@@ -3732,8 +3775,7 @@ public class W65C02
           }
           case 4:
           {
-            updateZeroAndNegativeStatus(data);
-            xIndex = data;
+            loadX();
           }
           default:
             doneInstruction();
@@ -3761,7 +3803,7 @@ public class W65C02
         if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
-          updateCarryStatus(address);
+          updateCarry(address);
         }
         doneInstruction();
         return;
@@ -3791,7 +3833,7 @@ public class W65C02
           case 5:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -3813,7 +3855,7 @@ public class W65C02
           case 2:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -3831,7 +3873,7 @@ public class W65C02
           case 2:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -3854,7 +3896,7 @@ public class W65C02
           case 3:
           {
             data--;
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             wantWrite(address, data);
             break;
           }
@@ -3900,7 +3942,7 @@ public class W65C02
           programCounter--;
           data = yIndex;
           data++;
-          updateZeroAndNegativeStatus(data);
+          updateZeroAndNegative(data);
           yIndex = data;
         }
         doneInstruction();
@@ -3909,18 +3951,14 @@ public class W65C02
         if (cycle == 1)
         {
           address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-          updateCarryStatus(address);
+          updateCarry(address);
         }
         doneInstruction();
         return;
       case DEC_implied_x:
         if (cycle == 1)
         {
-          programCounter--;
-          data = xIndex;
-          data--;
-          updateZeroAndNegativeStatus(data);
-          xIndex = data;
+          DecrementX();
         }
         doneInstruction();
         return;
@@ -3965,7 +4003,7 @@ public class W65C02
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -3988,7 +4026,7 @@ public class W65C02
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -4016,7 +4054,7 @@ public class W65C02
           case 4:
           {
             data--;
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             wantWrite(address, data);
             break;
           }
@@ -4089,7 +4127,7 @@ public class W65C02
           case 5:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -4117,7 +4155,7 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -4140,7 +4178,7 @@ public class W65C02
           case 3:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -4157,9 +4195,7 @@ public class W65C02
           }
           case 2:
           {
-            address = offsetAddressByX();
-            setMemoryLock(true);
-            wantRead(address);
+            readAddressOffsetByXSetMLB();
             break;
           }
           case 3:
@@ -4170,7 +4206,7 @@ public class W65C02
           case 4:
           {
             data--;
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             wantWrite(address, data);
             break;
           }
@@ -4239,7 +4275,7 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -4252,7 +4288,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPush(xIndex);
+            pushToStack(xIndex);
             break;
           }
           case 2:
@@ -4313,7 +4349,7 @@ public class W65C02
           case 4:
           {
             address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
-            updateCarryStatus(address);
+            updateCarry(address);
           }
           default:
             doneInstruction();
@@ -4347,7 +4383,7 @@ public class W65C02
           case 5:
           {
             data--;
-            updateZeroAndNegativeStatus(data);
+            updateZeroAndNegative(data);
             wantWrite(address, data);
             break;
           }
@@ -4380,8 +4416,7 @@ public class W65C02
       case CPX_immediate:
         if (cycle == 1)
         {
-          address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
-          updateCarryStatus(address);
+          CompareXWithData();
         }
         doneInstruction();
         return;
@@ -4415,9 +4450,7 @@ public class W65C02
           }
           case 6:
           {
-            setOverflow(xorAddressNotTestHighBit() != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4434,8 +4467,7 @@ public class W65C02
           }
           case 2:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
-            updateCarryStatus(address);
+            CompareXWithData();
           }
           default:
             doneInstruction();
@@ -4457,9 +4489,7 @@ public class W65C02
           }
           case 3:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4481,9 +4511,7 @@ public class W65C02
           }
           case 3:
           {
-            data++;
-            updateZeroAndNegativeStatus(data);
-            wantWrite(address, data);
+            IncrementMemory();
             break;
           }
           case 4:
@@ -4525,11 +4553,7 @@ public class W65C02
       case INC_implied_x:
         if (cycle == 1)
         {
-          programCounter--;
-          data = xIndex;
-          data++;
-          updateZeroAndNegativeStatus(data);
-          xIndex = data;
+          IncrementX();
         }
         doneInstruction();
         return;
@@ -4543,9 +4567,7 @@ public class W65C02
           }
           case 2:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4567,8 +4589,7 @@ public class W65C02
           }
           case 3:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
-            updateCarryStatus(address);
+            CompareXWithData();
           }
           default:
             doneInstruction();
@@ -4595,9 +4616,7 @@ public class W65C02
           }
           case 4:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4624,9 +4643,7 @@ public class W65C02
           }
           case 4:
           {
-            data++;
-            updateZeroAndNegativeStatus(data);
-            wantWrite(address, data);
+            IncrementMemory();
             break;
           }
           case 5:
@@ -4702,9 +4719,7 @@ public class W65C02
           }
           case 6:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4736,9 +4751,7 @@ public class W65C02
           }
           case 5:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4783,9 +4796,7 @@ public class W65C02
           }
           case 4:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4802,9 +4813,7 @@ public class W65C02
           }
           case 2:
           {
-            address = offsetAddressByX();
-            setMemoryLock(true);
-            wantRead(address);
+            readAddressOffsetByXSetMLB();
             break;
           }
           case 3:
@@ -4814,9 +4823,7 @@ public class W65C02
           }
           case 4:
           {
-            data++;
-            updateZeroAndNegativeStatus(data);
-            wantWrite(address, data);
+            IncrementMemory();
             break;
           }
           case 5:
@@ -4888,9 +4895,7 @@ public class W65C02
           }
           case 5:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4903,7 +4908,7 @@ public class W65C02
           case 1:
           {
             programCounter--;
-            wantPop();
+            popFromStack();
             break;
           }
           case 2:
@@ -4956,9 +4961,7 @@ public class W65C02
           }
           case 5:
           {
-            setOverflow((xorAddressNotTestHighBit()) != 0);
-            updateCarryStatus(address);
-            accumulator = (byte) address;
+            accumulatorFromAddressSetOverflowAndCarry();
           }
           default:
             doneInstruction();
@@ -4991,9 +4994,7 @@ public class W65C02
           }
           case 5:
           {
-            data++;
-            updateZeroAndNegativeStatus(data);
-            wantWrite(address, data);
+            IncrementMemory();
             break;
           }
           case 6:
@@ -5073,6 +5074,57 @@ public class W65C02
     }
   }
 
+  private void readAddressOffsetByXSetMLB()
+  {
+    address = offsetAddressByX();
+    setMemoryLock(true);
+    wantRead(address);
+  }
+
+  private void CompareXWithData()
+  {
+    address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
+    updateCarry(address);
+  }
+
+  private void accumulatorFromAddressSetOverflowAndCarry()
+  {
+    setOverflow((xorAddressNotTestHighBit()) != 0);
+    updateCarry(address);
+    accumulator = (byte) address;
+  }
+
+  private void DecrementAccumulator()
+  {
+    programCounter--;
+    data = accumulator;
+    data--;
+    updateZeroAndNegative(data);
+    accumulator = data;
+  }
+
+  private void DecrementX()
+  {
+    programCounter--;
+    data = xIndex;
+    data--;
+    updateZeroAndNegative(data);
+    xIndex = data;
+  }
+
+  private void loadX()
+  {
+    updateZeroAndNegative(data);
+    xIndex = data;
+  }
+
+  private void transferStackToX()
+  {
+    programCounter--;
+    xIndex = stack;
+    updateZeroAndNegative(xIndex);
+  }
+
   private void addressHighFromDataOffsetAddressByX()
   {
     address |= (short) (data << 8);
@@ -5096,13 +5148,29 @@ public class W65C02
     programCounter = address;
   }
 
-  private void Increment()
+  private void IncrementAccumulator()
   {
     programCounter--;
     data = accumulator;
     data++;
-    updateZeroAndNegativeStatus(data);
+    updateZeroAndNegative(data);
     accumulator = data;
+  }
+
+  private void IncrementX()
+  {
+    programCounter--;
+    data = xIndex;
+    data++;
+    updateZeroAndNegative(data);
+    xIndex = data;
+  }
+
+  private void IncrementMemory()
+  {
+    data++;
+    updateZeroAndNegative(data);
+    wantWrite(address, data);
   }
 
   private short dataLowByte()
@@ -5133,12 +5201,12 @@ public class W65C02
     wantRead(programCounter++);
   }
 
-  private void rotateRight()
+  private void rotateMemoryRight()
   {
     short result = (short) (((data & 0xFF) >> 1) | (isCarry() ? 0x80 : 0));
     updateCarryStatus();
     data = (byte) result;
-    updateZeroAndNegativeStatus(result);
+    updateZeroAndNegative(result);
     wantWrite(address, data);
   }
 
@@ -5201,7 +5269,7 @@ public class W65C02
     updateCarryStatus();
     short result = (short) ((data & 0xFF) >> 1);
     data = (byte) result;
-    updateZeroAndNegativeStatus(result);
+    updateZeroAndNegative(result);
     wantWrite(address, data);
   }
 
@@ -5239,7 +5307,7 @@ public class W65C02
     data = accumulator;
     short result = (short) ((data & 0xFF) << 1);
     data = (byte) result;
-    updateCarryStatus(result);
+    updateCarry(result);
     accumulator = data;
   }
 
@@ -5304,10 +5372,10 @@ public class W65C02
     return (short) (address + (xIndex & 0xFF));
   }
 
-  private void accumulatorOrData()
+  private void orAccumulatorWithMemory()
   {
     accumulator |= data;
-    updateZeroAndNegativeStatus(accumulator);
+    updateZeroAndNegative(accumulator);
   }
 
   private void addressLowFromDataReadProgramCounter()
@@ -5316,7 +5384,7 @@ public class W65C02
     wantRead(programCounter++);
   }
 
-  private void OrAccumulator()
+  private void orMemoryWithAccumulator()
   {
     updateZeroStatus();
     data |= accumulator;
@@ -5365,8 +5433,253 @@ public class W65C02
   {
     short result = (short) ((data & 0xFF) << 1);
     data = (byte) result;
-    updateCarryStatus(result);
+    updateCarry(result);
     wantWrite(address, data);
+  }
+
+  protected void updateZeroAndNegative(int result)
+  {
+    setZeroStatus((result & 0xFF) == 0);
+    setNegative((result & 0x80) != 0);
+  }
+
+  protected void updateCarry(int value)
+  {
+    updateZeroAndNegative(value);
+    setCarry((value & 0x100) != 0);
+  }
+
+  protected void setNegative(boolean negative)
+  {
+    if (negative)
+    {
+      processorStatus |= P_N_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_N_BIT;
+    }
+  }
+
+  protected void setZeroStatus(boolean zeroStatus)
+  {
+    if (zeroStatus)
+    {
+      processorStatus |= P_Z_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_Z_BIT;
+    }
+  }
+
+  protected void setCarry(boolean carry)
+  {
+    if (carry)
+    {
+      processorStatus |= P_C_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_C_BIT;
+    }
+  }
+
+  public void reset(InstanceState cis)
+  {
+    stopped = false;
+    fetchedOpcode = BRK;
+    cycle = 1;
+    setInterrupt(true);
+    setDecimalMode(false);
+    previousNMI = true;
+    vectorToPull = RESET_VECTOR;
+    wantingVectorPull = false;
+    parent.setVPB(cis, false);
+    wantingSync = false;
+    parent.setSync(cis, false);
+    parent.setMLB(cis, false);
+    parent.setReady(cis, true);
+  }
+
+  protected void wantRead(short address)
+  {
+    intendedAddress = address;
+    intendedRWB = true;
+  }
+
+  protected void wantWrite(short address, byte data)
+  {
+    intendedAddress = address;
+    intendedData = data;
+    intendedRWB = false;
+  }
+
+  protected void pushToStack(byte value)
+  {
+    if (vectorToPull == RESET_VECTOR)
+    {
+      wantRead(stackAddress());
+    }
+    else
+    {
+      wantWrite(stackAddress(), value);
+    }
+    stack--;
+  }
+
+  protected void popFromStack()
+  {
+    stack++;
+    wantRead(stackAddress());
+  }
+
+  private short stackAddress()
+  {
+    return (short) (0x0100 | (stack & 0xFF));
+  }
+
+  protected void wantVPB(boolean want)
+  {
+    wantingVectorPull = want;
+  }
+
+  public void tick(InstanceState instanceState, boolean isResetting, boolean clockHigh)
+  {
+    if (isResetting)
+    {
+      reset(instanceState);
+    }
+
+    boolean isReady = parent.isReady(instanceState);
+    if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
+    {
+      parent.setReady(instanceState, true);
+    }
+    if (stopped || !isReady)
+    {
+      return;
+    }
+    this.instanceState = instanceState;
+    if (!clockHigh && previousClock)
+    {
+      // falling edge
+      boolean overflow = parent.isOverflow(instanceState);
+      if (overflow != previousOverflow)
+      {
+        if (overflow)
+        {
+          processorStatus |= P_V_BIT;
+        }
+        previousOverflow = overflow;
+      }
+      do
+      {
+        wantingSync = cycle < 0;
+        if (cycle < 0)
+        {
+          wantRead(programCounter);
+          programCounter++;
+          ++cycle;
+        }
+        else if (cycle == 0)
+        {
+          wantRead(programCounter);
+          programCounter++;
+          boolean nmi = parent.isNonMaskableInterrupt(instanceState);
+          if (nmi && !previousNMI)
+          {
+            vectorToPull = NMI_VECTOR;
+            programCounter -= 2;
+            fetchedOpcode = BRK;
+          }
+          else if (parent.isInterruptRequest(instanceState) && isInterrupt() == 0)
+          {
+            vectorToPull = IRQ_VECTOR;
+            programCounter -= 2;
+            fetchedOpcode = BRK;
+          }
+          else
+          {
+            fetchedOpcode = parent.getDataFromPort(instanceState);
+          }
+          previousNMI = nmi;
+          ++cycle;
+        }
+        else
+        {
+          data = parent.getDataFromPort(instanceState);
+          doInstruction();
+          if (cycle >= 0)
+          {
+            ++cycle;
+          }
+        }
+      }
+      while (cycle < 0 && !stopped);
+    }
+    else if (clockHigh && !previousClock)
+    {
+      // rising edge, apply outputs
+      if (intendedRWB)
+      {
+        parent.doRead(instanceState, intendedAddress);
+      }
+      else
+      {
+        parent.doWrite(instanceState, intendedAddress, intendedData);
+      }
+      parent.setSync(instanceState, wantingSync);
+      parent.setVPB(instanceState, wantingVectorPull);
+    }
+    this.instanceState = null;
+    previousClock = clockHigh;
+  }
+
+  private int isInterrupt()
+  {
+    return processorStatus & P_I_BIT;
+  }
+
+  protected void updateZeroStatus()
+  {
+    setZeroStatus((data & accumulator) == 0);
+  }
+
+  protected void setOverflow(boolean overflow)
+  {
+    if (overflow)
+    {
+      processorStatus |= P_V_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_V_BIT;
+    }
+  }
+
+  protected void setDecimalMode(boolean decimalMode)
+  {
+    if (decimalMode)
+    {
+      processorStatus |= P_D_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_D_BIT;
+    }
+  }
+
+  protected void setInterrupt(boolean interrupt)
+  {
+    if (interrupt)
+    {
+      processorStatus |= P_I_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_I_BIT;
+    }
   }
 }
 

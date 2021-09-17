@@ -4,7 +4,8 @@ import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
 
 public class CoreState
-    extends W65C02
+    extends
+    W65C02
     implements InstanceData,
                Cloneable
 {

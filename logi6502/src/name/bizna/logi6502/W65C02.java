@@ -173,22 +173,8 @@ public class W65C02
         andAccumulator_zero_page_x_indirect();
         break;
       case BIT_zero_page:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            updateProcessStateFromSomeWeirdDataThing();
-            updateZeroStatus();
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        testBits_zero_page();
+        break;
       case AND_zero_page:
         switch (cycle)
         {
@@ -463,100 +449,18 @@ public class W65C02
         }
         break;
       case AND_zero_page_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            offsetAddressByXReadAddress();
-            break;
-          }
-          case 3:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_zero_page_x();
         break;
       case ROL_zero_page_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readAddressOffsetByXSetMLB();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
-            data = (byte) result;
-            updateCarry(result);
-            wantWrite(address, data);
-            break;
-          }
-          case 5:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        rotateLeft_zero_page_x();
         break;
       case RMB_zero_page_3:
         clearBit(3);
       case SEC_implied:
-        if (cycle == 1)
-        {
-          programCounter--;
-          setCarry(true);
-        }
-        doneInstruction();
-        return;
+        setCarry();
+        break;
       case AND_absolute_y:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByY();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_absolute_y();
         break;
       case DEC_implied_a:
         if (cycle == 1)
@@ -4192,6 +4096,125 @@ public class W65C02
     }
   }
 
+  private void testBits_zero_page()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        updateProcessStateFromSomeWeirdDataThing();
+        updateZeroStatus();
+      }
+      default:
+        doneInstruction();
+        return;
+    }
+  }
+
+  private void andAccumulator_zero_page_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        offsetAddressByXReadAddress();
+        break;
+      }
+      case 3:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void andAccumulator_absolute_y()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByY();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void rotateLeft_zero_page_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readAddressOffsetByXSetMLB();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
+        data = (byte) result;
+        updateCarry(result);
+        wantWrite(address, data);
+        break;
+      }
+      case 5:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void setCarry()
+  {
+    if (cycle == 1)
+    {
+      programCounter--;
+      setCarry(true);
+    }
+    doneInstruction();
+  }
+
   private void updateProcessStateFromSomeWeirdDataThing()
   {
     processorStatus = (byte) ((processorStatus & 0x3F) | (data & 0xC0));
@@ -4228,7 +4251,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4258,7 +4280,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4298,7 +4319,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4327,7 +4347,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4361,7 +4380,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4399,7 +4417,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4443,7 +4460,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4467,7 +4483,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4496,7 +4511,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4525,7 +4539,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4559,7 +4572,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4578,7 +4590,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4630,7 +4641,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4654,7 +4664,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4688,7 +4697,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4781,7 +4789,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4861,7 +4868,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4906,7 +4912,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 

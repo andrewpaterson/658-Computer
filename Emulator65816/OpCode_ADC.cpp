@@ -25,7 +25,8 @@
  * This file contains the implementation for all ADC OpCodes.
  */
 
-void Cpu65816::execute8BitADC(OpCode &opCode) {
+void Cpu65816::execute8BitADC(OpCode &opCode) 
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(dataAddress);
     uint8_t accumulator = Binary::lower8BitsOf(mA);
@@ -44,11 +45,15 @@ void Cpu65816::execute8BitADC(OpCode &opCode) {
     bool carryOutOfLastBit = result16Bit & 0x0100;
 
     bool overflow = carryOutOfLastBit ^ carryOutOfPenultimateBit;
-    if (overflow) mCpuStatus.setOverflowFlag();
-    else mCpuStatus.clearOverflowFlag();
+    if (overflow) 
+        mCpuStatus.setOverflowFlag();
+    else 
+        mCpuStatus.clearOverflowFlag();
 
-    if (carryOutOfLastBit) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    if (carryOutOfLastBit) 
+        mCpuStatus.setCarryFlag();
+    else 
+        mCpuStatus.clearCarryFlag();
 
     uint8_t result8Bit = Binary::lower8BitsOf(result16Bit);
     // Update sign and zero flags
@@ -57,7 +62,8 @@ void Cpu65816::execute8BitADC(OpCode &opCode) {
     Binary::setLower8BitsOf16BitsValue(&mA, result8Bit);
 }
 
-void Cpu65816::execute16BitADC(OpCode &opCode) {
+void Cpu65816::execute16BitADC(OpCode &opCode) 
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(dataAddress);
     uint16_t accumulator = mA;
@@ -76,11 +82,15 @@ void Cpu65816::execute16BitADC(OpCode &opCode) {
     bool carryOutOfLastBit = result32Bit & 0x010000;
 
     bool overflow = carryOutOfLastBit ^ carryOutOfPenultimateBit;
-    if (overflow) mCpuStatus.setOverflowFlag();
-    else mCpuStatus.clearOverflowFlag();
+    if (overflow)
+        mCpuStatus.setOverflowFlag();
+    else 
+        mCpuStatus.clearOverflowFlag();
 
-    if (carryOutOfLastBit) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    if (carryOutOfLastBit) 
+        mCpuStatus.setCarryFlag();
+    else 
+        mCpuStatus.clearCarryFlag();
 
     uint8_t result16Bit = (uint8_t)Binary::lower16BitsOf(result32Bit);
     // Update sign and zero flags
@@ -89,50 +99,57 @@ void Cpu65816::execute16BitADC(OpCode &opCode) {
     mA = result16Bit;
 }
 
-void Cpu65816::execute8BitBCDADC(OpCode &opCode) {
+void Cpu65816::execute8BitBCDADC(OpCode &opCode) 
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(dataAddress);
     uint8_t accumulator = Binary::lower8BitsOf(mA);
 
     uint8_t result = 0;
     bool carry = Binary::bcdSum8Bit(value, accumulator, &result, mCpuStatus.carryFlag());
-    if (carry) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    if (carry) 
+        mCpuStatus.setCarryFlag();
+    else 
+        mCpuStatus.clearCarryFlag();
 
     Binary::setLower8BitsOf16BitsValue(&mA, result);
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
 }
 
-void Cpu65816::execute16BitBCDADC(OpCode &opCode) {
+void Cpu65816::execute16BitBCDADC(OpCode &opCode) 
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(dataAddress);
     uint16_t accumulator = mA;
 
     uint16_t result = 0;
     bool carry = Binary::bcdSum16Bit(value, accumulator, &result, mCpuStatus.carryFlag());
-    if (carry) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    if (carry) 
+        mCpuStatus.setCarryFlag();
+    else 
+        mCpuStatus.clearCarryFlag();
 
     mA = result;
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue((uint8_t)result);
 }
 
-void Cpu65816::executeADC(OpCode &opCode) {
-    if (accumulatorIs8BitWide()) {
-        if (mCpuStatus.decimalFlag()) execute8BitBCDADC(opCode);
-        else execute8BitADC(opCode);
-    } else {
-        if (mCpuStatus.decimalFlag()) execute16BitBCDADC(opCode);
-        else execute16BitADC(opCode);
+void Cpu65816::executeADC(OpCode &opCode) 
+{
+    if (accumulatorIs8BitWide()) 
+    {
+        if (mCpuStatus.decimalFlag()) 
+            execute8BitBCDADC(opCode);
+        else 
+            execute8BitADC(opCode);
+    } 
+    else 
+    {
+        if (mCpuStatus.decimalFlag()) 
+            execute16BitBCDADC(opCode);
+        else 
+            execute16BitADC(opCode);
         addToCycles(1);
     }
-
-// All OpCodes take one more cycle on 65C02 in decimal mode
-#ifdef EMU_65C02
-    if (mCpuStatus.decimalFlag()) {
-        addToCycles(1);
-    }
-#endif
 
     switch (opCode.getCode()) {
         case (0x69):                 // ADC Immediate

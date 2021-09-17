@@ -27,23 +27,26 @@
  * that deal with interrupts.
  */
 
-void Cpu65816::executeInterrupt(OpCode &opCode) {
-    switch (opCode.getCode()) {
+void Cpu65816::executeInterrupt(OpCode &opCode) 
+{
+    switch (opCode.getCode()) 
+    {
         case(0x00):  // BRK
         {
-            if (mCpuStatus.emulationFlag()) {
-                mStack.push16Bit(static_cast<uint16_t>(mProgramAddress.getOffset() + 2));
+            if (mCpuStatus.emulationFlag()) 
+            {
+                mStack.push16Bit((uint16_t)(mProgramAddress.getOffset() + 2));
                 mCpuStatus.setBreakFlag();
                 mStack.push8Bit(mCpuStatus.getRegisterValue());
                 mCpuStatus.setInterruptDisableFlag();
-#ifdef EMU_65C02
-                mCpuStatus.clearDecimalFlag();
-#endif
+
                 setProgramAddress(Address(0x00, mEmulationInterrupts->brkIrq));
                 addToCycles(7);
-            } else {
+            } 
+            else 
+            {
                 mStack.push8Bit(mProgramAddress.getBank());
-                mStack.push16Bit(static_cast<uint16_t>(mProgramAddress.getOffset() + 2));
+                mStack.push16Bit((uint16_t)(mProgramAddress.getOffset() + 2));
                 mStack.push8Bit(mCpuStatus.getRegisterValue());
                 mCpuStatus.setInterruptDisableFlag();
                 mCpuStatus.clearDecimalFlag();
@@ -56,14 +59,14 @@ void Cpu65816::executeInterrupt(OpCode &opCode) {
         case(0x02):                 // COP
         {
             if (mCpuStatus.emulationFlag()) {
-                mStack.push16Bit(static_cast<uint16_t>(mProgramAddress.getOffset() + 2));
+                mStack.push16Bit((uint16_t)(mProgramAddress.getOffset() + 2));
                 mStack.push8Bit(mCpuStatus.getRegisterValue());
                 mCpuStatus.setInterruptDisableFlag();
                 setProgramAddress(Address(0x00, mEmulationInterrupts->coProcessorEnable));
                 addToCycles(7);
             } else {
                 mStack.push8Bit(mProgramAddress.getBank());
-                mStack.push16Bit(static_cast<uint16_t>(mProgramAddress.getOffset() + 2));
+                mStack.push16Bit((uint16_t)(mProgramAddress.getOffset() + 2));
                 mStack.push8Bit(mCpuStatus.getRegisterValue());
                 mCpuStatus.setInterruptDisableFlag();
                 setProgramAddress(Address(0x00, mNativeInterrupts->coProcessorEnable));

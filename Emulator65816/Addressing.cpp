@@ -62,17 +62,20 @@ bool Cpu65816::opCodeAddressingCrossesPageBoundary(OpCode &opCode) {
     return false;
 }
 
-Address Cpu65816::getAddressOfOpCodeData(OpCode &opCode) {
+Address Cpu65816::getAddressOfOpCodeData(OpCode &opCode) 
+{
     uint8_t dataAddressBank;
     uint16_t dataAddressOffset;
 
-    switch(opCode.getAddressingMode()) {
+    switch(opCode.getAddressingMode()) 
+    {
         case AddressingMode::Interrupt:
         case AddressingMode::Accumulator:
         case AddressingMode::Implied:
         case AddressingMode::StackImplied:
             // Not really used, doesn't make any sense since these opcodes do not have operands
             return mProgramAddress;
+
         case AddressingMode::Immediate:
         case AddressingMode::BlockMove:
             // Blockmove OpCodes have two bytes following them directly
@@ -86,6 +89,7 @@ Address Cpu65816::getAddressOfOpCodeData(OpCode &opCode) {
         case AddressingMode::StackProgramCounterRelativeLong:
             mProgramAddress.newWithOffset(1).getBankAndOffset(&dataAddressBank, &dataAddressOffset);
             break;
+
         case AddressingMode::Absolute:
             dataAddressBank = mDB;
             dataAddressOffset = mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1));
@@ -93,40 +97,41 @@ Address Cpu65816::getAddressOfOpCodeData(OpCode &opCode) {
         case AddressingMode::AbsoluteLong:
             mSystemBus.readAddressAt(mProgramAddress.newWithOffset(1)).getBankAndOffset(&dataAddressBank, &dataAddressOffset);
             break;
+
         case AddressingMode::AbsoluteIndirect:
-        {
-            dataAddressBank = mProgramAddress.getBank();
-            Address addressOfOffset(0x00, mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
-            dataAddressOffset = mSystemBus.readTwoBytes(addressOfOffset);
-        }
+            {
+                dataAddressBank = mProgramAddress.getBank();
+                Address addressOfOffset(0x00, mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
+                dataAddressOffset = mSystemBus.readTwoBytes(addressOfOffset);
+            }
             break;
         case AddressingMode::AbsoluteIndirectLong:
-        {
-            Address addressOfEffectiveAddress(0x00, mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
-            mSystemBus.readAddressAt(addressOfEffectiveAddress).getBankAndOffset(&dataAddressBank, &dataAddressOffset);
-        }
+            {
+                Address addressOfEffectiveAddress(0x00, mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
+                mSystemBus.readAddressAt(addressOfEffectiveAddress).getBankAndOffset(&dataAddressBank, &dataAddressOffset);
+            }
             break;
         case AddressingMode::AbsoluteIndexedIndirectWithX:
-        {
-            Address firstStageAddress(mProgramAddress.getBank(), mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
-            Address secondStageAddress = firstStageAddress.newWithOffsetNoWrapAround(indexWithXRegister());
-            dataAddressBank = mProgramAddress.getBank();
-            dataAddressOffset = mSystemBus.readTwoBytes(secondStageAddress);
-        }
+            {
+                Address firstStageAddress(mProgramAddress.getBank(), mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
+                Address secondStageAddress = firstStageAddress.newWithOffsetNoWrapAround(indexWithXRegister());
+                dataAddressBank = mProgramAddress.getBank();
+                dataAddressOffset = mSystemBus.readTwoBytes(secondStageAddress);
+            }
             break;
         case AddressingMode::AbsoluteIndexedWithX:
-        {
-            Address firstStageAddress(mDB, mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
-            Address::sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister())
-                .getBankAndOffset(&dataAddressBank, &dataAddressOffset);;
-        }
+            {
+                Address firstStageAddress(mDB, mSystemBus.readTwoBytes(mProgramAddress.newWithOffset(1)));
+                Address::sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister())
+                    .getBankAndOffset(&dataAddressBank, &dataAddressOffset);;
+            }
             break;
         case AddressingMode::AbsoluteLongIndexedWithX:
-        {
-            Address firstStageAddress = mSystemBus.readAddressAt(mProgramAddress.newWithOffset(1));
-            Address::sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister())
-                .getBankAndOffset(&dataAddressBank, &dataAddressOffset);;
-        }
+            {
+                Address firstStageAddress = mSystemBus.readAddressAt(mProgramAddress.newWithOffset(1));
+                Address::sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister())
+                    .getBankAndOffset(&dataAddressBank, &dataAddressOffset);;
+            }
             break;
         case AddressingMode::AbsoluteIndexedWithY:
         {

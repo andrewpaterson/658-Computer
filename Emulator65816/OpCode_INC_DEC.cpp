@@ -106,11 +106,7 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
                 execute16BitIncInMemory(opCode);
                 addToCycles(2);
             }
-#ifdef EMU_65C02
-            if (!opCodeAddressingCrossesPageBoundary(opCode)) {
-                subtractFromCycles(1);
-            }
-#endif
+
             addToProgramAddressAndCycles(3, 7);
         }
         break;
@@ -175,11 +171,7 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
                 execute16BitDecInMemory(opCode);
                 addToCycles(2);
             }
-#ifdef EMU_65C02
-            if (!opCodeAddressingCrossesPageBoundary(opCode)) {
-                subtractFromCycles(1);
-            }
-#endif
+
             addToProgramAddressAndCycles(3, 7);
             break;
         }

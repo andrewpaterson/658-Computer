@@ -102,12 +102,6 @@ void Cpu65816::executeLSR(OpCode &opCode) {
                 addToCycles(2);
             }
 
-#ifdef EMU_65C02
-            if (!opCodeAddressingCrossesPageBoundary(opCode)) {
-                subtractFromCycles(1);
-            }
-#endif
-
             addToProgramAddressAndCycles(3, 7);
             break;
         }

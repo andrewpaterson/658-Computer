@@ -101,11 +101,7 @@ void Cpu65816::executeASL(OpCode &opCode) {
             if (accumulatorIs16BitWide()) {
                 addToCycles(2);
             }
-#ifdef EMU_65C02
-            if (!opCodeAddressingCrossesPageBoundary(opCode)) {
-                subtractFromCycles(1);
-            }
-#endif
+
             executeMemoryASL(opCode);
             addToProgramAddressAndCycles(3, 7);
             break;

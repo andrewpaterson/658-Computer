@@ -21,11 +21,7 @@
 
 #include <cmath>
 
-#ifdef EMU_65C02
-#define LOG_TAG "Cpu65C02"
-#else
 #define LOG_TAG (mCpuStatus.emulationFlag() ? "Cpu6502" : "Cpu65816")
-#endif
 
 Cpu65816::Cpu65816(SystemBus &systemBus, EmulationModeInterrupts *emulationInterrupts, NativeModeInterrupts *nativeInterrupts) :
             mSystemBus(systemBus),

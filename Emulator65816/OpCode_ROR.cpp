@@ -104,11 +104,7 @@ void Cpu65816::executeROR(OpCode &opCode) {
         case (0x7E):                // ROR Absolute Indexed, X
         {
             executeMemoryROR(opCode);
-#ifdef EMU_65C02
-            short opCycles = opCodeAddressingCrossesPageBoundary(opCode) ? 0 : -1;
-#else
             short opCycles = 0;
-#endif
             if (accumulatorIs8BitWide()) {
                 addToProgramAddressAndCycles(3, 7+opCycles);
             } else {

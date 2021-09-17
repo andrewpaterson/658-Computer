@@ -127,13 +127,6 @@ void Cpu65816::executeSBC(OpCode &opCode) {
         addToCycles(1);
     }
 
-// All OpCodes take one more cycle on 65C02 in decimal mode
-#ifdef EMU_65C02
-    if (mCpuStatus.decimalFlag()) {
-        addToCycles(1);
-    }
-#endif
-
     switch (opCode.getCode()) {
         case(0xE9):                 // SBC Immediate
         {

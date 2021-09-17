@@ -64,9 +64,6 @@ void Cpu65816::executeJumpReturn(OpCode &opCode) {
         {
             setProgramAddress(getAddressOfOpCodeData(opCode));
             addToCycles(5);
-#ifdef EMU_65C02
-            addToCycles(1);
-#endif
             break;
         }
         case(0x7C):  // JMP Absolute Indexed Indirect, X

@@ -8,9 +8,9 @@ public class W6502Opcodes
   public static final byte ORA_zero_page = (byte) 0x05;
   public static final byte ASL_zero_page = (byte) 0x06;
   public static final byte RMB_zero_page_0 = (byte) 0x07;
-  public static final byte Push_processor_status = (byte) 0x08;
+  public static final byte PHP = (byte) 0x08;
   public static final byte ORA_immediate = (byte) 0x09;
-  public static final byte ASL_implied_a = (byte) 0x0A;
+  public static final byte ASL_implied = (byte) 0x0A;
   public static final byte TSB_absolute = (byte) 0x0C;
   public static final byte ORA_absolute = (byte) 0x0D;
   public static final byte ASL_absolute = (byte) 0x0E;

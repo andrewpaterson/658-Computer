@@ -17,7 +17,6 @@ public abstract class AbstractCore
   public static final byte P_I_BIT = (byte) 0x04;
   public static final byte P_D_BIT = (byte) 0x08;
   public static final byte P_B_BIT = (byte) 0x10;
-  public static final byte P_1_BIT = (byte) 0x20;
   public static final byte P_V_BIT = (byte) 0x40;
   public static final byte P_N_BIT = (byte) 0x80;
 
@@ -29,7 +28,7 @@ public abstract class AbstractCore
   protected short vectorToPull = IRQ_VECTOR;
   protected short programCounter;
   protected boolean stopped = true;
-  protected boolean previousNMI = false, previousSO = false, previousClock = true, takingBranch = false, wantingSync, wantingVectorPull;
+  protected boolean previousNMI = false, previousOverflow = false, previousClock = true, takingBranch = false, wantingSync, wantingVectorPull;
   protected short intendedAddress;
   protected byte intendedData;
   protected boolean intendedRWB;
@@ -57,7 +56,7 @@ public abstract class AbstractCore
     programCounter = (short) ((corr[10] & 0xFF) | corr[11] << 8);
     intendedRWB = false;
     previousNMI = true;
-    previousSO = true;
+    previousOverflow = true;
     wantingSync = false;
     wantingVectorPull = false;
   }
@@ -66,15 +65,19 @@ public abstract class AbstractCore
 
   protected void updateZeroAndNegativeStatus(int result)
   {
-    if ((result & 0xFF) == 0)
-    {
-      processorStatus |= P_Z_BIT;
-    }
-    else
-    {
-      processorStatus &= ~P_Z_BIT;
-    }
-    if ((result & 0x80) != 0)
+    setZeroStatus((result & 0xFF) == 0);
+    setNegative((result & 0x80) != 0);
+  }
+
+  protected void updateCarryStatus(int result)
+  {
+    updateZeroAndNegativeStatus(result);
+    setCarry((result & 0x100) != 0);
+  }
+
+  protected void setNegative(boolean negative)
+  {
+    if (negative)
     {
       processorStatus |= P_N_BIT;
     }
@@ -84,10 +87,21 @@ public abstract class AbstractCore
     }
   }
 
-  protected void updateCarryStatus(int result)
+  protected void setZeroStatus(boolean zeroStatus)
   {
-    updateZeroAndNegativeStatus(result);
-    if ((result & 0x100) != 0)
+    if (zeroStatus)
+    {
+      processorStatus |= P_Z_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_Z_BIT;
+    }
+  }
+
+  protected void setCarry(boolean carry)
+  {
+    if (carry)
     {
       processorStatus |= P_C_BIT;
     }
@@ -102,8 +116,8 @@ public abstract class AbstractCore
     stopped = false;
     fetchedOpcode = BRK;
     cycle = 1;
-    processorStatus |= P_I_BIT;
-    processorStatus &= ~P_D_BIT;
+    setInterrupt(true);
+    setDecimalMode(false);
     previousNMI = true;
     vectorToPull = RESET_VECTOR;
     wantingVectorPull = false;
@@ -131,19 +145,24 @@ public abstract class AbstractCore
   {
     if (vectorToPull == RESET_VECTOR)
     {
-      wantRead((short) (0x0100 | (stack & 0xFF)));
+      wantRead(stackAddress());
     }
     else
     {
-      wantWrite((short) (0x0100 | (stack & 0xFF)), data);
+      wantWrite(stackAddress(), data);
     }
-    --stack;
+    stack--;
   }
 
   protected void wantPop()
   {
-    ++stack;
-    wantRead((short) (0x0100 | (stack & 0xFF)));
+    stack++;
+    wantRead(stackAddress());
+  }
+
+  private short stackAddress()
+  {
+    return (short) (0x0100 | (stack & 0xFF));
   }
 
   protected void wantVPB(boolean want)
@@ -171,26 +190,28 @@ public abstract class AbstractCore
     if (!clockHigh && previousClock)
     {
       // falling edge
-      boolean so = parent.isOverflow(instanceState);
-      if (so != previousSO)
+      boolean overflow = parent.isOverflow(instanceState);
+      if (overflow != previousOverflow)
       {
-        if (so)
+        if (overflow)
         {
           processorStatus |= P_V_BIT;
         }
-        previousSO = so;
+        previousOverflow = overflow;
       }
       do
       {
         wantingSync = cycle < 0;
         if (cycle < 0)
         {
-          wantRead(programCounter++);
+          wantRead(programCounter);
+          programCounter++;
           ++cycle;
         }
         else if (cycle == 0)
         {
-          wantRead(programCounter++);
+          wantRead(programCounter);
+          programCounter++;
           boolean nmi = parent.isNonMaskableInterrupt(instanceState);
           if (nmi && !previousNMI)
           {
@@ -198,7 +219,7 @@ public abstract class AbstractCore
             programCounter -= 2;
             fetchedOpcode = BRK;
           }
-          else if (parent.isInterruptRequest(instanceState) && (processorStatus & P_I_BIT) == 0)
+          else if (parent.isInterruptRequest(instanceState) && isInterrupt() == 0)
           {
             vectorToPull = IRQ_VECTOR;
             programCounter -= 2;
@@ -241,15 +262,49 @@ public abstract class AbstractCore
     previousClock = clockHigh;
   }
 
+  private int isInterrupt()
+  {
+    return processorStatus & P_I_BIT;
+  }
+
   protected void updateZeroStatus()
   {
-    if ((data & accumulator) != 0)
+    setZeroStatus((data & accumulator) == 0);
+  }
+
+  protected void setOverflow(boolean overflow)
+  {
+    if (overflow)
     {
-      processorStatus &= ~P_Z_BIT;
+      processorStatus |= P_V_BIT;
     }
     else
     {
-      processorStatus |= P_Z_BIT;
+      processorStatus &= ~P_V_BIT;
+    }
+  }
+
+  protected void setDecimalMode(boolean decimalMode)
+  {
+    if (decimalMode)
+    {
+      processorStatus |= P_D_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_D_BIT;
+    }
+  }
+
+  protected void setInterrupt(boolean interrupt)
+  {
+    if (interrupt)
+    {
+      processorStatus |= P_I_BIT;
+    }
+    else
+    {
+      processorStatus &= ~P_I_BIT;
     }
   }
 }

@@ -29,30 +29,30 @@ public class W65C02
         {
           case 1:
           {
-            wantPush((byte) (programCounter >> 8));
+            wantPush(programCounterHighByte());
             break;
           }
           case 2:
           {
-            wantPush((byte) programCounter);
+            wantPush(programCounterLowByte());
             break;
           }
           case 3:
           {
-            wantPush((byte) (processorStatus | P_B_BIT));
+            wantPush((byte) isBreakBit());
             break;
           }
           case 4:
           {
-            processorStatus &= ~P_D_BIT;
-            processorStatus |= P_I_BIT;
+            setDecimalMode(false);
+            setInterrupt(true);
             wantVPB(true);
             wantRead(vectorToPull);
             break;
           }
           case 5:
           {
-            programCounter = (short) (data & 0xFF);
+            programCounter = dataLowByte();
             wantRead((short) (vectorToPull + 1));
             vectorToPull = IRQ_VECTOR;
             break;
@@ -63,7 +63,7 @@ public class W65C02
             wantVPB(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -95,7 +95,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -119,10 +119,10 @@ public class W65C02
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -139,7 +139,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -163,10 +163,10 @@ public class W65C02
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -193,7 +193,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -210,7 +210,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -219,14 +219,14 @@ public class W65C02
         {
           accumulatorOrData();
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case ASL_implied_a:
         if (cycle == 1)
         {
           accumulatorShiftLeft();
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case TSB_absolute:
         switch (cycle)
@@ -253,10 +253,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -278,7 +278,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -307,10 +307,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -319,8 +319,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -328,7 +327,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(0);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -345,7 +344,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -364,19 +363,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -389,7 +376,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -416,7 +403,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -435,17 +422,15 @@ public class W65C02
           }
           case 3:
           {
-            updateZeroStatus();
-            data &= ~accumulator;
-            wantWrite(address, data);
+            testAndResetMemoryBitsAgainstAccumulator();
             break;
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -467,7 +452,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -482,7 +467,7 @@ public class W65C02
           case 2:
           {
             address = offsetAddressByX();
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -498,10 +483,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -528,7 +513,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -536,9 +521,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus &= ~P_C_BIT;
+          setCarry(false);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case ORA_absolute_y:
         switch (cycle)
@@ -550,19 +535,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -575,20 +548,16 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
       case INC_implied_a:
         if (cycle == 1)
         {
-          programCounter--;
-          data = accumulator;
-          data++;
-          updateZeroAndNegativeStatus(data);
-          accumulator = data;
+          Increment();
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case TRB_absolute:
         switch (cycle)
@@ -610,17 +579,15 @@ public class W65C02
           }
           case 4:
           {
-            updateZeroStatus();
-            data &= ~accumulator;
-            wantWrite(address, data);
+            testAndResetMemoryBitsAgainstAccumulator();
             break;
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -634,19 +601,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -659,7 +614,7 @@ public class W65C02
             accumulatorOrData();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -673,24 +628,12 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -706,10 +649,10 @@ public class W65C02
           }
           case 6:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -718,8 +661,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -727,7 +669,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(1);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -736,13 +678,13 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
-            wantPush((byte) (programCounter >> 8));
+            address = dataLowByte();
+            wantPush(programCounterHighByte());
             break;
           }
           case 2:
           {
-            wantPush((byte) programCounter);
+            wantPush(programCounterLowByte());
             break;
           }
           case 3:
@@ -752,11 +694,10 @@ public class W65C02
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            programCounter = address;
+            jumpToSubroutine();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -789,7 +730,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -807,7 +748,7 @@ public class W65C02
             updateZeroStatus();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
       case AND_zero_page:
@@ -824,7 +765,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -843,7 +784,7 @@ public class W65C02
           }
           case 3:
           {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
             updateCarryStatus(result);
             wantWrite(address, data);
@@ -851,10 +792,10 @@ public class W65C02
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -881,7 +822,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -899,7 +840,7 @@ public class W65C02
             processorStatus = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -909,19 +850,19 @@ public class W65C02
           accumulator &= data;
           updateZeroAndNegativeStatus(accumulator);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case ROL_implied_a:
         if (cycle == 1)
         {
           programCounter--;
           data = accumulator;
-          short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
+          short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
           data = (byte) result;
           updateCarryStatus(result);
           accumulator = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case BIT_absolute:
         switch (cycle)
@@ -942,7 +883,7 @@ public class W65C02
             updateZeroStatus();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -965,7 +906,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -989,7 +930,7 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
             updateCarryStatus(result);
             wantWrite(address, data);
@@ -997,10 +938,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1009,8 +950,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -1018,7 +958,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(2);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1035,7 +975,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1054,19 +994,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -1080,7 +1008,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1108,7 +1036,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1131,7 +1059,7 @@ public class W65C02
             updateZeroStatus();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1154,7 +1082,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1169,7 +1097,7 @@ public class W65C02
           case 2:
           {
             address = offsetAddressByX();
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -1180,7 +1108,7 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
             updateCarryStatus(result);
             wantWrite(address, data);
@@ -1188,10 +1116,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1218,7 +1146,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1226,9 +1154,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus |= P_C_BIT;
+          setCarry(true);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case AND_absolute_y:
         switch (cycle)
@@ -1240,19 +1168,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -1266,7 +1182,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1279,7 +1195,7 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           accumulator = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case BIT_absolute_x:
         switch (cycle)
@@ -1291,19 +1207,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -1317,7 +1221,7 @@ public class W65C02
             updateZeroStatus();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1331,19 +1235,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -1357,7 +1249,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1371,24 +1263,12 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -1399,7 +1279,7 @@ public class W65C02
           }
           case 5:
           {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarrySet()) ? 1 : 0));
+            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
             data = (byte) result;
             updateCarryStatus(result);
             wantWrite(address, data);
@@ -1407,10 +1287,10 @@ public class W65C02
           }
           case 6:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1419,8 +1299,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -1428,7 +1307,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(3);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1455,7 +1334,7 @@ public class W65C02
           }
           case 4:
           {
-            programCounter = (short) (data & 0xFF);
+            programCounter = dataLowByte();
             wantPop();
             break;
           }
@@ -1469,7 +1348,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1502,7 +1381,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1520,7 +1399,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1539,19 +1418,15 @@ public class W65C02
           }
           case 3:
           {
-            updateCarryStatus();
-            short result = (short) ((data & 0xFF) >> 1);
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            logicalShiftRight();
             break;
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1578,7 +1453,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1595,7 +1470,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1605,7 +1480,7 @@ public class W65C02
           accumulator ^= data;
           updateZeroAndNegativeStatus(accumulator);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LSR_implied_a:
         if (cycle == 1)
@@ -1618,7 +1493,7 @@ public class W65C02
           updateZeroAndNegativeStatus(result);
           accumulator = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case JMP_absolute:
         switch (cycle)
@@ -1630,11 +1505,10 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            programCounter = address;
+            jumpToSubroutine();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1657,7 +1531,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1681,19 +1555,15 @@ public class W65C02
           }
           case 4:
           {
-            updateCarryStatus();
-            short result = (short) ((data & 0xFF) >> 1);
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            logicalShiftRight();
             break;
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1702,8 +1572,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -1711,7 +1580,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(4);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1728,7 +1597,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1747,19 +1616,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -1773,7 +1630,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1801,7 +1658,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1819,7 +1676,7 @@ public class W65C02
             address = offsetAddressByX();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1842,7 +1699,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1857,7 +1714,7 @@ public class W65C02
           case 2:
           {
             address = offsetAddressByX();
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -1868,19 +1725,15 @@ public class W65C02
           }
           case 4:
           {
-            updateCarryStatus();
-            short result = (short) ((data & 0xFF) >> 1);
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            logicalShiftRight();
             break;
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1907,7 +1760,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1915,9 +1768,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus &= ~P_I_BIT;
+          setInterrupt(false);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case EOR_absolute_y:
         switch (cycle)
@@ -1929,19 +1782,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -1955,7 +1796,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1973,7 +1814,7 @@ public class W65C02
             yIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -1990,7 +1831,7 @@ public class W65C02
             address |= (short) (data << 8);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2004,19 +1845,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -2030,7 +1859,7 @@ public class W65C02
             updateZeroAndNegativeStatus(accumulator);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2044,24 +1873,12 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -2072,19 +1889,15 @@ public class W65C02
           }
           case 5:
           {
-            updateCarryStatus();
-            short result = (short) ((data & 0xFF) >> 1);
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            logicalShiftRight();
             break;
           }
           case 6:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2093,8 +1906,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -2102,7 +1914,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(5);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2128,7 +1940,7 @@ public class W65C02
           }
           case 4:
           {
-            programCounter = (short) (data & 0xFF);
+            programCounter = dataLowByte();
             wantPop();
             break;
           }
@@ -2142,7 +1954,7 @@ public class W65C02
             ++programCounter;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2171,44 +1983,17 @@ public class W65C02
           }
           case 5:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 6:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2217,7 +2002,7 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
+            address = dataLowByte();
             data = 0x00;
             wantWrite(address, data);
             break;
@@ -2226,7 +2011,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2240,44 +2025,18 @@ public class W65C02
           }
           case 2:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 3:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            boolean overflow = (xorAddressTestHighBit()) != 0;
+            setOverflow(overflow);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2296,19 +2055,15 @@ public class W65C02
           }
           case 3:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
-            updateCarryStatus();
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            rotateRight();
             break;
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2335,7 +2090,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2353,7 +2108,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2362,44 +2117,17 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 2:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2408,13 +2136,13 @@ public class W65C02
         {
           programCounter--;
           data = accumulator;
-          short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
+          short result = (short) (((data & 0xFF) >> 1) | (isCarry() ? 0x80 : 0));
           updateCarryStatus();
           data = (byte) result;
           updateZeroAndNegativeStatus(result);
           accumulator = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case JMP_absolute_indirect:
         switch (cycle)
@@ -2436,11 +2164,10 @@ public class W65C02
           }
           case 4:
           {
-            address |= (short) (data << 8);
-            programCounter = address;
+            jumpToSubroutine();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2459,44 +2186,17 @@ public class W65C02
           }
           case 3:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 4:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2520,19 +2220,15 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
-            updateCarryStatus();
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            rotateRight();
             break;
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2541,8 +2237,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -2550,7 +2245,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(6);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2567,7 +2262,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2586,19 +2281,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -2608,44 +2291,17 @@ public class W65C02
           }
           case 5:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 6:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow(xorAddressTestHighBit() != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2669,44 +2325,17 @@ public class W65C02
           }
           case 4:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 5:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2729,7 +2358,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2748,44 +2377,17 @@ public class W65C02
           }
           case 3:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 4:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2800,7 +2402,7 @@ public class W65C02
           case 2:
           {
             address = offsetAddressByX();
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -2811,19 +2413,15 @@ public class W65C02
           }
           case 4:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
-            updateCarryStatus();
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            rotateRight();
             break;
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2850,7 +2448,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2858,9 +2456,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus |= P_I_BIT;
+          setInterrupt(true);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case ADC_absolute_y:
         switch (cycle)
@@ -2872,19 +2470,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -2894,44 +2480,17 @@ public class W65C02
           }
           case 4:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 5:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2949,7 +2508,7 @@ public class W65C02
             yIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -2963,19 +2522,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -2990,11 +2537,10 @@ public class W65C02
           }
           case 5:
           {
-            address |= (short) (data << 8);
-            programCounter = address;
+            jumpToSubroutine();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3008,19 +2554,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -3030,44 +2564,17 @@ public class W65C02
           }
           case 4:
           {
-            address = (short) ((data & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data);
             break;
           }
           case 5:
           {
-            if (((accumulator ^ address) & (data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3081,24 +2588,12 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -3109,19 +2604,15 @@ public class W65C02
           }
           case 5:
           {
-            short result = (short) (((data & 0xFF) >> 1) | (isCarrySet() ? 0x80 : 0));
-            updateCarryStatus();
-            data = (byte) result;
-            updateZeroAndNegativeStatus(result);
-            wantWrite(address, data);
+            rotateRight();
             break;
           }
           case 6:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3130,8 +2621,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -3139,7 +2629,7 @@ public class W65C02
             takeBranchOnDataBitNotSet(7);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3148,18 +2638,8 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) (programCounter + data);
             takingBranch = true;
-            boolean doFixup = (programCounter >> 8) != (address >> 8);
-            if (doFixup)
-            {
-              wantRead((short) ((programCounter & 0xFF00) | (address & 0xFF)));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressFromProgramCounterAddData();
             break;
           }
           case 2:
@@ -3167,7 +2647,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3200,7 +2680,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3209,7 +2689,7 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
+            address = dataLowByte();
             data = yIndex;
             wantWrite(address, data);
             break;
@@ -3218,7 +2698,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3227,7 +2707,7 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
+            address = dataLowByte();
             data = accumulator;
             wantWrite(address, data);
             break;
@@ -3236,7 +2716,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3245,7 +2725,7 @@ public class W65C02
         {
           case 1:
           {
-            address = (short) (data & 0xFF);
+            address = dataLowByte();
             data = xIndex;
             wantWrite(address, data);
             break;
@@ -3254,7 +2734,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3281,7 +2761,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3294,14 +2774,14 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case BIT_immediate_immediate:
         if (cycle == 1)
         {
           updateZeroStatus();
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case TXA_implied:
         if (cycle == 1)
@@ -3310,7 +2790,7 @@ public class W65C02
           accumulator = xIndex;
           updateZeroAndNegativeStatus(accumulator);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case STY_absolute:
         switch (cycle)
@@ -3331,7 +2811,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3354,7 +2834,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3377,7 +2857,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3386,8 +2866,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -3400,7 +2879,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3417,7 +2896,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3436,19 +2915,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -3461,7 +2928,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3489,7 +2956,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3512,7 +2979,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3535,7 +3002,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3558,7 +3025,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3585,7 +3052,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3596,7 +3063,7 @@ public class W65C02
           accumulator = yIndex;
           updateZeroAndNegativeStatus(accumulator);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case STA_absolute_y:
         switch (cycle)
@@ -3608,19 +3075,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -3633,7 +3088,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3643,7 +3098,7 @@ public class W65C02
           programCounter--;
           stack = xIndex;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case STZ_absolute:
         switch (cycle)
@@ -3664,7 +3119,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3678,19 +3133,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -3703,7 +3146,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3717,19 +3160,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -3742,7 +3173,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3751,8 +3182,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -3760,7 +3190,7 @@ public class W65C02
             takeBranchOnDataBitSet(1);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3770,7 +3200,7 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LDA_zero_page_x_indirect:
         switch (cycle)
@@ -3801,7 +3231,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3811,7 +3241,7 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LDY_zero_page:
         switch (cycle)
@@ -3827,7 +3257,7 @@ public class W65C02
             yIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3845,7 +3275,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3863,7 +3293,7 @@ public class W65C02
             xIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3890,7 +3320,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3901,7 +3331,7 @@ public class W65C02
           yIndex = accumulator;
           updateZeroAndNegativeStatus(yIndex);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LDA_immediate:
         if (cycle == 1)
@@ -3909,7 +3339,7 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           accumulator = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case TAX_implied:
         if (cycle == 1)
@@ -3918,7 +3348,7 @@ public class W65C02
           xIndex = accumulator;
           updateZeroAndNegativeStatus(xIndex);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LDY_absolute:
         switch (cycle)
@@ -3939,7 +3369,7 @@ public class W65C02
             yIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3962,7 +3392,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3985,7 +3415,7 @@ public class W65C02
             xIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -3994,8 +3424,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -4003,7 +3432,7 @@ public class W65C02
             takeBranchOnDataBitSet(2);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4020,7 +3449,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4039,19 +3468,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -4065,7 +3482,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4093,7 +3510,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4116,7 +3533,7 @@ public class W65C02
             yIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4139,7 +3556,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4163,7 +3580,7 @@ public class W65C02
             xIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4190,7 +3607,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4198,9 +3615,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus &= ~P_V_BIT;
+          setOverflow(false);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LDA_absolute_y:
         switch (cycle)
@@ -4212,19 +3629,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -4238,7 +3643,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4249,7 +3654,7 @@ public class W65C02
           xIndex = stack;
           updateZeroAndNegativeStatus(xIndex);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case LDY_absolute_x:
         switch (cycle)
@@ -4261,19 +3666,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -4287,7 +3680,7 @@ public class W65C02
             yIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4301,19 +3694,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -4327,7 +3708,7 @@ public class W65C02
             accumulator = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4341,19 +3722,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -4367,7 +3736,7 @@ public class W65C02
             xIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4376,8 +3745,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -4385,7 +3753,7 @@ public class W65C02
             takeBranchOnDataBitSet(3);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4395,7 +3763,7 @@ public class W65C02
           address = (short) (((data ^ 0xFF) & 0xFF) + (yIndex & 0xFF) + 1);
           updateCarryStatus(address);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case CMP_zero_page_x_indirect:
         switch (cycle)
@@ -4426,13 +3794,13 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
       case (byte) 0xc2:
       case (byte) 0xe2:
-        cycle = -1;
+        doneInstruction();
         return;
       case CPY_zero_page:
         switch (cycle)
@@ -4448,7 +3816,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4466,7 +3834,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4492,10 +3860,10 @@ public class W65C02
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4522,7 +3890,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4535,7 +3903,7 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           yIndex = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case CMP_immediate:
         if (cycle == 1)
@@ -4543,7 +3911,7 @@ public class W65C02
           address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF) + 1);
           updateCarryStatus(address);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case DEC_implied_x:
         if (cycle == 1)
@@ -4554,7 +3922,7 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case WAI_implied:
         switch (cycle)
@@ -4577,7 +3945,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4600,7 +3968,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4623,7 +3991,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4654,10 +4022,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4666,8 +4034,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -4675,7 +4042,7 @@ public class W65C02
             takeBranchOnDataBitSet(4);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4692,7 +4059,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4711,19 +4078,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -4737,7 +4092,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4765,7 +4120,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4788,7 +4143,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4803,7 +4158,7 @@ public class W65C02
           case 2:
           {
             address = offsetAddressByX();
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -4821,10 +4176,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4851,7 +4206,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4859,9 +4214,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus &= ~P_D_BIT;
+          setDecimalMode(false);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case CMP_absolute_y:
         switch (cycle)
@@ -4873,19 +4228,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -4899,7 +4242,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4916,7 +4259,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4926,7 +4269,7 @@ public class W65C02
           programCounter--;
           stopped = true;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case (byte) 0xdc:
         switch (cycle)
@@ -4938,26 +4281,14 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -4971,19 +4302,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -4997,7 +4316,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5011,24 +4330,12 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -5046,10 +4353,10 @@ public class W65C02
           }
           case 6:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5058,8 +4365,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -5067,7 +4373,7 @@ public class W65C02
             takeBranchOnDataBitSet(5);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5077,7 +4383,7 @@ public class W65C02
           address = (short) (((data ^ 0xFF) & 0xFF) + (xIndex & 0xFF) + 1);
           updateCarryStatus(address);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case SBC_zero_page_x_indirect:
         switch (cycle)
@@ -5104,44 +4410,17 @@ public class W65C02
           }
           case 5:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 6:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow(xorAddressNotTestHighBit() != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5159,7 +4438,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5173,44 +4452,17 @@ public class W65C02
           }
           case 2:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 3:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5236,10 +4488,10 @@ public class W65C02
           }
           case 4:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5266,7 +4518,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5279,51 +4531,24 @@ public class W65C02
           updateZeroAndNegativeStatus(data);
           xIndex = data;
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case SBC_immediate:
         switch (cycle)
         {
           case 1:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 2:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5346,7 +4571,7 @@ public class W65C02
             updateCarryStatus(address);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5365,44 +4590,17 @@ public class W65C02
           }
           case 3:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 4:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5433,10 +4631,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5445,8 +4643,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -5454,7 +4651,7 @@ public class W65C02
             takeBranchOnDataBitSet(6);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5471,7 +4668,7 @@ public class W65C02
             takeBranch();
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5490,19 +4687,7 @@ public class W65C02
           }
           case 3:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 4:
@@ -5512,44 +4697,17 @@ public class W65C02
           }
           case 5:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 6:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5573,44 +4731,17 @@ public class W65C02
           }
           case 4:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 5:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5623,12 +4754,12 @@ public class W65C02
         {
           address = offsetAddressByX();
 
-          cycle = -1;
+          doneInstruction();
           return;
         }
         else
         {
-          cycle = -1;
+          doneInstruction();
           return;
         }
         break;
@@ -5647,44 +4778,17 @@ public class W65C02
           }
           case 3:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 4:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5699,7 +4803,7 @@ public class W65C02
           case 2:
           {
             address = offsetAddressByX();
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -5717,10 +4821,10 @@ public class W65C02
           }
           case 5:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5747,7 +4851,7 @@ public class W65C02
           {
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5755,9 +4859,9 @@ public class W65C02
         if (cycle == 1)
         {
           programCounter--;
-          processorStatus |= P_D_BIT;
+          setDecimalMode(true);
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case SBC_absolute_y:
         switch (cycle)
@@ -5769,19 +4873,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = offsetAddressByY();
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByY();
             break;
           }
           case 3:
@@ -5791,44 +4883,17 @@ public class W65C02
           }
           case 4:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 5:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5846,7 +4911,7 @@ public class W65C02
             xIndex = data;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5857,24 +4922,12 @@ public class W65C02
         }
         else if (cycle == 2)
         {
-          address |= (short) (data << 8);
-          short offsetAddress = (short) (address + (xIndex & 0xFF));
-          boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-          address = offsetAddress;
-          if (doFixup)
-          {
-            wantRead((short) (address - 0x100));
-          }
-          if (!doFixup)
-          {
-            cycle++;
-            doInstruction();
-          }
+          addressHighFromDataOffsetAddressByX();
         }
         else
         {
 
-          cycle = -1;
+          doneInstruction();
           return;
         }
         break;
@@ -5888,19 +4941,7 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
@@ -5910,44 +4951,17 @@ public class W65C02
           }
           case 4:
           {
-            address = (short) (((data ^ 0xFF) & 0xFF) + (accumulator & 0xFF));
-            if (isCarrySet())
-            {
-              address++;
-            }
-            if ((processorStatus & P_D_BIT) != 0)
-            {
-              if ((address & 0x0F) > 0x09)
-              {
-                address += 0x06;
-              }
-              if ((address & 0xF0) > 0x90)
-              {
-                address += 0x60;
-              }
-            }
-            if ((processorStatus & P_D_BIT) == 0)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addWithCarryFromAccumulator(data ^ 0xFF);
             break;
           }
           case 5:
           {
-            if (((accumulator ^ address) & ~(data ^ address) & 0x80) != 0)
-            {
-              processorStatus |= P_V_BIT;
-            }
-            else
-            {
-              processorStatus &= ~P_V_BIT;
-            }
+            setOverflow((xorAddressNotTestHighBit()) != 0);
             updateCarryStatus(address);
             accumulator = (byte) address;
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -5961,24 +4975,12 @@ public class W65C02
           }
           case 2:
           {
-            address |= (short) (data << 8);
-            short offsetAddress = (short) (address + (xIndex & 0xFF));
-            boolean doFixup = (address >> 8) != (offsetAddress >> 8);
-            address = offsetAddress;
-            if (doFixup)
-            {
-              wantRead((short) (address - 0x100));
-            }
-            if (!doFixup)
-            {
-              cycle++;
-              doInstruction();
-            }
+            addressHighFromDataOffsetAddressByX();
             break;
           }
           case 3:
           {
-            parent.setMLB(instanceState, true);
+            setMemoryLock(true);
             wantRead(address);
             break;
           }
@@ -5996,10 +4998,10 @@ public class W65C02
           }
           case 6:
           {
-            parent.setMLB(instanceState, false);
+            setMemoryLock(false);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -6008,8 +5010,7 @@ public class W65C02
         {
           case 1:
           {
-            address = data;
-            wantRead(programCounter++);
+            BitBranchRelative();
             break;
           }
           case 2:
@@ -6017,7 +5018,7 @@ public class W65C02
             takeBranchOnDataBitSet(7);
           }
           default:
-            cycle = -1;
+            doneInstruction();
             return;
         }
         break;
@@ -6029,9 +5030,9 @@ public class W65C02
       case (byte) 0x44:
         if (cycle == 1)
         {
-          address = (short) (data & 0xFF);
+          address = dataLowByte();
         }
-        cycle = -1;
+        doneInstruction();
         return;
       case NOP_implied:
       case (byte) 0x03:
@@ -6068,8 +5069,160 @@ public class W65C02
         {
           programCounter--;
         }
-        cycle = -1;
+        doneInstruction();
     }
+  }
+
+  private void addressHighFromDataOffsetAddressByX()
+  {
+    address |= (short) (data << 8);
+    short offsetAddress = offsetAddressByX();
+    boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+    address = offsetAddress;
+    if (doFixup)
+    {
+      wantRead((short) (address - 0x100));
+    }
+    else
+    {
+      cycle++;
+      doInstruction();
+    }
+  }
+
+  private void jumpToSubroutine()
+  {
+    address |= (short) (data << 8);
+    programCounter = address;
+  }
+
+  private void Increment()
+  {
+    programCounter--;
+    data = accumulator;
+    data++;
+    updateZeroAndNegativeStatus(data);
+    accumulator = data;
+  }
+
+  private short dataLowByte()
+  {
+    return (short) (data & 0xFF);
+  }
+
+  private byte programCounterLowByte()
+  {
+    return (byte) programCounter;
+  }
+
+  private byte programCounterHighByte()
+  {
+    return (byte) (programCounter >> 8);
+  }
+
+  private void testAndResetMemoryBitsAgainstAccumulator()
+  {
+    updateZeroStatus();
+    data &= ~accumulator;
+    wantWrite(address, data);
+  }
+
+  private void BitBranchRelative()
+  {
+    address = data;
+    wantRead(programCounter++);
+  }
+
+  private void rotateRight()
+  {
+    short result = (short) (((data & 0xFF) >> 1) | (isCarry() ? 0x80 : 0));
+    updateCarryStatus();
+    data = (byte) result;
+    updateZeroAndNegativeStatus(result);
+    wantWrite(address, data);
+  }
+
+  private void addWithCarryFromAccumulator(int data)
+  {
+    address = (short) ((data & 0xFF) + (accumulator & 0xFF));
+    if (isCarry())
+    {
+      address++;
+    }
+
+    if ((isDecimalMode()) != 0)
+    {
+      if ((address & 0x0F) > 0x09)
+      {
+        address += 0x06;
+      }
+      if ((address & 0xF0) > 0x90)
+      {
+        address += 0x60;
+      }
+    }
+
+    if ((isDecimalMode()) == 0)
+    {
+      cycle++;
+      doInstruction();
+    }
+  }
+
+  private void addressHighFromDataOffsetAddressByY()
+  {
+    address |= (short) (data << 8);
+    short offsetAddress = offsetAddressByY();
+    boolean doFixup = (address >> 8) != (offsetAddress >> 8);
+    address = offsetAddress;
+    if (doFixup)
+    {
+      wantRead((short) (address - 0x100));
+    }
+    else
+    {
+      cycle++;
+      doInstruction();
+    }
+  }
+
+  private void doneInstruction()
+  {
+    cycle = -1;
+  }
+
+  private void setMemoryLock(boolean mlb)
+  {
+    parent.setMLB(instanceState, mlb);
+  }
+
+  private void logicalShiftRight()
+  {
+    updateCarryStatus();
+    short result = (short) ((data & 0xFF) >> 1);
+    data = (byte) result;
+    updateZeroAndNegativeStatus(result);
+    wantWrite(address, data);
+  }
+
+  private int xorAddressTestHighBit()
+  {
+    return (accumulator ^ address) & (data ^ address) & 0x80;
+  }
+
+  private int xorAddressNotTestHighBit()
+  {
+    return (accumulator ^ address) & ~(data ^ address) & 0x80;
+  }
+
+  private int isBreakBit()
+  {
+    return processorStatus | P_B_BIT;
+  }
+
+  private int isDecimalMode()
+  {
+    return processorStatus & P_D_BIT;
   }
 
   private void takeBranch()
@@ -6112,8 +5265,13 @@ public class W65C02
 
   private void determineTakeBranchOnProcessorStatusBit(byte processorStatusBit, int testBit)
   {
+    this.takingBranch = (processorStatus & processorStatusBit) == testBit;
+    addressFromProgramCounterAddData();
+  }
+
+  private void addressFromProgramCounterAddData()
+  {
     address = (short) (programCounter + data);
-    takingBranch = (processorStatus & processorStatusBit) == testBit;
     boolean doFixup = (programCounter >> 8) != (address >> 8);
     if (doFixup)
     {
@@ -6126,21 +5284,14 @@ public class W65C02
     }
   }
 
-  private boolean isCarrySet()
+  private boolean isCarry()
   {
     return (processorStatus & P_C_BIT) != 0;
   }
 
   private void updateCarryStatus()
   {
-    if ((data & 1) != 0)
-    {
-      processorStatus |= P_C_BIT;
-    }
-    else
-    {
-      processorStatus &= ~P_C_BIT;
-    }
+    setCarry((data & 1) != 0);
   }
 
   private short offsetAddressByY()
@@ -6161,7 +5312,7 @@ public class W65C02
 
   private void addressLowFromDataReadProgramCounter()
   {
-    address = (short) (data & 0xFF);
+    address = dataLowByte();
     wantRead(programCounter++);
   }
 
@@ -6180,14 +5331,14 @@ public class W65C02
 
   private void addressLowFromDataReadAddress()
   {
-    address = (short) (data & 0xFF);
+    address = dataLowByte();
     wantRead(address);
   }
 
   private void readNextAddressAddressLowFromData()
   {
     wantRead((short) (address + 1));
-    address = (short) (data & 0xFF);
+    address = dataLowByte();
   }
 
   private void offsetAddressByXReadAddress()
@@ -6199,14 +5350,14 @@ public class W65C02
   private void readAddressHighSetMLB()
   {
     address |= (short) (data << 8);
-    parent.setMLB(instanceState, true);
+    setMemoryLock(true);
     wantRead(address);
   }
 
   private void readAddressLowSetMLB()
   {
-    address = (short) (data & 0xFF);
-    parent.setMLB(instanceState, true);
+    address = dataLowByte();
+    setMemoryLock(true);
     wantRead(address);
   }
 

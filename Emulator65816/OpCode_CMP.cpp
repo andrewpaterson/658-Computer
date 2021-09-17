@@ -30,23 +30,18 @@ void Cpu65816::execute8BitCMP(OpCode &opCode) {
     uint8_t value = mSystemBus.readByte(valueAddress);
     uint8_t result = Binary::lower8BitsOf(mA) - value;
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
-    if (Binary::lower8BitsOf(mA) >= value) {
-        mCpuStatus.setCarryFlag();
-    } else {
-        mCpuStatus.clearCarryFlag();
-    }
+    bool carry = Binary::lower8BitsOf(mA) >= value;
+    mCpuStatus.setCarryFlag(carry);
 }
 
-void Cpu65816::execute16BitCMP(OpCode &opCode) {
+void Cpu65816::execute16BitCMP(OpCode &opCode) 
+{
     Address valueAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(valueAddress);
     uint16_t result = mA - value;
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(result);
-    if (mA >= value) {
-        mCpuStatus.setCarryFlag();
-    } else {
-        mCpuStatus.clearCarryFlag();
-    }
+    bool carry = mA >= value;
+    mCpuStatus.setCarryFlag(carry);
 }
 void Cpu65816::executeCMP(OpCode &opCode) {
     if (accumulatorIs8BitWide()) {

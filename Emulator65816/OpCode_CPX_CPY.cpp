@@ -22,42 +22,49 @@
 #define LOG_TAG "Cpu::executeCPXCPY"
 
 /**
+ * Compare Index Register X with Memory
+ * 
  * This file contains implementations for all CPX and CPY OpCodes.
  */
 
-void Cpu65816::execute8BitCPX(OpCode &opCode) {
+void Cpu65816::execute8BitCPX(OpCode &opCode) 
+{
     uint8_t value = mSystemBus.readByte(getAddressOfOpCodeData(opCode));
     uint8_t result = Binary::lower8BitsOf(mX) - value;
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
-    if (Binary::lower8BitsOf(mX) >= value) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    bool carry = Binary::lower8BitsOf(mX) >= value;
+    mCpuStatus.setCarryFlag(carry);
 }
 
-void Cpu65816::execute16BitCPX(OpCode &opCode) {
+void Cpu65816::execute16BitCPX(OpCode &opCode) 
+{
     uint16_t value = mSystemBus.readTwoBytes(getAddressOfOpCodeData(opCode));
     uint16_t result = mX - value;
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(result);
-    if (mX >= value) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    bool carry = mX >= value; 
+    mCpuStatus.setCarryFlag(carry);
 }
 
-void Cpu65816::execute8BitCPY(OpCode &opCode) {
+void Cpu65816::execute8BitCPY(OpCode &opCode) 
+{
     uint8_t value = mSystemBus.readByte(getAddressOfOpCodeData(opCode));
     uint8_t result = Binary::lower8BitsOf(mY) - value;
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
-    if (Binary::lower8BitsOf(mY) >= value) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    bool carry = Binary::lower8BitsOf(mY) >= value;
+    mCpuStatus.setCarryFlag(carry);
 }
 
-void Cpu65816::execute16BitCPY(OpCode &opCode) {
+void Cpu65816::execute16BitCPY(OpCode &opCode) 
+{
     uint16_t value = mSystemBus.readTwoBytes(getAddressOfOpCodeData(opCode));
     uint16_t result = mY - value;
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(result);
-    if (mY >= value) mCpuStatus.setCarryFlag();
-    else mCpuStatus.clearCarryFlag();
+    bool carry = mY >= value;
+    mCpuStatus.setCarryFlag(carry);
 }
 
-void Cpu65816::executeCPXCPY(OpCode &opCode) {
+void Cpu65816::executeCPXCPY(OpCode &opCode) 
+{
     switch (opCode.getCode()) {
         case(0xE0):  // CPX Immediate
         {

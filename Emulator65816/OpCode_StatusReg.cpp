@@ -27,7 +27,8 @@
  */
 
 void Cpu65816::executeStatusReg(OpCode &opCode) {
-    switch (opCode.getCode()) {
+    switch (opCode.getCode()) 
+    {
         case(0xC2):  // REP #const
         {
             uint8_t value = mSystemBus.readByte(getAddressOfOpCodeData(opCode));
@@ -38,7 +39,7 @@ void Cpu65816::executeStatusReg(OpCode &opCode) {
         }
         case(0x38):  // SEC
         {
-            mCpuStatus.setCarryFlag();
+            mCpuStatus.setCarryFlag(true);
             addToProgramAddressAndCycles(1, 2);
             break;
         }
@@ -77,7 +78,7 @@ void Cpu65816::executeStatusReg(OpCode &opCode) {
         }
         case(0x18):  // CLC
         {
-            mCpuStatus.clearCarryFlag();
+            mCpuStatus.setCarryFlag(false);
             addToProgramAddressAndCycles(1, 2);
             break;
         }
@@ -99,16 +100,17 @@ void Cpu65816::executeStatusReg(OpCode &opCode) {
             bool oldEmulation = mCpuStatus.emulationFlag();
             if (oldCarry) mCpuStatus.setEmulationFlag();
             else mCpuStatus.clearEmulationFlag();
-            if (oldEmulation) mCpuStatus.setCarryFlag();
-            else mCpuStatus.clearCarryFlag();
+            mCpuStatus.setCarryFlag(oldEmulation);
 
             mX &= 0xFF;
             mY &= 0xFF;
 
-            if (mCpuStatus.emulationFlag()) {
+            if (mCpuStatus.emulationFlag()) 
+            {
                 mCpuStatus.setAccumulatorWidthFlag();
                 mCpuStatus.setIndexWidthFlag();
-            } else {
+            } else 
+            {
                 mCpuStatus.clearAccumulatorWidthFlag();
                 mCpuStatus.clearIndexWidthFlag();
             }

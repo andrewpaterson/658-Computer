@@ -27,8 +27,7 @@
     value = value << 1;                                         \
     if (carryWasSet) Binary::setBitIn8BitValue(&value, 0);      \
     else Binary::clearBitIn8BitValue(&value, 0);                \
-    if (carryWillBeSet) mCpuStatus.setCarryFlag();              \
-    else mCpuStatus.clearCarryFlag();                           \
+    mCpuStatus.setCarryFlag(carryWillBeSet);              \
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);      \
 }
 
@@ -38,8 +37,7 @@
     value = value << 1;                                         \
     if (carryWasSet) Binary::setBitIn16BitValue(&value, 0);     \
     else Binary::clearBitIn16BitValue(&value, 0);               \
-    if (carryWillBeSet) mCpuStatus.setCarryFlag();              \
-    else mCpuStatus.clearCarryFlag();                           \
+    mCpuStatus.setCarryFlag(carryWillBeSet);              \
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(value);      \
 }
 

@@ -47,8 +47,7 @@ void Cpu65816::execute8BitSBC(OpCode &opCode) {
     if (overflow) mCpuStatus.setOverflowFlag();
     else mCpuStatus.clearOverflowFlag();
 
-    if (borrowFromLastBit) mCpuStatus.clearCarryFlag();
-    else mCpuStatus.setCarryFlag();
+    mCpuStatus.setCarryFlag(!borrowFromLastBit);
 
     uint8_t result8Bit = Binary::lower8BitsOf(result16Bit);
     // Update sign and zero flags
@@ -79,8 +78,7 @@ void Cpu65816::execute16BitSBC(OpCode &opCode) {
     if (overflow) mCpuStatus.setOverflowFlag();
     else mCpuStatus.clearOverflowFlag();
 
-    if (borrowFromLastBit) mCpuStatus.clearCarryFlag();
-    else mCpuStatus.setCarryFlag();
+    mCpuStatus.setCarryFlag(!borrowFromLastBit);
 
     uint16_t result16Bit = Binary::lower8BitsOf(result32Bit);
     // Update sign and zero flags
@@ -96,8 +94,7 @@ void Cpu65816::execute8BitBCDSBC(OpCode &opCode) {
 
     uint8_t result = 0;
     bool borrow = Binary::bcdSubtract8Bit(value, accumulator, &result, !mCpuStatus.carryFlag());
-    if (borrow) mCpuStatus.clearCarryFlag();
-    else mCpuStatus.setCarryFlag();
+    mCpuStatus.setCarryFlag(!borrow);
 
     Binary::setLower8BitsOf16BitsValue(&mA, result);
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
@@ -110,8 +107,7 @@ void Cpu65816::execute16BitBCDSBC(OpCode &opCode) {
 
     uint16_t result = 0;
     bool borrow = Binary::bcdSubtract16Bit(value, accumulator, &result, !mCpuStatus.carryFlag());
-    if (borrow) mCpuStatus.clearCarryFlag();
-    else mCpuStatus.setCarryFlag();
+    mCpuStatus.setCarryFlag(!borrow);
 
     mA = result;
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue((uint8_t)result);

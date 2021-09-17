@@ -24,44 +24,54 @@
 #define DO_ASL_8_BIT(value) {                                   \
     bool newCarry = value & 0x80;                               \
     value = value << 1;                                         \
-    if (newCarry) mCpuStatus.setCarryFlag();                    \
-    else mCpuStatus.clearCarryFlag();                           \
+    mCpuStatus.setCarryFlag(newCarry);                    \
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);       \
 }
 
-#define DO_ASL_16_BIT(value) {                                  \
-    bool newCarry = value & 0x8000;                             \
-    value = value << 1;                                         \
-    if (newCarry) mCpuStatus.setCarryFlag();                    \
-    else mCpuStatus.clearCarryFlag();                           \
-    mCpuStatus.updateSignAndZeroFlagFrom16BitValue(value);      \
-}
-
 /**
+ * Arithmetic Shift Left
+ * 
  * This file contains implementations for all ASL OpCodes.
  */
 
-void Cpu65816::executeMemoryASL(OpCode &opCode) {
+void Cpu65816::executeMemoryASL(OpCode &opCode) 
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
 
-    if(accumulatorIs8BitWide()) {
+    if(accumulatorIs8BitWide()) 
+    {
         uint8_t value = mSystemBus.readByte(opCodeDataAddress);
-        DO_ASL_8_BIT(value);
+        bool newCarry = value & 0x80;
+        value = value << 1;
+        mCpuStatus.setCarryFlag(newCarry);
+        mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);
         mSystemBus.storeByte(opCodeDataAddress, value);
-    } else {
+    } 
+    else 
+    {
         uint16_t value = mSystemBus.readTwoBytes(opCodeDataAddress);
-        DO_ASL_16_BIT(value);
+        bool newCarry = value & 0x8000;
+        value = value << 1;
+        mCpuStatus.setCarryFlag(newCarry);
+        mCpuStatus.updateSignAndZeroFlagFrom16BitValue(value);
         mSystemBus.storeTwoBytes(opCodeDataAddress, value);
     }
 }
 
-void Cpu65816::executeAccumulatorASL(OpCode &opCode) {
-    if(accumulatorIs8BitWide()) {
+void Cpu65816::executeAccumulatorASL(OpCode &opCode) 
+{
+    if(accumulatorIs8BitWide()) 
+    {
         uint8_t value = Binary::lower8BitsOf(mA);
         DO_ASL_8_BIT(value);
         Binary::setLower8BitsOf16BitsValue(&mA, value);
-    } else {
-        DO_ASL_16_BIT(mA);
+    } 
+    else 
+    {
+        bool newCarry = mA & 0x8000;
+        mA = mA << 1;                                         
+        mCpuStatus.setCarryFlag(newCarry);
+        mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mA);
     }
 }
 

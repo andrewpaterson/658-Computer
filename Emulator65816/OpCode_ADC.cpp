@@ -22,6 +22,8 @@
 #define LOG_TAG "Cpu::executeADC"
 
 /**
+ * Add with Carry
+ * 
  * This file contains the implementation for all ADC OpCodes.
  */
 
@@ -50,10 +52,7 @@ void Cpu65816::execute8BitADC(OpCode &opCode)
     else 
         mCpuStatus.clearOverflowFlag();
 
-    if (carryOutOfLastBit) 
-        mCpuStatus.setCarryFlag();
-    else 
-        mCpuStatus.clearCarryFlag();
+    mCpuStatus.setCarryFlag(carryOutOfLastBit);
 
     uint8_t result8Bit = Binary::lower8BitsOf(result16Bit);
     // Update sign and zero flags
@@ -87,10 +86,7 @@ void Cpu65816::execute16BitADC(OpCode &opCode)
     else 
         mCpuStatus.clearOverflowFlag();
 
-    if (carryOutOfLastBit) 
-        mCpuStatus.setCarryFlag();
-    else 
-        mCpuStatus.clearCarryFlag();
+    mCpuStatus.setCarryFlag(carryOutOfLastBit);
 
     uint8_t result16Bit = (uint8_t)Binary::lower16BitsOf(result32Bit);
     // Update sign and zero flags
@@ -107,10 +103,7 @@ void Cpu65816::execute8BitBCDADC(OpCode &opCode)
 
     uint8_t result = 0;
     bool carry = Binary::bcdSum8Bit(value, accumulator, &result, mCpuStatus.carryFlag());
-    if (carry) 
-        mCpuStatus.setCarryFlag();
-    else 
-        mCpuStatus.clearCarryFlag();
+    mCpuStatus.setCarryFlag(carry);
 
     Binary::setLower8BitsOf16BitsValue(&mA, result);
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
@@ -124,10 +117,7 @@ void Cpu65816::execute16BitBCDADC(OpCode &opCode)
 
     uint16_t result = 0;
     bool carry = Binary::bcdSum16Bit(value, accumulator, &result, mCpuStatus.carryFlag());
-    if (carry) 
-        mCpuStatus.setCarryFlag();
-    else 
-        mCpuStatus.clearCarryFlag();
+    mCpuStatus.setCarryFlag(carry);
 
     mA = result;
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue((uint8_t)result);
@@ -151,10 +141,12 @@ void Cpu65816::executeADC(OpCode &opCode)
         addToCycles(1);
     }
 
-    switch (opCode.getCode()) {
+    switch (opCode.getCode()) 
+    {
         case (0x69):                 // ADC Immediate
         {
-            if (accumulatorIs16BitWide()) {
+            if (accumulatorIs16BitWide()) 
+            {
                 addToProgramAddress(1);
             }
             addToProgramAddress(2);
@@ -175,7 +167,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x65):                 // ADC Direct Page
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
 
@@ -185,7 +178,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x72):                 // ADC Direct Page Indirect
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
 
@@ -195,7 +189,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x67):                 // ADC Direct Page Indirect Long
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
 
@@ -205,7 +200,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x7D):                 // ADC Absolute Indexed, X
         {
-            if (opCodeAddressingCrossesPageBoundary(opCode)) {
+            if (opCodeAddressingCrossesPageBoundary(opCode)) 
+            {
                 addToCycles(1);
             }
 
@@ -221,7 +217,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x79):                 // ADC Absolute Indexed Y
         {
-            if (opCodeAddressingCrossesPageBoundary(opCode)) {
+            if (opCodeAddressingCrossesPageBoundary(opCode)) 
+            {
                 addToCycles(1);
             }
             addToProgramAddress(3);
@@ -230,7 +227,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x75):                 // ADC Direct Page Indexed, X
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddress(2);
@@ -239,7 +237,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x61):                 // ADC Direct Page Indexed Indirect, X
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddress(2);
@@ -248,10 +247,12 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x71):                 // ADC Direct Page Indirect Indexed, Y
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
-            if (opCodeAddressingCrossesPageBoundary(opCode)) {
+            if (opCodeAddressingCrossesPageBoundary(opCode)) 
+            {
                 addToCycles(1);
             }
             addToProgramAddress(2);
@@ -260,7 +261,8 @@ void Cpu65816::executeADC(OpCode &opCode)
         }
         case (0x77):                 // ADC Direct Page Indirect Long Indexed, Y
         {
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddress(2);
@@ -279,9 +281,10 @@ void Cpu65816::executeADC(OpCode &opCode)
             addToCycles(7);
             break;
         }
-        default: {
+        default: 
+        {
             LOG_UNEXPECTED_OPCODE(opCode);
         }
     }
-    
 }
+

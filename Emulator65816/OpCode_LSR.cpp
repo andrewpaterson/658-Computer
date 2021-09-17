@@ -24,16 +24,14 @@
 #define DO_LSR_8_BIT(value) {                                   \
     bool newCarry = value & 0x01;                               \
     value = value >> 1;                                         \
-    if (newCarry) mCpuStatus.setCarryFlag();                    \
-    else mCpuStatus.clearCarryFlag();                           \
+    mCpuStatus.setCarryFlag(newCarry);                    \
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);       \
 }
 
 #define DO_LSR_16_BIT(value) {                                  \
     bool newCarry = value & 0x0001;                             \
     value = value >> 1;                                         \
-    if (newCarry) mCpuStatus.setCarryFlag();                    \
-    else mCpuStatus.clearCarryFlag();                           \
+    mCpuStatus.setCarryFlag(newCarry);                    \
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(value);      \
 }
 

@@ -82,11 +82,13 @@ void CpuStatus::setIndexWidthFlag() {
     mIndexWidthFlag = true;
 }
 
-void CpuStatus::setCarryFlag() {
-    mCarryFlag = true;
+void CpuStatus::setCarryFlag(bool carryFlag) 
+{
+    mCarryFlag = carryFlag;
 }
 
-void CpuStatus::setEmulationFlag() {
+void CpuStatus::setEmulationFlag() 
+{
     mEmulationFlag = true;
 }
 
@@ -112,10 +114,6 @@ void CpuStatus::clearAccumulatorWidthFlag() {
 
 void CpuStatus::clearIndexWidthFlag() {
     mIndexWidthFlag = false;
-}
-
-void CpuStatus::clearCarryFlag() {
-    mCarryFlag = false;
 }
 
 void CpuStatus::clearEmulationFlag() {
@@ -193,9 +191,9 @@ uint8_t CpuStatus::getRegisterValue() {
     return value;
 }
 
-void CpuStatus::setRegisterValue(uint8_t value) {
-    if (value & STATUS_CARRY) setCarryFlag();
-    else clearCarryFlag();
+void CpuStatus::setRegisterValue(uint8_t value) 
+{
+    setCarryFlag(value & STATUS_CARRY);
     
     if (value & STATUS_ZERO) setZeroFlag();
     else clearZeroFlag();

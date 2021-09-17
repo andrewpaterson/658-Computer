@@ -50,8 +50,7 @@ class CpuStatus {
         void clearIndexWidthFlag();
         bool indexWidthFlag();
         
-        void setCarryFlag();
-        void clearCarryFlag();
+        void setCarryFlag(bool carryFlag);
         bool carryFlag();
         
         void setBreakFlag();

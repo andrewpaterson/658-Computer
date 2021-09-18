@@ -89,7 +89,7 @@ public class W6502Opcodes
   public static final byte RMB_zero_page_6 = (byte) 0x67;
   public static final byte PLA_implied = (byte) 0x68;
   public static final byte ADC_immediate = (byte) 0x69;
-  public static final byte ROR_implied_a = (byte) 0x6A;
+  public static final byte ROR_implied = (byte) 0x6A;
   public static final byte JMP_absolute_indirect = (byte) 0x6C;
   public static final byte ADC_absolute = (byte) 0x6D;
   public static final byte ROR_absolute = (byte) 0x6E;

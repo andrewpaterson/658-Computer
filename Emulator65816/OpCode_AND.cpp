@@ -27,7 +27,8 @@
  * This file contains implementations for all AND OpCodes.
  */
 
-void Cpu65816::executeAND8Bit(OpCode &opCode) {
+void Cpu65816::executeAND8Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint8_t operand = mSystemBus.readByte(opCodeDataAddress);
     uint8_t result = Binary::lower8BitsOf(mA) & operand;
@@ -35,7 +36,8 @@ void Cpu65816::executeAND8Bit(OpCode &opCode) {
     Binary::setLower8BitsOf16BitsValue(&mA, result);
 }
 
-void Cpu65816::executeAND16Bit(OpCode &opCode) {
+void Cpu65816::executeAND16Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint16_t operand = mSystemBus.readTwoBytes(opCodeDataAddress);
     uint16_t result = mA & operand;
@@ -43,11 +45,15 @@ void Cpu65816::executeAND16Bit(OpCode &opCode) {
     mA = result;
 }
 
-void Cpu65816::executeAND(OpCode &opCode) {
-    if (accumulatorIs16BitWide()) {
+void Cpu65816::executeAND(OpCode &opCode) 
+{
+    if (accumulatorIs16BitWide()) 
+    {
         executeAND16Bit(opCode);
         addToCycles(1);
-    } else {
+    } 
+    else 
+    {
         executeAND8Bit(opCode);
     }
 

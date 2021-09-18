@@ -25,7 +25,8 @@
  * This file contains implementations for all Increment and Decrement OpCodes.
  */
 
-void Cpu65816::execute8BitDecInMemory(OpCode &opCode) {
+void Cpu65816::execute8BitDecInMemory(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(opCodeDataAddress);
     value--;
@@ -33,7 +34,8 @@ void Cpu65816::execute8BitDecInMemory(OpCode &opCode) {
     mSystemBus.storeByte(opCodeDataAddress, value);
 }
 
-void Cpu65816::execute16BitDecInMemory(OpCode &opCode) {
+void Cpu65816::execute16BitDecInMemory(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(opCodeDataAddress);
     value--;
@@ -41,7 +43,8 @@ void Cpu65816::execute16BitDecInMemory(OpCode &opCode) {
     mSystemBus.storeTwoBytes(opCodeDataAddress, value);
 }
 
-void Cpu65816::execute8BitIncInMemory(OpCode &opCode) {
+void Cpu65816::execute8BitIncInMemory(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(opCodeDataAddress);
     value++;
@@ -49,7 +52,8 @@ void Cpu65816::execute8BitIncInMemory(OpCode &opCode) {
     mSystemBus.storeByte(opCodeDataAddress, value);
 }
 
-void Cpu65816::execute16BitIncInMemory(OpCode &opCode) {
+void Cpu65816::execute16BitIncInMemory(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(opCodeDataAddress);
     value++;
@@ -57,16 +61,20 @@ void Cpu65816::execute16BitIncInMemory(OpCode &opCode) {
     mSystemBus.storeTwoBytes(opCodeDataAddress, value);
 }
 
-void Cpu65816::executeINCDEC(OpCode &opCode) {
+void Cpu65816::executeINCDEC(OpCode &opCode)
+{
     switch (opCode.getCode()) {
         case(0x1A):  // INC Accumulator
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 uint8_t lowerA = Binary::lower8BitsOf(mA);
                 lowerA++;
                 Binary::setLower8BitsOf16BitsValue(&mA, lowerA);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lowerA);
-            } else {
+            }
+            else 
+            {
                 mA++;
                 mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mA);
             }
@@ -75,9 +83,12 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xEE): // INC Absolute
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitIncInMemory(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitIncInMemory(opCode);
                 addToCycles(2);
             }
@@ -86,13 +97,17 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xE6): // INC Direct Page
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitIncInMemory(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitIncInMemory(opCode);
                 addToCycles(2);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 5);
@@ -100,9 +115,12 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xFE): // INC Absolute Indexed, X
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitIncInMemory(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitIncInMemory(opCode);
                 addToCycles(2);
             }
@@ -112,13 +130,17 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         break;
         case(0xF6): // INC Direct Page Indexed, X
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitIncInMemory(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitIncInMemory(opCode);
                 addToCycles(2);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 6);
@@ -126,12 +148,15 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0x3A):  // DEC Accumulator
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 uint8_t lowerA = Binary::lower8BitsOf(mA);
                 lowerA--;
                 Binary::setLower8BitsOf16BitsValue(&mA, lowerA);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lowerA);
-            } else {
+            }
+            else 
+            {
                 mA--;
                 mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mA);
             }
@@ -140,9 +165,12 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xCE): // DEC Absolute
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitDecInMemory(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitDecInMemory(opCode);
                 addToCycles(2);
             }
@@ -151,13 +179,17 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xC6): // DEC Direct Page
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitDecInMemory(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitDecInMemory(opCode);
                 addToCycles(2);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 5);
@@ -165,9 +197,12 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xDE): // DEC Absolute Indexed, X
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitDecInMemory(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitDecInMemory(opCode);
                 addToCycles(2);
             }
@@ -179,11 +214,14 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         {
             if (accumulatorIs8BitWide()) {
                 execute8BitDecInMemory(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitDecInMemory(opCode);
                 addToCycles(2);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 6);
@@ -191,12 +229,15 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xC8):  // INY
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 uint8_t lowerY = Binary::lower8BitsOf(mY);
                 lowerY++;
                 Binary::setLower8BitsOf16BitsValue(&mY, lowerY);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lowerY);
-            } else {
+            }
+            else 
+            {
                 mY++;
                 mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mY);
             }
@@ -205,12 +246,15 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xE8):  // INX
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 uint8_t lowerX = Binary::lower8BitsOf(mX);
                 lowerX++;
                 Binary::setLower8BitsOf16BitsValue(&mX, lowerX);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lowerX);
-            } else {
+            }
+            else 
+            {
                 mX++;
                 mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mX);
             }
@@ -224,7 +268,9 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
                 lowerY--;
                 Binary::setLower8BitsOf16BitsValue(&mY, lowerY);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lowerY);
-            } else {
+            } 
+            else 
+            {
                 mY--;
                 mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mY);
             }
@@ -233,12 +279,15 @@ void Cpu65816::executeINCDEC(OpCode &opCode) {
         }
         case(0xCA):  // DEX
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 uint8_t lowerX = Binary::lower8BitsOf(mX);
                 lowerX--;
                 Binary::setLower8BitsOf16BitsValue(&mX, lowerX);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lowerX);
-            } else {
+            } 
+            else 
+            {
                 mX--;
                 mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mX);
             }

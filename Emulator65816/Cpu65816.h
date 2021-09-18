@@ -80,7 +80,8 @@ class Cpu65816 {
         // Direct page register
         uint16_t mD = 0;
 
-        struct {
+        struct 
+        {
             // Reset to true means low power mode (do nothing) (should jump indirect via 0x00FFFC)
             bool RES = true;
             // Ready to false means CPU is waiting for an NMI/IRQ/ABORT/RESET

@@ -27,24 +27,30 @@
  * This file contains implementations for all LDA OpCodes.
  */
 
-void Cpu65816::executeLDA8Bit(OpCode &opCode) {
+void Cpu65816::executeLDA8Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(opCodeDataAddress);
     Binary::setLower8BitsOf16BitsValue(&mA, value);
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);
 }
 
-void Cpu65816::executeLDA16Bit(OpCode &opCode) {
+void Cpu65816::executeLDA16Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     mA = mSystemBus.readTwoBytes(opCodeDataAddress);
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mA);
 }
 
-void Cpu65816::executeLDA(OpCode &opCode) {
-    if (accumulatorIs16BitWide()) {
+void Cpu65816::executeLDA(OpCode &opCode) 
+{
+    if (accumulatorIs16BitWide()) 
+    {
         executeLDA16Bit(opCode);
         addToCycles(1);
-    } else {
+    } 
+    else 
+    {
         executeLDA8Bit(opCode);
     }
 

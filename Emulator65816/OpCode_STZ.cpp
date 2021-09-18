@@ -25,7 +25,8 @@
  * This file contains the implementation for all STZ OpCodes.
  */
 
-void Cpu65816::executeSTZ(OpCode &opCode) {
+void Cpu65816::executeSTZ(OpCode &opCode)
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     if (accumulatorIs8BitWide()) {
         mSystemBus.storeByte(dataAddress, 0x00);

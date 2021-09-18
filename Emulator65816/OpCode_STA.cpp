@@ -25,7 +25,8 @@
  * This file contains the implementation for all STA OpCodes.
  */
 
-void Cpu65816::executeSTA(OpCode &opCode) {
+void Cpu65816::executeSTA(OpCode &opCode)
+{
 
     Address dataAddress = getAddressOfOpCodeData(opCode);
     if (accumulatorIs8BitWide()) {

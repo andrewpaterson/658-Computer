@@ -26,7 +26,8 @@
  * that deal with jumps, calls and returns.
  */
 
-void Cpu65816::executeJumpReturn(OpCode &opCode) {
+void Cpu65816::executeJumpReturn(OpCode &opCode)
+{
     switch (opCode.getCode()) {
         case(0x20):  // JSR Absolute
         {

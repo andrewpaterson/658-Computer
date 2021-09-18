@@ -24,7 +24,8 @@
 /**
  * This file contains the implementation for every stack related OpCode.
  */
-void Cpu65816::executeStack(OpCode &opCode) {
+void Cpu65816::executeStack(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     switch (opCode.getCode()) {
         case 0xF4:                  // PEA

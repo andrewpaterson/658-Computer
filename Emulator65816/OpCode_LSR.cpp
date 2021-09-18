@@ -39,7 +39,8 @@
  * This file contains implementations for all LSR OpCodes.
  */
 
-void Cpu65816::executeMemoryLSR(OpCode &opCode) {
+void Cpu65816::executeMemoryLSR(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
 
     if(accumulatorIs8BitWide()) {
@@ -53,7 +54,8 @@ void Cpu65816::executeMemoryLSR(OpCode &opCode) {
     }
 }
 
-void Cpu65816::executeAccumulatorLSR(OpCode &opCode) {
+void Cpu65816::executeAccumulatorLSR(OpCode &opCode)
+{
     if(accumulatorIs8BitWide()) {
         uint8_t value = Binary::lower8BitsOf(mA);
         DO_LSR_8_BIT(value);
@@ -63,7 +65,8 @@ void Cpu65816::executeAccumulatorLSR(OpCode &opCode) {
     }
 }
 
-void Cpu65816::executeLSR(OpCode &opCode) {
+void Cpu65816::executeLSR(OpCode &opCode)
+{
     switch (opCode.getCode()) {
         case (0x4A):                // LSR Accumulator
         {

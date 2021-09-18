@@ -26,7 +26,8 @@
  * This file contains the implementation for TSB and TRB OpCodes
  */
 
-void Cpu65816::execute8BitTSB(OpCode &opCode) {
+void Cpu65816::execute8BitTSB(OpCode &opCode)
+{
     const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(addressOfOpCodeData);
     uint8_t lowerA = Binary::lower8BitsOf(mA);
@@ -37,7 +38,8 @@ void Cpu65816::execute8BitTSB(OpCode &opCode) {
     else mCpuStatus.clearZeroFlag();
 }
 
-void Cpu65816::execute16BitTSB(OpCode &opCode) {
+void Cpu65816::execute16BitTSB(OpCode &opCode)
+{
     const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(addressOfOpCodeData);
     const uint16_t result = value | mA;
@@ -47,7 +49,8 @@ void Cpu65816::execute16BitTSB(OpCode &opCode) {
     else mCpuStatus.clearZeroFlag();
 }
 
-void Cpu65816::execute8BitTRB(OpCode &opCode) {
+void Cpu65816::execute8BitTRB(OpCode &opCode)
+{
     const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(addressOfOpCodeData);
     uint8_t lowerA = Binary::lower8BitsOf(mA);
@@ -58,7 +61,8 @@ void Cpu65816::execute8BitTRB(OpCode &opCode) {
     else mCpuStatus.clearZeroFlag();
 }
 
-void Cpu65816::execute16BitTRB(OpCode &opCode) {
+void Cpu65816::execute16BitTRB(OpCode &opCode)
+{
     const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(addressOfOpCodeData);
     const uint16_t result = value & ~mA;
@@ -68,13 +72,18 @@ void Cpu65816::execute16BitTRB(OpCode &opCode) {
     else mCpuStatus.clearZeroFlag();
 }
 
-void Cpu65816::executeTSBTRB(OpCode &opCode) {
-    switch (opCode.getCode()) {
+void Cpu65816::executeTSBTRB(OpCode &opCode) 
+{
+    switch (opCode.getCode()) 
+    {
         case(0x0C):                 // TSB Absolute
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitTSB(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitTSB(opCode);
                 addToCycles(2);
             }
@@ -83,9 +92,12 @@ void Cpu65816::executeTSBTRB(OpCode &opCode) {
         }
         case(0x04):                 // TSB Direct Page
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitTSB(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitTSB(opCode);
                 addToCycles(2);
             }
@@ -97,9 +109,12 @@ void Cpu65816::executeTSBTRB(OpCode &opCode) {
         }
         case(0x1C):                 // TRB Absolute
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitTRB(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitTRB(opCode);
                 addToCycles(2);
             }
@@ -108,19 +123,24 @@ void Cpu65816::executeTSBTRB(OpCode &opCode) {
         }
         case(0x14):                 // TRB Direct Page
         {
-            if (accumulatorIs8BitWide()) {
+            if (accumulatorIs8BitWide()) 
+            {
                 execute8BitTRB(opCode);
-            } else {
+            } 
+            else
+            {
                 execute16BitTRB(opCode);
                 addToCycles(2);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 5);
             break;
         }
-        default: {
+        default:
+        {
             LOG_UNEXPECTED_OPCODE(opCode);
         }
     }

@@ -25,7 +25,8 @@
  * This file contains the implementation for all SBC OpCodes.
  */
 
-void Cpu65816::execute8BitSBC(OpCode &opCode) {
+void Cpu65816::execute8BitSBC(OpCode &opCode)
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(dataAddress);
     uint8_t accumulator = Binary::lower8BitsOf(mA);
@@ -56,7 +57,8 @@ void Cpu65816::execute8BitSBC(OpCode &opCode) {
     Binary::setLower8BitsOf16BitsValue(&mA, result8Bit);
 }
 
-void Cpu65816::execute16BitSBC(OpCode &opCode) {
+void Cpu65816::execute16BitSBC(OpCode &opCode)
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(dataAddress);
     uint16_t accumulator = mA;
@@ -87,7 +89,8 @@ void Cpu65816::execute16BitSBC(OpCode &opCode) {
     mA = result16Bit;
 }
 
-void Cpu65816::execute8BitBCDSBC(OpCode &opCode) {
+void Cpu65816::execute8BitBCDSBC(OpCode &opCode)
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(dataAddress);
     uint8_t accumulator = Binary::lower8BitsOf(mA);
@@ -100,7 +103,8 @@ void Cpu65816::execute8BitBCDSBC(OpCode &opCode) {
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
 }
 
-void Cpu65816::execute16BitBCDSBC(OpCode &opCode) {
+void Cpu65816::execute16BitBCDSBC(OpCode &opCode)
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(dataAddress);
     uint16_t accumulator = mA;
@@ -113,7 +117,8 @@ void Cpu65816::execute16BitBCDSBC(OpCode &opCode) {
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue((uint8_t)result);
 }
 
-void Cpu65816::executeSBC(OpCode &opCode) {
+void Cpu65816::executeSBC(OpCode &opCode)
+{
     if (accumulatorIs8BitWide()) {
         if (mCpuStatus.decimalFlag()) execute8BitBCDSBC(opCode);
         else execute8BitSBC(opCode);

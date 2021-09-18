@@ -58,13 +58,16 @@ void Cpu65816::executeInterrupt(OpCode &opCode)
         }
         case(0x02):                 // COP
         {
-            if (mCpuStatus.emulationFlag()) {
+            if (mCpuStatus.emulationFlag()) 
+            {
                 mStack.push16Bit((uint16_t)(mProgramAddress.getOffset() + 2));
                 mStack.push8Bit(mCpuStatus.getRegisterValue());
                 mCpuStatus.setInterruptDisableFlag();
                 setProgramAddress(Address(0x00, mEmulationInterrupts->coProcessorEnable));
                 addToCycles(7);
-            } else {
+            } 
+            else 
+            {
                 mStack.push8Bit(mProgramAddress.getBank());
                 mStack.push16Bit((uint16_t)(mProgramAddress.getOffset() + 2));
                 mStack.push8Bit(mCpuStatus.getRegisterValue());
@@ -81,11 +84,14 @@ void Cpu65816::executeInterrupt(OpCode &opCode)
             // This implementation follows the text instead.
             mCpuStatus.setRegisterValue(mStack.pull8Bit());
 
-            if (mCpuStatus.emulationFlag()) {
+            if (mCpuStatus.emulationFlag()) 
+            {
                 Address newProgramAddress(mProgramAddress.getBank(), mStack.pull16Bit());
                 mProgramAddress = newProgramAddress;
                 addToCycles(6);
-            } else {
+            } 
+            else 
+            {
                 uint16_t offset = mStack.pull16Bit();
                 uint8_t bank = mStack.pull8Bit();
                 Address newProgramAddress(bank, offset);

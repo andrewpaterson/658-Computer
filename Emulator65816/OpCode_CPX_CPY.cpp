@@ -65,12 +65,16 @@ void Cpu65816::execute16BitCPY(OpCode &opCode)
 
 void Cpu65816::executeCPXCPY(OpCode &opCode) 
 {
-    switch (opCode.getCode()) {
+    switch (opCode.getCode()) 
+    {
         case(0xE0):  // CPX Immediate
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 execute8BitCPX(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitCPX(opCode);
                 addToProgramAddress(1);
                 addToCycles(1);
@@ -80,9 +84,12 @@ void Cpu65816::executeCPXCPY(OpCode &opCode)
         }
         case(0xEC):  // CPX Absolute
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 execute8BitCPX(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitCPX(opCode);
                 addToCycles(1);
             }
@@ -91,13 +98,17 @@ void Cpu65816::executeCPXCPY(OpCode &opCode)
         }
         case(0xE4):  // CPX Direct Page
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 execute8BitCPX(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitCPX(opCode);
                 addToCycles(1);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 3);
@@ -105,9 +116,12 @@ void Cpu65816::executeCPXCPY(OpCode &opCode)
         }
         case(0xC0):  // CPY Immediate
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 execute8BitCPY(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitCPY(opCode);
                 addToProgramAddress(1);
                 addToCycles(1);
@@ -117,9 +131,12 @@ void Cpu65816::executeCPXCPY(OpCode &opCode)
         }
         case(0xCC):  // CPY Absolute
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 execute8BitCPY(opCode);
-            } else {
+            }
+            else 
+            {
                 execute16BitCPY(opCode);
                 addToCycles(1);
             }
@@ -128,13 +145,17 @@ void Cpu65816::executeCPXCPY(OpCode &opCode)
         }
         case(0xC4):  // CPY Direct Page
         {
-            if (indexIs8BitWide()) {
+            if (indexIs8BitWide()) 
+            {
                 execute8BitCPY(opCode);
-            } else {
+            } 
+            else 
+            {
                 execute16BitCPY(opCode);
                 addToCycles(1);
             }
-            if (Binary::lower8BitsOf(mD) != 0) {
+            if (Binary::lower8BitsOf(mD) != 0) 
+            {
                 addToCycles(1);
             }
             addToProgramAddressAndCycles(2, 3);

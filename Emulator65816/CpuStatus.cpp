@@ -201,13 +201,20 @@ void CpuStatus::setRegisterValue(uint8_t value)
     if (value & STATUS_INTERRUPT_DISABLE) setInterruptDisableFlag();
     else clearInterruptDisableFlag();
     
-    if (value & STATUS_DECIMAL) setDecimalFlag();
-    else clearDecimalFlag();
+    if (value & STATUS_DECIMAL) 
+        setDecimalFlag();
+    else 
+        clearDecimalFlag();
     
-    if (emulationFlag()) {
-        if (value & STATUS_BREAK) setBreakFlag();
-        else clearBreakFlag();
-    } else {
+    if (emulationFlag()) 
+    {
+        if (value & STATUS_BREAK) 
+            setBreakFlag();
+        else 
+            clearBreakFlag();
+    } 
+    else 
+    {
         if (value & STATUS_INDEX_WIDTH) setIndexWidthFlag();
         else clearIndexWidthFlag();
     }

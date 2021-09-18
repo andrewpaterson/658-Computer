@@ -27,18 +27,23 @@
  * This file contains the implementation for all branch OpCodes
  */
 
-int Cpu65816::executeBranchShortOnCondition(bool condition, OpCode &opCode) {
+int Cpu65816::executeBranchShortOnCondition(bool condition, OpCode &opCode) 
+{
     uint8_t opCycles = 2;
     uint8_t destination =  mSystemBus.readByte(getAddressOfOpCodeData(opCode));
     // This is the address of the next instruction
     uint16_t actualDestination;
-    if (condition) {
+    if (condition) 
+    {
         // One extra cycle if the branch is taken
         opCycles++;
         uint16_t destination16;
-        if (Binary::is8bitValueNegative(destination)) {
+        if (Binary::is8bitValueNegative(destination)) 
+        {
             destination16 = 0xFF00 | destination;
-        } else {
+        }
+        else 
+        {
             destination16 = destination;
         }
         actualDestination = mProgramAddress.getOffset() + 2 + destination16;
@@ -47,7 +52,8 @@ int Cpu65816::executeBranchShortOnCondition(bool condition, OpCode &opCode) {
             mCpuStatus.emulationFlag()) {
             opCycles++;
         }
-    } else {
+    } else 
+    {
         actualDestination = mProgramAddress.getOffset() + 2;
     }
     Address newProgramAddress(mProgramAddress.getBank(), actualDestination);
@@ -64,7 +70,8 @@ int Cpu65816::executeBranchLongOnCondition(bool condition, OpCode &opCode) {
     return 4;
 }
 
-void Cpu65816::executeBranch(OpCode &opCode) {
+void Cpu65816::executeBranch(OpCode &opCode)
+{
 
     switch(opCode.getCode()) {
         case(0xD0):  // BNE

@@ -75,7 +75,8 @@ void Cpu65816::executeAccumulatorASL(OpCode &opCode)
     }
 }
 
-void Cpu65816::executeASL(OpCode &opCode) {
+void Cpu65816::executeASL(OpCode &opCode)
+{
     switch (opCode.getCode()) {
         case (0x0A):                // ASL Accumulator
         {

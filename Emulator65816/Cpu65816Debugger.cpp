@@ -97,9 +97,12 @@ void Cpu65816Debugger::logOpCode(OpCode &opCode) const {
         case AddressingMode::Immediate:
             // This refers to accumulator size to estimate the kind of value to print.
             // Instructions using index registers might print the wrong value.
-            if (mCpu.accumulatorIs8BitWide()) {
+            if (mCpu.accumulatorIs8BitWide()) 
+            {
                 log.str("#").hex(mCpu.mSystemBus.readByte(mCpu.getAddressOfOpCodeData(opCode)), 2);
-            } else {
+            }
+            else 
+            {
                 log.str("#").hex(mCpu.mSystemBus.readTwoBytes(mCpu.getAddressOfOpCodeData(opCode)), 4);
             }
             break;

@@ -26,12 +26,15 @@
  * These are OpCodes which transfer one register value to another.
  */
 
-void Cpu65816::executeTransfer(OpCode &opCode) {
-    switch (opCode.getCode()) {
+void Cpu65816::executeTransfer(OpCode &opCode) 
+{
+    switch (opCode.getCode()) 
+    {
         case(0xA8):  // TAY
         {
             if ( (accumulatorIs8BitWide() && indexIs8BitWide()) ||
-                 (accumulatorIs16BitWide() && indexIs8BitWide()) ) {
+                 (accumulatorIs16BitWide() && indexIs8BitWide()) ) 
+            {
                 uint8_t lower8BitsOfA = Binary::lower8BitsOf(mA);
                 Binary::setLower8BitsOf16BitsValue(&mY, lower8BitsOfA);
                 mCpuStatus.updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);

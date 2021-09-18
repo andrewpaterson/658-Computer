@@ -27,31 +27,39 @@
  * This file contains implementations for all LDX OpCodes.
  */
 
-void Cpu65816::executeLDX8Bit(OpCode &opCode) {
+void Cpu65816::executeLDX8Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(opCodeDataAddress);
     Binary::setLower8BitsOf16BitsValue(&mX, value);
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);
 }
 
-void Cpu65816::executeLDX16Bit(OpCode &opCode) {
+void Cpu65816::executeLDX16Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     mX = mSystemBus.readTwoBytes(opCodeDataAddress);
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mX);
 }
 
-void Cpu65816::executeLDX(OpCode &opCode) {
-    if (indexIs16BitWide()) {
+void Cpu65816::executeLDX(OpCode &opCode) 
+{
+    if (indexIs16BitWide()) 
+    {
         executeLDX16Bit(opCode);
         addToCycles(1);
-    } else {
+    } 
+    else 
+    {
         executeLDX8Bit(opCode);
     }
 
-    switch (opCode.getCode()) {
+    switch (opCode.getCode()) 
+    {
         case (0xA2):                // LDX Immediate
         {
-            if (indexIs16BitWide()) {
+            if (indexIs16BitWide()) 
+            {
                 addToProgramAddress(1);
             }
             addToProgramAddressAndCycles(2, 2);

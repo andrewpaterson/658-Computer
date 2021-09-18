@@ -25,7 +25,8 @@
  * This file contains the implementation for all STY OpCodes.
  */
 
-void Cpu65816::executeSTY(OpCode &opCode) {
+void Cpu65816::executeSTY(OpCode &opCode)
+{
     Address dataAddress = getAddressOfOpCodeData(opCode);
     if (accumulatorIs8BitWide()) {
         mSystemBus.storeByte(dataAddress, Binary::lower8BitsOf(mY));

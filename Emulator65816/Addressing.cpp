@@ -23,7 +23,8 @@
 
 #define LOG_TAG "Addressing"
 
-bool Cpu65816::opCodeAddressingCrossesPageBoundary(OpCode &opCode) {
+bool Cpu65816::opCodeAddressingCrossesPageBoundary(OpCode &opCode)
+{
     switch(opCode.getAddressingMode()) {
         case AddressingMode::AbsoluteIndexedWithX:
         {
@@ -147,7 +148,9 @@ Address Cpu65816::getAddressOfOpCodeData(OpCode &opCode)
             if (mCpuStatus.emulationFlag()) {
                 // 6502 uses zero page
                 dataAddressOffset = mSystemBus.readByte(mProgramAddress.newWithOffset(1));
-            } else {
+            }
+            else 
+            {
                 // 65816 uses direct page
                 dataAddressOffset = mD + mSystemBus.readByte(mProgramAddress.newWithOffset(1));
             }

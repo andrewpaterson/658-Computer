@@ -26,7 +26,8 @@
  * This file contains the implementation for all BIT OpCodes
  */
 
-void Cpu65816::execute8BitBIT(OpCode &opCode) {
+void Cpu65816::execute8BitBIT(OpCode &opCode)
+{
     const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(addressOfOpCodeData);
     bool isHighestBitSet = value & 0x80;
@@ -41,7 +42,8 @@ void Cpu65816::execute8BitBIT(OpCode &opCode) {
     mCpuStatus.updateZeroFlagFrom8BitValue(value & Binary::lower8BitsOf(mA));
 }
 
-void Cpu65816::execute16BitBIT(OpCode &opCode) {
+void Cpu65816::execute16BitBIT(OpCode &opCode)
+{
     const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
     uint16_t value = mSystemBus.readTwoBytes(addressOfOpCodeData);
     bool isHighestBitSet = value & 0x8000;
@@ -56,15 +58,20 @@ void Cpu65816::execute16BitBIT(OpCode &opCode) {
     mCpuStatus.updateZeroFlagFrom16BitValue(value & mA);
 }
 
-void Cpu65816::executeBIT(OpCode &opCode) {
-    if (accumulatorIs8BitWide()) {
+void Cpu65816::executeBIT(OpCode &opCode) 
+{
+    if (accumulatorIs8BitWide()) 
+    {
         execute8BitBIT(opCode);
-    } else {
+    } 
+    else 
+    {
         execute16BitBIT(opCode);
         addToCycles(1);
     }
 
-    switch (opCode.getCode()) {
+    switch (opCode.getCode()) 
+    {
         case(0x89):                 // BIT Immediate
         {
             if (accumulatorIs16BitWide()) {

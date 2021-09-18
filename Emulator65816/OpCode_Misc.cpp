@@ -25,7 +25,8 @@
  * This file contains implementations for all OpCodes that didn't fall into other categories.
  */
 
-void Cpu65816::executeMisc(OpCode &opCode) {
+void Cpu65816::executeMisc(OpCode &opCode)
+{
     switch (opCode.getCode()) {
         case(0xEB):     // XBA
         {

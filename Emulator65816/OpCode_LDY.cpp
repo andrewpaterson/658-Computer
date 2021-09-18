@@ -27,31 +27,39 @@
  * This file contains implementations for all LDY OpCodes.
  */
 
-void Cpu65816::executeLDY8Bit(OpCode &opCode) {
+void Cpu65816::executeLDY8Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(opCodeDataAddress);
     Binary::setLower8BitsOf16BitsValue(&mY, value);
     mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);
 }
 
-void Cpu65816::executeLDY16Bit(OpCode &opCode) {
+void Cpu65816::executeLDY16Bit(OpCode &opCode)
+{
     Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
     mY = mSystemBus.readTwoBytes(opCodeDataAddress);
     mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mY);
 }
 
-void Cpu65816::executeLDY(OpCode &opCode) {
-    if (indexIs16BitWide()) {
+void Cpu65816::executeLDY(OpCode &opCode) 
+{
+    if (indexIs16BitWide()) 
+    {
         executeLDY16Bit(opCode);
         addToCycles(1);
-    } else {
+    } 
+    else 
+    {
         executeLDY8Bit(opCode);
     }
 
-    switch (opCode.getCode()) {
+    switch (opCode.getCode()) 
+    {
         case (0xA0):                // LDY Immediate
         {
-            if (indexIs16BitWide()) {
+            if (indexIs16BitWide())
+            {
                 addToProgramAddress(1);
             }
             addToProgramAddressAndCycles(2, 2);

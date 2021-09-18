@@ -25,7 +25,8 @@
  * This file contains the implementation for all CMP OpCodes
  */
 
-void Cpu65816::execute8BitCMP(OpCode &opCode) {
+void Cpu65816::execute8BitCMP(OpCode &opCode)
+{
     Address valueAddress = getAddressOfOpCodeData(opCode);
     uint8_t value = mSystemBus.readByte(valueAddress);
     uint8_t result = Binary::lower8BitsOf(mA) - value;
@@ -43,10 +44,14 @@ void Cpu65816::execute16BitCMP(OpCode &opCode)
     bool carry = mA >= value;
     mCpuStatus.setCarryFlag(carry);
 }
-void Cpu65816::executeCMP(OpCode &opCode) {
-    if (accumulatorIs8BitWide()) {
+void Cpu65816::executeCMP(OpCode &opCode) 
+{
+    if (accumulatorIs8BitWide()) 
+    {
         execute8BitCMP(opCode);
-    } else {
+    } 
+    else 
+    {
         execute16BitCMP(opCode);
         addToCycles(1);
     }

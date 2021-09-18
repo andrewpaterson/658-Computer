@@ -114,13 +114,13 @@ bool Cpu65816::executeNextInstruction()
     if ((mPins.IRQ) && (!mCpuStatus.interruptDisableFlag())) 
     {
         /*
-        The program bank register (PB, the A16-A23 part of the address bus) is pushed onto the hardware stack (65C816/65C802 only when operating in native mode).
-        The most significant byte (MSB) of the program counter (PC) is pushed onto the stack.
-        The least significant byte (LSB) of the program counter is pushed onto the stack.
-        The status register (SR) is pushed onto the stack.
-        The interrupt disable flag is set in the status register.
-        PB is loaded with $00 (65C816/65C802 only when operating in native mode).
-        PC is loaded from the relevant vector (see tables).
+            The program bank register (PB, the A16-A23 part of the address bus) is pushed onto the hardware stack (65C816/65C802 only when operating in native mode).
+            The most significant byte (MSB) of the program counter (PC) is pushed onto the stack.
+            The least significant byte (LSB) of the program counter is pushed onto the stack.
+            The status register (SR) is pushed onto the stack.
+            The interrupt disable flag is set in the status register.
+            PB is loaded with $00 (65C816/65C802 only when operating in native mode).
+            PC is loaded from the relevant vector (see tables).
         */
         if (!mCpuStatus.emulationFlag()) 
         {
@@ -129,8 +129,9 @@ bool Cpu65816::executeNextInstruction()
             mStack.push8Bit(mCpuStatus.getRegisterValue());
             mCpuStatus.setInterruptDisableFlag();
             mProgramAddress = Address(0x00,mSystemBus.readTwoBytes(Address(0x00, mNativeInterrupts->interruptRequest)));
-        } else
-{
+        }
+        else
+        {
             mStack.push16Bit(mProgramAddress.getOffset());
             mStack.push8Bit(mCpuStatus.getRegisterValue());
             mCpuStatus.setInterruptDisableFlag();

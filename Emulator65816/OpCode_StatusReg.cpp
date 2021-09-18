@@ -26,7 +26,8 @@
  * that deal directly with the status register.
  */
 
-void Cpu65816::executeStatusReg(OpCode &opCode) {
+void Cpu65816::executeStatusReg(OpCode &opCode)
+{
     switch (opCode.getCode()) 
     {
         case(0xC2):  // REP #const

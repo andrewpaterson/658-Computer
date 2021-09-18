@@ -124,7 +124,7 @@ public class W65C02
       case BBR_relative_bit_branch_0:
         branchIfBitNotSet(0);
         break;
-      case Branch_relative_Not_Negative:
+      case BPL_relative:
         branchIfPositive();
         break;
       case ORA_zero_page_indirect_y:
@@ -204,7 +204,7 @@ public class W65C02
       case BBR_relative_bit_branch_2:
         branchIfBitNotSet(2);
         break;
-      case Branch_relative_Negative:
+      case BMI_relative:
         branchIfNegative();
         break;
       case AND_zero_page_indirect_y:
@@ -280,7 +280,7 @@ public class W65C02
       case BBR_relative_bit_branch_4:
         branchIfBitNotSet(4);
         break;
-      case Branch_relative_Not_Overflow:
+      case BVS_relative:
         branchIfNotOverflow();
         break;
       case EOR_zero_page_indirect_y:
@@ -361,7 +361,7 @@ public class W65C02
       case BBR_relative_bit_branch_6:
         branchIfBitNotSet(6);
         break;
-      case Branch_relative_Overflow:
+      case BVC_relative:
         branchIfOverflow();
         break;
       case ADC_zero_page_indirect_y:
@@ -402,7 +402,7 @@ public class W65C02
       case BBR_relative_bit_branch_7:
         branchIfBitNotSet(7);
         break;
-      case Branch_relative_always:
+      case BRA_relative:
         branchAlways();
         break;
       case STA_zero_page_x_indirect:
@@ -441,7 +441,7 @@ public class W65C02
       case BBS_relative_bit_branch_0:
         branchIfBitSet(0);
         break;
-      case Branch_relative_Not_Carry:
+      case BCC_relative:
         branchIfNotCarry();
         break;
       case STA_zero_page_indirect_y:
@@ -525,7 +525,7 @@ public class W65C02
       case BBS_relative_bit_branch_2:
         branchIfBitSet(2);
         break;
-      case Branch_relative_Carry:
+      case BCS_relative:
         branchIfCarry();
         break;
       case LDA_zero_page_indirect_y:
@@ -613,7 +613,7 @@ public class W65C02
       case BBS_relative_bit_branch_4:
         branchIfBitSet(4);
         break;
-      case Branch_relative_Not_Zero:
+      case BEQ_relative:
         branchIfNotZero();
         break;
       case CMP_zero_page_indirect_y:
@@ -691,7 +691,7 @@ public class W65C02
       case BBS_relative_bit_branch_6:
         branchIfBitSet(6);
         break;
-      case Branch_relative_Zero:
+      case BNE_relative:
         branchIfZero();
         break;
       case SBC_zero_page_indirect_y:
@@ -799,7 +799,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -824,7 +823,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -844,7 +842,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -884,7 +881,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -903,7 +899,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -964,7 +959,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -989,7 +983,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1014,7 +1007,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1034,7 +1026,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1063,7 +1054,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1088,7 +1078,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1112,7 +1101,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1142,7 +1130,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1181,7 +1168,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1211,7 +1197,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1236,7 +1221,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1271,7 +1255,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1296,7 +1279,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1337,7 +1319,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1372,7 +1353,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1391,7 +1371,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1424,7 +1403,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1464,7 +1442,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1489,7 +1466,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1519,7 +1495,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1554,7 +1529,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1579,7 +1553,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1609,7 +1582,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1644,7 +1616,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1674,7 +1645,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1713,7 +1683,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1732,7 +1701,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1765,7 +1733,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1795,7 +1762,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1808,12 +1774,7 @@ public class W65C02
     else if (cycle == 2)
     {
       addressHighFromDataOffsetAddressByX();
-    }
-    else
-    {
-
       doneInstruction();
-      return;
     }
   }
 
@@ -1865,7 +1826,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1878,14 +1838,7 @@ public class W65C02
     else if (cycle == 2)
     {
       address = offsetAddressByX();
-
       doneInstruction();
-      return;
-    }
-    else
-    {
-      doneInstruction();
-      return;
     }
   }
 
@@ -1904,7 +1857,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1938,7 +1890,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -1980,7 +1931,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2033,7 +1983,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2067,7 +2016,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2101,7 +2049,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2130,7 +2077,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2164,7 +2110,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2203,7 +2148,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2232,7 +2176,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2251,7 +2194,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2275,7 +2217,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2326,7 +2267,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2355,7 +2295,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2380,7 +2319,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2405,7 +2343,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2425,7 +2362,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2450,7 +2386,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2475,7 +2410,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2495,7 +2429,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2515,7 +2448,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -2534,7 +2466,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 

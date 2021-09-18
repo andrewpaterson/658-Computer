@@ -108,7 +108,7 @@ public class W65C02
         break;
       case ORA_immediate:
         orAccumulatorWithMemory_immediate();
-        return;
+        break;
       case ASL_implied:
         arithmeticShiftLeftAccumulator();
         break;
@@ -176,277 +176,45 @@ public class W65C02
         testBits_zero_page();
         break;
       case AND_zero_page:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_zero_page();
         break;
       case ROL_zero_page:
-        switch (cycle)
-        {
-          case 1:
-          {
-            readAddressLowSetMLB();
-            break;
-          }
-          case 2:
-          {
-            wantRead(address);
-            break;
-          }
-          case 3:
-          {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
-            data = (byte) result;
-            updateCarry(result);
-            wantWrite(address, data);
-            break;
-          }
-          case 4:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        rotateLeft_zero_page();
         break;
       case RMB_zero_page_2:
         clearBit(2);
       case PLP_implied:
-        switch (cycle)
-        {
-          case 1:
-          {
-            programCounter--;
-            popFromStack();
-            break;
-          }
-          case 2:
-          {
-            processorStatus = data;
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        pullFromStack_implied();
         break;
       case AND_immediate:
-        if (cycle == 1)
-        {
-          accumulator &= data;
-          updateZeroAndNegative(accumulator);
-        }
-        doneInstruction();
-        return;
-      case ROL_implied_a:
-        if (cycle == 1)
-        {
-          programCounter--;
-          data = accumulator;
-          short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
-          data = (byte) result;
-          updateCarry(result);
-          accumulator = data;
-        }
-        doneInstruction();
-        return;
+        andAccumulator_immediate();
+        break;
+      case ROL_implied:
+        rotateLeft_implied();
+        break;
       case BIT_absolute:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataReadAddress();
-            break;
-          }
-          case 3:
-          {
-            updateProcessStateFromSomeWeirdDataThing();
-            updateZeroStatus();
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        testBits_absolute();
         break;
       case AND_absolute:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataReadAddress();
-            break;
-          }
-          case 3:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_absolute();
         break;
       case ROL_absolute:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            readAddressHighSetMLB();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
-            data = (byte) result;
-            updateCarry(result);
-            wantWrite(address, data);
-            break;
-          }
-          case 5:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        rotateLeft_absolute();
         break;
       case BBR_relative_bit_branch_2:
         branchOnBitNotSet(2);
         break;
       case Branch_relative_Negative:
-        switch (cycle)
-        {
-          case 1:
-          {
-            determineTakeBranchOnProcessorStatusBit(P_N_BIT, P_N_BIT);
-            break;
-          }
-          case 2:
-          {
-            takeBranch();
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchNegative_relative();
         break;
       case AND_zero_page_indirect_y:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readNextAddressAddressLowFromData();
-            break;
-          }
-          case 3:
-          {
-            addressHighFromDataOffsetAddressByY();
-            break;
-          }
-          case 4:
-          {
-            wantRead(address);
-            break;
-          }
-          case 5:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_zero_page_indirect_y();
         break;
       case AND_zero_page_indirect:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readNextAddressAddressLowFromData();
-            break;
-          }
-          case 3:
-          {
-            addressHighFromDataReadAddress();
-            break;
-          }
-          case 4:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_zero_page_indirect();
         break;
       case BIT_zero_page_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            offsetAddressByXReadAddress();
-            break;
-          }
-          case 3:
-          {
-            updateProcessStateFromSomeWeirdDataThing();
-            updateZeroStatus();
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        testBits_zero_page_x();
         break;
       case AND_zero_page_x:
         andAccumulator_zero_page_x();
@@ -463,230 +231,31 @@ public class W65C02
         andAccumulator_absolute_y();
         break;
       case DEC_implied_a:
-        if (cycle == 1)
-        {
-          DecrementAccumulator();
-        }
-        doneInstruction();
-        return;
+        decrement_implied_a();
+        break;
       case BIT_absolute_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByX();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            updateProcessStateFromSomeWeirdDataThing();
-            updateZeroStatus();
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        testBits_absolute_x();
         break;
       case AND_absolute_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByX();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            accumulator &= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        andAccumulator_absolute_x();
         break;
       case ROL_absolute_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByX();
-            break;
-          }
-          case 3:
-          {
-            setMemoryLock(true);
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            wantRead(address);
-            break;
-          }
-          case 5:
-          {
-            short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
-            data = (byte) result;
-            updateCarry(result);
-            wantWrite(address, data);
-            break;
-          }
-          case 6:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        rotateLeft_absolute_x();
         break;
       case BBR_relative_bit_branch_3:
         branchOnBitNotSet(3);
         break;
       case RTI_implied:
-        switch (cycle)
-        {
-          case 1:
-          {
-            programCounter--;
-            address = programCounter;
-            wantRead(address);
-            break;
-          }
-          case 2:
-          {
-            popFromStack();
-            break;
-          }
-          case 3:
-          {
-            processorStatus = data;
-            popFromStack();
-            break;
-          }
-          case 4:
-          {
-            programCounter = dataLowByte();
-            popFromStack();
-            break;
-          }
-          case 5:
-          {
-            programCounter |= (short) (data << 8);
-            wantRead(programCounter);
-            break;
-          }
-          case 6:
-          {
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        returnFromInterrupt();
         break;
       case EOR_zero_page_x_indirect:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            offsetAddressByXReadAddress();
-            break;
-          }
-          case 3:
-          {
-            readNextAddressAddressLowFromData();
-            break;
-          }
-          case 4:
-          {
-            addressHighFromDataReadAddress();
-            break;
-          }
-          case 5:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_zero_page_x_indirect();
         break;
       case EOR_zero_page:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_zero_page();
         break;
       case LSR_zero_page:
-        switch (cycle)
-        {
-          case 1:
-          {
-            readAddressLowSetMLB();
-            break;
-          }
-          case 2:
-          {
-            wantRead(address);
-            break;
-          }
-          case 3:
-          {
-            logicalShiftRight();
-            break;
-          }
-          case 4:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        logicalShiftRight_zero_page();
         break;
       case RMB_zero_page_4:
         clearBit(4);
@@ -694,25 +263,10 @@ public class W65C02
         push(accumulator);
         break;
       case EOR_immediate:
-        if (cycle == 1)
-        {
-          accumulator ^= data;
-          updateZeroAndNegative(accumulator);
-        }
-        doneInstruction();
-        return;
+        exclusiveOrAccumulator_immediate();
+        break;
       case LSR_implied_a:
-        if (cycle == 1)
-        {
-          programCounter--;
-          data = accumulator;
-          updateCarryStatus();
-          short result = (short) ((data & 0xFF) >> 1);
-          data = (byte) result;
-          updateZeroAndNegative(result);
-          accumulator = data;
-        }
-        doneInstruction();
+        logicalShiftRight_implied();
         return;
       case JMP_absolute:
         switch (cycle)
@@ -732,59 +286,10 @@ public class W65C02
         }
         break;
       case EOR_absolute:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataReadAddress();
-            break;
-          }
-          case 3:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_absolute();
         break;
       case LSR_absolute:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            readAddressHighSetMLB();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            logicalShiftRight();
-            break;
-          }
-          case 5:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        logicalShiftRight_absolute();
         break;
       case BBR_relative_bit_branch_4:
         branchOnBitNotSet(4);
@@ -807,138 +312,20 @@ public class W65C02
         }
         break;
       case EOR_zero_page_indirect_y:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readNextAddressAddressLowFromData();
-            break;
-          }
-          case 3:
-          {
-            addressHighFromDataOffsetAddressByY();
-            break;
-          }
-          case 4:
-          {
-            wantRead(address);
-            break;
-          }
-          case 5:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_zero_page_indirect_y();
         break;
       case EOR_zero_page_indirect:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readNextAddressAddressLowFromData();
-            break;
-          }
-          case 3:
-          {
-            addressHighFromDataReadAddress();
-            break;
-          }
-          case 4:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_zero_page_indirect();
         break;
       case (byte) 0x54:
       case (byte) 0xd4:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            address = offsetAddressByX();
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        invalid_1();
         break;
       case EOR_zero_page_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            offsetAddressByXReadAddress();
-            break;
-          }
-          case 3:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_zero_page_x();
         break;
       case LSR_zero_page_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readAddressOffsetByXSetMLB();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            logicalShiftRight();
-            break;
-          }
-          case 5:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        logicalShiftRight_zero_page_x();
         break;
       case RMB_zero_page_5:
         clearBit(5);
@@ -950,34 +337,9 @@ public class W65C02
           setInterrupt(false);
         }
         doneInstruction();
-        return;
+        break;
       case EOR_absolute_y:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByY();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_absolute_y();
         break;
       case PHY_implied:
         switch (cycle)
@@ -1015,70 +377,10 @@ public class W65C02
         }
         break;
       case EOR_absolute_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByX();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            accumulator ^= data;
-            updateZeroAndNegative(accumulator);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        exclusiveOrAccumulator_absolute_x();
         break;
       case LSR_absolute_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByX();
-            break;
-          }
-          case 3:
-          {
-            setMemoryLock(true);
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            wantRead(address);
-            break;
-          }
-          case 5:
-          {
-            logicalShiftRight();
-            break;
-          }
-          case 6:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        logicalShiftRight_absolute_x();
         break;
       case BBR_relative_bit_branch_5:
         branchOnBitNotSet(5);
@@ -1220,7 +522,7 @@ public class W65C02
           }
           case 3:
           {
-            rotateMemoryRight();
+            rotateRight();
             break;
           }
           case 4:
@@ -1283,7 +585,7 @@ public class W65C02
           accumulator = data;
         }
         doneInstruction();
-        return;
+        break;
       case JMP_absolute_indirect:
         switch (cycle)
         {
@@ -1360,7 +662,7 @@ public class W65C02
           }
           case 4:
           {
-            rotateMemoryRight();
+            rotateRight();
             break;
           }
           case 5:
@@ -1537,7 +839,7 @@ public class W65C02
           }
           case 4:
           {
-            rotateMemoryRight();
+            rotateRight();
             break;
           }
           case 5:
@@ -1558,7 +860,7 @@ public class W65C02
           setInterrupt(true);
         }
         doneInstruction();
-        return;
+        break;
       case ADC_absolute_y:
         switch (cycle)
         {
@@ -1703,7 +1005,7 @@ public class W65C02
           }
           case 5:
           {
-            rotateMemoryRight();
+            rotateRight();
             break;
           }
           case 6:
@@ -1851,23 +1153,11 @@ public class W65C02
         }
         break;
       case DEC_implied_y:
-        if (cycle == 1)
-        {
-          programCounter--;
-          data = yIndex;
-          data--;
-          updateZeroAndNegative(data);
-          yIndex = data;
-        }
-        doneInstruction();
-        return;
+        decrement_implied_y();
+        break;
       case BIT_immediate_immediate:
-        if (cycle == 1)
-        {
-          updateZeroStatus();
-        }
-        doneInstruction();
-        return;
+        testBits_immediate_immediate();
+        break;
       case TXA_implied:
         if (cycle == 1)
         {
@@ -1876,7 +1166,7 @@ public class W65C02
           updateZeroAndNegative(accumulator);
         }
         doneInstruction();
-        return;
+        break;
       case STY_absolute:
         switch (cycle)
         {
@@ -2149,7 +1439,7 @@ public class W65C02
           updateZeroAndNegative(accumulator);
         }
         doneInstruction();
-        return;
+        break;
       case STA_absolute_y:
         switch (cycle)
         {
@@ -2184,7 +1474,7 @@ public class W65C02
           stack = xIndex;
         }
         doneInstruction();
-        return;
+        break;
       case STZ_absolute:
         switch (cycle)
         {
@@ -2263,21 +1553,7 @@ public class W65C02
         }
         break;
       case BBS_relative_bit_branch_1:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(1);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(1);
         break;
       case LDY_immediate:
         if (cycle == 1)
@@ -2286,7 +1562,7 @@ public class W65C02
           yIndex = data;
         }
         doneInstruction();
-        return;
+        break;
       case LDA_zero_page_x_indirect:
         switch (cycle)
         {
@@ -2326,7 +1602,7 @@ public class W65C02
           loadX();
         }
         doneInstruction();
-        return;
+        break;
       case LDY_zero_page:
         switch (cycle)
         {
@@ -2415,7 +1691,7 @@ public class W65C02
           updateZeroAndNegative(yIndex);
         }
         doneInstruction();
-        return;
+        break;
       case LDA_immediate:
         if (cycle == 1)
         {
@@ -2423,7 +1699,7 @@ public class W65C02
           accumulator = data;
         }
         doneInstruction();
-        return;
+        break;
       case TAX_implied:
         if (cycle == 1)
         {
@@ -2432,7 +1708,7 @@ public class W65C02
           updateZeroAndNegative(xIndex);
         }
         doneInstruction();
-        return;
+        break;
       case LDY_absolute:
         switch (cycle)
         {
@@ -2502,21 +1778,7 @@ public class W65C02
         }
         break;
       case BBS_relative_bit_branch_2:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(2);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(2);
         break;
       case Branch_relative_Carry:
         switch (cycle)
@@ -2699,7 +1961,7 @@ public class W65C02
           setOverflow(false);
         }
         doneInstruction();
-        return;
+        break;
       case LDA_absolute_y:
         switch (cycle)
         {
@@ -2734,7 +1996,7 @@ public class W65C02
           transferStackToX();
         }
         doneInstruction();
-        return;
+        break;
       case LDY_absolute_x:
         switch (cycle)
         {
@@ -2819,21 +2081,7 @@ public class W65C02
         }
         break;
       case BBS_relative_bit_branch_3:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(3);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(3);
         break;
       case CPY_immediate:
         if (cycle == 1)
@@ -2842,7 +2090,7 @@ public class W65C02
           updateCarry(address);
         }
         doneInstruction();
-        return;
+        break;
       case CMP_zero_page_x_indirect:
         switch (cycle)
         {
@@ -2879,7 +2127,7 @@ public class W65C02
       case (byte) 0xc2:
       case (byte) 0xe2:
         doneInstruction();
-        return;
+        break;
       case CPY_zero_page:
         switch (cycle)
         {
@@ -2917,33 +2165,7 @@ public class W65C02
         }
         break;
       case DEC_zero_page:
-        switch (cycle)
-        {
-          case 1:
-          {
-            readAddressLowSetMLB();
-            break;
-          }
-          case 2:
-          {
-            wantRead(address);
-            break;
-          }
-          case 3:
-          {
-            data--;
-            updateZeroAndNegative(data);
-            wantWrite(address, data);
-            break;
-          }
-          case 4:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        decrement_zero_page();
         break;
       case SMB_zero_page_4:
         switch (cycle)
@@ -2982,7 +2204,7 @@ public class W65C02
           yIndex = data;
         }
         doneInstruction();
-        return;
+        break;
       case CMP_immediate:
         if (cycle == 1)
         {
@@ -2990,13 +2212,9 @@ public class W65C02
           updateCarry(address);
         }
         doneInstruction();
-        return;
+        break;
       case DEC_implied_x:
-        if (cycle == 1)
-        {
-          DecrementX();
-        }
-        doneInstruction();
+        decrement_implied_x();
         return;
       case WAI_implied:
         switch (cycle)
@@ -3070,55 +2288,10 @@ public class W65C02
         }
         break;
       case DEC_absolute:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            readAddressHighSetMLB();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            data--;
-            updateZeroAndNegative(data);
-            wantWrite(address, data);
-            break;
-          }
-          case 5:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        decrement_absolute();
         break;
       case BBS_relative_bit_branch_4:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(4);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(4);
         break;
       case Branch_relative_Not_Zero:
         switch (cycle)
@@ -3222,38 +2395,7 @@ public class W65C02
         }
         break;
       case DEC_zero_page_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadAddress();
-            break;
-          }
-          case 2:
-          {
-            readAddressOffsetByXSetMLB();
-            break;
-          }
-          case 3:
-          {
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            data--;
-            updateZeroAndNegative(data);
-            wantWrite(address, data);
-            break;
-          }
-          case 5:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        decrement_zero_page_x();
         break;
       case SMB_zero_page_5:
         switch (cycle)
@@ -3289,7 +2431,7 @@ public class W65C02
           setDecimalMode(false);
         }
         doneInstruction();
-        return;
+        break;
       case CMP_absolute_y:
         switch (cycle)
         {
@@ -3328,7 +2470,7 @@ public class W65C02
           stopped = true;
         }
         doneInstruction();
-        return;
+        break;
       case (byte) 0xdc:
         switch (cycle)
         {
@@ -3379,61 +2521,10 @@ public class W65C02
         }
         break;
       case DEC_absolute_x:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressLowFromDataReadProgramCounter();
-            break;
-          }
-          case 2:
-          {
-            addressHighFromDataOffsetAddressByX();
-            break;
-          }
-          case 3:
-          {
-            setMemoryLock(true);
-            wantRead(address);
-            break;
-          }
-          case 4:
-          {
-            wantRead(address);
-            break;
-          }
-          case 5:
-          {
-            data--;
-            updateZeroAndNegative(data);
-            wantWrite(address, data);
-            break;
-          }
-          case 6:
-          {
-            setMemoryLock(false);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        decrement_absolute_x();
         break;
       case BBS_relative_bit_branch_5:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(5);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(5);
         break;
       case CPX_immediate:
         if (cycle == 1)
@@ -3441,7 +2532,7 @@ public class W65C02
           CompareXWithData();
         }
         doneInstruction();
-        return;
+        break;
       case SBC_zero_page_x_indirect:
         switch (cycle)
         {
@@ -3578,7 +2669,7 @@ public class W65C02
           IncrementX();
         }
         doneInstruction();
-        return;
+        break;
       case SBC_immediate:
         switch (cycle)
         {
@@ -3678,21 +2769,7 @@ public class W65C02
         }
         break;
       case BBS_relative_bit_branch_6:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(6);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(6);
         break;
       case Branch_relative_Zero:
         switch (cycle)
@@ -3891,7 +2968,7 @@ public class W65C02
           setDecimalMode(true);
         }
         doneInstruction();
-        return;
+        break;
       case SBC_absolute_y:
         switch (cycle)
         {
@@ -4029,21 +3106,7 @@ public class W65C02
         }
         break;
       case BBS_relative_bit_branch_7:
-        switch (cycle)
-        {
-          case 1:
-          {
-            addressFromDataReadPC();
-            break;
-          }
-          case 2:
-          {
-            takeBranchOnDataBitSet(7);
-          }
-          default:
-            doneInstruction();
-            return;
-        }
+        branchOnBitSet(7);
         break;
       case (byte) 0x02:
       case (byte) 0x22:
@@ -4056,7 +3119,7 @@ public class W65C02
           address = dataLowByte();
         }
         doneInstruction();
-        return;
+        break;
       case NOP_implied:
       case (byte) 0x03:
       case (byte) 0x23:
@@ -4096,6 +3159,1026 @@ public class W65C02
     }
   }
 
+  private void logicalShiftRight_absolute_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByX();
+        break;
+      }
+      case 3:
+      {
+        setMemoryLock(true);
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        wantRead(address);
+        break;
+      }
+      case 5:
+      {
+        logicalShiftRight();
+        break;
+      }
+      case 6:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void logicalShiftRight_zero_page_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readAddressOffsetByXSetMLB();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        logicalShiftRight();
+        break;
+      }
+      case 5:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void logicalShiftRight_absolute()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        readAddressHighSetMLB();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        logicalShiftRight();
+        break;
+      }
+      case 5:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void logicalShiftRight_zero_page()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        readAddressLowSetMLB();
+        break;
+      }
+      case 2:
+      {
+        wantRead(address);
+        break;
+      }
+      case 3:
+      {
+        logicalShiftRight();
+        break;
+      }
+      case 4:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_absolute_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByX();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_absolute_y()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByY();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_zero_page_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        offsetAddressByXReadAddress();
+        break;
+      }
+      case 3:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void invalid_1()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        address = offsetAddressByX();
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_zero_page_indirect()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readNextAddressAddressLowFromData();
+        break;
+      }
+      case 3:
+      {
+        addressHighFromDataReadAddress();
+        break;
+      }
+      case 4:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_zero_page_indirect_y()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readNextAddressAddressLowFromData();
+        break;
+      }
+      case 3:
+      {
+        addressHighFromDataOffsetAddressByY();
+        break;
+      }
+      case 4:
+      {
+        wantRead(address);
+        break;
+      }
+      case 5:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_absolute()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataReadAddress();
+        break;
+      }
+      case 3:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_immediate()
+  {
+    if (cycle == 1)
+    {
+      accumulator ^= data;
+      updateZeroAndNegative(accumulator);
+    }
+    doneInstruction();
+  }
+
+  private void exclusiveOrAccumulator_zero_page()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void exclusiveOrAccumulator_zero_page_x_indirect()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        offsetAddressByXReadAddress();
+        break;
+      }
+      case 3:
+      {
+        readNextAddressAddressLowFromData();
+        break;
+      }
+      case 4:
+      {
+        addressHighFromDataReadAddress();
+        break;
+      }
+      case 5:
+      {
+        accumulator ^= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void returnFromInterrupt()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        programCounter--;
+        address = programCounter;
+        wantRead(address);
+        break;
+      }
+      case 2:
+      {
+        popFromStack();
+        break;
+      }
+      case 3:
+      {
+        processorStatus = data;
+        popFromStack();
+        break;
+      }
+      case 4:
+      {
+        programCounter = dataLowByte();
+        popFromStack();
+        break;
+      }
+      case 5:
+      {
+        programCounter |= (short) (data << 8);
+        wantRead(programCounter);
+        break;
+      }
+      case 6:
+      {
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void rotateLeft_absolute_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByX();
+        break;
+      }
+      case 3:
+      {
+        setMemoryLock(true);
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        wantRead(address);
+        break;
+      }
+      case 5:
+      {
+        rotateLeftWithCarry();
+        break;
+      }
+      case 6:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void logicalShiftRight_implied()
+  {
+    if (cycle == 1)
+    {
+      programCounter--;
+      data = accumulator;
+      updateCarryStatus();
+      short result = (short) ((data & 0xFF) >> 1);
+      data = (byte) result;
+      updateZeroAndNegative(result);
+      accumulator = data;
+    }
+    doneInstruction();
+  }
+
+  private void rotateLeftWithCarry()
+  {
+    short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
+    data = (byte) result;
+    updateCarry(result);
+    wantWrite(address, data);
+  }
+
+  private void branchOnBitSet(int i)
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressFromDataReadPC();
+        break;
+      }
+      case 2:
+      {
+        takeBranchOnDataBitSet(i);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void testBits_immediate_immediate()
+  {
+    if (cycle == 1)
+    {
+      updateZeroStatus();
+    }
+    doneInstruction();
+  }
+
+  private void testBits_absolute_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByX();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        updateProcessStateFromSomeWeirdDataThing();
+        updateZeroStatus();
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void decrement_absolute_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByX();
+        break;
+      }
+      case 3:
+      {
+        setMemoryLock(true);
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        wantRead(address);
+        break;
+      }
+      case 5:
+      {
+        data--;
+        updateZeroAndNegative(data);
+        wantWrite(address, data);
+        break;
+      }
+      case 6:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void decrement_zero_page_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readAddressOffsetByXSetMLB();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        data--;
+        updateZeroAndNegative(data);
+        wantWrite(address, data);
+        break;
+      }
+      case 5:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void decrement_absolute()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        readAddressHighSetMLB();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        data--;
+        updateZeroAndNegative(data);
+        wantWrite(address, data);
+        break;
+      }
+      case 5:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void decrement_implied_x()
+  {
+    if (cycle == 1)
+    {
+      DecrementX();
+    }
+    doneInstruction();
+  }
+
+  private void decrement_zero_page()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        readAddressLowSetMLB();
+        break;
+      }
+      case 2:
+      {
+        wantRead(address);
+        break;
+      }
+      case 3:
+      {
+        data--;
+        updateZeroAndNegative(data);
+        wantWrite(address, data);
+        break;
+      }
+      case 4:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void decrement_implied_y()
+  {
+    if (cycle == 1)
+    {
+      programCounter--;
+      data = yIndex;
+      data--;
+      updateZeroAndNegative(data);
+      yIndex = data;
+    }
+    doneInstruction();
+  }
+
+  private void decrement_implied_a()
+  {
+    if (cycle == 1)
+    {
+      decrementAccumulator();
+    }
+    doneInstruction();
+  }
+
+  private void andAccumulator_absolute_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataOffsetAddressByX();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void testBits_zero_page_x()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        offsetAddressByXReadAddress();
+        break;
+      }
+      case 3:
+      {
+        updateProcessStateFromSomeWeirdDataThing();
+        updateZeroStatus();
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void andAccumulator_zero_page_indirect()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readNextAddressAddressLowFromData();
+        break;
+      }
+      case 3:
+      {
+        addressHighFromDataReadAddress();
+        break;
+      }
+      case 4:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void andAccumulator_zero_page_indirect_y()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        readNextAddressAddressLowFromData();
+        break;
+      }
+      case 3:
+      {
+        addressHighFromDataOffsetAddressByY();
+        break;
+      }
+      case 4:
+      {
+        wantRead(address);
+        break;
+      }
+      case 5:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void branchNegative_relative()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        determineTakeBranchOnProcessorStatusBit(P_N_BIT, P_N_BIT);
+        break;
+      }
+      case 2:
+      {
+        takeBranch();
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void rotateLeft_absolute()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        readAddressHighSetMLB();
+        break;
+      }
+      case 3:
+      {
+        wantRead(address);
+        break;
+      }
+      case 4:
+      {
+        rotateLeftWithCarry();
+        break;
+      }
+      case 5:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void andAccumulator_absolute()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataReadAddress();
+        break;
+      }
+      case 3:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void testBits_absolute()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadProgramCounter();
+        break;
+      }
+      case 2:
+      {
+        addressHighFromDataReadAddress();
+        break;
+      }
+      case 3:
+      {
+        updateProcessStateFromSomeWeirdDataThing();
+        updateZeroStatus();
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void rotateLeft_implied()
+  {
+    if (cycle == 1)
+    {
+      programCounter--;
+      data = accumulator;
+      short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
+      data = (byte) result;
+      updateCarry(result);
+      accumulator = data;
+    }
+    doneInstruction();
+  }
+
+  private void andAccumulator_immediate()
+  {
+    if (cycle == 1)
+    {
+      accumulator &= data;
+      updateZeroAndNegative(accumulator);
+    }
+    doneInstruction();
+  }
+
+  private void pullFromStack_implied()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        programCounter--;
+        popFromStack();
+        break;
+      }
+      case 2:
+      {
+        processorStatus = data;
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void rotateLeft_zero_page()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        readAddressLowSetMLB();
+        break;
+      }
+      case 2:
+      {
+        wantRead(address);
+        break;
+      }
+      case 3:
+      {
+        rotateLeftWithCarry();
+        break;
+      }
+      case 4:
+      {
+        setMemoryLock(false);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
+  private void andAccumulator_zero_page()
+  {
+    switch (cycle)
+    {
+      case 1:
+      {
+        addressLowFromDataReadAddress();
+        break;
+      }
+      case 2:
+      {
+        accumulator &= data;
+        updateZeroAndNegative(accumulator);
+      }
+      default:
+        doneInstruction();
+    }
+  }
+
   private void testBits_zero_page()
   {
     switch (cycle)
@@ -4112,7 +4195,6 @@ public class W65C02
       }
       default:
         doneInstruction();
-        return;
     }
   }
 
@@ -4190,10 +4272,7 @@ public class W65C02
       }
       case 4:
       {
-        short result = (short) (((data & 0xFF) << 1) | ((isCarry()) ? 1 : 0));
-        data = (byte) result;
-        updateCarry(result);
-        wantWrite(address, data);
+        rotateLeftWithCarry();
         break;
       }
       case 5:
@@ -4935,7 +5014,7 @@ public class W65C02
     accumulator = (byte) address;
   }
 
-  private void DecrementAccumulator()
+  private void decrementAccumulator()
   {
     programCounter--;
     data = accumulator;
@@ -5042,7 +5121,7 @@ public class W65C02
     wantRead(programCounter++);
   }
 
-  private void rotateMemoryRight()
+  private void rotateRight()
   {
     short result = (short) (((data & 0xFF) >> 1) | (isCarry() ? 0x80 : 0));
     updateCarryStatus();

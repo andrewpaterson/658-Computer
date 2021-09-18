@@ -119,7 +119,7 @@
     <a name="clabelfont" val="SansSerif plain 12"/>
     <a name="clabelup" val="east"/>
     <a name="downloadFrequency" val="-1.0"/>
-    <a name="simulationFrequency" val="2.0"/>
+    <a name="simulationFrequency" val="2048000.0"/>
     <comp lib="0" loc="(100,90)" name="Clock"/>
     <comp lib="0" loc="(150,290)" name="Pull Resistor">
       <a name="facing" val="north"/>
@@ -262,11 +262,6 @@
       <a name="fanout" val="1"/>
       <a name="incoming" val="16"/>
     </comp>
-    <comp lib="0" loc="(650,790)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="fanout" val="8"/>
-      <a name="incoming" val="8"/>
-    </comp>
     <comp lib="0" loc="(670,600)" name="Probe">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
@@ -276,11 +271,6 @@
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
       <a name="radix" val="16"/>
-    </comp>
-    <comp lib="0" loc="(710,770)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="PHI2"/>
-      <a name="labelfont" val="SansSerif bold 12"/>
     </comp>
     <comp lib="1" loc="(100,290)" name="Buffer">
       <a name="facing" val="north"/>
@@ -573,10 +563,6 @@ a 0 59 6f 75 3a 20 0
       <a name="text" val="Data"/>
     </comp>
     <comp lib="7" loc="(380,210)" name="W65C02S (Simple)"/>
-    <comp lib="8" loc="(750,770)" name="Digital Oscilloscope">
-      <a name="frontlines" val="both"/>
-      <a name="inputs" val="8"/>
-    </comp>
     <wire from="(100,220)" to="(240,220)"/>
     <wire from="(100,260)" to="(170,260)"/>
     <wire from="(100,280)" to="(100,290)"/>
@@ -703,32 +689,8 @@ a 0 59 6f 75 3a 20 0
     <wire from="(650,600)" to="(650,710)"/>
     <wire from="(650,600)" to="(670,600)"/>
     <wire from="(650,70)" to="(650,250)"/>
-    <wire from="(650,710)" to="(650,790)"/>
     <wire from="(670,350)" to="(680,350)"/>
     <wire from="(670,60)" to="(680,60)"/>
-    <wire from="(670,800)" to="(750,800)"/>
-    <wire from="(670,810)" to="(740,810)"/>
-    <wire from="(670,820)" to="(730,820)"/>
-    <wire from="(670,830)" to="(720,830)"/>
-    <wire from="(670,840)" to="(710,840)"/>
-    <wire from="(670,850)" to="(700,850)"/>
-    <wire from="(670,860)" to="(690,860)"/>
-    <wire from="(670,870)" to="(680,870)"/>
-    <wire from="(680,1010)" to="(750,1010)"/>
-    <wire from="(680,870)" to="(680,1010)"/>
-    <wire from="(690,860)" to="(690,980)"/>
-    <wire from="(690,980)" to="(750,980)"/>
-    <wire from="(700,850)" to="(700,950)"/>
-    <wire from="(700,950)" to="(750,950)"/>
-    <wire from="(710,770)" to="(750,770)"/>
-    <wire from="(710,840)" to="(710,920)"/>
-    <wire from="(710,920)" to="(750,920)"/>
-    <wire from="(720,830)" to="(720,890)"/>
-    <wire from="(720,890)" to="(750,890)"/>
-    <wire from="(730,820)" to="(730,860)"/>
-    <wire from="(730,860)" to="(750,860)"/>
-    <wire from="(740,810)" to="(740,830)"/>
-    <wire from="(740,830)" to="(750,830)"/>
     <wire from="(780,600)" to="(800,600)"/>
     <wire from="(780,620)" to="(800,620)"/>
     <wire from="(800,600)" to="(800,620)"/>

@@ -37,7 +37,7 @@ public class W6502Opcodes
   public static final byte RMB_zero_page_2 = (byte) 0x27;
   public static final byte PLP_implied = (byte) 0x28;
   public static final byte AND_immediate = (byte) 0x29;
-  public static final byte ROL_implied_a = (byte) 0x2A;
+  public static final byte ROL_implied = (byte) 0x2A;
   public static final byte BIT_absolute = (byte) 0x2C;
   public static final byte AND_absolute = (byte) 0x2D;
   public static final byte ROL_absolute = (byte) 0x2E;

@@ -133,9 +133,9 @@
     </comp>
     <comp lib="0" loc="(120,570)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="Address"/>
+      <a name="label" val="Tick_Count"/>
       <a name="labelfont" val="SansSerif bold 12"/>
-      <a name="width" val="16"/>
+      <a name="width" val="24"/>
     </comp>
     <comp lib="0" loc="(120,640)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -154,8 +154,8 @@
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(130,590)" name="Constant">
-      <a name="value" val="0x9cf"/>
-      <a name="width" val="16"/>
+      <a name="value" val="0x13fdf"/>
+      <a name="width" val="24"/>
     </comp>
     <comp lib="0" loc="(130,660)" name="Constant">
       <a name="value" val="0x9f5"/>
@@ -231,13 +231,17 @@
       <a name="labelfont" val="SansSerif bold 12"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(580,540)" name="Tunnel">
-      <a name="label" val="Clock_Enabled"/>
-      <a name="labelfont" val="SansSerif bold 12"/>
+    <comp lib="0" loc="(530,480)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="Continue"/>
     </comp>
     <comp lib="0" loc="(620,60)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="PHI2"/>
+      <a name="labelfont" val="SansSerif bold 12"/>
+    </comp>
+    <comp lib="0" loc="(630,530)" name="Tunnel">
+      <a name="label" val="Clock_Enabled"/>
       <a name="labelfont" val="SansSerif bold 12"/>
     </comp>
     <comp lib="0" loc="(670,320)" name="Probe">
@@ -313,6 +317,9 @@
       <a name="negate3" val="true"/>
       <a name="size" val="30"/>
     </comp>
+    <comp lib="1" loc="(600,530)" name="OR Gate">
+      <a name="size" val="30"/>
+    </comp>
     <comp lib="1" loc="(630,110)" name="Controlled Buffer">
       <a name="control" val="left"/>
       <a name="width" val="8"/>
@@ -328,7 +335,7 @@
       <a name="width" val="16"/>
     </comp>
     <comp lib="3" loc="(180,580)" name="Comparator">
-      <a name="width" val="16"/>
+      <a name="width" val="24"/>
     </comp>
     <comp lib="3" loc="(180,650)" name="Comparator">
       <a name="width" val="16"/>
@@ -471,12 +478,16 @@
     <wire from="(520,380)" to="(810,380)"/>
     <wire from="(520,80)" to="(520,150)"/>
     <wire from="(520,80)" to="(620,80)"/>
-    <wire from="(530,540)" to="(580,540)"/>
+    <wire from="(530,480)" to="(550,480)"/>
+    <wire from="(530,540)" to="(570,540)"/>
+    <wire from="(550,480)" to="(550,520)"/>
+    <wire from="(550,520)" to="(570,520)"/>
     <wire from="(590,110)" to="(590,230)"/>
     <wire from="(590,110)" to="(610,110)"/>
     <wire from="(590,230)" to="(590,320)"/>
     <wire from="(590,230)" to="(980,230)"/>
     <wire from="(590,320)" to="(670,320)"/>
+    <wire from="(600,530)" to="(630,530)"/>
     <wire from="(620,60)" to="(630,60)"/>
     <wire from="(620,80)" to="(620,100)"/>
     <wire from="(620,80)" to="(680,80)"/>

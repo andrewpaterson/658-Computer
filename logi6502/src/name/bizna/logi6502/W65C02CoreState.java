@@ -39,7 +39,14 @@ public class W65C02CoreState
 
   protected String getOpcodeValueHex()
   {
-    return getByteStringHex(fetchedOpcode);
+    if (cycle != 0)
+    {
+      return getByteStringHex(fetchedOpcode);
+    }
+    else
+    {
+      return "###";
+    }
   }
 
   private String getByteStringHex(byte value)
@@ -133,6 +140,23 @@ public class W65C02CoreState
   public String getCycle()
   {
     return Byte.toString(cycle);
+  }
+
+  protected String getOpcodeMnemonicString()
+  {
+    if (cycle == 0)
+    {
+      return "###";
+    }
+    else
+    {
+      return getOpcodeMnemonic();
+    }
+  }
+
+  protected boolean isOpcodeValid()
+  {
+    return cycle != 0;
   }
 }
 

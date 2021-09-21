@@ -907,7 +907,7 @@ public class W65C02
     }
   }
 
-  protected String getOpcodeMnemonicString()
+  protected String getOpcodeMnemonic()
   {
     switch (fetchedOpcode)
     {

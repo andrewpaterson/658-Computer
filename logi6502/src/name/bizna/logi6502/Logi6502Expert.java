@@ -92,8 +92,8 @@ public class Logi6502Expert
 
       W65C02CoreState core = W65C02CoreState.get(painter, this);
       int topOffset = 30;
-      drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString(), true);
-      drawInternal(g, topOffset + 20, 35, "Op-code:", core.getOpcodeValueHex(), true);
+      drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString(), core.isOpcodeValid());
+      drawInternal(g, topOffset + 20, 35, "Op-code:", core.getOpcodeValueHex(), core.isOpcodeValid());
       drawInternal(g, topOffset + 40, 35, "Cycle:", core.getCycle(), true);
       drawInternal(g, topOffset + 60, 50, "Address:", core.getAddressValueHex(), core.isAddressValid());
       drawInternal(g, topOffset + 80, 35, "Accumulator:", core.getAccumulatorValueHex(), true);

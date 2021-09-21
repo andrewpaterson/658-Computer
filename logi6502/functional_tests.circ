@@ -73,7 +73,7 @@
       <a name="valign" val="base"/>
     </tool>
   </lib>
-  <lib desc="jar#D:\Work\658-Computer\logi6502\out\artifacts\logi6502_jar\logi6502.jar#name.bizna.logi6502.Components" name="7"/>
+  <lib desc="jar#C:\Work\658-Computer\logi6502\out\artifacts\logi6502_jar\logi6502.jar#name.bizna.logi6502.Components" name="7"/>
   <lib desc="#Input/Output-Extra" name="8"/>
   <main name="main"/>
   <options>
@@ -190,7 +190,7 @@
       <a name="label" val="Break_3"/>
       <a name="labelfont" val="SansSerif bold 12"/>
     </comp>
-    <comp lib="0" loc="(220,150)" name="Tunnel">
+    <comp lib="0" loc="(220,140)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="PHI2"/>
       <a name="labelfont" val="SansSerif bold 12"/>
@@ -228,9 +228,6 @@
       <a name="appearance" val="NewPins"/>
       <a name="label" val="Continue"/>
     </comp>
-    <comp lib="0" loc="(60,310)" name="Pull Resistor">
-      <a name="facing" val="east"/>
-    </comp>
     <comp lib="0" loc="(650,560)" name="Tunnel">
       <a name="label" val="Clock_Enabled"/>
       <a name="labelfont" val="SansSerif bold 12"/>
@@ -266,7 +263,7 @@
     <comp lib="1" loc="(170,90)" name="AND Gate">
       <a name="size" val="30"/>
     </comp>
-    <comp lib="1" loc="(220,170)" name="NOT Gate"/>
+    <comp lib="1" loc="(220,160)" name="NOT Gate"/>
     <comp lib="1" loc="(220,310)" name="NOT Gate"/>
     <comp lib="1" loc="(220,350)" name="NOT Gate"/>
     <comp lib="1" loc="(550,570)" name="AND Gate">
@@ -309,12 +306,16 @@
       <a name="appearance" val="classic"/>
       <a name="enables" val="line"/>
     </comp>
-    <comp lib="5" loc="(110,170)" name="Button">
+    <comp lib="5" loc="(110,160)" name="Button">
       <a name="label" val="Reset"/>
       <a name="labelfont" val="SansSerif bold 12"/>
     </comp>
+    <comp lib="5" loc="(110,310)" name="Button">
+      <a name="label" val="IRQB"/>
+      <a name="labelfont" val="SansSerif bold 12"/>
+    </comp>
     <comp lib="5" loc="(110,350)" name="Button">
-      <a name="label" val="NMI"/>
+      <a name="label" val="NMIB"/>
       <a name="labelfont" val="SansSerif bold 12"/>
     </comp>
     <comp lib="5" loc="(200,510)" name="LED">
@@ -360,7 +361,8 @@
     <wire from="(1010,290)" to="(1010,350)"/>
     <wire from="(1040,440)" to="(1060,440)"/>
     <wire from="(1040,460)" to="(1060,460)"/>
-    <wire from="(110,170)" to="(190,170)"/>
+    <wire from="(110,160)" to="(190,160)"/>
+    <wire from="(110,310)" to="(190,310)"/>
     <wire from="(110,350)" to="(190,350)"/>
     <wire from="(1100,440)" to="(1170,440)"/>
     <wire from="(1100,460)" to="(1150,460)"/>
@@ -400,8 +402,8 @@
     <wire from="(190,750)" to="(200,750)"/>
     <wire from="(200,80)" to="(200,90)"/>
     <wire from="(200,90)" to="(250,90)"/>
-    <wire from="(220,150)" to="(580,150)"/>
-    <wire from="(220,170)" to="(560,170)"/>
+    <wire from="(220,140)" to="(580,140)"/>
+    <wire from="(220,160)" to="(560,160)"/>
     <wire from="(220,310)" to="(300,310)"/>
     <wire from="(220,350)" to="(300,350)"/>
     <wire from="(220,60)" to="(250,60)"/>
@@ -422,11 +424,10 @@
     <wire from="(540,380)" to="(640,380)"/>
     <wire from="(550,510)" to="(570,510)"/>
     <wire from="(550,570)" to="(590,570)"/>
-    <wire from="(560,170)" to="(560,260)"/>
+    <wire from="(560,160)" to="(560,260)"/>
     <wire from="(570,510)" to="(570,550)"/>
     <wire from="(570,550)" to="(590,550)"/>
-    <wire from="(580,150)" to="(580,300)"/>
-    <wire from="(60,310)" to="(190,310)"/>
+    <wire from="(580,140)" to="(580,300)"/>
     <wire from="(600,210)" to="(600,340)"/>
     <wire from="(600,210)" to="(710,210)"/>
     <wire from="(620,230)" to="(620,360)"/>

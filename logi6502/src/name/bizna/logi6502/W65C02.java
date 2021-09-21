@@ -2,6 +2,7 @@ package name.bizna.logi6502;
 
 import com.cburch.logisim.instance.InstanceState;
 
+import javax.swing.*;
 import java.util.Random;
 
 import static name.bizna.logi6502.W6502Opcodes.*;
@@ -5749,9 +5750,8 @@ public class W65C02
       {
         programCounter = dataLowByte();
         wantRead((short) (vectorToPull + 1));
-        throw new RuntimeException("break_");
-//        vectorToPull = IRQ_VECTOR;
-//        break;
+        vectorToPull = IRQ_VECTOR;
+        break;
       }
       case 6:
       {
@@ -6300,17 +6300,15 @@ public class W65C02
     boolean nmi = parent.isNonMaskableInterrupt(instanceState);
     if (nmi && !previousNMI)
     {
-      throw new RuntimeException("nmi && !previousNMI");
-//            vectorToPull = NMI_VECTOR;
-//            programCounter -= 2;
-//            fetchedOpcode = BRK;
+      vectorToPull = NMI_VECTOR;
+      programCounter -= 2;
+      fetchedOpcode = BRK;
     }
     else if (parent.isInterruptRequest(instanceState) && isInterrupt() == 0)
     {
-      throw new RuntimeException("parent.isInterruptRequest(instanceState) && isInterrupt() == 0");
-//            vectorToPull = IRQ_VECTOR;
-//            programCounter -= 2;
-//            fetchedOpcode = BRK;
+      vectorToPull = IRQ_VECTOR;
+      programCounter -= 2;
+      fetchedOpcode = BRK;
     }
     else
     {

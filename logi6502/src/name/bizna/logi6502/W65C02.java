@@ -183,6 +183,7 @@ public class W65C02
         break;
       case RMB_zero_page_2:
         clearBit(2);
+        break;
       case PLP_implied:
         pullFromStack_implied();
         break;
@@ -259,6 +260,7 @@ public class W65C02
         break;
       case RMB_zero_page_4:
         clearBit(4);
+        break;
       case PHA_implied:
         push(accumulator);
         break;
@@ -267,7 +269,7 @@ public class W65C02
         break;
       case LSR_implied_a:
         logicalShiftRight_implied();
-        return;
+        break;
       case JMP_absolute:
         jump_absolute();
         break;
@@ -340,6 +342,7 @@ public class W65C02
         break;
       case RMB_zero_page_6:
         clearBit(6);
+        break;
       case PLA_implied:
         pullAccumulatorFromStack();
         break;
@@ -381,6 +384,7 @@ public class W65C02
         break;
       case RMB_zero_page_7:
         clearBit(7);
+        break;
       case SEI_implied:
         setInterrupt();
         break;
@@ -597,7 +601,7 @@ public class W65C02
         break;
       case DEC_implied_x:
         decrement_implied_x();
-        return;
+        break;
       case WAI_implied:
         waitForInterrupt();
         break;
@@ -773,6 +777,7 @@ public class W65C02
       case (byte) 0xd3:
       case (byte) 0xe3:
         noOperation();
+        break;
     }
   }
 
@@ -900,6 +905,480 @@ public class W65C02
       default:
         doneInstruction();
     }
+  }
+
+  protected String getOpcodeMnemonicString()
+  {
+    switch (fetchedOpcode)
+    {
+      case BRK:
+        return "BRK";
+      case ORA_zero_page_x_indirect:
+        return "ORA";
+      case TSB_zero_page:
+        return "TSB";
+      case ORA_zero_page:
+        return "ORA";
+      case ASL_zero_page:
+        return "ASL";
+      case RMB_zero_page_0:
+        return "RMB";
+      case PHP:
+        return "PHP";
+      case ORA_immediate:
+        return "ORA";
+      case ASL_implied:
+        return "ASL";
+      case TSB_absolute:
+        return "TSB";
+      case ORA_absolute:
+        return "ORA";
+      case ASL_absolute:
+        return "ASL";
+      case BBR_relative_bit_branch_0:
+        return "BBR";
+      case BPL_relative:
+        return "BPL";
+      case ORA_zero_page_indirect_y:
+        return "ORA";
+      case ORA_zero_page_indirect:
+        return "ORA";
+      case TRB_zero_page:
+        return "TRB";
+      case ORA_zero_page_x:
+        return "ORA";
+      case ASL_zero_page_x:
+        return "SL";
+      case RMB_zero_page_1:
+        return "RMB";
+      case CLC_implied:
+        return "CLC";
+      case ORA_absolute_y:
+        return "ORA";
+      case INC_implied_a:
+        return "INC";
+      case TRB_absolute:
+        return "TRB";
+      case ORA_absolute_x:
+        return "ORA";
+      case ASL_absolute_x:
+        return "ASL";
+      case BBR_relative_bit_branch_1:
+        return "BBR";
+      case JSR:
+        return "JSR";
+      case AND_zero_page_x_indirect:
+        return "AND";
+      case BIT_zero_page:
+        return "BIT";
+      case AND_zero_page:
+        return "AND";
+      case ROL_zero_page:
+        return "ROL";
+      case RMB_zero_page_2:
+        return "RMB";
+      case AND_immediate:
+        return "AND";
+      case ROL_implied:
+        return "ROL";
+      case BIT_absolute:
+        return "BIT";
+      case AND_absolute:
+        return "AND";
+      case ROL_absolute:
+        return "ROL";
+      case BBR_relative_bit_branch_2:
+        return "BBR";
+      case BMI_relative:
+        return "BMI";
+      case AND_zero_page_indirect_y:
+        return "AND";
+      case AND_zero_page_indirect:
+        return "AND";
+      case BIT_zero_page_x:
+        return "BIT";
+      case AND_zero_page_x:
+        return "AND";
+      case ROL_zero_page_x:
+        return "ROL";
+      case RMB_zero_page_3:
+        return "RMB";
+      case SEC_implied:
+        return "SEC";
+      case AND_absolute_y:
+        return "AND";
+      case DEC_implied_a:
+        return "DEC";
+      case BIT_absolute_x:
+        return "BIT";
+      case AND_absolute_x:
+        return "AND";
+      case ROL_absolute_x:
+        return "ROL";
+      case BBR_relative_bit_branch_3:
+        return "BBR";
+      case RTI_implied:
+        return "RTI";
+      case EOR_zero_page_x_indirect:
+        return "EOR";
+      case EOR_zero_page:
+        return "EOR";
+      case LSR_zero_page:
+        return "LSR";
+      case RMB_zero_page_4:
+        return "RMB";
+      case PHA_implied:
+        return "PHA";
+      case EOR_immediate:
+        return "EOR";
+      case LSR_implied_a:
+        return "LSR";
+      case JMP_absolute:
+        return "JMP";
+      case EOR_absolute:
+        return "EOR";
+      case LSR_absolute:
+        return "LSR";
+      case BBR_relative_bit_branch_4:
+        return "BBR";
+      case BVS_relative:
+        return "BVS";
+      case EOR_zero_page_indirect_y:
+        return "EOR";
+      case EOR_zero_page_indirect:
+        return "EOR";
+      case EOR_zero_page_x:
+        return "EOR";
+      case LSR_zero_page_x:
+        return "LSR";
+      case RMB_zero_page_5:
+        return "RMB";
+      case CLI_implied:
+        return "CLI";
+      case EOR_absolute_y:
+        return "EOR";
+      case PHY_implied:
+        return "PHY";
+      case EOR_absolute_x:
+        return "EOR";
+      case LSR_absolute_x:
+        return "LSR";
+      case BBR_relative_bit_branch_5:
+        return "BBR";
+      case RTS_implied:
+        return "RTS";
+      case ADC_zero_page_x_indirect:
+        return "ADC";
+      case STZ_zero_page:
+        return "STZ";
+      case ADC_zero_page:
+        return "ADC";
+      case ROR_zero_page:
+        return "ROR";
+      case RMB_zero_page_6:
+        return "RMB";
+      case PLA_implied:
+        return "PLA";
+      case ADC_immediate:
+        return "ADC";
+      case ROR_implied:
+        return "ROR";
+      case JMP_absolute_indirect:
+        return "JMP";
+      case ADC_absolute:
+        return "ADC";
+      case ROR_absolute:
+        return "ROR";
+      case BBR_relative_bit_branch_6:
+        return "BBR";
+      case BVC_relative:
+        return "BVC";
+      case ADC_zero_page_indirect_y:
+        return "ADC";
+      case ADC_zero_page_indirect:
+        return "ADC";
+      case STZ_zero_page_x:
+        return "STZ";
+      case ADC_zero_page_x:
+        return "ADC";
+      case ROR_zero_page_x:
+        return "ROR";
+      case RMB_zero_page_7:
+        return "RMB";
+      case SEI_implied:
+        return "SEI";
+      case ADC_absolute_y:
+        return "ADC";
+      case PLY_implied:
+        return "PLY";
+      case JMP_absolute_x_indirect:
+        return "JMP";
+      case ADC_absolute_x:
+        return "ADC";
+      case ROR_absolute_x:
+        return "ROR";
+      case BBR_relative_bit_branch_7:
+        return "BBR";
+      case BRA_relative:
+        return "BRA";
+      case STA_zero_page_x_indirect:
+        return "STA";
+      case STY_zero_page:
+        return "STY";
+      case STA_zero_page:
+        return "STA";
+      case STX_zero_page:
+        return "STX";
+      case SMB_zero_page_0:
+        return "SMB";
+      case DEC_implied_y:
+        return "DEC";
+      case BIT_immediate_immediate:
+        return "BIT";
+      case TXA_implied:
+        return "TXA";
+      case STY_absolute:
+        return "STY";
+      case STA_absolute:
+        return "STA";
+      case STX_absolute:
+        return "STX";
+      case BBS_relative_bit_branch_0:
+        return "BBS";
+      case BCC_relative:
+        return "BCC";
+      case STA_zero_page_indirect_y:
+        return "STA";
+      case STA_zero_page_indirect:
+        return "STA";
+      case STY_zero_page_x:
+        return "STY";
+      case STA_zero_page_x:
+        return "STA";
+      case STX_zero_page_y:
+        return "STX";
+      case SMB_zero_page_1:
+        return "SMB";
+      case TYA_implied:
+        return "TYA";
+      case STA_absolute_y:
+        return "STA";
+      case TXS_implied:
+        return "TXS";
+      case STZ_absolute:
+        return "STZ";
+      case STA_absolute_x:
+        return "STA";
+      case STZ_absolute_x:
+        return "STZ";
+      case BBS_relative_bit_branch_1:
+        return "BBS";
+      case LDY_immediate:
+        return "LDY";
+      case LDA_zero_page_x_indirect:
+        return "LDA";
+      case LDX_immediate:
+        return "LDX";
+      case LDY_zero_page:
+        return "LDY";
+      case LDA_zero_page:
+        return "LDA";
+      case LDX_zero_page:
+        return "LDX";
+      case SMB_zero_page_2:
+        return "SMB";
+      case TAY_implied:
+        return "TAY";
+      case LDA_immediate:
+        return "LDA";
+      case TAX_implied:
+        return "TAX";
+      case LDY_absolute:
+        return "LDY";
+      case LDA_absolute:
+        return "LDA";
+      case LDX_absolute:
+        return "LDX";
+      case BBS_relative_bit_branch_2:
+        return "BBS";
+      case BCS_relative:
+        return "BCS";
+      case LDA_zero_page_indirect_y:
+        return "LDA";
+      case LDA_zero_page_indirect:
+        return "LDA";
+      case LDY_zero_page_x:
+        return "LDY";
+      case LDA_zero_page_x:
+        return "LDA";
+      case LDX_zero_page_y:
+        return "LDX";
+      case SMB_zero_page_3:
+        return "SMB";
+      case CLV_implied:
+        return "CLV";
+      case LDA_absolute_y:
+        return "LDA";
+      case TSX_implied:
+        return "TSX";
+      case LDY_absolute_x:
+        return "LDY";
+      case LDA_absolute_x:
+        return "LDA";
+      case LDX_absolute_y:
+        return "LDX";
+      case BBS_relative_bit_branch_3:
+        return "BBS";
+      case CPY_immediate:
+        return "CPY";
+      case CMP_zero_page_x_indirect:
+        return "CMP";
+      case CPY_zero_page:
+        return "CPY";
+      case CMP_zero_page:
+        return "CMP";
+      case DEC_zero_page:
+        return "DEC";
+      case SMB_zero_page_4:
+        return "SMB";
+      case INC_implied_y:
+        return "INC";
+      case CMP_immediate:
+        return "CMP";
+      case DEC_implied_x:
+        return "DEC";
+      case WAI_implied:
+        return "WAI";
+      case CPY_absolute:
+        return "CPY";
+      case CMP_absolute:
+        return "CMP";
+      case DEC_absolute:
+        return "DEC";
+      case BBS_relative_bit_branch_4:
+        return "BBS";
+      case BEQ_relative:
+        return "BEQ";
+      case CMP_zero_page_indirect_y:
+        return "CMP";
+      case CMP_zero_page_indirect:
+        return "CMP";
+      case CMP_zero_page_x:
+        return "CMP";
+      case DEC_zero_page_x:
+        return "DEC";
+      case SMB_zero_page_5:
+        return "SMB";
+      case CLD_implied:
+        return "CLD";
+      case CMP_absolute_y:
+        return "CMP";
+      case PHX_implied:
+        return "PHX";
+      case STP_implied:
+        return "STP";
+      case CMP_absolute_x:
+        return "CMP";
+      case DEC_absolute_x:
+        return "DEC";
+      case BBS_relative_bit_branch_5:
+        return "BBS";
+      case CPX_immediate:
+        return "CPX";
+      case SBC_zero_page_x_indirect:
+        return "SBC";
+      case CPX_zero_page:
+        return "CPX";
+      case SBC_zero_page:
+        return "SBC";
+      case INC_zero_page:
+        return "INC";
+      case SMB_zero_page_6:
+        return "SMB";
+      case INC_implied_x:
+        return "INC";
+      case SBC_immediate:
+        return "SBC";
+      case CPX_absolute:
+        return "CPX";
+      case SBC_absolute:
+        return "SBC";
+      case INC_absolute:
+        return "INC";
+      case BBS_relative_bit_branch_6:
+        return "BBS";
+      case BNE_relative:
+        return "BNE";
+      case SBC_zero_page_indirect_y:
+        return "SBC";
+      case SBC_zero_page_indirect:
+        return "SBC";
+      case SBC_zero_page_x:
+        return "SBC";
+      case INC_zero_page_x:
+        return "INC";
+      case SMB_zero_page_7:
+        return "SMB";
+      case SED_implied:
+        return "SED";
+      case SBC_absolute_y:
+        return "SBC";
+      case PLX_implied:
+        return "PLX";
+      case SBC_absolute_x:
+        return "SBC";
+      case INC_absolute_x:
+        return "INC";
+      case BBS_relative_bit_branch_7:
+        return "BBS";
+      case NOP_absolute:
+      case NOP_implied:
+      case (byte) 0xf4:
+      case (byte) 0x54:
+      case (byte) 0xd4:
+      case (byte) 0xc2:
+      case (byte) 0xe2:
+      case (byte) 0xdc:
+      case (byte) 0x02:
+      case (byte) 0x22:
+      case (byte) 0x62:
+      case (byte) 0x82:
+      case (byte) 0x42:
+      case (byte) 0x44:
+      case (byte) 0x03:
+      case (byte) 0x23:
+      case (byte) 0x53:
+      case (byte) 0x63:
+      case (byte) 0x83:
+      case (byte) 0xab:
+      case (byte) 0xb3:
+      case (byte) 0x0b:
+      case (byte) 0xeb:
+      case (byte) 0xf3:
+      case (byte) 0xfb:
+      case (byte) 0x13:
+      case (byte) 0x1b:
+      case (byte) 0x2b:
+      case (byte) 0x33:
+      case (byte) 0x3b:
+      case (byte) 0x43:
+      case (byte) 0x4b:
+      case (byte) 0x5b:
+      case (byte) 0x6b:
+      case (byte) 0x73:
+      case (byte) 0x7b:
+      case (byte) 0x8b:
+      case (byte) 0x93:
+      case (byte) 0x9b:
+      case (byte) 0xa3:
+      case (byte) 0xbb:
+      case (byte) 0xc3:
+      case (byte) 0xd3:
+      case (byte) 0xe3:
+      case (byte) 0xfc:
+        return "NOP";
+    }
+    return "";
   }
 
   private void clearOverflow()

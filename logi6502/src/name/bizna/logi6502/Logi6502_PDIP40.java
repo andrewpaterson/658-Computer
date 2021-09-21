@@ -216,7 +216,8 @@ public class Logi6502_PDIP40
     g.setFont(oldFont.deriveFont(9.0f));
     paintPorts(painter, portInfos, PINS_PER_SIDE);
     g.setFont(oldFont);
-    super.paintInstance(painter);
+
+    paintCommon(painter);
   }
 
   @Override

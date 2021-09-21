@@ -35,6 +35,29 @@ public abstract class Logi6502
     }
   }
 
+  protected void paintCommon(InstancePainter painter)
+  {
+    Graphics g = painter.getGraphics();
+    if (g instanceof Graphics2D)
+    {
+      Font oldFont = g.getFont();
+      g.setFont(oldFont.deriveFont(Font.BOLD));
+      Bounds bds = painter.getBounds();
+      Graphics2D g2 = (Graphics2D) g;
+      AffineTransform oldTransform = g2.getTransform();
+      AffineTransform newTransform = (AffineTransform) oldTransform.clone();
+      newTransform.translate(bds.getX() + bds.getWidth() / 2.0, bds.getY() + bds.getHeight() / 2.0);
+      if (bds.getWidth() < bds.getHeight())
+      {
+        newTransform.quadrantRotate(-1, 0, 0);
+      }
+      g2.setTransform(newTransform);
+      GraphicsUtil.drawCenteredText(g, "W65C02S", 0, 0);
+      g2.setTransform(oldTransform);
+      g.setFont(oldFont);
+    }
+  }
+
   protected abstract boolean isReset(InstanceState i);
 
   protected abstract boolean getPHI2(InstanceState i);
@@ -79,37 +102,18 @@ public abstract class Logi6502
   @Override
   public void propagate(InstanceState state)
   {
-    CoreState core = CoreState.get(state, this);
+    W65C02CoreState core = W65C02CoreState.get(state, this);
     core.tick(state, isReset(state), getPHI2(state));
   }
 
   @Override
   public void paintInstance(InstancePainter painter)
   {
-    Graphics g = painter.getGraphics();
-    if (g instanceof Graphics2D)
-    {
-      Font oldFont = g.getFont();
-      g.setFont(oldFont.deriveFont(Font.BOLD));
-      Bounds bds = painter.getBounds();
-      Graphics2D g2 = (Graphics2D) g;
-      AffineTransform oldTransform = g2.getTransform();
-      AffineTransform newTransform = (AffineTransform) oldTransform.clone();
-      newTransform.translate(bds.getX() + bds.getWidth() / 2.0, bds.getY() + bds.getHeight() / 2.0);
-      if (bds.getWidth() < bds.getHeight())
-      {
-        newTransform.quadrantRotate(-1, 0, 0);
-      }
-      g2.setTransform(newTransform);
-      GraphicsUtil.drawCenteredText(g, "W65C02S", 0, 0);
-      g2.setTransform(oldTransform);
-      g.setFont(oldFont);
-    }
   }
 
   protected void shred(InstanceState state)
   {
-    CoreState core = CoreState.get(state, this);
+    W65C02CoreState core = W65C02CoreState.get(state, this);
     core.shred();
   }
 

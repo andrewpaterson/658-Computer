@@ -6,6 +6,10 @@ import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import com.cburch.logisim.util.GraphicsUtil;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class Logi6502Simple
     extends Logi6502
@@ -44,11 +48,6 @@ public class Logi6502Simple
   public static final int PORT_SYNC = 8;
   public static final int NUM_PINS = 10;
 
-  static
-  {
-    assert (PINS_PER_SIDE * 2 == NUM_PINS);
-  }
-
   public Logi6502Simple()
   {
     super("W65C02S (Simple)");
@@ -77,7 +76,8 @@ public class Logi6502Simple
         ++n;
       }
     }
-    super.paintInstance(painter);
+
+    paintCommon(painter);
   }
 
   @Override

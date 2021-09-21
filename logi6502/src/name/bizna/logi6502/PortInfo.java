@@ -2,8 +2,10 @@ package name.bizna.logi6502;
 
 public class PortInfo
 {
-  public final String name, type, exclusive;
-  public final int bitWidth;
+  protected String name;
+  protected String type;
+  protected String exclusive;
+  protected int bitWidth;
 
   private PortInfo(String name, String type, String exclusive, int bitWidth)
   {

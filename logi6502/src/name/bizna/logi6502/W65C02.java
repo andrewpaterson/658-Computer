@@ -5749,8 +5749,9 @@ public class W65C02
       {
         programCounter = dataLowByte();
         wantRead((short) (vectorToPull + 1));
-        vectorToPull = IRQ_VECTOR;
-        break;
+        throw new RuntimeException("break_");
+//        vectorToPull = IRQ_VECTOR;
+//        break;
       }
       case 6:
       {

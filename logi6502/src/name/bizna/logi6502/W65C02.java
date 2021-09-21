@@ -185,7 +185,7 @@ public class W65C02
         clearBit(2);
         break;
       case PLP_implied:
-        pullFromStack_implied();
+        pullProcessorStatusFromStack_implied();
         break;
       case AND_immediate:
         andAccumulator_immediate();
@@ -977,6 +977,8 @@ public class W65C02
         return "ROL";
       case RMB_zero_page_2:
         return "RMB";
+      case PLP_implied:
+        return "PLP";
       case AND_immediate:
         return "AND";
       case ROL_implied:
@@ -4879,7 +4881,7 @@ public class W65C02
     doneInstruction();
   }
 
-  private void pullFromStack_implied()
+  private void pullProcessorStatusFromStack_implied()
   {
     switch (cycle)
     {

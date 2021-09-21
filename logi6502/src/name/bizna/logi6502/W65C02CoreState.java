@@ -119,5 +119,20 @@ public class W65C02CoreState
   {
     return (processorStatus & statusBit) != 0;
   }
+
+  public boolean isAddressValid()
+  {
+    return intendedAddress == address;
+  }
+
+  public boolean isDataValid()
+  {
+    return intendedData == data;
+  }
+
+  public String getCycle()
+  {
+    return Byte.toString(cycle);
+  }
 }
 

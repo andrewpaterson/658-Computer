@@ -20,8 +20,8 @@ public class Logi6502Expert
   private static final int V_MARGIN = 10;
   private static final int LEFT_X = -120;
   private static final int RIGHT_X = 120;
-  private static final int TOP_Y = -120 - V_MARGIN;
-  private static final int BOT_Y = 120 + V_MARGIN;
+  private static final int TOP_Y = -130 - V_MARGIN;
+  private static final int BOT_Y = 130 + V_MARGIN;
   private static final int PIN_TOP_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / -2) - V_MARGIN;
   private static final int PIN_BOT_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / 2) + V_MARGIN;
   private static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN + PIXELS_PER_PIN / 2;
@@ -92,35 +92,44 @@ public class Logi6502Expert
 
       W65C02CoreState core = W65C02CoreState.get(painter, this);
       int topOffset = 30;
-      drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString());
-      drawInternal(g, topOffset + 20, 35, "Op-code:", core.getOpcodeValueHex());
-      drawInternal(g, topOffset + 40, 50, "Address:", core.getAddressValueHex());
-      drawInternal(g, topOffset + 60, 35, "Accumulator:", core.getAccumulatorValueHex());
-      drawInternal(g, topOffset + 80, 35, "X Index:", core.getXValueHex());
-      drawInternal(g, topOffset + 100, 35, "Y Index:", core.getYValueHex());
-      drawInternal(g, topOffset + 120, 35, "Stack", core.getStackValueHex());
-      drawInternal(g, topOffset + 140, 50, "P-Counter:", core.getProgramCounterValueHex());
-      drawInternal(g, topOffset + 160, 35, "Data", core.getDataValueHex());
+      drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString(), true);
+      drawInternal(g, topOffset + 20, 35, "Op-code:", core.getOpcodeValueHex(), true);
+      drawInternal(g, topOffset + 40, 35, "Cycle:", core.getCycle(), true);
+      drawInternal(g, topOffset + 60, 50, "Address:", core.getAddressValueHex(), core.isAddressValid());
+      drawInternal(g, topOffset + 80, 35, "Accumulator:", core.getAccumulatorValueHex(), true);
+      drawInternal(g, topOffset + 100, 35, "X Index:", core.getXValueHex(), true);
+      drawInternal(g, topOffset + 120, 35, "Y Index:", core.getYValueHex(), true);
+      drawInternal(g, topOffset + 140, 35, "Stack", core.getStackValueHex(), true);
+      drawInternal(g, topOffset + 160, 50, "P-Counter:", core.getProgramCounterValueHex(), true);
+      drawInternal(g, topOffset + 180, 35, "Data", core.getDataValueHex(), core.isDataValid());
 
-      drawProcessorStatus(g, topOffset + 185, -60, "C", core.isProcessorStatus(P_C_BIT));
-      drawProcessorStatus(g, topOffset + 185, -40, "Z", core.isProcessorStatus(P_Z_BIT));
-      drawProcessorStatus(g, topOffset + 185, -20, "I", core.isProcessorStatus(P_I_BIT));
-      drawProcessorStatus(g, topOffset + 185, 0, "D", core.isProcessorStatus(P_D_BIT));
-      drawProcessorStatus(g, topOffset + 185, 20, "B", core.isProcessorStatus(P_B_BIT));
-      drawProcessorStatus(g, topOffset + 185, 40, "V", core.isProcessorStatus(P_V_BIT));
-      drawProcessorStatus(g, topOffset + 185, 60, "N", core.isProcessorStatus(P_N_BIT));
+      int processorStatusTopOffset = topOffset + 205;
+      drawProcessorStatus(g, processorStatusTopOffset, -60, "C", core.isProcessorStatus(P_C_BIT));
+      drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", core.isProcessorStatus(P_Z_BIT));
+      drawProcessorStatus(g, processorStatusTopOffset, -20, "I", core.isProcessorStatus(P_I_BIT));
+      drawProcessorStatus(g, processorStatusTopOffset, 0, "D", core.isProcessorStatus(P_D_BIT));
+      drawProcessorStatus(g, processorStatusTopOffset, 20, "B", core.isProcessorStatus(P_B_BIT));
+      drawProcessorStatus(g, processorStatusTopOffset, 40, "V", core.isProcessorStatus(P_V_BIT));
+      drawProcessorStatus(g, processorStatusTopOffset, 60, "N", core.isProcessorStatus(P_N_BIT));
 
       g2.setTransform(oldTransform);
       g.setFont(oldFont);
     }
   }
 
-  private void drawProcessorStatus(Graphics g, int topOffset, int horizontalPosition, String flag, boolean set)
+  private void drawProcessorStatus(Graphics g, int topOffset, int horizontalPosition, String flag, boolean black)
   {
     int top = TOP_Y + V_MARGIN + topOffset;
     g.drawRect(horizontalPosition - 7, top - 5, 15, 15);
+    Color oldColour = setColour(g, black);
+    GraphicsUtil.drawText(g, flag, horizontalPosition, top, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER);
+    g.setColor(oldColour);
+  }
+
+  private Color setColour(Graphics g, boolean black)
+  {
     Color oldColour = g.getColor();
-    if (set)
+    if (black)
     {
       g.setColor(Color.black);
     }
@@ -128,16 +137,17 @@ public class Logi6502Expert
     {
       g.setColor(Color.lightGray);
     }
-    GraphicsUtil.drawText(g, flag, horizontalPosition, top, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER);
-    g.setColor(oldColour);
+    return oldColour;
   }
 
-  private void drawInternal(Graphics g, int topOffset, int rectangleWidth, String label, String value)
+  private void drawInternal(Graphics g, int topOffset, int rectangleWidth, String label, String value, boolean black)
   {
     int opcodeMnemonicTop = TOP_Y + V_MARGIN + topOffset;
     g.drawRect(15, opcodeMnemonicTop - 5, rectangleWidth, 15);
     GraphicsUtil.drawText(g, label, 0, opcodeMnemonicTop, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
+    Color oldColour = setColour(g, black);
     GraphicsUtil.drawText(g, value, 20, opcodeMnemonicTop, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
+    g.setColor(oldColour);
   }
 
   @Override

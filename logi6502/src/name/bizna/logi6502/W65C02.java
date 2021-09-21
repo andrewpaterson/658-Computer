@@ -795,7 +795,7 @@ public class W65C02
       {
         if (!parent.isInterruptRequest(instanceState) && !(parent.isNonMaskableInterrupt(instanceState) && !previousNMI))
         {
-          --cycle;
+          cycle--;
         }
         break;
       }
@@ -6209,7 +6209,7 @@ public class W65C02
     wantingVectorPull = want;
   }
 
-  public void tick(InstanceState instanceState, boolean isResetting, boolean clockHigh)
+  public void tick(InstanceState instanceState, boolean isResetting, boolean clock)
   {
     if (isResetting)
     {
@@ -6225,80 +6225,112 @@ public class W65C02
     {
       return;
     }
+
     this.instanceState = instanceState;
-    if (!clockHigh && previousClock)
+    boolean clockFallingEdge = !clock && previousClock;
+    boolean clockRisingEdge = clock && !previousClock;
+
+    if (clockFallingEdge)
     {
-      // falling edge
-      boolean overflow = parent.isOverflow(instanceState);
-      if (overflow != previousOverflow)
-      {
-        if (overflow)
-        {
-          processorStatus |= P_V_BIT;
-        }
-        previousOverflow = overflow;
-      }
+      updateOverflow(instanceState);
+
       do
       {
         wantingSync = cycle < 0;
         if (cycle < 0)
         {
-          wantRead(programCounter);
-          programCounter++;
-          ++cycle;
+          doneInstructionUpdateAddress();
         }
         else if (cycle == 0)
         {
-          wantRead(programCounter);
-          programCounter++;
-          boolean nmi = parent.isNonMaskableInterrupt(instanceState);
-          if (nmi && !previousNMI)
-          {
-            vectorToPull = NMI_VECTOR;
-            programCounter -= 2;
-            fetchedOpcode = BRK;
-          }
-          else if (parent.isInterruptRequest(instanceState) && isInterrupt() == 0)
-          {
-            vectorToPull = IRQ_VECTOR;
-            programCounter -= 2;
-            fetchedOpcode = BRK;
-          }
-          else
-          {
-            fetchedOpcode = parent.getDataFromPort(instanceState);
-          }
-          previousNMI = nmi;
-          ++cycle;
+          fetchNextOpcodeOrInterrupt(instanceState);
         }
         else
         {
-          data = parent.getDataFromPort(instanceState);
-          doInstruction();
-          if (cycle >= 0)
-          {
-            ++cycle;
-          }
+          fetchData(instanceState);
         }
       }
       while (cycle < 0 && !stopped);
     }
-    else if (clockHigh && !previousClock)
+    else if (clockRisingEdge)
     {
-      // rising edge, apply outputs
-      if (intendedRWB)
-      {
-        parent.doRead(instanceState, intendedAddress);
-      }
-      else
-      {
-        parent.doWrite(instanceState, intendedAddress, intendedData);
-      }
-      parent.setSync(instanceState, wantingSync);
-      parent.setVPB(instanceState, wantingVectorPull);
+      applyOutputs(instanceState);
     }
+
     this.instanceState = null;
-    previousClock = clockHigh;
+    this.previousClock = clock;
+  }
+
+  private void updateOverflow(InstanceState instanceState)
+  {
+    boolean overflow = parent.isOverflow(instanceState);
+    if (overflow != previousOverflow)
+    {
+      if (overflow)
+      {
+        processorStatus |= P_V_BIT;
+      }
+      previousOverflow = overflow;
+    }
+  }
+
+  private void doneInstructionUpdateAddress()
+  {
+    wantRead(programCounter);
+    programCounter++;
+    cycle++;
+  }
+
+  private void fetchData(InstanceState instanceState)
+  {
+    data = parent.getDataFromPort(instanceState);
+    doInstruction();
+    if (cycle >= 0)
+    {
+      cycle++;
+    }
+  }
+
+  private void fetchNextOpcodeOrInterrupt(InstanceState instanceState)
+  {
+    wantRead(programCounter);
+    programCounter++;
+
+    boolean nmi = parent.isNonMaskableInterrupt(instanceState);
+    if (nmi && !previousNMI)
+    {
+      throw new RuntimeException("nmi && !previousNMI");
+//            vectorToPull = NMI_VECTOR;
+//            programCounter -= 2;
+//            fetchedOpcode = BRK;
+    }
+    else if (parent.isInterruptRequest(instanceState) && isInterrupt() == 0)
+    {
+      throw new RuntimeException("parent.isInterruptRequest(instanceState) && isInterrupt() == 0");
+//            vectorToPull = IRQ_VECTOR;
+//            programCounter -= 2;
+//            fetchedOpcode = BRK;
+    }
+    else
+    {
+      fetchedOpcode = parent.getDataFromPort(instanceState);
+    }
+    previousNMI = nmi;
+    cycle++;
+  }
+
+  private void applyOutputs(InstanceState instanceState)
+  {
+    if (intendedRWB)
+    {
+      parent.doRead(instanceState, intendedAddress);
+    }
+    else
+    {
+      parent.doWrite(instanceState, intendedAddress, intendedData);
+    }
+    parent.setSync(instanceState, wantingSync);
+    parent.setVPB(instanceState, wantingVectorPull);
   }
 
   private int isInterrupt()

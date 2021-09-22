@@ -16,4 +16,23 @@ public class OpCode_WAI
   {
 
   }
+
+  void Cpu65816::executeMisc(OpCode &opCode)
+{
+  switch (opCode.getCode()) {
+    case(0xCB):     // WAI
+    {
+      setRDYPin(false);
+
+      addToProgramAddress(1);
+      addToCycles(3);
+      break;
+    }
+    default:
+    {
+      LOG_UNEXPECTED_OPCODE(opCode);
+    }
+  }
+}
+
 }

@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_BRK
-    extends OpCode
+    extends OpCodeInterrupt
 {
   public OpCode_BRK(String mName, byte mCode, AddressingMode mAddressingMode)
   {

@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_SEC
-    extends OpCode
+    extends OpCodeStatus
 {
   public OpCode_SEC(String mName, byte mCode, AddressingMode mAddressingMode)
   {

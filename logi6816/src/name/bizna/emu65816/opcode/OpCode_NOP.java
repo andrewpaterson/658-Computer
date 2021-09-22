@@ -16,4 +16,21 @@ public class OpCode_NOP
   {
 
   }
+
+  void Cpu65816::executeMisc(OpCode &opCode)
+{
+  switch (opCode.getCode()) {
+    case(0xEA):     // NOP
+    {
+      addToProgramAddress(1);
+      addToCycles(2);
+      break;
+    }
+    default:
+    {
+      LOG_UNEXPECTED_OPCODE(opCode);
+    }
+  }
+}
+
 }

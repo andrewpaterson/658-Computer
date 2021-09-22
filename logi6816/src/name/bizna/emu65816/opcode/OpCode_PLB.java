@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_PLB
-    extends OpCode
+    extends OpCodeStack
 {
   public OpCode_PLB(String mName, byte mCode, AddressingMode mAddressingMode)
   {

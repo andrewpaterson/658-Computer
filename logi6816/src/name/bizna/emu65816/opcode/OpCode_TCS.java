@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_TCS
-    extends OpCode
+    extends OpCodeTransfer
 {
   public OpCode_TCS(String mName, byte mCode, AddressingMode mAddressingMode)
   {

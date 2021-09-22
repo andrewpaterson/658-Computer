@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_PER
-    extends OpCode
+    extends OpCodeStack
 {
   public OpCode_PER(String mName, byte mCode, AddressingMode mAddressingMode)
   {

@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_JSR
-    extends OpCode
+    extends OpCodeJumpReturn
 {
   public OpCode_JSR(String mName, byte mCode, AddressingMode mAddressingMode)
   {

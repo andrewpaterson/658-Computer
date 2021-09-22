@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_INX
-    extends OpCode
+    extends OpCodeIncDec
 {
   public OpCode_INX(String mName, byte mCode, AddressingMode mAddressingMode)
   {

@@ -16,4 +16,21 @@ public class OpCode_WDM
   {
 
   }
+
+  void Cpu65816::executeMisc(OpCode &opCode)
+{
+  switch (opCode.getCode()) {
+   case(0x42):     // WDM
+    {
+      addToProgramAddress(2);
+      addToCycles(2);
+      break;
+    }
+    default:
+    {
+      LOG_UNEXPECTED_OPCODE(opCode);
+    }
+  }
+}
+
 }

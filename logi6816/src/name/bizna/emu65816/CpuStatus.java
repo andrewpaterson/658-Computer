@@ -24,11 +24,11 @@ public class CpuStatus
   boolean mAccumulatorWidthFlag;
   boolean mIndexWidthFlag;
   boolean mCarryFlag;
-  boolean mEmulationFlag = true; // CPU Starts in emulation mode
+  boolean mEmulationFlag;
   boolean mOverflowFlag;
   boolean mBreakFlag;
 
-  CpuStatus()
+  public CpuStatus()
   {
     mZeroFlag = false;
     mSignFlag = false;
@@ -42,152 +42,152 @@ public class CpuStatus
     mBreakFlag = false;
   }
 
-  void setZeroFlag()
+  public void setZeroFlag()
   {
     mZeroFlag = true;
   }
 
-  void setSignFlag()
+  public void setSignFlag()
   {
     mSignFlag = true;
   }
 
-  void setDecimalFlag()
+  public void setDecimalFlag()
   {
     mDecimalFlag = true;
   }
 
-  void setInterruptDisableFlag()
+  public void setInterruptDisableFlag()
   {
     mInterruptDisableFlag = true;
   }
 
-  void setAccumulatorWidthFlag()
+  public void setAccumulatorWidthFlag()
   {
     mAccumulatorWidthFlag = true;
   }
 
-  void setIndexWidthFlag()
+  public void setIndexWidthFlag()
   {
     mIndexWidthFlag = true;
   }
 
-  void setCarryFlag(boolean carryFlag)
+  public void setCarryFlag(boolean carryFlag)
   {
     mCarryFlag = carryFlag;
   }
 
-  void setEmulationFlag()
+  public void setEmulationFlag()
   {
     mEmulationFlag = true;
   }
 
-  void clearZeroFlag()
+  public void clearZeroFlag()
   {
     mZeroFlag = false;
   }
 
-  void clearSignFlag()
+  public void clearSignFlag()
   {
     mSignFlag = false;
   }
 
-  void clearDecimalFlag()
+  public void clearDecimalFlag()
   {
     mDecimalFlag = false;
   }
 
-  void clearInterruptDisableFlag()
+  public void clearInterruptDisableFlag()
   {
     mInterruptDisableFlag = false;
   }
 
-  void clearAccumulatorWidthFlag()
+  public void clearAccumulatorWidthFlag()
   {
     mAccumulatorWidthFlag = false;
   }
 
-  void clearIndexWidthFlag()
+  public void clearIndexWidthFlag()
   {
     mIndexWidthFlag = false;
   }
 
-  void clearEmulationFlag()
+  public void clearEmulationFlag()
   {
     mEmulationFlag = false;
   }
 
-  boolean zeroFlag()
+  public boolean zeroFlag()
   {
     return mZeroFlag;
   }
 
-  boolean signFlag()
+  public boolean signFlag()
   {
     return mSignFlag;
   }
 
-  boolean decimalFlag()
+  public boolean decimalFlag()
   {
     return mDecimalFlag;
   }
 
-  boolean interruptDisableFlag()
+  public boolean interruptDisableFlag()
   {
     return mInterruptDisableFlag;
   }
 
-  boolean accumulatorWidthFlag()
+  public boolean accumulatorWidthFlag()
   {
     return mAccumulatorWidthFlag;
   }
 
-  boolean indexWidthFlag()
+  public boolean indexWidthFlag()
   {
     return mIndexWidthFlag;
   }
 
-  boolean carryFlag()
+  public boolean carryFlag()
   {
     return mCarryFlag;
   }
 
-  boolean emulationFlag()
+  public boolean emulationFlag()
   {
     return mEmulationFlag;
   }
 
-  void setBreakFlag()
+  public void setBreakFlag()
   {
     mBreakFlag = true;
   }
 
-  void clearBreakFlag()
+  public void clearBreakFlag()
   {
     mBreakFlag = false;
   }
 
-  boolean breakFlag()
+  public boolean breakFlag()
   {
     return mBreakFlag;
   }
 
-  void setOverflowFlag()
+  public void setOverflowFlag()
   {
     mOverflowFlag = true;
   }
 
-  void clearOverflowFlag()
+  public void clearOverflowFlag()
   {
     mOverflowFlag = false;
   }
 
-  boolean overflowFlag()
+  public boolean overflowFlag()
   {
     return mOverflowFlag;
   }
 
-  byte getRegisterValue()
+  public byte getRegisterValue()
   {
     byte value = 0;
     if (carryFlag())
@@ -230,7 +230,7 @@ public class CpuStatus
     return value;
   }
 
-  void setRegisterValue(byte value)
+  public void setRegisterValue(byte value)
   {
     setCarryFlag((value & STATUS_CARRY) != 0);
 
@@ -312,38 +312,61 @@ public class CpuStatus
     }
   }
 
-  void updateZeroFlagFrom8BitValue(byte value)
+  public void updateZeroFlagFrom8BitValue(byte value)
   {
-    if (Binary.is8bitValueZero (value))
+    if (Binary.is8bitValueZero(value))
+    {
       setZeroFlag();
-    else clearZeroFlag();
+    }
+    else
+    {
+      clearZeroFlag();
+    }
   }
 
-  void updateZeroFlagFrom16BitValue(short value)
+  public void updateZeroFlagFrom16BitValue(short value)
   {
-    if (Binary.is16bitValueZero (value))setZeroFlag();
-    else clearZeroFlag();
+    if (Binary.is16bitValueZero(value))
+    {
+      setZeroFlag();
+    }
+    else
+    {
+      clearZeroFlag();
+    }
   }
 
-  void updateSignFlagFrom8BitValue(byte value)
+  public void updateSignFlagFrom8BitValue(byte value)
   {
-    if (Binary.is8bitValueNegative (value))setSignFlag();
-    else clearSignFlag();
+    if (Binary.is8bitValueNegative(value))
+    {
+      setSignFlag();
+    }
+    else
+    {
+      clearSignFlag();
+    }
   }
 
-  void updateSignFlagFrom16BitValue(short value)
+  public void updateSignFlagFrom16BitValue(short value)
   {
-    if (Binary.is16bitValueNegative (value))setSignFlag();
-    else clearSignFlag();
+    if (Binary.is16bitValueNegative(value))
+    {
+      setSignFlag();
+    }
+    else
+    {
+      clearSignFlag();
+    }
   }
 
-  void updateSignAndZeroFlagFrom8BitValue(byte value)
+  public void updateSignAndZeroFlagFrom8BitValue(byte value)
   {
     updateSignFlagFrom8BitValue(value);
     updateZeroFlagFrom8BitValue(value);
   }
 
-  void updateSignAndZeroFlagFrom16BitValue(short value)
+  public void updateSignAndZeroFlagFrom16BitValue(short value)
   {
     updateSignFlagFrom16BitValue(value);
     updateZeroFlagFrom16BitValue(value);

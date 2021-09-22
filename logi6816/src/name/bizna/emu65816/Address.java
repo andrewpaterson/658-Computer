@@ -15,6 +15,12 @@ public class Address
     mOffset = 0x0000;
   }
 
+  public Address(short mOffset)
+  {
+    mBank = 0x00;
+    this.mOffset = mOffset;
+  }
+
   public Address(byte mBank, short mOffset)
   {
     this.mBank = mBank;
@@ -31,7 +37,7 @@ public class Address
     return mOffset;
   }
 
-  Address sumOffsetToAddressNoWrapAround(Address address, short offset)
+  public static Address sumOffsetToAddressNoWrapAround(Address address, short offset)
   {
     byte newBank = address.getBank();
     short newOffset;
@@ -48,36 +54,41 @@ public class Address
     return new Address(newBank, newOffset);
   }
 
-  Address sumOffsetToAddressWrapAround(Address address, short offset)
+  public static Address sumOffsetToAddressWrapAround(Address address, short offset)
   {
     return new Address(address.getBank(), (short) (address.getOffset() + offset));
   }
 
-  Address sumOffsetToAddress(Address address, short offset)
+  public static Address sumOffsetToAddress(Address address, short offset)
   {
     // This wraps around by default
     // TODO figure out when to wrap around and when not to
     return sumOffsetToAddressWrapAround(address, offset);
   }
 
-  boolean offsetsAreOnDifferentPages(short offsetFirst, short offsetSecond)
+  public static boolean offsetsAreOnDifferentPages(short offsetFirst, short offsetSecond)
   {
     int pageOfFirst = offsetFirst / PAGE_SIZE_BYTES;
     int pageOfSecond = offsetSecond / PAGE_SIZE_BYTES;
     return pageOfFirst != pageOfSecond;
   }
 
-  Address newWithOffset(short offset)
+  public Address newWithOffset(short offset)
   {
     return sumOffsetToAddress(this, offset);
   }
 
-  Address newWithOffsetNoWrapAround(short offset)
+  public Address newWithOffset1()
+  {
+    return sumOffsetToAddress(this, (short) 1);
+  }
+
+  public Address newWithOffsetNoWrapAround(short offset)
   {
     return sumOffsetToAddressNoWrapAround(this, offset);
   }
 
-  Address newWithOffsetWrapAround(short offset)
+  public Address newWithOffsetWrapAround(short offset)
   {
     return sumOffsetToAddressWrapAround(this, offset);
   }

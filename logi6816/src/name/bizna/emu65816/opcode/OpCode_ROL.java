@@ -5,6 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_ROL
@@ -18,7 +19,7 @@ public class OpCode_ROL
   void DO_ROL_8_BIT(Cpu65816 cpu, byte value)
   {
     boolean carryWasSet = cpu.getCpuStatus().carryFlag();
-    boolean carryWillBeSet = (value & 0x80) != 0;
+    boolean carryWillBeSet = is8bitValueNegative(value);
     value = (byte) (value << 1);
     if (carryWasSet)
     {

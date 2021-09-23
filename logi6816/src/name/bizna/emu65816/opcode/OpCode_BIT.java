@@ -5,6 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_BIT
@@ -79,28 +80,14 @@ public class OpCode_BIT
   protected void execute8BitBIT(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(addressOfOpCodeData);
-    boolean isHighestBitSet = (value & 0x80) != 0;
+    int value = cpu.readByte(addressOfOpCodeData);
+    boolean isHighestBitSet = is8bitValueNegative(value);
     boolean isNextToHighestBitSet = (value & 0x40) != 0;
 
     if (getAddressingMode() != AddressingMode.Immediate)
     {
-      if (isHighestBitSet)
-      {
-        cpu.getCpuStatus().setSignFlag();
-      }
-      else
-      {
-        cpu.getCpuStatus().clearSignFlag();
-      }
-      if (isNextToHighestBitSet)
-      {
-        cpu.getCpuStatus().setOverflowFlag();
-      }
-      else
-      {
-        cpu.getCpuStatus().clearOverflowFlag();
-      }
+      cpu.getCpuStatus().setSignFlag (isHighestBitSet);
+      cpu.getCpuStatus().setOverflowFlag (isNextToHighestBitSet);
     }
     cpu.getCpuStatus().updateZeroFlagFrom8BitValue((byte) (value & Binary.lower8BitsOf(cpu.getA())));
   }
@@ -108,28 +95,14 @@ public class OpCode_BIT
   protected void execute16BitBIT(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(addressOfOpCodeData);
+    int value = cpu.readTwoBytes(addressOfOpCodeData);
     boolean isHighestBitSet = (value & 0x8000) != 0;
     boolean isNextToHighestBitSet = (value & 0x4000) != 0;
 
     if (getAddressingMode() != AddressingMode.Immediate)
     {
-      if (isHighestBitSet)
-      {
-        cpu.getCpuStatus().setSignFlag();
-      }
-      else
-      {
-        cpu.getCpuStatus().clearSignFlag();
-      }
-      if (isNextToHighestBitSet)
-      {
-        cpu.getCpuStatus().setOverflowFlag();
-      }
-      else
-      {
-        cpu.getCpuStatus().clearOverflowFlag();
-      }
+      cpu.getCpuStatus().setSignFlag (isHighestBitSet);
+      cpu.getCpuStatus().setOverflowFlag (isNextToHighestBitSet);
     }
     cpu.getCpuStatus().updateZeroFlagFrom16BitValue((short) (value & cpu.getA()));
   }

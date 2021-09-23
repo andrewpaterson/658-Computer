@@ -5,6 +5,11 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Binary.is8bitValueNegative;
+import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class OpCode_ASL
     extends OpCode
 {
@@ -13,10 +18,10 @@ public class OpCode_ASL
     super(mName, mCode, mAddressingMode);
   }
 
-  void DO_ASL_8_BIT(Cpu65816 cpu, byte value)
+  void DO_ASL_8_BIT(Cpu65816 cpu, int value)
   {
-    boolean newCarry = (value & 0x80) != 0;
-    value = (byte) (value << 1);
+    boolean newCarry = is8bitValueNegative(value);
+    value = toByte(value << 1);
     cpu.getCpuStatus().setCarryFlag(newCarry);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
@@ -33,18 +38,18 @@ public class OpCode_ASL
 
     if (cpu.accumulatorIs8BitWide())
     {
-      byte value = cpu.readByte(opCodeDataAddress);
-      boolean newCarry = (value & 0x80) != 0;
-      value = (byte) (value << 1);
+      int value = cpu.readByte(opCodeDataAddress);
+      boolean newCarry = is8bitValueNegative(value);
+      value = toByte(value << 1);
       cpu.getCpuStatus().setCarryFlag(newCarry);
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      short value = cpu.readTwoBytes(opCodeDataAddress);
+      int value = cpu.readTwoBytes(opCodeDataAddress);
       boolean newCarry = (value & 0x8000) != 0;
-      value = (short) (value << 1);
+      value = toShort(value << 1);
       cpu.getCpuStatus().setCarryFlag(newCarry);
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
@@ -55,14 +60,14 @@ public class OpCode_ASL
   {
     if (cpu.accumulatorIs8BitWide())
     {
-      byte value = Binary.lower8BitsOf(cpu.getA());
+      int value = Binary.lower8BitsOf(cpu.getA());
       DO_ASL_8_BIT(cpu, value);
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     }
     else
     {
       boolean newCarry = (cpu.getA() & 0x8000) != 0;
-      cpu.setA((short) (cpu.getA() << 1));
+      cpu.setA(toShort(cpu.getA() << 1));
       cpu.getCpuStatus().setCarryFlag(newCarry);
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     }
@@ -73,13 +78,13 @@ public class OpCode_ASL
   {
     switch (getCode())
     {
-      case (0x0A):                // ASL Accumulator
+      case ASL_Accumulator:                // ASL Accumulator
       {
         executeAccumulatorASL(cpu);
         cpu.addToProgramAddressAndCycles(1, 2);
         break;
       }
-      case (0x0E):                // ASL Absolute
+      case ASL_Absolute:                // ASL Absolute
       {
         if (cpu.accumulatorIs16BitWide())
         {
@@ -90,7 +95,7 @@ public class OpCode_ASL
         cpu.addToProgramAddressAndCycles(3, 6);
         break;
       }
-      case (0x06):                // ASL Direct Page
+      case ASL_DirectPage:                // ASL Direct Page
       {
         if (cpu.accumulatorIs16BitWide())
         {
@@ -105,7 +110,7 @@ public class OpCode_ASL
         cpu.addToProgramAddressAndCycles(2, 5);
         break;
       }
-      case (0x1E):                // ASL Absolute Indexed, X
+      case ASL_AbsoluteIndexedWithX:                // ASL Absolute Indexed, X
       {
         if (cpu.accumulatorIs16BitWide())
         {
@@ -116,7 +121,7 @@ public class OpCode_ASL
         cpu.addToProgramAddressAndCycles(3, 7);
         break;
       }
-      case (0x16):                // ASL Direct Page Indexed, X
+      case ASL_DirectPageIndexedWithX:                // ASL Direct Page Indexed, X
       {
         if (cpu.accumulatorIs16BitWide())
         {
@@ -136,3 +141,4 @@ public class OpCode_ASL
     }
   }
 }
+

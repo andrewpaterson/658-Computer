@@ -3,6 +3,7 @@ package name.bizna.emu65816;
 import name.bizna.emu65816.opcode.OpCode;
 
 import static name.bizna.emu65816.Address.sumOffsetToAddress;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class Cpu65816
 {
@@ -10,28 +11,26 @@ public class Cpu65816
   protected EmulationModeInterrupts mEmulationInterrupts;
   protected NativeModeInterrupts mNativeInterrupts;
 
-  // Accumulator register
-  protected short mA = 0;
-  // X index register
-  protected short mX = 0;
-  // Y index register
-  protected short mY = 0;
   // Status register
   protected CpuStatus mCpuStatus;
-  // Data bank register
-  protected byte mDB = 0;
-  // Direct page register
-  protected short mD = 0;
-
   protected Pins mPins;
-
   protected Stack mStack;
 
+  // Accumulator register (short)
+  protected int mA;
+  // X index register (short)
+  protected int mX;
+  // Y index register (short)
+  protected int mY;
+  // Data bank register (short)
+  protected int mDB;
+  // Direct page register (short)
+  protected int mD;
   // Address of the current OpCode
   protected Address mProgramAddress;
 
   // Total number of cycles
-  long mTotalCyclesCounter = 0;
+  long mTotalCyclesCounter;
 
   // OpCode Table.
   static OpCode[] OP_CODE_TABLE;
@@ -41,9 +40,17 @@ public class Cpu65816
     mSystemBus = systemBus;
     mEmulationInterrupts = emulationInterrupts;
     mNativeInterrupts = nativeInterrupts;
-    mProgramAddress = new Address((short) 0x0000);
+    mProgramAddress = new Address(0x0000);
     mStack = new Stack(mSystemBus);
     OP_CODE_TABLE = OpCodeTable.createTable();
+    mPins = new Pins();
+    mTotalCyclesCounter = 0;
+    mA = 0;
+    mX = 0;
+    mY = 0;
+    mDB = 0;
+    mD = 0;
+    mCpuStatus = new CpuStatus();
   }
 
   public void setRESPin(boolean value)
@@ -70,59 +77,49 @@ public class Cpu65816
     mPins.ABORT = value;
   }
 
-  public void setXL(byte x)
+  public void setX(int x)
   {
     mX = x;
   }
 
-  public void setYL(byte y)
+  public void setY(int y)
   {
     mY = y;
   }
 
-  public void setX(short x)
-  {
-    mX = x;
-  }
-
-  public void setY(short y)
-  {
-    mY = y;
-  }
-
-  public void setA(short a)
+  public void setA(int a)
   {
     mA = a;
   }
 
-  public short getA()
+  public int getA()
   {
     return mA;
   }
 
-  public short getX()
+  public int getX()
   {
     return mX;
   }
 
-  public short getY()
+  public int getY()
   {
     return mY;
   }
 
-  public byte getDB()
+  public int getDB()
   {
     return mDB;
   }
 
-  public void setDB(byte mDB)
+  public void setDB(int mDB)
   {
-    this.mDB = mDB;
+    this.mDB = toShort(mDB);
   }
 
-  public void setD(short mD)
+  public void setD(int mD)
   {
-    this.mD = mD;
+    this.mD = toShort(mD);
   }
 
   public Address getProgramAddress()
@@ -146,9 +143,9 @@ public class Cpu65816
   public void reset()
   {
     setRESPin(true);
-    mCpuStatus.setEmulationFlag();
-    mCpuStatus.setAccumulatorWidthFlag();
-    mCpuStatus.setIndexWidthFlag();
+    mCpuStatus.setEmulationFlag(true);
+    mCpuStatus.setAccumulatorWidthFlag(true);
+    mCpuStatus.setIndexWidthFlag(true);
     mX &= 0xFF;
     mY &= 0xFF;
     mD = 0x0;
@@ -162,11 +159,11 @@ public class Cpu65816
     mPins.RDY = value;
   }
 
-  public boolean executeNextInstruction()
+  public void executeNextInstruction()
   {
     if (mPins.RES)
     {
-      return false;
+      return;
     }
     if ((mPins.IRQ) && (!mCpuStatus.interruptDisableFlag()))
     {
@@ -184,24 +181,23 @@ public class Cpu65816
         mStack.push8Bit(mProgramAddress.getBank());
         mStack.push16Bit(mProgramAddress.getOffset());
         mStack.push8Bit(mCpuStatus.getRegisterValue());
-        mCpuStatus.setInterruptDisableFlag();
+        mCpuStatus.setInterruptDisableFlag(true);
         mProgramAddress = new Address(mSystemBus.readTwoBytes(new Address(mNativeInterrupts.interruptRequest)));
       }
       else
       {
         mStack.push16Bit(mProgramAddress.getOffset());
         mStack.push8Bit(mCpuStatus.getRegisterValue());
-        mCpuStatus.setInterruptDisableFlag();
+        mCpuStatus.setInterruptDisableFlag(true);
         mProgramAddress = new Address(mSystemBus.readTwoBytes(new Address(mEmulationInterrupts.brkIrq)));
       }
     }
 
     // Fetch the instruction
-    byte instruction = mSystemBus.readByte(mProgramAddress);
+    int instruction = mSystemBus.readByte(mProgramAddress);
     OpCode opCode = OP_CODE_TABLE[instruction];
     // Execute it
     opCode.execute(this);
-    return true;
   }
 
   public boolean accumulatorIs8BitWide()
@@ -247,14 +243,9 @@ public class Cpu65816
     mTotalCyclesCounter += cycles;
   }
 
-  public void subtractFromCycles(int cycles)
-  {
-    mTotalCyclesCounter -= cycles;
-  }
-
   public void addToProgramAddress(int bytes)
   {
-    mProgramAddress.incrementOffsetBy((short) bytes);
+    mProgramAddress.incrementOffsetBy(bytes);
   }
 
   public void addToProgramAddressAndCycles(int bytes, int cycles)
@@ -263,12 +254,12 @@ public class Cpu65816
     addToProgramAddress(bytes);
   }
 
-  public short indexWithXRegister()
+  public int indexWithXRegister()
   {
-    return indexIs8BitWide() ? Binary.lower8BitsOf(mX) : mX;
+    return (indexIs8BitWide() ? Binary.lower8BitsOf(mX) : mX);
   }
 
-  public short indexWithYRegister()
+  public int indexWithYRegister()
   {
     return indexIs8BitWide() ? Binary.lower8BitsOf(mY) : mY;
   }
@@ -300,9 +291,9 @@ public class Cpu65816
       }
       case DirectPageIndirectIndexedWithY:
       {
-        short firstStageOffset = (short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        int firstStageOffset = toShort(mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
         Address firstStageAddress = new Address(firstStageOffset);
-        short secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
+        int secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
         Address thirdStageAddress = new Address(mDB, secondStageOffset);
         // TODO: figure out when to wrap around and when not to, it should not matter in this case
         // but it matters when fetching data
@@ -317,8 +308,8 @@ public class Cpu65816
 
   public Address getAddressOfOpCodeData(AddressingMode addressingMode)
   {
-    byte dataAddressBank;
-    short dataAddressOffset;
+    int dataAddressBank;
+    int dataAddressOffset;
 
     switch (addressingMode)
     {
@@ -419,32 +410,32 @@ public class Cpu65816
         }
         else
         {
-          dataAddressOffset = (short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+          dataAddressOffset = toShort(mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
         }
       }
       break;
       case DirectPageIndexedWithX:
       {
         dataAddressBank = 0x00;
-        dataAddressOffset = (short) (mD + indexWithXRegister() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        dataAddressOffset = toShort(mD + indexWithXRegister() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
       }
       break;
       case DirectPageIndexedWithY:
       {
         dataAddressBank = 0x00;
-        dataAddressOffset = (short) (mD + indexWithYRegister() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        dataAddressOffset = toShort(mD + indexWithYRegister() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
       }
       break;
       case DirectPageIndirect:
       {
-        Address firstStageAddress = new Address((short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        Address firstStageAddress = new Address((mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
         dataAddressBank = mDB;
         dataAddressOffset = mSystemBus.readTwoBytes(firstStageAddress);
       }
       break;
       case DirectPageIndirectLong:
       {
-        Address firstStageAddress = new Address((short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
         Address address = mSystemBus.readAddressAt(firstStageAddress);
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();
@@ -452,15 +443,15 @@ public class Cpu65816
       break;
       case DirectPageIndexedIndirectWithX:
       {
-        Address firstStageAddress = new Address((short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
+        Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
         dataAddressBank = mDB;
         dataAddressOffset = mSystemBus.readTwoBytes(firstStageAddress);
       }
       break;
       case DirectPageIndirectIndexedWithY:
       {
-        Address firstStageAddress = new Address((short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
-        short secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
+        Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        int secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
         Address thirdStageAddress = new Address(mDB, secondStageOffset);
         Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
         dataAddressBank = address.getBank();
@@ -469,7 +460,7 @@ public class Cpu65816
       break;
       case DirectPageIndirectLongIndexedWithY:
       {
-        Address firstStageAddress = new Address((short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        Address firstStageAddress = new Address((mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
         Address secondStageAddress = mSystemBus.readAddressAt(firstStageAddress);
         Address address = Address.sumOffsetToAddressNoWrapAround(secondStageAddress, indexWithYRegister());
         dataAddressBank = address.getBank();
@@ -479,19 +470,19 @@ public class Cpu65816
       case StackRelative:
       {
         dataAddressBank = 0x00;
-        dataAddressOffset = (short) (mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        dataAddressOffset = toShort (mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
       }
       break;
       case StackDirectPageIndirect:
       {
         dataAddressBank = 0x00;
-        dataAddressOffset = (short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        dataAddressOffset = toShort (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
       }
       break;
       case StackRelativeIndirectIndexedWithY:
       {
-        Address firstStageAddress = new Address((short) (mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
-        short secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
+        Address firstStageAddress = new Address( (mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        int secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
         Address thirdStageAddress = new Address(mDB, secondStageOffset);
         Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
         dataAddressBank = address.getBank();
@@ -505,27 +496,27 @@ public class Cpu65816
     return new Address(dataAddressBank, dataAddressOffset);
   }
 
-  public byte readByte(Address address)
+  public int readByte(Address address)
   {
     return mSystemBus.readByte(address);
   }
 
-  public short readTwoBytes(Address address)
+  public int readTwoBytes(Address address)
   {
     return mSystemBus.readTwoBytes(address);
   }
 
-  public short getD()
+  public int getD()
   {
     return mD;
   }
 
-  public void storeTwoBytes(Address address, short value)
+  public void storeTwoBytes(Address address, int value)
   {
     mSystemBus.storeTwoBytes(address, value);
   }
 
-  public void storeByte(Address address, byte value)
+  public void storeByte(Address address, int value)
   {
     mSystemBus.storeByte(address, value);
   }
@@ -549,6 +540,7 @@ public class Cpu65816
   {
     mStack = new Stack(mSystemBus, address);
   }
+
   public void incA()
   {
     mA++;

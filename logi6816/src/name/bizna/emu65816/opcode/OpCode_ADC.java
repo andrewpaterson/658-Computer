@@ -2,6 +2,11 @@ package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.*;
 
+import static name.bizna.emu65816.Binary.is8bitValueNegative;
+import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class OpCode_ADC
     extends OpCode
 {
@@ -13,35 +18,28 @@ public class OpCode_ADC
   protected void execute8BitADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(dataAddress);
-    byte accumulator = Binary.lower8BitsOf(cpu.getA());
-    byte carryValue = (byte) (cpu.getCpuStatus().carryFlag() ? 1 : 0);
+    int value = cpu.readByte(dataAddress);
+    int accumulator = Binary.lower8BitsOf(cpu.getA());
+    int carryValue = (cpu.getCpuStatus().carryFlag() ? 1 : 0);
 
-    short result16Bit = (short) (accumulator + value + carryValue);
+    int result16Bit = toShort(accumulator + value + carryValue);
 
     // Is there a carry out of the penultimate bit, redo the sum with 7 bits value and find out.
     accumulator &= 0x7F;
     value &= 0x7F;
-    byte partialResult = (byte) (accumulator + value + carryValue);
+    int partialResult = toByte(accumulator + value + carryValue);
     // Is bit 8 set?
-    boolean carryOutOfPenultimateBit = (partialResult & 0x80) != 0;
+    boolean carryOutOfPenultimateBit = is8bitValueNegative(partialResult);
 
     // Is there a carry out of the last bit, check bit 8 for that
     boolean carryOutOfLastBit = (result16Bit & 0x0100) != 0;
 
     boolean overflow = carryOutOfLastBit ^ carryOutOfPenultimateBit;
-    if (overflow)
-    {
-      cpu.getCpuStatus().setOverflowFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearOverflowFlag();
-    }
+    cpu.getCpuStatus().setOverflowFlag(overflow);
 
     cpu.getCpuStatus().setCarryFlag(carryOutOfLastBit);
 
-    byte result8Bit = Binary.lower8BitsOf(result16Bit);
+    int result8Bit = Binary.lower8BitsOf(result16Bit);
     // Update sign and zero flags
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result8Bit);
     // Store the 8 bit result in the accumulator
@@ -51,16 +49,16 @@ public class OpCode_ADC
   protected void execute16BitADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(dataAddress);
-    short accumulator = cpu.getA();
-    short carryValue = (short) (cpu.getCpuStatus().carryFlag() ? 1 : 0);
+    int value = cpu.readTwoBytes(dataAddress);
+    int accumulator = cpu.getA();
+    int carryValue = (cpu.getCpuStatus().carryFlag() ? 1 : 0);
 
     int result32Bit = accumulator + value + carryValue;
 
     // Is there a carry out of the penultimate bit, redo the sum with 15 bits value and find out.
     accumulator &= 0x7FFF;
     value &= 0x7FFF;
-    short partialResult = (short) (accumulator + value + carryValue);
+    int partialResult = toShort(accumulator + value + carryValue);
     // Is bit 8 set?
     boolean carryOutOfPenultimateBit = (partialResult & 0x8000) != 0;
 
@@ -68,18 +66,11 @@ public class OpCode_ADC
     boolean carryOutOfLastBit = (result32Bit & 0x010000) != 0;
 
     boolean overflow = carryOutOfLastBit ^ carryOutOfPenultimateBit;
-    if (overflow)
-    {
-      cpu.getCpuStatus().setOverflowFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearOverflowFlag();
-    }
+    cpu.getCpuStatus().setOverflowFlag(overflow);
 
     cpu.getCpuStatus().setCarryFlag(carryOutOfLastBit);
 
-    byte result16Bit = (byte) Binary.lower16BitsOf(result32Bit);
+    int result16Bit = Binary.lower16BitsOf(result32Bit);
     // Update sign and zero flags
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result16Bit);
     // Store the 16 bit result in the accumulator
@@ -89,13 +80,12 @@ public class OpCode_ADC
   protected void execute8BitBCDADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(dataAddress);
-    byte accumulator = Binary.lower8BitsOf(cpu.getA());
+    int value = cpu.readByte(dataAddress);
+    int accumulator = Binary.lower8BitsOf(cpu.getA());
 
-    byte result = 0;
-    BCD8BitResult bcd8BitResult = Binary.bcdSum8Bit(value, accumulator, result, cpu.getCpuStatus().carryFlag());
+    BCDResult bcd8BitResult = Binary.bcdSum8Bit(value, accumulator, cpu.getCpuStatus().carryFlag());
     boolean carry = bcd8BitResult.carry;
-    result = bcd8BitResult.value;
+    int result = bcd8BitResult.value;
     cpu.getCpuStatus().setCarryFlag(carry);
 
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
@@ -105,17 +95,16 @@ public class OpCode_ADC
   protected void execute16BitBCDADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(dataAddress);
-    short accumulator = cpu.getA();
+    int value = cpu.readTwoBytes(dataAddress);
+    int accumulator = cpu.getA();
 
-    short result = 0;
-    BCD16BitResult bcd16BitResult = Binary.bcdSum16Bit(value, accumulator, result, cpu.getCpuStatus().carryFlag());
+    BCDResult bcd16BitResult = Binary.bcdSum16Bit(value, accumulator, cpu.getCpuStatus().carryFlag());
     boolean carry = bcd16BitResult.carry;
-    result = bcd16BitResult.value;
+    int result = bcd16BitResult.value;
     cpu.getCpuStatus().setCarryFlag(carry);
 
     cpu.setA(result);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue((byte) result);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
   }
 
   @Override
@@ -147,7 +136,7 @@ public class OpCode_ADC
 
     switch (getCode())
     {
-      case (0x69):                 // ADC Immediate
+      case ADC_Immediate:                 // ADC Immediate
       {
         if (cpu.accumulatorIs16BitWide())
         {
@@ -157,19 +146,19 @@ public class OpCode_ADC
         cpu.addToCycles(2);
         break;
       }
-      case (0x6D):                 // ADC Absolute
+      case ADC_Absolute:                 // ADC Absolute
       {
         cpu.addToProgramAddress(3);
         cpu.addToCycles(4);
         break;
       }
-      case (0x6F):                 // ADC Absolute Long
+      case ADC_AbsoluteLong:                 // ADC Absolute Long
       {
         cpu.addToProgramAddress(4);
         cpu.addToCycles(5);
         break;
       }
-      case (0x65):                 // ADC Direct Page
+      case ADC_DirectPage:                 // ADC Direct Page
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -180,7 +169,7 @@ public class OpCode_ADC
         cpu.addToCycles(3);
         break;
       }
-      case (0x72):                 // ADC Direct Page Indirect
+      case ADC_DirectPageIndirect:                 // ADC Direct Page Indirect
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -191,7 +180,7 @@ public class OpCode_ADC
         cpu.addToCycles(5);
         break;
       }
-      case (0x67):                 // ADC Direct Page Indirect Long
+      case ADC_DirectPageIndirectLong:                 // ADC Direct Page Indirect Long
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -202,7 +191,7 @@ public class OpCode_ADC
         cpu.addToCycles(6);
         break;
       }
-      case (0x7D):                 // ADC Absolute Indexed, X
+      case ADC_AbsoluteIndexedWithX:                 // ADC Absolute Indexed, X
       {
         if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
         {
@@ -213,7 +202,7 @@ public class OpCode_ADC
         cpu.addToCycles(4);
         break;
       }
-      case (0x7F):                 // ADC Absolute Long Indexed, X
+      case ADC_AbsoluteLongIndexedWithX:                 // ADC Absolute Long Indexed, X
       {
         cpu.addToProgramAddress(4);
         cpu.addToCycles(5);
@@ -229,7 +218,7 @@ public class OpCode_ADC
         cpu.addToCycles(4);
         break;
       }
-      case (0x75):                 // ADC Direct Page Indexed, X
+      case ADC_DirectPageIndexedWithX:                 // ADC Direct Page Indexed, X
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -239,7 +228,7 @@ public class OpCode_ADC
         cpu.addToCycles(4);
         break;
       }
-      case (0x61):                 // ADC Direct Page Indexed Indirect, X
+      case ADC_DirectPageIndexedIndirectWithX:                 // ADC Direct Page Indexed Indirect, X
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -249,7 +238,7 @@ public class OpCode_ADC
         cpu.addToCycles(6);
         break;
       }
-      case (0x71):                 // ADC Direct Page Indirect Indexed, Y
+      case ADC_DirectPageIndirectIndexedWithY:                 // ADC Direct Page Indirect Indexed, Y
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -263,7 +252,7 @@ public class OpCode_ADC
         cpu.addToCycles(5);
         break;
       }
-      case (0x77):                 // ADC Direct Page Indirect Long Indexed, Y
+      case ADC_DirectPageIndirectLongIndexedWithY:                 // ADC Direct Page Indirect Long Indexed, Y
       {
         if (Binary.lower8BitsOf(cpu.getD()) != 0)
         {
@@ -273,13 +262,13 @@ public class OpCode_ADC
         cpu.addToCycles(6);
         break;
       }
-      case (0x63):                 // ADC Stack Relative
+      case ADC_StackRelative:                 // ADC Stack Relative
       {
         cpu.addToProgramAddress(2);
         cpu.addToCycles(4);
         break;
       }
-      case (0x73):                 // ADC Stack Relative Indirect Indexed, Y
+      case ADC_StackRelativeIndirectIndexedWithY:                 // ADC Stack Relative Indirect Indexed, Y
       {
         cpu.addToProgramAddress(2);
         cpu.addToCycles(7);

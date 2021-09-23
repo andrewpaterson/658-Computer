@@ -4,6 +4,7 @@ import com.cburch.logisim.instance.InstanceState;
 
 import java.util.Random;
 
+import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.logi65816.W65C816Opcodes.*;
 
 public class W65C816
@@ -6105,7 +6106,7 @@ public class W65C816
   protected void updateZeroAndNegative(int result)
   {
     setZeroStatus((result & 0xFF) == 0);
-    setNegative((result & 0x80) != 0);
+    setNegative(is8bitValueNegative(result));
   }
 
   protected void updateCarry(int value)

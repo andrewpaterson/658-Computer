@@ -1,13 +1,15 @@
 package name.bizna.emu65816;
 
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class Address
 {
   public static final int BANK_SIZE_BYTES = 0x10000;
-  public static final int HALF_BANK_SIZE_BYTES = 0x8000;
   public static final int PAGE_SIZE_BYTES = 0x100;
 
-  protected byte mBank;
-  protected short mOffset;
+  protected int mBank;
+  protected int mOffset;
 
   public Address()
   {
@@ -15,92 +17,85 @@ public class Address
     mOffset = 0x0000;
   }
 
-  public Address(short mOffset)
+  public Address(int mOffset)
   {
     mBank = 0x00;
-    this.mOffset = mOffset;
+    this.mOffset = toShort(mOffset);
   }
 
-  public Address(byte mBank, short mOffset)
+  public Address(int mBank, int mOffset)
   {
-    this.mBank = mBank;
-    this.mOffset = mOffset;
+    this.mBank = toByte(mBank);
+    this.mOffset = toShort(mOffset);
   }
 
-  public byte getBank()
+  public int getBank()
   {
-    return mBank;
+    return toByte(mBank);
   }
 
-  public short getOffset()
+  public int getOffset()
   {
-    return mOffset;
+    return toShort(mOffset);
   }
 
-  public static Address sumOffsetToAddressNoWrapAround(Address address, short offset)
+  public static Address sumOffsetToAddressNoWrapAround(Address address, int offset)
   {
-    byte newBank = address.getBank();
-    short newOffset;
+    int newBank = address.getBank();
+    int newOffset;
     int offsetSum = address.getOffset() + offset;
     if (offsetSum >= BANK_SIZE_BYTES)
     {
-      ++newBank;
-      newOffset = (short) (offsetSum - BANK_SIZE_BYTES);
+      newBank++;
+      newBank = toByte(newBank);
+      newOffset = toShort((offsetSum - BANK_SIZE_BYTES));
     }
     else
     {
-      newOffset = (short) (address.getOffset() + offset);
+      newOffset = toShort(address.getOffset() + offset);
     }
     return new Address(newBank, newOffset);
   }
 
-  public static Address sumOffsetToAddressWrapAround(Address address, short offset)
+  public static Address sumOffsetToAddressWrapAround(Address address, int offset)
   {
-    return new Address(address.getBank(), (short) (address.getOffset() + offset));
+    return new Address(address.getBank(), toShort(address.getOffset() + offset));
   }
 
-  public static Address sumOffsetToAddress(Address address, short offset)
+  public static Address sumOffsetToAddress(Address address, int offset)
   {
     // This wraps around by default
     // TODO figure out when to wrap around and when not to
     return sumOffsetToAddressWrapAround(address, offset);
   }
 
-  public static boolean offsetsAreOnDifferentPages(short offsetFirst, short offsetSecond)
+  public static boolean offsetsAreOnDifferentPages(int offsetFirst, int offsetSecond)
   {
     int pageOfFirst = offsetFirst / PAGE_SIZE_BYTES;
     int pageOfSecond = offsetSecond / PAGE_SIZE_BYTES;
     return pageOfFirst != pageOfSecond;
   }
 
-  public Address newWithOffset(short offset)
-  {
-    return sumOffsetToAddress(this, offset);
-  }
-
   public Address newWithOffset1()
   {
-    return sumOffsetToAddress(this, (short) 1);
+    return sumOffsetToAddress(this, 1);
   }
 
-  public Address newWithOffsetNoWrapAround(short offset)
+  public Address newWithOffsetNoWrapAround(int offset)
   {
     return sumOffsetToAddressNoWrapAround(this, offset);
   }
 
-  public Address newWithOffsetWrapAround(short offset)
-  {
-    return sumOffsetToAddressWrapAround(this, offset);
-  }
-
-  public void decrementOffsetBy(short offset)
+  public void decrementOffsetBy(int offset)
   {
     mOffset -= offset;
+    mOffset = toShort(mOffset);
   }
 
-  public void incrementOffsetBy(short offset)
+  public void incrementOffsetBy(int offset)
   {
     mOffset += offset;
+    mOffset = toShort(mOffset);
   }
 }
 

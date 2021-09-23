@@ -2,7 +2,9 @@ package name.bizna.emu65816;
 
 import name.bizna.emu65816.opcode.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static name.bizna.emu65816.AddressingMode.*;
@@ -526,7 +528,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_INC("INC", INC_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_SBC("SBC", SBC_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
 
-    return (OpCode[]) opCodes.toArray();
+    return opCodes.toArray(new OpCode[0]);
   }
 
   public static void add(List<OpCode> opCodes, OpCode opCode)

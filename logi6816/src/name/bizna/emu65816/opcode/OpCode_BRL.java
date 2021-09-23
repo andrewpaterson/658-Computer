@@ -3,6 +3,8 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class OpCode_BRL
     extends OpCode
 {
@@ -21,8 +23,8 @@ public class OpCode_BRL
   {
     if (condition)
     {
-      short destination = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
-      cpu.getProgramAddress().incrementOffsetBy((short) (3 + destination));
+      int destination = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
+      cpu.getProgramAddress().incrementOffsetBy(toShort(3 + destination));
     }
     // CPU cycles: 4
     return 4;

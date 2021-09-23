@@ -6,6 +6,8 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_CMP
     extends OpCode
@@ -18,8 +20,8 @@ public class OpCode_CMP
   protected void execute8BitCMP(Cpu65816 cpu)
   {
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(valueAddress);
-    byte result = (byte) (Binary.lower8BitsOf(cpu.getA()) - value);
+    int value = cpu.readByte(valueAddress);
+    int result = toByte(Binary.lower8BitsOf(cpu.getA()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.lower8BitsOf(cpu.getA()) >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
@@ -28,8 +30,8 @@ public class OpCode_CMP
   protected void execute16BitCMP(Cpu65816 cpu)
   {
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(valueAddress);
-    short result = (short) (cpu.getA() - value);
+    int value = cpu.readTwoBytes(valueAddress);
+    int result = toShort (cpu.getA() - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getA() >= value;
     cpu.getCpuStatus().setCarryFlag(carry);

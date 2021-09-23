@@ -2,6 +2,7 @@ package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.*;
 
+import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_SBC
@@ -26,7 +27,7 @@ public class OpCode_SBC
     value &= 0x7F;
     byte partialResult = (byte) (accumulator - value - (borrow ? 1 : 0));
     // Is bit 8 set?
-    boolean borrowFromPenultimateBit = (partialResult & 0x80) != 0;
+    boolean borrowFromPenultimateBit = is8bitValueNegative(partialResult);
 
     // Is there a borrow from the last bit, check bit 8 for that
     boolean borrowFromLastBit = (result16Bit & 0x0100) != 0;
@@ -64,7 +65,7 @@ public class OpCode_SBC
     value &= 0x7FFF;
     short partialResult = (short) (accumulator - value - (borrow ? 1 : 0));
     // Is bit 15 set?
-    boolean borrowFromPenultimateBit = (partialResult & 0x80) != 0;
+    boolean borrowFromPenultimateBit = is8bitValueNegative(partialResult);
 
     // Is there a borrow from the last bit, check bit 16 for that
     boolean borrowFromLastBit = (result32Bit & 0x0100) != 0;
@@ -95,7 +96,7 @@ public class OpCode_SBC
     byte accumulator = Binary.lower8BitsOf(cpu.getA());
 
     byte result = 0;
-    BCD8BitResult bcd8BitResult = Binary.bcdSubtract8Bit(value, accumulator, result, !cpu.getCpuStatus().carryFlag());
+    BCDResult bcd8BitResult = Binary.bcdSubtract8Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
     boolean borrow = bcd8BitResult.carry;
     result = bcd8BitResult.value;
     cpu.getCpuStatus().setCarryFlag(!borrow);
@@ -111,7 +112,7 @@ public class OpCode_SBC
     short accumulator = cpu.getA();
 
     short result = 0;
-    BCD16BitResult bcd16BitResult = Binary.bcdSubtract16Bit(value, accumulator, result, !cpu.getCpuStatus().carryFlag());
+    BCDResult bcd16BitResult = Binary.bcdSubtract16Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
     boolean borrow = bcd16BitResult.carry;
     result = bcd16BitResult.value;
     cpu.getCpuStatus().setCarryFlag(!borrow);

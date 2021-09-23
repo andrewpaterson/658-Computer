@@ -1,11 +1,11 @@
 package name.bizna.emu65816;
 
-public class BCD16BitResult
+public class BCDResult
 {
-  public short value;
+  public int value;
   public boolean carry;
 
-  public BCD16BitResult(short value, boolean carry)
+  public BCDResult(int value, boolean carry)
   {
     this.value = value;
     this.carry = carry;

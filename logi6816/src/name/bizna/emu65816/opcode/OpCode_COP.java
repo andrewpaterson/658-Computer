@@ -4,6 +4,8 @@ import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class OpCode_COP
     extends OpCode
 {
@@ -17,20 +19,21 @@ public class OpCode_COP
   {
     if (cpu.getCpuStatus().emulationFlag())
     {
-      cpu.getStack().push16Bit((short) (cpu.getProgramAddress().getOffset() + 2));
+      cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
       cpu.getStack().push8Bit(cpu.getCpuStatus().getRegisterValue());
-      cpu.getCpuStatus().setInterruptDisableFlag();
+      cpu.getCpuStatus().setInterruptDisableFlag(true);
       cpu.setProgramAddress(new Address(cpu.getEmulationInterrupts().coProcessorEnable));
       cpu.addToCycles(7);
     }
     else
     {
       cpu.getStack().push8Bit(cpu.getProgramAddress().getBank());
-      cpu.getStack().push16Bit((short) (cpu.getProgramAddress().getOffset() + 2));
+      cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
       cpu.getStack().push8Bit(cpu.getCpuStatus().getRegisterValue());
-      cpu.getCpuStatus().setInterruptDisableFlag();
+      cpu.getCpuStatus().setInterruptDisableFlag(true);
       cpu.setProgramAddress(new Address(cpu.getNativeInterrupts().coProcessorEnable));
       cpu.addToCycles(8);
     }
   }
 }
+

@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_BRL
-    extends OpCodeBranch
+    extends OpCode
 {
   public OpCode_BRL(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -16,4 +16,16 @@ public class OpCode_BRL
   {
     cpu.addToCycles(executeBranchLongOnCondition(true, cpu));
   }
+
+  int executeBranchLongOnCondition(boolean condition, Cpu65816 cpu)
+  {
+    if (condition)
+    {
+      short destination = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
+      cpu.getProgramAddress().incrementOffsetBy((short) (3 + destination));
+    }
+    // CPU cycles: 4
+    return 4;
+  }
 }
+

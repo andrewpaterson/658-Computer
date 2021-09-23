@@ -3,8 +3,10 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.opcode.Branch.executeBranchShortOnCondition;
+
 public class OpCode_BMI
-    extends OpCodeBranch
+    extends OpCode
 {
   public OpCode_BMI(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +16,6 @@ public class OpCode_BMI
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.addToCycles(executeBranchShortOnCondition(cpu.getCpuStatus().signFlag(), cpu));
+    cpu.addToCycles(executeBranchShortOnCondition(cpu.getCpuStatus().signFlag(), cpu, getAddressingMode()));
   }
 }

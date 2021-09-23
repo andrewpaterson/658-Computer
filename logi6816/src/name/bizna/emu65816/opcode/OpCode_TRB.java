@@ -5,47 +5,15 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.OpCodeTable.TRB_Absolute;
+import static name.bizna.emu65816.OpCodeTable.TRB_DirectPage;
+
 public class OpCode_TRB
     extends OpCode
 {
   public OpCode_TRB(String mName, byte mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
-  }
-
-  protected void execute8BitTSB(Cpu65816 cpu)
-  {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(addressOfOpCodeData);
-    byte lowerA = Binary.lower8BitsOf(cpu.getA());
-    byte result = (byte) (value | lowerA);
-    cpu.storeByte(addressOfOpCodeData, result);
-
-    if ((value & lowerA) == 0)
-    {
-      cpu.getCpuStatus().setZeroFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearZeroFlag();
-    }
-  }
-
-  protected void execute16BitTSB(Cpu65816 cpu)
-  {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(addressOfOpCodeData);
-    short result = (short) (value | cpu.getA());
-    cpu.storeTwoBytes(addressOfOpCodeData, result);
-
-    if ((value & cpu.getA()) == 0)
-    {
-      cpu.getCpuStatus().setZeroFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearZeroFlag();
-    }
   }
 
   protected void execute8BitTRB(Cpu65816 cpu)
@@ -88,7 +56,7 @@ public class OpCode_TRB
   {
     switch (getCode())
     {
-      case (0x1C):                 // TRB Absolute
+      case TRB_Absolute:                 // TRB Absolute
       {
         if (cpu.accumulatorIs8BitWide())
         {
@@ -102,7 +70,7 @@ public class OpCode_TRB
         cpu.addToProgramAddressAndCycles(3, 6);
         break;
       }
-      case (0x14):                 // TRB Direct Page
+      case TRB_DirectPage:                 // TRB Direct Page
       {
         if (cpu.accumulatorIs8BitWide())
         {

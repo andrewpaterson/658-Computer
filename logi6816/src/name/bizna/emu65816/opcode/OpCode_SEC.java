@@ -18,3 +18,4 @@ public class OpCode_SEC
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
+

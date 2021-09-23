@@ -5,18 +5,12 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-public abstract class OpCodeBranch
-    extends OpCode
+public class Branch
 {
-  public OpCodeBranch(String mName, byte mCode, AddressingMode mAddressingMode)
-  {
-    super(mName, mCode, mAddressingMode);
-  }
-
-  int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu)
+  public static int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu, AddressingMode addressingMode)
   {
     byte opCycles = 2;
-    byte destination = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    byte destination = cpu.readByte(cpu.getAddressOfOpCodeData(addressingMode));
     // This is the address of the next instruction
     short actualDestination;
     if (condition)
@@ -47,17 +41,6 @@ public abstract class OpCodeBranch
     Address newProgramAddress = new Address(cpu.getProgramAddress().getBank(), actualDestination);
     cpu.setProgramAddress(newProgramAddress);
     return opCycles;
-  }
-
-  int executeBranchLongOnCondition(boolean condition, Cpu65816 cpu)
-  {
-    if (condition)
-    {
-      short destination = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
-      cpu.getProgramAddress().incrementOffsetBy((short) (3 + destination));
-    }
-    // CPU cycles: 4
-    return 4;
   }
 }
 

@@ -16,7 +16,6 @@ public class OpCode_PLX
   @Override
   public void execute(Cpu65816 cpu)
   {
-    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     if (cpu.indexIs8BitWide())
     {
       byte value = cpu.getStack().pull8Bit(cpu);

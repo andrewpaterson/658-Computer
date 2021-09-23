@@ -14,19 +14,8 @@ public class OpCode_WDM
   @Override
   public void execute(Cpu65816 cpu)
   {
+    cpu.addToProgramAddress(2);
+    cpu.addToCycles(2);
   }
-
-  protected void executeMisc(Cpu65816 cpu)
-{
-  switch (getCode()) {
-   case(0x42):     // WDM
-    {
-      cpu.addToProgramAddress(2);
-      cpu.addToCycles(2);
-      break;
-    }
-    default:
-throw new IllegalStateException("Unexpected value: " + getCode());  }
 }
 
-}

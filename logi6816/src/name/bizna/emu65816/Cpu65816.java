@@ -415,12 +415,10 @@ public class Cpu65816
         dataAddressBank = 0x00;
         if (mCpuStatus.emulationFlag())
         {
-          // 6502 uses zero page
           dataAddressOffset = mSystemBus.readByte(mProgramAddress.newWithOffset1());
         }
         else
         {
-          // 65816 uses direct page
           dataAddressOffset = (short) (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
         }
       }

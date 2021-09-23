@@ -18,3 +18,4 @@ public class OpCode_SEI
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
+

@@ -12,12 +12,7 @@ public class OpCode_SBC
     super(mName, mCode, mAddressingMode);
   }
 
-  @Override
-  public void execute(Cpu65816 cpu)
-  {
-  }
-
-  protected void execute8BitSBC(Cpu65816 cpu)
+  public void execute8BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     byte value = cpu.readByte(dataAddress);
@@ -125,7 +120,8 @@ public class OpCode_SBC
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue((byte) result);
   }
 
-  protected void executeSBC(Cpu65816 cpu)
+  @Override
+  public void execute(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs8BitWide())
     {

@@ -1,7 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_EOR
     extends OpCode
@@ -11,154 +15,161 @@ public class OpCode_EOR
     super(mName, mCode, mAddressingMode);
   }
 
+  protected void executeEOR8Bit(Cpu65816 cpu)
+  {
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    byte operand = cpu.readByte(opCodeDataAddress);
+    byte result = (byte) (Binary.lower8BitsOf(cpu.getA()) ^ operand);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
+    cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
+  }
+
+  protected void executeEOR16Bit(Cpu65816 cpu)
+  {
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    short operand = cpu.readTwoBytes(opCodeDataAddress);
+    short result = (short) (cpu.getA() ^ operand);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
+    cpu.setA(result);
+  }
+
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeEOR8Bit(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
-  uint8_t operand = mSystemBus.readByte(opCodeDataAddress);
-  uint8_t result = Binary::lower8BitsOf(mA) ^ operand;
-  mCpuStatus.updateSignAndZeroFlagFrom8BitValue(result);
-  Binary::setLower8BitsOf16BitsValue(&mA, result);
-}
-
-  void Cpu65816::executeEOR16Bit(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
-  uint16_t operand = mSystemBus.readTwoBytes(opCodeDataAddress);
-  uint16_t result = mA ^ operand;
-  mCpuStatus.updateSignAndZeroFlagFrom16BitValue(result);
-  mA = result;
-}
-
-  void Cpu65816::executeEOR(OpCode &opCode)
-{
-  if (accumulatorIs8BitWide())
-  {
-    executeEOR8Bit(opCode);
-  }
-  else
-  {
-    executeEOR16Bit(opCode);
-    addToCycles(1);
-  }
-
-  switch (opCode.getCode()) {
-    case (0x49):                // EOR Immediate
+    if (cpu.accumulatorIs8BitWide())
     {
-      if (accumulatorIs16BitWide()) {
-        addToProgramAddress(1);
+      executeEOR8Bit(cpu);
+    }
+    else
+    {
+      executeEOR16Bit(cpu);
+      cpu.addToCycles(1);
+    }
+
+    switch (getCode())
+    {
+      case EOR_Immediate:                // EOR Immediate
+      {
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToProgramAddress(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 2);
+        break;
       }
-      addToProgramAddressAndCycles(2, 2);
-      break;
-    }
-    case (0x4D):                // EOR Absolute
-    {
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case (0x4F):                // EOR Absolute Long
-    {
-      addToProgramAddressAndCycles(4, 5);
-      break;
-    }
-    case (0x45):                 // EOR Direct Page
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 3);
-      break;
-    }
-    case (0x52):                 // EOR Direct Page Indirect
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 5);
-      break;
-    }
-    case (0x47):                 // EOR Direct Page Indirect Long
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 6);
-      break;
-    }
-    case (0x5D):                 // EOR Absolute Indexed, X
-    {
-      if (opCodeAddressingCrossesPageBoundary(opCode)) {
-        addToCycles(1);
+      case EOR_Absolute:                // EOR Absolute
+      {
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
       }
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case (0x5F):                 // EOR Absolute Long Indexed, X
-    {
-      addToProgramAddressAndCycles(4, 5);
-      break;
-    }
-    case (0x59):                 // EOR Absolute Indexed, Y
-    {
-      if (opCodeAddressingCrossesPageBoundary(opCode)) {
-        addToCycles(1);
+      case EOR_AbsoluteLong:                // EOR Absolute Long
+      {
+        cpu.addToProgramAddressAndCycles(4, 5);
+        break;
       }
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case (0x55):                 // EOR Direct Page Indexed, X
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 4);
-      break;
-    }
-    case (0x41):                // EOR Direct Page Indexed Indirect, X
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 6);
-      break;
-    }
-    case (0x51):                 // EOR Direct Page Indirect Indexed, Y
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      if (opCodeAddressingCrossesPageBoundary(opCode)) {
-        addToCycles(1);
+      case EOR_DirectPage:                 // EOR Direct Page
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 3);
+        break;
       }
-      addToProgramAddressAndCycles(2, 5);
-      break;
-    }
-    case (0x57):                 // EOR Direct Page Indirect Long Indexed, Y
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 6);
-      break;
-    }
-    case (0x43):                // EOR Stack Relative
-    {
-      addToProgramAddressAndCycles(2, 4);
-      break;
-    }
-    case (0x53):                // EOR Stack Relative Indirect Indexed, Y
-    {
-      addToProgramAddressAndCycles(2, 7);
-      break;
-    }
-    default: {
-      LOG_UNEXPECTED_OPCODE(opCode);
+      case EOR_DirectPageIndirect:                 // EOR Direct Page Indirect
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 5);
+        break;
+      }
+      case EOR_DirectPageIndirectLong:                 // EOR Direct Page Indirect Long
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 6);
+        break;
+      }
+      case EOR_AbsoluteIndexedWithX:                 // EOR Absolute Indexed, X
+      {
+        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
+      }
+      case EOR_AbsoluteLongIndexedWithX:                 // EOR Absolute Long Indexed, X
+      {
+        cpu.addToProgramAddressAndCycles(4, 5);
+        break;
+      }
+      case EOR_AbsoluteIndexedWithY:                 // EOR Absolute Indexed, Y
+      {
+        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
+      }
+      case EOR_DirectPageIndexedWithX:                 // EOR Direct Page Indexed, X
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 4);
+        break;
+      }
+      case EOR_DirectPageIndexedIndirectWithX:                // EOR Direct Page Indexed Indirect, X
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 6);
+        break;
+      }
+      case EOR_DirectPageIndirectIndexedWithY:                 // EOR Direct Page Indirect Indexed, Y
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 5);
+        break;
+      }
+      case EOR_DirectPageIndirectLongIndexedWithY:                 // EOR Direct Page Indirect Long Indexed, Y
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 6);
+        break;
+      }
+      case EOR_StackRelative:                // EOR Stack Relative
+      {
+        cpu.addToProgramAddressAndCycles(2, 4);
+        break;
+      }
+      case EOR_StackRelativeIndirectIndexedWithY:                // EOR Stack Relative Indirect Indexed, Y
+      {
+        cpu.addToProgramAddressAndCycles(2, 7);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 }
-}
+

@@ -93,12 +93,12 @@ public class Address
     return sumOffsetToAddressWrapAround(this, offset);
   }
 
-  void decrementOffsetBy(short offset)
+  public void decrementOffsetBy(short offset)
   {
     mOffset -= offset;
   }
 
-  void incrementOffsetBy(short offset)
+  public void incrementOffsetBy(short offset)
   {
     mOffset += offset;
   }

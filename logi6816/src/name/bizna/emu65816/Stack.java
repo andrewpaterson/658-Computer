@@ -4,8 +4,8 @@ public class Stack
 {
   public static final short STACK_POINTER_DEFAULT = 0x1FF;
 
-  private SystemBus mSystemBus;
-  private Address mStackAddress;
+  private final SystemBus mSystemBus;
+  private final Address mStackAddress;
 
   public Stack(SystemBus mSystemBus)
   {
@@ -33,15 +33,15 @@ public class Stack
     push8Bit(leastSignificant);
   }
 
-  public byte pull8Bit()
+  public byte pull8Bit(Cpu65816 cpu)
   {
     mStackAddress.incrementOffsetBy((short) Sizeof.sizeofByte);
-    return mSystemBus.readByte(mStackAddress);
+    return cpu.readByte(mStackAddress);
   }
 
-  public short pull16Bit()
+  public short pull16Bit(Cpu65816 cpu)
   {
-    return (short) (pull8Bit() | (((short) pull8Bit()) << 8));
+    return (short) (pull8Bit(cpu) | (((short) pull8Bit(cpu)) << 8));
   }
 
   public short getStackPointer()

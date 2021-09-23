@@ -1,7 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_BIT
     extends OpCode
@@ -14,95 +18,120 @@ public class OpCode_BIT
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::execute8BitBIT(OpCode &opCode)
-{
-    const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-  uint8_t value = mSystemBus.readByte(addressOfOpCodeData);
-  bool isHighestBitSet = value & 0x80;
-  bool isNextToHighestBitSet = value & 0x40;
-
-  if (opCode.getAddressingMode() != AddressingMode::Immediate) {
-    if (isHighestBitSet) mCpuStatus.setSignFlag();
-    else mCpuStatus.clearSignFlag();
-    if (isNextToHighestBitSet) mCpuStatus.setOverflowFlag();
-    else mCpuStatus.clearOverflowFlag();
-  }
-  mCpuStatus.updateZeroFlagFrom8BitValue(value & Binary::lower8BitsOf(mA));
-}
-
-  void Cpu65816::execute16BitBIT(OpCode &opCode)
-{
-    const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-  uint16_t value = mSystemBus.readTwoBytes(addressOfOpCodeData);
-  bool isHighestBitSet = value & 0x8000;
-  bool isNextToHighestBitSet = value & 0x4000;
-
-  if (opCode.getAddressingMode() != AddressingMode::Immediate) {
-    if (isHighestBitSet) mCpuStatus.setSignFlag();
-    else mCpuStatus.clearSignFlag();
-    if (isNextToHighestBitSet) mCpuStatus.setOverflowFlag();
-    else mCpuStatus.clearOverflowFlag();
-  }
-  mCpuStatus.updateZeroFlagFrom16BitValue(value & mA);
-}
-
-  void Cpu65816::executeBIT(OpCode &opCode)
-{
-  if (accumulatorIs8BitWide())
-  {
-    execute8BitBIT(opCode);
-  }
-  else
-  {
-    execute16BitBIT(opCode);
-    addToCycles(1);
-  }
-
-  switch (opCode.getCode())
-  {
-    case(0x89):                 // BIT Immediate
+    if (cpu.accumulatorIs8BitWide())
     {
-      if (accumulatorIs16BitWide()) {
-        addToProgramAddress(1);
+      execute8BitBIT(cpu);
+    }
+    else
+    {
+      execute16BitBIT(cpu);
+      cpu.addToCycles(1);
+    }
+
+    switch (getCode())
+    {
+      case BIT_Immediate:                 // BIT Immediate
+      {
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToProgramAddress(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 2);
+        break;
       }
-      addToProgramAddressAndCycles(2, 2);
-      break;
-    }
-    case(0x2C):                 // BIT Absolute
-    {
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case(0x24):                 // BIT Direct Page
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 3);
-      break;
-    }
-    case(0x3C):                 // BIT Absolute Indexed, X
-    {
-      if (opCodeAddressingCrossesPageBoundary(opCode)) {
-        addToCycles(1);
+      case BIT_Absolute:                 // BIT Absolute
+      {
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
       }
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case(0x34):                 // BIT Direct Page Indexed, X
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 4);
-      break;
-    }
-    default: {
-      LOG_UNEXPECTED_OPCODE(opCode);
+      case BIT_DirectPage:                 // BIT Direct Page
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 3);
+        break;
+      }
+      case BIT_AbsoluteIndexedWithX:                 // BIT Absolute Indexed, X
+      {
+        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
+      }
+      case BIT_DirectPageIndexedWithX:                 // BIT Direct Page Indexed, X
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 4);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
+
+  protected void execute8BitBIT(Cpu65816 cpu)
+  {
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    byte value = cpu.readByte(addressOfOpCodeData);
+    boolean isHighestBitSet = (value & 0x80) != 0;
+    boolean isNextToHighestBitSet = (value & 0x40) != 0;
+
+    if (getAddressingMode() != AddressingMode.Immediate)
+    {
+      if (isHighestBitSet)
+      {
+        cpu.getCpuStatus().setSignFlag();
+      }
+      else
+      {
+        cpu.getCpuStatus().clearSignFlag();
+      }
+      if (isNextToHighestBitSet)
+      {
+        cpu.getCpuStatus().setOverflowFlag();
+      }
+      else
+      {
+        cpu.getCpuStatus().clearOverflowFlag();
+      }
+    }
+    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((byte) (value & Binary.lower8BitsOf(cpu.getA())));
+  }
+
+  protected void execute16BitBIT(Cpu65816 cpu)
+  {
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    short value = cpu.readTwoBytes(addressOfOpCodeData);
+    boolean isHighestBitSet = (value & 0x8000) != 0;
+    boolean isNextToHighestBitSet = (value & 0x4000) != 0;
+
+    if (getAddressingMode() != AddressingMode.Immediate)
+    {
+      if (isHighestBitSet)
+      {
+        cpu.getCpuStatus().setSignFlag();
+      }
+      else
+      {
+        cpu.getCpuStatus().clearSignFlag();
+      }
+      if (isNextToHighestBitSet)
+      {
+        cpu.getCpuStatus().setOverflowFlag();
+      }
+      else
+      {
+        cpu.getCpuStatus().clearOverflowFlag();
+      }
+    }
+    cpu.getCpuStatus().updateZeroFlagFrom16BitValue((short) (value & cpu.getA()));
+  }
 }
-}
+

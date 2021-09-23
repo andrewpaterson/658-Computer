@@ -1,6 +1,8 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_TSB
@@ -14,94 +16,117 @@ public class OpCode_TSB
   @Override
   public void execute(Cpu65816 cpu)
   {
-
   }
 
-  void Cpu65816::execute8BitTSB(OpCode &opCode)
-{
-    const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-  uint8_t value = mSystemBus.readByte(addressOfOpCodeData);
-  uint8_t lowerA = Binary::lower8BitsOf(mA);
-    const uint8_t result = value | lowerA;
-  mSystemBus.storeByte(addressOfOpCodeData, result);
-
-  if ((value & lowerA) == 0) mCpuStatus.setZeroFlag();
-  else mCpuStatus.clearZeroFlag();
-}
-
-  void Cpu65816::execute16BitTSB(OpCode &opCode)
-{
-    const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-  uint16_t value = mSystemBus.readTwoBytes(addressOfOpCodeData);
-    const uint16_t result = value | mA;
-  mSystemBus.storeTwoBytes(addressOfOpCodeData, result);
-
-  if ((value & mA) == 0) mCpuStatus.setZeroFlag();
-  else mCpuStatus.clearZeroFlag();
-}
-
-  void Cpu65816::execute8BitTRB(OpCode &opCode)
-{
-    const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-  uint8_t value = mSystemBus.readByte(addressOfOpCodeData);
-  uint8_t lowerA = Binary::lower8BitsOf(mA);
-    const uint8_t result = value & ~lowerA;
-  mSystemBus.storeByte(addressOfOpCodeData, result);
-
-  if ((value & lowerA) == 0) mCpuStatus.setZeroFlag();
-  else mCpuStatus.clearZeroFlag();
-}
-
-  void Cpu65816::execute16BitTRB(OpCode &opCode)
-{
-    const Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-  uint16_t value = mSystemBus.readTwoBytes(addressOfOpCodeData);
-    const uint16_t result = value & ~mA;
-  mSystemBus.storeTwoBytes(addressOfOpCodeData, result);
-
-  if ((value & mA) == 0) mCpuStatus.setZeroFlag();
-  else mCpuStatus.clearZeroFlag();
-}
-
-  void Cpu65816::executeTSBTRB(OpCode &opCode)
-{
-  switch (opCode.getCode())
+  protected void execute8BitTSB(Cpu65816 cpu)
   {
-    case(0x0C):                 // TSB Absolute
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    byte value = cpu.readByte(addressOfOpCodeData);
+    byte lowerA = Binary.lower8BitsOf(cpu.getA());
+    byte result = (byte) (value | lowerA);
+    cpu.storeByte(addressOfOpCodeData, result);
+
+    if ((value & lowerA) == 0)
     {
-      if (accumulatorIs8BitWide())
-      {
-        execute8BitTSB(opCode);
-      }
-      else
-      {
-        execute16BitTSB(opCode);
-        addToCycles(2);
-      }
-      addToProgramAddressAndCycles(3, 6);
-      break;
+      cpu.getCpuStatus().setZeroFlag();
     }
-    case(0x04):                 // TSB Direct Page
+    else
     {
-      if (accumulatorIs8BitWide())
-      {
-        execute8BitTSB(opCode);
-      }
-      else
-      {
-        execute16BitTSB(opCode);
-        addToCycles(2);
-      }
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
+      cpu.getCpuStatus().clearZeroFlag();
     }
-      addToProgramAddressAndCycles(2, 5);
-      break;
-    }
-    default:
+  }
+
+  protected void execute16BitTSB(Cpu65816 cpu)
+  {
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    short value = cpu.readTwoBytes(addressOfOpCodeData);
+    short result = (short) (value | cpu.getA());
+    cpu.storeTwoBytes(addressOfOpCodeData, result);
+
+    if ((value & cpu.getA()) == 0)
     {
-      LOG_UNEXPECTED_OPCODE(opCode);
+      cpu.getCpuStatus().setZeroFlag();
+    }
+    else
+    {
+      cpu.getCpuStatus().clearZeroFlag();
+    }
+  }
+
+  protected void execute8BitTRB(Cpu65816 cpu)
+  {
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    byte value = cpu.readByte(addressOfOpCodeData);
+    byte lowerA = Binary.lower8BitsOf(cpu.getA());
+    byte result = (byte) (value & ~lowerA);
+    cpu.storeByte(addressOfOpCodeData, result);
+
+    if ((value & lowerA) == 0)
+    {
+      cpu.getCpuStatus().setZeroFlag();
+    }
+    else
+    {
+      cpu.getCpuStatus().clearZeroFlag();
+    }
+  }
+
+  protected void execute16BitTRB(Cpu65816 cpu)
+  {
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    short value = cpu.readTwoBytes(addressOfOpCodeData);
+    short result = (short) (value & ~cpu.getA());
+    cpu.storeTwoBytes(addressOfOpCodeData, result);
+
+    if ((value & cpu.getA()) == 0)
+    {
+      cpu.getCpuStatus().setZeroFlag();
+    }
+    else
+    {
+      cpu.getCpuStatus().clearZeroFlag();
+    }
+  }
+
+  protected void executeTSBTRB(Cpu65816 cpu)
+  {
+    switch (getCode())
+    {
+      case (0x0C):                 // TSB Absolute
+      {
+        if (cpu.accumulatorIs8BitWide())
+        {
+          execute8BitTSB(cpu);
+        }
+        else
+        {
+          execute16BitTSB(cpu);
+          cpu.addToCycles(2);
+        }
+        cpu.addToProgramAddressAndCycles(3, 6);
+        break;
+      }
+      case (0x04):                 // TSB Direct Page
+      {
+        if (cpu.accumulatorIs8BitWide())
+        {
+          execute8BitTSB(cpu);
+        }
+        else
+        {
+          execute16BitTSB(cpu);
+          cpu.addToCycles(2);
+        }
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 5);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 }
-}
+

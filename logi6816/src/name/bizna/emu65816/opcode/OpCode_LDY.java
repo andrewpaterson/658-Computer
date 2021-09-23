@@ -1,7 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_LDY
     extends OpCode
@@ -11,83 +15,80 @@ public class OpCode_LDY
     super(mName, mCode, mAddressingMode);
   }
 
+  protected void executeLDY8Bit(Cpu65816 cpu)
+  {
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    byte value = cpu.readByte(opCodeDataAddress);
+    cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+  }
+
+  protected void executeLDY16Bit(Cpu65816 cpu)
+  {
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    cpu.setY(cpu.readTwoBytes(opCodeDataAddress));
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
+  }
+
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeLDY8Bit(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
-  uint8_t value = mSystemBus.readByte(opCodeDataAddress);
-  Binary::setLower8BitsOf16BitsValue(&mY, value);
-  mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);
-}
-
-  void Cpu65816::executeLDY16Bit(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
-  mY = mSystemBus.readTwoBytes(opCodeDataAddress);
-  mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mY);
-}
-
-  void Cpu65816::executeLDY(OpCode &opCode)
-{
-  if (indexIs16BitWide())
-  {
-    executeLDY16Bit(opCode);
-    addToCycles(1);
-  }
-  else
-  {
-    executeLDY8Bit(opCode);
-  }
-
-  switch (opCode.getCode())
-  {
-    case (0xA0):                // LDY Immediate
+    if (cpu.indexIs16BitWide())
     {
-      if (indexIs16BitWide())
+      executeLDY16Bit(cpu);
+      cpu.addToCycles(1);
+    }
+    else
+    {
+      executeLDY8Bit(cpu);
+    }
+
+    switch (getCode())
+    {
+      case LDY_Immediate:                // LDY Immediate
       {
-        addToProgramAddress(1);
+        if (cpu.indexIs16BitWide())
+        {
+          cpu.addToProgramAddress(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 2);
+        break;
       }
-      addToProgramAddressAndCycles(2, 2);
-      break;
-    }
-    case (0xAC):                // LDY Absolute
-    {
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case (0xA4):                // LDY Direct Page
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 3);
-      break;
-    }
-    case (0xBC):                // LDY Absolute Indexed, X
-    {
-      if (opCodeAddressingCrossesPageBoundary(opCode)) {
-        addToCycles(1);
+      case LDY_Absolute:                // LDY Absolute
+      {
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
       }
-      addToProgramAddressAndCycles(3, 4);
-      break;
-    }
-    case (0xB4):                // LDY Direct Page Indexed, X
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
-      addToProgramAddressAndCycles(2, 4);
-      break;
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
+      case LDY_DirectPage:                // LDY Direct Page
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 3);
+        break;
+      }
+      case LDY_AbsoluteIndexedWithX:                // LDY Absolute Indexed, X
+      {
+        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(3, 4);
+        break;
+      }
+      case LDY_DirectPageIndexedWithX:                // LDY Direct Page Indexed, X
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+        cpu.addToProgramAddressAndCycles(2, 4);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 }
-}
+

@@ -14,6 +14,6 @@ public class OpCode_BEQ
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.addToCycles(executeBranchShortOnCondition(cpu.getCpuStatus().zeroFlag(), cpu));
   }
 }

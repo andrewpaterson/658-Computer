@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_CLC
-    extends OpCodeStatus
+    extends OpCode
 {
   public OpCode_CLC(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +14,8 @@ public class OpCode_CLC
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.getCpuStatus().setCarryFlag(false);
+    cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
+

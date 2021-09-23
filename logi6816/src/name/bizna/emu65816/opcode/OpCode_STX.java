@@ -1,7 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_STX
     extends OpCode
@@ -14,49 +18,50 @@ public class OpCode_STX
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeSTX(OpCode &opCode)
-{
-  Address dataAddress = getAddressOfOpCodeData(opCode);
-  if (accumulatorIs8BitWide()) {
-    mSystemBus.storeByte(dataAddress, Binary::lower8BitsOf(mX));
-  } else {
-    mSystemBus.storeTwoBytes(dataAddress, mX);
-    addToCycles(1);
-  }
-
-  switch (opCode.getCode()) {
-    case(0x8E):  // STX Absolute
+    Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    if (cpu.accumulatorIs8BitWide())
     {
-      addToProgramAddress(3);
-      addToCycles(4);
-      break;
+      cpu.storeByte(dataAddress, Binary.lower8BitsOf(cpu.getX()));
     }
-    case(0x86):  // STX Direct Page
+    else
     {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
+      cpu.storeTwoBytes(dataAddress, cpu.getX());
+      cpu.addToCycles(1);
     }
 
-      addToProgramAddress(2);
-      addToCycles(3);
-      break;
-    }
-    case(0x96):  // STX Direct Page Indexed, Y
+    switch (getCode())
     {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
+      case STX_Absolute:  // STX Absolute
+      {
+        cpu.addToProgramAddress(3);
+        cpu.addToCycles(4);
+        break;
+      }
+      case STX_DirectPage:  // STX Direct Page
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
 
-      addToProgramAddress(2);
-      addToCycles(4);
-      break;
-    }
-    default: {
-      LOG_UNEXPECTED_OPCODE(opCode);
+        cpu.addToProgramAddress(2);
+        cpu.addToCycles(3);
+        break;
+      }
+      case STX_DirectPageIndexedWithY:  // STX Direct Page Indexed, Y
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+
+        cpu.addToProgramAddress(2);
+        cpu.addToCycles(4);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 }
-}
+

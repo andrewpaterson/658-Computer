@@ -14,6 +14,6 @@ public class OpCode_BRL
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.addToCycles(executeBranchLongOnCondition(true, cpu));
   }
 }

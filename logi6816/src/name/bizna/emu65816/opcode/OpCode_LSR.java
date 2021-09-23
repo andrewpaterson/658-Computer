@@ -1,7 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_LSR
     extends OpCode
@@ -11,96 +15,119 @@ public class OpCode_LSR
     super(mName, mCode, mAddressingMode);
   }
 
+  void DO_LSR_8_BIT(Cpu65816 cpu, byte value)
+  {
+    boolean newCarry = (value & 0x01) != 0;
+    value = (byte) (value >> 1);
+    cpu.getCpuStatus().setCarryFlag(newCarry);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+  }
+
+  void DO_LSR_16_BIT(Cpu65816 cpu, short value)
+  {
+    boolean newCarry = (value & 0x0001) != 0;
+    value = (short) (value >> 1);
+    cpu.getCpuStatus().setCarryFlag(newCarry);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
+  }
+
+  protected void executeMemoryLSR(Cpu65816 cpu)
+  {
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+
+    if (cpu.accumulatorIs8BitWide())
+    {
+      byte value = cpu.readByte(opCodeDataAddress);
+      DO_LSR_8_BIT(cpu, value);
+      cpu.storeByte(opCodeDataAddress, value);
+    }
+    else
+    {
+      short value = cpu.readTwoBytes(opCodeDataAddress);
+      DO_LSR_16_BIT(cpu, value);
+      cpu.storeTwoBytes(opCodeDataAddress, value);
+    }
+  }
+
+  protected void executeAccumulatorLSR(Cpu65816 cpu)
+  {
+    if (cpu.accumulatorIs8BitWide())
+    {
+      byte value = Binary.lower8BitsOf(cpu.getA());
+      DO_LSR_8_BIT(cpu, value);
+      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+    }
+    else
+    {
+      DO_LSR_16_BIT(cpu, cpu.getA());
+    }
+  }
+
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeMemoryLSR(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
-
-  if(accumulatorIs8BitWide()) {
-    uint8_t value = mSystemBus.readByte(opCodeDataAddress);
-    DO_LSR_8_BIT(value);
-    mSystemBus.storeByte(opCodeDataAddress, value);
-  } else {
-    uint16_t value = mSystemBus.readTwoBytes(opCodeDataAddress);
-    DO_LSR_16_BIT(value);
-    mSystemBus.storeTwoBytes(opCodeDataAddress, value);
-  }
-}
-
-  void Cpu65816::executeAccumulatorLSR(OpCode &opCode)
-{
-  if(accumulatorIs8BitWide()) {
-    uint8_t value = Binary::lower8BitsOf(mA);
-    DO_LSR_8_BIT(value);
-    Binary::setLower8BitsOf16BitsValue(&mA, value);
-  } else {
-    DO_LSR_16_BIT(mA);
-  }
-}
-
-  void Cpu65816::executeLSR(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-    case (0x4A):                // LSR Accumulator
+    switch (getCode())
     {
-      executeAccumulatorLSR(opCode);
-      addToProgramAddressAndCycles(1, 2);
-      break;
-    }
-    case (0x4E):                // LSR Absolute
-    {
-      executeMemoryLSR(opCode);
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+      case LSR_Accumulator:                // LSR Accumulator
+      {
+        executeAccumulatorLSR(cpu);
+        cpu.addToProgramAddressAndCycles(1, 2);
+        break;
       }
-      addToProgramAddressAndCycles(3, 6);
-      break;
-    }
-    case (0x46):                // LSR Direct Page
-    {
-      executeMemoryLSR(opCode);
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+      case LSR_Absolute:                // LSR Absolute
+      {
+        executeMemoryLSR(cpu);
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
+        cpu.addToProgramAddressAndCycles(3, 6);
+        break;
       }
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
+      case LSR_DirectPage:                // LSR Direct Page
+      {
+        executeMemoryLSR(cpu);
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
 
-      addToProgramAddressAndCycles(2, 5);
-      break;
-    }
-    case (0x5E):                // LSR Absolute Indexed, X
-    {
-      executeMemoryLSR(opCode);
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+        cpu.addToProgramAddressAndCycles(2, 5);
+        break;
       }
+      case LSR_AbsoluteIndexedWithX:                // LSR Absolute Indexed, X
+      {
+        executeMemoryLSR(cpu);
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
 
-      addToProgramAddressAndCycles(3, 7);
-      break;
-    }
-    case (0x56):                // LSR Direct Page Indexed, X
-    {
-      executeMemoryLSR(opCode);
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+        cpu.addToProgramAddressAndCycles(3, 7);
+        break;
       }
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
+      case LSR_DirectPageIndexedWithX:                // LSR Direct Page Indexed, X
+      {
+        executeMemoryLSR(cpu);
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
 
-      addToProgramAddressAndCycles(2, 6);
-      break;
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
+        cpu.addToProgramAddressAndCycles(2, 6);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 }
-}
+

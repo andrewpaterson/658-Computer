@@ -14,25 +14,10 @@ public class OpCode_WAI
   @Override
   public void execute(Cpu65816 cpu)
   {
+    cpu.setRDYPin(false);
 
-  }
-
-  void Cpu65816::executeMisc(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-    case(0xCB):     // WAI
-    {
-      setRDYPin(false);
-
-      addToProgramAddress(1);
-      addToCycles(3);
-      break;
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
-    }
+    cpu.addToProgramAddress(1);
+    cpu.addToCycles(3);
   }
 }
 
-}

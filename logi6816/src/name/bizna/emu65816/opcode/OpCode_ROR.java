@@ -1,7 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.*;
 
 public class OpCode_ROR
     extends OpCode
@@ -11,119 +15,146 @@ public class OpCode_ROR
     super(mName, mCode, mAddressingMode);
   }
 
-  @Override
-  public void execute(Cpu65816 cpu)
+  void DO_ROR_8_BIT(Cpu65816 cpu, byte value)
   {
-
+    boolean carryWasSet = cpu.getCpuStatus().carryFlag();
+    boolean carryWillBeSet = (value & 0x01) != 0;
+    value = (byte) (value >> 1);
+    if (carryWasSet)
+    {
+      value = Binary.setBitIn8BitValue(value, (byte) 7);
+    }
+    else
+    {
+      value = Binary.clearBitIn8BitValue(value, (byte) 7);
+    }
+    cpu.getCpuStatus().setCarryFlag(carryWillBeSet);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
-#define DO_ROR_8_BIT(value) {                                   \
-  bool carryWasSet = mCpuStatus.carryFlag();                  \
-  bool carryWillBeSet = (value & 0x01) != 0;                  \
-  value = value >> 1;                                         \
-  if (carryWasSet) Binary::setBitIn8BitValue(&value, 7);      \
-    else Binary::clearBitIn8BitValue(&value, 7);                \
-  mCpuStatus.setCarryFlag(carryWillBeSet);              \
-  mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);       \
-}
-
-#define DO_ROR_16_BIT(value) {                                  \
-  bool carryWasSet = mCpuStatus.carryFlag();                  \
-  bool carryWillBeSet = (value & 0x0001) != 0;                \
-  value = value >> 1;                                         \
-  if (carryWasSet) Binary::setBitIn16BitValue(&value, 15);    \
-    else Binary::clearBitIn16BitValue(&value, 15);              \
-  mCpuStatus.setCarryFlag(carryWillBeSet);              \
-  mCpuStatus.updateSignAndZeroFlagFrom16BitValue(value);      \
-}
+  void DO_ROR_16_BIT(Cpu65816 cpu, short value)
+  {
+    boolean carryWasSet = cpu.getCpuStatus().carryFlag();
+    boolean carryWillBeSet = (value & 0x0001) != 0;
+    value = (short) (value >> 1);
+    if (carryWasSet)
+    {
+      value = Binary.setBitIn16BitValue(value, (byte) 15);
+    }
+    else
+    {
+      value = Binary.clearBitIn16BitValue(value, (byte) 15);
+    }
+    cpu.getCpuStatus().setCarryFlag(carryWillBeSet);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
+  }
 
   /**
    * This file contains implementations for all ROR OpCodes.
    */
-  void Cpu65816::executeMemoryROR(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
+  protected void executeMemoryROR(Cpu65816 cpu)
+  {
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-  if(accumulatorIs8BitWide()) {
-    uint8_t value = mSystemBus.readByte(opCodeDataAddress);
-    DO_ROR_8_BIT(value);
-    mSystemBus.storeByte(opCodeDataAddress, value);
-  } else {
-    uint16_t value = mSystemBus.readTwoBytes(opCodeDataAddress);
-    DO_ROR_16_BIT(value);
-    mSystemBus.storeTwoBytes(opCodeDataAddress, value);
+    if (cpu.accumulatorIs8BitWide())
+    {
+      byte value = cpu.readByte(opCodeDataAddress);
+      DO_ROR_8_BIT(cpu, value);
+      cpu.storeByte(opCodeDataAddress, value);
+    }
+    else
+    {
+      short value = cpu.readTwoBytes(opCodeDataAddress);
+      DO_ROR_16_BIT(cpu, value);
+      cpu.storeTwoBytes(opCodeDataAddress, value);
+    }
+  }
+
+  protected void executeAccumulatorROR(Cpu65816 cpu)
+  {
+    if (cpu.accumulatorIs8BitWide())
+    {
+      byte value = Binary.lower8BitsOf(cpu.getA());
+      DO_ROR_8_BIT(cpu, value);
+      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+    }
+    else
+    {
+      short value = cpu.getA();
+      DO_ROR_16_BIT(cpu, value);
+      cpu.setA(value);
+    }
+  }
+
+  @Override
+  public void execute(Cpu65816 cpu)
+  {
+    switch (getCode())
+    {
+      case ROR_Accumulator:                // ROR accumulator
+      {
+        executeAccumulatorROR(cpu);
+        cpu.addToProgramAddressAndCycles(1, 2);
+        break;
+      }
+      case ROR_Absolute:                // ROR #addr
+      {
+        executeMemoryROR(cpu);
+        if (cpu.accumulatorIs8BitWide())
+        {
+          cpu.addToProgramAddressAndCycles(3, 6);
+        }
+        else
+        {
+          cpu.addToProgramAddressAndCycles(3, 8);
+        }
+        break;
+      }
+      case ROR_DirectPage:                // ROR Direct Page
+      {
+        executeMemoryROR(cpu);
+        int opCycles = Binary.lower8BitsOf(cpu.getD()) != 0 ? 1 : 0;
+        if (cpu.accumulatorIs8BitWide())
+        {
+          cpu.addToProgramAddressAndCycles(2, 5 + opCycles);
+        }
+        else
+        {
+          cpu.addToProgramAddressAndCycles(2, 7 + opCycles);
+        }
+        break;
+      }
+      case ROR_AbsoluteIndexedWithX:                // ROR Absolute Indexed, X
+      {
+        executeMemoryROR(cpu);
+        short opCycles = 0;
+        if (cpu.accumulatorIs8BitWide())
+        {
+          cpu.addToProgramAddressAndCycles(3, 7 + opCycles);
+        }
+        else
+        {
+          cpu.addToProgramAddressAndCycles(3, 9 + opCycles);
+        }
+        break;
+      }
+      case ROR_DirectPageIndexedWithX:                // ROR Direct Page Indexed, X
+      {
+        executeMemoryROR(cpu);
+        int opCycles = Binary.lower8BitsOf(cpu.getD()) != 0 ? 1 : 0;
+        if (cpu.accumulatorIs8BitWide())
+        {
+          cpu.addToProgramAddressAndCycles(2, 6 + opCycles);
+        }
+        else
+        {
+          cpu.addToProgramAddressAndCycles(2, 8 + opCycles);
+        }
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
+    }
   }
 }
 
-  void Cpu65816::executeAccumulatorROR(OpCode &opCode)
-{
-  if(accumulatorIs8BitWide()) {
-    uint8_t value = Binary::lower8BitsOf(mA);
-    DO_ROR_8_BIT(value);
-    Binary::setLower8BitsOf16BitsValue(&mA, value);
-  } else {
-    uint16_t value = mA;
-    DO_ROR_16_BIT(value);
-    mA = value;
-  }
-}
-
-  void Cpu65816::executeROR(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-    case (0x6A):                // ROR accumulator
-    {
-      executeAccumulatorROR(opCode);
-      addToProgramAddressAndCycles(1, 2);
-      break;
-    }
-    case (0x6E):                // ROR #addr
-    {
-      executeMemoryROR(opCode);
-      if (accumulatorIs8BitWide()) {
-        addToProgramAddressAndCycles(3, 6);
-      } else {
-        addToProgramAddressAndCycles(3, 8);
-      }
-      break;
-    }
-    case (0x66):                // ROR Direct Page
-    {
-      executeMemoryROR(opCode);
-      int opCycles = Binary::lower8BitsOf(mD) != 0 ? 1 : 0;
-      if (accumulatorIs8BitWide()) {
-        addToProgramAddressAndCycles(2, 5+opCycles);
-      } else {
-        addToProgramAddressAndCycles(2, 7+opCycles);
-      }
-      break;
-    }
-    case (0x7E):                // ROR Absolute Indexed, X
-    {
-      executeMemoryROR(opCode);
-      short opCycles = 0;
-      if (accumulatorIs8BitWide()) {
-        addToProgramAddressAndCycles(3, 7+opCycles);
-      } else {
-        addToProgramAddressAndCycles(3, 9+opCycles);
-      }
-      break;
-    }
-    case (0x76):                // ROR Direct Page Indexed, X
-    {
-      executeMemoryROR(opCode);
-      int opCycles = Binary::lower8BitsOf(mD) != 0 ? 1 : 0;
-      if (accumulatorIs8BitWide()) {
-        addToProgramAddressAndCycles(2, 6+opCycles);
-      } else {
-        addToProgramAddressAndCycles(2, 8+opCycles);
-      }
-      break;
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
-    }
-  }
-}
-}

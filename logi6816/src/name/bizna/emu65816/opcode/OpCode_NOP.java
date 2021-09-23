@@ -14,23 +14,8 @@ public class OpCode_NOP
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeMisc(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-    case(0xEA):     // NOP
-    {
-      addToProgramAddress(1);
-      addToCycles(2);
-      break;
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
-    }
+    cpu.addToProgramAddress(1);
+    cpu.addToCycles(2);
   }
 }
 
-}

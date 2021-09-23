@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_SEI
-    extends OpCodeStatus
+    extends OpCode
 {
   public OpCode_SEI(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +14,7 @@ public class OpCode_SEI
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.getCpuStatus().setInterruptDisableFlag();
+    cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

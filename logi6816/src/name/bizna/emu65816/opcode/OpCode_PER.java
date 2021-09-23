@@ -1,10 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_PER
-    extends OpCodeStack
+    extends OpCode
 {
   public OpCode_PER(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +15,12 @@ public class OpCode_PER
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    int opCodeSize = 3;
+    short operand = cpu.readTwoBytes(opCodeDataAddress);
+    short sum = (short) (operand + opCodeSize + cpu.getProgramAddress().getOffset());
+    cpu.getStack().push16Bit(sum);
+    cpu.addToProgramAddressAndCycles(3, 6);
   }
 }
+

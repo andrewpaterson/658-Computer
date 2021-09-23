@@ -1,5 +1,6 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
@@ -14,42 +15,27 @@ public class OpCode_MVP
   @Override
   public void execute(Cpu65816 cpu)
   {
+    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
+    byte destinationBank = cpu.readByte(addressOfOpCodeData);
+    addressOfOpCodeData.incrementOffsetBy((short) 1);
+    byte sourceBank = cpu.readByte(addressOfOpCodeData);
 
-  }
+    Address sourceAddress = new Address(sourceBank, cpu.getX());
+    Address destinationAddress = new Address(destinationBank, cpu.getY());
 
-  void Cpu65816::executeMisc(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-     case(0x44):     // MVP
+    while (cpu.getA() != 0xFFFF)
     {
-      Address addressOfOpCodeData = getAddressOfOpCodeData(opCode);
-      uint8_t destinationBank = mSystemBus.readByte(addressOfOpCodeData);
-      addressOfOpCodeData.incrementOffsetBy(1);
-      uint8_t sourceBank = mSystemBus.readByte(addressOfOpCodeData);
+      byte toTransfer = cpu.readByte(sourceAddress);
+      cpu.storeByte(destinationAddress, toTransfer);
 
-      Address sourceAddress(sourceBank, mX);
-      Address destinationAddress(destinationBank, mY);
+      sourceAddress.decrementOffsetBy((short) 1);
+      destinationAddress.decrementOffsetBy((short) 1);
+      cpu.decA();
 
-      while(mA != 0xFFFF) {
-        uint8_t toTransfer = mSystemBus.readByte(sourceAddress);
-        mSystemBus.storeByte(destinationAddress, toTransfer);
-
-        sourceAddress.decrementOffsetBy(1);
-        destinationAddress.decrementOffsetBy(1);
-        mA--;
-
-        addToCycles(7);
-      }
-      mDB = destinationBank;
-
-      addToProgramAddress(3);
-      break;
+      cpu.addToCycles(7);
     }
-     default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
-    }
+    cpu.setDB(destinationBank);
+    cpu.addToProgramAddress(3);
   }
 }
 
-}

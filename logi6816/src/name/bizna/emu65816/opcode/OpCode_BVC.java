@@ -14,6 +14,6 @@ public class OpCode_BVC
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.addToCycles(executeBranchShortOnCondition(!cpu.getCpuStatus().overflowFlag(), cpu));
   }
 }

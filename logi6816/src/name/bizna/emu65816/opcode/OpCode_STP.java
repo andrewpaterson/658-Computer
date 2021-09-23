@@ -14,25 +14,9 @@ public class OpCode_STP
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeMisc(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-    case(0xDB):     // STP
-    {
-      reset();
-      addToProgramAddress(1);
-      addToCycles(3);
-      break;
-
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
-    }
+    cpu.reset();
+    cpu.addToProgramAddress(1);
+    cpu.addToCycles(3);
   }
 }
 
-}

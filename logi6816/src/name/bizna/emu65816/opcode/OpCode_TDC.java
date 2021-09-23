@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_TDC
-    extends OpCodeTransfer
+    extends OpCode
 {
   public OpCode_TDC(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +14,9 @@ public class OpCode_TDC
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.setA(cpu.getD());
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+    cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
+

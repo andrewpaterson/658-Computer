@@ -1,9 +1,11 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-public class OpCodeBranch
+public abstract class OpCodeBranch
     extends OpCode
 {
   public OpCodeBranch(String mName, byte mCode, AddressingMode mAddressingMode)
@@ -11,112 +13,51 @@ public class OpCodeBranch
     super(mName, mCode, mAddressingMode);
   }
 
-  @Override
-  public void execute(Cpu65816 cpu)
+  int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu)
   {
-
+    byte opCycles = 2;
+    byte destination = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    // This is the address of the next instruction
+    short actualDestination;
+    if (condition)
+    {
+      // One extra cycle if the branch is taken
+      opCycles++;
+      short destination16;
+      if (Binary.is8bitValueNegative(destination))
+      {
+        destination16 = (short) (0xFF00 | destination);
+      }
+      else
+      {
+        destination16 = destination;
+      }
+      actualDestination = (short) (cpu.getProgramAddress().getOffset() + 2 + destination16);
+      // Emulation mode requires 1 extra cycle on page boundary crossing
+      if (Address.offsetsAreOnDifferentPages(cpu.getProgramAddress().getOffset(), actualDestination) &&
+          cpu.getCpuStatus().emulationFlag())
+      {
+        opCycles++;
+      }
+    }
+    else
+    {
+      actualDestination = (short) (cpu.getProgramAddress().getOffset() + 2);
+    }
+    Address newProgramAddress = new Address(cpu.getProgramAddress().getBank(), actualDestination);
+    cpu.setProgramAddress(newProgramAddress);
+    return opCycles;
   }
-  int Cpu65816::executeBranchShortOnCondition(bool condition, OpCode &opCode)
-{
-  uint8_t opCycles = 2;
-  uint8_t destination =  mSystemBus.readByte(getAddressOfOpCodeData(opCode));
-  // This is the address of the next instruction
-  uint16_t actualDestination;
-  if (condition)
+
+  int executeBranchLongOnCondition(boolean condition, Cpu65816 cpu)
   {
-    // One extra cycle if the branch is taken
-    opCycles++;
-    uint16_t destination16;
-    if (Binary::is8bitValueNegative(destination))
+    if (condition)
     {
-      destination16 = 0xFF00 | destination;
+      short destination = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
+      cpu.getProgramAddress().incrementOffsetBy((short) (3 + destination));
     }
-        else
-    {
-      destination16 = destination;
-    }
-    actualDestination = mProgramAddress.getOffset() + 2 + destination16;
-    // Emulation mode requires 1 extra cycle on page boundary crossing
-    if (Address::offsetsAreOnDifferentPages(mProgramAddress.getOffset(), actualDestination) &&
-    mCpuStatus.emulationFlag()) {
-    opCycles++;
+    // CPU cycles: 4
+    return 4;
   }
-  } else
-  {
-    actualDestination = mProgramAddress.getOffset() + 2;
-  }
-  Address newProgramAddress(mProgramAddress.getBank(), actualDestination);
-  mProgramAddress = newProgramAddress;
-  return opCycles;
 }
 
-  int Cpu65816::executeBranchLongOnCondition(bool condition, OpCode &opCode) {
-  if (condition) {
-    uint16_t destination = mSystemBus.readTwoBytes(getAddressOfOpCodeData(opCode));
-    mProgramAddress.incrementOffsetBy(3 + destination);
-  }
-  // CPU cycles: 4
-  return 4;
-}
-
-  void Cpu65816::executeBranch(OpCode &opCode)
-{
-
-  switch(opCode.getCode()) {
-    case(0xD0):  // BNE
-    {
-      addToCycles(executeBranchShortOnCondition(!mCpuStatus.zeroFlag(), opCode));
-      break;
-    }
-    case(0xF0):  // BEQ
-    {
-      addToCycles(executeBranchShortOnCondition(mCpuStatus.zeroFlag(), opCode));
-      break;
-    }
-    case(0x90):  // BCC
-    {
-      addToCycles(executeBranchShortOnCondition(!mCpuStatus.carryFlag(), opCode));
-      break;
-    }
-    case(0xB0):  // BCS
-    {
-      addToCycles(executeBranchShortOnCondition(mCpuStatus.carryFlag(), opCode));
-      break;
-    }
-    case(0x10):  // BPL
-    {
-      int cycles = executeBranchShortOnCondition(!mCpuStatus.signFlag(), opCode);
-      addToCycles(cycles);
-      break;
-    }
-    case(0x30):  // BMI
-    {
-      addToCycles(executeBranchShortOnCondition(mCpuStatus.signFlag(), opCode));
-      break;
-    }
-    case(0x50):  // BVC
-    {
-      addToCycles(executeBranchShortOnCondition(!mCpuStatus.overflowFlag(), opCode));
-      break;
-    }
-    case(0x70):  // BVS
-    {
-      addToCycles(executeBranchShortOnCondition(mCpuStatus.overflowFlag(), opCode));
-      break;
-    }
-    case(0x80):  // BRA
-    {
-      addToCycles(executeBranchShortOnCondition(true, opCode));
-      break;
-    }
-    case(0x82):  // BRL
-    {
-      addToCycles(executeBranchLongOnCondition(true, opCode));
-      break;
-    }
-    default: {
-      LOG_UNEXPECTED_OPCODE(opCode);
-    }
-  }
-}
-}

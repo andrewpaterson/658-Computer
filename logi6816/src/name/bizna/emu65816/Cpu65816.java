@@ -100,6 +100,31 @@ public class Cpu65816
     return mA;
   }
 
+  public short getX()
+  {
+    return mX;
+  }
+
+  public short getY()
+  {
+    return mY;
+  }
+
+  public byte getDB()
+  {
+    return mDB;
+  }
+
+  public void setDB(byte mDB)
+  {
+    this.mDB = mDB;
+  }
+
+  public void setD(short mD)
+  {
+    this.mD = mD;
+  }
+
   public Address getProgramAddress()
   {
     return mProgramAddress;
@@ -495,6 +520,65 @@ public class Cpu65816
   public short getD()
   {
     return mD;
+  }
+
+  public void storeTwoBytes(Address address, short value)
+  {
+    mSystemBus.storeTwoBytes(address, value);
+  }
+
+  public void storeByte(Address address, byte value)
+  {
+    mSystemBus.storeByte(address, value);
+  }
+
+  public EmulationModeInterrupts getEmulationInterrupts()
+  {
+    return mEmulationInterrupts;
+  }
+
+  public NativeModeInterrupts getNativeInterrupts()
+  {
+    return mNativeInterrupts;
+  }
+
+  public void clearStack()
+  {
+    mStack = new Stack(mSystemBus);
+  }
+
+  public void clearStack(Address address)
+  {
+    mStack = new Stack(mSystemBus, address);
+  }
+  public void incA()
+  {
+    mA++;
+  }
+
+  public void decA()
+  {
+    mA--;
+  }
+
+  public void incY()
+  {
+    mY++;
+  }
+
+  public void incX()
+  {
+    mX++;
+  }
+
+  public void decY()
+  {
+    mY--;
+  }
+
+  public void decX()
+  {
+    mX--;
   }
 }
 

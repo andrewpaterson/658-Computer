@@ -14,6 +14,7 @@ public class OpCode_BPL
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    int cycles = executeBranchShortOnCondition(!cpu.getCpuStatus().signFlag(), cpu);
+    cpu.addToCycles(cycles);
   }
 }

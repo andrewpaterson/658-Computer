@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_SEP
-    extends OpCodeStatus
+    extends OpCode
 {
   public OpCode_SEP(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +14,18 @@ public class OpCode_SEP
   @Override
   public void execute(Cpu65816 cpu)
   {
+    byte value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    if (cpu.getCpuStatus().emulationFlag())
+    {
+      // In emulation mode status bits 4 and 5 are not affected
+      // 0xCF = 11001111
+      value &= 0xCF;
+    }
+    byte statusReg = cpu.getCpuStatus().getRegisterValue();
+    statusReg |= value;
+    cpu.getCpuStatus().setRegisterValue(statusReg);
 
+    cpu.addToProgramAddressAndCycles(2, 3);
   }
 }
+

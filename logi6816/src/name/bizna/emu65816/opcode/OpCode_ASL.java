@@ -1,6 +1,8 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_ASL
@@ -11,125 +13,126 @@ public class OpCode_ASL
     super(mName, mCode, mAddressingMode);
   }
 
-  @Override
-  public void execute(Cpu65816 cpu)
+  void DO_ASL_8_BIT(Cpu65816 cpu, byte value)
   {
-
+    boolean newCarry = (value & 0x80) != 0;
+    value = (byte) (value << 1);
+    cpu.getCpuStatus().setCarryFlag(newCarry);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
-
-#define DO_ASL_8_BIT(value) {                                   \
-  bool newCarry = value & 0x80;                               \
-  value = value << 1;                                         \
-  mCpuStatus.setCarryFlag(newCarry);                    \
-  mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);       \
-}
 
   /**
    * Arithmetic Shift Left
-   *
+   * <p>
    * This file contains implementations for all ASL OpCodes.
    */
 
-  void Cpu65816::executeMemoryASL(OpCode &opCode)
-{
-  Address opCodeDataAddress = getAddressOfOpCodeData(opCode);
-
-  if(accumulatorIs8BitWide())
+  protected void executeMemoryASL(Cpu65816 cpu)
   {
-    uint8_t value = mSystemBus.readByte(opCodeDataAddress);
-    bool newCarry = value & 0x80;
-    value = value << 1;
-    mCpuStatus.setCarryFlag(newCarry);
-    mCpuStatus.updateSignAndZeroFlagFrom8BitValue(value);
-    mSystemBus.storeByte(opCodeDataAddress, value);
+    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+
+    if (cpu.accumulatorIs8BitWide())
+    {
+      byte value = cpu.readByte(opCodeDataAddress);
+      boolean newCarry = (value & 0x80) != 0;
+      value = (byte) (value << 1);
+      cpu.getCpuStatus().setCarryFlag(newCarry);
+      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+      cpu.storeByte(opCodeDataAddress, value);
+    }
+    else
+    {
+      short value = cpu.readTwoBytes(opCodeDataAddress);
+      boolean newCarry = (value & 0x8000) != 0;
+      value = (short) (value << 1);
+      cpu.getCpuStatus().setCarryFlag(newCarry);
+      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
+      cpu.storeTwoBytes(opCodeDataAddress, value);
+    }
   }
-  else
+
+  protected void executeAccumulatorASL(Cpu65816 cpu)
   {
-    uint16_t value = mSystemBus.readTwoBytes(opCodeDataAddress);
-    bool newCarry = value & 0x8000;
-    value = value << 1;
-    mCpuStatus.setCarryFlag(newCarry);
-    mCpuStatus.updateSignAndZeroFlagFrom16BitValue(value);
-    mSystemBus.storeTwoBytes(opCodeDataAddress, value);
+    if (cpu.accumulatorIs8BitWide())
+    {
+      byte value = Binary.lower8BitsOf(cpu.getA());
+      DO_ASL_8_BIT(cpu, value);
+      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+    }
+    else
+    {
+      boolean newCarry = (cpu.getA() & 0x8000) != 0;
+      cpu.setA((short) (cpu.getA() << 1));
+      cpu.getCpuStatus().setCarryFlag(newCarry);
+      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+    }
   }
-}
 
-  void Cpu65816::executeAccumulatorASL(OpCode &opCode)
-{
-  if(accumulatorIs8BitWide())
+  @Override
+  public void execute(Cpu65816 cpu)
   {
-    uint8_t value = Binary::lower8BitsOf(mA);
-    DO_ASL_8_BIT(value);
-    Binary::setLower8BitsOf16BitsValue(&mA, value);
-  }
-  else
-  {
-    bool newCarry = mA & 0x8000;
-    mA = mA << 1;
-    mCpuStatus.setCarryFlag(newCarry);
-    mCpuStatus.updateSignAndZeroFlagFrom16BitValue(mA);
-  }
-}
-
-  void Cpu65816::executeASL(OpCode &opCode)
-{
-  switch (opCode.getCode()) {
-    case (0x0A):                // ASL Accumulator
+    switch (getCode())
     {
-      executeAccumulatorASL(opCode);
-      addToProgramAddressAndCycles(1, 2);
-      break;
-    }
-    case (0x0E):                // ASL Absolute
-    {
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+      case (0x0A):                // ASL Accumulator
+      {
+        executeAccumulatorASL(cpu);
+        cpu.addToProgramAddressAndCycles(1, 2);
+        break;
       }
+      case (0x0E):                // ASL Absolute
+      {
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
 
-      executeMemoryASL(opCode);
-      addToProgramAddressAndCycles(3, 6);
-      break;
-    }
-    case (0x06):                // ASL Direct Page
-    {
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+        executeMemoryASL(cpu);
+        cpu.addToProgramAddressAndCycles(3, 6);
+        break;
       }
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
+      case (0x06):                // ASL Direct Page
+      {
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
 
-      executeMemoryASL(opCode);
-      addToProgramAddressAndCycles(2, 5);
-      break;
-    }
-    case (0x1E):                // ASL Absolute Indexed, X
-    {
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+        executeMemoryASL(cpu);
+        cpu.addToProgramAddressAndCycles(2, 5);
+        break;
       }
+      case (0x1E):                // ASL Absolute Indexed, X
+      {
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
 
-      executeMemoryASL(opCode);
-      addToProgramAddressAndCycles(3, 7);
-      break;
-    }
-    case (0x16):                // ASL Direct Page Indexed, X
-    {
-      if (accumulatorIs16BitWide()) {
-        addToCycles(2);
+        executeMemoryASL(cpu);
+        cpu.addToProgramAddressAndCycles(3, 7);
+        break;
       }
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
+      case (0x16):                // ASL Direct Page Indexed, X
+      {
+        if (cpu.accumulatorIs16BitWide())
+        {
+          cpu.addToCycles(2);
+        }
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
 
-      executeMemoryASL(opCode);
-      addToProgramAddressAndCycles(2, 6);
-      break;
-    }
-    default:
-    {
-      LOG_UNEXPECTED_OPCODE(opCode);
+        executeMemoryASL(cpu);
+        cpu.addToProgramAddressAndCycles(2, 6);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
-}
 }

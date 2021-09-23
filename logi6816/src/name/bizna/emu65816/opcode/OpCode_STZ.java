@@ -1,7 +1,12 @@
 package name.bizna.emu65816.opcode;
 
+import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+
+import static name.bizna.emu65816.OpCodeTable.STZ_Absolute;
+import static name.bizna.emu65816.OpCodeTable.STZ_AbsoluteIndexedWithX;
 
 public class OpCode_STZ
     extends OpCode
@@ -14,55 +19,56 @@ public class OpCode_STZ
   @Override
   public void execute(Cpu65816 cpu)
   {
-
-  }
-
-  void Cpu65816::executeSTZ(OpCode &opCode)
-{
-  Address dataAddress = getAddressOfOpCodeData(opCode);
-  if (accumulatorIs8BitWide()) {
-    mSystemBus.storeByte(dataAddress, 0x00);
-  } else {
-    mSystemBus.storeTwoBytes(dataAddress, 0x0000);
-    addToCycles(1);
-  }
-
-  switch (opCode.getCode()) {
-    case(0x9C):  // STZ Absolute
+    Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+    if (cpu.accumulatorIs8BitWide())
     {
-      addToProgramAddress(3);
-      addToCycles(4);
-      break;
+      cpu.storeByte(dataAddress, (byte) 0x00);
     }
-    case(0x64):  // STZ Direct Page
+    else
     {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
+      cpu.storeTwoBytes(dataAddress, (short) 0x0000);
+      cpu.addToCycles(1);
     }
 
-      addToProgramAddress(2);
-      addToCycles(3);
-      break;
-    }
-    case(0x9E):  // STZ Absolute Indexed, X
+    switch (getCode())
     {
-      addToProgramAddress(3);
-      addToCycles(5);
-      break;
-    }
-    case(0x74):  // STZ Direct Page Indexed, X
-    {
-      if (Binary::lower8BitsOf(mD) != 0) {
-      addToCycles(1);
-    }
+      case STZ_Absolute:  // STZ Absolute
+      {
+        cpu.addToProgramAddress(3);
+        cpu.addToCycles(4);
+        break;
+      }
+      case (0x64):  // STZ Direct Page
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
 
-      addToProgramAddress(2);
-      addToCycles(4);
-      break;
-    }
-    default: {
-      LOG_UNEXPECTED_OPCODE(opCode);
+        cpu.addToProgramAddress(2);
+        cpu.addToCycles(3);
+        break;
+      }
+      case STZ_AbsoluteIndexedWithX:  // STZ Absolute Indexed, X
+      {
+        cpu.addToProgramAddress(3);
+        cpu.addToCycles(5);
+        break;
+      }
+      case (0x74):  // STZ Direct Page Indexed, X
+      {
+        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        {
+          cpu.addToCycles(1);
+        }
+
+        cpu.addToProgramAddress(2);
+        cpu.addToCycles(4);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 }
-}
+

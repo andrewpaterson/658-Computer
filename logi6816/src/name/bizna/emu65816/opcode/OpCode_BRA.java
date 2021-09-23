@@ -14,6 +14,6 @@ public class OpCode_BRA
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.addToCycles(executeBranchShortOnCondition(true, cpu));
   }
 }

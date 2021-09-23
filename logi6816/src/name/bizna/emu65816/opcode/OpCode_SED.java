@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 public class OpCode_SED
-    extends OpCodeStatus
+    extends OpCode
 {
   public OpCode_SED(String mName, byte mCode, AddressingMode mAddressingMode)
   {
@@ -14,6 +14,8 @@ public class OpCode_SED
   @Override
   public void execute(Cpu65816 cpu)
   {
-
+    cpu.getCpuStatus().setDecimalFlag();
+    cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
+

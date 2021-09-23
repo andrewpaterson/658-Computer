@@ -36,15 +36,15 @@ public class Stack
     push8Bit(leastSignificant);
   }
 
-  public int pull8Bit(Cpu65816 cpu)
+  public int pull8Bit()
   {
     mStackAddress.incrementOffsetBy(Sizeof.sizeofByte);
-    return cpu.readByte(mStackAddress);
+    return mSystemBus.readByte(mStackAddress);
   }
 
-  public int pull16Bit(Cpu65816 cpu)
+  public int pull16Bit()
   {
-    return toShort((pull8Bit(cpu) | ((pull8Bit(cpu)) << 8)));
+    return toShort((pull8Bit() | ((pull8Bit()) << 8)));
   }
 
   public int getStackPointer()

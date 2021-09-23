@@ -19,13 +19,13 @@ public class OpCode_PLA
   {
     if (cpu.accumulatorIs8BitWide())
     {
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.getStack().pull8Bit(cpu)));
+      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.getStack().pull8Bit()));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(cpu.getA()));
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
-      cpu.setA(cpu.getStack().pull16Bit(cpu));
+      cpu.setA(cpu.getStack().pull16Bit());
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
       cpu.addToProgramAddressAndCycles(1, 5);
     }

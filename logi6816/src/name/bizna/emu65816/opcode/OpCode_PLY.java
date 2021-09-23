@@ -1,6 +1,5 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
@@ -18,14 +17,14 @@ public class OpCode_PLY
   {
     if (cpu.indexIs8BitWide())
     {
-      int value = cpu.getStack().pull8Bit(cpu);
+      int value = cpu.getStack().pull8Bit();
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
-      cpu.setY(cpu.getStack().pull16Bit(cpu));
+      cpu.setY(cpu.getStack().pull16Bit());
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
       cpu.addToProgramAddressAndCycles(1, 5);
     }

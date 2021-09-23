@@ -346,7 +346,7 @@ public class Cpu65816
       break;
       case AbsoluteLong:
       {
-        Address address = mSystemBus.readAddressAt(mProgramAddress.newWithOffset1());
+        Address address = mSystemBus.readLongAddressAt(mProgramAddress.newWithOffset1());
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();
       }
@@ -362,7 +362,7 @@ public class Cpu65816
       case AbsoluteIndirectLong:
       {
         Address addressOfEffectiveAddress = new Address(mSystemBus.readTwoBytes(mProgramAddress.newWithOffset1()));
-        Address address = mSystemBus.readAddressAt(addressOfEffectiveAddress);
+        Address address = mSystemBus.readLongAddressAt(addressOfEffectiveAddress);
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();
       }
@@ -386,7 +386,7 @@ public class Cpu65816
       break;
       case AbsoluteLongIndexedWithX:
       {
-        Address firstStageAddress = mSystemBus.readAddressAt(mProgramAddress.newWithOffset1());
+        Address firstStageAddress = mSystemBus.readLongAddressAt(mProgramAddress.newWithOffset1());
         Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();
@@ -436,7 +436,7 @@ public class Cpu65816
       case DirectPageIndirectLong:
       {
         Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
-        Address address = mSystemBus.readAddressAt(firstStageAddress);
+        Address address = mSystemBus.readLongAddressAt(firstStageAddress);
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();
       }
@@ -461,7 +461,7 @@ public class Cpu65816
       case DirectPageIndirectLongIndexedWithY:
       {
         Address firstStageAddress = new Address((mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
-        Address secondStageAddress = mSystemBus.readAddressAt(firstStageAddress);
+        Address secondStageAddress = mSystemBus.readLongAddressAt(firstStageAddress);
         Address address = Address.sumOffsetToAddressNoWrapAround(secondStageAddress, indexWithYRegister());
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();

@@ -14,7 +14,7 @@ public class OpCode_PLD
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setD(cpu.getStack().pull16Bit(cpu));
+    cpu.setD(cpu.getStack().pull16Bit());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getD());
     cpu.addToProgramAddressAndCycles(1, 5);
   }

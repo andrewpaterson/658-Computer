@@ -14,7 +14,7 @@ public class OpCode_PLP
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().setRegisterValue(cpu.getStack().pull8Bit(cpu));
+    cpu.getCpuStatus().setRegisterValue(cpu.getStack().pull8Bit());
     cpu.addToProgramAddressAndCycles(1, 4);
   }
 }

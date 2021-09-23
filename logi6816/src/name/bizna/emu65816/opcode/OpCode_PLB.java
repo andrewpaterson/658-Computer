@@ -14,7 +14,7 @@ public class OpCode_PLB
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDB(cpu.getStack().pull8Bit(cpu));
+    cpu.setDB(cpu.getStack().pull8Bit());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(cpu.getDB());
     cpu.addToProgramAddressAndCycles(1, 4);
   }

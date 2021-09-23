@@ -17,18 +17,18 @@ public class OpCode_RTI
   {
     // Note: The picture in the 65816 programming manual about this looks wrong.
     // This implementation follows the text instead.
-    cpu.getCpuStatus().setRegisterValue(cpu.getStack().pull8Bit(cpu));
+    cpu.getCpuStatus().setRegisterValue(cpu.getStack().pull8Bit());
 
     if (cpu.getCpuStatus().emulationFlag())
     {
-      Address newProgramAddress = new Address(cpu.getProgramAddress().getBank(), cpu.getStack().pull16Bit(cpu));
+      Address newProgramAddress = new Address(cpu.getProgramAddress().getBank(), cpu.getStack().pull16Bit());
       cpu.setProgramAddress(newProgramAddress);
       cpu.addToCycles(6);
     }
     else
     {
-      int offset = cpu.getStack().pull16Bit(cpu);
-      int bank = cpu.getStack().pull8Bit(cpu);
+      int offset = cpu.getStack().pull16Bit();
+      int bank = cpu.getStack().pull8Bit();
       Address newProgramAddress = new Address(bank, offset);
       cpu.setProgramAddress(newProgramAddress);
       cpu.addToCycles(7);

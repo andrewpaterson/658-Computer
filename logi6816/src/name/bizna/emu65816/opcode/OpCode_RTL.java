@@ -17,8 +17,8 @@ public class OpCode_RTL
   @Override
   public void execute(Cpu65816 cpu)
   {
-    int newOffset = toShort(cpu.getStack().pull16Bit(cpu) + 1);
-    int newBank = cpu.getStack().pull8Bit(cpu);
+    int newOffset = toShort(cpu.getStack().pull16Bit() + 1);
+    int newBank = cpu.getStack().pull8Bit();
 
     Address returnAddress = new Address(newBank, newOffset);
     cpu.setProgramAddress(returnAddress);

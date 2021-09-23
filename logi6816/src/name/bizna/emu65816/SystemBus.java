@@ -79,7 +79,7 @@ public class SystemBus
     return 0;
   }
 
-  public Address readAddressAt(Address address)
+  public Address readLongAddressAt(Address address)
   {
     for (SystemBusDevice device : mDevices)
     {

@@ -14,14 +14,14 @@ public class OpCode_SEP
   @Override
   public void execute(Cpu65816 cpu)
   {
-    byte value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
     if (cpu.getCpuStatus().emulationFlag())
     {
       // In emulation mode status bits 4 and 5 are not affected
       // 0xCF = 11001111
       value &= 0xCF;
     }
-    byte statusReg = cpu.getCpuStatus().getRegisterValue();
+    int statusReg = cpu.getCpuStatus().getRegisterValue();
     statusReg |= value;
     cpu.getCpuStatus().setRegisterValue(statusReg);
 

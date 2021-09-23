@@ -18,7 +18,7 @@ public class OpCode_LDY
   protected void executeLDY8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(opCodeDataAddress);
+    int value = cpu.readByte(opCodeDataAddress);
     cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }

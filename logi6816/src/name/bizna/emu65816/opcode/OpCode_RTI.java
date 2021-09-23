@@ -27,8 +27,8 @@ public class OpCode_RTI
     }
     else
     {
-      short offset = cpu.getStack().pull16Bit(cpu);
-      byte bank = cpu.getStack().pull8Bit(cpu);
+      int offset = cpu.getStack().pull16Bit(cpu);
+      int bank = cpu.getStack().pull8Bit(cpu);
       Address newProgramAddress = new Address(bank, offset);
       cpu.setProgramAddress(newProgramAddress);
       cpu.addToCycles(7);

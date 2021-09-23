@@ -16,20 +16,20 @@ public class OpCode_MVN
   public void execute(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte destinationBank = cpu.readByte(addressOfOpCodeData);
-    addressOfOpCodeData.incrementOffsetBy((short) 1);
-    byte sourceBank = cpu.readByte(addressOfOpCodeData);
+    int destinationBank = cpu.readByte(addressOfOpCodeData);
+    addressOfOpCodeData.incrementOffsetBy( 1);
+    int sourceBank = cpu.readByte(addressOfOpCodeData);
 
     Address sourceAddress = new Address(sourceBank, cpu.getX());
     Address destinationAddress = new Address (destinationBank, cpu.getY());
 
     while (cpu.getA() != 0xFFFF)
     {
-      byte toTransfer = cpu.readByte(sourceAddress);
+      int toTransfer = cpu.readByte(sourceAddress);
       cpu.storeByte(destinationAddress, toTransfer);
 
-      sourceAddress.incrementOffsetBy((short) 1);
-      destinationAddress.incrementOffsetBy((short) 1);
+      sourceAddress.incrementOffsetBy( 1);
+      destinationAddress.incrementOffsetBy( 1);
       cpu.decA();
 
       cpu.addToCycles(7);

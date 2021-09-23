@@ -4,6 +4,8 @@ import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class OpCode_PER
     extends OpCode
 {
@@ -17,8 +19,8 @@ public class OpCode_PER
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int opCodeSize = 3;
-    short operand = cpu.readTwoBytes(opCodeDataAddress);
-    short sum = (short) (operand + opCodeSize + cpu.getProgramAddress().getOffset());
+    int operand = cpu.readTwoBytes(opCodeDataAddress);
+    int sum = toShort (operand + opCodeSize + cpu.getProgramAddress().getOffset());
     cpu.getStack().push16Bit(sum);
     cpu.addToProgramAddressAndCycles(3, 6);
   }

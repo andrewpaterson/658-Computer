@@ -16,7 +16,7 @@ public class OpCode_TCS
   @Override
   public void execute(Cpu65816 cpu)
   {
-    short currentStackPointer = cpu.getStack().getStackPointer();
+    int currentStackPointer = cpu.getStack().getStackPointer();
     if (cpu.getCpuStatus().emulationFlag())
     {
       currentStackPointer = Binary.setLower8BitsOf16BitsValue(currentStackPointer, Binary.lower8BitsOf(cpu.getA()));
@@ -25,9 +25,7 @@ public class OpCode_TCS
     {
       currentStackPointer = cpu.getA();
     }
-
     cpu.clearStack(new Address(currentStackPointer));
-
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

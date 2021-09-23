@@ -14,7 +14,7 @@ public class OpCode_CLV
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().clearOverflowFlag();
+    cpu.getCpuStatus().setOverflowFlag(false);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

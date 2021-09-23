@@ -18,7 +18,7 @@ public class OpCode_PLY
   {
     if (cpu.indexIs8BitWide())
     {
-      byte value = cpu.getStack().pull8Bit(cpu);
+      int value = cpu.getStack().pull8Bit(cpu);
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
       cpu.addToProgramAddressAndCycles(1, 4);

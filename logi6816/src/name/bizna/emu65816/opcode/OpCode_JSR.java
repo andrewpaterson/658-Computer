@@ -5,6 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_JSR
     extends OpCode
@@ -21,8 +22,8 @@ public class OpCode_JSR
     {
       case JSR_Absolute:  // JSR Absolute
       {
-        cpu.getStack().push16Bit((short) (cpu.getProgramAddress().getOffset() + 2));
-        short destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
+        cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+        int destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
         cpu.setProgramAddress(new Address(cpu.getProgramAddress().getBank(), destinationAddress));
         cpu.addToCycles(6);
         break;
@@ -30,7 +31,7 @@ public class OpCode_JSR
       case JSR_AbsoluteLong:  // JSR Absolute Long
       {
         cpu.getStack().push8Bit(cpu.getProgramAddress().getBank());
-        cpu.getStack().push16Bit((short) (cpu.getProgramAddress().getOffset() + 3));
+        cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 3));
         cpu.setProgramAddress(cpu.getAddressOfOpCodeData(getAddressingMode()));
         cpu.addToCycles(8);
         break;
@@ -39,7 +40,7 @@ public class OpCode_JSR
       {
         Address destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
         cpu.getStack().push8Bit(cpu.getProgramAddress().getBank());
-        cpu.getStack().push16Bit((short) (cpu.getProgramAddress().getOffset() + 2));
+        cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
         cpu.setProgramAddress(destinationAddress);
         cpu.addToCycles(8);
         break;

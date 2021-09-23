@@ -16,7 +16,7 @@ public class OpCode_PEA
   public void execute(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short operand = cpu.readTwoBytes(opCodeDataAddress);
+    int operand = cpu.readTwoBytes(opCodeDataAddress);
     cpu.getStack().push16Bit(operand);
     cpu.addToProgramAddressAndCycles(3, 5);
   }

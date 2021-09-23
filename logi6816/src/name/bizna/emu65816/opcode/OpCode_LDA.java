@@ -18,7 +18,7 @@ public class OpCode_LDA
   protected void executeLDA8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(opCodeDataAddress);
+    int value = cpu.readByte(opCodeDataAddress);
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }

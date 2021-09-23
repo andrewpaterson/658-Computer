@@ -4,6 +4,8 @@ import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toShort;
+
 public class OpCode_RTL
     extends OpCode
 {
@@ -15,8 +17,8 @@ public class OpCode_RTL
   @Override
   public void execute(Cpu65816 cpu)
   {
-    short newOffset = (short) (cpu.getStack().pull16Bit(cpu) + 1);
-    byte newBank = cpu.getStack().pull8Bit(cpu);
+    int newOffset = toShort(cpu.getStack().pull16Bit(cpu) + 1);
+    int newBank = cpu.getStack().pull8Bit(cpu);
 
     Address returnAddress = new Address(newBank, newOffset);
     cpu.setProgramAddress(returnAddress);

@@ -6,6 +6,8 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_LSR
     extends OpCode
@@ -15,18 +17,18 @@ public class OpCode_LSR
     super(mName, mCode, mAddressingMode);
   }
 
-  void DO_LSR_8_BIT(Cpu65816 cpu, byte value)
+  void DO_LSR_8_BIT(Cpu65816 cpu, int value)
   {
     boolean newCarry = (value & 0x01) != 0;
-    value = (byte) (value >> 1);
+    value = toByte(value >> 1);
     cpu.getCpuStatus().setCarryFlag(newCarry);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
-  void DO_LSR_16_BIT(Cpu65816 cpu, short value)
+  void DO_LSR_16_BIT(Cpu65816 cpu, int value)
   {
     boolean newCarry = (value & 0x0001) != 0;
-    value = (short) (value >> 1);
+    value = toShort(value >> 1);
     cpu.getCpuStatus().setCarryFlag(newCarry);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
   }
@@ -37,13 +39,13 @@ public class OpCode_LSR
 
     if (cpu.accumulatorIs8BitWide())
     {
-      byte value = cpu.readByte(opCodeDataAddress);
+      int value = cpu.readByte(opCodeDataAddress);
       DO_LSR_8_BIT(cpu, value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      short value = cpu.readTwoBytes(opCodeDataAddress);
+      int value = cpu.readTwoBytes(opCodeDataAddress);
       DO_LSR_16_BIT(cpu, value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
     }
@@ -53,7 +55,7 @@ public class OpCode_LSR
   {
     if (cpu.accumulatorIs8BitWide())
     {
-      byte value = Binary.lower8BitsOf(cpu.getA());
+      int value = Binary.lower8BitsOf(cpu.getA());
       DO_LSR_8_BIT(cpu, value);
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     }

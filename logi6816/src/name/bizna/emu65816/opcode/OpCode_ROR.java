@@ -6,6 +6,8 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_ROR
     extends OpCode
@@ -15,35 +17,35 @@ public class OpCode_ROR
     super(mName, mCode, mAddressingMode);
   }
 
-  void DO_ROR_8_BIT(Cpu65816 cpu, byte value)
+  void DO_ROR_8_BIT(Cpu65816 cpu, int value)
   {
     boolean carryWasSet = cpu.getCpuStatus().carryFlag();
     boolean carryWillBeSet = (value & 0x01) != 0;
-    value = (byte) (value >> 1);
+    value = toByte(value >> 1);
     if (carryWasSet)
     {
-      value = Binary.setBitIn8BitValue(value, (byte) 7);
+      value = Binary.setBitIn8BitValue(value, 7);
     }
     else
     {
-      value = Binary.clearBitIn8BitValue(value, (byte) 7);
+      value = Binary.clearBitIn8BitValue(value, 7);
     }
     cpu.getCpuStatus().setCarryFlag(carryWillBeSet);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
-  void DO_ROR_16_BIT(Cpu65816 cpu, short value)
+  void DO_ROR_16_BIT(Cpu65816 cpu, int value)
   {
     boolean carryWasSet = cpu.getCpuStatus().carryFlag();
     boolean carryWillBeSet = (value & 0x0001) != 0;
-    value = (short) (value >> 1);
+    value = toShort(value >> 1);
     if (carryWasSet)
     {
-      value = Binary.setBitIn16BitValue(value, (byte) 15);
+      value = Binary.setBitIn16BitValue(value, 15);
     }
     else
     {
-      value = Binary.clearBitIn16BitValue(value, (byte) 15);
+      value = Binary.clearBitIn16BitValue(value, 15);
     }
     cpu.getCpuStatus().setCarryFlag(carryWillBeSet);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
@@ -58,13 +60,13 @@ public class OpCode_ROR
 
     if (cpu.accumulatorIs8BitWide())
     {
-      byte value = cpu.readByte(opCodeDataAddress);
+      int value = cpu.readByte(opCodeDataAddress);
       DO_ROR_8_BIT(cpu, value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      short value = cpu.readTwoBytes(opCodeDataAddress);
+      int value = cpu.readTwoBytes(opCodeDataAddress);
       DO_ROR_16_BIT(cpu, value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
     }
@@ -74,13 +76,13 @@ public class OpCode_ROR
   {
     if (cpu.accumulatorIs8BitWide())
     {
-      byte value = Binary.lower8BitsOf(cpu.getA());
+      int value = Binary.lower8BitsOf(cpu.getA());
       DO_ROR_8_BIT(cpu, value);
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     }
     else
     {
-      short value = cpu.getA();
+      int value = cpu.getA();
       DO_ROR_16_BIT(cpu, value);
       cpu.setA(value);
     }

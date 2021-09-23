@@ -6,6 +6,8 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_EOR
     extends OpCode
@@ -18,8 +20,8 @@ public class OpCode_EOR
   protected void executeEOR8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte operand = cpu.readByte(opCodeDataAddress);
-    byte result = (byte) (Binary.lower8BitsOf(cpu.getA()) ^ operand);
+    int operand = cpu.readByte(opCodeDataAddress);
+    int result = toByte(Binary.lower8BitsOf(cpu.getA()) ^ operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
   }
@@ -27,8 +29,8 @@ public class OpCode_EOR
   protected void executeEOR16Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short operand = cpu.readTwoBytes(opCodeDataAddress);
-    short result = (short) (cpu.getA() ^ operand);
+    int operand = cpu.readTwoBytes(opCodeDataAddress);
+    int result = toShort(cpu.getA() ^ operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     cpu.setA(result);
   }

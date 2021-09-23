@@ -3,6 +3,8 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toByte;
+
 public class OpCode_REP
     extends OpCode
 {
@@ -14,9 +16,9 @@ public class OpCode_REP
   @Override
   public void execute(Cpu65816 cpu)
   {
-    byte value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
-    byte statusByte = cpu.getCpuStatus().getRegisterValue();
-    cpu.getCpuStatus().setRegisterValue((byte) (statusByte & ~value));
+    int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int statusByte = cpu.getCpuStatus().getRegisterValue();
+    cpu.getCpuStatus().setRegisterValue(toByte(statusByte & ~value));
     cpu.addToProgramAddressAndCycles(2, 3);
   }
 }

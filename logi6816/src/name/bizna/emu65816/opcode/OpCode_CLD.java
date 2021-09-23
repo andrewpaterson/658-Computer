@@ -14,7 +14,7 @@ public class OpCode_CLD
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().clearDecimalFlag();
+    cpu.getCpuStatus().setDecimalFlag(false);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

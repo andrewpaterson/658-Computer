@@ -44,7 +44,7 @@ public class Binary
   {
     destination &= 0xFF00;
     destination |= toByte(value);
-    return toShort(destination);
+    return destination;
   }
 
   public static int setBitIn8BitValue(int value, int bitNumber)

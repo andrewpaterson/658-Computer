@@ -86,10 +86,10 @@ public class OpCode_BIT
 
     if (getAddressingMode() != AddressingMode.Immediate)
     {
-      cpu.getCpuStatus().setSignFlag (isHighestBitSet);
-      cpu.getCpuStatus().setOverflowFlag (isNextToHighestBitSet);
+      cpu.getCpuStatus().setSignFlag(isHighestBitSet);
+      cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
     }
-    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((byte) (value & Binary.lower8BitsOf(cpu.getA())));
+    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((value & Binary.lower8BitsOf(cpu.getA())));
   }
 
   protected void execute16BitBIT(Cpu65816 cpu)
@@ -101,10 +101,10 @@ public class OpCode_BIT
 
     if (getAddressingMode() != AddressingMode.Immediate)
     {
-      cpu.getCpuStatus().setSignFlag (isHighestBitSet);
-      cpu.getCpuStatus().setOverflowFlag (isNextToHighestBitSet);
+      cpu.getCpuStatus().setSignFlag(isHighestBitSet);
+      cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
     }
-    cpu.getCpuStatus().updateZeroFlagFrom16BitValue((short) (value & cpu.getA()));
+    cpu.getCpuStatus().updateZeroFlagFrom16BitValue((value & cpu.getA()));
   }
 }
 

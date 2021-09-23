@@ -4,6 +4,8 @@ import name.bizna.emu65816.*;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_SBC
     extends OpCode
@@ -16,16 +18,16 @@ public class OpCode_SBC
   public void execute8BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(dataAddress);
-    byte accumulator = Binary.lower8BitsOf(cpu.getA());
+    int value = cpu.readByte(dataAddress);
+    int accumulator = Binary.lower8BitsOf(cpu.getA());
     boolean borrow = !cpu.getCpuStatus().carryFlag();
 
-    short result16Bit = (short) (accumulator - value - (borrow ? 1 : 0));
+    int result16Bit = toShort(accumulator - value - (borrow ? 1 : 0));
 
     // Is there a borrow from the penultimate bit, redo the diff with 7 bits value and find out.
     accumulator &= 0x7F;
     value &= 0x7F;
-    byte partialResult = (byte) (accumulator - value - (borrow ? 1 : 0));
+    int partialResult = toByte(accumulator - value - (borrow ? 1 : 0));
     // Is bit 8 set?
     boolean borrowFromPenultimateBit = is8bitValueNegative(partialResult);
 
@@ -33,18 +35,11 @@ public class OpCode_SBC
     boolean borrowFromLastBit = (result16Bit & 0x0100) != 0;
 
     boolean overflow = borrowFromLastBit ^ borrowFromPenultimateBit;
-    if (overflow)
-    {
-      cpu.getCpuStatus().setOverflowFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearOverflowFlag();
-    }
+    cpu.getCpuStatus().setOverflowFlag(overflow);
 
     cpu.getCpuStatus().setCarryFlag(!borrowFromLastBit);
 
-    byte result8Bit = Binary.lower8BitsOf(result16Bit);
+    int result8Bit = Binary.lower8BitsOf(result16Bit);
     // Update sign and zero flags
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result8Bit);
     // Store the 8 bit result in the accumulator
@@ -54,8 +49,8 @@ public class OpCode_SBC
   protected void execute16BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(dataAddress);
-    short accumulator = cpu.getA();
+    int value = cpu.readTwoBytes(dataAddress);
+    int accumulator = cpu.getA();
     boolean borrow = !cpu.getCpuStatus().carryFlag();
 
     int result32Bit = accumulator - value - (borrow ? 1 : 0);
@@ -63,7 +58,7 @@ public class OpCode_SBC
     // Is there a borrow from the penultimate bit, redo the diff with 15 bits value and find out.
     accumulator &= 0x7FFF;
     value &= 0x7FFF;
-    short partialResult = (short) (accumulator - value - (borrow ? 1 : 0));
+    int partialResult = toShort(accumulator - value - (borrow ? 1 : 0));
     // Is bit 15 set?
     boolean borrowFromPenultimateBit = is8bitValueNegative(partialResult);
 
@@ -71,20 +66,13 @@ public class OpCode_SBC
     boolean borrowFromLastBit = (result32Bit & 0x0100) != 0;
 
     boolean overflow = borrowFromLastBit ^ borrowFromPenultimateBit;
-    if (overflow)
-    {
-      cpu.getCpuStatus().setOverflowFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearOverflowFlag();
-    }
+    cpu.getCpuStatus().setOverflowFlag(overflow);
 
     cpu.getCpuStatus().setCarryFlag(!borrowFromLastBit);
 
-    short result16Bit = Binary.lower8BitsOf((short) result32Bit);
+    int result16Bit = Binary.lower8BitsOf(result32Bit);
     // Update sign and zero flags
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue((byte) result16Bit);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(result16Bit));
     // Store the 8 bit result in the accumulator
     cpu.setA(result16Bit);
   }
@@ -92,13 +80,12 @@ public class OpCode_SBC
   protected void execute8BitBCDSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(dataAddress);
-    byte accumulator = Binary.lower8BitsOf(cpu.getA());
+    int value = cpu.readByte(dataAddress);
+    int accumulator = Binary.lower8BitsOf(cpu.getA());
 
-    byte result = 0;
     BCDResult bcd8BitResult = Binary.bcdSubtract8Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
     boolean borrow = bcd8BitResult.carry;
-    result = bcd8BitResult.value;
+    int result = bcd8BitResult.value;
     cpu.getCpuStatus().setCarryFlag(!borrow);
 
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
@@ -108,17 +95,16 @@ public class OpCode_SBC
   protected void execute16BitBCDSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(dataAddress);
-    short accumulator = cpu.getA();
+    int value = cpu.readTwoBytes(dataAddress);
+    int accumulator = cpu.getA();
 
-    short result = 0;
     BCDResult bcd16BitResult = Binary.bcdSubtract16Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
     boolean borrow = bcd16BitResult.carry;
-    result = bcd16BitResult.value;
+    int result = bcd16BitResult.value;
     cpu.getCpuStatus().setCarryFlag(!borrow);
 
     cpu.setA(result);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue((byte) result);
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(result));
   }
 
   @Override

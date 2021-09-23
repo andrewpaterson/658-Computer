@@ -21,7 +21,7 @@ public class OpCode_JMP
     {
       case JMP_Absolute:  // JMP Absolute
       {
-        short destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
+        int destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
         cpu.setProgramAddress(new Address(cpu.getProgramAddress().getBank(), destinationAddress));
         cpu.addToCycles(3);
         break;

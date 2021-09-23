@@ -4,6 +4,8 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toByte;
+
 public class OpCode_INX
     extends OpCode
 {
@@ -17,8 +19,9 @@ public class OpCode_INX
   {
     if (cpu.indexIs8BitWide())
     {
-      byte lowerX = Binary.lower8BitsOf(cpu.getX());
+      int lowerX = Binary.lower8BitsOf(cpu.getX());
       lowerX++;
+      lowerX = toByte(lowerX);
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), lowerX));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lowerX);
     }
@@ -30,3 +33,4 @@ public class OpCode_INX
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
+

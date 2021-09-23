@@ -14,7 +14,7 @@ public class OpCode_SED
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().setDecimalFlag();
+    cpu.getCpuStatus().setDecimalFlag(true);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

@@ -14,7 +14,7 @@ public class OpCode_CLI
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().clearInterruptDisableFlag();
+    cpu.getCpuStatus().setInterruptDisableFlag(false);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

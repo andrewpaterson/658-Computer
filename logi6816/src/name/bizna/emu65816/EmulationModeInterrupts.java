@@ -2,19 +2,19 @@ package name.bizna.emu65816;
 
 public class EmulationModeInterrupts
 {
-  public short coProcessorEnable;
-  public short unused;
-  public short abort;
-  public short nonMaskableInterrupt;
-  public short reset;
-  public short brkIrq;
+  public int coProcessorEnable;
+  public int unused;
+  public int abort;
+  public int nonMaskableInterrupt;
+  public int reset;
+  public int brkIrq;
 
-  public EmulationModeInterrupts(short coProcessorEnable,
-                                 short unused,
-                                 short abort,
-                                 short nonMaskableInterrupt,
-                                 short reset,
-                                 short brkIrq)
+  public EmulationModeInterrupts(int coProcessorEnable,
+                                 int unused,
+                                 int abort,
+                                 int nonMaskableInterrupt,
+                                 int reset,
+                                 int brkIrq)
   {
     this.coProcessorEnable = coProcessorEnable;
     this.unused = unused;

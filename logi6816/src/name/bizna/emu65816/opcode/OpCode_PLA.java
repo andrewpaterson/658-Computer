@@ -4,6 +4,8 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toByte;
+
 public class OpCode_PLA
     extends OpCode
 {
@@ -18,7 +20,7 @@ public class OpCode_PLA
     if (cpu.accumulatorIs8BitWide())
     {
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.getStack().pull8Bit(cpu)));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue((byte) cpu.getA());
+      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(cpu.getA()));
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else

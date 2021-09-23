@@ -3,6 +3,8 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
+import static name.bizna.emu65816.Unsigned.toByte;
+
 public class OpCode_XCE
     extends OpCode
 {
@@ -16,29 +18,14 @@ public class OpCode_XCE
   {
     boolean oldCarry = cpu.getCpuStatus().carryFlag();
     boolean oldEmulation = cpu.getCpuStatus().emulationFlag();
-    if (oldCarry)
-    {
-      cpu.getCpuStatus().setEmulationFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearEmulationFlag();
-    }
+    cpu.getCpuStatus().setEmulationFlag(oldCarry);
     cpu.getCpuStatus().setCarryFlag(oldEmulation);
 
-    cpu.setX((short) (cpu.getX() & 0xFF));
-    cpu.setY((short) (cpu.getY() & 0xFF));
+    cpu.setX(toByte(cpu.getX()));
+    cpu.setY(toByte(cpu.getY()));
 
-    if (cpu.getCpuStatus().emulationFlag())
-    {
-      cpu.getCpuStatus().setAccumulatorWidthFlag();
-      cpu.getCpuStatus().setIndexWidthFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearAccumulatorWidthFlag();
-      cpu.getCpuStatus().clearIndexWidthFlag();
-    }
+    cpu.getCpuStatus().setAccumulatorWidthFlag(cpu.getCpuStatus().emulationFlag());
+    cpu.getCpuStatus().setIndexWidthFlag(cpu.getCpuStatus().emulationFlag());
 
     // New stack
     cpu.clearStack();

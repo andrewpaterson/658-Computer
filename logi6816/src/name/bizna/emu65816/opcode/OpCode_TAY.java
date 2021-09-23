@@ -18,7 +18,7 @@ public class OpCode_TAY
     if ((cpu.accumulatorIs8BitWide() && cpu.indexIs8BitWide()) ||
         (cpu.accumulatorIs16BitWide() && cpu.indexIs8BitWide()))
     {
-      byte lower8BitsOfA = Binary.lower8BitsOf(cpu.getA());
+      int lower8BitsOfA = Binary.lower8BitsOf(cpu.getA());
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), lower8BitsOfA));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
     }

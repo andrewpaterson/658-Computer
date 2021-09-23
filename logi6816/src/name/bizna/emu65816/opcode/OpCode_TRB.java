@@ -7,6 +7,8 @@ import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.TRB_Absolute;
 import static name.bizna.emu65816.OpCodeTable.TRB_DirectPage;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_TRB
     extends OpCode
@@ -19,36 +21,20 @@ public class OpCode_TRB
   protected void execute8BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(addressOfOpCodeData);
-    byte lowerA = Binary.lower8BitsOf(cpu.getA());
-    byte result = (byte) (value & ~lowerA);
+    int value = cpu.readByte(addressOfOpCodeData);
+    int lowerA = Binary.lower8BitsOf(cpu.getA());
+    int result = toByte(value & ~lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
-
-    if ((value & lowerA) == 0)
-    {
-      cpu.getCpuStatus().setZeroFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearZeroFlag();
-    }
+    cpu.getCpuStatus().setZeroFlag((value & lowerA) == 0);
   }
 
   protected void execute16BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(addressOfOpCodeData);
-    short result = (short) (value & ~cpu.getA());
+    int value = cpu.readTwoBytes(addressOfOpCodeData);
+    int result = toShort(value & ~cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);
-
-    if ((value & cpu.getA()) == 0)
-    {
-      cpu.getCpuStatus().setZeroFlag();
-    }
-    else
-    {
-      cpu.getCpuStatus().clearZeroFlag();
-    }
+    cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);
   }
 
   @Override

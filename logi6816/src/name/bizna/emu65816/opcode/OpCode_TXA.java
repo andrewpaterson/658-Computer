@@ -17,19 +17,19 @@ public class OpCode_TXA
   {
     if (cpu.accumulatorIs8BitWide() && cpu.indexIs8BitWide())
     {
-      byte value = Binary.lower8BitsOf(cpu.getX());
+      int value = Binary.lower8BitsOf(cpu.getX());
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
     else if (cpu.accumulatorIs8BitWide() && cpu.indexIs16BitWide())
     {
-      byte value = Binary.lower8BitsOf(cpu.getX());
+      int value = Binary.lower8BitsOf(cpu.getX());
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
     else if (cpu.accumulatorIs16BitWide() && cpu.indexIs8BitWide())
     {
-      byte value = Binary.lower8BitsOf(cpu.getX());
+      int value = Binary.lower8BitsOf(cpu.getX());
       cpu.setA(value);
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
@@ -38,7 +38,6 @@ public class OpCode_TXA
       cpu.setA(cpu.getX());
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     }
-
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

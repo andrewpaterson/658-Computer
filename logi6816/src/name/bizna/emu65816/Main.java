@@ -4,18 +4,18 @@ public class Main
 {
   public static void main(String[] args)
   {
-    EmulationModeInterrupts emi = new EmulationModeInterrupts((short) 0xfff4,
-                                                              (short) 0xfff6,
-                                                              (short) 0xfff8,
-                                                              (short) 0xfffa,
-                                                              (short) 0xfffc,
-                                                              (short) 0xfffe);
-    NativeModeInterrupts nmi = new NativeModeInterrupts((short) 0xffe4,
-                                                        (short) 0xffe6,
-                                                        (short) 0xffe8,
-                                                        (short) 0xffea,
-                                                        (short) 0xfffc,
-                                                        (short) 0xffee);
+    EmulationModeInterrupts emi = new EmulationModeInterrupts(0xfff4,
+                                                              0xfff6,
+                                                              0xfff8,
+                                                              0xfffa,
+                                                              0xfffc,
+                                                              0xfffe);
+    NativeModeInterrupts nmi = new NativeModeInterrupts(0xffe4,
+                                                        0xffe6,
+                                                        0xffe8,
+                                                        0xffea,
+                                                        0xfffc,
+                                                        0xffee);
     SystemBus systemBus = new SystemBus();
 
     MemoryDevice memory = new MemoryDevice(128 * MemoryDevice.KB);

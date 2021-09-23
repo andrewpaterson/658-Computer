@@ -22,11 +22,11 @@ public class OpCode_STZ
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     if (cpu.accumulatorIs8BitWide())
     {
-      cpu.storeByte(dataAddress, (byte) 0x00);
+      cpu.storeByte(dataAddress, 0x00);
     }
     else
     {
-      cpu.storeTwoBytes(dataAddress, (short) 0x0000);
+      cpu.storeTwoBytes(dataAddress, 0x0000);
       cpu.addToCycles(1);
     }
 

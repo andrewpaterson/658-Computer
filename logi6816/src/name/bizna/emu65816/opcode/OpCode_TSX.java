@@ -15,10 +15,10 @@ public class OpCode_TSX
   @Override
   public void execute(Cpu65816 cpu)
   {
-    short stackPointer = cpu.getStack().getStackPointer();
+    int stackPointer = cpu.getStack().getStackPointer();
     if (cpu.indexIs8BitWide())
     {
-      byte stackPointerLower8Bits = Binary.lower8BitsOf(stackPointer);
+      int stackPointerLower8Bits = Binary.lower8BitsOf(stackPointer);
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), stackPointerLower8Bits));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(stackPointerLower8Bits);
     }
@@ -27,7 +27,6 @@ public class OpCode_TSX
       cpu.setX(stackPointer);
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
     }
-
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

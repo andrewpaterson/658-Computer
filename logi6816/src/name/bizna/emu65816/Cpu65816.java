@@ -544,31 +544,37 @@ public class Cpu65816
   public void incA()
   {
     mA++;
+    mA = toShort(mA);
   }
 
   public void decA()
   {
     mA--;
+    mA = toShort(mA);
   }
 
   public void incY()
   {
     mY++;
+    mY = toShort(mY);
   }
 
   public void incX()
   {
     mX++;
+    mX = toShort(mX);
   }
 
   public void decY()
   {
     mY--;
+    mY = toShort(mY);
   }
 
   public void decX()
   {
     mX--;
+    mX = toShort(mX);
   }
 }
 

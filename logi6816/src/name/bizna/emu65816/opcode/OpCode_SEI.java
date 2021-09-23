@@ -14,7 +14,7 @@ public class OpCode_SEI
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().setInterruptDisableFlag();
+    cpu.getCpuStatus().setInterruptDisableFlag(true);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

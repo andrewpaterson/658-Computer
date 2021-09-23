@@ -7,6 +7,8 @@ import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.OpCodeTable.*;
 import static name.bizna.emu65816.OpCodeTable.DEC_DirectPageIndexedWithX;
+import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_DEC
     extends OpCode
@@ -19,8 +21,9 @@ public class OpCode_DEC
   protected void execute8BitDecInMemory(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    byte value = cpu.readByte(opCodeDataAddress);
+    int value = cpu.readByte(opCodeDataAddress);
     value--;
+    value = toByte(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     cpu.storeByte(opCodeDataAddress, value);
   }
@@ -28,8 +31,9 @@ public class OpCode_DEC
   protected void execute16BitDecInMemory(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    short value = cpu.readTwoBytes(opCodeDataAddress);
+    int value = cpu.readTwoBytes(opCodeDataAddress);
     value--;
+    value = toShort(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
     cpu.storeTwoBytes(opCodeDataAddress, value);
   }
@@ -43,8 +47,9 @@ public class OpCode_DEC
       {
         if (cpu.accumulatorIs8BitWide())
         {
-          byte lowerA = Binary.lower8BitsOf(cpu.getA());
+          int lowerA = Binary.lower8BitsOf(cpu.getA());
           lowerA--;
+          lowerA = toByte(lowerA);
           cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), lowerA));
           cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lowerA);
         }

@@ -47,9 +47,12 @@ void Cpu65816::executeORA16Bit(OpCode &opCode)
 
 void Cpu65816::executeORA(OpCode &opCode)
 {
-    if (accumulatorIs8BitWide()) {
+    if (accumulatorIs8BitWide()) 
+    {
         executeORA8Bit(opCode);
-    } else {
+    } 
+    else 
+    {
         executeORA16Bit(opCode);
         addToCycles(1);
     }

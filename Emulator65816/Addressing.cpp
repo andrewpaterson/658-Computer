@@ -231,3 +231,4 @@ Address Cpu65816::getAddressOfOpCodeData(OpCode &opCode)
 
     return Address(dataAddressBank, dataAddressOffset);
 }
+

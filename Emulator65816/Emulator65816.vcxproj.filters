@@ -8,6 +8,9 @@
     <Filter Include="Source Files\Log">
       <UniqueIdentifier>{2e93d9d0-c980-490a-b191-fb2e6e030add}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\OpCode">
+      <UniqueIdentifier>{6f1a9d5f-5abb-49c3-8a8c-734a8648244f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Addressing.cpp">
@@ -23,90 +26,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CpuStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_ADC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_AND.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_ASL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_BIT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_Branch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_CMP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_CPX_CPY.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_EOR.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_INC_DEC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_Interrupt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_JumpReturn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_LDA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_LDX.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_LDY.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_LSR.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_Misc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_ORA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_ROL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_ROR.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_SBC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_STA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_Stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_StatusReg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_STX.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_STY.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_STZ.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_Transfer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OpCode_TSB_TRB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpCodeTable.cpp">
@@ -130,6 +49,90 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files\Log</Filter>
     </ClCompile>
+    <ClCompile Include="OpCode_ADC.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_AND.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_ASL.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_BIT.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_Branch.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_CMP.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_CPX_CPY.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_EOR.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_INC_DEC.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_Interrupt.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_JumpReturn.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_LDA.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_LDX.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_LDY.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_LSR.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_Misc.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_ORA.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_ROL.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_ROR.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_SBC.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_STA.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_Stack.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_StatusReg.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_STX.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_STY.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_STZ.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_Transfer.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
+    <ClCompile Include="OpCode_TSB_TRB.cpp">
+      <Filter>Source Files\OpCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Addressing.h">
@@ -150,9 +153,6 @@
     <ClInclude Include="Interrupt.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="OpCode.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Stack.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -167,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Source Files\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="OpCode.h">
+      <Filter>Source Files\OpCode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

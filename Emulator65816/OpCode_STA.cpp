@@ -27,7 +27,6 @@
 
 void Cpu65816::executeSTA(OpCode &opCode)
 {
-
     Address dataAddress = getAddressOfOpCodeData(opCode);
     if (accumulatorIs8BitWide()) {
         mSystemBus.storeByte(dataAddress, Binary::lower8BitsOf(mA));

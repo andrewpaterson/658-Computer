@@ -14,7 +14,7 @@ public class OpCode_STP
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.reset();
+    cpu.stop();
     cpu.addToProgramAddress(1);
     cpu.addToCycles(3);
   }

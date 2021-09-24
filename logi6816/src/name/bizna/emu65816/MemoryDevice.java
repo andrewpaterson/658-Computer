@@ -19,6 +19,13 @@ public class MemoryDevice
     this.size = size;
   }
 
+  public MemoryDevice(byte[] bytes)
+  {
+    pvMemory = new byte[bytes.length];
+    System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
+    this.size = bytes.length;
+  }
+
   public void storeByte(Address address, int byteValue)
   {
     int bank = address.getBank();
@@ -81,6 +88,13 @@ public class MemoryDevice
       byte value = (byte) (charToHex(hi) * 0x10 + charToHex(lo));
       pvMemory[address] = value;
     }
+  }
+
+  public byte[] get(int start, int length)
+  {
+    byte[] bytes = new byte[length];
+    System.arraycopy(pvMemory, start, bytes, 0, length);
+    return bytes;
   }
 }
 

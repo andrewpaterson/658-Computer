@@ -15,6 +15,7 @@ public class Cpu65816
   protected CpuStatus mCpuStatus;
   protected Pins mPins;
   protected Stack mStack;
+  protected boolean mStopped;
 
   // Accumulator register (short)
   protected int mA;
@@ -33,7 +34,7 @@ public class Cpu65816
   long mTotalCyclesCounter;
 
   // OpCode Table.
-  static OpCode[] OP_CODE_TABLE;
+  protected static OpCode[] OP_CODE_TABLE;
 
   public Cpu65816(SystemBus systemBus, EmulationModeInterrupts emulationInterrupts, NativeModeInterrupts nativeInterrupts)
   {
@@ -51,6 +52,7 @@ public class Cpu65816
     mDB = 0;
     mD = 0;
     mCpuStatus = new CpuStatus();
+    mStopped = false;
   }
 
   public void setRESPin(boolean value)
@@ -161,10 +163,11 @@ public class Cpu65816
 
   public void executeNextInstruction()
   {
-    if (mPins.RES)
+    if ((mPins.RES) || (mStopped))
     {
       return;
     }
+
     if ((mPins.IRQ) && (!mCpuStatus.interruptDisableFlag()))
     {
         /*
@@ -196,6 +199,8 @@ public class Cpu65816
     // Fetch the instruction
     int instruction = mSystemBus.readByte(mProgramAddress);
     OpCode opCode = OP_CODE_TABLE[instruction];
+    System.out.println(opCode.getName());
+
     // Execute it
     opCode.execute(this);
   }
@@ -575,6 +580,16 @@ public class Cpu65816
   {
     mX--;
     mX = toShort(mX);
+  }
+
+  public void stop()
+  {
+    mStopped = true;
+  }
+
+  public boolean isStopped()
+  {
+    return mStopped;
   }
 }
 

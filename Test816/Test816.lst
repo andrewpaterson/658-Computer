@@ -1,4 +1,4 @@
-  Fri Sep 24 2021 14:35                                                Page 1
+  Fri Sep 24 2021 14:40                                                Page 1
 
 
                      ***************************************
@@ -32,7 +32,7 @@
     20 00:F007: 1B           	TCS	     		;and set the stack to it
     21                        
     22                        
-    23 00:F008: E2 20        	SEP		#$20	;8 bit accum
+    23 00:F008: E2 20        	SEP		#$20	;8 bit accumulator
     24                        	LONGA 	OFF
     25 00:F00A: A9 00        	LDA 	#$00	;get bank of data
     26 00:F00C: 48           	PHA
@@ -45,44 +45,43 @@
     33                        	ORG $0400
     34                        
     35                        MYSTART
-    36 00:0400: E2 30        	SEP		#$30	;8 bit registers
+    36 00:0400: E2 20        	SEP		#$20	;8 bit accumulator
     37                        	LONGA 	OFF
-    38                        	LONGI 	OFF
-    39                        
-    40 00:0402: A9 2E        	LDA #$2e
-    41 00:0404: A0 01        	LDY #PROGRESS
-    42                        LOOP:	
-    43 00:0406: 99 00 00     	STA 0,Y
-    44 00:0409: C8           	INY
-    45 00:040A: C0 11        	CPY #ENDPROGRESS
-    46 00:040C: D0 F8        	BNE LOOP
-    47 00:040E: DB           	STP
-    48                        	
-    49                        ; This section defines the interrupt and reset vec
-  Fri Sep 24 2021 14:35                                                Page 2
-
-
+    38                        
+    39 00:0402: A9 2E        	LDA #$2e
+    40 00:0404: A0 01 00     	LDY #PROGRESS
+    41                        LOOP:	
+    42 00:0407: 99 00 00     	STA 0,Y
+    43 00:040A: C8           	INY
+    44 00:040B: C0 11 00     	CPY #ENDPROGRESS
+    45 00:040E: D0 F7        	BNE LOOP
+    46 00:0410: DB           	STP
+    47                        	
+    48                        ; This section defines the interrupt and reset vec
                     tors.    
-    50                        
-    51                        	ORG	$FFE4
-    52                        
-    53 00:FFE4: 00 00        N_COP   DW    0
-    54 00:FFE6: 00 00        N_BRK   DW    0
-    55 00:FFE8: 00 00        N_ABORT DW    0
-    56 00:FFEA: 00 00        N_NMI   DW    0
-    57 00:FFEC: 00 00        N_RSRVD DW    0
-    58 00:FFEE: 00 00        N_IRQ   DW    0
-    59 00:FFF0:              	DS    4
-    60 00:FFF4: 00 00        E_COP   DW    0
-    61 00:FFF6: 00 00        E_RSRVD DW    0
-    62 00:FFF8: 00 00        E_ABORT DW    0
-    63 00:FFFA: 00 00        E_NMI   DW    0
-    64 00:FFFC: 00 F0        E_RESET DW    START
-    65 00:FFFE: 00 00        E_IRQ   DW    0
-    66                        
-    67 01:0000:              	ENDS
-    68                        	END
+  Fri Sep 24 2021 14:40                                                Page 2
 
 
-      Lines assembled: 68
+    49                        
+    50                        	ORG	$FFE4
+    51                        
+    52 00:FFE4: 00 00        N_COP   DW    0
+    53 00:FFE6: 00 00        N_BRK   DW    0
+    54 00:FFE8: 00 00        N_ABORT DW    0
+    55 00:FFEA: 00 00        N_NMI   DW    0
+    56 00:FFEC: 00 00        N_RSRVD DW    0
+    57 00:FFEE: 00 00        N_IRQ   DW    0
+    58 00:FFF0:              	DS    4
+    59 00:FFF4: 00 00        E_COP   DW    0
+    60 00:FFF6: 00 00        E_RSRVD DW    0
+    61 00:FFF8: 00 00        E_ABORT DW    0
+    62 00:FFFA: 00 00        E_NMI   DW    0
+    63 00:FFFC: 00 F0        E_RESET DW    START
+    64 00:FFFE: 00 00        E_IRQ   DW    0
+    65                        
+    66 01:0000:              	ENDS
+    67                        	END
+
+
+      Lines assembled: 67
       Errors: 0

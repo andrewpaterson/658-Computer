@@ -199,7 +199,6 @@ public class Cpu65816
     // Fetch the instruction
     int instruction = mSystemBus.readByte(mProgramAddress);
     OpCode opCode = OP_CODE_TABLE[instruction];
-    System.out.println(opCode.getName());
 
     // Execute it
     opCode.execute(this);

@@ -20,7 +20,7 @@ START:
 	TCS	     		;and set the stack to it
 
 
-	SEP		#$20	;8 bit accum
+	SEP		#$20	;8 bit accumulator
 	LONGA 	OFF
 	LDA 	#$00	;get bank of data
 	PHA
@@ -33,9 +33,8 @@ START:
 	ORG $0400
 
 MYSTART
-	SEP		#$30	;8 bit registers
+	SEP		#$20	;8 bit accumulator
 	LONGA 	OFF
-	LONGI 	OFF
 
 	LDA #$2e
 	LDY #PROGRESS

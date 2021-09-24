@@ -1,0 +1,88 @@
+  Fri Sep 24 2021 14:35                                                Page 1
+
+
+                     ***************************************
+                     **      WDC 65C816 Macro Assembler   **
+                     **                                   **
+                     **     Version 3.49.1- Feb  6 2006    **
+                     ***************************************
+
+     1                        STARTUP SECTION
+     2                        
+     3                        	ORG	$0000
+     4                        
+     5 00:0000: 5B           	DB '['
+     6                        PROGRESS:	
+     7 00:0001: 78 78 78 78  	DB 'xxxxxxxxxxxxxxxx'
+       00:0005: 78 78 78 78 
+       00:0009: 78 78 78 78 
+       00:000D: 78 78 78 78 
+     8                        ENDPROGRESS:	
+     9 00:0011: 5D           	DB ']'
+    10                        	
+    11                        	ORG $F000
+    12                        	
+    13                        START:
+    14 00:F000: 18           	CLC	     		;clear carry
+    15 00:F001: FB           	XCE	     		;clear emulation
+    16 00:F002: C2 30        	REP		#$30    ;16 bit registers
+    17                        	LONGI 	ON
+    18                        	LONGA	ON
+    19 00:F004: A9 00 01     	LDA		#$0100  ;get the stack address
+    20 00:F007: 1B           	TCS	     		;and set the stack to it
+    21                        
+    22                        
+    23 00:F008: E2 20        	SEP		#$20	;8 bit accum
+    24                        	LONGA 	OFF
+    25 00:F00A: A9 00        	LDA 	#$00	;get bank of data
+    26 00:F00C: 48           	PHA
+    27 00:F00D: AB           	PLB	     		;set data bank register
+    28 00:F00E: C2 20        	REP		#$20    ;back to 16 bit mode
+    29                        	LONGA	ON
+    30                        
+    31 00:F010: 4C 00 04     	JMP   MYSTART	;long jump in case not bank 0
+    32                        
+    33                        	ORG $0400
+    34                        
+    35                        MYSTART
+    36 00:0400: E2 30        	SEP		#$30	;8 bit registers
+    37                        	LONGA 	OFF
+    38                        	LONGI 	OFF
+    39                        
+    40 00:0402: A9 2E        	LDA #$2e
+    41 00:0404: A0 01        	LDY #PROGRESS
+    42                        LOOP:	
+    43 00:0406: 99 00 00     	STA 0,Y
+    44 00:0409: C8           	INY
+    45 00:040A: C0 11        	CPY #ENDPROGRESS
+    46 00:040C: D0 F8        	BNE LOOP
+    47 00:040E: DB           	STP
+    48                        	
+    49                        ; This section defines the interrupt and reset vec
+  Fri Sep 24 2021 14:35                                                Page 2
+
+
+                    tors.    
+    50                        
+    51                        	ORG	$FFE4
+    52                        
+    53 00:FFE4: 00 00        N_COP   DW    0
+    54 00:FFE6: 00 00        N_BRK   DW    0
+    55 00:FFE8: 00 00        N_ABORT DW    0
+    56 00:FFEA: 00 00        N_NMI   DW    0
+    57 00:FFEC: 00 00        N_RSRVD DW    0
+    58 00:FFEE: 00 00        N_IRQ   DW    0
+    59 00:FFF0:              	DS    4
+    60 00:FFF4: 00 00        E_COP   DW    0
+    61 00:FFF6: 00 00        E_RSRVD DW    0
+    62 00:FFF8: 00 00        E_ABORT DW    0
+    63 00:FFFA: 00 00        E_NMI   DW    0
+    64 00:FFFC: 00 F0        E_RESET DW    START
+    65 00:FFFE: 00 00        E_IRQ   DW    0
+    66                        
+    67 01:0000:              	ENDS
+    68                        	END
+
+
+      Lines assembled: 68
+      Errors: 0

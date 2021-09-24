@@ -9,6 +9,16 @@ public class EmulationModeInterrupts
   public int reset;
   public int brkIrq;
 
+  public EmulationModeInterrupts()
+  {
+    this(0xfff4,
+         0xfff6,
+         0xfff8,
+         0xfffa,
+         0xfffc,
+         0xfffe);
+  }
+
   public EmulationModeInterrupts(int coProcessorEnable,
                                  int unused,
                                  int abort,

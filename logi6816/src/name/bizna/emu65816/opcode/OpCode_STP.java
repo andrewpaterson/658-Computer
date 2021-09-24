@@ -6,13 +6,13 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_STP
     extends OpCode
 {
-  public OpCode_STP(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_STP(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     cpu.stop();
     cpu.addToProgramAddress(1);

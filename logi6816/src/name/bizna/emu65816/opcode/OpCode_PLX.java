@@ -7,13 +7,13 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_PLX
     extends OpCode
 {
-  public OpCode_PLX(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_PLX(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.indexIs8BitWide())
     {

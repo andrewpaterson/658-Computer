@@ -9,13 +9,13 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_PLA
     extends OpCode
 {
-  public OpCode_PLA(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_PLA(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.accumulatorIs8BitWide())
     {

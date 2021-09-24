@@ -13,7 +13,7 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_ASL
     extends OpCode
 {
-  public OpCode_ASL(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_ASL(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
@@ -74,7 +74,7 @@ public class OpCode_ASL
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     switch (getCode())
     {

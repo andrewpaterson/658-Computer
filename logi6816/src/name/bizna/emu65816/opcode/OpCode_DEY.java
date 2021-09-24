@@ -5,17 +5,18 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_DEY
     extends OpCode
 {
-  public OpCode_DEY(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_DEY(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.indexIs8BitWide())
     {
@@ -27,8 +28,11 @@ public class OpCode_DEY
     }
     else
     {
-      cpu.decY();
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
+      int y = (cpu.getY());
+      y--;
+      y = toShort(y);
+      cpu.setY(y);
+      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(y);
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

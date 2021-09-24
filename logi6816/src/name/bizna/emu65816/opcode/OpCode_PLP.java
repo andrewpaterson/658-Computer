@@ -6,13 +6,13 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_PLP
     extends OpCode
 {
-  public OpCode_PLP(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_PLP(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     cpu.getCpuStatus().setRegisterValue(cpu.getStack().pull8Bit());
     cpu.addToProgramAddressAndCycles(1, 4);

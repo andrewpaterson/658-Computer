@@ -10,7 +10,7 @@ import static name.bizna.emu65816.OpCodeTable.*;
 public class OpCode_LDX
     extends OpCode
 {
-  public OpCode_LDX(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_LDX(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
@@ -31,7 +31,7 @@ public class OpCode_LDX
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.indexIs16BitWide())
     {

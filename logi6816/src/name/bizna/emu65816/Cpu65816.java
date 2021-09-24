@@ -1,6 +1,9 @@
 package name.bizna.emu65816;
 
+import name.bizna.emu65816.opcode.InterruptRequest;
+import name.bizna.emu65816.opcode.NonMaskableInterrupt;
 import name.bizna.emu65816.opcode.OpCode;
+import name.bizna.emu65816.opcode.Reset;
 
 import static name.bizna.emu65816.Address.sumOffsetToAddress;
 import static name.bizna.emu65816.Unsigned.toShort;
@@ -17,34 +20,43 @@ public class Cpu65816
   protected Stack mStack;
   protected boolean mStopped;
 
-  // Accumulator register (short)
   protected int mA;
-  // X index register (short)
   protected int mX;
-  // Y index register (short)
   protected int mY;
-  // Data bank register (short)
   protected int mDB;
-  // Direct page register (short)
   protected int mD;
-  // Address of the current OpCode
   protected Address mProgramAddress;
 
   // Total number of cycles
-  long mTotalCyclesCounter;
+  protected long mTotalCyclesCounter;
 
-  // OpCode Table.
+  protected boolean previousClock;
+  protected int cycle;
+  protected OpCode opCode;
+
+  // Real OpCode Table.
   protected static OpCode[] OP_CODE_TABLE;
+  protected static OpCode resetOpcode;
+  protected static OpCode irqOpcode;
+  protected static OpCode nmiOpcode;
 
-  public Cpu65816(SystemBus systemBus, EmulationModeInterrupts emulationInterrupts, NativeModeInterrupts nativeInterrupts)
+  protected Address address;
+  protected boolean read;
+  protected int data;
+
+  public Cpu65816(SystemBus systemBus,
+                  Pins pins)
   {
     mSystemBus = systemBus;
-    mEmulationInterrupts = emulationInterrupts;
-    mNativeInterrupts = nativeInterrupts;
+    mEmulationInterrupts = new EmulationModeInterrupts();
+    mNativeInterrupts = new NativeModeInterrupts();
     mProgramAddress = new Address(0x0000);
     mStack = new Stack(mSystemBus);
     OP_CODE_TABLE = OpCodeTable.createTable();
-    mPins = new Pins();
+    resetOpcode = new Reset("Reset", -1, AddressingMode.Interrupt);
+    irqOpcode = new InterruptRequest("IRQ", -1, AddressingMode.Interrupt);
+    nmiOpcode = new NonMaskableInterrupt("NMI", -1, AddressingMode.Interrupt);
+    mPins = pins;
     mTotalCyclesCounter = 0;
     mA = 0;
     mX = 0;
@@ -53,30 +65,9 @@ public class Cpu65816
     mD = 0;
     mCpuStatus = new CpuStatus();
     mStopped = false;
-  }
-
-  public void setRESPin(boolean value)
-  {
-    if (!value && mPins.RES)
-    {
-      reset();
-    }
-    mPins.RES = value;
-  }
-
-  public void setIRQPin(boolean value)
-  {
-    mPins.IRQ = value;
-  }
-
-  public void setNMIPin(boolean value)
-  {
-    mPins.NMI = value;
-  }
-
-  public void setABORTPin(boolean value)
-  {
-    mPins.ABORT = value;
+    previousClock = true;
+    cycle = 0;
+    opCode = resetOpcode;
   }
 
   public void setX(int x)
@@ -139,69 +130,64 @@ public class Cpu65816
     return mCpuStatus;
   }
 
-  /**
-   * Resets the cpu to its initial state.
-   */
-  public void reset()
+  public void tick(boolean clock)
   {
-    setRESPin(true);
-    mCpuStatus.setEmulationFlag(true);
-    mCpuStatus.setAccumulatorWidthFlag(true);
-    mCpuStatus.setIndexWidthFlag(true);
-    mX &= 0xFF;
-    mY &= 0xFF;
-    mD = 0x0;
-    mStack = new Stack(mSystemBus);
-    mProgramAddress = new Address(mEmulationInterrupts.reset);
-    mProgramAddress = new Address(mSystemBus.readTwoBytes(mProgramAddress));
-  }
-
-  public void setRDYPin(boolean value)
-  {
-    mPins.RDY = value;
-  }
-
-  public void executeNextInstruction()
-  {
-    if ((mPins.RES) || (mStopped))
+    if (mStopped)
     {
       return;
     }
 
-    if ((mPins.IRQ) && (!mCpuStatus.interruptDisableFlag()))
+    boolean clockFallingEdge = !clock && previousClock;
+    boolean clockRisingEdge = clock && !previousClock;
+
+  }
+
+  public void executeNextInstruction()
+  {
+    if ((mStopped))
     {
-        /*
-            The program bank register (PB, the A16-A23 part of the address bus) is pushed onto the hardware stack (65C816/65C802 only when operating in native mode).
-            The most significant byte (MSB) of the program counter (PC) is pushed onto the stack.
-            The least significant byte (LSB) of the program counter is pushed onto the stack.
-            The status register (SR) is pushed onto the stack.
-            The interrupt disable flag is set in the status register.
-            PB is loaded with $00 (65C816/65C802 only when operating in native mode).
-            PC is loaded from the relevant vector (see tables).
-        */
-      if (!mCpuStatus.emulationFlag())
-      {
-        mStack.push8Bit(mProgramAddress.getBank());
-        mStack.push16Bit(mProgramAddress.getOffset());
-        mStack.push8Bit(mCpuStatus.getRegisterValue());
-        mCpuStatus.setInterruptDisableFlag(true);
-        mProgramAddress = new Address(mSystemBus.readTwoBytes(new Address(mNativeInterrupts.interruptRequest)));
-      }
-      else
-      {
-        mStack.push16Bit(mProgramAddress.getOffset());
-        mStack.push8Bit(mCpuStatus.getRegisterValue());
-        mCpuStatus.setInterruptDisableFlag(true);
-        mProgramAddress = new Address(mSystemBus.readTwoBytes(new Address(mEmulationInterrupts.brkIrq)));
-      }
+      return;
     }
+
+//    if (opCode.isReset())
+//    {
+//      return;
+//    }
+
+//    if ((mPins.IRQ) && (!mCpuStatus.interruptDisableFlag()))
+//    {
+//        /*
+//            The program bank register (PB, the A16-A23 part of the address bus) is pushed onto the hardware stack (65C816/65C802 only when operating in native mode).
+//            The most significant byte (MSB) of the program counter (PC) is pushed onto the stack.
+//            The least significant byte (LSB) of the program counter is pushed onto the stack.
+//            The status register (SR) is pushed onto the stack.
+//            The interrupt disable flag is set in the status register.
+//            PB is loaded with $00 (65C816/65C802 only when operating in native mode).
+//            PC is loaded from the relevant vector (see tables).
+//        */
+//      if (!mCpuStatus.emulationFlag())
+//      {
+//        mStack.push8Bit(mProgramAddress.getBank());
+//        mStack.push16Bit(mProgramAddress.getOffset());
+//        mStack.push8Bit(mCpuStatus.getRegisterValue());
+//        mCpuStatus.setInterruptDisableFlag(true);
+//        mProgramAddress = new Address(mSystemBus.readTwoBytes(new Address(mNativeInterrupts.interruptRequest)));
+//      }
+//      else
+//      {
+//        mStack.push16Bit(mProgramAddress.getOffset());
+//        mStack.push8Bit(mCpuStatus.getRegisterValue());
+//        mCpuStatus.setInterruptDisableFlag(true);
+//        mProgramAddress = new Address(mSystemBus.readTwoBytes(new Address(mEmulationInterrupts.brkIrq)));
+//      }
+//    }
 
     // Fetch the instruction
     int instruction = mSystemBus.readByte(mProgramAddress);
     OpCode opCode = OP_CODE_TABLE[instruction];
 
     // Execute it
-    opCode.execute(this);
+    opCode.execute(this, 0, false);
   }
 
   public boolean accumulatorIs8BitWide()
@@ -271,6 +257,21 @@ public class Cpu65816
   public void setProgramAddress(Address address)
   {
     mProgramAddress = address;
+  }
+
+  public void setProgramAddressBank(int bank)
+  {
+    mProgramAddress.mBank = bank;
+  }
+
+  public void setProgramAddressHigh(int data)
+  {
+    mProgramAddress.mOffset = (mProgramAddress.mOffset & 0xff) | data << 8;
+  }
+
+  public void setProgramAddressLow(int data)
+  {
+    mProgramAddress.mOffset = (mProgramAddress.mOffset & 0xff00) | data;
   }
 
   public boolean opCodeAddressingCrossesPageBoundary(AddressingMode addressingMode)
@@ -439,7 +440,7 @@ public class Cpu65816
       break;
       case DirectPageIndirectLong:
       {
-        Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        Address firstStageAddress = new Address((mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
         Address address = mSystemBus.readLongAddressAt(firstStageAddress);
         dataAddressBank = address.getBank();
         dataAddressOffset = address.getOffset();
@@ -447,14 +448,14 @@ public class Cpu65816
       break;
       case DirectPageIndexedIndirectWithX:
       {
-        Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
+        Address firstStageAddress = new Address((mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
         dataAddressBank = mDB;
         dataAddressOffset = mSystemBus.readTwoBytes(firstStageAddress);
       }
       break;
       case DirectPageIndirectIndexedWithY:
       {
-        Address firstStageAddress = new Address( (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        Address firstStageAddress = new Address((mD + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
         int secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
         Address thirdStageAddress = new Address(mDB, secondStageOffset);
         Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
@@ -474,18 +475,18 @@ public class Cpu65816
       case StackRelative:
       {
         dataAddressBank = 0x00;
-        dataAddressOffset = toShort (mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        dataAddressOffset = toShort(mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
       }
       break;
       case StackDirectPageIndirect:
       {
         dataAddressBank = 0x00;
-        dataAddressOffset = toShort (mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
+        dataAddressOffset = toShort(mD + mSystemBus.readByte(mProgramAddress.newWithOffset1()));
       }
       break;
       case StackRelativeIndirectIndexedWithY:
       {
-        Address firstStageAddress = new Address( (mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
+        Address firstStageAddress = new Address((mStack.getStackPointer() + mSystemBus.readByte(mProgramAddress.newWithOffset1())));
         int secondStageOffset = mSystemBus.readTwoBytes(firstStageAddress);
         Address thirdStageAddress = new Address(mDB, secondStageOffset);
         Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
@@ -557,30 +558,6 @@ public class Cpu65816
     mA = toShort(mA);
   }
 
-  public void incY()
-  {
-    mY++;
-    mY = toShort(mY);
-  }
-
-  public void incX()
-  {
-    mX++;
-    mX = toShort(mX);
-  }
-
-  public void decY()
-  {
-    mY--;
-    mY = toShort(mY);
-  }
-
-  public void decX()
-  {
-    mX--;
-    mX = toShort(mX);
-  }
-
   public void stop()
   {
     mStopped = true;
@@ -589,6 +566,33 @@ public class Cpu65816
   public boolean isStopped()
   {
     return mStopped;
+  }
+
+  public void doneInstruction()
+  {
+    cycle = 0;
+  }
+
+  public void nextCycle()
+  {
+    cycle++;
+  }
+
+  public void readAddress(Address address)
+  {
+    this.address = address;
+    this.read = true;
+  }
+
+  public void writeAddress(Address address)
+  {
+    this.address = address;
+    this.read = false;
+  }
+
+  public int getData()
+  {
+    return data;
   }
 }
 

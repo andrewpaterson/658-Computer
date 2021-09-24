@@ -12,7 +12,7 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_TSB
     extends OpCode
 {
-  public OpCode_TSB(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_TSB(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
@@ -37,7 +37,7 @@ public class OpCode_TSB
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     switch (getCode())
     {

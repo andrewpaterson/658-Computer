@@ -10,13 +10,13 @@ import static name.bizna.emu65816.OpCodeTable.*;
 public class OpCode_STY
     extends OpCode
 {
-  public OpCode_STY(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_STY(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     if (cpu.accumulatorIs8BitWide())

@@ -10,7 +10,7 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_ORA
     extends OpCode
 {
-  public OpCode_ORA(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_ORA(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
@@ -33,7 +33,7 @@ public class OpCode_ORA
     cpu.setA(result);
   }
 
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.accumulatorIs8BitWide())
     {

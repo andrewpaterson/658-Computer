@@ -5,18 +5,18 @@ import name.bizna.emu65816.Cpu65816;
 
 public abstract class OpCode
 {
-  private byte mCode;
-  private String mName;
-  private AddressingMode mAddressingMode;
+  private final int mCode;
+  private final String mName;
+  private final AddressingMode mAddressingMode;
 
-  public OpCode(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode(String mName, int mCode, AddressingMode mAddressingMode)
   {
     this.mCode = mCode;
     this.mName = mName;
     this.mAddressingMode = mAddressingMode;
   }
 
-  public byte getCode()
+  public int getCode()
   {
     return mCode;
   }
@@ -31,6 +31,6 @@ public abstract class OpCode
     return mAddressingMode;
   }
 
-  public abstract void execute(Cpu65816 cpu);
+  public abstract void execute(Cpu65816 cpu, int cycle, boolean clock);
 }
 

@@ -12,7 +12,7 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_INC
     extends OpCode
 {
-  public OpCode_INC(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_INC(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
@@ -38,7 +38,7 @@ public class OpCode_INC
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     switch (getCode())
     {
@@ -54,8 +54,11 @@ public class OpCode_INC
         }
         else
         {
-          cpu.incA();
-          cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+          int a = (cpu.getA());
+          a++;
+          a = toShort(a);
+          cpu.setA(a);
+          cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(a);
         }
         cpu.addToProgramAddressAndCycles(1, 2);
         break;

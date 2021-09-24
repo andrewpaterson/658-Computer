@@ -9,13 +9,13 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_RTL
     extends OpCode
 {
-  public OpCode_RTL(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_RTL(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     int newOffset = toShort(cpu.getStack().pull16Bit() + 1);
     int newBank = cpu.getStack().pull8Bit();

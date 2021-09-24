@@ -7,13 +7,13 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_RTI
     extends OpCode
 {
-  public OpCode_RTI(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_RTI(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     // Note: The picture in the 65816 programming manual about this looks wrong.
     // This implementation follows the text instead.

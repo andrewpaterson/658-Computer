@@ -9,6 +9,16 @@ public class NativeModeInterrupts
   public int reset;
   public int interruptRequest;
 
+  public NativeModeInterrupts()
+  {
+    this(0xffe4,
+         0xffe6,
+         0xffe8,
+         0xffea,
+         0xfffc,
+         0xffee);
+  }
+
   public NativeModeInterrupts(int coProcessorEnable,
                               int brk,
                               int abort,

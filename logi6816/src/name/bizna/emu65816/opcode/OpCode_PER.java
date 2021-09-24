@@ -9,13 +9,13 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_PER
     extends OpCode
 {
-  public OpCode_PER(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_PER(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int opCodeSize = 3;

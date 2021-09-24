@@ -8,13 +8,13 @@ import static name.bizna.emu65816.opcode.Branch.executeBranchShortOnCondition;
 public class OpCode_BCC
     extends OpCode
 {
-  public OpCode_BCC(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_BCC(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     cpu.addToCycles(executeBranchShortOnCondition(!cpu.getCpuStatus().carryFlag(), cpu, getAddressingMode()));
   }

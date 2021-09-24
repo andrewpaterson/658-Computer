@@ -8,13 +8,13 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_TXS
     extends OpCode
 {
-  public OpCode_TXS(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_TXS(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.getCpuStatus().emulationFlag())
     {

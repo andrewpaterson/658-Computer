@@ -9,13 +9,13 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_XBA
     extends OpCode
 {
-  public OpCode_XBA(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_XBA(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     int lowerA = Binary.lower8BitsOf(cpu.getA());
     int higherA = Binary.higher8BitsOf(cpu.getA());

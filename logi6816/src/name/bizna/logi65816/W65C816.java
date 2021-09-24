@@ -6218,7 +6218,7 @@ public class W65C816
     }
 
     boolean isReady = parent.isReady(instanceState);
-    if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
+    if (!isReady && !stopped && (fetchedOpcode == WAI_implied) && (cycle == 2))
     {
       parent.setReady(instanceState, true);
     }
@@ -6248,7 +6248,7 @@ public class W65C816
         }
         else
         {
-          fetchData(instanceState);
+          doInstruction(instanceState);
         }
       }
       while (cycle < 0 && !stopped);
@@ -6282,7 +6282,7 @@ public class W65C816
     cycle++;
   }
 
-  private void fetchData(InstanceState instanceState)
+  private void doInstruction(InstanceState instanceState)
   {
     data = parent.getDataFromPort(instanceState);
     doInstruction();

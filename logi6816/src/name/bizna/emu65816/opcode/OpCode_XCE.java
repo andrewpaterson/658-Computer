@@ -8,13 +8,13 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_XCE
     extends OpCode
 {
-  public OpCode_XCE(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_XCE(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     boolean oldCarry = cpu.getCpuStatus().carryFlag();
     boolean oldEmulation = cpu.getCpuStatus().emulationFlag();

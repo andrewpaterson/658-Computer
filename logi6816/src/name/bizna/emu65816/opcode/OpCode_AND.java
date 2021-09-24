@@ -10,7 +10,7 @@ import static name.bizna.emu65816.OpCodeTable.*;
 public class OpCode_AND
     extends OpCode
 {
-  public OpCode_AND(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_AND(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
@@ -34,7 +34,7 @@ public class OpCode_AND
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     if (cpu.accumulatorIs16BitWide())
     {

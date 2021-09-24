@@ -8,13 +8,13 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_PEI
     extends OpCode
 {
-  public OpCode_PEI(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_PEI(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.readTwoBytes(opCodeDataAddress);

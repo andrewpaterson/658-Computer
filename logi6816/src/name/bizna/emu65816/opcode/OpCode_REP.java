@@ -8,13 +8,13 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_REP
     extends OpCode
 {
-  public OpCode_REP(String mName, byte mCode, AddressingMode mAddressingMode)
+  public OpCode_REP(String mName, int mCode, AddressingMode mAddressingMode)
   {
     super(mName, mCode, mAddressingMode);
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, int cycle, boolean clock)
   {
     int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int statusByte = cpu.getCpuStatus().getRegisterValue();

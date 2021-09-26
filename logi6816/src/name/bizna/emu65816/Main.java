@@ -8,22 +8,36 @@ public class Main
 {
   public static void main(String[] args)
   {
-    SystemBus systemBus = new SystemBus();
-
-    MemoryDevice memory = new MemoryDevice(readBytes(new File("../Test816/Test816.bin")));
-
-    systemBus.registerDevice(memory);
+    Memory memory = new Memory(readBytes(new File("../Test816/Test816.bin")));
 
     Pins pins = new Pins();
-    Cpu65816 cpu = new Cpu65816(systemBus, pins);
+    Cpu65816 cpu = new Cpu65816(pins);
 
     int count = 1024;
     boolean clock = true;
     while (!cpu.isStopped() && count > 0)
     {
-      cpu.tick(clock);
+      pins.setPhi2(clock);
+
+      cpu.tick();
+
+      if (!clock)
+      {
+        if (pins.isValidDataAddress() || pins.isValidProgramAddress())
+        {
+          Address address = cpu.getAddress();  //This should probably use pins not cpu.
+          if (pins.isRead())
+          {
+            pins.setData(memory.readByte(address));
+          }
+          else
+          {
+            memory.writeByte(address, pins.getData());
+          }
+        }
+      }
+
       clock = !clock;
-//      cpu.executeNextInstruction();
       count--;
     }
 

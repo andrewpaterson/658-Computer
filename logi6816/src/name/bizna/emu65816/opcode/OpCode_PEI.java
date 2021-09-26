@@ -14,12 +14,17 @@ public class OpCode_PEI
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.readTwoBytes(opCodeDataAddress);
-    cpu.getStack().push16Bit(operand);
+    cpu.push16Bit(operand);
     int opCycles = Binary.lower8BitsOf(cpu.getD()) != 0 ? 1 : 0;
     cpu.addToProgramAddressAndCycles(2, 6 + opCycles);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }

@@ -13,7 +13,7 @@ public class OpCode_TXY
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.indexIs8BitWide())
     {
@@ -27,6 +27,11 @@ public class OpCode_TXY
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

@@ -15,14 +15,19 @@ public class OpCode_RTL
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    int newOffset = toShort(cpu.getStack().pull16Bit() + 1);
-    int newBank = cpu.getStack().pull8Bit();
+    int newOffset = toShort(cpu.pull16Bit() + 1);
+    int newBank = cpu.pull8Bit();
 
     Address returnAddress = new Address(newBank, newOffset);
     cpu.setProgramAddress(returnAddress);
     cpu.addToCycles(6);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

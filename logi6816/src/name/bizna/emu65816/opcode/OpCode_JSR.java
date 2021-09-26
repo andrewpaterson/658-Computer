@@ -16,13 +16,13 @@ public class OpCode_JSR
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     switch (getCode())
     {
       case JSR_Absolute:  // JSR Absolute
       {
-        cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+        cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
         int destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
         cpu.setProgramAddress(new Address(cpu.getProgramAddress().getBank(), destinationAddress));
         cpu.addToCycles(6);
@@ -30,8 +30,8 @@ public class OpCode_JSR
       }
       case JSR_AbsoluteLong:  // JSR Absolute Long
       {
-        cpu.getStack().push8Bit(cpu.getProgramAddress().getBank());
-        cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 3));
+        cpu.push8Bit(cpu.getProgramAddress().getBank());
+        cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 3));
         cpu.setProgramAddress(cpu.getAddressOfOpCodeData(getAddressingMode()));
         cpu.addToCycles(8);
         break;
@@ -39,8 +39,8 @@ public class OpCode_JSR
       case JSR_AbsoluteIndexedIndirectWithX:  // JSR Absolute Indexed Indirect, X
       {
         Address destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-        cpu.getStack().push8Bit(cpu.getProgramAddress().getBank());
-        cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+        cpu.push8Bit(cpu.getProgramAddress().getBank());
+        cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
         cpu.setProgramAddress(destinationAddress);
         cpu.addToCycles(8);
         break;
@@ -48,6 +48,11 @@ public class OpCode_JSR
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

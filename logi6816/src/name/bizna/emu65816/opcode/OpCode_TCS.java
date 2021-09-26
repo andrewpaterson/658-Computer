@@ -14,9 +14,9 @@ public class OpCode_TCS
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    int currentStackPointer = cpu.getStack().getStackPointer();
+    int currentStackPointer = cpu.getStackPointer();
     if (cpu.getCpuStatus().emulationFlag())
     {
       currentStackPointer = Binary.setLower8BitsOf16BitsValue(currentStackPointer, Binary.lower8BitsOf(cpu.getA()));
@@ -27,6 +27,11 @@ public class OpCode_TCS
     }
     cpu.clearStack(new Address(currentStackPointer));
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

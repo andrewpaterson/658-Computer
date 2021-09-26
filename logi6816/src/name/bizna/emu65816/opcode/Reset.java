@@ -1,6 +1,9 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.*;
+import name.bizna.emu65816.Address;
+import name.bizna.emu65816.AddressingMode;
+import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.CpuStatus;
 
 public class Reset
     extends OpCode
@@ -11,36 +14,43 @@ public class Reset
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cycle == 1)
+    int cycle = cpu.getCycle();
+
+    switch (cycle)
     {
-      if (!clock)
-      {
+      case 1:
         CpuStatus cpuStatus = cpu.getCpuStatus();
         cpuStatus.setEmulationFlag(true);
         cpuStatus.setAccumulatorWidthFlag(true);
         cpuStatus.setIndexWidthFlag(true);
-        cpu.readAddress(new Address(cpu.getEmulationInterrupts().reset));
-      }
-      else
-      {
+        cpu.readProgram(new Address(cpu.getEmulationInterrupts().reset));
+        break;
+      case 2:
+        cpu.readProgram(new Address(cpu.getEmulationInterrupts().reset + 1));
+        break;
+      default:
+        invalidCycle();
+    }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
+    int cycle = cpu.getCycle();
+    switch (cycle)
+    {
+      case 1:
         cpu.setProgramAddressBank(0);
         cpu.setProgramAddressLow(cpu.getData());
-        cpu.nextCycle();
-      }
-    }
-    else if (cycle == 2)
-    {
-      if (!clock)
-      {
-        cpu.readAddress(new Address(cpu.getEmulationInterrupts().reset + 1));
-      }
-      else
-      {
+        break;
+      case 2:
         cpu.setProgramAddressHigh(cpu.getData());
         cpu.doneInstruction();
-      }
+        break;
+      default:
+        invalidCycle();
     }
   }
 }

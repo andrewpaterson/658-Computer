@@ -1,42 +1,44 @@
 package name.bizna.emu65816;
 
+import static java.lang.Integer.toHexString;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
+import static name.bizna.emu65816.util.StringUtil.rightJustify;
 
 public class Address
 {
   public static final int BANK_SIZE_BYTES = 0x10000;
   public static final int PAGE_SIZE_BYTES = 0x100;
 
-  protected int mBank;
-  protected int mOffset;
+  protected int bank;
+  protected int offset;
 
   public Address()
   {
-    mBank = 0x00;
-    mOffset = 0x0000;
+    bank = 0x00;
+    offset = 0x0000;
   }
 
-  public Address(int mOffset)
+  public Address(int offset)
   {
-    mBank = 0x00;
-    this.mOffset = toShort(mOffset);
+    bank = 0x00;
+    this.offset = toShort(offset);
   }
 
-  public Address(int mBank, int mOffset)
+  public Address(int bank, int offset)
   {
-    this.mBank = toByte(mBank);
-    this.mOffset = toShort(mOffset);
+    this.bank = toByte(bank);
+    this.offset = toShort(offset);
   }
 
   public int getBank()
   {
-    return toByte(mBank);
+    return toByte(bank);
   }
 
   public int getOffset()
   {
-    return toShort(mOffset);
+    return toShort(offset);
   }
 
   public static Address sumOffsetToAddressNoWrapAround(Address address, int offset)
@@ -88,14 +90,30 @@ public class Address
 
   public void decrementOffsetBy(int offset)
   {
-    mOffset -= offset;
-    mOffset = toShort(mOffset);
+    this.offset -= offset;
+    this.offset = toShort(this.offset);
   }
 
   public void incrementOffsetBy(int offset)
   {
-    mOffset += offset;
-    mOffset = toShort(mOffset);
+    this.offset += offset;
+    this.offset = toShort(this.offset);
+  }
+
+  @Override
+  public String toString()
+  {
+    return rightJustify(toHexString(bank), 2, "0") + ":" + rightJustify(toHexString(offset), 4, "0");
+  }
+
+  public void setOffset(int offset)
+  {
+    this.offset = offset;
+  }
+
+  public void setBank(int bank)
+  {
+    this.bank = bank;
   }
 }
 

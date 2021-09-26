@@ -15,11 +15,16 @@ public class OpCode_RTS
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    Address returnAddress = new Address(cpu.getProgramAddress().getBank(), toShort (cpu.getStack().pull16Bit() + 1));
+    Address returnAddress = new Address(cpu.getProgramAddress().getBank(), toShort (cpu.pull16Bit() + 1));
     cpu.setProgramAddress(returnAddress);
     cpu.addToCycles(6);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

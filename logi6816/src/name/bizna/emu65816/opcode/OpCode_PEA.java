@@ -13,11 +13,16 @@ public class OpCode_PEA
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.readTwoBytes(opCodeDataAddress);
-    cpu.getStack().push16Bit(operand);
+    cpu.push16Bit(operand);
     cpu.addToProgramAddressAndCycles(3, 5);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }

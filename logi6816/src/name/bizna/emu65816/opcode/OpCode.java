@@ -2,35 +2,43 @@ package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.EmulatorException;
 
 public abstract class OpCode
 {
-  private final int mCode;
-  private final String mName;
-  private final AddressingMode mAddressingMode;
+  private final int code;
+  private final String name;
+  private final AddressingMode addressingMode;
 
-  public OpCode(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode(String name, int code, AddressingMode addressingMode)
   {
-    this.mCode = mCode;
-    this.mName = mName;
-    this.mAddressingMode = mAddressingMode;
+    this.code = code;
+    this.name = name;
+    this.addressingMode = addressingMode;
+  }
+
+  protected void invalidCycle()
+  {
+    throw new EmulatorException("Invalid Cycle");
   }
 
   public int getCode()
   {
-    return mCode;
+    return code;
   }
 
   public String getName()
   {
-    return mName;
+    return name;
   }
 
   public AddressingMode getAddressingMode()
   {
-    return mAddressingMode;
+    return addressingMode;
   }
 
-  public abstract void execute(Cpu65816 cpu, int cycle, boolean clock);
+  public abstract void executeOnFallingEdge(Cpu65816 cpu);
+
+  public abstract void executeOnRisingEdge(Cpu65816 cpu);
 }
 

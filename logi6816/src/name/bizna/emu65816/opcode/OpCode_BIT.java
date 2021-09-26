@@ -17,7 +17,7 @@ public class OpCode_BIT
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs8BitWide())
     {
@@ -105,6 +105,11 @@ public class OpCode_BIT
       cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
     }
     cpu.getCpuStatus().updateZeroFlagFrom16BitValue((value & cpu.getA()));
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

@@ -14,7 +14,7 @@ public class OpCode_TXS
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.getCpuStatus().emulationFlag())
     {
@@ -31,6 +31,11 @@ public class OpCode_TXS
       cpu.clearStack(new Address(cpu.getX()));
     }
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

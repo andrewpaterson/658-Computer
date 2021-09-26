@@ -12,10 +12,15 @@ public class OpCode_PHD
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.getStack().push16Bit(cpu.getD());
+    cpu.push16Bit(cpu.getD());
     cpu.addToProgramAddressAndCycles(1, 4);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

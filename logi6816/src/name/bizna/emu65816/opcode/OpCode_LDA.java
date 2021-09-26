@@ -31,7 +31,7 @@ public class OpCode_LDA
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs16BitWide())
     {
@@ -167,6 +167,11 @@ public class OpCode_LDA
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

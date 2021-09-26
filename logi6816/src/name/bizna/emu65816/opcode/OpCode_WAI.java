@@ -12,12 +12,17 @@ public class OpCode_WAI
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     //cpu.setRDYPin(false);
 
     cpu.addToProgramAddress(1);
     cpu.addToCycles(3);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

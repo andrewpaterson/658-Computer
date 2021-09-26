@@ -15,13 +15,13 @@ public class OpCode_BRK
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.getCpuStatus().emulationFlag())
     {
-      cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+      cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
       cpu.getCpuStatus().setBreakFlag(true);
-      cpu.getStack().push8Bit(cpu.getCpuStatus().getRegisterValue());
+      cpu.push8Bit(cpu.getCpuStatus().getRegisterValue());
       cpu.getCpuStatus().setInterruptDisableFlag(true);
 
       cpu.setProgramAddress(new Address(cpu.getEmulationInterrupts().brkIrq));
@@ -29,15 +29,20 @@ public class OpCode_BRK
     }
     else
     {
-      cpu.getStack().push8Bit(cpu.getProgramAddress().getBank());
-      cpu.getStack().push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
-      cpu.getStack().push8Bit(cpu.getCpuStatus().getRegisterValue());
+      cpu.push8Bit(cpu.getProgramAddress().getBank());
+      cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+      cpu.push8Bit(cpu.getCpuStatus().getRegisterValue());
       cpu.getCpuStatus().setInterruptDisableFlag(true);
       cpu.getCpuStatus().setDecimalFlag(false);
       Address newAddress = new Address(cpu.getNativeInterrupts().brk);
       cpu.setProgramAddress(newAddress);
       cpu.addToCycles(8);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

@@ -74,7 +74,7 @@ public class OpCode_ASL
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     switch (getCode())
     {
@@ -139,6 +139,11 @@ public class OpCode_ASL
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

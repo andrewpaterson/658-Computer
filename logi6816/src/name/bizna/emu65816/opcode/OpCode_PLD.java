@@ -12,11 +12,16 @@ public class OpCode_PLD
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.setD(cpu.getStack().pull16Bit());
+    cpu.setD(cpu.pull16Bit());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getD());
     cpu.addToProgramAddressAndCycles(1, 5);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

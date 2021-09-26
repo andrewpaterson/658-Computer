@@ -13,18 +13,23 @@ public class OpCode_PHX
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.indexIs8BitWide())
     {
-      cpu.getStack().push8Bit(Binary.lower8BitsOf(cpu.getX()));
+      cpu.push8Bit(Binary.lower8BitsOf(cpu.getX()));
       cpu.addToProgramAddressAndCycles(1, 3);
     }
     else
     {
-      cpu.getStack().push16Bit(cpu.getX());
+      cpu.push16Bit(cpu.getX());
       cpu.addToProgramAddressAndCycles(1, 4);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

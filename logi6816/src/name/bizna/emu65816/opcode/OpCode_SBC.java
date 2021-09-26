@@ -108,7 +108,7 @@ public class OpCode_SBC
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs8BitWide())
     {
@@ -281,6 +281,11 @@ public class OpCode_SBC
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

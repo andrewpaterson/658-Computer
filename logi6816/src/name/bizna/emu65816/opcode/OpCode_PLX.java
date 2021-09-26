@@ -13,21 +13,26 @@ public class OpCode_PLX
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.indexIs8BitWide())
     {
-      int value = cpu.getStack().pull8Bit();
+      int value = cpu.pull8Bit();
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
-      cpu.setX(cpu.getStack().pull16Bit());
+      cpu.setX(cpu.pull16Bit());
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
       cpu.addToProgramAddressAndCycles(1, 5);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

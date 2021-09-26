@@ -12,11 +12,16 @@ public class OpCode_STP
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     cpu.stop();
     cpu.addToProgramAddress(1);
     cpu.addToCycles(3);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

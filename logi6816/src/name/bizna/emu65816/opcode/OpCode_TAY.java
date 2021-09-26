@@ -13,7 +13,7 @@ public class OpCode_TAY
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if ((cpu.accumulatorIs8BitWide() && cpu.indexIs8BitWide()) ||
         (cpu.accumulatorIs16BitWide() && cpu.indexIs8BitWide()))
@@ -28,6 +28,11 @@ public class OpCode_TAY
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

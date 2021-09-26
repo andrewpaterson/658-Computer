@@ -4,22 +4,21 @@ import java.util.Arrays;
 
 import static name.bizna.emu65816.Unsigned.*;
 
-public class MemoryDevice
-    extends SystemBusDevice
+public class Memory
 {
   public static final int KB = 1024;
 
   protected int size;
   protected byte[] pvMemory;
 
-  public MemoryDevice(int size)
+  public Memory(int size)
   {
     pvMemory = new byte[size];
     Arrays.fill(pvMemory, (byte) 0xea);
     this.size = size;
   }
 
-  public MemoryDevice(byte[] bytes)
+  public Memory(byte[] bytes)
   {
     pvMemory = new byte[bytes.length];
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
@@ -41,22 +40,17 @@ public class MemoryDevice
     int offset = address.getOffset();
 
     int i = bank * 64 * KB + offset;
-    return pvMemory[i];
+    return toByte(pvMemory[i]);
   }
 
-  public Address decodeAddress(Address address)
+  public void writeByte(Address address, int data)
   {
     int bank = address.getBank();
     int offset = address.getOffset();
-    int size = bank * 64 * KB + offset;
-    if (size < this.size)
-    {
-      return address;
-    }
-    else
-    {
-      return null;
-    }
+
+    int i = bank * 64 * KB + offset;
+
+    pvMemory[i] = (byte) toByte(data);
   }
 
   byte charToHex(char c)

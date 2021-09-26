@@ -13,18 +13,23 @@ public class OpCode_PHA
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs8BitWide())
     {
-      cpu.getStack().push8Bit(Binary.lower8BitsOf(cpu.getA()));
+      cpu.push8Bit(Binary.lower8BitsOf(cpu.getA()));
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
-      cpu.getStack().push16Bit(cpu.getA());
+      cpu.push16Bit(cpu.getA());
       cpu.addToProgramAddressAndCycles(1, 3);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

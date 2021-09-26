@@ -13,9 +13,9 @@ public class OpCode_TSX
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    int stackPointer = cpu.getStack().getStackPointer();
+    int stackPointer = cpu.getStackPointer();
     if (cpu.indexIs8BitWide())
     {
       int stackPointerLower8Bits = Binary.lower8BitsOf(stackPointer);
@@ -28,6 +28,11 @@ public class OpCode_TSX
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

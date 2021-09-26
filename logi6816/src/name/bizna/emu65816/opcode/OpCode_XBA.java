@@ -15,13 +15,18 @@ public class OpCode_XBA
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     int lowerA = Binary.lower8BitsOf(cpu.getA());
     int higherA = Binary.higher8BitsOf(cpu.getA());
     cpu.setA(toShort(higherA | (((lowerA)) << 8)));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(higherA);
     cpu.addToProgramAddressAndCycles(1, 3);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

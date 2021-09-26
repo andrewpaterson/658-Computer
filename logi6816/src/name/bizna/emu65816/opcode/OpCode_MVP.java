@@ -13,7 +13,7 @@ public class OpCode_MVP
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int destinationBank = cpu.readByte(addressOfOpCodeData);
@@ -36,6 +36,11 @@ public class OpCode_MVP
     }
     cpu.setDB(destinationBank);
     cpu.addToProgramAddress(3);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

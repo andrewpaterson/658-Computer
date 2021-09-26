@@ -12,10 +12,15 @@ public class OpCode_PHB
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.getStack().push8Bit(cpu.getDB());
+    cpu.push8Bit(cpu.getDB());
     cpu.addToProgramAddressAndCycles(1, 3);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

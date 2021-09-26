@@ -13,21 +13,26 @@ public class OpCode_PLY
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.indexIs8BitWide())
     {
-      int value = cpu.getStack().pull8Bit();
+      int value = cpu.pull8Bit();
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
-      cpu.setY(cpu.getStack().pull16Bit());
+      cpu.setY(cpu.pull16Bit());
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
       cpu.addToProgramAddressAndCycles(1, 5);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

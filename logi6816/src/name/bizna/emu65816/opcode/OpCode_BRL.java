@@ -14,7 +14,7 @@ public class OpCode_BRL
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     cpu.addToCycles(executeBranchLongOnCondition(true, cpu));
   }
@@ -28,6 +28,11 @@ public class OpCode_BRL
     }
     // CPU cycles: 4
     return 4;
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

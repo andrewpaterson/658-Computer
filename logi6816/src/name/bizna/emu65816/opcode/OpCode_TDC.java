@@ -12,11 +12,16 @@ public class OpCode_TDC
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     cpu.setA(cpu.getD());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

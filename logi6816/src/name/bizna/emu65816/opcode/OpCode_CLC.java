@@ -12,10 +12,32 @@ public class OpCode_CLC
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.getCpuStatus().setCarryFlag(false);
-    cpu.addToProgramAddressAndCycles(1, 2);
+    int cycle = cpu.getCycle();
+    if (cycle == 1)
+    {
+      cpu.getCpuStatus().setCarryFlag(false);
+      cpu.noAddress();
+    }
+    else
+    {
+      invalidCycle();
+    }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
+    int cycle = cpu.getCycle();
+    if (cycle == 1)
+    {
+      cpu.doneInstruction();
+    }
+    else
+    {
+      invalidCycle();
+    }
   }
 }
 

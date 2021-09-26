@@ -14,8 +14,13 @@ public class OpCode_BCS
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     cpu.addToCycles(executeBranchShortOnCondition(cpu.getCpuStatus().carryFlag(), cpu, getAddressingMode()));
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }

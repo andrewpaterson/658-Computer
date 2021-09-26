@@ -12,11 +12,16 @@ public class OpCode_TSC
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.setA(cpu.getStack().getStackPointer());
+    cpu.setA(cpu.getStackPointer());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     cpu.addToProgramAddressAndCycles(1, 2);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

@@ -15,14 +15,19 @@ public class OpCode_PER
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int opCodeSize = 3;
     int operand = cpu.readTwoBytes(opCodeDataAddress);
     int sum = toShort (operand + opCodeSize + cpu.getProgramAddress().getOffset());
-    cpu.getStack().push16Bit(sum);
+    cpu.push16Bit(sum);
     cpu.addToProgramAddressAndCycles(3, 6);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

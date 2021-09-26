@@ -13,18 +13,23 @@ public class OpCode_PHY
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.indexIs8BitWide())
     {
-      cpu.getStack().push8Bit(Binary.lower8BitsOf(cpu.getY()));
+      cpu.push8Bit(Binary.lower8BitsOf(cpu.getY()));
       cpu.addToProgramAddressAndCycles(1, 3);
     }
     else
     {
-      cpu.getStack().push16Bit(cpu.getY());
+      cpu.push16Bit(cpu.getY());
       cpu.addToProgramAddressAndCycles(1, 4);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

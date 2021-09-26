@@ -12,7 +12,7 @@ public class OpCode_SEP
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
     if (cpu.getCpuStatus().emulationFlag())
@@ -26,6 +26,11 @@ public class OpCode_SEP
     cpu.getCpuStatus().setRegisterValue(statusReg);
 
     cpu.addToProgramAddressAndCycles(2, 3);
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

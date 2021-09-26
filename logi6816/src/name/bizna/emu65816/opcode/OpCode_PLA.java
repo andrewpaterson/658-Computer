@@ -15,20 +15,25 @@ public class OpCode_PLA
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs8BitWide())
     {
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.getStack().pull8Bit()));
+      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.pull8Bit()));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(cpu.getA()));
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
-      cpu.setA(cpu.getStack().pull16Bit());
+      cpu.setA(cpu.pull16Bit());
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
       cpu.addToProgramAddressAndCycles(1, 5);
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

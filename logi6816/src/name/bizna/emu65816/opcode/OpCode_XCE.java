@@ -14,23 +14,44 @@ public class OpCode_XCE
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    boolean oldCarry = cpu.getCpuStatus().carryFlag();
-    boolean oldEmulation = cpu.getCpuStatus().emulationFlag();
-    cpu.getCpuStatus().setEmulationFlag(oldCarry);
-    cpu.getCpuStatus().setCarryFlag(oldEmulation);
+    int cycle = cpu.getCycle();
+    if (cycle == 1)
+    {
+      boolean oldCarry = cpu.getCpuStatus().carryFlag();
+      boolean oldEmulation = cpu.getCpuStatus().emulationFlag();
+      cpu.getCpuStatus().setEmulationFlag(oldCarry);
+      cpu.getCpuStatus().setCarryFlag(oldEmulation);
 
-    cpu.setX(toByte(cpu.getX()));
-    cpu.setY(toByte(cpu.getY()));
+      cpu.setX(toByte(cpu.getX()));
+      cpu.setY(toByte(cpu.getY()));
 
-    cpu.getCpuStatus().setAccumulatorWidthFlag(cpu.getCpuStatus().emulationFlag());
-    cpu.getCpuStatus().setIndexWidthFlag(cpu.getCpuStatus().emulationFlag());
+      cpu.getCpuStatus().setAccumulatorWidthFlag(cpu.getCpuStatus().emulationFlag());
+      cpu.getCpuStatus().setIndexWidthFlag(cpu.getCpuStatus().emulationFlag());
 
-    // New stack
-    cpu.clearStack();
+      cpu.clearStack();
 
-    cpu.addToProgramAddressAndCycles(1, 2);
+      cpu.noAddress();
+    }
+    else
+    {
+      invalidCycle();
+    }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
+    int cycle = cpu.getCycle();
+    if (cycle == 1)
+    {
+      cpu.doneInstruction();
+    }
+    else
+    {
+      invalidCycle();
+    }
   }
 }
 

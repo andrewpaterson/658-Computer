@@ -34,7 +34,7 @@ public class OpCode_AND
   }
 
   @Override
-  public void execute(Cpu65816 cpu, int cycle, boolean clock)
+  public void executeOnFallingEdge(Cpu65816 cpu)
   {
     if (cpu.accumulatorIs16BitWide())
     {
@@ -172,6 +172,11 @@ public class OpCode_AND
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
+  }
+
+  @Override
+  public void executeOnRisingEdge(Cpu65816 cpu)
+  {
   }
 }
 

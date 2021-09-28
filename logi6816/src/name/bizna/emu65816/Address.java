@@ -1,9 +1,11 @@
 package name.bizna.emu65816;
 
-import static java.lang.Integer.toHexString;
+import static name.bizna.emu65816.Binary.setHighByte;
+import static name.bizna.emu65816.Binary.setLowByte;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
-import static name.bizna.emu65816.util.StringUtil.rightJustify;
+import static name.bizna.emu65816.util.StringUtil.to16BitHex;
+import static name.bizna.emu65816.util.StringUtil.to8BitHex;
 
 public class Address
 {
@@ -13,97 +15,77 @@ public class Address
   protected int bank;
   protected int offset;
 
-  public Address()
+  public Address(Address address)
   {
-    bank = 0x00;
-    offset = 0x0000;
+    this(address.getBank(), address.getOffset());
   }
 
-  public Address(int offset)
+  public Address()
   {
-    bank = 0x00;
-    this.offset = toShort(offset);
+    this(0x00, 0x0000);
   }
 
   public Address(int bank, int offset)
   {
+    if (bank > 0xFF)
+    {
+      throw new EmulatorException("Call toByte(bank) before creating an Address.");
+    }
+    if (offset > 0xFFFF)
+    {
+      throw new EmulatorException("Call toShort(offset) before creating an Address.");
+    }
+
     this.bank = toByte(bank);
     this.offset = toShort(offset);
   }
 
   public int getBank()
   {
-    return toByte(bank);
+    return bank;
   }
 
   public int getOffset()
   {
-    return toShort(offset);
+    return offset;
   }
 
-  public static Address sumOffsetToAddressNoWrapAround(Address address, int offset)
-  {
-    int newBank = address.getBank();
-    int newOffset;
-    int offsetSum = address.getOffset() + offset;
-    if (offsetSum >= BANK_SIZE_BYTES)
-    {
-      newBank++;
-      newBank = toByte(newBank);
-      newOffset = toShort((offsetSum - BANK_SIZE_BYTES));
-    }
-    else
-    {
-      newOffset = toShort(address.getOffset() + offset);
-    }
-    return new Address(newBank, newOffset);
-  }
-
-  public static Address sumOffsetToAddressWrapAround(Address address, int offset)
-  {
-    return new Address(address.getBank(), toShort(address.getOffset() + offset));
-  }
-
-  public static Address sumOffsetToAddress(Address address, int offset)
-  {
-    // This wraps around by default
-    // TODO figure out when to wrap around and when not to
-    return sumOffsetToAddressWrapAround(address, offset);
-  }
-
-  public static boolean offsetsAreOnDifferentPages(int offsetFirst, int offsetSecond)
+  public static boolean areOffsetsAreOnDifferentPages(int offsetFirst, int offsetSecond)
   {
     int pageOfFirst = offsetFirst / PAGE_SIZE_BYTES;
     int pageOfSecond = offsetSecond / PAGE_SIZE_BYTES;
     return pageOfFirst != pageOfSecond;
   }
 
-  public Address newWithOffset1()
+  public Address offset(int offset, boolean wrapOffset)
   {
-    return sumOffsetToAddress(this, 1);
-  }
-
-  public Address newWithOffsetNoWrapAround(int offset)
-  {
-    return sumOffsetToAddressNoWrapAround(this, offset);
-  }
-
-  public void decrementOffsetBy(int offset)
-  {
-    this.offset -= offset;
-    this.offset = toShort(this.offset);
-  }
-
-  public void incrementOffsetBy(int offset)
-  {
-    this.offset += offset;
-    this.offset = toShort(this.offset);
+    if (offset != 0)
+    {
+      if (wrapOffset)
+      {
+        this.offset = toShort(this.offset + offset);
+      }
+      else
+      {
+        int newOffset = this.offset + offset;
+        if (newOffset >= BANK_SIZE_BYTES)
+        {
+          this.bank = toByte(bank + 1);
+          this.offset = toShort((newOffset - BANK_SIZE_BYTES));  //This subtraction is probably unnecessary.
+        }
+        else
+        {
+          this.offset = toShort(this.offset + offset);
+        }
+      }
+    }
+    return this;
   }
 
   @Override
   public String toString()
   {
-    return rightJustify(toHexString(bank), 2, "0") + ":" + rightJustify(toHexString(offset), 4, "0");
+    return to8BitHex(bank) + ":" + to16BitHex(offset);
   }
 
   public void setOffset(int offset)
@@ -114,6 +96,16 @@ public class Address
   public void setBank(int bank)
   {
     this.bank = bank;
+  }
+
+  public void setOffsetLow(int offsetLow)
+  {
+    offset = setLowByte(offset, offsetLow);
+  }
+
+  public void setOffsetHigh(int offsetHigh)
+  {
+    offset = setHighByte(offset, offsetHigh);
   }
 }
 

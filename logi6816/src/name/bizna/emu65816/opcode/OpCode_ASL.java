@@ -6,7 +6,7 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -36,9 +36,9 @@ public class OpCode_ASL
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
-      int value = cpu.readByte(opCodeDataAddress);
+      int value = cpu.get8BitData();
       boolean newCarry = is8bitValueNegative(value);
       value = toByte(value << 1);
       cpu.getCpuStatus().setCarryFlag(newCarry);
@@ -47,7 +47,7 @@ public class OpCode_ASL
     }
     else
     {
-      int value = cpu.readTwoBytes(opCodeDataAddress);
+      int value = cpu.get16BitData();
       boolean newCarry = (value & 0x8000) != 0;
       value = toShort(value << 1);
       cpu.getCpuStatus().setCarryFlag(newCarry);
@@ -58,7 +58,7 @@ public class OpCode_ASL
 
   protected void executeAccumulatorASL(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       int value = Binary.lower8BitsOf(cpu.getA());
       DO_ASL_8_BIT(cpu, value);
@@ -86,7 +86,7 @@ public class OpCode_ASL
       }
       case ASL_Absolute:                // ASL Absolute
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -97,11 +97,11 @@ public class OpCode_ASL
       }
       case ASL_DirectPage:                // ASL Direct Page
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -112,7 +112,7 @@ public class OpCode_ASL
       }
       case ASL_AbsoluteIndexedWithX:                // ASL Absolute Indexed, X
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -123,11 +123,11 @@ public class OpCode_ASL
       }
       case ASL_DirectPageIndexedWithX:                // ASL Direct Page Indexed, X
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

@@ -2,7 +2,7 @@ package name.bizna.emu65816;
 
 import name.bizna.emu65816.opcode.*;
 
-import static name.bizna.emu65816.Address.sumOffsetToAddress;
+import static name.bizna.emu65816.Binary.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -38,18 +38,24 @@ public class Cpu65816
   protected static OpCode nmiOpcode;
   protected static OpCode fetchOpcode;
 
-  protected Address address;
-  protected boolean read;
-  protected int data;
-  protected boolean validProgramAddress;
-  protected boolean validDataAddress;
+  protected int pinData;  //Think about this very carefully.
+
+  //These are not the values on the pins, they are internal data.
+  protected boolean internalRead;
+  protected boolean internalValidProgramAddress;
+  protected boolean internalValidDataAddress;
+  protected Address internalAddress;
+  protected int internalData;
+  protected int internalDirectOffset;
+  protected int internalImmediate;
+  protected int internalStackOffset;
 
   public Cpu65816(Pins pins)
   {
     mEmulationInterrupts = new EmulationModeInterrupts();
     mNativeInterrupts = new NativeModeInterrupts();
-    mProgramAddress = new Address(0x0000);
-    mStackAddress = new Address(0x01FF);
+    mProgramAddress = new Address(0x00, 0x0000);
+    mStackAddress = new Address(0x00, 0x01FF);
     opCodeTable = OpCodeTable.createTable();
     resetOpcode = new Reset("Reset", -1, AddressingMode.Interrupt);
     irqOpcode = new InterruptRequest("IRQ", -1, AddressingMode.Interrupt);
@@ -67,55 +73,107 @@ public class Cpu65816
     previousClock = true;
     cycle = 1;
     opCode = resetOpcode;
-    address = new Address();
+    pinData = 0;
+    internalData = 0;
+    internalDirectOffset = 0;
+    internalImmediate = 0;
+    internalStackOffset = 0;
+    internalAddress = new Address();
   }
 
   public void setX(int xIndex)
   {
+    if (isIndex16Bit())
+    {
+      assert16Bit(xIndex, "X Index register");
+    }
+    else
+    {
+      assert8Bit(xIndex, "X Index register");
+    }
     this.xIndex = xIndex;
   }
 
-  public void setY(int y)
+  public void setY(int yIndex)
   {
-    yIndex = y;
+    if (isIndex16Bit())
+    {
+      assert16Bit(yIndex, "Y Index register");
+    }
+    else
+    {
+      assert8Bit(yIndex, "Y Index register");
+    }
+    this.yIndex = yIndex;
   }
 
   public void setA(int accumulator)
   {
+    if (isAccumulator16Bit())
+    {
+      assert16Bit(accumulator, "Accumulator");
+    }
+    else
+    {
+      assert8Bit(accumulator, "Accumulator");
+    }
     this.accumulator = accumulator;
   }
 
   public int getA()
   {
-    return accumulator;
+    if (isAccumulator16Bit())
+    {
+      return accumulator;
+    }
+    else
+    {
+      return toByte(accumulator);
+    }
   }
 
   public int getX()
   {
-    return xIndex;
+    if (isIndex16Bit())
+    {
+      return xIndex;
+    }
+    else
+    {
+      return toByte(xIndex);
+    }
   }
 
   public int getY()
   {
-    return yIndex;
+    if (isIndex16Bit())
+    {
+      return yIndex;
+    }
+    else
+    {
+      return toByte(yIndex);
+    }
   }
 
-  public int getDB()
+  public int getDataBank()
   {
     return dataBank;
   }
 
-  public void setDB(int mDB)
+  public void setDataBank(int dataBank)
   {
-    this.dataBank = toShort(mDB);
+    assert8Bit(dataBank, "Data Bank");
+    this.dataBank = dataBank;
   }
 
-  public void setD(int mD)
+  public void setDirectPage(int directPage)
   {
-    this.directPage = toShort(mD);
+    assert16Bit(directPage, "Direct Page");
+    this.directPage = directPage;
   }
 
-  public Address getProgramAddress()
+  public Address getProgramCounter()
   {
     return mProgramAddress;
   }
@@ -141,22 +199,22 @@ public class Cpu65816
     {
       opCode.executeOnFallingEdge(this);
 
-      mPins.setRead(read);
-      mPins.setAddress(address.getOffset());
-      mPins.setData(address.getBank());
-      mPins.setValidDataAddress(validDataAddress);
-      mPins.setValidProgramAddress(validProgramAddress);
+      mPins.setRead(internalRead);
+      mPins.setAddress(internalAddress.getOffset());
+      mPins.setData(internalAddress.getBank());
+      mPins.setValidDataAddress(internalValidDataAddress);
+      mPins.setValidProgramAddress(internalValidProgramAddress);
     }
 
     if (clockRisingEdge)
     {
-      if (!read)
+      if (!internalRead)
       {
-        mPins.setData(data);
+        mPins.setData(pinData);
       }
       else
       {
-        data = mPins.getData();
+        pinData = mPins.getData();
       }
       opCode.executeOnRisingEdge(this);
 
@@ -164,13 +222,13 @@ public class Cpu65816
     }
   }
 
-  public void executeNextInstruction()
-  {
-    if ((mStopped))
-    {
-      return;
-    }
-
+//  public void executeNextInstruction()
+//  {
+//    if ((mStopped))
+//    {
+//      return;
+//    }
+//
 //    if (opCode.isReset())
 //    {
 //      return;
@@ -210,44 +268,40 @@ public class Cpu65816
 //
 //    // Execute it
 //    opCode.execute(this, 0, false);
-  }
+//  }
 
-  public boolean accumulatorIs8BitWide()
+  public boolean isAccumulator8Bit()
   {
-    // Accumulator is always 8 bit in emulation mode.
-    if (mCpuStatus.emulationFlag())
+    if (mCpuStatus.isEmulationMode())
     {
       return true;
     }
-    // Accumulator width set to one means 8 bit accumulator.
     else
     {
-      return mCpuStatus.accumulatorWidthFlag();
+      return mCpuStatus.isAccumulator8Bit();
     }
   }
 
-  public boolean accumulatorIs16BitWide()
+  public boolean isAccumulator16Bit()
   {
-    return !accumulatorIs8BitWide();
+    return !isAccumulator8Bit();
   }
 
-  public boolean indexIs8BitWide()
+  public boolean isIndex8Bit()
   {
-    // Index is always 8 bit in emulation mode.
-    if (mCpuStatus.emulationFlag())
+    if (mCpuStatus.isEmulationMode())
     {
       return true;
     }
-    // Index width set to one means 8 bit accumulator.
     else
     {
-      return mCpuStatus.indexWidthFlag();
+      return mCpuStatus.isIndex8Bit();
     }
   }
 
-  public boolean indexIs16BitWide()
+  public boolean isIndex16Bit()
   {
-    return !indexIs8BitWide();
+    return !isIndex8Bit();
   }
 
   public void addToCycles(int cycles)
@@ -257,23 +311,13 @@ public class Cpu65816
 
   public void addToProgramAddress(int bytes)
   {
-    mProgramAddress.incrementOffsetBy(bytes);
+    mProgramAddress.offset(bytes, false);
   }
 
   public void addToProgramAddressAndCycles(int bytes, int cycles)
   {
     addToCycles(cycles);
     addToProgramAddress(bytes);
-  }
-
-  public int indexWithXRegister()
-  {
-    return (indexIs8BitWide() ? Binary.lower8BitsOf(xIndex) : xIndex);
-  }
-
-  public int indexWithYRegister()
-  {
-    return indexIs8BitWide() ? Binary.lower8BitsOf(yIndex) : yIndex;
   }
 
   public void setProgramAddress(Address address)
@@ -283,263 +327,253 @@ public class Cpu65816
 
   public void setProgramAddressBank(int bank)
   {
+    assert8Bit(bank, "Program Address Bank");
     mProgramAddress.bank = bank;
   }
 
   public void setProgramAddressHigh(int data)
   {
-    mProgramAddress.offset = (mProgramAddress.offset & 0xff) | data << 8;
+    assert8Bit(data, "Program Address High");
+    mProgramAddress.setOffsetHigh(data);
   }
 
   public void setProgramAddressLow(int data)
   {
-    mProgramAddress.offset = (mProgramAddress.offset & 0xff00) | data;
+    assert8Bit(data, "Program Address Low");
+    mProgramAddress.setOffsetLow(data);
   }
 
-  public boolean opCodeAddressingCrossesPageBoundary(AddressingMode addressingMode)
+  public void setAddressLow(int addressLow)
   {
-    switch (addressingMode)
-    {
-      case AbsoluteIndexedWithX:
-      {
-        Address initialAddress = new Address(dataBank, readTwoBytes(mProgramAddress.newWithOffset1()));
-        // TODO: figure out when to wrap around and when not to, it should not matter in this case
-        // but it matters when fetching data
-        Address finalAddress = sumOffsetToAddress(initialAddress, indexWithXRegister());
-        return Address.offsetsAreOnDifferentPages(initialAddress.getOffset(), finalAddress.getOffset());
-      }
-      case AbsoluteIndexedWithY:
-      {
-        Address initialAddress = new Address(dataBank, readTwoBytes(mProgramAddress.newWithOffset1()));
-        // TODO: figure out when to wrap around and when not to, it should not matter in this case
-        // but it matters when fetching data
-        Address finalAddress = sumOffsetToAddress(initialAddress, indexWithYRegister());
-        return Address.offsetsAreOnDifferentPages(initialAddress.getOffset(), finalAddress.getOffset());
-      }
-      case DirectPageIndirectIndexedWithY:
-      {
-        int firstStageOffset = toShort(directPage + readByte(mProgramAddress.newWithOffset1()));
-        Address firstStageAddress = new Address(firstStageOffset);
-        int secondStageOffset = readTwoBytes(firstStageAddress);
-        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
-        // TODO: figure out when to wrap around and when not to, it should not matter in this case
-        // but it matters when fetching data
-        Address finalAddress = sumOffsetToAddress(thirdStageAddress, indexWithYRegister());
-        return Address.offsetsAreOnDifferentPages(thirdStageAddress.getOffset(), finalAddress.getOffset());
-      }
+    assert8Bit(addressLow, "Address Low");
+    this.internalAddress.setOffsetLow(addressLow);
+  }
 
-      default:
-        throw new IllegalStateException("Unexpected value: " + addressingMode);
-    }
+  public void setAddressHigh(int addressHigh)
+  {
+    assert8Bit(addressHigh, "Address High");
+    this.internalAddress.setOffsetHigh(addressHigh);
+  }
+
+  public void setAddressBank(int addressBank)
+  {
+    assert8Bit(addressBank, "Address Bank");
+    this.internalAddress.setBank(addressBank);
   }
 
   public Address getAddressOfOpCodeData(AddressingMode addressingMode)
   {
-    int dataAddressBank;
-    int dataAddressOffset;
-
-    switch (addressingMode)
-    {
-      case Interrupt:
-      case Accumulator:
-      case Implied:
-      case StackImplied:
-        // Not really used, doesn't make any sense since these opcodes do not have operands
-        return mProgramAddress;
-
-      case Immediate:
-      case BlockMove:
-        // Blockmove OpCodes have two bytes following them directly
-      case StackAbsolute:
-        // Stack absolute is used to push values following the op code onto the stack
-      case ProgramCounterRelative:
-        // Program counter relative OpCodes such as all branch instructions have an 8 bit operand
-        // following the op code
-      case ProgramCounterRelativeLong:
-        // StackProgramCounterRelativeLong is only used by the PER OpCode, it has 16 bit operand
-      case StackProgramCounterRelativeLong:
-      {
-        dataAddressBank = mProgramAddress.getBank();
-        dataAddressOffset = mProgramAddress.getOffset();
-      }
-      break;
-
-      case Absolute:
-      {
-        dataAddressBank = dataBank;
-        dataAddressOffset = readTwoBytes(mProgramAddress.newWithOffset1());
-      }
-      break;
-      case AbsoluteLong:
-      {
-        Address address = readLongAddressAt(mProgramAddress.newWithOffset1());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-
-      case AbsoluteIndirect:
-      {
-        dataAddressBank = mProgramAddress.getBank();
-        Address addressOfOffset = new Address(readTwoBytes(mProgramAddress.newWithOffset1()));
-        dataAddressOffset = readTwoBytes(addressOfOffset);
-      }
-      break;
-      case AbsoluteIndirectLong:
-      {
-        Address addressOfEffectiveAddress = new Address(readTwoBytes(mProgramAddress.newWithOffset1()));
-        Address address = readLongAddressAt(addressOfEffectiveAddress);
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case AbsoluteIndexedIndirectWithX:
-      {
-        Address firstStageAddress = new Address(mProgramAddress.getBank(), readTwoBytes(mProgramAddress.newWithOffset1()));
-
-        Address secondStageAddress = firstStageAddress.newWithOffsetNoWrapAround(indexWithXRegister());
-        dataAddressBank = mProgramAddress.getBank();
-        dataAddressOffset = readTwoBytes(secondStageAddress);
-      }
-      break;
-      case AbsoluteIndexedWithX:
-      {
-        Address firstStageAddress = new Address(dataBank, readTwoBytes(mProgramAddress.newWithOffset1()));
-        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case AbsoluteLongIndexedWithX:
-      {
-        Address firstStageAddress = readLongAddressAt(mProgramAddress.newWithOffset1());
-        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case AbsoluteIndexedWithY:
-      {
-        Address firstStageAddress = new Address(dataBank, readTwoBytes(mProgramAddress.newWithOffset1()));
-        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithYRegister());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case DirectPage:
-      {
-        // Direct page/Zero page always refers to bank zero
-        dataAddressBank = 0x00;
-        if (mCpuStatus.emulationFlag())
-        {
-          dataAddressOffset = readByte(mProgramAddress.newWithOffset1());
-        }
-        else
-        {
-          dataAddressOffset = toShort(directPage + readByte(mProgramAddress.newWithOffset1()));
-        }
-      }
-      break;
-      case DirectPageIndexedWithX:
-      {
-        dataAddressBank = 0x00;
-        dataAddressOffset = toShort(directPage + indexWithXRegister() + readByte(mProgramAddress.newWithOffset1()));
-      }
-      break;
-      case DirectPageIndexedWithY:
-      {
-        dataAddressBank = 0x00;
-        dataAddressOffset = toShort(directPage + indexWithYRegister() + readByte(mProgramAddress.newWithOffset1()));
-      }
-      break;
-      case DirectPageIndirect:
-      {
-        Address firstStageAddress = new Address((directPage + readByte(mProgramAddress.newWithOffset1())));
-        dataAddressBank = dataBank;
-        dataAddressOffset = readTwoBytes(firstStageAddress);
-      }
-      break;
-      case DirectPageIndirectLong:
-      {
-        Address firstStageAddress = new Address((directPage + readByte(mProgramAddress.newWithOffset1())));
-        Address address = readLongAddressAt(firstStageAddress);
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case DirectPageIndexedIndirectWithX:
-      {
-        Address firstStageAddress = new Address((directPage + readByte(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
-        dataAddressBank = dataBank;
-        dataAddressOffset = readTwoBytes(firstStageAddress);
-      }
-      break;
-      case DirectPageIndirectIndexedWithY:
-      {
-        Address firstStageAddress = new Address((directPage + readByte(mProgramAddress.newWithOffset1())));
-        int secondStageOffset = readTwoBytes(firstStageAddress);
-        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
-        Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case DirectPageIndirectLongIndexedWithY:
-      {
-        Address firstStageAddress = new Address((directPage + readByte(mProgramAddress.newWithOffset1())));
-        Address secondStageAddress = readLongAddressAt(firstStageAddress);
-        Address address = Address.sumOffsetToAddressNoWrapAround(secondStageAddress, indexWithYRegister());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      case StackRelative:
-      {
-        dataAddressBank = 0x00;
-        dataAddressOffset = toShort(getStackPointer() + readByte(mProgramAddress.newWithOffset1()));
-      }
-      break;
-      case StackDirectPageIndirect:
-      {
-        dataAddressBank = 0x00;
-        dataAddressOffset = toShort(directPage + readByte(mProgramAddress.newWithOffset1()));
-      }
-      break;
-      case StackRelativeIndirectIndexedWithY:
-      {
-        Address firstStageAddress = new Address((getStackPointer() + readByte(mProgramAddress.newWithOffset1())));
-        int secondStageOffset = readTwoBytes(firstStageAddress);
-        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
-        Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
-        dataAddressBank = address.getBank();
-        dataAddressOffset = address.getOffset();
-      }
-      break;
-      default:
-        throw new IllegalStateException("Unexpected value: " + addressingMode);
-    }
-
-    return new Address(dataAddressBank, dataAddressOffset);
+//    int dataAddressBank;
+//    int dataAddressOffset;
+//
+//    switch (addressingMode)
+//    {
+//      case Interrupt:
+//      case Accumulator:
+//      case Implied:
+//      case StackImplied:
+//        // Not really used, doesn't make any sense since these opcodes do not have operands
+//        return mProgramAddress;
+//
+//      case Immediate:
+//      case BlockMove:
+//        // Blockmove OpCodes have two bytes following them directly
+//      case StackAbsolute:
+//        // Stack absolute is used to push values following the op code onto the stack
+//      case ProgramCounterRelative:
+//        // Program counter relative OpCodes such as all branch instructions have an 8 bit operand
+//        // following the op code
+//      case ProgramCounterRelativeLong:
+//        // StackProgramCounterRelativeLong is only used by the PER OpCode, it has 16 bit operand
+//      case StackProgramCounterRelativeLong:
+//      {
+//        dataAddressBank = mProgramAddress.getBank();
+//        dataAddressOffset = mProgramAddress.getOffset();
+//      }
+//      break;
+//
+//      case Absolute:
+//      {
+//        dataAddressBank = dataBank;
+//        dataAddressOffset = get16BitData(mProgramAddress.newWithOffset1());
+//      }
+//      break;
+//      case AbsoluteLong:
+//      {
+//        Address address = readLongAddressAt(mProgramAddress.newWithOffset1());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//
+//      case AbsoluteIndirect:
+//      {
+//        dataAddressBank = mProgramAddress.getBank();
+//        Address addressOfOffset = new Address(get16BitData(mProgramAddress.newWithOffset1()));
+//        dataAddressOffset = get16BitData();
+//      }
+//      break;
+//      case AbsoluteIndirectLong:
+//      {
+//        Address addressOfEffectiveAddress = new Address(get16BitData(mProgramAddress.newWithOffset1()));
+//        Address address = readLongAddressAt(addressOfEffectiveAddress);
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case AbsoluteIndexedIndirectWithX:
+//      {
+//        Address firstStageAddress = new Address(mProgramAddress.getBank(), get16BitData(mProgramAddress.newWithOffset1()));
+//
+//        Address secondStageAddress = firstStageAddress.newWithOffsetNoWrapAround(indexWithXRegister());
+//        dataAddressBank = mProgramAddress.getBank();
+//        dataAddressOffset = get16BitData();
+//      }
+//      break;
+//      case AbsoluteIndexedWithX:
+//      {
+//        Address firstStageAddress = new Address(dataBank, get16BitData(mProgramAddress.newWithOffset1()));
+//        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case AbsoluteLongIndexedWithX:
+//      {
+//        Address firstStageAddress = readLongAddressAt(mProgramAddress.newWithOffset1());
+//        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case AbsoluteIndexedWithY:
+//      {
+//        Address firstStageAddress = new Address(dataBank, get16BitData(mProgramAddress.newWithOffset1()));
+//        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithYRegister());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case DirectPage:
+//      {
+//        // Direct page/Zero page always refers to bank zero
+//        dataAddressBank = 0x00;
+//        if (mCpuStatus.emulationFlag())
+//        {
+//          dataAddressOffset = get8BitData(mProgramAddress.newWithOffset1());
+//        }
+//        else
+//        {
+//          dataAddressOffset = toShort(directPage + get8BitData(mProgramAddress.newWithOffset1()));
+//        }
+//      }
+//      break;
+//      case DirectPageIndexedWithX:
+//      {
+//        dataAddressBank = 0x00;
+//        dataAddressOffset = toShort(directPage + indexWithXRegister() + get8BitData(mProgramAddress.newWithOffset1()));
+//      }
+//      break;
+//      case DirectPageIndexedWithY:
+//      {
+//        dataAddressBank = 0x00;
+//        dataAddressOffset = toShort(directPage + indexWithYRegister() + get8BitData(mProgramAddress.newWithOffset1()));
+//      }
+//      break;
+//      case DirectPageIndirect:
+//      {
+//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
+//        dataAddressBank = dataBank;
+//        dataAddressOffset = get16BitData();
+//      }
+//      break;
+//      case DirectPageIndirectLong:
+//      {
+//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
+//        Address address = readLongAddressAt(firstStageAddress);
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case DirectPageIndexedIndirectWithX:
+//      {
+//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
+//        dataAddressBank = dataBank;
+//        dataAddressOffset = get16BitData();
+//      }
+//      break;
+//      case DirectPageIndirectIndexedWithY:
+//      {
+//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
+//        int secondStageOffset = get16BitData();
+//        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
+//        Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case DirectPageIndirectLongIndexedWithY:
+//      {
+//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
+//        Address secondStageAddress = readLongAddressAt(firstStageAddress);
+//        Address address = Address.sumOffsetToAddressNoWrapAround(secondStageAddress, indexWithYRegister());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      case StackRelative:
+//      {
+//        dataAddressBank = 0x00;
+//        dataAddressOffset = toShort(getStackPointer() + get8BitData(mProgramAddress.newWithOffset1()));
+//      }
+//      break;
+//      case StackDirectPageIndirect:
+//      {
+//        dataAddressBank = 0x00;
+//        dataAddressOffset = toShort(directPage + get8BitData(mProgramAddress.newWithOffset1()));
+//      }
+//      break;
+//      case StackRelativeIndirectIndexedWithY:
+//      {
+//        Address firstStageAddress = new Address((getStackPointer() + get8BitData(mProgramAddress.newWithOffset1())));
+//        int secondStageOffset = get16BitData();
+//        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
+//        Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
+//        dataAddressBank = address.getBank();
+//        dataAddressOffset = address.getOffset();
+//      }
+//      break;
+//      default:
+//        throw new IllegalStateException("Unexpected value: " + addressingMode);
+//    }
+//
+//    return new Address(dataAddressBank, dataAddressOffset);
+    throw new EmulatorException("Not Implemented");
   }
 
-  public int readByte(Address address)
+  public int get8BitData()
   {
-    return 0;
+    return toByte(internalData);
   }
 
-  public int readTwoBytes(Address address)
+  public int get16BitData()
   {
-    return 0;
+    return internalData;
   }
 
   public Address readLongAddressAt(Address address)
   {
-    return new Address(0);
+    return new Address(0x00, 0);
   }
 
-  public int getD()
+  public int getDirectPage()
   {
     return directPage;
+  }
+
+  public int getDirectOffset()
+  {
+    return internalDirectOffset;
   }
 
   public void storeTwoBytes(Address address, int value)
@@ -562,7 +596,7 @@ public class Cpu65816
 
   public void clearStack()
   {
-    mStackAddress = new Address(0x01FF);
+    mStackAddress = new Address(0x00, 0x01FF);
   }
 
   public void clearStack(Address address)
@@ -573,21 +607,19 @@ public class Cpu65816
   public void push8Bit(int value)
   {
     storeByte(mStackAddress, value);
-    mStackAddress.decrementOffsetBy(Sizeof.sizeofByte);
+    mStackAddress.offset(Sizeof.sizeofByte, true);
   }
 
   public void push16Bit(int value)
   {
-    int leastSignificant = toByte((value) & 0xFF);
-    int mostSignificant = toByte(((value) & 0xFF00) >> 8);
-    push8Bit(mostSignificant);
-    push8Bit(leastSignificant);
+    push8Bit(getHighByte(value));
+    push8Bit(getLowByte(value));
   }
 
   public int pull8Bit()
   {
-    mStackAddress.incrementOffsetBy(Sizeof.sizeofByte);
-    return readByte(mStackAddress);
+    mStackAddress.offset(Sizeof.sizeofByte, true);
+    return get8BitData();
   }
 
   public int pull16Bit()
@@ -598,18 +630,6 @@ public class Cpu65816
   public int getStackPointer()
   {
     return mStackAddress.getOffset();
-  }
-
-  public void incA()
-  {
-    accumulator++;
-    accumulator = toShort(accumulator);
-  }
-
-  public void decA()
-  {
-    accumulator--;
-    accumulator = toShort(accumulator);
   }
 
   public void stop()
@@ -635,47 +655,54 @@ public class Cpu65816
 
   public void readProgram(Address address)
   {
-    this.address = address;
-    this.read = true;
-    this.validProgramAddress = true;
-    this.validDataAddress = false;
+    this.internalAddress = address;
+    this.internalRead = true;
+    this.internalValidProgramAddress = true;
+    this.internalValidDataAddress = false;
   }
 
   public void readData(Address address)
   {
-    this.address = address;
-    this.read = true;
-    this.validProgramAddress = false;
-    this.validDataAddress = true;
+    this.internalAddress = address;
+    this.internalRead = true;
+    this.internalValidProgramAddress = false;
+    this.internalValidDataAddress = true;
   }
 
   public void readOpCode(Address address)
   {
-    this.address = address;
-    this.read = true;
-    this.validProgramAddress = true;
-    this.validDataAddress = true;
+    this.internalAddress = address;
+    this.internalRead = true;
+    this.internalValidProgramAddress = true;
+    this.internalValidDataAddress = true;
   }
 
   public void writeData(Address address)
   {
-    this.address = address;
-    this.read = false;
-    this.validProgramAddress = false;
-    this.validDataAddress = true;
+    this.internalAddress = address;
+    this.internalRead = false;
+    this.internalValidProgramAddress = false;
+    this.internalValidDataAddress = true;
   }
 
   public void noAddress()
   {
-    this.address = mProgramAddress;
-    this.read = true;
-    this.validProgramAddress = false;
-    this.validDataAddress = false;
+    this.internalAddress = mProgramAddress;
+    this.internalRead = true;
+    this.internalValidProgramAddress = false;
+    this.internalValidDataAddress = false;
   }
 
-  public int getData()
+  public int getPinData()
   {
-    return data;
+    if (mPins.getPhi2())
+    {
+      return mPins.getData();
+    }
+    else
+    {
+      throw new EmulatorException("Cannot get Data from pins when clock is low.");
+    }
   }
 
   public int getCycle()
@@ -707,25 +734,66 @@ public class Cpu65816
 
   public Address getAddress()
   {
-    return address;
+    return internalAddress;
+  }
+
+  public OpCode getOpCode()
+  {
+    return opCode;
   }
 
   public void setRead(boolean read)
   {
-    this.read = read;
+    this.internalRead = read;
   }
 
   public void incrementProgramAddress()
   {
-    int offset = this.mProgramAddress.getOffset();
-    offset++;
-    this.mProgramAddress.setOffset(toShort(offset));
-    if (offset > 0xffff)
-    {
-      int bank = this.mProgramAddress.getBank();
-      bank++;
-      this.mProgramAddress.setBank(toByte(bank));
-    }
+    this.mProgramAddress.offset(Sizeof.sizeofByte, true);
+  }
+
+  public boolean isRead()
+  {
+    return internalRead;
+  }
+
+//  public boolean indexAcrossPage(int offset)
+//  {
+//    return Address.areOffsetsAreOnDifferentPages(address.getOffset(), address.getOffset() + offset);
+//  }
+
+  public void setDirectOffset(int data)
+  {
+    assert8Bit(data, "Direct Offset");
+    internalDirectOffset = data;
+  }
+
+  public void setImmediateHigh(int data)
+  {
+    assert8Bit(data, "Immediate High");
+    internalImmediate = setHighByte(internalImmediate, data);
+  }
+
+  public void setImmediateLow(int data)
+  {
+    assert8Bit(data, "Immediate Low");
+    internalImmediate = setLowByte(internalImmediate, data);
+  }
+
+  public void setStackPointerOffset(int data)
+  {
+    assert8Bit(data, "Stack Offset");
+    this.internalStackOffset = data;
+  }
+
+  public void setDataLow(int data)
+  {
+    this.data = setLowByte(this.data, data);;
+  }
+
+  public void setDataHigh(int data)
+  {
+    this.data = setHighByte(this.data, data);;
   }
 }
 

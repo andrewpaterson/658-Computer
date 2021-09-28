@@ -16,7 +16,7 @@ public class OpCode_TSX
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     int stackPointer = cpu.getStackPointer();
-    if (cpu.indexIs8BitWide())
+    if (cpu.isIndex8Bit())
     {
       int stackPointerLower8Bits = Binary.lower8BitsOf(stackPointer);
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), stackPointerLower8Bits));

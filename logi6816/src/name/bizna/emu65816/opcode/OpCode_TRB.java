@@ -5,8 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.TRB_Absolute;
-import static name.bizna.emu65816.OpCodeTable.TRB_DirectPage;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -21,7 +20,7 @@ public class OpCode_TRB
   protected void execute8BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(addressOfOpCodeData);
+    int value = cpu.get8BitData();
     int lowerA = Binary.lower8BitsOf(cpu.getA());
     int result = toByte(value & ~lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
@@ -31,7 +30,7 @@ public class OpCode_TRB
   protected void execute16BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(addressOfOpCodeData);
+    int value = cpu.get16BitData();
     int result = toShort(value & ~cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);
@@ -44,7 +43,7 @@ public class OpCode_TRB
     {
       case TRB_Absolute:                 // TRB Absolute
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitTRB(cpu);
         }
@@ -58,7 +57,7 @@ public class OpCode_TRB
       }
       case TRB_DirectPage:                 // TRB Direct Page
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitTRB(cpu);
         }
@@ -67,7 +66,7 @@ public class OpCode_TRB
           execute16BitTRB(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

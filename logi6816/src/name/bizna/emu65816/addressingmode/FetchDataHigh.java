@@ -4,10 +4,10 @@ import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
-public class FetchDataLow
+public class FetchDataHigh
     extends DataBusCycleOperation
 {
-  public FetchDataLow(boolean notMemoryLock)
+  public FetchDataHigh(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }
@@ -15,13 +15,13 @@ public class FetchDataLow
   @Override
   public boolean shouldSkipCycle(Cpu65816 cpu)
   {
-    return toByte(cpu.getDirectPage()) == 0;
+    return cpu.isAccumulator8Bit() && cpu.isIndex8Bit();
   }
 
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDataLow(cpu.getPinData());
+    cpu.setDataHigh(cpu.getPinData());
   }
 }
 

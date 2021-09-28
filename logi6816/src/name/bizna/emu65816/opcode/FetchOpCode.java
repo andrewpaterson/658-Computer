@@ -17,7 +17,7 @@ public class FetchOpCode
     int cycle = cpu.getCycle();
     if (cycle == 0)
     {
-      cpu.readOpCode(cpu.getProgramAddress());
+      cpu.readOpCode(cpu.getProgramCounter());
     }
     else
     {
@@ -31,7 +31,7 @@ public class FetchOpCode
     int cycle = cpu.getCycle();
     if (cycle == 0)
     {
-      cpu.setOpCode(cpu.getData());
+      cpu.setOpCode(cpu.getPinData());
       cpu.incrementProgramAddress();
     }
     else

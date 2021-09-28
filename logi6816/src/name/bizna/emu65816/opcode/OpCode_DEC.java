@@ -5,8 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
-import static name.bizna.emu65816.OpCodeTable.DEC_DirectPageIndexedWithX;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -21,7 +20,7 @@ public class OpCode_DEC
   protected void execute8BitDecInMemory(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(opCodeDataAddress);
+    int value = cpu.get8BitData();
     value--;
     value = toByte(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
@@ -31,7 +30,7 @@ public class OpCode_DEC
   protected void execute16BitDecInMemory(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(opCodeDataAddress);
+    int value = cpu.get16BitData();
     value--;
     value = toShort(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
@@ -45,7 +44,7 @@ public class OpCode_DEC
     {
       case DEC_Accumulator:  // DEC Accumulator
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           int lowerA = Binary.lower8BitsOf(cpu.getA());
           lowerA--;
@@ -55,15 +54,17 @@ public class OpCode_DEC
         }
         else
         {
-          cpu.decA();
-          cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+          int a = cpu.getA();
+          a--;
+          a = toShort(a);
+          cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(a);
         }
         cpu.addToProgramAddressAndCycles(1, 2);
         break;
       }
       case DEC_Absolute: // DEC Absolute
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -77,7 +78,7 @@ public class OpCode_DEC
       }
       case DEC_DirectPage: // DEC Direct Page
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -86,7 +87,7 @@ public class OpCode_DEC
           execute16BitDecInMemory(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -95,7 +96,7 @@ public class OpCode_DEC
       }
       case DEC_AbsoluteIndexedWithX: // DEC Absolute Indexed, X
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -110,7 +111,7 @@ public class OpCode_DEC
       }
       case DEC_DirectPageIndexedWithX: // DEC Direct Page Indexed, X
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -119,7 +120,7 @@ public class OpCode_DEC
           execute16BitDecInMemory(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

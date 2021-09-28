@@ -2,7 +2,8 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public abstract class Data
+public abstract class DataBusCycleOperation
+    extends CycleOperation
 {
   protected boolean validProgramAddress;
   protected boolean validDataAddress;
@@ -10,7 +11,7 @@ public abstract class Data
   protected boolean read;
   protected boolean notVectorPull;
 
-  public Data(boolean validProgramAddress, boolean validDataAddress, boolean notMemoryLock, boolean read, boolean notVectorPull)
+  public DataBusCycleOperation(boolean validProgramAddress, boolean validDataAddress, boolean notMemoryLock, boolean read, boolean notVectorPull)
   {
     this.validProgramAddress = validProgramAddress;
     this.validDataAddress = validDataAddress;
@@ -19,7 +20,7 @@ public abstract class Data
     this.notVectorPull = notVectorPull;
   }
 
-  public boolean shouldSkip(Cpu65816 cpu)
+  public boolean shouldSkipCycle(Cpu65816 cpu)
   {
     return false;
   }
@@ -28,7 +29,5 @@ public abstract class Data
   {
     return -1;
   }
-
-  public abstract void executeRead(Cpu65816 cpu, int data);
 }
 

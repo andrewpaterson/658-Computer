@@ -15,8 +15,8 @@ public class OpCode_TAY
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if ((cpu.accumulatorIs8BitWide() && cpu.indexIs8BitWide()) ||
-        (cpu.accumulatorIs16BitWide() && cpu.indexIs8BitWide()))
+    if ((cpu.isAccumulator8Bit() && cpu.isIndex8Bit()) ||
+        (cpu.isAccumulator16Bit() && cpu.isIndex8Bit()))
     {
       int lower8BitsOfA = Binary.lower8BitsOf(cpu.getA());
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), lower8BitsOfA));

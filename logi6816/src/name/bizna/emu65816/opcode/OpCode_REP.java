@@ -38,7 +38,7 @@ public class OpCode_REP
     switch (cycle)
     {
       case 1:
-        int value = cpu.getData();
+        int value = cpu.getPinData();
         int statusByte = cpu.getCpuStatus().getRegisterValue();
         cpu.getCpuStatus().setRegisterValue(toByte(statusByte & ~value));
 

@@ -25,10 +25,10 @@ public class Reset
         cpuStatus.setEmulationFlag(true);
         cpuStatus.setAccumulatorWidthFlag(true);
         cpuStatus.setIndexWidthFlag(true);
-        cpu.readProgram(new Address(cpu.getEmulationInterrupts().reset));
+        cpu.readProgram(new Address(0x00, cpu.getEmulationInterrupts().reset));
         break;
       case 2:
-        cpu.readProgram(new Address(cpu.getEmulationInterrupts().reset + 1));
+        cpu.readProgram(new Address(0x00, cpu.getEmulationInterrupts().reset + 1));
         break;
       default:
         invalidCycle();
@@ -43,10 +43,10 @@ public class Reset
     {
       case 1:
         cpu.setProgramAddressBank(0);
-        cpu.setProgramAddressLow(cpu.getData());
+        cpu.setProgramAddressLow(cpu.getPinData());
         break;
       case 2:
-        cpu.setProgramAddressHigh(cpu.getData());
+        cpu.setProgramAddressHigh(cpu.getPinData());
         cpu.doneInstruction();
         break;
       default:

@@ -14,7 +14,7 @@ public class OpCode_TDC
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.setA(cpu.getD());
+    cpu.setA(cpu.getDirectPage());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     cpu.addToProgramAddressAndCycles(1, 2);
   }

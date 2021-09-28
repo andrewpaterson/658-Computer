@@ -4,7 +4,7 @@ import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_JMP
     extends OpCode
@@ -22,7 +22,7 @@ public class OpCode_JMP
       case JMP_Absolute:  // JMP Absolute
       {
         int destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
-        cpu.setProgramAddress(new Address(cpu.getProgramAddress().getBank(), destinationAddress));
+        cpu.setProgramAddress(new Address(cpu.getProgramCounter().getBank(), destinationAddress));
         cpu.addToCycles(3);
         break;
       }

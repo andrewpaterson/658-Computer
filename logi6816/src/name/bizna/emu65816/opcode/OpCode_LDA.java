@@ -1,39 +1,36 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_LDA
     extends OpCode
 {
-  public OpCode_LDA(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_LDA(String mName, int mCode, InstructionCycles busCycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, busCycles.getAddressingMode());
   }
 
   protected void executeLDA8Bit(Cpu65816 cpu)
   {
-    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(opCodeDataAddress);
+    int value = cpu.get8BitData();
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
   protected void executeLDA16Bit(Cpu65816 cpu)
   {
-    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    cpu.setA(cpu.readTwoBytes(opCodeDataAddress));
+    cpu.setA(cpu.get16BitData());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
   }
 
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs16BitWide())
+    if (cpu.isAccumulator16Bit())
     {
       executeLDA16Bit(cpu);
       cpu.addToCycles(1);
@@ -47,7 +44,7 @@ public class OpCode_LDA
     {
       case LDA_Immediate:                // LDA Immediate
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -66,7 +63,7 @@ public class OpCode_LDA
       }
       case LDA_DirectPage:                // LDA Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -75,7 +72,7 @@ public class OpCode_LDA
       }
       case LDA_DirectPageIndirect:                // LDA Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -84,7 +81,7 @@ public class OpCode_LDA
       }
       case LDA_DirectPageIndirectLong:                // LDA Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -93,10 +90,6 @@ public class OpCode_LDA
       }
       case LDA_AbsoluteIndexedWithX:                // LDA Absolute Indexed, X
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
         cpu.addToProgramAddressAndCycles(3, 4);
         break;
       }
@@ -107,16 +100,12 @@ public class OpCode_LDA
       }
       case LDA_AbsoluteIndexedWithY:                // LDA Absolute Indexed, Y
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
         cpu.addToProgramAddressAndCycles(3, 4);
         break;
       }
       case LDA_DirectPageIndexedWithX:                // LDA Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -125,7 +114,7 @@ public class OpCode_LDA
       }
       case LDA_DirectPageIndexedIndirectWithX:                // LDA Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -134,11 +123,7 @@ public class OpCode_LDA
       }
       case LDA_DirectPageIndirectIndexedWithY:                // LDA Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -147,7 +132,7 @@ public class OpCode_LDA
       }
       case LDA_DirectPageIndirectLongIndexedWithY:                // LDA Direct Page DP Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

@@ -6,7 +6,7 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_BIT
     extends OpCode
@@ -19,7 +19,7 @@ public class OpCode_BIT
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       execute8BitBIT(cpu);
     }
@@ -33,7 +33,7 @@ public class OpCode_BIT
     {
       case BIT_Immediate:                 // BIT Immediate
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -47,7 +47,7 @@ public class OpCode_BIT
       }
       case BIT_DirectPage:                 // BIT Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -56,16 +56,12 @@ public class OpCode_BIT
       }
       case BIT_AbsoluteIndexedWithX:                 // BIT Absolute Indexed, X
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
         cpu.addToProgramAddressAndCycles(3, 4);
         break;
       }
       case BIT_DirectPageIndexedWithX:                 // BIT Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -80,7 +76,7 @@ public class OpCode_BIT
   protected void execute8BitBIT(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(addressOfOpCodeData);
+    int value = cpu.get8BitData();
     boolean isHighestBitSet = is8bitValueNegative(value);
     boolean isNextToHighestBitSet = (value & 0x40) != 0;
 
@@ -95,7 +91,7 @@ public class OpCode_BIT
   protected void execute16BitBIT(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(addressOfOpCodeData);
+    int value = cpu.get16BitData();
     boolean isHighestBitSet = (value & 0x8000) != 0;
     boolean isNextToHighestBitSet = (value & 0x4000) != 0;
 

@@ -18,7 +18,7 @@ public class OpCode_INY
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.indexIs8BitWide())
+    if (cpu.isIndex8Bit())
     {
       int lowerY = Binary.lower8BitsOf(cpu.getY());
       lowerY++;

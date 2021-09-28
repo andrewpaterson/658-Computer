@@ -17,21 +17,21 @@ public class OpCode_COP
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.getCpuStatus().emulationFlag())
+    if (cpu.getCpuStatus().isEmulationMode())
     {
-      cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+      cpu.push16Bit(toShort(cpu.getProgramCounter().getOffset() + 2));
       cpu.push8Bit(cpu.getCpuStatus().getRegisterValue());
       cpu.getCpuStatus().setInterruptDisableFlag(true);
-      cpu.setProgramAddress(new Address(cpu.getEmulationInterrupts().coProcessorEnable));
+      cpu.setProgramAddress(new Address(0x00, cpu.getEmulationInterrupts().coProcessorEnable));
       cpu.addToCycles(7);
     }
     else
     {
-      cpu.push8Bit(cpu.getProgramAddress().getBank());
-      cpu.push16Bit(toShort(cpu.getProgramAddress().getOffset() + 2));
+      cpu.push8Bit(cpu.getProgramCounter().getBank());
+      cpu.push16Bit(toShort(cpu.getProgramCounter().getOffset() + 2));
       cpu.push8Bit(cpu.getCpuStatus().getRegisterValue());
       cpu.getCpuStatus().setInterruptDisableFlag(true);
-      cpu.setProgramAddress(new Address(cpu.getNativeInterrupts().coProcessorEnable));
+      cpu.setProgramAddress(new Address(0x00, cpu.getNativeInterrupts().coProcessorEnable));
       cpu.addToCycles(8);
     }
   }

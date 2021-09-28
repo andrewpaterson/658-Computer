@@ -12,7 +12,7 @@ public class Branch
   public static int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu, AddressingMode addressingMode)
   {
     int opCycles = 2;
-    int destination = cpu.readByte(cpu.getAddressOfOpCodeData(addressingMode));
+    int destination = cpu.get8BitData(cpu.getAddressOfOpCodeData(addressingMode));
     // This is the address of the next instruction
     int actualDestination;
     if (condition)
@@ -28,19 +28,19 @@ public class Branch
       {
         destination16 = destination;
       }
-      actualDestination = toShort(cpu.getProgramAddress().getOffset() + 2 + destination16);
+      actualDestination = toShort(cpu.getProgramCounter().getOffset() + 2 + destination16);
       // Emulation mode requires 1 extra cycle on page boundary crossing
-      if (Address.offsetsAreOnDifferentPages(cpu.getProgramAddress().getOffset(), actualDestination) &&
-          cpu.getCpuStatus().emulationFlag())
+      if (Address.areOffsetsAreOnDifferentPages(cpu.getProgramCounter().getOffset(), actualDestination) &&
+          cpu.getCpuStatus().isEmulationMode())
       {
         opCycles++;
       }
     }
     else
     {
-      actualDestination = toShort(cpu.getProgramAddress().getOffset() + 2);
+      actualDestination = toShort(cpu.getProgramCounter().getOffset() + 2);
     }
-    Address newProgramAddress = new Address(cpu.getProgramAddress().getBank(), actualDestination);
+    Address newProgramAddress = new Address(cpu.getProgramCounter().getBank(), actualDestination);
     cpu.setProgramAddress(newProgramAddress);
     return opCycles;
   }

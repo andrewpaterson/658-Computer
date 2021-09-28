@@ -1,20 +1,22 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.Direct;
 import static name.bizna.emu65816.AddressingMode.DirectIndexedWithX;
 
-public class DirectIndexedWithXCycles
+public class DirectIndexedWithXRMWCycles
     extends InstructionCycles
 {
-  public DirectIndexedWithXCycles(boolean read)
+  public DirectIndexedWithXRMWCycles()
   {
     super(DirectIndexedWithX,
           new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchDirectOffset(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new DirectPageLowZero(true)),
-          new BusCycle(new ProgramCounter(), new InternalIgnored(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new ExecuteLow(true, read)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new Offset(1), new ExecuteHigh(true, read)));
+          new BusCycle(new ProgramCounter(), new FetchDirectOffset(false), new IncrementProgramCounter()),
+          new BusCycle(new ProgramCounter(), new DirectPageLowZero(false)),
+          new BusCycle(new ProgramCounter(), new InternalIgnored(false)),
+          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new FetchDataLow(false)),
+          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new Offset(1), new FetchDataHigh(false)),
+          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new Offset(1), new InternalIgnored(false)),
+          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new Offset(1), new ExecuteHigh(false, false)),
+          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new ExecuteLow(false, false)));
   }
 }
 

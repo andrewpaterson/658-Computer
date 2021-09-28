@@ -5,7 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_STY
     extends OpCode
@@ -19,7 +19,7 @@ public class OpCode_STY
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       cpu.storeByte(dataAddress, Binary.lower8BitsOf(cpu.getY()));
     }
@@ -39,7 +39,7 @@ public class OpCode_STY
       }
       case STY_DirectPage:  // STY Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -50,7 +50,7 @@ public class OpCode_STY
       }
       case STY_DirectPageIndexedWithX:  // STY Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

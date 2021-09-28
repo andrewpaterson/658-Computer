@@ -14,8 +14,8 @@ public class OpCode_SEP
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
-    if (cpu.getCpuStatus().emulationFlag())
+    int value = cpu.get8BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    if (cpu.getCpuStatus().isEmulationMode())
     {
       // In emulation mode status bits 4 and 5 are not affected
       // 0xCF = 11001111

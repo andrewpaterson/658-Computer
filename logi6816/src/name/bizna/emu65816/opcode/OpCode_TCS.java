@@ -17,7 +17,7 @@ public class OpCode_TCS
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     int currentStackPointer = cpu.getStackPointer();
-    if (cpu.getCpuStatus().emulationFlag())
+    if (cpu.getCpuStatus().isEmulationMode())
     {
       currentStackPointer = Binary.setLower8BitsOf16BitsValue(currentStackPointer, Binary.lower8BitsOf(cpu.getA()));
     }
@@ -25,7 +25,7 @@ public class OpCode_TCS
     {
       currentStackPointer = cpu.getA();
     }
-    cpu.clearStack(new Address(currentStackPointer));
+    cpu.clearStack(new Address(0x00, currentStackPointer));
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 

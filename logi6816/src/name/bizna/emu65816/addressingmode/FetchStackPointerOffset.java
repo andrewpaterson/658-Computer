@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class StackPointerOffset
+public class FetchStackPointerOffset
     extends DataBusCycleOperation
 {
-  public StackPointerOffset(boolean notMemoryLock)
+  public FetchStackPointerOffset(boolean notMemoryLock)
   {
     super(true, false, notMemoryLock, true, true);
   }

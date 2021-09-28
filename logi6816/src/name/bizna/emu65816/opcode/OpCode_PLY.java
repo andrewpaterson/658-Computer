@@ -15,7 +15,7 @@ public class OpCode_PLY
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.indexIs8BitWide())
+    if (cpu.isIndex8Bit())
     {
       int value = cpu.pull8Bit();
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));

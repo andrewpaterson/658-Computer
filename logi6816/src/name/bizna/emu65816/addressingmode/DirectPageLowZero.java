@@ -4,10 +4,10 @@ import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
-public class DirectPageLowNotZero
+public class DirectPageLowZero
     extends DataBusCycleOperation
 {
-  public DirectPageLowNotZero(boolean notMemoryLock)
+  public DirectPageLowZero(boolean notMemoryLock)
   {
     super(true, false, notMemoryLock, true, true);
   }

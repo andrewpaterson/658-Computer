@@ -5,8 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.STZ_Absolute;
-import static name.bizna.emu65816.OpCodeTable.STZ_AbsoluteIndexedWithX;
+import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_STZ
     extends OpCode
@@ -20,7 +19,7 @@ public class OpCode_STZ
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       cpu.storeByte(dataAddress, 0x00);
     }
@@ -40,7 +39,7 @@ public class OpCode_STZ
       }
       case (0x64):  // STZ Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -57,7 +56,7 @@ public class OpCode_STZ
       }
       case (0x74):  // STZ Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

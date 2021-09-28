@@ -14,7 +14,7 @@ public class OpCode_PHD
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.push16Bit(cpu.getD());
+    cpu.push16Bit(cpu.getDirectPage());
     cpu.addToProgramAddressAndCycles(1, 4);
   }
 

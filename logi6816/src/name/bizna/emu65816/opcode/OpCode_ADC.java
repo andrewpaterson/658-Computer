@@ -3,7 +3,7 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.*;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -18,7 +18,7 @@ public class OpCode_ADC
   protected void execute8BitADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(dataAddress);
+    int value = cpu.get8BitData();
     int accumulator = Binary.lower8BitsOf(cpu.getA());
     int carryValue = (cpu.getCpuStatus().carryFlag() ? 1 : 0);
 
@@ -49,7 +49,7 @@ public class OpCode_ADC
   protected void execute16BitADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(dataAddress);
+    int value = cpu.get16BitData();
     int accumulator = cpu.getA();
     int carryValue = (cpu.getCpuStatus().carryFlag() ? 1 : 0);
 
@@ -80,7 +80,7 @@ public class OpCode_ADC
   protected void execute8BitBCDADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(dataAddress);
+    int value = cpu.get8BitData();
     int accumulator = Binary.lower8BitsOf(cpu.getA());
 
     BCDResult bcd8BitResult = Binary.bcdSum8Bit(value, accumulator, cpu.getCpuStatus().carryFlag());
@@ -95,7 +95,7 @@ public class OpCode_ADC
   protected void execute16BitBCDADC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(dataAddress);
+    int value = cpu.get16BitData();
     int accumulator = cpu.getA();
 
     BCDResult bcd16BitResult = Binary.bcdSum16Bit(value, accumulator, cpu.getCpuStatus().carryFlag());
@@ -110,7 +110,7 @@ public class OpCode_ADC
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       if (cpu.getCpuStatus().decimalFlag())
       {
@@ -138,7 +138,7 @@ public class OpCode_ADC
     {
       case ADC_Immediate:                 // ADC Immediate
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -160,7 +160,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPage:                 // ADC Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -171,7 +171,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirect:                 // ADC Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -182,7 +182,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirectLong:                 // ADC Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -193,11 +193,6 @@ public class OpCode_ADC
       }
       case ADC_AbsoluteIndexedWithX:                 // ADC Absolute Indexed, X
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
-
         cpu.addToProgramAddress(3);
         cpu.addToCycles(4);
         break;
@@ -210,17 +205,13 @@ public class OpCode_ADC
       }
       case (0x79):                 // ADC Absolute Indexed Y
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
         cpu.addToProgramAddress(3);
         cpu.addToCycles(4);
         break;
       }
       case ADC_DirectPageIndexedWithX:                 // ADC Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -230,7 +221,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndexedIndirectWithX:                 // ADC Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -240,11 +231,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirectIndexedWithY:                 // ADC Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -254,7 +241,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirectLongIndexedWithY:                 // ADC Direct Page Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

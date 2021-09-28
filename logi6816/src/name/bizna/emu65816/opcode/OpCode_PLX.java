@@ -15,7 +15,7 @@ public class OpCode_PLX
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.indexIs8BitWide())
+    if (cpu.isIndex8Bit())
     {
       int value = cpu.pull8Bit();
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), value));

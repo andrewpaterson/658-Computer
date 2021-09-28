@@ -16,19 +16,19 @@ public class OpCode_TXS
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.getCpuStatus().emulationFlag())
+    if (cpu.getCpuStatus().isEmulationMode())
     {
       short newStackPointer = 0x100;
       newStackPointer |= Binary.lower8BitsOf(cpu.getX());
-      cpu.clearStack(new Address(newStackPointer));
+      cpu.clearStack(new Address(0x00, newStackPointer));
     }
-    else if (!cpu.getCpuStatus().emulationFlag() && cpu.indexIs8BitWide())
+    else if (!cpu.getCpuStatus().isEmulationMode() && cpu.isIndex8Bit())
     {
-      cpu.clearStack(new Address(Binary.lower8BitsOf(cpu.getX())));
+      cpu.clearStack(new Address(0x00, Binary.lower8BitsOf(cpu.getX())));
     }
-    else if (!cpu.getCpuStatus().emulationFlag() && cpu.indexIs16BitWide())
+    else if (!cpu.getCpuStatus().isEmulationMode() && cpu.isIndex16Bit())
     {
-      cpu.clearStack(new Address(cpu.getX()));
+      cpu.clearStack(new Address(0x00, cpu.getX()));
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

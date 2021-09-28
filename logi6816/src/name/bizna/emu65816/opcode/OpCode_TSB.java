@@ -5,8 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.TSB_Absolute;
-import static name.bizna.emu65816.OpCodeTable.TSB_DirectPage;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 
 public class OpCode_TSB
@@ -20,7 +19,7 @@ public class OpCode_TSB
   protected void execute8BitTSB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(addressOfOpCodeData);
+    int value = cpu.get8BitData();
     int lowerA = Binary.lower8BitsOf(cpu.getA());
     int result = toByte(value | lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
@@ -30,7 +29,7 @@ public class OpCode_TSB
   protected void execute16BitTSB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(addressOfOpCodeData);
+    int value = cpu.get16BitData();
     int result = (value | cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);
@@ -43,7 +42,7 @@ public class OpCode_TSB
     {
       case TSB_Absolute:                 // TSB Absolute
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitTSB(cpu);
         }
@@ -57,7 +56,7 @@ public class OpCode_TSB
       }
       case TSB_DirectPage:                 // TSB Direct Page
       {
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           execute8BitTSB(cpu);
         }
@@ -66,7 +65,7 @@ public class OpCode_TSB
           execute16BitTSB(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

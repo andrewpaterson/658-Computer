@@ -102,12 +102,12 @@ public class CpuStatus
     return mInterruptDisableFlag;
   }
 
-  public boolean accumulatorWidthFlag()
+  public boolean isAccumulator8Bit()
   {
     return mAccumulatorWidthFlag;
   }
 
-  public boolean indexWidthFlag()
+  public boolean isIndex8Bit()
   {
     return mIndexWidthFlag;
   }
@@ -117,7 +117,7 @@ public class CpuStatus
     return mCarryFlag;
   }
 
-  public boolean emulationFlag()
+  public boolean isEmulationMode()
   {
     return mEmulationFlag;
   }
@@ -161,15 +161,15 @@ public class CpuStatus
     {
       value |= STATUS_DECIMAL;
     }
-    if (emulationFlag() && breakFlag())
+    if (isEmulationMode() && breakFlag())
     {
       value |= STATUS_BREAK;
     }
-    if (!emulationFlag() && indexWidthFlag())
+    if (!isEmulationMode() && isIndex8Bit())
     {
       value |= STATUS_INDEX_WIDTH;
     }
-    if (!emulationFlag() && accumulatorWidthFlag())
+    if (!isEmulationMode() && isAccumulator8Bit())
     {
       value |= STATUS_ACCUMULATOR_WIDTH;
     }
@@ -192,7 +192,7 @@ public class CpuStatus
     setInterruptDisableFlag((value & STATUS_INTERRUPT_DISABLE) != 0);
     setDecimalFlag((value & STATUS_DECIMAL) != 0);
 
-    if (emulationFlag())
+    if (isEmulationMode())
     {
       setBreakFlag((value & STATUS_BREAK) != 0);
     }
@@ -201,7 +201,7 @@ public class CpuStatus
       setIndexWidthFlag((value & STATUS_INDEX_WIDTH) != 0);
     }
 
-    setAccumulatorWidthFlag(!emulationFlag() && ((value & STATUS_ACCUMULATOR_WIDTH) != 0));
+    setAccumulatorWidthFlag(!isEmulationMode() && ((value & STATUS_ACCUMULATOR_WIDTH) != 0));
     setOverflowFlag((value & STATUS_OVERFLOW) != 0);
 
     setSignFlag((value & STATUS_SIGN) != 0);

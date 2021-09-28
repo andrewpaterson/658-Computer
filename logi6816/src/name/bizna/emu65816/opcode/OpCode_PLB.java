@@ -14,8 +14,8 @@ public class OpCode_PLB
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.setDB(cpu.pull8Bit());
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(cpu.getDB());
+    cpu.setDataBank(cpu.pull8Bit());
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(cpu.getDataBank());
     cpu.addToProgramAddressAndCycles(1, 4);
   }
 

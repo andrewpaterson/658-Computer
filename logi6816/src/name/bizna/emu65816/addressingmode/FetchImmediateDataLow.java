@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class ImmediateDataLow
+public class FetchImmediateDataLow
     extends DataBusCycleOperation
 {
-  public ImmediateDataLow()
+  public FetchImmediateDataLow()
   {
     super(false, true, true, true, true);
   }

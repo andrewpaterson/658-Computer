@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class DirectPageOffset
+public class FetchDirectOffset
     extends DataBusCycleOperation
 {
-  public DirectPageOffset(boolean notMemoryLock)
+  public FetchDirectOffset(boolean notMemoryLock)
   {
     super(true, false, notMemoryLock, true, true);
   }

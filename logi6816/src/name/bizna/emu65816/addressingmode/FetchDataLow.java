@@ -4,12 +4,12 @@ import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
-public class DirectPageLowZero
+public class FetchDataLow
     extends DataBusCycleOperation
 {
-  public DirectPageLowZero(boolean notMemoryLock)
+  public FetchDataLow(boolean notMemoryLock)
   {
-    super(true, false, notMemoryLock, true, true);
+    super(false, true, notMemoryLock, true, true);
   }
 
   @Override
@@ -21,6 +21,7 @@ public class DirectPageLowZero
   @Override
   public void execute(Cpu65816 cpu)
   {
+    cpu.setDataLow(cpu.getPinData());
   }
 }
 

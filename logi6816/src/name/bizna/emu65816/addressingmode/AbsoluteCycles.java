@@ -1,16 +1,18 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.Immediate;
+import static name.bizna.emu65816.AddressingMode.Absolute;
 
-public class ImmediateCycles
+public class AbsoluteCycles
     extends InstructionCycles
 {
-  public ImmediateCycles()
+  public AbsoluteCycles(boolean read)
   {
-    super(Immediate,
-          new BusCycle(new PCRelativeAddress(0), new OpCodeData()),
-          new BusCycle(new PCRelativeAddress(1), new ReadImmediateDataLow()),
-          new BusCycle(new PCRelativeAddress(2), new ReadImmediateDataHigh()));
+    super(Absolute,
+          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
+          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
+          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
+          new BusCycle(new DataBank(), new AbsoluteOffset(), new ExecuteLow(read, true)),
+          new BusCycle(new DataBank(), new AbsoluteOffset(), new Offset(1), new ExecuteHigh(read, true)));
   }
 }
 

@@ -1,18 +1,16 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.DirectPage;
+import static name.bizna.emu65816.AddressingMode.Immediate;
 
-public class DirectPageCycles
+public class ImmediateCycles
     extends InstructionCycles
 {
-  public DirectPageCycles(boolean read)
+  public ImmediateCycles()
   {
-    super(DirectPage,
-          new BusCycle(new PCRelativeAddress(0), new OpCodeData()),
-          new BusCycle(new PCRelativeAddress(1), new ReadDirectOffset(true)),
-          new BusCycle(new PCRelativeAddress(1), new DirectPageLowNotZero(true)),
-          new BusCycle(new DirectPageAddress(0), new ExecuteLow(true, read)),
-          new BusCycle(new DirectPageAddress(1), new ExecuteHigh(true, read)));
+    super(Immediate,
+          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
+          new BusCycle(new ProgramCounter(), new FetchImmediateDataLow(), new IncrementProgramCounter(), new ExecuteLow(true, true)),
+          new BusCycle(new ProgramCounter(), new FetchImmediateDataHigh(), new ExecuteHigh(true, true)));
   }
 }
 

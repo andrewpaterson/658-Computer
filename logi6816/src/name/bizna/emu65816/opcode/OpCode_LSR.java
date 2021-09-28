@@ -5,7 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -37,15 +37,15 @@ public class OpCode_LSR
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
-      int value = cpu.readByte(opCodeDataAddress);
+      int value = cpu.get8BitData();
       DO_LSR_8_BIT(cpu, value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      int value = cpu.readTwoBytes(opCodeDataAddress);
+      int value = cpu.get16BitData();
       DO_LSR_16_BIT(cpu, value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
     }
@@ -53,7 +53,7 @@ public class OpCode_LSR
 
   protected void executeAccumulatorLSR(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       int value = Binary.lower8BitsOf(cpu.getA());
       DO_LSR_8_BIT(cpu, value);
@@ -79,7 +79,7 @@ public class OpCode_LSR
       case LSR_Absolute:                // LSR Absolute
       {
         executeMemoryLSR(cpu);
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -89,11 +89,11 @@ public class OpCode_LSR
       case LSR_DirectPage:                // LSR Direct Page
       {
         executeMemoryLSR(cpu);
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -104,7 +104,7 @@ public class OpCode_LSR
       case LSR_AbsoluteIndexedWithX:                // LSR Absolute Indexed, X
       {
         executeMemoryLSR(cpu);
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -115,11 +115,11 @@ public class OpCode_LSR
       case LSR_DirectPageIndexedWithX:                // LSR Direct Page Indexed, X
       {
         executeMemoryLSR(cpu);
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

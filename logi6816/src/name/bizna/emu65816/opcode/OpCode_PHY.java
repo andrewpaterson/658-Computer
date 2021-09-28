@@ -15,7 +15,7 @@ public class OpCode_PHY
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.indexIs8BitWide())
+    if (cpu.isIndex8Bit())
     {
       cpu.push8Bit(Binary.lower8BitsOf(cpu.getY()));
       cpu.addToProgramAddressAndCycles(1, 3);

@@ -6,10 +6,10 @@ import name.bizna.emu65816.opcode.OpCode;
 import static name.bizna.emu65816.OpCodeName.REP_Immediate;
 import static name.bizna.emu65816.OpCodeName.SEP_Immediate;
 
-public class ImmediateDataHigh
+public class FetchImmediateDataHigh
     extends DataBusCycleOperation
 {
-  public ImmediateDataHigh()
+  public FetchImmediateDataHigh()
   {
     super(false, true, true, true, true);
   }
@@ -20,7 +20,7 @@ public class ImmediateDataHigh
     boolean sixteenBitRegisters = cpu.isAccumulator8Bit() && cpu.isIndex8Bit();
     OpCode opCode = cpu.getOpCode();
     boolean sepOrRep = opCode.getCode() == SEP_Immediate || opCode.getCode() == REP_Immediate;
-    return !sixteenBitRegisters && !sepOrRep;
+    return !(sixteenBitRegisters || sepOrRep);
   }
 
   @Override

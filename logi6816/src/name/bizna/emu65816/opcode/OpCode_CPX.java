@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -18,7 +18,7 @@ public class OpCode_CPX
 
   protected void execute8BitCPX(Cpu65816 cpu)
   {
-    int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.get8BitData();
     int result = toByte(Binary.lower8BitsOf(cpu.getX()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.lower8BitsOf(cpu.getX()) >= value;
@@ -27,7 +27,7 @@ public class OpCode_CPX
 
   protected void execute16BitCPX(Cpu65816 cpu)
   {
-    int value = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.get16BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toShort(cpu.getX() - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getX() >= value;
@@ -41,22 +41,21 @@ public class OpCode_CPX
     {
       case CPX_Immediate:  // CPX Immediate
       {
-        if (cpu.indexIs8BitWide())
+        if (cpu.isIndex8Bit())
         {
           execute8BitCPX(cpu);
         }
         else
         {
           execute16BitCPX(cpu);
-          cpu.addToProgramAddress(1);
-          cpu.addToCycles(1);
+          cpu.addToProgramAddressAndCycles(1, 1);
         }
         cpu.addToProgramAddressAndCycles(2, 2);
         break;
       }
       case CPX_Absolute:  // CPX Absolute
       {
-        if (cpu.indexIs8BitWide())
+        if (cpu.isIndex8Bit())
         {
           execute8BitCPX(cpu);
         }
@@ -70,7 +69,7 @@ public class OpCode_CPX
       }
       case CPX_DirectPage:  // CPX Direct Page
       {
-        if (cpu.indexIs8BitWide())
+        if (cpu.isIndex8Bit())
         {
           execute8BitCPX(cpu);
         }
@@ -79,7 +78,7 @@ public class OpCode_CPX
           execute16BitCPX(cpu);
           cpu.addToCycles(1);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

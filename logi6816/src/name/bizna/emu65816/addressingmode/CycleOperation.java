@@ -1,2 +1,22 @@
-package name.bizna.emu65816.addressingmode;public class CycleOperation {
+package name.bizna.emu65816.addressingmode;
+
+import name.bizna.emu65816.Cpu65816;
+
+public abstract class CycleOperation implements BusCycleParameter
+{
+  public abstract void execute(Cpu65816 cpu);
+
+  public abstract boolean shouldSkipCycle(Cpu65816 cpu);
+
+  @Override
+  public boolean isOperation()
+  {
+    return true;
+  }
+
+  @Override
+  public boolean isAddressOffset()
+  {
+    return false;
+  }
 }

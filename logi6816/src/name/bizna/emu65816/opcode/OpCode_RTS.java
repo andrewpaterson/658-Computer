@@ -17,7 +17,7 @@ public class OpCode_RTS
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    Address returnAddress = new Address(cpu.getProgramAddress().getBank(), toShort (cpu.pull16Bit() + 1));
+    Address returnAddress = new Address(cpu.getProgramCounter().getBank(), toShort (cpu.pull16Bit() + 1));
     cpu.setProgramAddress(returnAddress);
     cpu.addToCycles(6);
   }

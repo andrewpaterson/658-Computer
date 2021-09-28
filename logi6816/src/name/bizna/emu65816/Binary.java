@@ -139,8 +139,8 @@ public class Binary
       int digitOfSecond = (bcdSecond & 0xFF);
       BCDResult bcd8BitResult = bcdSum8Bit(digitOfFirst, digitOfSecond, carry);
       carry = bcd8BitResult.carry;
-      int partialresult = bcd8BitResult.value;
-      result = toShort(result | (partialresult << shift));
+      int partialResult = bcd8BitResult.value;
+      result = toShort(result | (partialResult << shift));
       shift += 8;
       bcdFirst = toShort(bcdFirst >> shift);
       bcdSecond = toShort(bcdSecond >> shift);
@@ -158,13 +158,51 @@ public class Binary
       int digitOfSecond = (bcdSecond & 0xFF);
       BCDResult bcd8BitResult = bcdSubtract8Bit(digitOfFirst, digitOfSecond, borrow);
       borrow = bcd8BitResult.carry;
-      int partialresult = bcd8BitResult.value;
-      result = toShort(result | (partialresult << shift));
+      int partialResult = bcd8BitResult.value;
+      result = toShort(result | (partialResult << shift));
       shift += 8;
       bcdFirst = toShort(bcdFirst >> shift);
       bcdSecond = toShort(bcdSecond >> shift);
     }
     return new BCDResult(result, borrow);
+  }
+
+  public static int getLowByte(int value)
+  {
+    return toByte(value);
+  }
+
+  public static int getHighByte(int value)
+  {
+    return toByte((value & 0xFF00) >> 8);
+  }
+
+  public static int setLowByte(int variable,  int data)
+  {
+    return (variable & 0xFF00) | toByte(data);
+  }
+
+  public static int setHighByte(int variable, int data)
+  {
+    return (variable & 0xFF) | (toByte(data) << 8);
+  }
+
+  public static void assert8Bit(int value, String variable)
+  {
+    if ((value < 0) || (value > 0xFF))
+    {
+      String error = variable + "value [0x" + Integer.toHexString(value) + "] must in the range 0...0xFF.";
+      throw new EmulatorException(error);
+    }
+  }
+
+  public static void assert16Bit(int value, String variable)
+  {
+    if ((value < 0) || (value > 0xFFFF))
+    {
+      String error = variable + "value [0x" + Integer.toHexString(value) + "] must in the range 0...0xFFFF.";
+      throw new EmulatorException(error);
+    }
   }
 }
 

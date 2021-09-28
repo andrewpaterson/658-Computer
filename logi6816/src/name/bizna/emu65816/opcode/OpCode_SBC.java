@@ -3,7 +3,7 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.*;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -18,7 +18,7 @@ public class OpCode_SBC
   public void execute8BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(dataAddress);
+    int value = cpu.get8BitData();
     int accumulator = Binary.lower8BitsOf(cpu.getA());
     boolean borrow = !cpu.getCpuStatus().carryFlag();
 
@@ -49,7 +49,7 @@ public class OpCode_SBC
   protected void execute16BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(dataAddress);
+    int value = cpu.get16BitData();
     int accumulator = cpu.getA();
     boolean borrow = !cpu.getCpuStatus().carryFlag();
 
@@ -80,7 +80,7 @@ public class OpCode_SBC
   protected void execute8BitBCDSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(dataAddress);
+    int value = cpu.get8BitData();
     int accumulator = Binary.lower8BitsOf(cpu.getA());
 
     BCDResult bcd8BitResult = Binary.bcdSubtract8Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
@@ -95,7 +95,7 @@ public class OpCode_SBC
   protected void execute16BitBCDSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readTwoBytes(dataAddress);
+    int value = cpu.get16BitData();
     int accumulator = cpu.getA();
 
     BCDResult bcd16BitResult = Binary.bcdSubtract16Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
@@ -110,7 +110,7 @@ public class OpCode_SBC
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       if (cpu.getCpuStatus().decimalFlag())
       {
@@ -138,7 +138,7 @@ public class OpCode_SBC
     {
       case SBC_Immediate:                 // SBC Immediate
       {
-        if (cpu.accumulatorIs16BitWide())
+        if (cpu.isAccumulator16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -160,7 +160,7 @@ public class OpCode_SBC
       }
       case SBC_DirectPage:                 // SBC Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -171,7 +171,7 @@ public class OpCode_SBC
       }
       case SBC_DirectPageIndirect:                 // SBC Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -182,7 +182,7 @@ public class OpCode_SBC
       }
       case SBC_DirectPageIndirectLong:                 // SBC Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -193,11 +193,6 @@ public class OpCode_SBC
       }
       case SBC_AbsoluteIndexedWithX:                 // SBC Absolute Indexed, X
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
-
         cpu.addToProgramAddress(3);
         cpu.addToCycles(4);
         break;
@@ -210,21 +205,13 @@ public class OpCode_SBC
       }
       case SBC_AbsoluteIndexedWithY:                 // SBC Absolute Indexed Y
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
         cpu.addToProgramAddress(3);
         cpu.addToCycles(4);
         break;
       }
       case SBC_DirectPageIndexedWithX:                 // SBC Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -234,7 +221,7 @@ public class OpCode_SBC
       }
       case SBC_DirectPageIndexedIndirectWithX:                 // SBC Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -244,11 +231,7 @@ public class OpCode_SBC
       }
       case SBC_DirectPageIndirectIndexedWithY:                 // SBC Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -258,7 +241,7 @@ public class OpCode_SBC
       }
       case SBC_DirectPageIndirectLongIndexedWithY:                 // SBC Direct Page Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

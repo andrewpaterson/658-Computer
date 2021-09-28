@@ -4,7 +4,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -18,7 +18,7 @@ public class OpCode_CPY
 
   protected void execute8BitCPY(Cpu65816 cpu)
   {
-    int value = cpu.readByte(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.get8BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toByte(Binary.lower8BitsOf(cpu.getY()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.lower8BitsOf(cpu.getY()) >= value;
@@ -27,7 +27,7 @@ public class OpCode_CPY
 
   protected void execute16BitCPY(Cpu65816 cpu)
   {
-    int value = cpu.readTwoBytes(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.get16BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toShort(cpu.getY() - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getY() >= value;
@@ -41,7 +41,7 @@ public class OpCode_CPY
     {
       case CPY_Immediate:  // CPY Immediate
       {
-        if (cpu.indexIs8BitWide())
+        if (cpu.isIndex8Bit())
         {
           execute8BitCPY(cpu);
         }
@@ -56,7 +56,7 @@ public class OpCode_CPY
       }
       case CPY_Absolute:  // CPY Absolute
       {
-        if (cpu.indexIs8BitWide())
+        if (cpu.isIndex8Bit())
         {
           execute8BitCPY(cpu);
         }
@@ -70,7 +70,7 @@ public class OpCode_CPY
       }
       case CPY_DirectPage:  // CPY Direct Page
       {
-        if (cpu.indexIs8BitWide())
+        if (cpu.isIndex8Bit())
         {
           execute8BitCPY(cpu);
         }
@@ -79,7 +79,7 @@ public class OpCode_CPY
           execute16BitCPY(cpu);
           cpu.addToCycles(1);
         }
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

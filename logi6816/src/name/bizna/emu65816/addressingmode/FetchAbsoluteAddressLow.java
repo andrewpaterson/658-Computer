@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class AbsoluteAddressLow
+public class FetchAbsoluteAddressLow
     extends DataBusCycleOperation
 {
-  public AbsoluteAddressLow(boolean notMemoryLock)
+  public FetchAbsoluteAddressLow(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

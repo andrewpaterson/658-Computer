@@ -1,20 +1,25 @@
 package name.bizna.emu65816.addressingmode;
 
-import name.bizna.emu65816.Address;
 import name.bizna.emu65816.Cpu65816;
 
-public class ProgramCounterAddress
-    extends BaseAddressCycle
+public class ProgramCounter
+    extends AddressOffset
 {
-  public ProgramCounterAddress()
+  public ProgramCounter()
   {
     super();
   }
 
   @Override
-  public Address getAddress(Cpu65816 cpu65816)
+  public int getOffset(Cpu65816 cpu)
   {
-    return cpu65816.getProgramCounter();
+    return cpu.getProgramCounter().getOffset();
+  }
+
+  @Override
+  public int getBank(Cpu65816 cpu)
+  {
+    return cpu.getProgramCounter().getBank();
   }
 }
 

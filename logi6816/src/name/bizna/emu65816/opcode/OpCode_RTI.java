@@ -19,9 +19,9 @@ public class OpCode_RTI
     // This implementation follows the text instead.
     cpu.getCpuStatus().setRegisterValue(cpu.pull8Bit());
 
-    if (cpu.getCpuStatus().emulationFlag())
+    if (cpu.getCpuStatus().isEmulationMode())
     {
-      Address newProgramAddress = new Address(cpu.getProgramAddress().getBank(), cpu.pull16Bit());
+      Address newProgramAddress = new Address(cpu.getProgramCounter().getBank(), cpu.pull16Bit());
       cpu.setProgramAddress(newProgramAddress);
       cpu.addToCycles(6);
     }

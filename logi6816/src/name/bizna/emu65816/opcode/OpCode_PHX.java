@@ -15,7 +15,7 @@ public class OpCode_PHX
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.indexIs8BitWide())
+    if (cpu.isIndex8Bit())
     {
       cpu.push8Bit(Binary.lower8BitsOf(cpu.getX()));
       cpu.addToProgramAddressAndCycles(1, 3);

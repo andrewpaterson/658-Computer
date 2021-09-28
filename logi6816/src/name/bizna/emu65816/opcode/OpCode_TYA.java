@@ -15,19 +15,19 @@ public class OpCode_TYA
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide() && cpu.indexIs8BitWide())
+    if (cpu.isAccumulator8Bit() && cpu.isIndex8Bit())
     {
       int value = Binary.lower8BitsOf(cpu.getY());
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
-    else if (cpu.accumulatorIs8BitWide() && cpu.indexIs16BitWide())
+    else if (cpu.isAccumulator8Bit() && cpu.isIndex16Bit())
     {
       int value = Binary.lower8BitsOf(cpu.getY());
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
-    else if (cpu.accumulatorIs16BitWide() && cpu.indexIs8BitWide())
+    else if (cpu.isAccumulator16Bit() && cpu.isIndex8Bit())
     {
       int value = Binary.lower8BitsOf(cpu.getY());
       cpu.setA(value);

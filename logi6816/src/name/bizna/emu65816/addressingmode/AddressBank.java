@@ -2,7 +2,7 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class DataBank
+public class AddressBank
     extends AddressOffset
 {
   @Override
@@ -14,7 +14,7 @@ public class DataBank
   @Override
   public int getBank(Cpu65816 cpu)
   {
-    return cpu.getDataBank();
+    return cpu.getAddress().getBank();
   }
 }
 

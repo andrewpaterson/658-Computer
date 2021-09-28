@@ -3,21 +3,20 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Address;
 import name.bizna.emu65816.Cpu65816;
 
-public class DirectPageAddressPlusY
-    extends AddressCycle
+public class DirectPageAddressPlusX
+    extends OffsetAddressCycle
 {
-  private int offset;
-
-  public DirectPageAddressPlusY(int offset)
+  public DirectPageAddressPlusX(int offset)
   {
-    super();
-    this.offset = offset;
+    super(offset);
   }
 
   @Override
-  public Address getAddress(Cpu65816 cpu65816)
+  public Address getAddress(Cpu65816 cpu)
   {
-    return null;
+    return new Address(0x00, cpu.getDirectPage()).offset(cpu.getDirectOffset() +
+                                                         cpu.getX() +
+                                                         offset, true);  //@todo - does this wrap, if so where?
   }
 }
 

@@ -19,8 +19,8 @@ public class OpCode_PER
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int opCodeSize = 3;
-    int operand = cpu.readTwoBytes(opCodeDataAddress);
-    int sum = toShort (operand + opCodeSize + cpu.getProgramAddress().getOffset());
+    int operand = cpu.get16BitData();
+    int sum = toShort (operand + opCodeSize + cpu.getProgramCounter().getOffset());
     cpu.push16Bit(sum);
     cpu.addToProgramAddressAndCycles(3, 6);
   }

@@ -1,11 +1,18 @@
 package name.bizna.emu65816.addressingmode;
 
-public class IOData
-    extends Data
+import name.bizna.emu65816.Cpu65816;
+
+public class InternalIgnored
+    extends DataBusCycleOperation
 {
-  public IOData()
+  public InternalIgnored(boolean notMemoryLock)
   {
-    super(false, false, true, true, true);
+    super(false, false, notMemoryLock, true, true);
+  }
+
+  @Override
+  public void execute(Cpu65816 cpu)
+  {
   }
 }
 

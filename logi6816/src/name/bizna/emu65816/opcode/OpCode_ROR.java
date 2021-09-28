@@ -5,7 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
@@ -58,15 +58,15 @@ public class OpCode_ROR
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
-      int value = cpu.readByte(opCodeDataAddress);
+      int value = cpu.get8BitData();
       DO_ROR_8_BIT(cpu, value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      int value = cpu.readTwoBytes(opCodeDataAddress);
+      int value = cpu.get16BitData();
       DO_ROR_16_BIT(cpu, value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
     }
@@ -74,7 +74,7 @@ public class OpCode_ROR
 
   protected void executeAccumulatorROR(Cpu65816 cpu)
   {
-    if (cpu.accumulatorIs8BitWide())
+    if (cpu.isAccumulator8Bit())
     {
       int value = Binary.lower8BitsOf(cpu.getA());
       DO_ROR_8_BIT(cpu, value);
@@ -102,7 +102,7 @@ public class OpCode_ROR
       case ROR_Absolute:                // ROR #addr
       {
         executeMemoryROR(cpu);
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           cpu.addToProgramAddressAndCycles(3, 6);
         }
@@ -115,8 +115,8 @@ public class OpCode_ROR
       case ROR_DirectPage:                // ROR Direct Page
       {
         executeMemoryROR(cpu);
-        int opCycles = Binary.lower8BitsOf(cpu.getD()) != 0 ? 1 : 0;
-        if (cpu.accumulatorIs8BitWide())
+        int opCycles = Binary.lower8BitsOf(cpu.getDirectPage()) != 0 ? 1 : 0;
+        if (cpu.isAccumulator8Bit())
         {
           cpu.addToProgramAddressAndCycles(2, 5 + opCycles);
         }
@@ -130,7 +130,7 @@ public class OpCode_ROR
       {
         executeMemoryROR(cpu);
         short opCycles = 0;
-        if (cpu.accumulatorIs8BitWide())
+        if (cpu.isAccumulator8Bit())
         {
           cpu.addToProgramAddressAndCycles(3, 7 + opCycles);
         }
@@ -143,8 +143,8 @@ public class OpCode_ROR
       case ROR_DirectPageIndexedWithX:                // ROR Direct Page Indexed, X
       {
         executeMemoryROR(cpu);
-        int opCycles = Binary.lower8BitsOf(cpu.getD()) != 0 ? 1 : 0;
-        if (cpu.accumulatorIs8BitWide())
+        int opCycles = Binary.lower8BitsOf(cpu.getDirectPage()) != 0 ? 1 : 0;
+        if (cpu.isAccumulator8Bit())
         {
           cpu.addToProgramAddressAndCycles(2, 6 + opCycles);
         }

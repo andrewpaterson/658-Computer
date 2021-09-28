@@ -5,7 +5,7 @@ import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-import static name.bizna.emu65816.OpCodeTable.*;
+import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_LDX
     extends OpCode
@@ -18,7 +18,7 @@ public class OpCode_LDX
   protected void executeLDX8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.readByte(opCodeDataAddress);
+    int value = cpu.get8BitData();
     cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
@@ -26,14 +26,14 @@ public class OpCode_LDX
   protected void executeLDX16Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    cpu.setX(cpu.readTwoBytes(opCodeDataAddress));
+    cpu.setX(cpu.get16BitData());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
   }
 
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.indexIs16BitWide())
+    if (cpu.isIndex16Bit())
     {
       executeLDX16Bit(cpu);
       cpu.addToCycles(1);
@@ -47,7 +47,7 @@ public class OpCode_LDX
     {
       case LDX_Immediate:                // LDX Immediate
       {
-        if (cpu.indexIs16BitWide())
+        if (cpu.isIndex16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -61,7 +61,7 @@ public class OpCode_LDX
       }
       case LDX_DirectPage:                // LDX Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -70,16 +70,12 @@ public class OpCode_LDX
       }
       case LDX_AbsoluteIndexedWithY:                // LDX Absolute Indexed, Y
       {
-        if (cpu.opCodeAddressingCrossesPageBoundary(getAddressingMode()))
-        {
-          cpu.addToCycles(1);
-        }
         cpu.addToProgramAddressAndCycles(3, 4);
         break;
       }
       case LDX_DirectPageIndexedWithY:                // LDX Direct Page Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getD()) != 0)
+        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

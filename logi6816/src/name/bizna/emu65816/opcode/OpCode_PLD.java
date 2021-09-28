@@ -14,8 +14,8 @@ public class OpCode_PLD
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.setD(cpu.pull16Bit());
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getD());
+    cpu.setDirectPage(cpu.pull16Bit());
+    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getDirectPage());
     cpu.addToProgramAddressAndCycles(1, 5);
   }
 

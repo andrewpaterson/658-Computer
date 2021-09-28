@@ -14,7 +14,7 @@ public class OpCode_PHK
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    cpu.push8Bit(cpu.getProgramAddress().getBank());
+    cpu.push8Bit(cpu.getProgramCounter().getBank());
     cpu.addToProgramAddressAndCycles(1, 3);
   }
 

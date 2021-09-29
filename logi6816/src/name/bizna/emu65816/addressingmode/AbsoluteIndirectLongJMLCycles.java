@@ -10,7 +10,7 @@ public class AbsoluteIndirectLongJMLCycles
     super(AbsoluteIndirectLong,
           new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new StackPointer(), new FetchAbsoluteAddressHigh(true)),
+          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
           new BusCycle(new AbsoluteAddress(), new FetchNewProgramCounterLow(true)),
           new BusCycle(new AbsoluteAddress(), new Offset(1), new FetchNewProgramCounterHigh(true)),
           new BusCycle(new AbsoluteAddress(), new Offset(2), new FetchNewProgramCounterBank(true), new SetProgramCounter(new NewProgramCounter())));

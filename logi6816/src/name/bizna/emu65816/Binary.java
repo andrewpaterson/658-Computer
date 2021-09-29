@@ -5,21 +5,6 @@ import static name.bizna.emu65816.Unsigned.toShort;
 
 public class Binary
 {
-  public static int lower8BitsOf(int value)
-  {
-    return toByte(value);
-  }
-
-  public static int higher8BitsOf(int value)
-  {
-    return toByte(((value & 0xFF00) >> 8));
-  }
-
-  public static int lower16BitsOf(int value)
-  {
-    return toShort(value);
-  }
-
   public static boolean is8bitValueNegative(int value)
   {
     return (value & 0x80) != 0;

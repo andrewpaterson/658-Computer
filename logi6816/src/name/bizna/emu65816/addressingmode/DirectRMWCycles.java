@@ -13,7 +13,7 @@ public class DirectRMWCycles
           new BusCycle(new ProgramCounter(), new DirectPageLowZero(false)),
           new BusCycle(new DirectPage(), new DirectOffset(), new FetchDataLow(false)),
           new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new FetchDataHigh(false)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new InternalIgnored(false)),
+          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new InternalOperation(false)),
           new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new ExecuteHigh(false, false)),
           new BusCycle(new DirectPage(), new DirectOffset(), new ExecuteLow(false, false)));
   }

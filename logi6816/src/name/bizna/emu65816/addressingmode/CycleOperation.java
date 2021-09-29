@@ -2,11 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public abstract class CycleOperation implements BusCycleParameter
+public abstract class CycleOperation
+    implements BusCycleParameter
 {
   public abstract void execute(Cpu65816 cpu);
-
-  public abstract boolean shouldSkipCycle(Cpu65816 cpu);
 
   @Override
   public boolean isOperation()
@@ -19,4 +18,10 @@ public abstract class CycleOperation implements BusCycleParameter
   {
     return false;
   }
+
+  public boolean isDataBus()
+  {
+    return false;
+  }
 }
+

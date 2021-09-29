@@ -17,8 +17,8 @@ public class OpCode_XBA
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    int lowerA = Binary.lower8BitsOf(cpu.getA());
-    int higherA = Binary.higher8BitsOf(cpu.getA());
+    int lowerA = Binary.getLowByte(cpu.getA());
+    int higherA = Binary.getHighByte(cpu.getA());
     cpu.setA(toShort(higherA | (((lowerA)) << 8)));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(higherA);
     cpu.addToProgramAddressAndCycles(1, 3);

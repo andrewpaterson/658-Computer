@@ -19,7 +19,7 @@ public class OpCode_PEI
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.get16BitData();
     cpu.push16Bit(operand);
-    int opCycles = Binary.lower8BitsOf(cpu.getDirectPage()) != 0 ? 1 : 0;
+    int opCycles = Binary.getLowByte(cpu.getDirectPage()) != 0 ? 1 : 0;
     cpu.addToProgramAddressAndCycles(2, 6 + opCycles);
   }
 

@@ -11,6 +11,7 @@ import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCodeTable
 {
+  @SuppressWarnings("DuplicatedCode")
   public static OpCode[] createTable()
   {
     InstructionCycles directPageRead = new DirectCycles(true);
@@ -32,11 +33,16 @@ public class OpCodeTable
     InstructionCycles directPageIndirectWrite = new DirectIndirectCycles(true);
     InstructionCycles stackRelativeIndirectIndexedWithYRead = new StackRelativeIndirectIndexedWithYCycles(true);
     InstructionCycles stackRelativeIndirectIndexedWithYWrite = new StackRelativeIndirectIndexedWithYCycles(false);
+    InstructionCycles directIndexedWithXRead = new DirectIndexedWithXCycles(true);
+    InstructionCycles directIndirectLongIndexedWithYRead = new DirectIndirectLongIndexedWithYCycles(true);
+    InstructionCycles absoluteIndexedWithYRead = new AbsoluteIndexedWithYCycles(true);
+    InstructionCycles absoluteIndexedWithXRead = new AbsoluteIndexedWithXCycles(true);
+    InstructionCycles absoluteLongIndexedWithXRead = new AbsoluteLongIndexedWithXCycles(true);
 
     List<OpCode> opCodes = new ArrayList<>();
-    add(opCodes, new OpCode_BRK("BRK", BRK_Interrupt, Interrupt));
+    add(opCodes, new OpCode_BRK("BRK", BRK_Interrupt, StackInterruptSoftware));
     add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
-    add(opCodes, new OpCode_COP("COP", COP_Interrupt, Interrupt));
+    add(opCodes, new OpCode_COP("COP", COP_Interrupt, StackInterruptSoftware));
     add(opCodes, new OpCode_ORA("ORA", ORA_StackRelative, StackRelative));
     add(opCodes, new OpCode_TSB("TSB", TSB_DirectPage, Direct));
     add(opCodes, new OpCode_ORA("ORA", ORA_DirectPage, Direct));
@@ -50,7 +56,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_ORA("ORA", ORA_Absolute, Absolute));
     add(opCodes, new OpCode_ASL("ASL", ASL_Absolute, Absolute));
     add(opCodes, new OpCode_ORA("ORA", ORA_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BPL("BPL", BPL_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BPL("BPL", BPL_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_ORA("ORA", ORA_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
@@ -82,7 +88,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_AND("AND", AND_Absolute, Absolute));
     add(opCodes, new OpCode_ROL("ROL", ROL_Absolute, Absolute));
     add(opCodes, new OpCode_AND("AND", AND_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BMI("BMI", BMI_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BMI("BMI", BMI_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_AND("AND", AND_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_AND("AND", AND_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_AND("AND", AND_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
@@ -114,7 +120,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_EOR("EOR", EOR_Absolute, Absolute));
     add(opCodes, new OpCode_LSR("LSR", LSR_Absolute, Absolute));
     add(opCodes, new OpCode_EOR("EOR", EOR_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BVC("BVC", BVC_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BVC("BVC", BVC_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_EOR("EOR", EOR_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_EOR("EOR", EOR_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_EOR("EOR", EOR_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
@@ -132,7 +138,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_EOR("EOR", EOR_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
     add(opCodes, new OpCode_RTS("RTS", RTS_StackImplied, StackImplied));
     add(opCodes, new OpCode_ADC("ADC", ADC_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
-    add(opCodes, new OpCode_PER("PER", PER_StackProgramCounterRelativeLong, StackProgramCounterRelativeLong));
+    add(opCodes, new OpCode_PER("PER", PER_StackProgramCounterRelativeLong, Relative));
     add(opCodes, new OpCode_ADC("ADC", ADC_StackRelative, StackRelative));
     add(opCodes, new OpCode_STZ("STZ", STZ_DirectPage, Direct));
     add(opCodes, new OpCode_ADC("ADC", ADC_DirectPage, Direct));
@@ -146,7 +152,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_ADC("ADC", ADC_Absolute, Absolute));
     add(opCodes, new OpCode_ROR("ROR", ROR_Absolute, Absolute));
     add(opCodes, new OpCode_ADC("ADC", ADC_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BVS("BVS", BVS_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BVS("BVS", BVS_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_ADC("ADC", ADC_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_ADC("ADC", ADC_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_ADC("ADC", ADC_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
@@ -162,9 +168,9 @@ public class OpCodeTable
     add(opCodes, new OpCode_ADC("ADC", ADC_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_ROR("ROR", ROR_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_ADC("ADC", ADC_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
-    add(opCodes, new OpCode_BRA("BRA", BRA_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BRA("BRA", BRA_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_STA("STA", STA_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
-    add(opCodes, new OpCode_BRL("BRL", BRL_ProgramCounterRelativeLong, ProgramCounterRelativeLong));
+    add(opCodes, new OpCode_BRL("BRL", BRL_ProgramCounterRelativeLong, RelativeLong));
     add(opCodes, new OpCode_STA("STA", STA_StackRelative, StackRelative));
     add(opCodes, new OpCode_STY("STY", STY_DirectPage, Direct));
     add(opCodes, new OpCode_STA("STA", STA_DirectPage, Direct));
@@ -178,7 +184,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_STA("STA", STA_Absolute, Absolute));
     add(opCodes, new OpCode_STX("STX", STX_Absolute, Absolute));
     add(opCodes, new OpCode_STA("STA", STA_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BCC("BCC", BCC_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BCC("BCC", BCC_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_STA("STA", STA_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_STA("STA", STA_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_STA("STA", STA_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
@@ -210,22 +216,22 @@ public class OpCodeTable
     add(opCodes, new OpCode_LDA("LDA", LDA_Absolute, absoluteRead));
     add(opCodes, new OpCode_LDX("LDX", LDX_Absolute, Absolute));
     add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteLong, absoluteLongRead));
-    add(opCodes, new OpCode_BCS("BCS", BCS_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BCS("BCS", BCS_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirectIndexedWithY, directPageIndirectIndexedWithYRead));
     add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirect, directPageIndirectRead));
     add(opCodes, new OpCode_LDA("LDA", LDA_StackRelativeIndirectIndexedWithY, stackRelativeIndirectIndexedWithYRead));
     add(opCodes, new OpCode_LDY("LDY", LDY_DirectPageIndexedWithX, DirectIndexedWithX));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndexedWithX, DirectIndexedWithX));
+    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndexedWithX, directIndexedWithXRead));
     add(opCodes, new OpCode_LDX("LDX", LDX_DirectPageIndexedWithY, DirectIndexedWithY));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirectLongIndexedWithY, DirectIndirectLongIndexedWithY));
+    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirectLongIndexedWithY, directIndirectLongIndexedWithYRead));
     add(opCodes, new OpCode_CLV("CLV", CLV_Implied, Implied));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteIndexedWithY, AbsoluteIndexedWithY));
+    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteIndexedWithY, absoluteIndexedWithYRead));
     add(opCodes, new OpCode_TSX("TSX", TSX_Implied, Implied));
     add(opCodes, new OpCode_TYX("TYX", TYX_Implied, Implied));
     add(opCodes, new OpCode_LDY("LDY", LDY_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
+    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteIndexedWithX, absoluteIndexedWithXRead));
     add(opCodes, new OpCode_LDX("LDX", LDX_AbsoluteIndexedWithY, AbsoluteIndexedWithY));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
+    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteLongIndexedWithX, absoluteLongIndexedWithXRead));
     add(opCodes, new OpCode_CPY("CPY", CPY_Immediate, Immediate));
     add(opCodes, new OpCode_CMP("CMP", CMP_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
     add(opCodes, new OpCode_REP("REP", REP_Immediate, Immediate));
@@ -242,11 +248,11 @@ public class OpCodeTable
     add(opCodes, new OpCode_CMP("CMP", CMP_Absolute, Absolute));
     add(opCodes, new OpCode_DEC("DEC", DEC_Absolute, Absolute));
     add(opCodes, new OpCode_CMP("CMP", CMP_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BNE("BNE", BNE_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BNE("BNE", BNE_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_CMP("CMP", CMP_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_CMP("CMP", CMP_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_CMP("CMP", CMP_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
-    add(opCodes, new OpCode_PEI("PEI", PEI_StackDirectPageIndirect, StackDirectPageIndirect));
+    add(opCodes, new OpCode_PEI("PEI", PEI_StackDirectPageIndirect, StackDirectIndirect));
     add(opCodes, new OpCode_CMP("CMP", CMP_DirectPageIndexedWithX, DirectIndexedWithX));
     add(opCodes, new OpCode_DEC("DEC", DEC_DirectPageIndexedWithX, DirectIndexedWithX));
     add(opCodes, new OpCode_CMP("CMP", CMP_DirectPageIndirectLongIndexedWithY, DirectIndirectLongIndexedWithY));
@@ -274,7 +280,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_SBC("SBC", SBC_Absolute, Absolute));
     add(opCodes, new OpCode_INC("INC", INC_Absolute, Absolute));
     add(opCodes, new OpCode_SBC("SBC", SBC_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_BEQ("BEQ", BEQ_ProgramCounterRelative, ProgramCounterRelative));
+    add(opCodes, new OpCode_BEQ("BEQ", BEQ_ProgramCounterRelative, Relative));
     add(opCodes, new OpCode_SBC("SBC", SBC_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
     add(opCodes, new OpCode_SBC("SBC", SBC_DirectPageIndirect, DirectIndirect));
     add(opCodes, new OpCode_SBC("SBC", SBC_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));

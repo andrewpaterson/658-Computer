@@ -61,7 +61,7 @@ public class OpCode_LDY
       }
       case LDY_DirectPage:                // LDY Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -75,7 +75,7 @@ public class OpCode_LDY
       }
       case LDY_DirectPageIndexedWithX:                // LDY Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

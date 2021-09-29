@@ -8,9 +8,9 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_REP
     extends OpCode
 {
-  public OpCode_REP(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_REP(String name, int mCode, AddressingMode mAddressingMode)
   {
-    super(mName, mCode, mAddressingMode);
+    super(name, mCode, mAddressingMode);
   }
 
   @Override

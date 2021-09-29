@@ -36,7 +36,7 @@ public class OpCode_ASL
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       int value = cpu.get8BitData();
       boolean newCarry = is8bitValueNegative(value);
@@ -58,9 +58,9 @@ public class OpCode_ASL
 
   protected void executeAccumulatorASL(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
-      int value = Binary.lower8BitsOf(cpu.getA());
+      int value = Binary.getLowByte(cpu.getA());
       DO_ASL_8_BIT(cpu, value);
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     }
@@ -86,7 +86,7 @@ public class OpCode_ASL
       }
       case ASL_Absolute:                // ASL Absolute
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -97,11 +97,11 @@ public class OpCode_ASL
       }
       case ASL_DirectPage:                // ASL Direct Page
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -112,7 +112,7 @@ public class OpCode_ASL
       }
       case ASL_AbsoluteIndexedWithX:                // ASL Absolute Indexed, X
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -123,11 +123,11 @@ public class OpCode_ASL
       }
       case ASL_DirectPageIndexedWithX:                // ASL Direct Page Indexed, X
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

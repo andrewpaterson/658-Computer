@@ -1,11 +1,12 @@
 package name.bizna.emu65816.addressingmode;
 
+import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-public class WriteProgramBank
+public class WriteProgramCounterHigh
     extends DataBusCycleOperation
 {
-  public WriteProgramBank()
+  public WriteProgramCounterHigh()
   {
     super(false, true, true, false, true);
   }
@@ -13,7 +14,7 @@ public class WriteProgramBank
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setPinData(cpu.getProgramCounter().getBank());
+    cpu.setPinData(Binary.getHighByte(cpu.getProgramCounter().getOffset()));
   }
 }
 

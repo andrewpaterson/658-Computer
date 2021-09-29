@@ -37,7 +37,7 @@ public class OpCode_LSR
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       int value = cpu.get8BitData();
       DO_LSR_8_BIT(cpu, value);
@@ -53,9 +53,9 @@ public class OpCode_LSR
 
   protected void executeAccumulatorLSR(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
-      int value = Binary.lower8BitsOf(cpu.getA());
+      int value = Binary.getLowByte(cpu.getA());
       DO_LSR_8_BIT(cpu, value);
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     }
@@ -79,7 +79,7 @@ public class OpCode_LSR
       case LSR_Absolute:                // LSR Absolute
       {
         executeMemoryLSR(cpu);
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -89,11 +89,11 @@ public class OpCode_LSR
       case LSR_DirectPage:                // LSR Direct Page
       {
         executeMemoryLSR(cpu);
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -104,7 +104,7 @@ public class OpCode_LSR
       case LSR_AbsoluteIndexedWithX:                // LSR Absolute Indexed, X
       {
         executeMemoryLSR(cpu);
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
@@ -115,11 +115,11 @@ public class OpCode_LSR
       case LSR_DirectPageIndexedWithX:                // LSR Direct Page Indexed, X
       {
         executeMemoryLSR(cpu);
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

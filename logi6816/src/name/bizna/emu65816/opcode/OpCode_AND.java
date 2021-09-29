@@ -19,7 +19,7 @@ public class OpCode_AND
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.get8BitData();
-    int result = (Binary.lower8BitsOf(cpu.getA()) & operand);
+    int result = (Binary.getLowByte(cpu.getA()) & operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
   }
@@ -36,7 +36,7 @@ public class OpCode_AND
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator16Bit())
+    if (cpu.isMemory16Bit())
     {
       executeAND16Bit(cpu);
       cpu.addToCycles(1);
@@ -50,7 +50,7 @@ public class OpCode_AND
     {
       case AND_Immediate:                // AND Immediate
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToProgramAddressAndCycles(3, 2);
         }
@@ -72,7 +72,7 @@ public class OpCode_AND
       }
       case AND_DirectPage:                // AND Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToProgramAddressAndCycles(2, 4);
         }
@@ -84,7 +84,7 @@ public class OpCode_AND
       }
       case AND_DirectPageIndirect:                // AND Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToProgramAddressAndCycles(2, 6);
         }
@@ -96,7 +96,7 @@ public class OpCode_AND
       }
       case AND_DirectPageIndirectLong:                // AND Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToProgramAddressAndCycles(2, 7);
         }
@@ -123,7 +123,7 @@ public class OpCode_AND
       }
       case AND_DirectPageIndexedWithX:                // AND Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToProgramAddressAndCycles(2, 5);
         }
@@ -135,7 +135,7 @@ public class OpCode_AND
       }
       case AND_DirectPageIndexedIndirectWithX:                // AND Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToProgramAddressAndCycles(2, 7);
         }
@@ -147,7 +147,7 @@ public class OpCode_AND
       }
       case AND_DirectPageIndirectIndexedWithY:                // AND Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -156,7 +156,7 @@ public class OpCode_AND
       }
       case AND_DirectPageIndirectLongIndexedWithY:                // AND Direct Page Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

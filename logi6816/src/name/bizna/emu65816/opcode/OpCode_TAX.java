@@ -15,10 +15,10 @@ public class OpCode_TAX
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if ((cpu.isAccumulator8Bit() && cpu.isIndex8Bit()) ||
-        (cpu.isAccumulator16Bit() && cpu.isIndex8Bit()))
+    if ((cpu.isMemory8Bit() && cpu.isIndex8Bit()) ||
+        (cpu.isMemory16Bit() && cpu.isIndex8Bit()))
     {
-      int lower8BitsOfA = Binary.lower8BitsOf(cpu.getA());
+      int lower8BitsOfA = Binary.getLowByte(cpu.getA());
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), lower8BitsOfA));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
     }

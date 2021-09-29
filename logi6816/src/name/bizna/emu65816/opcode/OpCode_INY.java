@@ -20,7 +20,7 @@ public class OpCode_INY
   {
     if (cpu.isIndex8Bit())
     {
-      int lowerY = Binary.lower8BitsOf(cpu.getY());
+      int lowerY = Binary.getLowByte(cpu.getY());
       lowerY++;
       lowerY = toByte(lowerY);
       cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), lowerY));

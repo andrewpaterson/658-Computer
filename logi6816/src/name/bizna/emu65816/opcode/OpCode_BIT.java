@@ -19,7 +19,7 @@ public class OpCode_BIT
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       execute8BitBIT(cpu);
     }
@@ -33,7 +33,7 @@ public class OpCode_BIT
     {
       case BIT_Immediate:                 // BIT Immediate
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -47,7 +47,7 @@ public class OpCode_BIT
       }
       case BIT_DirectPage:                 // BIT Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -61,7 +61,7 @@ public class OpCode_BIT
       }
       case BIT_DirectPageIndexedWithX:                 // BIT Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -85,7 +85,7 @@ public class OpCode_BIT
       cpu.getCpuStatus().setSignFlag(isHighestBitSet);
       cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
     }
-    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((value & Binary.lower8BitsOf(cpu.getA())));
+    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((value & Binary.getLowByte(cpu.getA())));
   }
 
   protected void execute16BitBIT(Cpu65816 cpu)

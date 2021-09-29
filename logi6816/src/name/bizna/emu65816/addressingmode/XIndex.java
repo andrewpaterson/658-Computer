@@ -4,7 +4,6 @@ import name.bizna.emu65816.Cpu65816;
 
 public class XIndex
     extends AddressOffset
-    implements BusCycleParameter
 {
   @Override
   public int getOffset(Cpu65816 cpu)

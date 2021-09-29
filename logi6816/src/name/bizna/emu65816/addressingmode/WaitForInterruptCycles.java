@@ -1,16 +1,16 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.Immediate;
+import static name.bizna.emu65816.AddressingMode.StackInterruptSoftware;
 
-public class ImpliedXBACycles
+public class WaitForInterruptCycles
     extends InstructionCycles
 {
-  public ImpliedXBACycles()
+  public WaitForInterruptCycles()
   {
-    super(Immediate,
+    super(StackInterruptSoftware,
           new BusCycle(new ProgramCounter(), new FetchOpCode()),
-          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)),
-          new BusCycle(new ProgramCounter(), new InternalIgnored(true)));
+          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
+          new BusCycle(new ProgramCounter(), new InternalOperation(true), new ExecuteLow(true, true)));
   }
 }
 

@@ -11,8 +11,8 @@ public class AbsoluteCycles
           new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new DataBank(), new AbsoluteOffset(), new ExecuteLow(read, true)),
-          new BusCycle(new DataBank(), new AbsoluteOffset(), new Offset(1), new ExecuteHigh(read, true)));
+          new BusCycle(new DataBank(), new AbsoluteAddress(), new ExecuteLow(read, true)),
+          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new ExecuteHigh(read, true)));
   }
 }
 

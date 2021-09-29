@@ -20,7 +20,7 @@ public class OpCode_DEX
   {
     if (cpu.isIndex8Bit())
     {
-      int lowerX = Binary.lower8BitsOf(cpu.getX());
+      int lowerX = Binary.getLowByte(cpu.getX());
       lowerX--;
       lowerX = toByte(lowerX);
       cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), lowerX));

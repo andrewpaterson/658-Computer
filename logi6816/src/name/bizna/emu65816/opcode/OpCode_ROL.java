@@ -59,7 +59,7 @@ public class OpCode_ROL
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
 
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       int value = cpu.get8BitData();
       DO_ROL_8_BIT(cpu, value);
@@ -75,9 +75,9 @@ public class OpCode_ROL
 
   protected void executeAccumulatorROL(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
-      int value = Binary.lower8BitsOf(cpu.getA());
+      int value = Binary.getLowByte(cpu.getA());
       DO_ROL_8_BIT(cpu, value);
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
     }
@@ -103,7 +103,7 @@ public class OpCode_ROL
       case (0x2E):                // ROL #addr
       {
         executeMemoryROL(cpu);
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           cpu.addToProgramAddressAndCycles(3, 6);
         }
@@ -116,8 +116,8 @@ public class OpCode_ROL
       case (0x26):                // ROL Direct Page
       {
         executeMemoryROL(cpu);
-        int opCycles = Binary.lower8BitsOf(cpu.getDirectPage()) != 0 ? 1 : 0;
-        if (cpu.isAccumulator8Bit())
+        int opCycles = Binary.getLowByte(cpu.getDirectPage()) != 0 ? 1 : 0;
+        if (cpu.isMemory8Bit())
         {
           cpu.addToProgramAddressAndCycles(2, 5 + opCycles);
         }
@@ -131,7 +131,7 @@ public class OpCode_ROL
       {
         executeMemoryROL(cpu);
         short opCycles = 0;
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           cpu.addToProgramAddressAndCycles(3, 7 + opCycles);
         }
@@ -144,8 +144,8 @@ public class OpCode_ROL
       case (0x36):                // ROL Direct Page Indexed, X
       {
         executeMemoryROL(cpu);
-        int opCycles = Binary.lower8BitsOf(cpu.getDirectPage()) != 0 ? 1 : 0;
-        if (cpu.isAccumulator8Bit())
+        int opCycles = Binary.getLowByte(cpu.getDirectPage()) != 0 ? 1 : 0;
+        if (cpu.isMemory8Bit())
         {
           cpu.addToProgramAddressAndCycles(2, 6 + opCycles);
         }

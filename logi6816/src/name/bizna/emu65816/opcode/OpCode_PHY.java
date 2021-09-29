@@ -17,7 +17,7 @@ public class OpCode_PHY
   {
     if (cpu.isIndex8Bit())
     {
-      cpu.push8Bit(Binary.lower8BitsOf(cpu.getY()));
+      cpu.push8Bit(Binary.getLowByte(cpu.getY()));
       cpu.addToProgramAddressAndCycles(1, 3);
     }
     else

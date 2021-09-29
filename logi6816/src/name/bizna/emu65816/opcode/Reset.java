@@ -22,7 +22,7 @@ public class Reset
     {
       case 1:
         CpuStatus cpuStatus = cpu.getCpuStatus();
-        cpuStatus.setEmulationFlag(true);
+        cpu.setEmulationFlag(true);
         cpuStatus.setAccumulatorWidthFlag(true);
         cpuStatus.setIndexWidthFlag(true);
         cpu.readProgram(new Address(0x00, cpu.getEmulationInterrupts().reset));

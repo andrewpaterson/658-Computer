@@ -29,5 +29,11 @@ public abstract class DataBusCycleOperation
   {
     return -1;
   }
+
+  @Override
+  public boolean isDataBus()
+  {
+    return true;
+  }
 }
 

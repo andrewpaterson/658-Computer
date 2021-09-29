@@ -10,11 +10,5 @@ public class IncrementProgramCounter
   {
     cpu.incrementProgramAddress();
   }
-
-  @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return false;
-  }
 }
 

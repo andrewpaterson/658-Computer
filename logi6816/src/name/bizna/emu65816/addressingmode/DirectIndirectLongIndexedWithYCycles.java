@@ -14,8 +14,8 @@ public class DirectIndirectLongIndexedWithYCycles
           new BusCycle(new DirectPage(), new DirectOffset(), new FetchAbsoluteAddressLow(true)),
           new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new FetchAbsoluteAddressHigh(true)),
           new BusCycle(new DirectPage(), new DirectOffset(), new Offset(2), new FetchAbsoluteAddressBank(true)),
-          new BusCycle(new AddressBank(), new AbsoluteOffset(), new YIndex(), new ExecuteLow(true, read)),
-          new BusCycle(new AddressBank(), new AbsoluteOffset(), new YIndex(), new Offset(1), new ExecuteHigh(true, read)));
+          new BusCycle(new AddressBank(), new AbsoluteAddress(), new YIndex(), new ExecuteLow(true, read)),
+          new BusCycle(new AddressBank(), new AbsoluteAddress(), new YIndex(), new Offset(1), new ExecuteHigh(true, read)));
   }
 }
 

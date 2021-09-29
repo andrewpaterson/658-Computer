@@ -2,11 +2,6 @@ package name.bizna.emu65816;
 
 public enum AddressingMode
 {
-  Interrupt,
-  Accumulator,
-  BlockMove,
-  Implied,
-  Immediate,
   Absolute,
   AbsoluteLong,
   AbsoluteIndirect,
@@ -15,6 +10,8 @@ public enum AddressingMode
   AbsoluteIndexedWithX,
   AbsoluteLongIndexedWithX,
   AbsoluteIndexedWithY,
+  Accumulator,
+  BlockMove,
   Direct,
   DirectIndexedWithX,
   DirectIndexedWithY,
@@ -23,13 +20,16 @@ public enum AddressingMode
   DirectIndexedIndirectWithX,
   DirectIndirectIndexedWithY,
   DirectIndirectLongIndexedWithY,
+  Implied,
+  Immediate,
+  StackInterruptSoftware,
+  StackInterruptHardware,
   StackImplied,
   StackRelative,
   StackAbsolute,
-  StackDirectPageIndirect,
-  StackProgramCounterRelativeLong,
+  StackDirectIndirect,
   StackRelativeIndirectIndexedWithY,
-  ProgramCounterRelative,
-  ProgramCounterRelativeLong
+  Relative,
+  RelativeLong
 }
 

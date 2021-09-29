@@ -9,8 +9,8 @@ public class ImmediateCycles
   {
     super(Immediate,
           new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchImmediateDataLow(), new IncrementProgramCounter(), new ExecuteLow(true, true)),
-          new BusCycle(new ProgramCounter(), new FetchImmediateDataHigh(), new ExecuteHigh(true, true)));
+          new BusCycle(new ProgramCounter(), new IncrementProgramCounter(), new ExecuteLow(true, true)),
+          new BusCycle(new ProgramCounter(), new NoteEight(), new ExecuteHigh(true, true)));
   }
 }
 

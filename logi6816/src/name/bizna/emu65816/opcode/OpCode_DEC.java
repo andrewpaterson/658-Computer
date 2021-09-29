@@ -44,9 +44,9 @@ public class OpCode_DEC
     {
       case DEC_Accumulator:  // DEC Accumulator
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
-          int lowerA = Binary.lower8BitsOf(cpu.getA());
+          int lowerA = Binary.getLowByte(cpu.getA());
           lowerA--;
           lowerA = toByte(lowerA);
           cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), lowerA));
@@ -64,7 +64,7 @@ public class OpCode_DEC
       }
       case DEC_Absolute: // DEC Absolute
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -78,7 +78,7 @@ public class OpCode_DEC
       }
       case DEC_DirectPage: // DEC Direct Page
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -87,7 +87,7 @@ public class OpCode_DEC
           execute16BitDecInMemory(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -96,7 +96,7 @@ public class OpCode_DEC
       }
       case DEC_AbsoluteIndexedWithX: // DEC Absolute Indexed, X
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -111,7 +111,7 @@ public class OpCode_DEC
       }
       case DEC_DirectPageIndexedWithX: // DEC Direct Page Indexed, X
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitDecInMemory(cpu);
         }
@@ -120,7 +120,7 @@ public class OpCode_DEC
           execute16BitDecInMemory(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

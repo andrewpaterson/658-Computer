@@ -19,9 +19,9 @@ public class OpCode_CPX
   protected void execute8BitCPX(Cpu65816 cpu)
   {
     int value = cpu.get8BitData();
-    int result = toByte(Binary.lower8BitsOf(cpu.getX()) - value);
+    int result = toByte(Binary.getLowByte(cpu.getX()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
-    boolean carry = Binary.lower8BitsOf(cpu.getX()) >= value;
+    boolean carry = Binary.getLowByte(cpu.getX()) >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }
 
@@ -78,7 +78,7 @@ public class OpCode_CPX
           execute16BitCPX(cpu);
           cpu.addToCycles(1);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

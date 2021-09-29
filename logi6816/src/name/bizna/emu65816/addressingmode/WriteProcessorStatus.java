@@ -3,10 +3,10 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
-public class WriteProgramCounterLow
+public class WriteProcessorStatus
     extends DataBusCycleOperation
 {
-  public WriteProgramCounterLow()
+  public WriteProcessorStatus()
   {
     super(false, true, true, false, true);
   }
@@ -14,7 +14,7 @@ public class WriteProgramCounterLow
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setPinData(Binary.getLowByte(cpu.getProgramCounter().getOffset()));
+    cpu.setPinData(cpu.getCpuStatus().getRegisterValue());
   }
 }
 

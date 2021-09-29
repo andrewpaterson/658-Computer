@@ -21,7 +21,7 @@ public class OpCode_XCE
     {
       boolean oldCarry = cpu.getCpuStatus().carryFlag();
       boolean oldEmulation = cpu.getCpuStatus().isEmulationMode();
-      cpu.getCpuStatus().setEmulationFlag(oldCarry);
+      cpu.setEmulationFlag(oldCarry);
       cpu.getCpuStatus().setCarryFlag(oldEmulation);
 
       cpu.setX(toByte(cpu.getX()));
@@ -30,7 +30,7 @@ public class OpCode_XCE
       cpu.getCpuStatus().setAccumulatorWidthFlag(cpu.getCpuStatus().isEmulationMode());
       cpu.getCpuStatus().setIndexWidthFlag(cpu.getCpuStatus().isEmulationMode());
 
-      cpu.clearStack();
+      cpu.setStackPointer();
 
       cpu.noAddress();
     }

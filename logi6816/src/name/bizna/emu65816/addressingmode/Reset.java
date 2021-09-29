@@ -5,23 +5,17 @@ import name.bizna.emu65816.Cpu65816;
 import java.util.Arrays;
 import java.util.List;
 
-public class ClearStop
+public class Reset
     extends CycleOperation
 {
-  public ClearStop()
+  public Reset()
   {
   }
 
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.clearStop();
-  }
-
-  @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return false;
+    cpu.reset();
   }
 }
 

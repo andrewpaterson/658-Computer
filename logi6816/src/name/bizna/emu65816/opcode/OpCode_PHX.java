@@ -17,7 +17,7 @@ public class OpCode_PHX
   {
     if (cpu.isIndex8Bit())
     {
-      cpu.push8Bit(Binary.lower8BitsOf(cpu.getX()));
+      cpu.push8Bit(Binary.getLowByte(cpu.getX()));
       cpu.addToProgramAddressAndCycles(1, 3);
     }
     else

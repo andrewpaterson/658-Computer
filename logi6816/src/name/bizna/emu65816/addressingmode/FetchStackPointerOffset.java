@@ -13,7 +13,7 @@ public class FetchStackPointerOffset
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setStackPointerOffset(cpu.getPinData());
+    cpu.setStackOffset(cpu.getPinData());
   }
 }
 

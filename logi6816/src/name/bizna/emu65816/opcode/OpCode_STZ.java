@@ -19,7 +19,7 @@ public class OpCode_STZ
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       cpu.storeByte(dataAddress, 0x00);
     }
@@ -39,7 +39,7 @@ public class OpCode_STZ
       }
       case (0x64):  // STZ Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -56,7 +56,7 @@ public class OpCode_STZ
       }
       case (0x74):  // STZ Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

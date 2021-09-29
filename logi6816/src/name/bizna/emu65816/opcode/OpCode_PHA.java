@@ -15,9 +15,9 @@ public class OpCode_PHA
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
-      cpu.push8Bit(Binary.lower8BitsOf(cpu.getA()));
+      cpu.push8Bit(Binary.getLowByte(cpu.getA()));
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else

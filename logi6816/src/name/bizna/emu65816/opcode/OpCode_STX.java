@@ -19,9 +19,9 @@ public class OpCode_STX
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
-      cpu.storeByte(dataAddress, Binary.lower8BitsOf(cpu.getX()));
+      cpu.storeByte(dataAddress, Binary.getLowByte(cpu.getX()));
     }
     else
     {
@@ -39,7 +39,7 @@ public class OpCode_STX
       }
       case STX_DirectPage:  // STX Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -50,7 +50,7 @@ public class OpCode_STX
       }
       case STX_DirectPageIndexedWithY:  // STX Direct Page Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

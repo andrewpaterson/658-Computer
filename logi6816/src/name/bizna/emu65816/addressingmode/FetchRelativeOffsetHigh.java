@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class FetchRelativeOffsetLow
+public class FetchRelativeOffsetHigh
     extends DataBusCycleOperation
 {
-  public FetchRelativeOffsetLow()
+  public FetchRelativeOffsetHigh()
   {
     super(true, false, true, true, true);
   }
@@ -13,7 +13,7 @@ public class FetchRelativeOffsetLow
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setRelativeOffsetLow(cpu.getPinData());
+    cpu.setRelativeOffsetHigh(cpu.getPinData());
   }
 }
 

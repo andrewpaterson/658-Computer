@@ -21,9 +21,9 @@ public class OpCode_CMP
   {
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.get8BitData();
-    int result = toByte(Binary.lower8BitsOf(cpu.getA()) - value);
+    int result = toByte(Binary.getLowByte(cpu.getA()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
-    boolean carry = Binary.lower8BitsOf(cpu.getA()) >= value;
+    boolean carry = Binary.getLowByte(cpu.getA()) >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }
 
@@ -39,7 +39,7 @@ public class OpCode_CMP
 
   private void executeCMP(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       execute8BitCMP(cpu);
     }
@@ -58,7 +58,7 @@ public class OpCode_CMP
       case CMP_Immediate:  // CMP Immediate
       {
         executeCMP(cpu);
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -80,7 +80,7 @@ public class OpCode_CMP
       case CMP_DirectPage:  // CMP Direct Page
       {
         executeCMP(cpu);
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -90,7 +90,7 @@ public class OpCode_CMP
       case CMP_DirectPageIndirect:  // CMP Direct Page Indirect
       {
         executeCMP(cpu);
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -124,7 +124,7 @@ public class OpCode_CMP
       case CMP_DirectPageIndexedWithX:  // CMP Direct Page Indexed, X
       {
         executeCMP(cpu);
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -134,7 +134,7 @@ public class OpCode_CMP
       case CMP_DirectPageIndexedIndirectWithX:  // CMP Direct Page Indexed Indirect, X
       {
         executeCMP(cpu);
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -144,7 +144,7 @@ public class OpCode_CMP
       case CMP_DirectPageIndirectIndexedWithY:  // CMP Direct Page Indexed Indirect, Y
       {
         executeCMP(cpu);
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -154,7 +154,7 @@ public class OpCode_CMP
       case CMP_DirectPageIndirectLongIndexedWithY:  // CMP Direct Page Indirect Long Indexed, Y
       {
         executeCMP(cpu);
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

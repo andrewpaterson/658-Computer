@@ -2,18 +2,18 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class FetchOpCode
+public class WriteProgramBank
     extends DataBusCycleOperation
 {
-  public FetchOpCode()
+  public WriteProgramBank()
   {
-    super(true, true, true, true, true);
+    super(false, true, true, false, true);
   }
 
   @Override
   public void execute(Cpu65816 cpu)
   {
-    //Special case that is handled directly in the Cpu65816 class.
+    cpu.setPinData(cpu.getProgramCounter().getBank());
   }
 }
 

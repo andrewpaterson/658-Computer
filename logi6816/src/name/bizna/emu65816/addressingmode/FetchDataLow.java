@@ -13,12 +13,6 @@ public class FetchDataLow
   }
 
   @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return toByte(cpu.getDirectPage()) == 0;
-  }
-
-  @Override
   public void execute(Cpu65816 cpu)
   {
     cpu.setDataLow(cpu.getPinData());

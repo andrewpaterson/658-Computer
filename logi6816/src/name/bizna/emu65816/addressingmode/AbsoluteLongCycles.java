@@ -12,8 +12,8 @@ public class AbsoluteLongCycles
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true), new IncrementProgramCounter()),
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressBank(true)),
-          new BusCycle(new AddressBank(), new AbsoluteOffset(), new ExecuteLow(read, true)),
-          new BusCycle(new AddressBank(), new AbsoluteOffset(), new Offset(1), new ExecuteHigh(read, true)));
+          new BusCycle(new AddressBank(), new AbsoluteAddress(), new ExecuteLow(read, true)),
+          new BusCycle(new AddressBank(), new AbsoluteAddress(), new Offset(1), new ExecuteHigh(read, true)));
   }
 }
 

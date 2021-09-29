@@ -2,17 +2,15 @@ package name.bizna.emu65816.addressingmode;
 
 import static name.bizna.emu65816.AddressingMode.Absolute;
 
-public class AbsoluteCycles
+public class AbsoluteJMPCycles
     extends InstructionCycles
 {
-  public AbsoluteCycles(boolean read)
+  public AbsoluteJMPCycles(boolean read)
   {
     super(Absolute,
           new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new ExecuteLow(read, true)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new ExecuteHigh(read, true)));
+          new BusCycle(new ProgramCounter(), new FetchNewProgramCounterLow(true), new ClearNewProgramCounterBank(), new IncrementProgramCounter()),
+          new BusCycle(new ProgramCounter(), new FetchNewProgramCounterHigh(true), new SetProgramCounter(new NewProgramCounter())));
   }
 }
 

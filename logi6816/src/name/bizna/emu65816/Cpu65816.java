@@ -4,28 +4,27 @@ import name.bizna.emu65816.opcode.*;
 
 import static name.bizna.emu65816.Binary.*;
 import static name.bizna.emu65816.Unsigned.toByte;
-import static name.bizna.emu65816.Unsigned.toShort;
 
 public class Cpu65816
 {
-  protected EmulationModeInterrupts mEmulationInterrupts;
-  protected NativeModeInterrupts mNativeInterrupts;
+  protected EmulationModeInterrupts emulationInterrupts;
+  protected NativeModeInterrupts nativeInterrupts;
 
   // Status register
-  protected CpuStatus mCpuStatus;
-  protected Pins mPins;
-  protected boolean mStopped;
+  protected CpuStatus processorStatus;
+  protected Pins pins;
+  protected boolean stopped;
 
   protected int accumulator;
   protected int xIndex;
   protected int yIndex;
   protected int dataBank;
   protected int directPage;
-  protected Address mProgramAddress;
-  protected Address mStackAddress;
+  protected Address programAddress;
+  protected int stackPointer;
 
   // Total number of cycles
-  protected long mTotalCyclesCounter;
+  protected long totalCyclesCounter;
 
   protected boolean previousClock;
   protected int cycle;
@@ -49,27 +48,30 @@ public class Cpu65816
   protected int internalDirectOffset;
   protected int internalImmediate;
   protected int internalStackOffset;
+  protected int relativeOffset;
+  protected Address internalProgramCounter;
 
   public Cpu65816(Pins pins)
   {
-    mEmulationInterrupts = new EmulationModeInterrupts();
-    mNativeInterrupts = new NativeModeInterrupts();
-    mProgramAddress = new Address(0x00, 0x0000);
-    mStackAddress = new Address(0x00, 0x01FF);
+    emulationInterrupts = new EmulationModeInterrupts();
+    nativeInterrupts = new NativeModeInterrupts();
+    programAddress = new Address(0x00, 0x0000);
+    setStackPointer();
     opCodeTable = OpCodeTable.createTable();
-    resetOpcode = new Reset("Reset", -1, AddressingMode.Interrupt);
-    irqOpcode = new InterruptRequest("IRQ", -1, AddressingMode.Interrupt);
-    nmiOpcode = new NonMaskableInterrupt("NMI", -1, AddressingMode.Interrupt);
+    resetOpcode = new Reset("Reset", -1, AddressingMode.StackInterruptHardware);
+    irqOpcode = new InterruptRequest("IRQ", -1, AddressingMode.StackInterruptHardware);
+    nmiOpcode = new NonMaskableInterrupt("NMI", -1, AddressingMode.StackInterruptHardware);
+//    abortOpcode = new Abort("Abort", -1, AddressingMode.StackInterruptHardware);
     fetchOpcode = new FetchOpCode("Fetch Opcode", -1, AddressingMode.Implied);
-    mPins = pins;
-    mTotalCyclesCounter = 0;
+    this.pins = pins;
+    totalCyclesCounter = 0;
     accumulator = 0;
     xIndex = 0;
     yIndex = 0;
     dataBank = 0;
     directPage = 0;
-    mCpuStatus = new CpuStatus();
-    mStopped = false;
+    processorStatus = new CpuStatus();
+    stopped = false;
     previousClock = true;
     cycle = 1;
     opCode = resetOpcode;
@@ -78,6 +80,8 @@ public class Cpu65816
     internalDirectOffset = 0;
     internalImmediate = 0;
     internalStackOffset = 0;
+    relativeOffset = 0;
+    internalProgramCounter = new Address();
     internalAddress = new Address();
   }
 
@@ -109,7 +113,7 @@ public class Cpu65816
 
   public void setA(int accumulator)
   {
-    if (isAccumulator16Bit())
+    if (isMemory16Bit())
     {
       assert16Bit(accumulator, "Accumulator");
     }
@@ -122,7 +126,7 @@ public class Cpu65816
 
   public int getA()
   {
-    if (isAccumulator16Bit())
+    if (isMemory16Bit())
     {
       return accumulator;
     }
@@ -175,22 +179,22 @@ public class Cpu65816
 
   public Address getProgramCounter()
   {
-    return mProgramAddress;
+    return programAddress;
   }
 
   public CpuStatus getCpuStatus()
   {
-    return mCpuStatus;
+    return processorStatus;
   }
 
   public void tick()
   {
-    if (mStopped)
+    if (stopped)
     {
       return;
     }
 
-    boolean clock = mPins.getPhi2();
+    boolean clock = pins.getPhi2();
     boolean clockFallingEdge = !clock && previousClock;
     boolean clockRisingEdge = clock && !previousClock;
     previousClock = clock;
@@ -199,22 +203,22 @@ public class Cpu65816
     {
       opCode.executeOnFallingEdge(this);
 
-      mPins.setRead(internalRead);
-      mPins.setAddress(internalAddress.getOffset());
-      mPins.setData(internalAddress.getBank());
-      mPins.setValidDataAddress(internalValidDataAddress);
-      mPins.setValidProgramAddress(internalValidProgramAddress);
+      pins.setRead(internalRead);
+      pins.setAddress(internalAddress.getOffset());
+      pins.setData(internalAddress.getBank());
+      pins.setValidDataAddress(internalValidDataAddress);
+      pins.setValidProgramAddress(internalValidProgramAddress);
     }
 
     if (clockRisingEdge)
     {
       if (!internalRead)
       {
-        mPins.setData(pinData);
+        pins.setData(pinData);
       }
       else
       {
-        pinData = mPins.getData();
+        pinData = pins.getData();
       }
       opCode.executeOnRisingEdge(this);
 
@@ -222,80 +226,43 @@ public class Cpu65816
     }
   }
 
-//  public void executeNextInstruction()
-//  {
-//    if ((mStopped))
-//    {
-//      return;
-//    }
-//
-//    if (opCode.isReset())
-//    {
-//      return;
-//    }
-
-//    if ((mPins.IRQ) && (!mCpuStatus.interruptDisableFlag()))
-//    {
-//        /*
-//            The program bank register (PB, the A16-A23 part of the address bus) is pushed onto the hardware stack (65C816/65C802 only when operating in native mode).
-//            The most significant byte (MSB) of the program counter (PC) is pushed onto the stack.
-//            The least significant byte (LSB) of the program counter is pushed onto the stack.
-//            The status register (SR) is pushed onto the stack.
-//            The interrupt disable flag is set in the status register.
-//            PB is loaded with $00 (65C816/65C802 only when operating in native mode).
-//            PC is loaded from the relevant vector (see tables).
-//        */
-//      if (!mCpuStatus.emulationFlag())
-//      {
-//        mStack.push8Bit(mProgramAddress.getBank());
-//        mStack.push16Bit(mProgramAddress.getOffset());
-//        mStack.push8Bit(mCpuStatus.getRegisterValue());
-//        mCpuStatus.setInterruptDisableFlag(true);
-//        mProgramAddress = new Address(readTwoBytes(new Address(mNativeInterrupts.interruptRequest)));
-//      }
-//      else
-//      {
-//        mStack.push16Bit(mProgramAddress.getOffset());
-//        mStack.push8Bit(mCpuStatus.getRegisterValue());
-//        mCpuStatus.setInterruptDisableFlag(true);
-//        mProgramAddress = new Address(readTwoBytes(new Address(mEmulationInterrupts.brkIrq)));
-//      }
-//    }
-
-    // Fetch the instruction
-//    int instruction = readByte(mProgramAddress);
-//    OpCode opCode = OP_CODE_TABLE[instruction];
-//
-//    // Execute it
-//    opCode.execute(this, 0, false);
-//  }
-
-  public boolean isAccumulator8Bit()
+  public void reset()
   {
-    if (mCpuStatus.isEmulationMode())
+    setEmulationFlag(true);
+    dataBank = 0;
+    directPage = 0;
+    programAddress.setBank(0);
+    stackPointer = getLowByte(stackPointer) | 0x100;
+    processorStatus.setDecimalFlag(false);
+    processorStatus.setInterruptDisableFlag(true);
+  }
+
+  public boolean isMemory8Bit()
+  {
+    if (processorStatus.isEmulationMode())
     {
       return true;
     }
     else
     {
-      return mCpuStatus.isAccumulator8Bit();
+      return processorStatus.isAccumulator8Bit();
     }
   }
 
-  public boolean isAccumulator16Bit()
+  public boolean isMemory16Bit()
   {
-    return !isAccumulator8Bit();
+    return !isMemory8Bit();
   }
 
   public boolean isIndex8Bit()
   {
-    if (mCpuStatus.isEmulationMode())
+    if (processorStatus.isEmulationMode())
     {
       return true;
     }
     else
     {
-      return mCpuStatus.isIndex8Bit();
+      return processorStatus.isIndex8Bit();
     }
   }
 
@@ -306,12 +273,12 @@ public class Cpu65816
 
   public void addToCycles(int cycles)
   {
-    mTotalCyclesCounter += cycles;
+    totalCyclesCounter += cycles;
   }
 
   public void addToProgramAddress(int bytes)
   {
-    mProgramAddress.offset(bytes, false);
+    programAddress.offset(bytes, false);
   }
 
   public void addToProgramAddressAndCycles(int bytes, int cycles)
@@ -322,25 +289,25 @@ public class Cpu65816
 
   public void setProgramAddress(Address address)
   {
-    mProgramAddress = address;
+    programAddress = address;
   }
 
   public void setProgramAddressBank(int bank)
   {
     assert8Bit(bank, "Program Address Bank");
-    mProgramAddress.bank = bank;
+    programAddress.bank = bank;
   }
 
   public void setProgramAddressHigh(int data)
   {
     assert8Bit(data, "Program Address High");
-    mProgramAddress.setOffsetHigh(data);
+    programAddress.setOffsetHigh(data);
   }
 
   public void setProgramAddressLow(int data)
   {
     assert8Bit(data, "Program Address Low");
-    mProgramAddress.setOffsetLow(data);
+    programAddress.setOffsetLow(data);
   }
 
   public void setAddressLow(int addressLow)
@@ -361,196 +328,6 @@ public class Cpu65816
     this.internalAddress.setBank(addressBank);
   }
 
-  public Address getAddressOfOpCodeData(AddressingMode addressingMode)
-  {
-//    int dataAddressBank;
-//    int dataAddressOffset;
-//
-//    switch (addressingMode)
-//    {
-//      case Interrupt:
-//      case Accumulator:
-//      case Implied:
-//      case StackImplied:
-//        // Not really used, doesn't make any sense since these opcodes do not have operands
-//        return mProgramAddress;
-//
-//      case Immediate:
-//      case BlockMove:
-//        // Blockmove OpCodes have two bytes following them directly
-//      case StackAbsolute:
-//        // Stack absolute is used to push values following the op code onto the stack
-//      case ProgramCounterRelative:
-//        // Program counter relative OpCodes such as all branch instructions have an 8 bit operand
-//        // following the op code
-//      case ProgramCounterRelativeLong:
-//        // StackProgramCounterRelativeLong is only used by the PER OpCode, it has 16 bit operand
-//      case StackProgramCounterRelativeLong:
-//      {
-//        dataAddressBank = mProgramAddress.getBank();
-//        dataAddressOffset = mProgramAddress.getOffset();
-//      }
-//      break;
-//
-//      case Absolute:
-//      {
-//        dataAddressBank = dataBank;
-//        dataAddressOffset = get16BitData(mProgramAddress.newWithOffset1());
-//      }
-//      break;
-//      case AbsoluteLong:
-//      {
-//        Address address = readLongAddressAt(mProgramAddress.newWithOffset1());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//
-//      case AbsoluteIndirect:
-//      {
-//        dataAddressBank = mProgramAddress.getBank();
-//        Address addressOfOffset = new Address(get16BitData(mProgramAddress.newWithOffset1()));
-//        dataAddressOffset = get16BitData();
-//      }
-//      break;
-//      case AbsoluteIndirectLong:
-//      {
-//        Address addressOfEffectiveAddress = new Address(get16BitData(mProgramAddress.newWithOffset1()));
-//        Address address = readLongAddressAt(addressOfEffectiveAddress);
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case AbsoluteIndexedIndirectWithX:
-//      {
-//        Address firstStageAddress = new Address(mProgramAddress.getBank(), get16BitData(mProgramAddress.newWithOffset1()));
-//
-//        Address secondStageAddress = firstStageAddress.newWithOffsetNoWrapAround(indexWithXRegister());
-//        dataAddressBank = mProgramAddress.getBank();
-//        dataAddressOffset = get16BitData();
-//      }
-//      break;
-//      case AbsoluteIndexedWithX:
-//      {
-//        Address firstStageAddress = new Address(dataBank, get16BitData(mProgramAddress.newWithOffset1()));
-//        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case AbsoluteLongIndexedWithX:
-//      {
-//        Address firstStageAddress = readLongAddressAt(mProgramAddress.newWithOffset1());
-//        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithXRegister());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case AbsoluteIndexedWithY:
-//      {
-//        Address firstStageAddress = new Address(dataBank, get16BitData(mProgramAddress.newWithOffset1()));
-//        Address address = Address.sumOffsetToAddressNoWrapAround(firstStageAddress, indexWithYRegister());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case DirectPage:
-//      {
-//        // Direct page/Zero page always refers to bank zero
-//        dataAddressBank = 0x00;
-//        if (mCpuStatus.emulationFlag())
-//        {
-//          dataAddressOffset = get8BitData(mProgramAddress.newWithOffset1());
-//        }
-//        else
-//        {
-//          dataAddressOffset = toShort(directPage + get8BitData(mProgramAddress.newWithOffset1()));
-//        }
-//      }
-//      break;
-//      case DirectPageIndexedWithX:
-//      {
-//        dataAddressBank = 0x00;
-//        dataAddressOffset = toShort(directPage + indexWithXRegister() + get8BitData(mProgramAddress.newWithOffset1()));
-//      }
-//      break;
-//      case DirectPageIndexedWithY:
-//      {
-//        dataAddressBank = 0x00;
-//        dataAddressOffset = toShort(directPage + indexWithYRegister() + get8BitData(mProgramAddress.newWithOffset1()));
-//      }
-//      break;
-//      case DirectPageIndirect:
-//      {
-//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
-//        dataAddressBank = dataBank;
-//        dataAddressOffset = get16BitData();
-//      }
-//      break;
-//      case DirectPageIndirectLong:
-//      {
-//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
-//        Address address = readLongAddressAt(firstStageAddress);
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case DirectPageIndexedIndirectWithX:
-//      {
-//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1()) + indexWithXRegister()));
-//        dataAddressBank = dataBank;
-//        dataAddressOffset = get16BitData();
-//      }
-//      break;
-//      case DirectPageIndirectIndexedWithY:
-//      {
-//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
-//        int secondStageOffset = get16BitData();
-//        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
-//        Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case DirectPageIndirectLongIndexedWithY:
-//      {
-//        Address firstStageAddress = new Address((directPage + get8BitData(mProgramAddress.newWithOffset1())));
-//        Address secondStageAddress = readLongAddressAt(firstStageAddress);
-//        Address address = Address.sumOffsetToAddressNoWrapAround(secondStageAddress, indexWithYRegister());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      case StackRelative:
-//      {
-//        dataAddressBank = 0x00;
-//        dataAddressOffset = toShort(getStackPointer() + get8BitData(mProgramAddress.newWithOffset1()));
-//      }
-//      break;
-//      case StackDirectPageIndirect:
-//      {
-//        dataAddressBank = 0x00;
-//        dataAddressOffset = toShort(directPage + get8BitData(mProgramAddress.newWithOffset1()));
-//      }
-//      break;
-//      case StackRelativeIndirectIndexedWithY:
-//      {
-//        Address firstStageAddress = new Address((getStackPointer() + get8BitData(mProgramAddress.newWithOffset1())));
-//        int secondStageOffset = get16BitData();
-//        Address thirdStageAddress = new Address(dataBank, secondStageOffset);
-//        Address address = Address.sumOffsetToAddressNoWrapAround(thirdStageAddress, indexWithYRegister());
-//        dataAddressBank = address.getBank();
-//        dataAddressOffset = address.getOffset();
-//      }
-//      break;
-//      default:
-//        throw new IllegalStateException("Unexpected value: " + addressingMode);
-//    }
-//
-//    return new Address(dataAddressBank, dataAddressOffset);
-    throw new EmulatorException("Not Implemented");
-  }
-
   public int get8BitData()
   {
     return toByte(internalData);
@@ -559,11 +336,6 @@ public class Cpu65816
   public int get16BitData()
   {
     return internalData;
-  }
-
-  public Address readLongAddressAt(Address address)
-  {
-    return new Address(0x00, 0);
   }
 
   public int getDirectPage()
@@ -576,70 +348,46 @@ public class Cpu65816
     return internalDirectOffset;
   }
 
-  public void storeTwoBytes(Address address, int value)
-  {
-  }
-
-  public void storeByte(Address address, int value)
-  {
-  }
-
   public EmulationModeInterrupts getEmulationInterrupts()
   {
-    return mEmulationInterrupts;
+    return emulationInterrupts;
   }
 
   public NativeModeInterrupts getNativeInterrupts()
   {
-    return mNativeInterrupts;
+    return nativeInterrupts;
   }
 
-  public void clearStack()
+  public void setStackPointer()
   {
-    mStackAddress = new Address(0x00, 0x01FF);
-  }
-
-  public void clearStack(Address address)
-  {
-    mStackAddress = address;
-  }
-
-  public void push8Bit(int value)
-  {
-    storeByte(mStackAddress, value);
-    mStackAddress.offset(Sizeof.sizeofByte, true);
-  }
-
-  public void push16Bit(int value)
-  {
-    push8Bit(getHighByte(value));
-    push8Bit(getLowByte(value));
-  }
-
-  public int pull8Bit()
-  {
-    mStackAddress.offset(Sizeof.sizeofByte, true);
-    return get8BitData();
-  }
-
-  public int pull16Bit()
-  {
-    return toShort((pull8Bit() | ((pull8Bit()) << 8)));
+    stackPointer = 0x01FF;
   }
 
   public int getStackPointer()
   {
-    return mStackAddress.getOffset();
+    if (!processorStatus.isEmulationMode())
+    {
+      return stackPointer;
+    }
+    else
+    {
+      return getLowByte(stackPointer) | 0x100;
+    }
+  }
+
+  public int getStackOffset()
+  {
+    return internalStackOffset;
   }
 
   public void stop()
   {
-    mStopped = true;
+    stopped = true;
   }
 
   public boolean isStopped()
   {
-    return mStopped;
+    return stopped;
   }
 
   public void doneInstruction()
@@ -687,7 +435,7 @@ public class Cpu65816
 
   public void noAddress()
   {
-    this.internalAddress = mProgramAddress;
+    this.internalAddress = programAddress;
     this.internalRead = true;
     this.internalValidProgramAddress = false;
     this.internalValidDataAddress = false;
@@ -695,9 +443,9 @@ public class Cpu65816
 
   public int getPinData()
   {
-    if (mPins.getPhi2())
+    if (pins.getPhi2())
     {
-      return mPins.getData();
+      return pins.getData();
     }
     else
     {
@@ -712,12 +460,12 @@ public class Cpu65816
 
   public boolean isClockLow()
   {
-    return !mPins.getPhi2();
+    return !pins.getPhi2();
   }
 
   public boolean isClockHigh()
   {
-    return mPins.getPhi2();
+    return pins.getPhi2();
   }
 
   public void setOpCode(int data)
@@ -742,6 +490,11 @@ public class Cpu65816
     return opCode;
   }
 
+  public Address getNewProgramCounter()
+  {
+    return internalProgramCounter;
+  }
+
   public void setRead(boolean read)
   {
     this.internalRead = read;
@@ -749,7 +502,12 @@ public class Cpu65816
 
   public void incrementProgramAddress()
   {
-    this.mProgramAddress.offset(Sizeof.sizeofByte, true);
+    this.programAddress.offset(Sizeof.sizeofByte, true);
+  }
+
+  public void decrementStackPointer()
+  {
+    this.stackPointer--;
   }
 
   public boolean isRead()
@@ -780,20 +538,90 @@ public class Cpu65816
     internalImmediate = setLowByte(internalImmediate, data);
   }
 
-  public void setStackPointerOffset(int data)
+  public void setStackOffset(int data)
   {
     assert8Bit(data, "Stack Offset");
-    this.internalStackOffset = data;
+    internalStackOffset = data;
   }
 
   public void setDataLow(int data)
   {
-    this.data = setLowByte(this.data, data);;
+    assert8Bit(data, "Data Low");
+    internalData = setLowByte(internalData, data);
+    ;
   }
 
   public void setDataHigh(int data)
   {
-    this.data = setHighByte(this.data, data);;
+    assert8Bit(data, "Data High");
+    internalData = setHighByte(internalData, data);
+    ;
+  }
+
+  public void setRelativeOffsetLow(int data)
+  {
+    assert8Bit(data, "Relative Offset Low");
+    relativeOffset = setLowByte(relativeOffset, data);
+  }
+
+  public void setRelativeOffsetHigh(int data)
+  {
+    assert8Bit(data, "Relative Offset High");
+    relativeOffset = setHighByte(relativeOffset, data);
+  }
+
+  public void setStackPointer(int data)
+  {
+    assert16Bit(data, "Stack Pointer");
+    stackPointer = data;
+  }
+
+  public void setStackPointerLow(int data)
+  {
+    assert8Bit(data, "Stack Pointer Low");
+    stackPointer = setLowByte(stackPointer, data);
+  }
+
+  public void setStackPointerHigh(int data)
+  {
+    assert8Bit(data, "Stack Pointer High");
+    stackPointer = setHighByte(stackPointer, data);
+  }
+
+  public void setNewProgramCounterLow(int data)
+  {
+    assert8Bit(data, "Program Counter Low");
+    internalProgramCounter.setOffsetLow(data);
+
+  }
+
+  public void setNewProgramCounterHigh(int data)
+  {
+    assert8Bit(data, "Program Counter High");
+    internalProgramCounter.setOffsetHigh(data);
+  }
+
+  public void setNewProgramCounterBank(int data)
+  {
+    assert8Bit(data, "Program Counter Bank");
+    internalProgramCounter.setBank(data);
+  }
+
+  public void setPinData(int data)
+  {
+    pins.setData(data);
+  }
+
+  public void setEmulationFlag(boolean emulation)
+  {
+    processorStatus.setEmulationFlag(emulation);
+    if (emulation)
+    {
+      xIndex = getLowByte(xIndex);
+      yIndex = getLowByte(yIndex);
+      processorStatus.setAccumulatorWidthFlag(true);
+      processorStatus.setIndexWidthFlag(true);
+    }
   }
 }
 

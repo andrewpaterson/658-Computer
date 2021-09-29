@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class FetchNewProgramCounterLow
+public class FetchNewProgramCounterHigh
     extends DataBusCycleOperation
 {
-  public FetchNewProgramCounterLow(boolean notMemoryLock)
+  public FetchNewProgramCounterHigh(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }
@@ -13,7 +13,7 @@ public class FetchNewProgramCounterLow
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setNewProgramCounterLow(cpu.getPinData());
+    cpu.setNewProgramCounterHigh(cpu.getPinData());
   }
 }
 

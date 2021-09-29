@@ -44,9 +44,9 @@ public class OpCode_INC
     {
       case INC_Accumulator:  // INC Accumulator
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
-          int lowerA = Binary.lower8BitsOf(cpu.getA());
+          int lowerA = Binary.getLowByte(cpu.getA());
           lowerA++;
           lowerA = toByte(lowerA);
           cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), lowerA));
@@ -65,7 +65,7 @@ public class OpCode_INC
       }
       case INC_Absolute: // INC Absolute
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitIncInMemory(cpu);
         }
@@ -79,7 +79,7 @@ public class OpCode_INC
       }
       case INC_DirectPage: // INC Direct Page
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitIncInMemory(cpu);
         }
@@ -88,7 +88,7 @@ public class OpCode_INC
           execute16BitIncInMemory(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -97,7 +97,7 @@ public class OpCode_INC
       }
       case INC_AbsoluteIndexedWithX: // INC Absolute Indexed, X
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitIncInMemory(cpu);
         }
@@ -112,7 +112,7 @@ public class OpCode_INC
       break;
       case INC_DirectPageIndexedWithX: // INC Direct Page Indexed, X
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitIncInMemory(cpu);
         }
@@ -121,7 +121,7 @@ public class OpCode_INC
           execute16BitIncInMemory(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

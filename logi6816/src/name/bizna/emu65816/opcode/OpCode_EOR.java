@@ -21,7 +21,7 @@ public class OpCode_EOR
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.get8BitData();
-    int result = toByte(Binary.lower8BitsOf(cpu.getA()) ^ operand);
+    int result = toByte(Binary.getLowByte(cpu.getA()) ^ operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
   }
@@ -38,7 +38,7 @@ public class OpCode_EOR
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       executeEOR8Bit(cpu);
     }
@@ -52,7 +52,7 @@ public class OpCode_EOR
     {
       case EOR_Immediate:                // EOR Immediate
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -71,7 +71,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPage:                 // EOR Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -80,7 +80,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPageIndirect:                 // EOR Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -89,7 +89,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPageIndirectLong:                 // EOR Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -113,7 +113,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPageIndexedWithX:                 // EOR Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -122,7 +122,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPageIndexedIndirectWithX:                // EOR Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -131,7 +131,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPageIndirectIndexedWithY:                 // EOR Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -140,7 +140,7 @@ public class OpCode_EOR
       }
       case EOR_DirectPageIndirectLongIndexedWithY:                 // EOR Direct Page Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

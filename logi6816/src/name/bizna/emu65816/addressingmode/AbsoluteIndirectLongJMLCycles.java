@@ -1,21 +1,19 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.AbsoluteIndexedIndirectWithX;
+import static name.bizna.emu65816.AddressingMode.*;
 
-public class AbsoluteIndexedIndirectWithXJSRCycles
+public class AbsoluteIndirectLongJMLCycles
     extends InstructionCycles
 {
-  public AbsoluteIndexedIndirectWithXJSRCycles()
+  public AbsoluteIndirectLongJMLCycles()
   {
-    super(AbsoluteIndexedIndirectWithX,
+    super(AbsoluteIndirectLong,
           new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
           new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new StackPointer(), new WriteProgramCounterHigh(), new DecrementStackPointer()),
-          new BusCycle(new StackPointer(), new WriteProgramCounterLow(), new DecrementStackPointer()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new ProgramBank(), new AbsoluteAddress(), new XIndex(), new FetchNewProgramCounterLow(true)),
-          new BusCycle(new ProgramBank(), new AbsoluteAddress(), new XIndex(), new Offset(1), new FetchNewProgramCounterHigh(true), new SetProgramCounter(new NewProgramCounter())));
+          new BusCycle(new StackPointer(), new FetchAbsoluteAddressHigh(true)),
+          new BusCycle(new AbsoluteAddress(), new FetchNewProgramCounterLow(true)),
+          new BusCycle(new AbsoluteAddress(), new Offset(1), new FetchNewProgramCounterHigh(true)),
+          new BusCycle(new AbsoluteAddress(), new Offset(2), new FetchNewProgramCounterBank(true), new SetProgramCounter(new NewProgramCounter())));
   }
 }
 

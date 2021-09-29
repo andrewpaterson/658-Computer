@@ -13,8 +13,8 @@ public class DirectIndirectCycles
           new BusCycle(new ProgramCounter(), new DirectPageLowZero(true)),
           new BusCycle(new DirectPage(), new DirectOffset(), new FetchAbsoluteAddressLow(true)),
           new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new DataBank(), new AbsoluteOffset(), new ExecuteLow(true, read)),
-          new BusCycle(new DataBank(), new AbsoluteOffset(), new Offset(1), new ExecuteLow(true, read)));
+          new BusCycle(new DataBank(), new AbsoluteAddress(), new ExecuteLow(true, read)),
+          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new ExecuteLow(true, read)));
   }
 }
 

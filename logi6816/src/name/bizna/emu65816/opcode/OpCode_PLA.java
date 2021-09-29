@@ -17,7 +17,7 @@ public class OpCode_PLA
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.pull8Bit()));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(cpu.getA()));

@@ -19,7 +19,7 @@ public class OpCode_ORA
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.get8BitData();
-    int result = toByte(Binary.lower8BitsOf(cpu.getA()) | operand);
+    int result = toByte(Binary.getLowByte(cpu.getA()) | operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
   }
@@ -35,7 +35,7 @@ public class OpCode_ORA
 
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       executeORA8Bit(cpu);
     }
@@ -49,7 +49,7 @@ public class OpCode_ORA
     {
       case (0x09):                // ORA Immediate
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -68,7 +68,7 @@ public class OpCode_ORA
       }
       case (0x05):                 // ORA Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -77,7 +77,7 @@ public class OpCode_ORA
       }
       case (0x12):                 // ORA Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -86,7 +86,7 @@ public class OpCode_ORA
       }
       case (0x07):                 // ORA Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -110,7 +110,7 @@ public class OpCode_ORA
       }
       case (0x15):                 // ORA Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -119,7 +119,7 @@ public class OpCode_ORA
       }
       case (0x01):                // ORA Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -128,7 +128,7 @@ public class OpCode_ORA
       }
       case (0x11):                 // ORA Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -137,7 +137,7 @@ public class OpCode_ORA
       }
       case (0x17):                 // ORA Direct Page Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

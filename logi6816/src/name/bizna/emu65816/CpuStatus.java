@@ -24,7 +24,7 @@ public class CpuStatus
   boolean mAccumulatorWidthFlag;
   boolean mIndexWidthFlag;
   boolean mCarryFlag;
-  boolean mEmulationFlag;
+  boolean emulationFlag;
   boolean mOverflowFlag;
   boolean mBreakFlag;
 
@@ -37,7 +37,7 @@ public class CpuStatus
     mAccumulatorWidthFlag = false;
     mIndexWidthFlag = false;
     mCarryFlag = false;
-    mEmulationFlag = true; // CPU Starts in emulation mode
+    emulationFlag = true; // CPU Starts in emulation mode
     mOverflowFlag = false;
     mBreakFlag = false;
   }
@@ -79,7 +79,7 @@ public class CpuStatus
 
   public void setEmulationFlag(boolean emulationFlag)
   {
-    mEmulationFlag = emulationFlag;
+    this.emulationFlag = emulationFlag;
   }
 
   public boolean zeroFlag()
@@ -119,7 +119,7 @@ public class CpuStatus
 
   public boolean isEmulationMode()
   {
-    return mEmulationFlag;
+    return emulationFlag;
   }
 
   public void setBreakFlag(boolean breakFlag)

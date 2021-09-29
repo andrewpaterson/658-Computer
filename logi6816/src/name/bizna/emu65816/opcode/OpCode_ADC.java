@@ -19,7 +19,7 @@ public class OpCode_ADC
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.get8BitData();
-    int accumulator = Binary.lower8BitsOf(cpu.getA());
+    int accumulator = Binary.getLowByte(cpu.getA());
     int carryValue = (cpu.getCpuStatus().carryFlag() ? 1 : 0);
 
     int result16Bit = toShort(accumulator + value + carryValue);
@@ -39,7 +39,7 @@ public class OpCode_ADC
 
     cpu.getCpuStatus().setCarryFlag(carryOutOfLastBit);
 
-    int result8Bit = Binary.lower8BitsOf(result16Bit);
+    int result8Bit = Binary.getLowByte(result16Bit);
     // Update sign and zero flags
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result8Bit);
     // Store the 8 bit result in the accumulator
@@ -70,7 +70,7 @@ public class OpCode_ADC
 
     cpu.getCpuStatus().setCarryFlag(carryOutOfLastBit);
 
-    int result16Bit = Binary.lower16BitsOf(result32Bit);
+    int result16Bit = toShort(result32Bit);
     // Update sign and zero flags
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result16Bit);
     // Store the 16 bit result in the accumulator
@@ -81,7 +81,7 @@ public class OpCode_ADC
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.get8BitData();
-    int accumulator = Binary.lower8BitsOf(cpu.getA());
+    int accumulator = Binary.getLowByte(cpu.getA());
 
     BCDResult bcd8BitResult = Binary.bcdSum8Bit(value, accumulator, cpu.getCpuStatus().carryFlag());
     boolean carry = bcd8BitResult.carry;
@@ -110,7 +110,7 @@ public class OpCode_ADC
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    if (cpu.isAccumulator8Bit())
+    if (cpu.isMemory8Bit())
     {
       if (cpu.getCpuStatus().decimalFlag())
       {
@@ -138,7 +138,7 @@ public class OpCode_ADC
     {
       case ADC_Immediate:                 // ADC Immediate
       {
-        if (cpu.isAccumulator16Bit())
+        if (cpu.isMemory16Bit())
         {
           cpu.addToProgramAddress(1);
         }
@@ -160,7 +160,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPage:                 // ADC Direct Page
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -171,7 +171,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirect:                 // ADC Direct Page Indirect
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -182,7 +182,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirectLong:                 // ADC Direct Page Indirect Long
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -211,7 +211,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndexedWithX:                 // ADC Direct Page Indexed, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -221,7 +221,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndexedIndirectWithX:                 // ADC Direct Page Indexed Indirect, X
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -231,7 +231,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirectIndexedWithY:                 // ADC Direct Page Indirect Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }
@@ -241,7 +241,7 @@ public class OpCode_ADC
       }
       case ADC_DirectPageIndirectLongIndexedWithY:                 // ADC Direct Page Indirect Long Indexed, Y
       {
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

@@ -13,7 +13,7 @@ public class ExecuteHigh
   @Override
   public boolean shouldSkipCycle(Cpu65816 cpu)
   {
-    return cpu.isAccumulator8Bit() && cpu.isIndex8Bit();
+    return cpu.isMemory8Bit() && cpu.isIndex8Bit();
   }
 
   @Override

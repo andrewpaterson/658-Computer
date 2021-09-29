@@ -2,14 +2,15 @@ package name.bizna.emu65816.addressingmode;
 
 import static name.bizna.emu65816.AddressingMode.Immediate;
 
-public class ImpliedCycles
+public class ImpliedXBACycles
     extends InstructionCycles
 {
-  public ImpliedCycles()
+  public ImpliedXBACycles()
   {
     super(Immediate,
           new BusCycle(new ProgramCounter(), new FetchOpCode()),
-          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)));
+          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)),
+          new BusCycle(new ProgramCounter(), new InternalOperation(true)));
   }
 }
 

@@ -20,7 +20,7 @@ public class OpCode_TSB
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.get8BitData();
-    int lowerA = Binary.lower8BitsOf(cpu.getA());
+    int lowerA = Binary.getLowByte(cpu.getA());
     int result = toByte(value | lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & lowerA) == 0);
@@ -42,7 +42,7 @@ public class OpCode_TSB
     {
       case TSB_Absolute:                 // TSB Absolute
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitTSB(cpu);
         }
@@ -56,7 +56,7 @@ public class OpCode_TSB
       }
       case TSB_DirectPage:                 // TSB Direct Page
       {
-        if (cpu.isAccumulator8Bit())
+        if (cpu.isMemory8Bit())
         {
           execute8BitTSB(cpu);
         }
@@ -65,7 +65,7 @@ public class OpCode_TSB
           execute16BitTSB(cpu);
           cpu.addToCycles(2);
         }
-        if (Binary.lower8BitsOf(cpu.getDirectPage()) != 0)
+        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
         {
           cpu.addToCycles(1);
         }

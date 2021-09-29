@@ -1,6 +1,5 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
@@ -16,16 +15,16 @@ public class OpCode_TCS
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
-    int currentStackPointer = cpu.getStackPointer();
+    int stackPointer = cpu.getStackPointer();
     if (cpu.getCpuStatus().isEmulationMode())
     {
-      currentStackPointer = Binary.setLower8BitsOf16BitsValue(currentStackPointer, Binary.lower8BitsOf(cpu.getA()));
+      stackPointer = Binary.setLower8BitsOf16BitsValue(stackPointer, Binary.getLowByte(cpu.getA()));
     }
     else
     {
-      currentStackPointer = cpu.getA();
+      stackPointer = cpu.getA();
     }
-    cpu.clearStack(new Address(0x00, currentStackPointer));
+    cpu.setStackPointer(stackPointer);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 

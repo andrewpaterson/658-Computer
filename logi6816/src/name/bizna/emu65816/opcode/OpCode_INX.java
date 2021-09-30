@@ -23,7 +23,7 @@ public class OpCode_INX
       int lowerX = Binary.getLowByte(cpu.getX());
       lowerX++;
       lowerX = toByte(lowerX);
-      cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), lowerX));
+      cpu.setX(Binary.setLowByte(cpu.getX(), lowerX));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lowerX);
     }
     else

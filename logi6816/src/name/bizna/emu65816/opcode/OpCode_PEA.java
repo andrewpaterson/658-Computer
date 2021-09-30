@@ -16,7 +16,7 @@ public class OpCode_PEA
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int operand = cpu.get16BitData();
+    int operand = cpu.getData();
     cpu.push16Bit(operand);
     cpu.addToProgramAddressAndCycles(3, 5);
   }

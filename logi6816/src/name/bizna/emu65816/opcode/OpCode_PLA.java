@@ -19,7 +19,7 @@ public class OpCode_PLA
   {
     if (cpu.isMemory8Bit())
     {
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), cpu.pull8Bit()));
+      cpu.setA(Binary.setLowByte(cpu.getA(), cpu.pull8Bit()));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(cpu.getA()));
       cpu.addToProgramAddressAndCycles(1, 4);
     }

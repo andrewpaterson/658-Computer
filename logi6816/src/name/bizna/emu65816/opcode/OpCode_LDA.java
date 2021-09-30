@@ -4,26 +4,27 @@ import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.addressingmode.InstructionCycles;
 
-import static name.bizna.emu65816.OpCodeName.*;
-
 public class OpCode_LDA
     extends OpCode
 {
-  public OpCode_LDA(String mName, int mCode, InstructionCycles busCycles)
+  public OpCode_LDA(int mCode, InstructionCycles busCycles)
   {
-    super(mName, mCode, busCycles.getAddressingMode());
+    super("LDA", mCode, busCycles.getAddressingMode());
   }
 
-  protected void executeLDA8Bit(Cpu65816 cpu)
+  @Override
+  public void execute1(Cpu65816 cpu)
   {
-    int value = cpu.get8BitData();
-    cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+    int value = cpu.getDataLow();
+    cpu.setA(Binary.setLowByte(cpu.getA(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
-  protected void executeLDA16Bit(Cpu65816 cpu)
+  @Override
+  public void execute2(Cpu65816 cpu)
   {
-    cpu.setA(cpu.get16BitData());
+    int value = cpu.getData();
+    cpu.setA(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
   }
 
@@ -38,119 +39,6 @@ public class OpCode_LDA
     else
     {
       executeLDA8Bit(cpu);
-    }
-
-    switch (getCode())
-    {
-      case LDA_Immediate:                // LDA Immediate
-      {
-        if (cpu.isMemory16Bit())
-        {
-          cpu.addToProgramAddress(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 2);
-        break;
-      }
-      case LDA_Absolute:                // LDA Absolute
-      {
-        cpu.addToProgramAddressAndCycles(3, 4);
-        break;
-      }
-      case LDA_AbsoluteLong:                // LDA Absolute Long
-      {
-        cpu.addToProgramAddressAndCycles(4, 5);
-        break;
-      }
-      case LDA_DirectPage:                // LDA Direct Page
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 3);
-        break;
-      }
-      case LDA_DirectPageIndirect:                // LDA Direct Page Indirect
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 5);
-        break;
-      }
-      case LDA_DirectPageIndirectLong:                // LDA Direct Page Indirect Long
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 6);
-        break;
-      }
-      case LDA_AbsoluteIndexedWithX:                // LDA Absolute Indexed, X
-      {
-        cpu.addToProgramAddressAndCycles(3, 4);
-        break;
-      }
-      case LDA_AbsoluteLongIndexedWithX:                // LDA Absolute Long Indexed, X
-      {
-        cpu.addToProgramAddressAndCycles(4, 5);
-        break;
-      }
-      case LDA_AbsoluteIndexedWithY:                // LDA Absolute Indexed, Y
-      {
-        cpu.addToProgramAddressAndCycles(3, 4);
-        break;
-      }
-      case LDA_DirectPageIndexedWithX:                // LDA Direct Page Indexed, X
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 4);
-        break;
-      }
-      case LDA_DirectPageIndexedIndirectWithX:                // LDA Direct Page Indexed Indirect, X
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 6);
-        break;
-      }
-      case LDA_DirectPageIndirectIndexedWithY:                // LDA Direct Page Indirect Indexed, Y
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 5);
-        break;
-      }
-      case LDA_DirectPageIndirectLongIndexedWithY:                // LDA Direct Page DP Indirect Long Indexed, Y
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-        cpu.addToProgramAddressAndCycles(2, 6);
-        break;
-      }
-      case LDA_StackRelative:                // LDA Stack Relative
-      {
-        cpu.addToProgramAddressAndCycles(2, 4);
-        break;
-      }
-      case LDA_StackRelativeIndirectIndexedWithY:                // LDA Stack Relative Indirect Indexed, Y
-      {
-        cpu.addToProgramAddressAndCycles(2, 7);
-        break;
-      }
-      default:
-        throw new IllegalStateException("Unexpected value: " + getCode());
     }
   }
 

@@ -20,16 +20,16 @@ public class OpCode_EOR
   protected void executeEOR8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int operand = cpu.get8BitData();
+    int operand = cpu.getDataLow();
     int result = toByte(Binary.getLowByte(cpu.getA()) ^ operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
-    cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
+    cpu.setA(Binary.setLowByte(cpu.getA(), result));
   }
 
   protected void executeEOR16Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int operand = cpu.get16BitData();
+    int operand = cpu.getData();
     int result = toShort(cpu.getA() ^ operand);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     cpu.setA(result);

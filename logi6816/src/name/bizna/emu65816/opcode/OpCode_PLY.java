@@ -18,7 +18,7 @@ public class OpCode_PLY
     if (cpu.isIndex8Bit())
     {
       int value = cpu.pull8Bit();
-      cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
+      cpu.setY(Binary.setLowByte(cpu.getY(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
       cpu.addToProgramAddressAndCycles(1, 4);
     }

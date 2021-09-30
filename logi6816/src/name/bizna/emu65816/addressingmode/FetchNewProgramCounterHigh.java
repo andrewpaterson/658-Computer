@@ -3,10 +3,10 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.opcode.OpCode;
 
-public class Fetch_New_PCH
+public class FetchNewProgramCounterHigh
     extends DataOperation
 {
-  public Fetch_New_PCH(boolean notMemoryLock)
+  public FetchNewProgramCounterHigh(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

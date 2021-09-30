@@ -7,9 +7,9 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_RTI
     extends OpCode
 {
-  public OpCode_RTI(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_RTI(int mCode, AddressingMode mAddressingMode)
   {
-    super(mName, mCode, mAddressingMode);
+    super("RTI", mCode, mAddressingMode);
   }
 
   @Override

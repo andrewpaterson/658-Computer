@@ -3,18 +3,32 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.EmulatorException;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public abstract class OpCode
 {
-  private final int code;
-  private final String name;
-  private final AddressingMode addressingMode;
+  protected final int code;
+  protected final String name;
+  protected final AddressingMode addressingMode;
+  protected final InstructionCycles cycles;
+  protected final String description;
 
-  public OpCode(String name, int code, AddressingMode addressingMode)
+  public OpCode(String name, String description, int code, AddressingMode addressingMode)
   {
+    this.description = description;
     this.code = code;
     this.name = name;
     this.addressingMode = addressingMode;
+    this.cycles = null;
+  }
+
+  public OpCode(String name, String description, int code, InstructionCycles cycles)
+  {
+    this.description = description;
+    this.code = code;
+    this.name = name;
+    this.addressingMode = cycles.getAddressingMode();
+    this.cycles = cycles;
   }
 
   protected void invalidCycle()
@@ -37,8 +51,22 @@ public abstract class OpCode
     return addressingMode;
   }
 
-  public abstract void executeOnFallingEdge(Cpu65816 cpu);
+  public final void executeOnFallingEdge(Cpu65816 cpu)
+  {
+    cycles.executeOnFallingEdge(cpu);
+  }
 
-  public abstract void executeOnRisingEdge(Cpu65816 cpu);
+  public final void executeOnRisingEdge(Cpu65816 cpu)
+  {
+    cycles.executeOnRisingEdge(cpu, this);
+  }
+
+  public void execute1(Cpu65816 cpu)
+  {
+  }
+
+  public void execute2(Cpu65816 cpu)
+  {
+  }
 }
 

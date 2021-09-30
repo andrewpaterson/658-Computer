@@ -21,7 +21,7 @@ public class OpCode_XCE
     {
       boolean oldCarry = cpu.getCpuStatus().carryFlag();
       boolean oldEmulation = cpu.getCpuStatus().isEmulationMode();
-      cpu.setEmulationFlag(oldCarry);
+      cpu.setEmulationMode(oldCarry);
       cpu.getCpuStatus().setCarryFlag(oldEmulation);
 
       cpu.setX(toByte(cpu.getX()));

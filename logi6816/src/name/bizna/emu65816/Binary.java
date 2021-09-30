@@ -25,13 +25,6 @@ public class Binary
     return (value == 0x0000);
   }
 
-  public static int setLower8BitsOf16BitsValue(int destination, int value)
-  {
-    destination &= 0xFF00;
-    destination |= toByte(value);
-    return destination;
-  }
-
   public static int setBitIn8BitValue(int value, int bitNumber)
   {
     int mask = (1 << bitNumber);

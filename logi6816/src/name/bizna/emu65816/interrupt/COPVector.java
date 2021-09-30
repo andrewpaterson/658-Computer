@@ -2,7 +2,7 @@ package name.bizna.emu65816.interrupt;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class BRKVector
+public class COPVector
     extends InterruptVector
 {
   @Override
@@ -10,11 +10,11 @@ public class BRKVector
   {
     if (cpu.isEmulationMode())
     {
-      return 0xfffe;
+      return 0xfff4;
     }
     else
     {
-      return 0xffe6;
+      return 0xffe4;
     }
   }
 }

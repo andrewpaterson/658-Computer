@@ -4,12 +4,10 @@ import name.bizna.emu65816.opcode.*;
 
 import static name.bizna.emu65816.Binary.*;
 import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
 public class Cpu65816
 {
-  protected EmulationModeInterrupts emulationInterrupts;
-  protected NativeModeInterrupts nativeInterrupts;
-
   // Status register
   protected CpuStatus processorStatus;
   protected Pins pins;
@@ -33,6 +31,7 @@ public class Cpu65816
   // Real OpCode Table.
   protected static OpCode[] opCodeTable;
   protected static OpCode resetOpcode;
+  protected static OpCode abortOpcode;
   protected static OpCode irqOpcode;
   protected static OpCode nmiOpcode;
   protected static OpCode fetchOpcode;
@@ -53,15 +52,13 @@ public class Cpu65816
 
   public Cpu65816(Pins pins)
   {
-    emulationInterrupts = new EmulationModeInterrupts();
-    nativeInterrupts = new NativeModeInterrupts();
     programAddress = new Address(0x00, 0x0000);
     setStackPointer();
     opCodeTable = OpCodeTable.createTable();
-    resetOpcode = new Reset("Reset", -1, AddressingMode.StackInterruptHardware);
-    irqOpcode = new InterruptRequest("IRQ", -1, AddressingMode.StackInterruptHardware);
-    nmiOpcode = new NonMaskableInterrupt("NMI", -1, AddressingMode.StackInterruptHardware);
-//    abortOpcode = new Abort("Abort", -1, AddressingMode.StackInterruptHardware);
+    resetOpcode = new OpCode_RES();
+    irqOpcode = new OpCode_IRQ();
+    nmiOpcode = new OpCode_NMI();
+    abortOpcode = new OpCode_ABORT();
     fetchOpcode = new FetchOpCode("Fetch Opcode", -1, AddressingMode.Implied);
     this.pins = pins;
     totalCyclesCounter = 0;
@@ -116,12 +113,31 @@ public class Cpu65816
     if (isMemory16Bit())
     {
       assert16Bit(accumulator, "Accumulator");
+      processorStatus.updateSignAndZeroFlagFrom16BitValue(accumulator);
+      this.accumulator = accumulator;
     }
     else
     {
       assert8Bit(accumulator, "Accumulator");
+      processorStatus.updateSignAndZeroFlagFrom8BitValue(accumulator);
+      this.accumulator = setLowByte(this.accumulator, accumulator);
     }
-    this.accumulator = accumulator;
+  }
+
+  public void setData(int data)
+  {
+    if (isMemory16Bit())
+    {
+      assert16Bit(data, "Data");
+      processorStatus.updateSignAndZeroFlagFrom16BitValue(data);
+      internalData = data;
+    }
+    else
+    {
+      assert8Bit(data, "Data");
+      processorStatus.updateSignAndZeroFlagFrom8BitValue(data);
+      internalData = setLowByte(internalData, data);
+    }
   }
 
   public int getA()
@@ -228,13 +244,44 @@ public class Cpu65816
 
   public void reset()
   {
-    setEmulationFlag(true);
+    setEmulationMode(true);
     dataBank = 0;
     directPage = 0;
     programAddress.setBank(0);
     stackPointer = getLowByte(stackPointer) | 0x100;
     processorStatus.setDecimalFlag(false);
     processorStatus.setInterruptDisableFlag(true);
+  }
+
+  public void abort()
+  {
+  }
+
+  public void interruptRequest()
+  {
+  }
+
+  public void nonMaskableInterrupt()
+  {
+  }
+
+  public void break_()
+  {
+    processorStatus.setInterruptDisableFlag(true);
+    processorStatus.setDecimalFlag(false);
+    if (processorStatus.isEmulationMode())
+    {
+      processorStatus.setBreakFlag(true);
+    }
+  }
+  public void coprocessor()
+  {
+    processorStatus.setInterruptDisableFlag(true);
+    processorStatus.setDecimalFlag(false);
+    if (processorStatus.isEmulationMode())
+    {
+      processorStatus.setBreakFlag(true);
+    }
   }
 
   public boolean isMemory8Bit()
@@ -328,14 +375,26 @@ public class Cpu65816
     this.internalAddress.setBank(addressBank);
   }
 
-  public int get8BitData()
+  public int getDataLow()
   {
-    return toByte(internalData);
+    return getLowByte(internalData);
   }
 
-  public int get16BitData()
+  public int getDataHigh()
   {
-    return internalData;
+    return getHighByte(internalData);
+  }
+
+  public int getData()
+  {
+    if (isMemory16Bit())
+    {
+      return internalData;
+    }
+    else
+    {
+      return toByte(internalData);
+    }
   }
 
   public int getDirectPage()
@@ -346,16 +405,6 @@ public class Cpu65816
   public int getDirectOffset()
   {
     return internalDirectOffset;
-  }
-
-  public EmulationModeInterrupts getEmulationInterrupts()
-  {
-    return emulationInterrupts;
-  }
-
-  public NativeModeInterrupts getNativeInterrupts()
-  {
-    return nativeInterrupts;
   }
 
   public void setStackPointer()
@@ -399,14 +448,6 @@ public class Cpu65816
   public void nextCycle()
   {
     cycle++;
-  }
-
-  public void readProgram(Address address)
-  {
-    this.internalAddress = address;
-    this.internalRead = true;
-    this.internalValidProgramAddress = true;
-    this.internalValidDataAddress = false;
   }
 
   public void readData(Address address)
@@ -508,6 +549,7 @@ public class Cpu65816
   public void decrementStackPointer()
   {
     this.stackPointer--;
+    stackPointer = toShort(stackPointer);
   }
 
   public boolean isRead()
@@ -607,12 +649,17 @@ public class Cpu65816
     internalProgramCounter.setBank(data);
   }
 
-  public void setPinData(int data)
+  public void setPinsData(int data)
   {
     pins.setData(data);
   }
 
-  public void setEmulationFlag(boolean emulation)
+  public void setPinsAddress(int address)
+  {
+    pins.setAddress(address);
+  }
+
+  public void setEmulationMode(boolean emulation)
   {
     processorStatus.setEmulationFlag(emulation);
     if (emulation)
@@ -622,6 +669,16 @@ public class Cpu65816
       processorStatus.setAccumulatorWidthFlag(true);
       processorStatus.setIndexWidthFlag(true);
     }
+  }
+
+  public boolean isEmulationMode()
+  {
+    return false;
+  }
+
+  public void setCarryFlag(boolean carry)
+  {
+    processorStatus.setCarryFlag(carry);
   }
 }
 

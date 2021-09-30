@@ -2,7 +2,7 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class AbsoluteHighOffset
+public class AbsoluteAddressHigh
     extends AddressOffset
 {
   @Override

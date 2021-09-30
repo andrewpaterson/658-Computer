@@ -18,7 +18,7 @@ public class OpCode_CPY
 
   protected void execute8BitCPY(Cpu65816 cpu)
   {
-    int value = cpu.get8BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.getDataLow(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toByte(Binary.getLowByte(cpu.getY()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.getLowByte(cpu.getY()) >= value;
@@ -27,7 +27,7 @@ public class OpCode_CPY
 
   protected void execute16BitCPY(Cpu65816 cpu)
   {
-    int value = cpu.get16BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.getData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toShort(cpu.getY() - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getY() >= value;

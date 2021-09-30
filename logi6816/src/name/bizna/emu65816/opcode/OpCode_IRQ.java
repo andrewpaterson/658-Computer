@@ -1,24 +1,21 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.StackHardwareInterruptCycles;
+import name.bizna.emu65816.interrupt.IRQVector;
 
-public class InterruptRequest
+public class OpCode_IRQ
     extends OpCode
 {
-  public InterruptRequest(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_IRQ()
   {
-    super(mName, mCode, mAddressingMode);
+    super("IRQ", "Interrupt request.", -1, new StackHardwareInterruptCycles(new IRQVector()));
   }
 
   @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
+  public void execute1(Cpu65816 cpu)
   {
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
+    cpu.interruptRequest();
   }
 }
 

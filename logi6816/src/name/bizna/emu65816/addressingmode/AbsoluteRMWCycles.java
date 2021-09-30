@@ -5,16 +5,18 @@ import static name.bizna.emu65816.AddressingMode.Absolute;
 public class AbsoluteRMWCycles
     extends InstructionCycles
 {
+  //1d
   public AbsoluteRMWCycles()
   {
     super(Absolute,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(false), new IncrementProgramCounter()),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new FetchDataLow(false)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new FetchDataHigh(false)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new InternalOperation(false)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new ExecuteHigh(false, false)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new ExecuteLow(false, false)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(RMW), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(RMW), PC_pp()),
+          new BusCycle(Address(DBR(), AA()), Read_DataLow(RMW)),
+          new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(RMW)),
+          new BusCycle(Address(DBR(), AA(), o(1)), IO(RMW)),
+          new BusCycle(Address(DBR(), AA(), o(1)), ExecuteHigh(false, RMW)),
+          new BusCycle(Address(DBR(), AA()), ExecuteLow(false, RMW)));
   }
 }
 

@@ -18,7 +18,7 @@ public class OpCode_SBC
   public void execute8BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     int accumulator = Binary.getLowByte(cpu.getA());
     boolean borrow = !cpu.getCpuStatus().carryFlag();
 
@@ -43,13 +43,13 @@ public class OpCode_SBC
     // Update sign and zero flags
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result8Bit);
     // Store the 8 bit result in the accumulator
-    cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result8Bit));
+    cpu.setA(Binary.setLowByte(cpu.getA(), result8Bit));
   }
 
   protected void execute16BitSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     int accumulator = cpu.getA();
     boolean borrow = !cpu.getCpuStatus().carryFlag();
 
@@ -80,7 +80,7 @@ public class OpCode_SBC
   protected void execute8BitBCDSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     int accumulator = Binary.getLowByte(cpu.getA());
 
     BCDResult bcd8BitResult = Binary.bcdSubtract8Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());
@@ -88,14 +88,14 @@ public class OpCode_SBC
     int result = bcd8BitResult.value;
     cpu.getCpuStatus().setCarryFlag(!borrow);
 
-    cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), result));
+    cpu.setA(Binary.setLowByte(cpu.getA(), result));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
   }
 
   protected void execute16BitBCDSBC(Cpu65816 cpu)
   {
     Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     int accumulator = cpu.getA();
 
     BCDResult bcd16BitResult = Binary.bcdSubtract16Bit(value, accumulator, !cpu.getCpuStatus().carryFlag());

@@ -1,23 +1,23 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.StackRelative;
+import name.bizna.emu65816.interrupt.InterruptVector;
+
+import static name.bizna.emu65816.AddressingMode.StackInterruptHardware;
 
 public class StackResetCycles
     extends InstructionCycles
 {
-  private int interruptVector;
-
-  public StackResetCycles(boolean read, int interruptVector)
+  public StackResetCycles(InterruptVector interruptVector)
   {
-    super(StackRelative,
-          new BusCycle(new ProgramCounter(), new InternalOperation(true, true, true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true), new Reset()),
-          new BusCycle(new StackPointer(), new InternalOperation(true)),
-          new BusCycle(new StackPointer(), new InternalOperation(true)),
-          new BusCycle(new StackPointer(), new InternalOperation(true)),
-          new BusCycle(new StackPointer(), new InternalOperation(true)),
-          new BusCycle(new InterruptVector(interruptVector), new FetchAbsoluteAddressLow(true)),
-          new BusCycle(new InterruptVector(interruptVector), new Offset(1), new FetchAbsoluteAddressHigh(true), new SetProgramCounter(new AbsoluteAddress())));
+    super(StackInterruptHardware,
+          new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(S()), IO()),
+          new BusCycle(Address(S()), IO()),
+          new BusCycle(Address(S()), IO()),
+          new BusCycle(Address(S()), IO(), new Execute1()),
+          new BusCycle(Address(InterruptAddress(interruptVector)), Read_AAL()),
+          new BusCycle(Address(InterruptAddress(interruptVector), o(1)), Read_AAH(), PC_e(PBR(), AA())));
   }
 }
 

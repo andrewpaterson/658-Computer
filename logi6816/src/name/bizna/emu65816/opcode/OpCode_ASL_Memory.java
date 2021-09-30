@@ -9,12 +9,12 @@ import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_ASL
+public class OpCode_ASL_Memory
     extends OpCode
 {
-  public OpCode_ASL(int mCode, InstructionCycles busCycles)
+  public OpCode_ASL_Memory(int mCode, InstructionCycles busCycles)
   {
-    super("ASL", "Shift ", mCode, busCycles);
+    super("ASL", "Shift memory left 1 bit; result in memory and update NZC.", mCode, busCycles);
   }
 
   @Override
@@ -22,18 +22,6 @@ public class OpCode_ASL
   {
     switch (getCode())
     {
-      case ASL_Accumulator:
-      {
-        if (cpu.isMemory8Bit())
-        {
-          int accumulator = cpu.getA();
-          boolean carry = is8bitValueNegative(accumulator);
-          accumulator = toByte(accumulator << 1);
-          cpu.setCarryFlag(carry);
-          cpu.setA(accumulator);
-        }
-        break;
-      }
       case ASL_Absolute:
       case ASL_DirectPage:
       case ASL_AbsoluteIndexedWithX:
@@ -42,9 +30,9 @@ public class OpCode_ASL
         if (cpu.isMemory8Bit())
         {
           int operand = cpu.getData();
-          boolean newCarry = is8bitValueNegative(operand);
+          boolean carry = is8bitValueNegative(operand);
           operand = toByte(operand << 1);
-          cpu.getCpuStatus().setCarryFlag(newCarry);
+          cpu.getCpuStatus().setCarryFlag(carry);
           cpu.setData(operand);
         }
         break;
@@ -59,18 +47,6 @@ public class OpCode_ASL
   {
     switch (getCode())
     {
-      case ASL_Accumulator:
-      {
-        if (cpu.isMemory16Bit())
-        {
-          int accumulator = cpu.getA();
-          boolean carry = is16bitValueNegative(accumulator);
-          accumulator = toShort(accumulator << 1);
-          cpu.setCarryFlag(carry);
-          cpu.setA(accumulator);
-        }
-        break;
-      }
       case ASL_Absolute:
       case ASL_DirectPage:
       case ASL_AbsoluteIndexedWithX:
@@ -79,9 +55,9 @@ public class OpCode_ASL
         if (cpu.isMemory16Bit())
         {
           int operand = cpu.getData();
-          boolean newCarry = (operand & 0x8000) != 0;
+          boolean carry = (operand & 0x8000) != 0;
           operand = toShort(operand << 1);
-          cpu.getCpuStatus().setCarryFlag(newCarry);
+          cpu.getCpuStatus().setCarryFlag(carry);
           cpu.setData(operand);
         }
         break;

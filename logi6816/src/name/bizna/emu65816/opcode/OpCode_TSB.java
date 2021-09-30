@@ -19,7 +19,7 @@ public class OpCode_TSB
   protected void execute8BitTSB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     int lowerA = Binary.getLowByte(cpu.getA());
     int result = toByte(value | lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
@@ -29,7 +29,7 @@ public class OpCode_TSB
   protected void execute16BitTSB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     int result = (value | cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);

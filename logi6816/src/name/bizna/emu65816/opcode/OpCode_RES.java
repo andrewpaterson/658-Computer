@@ -1,24 +1,15 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.addressingmode.*;
+import name.bizna.emu65816.addressingmode.StackResetCycles;
+import name.bizna.emu65816.interrupt.ResetVector;
 
-import static name.bizna.emu65816.AddressingMode.StackInterruptHardware;
-
-public class Reset
+public class OpCode_RES
     extends OpCode
 {
-  public Reset()
+  public OpCode_RES()
   {
-    super("Reset", -1, new InstructionCycles(StackInterruptHardware,
-                                             new BusCycle(new ProgramCounter(), new InternalOperation(true, true, true)),
-                                             new BusCycle(new ProgramCounter(), new InternalOperation(true), new Execute1()),
-                                             new BusCycle(new StackPointer(), new InternalOperation(true)),
-                                             new BusCycle(new StackPointer(), new InternalOperation(true)),
-                                             new BusCycle(new StackPointer(), new InternalOperation(true)),
-                                             new BusCycle(new StackPointer(), new InternalOperation(true)),
-                                             new BusCycle(new InterruptVector(0xfffc), new FetchAbsoluteAddressLow(true)),
-                                             new BusCycle(new InterruptVector(0xfffc), new Offset(1), new FetchAbsoluteAddressHigh(true), new SetProgramCounter(new AbsoluteAddress()))));
+    super("RES", "Reset the CPU.", -1, new StackResetCycles(new ResetVector()));
   }
 
   @Override

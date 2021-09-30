@@ -18,7 +18,7 @@ public class OpCode_TCS
     int stackPointer = cpu.getStackPointer();
     if (cpu.getCpuStatus().isEmulationMode())
     {
-      stackPointer = Binary.setLower8BitsOf16BitsValue(stackPointer, Binary.getLowByte(cpu.getA()));
+      stackPointer = Binary.setLowByte(stackPointer, Binary.getLowByte(cpu.getA()));
     }
     else
     {

@@ -8,14 +8,14 @@ public class DirectRMWCycles
   public DirectRMWCycles()
   {
     super(Direct,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchDirectOffset(false), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new DirectPageLowZero(false)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new FetchDataLow(false)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new FetchDataHigh(false)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new InternalOperation(false)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new ExecuteHigh(false, false)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new ExecuteLow(false, false)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), new FetchDirectOffset(false), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), new DirectPageLowZero(false)),
+          new BusCycle(Address(DirectPage(), D0(), Read_DataLow(false)),
+          new BusCycle(Address(DirectPage(), D0(), o(1), Read_DataHigh(false)),
+          new BusCycle(Address(DirectPage(), D0(), o(1), IO(false)),
+          new BusCycle(Address(DirectPage(), D0(), o(1), new Execute2(), new WriteDataHigh(false)),
+          new BusCycle(Address(DirectPage(), D0(), new Execute1(), new WriteDataLow(false)));
   }
 }
 

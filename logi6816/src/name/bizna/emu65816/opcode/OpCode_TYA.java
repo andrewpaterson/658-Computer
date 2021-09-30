@@ -18,13 +18,13 @@ public class OpCode_TYA
     if (cpu.isMemory8Bit() && cpu.isIndex8Bit())
     {
       int value = Binary.getLowByte(cpu.getY());
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+      cpu.setA(Binary.setLowByte(cpu.getA(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
     else if (cpu.isMemory8Bit() && cpu.isIndex16Bit())
     {
       int value = Binary.getLowByte(cpu.getY());
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+      cpu.setA(Binary.setLowByte(cpu.getA(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
     else if (cpu.isMemory16Bit() && cpu.isIndex8Bit())

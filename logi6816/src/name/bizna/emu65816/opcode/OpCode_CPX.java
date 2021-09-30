@@ -18,7 +18,7 @@ public class OpCode_CPX
 
   protected void execute8BitCPX(Cpu65816 cpu)
   {
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     int result = toByte(Binary.getLowByte(cpu.getX()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.getLowByte(cpu.getX()) >= value;
@@ -27,7 +27,7 @@ public class OpCode_CPX
 
   protected void execute16BitCPX(Cpu65816 cpu)
   {
-    int value = cpu.get16BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
+    int value = cpu.getData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toShort(cpu.getX() - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getX() >= value;

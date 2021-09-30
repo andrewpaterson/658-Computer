@@ -1,15 +1,16 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.opcode.OpCode;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
 public class DirectPageLowZero
-    extends DataBusCycleOperation
+    extends DataOperation
 {
   public DirectPageLowZero(boolean notMemoryLock)
   {
-    super(true, false, notMemoryLock, true, true);
+    super(false, false, notMemoryLock, true, true);
   }
 
   @Override
@@ -19,7 +20,7 @@ public class DirectPageLowZero
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, OpCode opCode)
   {
   }
 }

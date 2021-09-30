@@ -3,10 +3,10 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.opcode.OpCode;
 
-public class Fetch_AAL
+public class FetchAbsoluteAddressLow
     extends DataOperation
 {
-  public Fetch_AAL(boolean notMemoryLock)
+  public FetchAbsoluteAddressLow(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

@@ -14,68 +14,43 @@ public class OpCodeTable
   @SuppressWarnings("DuplicatedCode")
   public static OpCode[] createTable()
   {
-    InstructionCycles directPageRead = new DirectCycles(true);
-    InstructionCycles directPageWrite = new DirectCycles(false);
-    InstructionCycles directPageIndexedIndirectWithXRead = new DirectIndexedIndirectWithXCycles(true);
-    InstructionCycles directPageIndexedIndirectWithXWrite = new DirectIndexedIndirectWithXCycles(false);
-    InstructionCycles stackRelativeRead = new StackRelativeCycles(true);
-    InstructionCycles stackRelativeWrite = new StackRelativeCycles(true);
-    InstructionCycles directPageIndirectLongRead = new DirectIndirectLongCycles(true);
-    InstructionCycles directPageIndirectLongWrite = new DirectIndirectLongCycles(false);
-    InstructionCycles immediateRead = new ImmediateCycles();
-    InstructionCycles absoluteRead = new AbsoluteCycles(true);
-    InstructionCycles absoluteWrite = new AbsoluteCycles(false);
-    InstructionCycles absoluteLongRead = new AbsoluteLongCycles(true);
-    InstructionCycles absoluteLongWrite = new AbsoluteLongCycles(false);
-    InstructionCycles directPageIndirectIndexedWithYRead = new DirectIndirectIndexedWithYCycles(true);
-    InstructionCycles directPageIndirectIndexedWithYWrite = new DirectIndirectIndexedWithYCycles(false);
-    InstructionCycles directPageIndirectRead = new DirectIndirectCycles(true);
-    InstructionCycles directPageIndirectWrite = new DirectIndirectCycles(true);
-    InstructionCycles stackRelativeIndirectIndexedWithYRead = new StackRelativeIndirectIndexedWithYCycles(true);
-    InstructionCycles stackRelativeIndirectIndexedWithYWrite = new StackRelativeIndirectIndexedWithYCycles(false);
-    InstructionCycles directIndexedWithXRead = new DirectIndexedWithXCycles(true);
-    InstructionCycles directIndirectLongIndexedWithYRead = new DirectIndirectLongIndexedWithYCycles(true);
-    InstructionCycles absoluteIndexedWithYRead = new AbsoluteIndexedWithYCycles(true);
-    InstructionCycles absoluteIndexedWithXRead = new AbsoluteIndexedWithXCycles(true);
-    InstructionCycles absoluteLongIndexedWithXRead = new AbsoluteLongIndexedWithXCycles(true);
-
     List<OpCode> opCodes = new ArrayList<>();
-    add(opCodes, new OpCode_BRK("BRK", BRK_Interrupt, StackInterruptSoftware));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
-    add(opCodes, new OpCode_COP("COP", COP_Interrupt, StackInterruptSoftware));
-    add(opCodes, new OpCode_ORA("ORA", ORA_StackRelative, StackRelative));
+    add(opCodes, new OpCode_BRK(BRK_Interrupt));
+    add(opCodes, new OpCode_ORA(ORA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
+    add(opCodes, new OpCode_COP(COP_Interrupt));
+    add(opCodes, new OpCode_ORA(ORA_StackRelative, new StackRelativeCycles(true)));
     add(opCodes, new OpCode_TSB("TSB", TSB_DirectPage, Direct));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPage, Direct));
-    add(opCodes, new OpCode_ASL("ASL", ASL_DirectPage, Direct));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndirectLong, DirectIndirectLong));
+    add(opCodes, new OpCode_ORA(ORA_DirectPage, new DirectCycles(true)));
+    add(opCodes, new OpCode_ASL_Memory(ASL_DirectPage, new DirectRMWCycles()));
+    add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectLong, new DirectIndirectLongCycles(true)));
     add(opCodes, new OpCode_PHP("PHP", PHP_StackImplied, StackImplied));
-    add(opCodes, new OpCode_ORA("ORA", ORA_Immediate, Immediate));
-    add(opCodes, new OpCode_ASL("ASL", ASL_Accumulator, Accumulator));
+    add(opCodes, new OpCode_ORA(ORA_Immediate, new ImmediateCycles()));
+    add(opCodes, new OpCode_ASL_Memory(ASL_Accumulator, new AccumulatorCycles()));
     add(opCodes, new OpCode_PHD("PHD", PHD_StackImplied, StackImplied));
     add(opCodes, new OpCode_TSB("TSB", TSB_Absolute, Absolute));
-    add(opCodes, new OpCode_ORA("ORA", ORA_Absolute, Absolute));
-    add(opCodes, new OpCode_ASL("ASL", ASL_Absolute, Absolute));
-    add(opCodes, new OpCode_ORA("ORA", ORA_AbsoluteLong, AbsoluteLong));
+    add(opCodes, new OpCode_ORA(ORA_Absolute, Absolute));
+    add(opCodes, new OpCode_ASL_Memory(ASL_Absolute, new AbsoluteRMWCycles()));
+    add(opCodes, new OpCode_ORA(ORA_AbsoluteLong, AbsoluteLong));
     add(opCodes, new OpCode_BPL("BPL", BPL_ProgramCounterRelative, Relative));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndirect, DirectIndirect));
-    add(opCodes, new OpCode_ORA("ORA", ORA_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
+    add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectIndexedWithY, DirectIndirectIndexedWithY));
+    add(opCodes, new OpCode_ORA(ORA_DirectPageIndirect, DirectIndirect));
+    add(opCodes, new OpCode_ORA(ORA_StackRelativeIndirectIndexedWithY, StackRelativeIndirectIndexedWithY));
     add(opCodes, new OpCode_TRB("TRB", TRB_DirectPage, Direct));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndexedWithX, DirectIndexedWithX));
-    add(opCodes, new OpCode_ASL("ASL", ASL_DirectPageIndexedWithX, DirectIndexedWithX));
-    add(opCodes, new OpCode_ORA("ORA", ORA_DirectPageIndirectLongIndexedWithY, DirectIndirectLongIndexedWithY));
+    add(opCodes, new OpCode_ORA(ORA_DirectPageIndexedWithX, DirectIndexedWithX));
+    add(opCodes, new OpCode_ASL_Memory(ASL_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
+    add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectLongIndexedWithY, DirectIndirectLongIndexedWithY));
     add(opCodes, new OpCode_CLC("CLC", CLC_Implied, Implied));
-    add(opCodes, new OpCode_ORA("ORA", ORA_AbsoluteIndexedWithY, AbsoluteIndexedWithY));
+    add(opCodes, new OpCode_ORA(ORA_AbsoluteIndexedWithY, AbsoluteIndexedWithY));
     add(opCodes, new OpCode_INC("INC", INC_Accumulator, Accumulator));
     add(opCodes, new OpCode_TCS("TCS", TCS_Implied, Implied));
     add(opCodes, new OpCode_TRB("TRB", TRB_Absolute, Absolute));
-    add(opCodes, new OpCode_ORA("ORA", ORA_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
-    add(opCodes, new OpCode_ASL("ASL", ASL_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
-    add(opCodes, new OpCode_ORA("ORA", ORA_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
+    add(opCodes, new OpCode_ORA(ORA_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
+    add(opCodes, new OpCode_ASL_Memory(ASL_AbsoluteIndexedWithX, new AbsoluteIndexedWithXRMWCycles()));
+    add(opCodes, new OpCode_ORA(ORA_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
     add(opCodes, new OpCode_JSR("JSR", JSR_Absolute, Absolute));
-    add(opCodes, new OpCode_AND("AND", AND_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
+    add(opCodes, new OpCode_AND(AND_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_JSR("JSR", JSR_AbsoluteLong, AbsoluteLong));
-    add(opCodes, new OpCode_AND("AND", AND_StackRelative, StackRelative));
+    add(opCodes, new OpCode_AND(AND_StackRelative, new StackRelativeCycles(true)));
     add(opCodes, new OpCode_BIT("BIT", BIT_DirectPage, Direct));
     add(opCodes, new OpCode_AND("AND", AND_DirectPage, Direct));
     add(opCodes, new OpCode_ROL("ROL", ROL_DirectPage, Direct));
@@ -104,7 +79,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_AND("AND", AND_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_ROL("ROL", ROL_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_AND("AND", AND_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
-    add(opCodes, new OpCode_RTI("RTI", RTI_StackImplied, StackImplied));
+    add(opCodes, new OpCode_RTI(RTI_StackImplied, StackImplied));
     add(opCodes, new OpCode_EOR("EOR", EOR_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
     add(opCodes, new OpCode_WDM("WDM", WDM_Implied, Implied));
     add(opCodes, new OpCode_EOR("EOR", EOR_StackRelative, StackRelative));
@@ -201,37 +176,37 @@ public class OpCodeTable
     add(opCodes, new OpCode_STZ("STZ", STZ_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_STA("STA", STA_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
     add(opCodes, new OpCode_LDY("LDY", LDY_Immediate, Immediate));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndexedIndirectWithX, directPageIndexedIndirectWithXRead));
+    add(opCodes, new OpCode_LDA(LDA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_LDX("LDX", LDX_Immediate, Immediate));
-    add(opCodes, new OpCode_LDA("LDA", LDA_StackRelative, stackRelativeRead));
+    add(opCodes, new OpCode_LDA(LDA_StackRelative, new StackRelativeCycles(true)));
     add(opCodes, new OpCode_LDY("LDY", LDY_DirectPage, Direct));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPage, directPageRead));
+    add(opCodes, new OpCode_LDA(LDA_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_LDX("LDX", LDX_DirectPage, Direct));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirectLong, directPageIndirectLongRead));
+    add(opCodes, new OpCode_LDA(LDA_DirectPageIndirectLong, new DirectIndirectLongCycles(true)));
     add(opCodes, new OpCode_TAY("TAY", TAY_Implied, Implied));
-    add(opCodes, new OpCode_LDA("LDA", LDA_Immediate, immediateRead));
+    add(opCodes, new OpCode_LDA(LDA_Immediate, new ImmediateCycles()));
     add(opCodes, new OpCode_TAX("TAX", TAX_Implied, Implied));
     add(opCodes, new OpCode_PLB("PLB", PLB_StackImplied, StackImplied));
     add(opCodes, new OpCode_LDY("LDY", LDY_Absolute, Absolute));
-    add(opCodes, new OpCode_LDA("LDA", LDA_Absolute, absoluteRead));
+    add(opCodes, new OpCode_LDA(LDA_Absolute, new AbsoluteCycles(true)));
     add(opCodes, new OpCode_LDX("LDX", LDX_Absolute, Absolute));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteLong, absoluteLongRead));
+    add(opCodes, new OpCode_LDA(LDA_AbsoluteLong, new AbsoluteLongCycles(true)));
     add(opCodes, new OpCode_BCS("BCS", BCS_ProgramCounterRelative, Relative));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirectIndexedWithY, directPageIndirectIndexedWithYRead));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirect, directPageIndirectRead));
-    add(opCodes, new OpCode_LDA("LDA", LDA_StackRelativeIndirectIndexedWithY, stackRelativeIndirectIndexedWithYRead));
+    add(opCodes, new OpCode_LDA(LDA_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_LDA(LDA_DirectPageIndirect, new DirectIndirectCycles(true)));
+    add(opCodes, new OpCode_LDA(LDA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_LDY("LDY", LDY_DirectPageIndexedWithX, DirectIndexedWithX));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndexedWithX, directIndexedWithXRead));
+    add(opCodes, new OpCode_LDA(LDA_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_LDX("LDX", LDX_DirectPageIndexedWithY, DirectIndexedWithY));
-    add(opCodes, new OpCode_LDA("LDA", LDA_DirectPageIndirectLongIndexedWithY, directIndirectLongIndexedWithYRead));
+    add(opCodes, new OpCode_LDA(LDA_DirectPageIndirectLongIndexedWithY, new DirectIndirectLongIndexedWithYCycles(true)));
     add(opCodes, new OpCode_CLV("CLV", CLV_Implied, Implied));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteIndexedWithY, absoluteIndexedWithYRead));
+    add(opCodes, new OpCode_LDA(LDA_AbsoluteIndexedWithY, new AbsoluteIndexedWithYCycles(true)));
     add(opCodes, new OpCode_TSX("TSX", TSX_Implied, Implied));
     add(opCodes, new OpCode_TYX("TYX", TYX_Implied, Implied));
     add(opCodes, new OpCode_LDY("LDY", LDY_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteIndexedWithX, absoluteIndexedWithXRead));
+    add(opCodes, new OpCode_LDA(LDA_AbsoluteIndexedWithX, new AbsoluteIndexedWithXCycles(true)));
     add(opCodes, new OpCode_LDX("LDX", LDX_AbsoluteIndexedWithY, AbsoluteIndexedWithY));
-    add(opCodes, new OpCode_LDA("LDA", LDA_AbsoluteLongIndexedWithX, absoluteLongIndexedWithXRead));
+    add(opCodes, new OpCode_LDA(LDA_AbsoluteLongIndexedWithX, new AbsoluteLongIndexedWithXCycles(true)));
     add(opCodes, new OpCode_CPY("CPY", CPY_Immediate, Immediate));
     add(opCodes, new OpCode_CMP("CMP", CMP_DirectPageIndexedIndirectWithX, DirectIndexedIndirectWithX));
     add(opCodes, new OpCode_REP("REP", REP_Immediate, Immediate));
@@ -296,6 +271,15 @@ public class OpCodeTable
     add(opCodes, new OpCode_SBC("SBC", SBC_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_INC("INC", INC_AbsoluteIndexedWithX, AbsoluteIndexedWithX));
     add(opCodes, new OpCode_SBC("SBC", SBC_AbsoluteLongIndexedWithX, AbsoluteLongIndexedWithX));
+
+    for (int i = 0; i <= 255; i++)
+    {
+      OpCode opCode = opCodes.get(i);
+      if (opCode.getCode() != i)
+      {
+        throw new EmulatorException("OpCode [" + opCode.getName() + "] has code [" + opCode.getCode() + "] but is at index [" + i + "].");
+      }
+    }
 
     return opCodes.toArray(new OpCode[0]);
   }

@@ -18,16 +18,16 @@ public class OpCode_MVP
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int destinationBank = cpu.get8BitData();
+    int destinationBank = cpu.getDataLow();
     addressOfOpCodeData.incrementOffsetBy(1);
-    int sourceBank = cpu.get8BitData();
+    int sourceBank = cpu.getDataLow();
 
     Address sourceAddress = new Address(sourceBank, cpu.getX());
     Address destinationAddress = new Address(destinationBank, cpu.getY());
 
     while (cpu.getA() != 0xFFFF)
     {
-      int toTransfer = cpu.get8BitData();
+      int toTransfer = cpu.getDataLow();
       cpu.storeByte(destinationAddress, toTransfer);
 
       sourceAddress.decrementOffsetBy(1);

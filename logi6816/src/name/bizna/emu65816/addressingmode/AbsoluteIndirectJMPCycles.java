@@ -1,18 +1,19 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.AbsoluteIndirectLong;
+import static name.bizna.emu65816.AddressingMode.AbsoluteIndirect;
 
 public class AbsoluteIndirectJMPCycles
     extends InstructionCycles
 {
+  //3b
   public AbsoluteIndirectJMPCycles()
   {
-    super(AbsoluteIndirectLong,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new AbsoluteAddress(), new FetchNewProgramCounterLow(true), new ClearNewProgramCounterBank()),
-          new BusCycle(new AbsoluteAddress(), new Offset(1), new FetchNewProgramCounterHigh(true), new SetProgramCounter(new NewProgramCounter())));
+    super(AbsoluteIndirect,
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_pp()),
+          new BusCycle(Address(AA()), Read_NewPCL()),
+          new BusCycle(Address(AA(), o(1)), Read_NewPCH(), new SetProgramCounter(PBR(), New_PC())));
   }
 }
 

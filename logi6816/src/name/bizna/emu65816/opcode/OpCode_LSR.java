@@ -39,13 +39,13 @@ public class OpCode_LSR
 
     if (cpu.isMemory8Bit())
     {
-      int value = cpu.get8BitData();
+      int value = cpu.getDataLow();
       DO_LSR_8_BIT(cpu, value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      int value = cpu.get16BitData();
+      int value = cpu.getData();
       DO_LSR_16_BIT(cpu, value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
     }
@@ -57,7 +57,7 @@ public class OpCode_LSR
     {
       int value = Binary.getLowByte(cpu.getA());
       DO_LSR_8_BIT(cpu, value);
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+      cpu.setA(Binary.setLowByte(cpu.getA(), value));
     }
     else
     {

@@ -5,35 +5,51 @@ import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.EmulatorException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BusCycle
 {
   protected List<AddressOffset> addressOffsets;
-  protected List<CycleOperation> operations;
+  protected List<Operation> operations;
 
   public BusCycle(BusCycleParameter... parameters)
   {
-    int dataBusOperation = 0;
-
     addressOffsets = new ArrayList<>();
     operations = new ArrayList<>();
     for (BusCycleParameter parameter : parameters)
     {
-      if (parameter.isAddressOffset())
+      if (parameter.isAddress())
       {
         addressOffsets.add((AddressOffset) parameter);
       }
 
       if (parameter.isOperation())
       {
-        CycleOperation cycleOperation = (CycleOperation) parameter;
-        operations.add(cycleOperation);
+        Operation operation = (Operation) parameter;
+        operations.add(operation);
+      }
+    }
 
-        if (cycleOperation.isDataBus())
-        {
-          dataBusOperation++;
-        }
+    validate();
+  }
+
+  public BusCycle(AddressOffset[] addressOffsets, Operation... operations)
+  {
+    this.addressOffsets = Arrays.asList(addressOffsets);
+    this.operations = Arrays.asList(operations);
+
+    validate();
+  }
+
+  private void validate()
+  {
+    int dataBusOperation = 0;
+    for (Operation operation : this.operations)
+    {
+      if (operation.isData())
+      {
+        dataBusOperation++;
       }
     }
 
@@ -41,11 +57,21 @@ public class BusCycle
     {
       throw new EmulatorException("Exactly [1] data bus operation must be specified in a bus cycle.");
     }
+
+    if (addressOffsets.size() == 0)
+    {
+      throw new EmulatorException("At least [1] address offset must be specified in a bus cycle.");
+    }
   }
 
   public Address getAddress(Cpu65816 cpu)
   {
     return AddressOffset.getAddress(cpu, addressOffsets);
+  }
+
+  public List<Operation> getOperations()
+  {
+    return operations;
   }
 }
 

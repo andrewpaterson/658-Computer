@@ -2,11 +2,20 @@ package name.bizna.emu65816.interrupt;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class ResetVector extends InterruptVector
+public class AbortVector
+    extends InterruptVector
 {
   @Override
   public int getAddress(Cpu65816 cpu)
   {
-    return 0;
+    if (cpu.isEmulationMode())
+    {
+      return 0xfff8;
+    }
+    else
+    {
+      return 0xffe8;
+    }
   }
 }
+

@@ -8,9 +8,9 @@ public class WaitForInterruptCycles
   public WaitForInterruptCycles()
   {
     super(StackInterruptSoftware,
-          new BusCycle(new ProgramCounter(), new FetchOpCode()),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true), new ExecuteLow(true, true)));
+          new BusCycle(Address(PBR(), PC()), OpCode()),
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(PBR(), PC()), IO(), new Execute1()));
   }
 }
 

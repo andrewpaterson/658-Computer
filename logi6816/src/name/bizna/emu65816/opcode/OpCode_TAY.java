@@ -19,7 +19,7 @@ public class OpCode_TAY
         (cpu.isMemory16Bit() && cpu.isIndex8Bit()))
     {
       int lower8BitsOfA = Binary.getLowByte(cpu.getA());
-      cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), lower8BitsOfA));
+      cpu.setY(Binary.setLowByte(cpu.getY(), lower8BitsOfA));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
     }
     else

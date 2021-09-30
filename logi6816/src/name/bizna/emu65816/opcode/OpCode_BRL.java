@@ -23,7 +23,7 @@ public class OpCode_BRL
   {
     if (condition)
     {
-      int destination = cpu.get16BitData(cpu.getAddressOfOpCodeData(getAddressingMode()));
+      int destination = cpu.getData(cpu.getAddressOfOpCodeData(getAddressingMode()));
       cpu.getProgramCounter().incrementOffsetBy(toShort(3 + destination));
     }
     // CPU cycles: 4

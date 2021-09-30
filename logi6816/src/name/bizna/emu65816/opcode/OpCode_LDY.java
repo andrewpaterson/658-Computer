@@ -18,15 +18,15 @@ public class OpCode_LDY
   protected void executeLDY8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
-    cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
+    int value = cpu.getDataLow();
+    cpu.setY(Binary.setLowByte(cpu.getY(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
   protected void executeLDY16Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    cpu.setY(cpu.get16BitData());
+    cpu.setY(cpu.getData());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
   }
 

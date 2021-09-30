@@ -7,7 +7,7 @@ import static name.bizna.emu65816.OpCodeName.REP_Immediate;
 import static name.bizna.emu65816.OpCodeName.SEP_Immediate;
 
 public class NoteEight
-    extends DataBusCycleOperation
+    extends DataOperation
 {
   public NoteEight()
   {
@@ -23,7 +23,7 @@ public class NoteEight
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, OpCode opCode)
   {
   }
 }

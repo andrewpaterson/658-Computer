@@ -5,17 +5,18 @@ import static name.bizna.emu65816.AddressingMode.AbsoluteIndexedIndirectWithX;
 public class AbsoluteIndexedIndirectWithXJSRCycles
     extends InstructionCycles
 {
+  //2b
   public AbsoluteIndexedIndirectWithXJSRCycles()
   {
     super(AbsoluteIndexedIndirectWithX,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new StackPointer(), new WriteProgramCounterHigh(), new DecrementStackPointer()),
-          new BusCycle(new StackPointer(), new WriteProgramCounterLow(), new DecrementStackPointer()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new ProgramBank(), new AbsoluteAddress(), new XIndex(), new FetchNewProgramCounterLow(true), new ClearNewProgramCounterBank()),
-          new BusCycle(new ProgramBank(), new AbsoluteAddress(), new XIndex(), new Offset(1), new FetchNewProgramCounterHigh(true), new SetProgramCounter(new NewProgramCounter())));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_pp()),
+          new BusCycle(Address(S()), Write_PCH(), SP_mm()),
+          new BusCycle(Address(S()), Write_PCL(), SP_mm()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH()),
+          new BusCycle(Address(PBR(), PC()), IO(), PC_pp()),
+          new BusCycle(Address(PBR(), AA(), X()), Read_NewPCL()),
+          new BusCycle(Address(PBR(), AA(), X(), o(1)), Read_NewPCH(), PC_e(PBR(), New_PC())));
   }
 }
 

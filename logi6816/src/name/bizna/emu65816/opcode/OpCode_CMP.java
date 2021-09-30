@@ -20,7 +20,7 @@ public class OpCode_CMP
   protected void execute8BitCMP(Cpu65816 cpu)
   {
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     int result = toByte(Binary.getLowByte(cpu.getA()) - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.getLowByte(cpu.getA()) >= value;
@@ -30,7 +30,7 @@ public class OpCode_CMP
   protected void execute16BitCMP(Cpu65816 cpu)
   {
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     int result = toShort (cpu.getA() - value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getA() >= value;

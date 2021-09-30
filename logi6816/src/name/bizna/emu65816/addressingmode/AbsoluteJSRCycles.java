@@ -5,15 +5,16 @@ import static name.bizna.emu65816.AddressingMode.Absolute;
 public class AbsoluteJSRCycles
     extends InstructionCycles
 {
-  public AbsoluteJSRCycles(boolean read)
+  //1c
+  public AbsoluteJSRCycles()
   {
     super(Absolute,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchNewProgramCounterLow(true), new ClearNewProgramCounterBank(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchNewProgramCounterHigh(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new StackPointer(), new WriteProgramCounterHigh(), new DecrementStackPointer()),
-          new BusCycle(new StackPointer(), new WriteProgramCounterLow(), new SetProgramCounter(new NewProgramCounter())));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_NewPCL(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_NewPCH(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(S()), Write_PCH(), SP_mm()),
+          new BusCycle(Address(S()), Write_PCL(), SP_mm(), PC_e(PBR(), New_PC())));
   }
 }
 

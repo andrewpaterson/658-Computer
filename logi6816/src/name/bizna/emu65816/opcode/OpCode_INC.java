@@ -20,7 +20,7 @@ public class OpCode_INC
   protected void execute8BitIncInMemory(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     value++;
     value = toByte(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
@@ -30,7 +30,7 @@ public class OpCode_INC
   protected void execute16BitIncInMemory(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     value++;
     value = toShort(value);
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
@@ -49,7 +49,7 @@ public class OpCode_INC
           int lowerA = Binary.getLowByte(cpu.getA());
           lowerA++;
           lowerA = toByte(lowerA);
-          cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), lowerA));
+          cpu.setA(Binary.setLowByte(cpu.getA(), lowerA));
           cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lowerA);
         }
         else

@@ -76,7 +76,7 @@ public class OpCode_BIT
   protected void execute8BitBIT(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     boolean isHighestBitSet = is8bitValueNegative(value);
     boolean isNextToHighestBitSet = (value & 0x40) != 0;
 
@@ -91,7 +91,7 @@ public class OpCode_BIT
   protected void execute16BitBIT(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     boolean isHighestBitSet = (value & 0x8000) != 0;
     boolean isNextToHighestBitSet = (value & 0x4000) != 0;
 

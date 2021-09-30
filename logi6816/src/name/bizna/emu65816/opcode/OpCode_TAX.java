@@ -19,7 +19,7 @@ public class OpCode_TAX
         (cpu.isMemory16Bit() && cpu.isIndex8Bit()))
     {
       int lower8BitsOfA = Binary.getLowByte(cpu.getA());
-      cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), lower8BitsOfA));
+      cpu.setX(Binary.setLowByte(cpu.getX(), lower8BitsOfA));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
     }
     else

@@ -8,11 +8,11 @@ public class DirectCycles
   public DirectCycles(boolean read)
   {
     super(Direct,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchDirectOffset(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new DirectPageLowZero(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new ExecuteLow(true, read)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new ExecuteHigh(true, read)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_D0(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), DPL_ne_0()),
+          new BusCycle(Address(DirectPage(), D0()), ExecuteLow(read, true)),
+          new BusCycle(Address(DirectPage(), D0(), o(1)), ExecuteHigh(read, true)));
   }
 }
 

@@ -19,7 +19,7 @@ public class OpCode_TSX
     if (cpu.isIndex8Bit())
     {
       int stackPointerLower8Bits = Binary.getLowByte(stackPointer);
-      cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), stackPointerLower8Bits));
+      cpu.setX(Binary.setLowByte(cpu.getX(), stackPointerLower8Bits));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(stackPointerLower8Bits);
     }
     else

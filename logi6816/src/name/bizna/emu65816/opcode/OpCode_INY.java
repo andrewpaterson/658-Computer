@@ -23,7 +23,7 @@ public class OpCode_INY
       int lowerY = Binary.getLowByte(cpu.getY());
       lowerY++;
       lowerY = toByte(lowerY);
-      cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), lowerY));
+      cpu.setY(Binary.setLowByte(cpu.getY(), lowerY));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lowerY);
     }
     else

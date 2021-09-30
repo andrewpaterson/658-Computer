@@ -8,12 +8,12 @@ public class DirectIndexedWithXCycles
   public DirectIndexedWithXCycles(boolean read)
   {
     super(DirectIndexedWithX,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchDirectOffset(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new DirectPageLowZero(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new ExecuteLow(true, read)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new Offset(1), new ExecuteHigh(true, read)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_D0(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), DPL_ne_0()),
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(DirectPage(), D0(), X(), new Execute1()),
+          new BusCycle(Address(DirectPage(), D0(), X(), o(1), new Execute2(true, read)));
   }
 }
 

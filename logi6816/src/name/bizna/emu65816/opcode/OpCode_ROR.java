@@ -60,13 +60,13 @@ public class OpCode_ROR
 
     if (cpu.isMemory8Bit())
     {
-      int value = cpu.get8BitData();
+      int value = cpu.getDataLow();
       DO_ROR_8_BIT(cpu, value);
       cpu.storeByte(opCodeDataAddress, value);
     }
     else
     {
-      int value = cpu.get16BitData();
+      int value = cpu.getData();
       DO_ROR_16_BIT(cpu, value);
       cpu.storeTwoBytes(opCodeDataAddress, value);
     }
@@ -78,7 +78,7 @@ public class OpCode_ROR
     {
       int value = Binary.getLowByte(cpu.getA());
       DO_ROR_8_BIT(cpu, value);
-      cpu.setA(Binary.setLower8BitsOf16BitsValue(cpu.getA(), value));
+      cpu.setA(Binary.setLowByte(cpu.getA(), value));
     }
     else
     {

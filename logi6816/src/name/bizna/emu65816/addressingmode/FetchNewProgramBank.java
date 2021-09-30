@@ -3,10 +3,10 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.opcode.OpCode;
 
-public class FetchNewProgramCounterBank
+public class FetchNewProgramBank
     extends DataOperation
 {
-  public FetchNewProgramCounterBank(boolean notMemoryLock)
+  public FetchNewProgramBank(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

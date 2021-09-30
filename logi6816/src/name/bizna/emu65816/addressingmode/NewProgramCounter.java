@@ -10,12 +10,5 @@ public class NewProgramCounter
   {
     return cpu.getNewProgramCounter().getOffset();
   }
-
-  @Override
-  public int getBank(Cpu65816 cpu)
-  {
-    return cpu.getNewProgramCounter().getBank();
-  }
-
 }
 

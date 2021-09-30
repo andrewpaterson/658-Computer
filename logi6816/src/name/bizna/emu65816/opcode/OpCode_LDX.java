@@ -18,15 +18,15 @@ public class OpCode_LDX
   protected void executeLDX8Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
-    cpu.setX(Binary.setLower8BitsOf16BitsValue(cpu.getX(), value));
+    int value = cpu.getDataLow();
+    cpu.setX(Binary.setLowByte(cpu.getX(), value));
     cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
   }
 
   protected void executeLDX16Bit(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    cpu.setX(cpu.get16BitData());
+    cpu.setX(cpu.getData());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
   }
 

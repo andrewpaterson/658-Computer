@@ -15,11 +15,5 @@ public class ProgramCounter
   {
     return cpu.getProgramCounter().getOffset();
   }
-
-  @Override
-  public int getBank(Cpu65816 cpu)
-  {
-    return cpu.getProgramCounter().getBank();
-  }
 }
 

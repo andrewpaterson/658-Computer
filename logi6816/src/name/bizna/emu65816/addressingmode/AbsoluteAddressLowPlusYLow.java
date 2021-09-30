@@ -5,7 +5,7 @@ import name.bizna.emu65816.Cpu65816;
 import static name.bizna.emu65816.Binary.getLowByte;
 import static name.bizna.emu65816.Unsigned.toByte;
 
-public class AAL_YL
+public class AbsoluteAddressLowPlusYLow
     extends AddressOffset
 {
   @Override

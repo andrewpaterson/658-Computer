@@ -17,7 +17,7 @@ public class OpCode_PEI
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int operand = cpu.get16BitData();
+    int operand = cpu.getData();
     cpu.push16Bit(operand);
     int opCycles = Binary.getLowByte(cpu.getDirectPage()) != 0 ? 1 : 0;
     cpu.addToProgramAddressAndCycles(2, 6 + opCycles);

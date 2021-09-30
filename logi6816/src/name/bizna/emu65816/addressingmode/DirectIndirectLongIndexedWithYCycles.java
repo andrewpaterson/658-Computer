@@ -8,14 +8,14 @@ public class DirectIndirectLongIndexedWithYCycles
   public DirectIndirectLongIndexedWithYCycles(boolean read)
   {
     super(DirectIndirectLongIndexedWithY,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchDirectOffset(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new DirectPageLowZero(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new FetchAbsoluteAddressLow(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(1), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new Offset(2), new FetchAbsoluteAddressBank(true)),
-          new BusCycle(new AddressBank(), new AbsoluteAddress(), new YIndex(), new ExecuteLow(true, read)),
-          new BusCycle(new AddressBank(), new AbsoluteAddress(), new YIndex(), new Offset(1), new ExecuteHigh(true, read)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_D0(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), DPL_ne_0()),
+          new BusCycle(Address(DirectPage(), D0(), Read_AAL()),
+          new BusCycle(Address(DirectPage(), D0(), o(1), Read_AAH()),
+          new BusCycle(Address(DirectPage(), D0(), o(2), Read_AAB()),
+          new BusCycle(Address(AAB(), AA(), Y(), new Execute1()),
+          new BusCycle(Address(AAB(), AA(), Y(), o(1), new Execute2(true, read)));
   }
 }
 

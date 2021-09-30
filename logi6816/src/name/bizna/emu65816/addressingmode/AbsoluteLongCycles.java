@@ -5,15 +5,16 @@ import static name.bizna.emu65816.AddressingMode.AbsoluteLong;
 public class AbsoluteLongCycles
     extends InstructionCycles
 {
+  //4a
   public AbsoluteLongCycles(boolean read)
   {
     super(AbsoluteLong,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressBank(true)),
-          new BusCycle(new AddressBank(), new AbsoluteAddress(), new ExecuteLow(read, true)),
-          new BusCycle(new AddressBank(), new AbsoluteAddress(), new Offset(1), new ExecuteHigh(read, true)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAB(), PC_pp()),
+          new BusCycle(Address(AAB(), AA()), ExecuteLow(read, true)),
+          new BusCycle(Address(AAB(), AA(), o(1)), ExecuteHigh(read, true)));
   }
 }
 

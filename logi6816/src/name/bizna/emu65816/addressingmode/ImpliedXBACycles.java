@@ -8,9 +8,9 @@ public class ImpliedXBACycles
   public ImpliedXBACycles()
   {
     super(Immediate,
-          new BusCycle(new ProgramCounter(), new FetchOpCode()),
-          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)));
+          new BusCycle(Address(PBR(), PC()), OpCode()),
+          new BusCycle(Address(PBR(), PC()), new Execute1()),
+          new BusCycle(Address(PBR(), PC()), IO()));
   }
 }
 

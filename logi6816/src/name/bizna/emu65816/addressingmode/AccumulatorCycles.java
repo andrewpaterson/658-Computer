@@ -1,15 +1,16 @@
 package name.bizna.emu65816.addressingmode;
 
-import name.bizna.emu65816.AddressingMode;
+import static name.bizna.emu65816.AddressingMode.Accumulator;
 
-public class Accumulator
+public class AccumulatorCycles
     extends InstructionCycles
 {
-  public Accumulator()
+  //8
+  public AccumulatorCycles()
   {
-    super(AddressingMode.Accumulator,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)));
+    super(Accumulator,
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), new Execute1(), new Execute2()));
   }
 }
 

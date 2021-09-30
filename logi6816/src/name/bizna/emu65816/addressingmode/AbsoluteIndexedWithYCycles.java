@@ -1,19 +1,21 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.AbsoluteIndexedWithX;
+import static name.bizna.emu65816.AddressingMode.AbsoluteIndexedWithY;
 
-public class AbsoluteIndexedWithXCycles
+public class AbsoluteIndexedWithYCycles
     extends InstructionCycles
 {
-  public AbsoluteIndexedWithXCycles(boolean read)
+  //7
+  public AbsoluteIndexedWithYCycles(boolean read)
   {
-    super(AbsoluteIndexedWithX,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressLow(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new DataBank(), new AbsoluteAddressHigh(), new AbsoluteAddressLowPlusX(), new NoteFour(true, read)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new XIndex(), new ExecuteLow(read, true)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new XIndex(), new Offset(1), new ExecuteHigh(read, true)));
+    super(AbsoluteIndexedWithY,
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_pp()),
+          new BusCycle(Address(DBR(), AAH(), AAL_YL()), new NoteFour(true, read)),
+          new BusCycle(Address(DBR(), AA(), Y()), ExecuteLow(read, true)),
+          new BusCycle(Address(DBR(), AA(), Y(), o(1)), ExecuteHigh(read, true)));
   }
+
 }
 

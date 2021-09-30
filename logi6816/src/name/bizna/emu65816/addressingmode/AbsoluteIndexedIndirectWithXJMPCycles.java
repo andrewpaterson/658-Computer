@@ -5,15 +5,16 @@ import static name.bizna.emu65816.AddressingMode.AbsoluteIndexedIndirectWithX;
 public class AbsoluteIndexedIndirectWithXJMPCycles
     extends InstructionCycles
 {
-  public AbsoluteIndexedIndirectWithXJMPCycles(boolean read)
+  //2a
+  public AbsoluteIndexedIndirectWithXJMPCycles()
   {
     super(AbsoluteIndexedIndirectWithX,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchNewProgramCounterLow(true), new ClearNewProgramCounterBank(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchNewProgramCounterHigh(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new ProgramBank(), new AbsoluteAddress(), new XIndex(), new FetchNewProgramCounterLow(true)),
-          new BusCycle(new ProgramBank(), new AbsoluteAddress(), new XIndex(), new Offset(1), new FetchNewProgramCounterHigh(true), new SetProgramCounter(new NewProgramCounter())));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(PBR(), AA(), X()), Read_NewPCL()),
+          new BusCycle(Address(PBR(), AA(), X(), o(1)), Read_NewPCH(), new SetProgramCounter(PBR(), New_PC())));
   }
 }
 

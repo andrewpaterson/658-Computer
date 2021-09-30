@@ -2,23 +2,21 @@ package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.StackHardwareInterruptCycles;
+import name.bizna.emu65816.interrupt.NMIVector;
 
-public class NonMaskableInterrupt
+public class OpCode_NMI
     extends OpCode
 {
-  public NonMaskableInterrupt(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_NMI()
   {
-    super(mName, mCode, mAddressingMode);
+    super("NMI", "Non-maskable interrupt.", -1, new StackHardwareInterruptCycles(new NMIVector()));
   }
 
   @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
+  public void execute1(Cpu65816 cpu)
   {
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
+    cpu.nonMaskableInterrupt();
   }
 }
 

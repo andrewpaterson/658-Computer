@@ -18,7 +18,7 @@ public class OpCode_TXY
     if (cpu.isIndex8Bit())
     {
       int value = Binary.getLowByte(cpu.getX());
-      cpu.setY(Binary.setLower8BitsOf16BitsValue(cpu.getY(), value));
+      cpu.setY(Binary.setLowByte(cpu.getY(), value));
       cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
     }
     else

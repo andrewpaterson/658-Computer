@@ -2,13 +2,13 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class NewProgramCounter
+public class NewProgramBank
     extends AddressOffset
 {
   @Override
   public int getOffset(Cpu65816 cpu)
   {
-    return cpu.getNewProgramCounter().getOffset();
+    return 0;
   }
 
   @Override
@@ -16,6 +16,5 @@ public class NewProgramCounter
   {
     return cpu.getNewProgramCounter().getBank();
   }
-
 }
 

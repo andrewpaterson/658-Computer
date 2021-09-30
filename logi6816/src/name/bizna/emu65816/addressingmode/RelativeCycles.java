@@ -8,9 +8,10 @@ public class RelativeCycles
   public RelativeCycles()
   {
     super(Relative,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchRelativeOffsetLow()),
-          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)));  //Skip if branch not taken.
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
+          new BusCycle(Address(PBR(), PC()), new FetchRelativeOffsetLow()),
+          new BusCycle(Address(PBR(), PC()), new Execute1()),
+          new BusCycle(Address(PBR(), PC()), new NoteSix(true)));
   }
 }
 

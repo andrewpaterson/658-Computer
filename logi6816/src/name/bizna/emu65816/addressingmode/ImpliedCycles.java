@@ -8,8 +8,8 @@ public class ImpliedCycles
   public ImpliedCycles()
   {
     super(Immediate,
-          new BusCycle(new ProgramCounter(), new FetchOpCode()),
-          new BusCycle(new ProgramCounter(), new ExecuteLow(true, true)));
+          new BusCycle(Address(PBR(), PC()), OpCode()),
+          new BusCycle(Address(PBR(), PC()), new Execute1()));
   }
 }
 

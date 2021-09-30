@@ -20,7 +20,7 @@ public class OpCode_TRB
   protected void execute8BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get8BitData();
+    int value = cpu.getDataLow();
     int lowerA = Binary.getLowByte(cpu.getA());
     int result = toByte(value & ~lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
@@ -30,7 +30,7 @@ public class OpCode_TRB
   protected void execute16BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.get16BitData();
+    int value = cpu.getData();
     int result = toShort(value & ~cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);

@@ -1,9 +1,10 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.opcode.OpCode;
 
 public class InternalOperation
-    extends DataBusCycleOperation
+    extends DataOperation
 {
   public InternalOperation(boolean notMemoryLock)
   {
@@ -16,7 +17,7 @@ public class InternalOperation
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, OpCode opCode)
   {
   }
 }

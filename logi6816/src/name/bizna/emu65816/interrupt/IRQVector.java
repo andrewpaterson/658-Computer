@@ -2,7 +2,7 @@ package name.bizna.emu65816.interrupt;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class AbortVector
+public class IRQVector
     extends InterruptVector
 {
   @Override
@@ -10,11 +10,11 @@ public class AbortVector
   {
     if (cpu.isEmulationMode())
     {
-      return 0xfff8;
+      return 0xfffe;
     }
     else
     {
-      return 0xffe8;
+      return 0xffee;
     }
   }
 }

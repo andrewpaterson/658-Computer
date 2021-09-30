@@ -1,13 +1,14 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.interrupt.InterruptVector;
 
-public class InterruptVector
+public class InterruptAddress
     extends AddressOffset
 {
-  private int interruptVector;
+  private final InterruptVector interruptVector;
 
-  public InterruptVector(int interruptVector)
+  public InterruptAddress(InterruptVector interruptVector)
   {
     this.interruptVector = interruptVector;
   }
@@ -15,7 +16,7 @@ public class InterruptVector
   @Override
   public int getOffset(Cpu65816 cpu)
   {
-    return interruptVector;
+    return interruptVector.getAddress(cpu);
   }
 }
 

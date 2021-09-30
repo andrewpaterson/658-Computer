@@ -1,11 +1,10 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
-
-import static name.bizna.emu65816.Unsigned.toByte;
+import name.bizna.emu65816.opcode.OpCode;
 
 public class FetchDataLow
-    extends DataBusCycleOperation
+    extends DataOperation
 {
   public FetchDataLow(boolean notMemoryLock)
   {
@@ -13,7 +12,7 @@ public class FetchDataLow
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(Cpu65816 cpu, OpCode opCode)
   {
     cpu.setDataLow(cpu.getPinData());
   }

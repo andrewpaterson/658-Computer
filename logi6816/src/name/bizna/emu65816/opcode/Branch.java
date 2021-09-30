@@ -12,7 +12,7 @@ public class Branch
   public static int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu, AddressingMode addressingMode)
   {
     int opCycles = 2;
-    int destination = cpu.get8BitData(cpu.getAddressOfOpCodeData(addressingMode));
+    int destination = 0;
     // This is the address of the next instruction
     int actualDestination;
     if (condition)

@@ -2,7 +2,7 @@ package name.bizna.emu65816.interrupt;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class IRQVector
+public class BRKVector
     extends InterruptVector
 {
   @Override
@@ -14,7 +14,7 @@ public class IRQVector
     }
     else
     {
-      return 0xffee;
+      return 0xffe6;
     }
   }
 }

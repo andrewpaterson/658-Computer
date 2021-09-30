@@ -8,14 +8,14 @@ public class DirectIndexedIndirectWithXCycles
   public DirectIndexedIndirectWithXCycles(boolean read)
   {
     super(DirectIndexedIndirectWithX,
-          new BusCycle(new ProgramCounter(), new FetchOpCode(), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new FetchDirectOffset(true), new IncrementProgramCounter()),
-          new BusCycle(new ProgramCounter(), new DirectPageLowZero(true)),
-          new BusCycle(new ProgramCounter(), new InternalOperation(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new FetchAbsoluteAddressLow(true)),
-          new BusCycle(new DirectPage(), new DirectOffset(), new XIndex(), new Offset(1), new FetchAbsoluteAddressHigh(true)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new ExecuteLow(true, read)),
-          new BusCycle(new DataBank(), new AbsoluteAddress(), new Offset(1), new ExecuteLow(true, read)));
+          new BusCycle(Address(PBR(), PC()), Operation(OpCode(), PC_pp())),
+          new BusCycle(Address(PBR(), PC()), Operation(Read_D0(), PC_pp())),
+          new BusCycle(Address(PBR(), PC()), Operation(DPL_ne_0())),
+          new BusCycle(Address(PBR(), PC()), Operation(IO())),
+          new BusCycle(Address(DirectPage(), D0(), X()), Operation(Read_AAL())),
+          new BusCycle(Address(DirectPage(), D0(), X(), o(1)), Operation(Read_AAH())),
+          new BusCycle(Address(DBR(), AA()), ExecuteLow(read, true)),
+          new BusCycle(Address(DBR(), AA(), o(1)), ExecuteHigh(read, true)));
   }
 }
 

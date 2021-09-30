@@ -16,7 +16,7 @@ public abstract class AddressOffset
   }
 
   @Override
-  public boolean isAddressOffset()
+  public boolean isAddress()
   {
     return true;
   }

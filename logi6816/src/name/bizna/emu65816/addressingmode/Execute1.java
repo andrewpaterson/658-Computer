@@ -3,18 +3,20 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.opcode.OpCode;
 
-public class Fetch_New_PCL
-    extends DataOperation
+public class Execute
+    extends Operation
 {
-  public Fetch_New_PCL(boolean notMemoryLock)
+  private final int executeCycle;
+
+  public Execute(int executeCycle)
   {
-    super(false, true, notMemoryLock, true, true);
+    this.executeCycle = executeCycle;
   }
 
   @Override
   public void execute(Cpu65816 cpu, OpCode opCode)
   {
-    cpu.setNewProgramCounterLow(cpu.getPinData());
+    opCode.execute(cpu, executeCycle);
   }
 }
 

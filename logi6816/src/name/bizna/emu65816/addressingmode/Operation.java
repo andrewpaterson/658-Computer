@@ -14,12 +14,12 @@ public abstract class CycleOperation
   }
 
   @Override
-  public boolean isAddressOffset()
+  public boolean isAddress()
   {
     return false;
   }
 
-  public boolean isDataBus()
+  public boolean isData()
   {
     return false;
   }

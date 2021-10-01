@@ -8,9 +8,9 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_XCE
     extends OpCode
 {
-  public OpCode_XCE(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_XCE(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   @Override

@@ -9,7 +9,10 @@ public class OpCode_RES
 {
   public OpCode_RES()
   {
-    super("RES", "Reset the CPU.", -1, new StackResetCycles(new ResetVector()));
+    super("RES",
+          "Reset the CPU.",
+          -1,
+          new StackResetCycles(new ResetVector()));
   }
 
   @Override

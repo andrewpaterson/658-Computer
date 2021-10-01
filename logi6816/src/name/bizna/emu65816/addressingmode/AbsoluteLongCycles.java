@@ -9,12 +9,12 @@ public class AbsoluteLongCycles
   public AbsoluteLongCycles(boolean read)
   {
     super(AbsoluteLong,
-          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_AAB(), PC_pp()),
-          new BusCycle(Address(AAB(), AA()), ExecuteLow(read, true)),
-          new BusCycle(Address(AAB(), AA(), o(1)), ExecuteHigh(read, true)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_AAB(), PC_inc()),
+          new BusCycle(Address(AAB(), AA()), ExecuteLow_DoneIf8Bit(read)),
+          new BusCycle(Address(AAB(), AA(), o(1)), ExecuteHigh_DoneIf16Bit(read)));
   }
 }
 

@@ -10,7 +10,10 @@ public class OpCode_NMI
 {
   public OpCode_NMI()
   {
-    super("NMI", "Non-maskable interrupt.", -1, new StackHardwareInterruptCycles(new NMIVector()));
+    super("NMI",
+          "Non-maskable interrupt.",
+          -1,
+          new StackHardwareInterruptCycles(new NMIVector()));
   }
 
   @Override

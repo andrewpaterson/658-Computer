@@ -7,9 +7,9 @@ import name.bizna.emu65816.Cpu65816;
 public class OpCode_TAX
     extends OpCode
 {
-  public OpCode_TAX(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_TAX(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   @Override

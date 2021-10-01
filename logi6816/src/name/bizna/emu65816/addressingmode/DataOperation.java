@@ -20,11 +20,6 @@ public abstract class DataOperation
     this.notVectorPull = notVectorPull;
   }
 
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return false;
-  }
-
   @Override
   public boolean isData()
   {

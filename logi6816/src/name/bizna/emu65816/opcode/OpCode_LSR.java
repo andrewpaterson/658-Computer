@@ -12,9 +12,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_LSR
     extends OpCode
 {
-  public OpCode_LSR(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_LSR(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   void DO_LSR_8_BIT(Cpu65816 cpu, int value)

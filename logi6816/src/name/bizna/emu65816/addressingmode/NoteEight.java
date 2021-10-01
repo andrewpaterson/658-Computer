@@ -7,19 +7,13 @@ import static name.bizna.emu65816.OpCodeName.REP_Immediate;
 import static name.bizna.emu65816.OpCodeName.SEP_Immediate;
 
 public class NoteEight
-    extends DataOperation
+    extends Operation
 {
-  public NoteEight()
-  {
-    super(false, true, true, true, true);
-  }
-
   @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
+  public boolean mustExecute(Cpu65816 cpu)
   {
-    OpCode opCode = cpu.getOpCode();
-    boolean sepOrRep = opCode.getCode() == SEP_Immediate || opCode.getCode() == REP_Immediate;
-    return !(cpu.isMemory8Bit() || sepOrRep);
+    int opCode = cpu.getOpCode().getCode();
+    return opCode == SEP_Immediate || opCode == REP_Immediate;
   }
 
   @Override

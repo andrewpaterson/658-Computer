@@ -8,9 +8,9 @@ import static name.bizna.emu65816.opcode.Branch.executeBranchShortOnCondition;
 public class OpCode_BVS
     extends OpCode
 {
-  public OpCode_BVS(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_BVS(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   @Override

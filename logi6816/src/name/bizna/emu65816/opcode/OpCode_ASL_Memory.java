@@ -27,39 +27,7 @@ public class OpCode_ASL_Memory
       case ASL_AbsoluteIndexedWithX:
       case ASL_DirectPageIndexedWithX:
       {
-        if (cpu.isMemory8Bit())
-        {
-          int operand = cpu.getData();
-          boolean carry = is8bitValueNegative(operand);
-          operand = toByte(operand << 1);
-          cpu.getCpuStatus().setCarryFlag(carry);
-          cpu.setData(operand);
-        }
-        break;
-      }
-      default:
-        throw new IllegalStateException("Unexpected value: " + getCode());
-    }
-  }
-
-  @Override
-  public void execute2(Cpu65816 cpu)
-  {
-    switch (getCode())
-    {
-      case ASL_Absolute:
-      case ASL_DirectPage:
-      case ASL_AbsoluteIndexedWithX:
-      case ASL_DirectPageIndexedWithX:
-      {
-        if (cpu.isMemory16Bit())
-        {
-          int operand = cpu.getData();
-          boolean carry = (operand & 0x8000) != 0;
-          operand = toShort(operand << 1);
-          cpu.getCpuStatus().setCarryFlag(carry);
-          cpu.setData(operand);
-        }
+        cpu.shiftLeftData();
         break;
       }
       default:

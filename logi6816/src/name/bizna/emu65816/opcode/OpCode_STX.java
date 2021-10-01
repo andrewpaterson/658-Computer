@@ -10,9 +10,9 @@ import static name.bizna.emu65816.OpCodeName.*;
 public class OpCode_STX
     extends OpCode
 {
-  public OpCode_STX(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_STX(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   @Override

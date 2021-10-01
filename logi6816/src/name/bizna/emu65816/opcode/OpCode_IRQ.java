@@ -9,7 +9,10 @@ public class OpCode_IRQ
 {
   public OpCode_IRQ()
   {
-    super("IRQ", "Interrupt request.", -1, new StackHardwareInterruptCycles(new IRQVector()));
+    super("IRQ",
+          "Interrupt request.",
+          -1,
+          new StackHardwareInterruptCycles(new IRQVector()));
   }
 
   @Override

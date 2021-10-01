@@ -1,35 +1,32 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
-import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_PHX
     extends OpCode
 {
-  public OpCode_PHX(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_PHX(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super("PHX", "Push Index X on Stack", mCode, cycles);
   }
 
   @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
+  public void execute1(Cpu65816 cpu)
   {
     if (cpu.isIndex8Bit())
     {
-      cpu.push8Bit(Binary.getLowByte(cpu.getX()));
-      cpu.addToProgramAddressAndCycles(1, 3);
-    }
-    else
-    {
-      cpu.push16Bit(cpu.getX());
-      cpu.addToProgramAddressAndCycles(1, 4);
+      cpu.setData(cpu.getX());
     }
   }
 
   @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
+  public void execute2(Cpu65816 cpu)
   {
+    if (cpu.isIndex16Bit())
+    {
+      cpu.setData(cpu.getX());
+    }
   }
 }
 

@@ -12,12 +12,6 @@ public class WriteDataHigh
   }
 
   @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return cpu.isMemory8Bit();
-  }
-
-  @Override
   public void execute(Cpu65816 cpu, OpCode opCode)
   {
     cpu.setPinsData(cpu.getDataHigh());

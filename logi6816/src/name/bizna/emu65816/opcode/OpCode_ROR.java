@@ -12,9 +12,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_ROR
     extends OpCode
 {
-  public OpCode_ROR(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_ROR(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   void DO_ROR_8_BIT(Cpu65816 cpu, int value)

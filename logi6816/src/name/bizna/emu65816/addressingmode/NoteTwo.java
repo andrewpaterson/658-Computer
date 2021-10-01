@@ -5,16 +5,16 @@ import name.bizna.emu65816.opcode.OpCode;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
-public class DirectPageLowZero
+public class NoteTwo
     extends DataOperation
 {
-  public DirectPageLowZero(boolean notMemoryLock)
+  public NoteTwo()
   {
-    super(false, false, notMemoryLock, true, true);
+    super(false, false, true, true, true);
   }
 
   @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
+  public boolean mustExecute(Cpu65816 cpu)
   {
     return toByte(cpu.getDirectPage()) == 0;
   }

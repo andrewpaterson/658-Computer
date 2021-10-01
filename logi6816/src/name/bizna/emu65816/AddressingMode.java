@@ -20,16 +20,20 @@ public enum AddressingMode
   DirectIndexedIndirectWithX,
   DirectIndirectIndexedWithY,
   DirectIndirectLongIndexedWithY,
+  OpCode,
   Implied,
   Immediate,
   StackInterruptSoftware,
   StackInterruptHardware,
   StackImplied,
-  StackRelative,
+  Stack,
   StackAbsolute,
   StackDirectIndirect,
+  StackRelative,
   StackRelativeIndirectIndexedWithY,
+  StopTheClock,
   Relative,
-  RelativeLong
+  RelativeLong,
+  WaitForInterrupt
 }
 

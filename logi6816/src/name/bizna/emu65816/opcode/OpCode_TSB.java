@@ -11,9 +11,9 @@ import static name.bizna.emu65816.Unsigned.toByte;
 public class OpCode_TSB
     extends OpCode
 {
-  public OpCode_TSB(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_TSB(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   protected void execute8BitTSB(Cpu65816 cpu)

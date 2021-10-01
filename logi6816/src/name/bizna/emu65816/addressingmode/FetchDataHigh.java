@@ -6,15 +6,9 @@ import name.bizna.emu65816.opcode.OpCode;
 public class FetchDataHigh
     extends DataOperation
 {
-  public FetchDataHigh(boolean notMemoryLock)
+  protected FetchDataHigh(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
-  }
-
-  @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return cpu.isMemory8Bit();
   }
 
   @Override

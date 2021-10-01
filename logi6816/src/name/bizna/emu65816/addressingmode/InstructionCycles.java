@@ -8,6 +8,8 @@ import name.bizna.emu65816.opcode.OpCode;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class InstructionCycles
 {
@@ -33,11 +35,6 @@ public abstract class InstructionCycles
     return new StackPointer();
   }
 
-  protected static StackOffset StackOffset()
-  {
-    return new StackOffset();
-  }
-
   protected static AddressOffset[] Address(AddressOffset... addressOffsets)
   {
     return addressOffsets;
@@ -48,28 +45,38 @@ public abstract class InstructionCycles
     return operations;
   }
 
-  protected static Operation[] ExecuteLow(boolean read, boolean notMemoryLock)
+  protected static Operation[] ExecuteLow_DoneIf8Bit(boolean read)
   {
     if (read)
     {
-      return InstructionCycles.Operation(new FetchDataLow(notMemoryLock), new Execute1());
+      return InstructionCycles.Operation(Read_DataLow(), new Execute1(), new DoneInstructionIf8BitMemory());
     }
     else
     {
-      return InstructionCycles.Operation(new Execute1(), new WriteDataLow(notMemoryLock));
+      return InstructionCycles.Operation(new Execute1(), Write_DataLow(), new DoneInstructionIf8BitMemory());
     }
   }
 
-  protected static Operation[] ExecuteHigh(boolean read, boolean notMemoryLock)
+  protected static Operation[] ExecuteHigh_DoneIf16Bit(boolean read)
   {
     if (read)
     {
-      return InstructionCycles.Operation(new FetchDataHigh(notMemoryLock), new Execute2());
+      return InstructionCycles.Operation(Read_DataHigh(), new Execute2(), new DoneInstructionIf16BitMemory());
     }
     else
     {
-      return InstructionCycles.Operation(new Execute2(), new WriteDataHigh(notMemoryLock));
+      return InstructionCycles.Operation(new Execute2(), Write_DataHigh(), new NoteOne(), new DoneInstructionIf16BitMemory());
     }
+  }
+
+  protected static WriteDataHigh Write_DataHigh()
+  {
+    return Write_DataHigh(true);
+  }
+
+  protected static WriteDataHigh Write_DataHigh(boolean notMemoryLock)
+  {
+    return new WriteDataHigh(notMemoryLock);
   }
 
   protected static ProgramBank PBR()
@@ -107,7 +114,7 @@ public abstract class InstructionCycles
     return new AbsoluteAddressHigh();
   }
 
-  protected static InterruptAddress InterruptAddress(InterruptVector interruptVector)
+  protected static InterruptAddress VA(InterruptVector interruptVector)
   {
     return new InterruptAddress(interruptVector);
   }
@@ -117,7 +124,7 @@ public abstract class InstructionCycles
     return new DirectOffset();
   }
 
-  protected static DirectPage DirectPage()
+  protected static DirectPage DP()
   {
     return new DirectPage();
   }
@@ -142,14 +149,24 @@ public abstract class InstructionCycles
     return new FetchOpCode();
   }
 
-  protected static IncrementProgramCounter PC_pp()
+  protected static IncrementProgramCounter PC_inc()
   {
     return new IncrementProgramCounter();
   }
 
-  protected static DecrementStackPointer SP_mm()
+  protected static DecrementProgramCounter PC_dec()
+  {
+    return new DecrementProgramCounter();
+  }
+
+  protected static DecrementStackPointer SP_dec()
   {
     return new DecrementStackPointer();
+  }
+
+  protected static IncrementStackPointer SP_inc()
+  {
+    return new IncrementStackPointer();
   }
 
   protected static WriteProgramBank Write_PBR()
@@ -222,11 +239,6 @@ public abstract class InstructionCycles
     return DirectOffset();
   }
 
-  protected static DirectPageLowZero DPL_ne_0()
-  {
-    return new DirectPageLowZero(true);
-  }
-
   protected static FetchDirectOffset Read_D0()
   {
     return new FetchDirectOffset(true);
@@ -235,6 +247,11 @@ public abstract class InstructionCycles
   protected static FetchAbsoluteAddressBank Read_AAB()
   {
     return new FetchAbsoluteAddressBank(true);
+  }
+
+  protected static FetchDataBank Read_DBR()
+  {
+    return new FetchDataBank(true);
   }
 
   protected static WriteProcessorStatus Write_PS()
@@ -252,6 +269,11 @@ public abstract class InstructionCycles
     return new InternalOperation(notMemoryLock);
   }
 
+  protected static FetchDataHigh Read_DataHigh()
+  {
+    return Read_DataHigh(true);
+  }
+
   protected static FetchDataHigh Read_DataHigh(boolean notMemoryLock)
   {
     return new FetchDataHigh(notMemoryLock);
@@ -262,12 +284,82 @@ public abstract class InstructionCycles
     return new FetchDataLow(notMemoryLock);
   }
 
+  protected static FetchDataLow Read_DataLow()
+  {
+    return Read_DataLow(true);
+  }
+
+  protected static WriteDataLow Write_DataLow()
+  {
+    return Write_DataLow(true);
+  }
+
+  protected static FetchDirectOffset Read_D0(boolean notMemoryLock)
+  {
+    return new FetchDirectOffset(notMemoryLock);
+  }
+
+  protected static WriteDataLow Write_DataLow(boolean notMemoryLock)
+  {
+    return new WriteDataLow(notMemoryLock);
+  }
+
+  protected static DoneInstruction DONE()
+  {
+    return new DoneInstruction();
+  }
+
+  protected static Operation[] ExecuteRMWLow_Done()
+  {
+    return new Operation[]{new Execute1(), Write_DataLow(RMW), DONE()};
+  }
+
+  protected static Operation[] ExecuteRMWHigh()
+  {
+    return new Operation[]{new Execute2(), Write_DataHigh(RMW), new NoteOne()};
+  }
+
+  protected static RelativeOffset R()
+  {
+    return new RelativeOffset();
+  }
+
+  protected static FetchRelativeOffsetHigh Read_RH()
+  {
+    return new FetchRelativeOffsetHigh();
+  }
+
+  protected static FetchRelativeOffsetLow Read_RL()
+  {
+    return new FetchRelativeOffsetLow();
+  }
+
+  protected static SetProgramBank PBR_e(int bank)
+  {
+    return new SetProgramBank(bank);
+  }
+
+  public static WriteAbsoluteAddressLow Write_AAL()
+  {
+    return new WriteAbsoluteAddressLow();
+  }
+
+  public static WriteAbsoluteAddressHigh Write_AAH()
+  {
+    return new WriteAbsoluteAddressHigh();
+  }
+
+  protected static ExecuteOnCpu E(Consumer<Cpu65816> consumer)
+  {
+    return new ExecuteOnCpu(consumer);
+  }
+
   public AddressingMode getAddressingMode()
   {
     return addressingMode;
   }
 
-  public void executeOnFallingEdge(Cpu65816 cpu)
+  public final void executeOnFallingEdge(Cpu65816 cpu)
   {
     BusCycle busCycle = cycles.get(cpu.getCycle());
     Address address = busCycle.getAddress(cpu);
@@ -275,7 +367,7 @@ public abstract class InstructionCycles
     cpu.setPinsData(address.getBank());
   }
 
-  public void executeOnRisingEdge(Cpu65816 cpu, OpCode opCode)
+  public final void executeOnRisingEdge(Cpu65816 cpu, OpCode opCode)
   {
     BusCycle busCycle = cycles.get(cpu.getCycle());
     List<Operation> operations = busCycle.getOperations();

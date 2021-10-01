@@ -12,9 +12,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_EOR
     extends OpCode
 {
-  public OpCode_EOR(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_EOR(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   protected void executeEOR8Bit(Cpu65816 cpu)

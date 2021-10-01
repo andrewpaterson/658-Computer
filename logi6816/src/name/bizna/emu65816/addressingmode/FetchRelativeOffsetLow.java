@@ -14,6 +14,7 @@ public class FetchRelativeOffsetLow
   @Override
   public void execute(Cpu65816 cpu, OpCode opCode)
   {
+    cpu.clearRelativeOffsetHigh();
     cpu.setRelativeOffsetLow(cpu.getPinData());
   }
 }

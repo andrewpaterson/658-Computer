@@ -3,47 +3,25 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_MVP
     extends OpCode
 {
-  public OpCode_MVP(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_MVP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super("MVP", "Block move previous...", mCode, cycles);
   }
 
   @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
+  public void execute1(Cpu65816 cpu)
   {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int destinationBank = cpu.getDataLow();
-    addressOfOpCodeData.incrementOffsetBy(1);
-    int sourceBank = cpu.getDataLow();
-
-    Address sourceAddress = new Address(sourceBank, cpu.getX());
-    Address destinationAddress = new Address(destinationBank, cpu.getY());
-
-    while (cpu.getA() != 0xFFFF)
+    if (!cpu.blockMovePrevious())
     {
-      int toTransfer = cpu.getDataLow();
-      cpu.storeByte(destinationAddress, toTransfer);
-
-      sourceAddress.decrementOffsetBy(1);
-      destinationAddress.decrementOffsetBy(1);
-      cpu.accumulator--;
-      cpu.accumulator = toShort(cpu.accumulator);
-
-      cpu.addToCycles(7);
+      cpu.doneInstruction();
     }
-    cpu.setDataBank(destinationBank);
-    cpu.addToProgramAddress(3);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -12,9 +12,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_CMP
     extends OpCode
 {
-  public OpCode_CMP(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_CMP(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   protected void execute8BitCMP(Cpu65816 cpu)

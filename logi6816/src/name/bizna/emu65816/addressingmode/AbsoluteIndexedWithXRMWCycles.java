@@ -9,15 +9,15 @@ public class AbsoluteIndexedWithXRMWCycles
   public AbsoluteIndexedWithXRMWCycles()
   {
     super(AbsoluteIndexedWithX,
-          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_AAL(RMW), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_AAH(RMW), PC_pp()),
-          new BusCycle(Address(DBR(), AAH(), AAL_XL()), IO(false)),
-          new BusCycle(Address(DBR(), AA(), X()), Read_DataLow(false)),
-          new BusCycle(Address(DBR(), AA(), X(), o(1)), Read_DataHigh(false)),
-          new BusCycle(Address(DBR(), AA(), X(), o(1)), IO(false)),
-          new BusCycle(Address(DBR(), AA(), X(), o(1)), new Execute2(), new WriteDataHigh(false)),
-          new BusCycle(Address(DBR(), AA(), X()), new Execute1(), new WriteDataLow(false)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_AAL(RMW), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_AAH(RMW), PC_inc()),
+          new BusCycle(Address(DBR(), AAH(), AAL_XL()), IO(RMW)),
+          new BusCycle(Address(DBR(), AA(), X()), Read_DataLow(RMW)),
+          new BusCycle(Address(DBR(), AA(), X(), o(1)), Read_DataHigh(RMW), new NoteOne()),
+          new BusCycle(Address(DBR(), AA(), X(), o(1)), IO(RMW)),
+          new BusCycle(Address(DBR(), AA(), X(), o(1)), ExecuteRMWHigh()),
+          new BusCycle(Address(DBR(), AA(), X()), ExecuteRMWLow_Done()));
   }
 }
 

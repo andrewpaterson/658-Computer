@@ -9,7 +9,10 @@ public class OpCode_ABORT
 {
   public OpCode_ABORT()
   {
-    super("ABORT", "Stop the current instruction and return processor status to what it was prior to the current instruction.", -1, new StackHardwareInterruptCycles(new AbortVector()));
+    super("ABORT",
+          "Stop the current instruction and return processor status to what it was prior to the current instruction.",
+          -1,
+          new StackHardwareInterruptCycles(new AbortVector()));
   }
 
   @Override

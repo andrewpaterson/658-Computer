@@ -11,9 +11,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_CPY
     extends OpCode
 {
-  public OpCode_CPY(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_CPY(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   protected void execute8BitCPY(Cpu65816 cpu)

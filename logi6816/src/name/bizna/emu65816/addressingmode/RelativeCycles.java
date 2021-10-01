@@ -5,13 +5,14 @@ import static name.bizna.emu65816.AddressingMode.Relative;
 public class RelativeCycles
     extends InstructionCycles
 {
+  //20
   public RelativeCycles()
   {
     super(Relative,
-          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), new FetchRelativeOffsetLow()),
-          new BusCycle(Address(PBR(), PC()), new Execute1()),
-          new BusCycle(Address(PBR(), PC()), new NoteSix(true)));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_RL(), PC_inc(), new Execute1()),  //Done if branch not taken
+          new BusCycle(Address(PBR(), PC()), new NoteSix()),
+          new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), R()), DONE()));
   }
 }
 

@@ -10,9 +10,9 @@ import static name.bizna.emu65816.OpCodeName.*;
 public class OpCode_LDX
     extends OpCode
 {
-  public OpCode_LDX(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_LDX(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   protected void executeLDX8Bit(Cpu65816 cpu)

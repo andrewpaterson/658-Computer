@@ -9,8 +9,8 @@ public class AccumulatorCycles
   public AccumulatorCycles()
   {
     super(Accumulator,
-          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), new Execute1(), new Execute2()));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), new Execute1(), new Execute2(), DONE()));
   }
 }
 

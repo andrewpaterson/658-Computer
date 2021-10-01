@@ -2,13 +2,13 @@ package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
 
-public class StackOffset
+public class RelativeOffset
     extends AddressOffset
 {
   @Override
   public int getOffset(Cpu65816 cpu)
   {
-    return cpu.getStackOffset();
+    return cpu.getRelativeOffset();
   }
 }
 

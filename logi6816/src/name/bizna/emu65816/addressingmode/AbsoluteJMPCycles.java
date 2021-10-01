@@ -9,9 +9,9 @@ public class AbsoluteJMPCycles
   public AbsoluteJMPCycles()
   {
     super(Absolute,
-          new BusCycle(Address(PBR(), PC()), OpCode(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_NewPCL(), PC_pp()),
-          new BusCycle(Address(PBR(), PC()), Read_NewPCH(), PC_pp(), new SetProgramCounter(PBR(), New_PC())));
+          new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_NewPCL(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), Read_NewPCH(), PC_inc(), new SetProgramCounter(PBR(), New_PC()), DONE()));
   }
 }
 

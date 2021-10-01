@@ -34,7 +34,7 @@ public class Cpu65816
   protected static OpCode abortOpcode;
   protected static OpCode irqOpcode;
   protected static OpCode nmiOpcode;
-  protected static OpCode fetchOpcode;
+  protected static OpCode fetchNextOpcode;
 
   protected int pinData;  //Think about this very carefully.
 
@@ -45,8 +45,6 @@ public class Cpu65816
   protected Address internalAddress;
   protected int internalData;
   protected int internalDirectOffset;
-  protected int internalImmediate;
-  protected int internalStackOffset;
   protected int relativeOffset;
   protected Address internalProgramCounter;
 
@@ -59,7 +57,7 @@ public class Cpu65816
     irqOpcode = new OpCode_IRQ();
     nmiOpcode = new OpCode_NMI();
     abortOpcode = new OpCode_ABORT();
-    fetchOpcode = new FetchOpCode("Fetch Opcode", -1, AddressingMode.Implied);
+    fetchNextOpcode = new OpCode_FetchNextOpCode();
     this.pins = pins;
     totalCyclesCounter = 0;
     accumulator = 0;
@@ -75,8 +73,6 @@ public class Cpu65816
     pinData = 0;
     internalData = 0;
     internalDirectOffset = 0;
-    internalImmediate = 0;
-    internalStackOffset = 0;
     relativeOffset = 0;
     internalProgramCounter = new Address();
     internalAddress = new Address();
@@ -274,6 +270,7 @@ public class Cpu65816
       processorStatus.setBreakFlag(true);
     }
   }
+
   public void coprocessor()
   {
     processorStatus.setInterruptDisableFlag(true);
@@ -397,6 +394,11 @@ public class Cpu65816
     }
   }
 
+  public int getRelativeOffset()
+  {
+    return relativeOffset;
+  }
+
   public int getDirectPage()
   {
     return directPage;
@@ -424,11 +426,6 @@ public class Cpu65816
     }
   }
 
-  public int getStackOffset()
-  {
-    return internalStackOffset;
-  }
-
   public void stop()
   {
     stopped = true;
@@ -442,7 +439,7 @@ public class Cpu65816
   public void doneInstruction()
   {
     cycle = -1;
-    opCode = fetchOpcode;
+    opCode = fetchNextOpcode;
   }
 
   public void nextCycle()
@@ -546,6 +543,17 @@ public class Cpu65816
     this.programAddress.offset(Sizeof.sizeofByte, true);
   }
 
+  public void decrementProgramCounter()
+  {
+    this.programAddress.offset(-Sizeof.sizeofByte, true);
+  }
+
+  public void incrementStackPointer()
+  {
+    this.stackPointer++;
+    stackPointer = toShort(stackPointer);
+  }
+
   public void decrementStackPointer()
   {
     this.stackPointer--;
@@ -557,47 +565,22 @@ public class Cpu65816
     return internalRead;
   }
 
-//  public boolean indexAcrossPage(int offset)
-//  {
-//    return Address.areOffsetsAreOnDifferentPages(address.getOffset(), address.getOffset() + offset);
-//  }
-
   public void setDirectOffset(int data)
   {
     assert8Bit(data, "Direct Offset");
     internalDirectOffset = data;
   }
 
-  public void setImmediateHigh(int data)
-  {
-    assert8Bit(data, "Immediate High");
-    internalImmediate = setHighByte(internalImmediate, data);
-  }
-
-  public void setImmediateLow(int data)
-  {
-    assert8Bit(data, "Immediate Low");
-    internalImmediate = setLowByte(internalImmediate, data);
-  }
-
-  public void setStackOffset(int data)
-  {
-    assert8Bit(data, "Stack Offset");
-    internalStackOffset = data;
-  }
-
   public void setDataLow(int data)
   {
     assert8Bit(data, "Data Low");
     internalData = setLowByte(internalData, data);
-    ;
   }
 
   public void setDataHigh(int data)
   {
     assert8Bit(data, "Data High");
     internalData = setHighByte(internalData, data);
-    ;
   }
 
   public void setRelativeOffsetLow(int data)
@@ -610,6 +593,11 @@ public class Cpu65816
   {
     assert8Bit(data, "Relative Offset High");
     relativeOffset = setHighByte(relativeOffset, data);
+  }
+
+  public void clearRelativeOffsetHigh()
+  {
+    relativeOffset = toByte(relativeOffset);
   }
 
   public void setStackPointer(int data)
@@ -679,6 +667,160 @@ public class Cpu65816
   public void setCarryFlag(boolean carry)
   {
     processorStatus.setCarryFlag(carry);
+  }
+
+  public void incrementA()
+  {
+    int a = getA();
+    a++;
+    a = trimMemory(a);
+    setA(a);
+  }
+
+  public void incrementX()
+  {
+    int x = getX();
+    x++;
+    x = trimIndex(x);
+    setX(x);
+  }
+
+  public void incrementY()
+  {
+    int y = getY();
+    y++;
+    y = trimIndex(y);
+    setY(y);
+  }
+
+  public void decrementY()
+  {
+    int y = getY();
+    y--;
+    y = trimIndex(y);
+    setY(y);
+  }
+
+  public void decrementA()
+  {
+    int a = getA();
+    a--;
+    a = trimMemory(a);
+    setA(a);
+  }
+
+  public void decrementX()
+  {
+    int x = getX();
+    x--;
+    x = trimIndex(x);
+    setX(x);
+  }
+
+  public void incrementData()
+  {
+    int operand = getData();
+    operand++;
+    operand = trimMemory(operand);
+    setData(operand);
+  }
+
+  public void decrementData()
+  {
+    int operand = getData();
+    operand--;
+    operand = trimMemory(operand);
+    setData(operand);
+  }
+
+  public void shiftLeftData()
+  {
+    int operand = getData();
+    boolean carry = isNegative(operand);
+    operand = trimMemory(operand << 1);
+    setCarryFlag(carry);
+    setData(operand);
+  }
+
+  public void shiftLeftA()
+  {
+    int a = getA();
+    boolean carry = isNegative(a);
+    a = trimMemory(a << 1);
+    setCarryFlag(carry);
+    setA(a);
+  }
+
+  public boolean blockMoveNext()
+  {
+    accumulator = toShort(accumulator--);
+    xIndex = trimIndex(xIndex++);
+    yIndex = trimIndex(yIndex++);
+
+    return accumulator != 0xffff;
+  }
+
+  public boolean blockMovePrevious()
+  {
+    accumulator = toShort(accumulator--);
+    xIndex = trimIndex(xIndex--);
+    yIndex = trimIndex(yIndex--);
+
+    return accumulator != 0xffff;
+  }
+
+  private boolean isNegative(int operand)
+  {
+    if (isMemory16Bit())
+    {
+      return is16bitValueNegative(operand);
+    }
+    else if (isMemory8Bit())
+    {
+      return is8bitValueNegative(operand);
+    }
+    return false;
+  }
+
+  private int trimMemory(int a)
+  {
+    if (isMemory16Bit())
+    {
+      a = toShort(a);
+    }
+    else if (isMemory8Bit())
+    {
+      a = toByte(a);
+    }
+    return a;
+  }
+
+  private int trimIndex(int a)
+  {
+    if (isIndex16Bit())
+    {
+      a = toShort(a);
+    }
+    else if (isIndex8Bit())
+    {
+      a = toByte(a);
+    }
+    return a;
+  }
+
+  public void PER()
+  {
+    internalData = toShort(internalData + programAddress.getOffset());  // + Carry?
+  }
+
+  public void PLD()
+  {
+    setDirectPage(internalData);
+  }
+
+  public void PLB()
+  {
+    setDataBank(getDataLow());
   }
 }
 

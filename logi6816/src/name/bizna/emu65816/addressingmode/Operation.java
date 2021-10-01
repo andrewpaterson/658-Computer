@@ -14,6 +14,11 @@ public abstract class Operation
     return true;
   }
 
+  public boolean mustExecute(Cpu65816 cpu)
+  {
+    return true;
+  }
+
   @Override
   public boolean isAddress()
   {

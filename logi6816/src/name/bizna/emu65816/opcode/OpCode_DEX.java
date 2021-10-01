@@ -10,9 +10,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_DEX
     extends OpCode
 {
-  public OpCode_DEX(String mName, int mCode, AddressingMode mAddressingMode)
+  public OpCode_DEX(String mName, int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, mAddressingMode);
+    super(mName, mCode, cycles);
   }
 
   @Override

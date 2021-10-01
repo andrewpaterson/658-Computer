@@ -16,11 +16,5 @@ public class WriteProgramBank
   {
     cpu.setPinsData(cpu.getProgramCounter().getBank());
   }
-
-  @Override
-  public boolean shouldSkipCycle(Cpu65816 cpu)
-  {
-    return cpu.isEmulationMode();
-  }
 }
 

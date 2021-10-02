@@ -6,7 +6,7 @@ public class AbsoluteLongJSLCycles
     extends InstructionCycles
 {
   //4c
-  public AbsoluteLongJSLCycles(boolean read)
+  public AbsoluteLongJSLCycles()
   {
     super(AbsoluteLong,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

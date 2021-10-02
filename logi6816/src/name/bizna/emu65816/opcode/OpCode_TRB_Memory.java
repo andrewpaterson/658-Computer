@@ -1,36 +1,37 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
+import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_TSB
+public class OpCode_TRB
     extends OpCode
 {
-  public OpCode_TSB(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_TRB(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("TRB", "Test and Reset Bit", mCode, cycles);
   }
 
-  protected void execute8BitTSB(Cpu65816 cpu)
+  protected void execute8BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getDataLow();
     int lowerA = Binary.getLowByte(cpu.getA());
-    int result = toByte(value | lowerA);
+    int result = toByte(value & ~lowerA);
     cpu.storeByte(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & lowerA) == 0);
   }
 
-  protected void execute16BitTSB(Cpu65816 cpu)
+  protected void execute16BitTRB(Cpu65816 cpu)
   {
     Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getData();
-    int result = (value | cpu.getA());
+    int result = toShort(value & ~cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);
     cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);
   }
@@ -40,29 +41,29 @@ public class OpCode_TSB
   {
     switch (getCode())
     {
-      case TSB_Absolute:                 // TSB Absolute
+      case TRB_Absolute:                 // TRB Absolute
       {
         if (cpu.isMemory8Bit())
         {
-          execute8BitTSB(cpu);
+          execute8BitTRB(cpu);
         }
         else
         {
-          execute16BitTSB(cpu);
+          execute16BitTRB(cpu);
           cpu.addToCycles(2);
         }
         cpu.addToProgramAddressAndCycles(3, 6);
         break;
       }
-      case TSB_DirectPage:                 // TSB Direct Page
+      case TRB_DirectPage:                 // TRB Direct Page
       {
         if (cpu.isMemory8Bit())
         {
-          execute8BitTSB(cpu);
+          execute8BitTRB(cpu);
         }
         else
         {
-          execute16BitTSB(cpu);
+          execute16BitTRB(cpu);
           cpu.addToCycles(2);
         }
         if (Binary.getLowByte(cpu.getDirectPage()) != 0)
@@ -75,11 +76,6 @@ public class OpCode_TSB
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

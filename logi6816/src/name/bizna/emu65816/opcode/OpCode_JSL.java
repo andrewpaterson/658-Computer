@@ -1,0 +1,53 @@
+package name.bizna.emu65816.opcode;
+
+import name.bizna.emu65816.Address;
+import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
+
+import static name.bizna.emu65816.OpCodeName.*;
+import static name.bizna.emu65816.Unsigned.toShort;
+
+public class OpCode_JSR
+    extends OpCode
+{
+  public OpCode_JSR(int mCode, InstructionCycles cycles)
+  {
+    super("JSR", "Jump to News Location Saving Return", mCode, cycles);
+  }
+
+  @Override
+  public void executeOnFallingEdge(Cpu65816 cpu)
+  {
+    switch (getCode())
+    {
+      case JSR_Absolute:  // JSR Absolute
+      {
+        cpu.push16Bit(toShort(cpu.getProgramCounter().getOffset() + 2));
+        int destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode()).getOffset();
+        cpu.setProgramAddress(new Address(cpu.getProgramCounter().getBank(), destinationAddress));
+        cpu.addToCycles(6);
+        break;
+      }
+      case JSR_AbsoluteLong:  // JSR Absolute Long
+      {
+        cpu.push8Bit(cpu.getProgramCounter().getBank());
+        cpu.push16Bit(toShort(cpu.getProgramCounter().getOffset() + 3));
+        cpu.setProgramAddress(cpu.getAddressOfOpCodeData(getAddressingMode()));
+        cpu.addToCycles(8);
+        break;
+      }
+      case JSR_AbsoluteIndexedIndirectWithX:  // JSR Absolute Indexed Indirect, X
+      {
+        Address destinationAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
+        cpu.push8Bit(cpu.getProgramCounter().getBank());
+        cpu.push16Bit(toShort(cpu.getProgramCounter().getOffset() + 2));
+        cpu.setProgramAddress(destinationAddress);
+        cpu.addToCycles(8);
+        break;
+      }
+      default:
+        throw new IllegalStateException("Unexpected value: " + getCode());
+    }
+  }
+}
+

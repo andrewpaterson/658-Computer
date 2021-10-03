@@ -27,7 +27,7 @@ public enum AddressingMode
   StackInterruptHardware,
   StackImplied,
   Stack,
-  StackAbsolute,
+  StackImmediate,
   StackDirectIndirect,
   StackRelative,
   StackRelativeIndirectIndexedWithY,

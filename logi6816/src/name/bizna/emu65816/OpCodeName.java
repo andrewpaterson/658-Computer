@@ -246,7 +246,7 @@ public class OpCodeName
   public static final int SBC_DirectPageIndirectIndexedWithY = 0xF1;
   public static final int SBC_DirectPageIndirect = 0xF2;
   public static final int SBC_StackRelativeIndirectIndexedWithY = 0xF3;
-  public static final int PEA_StackAbsolute = 0xF4;
+  public static final int PEA_StackImmediate = 0xF4;
   public static final int SBC_DirectPageIndexedWithX = 0xF5;
   public static final int INC_DirectPageIndexedWithX = 0xF6;
   public static final int SBC_DirectPageIndirectLongIndexedWithY = 0xF7;

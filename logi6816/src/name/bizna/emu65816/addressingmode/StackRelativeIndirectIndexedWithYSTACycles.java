@@ -2,10 +2,10 @@ package name.bizna.emu65816.addressingmode;
 
 import static name.bizna.emu65816.AddressingMode.StackRelativeIndirectIndexedWithY;
 
-public class StackRelativeIndirectIndexedWithYCycles
+public class StackRelativeIndirectIndexedWithYSTACycles
     extends InstructionCycles
 {
-  public StackRelativeIndirectIndexedWithYCycles()
+  public StackRelativeIndirectIndexedWithYSTACycles()
   {
     super(StackRelativeIndirectIndexedWithY,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
@@ -14,8 +14,8 @@ public class StackRelativeIndirectIndexedWithYCycles
           new BusCycle(Address(S(), D0()), Read_AAL(), SP_inc()),
           new BusCycle(Address(S(), D0(), o(1)), Read_AAH()),
           new BusCycle(Address(S(), D0(), o(1)), IO()),
-          new BusCycle(Address(DBR(), AA(), Y()), Read_DataLow(), new Execute1(), new DoneInstructionIf8BitMemory()),
-          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), new Execute2(), new DoneInstructionIf16BitMemory()));
+          new BusCycle(Address(DBR(), AA(), Y()), new Execute1(), Write_DataLow(), new DoneInstructionIf8BitMemory()),
+          new BusCycle(Address(DBR(), AA(), Y(), o(1)), new Execute2(), Write_DataHigh(), new DoneInstructionIf16BitMemory()));
   }
 }
 

@@ -12,7 +12,7 @@ public class StackSoftwareInterruptCycles
   {
     super(StackInterruptSoftware,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
-          new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
+          new BusCycle(Address(PBR(), PC()), new InternalOperation(true, false, true), PC_inc()),  //Read and ignore the signature byte.
           new BusCycle(Address(S()), Write_PBR(), SP_dec(), PBR_e(0), new NoteSeven()),
           new BusCycle(Address(S()), Write_PCH(), SP_dec()),
           new BusCycle(Address(S()), Write_PCL(), SP_dec()),

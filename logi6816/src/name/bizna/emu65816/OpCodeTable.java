@@ -17,7 +17,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BRK(BRK_Interrupt));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_COP(COP_Interrupt));
-    add(opCodes, new OpCode_ORA(ORA_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_ORA(ORA_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_TSB_Memory(TSB_DirectPage, new DirectRMWCycles()));
     add(opCodes, new OpCode_ORA(ORA_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_ASL_Memory(ASL_DirectPage, new DirectRMWCycles()));
@@ -33,7 +33,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BPL(BPL_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_ORA(ORA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_ORA(ORA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
     add(opCodes, new OpCode_TRB_Memory(TRB_DirectPage, new DirectRMWCycles()));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_ASL_Memory(ASL_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
@@ -49,7 +49,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_JSR(JSR_Absolute, new AbsoluteJSRCycles()));
     add(opCodes, new OpCode_AND(AND_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_JSR(JSL_AbsoluteLong, new AbsoluteLongJSLCycles()));
-    add(opCodes, new OpCode_AND(AND_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_AND(AND_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_BIT(BIT_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_AND(AND_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_ROL_Memory(ROL_DirectPage, new DirectRMWCycles()));
@@ -65,7 +65,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BMI(BMI_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_AND(AND_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_AND(AND_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_AND(AND_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_AND(AND_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
     add(opCodes, new OpCode_BIT(BIT_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_AND(AND_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_ROL_Memory(ROL_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
@@ -78,10 +78,10 @@ public class OpCodeTable
     add(opCodes, new OpCode_AND(AND_AbsoluteIndexedWithX, new AbsoluteIndexedWithXCycles(true)));
     add(opCodes, new OpCode_ROL_Memory(ROL_AbsoluteIndexedWithX, new AbsoluteIndexedWithXRMWCycles()));
     add(opCodes, new OpCode_AND(AND_AbsoluteLongIndexedWithX, new AbsoluteLongIndexedWithXCycles(true)));
-    add(opCodes, new OpCode_RTI(RTI_StackImplied, new StackImpliedCycles()));
+    add(opCodes, new OpCode_RTI(RTI_StackImplied, new StackRTICycles()));
     add(opCodes, new OpCode_EOR(EOR_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_WDM(WDM_Implied, new ImpliedCycles()));
-    add(opCodes, new OpCode_EOR(EOR_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_EOR(EOR_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_MVP(MVP_BlockMove, new BlockMoveCycles()));
     add(opCodes, new OpCode_EOR(EOR_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_LSR(LSR_DirectPage, new DirectRMWCycles()));
@@ -97,7 +97,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BVC(BVC_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_EOR(EOR_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_EOR(EOR_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_EOR(EOR_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_EOR(EOR_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
     add(opCodes, new OpCode_MVN(MVN_BlockMove, new BlockMoveCycles()));
     add(opCodes, new OpCode_EOR(EOR_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_LSR(LSR_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
@@ -110,10 +110,10 @@ public class OpCodeTable
     add(opCodes, new OpCode_EOR(EOR_AbsoluteIndexedWithX, new AbsoluteIndexedWithXCycles(true)));
     add(opCodes, new OpCode_LSR(LSR_AbsoluteIndexedWithX, new AbsoluteIndexedWithXRMWCycles()));
     add(opCodes, new OpCode_EOR(EOR_AbsoluteLongIndexedWithX, new AbsoluteLongIndexedWithXCycles(true)));
-    add(opCodes, new OpCode_RTS(RTS_StackImplied, new StackImpliedCycles()));
+    add(opCodes, new OpCode_RTS(RTS_StackImplied, new StackRTSCycles()));
     add(opCodes, new OpCode_ADC(ADC_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_PER(PER_StackProgramCounterRelativeLong, new StackPERCycles()));
-    add(opCodes, new OpCode_ADC(ADC_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_ADC(ADC_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_STZ(STZ_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_ADC(ADC_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_ROR(ROR_DirectPage, new DirectRMWCycles()));
@@ -121,7 +121,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_PLA(PLA_StackImplied, new StackPLACycles()));
     add(opCodes, new OpCode_ADC(ADC_Immediate, new ImmediateCycles()));
     add(opCodes, new OpCode_ROR(ROR_Accumulator, new AccumulatorCycles()));
-    add(opCodes, new OpCode_RTL(RTL_StackImplied, new StackImpliedCycles()));
+    add(opCodes, new OpCode_RTL(RTL_StackImplied, new StackRTLCycles()));
     add(opCodes, new OpCode_JMP(JMP_AbsoluteIndirect, new AbsoluteIndirectJMPCycles()));
     add(opCodes, new OpCode_ADC(ADC_Absolute, new AbsoluteCycles(true)));
     add(opCodes, new OpCode_ROR(ROR_Absolute, new AbsoluteRMWCycles()));
@@ -129,7 +129,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BVS(BVS_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_ADC(ADC_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_ADC(ADC_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_ADC(ADC_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_ADC(ADC_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
     add(opCodes, new OpCode_STZ(STZ_DirectPageIndexedWithX, new DirectIndexedWithXCycles(false)));
     add(opCodes, new OpCode_ADC(ADC_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_ROR(ROR_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
@@ -145,7 +145,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BRA(BRA_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_STA(STA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(false)));
     add(opCodes, new OpCode_BRL(BRL_ProgramCounterRelativeLong, new RelativeLongCycles()));
-    add(opCodes, new OpCode_STA(STA_StackRelative, new StackRelativeCycles(false)));
+    add(opCodes, new OpCode_STA(STA_StackRelative, new StackRelativeSTACycles()));
     add(opCodes, new OpCode_STY(STY_DirectPage, new DirectCycles(false)));
     add(opCodes, new OpCode_STA(STA_DirectPage, new DirectCycles(false)));
     add(opCodes, new OpCode_STX(STX_DirectPage, new DirectCycles(false)));
@@ -161,7 +161,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BCC(BCC_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_STA(STA_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(false)));
     add(opCodes, new OpCode_STA(STA_DirectPageIndirect, new DirectIndirectCycles(false)));
-    add(opCodes, new OpCode_STA(STA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(false)));
+    add(opCodes, new OpCode_STA(STA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYSTACycles()));
     add(opCodes, new OpCode_STY(STY_DirectPageIndexedWithX, new DirectIndexedWithXCycles(false)));
     add(opCodes, new OpCode_STA(STA_DirectPageIndexedWithX, new DirectIndexedWithXCycles(false)));
     add(opCodes, new OpCode_STX(STX_DirectPageIndexedWithY, new DirectIndexedWithYCycles(false)));
@@ -177,7 +177,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_LDY(LDY_Immediate, new ImmediateCycles()));
     add(opCodes, new OpCode_LDA(LDA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_LDX(LDX_Immediate, new ImmediateCycles()));
-    add(opCodes, new OpCode_LDA(LDA_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_LDA(LDA_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_LDY(LDY_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_LDA(LDA_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_LDX(LDX_DirectPage, new DirectCycles(true)));
@@ -193,7 +193,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BCS(BCS_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_LDA(LDA_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_LDA(LDA_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_LDA(LDA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_LDA(LDA_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
     add(opCodes, new OpCode_LDY(LDY_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_LDA(LDA_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_LDX(LDX_DirectPageIndexedWithY, new DirectIndexedWithYCycles(true)));
@@ -209,7 +209,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_CPY(CPY_Immediate, new ImmediateCycles()));
     add(opCodes, new OpCode_CMP(CMP_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_REP(REP_Immediate, new ImmediateCycles()));
-    add(opCodes, new OpCode_CMP(CMP_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_CMP(CMP_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_CPY(CPY_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_CMP(CMP_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_DEC_Memory(DEC_DirectPage, new DirectRMWCycles()));
@@ -225,7 +225,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_BNE(BNE_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_CMP(CMP_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_CMP(CMP_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_CMP(CMP_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
+    add(opCodes, new OpCode_CMP(CMP_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
     add(opCodes, new OpCode_PEI(PEI_StackDirectPageIndirect, new StackPEICycles()));
     add(opCodes, new OpCode_CMP(CMP_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_DEC_Memory(DEC_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
@@ -241,7 +241,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_CPX(CPX_Immediate, new ImmediateCycles()));
     add(opCodes, new OpCode_SBC(SBC_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(true)));
     add(opCodes, new OpCode_SEP(SEP_Immediate, new ImmediateCycles()));
-    add(opCodes, new OpCode_SBC(SBC_StackRelative, new StackRelativeCycles(true)));
+    add(opCodes, new OpCode_SBC(SBC_StackRelative, new StackRelativeCycles()));
     add(opCodes, new OpCode_CPX(CPX_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_SBC(SBC_DirectPage, new DirectCycles(true)));
     add(opCodes, new OpCode_INC_Memory(INC_DirectPage, new DirectRMWCycles()));
@@ -257,8 +257,8 @@ public class OpCodeTable
     add(opCodes, new OpCode_BEQ(BEQ_ProgramCounterRelative, new RelativeCycles()));
     add(opCodes, new OpCode_SBC(SBC_DirectPageIndirectIndexedWithY, new DirectIndirectIndexedWithYCycles(true)));
     add(opCodes, new OpCode_SBC(SBC_DirectPageIndirect, new DirectIndirectCycles(true)));
-    add(opCodes, new OpCode_SBC(SBC_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles(true)));
-    add(opCodes, new OpCode_PEA(PEA_StackAbsolute, new StackAbsolute));
+    add(opCodes, new OpCode_SBC(SBC_StackRelativeIndirectIndexedWithY, new StackRelativeIndirectIndexedWithYCycles()));
+    add(opCodes, new OpCode_PEA(PEA_StackImmediate, new StackPEACycles()));
     add(opCodes, new OpCode_SBC(SBC_DirectPageIndexedWithX, new DirectIndexedWithXCycles(true)));
     add(opCodes, new OpCode_INC_Memory(INC_DirectPageIndexedWithX, new DirectIndexedWithXRMWCycles()));
     add(opCodes, new OpCode_SBC(SBC_DirectPageIndirectLongIndexedWithY, new DirectIndirectLongIndexedWithYCycles(true)));

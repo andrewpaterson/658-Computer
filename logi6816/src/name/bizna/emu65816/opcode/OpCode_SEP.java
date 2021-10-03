@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_SEP
     extends OpCode
 {
-  public OpCode_SEP(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_SEP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("SEP", "Set Processor Status Bit", mCode, cycles);
   }
 
   @Override
@@ -26,11 +26,6 @@ public class OpCode_SEP
     cpu.getCpuStatus().setRegisterValue(statusReg);
 
     cpu.addToProgramAddressAndCycles(2, 3);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

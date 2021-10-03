@@ -1,9 +1,9 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
@@ -12,9 +12,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_LSR
     extends OpCode
 {
-  public OpCode_LSR(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_LSR(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("LSR", "Shift one bit Right (Memory or Accumulator)", mCode, cycles);
   }
 
   void DO_LSR_8_BIT(Cpu65816 cpu, int value)
@@ -130,11 +130,6 @@ public class OpCode_LSR
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

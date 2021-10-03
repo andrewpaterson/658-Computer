@@ -1,163 +1,20 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
-import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
-
-import static name.bizna.emu65816.OpCodeName.*;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_STA
     extends OpCode
 {
-  public OpCode_STA(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_STA(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("STA", "Store Accumulator in Memory", mCode, cycles);
   }
 
   @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
+  public void execute1(Cpu65816 cpu)
   {
-    Address dataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-    if (cpu.isMemory8Bit())
-    {
-      cpu.storeByte(dataAddress, Binary.getLowByte(cpu.getA()));
-    }
-    else
-    {
-      cpu.storeTwoBytes(dataAddress, cpu.getA());
-      cpu.addToCycles(1);
-    }
-
-    switch (getCode())
-    {
-      case STA_Absolute:  // STA Absolute
-      {
-        cpu.addToProgramAddress(3);
-        cpu.addToCycles(4);
-        break;
-      }
-      case STA_AbsoluteLong:  // STA Absolute Long
-      {
-        cpu.addToProgramAddress(4);
-        cpu.addToCycles(5);
-        break;
-      }
-      case STA_DirectPage:  // STA Direct Page
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(3);
-        break;
-      }
-      case STA_DirectPageIndirect:  // STA Direct Page Indirect
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(5);
-        break;
-      }
-      case STA_DirectPageIndirectLong:  // STA Direct Page Indirect Long
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(6);
-        break;
-      }
-      case STA_AbsoluteIndexedWithX:  // STA Absolute Indexed, X
-      {
-        cpu.addToProgramAddress(3);
-        cpu.addToCycles(5);
-        break;
-      }
-      case STA_AbsoluteLongIndexedWithX:  // STA Absolute Long Indexed, X
-      {
-        cpu.addToProgramAddress(4);
-        cpu.addToCycles(5);
-        break;
-      }
-      case STA_AbsoluteIndexedWithY:  // STA Absolute Indexed, Y
-      {
-        cpu.addToProgramAddress(3);
-        cpu.addToCycles(5);
-        break;
-      }
-      case STA_DirectPageIndexedWithX:  // STA Direct Page Indexed, X
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(4);
-        break;
-      }
-      case STA_DirectPageIndexedIndirectWithX:  // STA Direct Page Indexed Indirect, X
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(6);
-        break;
-      }
-      case STA_DirectPageIndirectIndexedWithY:  // STA Direct Page Indirect Indexed, Y
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(6);
-        break;
-      }
-      case STA_DirectPageIndirectLongIndexedWithY:  // STA Direct Page Indirect Long Indexed, Y
-      {
-        if (Binary.getLowByte(cpu.getDirectPage()) != 0)
-        {
-          cpu.addToCycles(1);
-        }
-
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(6);
-        break;
-      }
-      case STA_StackRelative:  // STA Stack Relative
-      {
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(4);
-        break;
-      }
-      case STA_StackRelativeIndirectIndexedWithY:  // STA Stack Relative Indirect Indexed, Y
-      {
-        cpu.addToProgramAddress(2);
-        cpu.addToCycles(7);
-        break;
-      }
-      default:
-        throw new IllegalStateException("Unexpected value: " + getCode());
-    }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
+    cpu.setData(cpu.getA());
   }
 }
 

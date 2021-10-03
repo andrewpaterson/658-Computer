@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_CLV
     extends OpCode
 {
-  public OpCode_CLV(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_CLV(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("CLV", "Clear Overflow Flag", mCode, cycles);
   }
 
   @Override
@@ -16,11 +16,6 @@ public class OpCode_CLV
   {
     cpu.getCpuStatus().setOverflowFlag(false);
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

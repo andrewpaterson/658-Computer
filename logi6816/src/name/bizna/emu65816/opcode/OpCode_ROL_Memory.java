@@ -10,12 +10,12 @@ import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_ROL
+public class OpCode_ROL_Memory
     extends OpCode
 {
-  public OpCode_ROL(int mCode, InstructionCycles cycles)
+  public OpCode_ROL_Memory(int mCode, InstructionCycles cycles)
   {
-    super("ROL", "Rotate One Bit Left (Memory or Accumulator)", mCode, cycles);
+    super("ROL", "Rotate Memory One Bit Left.", mCode, cycles);
   }
 
   void DO_ROL_8_BIT(Cpu65816 cpu, int value)
@@ -100,7 +100,7 @@ public class OpCode_ROL
         cpu.addToProgramAddressAndCycles(1, 2);
         break;
       }
-      case (0x2E):                // ROL #addr
+      case (ROL_Absolute):                // ROL #addr
       {
         executeMemoryROL(cpu);
         if (cpu.isMemory8Bit())
@@ -113,7 +113,7 @@ public class OpCode_ROL
         }
         break;
       }
-      case (0x26):                // ROL Direct Page
+      case (ROL_DirectPage):                // ROL Direct Page
       {
         executeMemoryROL(cpu);
         int opCycles = Binary.getLowByte(cpu.getDirectPage()) != 0 ? 1 : 0;
@@ -127,7 +127,7 @@ public class OpCode_ROL
         }
         break;
       }
-      case (0x3E):                // ROL Absolute Indexed, X
+      case (ROL_AbsoluteIndexedWithX):                // ROL Absolute Indexed, X
       {
         executeMemoryROL(cpu);
         short opCycles = 0;
@@ -141,7 +141,7 @@ public class OpCode_ROL
         }
         break;
       }
-      case (0x36):                // ROL Direct Page Indexed, X
+      case (ROL_DirectPageIndexedWithX):                // ROL Direct Page Indexed, X
       {
         executeMemoryROL(cpu);
         int opCycles = Binary.getLowByte(cpu.getDirectPage()) != 0 ? 1 : 0;

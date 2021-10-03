@@ -65,7 +65,7 @@ public abstract class InstructionCycles
     }
     else
     {
-      return InstructionCycles.Operation(new Execute2(), Write_DataHigh(), new NoteOne(), new DoneInstructionIf16BitMemory());
+      return InstructionCycles.Operation(new Execute2(), Write_DataHigh(), new DoneInstructionIf16BitMemory());
     }
   }
 

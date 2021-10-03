@@ -1,15 +1,15 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_RTI
     extends OpCode
 {
   public OpCode_RTI(int mCode, InstructionCycles cycles)
   {
-    super("RTI", mCode, cycles);
+    super("RTI", "Return from Interrupt", mCode, cycles);
   }
 
   @Override
@@ -33,11 +33,6 @@ public class OpCode_RTI
       cpu.setProgramAddress(newProgramAddress);
       cpu.addToCycles(7);
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

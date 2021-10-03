@@ -36,7 +36,7 @@ public class OpCodeName
   public static final int ORA_AbsoluteLongIndexedWithX = 0x1F;
   public static final int JSR_Absolute = 0x20;
   public static final int AND_DirectPageIndexedIndirectWithX = 0x21;
-  public static final int JSR_AbsoluteLong = 0x22;
+  public static final int JSL_AbsoluteLong = 0x22;
   public static final int AND_StackRelative = 0x23;
   public static final int BIT_DirectPage = 0x24;
   public static final int AND_DirectPage = 0x25;
@@ -222,7 +222,7 @@ public class OpCodeName
   public static final int CMP_AbsoluteIndexedWithY = 0xD9;
   public static final int PHX_StackImplied = 0xDA;
   public static final int STP_Implied = 0xDB;
-  public static final int JMP_AbsoluteIndirectLong = 0xDC;
+  public static final int JML_AbsoluteIndirectLong = 0xDC;
   public static final int CMP_AbsoluteIndexedWithX = 0xDD;
   public static final int DEC_AbsoluteIndexedWithX = 0xDE;
   public static final int CMP_AbsoluteLongIndexedWithX = 0xDF;

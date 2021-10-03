@@ -8,17 +8,16 @@ import name.bizna.emu65816.addressingmode.InstructionCycles;
 import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 
-public class OpCode_TSB
+public class OpCode_TSB_Memory
     extends OpCode
 {
-  public OpCode_TSB(int mCode, InstructionCycles cycles)
+  public OpCode_TSB_Memory(int mCode, InstructionCycles cycles)
   {
     super("TSB", "Test and Set Bit", mCode, cycles);
   }
 
   protected void execute8BitTSB(Cpu65816 cpu)
   {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getDataLow();
     int lowerA = Binary.getLowByte(cpu.getA());
     int result = toByte(value | lowerA);
@@ -28,7 +27,6 @@ public class OpCode_TSB
 
   protected void execute16BitTSB(Cpu65816 cpu)
   {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getData();
     int result = (value | cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);

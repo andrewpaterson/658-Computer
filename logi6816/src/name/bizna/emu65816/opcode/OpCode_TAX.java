@@ -1,15 +1,15 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_TAX
     extends OpCode
 {
-  public OpCode_TAX(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_TAX(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("TAX", "Transfer Accumulator in Index X", mCode, cycles);
   }
 
   @Override
@@ -28,11 +28,6 @@ public class OpCode_TAX
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

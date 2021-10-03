@@ -1,6 +1,7 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.*;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeName.*;
@@ -10,9 +11,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_SBC
     extends OpCode
 {
-  public OpCode_SBC(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_SBC(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("SBC", "Subtract Memory from Accumulator", mCode, cycles);
   }
 
   public void execute8BitSBC(Cpu65816 cpu)
@@ -264,11 +265,6 @@ public class OpCode_SBC
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

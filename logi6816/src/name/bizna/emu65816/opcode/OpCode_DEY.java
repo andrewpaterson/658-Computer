@@ -1,8 +1,8 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
@@ -10,9 +10,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_DEY
     extends OpCode
 {
-  public OpCode_DEY(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_DEY(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("DEY", "Decrement Index Y by One", mCode, cycles);
   }
 
   @Override
@@ -35,10 +35,5 @@ public class OpCode_DEY
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(y);
     }
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }

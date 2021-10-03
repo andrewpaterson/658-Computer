@@ -9,7 +9,7 @@ public class OpCode_BRK
 {
   public OpCode_BRK(int code)
   {
-    super("BRK", "Force software interrupt.", code, new StackSoftwareInterruptCycles(new BRKVector()));
+    super("BRK", "Force break software interrupt.", code, new StackSoftwareInterruptCycles(new BRKVector()));
   }
 
   @Override

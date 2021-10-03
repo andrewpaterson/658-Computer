@@ -818,9 +818,35 @@ public class Cpu65816
     setDirectPage(internalData);
   }
 
+  public  void PHD()
+  {
+    internalData = directPage;
+  }
+
   public void PLB()
   {
     setDataBank(getDataLow());
   }
+
+  public void PHB()
+  {
+    setDataLow(getDataBank());
+  }
+
+  public void PHK()
+  {
+    setDataLow(getProgramCounter().getBank());
+  }
+
+  public void PLP()
+  {
+    setDataLow(processorStatus.getRegisterValue());
+  }
+
+  public void PHP()
+  {
+    processorStatus.setRegisterValue(getDataLow());
+  }
+
 }
 

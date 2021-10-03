@@ -1,5 +1,7 @@
 package name.bizna.emu65816.addressingmode;
 
+import name.bizna.emu65816.Cpu65816;
+
 import static name.bizna.emu65816.AddressingMode.Stack;
 
 public class StackPLPCycles
@@ -13,7 +15,7 @@ public class StackPLPCycles
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(S(), o(1)), IO()),
-          new BusCycle(Address(S(), o(1)), Read_DataLow(), SP_inc(), new Execute1(), DONE()));
+          new BusCycle(Address(S(), o(1)), Read_DataLow(), SP_inc(), E(Cpu65816::PLP), DONE()));
   }
 }
 

@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_CLD
     extends OpCode
 {
-  public OpCode_CLD(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_CLD(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("CLD", "Clear Decimal Mode", mCode, cycles);
   }
 
   @Override
@@ -17,9 +17,5 @@ public class OpCode_CLD
     cpu.getCpuStatus().setDecimalFlag(false);
     cpu.addToProgramAddressAndCycles(1, 2);
   }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
-  }
 }
+

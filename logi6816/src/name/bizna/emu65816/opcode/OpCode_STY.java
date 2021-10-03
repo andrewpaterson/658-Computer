@@ -1,18 +1,18 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_STY
     extends OpCode
 {
-  public OpCode_STY(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_STY(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("STY", "Store Index Y in Memory", mCode, cycles);
   }
 
   @Override
@@ -62,11 +62,6 @@ public class OpCode_STY
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -9,17 +9,16 @@ import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_TRB
+public class OpCode_TRB_Memory
     extends OpCode
 {
-  public OpCode_TRB(int mCode, InstructionCycles cycles)
+  public OpCode_TRB_Memory(int mCode, InstructionCycles cycles)
   {
     super("TRB", "Test and Reset Bit", mCode, cycles);
   }
 
   protected void execute8BitTRB(Cpu65816 cpu)
   {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getDataLow();
     int lowerA = Binary.getLowByte(cpu.getA());
     int result = toByte(value & ~lowerA);
@@ -29,7 +28,6 @@ public class OpCode_TRB
 
   protected void execute16BitTRB(Cpu65816 cpu)
   {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getData();
     int result = toShort(value & ~cpu.getA());
     cpu.storeTwoBytes(addressOfOpCodeData, result);

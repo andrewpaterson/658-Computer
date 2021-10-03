@@ -1,18 +1,18 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_LDX
     extends OpCode
 {
-  public OpCode_LDX(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_LDX(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("LDX", "Load Index X with Memory", mCode, cycles);
   }
 
   protected void executeLDX8Bit(Cpu65816 cpu)
@@ -85,11 +85,6 @@ public class OpCode_LDX
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

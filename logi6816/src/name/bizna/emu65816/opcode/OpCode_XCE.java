@@ -1,16 +1,16 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
 public class OpCode_XCE
     extends OpCode
 {
-  public OpCode_XCE(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_XCE(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("XCE", "Exchange Carry and Emulation Bits", mCode, cycles);
   }
 
   @Override

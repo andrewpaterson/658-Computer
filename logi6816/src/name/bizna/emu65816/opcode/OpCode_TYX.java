@@ -1,15 +1,15 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_TYX
     extends OpCode
 {
-  public OpCode_TYX(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_TYX(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("TYX", "Transfer Index Y to Index X", mCode, cycles);
   }
 
   @Override
@@ -27,11 +27,6 @@ public class OpCode_TYX
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

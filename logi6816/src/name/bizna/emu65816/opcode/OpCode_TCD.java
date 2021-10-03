@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_TCD
     extends OpCode
 {
-  public OpCode_TCD(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_TCD(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("TCD", "Transfer C Accumulator to Direct Register", mCode, cycles);
   }
 
   @Override
@@ -17,11 +17,6 @@ public class OpCode_TCD
     cpu.setDirectPage(cpu.getA());
     cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getDirectPage());
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -1,17 +1,17 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 
 public class OpCode_JMP
     extends OpCode
 {
-  public OpCode_JMP(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_JMP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("JMP", "Jump to New Location", mCode, cycles);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class OpCode_JMP
         cpu.addToCycles(4);
         break;
       }
-      case JMP_AbsoluteIndirectLong:  // JMP Absolute Indirect Long
+      case JML_AbsoluteIndirectLong:  // JMP Absolute Indirect Long
       {
         cpu.setProgramAddress(cpu.getAddressOfOpCodeData(getAddressingMode()));
         cpu.addToCycles(6);
@@ -53,11 +53,6 @@ public class OpCode_JMP
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

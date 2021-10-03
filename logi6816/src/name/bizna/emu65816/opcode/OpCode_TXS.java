@@ -1,15 +1,15 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_TXS
     extends OpCode
 {
-  public OpCode_TXS(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_TXS(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("TXS", " Transfer Index X to Stack Pointer Register", mCode, cycles);
   }
 
   @Override
@@ -25,11 +25,6 @@ public class OpCode_TXS
       cpu.setStackPointer(cpu.getX());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

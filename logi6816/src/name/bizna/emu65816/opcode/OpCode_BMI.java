@@ -1,16 +1,16 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.opcode.Branch.executeBranchShortOnCondition;
 
 public class OpCode_BMI
     extends OpCode
 {
-  public OpCode_BMI(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_BMI(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("BMI", "Branch if Result Minus (N=1)", mCode, cycles);
   }
 
   @Override
@@ -18,9 +18,5 @@ public class OpCode_BMI
   {
     cpu.addToCycles(executeBranchShortOnCondition(cpu.getCpuStatus().signFlag(), cpu, getAddressingMode()));
   }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
-  }
 }
+

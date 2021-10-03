@@ -10,12 +10,12 @@ import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_ROL_Memory
+public class OpCode_ROL_A
     extends OpCode
 {
-  public OpCode_ROL_Memory(int mCode, InstructionCycles cycles)
+  public OpCode_ROL_A(int mCode, InstructionCycles cycles)
   {
-    super("ROL", "Rotate One Bit Left (Memory or Accumulator)", mCode, cycles);
+    super("ROL", "Rotate Accumulator One Bit Left.", mCode, cycles);
   }
 
   void DO_ROL_8_BIT(Cpu65816 cpu, int value)

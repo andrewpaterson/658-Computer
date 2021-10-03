@@ -1,15 +1,15 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_TSX
     extends OpCode
 {
-  public OpCode_TSX(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_TSX(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("TSX", "Transfer Stack Pointer Register to Index X", mCode, cycles);
   }
 
   @Override
@@ -28,11 +28,6 @@ public class OpCode_TSX
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

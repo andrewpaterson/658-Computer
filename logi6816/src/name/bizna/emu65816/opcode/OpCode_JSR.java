@@ -1,8 +1,8 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toShort;
@@ -10,9 +10,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_JSR
     extends OpCode
 {
-  public OpCode_JSR(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_JSR(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("JSR", "Jump to new location save return address on Stack.", mCode, cycles);
   }
 
   @Override
@@ -28,7 +28,7 @@ public class OpCode_JSR
         cpu.addToCycles(6);
         break;
       }
-      case JSR_AbsoluteLong:  // JSR Absolute Long
+      case JSL_AbsoluteLong:  // JSR Absolute Long
       {
         cpu.push8Bit(cpu.getProgramCounter().getBank());
         cpu.push16Bit(toShort(cpu.getProgramCounter().getOffset() + 3));
@@ -48,11 +48,6 @@ public class OpCode_JSR
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -3,13 +3,14 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_PLY
     extends OpCode
 {
-  public OpCode_PLY(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_PLY(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("PLY", "Pull Index Y from Stack", mCode, cycles);
   }
 
   @Override
@@ -28,11 +29,6 @@ public class OpCode_PLY
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getY());
       cpu.addToProgramAddressAndCycles(1, 5);
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

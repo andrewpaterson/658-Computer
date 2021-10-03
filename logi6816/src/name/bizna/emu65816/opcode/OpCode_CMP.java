@@ -1,9 +1,9 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
@@ -12,9 +12,9 @@ import static name.bizna.emu65816.Unsigned.toShort;
 public class OpCode_CMP
     extends OpCode
 {
-  public OpCode_CMP(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_CMP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("CMP", "Compare Memory and Accumulator", mCode, cycles);
   }
 
   protected void execute8BitCMP(Cpu65816 cpu)
@@ -176,11 +176,6 @@ public class OpCode_CMP
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -9,7 +9,7 @@ public class OpCode_ORA
 {
   public OpCode_ORA(int mCode, InstructionCycles cycles)
   {
-    super("ORA", "Bitwise OR memory with A; result in A and update NZ.", mCode, cycles);
+    super("ORA", "'OR' memory with A; result in A and update NZ.", mCode, cycles);
   }
 
   @Override

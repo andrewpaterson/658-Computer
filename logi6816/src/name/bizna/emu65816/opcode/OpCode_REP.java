@@ -1,16 +1,16 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Unsigned.toByte;
 
 public class OpCode_REP
     extends OpCode
 {
-  public OpCode_REP(String name, int mCode, InstructionCycles cycles)
+  public OpCode_REP(int mCode, InstructionCycles cycles)
   {
-    super(name, mCode, cycles);
+    super("REP", "Reset Status Bits", mCode, cycles);
   }
 
   @Override

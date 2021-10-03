@@ -1,16 +1,16 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Unsigned.toShort;
 
 public class OpCode_BRL
     extends OpCode
 {
-  public OpCode_BRL(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_BRL(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("BRL", "Branch Always Long", mCode, cycles);
   }
 
   @Override
@@ -28,11 +28,6 @@ public class OpCode_BRL
     }
     // CPU cycles: 4
     return 4;
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

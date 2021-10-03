@@ -4,6 +4,7 @@ import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeName.*;
@@ -11,9 +12,37 @@ import static name.bizna.emu65816.OpCodeName.*;
 public class OpCode_BIT
     extends OpCode
 {
-  public OpCode_BIT(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_BIT(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("BIT", "Bit Test", mCode, cycles);
+  }
+
+  protected void execute8BitBIT(Cpu65816 cpu)
+  {
+    int value = cpu.getDataLow();
+    boolean isHighestBitSet = is8bitValueNegative(value);
+    boolean isNextToHighestBitSet = (value & 0x40) != 0;
+
+    if (getAddressingMode() != AddressingMode.Immediate)
+    {
+      cpu.getCpuStatus().setSignFlag(isHighestBitSet);
+      cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
+    }
+    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((value & Binary.getLowByte(cpu.getA())));
+  }
+
+  protected void execute16BitBIT(Cpu65816 cpu)
+  {
+    int value = cpu.getData();
+    boolean isHighestBitSet = (value & 0x8000) != 0;
+    boolean isNextToHighestBitSet = (value & 0x4000) != 0;
+
+    if (getAddressingMode() != AddressingMode.Immediate)
+    {
+      cpu.getCpuStatus().setSignFlag(isHighestBitSet);
+      cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
+    }
+    cpu.getCpuStatus().updateZeroFlagFrom16BitValue((value & cpu.getA()));
   }
 
   @Override
@@ -71,41 +100,6 @@ public class OpCode_BIT
       default:
         throw new IllegalStateException("Unexpected value: " + getCode());
     }
-  }
-
-  protected void execute8BitBIT(Cpu65816 cpu)
-  {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.getDataLow();
-    boolean isHighestBitSet = is8bitValueNegative(value);
-    boolean isNextToHighestBitSet = (value & 0x40) != 0;
-
-    if (getAddressingMode() != AddressingMode.Immediate)
-    {
-      cpu.getCpuStatus().setSignFlag(isHighestBitSet);
-      cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
-    }
-    cpu.getCpuStatus().updateZeroFlagFrom8BitValue((value & Binary.getLowByte(cpu.getA())));
-  }
-
-  protected void execute16BitBIT(Cpu65816 cpu)
-  {
-    Address addressOfOpCodeData = cpu.getAddressOfOpCodeData(getAddressingMode());
-    int value = cpu.getData();
-    boolean isHighestBitSet = (value & 0x8000) != 0;
-    boolean isNextToHighestBitSet = (value & 0x4000) != 0;
-
-    if (getAddressingMode() != AddressingMode.Immediate)
-    {
-      cpu.getCpuStatus().setSignFlag(isHighestBitSet);
-      cpu.getCpuStatus().setOverflowFlag(isNextToHighestBitSet);
-    }
-    cpu.getCpuStatus().updateZeroFlagFrom16BitValue((value & cpu.getA()));
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -3,14 +3,15 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.AddressingMode.Stack;
+import static name.bizna.emu65816.AddressingMode.StackImplied;
 
-public class StackPHPCycles
+public class StackImpliedPHPCycles
     extends InstructionCycles
 {
   //22c
-  public StackPHPCycles()
+  public StackImpliedPHPCycles()
   {
-    super(Stack,
+    super(StackImplied,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(PBR(), PC()), IO()),

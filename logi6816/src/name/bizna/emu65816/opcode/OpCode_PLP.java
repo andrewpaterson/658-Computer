@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_PLP
     extends OpCode
 {
-  public OpCode_PLP(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_PLP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("PLP", "Pull Processor Status from Stack", mCode, cycles);
   }
 
   @Override
@@ -16,11 +16,6 @@ public class OpCode_PLP
   {
     cpu.getCpuStatus().setRegisterValue(cpu.pull8Bit());
     cpu.addToProgramAddressAndCycles(1, 4);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

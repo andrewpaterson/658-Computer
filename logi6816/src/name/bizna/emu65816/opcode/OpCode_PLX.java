@@ -1,15 +1,15 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_PLX
     extends OpCode
 {
-  public OpCode_PLX(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_PLX(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("PLX", "Pull Index X from Stack", mCode, cycles);
   }
 
   @Override
@@ -28,11 +28,6 @@ public class OpCode_PLX
       cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
       cpu.addToProgramAddressAndCycles(1, 5);
     }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

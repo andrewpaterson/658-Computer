@@ -9,7 +9,7 @@ public class OpCode_COP
 {
   public OpCode_COP(int code)
   {
-    super("COP", "Force software interrupt.", code, new StackSoftwareInterruptCycles(new COPVector()));
+    super("COP", "Force co-processor software interrupt.", code, new StackSoftwareInterruptCycles(new COPVector()));
   }
 
   @Override

@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_CLC
     extends OpCode
 {
-  public OpCode_CLC(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_CLC(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("CLC", "Clear Carry Flag", mCode, cycles);
   }
 
   @Override
@@ -19,20 +19,6 @@ public class OpCode_CLC
     {
       cpu.getCpuStatus().setCarryFlag(false);
       cpu.noAddress();
-    }
-    else
-    {
-      invalidCycle();
-    }
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
-    int cycle = cpu.getCycle();
-    if (cycle == 1)
-    {
-      cpu.doneInstruction();
     }
     else
     {

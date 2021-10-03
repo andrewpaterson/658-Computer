@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_STP
     extends OpCode
 {
-  public OpCode_STP(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_STP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("STP", "Stop the Clock", mCode, cycles);
   }
 
   @Override
@@ -17,11 +17,6 @@ public class OpCode_STP
     cpu.stop();
     cpu.addToProgramAddress(1);
     cpu.addToCycles(3);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

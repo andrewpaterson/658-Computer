@@ -1,14 +1,14 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_NOP
     extends OpCode
 {
-  public OpCode_NOP(String mName, int mCode, InstructionCycles cycles)
+  public OpCode_NOP(int mCode, InstructionCycles cycles)
   {
-    super(mName, mCode, cycles);
+    super("NOP", "No Operation for two cycles.", mCode, cycles);
   }
 
   @Override
@@ -16,11 +16,6 @@ public class OpCode_NOP
   {
     cpu.addToProgramAddress(1);
     cpu.addToCycles(2);
-  }
-
-  @Override
-  public void executeOnRisingEdge(Cpu65816 cpu)
-  {
   }
 }
 

@@ -10,12 +10,5 @@ public class OpCode_SED
   {
     super("SED", "Set Decimal Mode", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cpu.getCpuStatus().setDecimalFlag(true);
-    cpu.addToProgramAddressAndCycles(1, 2);
-  }
 }
 

@@ -94,7 +94,7 @@ public class OpCodeName
   public static final int EOR_AbsoluteIndexedWithY = 0x59;
   public static final int PHY_StackImplied = 0x5A;
   public static final int TCD_Implied = 0x5B;
-  public static final int JMP_AbsoluteLong = 0x5C;
+  public static final int JML_AbsoluteLong = 0x5C;
   public static final int EOR_AbsoluteIndexedWithX = 0x5D;
   public static final int LSR_AbsoluteIndexedWithX = 0x5E;
   public static final int EOR_AbsoluteLongIndexedWithX = 0x5F;
@@ -106,7 +106,7 @@ public class OpCodeName
   public static final int ADC_DirectPage = 0x65;
   public static final int ROR_DirectPage = 0x66;
   public static final int ADC_DirectPageIndirectLong = 0x67;
-  public static final int PLA_StackImplied = 0x68;
+  public static final int PLA_Stack = 0x68;
   public static final int ADC_Immediate = 0x69;
   public static final int ROR_Accumulator = 0x6A;
   public static final int RTL_StackImplied = 0x6B;

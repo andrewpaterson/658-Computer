@@ -3,16 +3,12 @@ package name.bizna.emu65816.opcode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.addressingmode.InstructionCycles;
 
-import static name.bizna.emu65816.Binary.is16bitValueNegative;
-import static name.bizna.emu65816.Binary.is8bitValueNegative;
 import static name.bizna.emu65816.OpCodeName.*;
-import static name.bizna.emu65816.Unsigned.toByte;
-import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_ASL_Memory
+public class OpCode_ASL
     extends OpCode
 {
-  public OpCode_ASL_Memory(int mCode, InstructionCycles busCycles)
+  public OpCode_ASL(int mCode, InstructionCycles busCycles)
   {
     super("ASL", "Shift memory left 1 bit; result in memory and update NZC.", mCode, busCycles);
   }
@@ -27,7 +23,7 @@ public class OpCode_ASL_Memory
       case ASL_AbsoluteIndexedWithX:
       case ASL_DirectPageIndexedWithX:
       {
-        cpu.shiftLeftData();
+        cpu.ASL();
         break;
       }
       default:

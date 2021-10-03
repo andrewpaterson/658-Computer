@@ -3,13 +3,13 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.Width;
 import name.bizna.emu65816.interrupt.InterruptVector;
 import name.bizna.emu65816.opcode.OpCode;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public abstract class InstructionCycles
 {
@@ -38,35 +38,6 @@ public abstract class InstructionCycles
   protected static AddressOffset[] Address(AddressOffset... addressOffsets)
   {
     return addressOffsets;
-  }
-
-  protected static Operation[] Operation(Operation... operations)
-  {
-    return operations;
-  }
-
-  protected static Operation[] ExecuteLow_DoneIf8Bit(boolean read)
-  {
-    if (read)
-    {
-      return InstructionCycles.Operation(Read_DataLow(), new Execute1(), new DoneInstructionIf8BitMemory());
-    }
-    else
-    {
-      return InstructionCycles.Operation(new Execute1(), Write_DataLow(), new DoneInstructionIf8BitMemory());
-    }
-  }
-
-  protected static Operation[] ExecuteHigh_DoneIf16Bit(boolean read)
-  {
-    if (read)
-    {
-      return InstructionCycles.Operation(Read_DataHigh(), new Execute2(), new DoneInstructionIf16BitMemory());
-    }
-    else
-    {
-      return InstructionCycles.Operation(new Execute2(), Write_DataHigh(), new DoneInstructionIf16BitMemory());
-    }
   }
 
   protected static WriteDataHigh Write_DataHigh()
@@ -309,16 +280,6 @@ public abstract class InstructionCycles
     return new DoneInstruction();
   }
 
-  protected static Operation[] ExecuteRMWLow_Done()
-  {
-    return new Operation[]{new Execute1(), Write_DataLow(RMW), DONE()};
-  }
-
-  protected static Operation[] ExecuteRMWHigh()
-  {
-    return new Operation[]{new Execute2(), Write_DataHigh(RMW), new NoteOne()};
-  }
-
   protected static RelativeOffset R()
   {
     return new RelativeOffset();
@@ -334,6 +295,7 @@ public abstract class InstructionCycles
     return new FetchRelativeOffsetLow();
   }
 
+  @SuppressWarnings("SameParameterValue")
   protected static SetProgramBank PBR_e(int bank)
   {
     return new SetProgramBank(bank);
@@ -349,9 +311,29 @@ public abstract class InstructionCycles
     return new WriteAbsoluteAddressHigh();
   }
 
-  protected static ExecuteOnCpu E(Consumer<Cpu65816> consumer)
+  protected static ExecuteIf16BitMemory E16Bit(Consumer<Cpu65816> consumer)
   {
-    return new ExecuteOnCpu(consumer);
+    return new ExecuteIf16BitMemory(consumer);
+  }
+
+  protected static ExecuteIf8BitMemory E8Bit(Consumer<Cpu65816> consumer)
+  {
+    return new ExecuteIf8BitMemory(consumer);
+  }
+
+  protected static Execute E(Consumer<Cpu65816> consumer)
+  {
+    return new Execute(consumer);
+  }
+
+  protected static Operation DONE16Bit(Width width)
+  {
+    return new DoneInstructionIf16Bit(width);
+  }
+
+  protected static Operation DONE8Bit(Width width)
+  {
+    return new DoneInstructionIf8Bit(width);
   }
 
   public AddressingMode getAddressingMode()

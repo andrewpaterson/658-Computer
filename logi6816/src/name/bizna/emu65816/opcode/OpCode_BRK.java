@@ -9,13 +9,13 @@ public class OpCode_BRK
 {
   public OpCode_BRK(int code)
   {
-    super("BRK", "Force break software interrupt.", code, new StackSoftwareInterruptCycles(new BRKVector()));
+    super("BRK", "Force break software interrupt.", code, new StackSoftwareInterruptCycles(new BRKVector(), Cpu65816::BRK));
   }
 
   @Override
   public void execute1(Cpu65816 cpu)
   {
-    cpu.break_();
+    cpu.BRK();
   }
 }
 

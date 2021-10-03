@@ -1,12 +1,17 @@
 package name.bizna.emu65816.addressingmode;
 
+import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.Width;
+
+import java.util.function.Consumer;
+
 import static name.bizna.emu65816.AddressingMode.DirectIndexedIndirectWithX;
 
 public class DirectIndexedIndirectWithXCycles
     extends InstructionCycles
 {
   //11
-  public DirectIndexedIndirectWithXCycles(boolean read)
+  public DirectIndexedIndirectWithXCycles(Consumer<Cpu65816> operation)
   {
     super(DirectIndexedIndirectWithX,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
@@ -15,8 +20,8 @@ public class DirectIndexedIndirectWithXCycles
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(DP(), D0(), X()), Read_AAL()),
           new BusCycle(Address(DP(), D0(), X(), o(1)), Read_AAH()),
-          new BusCycle(Address(DBR(), AA()), ExecuteLow_DoneIf8Bit(read)),
-          new BusCycle(Address(DBR(), AA(), o(1)), ExecuteHigh_DoneIf16Bit(read)));
+          new BusCycle(Address(DBR(), AA()), Read_DataLow(), E8Bit(operation), DONE8Bit(Width.A)),
+          new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(Width.A)));
   }
 }
 

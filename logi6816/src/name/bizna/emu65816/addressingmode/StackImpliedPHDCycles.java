@@ -3,7 +3,6 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Cpu65816;
 
 import static name.bizna.emu65816.AddressingMode.Stack;
-import static name.bizna.emu65816.AddressingMode.StackImplied;
 
 public class StackImpliedPHDCycles
     extends InstructionCycles
@@ -11,7 +10,7 @@ public class StackImpliedPHDCycles
   //22c
   public StackImpliedPHDCycles()
   {
-    super(StackImplied,
+    super(Stack,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(S()), E(Cpu65816::PHD), Write_DataHigh(), SP_dec()),

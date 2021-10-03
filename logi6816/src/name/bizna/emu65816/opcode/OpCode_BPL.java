@@ -12,11 +12,5 @@ public class OpCode_BPL
   {
     super("BPL", "Branch if Result Plus (N=0)", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cpu.addToCycles(executeBranchShortOnCondition(!cpu.getCpuStatus().signFlag(), cpu, getAddressingMode()));
-  }
 }
 

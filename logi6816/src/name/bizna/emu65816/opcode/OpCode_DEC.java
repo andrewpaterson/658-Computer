@@ -10,10 +10,10 @@ import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_DEC_Memory
+public class OpCode_DEC
     extends OpCode
 {
-  public OpCode_DEC_Memory(int mCode, InstructionCycles busCycles)
+  public OpCode_DEC(int mCode, InstructionCycles busCycles)
   {
     super("DEC", "Decrement memory; result in memory and update NZ.", mCode, busCycles);
   }

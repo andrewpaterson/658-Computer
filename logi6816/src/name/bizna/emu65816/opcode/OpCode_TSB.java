@@ -7,61 +7,44 @@ import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 import static name.bizna.emu65816.OpCodeName.*;
 import static name.bizna.emu65816.Unsigned.toByte;
-import static name.bizna.emu65816.Unsigned.toShort;
 
-public class OpCode_TRB_Memory
+public class OpCode_TSB
     extends OpCode
 {
-  public OpCode_TRB_Memory(int mCode, InstructionCycles cycles)
+  public OpCode_TSB(int mCode, InstructionCycles cycles)
   {
-    super("TRB", "Test and Reset Bit", mCode, cycles);
+    super("TSB", "Test and Set Bit", mCode, cycles);
   }
 
-  protected void execute8BitTRB(Cpu65816 cpu)
-  {
-    int value = cpu.getDataLow();
-    int lowerA = Binary.getLowByte(cpu.getA());
-    int result = toByte(value & ~lowerA);
-    cpu.storeByte(addressOfOpCodeData, result);
-    cpu.getCpuStatus().setZeroFlag((value & lowerA) == 0);
-  }
-
-  protected void execute16BitTRB(Cpu65816 cpu)
-  {
-    int value = cpu.getData();
-    int result = toShort(value & ~cpu.getA());
-    cpu.storeTwoBytes(addressOfOpCodeData, result);
-    cpu.getCpuStatus().setZeroFlag((value & cpu.getA()) == 0);
-  }
 
   @Override
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     switch (getCode())
     {
-      case TRB_Absolute:                 // TRB Absolute
+      case TSB_Absolute:                 // TSB Absolute
       {
         if (cpu.isMemory8Bit())
         {
-          execute8BitTRB(cpu);
+          execute8BitTSB(cpu);
         }
         else
         {
-          execute16BitTRB(cpu);
+          execute16BitTSB(cpu);
           cpu.addToCycles(2);
         }
         cpu.addToProgramAddressAndCycles(3, 6);
         break;
       }
-      case TRB_DirectPage:                 // TRB Direct Page
+      case TSB_DirectPage:                 // TSB Direct Page
       {
         if (cpu.isMemory8Bit())
         {
-          execute8BitTRB(cpu);
+          execute8BitTSB(cpu);
         }
         else
         {
-          execute16BitTRB(cpu);
+          execute16BitTSB(cpu);
           cpu.addToCycles(2);
         }
         if (Binary.getLowByte(cpu.getDirectPage()) != 0)

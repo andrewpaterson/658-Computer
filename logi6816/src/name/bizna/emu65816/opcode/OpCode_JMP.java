@@ -38,7 +38,7 @@ public class OpCode_JMP
         cpu.addToCycles(6);
         break;
       }
-      case JMP_AbsoluteLong:  // JMP Absolute Long
+      case JML_AbsoluteLong:  // JMP Absolute Long
       {
         cpu.setProgramAddress(cpu.getAddressOfOpCodeData(getAddressingMode()));
         cpu.addToCycles(4);

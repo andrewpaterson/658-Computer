@@ -1,16 +1,20 @@
 package name.bizna.emu65816.addressingmode;
 
+import name.bizna.emu65816.Cpu65816;
+
+import java.util.function.Consumer;
+
 import static name.bizna.emu65816.AddressingMode.Accumulator;
 
 public class AccumulatorCycles
     extends InstructionCycles
 {
   //8
-  public AccumulatorCycles()
+  public AccumulatorCycles(Consumer<Cpu65816> operation)
   {
     super(Accumulator,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
-          new BusCycle(Address(PBR(), PC()), new Execute1(), new Execute2(), DONE()));
+          new BusCycle(Address(PBR(), PC()), E(operation), DONE()));
   }
 }
 

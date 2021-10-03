@@ -14,7 +14,7 @@ public class AbsoluteIndexedIndirectWithXJMPCycles
           new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(PBR(), AA(), X()), Read_NewPCL()),
-          new BusCycle(Address(PBR(), AA(), X(), o(1)), Read_NewPCH(), new SetProgramCounter(PBR(), New_PC()), DONE()));
+          new BusCycle(Address(PBR(), AA(), X(), o(1)), Read_NewPCH(), PC_e(PBR(), New_PC()), DONE()));
   }
 }
 

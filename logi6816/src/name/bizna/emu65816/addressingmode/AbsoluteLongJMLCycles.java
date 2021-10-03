@@ -2,11 +2,11 @@ package name.bizna.emu65816.addressingmode;
 
 import static name.bizna.emu65816.AddressingMode.AbsoluteLong;
 
-public class AbsoluteLongJMPCycles
+public class AbsoluteLongJMLCycles
     extends InstructionCycles
 {
   //4b
-  public AbsoluteLongJMPCycles(boolean read)
+  public AbsoluteLongJMLCycles()
   {
     super(AbsoluteLong,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

@@ -120,20 +120,31 @@ public class Cpu65816
     }
   }
 
-  public void setData(int data)
+  public void setData(int data, boolean updateFlags)
   {
     if (isMemory16Bit())
     {
       assert16Bit(data, "Data");
-      processorStatus.updateSignAndZeroFlagFrom16BitValue(data);
+      if (updateFlags)
+      {
+        processorStatus.updateSignAndZeroFlagFrom16BitValue(data);
+      }
       internalData = data;
     }
     else
     {
       assert8Bit(data, "Data");
-      processorStatus.updateSignAndZeroFlagFrom8BitValue(data);
+      if (updateFlags)
+      {
+        processorStatus.updateSignAndZeroFlagFrom8BitValue(data);
+      }
       internalData = setLowByte(internalData, data);
     }
+  }
+
+  public void setData(int data)
+  {
+    setData(data, true);
   }
 
   public int getA()
@@ -238,17 +249,6 @@ public class Cpu65816
     }
   }
 
-  public void reset()
-  {
-    setEmulationMode(true);
-    dataBank = 0;
-    directPage = 0;
-    programAddress.setBank(0);
-    stackPointer = getLowByte(stackPointer) | 0x100;
-    processorStatus.setDecimalFlag(false);
-    processorStatus.setInterruptDisableFlag(true);
-  }
-
   public void abort()
   {
   }
@@ -259,26 +259,6 @@ public class Cpu65816
 
   public void nonMaskableInterrupt()
   {
-  }
-
-  public void break_()
-  {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
-    if (processorStatus.isEmulationMode())
-    {
-      processorStatus.setBreakFlag(true);
-    }
-  }
-
-  public void coprocessor()
-  {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
-    if (processorStatus.isEmulationMode())
-    {
-      processorStatus.setBreakFlag(true);
-    }
   }
 
   public boolean isMemory8Bit()
@@ -733,7 +713,7 @@ public class Cpu65816
     setData(operand);
   }
 
-  public void shiftLeftData()
+  public void ASL()
   {
     int operand = getData();
     boolean carry = isNegative(operand);
@@ -742,13 +722,13 @@ public class Cpu65816
     setData(operand);
   }
 
-  public void shiftLeftA()
+  public void ASL_A()
   {
-    int a = getA();
-    boolean carry = isNegative(a);
-    a = trimMemory(a << 1);
+    int operand = getA();
+    boolean carry = isNegative(operand);
+    operand = trimMemory(operand << 1);
     setCarryFlag(carry);
-    setA(a);
+    setA(operand);
   }
 
   public boolean blockMoveNext()
@@ -808,6 +788,10 @@ public class Cpu65816
     return a;
   }
 
+  private void branch()
+  {
+  }
+
   public void PER()
   {
     internalData = toShort(internalData + programAddress.getOffset());  // + Carry?
@@ -818,7 +802,7 @@ public class Cpu65816
     setDirectPage(internalData);
   }
 
-  public  void PHD()
+  public void PHD()
   {
     internalData = directPage;
   }
@@ -848,5 +832,431 @@ public class Cpu65816
     processorStatus.setRegisterValue(getDataLow());
   }
 
+  public void BRK()
+  {
+    processorStatus.setInterruptDisableFlag(true);
+    processorStatus.setDecimalFlag(false);
+    if (processorStatus.isEmulationMode())
+    {
+      processorStatus.setBreakFlag(true);
+    }
+  }
+
+  public void COP()
+  {
+    processorStatus.setInterruptDisableFlag(true);
+    processorStatus.setDecimalFlag(false);
+    if (processorStatus.isEmulationMode())
+    {
+      processorStatus.setBreakFlag(true);
+    }
+  }
+
+  public void ORA()
+  {
+    int operand = getData();
+    setA(getA() | operand);
+  }
+
+  public void TSB()
+  {
+    int value = getData();
+    setData((value | getA()), false);
+    processorStatus.setZeroFlag((value & getA()) == 0);
+  }
+
+  public  void TRB()
+  {
+    int value = getData();
+    setData(value & trimMemory(~getA()), false);
+    processorStatus.setZeroFlag((value & getA()) == 0);
+  }
+
+  public void BPL()
+  {
+    if (!processorStatus.signFlag())
+    {
+      branch();
+    }
+    else
+    {
+      doneInstruction();
+    }
+  }
+
+  public void BMI()
+  {
+
+  }
+
+  public void CLC()
+  {
+
+  }
+
+  public void INC_A()
+  {
+
+  }
+
+  public void TCS()
+  {
+
+  }
+
+  public void AND()
+  {
+
+  }
+
+  public void BIT()
+  {
+
+  }
+
+  public void ROL()
+  {
+
+  }
+
+  public void ROL_A()
+  {
+
+  }
+
+  public void SEC()
+  {
+
+  }
+
+  public void DEC_A()
+  {
+
+  }
+
+  public void TSC()
+  {
+
+  }
+
+  public void RTI()
+  {
+
+  }
+
+  public void EOR()
+  {
+
+  }
+
+  public void WDM()
+  {
+
+  }
+
+  public void MVP()
+  {
+
+  }
+
+  public void MVN()
+  {
+
+  }
+
+  public void LSR()
+  {
+
+  }
+
+  public void PHA()
+  {
+
+  }
+
+  public void LSR_A()
+  {
+
+  }
+
+  public void BVC()
+  {
+
+  }
+
+  public void CLI()
+  {
+
+  }
+
+  public void PHY()
+  {
+
+  }
+
+  public void TCD()
+  {
+
+  }
+
+  public void ADC()
+  {
+
+  }
+
+  public void STZ()
+  {
+
+  }
+
+  public void PLA()
+  {
+
+  }
+
+  public void ROR()
+  {
+
+  }
+
+  public void ROR_A()
+  {
+
+  }
+
+  public void BVS()
+  {
+
+  }
+
+  public void SEI()
+  {
+
+  }
+
+  public void PLY()
+  {
+
+  }
+
+  public void TDC()
+  {
+
+  }
+
+  public void BRA()
+  {
+
+  }
+
+  public void STA()
+  {
+
+  }
+
+  public void STY()
+  {
+
+  }
+
+  public void STX()
+  {
+
+  }
+
+  public void DEY()
+  {
+
+  }
+
+  public void TXA()
+  {
+
+  }
+
+  public void BCC()
+  {
+
+  }
+
+  public void LDY()
+  {
+
+  }
+
+  public void LDA()
+  {
+  }
+
+  public void LDX()
+  {
+
+  }
+
+  public void BCS()
+  {
+
+  }
+
+  public void CLV()
+  {
+
+  }
+
+  public void TSX()
+  {
+
+  }
+
+  public void TYX()
+  {
+
+  }
+
+  public void TYA()
+  {
+
+  }
+
+  public void TXS()
+  {
+
+  }
+
+  public void TXY()
+  {
+
+  }
+
+  public void CPY()
+  {
+
+  }
+
+  public void CMP()
+  {
+
+  }
+
+  public void REP()
+  {
+
+  }
+
+  public void TAY()
+  {
+
+  }
+
+  public void TAX()
+  {
+
+  }
+
+  public void PHX()
+  {
+
+  }
+
+  public void STP()
+  {
+
+  }
+
+  public void DEC()
+  {
+
+  }
+
+  public void INY()
+  {
+
+  }
+
+  public void DEX()
+  {
+
+  }
+
+  public void WAI()
+  {
+
+  }
+
+  public void BNE()
+  {
+
+  }
+
+  public void CLD()
+  {
+
+  }
+
+  public void CPX()
+  {
+
+  }
+
+  public void SBC()
+  {
+
+  }
+
+  public void SEP()
+  {
+
+  }
+
+  public void INC()
+  {
+
+  }
+
+  public void INX()
+  {
+
+  }
+
+  public void NOP()
+  {
+
+  }
+
+  public void XBA()
+  {
+
+  }
+
+  public void BEQ()
+  {
+
+  }
+
+  public void SED()
+  {
+    processorStatus.setDecimalFlag(true);
+  }
+
+  public void PLX()
+  {
+
+  }
+
+  public void XCE()
+  {
+
+  }
+
+  public void RES()
+  {
+    setEmulationMode(true);
+    dataBank = 0;
+    directPage = 0;
+    programAddress.setBank(0);
+    stackPointer = getLowByte(stackPointer) | 0x100;
+    processorStatus.setDecimalFlag(false);
+    processorStatus.setInterruptDisableFlag(true);
+  }
 }
 

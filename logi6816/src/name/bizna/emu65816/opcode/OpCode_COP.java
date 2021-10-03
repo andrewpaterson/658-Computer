@@ -1,21 +1,21 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 import name.bizna.emu65816.addressingmode.StackSoftwareInterruptCycles;
-import name.bizna.emu65816.interrupt.COPVector;
 
 public class OpCode_COP
     extends OpCode
 {
-  public OpCode_COP(int code)
+  public OpCode_COP(int code, InstructionCycles cycles)
   {
-    super("COP", "Force co-processor software interrupt.", code, new StackSoftwareInterruptCycles(new COPVector()));
+    super("COP", "Force co-processor software interrupt.", code, cycles);
   }
 
   @Override
   public void execute1(Cpu65816 cpu)
   {
-    cpu.coprocessor();
+    cpu.COP();
   }
 }
 

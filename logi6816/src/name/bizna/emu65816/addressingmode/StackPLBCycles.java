@@ -14,7 +14,7 @@ public class StackPLBCycles
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(PBR(), PC()), IO()),
-          new BusCycle(Address(S(), o(1)), Read_DataLow(), SP_inc(), E(Cpu65816::PLB), DONE()));
+          new BusCycle(Address(S(), o(1)), SP_inc(), Read_DataLow(), E(Cpu65816::PLB), DONE()));
   }
 }
 

@@ -25,7 +25,6 @@ public enum AddressingMode
   Immediate,
   StackInterruptSoftware,
   StackInterruptHardware,
-  StackImplied,
   Stack,
   StackImmediate,
   StackDirectIndirect,

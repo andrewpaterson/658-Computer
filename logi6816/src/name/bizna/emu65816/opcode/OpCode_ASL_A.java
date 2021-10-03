@@ -14,7 +14,7 @@ public class OpCode_ASL_A
   @Override
   public void execute1(Cpu65816 cpu)
   {
-    cpu.shiftLeftA();
+    cpu.ASL_A();
   }
 }
 

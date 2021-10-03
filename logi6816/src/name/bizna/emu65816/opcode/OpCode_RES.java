@@ -14,11 +14,5 @@ public class OpCode_RES
           -1,
           new StackResetCycles(new ResetVector()));
   }
-
-  @Override
-  public void execute1(Cpu65816 cpu)
-  {
-    cpu.reset();
-  }
 }
 

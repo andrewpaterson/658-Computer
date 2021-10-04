@@ -10,11 +10,5 @@ public class OpCode_INC_A
   {
     super("INC", "Increment accumulator; update NZ.", mCode, busCycles);
   }
-
-  @Override
-  public void execute1(Cpu65816 cpu)
-  {
-    cpu.incrementA();
-  }
 }
 

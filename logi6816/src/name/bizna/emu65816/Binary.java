@@ -25,36 +25,6 @@ public class Binary
     return (value == 0x0000);
   }
 
-  public static int setBitIn8BitValue(int value, int bitNumber)
-  {
-    int mask = (1 << bitNumber);
-    value = (value | mask);
-    return toByte(value);
-  }
-
-  public static int clearBitIn8BitValue(int value, int bitNumber)
-  {
-    int mask = (1 << bitNumber);
-    mask = (mask ^ 0xFF);
-    value = (value & mask);
-    return toByte(value);
-  }
-
-  public static int setBitIn16BitValue(int value, int bitNumber)
-  {
-    int mask = (1 << bitNumber);
-    value = (value | mask);
-    return toShort(value);
-  }
-
-  public static int clearBitIn16BitValue(int value, int bitNumber)
-  {
-    int mask = (1 << bitNumber);
-    mask = (mask ^ 0xFFFF);
-    value = (value & mask);
-    return toShort(value);
-  }
-
   public static BCDResult bcdSum8Bit(int bcdFirst, int bcdSecond, boolean carry)
   {
     int shift = 0;

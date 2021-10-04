@@ -1,6 +1,7 @@
 package name.bizna.emu65816;
 
 import name.bizna.emu65816.addressingmode.*;
+import name.bizna.emu65816.interrupt.BRKVector;
 import name.bizna.emu65816.interrupt.COPVector;
 import name.bizna.emu65816.opcode.*;
 
@@ -17,7 +18,7 @@ public class OpCodeTable
   public static OpCode[] createTable()
   {
     List<OpCode> opCodes = new ArrayList<>();
-    add(opCodes, new OpCode_BRK(BRK_Interrupt));
+    add(opCodes, new OpCode_BRK(BRK_Interrupt, new StackSoftwareInterruptCycles(new BRKVector(), Cpu65816::BRK)));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(Cpu65816::ORA)));
     add(opCodes, new OpCode_COP(COP_Interrupt, new StackSoftwareInterruptCycles(new COPVector(), Cpu65816::COP)));
     add(opCodes, new OpCode_ORA(ORA_StackRelative, new StackRelativeCycles(Cpu65816::ORA)));
@@ -25,10 +26,10 @@ public class OpCodeTable
     add(opCodes, new OpCode_ORA(ORA_DirectPage, new DirectCycles(Cpu65816::ORA, A)));
     add(opCodes, new OpCode_ASL(ASL_DirectPage, new DirectRMWCycles(Cpu65816::ASL)));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectLong, new DirectIndirectLongCycles(Cpu65816::ORA)));
-    add(opCodes, new OpCode_PHP(PHP_StackImplied, new StackImpliedPHPCycles()));
+    add(opCodes, new OpCode_PHP(PHP_StackImplied, new StackImpliedPHPCycles(Cpu65816::PHP)));
     add(opCodes, new OpCode_ORA(ORA_Immediate, new ImmediateCycles(Cpu65816::ORA, A)));
     add(opCodes, new OpCode_ASL_A(ASL_Accumulator, new AccumulatorCycles(Cpu65816::ASL_A)));
-    add(opCodes, new OpCode_PHD(PHD_StackImplied, new StackImpliedPHDCycles()));
+    add(opCodes, new OpCode_PHD(PHD_StackImplied, new StackImpliedPHDCycles(Cpu65816::PHD)));
     add(opCodes, new OpCode_TSB(TSB_Absolute, new AbsoluteRMWCycles(Cpu65816::TSB)));
     add(opCodes, new OpCode_ORA(ORA_Absolute, new AbsoluteWriteCycles(Cpu65816::ORA, A)));
     add(opCodes, new OpCode_ASL(ASL_Absolute, new AbsoluteRMWCycles(Cpu65816::ASL)));
@@ -154,7 +155,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_STX(STX_DirectPage, new DirectWriteCycles(Cpu65816::STX, XY)));
     add(opCodes, new OpCode_STA(STA_DirectPageIndirectLong, new DirectIndirectLongWriteCycles(Cpu65816::STA)));
     add(opCodes, new OpCode_DEY(DEY_Implied, new ImpliedCycles(Cpu65816::DEY)));
-    add(opCodes, new OpCode_BIT(BIT_Immediate, new ImmediateCycles(Cpu65816::BIT, A)));
+    add(opCodes, new OpCode_BIT(BIT_Immediate, new ImmediateCycles(Cpu65816::BIT_I, A)));
     add(opCodes, new OpCode_TXA(TXA_Implied, new ImpliedCycles(Cpu65816::TXA)));
     add(opCodes, new OpCode_PHB(PHB_StackImplied, new StackPHBCycles()));
     add(opCodes, new OpCode_STY(STY_Absolute, new AbsoluteWriteCycles(Cpu65816::STY, XY)));

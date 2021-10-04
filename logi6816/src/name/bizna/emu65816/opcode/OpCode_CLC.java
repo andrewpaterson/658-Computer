@@ -10,20 +10,5 @@ public class OpCode_CLC
   {
     super("CLC", "Clear Carry Flag", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    int cycle = cpu.getCycle();
-    if (cycle == 1)
-    {
-      cpu.getCpuStatus().setCarryFlag(false);
-      cpu.noAddress();
-    }
-    else
-    {
-      invalidCycle();
-    }
-  }
 }
 

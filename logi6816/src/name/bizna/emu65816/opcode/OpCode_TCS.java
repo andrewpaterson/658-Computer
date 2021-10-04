@@ -11,21 +11,5 @@ public class OpCode_TCS
   {
     super("TCS", "Transfer C Accumulator to Stack Pointer", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    int stackPointer = cpu.getStackPointer();
-    if (cpu.getCpuStatus().isEmulationMode())
-    {
-      stackPointer = Binary.setLowByte(stackPointer, Binary.getLowByte(cpu.getA()));
-    }
-    else
-    {
-      stackPointer = cpu.getA();
-    }
-    cpu.setStackPointer(stackPointer);
-    cpu.addToProgramAddressAndCycles(1, 2);
-  }
 }
 

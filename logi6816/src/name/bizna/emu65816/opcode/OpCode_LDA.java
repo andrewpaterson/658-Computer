@@ -8,7 +8,7 @@ public class OpCode_LDA
 {
   public OpCode_LDA(int mCode, InstructionCycles busCycles)
   {
-    super("LDA", "Load Accumulator with Memory", mCode, busCycles.getAddressingMode());
+    super("LDA", "Load Accumulator with Memory", mCode, busCycles);
   }
 
   @Override

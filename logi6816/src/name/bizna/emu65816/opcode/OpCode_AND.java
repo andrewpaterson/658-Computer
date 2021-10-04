@@ -11,25 +11,5 @@ public class OpCode_AND
   {
     super("AND", "Bitwise AND memory with A; result in A and update NZ.", mCode, cycles);
   }
-
-  @Override
-  public void execute1(Cpu65816 cpu)
-  {
-    if (cpu.isMemory8Bit())
-    {
-      int operand = cpu.getData();
-      cpu.setA((cpu.getA() & operand));
-    }
-  }
-
-  @Override
-  public void execute2(Cpu65816 cpu)
-  {
-    if (cpu.isMemory16Bit())
-    {
-      int operand = cpu.getData();
-      cpu.setA((cpu.getA() & operand));
-    }
-  }
 }
 

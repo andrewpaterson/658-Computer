@@ -5,22 +5,13 @@ import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.EmulatorException;
 import name.bizna.emu65816.addressingmode.InstructionCycles;
 
-public abstract class OpCode
+public class OpCode
 {
   protected final int code;
   protected final String name;
   protected final AddressingMode addressingMode;
   protected final InstructionCycles cycles;
   protected final String description;
-
-  public OpCode(String name, String description, int code, AddressingMode addressingMode)
-  {
-    this.description = description;
-    this.code = code;
-    this.name = name;
-    this.addressingMode = addressingMode;
-    this.cycles = null;
-  }
 
   public OpCode(String name, String description, int code, InstructionCycles cycles)
   {

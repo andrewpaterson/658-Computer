@@ -24,7 +24,7 @@ public class OpCode_ROR
     value = toByte(value >> 1);
     if (carryWasSet)
     {
-      value = Binary.setBitIn8BitValue(value, 7);
+      value = Binary.setBit(value, 7);
     }
     else
     {
@@ -41,7 +41,7 @@ public class OpCode_ROR
     value = toShort(value >> 1);
     if (carryWasSet)
     {
-      value = Binary.setBitIn16BitValue(value, 15);
+      value = Binary.setBit(value, 15);
     }
     else
     {

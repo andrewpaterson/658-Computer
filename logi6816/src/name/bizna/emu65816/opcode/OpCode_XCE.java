@@ -30,7 +30,7 @@ public class OpCode_XCE
       cpu.getCpuStatus().setAccumulatorWidthFlag(cpu.getCpuStatus().isEmulationMode());
       cpu.getCpuStatus().setIndexWidthFlag(cpu.getCpuStatus().isEmulationMode());
 
-      cpu.setStackPointer();
+      cpu.setDefaultStackPointer();
 
       cpu.noAddress();
     }

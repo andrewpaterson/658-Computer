@@ -19,12 +19,12 @@ public class OpCode_TYX
     {
       int value = Binary.getLowByte(cpu.getY());
       cpu.setX(Binary.setLowByte(cpu.getX(), value));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(value);
     }
     else
     {
       cpu.setX(cpu.getY());
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
+      cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getX());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

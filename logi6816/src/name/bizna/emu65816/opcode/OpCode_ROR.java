@@ -31,7 +31,7 @@ public class OpCode_ROR
       value = Binary.clearBitIn8BitValue(value, 7);
     }
     cpu.getCpuStatus().setCarryFlag(carryWillBeSet);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(value);
   }
 
   void DO_ROR_16_BIT(Cpu65816 cpu, int value)
@@ -48,7 +48,7 @@ public class OpCode_ROR
       value = Binary.clearBitIn16BitValue(value, 15);
     }
     cpu.getCpuStatus().setCarryFlag(carryWillBeSet);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(value);
   }
 
   /**

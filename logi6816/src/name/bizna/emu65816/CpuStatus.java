@@ -204,36 +204,36 @@ public class CpuStatus
     setSignFlag((value & STATUS_SIGN) != 0);
   }
 
-  public void updateZeroFlagFrom8BitValue(int value)
+  public void setZeroFlagFrom8BitValue(int value)
   {
     setZeroFlag(Binary.is8bitValueZero(value));
   }
 
-  public void updateZeroFlagFrom16BitValue(int value)
+  public void setZeroFlagFrom16BitValue(int value)
   {
     setZeroFlag(Binary.is16bitValueZero(value));
   }
 
-  public void updateSignFlagFrom8BitValue(int value)
+  public void setSignFlagFrom8BitValue(int value)
   {
     setSignFlag(Binary.is8bitValueNegative(value));
   }
 
-  public void updateSignFlagFrom16BitValue(int value)
+  public void setSignFlagFrom16BitValue(int value)
   {
     setSignFlag(Binary.is16bitValueNegative(value));
   }
 
-  public void updateSignAndZeroFlagFrom8BitValue(int value)
+  public void setSignAndZeroFlagFrom8BitValue(int value)
   {
-    updateSignFlagFrom8BitValue(value);
-    updateZeroFlagFrom8BitValue(value);
+    setSignFlagFrom8BitValue(value);
+    setZeroFlagFrom8BitValue(value);
   }
 
-  public void updateSignAndZeroFlagFrom16BitValue(int value)
+  public void setSignAndZeroFlagFrom16BitValue(int value)
   {
-    updateSignFlagFrom16BitValue(value);
-    updateZeroFlagFrom16BitValue(value);
+    setSignFlagFrom16BitValue(value);
+    setZeroFlagFrom16BitValue(value);
   }
 }
 

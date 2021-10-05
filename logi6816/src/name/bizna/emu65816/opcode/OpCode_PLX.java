@@ -19,13 +19,13 @@ public class OpCode_PLX
     {
       int value = cpu.pull8Bit();
       cpu.setX(Binary.setLowByte(cpu.getX(), value));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(value);
       cpu.addToProgramAddressAndCycles(1, 4);
     }
     else
     {
       cpu.setX(cpu.pull16Bit());
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
+      cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getX());
       cpu.addToProgramAddressAndCycles(1, 5);
     }
   }

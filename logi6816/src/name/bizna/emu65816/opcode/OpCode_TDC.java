@@ -15,7 +15,7 @@ public class OpCode_TDC
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     cpu.setA(cpu.getDirectPage());
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getA());
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

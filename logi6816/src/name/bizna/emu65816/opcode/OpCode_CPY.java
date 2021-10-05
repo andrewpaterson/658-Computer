@@ -1,6 +1,5 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.addressingmode.InstructionCycles;
@@ -21,7 +20,7 @@ public class OpCode_CPY
   {
     int value = cpu.getDataLow(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toByte(Binary.getLowByte(cpu.getY()) - value);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.getLowByte(cpu.getY()) >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }
@@ -30,7 +29,7 @@ public class OpCode_CPY
   {
     int value = cpu.getData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toShort(cpu.getY() - value);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getY() >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }

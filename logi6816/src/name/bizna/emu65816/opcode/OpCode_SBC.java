@@ -42,7 +42,7 @@ public class OpCode_SBC
 
     int result8Bit = Binary.getLowByte(result16Bit);
     // Update sign and zero flags
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result8Bit);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(result8Bit);
     // Store the 8 bit result in the accumulator
     cpu.setA(Binary.setLowByte(cpu.getA(), result8Bit));
   }
@@ -73,7 +73,7 @@ public class OpCode_SBC
 
     int result16Bit = Binary.getLowByte(result32Bit);
     // Update sign and zero flags
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(result16Bit));
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(toByte(result16Bit));
     // Store the 8 bit result in the accumulator
     cpu.setA(result16Bit);
   }
@@ -90,7 +90,7 @@ public class OpCode_SBC
     cpu.getCpuStatus().setCarryFlag(!borrow);
 
     cpu.setA(Binary.setLowByte(cpu.getA(), result));
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(result);
   }
 
   protected void execute16BitBCDSBC(Cpu65816 cpu)
@@ -105,7 +105,7 @@ public class OpCode_SBC
     cpu.getCpuStatus().setCarryFlag(!borrow);
 
     cpu.setA(result);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(toByte(result));
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(toByte(result));
   }
 
   @Override

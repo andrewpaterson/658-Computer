@@ -22,7 +22,7 @@ public class OpCode_LSR
     boolean newCarry = (value & 0x01) != 0;
     value = toByte(value >> 1);
     cpu.getCpuStatus().setCarryFlag(newCarry);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(value);
   }
 
   void DO_LSR_16_BIT(Cpu65816 cpu, int value)
@@ -30,7 +30,7 @@ public class OpCode_LSR
     boolean newCarry = (value & 0x0001) != 0;
     value = toShort(value >> 1);
     cpu.getCpuStatus().setCarryFlag(newCarry);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(value);
   }
 
   protected void executeMemoryLSR(Cpu65816 cpu)

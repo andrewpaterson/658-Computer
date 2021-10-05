@@ -24,7 +24,7 @@ public class OpCode_INY
       lowerY++;
       lowerY = toByte(lowerY);
       cpu.setY(Binary.setLowByte(cpu.getY(), lowerY));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lowerY);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(lowerY);
     }
     else
     {
@@ -32,7 +32,7 @@ public class OpCode_INY
       y++;
       y = toShort(y);
       cpu.setY(y);
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(y);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(y);
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

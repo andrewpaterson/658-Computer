@@ -21,9 +21,6 @@ public class Cpu65816
   protected Address programAddress;
   protected int stackPointer;
 
-  // Total number of cycles
-  protected long totalCyclesCounter;
-
   protected boolean previousClock;
   protected int cycle;
   protected OpCode opCode;
@@ -50,16 +47,16 @@ public class Cpu65816
 
   public Cpu65816(Pins pins)
   {
+    this.pins = pins;
     programAddress = new Address(0x00, 0x0000);
-    setStackPointer();
+
+    setDefaultStackPointer();
     opCodeTable = OpCodeTable.createTable();
     resetOpcode = new OpCode_RES();
     irqOpcode = new OpCode_IRQ();
     nmiOpcode = new OpCode_NMI();
     abortOpcode = new OpCode_ABORT();
     fetchNextOpcode = new OpCode_FetchNextOpCode();
-    this.pins = pins;
-    totalCyclesCounter = 0;
     accumulator = 0;
     xIndex = 0;
     yIndex = 0;
@@ -109,15 +106,14 @@ public class Cpu65816
     if (isMemory16Bit())
     {
       assert16Bit(accumulator, "Accumulator");
-      processorStatus.updateSignAndZeroFlagFrom16BitValue(accumulator);
       this.accumulator = accumulator;
     }
     else
     {
       assert8Bit(accumulator, "Accumulator");
-      processorStatus.updateSignAndZeroFlagFrom8BitValue(accumulator);
       this.accumulator = setLowByte(this.accumulator, accumulator);
     }
+    setSignAndZeroFromMemory(accumulator);
   }
 
   public void setData(int data, boolean updateFlags)
@@ -125,20 +121,28 @@ public class Cpu65816
     if (isMemory16Bit())
     {
       assert16Bit(data, "Data");
-      if (updateFlags)
-      {
-        processorStatus.updateSignAndZeroFlagFrom16BitValue(data);
-      }
       internalData = data;
     }
     else
     {
       assert8Bit(data, "Data");
-      if (updateFlags)
-      {
-        processorStatus.updateSignAndZeroFlagFrom8BitValue(data);
-      }
       internalData = setLowByte(internalData, data);
+    }
+    if (updateFlags)
+    {
+      setSignAndZeroFromMemory(data);
+    }
+  }
+
+  private void setSignAndZeroFromMemory(int value)
+  {
+    if (isMemory16Bit())
+    {
+      processorStatus.setSignAndZeroFlagFrom16BitValue(value);
+    }
+    else
+    {
+      processorStatus.setSignAndZeroFlagFrom8BitValue(value);
     }
   }
 
@@ -295,20 +299,9 @@ public class Cpu65816
     return !isIndex8Bit();
   }
 
-  public void addToCycles(int cycles)
+  public boolean isCarrySet()
   {
-    totalCyclesCounter += cycles;
-  }
-
-  public void addToProgramAddress(int bytes)
-  {
-    programAddress.offset(bytes, false);
-  }
-
-  public void addToProgramAddressAndCycles(int bytes, int cycles)
-  {
-    addToCycles(cycles);
-    addToProgramAddress(bytes);
+    return processorStatus.carryFlag();
   }
 
   public void setProgramAddress(Address address)
@@ -389,7 +382,7 @@ public class Cpu65816
     return internalDirectOffset;
   }
 
-  public void setStackPointer()
+  public void setDefaultStackPointer()
   {
     stackPointer = 0x01FF;
   }
@@ -692,13 +685,7 @@ public class Cpu65816
   public int clearBit(int value, int bitNumber)
   {
     int mask = (1 << bitNumber);
-    if (isMemory8Bit())
-    {
-      mask = (mask ^ 0xFF);
-      value = (value & mask);
-      return toByte(value);
-    }
-    else if (isMemory16Bit())
+    if (isMemory16Bit())
     {
       mask = (mask ^ 0xFFFF);
       value = (value & mask);
@@ -706,7 +693,9 @@ public class Cpu65816
     }
     else
     {
-      throw new EmulatorException("Memory must be 8- or 16-bit.");
+      mask = (mask ^ 0xFF);
+      value = (value & mask);
+      return toByte(value);
     }
   }
 
@@ -714,25 +703,21 @@ public class Cpu65816
   {
     int mask = (1 << bitNumber);
     value = (value | mask);
-    if (isMemory8Bit())
-    {
-      return toByte(value);
-    }
-    else if (isMemory16Bit())
+    if (isMemory16Bit())
     {
       return toShort(value);
     }
     else
     {
-      throw new EmulatorException("Memory must be 8- or 16-bit.");
+      return toByte(value);
     }
   }
 
-  int rotateLeft8Bit(int value)
+  int rotateLeft(int value)
   {
-    boolean carryWasSet = getCpuStatus().carryFlag();
-    boolean carryWillBeSet = is8bitValueNegative(value);
-    value = toByte(value << 1);
+    boolean carryWasSet = isCarrySet();
+    boolean carryWillBeSet = isMemoryNegative(value);
+    value = trimMemory(value << 1);
     if (carryWasSet)
     {
       value = setBit(value, 0);
@@ -741,33 +726,15 @@ public class Cpu65816
     {
       value = clearBit(value, 0);
     }
-    getCpuStatus().setCarryFlag(carryWillBeSet);
-    getCpuStatus().updateSignAndZeroFlagFrom8BitValue(value);
-    return value;
-  }
-
-  int rotateLeft16Bit(int value)
-  {
-    boolean carryWasSet = getCpuStatus().carryFlag();
-    boolean carryWillBeSet = (value & 0x8000) != 0;
-    value = toShort(value << 1);
-    if (carryWasSet)
-    {
-      value = setBit(value, 0);
-    }
-    else
-    {
-      value = clearBit(value, 0);
-    }
-    getCpuStatus().setCarryFlag(carryWillBeSet);
-    getCpuStatus().updateSignAndZeroFlagFrom16BitValue(value);
+    setCarryFlag(carryWillBeSet);
+    setSignAndZeroFromMemory(value);
     return value;
   }
 
   public void ASL()
   {
     int operand = getData();
-    boolean carry = isNegative(operand);
+    boolean carry = isMemoryNegative(operand);
     operand = trimMemory(operand << 1);
     setCarryFlag(carry);
     setData(operand);
@@ -776,7 +743,7 @@ public class Cpu65816
   public void ASL_A()
   {
     int operand = getA();
-    boolean carry = isNegative(operand);
+    boolean carry = isMemoryNegative(operand);
     operand = trimMemory(operand << 1);
     setCarryFlag(carry);
     setA(operand);
@@ -800,17 +767,16 @@ public class Cpu65816
     return accumulator != 0xffff;
   }
 
-  private boolean isNegative(int operand)
+  private boolean isMemoryNegative(int operand)
   {
     if (isMemory16Bit())
     {
       return is16bitValueNegative(operand);
     }
-    else if (isMemory8Bit())
+    else
     {
       return is8bitValueNegative(operand);
     }
-    return false;
   }
 
   private int trimMemory(int a)
@@ -819,7 +785,7 @@ public class Cpu65816
     {
       a = toShort(a);
     }
-    else if (isMemory8Bit())
+    else
     {
       a = toByte(a);
     }
@@ -957,7 +923,7 @@ public class Cpu65816
   public void TCS()
   {
     int stackPointer = getStackPointer();
-    if (getCpuStatus().isEmulationMode())
+    if (processorStatus.isEmulationMode())
     {
       stackPointer = setLowByte(stackPointer, getLowByte(getA()));
     }
@@ -977,66 +943,40 @@ public class Cpu65816
   {
     int value = getData();
 
-    if (isMemory8Bit())
+    if (isMemory16Bit())
     {
-      getCpuStatus().setSignFlag(is8bitValueNegative(value));
-      getCpuStatus().setOverflowFlag((value & 0x40) != 0);
-      getCpuStatus().updateZeroFlagFrom8BitValue((value & getA()));
+      processorStatus.setSignFlag(is16bitValueNegative(value));
+      processorStatus.setOverflowFlag((value & 0x4000) != 0);
+      processorStatus.setZeroFlagFrom16BitValue((value & getA()));
     }
-
-    else if (isMemory16Bit())
+    else
     {
-      getCpuStatus().setSignFlag(is16bitValueNegative(value));
-      getCpuStatus().setOverflowFlag((value & 0x4000) != 0);
-      getCpuStatus().updateZeroFlagFrom16BitValue((value & getA()));
+      processorStatus.setSignFlag(is8bitValueNegative(value));
+      processorStatus.setOverflowFlag((value & 0x40) != 0);
+      processorStatus.setZeroFlagFrom8BitValue((value & getA()));
     }
   }
 
   public void BIT_I()
   {
-    if (isMemory8Bit())
+    if (isMemory16Bit())
     {
-      getCpuStatus().updateZeroFlagFrom8BitValue((getData() & getA()));
+      processorStatus.setZeroFlagFrom16BitValue((getData() & getA()));
     }
-    else if (isMemory16Bit())
+    else
     {
-      getCpuStatus().updateZeroFlagFrom16BitValue((getData() & getA()));
+      processorStatus.setZeroFlagFrom8BitValue((getData() & getA()));
     }
   }
 
   public void ROL()
   {
-    Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
-
-    if (isMemory8Bit())
-    {
-      int value = getData();
-      value = rotateLeft8Bit(value);
-      DO_ROL_8_BIT(cpu, value);
-      cpu.storeByte(opCodeDataAddress, value);
-    }
-    else
-    {
-      int value = cpu.getData();
-      DO_ROL_16_BIT(cpu, value);
-      cpu.storeTwoBytes(opCodeDataAddress, value);
-    }
+    setData(rotateLeft(getData()));
   }
 
   public void ROL_A()
   {
-    if (cpu.isMemory8Bit())
-    {
-      int value = Binary.getLowByte(cpu.getA());
-      DO_ROL_8_BIT(cpu, value);
-      cpu.setA(Binary.setLowByte(cpu.getA(), value));
-    }
-    else
-    {
-      int value = cpu.getA();
-      DO_ROL_16_BIT(cpu, value);
-      cpu.setA(value);
-    }
+    setA(rotateLeft(getA()));
   }
 
   public void SEC()

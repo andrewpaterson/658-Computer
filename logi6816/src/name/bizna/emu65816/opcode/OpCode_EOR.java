@@ -22,7 +22,7 @@ public class OpCode_EOR
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.getDataLow();
     int result = toByte(Binary.getLowByte(cpu.getA()) ^ operand);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(result);
     cpu.setA(Binary.setLowByte(cpu.getA(), result));
   }
 
@@ -31,7 +31,7 @@ public class OpCode_EOR
     Address opCodeDataAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int operand = cpu.getData();
     int result = toShort(cpu.getA() ^ operand);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(result);
     cpu.setA(result);
   }
 

@@ -20,12 +20,12 @@ public class OpCode_TAX
     {
       int lower8BitsOfA = Binary.getLowByte(cpu.getA());
       cpu.setX(Binary.setLowByte(cpu.getX(), lower8BitsOfA));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
     }
     else
     {
       cpu.setX(cpu.getA());
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+      cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getA());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

@@ -15,7 +15,7 @@ public class OpCode_TSC
   public void executeOnFallingEdge(Cpu65816 cpu)
   {
     cpu.setA(cpu.getStackPointer());
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getA());
     cpu.addToProgramAddressAndCycles(1, 2);
   }
 }

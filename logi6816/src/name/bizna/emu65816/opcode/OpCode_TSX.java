@@ -20,12 +20,12 @@ public class OpCode_TSX
     {
       int stackPointerLower8Bits = Binary.getLowByte(stackPointer);
       cpu.setX(Binary.setLowByte(cpu.getX(), stackPointerLower8Bits));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(stackPointerLower8Bits);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(stackPointerLower8Bits);
     }
     else
     {
       cpu.setX(stackPointer);
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getX());
+      cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getX());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

@@ -22,7 +22,7 @@ public class OpCode_CMP
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getDataLow();
     int result = toByte(Binary.getLowByte(cpu.getA()) - value);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.getLowByte(cpu.getA()) >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }
@@ -32,7 +32,7 @@ public class OpCode_CMP
     Address valueAddress = cpu.getAddressOfOpCodeData(getAddressingMode());
     int value = cpu.getData();
     int result = toShort (cpu.getA() - value);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getA() >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }

@@ -20,12 +20,12 @@ public class OpCode_TAY
     {
       int lower8BitsOfA = Binary.getLowByte(cpu.getA());
       cpu.setY(Binary.setLowByte(cpu.getY(), lower8BitsOfA));
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
+      cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(lower8BitsOfA);
     }
     else
     {
       cpu.setY(cpu.getA());
-      cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(cpu.getA());
+      cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(cpu.getA());
     }
     cpu.addToProgramAddressAndCycles(1, 2);
   }

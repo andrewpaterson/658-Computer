@@ -20,7 +20,7 @@ public class OpCode_CPX
   {
     int value = cpu.getDataLow();
     int result = toByte(Binary.getLowByte(cpu.getX()) - value);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom8BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(result);
     boolean carry = Binary.getLowByte(cpu.getX()) >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }
@@ -29,7 +29,7 @@ public class OpCode_CPX
   {
     int value = cpu.getData(cpu.getAddressOfOpCodeData(getAddressingMode()));
     int result = toShort(cpu.getX() - value);
-    cpu.getCpuStatus().updateSignAndZeroFlagFrom16BitValue(result);
+    cpu.getCpuStatus().setSignAndZeroFlagFrom16BitValue(result);
     boolean carry = cpu.getX() >= value;
     cpu.getCpuStatus().setCarryFlag(carry);
   }

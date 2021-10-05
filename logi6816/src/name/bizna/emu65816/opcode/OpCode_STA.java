@@ -10,11 +10,5 @@ public class OpCode_STA
   {
     super("STA", "Store Accumulator in Memory", mCode, cycles);
   }
-
-  @Override
-  public void execute1(Cpu65816 cpu)
-  {
-    cpu.setData(cpu.getA());
-  }
 }
 

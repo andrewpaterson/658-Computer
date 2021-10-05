@@ -1,7 +1,6 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.opcode.OpCode;
 
 public class WriteDataHigh
     extends DataOperation
@@ -12,9 +11,9 @@ public class WriteDataHigh
   }
 
   @Override
-  public void execute(Cpu65816 cpu, OpCode opCode)
+  public void execute(Cpu65816 cpu)
   {
-    cpu.setPinsData(cpu.getDataHigh());
+    cpu.getPins().setData(cpu.getDataHigh());
   }
 }
 

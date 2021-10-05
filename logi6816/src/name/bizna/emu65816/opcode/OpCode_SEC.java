@@ -1,6 +1,5 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_SEC
@@ -9,13 +8,6 @@ public class OpCode_SEC
   public OpCode_SEC(int mCode, InstructionCycles cycles)
   {
     super("SEC", "Set Carry Flag", mCode, cycles);
-  }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cpu.getCpuStatus().setCarryFlag(true);
-    cpu.addToProgramAddressAndCycles(1, 2);
   }
 }
 

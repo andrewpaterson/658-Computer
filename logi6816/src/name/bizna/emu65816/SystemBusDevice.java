@@ -7,6 +7,7 @@ public abstract class SystemBusDevice
   /**
    * Reads one byte from the real address represented by the specified virtual address.
    * That is: maps the virtual address to the real one and reads from it.
+   *
    * @return
    */
   public abstract int readByte(Address address);

@@ -1,7 +1,6 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.opcode.OpCode;
 
 public class FetchNewProgramBank
     extends DataOperation
@@ -12,7 +11,7 @@ public class FetchNewProgramBank
   }
 
   @Override
-  public void execute(Cpu65816 cpu, OpCode opCode)
+  public void execute(Cpu65816 cpu)
   {
     cpu.setNewProgramCounterBank(cpu.getPinData());
   }

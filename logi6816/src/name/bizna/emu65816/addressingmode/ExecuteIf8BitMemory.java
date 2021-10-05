@@ -1,7 +1,6 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.opcode.OpCode;
 
 import java.util.function.Consumer;
 
@@ -16,7 +15,7 @@ public class ExecuteIf8BitMemory
   }
 
   @Override
-  public void execute(Cpu65816 cpu, OpCode opCode)
+  public void execute(Cpu65816 cpu)
   {
     if (cpu.isMemory8Bit())
     {

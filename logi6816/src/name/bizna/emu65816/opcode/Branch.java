@@ -1,7 +1,6 @@
 package name.bizna.emu65816.opcode;
 
 import name.bizna.emu65816.Address;
-import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Binary;
 import name.bizna.emu65816.Cpu65816;
 
@@ -9,7 +8,7 @@ import static name.bizna.emu65816.Unsigned.toShort;
 
 public class Branch
 {
-  public static int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu, AddressingMode addressingMode)
+  public static int executeBranchShortOnCondition(boolean condition, Cpu65816 cpu)
   {
     int opCycles = 2;
     int destination = 0;

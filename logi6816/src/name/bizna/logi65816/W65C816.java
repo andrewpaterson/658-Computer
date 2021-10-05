@@ -3955,7 +3955,7 @@ public class W65C816
       }
       case 5:
       {
-        logicalShiftRight();
+        shiftDataRight();
         break;
       }
       case 6:
@@ -3988,7 +3988,7 @@ public class W65C816
       }
       case 4:
       {
-        logicalShiftRight();
+        shiftDataRight();
         break;
       }
       case 5:
@@ -4021,7 +4021,7 @@ public class W65C816
       }
       case 4:
       {
-        logicalShiftRight();
+        shiftDataRight();
         break;
       }
       case 5:
@@ -4049,7 +4049,7 @@ public class W65C816
       }
       case 3:
       {
-        logicalShiftRight();
+        shiftDataRight();
         break;
       }
       case 4:
@@ -5930,15 +5930,6 @@ public class W65C816
     parent.setMLB(instanceState, mlb);
   }
 
-  private void logicalShiftRight()
-  {
-    updateCarryStatus();
-    short result = (short) ((data & 0xFF) >> 1);
-    data = (byte) result;
-    updateZeroAndNegative(result);
-    wantWrite(address, data);
-  }
-
   private int xorAddressTestHighBit()
   {
     return (accumulator ^ address) & (data ^ address) & 0x80;
@@ -6100,6 +6091,15 @@ public class W65C816
     short result = (short) ((data & 0xFF) << 1);
     data = (byte) result;
     updateCarry(result);
+    wantWrite(address, data);
+  }
+
+  private void shiftDataRight()
+  {
+    updateCarryStatus();
+    short result = (short) ((data & 0xFF) >> 1);
+    data = (byte) result;
+    updateZeroAndNegative(result);
     wantWrite(address, data);
   }
 

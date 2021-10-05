@@ -1,5 +1,6 @@
 package name.bizna.emu65816;
 
+@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "unused"})
 public class Pins
 {
   private int address;                  //output
@@ -11,7 +12,7 @@ public class Pins
   private boolean emulation;            //output
   private boolean irqB;                 //input
   private boolean nmiB;                 //input
-  private boolean memoryLock;           //output
+  private boolean memoryLockB;           //output
   private boolean mx;                   //output
   private boolean ready;                //bi-directional.  Also.  Fuck-it I'm treating this an output.
   private boolean resetB;               //input
@@ -30,7 +31,7 @@ public class Pins
     this.emulation = true;
     this.irqB = true;
     this.nmiB = true;
-    this.memoryLock = false;
+    this.memoryLockB = false;
     this.mx = true;
     this.ready = false;
     this.resetB = true;
@@ -70,26 +71,6 @@ public class Pins
     return read;
   }
 
-  public boolean isAbortB()
-  {
-    return abortB;
-  }
-
-  public void setAbortB(boolean abortB)
-  {
-    this.abortB = abortB;
-  }
-
-  public boolean isBusEnable()
-  {
-    return busEnable;
-  }
-
-  public void setBusEnable(boolean busEnable)
-  {
-    this.busEnable = busEnable;
-  }
-
   public boolean getPhi2()
   {
     return phi2;
@@ -100,79 +81,24 @@ public class Pins
     this.phi2 = phi2;
   }
 
-  public boolean isEmulation()
-  {
-    return emulation;
-  }
-
   public void setEmulation(boolean emulation)
   {
     this.emulation = emulation;
   }
 
-  public boolean isIrqB()
+  public void setMemoryLockB(boolean memoryLock)
   {
-    return irqB;
+    this.memoryLockB = memoryLock;
   }
 
-  public void setIrqB(boolean irqB)
-  {
-    this.irqB = irqB;
-  }
-
-  public boolean isNmiB()
-  {
-    return nmiB;
-  }
-
-  public void setNmiB(boolean nmiB)
-  {
-    this.nmiB = nmiB;
-  }
-
-  public boolean isMemoryLock()
-  {
-    return memoryLock;
-  }
-
-  public void setMemoryLock(boolean memoryLock)
-  {
-    this.memoryLock = memoryLock;
-  }
-
-  public boolean isMx()
-  {
-    return mx;
-  }
-
-  public void setMx(boolean mx)
+  public void setMX(boolean mx)
   {
     this.mx = mx;
-  }
-
-  public boolean isReady()
-  {
-    return ready;
   }
 
   public void setReady(boolean ready)
   {
     this.ready = ready;
-  }
-
-  public boolean isResetB()
-  {
-    return resetB;
-  }
-
-  public void setResetB(boolean resetB)
-  {
-    this.resetB = resetB;
-  }
-
-  public boolean isVectorPullB()
-  {
-    return vectorPullB;
   }
 
   public void setVectorPullB(boolean vectorPullB)

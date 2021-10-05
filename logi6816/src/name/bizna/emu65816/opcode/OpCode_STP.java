@@ -10,13 +10,5 @@ public class OpCode_STP
   {
     super("STP", "Stop the Clock", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cpu.stop();
-    cpu.addToProgramAddress(1);
-    cpu.addToCycles(3);
-  }
 }
 

@@ -6,7 +6,7 @@ import name.bizna.emu65816.Cpu65816;
 public class AddressCycle
     extends BaseAddressCycle
 {
-  public AddressCycle(AddressOffset ... offsets)
+  public AddressCycle(AddressOffset... offsets)
   {
   }
 

@@ -14,7 +14,7 @@ public class WaitForInterruptCycles
     super(WaitForInterrupt,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO()),
-          new BusCycle(Address(PBR(), PC()), IO(), E(consumer), DONE()));
+          new BusCycle(Address(PBR(), PC()), new WaitOperation(), E(consumer), DONE()));
   }
 }
 

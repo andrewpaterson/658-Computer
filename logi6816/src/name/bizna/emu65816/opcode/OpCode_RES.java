@@ -1,18 +1,16 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.addressingmode.StackResetCycles;
-import name.bizna.emu65816.interrupt.ResetVector;
+import name.bizna.emu65816.addressingmode.InstructionCycles;
 
 public class OpCode_RES
     extends OpCode
 {
-  public OpCode_RES()
+  public OpCode_RES(InstructionCycles cycles)
   {
     super("RES",
           "Reset the CPU.",
           -1,
-          new StackResetCycles(new ResetVector()));
+          cycles);
   }
 }
 

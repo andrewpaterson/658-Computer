@@ -1,11 +1,9 @@
 package name.bizna.emu65816.addressingmode;
 
-import name.bizna.emu65816.Address;
 import name.bizna.emu65816.AddressingMode;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.Width;
 import name.bizna.emu65816.interrupt.InterruptVector;
-import name.bizna.emu65816.opcode.OpCode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -280,21 +278,6 @@ public abstract class InstructionCycles
     return new DoneInstruction();
   }
 
-  protected static RelativeOffset R()
-  {
-    return new RelativeOffset();
-  }
-
-  protected static FetchRelativeOffsetHigh Read_RH()
-  {
-    return new FetchRelativeOffsetHigh();
-  }
-
-  protected static FetchRelativeOffsetLow Read_RL()
-  {
-    return new FetchRelativeOffsetLow();
-  }
-
   @SuppressWarnings("SameParameterValue")
   protected static SetProgramBank PBR_e(int bank)
   {
@@ -343,20 +326,12 @@ public abstract class InstructionCycles
 
   public final void executeOnFallingEdge(Cpu65816 cpu)
   {
-    BusCycle busCycle = cycles.get(cpu.getCycle());
-    Address address = busCycle.getAddress(cpu);
-    cpu.setPinsAddress(address.getOffset());
-    cpu.setPinsData(address.getBank());
+    cycles.get(cpu.getCycle()).executeOnFallingEdge(cpu);
   }
 
-  public final void executeOnRisingEdge(Cpu65816 cpu, OpCode opCode)
+  public final void executeOnRisingEdge(Cpu65816 cpu)
   {
-    BusCycle busCycle = cycles.get(cpu.getCycle());
-    List<Operation> operations = busCycle.getOperations();
-    for (Operation operation : operations)
-    {
-      operation.execute(cpu, opCode);
-    }
+    cycles.get(cpu.getCycle()).executeOnRisingEdge(cpu);
   }
 }
 

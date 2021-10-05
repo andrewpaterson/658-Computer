@@ -10,12 +10,5 @@ public class OpCode_PHB
   {
     super("PHB", "Push Data Bank Register on Stack", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cpu.push8Bit(cpu.getDataBank());
-    cpu.addToProgramAddressAndCycles(1, 3);
-  }
 }
 

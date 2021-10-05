@@ -14,7 +14,7 @@ public class AccumulatorCycles
   {
     super(Accumulator,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
-          new BusCycle(Address(PBR(), PC()), E(operation), DONE()));
+          new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 }
 

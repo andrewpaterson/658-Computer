@@ -13,15 +13,5 @@ public class OpCode_XBA
   {
     super("XBA", "Exchange B and A Accumulator", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    int lowerA = Binary.getLowByte(cpu.getA());
-    int higherA = Binary.getHighByte(cpu.getA());
-    cpu.setA(toShort(higherA | (((lowerA)) << 8)));
-    cpu.getCpuStatus().setSignAndZeroFlagFrom8BitValue(higherA);
-    cpu.addToProgramAddressAndCycles(1, 3);
-  }
 }
 

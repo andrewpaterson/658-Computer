@@ -1,12 +1,11 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.opcode.OpCode;
 
 public abstract class Operation
     implements BusCycleParameter
 {
-  public abstract void execute(Cpu65816 cpu, OpCode opCode);
+  public abstract void execute(Cpu65816 cpu);
 
   @Override
   public boolean isOperation()
@@ -17,6 +16,14 @@ public abstract class Operation
   public boolean mustExecute(Cpu65816 cpu)
   {
     return true;
+  }
+
+  public void _execute(Cpu65816 cpu)
+  {
+    if (mustExecute(cpu))
+    {
+      execute(cpu);
+    }
   }
 
   @Override

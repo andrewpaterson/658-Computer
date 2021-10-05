@@ -11,10 +11,10 @@ public class StackRTLCycles
     super(Stack,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
-          new BusCycle(Address(PBR(), PC()), IO(), SP_inc()),
-          new BusCycle(Address(S()), Read_NewPCL(), SP_inc()),
-          new BusCycle(Address(S()), Read_NewPCH(), SP_inc()),
-          new BusCycle(Address(S()), Read_NewPBR(), PC_e(New_PBR(), New_PC()), DONE()));
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(S(), o(1)), Read_NewPCL(), SP_inc()),
+          new BusCycle(Address(S(), o(1)), Read_NewPCH(), SP_inc()),
+          new BusCycle(Address(S(), o(1)), Read_NewPBR(), SP_inc(), PC_e(New_PBR(), New_PC()), DONE()));
   }
 }
 

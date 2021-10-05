@@ -1,9 +1,6 @@
 package name.bizna.emu65816.opcode;
 
-import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.addressingmode.InstructionCycles;
-
-import static name.bizna.emu65816.opcode.Branch.executeBranchShortOnCondition;
 
 public class OpCode_BPL
     extends OpCode

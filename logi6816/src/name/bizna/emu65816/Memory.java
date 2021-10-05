@@ -2,7 +2,7 @@ package name.bizna.emu65816;
 
 import java.util.Arrays;
 
-import static name.bizna.emu65816.Unsigned.*;
+import static name.bizna.emu65816.Unsigned.toByte;
 
 public class Memory
 {

@@ -1,6 +1,5 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.Stack;
 import static name.bizna.emu65816.AddressingMode.StackDirectIndirect;
 
 public class StackPEICycles

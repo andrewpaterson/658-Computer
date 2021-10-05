@@ -11,9 +11,9 @@ public class StackRTSCycles
     super(Stack,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
-          new BusCycle(Address(PBR(), PC()), IO(), SP_inc()),
-          new BusCycle(Address(S()), Read_NewPCL(), SP_inc()),
-          new BusCycle(Address(S()), Read_NewPCH()),
+          new BusCycle(Address(PBR(), PC()), IO()),
+          new BusCycle(Address(S(), o(1)), Read_NewPCL(), SP_inc()),
+          new BusCycle(Address(S(), o(1)), Read_NewPCH(), SP_inc()),
           new BusCycle(Address(S()), IO(), PC_e(PBR(), New_PC()), DONE()));
   }
 }

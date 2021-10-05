@@ -1,6 +1,6 @@
 package name.bizna.emu65816.addressingmode;
 
-import static name.bizna.emu65816.AddressingMode.*;
+import static name.bizna.emu65816.AddressingMode.AbsoluteIndirect;
 
 public class AbsoluteIndirectJMLCycles
     extends InstructionCycles

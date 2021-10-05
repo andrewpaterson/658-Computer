@@ -10,12 +10,5 @@ public class OpCode_PHK
   {
     super("PHK", "Push Program Bank Register on Stack", mCode, cycles);
   }
-
-  @Override
-  public void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cpu.push8Bit(cpu.getProgramCounter().getBank());
-    cpu.addToProgramAddressAndCycles(1, 3);
-  }
 }
 

@@ -10,7 +10,7 @@ public class Offset
 
   public Offset(int offset)
   {
-    if (offset <0 || offset >3)
+    if (offset < 0 || offset > 3)
     {
       throw new EmulatorException("Numeric Offset must be in the range 0...3.");
     }

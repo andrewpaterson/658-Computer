@@ -3,6 +3,7 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Address;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.EmulatorException;
+import name.bizna.emu65816.Pins;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,9 +70,36 @@ public class BusCycle
     return AddressOffset.getAddress(cpu, addressOffsets);
   }
 
-  public List<Operation> getOperations()
+  public DataOperation getDataOperation()
   {
-    return operations;
+    for (Operation operation : operations)
+    {
+      if (operation.isData())
+      {
+        return (DataOperation) operation;
+      }
+    }
+    return null;
+  }
+
+  public final void executeOnFallingEdge(Cpu65816 cpu)
+  {
+    Address address = getAddress(cpu);
+    getDataOperation().setPins(cpu);
+
+    Pins pins = cpu.getPins();
+    pins.setAddress(address.getOffset());
+    pins.setData(address.getBank());
+  }
+
+  public final void executeOnRisingEdge(Cpu65816 cpu)
+  {
+    getDataOperation().setPins(cpu);
+
+    for (Operation operation : operations)
+    {
+      operation._execute(cpu);
+    }
   }
 }
 

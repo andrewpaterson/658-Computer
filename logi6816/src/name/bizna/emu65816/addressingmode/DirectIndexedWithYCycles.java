@@ -6,7 +6,6 @@ import name.bizna.emu65816.Width;
 import java.util.function.Consumer;
 
 import static name.bizna.emu65816.AddressingMode.DirectIndexedWithY;
-import static name.bizna.emu65816.Width.A;
 
 public class DirectIndexedWithYCycles
     extends InstructionCycles

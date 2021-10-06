@@ -18,14 +18,6 @@ public abstract class Operation
     return true;
   }
 
-  public void _execute(Cpu65816 cpu)
-  {
-    if (mustExecute(cpu))
-    {
-      execute(cpu);
-    }
-  }
-
   @Override
   public boolean isAddress()
   {

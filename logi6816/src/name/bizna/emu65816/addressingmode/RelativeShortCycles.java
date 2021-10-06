@@ -16,7 +16,7 @@ public class RelativeShortCycles
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_DataLow(), PC_inc(), E(operation)),  //Done if branch not taken
           new BusCycle(Address(PBR(), PC()), IO(), new NoteSix()),
-          new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), new SignedDataLow()), DONE()));
+          new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), new SignedDataLow()), IO(), DONE()));
   }
 }
 

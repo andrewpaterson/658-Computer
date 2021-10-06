@@ -16,8 +16,7 @@ public class RelativeLongCycles
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_DataLow(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_DataHigh(), PC_inc(), E(operation)),  //Done if branch not taken
-          new BusCycle(Address(PBR(), PC()), IO()),
-          new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), new SignedData()), DONE()));
+          new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), new SignedData()), IO(), DONE()));
   }
 }
 

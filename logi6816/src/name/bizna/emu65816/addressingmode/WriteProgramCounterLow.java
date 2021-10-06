@@ -16,5 +16,11 @@ public class WriteProgramCounterLow
   {
     cpu.getPins().setData(Binary.getLowByte(cpu.getProgramCounter().getOffset()));
   }
+
+  @Override
+  public String toString()
+  {
+    return "Write(PCL)";
+  }
 }
 

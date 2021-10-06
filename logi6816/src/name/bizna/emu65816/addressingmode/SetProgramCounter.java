@@ -20,5 +20,11 @@ public class SetProgramCounter
   {
     cpu.setProgramAddress(AddressOffset.getAddress(cpu, addressOffsets));
   }
+
+  @Override
+  public String toString()
+  {
+    return "Set(PC)";
+  }
 }
 

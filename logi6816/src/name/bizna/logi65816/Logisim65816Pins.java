@@ -108,7 +108,6 @@ public class Logisim65816Pins
   {
     this.memoryLockB = memoryLockB;
     setBooleanValue(PORT_MLB, memoryLockB, 9);
-
   }
 
   @Override
@@ -156,7 +155,72 @@ public class Logisim65816Pins
   {
     this.validDataAddress = validDataAddress;
     setBooleanValue(PORT_MX, validDataAddress, 9);
+  }
 
+  @Override
+  public boolean isEmulation()
+  {
+    return emulation;
+  }
+
+  @Override
+  public boolean isMemoryLockB()
+  {
+    return memoryLockB;
+  }
+
+  @Override
+  public boolean isMX()
+  {
+    return mx;
+  }
+
+  @Override
+  public boolean isResetB()
+  {
+    return getBooleanValue(PORT_RESB);
+  }
+
+  @Override
+  public boolean isAbortB()
+  {
+    return getBooleanValue(PORT_ABORT);
+  }
+
+  @Override
+  public boolean isReady()
+  {
+    return ready;
+  }
+
+  @Override
+  public boolean isVectorPullB()
+  {
+    return vectorPullB;
+  }
+
+  @Override
+  public boolean isBusEnable()
+  {
+    return getBooleanValue(PORT_BE);
+  }
+
+  @Override
+  public boolean isPhi2()
+  {
+    return getBooleanValue(PORT_PHI2);
+  }
+
+  @Override
+  public boolean isIrqB()
+  {
+    return getBooleanValue(PORT_IRQB);
+  }
+
+  @Override
+  public boolean isNmiB()
+  {
+    return getBooleanValue(PORT_NMIB);
   }
 
   private void setBooleanValue(int portIndex, boolean value, int delay)
@@ -180,7 +244,7 @@ public class Logisim65816Pins
 
   private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
   {
-    if (instanceState.getPortValue(PORT_BE) == Value.FALSE)
+    if (isBusEnable())
     {
       instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
       instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);

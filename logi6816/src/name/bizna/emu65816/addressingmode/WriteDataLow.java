@@ -15,5 +15,10 @@ public class WriteDataLow
   {
     cpu.getPins().setData(cpu.getDataLow());
   }
+  @Override
+  public String toString()
+  {
+    return "Write(DL)";
+  }
 }
 

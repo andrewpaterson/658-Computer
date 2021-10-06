@@ -79,22 +79,22 @@ public class CpuStatus
     this.emulationFlag = emulationFlag;
   }
 
-  public boolean zeroFlag()
+  public boolean isZeroFlag()
   {
     return zeroFlag;
   }
 
-  public boolean negativeFlag()
+  public boolean isNegative()
   {
     return negativeFlag;
   }
 
-  public boolean decimalFlag()
+  public boolean isDecimal()
   {
     return decimalFlag;
   }
 
-  public boolean interruptDisableFlag()
+  public boolean isInterruptDisable()
   {
     return interruptDisableFlag;
   }
@@ -109,14 +109,24 @@ public class CpuStatus
     return mIndexWidthFlag;
   }
 
-  public boolean carryFlag()
+  public boolean isCarry()
   {
     return carryFlag;
   }
 
-  public boolean isEmulationMode()
+  public boolean isEmulation()
   {
     return emulationFlag;
+  }
+
+  public boolean isBreak()
+  {
+    return breakFlag;
+  }
+
+  public boolean isOverflowFlag()
+  {
+    return overflowFlag;
   }
 
   public void setBreakFlag(boolean breakFlag)
@@ -124,57 +134,47 @@ public class CpuStatus
     this.breakFlag = breakFlag;
   }
 
-  public boolean breakFlag()
-  {
-    return breakFlag;
-  }
-
   public void setOverflowFlag(boolean overflowFlag)
   {
     this.overflowFlag = overflowFlag;
   }
 
-  public boolean overflowFlag()
-  {
-    return overflowFlag;
-  }
-
   public int getRegisterValue()
   {
     int value = 0;
-    if (carryFlag())
+    if (isCarry())
     {
       value |= STATUS_CARRY;
     }
-    if (zeroFlag())
+    if (isZeroFlag())
     {
       value |= STATUS_ZERO;
     }
-    if (interruptDisableFlag())
+    if (isInterruptDisable())
     {
       value |= STATUS_INTERRUPT_DISABLE;
     }
-    if (decimalFlag())
+    if (isDecimal())
     {
       value |= STATUS_DECIMAL;
     }
-    if (isEmulationMode() && breakFlag())
+    if (isEmulation() && isBreak())
     {
       value |= STATUS_BREAK;
     }
-    if (!isEmulationMode() && isIndex8Bit())
+    if (!isEmulation() && isIndex8Bit())
     {
       value |= STATUS_INDEX_WIDTH;
     }
-    if (!isEmulationMode() && isAccumulator8Bit())
+    if (!isEmulation() && isAccumulator8Bit())
     {
       value |= STATUS_ACCUMULATOR_WIDTH;
     }
-    if (overflowFlag())
+    if (isOverflowFlag())
     {
       value |= STATUS_OVERFLOW;
     }
-    if (negativeFlag())
+    if (isNegative())
     {
       value |= STATUS_NEGATIVE;
     }
@@ -189,7 +189,7 @@ public class CpuStatus
     setInterruptDisableFlag((value & STATUS_INTERRUPT_DISABLE) != 0);
     setDecimalFlag((value & STATUS_DECIMAL) != 0);
 
-    if (isEmulationMode())
+    if (isEmulation())
     {
       setBreakFlag((value & STATUS_BREAK) != 0);
     }
@@ -198,7 +198,7 @@ public class CpuStatus
       setIndexWidthFlag((value & STATUS_INDEX_WIDTH) != 0);
     }
 
-    setAccumulatorWidthFlag(!isEmulationMode() && ((value & STATUS_ACCUMULATOR_WIDTH) != 0));
+    setAccumulatorWidthFlag(!isEmulation() && ((value & STATUS_ACCUMULATOR_WIDTH) != 0));
     setOverflowFlag((value & STATUS_OVERFLOW) != 0);
 
     setNegativeFlag((value & STATUS_NEGATIVE) != 0);

@@ -15,5 +15,11 @@ public class NoteSeven
   {
     return !cpu.isEmulationMode();
   }
+
+  @Override
+  public String toString()
+  {
+    return "Note(7)";
+  }
 }
 

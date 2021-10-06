@@ -16,5 +16,11 @@ public class WriteAbsoluteAddressHigh
   {
     cpu.getPins().setData(Binary.getHighByte(cpu.getAddress().getOffset()));
   }
+
+  @Override
+  public String toString()
+  {
+    return "Write(AAH)";
+  }
 }
 

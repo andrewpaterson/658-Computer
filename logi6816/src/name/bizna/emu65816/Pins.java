@@ -35,4 +35,27 @@ public interface Pins
   boolean isValidDataAddress();
 
   void setValidDataAddress(boolean validDataAddress);
+
+  boolean isEmulation();
+
+  boolean isMemoryLockB();
+
+  boolean isReady();
+
+  boolean isVectorPullB();
+
+  boolean isBusEnable();
+
+  boolean isPhi2();
+
+  boolean isIrqB();
+
+  boolean isNmiB();
+
+  boolean isMX();
+
+  boolean isResetB();
+
+  boolean isAbortB();
 }
+

@@ -15,5 +15,11 @@ public class FetchNewProgramCounterLow
   {
     cpu.setNewProgramCounterLow(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(New_PCL)";
+  }
 }
 

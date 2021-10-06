@@ -15,5 +15,11 @@ public class FetchDataLow
   {
     cpu.setDataLow(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(DL)";
+  }
 }
 

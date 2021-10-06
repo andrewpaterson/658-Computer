@@ -10,5 +10,11 @@ public class StackPointer
   {
     return cpu.getStackPointer();
   }
+
+  @Override
+  public String toString()
+  {
+    return "S";
+  }
 }
 

@@ -17,5 +17,11 @@ public class SetProgramBank
   {
     cpu.setProgramAddressBank(bank);
   }
+
+  @Override
+  public String toString()
+  {
+    return "PBR=" + bank;
+  }
 }
 

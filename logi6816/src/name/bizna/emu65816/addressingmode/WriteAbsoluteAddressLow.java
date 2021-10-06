@@ -16,5 +16,10 @@ public class WriteAbsoluteAddressLow
   {
     cpu.getPins().setData(Binary.getLowByte(cpu.getAddress().getOffset()));
   }
+  @Override
+  public String toString()
+  {
+    return "Write(AAL)";
+  }
 }
 

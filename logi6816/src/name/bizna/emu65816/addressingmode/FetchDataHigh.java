@@ -15,5 +15,11 @@ public class FetchDataHigh
   {
     cpu.setDataHigh(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(DH)";
+  }
 }
 

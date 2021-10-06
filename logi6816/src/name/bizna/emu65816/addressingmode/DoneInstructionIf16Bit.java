@@ -36,5 +36,11 @@ public class DoneInstructionIf16Bit
       throw new EmulatorException("Unknown Width.");
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "DONE_If_16Bit_" + width;
+  }
 }
 

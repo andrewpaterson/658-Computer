@@ -15,5 +15,11 @@ public class WriteProgramBank
   {
     cpu.getPins().setData(cpu.getProgramCounter().getBank());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Write(PBR)";
+  }
 }
 

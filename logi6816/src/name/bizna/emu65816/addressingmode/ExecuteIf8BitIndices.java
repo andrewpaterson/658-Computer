@@ -22,5 +22,11 @@ public class ExecuteIf8BitIndices
       function.accept(cpu);
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "Execute_If_8Bit_XY_" + function;
+  }
 }
 

@@ -16,5 +16,10 @@ public class WriteProgramCounterHigh
   {
     cpu.getPins().setData(Binary.getHighByte(cpu.getProgramCounter().getOffset()));
   }
+  @Override
+  public String toString()
+  {
+    return "Write(PCH)";
+  }
 }
 

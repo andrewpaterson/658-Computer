@@ -15,5 +15,11 @@ public class FetchNewProgramBank
   {
     cpu.setNewProgramCounterBank(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(New_PBR)";
+  }
 }
 

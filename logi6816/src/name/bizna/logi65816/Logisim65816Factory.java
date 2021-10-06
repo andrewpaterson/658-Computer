@@ -126,34 +126,34 @@ public class Logisim65816Factory
       int width16Bit = 50;
       int width24Bit = 65;
 
-      drawInternal(g, topOffset, width8Bit, "Op-code:", core.getOpcodeMnemonicString(), core.isOpcodeValid());
-      drawInternal(g, topOffset + 20, width8Bit, "Op-code:", core.getOpcodeValueHex(), core.isOpcodeValid());
-      drawInternal(g, topOffset + 40, width8Bit, "Cycle:", core.getCycle(), true);
-      drawInternal(g, topOffset + 60, width16Bit, "Accumulator:", core.getAccumulatorValueHex(), true);
-      drawInternal(g, topOffset + 80, width16Bit, "X Index:", core.getXValueHex(), true);
-      drawInternal(g, topOffset + 100, width16Bit, "Y Index:", core.getYValueHex(), true);
-      drawInternal(g, topOffset + 120, width16Bit, "Stack", core.getStackValueHex(), true);
-      drawInternal(g, topOffset + 140, width24Bit, "P-Counter:", core.getProgramCounterValueHex(), true);
-      drawInternal(g, topOffset + 160, width24Bit, "Address:", core.getAddressValueHex(), false);
-      drawInternal(g, topOffset + 180, width16Bit, "Data", core.getDataValueHex(), false);
+      drawInternal(g, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), core.isOpcodeValid());
+      drawInternal(g, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), core.isOpcodeValid());
+      drawInternal(g, topOffset + 40, width8Bit, "Cycle:", Integer.toString(cpu.getCycle()), true);
+      drawInternal(g, topOffset + 60, width16Bit, "Accumulator:", cpu.getAccumulatorValueHex(), true);
+      drawInternal(g, topOffset + 80, width16Bit, "X Index:", cpu.getXValueHex(), true);
+      drawInternal(g, topOffset + 100, width16Bit, "Y Index:", cpu.getYValueHex(), true);
+      drawInternal(g, topOffset + 120, width16Bit, "Stack", cpu.getStackValueHex(), true);
+      drawInternal(g, topOffset + 140, width24Bit, "P-Counter:", cpu.getProgramCounterValueHex(), true);
+      drawInternal(g, topOffset + 160, width24Bit, "Address:", cpu.getAddressValueHex(), false);
+      drawInternal(g, topOffset + 180, width16Bit, "Data", cpu.getDataValueHex(), false);
 
       int processorStatusTopOffset = topOffset + 205;
-      boolean emulationMode = status.isEmulationMode();
-      drawProcessorStatus(g, processorStatusTopOffset, -60, "C", status.carryFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", status.zeroFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, -20, "I", status.interruptDisableFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, 0, "D", status.decimalFlag());
+      boolean emulationMode = status.isEmulation();
+      drawProcessorStatus(g, processorStatusTopOffset, -60, "C", status.isCarry());
+      drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", status.isZeroFlag());
+      drawProcessorStatus(g, processorStatusTopOffset, -20, "I", status.isInterruptDisable());
+      drawProcessorStatus(g, processorStatusTopOffset, 0, "D", status.isDecimal());
       if (emulationMode)
       {
-        drawProcessorStatus(g, processorStatusTopOffset, 20, "B", status.breakFlag());
+        drawProcessorStatus(g, processorStatusTopOffset, 20, "B", status.isBreak());
       }
       else
       {
         drawProcessorStatus(g, processorStatusTopOffset, 20, "X", status.isIndex8Bit());
         drawProcessorStatus(g, processorStatusTopOffset, 40, "M", status.isAccumulator8Bit());
       }
-      drawProcessorStatus(g, processorStatusTopOffset, 60, "V", status.overflowFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, 80, "N", status.negativeFlag());
+      drawProcessorStatus(g, processorStatusTopOffset, 60, "V", status.isOverflowFlag());
+      drawProcessorStatus(g, processorStatusTopOffset, 80, "N", status.isNegative());
 
       g2.setTransform(oldTransform);
       g.setFont(oldFont);

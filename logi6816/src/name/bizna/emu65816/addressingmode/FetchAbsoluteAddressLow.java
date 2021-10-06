@@ -15,5 +15,11 @@ public class FetchAbsoluteAddressLow
   {
     cpu.setAddressLow(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(AAL)";
+  }
 }
 

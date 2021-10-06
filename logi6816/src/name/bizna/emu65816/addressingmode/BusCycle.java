@@ -1,8 +1,10 @@
 package name.bizna.emu65816.addressingmode;
 
-import name.bizna.emu65816.*;
+import name.bizna.emu65816.Address;
+import name.bizna.emu65816.Cpu65816;
+import name.bizna.emu65816.EmulatorException;
+import name.bizna.emu65816.Pins;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,27 +12,6 @@ public class BusCycle
 {
   protected List<AddressOffset> addressOffsets;
   protected List<Operation> operations;
-
-  public BusCycle(BusCycleParameter... parameters)
-  {
-    addressOffsets = new ArrayList<>();
-    operations = new ArrayList<>();
-    for (BusCycleParameter parameter : parameters)
-    {
-      if (parameter.isAddress())
-      {
-        addressOffsets.add((AddressOffset) parameter);
-      }
-
-      if (parameter.isOperation())
-      {
-        Operation operation = (Operation) parameter;
-        operations.add(operation);
-      }
-    }
-
-    validate();
-  }
 
   public BusCycle(AddressOffset[] addressOffsets, Operation... operations)
   {
@@ -95,8 +76,58 @@ public class BusCycle
 
     for (Operation operation : operations)
     {
-      operation._execute(cpu);
+      operation.execute(cpu);
     }
   }
+
+  protected boolean mustExecute(Cpu65816 cpu)
+  {
+    boolean mustExecute = true;
+    for (Operation operation : operations)
+    {
+      if (!operation.mustExecute(cpu))
+      {
+        mustExecute = false;
+      }
+    }
+    return mustExecute;
+  }
+
+  public String toAddressOffsetString()
+  {
+    StringBuilder string = new StringBuilder();
+    boolean first = true;
+    for (AddressOffset addressOffset : addressOffsets)
+    {
+      if (!first && !(addressOffset instanceof Offset))
+      {
+        if (string.charAt(string.length() - 1) != ',')
+        {
+          string.append("+");
+        }
+      }
+      string.append(addressOffset.toString());
+
+      first = false;
+    }
+    return string.toString();
+  }
+
+  public String toOperationString()
+  {
+    StringBuilder string = new StringBuilder();
+    boolean first = true;
+    for (Operation operation : operations)
+    {
+      if (!first)
+      {
+        string.append(" ");
+      }
+      string.append(operation.toString());
+      first = false;
+    }
+    return string.toString();
+  }
 }
+
 

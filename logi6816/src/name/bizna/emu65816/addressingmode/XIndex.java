@@ -10,4 +10,10 @@ public class XIndex
   {
     return cpu.getX();
   }
+
+  @Override
+  public String toString()
+  {
+    return "X";
+  }
 }

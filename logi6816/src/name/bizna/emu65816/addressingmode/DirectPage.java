@@ -10,5 +10,11 @@ public class DirectPage
   {
     return cpu.getDirectPage();
   }
+
+  @Override
+  public String toString()
+  {
+    return "D";
+  }
 }
 

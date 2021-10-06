@@ -10,5 +10,11 @@ public class DirectOffset
   {
     return cpu.getDirectOffset();
   }
+
+  @Override
+  public String toString()
+  {
+    return "D0";
+  }
 }
 

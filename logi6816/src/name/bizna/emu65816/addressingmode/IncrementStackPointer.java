@@ -10,5 +10,11 @@ public class IncrementStackPointer
   {
     cpu.incrementStackPointer();
   }
+
+  @Override
+  public String toString()
+  {
+    return "SP++";
+  }
 }
 

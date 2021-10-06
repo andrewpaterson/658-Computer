@@ -10,5 +10,11 @@ public class NewProgramCounter
   {
     return cpu.getNewProgramCounter().getOffset();
   }
+
+  @Override
+  public String toString()
+  {
+    return "New_PC";
+  }
 }
 

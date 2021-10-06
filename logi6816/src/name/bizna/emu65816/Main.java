@@ -21,21 +21,23 @@ public class Main
 
       cpu.tick();
 
-      if (!clock)
-      {
-        if (pins.isValidDataAddress() || pins.isValidProgramAddress())
-        {
-          Address address = cpu.getAddress();  //This should probably use pins not cpu.
-          if (pins.isRead())
-          {
-            pins.setData(memory.readByte(address));
-          }
-          else
-          {
-            memory.writeByte(address, pins.getData());
-          }
-        }
-      }
+      cpu.dump();
+
+//      if (!clock)
+//      {
+//        if (pins.isValidDataAddress() || pins.isValidProgramAddress())
+//        {
+//          Address address = cpu.getAddress();  //This should probably use pins not cpu.
+//          if (pins.isRead())
+//          {
+//            pins.setData(memory.readByte(address));
+//          }
+//          else
+//          {
+//            memory.writeByte(address, pins.getData());
+//          }
+//        }
+//      }
 
       clock = !clock;
       count--;

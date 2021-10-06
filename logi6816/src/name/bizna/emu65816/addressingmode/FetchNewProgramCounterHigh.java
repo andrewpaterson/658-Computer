@@ -15,5 +15,11 @@ public class FetchNewProgramCounterHigh
   {
     cpu.setNewProgramCounterHigh(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(New_PCH)";
+  }
 }
 

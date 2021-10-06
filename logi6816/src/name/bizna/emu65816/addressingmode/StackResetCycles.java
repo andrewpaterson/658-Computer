@@ -16,7 +16,6 @@ public class StackResetCycles
     super(StackInterruptHardware,
           new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),
           new BusCycle(Address(PBR(), PC()), IO()),
-          new BusCycle(Address(S()), IO(), new NoteSeven()),
           new BusCycle(Address(S()), IO()),
           new BusCycle(Address(S()), IO()),
           new BusCycle(Address(S()), IO(), E(consumer)),

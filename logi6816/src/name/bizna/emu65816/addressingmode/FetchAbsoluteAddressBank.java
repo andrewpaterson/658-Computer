@@ -15,5 +15,11 @@ public class FetchAbsoluteAddressBank
   {
     cpu.setAddressBank(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Read(AAB)";
+  }
 }
 

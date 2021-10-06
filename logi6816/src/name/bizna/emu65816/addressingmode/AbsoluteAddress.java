@@ -10,5 +10,11 @@ public class AbsoluteAddress
   {
     return cpu.getAddress().getOffset();
   }
+
+  @Override
+  public String toString()
+  {
+    return "AA";
+  }
 }
 

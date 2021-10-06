@@ -20,4 +20,10 @@ public class SignedData
       return dataLow;
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "R";
+  }
 }

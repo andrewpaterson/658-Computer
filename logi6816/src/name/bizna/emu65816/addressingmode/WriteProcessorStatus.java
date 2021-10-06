@@ -15,5 +15,11 @@ public class WriteProcessorStatus
   {
     cpu.getPins().setData(cpu.getCpuStatus().getRegisterValue());
   }
+
+  @Override
+  public String toString()
+  {
+    return "Write(P)";
+  }
 }
 

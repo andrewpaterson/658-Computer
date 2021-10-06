@@ -15,5 +15,11 @@ public class ProgramCounter
   {
     return cpu.getProgramCounter().getOffset();
   }
+
+  @Override
+  public String toString()
+  {
+    return "PC";
+  }
 }
 

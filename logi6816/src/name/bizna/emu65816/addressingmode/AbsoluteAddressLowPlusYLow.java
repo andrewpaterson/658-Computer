@@ -13,5 +13,11 @@ public class AbsoluteAddressLowPlusYLow
   {
     return toByte(getLowByte(cpu.getAddress().getOffset()) + getLowByte(cpu.getY()));
   }
+
+  @Override
+  public String toString()
+  {
+    return "(AAL+YL)";
+  }
 }
 

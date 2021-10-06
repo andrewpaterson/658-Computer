@@ -35,5 +35,11 @@ public class NoteOne
       throw new EmulatorException("Unknown Width.");
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "Note(1)";
+  }
 }
 

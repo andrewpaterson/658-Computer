@@ -10,5 +10,11 @@ public class YIndex
   {
     return cpu.getY();
   }
+
+  @Override
+  public String toString()
+  {
+    return "Y";
+  }
 }
 

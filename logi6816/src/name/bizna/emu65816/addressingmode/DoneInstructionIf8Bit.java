@@ -36,5 +36,11 @@ public class DoneInstructionIf8Bit
       throw new EmulatorException("Unknown Width.");
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "DONE_8Bit_" + width;
+  }
 }
 

@@ -19,5 +19,11 @@ public class Execute
   {
     function.accept(cpu);
   }
+
+  @Override
+  public String toString()
+  {
+    return "Execute_" + function;
+  }
 }
 

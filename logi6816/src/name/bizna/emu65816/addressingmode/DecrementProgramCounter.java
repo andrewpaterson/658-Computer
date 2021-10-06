@@ -10,5 +10,11 @@ public class DecrementProgramCounter
   {
     cpu.decrementProgramCounter();
   }
+
+  @Override
+  public String toString()
+  {
+    return "PC--";
+  }
 }
 

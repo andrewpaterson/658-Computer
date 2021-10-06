@@ -17,5 +17,11 @@ public class NoteTwo
   public void execute(Cpu65816 cpu)
   {
   }
+
+  @Override
+  public String toString()
+  {
+    return "Note(2)";
+  }
 }
 

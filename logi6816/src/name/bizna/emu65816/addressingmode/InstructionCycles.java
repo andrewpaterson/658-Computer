@@ -333,5 +333,15 @@ public abstract class InstructionCycles
   {
     cycles.get(cpu.getCycle()).executeOnRisingEdge(cpu);
   }
+
+  public BusCycle getBusCycle(int index)
+  {
+    return cycles.get(index);
+  }
+
+  public boolean mustExecute(Cpu65816 cpu)
+  {
+    return cycles.get(cpu.getCycle()).mustExecute(cpu);
+  }
 }
 

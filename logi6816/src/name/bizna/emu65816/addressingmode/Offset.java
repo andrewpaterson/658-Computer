@@ -6,7 +6,7 @@ import name.bizna.emu65816.EmulatorException;
 public class Offset
     extends AddressOffset
 {
-  private int offset;
+  private final int offset;
 
   public Offset(int offset)
   {
@@ -21,6 +21,19 @@ public class Offset
   public int getOffset(Cpu65816 cpu)
   {
     return offset;
+  }
+
+  @Override
+  public String toString()
+  {
+    if (offset >= 0)
+    {
+      return "+" + offset;
+    }
+    else
+    {
+      return "" + offset;
+    }
   }
 }
 

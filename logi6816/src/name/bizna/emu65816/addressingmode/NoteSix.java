@@ -21,5 +21,11 @@ public class NoteSix
     }
     return false;
   }
+
+  @Override
+  public String toString()
+  {
+    return "Note(6)";
+  }
 }
 

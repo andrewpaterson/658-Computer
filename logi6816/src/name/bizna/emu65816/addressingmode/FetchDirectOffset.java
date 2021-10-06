@@ -15,5 +15,12 @@ public class FetchDirectOffset
   {
     cpu.setDirectOffset(cpu.getPinData());
   }
+
+
+  @Override
+  public String toString()
+  {
+    return "Read(D0)";
+  }
 }
 

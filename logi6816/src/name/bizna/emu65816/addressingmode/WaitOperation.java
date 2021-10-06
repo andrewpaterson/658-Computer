@@ -15,5 +15,11 @@ public class WaitOperation
   public void execute(Cpu65816 cpu)
   {
   }
+
+  @Override
+  public String toString()
+  {
+    return "Wait";
+  }
 }
 

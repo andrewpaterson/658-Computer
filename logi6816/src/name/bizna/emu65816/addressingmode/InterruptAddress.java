@@ -18,5 +18,11 @@ public class InterruptAddress
   {
     return interruptVector.getAddress(cpu);
   }
+
+  @Override
+  public String toString()
+  {
+    return "VA";
+  }
 }
 

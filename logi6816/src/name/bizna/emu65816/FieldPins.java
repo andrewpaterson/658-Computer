@@ -143,5 +143,64 @@ public class FieldPins
   {
     this.validDataAddress = validDataAddress;
   }
+
+  @Override
+  public boolean isEmulation()
+  {
+    return emulation;
+  }
+
+  @Override
+  public boolean isMemoryLockB()
+  {
+    return memoryLockB;
+  }
+
+  @Override
+  public boolean isReady()
+  {
+    return ready;
+  }
+
+  @Override
+  public boolean isVectorPullB()
+  {
+    return vectorPullB;
+  }
+
+  public boolean isAbortB()
+  {
+    return abortB;
+  }
+
+  public boolean isBusEnable()
+  {
+    return busEnable;
+  }
+
+  public boolean isPhi2()
+  {
+    return phi2;
+  }
+
+  public boolean isIrqB()
+  {
+    return irqB;
+  }
+
+  public boolean isNmiB()
+  {
+    return nmiB;
+  }
+
+  public boolean isMX()
+  {
+    return mx;
+  }
+
+  public boolean isResetB()
+  {
+    return resetB;
+  }
 }
 

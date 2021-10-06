@@ -15,5 +15,11 @@ public class FetchOpCode
   {
     cpu.setOpCode(cpu.getPinData());
   }
+
+  @Override
+  public String toString()
+  {
+    return "OpCode";
+  }
 }
 

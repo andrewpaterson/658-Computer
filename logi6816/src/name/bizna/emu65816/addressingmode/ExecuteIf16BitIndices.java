@@ -22,5 +22,10 @@ public class ExecuteIf16BitIndices
       function.accept(cpu);
     }
   }
+  @Override
+  public String toString()
+  {
+    return "Execute_If_16Bit_XY_" + function;
+  }
 }
 

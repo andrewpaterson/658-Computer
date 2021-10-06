@@ -19,7 +19,7 @@ public class DirectIndirectIndexedWithYWriteCycles
           new BusCycle(Address(PBR(), PC()), IO(), new NoteTwo()),
           new BusCycle(Address(DP(), D0()), Read_AAL()),
           new BusCycle(Address(DP(), D0(), o(1)), Read_AAH()),
-          new BusCycle(Address(DBR(), AAH(), AAL_YL()), new NoteFourY(false)),
+          new BusCycle(Address(DBR(), AAH(), AAL_YL()), IO(), new NoteFourY(false)),
           new BusCycle(Address(DBR(), AA(), Y()), E(operation), Write_DataLow(), DONE8Bit(Width.A)),
           new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(Width.A)));
   }

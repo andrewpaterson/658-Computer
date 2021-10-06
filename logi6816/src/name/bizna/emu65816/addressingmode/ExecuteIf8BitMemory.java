@@ -22,5 +22,11 @@ public class ExecuteIf8BitMemory
       function.accept(cpu);
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "Execute_If_8Bit_M_" + function;
+  }
 }
 

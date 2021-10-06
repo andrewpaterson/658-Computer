@@ -26,5 +26,11 @@ public class NoteFourY
            !nextWillRead ||
            cpu.isIndex16Bit();
   }
+
+  @Override
+  public String toString()
+  {
+    return "Note(4)";
+  }
 }
 

@@ -10,5 +10,11 @@ public class DecrementStackPointer
   {
     cpu.decrementStackPointer();
   }
+
+  @Override
+  public String toString()
+  {
+    return "SP--";
+  }
 }
 

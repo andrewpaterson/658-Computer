@@ -10,5 +10,11 @@ public class IncrementProgramCounter
   {
     cpu.incrementProgramAddress();
   }
+
+  @Override
+  public String toString()
+  {
+    return "PC++";
+  }
 }
 

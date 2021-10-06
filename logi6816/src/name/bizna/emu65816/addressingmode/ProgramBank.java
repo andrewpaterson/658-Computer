@@ -16,5 +16,11 @@ public class ProgramBank
   {
     return cpu.getProgramCounter().getBank();
   }
+
+  @Override
+  public String toString()
+  {
+    return "PBR,";
+  }
 }
 

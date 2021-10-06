@@ -15,5 +15,10 @@ public class WriteDataHigh
   {
     cpu.getPins().setData(cpu.getDataHigh());
   }
+  @Override
+  public String toString()
+  {
+    return "Write(DH)";
+  }
 }
 

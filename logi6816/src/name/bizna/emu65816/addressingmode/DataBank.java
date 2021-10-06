@@ -16,5 +16,11 @@ public class DataBank
   {
     return cpu.getDataBank();
   }
+
+  @Override
+  public String toString()
+  {
+    return "DBR,";
+  }
 }
 

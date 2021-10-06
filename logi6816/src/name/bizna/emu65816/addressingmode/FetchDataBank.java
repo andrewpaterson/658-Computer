@@ -15,5 +15,12 @@ public class FetchDataBank
   {
     cpu.setDataBank(cpu.getPinData());
   }
+
+
+  @Override
+  public String toString()
+  {
+    return "Read(DBR)";
+  }
 }
 

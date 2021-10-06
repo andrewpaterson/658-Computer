@@ -9,10 +9,13 @@ import name.bizna.emu65816.interrupt.IRQVector;
 import name.bizna.emu65816.interrupt.NMIVector;
 import name.bizna.emu65816.interrupt.ResetVector;
 import name.bizna.emu65816.opcode.*;
+import name.bizna.emu65816.util.StringUtil;
 
 import static name.bizna.emu65816.Binary.*;
 import static name.bizna.emu65816.Unsigned.toByte;
 import static name.bizna.emu65816.Unsigned.toShort;
+import static name.bizna.emu65816.util.StringUtil.to16BitHex;
+import static name.bizna.emu65816.util.StringUtil.to8BitHex;
 
 public class Cpu65816
 {
@@ -271,9 +274,15 @@ public class Cpu65816
     previousClock = clock;
 
     InstructionCycles cycles = opCode.getCycles();
+
+    while (!cycles.mustExecute(this))
+    {
+      nextCycle();
+    }
+
     if (clockFallingEdge)
     {
-      pins.setEmulation(processorStatus.isEmulationMode());
+      pins.setEmulation(processorStatus.isEmulation());
       pins.setMX(isMemory8Bit());
 
       cycles.executeOnFallingEdge(this);
@@ -289,7 +298,7 @@ public class Cpu65816
 
   public boolean isMemory8Bit()
   {
-    if (processorStatus.isEmulationMode())
+    if (processorStatus.isEmulation())
     {
       return true;
     }
@@ -306,7 +315,7 @@ public class Cpu65816
 
   public boolean isIndex8Bit()
   {
-    if (processorStatus.isEmulationMode())
+    if (processorStatus.isEmulation())
     {
       return true;
     }
@@ -323,7 +332,7 @@ public class Cpu65816
 
   public boolean isCarrySet()
   {
-    return processorStatus.carryFlag();
+    return processorStatus.isCarry();
   }
 
   protected int getCarry()
@@ -333,12 +342,12 @@ public class Cpu65816
 
   private boolean isSignSet()
   {
-    return processorStatus.negativeFlag();
+    return processorStatus.isNegative();
   }
 
   private boolean isOverflowSet()
   {
-    return processorStatus.overflowFlag();
+    return processorStatus.isOverflowFlag();
   }
 
   public void setProgramAddress(Address address)
@@ -421,7 +430,7 @@ public class Cpu65816
 
   public int getStackPointer()
   {
-    if (!processorStatus.isEmulationMode())
+    if (!processorStatus.isEmulation())
     {
       return stackPointer;
     }
@@ -576,7 +585,7 @@ public class Cpu65816
 
   public boolean isEmulationMode()
   {
-    return processorStatus.isEmulationMode();
+    return processorStatus.isEmulation();
   }
 
   private void processorStatusChanged()
@@ -1016,7 +1025,7 @@ public class Cpu65816
   {
     processorStatus.setInterruptDisableFlag(true);
     processorStatus.setDecimalFlag(false);
-    if (processorStatus.isEmulationMode())
+    if (processorStatus.isEmulation())
     {
       processorStatus.setBreakFlag(true);
     }
@@ -1026,7 +1035,7 @@ public class Cpu65816
   {
     processorStatus.setInterruptDisableFlag(true);
     processorStatus.setDecimalFlag(false);
-    if (processorStatus.isEmulationMode())
+    if (processorStatus.isEmulation())
     {
       processorStatus.setBreakFlag(true);
     }
@@ -1074,7 +1083,7 @@ public class Cpu65816
   public void TCS()
   {
     int stackPointer = getStackPointer();
-    if (processorStatus.isEmulationMode())
+    if (processorStatus.isEmulation())
     {
       stackPointer = setLowByte(stackPointer, getLowByte(getA()));
     }
@@ -1218,7 +1227,7 @@ public class Cpu65816
   {
     if (isMemory16Bit())
     {
-      if (!processorStatus.decimalFlag())
+      if (!processorStatus.isDecimal())
       {
         execute16BitADC();
       }
@@ -1229,7 +1238,7 @@ public class Cpu65816
     }
     else
     {
-      if (!processorStatus.decimalFlag())
+      if (!processorStatus.isDecimal())
       {
         execute8BitADC();
       }
@@ -1262,7 +1271,7 @@ public class Cpu65816
 
   public void BVS()
   {
-    branch(processorStatus.overflowFlag());
+    branch(processorStatus.isOverflowFlag());
   }
 
   public void SEI()
@@ -1323,7 +1332,7 @@ public class Cpu65816
 
   public void BCC()
   {
-    branch(!getCpuStatus().carryFlag());
+    branch(!getCpuStatus().isCarry());
   }
 
   public void LDY()
@@ -1357,7 +1366,7 @@ public class Cpu65816
 
   public void BCS()
   {
-    branch(processorStatus.carryFlag());
+    branch(processorStatus.isCarry());
   }
 
   public void CLV()
@@ -1498,7 +1507,7 @@ public class Cpu65816
 
   public void BNE()
   {
-    branch(!processorStatus.zeroFlag());
+    branch(!processorStatus.isZeroFlag());
   }
 
   public void CLD()
@@ -1517,7 +1526,7 @@ public class Cpu65816
   {
     if (isMemory16Bit())
     {
-      if (!processorStatus.decimalFlag())
+      if (!processorStatus.isDecimal())
       {
         execute16BitSBC();
       }
@@ -1528,7 +1537,7 @@ public class Cpu65816
     }
     else
     {
-      if (!processorStatus.decimalFlag())
+      if (!processorStatus.isDecimal())
       {
         execute8BitSBC();
       }
@@ -1574,7 +1583,7 @@ public class Cpu65816
 
   public void BEQ()
   {
-    branch(processorStatus.zeroFlag());
+    branch(processorStatus.isZeroFlag());
   }
 
   public void SED()
@@ -1589,13 +1598,13 @@ public class Cpu65816
 
   public void XCE()
   {
-    boolean oldCarry = processorStatus.carryFlag();
-    boolean oldEmulation = processorStatus.isEmulationMode();
+    boolean oldCarry = processorStatus.isCarry();
+    boolean oldEmulation = processorStatus.isEmulation();
     setEmulationMode(oldCarry);
     processorStatus.setCarryFlag(oldEmulation);
 
-    processorStatus.setAccumulatorWidthFlag(processorStatus.isEmulationMode());
-    processorStatus.setIndexWidthFlag(processorStatus.isEmulationMode());
+    processorStatus.setAccumulatorWidthFlag(processorStatus.isEmulation());
+    processorStatus.setIndexWidthFlag(processorStatus.isEmulation());
   }
 
   public void ABORT()
@@ -1624,6 +1633,151 @@ public class Cpu65816
     programAddress.setBank(0);
     processorStatus.setDecimalFlag(false);
     processorStatus.setInterruptDisableFlag(true);
+  }
+
+  public String getByteStringHex(int value)
+  {
+    return "0x" + to8BitHex(value);
+  }
+
+  private String getWordStringHex(int value)
+  {
+    return "0x" + to16BitHex(value);
+  }
+
+  public String getAddressValueHex()
+  {
+    return getByteStringHex(getAddress().getBank()) + ":" + to16BitHex(getAddress().getOffset());
+  }
+
+  public String getAccumulatorValueHex()
+  {
+    return getWordStringHex(getA());
+  }
+
+  public String getXValueHex()
+  {
+    return getWordStringHex(getX());
+  }
+
+  public String getYValueHex()
+  {
+    return getWordStringHex(getY());
+  }
+
+  public String getStackValueHex()
+  {
+    return getWordStringHex(getStackPointer());
+  }
+
+  public String getProgramCounterValueHex()
+  {
+    return getByteStringHex(getProgramCounter().getBank()) + ":" + to16BitHex(getProgramCounter().getOffset());
+  }
+
+  public String getDataValueHex()
+  {
+    return getWordStringHex(getData16Bit());
+  }
+
+  public String getOpcodeValueHex()
+  {
+    if (getCycle() != 0)
+    {
+      int code = getOpCode().getCode();
+      if (code >= 0 && code <= 255)
+      {
+        return getByteStringHex(code);
+      }
+      else
+      {
+        return "---";
+      }
+    }
+    else
+    {
+      return "###";
+    }
+  }
+
+  public String getOpcodeMnemonicString()
+  {
+    return getOpCode().getName();
+  }
+
+  private String getStatusString()
+  {
+    String z = processorStatus.isZeroFlag() ? "Z:1 " : "Z:0 ";
+    String n = processorStatus.isNegative() ? "N:1 " : "N:0 ";
+    String d = processorStatus.isDecimal() ? "D:1 " : "D:0 ";
+    String i = processorStatus.isInterruptDisable() ? "I:1 " : "I:0 ";
+    String m = processorStatus.isAccumulator8Bit() ? "M8  " : "M16 ";
+    String x = "";
+    if (!isEmulationMode())
+    {
+      x = processorStatus.isIndex8Bit() ? "X8  " : "X16 ";
+    }
+    String c = processorStatus.isCarry() ? "C1 " : "C0 ";
+    String e = processorStatus.isEmulation() ? "E1 " : "E0 ";
+    String o = processorStatus.isOverflowFlag() ? "O1 " : "O0 ";
+    String b = "";
+    if (processorStatus.isEmulation())
+    {
+      b = processorStatus.isBreak() ? "B1 " : "B0 ";
+    }
+    return z + n + d + i + m + x + c + e + o + b;
+  }
+
+  public void dump()
+  {
+    if (previousClock)
+    {
+      System.out.println("  --- Internal Status ---- ");
+      System.out.println("       Op-Code: " + getOpcodeValueHex());
+      System.out.println("      Mnemonic: " + getOpcodeMnemonicString());
+      System.out.println("         Cycle: " + getCycle() + (previousClock ? " (High)" : " (Low)"));
+      System.out.println("       Address: " + getAddressValueHex());
+      System.out.println("          Data: " + getDataValueHex());
+      System.out.println("   Accumulator: " + getAccumulatorValueHex());
+      System.out.println("       X-Index: " + getXValueHex());
+      System.out.println("       Y-Index: " + getYValueHex());
+      System.out.println(" Stack Pointer: " + getStackValueHex());
+      System.out.println(" Program Count: " + getProgramCounterValueHex());
+      System.out.println("        Status: " + getStatusString());
+      System.out.println("Address Offset: " + getOpCode().getCycles().getBusCycle(getCycle()).toAddressOffsetString());
+      System.out.println("     Operation: " + getOpCode().getCycles().getBusCycle(getCycle()).toOperationString());
+
+      System.out.println(" --------- Pin Status ---- ");
+      System.out.println("      Address: 0x" + StringUtil.to16BitHex(pins.getAddress()));
+      System.out.println("         Data: 0x" + StringUtil.to8BitHex(pins.getData()));
+      System.out.print("          RWB:" + is(pins.isRead()));
+      System.out.print(" VPA:" + is(pins.isValidProgramAddress()));
+      System.out.print(" VDA:" + is(pins.isValidDataAddress()));
+      System.out.print("  BE:" + is(pins.isBusEnable()));
+      System.out.print(" PHI2:" + is(pins.isPhi2()));
+      System.out.print("   E:" + is(pins.isEmulation()));
+      System.out.println(" IRQB:" + is(pins.isIrqB()));
+      System.out.print("         NMIB:" + is(pins.isNmiB()));
+      System.out.print(" MLB:" + is(pins.isMemoryLockB()));
+      System.out.print("  MX:" + is(pins.isMX()));
+      System.out.print(" RDY:" + is(pins.isReady()));
+      System.out.print(" ABTB:" + is(pins.isAbortB()));
+      System.out.print(" RSB:" + is(pins.isResetB()));
+      System.out.println(" VPB:" + is(pins.isVectorPullB()));
+      System.out.println();
+    }
+  }
+
+  private String is(boolean bool)
+  {
+    if (bool)
+    {
+      return "1";
+    }
+    else
+    {
+      return "0";
+    }
   }
 }
 

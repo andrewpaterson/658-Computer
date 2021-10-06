@@ -22,5 +22,11 @@ public class ExecuteIf16BitMemory
       function.accept(cpu);
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "Execute_If_16Bit_M_" + function;
+  }
 }
 

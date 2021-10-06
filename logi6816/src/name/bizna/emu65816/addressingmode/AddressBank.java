@@ -16,5 +16,11 @@ public class AddressBank
   {
     return cpu.getAddress().getBank();
   }
+
+  @Override
+  public String toString()
+  {
+    return "AAB,";
+  }
 }
 

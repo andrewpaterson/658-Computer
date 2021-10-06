@@ -28,7 +28,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectLong, new DirectIndirectLongCycles(Cpu65816::ORA)));
     add(opCodes, new OpCode_PHP(PHP_StackImplied, new StackImpliedPHPCycles(Cpu65816::PHP)));
     add(opCodes, new OpCode_ORA(ORA_Immediate, new ImmediateCycles(Cpu65816::ORA, A)));
-    add(opCodes, new OpCode_ASL_A(ASL_Accumulator, new AccumulatorCycles(Cpu65816::ASL_A)));
+    add(opCodes, new OpCode_SLA(ASL_Accumulator, new AccumulatorCycles(Cpu65816::ASL_A)));
     add(opCodes, new OpCode_PHD(PHD_StackImplied, new StackImpliedPHDCycles(Cpu65816::PHD)));
     add(opCodes, new OpCode_TSB(TSB_Absolute, new AbsoluteRMWCycles(Cpu65816::TSB)));
     add(opCodes, new OpCode_ORA(ORA_Absolute, new AbsoluteCycles(Cpu65816::ORA, A)));
@@ -44,7 +44,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndirectLongIndexedWithY, new DirectIndirectLongIndexedWithYCycles(Cpu65816::ORA)));
     add(opCodes, new OpCode_CLC(CLC_Implied, new ImpliedCycles(Cpu65816::CLC)));
     add(opCodes, new OpCode_ORA(ORA_AbsoluteIndexedWithY, new AbsoluteIndexedWithYCycles(Cpu65816::ORA, A)));
-    add(opCodes, new OpCode_INC_A(INC_Accumulator, new AccumulatorCycles(Cpu65816::INC_A)));
+    add(opCodes, new OpCode_INA(INC_Accumulator, new AccumulatorCycles(Cpu65816::INC_A)));
     add(opCodes, new OpCode_TCS(TCS_Implied, new ImpliedCycles(Cpu65816::TCS)));
     add(opCodes, new OpCode_TRB(TRB_Absolute, new AbsoluteRMWCycles(Cpu65816::TRB)));
     add(opCodes, new OpCode_ORA(ORA_AbsoluteIndexedWithX, new AbsoluteIndexedWithXCycles(Cpu65816::ORA, A)));
@@ -60,7 +60,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_AND(AND_DirectPageIndirectLong, new DirectIndirectLongCycles(Cpu65816::AND)));
     add(opCodes, new OpCode_PLP(PLP_StackImplied, new StackPLPCycles()));
     add(opCodes, new OpCode_AND(AND_Immediate, new ImmediateCycles(Cpu65816::AND, A)));
-    add(opCodes, new OpCode_ROL_A(ROL_Accumulator, new AccumulatorCycles(Cpu65816::ROL_A)));
+    add(opCodes, new OpCode_RLA(ROL_Accumulator, new AccumulatorCycles(Cpu65816::ROL_A)));
     add(opCodes, new OpCode_PLD(PLD_StackImplied, new StackPLDCycles(Cpu65816::PLD)));
     add(opCodes, new OpCode_BIT(BIT_Absolute, new AbsoluteCycles(Cpu65816::BIT, A)));
     add(opCodes, new OpCode_AND(AND_Absolute, new AbsoluteCycles(Cpu65816::AND, A)));
@@ -76,7 +76,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_AND(AND_DirectPageIndirectLongIndexedWithY, new DirectIndirectLongIndexedWithYCycles(Cpu65816::AND)));
     add(opCodes, new OpCode_SEC(SEC_Implied, new ImpliedCycles(Cpu65816::SEC)));
     add(opCodes, new OpCode_AND(AND_AbsoluteIndexedWithY, new AbsoluteIndexedWithYCycles(Cpu65816::AND, A)));
-    add(opCodes, new OpCode_DEC_A(DEC_Accumulator, new AccumulatorCycles(Cpu65816::DEC_A)));
+    add(opCodes, new OpCode_DEA(DEC_Accumulator, new AccumulatorCycles(Cpu65816::DEC_A)));
     add(opCodes, new OpCode_TSC(TSC_Implied, new ImpliedCycles(Cpu65816::TSC)));
     add(opCodes, new OpCode_BIT(BIT_AbsoluteIndexedWithX, new AbsoluteIndexedWithXCycles(Cpu65816::BIT, A)));
     add(opCodes, new OpCode_AND(AND_AbsoluteIndexedWithX, new AbsoluteIndexedWithXCycles(Cpu65816::AND, A)));
@@ -92,7 +92,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_EOR(EOR_DirectPageIndirectLong, new DirectIndirectLongCycles(Cpu65816::EOR)));
     add(opCodes, new OpCode_PHA(PHA_StackImplied, new StackPushCycles(Cpu65816::PHA, A)));
     add(opCodes, new OpCode_EOR(EOR_Immediate, new ImmediateCycles(Cpu65816::EOR, A)));
-    add(opCodes, new OpCode_LSR_A(LSR_Accumulator, new AccumulatorCycles(Cpu65816::LSR_A)));
+    add(opCodes, new OpCode_SRA(LSR_Accumulator, new AccumulatorCycles(Cpu65816::LSR_A)));
     add(opCodes, new OpCode_PHK(PHK_StackImplied, new StackPHKCycles(Cpu65816::PHK)));
     add(opCodes, new OpCode_JMP(JMP_Absolute, new AbsoluteJMPCycles()));
     add(opCodes, new OpCode_EOR(EOR_Absolute, new AbsoluteCycles(Cpu65816::EOR, A)));
@@ -124,7 +124,7 @@ public class OpCodeTable
     add(opCodes, new OpCode_ADC(ADC_DirectPageIndirectLong, new DirectIndirectLongCycles(Cpu65816::ADC)));
     add(opCodes, new OpCode_PLA(PLA_Stack, new StackPullCycles(Cpu65816::PLA, A)));
     add(opCodes, new OpCode_ADC(ADC_Immediate, new ImmediateCycles(Cpu65816::ADC, A)));
-    add(opCodes, new OpCode_ROR_A(ROR_Accumulator, new AccumulatorCycles(Cpu65816::ROR_A)));
+    add(opCodes, new OpCode_RRA(ROR_Accumulator, new AccumulatorCycles(Cpu65816::ROR_A)));
     add(opCodes, new OpCode_RTL(RTL_StackImplied, new StackRTLCycles()));
     add(opCodes, new OpCode_JMP(JMP_AbsoluteIndirect, new AbsoluteIndirectJMPCycles()));
     add(opCodes, new OpCode_ADC(ADC_Absolute, new AbsoluteCycles(Cpu65816::ADC, A)));

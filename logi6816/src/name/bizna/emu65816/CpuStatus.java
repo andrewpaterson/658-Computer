@@ -12,56 +12,56 @@ public class CpuStatus
   public static final int STATUS_ACCUMULATOR_WIDTH = 0X20;
 
   public static final int STATUS_OVERFLOW = 0X40;
-  public static final int STATUS_SIGN = 0X80;
+  public static final int STATUS_NEGATIVE = 0X80;
 
-  boolean mZeroFlag;
-  boolean mSignFlag;
-  boolean mDecimalFlag;
-  boolean mInterruptDisableFlag;
-  boolean mAccumulatorWidthFlag;
+  boolean zeroFlag;
+  boolean negativeFlag;
+  boolean decimalFlag;
+  boolean interruptDisableFlag;
+  boolean accumulatorWidthFlag;
   boolean mIndexWidthFlag;
-  boolean mCarryFlag;
+  boolean carryFlag;
   boolean emulationFlag;
-  boolean mOverflowFlag;
-  boolean mBreakFlag;
+  boolean overflowFlag;
+  boolean breakFlag;
 
   public CpuStatus()
   {
-    mZeroFlag = false;
-    mSignFlag = false;
-    mDecimalFlag = false;
-    mInterruptDisableFlag = false;
-    mAccumulatorWidthFlag = false;
+    zeroFlag = false;
+    negativeFlag = false;
+    decimalFlag = false;
+    interruptDisableFlag = false;
+    accumulatorWidthFlag = false;
     mIndexWidthFlag = false;
-    mCarryFlag = false;
+    carryFlag = false;
     emulationFlag = true; // CPU Starts in emulation mode
-    mOverflowFlag = false;
-    mBreakFlag = false;
+    overflowFlag = false;
+    breakFlag = false;
   }
 
   public void setZeroFlag(boolean zeroFlag)
   {
-    mZeroFlag = zeroFlag;
+    this.zeroFlag = zeroFlag;
   }
 
-  public void setSignFlag(boolean signFlag)
+  public void setNegativeFlag(boolean signFlag)
   {
-    mSignFlag = signFlag;
+    negativeFlag = signFlag;
   }
 
   public void setDecimalFlag(boolean decimalFlag)
   {
-    mDecimalFlag = decimalFlag;
+    this.decimalFlag = decimalFlag;
   }
 
   public void setInterruptDisableFlag(boolean interruptDisableFlag)
   {
-    mInterruptDisableFlag = interruptDisableFlag;
+    this.interruptDisableFlag = interruptDisableFlag;
   }
 
   public void setAccumulatorWidthFlag(boolean accumulatorWidthFlag)
   {
-    mAccumulatorWidthFlag = accumulatorWidthFlag;
+    this.accumulatorWidthFlag = accumulatorWidthFlag;
   }
 
   public void setIndexWidthFlag(boolean indexWidthFlag)
@@ -71,7 +71,7 @@ public class CpuStatus
 
   public void setCarryFlag(boolean carryFlag)
   {
-    mCarryFlag = carryFlag;
+    this.carryFlag = carryFlag;
   }
 
   public void setEmulationFlag(boolean emulationFlag)
@@ -81,27 +81,27 @@ public class CpuStatus
 
   public boolean zeroFlag()
   {
-    return mZeroFlag;
+    return zeroFlag;
   }
 
-  public boolean signFlag()
+  public boolean negativeFlag()
   {
-    return mSignFlag;
+    return negativeFlag;
   }
 
   public boolean decimalFlag()
   {
-    return mDecimalFlag;
+    return decimalFlag;
   }
 
   public boolean interruptDisableFlag()
   {
-    return mInterruptDisableFlag;
+    return interruptDisableFlag;
   }
 
   public boolean isAccumulator8Bit()
   {
-    return mAccumulatorWidthFlag;
+    return accumulatorWidthFlag;
   }
 
   public boolean isIndex8Bit()
@@ -111,7 +111,7 @@ public class CpuStatus
 
   public boolean carryFlag()
   {
-    return mCarryFlag;
+    return carryFlag;
   }
 
   public boolean isEmulationMode()
@@ -121,22 +121,22 @@ public class CpuStatus
 
   public void setBreakFlag(boolean breakFlag)
   {
-    mBreakFlag = breakFlag;
+    this.breakFlag = breakFlag;
   }
 
   public boolean breakFlag()
   {
-    return mBreakFlag;
+    return breakFlag;
   }
 
   public void setOverflowFlag(boolean overflowFlag)
   {
-    mOverflowFlag = overflowFlag;
+    this.overflowFlag = overflowFlag;
   }
 
   public boolean overflowFlag()
   {
-    return mOverflowFlag;
+    return overflowFlag;
   }
 
   public int getRegisterValue()
@@ -174,9 +174,9 @@ public class CpuStatus
     {
       value |= STATUS_OVERFLOW;
     }
-    if (signFlag())
+    if (negativeFlag())
     {
-      value |= STATUS_SIGN;
+      value |= STATUS_NEGATIVE;
     }
 
     return value;
@@ -201,7 +201,7 @@ public class CpuStatus
     setAccumulatorWidthFlag(!isEmulationMode() && ((value & STATUS_ACCUMULATOR_WIDTH) != 0));
     setOverflowFlag((value & STATUS_OVERFLOW) != 0);
 
-    setSignFlag((value & STATUS_SIGN) != 0);
+    setNegativeFlag((value & STATUS_NEGATIVE) != 0);
   }
 
   public void setZeroFlagFrom8BitValue(int value)
@@ -214,25 +214,25 @@ public class CpuStatus
     setZeroFlag(Binary.is16bitValueZero(value));
   }
 
-  public void setSignFlagFrom8BitValue(int value)
+  public void setNegativeFlagFrom8BitValue(int value)
   {
-    setSignFlag(Binary.is8bitValueNegative(value));
+    setNegativeFlag(Binary.is8bitValueNegative(value));
   }
 
-  public void setSignFlagFrom16BitValue(int value)
+  public void setNegativeFlagFrom16BitValue(int value)
   {
-    setSignFlag(Binary.is16bitValueNegative(value));
+    setNegativeFlag(Binary.is16bitValueNegative(value));
   }
 
   public void setSignAndZeroFlagFrom8BitValue(int value)
   {
-    setSignFlagFrom8BitValue(value);
+    setNegativeFlagFrom8BitValue(value);
     setZeroFlagFrom8BitValue(value);
   }
 
   public void setSignAndZeroFlagFrom16BitValue(int value)
   {
-    setSignFlagFrom16BitValue(value);
+    setNegativeFlagFrom16BitValue(value);
     setZeroFlagFrom16BitValue(value);
   }
 }

@@ -3,7 +3,7 @@ package name.bizna.emu65816.addressingmode;
 import name.bizna.emu65816.Address;
 import name.bizna.emu65816.Cpu65816;
 import name.bizna.emu65816.EmulatorException;
-import name.bizna.emu65816.Pins;
+import name.bizna.emu65816.FieldPins;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,7 +87,7 @@ public class BusCycle
     Address address = getAddress(cpu);
     getDataOperation().setPins(cpu);
 
-    Pins pins = cpu.getPins();
+    FieldPins pins = cpu.getPins();
     pins.setAddress(address.getOffset());
     pins.setData(address.getBank());
   }

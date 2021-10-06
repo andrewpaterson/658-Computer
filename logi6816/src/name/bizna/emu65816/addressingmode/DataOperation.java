@@ -1,7 +1,7 @@
 package name.bizna.emu65816.addressingmode;
 
 import name.bizna.emu65816.Cpu65816;
-import name.bizna.emu65816.Pins;
+import name.bizna.emu65816.FieldPins;
 
 public abstract class DataOperation
     extends Operation
@@ -31,7 +31,7 @@ public abstract class DataOperation
 
   public void setPins(Cpu65816 cpu)
   {
-    Pins pins = cpu.getPins();
+    FieldPins pins = cpu.getPins();
 
     pins.setRead(read);
     pins.setValidDataAddress(validDataAddress);

@@ -1,129 +1,38 @@
 package name.bizna.emu65816;
 
-@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "unused"})
-public class Pins
+public interface Pins
 {
-  private int address;                  //output
-  private int data;                     //bi-directional
-  private boolean read;                 //output
-  private boolean abortB;               //input
-  private boolean busEnable;            //input
-  private boolean phi2;                 //input
-  private boolean emulation;            //output
-  private boolean irqB;                 //input
-  private boolean nmiB;                 //input
-  private boolean memoryLockB;           //output
-  private boolean mx;                   //output
-  private boolean ready;                //bi-directional.  Also.  Fuck-it I'm treating this an output.
-  private boolean resetB;               //input
-  private boolean vectorPullB;          //output
-  private boolean validProgramAddress;  //output
-  private boolean validDataAddress;     //output
+  int getAddress();
 
-  public Pins()
-  {
-    this.address = 0;
-    this.data = 0;
-    this.read = true;
-    this.abortB = true;
-    this.busEnable = true;
-    this.phi2 = true;
-    this.emulation = true;
-    this.irqB = true;
-    this.nmiB = true;
-    this.memoryLockB = false;
-    this.mx = true;
-    this.ready = false;
-    this.resetB = true;
-    this.vectorPullB = true;
-    this.validProgramAddress = false;
-    this.validDataAddress = false;
-  }
+  void setAddress(int address);
 
-  public int getAddress()
-  {
-    return address;
-  }
+  int getData();
 
-  public void setAddress(int address)
-  {
-    this.address = address;
-  }
+  void setData(int data);
 
-  public int getData()
-  {
-    return data;
-  }
+  void setRead(boolean read);
 
-  public void setData(int data)
-  {
-    this.data = data;
-  }
+  boolean isRead();
 
-  public void setRead(boolean read)
-  {
+  boolean getPhi2();
 
-    this.read = read;
-  }
+  void setPhi2(boolean phi2);
 
-  public boolean isRead()
-  {
-    return read;
-  }
+  void setEmulation(boolean emulation);
 
-  public boolean getPhi2()
-  {
-    return phi2;
-  }
+  void setMemoryLockB(boolean memoryLock);
 
-  public void setPhi2(boolean phi2)
-  {
-    this.phi2 = phi2;
-  }
+  void setMX(boolean mx);
 
-  public void setEmulation(boolean emulation)
-  {
-    this.emulation = emulation;
-  }
+  void setReady(boolean ready);
 
-  public void setMemoryLockB(boolean memoryLock)
-  {
-    this.memoryLockB = memoryLock;
-  }
+  void setVectorPullB(boolean vectorPullB);
 
-  public void setMX(boolean mx)
-  {
-    this.mx = mx;
-  }
+  boolean isValidProgramAddress();
 
-  public void setReady(boolean ready)
-  {
-    this.ready = ready;
-  }
+  void setValidProgramAddress(boolean validProgramAddress);
 
-  public void setVectorPullB(boolean vectorPullB)
-  {
-    this.vectorPullB = vectorPullB;
-  }
+  boolean isValidDataAddress();
 
-  public boolean isValidProgramAddress()
-  {
-    return validProgramAddress;
-  }
-
-  public void setValidProgramAddress(boolean validProgramAddress)
-  {
-    this.validProgramAddress = validProgramAddress;
-  }
-
-  public boolean isValidDataAddress()
-  {
-    return validDataAddress;
-  }
-
-  public void setValidDataAddress(boolean validDataAddress)
-  {
-    this.validDataAddress = validDataAddress;
-  }
+  void setValidDataAddress(boolean validDataAddress);
 }
-

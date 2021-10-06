@@ -50,8 +50,8 @@ public class Cpu65816
   public Cpu65816(Pins pins)
   {
     this.pins = pins;
-    programAddress = new Address(0x00, 0x0000);
 
+    programAddress = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
     opCodeTable = OpCodeTable.createTable();
     resetOpcode = new OpCode_RES(new StackResetCycles(new ResetVector(), Cpu65816::RES));
@@ -333,7 +333,7 @@ public class Cpu65816
 
   private boolean isSignSet()
   {
-    return processorStatus.signFlag();
+    return processorStatus.negativeFlag();
   }
 
   private boolean isOverflowSet()
@@ -1096,13 +1096,13 @@ public class Cpu65816
 
     if (isMemory16Bit())
     {
-      processorStatus.setSignFlag(is16bitValueNegative(value));
+      processorStatus.setNegativeFlag(is16bitValueNegative(value));
       processorStatus.setOverflowFlag((value & 0x4000) != 0);
       processorStatus.setZeroFlagFrom16BitValue((value & getA()));
     }
     else
     {
-      processorStatus.setSignFlag(is8bitValueNegative(value));
+      processorStatus.setNegativeFlag(is8bitValueNegative(value));
       processorStatus.setOverflowFlag((value & 0x40) != 0);
       processorStatus.setZeroFlagFrom8BitValue((value & getA()));
     }

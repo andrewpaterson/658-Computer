@@ -10,7 +10,7 @@ public class Main
   {
     Memory memory = new Memory(readBytes(new File("../Test816/Test816.bin")));
 
-    Pins pins = new Pins();
+    FieldPins pins = new FieldPins();
     Cpu65816 cpu = new Cpu65816(pins);
 
     int count = 1024;

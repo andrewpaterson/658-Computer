@@ -134,11 +134,6 @@ public class Logisim65816Data
     return getWordStringHex(cpu.getData16Bit());
   }
 
-  public boolean isProcessorStatus(byte statusBit)
-  {
-    return (cpu.getCpuStatus().getRegisterValue() & statusBit) != 0;
-  }
-
   public String getCycle()
   {
     return Integer.toString(cpu.getCycle());
@@ -161,7 +156,7 @@ public class Logisim65816Data
     return cpu.getCycle() != 0;
   }
 
-  public void propagate(InstanceState state)
+  public void propagate()
   {
     cpu.tick();
   }

@@ -1,9 +1,7 @@
 package name.bizna.logi65816;
 
-import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
-import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -17,29 +15,14 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
-import static name.bizna.logi65816.W65C816.*;
-
 public class Logisim65816Factory
     extends InstanceFactory
 {
   protected static final int V_MARGIN = 10;
-  protected static final int PINS_PER_SIDE = 7;
+  protected static final int PINS_PER_SIDE = 8;
   protected static final int PIXELS_PER_PIN = 20;
   protected static final int PIN_TOP_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / -2) - V_MARGIN;
   protected static final int PIN_BOT_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / 2) + V_MARGIN;
-  protected static final int PORT_VPB = 0;
-  protected static final int PORT_RDY = 1;
-  protected static final int PORT_IRQB = 2;
-  protected static final int PORT_MLB = 3;
-  protected static final int PORT_NMIB = 4;
-  protected static final int PORT_SYNC = 5;
-  protected static final int PORT_AddressBus = 6;
-  protected static final int PORT_DataBus = 7;
-  protected static final int PORT_RWB = 8;
-  protected static final int PORT_BE = 9;
-  protected static final int PORT_PHI2 = 10;
-  protected static final int PORT_SOB = 11;
-  protected static final int PORT_RESB = 12;
 
   protected static final int LEFT_X = -120;
   protected static final int RIGHT_X = 120;
@@ -47,24 +30,46 @@ public class Logisim65816Factory
   protected static final int BOT_Y = 130 + V_MARGIN;
   protected static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN + PIXELS_PER_PIN / 2;
   protected static final int PIN_STOP_Y = PIN_BOT_Y - V_MARGIN;
+
+  protected static final int PORT_VPB = 0;
+  protected static final int PORT_RDY = 1;
+  protected static final int PORT_ABORT = 2;
+  protected static final int PORT_IRQB = 3;
+  protected static final int PORT_MLB = 4;
+  protected static final int PORT_NMIB = 5;
+  protected static final int PORT_VPA = 6;
+  protected static final int PORT_AddressBus = 7;
+
+  protected static final int PORT_RESB = 8;
+  protected static final int PORT_VDA = 9;
+  protected static final int PORT_MX = 10;
+  protected static final int PORT_PHI2 = 11;
+  protected static final int PORT_BE = 12;
+  protected static final int PORT_E = 13;
+  protected static final int PORT_RWB = 14;
+  protected static final int PORT_DataBus = 15;
+
   protected static final PortInfo[] portInfos = new PortInfo[]
       {
           // Left side, top to bottom
-          PortInfo.exclusiveOutput("VPB#"),
+          PortInfo.sharedOutput("VPB"),
           PortInfo.sharedBidirectional("RDY"),
-          PortInfo.sharedInput("IRQB#"),
-          PortInfo.exclusiveOutput("MLB#"),
-          PortInfo.sharedInput("NMIB#"),
-          PortInfo.exclusiveOutput("VPA"),
-          PortInfo.exclusiveOutput("VDA"),
-          // Right side, bottom to top
+          PortInfo.sharedInput("ABORT"),
+          PortInfo.sharedInput("IRQB"),
+          PortInfo.sharedOutput("MLB"),
+          PortInfo.sharedInput("NMIB"),
+          PortInfo.sharedOutput("VPA"),
           PortInfo.sharedOutput("A", 16),
-          PortInfo.sharedBidirectional("D", 8),
-          PortInfo.sharedOutput("RWB"),
-          PortInfo.sharedInput("BE"),
+
+          // Right side, bottom to top
+          PortInfo.sharedInput("RESB"),
+          PortInfo.sharedOutput("VDA"),
+          PortInfo.sharedOutput("MX"),
           PortInfo.sharedInput("PHI2"),
-          PortInfo.sharedInput("SOB#"),
-          PortInfo.sharedInput("RESB#")
+          PortInfo.sharedInput("BE"),
+          PortInfo.sharedOutput("E"),
+          PortInfo.sharedOutput("RWB"),
+          PortInfo.sharedBidirectional("D", 8)
       };
 
   public Logisim65816Factory()
@@ -74,16 +79,16 @@ public class Logisim65816Factory
     addStandardPins(portInfos, LEFT_X, RIGHT_X, PIN_START_Y, PIN_STOP_Y, PIXELS_PER_PIN, PINS_PER_SIDE);
   }
 
-  void paintPorts(InstancePainter painter, PortInfo[] portInfos, int pinsPerSide)
+  void paintPorts(InstancePainter painter)
   {
     int n = 0;
-    for (int i = 0; i < portInfos.length; ++i)
+    for (int i = 0; i < Logisim65816Factory.portInfos.length; ++i)
     {
-      if (portInfos[i] != null)
+      if (Logisim65816Factory.portInfos[i] != null)
       {
-        Direction dir = i < pinsPerSide ? Direction.EAST : Direction.WEST;
-        painter.drawPort(n, portInfos[i].name, dir);
-        ++n;
+        Direction dir = i < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
+        painter.drawPort(n, Logisim65816Factory.portInfos[i].name, dir);
+        n++;
       }
     }
   }
@@ -92,7 +97,7 @@ public class Logisim65816Factory
   public void paintInstance(InstancePainter painter)
   {
     painter.drawBounds();
-    paintPorts(painter, portInfos, PINS_PER_SIDE);
+    paintPorts(painter);
 
     Graphics g = painter.getGraphics();
     if (g instanceof Graphics2D)
@@ -124,12 +129,12 @@ public class Logisim65816Factory
       drawInternal(g, topOffset, width8Bit, "Op-code:", core.getOpcodeMnemonicString(), core.isOpcodeValid());
       drawInternal(g, topOffset + 20, width8Bit, "Op-code:", core.getOpcodeValueHex(), core.isOpcodeValid());
       drawInternal(g, topOffset + 40, width8Bit, "Cycle:", core.getCycle(), true);
-      drawInternal(g, topOffset + 60, width24Bit, "Address:", core.getAddressValueHex(), false);
-      drawInternal(g, topOffset + 80, width16Bit, "Accumulator:", core.getAccumulatorValueHex(), true);
-      drawInternal(g, topOffset + 100, width16Bit, "X Index:", core.getXValueHex(), true);
-      drawInternal(g, topOffset + 120, width16Bit, "Y Index:", core.getYValueHex(), true);
-      drawInternal(g, topOffset + 140, width16Bit, "Stack", core.getStackValueHex(), true);
-      drawInternal(g, topOffset + 160, width24Bit, "P-Counter:", core.getProgramCounterValueHex(), true);
+      drawInternal(g, topOffset + 60, width16Bit, "Accumulator:", core.getAccumulatorValueHex(), true);
+      drawInternal(g, topOffset + 80, width16Bit, "X Index:", core.getXValueHex(), true);
+      drawInternal(g, topOffset + 100, width16Bit, "Y Index:", core.getYValueHex(), true);
+      drawInternal(g, topOffset + 120, width16Bit, "Stack", core.getStackValueHex(), true);
+      drawInternal(g, topOffset + 140, width24Bit, "P-Counter:", core.getProgramCounterValueHex(), true);
+      drawInternal(g, topOffset + 160, width24Bit, "Address:", core.getAddressValueHex(), false);
       drawInternal(g, topOffset + 180, width16Bit, "Data", core.getDataValueHex(), false);
 
       int processorStatusTopOffset = topOffset + 205;
@@ -188,83 +193,14 @@ public class Logisim65816Factory
     g.setColor(oldColour);
   }
 
-  private void setPort(InstanceState instanceState, int port, boolean value, int delay)
-  {
-    instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
-  }
-
-  private void setAddressPort(InstanceState instanceState, short a)
-  {
-    instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), a), 12);
-  }
-
-  private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
-  {
-    if (instanceState.getPortValue(PORT_BE) == Value.FALSE)
-    {
-      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
-      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
-      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 12);
-      return false;
-    }
-    else
-    {
-      return true;
-    }
-  }
-
-  public void doRead(InstanceState instanceState, short address)
-  {
-    if (updateBussesEnabledFromNotBusEnabled(instanceState))
-    {
-      setAddressPort(instanceState, address);
-      instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
-      setPort(instanceState, Logisim65816Factory.PORT_RWB, true, 9);
-    }
-  }
-
-  public void doWrite(InstanceState instanceState, short address, byte data)
-  {
-    if (updateBussesEnabledFromNotBusEnabled(instanceState))
-    {
-      setAddressPort(instanceState, address);
-      instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
-      setPort(instanceState, Logisim65816Factory.PORT_RWB, false, 9);
-    }
-  }
-
-  public byte getDataFromPort(InstanceState instanceState)
-  {
-    return (byte) instanceState.getPortValue(Logisim65816Factory.PORT_DataBus).toLongValue();
-  }
-
-  public boolean isOverflow(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_SOB) == Value.FALSE;
-  }
-
-  public void setReady(InstanceState instanceState, boolean ready)
-  {
-    instanceState.setPort(PORT_RDY, ready ? Value.UNKNOWN : Value.FALSE, 9);
-  }
-
-  public void setVPB(InstanceState instanceState, boolean vectorPull)
-  {
-    setPort(instanceState, PORT_VPB, !vectorPull, 6);
-  }
-
-  public void setSync(InstanceState instanceState, boolean sync)
-  {
-    setPort(instanceState, PORT_SYNC, sync, 6);
-  }
-
   @Override
   public void propagate(InstanceState state)
   {
     Logisim65816Data core = Logisim65816Data.getOrCreateLogisim65816Data(state, this);
-    core.propagate(state);
+    core.propagate();
   }
 
+  @SuppressWarnings("SameParameterValue")
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)
   {
     ArrayList<Port> ports = new ArrayList<>(portInfos.length);
@@ -297,11 +233,6 @@ public class Logisim65816Factory
       ports.add(port);
     }
     setPorts(ports);
-  }
-
-  public void setMLB(InstanceState instanceState, boolean mlb)
-  {
-    setPort(instanceState, PORT_MLB, mlb, 6);
   }
 }
 

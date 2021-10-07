@@ -2,21 +2,15 @@ package name.bizna.cpu;
 
 public interface Pins65816
 {
-  int getAddress();
-
   void setAddress(int address);
 
   int getData();
 
   void setData(int data);
 
-  void setRead(boolean read);
-
-  boolean isRead();
+  void setRwb(boolean rwb);
 
   boolean getPhi2();
-
-  void setPhi2(boolean phi2);
 
   void setEmulation(boolean emulation);
 
@@ -24,25 +18,13 @@ public interface Pins65816
 
   void setMX(boolean mx);
 
-  void setReady(boolean ready);
+  void setRdy(boolean rdy);
 
   void setVectorPullB(boolean vectorPullB);
 
-  boolean isValidProgramAddress();
-
   void setValidProgramAddress(boolean validProgramAddress);
 
-  boolean isValidDataAddress();
-
   void setValidDataAddress(boolean validDataAddress);
-
-  boolean isEmulation();
-
-  boolean isMemoryLockB();
-
-  boolean isReady();
-
-  boolean isVectorPullB();
 
   boolean isBusEnable();
 
@@ -52,10 +34,8 @@ public interface Pins65816
 
   boolean isNmiB();
 
-  boolean isMX();
+  boolean isAbortB();
 
   boolean isResetB();
-
-  boolean isAbortB();
 }
 

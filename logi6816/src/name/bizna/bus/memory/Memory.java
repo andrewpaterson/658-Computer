@@ -1,58 +1,85 @@
 package name.bizna.bus.memory;
 
-import name.bizna.cpu.Address;
-
-import java.util.Arrays;
+import name.bizna.bus.common.Omnibus;
+import name.bizna.bus.common.Single;
+import name.bizna.bus.logic.Tickable;
+import name.bizna.util.EmulatorException;
 
 import static name.bizna.util.IntUtil.toByte;
 
 public class Memory
+    implements Tickable
 {
-  public static final int KB = 1024;
-
   protected int size;
   protected byte[] pvMemory;
 
-  public Memory(int size)
-  {
-    pvMemory = new byte[size];
-    Arrays.fill(pvMemory, (byte) 0xea);
-    this.size = size;
-  }
+  private final Omnibus addressBus;
+  private final Omnibus dataBus;
+  private final Single rwbTrace;
 
-  public Memory(byte[] bytes)
+  private int outValue;
+
+  public Memory(Omnibus addressBus,
+                Omnibus dataBus,
+                Single rwbTrace,
+                byte[] bytes)
   {
+    this.addressBus = addressBus;
+    this.dataBus = dataBus;
+    this.rwbTrace = rwbTrace;
+
     pvMemory = new byte[bytes.length];
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
     this.size = bytes.length;
   }
 
-  public void storeByte(Address address, int byteValue)
+  public boolean propagate()
   {
-    int bank = address.getBank();
-    int offset = address.getOffset();
+    if (rwbTrace.get())
+    {
+      int newOutValue = read(addressBus.get());
+      dataBus.set(newOutValue);
 
-    int i = bank * 64 * KB + offset;
-    pvMemory[i] = (byte) toByte(byteValue);
+      boolean settled = newOutValue == outValue;
+      this.outValue = newOutValue;
+      return settled;
+    }
+    else
+    {
+      write(addressBus.get(), dataBus.get());
+    }
+    return true;
   }
 
-  public int readByte(Address address)
+  public void write(int address, int value)
   {
-    int bank = address.getBank();
-    int offset = address.getOffset();
-
-    int i = bank * 64 * KB + offset;
-    return toByte(pvMemory[i]);
+    if (address >= 0 && address < size)
+    {
+      if (value >= 0 && value <= 0xFF)
+      {
+        pvMemory[address] = (byte) value;
+      }
+      else
+      {
+        throw new EmulatorException("Cannot write value > 0xFF.");
+      }
+    }
+    else
+    {
+      throw new EmulatorException("Cannot write outside of memory.");
+    }
   }
 
-  public void writeByte(Address address, int data)
+  public int read(int address)
   {
-    int bank = address.getBank();
-    int offset = address.getOffset();
-
-    int i = bank * 64 * KB + offset;
-
-    pvMemory[i] = (byte) toByte(data);
+    if (address >= 0 && address < size)
+    {
+      return toByte(pvMemory[address]);
+    }
+    else
+    {
+      throw new EmulatorException("Cannot read outside of memory.");
+    }
   }
 
   byte charToHex(char c)

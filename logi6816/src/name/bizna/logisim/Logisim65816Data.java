@@ -14,7 +14,7 @@ public class Logisim65816Data
   public Logisim65816Data(Logisim65816Factory parent, InstanceState state)
   {
     this.parent = parent;
-    this.cpu = new Cpu65816(new PinsLogisim65816(state));
+    this.cpu = new Cpu65816(new LogisimPins65816(state));
   }
 
   public static Logisim65816Data getOrCreateLogisim65816Data(InstanceState state, Logisim65816Factory factory)

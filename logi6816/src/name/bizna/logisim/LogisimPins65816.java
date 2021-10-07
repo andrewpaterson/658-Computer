@@ -3,64 +3,41 @@ package name.bizna.logisim;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceState;
-import name.bizna.util.EmulatorException;
 import name.bizna.cpu.Pins65816;
 
 import static name.bizna.logisim.Logisim65816Factory.*;
 
-public class PinsLogisim65816
+public class LogisimPins65816
     implements Pins65816
 {
   private final InstanceState instanceState;
 
-  private int address;                  //output
   private int data;                     //bi-directional
-  private boolean read;                 //output
-  private boolean emulation;            //output
-  private boolean memoryLockB;           //output
-  private boolean mx;                   //output
-  private boolean ready;                //bi-directional.  Also.  Fuck-it I'm treating this an output.
-  private boolean vectorPullB;          //output
-  private boolean validProgramAddress;  //output
-  private boolean validDataAddress;     //output
+  private boolean rdy;                  //bi-directional.  Also.  Fuck-it I'm treating this an output.
 
-  public PinsLogisim65816(InstanceState state)
+  public LogisimPins65816(InstanceState state)
   {
     this.instanceState = state;
   }
 
   @Override
-  public int getAddress()
-  {
-    return address;
-  }
-
-  @Override
   public void setAddress(int address)
   {
-    this.address = address;
     instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
   }
 
   @Override
   public int getData()
   {
-    if (read)
+    //instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);  //How the ever-loving-fuck does this line read data?
+    Value portValue = instanceState.getPortValue(PORT_DataBus);
+    if (portValue.isFullyDefined())
     {
-      //instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);  //How the ever-loving-fuck does this line read data?
-      Value portValue = instanceState.getPortValue(PORT_DataBus);
-      if (portValue.isFullyDefined())
-      {
-        return (byte) portValue.toLongValue();
-      }
-      else
-      {
-        return 0;
-      }
+      return (byte) portValue.toLongValue();
     }
     else
     {
-      return (byte)data;
+      return 0;
     }
   }
 
@@ -72,16 +49,9 @@ public class PinsLogisim65816
   }
 
   @Override
-  public void setRead(boolean read)
+  public void setRwb(boolean rwb)
   {
-    this.read = read;
-    instanceState.setPort(PORT_RWB, read ? Value.TRUE : Value.FALSE, 9);
-  }
-
-  @Override
-  public boolean isRead()
-  {
-    return read;
+    instanceState.setPort(PORT_RWB, rwb ? Value.TRUE : Value.FALSE, 9);
   }
 
   @Override
@@ -91,88 +61,45 @@ public class PinsLogisim65816
   }
 
   @Override
-  public void setPhi2(boolean phi2)
-  {
-    throw new EmulatorException("Cannot set PHI2 from within the CPU.");
-  }
-
-  @Override
   public void setEmulation(boolean emulation)
   {
-    this.emulation = emulation;
     setBooleanValue(PORT_E, emulation, 9);
   }
 
   @Override
   public void setMemoryLockB(boolean memoryLockB)
   {
-    this.memoryLockB = memoryLockB;
     setBooleanValue(PORT_MLB, memoryLockB, 9);
   }
 
   @Override
   public void setMX(boolean mx)
   {
-    this.mx = mx;
     setBooleanValue(PORT_MX, mx, 9);
   }
 
   @Override
-  public void setReady(boolean ready)
+  public void setRdy(boolean rdy)
   {
-    this.ready = ready;
-    setBooleanValue(PORT_RDY, ready, 12);
+    setBooleanValue(PORT_RDY, rdy, 12);
   }
 
   @Override
   public void setVectorPullB(boolean vectorPullB)
   {
-    this.vectorPullB = vectorPullB;
-    setBooleanValue(PORT_VPB, mx, 9);
-  }
-
-  @Override
-  public boolean isValidProgramAddress()
-  {
-    return validProgramAddress;
+    setBooleanValue(PORT_VPB, vectorPullB, 9);
   }
 
   @Override
   public void setValidProgramAddress(boolean validProgramAddress)
   {
-    this.validProgramAddress = validProgramAddress;
-    setBooleanValue(PORT_MX, validProgramAddress, 9);
-  }
-
-  @Override
-  public boolean isValidDataAddress()
-  {
-    return validDataAddress;
+    setBooleanValue(PORT_VPA, validProgramAddress, 9);
   }
 
   @Override
   public void setValidDataAddress(boolean validDataAddress)
   {
-    this.validDataAddress = validDataAddress;
-    setBooleanValue(PORT_MX, validDataAddress, 9);
-  }
-
-  @Override
-  public boolean isEmulation()
-  {
-    return emulation;
-  }
-
-  @Override
-  public boolean isMemoryLockB()
-  {
-    return memoryLockB;
-  }
-
-  @Override
-  public boolean isMX()
-  {
-    return mx;
+    setBooleanValue(PORT_VDA, validDataAddress, 9);
   }
 
   @Override
@@ -185,18 +112,6 @@ public class PinsLogisim65816
   public boolean isAbortB()
   {
     return getBooleanValue(PORT_ABORT);
-  }
-
-  @Override
-  public boolean isReady()
-  {
-    return ready;
-  }
-
-  @Override
-  public boolean isVectorPullB()
-  {
-    return vectorPullB;
   }
 
   @Override

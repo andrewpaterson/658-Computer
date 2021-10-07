@@ -33,12 +33,12 @@ public abstract class DataOperation
   {
     Pins65816 pins = cpu.getPins();
 
-    pins.setRead(read);
+    pins.setRwb(read);
     pins.setValidDataAddress(validDataAddress);
     pins.setValidProgramAddress(validProgramAddress);
     pins.setMemoryLockB(notMemoryLock);
     pins.setVectorPullB(notVectorPull);
-    pins.setReady(ready);
+    pins.setRdy(ready);
   }
 }
 

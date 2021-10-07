@@ -1,6 +1,5 @@
 package name.bizna.cpu;
 
-import name.bizna.util.EmulatorException;
 import name.bizna.cpu.addressingmode.FetchOpCodeCycles;
 import name.bizna.cpu.addressingmode.InstructionCycles;
 import name.bizna.cpu.addressingmode.StackHardwareInterruptCycles;
@@ -10,8 +9,8 @@ import name.bizna.cpu.interrupt.IRQVector;
 import name.bizna.cpu.interrupt.NMIVector;
 import name.bizna.cpu.interrupt.ResetVector;
 import name.bizna.cpu.opcode.*;
+import name.bizna.util.EmulatorException;
 import name.bizna.util.IntUtil;
-import name.bizna.util.StringUtil;
 
 import static name.bizna.util.IntUtil.*;
 import static name.bizna.util.StringUtil.to16BitHex;
@@ -263,15 +262,19 @@ public class Cpu65816
 
   public void tick()
   {
-    if (stopped)
-    {
-      return;
-    }
-
     boolean clock = pins.getPhi2();
     boolean clockFallingEdge = !clock && previousClock;
     boolean clockRisingEdge = clock && !previousClock;
     previousClock = clock;
+
+    if (!clockFallingEdge && !clockRisingEdge)
+    {
+      return;
+    }
+    if (stopped)
+    {
+      return;
+    }
 
     InstructionCycles cycles = opCode.getCycles();
 
@@ -438,11 +441,6 @@ public class Cpu65816
     {
       return getLowByte(stackPointer) | 0x100;
     }
-  }
-
-  public boolean isStopped()
-  {
-    return stopped;
   }
 
   public void doneInstruction()
@@ -1766,38 +1764,13 @@ public class Cpu65816
       System.out.println("        Status: " + getStatusString());
       System.out.println("Address Offset: " + getOpCode().getCycles().getBusCycle(getCycle()).toAddressOffsetString());
       System.out.println("     Operation: " + getOpCode().getCycles().getBusCycle(getCycle()).toOperationString());
-
-      System.out.println(" --------- Pin Status ---- ");
-      System.out.println("      Address: 0x" + StringUtil.to16BitHex(pins.getAddress()));
-      System.out.println("         Data: 0x" + StringUtil.to8BitHex(pins.getData()));
-      System.out.print("          RWB:" + is(pins.isRead()));
-      System.out.print(" VPA:" + is(pins.isValidProgramAddress()));
-      System.out.print(" VDA:" + is(pins.isValidDataAddress()));
-      System.out.print("  BE:" + is(pins.isBusEnable()));
-      System.out.print(" PHI2:" + is(pins.isPhi2()));
-      System.out.print("   E:" + is(pins.isEmulation()));
-      System.out.println(" IRQB:" + is(pins.isIrqB()));
-      System.out.print("         NMIB:" + is(pins.isNmiB()));
-      System.out.print(" MLB:" + is(pins.isMemoryLockB()));
-      System.out.print("  MX:" + is(pins.isMX()));
-      System.out.print(" RDY:" + is(pins.isReady()));
-      System.out.print(" ABTB:" + is(pins.isAbortB()));
-      System.out.print(" RSB:" + is(pins.isResetB()));
-      System.out.println(" VPB:" + is(pins.isVectorPullB()));
       System.out.println();
     }
   }
 
-  private String is(boolean bool)
+  public boolean isStopped()
   {
-    if (bool)
-    {
-      return "1";
-    }
-    else
-    {
-      return "0";
-    }
+    return stopped;
   }
 }
 

@@ -1,0 +1,20 @@
+package name.bizna.cpu.addressingmode;
+
+import name.bizna.cpu.Cpu65816;
+
+public class IncrementStackPointer
+    extends Operation
+{
+  @Override
+  public void execute(Cpu65816 cpu)
+  {
+    cpu.incrementStackPointer();
+  }
+
+  @Override
+  public String toString()
+  {
+    return "SP++";
+  }
+}
+

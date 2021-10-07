@@ -1,0 +1,13 @@
+package name.bizna.cpu.opcode;
+
+import name.bizna.cpu.addressingmode.InstructionCycles;
+
+public class OpCode_TCS
+    extends OpCode
+{
+  public OpCode_TCS(int mCode, InstructionCycles cycles)
+  {
+    super("TCS", "Transfer C Accumulator to Stack Pointer", mCode, cycles);
+  }
+}
+

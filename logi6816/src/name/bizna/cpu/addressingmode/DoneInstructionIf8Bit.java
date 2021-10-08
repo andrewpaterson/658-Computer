@@ -2,14 +2,17 @@ package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
 import name.bizna.util.EmulatorException;
-import name.bizna.cpu.Width;
+import name.bizna.cpu.WidthFromRegister;
+
+import static name.bizna.cpu.WidthFromRegister.A;
+import static name.bizna.cpu.WidthFromRegister.XY;
 
 public class DoneInstructionIf8Bit
     extends Operation
 {
-  private final Width width;
+  private final WidthFromRegister width;
 
-  public DoneInstructionIf8Bit(Width width)
+  public DoneInstructionIf8Bit(WidthFromRegister width)
   {
     this.width = width;
   }
@@ -17,14 +20,14 @@ public class DoneInstructionIf8Bit
   @Override
   public void execute(Cpu65816 cpu)
   {
-    if (width == Width.A)
+    if (width == A)
     {
       if (cpu.isMemory8Bit())
       {
         cpu.doneInstruction();
       }
     }
-    else if (width == Width.XY)
+    else if (width == XY)
     {
       if (cpu.isIndex8Bit())
       {

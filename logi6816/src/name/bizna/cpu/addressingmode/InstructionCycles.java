@@ -2,7 +2,7 @@ package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.AddressingMode;
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Width;
+import name.bizna.cpu.WidthFromRegister;
 import name.bizna.cpu.interrupt.InterruptVector;
 
 import java.util.Arrays;
@@ -309,12 +309,12 @@ public abstract class InstructionCycles
     return new Execute(consumer);
   }
 
-  protected static Operation DONE16Bit(Width width)
+  protected static Operation DONE16Bit(WidthFromRegister width)
   {
     return new DoneInstructionIf16Bit(width);
   }
 
-  protected static Operation DONE8Bit(Width width)
+  protected static Operation DONE8Bit(WidthFromRegister width)
   {
     return new DoneInstructionIf8Bit(width);
   }

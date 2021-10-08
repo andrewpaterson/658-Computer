@@ -2,14 +2,17 @@ package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
 import name.bizna.util.EmulatorException;
-import name.bizna.cpu.Width;
+import name.bizna.cpu.WidthFromRegister;
+
+import static name.bizna.cpu.WidthFromRegister.A;
+import static name.bizna.cpu.WidthFromRegister.XY;
 
 public class NoteOne
     extends Operation
 {
-  private final Width width;
+  private final WidthFromRegister width;
 
-  public NoteOne(Width width)
+  public NoteOne(WidthFromRegister width)
   {
     this.width = width;
   }
@@ -22,11 +25,11 @@ public class NoteOne
   @Override
   public boolean mustExecute(Cpu65816 cpu)
   {
-    if (width == Width.A)
+    if (width == A)
     {
       return cpu.isMemory16Bit();
     }
-    else if (width == Width.XY)
+    else if (width == XY)
     {
       return cpu.isIndex16Bit();
     }

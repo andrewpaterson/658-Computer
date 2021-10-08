@@ -5,7 +5,7 @@ import name.bizna.cpu.Cpu65816;
 import java.util.function.Consumer;
 
 import static name.bizna.cpu.AddressingMode.Absolute;
-import static name.bizna.cpu.Width.A;
+import static name.bizna.cpu.WidthFromRegister.A;
 
 public class AbsoluteRMWCycles
     extends InstructionCycles

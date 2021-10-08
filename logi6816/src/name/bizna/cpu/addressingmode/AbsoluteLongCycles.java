@@ -1,11 +1,11 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Width;
 
 import java.util.function.Consumer;
 
 import static name.bizna.cpu.AddressingMode.AbsoluteLong;
+import static name.bizna.cpu.WidthFromRegister.A;
 
 public class AbsoluteLongCycles
     extends InstructionCycles
@@ -18,8 +18,8 @@ public class AbsoluteLongCycles
           new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_AAB(), PC_inc()),
-          new BusCycle(Address(AAB(), AA()), Read_DataLow(), E8Bit(operation), DONE8Bit(Width.A)),
-          new BusCycle(Address(AAB(), AA(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(Width.A)));
+          new BusCycle(Address(AAB(), AA()), Read_DataLow(), E8Bit(operation), DONE8Bit(A)),
+          new BusCycle(Address(AAB(), AA(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(A)));
   }
 }
 

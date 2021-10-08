@@ -1,57 +1,90 @@
 package name.bizna.bus.memory;
 
-import name.bizna.bus.common.Omniport;
-import name.bizna.bus.common.Port;
+import name.bizna.bus.common.*;
 import name.bizna.bus.logic.Tickable;
 import name.bizna.util.EmulatorException;
 
 import static name.bizna.util.IntUtil.toByte;
 
 public class Memory
-    implements Tickable
+    extends Tickable
 {
-  protected int size;
-  protected byte[] pvMemory;
+  protected final int size;
+  protected final byte[] pvMemory;
 
   private final Omniport addressBus;
   private final Omniport dataBus;
-  private final Port rwbTrace;
+  private final Uniport rwb;
 
-  private int outValue;
+  private boolean propagateWroteMemory;
+  private long oldAddress;
+  private int oldValue;
 
-  public Memory(Omniport addressBus,
-                Omniport dataBus,
-                Port rwbTrace,
+  public Memory(Tickables tickables,
+                Bus addressBus,
+                Bus dataBus,
+                Trace rwb,
                 byte[] bytes)
   {
-    this.addressBus = addressBus;
-    this.dataBus = dataBus;
-    this.rwbTrace = rwbTrace;
+    super(tickables);
+    this.addressBus = new Omniport(this, 16);
+    this.dataBus = new Omniport(this, 8);
+    this.rwb = new Uniport(this);
+
+    this.addressBus.connect(addressBus);
+    this.dataBus.connect(dataBus);
+    this.rwb.connect(rwb);
 
     pvMemory = new byte[bytes.length];
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
     this.size = bytes.length;
+    this.propagateWroteMemory = false;
   }
 
-  public boolean propagate()
+  public void propagate()
   {
-    if (rwbTrace.get())
+    TraceValue readState = rwb.readState();
+    TraceValue addressState = addressBus.readState();
+    if (readState == TraceValue.Error || addressState == TraceValue.Error)
     {
-      int newOutValue = read(addressBus.get());
-      dataBus.set(newOutValue);
+      dataBus.writeAllPinsError();
+    }
+    else if (readState == TraceValue.Undefined || addressState == TraceValue.Undefined)
+    {
+      dataBus.writeAllPinsUndefined();
+    }
+    else if (readState == TraceValue.High)
+    {
+      int data = getMemory(addressBus.readAllPinsBool());
+      dataBus.writeAllPinsBool(data);
+    }
+    else if (readState == TraceValue.Low)
+    {
+      TraceValue dataBusState = dataBus.readState();
+      if (dataBusState == TraceValue.HighAndLow ||
+          dataBusState == TraceValue.High ||
+          dataBusState == TraceValue.Low)
+      {
+        oldAddress = addressBus.readAllPinsBool();
+        oldValue = getMemory(oldAddress);
 
-      boolean settled = newOutValue == outValue;
-      this.outValue = newOutValue;
-      return settled;
+        setMemory(oldAddress, dataBus.readAllPinsBool());
+
+        propagateWroteMemory = true;
+      }
     }
-    else
-    {
-      write(addressBus.get(), dataBus.get());
-    }
-    return true;
   }
 
-  public void write(long address, long value)
+  @Override
+  public void undoPropagation()
+  {
+    if (propagateWroteMemory)
+    {
+      setMemory(oldAddress, oldValue);
+    }
+  }
+
+  public void setMemory(long address, long value)
   {
     if (address >= 0 && address < size)
     {
@@ -70,7 +103,7 @@ public class Memory
     }
   }
 
-  public int read(long address)
+  public int getMemory(long address)
   {
     if (address >= 0 && address < size)
     {

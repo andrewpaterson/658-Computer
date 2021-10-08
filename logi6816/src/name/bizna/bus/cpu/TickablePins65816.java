@@ -1,0 +1,212 @@
+package name.bizna.bus.cpu;
+
+import name.bizna.bus.common.*;
+import name.bizna.bus.logic.Tickable;
+import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Pins65816;
+
+@SuppressWarnings({"FieldMayBeFinal"})
+public class TickablePins65816
+    extends Tickable
+    implements Pins65816
+{
+  private Cpu65816 cpu;
+
+  protected final Omniport addressBus;
+  protected final Omniport dataBus;
+  protected final Uniport rwb;
+  protected final Uniport clock;
+  protected final Uniport abortB;
+  protected final Uniport busEnable;
+  protected final Uniport irqB;
+  protected final Uniport nmiB;
+  protected final Uniport resetB;
+  protected final Uniport emulation;
+  protected final Uniport memoryLockB;
+  protected final Uniport mx;
+  protected final Uniport rdy;
+  protected final Uniport vectorPullB;
+  protected final Uniport validProgramAddress;
+  protected final Uniport validDataAddress;
+
+  public TickablePins65816(Tickables tickables,
+                           Bus addressBus,
+                           Bus dataBus,
+                           Trace rwb,
+                           Trace clock,
+                           Trace abortB,
+                           Trace busEnable,
+                           Trace irqB,
+                           Trace nmiB,
+                           Trace resetB,
+                           Trace emulation,
+                           Trace memoryLockB,
+                           Trace mx,
+                           Trace rdy,
+                           Trace vectorPullB,
+                           Trace validProgramAddress,
+                           Trace validDataAddress)
+  {
+    super(tickables);
+    this.addressBus = new Omniport(this, 16);
+    this.dataBus = new Omniport(this, 8);
+    this.rwb = new Uniport(this);
+    this.clock = new Uniport(this);
+    this.abortB = new Uniport(this);
+    this.rdy = new Uniport(this);
+    this.busEnable = new Uniport(this);
+    this.irqB = new Uniport(this);
+    this.nmiB = new Uniport(this);
+    this.resetB = new Uniport(this);
+    this.emulation = new Uniport(this);
+    this.memoryLockB = new Uniport(this);
+    this.vectorPullB = new Uniport(this);
+    this.validProgramAddress = new Uniport(this);
+    this.validDataAddress = new Uniport(this);
+    this.mx = new Uniport(this);
+
+    this.addressBus.connect(addressBus);
+    this.dataBus.connect(dataBus);
+    this.rwb.connect(rwb);
+    this.clock.connect(clock);
+    this.abortB.connect(abortB);
+    this.rdy.connect(rdy);
+    this.busEnable.connect(busEnable);
+    this.irqB.connect(irqB);
+    this.nmiB.connect(nmiB);
+    this.resetB.connect(resetB);
+    this.emulation.connect(emulation);
+    this.memoryLockB.connect(memoryLockB);
+    this.vectorPullB.connect(vectorPullB);
+    this.validProgramAddress.connect(validProgramAddress);
+    this.validDataAddress.connect(validDataAddress);
+    this.mx.connect(mx);
+  }
+
+  @Override
+  public void propagate()
+  {
+    cpu.tick();
+  }
+
+  public void setCpu(Cpu65816 cpu)
+  {
+    this.cpu = cpu;
+  }
+
+  @Override
+  public void setAddress(int address)
+  {
+    this.addressBus.writeAllPinsBool(address);
+  }
+
+  @Override
+  public int getData()
+  {
+    if (cpu.isRead())
+    {
+      return (int) dataBus.readAllPinsBool();
+    }
+    else
+    {
+      return 0;
+    }
+  }
+
+  @Override
+  public void setData(int data)
+  {
+    this.dataBus.writeAllPinsBool(data);
+  }
+
+  @Override
+  public void setRwb(boolean rwb)
+  {
+    this.rwb.writeBool(rwb);
+  }
+
+  @Override
+  public boolean getPhi2()
+  {
+    return clock.readBool();
+  }
+
+  @Override
+  public void setEmulation(boolean emulation)
+  {
+    this.emulation.writeBool(emulation);
+  }
+
+  @Override
+  public void setMemoryLockB(boolean memoryLockB)
+  {
+    this.memoryLockB.writeBool(memoryLockB);
+  }
+
+  @Override
+  public void setMX(boolean mx)
+  {
+    this.mx.writeBool(mx);
+  }
+
+  @Override
+  public void setRdy(boolean rdy)
+  {
+    this.rdy.writeBool(rdy);
+  }
+
+  @Override
+  public void setVectorPullB(boolean vectorPullB)
+  {
+    this.vectorPullB.writeBool(vectorPullB);
+  }
+
+  @Override
+  public void setValidProgramAddress(boolean validProgramAddress)
+  {
+    this.validProgramAddress.writeBool(validProgramAddress);
+  }
+
+  @Override
+  public void setValidDataAddress(boolean validDataAddress)
+  {
+    this.validDataAddress.writeBool(validDataAddress);
+  }
+
+  @Override
+  public boolean isAbortB()
+  {
+    return abortB.readBool();
+  }
+
+  @Override
+  public boolean isBusEnable()
+  {
+    return busEnable.readBool();
+  }
+
+  @Override
+  public boolean isPhi2()
+  {
+    return clock.readBool();
+  }
+
+  @Override
+  public boolean isIrqB()
+  {
+    return irqB.readBool();
+  }
+
+  @Override
+  public boolean isNmiB()
+  {
+    return nmiB.readBool();
+  }
+
+  @Override
+  public boolean isResetB()
+  {
+    return resetB.readBool();
+  }
+}
+

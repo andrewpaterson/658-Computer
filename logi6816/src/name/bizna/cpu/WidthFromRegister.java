@@ -1,6 +1,6 @@
 package name.bizna.cpu;
 
-public enum Width
+public enum WidthFromRegister
 {
   A,
   XY

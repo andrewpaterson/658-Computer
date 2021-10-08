@@ -8,16 +8,15 @@ import name.bizna.bus.common.Uniport;
 import java.util.ArrayList;
 import java.util.List;
 
-import static name.bizna.bus.common.TraceValue.Error;
 import static name.bizna.bus.common.TraceValue.*;
 
-public class OrGate
+public class AndGate
     extends Tickable
 {
   protected List<Uniport> in;
   protected Uniport out;
 
-  public OrGate(Tickables tickables, Trace in1, Trace in2, Trace out)
+  public AndGate(Tickables tickables, Trace in1, Trace in2, Trace out)
   {
     super(tickables);
     this.in = new ArrayList<>();
@@ -49,13 +48,13 @@ public class OrGate
           outputValue = Undefined;
           break;
         }
-        if (value == High)
-        {
-          outputValue = High;
-        }
-        else if ((value == Low) && (outputValue == Undefined))
+        if (value == Low)
         {
           outputValue = Low;
+        }
+        else if ((value == High) && (outputValue == Undefined))
+        {
+          outputValue = High;
         }
       }
     }

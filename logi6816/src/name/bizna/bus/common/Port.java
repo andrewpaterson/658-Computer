@@ -1,41 +1,25 @@
 package name.bizna.bus.common;
 
-public class Port
+import name.bizna.bus.logic.Tickable;
+
+import java.util.List;
+
+public abstract class Port
 {
-  protected TransmissionState state;
-  protected TraceState value;
+  protected Tickable tickable;
 
-  public Port()
+  public Port(Tickable tickable)
   {
-    this.value = TraceState.Undefined;
-    this.state = TransmissionState.Impedance;
+    this.tickable = tickable;
+    tickable.addPort(this);
   }
 
-  public boolean get()
-  {
-    return value == TraceState.High;
-  }
+  public abstract void startPropagation();
 
-  public TraceState getState()
-  {
-    return value;
-  }
+  public abstract void addTraceValues(List<TraceValue> traceValues);
 
-  public void set(TraceState value)
-  {
-    if (state == TransmissionState.Output)
-    {
-      this.value = value;
-    }
-    else
-    {
-      this.value = TraceState.Error;
-    }
-  }
+  public abstract void updateConnection();
 
-  public void set(boolean value)
-  {
-    set(value ? TraceState.High : TraceState.Low);
-  }
+  public abstract void resetConnection();
 }
 

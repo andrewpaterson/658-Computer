@@ -4,6 +4,7 @@ public enum TransmissionState
 {
   Input,
   Output,
-  Impedance
+  Impedance,
+  Undefined,
 }
 

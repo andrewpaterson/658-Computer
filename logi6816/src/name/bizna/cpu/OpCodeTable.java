@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static name.bizna.cpu.OpCodeName.*;
-import static name.bizna.cpu.Width.A;
-import static name.bizna.cpu.Width.XY;
+import static name.bizna.cpu.WidthFromRegister.A;
+import static name.bizna.cpu.WidthFromRegister.XY;
 
 public class OpCodeTable
 {

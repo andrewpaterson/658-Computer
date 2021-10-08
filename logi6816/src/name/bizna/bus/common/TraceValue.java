@@ -1,10 +1,11 @@
 package name.bizna.bus.common;
 
-public enum TraceState
+public enum TraceValue
 {
   High,
   Low,
   Undefined,
-  Error;
+  Error,
+  HighAndLow;
 }
 

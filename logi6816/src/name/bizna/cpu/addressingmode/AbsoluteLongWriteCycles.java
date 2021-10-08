@@ -1,7 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Width;
+import name.bizna.cpu.WidthFromRegister;
 
 import java.util.function.Consumer;
 
@@ -11,7 +11,7 @@ public class AbsoluteLongWriteCycles
     extends InstructionCycles
 {
   //4a
-  public AbsoluteLongWriteCycles(Consumer<Cpu65816> operation, Width width)
+  public AbsoluteLongWriteCycles(Consumer<Cpu65816> operation, WidthFromRegister width)
   {
     super(AbsoluteLong,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

@@ -1,11 +1,11 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Width;
 
 import java.util.function.Consumer;
 
 import static name.bizna.cpu.AddressingMode.DirectIndirectIndexedWithY;
+import static name.bizna.cpu.WidthFromRegister.A;
 
 public class DirectIndirectIndexedWithYWriteCycles
     extends InstructionCycles
@@ -20,8 +20,8 @@ public class DirectIndirectIndexedWithYWriteCycles
           new BusCycle(Address(DP(), D0()), Read_AAL()),
           new BusCycle(Address(DP(), D0(), o(1)), Read_AAH()),
           new BusCycle(Address(DBR(), AAH(), AAL_YL()), IO(), new NoteFourY(false)),
-          new BusCycle(Address(DBR(), AA(), Y()), E(operation), Write_DataLow(), DONE8Bit(Width.A)),
-          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(Width.A)));
+          new BusCycle(Address(DBR(), AA(), Y()), E(operation), Write_DataLow(), DONE8Bit(A)),
+          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(A)));
   }
 }
 

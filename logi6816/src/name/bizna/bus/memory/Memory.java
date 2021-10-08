@@ -1,7 +1,7 @@
 package name.bizna.bus.memory;
 
-import name.bizna.bus.common.Omnibus;
-import name.bizna.bus.common.Single;
+import name.bizna.bus.common.Omniport;
+import name.bizna.bus.common.Port;
 import name.bizna.bus.logic.Tickable;
 import name.bizna.util.EmulatorException;
 
@@ -13,15 +13,15 @@ public class Memory
   protected int size;
   protected byte[] pvMemory;
 
-  private final Omnibus addressBus;
-  private final Omnibus dataBus;
-  private final Single rwbTrace;
+  private final Omniport addressBus;
+  private final Omniport dataBus;
+  private final Port rwbTrace;
 
   private int outValue;
 
-  public Memory(Omnibus addressBus,
-                Omnibus dataBus,
-                Single rwbTrace,
+  public Memory(Omniport addressBus,
+                Omniport dataBus,
+                Port rwbTrace,
                 byte[] bytes)
   {
     this.addressBus = addressBus;
@@ -51,13 +51,13 @@ public class Memory
     return true;
   }
 
-  public void write(int address, int value)
+  public void write(long address, long value)
   {
     if (address >= 0 && address < size)
     {
       if (value >= 0 && value <= 0xFF)
       {
-        pvMemory[address] = (byte) value;
+        pvMemory[(int) address] = (byte) value;
       }
       else
       {
@@ -70,11 +70,11 @@ public class Memory
     }
   }
 
-  public int read(int address)
+  public int read(long address)
   {
     if (address >= 0 && address < size)
     {
-      return toByte(pvMemory[address]);
+      return toByte(pvMemory[(int) address]);
     }
     else
     {

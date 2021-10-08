@@ -48,10 +48,12 @@ public class Cpu65816
   protected int internalData;
   protected int internalDirectOffset;
   protected Address internalProgramCounter;
+  private boolean read;
 
   public Cpu65816(Pins65816 pins)
   {
     this.pins = pins;
+    this.pins.setCpu(this);
 
     programAddress = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
@@ -297,6 +299,21 @@ public class Cpu65816
       cycles.executeOnRisingEdge(this);
       nextCycle();
     }
+  }
+
+  public boolean isStopped()
+  {
+    return stopped;
+  }
+
+  public void setRead(boolean read)
+  {
+    this.read = read;
+  }
+
+  public boolean isRead()
+  {
+    return read;
   }
 
   public boolean isMemory8Bit()
@@ -1766,11 +1783,6 @@ public class Cpu65816
       System.out.println("     Operation: " + getOpCode().getCycles().getBusCycle(getCycle()).toOperationString());
       System.out.println();
     }
-  }
-
-  public boolean isStopped()
-  {
-    return stopped;
   }
 }
 

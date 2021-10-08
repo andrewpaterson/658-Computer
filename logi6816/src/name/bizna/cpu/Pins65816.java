@@ -37,5 +37,7 @@ public interface Pins65816
   boolean isAbortB();
 
   boolean isResetB();
+
+  void setCpu(Cpu65816 cpu);
 }
 

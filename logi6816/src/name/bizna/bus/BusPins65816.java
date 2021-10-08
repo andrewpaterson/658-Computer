@@ -1,210 +1,187 @@
 package name.bizna.bus;
 
-import name.bizna.bus.common.Omnibus;
-import name.bizna.bus.common.Single;
+import name.bizna.bus.common.Omniport;
+import name.bizna.bus.common.Port;
+import name.bizna.bus.common.TraceState;
+import name.bizna.cpu.Cpu65816;
 import name.bizna.cpu.Pins65816;
 
 @SuppressWarnings({"FieldMayBeFinal"})
 public class BusPins65816
     implements Pins65816
 {
-  protected final Omnibus addressBus;
-  protected final Omnibus dataBus;
-  protected final Single rwbTrace;
-  protected final Single clockTrace;
-  protected final Single abortBTrace;
-  protected final Single busEnableTrace;
-  protected final Single irqBTrace;
-  protected final Single nmiBTrace;
-  protected final Single resetBTrace;
-  protected final Single emulationTrace;
-  protected final Single memoryLockBTrace;
-  protected final Single mxTrace;
-  protected final Single rdyTrace;
-  protected final Single vectorPullBTrace;
-  protected final Single validProgramAddressTrace;
-  protected final Single validDataAddressTrace;
+  private Cpu65816 cpu;
 
-  protected int address;                  //output
-  protected int data;                     //bi-directional
-  protected boolean rwb;                  //output
-  protected boolean emulation;            //output
-  protected boolean memoryLockB;          //output
-  protected boolean mx;                   //output
-  protected boolean rdy;                  //bi-directional.  Also.  Fuck-it I'm treating this an output.
-  protected boolean vectorPullB;          //output
-  protected boolean validProgramAddress;  //output
-  protected boolean validDataAddress;     //output
+  protected final Omniport addressBus;
+  protected final Omniport dataBus;
+  protected final Port rwb;
+  protected final Port clock;
+  protected final Port abortB;
+  protected final Port busEnable;
+  protected final Port irqB;
+  protected final Port nmiB;
+  protected final Port resetB;
+  protected final Port emulation;
+  protected final Port memoryLockB;
+  protected final Port mx;
+  protected final Port rdy;
+  protected final Port vectorPullB;
+  protected final Port validProgramAddress;
+  protected final Port validDataAddress;
 
-  public BusPins65816(Omnibus addressBus,
-                      Omnibus dataBus,
-                      Single rwbTrace,
-                      Single clockTrace,
-                      Single abortBTrace,
-                      Single busEnable,
-                      Single irqBTrace,
-                      Single nmiBTrace,
-                      Single resetBTrace,
-                      Single emulationTrace,
-                      Single memoryLockBTrace,
-                      Single mxTrace,
-                      Single rdyTrace,
-                      Single vectorPullBTrace,
-                      Single validProgramAddressTrace,
-                      Single validDataAddressTrace)
+  public BusPins65816(Omniport addressBus,
+                      Omniport dataBus,
+                      Port rwb,
+                      Port clock,
+                      Port abortB,
+                      Port busEnable,
+                      Port irqB,
+                      Port nmiB,
+                      Port resetB,
+                      Port emulation,
+                      Port memoryLockB,
+                      Port mx,
+                      Port rdy,
+                      Port vectorPullB,
+                      Port validProgramAddress,
+                      Port validDataAddress)
   {
     this.addressBus = addressBus;
     this.dataBus = dataBus;
-    this.rwbTrace = rwbTrace;
-    this.clockTrace = clockTrace;
-    this.abortBTrace = abortBTrace;
-    this.rdyTrace = rdyTrace;
-    this.busEnableTrace = busEnable;
-    this.irqBTrace = irqBTrace;
-    this.nmiBTrace = nmiBTrace;
-    this.resetBTrace = resetBTrace;
-    this.emulationTrace = emulationTrace;
-    this.memoryLockBTrace = memoryLockBTrace;
-    this.vectorPullBTrace = vectorPullBTrace;
-    this.validProgramAddressTrace = validProgramAddressTrace;
-    this.validDataAddressTrace = validDataAddressTrace;
-    this.mxTrace = mxTrace;
+    this.rwb = rwb;
+    this.clock = clock;
+    this.abortB = abortB;
+    this.rdy = rdy;
+    this.busEnable = busEnable;
+    this.irqB = irqB;
+    this.nmiB = nmiB;
+    this.resetB = resetB;
+    this.emulation = emulation;
+    this.memoryLockB = memoryLockB;
+    this.vectorPullB = vectorPullB;
+    this.validProgramAddress = validProgramAddress;
+    this.validDataAddress = validDataAddress;
+    this.mx = mx;
+  }
 
-    this.address = addressBus.get();
-    this.data = dataBus.get();
-    this.rwb = rwbTrace.get();
-    this.emulation = emulationTrace.get();
-    this.memoryLockB = memoryLockBTrace.get();
-    this.mx = mxTrace.get();
-    this.rdy = rdyTrace.get();
-    this.vectorPullB = vectorPullBTrace.get();
-    this.validProgramAddress = validProgramAddressTrace.get();
-    this.validDataAddress = validDataAddressTrace.get();
+  public void setCpu(Cpu65816 cpu)
+  {
+    this.cpu = cpu;
   }
 
   @Override
   public void setAddress(int address)
   {
-    this.address = address;
     this.addressBus.set(address);
   }
 
   @Override
   public int getData()
   {
-    if (rwb)
+    if (cpu.isRead())
     {
-      return dataBus.get();
+      return (int) dataBus.get();
     }
     else
     {
-      return data;
+      return 0;
     }
   }
 
   @Override
   public void setData(int data)
   {
-    this.data = data;
     this.dataBus.set(data);
   }
 
   @Override
   public void setRwb(boolean rwb)
   {
-    this.rwbTrace.set(rwb);
-    this.rwb = rwb;
+    this.rwb.set(rwb);
   }
 
   @Override
   public boolean getPhi2()
   {
-    return clockTrace.get();
+    return clock.get();
   }
 
   @Override
   public void setEmulation(boolean emulation)
   {
-    this.emulation = emulation;
-    this.emulationTrace.set(emulation);
+    this.emulation.set(emulation);
   }
 
   @Override
   public void setMemoryLockB(boolean memoryLockB)
   {
-    this.memoryLockB = memoryLockB;
-    this.memoryLockBTrace.set(memoryLockB);
+    this.memoryLockB.set(memoryLockB);
   }
 
   @Override
   public void setMX(boolean mx)
   {
-    this.mx = mx;
-    this.mxTrace.set(mx);
+    this.mx.set(mx);
   }
 
   @Override
   public void setRdy(boolean rdy)
   {
-    this.rdy = rdy;
-    this.rdyTrace.set(rdy);
+    this.rdy.set(rdy);
   }
 
   @Override
   public void setVectorPullB(boolean vectorPullB)
   {
-    this.vectorPullB = vectorPullB;
-    this.vectorPullBTrace.set(vectorPullB);
+    this.vectorPullB.set(vectorPullB);
   }
 
   @Override
   public void setValidProgramAddress(boolean validProgramAddress)
   {
-    this.validProgramAddress = validProgramAddress;
-    this.validProgramAddressTrace.set(validProgramAddress);
+    this.validProgramAddress.set(validProgramAddress);
   }
 
   @Override
   public void setValidDataAddress(boolean validDataAddress)
   {
-    this.validDataAddress = validDataAddress;
-    this.validDataAddressTrace.set(validDataAddress);
+    this.validDataAddress.set(validDataAddress);
   }
 
   @Override
   public boolean isAbortB()
   {
-    return abortBTrace.get();
+    return abortB.get();
   }
 
   @Override
   public boolean isBusEnable()
   {
-    return busEnableTrace.get();
+    return busEnable.get();
   }
 
   @Override
   public boolean isPhi2()
   {
-    return clockTrace.get();
+    return clock.get();
   }
 
   @Override
   public boolean isIrqB()
   {
-    return irqBTrace.get();
+    return irqB.get();
   }
 
   @Override
   public boolean isNmiB()
   {
-    return nmiBTrace.get();
+    return nmiB.get();
   }
 
   @Override
   public boolean isResetB()
   {
-    return resetBTrace.get();
+    return resetB.get();
   }
 }
 

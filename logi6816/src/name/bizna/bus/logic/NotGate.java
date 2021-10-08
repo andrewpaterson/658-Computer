@@ -1,15 +1,15 @@
 package name.bizna.bus.logic;
 
-import name.bizna.bus.common.Single;
+import name.bizna.bus.common.Port;
 
 public class NotGate implements Tickable
 {
-  protected Single in;
-  protected Single out;
+  protected Port in;
+  protected Port out;
 
   protected boolean previousValue;
 
-  public NotGate(Single in, Single out)
+  public NotGate(Port in, Port out)
   {
     this.in = in;
     this.out = out;

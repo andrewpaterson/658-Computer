@@ -2,8 +2,8 @@ package name.bizna.cpu;
 
 import name.bizna.bus.BusPins65816;
 import name.bizna.bus.TickableCpu;
-import name.bizna.bus.common.Omnibus;
-import name.bizna.bus.common.Single;
+import name.bizna.bus.common.Omniport;
+import name.bizna.bus.common.Port;
 import name.bizna.bus.logic.NotGate;
 import name.bizna.bus.logic.OrGate;
 import name.bizna.bus.logic.Tickable;
@@ -19,24 +19,24 @@ public class Main
 {
   public static void main(String[] args)
   {
-    Omnibus addressBus = new Omnibus(24);
-    Omnibus dataBus = new Omnibus(8);
-    Single rwbTrace = new Single();
-    Single readTrace = new Single();
-    Single clockTrace = new Single();
-    Single notClockTrace = new Single();
-    Single abortBTrace = new Single();
-    Single busEnable = new Single();
-    Single irqBTrace = new Single();
-    Single nmiBTrace = new Single();
-    Single resetBTrace = new Single();
-    Single emulationTrace = new Single();
-    Single memoryLockBTrace = new Single();
-    Single mxTrace = new Single();
-    Single rdyTrace = new Single();
-    Single vectorPullBTrace = new Single();
-    Single validProgramAddressTrace = new Single();
-    Single validDataAddressTrace = new Single();
+    Omniport addressBus = new Omniport(24);
+    Omniport dataBus = new Omniport(8);
+    Port rwbTrace = new Port();
+    Port readTrace = new Port();
+    Port clockTrace = new Port();
+    Port notClockTrace = new Port();
+    Port abortBTrace = new Port();
+    Port busEnable = new Port();
+    Port irqBTrace = new Port();
+    Port nmiBTrace = new Port();
+    Port resetBTrace = new Port();
+    Port emulationTrace = new Port();
+    Port memoryLockBTrace = new Port();
+    Port mxTrace = new Port();
+    Port rdyTrace = new Port();
+    Port vectorPullBTrace = new Port();
+    Port validProgramAddressTrace = new Port();
+    Port validDataAddressTrace = new Port();
 
     NotGate notGate = new NotGate(clockTrace, notClockTrace);
     OrGate orGate = new OrGate(notClockTrace, rwbTrace, readTrace);
@@ -60,8 +60,9 @@ public class Main
                                          vectorPullBTrace,
                                          validProgramAddressTrace,
                                          validDataAddressTrace);
+    Cpu65816 cpu65816 = new Cpu65816(pins);
+    TickableCpu cpu = new TickableCpu(cpu65816);
 
-    TickableCpu cpu = new TickableCpu(pins);
     ClockOscillator clockOscillator = new ClockOscillator(clockTrace);
 
     List<Tickable> tickables = new ArrayList<>();
@@ -77,22 +78,6 @@ public class Main
       runTickables(tickables);
 
       cpu.dump();
-
-//      if (!clock)
-//      {
-//        if (pins.isValidDataAddress() || pins.isValidProgramAddress())
-//        {
-//          Address address = cpu.getAddress();  //This should probably use pins not cpu.
-//          if (pins.isRead())
-//          {
-//            pins.setData(memory.readByte(address));
-//          }
-//          else
-//          {
-//            memory.writeByte(address, pins.getData());
-//          }
-//        }
-//      }
 
       count--;
     }

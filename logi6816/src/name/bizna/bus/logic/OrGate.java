@@ -1,6 +1,6 @@
 package name.bizna.bus.logic;
 
-import name.bizna.bus.common.Single;
+import name.bizna.bus.common.Port;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.List;
 public class OrGate
     implements Tickable
 {
-  protected List<Single> in;
-  protected Single out;
+  protected List<Port> in;
+  protected Port out;
 
   protected boolean outValue;
 
-  public OrGate(Single in1, Single in2, Single out)
+  public OrGate(Port in1, Port in2, Port out)
   {
     this.in = new ArrayList<>();
     this.in.add(in1);
@@ -27,9 +27,9 @@ public class OrGate
     if (in.size() > 0)
     {
       boolean value = false;
-      for (Single single : in)
+      for (Port trace : in)
       {
-        value = value | single.get();
+        value = value | trace.get();
       }
 
       newOutValue = value;

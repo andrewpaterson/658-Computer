@@ -3,6 +3,7 @@ package name.bizna.logisim;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceState;
+import name.bizna.cpu.Cpu65816;
 import name.bizna.cpu.Pins65816;
 
 import static name.bizna.logisim.Logisim65816Factory.*;
@@ -12,8 +13,7 @@ public class LogisimPins65816
 {
   private final InstanceState instanceState;
 
-  private int data;                     //bi-directional
-  private boolean rdy;                  //bi-directional.  Also.  Fuck-it I'm treating this an output.
+  private Cpu65816 cpu;
 
   public LogisimPins65816(InstanceState state)
   {
@@ -30,10 +30,17 @@ public class LogisimPins65816
   public int getData()
   {
     //instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);  //How the ever-loving-fuck does this line read data?
-    Value portValue = instanceState.getPortValue(PORT_DataBus);
-    if (portValue.isFullyDefined())
+    if (cpu.isRead())
     {
-      return (byte) portValue.toLongValue();
+      Value portValue = instanceState.getPortValue(PORT_DataBus);
+      if (portValue.isFullyDefined())
+      {
+        return (byte) portValue.toLongValue();
+      }
+      else
+      {
+        return 0;
+      }
     }
     else
     {
@@ -44,7 +51,6 @@ public class LogisimPins65816
   @Override
   public void setData(int data)
   {
-    this.data = data;
     instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
   }
 
@@ -106,6 +112,12 @@ public class LogisimPins65816
   public boolean isResetB()
   {
     return getBooleanValue(PORT_RESB);
+  }
+
+  @Override
+  public void setCpu(Cpu65816 cpu)
+  {
+    this.cpu = cpu;
   }
 
   @Override

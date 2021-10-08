@@ -1,16 +1,16 @@
 package name.bizna.cpu;
 
-import name.bizna.bus.common.Single;
+import name.bizna.bus.common.Port;
 import name.bizna.bus.logic.Tickable;
 
 public class ClockOscillator
     implements Tickable
 {
-  private Single clockTrace;
+  private Port clockTrace;
   private boolean value;
   private boolean hasSettled;
 
-  public ClockOscillator(Single clockTrace)
+  public ClockOscillator(Port clockTrace)
   {
     this.clockTrace = clockTrace;
     this.value = clockTrace.get();

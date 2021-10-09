@@ -43,47 +43,30 @@ public enum TraceValue
     return this == Undefined;
   }
 
-  public static TraceValue getTraceValue(Collection<TraceValue> traceValues)
-  {
-    boolean high = false;
-    boolean low = false;
-    for (TraceValue traceValue : traceValues)
-    {
-      if (traceValue.isInvalid())
-      {
-        return traceValue;
-      }
-      else if (traceValue.isHigh())
-      {
-        high = true;
-      }
-      else if (traceValue.isLow())
-      {
-        low = true;
-      }
-    }
-
-    if (high && low)
-    {
-      return HighAndLow;
-    }
-    else if (high)
-    {
-      return High;
-    }
-    else if (low)
-    {
-      return Low;
-    }
-    else
-    {
-      return Undefined;
-    }
-  }
-
   public static TraceValue fromBoolean(boolean value)
   {
     return value ? TraceValue.High : TraceValue.Low;
+  }
+
+  public char getStringValue()
+  {
+    if (isHigh())
+    {
+      return '1';
+    }
+    else if (isLow())
+    {
+      return '0';
+    }
+    else if (isUndefined())
+    {
+      return '.';
+    }
+    else if (isError())
+    {
+      return 'x';
+    }
+    return ' ';
   }
 }
 

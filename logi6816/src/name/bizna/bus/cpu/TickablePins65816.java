@@ -105,7 +105,7 @@ public class TickablePins65816
   {
     if (cpu.isRead())
     {
-      return (int) dataBus.readAllPinsBool();
+      return (int) dataBus.getPinsAsBoolAfterRead();
     }
     else
     {

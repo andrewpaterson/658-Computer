@@ -43,8 +43,11 @@ public class Memory
 
   public void propagate()
   {
+    propagateWroteMemory = false;
+
     TraceValue readState = rwb.readState();
-    TraceValue addressState = addressBus.readState();
+    TraceValue addressState = addressBus.readStates();
+
     if (readState.isInvalid() || addressState.isError())
     {
       dataBus.writeAllPinsError();
@@ -55,19 +58,19 @@ public class Memory
     }
     else if (readState.isHigh())
     {
-      long address = addressBus.readAllPinsBool();
+      long address = addressBus.getPinsAsBoolAfterRead();
       int data = getMemory(address);
       dataBus.writeAllPinsBool(data);
     }
     else if (readState.isLow())
     {
-      TraceValue dataBusState = dataBus.readState();
+      TraceValue dataBusState = dataBus.readStates();
       if (dataBusState.isValid())
       {
-        oldAddress = addressBus.readAllPinsBool();
+        oldAddress = addressBus.getPinsAsBoolAfterRead();
         oldValue = getMemory(oldAddress);
 
-        long data = dataBus.readAllPinsBool();
+        long data = dataBus.getPinsAsBoolAfterRead();
         setMemory(oldAddress, data);
 
         propagateWroteMemory = true;

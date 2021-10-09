@@ -113,23 +113,14 @@ public class Omniport
     }
   }
 
-  public long readAllPinsBool()
+  public long getPinsAsBoolAfterRead()
   {
-    if (state == TransmissionState.Undefined)
-    {
-      state = TransmissionState.Input;
-    }
-
     if (state == TransmissionState.Input)
     {
       long value = 0;
-      int length = pins.size();
-      for (int i = 0; i < length; i++)
+      for (int i = pins.size() -1; i >=0; i--)
       {
-        Trace connection = connections.get(i);
-        TraceValue traceValue = connection.getValue();
-        pins.set(i, traceValue);
-
+        TraceValue traceValue = pins.get(i);
         value <<= 1;
         if (traceValue.isHigh())
         {
@@ -214,6 +205,18 @@ public class Omniport
     }
   }
 
+  public void connect(Trace trace)
+  {
+    if (connections.size() == 1)
+    {
+      connections.set(0, trace);
+    }
+    else
+    {
+      throw new EmulatorException("Cannot connect omniport to bus of different width");
+    }
+  }
+
   public void writeAllPinsUndefined()
   {
     for (int i = 0; i < pins.size(); i++)
@@ -230,7 +233,7 @@ public class Omniport
     }
   }
 
-  public TraceValue readState()
+  public TraceValue readStates()
   {
     if (state == TransmissionState.Undefined)
     {
@@ -239,12 +242,83 @@ public class Omniport
 
     if (state == TransmissionState.Input)
     {
-      return getTraceValue(pins);
+      boolean high = false;
+      boolean low = false;
+      boolean error = false;
+      boolean undefined = false;
+      int length = pins.size();
+      for (int i = 0; i < length; i++)
+      {
+        Trace connection = connections.get(i);
+        TraceValue value;
+        if (connection != null)
+        {
+          value = connection.getValue();
+          pins.set(i, value);
+        }
+        else
+        {
+          value = Undefined;
+        }
+
+        if (value.isError())
+        {
+          error = true;
+        }
+        else if (value.isUndefined())
+        {
+          undefined = true;
+        }
+        else if (value.isHigh())
+        {
+          high = true;
+        }
+        else if (value.isLow())
+        {
+          low = true;
+        }
+      }
+
+      if (error)
+      {
+        return Error;
+      }
+      else if (undefined)
+      {
+        return Undefined;
+      }
+      else if (high && low)
+      {
+        return HighAndLow;
+      }
+      else if (high)
+      {
+        return High;
+      }
+      else if (low)
+      {
+        return Low;
+      }
+      else
+      {
+        return Undefined;
+      }
     }
     else
     {
       throw new EmulatorException("Cannot read from a Port that is not an input.");
     }
+  }
+
+  public String getStringValue()
+  {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (TraceValue traceValue : pins)
+    {
+      char c = traceValue.getStringValue();
+      stringBuilder.insert(0, c);
+    }
+    return stringBuilder.toString();
   }
 }
 

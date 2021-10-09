@@ -13,7 +13,7 @@ public class NoteSeven
   @Override
   public boolean mustExecute(Cpu65816 cpu)
   {
-    return !cpu.isEmulationMode();
+    return !cpu.isEmulation();
   }
 
   @Override

@@ -14,7 +14,7 @@ public class NoteSix
   @Override
   public boolean mustExecute(Cpu65816 cpu)
   {
-    if (cpu.isEmulationMode())
+    if (cpu.isEmulation())
     {
       int pcOffset = cpu.getProgramCounter().getOffset();
       return Address.areOffsetsAreOnDifferentPages(pcOffset, pcOffset + cpu.getData16Bit());

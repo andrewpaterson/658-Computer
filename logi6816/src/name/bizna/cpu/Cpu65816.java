@@ -12,17 +12,33 @@ import name.bizna.cpu.opcode.*;
 import name.bizna.util.EmulatorException;
 import name.bizna.util.IntUtil;
 
+import static name.bizna.cpu.CpuFlags.*;
 import static name.bizna.util.IntUtil.*;
 import static name.bizna.util.StringUtil.to16BitHex;
 import static name.bizna.util.StringUtil.to8BitHex;
 
 public class Cpu65816
 {
-  // Status register
-  protected CpuStatus processorStatus;
-  protected Pins65816 pins;
-  protected boolean stopped;
+  protected static OpCode[] opCodeTable;
+  protected static OpCode resetOpcode;
+  protected static OpCode abortOpcode;
+  protected static OpCode irqOpcode;
+  protected static OpCode nmiOpcode;
+  protected static OpCode fetchNextOpcode;
 
+  // Status register
+  boolean zeroFlag;
+  boolean negativeFlag;
+  boolean decimalFlag;
+  boolean interruptDisableFlag;
+  boolean accumulatorWidthFlag;
+  boolean indexWidthFlag;
+  boolean carryFlag;
+  boolean emulationFlag;
+  boolean overflowFlag;
+  boolean breakFlag;
+
+  // Registers
   protected int accumulator;
   protected int xIndex;
   protected int yIndex;
@@ -34,21 +50,16 @@ public class Cpu65816
   protected boolean previousClock;
   protected int cycle;
   protected OpCode opCode;
-
-  // Real OpCode Table.
-  protected static OpCode[] opCodeTable;
-  protected static OpCode resetOpcode;
-  protected static OpCode abortOpcode;
-  protected static OpCode irqOpcode;
-  protected static OpCode nmiOpcode;
-  protected static OpCode fetchNextOpcode;
+  protected boolean stopped;
 
   //These are not the values on the pins, they are internal data.
-  protected Address internalAddress;
-  protected int internalData;
-  protected int internalDirectOffset;
-  protected Address internalProgramCounter;
-  private boolean read;
+  protected Address address;
+  protected int data;
+  protected int directOffset;
+  protected Address newProgramCounter;
+  protected boolean read;
+
+  protected Pins65816 pins;
 
   public Cpu65816(Pins65816 pins)
   {
@@ -68,15 +79,26 @@ public class Cpu65816
     yIndex = 0;
     dataBank = 0;
     directPage = 0;
-    processorStatus = new CpuStatus();
+
+    zeroFlag = false;
+    negativeFlag = false;
+    decimalFlag = false;
+    interruptDisableFlag = false;
+    accumulatorWidthFlag = false;
+    indexWidthFlag = false;
+    carryFlag = false;
+    emulationFlag = true;
+    overflowFlag = false;
+    breakFlag = false;
+
     stopped = false;
     previousClock = true;
     cycle = 1;
     opCode = resetOpcode;
-    internalData = 0;
-    internalDirectOffset = 0;
-    internalProgramCounter = new Address();
-    internalAddress = new Address();
+    data = 0;
+    directOffset = 0;
+    newProgramCounter = new Address();
+    address = new Address();
   }
 
   public void setX(int xIndex)
@@ -126,7 +148,7 @@ public class Cpu65816
   {
     assert16Bit(accumulator, "Accumulator");
     this.accumulator = accumulator;
-    processorStatus.setSignAndZeroFlagFrom16BitValue(accumulator);
+    setSignAndZeroFlagFrom16BitValue(accumulator);
   }
 
   public void setData(int data, boolean updateFlags)
@@ -134,12 +156,12 @@ public class Cpu65816
     if (isMemory16Bit())
     {
       assert16Bit(data, "Data");
-      internalData = data;
+      this.data = data;
     }
     else
     {
       assert8Bit(data, "Data");
-      internalData = setLowByte(internalData, data);
+      this.data = setLowByte(this.data, data);
     }
     if (updateFlags)
     {
@@ -152,12 +174,12 @@ public class Cpu65816
     if (isIndex16Bit())
     {
       assert16Bit(data, "Data");
-      internalData = data;
+      this.data = data;
     }
     else
     {
       assert8Bit(data, "Data");
-      internalData = setLowByte(internalData, data);
+      this.data = setLowByte(this.data, data);
     }
     if (updateFlags)
     {
@@ -169,11 +191,11 @@ public class Cpu65816
   {
     if (isMemory16Bit())
     {
-      processorStatus.setSignAndZeroFlagFrom16BitValue(value);
+      setSignAndZeroFlagFrom16BitValue(value);
     }
     else
     {
-      processorStatus.setSignAndZeroFlagFrom8BitValue(value);
+      setSignAndZeroFlagFrom8BitValue(value);
     }
   }
 
@@ -181,11 +203,11 @@ public class Cpu65816
   {
     if (isIndex16Bit())
     {
-      processorStatus.setSignAndZeroFlagFrom16BitValue(value);
+      setSignAndZeroFlagFrom16BitValue(value);
     }
     else
     {
-      processorStatus.setSignAndZeroFlagFrom8BitValue(value);
+      setSignAndZeroFlagFrom8BitValue(value);
     }
   }
 
@@ -257,11 +279,6 @@ public class Cpu65816
     return programAddress;
   }
 
-  public CpuStatus getCpuStatus()
-  {
-    return processorStatus;
-  }
-
   public void tick()
   {
     boolean clock = pins.getPhi2();
@@ -287,7 +304,7 @@ public class Cpu65816
 
     if (clockFallingEdge)
     {
-      pins.setEmulation(processorStatus.isEmulation());
+      pins.setEmulation(isEmulation());
       pins.setMX(isMemory8Bit());
 
       cycles.executeOnFallingEdge(this);
@@ -318,13 +335,13 @@ public class Cpu65816
 
   public boolean isMemory8Bit()
   {
-    if (processorStatus.isEmulation())
+    if (isEmulation())
     {
       return true;
     }
     else
     {
-      return processorStatus.isAccumulator8Bit();
+      return accumulatorWidthFlag;
     }
   }
 
@@ -335,13 +352,13 @@ public class Cpu65816
 
   public boolean isIndex8Bit()
   {
-    if (processorStatus.isEmulation())
+    if (isEmulation())
     {
       return true;
     }
     else
     {
-      return processorStatus.isIndex8Bit();
+      return indexWidthFlag;
     }
   }
 
@@ -352,7 +369,7 @@ public class Cpu65816
 
   public boolean isCarrySet()
   {
-    return processorStatus.isCarry();
+    return isCarry();
   }
 
   protected int getCarry()
@@ -362,12 +379,12 @@ public class Cpu65816
 
   private boolean isSignSet()
   {
-    return processorStatus.isNegative();
+    return isNegative();
   }
 
   private boolean isOverflowSet()
   {
-    return processorStatus.isOverflowFlag();
+    return isOverflowFlag();
   }
 
   public void setProgramAddress(Address address)
@@ -384,40 +401,40 @@ public class Cpu65816
   public void setAddressLow(int addressLow)
   {
     assert8Bit(addressLow, "Address Low");
-    this.internalAddress.setOffsetLow(addressLow);
+    this.address.setOffsetLow(addressLow);
   }
 
   public void setAddressHigh(int addressHigh)
   {
     assert8Bit(addressHigh, "Address High");
-    this.internalAddress.setOffsetHigh(addressHigh);
+    this.address.setOffsetHigh(addressHigh);
   }
 
   public void setAddressBank(int addressBank)
   {
     assert8Bit(addressBank, "Address Bank");
-    this.internalAddress.setBank(addressBank);
+    this.address.setBank(addressBank);
   }
 
   public int getDataLow()
   {
-    return getLowByte(internalData);
+    return getLowByte(data);
   }
 
   public int getDataHigh()
   {
-    return getHighByte(internalData);
+    return getHighByte(data);
   }
 
   public int getData()
   {
     if (isMemory16Bit())
     {
-      return internalData;
+      return data;
     }
     else
     {
-      return toByte(internalData);
+      return toByte(data);
     }
   }
 
@@ -425,17 +442,17 @@ public class Cpu65816
   {
     if (isIndex16Bit())
     {
-      return internalData;
+      return data;
     }
     else
     {
-      return toByte(internalData);
+      return toByte(data);
     }
   }
 
   public int getData16Bit()
   {
-    return internalData;
+    return data;
   }
 
   public int getDirectPage()
@@ -445,12 +462,12 @@ public class Cpu65816
 
   public int getDirectOffset()
   {
-    return internalDirectOffset;
+    return directOffset;
   }
 
   public int getStackPointer()
   {
-    if (!processorStatus.isEmulation())
+    if (!isEmulation())
     {
       return stackPointer;
     }
@@ -502,7 +519,7 @@ public class Cpu65816
 
   public Address getAddress()
   {
-    return internalAddress;
+    return address;
   }
 
   public OpCode getOpCode()
@@ -512,7 +529,7 @@ public class Cpu65816
 
   public Address getNewProgramCounter()
   {
-    return internalProgramCounter;
+    return newProgramCounter;
   }
 
   public void incrementProgramAddress()
@@ -540,19 +557,19 @@ public class Cpu65816
   public void setDirectOffset(int data)
   {
     assert8Bit(data, "Direct Offset");
-    internalDirectOffset = data;
+    directOffset = data;
   }
 
   public void setDataLow(int data)
   {
     assert8Bit(data, "Data Low");
-    internalData = setLowByte(internalData, data);
+    this.data = setLowByte(this.data, data);
   }
 
   public void setDataHigh(int data)
   {
     assert8Bit(data, "Data High");
-    internalData = setHighByte(internalData, data);
+    this.data = setHighByte(this.data, data);
   }
 
   public void setStackPointer(int data)
@@ -564,20 +581,20 @@ public class Cpu65816
   public void setNewProgramCounterLow(int data)
   {
     assert8Bit(data, "Program Counter Low");
-    internalProgramCounter.setOffsetLow(data);
+    newProgramCounter.setOffsetLow(data);
 
   }
 
   public void setNewProgramCounterHigh(int data)
   {
     assert8Bit(data, "Program Counter High");
-    internalProgramCounter.setOffsetHigh(data);
+    newProgramCounter.setOffsetHigh(data);
   }
 
   public void setNewProgramCounterBank(int data)
   {
     assert8Bit(data, "Program Counter Bank");
-    internalProgramCounter.setBank(data);
+    newProgramCounter.setBank(data);
   }
 
   public Pins65816 getPins()
@@ -587,13 +604,13 @@ public class Cpu65816
 
   public void setEmulationMode(boolean emulation)
   {
-    processorStatus.setEmulationFlag(emulation);
+    setEmulationFlag(emulation);
     if (emulation)
     {
       xIndex = toByte(xIndex);
       yIndex = toByte(yIndex);
-      processorStatus.setAccumulatorWidthFlag(true);
-      processorStatus.setIndexWidthFlag(true);
+      setAccumulatorWidthFlag(true);
+      setIndexWidthFlag(true);
       stackPointer = toByte(stackPointer) | 0x100;
     }
   }
@@ -618,28 +635,18 @@ public class Cpu65816
     return (toShort(value) == 0);
   }
 
-  public boolean isEmulationMode()
-  {
-    return processorStatus.isEmulation();
-  }
-
   private void processorStatusChanged()
   {
-    if (isIndex8Bit())
+    if (indexWidthFlag)
     {
       xIndex = toByte(xIndex);
       yIndex = toByte(yIndex);
     }
-    if (isEmulationMode())
+    if (isEmulation())
     {
-      processorStatus.setIndexWidthFlag(true);
-      processorStatus.setAccumulatorWidthFlag(true);
+      setIndexWidthFlag(true);
+      setAccumulatorWidthFlag(true);
     }
-  }
-
-  public void setCarryFlag(boolean carry)
-  {
-    processorStatus.setCarryFlag(carry);
   }
 
   private int setBit(int value, boolean bitValue, int bitNumber)
@@ -834,8 +841,8 @@ public class Cpu65816
     boolean carryOutOfPenultimateBit = isMemoryNegative(trimMemory(accumulator + operand + carryValue));
 
     boolean carry = (result & 0x0100) != 0;
-    processorStatus.setCarryFlag(carry);
-    processorStatus.setOverflowFlag(carry ^ carryOutOfPenultimateBit);
+    setCarryFlag(carry);
+    setOverflowFlag(carry ^ carryOutOfPenultimateBit);
     setA(trimMemory(result));
   }
 
@@ -852,8 +859,8 @@ public class Cpu65816
     boolean carryOutOfPenultimateBit = isMemoryNegative(trimMemory(accumulator + operand + carryValue));
 
     boolean carry = (result & 0x010000) != 0;
-    processorStatus.setCarryFlag(carry);
-    processorStatus.setOverflowFlag(carry ^ carryOutOfPenultimateBit);
+    setCarryFlag(carry);
+    setOverflowFlag(carry ^ carryOutOfPenultimateBit);
     setA(trimMemory(result));
   }
 
@@ -863,7 +870,7 @@ public class Cpu65816
     int accumulator = getA();
 
     BCDResult bcdResult = bcdAdd8Bit(operand, accumulator, isCarrySet());
-    processorStatus.setCarryFlag(bcdResult.carry);
+    setCarryFlag(bcdResult.carry);
     setA(bcdResult.value);
   }
 
@@ -873,7 +880,7 @@ public class Cpu65816
     int accumulator = getA();
 
     BCDResult bcdResult = bcdAdd16Bit(operand, accumulator, isCarrySet());
-    processorStatus.setCarryFlag(bcdResult.carry);
+    setCarryFlag(bcdResult.carry);
     setA(bcdResult.value);
   }
 
@@ -890,8 +897,8 @@ public class Cpu65816
     boolean borrowFromPenultimateBit = isMemoryNegative(trimMemory(accumulator - value - borrowValue));
     boolean borrow = (result & 0x0100) != 0;
 
-    processorStatus.setCarryFlag(!borrow);
-    processorStatus.setOverflowFlag(borrow ^ borrowFromPenultimateBit);
+    setCarryFlag(!borrow);
+    setOverflowFlag(borrow ^ borrowFromPenultimateBit);
     setA(trimMemory(result));
   }
 
@@ -908,8 +915,8 @@ public class Cpu65816
     boolean borrowFromPenultimateBit = isMemoryNegative(trimMemory(accumulator - value - borrowValue));
     boolean borrow = (result & 0x010000) != 0;
 
-    processorStatus.setCarryFlag(!borrow);
-    processorStatus.setOverflowFlag(borrow ^ borrowFromPenultimateBit);
+    setCarryFlag(!borrow);
+    setOverflowFlag(borrow ^ borrowFromPenultimateBit);
     setA(trimMemory(result));
   }
 
@@ -919,7 +926,7 @@ public class Cpu65816
     int accumulator = getLowByte(getA());
 
     BCDResult bcdResult = bcdSubtract8Bit(value, accumulator, !isCarrySet());
-    processorStatus.setCarryFlag(!bcdResult.carry);
+    setCarryFlag(!bcdResult.carry);
     setA(bcdResult.value);
   }
 
@@ -929,7 +936,7 @@ public class Cpu65816
     int accumulator = getA();
 
     BCDResult bcdResult = bcdSubtract16Bit(value, accumulator, !isCarrySet());
-    processorStatus.setCarryFlag(!bcdResult.carry);
+    setCarryFlag(!bcdResult.carry);
     setA(bcdResult.value);
   }
 
@@ -997,6 +1004,193 @@ public class Cpu65816
     }
   }
 
+  public void setZeroFlag(boolean zeroFlag)
+  {
+    this.zeroFlag = zeroFlag;
+  }
+
+  public void setNegativeFlag(boolean signFlag)
+  {
+    negativeFlag = signFlag;
+  }
+
+  public void setDecimalFlag(boolean decimalFlag)
+  {
+    this.decimalFlag = decimalFlag;
+  }
+
+  public void setInterruptDisableFlag(boolean interruptDisableFlag)
+  {
+    this.interruptDisableFlag = interruptDisableFlag;
+  }
+
+  public void setAccumulatorWidthFlag(boolean accumulatorWidthFlag)
+  {
+    this.accumulatorWidthFlag = accumulatorWidthFlag;
+  }
+
+  public void setIndexWidthFlag(boolean indexWidthFlag)
+  {
+    this.indexWidthFlag = indexWidthFlag;
+  }
+
+  public void setCarryFlag(boolean carryFlag)
+  {
+    this.carryFlag = carryFlag;
+  }
+
+  public void setEmulationFlag(boolean emulationFlag)
+  {
+    this.emulationFlag = emulationFlag;
+  }
+
+  public boolean isZeroFlag()
+  {
+    return zeroFlag;
+  }
+
+  public boolean isNegative()
+  {
+    return negativeFlag;
+  }
+
+  public boolean isDecimal()
+  {
+    return decimalFlag;
+  }
+
+  public boolean isInterruptDisable()
+  {
+    return interruptDisableFlag;
+  }
+
+  public boolean isCarry()
+  {
+    return carryFlag;
+  }
+
+  public boolean isEmulation()
+  {
+    return emulationFlag;
+  }
+
+  public boolean isBreak()
+  {
+    return breakFlag;
+  }
+
+  public boolean isOverflowFlag()
+  {
+    return overflowFlag;
+  }
+
+  public void setBreakFlag(boolean breakFlag)
+  {
+    this.breakFlag = breakFlag;
+  }
+
+  public void setOverflowFlag(boolean overflowFlag)
+  {
+    this.overflowFlag = overflowFlag;
+  }
+
+  public int getProcessorRegisterValue()
+  {
+    int value = 0;
+    if (isCarry())
+    {
+      value |= STATUS_CARRY;
+    }
+    if (isZeroFlag())
+    {
+      value |= STATUS_ZERO;
+    }
+    if (isInterruptDisable())
+    {
+      value |= STATUS_INTERRUPT_DISABLE;
+    }
+    if (isDecimal())
+    {
+      value |= STATUS_DECIMAL;
+    }
+    if (emulationFlag && breakFlag)
+    {
+      value |= STATUS_BREAK;
+    }
+    if (!emulationFlag && indexWidthFlag)
+    {
+      value |= STATUS_INDEX_WIDTH;
+    }
+    if (!emulationFlag && accumulatorWidthFlag)
+    {
+      value |= STATUS_ACCUMULATOR_WIDTH;
+    }
+    if (isOverflowFlag())
+    {
+      value |= STATUS_OVERFLOW;
+    }
+    if (isNegative())
+    {
+      value |= STATUS_NEGATIVE;
+    }
+
+    return value;
+  }
+
+  public void setProcessorRegisterValue(int value)
+  {
+    setCarryFlag((value & STATUS_CARRY) != 0);
+    setZeroFlag((value & STATUS_ZERO) != 0);
+    setInterruptDisableFlag((value & STATUS_INTERRUPT_DISABLE) != 0);
+    setDecimalFlag((value & STATUS_DECIMAL) != 0);
+
+    if (isEmulation())
+    {
+      setBreakFlag((value & STATUS_BREAK) != 0);
+    }
+    else
+    {
+      setIndexWidthFlag((value & STATUS_INDEX_WIDTH) != 0);
+    }
+
+    setAccumulatorWidthFlag(!isEmulation() && ((value & STATUS_ACCUMULATOR_WIDTH) != 0));
+    setOverflowFlag((value & STATUS_OVERFLOW) != 0);
+
+    setNegativeFlag((value & STATUS_NEGATIVE) != 0);
+  }
+
+  public void setZeroFlagFrom8BitValue(int value)
+  {
+    setZeroFlag(Cpu65816.is8bitValueZero(value));
+  }
+
+  public void setZeroFlagFrom16BitValue(int value)
+  {
+    setZeroFlag(Cpu65816.is16bitValueZero(value));
+  }
+
+  public void setNegativeFlagFrom8BitValue(int value)
+  {
+    setNegativeFlag(Cpu65816.is8bitValueNegative(value));
+  }
+
+  public void setNegativeFlagFrom16BitValue(int value)
+  {
+    setNegativeFlag(Cpu65816.is16bitValueNegative(value));
+  }
+
+  public void setSignAndZeroFlagFrom8BitValue(int value)
+  {
+    setNegativeFlagFrom8BitValue(value);
+    setZeroFlagFrom8BitValue(value);
+  }
+
+  public void setSignAndZeroFlagFrom16BitValue(int value)
+  {
+    setNegativeFlagFrom16BitValue(value);
+    setZeroFlagFrom16BitValue(value);
+  }
+
   public void ASL()
   {
     int operand = getData();
@@ -1017,7 +1211,7 @@ public class Cpu65816
 
   public void PER()
   {
-    internalData = toShort(internalData + programAddress.getOffset());  // + Carry?
+    data = toShort(data + programAddress.getOffset());  // + Carry?
   }
 
   public void PLD()
@@ -1027,7 +1221,7 @@ public class Cpu65816
 
   public void PHD()
   {
-    internalData = directPage;
+    data = directPage;
   }
 
   public void PLB()
@@ -1047,32 +1241,32 @@ public class Cpu65816
 
   public void PLP()
   {
-    processorStatus.setRegisterValue(getDataLow());
+    setProcessorRegisterValue(getDataLow());
     processorStatusChanged();
   }
 
   public void PHP()
   {
-    setDataLow(processorStatus.getRegisterValue());
+    setDataLow(getProcessorRegisterValue());
   }
 
   public void BRK()
   {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
-    if (processorStatus.isEmulation())
+    setInterruptDisableFlag(true);
+    setDecimalFlag(false);
+    if (isEmulation())
     {
-      processorStatus.setBreakFlag(true);
+      setBreakFlag(true);
     }
   }
 
   public void COP()
   {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
-    if (processorStatus.isEmulation())
+    setInterruptDisableFlag(true);
+    setDecimalFlag(false);
+    if (isEmulation())
     {
-      processorStatus.setBreakFlag(true);
+      setBreakFlag(true);
     }
   }
 
@@ -1085,14 +1279,14 @@ public class Cpu65816
   {
     int value = getData();
     setData((value | getA()), false);
-    processorStatus.setZeroFlag((value & getA()) == 0);
+    setZeroFlag((value & getA()) == 0);
   }
 
   public void TRB()
   {
     int value = getData();
     setData(value & trimMemory(~getA()), false);
-    processorStatus.setZeroFlag((value & getA()) == 0);
+    setZeroFlag((value & getA()) == 0);
   }
 
   public void BPL()
@@ -1118,7 +1312,7 @@ public class Cpu65816
   public void TCS()
   {
     int stackPointer = getStackPointer();
-    if (processorStatus.isEmulation())
+    if (isEmulation())
     {
       stackPointer = setLowByte(stackPointer, getLowByte(getA()));
     }
@@ -1140,15 +1334,15 @@ public class Cpu65816
 
     if (isMemory16Bit())
     {
-      processorStatus.setNegativeFlag(is16bitValueNegative(value));
-      processorStatus.setOverflowFlag((value & 0x4000) != 0);
-      processorStatus.setZeroFlagFrom16BitValue((value & getA()));
+      setNegativeFlag(is16bitValueNegative(value));
+      setOverflowFlag((value & 0x4000) != 0);
+      setZeroFlagFrom16BitValue((value & getA()));
     }
     else
     {
-      processorStatus.setNegativeFlag(is8bitValueNegative(value));
-      processorStatus.setOverflowFlag((value & 0x40) != 0);
-      processorStatus.setZeroFlagFrom8BitValue((value & getA()));
+      setNegativeFlag(is8bitValueNegative(value));
+      setOverflowFlag((value & 0x40) != 0);
+      setZeroFlagFrom8BitValue((value & getA()));
     }
   }
 
@@ -1156,11 +1350,11 @@ public class Cpu65816
   {
     if (isMemory16Bit())
     {
-      processorStatus.setZeroFlagFrom16BitValue((getData() & getA()));
+      setZeroFlagFrom16BitValue((getData() & getA()));
     }
     else
     {
-      processorStatus.setZeroFlagFrom8BitValue((getData() & getA()));
+      setZeroFlagFrom8BitValue((getData() & getA()));
     }
   }
 
@@ -1176,7 +1370,7 @@ public class Cpu65816
 
   public void SEC()
   {
-    processorStatus.setCarryFlag(true);
+    setCarryFlag(true);
   }
 
   public void DEC_A()
@@ -1192,7 +1386,7 @@ public class Cpu65816
 
   public void RTI()
   {
-    processorStatus.setRegisterValue(getDataLow());
+    setProcessorRegisterValue(getDataLow());
   }
 
   public void EOR()
@@ -1244,7 +1438,7 @@ public class Cpu65816
 
   public void CLI()
   {
-    processorStatus.setInterruptDisableFlag(false);
+    setInterruptDisableFlag(false);
   }
 
   public void PHY()
@@ -1255,14 +1449,14 @@ public class Cpu65816
   public void TCD()
   {
     setDirectPage(accumulator);
-    processorStatus.setSignAndZeroFlagFrom16BitValue(accumulator);
+    setSignAndZeroFlagFrom16BitValue(accumulator);
   }
 
   public void ADC()
   {
     if (isMemory16Bit())
     {
-      if (!processorStatus.isDecimal())
+      if (!isDecimal())
       {
         execute16BitADC();
       }
@@ -1273,7 +1467,7 @@ public class Cpu65816
     }
     else
     {
-      if (!processorStatus.isDecimal())
+      if (!isDecimal())
       {
         execute8BitADC();
       }
@@ -1306,12 +1500,12 @@ public class Cpu65816
 
   public void BVS()
   {
-    branch(processorStatus.isOverflowFlag());
+    branch(isOverflowFlag());
   }
 
   public void SEI()
   {
-    processorStatus.setInterruptDisableFlag(true);
+    setInterruptDisableFlag(true);
   }
 
   public void PLY()
@@ -1367,18 +1561,18 @@ public class Cpu65816
 
   public void BCC()
   {
-    branch(!getCpuStatus().isCarry());
+    branch(!isCarry());
   }
 
   public void LDY()
   {
     if (isIndex16Bit())
     {
-      setY(internalData);
+      setY(data);
     }
     else
     {
-      setY(toByte(internalData));
+      setY(toByte(data));
     }
   }
 
@@ -1391,22 +1585,22 @@ public class Cpu65816
   {
     if (isIndex16Bit())
     {
-      setX(internalData);
+      setX(data);
     }
     else
     {
-      setX(toByte(internalData));
+      setX(toByte(data));
     }
   }
 
   public void BCS()
   {
-    branch(processorStatus.isCarry());
+    branch(isCarry());
   }
 
   public void CLV()
   {
-    processorStatus.setOverflowFlag(false);
+    setOverflowFlag(false);
   }
 
   public void TSX()
@@ -1446,7 +1640,7 @@ public class Cpu65816
 
   public void TXS()
   {
-    if (isEmulationMode())
+    if (isEmulation())
     {
       int newStackPointer = 0x100 | getLowByte(getX());
       setStackPointer(newStackPointer);
@@ -1479,7 +1673,7 @@ public class Cpu65816
   public void REP()
   {
     int value = toByte(~getDataLow());
-    processorStatus.setRegisterValue(processorStatus.getRegisterValue() & value);
+    setProcessorRegisterValue(getProcessorRegisterValue() & value);
     processorStatusChanged();
   }
 
@@ -1542,12 +1736,12 @@ public class Cpu65816
 
   public void BNE()
   {
-    branch(!processorStatus.isZeroFlag());
+    branch(!isZeroFlag());
   }
 
   public void CLD()
   {
-    processorStatus.setDecimalFlag(false);
+    setDecimalFlag(false);
   }
 
   public void CPX()
@@ -1561,7 +1755,7 @@ public class Cpu65816
   {
     if (isMemory16Bit())
     {
-      if (!processorStatus.isDecimal())
+      if (!isDecimal())
       {
         execute16BitSBC();
       }
@@ -1572,7 +1766,7 @@ public class Cpu65816
     }
     else
     {
-      if (!processorStatus.isDecimal())
+      if (!isDecimal())
       {
         execute8BitSBC();
       }
@@ -1586,11 +1780,11 @@ public class Cpu65816
   public void SEP()
   {
     int value = getDataLow();
-    if (isEmulationMode())
+    if (isEmulation())
     {
       value = value & 0xCF;
     }
-    processorStatus.setRegisterValue(processorStatus.getRegisterValue() | value);
+    setProcessorRegisterValue(getProcessorRegisterValue() | value);
     processorStatusChanged();
   }
 
@@ -1618,12 +1812,12 @@ public class Cpu65816
 
   public void BEQ()
   {
-    branch(processorStatus.isZeroFlag());
+    branch(isZeroFlag());
   }
 
   public void SED()
   {
-    processorStatus.setDecimalFlag(true);
+    setDecimalFlag(true);
   }
 
   public void PLX()
@@ -1633,31 +1827,31 @@ public class Cpu65816
 
   public void XCE()
   {
-    boolean oldCarry = processorStatus.isCarry();
-    boolean oldEmulation = processorStatus.isEmulation();
+    boolean oldCarry = isCarry();
+    boolean oldEmulation = isEmulation();
     setEmulationMode(oldCarry);
-    processorStatus.setCarryFlag(oldEmulation);
+    setCarryFlag(oldEmulation);
 
-    processorStatus.setAccumulatorWidthFlag(processorStatus.isEmulation());
-    processorStatus.setIndexWidthFlag(processorStatus.isEmulation());
+    setAccumulatorWidthFlag(isEmulation());
+    setIndexWidthFlag(isEmulation());
   }
 
   public void ABORT()
   {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
+    setInterruptDisableFlag(true);
+    setDecimalFlag(false);
   }
 
   public void IRQ()
   {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
+    setInterruptDisableFlag(true);
+    setDecimalFlag(false);
   }
 
   public void NMI()
   {
-    processorStatus.setInterruptDisableFlag(true);
-    processorStatus.setDecimalFlag(false);
+    setInterruptDisableFlag(true);
+    setDecimalFlag(false);
   }
 
   public void RES()
@@ -1666,8 +1860,8 @@ public class Cpu65816
     dataBank = 0;
     directPage = 0;
     programAddress.setBank(0);
-    processorStatus.setDecimalFlag(false);
-    processorStatus.setInterruptDisableFlag(true);
+    setDecimalFlag(false);
+    setInterruptDisableFlag(true);
   }
 
   public String getByteStringHex(int value)
@@ -1742,23 +1936,23 @@ public class Cpu65816
 
   private String getStatusString()
   {
-    String z = processorStatus.isZeroFlag() ? "Z:1 " : "Z:0 ";
-    String n = processorStatus.isNegative() ? "N:1 " : "N:0 ";
-    String d = processorStatus.isDecimal() ? "D:1 " : "D:0 ";
-    String i = processorStatus.isInterruptDisable() ? "I:1 " : "I:0 ";
-    String m = processorStatus.isAccumulator8Bit() ? "M8  " : "M16 ";
+    String z = isZeroFlag() ? "Z:1 " : "Z:0 ";
+    String n = isNegative() ? "N:1 " : "N:0 ";
+    String d = isDecimal() ? "D:1 " : "D:0 ";
+    String i = isInterruptDisable() ? "I:1 " : "I:0 ";
+    String m = isMemory8Bit() ? "M8  " : "M16 ";
     String x = "";
-    if (!isEmulationMode())
+    if (!isEmulation())
     {
-      x = processorStatus.isIndex8Bit() ? "X8  " : "X16 ";
+      x = isIndex8Bit() ? "X8  " : "X16 ";
     }
-    String c = processorStatus.isCarry() ? "C1 " : "C0 ";
-    String e = processorStatus.isEmulation() ? "E1 " : "E0 ";
-    String o = processorStatus.isOverflowFlag() ? "O1 " : "O0 ";
+    String c = isCarry() ? "C1 " : "C0 ";
+    String e = isEmulation() ? "E1 " : "E0 ";
+    String o = isOverflowFlag() ? "O1 " : "O0 ";
     String b = "";
-    if (processorStatus.isEmulation())
+    if (isEmulation())
     {
-      b = processorStatus.isBreak() ? "B1 " : "B0 ";
+      b = isBreak() ? "B1 " : "B0 ";
     }
     return z + n + d + i + m + x + c + e + o + b;
   }

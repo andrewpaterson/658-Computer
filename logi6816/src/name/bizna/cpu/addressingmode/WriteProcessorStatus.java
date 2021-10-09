@@ -13,7 +13,7 @@ public class WriteProcessorStatus
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getPins().setData(cpu.getCpuStatus().getRegisterValue());
+    cpu.getPins().setData(cpu.getProcessorRegisterValue());
   }
 
   @Override

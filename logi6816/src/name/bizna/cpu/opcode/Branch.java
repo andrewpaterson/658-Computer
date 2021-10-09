@@ -29,7 +29,7 @@ public class Branch
       actualDestination = toShort(cpu.getProgramCounter().getOffset() + 2 + destination16);
       // Emulation mode requires 1 extra cycle on page boundary crossing
       if (Address.areOffsetsAreOnDifferentPages(cpu.getProgramCounter().getOffset(), actualDestination) &&
-          cpu.getCpuStatus().isEmulation())
+          cpu.isEmulation())
       {
         opCycles++;
       }

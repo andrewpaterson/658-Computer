@@ -9,7 +9,6 @@ import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.CpuStatus;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -119,7 +118,6 @@ public class Logisim65816Factory
 
       Logisim65816Data core = Logisim65816Data.getOrCreateLogisim65816Data(painter, this);
       Cpu65816 cpu = core.getCpu();
-      CpuStatus status = cpu.getCpuStatus();
 
       int topOffset = 30;
       int width8Bit = 35;
@@ -138,22 +136,22 @@ public class Logisim65816Factory
       drawInternal(g, topOffset + 180, width16Bit, "Data", cpu.getDataValueHex(), false);
 
       int processorStatusTopOffset = topOffset + 205;
-      boolean emulationMode = status.isEmulation();
-      drawProcessorStatus(g, processorStatusTopOffset, -60, "C", status.isCarry());
-      drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", status.isZeroFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, -20, "I", status.isInterruptDisable());
-      drawProcessorStatus(g, processorStatusTopOffset, 0, "D", status.isDecimal());
+      boolean emulationMode = cpu.isEmulation();
+      drawProcessorStatus(g, processorStatusTopOffset, -60, "C", cpu.isCarry());
+      drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", cpu.isZeroFlag());
+      drawProcessorStatus(g, processorStatusTopOffset, -20, "I", cpu.isInterruptDisable());
+      drawProcessorStatus(g, processorStatusTopOffset, 0, "D", cpu.isDecimal());
       if (emulationMode)
       {
-        drawProcessorStatus(g, processorStatusTopOffset, 20, "B", status.isBreak());
+        drawProcessorStatus(g, processorStatusTopOffset, 20, "B", cpu.isBreak());
       }
       else
       {
-        drawProcessorStatus(g, processorStatusTopOffset, 20, "X", status.isIndex8Bit());
-        drawProcessorStatus(g, processorStatusTopOffset, 40, "M", status.isAccumulator8Bit());
+        drawProcessorStatus(g, processorStatusTopOffset, 20, "X", cpu.isIndex8Bit());
+        drawProcessorStatus(g, processorStatusTopOffset, 40, "M", cpu.isMemory8Bit());
       }
-      drawProcessorStatus(g, processorStatusTopOffset, 60, "V", status.isOverflowFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, 80, "N", status.isNegative());
+      drawProcessorStatus(g, processorStatusTopOffset, 60, "V", cpu.isOverflowFlag());
+      drawProcessorStatus(g, processorStatusTopOffset, 80, "N", cpu.isNegative());
 
       g2.setTransform(oldTransform);
       g.setFont(oldFont);

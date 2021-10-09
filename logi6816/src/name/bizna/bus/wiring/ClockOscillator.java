@@ -11,10 +11,10 @@ public class ClockOscillator
   private final Uniport out;
   private boolean value;
 
-  public ClockOscillator(Tickables tickables, Trace trace)
+  public ClockOscillator(Tickables tickables, String name, Trace trace)
   {
-    super(tickables);
-    this.out = new Uniport(this);
+    super(tickables, name);
+    this.out = new Uniport(this, "Out");
     this.out.connect(trace);
     this.value = false;
   }
@@ -29,6 +29,12 @@ public class ClockOscillator
   public void startPropagation()
   {
     value = !value;
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Clock Oscillator";
   }
 }
 

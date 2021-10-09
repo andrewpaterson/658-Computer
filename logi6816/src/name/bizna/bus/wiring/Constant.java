@@ -13,10 +13,10 @@ public class Constant
 
   protected long constantValue;
 
-  public Constant(Tickables tickables, boolean booleanValue, Trace trace)
+  public Constant(Tickables tickables, String name, boolean booleanValue, Trace trace)
   {
-    super(tickables);
-    value = new Omniport(this, 1);
+    super(tickables, name);
+    value = new Omniport(this, "Value", 1);
     value.connect(trace);
 
     if (booleanValue)
@@ -29,10 +29,10 @@ public class Constant
     }
   }
 
-  public Constant(Tickables tickables, int width, long constantValue, Bus bus)
+  public Constant(Tickables tickables, String name, int width, long constantValue, Bus bus)
   {
-    super(tickables);
-    value = new Omniport(this, width);
+    super(tickables, name);
+    value = new Omniport(this, "Value", width);
     value.connect(bus);
 
     this.constantValue = constantValue;
@@ -42,6 +42,12 @@ public class Constant
   public void propagate()
   {
     value.writeAllPinsBool(constantValue);
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Constant";
   }
 }
 

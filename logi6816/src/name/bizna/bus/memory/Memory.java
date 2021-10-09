@@ -21,15 +21,16 @@ public class Memory
   private int oldValue;
 
   public Memory(Tickables tickables,
+                String name,
                 Bus addressBus,
                 Bus dataBus,
                 Trace rwb,
                 byte[] bytes)
   {
-    super(tickables);
-    this.addressBus = new Omniport(this, 16);
-    this.dataBus = new Omniport(this, 8);
-    this.rwb = new Uniport(this);
+    super(tickables, name);
+    this.addressBus = new Omniport(this, "Address Bus", 16);
+    this.dataBus = new Omniport(this, "Data Bus", 8);
+    this.rwb = new Uniport(this, "RWB");
 
     this.addressBus.connect(addressBus);
     this.dataBus.connect(dataBus);
@@ -85,6 +86,12 @@ public class Memory
     {
       setMemory(oldAddress, oldValue);
     }
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Async SRAM";
   }
 
   public void setMemory(long address, long value)

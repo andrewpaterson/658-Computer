@@ -1,19 +1,15 @@
 package name.bizna.cpu;
 
-import name.bizna.bus.common.Tickables;
-import name.bizna.bus.wiring.ClockOscillator;
-import name.bizna.bus.cpu.TickablePins65816;
 import name.bizna.bus.common.Bus;
+import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
-import name.bizna.bus.common.TraceValue;
+import name.bizna.bus.cpu.TickablePins65816;
 import name.bizna.bus.logic.NotGate;
 import name.bizna.bus.logic.OrGate;
-import name.bizna.bus.logic.Tickable;
 import name.bizna.bus.memory.Memory;
+import name.bizna.bus.wiring.ClockOscillator;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import static name.bizna.util.FileUtil.readBytes;
 
@@ -23,7 +19,7 @@ public class CpuMain
   {
     Tickables tickables = new Tickables();
 
-    Bus addressBus = new Bus(24);
+    Bus addressBus = new Bus(16);
     Bus dataBus = new Bus(8);
     Trace rwbTrace = new Trace();
     Trace readTrace = new Trace();
@@ -42,15 +38,17 @@ public class CpuMain
     Trace validProgramAddressTrace = new Trace();
     Trace validDataAddressTrace = new Trace();
 
-    new NotGate(tickables, clockTrace, notClockTrace);
+    new NotGate(tickables, "NOT Clock", clockTrace, notClockTrace);
 
-    new OrGate(tickables, notClockTrace, rwbTrace, readTrace);
+    new OrGate(tickables, "(NOT Clock) OR Read", notClockTrace, rwbTrace, readTrace);
 
     Memory memory = new Memory(tickables,
+                               "",
                                addressBus, dataBus, rwbTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
     TickablePins65816 cpuPins = new TickablePins65816(tickables,
+                                                      "",
                                                       addressBus,
                                                       dataBus,
                                                       rwbTrace,
@@ -69,7 +67,7 @@ public class CpuMain
                                                       validDataAddressTrace);
     Cpu65816 cpu = new Cpu65816(cpuPins);
 
-    new ClockOscillator(tickables, clockTrace);
+    new ClockOscillator(tickables, "", clockTrace);
 
     int count = 1024;
     while (!cpu.isStopped() && count > 0)

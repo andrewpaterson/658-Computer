@@ -3,6 +3,7 @@ package name.bizna.bus.logic;
 import name.bizna.bus.common.Port;
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.TraceValue;
+import name.bizna.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +12,12 @@ public abstract class Tickable
 {
   protected Tickables tickables;
   protected List<Port> ports;
+  protected String name;
 
-  public Tickable(Tickables tickables)
+  public Tickable(Tickables tickables, String name)
   {
     this.tickables = tickables;
+    this.name = name;
     this.tickables.add(this);
     this.ports = new ArrayList<>();
   }
@@ -63,5 +66,24 @@ public abstract class Tickable
       port.resetConnection();
     }
   }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public String getDescription()
+  {
+    if (StringUtil.isEmptyOrNull(name))
+    {
+      return getType();
+    }
+    else
+    {
+      return getType() + " \"" + name + "\"";
+    }
+  }
+
+  public abstract String getType();
 }
 

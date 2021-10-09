@@ -30,6 +30,7 @@ public class TickablePins65816
   protected final Uniport validDataAddress;
 
   public TickablePins65816(Tickables tickables,
+                           String name,
                            Bus addressBus,
                            Bus dataBus,
                            Trace rwb,
@@ -47,23 +48,23 @@ public class TickablePins65816
                            Trace validProgramAddress,
                            Trace validDataAddress)
   {
-    super(tickables);
-    this.addressBus = new Omniport(this, 16);
-    this.dataBus = new Omniport(this, 8);
-    this.rwb = new Uniport(this);
-    this.clock = new Uniport(this);
-    this.abortB = new Uniport(this);
-    this.rdy = new Uniport(this);
-    this.busEnable = new Uniport(this);
-    this.irqB = new Uniport(this);
-    this.nmiB = new Uniport(this);
-    this.resetB = new Uniport(this);
-    this.emulation = new Uniport(this);
-    this.memoryLockB = new Uniport(this);
-    this.vectorPullB = new Uniport(this);
-    this.validProgramAddress = new Uniport(this);
-    this.validDataAddress = new Uniport(this);
-    this.mx = new Uniport(this);
+    super(tickables, name);
+    this.addressBus = new Omniport(this, "Address Bus", 16);
+    this.dataBus = new Omniport(this, "Data Bus", 8);
+    this.rwb = new Uniport(this, "RWB");
+    this.clock = new Uniport(this, "Phi2");
+    this.abortB = new Uniport(this, "AbortB");
+    this.rdy = new Uniport(this, "Rdy");
+    this.busEnable = new Uniport(this, "BE");
+    this.irqB = new Uniport(this, "IRQB");
+    this.nmiB = new Uniport(this, "NMIB");
+    this.resetB = new Uniport(this, "ResB");
+    this.emulation = new Uniport(this, "E");
+    this.memoryLockB = new Uniport(this, "MLB");
+    this.vectorPullB = new Uniport(this, "VPB");
+    this.validProgramAddress = new Uniport(this, "VPA");
+    this.validDataAddress = new Uniport(this, "VDA");
+    this.mx = new Uniport(this, "MX");
 
     this.addressBus.connect(addressBus);
     this.dataBus.connect(dataBus);
@@ -87,6 +88,12 @@ public class TickablePins65816
   public void propagate()
   {
     cpu.tick();
+  }
+
+  @Override
+  public String getType()
+  {
+    return "WDC65C816";
   }
 
   public void setCpu(Cpu65816 cpu)

@@ -25,12 +25,13 @@ public class BusTest
     Bus zeroBus = new Bus(8);
     Bus addressBus = new Bus(counterData, zeroBus);
 
-    new ClockOscillator(tickables, clockTrace);
-    Counter counter = new Counter(tickables, 8, counterData, clockTrace);
-    new Constant(tickables, true, readTrace);
-    new Constant(tickables, 8, 0, zeroBus);
+    new ClockOscillator(tickables, "", clockTrace);
+    Counter counter = new Counter(tickables, "", 8, counterData, clockTrace);
+    new Constant(tickables, "", true, readTrace);
+    new Constant(tickables, "", 8, 0, zeroBus);
 
     new Memory(tickables,
+               "",
                addressBus, dataBus, readTrace,
                readBytes(new File("../Test816/Test816.bin")));
 

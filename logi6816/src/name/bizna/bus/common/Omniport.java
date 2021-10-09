@@ -17,9 +17,9 @@ public class Omniport
   protected List<TraceValue> pins;
   protected List<Trace> connections;
 
-  public Omniport(Tickable tickable, int width)
+  public Omniport(Tickable tickable, String name, int width)
   {
-    super(tickable);
+    super(tickable, name);
     state = TransmissionState.Undefined;
     connections = new ArrayList<>();
     pins = new ArrayList<>(width);
@@ -118,7 +118,7 @@ public class Omniport
     if (state == TransmissionState.Input)
     {
       long value = 0;
-      for (int i = pins.size() -1; i >=0; i--)
+      for (int i = pins.size() - 1; i >= 0; i--)
       {
         TraceValue traceValue = pins.get(i);
         value <<= 1;
@@ -189,19 +189,19 @@ public class Omniport
     }
   }
 
-  public void connect(Bus addressBus)
+  public void connect(Bus bus)
   {
-    if (addressBus.getWidth() == connections.size())
+    if (bus.getWidth() == connections.size())
     {
       for (int i = 0; i < connections.size(); i++)
       {
-        Trace trace = addressBus.getTrace(i);
+        Trace trace = bus.getTrace(i);
         connections.set(i, trace);
       }
     }
     else
     {
-      throw new EmulatorException("Cannot connect omniport to bus of different width");
+      throw new EmulatorException("Cannot connect bus with width [" + bus.getWidth() + "] to omniport with a different width [" + connections.size() + "].");
     }
   }
 
@@ -213,7 +213,7 @@ public class Omniport
     }
     else
     {
-      throw new EmulatorException("Cannot connect omniport to bus of different width");
+      throw new EmulatorException("Cannot connect bus with width [1] to omniport with a different width [" + connections.size() + "].");
     }
   }
 

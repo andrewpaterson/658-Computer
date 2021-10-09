@@ -7,10 +7,12 @@ import java.util.List;
 public abstract class Port
 {
   protected Tickable tickable;
+  protected String name;
 
-  public Port(Tickable tickable)
+  public Port(Tickable tickable,  String name)
   {
     this.tickable = tickable;
+    this.name = name;
     tickable.addPort(this);
   }
 

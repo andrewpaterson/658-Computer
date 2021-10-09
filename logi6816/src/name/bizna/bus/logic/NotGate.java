@@ -13,11 +13,11 @@ public class NotGate
 
   protected boolean previousValue;
 
-  public NotGate(Tickables tickables, Trace inTrace, Trace outTrace)
+  public NotGate(Tickables tickables, String name, Trace inTrace, Trace outTrace)
   {
-    super(tickables);
-    in = new Uniport(this);
-    out = new Uniport(this);
+    super(tickables, name);
+    in = new Uniport(this, "In");
+    out = new Uniport(this, "Out");
 
     in.connect(inTrace);
     out.connect(outTrace);
@@ -34,6 +34,12 @@ public class NotGate
     boolean calculatedValue = !inValue.isHigh();
     out.writeBool(calculatedValue);
     this.previousValue = calculatedValue;
+  }
+
+  @Override
+  public String getType()
+  {
+    return "NOT Gate";
   }
 }
 

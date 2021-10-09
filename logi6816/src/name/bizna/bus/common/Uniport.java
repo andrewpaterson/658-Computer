@@ -5,8 +5,8 @@ import name.bizna.util.EmulatorException;
 
 import java.util.List;
 
-import static name.bizna.bus.common.TraceValue.*;
 import static name.bizna.bus.common.TraceValue.Undefined;
+import static name.bizna.bus.common.TraceValue.fromBoolean;
 
 public class Uniport
     extends Port
@@ -16,9 +16,9 @@ public class Uniport
   protected TraceValue value;
   protected Trace connection;
 
-  public Uniport(Tickable tickable)
+  public Uniport(Tickable tickable, String name)
   {
-    super(tickable);
+    super(tickable, name);
     state = TransmissionState.Undefined;
     value = Undefined;
   }
@@ -58,7 +58,7 @@ public class Uniport
     TraceValue traceValue = readState();
     if (!traceValue.isValid())
     {
-      throw new EmulatorException("Cannot read a boolean value from a Port that has invalid state.");
+      throw new EmulatorException("Cannot read a boolean value from Port [" + name + "] that has invalid state [" + traceValue + "] in [" + tickable.getDescription() + "] .");
     }
     return traceValue.isHigh();
   }
@@ -99,7 +99,8 @@ public class Uniport
 
     if (state == TransmissionState.Output)
     {
-      this.value = fromBoolean(value);;
+      this.value = fromBoolean(value);
+      ;
     }
     else
     {

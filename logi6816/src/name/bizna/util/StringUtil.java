@@ -61,5 +61,10 @@ public class StringUtil
     }
     return stringBuffer.toString();
   }
+
+  public static boolean isEmptyOrNull(String string)
+  {
+    return (string == null) || string.trim().isEmpty();
+  }
 }
 

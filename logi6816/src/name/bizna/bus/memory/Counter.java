@@ -16,11 +16,11 @@ public class Counter
   protected boolean previousPreviousClock;
   protected long previousCounter;
 
-  public Counter(Tickables tickables, int width, Bus dataBus, Trace clockTrace)
+  public Counter(Tickables tickables, String name, int width, Bus dataBus, Trace clockTrace)
   {
-    super(tickables);
-    this.value = new Omniport(this, width);
-    this.phi2 = new Uniport(this);
+    super(tickables, name);
+    this.value = new Omniport(this, "Value", width);
+    this.phi2 = new Uniport(this, "Clk");
 
     value.connect(dataBus);
     phi2.connect(clockTrace);
@@ -62,6 +62,12 @@ public class Counter
   {
     counter = previousCounter;
     previousClock = previousPreviousClock;
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Counter";
   }
 
   public long getCounter()

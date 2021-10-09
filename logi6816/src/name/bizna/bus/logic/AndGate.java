@@ -16,14 +16,14 @@ public class AndGate
   protected List<Uniport> in;
   protected Uniport out;
 
-  public AndGate(Tickables tickables, Trace in1, Trace in2, Trace out)
+  public AndGate(Tickables tickables, String name, Trace in1, Trace in2, Trace out)
   {
-    super(tickables);
+    super(tickables, name);
     this.in = new ArrayList<>();
 
-    this.in.add(new Uniport(this));
-    this.in.add(new Uniport(this));
-    this.out = new Uniport(this);
+    this.in.add(new Uniport(this, "In"));
+    this.in.add(new Uniport(this, "In"));
+    this.out = new Uniport(this, "Out");
 
     this.in.get(0).connect(in1);
     this.in.get(1).connect(in2);
@@ -60,6 +60,12 @@ public class AndGate
     }
 
     out.writeState(outputValue);
+  }
+
+  @Override
+  public String getType()
+  {
+    return "AND Gate";
   }
 }
 

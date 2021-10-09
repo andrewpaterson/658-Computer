@@ -20,7 +20,7 @@ public class Omniport
   public Omniport(Tickable tickable, int width)
   {
     super(tickable);
-    state = TransmissionState.Impedance;
+    state = TransmissionState.Undefined;
     connections = new ArrayList<>();
     pins = new ArrayList<>(width);
 
@@ -89,9 +89,17 @@ public class Omniport
       if (state == TransmissionState.Input)
       {
         Trace connection = connections.get(pin);
-        TraceValue value = connection.getValue();
+        TraceValue value;
+        if (connection != null)
+        {
+          value = connection.getValue();
+        }
+        else
+        {
+          value = Undefined;
+        }
         pins.set(pin, value);
-        return pins.get(pin);
+        return value;
       }
       else
       {
@@ -123,9 +131,13 @@ public class Omniport
         pins.set(i, traceValue);
 
         value <<= 1;
-        if (traceValue == High)
+        if (traceValue.isHigh())
         {
           value |= 1;
+        }
+        else if (traceValue.isInvalid())
+        {
+          throw new EmulatorException("Cannot read a boolean value from a Port that has invalid state.");
         }
       }
       return value;
@@ -225,46 +237,9 @@ public class Omniport
       state = TransmissionState.Input;
     }
 
-    boolean high = false;
-    boolean low = false;
     if (state == TransmissionState.Input)
     {
-      for (TraceValue traceValue : pins)
-      {
-        if (traceValue == Error)
-        {
-          return Error;
-        }
-        else if (traceValue == Undefined)
-        {
-          return Undefined;
-        }
-        else if (traceValue == High)
-        {
-          high = true;
-        }
-        else if (traceValue == Low)
-        {
-          low = true;
-        }
-      }
-
-      if (high && low)
-      {
-        return HighAndLow;
-      }
-      else if (high)
-      {
-        return High;
-      }
-      else if (low)
-      {
-        return Low;
-      }
-      else
-      {
-        return Undefined;
-      }
+      return getTraceValue(pins);
     }
     else
     {

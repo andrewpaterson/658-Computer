@@ -2,6 +2,7 @@ package name.bizna.bus.logic;
 
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
+import name.bizna.bus.common.TraceValue;
 import name.bizna.bus.common.Uniport;
 
 public class NotGate
@@ -24,10 +25,14 @@ public class NotGate
 
   public void propagate()
   {
-    boolean calculatedValue = !in.readBool();
-    out.writeBool(calculatedValue);
+    TraceValue inValue = in.readState();
+    if (inValue.isInvalid())
+    {
+      out.writeState(inValue);
+    }
 
-    boolean settled = calculatedValue == previousValue;
+    boolean calculatedValue = !inValue.isHigh();
+    out.writeBool(calculatedValue);
     this.previousValue = calculatedValue;
   }
 }

@@ -45,30 +45,30 @@ public class Memory
   {
     TraceValue readState = rwb.readState();
     TraceValue addressState = addressBus.readState();
-    if (readState == TraceValue.Error || addressState == TraceValue.Error)
+    if (readState.isInvalid() || addressState.isError())
     {
       dataBus.writeAllPinsError();
     }
-    else if (readState == TraceValue.Undefined || addressState == TraceValue.Undefined)
+    else if (readState.isUndefined() || addressState.isUndefined())
     {
       dataBus.writeAllPinsUndefined();
     }
-    else if (readState == TraceValue.High)
+    else if (readState.isHigh())
     {
-      int data = getMemory(addressBus.readAllPinsBool());
+      long address = addressBus.readAllPinsBool();
+      int data = getMemory(address);
       dataBus.writeAllPinsBool(data);
     }
-    else if (readState == TraceValue.Low)
+    else if (readState.isLow())
     {
       TraceValue dataBusState = dataBus.readState();
-      if (dataBusState == TraceValue.HighAndLow ||
-          dataBusState == TraceValue.High ||
-          dataBusState == TraceValue.Low)
+      if (dataBusState.isValid())
       {
         oldAddress = addressBus.readAllPinsBool();
         oldValue = getMemory(oldAddress);
 
-        setMemory(oldAddress, dataBus.readAllPinsBool());
+        long data = dataBus.readAllPinsBool();
+        setMemory(oldAddress, data);
 
         propagateWroteMemory = true;
       }

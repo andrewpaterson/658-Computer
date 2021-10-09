@@ -8,10 +8,12 @@ import java.util.List;
 public class Tickables
 {
   protected List<Tickable> tickables;
+  protected boolean debug;
 
   public Tickables()
   {
     this.tickables = new ArrayList<>();
+    this.debug = false;
   }
 
   public void add(Tickable tickable)
@@ -31,24 +33,21 @@ public class Tickables
     boolean settled;
     do
     {
-      System.out.println("-----------------------------");
+      if (count == 200)
+      {
+        break;
+      }
 
       settled = true;
       for (Tickable tickable : tickables)
       {
         List<TraceValue> oldTraceValues = tickable.getTraceValues();
+
         tickable.propagate();
         tickable.updateConnections();
 
-        System.out.println(tickable.getClass().getSimpleName());
         List<TraceValue> newTraceValues = tickable.getTraceValues();
-        for (TraceValue newTraceValue : newTraceValues)
-        {
-          System.out.println(newTraceValue);
-        }
         settled &= areSettled(oldTraceValues, newTraceValues);
-        System.out.println(settled);
-        System.out.println();
       }
 
       if (!settled)
@@ -58,14 +57,33 @@ public class Tickables
           tickable.undoPropagation();
         }
       }
-      System.out.println(count);
       count++;
     }
     while (!settled);
 
+    debugLog("-----------------------------");
     for (Tickable tickable : tickables)
     {
+      if (debug)
+      {
+        debugLog(tickable.getClass().getSimpleName());
+        List<TraceValue> newTraceValues = tickable.getTraceValues();
+        for (TraceValue newTraceValue : newTraceValues)
+        {
+          debugLog(newTraceValue.toString());
+        }
+        debugLog("");
+      }
+
       tickable.donePropagation();
+    }
+  }
+
+  private void debugLog(String s)
+  {
+    if (debug)
+    {
+      System.out.println(s);
     }
   }
 
@@ -82,3 +100,4 @@ public class Tickables
     return true;
   }
 }
+

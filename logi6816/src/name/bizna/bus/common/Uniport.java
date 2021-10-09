@@ -5,6 +5,7 @@ import name.bizna.util.EmulatorException;
 
 import java.util.List;
 
+import static name.bizna.bus.common.TraceValue.*;
 import static name.bizna.bus.common.TraceValue.Undefined;
 
 public class Uniport
@@ -19,14 +20,14 @@ public class Uniport
   {
     super(tickable);
     state = TransmissionState.Undefined;
-    value = TraceValue.Undefined;
+    value = Undefined;
   }
 
   @Override
   public void startPropagation()
   {
     state = TransmissionState.Undefined;
-    value = TraceValue.Undefined;
+    value = Undefined;
   }
 
   @Override
@@ -54,20 +55,12 @@ public class Uniport
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
   public boolean readBool()
   {
-    if (state == TransmissionState.Undefined)
+    TraceValue traceValue = readState();
+    if (!traceValue.isValid())
     {
-      state = TransmissionState.Input;
+      throw new EmulatorException("Cannot read a boolean value from a Port that has invalid state.");
     }
-
-    if (state == TransmissionState.Input)
-    {
-      value = connection.getValue();
-      return value == TraceValue.High;
-    }
-    else
-    {
-      throw new EmulatorException("Cannot read from a Port that is not an input.");
-    }
+    return traceValue.isHigh();
   }
 
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
@@ -80,7 +73,14 @@ public class Uniport
 
     if (state == TransmissionState.Input)
     {
-      value = connection.getValue();
+      if (connection != null)
+      {
+        value = connection.getValue();
+      }
+      else
+      {
+        value = Undefined;
+      }
       return value;
     }
     else
@@ -99,7 +99,7 @@ public class Uniport
 
     if (state == TransmissionState.Output)
     {
-      this.value = value ? TraceValue.High : TraceValue.Low;
+      this.value = fromBoolean(value);;
     }
     else
     {
@@ -122,11 +122,6 @@ public class Uniport
     {
       throw new EmulatorException("Cannot write to a Port that is not an output.");
     }
-  }
-
-  public TraceValue getValue()
-  {
-    return value;
   }
 
   public void connect(Trace trace)

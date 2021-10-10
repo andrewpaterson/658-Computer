@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static name.bizna.bus.common.TraceValue.Error;
-import static name.bizna.bus.common.TraceValue.Undefined;
+import static name.bizna.bus.common.TraceValue.Unsettled;
 
 public class TraceNet
 {
@@ -14,19 +14,19 @@ public class TraceNet
   public TraceNet(List<Trace> connected)
   {
     traces = connected;
-    value = Undefined;
+    value = Unsettled;
   }
 
   public TraceNet(Trace trace)
   {
     traces = new ArrayList<>();
     traces.add(trace);
-    value = Undefined;
+    value = Unsettled;
   }
 
   public void reset()
   {
-    value = Undefined;
+    value = Unsettled;
   }
 
   public TraceValue update(TraceValue value)
@@ -35,7 +35,7 @@ public class TraceNet
     {
       return value;
     }
-    else if (this.value == Undefined)
+    else if (this.value == Unsettled)
     {
       this.value = value;
       return value;

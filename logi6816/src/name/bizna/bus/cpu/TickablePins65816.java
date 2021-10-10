@@ -1,7 +1,7 @@
 package name.bizna.bus.cpu;
 
 import name.bizna.bus.common.*;
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 import name.bizna.cpu.Cpu65816;
 import name.bizna.cpu.CpuSnapshot;
 import name.bizna.cpu.Pins65816;
@@ -92,22 +92,22 @@ public class TickablePins65816
   @Override
   public void propagate()
   {
-    TraceValue clockValue = clock.readState();
-    TraceValue abortBValue = abortB.readState();
-    TraceValue busEnableValue = busEnable.readState();
-    TraceValue irqbValue = irqB.readState();
-    TraceValue nmibValue = nmiB.readState();
-    TraceValue resetBValue = resetB.readState();
+    TraceValue clockValue = clock.read();
+    TraceValue abortBValue = abortB.read();
+    TraceValue busEnableValue = busEnable.read();
+    TraceValue irqbValue = irqB.read();
+    TraceValue nmibValue = nmiB.read();
+    TraceValue resetBValue = resetB.read();
 
-    boolean rwbState = rwb.writeState();
-    boolean addressState = addressBus.writeState();
-    boolean rdyState = rdy.writeState();
-    boolean emulationState = emulation.writeState();
-    boolean memoryLockBState = memoryLockB.writeState();
-    boolean vectorPullBState = vectorPullB.writeState();
-    boolean validProgramAddressState = validProgramAddress.writeState();
-    boolean validDataAddressState = validDataAddress.writeState();
-    boolean mxState = mx.writeState();
+    boolean rwbState = rwb.write();
+    boolean addressState = addressBus.write();
+    boolean rdyState = rdy.write();
+    boolean emulationState = emulation.write();
+    boolean memoryLockBState = memoryLockB.write();
+    boolean vectorPullBState = vectorPullB.write();
+    boolean validProgramAddressState = validProgramAddress.write();
+    boolean validDataAddressState = validDataAddress.write();
+    boolean mxState = mx.write();
 
     if (clockValue.isValid() &&
         abortBValue.isValidOrUndefined() &&
@@ -125,11 +125,11 @@ public class TickablePins65816
              nmibValue.isError() ||
              resetBValue.isError())
     {
-      writeAllPinsError();
+      setAllOutputsError();
     }
-    else if (clockValue.isUndefined())
+    else if (clockValue.isUnsettled())
     {
-      writeAllPinsUndefined();
+      setAllOutputsUnknown();
     }
     else
     {
@@ -159,19 +159,19 @@ public class TickablePins65816
   {
     if (cpu.isRead())
     {
-      TraceValue traceValue = dataBus.readStates();
+      TraceValue traceValue = dataBus.read();
       if (traceValue.isValid())
       {
         return (int) dataBus.getPinsAsBoolAfterRead();
       }
       else if (traceValue.isError())
       {
-        writeAllPinsError();
+        setAllOutputsError();
         return 0;
       }
-      else if (traceValue.isUndefined())
+      else if (traceValue.isUnsettled())
       {
-        writeAllPinsUndefined();
+        setAllOutputsUnknown();
         return 0;
       }
       else
@@ -200,7 +200,7 @@ public class TickablePins65816
   @Override
   public boolean getPhi2()
   {
-    return clock.readBool();
+    return clock.getBoolAfterRead();
   }
 
   @Override
@@ -248,31 +248,31 @@ public class TickablePins65816
   @Override
   public boolean isAbortB()
   {
-    return abortB.readBool();
+    return abortB.getBoolAfterRead();
   }
 
   @Override
   public boolean isBusEnable()
   {
-    return busEnable.readBool();
+    return busEnable.getBoolAfterRead();
   }
 
   @Override
   public boolean isIrqB()
   {
-    return irqB.readBool();
+    return irqB.getBoolAfterRead();
   }
 
   @Override
   public boolean isNmiB()
   {
-    return nmiB.readBool();
+    return nmiB.getBoolAfterRead();
   }
 
   @Override
   public boolean isResetB()
   {
-    return resetB.readBool();
+    return resetB.getBoolAfterRead();
   }
 
   @Override
@@ -294,33 +294,33 @@ public class TickablePins65816
   }
 
   @Override
-  public void writeAllPinsUndefined()
+  public void setAllOutputsUnknown()
   {
-    rwb.writeState(TraceValue.Undefined);
-    addressBus.writeAllPinsUndefined();
-    dataBus.writeAllPinsUndefined();
-    rdy.writeState(TraceValue.Undefined);
-    emulation.writeState(TraceValue.Undefined);
-    memoryLockB.writeState(TraceValue.Undefined);
-    vectorPullB.writeState(TraceValue.Undefined);
-    validProgramAddress.writeState(TraceValue.Undefined);
-    validDataAddress.writeState(TraceValue.Undefined);
-    mx.writeState(TraceValue.Undefined);
+    rwb.unset();;
+    addressBus.unset();
+    dataBus.unset();
+    rdy.unset();
+    emulation.unset();
+    memoryLockB.unset();
+    vectorPullB.unset();
+    validProgramAddress.unset();
+    validDataAddress.unset();
+    mx.unset();
   }
 
   @Override
-  public void writeAllPinsError()
+  public void setAllOutputsError()
   {
-    rwb.writeState(TraceValue.Error);
-    addressBus.writeAllPinsError();
-    dataBus.writeAllPinsError();
-    rdy.writeState(TraceValue.Error);
-    emulation.writeState(TraceValue.Error);
-    memoryLockB.writeState(TraceValue.Error);
-    vectorPullB.writeState(TraceValue.Error);
-    validProgramAddress.writeState(TraceValue.Error);
-    validDataAddress.writeState(TraceValue.Error);
-    mx.writeState(TraceValue.Error);
+    rwb.error();
+    addressBus.error();
+    dataBus.error();
+    rdy.error();
+    emulation.error();
+    memoryLockB.error();
+    vectorPullB.error();
+    validProgramAddress.error();
+    validDataAddress.error();
+    mx.error();
   }
 }
 

@@ -1,18 +1,16 @@
-package name.bizna.bus.logic;
+package name.bizna.bus.gate;
 
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
-import name.bizna.bus.common.TraceValue;
 import name.bizna.bus.common.Uniport;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static name.bizna.bus.common.TraceValue.Error;
-import static name.bizna.bus.common.TraceValue.*;
+import static name.bizna.bus.common.TraceValue.High;
 
 public class AndGate
-    extends Tickable
+    extends LogicGate
 {
   protected List<Uniport> in;
   protected Uniport out;
@@ -33,33 +31,7 @@ public class AndGate
 
   public void propagate()
   {
-    TraceValue outputValue;
-    if (in.size() > 0)
-    {
-      outputValue = High;
-      for (Uniport input : in)
-      {
-        TraceValue value = input.readState();  //Always read all the traces.
-        if (value == Error)
-        {
-          outputValue = Error;
-        }
-
-        if (!outputValue.isError())
-        {
-          if (value == Low)
-          {
-            outputValue = Low;
-          }
-        }
-      }
-    }
-    else
-    {
-      outputValue = Undefined;
-    }
-
-    out.writeState(outputValue);
+    propagateLogic(in, out, High);
   }
 
   @Override

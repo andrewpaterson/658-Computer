@@ -1,4 +1,4 @@
-package name.bizna.bus.logic;
+package name.bizna.bus.gate;
 
 import name.bizna.bus.common.Port;
 import name.bizna.bus.common.Tickables;

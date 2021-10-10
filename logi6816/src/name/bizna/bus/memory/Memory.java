@@ -1,7 +1,7 @@
 package name.bizna.bus.memory;
 
 import name.bizna.bus.common.*;
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 import name.bizna.util.EmulatorException;
 
 import static name.bizna.util.IntUtil.toByte;
@@ -46,16 +46,16 @@ public class Memory
   {
     propagateWroteMemory = false;
 
-    TraceValue readState = rwb.readState();
-    TraceValue addressState = addressBus.readStates();
+    TraceValue readState = rwb.read();
+    TraceValue addressState = addressBus.read();
 
-    if (readState.isInvalid() || addressState.isError())
+    if (readState.isError() || addressState.isError() || readState.isNotConnected() || addressState.isNotConnected())
     {
-      dataBus.writeAllPinsError();
+      dataBus.error();
     }
-    else if (readState.isUndefined() || addressState.isUndefined())
+    else if (readState.isUnsettled() || addressState.isUnsettled())
     {
-      dataBus.writeAllPinsUndefined();
+      dataBus.unset();
     }
     else if (readState.isHigh())
     {
@@ -65,7 +65,7 @@ public class Memory
     }
     else if (readState.isLow())
     {
-      TraceValue dataBusState = dataBus.readStates();
+      TraceValue dataBusState = dataBus.read();
       if (dataBusState.isValid())
       {
         oldAddress = addressBus.getPinsAsBoolAfterRead();
@@ -76,6 +76,10 @@ public class Memory
 
         propagateWroteMemory = true;
       }
+    }
+    else
+    {
+      throw new EmulatorException(getDescription() + " connections are in an impossible state.");
     }
   }
 

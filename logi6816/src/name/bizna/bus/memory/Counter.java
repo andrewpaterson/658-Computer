@@ -1,7 +1,7 @@
 package name.bizna.bus.memory;
 
 import name.bizna.bus.common.*;
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 
 public class Counter
     extends Tickable
@@ -36,25 +36,36 @@ public class Counter
     previousCounter = counter;
     previousPreviousClock = previousClock;
 
-    TraceValue clockValue = phi2.readState();
-    if (clockValue.isInvalid())
+    TraceValue clockValue = phi2.read();
+    if (clockValue.isError())
     {
-      return;
+      value.error();
     }
-    boolean clock = phi2.readBool();
-
-    boolean clockRisingEdge = clock && !previousClock;
-    previousClock = clock;
-
-    if (clockRisingEdge)
+    else if (clockValue.isUnsettled())
     {
-      counter++;
-      if (counter == resetValue)
+      value.unset();
+    }
+    else if (clockValue.isNotConnected())
+    {
+      value.writeAllPinsBool(counter);
+    }
+    else
+    {
+      boolean clock = phi2.getBoolAfterRead();
+
+      boolean clockRisingEdge = clock && !previousClock;
+      previousClock = clock;
+
+      if (clockRisingEdge)
       {
-        counter = 0;
+        counter++;
+        if (counter == resetValue)
+        {
+          counter = 0;
+        }
       }
+      value.writeAllPinsBool(counter);
     }
-    value.writeAllPinsBool(counter);
   }
 
   @Override

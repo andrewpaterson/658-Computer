@@ -3,7 +3,7 @@ package name.bizna.bus.wiring;
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
 import name.bizna.bus.common.Uniport;
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 
 public class ClockOscillator
     extends Tickable

@@ -1,4 +1,4 @@
-package name.bizna.bus.logic;
+package name.bizna.bus.gate;
 
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
@@ -10,7 +10,6 @@ public class NotGate
 {
   protected Uniport in;
   protected Uniport out;
-
 
   public NotGate(Tickables tickables, String name, Trace inTrace, Trace outTrace)
   {
@@ -24,14 +23,20 @@ public class NotGate
 
   public void propagate()
   {
-    TraceValue inValue = in.readState();
-    if (inValue.isInvalid())
+    TraceValue inValue = in.read();
+    if (inValue.isError() || inValue.isNotConnected())
     {
-      out.writeState(inValue);
+      out.error();
     }
-
-    boolean calculatedValue = !inValue.isHigh();
-    out.writeBool(calculatedValue);
+    else if (inValue.isUnsettled())
+    {
+      out.unset();
+    }
+    else
+    {
+      boolean calculatedValue = !inValue.isHigh();
+      out.writeBool(calculatedValue);
+    }
   }
 
   @Override

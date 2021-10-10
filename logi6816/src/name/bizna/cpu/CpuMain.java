@@ -4,8 +4,9 @@ import name.bizna.bus.common.Bus;
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
 import name.bizna.bus.cpu.TickablePins65816;
-import name.bizna.bus.logic.NotGate;
-import name.bizna.bus.logic.OrGate;
+import name.bizna.bus.gate.NotGate;
+import name.bizna.bus.gate.OrGate;
+import name.bizna.bus.gate.Transceiver;
 import name.bizna.bus.memory.Memory;
 import name.bizna.bus.wiring.ClockOscillator;
 
@@ -20,6 +21,7 @@ public class CpuMain
     Tickables tickables = new Tickables();
 
     Bus addressBus = new Bus(16);
+    Bus dataAndBankMultiplexedBus = new Bus(8);
     Bus dataBus = new Bus(8);
     Trace rwbTrace = new Trace();
     Trace readTrace = new Trace();
@@ -42,15 +44,15 @@ public class CpuMain
 
     new OrGate(tickables, "(NOT Clock) OR Read", notClockTrace, rwbTrace, readTrace);
 
-    Memory memory = new Memory(tickables,
-                               "",
-                               addressBus, dataBus, rwbTrace,
+    new Transceiver(tickables, "Allow Data block Bank", 8, dataAndBankMultiplexedBus, dataBus, notClockTrace);
+
+    Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
     TickablePins65816 cpuPins = new TickablePins65816(tickables,
                                                       "",
                                                       addressBus,
-                                                      dataBus,
+                                                      dataAndBankMultiplexedBus,
                                                       rwbTrace,
                                                       clockTrace,
                                                       abortBTrace,

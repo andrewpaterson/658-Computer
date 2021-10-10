@@ -1,12 +1,11 @@
 package name.bizna.bus.common;
 
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 import name.bizna.util.EmulatorException;
 
 import java.util.List;
 
-import static name.bizna.bus.common.TraceValue.Undefined;
-import static name.bizna.bus.common.TraceValue.fromBoolean;
+import static name.bizna.bus.common.TraceValue.*;
 import static name.bizna.bus.common.TransmissionState.*;
 
 public class Uniport
@@ -18,14 +17,14 @@ public class Uniport
   public Uniport(Tickable tickable, String name)
   {
     super(tickable, name);
-    value = Undefined;
+    value = Unsettled;
   }
 
   @Override
   public void resetConnections()
   {
-    state = NotSet;
-    value = Undefined;
+    super.resetConnections();
+    value = Unsettled;
     connection.getNet().reset();
   }
 
@@ -40,30 +39,34 @@ public class Uniport
   {
     if (connection != null)
     {
-      value = connection.updateNetValue(value);
+      if (state.isOutput())
+      {
+        value = connection.updateNetValue(value);
+      }
     }
   }
 
-  //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
-  public boolean readBool()
+  public boolean getBoolAfterRead()
   {
-    TraceValue traceValue = readState();
-    if (!traceValue.isValid())
+    if (state.isInput())
     {
-      throw new EmulatorException("Cannot read a boolean value from Port [" + name + "] that has invalid state [" + traceValue + "] in [" + tickable.getDescription() + "] .");
+      return value.isHigh();
     }
-    return traceValue.isHigh();
+    else
+    {
+      throw new EmulatorException("Cannot read boolean value before port is set to Input.  Call and check the value of readState().");
+    }
   }
 
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
-  public TraceValue readState()
+  public TraceValue read()
   {
-    if (state == NotSet)
+    if (state.isNotSet())
     {
       state = Input;
     }
 
-    if (state == Input)
+    if (state.isInput())
     {
       if (connection != null)
       {
@@ -71,7 +74,7 @@ public class Uniport
       }
       else
       {
-        value = Undefined;
+        value = NotConnected;
       }
       return value;
     }
@@ -84,14 +87,9 @@ public class Uniport
   //A write is only done by the Tickable the Port exists in and causes the port ot be set as an output.
   public void writeBool(boolean value)
   {
-    if (state == NotSet)
+    if (write())
     {
-      state = Output;
-    }
-
-    if (state == Output)
-    {
-      this.value = fromBoolean(value);
+      this.value = value ? High : Low;
     }
     else
     {
@@ -99,31 +97,26 @@ public class Uniport
     }
   }
 
-  public void writeState(TraceValue value)
+  public boolean write()
   {
-    if (state == NotSet)
+    if (state.isNotSet())
     {
       state = Output;
     }
 
-    if (state == Output)
-    {
-      this.value = value;
-    }
-    else
-    {
-      throw new EmulatorException("Cannot write to a Port that is not an output.");
-    }
+    return state.isOutput();
   }
 
-  public boolean writeState()
+  public void unset()
   {
-    if (state == NotSet)
-    {
-      state = Output;
-    }
+    state = NotSet;
+    value = Unsettled;
+  }
 
-    return state == Output;
+  public void error()
+  {
+    state = NotSet;  //Maybe?  Maybe we need an error state.
+    value = Error;
   }
 
   public void connect(Trace trace)

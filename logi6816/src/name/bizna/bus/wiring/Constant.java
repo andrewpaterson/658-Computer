@@ -4,7 +4,7 @@ import name.bizna.bus.common.Bus;
 import name.bizna.bus.common.Omniport;
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 
 public class Constant
     extends Tickable

@@ -1,14 +1,14 @@
 package name.bizna.bus.common;
 
-import java.util.Collection;
-
 public enum TraceValue
 {
   High,
   Low,
-  Undefined,
-  Error,
-  HighAndLow;
+  HighAndLow,
+
+  Unsettled,
+  NotConnected,
+  Error;
 
   public boolean isValid()
   {
@@ -22,13 +22,14 @@ public enum TraceValue
     return this == TraceValue.HighAndLow ||
            this == TraceValue.High ||
            this == TraceValue.Low ||
-           this == TraceValue.Undefined;
+           this == TraceValue.Unsettled;
   }
 
   public boolean isInvalid()
   {
-    return this == TraceValue.Undefined ||
-           this == TraceValue.Error;
+    return this == TraceValue.Unsettled ||
+           this == TraceValue.Error ||
+           this == TraceValue.NotConnected;
   }
 
   public boolean isHigh()
@@ -46,9 +47,9 @@ public enum TraceValue
     return this == Low;
   }
 
-  public boolean isUndefined()
+  public boolean isUnsettled()
   {
-    return this == Undefined;
+    return this == Unsettled;
   }
 
   public static TraceValue fromBoolean(boolean value)
@@ -66,7 +67,7 @@ public enum TraceValue
     {
       return '0';
     }
-    else if (isUndefined())
+    else if (isUnsettled())
     {
       return '.';
     }
@@ -75,6 +76,16 @@ public enum TraceValue
       return 'x';
     }
     return ' ';
+  }
+
+  public boolean isConnected()
+  {
+    return this != NotConnected;
+  }
+
+  public boolean isNotConnected()
+  {
+    return this == NotConnected;
   }
 }
 

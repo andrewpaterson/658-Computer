@@ -1,6 +1,6 @@
 package name.bizna.bus.common;
 
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 import name.bizna.util.EmulatorException;
 
 import java.util.ArrayList;
@@ -27,19 +27,19 @@ public class Omniport
 
     for (int i = 0; i < width; i++)
     {
-      pins.add(Undefined);
+      pins.add(Unsettled);
       connections.add(null);
     }
   }
 
   public void resetConnections()
   {
-    state = NotSet;
+    super.resetConnections();
 
     int length = pins.size();
     for (int i = 0; i < length; i++)
     {
-      pins.set(i, Undefined);
+      pins.set(i, Unsettled);
       Trace trace = connections.get(i);
       if (trace != null)
       {
@@ -57,58 +57,25 @@ public class Omniport
   @Override
   public void updateConnection()
   {
-    int length = pins.size();
-    for (int i = 0; i < length; i++)
+    if (state.isOutput())
     {
-      TraceValue value = pins.get(i);
-      Trace trace = connections.get(i);
-      if (trace != null)
+      int length = pins.size();
+      for (int i = 0; i < length; i++)
       {
-        value = trace.updateNetValue(value);
-        pins.set(i, value);
-      }
-    }
-  }
-
-  public TraceValue readSinglePinState(int pin)
-  {
-    if (pin >= 0 && pin < pins.size())
-    {
-      if (state == NotSet)
-      {
-        state = Input;
-      }
-
-      if (state == Input)
-      {
-        Trace connection = connections.get(pin);
-        TraceValue value;
+        TraceValue value = pins.get(i);
+        Trace connection = connections.get(i);
         if (connection != null)
         {
-          value = connection.getValue();
+          value = connection.updateNetValue(value);
+          pins.set(i, value);
         }
-        else
-        {
-          value = Undefined;
-        }
-        pins.set(pin, value);
-        return value;
       }
-      else
-      {
-        throw new EmulatorException("Cannot read from a Port that is not an input.");
-      }
-
-    }
-    else
-    {
-      throw new EmulatorException("Pin number exceeds port width.");
     }
   }
 
   public long getPinsAsBoolAfterRead()
   {
-    if (state == Input)
+    if (state.isInput())
     {
       long value = 0;
       for (int i = pins.size() - 1; i >= 0; i--)
@@ -132,38 +99,9 @@ public class Omniport
     }
   }
 
-  public void writeSinglePinState(int pin, TraceValue value)
-  {
-    if (pin >= 0 && pin < pins.size())
-    {
-      if (state == NotSet)
-      {
-        state = Output;
-      }
-
-      if (state == Output)
-      {
-        pins.set(pin, value);
-      }
-      else
-      {
-        throw new EmulatorException("Cannot write to a Port that is not an output.");
-      }
-    }
-    else
-    {
-      throw new EmulatorException("Pin number exceeds port width.");
-    }
-  }
-
   public void writeAllPinsBool(long longValue)
   {
-    if (state == NotSet)
-    {
-      state = Output;
-    }
-
-    if (state == Output)
+    if (write())
     {
       for (int i = 0; i < pins.size(); i++)
       {
@@ -210,35 +148,39 @@ public class Omniport
     }
   }
 
-  public void writeAllPinsUndefined()
+  public void unset()
   {
+    state = NotSet;
     for (int i = 0; i < pins.size(); i++)
     {
-      pins.set(i, Undefined);
+      pins.set(i, Unsettled);
     }
   }
 
-  public void writeAllPinsError()
+  public void error()
   {
+    state = NotSet;
     for (int i = 0; i < pins.size(); i++)
     {
       pins.set(i, Error);
     }
   }
 
-  public TraceValue readStates()
+  public TraceValue read()
   {
-    if (state == NotSet)
+    if (state.isNotSet())
     {
       state = Input;
     }
 
-    if (state == Input)
+    if (state.isInput())
     {
       boolean high = false;
       boolean low = false;
       boolean error = false;
-      boolean undefined = false;
+      boolean unsettled = false;
+      boolean connected = false;
+
       int length = pins.size();
       for (int i = 0; i < length; i++)
       {
@@ -248,19 +190,20 @@ public class Omniport
         {
           value = connection.getValue();
           pins.set(i, value);
+          connected = true;
         }
         else
         {
-          value = Undefined;
+          value = NotConnected;
         }
 
         if (value.isError())
         {
           error = true;
         }
-        else if (value.isUndefined())
+        else if (value.isUnsettled())
         {
-          undefined = true;
+          unsettled = true;
         }
         else if (value.isHigh())
         {
@@ -272,30 +215,7 @@ public class Omniport
         }
       }
 
-      if (error)
-      {
-        return Error;
-      }
-      else if (undefined)
-      {
-        return Undefined;
-      }
-      else if (high && low)
-      {
-        return HighAndLow;
-      }
-      else if (high)
-      {
-        return High;
-      }
-      else if (low)
-      {
-        return Low;
-      }
-      else
-      {
-        return Undefined;
-      }
+      return translatePortValue(high, low, error, unsettled, connected);
     }
     else
     {
@@ -303,15 +223,26 @@ public class Omniport
     }
   }
 
-  public boolean writeState()
+  public boolean write()
   {
-    if (state == NotSet)
+    if (state.isNotSet())
     {
       state = Output;
     }
 
-    return state == Output;
+    return state.isOutput();
   }
+
+  public boolean highImpedance()
+  {
+    if (state.isNotSet())
+    {
+      state = Impedance;
+    }
+
+    return state.isImpedance();
+  }
+
 
   public String getStringValue()
   {

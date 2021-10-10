@@ -73,7 +73,7 @@ public class Trace
     }
     else
     {
-      return TraceValue.Undefined;
+      return TraceValue.Unsettled;
     }
   }
 

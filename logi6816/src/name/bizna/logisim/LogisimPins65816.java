@@ -40,12 +40,12 @@ public class LogisimPins65816
       }
       else if (portValue.isErrorValue())
       {
-        writeAllPinsError();
+        setAllOutputsError();
         return 0;
       }
       else if (portValue.isUnknown())
       {
-        writeAllPinsUndefined();
+        setAllOutputsUnknown();
         return 0;
       }
       else
@@ -132,7 +132,7 @@ public class LogisimPins65816
   }
 
   @Override
-  public void writeAllPinsUndefined()
+  public void setAllOutputsUnknown()
   {
     instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
     instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
@@ -147,7 +147,7 @@ public class LogisimPins65816
   }
 
   @Override
-  public void writeAllPinsError()
+  public void setAllOutputsError()
   {
     instanceState.setPort(PORT_AddressBus, Value.createError(BitWidth.create(16)), 12);
     instanceState.setPort(PORT_DataBus, Value.createError(BitWidth.create(8)), 12);

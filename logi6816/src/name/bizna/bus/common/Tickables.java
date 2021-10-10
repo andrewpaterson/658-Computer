@@ -1,6 +1,6 @@
 package name.bizna.bus.common;
 
-import name.bizna.bus.logic.Tickable;
+import name.bizna.bus.gate.Tickable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Tickables
   public Tickables()
   {
     this.tickables = new ArrayList<>();
-    this.debug = true;
+    this.debug = false;
   }
 
   public void add(Tickable tickable)

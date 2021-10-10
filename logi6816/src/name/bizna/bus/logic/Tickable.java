@@ -63,7 +63,7 @@ public abstract class Tickable
   {
     for (Port port : ports)
     {
-      port.resetConnection();
+      port.resetConnections();
     }
   }
 

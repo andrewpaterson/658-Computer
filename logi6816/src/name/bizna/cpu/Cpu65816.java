@@ -27,16 +27,16 @@ public class Cpu65816
   protected static OpCode fetchNextOpcode;
 
   // Status register
-  boolean zeroFlag;
-  boolean negativeFlag;
-  boolean decimalFlag;
-  boolean interruptDisableFlag;
-  boolean accumulatorWidthFlag;
-  boolean indexWidthFlag;
-  boolean carryFlag;
-  boolean emulationFlag;
-  boolean overflowFlag;
-  boolean breakFlag;
+  protected boolean zeroFlag;
+  protected boolean negativeFlag;
+  protected boolean decimalFlag;
+  protected boolean interruptDisableFlag;
+  protected boolean accumulatorWidthFlag;
+  protected boolean indexWidthFlag;
+  protected boolean carryFlag;
+  protected boolean emulationFlag;
+  protected boolean overflowFlag;
+  protected boolean breakFlag;
 
   // Registers
   protected int accumulator;
@@ -486,18 +486,6 @@ public class Cpu65816
   public void nextCycle()
   {
     cycle++;
-  }
-
-  public int getPinData()
-  {
-    if (pins.getPhi2())
-    {
-      return pins.getData();
-    }
-    else
-    {
-      throw new EmulatorException("Cannot get Data from pins when clock is low.");
-    }
   }
 
   public int getCycle()
@@ -1955,6 +1943,69 @@ public class Cpu65816
       b = isBreak() ? "B1 " : "B0 ";
     }
     return z + n + d + i + m + x + c + e + o + b;
+  }
+
+  public CpuSnapshot createCpuSnapshot()
+  {
+    return new CpuSnapshot(zeroFlag,
+                           negativeFlag,
+                           decimalFlag,
+                           interruptDisableFlag,
+                           accumulatorWidthFlag,
+                           indexWidthFlag,
+                           carryFlag,
+                           emulationFlag,
+                           overflowFlag,
+                           breakFlag,
+                           accumulator,
+                           xIndex,
+                           yIndex,
+                           dataBank,
+                           directPage,
+                           new Address(programAddress),
+                           stackPointer,
+                           previousClock,
+                           cycle,
+                           opCode,
+                           stopped,
+                           new Address(address),
+                           data,
+                           directOffset,
+                           new Address(newProgramCounter),
+                           read);
+  }
+
+  public void restoreCpuFromSnapshot(CpuSnapshot snapshot)
+  {
+    zeroFlag = snapshot.zeroFlag;
+    negativeFlag = snapshot.negativeFlag;
+    decimalFlag = snapshot.decimalFlag;
+    interruptDisableFlag = snapshot.interruptDisableFlag;
+    accumulatorWidthFlag = snapshot.accumulatorWidthFlag;
+    indexWidthFlag = snapshot.indexWidthFlag;
+    carryFlag = snapshot.carryFlag;
+    emulationFlag = snapshot.emulationFlag;
+    overflowFlag = snapshot.overflowFlag;
+    breakFlag = snapshot.breakFlag;
+
+    accumulator = snapshot.accumulator;
+    xIndex = snapshot.xIndex;
+    yIndex = snapshot.yIndex;
+    dataBank = snapshot.dataBank;
+    directPage = snapshot.directPage;
+    programAddress = snapshot.programAddress;
+    stackPointer = snapshot.stackPointer;
+
+    previousClock = snapshot.previousClock;
+    cycle = snapshot.cycle;
+    opCode = snapshot.opCode;
+    stopped = snapshot.stopped;
+
+    address = snapshot.address;
+    data = snapshot.data;
+    directOffset = snapshot.directOffset;
+    newProgramCounter = snapshot.newProgramCounter;
+    read = snapshot.read;
   }
 
   public void dump()

@@ -33,31 +33,30 @@ public class OrGate
 
   public void propagate()
   {
-    TraceValue outputValue = Undefined;
+    TraceValue outputValue;
     if (in.size() > 0)
     {
-      for (Uniport trace : in)
+      outputValue = Low;
+      for (Uniport input : in)
       {
-        TraceValue value = trace.readState();
+        TraceValue value = input.readState();  //Always read all the traces.  Undefined is not connected.
         if (value == Error)
         {
           outputValue = Error;
-          break;
         }
-        if (value == Undefined)
+
+        if (!outputValue.isError())
         {
-          outputValue = Undefined;
-          break;
-        }
-        if (value == High)
-        {
-          outputValue = High;
-        }
-        else if ((value == Low) && (outputValue == Undefined))
-        {
-          outputValue = Low;
+          if (value == High)
+          {
+            outputValue = High;
+          }
         }
       }
+    }
+    else
+    {
+      outputValue = Undefined;
     }
 
     out.writeState(outputValue);

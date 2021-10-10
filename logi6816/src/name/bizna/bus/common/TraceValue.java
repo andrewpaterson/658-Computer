@@ -17,6 +17,14 @@ public enum TraceValue
            this == TraceValue.Low;
   }
 
+  public boolean isValidOrUndefined()
+  {
+    return this == TraceValue.HighAndLow ||
+           this == TraceValue.High ||
+           this == TraceValue.Low ||
+           this == TraceValue.Undefined;
+  }
+
   public boolean isInvalid()
   {
     return this == TraceValue.Undefined ||

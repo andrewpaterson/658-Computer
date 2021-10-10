@@ -5,6 +5,6 @@ public enum TransmissionState
   Input,
   Output,
   Impedance,
-  Undefined,
+  NotSet,
 }
 

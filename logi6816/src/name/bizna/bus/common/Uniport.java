@@ -7,27 +7,26 @@ import java.util.List;
 
 import static name.bizna.bus.common.TraceValue.Undefined;
 import static name.bizna.bus.common.TraceValue.fromBoolean;
+import static name.bizna.bus.common.TransmissionState.*;
 
 public class Uniport
     extends Port
 {
-  protected TransmissionState state;
-
   protected TraceValue value;
   protected Trace connection;
 
   public Uniport(Tickable tickable, String name)
   {
     super(tickable, name);
-    state = TransmissionState.Undefined;
     value = Undefined;
   }
 
   @Override
-  public void startPropagation()
+  public void resetConnections()
   {
-    state = TransmissionState.Undefined;
+    state = NotSet;
     value = Undefined;
+    connection.getNet().reset();
   }
 
   @Override
@@ -45,13 +44,6 @@ public class Uniport
     }
   }
 
-  @Override
-  public void resetConnection()
-  {
-    value = Undefined;
-    connection.getNet().reset();
-  }
-
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
   public boolean readBool()
   {
@@ -66,12 +58,12 @@ public class Uniport
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
   public TraceValue readState()
   {
-    if (state == TransmissionState.Undefined)
+    if (state == NotSet)
     {
-      state = TransmissionState.Input;
+      state = Input;
     }
 
-    if (state == TransmissionState.Input)
+    if (state == Input)
     {
       if (connection != null)
       {
@@ -92,15 +84,14 @@ public class Uniport
   //A write is only done by the Tickable the Port exists in and causes the port ot be set as an output.
   public void writeBool(boolean value)
   {
-    if (state == TransmissionState.Undefined)
+    if (state == NotSet)
     {
-      state = TransmissionState.Output;
+      state = Output;
     }
 
-    if (state == TransmissionState.Output)
+    if (state == Output)
     {
       this.value = fromBoolean(value);
-      ;
     }
     else
     {
@@ -110,12 +101,12 @@ public class Uniport
 
   public void writeState(TraceValue value)
   {
-    if (state == TransmissionState.Undefined)
+    if (state == NotSet)
     {
-      state = TransmissionState.Output;
+      state = Output;
     }
 
-    if (state == TransmissionState.Output)
+    if (state == Output)
     {
       this.value = value;
     }
@@ -123,6 +114,16 @@ public class Uniport
     {
       throw new EmulatorException("Cannot write to a Port that is not an output.");
     }
+  }
+
+  public boolean writeState()
+  {
+    if (state == NotSet)
+    {
+      state = Output;
+    }
+
+    return state == Output;
   }
 
   public void connect(Trace trace)

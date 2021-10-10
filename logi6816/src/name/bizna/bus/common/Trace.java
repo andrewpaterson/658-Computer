@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Trace
 {
-  protected List<Trace> connections;
+  protected List<Trace> connections;  //Only Trace connections, not Ports.
   protected TraceNet net;
 
   public Trace()

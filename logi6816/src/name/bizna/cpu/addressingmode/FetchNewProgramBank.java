@@ -1,6 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Pins65816;
 
 public class FetchNewProgramBank
     extends DataOperation
@@ -13,7 +14,8 @@ public class FetchNewProgramBank
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setNewProgramCounterBank(cpu.getPinData());
+    Pins65816 pins = cpu.getPins();
+    cpu.setNewProgramCounterBank(pins.getData());
   }
 
   @Override

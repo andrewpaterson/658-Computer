@@ -11,7 +11,6 @@ public class NotGate
   protected Uniport in;
   protected Uniport out;
 
-  protected boolean previousValue;
 
   public NotGate(Tickables tickables, String name, Trace inTrace, Trace outTrace)
   {
@@ -33,7 +32,6 @@ public class NotGate
 
     boolean calculatedValue = !inValue.isHigh();
     out.writeBool(calculatedValue);
-    this.previousValue = calculatedValue;
   }
 
   @Override

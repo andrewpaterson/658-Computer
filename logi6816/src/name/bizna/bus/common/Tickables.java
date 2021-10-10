@@ -13,7 +13,7 @@ public class Tickables
   public Tickables()
   {
     this.tickables = new ArrayList<>();
-    this.debug = false;
+    this.debug = true;
   }
 
   public void add(Tickable tickable)
@@ -61,7 +61,7 @@ public class Tickables
     }
     while (!settled);
 
-    debugLog("-----------------------------");
+    debugLog("------ Settled in [" + count + "] iterations. ------");
     for (Tickable tickable : tickables)
     {
       if (debug)

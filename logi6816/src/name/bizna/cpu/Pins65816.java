@@ -1,5 +1,10 @@
 package name.bizna.cpu;
 
+import name.bizna.util.EmulatorException;
+
+import static name.bizna.bus.common.TraceValue.Error;
+import static name.bizna.bus.common.TraceValue.Undefined;
+
 public interface Pins65816
 {
   void setAddress(int address);
@@ -28,8 +33,6 @@ public interface Pins65816
 
   boolean isBusEnable();
 
-  boolean isPhi2();
-
   boolean isIrqB();
 
   boolean isNmiB();
@@ -39,5 +42,9 @@ public interface Pins65816
   boolean isResetB();
 
   void setCpu(Cpu65816 cpu);
+
+  void writeAllPinsUndefined();
+
+  void writeAllPinsError();
 }
 

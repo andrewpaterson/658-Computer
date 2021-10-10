@@ -8,6 +8,7 @@ import name.bizna.bus.common.Uniport;
 import java.util.ArrayList;
 import java.util.List;
 
+import static name.bizna.bus.common.TraceValue.Error;
 import static name.bizna.bus.common.TraceValue.*;
 
 public class AndGate
@@ -32,31 +33,30 @@ public class AndGate
 
   public void propagate()
   {
-    TraceValue outputValue = Undefined;
+    TraceValue outputValue;
     if (in.size() > 0)
     {
-      for (Uniport trace : in)
+      outputValue = High;
+      for (Uniport input : in)
       {
-        TraceValue value = trace.readState();
+        TraceValue value = input.readState();  //Always read all the traces.
         if (value == Error)
         {
           outputValue = Error;
-          break;
         }
-        if (value == Undefined)
+
+        if (!outputValue.isError())
         {
-          outputValue = Undefined;
-          break;
-        }
-        if (value == Low)
-        {
-          outputValue = Low;
-        }
-        else if ((value == High) && (outputValue == Undefined))
-        {
-          outputValue = High;
+          if (value == Low)
+          {
+            outputValue = Low;
+          }
         }
       }
+    }
+    else
+    {
+      outputValue = Undefined;
     }
 
     out.writeState(outputValue);

@@ -8,6 +8,7 @@ import java.util.List;
 
 import static name.bizna.bus.common.TraceValue.Error;
 import static name.bizna.bus.common.TraceValue.*;
+import static name.bizna.bus.common.TransmissionState.*;
 
 public class Omniport
     extends Port
@@ -20,7 +21,7 @@ public class Omniport
   public Omniport(Tickable tickable, String name, int width)
   {
     super(tickable, name);
-    state = TransmissionState.Undefined;
+    state = NotSet;
     connections = new ArrayList<>();
     pins = new ArrayList<>(width);
 
@@ -31,12 +32,19 @@ public class Omniport
     }
   }
 
-  public void startPropagation()
+  public void resetConnections()
   {
-    state = TransmissionState.Undefined;
-    for (int i = 0; i < pins.size(); i++)
+    state = NotSet;
+
+    int length = pins.size();
+    for (int i = 0; i < length; i++)
     {
-      this.pins.set(i, Undefined);
+      pins.set(i, Undefined);
+      Trace trace = connections.get(i);
+      if (trace != null)
+      {
+        trace.getNet().reset();
+      }
     }
   }
 
@@ -62,31 +70,16 @@ public class Omniport
     }
   }
 
-  @Override
-  public void resetConnection()
-  {
-    int length = pins.size();
-    for (int i = 0; i < length; i++)
-    {
-      pins.set(i, Undefined);
-      Trace trace = connections.get(i);
-      if (trace != null)
-      {
-        trace.getNet().reset();
-      }
-    }
-  }
-
   public TraceValue readSinglePinState(int pin)
   {
     if (pin >= 0 && pin < pins.size())
     {
-      if (state == TransmissionState.Undefined)
+      if (state == NotSet)
       {
-        state = TransmissionState.Input;
+        state = Input;
       }
 
-      if (state == TransmissionState.Input)
+      if (state == Input)
       {
         Trace connection = connections.get(pin);
         TraceValue value;
@@ -115,7 +108,7 @@ public class Omniport
 
   public long getPinsAsBoolAfterRead()
   {
-    if (state == TransmissionState.Input)
+    if (state == Input)
     {
       long value = 0;
       for (int i = pins.size() - 1; i >= 0; i--)
@@ -128,7 +121,7 @@ public class Omniport
         }
         else if (traceValue.isInvalid())
         {
-          throw new EmulatorException("Cannot read a boolean value from a Port that has invalid state.");
+          throw new EmulatorException("Cannot read a boolean value from Port [" + name + "] that has invalid state [" + traceValue + "] in [" + tickable.getDescription() + "] .");
         }
       }
       return value;
@@ -143,12 +136,12 @@ public class Omniport
   {
     if (pin >= 0 && pin < pins.size())
     {
-      if (state == TransmissionState.Undefined)
+      if (state == NotSet)
       {
-        state = TransmissionState.Output;
+        state = Output;
       }
 
-      if (state == TransmissionState.Output)
+      if (state == Output)
       {
         pins.set(pin, value);
       }
@@ -165,12 +158,12 @@ public class Omniport
 
   public void writeAllPinsBool(long longValue)
   {
-    if (state == TransmissionState.Undefined)
+    if (state == NotSet)
     {
-      state = TransmissionState.Output;
+      state = Output;
     }
 
-    if (state == TransmissionState.Output)
+    if (state == Output)
     {
       for (int i = 0; i < pins.size(); i++)
       {
@@ -235,12 +228,12 @@ public class Omniport
 
   public TraceValue readStates()
   {
-    if (state == TransmissionState.Undefined)
+    if (state == NotSet)
     {
-      state = TransmissionState.Input;
+      state = Input;
     }
 
-    if (state == TransmissionState.Input)
+    if (state == Input)
     {
       boolean high = false;
       boolean low = false;
@@ -308,6 +301,16 @@ public class Omniport
     {
       throw new EmulatorException("Cannot read from a Port that is not an input.");
     }
+  }
+
+  public boolean writeState()
+  {
+    if (state == NotSet)
+    {
+      state = Output;
+    }
+
+    return state == Output;
   }
 
   public String getStringValue()

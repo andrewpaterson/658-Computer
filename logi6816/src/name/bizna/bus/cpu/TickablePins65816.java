@@ -3,7 +3,9 @@ package name.bizna.bus.cpu;
 import name.bizna.bus.common.*;
 import name.bizna.bus.logic.Tickable;
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.CpuSnapshot;
 import name.bizna.cpu.Pins65816;
+import name.bizna.util.EmulatorException;
 
 @SuppressWarnings({"FieldMayBeFinal"})
 public class TickablePins65816
@@ -11,6 +13,7 @@ public class TickablePins65816
     implements Pins65816
 {
   private Cpu65816 cpu;
+  private CpuSnapshot snapshot;
 
   protected final Omniport addressBus;
   protected final Omniport dataBus;
@@ -82,12 +85,56 @@ public class TickablePins65816
     this.validProgramAddress.connect(validProgramAddress);
     this.validDataAddress.connect(validDataAddress);
     this.mx.connect(mx);
+
+    snapshot = null;
   }
 
   @Override
   public void propagate()
   {
-    cpu.tick();
+    TraceValue clockValue = clock.readState();
+    TraceValue abortBValue = abortB.readState();
+    TraceValue busEnableValue = busEnable.readState();
+    TraceValue irqbValue = irqB.readState();
+    TraceValue nmibValue = nmiB.readState();
+    TraceValue resetBValue = resetB.readState();
+
+    boolean rwbState = rwb.writeState();
+    boolean addressState = addressBus.writeState();
+    boolean rdyState = rdy.writeState();
+    boolean emulationState = emulation.writeState();
+    boolean memoryLockBState = memoryLockB.writeState();
+    boolean vectorPullBState = vectorPullB.writeState();
+    boolean validProgramAddressState = validProgramAddress.writeState();
+    boolean validDataAddressState = validDataAddress.writeState();
+    boolean mxState = mx.writeState();
+
+    if (clockValue.isValid() &&
+        abortBValue.isValidOrUndefined() &&
+        busEnableValue.isValidOrUndefined() &&
+        irqbValue.isValidOrUndefined() &&
+        nmibValue.isValidOrUndefined() &&
+        resetBValue.isValidOrUndefined())
+    {
+      cpu.tick();
+    }
+    else if (clockValue.isError() ||
+             abortBValue.isError() ||
+             busEnableValue.isError() ||
+             irqbValue.isError() ||
+             nmibValue.isError() ||
+             resetBValue.isError())
+    {
+      writeAllPinsError();
+    }
+    else if (clockValue.isUndefined())
+    {
+      writeAllPinsUndefined();
+    }
+    else
+    {
+      throw new EmulatorException("Cannot tick CPU with pins in unexpected state combination.");
+    }
   }
 
   @Override
@@ -112,11 +159,29 @@ public class TickablePins65816
   {
     if (cpu.isRead())
     {
-      return (int) dataBus.getPinsAsBoolAfterRead();
+      TraceValue traceValue = dataBus.readStates();
+      if (traceValue.isValid())
+      {
+        return (int) dataBus.getPinsAsBoolAfterRead();
+      }
+      else if (traceValue.isError())
+      {
+        writeAllPinsError();
+        return 0;
+      }
+      else if (traceValue.isUndefined())
+      {
+        writeAllPinsUndefined();
+        return 0;
+      }
+      else
+      {
+        throw new EmulatorException("Cannot getData from pins in unknown state.");
+      }
     }
     else
     {
-      return 0;
+      throw new EmulatorException("Cannot getData from pins in Write Mode.");
     }
   }
 
@@ -193,12 +258,6 @@ public class TickablePins65816
   }
 
   @Override
-  public boolean isPhi2()
-  {
-    return clock.readBool();
-  }
-
-  @Override
   public boolean isIrqB()
   {
     return irqB.readBool();
@@ -214,6 +273,54 @@ public class TickablePins65816
   public boolean isResetB()
   {
     return resetB.readBool();
+  }
+
+  @Override
+  public void startPropagation()
+  {
+    snapshot = cpu.createCpuSnapshot();
+  }
+
+  @Override
+  public void donePropagation()
+  {
+    snapshot = null;
+  }
+
+  @Override
+  public void undoPropagation()
+  {
+    cpu.restoreCpuFromSnapshot(snapshot);
+  }
+
+  @Override
+  public void writeAllPinsUndefined()
+  {
+    rwb.writeState(TraceValue.Undefined);
+    addressBus.writeAllPinsUndefined();
+    dataBus.writeAllPinsUndefined();
+    rdy.writeState(TraceValue.Undefined);
+    emulation.writeState(TraceValue.Undefined);
+    memoryLockB.writeState(TraceValue.Undefined);
+    vectorPullB.writeState(TraceValue.Undefined);
+    validProgramAddress.writeState(TraceValue.Undefined);
+    validDataAddress.writeState(TraceValue.Undefined);
+    mx.writeState(TraceValue.Undefined);
+  }
+
+  @Override
+  public void writeAllPinsError()
+  {
+    rwb.writeState(TraceValue.Error);
+    addressBus.writeAllPinsError();
+    dataBus.writeAllPinsError();
+    rdy.writeState(TraceValue.Error);
+    emulation.writeState(TraceValue.Error);
+    memoryLockB.writeState(TraceValue.Error);
+    vectorPullB.writeState(TraceValue.Error);
+    validProgramAddress.writeState(TraceValue.Error);
+    validDataAddress.writeState(TraceValue.Error);
+    mx.writeState(TraceValue.Error);
   }
 }
 

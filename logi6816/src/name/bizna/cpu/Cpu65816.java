@@ -306,11 +306,11 @@ public class Cpu65816
     if (clockFallingEdge)
     {
       cycles.executeOnFallingEdge(this);
+      nextCycle();
     }
     if (clockRisingEdge)
     {
       cycles.executeOnRisingEdge(this);
-      nextCycle();
     }
   }
 

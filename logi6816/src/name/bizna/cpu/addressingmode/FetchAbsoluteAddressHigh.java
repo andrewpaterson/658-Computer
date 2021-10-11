@@ -13,8 +13,7 @@ public class FetchAbsoluteAddressHigh
   @Override
   public void execute(Cpu65816 cpu)
   {
-    int data = cpu.getPins().getData();
-    cpu.setAddressHigh(data);
+    cpu.setAddressHigh(cpu.getPins().getData());
   }
 
   @Override

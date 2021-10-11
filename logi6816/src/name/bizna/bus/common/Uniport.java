@@ -56,28 +56,34 @@ public class Uniport
     }
     else
     {
-      throw new EmulatorException("Cannot read boolean value before port is set to Input.  Call and check the value of readState().");
+      throw new EmulatorException("Cannot read a boolean value from Port [" + getDescription() + "] that has an invalid value [" + pin.toEnumString() + "].");
     }
   }
 
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
   public TraceValue read()
   {
-    state = Input;
-
-    if (wire != null)
+    if (state.isNotSet())
     {
-      pin = wire.getValue();
+      state = Input;
+    }
+
+    if (state.isInput())
+    {
+      if (wire != null)
+      {
+        pin = wire.getValue();
+      }
+      else
+      {
+        pin = NotConnected;
+      }
+      return pin;
     }
     else
     {
-      pin = NotConnected;
+      throw new EmulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
-    return pin;
-//    else
-//    {
-//      throw new EmulatorException("Cannot read from a Port that is not an input.");
-//    }
   }
 
   @Override
@@ -91,12 +97,19 @@ public class Uniport
   //A write is only done by the Tickable the Port exists in and causes the port ot be set as an output.
   public void writeBool(boolean value)
   {
-    state = Output;
-    pin = fromBoolean(value);
-//    else
-//    {
-//      throw new EmulatorException("Cannot write to a Port that is not an output.");
-//    }
+    if (state.isNotSet())
+    {
+      state = Output;
+    }
+
+    if (state.isOutput())
+    {
+      pin = fromBoolean(value);
+    }
+    else
+    {
+      throw new EmulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+    }
   }
 
   public void unset()

@@ -77,15 +77,15 @@ public class Omniport
       long value = 0;
       for (int i = pins.size() - 1; i >= 0; i--)
       {
-        TraceValue traceValue = pins.get(i);
+        TraceValue pin = pins.get(i);
         value <<= 1;
-        if (traceValue.isHigh())
+        if (pin.isHigh())
         {
           value |= 1;
         }
-        else if (traceValue.isInvalid())
+        else if (pin.isInvalid())
         {
-          throw new EmulatorException("Cannot read a boolean value from Port [" + getDescription() + "] that has an invalid value [" + traceValue + "].");
+          throw new EmulatorException("Cannot read a boolean value from Port [" + getDescription() + "] that has an invalid value [" + pin.toEnumString() + "].");
         }
       }
       return value;
@@ -98,22 +98,28 @@ public class Omniport
 
   public void writeAllPinsBool(long longValue)
   {
-    state = Output;
-    for (int i = 0; i < pins.size(); i++)
+    if (state.isNotSet())
     {
-      TraceValue value = Low;
-      if ((longValue >> i & 1) == 1)
-      {
-        value = High;
-      }
-
-      pins.set(i, value);
+      state = Output;
     }
 
-//    else
-//    {
-//      throw new EmulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-//    }
+    if (state.isOutput())
+    {
+      for (int i = 0; i < pins.size(); i++)
+      {
+        TraceValue value = Low;
+        if ((longValue >> i & 1) == 1)
+        {
+          value = High;
+        }
+
+        pins.set(i, value);
+      }
+    }
+    else
+    {
+      throw new EmulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+    }
   }
 
   public void connect(Bus bus)
@@ -164,53 +170,59 @@ public class Omniport
 
   public TraceValue read()
   {
-    boolean high = false;
-    boolean low = false;
-    boolean error = false;
-    boolean unsettled = false;
-    boolean connected = false;
-
-    state = Input;
-
-    int length = pins.size();
-    for (int i = 0; i < length; i++)
+    if (state.isNotSet())
     {
-      Trace connection = wires.get(i);
-      TraceValue value;
-      if (connection != null)
-      {
-        value = connection.getValue();
-        pins.set(i, value);
-        connected = true;
-      }
-      else
-      {
-        value = NotConnected;
-      }
-
-      if (value.isError())
-      {
-        error = true;
-      }
-      else if (value.isUnsettled())
-      {
-        unsettled = true;
-      }
-      else if (value.isHigh())
-      {
-        high = true;
-      }
-      else if (value.isLow())
-      {
-        low = true;
-      }
+      state = Input;
     }
 
-    return translatePortValue(high, low, error, unsettled, connected);
-//    else
-//    {
-//      throw new EmulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-//    }
+    if (state.isInput())
+    {
+      boolean high = false;
+      boolean low = false;
+      boolean error = false;
+      boolean unsettled = false;
+      boolean connected = false;
+
+      int length = pins.size();
+      for (int i = 0; i < length; i++)
+      {
+        Trace connection = wires.get(i);
+        TraceValue value;
+        if (connection != null)
+        {
+          value = connection.getValue();
+          pins.set(i, value);
+          connected = true;
+        }
+        else
+        {
+          value = NotConnected;
+        }
+
+        if (value.isError())
+        {
+          error = true;
+        }
+        else if (value.isUnsettled())
+        {
+          unsettled = true;
+        }
+        else if (value.isHigh())
+        {
+          high = true;
+        }
+        else if (value.isLow())
+        {
+          low = true;
+        }
+      }
+
+      return translatePortValue(high, low, error, unsettled, connected);
+    }
+    else
+    {
+      throw new EmulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+    }
   }
 
   public void highImpedance()

@@ -99,6 +99,7 @@ public class Cpu65816
     directOffset = 0;
     newProgramCounter = new Address();
     address = new Address();
+    read = true;
   }
 
   public void setX(int xIndex)
@@ -304,15 +305,10 @@ public class Cpu65816
 
     if (clockFallingEdge)
     {
-      pins.setEmulation(isEmulation());
-      pins.setMX(isMemory8Bit());
-
       cycles.executeOnFallingEdge(this);
     }
     if (clockRisingEdge)
     {
-      pins.setMX(isIndex8Bit());
-
       cycles.executeOnRisingEdge(this);
       nextCycle();
     }

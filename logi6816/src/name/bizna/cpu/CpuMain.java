@@ -18,7 +18,7 @@ public class CpuMain
 {
   public static void main(String[] args)
   {
-    Tickables tickables = new Tickables(true);
+    Tickables tickables = new Tickables();
 
     Bus addressBus = new Bus(16);
     Bus dataAndBankMultiplexedBus = new Bus(8);
@@ -43,13 +43,13 @@ public class CpuMain
 
     new NotGate(tickables, "NOT Clock", clockTrace, notClockTrace);
 
-    new OrGate(tickables, "(NOT Clock) OR Read", notClockTrace, rwbTrace, readTrace);
+    new OrGate(tickables, "High Read Memory, Low Write", notClockTrace, rwbTrace, readTrace);
 
-    new NotGate(tickables, "NOT RWB", rwbTrace, notRWBTrace);
+    new NotGate(tickables, "High Write, Low Read", rwbTrace, notRWBTrace);
 
-    new Transceiver(tickables, "Pass Data block Bank", 8, dataAndBankMultiplexedBus, dataBus, notClockTrace, notRWBTrace);
+    new Transceiver(tickables, "", 8, dataAndBankMultiplexedBus, dataBus, clockTrace, notRWBTrace);
 
-    Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace,
+    Memory memory = new Memory(tickables, "", addressBus, dataBus, readTrace, clockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
     TickablePins65816 cpuPins = new TickablePins65816(tickables,

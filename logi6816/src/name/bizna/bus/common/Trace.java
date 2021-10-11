@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Trace
 {
-  protected List<Trace> connections;  //Only Trace connections, not Ports.
+  protected List<Trace> connections;  //Only connected Traces, not connected Ports.
   protected TraceNet net;
 
   public Trace()
@@ -77,9 +77,9 @@ public class Trace
     }
   }
 
-  public TraceValue updateNetValue(TraceValue value)
+  public TraceValue updateNetValue(TraceValue value, Port port)
   {
-    return net.update(value);
+    return net.update(value, port);
   }
 
   public TraceNet getNet()
@@ -97,6 +97,18 @@ public class Trace
   public char getStringValue()
   {
     return net.getValue().getStringValue();
+  }
+
+  public Port get_DEBUG_lastPortThatUpdated()
+  {
+    if (net != null)
+    {
+      return net.get_DEBUG_lastPortThatUpdated();
+    }
+    else
+    {
+      return null;
+    }
   }
 }
 

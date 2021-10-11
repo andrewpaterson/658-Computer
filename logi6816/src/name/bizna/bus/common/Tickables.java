@@ -1,19 +1,20 @@
 package name.bizna.bus.common;
 
 import name.bizna.bus.gate.Tickable;
+import name.bizna.util.EmulatorException;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static name.bizna.util.DebugUtil.debugLog;
+
 public class Tickables
 {
   protected List<Tickable> tickables;
-  protected boolean debug;
 
-  public Tickables(boolean debug)
+  public Tickables()
   {
     this.tickables = new ArrayList<>();
-    this.debug = debug;
   }
 
   public void add(Tickable tickable)
@@ -30,6 +31,7 @@ public class Tickables
     }
 
     int count = 0;
+    int afterSettleCount = 0;
     boolean settled;
     do
     {
@@ -50,32 +52,32 @@ public class Tickables
         tickable.updateConnections();
         List<TraceValue> newTraceValues = tickable.getTraceValues();
         settled &= areSettled(oldTraceValues, newTraceValues);
-
       }
 
       if (!settled)
       {
+        if (afterSettleCount > 0)
+        {
+          throw new EmulatorException("Settled unsettled.  Or something.");
+        }
+        afterSettleCount = 0;
         for (Tickable tickable : tickables)
         {
           tickable.undoPropagation();
         }
       }
+      else
+      {
+        afterSettleCount++;
+      }
       count++;
     }
-    while (!settled);
+    while (!settled || afterSettleCount < 3);
 
     debugLog("------ Settled in [" + count + "] iterations. ------");
     for (Tickable tickable : tickables)
     {
       tickable.donePropagation();
-    }
-  }
-
-  private void debugLog(String s)
-  {
-    if (debug)
-    {
-      System.out.println(s);
     }
   }
 

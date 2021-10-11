@@ -1,5 +1,7 @@
 package name.bizna.bus.common;
 
+import name.bizna.util.StringUtil;
+
 public enum TransmissionState
 {
   Input,
@@ -25,6 +27,11 @@ public enum TransmissionState
   public boolean isImpedance()
   {
     return this == Impedance;
+  }
+
+  public String toEnumString()
+  {
+    return StringUtil.toEnumString(this);
   }
 }
 

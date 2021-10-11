@@ -2,11 +2,14 @@ package name.bizna.bus.gate;
 
 import name.bizna.bus.common.Port;
 import name.bizna.bus.common.Tickables;
+import name.bizna.bus.common.Trace;
 import name.bizna.bus.common.TraceValue;
 import name.bizna.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class Tickable
 {
@@ -102,16 +105,41 @@ public abstract class Tickable
       String connectionValues = port.getConnectionValuesAsString();
       if (portValues.equals(connectionValues))
       {
-        stringBuilder.append(portTransmissionState).append(": P&C").append(portValues);
+        stringBuilder.append(portTransmissionState).append(": P&W").append(portValues);
       }
       else
       {
-        stringBuilder.append(portTransmissionState).append(":   P").append(portValues).append(" C");
+        stringBuilder.append(portTransmissionState).append(":   P").append(portValues).append(" W");
         stringBuilder.append(connectionValues);
       }
+      List<Trace> connections = port.getConnections();
+      Set<Port> updatingPorts = get_DEBUG_UpdatingPorts(connections);
+      if (updatingPorts.size() > 1)
+      {
+        stringBuilder.append(" (Multiple updaters)");
+      }
+      else if (updatingPorts.size() == 1)
+      {
+        stringBuilder.append(" (").append(updatingPorts.iterator().next().getDescription()).append(")");
+      }
+
       stringBuilder.append("\n");
     }
     return stringBuilder.toString();
+  }
+
+  private Set<Port> get_DEBUG_UpdatingPorts(List<Trace> connections)
+  {
+    Set<Port> updatingPorts = new LinkedHashSet<>();
+    for (Trace connection : connections)
+    {
+      Port updatingPort = connection.get_DEBUG_lastPortThatUpdated();
+      if (updatingPort != null)
+      {
+        updatingPorts.add(updatingPort);
+      }
+    }
+    return updatingPorts;
   }
 
   public abstract String getType();

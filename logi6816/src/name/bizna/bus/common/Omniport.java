@@ -13,22 +13,19 @@ import static name.bizna.bus.common.TransmissionState.*;
 public class Omniport
     extends Port
 {
-  protected TransmissionState state;
-
   protected List<TraceValue> pins;
-  protected List<Trace> connections;
+  protected List<Trace> wires;
 
   public Omniport(Tickable tickable, String name, int width)
   {
     super(tickable, name);
-    state = NotSet;
-    connections = new ArrayList<>();
+    wires = new ArrayList<>();
     pins = new ArrayList<>(width);
 
     for (int i = 0; i < width; i++)
     {
       pins.add(Unsettled);
-      connections.add(null);
+      wires.add(null);
     }
   }
 
@@ -40,7 +37,7 @@ public class Omniport
     for (int i = 0; i < length; i++)
     {
       pins.set(i, Unsettled);
-      Trace trace = connections.get(i);
+      Trace trace = wires.get(i);
       if (trace != null)
       {
         trace.getNet().reset();
@@ -63,10 +60,10 @@ public class Omniport
       for (int i = 0; i < length; i++)
       {
         TraceValue value = pins.get(i);
-        Trace connection = connections.get(i);
+        Trace connection = wires.get(i);
         if (connection != null)
         {
-          value = connection.updateNetValue(value);
+          value = connection.updateNetValue(value, this);
           pins.set(i, value);
         }
       }
@@ -88,63 +85,62 @@ public class Omniport
         }
         else if (traceValue.isInvalid())
         {
-          throw new EmulatorException("Cannot read a boolean value from Port [" + name + "] that has invalid state [" + traceValue + "] in [" + tickable.getDescription() + "] .");
+          throw new EmulatorException("Cannot read a boolean value from Port [" + getDescription() + "] that has an invalid value [" + traceValue + "].");
         }
       }
       return value;
     }
     else
     {
-      throw new EmulatorException("Cannot read from a Port that is not an input.");
+      throw new EmulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
   }
 
   public void writeAllPinsBool(long longValue)
   {
-    if (write())
+    state = Output;
+    for (int i = 0; i < pins.size(); i++)
     {
-      for (int i = 0; i < pins.size(); i++)
+      TraceValue value = Low;
+      if ((longValue >> i & 1) == 1)
       {
-        TraceValue value = Low;
-        if ((longValue >> i & 1) == 1)
-        {
-          value = High;
-        }
-
-        pins.set(i, value);
+        value = High;
       }
+
+      pins.set(i, value);
     }
-    else
-    {
-      throw new EmulatorException("Cannot write to a Port that is not an output.");
-    }
+
+//    else
+//    {
+//      throw new EmulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+//    }
   }
 
   public void connect(Bus bus)
   {
-    if (bus.getWidth() == connections.size())
+    if (bus.getWidth() == wires.size())
     {
-      for (int i = 0; i < connections.size(); i++)
+      for (int i = 0; i < wires.size(); i++)
       {
         Trace trace = bus.getTrace(i);
-        connections.set(i, trace);
+        wires.set(i, trace);
       }
     }
     else
     {
-      throw new EmulatorException("Cannot connect bus with width [" + bus.getWidth() + "] to omniport with a different width [" + connections.size() + "].");
+      throw new EmulatorException("Cannot connect Port [" + getDescription() + "] with width [" + wires.size() + "] to Bus with a different width [" + bus.getWidth() + "].");
     }
   }
 
   public void connect(Trace trace)
   {
-    if (connections.size() == 1)
+    if (wires.size() == 1)
     {
-      connections.set(0, trace);
+      wires.set(0, trace);
     }
     else
     {
-      throw new EmulatorException("Cannot connect bus with width [1] to omniport with a different width [" + connections.size() + "].");
+      throw new EmulatorException("Cannot connect Port [" + getDescription() + "] with width [" + wires.size() + "] to Bus with a different width [1].");
     }
   }
 
@@ -168,85 +164,64 @@ public class Omniport
 
   public TraceValue read()
   {
-    if (state.isNotSet())
-    {
-      state = Input;
-    }
+    boolean high = false;
+    boolean low = false;
+    boolean error = false;
+    boolean unsettled = false;
+    boolean connected = false;
 
-    if (state.isInput())
-    {
-      boolean high = false;
-      boolean low = false;
-      boolean error = false;
-      boolean unsettled = false;
-      boolean connected = false;
+    state = Input;
 
-      int length = pins.size();
-      for (int i = 0; i < length; i++)
+    int length = pins.size();
+    for (int i = 0; i < length; i++)
+    {
+      Trace connection = wires.get(i);
+      TraceValue value;
+      if (connection != null)
       {
-        Trace connection = connections.get(i);
-        TraceValue value;
-        if (connection != null)
-        {
-          value = connection.getValue();
-          pins.set(i, value);
-          connected = true;
-        }
-        else
-        {
-          value = NotConnected;
-        }
-
-        if (value.isError())
-        {
-          error = true;
-        }
-        else if (value.isUnsettled())
-        {
-          unsettled = true;
-        }
-        else if (value.isHigh())
-        {
-          high = true;
-        }
-        else if (value.isLow())
-        {
-          low = true;
-        }
+        value = connection.getValue();
+        pins.set(i, value);
+        connected = true;
+      }
+      else
+      {
+        value = NotConnected;
       }
 
-      return translatePortValue(high, low, error, unsettled, connected);
+      if (value.isError())
+      {
+        error = true;
+      }
+      else if (value.isUnsettled())
+      {
+        unsettled = true;
+      }
+      else if (value.isHigh())
+      {
+        high = true;
+      }
+      else if (value.isLow())
+      {
+        low = true;
+      }
     }
-    else
-    {
-      throw new EmulatorException("Cannot read from a Port that is not an input.");
-    }
+
+    return translatePortValue(high, low, error, unsettled, connected);
+//    else
+//    {
+//      throw new EmulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+//    }
   }
 
-  public boolean write()
+  public void highImpedance()
   {
-    if (state.isNotSet())
-    {
-      state = Output;
-    }
-
-    return state.isOutput();
-  }
-
-  public boolean highImpedance()
-  {
-    if (state.isNotSet())
-    {
-      state = Impedance;
-    }
-
-    return state.isImpedance();
+    state = Impedance;
   }
 
   @Override
   public List<Trace> getConnections()
   {
-    return connections;
+    return wires;
   }
 
   @Override
@@ -265,7 +240,7 @@ public class Omniport
   public String getConnectionValuesAsString()
   {
     StringBuilder stringBuilder = new StringBuilder();
-    for (Trace trace : connections)
+    for (Trace trace : wires)
     {
       char c;
       if (trace != null)

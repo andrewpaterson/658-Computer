@@ -29,18 +29,34 @@ public abstract class DataOperation
     return true;
   }
 
-  public void setPins(Cpu65816 cpu)
+  public boolean isRead()
   {
-    Pins65816 pins = cpu.getPins();
+    return read;
+  }
 
-    cpu.setRead(read);
-    pins.setRwb(read);
-    pins.setValidDataAddress(validDataAddress);
-    pins.setValidProgramAddress(validProgramAddress);
-    pins.setMemoryLockB(notMemoryLock);
-    pins.setVectorPullB(notVectorPull);
+  public boolean isValidProgramAddress()
+  {
+    return validProgramAddress;
+  }
 
-    pins.setRdy(ready);
+  public boolean isValidDataAddress()
+  {
+    return validDataAddress;
+  }
+
+  public boolean isNotMemoryLock()
+  {
+    return notMemoryLock;
+  }
+
+  public boolean isNotVectorPull()
+  {
+    return notVectorPull;
+  }
+
+  public boolean isReady()
+  {
+    return ready;
   }
 }
 

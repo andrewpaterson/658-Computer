@@ -11,7 +11,13 @@ public class Transceiver
   protected Uniport outputEnableB;
   protected Uniport dir;
 
-  public Transceiver(Tickables tickables, String name, int width, Bus aBus, Bus bBus, Trace outputEnabledBTrace, Trace dirTrace)
+  public Transceiver(Tickables tickables,
+                     String name,
+                     int width,
+                     Bus aBus,
+                     Bus bBus,
+                     Trace outputEnabledBTrace,
+                     Trace dirTrace)
   {
     super(tickables, name);
     this.aPort = new Omniport(this, "A", width);
@@ -43,13 +49,13 @@ public class Transceiver
       return;
     }
 
-    if (dirValue.isLow())  //A -> B
-    {
-      transmit(outputEnabledBValue, aPort, bPort);
-    }
-    else if (dirValue.isHigh())  //B -> A
+    if (dirValue.isLow())  //B -> A
     {
       transmit(outputEnabledBValue, bPort, aPort);
+    }
+    else if (dirValue.isHigh())  //A -> B
+    {
+      transmit(outputEnabledBValue, aPort, bPort);
     }
     else
     {
@@ -69,10 +75,6 @@ public class Transceiver
     }
     else if (outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow())
     {
-      output.highImpedance();
-    }
-    else if (outputEnabledBValue.isHigh())
-    {
       TraceValue readValue = input.read();
       if (readValue.isError() || readValue.isNotConnected())
       {
@@ -87,6 +89,10 @@ public class Transceiver
         long value = input.getPinsAsBoolAfterRead();
         output.writeAllPinsBool(value);
       }
+    }
+    else if (outputEnabledBValue.isHigh())
+    {
+      output.highImpedance();
     }
     else
     {

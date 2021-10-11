@@ -1,5 +1,7 @@
 package name.bizna.bus.common;
 
+import name.bizna.util.StringUtil;
+
 public enum TraceValue
 {
   High,
@@ -86,6 +88,11 @@ public enum TraceValue
   public boolean isNotConnected()
   {
     return this == NotConnected;
+  }
+
+  public String toEnumString()
+  {
+    return StringUtil.toEnumString(this);
   }
 }
 

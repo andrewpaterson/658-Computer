@@ -1,7 +1,6 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Pins65816;
 
 public class FetchDirectOffset
     extends DataOperation
@@ -14,10 +13,8 @@ public class FetchDirectOffset
   @Override
   public void execute(Cpu65816 cpu)
   {
-    Pins65816 pins = cpu.getPins();
-    cpu.setDirectOffset(pins.getData());
+    cpu.setDirectOffset(cpu.getPins().getData());
   }
-
 
   @Override
   public String toString()

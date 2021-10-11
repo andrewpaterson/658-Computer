@@ -13,37 +13,37 @@ import static name.bizna.bus.common.TransmissionState.*;
 public class Uniport
     extends Port
 {
-  protected TraceValue value;
-  protected Trace connection;
+  protected TraceValue pin;
+  protected Trace wire;
 
   public Uniport(Tickable tickable, String name)
   {
     super(tickable, name);
-    value = Unsettled;
+    pin = Unsettled;
   }
 
   @Override
   public void resetConnections()
   {
     super.resetConnections();
-    value = Unsettled;
-    connection.getNet().reset();
+    pin = Unsettled;
+    wire.getNet().reset();
   }
 
   @Override
   public void addTraceValues(List<TraceValue> traceValues)
   {
-    traceValues.add(value);
+    traceValues.add(pin);
   }
 
   @Override
   public void updateConnection()
   {
-    if (connection != null)
+    if (wire != null)
     {
       if (state.isOutput())
       {
-        value = connection.updateNetValue(value);
+        pin = wire.updateNetValue(pin, this);
       }
     }
   }
@@ -52,7 +52,7 @@ public class Uniport
   {
     if (state.isInput())
     {
-      return value.isHigh();
+      return pin.isHigh();
     }
     else
     {
@@ -63,89 +63,71 @@ public class Uniport
   //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
   public TraceValue read()
   {
-    if (state.isNotSet())
-    {
-      state = Input;
-    }
+    state = Input;
 
-    if (state.isInput())
+    if (wire != null)
     {
-      if (connection != null)
-      {
-        value = connection.getValue();
-      }
-      else
-      {
-        value = NotConnected;
-      }
-      return value;
+      pin = wire.getValue();
     }
     else
     {
-      throw new EmulatorException("Cannot read from a Port that is not an input.");
+      pin = NotConnected;
     }
+    return pin;
+//    else
+//    {
+//      throw new EmulatorException("Cannot read from a Port that is not an input.");
+//    }
   }
 
   @Override
   public List<Trace> getConnections()
   {
     ArrayList<Trace> connections = new ArrayList<>();
-    connections.add(connection);
+    connections.add(wire);
     return connections;
   }
 
   //A write is only done by the Tickable the Port exists in and causes the port ot be set as an output.
   public void writeBool(boolean value)
   {
-    if (write())
-    {
-      this.value = fromBoolean(value);
-    }
-    else
-    {
-      throw new EmulatorException("Cannot write to a Port that is not an output.");
-    }
-  }
-
-  public boolean write()
-  {
-    if (state.isNotSet())
-    {
-      state = Output;
-    }
-
-    return state.isOutput();
+    state = Output;
+    pin = fromBoolean(value);
+//    else
+//    {
+//      throw new EmulatorException("Cannot write to a Port that is not an output.");
+//    }
   }
 
   public void unset()
   {
     state = NotSet;
-    value = Unsettled;
+    pin = Unsettled;
   }
 
   public void error()
   {
     state = NotSet;  //Maybe?  Maybe we need an error state.
-    value = Error;
+    pin = Error;
   }
 
   public void connect(Trace trace)
   {
-    this.connection = trace;
+    this.wire = trace;
   }
 
   @Override
   public String getTraceValuesAsString()
   {
-    return "" + value.getStringValue();
+    return "" + pin.getStringValue();
   }
 
   @Override
   public String getConnectionValuesAsString()
   {
-    if (connection != null)
+    if (wire != null)
     {
-      return "" + connection.getStringValue();
+      return "" + wire.getStringValue();
     }
     else
     {

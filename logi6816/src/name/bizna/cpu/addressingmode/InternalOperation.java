@@ -18,6 +18,7 @@ public class InternalOperation
   @Override
   public void execute(Cpu65816 cpu)
   {
+    cpu.getPins().getData();
   }
 
   @Override

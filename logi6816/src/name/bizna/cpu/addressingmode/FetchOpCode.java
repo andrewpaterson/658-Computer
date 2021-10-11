@@ -1,7 +1,6 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Pins65816;
 
 public class FetchOpCode
     extends DataOperation
@@ -14,8 +13,7 @@ public class FetchOpCode
   @Override
   public void execute(Cpu65816 cpu)
   {
-    Pins65816 pins = cpu.getPins();
-    cpu.setOpCode(pins.getData());
+    cpu.setOpCode(cpu.getPins().getData());
   }
 
   @Override

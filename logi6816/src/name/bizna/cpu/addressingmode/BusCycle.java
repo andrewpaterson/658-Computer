@@ -2,8 +2,8 @@ package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Address;
 import name.bizna.cpu.Cpu65816;
-import name.bizna.util.EmulatorException;
 import name.bizna.cpu.Pins65816;
+import name.bizna.util.EmulatorException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,22 +62,47 @@ public class BusCycle
 
   public final void executeOnFallingEdge(Cpu65816 cpu)
   {
-    Address address = getAddress(cpu);
-    getDataOperation().setPins(cpu);
-
-    Pins65816 pins = cpu.getPins();
-    pins.setAddress(address.getOffset());
-    pins.setData(address.getBank());
-  }
-
-  public final void executeOnRisingEdge(Cpu65816 cpu)
-  {
-    getDataOperation().setPins(cpu);
-
+    System.out.println("BusCycle.executeOnFallingEdge");
     for (Operation operation : operations)
     {
       operation.execute(cpu);
     }
+
+    Address address = getAddress(cpu);
+    DataOperation dataOperation = getDataOperation();
+    boolean read = dataOperation.isRead();
+    cpu.setRead(read);
+
+    Pins65816 pins = cpu.getPins();
+    pins.setRwb(read);
+    pins.setValidDataAddress(dataOperation.isValidDataAddress());
+    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
+    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
+    pins.setVectorPullB(dataOperation.isNotVectorPull());
+    pins.setRdy(dataOperation.isReady());
+    pins.setMX(cpu.isMemory8Bit());
+    pins.setEmulation(cpu.isEmulation());
+    pins.setAddress(address.getOffset());
+  }
+
+  public final void executeOnRisingEdge(Cpu65816 cpu)
+  {
+    System.out.println("BusCycle.executeOnRisingEdge");
+    Address address = getAddress(cpu);
+    DataOperation dataOperation = getDataOperation();
+    boolean read = cpu.isRead();
+
+    Pins65816 pins = cpu.getPins();
+    pins.setMX(cpu.isIndex8Bit());
+    pins.setRwb(read);
+    pins.setValidDataAddress(dataOperation.isValidDataAddress());
+    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
+    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
+    pins.setVectorPullB(dataOperation.isNotVectorPull());
+    pins.setRdy(dataOperation.isReady());
+    pins.setEmulation(cpu.isEmulation());
+    pins.setAddress(address.getOffset());
+    pins.setData(address.getBank());
   }
 
   protected boolean mustExecute(Cpu65816 cpu)

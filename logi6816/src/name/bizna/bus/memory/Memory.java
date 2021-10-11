@@ -12,29 +12,33 @@ public class Memory
   protected final int size;
   protected final byte[] pvMemory;
 
-  private final Omniport addressBus;
-  private final Omniport dataBus;
-  private final Uniport rwb;
+  protected final Omniport addressBus;
+  protected final Omniport dataBus;
+  protected final Uniport rwb;
+  protected Uniport outputEnableB;
 
-  private boolean propagateWroteMemory;
-  private long oldAddress;
-  private int oldValue;
+  protected boolean propagateWroteMemory;
+  protected long oldAddress;
+  protected int oldValue;
 
   public Memory(Tickables tickables,
                 String name,
                 Bus addressBus,
                 Bus dataBus,
                 Trace rwb,
+                Trace outputEnabledBTrace,
                 byte[] bytes)
   {
     super(tickables, name);
     this.addressBus = new Omniport(this, "Address Bus", 16);
     this.dataBus = new Omniport(this, "Data Bus", 8);
     this.rwb = new Uniport(this, "RWB");
+    this.outputEnableB = new Uniport(this, "OEB");
 
     this.addressBus.connect(addressBus);
     this.dataBus.connect(dataBus);
     this.rwb.connect(rwb);
+    this.outputEnableB.connect(outputEnabledBTrace);
 
     pvMemory = new byte[bytes.length];
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
@@ -48,20 +52,28 @@ public class Memory
 
     TraceValue readState = rwb.read();
     TraceValue addressState = addressBus.read();
+    TraceValue outputEnabledBValue = outputEnableB.read();
 
-    if (readState.isError() || addressState.isError() || readState.isNotConnected() || addressState.isNotConnected())
+    if (readState.isError() || addressState.isError() || readState.isNotConnected() || addressState.isNotConnected() || outputEnabledBValue.isError())
     {
       dataBus.error();
     }
-    else if (readState.isUnsettled() || addressState.isUnsettled())
+    else if (readState.isUnsettled() || addressState.isUnsettled() || outputEnabledBValue.isUnsettled())
     {
       dataBus.unset();
     }
     else if (readState.isHigh())
     {
-      long address = addressBus.getPinsAsBoolAfterRead();
-      int data = getMemory(address);
-      dataBus.writeAllPinsBool(data);
+      if (outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow())
+      {
+        long address = addressBus.getPinsAsBoolAfterRead();
+        int data = getMemory(address);
+        dataBus.writeAllPinsBool(data);
+      }
+      else
+      {
+        dataBus.highImpedance();
+      }
     }
     else if (readState.isLow())
     {

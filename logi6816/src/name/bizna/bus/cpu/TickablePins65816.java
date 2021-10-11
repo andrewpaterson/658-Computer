@@ -99,16 +99,6 @@ public class TickablePins65816
     TraceValue nmibValue = nmiB.read();
     TraceValue resetBValue = resetB.read();
 
-    boolean rwbState = rwb.write();
-    boolean addressState = addressBus.write();
-    boolean rdyState = rdy.write();
-    boolean emulationState = emulation.write();
-    boolean memoryLockBState = memoryLockB.write();
-    boolean vectorPullBState = vectorPullB.write();
-    boolean validProgramAddressState = validProgramAddress.write();
-    boolean validDataAddressState = validDataAddress.write();
-    boolean mxState = mx.write();
-
     if (clockValue.isValid() &&
         abortBValue.isValidOrUndefined() &&
         busEnableValue.isValidOrUndefined() &&
@@ -296,7 +286,7 @@ public class TickablePins65816
   @Override
   public void setAllOutputsUnknown()
   {
-    rwb.unset();;
+    rwb.unset();
     addressBus.unset();
     dataBus.unset();
     rdy.unset();

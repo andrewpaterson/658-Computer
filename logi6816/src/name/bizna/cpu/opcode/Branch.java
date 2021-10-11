@@ -39,7 +39,7 @@ public class Branch
       actualDestination = toShort(cpu.getProgramCounter().getOffset() + 2);
     }
     Address newProgramAddress = new Address(cpu.getProgramCounter().getBank(), actualDestination);
-    cpu.setProgramAddress(newProgramAddress);
+    cpu.setProgramCounter(newProgramAddress);
     return opCycles;
   }
 }

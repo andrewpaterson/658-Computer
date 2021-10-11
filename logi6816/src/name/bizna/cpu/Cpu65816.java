@@ -44,7 +44,7 @@ public class Cpu65816
   protected int yIndex;
   protected int dataBank;
   protected int directPage;
-  protected Address programAddress;
+  protected Address programCounter;
   protected int stackPointer;
 
   protected boolean previousClock;
@@ -66,7 +66,7 @@ public class Cpu65816
     this.pins = pins;
     this.pins.setCpu(this);
 
-    programAddress = new Address(0x00, 0x0000);
+    programCounter = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
     opCodeTable = OpCodeTable.createTable();
     resetOpcode = new OpCode_RES(new StackResetCycles(new ResetVector(), Cpu65816::RES));
@@ -277,7 +277,7 @@ public class Cpu65816
 
   public Address getProgramCounter()
   {
-    return programAddress;
+    return programCounter;
   }
 
   public void tick()
@@ -383,15 +383,15 @@ public class Cpu65816
     return isOverflowFlag();
   }
 
-  public void setProgramAddress(Address address)
+  public void setProgramCounter(Address address)
   {
-    programAddress = address;
+    programCounter = address;
   }
 
   public void setProgramAddressBank(int bank)
   {
     assert8Bit(bank, "Program Address Bank");
-    programAddress.bank = bank;
+    programCounter.bank = bank;
   }
 
   public void setAddressLow(int addressLow)
@@ -518,12 +518,12 @@ public class Cpu65816
 
   public void incrementProgramAddress()
   {
-    this.programAddress.offset(1, true);
+    this.programCounter.offset(1, true);
   }
 
   public void decrementProgramCounter()
   {
-    this.programAddress.offset(-1, true);
+    this.programCounter.offset(-1, true);
   }
 
   public void incrementStackPointer()
@@ -1195,7 +1195,7 @@ public class Cpu65816
 
   public void PER()
   {
-    data = toShort(data + programAddress.getOffset());  // + Carry?
+    data = toShort(data + programCounter.getOffset());  // + Carry?
   }
 
   public void PLD()
@@ -1843,7 +1843,7 @@ public class Cpu65816
     setEmulationMode(true);
     dataBank = 0;
     directPage = 0;
-    programAddress.setBank(0);
+    programCounter.setBank(0);
     setDecimalFlag(false);
     setInterruptDisableFlag(true);
   }
@@ -1958,7 +1958,7 @@ public class Cpu65816
                            yIndex,
                            dataBank,
                            directPage,
-                           new Address(programAddress),
+                           new Address(programCounter),
                            stackPointer,
                            previousClock,
                            cycle,
@@ -1989,7 +1989,7 @@ public class Cpu65816
     yIndex = snapshot.yIndex;
     dataBank = snapshot.dataBank;
     directPage = snapshot.directPage;
-    programAddress = snapshot.programAddress;
+    programCounter = new Address(snapshot.programCounter);
     stackPointer = snapshot.stackPointer;
 
     previousClock = snapshot.previousClock;
@@ -1997,10 +1997,10 @@ public class Cpu65816
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;
 
-    address = snapshot.address;
+    address = new Address(snapshot.address);
     data = snapshot.data;
     directOffset = snapshot.directOffset;
-    newProgramCounter = snapshot.newProgramCounter;
+    newProgramCounter = new Address(snapshot.newProgramCounter);
     read = snapshot.read;
   }
 

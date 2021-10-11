@@ -11,10 +11,12 @@ import static name.bizna.util.DebugUtil.debugLog;
 public class Tickables
 {
   protected List<Tickable> tickables;
+  protected long tickCount;
 
   public Tickables()
   {
     this.tickables = new ArrayList<>();
+    this.tickCount = 0;
   }
 
   public void add(Tickable tickable)
@@ -24,6 +26,11 @@ public class Tickables
 
   public void run()
   {
+    if (tickCount == 13)
+    {
+      int xxx = 0;
+    }
+
     for (Tickable tickable : tickables)
     {
       tickable.resetConnections();
@@ -35,6 +42,7 @@ public class Tickables
     boolean settled;
     do
     {
+      debugLog("---======--- Tick [" + tickCount + "]  Start settle iteration [" + count + "] ---======---");
       if (count == 200)
       {
         break;
@@ -74,11 +82,12 @@ public class Tickables
     }
     while (!settled || afterSettleCount < 3);
 
-    debugLog("------ Settled in [" + count + "] iterations. ------");
+    debugLog("---======--- Tick [" + tickCount + "] Settled in [" + count + "] iterations. ---======---");
     for (Tickable tickable : tickables)
     {
       tickable.donePropagation();
     }
+    tickCount++;
   }
 
   private static boolean areSettled(List<TraceValue> oldTraceValues, List<TraceValue> newTraceValues)

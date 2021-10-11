@@ -18,7 +18,7 @@ public class SetProgramCounter
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setProgramAddress(AddressOffset.getAddress(cpu, addressOffsets));
+    cpu.setProgramCounter(AddressOffset.getAddress(cpu, addressOffsets));
   }
 
   @Override

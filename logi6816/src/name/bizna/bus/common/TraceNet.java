@@ -5,6 +5,8 @@ import java.util.List;
 
 import static name.bizna.bus.common.TraceValue.Error;
 import static name.bizna.bus.common.TraceValue.Unsettled;
+import static name.bizna.util.DebugUtil.debug;
+import static name.bizna.util.DebugUtil.debugLog;
 
 public class TraceNet
 {
@@ -52,10 +54,10 @@ public class TraceNet
     }
     else
     {
-//      if (debug)
-//      {
-//      debugLog("Trace conflict: [" + _DEBUG_lastPortThatUpdated.getDescription() + "] set net value [" + this.value.getStringValue() + "] but [" + port.getDescription() + "] set net value [" + value.getStringValue() + "].");
-//      }
+      if (debug)
+      {
+        debugLog("Trace conflict: [" + _DEBUG_lastPortThatUpdated.getDescription() + "] set net value [" + this.value.getStringValue() + "] but [" + port.getDescription() + "] set net value [" + value.getStringValue() + "].");
+      }
       _DEBUG_lastPortThatUpdated = port;
       this.value = Error;
       return Error;

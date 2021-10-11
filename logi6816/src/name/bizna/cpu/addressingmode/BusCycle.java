@@ -62,7 +62,6 @@ public class BusCycle
 
   public final void executeOnFallingEdge(Cpu65816 cpu)
   {
-    System.out.println("BusCycle.executeOnFallingEdge");
     for (Operation operation : operations)
     {
       operation.execute(cpu);
@@ -87,7 +86,6 @@ public class BusCycle
 
   public final void executeOnRisingEdge(Cpu65816 cpu)
   {
-    System.out.println("BusCycle.executeOnRisingEdge");
     Address address = getAddress(cpu);
     DataOperation dataOperation = getDataOperation();
     boolean read = cpu.isRead();

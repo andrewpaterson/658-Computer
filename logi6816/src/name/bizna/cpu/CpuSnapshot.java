@@ -22,7 +22,7 @@ public class CpuSnapshot
   public int yIndex;
   public int dataBank;
   public int directPage;
-  public Address programAddress;
+  public Address programCounter;
   public int stackPointer;
 
   public boolean previousClock;
@@ -37,7 +37,32 @@ public class CpuSnapshot
   public Address newProgramCounter;
   public boolean read;
 
-  public CpuSnapshot(boolean zeroFlag, boolean negativeFlag, boolean decimalFlag, boolean interruptDisableFlag, boolean accumulatorWidthFlag, boolean indexWidthFlag, boolean carryFlag, boolean emulationFlag, boolean overflowFlag, boolean breakFlag, int accumulator, int xIndex, int yIndex, int dataBank, int directPage, Address programAddress, int stackPointer, boolean previousClock, int cycle, OpCode opCode, boolean stopped, Address address, int data, int directOffset, Address newProgramCounter, boolean read)
+  public CpuSnapshot(boolean zeroFlag,
+                     boolean negativeFlag,
+                     boolean decimalFlag,
+                     boolean interruptDisableFlag,
+                     boolean accumulatorWidthFlag,
+                     boolean indexWidthFlag,
+                     boolean carryFlag,
+                     boolean emulationFlag,
+                     boolean overflowFlag,
+                     boolean breakFlag,
+                     int accumulator,
+                     int xIndex,
+                     int yIndex,
+                     int dataBank,
+                     int directPage,
+                     Address programCounter,
+                     int stackPointer,
+                     boolean previousClock,
+                     int cycle,
+                     OpCode opCode,
+                     boolean stopped,
+                     Address address,
+                     int data,
+                     int directOffset,
+                     Address newProgramCounter,
+                     boolean read)
   {
     this.zeroFlag = zeroFlag;
     this.negativeFlag = negativeFlag;
@@ -54,7 +79,7 @@ public class CpuSnapshot
     this.yIndex = yIndex;
     this.dataBank = dataBank;
     this.directPage = directPage;
-    this.programAddress = programAddress;
+    this.programCounter = programCounter;
     this.stackPointer = stackPointer;
     this.previousClock = previousClock;
     this.cycle = cycle;

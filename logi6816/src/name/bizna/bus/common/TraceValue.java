@@ -73,7 +73,7 @@ public enum TraceValue
     }
     else if (isError())
     {
-      return 'x';
+      return 'E';
     }
     return ' ';
   }

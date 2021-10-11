@@ -18,12 +18,13 @@ public class CpuMain
 {
   public static void main(String[] args)
   {
-    Tickables tickables = new Tickables();
+    Tickables tickables = new Tickables(true);
 
     Bus addressBus = new Bus(16);
     Bus dataAndBankMultiplexedBus = new Bus(8);
     Bus dataBus = new Bus(8);
     Trace rwbTrace = new Trace();
+    Trace notRWBTrace = new Trace();
     Trace readTrace = new Trace();
     Trace clockTrace = new Trace();
     Trace notClockTrace = new Trace();
@@ -44,7 +45,9 @@ public class CpuMain
 
     new OrGate(tickables, "(NOT Clock) OR Read", notClockTrace, rwbTrace, readTrace);
 
-    new Transceiver(tickables, "Allow Data block Bank", 8, dataAndBankMultiplexedBus, dataBus, notClockTrace);
+    new NotGate(tickables, "NOT RWB", rwbTrace, notRWBTrace);
+
+    new Transceiver(tickables, "Pass Data block Bank", 8, dataAndBankMultiplexedBus, dataBus, notClockTrace, notRWBTrace);
 
     Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace,
                                readBytes(new File("../Test816/Test816.bin")));

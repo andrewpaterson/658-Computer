@@ -16,7 +16,7 @@ public class BusTest
 {
   public static void main(String[] args)
   {
-    Tickables tickables = new Tickables();
+    Tickables tickables = new Tickables(false);
 
     Trace clockTrace = new Trace();
     Trace readTrace = new Trace();

@@ -91,7 +91,12 @@ public class Trace
   public String toString()
   {
     TraceValue value = getNet().getValue();
-    return StringUtil.enumString(value);
+    return StringUtil.toEnumString(value);
+  }
+
+  public char getStringValue()
+  {
+    return net.getValue().getStringValue();
   }
 }
 

@@ -243,13 +243,40 @@ public class Omniport
     return state.isImpedance();
   }
 
+  @Override
+  public List<Trace> getConnections()
+  {
+    return connections;
+  }
 
-  public String getStringValue()
+  @Override
+  public String getTraceValuesAsString()
   {
     StringBuilder stringBuilder = new StringBuilder();
     for (TraceValue traceValue : pins)
     {
       char c = traceValue.getStringValue();
+      stringBuilder.insert(0, c);
+    }
+    return stringBuilder.toString();
+  }
+
+  @Override
+  public String getConnectionValuesAsString()
+  {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (Trace trace : connections)
+    {
+      char c;
+      if (trace != null)
+      {
+        c = trace.getStringValue();
+      }
+      else
+      {
+        c = ' ';
+      }
+
       stringBuilder.insert(0, c);
     }
     return stringBuilder.toString();

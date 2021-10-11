@@ -84,6 +84,36 @@ public abstract class Tickable
     }
   }
 
+  @Override
+  public String toString()
+  {
+    return getDescription();
+  }
+
+  public String toDebugString()
+  {
+    StringBuilder stringBuilder = new StringBuilder();
+    String description = " " + getDescription() + " ";
+    stringBuilder.append(" ").append(StringUtil.centerJustify(description, 48, "-")).append(" \n");
+    for (Port port : ports)
+    {
+      String portTransmissionState = StringUtil.rightJustify(port.getPortTransmissionStateAsString(), 24, " ");
+      String portValues = port.getTraceValuesAsString();
+      String connectionValues = port.getConnectionValuesAsString();
+      if (portValues.equals(connectionValues))
+      {
+        stringBuilder.append(portTransmissionState).append(": P&C").append(portValues);
+      }
+      else
+      {
+        stringBuilder.append(portTransmissionState).append(":   P").append(portValues).append(" C");
+        stringBuilder.append(connectionValues);
+      }
+      stringBuilder.append("\n");
+    }
+    return stringBuilder.toString();
+  }
+
   public abstract String getType();
 }
 

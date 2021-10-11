@@ -6,53 +6,86 @@ import name.bizna.util.EmulatorException;
 public class Transceiver
     extends Tickable
 {
-  protected Omniport in;
-  protected Omniport out;
+  protected Omniport aPort;
+  protected Omniport bPort;
   protected Uniport outputEnableB;
+  protected Uniport dir;
 
-  public Transceiver(Tickables tickables, String name, int width, Bus inBus, Bus outBus, Trace outputEnabledBTrace)
+  public Transceiver(Tickables tickables, String name, int width, Bus aBus, Bus bBus, Trace outputEnabledBTrace, Trace dirTrace)
   {
     super(tickables, name);
-    this.in = new Omniport(this, "In", width);
-    this.out = new Omniport(this, "Out", width);
+    this.aPort = new Omniport(this, "A", width);
+    this.bPort = new Omniport(this, "B", width);
     this.outputEnableB = new Uniport(this, "OEB");
+    this.dir = new Uniport(this, "DIR");
 
-    in.connect(inBus);
-    out.connect(outBus);
+    aPort.connect(aBus);
+    bPort.connect(bBus);
     outputEnableB.connect(outputEnabledBTrace);
+    dir.connect(dirTrace);
   }
 
   @Override
   public void propagate()
   {
     TraceValue outputEnabledBValue = outputEnableB.read();
+    TraceValue dirValue = dir.read();
+    if (dirValue.isError() || dirValue.isNotConnected())
+    {
+      bPort.error();
+      aPort.error();
+      return;
+    }
+    else if (dirValue.isUnsettled())
+    {
+      bPort.unset();
+      aPort.unset();
+      return;
+    }
+
+    if (dirValue.isLow())  //A -> B
+    {
+      transmit(outputEnabledBValue, aPort, bPort);
+    }
+    else if (dirValue.isHigh())  //B -> A
+    {
+      transmit(outputEnabledBValue, bPort, aPort);
+    }
+    else
+    {
+      throw new EmulatorException(getDescription() + " connections are in an impossible state.");
+    }
+  }
+
+  private void transmit(TraceValue outputEnabledBValue, Omniport input, Omniport output)
+  {
     if (outputEnabledBValue.isError())
     {
-      out.error();
+      output.error();
     }
     else if (outputEnabledBValue.isUnsettled())
     {
-      out.unset();
+      output.unset();
     }
     else if (outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow())
     {
-      out.highImpedance();
+      output.highImpedance();
     }
     else if (outputEnabledBValue.isHigh())
     {
-      TraceValue readValue = in.read();
+      TraceValue readValue = input.read();
       if (readValue.isError() || readValue.isNotConnected())
       {
-        out.error();
+        output.error();
       }
       else if (readValue.isUnsettled())
       {
-        out.unset();
+        output.unset();
       }
       else
       {
-        long value = in.getPinsAsBoolAfterRead();
-        out.writeAllPinsBool(value);
+        long value = input.getPinsAsBoolAfterRead();
+        output.writeAllPinsBool(value);
       }
     }
     else

@@ -3,8 +3,10 @@ package name.bizna.bus.common;
 import name.bizna.bus.gate.Tickable;
 import name.bizna.util.EmulatorException;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static name.bizna.bus.common.TraceValue.Error;
 import static name.bizna.bus.common.TraceValue.*;
 import static name.bizna.bus.common.TransmissionState.*;
 
@@ -84,12 +86,20 @@ public class Uniport
     }
   }
 
+  @Override
+  public List<Trace> getConnections()
+  {
+    ArrayList<Trace> connections = new ArrayList<>();
+    connections.add(connection);
+    return connections;
+  }
+
   //A write is only done by the Tickable the Port exists in and causes the port ot be set as an output.
   public void writeBool(boolean value)
   {
     if (write())
     {
-      this.value = value ? High : Low;
+      this.value = fromBoolean(value);
     }
     else
     {
@@ -122,6 +132,25 @@ public class Uniport
   public void connect(Trace trace)
   {
     this.connection = trace;
+  }
+
+  @Override
+  public String getTraceValuesAsString()
+  {
+    return "" + value.getStringValue();
+  }
+
+  @Override
+  public String getConnectionValuesAsString()
+  {
+    if (connection != null)
+    {
+      return "" + connection.getStringValue();
+    }
+    else
+    {
+      return " ";
+    }
   }
 }
 

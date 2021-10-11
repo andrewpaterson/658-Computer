@@ -10,10 +10,10 @@ public class Tickables
   protected List<Tickable> tickables;
   protected boolean debug;
 
-  public Tickables()
+  public Tickables(boolean debug)
   {
     this.tickables = new ArrayList<>();
-    this.debug = false;
+    this.debug = debug;
   }
 
   public void add(Tickable tickable)
@@ -44,10 +44,13 @@ public class Tickables
         List<TraceValue> oldTraceValues = tickable.getTraceValues();
 
         tickable.propagate();
-        tickable.updateConnections();
+        debugLog(tickable.toDebugString());
+        debugLog("");
 
+        tickable.updateConnections();
         List<TraceValue> newTraceValues = tickable.getTraceValues();
         settled &= areSettled(oldTraceValues, newTraceValues);
+
       }
 
       if (!settled)
@@ -64,17 +67,6 @@ public class Tickables
     debugLog("------ Settled in [" + count + "] iterations. ------");
     for (Tickable tickable : tickables)
     {
-      if (debug)
-      {
-        debugLog(tickable.getClass().getSimpleName());
-        List<TraceValue> newTraceValues = tickable.getTraceValues();
-        for (TraceValue newTraceValue : newTraceValues)
-        {
-          debugLog(newTraceValue.toString());
-        }
-        debugLog("");
-      }
-
       tickable.donePropagation();
     }
   }

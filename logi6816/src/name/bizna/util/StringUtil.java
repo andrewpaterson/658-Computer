@@ -6,12 +6,38 @@ public class StringUtil
 {
   public static String rightJustify(String source, int width, String padCharacter)
   {
-    StringBuilder s = new StringBuilder(source);
-    while (s.length() < width)
+    return pad(width - source.length(), padCharacter) + source;
+  }
+
+  public static String leftJustify(String source, int width, String padCharacter)
+  {
+    return source + pad(width - source.length(), padCharacter);
+  }
+
+  public static String centerJustify(String source, int width, String padCharacter)
+  {
+    width = width - source.length();
+    if (width > 0)
     {
-      s.insert(0, padCharacter);
+      int left = width / 2;
+      int right = width / 2 + width % 2;
+      return pad(left, padCharacter) + source + pad(right, padCharacter);
     }
-    return s.toString();
+    else
+    {
+      return source;
+    }
+  }
+
+  private static String pad(int width, String padCharacter)
+  {
+    StringBuilder stringBuilder = new StringBuilder();
+    while (width > 0)
+    {
+      stringBuilder.append(padCharacter);
+      width--;
+    }
+    return stringBuilder.toString();
   }
 
   public static String to16BitHex(int value)
@@ -24,7 +50,7 @@ public class StringUtil
     return rightJustify(toHexString(value), 2, "0");
   }
 
-  public static String enumString(Enum anEnum)
+  public static String toEnumString(Enum<?> anEnum)
   {
     String stringWithoutUnderscores = anEnum.toString().toLowerCase().replace('_', ' ');
 

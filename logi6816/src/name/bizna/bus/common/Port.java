@@ -1,6 +1,7 @@
 package name.bizna.bus.common;
 
 import name.bizna.bus.gate.Tickable;
+import name.bizna.util.StringUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,6 +24,11 @@ public abstract class Port
     tickable.addPort(this);
   }
 
+  public String getName()
+  {
+    return name;
+  }
+
   public void resetConnections()
   {
     state = NotSet;
@@ -33,6 +39,7 @@ public abstract class Port
   public abstract void updateConnection();
 
   public abstract TraceValue read();
+
 
   public static TraceValue readStates(Collection<? extends Port> ports)
   {
@@ -98,5 +105,33 @@ public abstract class Port
     }
     return NotConnected;
   }
+
+  public String getPortTransmissionStateAsString()
+  {
+    String portStateString = "  ";
+    if (state.isInput())
+    {
+      portStateString  = "<-";
+    }
+    else if (state.isOutput())
+    {
+      portStateString  = "->";
+    }
+    else if (state.isNotSet())
+    {
+      portStateString = "..";
+    }
+    else if (state.isImpedance())
+    {
+      portStateString = "xx";
+    }
+    return getName() + "[" +  portStateString+ "]";
+  }
+
+  public abstract List<Trace> getConnections();
+
+  public abstract String getTraceValuesAsString();
+
+  public abstract String getConnectionValuesAsString();
 }
 

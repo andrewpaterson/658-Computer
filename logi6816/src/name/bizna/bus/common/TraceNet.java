@@ -3,8 +3,7 @@ package name.bizna.bus.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import static name.bizna.bus.common.TraceValue.Error;
-import static name.bizna.bus.common.TraceValue.Unsettled;
+import static name.bizna.bus.common.TraceValue.*;
 import static name.bizna.util.DebugUtil.debug;
 import static name.bizna.util.DebugUtil.debugLog;
 
@@ -46,7 +45,7 @@ public class TraceNet
       _DEBUG_lastPortThatUpdated = port;
       return value;
     }
-    else if (this.value == Unsettled)
+    else if (this.value == Unsettled || this.value == NotConnected)
     {
       _DEBUG_lastPortThatUpdated = port;
       this.value = value;

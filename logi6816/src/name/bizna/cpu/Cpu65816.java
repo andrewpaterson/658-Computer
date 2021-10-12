@@ -89,7 +89,7 @@ public class Cpu65816
     breakFlag = false;
 
     stopped = false;
-    previousClock = true;
+    previousClock = false;
     cycle = 1;
     opCode = resetOpcode;
     data = 0;
@@ -2007,24 +2007,21 @@ public class Cpu65816
 
   public void dump()
   {
-    if (previousClock)
-    {
-      System.out.println("  --- Internal Status ---- ");
-      System.out.println("       Op-Code: " + getOpcodeValueHex());
-      System.out.println("      Mnemonic: " + getOpcodeMnemonicString());
-      System.out.println("         Cycle: " + getCycle() + (previousClock ? " (High)" : " (Low)"));
-      System.out.println("       Address: " + getAddressValueHex());
-      System.out.println("          Data: " + getDataValueHex());
-      System.out.println("   Accumulator: " + getAccumulatorValueHex());
-      System.out.println("       X-Index: " + getXValueHex());
-      System.out.println("       Y-Index: " + getYValueHex());
-      System.out.println(" Stack Pointer: " + getStackValueHex());
-      System.out.println(" Program Count: " + getProgramCounterValueHex());
-      System.out.println("        Status: " + getStatusString());
-      System.out.println("Address Offset: " + getOpCode().getCycles().getBusCycle(getCycle()).toAddressOffsetString());
-      System.out.println("     Operation: " + getOpCode().getCycles().getBusCycle(getCycle()).toOperationString());
-      System.out.println();
-    }
+    System.out.println("  --- Internal Status ---- ");
+    System.out.println("       Op-Code: " + getOpcodeValueHex());
+    System.out.println("      Mnemonic: " + getOpcodeMnemonicString());
+    System.out.println("         Cycle: " + getCycle() + (previousClock ? " (High)" : " (Low)"));
+    System.out.println("       Address: " + getAddressValueHex());
+    System.out.println("          Data: " + getDataValueHex());
+    System.out.println("   Accumulator: " + getAccumulatorValueHex());
+    System.out.println("       X-Index: " + getXValueHex());
+    System.out.println("       Y-Index: " + getYValueHex());
+    System.out.println(" Stack Pointer: " + getStackValueHex());
+    System.out.println(" Program Count: " + getProgramCounterValueHex());
+    System.out.println("        Status: " + getStatusString());
+    System.out.println("Address Offset: " + getOpCode().getCycles().getBusCycle(getCycle()).toAddressOffsetString());
+    System.out.println("     Operation: " + getOpCode().getCycles().getBusCycle(getCycle()).toOperationString());
+    System.out.println();
   }
 }
 

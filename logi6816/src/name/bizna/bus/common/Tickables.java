@@ -70,7 +70,7 @@ public class Tickables
     }
     while (!settled);
 
-    debugLog("---======--- Tick [" + tickCount + "] Settled in [" + count + "] iterations. ---======---");
+    debugLog("---======--- Tick [" + tickCount + "]  Settled in [" + count + "] iterations. ---======---");
     for (Tickable tickable : tickables)
     {
       tickable.donePropagation();

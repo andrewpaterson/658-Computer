@@ -17,5 +17,11 @@ public class DoneInstruction
   {
     return "DONE";
   }
+
+  @Override
+  public boolean isDone()
+  {
+    return true;
+  }
 }
 

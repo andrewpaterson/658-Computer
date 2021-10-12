@@ -18,10 +18,8 @@ public class CpuMain
     Tickables tickables = new Tickables();
 
     Bus addressBus = new Bus(16);
-    Bus dataAndBankMultiplexedBus = new Bus(8);
     Bus dataBus = new Bus(8);
     Trace rwbTrace = new Trace();
-    Trace readTrace = new Trace();
     Trace clockTrace = new Trace();
     Trace abortBTrace = new Trace();
     Trace busEnable = new Trace();
@@ -38,13 +36,13 @@ public class CpuMain
 
     new ClockOscillator(tickables, "", clockTrace);
 
-    Memory memory = new Memory(tickables, "", addressBus, dataBus, readTrace, clockTrace, clockTrace,
+    Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, clockTrace, clockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
     Cpu65816Pins cpuPins = new Cpu65816Pins(tickables,
                                             "",
                                             addressBus,
-                                            dataAndBankMultiplexedBus,
+                                            dataBus,
                                             rwbTrace,
                                             clockTrace,
                                             abortBTrace,

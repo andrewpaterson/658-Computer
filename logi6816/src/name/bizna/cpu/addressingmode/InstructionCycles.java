@@ -2,8 +2,10 @@ package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.AddressingMode;
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 import name.bizna.cpu.WidthFromRegister;
 import name.bizna.cpu.interrupt.InterruptVector;
+import name.bizna.util.EmulatorException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,41 @@ public abstract class InstructionCycles
   {
     this.addressingMode = addressingMode;
     this.cycles = Arrays.asList(cycles);
+
+    this.validate();
+  }
+
+  private void validate()
+  {
+    validateDoneOperation();
+  }
+
+  protected void validateDoneOperation()
+  {
+    int done8 = 0;
+    int done16 = 0;
+    for (BusCycle cycle : cycles)
+    {
+      Operation operation = cycle.getDoneOperation();
+      if (operation instanceof DoneInstructionIf8Bit)
+      {
+        done8++;
+      }
+      else if (operation instanceof DoneInstructionIf16Bit)
+      {
+        done16++;
+      }
+      else if (operation instanceof DoneInstruction)
+      {
+        done8++;
+        done16++;
+      }
+    }
+
+    if (done8 != 1 && done16 !=1)
+    {
+      throw new EmulatorException("Exactly [1] 8 bit and [1] 16 bit done  operation must be specified in an Instruction cycle.");
+    }
   }
 
   protected static ProgramCounter PC()
@@ -294,17 +331,17 @@ public abstract class InstructionCycles
     return new WriteAbsoluteAddressHigh();
   }
 
-  protected static ExecuteIf16BitMemory E16Bit(Consumer<Cpu65816> consumer)
+  protected static ExecuteIf16BitMemory E16Bit(Executor<Cpu65816> consumer)
   {
     return new ExecuteIf16BitMemory(consumer);
   }
 
-  protected static ExecuteIf8BitMemory E8Bit(Consumer<Cpu65816> consumer)
+  protected static ExecuteIf8BitMemory E8Bit(Executor<Cpu65816> consumer)
   {
     return new ExecuteIf8BitMemory(consumer);
   }
 
-  protected static Execute E(Consumer<Cpu65816> consumer)
+  protected static Execute E(Executor<Cpu65816> consumer)
   {
     return new Execute(consumer);
   }
@@ -326,7 +363,11 @@ public abstract class InstructionCycles
 
   public BusCycle getBusCycle(int index)
   {
-    return cycles.get(index);
+    if ((index >= 0) && (index < cycles.size()))
+    {
+      return cycles.get(index);
+    }
+    return null;
   }
 }
 

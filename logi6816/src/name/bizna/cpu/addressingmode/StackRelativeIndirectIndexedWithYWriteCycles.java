@@ -1,16 +1,15 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-
-import java.util.function.Consumer;
+import name.bizna.cpu.Executor;
 
 import static name.bizna.cpu.AddressingMode.StackRelativeIndirectIndexedWithY;
-import static name.bizna.cpu.WidthFromRegister.A;
+import static name.bizna.cpu.WidthFromRegister.M;
 
 public class StackRelativeIndirectIndexedWithYWriteCycles
     extends InstructionCycles
 {
-  public StackRelativeIndirectIndexedWithYWriteCycles(Consumer<Cpu65816> operation)
+  public StackRelativeIndirectIndexedWithYWriteCycles(Executor<Cpu65816> operation)
   {
     super(StackRelativeIndirectIndexedWithY,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
@@ -19,8 +18,8 @@ public class StackRelativeIndirectIndexedWithYWriteCycles
           new BusCycle(Address(S(), D0()), Read_AAL(), SP_inc()),
           new BusCycle(Address(S(), D0(), o(1)), Read_AAH()),
           new BusCycle(Address(S(), D0(), o(1)), IO()),
-          new BusCycle(Address(DBR(), AA(), Y()), E(operation), Write_DataLow(), DONE8Bit(A)),
-          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(A)));
+          new BusCycle(Address(DBR(), AA(), Y()), E(operation), Write_DataLow(), DONE8Bit(M)),
+          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 }
 

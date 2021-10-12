@@ -2,6 +2,7 @@ package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.AddressingMode;
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 
 import java.util.function.Consumer;
 
@@ -9,7 +10,7 @@ public class BlockMoveCycles
     extends InstructionCycles
 {
   //9a & 9b
-  public BlockMoveCycles(Consumer<Cpu65816> operation)
+  public BlockMoveCycles(Executor<Cpu65816> operation)
   {
     super(AddressingMode.BlockMove,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

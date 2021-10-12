@@ -1,6 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 import name.bizna.cpu.WidthFromRegister;
 
 import java.util.function.Consumer;
@@ -11,7 +12,7 @@ public class DirectIndexedWithXWriteCycles
     extends InstructionCycles
 {
   //16a
-  public DirectIndexedWithXWriteCycles(Consumer<Cpu65816> operation, WidthFromRegister width)
+  public DirectIndexedWithXWriteCycles(Executor<Cpu65816> operation, WidthFromRegister width)
   {
     super(DirectIndexedWithX,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

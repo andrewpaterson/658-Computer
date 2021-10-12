@@ -1,6 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 import name.bizna.cpu.WidthFromRegister;
 
 import java.util.function.Consumer;
@@ -11,7 +12,7 @@ public class StackPullCycles
     extends InstructionCycles
 {
   //22b
-  public StackPullCycles(Consumer<Cpu65816> consumer, WidthFromRegister width)
+  public StackPullCycles(Executor<Cpu65816> consumer, WidthFromRegister width)
   {
     super(Stack,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

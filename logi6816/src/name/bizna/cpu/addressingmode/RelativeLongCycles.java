@@ -1,6 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 
 import java.util.function.Consumer;
 
@@ -10,7 +11,7 @@ public class RelativeLongCycles
     extends InstructionCycles
 {
   //21
-  public RelativeLongCycles(Consumer<Cpu65816> operation)
+  public RelativeLongCycles(Executor<Cpu65816> operation)
   {
     super(RelativeLong,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

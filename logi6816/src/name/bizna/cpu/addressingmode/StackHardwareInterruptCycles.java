@@ -1,6 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 import name.bizna.cpu.interrupt.InterruptVector;
 
 import java.util.function.Consumer;
@@ -11,7 +12,7 @@ public class StackHardwareInterruptCycles
     extends InstructionCycles
 {
   //22a
-  public StackHardwareInterruptCycles(InterruptVector interruptVector, Consumer<Cpu65816> operation)
+  public StackHardwareInterruptCycles(InterruptVector interruptVector, Executor<Cpu65816> operation)
   {
     super(StackInterruptHardware,
           new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),

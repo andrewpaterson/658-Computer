@@ -28,5 +28,10 @@ public abstract class Operation
   {
     return false;
   }
+
+  public boolean isDone()
+  {
+    return false;
+  }
 }
 

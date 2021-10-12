@@ -26,11 +26,6 @@ public class Tickables
 
   public void run()
   {
-    if (tickCount == 13)
-    {
-      int xxx = 0;
-    }
-
     for (Tickable tickable : tickables)
     {
       tickable.resetConnections();

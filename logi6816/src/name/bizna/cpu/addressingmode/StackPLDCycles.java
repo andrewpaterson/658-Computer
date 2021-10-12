@@ -1,6 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 
 import java.util.function.Consumer;
 
@@ -10,7 +11,7 @@ public class StackPLDCycles
     extends InstructionCycles
 {
   //22b
-  public StackPLDCycles(Consumer<Cpu65816> consumer)
+  public StackPLDCycles(Executor<Cpu65816> consumer)
   {
     super(Stack,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

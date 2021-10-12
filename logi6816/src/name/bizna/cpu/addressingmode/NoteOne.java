@@ -4,7 +4,7 @@ import name.bizna.cpu.Cpu65816;
 import name.bizna.util.EmulatorException;
 import name.bizna.cpu.WidthFromRegister;
 
-import static name.bizna.cpu.WidthFromRegister.A;
+import static name.bizna.cpu.WidthFromRegister.M;
 import static name.bizna.cpu.WidthFromRegister.XY;
 
 public class NoteOne
@@ -25,7 +25,7 @@ public class NoteOne
   @Override
   public boolean mustExecute(Cpu65816 cpu)
   {
-    if (width == A)
+    if (width == M)
     {
       return cpu.isMemory16Bit();
     }

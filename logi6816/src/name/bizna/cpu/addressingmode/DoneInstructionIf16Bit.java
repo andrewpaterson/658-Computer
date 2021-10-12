@@ -4,7 +4,7 @@ import name.bizna.cpu.Cpu65816;
 import name.bizna.util.EmulatorException;
 import name.bizna.cpu.WidthFromRegister;
 
-import static name.bizna.cpu.WidthFromRegister.A;
+import static name.bizna.cpu.WidthFromRegister.M;
 import static name.bizna.cpu.WidthFromRegister.XY;
 
 public class DoneInstructionIf16Bit
@@ -20,7 +20,7 @@ public class DoneInstructionIf16Bit
   @Override
   public void execute(Cpu65816 cpu)
   {
-    if (width == A)
+    if (width == M)
     {
       if (cpu.isMemory16Bit())
       {
@@ -44,6 +44,12 @@ public class DoneInstructionIf16Bit
   public String toString()
   {
     return "DONE_If_16Bit_" + width;
+  }
+
+  @Override
+  public boolean isDone()
+  {
+    return true;
   }
 }
 

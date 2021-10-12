@@ -1,8 +1,7 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-
-import java.util.function.Consumer;
+import name.bizna.cpu.Executor;
 
 import static name.bizna.cpu.AddressingMode.Implied;
 
@@ -10,7 +9,7 @@ public class ImpliedCycles
     extends InstructionCycles
 {
   //19a
-  public ImpliedCycles(Consumer<Cpu65816> operation)
+  public ImpliedCycles(Executor<Cpu65816> operation)
   {
     super(Implied,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),

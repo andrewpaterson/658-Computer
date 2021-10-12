@@ -1,15 +1,16 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 
-import java.util.function.Consumer;
+import static name.bizna.cpu.Executor.getMethodName;
 
 public class ExecuteIf16BitIndices
     extends Operation
 {
-  private final Consumer<Cpu65816> function;
+  private final Executor<Cpu65816> function;
 
-  public ExecuteIf16BitIndices(Consumer<Cpu65816> function)
+  public ExecuteIf16BitIndices(Executor<Cpu65816> function)
   {
     this.function = function;
   }
@@ -22,10 +23,11 @@ public class ExecuteIf16BitIndices
       function.accept(cpu);
     }
   }
+
   @Override
   public String toString()
   {
-    return "Execute_If_16Bit_XY_" + function;
+    return "Execute_If_16Bit_XY(" + getMethodName(function) + ")";
   }
 }
 

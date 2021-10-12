@@ -1,15 +1,16 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
+import name.bizna.cpu.Executor;
 
-import java.util.function.Consumer;
+import static name.bizna.cpu.Executor.getMethodName;
 
 public class Execute
     extends Operation
 {
-  private final Consumer<Cpu65816> function;
+  private final Executor<Cpu65816> function;
 
-  public Execute(Consumer<Cpu65816> function)
+  public Execute(Executor<Cpu65816> function)
   {
     this.function = function;
   }
@@ -23,7 +24,7 @@ public class Execute
   @Override
   public String toString()
   {
-    return "Execute_" + function;
+    return "Execute(" + getMethodName(function) + ")";
   }
 }
 

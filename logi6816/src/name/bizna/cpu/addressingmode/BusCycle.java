@@ -60,6 +60,18 @@ public class BusCycle
     return null;
   }
 
+  public Operation getDoneOperation()
+  {
+    for (Operation operation : operations)
+    {
+      if (operation.isDone())
+      {
+        return operation;
+      }
+    }
+    return null;
+  }
+
   public final void executeOnFallingEdge(Cpu65816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
@@ -153,5 +165,4 @@ public class BusCycle
     return string.toString();
   }
 }
-
 

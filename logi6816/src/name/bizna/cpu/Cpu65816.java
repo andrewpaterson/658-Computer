@@ -8,6 +8,7 @@ import name.bizna.cpu.interrupt.ResetVector;
 import name.bizna.cpu.opcode.*;
 import name.bizna.util.EmulatorException;
 import name.bizna.util.IntUtil;
+import name.bizna.util.StringUtil;
 
 import static name.bizna.cpu.CpuFlags.*;
 import static name.bizna.util.IntUtil.*;
@@ -494,6 +495,10 @@ public class Cpu65816
   {
     if ((data >= 0) && (data <= 255))
     {
+      if (data == 0xa0)
+      {
+        int xxxx = 0;
+      }
       opCode = opCodeTable[data];
     }
     else
@@ -1879,9 +1884,19 @@ public class Cpu65816
     return getWordStringHex(getY());
   }
 
+  public String getDataBankValueHex()
+  {
+    return getByteStringHex(getDataBank());
+  }
+
   public String getStackValueHex()
   {
     return getWordStringHex(getStackPointer());
+  }
+
+  public String getDirectPageValueHex()
+  {
+    return getWordStringHex(getDirectPage());
   }
 
   public String getProgramCounterValueHex()
@@ -2008,19 +2023,22 @@ public class Cpu65816
   public void dump()
   {
     System.out.println("  --- Internal Status ---- ");
-    System.out.println("       Op-Code: " + getOpcodeValueHex());
     System.out.println("      Mnemonic: " + getOpcodeMnemonicString());
     System.out.println("         Cycle: " + getCycle() + (previousClock ? " (High)" : " (Low)"));
-    System.out.println("       Address: " + getAddressValueHex());
-    System.out.println("          Data: " + getDataValueHex());
     System.out.println("   Accumulator: " + getAccumulatorValueHex());
     System.out.println("       X-Index: " + getXValueHex());
     System.out.println("       Y-Index: " + getYValueHex());
     System.out.println(" Stack Pointer: " + getStackValueHex());
+    System.out.println("   Direct Page: " + getDirectPageValueHex());
     System.out.println(" Program Count: " + getProgramCounterValueHex());
+    System.out.println("     Data Bank: " + getDataBankValueHex());
     System.out.println("        Status: " + getStatusString());
-    System.out.println("Address Offset: " + getOpCode().getCycles().getBusCycle(getCycle()).toAddressOffsetString());
-    System.out.println("     Operation: " + getOpCode().getCycles().getBusCycle(getCycle()).toOperationString());
+    BusCycle busCycle = getBusCycle();
+    if (busCycle != null)
+    {
+      System.out.println("Address Offset: " + busCycle.toAddressOffsetString());
+      System.out.println("     Operation: " + busCycle.toOperationString());
+    }
     System.out.println();
   }
 }

@@ -11,5 +11,10 @@ public class FetchOpCodeCycles
     super(OpCode,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()));
   }
+
+  @Override
+  protected void validateDoneOperation()
+  {
+  }
 }
 

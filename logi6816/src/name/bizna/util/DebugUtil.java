@@ -2,7 +2,7 @@ package name.bizna.util;
 
 public class DebugUtil
 {
-  public static final boolean debug = true;
+  public static final boolean debug = false;
 
   public static void debugLog(String s)
   {
@@ -11,5 +11,5 @@ public class DebugUtil
       System.out.println(s);
     }
   }
-
 }
+

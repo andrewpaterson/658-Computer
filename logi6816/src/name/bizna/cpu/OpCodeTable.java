@@ -1,5 +1,6 @@
 package name.bizna.cpu;
 
+import name.bizna.cpu.interrupt.BRKVector;
 import name.bizna.util.EmulatorException;
 import name.bizna.cpu.addressingmode.*;
 import name.bizna.cpu.interrupt.COPVector;
@@ -18,7 +19,7 @@ public class OpCodeTable
   public static OpCode[] createTable()
   {
     List<OpCode> opCodes = new ArrayList<>();
-    add(opCodes, new OpCode_BRK());
+    add(opCodes, new OpCode_BRK(BRK_Interrupt, new StackSoftwareInterruptCycles(new BRKVector(), Cpu65816::BRK)));
     add(opCodes, new OpCode_ORA(ORA_DirectPageIndexedIndirectWithX, new DirectIndexedIndirectWithXCycles(Cpu65816::ORA)));
     add(opCodes, new OpCode_COP(COP_Interrupt, new StackSoftwareInterruptCycles(new COPVector(), Cpu65816::COP)));
     add(opCodes, new OpCode_ORA(ORA_StackRelative, new StackRelativeCycles(Cpu65816::ORA)));

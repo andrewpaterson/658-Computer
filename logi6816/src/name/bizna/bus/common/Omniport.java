@@ -227,7 +227,15 @@ public class Omniport
 
   public void highImpedance()
   {
-    state = Impedance;
+    if (state.isNotSet())
+    {
+      state = Impedance;
+    }
+
+    if (!state.isImpedance())
+    {
+      throw new EmulatorException("Cannot high-impedance Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+    }
   }
 
   @Override

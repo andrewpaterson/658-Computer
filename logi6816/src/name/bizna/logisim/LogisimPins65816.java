@@ -45,7 +45,6 @@ public class LogisimPins65816
       }
       else if (portValue.isUnknown())
       {
-        setAllOutputsUnknown();
         return 0;
       }
       else

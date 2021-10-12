@@ -161,7 +161,6 @@ public class Cpu65816Pins
       }
       else if (traceValue.isUnsettled())
       {
-        setAllOutputsUnknown();
         return 0;
       }
       else

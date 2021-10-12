@@ -1,0 +1,25 @@
+package net.wdc65xx.wdc65816.addressingmode;
+
+import net.wdc65xx.wdc65816.Cpu65816;
+
+public class FetchOpCode
+    extends DataOperation
+{
+  public FetchOpCode()
+  {
+    super(true, true, true, true, true);
+  }
+
+  @Override
+  public void execute(Cpu65816 cpu)
+  {
+    cpu.setOpCode(cpu.getPins().getData());
+  }
+
+  @Override
+  public String toString()
+  {
+    return "OpCode";
+  }
+}
+

@@ -27,48 +27,47 @@ public class Logisim65816Factory
   protected static final int RIGHT_X = 120;
   protected static final int TOP_Y = -130 - V_MARGIN;
   protected static final int BOT_Y = 130 + V_MARGIN;
-  protected static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN + PIXELS_PER_PIN / 2;
+  protected static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN;
   protected static final int PIN_STOP_Y = PIN_BOT_Y - V_MARGIN;
 
-  protected static final int PORT_VPB = 0;
-  protected static final int PORT_RDY = 1;
-  protected static final int PORT_ABORT = 2;
-  protected static final int PORT_IRQB = 3;
-  protected static final int PORT_MLB = 4;
-  protected static final int PORT_NMIB = 5;
+  protected static final int PORT_ABORT = 0;
+  protected static final int PORT_IRQB = 1;
+  protected static final int PORT_NMIB = 2;
+  protected static final int PORT_RESB = 3;
+  protected static final int PORT_PHI2 = 4;
+  protected static final int PORT_VPB = 5;
   protected static final int PORT_VPA = 6;
-  protected static final int PORT_AddressBus = 7;
-
-  protected static final int PORT_RESB = 8;
-  protected static final int PORT_VDA = 9;
+  protected static final int PORT_VDA = 7;
+  protected static final int PORT_MLB = 8;
+  protected static final int PORT_RDY = 9;
   protected static final int PORT_MX = 10;
-  protected static final int PORT_PHI2 = 11;
+  protected static final int PORT_E = 11;
   protected static final int PORT_BE = 12;
-  protected static final int PORT_E = 13;
-  protected static final int PORT_RWB = 14;
-  protected static final int PORT_DataBus = 15;
+  protected static final int PORT_RWB = 13;
+  protected static final int PORT_DataBus = 14;
+  protected static final int PORT_AddressBus = 15;
 
   protected static final PortInfo[] portInfos = new PortInfo[]
       {
           // Left side, top to bottom
-          PortInfo.sharedOutput("VPB"),
-          PortInfo.sharedBidirectional("RDY"),
           PortInfo.sharedInput("ABORT"),
           PortInfo.sharedInput("IRQB"),
-          PortInfo.sharedOutput("MLB"),
           PortInfo.sharedInput("NMIB"),
+          PortInfo.sharedInput("RESB"),
+          PortInfo.sharedInput("PHI2"),
+          PortInfo.sharedOutput("VPB"),
           PortInfo.sharedOutput("VPA"),
-          PortInfo.sharedOutput("A", 16),
+          PortInfo.sharedOutput("VDA"),
 
           // Right side, bottom to top
-          PortInfo.sharedInput("RESB"),
-          PortInfo.sharedOutput("VDA"),
+          PortInfo.sharedOutput("MLB"),
+          PortInfo.sharedBidirectional("RDY"),
           PortInfo.sharedOutput("MX"),
-          PortInfo.sharedInput("PHI2"),
-          PortInfo.sharedInput("BE"),
           PortInfo.sharedOutput("E"),
+          PortInfo.sharedInput("BE"),
           PortInfo.sharedOutput("RWB"),
-          PortInfo.sharedBidirectional("D", 8)
+          PortInfo.sharedBidirectional("D", 8),
+          PortInfo.sharedOutput("A", 16),
       };
 
   public Logisim65816Factory()

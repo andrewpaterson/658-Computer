@@ -8,7 +8,7 @@ import name.bizna.cpu.Pins65816;
 import name.bizna.util.EmulatorException;
 
 @SuppressWarnings({"FieldMayBeFinal"})
-public class TickablePins65816
+public class Cpu65816Pins
     extends Tickable
     implements Pins65816
 {
@@ -17,7 +17,7 @@ public class TickablePins65816
 
   protected final Omniport addressBus;
   protected final Omniport dataBus;
-  protected final Uniport rwb;
+  protected final Uniport rwB;
   protected final Uniport clock;
   protected final Uniport abortB;
   protected final Uniport busEnable;
@@ -32,29 +32,29 @@ public class TickablePins65816
   protected final Uniport validProgramAddress;
   protected final Uniport validDataAddress;
 
-  public TickablePins65816(Tickables tickables,
-                           String name,
-                           Bus addressBus,
-                           Bus dataBus,
-                           Trace rwb,
-                           Trace clock,
-                           Trace abortB,
-                           Trace busEnable,
-                           Trace irqB,
-                           Trace nmiB,
-                           Trace resetB,
-                           Trace emulation,
-                           Trace memoryLockB,
-                           Trace mx,
-                           Trace rdy,
-                           Trace vectorPullB,
-                           Trace validProgramAddress,
-                           Trace validDataAddress)
+  public Cpu65816Pins(Tickables tickables,
+                      String name,
+                      Bus addressBus,
+                      Bus dataBus,
+                      Trace rwb,
+                      Trace clock,
+                      Trace abortB,
+                      Trace busEnable,
+                      Trace irqB,
+                      Trace nmiB,
+                      Trace resetB,
+                      Trace emulation,
+                      Trace memoryLockB,
+                      Trace mx,
+                      Trace rdy,
+                      Trace vectorPullB,
+                      Trace validProgramAddress,
+                      Trace validDataAddress)
   {
     super(tickables, name);
     this.addressBus = new Omniport(this, "Address Bus", 16);
     this.dataBus = new Omniport(this, "Data Bus", 8);
-    this.rwb = new Uniport(this, "RWB");
+    this.rwB = new Uniport(this, "RWB");
     this.clock = new Uniport(this, "Phi2");
     this.abortB = new Uniport(this, "AbortB");
     this.rdy = new Uniport(this, "Rdy");
@@ -71,7 +71,7 @@ public class TickablePins65816
 
     this.addressBus.connect(addressBus);
     this.dataBus.connect(dataBus);
-    this.rwb.connect(rwb);
+    this.rwB.connect(rwb);
     this.clock.connect(clock);
     this.abortB.connect(abortB);
     this.rdy.connect(rdy);
@@ -182,9 +182,9 @@ public class TickablePins65816
   }
 
   @Override
-  public void setRwb(boolean rwb)
+  public void setRwb(boolean rwB)
   {
-    this.rwb.writeBool(rwb);
+    this.rwB.writeBool(rwB);
   }
 
   @Override
@@ -286,7 +286,7 @@ public class TickablePins65816
   @Override
   public void setAllOutputsUnknown()
   {
-    rwb.unset();
+    rwB.unset();
     addressBus.unset();
     dataBus.unset();
     rdy.unset();
@@ -301,7 +301,7 @@ public class TickablePins65816
   @Override
   public void setAllOutputsError()
   {
-    rwb.error();
+    rwB.error();
     addressBus.error();
     dataBus.error();
     rdy.error();

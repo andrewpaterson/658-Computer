@@ -1,9 +1,6 @@
 package name.bizna.cpu;
 
-import name.bizna.cpu.addressingmode.FetchOpCodeCycles;
-import name.bizna.cpu.addressingmode.InstructionCycles;
-import name.bizna.cpu.addressingmode.StackHardwareInterruptCycles;
-import name.bizna.cpu.addressingmode.StackResetCycles;
+import name.bizna.cpu.addressingmode.*;
 import name.bizna.cpu.interrupt.AbortVector;
 import name.bizna.cpu.interrupt.IRQVector;
 import name.bizna.cpu.interrupt.NMIVector;
@@ -296,22 +293,26 @@ public class Cpu65816
       return;
     }
 
-    InstructionCycles cycles = opCode.getCycles();
-
-    while (!cycles.mustExecute(this))
+    while (!getBusCycle().mustExecute(this))
     {
       nextCycle();
     }
 
     if (clockFallingEdge)
     {
-      cycles.executeOnFallingEdge(this);
+      getBusCycle().executeOnFallingEdge(this);
       nextCycle();
     }
     if (clockRisingEdge)
     {
-      cycles.executeOnRisingEdge(this);
+      getBusCycle().executeOnRisingEdge(this);
     }
+  }
+
+  public BusCycle getBusCycle()
+  {
+    InstructionCycles cycles = opCode.getCycles();
+    return cycles.getBusCycle(cycle);
   }
 
   public boolean isStopped()

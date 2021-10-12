@@ -324,24 +324,9 @@ public abstract class InstructionCycles
     return addressingMode;
   }
 
-  public final void executeOnFallingEdge(Cpu65816 cpu)
-  {
-    cycles.get(cpu.getCycle()).executeOnFallingEdge(cpu);
-  }
-
-  public final void executeOnRisingEdge(Cpu65816 cpu)
-  {
-    cycles.get(cpu.getCycle()).executeOnRisingEdge(cpu);
-  }
-
   public BusCycle getBusCycle(int index)
   {
     return cycles.get(index);
-  }
-
-  public boolean mustExecute(Cpu65816 cpu)
-  {
-    return cycles.get(cpu.getCycle()).mustExecute(cpu);
   }
 }
 

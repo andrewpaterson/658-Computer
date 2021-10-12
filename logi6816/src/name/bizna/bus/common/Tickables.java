@@ -38,7 +38,6 @@ public class Tickables
     }
 
     int count = 0;
-    int afterSettleCount = 0;
     boolean settled;
     do
     {
@@ -54,8 +53,6 @@ public class Tickables
         List<TraceValue> oldTraceValues = tickable.getTraceValues();
 
         tickable.propagate();
-        debugLog(tickable.toDebugString());
-        debugLog("");
 
         tickable.updateConnections();
         List<TraceValue> newTraceValues = tickable.getTraceValues();
@@ -64,28 +61,21 @@ public class Tickables
 
       if (!settled)
       {
-        if (afterSettleCount > 0)
-        {
-          throw new EmulatorException("Settled unsettled.  Or something.");
-        }
-        afterSettleCount = 0;
         for (Tickable tickable : tickables)
         {
           tickable.undoPropagation();
         }
       }
-      else
-      {
-        afterSettleCount++;
-      }
       count++;
     }
-    while (!settled || afterSettleCount < 3);
+    while (!settled);
 
     debugLog("---======--- Tick [" + tickCount + "] Settled in [" + count + "] iterations. ---======---");
     for (Tickable tickable : tickables)
     {
       tickable.donePropagation();
+
+      debugLog(tickable.toDebugString());
     }
     tickCount++;
   }

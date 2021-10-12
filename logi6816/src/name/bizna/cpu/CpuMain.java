@@ -3,10 +3,7 @@ package name.bizna.cpu;
 import name.bizna.bus.common.Bus;
 import name.bizna.bus.common.Tickables;
 import name.bizna.bus.common.Trace;
-import name.bizna.bus.cpu.TickablePins65816;
-import name.bizna.bus.gate.NotGate;
-import name.bizna.bus.gate.OrGate;
-import name.bizna.bus.gate.Transceiver;
+import name.bizna.bus.cpu.Cpu65816Pins;
 import name.bizna.bus.memory.Memory;
 import name.bizna.bus.wiring.ClockOscillator;
 
@@ -24,10 +21,8 @@ public class CpuMain
     Bus dataAndBankMultiplexedBus = new Bus(8);
     Bus dataBus = new Bus(8);
     Trace rwbTrace = new Trace();
-    Trace notRWBTrace = new Trace();
     Trace readTrace = new Trace();
     Trace clockTrace = new Trace();
-    Trace notClockTrace = new Trace();
     Trace abortBTrace = new Trace();
     Trace busEnable = new Trace();
     Trace irqBTrace = new Trace();
@@ -41,38 +36,30 @@ public class CpuMain
     Trace validProgramAddressTrace = new Trace();
     Trace validDataAddressTrace = new Trace();
 
-    new NotGate(tickables, "NOT Clock", clockTrace, notClockTrace);
+    new ClockOscillator(tickables, "", clockTrace);
 
-    new OrGate(tickables, "High Read Memory, Low Write", notClockTrace, rwbTrace, readTrace);
-
-    new NotGate(tickables, "High Write, Low Read", rwbTrace, notRWBTrace);
-
-    new Transceiver(tickables, "", 8, dataAndBankMultiplexedBus, dataBus, clockTrace, notRWBTrace);
-
-    Memory memory = new Memory(tickables, "", addressBus, dataBus, readTrace, clockTrace,
+    Memory memory = new Memory(tickables, "", addressBus, dataBus, readTrace, clockTrace, clockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
-    TickablePins65816 cpuPins = new TickablePins65816(tickables,
-                                                      "",
-                                                      addressBus,
-                                                      dataAndBankMultiplexedBus,
-                                                      rwbTrace,
-                                                      clockTrace,
-                                                      abortBTrace,
-                                                      busEnable,
-                                                      irqBTrace,
-                                                      nmiBTrace,
-                                                      resetBTrace,
-                                                      emulationTrace,
-                                                      memoryLockBTrace,
-                                                      mxTrace,
-                                                      rdyTrace,
-                                                      vectorPullBTrace,
-                                                      validProgramAddressTrace,
-                                                      validDataAddressTrace);
+    Cpu65816Pins cpuPins = new Cpu65816Pins(tickables,
+                                            "",
+                                            addressBus,
+                                            dataAndBankMultiplexedBus,
+                                            rwbTrace,
+                                            clockTrace,
+                                            abortBTrace,
+                                            busEnable,
+                                            irqBTrace,
+                                            nmiBTrace,
+                                            resetBTrace,
+                                            emulationTrace,
+                                            memoryLockBTrace,
+                                            mxTrace,
+                                            rdyTrace,
+                                            vectorPullBTrace,
+                                            validProgramAddressTrace,
+                                            validDataAddressTrace);
     Cpu65816 cpu = new Cpu65816(cpuPins);
-
-    new ClockOscillator(tickables, "", clockTrace);
 
     int count = 1024;
     while (!cpu.isStopped() && count > 0)

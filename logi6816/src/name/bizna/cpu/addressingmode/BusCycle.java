@@ -62,26 +62,27 @@ public class BusCycle
 
   public final void executeOnFallingEdge(Cpu65816 cpu)
   {
+    DataOperation dataOperation = getDataOperation();
+    boolean read = dataOperation.isRead();
+    cpu.setRead(read);
+    Pins65816 pins = cpu.getPins();
+    pins.setRwb(read);
+    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
+    pins.setMX(cpu.isMemory8Bit());
+    pins.setEmulation(cpu.isEmulation());
+    pins.setValidDataAddress(dataOperation.isValidDataAddress());
+    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
+    pins.setVectorPullB(dataOperation.isNotVectorPull());
+    pins.setRdy(dataOperation.isReady());
+
+    //Address is always valid before the operation.
+    Address address = getAddress(cpu);
+    pins.setAddress(address.getOffset());
+
     for (Operation operation : operations)
     {
       operation.execute(cpu);
     }
-
-    Address address = getAddress(cpu);
-    DataOperation dataOperation = getDataOperation();
-    boolean read = dataOperation.isRead();
-    cpu.setRead(read);
-
-    Pins65816 pins = cpu.getPins();
-    pins.setRwb(read);
-    pins.setValidDataAddress(dataOperation.isValidDataAddress());
-    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setRdy(dataOperation.isReady());
-    pins.setMX(cpu.isMemory8Bit());
-    pins.setEmulation(cpu.isEmulation());
-    pins.setAddress(address.getOffset());
   }
 
   public final void executeOnRisingEdge(Cpu65816 cpu)
@@ -103,7 +104,7 @@ public class BusCycle
     pins.setData(address.getBank());
   }
 
-  protected boolean mustExecute(Cpu65816 cpu)
+  public boolean mustExecute(Cpu65816 cpu)
   {
     boolean mustExecute = true;
     for (Operation operation : operations)

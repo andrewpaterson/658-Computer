@@ -14,8 +14,9 @@ public class Memory
 
   protected final Omniport addressBus;
   protected final Omniport dataBus;
-  protected final Uniport rwb;
-  protected Uniport outputEnableB;
+  protected final Uniport writeEnableB;
+  protected final Uniport outputEnableB;
+  protected final Uniport chipEnableB;
 
   protected boolean propagateWroteMemory;
   protected long oldAddress;
@@ -25,20 +26,23 @@ public class Memory
                 String name,
                 Bus addressBus,
                 Bus dataBus,
-                Trace rwb,
+                Trace writeEnableBTrace,
                 Trace outputEnabledBTrace,
+                Trace chipEnabledBTrace,
                 byte[] bytes)
   {
     super(tickables, name);
     this.addressBus = new Omniport(this, "Address Bus", 16);
     this.dataBus = new Omniport(this, "Data Bus", 8);
-    this.rwb = new Uniport(this, "RWB");
+    this.writeEnableB = new Uniport(this, "WEB");
     this.outputEnableB = new Uniport(this, "OEB");
+    this.chipEnableB = new Uniport(this, "CEB");
 
     this.addressBus.connect(addressBus);
     this.dataBus.connect(dataBus);
-    this.rwb.connect(rwb);
+    this.writeEnableB.connect(writeEnableBTrace);
     this.outputEnableB.connect(outputEnabledBTrace);
+    this.chipEnableB.connect(chipEnabledBTrace);
 
     pvMemory = new byte[bytes.length];
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
@@ -50,7 +54,28 @@ public class Memory
   {
     propagateWroteMemory = false;
 
-    TraceValue readState = rwb.read();
+    TraceValue chipEnabledBValue = chipEnableB.read();
+    if (chipEnabledBValue.isError())
+    {
+      dataBus.error();
+    }
+    else if (chipEnabledBValue.isUnsettled())
+    {
+      dataBus.unset();
+    }
+    else if (chipEnabledBValue.isHigh())
+    {
+      dataBus.highImpedance();
+    }
+    else if (chipEnabledBValue.isLow() || chipEnabledBValue.isNotConnected())
+    {
+      propagateWhenChipEnabled();
+    }
+  }
+
+  private void propagateWhenChipEnabled()
+  {
+    TraceValue readState = writeEnableB.read();
     TraceValue addressState = addressBus.read();
     TraceValue outputEnabledBValue = outputEnableB.read();
 

@@ -8,7 +8,7 @@ public interface Pins65816
 
   void setData(int data);
 
-  void setRwb(boolean rwb);
+  void setRwb(boolean rwB);
 
   boolean getPhi2();
 

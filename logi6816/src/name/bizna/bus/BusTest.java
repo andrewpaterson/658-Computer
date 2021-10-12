@@ -20,7 +20,7 @@ public class BusTest
 
     Trace clockTrace = new Trace();
     Trace readTrace = new Trace();
-    Trace outputEnableTrace = new Trace();
+    Trace lowTrace = new Trace();
     Bus counterData = new Bus(8);
     Bus dataBus = new Bus(8);
     Bus zeroBus = new Bus(8);
@@ -28,13 +28,13 @@ public class BusTest
 
     new ClockOscillator(tickables, "", clockTrace);
     Counter counter = new Counter(tickables, "", 8, counterData, clockTrace);
-    new Constant(tickables, "", true, readTrace);
-    new Constant(tickables, "", false, outputEnableTrace);
-    new Constant(tickables, "", 8, 0, zeroBus);
+    new Constant(tickables, "High", true, readTrace);
+    new Constant(tickables, "Low", false, lowTrace);
+    new Constant(tickables, "00000000", 8, 0, zeroBus);
 
     new Memory(tickables,
                "",
-               addressBus, dataBus, readTrace, outputEnableTrace,
+               addressBus, dataBus, readTrace, lowTrace, lowTrace,
                readBytes(new File("../Test816/Test816.bin")));
 
     long lastCountNumber = 0;

@@ -66,9 +66,9 @@ public class LogisimPins65816
   }
 
   @Override
-  public void setRwb(boolean rwb)
+  public void setRwb(boolean rwB)
   {
-    instanceState.setPort(PORT_RWB, rwb ? Value.TRUE : Value.FALSE, 9);
+    instanceState.setPort(PORT_RWB, rwB ? Value.TRUE : Value.FALSE, 9);
   }
 
   @Override

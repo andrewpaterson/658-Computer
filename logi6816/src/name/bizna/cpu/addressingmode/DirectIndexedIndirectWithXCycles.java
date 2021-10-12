@@ -19,8 +19,8 @@ public class DirectIndexedIndirectWithXCycles
           new BusCycle(Address(PBR(), PC()), IO()),
           new BusCycle(Address(DP(), D0(), X()), Read_AAL()),
           new BusCycle(Address(DP(), D0(), X(), o(1)), Read_AAH()),
-          new BusCycle(Address(DBR(), AA()), Read_DataLow(), E8Bit(operation), DONE8Bit(M)),
-          new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(M)));
+          new BusCycle(Address(DBR(), AA()), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
+          new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 }
 

@@ -11,7 +11,6 @@ public class DoneInstruction
     cpu.doneInstruction();
   }
 
-
   @Override
   public String toString()
   {

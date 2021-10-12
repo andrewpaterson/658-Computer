@@ -1,8 +1,8 @@
 package name.bizna.cpu.addressingmode;
 
 import name.bizna.cpu.Cpu65816;
-import name.bizna.util.EmulatorException;
 import name.bizna.cpu.WidthFromRegister;
+import name.bizna.util.EmulatorException;
 
 import static name.bizna.cpu.WidthFromRegister.M;
 import static name.bizna.cpu.WidthFromRegister.XY;

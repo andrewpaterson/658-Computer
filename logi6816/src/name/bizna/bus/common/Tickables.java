@@ -1,7 +1,6 @@
 package name.bizna.bus.common;
 
 import name.bizna.bus.gate.Tickable;
-import name.bizna.util.EmulatorException;
 
 import java.util.ArrayList;
 import java.util.List;

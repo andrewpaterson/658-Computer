@@ -1,10 +1,10 @@
 package name.bizna.cpu;
 
-import name.bizna.cpu.interrupt.BRKVector;
-import name.bizna.util.EmulatorException;
 import name.bizna.cpu.addressingmode.*;
+import name.bizna.cpu.interrupt.BRKVector;
 import name.bizna.cpu.interrupt.COPVector;
 import name.bizna.cpu.opcode.*;
+import name.bizna.util.EmulatorException;
 
 import java.util.ArrayList;
 import java.util.List;

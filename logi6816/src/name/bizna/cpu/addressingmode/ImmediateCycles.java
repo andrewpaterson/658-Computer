@@ -14,8 +14,8 @@ public class ImmediateCycles
   {
     super(Immediate,
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
-          new BusCycle(Address(PBR(), PC()), PC_inc(), Read_DataLow(), E8Bit(operation), DONE8Bit(width)),
-          new BusCycle(Address(PBR(), PC()), PC_inc(), Read_DataHigh(), E16Bit(operation), DONE16Bit(width)));
+          new BusCycle(Address(PBR(), PC()), PC_inc(), Read_DataLow(), E8Bit(operation, width), DONE8Bit(width)),
+          new BusCycle(Address(PBR(), PC()), PC_inc(), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 }
 

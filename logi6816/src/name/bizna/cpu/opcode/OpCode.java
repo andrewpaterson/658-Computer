@@ -1,8 +1,8 @@
 package name.bizna.cpu.opcode;
 
 import name.bizna.cpu.AddressingMode;
-import name.bizna.util.EmulatorException;
 import name.bizna.cpu.addressingmode.InstructionCycles;
+import name.bizna.util.EmulatorException;
 
 public class OpCode
 {

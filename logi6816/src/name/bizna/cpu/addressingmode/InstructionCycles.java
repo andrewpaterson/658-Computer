@@ -9,7 +9,6 @@ import name.bizna.util.EmulatorException;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 public abstract class InstructionCycles
 {
@@ -54,7 +53,7 @@ public abstract class InstructionCycles
       }
     }
 
-    if (done8 != 1 && done16 !=1)
+    if (done8 != 1 && done16 != 1)
     {
       throw new EmulatorException("Exactly [1] 8 bit and [1] 16 bit done  operation must be specified in an Instruction cycle.");
     }
@@ -331,14 +330,15 @@ public abstract class InstructionCycles
     return new WriteAbsoluteAddressHigh();
   }
 
-  protected static ExecuteIf16BitMemory E16Bit(Executor<Cpu65816> consumer)
+  protected static ExecuteIf16Bit E16Bit(Executor<Cpu65816> consumer, WidthFromRegister width)
   {
-    return new ExecuteIf16BitMemory(consumer);
+
+    return new ExecuteIf16Bit(consumer, width);
   }
 
-  protected static ExecuteIf8BitMemory E8Bit(Executor<Cpu65816> consumer)
+  protected static ExecuteIf8Bit E8Bit(Executor<Cpu65816> consumer, WidthFromRegister width)
   {
-    return new ExecuteIf8BitMemory(consumer);
+    return new ExecuteIf8Bit(consumer, width);
   }
 
   protected static Execute E(Executor<Cpu65816> consumer)

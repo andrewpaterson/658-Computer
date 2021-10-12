@@ -19,8 +19,8 @@ public class DirectIndirectLongIndexedWithYCycles
           new BusCycle(Address(DP(), D0()), Read_AAL()),
           new BusCycle(Address(DP(), D0(), o(1)), Read_AAH()),
           new BusCycle(Address(DP(), D0(), o(2)), Read_AAB()),
-          new BusCycle(Address(AAB(), AA(), Y()), Read_DataLow(), E8Bit(operation), DONE8Bit(M)),
-          new BusCycle(Address(AAB(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(M)));
+          new BusCycle(Address(AAB(), AA(), Y()), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
+          new BusCycle(Address(AAB(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 }
 

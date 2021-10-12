@@ -8,7 +8,6 @@ import name.bizna.cpu.interrupt.ResetVector;
 import name.bizna.cpu.opcode.*;
 import name.bizna.util.EmulatorException;
 import name.bizna.util.IntUtil;
-import name.bizna.util.StringUtil;
 
 import static name.bizna.cpu.CpuFlags.*;
 import static name.bizna.util.IntUtil.*;
@@ -495,10 +494,6 @@ public class Cpu65816
   {
     if ((data >= 0) && (data <= 255))
     {
-      if (data == 0xa0)
-      {
-        int xxxx = 0;
-      }
       opCode = opCodeTable[data];
     }
     else

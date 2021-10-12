@@ -16,8 +16,8 @@ public class StackRelativeCycles
           new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_D0(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), IO()),
-          new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataLow(), E8Bit(operation), DONE8Bit(M)),
-          new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataHigh(), E16Bit(operation), DONE16Bit(M)));
+          new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
+          new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 }
 

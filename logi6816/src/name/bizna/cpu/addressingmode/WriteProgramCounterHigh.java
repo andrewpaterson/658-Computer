@@ -16,6 +16,7 @@ public class WriteProgramCounterHigh
   {
     cpu.getPins().setData(IntUtil.getHighByte(cpu.getProgramCounter().getOffset()));
   }
+
   @Override
   public String toString()
   {

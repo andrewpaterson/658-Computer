@@ -4,8 +4,6 @@ import name.bizna.cpu.Cpu65816;
 import name.bizna.cpu.Executor;
 import name.bizna.cpu.interrupt.InterruptVector;
 
-import java.util.function.Consumer;
-
 import static name.bizna.cpu.AddressingMode.StackInterruptSoftware;
 
 public class StackSoftwareInterruptCycles

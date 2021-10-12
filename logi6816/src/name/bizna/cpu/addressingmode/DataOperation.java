@@ -1,8 +1,5 @@
 package name.bizna.cpu.addressingmode;
 
-import name.bizna.cpu.Cpu65816;
-import name.bizna.cpu.Pins65816;
-
 public abstract class DataOperation
     extends Operation
 {

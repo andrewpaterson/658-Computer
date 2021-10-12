@@ -4,8 +4,6 @@ import name.bizna.cpu.AddressingMode;
 import name.bizna.cpu.Cpu65816;
 import name.bizna.cpu.Executor;
 
-import java.util.function.Consumer;
-
 public class BlockMoveCycles
     extends InstructionCycles
 {

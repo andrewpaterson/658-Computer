@@ -3,8 +3,6 @@ package name.bizna.cpu.addressingmode;
 import name.bizna.cpu.Cpu65816;
 import name.bizna.cpu.Executor;
 
-import java.util.function.Consumer;
-
 import static name.bizna.cpu.AddressingMode.Stack;
 
 public class StackPLDCycles

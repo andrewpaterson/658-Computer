@@ -17,8 +17,8 @@ public class AbsoluteLongIndexedWithXCycles
           new BusCycle(Address(PBR(), PC()), Read_AAL(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_AAH(), PC_inc()),
           new BusCycle(Address(PBR(), PC()), Read_AAB(), PC_inc()),
-          new BusCycle(Address(AAB(), AA(), X()), Read_DataLow(), E8Bit(operation), DONE8Bit(M)),
-          new BusCycle(Address(AAB(), AA(), X(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(M)));
+          new BusCycle(Address(AAB(), AA(), X()), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
+          new BusCycle(Address(AAB(), AA(), X(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 }
 

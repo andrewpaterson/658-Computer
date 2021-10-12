@@ -19,8 +19,8 @@ public class StackRelativeIndirectIndexedWithYCycles
           new BusCycle(Address(S(), D0(), o(1)), Read_AAL(), SP_inc()),
           new BusCycle(Address(S(), D0(), o(1)), Read_AAH(), SP_inc()),
           new BusCycle(Address(S(), D0(), o(1)), IO()),
-          new BusCycle(Address(DBR(), AA(), Y()), Read_DataLow(), E8Bit(operation), DONE8Bit(M)),
-          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation), DONE16Bit(M)));
+          new BusCycle(Address(DBR(), AA(), Y()), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
+          new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 }
 

@@ -25,8 +25,8 @@ public class Logisim6502Factory
   private static final int V_MARGIN = 10;
   private static final int LEFT_X = -120;
   private static final int RIGHT_X = 120;
-  private static final int TOP_Y = -130 - V_MARGIN;
-  private static final int BOT_Y = 130 + V_MARGIN;
+  private static final int TOP_Y = -120 - V_MARGIN;
+  private static final int BOT_Y = 120 + V_MARGIN;
   private static final int PIN_TOP_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / -2) - V_MARGIN;
   private static final int PIN_BOT_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / 2) + V_MARGIN;
   private static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN + PIXELS_PER_PIN / 2;
@@ -158,18 +158,19 @@ public class Logisim6502Factory
 
       Logisim65C02Data core = Logisim65C02Data.getOrCreate(painter, this);
       int topOffset = 30;
-      drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString(), core.isOpcodeValid());
-      drawInternal(g, topOffset + 20, 35, "Op-code:", core.getOpcodeValueHex(), core.isOpcodeValid());
-      drawInternal(g, topOffset + 40, 35, "Cycle:", core.getCycle(), true);
-      drawInternal(g, topOffset + 60, 50, "Address:", core.getAddressValueHex(), core.isAddressValid());
-      drawInternal(g, topOffset + 80, 35, "Accumulator:", core.getAccumulatorValueHex(), true);
-      drawInternal(g, topOffset + 100, 35, "X Index:", core.getXValueHex(), true);
-      drawInternal(g, topOffset + 120, 35, "Y Index:", core.getYValueHex(), true);
-      drawInternal(g, topOffset + 140, 35, "Stack", core.getStackValueHex(), true);
-      drawInternal(g, topOffset + 160, 50, "P-Counter:", core.getProgramCounterValueHex(), true);
-      drawInternal(g, topOffset + 180, 35, "Data", core.getDataValueHex(), core.isDataValid());
+      int width8Bit = 38;
+      int width16Bit = 52;
 
-      int processorStatusTopOffset = topOffset + 205;
+      drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString(), core.isOpcodeValid());
+      drawInternal(g, topOffset + 20, width8Bit, "Op-code:", core.getOpcodeValueHex(), core.isOpcodeValid());
+      drawInternal(g, topOffset + 40, width8Bit, "Cycle:", core.getCycle(), true);
+      drawInternal(g, topOffset + 60, width8Bit, "Accumulator:", core.getAccumulatorValueHex(), true);
+      drawInternal(g, topOffset + 80, width8Bit, "X Index:", core.getXValueHex(), true);
+      drawInternal(g, topOffset + 100, width8Bit, "Y Index:", core.getYValueHex(), true);
+      drawInternal(g, topOffset + 120, width16Bit, "Stack", core.getStackValueHex(), true);
+      drawInternal(g, topOffset + 140, width16Bit, "P-Counter:", core.getProgramCounterValueHex(), true);
+
+      int processorStatusTopOffset = topOffset + 185;
       drawProcessorStatus(g, processorStatusTopOffset, -60, "C", core.isProcessorStatus(P_C_BIT));
       drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", core.isProcessorStatus(P_Z_BIT));
       drawProcessorStatus(g, processorStatusTopOffset, -20, "I", core.isProcessorStatus(P_I_BIT));
@@ -241,11 +242,6 @@ public class Logisim6502Factory
     instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
   }
 
-  private void setAddressPort(InstanceState instanceState, short a)
-  {
-    instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), a), 12);
-  }
-
   private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
   {
     if (instanceState.getPortValue(PORT_BE) == Value.FALSE)
@@ -265,7 +261,7 @@ public class Logisim6502Factory
   {
     if (updateBussesEnabledFromNotBusEnabled(instanceState))
     {
-      setAddressPort(instanceState, address);
+      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
       instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
       setPort(instanceState, PORT_RWB, true, 9);
     }
@@ -275,7 +271,7 @@ public class Logisim6502Factory
   {
     if (updateBussesEnabledFromNotBusEnabled(instanceState))
     {
-      setAddressPort(instanceState, address);
+      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
       instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
       setPort(instanceState, PORT_RWB, false, 9);
     }

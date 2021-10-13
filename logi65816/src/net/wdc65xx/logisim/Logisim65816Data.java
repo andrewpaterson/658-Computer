@@ -9,14 +9,14 @@ public class Logisim65816Data
                Cloneable
 {
   protected Cpu65816 cpu;
-  protected Logisim65816Factory parent;
+  protected Logisim65816Factory factory;
   protected LogisimPins65816 pins;
 
-  public Logisim65816Data(Logisim65816Factory parent)
+  public Logisim65816Data(Logisim65816Factory factory)
   {
-    this.parent = parent;
+    this.factory = factory;
 
-    this.pins = new LogisimPins65816();
+    this.pins = new LogisimPins65816(factory);
     this.cpu = new Cpu65816(pins);
   }
 

@@ -3,21 +3,23 @@ package net.wdc65xx.logisim;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceState;
+import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.Cpu65816;
 import net.wdc65xx.wdc65816.Pins65816;
 
-import static net.wdc65xx.logisim.Logisim65816Factory.*;
 import static net.util.IntUtil.toByte;
+import static net.wdc65xx.logisim.Logisim65816Factory.*;
 
 public class LogisimPins65816
     implements Pins65816
 {
   private InstanceState instanceState;
-
+  private Logisim65816Factory factory;
   private Cpu65816 cpu;
 
-  public LogisimPins65816()
+  public LogisimPins65816(Logisim65816Factory factory)
   {
+    this.factory = factory;
     this.instanceState = null;
   }
 
@@ -35,31 +37,38 @@ public class LogisimPins65816
   @Override
   public int getData()
   {
-    //instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);  //How the ever-loving-fuck does this read data?
     if (cpu.isRead())
     {
+      System.out.println("Read");
       Value portValue = instanceState.getPortValue(PORT_DataBus);
+      instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
       if (portValue.isFullyDefined())
       {
-        return toByte((int) portValue.toLongValue());
+        long longValue = portValue.toLongValue();
+        System.out.println("Fully Defined: " + Long.toHexString(longValue));
+        return toByte((int) longValue);
       }
       else if (portValue.isErrorValue())
       {
+        System.out.println("Error");
         setAllOutputsError();
         return 0;
       }
       else if (portValue.isUnknown())
       {
+        System.out.println("Unknown");
         return 0;
       }
       else
       {
-        return 0;
+        System.out.println("Impossible Value");
+        throw new EmulatorException("Impossible Value");
       }
     }
     else
     {
-      return 0;
+      System.out.println("Get Data when CPU is write?");
+      throw new EmulatorException("Get Data when CPU is write?");
     }
   }
 

@@ -175,10 +175,9 @@ end TCL_Generic;&#13;
     <a name="downloadFrequency" val="-1.0"/>
     <a name="simulationFrequency" val="8.0"/>
     <comp lib="0" loc="(110,90)" name="Clock"/>
-    <comp lib="0" loc="(1130,210)" name="Constant">
+    <comp lib="0" loc="(1130,210)" name="Probe">
+      <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
-      <a name="value" val="0xff"/>
-      <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(250,60)" name="Tunnel">
       <a name="label" val="Tick_Count"/>

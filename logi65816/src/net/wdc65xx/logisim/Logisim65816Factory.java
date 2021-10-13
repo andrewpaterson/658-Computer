@@ -25,8 +25,8 @@ public class Logisim65816Factory
 
   protected static final int LEFT_X = -120;
   protected static final int RIGHT_X = 120;
-  protected static final int TOP_Y = -130 - V_MARGIN;
-  protected static final int BOT_Y = 130 + V_MARGIN;
+  protected static final int TOP_Y = -120 - V_MARGIN;
+  protected static final int BOT_Y = 120 + V_MARGIN;
   protected static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN;
   protected static final int PIN_STOP_Y = PIN_BOT_Y - V_MARGIN;
 
@@ -47,37 +47,60 @@ public class Logisim65816Factory
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_AddressBus = 15;
 
-  protected static final PortInfo[] portInfos = new PortInfo[]
+  protected static PortInfo[] portInfos;
+  protected static String[] portInfoNamesHigh = new String[]
       {
           // Left side, top to bottom
-          PortInfo.sharedInput("ABORT"),
-          PortInfo.sharedInput("IRQB"),
-          PortInfo.sharedInput("NMIB"),
-          PortInfo.sharedInput("RESB"),
-          PortInfo.sharedInput("PHI2"),
-          PortInfo.sharedOutput("VPB"),
-          PortInfo.sharedOutput("VPA"),
-          PortInfo.sharedOutput("VDA"),
+          "ABORT",
+          "IRQB",
+          "NMIB",
+          "RESB",
+          "PHI2",
+          "VPB",
+          "VPA",
+          "VDA",
 
           // Right side, bottom to top
-          PortInfo.sharedOutput("MLB"),
-          PortInfo.sharedBidirectional("RDY"),
-          PortInfo.sharedOutput("MX"),
-          PortInfo.sharedOutput("E"),
-          PortInfo.sharedInput("BE"),
-          PortInfo.sharedOutput("RWB"),
-          PortInfo.sharedBidirectional("D", 8),
-          PortInfo.sharedOutput("A", 16),
-      };
+          "MLB",
+          "RDY",
+          "X",
+          "E",
+          "BE",
+          "RWB",
+          "BA",
+          "A"};
 
   public Logisim65816Factory()
   {
     super("W65C816S");
+
+    portInfos = new PortInfo[]
+        {
+            // Left side, top to bottom
+            PortInfo.sharedInput("ABORT"),
+            PortInfo.sharedInput("IRQB"),
+            PortInfo.sharedInput("NMIB"),
+            PortInfo.sharedInput("RESB"),
+            PortInfo.sharedInput("PHI2"),
+            PortInfo.exclusiveOutput("VPB"),
+            PortInfo.exclusiveOutput("VPA"),
+            PortInfo.exclusiveOutput("VDA"),
+
+            // Right side, bottom to top
+            PortInfo.exclusiveOutput("MLB"),
+            PortInfo.sharedBidirectional("RDY"),
+            PortInfo.exclusiveOutput("M"),
+            PortInfo.exclusiveOutput("E"),
+            PortInfo.sharedInput("BE"),
+            PortInfo.sharedOutput("RWB"),
+            PortInfo.sharedBidirectional("D", 8),
+            PortInfo.sharedOutput("A", 16)};
+
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
     addStandardPins(portInfos, LEFT_X, RIGHT_X, PIN_START_Y, PIN_STOP_Y, PIXELS_PER_PIN, PINS_PER_SIDE);
   }
 
-  void paintPorts(InstancePainter painter)
+  void paintPorts(InstancePainter painter, boolean clockHigh)
   {
     int n = 0;
     for (int i = 0; i < Logisim65816Factory.portInfos.length; ++i)
@@ -85,7 +108,16 @@ public class Logisim65816Factory
       if (Logisim65816Factory.portInfos[i] != null)
       {
         Direction dir = i < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
-        painter.drawPort(n, Logisim65816Factory.portInfos[i].name, dir);
+        String name;
+        if (!clockHigh)
+        {
+          name = Logisim65816Factory.portInfos[i].name;
+        }
+        else
+        {
+          name = portInfoNamesHigh[i];
+        }
+        painter.drawPort(n, name, dir);
         n++;
       }
     }
@@ -94,8 +126,12 @@ public class Logisim65816Factory
   @Override
   public void paintInstance(InstancePainter painter)
   {
+    Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(painter, this);
+    Cpu65816 cpu = data.getCpu();
+    boolean clockHigh = cpu.getPreviousClock();
+
     painter.drawBounds();
-    paintPorts(painter);
+    paintPorts(painter, clockHigh);
 
     Graphics g = painter.getGraphics();
     if (g instanceof Graphics2D)
@@ -108,20 +144,13 @@ public class Logisim65816Factory
       AffineTransform oldTransform = g2.getTransform();
       AffineTransform newTransform = (AffineTransform) oldTransform.clone();
       newTransform.translate(bds.getX() + bds.getWidth() / 2.0, bds.getY() + bds.getHeight() / 2.0);
-      if (bds.getWidth() > bds.getHeight())
-      {
-        newTransform.quadrantRotate(-1, 0, 0);
-      }
       g2.setTransform(newTransform);
       GraphicsUtil.drawCenteredText(g, "W65C816S", 0, TOP_Y + V_MARGIN);
 
-      Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(painter, this);
-      Cpu65816 cpu = data.getCpu();
-
       int topOffset = 30;
-      int width8Bit = 35;
-      int width16Bit = 50;
-      int width24Bit = 65;
+      int width8Bit = 38;
+      int width16Bit = 52;
+      int width24Bit = 70;
 
       drawInternal(g, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), data.isOpcodeValid());
       drawInternal(g, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), data.isOpcodeValid());
@@ -131,10 +160,9 @@ public class Logisim65816Factory
       drawInternal(g, topOffset + 100, width16Bit, "Y Index:", cpu.getYValueHex(), true);
       drawInternal(g, topOffset + 120, width16Bit, "Stack", cpu.getStackValueHex(), true);
       drawInternal(g, topOffset + 140, width24Bit, "P-Counter:", cpu.getProgramCounterValueHex(), true);
-      drawInternal(g, topOffset + 160, width24Bit, "Address:", cpu.getAddressValueHex(), false);
-      drawInternal(g, topOffset + 180, width16Bit, "Data", cpu.getDataValueHex(), false);
+      drawInternal(g, topOffset + 160, width8Bit, "Data Bank:", cpu.getDataBankValueHex(), true);
 
-      int processorStatusTopOffset = topOffset + 205;
+      int processorStatusTopOffset = topOffset + 185;
       boolean emulationMode = cpu.isEmulation();
       drawProcessorStatus(g, processorStatusTopOffset, -60, "C", cpu.isCarry());
       drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", cpu.isZeroFlag());
@@ -191,9 +219,9 @@ public class Logisim65816Factory
   }
 
   @Override
-  public void propagate(InstanceState state)
+  public void propagate(InstanceState instanceState)
   {
-    Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(state, this);
+    Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(instanceState, this);
     data.tick();
   }
 

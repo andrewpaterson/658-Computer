@@ -22,7 +22,7 @@ public class Logisim65C02Data
   public static final byte P_V_BIT = (byte) 0x40;
   public static final byte P_N_BIT = (byte) 0x80;
 
-  protected Logisim6502Factory parent;
+  protected Logisim6502Factory factory;
   protected InstanceState instanceState;
 
   protected byte cycle;
@@ -50,9 +50,9 @@ public class Logisim65C02Data
   protected byte intendedData;
   protected boolean intendedRWB;
 
-  public Logisim65C02Data(Logisim6502Factory parent)
+  public Logisim65C02Data(Logisim6502Factory factory)
   {
-    this.parent = parent;
+    this.factory = factory;
     previousNMI = false;
     previousOverflow = false;
     previousClock = true;
@@ -125,7 +125,7 @@ public class Logisim65C02Data
     }
     else
     {
-      s = new StringBuilder(Integer.toHexString(0x1000 + ((int) value)));
+      s = new StringBuilder(Integer.toHexString(0x10000 + ((int) value)));
     }
     while (s.length() < 4)
     {
@@ -133,11 +133,6 @@ public class Logisim65C02Data
     }
     s.insert(0, "0x");
     return s.toString();
-  }
-
-  protected String getAddressValueHex()
-  {
-    return getWordStringHex(address);
   }
 
   public String getAccumulatorValueHex()
@@ -157,7 +152,8 @@ public class Logisim65C02Data
 
   public String getStackValueHex()
   {
-    return getByteStringHex(stack);
+    short i = (short) ((short) (stack & 0xff) + 0x100);
+    return getWordStringHex(i);
   }
 
   public String getProgramCounterValueHex()
@@ -165,24 +161,9 @@ public class Logisim65C02Data
     return getWordStringHex(programCounter);
   }
 
-  public String getDataValueHex()
-  {
-    return getByteStringHex(data);
-  }
-
   public boolean isProcessorStatus(byte statusBit)
   {
     return (processorStatus & statusBit) != 0;
-  }
-
-  public boolean isAddressValid()
-  {
-    return intendedAddress == address;
-  }
-
-  public boolean isDataValid()
-  {
-    return intendedData == data;
   }
 
   public String getCycle()
@@ -937,12 +918,12 @@ public class Logisim65C02Data
       case 1:
       {
         programCounter--;
-        parent.setReady(instanceState, false);
+        factory.setReady(instanceState, false);
         break;
       }
       case 2:
       {
-        if (!parent.isInterruptRequest(instanceState) && !(parent.isNonMaskableInterrupt(instanceState) && !previousNMI))
+        if (!factory.isInterruptRequest(instanceState) && !(factory.isNonMaskableInterrupt(instanceState) && !previousNMI))
         {
           cycle--;
         }
@@ -6075,7 +6056,7 @@ public class Logisim65C02Data
 
   private void setMemoryLock(boolean mlb)
   {
-    parent.setMLB(instanceState, mlb);
+    factory.setMLB(instanceState, mlb);
   }
 
   private void logicalShiftRight()
@@ -6309,11 +6290,11 @@ public class Logisim65C02Data
     previousNMI = true;
     vectorToPull = RESET_VECTOR;
     wantingVectorPull = false;
-    parent.setVPB(cis, false);
+    factory.setVPB(cis, false);
     wantingSync = false;
-    parent.setSync(cis, false);
-    parent.setMLB(cis, false);
-    parent.setReady(cis, true);
+    factory.setSync(cis, false);
+    factory.setMLB(cis, false);
+    factory.setReady(cis, true);
   }
 
   protected void wantRead(short address)
@@ -6365,10 +6346,10 @@ public class Logisim65C02Data
       reset(instanceState);
     }
 
-    boolean isReady = parent.isReady(instanceState);
+    boolean isReady = factory.isReady(instanceState);
     if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
     {
-      parent.setReady(instanceState, true);
+      factory.setReady(instanceState, true);
     }
     if (stopped || !isReady)
     {
@@ -6412,7 +6393,7 @@ public class Logisim65C02Data
 
   private void updateOverflow(InstanceState instanceState)
   {
-    boolean overflow = parent.isOverflow(instanceState);
+    boolean overflow = factory.isOverflow(instanceState);
     if (overflow != previousOverflow)
     {
       if (overflow)
@@ -6432,7 +6413,7 @@ public class Logisim65C02Data
 
   private void fetchData(InstanceState instanceState)
   {
-    data = parent.getDataFromPort(instanceState);
+    data = factory.getDataFromPort(instanceState);
     doInstruction();
     if (cycle >= 0)
     {
@@ -6445,14 +6426,14 @@ public class Logisim65C02Data
     wantRead(programCounter);
     programCounter++;
 
-    boolean nmi = parent.isNonMaskableInterrupt(instanceState);
+    boolean nmi = factory.isNonMaskableInterrupt(instanceState);
     if (nmi && !previousNMI)
     {
       vectorToPull = NMI_VECTOR;
       programCounter -= 2;
       fetchedOpcode = BRK;
     }
-    else if (parent.isInterruptRequest(instanceState) && isInterrupt() == 0)
+    else if (factory.isInterruptRequest(instanceState) && isInterrupt() == 0)
     {
       vectorToPull = IRQ_VECTOR;
       programCounter -= 2;
@@ -6460,7 +6441,7 @@ public class Logisim65C02Data
     }
     else
     {
-      fetchedOpcode = parent.getDataFromPort(instanceState);
+      fetchedOpcode = factory.getDataFromPort(instanceState);
     }
     previousNMI = nmi;
     cycle++;
@@ -6470,14 +6451,14 @@ public class Logisim65C02Data
   {
     if (intendedRWB)
     {
-      parent.doRead(instanceState, intendedAddress);
+      factory.doRead(instanceState, intendedAddress);
     }
     else
     {
-      parent.doWrite(instanceState, intendedAddress, intendedData);
+      factory.doWrite(instanceState, intendedAddress, intendedData);
     }
-    parent.setSync(instanceState, wantingSync);
-    parent.setVPB(instanceState, wantingVectorPull);
+    factory.setSync(instanceState, wantingSync);
+    factory.setVPB(instanceState, wantingVectorPull);
   }
 
   private int isInterrupt()

@@ -1,5 +1,7 @@
 package net.wdc65xx.logisim;
 
+import com.cburch.logisim.instance.Port;
+
 public class PortInfo
 {
   protected String name;
@@ -17,32 +19,32 @@ public class PortInfo
 
   public static PortInfo sharedOutput(String name, int pins)
   {
-    return new PortInfo(name, "output", "shared", pins);
+    return new PortInfo(name, Port.OUTPUT, Port.SHARED, pins);
   }
 
   public static PortInfo sharedBidirectional(String name, int pins)
   {
-    return new PortInfo(name, "inout", "shared", pins);
-  }
-
-  public static PortInfo exclusiveOutput(String name)
-  {
-    return new PortInfo(name, "output", "exclusive", 1);
+    return new PortInfo(name, Port.INOUT, Port.SHARED, pins);
   }
 
   public static PortInfo sharedOutput(String name)
   {
-    return new PortInfo(name, "output", "shared", 1);
+    return new PortInfo(name, Port.OUTPUT, Port.SHARED, 1);
+  }
+
+  public static PortInfo exclusiveOutput(String name)
+  {
+    return new PortInfo(name, Port.OUTPUT, Port.EXCLUSIVE, 1);
   }
 
   public static PortInfo sharedInput(String name)
   {
-    return new PortInfo(name, "input", "shared", 1);
+    return new PortInfo(name, Port.INPUT, Port.SHARED, 1);
   }
 
   public static PortInfo sharedBidirectional(String name)
   {
-    return new PortInfo(name, "inout", "shared", 1);
+    return new PortInfo(name, Port.INOUT, Port.SHARED, 1);
   }
 }
 

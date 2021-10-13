@@ -73,7 +73,7 @@
       <a name="valign" val="base"/>
     </tool>
   </lib>
-  <lib desc="jar#C:\Work\658-Computer\logi6502\out\artifacts\logi6502_jar\logi6502.jar#name.bizna.logi6502.Components" name="7"/>
+  <lib desc="jar#C:\Work\658-Computer\logi6502\out\artifacts\logi6502.jar#name.bizna.logi6502.Components" name="7"/>
   <lib desc="#Input/Output-Extra" name="8"/>
   <main name="main"/>
   <options>
@@ -352,9 +352,10 @@
       <a name="halign" val="left"/>
       <a name="text" val="Initial Address"/>
     </comp>
-    <comp lib="7" loc="(420,320)" name="W65C02S (Expert)"/>
+    <comp lib="7" loc="(420,320)" name="W65C02S"/>
     <comp loc="(1080,450)" name="start_address">
       <a name="facing" val="north"/>
+      <a name="labelvisible" val="false"/>
     </comp>
     <wire from="(100,120)" to="(120,120)"/>
     <wire from="(1010,270)" to="(1010,290)"/>

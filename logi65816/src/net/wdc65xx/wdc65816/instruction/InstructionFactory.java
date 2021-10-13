@@ -892,8 +892,8 @@ public class InstructionFactory
 
   public static Instruction createFetchNext()
   {
-    return new Instruction(-1, createFetchOpCodeCycles(), "Fetch Opcode",
-                           "Fetch Opcode");
+    return new Instruction(-1, createFetchOpCodeCycles(), "NEXT",
+                           "Fetch Opcode from address in program counter.");
   }
 }
 

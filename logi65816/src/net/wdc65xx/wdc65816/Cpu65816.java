@@ -1,18 +1,20 @@
 package net.wdc65xx.wdc65816;
 
-import net.wdc65xx.wdc65816.addressingmode.*;
+import net.util.EmulatorException;
+import net.util.IntUtil;
+import net.wdc65xx.wdc65816.addressingmode.BusCycle;
+import net.wdc65xx.wdc65816.addressingmode.InstructionCycles;
 import net.wdc65xx.wdc65816.interrupt.AbortVector;
 import net.wdc65xx.wdc65816.interrupt.IRQVector;
 import net.wdc65xx.wdc65816.interrupt.NMIVector;
 import net.wdc65xx.wdc65816.interrupt.ResetVector;
 import net.wdc65xx.wdc65816.opcode.*;
-import net.util.EmulatorException;
-import net.util.IntUtil;
 
-import static net.wdc65xx.wdc65816.CpuFlags.*;
 import static net.util.IntUtil.*;
 import static net.util.StringUtil.to16BitHex;
 import static net.util.StringUtil.to8BitHex;
+import static net.wdc65xx.wdc65816.CpuFlags.*;
+import static net.wdc65xx.wdc65816.addressingmode.InstructionCycleFactory.*;
 
 public class Cpu65816
 {
@@ -66,11 +68,11 @@ public class Cpu65816
     programCounter = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
     opCodeTable = OpCodeTable.createTable();
-    resetOpcode = new OpCode_RES(new StackResetCycles(new ResetVector(), Cpu65816::RES));
-    irqOpcode = new OpCode_IRQ(new StackHardwareInterruptCycles(new IRQVector(), Cpu65816::IRQ));
-    nmiOpcode = new OpCode_NMI(new StackHardwareInterruptCycles(new NMIVector(), Cpu65816::NMI));
-    abortOpcode = new OpCode_ABORT(new StackHardwareInterruptCycles(new AbortVector(), Cpu65816::ABORT));
-    fetchNextOpcode = new OpCode_NEXT(new FetchOpCodeCycles());
+    resetOpcode = new OpCode_RES(createStackResetCycles(new ResetVector(), Cpu65816::RES));
+    irqOpcode = new OpCode_IRQ(createStackHardwareInterruptCycles(new IRQVector(), Cpu65816::IRQ));
+    nmiOpcode = new OpCode_NMI(createStackHardwareInterruptCycles(new NMIVector(), Cpu65816::NMI));
+    abortOpcode = new OpCode_ABORT(createStackHardwareInterruptCycles(new AbortVector(), Cpu65816::ABORT));
+    fetchNextOpcode = new OpCode_NEXT(createFetchOpCodeCycles());
     accumulator = 0;
     xIndex = 0;
     yIndex = 0;

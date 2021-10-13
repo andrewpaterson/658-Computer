@@ -12,13 +12,18 @@ import static net.util.IntUtil.toByte;
 public class LogisimPins65816
     implements Pins65816
 {
-  private final InstanceState instanceState;
+  private InstanceState instanceState;
 
   private Cpu65816 cpu;
 
-  public LogisimPins65816(InstanceState state)
+  public LogisimPins65816()
   {
-    this.instanceState = state;
+    this.instanceState = null;
+  }
+
+  protected void setInstanceState(InstanceState instanceState)
+  {
+    this.instanceState = instanceState;
   }
 
   @Override
@@ -30,7 +35,7 @@ public class LogisimPins65816
   @Override
   public int getData()
   {
-    //instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);  //How the ever-loving-fuck does this line read data?
+    //instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);  //How the ever-loving-fuck does this read data?
     if (cpu.isRead())
     {
       Value portValue = instanceState.getPortValue(PORT_DataBus);

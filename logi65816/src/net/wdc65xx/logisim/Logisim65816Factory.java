@@ -115,16 +115,16 @@ public class Logisim65816Factory
       g2.setTransform(newTransform);
       GraphicsUtil.drawCenteredText(g, "W65C816S", 0, TOP_Y + V_MARGIN);
 
-      Logisim65816Data core = Logisim65816Data.getOrCreateLogisim65816Data(painter, this);
-      Cpu65816 cpu = core.getCpu();
+      Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(painter, this);
+      Cpu65816 cpu = data.getCpu();
 
       int topOffset = 30;
       int width8Bit = 35;
       int width16Bit = 50;
       int width24Bit = 65;
 
-      drawInternal(g, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), core.isOpcodeValid());
-      drawInternal(g, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), core.isOpcodeValid());
+      drawInternal(g, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), data.isOpcodeValid());
+      drawInternal(g, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), data.isOpcodeValid());
       drawInternal(g, topOffset + 40, width8Bit, "Cycle:", Integer.toString(cpu.getCycle()), true);
       drawInternal(g, topOffset + 60, width16Bit, "Accumulator:", cpu.getAccumulatorValueHex(), true);
       drawInternal(g, topOffset + 80, width16Bit, "X Index:", cpu.getXValueHex(), true);
@@ -193,8 +193,8 @@ public class Logisim65816Factory
   @Override
   public void propagate(InstanceState state)
   {
-    Logisim65816Data core = Logisim65816Data.getOrCreateLogisim65816Data(state, this);
-    core.tick();
+    Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(state, this);
+    data.tick();
   }
 
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)

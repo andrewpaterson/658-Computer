@@ -10,11 +10,14 @@ public class Logisim65816Data
 {
   protected Cpu65816 cpu;
   protected Logisim65816Factory parent;
+  protected LogisimPins65816 pins;
 
-  public Logisim65816Data(Logisim65816Factory parent, InstanceState state)
+  public Logisim65816Data(Logisim65816Factory parent)
   {
     this.parent = parent;
-    this.cpu = new Cpu65816(new LogisimPins65816(state));
+
+    this.pins = new LogisimPins65816();
+    this.cpu = new Cpu65816(pins);
   }
 
   public static Logisim65816Data getOrCreateLogisim65816Data(InstanceState state, Logisim65816Factory factory)
@@ -22,9 +25,10 @@ public class Logisim65816Data
     Logisim65816Data ret = (Logisim65816Data) state.getData();
     if (ret == null)
     {
-      ret = new Logisim65816Data(factory, state);
+      ret = new Logisim65816Data(factory);
       state.setData(ret);
     }
+    ret.setInstanceState(state);
     return ret;
   }
 
@@ -39,6 +43,10 @@ public class Logisim65816Data
     {
       return null;
     }
+  }
+  public void setInstanceState(InstanceState instanceState)
+  {
+    pins.setInstanceState(instanceState);
   }
 
   protected boolean isOpcodeValid()

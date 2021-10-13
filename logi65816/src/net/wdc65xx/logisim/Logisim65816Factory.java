@@ -194,10 +194,9 @@ public class Logisim65816Factory
   public void propagate(InstanceState state)
   {
     Logisim65816Data core = Logisim65816Data.getOrCreateLogisim65816Data(state, this);
-    core.propagate();
+    core.tick();
   }
 
-  @SuppressWarnings("SameParameterValue")
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)
   {
     ArrayList<Port> ports = new ArrayList<>(portInfos.length);

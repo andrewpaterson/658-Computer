@@ -17,9 +17,7 @@ public class Components
     try
     {
       tools = new ArrayList<Tool>();
-      tools.add(new AddTool(new Logi6502Simple()));
-      tools.add(new AddTool(new Logi6502Expert()));
-      tools.add(new AddTool(new Logi6502_PDIP40()));
+      tools.add(new AddTool(new Logisim6502Factory()));
     }
     catch (Exception e)
     {

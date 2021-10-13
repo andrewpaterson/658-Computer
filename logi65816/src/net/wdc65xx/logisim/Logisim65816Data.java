@@ -46,7 +46,7 @@ public class Logisim65816Data
     return cpu.getCycle() != 0;
   }
 
-  public void propagate()
+  public void tick()
   {
     cpu.tick();
   }

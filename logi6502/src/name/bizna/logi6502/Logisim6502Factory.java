@@ -2,18 +2,23 @@ package name.bizna.logi6502;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Bounds;
+import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.data.Value;
+import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
+import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
+import com.cburch.logisim.util.StringGetter;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 
-import static name.bizna.logi6502.W65C02.*;
+import static name.bizna.logi6502.Logisim65C02Data.*;
 
-public class Logi6502Expert
-    extends Logi6502
+public class Logisim6502Factory
+    extends InstanceFactory
 {
   private static final int PINS_PER_SIDE = 7;
   private static final int PIXELS_PER_PIN = 20;
@@ -59,11 +64,72 @@ public class Logi6502Expert
   public static final int PORT_SOB = 11;
   public static final int PORT_RESB = 12;
 
-  public Logi6502Expert()
+  public Logisim6502Factory()
   {
-    super("W65C02S (Expert)");
+    super("W65C02S");
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
     addStandardPins(portInfos, LEFT_X, RIGHT_X, PIN_START_Y, PIN_STOP_Y, PIXELS_PER_PIN, PINS_PER_SIDE);
+  }
+
+  void paintPorts(InstancePainter painter, PortInfo[] portInfos, int pinsPerSide)
+  {
+    int n = 0;
+    for (int i = 0; i < portInfos.length; ++i)
+    {
+      if (portInfos[i] != null)
+      {
+        Direction dir = i < pinsPerSide ? Direction.EAST : Direction.WEST;
+        painter.drawPort(n, portInfos[i].name, dir);
+        ++n;
+      }
+    }
+  }
+
+  @Override
+  public void propagate(InstanceState state)
+  {
+    Logisim65C02Data core = Logisim65C02Data.getOrCreate(state, this);
+    core.tick(state, isReset(state), getPHI2(state));
+  }
+
+  protected void shred(InstanceState state)
+  {
+    Logisim65C02Data core = Logisim65C02Data.getOrCreate(state, this);
+    core.shred();
+  }
+
+  protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)
+  {
+    ArrayList<Port> ports = new ArrayList<>(portInfos.length);
+    for (int n = 0; n < portInfos.length; ++n)
+    {
+      PortInfo info = portInfos[n];
+      if (info == null)
+      {
+        continue;
+      }
+      boolean isRightSide = n >= PINS_PER_SIDE;
+      int pinPerSide = isRightSide ? n - PINS_PER_SIDE : n;
+      Port port;
+      if (isRightSide)
+      {
+        port = new Port(RIGHT_X, PIN_STOP_Y - pinPerSide * PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
+      }
+      else
+      {
+        port = new Port(LEFT_X, PIN_START_Y + pinPerSide * PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
+      }
+      port.setToolTip(new StringGetter()
+      {
+        @Override
+        public String toString()
+        {
+          return info.name;
+        }
+      });
+      ports.add(port);
+    }
+    setPorts(ports);
   }
 
   @Override
@@ -90,7 +156,7 @@ public class Logi6502Expert
       g2.setTransform(newTransform);
       GraphicsUtil.drawCenteredText(g, "W65C02S", 0, TOP_Y + V_MARGIN);
 
-      W65C02CoreState core = W65C02CoreState.get(painter, this);
+      Logisim65C02Data core = Logisim65C02Data.getOrCreate(painter, this);
       int topOffset = 30;
       drawInternal(g, topOffset, 35, "Op-code:", core.getOpcodeMnemonicString(), core.isOpcodeValid());
       drawInternal(g, topOffset + 20, 35, "Op-code:", core.getOpcodeValueHex(), core.isOpcodeValid());
@@ -150,25 +216,21 @@ public class Logi6502Expert
     g.setColor(oldColour);
   }
 
-  @Override
   protected boolean isReset(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_RESB) != Value.TRUE;
   }
 
-  @Override
   protected boolean getPHI2(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
   }
 
-  @Override
   public boolean isInterruptRequest(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_IRQB) == Value.FALSE;
   }
 
-  @Override
   public boolean isNonMaskableInterrupt(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_NMIB) == Value.FALSE;
@@ -199,7 +261,6 @@ public class Logi6502Expert
     }
   }
 
-  @Override
   public void doRead(InstanceState instanceState, short address)
   {
     if (updateBussesEnabledFromNotBusEnabled(instanceState))
@@ -210,7 +271,6 @@ public class Logi6502Expert
     }
   }
 
-  @Override
   public void doWrite(InstanceState instanceState, short address, byte data)
   {
     if (updateBussesEnabledFromNotBusEnabled(instanceState))
@@ -221,43 +281,36 @@ public class Logi6502Expert
     }
   }
 
-  @Override
   public byte getDataFromPort(InstanceState instanceState)
   {
     return (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
   }
 
-  @Override
   public boolean isReady(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_RDY) != Value.FALSE;
   }
 
-  @Override
   public boolean isOverflow(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_SOB) == Value.FALSE;
   }
 
-  @Override
   public void setReady(InstanceState instanceState, boolean ready)
   {
     instanceState.setPort(PORT_RDY, ready ? Value.UNKNOWN : Value.FALSE, 9);
   }
 
-  @Override
   public void setVPB(InstanceState instanceState, boolean vectorPull)
   {
     setPort(instanceState, PORT_VPB, !vectorPull, 6);
   }
 
-  @Override
   public void setSync(InstanceState instanceState, boolean sync)
   {
     setPort(instanceState, PORT_SYNC, sync, 6);
   }
 
-  @Override
   public void setMLB(InstanceState instanceState, boolean mlb)
   {
     setPort(instanceState, PORT_MLB, mlb, 6);

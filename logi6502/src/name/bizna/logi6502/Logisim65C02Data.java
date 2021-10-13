@@ -1,13 +1,15 @@
 package name.bizna.logi6502;
 
+import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
 
-import javax.swing.*;
 import java.util.Random;
 
 import static name.bizna.logi6502.W6502Opcodes.*;
 
-public class W65C02
+public class Logisim65C02Data
+    implements InstanceData,
+               Cloneable
 {
   public static final short IRQ_VECTOR = (short) 0xFFFE;
   public static final short RESET_VECTOR = (short) 0xFFFC;
@@ -20,7 +22,7 @@ public class W65C02
   public static final byte P_V_BIT = (byte) 0x40;
   public static final byte P_N_BIT = (byte) 0x80;
 
-  protected Logi6502 parent;
+  protected Logisim6502Factory parent;
   protected InstanceState instanceState;
 
   protected byte cycle;
@@ -48,7 +50,7 @@ public class W65C02
   protected byte intendedData;
   protected boolean intendedRWB;
 
-  public W65C02(Logi6502 parent)
+  public Logisim65C02Data(Logisim6502Factory parent)
   {
     this.parent = parent;
     previousNMI = false;
@@ -57,6 +59,152 @@ public class W65C02
     takingBranch = false;
     vectorToPull = IRQ_VECTOR;
     stopped = true;
+  }
+
+  public static Logisim65C02Data getOrCreate(InstanceState state, Logisim6502Factory parent)
+  {
+    Logisim65C02Data ret = (Logisim65C02Data) state.getData();
+    if (ret == null)
+    {
+      ret = new Logisim65C02Data(parent);
+      state.setData(ret);
+    }
+    return ret;
+  }
+
+  @Override
+  public Object clone()
+  {
+    try
+    {
+      return super.clone();
+    }
+    catch (CloneNotSupportedException e)
+    {
+      return null;
+    }
+  }
+
+  protected String getOpcodeValueHex()
+  {
+    if (cycle != 0)
+    {
+      return getByteStringHex(fetchedOpcode);
+    }
+    else
+    {
+      return "###";
+    }
+  }
+
+  private String getByteStringHex(byte value)
+  {
+    String s;
+    if (value >= 0)
+    {
+      s = Integer.toHexString(value);
+    }
+    else
+    {
+      s = Integer.toHexString(0x100 + ((int) value));
+    }
+    if (s.length() < 2)
+    {
+      s = "0" + s;
+    }
+    s = "0x" + s;
+    return s;
+  }
+
+  private String getWordStringHex(short value)
+  {
+    StringBuilder s;
+    if (value >= 0)
+    {
+      s = new StringBuilder(Integer.toHexString(value));
+    }
+    else
+    {
+      s = new StringBuilder(Integer.toHexString(0x1000 + ((int) value)));
+    }
+    while (s.length() < 4)
+    {
+      s.insert(0, "0");
+    }
+    s.insert(0, "0x");
+    return s.toString();
+  }
+
+  protected String getAddressValueHex()
+  {
+    return getWordStringHex(address);
+  }
+
+  public String getAccumulatorValueHex()
+  {
+    return getByteStringHex(accumulator);
+  }
+
+  public String getXValueHex()
+  {
+    return getByteStringHex(xIndex);
+  }
+
+  public String getYValueHex()
+  {
+    return getByteStringHex(yIndex);
+  }
+
+  public String getStackValueHex()
+  {
+    return getByteStringHex(stack);
+  }
+
+  public String getProgramCounterValueHex()
+  {
+    return getWordStringHex(programCounter);
+  }
+
+  public String getDataValueHex()
+  {
+    return getByteStringHex(data);
+  }
+
+  public boolean isProcessorStatus(byte statusBit)
+  {
+    return (processorStatus & statusBit) != 0;
+  }
+
+  public boolean isAddressValid()
+  {
+    return intendedAddress == address;
+  }
+
+  public boolean isDataValid()
+  {
+    return intendedData == data;
+  }
+
+  public String getCycle()
+  {
+    return Byte.toString(cycle);
+  }
+
+  protected String getOpcodeMnemonicString()
+  {
+    if (cycle == 0)
+    {
+      return "###";
+    }
+    else
+    {
+      return getOpcodeMnemonic();
+    }
+  }
+
+  protected boolean isOpcodeValid()
+  {
+    return cycle != 0;
   }
 
   public void shred()

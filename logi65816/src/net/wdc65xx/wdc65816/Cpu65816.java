@@ -2,9 +2,10 @@ package net.wdc65xx.wdc65816;
 
 import net.util.EmulatorException;
 import net.util.IntUtil;
-import net.wdc65xx.wdc65816.addressingmode.BusCycle;
-import net.wdc65xx.wdc65816.addressingmode.InstructionCycles;
-import net.wdc65xx.wdc65816.opcode.*;
+import net.wdc65xx.wdc65816.instruction.BusCycle;
+import net.wdc65xx.wdc65816.instruction.address.InstructionCycles;
+import net.wdc65xx.wdc65816.instruction.InstructionFactory;
+import net.wdc65xx.wdc65816.instruction.Instruction;
 
 import static net.util.IntUtil.*;
 import static net.util.StringUtil.to16BitHex;
@@ -13,12 +14,12 @@ import static net.wdc65xx.wdc65816.CpuFlags.*;
 
 public class Cpu65816
 {
-  protected static OpCode[] opCodeTable;
-  protected static OpCode resetOpcode;
-  protected static OpCode abortOpcode;
-  protected static OpCode irqOpcode;
-  protected static OpCode nmiOpcode;
-  protected static OpCode fetchNextOpcode;
+  protected static Instruction[] opCodeTable;
+  protected static Instruction resetOpcode;
+  protected static Instruction abortOpcode;
+  protected static Instruction irqOpcode;
+  protected static Instruction nmiOpcode;
+  protected static Instruction fetchNextOpcode;
 
   // Status register
   protected boolean zeroFlag;
@@ -43,7 +44,7 @@ public class Cpu65816
 
   protected boolean previousClock;
   protected int cycle;
-  protected OpCode opCode;
+  protected Instruction opCode;
   protected boolean stopped;
 
   //These are not the values on the pins, they are internal data.
@@ -62,12 +63,12 @@ public class Cpu65816
 
     programCounter = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
-    opCodeTable = OpCodeFactory.createOpcodes();
-    resetOpcode = OpCodeFactory.createReset();
-    irqOpcode = OpCodeFactory.createIRQ();
-    nmiOpcode = OpCodeFactory.createNMI();
-    abortOpcode = OpCodeFactory.createAbort();
-    fetchNextOpcode = OpCodeFactory.createFetchNext();
+    opCodeTable = InstructionFactory.createInstructions();
+    resetOpcode = InstructionFactory.createReset();
+    irqOpcode = InstructionFactory.createIRQ();
+    nmiOpcode = InstructionFactory.createNMI();
+    abortOpcode = InstructionFactory.createAbort();
+    fetchNextOpcode = InstructionFactory.createFetchNext();
     accumulator = 0;
     xIndex = 0;
     yIndex = 0;
@@ -504,7 +505,7 @@ public class Cpu65816
     return address;
   }
 
-  public OpCode getOpCode()
+  public Instruction getOpCode()
   {
     return opCode;
   }

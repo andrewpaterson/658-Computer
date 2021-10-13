@@ -7,7 +7,7 @@ import net.simulation.memory.Memory;
 import net.simulation.wiring.ClockOscillator;
 import net.wdc65xx.simulation.Cpu65816Pins;
 import net.wdc65xx.wdc65816.Cpu65816;
-import net.wdc65xx.wdc65816.addressingmode.BusCycle;
+import net.wdc65xx.wdc65816.instruction.BusCycle;
 
 import java.io.File;
 

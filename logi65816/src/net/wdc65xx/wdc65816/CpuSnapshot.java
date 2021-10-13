@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816;
 
-import net.wdc65xx.wdc65816.opcode.OpCode;
+import net.wdc65xx.wdc65816.instruction.Instruction;
 
 public class CpuSnapshot
 {
@@ -27,7 +27,7 @@ public class CpuSnapshot
 
   public boolean previousClock;
   public int cycle;
-  public OpCode opCode;
+  public Instruction opCode;
   public boolean stopped;
 
   //These are not the values on the pins, they are internal data.
@@ -56,7 +56,7 @@ public class CpuSnapshot
                      int stackPointer,
                      boolean previousClock,
                      int cycle,
-                     OpCode opCode,
+                     Instruction opCode,
                      boolean stopped,
                      Address address,
                      int data,

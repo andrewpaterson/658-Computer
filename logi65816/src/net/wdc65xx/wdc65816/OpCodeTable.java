@@ -1,7 +1,6 @@
 package net.wdc65xx.wdc65816;
 
 import net.util.EmulatorException;
-import net.wdc65xx.wdc65816.addressingmode.StackPEACycles;
 import net.wdc65xx.wdc65816.interrupt.BRKVector;
 import net.wdc65xx.wdc65816.interrupt.COPVector;
 import net.wdc65xx.wdc65816.opcode.*;

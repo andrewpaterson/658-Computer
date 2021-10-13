@@ -1,16 +1,16 @@
 package net.wdc65xx.wdc65816.addressingmode;
 
+import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.AddressingMode;
 import net.wdc65xx.wdc65816.Cpu65816;
 import net.wdc65xx.wdc65816.Executor;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.wdc65xx.wdc65816.interrupt.InterruptVector;
-import net.util.EmulatorException;
 
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class InstructionCycles
+public class InstructionCycles
 {
   protected static final boolean RMW = false;
 
@@ -46,7 +46,7 @@ public abstract class InstructionCycles
       {
         done16++;
       }
-      else if (operation instanceof DoneInstruction)
+      else if (operation instanceof DoneInstruction || operation instanceof FetchOpCode)
       {
         done8++;
         done16++;
@@ -149,9 +149,9 @@ public abstract class InstructionCycles
     return new AddressBank();
   }
 
-  protected static FetchOpCode OpCode()
+  protected static FirstOpCode OpCode()
   {
-    return new FetchOpCode();
+    return new FirstOpCode();
   }
 
   protected static IncrementProgramCounter PC_inc()

@@ -12,7 +12,7 @@ public class OpCode
   protected final InstructionCycles cycles;
   protected final String description;
 
-  public OpCode(String name, String description, int code, InstructionCycles cycles)
+  public OpCode(int code, InstructionCycles cycles, String name, String description)
   {
     this.description = description;
     this.code = code;

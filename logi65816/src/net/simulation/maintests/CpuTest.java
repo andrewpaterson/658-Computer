@@ -77,7 +77,7 @@ public class CpuTest
         String operation = busCycle.toOperationString();
 
         String opCode = cpu.getOpcodeMnemonicString();
-        System.out.println(rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + operation);
+        System.out.println(rightJustify("" + (cpu.getCycle() + 1), 2, " ") + " | " + rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + operation);
       }
 
       count--;

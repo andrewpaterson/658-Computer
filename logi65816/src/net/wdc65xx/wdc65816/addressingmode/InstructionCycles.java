@@ -37,20 +37,8 @@ public class InstructionCycles
     int done16 = 0;
     for (BusCycle cycle : cycles)
     {
-      Operation operation = cycle.getDoneOperation();
-      if (operation instanceof DoneInstructionIf8Bit)
-      {
-        done8++;
-      }
-      else if (operation instanceof DoneInstructionIf16Bit)
-      {
-        done16++;
-      }
-      else if (operation instanceof DoneInstruction || operation instanceof FetchOpCode)
-      {
-        done8++;
-        done16++;
-      }
+      done8 += cycle.getDone8();
+      done16 += cycle.getDone16();
     }
 
     if (done8 != 1 && done16 != 1)

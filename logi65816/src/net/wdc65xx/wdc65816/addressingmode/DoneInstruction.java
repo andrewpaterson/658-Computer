@@ -17,10 +17,14 @@ public class DoneInstruction
     return "DONE";
   }
 
-  @Override
-  public boolean isDone()
+  public int getDone8()
   {
-    return true;
+    return 1;
+  }
+
+  public int getDone16()
+  {
+    return 1;
   }
 }
 

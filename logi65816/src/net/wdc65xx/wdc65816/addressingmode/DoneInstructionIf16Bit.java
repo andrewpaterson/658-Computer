@@ -1,8 +1,8 @@
 package net.wdc65xx.wdc65816.addressingmode;
 
+import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.Cpu65816;
 import net.wdc65xx.wdc65816.WidthFromRegister;
-import net.util.EmulatorException;
 
 import static net.wdc65xx.wdc65816.WidthFromRegister.M;
 import static net.wdc65xx.wdc65816.WidthFromRegister.XY;
@@ -46,10 +46,9 @@ public class DoneInstructionIf16Bit
     return "DONE_If_16Bit_" + width;
   }
 
-  @Override
-  public boolean isDone()
+  public int getDone16()
   {
-    return true;
+    return 1;
   }
 }
 

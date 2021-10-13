@@ -60,16 +60,24 @@ public class BusCycle
     return null;
   }
 
-  public Operation getDoneOperation()
+  public int getDone8()
   {
+    int done8 = 0;
     for (Operation operation : operations)
     {
-      if (operation.isDone())
-      {
-        return operation;
-      }
+      done8 += operation.getDone8();
     }
-    return null;
+    return done8;
+  }
+
+  public int getDone16()
+  {
+    int done16 = 0;
+    for (Operation operation : operations)
+    {
+      done16 += operation.getDone16();
+    }
+    return done16;
   }
 
   public final void executeOnFallingEdge(Cpu65816 cpu)

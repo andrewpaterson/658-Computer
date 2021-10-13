@@ -29,9 +29,14 @@ public abstract class Operation
     return false;
   }
 
-  public boolean isDone()
+  public int getDone8()
   {
-    return false;
+    return 0;
+  }
+
+  public int getDone16()
+  {
+    return 0;
   }
 }
 

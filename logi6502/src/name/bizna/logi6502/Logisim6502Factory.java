@@ -89,7 +89,7 @@ public class Logisim6502Factory
   public void propagate(InstanceState state)
   {
     Logisim65C02Data core = Logisim65C02Data.getOrCreate(state, this);
-    core.tick(state, isReset(state), getPHI2(state));
+    core.tick(state, isReset(state), isPHI2(state));
   }
 
   protected void shred(InstanceState state)
@@ -222,7 +222,7 @@ public class Logisim6502Factory
     return instanceState.getPortValue(PORT_RESB) != Value.TRUE;
   }
 
-  protected boolean getPHI2(InstanceState instanceState)
+  protected boolean isPHI2(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
   }
@@ -277,7 +277,7 @@ public class Logisim6502Factory
     }
   }
 
-  public byte getDataFromPort(InstanceState instanceState)
+  public byte getData(InstanceState instanceState)
   {
     return (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
   }

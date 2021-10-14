@@ -14,12 +14,10 @@ public class LogisimPins65816
     implements Pins65816
 {
   private InstanceState instanceState;
-  private Logisim65816Factory factory;
   private Cpu65816 cpu;
 
-  public LogisimPins65816(Logisim65816Factory factory)
+  public LogisimPins65816()
   {
-    this.factory = factory;
     this.instanceState = null;
   }
 

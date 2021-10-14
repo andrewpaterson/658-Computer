@@ -6413,7 +6413,7 @@ public class Logisim65C02Data
 
   private void fetchData(InstanceState instanceState)
   {
-    data = factory.getDataFromPort(instanceState);
+    data = factory.getData(instanceState);
     doInstruction();
     if (cycle >= 0)
     {
@@ -6441,7 +6441,7 @@ public class Logisim65C02Data
     }
     else
     {
-      fetchedOpcode = factory.getDataFromPort(instanceState);
+      fetchedOpcode = factory.getData(instanceState);
     }
     previousNMI = nmi;
     cycle++;

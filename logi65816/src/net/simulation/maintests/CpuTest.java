@@ -12,8 +12,7 @@ import net.wdc65xx.wdc65816.instruction.BusCycle;
 import java.io.File;
 
 import static net.util.FileUtil.readBytes;
-import static net.util.StringUtil.leftJustify;
-import static net.util.StringUtil.rightJustify;
+import static net.util.StringUtil.*;
 
 public class CpuTest
 {
@@ -70,14 +69,18 @@ public class CpuTest
     {
       tickables.run();
 
-      if (cpu.getPreviousClock())
+      if (!cpu.getPreviousClock())
       {
         BusCycle busCycle = cpu.getBusCycle();
         String addressOffset = busCycle.toAddressOffsetString();
         String operation = busCycle.toOperationString();
 
         String opCode = cpu.getOpcodeMnemonicString();
-        System.out.println(rightJustify("" + (cpu.getCycle() + 1), 2, " ") + " | " + rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + operation);
+        if (busCycle.isFetchOpCode())
+        {
+          System.out.println("|" + pad(99, "-") + "|");
+        }
+        System.out.println(rightJustify("| " + (cpu.getCycle() + 1), 2, " ") + " | " + rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + leftJustify(operation, 60, " ") + "|");
       }
 
       count--;

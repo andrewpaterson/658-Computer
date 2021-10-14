@@ -1,9 +1,9 @@
 package net.wdc65xx.wdc65816.instruction;
 
+import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.Address;
 import net.wdc65xx.wdc65816.Cpu65816;
 import net.wdc65xx.wdc65816.Pins65816;
-import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.instruction.address.AddressOffset;
 import net.wdc65xx.wdc65816.instruction.address.ConstantOffset;
 import net.wdc65xx.wdc65816.instruction.operations.DataOperation;
@@ -175,6 +175,12 @@ public class BusCycle
       first = false;
     }
     return string.toString();
+  }
+
+  public boolean isFetchOpCode()
+  {
+    DataOperation dataOperation = getDataOperation();
+    return dataOperation.isFetchOpCode();
   }
 }
 

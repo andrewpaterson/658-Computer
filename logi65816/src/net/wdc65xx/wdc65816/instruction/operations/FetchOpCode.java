@@ -31,5 +31,10 @@ public class FetchOpCode
   {
     return 1;
   }
+
+  public boolean isFetchOpCode()
+  {
+    return true;
+  }
 }
 

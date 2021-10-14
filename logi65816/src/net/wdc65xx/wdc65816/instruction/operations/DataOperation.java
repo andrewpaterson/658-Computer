@@ -55,5 +55,10 @@ public abstract class DataOperation
   {
     return ready;
   }
+
+  public boolean isFetchOpCode()
+  {
+    return false;
+  }
 }
 

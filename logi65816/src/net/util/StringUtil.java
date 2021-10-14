@@ -29,7 +29,7 @@ public class StringUtil
     }
   }
 
-  private static String pad(int width, String padCharacter)
+  public static String pad(int width, String padCharacter)
   {
     StringBuilder stringBuilder = new StringBuilder();
     while (width > 0)

@@ -2,7 +2,6 @@ package net.wdc65xx.logisim;
 
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
-import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -50,8 +49,6 @@ public class Logisim65816Factory
 
   protected final PortInfo[] portInfos;
   protected final String[] portInfoNamesHigh;
-  protected final Cpu65816 cpu;
-  protected final LogisimPins65816 pins;
 
   public Logisim65816Factory()
   {
@@ -100,9 +97,6 @@ public class Logisim65816Factory
             PortInfo.sharedBidirectional("D", 8),
             PortInfo.sharedOutput("A", 16)};
 
-    this.pins = new LogisimPins65816();
-    this.cpu = new Cpu65816(pins);
-
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
     addStandardPins(portInfos, LEFT_X, RIGHT_X, PIN_START_Y, PIN_STOP_Y, PIXELS_PER_PIN, PINS_PER_SIDE);
   }
@@ -130,8 +124,22 @@ public class Logisim65816Factory
     }
   }
 
+  public Logisim65816Instance getOrCreateLogisim65816Instance(InstanceState state)
+  {
+    Logisim65816Instance ret = (Logisim65816Instance) state.getData();
+    if (ret == null)
+    {
+      ret = new Logisim65816Instance();
+      state.setData(ret);
+    }
+    ret.setInstanceState(state);
+    return ret;
+  }
+
   public void paintInstance(InstancePainter painter)
   {
+    Logisim65816Instance instance = getOrCreateLogisim65816Instance(painter);
+    Cpu65816 cpu = instance.getCpu();
     boolean clockHigh = cpu.getPreviousClock();
 
     painter.drawBounds();
@@ -226,8 +234,9 @@ public class Logisim65816Factory
   @Override
   public void propagate(InstanceState instanceState)
   {
-    Logisim65816Data data = Logisim65816Data.getOrCreateLogisim65816Data(instanceState, this);
-    data.tick();
+    Logisim65816Instance instance = getOrCreateLogisim65816Instance(instanceState);
+    Cpu65816 cpu = instance.getCpu();
+    cpu.tick();
   }
 
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)

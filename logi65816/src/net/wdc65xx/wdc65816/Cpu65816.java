@@ -88,7 +88,7 @@ public class Cpu65816
 
     stopped = false;
     previousClock = false;
-    cycle = 1;
+    cycle = 0;
     opCode = resetOpcode;
     data = 0;
     directOffset = 0;

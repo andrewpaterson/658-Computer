@@ -8,7 +8,7 @@ PROGRESS:
 ENDPROGRESS:	
 	DB ']'
 	
-	ORG $F000
+	ORG $F12B
 	
 START:
 	CLC	     		;clear carry

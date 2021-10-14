@@ -6283,7 +6283,7 @@ public class Logisim65C02Instance
     }
   }
 
-  public void reset(InstanceState cis)
+  public void reset(InstanceState instanceState)
   {
     stopped = false;
     fetchedOpcode = BRK;
@@ -6293,11 +6293,11 @@ public class Logisim65C02Instance
     previousNMI = true;
     vectorToPull = RESET_VECTOR;
     wantingVectorPull = false;
-    setVPB(cis, false);
+    setVPB(instanceState, false);
     wantingSync = false;
-    setSync(cis, false);
-    setMLB(cis, false);
-    setReady(cis, true);
+    setSync(instanceState, false);
+    setMLB(instanceState, false);
+    setReady(instanceState, true);
   }
 
   protected void wantRead(short address)
@@ -6348,6 +6348,7 @@ public class Logisim65C02Instance
     boolean clock = isPHI2(instanceState);
     if (isResetting)
     {
+      System.out.println("Logisim65C02Instance.tick - Restting");
       reset(instanceState);
     }
 
@@ -6358,6 +6359,8 @@ public class Logisim65C02Instance
     }
     if (stopped || !isReady)
     {
+      System.out.println("Logisim65C02Instance.tick - Stopped = " + stopped);
+      System.out.println("Logisim65C02Instance.tick - isReady = " + isReady);
       return;
     }
 

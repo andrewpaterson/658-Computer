@@ -16,6 +16,20 @@ import static net.util.StringUtil.*;
 
 public class CpuTest
 {
+  private static void print(Cpu65816 cpu)
+  {
+    BusCycle busCycle = cpu.getBusCycle();
+    String addressOffset = busCycle.toAddressOffsetString();
+    String operation = busCycle.toOperationString();
+
+    String opCode = cpu.getOpcodeMnemonicString();
+    if (busCycle.isFetchOpCode())
+    {
+      System.out.println("|" + pad(99, "-") + "|");
+    }
+    System.out.println(rightJustify("| " + (cpu.getCycle() + 1), 2, " ") + " | " + rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + leftJustify(operation, 60, " ") + "|");
+  }
+
   public static void main(String[] args)
   {
     Tickables tickables = new Tickables();
@@ -37,7 +51,7 @@ public class CpuTest
     Trace validProgramAddressTrace = new Trace();
     Trace validDataAddressTrace = new Trace();
 
-    new ClockOscillator(tickables, "", clockTrace);
+    ClockOscillator clock = new ClockOscillator(tickables, "", clockTrace);
 
     Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, clockTrace, clockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
@@ -67,21 +81,12 @@ public class CpuTest
     int count = 1024;
     while (!cpu.isStopped() && count > 0)
     {
+      print(cpu);
       tickables.run();
 
-      if (!cpu.getPreviousClock())
-      {
-        BusCycle busCycle = cpu.getBusCycle();
-        String addressOffset = busCycle.toAddressOffsetString();
-        String operation = busCycle.toOperationString();
-
-        String opCode = cpu.getOpcodeMnemonicString();
-        if (busCycle.isFetchOpCode())
-        {
-          System.out.println("|" + pad(99, "-") + "|");
-        }
-        System.out.println(rightJustify("| " + (cpu.getCycle() + 1), 2, " ") + " | " + rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + leftJustify(operation, 60, " ") + "|");
-      }
+//      if (!cpu.getPreviousClock())
+//      {
+//      }
 
       count--;
     }

@@ -1,9 +1,7 @@
 package name.bizna.logi6502;
 
-import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
-import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -34,35 +32,36 @@ public class Logisim6502Factory
   private static final PortInfo[] portInfos = new PortInfo[]
       {
           // Left side, top to bottom
-          PortInfo.exclusiveOutput("VPB#"),
-          PortInfo.sharedBidirectional("RDY"),
-          PortInfo.sharedInput("IRQB#"),
-          PortInfo.exclusiveOutput("MLB#"),
+          PortInfo.sharedInput("IRQB"),
           PortInfo.sharedInput("NMIB#"),
-          PortInfo.exclusiveOutput("SYNC"),
-          null,
-          // Right side, bottom to top
-          PortInfo.sharedOutput("A", 16),
-          PortInfo.sharedBidirectional("D", 8),
-          PortInfo.sharedOutput("RWB"),
-          PortInfo.sharedInput("BE"),
+          PortInfo.sharedInput("RESB"),
           PortInfo.sharedInput("PHI2"),
-          PortInfo.sharedInput("SOB#"),
-          PortInfo.sharedInput("RESB#")
-      };
-  public static final int PORT_VPB = 0;
-  public static final int PORT_RDY = 1;
-  public static final int PORT_IRQB = 2;
-  public static final int PORT_MLB = 3;
-  public static final int PORT_NMIB = 4;
-  public static final int PORT_SYNC = 5;
-  public static final int PORT_AddressBus = 6;
-  public static final int PORT_DataBus = 7;
-  public static final int PORT_RWB = 8;
+          PortInfo.exclusiveOutput("VPB"),
+          PortInfo.sharedInput("SOB"),
+          null,
+
+          // Right side, bottom to top
+          PortInfo.exclusiveOutput("SYNC"),
+          PortInfo.exclusiveOutput("MLB"),
+          PortInfo.sharedBidirectional("RDY"),
+          PortInfo.sharedInput("BE"),
+          PortInfo.sharedOutput("RWB"),
+          PortInfo.sharedBidirectional("D", 8),
+          PortInfo.sharedOutput("A", 16),
+          };
+  public static final int PORT_IRQB = 0;
+  public static final int PORT_NMIB = 1;
+  public static final int PORT_RESB = 2;
+  public static final int PORT_PHI2 = 3;
+  public static final int PORT_VPB = 4;
+  public static final int PORT_SOB = 5;
+  public static final int PORT_SYNC = 6;
+  public static final int PORT_MLB = 7;
+  public static final int PORT_RDY = 8;
   public static final int PORT_BE = 9;
-  public static final int PORT_PHI2 = 10;
-  public static final int PORT_SOB = 11;
-  public static final int PORT_RESB = 12;
+  public static final int PORT_RWB = 10;
+  public static final int PORT_DataBus = 11;
+  public static final int PORT_AddressBus = 12;
 
   public Logisim6502Factory()
   {

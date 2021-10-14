@@ -1,4 +1,4 @@
-  Fri Sep 24 2021 14:40                                                Page 1
+  Thu Oct 14 2021 20:33                                                Page 1
 
 
                      ***************************************
@@ -20,27 +20,27 @@
      8                        ENDPROGRESS:	
      9 00:0011: 5D           	DB ']'
     10                        	
-    11                        	ORG $F000
+    11                        	ORG $F12B
     12                        	
     13                        START:
-    14 00:F000: 18           	CLC	     		;clear carry
-    15 00:F001: FB           	XCE	     		;clear emulation
-    16 00:F002: C2 30        	REP		#$30    ;16 bit registers
+    14 00:F12B: 18           	CLC	     		;clear carry
+    15 00:F12C: FB           	XCE	     		;clear emulation
+    16 00:F12D: C2 30        	REP		#$30    ;16 bit registers
     17                        	LONGI 	ON
     18                        	LONGA	ON
-    19 00:F004: A9 00 01     	LDA		#$0100  ;get the stack address
-    20 00:F007: 1B           	TCS	     		;and set the stack to it
+    19 00:F12F: A9 00 01     	LDA		#$0100  ;get the stack address
+    20 00:F132: 1B           	TCS	     		;and set the stack to it
     21                        
     22                        
-    23 00:F008: E2 20        	SEP		#$20	;8 bit accumulator
+    23 00:F133: E2 20        	SEP		#$20	;8 bit accumulator
     24                        	LONGA 	OFF
-    25 00:F00A: A9 00        	LDA 	#$00	;get bank of data
-    26 00:F00C: 48           	PHA
-    27 00:F00D: AB           	PLB	     		;set data bank register
-    28 00:F00E: C2 20        	REP		#$20    ;back to 16 bit mode
+    25 00:F135: A9 00        	LDA 	#$00	;get bank of data
+    26 00:F137: 48           	PHA
+    27 00:F138: AB           	PLB	     		;set data bank register
+    28 00:F139: C2 20        	REP		#$20    ;back to 16 bit mode
     29                        	LONGA	ON
     30                        
-    31 00:F010: 4C 00 04     	JMP   MYSTART	;long jump in case not bank 0
+    31 00:F13B: 4C 00 04     	JMP   MYSTART	;long jump in case not bank 0
     32                        
     33                        	ORG $0400
     34                        
@@ -59,7 +59,7 @@
     47                        	
     48                        ; This section defines the interrupt and reset vec
                     tors.    
-  Fri Sep 24 2021 14:40                                                Page 2
+  Thu Oct 14 2021 20:33                                                Page 2
 
 
     49                        
@@ -76,7 +76,7 @@
     60 00:FFF6: 00 00        E_RSRVD DW    0
     61 00:FFF8: 00 00        E_ABORT DW    0
     62 00:FFFA: 00 00        E_NMI   DW    0
-    63 00:FFFC: 00 F0        E_RESET DW    START
+    63 00:FFFC: 2B F1        E_RESET DW    START
     64 00:FFFE: 00 00        E_IRQ   DW    0
     65                        
     66 01:0000:              	ENDS

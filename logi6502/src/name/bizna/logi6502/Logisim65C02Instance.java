@@ -1,13 +1,16 @@
 package name.bizna.logi6502;
 
+import com.cburch.logisim.data.BitWidth;
+import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
 
 import java.util.Random;
 
+import static name.bizna.logi6502.Logisim6502Factory.*;
 import static name.bizna.logi6502.W6502Opcodes.*;
 
-public class Logisim65C02Data
+public class Logisim65C02Instance
     implements InstanceData,
                Cloneable
 {
@@ -50,7 +53,7 @@ public class Logisim65C02Data
   protected byte intendedData;
   protected boolean intendedRWB;
 
-  public Logisim65C02Data(Logisim6502Factory factory)
+  public Logisim65C02Instance(Logisim6502Factory factory)
   {
     this.factory = factory;
     previousNMI = false;
@@ -61,12 +64,12 @@ public class Logisim65C02Data
     stopped = true;
   }
 
-  public static Logisim65C02Data getOrCreate(InstanceState state, Logisim6502Factory parent)
+  public static Logisim65C02Instance getOrCreate(InstanceState state, Logisim6502Factory parent)
   {
-    Logisim65C02Data ret = (Logisim65C02Data) state.getData();
+    Logisim65C02Instance ret = (Logisim65C02Instance) state.getData();
     if (ret == null)
     {
-      ret = new Logisim65C02Data(parent);
+      ret = new Logisim65C02Instance(parent);
       state.setData(ret);
     }
     return ret;
@@ -918,12 +921,12 @@ public class Logisim65C02Data
       case 1:
       {
         programCounter--;
-        factory.setReady(instanceState, false);
+        setReady(instanceState, false);
         break;
       }
       case 2:
       {
-        if (!factory.isInterruptRequest(instanceState) && !(factory.isNonMaskableInterrupt(instanceState) && !previousNMI))
+        if (!isInterruptRequest(instanceState) && !(isNonMaskableInterrupt(instanceState) && !previousNMI))
         {
           cycle--;
         }
@@ -6056,7 +6059,7 @@ public class Logisim65C02Data
 
   private void setMemoryLock(boolean mlb)
   {
-    factory.setMLB(instanceState, mlb);
+    setMLB(instanceState, mlb);
   }
 
   private void logicalShiftRight()
@@ -6290,11 +6293,11 @@ public class Logisim65C02Data
     previousNMI = true;
     vectorToPull = RESET_VECTOR;
     wantingVectorPull = false;
-    factory.setVPB(cis, false);
+    setVPB(cis, false);
     wantingSync = false;
-    factory.setSync(cis, false);
-    factory.setMLB(cis, false);
-    factory.setReady(cis, true);
+    setSync(cis, false);
+    setMLB(cis, false);
+    setReady(cis, true);
   }
 
   protected void wantRead(short address)
@@ -6339,17 +6342,19 @@ public class Logisim65C02Data
     wantingVectorPull = want;
   }
 
-  public void tick(InstanceState instanceState, boolean isResetting, boolean clock)
+  public void tick(InstanceState instanceState)
   {
+    boolean isResetting = isReset(instanceState);
+    boolean clock = isPHI2(instanceState);
     if (isResetting)
     {
       reset(instanceState);
     }
 
-    boolean isReady = factory.isReady(instanceState);
+    boolean isReady = isReady(instanceState);
     if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
     {
-      factory.setReady(instanceState, true);
+      setReady(instanceState, true);
     }
     if (stopped || !isReady)
     {
@@ -6393,7 +6398,7 @@ public class Logisim65C02Data
 
   private void updateOverflow(InstanceState instanceState)
   {
-    boolean overflow = factory.isOverflow(instanceState);
+    boolean overflow = isOverflow(instanceState);
     if (overflow != previousOverflow)
     {
       if (overflow)
@@ -6413,7 +6418,7 @@ public class Logisim65C02Data
 
   private void fetchData(InstanceState instanceState)
   {
-    data = factory.getData(instanceState);
+    data = getData(instanceState);
     doInstruction();
     if (cycle >= 0)
     {
@@ -6426,14 +6431,14 @@ public class Logisim65C02Data
     wantRead(programCounter);
     programCounter++;
 
-    boolean nmi = factory.isNonMaskableInterrupt(instanceState);
+    boolean nmi = isNonMaskableInterrupt(instanceState);
     if (nmi && !previousNMI)
     {
       vectorToPull = NMI_VECTOR;
       programCounter -= 2;
       fetchedOpcode = BRK;
     }
-    else if (factory.isInterruptRequest(instanceState) && isInterrupt() == 0)
+    else if (isInterruptRequest(instanceState) && isInterrupt() == 0)
     {
       vectorToPull = IRQ_VECTOR;
       programCounter -= 2;
@@ -6441,7 +6446,7 @@ public class Logisim65C02Data
     }
     else
     {
-      fetchedOpcode = factory.getData(instanceState);
+      fetchedOpcode = getData(instanceState);
     }
     previousNMI = nmi;
     cycle++;
@@ -6451,14 +6456,14 @@ public class Logisim65C02Data
   {
     if (intendedRWB)
     {
-      factory.doRead(instanceState, intendedAddress);
+      doRead(instanceState, intendedAddress);
     }
     else
     {
-      factory.doWrite(instanceState, intendedAddress, intendedData);
+      doWrite(instanceState, intendedAddress, intendedData);
     }
-    factory.setSync(instanceState, wantingSync);
-    factory.setVPB(instanceState, wantingVectorPull);
+    setSync(instanceState, wantingSync);
+    setVPB(instanceState, wantingVectorPull);
   }
 
   private int isInterrupt()
@@ -6505,6 +6510,101 @@ public class Logisim65C02Data
     {
       processorStatus &= ~P_I_BIT;
     }
+  }
+
+  protected boolean isReset(InstanceState instanceState)
+  {
+    return instanceState.getPortValue(PORT_RESB) != Value.TRUE;
+  }
+
+  protected boolean isPHI2(InstanceState instanceState)
+  {
+    return instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
+  }
+
+  public boolean isInterruptRequest(InstanceState instanceState)
+  {
+    return instanceState.getPortValue(PORT_IRQB) == Value.FALSE;
+  }
+
+  public boolean isNonMaskableInterrupt(InstanceState instanceState)
+  {
+    return instanceState.getPortValue(PORT_NMIB) == Value.FALSE;
+  }
+
+  private void setPort(InstanceState instanceState, int port, boolean value, int delay)
+  {
+    instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
+  }
+
+  private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
+  {
+    if (instanceState.getPortValue(PORT_BE) == Value.FALSE)
+    {
+      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
+      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 12);
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
+  public void doRead(InstanceState instanceState, short address)
+  {
+    if (updateBussesEnabledFromNotBusEnabled(instanceState))
+    {
+      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
+      setPort(instanceState, PORT_RWB, true, 9);
+    }
+  }
+
+  public void doWrite(InstanceState instanceState, short address, byte data)
+  {
+    if (updateBussesEnabledFromNotBusEnabled(instanceState))
+    {
+      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
+      instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+      setPort(instanceState, PORT_RWB, false, 9);
+    }
+  }
+
+  public byte getData(InstanceState instanceState)
+  {
+    return (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
+  }
+
+  public boolean isReady(InstanceState instanceState)
+  {
+    return instanceState.getPortValue(PORT_RDY) != Value.FALSE;
+  }
+
+  public boolean isOverflow(InstanceState instanceState)
+  {
+    return instanceState.getPortValue(PORT_SOB) == Value.FALSE;
+  }
+
+  public void setReady(InstanceState instanceState, boolean ready)
+  {
+    instanceState.setPort(PORT_RDY, ready ? Value.UNKNOWN : Value.FALSE, 9);
+  }
+
+  public void setVPB(InstanceState instanceState, boolean vectorPull)
+  {
+    setPort(instanceState, PORT_VPB, !vectorPull, 6);
+  }
+
+  public void setSync(InstanceState instanceState, boolean sync)
+  {
+    setPort(instanceState, PORT_SYNC, sync, 6);
+  }
+
+  public void setMLB(InstanceState instanceState, boolean mlb)
+  {
+    setPort(instanceState, PORT_MLB, mlb, 6);
   }
 }
 

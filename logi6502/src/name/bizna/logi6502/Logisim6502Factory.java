@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
-import static name.bizna.logi6502.Logisim65C02Data.*;
+import static name.bizna.logi6502.Logisim65C02Instance.*;
 
 public class Logisim6502Factory
     extends InstanceFactory
@@ -88,13 +88,13 @@ public class Logisim6502Factory
   @Override
   public void propagate(InstanceState state)
   {
-    Logisim65C02Data core = Logisim65C02Data.getOrCreate(state, this);
-    core.tick(state, isReset(state), isPHI2(state));
+    Logisim65C02Instance instance = Logisim65C02Instance.getOrCreate(state, this);
+    instance.tick(state);
   }
 
   protected void shred(InstanceState state)
   {
-    Logisim65C02Data core = Logisim65C02Data.getOrCreate(state, this);
+    Logisim65C02Instance core = Logisim65C02Instance.getOrCreate(state, this);
     core.shred();
   }
 
@@ -156,7 +156,7 @@ public class Logisim6502Factory
       g2.setTransform(newTransform);
       GraphicsUtil.drawCenteredText(g, "W65C02S", 0, TOP_Y + V_MARGIN);
 
-      Logisim65C02Data core = Logisim65C02Data.getOrCreate(painter, this);
+      Logisim65C02Instance core = Logisim65C02Instance.getOrCreate(painter, this);
       int topOffset = 30;
       int width8Bit = 38;
       int width16Bit = 52;
@@ -215,101 +215,6 @@ public class Logisim6502Factory
     Color oldColour = setColour(g, black);
     GraphicsUtil.drawText(g, value, 20, opcodeMnemonicTop, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
     g.setColor(oldColour);
-  }
-
-  protected boolean isReset(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_RESB) != Value.TRUE;
-  }
-
-  protected boolean isPHI2(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
-  }
-
-  public boolean isInterruptRequest(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_IRQB) == Value.FALSE;
-  }
-
-  public boolean isNonMaskableInterrupt(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_NMIB) == Value.FALSE;
-  }
-
-  private void setPort(InstanceState instanceState, int port, boolean value, int delay)
-  {
-    instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
-  }
-
-  private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
-  {
-    if (instanceState.getPortValue(PORT_BE) == Value.FALSE)
-    {
-      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
-      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
-      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 12);
-      return false;
-    }
-    else
-    {
-      return true;
-    }
-  }
-
-  public void doRead(InstanceState instanceState, short address)
-  {
-    if (updateBussesEnabledFromNotBusEnabled(instanceState))
-    {
-      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
-      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
-      setPort(instanceState, PORT_RWB, true, 9);
-    }
-  }
-
-  public void doWrite(InstanceState instanceState, short address, byte data)
-  {
-    if (updateBussesEnabledFromNotBusEnabled(instanceState))
-    {
-      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
-      instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
-      setPort(instanceState, PORT_RWB, false, 9);
-    }
-  }
-
-  public byte getData(InstanceState instanceState)
-  {
-    return (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
-  }
-
-  public boolean isReady(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_RDY) != Value.FALSE;
-  }
-
-  public boolean isOverflow(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_SOB) == Value.FALSE;
-  }
-
-  public void setReady(InstanceState instanceState, boolean ready)
-  {
-    instanceState.setPort(PORT_RDY, ready ? Value.UNKNOWN : Value.FALSE, 9);
-  }
-
-  public void setVPB(InstanceState instanceState, boolean vectorPull)
-  {
-    setPort(instanceState, PORT_VPB, !vectorPull, 6);
-  }
-
-  public void setSync(InstanceState instanceState, boolean sync)
-  {
-    setPort(instanceState, PORT_SYNC, sync, 6);
-  }
-
-  public void setMLB(InstanceState instanceState, boolean mlb)
-  {
-    setPort(instanceState, PORT_MLB, mlb, 6);
   }
 }
 

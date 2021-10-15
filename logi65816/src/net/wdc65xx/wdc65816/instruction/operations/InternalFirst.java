@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class InternalOpCode
+public class InternalFirst
     extends DataOperation
 {
-  public InternalOpCode()
+  public InternalFirst()
   {
     super(true, true, true, true, true);
   }

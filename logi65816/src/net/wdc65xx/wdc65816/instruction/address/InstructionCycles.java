@@ -139,9 +139,9 @@ public class InstructionCycles
     return new AddressBank();
   }
 
-  protected static InternalOpCode OpCode()
+  protected static InternalFirst OpCode()
   {
-    return new InternalOpCode();
+    return new InternalFirst();
   }
 
   protected static IncrementProgramCounter PC_inc()

@@ -31,7 +31,7 @@ public class InstructionFactory
     opCodes.add(createPHP(PHP_StackImplied, createStackImpliedPHPCycles(Cpu65816::PHP)));
     opCodes.add(createORA(ORA_Immediate, createImmediateCycles(Cpu65816::ORA, M)));
     opCodes.add(createSLA(ASL_Accumulator, createAccumulatorCycles(Cpu65816::ASL_A)));
-    opCodes.add(createPHD(PHD_StackImplied, createStackImpliedPHDCycles(Cpu65816::PHD)));
+    opCodes.add(createPHD(PHD_StackImplied, createStackPHDCycles(Cpu65816::PHD)));
     opCodes.add(createTSB(TSB_Absolute, createAbsoluteRMWCycles(Cpu65816::TSB)));
     opCodes.add(createORA(ORA_Absolute, createAbsoluteCycles(Cpu65816::ORA, M)));
     opCodes.add(createASL(ASL_Absolute, createAbsoluteRMWCycles(Cpu65816::ASL)));

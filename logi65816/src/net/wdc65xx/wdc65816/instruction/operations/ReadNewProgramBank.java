@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchNewProgramBank
+public class ReadNewProgramBank
     extends DataOperation
 {
-  public FetchNewProgramBank(boolean notMemoryLock)
+  public ReadNewProgramBank(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

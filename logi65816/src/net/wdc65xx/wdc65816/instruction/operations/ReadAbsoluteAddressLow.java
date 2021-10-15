@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchAbsoluteAddressLow
+public class ReadAbsoluteAddressLow
     extends DataOperation
 {
-  public FetchAbsoluteAddressLow(boolean notMemoryLock)
+  public ReadAbsoluteAddressLow(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

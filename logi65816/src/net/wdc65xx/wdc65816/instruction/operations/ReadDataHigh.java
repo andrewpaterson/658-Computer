@@ -2,24 +2,24 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchDirectOffset
+public class ReadDataHigh
     extends DataOperation
 {
-  public FetchDirectOffset(boolean notMemoryLock)
+  public ReadDataHigh(boolean notMemoryLock)
   {
-    super(true, false, notMemoryLock, true, true);
+    super(false, true, notMemoryLock, true, true);
   }
 
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDirectOffset(cpu.getPins().getData());
+    cpu.setDataHigh(cpu.getPins().getData());
   }
 
   @Override
   public String toString()
   {
-    return "Read(D0)";
+    return "Read(DH)";
   }
 }
 

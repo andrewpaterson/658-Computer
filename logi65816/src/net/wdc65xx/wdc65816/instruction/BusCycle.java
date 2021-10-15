@@ -99,7 +99,6 @@ public class BusCycle
     pins.setVectorPullB(dataOperation.isNotVectorPull());
     pins.setRdy(dataOperation.isReady());
 
-    //Address is always valid before the operation.
     Address address = getAddress(cpu);
     pins.setAddress(address.getOffset());
 

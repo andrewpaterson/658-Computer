@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchDataLow
+public class ReadAbsoluteAddressHigh
     extends DataOperation
 {
-  public FetchDataLow(boolean notMemoryLock)
+  public ReadAbsoluteAddressHigh(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }
@@ -13,13 +13,13 @@ public class FetchDataLow
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDataLow(cpu.getPins().getData());
+    cpu.setAddressHigh(cpu.getPins().getData());
   }
 
   @Override
   public String toString()
   {
-    return "Read(DL)";
+    return "Read(AAH)";
   }
 }
 

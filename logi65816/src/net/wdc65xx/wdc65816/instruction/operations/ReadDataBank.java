@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchDataBank
+public class ReadDataBank
     extends DataOperation
 {
-  public FetchDataBank(boolean notMemoryLock)
+  public ReadDataBank(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }

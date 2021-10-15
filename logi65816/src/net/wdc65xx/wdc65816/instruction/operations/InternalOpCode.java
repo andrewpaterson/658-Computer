@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchOpCode
+public class InternalOpCode
     extends DataOperation
 {
-  public FetchOpCode()
+  public InternalOpCode()
   {
     super(true, true, true, true, true);
   }
@@ -13,28 +13,12 @@ public class FetchOpCode
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setOpCode(cpu.getPins().getData());
   }
 
   @Override
   public String toString()
   {
     return "OpCode";
-  }
-
-  public int getDone8()
-  {
-    return 1;
-  }
-
-  public int getDone16()
-  {
-    return 1;
-  }
-
-  public boolean isFetchOpCode()
-  {
-    return true;
   }
 }
 

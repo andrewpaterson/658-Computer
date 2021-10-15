@@ -139,9 +139,9 @@ public class InstructionCycles
     return new AddressBank();
   }
 
-  protected static FirstOpCode OpCode()
+  protected static InternalOpCode OpCode()
   {
-    return new FirstOpCode();
+    return new InternalOpCode();
   }
 
   protected static IncrementProgramCounter PC_inc()
@@ -169,9 +169,9 @@ public class InstructionCycles
     return new WriteProgramBank();
   }
 
-  protected static FetchNewProgramCounterHigh Read_NewPCH()
+  protected static ReadNewProgramCounterHigh Read_NewPCH()
   {
-    return new FetchNewProgramCounterHigh(true);
+    return new ReadNewProgramCounterHigh(true);
   }
 
   protected static InternalOperation IO()
@@ -194,29 +194,29 @@ public class InstructionCycles
     return new WriteProgramCounterHigh();
   }
 
-  protected static FetchAbsoluteAddressHigh Read_AAH()
+  protected static ReadAbsoluteAddressHigh Read_AAH()
   {
-    return new FetchAbsoluteAddressHigh(true);
+    return new ReadAbsoluteAddressHigh(true);
   }
 
-  protected static FetchAbsoluteAddressHigh Read_AAH(boolean notMemoryLock)
+  protected static ReadAbsoluteAddressHigh Read_AAH(boolean notMemoryLock)
   {
-    return new FetchAbsoluteAddressHigh(notMemoryLock);
+    return new ReadAbsoluteAddressHigh(notMemoryLock);
   }
 
-  protected static FetchNewProgramBank Read_NewPBR()
+  protected static ReadNewProgramBank Read_NewPBR()
   {
-    return new FetchNewProgramBank(true);
+    return new ReadNewProgramBank(true);
   }
 
-  protected static FetchNewProgramCounterLow Read_NewPCL()
+  protected static ReadNewProgramCounterLow Read_NewPCL()
   {
-    return new FetchNewProgramCounterLow(true);
+    return new ReadNewProgramCounterLow(true);
   }
 
-  protected static FetchAbsoluteAddressLow Read_AAL()
+  protected static ReadAbsoluteAddressLow Read_AAL()
   {
-    return new FetchAbsoluteAddressLow(true);
+    return new ReadAbsoluteAddressLow(true);
   }
 
   protected static AbsoluteAddressLowPlusXLow AAL_XL()
@@ -234,19 +234,19 @@ public class InstructionCycles
     return DirectOffset();
   }
 
-  protected static FetchDirectOffset Read_D0()
+  protected static ReadDirectOffset Read_D0()
   {
-    return new FetchDirectOffset(true);
+    return new ReadDirectOffset(true);
   }
 
-  protected static FetchAbsoluteAddressBank Read_AAB()
+  protected static ReadAbsoluteAddressBank Read_AAB()
   {
-    return new FetchAbsoluteAddressBank(true);
+    return new ReadAbsoluteAddressBank(true);
   }
 
-  protected static FetchDataBank Read_DBR()
+  protected static ReadDataBank Read_DBR()
   {
-    return new FetchDataBank(true);
+    return new ReadDataBank(true);
   }
 
   protected static WriteProcessorStatus Write_PS()
@@ -254,9 +254,9 @@ public class InstructionCycles
     return new WriteProcessorStatus();
   }
 
-  protected static FetchAbsoluteAddressLow Read_AAL(boolean notMemoryLock)
+  protected static ReadAbsoluteAddressLow Read_AAL(boolean notMemoryLock)
   {
-    return new FetchAbsoluteAddressLow(notMemoryLock);
+    return new ReadAbsoluteAddressLow(notMemoryLock);
   }
 
   protected static InternalOperation IO(boolean notMemoryLock)
@@ -264,22 +264,22 @@ public class InstructionCycles
     return new InternalOperation(notMemoryLock);
   }
 
-  protected static FetchDataHigh Read_DataHigh()
+  protected static ReadDataHigh Read_DataHigh()
   {
     return Read_DataHigh(true);
   }
 
-  protected static FetchDataHigh Read_DataHigh(boolean notMemoryLock)
+  protected static ReadDataHigh Read_DataHigh(boolean notMemoryLock)
   {
-    return new FetchDataHigh(notMemoryLock);
+    return new ReadDataHigh(notMemoryLock);
   }
 
-  protected static FetchDataLow Read_DataLow(boolean notMemoryLock)
+  protected static ReadDataLow Read_DataLow(boolean notMemoryLock)
   {
-    return new FetchDataLow(notMemoryLock);
+    return new ReadDataLow(notMemoryLock);
   }
 
-  protected static FetchDataLow Read_DataLow()
+  protected static ReadDataLow Read_DataLow()
   {
     return Read_DataLow(true);
   }
@@ -289,9 +289,9 @@ public class InstructionCycles
     return Write_DataLow(true);
   }
 
-  protected static FetchDirectOffset Read_D0(boolean notMemoryLock)
+  protected static ReadDirectOffset Read_D0(boolean notMemoryLock)
   {
-    return new FetchDirectOffset(notMemoryLock);
+    return new ReadDirectOffset(notMemoryLock);
   }
 
   protected static WriteDataLow Write_DataLow(boolean notMemoryLock)

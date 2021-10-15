@@ -6,7 +6,7 @@ import net.wdc65xx.wdc65816.Executor;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
 import net.wdc65xx.wdc65816.instruction.interrupt.InterruptVector;
-import net.wdc65xx.wdc65816.instruction.operations.FetchOpCode;
+import net.wdc65xx.wdc65816.instruction.operations.ReadOpCode;
 import net.wdc65xx.wdc65816.instruction.operations.InternalOperation;
 import net.wdc65xx.wdc65816.instruction.operations.WaitOperation;
 import net.wdc65xx.wdc65816.instruction.operations.notes.*;
@@ -819,7 +819,7 @@ public class InstructionCycleFactory
   {
     //22b
     return new InstructionCycles(OpCode,
-                                 new BusCycle(Address(PBR(), PC()), new FetchOpCode(), PC_inc()));
+                                 new BusCycle(Address(PBR(), PC()), new ReadOpCode(), PC_inc()));
   }
 
   public static InstructionCycles createStackHardwareInterruptCycles(InterruptVector interruptVector, Executor<Cpu65816> operation)

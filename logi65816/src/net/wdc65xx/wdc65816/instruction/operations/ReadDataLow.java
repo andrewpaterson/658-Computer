@@ -2,10 +2,10 @@ package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.wdc65xx.wdc65816.Cpu65816;
 
-public class FetchNewProgramCounterHigh
+public class ReadDataLow
     extends DataOperation
 {
-  public FetchNewProgramCounterHigh(boolean notMemoryLock)
+  public ReadDataLow(boolean notMemoryLock)
   {
     super(false, true, notMemoryLock, true, true);
   }
@@ -13,13 +13,13 @@ public class FetchNewProgramCounterHigh
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setNewProgramCounterHigh(cpu.getPins().getData());
+    cpu.setDataLow(cpu.getPins().getData());
   }
 
   @Override
   public String toString()
   {
-    return "Read(New_PCH)";
+    return "Read(DL)";
   }
 }
 

@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816.instruction.operations;
 
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.util.IntUtil;
 
 public class WriteProgramCounterLow
@@ -12,7 +12,7 @@ public class WriteProgramCounterLow
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(WDC65C816 cpu)
   {
     setPinData(cpu, IntUtil.getLowByte(cpu.getProgramCounter().getOffset()));
   }

@@ -6,7 +6,7 @@ import net.simulation.common.Trace;
 import net.simulation.memory.Memory;
 import net.simulation.wiring.ClockOscillator;
 import net.wdc65xx.simulation.Cpu65816Pins;
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import static net.util.StringUtil.*;
 
 public class CpuTest
 {
-  private static void print(Cpu65816 cpu)
+  private static void print(WDC65C816 cpu)
   {
     BusCycle busCycle = cpu.getBusCycle();
     String addressOffset = busCycle.toAddressOffsetString();
@@ -74,7 +74,7 @@ public class CpuTest
                                             vectorPullBTrace,
                                             validProgramAddressTrace,
                                             validDataAddressTrace);
-    Cpu65816 cpu = new Cpu65816(cpuPins);
+    WDC65C816 cpu = new WDC65C816(cpuPins);
 
     System.out.println(new String(memory.get(0, 18)));
 

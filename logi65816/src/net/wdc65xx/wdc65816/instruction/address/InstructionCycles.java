@@ -2,7 +2,7 @@ package net.wdc65xx.wdc65816.instruction.address;
 
 import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.instruction.AddressingMode;
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Executor;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
@@ -320,18 +320,18 @@ public class InstructionCycles
     return new WriteAbsoluteAddressHigh();
   }
 
-  protected static ExecuteIf16Bit E16Bit(Executor<Cpu65816> consumer, WidthFromRegister width)
+  protected static ExecuteIf16Bit E16Bit(Executor<WDC65C816> consumer, WidthFromRegister width)
   {
 
     return new ExecuteIf16Bit(consumer, width);
   }
 
-  protected static ExecuteIf8Bit E8Bit(Executor<Cpu65816> consumer, WidthFromRegister width)
+  protected static ExecuteIf8Bit E8Bit(Executor<WDC65C816> consumer, WidthFromRegister width)
   {
     return new ExecuteIf8Bit(consumer, width);
   }
 
-  protected static Execute E(Executor<Cpu65816> consumer)
+  protected static Execute E(Executor<WDC65C816> consumer)
   {
     return new Execute(consumer);
   }

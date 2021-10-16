@@ -3,15 +3,15 @@ package net.wdc65xx.simulation;
 import net.simulation.common.*;
 import net.simulation.gate.Tickable;
 import net.util.EmulatorException;
-import net.wdc65xx.wdc65816.Cpu65816;
 import net.wdc65xx.wdc65816.CpuSnapshot;
 import net.wdc65xx.wdc65816.Pins65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 
 public class Cpu65816Pins
     extends Tickable
     implements Pins65816
 {
-  private Cpu65816 cpu;
+  private WDC65C816 cpu;
   private CpuSnapshot snapshot;
 
   protected final Omniport addressBus;
@@ -105,6 +105,7 @@ public class Cpu65816Pins
         nmibValue.isValidOrUndefined() &&
         resetBValue.isValidOrUndefined())
     {
+      cpu.preTick(clock.getBoolAfterRead(), !resetB.getBoolAfterRead());
       cpu.tick();
     }
     else if (clockValue.isError() ||
@@ -132,7 +133,7 @@ public class Cpu65816Pins
     return "WDC65C816";
   }
 
-  public void setCpu(Cpu65816 cpu)
+  public void setCpu(WDC65C816 cpu)
   {
     this.cpu = cpu;
   }
@@ -186,15 +187,9 @@ public class Cpu65816Pins
   }
 
   @Override
-  public void setRwb(boolean rwB)
+  public void setRWB(boolean rwB)
   {
     this.rwB.writeBool(rwB);
-  }
-
-  @Override
-  public boolean getPhi2()
-  {
-    return clock.getBoolAfterRead();
   }
 
   @Override
@@ -210,9 +205,15 @@ public class Cpu65816Pins
   }
 
   @Override
-  public void setMX(boolean mx)
+  public void setM(boolean m)
   {
-    this.mx.writeBool(mx);
+    this.mx.writeBool(m);
+  }
+
+  @Override
+  public void setX(boolean x)
+  {
+    this.mx.writeBool(x);
   }
 
   @Override
@@ -264,12 +265,6 @@ public class Cpu65816Pins
   }
 
   @Override
-  public boolean isResetB()
-  {
-    return resetB.getBoolAfterRead();
-  }
-
-  @Override
   public void startPropagation()
   {
     snapshot = cpu.createCpuSnapshot();
@@ -287,7 +282,6 @@ public class Cpu65816Pins
     cpu.restoreCpuFromSnapshot(snapshot);
   }
 
-  @Override
   public void setAllOutputsUnknown()
   {
     rwB.unset();
@@ -302,7 +296,6 @@ public class Cpu65816Pins
     mx.unset();
   }
 
-  @Override
   public void setAllOutputsError()
   {
     rwB.error();

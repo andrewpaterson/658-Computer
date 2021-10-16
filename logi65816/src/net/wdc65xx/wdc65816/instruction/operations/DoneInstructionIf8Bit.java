@@ -1,7 +1,7 @@
 package net.wdc65xx.wdc65816.instruction.operations;
 
 import net.util.EmulatorException;
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 
 import static net.wdc65xx.wdc65816.WidthFromRegister.M;
@@ -18,7 +18,7 @@ public class DoneInstructionIf8Bit
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(WDC65C816 cpu)
   {
     if (width == M)
     {

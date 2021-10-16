@@ -1,20 +1,23 @@
 package net.wdc65xx.logisim;
 
+import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
+
+import static net.wdc65xx.logisim.Logisim65816Factory.PORT_PHI2;
+import static net.wdc65xx.logisim.Logisim65816Factory.PORT_RESB;
 
 public class Logisim65816Instance
     implements InstanceData,
                Cloneable
 {
-  protected Cpu65816 cpu;
   protected LogisimPins65816 pins;
 
   public Logisim65816Instance()
   {
     this.pins = new LogisimPins65816();
-    this.cpu = new Cpu65816(pins);
+    new WDC65C816(pins);
   }
 
   @Override
@@ -29,14 +32,31 @@ public class Logisim65816Instance
       return null;
     }
   }
-  public void setInstanceState(InstanceState instanceState)
+  public LogisimPins65816 getPins()
   {
-    pins.setInstanceState(instanceState);
+    return pins;
   }
 
-  public Cpu65816 getCpu()
+  public void tick(InstanceState instanceState)
   {
-    return cpu;
+    LogisimPins65816 pins = getPins();
+    boolean reset = instanceState.getPortValue(PORT_RESB) != Value.TRUE;
+    boolean clock = instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
+
+    WDC65C816 cpu = pins.getCpu();
+    cpu.preTick(clock, reset);
+
+    if (cpu.isFallingEdge())
+    {
+      pins.readInputs(instanceState);
+    }
+
+    cpu.tick();
+
+    if (cpu.isRisingEdge())
+    {
+      pins.writeOutputs(instanceState);
+    }
   }
 }
 

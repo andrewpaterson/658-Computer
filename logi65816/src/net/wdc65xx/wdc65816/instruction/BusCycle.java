@@ -1,11 +1,8 @@
 package net.wdc65xx.wdc65816.instruction;
 
-import com.cburch.logisim.data.BitWidth;
-import com.cburch.logisim.data.Value;
 import net.util.EmulatorException;
-import net.wdc65xx.logisim.Logisim65816Factory;
 import net.wdc65xx.wdc65816.Address;
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Pins65816;
 import net.wdc65xx.wdc65816.instruction.address.AddressOffset;
 import net.wdc65xx.wdc65816.instruction.address.ConstantOffset;
@@ -50,7 +47,7 @@ public class BusCycle
     }
   }
 
-  public Address getAddress(Cpu65816 cpu)
+  public Address getAddress(WDC65C816 cpu)
   {
     return AddressOffset.getAddress(cpu, addressOffsets);
   }
@@ -87,15 +84,16 @@ public class BusCycle
     return done16;
   }
 
-  public final void executeOnFallingEdge(Cpu65816 cpu)
+  public final void executeOnFallingEdge(WDC65C816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();
     cpu.setRead(read);
     Pins65816 pins = cpu.getPins();
-    pins.setRwb(read);
+    pins.setRWB(read);
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setMX(cpu.isMemory8Bit());
+    pins.setM(cpu.isMemory8Bit());
+    pins.setX(cpu.isIndex8Bit());
     pins.setEmulation(cpu.isEmulation());
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
     pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
@@ -111,15 +109,16 @@ public class BusCycle
     }
   }
 
-  public final void executeOnRisingEdge(Cpu65816 cpu)
+  public final void executeOnRisingEdge(WDC65C816 cpu)
   {
     Address address = getAddress(cpu);
     DataOperation dataOperation = getDataOperation();
     boolean read = cpu.isRead();
 
     Pins65816 pins = cpu.getPins();
-    pins.setMX(cpu.isIndex8Bit());
-    pins.setRwb(read);
+    pins.setM(cpu.isMemory8Bit());
+    pins.setX(cpu.isIndex8Bit());
+    pins.setRWB(read);
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
     pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
@@ -130,7 +129,7 @@ public class BusCycle
     pins.setBank(address.getBank());
   }
 
-  public boolean mustExecute(Cpu65816 cpu)
+  public boolean mustExecute(WDC65C816 cpu)
   {
     boolean mustExecute = true;
     for (Operation operation : operations)

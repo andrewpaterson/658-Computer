@@ -1,12 +1,12 @@
 package net.wdc65xx.wdc65816.instruction.interrupt;
 
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 
 public class BRKVector
     extends InterruptVector
 {
   @Override
-  public int getAddress(Cpu65816 cpu)
+  public int getAddress(WDC65C816 cpu)
   {
     if (cpu.isEmulation())
     {

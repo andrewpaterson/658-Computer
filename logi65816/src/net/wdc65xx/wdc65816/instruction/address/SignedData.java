@@ -1,17 +1,15 @@
 package net.wdc65xx.wdc65816.instruction.address;
 
-import net.wdc65xx.wdc65816.Cpu65816;
-
-import static net.wdc65xx.wdc65816.Cpu65816.is16bitValueNegative;
+import net.wdc65xx.wdc65816.WDC65C816;
 
 public class SignedData
     extends AddressOffset
 {
   @Override
-  public int getOffset(Cpu65816 cpu)
+  public int getOffset(WDC65C816 cpu)
   {
     int dataLow = cpu.getData16Bit();
-    if (is16bitValueNegative(dataLow))
+    if (cpu.is16bitValueNegative(dataLow))
     {
       return dataLow | 0xffff0000;
     }

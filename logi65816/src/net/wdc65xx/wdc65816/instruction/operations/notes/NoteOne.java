@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816.instruction.operations.notes;
 
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.instruction.operations.Operation;
@@ -19,12 +19,12 @@ public class NoteOne
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(WDC65C816 cpu)
   {
   }
 
   @Override
-  public boolean mustExecute(Cpu65816 cpu)
+  public boolean mustExecute(WDC65C816 cpu)
   {
     if (width == M)
     {

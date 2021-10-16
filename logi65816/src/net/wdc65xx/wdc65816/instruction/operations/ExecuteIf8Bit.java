@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816.instruction.operations;
 
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Executor;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.util.EmulatorException;
@@ -12,17 +12,17 @@ import static net.wdc65xx.wdc65816.WidthFromRegister.XY;
 public class ExecuteIf8Bit
     extends Operation
 {
-  private final Executor<Cpu65816> function;
+  private final Executor<WDC65C816> function;
   private final WidthFromRegister width;
 
-  public ExecuteIf8Bit(Executor<Cpu65816> function, WidthFromRegister width)
+  public ExecuteIf8Bit(Executor<WDC65C816> function, WidthFromRegister width)
   {
     this.function = function;
     this.width = width;
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(WDC65C816 cpu)
   {
     if (width == M)
     {

@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816.instruction.address;
 
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Executor;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.wdc65xx.wdc65816.instruction.AddressingMode;
@@ -26,7 +26,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), new ReadOpCode(), PC_inc()));
   }
 
-  public static InstructionCycles createAbsoluteCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createAbsoluteCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //1a
     return new InstructionCycles(Absolute,
@@ -37,7 +37,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createAbsoluteWriteCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createAbsoluteWriteCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //1a
     return new InstructionCycles(Absolute,
@@ -69,7 +69,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_PCL(), SP_dec(), PC_e(PBR(), New_PC()), DONE()));
   }
 
-  public static InstructionCycles createAbsoluteRMWCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteRMWCycles(Executor<WDC65C816> operation)
   {
     //1d
     return new InstructionCycles(Absolute,
@@ -132,7 +132,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AA(), o(1)), Read_NewPCH(), PC_e(PBR(), New_PC()), DONE()));
   }
 
-  public static InstructionCycles createAbsoluteLongWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteLongWriteCycles(Executor<WDC65C816> operation)
   {
     //4a
     return new InstructionCycles(AbsoluteLong,
@@ -144,7 +144,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createAbsoluteLongCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteLongCycles(Executor<WDC65C816> operation)
   {
     //4a
     return new InstructionCycles(AbsoluteLong,
@@ -180,7 +180,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_PCL(), SP_dec(), PC_e(PBR(), New_PC()), DONE()));
   }
 
-  public static InstructionCycles createAbsoluteLongIndexedWithXCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteLongIndexedWithXCycles(Executor<WDC65C816> operation)
   {
     //5
     return new InstructionCycles(AbsoluteLongIndexedWithX,
@@ -192,7 +192,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), X(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createAbsoluteLongIndexedWithXWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteLongIndexedWithXWriteCycles(Executor<WDC65C816> operation)
   {
     //5
     return new InstructionCycles(AbsoluteLongIndexedWithX,
@@ -204,7 +204,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), X(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createAbsoluteIndexedWithXWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteIndexedWithXWriteCycles(Executor<WDC65C816> operation)
   {
     //6a
     return new InstructionCycles(AbsoluteIndexedWithX,
@@ -216,7 +216,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), X(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createAbsoluteIndexedWithXCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createAbsoluteIndexedWithXCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //6a
     return new InstructionCycles(AbsoluteIndexedWithX,
@@ -228,7 +228,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), X(), o(1)), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createAbsoluteIndexedWithXRMWCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteIndexedWithXRMWCycles(Executor<WDC65C816> operation)
   {
     //6b
     return new InstructionCycles(AbsoluteIndexedWithX,
@@ -243,7 +243,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), X()), Write_DataLow(RMW), DONE()));
   }
 
-  public static InstructionCycles createAbsoluteIndexedWithYWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAbsoluteIndexedWithYWriteCycles(Executor<WDC65C816> operation)
   {
     //7
     return new InstructionCycles(AbsoluteIndexedWithY,
@@ -255,7 +255,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createAbsoluteIndexedWithYCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createAbsoluteIndexedWithYCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //7
     return new InstructionCycles(AbsoluteIndexedWithY,
@@ -267,7 +267,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createAccumulatorCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createAccumulatorCycles(Executor<WDC65C816> operation)
   {
     //8
     return new InstructionCycles(Accumulator,
@@ -275,7 +275,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createBlockMoveCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createBlockMoveCycles(Executor<WDC65C816> operation)
   {
     //9a & 9b
     return new InstructionCycles(AddressingMode.BlockMove,
@@ -288,7 +288,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), Y()), IO(), PC_dec(), DONE()));
   }
 
-  public static InstructionCycles createDirectCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createDirectCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //10a
     return new InstructionCycles(Direct,
@@ -299,7 +299,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), o(1)), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createDirectWriteCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createDirectWriteCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //10a
     return new InstructionCycles(Direct,
@@ -310,7 +310,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), o(1)), Write_DataHigh(), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createDirectRMWCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectRMWCycles(Executor<WDC65C816> operation)
   {
     //10b
     return new InstructionCycles(Direct,
@@ -324,7 +324,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0()), Write_DataLow(RMW), DONE()));
   }
 
-  public static InstructionCycles createDirectIndexedIndirectWithXCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndexedIndirectWithXCycles(Executor<WDC65C816> operation)
   {
     //11
     return new InstructionCycles(DirectIndexedIndirectWithX,
@@ -338,7 +338,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndexedIndirectWithXWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndexedIndirectWithXWriteCycles(Executor<WDC65C816> operation)
   {
     //11
     return new InstructionCycles(DirectIndexedIndirectWithX,
@@ -352,7 +352,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectCycles(Executor<WDC65C816> operation)
   {
     //12
     return new InstructionCycles(DirectIndirect,
@@ -365,7 +365,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectWriteCycles(Executor<WDC65C816> operation)
   {
     //12
     return new InstructionCycles(DirectIndirect,
@@ -378,7 +378,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectIndexedWithYCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectIndexedWithYCycles(Executor<WDC65C816> operation)
   {
     //13
     return new InstructionCycles(DirectIndirectIndexedWithY,
@@ -392,7 +392,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectIndexedWithYWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectIndexedWithYWriteCycles(Executor<WDC65C816> operation)
   {
     //13
     return new InstructionCycles(DirectIndirectIndexedWithY,
@@ -406,7 +406,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectLongIndexedWithYCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectLongIndexedWithYCycles(Executor<WDC65C816> operation)
   {
     //14
     return new InstructionCycles(DirectIndirectLongIndexedWithY,
@@ -420,7 +420,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectLongIndexedWithYWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectLongIndexedWithYWriteCycles(Executor<WDC65C816> operation)
   {
     //14
     return new InstructionCycles(DirectIndirectLongIndexedWithY,
@@ -434,7 +434,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), Y(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectLongCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectLongCycles(Executor<WDC65C816> operation)
   {
     //15
     return new InstructionCycles(DirectIndirectLong,
@@ -448,7 +448,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndirectLongWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndirectLongWriteCycles(Executor<WDC65C816> operation)
   {
     //15
     return new InstructionCycles(DirectIndirectLong,
@@ -462,7 +462,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(AAB(), AA(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createDirectIndexedWithXCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createDirectIndexedWithXCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //16a
     return new InstructionCycles(DirectIndexedWithX,
@@ -474,7 +474,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), X(), o(1)), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createDirectIndexedWithXWriteCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createDirectIndexedWithXWriteCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //16a
     return new InstructionCycles(DirectIndexedWithX,
@@ -486,7 +486,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), X(), o(1)), Write_DataHigh(), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createDirectIndexedWithXRMWCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createDirectIndexedWithXRMWCycles(Executor<WDC65C816> operation)
   {
     //16b
     return new InstructionCycles(DirectIndexedWithX,
@@ -501,7 +501,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), X()), Write_DataLow(RMW), DONE()));
   }
 
-  public static InstructionCycles createDirectIndexedWithYCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createDirectIndexedWithYCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //17
     return new InstructionCycles(DirectIndexedWithY,
@@ -513,7 +513,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createDirectIndexedWithYWriteCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createDirectIndexedWithYWriteCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //17
     return new InstructionCycles(DirectIndexedWithY,
@@ -525,7 +525,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), Y(), o(1)), Write_DataHigh(), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createImmediateREPSEPCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createImmediateREPSEPCycles(Executor<WDC65C816> operation)
   {
     //18
     return new InstructionCycles(Immediate,
@@ -534,7 +534,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), Read_DataHigh(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createImmediateCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createImmediateCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //18
     return new InstructionCycles(Immediate,
@@ -543,7 +543,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), PC_inc(), Read_DataHigh(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createImpliedCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createImpliedCycles(Executor<WDC65C816> operation)
   {
     //19a
     return new InstructionCycles(Implied,
@@ -551,7 +551,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createImpliedXBACycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createImpliedXBACycles(Executor<WDC65C816> operation)
   {
     //19b
     return new InstructionCycles(Implied,
@@ -560,7 +560,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createStopTheClockCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStopTheClockCycles(Executor<WDC65C816> operation)
   {
     //19c
     return new InstructionCycles(StopTheClock,
@@ -569,7 +569,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createWaitForInterruptCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createWaitForInterruptCycles(Executor<WDC65C816> operation)
   {
     //19d
     return new InstructionCycles(WaitForInterrupt,
@@ -578,7 +578,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), new WaitOperation(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createRelativeShortCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createRelativeShortCycles(Executor<WDC65C816> operation)
   {
     //20
     return new InstructionCycles(Relative,
@@ -588,7 +588,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), new SignedDataLow()), IO(), DONE()));
   }
 
-  public static InstructionCycles createRelativeLongCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createRelativeLongCycles(Executor<WDC65C816> operation)
   {
     //21
     return new InstructionCycles(RelativeLong,
@@ -598,7 +598,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), PC_e(PBR(), PC(), new SignedData()), IO(), DONE()));
   }
 
-  public static InstructionCycles createStackHardwareInterruptCycles(InterruptVector interruptVector, Executor<Cpu65816> operation)
+  public static InstructionCycles createStackHardwareInterruptCycles(InterruptVector interruptVector, Executor<WDC65C816> operation)
   {
     //22a
     return new InstructionCycles(StackInterruptHardware,
@@ -612,7 +612,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(AA()), DONE()));
   }
 
-  public static InstructionCycles createStackResetCycles(InterruptVector interruptVector, Executor<Cpu65816> operation)
+  public static InstructionCycles createStackResetCycles(InterruptVector interruptVector, Executor<WDC65C816> operation)
   {
     //22a
     return new InstructionCycles(StackInterruptHardware,
@@ -625,7 +625,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(PBR(), AA()), DONE()));
   }
 
-  public static InstructionCycles createStackPullCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createStackPullCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //22b
     return new InstructionCycles(Stack,
@@ -636,7 +636,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), o(1)), Read_DataHigh(), SP_inc(), E16Bit(operation, width), DONE16Bit(width)));
   }
 
-  public static InstructionCycles createStackPLBCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPLBCycles(Executor<WDC65C816> operation)
   {
     //22b
     return new InstructionCycles(Stack,
@@ -646,7 +646,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), o(1)), SP_inc(), Read_DataLow(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createStackPLDCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPLDCycles(Executor<WDC65C816> operation)
   {
     //22b
     return new InstructionCycles(Stack,
@@ -657,7 +657,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), o(1)), Read_DataHigh(), SP_inc(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createStackPLPCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPLPCycles(Executor<WDC65C816> operation)
   {
     //22b
     return new InstructionCycles(Stack,
@@ -668,7 +668,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), o(1)), Read_DataLow(), SP_inc(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createStackImpliedPHPCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackImpliedPHPCycles(Executor<WDC65C816> operation)
   {
     //22c
     return new InstructionCycles(Stack,
@@ -678,7 +678,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), E(operation), Write_DataLow(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackPushCycles(Executor<Cpu65816> operation, WidthFromRegister width)
+  public static InstructionCycles createStackPushCycles(Executor<WDC65C816> operation, WidthFromRegister width)
   {
     //22c
     return new InstructionCycles(Stack,
@@ -688,7 +688,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_DataLow(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackPHBCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPHBCycles(Executor<WDC65C816> operation)
   {
     //22c
     return new InstructionCycles(Stack,
@@ -697,7 +697,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), E(operation), Write_DataLow(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackPHDCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPHDCycles(Executor<WDC65C816> operation)
   {
     //22c
     return new InstructionCycles(Stack,
@@ -707,7 +707,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_DataLow(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackPHKCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPHKCycles(Executor<WDC65C816> operation)
   {
     //22c
     return new InstructionCycles(Stack,
@@ -740,7 +740,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_AAL(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackPERCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackPERCycles(Executor<WDC65C816> operation)
   {
     //22f
     return new InstructionCycles(Stack,
@@ -752,7 +752,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_DataLow(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackRTICycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackRTICycles(Executor<WDC65C816> operation)
   {
     //22g
     return new InstructionCycles(Stack,
@@ -789,7 +789,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), o(1)), Read_NewPBR(), SP_inc(), PC_e(New_PBR(), New_PC()), DONE()));
   }
 
-  public static InstructionCycles createStackSoftwareInterruptCycles(InterruptVector interruptVector, Executor<Cpu65816> operation)
+  public static InstructionCycles createStackSoftwareInterruptCycles(InterruptVector interruptVector, Executor<WDC65C816> operation)
   {
     //22j
     return new InstructionCycles(StackInterruptSoftware,
@@ -803,7 +803,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(PBR(), AA()), DONE()));
   }
 
-  public static InstructionCycles createStackRelativeCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackRelativeCycles(Executor<WDC65C816> operation)
   {
     //23
     return new InstructionCycles(StackRelative,
@@ -814,7 +814,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createStackRelativeWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackRelativeWriteCycles(Executor<WDC65C816> operation)
   {
     //23
     return new InstructionCycles(StackRelative,
@@ -825,7 +825,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S(), D0(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createStackRelativeIndirectIndexedWithYCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackRelativeIndirectIndexedWithYCycles(Executor<WDC65C816> operation)
   {
     //24
     return new InstructionCycles(StackRelativeIndirectIndexedWithY,
@@ -839,7 +839,7 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
-  public static InstructionCycles createStackRelativeIndirectIndexedWithYWriteCycles(Executor<Cpu65816> operation)
+  public static InstructionCycles createStackRelativeIndirectIndexedWithYWriteCycles(Executor<WDC65C816> operation)
   {
     //24
     return new InstructionCycles(StackRelativeIndirectIndexedWithY,

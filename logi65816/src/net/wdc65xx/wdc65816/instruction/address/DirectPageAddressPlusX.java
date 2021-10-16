@@ -1,7 +1,7 @@
 package net.wdc65xx.wdc65816.instruction.address;
 
 import net.wdc65xx.wdc65816.Address;
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 
 public class DirectPageAddressPlusX
     extends OffsetAddressCycle
@@ -12,7 +12,7 @@ public class DirectPageAddressPlusX
   }
 
   @Override
-  public Address getAddress(Cpu65816 cpu)
+  public Address getAddress(WDC65C816 cpu)
   {
     return new Address(0x00, cpu.getDirectPage()).offset(cpu.getDirectOffset() +
                                                          cpu.getX() +

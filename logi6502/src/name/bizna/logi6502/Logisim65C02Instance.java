@@ -66,13 +66,13 @@ public class Logisim65C02Instance
 
   public static Logisim65C02Instance getOrCreate(InstanceState state, Logisim6502Factory parent)
   {
-    Logisim65C02Instance ret = (Logisim65C02Instance) state.getData();
-    if (ret == null)
+    Logisim65C02Instance instance = (Logisim65C02Instance) state.getData();
+    if (instance == null)
     {
-      ret = new Logisim65C02Instance(parent);
-      state.setData(ret);
+      instance = new Logisim65C02Instance(parent);
+      state.setData(instance);
     }
-    return ret;
+    return instance;
   }
 
   @Override
@@ -6342,60 +6342,6 @@ public class Logisim65C02Instance
     wantingVectorPull = want;
   }
 
-  public void tick(InstanceState instanceState)
-  {
-    boolean isResetting = isReset(instanceState);
-    boolean clock = isPHI2(instanceState);
-    if (isResetting)
-    {
-      reset(instanceState);
-    }
-
-    boolean isReady = isReady(instanceState);
-    if (!isReady && !stopped && fetchedOpcode == WAI_implied && cycle == 2)
-    {
-      setReady(instanceState, true);
-    }
-    if (stopped || !isReady)
-    {
-      return;
-    }
-
-    this.instanceState = instanceState;
-    boolean clockFallingEdge = !clock && previousClock;
-    boolean clockRisingEdge = clock && !previousClock;
-
-    if (clockFallingEdge)
-    {
-      updateOverflow(instanceState);
-
-      do
-      {
-        wantingSync = cycle < 0;
-        if (cycle < 0)
-        {
-          doneInstructionUpdateAddress();
-        }
-        else if (cycle == 0)
-        {
-          fetchNextOpcodeOrInterrupt(instanceState);
-        }
-        else
-        {
-          fetchData(instanceState);
-        }
-      }
-      while (cycle < 0 && !stopped);
-    }
-    else if (clockRisingEdge)
-    {
-      applyOutputs(instanceState);
-    }
-
-    this.instanceState = null;
-    this.previousClock = clock;
-  }
-
   private void updateOverflow(InstanceState instanceState)
   {
     boolean overflow = isOverflow(instanceState);
@@ -6409,16 +6355,16 @@ public class Logisim65C02Instance
     }
   }
 
-  private void doneInstructionUpdateAddress()
+  private void doneInstructionAndUpdateProgramCounter()
   {
     wantRead(programCounter);
     programCounter++;
     cycle++;
   }
 
-  private void fetchData(InstanceState instanceState)
+  private void readDataAndDoInstruction(InstanceState instanceState)
   {
-    data = getData(instanceState);
+    data = (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
     doInstruction();
     if (cycle >= 0)
     {
@@ -6426,7 +6372,7 @@ public class Logisim65C02Instance
     }
   }
 
-  private void fetchNextOpcodeOrInterrupt(InstanceState instanceState)
+  private void readNextOpcodeOrInterrupt(InstanceState instanceState)
   {
     wantRead(programCounter);
     programCounter++;
@@ -6446,13 +6392,13 @@ public class Logisim65C02Instance
     }
     else
     {
-      fetchedOpcode = getData(instanceState);
+      fetchedOpcode = (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
     }
     previousNMI = nmi;
     cycle++;
   }
 
-  private void applyOutputs(InstanceState instanceState)
+  private void writeOutputs(InstanceState instanceState)
   {
     if (intendedRWB)
     {
@@ -6572,11 +6518,6 @@ public class Logisim65C02Instance
     }
   }
 
-  public byte getData(InstanceState instanceState)
-  {
-    return (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
-  }
-
   public boolean isReady(InstanceState instanceState)
   {
     return instanceState.getPortValue(PORT_RDY) != Value.FALSE;
@@ -6605,6 +6546,60 @@ public class Logisim65C02Instance
   public void setMLB(InstanceState instanceState, boolean mlb)
   {
     setPort(instanceState, PORT_MLB, mlb, 6);
+  }
+
+  public void tick(InstanceState instanceState)
+  {
+    boolean isResetting = isReset(instanceState);
+    boolean clock = isPHI2(instanceState);
+    if (isResetting)
+    {
+      reset(instanceState);
+    }
+
+    boolean isReady = isReady(instanceState);
+    if (!isReady && !stopped && (fetchedOpcode == WAI_implied) && (cycle == 2))
+    {
+      setReady(instanceState, true);
+    }
+    if (stopped || !isReady)
+    {
+      return;
+    }
+
+    this.instanceState = instanceState;
+    boolean clockFallingEdge = !clock && previousClock;
+    boolean clockRisingEdge = clock && !previousClock;
+
+    if (clockFallingEdge)
+    {
+      updateOverflow(instanceState);
+      do
+      {
+        wantingSync = cycle < 0;
+        if (cycle < 0)
+        {
+          doneInstructionAndUpdateProgramCounter();
+        }
+        else if (cycle == 0)
+        {
+          readNextOpcodeOrInterrupt(instanceState);
+        }
+        else
+        {
+          readDataAndDoInstruction(instanceState);
+        }
+      }
+      while (cycle < 0 && !stopped);
+    }
+
+    if (clockRisingEdge)
+    {
+      writeOutputs(instanceState);
+    }
+
+    this.instanceState = null;
+    this.previousClock = clock;
   }
 }
 

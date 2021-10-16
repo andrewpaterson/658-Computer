@@ -9,8 +9,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
-import net.wdc65xx.wdc65816.Cpu65816;
-import net.wdc65xx.wdc65816.CpuSnapshot;
+import net.wdc65xx.wdc65816.WDC65C816;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -143,8 +142,8 @@ public class Logisim65816Factory
   public void paintInstance(InstancePainter painter)
   {
     Logisim65816Instance instance = getOrCreateLogisim65816Instance(painter);
-    Cpu65816 cpu = instance.getCpu();
-    boolean clockHigh = cpu.getPreviousClock();
+    WDC65C816 cpu = instance.getPins().getCpu();
+    boolean clockHigh = cpu.getClock();
 
     painter.drawBounds();
     paintPorts(painter, clockHigh);
@@ -239,17 +238,7 @@ public class Logisim65816Factory
   public void propagate(InstanceState instanceState)
   {
     Logisim65816Instance instance = getOrCreateLogisim65816Instance(instanceState);
-    instance.setInstanceState(instanceState);
-    Value portValue = instanceState.getPortValue(PORT_DataBus);
-    System.out.println("Logisim65816Factory.propagate - " + portValue.toHexString());
-
-    Cpu65816 cpu = instance.getCpu();
-    CpuSnapshot cpuSnapshot = cpu.createCpuSnapshot();
-    cpu.tick();
-    if (portValue.isErrorValue() || portValue.isUnknown())
-    {
-      cpu.restoreCpuFromSnapshot(cpuSnapshot);
-    }
+    instance.tick(instanceState);
   }
 
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)

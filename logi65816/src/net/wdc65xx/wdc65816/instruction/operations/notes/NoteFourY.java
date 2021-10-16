@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816.instruction.operations.notes;
 
-import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.operations.Operation;
 
 import static net.util.IntUtil.getLowByte;
@@ -16,12 +16,12 @@ public class NoteFourY
   }
 
   @Override
-  public void execute(Cpu65816 cpu)
+  public void execute(WDC65C816 cpu)
   {
   }
 
   @Override
-  public boolean mustExecute(Cpu65816 cpu)
+  public boolean mustExecute(WDC65C816 cpu)
   {
     return (getLowByte(cpu.getAddress().getOffset()) + getLowByte(cpu.getY())) > 0xFF ||
            !nextWillRead ||

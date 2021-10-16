@@ -12,7 +12,7 @@ import static net.util.StringUtil.to16BitHex;
 import static net.util.StringUtil.to8BitHex;
 import static net.wdc65xx.wdc65816.CpuFlags.*;
 
-public class Cpu65816
+public class WDC65C816
 {
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
@@ -42,7 +42,6 @@ public class Cpu65816
   protected Address programCounter;
   protected int stackPointer;
 
-  protected boolean previousClock;
   protected int cycle;
   protected Instruction opCode;
   protected boolean stopped;
@@ -56,7 +55,12 @@ public class Cpu65816
 
   protected Pins65816 pins;
 
-  public Cpu65816(Pins65816 pins)
+  protected boolean clock;
+  protected boolean fallingEdge;
+  protected boolean risingEdge;
+  protected boolean reset;
+
+  public WDC65C816(Pins65816 pins)
   {
     this.pins = pins;
     this.pins.setCpu(this);
@@ -87,7 +91,7 @@ public class Cpu65816
     breakFlag = false;
 
     stopped = false;
-    previousClock = false;
+    clock = false;
     cycle = 0;
     opCode = resetOpcode;
     data = 0;
@@ -277,12 +281,13 @@ public class Cpu65816
 
   public void tick()
   {
-    boolean clock = pins.getPhi2();
-    boolean clockFallingEdge = !clock && previousClock;
-    boolean clockRisingEdge = clock && !previousClock;
-    previousClock = clock;
+    if (reset)
+    {
+      opCode = resetOpcode;
+      cycle = 0;
+    }
 
-    if (!clockFallingEdge && !clockRisingEdge)
+    if (!fallingEdge && !risingEdge)
     {
       return;
     }
@@ -296,15 +301,23 @@ public class Cpu65816
       nextCycle();
     }
 
-    if (clockFallingEdge)
+    if (fallingEdge)
     {
       getBusCycle().executeOnFallingEdge(this);
       nextCycle();
     }
-    if (clockRisingEdge)
+    if (risingEdge)
     {
       getBusCycle().executeOnRisingEdge(this);
     }
+  }
+
+  public void preTick(boolean clock, boolean reset)
+  {
+    this.fallingEdge = !clock && this.clock;
+    this.risingEdge = clock && !this.clock;
+    this.clock = clock;
+    this.reset = reset;
   }
 
   public BusCycle getBusCycle()
@@ -598,22 +611,22 @@ public class Cpu65816
     }
   }
 
-  public static boolean is8bitValueNegative(int value)
+  public boolean is8bitValueNegative(int value)
   {
     return (value & 0x80) != 0;
   }
 
-  public static boolean is16bitValueNegative(int value)
+  public boolean is16bitValueNegative(int value)
   {
     return (value & 0x8000) != 0;
   }
 
-  public static boolean is8bitValueZero(int value)
+  public boolean is8bitValueZero(int value)
   {
     return (toByte(value) == 0);
   }
 
-  public static boolean is16bitValueZero(int value)
+  public boolean is16bitValueZero(int value)
   {
     return (toShort(value) == 0);
   }
@@ -1144,22 +1157,22 @@ public class Cpu65816
 
   public void setZeroFlagFrom8BitValue(int value)
   {
-    setZeroFlag(Cpu65816.is8bitValueZero(value));
+    setZeroFlag(is8bitValueZero(value));
   }
 
   public void setZeroFlagFrom16BitValue(int value)
   {
-    setZeroFlag(Cpu65816.is16bitValueZero(value));
+    setZeroFlag(is16bitValueZero(value));
   }
 
   public void setNegativeFlagFrom8BitValue(int value)
   {
-    setNegativeFlag(Cpu65816.is8bitValueNegative(value));
+    setNegativeFlag(is8bitValueNegative(value));
   }
 
   public void setNegativeFlagFrom16BitValue(int value)
   {
-    setNegativeFlag(Cpu65816.is16bitValueNegative(value));
+    setNegativeFlag(is16bitValueNegative(value));
   }
 
   public void setSignAndZeroFlagFrom8BitValue(int value)
@@ -1969,7 +1982,7 @@ public class Cpu65816
                            directPage,
                            new Address(programCounter),
                            stackPointer,
-                           previousClock,
+                           clock,
                            cycle,
                            opCode,
                            stopped,
@@ -2001,7 +2014,7 @@ public class Cpu65816
     programCounter = new Address(snapshot.programCounter);
     stackPointer = snapshot.stackPointer;
 
-    previousClock = snapshot.previousClock;
+    clock = snapshot.previousClock;
     cycle = snapshot.cycle;
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;
@@ -2013,16 +2026,26 @@ public class Cpu65816
     read = snapshot.read;
   }
 
-  public boolean getPreviousClock()
+  public boolean getClock()
   {
-    return previousClock;
+    return clock;
+  }
+
+  public boolean isFallingEdge()
+  {
+    return fallingEdge;
+  }
+
+  public boolean isRisingEdge()
+  {
+    return risingEdge;
   }
 
   public void dump()
   {
     System.out.println("  --- Internal Status ---- ");
     System.out.println("      Mnemonic: " + getOpcodeMnemonicString());
-    System.out.println("         Cycle: " + getCycle() + (previousClock ? " (High)" : " (Low)"));
+    System.out.println("         Cycle: " + getCycle() + (clock ? " (High)" : " (Low)"));
     System.out.println("   Accumulator: " + getAccumulatorValueHex());
     System.out.println("       X-Index: " + getXValueHex());
     System.out.println("       Y-Index: " + getYValueHex());

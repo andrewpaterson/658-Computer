@@ -10,15 +10,15 @@ public interface Pins65816
 
   void setBank(int data);
 
-  void setRwb(boolean rwB);
-
-  boolean getPhi2();
+  void setRWB(boolean rwB);
 
   void setEmulation(boolean emulation);
 
   void setMemoryLockB(boolean memoryLock);
 
-  void setMX(boolean mx);
+  void setM(boolean m);
+
+  void setX(boolean x);
 
   void setRdy(boolean rdy);
 
@@ -36,12 +36,6 @@ public interface Pins65816
 
   boolean isAbortB();
 
-  boolean isResetB();
-
-  void setCpu(Cpu65816 cpu);
-
-  void setAllOutputsUnknown();
-
-  void setAllOutputsError();
+  void setCpu(WDC65C816 cpu);
 }
 

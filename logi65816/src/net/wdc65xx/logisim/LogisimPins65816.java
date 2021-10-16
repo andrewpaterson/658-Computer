@@ -6,6 +6,7 @@ import com.cburch.logisim.instance.InstanceState;
 import net.wdc65xx.wdc65816.Pins65816;
 import net.wdc65xx.wdc65816.WDC65C816;
 
+import static net.util.IntUtil.toByte;
 import static net.wdc65xx.logisim.Logisim65816Factory.*;
 
 public class LogisimPins65816
@@ -50,7 +51,7 @@ public class LogisimPins65816
   @Override
   public void setData(int data)
   {
-    this.data = data;
+    this.data = toByte(data);
   }
 
   @Override
@@ -218,13 +219,11 @@ public class LogisimPins65816
 
   public void readInputs(InstanceState instanceState)
   {
-    data = (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
+    data = toByte((int) instanceState.getPortValue(PORT_DataBus).toLongValue());
     abortB = instanceState.getPortValue(PORT_ABORT) != Value.FALSE;
     be = instanceState.getPortValue(PORT_BE) != Value.FALSE;
     irqB = instanceState.getPortValue(PORT_IRQB) != Value.FALSE;
     nmiB = instanceState.getPortValue(PORT_NMIB) != Value.FALSE;
-
-    System.out.println("LogisimPins65816.readInputs - " + data);
   }
 
   public void writeOutputs(InstanceState instanceState)
@@ -274,5 +273,4 @@ public class LogisimPins65816
     instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
   }
 }
-
 

@@ -1,5 +1,7 @@
 package name.bizna.logi6502;
 
+import static com.cburch.logisim.instance.Port.*;
+
 public class PortInfo
 {
   protected String name;
@@ -15,34 +17,34 @@ public class PortInfo
     this.bitWidth = bitWidth;
   }
 
-  public static PortInfo sharedOutput(String name, int pins)
+  public static PortInfo outputShared(String name, int pins)
   {
-    return new PortInfo(name, "output", "shared", pins);
+    return new PortInfo(name, OUTPUT, SHARED, pins);
   }
 
-  public static PortInfo sharedBidirectional(String name, int pins)
+  public static PortInfo inoutShared(String name, int pins)
   {
-    return new PortInfo(name, "inout", "shared", pins);
+    return new PortInfo(name, INOUT, SHARED, pins);
   }
 
-  public static PortInfo exclusiveOutput(String name)
+  public static PortInfo outputExclusive(String name)
   {
-    return new PortInfo(name, "output", "exclusive", 1);
+    return new PortInfo(name, OUTPUT, EXCLUSIVE, 1);
   }
 
-  public static PortInfo sharedOutput(String name)
+  public static PortInfo outputShared(String name)
   {
-    return new PortInfo(name, "output", "shared", 1);
+    return new PortInfo(name, OUTPUT, SHARED, 1);
   }
 
-  public static PortInfo sharedInput(String name)
+  public static PortInfo inputShared(String name)
   {
-    return new PortInfo(name, "input", "shared", 1);
+    return new PortInfo(name, INPUT, SHARED, 1);
   }
 
-  public static PortInfo sharedBidirectional(String name)
+  public static PortInfo inoutShared(String name)
   {
-    return new PortInfo(name, "inout", "shared", 1);
+    return new PortInfo(name, INOUT, SHARED, 1);
   }
 }
 

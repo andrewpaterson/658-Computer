@@ -16,7 +16,7 @@ public class Components
   {
     try
     {
-      tools = new ArrayList<Tool>();
+      tools = new ArrayList<>();
       tools.add(new AddTool(new Logisim6502Factory()));
     }
     catch (Exception e)

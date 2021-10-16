@@ -25,7 +25,6 @@ public class Logisim65C02Instance
   public static final byte P_V_BIT = (byte) 0x40;
   public static final byte P_N_BIT = (byte) 0x80;
 
-  protected Logisim6502Factory factory;
   protected InstanceState instanceState;
 
   protected byte cycle;
@@ -53,9 +52,8 @@ public class Logisim65C02Instance
   protected byte intendedData;
   protected boolean intendedRWB;
 
-  public Logisim65C02Instance(Logisim6502Factory factory)
+  public Logisim65C02Instance()
   {
-    this.factory = factory;
     previousNMI = false;
     previousOverflow = false;
     previousClock = true;
@@ -64,13 +62,13 @@ public class Logisim65C02Instance
     stopped = true;
   }
 
-  public static Logisim65C02Instance getOrCreate(InstanceState state, Logisim6502Factory parent)
+  public static Logisim65C02Instance getOrCreate(InstanceState instanceState)
   {
-    Logisim65C02Instance instance = (Logisim65C02Instance) state.getData();
+    Logisim65C02Instance instance = (Logisim65C02Instance) instanceState.getData();
     if (instance == null)
     {
-      instance = new Logisim65C02Instance(parent);
-      state.setData(instance);
+      instance = new Logisim65C02Instance();
+      instanceState.setData(instance);
     }
     return instance;
   }
@@ -926,7 +924,9 @@ public class Logisim65C02Instance
       }
       case 2:
       {
-        if (!isInterruptRequest(instanceState) && !(isNonMaskableInterrupt(instanceState) && !previousNMI))
+        boolean irq = isInterruptRequest(instanceState);
+        boolean nmi = isNonMaskableInterrupt(instanceState);
+        if (!irq && !(nmi && !previousNMI))
         {
           cycle--;
         }
@@ -6362,9 +6362,8 @@ public class Logisim65C02Instance
     cycle++;
   }
 
-  private void readDataAndDoInstruction(InstanceState instanceState)
+  private void readDataAndDoInstruction()
   {
-    data = (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
     doInstruction();
     if (cycle >= 0)
     {
@@ -6372,19 +6371,18 @@ public class Logisim65C02Instance
     }
   }
 
-  private void readNextOpcodeOrInterrupt(InstanceState instanceState)
+  private void readNextOpcodeOrInterrupt(boolean nmi, boolean irq)
   {
     wantRead(programCounter);
     programCounter++;
 
-    boolean nmi = isNonMaskableInterrupt(instanceState);
     if (nmi && !previousNMI)
     {
       vectorToPull = NMI_VECTOR;
       programCounter -= 2;
       fetchedOpcode = BRK;
     }
-    else if (isInterruptRequest(instanceState) && isInterrupt() == 0)
+    else if (irq && isInterrupt() == 0)
     {
       vectorToPull = IRQ_VECTOR;
       programCounter -= 2;
@@ -6392,7 +6390,7 @@ public class Logisim65C02Instance
     }
     else
     {
-      fetchedOpcode = (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
+      fetchedOpcode = data;
     }
     previousNMI = nmi;
     cycle++;
@@ -6456,16 +6454,6 @@ public class Logisim65C02Instance
     {
       processorStatus &= ~P_I_BIT;
     }
-  }
-
-  protected boolean isReset(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_RESB) != Value.TRUE;
-  }
-
-  protected boolean isPHI2(InstanceState instanceState)
-  {
-    return instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
   }
 
   public boolean isInterruptRequest(InstanceState instanceState)
@@ -6550,9 +6538,11 @@ public class Logisim65C02Instance
 
   public void tick(InstanceState instanceState)
   {
-    boolean isResetting = isReset(instanceState);
-    boolean clock = isPHI2(instanceState);
-    if (isResetting)
+    boolean reset = instanceState.getPortValue(PORT_RESB) != Value.TRUE;
+    boolean clock = instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
+
+
+    if (reset)
     {
       reset(instanceState);
     }
@@ -6573,6 +6563,8 @@ public class Logisim65C02Instance
 
     if (clockFallingEdge)
     {
+      data = (byte) instanceState.getPortValue(PORT_DataBus).toLongValue();
+
       updateOverflow(instanceState);
       do
       {
@@ -6583,11 +6575,13 @@ public class Logisim65C02Instance
         }
         else if (cycle == 0)
         {
-          readNextOpcodeOrInterrupt(instanceState);
+          boolean nonMaskableInterrupt = isNonMaskableInterrupt(instanceState);
+          boolean interruptRequest = isInterruptRequest(instanceState);
+          readNextOpcodeOrInterrupt(nonMaskableInterrupt, interruptRequest);
         }
         else
         {
-          readDataAndDoInstruction(instanceState);
+          readDataAndDoInstruction();
         }
       }
       while (cycle < 0 && !stopped);

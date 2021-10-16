@@ -2,7 +2,6 @@ package net.wdc65xx.logisim;
 
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
-import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -81,32 +80,48 @@ public class Logisim65816Factory
     portInfos = new PortInfo[]
         {
             // Left side, top to bottom
-            PortInfo.sharedInput("ABORT"),
-            PortInfo.sharedInput("IRQB"),
-            PortInfo.sharedInput("NMIB"),
-            PortInfo.sharedInput("RESB"),
-            PortInfo.sharedInput("PHI2"),
-            PortInfo.exclusiveOutput("VPB"),
-            PortInfo.exclusiveOutput("VPA"),
-            PortInfo.exclusiveOutput("VDA"),
+            PortInfo.inputShared("ABORT"),
+            PortInfo.inputShared("IRQB"),
+            PortInfo.inputShared("NMIB"),
+            PortInfo.inputShared("RESB"),
+            PortInfo.inputShared("PHI2"),
+            PortInfo.outputExclusive("VPB"),
+            PortInfo.outputExclusive("VPA"),
+            PortInfo.outputExclusive("VDA"),
 
             // Right side, bottom to top
-            PortInfo.exclusiveOutput("MLB"),
-            PortInfo.sharedBidirectional("RDY"),
-            PortInfo.exclusiveOutput("M"),
-            PortInfo.exclusiveOutput("E"),
-            PortInfo.sharedInput("BE"),
-            PortInfo.sharedOutput("RWB"),
-            PortInfo.sharedBidirectional("D", 8),
-            PortInfo.sharedBidirectional("XX", 8),
-            PortInfo.sharedOutput("A", 16)};
+            PortInfo.outputExclusive("MLB"),
+            PortInfo.inoutShared("RDY"),
+            PortInfo.outputExclusive("M"),
+            PortInfo.outputExclusive("E"),
+            PortInfo.inputShared("BE"),
+            PortInfo.outputShared("RWB"),
+            PortInfo.inoutShared("D", 8),
+            PortInfo.inoutShared("XX", 8),
+            PortInfo.outputShared("A", 16)};
 
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
-    addStandardPins(portInfos, LEFT_X, RIGHT_X, PIN_START_Y, PIN_STOP_Y, PIXELS_PER_PIN, PINS_PER_SIDE);
+    addStandardPins(portInfos);
   }
 
-  void paintPorts(InstancePainter painter, boolean clockHigh)
+  public Logisim65816Instance getOrCreateInstance(InstanceState instanceState)
   {
+    Logisim65816Instance instance = (Logisim65816Instance) instanceState.getData();
+    if (instance == null)
+    {
+      instance = new Logisim65816Instance();
+      instanceState.setData(instance);
+    }
+    return instance;
+  }
+
+  public void paintInstance(InstancePainter painter)
+  {
+    Logisim65816Instance instance = getOrCreateInstance(painter);
+    WDC65C816 cpu = instance.getPins().getCpu();
+    boolean clockHigh = cpu.getClock();
+
+    painter.drawBounds();
     int n = 0;
     for (int i = 0; i < portInfos.length; ++i)
     {
@@ -126,27 +141,6 @@ public class Logisim65816Factory
         n++;
       }
     }
-  }
-
-  public Logisim65816Instance getOrCreateLogisim65816Instance(InstanceState instanceState)
-  {
-    Logisim65816Instance instance = (Logisim65816Instance) instanceState.getData();
-    if (instance == null)
-    {
-      instance = new Logisim65816Instance();
-      instanceState.setData(instance);
-    }
-    return instance;
-  }
-
-  public void paintInstance(InstancePainter painter)
-  {
-    Logisim65816Instance instance = getOrCreateLogisim65816Instance(painter);
-    WDC65C816 cpu = instance.getPins().getCpu();
-    boolean clockHigh = cpu.getClock();
-
-    painter.drawBounds();
-    paintPorts(painter, clockHigh);
 
     Graphics g = painter.getGraphics();
     if (g instanceof Graphics2D)
@@ -237,11 +231,11 @@ public class Logisim65816Factory
   @Override
   public void propagate(InstanceState instanceState)
   {
-    Logisim65816Instance instance = getOrCreateLogisim65816Instance(instanceState);
+    Logisim65816Instance instance = getOrCreateInstance(instanceState);
     instance.tick(instanceState);
   }
 
-  protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)
+  protected void addStandardPins(PortInfo[] portInfos)
   {
     ArrayList<Port> ports = new ArrayList<>(portInfos.length);
     for (int n = 0; n < portInfos.length; ++n)
@@ -251,16 +245,16 @@ public class Logisim65816Factory
       {
         continue;
       }
-      boolean isRightSide = n >= PINS_PER_SIDE;
-      int pinPerSide = isRightSide ? n - PINS_PER_SIDE : n;
+      boolean isRightSide = n >= Logisim65816Factory.PINS_PER_SIDE;
+      int pinPerSide = isRightSide ? n - Logisim65816Factory.PINS_PER_SIDE : n;
       Port port;
       if (isRightSide)
       {
-        port = new Port(RIGHT_X, PIN_STOP_Y - pinPerSide * PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
+        port = new Port(Logisim65816Factory.RIGHT_X, Logisim65816Factory.PIN_STOP_Y - pinPerSide * Logisim65816Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
       }
       else
       {
-        port = new Port(LEFT_X, PIN_START_Y + pinPerSide * PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
+        port = new Port(Logisim65816Factory.LEFT_X, Logisim65816Factory.PIN_START_Y + pinPerSide * Logisim65816Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
       }
       port.setToolTip(new StringGetter()
       {

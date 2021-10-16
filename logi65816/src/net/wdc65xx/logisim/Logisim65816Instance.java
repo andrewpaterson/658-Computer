@@ -32,6 +32,7 @@ public class Logisim65816Instance
       return null;
     }
   }
+
   public LogisimPins65816 getPins()
   {
     return pins;
@@ -39,21 +40,24 @@ public class Logisim65816Instance
 
   public void tick(InstanceState instanceState)
   {
-    LogisimPins65816 pins = getPins();
     boolean reset = instanceState.getPortValue(PORT_RESB) != Value.TRUE;
     boolean clock = instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
 
+    LogisimPins65816 pins = getPins();
+
     WDC65C816 cpu = pins.getCpu();
     cpu.preTick(clock, reset);
+    boolean fallingEdge = cpu.isFallingEdge();
+    boolean risingEdge = cpu.isRisingEdge();
 
-    if (cpu.isFallingEdge())
+    if (fallingEdge)
     {
       pins.readInputs(instanceState);
     }
 
     cpu.tick();
 
-    if (cpu.isRisingEdge())
+    if (risingEdge)
     {
       pins.writeOutputs(instanceState);
     }

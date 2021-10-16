@@ -1,6 +1,5 @@
 package net.wdc65xx.logisim;
 
-import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.data.Value;
@@ -10,9 +9,8 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
-import net.wdc65xx.wdc65816.Address;
 import net.wdc65xx.wdc65816.Cpu65816;
-import net.wdc65xx.wdc65816.Pins65816;
+import net.wdc65xx.wdc65816.CpuSnapshot;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -49,7 +47,8 @@ public class Logisim65816Factory
   protected static final int PORT_BE = 12;
   protected static final int PORT_RWB = 13;
   protected static final int PORT_DataBus = 14;
-  protected static final int PORT_AddressBus = 15;
+  protected static final int PORT_Bank = 15;
+  protected static final int PORT_AddressBus = 16;
 
   protected final PortInfo[] portInfos;
   protected final String[] portInfoNamesHigh;
@@ -77,6 +76,7 @@ public class Logisim65816Factory
             "E",
             "BE",
             "RWB",
+            "X",
             "BA",
             "A"};
     portInfos = new PortInfo[]
@@ -99,6 +99,7 @@ public class Logisim65816Factory
             PortInfo.sharedInput("BE"),
             PortInfo.sharedOutput("RWB"),
             PortInfo.sharedBidirectional("D", 8),
+            PortInfo.sharedBidirectional("XX", 8),
             PortInfo.sharedOutput("A", 16)};
 
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
@@ -239,9 +240,16 @@ public class Logisim65816Factory
   {
     Logisim65816Instance instance = getOrCreateLogisim65816Instance(instanceState);
     instance.setInstanceState(instanceState);
+    Value portValue = instanceState.getPortValue(PORT_DataBus);
+    System.out.println("Logisim65816Factory.propagate - " + portValue.toHexString());
 
     Cpu65816 cpu = instance.getCpu();
+    CpuSnapshot cpuSnapshot = cpu.createCpuSnapshot();
     cpu.tick();
+    if (portValue.isErrorValue() || portValue.isUnknown())
+    {
+      cpu.restoreCpuFromSnapshot(cpuSnapshot);
+    }
   }
 
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)

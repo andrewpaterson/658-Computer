@@ -180,6 +180,12 @@ public class Cpu65816Pins
   }
 
   @Override
+  public void setBank(int data)
+  {
+    this.dataBus.writeAllPinsBool(data);
+  }
+
+  @Override
   public void setRwb(boolean rwB)
   {
     this.rwB.writeBool(rwB);

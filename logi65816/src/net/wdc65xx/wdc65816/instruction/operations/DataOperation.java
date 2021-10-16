@@ -1,5 +1,7 @@
 package net.wdc65xx.wdc65816.instruction.operations;
 
+import net.wdc65xx.wdc65816.Cpu65816;
+
 public abstract class DataOperation
     extends Operation
 {
@@ -59,6 +61,16 @@ public abstract class DataOperation
   public boolean isFetchOpCode()
   {
     return false;
+  }
+
+  protected int getPinData(Cpu65816 cpu)
+  {
+    return cpu.getPins().getData();
+  }
+
+  protected void setPinData(Cpu65816 cpu, int data)
+  {
+    cpu.getPins().setData(data);
   }
 }
 

@@ -13,7 +13,7 @@ public class ReadDirectOffset
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDirectOffset(cpu.getPins().getData());
+    cpu.setDirectOffset(getPinData(cpu));
   }
 
   @Override

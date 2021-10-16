@@ -13,7 +13,7 @@ public class ReadAbsoluteAddressLow
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setAddressLow(cpu.getPins().getData());
+    cpu.setAddressLow(getPinData(cpu));
   }
 
   @Override

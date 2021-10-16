@@ -29,52 +29,54 @@ public class LogisimPins65816
   @Override
   public void setAddress(int address)
   {
-    instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
+    instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 10);
   }
 
   @Override
   public int getData()
   {
-    if (cpu.isRead())
+    instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 13);
+    Value portValue = instanceState.getPortValue(PORT_DataBus);
+    System.out.println("LogisimPins65816.getData - " + portValue.toHexString());
+    if (portValue.isFullyDefined())
     {
-      Value portValue = instanceState.getPortValue(PORT_DataBus);
-      instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
-      if (portValue.isFullyDefined())
-      {
-        long longValue = portValue.toLongValue();
-        return toByte((int) longValue);
-      }
-      else if (portValue.isErrorValue())
-      {
-        System.out.println("Error");
-        setAllOutputsError();
-        return 0;
-      }
-      else if (portValue.isUnknown())
-      {
-        return 0;
-      }
-      else
-      {
-        throw new EmulatorException("Impossible Value");
-      }
+      long longValue = portValue.toLongValue();
+      return toByte((int) longValue);
+    }
+    else if (portValue.isErrorValue())
+    {
+      System.out.println("Error");
+      setAllOutputsError();
+      return 0;
+    }
+    else if (portValue.isUnknown())
+    {
+      return 0;
     }
     else
     {
-      throw new EmulatorException("Get Data when CPU is write?");
+      throw new EmulatorException("Impossible Value");
     }
   }
 
   @Override
   public void setData(int data)
   {
-    instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+    instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 11);
+    instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 14);
+  }
+
+  @Override
+  public void setBank(int data)
+  {
+    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 11);
+    instanceState.setPort(PORT_Bank, Value.createKnown(BitWidth.create(8), data), 14);
   }
 
   @Override
   public void setRwb(boolean rwB)
   {
-    instanceState.setPort(PORT_RWB, rwB ? Value.TRUE : Value.FALSE, 9);
+    instanceState.setPort(PORT_RWB, rwB ? Value.TRUE : Value.FALSE, 10);
   }
 
   @Override
@@ -86,13 +88,13 @@ public class LogisimPins65816
   @Override
   public void setEmulation(boolean emulation)
   {
-    setBooleanValue(PORT_E, emulation, 9);
+    setBooleanValue(PORT_E, emulation, 10);
   }
 
   @Override
   public void setMemoryLockB(boolean memoryLockB)
   {
-    setBooleanValue(PORT_MLB, memoryLockB, 9);
+    setBooleanValue(PORT_MLB, memoryLockB, 10);
   }
 
   @Override
@@ -110,19 +112,19 @@ public class LogisimPins65816
   @Override
   public void setVectorPullB(boolean vectorPullB)
   {
-    setBooleanValue(PORT_VPB, vectorPullB, 9);
+    setBooleanValue(PORT_VPB, vectorPullB, 10);
   }
 
   @Override
   public void setValidProgramAddress(boolean validProgramAddress)
   {
-    setBooleanValue(PORT_VPA, validProgramAddress, 9);
+    setBooleanValue(PORT_VPA, validProgramAddress, 10);
   }
 
   @Override
   public void setValidDataAddress(boolean validDataAddress)
   {
-    setBooleanValue(PORT_VDA, validDataAddress, 9);
+    setBooleanValue(PORT_VDA, validDataAddress, 10);
   }
 
   @Override
@@ -140,30 +142,32 @@ public class LogisimPins65816
   @Override
   public void setAllOutputsUnknown()
   {
-    instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
-    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
-    instanceState.setPort(PORT_RWB, Value.UNKNOWN, 9);
+    instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 10);
+    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 11);
+    instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 14);
+    instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
     instanceState.setPort(PORT_RDY, Value.UNKNOWN, 10);
     instanceState.setPort(PORT_E, Value.UNKNOWN, 10);
-    instanceState.setPort(PORT_MLB, Value.UNKNOWN, 9);
-    instanceState.setPort(PORT_VPB, Value.UNKNOWN, 9);
-    instanceState.setPort(PORT_VPA, Value.UNKNOWN, 9);
-    instanceState.setPort(PORT_VDA, Value.UNKNOWN, 9);
+    instanceState.setPort(PORT_MLB, Value.UNKNOWN, 10);
+    instanceState.setPort(PORT_VPB, Value.UNKNOWN, 10);
+    instanceState.setPort(PORT_VPA, Value.UNKNOWN, 10);
+    instanceState.setPort(PORT_VDA, Value.UNKNOWN, 10);
     instanceState.setPort(PORT_MX, Value.UNKNOWN, 10);
   }
 
   @Override
   public void setAllOutputsError()
   {
-    instanceState.setPort(PORT_AddressBus, Value.createError(BitWidth.create(16)), 12);
-    instanceState.setPort(PORT_DataBus, Value.createError(BitWidth.create(8)), 12);
-    instanceState.setPort(PORT_RWB, Value.ERROR, 9);
+    instanceState.setPort(PORT_AddressBus, Value.createError(BitWidth.create(16)), 10);
+    instanceState.setPort(PORT_DataBus, Value.createError(BitWidth.create(8)), 11);
+    instanceState.setPort(PORT_Bank, Value.createError(BitWidth.create(8)), 14);
+    instanceState.setPort(PORT_RWB, Value.ERROR, 10);
     instanceState.setPort(PORT_RDY, Value.ERROR, 10);
     instanceState.setPort(PORT_E, Value.ERROR, 10);
-    instanceState.setPort(PORT_MLB, Value.ERROR, 9);
-    instanceState.setPort(PORT_VPB, Value.ERROR, 9);
-    instanceState.setPort(PORT_VPA, Value.ERROR, 9);
-    instanceState.setPort(PORT_VDA, Value.ERROR, 9);
+    instanceState.setPort(PORT_MLB, Value.ERROR, 10);
+    instanceState.setPort(PORT_VPB, Value.ERROR, 10);
+    instanceState.setPort(PORT_VPA, Value.ERROR, 10);
+    instanceState.setPort(PORT_VDA, Value.ERROR, 10);
     instanceState.setPort(PORT_MX, Value.ERROR, 10);
   }
 
@@ -214,9 +218,10 @@ public class LogisimPins65816
   {
     if (isBusEnable())
     {
-      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
-      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 12);
-      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 9);
+      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 10);
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 11);
+      instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 14);
+      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
       return false;
     }
     else

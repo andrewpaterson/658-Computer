@@ -13,7 +13,7 @@ public class ReadDataBank
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDataBank(cpu.getPins().getData());
+    cpu.setDataBank(getPinData(cpu));
   }
 
   @Override

@@ -13,7 +13,7 @@ public class ReadAbsoluteAddressBank
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setAddressBank(cpu.getPins().getData());
+    cpu.setAddressBank(getPinData(cpu));
   }
 
   @Override

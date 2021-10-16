@@ -14,7 +14,7 @@ public class WriteProgramCounterLow
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getPins().setData(IntUtil.getLowByte(cpu.getProgramCounter().getOffset()));
+    setPinData(cpu, IntUtil.getLowByte(cpu.getProgramCounter().getOffset()));
   }
 
   @Override

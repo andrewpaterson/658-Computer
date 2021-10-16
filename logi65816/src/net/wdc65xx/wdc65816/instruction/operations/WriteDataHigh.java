@@ -13,7 +13,7 @@ public class WriteDataHigh
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getPins().setData(cpu.getDataHigh());
+    setPinData(cpu, cpu.getDataHigh());
   }
 
   @Override

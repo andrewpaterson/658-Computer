@@ -13,7 +13,7 @@ public class ReadNewProgramCounterHigh
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setNewProgramCounterHigh(cpu.getPins().getData());
+    cpu.setNewProgramCounterHigh(getPinData(cpu));
   }
 
   @Override

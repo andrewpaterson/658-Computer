@@ -14,7 +14,7 @@ public class WriteAbsoluteAddressHigh
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.getPins().setData(IntUtil.getHighByte(cpu.getAddress().getOffset()));
+    setPinData(cpu, IntUtil.getHighByte(cpu.getAddress().getOffset()));
   }
 
   @Override

@@ -13,7 +13,7 @@ public class ReadDataHigh
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setDataHigh(cpu.getPins().getData());
+    cpu.setDataHigh(getPinData(cpu));
   }
 
   @Override

@@ -13,7 +13,7 @@ public class ReadOpCode
   @Override
   public void execute(Cpu65816 cpu)
   {
-    cpu.setOpCode(cpu.getPins().getData());
+    cpu.setOpCode(getPinData(cpu));
   }
 
   @Override

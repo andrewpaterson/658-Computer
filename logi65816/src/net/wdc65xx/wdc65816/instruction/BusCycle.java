@@ -127,7 +127,7 @@ public class BusCycle
     pins.setRdy(dataOperation.isReady());
     pins.setEmulation(cpu.isEmulation());
     pins.setAddress(address.getOffset());
-    pins.setData(address.getBank());
+    pins.setBank(address.getBank());
   }
 
   public boolean mustExecute(Cpu65816 cpu)

@@ -3,9 +3,9 @@ package net.wdc65xx.wdc65816;
 import net.util.EmulatorException;
 import net.util.IntUtil;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
-import net.wdc65xx.wdc65816.instruction.address.InstructionCycles;
-import net.wdc65xx.wdc65816.instruction.InstructionFactory;
 import net.wdc65xx.wdc65816.instruction.Instruction;
+import net.wdc65xx.wdc65816.instruction.InstructionFactory;
+import net.wdc65xx.wdc65816.instruction.address.InstructionCycles;
 
 import static net.util.IntUtil.*;
 import static net.util.StringUtil.to16BitHex;

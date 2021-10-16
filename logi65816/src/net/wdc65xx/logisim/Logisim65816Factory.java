@@ -1,14 +1,18 @@
 package net.wdc65xx.logisim;
 
+import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
+import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
+import net.wdc65xx.wdc65816.Address;
 import net.wdc65xx.wdc65816.Cpu65816;
+import net.wdc65xx.wdc65816.Pins65816;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -124,16 +128,15 @@ public class Logisim65816Factory
     }
   }
 
-  public Logisim65816Instance getOrCreateLogisim65816Instance(InstanceState state)
+  public Logisim65816Instance getOrCreateLogisim65816Instance(InstanceState instanceState)
   {
-    Logisim65816Instance ret = (Logisim65816Instance) state.getData();
-    if (ret == null)
+    Logisim65816Instance instance = (Logisim65816Instance) instanceState.getData();
+    if (instance == null)
     {
-      ret = new Logisim65816Instance();
-      state.setData(ret);
+      instance = new Logisim65816Instance();
+      instanceState.setData(instance);
     }
-    ret.setInstanceState(state);
-    return ret;
+    return instance;
   }
 
   public void paintInstance(InstancePainter painter)
@@ -235,6 +238,8 @@ public class Logisim65816Factory
   public void propagate(InstanceState instanceState)
   {
     Logisim65816Instance instance = getOrCreateLogisim65816Instance(instanceState);
+    instance.setInstanceState(instanceState);
+
     Cpu65816 cpu = instance.getCpu();
     cpu.tick();
   }

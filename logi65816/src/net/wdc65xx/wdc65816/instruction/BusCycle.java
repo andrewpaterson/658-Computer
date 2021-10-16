@@ -1,6 +1,9 @@
 package net.wdc65xx.wdc65816.instruction;
 
+import com.cburch.logisim.data.BitWidth;
+import com.cburch.logisim.data.Value;
 import net.util.EmulatorException;
+import net.wdc65xx.logisim.Logisim65816Factory;
 import net.wdc65xx.wdc65816.Address;
 import net.wdc65xx.wdc65816.Cpu65816;
 import net.wdc65xx.wdc65816.Pins65816;

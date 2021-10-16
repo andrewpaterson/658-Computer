@@ -85,16 +85,16 @@ public class Logisim6502Factory
   }
 
   @Override
-  public void propagate(InstanceState state)
+  public void propagate(InstanceState instanceState)
   {
-    Logisim65C02Instance instance = Logisim65C02Instance.getOrCreate(state, this);
-    instance.tick(state);
+    Logisim65C02Instance instance = Logisim65C02Instance.getOrCreate(instanceState, this);
+    instance.tick(instanceState);
   }
 
-  protected void shred(InstanceState state)
+  protected void shred(InstanceState instanceState)
   {
-    Logisim65C02Instance core = Logisim65C02Instance.getOrCreate(state, this);
-    core.shred();
+    Logisim65C02Instance instance = Logisim65C02Instance.getOrCreate(instanceState, this);
+    instance.shred();
   }
 
   protected void addStandardPins(PortInfo[] portInfos, int LEFT_X, int RIGHT_X, int PIN_START_Y, int PIN_STOP_Y, int PIXELS_PER_PIN, int PINS_PER_SIDE)

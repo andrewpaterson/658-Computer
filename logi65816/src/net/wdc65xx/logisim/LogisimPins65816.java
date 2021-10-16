@@ -37,13 +37,11 @@ public class LogisimPins65816
   {
     if (cpu.isRead())
     {
-      System.out.println("Read");
       Value portValue = instanceState.getPortValue(PORT_DataBus);
       instanceState.setPort(Logisim65816Factory.PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
       if (portValue.isFullyDefined())
       {
         long longValue = portValue.toLongValue();
-        System.out.println("Fully Defined: " + Long.toHexString(longValue));
         return toByte((int) longValue);
       }
       else if (portValue.isErrorValue())
@@ -54,18 +52,15 @@ public class LogisimPins65816
       }
       else if (portValue.isUnknown())
       {
-        System.out.println("Unknown");
         return 0;
       }
       else
       {
-        System.out.println("Impossible Value");
         throw new EmulatorException("Impossible Value");
       }
     }
     else
     {
-      System.out.println("Get Data when CPU is write?");
       throw new EmulatorException("Get Data when CPU is write?");
     }
   }

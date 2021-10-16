@@ -81,8 +81,8 @@ public class CpuTest
     int count = 1024;
     while (!cpu.isStopped() && count > 0)
     {
-      print(cpu);
       tickables.run();
+      print(cpu);
 
 //      if (!cpu.getPreviousClock())
 //      {

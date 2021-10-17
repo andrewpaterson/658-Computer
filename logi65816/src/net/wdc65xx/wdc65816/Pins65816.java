@@ -16,9 +16,7 @@ public interface Pins65816
 
   void setMemoryLockB(boolean memoryLock);
 
-  void setM(boolean m);
-
-  void setX(boolean x);
+  void setMX(boolean m);
 
   void setRdy(boolean rdy);
 

@@ -92,14 +92,8 @@ public class BusCycle
 
     cpu.setRead(read);
 
-    System.out.println("BusCycle.executeOnRisingEdge   Cycle: " + cpu.getCycle());
-    System.out.println("BusCycle.executeOnRisingEdge      Op: " + dataOperation.toString());
-    System.out.println("BusCycle.executeOnRisingEdge Address: " + Integer.toHexString(address.getOffset()));
-    System.out.println("BusCycle.executeOnRisingEdge     RWB: " + read);
-
     Pins65816 pins = cpu.getPins();
-    pins.setM(cpu.isMemory8Bit());
-    pins.setX(cpu.isIndex8Bit());
+    pins.setMX(cpu.isIndex8Bit());
     pins.setRWB(read);
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
     pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
@@ -109,6 +103,8 @@ public class BusCycle
     pins.setEmulation(cpu.isEmulation());
     pins.setAddress(address.getOffset());
     pins.setBank(address.getBank());
+
+    System.out.println("BusCycle.executeOnRisingEdge:  " + cpu.getCycle());
   }
 
   public final void executeOnFallingEdge(WDC65C816 cpu)
@@ -117,25 +113,20 @@ public class BusCycle
     boolean read = dataOperation.isRead();
     Address address = getAddress(cpu);
 
-    System.out.println("BusCycle.executeOnFallingEdge   Cycle: " + cpu.getCycle());
-    System.out.println("BusCycle.executeOnFallingEdge      Op: " + dataOperation.toString());
-    System.out.println("BusCycle.executeOnFallingEdge Address: " + Integer.toHexString(address.getOffset()));
-    System.out.println("BusCycle.executeOnFallingEdge     RWB: " + read);
-
     cpu.setRead(read);
 
     Pins65816 pins = cpu.getPins();
     pins.setRWB(read);
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setM(cpu.isMemory8Bit());
-    pins.setX(cpu.isIndex8Bit());
+    pins.setMX(cpu.isMemory8Bit());
     pins.setEmulation(cpu.isEmulation());
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
     pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
     pins.setVectorPullB(dataOperation.isNotVectorPull());
     pins.setRdy(dataOperation.isReady());
-
     pins.setAddress(address.getOffset());
+
+    System.out.println("BusCycle.executeOnFallingEdge: " + cpu.getCycle());
 
     for (Operation operation : operations)
     {

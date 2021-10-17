@@ -28,9 +28,7 @@ public class LogisimPins65816
   @Override
   public int getData()
   {
-    int data = (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
-    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
-    return data;
+    return (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
   }
 
   @Override
@@ -64,15 +62,9 @@ public class LogisimPins65816
   }
 
   @Override
-  public void setM(boolean m)
+  public void setMX(boolean m)
   {
     setPort(PORT_MX, m, 10);
-  }
-
-  @Override
-  public void setX(boolean x)
-  {
-    setPort(PORT_MX, x, 10);
   }
 
   @Override
@@ -105,38 +97,6 @@ public class LogisimPins65816
   {
     this.cpu = cpu;
   }
-
-//  @Override
-//  public void setAllOutputsUnknown()
-//  {
-//    instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 10);
-//    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 11);
-//    instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 14);
-//    instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_RDY, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_E, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_MLB, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_VPB, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_VPA, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_VDA, Value.UNKNOWN, 10);
-//    instanceState.setPort(PORT_MX, Value.UNKNOWN, 10);
-//  }
-//
-//  @Override
-//  public void setAllOutputsError()
-//  {
-//    instanceState.setPort(PORT_AddressBus, Value.createError(BitWidth.create(16)), 10);
-//    instanceState.setPort(PORT_DataBus, Value.createError(BitWidth.create(8)), 11);
-//    instanceState.setPort(PORT_Bank, Value.createError(BitWidth.create(8)), 14);
-//    instanceState.setPort(PORT_RWB, Value.ERROR, 10);
-//    instanceState.setPort(PORT_RDY, Value.ERROR, 10);
-//    instanceState.setPort(PORT_E, Value.ERROR, 10);
-//    instanceState.setPort(PORT_MLB, Value.ERROR, 10);
-//    instanceState.setPort(PORT_VPB, Value.ERROR, 10);
-//    instanceState.setPort(PORT_VPA, Value.ERROR, 10);
-//    instanceState.setPort(PORT_VDA, Value.ERROR, 10);
-//    instanceState.setPort(PORT_MX, Value.ERROR, 10);
-//  }
 
   @Override
   public boolean isAbortB()

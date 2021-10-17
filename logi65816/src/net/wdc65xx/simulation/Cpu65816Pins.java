@@ -205,15 +205,9 @@ public class Cpu65816Pins
   }
 
   @Override
-  public void setM(boolean m)
+  public void setMX(boolean m)
   {
     this.mx.writeBool(m);
-  }
-
-  @Override
-  public void setX(boolean x)
-  {
-    this.mx.writeBool(x);
   }
 
   @Override

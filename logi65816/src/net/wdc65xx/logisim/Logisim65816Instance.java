@@ -57,11 +57,10 @@ public class Logisim65816Instance
     {
       instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
 
-
-
-//    instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 15);
-//    setPort(instanceState, PORT_MX, X, 10);
-
+    }
+    if (fallingEdge)
+    {
+      instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 9);
     }
   }
 }

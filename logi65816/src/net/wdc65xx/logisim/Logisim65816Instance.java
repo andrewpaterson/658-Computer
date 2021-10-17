@@ -1,12 +1,12 @@
 package net.wdc65xx.logisim;
 
+import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
 import net.wdc65xx.wdc65816.WDC65C816;
 
-import static net.wdc65xx.logisim.Logisim65816Factory.PORT_PHI2;
-import static net.wdc65xx.logisim.Logisim65816Factory.PORT_RESB;
+import static net.wdc65xx.logisim.Logisim65816Factory.*;
 
 public class Logisim65816Instance
     implements InstanceData,
@@ -44,22 +44,24 @@ public class Logisim65816Instance
     boolean clock = instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
 
     LogisimPins65816 pins = getPins();
+    pins.setInstanceState(instanceState);
 
     WDC65C816 cpu = pins.getCpu();
     cpu.preTick(clock, reset);
     boolean fallingEdge = cpu.isFallingEdge();
     boolean risingEdge = cpu.isRisingEdge();
 
-    if (fallingEdge)
-    {
-      pins.readInputs(instanceState);
-    }
-
     cpu.tick();
 
     if (risingEdge)
     {
-      pins.writeOutputs(instanceState);
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
+
+
+
+//    instanceState.setPort(PORT_Bank, Value.createUnknown(BitWidth.create(8)), 15);
+//    setPort(instanceState, PORT_MX, X, 10);
+
     }
   }
 }

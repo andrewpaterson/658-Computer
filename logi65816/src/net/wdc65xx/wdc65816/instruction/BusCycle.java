@@ -2,8 +2,8 @@ package net.wdc65xx.wdc65816.instruction;
 
 import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.Address;
-import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Pins65816;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.address.AddressOffset;
 import net.wdc65xx.wdc65816.instruction.address.ConstantOffset;
 import net.wdc65xx.wdc65816.instruction.operations.DataOperation;
@@ -84,36 +84,18 @@ public class BusCycle
     return done16;
   }
 
-  public final void executeOnFallingEdge(WDC65C816 cpu)
+  public final void executeOnRisingEdge(WDC65C816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();
+    Address address = getAddress(cpu);
+
     cpu.setRead(read);
-    Pins65816 pins = cpu.getPins();
-    pins.setRWB(read);
-    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setM(cpu.isMemory8Bit());
-    pins.setX(cpu.isIndex8Bit());
-    pins.setEmulation(cpu.isEmulation());
-    pins.setValidDataAddress(dataOperation.isValidDataAddress());
-    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-    pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setRdy(dataOperation.isReady());
 
-    Address address = getAddress(cpu);
-    pins.setAddress(address.getOffset());
-
-    for (Operation operation : operations)
-    {
-      operation.execute(cpu);
-    }
-  }
-
-  public final void executeOnRisingEdge(WDC65C816 cpu)
-  {
-    Address address = getAddress(cpu);
-    DataOperation dataOperation = getDataOperation();
-    boolean read = cpu.isRead();
+    System.out.println("BusCycle.executeOnRisingEdge   Cycle: " + cpu.getCycle());
+    System.out.println("BusCycle.executeOnRisingEdge      Op: " + dataOperation.toString());
+    System.out.println("BusCycle.executeOnRisingEdge Address: " + Integer.toHexString(address.getOffset()));
+    System.out.println("BusCycle.executeOnRisingEdge     RWB: " + read);
 
     Pins65816 pins = cpu.getPins();
     pins.setM(cpu.isMemory8Bit());
@@ -127,6 +109,38 @@ public class BusCycle
     pins.setEmulation(cpu.isEmulation());
     pins.setAddress(address.getOffset());
     pins.setBank(address.getBank());
+  }
+
+  public final void executeOnFallingEdge(WDC65C816 cpu)
+  {
+    DataOperation dataOperation = getDataOperation();
+    boolean read = dataOperation.isRead();
+    Address address = getAddress(cpu);
+
+    System.out.println("BusCycle.executeOnFallingEdge   Cycle: " + cpu.getCycle());
+    System.out.println("BusCycle.executeOnFallingEdge      Op: " + dataOperation.toString());
+    System.out.println("BusCycle.executeOnFallingEdge Address: " + Integer.toHexString(address.getOffset()));
+    System.out.println("BusCycle.executeOnFallingEdge     RWB: " + read);
+
+    cpu.setRead(read);
+
+    Pins65816 pins = cpu.getPins();
+    pins.setRWB(read);
+    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
+    pins.setM(cpu.isMemory8Bit());
+    pins.setX(cpu.isIndex8Bit());
+    pins.setEmulation(cpu.isEmulation());
+    pins.setValidDataAddress(dataOperation.isValidDataAddress());
+    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
+    pins.setVectorPullB(dataOperation.isNotVectorPull());
+    pins.setRdy(dataOperation.isReady());
+
+    pins.setAddress(address.getOffset());
+
+    for (Operation operation : operations)
+    {
+      operation.execute(cpu);
+    }
   }
 
   public boolean mustExecute(WDC65C816 cpu)

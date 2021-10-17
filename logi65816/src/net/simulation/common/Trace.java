@@ -110,5 +110,30 @@ public class Trace
       return null;
     }
   }
+
+  public boolean isHigh()
+  {
+    return net != null && net.getValue().isHigh();
+  }
+
+  public boolean isError()
+  {
+    return net != null && net.getValue().isError();
+  }
+
+  public boolean isLow()
+  {
+    return net != null && net.getValue().isLow();
+  }
+
+  public boolean isUnsettled()
+  {
+    return net != null && net.getValue().isUnsettled();
+  }
+
+  public boolean isNotConnected()
+  {
+    return net == null;
+  }
 }
 

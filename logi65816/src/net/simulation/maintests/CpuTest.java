@@ -3,7 +3,9 @@ package net.simulation.maintests;
 import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
+import net.simulation.common.Uniport;
 import net.simulation.memory.Memory;
+import net.simulation.specialised.EconoReset;
 import net.simulation.wiring.ClockOscillator;
 import net.wdc65xx.simulation.Cpu65816Pins;
 import net.wdc65xx.wdc65816.WDC65C816;
@@ -18,16 +20,27 @@ public class CpuTest
 {
   private static void print(WDC65C816 cpu)
   {
+    Cpu65816Pins pins = (Cpu65816Pins) cpu.getPins();
     BusCycle busCycle = cpu.getBusCycle();
     String addressOffset = busCycle.toAddressOffsetString();
     String operation = busCycle.toOperationString();
 
     String opCode = cpu.getOpcodeMnemonicString();
-    if (busCycle.isFetchOpCode())
+    boolean clock = cpu.getClock();
+    if (busCycle.isFetchOpCode() && !clock)
     {
-      System.out.println("|" + pad(99, "-") + "|");
+      System.out.println("|" + pad(129, "-") + "|");
     }
-    System.out.println(rightJustify("| " + (cpu.getCycle() + 1), 2, " ") + " | " + rightJustify(opCode, 12, " ") + " | " + leftJustify(addressOffset, 16, " ") + " | " + leftJustify(operation, 60, " ") + "|");
+    String cycle = ("" + (cpu.getCycle() + 1)) + "-" + ("" + (clock ? 'H' : 'L'));
+    String addressSource = leftJustify(addressOffset, 16, " ");
+    String address = pins.getAddressBus().getWireValuesAsString();
+    String dataSource = leftJustify(operation, 60, " ");
+    String data = pins.getDataBus().getWireValuesAsString();
+    String rwb = pins.getRwB().getWireValuesAsString();
+    String vpa = pins.getValidProgramAddress().getWireValuesAsString();
+    String vda = pins.getValidDataAddress().getWireValuesAsString();
+    String vpb = pins.getVectorPullB().getWireValuesAsString();
+    System.out.println("| " + cycle + " | " + rightJustify(opCode, 13, " ") + " | " + addressSource + "(" + address + ")" + " | " + dataSource + "(" + data + ")" + " | " + rwb + " | " + vpa + " | " + vda + " | " + vpb + " |");
   }
 
   public static void main(String[] args)
@@ -52,6 +65,8 @@ public class CpuTest
     Trace validDataAddressTrace = new Trace();
 
     ClockOscillator clock = new ClockOscillator(tickables, "", clockTrace);
+
+    EconoReset econoReset = new EconoReset(tickables, "", resetBTrace);
 
     Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, clockTrace, clockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
@@ -83,10 +98,6 @@ public class CpuTest
     {
       tickables.run();
       print(cpu);
-
-//      if (!cpu.getPreviousClock())
-//      {
-//      }
 
       count--;
     }

@@ -489,7 +489,6 @@ public class WDC65C816
   {
     cycle = -1;
     opCode = fetchNextOpcode;
-    System.out.println("WDC65C816.doneInstruction");
   }
 
   public void nextCycle()

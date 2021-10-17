@@ -140,6 +140,8 @@ public abstract class Port
 
   public abstract String getTraceValuesAsString();
 
+  public abstract String getWireValuesAsString();
+
   public abstract String getConnectionValuesAsString();
 }
 

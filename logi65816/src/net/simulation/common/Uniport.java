@@ -136,6 +136,19 @@ public class Uniport
   }
 
   @Override
+  public String getWireValuesAsString()
+  {
+    if (wire.isNotConnected())
+    {
+      return " ";
+    }
+    else
+    {
+      return "" + wire.getStringValue();
+    }
+  }
+
+  @Override
   public String getConnectionValuesAsString()
   {
     if (wire != null)

@@ -103,8 +103,6 @@ public class BusCycle
     pins.setEmulation(cpu.isEmulation());
     pins.setAddress(address.getOffset());
     pins.setBank(address.getBank());
-
-    System.out.println("BusCycle.executeOnRisingEdge:  " + cpu.getCycle());
   }
 
   public final void executeOnFallingEdge(WDC65C816 cpu)
@@ -125,8 +123,6 @@ public class BusCycle
     pins.setVectorPullB(dataOperation.isNotVectorPull());
     pins.setRdy(dataOperation.isReady());
     pins.setAddress(address.getOffset());
-
-    System.out.println("BusCycle.executeOnFallingEdge: " + cpu.getCycle());
 
     for (Operation operation : operations)
     {

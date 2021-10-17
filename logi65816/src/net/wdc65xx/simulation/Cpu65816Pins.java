@@ -303,5 +303,35 @@ public class Cpu65816Pins
     validDataAddress.error();
     mx.error();
   }
+
+  public Omniport getAddressBus()
+  {
+    return addressBus;
+  }
+
+  public Omniport getDataBus()
+  {
+    return dataBus;
+  }
+
+  public Uniport getRwB()
+  {
+    return rwB;
+  }
+
+  public Uniport getVectorPullB()
+  {
+    return vectorPullB;
+  }
+
+  public Uniport getValidProgramAddress()
+  {
+    return validProgramAddress;
+  }
+
+  public Uniport getValidDataAddress()
+  {
+    return validDataAddress;
+  }
 }
 

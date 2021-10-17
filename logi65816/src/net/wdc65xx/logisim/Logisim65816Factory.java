@@ -35,14 +35,14 @@ public class Logisim65816Factory
   protected static final int PORT_NMIB = 2;
   protected static final int PORT_RESB = 3;
   protected static final int PORT_PHI2 = 4;
-  protected static final int PORT_VPB = 5;
-  protected static final int PORT_VPA = 6;
-  protected static final int PORT_VDA = 7;
-  protected static final int PORT_MLB = 8;
-  protected static final int PORT_RDY = 9;
-  protected static final int PORT_MX = 10;
-  protected static final int PORT_E = 11;
-  protected static final int PORT_BE = 12;
+  protected static final int PORT_MX = 5;
+  protected static final int PORT_E = 6;
+  protected static final int PORT_MLB = 7;
+  protected static final int PORT_BE = 8;
+  protected static final int PORT_VPB = 9;
+  protected static final int PORT_VPA = 10;
+  protected static final int PORT_VDA = 11;
+  protected static final int PORT_RDY = 12;
   protected static final int PORT_RWB = 13;
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_Bank = 15;
@@ -63,18 +63,18 @@ public class Logisim65816Factory
             "NMIB",
             "RESB",
             "PHI2",
+            "X",
+            "E",
+            "MLB",
+
+            // Right side, bottom to top
+            "BE",
             "VPB",
             "VPA",
             "VDA",
-
-            // Right side, bottom to top
-            "MLB",
             "RDY",
-            "X",
-            "E",
-            "BE",
             "RWB",
-            "X",
+            "",
             "BA",
             "A"};
     portInfos = new PortInfo[]
@@ -85,19 +85,19 @@ public class Logisim65816Factory
             PortInfo.inputShared("NMIB"),
             PortInfo.inputShared("RESB"),
             PortInfo.inputShared("PHI2"),
+            PortInfo.outputExclusive("M"),
+            PortInfo.outputExclusive("E"),
+            PortInfo.outputExclusive("MLB"),
+
+            // Right side, bottom to top
+            PortInfo.inputShared("BE"),
             PortInfo.outputExclusive("VPB"),
             PortInfo.outputExclusive("VPA"),
             PortInfo.outputExclusive("VDA"),
-
-            // Right side, bottom to top
-            PortInfo.outputExclusive("MLB"),
             PortInfo.inoutShared("RDY"),
-            PortInfo.outputExclusive("M"),
-            PortInfo.outputExclusive("E"),
-            PortInfo.inputShared("BE"),
             PortInfo.outputShared("RWB"),
             PortInfo.inoutShared("D", 8),
-            PortInfo.inoutShared("XX", 8),
+            PortInfo.inoutShared("", 8),
             PortInfo.outputShared("A", 16)};
 
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));

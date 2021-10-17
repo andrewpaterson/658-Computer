@@ -257,6 +257,66 @@ public class Omniport
   }
 
   @Override
+  public String getWireValuesAsString()
+  {
+    boolean unsettled = false;
+    boolean error = false;
+    boolean notConnected = false;
+    StringBuilder stringBuilder = new StringBuilder();
+
+    long value = 0;
+
+    for (int i = wires.size() - 1; i >= 0; i--)
+    {
+      Trace wire = wires.get(i);
+      value <<= 1;
+      if (wire.isHigh())
+      {
+        value |= 1;
+      }
+      else if (wire.isUnsettled())
+      {
+        unsettled = true;
+      }
+      else if (wire.isError())
+      {
+        error = true;
+      }
+      else if (wire.isNotConnected())
+      {
+        notConnected = true;
+      }
+
+      if (i % 4 == 0)
+      {
+        char e;
+        if (error)
+        {
+          e = 'E';
+        }
+        else if (unsettled)
+        {
+          e = '.';
+        }
+        else if (notConnected)
+        {
+          e = ' ';
+        }
+        else
+        {
+          e =  Long.toHexString(value).charAt(0);
+        }
+        stringBuilder.append(e);
+        value = 0;
+        unsettled = false;
+        error = false;
+        notConnected = false;
+      }
+    }
+    return stringBuilder.toString();
+  }
+
+  @Override
   public String getConnectionValuesAsString()
   {
     StringBuilder stringBuilder = new StringBuilder();

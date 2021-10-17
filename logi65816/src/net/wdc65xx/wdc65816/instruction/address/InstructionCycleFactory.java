@@ -621,8 +621,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), IO(), SP_dec()),
                                  new BusCycle(Address(S()), IO(), SP_dec()),
                                  new BusCycle(Address(S()), IO(), SP_dec(), E(operation)),
-                                 new BusCycle(Address(VA(interruptVector)), Read_AAL()),
-                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(PBR(), AA()), DONE()));
+                                 new BusCycle(Address(VA(interruptVector)), Read_AAVL()),
+                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAVH(), PC_e(PBR(), AA()), DONE()));
   }
 
   public static InstructionCycles createStackPullCycles(Executor<WDC65C816> operation, WidthFromRegister width)

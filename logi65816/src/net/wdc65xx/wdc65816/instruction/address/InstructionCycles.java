@@ -1,10 +1,10 @@
 package net.wdc65xx.wdc65816.instruction.address;
 
 import net.util.EmulatorException;
-import net.wdc65xx.wdc65816.instruction.AddressingMode;
-import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Executor;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.WidthFromRegister;
+import net.wdc65xx.wdc65816.instruction.AddressingMode;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
 import net.wdc65xx.wdc65816.instruction.interrupt.InterruptVector;
 import net.wdc65xx.wdc65816.instruction.operations.*;
@@ -196,12 +196,12 @@ public class InstructionCycles
 
   protected static ReadAbsoluteAddressHigh Read_AAH()
   {
-    return new ReadAbsoluteAddressHigh(true);
+    return new ReadAbsoluteAddressHigh(true, true);
   }
 
   protected static ReadAbsoluteAddressHigh Read_AAH(boolean notMemoryLock)
   {
-    return new ReadAbsoluteAddressHigh(notMemoryLock);
+    return new ReadAbsoluteAddressHigh(notMemoryLock, true);
   }
 
   protected static ReadNewProgramBank Read_NewPBR()
@@ -216,7 +216,17 @@ public class InstructionCycles
 
   protected static ReadAbsoluteAddressLow Read_AAL()
   {
-    return new ReadAbsoluteAddressLow(true);
+    return new ReadAbsoluteAddressLow(true, true);
+  }
+
+  protected static ReadAbsoluteAddressLow Read_AAVL()
+  {
+    return new ReadAbsoluteAddressLow(true, false);
+  }
+
+  protected static ReadAbsoluteAddressHigh Read_AAVH()
+  {
+    return new ReadAbsoluteAddressHigh(true, false);
   }
 
   protected static AbsoluteAddressLowPlusXLow AAL_XL()
@@ -256,7 +266,7 @@ public class InstructionCycles
 
   protected static ReadAbsoluteAddressLow Read_AAL(boolean notMemoryLock)
   {
-    return new ReadAbsoluteAddressLow(notMemoryLock);
+    return new ReadAbsoluteAddressLow(notMemoryLock, true);
   }
 
   protected static InternalOperation IO(boolean notMemoryLock)

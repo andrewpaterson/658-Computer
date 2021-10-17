@@ -5,9 +5,9 @@ import net.wdc65xx.wdc65816.WDC65C816;
 public class ReadAbsoluteAddressLow
     extends DataOperation
 {
-  public ReadAbsoluteAddressLow(boolean notMemoryLock)
+  public ReadAbsoluteAddressLow(boolean notMemoryLock, boolean notVectorPull)
   {
-    super(false, true, notMemoryLock, true, true);
+    super(false, true, notMemoryLock, true, notVectorPull);
   }
 
   @Override

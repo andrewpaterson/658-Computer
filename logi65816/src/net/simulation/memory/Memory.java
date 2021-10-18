@@ -50,6 +50,11 @@ public class Memory
     this.propagateWroteMemory = false;
   }
 
+  @Override
+  public void startPropagation()
+  {
+  }
+
   public void propagate()
   {
     propagateWroteMemory = false;
@@ -127,6 +132,11 @@ public class Memory
     {
       setMemory(oldAddress, oldValue);
     }
+  }
+
+  @Override
+  public void donePropagation()
+  {
   }
 
   @Override

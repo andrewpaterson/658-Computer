@@ -30,19 +30,13 @@ public abstract class Tickable
     ports.add(port);
   }
 
+  public abstract void startPropagation();
+
   public abstract void propagate();
 
-  public void startPropagation()
-  {
-  }
+  public abstract void undoPropagation();
 
-  public void donePropagation()
-  {
-  }
-
-  public void undoPropagation()
-  {
-  }
+  public abstract void donePropagation();
 
   public List<TraceValue> getTraceValues()
   {

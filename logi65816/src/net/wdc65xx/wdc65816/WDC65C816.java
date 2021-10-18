@@ -1983,6 +1983,9 @@ public class WDC65C816
                            new Address(programCounter),
                            stackPointer,
                            clock,
+                           fallingEdge,
+                           risingEdge,
+                           reset,
                            cycle,
                            opCode,
                            stopped,
@@ -2014,7 +2017,10 @@ public class WDC65C816
     programCounter = new Address(snapshot.programCounter);
     stackPointer = snapshot.stackPointer;
 
-    clock = snapshot.previousClock;
+    clock = snapshot.clock;
+    fallingEdge = snapshot.fallingEdge;
+    risingEdge = snapshot.risingEdge;
+    reset = snapshot.reset;
     cycle = snapshot.cycle;
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;

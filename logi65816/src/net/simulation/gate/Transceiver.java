@@ -32,6 +32,12 @@ public class Transceiver
   }
 
   @Override
+  public void startPropagation()
+  {
+
+  }
+
+  @Override
   public void propagate()
   {
     TraceValue outputEnabledBValue = outputEnableB.read();
@@ -61,6 +67,16 @@ public class Transceiver
     {
       throw new EmulatorException(getDescription() + " connections are in an impossible state.");
     }
+  }
+
+  @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
+  public void donePropagation()
+  {
   }
 
   private void transmit(TraceValue outputEnabledBValue, Omniport input, Omniport output)

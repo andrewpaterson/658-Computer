@@ -47,5 +47,20 @@ public abstract class LogicGate
       out.writeBool(outputValue == High);
     }
   }
+
+  @Override
+  public void startPropagation()
+  {
+  }
+
+  @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
+  public void donePropagation()
+  {
+  }
 }
 

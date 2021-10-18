@@ -25,7 +25,10 @@ public class CpuSnapshot
   public Address programCounter;
   public int stackPointer;
 
-  public boolean previousClock;
+  public boolean clock;
+  public boolean fallingEdge;
+  public boolean risingEdge;
+  public boolean reset;
   public int cycle;
   public Instruction opCode;
   public boolean stopped;
@@ -54,7 +57,10 @@ public class CpuSnapshot
                      int directPage,
                      Address programCounter,
                      int stackPointer,
-                     boolean previousClock,
+                     boolean clock,
+                     boolean fallingEdge,
+                     boolean risingEdge,
+                     boolean reset,
                      int cycle,
                      Instruction opCode,
                      boolean stopped,
@@ -81,7 +87,10 @@ public class CpuSnapshot
     this.directPage = directPage;
     this.programCounter = programCounter;
     this.stackPointer = stackPointer;
-    this.previousClock = previousClock;
+    this.clock = clock;
+    this.fallingEdge = fallingEdge;
+    this.risingEdge = risingEdge;
+    this.reset = reset;
     this.cycle = cycle;
     this.opCode = opCode;
     this.stopped = stopped;

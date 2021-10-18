@@ -22,9 +22,14 @@ public class EconoReset
   }
 
   @Override
-  public void propagate()
+  public void startPropagation()
   {
     oldCount = count;
+  }
+
+  @Override
+  public void propagate()
+  {
     if (count > 0)
     {
       count--;
@@ -43,8 +48,14 @@ public class EconoReset
   }
 
   @Override
+  public void donePropagation()
+  {
+  }
+
+  @Override
   public String getType()
   {
     return null;
   }
 }
+

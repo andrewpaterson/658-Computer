@@ -6,7 +6,7 @@ import net.simulation.common.TraceValue;
 import net.simulation.common.Uniport;
 
 public class NotGate
-    extends Tickable
+    extends LogicGate
 {
   protected Uniport in;
   protected Uniport out;

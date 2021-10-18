@@ -39,9 +39,24 @@ public class Constant
   }
 
   @Override
+  public void startPropagation()
+  {
+  }
+
+  @Override
   public void propagate()
   {
     value.writeAllPinsBool(constantValue);
+  }
+
+  @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
+  public void donePropagation()
+  {
   }
 
   @Override

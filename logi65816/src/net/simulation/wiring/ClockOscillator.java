@@ -26,6 +26,16 @@ public class ClockOscillator
   }
 
   @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
+  public void donePropagation()
+  {
+  }
+
+  @Override
   public void startPropagation()
   {
     value = !value;

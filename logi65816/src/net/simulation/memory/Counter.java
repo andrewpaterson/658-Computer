@@ -31,11 +31,15 @@ public class Counter
   }
 
   @Override
-  public void propagate()
+  public void startPropagation()
   {
     previousCounter = counter;
     previousPreviousClock = previousClock;
+  }
 
+  @Override
+  public void propagate()
+  {
     TraceValue clockValue = phi2.read();
     if (clockValue.isError())
     {
@@ -73,6 +77,11 @@ public class Counter
   {
     counter = previousCounter;
     previousClock = previousPreviousClock;
+  }
+
+  @Override
+  public void donePropagation()
+  {
   }
 
   @Override

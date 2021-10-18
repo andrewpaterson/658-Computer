@@ -2,6 +2,7 @@ package net.wdc65xx.logisim;
 
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
+import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -50,8 +51,7 @@ public class Logisim65816Factory
   protected static final int PORT_RDY = 12;
   protected static final int PORT_RWB = 13;
   protected static final int PORT_DataBus = 14;
-  protected static final int PORT_Bank = 15;
-  protected static final int PORT_AddressBus = 16;
+  protected static final int PORT_AddressBus = 15;
 
   protected final Map<Integer, PortInfo> portInfos;
 
@@ -76,8 +76,7 @@ public class Logisim65816Factory
             PortInfo.outputExclusive(PORT_VDA, "VDA"),
             PortInfo.inoutShared(PORT_RDY, "RDY"),
             PortInfo.outputShared(PORT_RWB, "RWB"),
-            PortInfo.inoutShared(PORT_DataBus, "D", 8).setHighName(" "),
-            PortInfo.inoutShared(PORT_Bank, "", 8).setHighName("BA"),
+            PortInfo.inoutShared(PORT_DataBus, "D", 8).setHighName("BA"),
             PortInfo.outputShared(PORT_AddressBus, "A", 16)};
 
     this.portInfos = new LinkedHashMap<>();
@@ -105,7 +104,7 @@ public class Logisim65816Factory
   {
     Logisim65816Instance instance = getOrCreateInstance(painter);
     WDC65C816 cpu = instance.getPins().getCpu();
-    boolean clockHigh = cpu.getClock();
+    boolean clockHigh = painter.getPortValue(PORT_PHI2) != Value.FALSE;
 
     painter.drawBounds();
     for (Integer index : portInfos.keySet())
@@ -246,7 +245,7 @@ public class Logisim65816Factory
         @Override
         public String toString()
         {
-          return info.lowName;
+          return info.tooltip;
         }
       });
       ports.add(port);

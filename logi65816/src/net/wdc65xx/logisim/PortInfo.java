@@ -7,6 +7,7 @@ public class PortInfo
   protected int index;
   protected String lowName;
   protected String highName;
+  protected String tooltip;
   protected String type;
   protected String exclusive;
   protected int bitWidth;
@@ -19,11 +20,13 @@ public class PortInfo
     this.type = type;
     this.exclusive = exclusive;
     this.bitWidth = bitWidth;
+    this.tooltip = name;
   }
 
   public PortInfo setHighName(String highName)
   {
     this.highName = highName;
+    this.tooltip = tooltip + " / " + highName;
     return this;
   }
 

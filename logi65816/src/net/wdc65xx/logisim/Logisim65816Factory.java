@@ -158,6 +158,7 @@ public class Logisim65816Factory
 
       int processorStatusTopOffset = topOffset + 185;
       boolean emulationMode = cpu.isEmulation();
+      drawProcessorStatus(g, processorStatusTopOffset, -80, "E", emulationMode);
       drawProcessorStatus(g, processorStatusTopOffset, -60, "C", cpu.isCarry());
       drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", cpu.isZeroFlag());
       drawProcessorStatus(g, processorStatusTopOffset, -20, "I", cpu.isInterruptDisable());

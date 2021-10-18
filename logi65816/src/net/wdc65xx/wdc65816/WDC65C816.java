@@ -1856,6 +1856,7 @@ public class WDC65C816
     dataBank = 0;
     directPage = 0;
     programCounter.setBank(0);
+    stopped = false;
     setDecimalFlag(false);
     setInterruptDisableFlag(true);
   }

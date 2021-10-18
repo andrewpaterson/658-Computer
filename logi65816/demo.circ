@@ -180,11 +180,11 @@ end TCL_Generic;&#13;
     <a name="clabelup" val="east"/>
     <a name="downloadFrequency" val="-1.0"/>
     <a name="simulationFrequency" val="32.0"/>
+    <comp lib="0" loc="(40,370)" name="Clock"/>
     <comp lib="0" loc="(590,550)" name="Pull Resistor">
       <a name="facing" val="north"/>
       <a name="pull" val="1"/>
     </comp>
-    <comp lib="0" loc="(80,370)" name="Clock"/>
     <comp lib="0" loc="(810,440)" name="Pull Resistor">
       <a name="facing" val="north"/>
       <a name="pull" val="1"/>
@@ -199,12 +199,13 @@ end TCL_Generic;&#13;
       <a name="facing" val="west"/>
       <a name="radix" val="16"/>
     </comp>
-    <comp lib="1" loc="(130,290)" name="AND Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="30"/>
-    </comp>
-    <comp lib="1" loc="(160,320)" name="NOT Gate">
+    <comp lib="1" loc="(120,320)" name="NOT Gate">
       <a name="facing" val="south"/>
+    </comp>
+    <comp lib="1" loc="(190,420)" name="NOT Gate"/>
+    <comp lib="1" loc="(190,480)" name="AND Gate">
+      <a name="facing" val="south"/>
+      <a name="size" val="30"/>
     </comp>
     <comp lib="1" loc="(270,410)" name="NOT Gate"/>
     <comp lib="1" loc="(270,430)" name="NOT Gate"/>
@@ -221,8 +222,12 @@ end TCL_Generic;&#13;
     <comp lib="1" loc="(740,470)" name="AND Gate">
       <a name="size" val="30"/>
     </comp>
+    <comp lib="1" loc="(90,290)" name="AND Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="30"/>
+    </comp>
     <comp lib="12" loc="(420,480)" name="W65C816S"/>
-    <comp lib="4" loc="(150,260)" name="Counter">
+    <comp lib="4" loc="(110,260)" name="Counter">
       <a name="appearance" val="classic"/>
       <a name="max" val="0x1"/>
       <a name="width" val="1"/>
@@ -240,35 +245,42 @@ end TCL_Generic;&#13;
       <a name="trigger" val="high"/>
       <a name="type" val="nonvolatile"/>
     </comp>
-    <comp lib="5" loc="(200,410)" name="DipSwitch">
+    <comp lib="5" loc="(150,380)" name="DipSwitch">
       <a name="facing" val="east"/>
       <a name="labelloc" val="south"/>
-      <a name="number" val="3"/>
+      <a name="number" val="4"/>
     </comp>
+    <wire from="(100,320)" to="(100,330)"/>
+    <wire from="(100,330)" to="(120,330)"/>
+    <wire from="(100,350)" to="(100,440)"/>
+    <wire from="(100,350)" to="(140,350)"/>
+    <wire from="(100,440)" to="(180,440)"/>
     <wire from="(1080,460)" to="(1100,460)"/>
+    <wire from="(110,270)" to="(120,270)"/>
     <wire from="(1100,340)" to="(1100,460)"/>
-    <wire from="(120,320)" to="(120,370)"/>
-    <wire from="(120,370)" to="(120,490)"/>
-    <wire from="(120,370)" to="(270,370)"/>
-    <wire from="(120,490)" to="(300,490)"/>
-    <wire from="(130,280)" to="(130,290)"/>
-    <wire from="(140,320)" to="(140,330)"/>
-    <wire from="(140,330)" to="(160,330)"/>
-    <wire from="(140,350)" to="(140,470)"/>
-    <wire from="(140,350)" to="(180,350)"/>
-    <wire from="(140,470)" to="(300,470)"/>
-    <wire from="(150,270)" to="(160,270)"/>
-    <wire from="(160,270)" to="(160,290)"/>
-    <wire from="(160,270)" to="(180,270)"/>
-    <wire from="(160,320)" to="(160,330)"/>
-    <wire from="(180,270)" to="(180,350)"/>
-    <wire from="(200,420)" to="(220,420)"/>
-    <wire from="(200,430)" to="(240,430)"/>
-    <wire from="(200,440)" to="(220,440)"/>
-    <wire from="(220,410)" to="(220,420)"/>
-    <wire from="(220,410)" to="(240,410)"/>
-    <wire from="(220,440)" to="(220,450)"/>
-    <wire from="(220,450)" to="(240,450)"/>
+    <wire from="(120,270)" to="(120,290)"/>
+    <wire from="(120,270)" to="(140,270)"/>
+    <wire from="(120,320)" to="(120,330)"/>
+    <wire from="(140,270)" to="(140,350)"/>
+    <wire from="(150,390)" to="(230,390)"/>
+    <wire from="(150,400)" to="(220,400)"/>
+    <wire from="(150,410)" to="(210,410)"/>
+    <wire from="(150,420)" to="(160,420)"/>
+    <wire from="(180,440)" to="(180,450)"/>
+    <wire from="(190,420)" to="(200,420)"/>
+    <wire from="(190,480)" to="(190,490)"/>
+    <wire from="(190,490)" to="(210,490)"/>
+    <wire from="(200,420)" to="(200,450)"/>
+    <wire from="(210,410)" to="(210,450)"/>
+    <wire from="(210,450)" to="(240,450)"/>
+    <wire from="(210,470)" to="(210,490)"/>
+    <wire from="(210,470)" to="(300,470)"/>
+    <wire from="(220,400)" to="(220,430)"/>
+    <wire from="(220,430)" to="(240,430)"/>
+    <wire from="(230,390)" to="(230,410)"/>
+    <wire from="(230,410)" to="(240,410)"/>
+    <wire from="(230,490)" to="(230,510)"/>
+    <wire from="(230,490)" to="(300,490)"/>
     <wire from="(250,510)" to="(300,510)"/>
     <wire from="(250,530)" to="(300,530)"/>
     <wire from="(250,550)" to="(300,550)"/>
@@ -277,6 +289,7 @@ end TCL_Generic;&#13;
     <wire from="(270,410)" to="(300,410)"/>
     <wire from="(270,430)" to="(300,430)"/>
     <wire from="(270,450)" to="(300,450)"/>
+    <wire from="(40,370)" to="(80,370)"/>
     <wire from="(540,410)" to="(610,410)"/>
     <wire from="(540,430)" to="(560,430)"/>
     <wire from="(540,450)" to="(600,450)"/>
@@ -314,11 +327,15 @@ end TCL_Generic;&#13;
     <wire from="(740,470)" to="(760,470)"/>
     <wire from="(760,430)" to="(760,470)"/>
     <wire from="(760,430)" to="(830,430)"/>
-    <wire from="(80,370)" to="(120,370)"/>
+    <wire from="(80,320)" to="(80,370)"/>
+    <wire from="(80,370)" to="(270,370)"/>
+    <wire from="(80,370)" to="(80,510)"/>
+    <wire from="(80,510)" to="(230,510)"/>
     <wire from="(810,380)" to="(810,390)"/>
     <wire from="(810,380)" to="(820,380)"/>
     <wire from="(810,390)" to="(810,410)"/>
     <wire from="(810,410)" to="(830,410)"/>
     <wire from="(810,440)" to="(830,440)"/>
+    <wire from="(90,280)" to="(90,290)"/>
   </circuit>
 </project>

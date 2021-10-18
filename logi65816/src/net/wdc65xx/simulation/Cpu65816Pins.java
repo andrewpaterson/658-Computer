@@ -333,5 +333,10 @@ public class Cpu65816Pins
   {
     return validDataAddress;
   }
+
+  public Uniport getClock()
+  {
+    return clock;
+  }
 }
 

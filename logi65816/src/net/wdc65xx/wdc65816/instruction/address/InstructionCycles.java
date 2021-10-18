@@ -24,6 +24,11 @@ public class InstructionCycles
   {
     this.addressingMode = addressingMode;
     this.cycles = Arrays.asList(cycles);
+    for (int i = 0; i < cycles.length; i++)
+    {
+      BusCycle cycle = this.cycles.get(i);
+      cycle.setCycle(i + 1);
+    }
 
     this.validate();
   }

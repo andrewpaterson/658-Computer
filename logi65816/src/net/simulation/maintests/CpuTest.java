@@ -3,13 +3,13 @@ package net.simulation.maintests;
 import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
-import net.simulation.common.Uniport;
 import net.simulation.memory.Memory;
 import net.simulation.specialised.EconoReset;
 import net.simulation.wiring.ClockOscillator;
 import net.wdc65xx.simulation.Cpu65816Pins;
 import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
+import net.wdc65xx.wdc65816.instruction.Instruction;
 
 import java.io.File;
 
@@ -18,29 +18,28 @@ import static net.util.StringUtil.*;
 
 public class CpuTest
 {
-  private static void print(WDC65C816 cpu)
+  private static void print(Cpu65816Pins pins, BusCycle busCycle, Instruction instruction)
   {
-    Cpu65816Pins pins = (Cpu65816Pins) cpu.getPins();
-    BusCycle busCycle = cpu.getBusCycle();
     String addressOffset = busCycle.toAddressOffsetString();
     String operation = busCycle.toOperationString();
 
-    String opCode = cpu.getOpcodeMnemonicString();
-    boolean clock = cpu.getClock();
-    if (busCycle.isFetchOpCode() && !clock)
+    String opCode = instruction.getName();
+    boolean clock = pins.getClock().getBoolAfterRead();
+    if (busCycle.isFetchOpCode() && clock)
     {
-      System.out.println("|" + pad(129, "-") + "|");
+      System.out.println("|" + pad(130, "-") + "|");
     }
-    String cycle = ("" + (cpu.getCycle() + 1)) + "-" + ("" + (clock ? 'H' : 'L'));
+    String cycle = ("" + busCycle.getCycle()) + "-" + ("" + (clock ? 'H' : 'L'));
     String addressSource = leftJustify(addressOffset, 16, " ");
-    String address = pins.getAddressBus().getWireValuesAsString();
     String dataSource = leftJustify(operation, 60, " ");
+
+    String address = pins.getAddressBus().getWireValuesAsString();
     String data = pins.getDataBus().getWireValuesAsString();
     String rwb = pins.getRwB().getWireValuesAsString();
     String vpa = pins.getValidProgramAddress().getWireValuesAsString();
     String vda = pins.getValidDataAddress().getWireValuesAsString();
     String vpb = pins.getVectorPullB().getWireValuesAsString();
-    System.out.println("| " + cycle + " | " + rightJustify(opCode, 13, " ") + " | " + addressSource + "(" + address + ")" + " | " + dataSource + "(" + data + ")" + " | " + rwb + " | " + vpa + " | " + vda + " | " + vpb + " |");
+    System.out.println("| " + cycle + " | " + rightJustify(opCode, 13, " ") + " | " + addressSource + " (" + address + ")" + " | " + dataSource + "(" + data + ")" + " | " + rwb + " | " + vpa + " | " + vda + " | " + vpb + " |");
   }
 
   public static void main(String[] args)
@@ -96,8 +95,10 @@ public class CpuTest
     int count = 1024;
     while (!cpu.isStopped() && count > 0)
     {
+      BusCycle busCycle = cpu.getBusCycle();
+      Instruction instruction = cpu.getOpCode();
       tickables.run();
-      print(cpu);
+      print(cpuPins, busCycle, instruction);
 
       count--;
     }

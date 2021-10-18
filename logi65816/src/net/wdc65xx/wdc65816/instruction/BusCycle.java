@@ -16,11 +16,13 @@ public class BusCycle
 {
   protected List<AddressOffset> addressOffsets;
   protected List<Operation> operations;
+  protected int cycle;
 
   public BusCycle(AddressOffset[] addressOffsets, Operation... operations)
   {
     this.addressOffsets = Arrays.asList(addressOffsets);
     this.operations = Arrays.asList(operations);
+    this.cycle = -1;
 
     validate();
   }
@@ -183,6 +185,16 @@ public class BusCycle
   {
     DataOperation dataOperation = getDataOperation();
     return dataOperation.isFetchOpCode();
+  }
+
+  public void setCycle(int cycle)
+  {
+    this.cycle = cycle;
+  }
+
+  public int getCycle()
+  {
+    return cycle;
   }
 }
 

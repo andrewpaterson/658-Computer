@@ -93,6 +93,9 @@ public class CpuTest
     System.out.println(new String(memory.get(0, 18)));
 
     int count = 1024;
+    System.out.println("|" + pad(130, "-") + "|");
+    System.out.println("|Cycle|  Instruction  |         Address         |                                 Data                             |RWB|VPA|VDA|VPB|");
+    System.out.println("|" + pad(130, "-") + "|");
     while (!cpu.isStopped() && count > 0)
     {
       BusCycle busCycle = cpu.getBusCycle();

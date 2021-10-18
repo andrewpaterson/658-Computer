@@ -1,52 +1,60 @@
 package net.wdc65xx.logisim;
 
-import com.cburch.logisim.instance.Port;
-
 import static com.cburch.logisim.instance.Port.*;
 
 public class PortInfo
 {
-  protected String name;
+  protected int index;
+  protected String lowName;
+  protected String highName;
   protected String type;
   protected String exclusive;
   protected int bitWidth;
 
-  private PortInfo(String name, String type, String exclusive, int bitWidth)
+  private PortInfo(int index, String name, String type, String exclusive, int bitWidth)
   {
-    this.name = name;
+    this.index = index;
+    this.lowName = name;
+    this.highName = name;
     this.type = type;
     this.exclusive = exclusive;
     this.bitWidth = bitWidth;
   }
 
-  public static PortInfo outputShared(String name, int pins)
+  public PortInfo setHighName(String highName)
   {
-    return new PortInfo(name, OUTPUT, SHARED, pins);
+    this.highName = highName;
+    return this;
   }
 
-  public static PortInfo inoutShared(String name, int pins)
+  public static PortInfo outputShared(int index, String name, int pins)
   {
-    return new PortInfo(name, INOUT, SHARED, pins);
+    return new PortInfo(index, name, OUTPUT, SHARED, pins);
   }
 
-  public static PortInfo outputShared(String name)
+  public static PortInfo inoutShared(int index, String name, int pins)
   {
-    return new PortInfo(name, OUTPUT, SHARED, 1);
+    return new PortInfo(index, name, INOUT, SHARED, pins);
   }
 
-  public static PortInfo outputExclusive(String name)
+  public static PortInfo outputShared(int index, String name)
   {
-    return new PortInfo(name, OUTPUT, EXCLUSIVE, 1);
+    return new PortInfo(index, name, OUTPUT, SHARED, 1);
   }
 
-  public static PortInfo inputShared(String name)
+  public static PortInfo outputExclusive(int index, String name)
   {
-    return new PortInfo(name, INPUT, SHARED, 1);
+    return new PortInfo(index, name, OUTPUT, EXCLUSIVE, 1);
   }
 
-  public static PortInfo inoutShared(String name)
+  public static PortInfo inputShared(int index, String name)
   {
-    return new PortInfo(name, INOUT, SHARED, 1);
+    return new PortInfo(index, name, INPUT, SHARED, 1);
+  }
+
+  public static PortInfo inoutShared(int index, String name)
+  {
+    return new PortInfo(index, name, INOUT, SHARED, 1);
   }
 }
 

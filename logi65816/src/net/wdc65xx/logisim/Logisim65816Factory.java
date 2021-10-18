@@ -13,6 +13,8 @@ import net.wdc65xx.wdc65816.WDC65C816;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Logisim65816Factory
     extends InstanceFactory
@@ -30,6 +32,7 @@ public class Logisim65816Factory
   protected static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN;
   protected static final int PIN_STOP_Y = PIN_BOT_Y - V_MARGIN;
 
+  // Left side, top to bottom
   protected static final int PORT_ABORT = 0;
   protected static final int PORT_IRQB = 1;
   protected static final int PORT_NMIB = 2;
@@ -38,6 +41,8 @@ public class Logisim65816Factory
   protected static final int PORT_MX = 5;
   protected static final int PORT_E = 6;
   protected static final int PORT_MLB = 7;
+
+  // Right side, bottom to top
   protected static final int PORT_BE = 8;
   protected static final int PORT_VPB = 9;
   protected static final int PORT_VPA = 10;
@@ -48,60 +53,41 @@ public class Logisim65816Factory
   protected static final int PORT_Bank = 15;
   protected static final int PORT_AddressBus = 16;
 
-  protected final PortInfo[] portInfos;
-  protected final String[] portInfoNamesHigh;
+  protected final Map<Integer, PortInfo> portInfos;
 
   public Logisim65816Factory()
   {
     super("W65C816S");
 
-    portInfoNamesHigh = new String[]
+    PortInfo[] portInfos = new PortInfo[]
         {
-            // Left side, top to bottom
-            "ABORT",
-            "IRQB",
-            "NMIB",
-            "RESB",
-            "PHI2",
-            "X",
-            "E",
-            "MLB",
+            PortInfo.inputShared(PORT_ABORT, "ABORT"),
+            PortInfo.inputShared(PORT_IRQB, "IRQB"),
+            PortInfo.inputShared(PORT_NMIB, "NMIB"),
+            PortInfo.inputShared(PORT_RESB, "RESB"),
+            PortInfo.inputShared(PORT_PHI2, "PHI2"),
+            PortInfo.outputExclusive(PORT_MX, "M").setHighName("X"),
+            PortInfo.outputExclusive(PORT_E, "E"),
+            PortInfo.outputExclusive(PORT_MLB, "MLB"),
 
-            // Right side, bottom to top
-            "BE",
-            "VPB",
-            "VPA",
-            "VDA",
-            "RDY",
-            "RWB",
-            "",
-            "BA",
-            "A"};
-    portInfos = new PortInfo[]
-        {
-            // Left side, top to bottom
-            PortInfo.inputShared("ABORT"),
-            PortInfo.inputShared("IRQB"),
-            PortInfo.inputShared("NMIB"),
-            PortInfo.inputShared("RESB"),
-            PortInfo.inputShared("PHI2"),
-            PortInfo.outputExclusive("M"),
-            PortInfo.outputExclusive("E"),
-            PortInfo.outputExclusive("MLB"),
+            PortInfo.inputShared(PORT_BE, "BE"),
+            PortInfo.outputExclusive(PORT_VPB, "VPB"),
+            PortInfo.outputExclusive(PORT_VPA, "VPA"),
+            PortInfo.outputExclusive(PORT_VDA, "VDA"),
+            PortInfo.inoutShared(PORT_RDY, "RDY"),
+            PortInfo.outputShared(PORT_RWB, "RWB"),
+            PortInfo.inoutShared(PORT_DataBus, "D", 8).setHighName(" "),
+            PortInfo.inoutShared(PORT_Bank, "", 8).setHighName("BA"),
+            PortInfo.outputShared(PORT_AddressBus, "A", 16)};
 
-            // Right side, bottom to top
-            PortInfo.inputShared("BE"),
-            PortInfo.outputExclusive("VPB"),
-            PortInfo.outputExclusive("VPA"),
-            PortInfo.outputExclusive("VDA"),
-            PortInfo.inoutShared("RDY"),
-            PortInfo.outputShared("RWB"),
-            PortInfo.inoutShared("D", 8),
-            PortInfo.inoutShared("", 8),
-            PortInfo.outputShared("A", 16)};
+    this.portInfos = new LinkedHashMap<>();
+    for (PortInfo portInfo : portInfos)
+    {
+      this.portInfos.put(portInfo.index, portInfo);
+    }
 
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
-    addStandardPins(portInfos);
+    addStandardPins(this.portInfos);
   }
 
   public Logisim65816Instance getOrCreateInstance(InstanceState instanceState)
@@ -122,23 +108,22 @@ public class Logisim65816Factory
     boolean clockHigh = cpu.getClock();
 
     painter.drawBounds();
-    int n = 0;
-    for (int i = 0; i < portInfos.length; ++i)
+    for (Integer index : portInfos.keySet())
     {
-      if (portInfos[i] != null)
+      PortInfo portInfo = portInfos.get(index);
+      if (portInfo != null)
       {
-        Direction dir = i < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
+        Direction dir = index < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
         String name;
         if (!clockHigh)
         {
-          name = portInfos[i].name;
+          name = portInfo.lowName;
         }
         else
         {
-          name = portInfoNamesHigh[i];
+          name = portInfo.highName;
         }
-        painter.drawPort(n, name, dir);
-        n++;
+        painter.drawPort(portInfo.index, name, dir);
       }
     }
 
@@ -235,18 +220,18 @@ public class Logisim65816Factory
     instance.tick(instanceState);
   }
 
-  protected void addStandardPins(PortInfo[] portInfos)
+  protected void addStandardPins(Map<Integer, PortInfo> portInfos)
   {
-    ArrayList<Port> ports = new ArrayList<>(portInfos.length);
-    for (int n = 0; n < portInfos.length; ++n)
+    ArrayList<Port> ports = new ArrayList<>();
+    for (Integer index : portInfos.keySet())
     {
-      PortInfo info = portInfos[n];
+      PortInfo info = portInfos.get(index);
       if (info == null)
       {
         continue;
       }
-      boolean isRightSide = n >= Logisim65816Factory.PINS_PER_SIDE;
-      int pinPerSide = isRightSide ? n - Logisim65816Factory.PINS_PER_SIDE : n;
+      boolean isRightSide = index >= Logisim65816Factory.PINS_PER_SIDE;
+      int pinPerSide = isRightSide ? index - Logisim65816Factory.PINS_PER_SIDE : index;
       Port port;
       if (isRightSide)
       {
@@ -261,7 +246,7 @@ public class Logisim65816Factory
         @Override
         public String toString()
         {
-          return info.name;
+          return info.lowName;
         }
       });
       ports.add(port);

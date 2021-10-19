@@ -25,13 +25,19 @@ public class CpuSnapshot
   public Address programCounter;
   public int stackPointer;
 
+  public boolean reset;
+  public boolean irq;
+  public boolean nmi;
+  public boolean abort;
+
   public boolean clock;
   public boolean fallingEdge;
   public boolean risingEdge;
-  public boolean reset;
+
   public int cycle;
   public Instruction opCode;
   public boolean stopped;
+  public boolean busEnable;
 
   //These are not the values on the pins, they are internal data.
   public Address address;
@@ -61,6 +67,10 @@ public class CpuSnapshot
                      boolean fallingEdge,
                      boolean risingEdge,
                      boolean reset,
+                     boolean irq,
+                     boolean nmi,
+                     boolean abort,
+                     boolean busEnable,
                      int cycle,
                      Instruction opCode,
                      boolean stopped,
@@ -91,9 +101,14 @@ public class CpuSnapshot
     this.fallingEdge = fallingEdge;
     this.risingEdge = risingEdge;
     this.reset = reset;
+    this.irq = irq;
+    this.nmi = nmi;
+    this.abort = abort;
+
     this.cycle = cycle;
     this.opCode = opCode;
     this.stopped = stopped;
+    this.busEnable = busEnable;
     this.address = address;
     this.data = data;
     this.directOffset = directOffset;

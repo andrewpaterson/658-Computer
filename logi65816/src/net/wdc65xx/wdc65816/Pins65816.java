@@ -28,12 +28,16 @@ public interface Pins65816
 
   boolean isBusEnable();
 
-  boolean isIrqB();
+  boolean isReset();
 
-  boolean isNmiB();
+  boolean isIRQ();
 
-  boolean isAbortB();
+  boolean isNMI();
+
+  boolean isAbort();
 
   void setCpu(WDC65C816 cpu);
+
+  void disableBusses();
 }
 

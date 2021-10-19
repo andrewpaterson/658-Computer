@@ -46,19 +46,24 @@ public class WDC65C816
   protected Instruction opCode;
   protected boolean stopped;
 
+  protected boolean reset;
+  protected boolean irq;
+  protected boolean nmi;
+  protected boolean abort;
+
   //These are not the values on the pins, they are internal data.
   protected Address address;
   protected int data;
   protected int directOffset;
   protected Address newProgramCounter;
   protected boolean read;
+  protected boolean busEnable;
 
   protected Pins65816 pins;
 
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
-  protected boolean reset;
 
   public WDC65C816(Pins65816 pins)
   {
@@ -90,7 +95,13 @@ public class WDC65C816
     overflowFlag = false;
     breakFlag = false;
 
+    reset = false;
+    irq = false;
+    nmi = false;
+    abort = false;
+
     stopped = false;
+    busEnable = true;
     clock = false;
     cycle = 0;
     opCode = resetOpcode;
@@ -281,10 +292,18 @@ public class WDC65C816
 
   public void tick()
   {
+    reset = pins.isReset();
+    busEnable = pins.isBusEnable();
+
     if (reset)
     {
       opCode = resetOpcode;
       cycle = 0;
+    }
+
+    if (!busEnable)
+    {
+      pins.disableBusses();
     }
 
     if (!fallingEdge && !risingEdge)
@@ -301,8 +320,13 @@ public class WDC65C816
       nextCycle();
     }
 
+    irq = pins.isIRQ();
+    nmi = pins.isNMI();
+
     if (fallingEdge)
     {
+      abort = pins.isAbort();
+
       getBusCycle().executeOnFallingEdge(this);
       nextCycle();
     }
@@ -312,12 +336,11 @@ public class WDC65C816
     }
   }
 
-  public void preTick(boolean clock, boolean reset)
+  public void preTick(boolean clock)
   {
     this.fallingEdge = !clock && this.clock;
     this.risingEdge = clock && !this.clock;
     this.clock = clock;
-    this.reset = reset;
   }
 
   public BusCycle getBusCycle()
@@ -488,7 +511,23 @@ public class WDC65C816
   public void doneInstruction()
   {
     cycle = -1;
-    opCode = fetchNextOpcode;
+
+    if (nmi)
+    {
+      opCode = nmiOpcode;
+    }
+    else if (abort)
+    {
+      opCode = abortOpcode;
+    }
+    else if (irq && !interruptDisableFlag)
+    {
+      opCode = irqOpcode;
+    }
+    else
+    {
+      opCode = fetchNextOpcode;
+    }
   }
 
   public void nextCycle()
@@ -1987,6 +2026,10 @@ public class WDC65C816
                            fallingEdge,
                            risingEdge,
                            reset,
+                           irq,
+                           nmi,
+                           abort,
+                           busEnable,
                            cycle,
                            opCode,
                            stopped,
@@ -2022,9 +2065,13 @@ public class WDC65C816
     fallingEdge = snapshot.fallingEdge;
     risingEdge = snapshot.risingEdge;
     reset = snapshot.reset;
+    irq = snapshot.irq;
+    nmi = snapshot.nmi;
+    abort = snapshot.abort;
     cycle = snapshot.cycle;
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;
+    busEnable = snapshot.busEnable;
 
     address = new Address(snapshot.address);
     data = snapshot.data;
@@ -2033,19 +2080,9 @@ public class WDC65C816
     read = snapshot.read;
   }
 
-  public boolean getClock()
+  public boolean isBusEnable()
   {
-    return clock;
-  }
-
-  public boolean isFallingEdge()
-  {
-    return fallingEdge;
-  }
-
-  public boolean isRisingEdge()
-  {
-    return risingEdge;
+    return busEnable;
   }
 
   public void dump()

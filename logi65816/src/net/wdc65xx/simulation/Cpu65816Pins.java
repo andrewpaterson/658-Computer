@@ -105,7 +105,7 @@ public class Cpu65816Pins
         nmibValue.isValidOrUndefined() &&
         resetBValue.isValidOrUndefined())
     {
-      cpu.preTick(clock.getBoolAfterRead(), !resetB.getBoolAfterRead());
+      cpu.preTick(clock.getBoolAfterRead());
       cpu.tick();
     }
     else if (clockValue.isError() ||
@@ -139,9 +139,20 @@ public class Cpu65816Pins
   }
 
   @Override
+  public void disableBusses()
+  {
+    this.addressBus.highImpedance();
+    this.dataBus.highImpedance();
+    this.rwB.highImpedance();
+  }
+
+  @Override
   public void setAddress(int address)
   {
-    this.addressBus.writeAllPinsBool(address);
+    if (cpu.isBusEnable())
+    {
+      this.addressBus.writeAllPinsBool(address);
+    }
   }
 
   @Override
@@ -149,23 +160,30 @@ public class Cpu65816Pins
   {
     if (cpu.isRead())
     {
-      TraceValue traceValue = dataBus.read();
-      if (traceValue.isValid())
+      if (cpu.isBusEnable())
       {
-        return (int) dataBus.getPinsAsBoolAfterRead();
-      }
-      else if (traceValue.isError())
-      {
-        setAllOutputsError();
-        return 0;
-      }
-      else if (traceValue.isUnsettled())
-      {
-        return 0;
+        TraceValue traceValue = dataBus.read();
+        if (traceValue.isValid())
+        {
+          return (int) dataBus.getPinsAsBoolAfterRead();
+        }
+        else if (traceValue.isError())
+        {
+          setAllOutputsError();
+          return 0;
+        }
+        else if (traceValue.isUnsettled())
+        {
+          return 0;
+        }
+        else
+        {
+          throw new EmulatorException("Cannot getData from pins in unknown state.");
+        }
       }
       else
       {
-        throw new EmulatorException("Cannot getData from pins in unknown state.");
+        return 0;
       }
     }
     else
@@ -177,19 +195,28 @@ public class Cpu65816Pins
   @Override
   public void setData(int data)
   {
-    this.dataBus.writeAllPinsBool(data);
+    if (cpu.isBusEnable())
+    {
+      this.dataBus.writeAllPinsBool(data);
+    }
   }
 
   @Override
   public void setBank(int data)
   {
-    this.dataBus.writeAllPinsBool(data);
+    if (cpu.isBusEnable())
+    {
+      this.dataBus.writeAllPinsBool(data);
+    }
   }
 
   @Override
   public void setRWB(boolean rwB)
   {
-    this.rwB.writeBool(rwB);
+    if (cpu.isBusEnable())
+    {
+      this.rwB.writeBool(rwB);
+    }
   }
 
   @Override
@@ -235,27 +262,33 @@ public class Cpu65816Pins
   }
 
   @Override
-  public boolean isAbortB()
-  {
-    return abortB.getBoolAfterRead();
-  }
-
-  @Override
   public boolean isBusEnable()
   {
     return busEnable.getBoolAfterRead();
   }
 
   @Override
-  public boolean isIrqB()
+  public boolean isAbort()
   {
-    return irqB.getBoolAfterRead();
+    return !abortB.getBoolAfterRead();
   }
 
   @Override
-  public boolean isNmiB()
+  public boolean isReset()
   {
-    return nmiB.getBoolAfterRead();
+    return !resetB.getBoolAfterRead();
+  }
+
+  @Override
+  public boolean isIRQ()
+  {
+    return !irqB.getBoolAfterRead();
+  }
+
+  @Override
+  public boolean isNMI()
+  {
+    return !nmiB.getBoolAfterRead();
   }
 
   @Override
@@ -278,9 +311,12 @@ public class Cpu65816Pins
 
   public void setAllOutputsUnknown()
   {
-    rwB.unset();
-    addressBus.unset();
-    dataBus.unset();
+    if (cpu.isBusEnable())
+    {
+      addressBus.unset();
+      dataBus.unset();
+      rwB.unset();
+    }
     rdy.unset();
     emulation.unset();
     memoryLockB.unset();
@@ -292,9 +328,12 @@ public class Cpu65816Pins
 
   public void setAllOutputsError()
   {
-    rwB.error();
-    addressBus.error();
-    dataBus.error();
+    if (cpu.isBusEnable())
+    {
+      addressBus.error();
+      dataBus.error();
+      rwB.error();
+    }
     rdy.error();
     emulation.error();
     memoryLockB.error();

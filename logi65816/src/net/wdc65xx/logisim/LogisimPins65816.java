@@ -23,33 +23,52 @@ public class LogisimPins65816
   @Override
   public void setAddress(int address)
   {
-    instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
+    if (cpu.isBusEnable())
+    {
+      instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
+    }
   }
 
   @Override
   public int getData()
   {
-    int value = (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
-    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
-    return toByte(value);
+    if (cpu.isBusEnable())
+    {
+      int value = (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
+      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
+      return toByte(value);
+    }
+    else
+    {
+      return 0;
+    }
   }
 
   @Override
   public void setData(int data)
   {
-    instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+    if (cpu.isBusEnable())
+    {
+      instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+    }
   }
 
   @Override
   public void setBank(int data)
   {
-    instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+    if (cpu.isBusEnable())
+    {
+      instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
+    }
   }
 
   @Override
   public void setRWB(boolean rwB)
   {
-    setPort(PORT_RWB, rwB, 9);
+    if (cpu.isBusEnable())
+    {
+      setPort(PORT_RWB, rwB, 9);
+    }
   }
 
   @Override
@@ -102,42 +121,41 @@ public class LogisimPins65816
   }
 
   @Override
-  public boolean isAbortB()
-  {
-    return instanceState.getPortValue(PORT_ABORT) != Value.FALSE;
-  }
-
-  @Override
   public boolean isBusEnable()
   {
     return instanceState.getPortValue(PORT_BE) != Value.FALSE;
   }
 
   @Override
-  public boolean isIrqB()
+  public boolean isAbort()
   {
-    return instanceState.getPortValue(PORT_IRQB) != Value.FALSE;
+    return instanceState.getPortValue(PORT_ABORTB) == Value.FALSE;
   }
 
   @Override
-  public boolean isNmiB()
+  public boolean isReset()
   {
-    return instanceState.getPortValue(PORT_NMIB) != Value.FALSE;
+    return instanceState.getPortValue(PORT_RESB) == Value.FALSE;
   }
 
-  private boolean updateBussesEnabledFromNotBusEnabled(InstanceState instanceState)
+  @Override
+  public boolean isIRQ()
   {
-    if (isBusEnable())
-    {
-      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 10);
-      instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 11);
-      instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
-      return false;
-    }
-    else
-    {
-      return true;
-    }
+    return instanceState.getPortValue(PORT_IRQB) == Value.FALSE;
+  }
+
+  @Override
+  public boolean isNMI()
+  {
+    return instanceState.getPortValue(PORT_NMIB) == Value.FALSE;
+  }
+
+  @Override
+  public void disableBusses()
+  {
+    instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 10);
+    instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 11);
+    instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
   }
 
   public WDC65C816 getCpu()

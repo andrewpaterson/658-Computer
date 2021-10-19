@@ -34,7 +34,7 @@ public class Logisim65816Factory
   protected static final int PIN_STOP_Y = PIN_BOT_Y - V_MARGIN;
 
   // Left side, top to bottom
-  protected static final int PORT_ABORT = 0;
+  protected static final int PORT_ABORTB = 0;
   protected static final int PORT_IRQB = 1;
   protected static final int PORT_NMIB = 2;
   protected static final int PORT_RESB = 3;
@@ -61,7 +61,7 @@ public class Logisim65816Factory
 
     PortInfo[] portInfos = new PortInfo[]
         {
-            PortInfo.inputShared(PORT_ABORT, "ABORT"),
+            PortInfo.inputShared(PORT_ABORTB, "ABORT"),
             PortInfo.inputShared(PORT_IRQB, "IRQB"),
             PortInfo.inputShared(PORT_NMIB, "NMIB"),
             PortInfo.inputShared(PORT_RESB, "RESB"),

@@ -7,7 +7,6 @@ import net.wdc65xx.wdc65816.CpuSnapshot;
 import net.wdc65xx.wdc65816.WDC65C816;
 
 import static net.wdc65xx.logisim.Logisim65816Factory.PORT_PHI2;
-import static net.wdc65xx.logisim.Logisim65816Factory.PORT_RESB;
 
 public class Logisim65816Instance
     implements InstanceData,
@@ -44,7 +43,6 @@ public class Logisim65816Instance
 
   public void tick(InstanceState instanceState)
   {
-    boolean reset = instanceState.getPortValue(PORT_RESB) != Value.TRUE;
     boolean clock = instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
 
     LogisimPins65816 pins = getPins();
@@ -58,7 +56,7 @@ public class Logisim65816Instance
     }
 
     CpuSnapshot snapshot = cpu.createCpuSnapshot();
-    cpu.preTick(clock, reset);
+    cpu.preTick(clock);
     cpu.tick();
     finalSnapshot = cpu.createCpuSnapshot();
     cpu.restoreCpuFromSnapshot(snapshot);

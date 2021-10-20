@@ -377,5 +377,55 @@ public class Cpu65816Pins
   {
     return clock;
   }
+
+  public Uniport getAbortB()
+  {
+    return abortB;
+  }
+
+  public Uniport getBusEnable()
+  {
+    return busEnable;
+  }
+
+  public Uniport getIrqB()
+  {
+    return irqB;
+  }
+
+  public Uniport getNmiB()
+  {
+    return nmiB;
+  }
+
+  public Uniport getResetB()
+  {
+    return resetB;
+  }
+
+  public Uniport getEmulation()
+  {
+    return emulation;
+  }
+
+  public Uniport getMemoryLockB()
+  {
+    return memoryLockB;
+  }
+
+  public Uniport getMx()
+  {
+    return mx;
+  }
+
+  public Uniport getRdy()
+  {
+    return rdy;
+  }
+
+  public WDC65C816 getCpu()
+  {
+    return cpu;
+  }
 }
 

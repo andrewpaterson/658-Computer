@@ -23,6 +23,7 @@ public class CpuTest
   private static void print(Cpu65816Pins pins, BusCycle busCycle, Instruction instruction)
   {
     String addressOffset = busCycle.toAddressOffsetString();
+    String data = busCycle.toDataString();
     String operation = busCycle.toOperationString();
 
     String opCode = instruction.getName();
@@ -33,10 +34,11 @@ public class CpuTest
     }
     String cycle = ("" + busCycle.getCycle()) + "-" + ("" + (clock ? 'H' : 'L'));
     String addressSource = leftJustify(addressOffset, 16, " ");
-    String dataSource = leftJustify(operation, 60, " ");
+    String operationSource = leftJustify(operation, 55, " ");
+    String dataSource = leftJustify(data, 11, " ");
 
-    String address = pins.getAddressBus().getWireValuesAsString();
-    String data = pins.getDataBus().getWireValuesAsString();
+    String addressBus = pins.getAddressBus().getWireValuesAsString();
+    String dataBus = pins.getDataBus().getWireValuesAsString();
     String rwb = pins.getRwB().getWireValuesAsString();
     String vpa = pins.getValidProgramAddress().getWireValuesAsString();
     String vda = pins.getValidDataAddress().getWireValuesAsString();
@@ -49,7 +51,7 @@ public class CpuTest
     String abort = pins.getAbortB().getWireValuesAsString();
     String busEnable = pins.getAbortB().getWireValuesAsString();
 
-    String opCodeCycle = "| " + cycle + " | " + rightJustify(opCode, 13, " ") + " | " + addressSource + " (" + address + ")" + " | " + dataSource + "(" + data + ")" + " | " + rwb + " | " + vpa + " | " + vda + " | " + vpb + " | " + mlb + " |";
+    String opCodeCycle = "| " + cycle + " | " + rightJustify(opCode, 13, " ") + " | " + addressSource + " (" + addressBus + ")" + " | " + dataSource + "(" + dataBus + ")" + " | " + operationSource + " | " + rwb + " | " + vpa + " | " + vda + " | " + vpb + " | " + mlb + " |";
     String inputs = "| " + busEnable + " | " + reset + " | " + nmi + " | " + abort + " | " + irq + " |";
 
     WDC65C816 cpu = pins.getCpu();
@@ -67,7 +69,7 @@ public class CpuTest
 
   private static void printDivider()
   {
-    System.out.println("|" + pad(134, "-") + "|" + "   " + "|" + pad(19, "-") + "|"  + "   " + "|" + pad(49, "-") + "|");
+    System.out.println("|" + pad(143, "-") + "|" + "   " + "|" + pad(19, "-") + "|"  + "   " + "|" + pad(49, "-") + "|");
   }
 
   public static void main(String[] args)

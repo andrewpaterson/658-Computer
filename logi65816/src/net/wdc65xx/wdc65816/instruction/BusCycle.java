@@ -181,6 +181,12 @@ public class BusCycle
     return string.toString();
   }
 
+  public String toDataString()
+  {
+    DataOperation operation = getDataOperation();
+    return operation.toString();
+  }
+
   public boolean isFetchOpCode()
   {
     DataOperation dataOperation = getDataOperation();

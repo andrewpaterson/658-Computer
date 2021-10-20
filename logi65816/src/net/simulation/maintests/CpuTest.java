@@ -6,6 +6,7 @@ import net.simulation.common.Trace;
 import net.simulation.memory.Memory;
 import net.simulation.specialised.EconoReset;
 import net.simulation.wiring.ClockOscillator;
+import net.simulation.wiring.Constant;
 import net.wdc65xx.simulation.Cpu65816Pins;
 import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
@@ -62,6 +63,12 @@ public class CpuTest
     Trace vectorPullBTrace = new Trace();
     Trace validProgramAddressTrace = new Trace();
     Trace validDataAddressTrace = new Trace();
+    Trace highTrace = new Trace();
+
+    Constant high = new Constant(tickables, "", true, highTrace);
+    abortBTrace.connect(highTrace);
+    nmiBTrace.connect(highTrace);
+    irqBTrace.connect(highTrace);
 
     ClockOscillator clock = new ClockOscillator(tickables, "", clockTrace);
 

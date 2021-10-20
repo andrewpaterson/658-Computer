@@ -79,8 +79,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA()), Read_DataLow(RMW)),
                                  new BusCycle(Address(DBR(), AA(), o(1)), Read_DataHigh(RMW), new NoteOne(M)),
                                  new BusCycle(Address(DBR(), AA(), o(1)), IO(RMW), E(operation)),
-                                 new BusCycle(Address(DBR(), AA(), o(1)), Write_DataHigh(RMW), new NoteOne(M)),
-                                 new BusCycle(Address(DBR(), AA()), Write_DataLow(RMW), DONE()));
+                                 new BusCycle(Address(DBR(), AA(), o(1)), new NoteThree(), Write_DataHigh(RMW), new NoteOne(M)),
+                                 new BusCycle(Address(DBR(), AA()), new NoteThree(), Write_DataLow(RMW), DONE()));
   }
 
   public static InstructionCycles createAbsoluteIndexedIndirectWithXJMPCycles()
@@ -239,8 +239,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DBR(), AA(), X()), Read_DataLow(RMW)),
                                  new BusCycle(Address(DBR(), AA(), X(), o(1)), Read_DataHigh(RMW), new NoteOne(M)),
                                  new BusCycle(Address(DBR(), AA(), X(), o(1)), IO(RMW), E(operation)),
-                                 new BusCycle(Address(DBR(), AA(), X(), o(1)), Write_DataHigh(RMW), new NoteOne(M)),
-                                 new BusCycle(Address(DBR(), AA(), X()), Write_DataLow(RMW), DONE()));
+                                 new BusCycle(Address(DBR(), AA(), X(), o(1)), new NoteThree(), Write_DataHigh(RMW), new NoteOne(M)),
+                                 new BusCycle(Address(DBR(), AA(), X()), new NoteThree(), Write_DataLow(RMW), DONE()));
   }
 
   public static InstructionCycles createAbsoluteIndexedWithYWriteCycles(Executor<WDC65C816> operation)
@@ -320,8 +320,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0()), Read_DataLow(RMW)),
                                  new BusCycle(Address(DP(), D0(), o(1)), Read_DataHigh(RMW), new NoteOne(M)),
                                  new BusCycle(Address(DP(), D0(), o(1)), IO(RMW), E(operation)),
-                                 new BusCycle(Address(DP(), D0(), o(1)), Write_DataHigh(RMW), new NoteOne(M)),
-                                 new BusCycle(Address(DP(), D0()), Write_DataLow(RMW), DONE()));
+                                 new BusCycle(Address(DP(), D0(), o(1)), new NoteThree(), Write_DataHigh(RMW), new NoteOne(M)),
+                                 new BusCycle(Address(DP(), D0()), new NoteThree(), Write_DataLow(RMW), DONE()));
   }
 
   public static InstructionCycles createDirectIndexedIndirectWithXCycles(Executor<WDC65C816> operation)
@@ -497,8 +497,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(DP(), D0(), X()), Read_DataLow(RMW)),
                                  new BusCycle(Address(DP(), D0(), X(), o(1)), Read_DataHigh(RMW), new NoteOne(M)),
                                  new BusCycle(Address(DP(), D0(), X(), o(1)), IO(RMW), E(operation)),
-                                 new BusCycle(Address(DP(), D0(), X(), o(1)), Write_DataHigh(RMW), new NoteOne(M)),
-                                 new BusCycle(Address(DP(), D0(), X()), Write_DataLow(RMW), DONE()));
+                                 new BusCycle(Address(DP(), D0(), X(), o(1)), new NoteThree(), Write_DataHigh(RMW), new NoteOne(M)),
+                                 new BusCycle(Address(DP(), D0(), X()), new NoteThree(), Write_DataLow(RMW), DONE()));
   }
 
   public static InstructionCycles createDirectIndexedWithYCycles(Executor<WDC65C816> operation, WidthFromRegister width)
@@ -603,11 +603,11 @@ public class InstructionCycleFactory
     //22a
     return new InstructionCycles(StackInterruptHardware,
                                  new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),
-                                 new BusCycle(Address(PBR(), PC()), IO()),
+                                 new BusCycle(Address(PBR(), PC()), IO(), E(operation)),
                                  new BusCycle(Address(S()), Write_PBR(), SP_dec(), PBR_e(0), new NoteSeven()),
                                  new BusCycle(Address(S()), Write_PCH(), SP_dec()),
                                  new BusCycle(Address(S()), Write_PCL(), SP_dec()),
-                                 new BusCycle(Address(S()), Write_PS(), SP_dec(), E(operation)),
+                                 new BusCycle(Address(S()), Write_PS(), SP_dec()),
                                  new BusCycle(Address(VA(interruptVector)), Read_AAL()),
                                  new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(AA()), DONE()));
   }
@@ -617,10 +617,10 @@ public class InstructionCycleFactory
     //22a
     return new InstructionCycles(StackInterruptHardware,
                                  new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),
-                                 new BusCycle(Address(PBR(), PC()), IO()),
+                                 new BusCycle(Address(PBR(), PC()), IO(), E(operation)),
                                  new BusCycle(Address(S()), IO(), SP_dec()),
                                  new BusCycle(Address(S()), IO(), SP_dec()),
-                                 new BusCycle(Address(S()), IO(), SP_dec(), E(operation)),
+                                 new BusCycle(Address(S()), IO(), SP_dec()),
                                  new BusCycle(Address(VA(interruptVector)), Read_AAVL()),
                                  new BusCycle(Address(VA(interruptVector), o(1)), Read_AAVH(), PC_e(PBR(), AA()), DONE()));
   }

@@ -1,4 +1,4 @@
-  Thu Oct 14 2021 20:33                                                Page 1
+  Wed Oct 20 2021 11:00                                                Page 1
 
 
                      ***************************************
@@ -7,22 +7,22 @@
                      **     Version 3.49.1- Feb  6 2006    **
                      ***************************************
 
-     1                        STARTUP SECTION
+     1                        ;
      2                        
-     3                        	ORG	$0000
+     3                        STARTUP SECTION
      4                        
-     5 00:0000: 5B           	DB '['
-     6                        PROGRESS:	
-     7 00:0001: 78 78 78 78  	DB 'xxxxxxxxxxxxxxxx'
+     5                        	ORG	$0000
+     6 00:0000: 5B           	DB '['
+     7                        PROGRESS:	
+     8 00:0001: 78 78 78 78  	DB 'xxxxxxxxxxxxxxxx'
        00:0005: 78 78 78 78 
        00:0009: 78 78 78 78 
        00:000D: 78 78 78 78 
-     8                        ENDPROGRESS:	
-     9 00:0011: 5D           	DB ']'
-    10                        	
-    11                        	ORG $F12B
-    12                        	
-    13                        START:
+     9                        ENDPROGRESS:	
+    10 00:0011: 5D           	DB ']'
+    11                        	
+    12                        	ORG $F12B
+    13                        RESET:
     14 00:F12B: 18           	CLC	     		;clear carry
     15 00:F12C: FB           	XCE	     		;clear emulation
     16 00:F12D: C2 30        	REP		#$30    ;16 bit registers
@@ -40,48 +40,64 @@
     28 00:F139: C2 20        	REP		#$20    ;back to 16 bit mode
     29                        	LONGA	ON
     30                        
-    31 00:F13B: 4C 00 04     	JMP   MYSTART	;long jump in case not bank 0
+    31 00:F13B: 4C 00 80     	JMP   START	;long jump in case not bank 0
     32                        
-    33                        	ORG $0400
-    34                        
-    35                        MYSTART
-    36 00:0400: E2 20        	SEP		#$20	;8 bit accumulator
-    37                        	LONGA 	OFF
-    38                        
-    39 00:0402: A9 2E        	LDA #$2e
-    40 00:0404: A0 01 00     	LDY #PROGRESS
-    41                        LOOP:	
-    42 00:0407: 99 00 00     	STA 0,Y
-    43 00:040A: C8           	INY
-    44 00:040B: C0 11 00     	CPY #ENDPROGRESS
-    45 00:040E: D0 F7        	BNE LOOP
-    46 00:0410: DB           	STP
-    47                        	
-    48                        ; This section defines the interrupt and reset vec
+    33                        IRQ:
+    34 00:F13E: 8B           	PHB				;save DB
+    35 00:F13F: 0B           	PHD				;save DP
+    36 00:F140: C2 30        	REP	#$30		;16 bit registers
+    37 00:F142: 48           	PHA				;save A
+    38 00:F143: DA           	PHX				;save X
+    39 00:F144: 5A           	PHY 			;save Y
+    40                        	 
+    41 00:F145: C2 30        	REP	#$30		;16 bit registers
+    42 00:F147: 7A           	PLY             ;restore Y
+    43 00:F148: FA               PLX             ;restore X
+    44 00:F149: 68               PLA             ;restore A
+    45 00:F14A: 2B               PLD             ;restore DP
+    46 00:F14B: AB               PLB             ;restore DB
+    47 00:F14C: 40               RTI				;return
+    48                        
+    49                        	ORG $8000
+  Wed Oct 20 2021 11:00                                                Page 2
+
+
+    50                        START
+    51 00:8000: 58           	CLI
+    52 00:8001: E2 20        	SEP		#$20	;8 bit accumulator
+    53                        	LONGA 	OFF
+    54                        
+    55 00:8003: A9 2E        	LDA #$2e
+    56 00:8005: A0 01 00     	LDY #PROGRESS
+    57                        LOOP:	
+    58 00:8008: 99 00 00     	STA 0,Y
+    59 00:800B: C8           	INY
+    60 00:800C: C0 11 00     	CPY #ENDPROGRESS
+    61 00:800F: D0 F7        	BNE LOOP
+    62 00:8011: DB           	STP
+    63                        	
+    64                        ; This section defines the interrupt and reset vec
                     tors.    
-  Thu Oct 14 2021 20:33                                                Page 2
-
-
-    49                        
-    50                        	ORG	$FFE4
-    51                        
-    52 00:FFE4: 00 00        N_COP   DW    0
-    53 00:FFE6: 00 00        N_BRK   DW    0
-    54 00:FFE8: 00 00        N_ABORT DW    0
-    55 00:FFEA: 00 00        N_NMI   DW    0
-    56 00:FFEC: 00 00        N_RSRVD DW    0
-    57 00:FFEE: 00 00        N_IRQ   DW    0
-    58 00:FFF0:              	DS    4
-    59 00:FFF4: 00 00        E_COP   DW    0
-    60 00:FFF6: 00 00        E_RSRVD DW    0
-    61 00:FFF8: 00 00        E_ABORT DW    0
-    62 00:FFFA: 00 00        E_NMI   DW    0
-    63 00:FFFC: 2B F1        E_RESET DW    START
-    64 00:FFFE: 00 00        E_IRQ   DW    0
     65                        
-    66 01:0000:              	ENDS
-    67                        	END
+    66                        	ORG	$FFE4
+    67                        
+    68 00:FFE4: 00 00        N_COP   DW    0
+    69 00:FFE6: 00 00        N_BRK   DW    0
+    70 00:FFE8: 00 00        N_ABORT DW    0
+    71 00:FFEA: 00 00        N_NMI   DW    0
+    72 00:FFEC: 00 00        N_RSRVD DW    0
+    73 00:FFEE: 00 00        N_IRQ   DW    0
+    74 00:FFF0:              	DS    4
+    75 00:FFF4: 00 00        E_COP   DW    0
+    76 00:FFF6: 00 00        E_RSRVD DW    0
+    77 00:FFF8: 00 00        E_ABORT DW    0
+    78 00:FFFA: 00 00        E_NMI   DW    0
+    79 00:FFFC: 2B F1        E_RESET DW    RESET
+    80 00:FFFE: 3E F1        E_IRQ   DW    IRQ
+    81                        
+    82 01:0000:              	ENDS
+    83                        	END
 
 
-      Lines assembled: 67
+      Lines assembled: 83
       Errors: 0

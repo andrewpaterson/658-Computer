@@ -1,7 +1,8 @@
+;
+
 STARTUP SECTION
 
 	ORG	$0000
-
 	DB '['
 PROGRESS:	
 	DB 'xxxxxxxxxxxxxxxx'
@@ -9,8 +10,7 @@ ENDPROGRESS:
 	DB ']'
 	
 	ORG $F12B
-	
-START:
+RESET:
 	CLC	     		;clear carry
 	XCE	     		;clear emulation
 	REP		#$30    ;16 bit registers
@@ -28,11 +28,27 @@ START:
 	REP		#$20    ;back to 16 bit mode
 	LONGA	ON
 
-	JMP   MYSTART	;long jump in case not bank 0
+	JMP   START		;long jump in case not bank 0
 
-	ORG $0400
+IRQ:
+	PHB				;save DB
+	PHD				;save DP
+	REP	#$30		;16 bit registers
+	PHA				;save A
+	PHX				;save X
+	PHY 			;save Y
+	 
+	REP	#$30		;16 bit registers
+	PLY             ;restore Y
+    PLX             ;restore X
+    PLA             ;restore A
+    PLD             ;restore DP
+    PLB             ;restore DB
+    RTI				;return
 
-MYSTART
+	ORG $8000
+START
+	CLI
 	SEP		#$20	;8 bit accumulator
 	LONGA 	OFF
 
@@ -60,8 +76,8 @@ E_COP   DW    0
 E_RSRVD DW    0
 E_ABORT DW    0
 E_NMI   DW    0
-E_RESET DW    START
-E_IRQ   DW    0
+E_RESET DW    RESET
+E_IRQ   DW    IRQ
 
 	ENDS
 	END

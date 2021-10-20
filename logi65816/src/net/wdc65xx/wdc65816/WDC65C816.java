@@ -51,6 +51,15 @@ public class WDC65C816
   protected boolean nmi;
   protected boolean abort;
 
+  protected int abortProcessRegister;
+  protected int abortAccumulator;
+  protected int abortXIndex;
+  protected int abortYIndex;
+  protected int abortDataBank;
+  protected int abortDirectPage;
+  protected Address abortProgramCounter;
+  protected int abortStackPointer;
+
   //These are not the values on the pins, they are internal data.
   protected Address address;
   protected int data;
@@ -110,6 +119,39 @@ public class WDC65C816
     newProgramCounter = new Address();
     address = new Address();
     read = true;
+
+    createAbortValues();
+  }
+
+  private void createAbortValues()
+  {
+    abortProcessRegister = getProcessorRegisterValue();
+    abortAccumulator = accumulator;
+    abortXIndex = xIndex;
+    abortYIndex = yIndex;
+    abortDataBank = dataBank;
+    abortDirectPage = directPage;
+    abortProgramCounter = new Address(programCounter);
+    abortStackPointer = stackPointer;
+  }
+
+  public void createPartialAbortValues()
+  {
+    abortProcessRegister = getProcessorRegisterValue();
+    abortDataBank = dataBank;
+    abortProgramCounter = new Address(programCounter.getBank(), abortProgramCounter.getOffset());
+  }
+
+  private void restoreAbortValues()
+  {
+    abortProcessRegister = getProcessorRegisterValue();
+    accumulator = abortAccumulator;
+    xIndex = abortXIndex;
+    yIndex = abortYIndex;
+    dataBank = abortDataBank;
+    directPage = abortDirectPage;
+    programCounter = new Address(abortProgramCounter);
+    stackPointer = abortStackPointer;
   }
 
   public void setX(int xIndex)
@@ -511,6 +553,10 @@ public class WDC65C816
   public void doneInstruction()
   {
     cycle = -1;
+    if (!abort)
+    {
+      createAbortValues();
+    }
 
     if (nmi)
     {
@@ -1873,6 +1919,7 @@ public class WDC65C816
 
   public void ABORT()
   {
+    restoreAbortValues();
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
   }

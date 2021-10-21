@@ -6,6 +6,7 @@ import com.cburch.logisim.instance.InstanceState;
 import net.wdc65xx.wdc65816.CpuSnapshot;
 import net.wdc65xx.wdc65816.WDC65C816;
 
+import static net.wdc65xx.logisim.Logisim65816Factory.PORT_DataBus;
 import static net.wdc65xx.logisim.Logisim65816Factory.PORT_PHI2;
 
 public class Logisim65816Instance
@@ -43,7 +44,7 @@ public class Logisim65816Instance
 
   public void tick(InstanceState instanceState)
   {
-    boolean clock = instanceState.getPortValue(PORT_PHI2) != Value.FALSE;
+    boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
 
     LogisimPins65816 pins = getPins();
     pins.setInstanceState(instanceState);
@@ -53,6 +54,7 @@ public class Logisim65816Instance
     {
       cpu.restoreCpuFromSnapshot(finalSnapshot);
       finalSnapshot = null;
+      this.clock = clock;
     }
 
     CpuSnapshot snapshot = cpu.createCpuSnapshot();

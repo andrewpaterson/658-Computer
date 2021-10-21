@@ -104,7 +104,7 @@ public class Logisim65816Factory
   {
     Logisim65816Instance instance = getOrCreateInstance(painter);
     WDC65C816 cpu = instance.getPins().getCpu();
-    boolean clockHigh = painter.getPortValue(PORT_PHI2) != Value.FALSE;
+    boolean clock = cpu.isClock();
 
     painter.drawBounds();
     for (Integer index : portInfos.keySet())
@@ -114,7 +114,7 @@ public class Logisim65816Factory
       {
         Direction dir = index < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
         String name;
-        if (!clockHigh)
+        if (!clock)
         {
           name = portInfo.lowName;
         }

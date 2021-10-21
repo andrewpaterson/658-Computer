@@ -2129,5 +2129,10 @@ public class WDC65C816
   {
     return busEnable;
   }
+
+  public boolean isClock()
+  {
+    return clock;
+  }
 }
 

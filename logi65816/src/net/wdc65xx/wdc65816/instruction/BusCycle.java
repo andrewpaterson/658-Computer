@@ -86,7 +86,7 @@ public class BusCycle
     return done16;
   }
 
-  public final void executeFirstHalfCycle(WDC65C816 cpu)
+  public final void executeFirstHalf(WDC65C816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();
@@ -107,7 +107,7 @@ public class BusCycle
     pins.setBank(address.getBank());
   }
 
-  public final void executeSecondHalfCycle(WDC65C816 cpu)
+  public final void executeSecondHalf(WDC65C816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();

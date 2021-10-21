@@ -365,11 +365,11 @@ public class WDC65C816
       irq = pins.isIRQ() || irq;
       nmi = pins.isNMI() || nmi;
 
-      getBusCycle().executeFirstHalfCycle(this);
+      getBusCycle().executeFirstHalf(this);
     }
     if (fallingEdge)
     {
-      getBusCycle().executeSecondHalfCycle(this);
+      getBusCycle().executeSecondHalf(this);
     }
   }
 

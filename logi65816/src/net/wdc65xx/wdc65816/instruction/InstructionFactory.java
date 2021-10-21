@@ -84,7 +84,7 @@ public class InstructionFactory
     opCodes.add(createAND(AND_AbsoluteIndexedWithX, createAbsoluteIndexedWithXCycles(WDC65C816::AND, M)));
     opCodes.add(createROL(ROL_AbsoluteIndexedWithX, createAbsoluteIndexedWithXRMWCycles(WDC65C816::ROL)));
     opCodes.add(createAND(AND_AbsoluteLongIndexedWithX, createAbsoluteLongIndexedWithXCycles(WDC65C816::AND)));
-    opCodes.add(createRTI(RTI_StackImplied, createStackRTICycles(WDC65C816::RTI)));
+    opCodes.add(createRTI(RTI_StackImplied, createStackRTICycles()));
     opCodes.add(createEOR(EOR_DirectPageIndexedIndirectWithX, createDirectIndexedIndirectWithXCycles(WDC65C816::EOR)));
     opCodes.add(createWDM(WDM_Implied, createImpliedCycles(WDC65C816::WDM)));
     opCodes.add(createEOR(EOR_StackRelative, createStackRelativeCycles(WDC65C816::EOR)));
@@ -886,7 +886,7 @@ public class InstructionFactory
 
   public static Instruction createAbort()
   {
-    return new Instruction(-1, createStackHardwareInterruptCycles(new AbortVector(), WDC65C816::ABORT), "ABORT",
+    return new Instruction(-1, createStackAbortInterruptCycles(new AbortVector(), WDC65C816::ABORT), "ABORT",
                            "Stop the current instruction and return processor status to what it was prior to the current instruction.");
   }
 

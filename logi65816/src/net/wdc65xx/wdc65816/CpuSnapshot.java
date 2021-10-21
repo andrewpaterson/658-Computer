@@ -46,6 +46,15 @@ public class CpuSnapshot
   public Address newProgramCounter;
   public boolean read;
 
+  public int abortProcessRegister;
+  public int abortAccumulator;
+  public int abortXIndex;
+  public int abortYIndex;
+  public int abortDataBank;
+  public int abortDirectPage;
+  public Address abortProgramCounter;
+  public int abortStackPointer;
+
   public CpuSnapshot(boolean zeroFlag,
                      boolean negativeFlag,
                      boolean decimalFlag,
@@ -78,7 +87,15 @@ public class CpuSnapshot
                      int data,
                      int directOffset,
                      Address newProgramCounter,
-                     boolean read)
+                     boolean read,
+                     int abortProcessRegister,
+                     int abortAccumulator,
+                     int abortXIndex,
+                     int abortYIndex,
+                     int abortDataBank,
+                     int abortDirectPage,
+                     Address abortProgramCounter,
+                     int abortStackPointer)
   {
     this.zeroFlag = zeroFlag;
     this.negativeFlag = negativeFlag;
@@ -114,6 +131,15 @@ public class CpuSnapshot
     this.directOffset = directOffset;
     this.newProgramCounter = newProgramCounter;
     this.read = read;
+
+    this.abortProcessRegister = abortProcessRegister;
+    this.abortAccumulator = abortAccumulator;
+    this.abortXIndex = abortXIndex;
+    this.abortYIndex = abortYIndex;
+    this.abortDataBank =abortDataBank;
+    this.abortDirectPage =abortDirectPage;
+    this.abortProgramCounter = abortProgramCounter;
+    this.abortStackPointer = abortStackPointer;
   }
 }
 

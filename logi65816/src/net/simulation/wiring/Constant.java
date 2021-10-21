@@ -19,6 +19,11 @@ public class Constant
     value = new Omniport(this, "Value", 1);
     value.connect(trace);
 
+    setValue(booleanValue);
+  }
+
+  public void setValue(boolean booleanValue)
+  {
     if (booleanValue)
     {
       constantValue = 1;

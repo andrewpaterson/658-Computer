@@ -269,6 +269,11 @@ public class InstructionCycles
     return new WriteProcessorStatus();
   }
 
+  protected static ReadProcessorStatus Read_PS()
+  {
+    return new ReadProcessorStatus();
+  }
+
   protected static ReadAbsoluteAddressLow Read_AAL(boolean notMemoryLock)
   {
     return new ReadAbsoluteAddressLow(notMemoryLock, true);

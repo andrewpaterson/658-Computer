@@ -88,7 +88,7 @@ public class CpuTest
 
   private static void printDivider()
   {
-    System.out.println("|" + pad(146, "-") + "|" + "   " + "|" + pad(19, "-") + "|"  + "   " + "|" + pad(49, "-") + "|");
+    System.out.println("|" + pad(146, "-") + "|" + "   " + "|" + pad(19, "-") + "|" + "   " + "|" + pad(49, "-") + "|");
   }
 
   public static void main(String[] args)
@@ -112,13 +112,12 @@ public class CpuTest
     Trace vectorPullBTrace = new Trace();
     Trace validProgramAddressTrace = new Trace();
     Trace validDataAddressTrace = new Trace();
-    Trace highTrace = new Trace();
 
-    Constant high = new Constant(tickables, "", true, highTrace);
-    abortBTrace.connect(highTrace);
-    nmiBTrace.connect(highTrace);
-    irqBTrace.connect(highTrace);
-    busEnableTrace.connect(highTrace);
+    Constant busEnable = new Constant(tickables, "", true, busEnableTrace);
+    Constant irqB = new Constant(tickables, "", true, irqBTrace);
+    Constant nmiB = new Constant(tickables, "", true, nmiBTrace);
+    Constant abortB = new Constant(tickables, "", true, abortBTrace);
+    busEnableTrace.connect(busEnableTrace);
 
     ClockOscillator clock = new ClockOscillator(tickables, "", clockTrace);
     new NotGate(tickables, "", clockTrace, notClockTrace);
@@ -148,9 +147,13 @@ public class CpuTest
                                             validDataAddressTrace);
     WDC65C816 cpu = new WDC65C816(cpuPins);
 
-    System.out.println(new String(memory.get(0, 18)));
+    InterruptTrigger irqTrigger =   new InterruptTrigger("[..............BRK.COP]", 200);
+    InterruptTrigger nmiTrigger =   new InterruptTrigger("[IRQ...........BRK.COP]", 200);
+    InterruptTrigger abortTrigger = new InterruptTrigger("[IRQ.NMI.......BRK.COP]", 200);
 
-    int count = 1024;
+    System.out.println(new String(memory.get(0, 23)));
+
+    int count = 3072;
     printDivider();
     System.out.println("|Cycle|  Instruction  |         Address         |        Data        |                     Operation                           |RWB|VPA|VDA|VPB|MLB|   |BE |RES|NMI|ABT|IRQ|   |   PC    |  SP  |  DP  | DB |  A   |  X   |  Y   |");
     printDivider();
@@ -161,10 +164,15 @@ public class CpuTest
       tickables.run();
       print(cpuPins, busCycle, instruction);
 
+      String s = new String(memory.get(0, 23));
+      irqB.setValue(irqTrigger.test(s));
+      nmiB.setValue(nmiTrigger.test(s));
+      abortB.setValue(abortTrigger.test(s));
+
       count--;
     }
 
-    System.out.println(new String(memory.get(0, 18)));
+    System.out.println(new String(memory.get(0, 23)));
   }
 }
 

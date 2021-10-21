@@ -1,7 +1,7 @@
 package net.wdc65xx.wdc65816.instruction.address;
 
-import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.Executor;
+import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.WidthFromRegister;
 import net.wdc65xx.wdc65816.instruction.AddressingMode;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
@@ -603,11 +603,25 @@ public class InstructionCycleFactory
     //22a
     return new InstructionCycles(StackInterruptHardware,
                                  new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),
-                                 new BusCycle(Address(PBR(), PC()), IO(), E(operation)),
+                                 new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(S()), Write_PBR(), SP_dec(), PBR_e(0), new NoteSeven()),
                                  new BusCycle(Address(S()), Write_PCH(), SP_dec()),
                                  new BusCycle(Address(S()), Write_PCL(), SP_dec()),
-                                 new BusCycle(Address(S()), Write_PS(), SP_dec()),
+                                 new BusCycle(Address(S()), Write_PS(), SP_dec(), E(operation)),
+                                 new BusCycle(Address(VA(interruptVector)), Read_AAL()),
+                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(AA()), DONE()));
+  }
+
+  public static InstructionCycles createStackAbortInterruptCycles(InterruptVector interruptVector, Executor<WDC65C816> operation)
+  {
+    //22a
+    return new InstructionCycles(StackInterruptHardware,
+                                 new BusCycle(Address(PBR(), PC()), new InternalOperation(true, true, true)),
+                                 new BusCycle(Address(PBR(), PC()), IO(), new RestoreAbortValues()),
+                                 new BusCycle(Address(S()), Write_PBR(), SP_dec(), PBR_e(0), new NoteSeven()),
+                                 new BusCycle(Address(S()), Write_PCH(), SP_dec()),
+                                 new BusCycle(Address(S()), Write_PCL(), SP_dec()),
+                                 new BusCycle(Address(S()), Write_PS(), SP_dec(), E(operation)),
                                  new BusCycle(Address(VA(interruptVector)), Read_AAL()),
                                  new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(AA()), DONE()));
   }
@@ -752,17 +766,17 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_DataLow(), SP_dec(), DONE()));
   }
 
-  public static InstructionCycles createStackRTICycles(Executor<WDC65C816> operation)
+  public static InstructionCycles createStackRTICycles()
   {
     //22g
     return new InstructionCycles(Stack,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
-                                 new BusCycle(Address(S(), o(1)), Read_DataLow(), SP_inc()),  //Processor status
+                                 new BusCycle(Address(S(), o(1)), Read_PS(), SP_inc()),  //Processor status
                                  new BusCycle(Address(S(), o(1)), Read_NewPCL(), SP_inc()),
                                  new BusCycle(Address(S(), o(1)), Read_NewPCH(), SP_inc()),
-                                 new BusCycle(Address(S(), o(1)), Read_NewPBR(), E(operation), SP_inc(), PC_e(New_PBR(), New_PC()), DONE()));
+                                 new BusCycle(Address(S(), o(1)), Read_NewPBR(), SP_inc(), PC_e(New_PBR(), New_PC()), DONE()));
   }
 
   public static InstructionCycles createStackRTSCycles()
@@ -810,8 +824,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_D0(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
-                                 new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
-                                 new BusCycle(Address(S(), D0(), o(1)), SP_inc(), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
+                                 new BusCycle(Address(S(), D0()), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
+                                 new BusCycle(Address(S(), D0(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
   }
 
   public static InstructionCycles createStackRelativeWriteCycles(Executor<WDC65C816> operation)
@@ -820,8 +834,8 @@ public class InstructionCycleFactory
     return new InstructionCycles(StackRelative,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_D0(), PC_inc()),
-                                 new BusCycle(Address(PBR(), PC()), IO(), SP_inc()),
-                                 new BusCycle(Address(S(), D0()), SP_inc(), E(operation), Write_DataLow(), DONE8Bit(M)),
+                                 new BusCycle(Address(PBR(), PC()), IO()),
+                                 new BusCycle(Address(S(), D0()), E(operation), Write_DataLow(), DONE8Bit(M)),
                                  new BusCycle(Address(S(), D0(), o(1)), Write_DataHigh(), DONE16Bit(M)));
   }
 
@@ -832,8 +846,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_D0(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
-                                 new BusCycle(Address(S(), D0(), o(1)), Read_AAL(), SP_inc()),
-                                 new BusCycle(Address(S(), D0(), o(1)), Read_AAH(), SP_inc()),
+                                 new BusCycle(Address(S(), D0()), Read_AAL()),
+                                 new BusCycle(Address(S(), D0(), o(1)), Read_AAH()),
                                  new BusCycle(Address(S(), D0(), o(1)), IO()),
                                  new BusCycle(Address(DBR(), AA(), Y()), Read_DataLow(), E8Bit(operation, M), DONE8Bit(M)),
                                  new BusCycle(Address(DBR(), AA(), Y(), o(1)), Read_DataHigh(), E16Bit(operation, M), DONE16Bit(M)));
@@ -845,8 +859,8 @@ public class InstructionCycleFactory
     return new InstructionCycles(StackRelativeIndirectIndexedWithY,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_D0(), PC_inc()),
-                                 new BusCycle(Address(PBR(), PC()), IO(), SP_inc()),
-                                 new BusCycle(Address(S(), D0()), Read_AAL(), SP_inc()),
+                                 new BusCycle(Address(PBR(), PC()), IO()),
+                                 new BusCycle(Address(S(), D0()), Read_AAL()),
                                  new BusCycle(Address(S(), D0(), o(1)), Read_AAH()),
                                  new BusCycle(Address(S(), D0(), o(1)), IO()),
                                  new BusCycle(Address(DBR(), AA(), Y()), E(operation), Write_DataLow(), DONE8Bit(M)),

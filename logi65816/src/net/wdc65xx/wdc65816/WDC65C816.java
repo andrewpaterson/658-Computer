@@ -142,7 +142,7 @@ public class WDC65C816
     abortProgramCounter = new Address(programCounter.getBank(), abortProgramCounter.getOffset());
   }
 
-  private void restoreAbortValues()
+  public void restoreAbortValues()
   {
     abortProcessRegister = getProcessorRegisterValue();
     accumulator = abortAccumulator;
@@ -367,8 +367,12 @@ public class WDC65C816
 
       getBusCycle().executeFirstHalf(this);
     }
+
     if (fallingEdge)
     {
+      irq = pins.isIRQ() || irq;
+      nmi = pins.isNMI() || nmi;
+
       getBusCycle().executeSecondHalf(this);
     }
   }
@@ -553,17 +557,25 @@ public class WDC65C816
       createAbortValues();
     }
 
+    if (irq && interruptDisableFlag)
+    {
+      irq = false;
+    }
+
     if (nmi)
     {
       opCode = nmiOpcode;
+      nmi = false;
     }
     else if (abort)
     {
       opCode = abortOpcode;
+      abort = false;
     }
-    else if (irq && !interruptDisableFlag)
+    else if (irq)
     {
       opCode = irqOpcode;
+      irq = false;
     }
     else
     {
@@ -1460,11 +1472,6 @@ public class WDC65C816
     setSignAndZeroFromMemory(getA());
   }
 
-  public void RTI()
-  {
-    setProcessorRegisterValue(getDataLow());
-  }
-
   public void EOR()
   {
     int result = trimMemory(getA() ^ getData());
@@ -1914,7 +1921,6 @@ public class WDC65C816
 
   public void ABORT()
   {
-    restoreAbortValues();
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
     abort = false;
@@ -2082,7 +2088,15 @@ public class WDC65C816
                            data,
                            directOffset,
                            new Address(newProgramCounter),
-                           read);
+                           read,
+                           abortProcessRegister,
+                           abortAccumulator,
+                           abortXIndex,
+                           abortYIndex,
+                           abortDataBank,
+                           abortDirectPage,
+                           new Address(abortProgramCounter),
+                           abortStackPointer);
   }
 
   public void restoreCpuFromSnapshot(CpuSnapshot snapshot)
@@ -2117,6 +2131,15 @@ public class WDC65C816
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;
     busEnable = snapshot.busEnable;
+
+    abortAccumulator = snapshot.abortAccumulator;
+    abortDataBank = snapshot.abortDataBank;
+    abortDirectPage = snapshot.abortDirectPage;
+    abortProgramCounter = new Address(snapshot.abortProgramCounter);
+    abortProcessRegister = snapshot.abortProcessRegister;
+    abortXIndex = snapshot.abortXIndex;
+    abortYIndex = snapshot.abortYIndex;
+    abortStackPointer = snapshot.abortStackPointer;
 
     address = new Address(snapshot.address);
     data = snapshot.data;

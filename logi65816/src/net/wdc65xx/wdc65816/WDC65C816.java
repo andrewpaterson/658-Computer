@@ -340,6 +340,7 @@ public class WDC65C816
     if (reset)
     {
       opCode = resetOpcode;
+      stopped = false;
       cycle = 0;
     }
 
@@ -348,11 +349,7 @@ public class WDC65C816
       pins.disableBusses();
     }
 
-    if (!fallingEdge && !risingEdge)
-    {
-      return;
-    }
-    if (stopped)
+    if (!fallingEdge && !risingEdge || stopped)
     {
       return;
     }
@@ -362,26 +359,24 @@ public class WDC65C816
       nextCycle();
     }
 
-    irq = pins.isIRQ();
-    nmi = pins.isNMI();
-
-    if (fallingEdge)
-    {
-      abort = pins.isAbort();
-
-      getBusCycle().executeOnFallingEdge(this);
-      nextCycle();
-    }
     if (risingEdge)
     {
-      getBusCycle().executeOnRisingEdge(this);
+      abort = pins.isAbort() || abort;
+      irq = pins.isIRQ() || irq;
+      nmi = pins.isNMI() || nmi;
+
+      getBusCycle().executeFirstHalfCycle(this);
+    }
+    if (fallingEdge)
+    {
+      getBusCycle().executeSecondHalfCycle(this);
     }
   }
 
   public void preTick(boolean clock)
   {
-    this.fallingEdge = !clock && this.clock;
-    this.risingEdge = clock && !this.clock;
+    this.risingEdge = !clock && this.clock;
+    this.fallingEdge = clock && !this.clock;
     this.clock = clock;
   }
 
@@ -1922,18 +1917,21 @@ public class WDC65C816
     restoreAbortValues();
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
+    abort = false;
   }
 
   public void IRQ()
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
+    irq = false;
   }
 
   public void NMI()
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
+    nmi = false;
   }
 
   public void RES()
@@ -2130,28 +2128,6 @@ public class WDC65C816
   public boolean isBusEnable()
   {
     return busEnable;
-  }
-
-  public void dump()
-  {
-    System.out.println("  --- Internal Status ---- ");
-    System.out.println("      Mnemonic: " + getOpcodeMnemonicString());
-    System.out.println("         Cycle: " + getCycle() + (clock ? " (High)" : " (Low)"));
-    System.out.println("   Accumulator: " + getAccumulatorValueHex());
-    System.out.println("       X-Index: " + getXValueHex());
-    System.out.println("       Y-Index: " + getYValueHex());
-    System.out.println(" Stack Pointer: " + getStackValueHex());
-    System.out.println("   Direct Page: " + getDirectPageValueHex());
-    System.out.println(" Program Count: " + getProgramCounterValueHex());
-    System.out.println("     Data Bank: " + getDataBankValueHex());
-    System.out.println("        Status: " + getStatusString());
-    BusCycle busCycle = getBusCycle();
-    if (busCycle != null)
-    {
-      System.out.println("Address Offset: " + busCycle.toAddressOffsetString());
-      System.out.println("     Operation: " + busCycle.toOperationString());
-    }
-    System.out.println();
   }
 }
 

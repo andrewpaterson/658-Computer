@@ -3,6 +3,7 @@ package net.simulation.maintests;
 import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
+import net.simulation.gate.NotGate;
 import net.simulation.memory.Memory;
 import net.simulation.specialised.EconoReset;
 import net.simulation.wiring.ClockOscillator;
@@ -23,19 +24,37 @@ public class CpuTest
   private static void print(Cpu65816Pins pins, BusCycle busCycle, Instruction instruction)
   {
     String addressOffset = busCycle.toAddressOffsetString();
-    String data = busCycle.toDataString();
-    String operation = busCycle.toOperationString();
 
     String opCode = instruction.getName();
     boolean clock = pins.getClock().getBoolAfterRead();
-    if (busCycle.isFetchOpCode() && clock)
+    if (busCycle.isFetchOpCode() && !clock)
     {
       printDivider();
     }
     String cycle = ("" + busCycle.getCycle()) + "-" + ("" + (clock ? 'H' : 'L'));
     String addressSource = leftJustify(addressOffset, 16, " ");
+
+    String operation;
+    if (clock)
+    {
+      operation = busCycle.toOperationString();
+    }
+    else
+    {
+      operation = "";
+    }
     String operationSource = leftJustify(operation, 55, " ");
-    String dataSource = leftJustify(data, 11, " ");
+
+    String data;
+    if (clock)
+    {
+      data = busCycle.toDataString();
+    }
+    else
+    {
+      data = "Write(BA)";
+    }
+    String dataSource = leftJustify(data, 14, " ");
 
     String addressBus = pins.getAddressBus().getWireValuesAsString();
     String dataBus = pins.getDataBus().getWireValuesAsString();
@@ -69,7 +88,7 @@ public class CpuTest
 
   private static void printDivider()
   {
-    System.out.println("|" + pad(143, "-") + "|" + "   " + "|" + pad(19, "-") + "|"  + "   " + "|" + pad(49, "-") + "|");
+    System.out.println("|" + pad(146, "-") + "|" + "   " + "|" + pad(19, "-") + "|"  + "   " + "|" + pad(49, "-") + "|");
   }
 
   public static void main(String[] args)
@@ -80,6 +99,7 @@ public class CpuTest
     Bus dataBus = new Bus(8);
     Trace rwbTrace = new Trace();
     Trace clockTrace = new Trace();
+    Trace notClockTrace = new Trace();
     Trace abortBTrace = new Trace();
     Trace busEnableTrace = new Trace();
     Trace irqBTrace = new Trace();
@@ -101,10 +121,11 @@ public class CpuTest
     busEnableTrace.connect(highTrace);
 
     ClockOscillator clock = new ClockOscillator(tickables, "", clockTrace);
+    new NotGate(tickables, "", clockTrace, notClockTrace);
 
     EconoReset econoReset = new EconoReset(tickables, "", resetBTrace);
 
-    Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, clockTrace, clockTrace,
+    Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, notClockTrace, notClockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
     Cpu65816Pins cpuPins = new Cpu65816Pins(tickables,
@@ -131,7 +152,7 @@ public class CpuTest
 
     int count = 1024;
     printDivider();
-    System.out.println("|Cycle|  Instruction  |         Address         |                                 Data                             |RWB|VPA|VDA|VPB|MLB|   |BE |RES|NMI|ABT|IRQ|   |   PC    |  SP  |  DP  | DB |  A   |  X   |  Y   |");
+    System.out.println("|Cycle|  Instruction  |         Address         |        Data        |                     Operation                           |RWB|VPA|VDA|VPB|MLB|   |BE |RES|NMI|ABT|IRQ|   |   PC    |  SP  |  DP  | DB |  A   |  X   |  Y   |");
     printDivider();
     while (!cpu.isStopped() && count > 0)
     {

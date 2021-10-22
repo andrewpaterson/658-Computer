@@ -2,7 +2,7 @@ package net.wdc65xx.wdc65816.instruction;
 
 import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.Address;
-import net.wdc65xx.wdc65816.Pins65816;
+import net.wdc65xx.wdc65816.WDC65C816Pins;
 import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.address.AddressOffset;
 import net.wdc65xx.wdc65816.instruction.address.ConstantOffset;
@@ -94,7 +94,7 @@ public class BusCycle
 
     cpu.setRead(read);
 
-    Pins65816 pins = cpu.getPins();
+    WDC65C816Pins pins = cpu.getPins();
     pins.setMX(cpu.isIndex8Bit());
     pins.setRWB(read);
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
@@ -115,7 +115,7 @@ public class BusCycle
 
     cpu.setRead(read);
 
-    Pins65816 pins = cpu.getPins();
+    WDC65C816Pins pins = cpu.getPins();
     pins.setRWB(read);
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
     pins.setMX(cpu.isMemory8Bit());

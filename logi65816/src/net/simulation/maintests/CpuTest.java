@@ -9,7 +9,7 @@ import net.simulation.specialised.EconoReset;
 import net.simulation.wiring.ClockOscillator;
 import net.simulation.wiring.Constant;
 import net.util.StringUtil;
-import net.wdc65xx.simulation.Cpu65816Pins;
+import net.wdc65xx.simulation.WDC65C816TickablePins;
 import net.wdc65xx.wdc65816.WDC65C816;
 import net.wdc65xx.wdc65816.instruction.BusCycle;
 import net.wdc65xx.wdc65816.instruction.Instruction;
@@ -21,7 +21,7 @@ import static net.util.StringUtil.*;
 
 public class CpuTest
 {
-  private static void print(Cpu65816Pins pins, BusCycle busCycle, Instruction instruction)
+  private static void print(WDC65C816TickablePins pins, BusCycle busCycle, Instruction instruction)
   {
     String addressOffset = busCycle.toAddressOffsetString();
 
@@ -127,24 +127,24 @@ public class CpuTest
     Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, notClockTrace, notClockTrace,
                                readBytes(new File("../Test816/Test816.bin")));
 
-    Cpu65816Pins cpuPins = new Cpu65816Pins(tickables,
-                                            "",
-                                            addressBus,
-                                            dataBus,
-                                            rwbTrace,
-                                            clockTrace,
-                                            abortBTrace,
-                                            busEnableTrace,
-                                            irqBTrace,
-                                            nmiBTrace,
-                                            resetBTrace,
-                                            emulationTrace,
-                                            memoryLockBTrace,
-                                            mxTrace,
-                                            rdyTrace,
-                                            vectorPullBTrace,
-                                            validProgramAddressTrace,
-                                            validDataAddressTrace);
+    WDC65C816TickablePins cpuPins = new WDC65C816TickablePins(tickables,
+                                                              "",
+                                                              addressBus,
+                                                              dataBus,
+                                                              rwbTrace,
+                                                              clockTrace,
+                                                              abortBTrace,
+                                                              busEnableTrace,
+                                                              irqBTrace,
+                                                              nmiBTrace,
+                                                              resetBTrace,
+                                                              emulationTrace,
+                                                              memoryLockBTrace,
+                                                              mxTrace,
+                                                              rdyTrace,
+                                                              vectorPullBTrace,
+                                                              validProgramAddressTrace,
+                                                              validDataAddressTrace);
     WDC65C816 cpu = new WDC65C816(cpuPins);
 
     InterruptTrigger irqTrigger =   new InterruptTrigger("[..............BRK.COP]", 200);

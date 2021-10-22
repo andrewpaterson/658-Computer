@@ -4,12 +4,12 @@ import net.simulation.common.*;
 import net.simulation.gate.Tickable;
 import net.util.EmulatorException;
 import net.wdc65xx.wdc65816.CpuSnapshot;
-import net.wdc65xx.wdc65816.Pins65816;
+import net.wdc65xx.wdc65816.WDC65C816Pins;
 import net.wdc65xx.wdc65816.WDC65C816;
 
-public class Cpu65816Pins
+public class WDC65C816TickablePins
     extends Tickable
-    implements Pins65816
+    implements WDC65C816Pins
 {
   private WDC65C816 cpu;
   private CpuSnapshot snapshot;
@@ -31,24 +31,24 @@ public class Cpu65816Pins
   protected final Uniport validProgramAddress;
   protected final Uniport validDataAddress;
 
-  public Cpu65816Pins(Tickables tickables,
-                      String name,
-                      Bus addressBus,
-                      Bus dataBus,
-                      Trace rwb,
-                      Trace clock,
-                      Trace abortB,
-                      Trace busEnable,
-                      Trace irqB,
-                      Trace nmiB,
-                      Trace resetB,
-                      Trace emulation,
-                      Trace memoryLockB,
-                      Trace mx,
-                      Trace rdy,
-                      Trace vectorPullB,
-                      Trace validProgramAddress,
-                      Trace validDataAddress)
+  public WDC65C816TickablePins(Tickables tickables,
+                               String name,
+                               Bus addressBus,
+                               Bus dataBus,
+                               Trace rwb,
+                               Trace clock,
+                               Trace abortB,
+                               Trace busEnable,
+                               Trace irqB,
+                               Trace nmiB,
+                               Trace resetB,
+                               Trace emulation,
+                               Trace memoryLockB,
+                               Trace mx,
+                               Trace rdy,
+                               Trace vectorPullB,
+                               Trace validProgramAddress,
+                               Trace validDataAddress)
   {
     super(tickables, name);
     this.addressBus = new Omniport(this, "Address Bus", 16);

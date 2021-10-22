@@ -3,20 +3,20 @@ package net.wdc65xx.logisim;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceState;
-import net.wdc65xx.wdc65816.Pins65816;
+import net.wdc65xx.wdc65816.WDC65C816Pins;
 import net.wdc65xx.wdc65816.WDC65C816;
 
 import static net.util.IntUtil.toByte;
 import static net.wdc65xx.logisim.Logisim65816Factory.*;
 
-public class LogisimPins65816
-    implements Pins65816
+public class WDC65C816LogisimPins
+    implements WDC65C816Pins
 {
   private WDC65C816 cpu;
 
   private InstanceState instanceState;
 
-  public LogisimPins65816()
+  public WDC65C816LogisimPins()
   {
   }
 

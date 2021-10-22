@@ -1,6 +1,6 @@
 package net.wdc65xx.wdc65816;
 
-public interface Pins65816
+public interface WDC65C816Pins
 {
   void setAddress(int address);
 

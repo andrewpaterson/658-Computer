@@ -6,20 +6,19 @@ import com.cburch.logisim.instance.InstanceState;
 import net.wdc65xx.wdc65816.CpuSnapshot;
 import net.wdc65xx.wdc65816.WDC65C816;
 
-import static net.wdc65xx.logisim.Logisim65816Factory.PORT_DataBus;
 import static net.wdc65xx.logisim.Logisim65816Factory.PORT_PHI2;
 
 public class Logisim65816Instance
     implements InstanceData,
                Cloneable
 {
-  protected LogisimPins65816 pins;
+  protected WDC65C816LogisimPins pins;
   protected CpuSnapshot finalSnapshot;
   protected boolean clock;
 
   public Logisim65816Instance()
   {
-    this.pins = new LogisimPins65816();
+    this.pins = new WDC65C816LogisimPins();
     new WDC65C816(pins);
     finalSnapshot = null;
   }
@@ -37,7 +36,7 @@ public class Logisim65816Instance
     }
   }
 
-  public LogisimPins65816 getPins()
+  public WDC65C816LogisimPins getPins()
   {
     return pins;
   }
@@ -46,7 +45,7 @@ public class Logisim65816Instance
   {
     boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
 
-    LogisimPins65816 pins = getPins();
+    WDC65C816LogisimPins pins = getPins();
     pins.setInstanceState(instanceState);
     WDC65C816 cpu = pins.getCpu();
 

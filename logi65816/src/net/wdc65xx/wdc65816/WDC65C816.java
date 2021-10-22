@@ -68,13 +68,13 @@ public class WDC65C816
   protected boolean read;
   protected boolean busEnable;
 
-  protected Pins65816 pins;
+  protected WDC65C816Pins pins;
 
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
 
-  public WDC65C816(Pins65816 pins)
+  public WDC65C816(WDC65C816Pins pins)
   {
     this.pins = pins;
     this.pins.setCpu(this);
@@ -685,7 +685,7 @@ public class WDC65C816
     newProgramCounter.setBank(data);
   }
 
-  public Pins65816 getPins()
+  public WDC65C816Pins getPins()
   {
     return pins;
   }

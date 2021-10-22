@@ -2,8 +2,8 @@ package net.wdc.wdc65816.instruction;
 
 import net.util.EmulatorException;
 import net.wdc.wdc65816.Address;
-import net.wdc.wdc65816.WDC65C816Pins;
-import net.wdc.wdc65816.WDC65C816;
+import net.wdc.wdc65816.WDC65816Pins;
+import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.instruction.address.AddressOffset;
 import net.wdc.wdc65816.instruction.address.ConstantOffset;
 import net.wdc.wdc65816.instruction.operations.DataOperation;
@@ -49,7 +49,7 @@ public class BusCycle
     }
   }
 
-  public Address getAddress(WDC65C816 cpu)
+  public Address getAddress(WDC65816 cpu)
   {
     return AddressOffset.getAddress(cpu, addressOffsets);
   }
@@ -86,7 +86,7 @@ public class BusCycle
     return done16;
   }
 
-  public final void executeFirstHalf(WDC65C816 cpu)
+  public final void executeFirstHalf(WDC65816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();
@@ -94,7 +94,7 @@ public class BusCycle
 
     cpu.setRead(read);
 
-    WDC65C816Pins pins = cpu.getPins();
+    WDC65816Pins pins = cpu.getPins();
     pins.setMX(cpu.isIndex8Bit());
     pins.setRWB(read);
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
@@ -107,7 +107,7 @@ public class BusCycle
     pins.setBank(address.getBank());
   }
 
-  public final void executeSecondHalf(WDC65C816 cpu)
+  public final void executeSecondHalf(WDC65816 cpu)
   {
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();
@@ -115,7 +115,7 @@ public class BusCycle
 
     cpu.setRead(read);
 
-    WDC65C816Pins pins = cpu.getPins();
+    WDC65816Pins pins = cpu.getPins();
     pins.setRWB(read);
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
     pins.setMX(cpu.isMemory8Bit());
@@ -134,7 +134,7 @@ public class BusCycle
     cpu.nextCycle();
   }
 
-  public boolean mustExecute(WDC65C816 cpu)
+  public boolean mustExecute(WDC65816 cpu)
   {
     boolean mustExecute = true;
     for (Operation operation : operations)

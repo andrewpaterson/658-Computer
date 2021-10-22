@@ -12,7 +12,7 @@ import static net.util.StringUtil.to16BitHex;
 import static net.util.StringUtil.to8BitHex;
 import static net.wdc.wdc65816.CpuFlags.*;
 
-public class WDC65C816
+public class WDC65816
 {
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
@@ -68,13 +68,13 @@ public class WDC65C816
   protected boolean read;
   protected boolean busEnable;
 
-  protected WDC65C816Pins pins;
+  protected WDC65816Pins pins;
 
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
 
-  public WDC65C816(WDC65C816Pins pins)
+  public WDC65816(WDC65816Pins pins)
   {
     this.pins = pins;
     this.pins.setCpu(this);
@@ -685,7 +685,7 @@ public class WDC65C816
     newProgramCounter.setBank(data);
   }
 
-  public WDC65C816Pins getPins()
+  public WDC65816Pins getPins()
   {
     return pins;
   }

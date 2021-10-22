@@ -29,7 +29,7 @@ public class Components
   @Override
   public String getName()
   {
-    return "W65C02S";
+    return "WDC";
   }
 
   @Override

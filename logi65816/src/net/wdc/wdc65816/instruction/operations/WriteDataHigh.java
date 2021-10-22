@@ -1,6 +1,6 @@
 package net.wdc.wdc65816.instruction.operations;
 
-import net.wdc.wdc65816.WDC65C816;
+import net.wdc.wdc65816.WDC65816;
 
 public class WriteDataHigh
     extends DataOperation
@@ -11,7 +11,7 @@ public class WriteDataHigh
   }
 
   @Override
-  public void execute(WDC65C816 cpu)
+  public void execute(WDC65816 cpu)
   {
     setPinData(cpu, cpu.getDataHigh());
   }

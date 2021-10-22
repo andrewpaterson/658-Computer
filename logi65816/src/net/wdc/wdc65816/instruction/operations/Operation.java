@@ -1,12 +1,12 @@
 package net.wdc.wdc65816.instruction.operations;
 
-import net.wdc.wdc65816.WDC65C816;
+import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.instruction.BusCycleParameter;
 
 public abstract class Operation
     implements BusCycleParameter
 {
-  public abstract void execute(WDC65C816 cpu);
+  public abstract void execute(WDC65816 cpu);
 
   @Override
   public boolean isOperation()
@@ -14,7 +14,7 @@ public abstract class Operation
     return true;
   }
 
-  public boolean mustExecute(WDC65C816 cpu)
+  public boolean mustExecute(WDC65816 cpu)
   {
     return true;
   }

@@ -3,6 +3,8 @@ package net.wdc.logisim;
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
+import net.wdc.logisim.wdc6502.Logisim6502Factory;
+import net.wdc.logisim.wdc65816.Logisim65816Factory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Components
     {
       tools = new ArrayList<>();
       tools.add(new AddTool(new Logisim65816Factory()));
+      tools.add(new AddTool(new Logisim6502Factory()));
     }
     catch (Exception e)
     {
@@ -29,7 +32,7 @@ public class Components
   @Override
   public String getName()
   {
-    return "W65C816S";
+    return "WDC";
   }
 
   @Override

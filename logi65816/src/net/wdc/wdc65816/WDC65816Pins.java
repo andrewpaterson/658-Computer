@@ -1,6 +1,6 @@
 package net.wdc.wdc65816;
 
-public interface WDC65C816Pins
+public interface WDC65816Pins
 {
   void setAddress(int address);
 
@@ -36,7 +36,7 @@ public interface WDC65C816Pins
 
   boolean isAbort();
 
-  void setCpu(WDC65C816 cpu);
+  void setCpu(WDC65816 cpu);
 
   void disableBusses();
 }

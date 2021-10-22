@@ -1,23 +1,44 @@
-package net.wdc.logisim;
+package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
+import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
-import net.wdc.wdc65816.WDC65C816Pins;
-import net.wdc.wdc65816.WDC65C816;
+import net.wdc.wdc65816.CpuSnapshot;
+import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.WDC65816Pins;
 
 import static net.util.IntUtil.toByte;
-import static net.wdc.logisim.Logisim65816Factory.*;
+import static net.wdc.logisim.wdc65816.Logisim65816Factory.*;
 
-public class WDC65C816LogisimPins
-    implements WDC65C816Pins
+public class WDC65816LogisimPins
+    implements WDC65816Pins,
+               InstanceData
 {
-  private WDC65C816 cpu;
+  private WDC65816 cpu;
+
+  protected CpuSnapshot finalSnapshot;
+  protected boolean clock;
 
   private InstanceState instanceState;
 
-  public WDC65C816LogisimPins()
+  public WDC65816LogisimPins()
   {
+    new WDC65816(this);
+    finalSnapshot = null;
+  }
+
+  @Override
+  public Object clone()
+  {
+    try
+    {
+      return super.clone();
+    }
+    catch (CloneNotSupportedException e)
+    {
+      return null;
+    }
   }
 
   @Override
@@ -115,7 +136,7 @@ public class WDC65C816LogisimPins
   }
 
   @Override
-  public void setCpu(WDC65C816 cpu)
+  public void setCpu(WDC65816 cpu)
   {
     this.cpu = cpu;
   }
@@ -158,7 +179,7 @@ public class WDC65C816LogisimPins
     instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
   }
 
-  public WDC65C816 getCpu()
+  public WDC65816 getCpu()
   {
     return cpu;
   }
@@ -171,6 +192,26 @@ public class WDC65C816LogisimPins
   public void setInstanceState(InstanceState instanceState)
   {
     this.instanceState = instanceState;
+  }
+
+  public void tick(InstanceState instanceState)
+  {
+    boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
+
+    setInstanceState(instanceState);
+
+    if ((this.clock != clock) && (finalSnapshot != null))
+    {
+      cpu.restoreCpuFromSnapshot(finalSnapshot);
+      finalSnapshot = null;
+      this.clock = clock;
+    }
+
+    CpuSnapshot snapshot = cpu.createCpuSnapshot();
+    cpu.preTick(clock);
+    cpu.tick();
+    finalSnapshot = cpu.createCpuSnapshot();
+    cpu.restoreCpuFromSnapshot(snapshot);
   }
 }
 

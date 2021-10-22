@@ -1,4 +1,4 @@
-package net.wdc.logisim;
+package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
@@ -8,7 +8,7 @@ import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
-import net.wdc.wdc65816.WDC65C816;
+import net.wdc.wdc65816.WDC65816;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -52,48 +52,48 @@ public class Logisim65816Factory
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_AddressBus = 15;
 
-  protected final Map<Integer, PortInfo> portInfos;
+  protected final Map<Integer, PortDescription> portInfos;
 
   public Logisim65816Factory()
   {
     super("W65C816S");
 
-    PortInfo[] portInfos = new PortInfo[]
+    PortDescription[] portDescriptions = new PortDescription[]
         {
-            PortInfo.inputShared(PORT_ABORTB, "ABORT"),
-            PortInfo.inputShared(PORT_IRQB, "IRQB"),
-            PortInfo.inputShared(PORT_NMIB, "NMIB"),
-            PortInfo.inputShared(PORT_RESB, "RESB"),
-            PortInfo.inputShared(PORT_PHI2, "PHI2"),
-            PortInfo.outputExclusive(PORT_MX, "M").setHighName("X"),
-            PortInfo.outputExclusive(PORT_E, "E"),
-            PortInfo.outputExclusive(PORT_MLB, "MLB"),
+            PortDescription.inputShared(PORT_ABORTB, "ABORT"),
+            PortDescription.inputShared(PORT_IRQB, "IRQB"),
+            PortDescription.inputShared(PORT_NMIB, "NMIB"),
+            PortDescription.inputShared(PORT_RESB, "RESB"),
+            PortDescription.inputShared(PORT_PHI2, "PHI2"),
+            PortDescription.outputExclusive(PORT_MX, "M").setHighName("X"),
+            PortDescription.outputExclusive(PORT_E, "E"),
+            PortDescription.outputExclusive(PORT_MLB, "MLB"),
 
-            PortInfo.inputShared(PORT_BE, "BE"),
-            PortInfo.outputExclusive(PORT_VPB, "VPB"),
-            PortInfo.outputExclusive(PORT_VPA, "VPA"),
-            PortInfo.outputExclusive(PORT_VDA, "VDA"),
-            PortInfo.inoutShared(PORT_RDY, "RDY"),
-            PortInfo.outputShared(PORT_RWB, "RWB"),
-            PortInfo.inoutShared(PORT_DataBus, "D", 8).setHighName("BA"),
-            PortInfo.outputShared(PORT_AddressBus, "A", 16)};
+            PortDescription.inputShared(PORT_BE, "BE"),
+            PortDescription.outputExclusive(PORT_VPB, "VPB"),
+            PortDescription.outputExclusive(PORT_VPA, "VPA"),
+            PortDescription.outputExclusive(PORT_VDA, "VDA"),
+            PortDescription.inoutShared(PORT_RDY, "RDY"),
+            PortDescription.outputShared(PORT_RWB, "RWB"),
+            PortDescription.inoutShared(PORT_DataBus, "D", 8).setHighName("BA"),
+            PortDescription.outputShared(PORT_AddressBus, "A", 16)};
 
     this.portInfos = new LinkedHashMap<>();
-    for (PortInfo portInfo : portInfos)
+    for (PortDescription portDescription : portDescriptions)
     {
-      this.portInfos.put(portInfo.index, portInfo);
+      this.portInfos.put(portDescription.index, portDescription);
     }
 
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
     addStandardPins(this.portInfos);
   }
 
-  public Logisim65816Instance getOrCreateInstance(InstanceState instanceState)
+  public WDC65816LogisimPins getOrCreateInstance(InstanceState instanceState)
   {
-    Logisim65816Instance instance = (Logisim65816Instance) instanceState.getData();
+    WDC65816LogisimPins instance = (WDC65816LogisimPins) instanceState.getData();
     if (instance == null)
     {
-      instance = new Logisim65816Instance();
+      instance = new WDC65816LogisimPins();
       instanceState.setData(instance);
     }
     return instance;
@@ -101,27 +101,27 @@ public class Logisim65816Factory
 
   public void paintInstance(InstancePainter painter)
   {
-    Logisim65816Instance instance = getOrCreateInstance(painter);
-    WDC65C816 cpu = instance.getPins().getCpu();
+    WDC65816LogisimPins instance = getOrCreateInstance(painter);
+    WDC65816 cpu = instance.getCpu();
     boolean clock = cpu.isClock();
 
     painter.drawBounds();
     for (Integer index : portInfos.keySet())
     {
-      PortInfo portInfo = portInfos.get(index);
-      if (portInfo != null)
+      PortDescription portDescription = portInfos.get(index);
+      if (portDescription != null)
       {
         Direction dir = index < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
         String name;
         if (!clock)
         {
-          name = portInfo.lowName;
+          name = portDescription.lowName;
         }
         else
         {
-          name = portInfo.highName;
+          name = portDescription.highName;
         }
-        painter.drawPort(portInfo.index, name, dir);
+        painter.drawPort(portDescription.index, name, dir);
       }
     }
 
@@ -215,16 +215,16 @@ public class Logisim65816Factory
   @Override
   public void propagate(InstanceState instanceState)
   {
-    Logisim65816Instance instance = getOrCreateInstance(instanceState);
+    WDC65816LogisimPins instance = getOrCreateInstance(instanceState);
     instance.tick(instanceState);
   }
 
-  protected void addStandardPins(Map<Integer, PortInfo> portInfos)
+  protected void addStandardPins(Map<Integer, PortDescription> portInfos)
   {
     ArrayList<Port> ports = new ArrayList<>();
     for (Integer index : portInfos.keySet())
     {
-      PortInfo info = portInfos.get(index);
+      PortDescription info = portInfos.get(index);
       if (info == null)
       {
         continue;

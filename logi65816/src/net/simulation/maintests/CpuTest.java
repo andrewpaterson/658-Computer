@@ -9,10 +9,10 @@ import net.simulation.specialised.EconoReset;
 import net.simulation.wiring.ClockOscillator;
 import net.simulation.wiring.Constant;
 import net.util.StringUtil;
-import net.wdc65xx.simulation.WDC65C816TickablePins;
-import net.wdc65xx.wdc65816.WDC65C816;
-import net.wdc65xx.wdc65816.instruction.BusCycle;
-import net.wdc65xx.wdc65816.instruction.Instruction;
+import net.wdc.simulation.WDC65C816TickablePins;
+import net.wdc.wdc65816.WDC65C816;
+import net.wdc.wdc65816.instruction.BusCycle;
+import net.wdc.wdc65816.instruction.Instruction;
 
 import java.io.File;
 

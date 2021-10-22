@@ -7,9 +7,9 @@
         <KeywordLists>
             <Keywords name="Comments">00; 01 02 03 04</Keywords>
             <Keywords name="Numbers, prefix1">%</Keywords>
-            <Keywords name="Numbers, prefix2">$</Keywords>
+            <Keywords name="Numbers, prefix2">#$ $</Keywords>
             <Keywords name="Numbers, extras1"></Keywords>
-            <Keywords name="Numbers, extras2">abcdef</Keywords>
+            <Keywords name="Numbers, extras2">abcdefABCDEF</Keywords>
             <Keywords name="Numbers, suffix1"></Keywords>
             <Keywords name="Numbers, suffix2"></Keywords>
             <Keywords name="Numbers, range"></Keywords>
@@ -24,11 +24,11 @@
             <Keywords name="Folders in comment, open"></Keywords>
             <Keywords name="Folders in comment, middle"></Keywords>
             <Keywords name="Folders in comment, close"></Keywords>
-            <Keywords name="Keywords1">adc and asl bcc bcs bit beq bmi bne bpl bra bvc bvs clc cld cli clv cmp cpx cpy dec dex dey eor inc inx iny jmp jsr lda ldx ldy lsr mvn mvp nop ora pha phb phd phk php phx phy pla plp plb pld plk plx ply rep rol ror rti rts sbc sec sed sei sep sta stp stx sty stz tax tay tcs tsx txa txs txy tya tyx wai xba xce</Keywords>
+            <Keywords name="Keywords1">adc and asl bcc bcs bit beq bmi bne bpl bra brl bvc bvs clc cld cli clv cmp cpx cpy dec dex dey eor inc inx iny jml jmp jsr lda ldx ldy lsr mvn mvp nop ora pha phb phd phk php phx phy pla plp plb pld plk plx ply rep rol ror rti rtl rts sbc sec sed sei sep sta stp stx sty stz tax tay tcs tsx txa txs txy tya tyx wai xba xce</Keywords>
             <Keywords name="Keywords2">append include insert end exit module endmod section ends org origin equ equal gequ defl set var extern external xref externs global public xdef globals message messg efunc incdebug case chip chkimmed comment dbreg dpage longa longi radix spaces llchar bit7 mask squote twochar ascii asc fcc date da byte db defb fcb string dc defw dw fdb word dbyte dl long longw lword blkb blkw blkl defs ds rmb dsa dsb dsl dsw apwdc float double macro endm macend argchk macfirst macdelim macexit rept endr pl pw top heading nam title ttl sttl subtitle subttl eject pag page list nlist nolist inclist asclist condlist maclist mlist mnlist pass1</Keywords>
-            <Keywords name="Keywords3">65c02 w65c02s 65816 on off </Keywords>
+            <Keywords name="Keywords3">65c02 w65c02s 65816 on off</Keywords>
             <Keywords name="Keywords4">ifma ifnma endc endif cond if iffalse ifntrue iftrue ifntrue ifz ifnz else ifabs ifnabs ifrel ifnrel ifdef ifndef ifdiff ifndiff ifsame ifnsame ifext ifnext ifpage0 ifnpage0 iflonga iflongi ifshorta ifshorti ifmatch</Keywords>
-            <Keywords name="Keywords5"># | ! &lt; &gt;  &gt;&gt;  </Keywords>
+            <Keywords name="Keywords5"># | ! &lt; &gt; &gt;&gt;</Keywords>
             <Keywords name="Keywords6"></Keywords>
             <Keywords name="Keywords7">a x y</Keywords>
             <Keywords name="Keywords8"></Keywords>
@@ -38,10 +38,10 @@
             <WordsStyle name="DEFAULT" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="COMMENTS" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="LINE COMMENTS" fgColor="008080" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
-            <WordsStyle name="NUMBERS" fgColor="800040" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="NUMBERS" fgColor="000080" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="KEYWORDS1" fgColor="0000FF" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="KEYWORDS2" fgColor="008000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
-            <WordsStyle name="KEYWORDS3" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="KEYWORDS3" fgColor="004040" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="KEYWORDS4" fgColor="008080" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="KEYWORDS5" fgColor="0080C0" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="KEYWORDS6" fgColor="FF00FF" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
@@ -53,7 +53,7 @@
             <WordsStyle name="FOLDER IN COMMENT" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="DELIMITERS1" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="DELIMITERS2" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
-            <WordsStyle name="DELIMITERS3" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
+            <WordsStyle name="DELIMITERS3" fgColor="000080" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="DELIMITERS4" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="DELIMITERS5" fgColor="FF0000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />
             <WordsStyle name="DELIMITERS6" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" nesting="0" />

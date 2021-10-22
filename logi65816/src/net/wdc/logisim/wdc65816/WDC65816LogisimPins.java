@@ -3,13 +3,13 @@ package net.wdc.logisim.wdc65816;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceState;
-import net.wdc.logisim.common.LogisimPins;
+import net.logisim.common.LogisimPins;
 import net.wdc.wdc65816.CpuSnapshot;
 import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.WDC65816Pins;
 
 import static net.util.IntUtil.toByte;
-import static net.wdc.logisim.wdc65816.Logisim65816Factory.*;
+import static net.wdc.logisim.wdc65816.WDC65816LogisimFactory.*;
 
 public class WDC65816LogisimPins
     extends LogisimPins

@@ -1,4 +1,4 @@
-package net.wdc.logisim.common;
+package net.logisim.common;
 
 import static com.cburch.logisim.instance.Port.*;
 

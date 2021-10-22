@@ -1,23 +1,26 @@
-package net.simulation.gate;
+package net.nexperia.simulation;
 
+import net.nexperia.lvc4245.LVC4245Pins;
 import net.simulation.common.*;
+import net.simulation.gate.Tickable;
 import net.util.EmulatorException;
 
-public class Transceiver
+public class LVC4245TickablePins
     extends Tickable
+    implements LVC4245Pins
 {
   protected Omniport aPort;
   protected Omniport bPort;
   protected Uniport outputEnableB;
   protected Uniport dir;
 
-  public Transceiver(Tickables tickables,
-                     String name,
-                     int width,
-                     Bus aBus,
-                     Bus bBus,
-                     Trace outputEnabledBTrace,
-                     Trace dirTrace)
+  public LVC4245TickablePins(Tickables tickables,
+                             String name,
+                             int width,
+                             Bus aBus,
+                             Bus bBus,
+                             Trace outputEnabledBTrace,
+                             Trace dirTrace)
   {
     super(tickables, name);
     this.aPort = new Omniport(this, "A", width);
@@ -122,4 +125,3 @@ public class Transceiver
     return "Bus Transceiver";
   }
 }
-

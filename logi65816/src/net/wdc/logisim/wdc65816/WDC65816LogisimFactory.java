@@ -1,18 +1,15 @@
 package net.wdc.logisim.wdc65816;
 
-import com.cburch.logisim.data.Bounds;
-import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.util.GraphicsUtil;
-import net.wdc.logisim.common.ComponentDescription;
-import net.wdc.logisim.common.LogisimFactory;
+import net.logisim.common.ComponentDescription;
+import net.logisim.common.LogisimFactory;
 import net.wdc.wdc65816.WDC65816;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
-import static net.wdc.logisim.common.PortDescription.*;
+import static net.logisim.common.PortDescription.*;
 
-public class Logisim65816Factory
+public class WDC65816LogisimFactory
     extends LogisimFactory<WDC65816LogisimPins>
 {
   // Left side, top to bottom
@@ -35,10 +32,10 @@ public class Logisim65816Factory
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_AddressBus = 15;
 
-  public Logisim65816Factory()
+  public WDC65816LogisimFactory()
   {
     super("W65C816S",
-          new ComponentDescription(240, 240, 10,
+          new ComponentDescription(240, 240, 10, false,
                                    inputShared(PORT_ABORTB, "ABORTB").setTooltip("Abort current instruction (input: active low)"),
                                    inputShared(PORT_IRQB, "IRQB").setTooltip("Interrupt request (input: active low)"),
                                    inputShared(PORT_NMIB, "NMIB").setTooltip("Non-maskable interrupt (input: active low)"),
@@ -60,64 +57,44 @@ public class Logisim65816Factory
     );
   }
 
-  public void paintInstance(InstancePainter painter)
+  @Override
+  protected void paint(WDC65816LogisimPins instance, Graphics2D graphics2D)
   {
-    WDC65816LogisimPins instance = getOrCreateInstance(painter);
-    paintPorts(painter, instance);
+    int topOffset = 30;
+    int width8Bit = 38;
+    int width16Bit = 52;
+    int width24Bit = 70;
 
-    Graphics g = painter.getGraphics();
-    if (g instanceof Graphics2D)
+    WDC65816 cpu = instance.getCpu();
+    boolean isOpcodeValid = cpu.getCycle() != 0;
+    drawInternal(graphics2D, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
+    drawInternal(graphics2D, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
+    drawInternal(graphics2D, topOffset + 40, width8Bit, "Cycle:", Integer.toString(cpu.getCycle()), true);
+    drawInternal(graphics2D, topOffset + 60, width16Bit, "Accumulator:", cpu.getAccumulatorValueHex(), true);
+    drawInternal(graphics2D, topOffset + 80, width16Bit, "X Index:", cpu.getXValueHex(), true);
+    drawInternal(graphics2D, topOffset + 100, width16Bit, "Y Index:", cpu.getYValueHex(), true);
+    drawInternal(graphics2D, topOffset + 120, width16Bit, "Stack", cpu.getStackValueHex(), true);
+    drawInternal(graphics2D, topOffset + 140, width24Bit, "P-Counter:", cpu.getProgramCounterValueHex(), true);
+    drawInternal(graphics2D, topOffset + 160, width8Bit, "Data Bank:", cpu.getDataBankValueHex(), true);
+
+    int processorStatusTopOffset = topOffset + 185;
+    boolean emulationMode = cpu.isEmulation();
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -80, "E", emulationMode);
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -60, "C", cpu.isCarry());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -40, "Z", cpu.isZeroFlag());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -20, "I", cpu.isInterruptDisable());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, 0, "D", cpu.isDecimal());
+    if (emulationMode)
     {
-      Font oldFont = g.getFont();
-      g.setFont(oldFont.deriveFont(Font.BOLD));
-      Bounds bds = painter.getBounds();
-      Graphics2D g2 = (Graphics2D) g;
-
-      AffineTransform oldTransform = g2.getTransform();
-      AffineTransform newTransform = (AffineTransform) oldTransform.clone();
-      newTransform.translate(bds.getX() + bds.getWidth() / 2.0, bds.getY() + bds.getHeight() / 2.0);
-      g2.setTransform(newTransform);
-      GraphicsUtil.drawCenteredText(g, getName(), 0, description.getTopYPlusMargin());
-
-      int topOffset = 30;
-      int width8Bit = 38;
-      int width16Bit = 52;
-      int width24Bit = 70;
-
-      WDC65816 cpu = instance.getCpu();
-      boolean isOpcodeValid = cpu.getCycle() != 0;
-      drawInternal(g, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
-      drawInternal(g, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
-      drawInternal(g, topOffset + 40, width8Bit, "Cycle:", Integer.toString(cpu.getCycle()), true);
-      drawInternal(g, topOffset + 60, width16Bit, "Accumulator:", cpu.getAccumulatorValueHex(), true);
-      drawInternal(g, topOffset + 80, width16Bit, "X Index:", cpu.getXValueHex(), true);
-      drawInternal(g, topOffset + 100, width16Bit, "Y Index:", cpu.getYValueHex(), true);
-      drawInternal(g, topOffset + 120, width16Bit, "Stack", cpu.getStackValueHex(), true);
-      drawInternal(g, topOffset + 140, width24Bit, "P-Counter:", cpu.getProgramCounterValueHex(), true);
-      drawInternal(g, topOffset + 160, width8Bit, "Data Bank:", cpu.getDataBankValueHex(), true);
-
-      int processorStatusTopOffset = topOffset + 185;
-      boolean emulationMode = cpu.isEmulation();
-      drawProcessorStatus(g, processorStatusTopOffset, -80, "E", emulationMode);
-      drawProcessorStatus(g, processorStatusTopOffset, -60, "C", cpu.isCarry());
-      drawProcessorStatus(g, processorStatusTopOffset, -40, "Z", cpu.isZeroFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, -20, "I", cpu.isInterruptDisable());
-      drawProcessorStatus(g, processorStatusTopOffset, 0, "D", cpu.isDecimal());
-      if (emulationMode)
-      {
-        drawProcessorStatus(g, processorStatusTopOffset, 20, "B", cpu.isBreak());
-      }
-      else
-      {
-        drawProcessorStatus(g, processorStatusTopOffset, 20, "X", cpu.isIndex8Bit());
-        drawProcessorStatus(g, processorStatusTopOffset, 40, "M", cpu.isMemory8Bit());
-      }
-      drawProcessorStatus(g, processorStatusTopOffset, 60, "V", cpu.isOverflowFlag());
-      drawProcessorStatus(g, processorStatusTopOffset, 80, "N", cpu.isNegative());
-
-      g2.setTransform(oldTransform);
-      g.setFont(oldFont);
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 20, "B", cpu.isBreak());
     }
+    else
+    {
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 20, "X", cpu.isIndex8Bit());
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 40, "M", cpu.isMemory8Bit());
+    }
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, 60, "V", cpu.isOverflowFlag());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, 80, "N", cpu.isNegative());
   }
 
   private void drawProcessorStatus(Graphics g, int topOffset, int horizontalPosition, String flag, boolean black)

@@ -1,13 +1,14 @@
-package net.wdc.logisim.common;
+package net.logisim.common;
 
+import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
-import com.cburch.logisim.instance.InstanceFactory;
-import com.cburch.logisim.instance.InstancePainter;
-import com.cburch.logisim.instance.InstanceState;
-import com.cburch.logisim.instance.Port;
+import com.cburch.logisim.instance.*;
+import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,6 +23,37 @@ public abstract class LogisimFactory<T extends LogisimPins>
   public LogisimFactory(String name, ComponentDescription description)
   {
     super(name);
+    Attribute[] attributesNames;
+    Object[] attributeDefaults;
+    if (description.canChangeDirection())
+    {
+      attributesNames = new Attribute[]{
+          StdAttr.FACING,
+          StdAttr.LABEL,
+          StdAttr.LABEL_FONT,
+          };
+      attributeDefaults = new Object[]{
+          Direction.EAST,
+          "",
+          StdAttr.DEFAULT_LABEL_FONT,
+          };
+    }
+    else
+    {
+      attributesNames = new Attribute[]{
+          StdAttr.LABEL,
+          StdAttr.LABEL_FONT,
+          };
+      attributeDefaults = new Object[]{
+          "",
+          StdAttr.DEFAULT_LABEL_FONT,
+          };
+    }
+
+    setAttributes(
+        attributesNames,
+        attributeDefaults);
+
     this.description = description;
     this.portMap = new LinkedHashMap<>();
     for (PortDescription portDescription : description.getPortDescriptions())
@@ -109,6 +141,45 @@ public abstract class LogisimFactory<T extends LogisimPins>
     instance.setInstanceState(instanceState);
     instance.tick(instanceState);
   }
+
+  public void paintInstance(InstancePainter painter)
+  {
+    Graphics g = painter.getGraphics();
+    if (g instanceof Graphics2D)
+    {
+      Graphics2D graphics2D = (Graphics2D) g;
+      T instance = getOrCreateInstance(painter);
+      paintPorts(painter, instance);
+
+      Font oldFont = graphics2D.getFont();
+      graphics2D.setFont(oldFont.deriveFont(Font.BOLD));
+      Bounds bounds = painter.getBounds();
+
+      AffineTransform oldTransform = graphics2D.getTransform();
+      AffineTransform newTransform = (AffineTransform) oldTransform.clone();
+      if (description.canChangeDirection())
+      {
+        Direction direction = painter.getAttributeValue(StdAttr.FACING);
+        if (direction != null && direction != Direction.EAST)
+        {
+          var rotate = 0.0;
+          rotate = -direction.toRadians();
+          newTransform.rotate(rotate);
+        }
+      }
+
+      newTransform.translate(bounds.getX() + bounds.getWidth() / 2.0, bounds.getY() + bounds.getHeight() / 2.0);
+      graphics2D.setTransform(newTransform);
+      GraphicsUtil.drawCenteredText(graphics2D, getName(), 0, description.getTopYPlusMargin());
+
+      paint(instance, graphics2D);
+
+      graphics2D.setTransform(oldTransform);
+      graphics2D.setFont(oldFont);
+    }
+  }
+
+  protected abstract void paint(T instance, Graphics2D graphics2D);
 
   protected abstract T createInstance();
 }

@@ -1,4 +1,4 @@
-package net.wdc.logisim.common;
+package net.logisim.common;
 
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;

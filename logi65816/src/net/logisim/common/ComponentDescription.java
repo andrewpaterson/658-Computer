@@ -1,4 +1,4 @@
-package net.wdc.logisim.common;
+package net.logisim.common;
 
 public class ComponentDescription
 {
@@ -16,10 +16,17 @@ public class ComponentDescription
   protected final int pinStartY;
   protected final int pinStopY;
 
+  protected boolean canChangeDirection;
+
   protected final PortDescription[] portDescriptions;
 
-  public ComponentDescription(int width, int height, int verticalMargin, PortDescription... portDescriptions)
+  public ComponentDescription(int width,
+                              int height,
+                              int verticalMargin,
+                              boolean canChangeDirection,
+                              PortDescription... portDescriptions)
   {
+    this.canChangeDirection = canChangeDirection;
     this.portDescriptions = portDescriptions;
     this.pinsPerSide = portDescriptions.length / 2 + portDescriptions.length % 2;
 
@@ -111,6 +118,11 @@ public class ComponentDescription
   public int pixelsPerPin()
   {
     return pixelsPerPin;
+  }
+
+  public boolean canChangeDirection()
+  {
+    return canChangeDirection;
   }
 }
 

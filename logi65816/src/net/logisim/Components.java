@@ -1,11 +1,11 @@
-package net.wdc.logisim;
+package net.logisim;
 
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
-import net.wdc.logisim.nexperia.transceiver.LVC4245Factory;
+import net.nexperia.logisim.LVC4245Factory;
 import net.wdc.logisim.wdc6502.Logisim6502Factory;
-import net.wdc.logisim.wdc65816.Logisim65816Factory;
+import net.wdc.logisim.wdc65816.WDC65816LogisimFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class Components
     try
     {
       tools = new ArrayList<>();
-      tools.add(new AddTool(new Logisim65816Factory()));
+      tools.add(new AddTool(new WDC65816LogisimFactory()));
       tools.add(new AddTool(new Logisim6502Factory()));
       tools.add(new AddTool(new LVC4245Factory()));
     }

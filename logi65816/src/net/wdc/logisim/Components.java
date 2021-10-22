@@ -3,6 +3,7 @@ package net.wdc.logisim;
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
+import net.wdc.logisim.nexperia.transceiver.LVC4245Factory;
 import net.wdc.logisim.wdc6502.Logisim6502Factory;
 import net.wdc.logisim.wdc65816.Logisim65816Factory;
 
@@ -21,6 +22,7 @@ public class Components
       tools = new ArrayList<>();
       tools.add(new AddTool(new Logisim65816Factory()));
       tools.add(new AddTool(new Logisim6502Factory()));
+      tools.add(new AddTool(new LVC4245Factory()));
     }
     catch (Exception e)
     {

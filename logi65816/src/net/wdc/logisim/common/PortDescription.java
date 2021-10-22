@@ -1,16 +1,16 @@
-package net.wdc.logisim.wdc65816;
+package net.wdc.logisim.common;
 
 import static com.cburch.logisim.instance.Port.*;
 
 public class PortDescription
 {
-  protected int index;
-  protected String lowName;
-  protected String highName;
-  protected String tooltip;
-  protected String type;
-  protected String exclusive;
-  protected int bitWidth;
+  public int index;
+  public String lowName;
+  public String highName;
+  public String tooltip;
+  public String type;
+  public String exclusive;
+  public int bitWidth;
 
   private PortDescription(int index, String name, String type, String exclusive, int bitWidth)
   {
@@ -27,6 +27,12 @@ public class PortDescription
   {
     this.highName = highName;
     this.tooltip = tooltip + " / " + highName;
+    return this;
+  }
+
+  public PortDescription setTooltip(String tooltip)
+  {
+    this.tooltip = tooltip;
     return this;
   }
 

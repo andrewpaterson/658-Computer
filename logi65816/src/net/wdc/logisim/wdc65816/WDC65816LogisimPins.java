@@ -2,8 +2,8 @@ package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
-import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
+import net.wdc.logisim.common.LogisimPins;
 import net.wdc.wdc65816.CpuSnapshot;
 import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.WDC65816Pins;
@@ -12,33 +12,19 @@ import static net.util.IntUtil.toByte;
 import static net.wdc.logisim.wdc65816.Logisim65816Factory.*;
 
 public class WDC65816LogisimPins
-    implements WDC65816Pins,
-               InstanceData
+    extends LogisimPins
+    implements WDC65816Pins
+
 {
-  private WDC65816 cpu;
+  protected WDC65816 cpu;
 
   protected CpuSnapshot finalSnapshot;
   protected boolean clock;
-
-  private InstanceState instanceState;
 
   public WDC65816LogisimPins()
   {
     new WDC65816(this);
     finalSnapshot = null;
-  }
-
-  @Override
-  public Object clone()
-  {
-    try
-    {
-      return super.clone();
-    }
-    catch (CloneNotSupportedException e)
-    {
-      return null;
-    }
   }
 
   @Override
@@ -126,7 +112,6 @@ public class WDC65816LogisimPins
   public void setValidProgramAddress(boolean validProgramAddress)
   {
     setPort(PORT_VPA, validProgramAddress, 10);
-
   }
 
   @Override
@@ -189,16 +174,10 @@ public class WDC65816LogisimPins
     instanceState.setPort(port, value ? Value.TRUE : Value.FALSE, delay);
   }
 
-  public void setInstanceState(InstanceState instanceState)
-  {
-    this.instanceState = instanceState;
-  }
-
+  @Override
   public void tick(InstanceState instanceState)
   {
     boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
-
-    setInstanceState(instanceState);
 
     if ((this.clock != clock) && (finalSnapshot != null))
     {
@@ -212,6 +191,12 @@ public class WDC65816LogisimPins
     cpu.tick();
     finalSnapshot = cpu.createCpuSnapshot();
     cpu.restoreCpuFromSnapshot(snapshot);
+  }
+
+  @Override
+  public boolean isClockHigh()
+  {
+    return cpu.isClock();
   }
 }
 

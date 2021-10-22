@@ -1,37 +1,20 @@
 package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.Bounds;
-import com.cburch.logisim.data.Direction;
-import com.cburch.logisim.instance.InstanceFactory;
 import com.cburch.logisim.instance.InstancePainter;
-import com.cburch.logisim.instance.InstanceState;
-import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
-import com.cburch.logisim.util.StringGetter;
+import net.wdc.logisim.common.ComponentDescription;
+import net.wdc.logisim.common.LogisimFactory;
 import net.wdc.wdc65816.WDC65816;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
+import static net.wdc.logisim.common.PortDescription.*;
 
 public class Logisim65816Factory
-    extends InstanceFactory
+    extends LogisimFactory<WDC65816LogisimPins>
 {
-  protected static final int V_MARGIN = 10;
-  protected static final int PINS_PER_SIDE = 8;
-  protected static final int PIXELS_PER_PIN = 20;
-  protected static final int PIN_TOP_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / -2) - V_MARGIN;
-  protected static final int PIN_BOT_Y = ((PINS_PER_SIDE - 1) * PIXELS_PER_PIN / 2) + V_MARGIN;
-
-  protected static final int LEFT_X = -120;
-  protected static final int RIGHT_X = 120;
-  protected static final int TOP_Y = -120 - V_MARGIN;
-  protected static final int BOT_Y = 120 + V_MARGIN;
-  protected static final int PIN_START_Y = PIN_TOP_Y + V_MARGIN;
-  protected static final int PIN_STOP_Y = PIN_BOT_Y - V_MARGIN;
-
   // Left side, top to bottom
   protected static final int PORT_ABORTB = 0;
   protected static final int PORT_IRQB = 1;
@@ -52,78 +35,35 @@ public class Logisim65816Factory
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_AddressBus = 15;
 
-  protected final Map<Integer, PortDescription> portInfos;
-
   public Logisim65816Factory()
   {
-    super("W65C816S");
+    super("W65C816S",
+          new ComponentDescription(240, 240, 10,
+                                   inputShared(PORT_ABORTB, "ABORTB").setTooltip("Abort current instruction (input: active low)"),
+                                   inputShared(PORT_IRQB, "IRQB").setTooltip("Interrupt request (input: active low)"),
+                                   inputShared(PORT_NMIB, "NMIB").setTooltip("Non-maskable interrupt (input: active low)"),
+                                   inputShared(PORT_RESB, "RESB").setTooltip("Reset (input: active low)"),
+                                   inputShared(PORT_PHI2, "PHI2").setTooltip("Clock (input)"),
+                                   outputExclusive(PORT_MX, "M").setHighName("X").setTooltip("Memory width / Index width (8bit high, 16bit low)"),
+                                   outputExclusive(PORT_E, "E").setTooltip("Emulation mode (output: emulation high, native low)"),
+                                   outputExclusive(PORT_MLB, "MLB").setTooltip("Memory lock (output: read-modify-write low)"),
 
-    PortDescription[] portDescriptions = new PortDescription[]
-        {
-            PortDescription.inputShared(PORT_ABORTB, "ABORT"),
-            PortDescription.inputShared(PORT_IRQB, "IRQB"),
-            PortDescription.inputShared(PORT_NMIB, "NMIB"),
-            PortDescription.inputShared(PORT_RESB, "RESB"),
-            PortDescription.inputShared(PORT_PHI2, "PHI2"),
-            PortDescription.outputExclusive(PORT_MX, "M").setHighName("X"),
-            PortDescription.outputExclusive(PORT_E, "E"),
-            PortDescription.outputExclusive(PORT_MLB, "MLB"),
-
-            PortDescription.inputShared(PORT_BE, "BE"),
-            PortDescription.outputExclusive(PORT_VPB, "VPB"),
-            PortDescription.outputExclusive(PORT_VPA, "VPA"),
-            PortDescription.outputExclusive(PORT_VDA, "VDA"),
-            PortDescription.inoutShared(PORT_RDY, "RDY"),
-            PortDescription.outputShared(PORT_RWB, "RWB"),
-            PortDescription.inoutShared(PORT_DataBus, "D", 8).setHighName("BA"),
-            PortDescription.outputShared(PORT_AddressBus, "A", 16)};
-
-    this.portInfos = new LinkedHashMap<>();
-    for (PortDescription portDescription : portDescriptions)
-    {
-      this.portInfos.put(portDescription.index, portDescription);
-    }
-
-    setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
-    addStandardPins(this.portInfos);
-  }
-
-  public WDC65816LogisimPins getOrCreateInstance(InstanceState instanceState)
-  {
-    WDC65816LogisimPins instance = (WDC65816LogisimPins) instanceState.getData();
-    if (instance == null)
-    {
-      instance = new WDC65816LogisimPins();
-      instanceState.setData(instance);
-    }
-    return instance;
+                                   inputShared(PORT_BE, "BE").setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low"),
+                                   outputExclusive(PORT_VPB, "VPB").setTooltip("Interrupt vector pull (output: fetching interrupt address low)"),
+                                   outputExclusive(PORT_VPA, "VPA").setTooltip("Valid program address (output: valid high, invalid low)"),
+                                   outputExclusive(PORT_VDA, "VDA").setTooltip("Valid data address (output: valid high, invalid low)"),
+                                   inoutShared(PORT_RDY, "RDY").setTooltip("Ready (bi-directional - see data sheet)"),
+                                   outputShared(PORT_RWB, "RWB").setTooltip("Read / Write (output: read high, write low)"),
+                                   inoutShared(PORT_DataBus, "D", 8).setHighName("BA").setTooltip("Data / Bank address (bi-directional - see data sheet)"),
+                                   outputShared(PORT_AddressBus, "A", 16).setTooltip("Address (output)")
+          )
+    );
   }
 
   public void paintInstance(InstancePainter painter)
   {
     WDC65816LogisimPins instance = getOrCreateInstance(painter);
-    WDC65816 cpu = instance.getCpu();
-    boolean clock = cpu.isClock();
-
-    painter.drawBounds();
-    for (Integer index : portInfos.keySet())
-    {
-      PortDescription portDescription = portInfos.get(index);
-      if (portDescription != null)
-      {
-        Direction dir = index < Logisim65816Factory.PINS_PER_SIDE ? Direction.EAST : Direction.WEST;
-        String name;
-        if (!clock)
-        {
-          name = portDescription.lowName;
-        }
-        else
-        {
-          name = portDescription.highName;
-        }
-        painter.drawPort(portDescription.index, name, dir);
-      }
-    }
+    paintPorts(painter, instance);
 
     Graphics g = painter.getGraphics();
     if (g instanceof Graphics2D)
@@ -137,13 +77,14 @@ public class Logisim65816Factory
       AffineTransform newTransform = (AffineTransform) oldTransform.clone();
       newTransform.translate(bds.getX() + bds.getWidth() / 2.0, bds.getY() + bds.getHeight() / 2.0);
       g2.setTransform(newTransform);
-      GraphicsUtil.drawCenteredText(g, "W65C816S", 0, TOP_Y + V_MARGIN);
+      GraphicsUtil.drawCenteredText(g, getName(), 0, description.getTopYPlusMargin());
 
       int topOffset = 30;
       int width8Bit = 38;
       int width16Bit = 52;
       int width24Bit = 70;
 
+      WDC65816 cpu = instance.getCpu();
       boolean isOpcodeValid = cpu.getCycle() != 0;
       drawInternal(g, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
       drawInternal(g, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
@@ -181,10 +122,20 @@ public class Logisim65816Factory
 
   private void drawProcessorStatus(Graphics g, int topOffset, int horizontalPosition, String flag, boolean black)
   {
-    int top = TOP_Y + V_MARGIN + topOffset;
+    int top = description.getTopYPlusMargin() + topOffset;
     g.drawRect(horizontalPosition - 7, top - 5, 15, 15);
     Color oldColour = setColour(g, black);
     GraphicsUtil.drawText(g, flag, horizontalPosition, top, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER);
+    g.setColor(oldColour);
+  }
+
+  private void drawInternal(Graphics g, int topOffset, int rectangleWidth, String label, String value, boolean black)
+  {
+    int opcodeMnemonicTop = description.getTopYPlusMargin() + topOffset;
+    g.drawRect(15, opcodeMnemonicTop - 5, rectangleWidth, 15);
+    GraphicsUtil.drawText(g, label, 0, opcodeMnemonicTop, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
+    Color oldColour = setColour(g, black);
+    GraphicsUtil.drawText(g, value, 20, opcodeMnemonicTop, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
     g.setColor(oldColour);
   }
 
@@ -202,55 +153,10 @@ public class Logisim65816Factory
     return oldColour;
   }
 
-  private void drawInternal(Graphics g, int topOffset, int rectangleWidth, String label, String value, boolean black)
-  {
-    int opcodeMnemonicTop = TOP_Y + V_MARGIN + topOffset;
-    g.drawRect(15, opcodeMnemonicTop - 5, rectangleWidth, 15);
-    GraphicsUtil.drawText(g, label, 0, opcodeMnemonicTop, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
-    Color oldColour = setColour(g, black);
-    GraphicsUtil.drawText(g, value, 20, opcodeMnemonicTop, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
-    g.setColor(oldColour);
-  }
-
   @Override
-  public void propagate(InstanceState instanceState)
+  protected WDC65816LogisimPins createInstance()
   {
-    WDC65816LogisimPins instance = getOrCreateInstance(instanceState);
-    instance.tick(instanceState);
-  }
-
-  protected void addStandardPins(Map<Integer, PortDescription> portInfos)
-  {
-    ArrayList<Port> ports = new ArrayList<>();
-    for (Integer index : portInfos.keySet())
-    {
-      PortDescription info = portInfos.get(index);
-      if (info == null)
-      {
-        continue;
-      }
-      boolean isRightSide = index >= Logisim65816Factory.PINS_PER_SIDE;
-      int pinPerSide = isRightSide ? index - Logisim65816Factory.PINS_PER_SIDE : index;
-      Port port;
-      if (isRightSide)
-      {
-        port = new Port(Logisim65816Factory.RIGHT_X, Logisim65816Factory.PIN_STOP_Y - pinPerSide * Logisim65816Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
-      }
-      else
-      {
-        port = new Port(Logisim65816Factory.LEFT_X, Logisim65816Factory.PIN_START_Y + pinPerSide * Logisim65816Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
-      }
-      port.setToolTip(new StringGetter()
-      {
-        @Override
-        public String toString()
-        {
-          return info.tooltip;
-        }
-      });
-      ports.add(port);
-    }
-    setPorts(ports);
+    return new WDC65816LogisimPins();
   }
 }
 

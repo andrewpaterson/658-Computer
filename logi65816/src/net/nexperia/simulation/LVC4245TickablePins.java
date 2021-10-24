@@ -1,14 +1,16 @@
 package net.nexperia.simulation;
 
+import net.nexperia.lvc4245.LVC4245;
 import net.nexperia.lvc4245.LVC4245Pins;
 import net.simulation.common.*;
-import net.simulation.common.Tickable;
 import net.util.EmulatorException;
 
 public class LVC4245TickablePins
     extends Tickable
     implements LVC4245Pins
 {
+  protected LVC4245 transceiver;
+
   protected Omniport aPort;
   protected Omniport bPort;
   protected Uniport outputEnableB;
@@ -35,9 +37,14 @@ public class LVC4245TickablePins
   }
 
   @Override
+  public void setTransceiver(LVC4245 transceiver)
+  {
+    this.transceiver = transceiver;
+  }
+
+  @Override
   public void startPropagation()
   {
-
   }
 
   @Override
@@ -87,7 +94,15 @@ public class LVC4245TickablePins
     {
       output.unset();
     }
-    else if (outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow())
+    else
+    {
+      transmit(outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow(), input, output);
+    }
+  }
+
+  private void transmit(boolean outputEnabled, Omniport input, Omniport output)
+  {
+    if (outputEnabled)
     {
       TraceValue readValue = input.read();
       if (readValue.isError() || readValue.isNotConnected())
@@ -104,13 +119,9 @@ public class LVC4245TickablePins
         output.writeAllPinsBool(value);
       }
     }
-    else if (outputEnabledBValue.isHigh())
-    {
-      output.highImpedance();
-    }
     else
     {
-      throw new EmulatorException(getDescription() + " connections are in an impossible state.");
+      output.highImpedance();
     }
   }
 
@@ -120,3 +131,4 @@ public class LVC4245TickablePins
     return "Bus Transceiver";
   }
 }
+

@@ -39,6 +39,6 @@ public abstract class LogisimPins
     return false;
   }
 
-  public abstract void tick(InstanceState instanceState);
+  public abstract void tick();
 }
 

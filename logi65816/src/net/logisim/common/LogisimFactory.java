@@ -127,7 +127,7 @@ public abstract class LogisimFactory<T extends LogisimPins>
   {
     T instance = getOrCreateInstance(instanceState);
     instance.setInstanceState(instanceState);
-    instance.tick(instanceState);
+    instance.tick();
   }
 
   public void paintInstance(InstancePainter painter)

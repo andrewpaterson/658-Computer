@@ -175,7 +175,7 @@ public class WDC65816LogisimPins
   }
 
   @Override
-  public void tick(InstanceState instanceState)
+  public void tick()
   {
     if (snapshot != null)
     {

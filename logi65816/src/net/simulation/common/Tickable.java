@@ -1,5 +1,6 @@
 package net.simulation.common;
 
+import net.nexperia.lvc4245.LVC4245;
 import net.simulation.common.Port;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;

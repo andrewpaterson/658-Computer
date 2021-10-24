@@ -2,7 +2,7 @@ package net.nexperia.simulation;
 
 import net.nexperia.lvc4245.LVC4245Pins;
 import net.simulation.common.*;
-import net.simulation.gate.Tickable;
+import net.simulation.common.Tickable;
 import net.util.EmulatorException;
 
 public class LVC4245TickablePins
@@ -70,11 +70,6 @@ public class LVC4245TickablePins
     {
       throw new EmulatorException(getDescription() + " connections are in an impossible state.");
     }
-  }
-
-  @Override
-  public void undoPropagation()
-  {
   }
 
   @Override

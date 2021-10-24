@@ -21,6 +21,14 @@ public abstract class LogisimPins
     }
   }
 
+  public void donePropagation()
+  {
+  }
+
+  public void startPropagation()
+  {
+  }
+
   public void setInstanceState(InstanceState instanceState)
   {
     this.instanceState = instanceState;

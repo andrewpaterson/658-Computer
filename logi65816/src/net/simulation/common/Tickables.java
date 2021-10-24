@@ -1,7 +1,5 @@
 package net.simulation.common;
 
-import net.simulation.gate.Tickable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,13 +51,6 @@ public class Tickables
         settled &= areSettled(oldTraceValues, newTraceValues);
       }
 
-      if (!settled)
-      {
-        for (Tickable tickable : tickables)
-        {
-          tickable.undoPropagation();
-        }
-      }
       count++;
     }
     while (!settled);

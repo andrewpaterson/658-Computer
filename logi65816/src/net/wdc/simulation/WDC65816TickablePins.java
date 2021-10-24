@@ -1,18 +1,17 @@
 package net.wdc.simulation;
 
 import net.simulation.common.*;
-import net.simulation.gate.Tickable;
 import net.util.EmulatorException;
-import net.wdc.wdc65816.CpuSnapshot;
-import net.wdc.wdc65816.WDC65816Pins;
 import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.WDC65816Pins;
+import net.wdc.wdc65816.WDC65816Snapshot;
 
 public class WDC65816TickablePins
     extends Tickable
     implements WDC65816Pins
 {
   private WDC65816 cpu;
-  private CpuSnapshot snapshot;
+  private WDC65816Snapshot snapshot;
 
   protected final Omniport addressBus;
   protected final Omniport dataBus;
@@ -89,8 +88,30 @@ public class WDC65816TickablePins
   }
 
   @Override
+  public void startPropagation()
+  {
+    snapshot = cpu.createCpuSnapshot();
+  }
+
+  @Override
+  public void donePropagation()
+  {
+    snapshot = null;
+  }
+
+  public void undoPropagation()
+  {
+    if (snapshot != null)
+    {
+      cpu.restoreCpuFromSnapshot(snapshot);
+    }
+  }
+
+  @Override
   public void propagate()
   {
+    undoPropagation();
+
     TraceValue clockValue = clock.read();
     TraceValue abortBValue = abortB.read();
     TraceValue busEnableValue = busEnable.read();
@@ -289,24 +310,6 @@ public class WDC65816TickablePins
   public boolean isNMI()
   {
     return !nmiB.getBoolAfterRead();
-  }
-
-  @Override
-  public void startPropagation()
-  {
-    snapshot = cpu.createCpuSnapshot();
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-    cpu.restoreCpuFromSnapshot(snapshot);
   }
 
   public void setAllOutputsUnknown()

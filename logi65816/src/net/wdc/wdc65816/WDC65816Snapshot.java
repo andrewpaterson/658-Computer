@@ -1,8 +1,10 @@
 package net.wdc.wdc65816;
 
+import net.simulation.common.Snapshot;
 import net.wdc.wdc65816.instruction.Instruction;
 
-public class CpuSnapshot
+public class WDC65816Snapshot
+    implements Snapshot
 {
   // Status register
   public boolean zeroFlag;
@@ -55,47 +57,47 @@ public class CpuSnapshot
   public Address abortProgramCounter;
   public int abortStackPointer;
 
-  public CpuSnapshot(boolean zeroFlag,
-                     boolean negativeFlag,
-                     boolean decimalFlag,
-                     boolean interruptDisableFlag,
-                     boolean accumulatorWidthFlag,
-                     boolean indexWidthFlag,
-                     boolean carryFlag,
-                     boolean emulationFlag,
-                     boolean overflowFlag,
-                     boolean breakFlag,
-                     int accumulator,
-                     int xIndex,
-                     int yIndex,
-                     int dataBank,
-                     int directPage,
-                     Address programCounter,
-                     int stackPointer,
-                     boolean clock,
-                     boolean fallingEdge,
-                     boolean risingEdge,
-                     boolean reset,
-                     boolean irq,
-                     boolean nmi,
-                     boolean abort,
-                     boolean busEnable,
-                     int cycle,
-                     Instruction opCode,
-                     boolean stopped,
-                     Address address,
-                     int data,
-                     int directOffset,
-                     Address newProgramCounter,
-                     boolean read,
-                     int abortProcessRegister,
-                     int abortAccumulator,
-                     int abortXIndex,
-                     int abortYIndex,
-                     int abortDataBank,
-                     int abortDirectPage,
-                     Address abortProgramCounter,
-                     int abortStackPointer)
+  public WDC65816Snapshot(boolean zeroFlag,
+                          boolean negativeFlag,
+                          boolean decimalFlag,
+                          boolean interruptDisableFlag,
+                          boolean accumulatorWidthFlag,
+                          boolean indexWidthFlag,
+                          boolean carryFlag,
+                          boolean emulationFlag,
+                          boolean overflowFlag,
+                          boolean breakFlag,
+                          int accumulator,
+                          int xIndex,
+                          int yIndex,
+                          int dataBank,
+                          int directPage,
+                          Address programCounter,
+                          int stackPointer,
+                          boolean clock,
+                          boolean fallingEdge,
+                          boolean risingEdge,
+                          boolean reset,
+                          boolean irq,
+                          boolean nmi,
+                          boolean abort,
+                          boolean busEnable,
+                          int cycle,
+                          Instruction opCode,
+                          boolean stopped,
+                          Address address,
+                          int data,
+                          int directOffset,
+                          Address newProgramCounter,
+                          boolean read,
+                          int abortProcessRegister,
+                          int abortAccumulator,
+                          int abortXIndex,
+                          int abortYIndex,
+                          int abortDataBank,
+                          int abortDirectPage,
+                          Address abortProgramCounter,
+                          int abortStackPointer)
   {
     this.zeroFlag = zeroFlag;
     this.negativeFlag = negativeFlag;
@@ -136,8 +138,8 @@ public class CpuSnapshot
     this.abortAccumulator = abortAccumulator;
     this.abortXIndex = abortXIndex;
     this.abortYIndex = abortYIndex;
-    this.abortDataBank =abortDataBank;
-    this.abortDirectPage =abortDirectPage;
+    this.abortDataBank = abortDataBank;
+    this.abortDirectPage = abortDirectPage;
     this.abortProgramCounter = abortProgramCounter;
     this.abortStackPointer = abortStackPointer;
   }

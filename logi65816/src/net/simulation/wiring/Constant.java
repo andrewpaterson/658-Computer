@@ -4,7 +4,7 @@ import net.simulation.common.Bus;
 import net.simulation.common.Omniport;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
-import net.simulation.gate.Tickable;
+import net.simulation.common.Tickable;
 
 public class Constant
     extends Tickable
@@ -52,11 +52,6 @@ public class Constant
   public void propagate()
   {
     value.writeAllPinsBool(constantValue);
-  }
-
-  @Override
-  public void undoPropagation()
-  {
   }
 
   @Override

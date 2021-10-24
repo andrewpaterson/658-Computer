@@ -1,4 +1,4 @@
-package net.simulation.gate;
+package net.simulation.common;
 
 import net.simulation.common.Port;
 import net.simulation.common.Tickables;
@@ -33,8 +33,6 @@ public abstract class Tickable
   public abstract void startPropagation();
 
   public abstract void propagate();
-
-  public abstract void undoPropagation();
 
   public abstract void donePropagation();
 

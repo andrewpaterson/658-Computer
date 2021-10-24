@@ -3,7 +3,7 @@ package net.simulation.wiring;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.common.Uniport;
-import net.simulation.gate.Tickable;
+import net.simulation.common.Tickable;
 
 public class ClockOscillator
     extends Tickable
@@ -23,11 +23,6 @@ public class ClockOscillator
   public void propagate()
   {
     out.writeBool(value);
-  }
-
-  @Override
-  public void undoPropagation()
-  {
   }
 
   @Override

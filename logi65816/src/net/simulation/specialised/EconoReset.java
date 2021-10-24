@@ -1,9 +1,9 @@
 package net.simulation.specialised;
 
+import net.simulation.common.Tickable;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.common.Uniport;
-import net.simulation.gate.Tickable;
 
 public class EconoReset
     extends Tickable
@@ -11,7 +11,7 @@ public class EconoReset
   private final Uniport out;
   private int count;
 
-  private int oldCount;
+  private EconoResetSnapshot snapshot;
 
   public EconoReset(Tickables tickables, String name, Trace out)
   {
@@ -19,17 +19,25 @@ public class EconoReset
     this.out = new Uniport(this, "Out");
     this.out.connect(out);
     this.count = 4;
+    this.snapshot = null;
   }
 
   @Override
   public void startPropagation()
   {
-    oldCount = count;
+    snapshot = createSnapshot();
+  }
+
+  private EconoResetSnapshot createSnapshot()
+  {
+    return new EconoResetSnapshot(count);
   }
 
   @Override
   public void propagate()
   {
+    undoPropagation();
+
     if (count > 0)
     {
       count--;
@@ -41,15 +49,23 @@ public class EconoReset
     }
   }
 
-  @Override
   public void undoPropagation()
   {
-    count = oldCount;
+    if (snapshot != null)
+    {
+      restoreFromSnapshot(snapshot);
+    }
+  }
+
+  private void restoreFromSnapshot(EconoResetSnapshot snapshot)
+  {
+    count = snapshot.count;
   }
 
   @Override
   public void donePropagation()
   {
+    snapshot = null;
   }
 
   @Override

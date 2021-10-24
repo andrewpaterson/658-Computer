@@ -1,9 +1,6 @@
 package net.simulation.gate;
 
-import net.simulation.common.Port;
-import net.simulation.common.Tickables;
-import net.simulation.common.TraceValue;
-import net.simulation.common.Uniport;
+import net.simulation.common.*;
 
 import java.util.List;
 
@@ -50,11 +47,6 @@ public abstract class LogicGate
 
   @Override
   public void startPropagation()
-  {
-  }
-
-  @Override
-  public void undoPropagation()
   {
   }
 

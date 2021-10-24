@@ -1,5 +1,8 @@
 package net.logisim.common;
 
+import com.cburch.logisim.circuit.Circuit;
+import com.cburch.logisim.circuit.CircuitState;
+import com.cburch.logisim.comp.Component;
 import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.Bounds;
 import com.cburch.logisim.data.Direction;
@@ -19,7 +22,9 @@ public abstract class LogisimFactory<T extends LogisimPins>
 {
   protected final Map<Integer, PortDescription> portMap;
   protected final ComponentDescription description;
+  private PropagationListener propagationListener;
 
+  @SuppressWarnings("rawtypes")
   public LogisimFactory(String name, ComponentDescription description)
   {
     super(name);
@@ -66,18 +71,6 @@ public abstract class LogisimFactory<T extends LogisimPins>
                                   description.getWidth(),
                                   description.getHeight()));
     addPins(this.portMap);
-  }
-
-  @SuppressWarnings("unchecked")
-  public T getOrCreateInstance(InstanceState instanceState)
-  {
-    T instance = (T) instanceState.getData();
-    if (instance == null)
-    {
-      instance = createInstance();
-      instanceState.setData(instance);
-    }
-    return instance;
   }
 
   protected void addPins(Map<Integer, PortDescription> portInfos)
@@ -179,8 +172,33 @@ public abstract class LogisimFactory<T extends LogisimPins>
     }
   }
 
-  protected abstract void paint(T instance, Graphics2D graphics2D);
+  public T getOrCreateInstance(InstanceState instanceState)
+  {
+    T instance = (T) instanceState.getData();
+    if (instance == null)
+    {
+      instance = createInstance();
+      instanceState.setData(instance);
+
+      propagationListener = new PropagationListener<>(instance);
+      instanceState.getProject().getSimulator().addSimulatorListener(propagationListener);
+    }
+    return instance;
+  }
+
+  @Override
+  public void removeComponent(Circuit circ, Component c, CircuitState state)
+  {
+    super.removeComponent(circ, c, state);
+    if (propagationListener != null)
+    {
+      state.getProject().getSimulator().removeSimulatorListener(propagationListener);
+    }
+    System.out.println("LogisimFactory.removeComponent");
+  }
 
   protected abstract T createInstance();
+
+  protected abstract void paint(T instance, Graphics2D graphics2D);
 }
 

@@ -1,7 +1,7 @@
 package net.simulation.memory;
 
 import net.simulation.common.*;
-import net.simulation.gate.Tickable;
+import net.simulation.common.Tickable;
 import net.util.EmulatorException;
 
 import static net.util.IntUtil.toByte;
@@ -18,6 +18,7 @@ public class Memory
   protected final Uniport outputEnableB;
   protected final Uniport chipEnableB;
 
+  protected boolean snapshot;
   protected boolean propagateWroteMemory;
   protected long oldAddress;
   protected int oldValue;
@@ -48,15 +49,20 @@ public class Memory
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
     this.size = bytes.length;
     this.propagateWroteMemory = false;
+    this.snapshot = false;
   }
 
   @Override
   public void startPropagation()
   {
+    snapshot = true;
+    propagateWroteMemory = false;
   }
 
   public void propagate()
   {
+    undoPropagation();
+
     propagateWroteMemory = false;
 
     TraceValue chipEnabledBValue = chipEnableB.read();
@@ -125,10 +131,9 @@ public class Memory
     }
   }
 
-  @Override
   public void undoPropagation()
   {
-    if (propagateWroteMemory)
+    if (snapshot && propagateWroteMemory)
     {
       setMemory(oldAddress, oldValue);
     }
@@ -137,6 +142,7 @@ public class Memory
   @Override
   public void donePropagation()
   {
+    snapshot = false;
   }
 
   @Override

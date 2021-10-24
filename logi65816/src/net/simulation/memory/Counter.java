@@ -1,7 +1,6 @@
 package net.simulation.memory;
 
 import net.simulation.common.*;
-import net.simulation.gate.Tickable;
 
 public class Counter
     extends Tickable
@@ -13,8 +12,7 @@ public class Counter
   protected long counter;
   protected long resetValue;
 
-  protected boolean previousPreviousClock;
-  protected long previousCounter;
+  protected CounterSnapshot snapshot;
 
   public Counter(Tickables tickables, String name, int width, Bus dataBus, Trace clockTrace)
   {
@@ -28,18 +26,21 @@ public class Counter
     previousClock = true;
     counter = 0;
     resetValue = 1L << width;
+
+    snapshot = null;
   }
 
   @Override
   public void startPropagation()
   {
-    previousCounter = counter;
-    previousPreviousClock = previousClock;
+    snapshot = new CounterSnapshot(previousClock, counter, resetValue);
   }
 
   @Override
   public void propagate()
   {
+    undoPropagation();
+
     TraceValue clockValue = phi2.read();
     if (clockValue.isError())
     {
@@ -72,16 +73,25 @@ public class Counter
     }
   }
 
-  @Override
   public void undoPropagation()
   {
-    counter = previousCounter;
-    previousClock = previousPreviousClock;
+    if (snapshot != null)
+    {
+      restoreFromSnapShot(snapshot);
+    }
+  }
+
+  private void restoreFromSnapShot(CounterSnapshot snapshot)
+  {
+    counter = snapshot.counter;
+    previousClock = snapshot.previousClock;
+    resetValue = snapshot.resetValue;
   }
 
   @Override
   public void donePropagation()
   {
+    snapshot = null;
   }
 
   @Override

@@ -1,7 +1,5 @@
 package net.simulation.common;
 
-import net.simulation.gate.Tickable;
-
 import java.util.Collection;
 import java.util.List;
 

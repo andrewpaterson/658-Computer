@@ -1,6 +1,5 @@
 package net.simulation.common;
 
-import net.simulation.gate.Tickable;
 import net.util.EmulatorException;
 
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceState;
 import net.logisim.common.LogisimPins;
-import net.wdc.wdc65816.CpuSnapshot;
+import net.wdc.wdc65816.WDC65816Snapshot;
 import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.WDC65816Pins;
 
@@ -18,13 +18,13 @@ public class WDC65816LogisimPins
 {
   protected WDC65816 cpu;
 
-  protected CpuSnapshot finalSnapshot;
+  protected WDC65816Snapshot snapshot;
   protected boolean clock;
 
   public WDC65816LogisimPins()
   {
     new WDC65816(this);
-    finalSnapshot = null;
+    snapshot = null;
   }
 
   @Override
@@ -177,20 +177,29 @@ public class WDC65816LogisimPins
   @Override
   public void tick(InstanceState instanceState)
   {
-    boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
-
-    if ((this.clock != clock) && (finalSnapshot != null))
+    if (snapshot != null)
     {
-      cpu.restoreCpuFromSnapshot(finalSnapshot);
-      finalSnapshot = null;
-      this.clock = clock;
+      cpu.restoreCpuFromSnapshot(snapshot);
     }
 
-    CpuSnapshot snapshot = cpu.createCpuSnapshot();
+    boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
+
     cpu.preTick(clock);
     cpu.tick();
-    finalSnapshot = cpu.createCpuSnapshot();
-    cpu.restoreCpuFromSnapshot(snapshot);
+  }
+
+  @Override
+  public void startPropagation()
+  {
+    snapshot = cpu.createCpuSnapshot();
+    System.out.println("WDC65816LogisimPins.startPropagation " + instanceState.getFactory().getName());
+  }
+
+  @Override
+  public void donePropagation()
+  {
+    System.out.println("WDC65816LogisimPins.donePropagation " + instanceState.getFactory().getName());
+    snapshot = null;
   }
 
   @Override

@@ -192,13 +192,11 @@ public class WDC65816LogisimPins
   public void startPropagation()
   {
     snapshot = cpu.createCpuSnapshot();
-    System.out.println("WDC65816LogisimPins.startPropagation " + instanceState.getFactory().getName());
   }
 
   @Override
   public void donePropagation()
   {
-    System.out.println("WDC65816LogisimPins.donePropagation " + instanceState.getFactory().getName());
     snapshot = null;
   }
 

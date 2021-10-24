@@ -11,8 +11,9 @@ public class PortDescription
   public String type;
   public String exclusive;
   public int bitWidth;
+  public boolean mustDraw;
 
-  private PortDescription(int index, String name, String type, String exclusive, int bitWidth)
+  private PortDescription(int index, String name, String type, String exclusive, int bitWidth, boolean mustDraw)
   {
     this.index = index;
     this.lowName = name;
@@ -21,6 +22,7 @@ public class PortDescription
     this.exclusive = exclusive;
     this.bitWidth = bitWidth;
     this.tooltip = name;
+    this.mustDraw = mustDraw;
   }
 
   public PortDescription setHighName(String highName)
@@ -38,32 +40,37 @@ public class PortDescription
 
   public static PortDescription outputShared(int index, String name, int pins)
   {
-    return new PortDescription(index, name, OUTPUT, SHARED, pins);
+    return new PortDescription(index, name, OUTPUT, SHARED, pins, true);
   }
 
   public static PortDescription inoutShared(int index, String name, int pins)
   {
-    return new PortDescription(index, name, INOUT, SHARED, pins);
+    return new PortDescription(index, name, INOUT, SHARED, pins, true);
   }
 
   public static PortDescription outputShared(int index, String name)
   {
-    return new PortDescription(index, name, OUTPUT, SHARED, 1);
+    return new PortDescription(index, name, OUTPUT, SHARED, 1, true);
   }
 
   public static PortDescription outputExclusive(int index, String name)
   {
-    return new PortDescription(index, name, OUTPUT, EXCLUSIVE, 1);
+    return new PortDescription(index, name, OUTPUT, EXCLUSIVE, 1, true);
   }
 
   public static PortDescription inputShared(int index, String name)
   {
-    return new PortDescription(index, name, INPUT, SHARED, 1);
+    return new PortDescription(index, name, INPUT, SHARED, 1, true);
   }
 
   public static PortDescription inoutShared(int index, String name)
   {
-    return new PortDescription(index, name, INOUT, SHARED, 1);
+    return new PortDescription(index, name, INOUT, SHARED, 1, true);
+  }
+
+  public static PortDescription blank()
+  {
+    return new PortDescription(-1, null, null, null, 0, false);
   }
 }
 

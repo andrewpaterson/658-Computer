@@ -13,16 +13,16 @@ import com.cburch.logisim.util.StringGetter;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 @SuppressWarnings("unchecked")
 public abstract class LogisimFactory<T extends LogisimPins>
     extends InstanceFactory
 {
-  protected final Map<Integer, PortDescription> portMap;
+  protected final List<PortDescription> portMap;
   protected final ComponentDescription description;
-  private PropagationListener propagationListener;
+  protected PropagationListener<T> propagationListener;
 
   @SuppressWarnings("rawtypes")
   public LogisimFactory(String name, ComponentDescription description)
@@ -60,11 +60,7 @@ public abstract class LogisimFactory<T extends LogisimPins>
         attributeDefaults);
 
     this.description = description;
-    this.portMap = new LinkedHashMap<>();
-    for (PortDescription portDescription : description.getPortDescriptions())
-    {
-      this.portMap.put(portDescription.index, portDescription);
-    }
+    this.portMap = Arrays.asList(description.getPortDescriptions());
 
     setOffsetBounds(Bounds.create(description.getLeft(),
                                   description.getTopY(),
@@ -73,36 +69,35 @@ public abstract class LogisimFactory<T extends LogisimPins>
     addPins(this.portMap);
   }
 
-  protected void addPins(Map<Integer, PortDescription> portInfos)
+  protected void addPins(List<PortDescription> portInfos)
   {
     ArrayList<Port> ports = new ArrayList<>();
-    for (Integer index : portInfos.keySet())
+    for (int index = 0; index < portInfos.size(); index++)
     {
-      PortDescription info = portInfos.get(index);
-      if (info == null)
+      PortDescription portDescription = portInfos.get(index);
+      if (portDescription.mustDraw)
       {
-        continue;
-      }
-      boolean isRightSide = index >= description.getPinsPerSide();
-      int pinPerSide = isRightSide ? index - description.getPinsPerSide() : index;
-      Port port;
-      if (isRightSide)
-      {
-        port = new Port(description.getRight(), description.getPinStop() - pinPerSide * description.pixelsPerPin(), info.type, info.bitWidth, info.exclusive);
-      }
-      else
-      {
-        port = new Port(description.getLeft(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), info.type, info.bitWidth, info.exclusive);
-      }
-      port.setToolTip(new StringGetter()
-      {
-        @Override
-        public String toString()
+        boolean isRightSide = index >= description.getPinsPerSide();
+        int pinPerSide = isRightSide ? index - description.getPinsPerSide() : index;
+        Port port;
+        if (isRightSide)
         {
-          return info.tooltip;
+          port = new Port(description.getRight(), description.getPinStop() - pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
         }
-      });
-      ports.add(port);
+        else
+        {
+          port = new Port(description.getLeft(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+        }
+        port.setToolTip(new StringGetter()
+        {
+          @Override
+          public String toString()
+          {
+            return portDescription.tooltip;
+          }
+        });
+        ports.add(port);
+      }
     }
     setPorts(ports);
   }
@@ -116,10 +111,10 @@ public abstract class LogisimFactory<T extends LogisimPins>
   {
     boolean clock = isClockHigh((T) instance);
     painter.drawBounds();
-    for (Integer index : portMap.keySet())
+    for (int index = 0; index < portMap.size(); index++)
     {
       PortDescription portDescription = portMap.get(index);
-      if (portDescription != null)
+      if (portDescription.mustDraw)
       {
         Direction dir = index < description.getPinsPerSide() ? Direction.EAST : Direction.WEST;
         painter.drawPort(portDescription.index, !clock ? portDescription.lowName : portDescription.highName, dir);
@@ -194,7 +189,6 @@ public abstract class LogisimFactory<T extends LogisimPins>
     {
       state.getProject().getSimulator().removeSimulatorListener(propagationListener);
     }
-    System.out.println("LogisimFactory.removeComponent");
   }
 
   protected abstract T createInstance();

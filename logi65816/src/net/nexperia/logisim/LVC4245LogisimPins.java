@@ -18,6 +18,7 @@ public class LVC4245LogisimPins
 
   public LVC4245LogisimPins()
   {
+    new LVC4245(this);
     this.ports = new int[2];
     ports[PORT_A_INDEX] = LVC4245Factory.PORT_A;
     ports[PORT_B_INDEX] = LVC4245Factory.PORT_B;
@@ -27,6 +28,12 @@ public class LVC4245LogisimPins
   public void setTransceiver(LVC4245 transceiver)
   {
     this.transceiver = transceiver;
+  }
+
+  @Override
+  public IntegratedCircuit getIntegratedCircuit()
+  {
+    return transceiver;
   }
 
   @Override
@@ -68,12 +75,6 @@ public class LVC4245LogisimPins
   public void setPortValue(int index, long value)
   {
     instanceState.setPort(ports[index], Value.createKnown(BitWidth.create(8), value), 2);
-  }
-
-  @Override
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return transceiver;
   }
 }
 

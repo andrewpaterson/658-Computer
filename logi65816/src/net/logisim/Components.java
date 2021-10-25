@@ -4,6 +4,7 @@ import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
 import net.nexperia.logisim.LVC4245Factory;
+import net.nexperia.logisim.LVC573Factory;
 import net.wdc.logisim.wdc6502.Logisim6502Factory;
 import net.wdc.logisim.wdc65816.WDC65816LogisimFactory;
 
@@ -22,6 +23,7 @@ public class Components
       tools = new ArrayList<>();
       tools.add(new AddTool(new WDC65816LogisimFactory()));
       tools.add(new AddTool(new Logisim6502Factory()));
+      tools.add(new AddTool(new LVC573Factory()));
       tools.add(new AddTool(new LVC4245Factory()));
     }
     catch (Exception e)

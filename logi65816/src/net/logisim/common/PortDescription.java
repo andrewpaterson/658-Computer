@@ -63,6 +63,11 @@ public class PortDescription
     return new PortDescription(index, name, INPUT, SHARED, 1, true);
   }
 
+  public static PortDescription inputShared(int index, String name, int pins)
+  {
+    return new PortDescription(index, name, INPUT, SHARED, pins, true);
+  }
+
   public static PortDescription inoutShared(int index, String name)
   {
     return new PortDescription(index, name, INOUT, SHARED, 1, true);

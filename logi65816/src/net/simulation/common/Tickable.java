@@ -1,10 +1,7 @@
 package net.simulation.common;
 
-import net.nexperia.lvc4245.LVC4245;
-import net.simulation.common.Port;
-import net.simulation.common.Tickables;
-import net.simulation.common.Trace;
-import net.simulation.common.TraceValue;
+import net.common.BusValue;
+import net.common.PinValue;
 import net.util.StringUtil;
 
 import java.util.ArrayList;
@@ -77,6 +74,48 @@ public abstract class Tickable
     else
     {
       return getType() + " \"" + name + "\"";
+    }
+  }
+
+  protected BusValue getBusValue(Omniport omniport)
+  {
+    TraceValue value = omniport.read();
+    if (value.isError())
+    {
+      return BusValue.error();
+    }
+    else if (value.isNotConnected())
+    {
+      return BusValue.notConnected();
+    }
+    else if (value.isUnsettled())
+    {
+      return BusValue.unknown();
+    }
+    else
+    {
+      return new BusValue(omniport.getPinsAsBoolAfterRead());
+    }
+  }
+
+  protected PinValue getPinValue(Uniport uniport)
+  {
+    TraceValue value = uniport.read();
+    if (value.isError())
+    {
+      return PinValue.Error;
+    }
+    else if (value.isNotConnected())
+    {
+      return PinValue.NotConnected;
+    }
+    else if (value.isUnsettled())
+    {
+      return PinValue.Unknown;
+    }
+    else
+    {
+      return value.isHigh() ? PinValue.High : PinValue.Low;
     }
   }
 

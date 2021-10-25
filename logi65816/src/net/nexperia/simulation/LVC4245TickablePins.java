@@ -1,9 +1,10 @@
 package net.nexperia.simulation;
 
+import net.common.BusValue;
+import net.common.PinValue;
 import net.nexperia.lvc4245.LVC4245;
 import net.nexperia.lvc4245.LVC4245Pins;
 import net.simulation.common.*;
-import net.util.EmulatorException;
 
 public class LVC4245TickablePins
     extends Tickable
@@ -11,8 +12,7 @@ public class LVC4245TickablePins
 {
   protected LVC4245 transceiver;
 
-  protected Omniport aPort;
-  protected Omniport bPort;
+  protected Omniport[] ports;
   protected Uniport outputEnableB;
   protected Uniport dir;
 
@@ -25,13 +25,14 @@ public class LVC4245TickablePins
                              Trace dirTrace)
   {
     super(tickables, name);
-    this.aPort = new Omniport(this, "A", width);
-    this.bPort = new Omniport(this, "B", width);
+    this.ports = new Omniport[2];
+    this.ports[PORT_A_INDEX] = new Omniport(this, "A", width);
+    this.ports[PORT_B_INDEX] = new Omniport(this, "B", width);
     this.outputEnableB = new Uniport(this, "OEB");
     this.dir = new Uniport(this, "DIR");
 
-    aPort.connect(aBus);
-    bPort.connect(bBus);
+    this.ports[PORT_A_INDEX].connect(aBus);
+    this.ports[PORT_B_INDEX].connect(bBus);
     outputEnableB.connect(outputEnabledBTrace);
     dir.connect(dirTrace);
   }
@@ -50,79 +51,54 @@ public class LVC4245TickablePins
   @Override
   public void propagate()
   {
-    TraceValue outputEnabledBValue = outputEnableB.read();
-    TraceValue dirValue = dir.read();
-    if (dirValue.isError() || dirValue.isNotConnected())
-    {
-      bPort.error();
-      aPort.error();
-      return;
-    }
-    else if (dirValue.isUnsettled())
-    {
-      bPort.unset();
-      aPort.unset();
-      return;
-    }
+    transceiver.tick();
+  }
 
-    if (dirValue.isLow())  //B -> A
-    {
-      transmit(outputEnabledBValue, bPort, aPort);
-    }
-    else if (dirValue.isHigh())  //A -> B
-    {
-      transmit(outputEnabledBValue, aPort, bPort);
-    }
-    else
-    {
-      throw new EmulatorException(getDescription() + " connections are in an impossible state.");
-    }
+  @Override
+  public void setPortError(int index)
+  {
+    ports[index].error();
+  }
+
+  @Override
+  public void setPortUnsettled(int index)
+  {
+    ports[index].unset();
+  }
+
+  @Override
+  public void setPortHighImpedance(int index)
+  {
+    ports[index].highImpedance();
+  }
+
+  @Override
+  public PinValue getDir()
+  {
+    return getPinValue(dir);
+  }
+
+  @Override
+  public PinValue getOEB()
+  {
+    return getPinValue(outputEnableB);
+  }
+
+  @Override
+  public BusValue getPortValue(int index)
+  {
+    return getBusValue(ports[index]);
+  }
+
+  @Override
+  public void setPortValue(int index, long value)
+  {
+    ports[index].writeAllPinsBool(value);
   }
 
   @Override
   public void donePropagation()
   {
-  }
-
-  private void transmit(TraceValue outputEnabledBValue, Omniport input, Omniport output)
-  {
-    if (outputEnabledBValue.isError())
-    {
-      output.error();
-    }
-    else if (outputEnabledBValue.isUnsettled())
-    {
-      output.unset();
-    }
-    else
-    {
-      transmit(outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow(), input, output);
-    }
-  }
-
-  private void transmit(boolean outputEnabled, Omniport input, Omniport output)
-  {
-    if (outputEnabled)
-    {
-      TraceValue readValue = input.read();
-      if (readValue.isError() || readValue.isNotConnected())
-      {
-        output.error();
-      }
-      else if (readValue.isUnsettled())
-      {
-        output.unset();
-      }
-      else
-      {
-        long value = input.getPinsAsBoolAfterRead();
-        output.writeAllPinsBool(value);
-      }
-    }
-    else
-    {
-      output.highImpedance();
-    }
   }
 
   @Override

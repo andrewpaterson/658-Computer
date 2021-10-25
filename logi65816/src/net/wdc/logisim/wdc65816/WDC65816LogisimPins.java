@@ -2,11 +2,10 @@ package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
-import com.cburch.logisim.instance.InstanceState;
 import net.logisim.common.LogisimPins;
-import net.wdc.wdc65816.WDC65816Snapshot;
 import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.WDC65816Pins;
+import net.wdc.wdc65816.WDC65816Snapshot;
 
 import static net.util.IntUtil.toByte;
 import static net.wdc.logisim.wdc65816.WDC65816LogisimFactory.*;
@@ -14,7 +13,6 @@ import static net.wdc.logisim.wdc65816.WDC65816LogisimFactory.*;
 public class WDC65816LogisimPins
     extends LogisimPins
     implements WDC65816Pins
-
 {
   protected WDC65816 cpu;
 
@@ -164,6 +162,12 @@ public class WDC65816LogisimPins
     instanceState.setPort(PORT_RWB, Value.UNKNOWN, 10);
   }
 
+  @Override
+  public boolean isClock()
+  {
+    return instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
+  }
+
   public WDC65816 getCpu()
   {
     return cpu;
@@ -177,14 +181,8 @@ public class WDC65816LogisimPins
   @Override
   public void tick()
   {
-    if (snapshot != null)
-    {
-      cpu.restoreCpuFromSnapshot(snapshot);
-    }
+    undoPropagation();
 
-    boolean clock = instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
-
-    cpu.preTick(clock);
     cpu.tick();
   }
 
@@ -192,6 +190,15 @@ public class WDC65816LogisimPins
   public void startPropagation()
   {
     snapshot = cpu.createCpuSnapshot();
+  }
+
+  @Override
+  public void undoPropagation()
+  {
+    if (snapshot != null)
+    {
+      cpu.restoreCpuFromSnapshot(snapshot);
+    }
   }
 
   @Override

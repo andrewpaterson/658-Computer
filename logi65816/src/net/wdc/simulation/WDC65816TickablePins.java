@@ -126,7 +126,6 @@ public class WDC65816TickablePins
         nmibValue.isValidOrUndefined() &&
         resetBValue.isValidOrUndefined())
     {
-      cpu.preTick(clock.getBoolAfterRead());
       cpu.tick();
     }
     else if (clockValue.isError() ||
@@ -165,6 +164,12 @@ public class WDC65816TickablePins
     this.addressBus.highImpedance();
     this.dataBus.highImpedance();
     this.rwB.highImpedance();
+  }
+
+  @Override
+  public boolean isClock()
+  {
+    return clock.getBoolAfterRead();
   }
 
   @Override

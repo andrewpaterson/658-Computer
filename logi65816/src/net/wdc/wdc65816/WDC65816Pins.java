@@ -39,5 +39,7 @@ public interface WDC65816Pins
   void setCpu(WDC65816 cpu);
 
   void disableBusses();
+
+  boolean isClock();
 }
 

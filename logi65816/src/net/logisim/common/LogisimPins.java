@@ -1,7 +1,11 @@
 package net.logisim.common;
 
+import com.cburch.logisim.data.BitWidth;
+import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
+import net.common.BusValue;
+import net.common.PinValue;
 
 public abstract class LogisimPins
     implements InstanceData
@@ -21,11 +25,15 @@ public abstract class LogisimPins
     }
   }
 
-  public void donePropagation()
+  public void startPropagation()
   {
   }
 
-  public void startPropagation()
+  public void undoPropagation()
+  {
+  }
+
+  public void donePropagation()
   {
   }
 
@@ -39,6 +47,52 @@ public abstract class LogisimPins
     return false;
   }
 
+  protected BusValue getBusValue(int portIndex, int width, int delay)
+  {
+    if (instanceState.isPortConnected(portIndex))
+    {
+      Value portValue = instanceState.getPortValue(portIndex);
+      if (portValue.isErrorValue())
+      {
+        return BusValue.error();
+      }
+      else if (portValue.isUnknown())
+      {
+        return BusValue.unknown();
+      }
+      else
+      {
+        instanceState.setPort(portIndex, Value.createUnknown(BitWidth.create(width)), delay);
+        return new BusValue(portValue.toLongValue());
+      }
+    }
+    else
+    {
+      return BusValue.notConnected();
+    }
+  }
+
   public abstract void tick();
+
+  protected PinValue getPinValue(int portIndex)
+  {
+    Value value = instanceState.getPortValue(portIndex);
+    if (value.isErrorValue())
+    {
+      return PinValue.Error;
+    }
+    else if (value == Value.TRUE)
+    {
+      return PinValue.High;
+    }
+    else if (value == Value.FALSE)
+    {
+      return PinValue.Low;
+    }
+    else
+    {
+      return PinValue.Unknown;
+    }
+  }
 }
 

@@ -334,6 +334,12 @@ public class WDC65816
 
   public void tick()
   {
+    boolean currentClock = pins.isClock();
+
+    risingEdge = !currentClock && this.clock;
+    fallingEdge = currentClock && !this.clock;
+    clock = currentClock;
+
     reset = pins.isReset();
     busEnable = pins.isBusEnable();
 
@@ -375,13 +381,6 @@ public class WDC65816
 
       getBusCycle().executeSecondHalf(this);
     }
-  }
-
-  public void preTick(boolean clock)
-  {
-    this.risingEdge = !clock && this.clock;
-    this.fallingEdge = clock && !this.clock;
-    this.clock = clock;
   }
 
   public BusCycle getBusCycle()

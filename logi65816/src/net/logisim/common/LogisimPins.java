@@ -5,6 +5,7 @@ import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
 import net.common.BusValue;
+import net.common.IntegratedCircuit;
 import net.common.PinValue;
 
 public abstract class LogisimPins
@@ -72,7 +73,13 @@ public abstract class LogisimPins
     }
   }
 
-  public abstract void tick();
+  public void propagate()
+  {
+    undoPropagation();
+    getIntegratedCircuit().tick();
+  }
+
+  public abstract IntegratedCircuit getIntegratedCircuit();
 
   protected PinValue getPinValue(int portIndex)
   {

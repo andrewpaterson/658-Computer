@@ -1,5 +1,6 @@
 package net.wdc.wdc65816;
 
+import net.common.IntegratedCircuit;
 import net.util.EmulatorException;
 import net.util.IntUtil;
 import net.wdc.wdc65816.instruction.BusCycle;
@@ -13,6 +14,7 @@ import static net.util.StringUtil.to8BitHex;
 import static net.wdc.wdc65816.CpuFlags.*;
 
 public class WDC65816
+    extends IntegratedCircuit
 {
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
@@ -1812,10 +1814,6 @@ public class WDC65816
     decrementX();
   }
 
-  public void WAI()
-  {
-  }
-
   public void BNE()
   {
     branch(!isZeroFlag());
@@ -1882,7 +1880,6 @@ public class WDC65816
 
   public void NOP()
   {
-
   }
 
   public void XBA()

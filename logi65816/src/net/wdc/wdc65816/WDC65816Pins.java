@@ -1,6 +1,9 @@
 package net.wdc.wdc65816;
 
+import net.common.Pins;
+
 public interface WDC65816Pins
+    extends Pins
 {
   void setAddress(int address);
 

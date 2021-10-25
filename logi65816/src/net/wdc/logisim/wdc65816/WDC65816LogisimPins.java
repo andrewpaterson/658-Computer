@@ -2,6 +2,7 @@ package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
+import net.common.IntegratedCircuit;
 import net.logisim.common.LogisimPins;
 import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.WDC65816Pins;
@@ -179,14 +180,6 @@ public class WDC65816LogisimPins
   }
 
   @Override
-  public void tick()
-  {
-    undoPropagation();
-
-    cpu.tick();
-  }
-
-  @Override
   public void startPropagation()
   {
     snapshot = cpu.createCpuSnapshot();
@@ -211,6 +204,12 @@ public class WDC65816LogisimPins
   public boolean isClockHigh()
   {
     return cpu.isClock();
+  }
+
+  @Override
+  public IntegratedCircuit getIntegratedCircuit()
+  {
+    return cpu;
   }
 }
 

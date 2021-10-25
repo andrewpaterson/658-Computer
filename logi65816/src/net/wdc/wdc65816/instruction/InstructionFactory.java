@@ -223,7 +223,7 @@ public class InstructionFactory
     opCodes.add(createINY(INY_Implied, createImpliedCycles(WDC65816::INY)));
     opCodes.add(createCMP(CMP_Immediate, createImmediateCycles(WDC65816::CMP, M)));
     opCodes.add(createDEX(DEX_Implied, createImpliedCycles(WDC65816::DEX)));
-    opCodes.add(createWAI(WAI_Implied, createWaitForInterruptCycles(WDC65816::WAI)));
+    opCodes.add(createWAI(WAI_Implied, createWaitForInterruptCycles()));
     opCodes.add(createCPY(CPY_Absolute, createAbsoluteCycles(WDC65816::CPY, XY)));
     opCodes.add(createCMP(CMP_Absolute, createAbsoluteCycles(WDC65816::CMP, M)));
     opCodes.add(createDEC(DEC_Absolute, createAbsoluteRMWCycles(WDC65816::DEC)));

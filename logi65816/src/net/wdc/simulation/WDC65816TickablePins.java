@@ -1,5 +1,6 @@
 package net.wdc.simulation;
 
+import net.common.IntegratedCircuit;
 import net.simulation.common.*;
 import net.util.EmulatorException;
 import net.wdc.wdc65816.WDC65816;
@@ -391,11 +392,6 @@ public class WDC65816TickablePins
     return abortB;
   }
 
-  public Uniport getBusEnable()
-  {
-    return busEnable;
-  }
-
   public Uniport getIrqB()
   {
     return irqB;
@@ -411,27 +407,18 @@ public class WDC65816TickablePins
     return resetB;
   }
 
-  public Uniport getEmulation()
-  {
-    return emulation;
-  }
-
   public Uniport getMemoryLockB()
   {
     return memoryLockB;
   }
 
-  public Uniport getMx()
-  {
-    return mx;
-  }
-
-  public Uniport getRdy()
-  {
-    return rdy;
-  }
-
   public WDC65816 getCpu()
+  {
+    return cpu;
+  }
+
+  @Override
+  public IntegratedCircuit getIntegratedCircuit()
   {
     return cpu;
   }

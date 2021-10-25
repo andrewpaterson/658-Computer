@@ -569,13 +569,13 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 
-  public static InstructionCycles createWaitForInterruptCycles(Executor<WDC65816> operation)
+  public static InstructionCycles createWaitForInterruptCycles()
   {
     //19d
     return new InstructionCycles(WaitForInterrupt,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
-                                 new BusCycle(Address(PBR(), PC()), new WaitOperation(), E(operation), DONE()));
+                                 new BusCycle(Address(PBR(), PC()), new WaitOperation(), DONE()));
   }
 
   public static InstructionCycles createRelativeShortCycles(Executor<WDC65816> operation)

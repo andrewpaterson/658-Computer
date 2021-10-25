@@ -3,6 +3,7 @@ package net.nexperia.logisim;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import net.common.BusValue;
+import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.logisim.common.LogisimPins;
 import net.nexperia.lvc4245.LVC4245;
@@ -26,14 +27,6 @@ public class LVC4245LogisimPins
   public void setTransceiver(LVC4245 transceiver)
   {
     this.transceiver = transceiver;
-  }
-
-  @Override
-  public void tick()
-  {
-    undoPropagation();
-
-    transceiver.tick();
   }
 
   @Override
@@ -75,6 +68,12 @@ public class LVC4245LogisimPins
   public void setPortValue(int index, long value)
   {
     instanceState.setPort(ports[index], Value.createKnown(BitWidth.create(8), value), 2);
+  }
+
+  @Override
+  public IntegratedCircuit getIntegratedCircuit()
+  {
+    return transceiver;
   }
 }
 

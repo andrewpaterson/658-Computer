@@ -1,12 +1,14 @@
 package net.nexperia.lvc4245;
 
 import net.common.BusValue;
+import net.common.IntegratedCircuit;
 import net.common.PinValue;
 
 import static net.nexperia.lvc4245.LVC4245Pins.PORT_A_INDEX;
 import static net.nexperia.lvc4245.LVC4245Pins.PORT_B_INDEX;
 
 public class LVC4245
+    extends IntegratedCircuit
 {
   private final LVC4245Pins pins;
 

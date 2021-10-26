@@ -3,6 +3,8 @@ package net.nexperia.logisim;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
 import net.logisim.common.PortDescription;
+import net.nexperia.lvc4245.LVC4245;
+import net.nexperia.lvc573.LVC573;
 
 import java.awt.*;
 
@@ -17,7 +19,7 @@ public class LVC573Factory
   public LVC573Factory()
   {
     super("LVC573",
-          new ComponentDescription(100, 60, 10, true,
+          new ComponentDescription(140, 60, 10, true,
                                    PortDescription.inputShared(PORT_OEB, "OEB"),
                                    PortDescription.inputShared(PORT_D, "D", 8).setTooltip("Input D (input)"),
                                    PortDescription.inputShared(PORT_LE, "LE"),
@@ -32,6 +34,8 @@ public class LVC573Factory
   @Override
   protected void paint(LVC573LogisimPins instance, Graphics2D graphics2D)
   {
+    LVC573 latch = instance.getLatch();
+    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Value:", latch.getValueString(), true);
   }
 
   @Override

@@ -26,17 +26,17 @@ public abstract class LogisimPins
     }
   }
 
-  public void startPropagation()
+  public abstract void startPropagation();
+
+  public void propagate()
   {
+    undoPropagation();
+    getIntegratedCircuit().tick();
   }
 
-  public void undoPropagation()
-  {
-  }
+  public abstract void undoPropagation();
 
-  public void donePropagation()
-  {
-  }
+  public abstract void donePropagation();
 
   public void setInstanceState(InstanceState instanceState)
   {
@@ -73,14 +73,6 @@ public abstract class LogisimPins
     }
   }
 
-  public void propagate()
-  {
-    undoPropagation();
-    getIntegratedCircuit().tick();
-  }
-
-  public abstract IntegratedCircuit getIntegratedCircuit();
-
   protected PinValue getPinValue(int portIndex)
   {
     Value value = instanceState.getPortValue(portIndex);
@@ -101,5 +93,7 @@ public abstract class LogisimPins
       return PinValue.Unknown;
     }
   }
+
+  public abstract IntegratedCircuit getIntegratedCircuit();
 }
 

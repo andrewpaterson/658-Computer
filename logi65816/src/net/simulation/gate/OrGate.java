@@ -29,7 +29,7 @@ public class OrGate
     this.out.connect(out);
   }
 
-  public void propagate()
+  public void tick()
   {
     propagateLogic(in, out, Low);
   }

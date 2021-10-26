@@ -91,7 +91,7 @@ public class WDC65816TickablePins
   @Override
   public void startPropagation()
   {
-    snapshot = cpu.createCpuSnapshot();
+    snapshot = cpu.createSnapshot();
   }
 
   @Override
@@ -104,7 +104,7 @@ public class WDC65816TickablePins
   {
     if (snapshot != null)
     {
-      cpu.restoreCpuFromSnapshot(snapshot);
+      cpu.restoreFromSnapshot(snapshot);
     }
   }
 

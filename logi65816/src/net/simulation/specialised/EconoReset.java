@@ -1,5 +1,6 @@
 package net.simulation.specialised;
 
+import net.common.IntegratedCircuit;
 import net.simulation.common.Tickable;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
@@ -7,6 +8,7 @@ import net.simulation.common.Uniport;
 
 public class EconoReset
     extends Tickable
+    implements IntegratedCircuit
 {
   private final Uniport out;
   private int count;
@@ -33,20 +35,9 @@ public class EconoReset
     return new EconoResetSnapshot(count);
   }
 
-  @Override
-  public void propagate()
+  private void restoreFromSnapshot(EconoResetSnapshot snapshot)
   {
-    undoPropagation();
-
-    if (count > 0)
-    {
-      count--;
-      out.writeBool(false);
-    }
-    else
-    {
-      out.writeBool(true);
-    }
+    count = snapshot.count;
   }
 
   public void undoPropagation()
@@ -55,11 +46,6 @@ public class EconoReset
     {
       restoreFromSnapshot(snapshot);
     }
-  }
-
-  private void restoreFromSnapshot(EconoResetSnapshot snapshot)
-  {
-    count = snapshot.count;
   }
 
   @Override
@@ -71,7 +57,27 @@ public class EconoReset
   @Override
   public String getType()
   {
-    return null;
+    return "Econo Reset";
+  }
+
+  @Override
+  protected IntegratedCircuit getIntegratedCircuit()
+  {
+    return this;
+  }
+
+  @Override
+  public void tick()
+  {
+    if (count > 0)
+    {
+      count--;
+      out.writeBool(false);
+    }
+    else
+    {
+      out.writeBool(true);
+    }
   }
 }
 

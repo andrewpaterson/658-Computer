@@ -1,5 +1,6 @@
 package net.simulation.gate;
 
+import net.common.IntegratedCircuit;
 import net.simulation.common.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import static net.simulation.common.TraceValue.Low;
 
 public abstract class LogicGate
     extends Tickable
+    implements IntegratedCircuit
 {
   public LogicGate(Tickables tickables, String name)
   {
@@ -51,8 +53,19 @@ public abstract class LogicGate
   }
 
   @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
   public void donePropagation()
   {
+  }
+
+  @Override
+  protected IntegratedCircuit getIntegratedCircuit()
+  {
+    return this;
   }
 }
 

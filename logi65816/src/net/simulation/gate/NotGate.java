@@ -21,7 +21,7 @@ public class NotGate
     out.connect(outTrace);
   }
 
-  public void propagate()
+  public void tick()
   {
     TraceValue inValue = in.read();
     if (inValue.isError() || inValue.isNotConnected())

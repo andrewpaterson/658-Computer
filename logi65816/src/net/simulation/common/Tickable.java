@@ -1,6 +1,7 @@
 package net.simulation.common;
 
 import net.common.BusValue;
+import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.util.StringUtil;
 
@@ -28,9 +29,16 @@ public abstract class Tickable
     ports.add(port);
   }
 
+
   public abstract void startPropagation();
 
-  public abstract void propagate();
+  public void propagate()
+  {
+    undoPropagation();
+    getIntegratedCircuit().tick();
+  }
+
+  public abstract void undoPropagation();
 
   public abstract void donePropagation();
 
@@ -175,5 +183,7 @@ public abstract class Tickable
   }
 
   public abstract String getType();
+
+  protected abstract IntegratedCircuit getIntegratedCircuit();
 }
 

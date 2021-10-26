@@ -1,13 +1,11 @@
 package net.simulation.wiring;
 
-import net.simulation.common.Bus;
-import net.simulation.common.Omniport;
-import net.simulation.common.Tickables;
-import net.simulation.common.Trace;
-import net.simulation.common.Tickable;
+import net.common.IntegratedCircuit;
+import net.simulation.common.*;
 
 public class Constant
     extends Tickable
+    implements IntegratedCircuit
 {
   protected final Omniport value;
 
@@ -55,6 +53,11 @@ public class Constant
   }
 
   @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
   public void donePropagation()
   {
   }
@@ -63,6 +66,18 @@ public class Constant
   public String getType()
   {
     return "Constant";
+  }
+
+  @Override
+  protected IntegratedCircuit getIntegratedCircuit()
+  {
+    return null;
+  }
+
+  @Override
+  public void tick()
+  {
+
   }
 }
 

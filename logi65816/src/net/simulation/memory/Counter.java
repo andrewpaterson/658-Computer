@@ -1,9 +1,11 @@
 package net.simulation.memory;
 
+import net.common.IntegratedCircuit;
 import net.simulation.common.*;
 
 public class Counter
     extends Tickable
+    implements IntegratedCircuit
 {
   protected final Omniport value;
   protected final Uniport phi2;
@@ -36,11 +38,47 @@ public class Counter
     snapshot = new CounterSnapshot(previousClock, counter, resetValue);
   }
 
-  @Override
-  public void propagate()
+  public void undoPropagation()
   {
-    undoPropagation();
+    if (snapshot != null)
+    {
+      restoreFromSnapShot(snapshot);
+    }
+  }
 
+  private void restoreFromSnapShot(CounterSnapshot snapshot)
+  {
+    counter = snapshot.counter;
+    previousClock = snapshot.previousClock;
+    resetValue = snapshot.resetValue;
+  }
+
+  @Override
+  public void donePropagation()
+  {
+    snapshot = null;
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Counter";
+  }
+
+  @Override
+  protected IntegratedCircuit getIntegratedCircuit()
+  {
+    return this;
+  }
+
+  public long getCounter()
+  {
+    return counter;
+  }
+
+  @Override
+  public void tick()
+  {
     TraceValue clockValue = phi2.read();
     if (clockValue.isError())
     {
@@ -71,38 +109,6 @@ public class Counter
       }
       value.writeAllPinsBool(counter);
     }
-  }
-
-  public void undoPropagation()
-  {
-    if (snapshot != null)
-    {
-      restoreFromSnapShot(snapshot);
-    }
-  }
-
-  private void restoreFromSnapShot(CounterSnapshot snapshot)
-  {
-    counter = snapshot.counter;
-    previousClock = snapshot.previousClock;
-    resetValue = snapshot.resetValue;
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Counter";
-  }
-
-  public long getCounter()
-  {
-    return counter;
   }
 }
 

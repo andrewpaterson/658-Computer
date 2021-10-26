@@ -1,12 +1,14 @@
 package net.simulation.wiring;
 
+import net.common.IntegratedCircuit;
+import net.simulation.common.Tickable;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.common.Uniport;
-import net.simulation.common.Tickable;
 
 public class ClockOscillator
     extends Tickable
+    implements IntegratedCircuit
 {
   private final Uniport out;
   private boolean value;
@@ -20,9 +22,8 @@ public class ClockOscillator
   }
 
   @Override
-  public void propagate()
+  public void undoPropagation()
   {
-    out.writeBool(value);
   }
 
   @Override
@@ -40,6 +41,18 @@ public class ClockOscillator
   public String getType()
   {
     return "Clock Oscillator";
+  }
+
+  @Override
+  protected IntegratedCircuit getIntegratedCircuit()
+  {
+    return this;
+  }
+
+  @Override
+  public void tick()
+  {
+    out.writeBool(value);
   }
 }
 

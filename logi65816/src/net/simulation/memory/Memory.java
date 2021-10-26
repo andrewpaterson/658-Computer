@@ -1,5 +1,6 @@
 package net.simulation.memory;
 
+import net.common.IntegratedCircuit;
 import net.simulation.common.*;
 import net.simulation.common.Tickable;
 import net.util.EmulatorException;
@@ -8,6 +9,7 @@ import static net.util.IntUtil.toByte;
 
 public class Memory
     extends Tickable
+    implements IntegratedCircuit
 {
   protected final int size;
   protected final byte[] pvMemory;
@@ -61,27 +63,6 @@ public class Memory
 
   public void propagate()
   {
-    undoPropagation();
-
-    propagateWroteMemory = false;
-
-    TraceValue chipEnabledBValue = chipEnableB.read();
-    if (chipEnabledBValue.isError())
-    {
-      dataBus.error();
-    }
-    else if (chipEnabledBValue.isUnsettled())
-    {
-      dataBus.unset();
-    }
-    else if (chipEnabledBValue.isHigh())
-    {
-      dataBus.highImpedance();
-    }
-    else if (chipEnabledBValue.isLow() || chipEnabledBValue.isNotConnected())
-    {
-      propagateWhenChipEnabled();
-    }
   }
 
   private void propagateWhenChipEnabled()
@@ -151,6 +132,12 @@ public class Memory
     return "Async SRAM";
   }
 
+  @Override
+  protected IntegratedCircuit getIntegratedCircuit()
+  {
+    return this;
+  }
+
   public void setMemory(long address, long value)
   {
     if (address >= 0 && address < size)
@@ -218,6 +205,30 @@ public class Memory
     byte[] bytes = new byte[length];
     System.arraycopy(pvMemory, start, bytes, 0, length);
     return bytes;
+  }
+
+  @Override
+  public void tick()
+  {
+    propagateWroteMemory = false;
+
+    TraceValue chipEnabledBValue = chipEnableB.read();
+    if (chipEnabledBValue.isError())
+    {
+      dataBus.error();
+    }
+    else if (chipEnabledBValue.isUnsettled())
+    {
+      dataBus.unset();
+    }
+    else if (chipEnabledBValue.isHigh())
+    {
+      dataBus.highImpedance();
+    }
+    else if (chipEnabledBValue.isLow() || chipEnabledBValue.isNotConnected())
+    {
+      propagateWhenChipEnabled();
+    }
   }
 }
 

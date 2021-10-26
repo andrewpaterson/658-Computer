@@ -1,6 +1,7 @@
 package net.common;
 
-public abstract class IntegratedCircuit
+public interface IntegratedCircuit
 {
-  public abstract void tick();
+  void tick();
 }
+

@@ -59,7 +59,7 @@
   <circuit name="main">
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="64.0"/>
+    <a name="simulationFrequency" val="16.0"/>
     <comp lib="0" loc="(110,460)" name="Clock"/>
     <comp lib="0" loc="(110,820)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -133,6 +133,10 @@
       <a name="fanout" val="3"/>
       <a name="incoming" val="24"/>
     </comp>
+    <comp lib="0" loc="(220,820)" name="Probe">
+      <a name="appearance" val="NewPins"/>
+      <a name="radix" val="16"/>
+    </comp>
     <comp lib="0" loc="(420,610)" name="Tunnel">
       <a name="label" val="RWB"/>
       <a name="labelfont" val="SansSerif bold 10"/>
@@ -184,28 +188,47 @@
       <a name="label" val="RWB"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <comp lib="0" loc="(530,920)" name="Tunnel">
+    <comp lib="0" loc="(530,490)" name="Probe">
+      <a name="appearance" val="NewPins"/>
+      <a name="radix" val="16"/>
+    </comp>
+    <comp lib="0" loc="(530,880)" name="Probe">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="radix" val="16"/>
+    </comp>
+    <comp lib="0" loc="(540,920)" name="Tunnel">
       <a name="label" val="D"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(570,570)" name="Pull Resistor"/>
-    <comp lib="0" loc="(720,590)" name="Tunnel">
+    <comp lib="0" loc="(760,490)" name="Probe">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="radix" val="16"/>
+    </comp>
+    <comp lib="0" loc="(760,660)" name="Probe">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="radix" val="16"/>
+    </comp>
+    <comp lib="0" loc="(770,590)" name="Tunnel">
       <a name="label" val="BA0_7"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(720,700)" name="Tunnel">
+    <comp lib="0" loc="(770,700)" name="Tunnel">
       <a name="label" val="D"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="1" loc="(230,880)" name="NOT Gate"/>
+    <comp lib="1" loc="(240,890)" name="NOT Gate"/>
     <comp lib="1" loc="(570,610)" name="NOT Gate"/>
     <comp lib="1" loc="(570,680)" name="NOT Gate"/>
     <comp lib="12" loc="(290,640)" name="W65C816S"/>
-    <comp lib="12" loc="(640,590)" name="LVC573"/>
-    <comp lib="12" loc="(640,700)" name="LVC4245"/>
+    <comp lib="12" loc="(660,590)" name="LVC573"/>
+    <comp lib="12" loc="(660,700)" name="LVC4245"/>
     <comp lib="4" loc="(250,860)" name="RAM">
       <a name="addrWidth" val="24"/>
       <a name="appearance" val="classic"/>
@@ -232,15 +255,18 @@
     <wire from="(150,590)" to="(170,590)"/>
     <wire from="(150,610)" to="(170,610)"/>
     <wire from="(150,630)" to="(170,630)"/>
-    <wire from="(150,870)" to="(250,870)"/>
+    <wire from="(150,870)" to="(230,870)"/>
     <wire from="(180,880)" to="(180,910)"/>
-    <wire from="(180,880)" to="(200,880)"/>
-    <wire from="(180,910)" to="(210,910)"/>
-    <wire from="(210,890)" to="(210,910)"/>
-    <wire from="(210,890)" to="(250,890)"/>
-    <wire from="(230,880)" to="(250,880)"/>
+    <wire from="(180,880)" to="(250,880)"/>
+    <wire from="(180,910)" to="(200,910)"/>
+    <wire from="(200,890)" to="(200,910)"/>
+    <wire from="(200,890)" to="(210,890)"/>
+    <wire from="(220,820)" to="(230,820)"/>
+    <wire from="(230,820)" to="(230,870)"/>
+    <wire from="(230,870)" to="(250,870)"/>
     <wire from="(230,900)" to="(230,940)"/>
     <wire from="(230,900)" to="(250,900)"/>
+    <wire from="(240,890)" to="(250,890)"/>
     <wire from="(410,570)" to="(440,570)"/>
     <wire from="(410,590)" to="(470,590)"/>
     <wire from="(410,610)" to="(420,610)"/>
@@ -249,18 +275,30 @@
     <wire from="(460,550)" to="(480,550)"/>
     <wire from="(460,560)" to="(490,560)"/>
     <wire from="(470,590)" to="(470,700)"/>
-    <wire from="(470,590)" to="(590,590)"/>
+    <wire from="(470,590)" to="(550,590)"/>
     <wire from="(470,700)" to="(590,700)"/>
     <wire from="(480,530)" to="(480,550)"/>
     <wire from="(480,530)" to="(490,530)"/>
-    <wire from="(500,920)" to="(530,920)"/>
+    <wire from="(500,920)" to="(520,920)"/>
     <wire from="(520,610)" to="(540,610)"/>
     <wire from="(520,680)" to="(540,680)"/>
     <wire from="(520,720)" to="(590,720)"/>
+    <wire from="(520,880)" to="(520,920)"/>
+    <wire from="(520,880)" to="(530,880)"/>
+    <wire from="(520,920)" to="(540,920)"/>
+    <wire from="(530,490)" to="(550,490)"/>
+    <wire from="(550,490)" to="(550,590)"/>
+    <wire from="(550,590)" to="(590,590)"/>
     <wire from="(570,570)" to="(590,570)"/>
     <wire from="(570,610)" to="(590,610)"/>
     <wire from="(570,680)" to="(590,680)"/>
-    <wire from="(690,590)" to="(720,590)"/>
-    <wire from="(690,700)" to="(720,700)"/>
+    <wire from="(730,590)" to="(750,590)"/>
+    <wire from="(730,700)" to="(750,700)"/>
+    <wire from="(750,490)" to="(750,590)"/>
+    <wire from="(750,490)" to="(760,490)"/>
+    <wire from="(750,590)" to="(770,590)"/>
+    <wire from="(750,660)" to="(750,700)"/>
+    <wire from="(750,660)" to="(760,660)"/>
+    <wire from="(750,700)" to="(770,700)"/>
   </circuit>
 </project>

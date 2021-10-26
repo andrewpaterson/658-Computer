@@ -9,12 +9,11 @@ import net.wdc.wdc65816.instruction.InstructionFactory;
 import net.wdc.wdc65816.instruction.address.InstructionCycles;
 
 import static net.util.IntUtil.*;
-import static net.util.StringUtil.to16BitHex;
-import static net.util.StringUtil.to8BitHex;
+import static net.util.StringUtil.*;
 import static net.wdc.wdc65816.CpuFlags.*;
 
 public class WDC65816
-    extends IntegratedCircuit
+    implements IntegratedCircuit
 {
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
@@ -1947,16 +1946,6 @@ public class WDC65816
     setInterruptDisableFlag(true);
   }
 
-  public String getByteStringHex(int value)
-  {
-    return "0x" + to8BitHex(value);
-  }
-
-  private String getWordStringHex(int value)
-  {
-    return "0x" + to16BitHex(value);
-  }
-
   public String getAddressValueHex()
   {
     return getByteStringHex(getAddress().getBank()) + ":" + to16BitHex(getAddress().getOffset());
@@ -2050,7 +2039,7 @@ public class WDC65816
     return z + n + d + i + m + x + c + e + o + b;
   }
 
-  public WDC65816Snapshot createCpuSnapshot()
+  public WDC65816Snapshot createSnapshot()
   {
     return new WDC65816Snapshot(zeroFlag,
                                 negativeFlag,
@@ -2095,7 +2084,7 @@ public class WDC65816
                                 abortStackPointer);
   }
 
-  public void restoreCpuFromSnapshot(WDC65816Snapshot snapshot)
+  public void restoreFromSnapshot(WDC65816Snapshot snapshot)
   {
     zeroFlag = snapshot.zeroFlag;
     negativeFlag = snapshot.negativeFlag;

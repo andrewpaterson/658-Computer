@@ -50,16 +50,21 @@ public class LVC4245TickablePins
   {
   }
 
-  private void undoPropagation()
-  {
-
-  }
-
   @Override
   public void propagate()
   {
     undoPropagation();
     getIntegratedCircuit().tick();
+  }
+
+  @Override
+  public void undoPropagation()
+  {
+  }
+
+  @Override
+  public void donePropagation()
+  {
   }
 
   @Override
@@ -102,11 +107,6 @@ public class LVC4245TickablePins
   public void setPortValue(int index, long value)
   {
     ports[index].writeAllPinsBool(value);
-  }
-
-  @Override
-  public void donePropagation()
-  {
   }
 
   @Override

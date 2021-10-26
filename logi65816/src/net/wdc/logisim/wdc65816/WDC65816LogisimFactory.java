@@ -60,24 +60,19 @@ public class WDC65816LogisimFactory
   @Override
   protected void paint(WDC65816LogisimPins instance, Graphics2D graphics2D)
   {
-    int topOffset = 30;
-    int width8Bit = 38;
-    int width16Bit = 52;
-    int width24Bit = 70;
-
     WDC65816 cpu = instance.getCpu();
     boolean isOpcodeValid = cpu.getCycle() != 0;
-    drawInternal(graphics2D, topOffset, width8Bit, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
-    drawInternal(graphics2D, topOffset + 20, width8Bit, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
-    drawInternal(graphics2D, topOffset + 40, width8Bit, "Cycle:", Integer.toString(cpu.getCycle()), true);
-    drawInternal(graphics2D, topOffset + 60, width16Bit, "Accumulator:", cpu.getAccumulatorValueHex(), true);
-    drawInternal(graphics2D, topOffset + 80, width16Bit, "X Index:", cpu.getXValueHex(), true);
-    drawInternal(graphics2D, topOffset + 100, width16Bit, "Y Index:", cpu.getYValueHex(), true);
-    drawInternal(graphics2D, topOffset + 120, width16Bit, "Stack", cpu.getStackValueHex(), true);
-    drawInternal(graphics2D, topOffset + 140, width24Bit, "P-Counter:", cpu.getProgramCounterValueHex(), true);
-    drawInternal(graphics2D, topOffset + 160, width8Bit, "Data Bank:", cpu.getDataBankValueHex(), true);
+    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
+    drawField(graphics2D, TOP_OFFSET + 20, WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
+    drawField(graphics2D, TOP_OFFSET + 40, WIDTH_8BIT, "Cycle:", Integer.toString(cpu.getCycle()), true);
+    drawField(graphics2D, TOP_OFFSET + 60, WIDTH_16BIT, "Accumulator:", cpu.getAccumulatorValueHex(), true);
+    drawField(graphics2D, TOP_OFFSET + 80, WIDTH_16BIT, "X Index:", cpu.getXValueHex(), true);
+    drawField(graphics2D, TOP_OFFSET + 100, WIDTH_16BIT, "Y Index:", cpu.getYValueHex(), true);
+    drawField(graphics2D, TOP_OFFSET + 120, WIDTH_16BIT, "Stack", cpu.getStackValueHex(), true);
+    drawField(graphics2D, TOP_OFFSET + 140, WIDTH_24BIT, "P-Counter:", cpu.getProgramCounterValueHex(), true);
+    drawField(graphics2D, TOP_OFFSET + 160, WIDTH_8BIT, "Data Bank:", cpu.getDataBankValueHex(), true);
 
-    int processorStatusTopOffset = topOffset + 185;
+    int processorStatusTopOffset = TOP_OFFSET + 185;
     boolean emulationMode = cpu.isEmulation();
     drawProcessorStatus(graphics2D, processorStatusTopOffset, -80, "E", emulationMode);
     drawProcessorStatus(graphics2D, processorStatusTopOffset, -60, "C", cpu.isCarry());
@@ -104,30 +99,6 @@ public class WDC65816LogisimFactory
     Color oldColour = setColour(g, black);
     GraphicsUtil.drawText(g, flag, horizontalPosition, top, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER);
     g.setColor(oldColour);
-  }
-
-  private void drawInternal(Graphics g, int topOffset, int rectangleWidth, String label, String value, boolean black)
-  {
-    int opcodeMnemonicTop = description.getTopYPlusMargin() + topOffset;
-    g.drawRect(15, opcodeMnemonicTop - 5, rectangleWidth, 15);
-    GraphicsUtil.drawText(g, label, 0, opcodeMnemonicTop, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
-    Color oldColour = setColour(g, black);
-    GraphicsUtil.drawText(g, value, 20, opcodeMnemonicTop, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
-    g.setColor(oldColour);
-  }
-
-  private Color setColour(Graphics g, boolean black)
-  {
-    Color oldColour = g.getColor();
-    if (black)
-    {
-      g.setColor(Color.black);
-    }
-    else
-    {
-      g.setColor(Color.lightGray);
-    }
-    return oldColour;
   }
 
   @Override

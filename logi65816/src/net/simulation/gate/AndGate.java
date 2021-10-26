@@ -1,5 +1,6 @@
 package net.simulation.gate;
 
+import net.common.IntegratedCircuit;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.common.Uniport;
@@ -29,15 +30,16 @@ public class AndGate
     this.out.connect(out);
   }
 
-  public void propagate()
-  {
-    propagateLogic(in, out, High);
-  }
-
   @Override
   public String getType()
   {
     return "AND Gate";
+  }
+
+  @Override
+  public void tick()
+  {
+    propagateLogic(in, out, High);
   }
 }
 

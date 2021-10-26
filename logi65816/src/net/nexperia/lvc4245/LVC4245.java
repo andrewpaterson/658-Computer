@@ -8,9 +8,10 @@ import static net.nexperia.lvc4245.LVC4245Pins.PORT_A_INDEX;
 import static net.nexperia.lvc4245.LVC4245Pins.PORT_B_INDEX;
 
 public class LVC4245
-    extends IntegratedCircuit
+    implements IntegratedCircuit
 {
   private final LVC4245Pins pins;
+  private PinValue direction;
 
   public LVC4245(LVC4245Pins pins)
   {
@@ -20,22 +21,22 @@ public class LVC4245
 
   public void tick()
   {
-    PinValue dir = pins.getDir();
+    direction = pins.getDir();
 
-    if (dir.isError() || dir.isNotConnected())
+    if (direction.isError() || direction.isNotConnected())
     {
       pins.setPortError(PORT_A_INDEX);
       pins.setPortError(PORT_B_INDEX);
       return;
     }
-    else if (dir.isUnknown())
+    else if (direction.isUnknown())
     {
       pins.setPortUnsettled(PORT_A_INDEX);
       pins.setPortUnsettled(PORT_B_INDEX);
       return;
     }
 
-    if (dir.isLow())  //B -> A
+    if (direction.isLow())  //B -> A
     {
       transmit(PORT_B_INDEX, PORT_A_INDEX);
     }
@@ -47,15 +48,15 @@ public class LVC4245
 
   private void transmit(int input, int output)
   {
-    PinValue outputEnabledBValue = pins.getOEB();
+    PinValue outputEnabledB = pins.getOEB();
 
-    if (outputEnabledBValue.isError() || outputEnabledBValue.isNotConnected())
+    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
     {
       pins.setPortError(output);
     }
     else
     {
-      transmit(!outputEnabledBValue.isHigh(), input, output);
+      transmit(!outputEnabledB.isHigh(), input, output);
     }
   }
 
@@ -74,13 +75,46 @@ public class LVC4245
       }
       else
       {
-        pins.setPortValue(output, readValue.getValue());
+        long value = readValue.getValue();
+        pins.setPortValue(output, value);
       }
     }
     else
     {
       pins.setPortHighImpedance(output);
     }
+  }
+
+  public LVC4245Snapshot createSnapshot()
+  {
+    return new LVC4245Snapshot(direction);
+  }
+
+  public void restoreFromSnapshot(LVC4245Snapshot snapshot)
+  {
+    direction = snapshot.direction;
+  }
+
+  public String getDirectionString()
+  {
+    if (direction != null)
+    {
+      if (direction.isHigh())
+      {
+        return "A->B";
+      }
+      else if (direction.isLow())
+      {
+        return "B->A";
+      }
+    }
+
+    return "###";
+  }
+
+  public boolean isDirectionValid()
+  {
+    return direction != null && (direction.isHigh() || direction.isLow());
   }
 }
 

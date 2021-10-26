@@ -182,7 +182,7 @@ public class WDC65816LogisimPins
   @Override
   public void startPropagation()
   {
-    snapshot = cpu.createCpuSnapshot();
+    snapshot = cpu.createSnapshot();
   }
 
   @Override
@@ -190,7 +190,7 @@ public class WDC65816LogisimPins
   {
     if (snapshot != null)
     {
-      cpu.restoreCpuFromSnapshot(snapshot);
+      cpu.restoreFromSnapshot(snapshot);
     }
   }
 

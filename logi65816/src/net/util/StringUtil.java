@@ -50,6 +50,16 @@ public class StringUtil
     return rightJustify(toHexString(value), 2, "0");
   }
 
+  public static String getByteStringHex(int value)
+  {
+    return "0x" + to8BitHex(value);
+  }
+
+  public static String getWordStringHex(int value)
+  {
+    return "0x" + to16BitHex(value);
+  }
+
   public static String toEnumString(Enum<?> anEnum)
   {
     String stringWithoutUnderscores = anEnum.toString().toLowerCase().replace('_', ' ');

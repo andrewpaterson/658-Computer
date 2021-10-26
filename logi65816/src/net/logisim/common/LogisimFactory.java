@@ -20,6 +20,11 @@ import java.util.List;
 public abstract class LogisimFactory<T extends LogisimPins>
     extends InstanceFactory
 {
+  public static final int TOP_OFFSET = 30;
+  public static final int WIDTH_8BIT = 38;
+  public static final int WIDTH_16BIT = 52;
+  public static final int WIDTH_24BIT = 70;
+
   protected final List<PortDescription> portMap;
   protected final ComponentDescription description;
   protected PropagationListener<T> propagationListener;
@@ -189,6 +194,30 @@ public abstract class LogisimFactory<T extends LogisimPins>
     {
       state.getProject().getSimulator().removeSimulatorListener(propagationListener);
     }
+  }
+
+  protected Color setColour(Graphics g, boolean black)
+  {
+    Color oldColour = g.getColor();
+    if (black)
+    {
+      g.setColor(Color.black);
+    }
+    else
+    {
+      g.setColor(Color.lightGray);
+    }
+    return oldColour;
+  }
+
+  protected void drawField(Graphics g, int topOffset, int rectangleWidth, String label, String value, boolean black)
+  {
+    int y = description.getTopYPlusMargin() + topOffset;
+    g.drawRect(5, y - 5, rectangleWidth, 15);
+    GraphicsUtil.drawText(g, label, -10, y, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
+    Color oldColour = setColour(g, black);
+    GraphicsUtil.drawText(g, value, 10, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
+    g.setColor(oldColour);
   }
 
   protected abstract T createInstance();

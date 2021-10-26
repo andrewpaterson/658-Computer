@@ -3,6 +3,8 @@ package net.nexperia.logisim;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
 import net.logisim.common.PortDescription;
+import net.nexperia.lvc4245.LVC4245;
+import net.wdc.wdc65816.WDC65816;
 
 import java.awt.*;
 
@@ -17,7 +19,7 @@ public class LVC4245Factory
   public LVC4245Factory()
   {
     super("LVC4245",
-          new ComponentDescription(100, 60, 10, true,
+          new ComponentDescription(140, 60, 10, true,
                                    PortDescription.inputShared(PORT_OEB, "OEB").setTooltip("Output enable (input: A and B high impedance high, A and B enable low)"),
                                    PortDescription.inoutShared(PORT_B, "B", 8).setTooltip("Data B (input or output)"),
                                    PortDescription.inputShared(PORT_DIR, "DIR").setTooltip("Direction (input: B to A low, A to B high)"),
@@ -32,6 +34,8 @@ public class LVC4245Factory
   @Override
   protected void paint(LVC4245LogisimPins instance, Graphics2D graphics2D)
   {
+    LVC4245 transceiver = instance.getTransceiver();
+    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Dir:", transceiver.getDirectionString(), transceiver.isDirectionValid());
   }
 
   @Override

@@ -1,8 +1,11 @@
 package net.nexperia.simulation;
 
+import net.common.BusValue;
 import net.common.IntegratedCircuit;
+import net.common.PinValue;
 import net.nexperia.lvc573.LVC573;
 import net.nexperia.lvc573.LVC573Pins;
+import net.nexperia.lvc573.LVC573Snapshot;
 import net.simulation.common.*;
 
 public class LVC573TickablePins
@@ -10,6 +13,7 @@ public class LVC573TickablePins
     implements LVC573Pins
 {
   protected LVC573 latch;
+  protected LVC573Snapshot snapshot;
 
   protected Omniport input;
   protected Omniport output;
@@ -46,22 +50,58 @@ public class LVC573TickablePins
   @Override
   public void startPropagation()
   {
-  }
-
-  private void undoPropagation()
-  {
+    snapshot = latch.createSnapshot();
   }
 
   @Override
-  public void propagate()
+  public void undoPropagation()
   {
-    undoPropagation();
-    getIntegratedCircuit().tick();
+    if (snapshot != null)
+    {
+      latch.restoreFromSnapshot(snapshot);
+    }
   }
 
   @Override
   public void donePropagation()
   {
+    snapshot = null;
+  }
+
+  @Override
+  public PinValue getLE()
+  {
+    return getPinValue(latchEnable);
+  }
+
+  @Override
+  public BusValue getInput()
+  {
+    return getBusValue(input);
+  }
+
+  @Override
+  public void setOutputUnsettled()
+  {
+    output.unset();
+  }
+
+  @Override
+  public void setOutputError()
+  {
+    output.error();
+  }
+
+  @Override
+  public void setOutput(long latchValue)
+  {
+    output.writeAllPinsBool(latchValue);
+  }
+
+  @Override
+  public PinValue getOEB()
+  {
+    return null;
   }
 
   @Override

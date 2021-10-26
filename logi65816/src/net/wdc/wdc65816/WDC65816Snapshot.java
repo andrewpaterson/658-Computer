@@ -1,6 +1,6 @@
 package net.wdc.wdc65816;
 
-import net.simulation.common.Snapshot;
+import net.common.Snapshot;
 import net.wdc.wdc65816.instruction.Instruction;
 
 public class WDC65816Snapshot

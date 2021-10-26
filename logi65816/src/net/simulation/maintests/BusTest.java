@@ -4,9 +4,11 @@ import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.memory.Counter;
+import net.simulation.memory.CounterTickablePins;
 import net.simulation.memory.Memory;
-import net.simulation.wiring.ClockOscillator;
+import net.simulation.wiring.ClockOscillatorTickablePins;
 import net.simulation.wiring.Constant;
+import net.simulation.wiring.ConstantTickablePins;
 
 import java.io.File;
 
@@ -26,11 +28,11 @@ public class BusTest
     Bus zeroBus = new Bus(8);
     Bus addressBus = new Bus(counterData, zeroBus);
 
-    new ClockOscillator(tickables, "", clockTrace);
-    Counter counter = new Counter(tickables, "", 8, counterData, clockTrace);
-    new Constant(tickables, "High", true, readTrace);
-    new Constant(tickables, "Low", false, lowTrace);
-    new Constant(tickables, "00000000", 8, 0, zeroBus);
+    new ClockOscillatorTickablePins(tickables, "", clockTrace);
+    Counter counter = new Counter(new CounterTickablePins(tickables, "", 8, counterData, clockTrace));
+    new Constant(new ConstantTickablePins(tickables, "High", readTrace), true);
+    new Constant(new ConstantTickablePins(tickables, "Low", lowTrace), false);
+    new Constant(new ConstantTickablePins(tickables, "00000000", 8, zeroBus), 0);
 
     new Memory(tickables,
                "",

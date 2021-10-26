@@ -34,14 +34,16 @@ public class LVC4245Factory
   @Override
   protected void paint(LVC4245LogisimPins instance, Graphics2D graphics2D)
   {
-    LVC4245 transceiver = instance.getTransceiver();
+    LVC4245 transceiver = instance.getIntegratedCircuit();
     drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Dir:", transceiver.getDirectionString(), transceiver.isDirectionValid());
   }
 
   @Override
   protected LVC4245LogisimPins createInstance()
   {
-    return new LVC4245LogisimPins();
+    LVC4245LogisimPins pins = new LVC4245LogisimPins();
+    new LVC4245(pins);
+    return pins;
   }
 }
 

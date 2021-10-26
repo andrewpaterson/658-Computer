@@ -1,14 +1,14 @@
 package net.nexperia.simulation;
 
 import net.common.BusValue;
-import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.nexperia.lvc4245.LVC4245;
 import net.nexperia.lvc4245.LVC4245Pins;
+import net.nexperia.lvc4245.LVC4245Snapshot;
 import net.simulation.common.*;
 
 public class LVC4245TickablePins
-    extends Tickable
+    extends Tickable<LVC4245Snapshot, LVC4245Pins, LVC4245>
     implements LVC4245Pins
 {
   protected LVC4245 transceiver;
@@ -37,34 +37,6 @@ public class LVC4245TickablePins
     this.ports[PORT_B_INDEX].connect(bBus);
     outputEnableB.connect(outputEnabledBTrace);
     dir.connect(dirTrace);
-  }
-
-  @Override
-  public void setTransceiver(LVC4245 transceiver)
-  {
-    this.transceiver = transceiver;
-  }
-
-  @Override
-  public void startPropagation()
-  {
-  }
-
-  @Override
-  public void propagate()
-  {
-    undoPropagation();
-    getIntegratedCircuit().tick();
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-  }
-
-  @Override
-  public void donePropagation()
-  {
   }
 
   @Override
@@ -113,12 +85,6 @@ public class LVC4245TickablePins
   public String getType()
   {
     return "Bus Transceiver";
-  }
-
-  @Override
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return transceiver;
   }
 }
 

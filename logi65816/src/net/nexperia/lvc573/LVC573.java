@@ -8,24 +8,21 @@ import net.util.StringUtil;
 import static net.util.IntUtil.toByte;
 
 public class LVC573
-    implements IntegratedCircuit
+    extends IntegratedCircuit<LVC573Snapshot, LVC573Pins>
 {
-  private final LVC573Pins pins;
-
   protected long latchValue;
 
   public LVC573(LVC573Pins pins)
   {
-    this.pins = pins;
-    this.pins.setLatch(this);
+    super(pins);
     latchValue = 0;
   }
 
   @Override
   public void tick()
   {
-    PinValue latchEnabled = pins.getLE();
-    PinValue outputEnabledB = pins.getOEB();
+    PinValue latchEnabled = getPins().getLE();
+    PinValue outputEnabledB = getPins().getOEB();
 
     boolean outputError = false;
     boolean outputUnset = false;
@@ -40,7 +37,7 @@ public class LVC573
 
     if (latchEnabled.isHigh())
     {
-      BusValue input = pins.getInput();
+      BusValue input = getPins().getInput();
       if (input.isUnknown() || input.isNotConnected())
       {
         outputUnset = true;
@@ -57,23 +54,25 @@ public class LVC573
 
     if (outputError)
     {
-      pins.setOutputError();
+      getPins().setOutputError();
     }
     else if (outputUnset)
     {
-      pins.setOutputUnsettled();
+      getPins().setOutputUnsettled();
     }
     else
     {
-      pins.setOutput(latchValue);
+      getPins().setOutput(latchValue);
     }
   }
 
+  @Override
   public LVC573Snapshot createSnapshot()
   {
     return new LVC573Snapshot(latchValue);
   }
 
+  @Override
   public void restoreFromSnapshot(LVC573Snapshot snapshot)
   {
     latchValue = snapshot.latchValue;

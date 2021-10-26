@@ -1,8 +1,6 @@
 package net.simulation.common;
 
-import net.common.BusValue;
-import net.common.IntegratedCircuit;
-import net.common.PinValue;
+import net.common.*;
 import net.util.StringUtil;
 
 import java.util.ArrayList;
@@ -10,8 +8,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Tickable
+public abstract class Tickable<
+    SNAPSHOT extends Snapshot,
+    PINS extends Pins<SNAPSHOT, PINS, ? extends IntegratedCircuit<SNAPSHOT, PINS>>,
+    INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
 {
+  protected INTEGRATED_CIRCUIT integratedCircuit;
+  protected SNAPSHOT snapshot;
+
   protected Tickables tickables;
   protected List<Port> ports;
   protected String name;
@@ -29,8 +33,11 @@ public abstract class Tickable
     ports.add(port);
   }
 
-
-  public abstract void startPropagation();
+  public final void startPropagation()
+  {
+    snapshot = integratedCircuit.createSnapshot();
+    getIntegratedCircuit().startTick();
+  }
 
   public void propagate()
   {
@@ -38,9 +45,18 @@ public abstract class Tickable
     getIntegratedCircuit().tick();
   }
 
-  public abstract void undoPropagation();
+  public final void undoPropagation()
+  {
+    if (snapshot != null)
+    {
+      integratedCircuit.restoreFromSnapshot(snapshot);
+    }
+  }
 
-  public abstract void donePropagation();
+  public final void donePropagation()
+  {
+    snapshot = null;
+  }
 
   public List<TraceValue> getTraceValues()
   {
@@ -182,8 +198,16 @@ public abstract class Tickable
     return updatingPorts;
   }
 
-  public abstract String getType();
+  public INTEGRATED_CIRCUIT getIntegratedCircuit()
+  {
+    return integratedCircuit;
+  }
 
-  protected abstract IntegratedCircuit getIntegratedCircuit();
+  public void setIntegratedCircuit(INTEGRATED_CIRCUIT integratedCircuit)
+  {
+    this.integratedCircuit = integratedCircuit;
+  }
+
+  public abstract String getType();
 }
 

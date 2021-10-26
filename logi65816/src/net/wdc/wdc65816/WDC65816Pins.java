@@ -3,7 +3,7 @@ package net.wdc.wdc65816;
 import net.common.Pins;
 
 public interface WDC65816Pins
-    extends Pins
+    extends Pins<WDC65816Snapshot, WDC65816Pins, WDC65816>
 {
   void setAddress(int address);
 
@@ -38,8 +38,6 @@ public interface WDC65816Pins
   boolean isNMI();
 
   boolean isAbort();
-
-  void setCpu(WDC65816 cpu);
 
   void disableBusses();
 

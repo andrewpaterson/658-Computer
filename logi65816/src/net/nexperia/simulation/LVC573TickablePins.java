@@ -1,7 +1,6 @@
 package net.nexperia.simulation;
 
 import net.common.BusValue;
-import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.nexperia.lvc573.LVC573;
 import net.nexperia.lvc573.LVC573Pins;
@@ -9,12 +8,9 @@ import net.nexperia.lvc573.LVC573Snapshot;
 import net.simulation.common.*;
 
 public class LVC573TickablePins
-    extends Tickable
+    extends Tickable<LVC573Snapshot, LVC573Pins, LVC573>
     implements LVC573Pins
 {
-  protected LVC573 latch;
-  protected LVC573Snapshot snapshot;
-
   protected Omniport input;
   protected Omniport output;
   protected Uniport outputEnableB;
@@ -39,33 +35,6 @@ public class LVC573TickablePins
     this.output.connect(outputBus);
     outputEnableB.connect(outputEnabledBTrace);
     latchEnable.connect(latchEnableTrace);
-  }
-
-  @Override
-  public void setLatch(LVC573 latch)
-  {
-    this.latch = latch;
-  }
-
-  @Override
-  public void startPropagation()
-  {
-    snapshot = latch.createSnapshot();
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-    if (snapshot != null)
-    {
-      latch.restoreFromSnapshot(snapshot);
-    }
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
   }
 
   @Override
@@ -108,12 +77,6 @@ public class LVC573TickablePins
   public String getType()
   {
     return "Bus Transceiver";
-  }
-
-  @Override
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return latch;
   }
 }
 

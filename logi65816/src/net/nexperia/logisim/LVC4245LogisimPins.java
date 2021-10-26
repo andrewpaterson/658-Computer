@@ -3,7 +3,6 @@ package net.nexperia.logisim;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import net.common.BusValue;
-import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.logisim.common.LogisimPins;
 import net.nexperia.lvc4245.LVC4245;
@@ -11,58 +10,16 @@ import net.nexperia.lvc4245.LVC4245Pins;
 import net.nexperia.lvc4245.LVC4245Snapshot;
 
 public class LVC4245LogisimPins
-    extends LogisimPins
+    extends LogisimPins<LVC4245Snapshot, LVC4245Pins, LVC4245>
     implements LVC4245Pins
 {
-  protected LVC4245 transceiver;
-  protected LVC4245Snapshot snapshot;
-
   protected int[] ports;
 
   public LVC4245LogisimPins()
   {
-    new LVC4245(this);
     this.ports = new int[2];
     ports[PORT_A_INDEX] = LVC4245Factory.PORT_A;
     ports[PORT_B_INDEX] = LVC4245Factory.PORT_B;
-  }
-
-  @Override
-  public void setTransceiver(LVC4245 transceiver)
-  {
-    this.transceiver = transceiver;
-  }
-
-  @Override
-  public void startPropagation()
-  {
-    snapshot = transceiver.createSnapshot();
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-    if (snapshot != null)
-    {
-      transceiver.restoreFromSnapshot(snapshot);
-    }
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
-  }
-
-  @Override
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return transceiver;
-  }
-
-  public LVC4245 getTransceiver()
-  {
-    return transceiver;
   }
 
   @Override

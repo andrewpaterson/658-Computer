@@ -1,6 +1,5 @@
 package net.wdc.simulation;
 
-import net.common.IntegratedCircuit;
 import net.simulation.common.*;
 import net.util.EmulatorException;
 import net.wdc.wdc65816.WDC65816;
@@ -8,12 +7,9 @@ import net.wdc.wdc65816.WDC65816Pins;
 import net.wdc.wdc65816.WDC65816Snapshot;
 
 public class WDC65816TickablePins
-    extends Tickable
+    extends Tickable<WDC65816Snapshot, WDC65816Pins, WDC65816>
     implements WDC65816Pins
 {
-  private WDC65816 cpu;
-  private WDC65816Snapshot snapshot;
-
   protected final Omniport addressBus;
   protected final Omniport dataBus;
   protected final Uniport rwB;
@@ -89,26 +85,6 @@ public class WDC65816TickablePins
   }
 
   @Override
-  public void startPropagation()
-  {
-    snapshot = cpu.createSnapshot();
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
-  }
-
-  public void undoPropagation()
-  {
-    if (snapshot != null)
-    {
-      cpu.restoreFromSnapshot(snapshot);
-    }
-  }
-
-  @Override
   public void propagate()
   {
     undoPropagation();
@@ -127,7 +103,7 @@ public class WDC65816TickablePins
         nmibValue.isValidOrUndefined() &&
         resetBValue.isValidOrUndefined())
     {
-      cpu.tick();
+      getCpu().tick();
     }
     else if (clockValue.isError() ||
              abortBValue.isError() ||
@@ -154,11 +130,6 @@ public class WDC65816TickablePins
     return "WDC65C816";
   }
 
-  public void setCpu(WDC65816 cpu)
-  {
-    this.cpu = cpu;
-  }
-
   @Override
   public void disableBusses()
   {
@@ -176,7 +147,7 @@ public class WDC65816TickablePins
   @Override
   public void setAddress(int address)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       this.addressBus.writeAllPinsBool(address);
     }
@@ -185,9 +156,9 @@ public class WDC65816TickablePins
   @Override
   public int getData()
   {
-    if (cpu.isRead())
+    if (getCpu().isRead())
     {
-      if (cpu.isBusEnable())
+      if (getCpu().isBusEnable())
       {
         TraceValue traceValue = dataBus.read();
         if (traceValue.isValid())
@@ -222,7 +193,7 @@ public class WDC65816TickablePins
   @Override
   public void setData(int data)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       this.dataBus.writeAllPinsBool(data);
     }
@@ -231,7 +202,7 @@ public class WDC65816TickablePins
   @Override
   public void setBank(int data)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       this.dataBus.writeAllPinsBool(data);
     }
@@ -240,7 +211,7 @@ public class WDC65816TickablePins
   @Override
   public void setRWB(boolean rwB)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       this.rwB.writeBool(rwB);
     }
@@ -320,7 +291,7 @@ public class WDC65816TickablePins
 
   public void setAllOutputsUnknown()
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       addressBus.unset();
       dataBus.unset();
@@ -337,7 +308,7 @@ public class WDC65816TickablePins
 
   public void setAllOutputsError()
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       addressBus.error();
       dataBus.error();
@@ -414,13 +385,7 @@ public class WDC65816TickablePins
 
   public WDC65816 getCpu()
   {
-    return cpu;
-  }
-
-  @Override
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return cpu;
+    return getIntegratedCircuit();
   }
 }
 

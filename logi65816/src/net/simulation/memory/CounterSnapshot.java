@@ -1,6 +1,6 @@
 package net.simulation.memory;
 
-import net.simulation.common.Snapshot;
+import net.common.Snapshot;
 
 public class CounterSnapshot
     implements Snapshot

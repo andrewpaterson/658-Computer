@@ -1,74 +1,35 @@
 package net.simulation.memory;
 
 import net.common.IntegratedCircuit;
-import net.simulation.common.*;
+import net.common.PinValue;
 
 public class Counter
-    extends Tickable
-    implements IntegratedCircuit
+    extends IntegratedCircuit<CounterSnapshot, CounterTickablePins>
 {
-  protected final Omniport value;
-  protected final Uniport phi2;
-
   protected boolean previousClock;
   protected long counter;
   protected long resetValue;
 
-  protected CounterSnapshot snapshot;
-
-  public Counter(Tickables tickables, String name, int width, Bus dataBus, Trace clockTrace)
+  public Counter(CounterTickablePins pins)
   {
-    super(tickables, name);
-    this.value = new Omniport(this, "Value", width);
-    this.phi2 = new Uniport(this, "Clk");
-
-    value.connect(dataBus);
-    phi2.connect(clockTrace);
-
+    super(pins);
     previousClock = true;
     counter = 0;
-    resetValue = 1L << width;
-
-    snapshot = null;
+    resetValue = 1L << pins.getWidth();
   }
 
   @Override
-  public void startPropagation()
+  public CounterSnapshot createSnapshot()
   {
-    snapshot = new CounterSnapshot(previousClock, counter, resetValue);
+    return new CounterSnapshot(previousClock, counter, resetValue);
   }
 
-  public void undoPropagation()
-  {
-    if (snapshot != null)
-    {
-      restoreFromSnapShot(snapshot);
-    }
-  }
-
-  private void restoreFromSnapShot(CounterSnapshot snapshot)
+  @Override
+  public void restoreFromSnapshot(CounterSnapshot snapshot)
   {
     counter = snapshot.counter;
     previousClock = snapshot.previousClock;
     resetValue = snapshot.resetValue;
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Counter";
-  }
-
-  @Override
-  protected IntegratedCircuit getIntegratedCircuit()
-  {
-    return this;
   }
 
   public long getCounter()
@@ -79,22 +40,22 @@ public class Counter
   @Override
   public void tick()
   {
-    TraceValue clockValue = phi2.read();
+    PinValue clockValue = getPins().getPhi2();
     if (clockValue.isError())
     {
-      value.error();
+      getPins().setValueError();
     }
-    else if (clockValue.isUnsettled())
+    else if (clockValue.isUnknown())
     {
-      value.unset();
+      getPins().setValueUnsettled();
     }
     else if (clockValue.isNotConnected())
     {
-      value.writeAllPinsBool(counter);
+      getPins().setValue(counter);
     }
     else
     {
-      boolean clock = phi2.getBoolAfterRead();
+      boolean clock = clockValue.isHigh();
 
       boolean clockRisingEdge = clock && !previousClock;
       previousClock = clock;
@@ -107,7 +68,7 @@ public class Counter
           counter = 0;
         }
       }
-      value.writeAllPinsBool(counter);
+      getPins().setValue(counter);
     }
   }
 }

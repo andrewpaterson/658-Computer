@@ -2,7 +2,6 @@ package net.wdc.logisim.wdc65816;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
-import net.common.IntegratedCircuit;
 import net.logisim.common.LogisimPins;
 import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.WDC65816Pins;
@@ -12,24 +11,15 @@ import static net.util.IntUtil.toByte;
 import static net.wdc.logisim.wdc65816.WDC65816LogisimFactory.*;
 
 public class WDC65816LogisimPins
-    extends LogisimPins
+    extends LogisimPins<WDC65816Snapshot, WDC65816Pins, WDC65816>
     implements WDC65816Pins
 {
-  protected WDC65816 cpu;
-
-  protected WDC65816Snapshot snapshot;
   protected boolean clock;
-
-  public WDC65816LogisimPins()
-  {
-    new WDC65816(this);
-    snapshot = null;
-  }
 
   @Override
   public void setAddress(int address)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       instanceState.setPort(PORT_AddressBus, Value.createKnown(BitWidth.create(16), address), 12);
     }
@@ -38,7 +28,7 @@ public class WDC65816LogisimPins
   @Override
   public int getData()
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       int value = (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
       instanceState.setPort(PORT_DataBus, Value.createUnknown(BitWidth.create(8)), 9);
@@ -53,7 +43,7 @@ public class WDC65816LogisimPins
   @Override
   public void setData(int data)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
     }
@@ -62,7 +52,7 @@ public class WDC65816LogisimPins
   @Override
   public void setBank(int data)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       instanceState.setPort(PORT_DataBus, Value.createKnown(BitWidth.create(8), data), 15);
     }
@@ -71,7 +61,7 @@ public class WDC65816LogisimPins
   @Override
   public void setRWB(boolean rwB)
   {
-    if (cpu.isBusEnable())
+    if (getCpu().isBusEnable())
     {
       setPort(PORT_RWB, rwB, 9);
     }
@@ -120,12 +110,6 @@ public class WDC65816LogisimPins
   }
 
   @Override
-  public void setCpu(WDC65816 cpu)
-  {
-    this.cpu = cpu;
-  }
-
-  @Override
   public boolean isBusEnable()
   {
     return instanceState.getPortValue(PORT_BE) != Value.FALSE;
@@ -171,7 +155,7 @@ public class WDC65816LogisimPins
 
   public WDC65816 getCpu()
   {
-    return cpu;
+    return getIntegratedCircuit();
   }
 
   private void setPort(int port, boolean value, int delay)
@@ -180,36 +164,9 @@ public class WDC65816LogisimPins
   }
 
   @Override
-  public void startPropagation()
-  {
-    snapshot = cpu.createSnapshot();
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-    if (snapshot != null)
-    {
-      cpu.restoreFromSnapshot(snapshot);
-    }
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = null;
-  }
-
-  @Override
   public boolean isClockHigh()
   {
-    return cpu.isClock();
-  }
-
-  @Override
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return cpu;
+    return getCpu().isClock();
   }
 }
 

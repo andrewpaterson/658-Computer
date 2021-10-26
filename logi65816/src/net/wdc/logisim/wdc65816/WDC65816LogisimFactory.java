@@ -104,7 +104,9 @@ public class WDC65816LogisimFactory
   @Override
   protected WDC65816LogisimPins createInstance()
   {
-    return new WDC65816LogisimPins();
+    WDC65816LogisimPins pins = new WDC65816LogisimPins();
+    new WDC65816(pins);
+    return pins;
   }
 }
 

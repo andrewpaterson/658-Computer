@@ -1,4 +1,4 @@
-package net.simulation.common;
+package net.common;
 
 public interface Snapshot
 {

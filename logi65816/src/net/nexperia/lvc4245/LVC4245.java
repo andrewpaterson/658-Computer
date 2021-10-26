@@ -8,31 +8,29 @@ import static net.nexperia.lvc4245.LVC4245Pins.PORT_A_INDEX;
 import static net.nexperia.lvc4245.LVC4245Pins.PORT_B_INDEX;
 
 public class LVC4245
-    implements IntegratedCircuit
+    extends IntegratedCircuit<LVC4245Snapshot, LVC4245Pins>
 {
-  private final LVC4245Pins pins;
   private PinValue direction;
 
   public LVC4245(LVC4245Pins pins)
   {
-    this.pins = pins;
-    this.pins.setTransceiver(this);
+    super(pins);
   }
 
   public void tick()
   {
-    direction = pins.getDir();
+    direction = getPins().getDir();
 
     if (direction.isError() || direction.isNotConnected())
     {
-      pins.setPortError(PORT_A_INDEX);
-      pins.setPortError(PORT_B_INDEX);
+      getPins().setPortError(PORT_A_INDEX);
+      getPins().setPortError(PORT_B_INDEX);
       return;
     }
     else if (direction.isUnknown())
     {
-      pins.setPortUnsettled(PORT_A_INDEX);
-      pins.setPortUnsettled(PORT_B_INDEX);
+      getPins().setPortUnsettled(PORT_A_INDEX);
+      getPins().setPortUnsettled(PORT_B_INDEX);
       return;
     }
 
@@ -48,11 +46,11 @@ public class LVC4245
 
   private void transmit(int input, int output)
   {
-    PinValue outputEnabledB = pins.getOEB();
+    PinValue outputEnabledB = getPins().getOEB();
 
     if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
     {
-      pins.setPortError(output);
+      getPins().setPortError(output);
     }
     else
     {
@@ -64,24 +62,24 @@ public class LVC4245
   {
     if (outputEnabled)
     {
-      BusValue readValue = pins.getPortValue(input);
+      BusValue readValue = getPins().getPortValue(input);
       if (readValue.isError() || readValue.isNotConnected())
       {
-        pins.setPortError(output);
+        getPins().setPortError(output);
       }
       else if (readValue.isUnknown())
       {
-        pins.setPortUnsettled(output);
+        getPins().setPortUnsettled(output);
       }
       else
       {
         long value = readValue.getValue();
-        pins.setPortValue(output, value);
+        getPins().setPortValue(output, value);
       }
     }
     else
     {
-      pins.setPortHighImpedance(output);
+      getPins().setPortHighImpedance(output);
     }
   }
 

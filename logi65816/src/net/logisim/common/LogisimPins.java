@@ -7,10 +7,18 @@ import com.cburch.logisim.instance.InstanceState;
 import net.common.BusValue;
 import net.common.IntegratedCircuit;
 import net.common.PinValue;
+import net.common.Pins;
+import net.common.Snapshot;
 
-public abstract class LogisimPins
+public abstract class LogisimPins<
+    SNAPSHOT extends Snapshot,
+    PINS extends Pins<SNAPSHOT, PINS, ? extends IntegratedCircuit<SNAPSHOT, PINS>>,
+    INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
     implements InstanceData
 {
+  protected INTEGRATED_CIRCUIT integratedCircuit;
+  protected SNAPSHOT snapshot;
+
   protected InstanceState instanceState;
 
   @Override
@@ -26,7 +34,11 @@ public abstract class LogisimPins
     }
   }
 
-  public abstract void startPropagation();
+  public void startPropagation()
+  {
+    snapshot = integratedCircuit.createSnapshot();
+    getIntegratedCircuit().startTick();
+  }
 
   public void propagate()
   {
@@ -34,9 +46,18 @@ public abstract class LogisimPins
     getIntegratedCircuit().tick();
   }
 
-  public abstract void undoPropagation();
+  public void undoPropagation()
+  {
+    if (snapshot != null)
+    {
+      integratedCircuit.restoreFromSnapshot(snapshot);
+    }
+  }
 
-  public abstract void donePropagation();
+  public void donePropagation()
+  {
+    snapshot = null;
+  }
 
   public void setInstanceState(InstanceState instanceState)
   {
@@ -94,6 +115,14 @@ public abstract class LogisimPins
     }
   }
 
-  public abstract IntegratedCircuit getIntegratedCircuit();
+  public INTEGRATED_CIRCUIT getIntegratedCircuit()
+  {
+    return integratedCircuit;
+  }
+
+  public void setIntegratedCircuit(INTEGRATED_CIRCUIT integratedCircuit)
+  {
+    this.integratedCircuit = integratedCircuit;
+  }
 }
 

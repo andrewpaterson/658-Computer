@@ -5,10 +5,8 @@ import net.common.PinValue;
 import net.common.Pins;
 
 public interface LVC573Pins
-    extends Pins
+    extends Pins<LVC573Snapshot, LVC573Pins, LVC573>
 {
-  void setLatch(LVC573 latch);
-
   PinValue getLE();
 
   BusValue getInput();

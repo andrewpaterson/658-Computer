@@ -1,23 +1,23 @@
 package net.simulation.wiring;
 
 import net.common.IntegratedCircuit;
-import net.simulation.common.*;
+import net.common.Snapshot;
 
 public class Constant
-    extends Tickable
-    implements IntegratedCircuit
+    extends IntegratedCircuit<Snapshot, ConstantTickablePins>
 {
-  protected final Omniport value;
-
   protected long constantValue;
 
-  public Constant(Tickables tickables, String name, boolean booleanValue, Trace trace)
+  public Constant(ConstantTickablePins pins, boolean booleanValue)
   {
-    super(tickables, name);
-    value = new Omniport(this, "Value", 1);
-    value.connect(trace);
-
+    super(pins);
     setValue(booleanValue);
+  }
+
+  public Constant(ConstantTickablePins pins, long constantValue)
+  {
+    super(pins);
+    this.constantValue = constantValue;
   }
 
   public void setValue(boolean booleanValue)
@@ -32,52 +32,10 @@ public class Constant
     }
   }
 
-  public Constant(Tickables tickables, String name, int width, long constantValue, Bus bus)
-  {
-    super(tickables, name);
-    value = new Omniport(this, "Value", width);
-    value.connect(bus);
-
-    this.constantValue = constantValue;
-  }
-
-  @Override
-  public void startPropagation()
-  {
-  }
-
-  @Override
-  public void propagate()
-  {
-    value.writeAllPinsBool(constantValue);
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-  }
-
-  @Override
-  public void donePropagation()
-  {
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Constant";
-  }
-
-  @Override
-  protected IntegratedCircuit getIntegratedCircuit()
-  {
-    return null;
-  }
-
   @Override
   public void tick()
   {
-
+    getPins().setValue(constantValue);
   }
 }
 

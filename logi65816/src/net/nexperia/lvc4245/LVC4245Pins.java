@@ -1,16 +1,14 @@
 package net.nexperia.lvc4245;
 
 import net.common.BusValue;
-import net.common.Pins;
 import net.common.PinValue;
+import net.common.Pins;
 
 public interface LVC4245Pins
-    extends Pins
+    extends Pins<LVC4245Snapshot, LVC4245Pins, LVC4245>
 {
   int PORT_A_INDEX = 0;
   int PORT_B_INDEX = 1;
-
-  void setTransceiver(LVC4245 transceiver);
 
   void setPortError(int index);
 

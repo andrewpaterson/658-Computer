@@ -13,7 +13,7 @@ import static net.util.StringUtil.*;
 import static net.wdc.wdc65816.CpuFlags.*;
 
 public class WDC65816
-    implements IntegratedCircuit
+    extends IntegratedCircuit<WDC65816Snapshot, WDC65816Pins>
 {
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;

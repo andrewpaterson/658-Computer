@@ -1,8 +1,7 @@
 package net.nexperia.lvc4245;
 
-import net.common.BusValue;
 import net.common.PinValue;
-import net.simulation.common.Snapshot;
+import net.common.Snapshot;
 
 public class LVC4245Snapshot
     implements Snapshot

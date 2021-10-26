@@ -1,6 +1,6 @@
 package net.nexperia.lvc573;
 
-import net.simulation.common.Snapshot;
+import net.common.Snapshot;
 
 public class LVC573Snapshot
     implements Snapshot

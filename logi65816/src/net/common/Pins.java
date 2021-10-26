@@ -1,6 +1,9 @@
 package net.common;
 
-public interface Pins
+public interface Pins<SNAPSHOT extends Snapshot, PINS extends Pins<SNAPSHOT, PINS, ? extends IntegratedCircuit<SNAPSHOT, PINS>>, INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
 {
-  IntegratedCircuit getIntegratedCircuit();
+  INTEGRATED_CIRCUIT getIntegratedCircuit();
+
+  void setIntegratedCircuit(INTEGRATED_CIRCUIT integratedCircuit);
 }
+

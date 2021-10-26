@@ -114,7 +114,7 @@ public abstract class LogisimFactory<T extends LogisimPins>
 
   protected void paintPorts(InstancePainter painter, LogisimPins instance)
   {
-    boolean clock = isClockHigh((T) instance);
+    boolean clock = !isClockHigh((T) instance);
     painter.drawBounds();
     for (int index = 0; index < portMap.size(); index++)
     {

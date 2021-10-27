@@ -7,6 +7,7 @@ import net.simulation.memory.Counter;
 import net.simulation.memory.CounterTickablePins;
 import net.simulation.memory.Memory;
 import net.simulation.memory.MemoryTickablePins;
+import net.simulation.wiring.ClockOscillator;
 import net.simulation.wiring.ClockOscillatorTickablePins;
 import net.simulation.wiring.Constant;
 import net.simulation.wiring.ConstantTickablePins;
@@ -29,7 +30,7 @@ public class BusTest
     Bus zeroBus = new Bus(8);
     Bus addressBus = new Bus(counterData, zeroBus);
 
-    new ClockOscillatorTickablePins(tickables, clockTrace);
+    new ClockOscillator("", new ClockOscillatorTickablePins(tickables, clockTrace));
     Counter counter = new Counter("", new CounterTickablePins(tickables, "", 8, counterData, clockTrace));
     new Constant("High", new ConstantTickablePins(tickables, readTrace), true);
     new Constant("Low", new ConstantTickablePins(tickables, lowTrace), false);

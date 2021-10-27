@@ -25,8 +25,7 @@ public class LVC4245TickablePins
                              Trace outputEnabledBTrace,
                              Trace dirTrace)
   {
-    super(tickables, name);
-    new LVC4245(this);
+    super(tickables);
     this.ports = new Omniport[2];
     this.ports[PORT_A_INDEX] = new Omniport(this, "A", width);
     this.ports[PORT_B_INDEX] = new Omniport(this, "B", width);
@@ -79,12 +78,6 @@ public class LVC4245TickablePins
   public void setPortValue(int index, long value)
   {
     ports[index].writeAllPinsBool(value);
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Bus Transceiver";
   }
 }
 

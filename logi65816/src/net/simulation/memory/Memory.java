@@ -1,109 +1,70 @@
 package net.simulation.memory;
 
+import net.common.BusValue;
 import net.common.IntegratedCircuit;
-import net.simulation.common.*;
-import net.simulation.common.Tickable;
+import net.common.PinValue;
 import net.util.EmulatorException;
 
 import static net.util.IntUtil.toByte;
 
 public class Memory
-    extends Tickable
-    implements IntegratedCircuit
+    extends IntegratedCircuit<MemorySnapshot, MemoryTickablePins>
 {
   protected final int size;
   protected final byte[] pvMemory;
 
-  protected final Omniport addressBus;
-  protected final Omniport dataBus;
-  protected final Uniport writeEnableB;
-  protected final Uniport outputEnableB;
-  protected final Uniport chipEnableB;
-
-  protected boolean snapshot;
-  protected boolean propagateWroteMemory;
-  protected long oldAddress;
-  protected int oldValue;
-
-  public Memory(Tickables tickables,
-                String name,
-                Bus addressBus,
-                Bus dataBus,
-                Trace writeEnableBTrace,
-                Trace outputEnabledBTrace,
-                Trace chipEnabledBTrace,
-                byte[] bytes)
+  public Memory(String name, MemoryTickablePins pins, byte[] bytes)
   {
-    super(tickables, name);
-    this.addressBus = new Omniport(this, "Address Bus", 16);
-    this.dataBus = new Omniport(this, "Data Bus", 8);
-    this.writeEnableB = new Uniport(this, "WEB");
-    this.outputEnableB = new Uniport(this, "OEB");
-    this.chipEnableB = new Uniport(this, "CEB");
-
-    this.addressBus.connect(addressBus);
-    this.dataBus.connect(dataBus);
-    this.writeEnableB.connect(writeEnableBTrace);
-    this.outputEnableB.connect(outputEnabledBTrace);
-    this.chipEnableB.connect(chipEnabledBTrace);
+    super(name, pins);
 
     pvMemory = new byte[bytes.length];
     System.arraycopy(bytes, 0, pvMemory, 0, bytes.length);
     this.size = bytes.length;
-    this.propagateWroteMemory = false;
-    this.snapshot = false;
   }
 
   @Override
-  public void startPropagation()
+  public MemorySnapshot createSnapshot()
   {
-    snapshot = true;
-    propagateWroteMemory = false;
-  }
-
-  public void propagate()
-  {
+    return new MemorySnapshot();
   }
 
   private void propagateWhenChipEnabled()
   {
-    TraceValue readState = writeEnableB.read();
-    TraceValue addressState = addressBus.read();
-    TraceValue outputEnabledBValue = outputEnableB.read();
+    PinValue readState = getPins().getWriteEnableB();
+    BusValue address = getPins().getAddress();
+    PinValue outputEnabledBValue = getPins().getOutputEnableB();
 
-    if (readState.isError() || addressState.isError() || readState.isNotConnected() || addressState.isNotConnected() || outputEnabledBValue.isError())
+    if (readState.isError() || address.isError() || readState.isNotConnected() || address.isNotConnected() || outputEnabledBValue.isError())
     {
-      dataBus.error();
+      getPins().setDataError();
     }
-    else if (readState.isUnsettled() || addressState.isUnsettled() || outputEnabledBValue.isUnsettled())
+    else if (readState.isUnknown() || address.isUnknown() || outputEnabledBValue.isUnknown())
     {
-      dataBus.unset();
+      getPins().setDataUnsettled();
     }
     else if (readState.isHigh())
     {
       if (outputEnabledBValue.isNotConnected() || outputEnabledBValue.isLow())
       {
-        long address = addressBus.getPinsAsBoolAfterRead();
-        int data = getMemory(address);
-        dataBus.writeAllPinsBool(data);
+        long data = getMemory(address.getValue());
+        getPins().setDataValue(data);
       }
       else
       {
-        dataBus.highImpedance();
+        getPins().setDataHighImpedance();
       }
     }
     else if (readState.isLow())
     {
-      TraceValue dataBusState = dataBus.read();
-      if (dataBusState.isValid())
+      BusValue data = getPins().getData();
+      if (data.isValid())
       {
-        oldAddress = addressBus.getPinsAsBoolAfterRead();
-        oldValue = getMemory(oldAddress);
+        long oldAddress = address.getValue();
+        long oldValue = getMemory(oldAddress);
 
-        long data = dataBus.getPinsAsBoolAfterRead();
-        setMemory(oldAddress, data);
+        setMemory(oldAddress, data.value);
 
-        propagateWroteMemory = true;
+        getPins().updateSnapshot(oldAddress, oldValue);
       }
     }
     else
@@ -112,30 +73,16 @@ public class Memory
     }
   }
 
-  public void undoPropagation()
+  @Override
+  public void restoreFromSnapshot(MemorySnapshot snapshot)
   {
-    if (snapshot && propagateWroteMemory)
+    if (snapshot != null)
     {
-      setMemory(oldAddress, oldValue);
+      if (snapshot.propagateWroteMemory)
+      {
+        setMemory(snapshot.oldAddress, snapshot.oldValue);
+      }
     }
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    snapshot = false;
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Async SRAM";
-  }
-
-  @Override
-  protected IntegratedCircuit getIntegratedCircuit()
-  {
-    return this;
   }
 
   public void setMemory(long address, long value)
@@ -157,7 +104,7 @@ public class Memory
     }
   }
 
-  public int getMemory(long address)
+  public long getMemory(long address)
   {
     if (address >= 0 && address < size)
     {
@@ -210,25 +157,31 @@ public class Memory
   @Override
   public void tick()
   {
-    propagateWroteMemory = false;
+    getPins().updateSnapshot();
 
-    TraceValue chipEnabledBValue = chipEnableB.read();
+    PinValue chipEnabledBValue = getPins().getChipEnableB();
     if (chipEnabledBValue.isError())
     {
-      dataBus.error();
+      getPins().setDataError();
     }
-    else if (chipEnabledBValue.isUnsettled())
+    else if (chipEnabledBValue.isUnknown())
     {
-      dataBus.unset();
+      getPins().setDataUnsettled();
     }
     else if (chipEnabledBValue.isHigh())
     {
-      dataBus.highImpedance();
+      getPins().setDataHighImpedance();
     }
     else if (chipEnabledBValue.isLow() || chipEnabledBValue.isNotConnected())
     {
       propagateWhenChipEnabled();
     }
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Async SRAM";
   }
 }
 

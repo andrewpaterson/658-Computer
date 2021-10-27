@@ -8,15 +8,15 @@ public class Constant
 {
   protected long constantValue;
 
-  public Constant(ConstantTickablePins pins, boolean booleanValue)
+  public Constant(String name, ConstantTickablePins pins, boolean booleanValue)
   {
-    super(pins);
+    super(name, pins);
     setValue(booleanValue);
   }
 
-  public Constant(ConstantTickablePins pins, long constantValue)
+  public Constant(String name, ConstantTickablePins pins, long constantValue)
   {
-    super(pins);
+    super(name, pins);
     this.constantValue = constantValue;
   }
 
@@ -36,6 +36,12 @@ public class Constant
   public void tick()
   {
     getPins().setValue(constantValue);
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Constant";
   }
 }
 

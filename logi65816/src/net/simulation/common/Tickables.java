@@ -7,7 +7,7 @@ import static net.util.DebugUtil.debugLog;
 
 public class Tickables
 {
-  protected List<Tickable> tickables;
+  protected List<Tickable<?, ?, ?>> tickables;
   protected long tickCount;
 
   public Tickables()
@@ -16,14 +16,14 @@ public class Tickables
     this.tickCount = 0;
   }
 
-  public void add(Tickable tickable)
+  public void add(Tickable<?, ?, ?> tickable)
   {
     tickables.add(tickable);
   }
 
   public void run()
   {
-    for (Tickable tickable : tickables)
+    for (Tickable<?, ?, ?> tickable : tickables)
     {
       tickable.resetConnections();
       tickable.startPropagation();
@@ -40,7 +40,7 @@ public class Tickables
       }
 
       settled = true;
-      for (Tickable tickable : tickables)
+      for (Tickable<?, ?, ?> tickable : tickables)
       {
         List<TraceValue> oldTraceValues = tickable.getTraceValues();
 
@@ -56,7 +56,7 @@ public class Tickables
     while (!settled);
 
     debugLog("---======--- Tick [" + tickCount + "]  Settled in [" + count + "] iterations. ---======---");
-    for (Tickable tickable : tickables)
+    for (Tickable<?, ?, ?> tickable : tickables)
     {
       tickable.donePropagation();
 

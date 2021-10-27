@@ -8,9 +8,9 @@ public class ClockOscillator
 {
   private boolean value;
 
-  public ClockOscillator(ClockOscillatorTickablePins pins)
+  public ClockOscillator(String name, ClockOscillatorTickablePins pins)
   {
-    super(pins);
+    super(name, pins);
     this.value = false;
   }
 
@@ -24,6 +24,12 @@ public class ClockOscillator
   public void tick()
   {
     getPins().setValue(value);
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Clock Oscillator";
   }
 }
 

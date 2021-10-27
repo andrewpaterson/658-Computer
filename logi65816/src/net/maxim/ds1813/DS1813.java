@@ -7,9 +7,9 @@ public class DS1813
 {
   private int count;
 
-  public DS1813(DS1813Pins pins)
+  public DS1813(String name, DS1813Pins pins)
   {
-    super(pins);
+    super(name, pins);
     this.count = 4;
   }
 
@@ -38,6 +38,12 @@ public class DS1813
   public void restoreFromSnapshot(DS1813Snapshot snapshot)
   {
     count = snapshot.count;
+  }
+
+  @Override
+  public String getType()
+  {
+    return "DS1813";
   }
 }
 

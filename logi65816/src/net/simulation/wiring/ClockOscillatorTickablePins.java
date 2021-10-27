@@ -10,17 +10,11 @@ public class ClockOscillatorTickablePins
 {
   private final Uniport out;
 
-  public ClockOscillatorTickablePins(Tickables tickables, String name, Trace trace)
+  public ClockOscillatorTickablePins(Tickables tickables, Trace trace)
   {
-    super(tickables, name);
+    super(tickables);
     this.out = new Uniport(this, "Out");
     this.out.connect(trace);
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Clock Oscillator";
   }
 
   public void setValue(boolean value)

@@ -18,12 +18,10 @@ public abstract class Tickable<
 
   protected Tickables tickables;
   protected List<Port> ports;
-  protected String name;
 
-  public Tickable(Tickables tickables, String name)
+  public Tickable(Tickables tickables)
   {
     this.tickables = tickables;
-    this.name = name;
     this.tickables.add(this);
     this.ports = new ArrayList<>();
   }
@@ -86,11 +84,12 @@ public abstract class Tickable<
 
   public String getName()
   {
-    return name;
+    return getIntegratedCircuit().getName();
   }
 
   public String getDescription()
   {
+    String name = getName();
     if (StringUtil.isEmptyOrNull(name))
     {
       return getType();
@@ -125,6 +124,11 @@ public abstract class Tickable<
   protected PinValue getPinValue(Uniport uniport)
   {
     TraceValue value = uniport.read();
+    return getPinValue(value);
+  }
+
+  protected PinValue getPinValue(TraceValue value)
+  {
     if (value.isError())
     {
       return PinValue.Error;
@@ -208,6 +212,9 @@ public abstract class Tickable<
     this.integratedCircuit = integratedCircuit;
   }
 
-  public abstract String getType();
+  public String getType()
+  {
+    return integratedCircuit.getType();
+  }
 }
 

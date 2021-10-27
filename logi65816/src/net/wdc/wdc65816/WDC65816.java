@@ -69,16 +69,13 @@ public class WDC65816
   protected boolean read;
   protected boolean busEnable;
 
-  protected WDC65816Pins pins;
-
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
 
-  public WDC65816(WDC65816Pins pins)
+  public WDC65816(String name, WDC65816Pins pins)
   {
-    this.pins = pins;
-    this.pins.setCpu(this);
+    super(name, pins);
 
     programCounter = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
@@ -335,14 +332,14 @@ public class WDC65816
 
   public void tick()
   {
-    boolean currentClock = pins.isClock();
+    boolean currentClock = getPins().isClock();
 
     risingEdge = !currentClock && this.clock;
     fallingEdge = currentClock && !this.clock;
     clock = currentClock;
 
-    reset = pins.isReset();
-    busEnable = pins.isBusEnable();
+    reset = getPins().isReset();
+    busEnable = getPins().isBusEnable();
 
     if (reset)
     {
@@ -353,7 +350,7 @@ public class WDC65816
 
     if (!busEnable)
     {
-      pins.disableBusses();
+      getPins().disableBusses();
     }
 
     if (!fallingEdge && !risingEdge || stopped)
@@ -368,17 +365,17 @@ public class WDC65816
 
     if (risingEdge)
     {
-      abort = pins.isAbort() || abort;
-      irq = pins.isIRQ() || irq;
-      nmi = pins.isNMI() || nmi;
+      abort = getPins().isAbort() || abort;
+      irq = getPins().isIRQ() || irq;
+      nmi = getPins().isNMI() || nmi;
 
       getBusCycle().executeFirstHalf(this);
     }
 
     if (fallingEdge)
     {
-      irq = pins.isIRQ() || irq;
-      nmi = pins.isNMI() || nmi;
+      irq = getPins().isIRQ() || irq;
+      nmi = getPins().isNMI() || nmi;
 
       getBusCycle().executeSecondHalf(this);
     }
@@ -683,11 +680,6 @@ public class WDC65816
   {
     assert8Bit(data, "Program Counter Bank");
     newProgramCounter.setBank(data);
-  }
-
-  public WDC65816Pins getPins()
-  {
-    return pins;
   }
 
   public void setEmulationMode(boolean emulation)
@@ -2141,6 +2133,12 @@ public class WDC65816
   public boolean isClock()
   {
     return clock;
+  }
+
+  @Override
+  public String getType()
+  {
+    return "WDC65C816";
   }
 }
 

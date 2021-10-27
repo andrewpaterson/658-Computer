@@ -14,17 +14,11 @@ public class DS1813TickablePins
 {
   private final Uniport out;
 
-  public DS1813TickablePins(Tickables tickables, String name, Trace out)
+  public DS1813TickablePins(Tickables tickables, Trace out)
   {
-    super(tickables, name);
+    super(tickables);
     this.out = new Uniport(this, "Out");
     this.out.connect(out);
-  }
-
-  @Override
-  public String getType()
-  {
-    return "DS1813";
   }
 
   @Override

@@ -15,7 +15,7 @@ public class CounterTickablePins
 
   public CounterTickablePins(Tickables tickables, String name, int width, Bus dataBus, Trace clockTrace)
   {
-    super(tickables, name);
+    super(tickables);
     this.value = new Omniport(this, "Value", width);
     this.phi2 = new Uniport(this, "Clk");
 
@@ -23,12 +23,6 @@ public class CounterTickablePins
     phi2.connect(clockTrace);
 
     this.width = width;
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Counter";
   }
 
   public int getWidth()

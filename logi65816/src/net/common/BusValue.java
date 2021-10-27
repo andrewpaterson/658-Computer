@@ -47,6 +47,11 @@ public class BusValue
     return error;
   }
 
+  public boolean isValid()
+  {
+    return !(unknown || notConnected || error);
+  }
+
   public static BusValue error()
   {
     return errorValue;

@@ -12,9 +12,9 @@ public class LVC4245
 {
   private PinValue direction;
 
-  public LVC4245(LVC4245Pins pins)
+  public LVC4245(String name, LVC4245Pins pins)
   {
-    super(pins);
+    super(name, pins);
   }
 
   public void tick()
@@ -113,6 +113,12 @@ public class LVC4245
   public boolean isDirectionValid()
   {
     return direction != null && (direction.isHigh() || direction.isLow());
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Bus Transceiver";
   }
 }
 

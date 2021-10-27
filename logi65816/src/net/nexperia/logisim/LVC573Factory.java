@@ -41,7 +41,7 @@ public class LVC573Factory
   protected LVC573LogisimPins createInstance()
   {
     LVC573LogisimPins pins = new LVC573LogisimPins();
-    new LVC573(pins);
+    new LVC573("", pins);
     return pins;
   }
 }

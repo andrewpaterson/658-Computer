@@ -10,9 +10,9 @@ public class Counter
   protected long counter;
   protected long resetValue;
 
-  public Counter(CounterTickablePins pins)
+  public Counter(String name, CounterTickablePins pins)
   {
-    super(pins);
+    super(name, pins);
     previousClock = true;
     counter = 0;
     resetValue = 1L << pins.getWidth();
@@ -70,6 +70,12 @@ public class Counter
       }
       getPins().setValue(counter);
     }
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Counter";
   }
 }
 

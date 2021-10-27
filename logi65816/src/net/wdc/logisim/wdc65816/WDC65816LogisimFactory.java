@@ -105,7 +105,7 @@ public class WDC65816LogisimFactory
   protected WDC65816LogisimPins createInstance()
   {
     WDC65816LogisimPins pins = new WDC65816LogisimPins();
-    new WDC65816(pins);
+    new WDC65816("", pins);
     return pins;
   }
 }

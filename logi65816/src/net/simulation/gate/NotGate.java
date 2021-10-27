@@ -1,41 +1,32 @@
 package net.simulation.gate;
 
-import net.simulation.common.Tickables;
-import net.simulation.common.Trace;
-import net.simulation.common.TraceValue;
-import net.simulation.common.Uniport;
+import net.common.PinValue;
+import net.common.Snapshot;
 
 public class NotGate
-    extends LogicGate
+    extends LogicGate<Snapshot, NotGateTickablePins>
 {
-  protected Uniport in;
-  protected Uniport out;
 
-  public NotGate(Tickables tickables, String name, Trace inTrace, Trace outTrace)
+  public NotGate(String name, NotGateTickablePins pins)
   {
-    super(tickables, name);
-    in = new Uniport(this, "In");
-    out = new Uniport(this, "Out");
-
-    in.connect(inTrace);
-    out.connect(outTrace);
+    super(name, pins);
   }
 
   public void tick()
   {
-    TraceValue inValue = in.read();
+    PinValue inValue = getPins().getInValue();
     if (inValue.isError() || inValue.isNotConnected())
     {
-      out.error();
+      getPins().setOutError();
     }
-    else if (inValue.isUnsettled())
+    else if (inValue.isUnknown())
     {
-      out.unset();
+      getPins().setOutUnsettled();
     }
     else
     {
       boolean calculatedValue = !inValue.isHigh();
-      out.writeBool(calculatedValue);
+      getPins().setOutValue(calculatedValue);
     }
   }
 

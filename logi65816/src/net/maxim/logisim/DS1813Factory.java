@@ -33,7 +33,7 @@ public class DS1813Factory
   protected DS1813LogisimPins createInstance()
   {
     DS1813LogisimPins pins = new DS1813LogisimPins();
-    new DS1813(pins);
+    new DS1813("", pins);
     return pins;
   }
 }

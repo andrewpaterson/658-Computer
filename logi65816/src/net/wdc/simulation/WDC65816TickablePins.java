@@ -46,7 +46,7 @@ public class WDC65816TickablePins
                               Trace validProgramAddress,
                               Trace validDataAddress)
   {
-    super(tickables, name);
+    super(tickables);
     this.addressBus = new Omniport(this, "Address Bus", 16);
     this.dataBus = new Omniport(this, "Data Bus", 8);
     this.rwB = new Uniport(this, "RWB");
@@ -122,12 +122,6 @@ public class WDC65816TickablePins
     {
       throw new EmulatorException("Cannot tick CPU with pins in unexpected state combination.");
     }
-  }
-
-  @Override
-  public String getType()
-  {
-    return "WDC65C816";
   }
 
   @Override

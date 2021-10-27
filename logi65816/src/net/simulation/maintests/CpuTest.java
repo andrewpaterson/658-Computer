@@ -1,10 +1,14 @@
 package net.simulation.maintests;
 
+import net.maxim.ds1813.DS1813;
+import net.maxim.simulation.DS1813TickablePins;
 import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.gate.NotGate;
+import net.simulation.gate.NotGateTickablePins;
 import net.simulation.memory.Memory;
+import net.simulation.memory.MemoryTickablePins;
 import net.simulation.wiring.ClockOscillator;
 import net.simulation.wiring.ClockOscillatorTickablePins;
 import net.simulation.wiring.Constant;
@@ -114,18 +118,20 @@ public class CpuTest
     Trace validProgramAddressTrace = new Trace();
     Trace validDataAddressTrace = new Trace();
 
-    Constant busEnable = new Constant(new ConstantTickablePins(tickables, "", busEnableTrace), true);
-    Constant irqB = new Constant(new ConstantTickablePins(tickables, "", irqBTrace), true);
-    Constant nmiB = new Constant(new ConstantTickablePins(tickables, "", nmiBTrace), true);
-    Constant abortB = new Constant(new ConstantTickablePins(tickables, "", abortBTrace), true);
+    Constant busEnable = new Constant("", new ConstantTickablePins(tickables, busEnableTrace), true);
+    Constant irqB = new Constant("", new ConstantTickablePins(tickables, irqBTrace), true);
+    Constant nmiB = new Constant("", new ConstantTickablePins(tickables, nmiBTrace), true);
+    Constant abortB = new Constant("", new ConstantTickablePins(tickables, abortBTrace), true);
     busEnableTrace.connect(busEnableTrace);
 
-    new ClockOscillator(new ClockOscillatorTickablePins(tickables, "", clockTrace));
-    new NotGate(tickables, "", clockTrace, notClockTrace);
+    new ClockOscillator("", new ClockOscillatorTickablePins(tickables, clockTrace));
+    new NotGate("", new NotGateTickablePins(tickables, clockTrace, notClockTrace));
 
-    EconoReset econoReset = new EconoReset(tickables, "", resetBTrace);
+    DS1813 econoReset = new DS1813("", new DS1813TickablePins(tickables, resetBTrace));
 
-    Memory memory = new Memory(tickables, "", addressBus, dataBus, rwbTrace, notClockTrace, notClockTrace,
+    Memory memory = new Memory("",
+                               new MemoryTickablePins(tickables,
+                                                      addressBus, dataBus, rwbTrace, notClockTrace, notClockTrace),
                                readBytes(new File("../Test816/Test816.bin")));
 
     WDC65816TickablePins cpuPins = new WDC65816TickablePins(tickables,
@@ -146,7 +152,7 @@ public class CpuTest
                                                             vectorPullBTrace,
                                                             validProgramAddressTrace,
                                                             validDataAddressTrace);
-    WDC65816 cpu = new WDC65816(cpuPins);
+    WDC65816 cpu = new WDC65816("", cpuPins);
 
     InterruptTrigger irqTrigger = new InterruptTrigger("[..............BRK.COP]", 200);
     InterruptTrigger nmiTrigger = new InterruptTrigger("[IRQ...........BRK.COP]", 200);

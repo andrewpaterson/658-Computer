@@ -24,8 +24,7 @@ public class LVC573TickablePins
                             Trace outputEnabledBTrace,
                             Trace latchEnableTrace)
   {
-    super(tickables, name);
-    new LVC573(this);
+    super(tickables);
     this.input = new Omniport(this, "D", width);
     this.output = new Omniport(this, "Q", width);
     this.outputEnableB = new Uniport(this, "OEB");
@@ -71,12 +70,6 @@ public class LVC573TickablePins
   public PinValue getOEB()
   {
     return null;
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Bus Transceiver";
   }
 }
 

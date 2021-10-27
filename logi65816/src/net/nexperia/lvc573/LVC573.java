@@ -12,9 +12,9 @@ public class LVC573
 {
   protected long latchValue;
 
-  public LVC573(LVC573Pins pins)
+  public LVC573(String name, LVC573Pins pins)
   {
-    super(pins);
+    super(name, pins);
     latchValue = 0;
   }
 
@@ -81,6 +81,12 @@ public class LVC573
   public String getValueString()
   {
     return StringUtil.getByteStringHex(toByte((int) latchValue));
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Bus Transceiver";
   }
 }
 

@@ -6,6 +6,7 @@ import net.simulation.common.Trace;
 import net.simulation.memory.Counter;
 import net.simulation.memory.CounterTickablePins;
 import net.simulation.memory.Memory;
+import net.simulation.memory.MemoryTickablePins;
 import net.simulation.wiring.ClockOscillatorTickablePins;
 import net.simulation.wiring.Constant;
 import net.simulation.wiring.ConstantTickablePins;
@@ -28,15 +29,15 @@ public class BusTest
     Bus zeroBus = new Bus(8);
     Bus addressBus = new Bus(counterData, zeroBus);
 
-    new ClockOscillatorTickablePins(tickables, "", clockTrace);
-    Counter counter = new Counter(new CounterTickablePins(tickables, "", 8, counterData, clockTrace));
-    new Constant(new ConstantTickablePins(tickables, "High", readTrace), true);
-    new Constant(new ConstantTickablePins(tickables, "Low", lowTrace), false);
-    new Constant(new ConstantTickablePins(tickables, "00000000", 8, zeroBus), 0);
+    new ClockOscillatorTickablePins(tickables, clockTrace);
+    Counter counter = new Counter("", new CounterTickablePins(tickables, "", 8, counterData, clockTrace));
+    new Constant("High", new ConstantTickablePins(tickables, readTrace), true);
+    new Constant("Low", new ConstantTickablePins(tickables, lowTrace), false);
+    new Constant("00000000", new ConstantTickablePins(tickables, 8, zeroBus), 0);
 
-    new Memory(tickables,
-               "",
-               addressBus, dataBus, readTrace, lowTrace, lowTrace,
+    new Memory("",
+               new MemoryTickablePins(tickables,
+                                      addressBus, dataBus, readTrace, lowTrace, lowTrace),
                readBytes(new File("../Test816/Test816.bin")));
 
     long lastCountNumber = 0;

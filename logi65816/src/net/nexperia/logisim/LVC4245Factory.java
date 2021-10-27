@@ -42,7 +42,7 @@ public class LVC4245Factory
   protected LVC4245LogisimPins createInstance()
   {
     LVC4245LogisimPins pins = new LVC4245LogisimPins();
-    new LVC4245(pins);
+    new LVC4245("", pins);
     return pins;
   }
 }

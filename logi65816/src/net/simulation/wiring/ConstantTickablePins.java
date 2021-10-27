@@ -11,24 +11,18 @@ public class ConstantTickablePins
 {
   protected final Omniport value;
 
-  public ConstantTickablePins(Tickables tickables, String name, Trace trace)
+  public ConstantTickablePins(Tickables tickables, Trace trace)
   {
-    super(tickables, name);
+    super(tickables);
     value = new Omniport(this, "Value", 1);
     value.connect(trace);
   }
 
-  public ConstantTickablePins(Tickables tickables, String name, int width, Bus bus)
+  public ConstantTickablePins(Tickables tickables, int width, Bus bus)
   {
-    super(tickables, name);
+    super(tickables);
     value = new Omniport(this, "Value", width);
     value.connect(bus);
-  }
-
-  @Override
-  public String getType()
-  {
-    return "Constant";
   }
 
   public void setValue(long constantValue)

@@ -1,41 +1,42 @@
 package net.simulation.gate;
 
 import net.common.IntegratedCircuit;
-import net.simulation.common.*;
+import net.common.PinValue;
+import net.common.Snapshot;
 
 import java.util.List;
 
-import static net.simulation.common.TraceValue.High;
-import static net.simulation.common.TraceValue.Low;
+import static net.common.PinValue.High;
+import static net.common.PinValue.Low;
 
-public abstract class LogicGate
-    extends Tickable
-    implements IntegratedCircuit
+public abstract class LogicGate<SNAPSHOT extends Snapshot, PINS extends LogicGateTickablePins<SNAPSHOT, PINS, ? extends IntegratedCircuit<SNAPSHOT, PINS>>>
+    extends IntegratedCircuit<SNAPSHOT, PINS>
 {
-  public LogicGate(Tickables tickables, String name)
+  public LogicGate(String name, PINS pins)
   {
-    super(tickables, name);
+    super(name, pins);
   }
 
-  protected void propagateLogic(List<Uniport> in, Uniport out, TraceValue defaultValue)
+  protected void andOrLogic(PinValue defaultValue)
   {
-    TraceValue inValues = Port.readStates(in);
+    PinValue inValues = getPins().getSingleInputValue();
+
     if (inValues.isError() || inValues.isNotConnected())
     {
-      out.error();
+      getPins().setOutError();
     }
-    else if (inValues.isUnsettled())
+    else if (inValues.isUnknown())
     {
-      out.unset();
+      getPins().setOutUnsettled();
     }
     else
     {
-      TraceValue oppositeValue = defaultValue == High ? Low : High;
-      TraceValue outputValue;
+      PinValue oppositeValue = defaultValue == High ? Low : High;
+      PinValue outputValue;
       outputValue = defaultValue;
-      for (Uniport input : in)
+      List<PinValue> pinValues = getPins().getInputValues();
+      for (PinValue inValue : pinValues)
       {
-        TraceValue inValue = input.read();
         if (inValue == oppositeValue)
         {
           outputValue = oppositeValue;
@@ -43,29 +44,8 @@ public abstract class LogicGate
         }
       }
 
-      out.writeBool(outputValue == High);
+      getPins().setOutValue(outputValue == High);
     }
-  }
-
-  @Override
-  public void startPropagation()
-  {
-  }
-
-  @Override
-  public void undoPropagation()
-  {
-  }
-
-  @Override
-  public void donePropagation()
-  {
-  }
-
-  @Override
-  protected IntegratedCircuit getIntegratedCircuit()
-  {
-    return this;
   }
 }
 

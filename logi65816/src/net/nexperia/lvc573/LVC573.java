@@ -10,6 +10,8 @@ import static net.util.IntUtil.toByte;
 public class LVC573
     extends IntegratedCircuit<LVC573Snapshot, LVC573Pins>
 {
+  public static final String TYPE = "Octal Latch";
+
   protected long latchValue;
 
   public LVC573(String name, LVC573Pins pins)
@@ -86,7 +88,7 @@ public class LVC573
   @Override
   public String getType()
   {
-    return "Bus Transceiver";
+    return TYPE;
   }
 }
 

@@ -203,22 +203,22 @@
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(570,570)" name="Pull Resistor"/>
-    <comp lib="0" loc="(760,490)" name="Probe">
+    <comp lib="0" loc="(780,490)" name="Probe">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
       <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(760,660)" name="Probe">
+    <comp lib="0" loc="(780,660)" name="Probe">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
       <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(770,590)" name="Tunnel">
+    <comp lib="0" loc="(790,590)" name="Tunnel">
       <a name="label" val="BA0_7"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(770,700)" name="Tunnel">
+    <comp lib="0" loc="(790,700)" name="Tunnel">
       <a name="label" val="D"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="8"/>
@@ -226,9 +226,10 @@
     <comp lib="1" loc="(240,890)" name="NOT Gate"/>
     <comp lib="1" loc="(570,610)" name="NOT Gate"/>
     <comp lib="1" loc="(570,680)" name="NOT Gate"/>
-    <comp lib="12" loc="(290,640)" name="W65C816S"/>
-    <comp lib="12" loc="(660,590)" name="LVC573"/>
-    <comp lib="12" loc="(660,700)" name="LVC4245"/>
+    <comp lib="12" loc="(230,340)" name="DS1813"/>
+    <comp lib="12" loc="(290,640)" name="WDC65816"/>
+    <comp lib="12" loc="(670,590)" name="LVC573"/>
+    <comp lib="12" loc="(670,700)" name="LVC4245"/>
     <comp lib="4" loc="(250,860)" name="RAM">
       <a name="addrWidth" val="24"/>
       <a name="appearance" val="classic"/>
@@ -267,6 +268,7 @@
     <wire from="(230,900)" to="(230,940)"/>
     <wire from="(230,900)" to="(250,900)"/>
     <wire from="(240,890)" to="(250,890)"/>
+    <wire from="(310,340)" to="(420,340)"/>
     <wire from="(410,570)" to="(440,570)"/>
     <wire from="(410,590)" to="(470,590)"/>
     <wire from="(410,610)" to="(420,610)"/>
@@ -292,13 +294,13 @@
     <wire from="(570,570)" to="(590,570)"/>
     <wire from="(570,610)" to="(590,610)"/>
     <wire from="(570,680)" to="(590,680)"/>
-    <wire from="(730,590)" to="(750,590)"/>
-    <wire from="(730,700)" to="(750,700)"/>
-    <wire from="(750,490)" to="(750,590)"/>
-    <wire from="(750,490)" to="(760,490)"/>
     <wire from="(750,590)" to="(770,590)"/>
-    <wire from="(750,660)" to="(750,700)"/>
-    <wire from="(750,660)" to="(760,660)"/>
     <wire from="(750,700)" to="(770,700)"/>
+    <wire from="(770,490)" to="(770,590)"/>
+    <wire from="(770,490)" to="(780,490)"/>
+    <wire from="(770,590)" to="(790,590)"/>
+    <wire from="(770,660)" to="(770,700)"/>
+    <wire from="(770,660)" to="(780,660)"/>
+    <wire from="(770,700)" to="(790,700)"/>
   </circuit>
 </project>

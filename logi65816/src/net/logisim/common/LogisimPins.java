@@ -115,6 +115,11 @@ public abstract class LogisimPins<
     }
   }
 
+  public boolean requiresPropagationListener()
+  {
+    return true;
+  }
+
   public INTEGRATED_CIRCUIT getIntegratedCircuit()
   {
     return integratedCircuit;
@@ -123,6 +128,11 @@ public abstract class LogisimPins<
   public void setIntegratedCircuit(INTEGRATED_CIRCUIT integratedCircuit)
   {
     this.integratedCircuit = integratedCircuit;
+  }
+
+  public int getTickCount()
+  {
+    return instanceState.getTickCount();
   }
 }
 

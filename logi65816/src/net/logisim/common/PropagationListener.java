@@ -2,10 +2,10 @@ package net.logisim.common;
 
 import com.cburch.logisim.circuit.Simulator;
 
-public class PropagationListener<T extends LogisimPins>
+public class PropagationListener<T extends LogisimPins<?, ?, ?>>
     implements Simulator.Listener
 {
-  private T instance;
+  private final T instance;
 
   public PropagationListener(T instance)
   {

@@ -22,8 +22,9 @@ public class DS1813TickablePins
   }
 
   @Override
-  public void setOut(boolean value)
+  public void setOut()
   {
+    boolean value = getTickCount() > 5;
     out.writeBool(value);
   }
 }

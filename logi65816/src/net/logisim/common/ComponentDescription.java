@@ -16,17 +16,13 @@ public class ComponentDescription
   protected final int pinStartY;
   protected final int pinStopY;
 
-  protected boolean canChangeDirection;
-
   protected final PortDescription[] portDescriptions;
 
   public ComponentDescription(int width,
                               int height,
                               int verticalMargin,
-                              boolean canChangeDirection,
                               PortDescription... portDescriptions)
   {
-    this.canChangeDirection = canChangeDirection;
     this.portDescriptions = portDescriptions;
     this.pinsPerSide = portDescriptions.length / 2 + portDescriptions.length % 2;
 
@@ -115,14 +111,14 @@ public class ComponentDescription
     return topY + verticalMargin;
   }
 
+  public int getBottomYMinusMargin()
+  {
+    return botY - verticalMargin - 5;
+  }
+
   public int pixelsPerPin()
   {
     return pixelsPerPin;
-  }
-
-  public boolean canChangeDirection()
-  {
-    return canChangeDirection;
   }
 }
 

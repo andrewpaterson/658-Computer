@@ -181,7 +181,7 @@ public class Memory
   @Override
   public String getType()
   {
-    return "Async SRAM";
+    return "Memory";
   }
 }
 

@@ -11,8 +11,12 @@ public class DS1813LogisimPins
     implements DS1813Pins
 {
   @Override
-  public void setOut(boolean value)
+  public void setOut()
   {
+    int tickCount = instanceState.getTickCount();
+    System.out.println("DS1813LogisimPins.setOut: " + tickCount);
+    boolean value = tickCount > 5;
+    System.out.println("DS1813LogisimPins.setOut: " + value);
     instanceState.setPort(DS1813Factory.PORT_RSTB, value ? Value.TRUE : Value.FALSE, 20);
   }
 }

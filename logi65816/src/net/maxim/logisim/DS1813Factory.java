@@ -4,7 +4,6 @@ import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
 import net.logisim.common.PortDescription;
 import net.maxim.ds1813.DS1813;
-import net.nexperia.lvc573.LVC573;
 
 import java.awt.*;
 
@@ -15,8 +14,8 @@ public class DS1813Factory
 
   public DS1813Factory()
   {
-    super("LVC573",
-          new ComponentDescription(100, 20, 10, true,
+    super(DS1813.class.getSimpleName(),
+          new ComponentDescription(160, 60, 10,
                                    PortDescription.blank(),
                                    PortDescription.inoutShared(PORT_RSTB, "RSTB")
           ));
@@ -25,8 +24,7 @@ public class DS1813Factory
   @Override
   protected void paint(DS1813LogisimPins instance, Graphics2D graphics2D)
   {
-    DS1813 latch = instance.getIntegratedCircuit();
-//    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Value:", latch.getValueString(), true);
+    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Reset:", "", true);
   }
 
   @Override

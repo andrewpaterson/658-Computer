@@ -3,10 +3,11 @@ package net.logisim;
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
+import net.maxim.logisim.DS1813Factory;
 import net.nexperia.logisim.LVC4245Factory;
 import net.nexperia.logisim.LVC573Factory;
 import net.wdc.logisim.wdc6502.Logisim6502Factory;
-import net.wdc.logisim.wdc65816.WDC65816LogisimFactory;
+import net.wdc.logisim.wdc65816.WDC65816Factory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +22,11 @@ public class Components
     try
     {
       tools = new ArrayList<>();
-      tools.add(new AddTool(new WDC65816LogisimFactory()));
+      tools.add(new AddTool(new WDC65816Factory()));
       tools.add(new AddTool(new Logisim6502Factory()));
       tools.add(new AddTool(new LVC573Factory()));
       tools.add(new AddTool(new LVC4245Factory()));
+      tools.add(new AddTool(new DS1813Factory()));
     }
     catch (Exception e)
     {

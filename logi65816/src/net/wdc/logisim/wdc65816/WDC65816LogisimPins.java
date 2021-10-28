@@ -8,7 +8,7 @@ import net.wdc.wdc65816.WDC65816Pins;
 import net.wdc.wdc65816.WDC65816Snapshot;
 
 import static net.util.IntUtil.toByte;
-import static net.wdc.logisim.wdc65816.WDC65816LogisimFactory.*;
+import static net.wdc.logisim.wdc65816.WDC65816Factory.*;
 
 public class WDC65816LogisimPins
     extends LogisimPins<WDC65816Snapshot, WDC65816Pins, WDC65816>

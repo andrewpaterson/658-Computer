@@ -9,6 +9,7 @@ import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.instance.*;
 import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
+import net.common.IntegratedCircuit;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
-public abstract class LogisimFactory<T extends LogisimPins>
+public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
     extends InstanceFactory
 {
   public static final int TOP_OFFSET = 30;
@@ -27,6 +28,7 @@ public abstract class LogisimFactory<T extends LogisimPins>
 
   protected final List<PortDescription> portMap;
   protected final ComponentDescription description;
+
   protected PropagationListener<T> propagationListener;
 
   @SuppressWarnings("rawtypes")
@@ -35,30 +37,14 @@ public abstract class LogisimFactory<T extends LogisimPins>
     super(name);
     Attribute[] attributesNames;
     Object[] attributeDefaults;
-    if (description.canChangeDirection())
-    {
-      attributesNames = new Attribute[]{
-          StdAttr.FACING,
-          StdAttr.LABEL,
-          StdAttr.LABEL_FONT,
-          };
-      attributeDefaults = new Object[]{
-          Direction.EAST,
-          "",
-          StdAttr.DEFAULT_LABEL_FONT,
-          };
-    }
-    else
-    {
-      attributesNames = new Attribute[]{
-          StdAttr.LABEL,
-          StdAttr.LABEL_FONT,
-          };
-      attributeDefaults = new Object[]{
-          "",
-          StdAttr.DEFAULT_LABEL_FONT,
-          };
-    }
+    attributesNames = new Attribute[]{
+        StdAttr.LABEL,
+        StdAttr.LABEL_FONT,
+        };
+    attributeDefaults = new Object[]{
+        "",
+        StdAttr.DEFAULT_LABEL_FONT,
+        };
 
     setAttributes(
         attributesNames,
@@ -112,9 +98,9 @@ public abstract class LogisimFactory<T extends LogisimPins>
     return instance.isClockHigh();
   }
 
-  protected void paintPorts(InstancePainter painter, LogisimPins instance)
+  protected void paintPorts(InstancePainter painter, T instance)
   {
-    boolean clock = !isClockHigh((T) instance);
+    boolean clock = !isClockHigh(instance);
     painter.drawBounds();
     for (int index = 0; index < portMap.size(); index++)
     {
@@ -150,20 +136,14 @@ public abstract class LogisimFactory<T extends LogisimPins>
 
       AffineTransform oldTransform = graphics2D.getTransform();
       AffineTransform newTransform = (AffineTransform) oldTransform.clone();
-      if (description.canChangeDirection())
-      {
-        Direction direction = painter.getAttributeValue(StdAttr.FACING);
-        if (direction != null && direction != Direction.EAST)
-        {
-          var rotate = 0.0;
-          rotate = -direction.toRadians();
-          newTransform.rotate(rotate);
-        }
-      }
 
       newTransform.translate(bounds.getX() + bounds.getWidth() / 2.0, bounds.getY() + bounds.getHeight() / 2.0);
       graphics2D.setTransform(newTransform);
-      GraphicsUtil.drawCenteredText(graphics2D, getName(), 0, description.getTopYPlusMargin());
+      IntegratedCircuit<?, ?> integratedCircuit = instance.getIntegratedCircuit();
+      String type = integratedCircuit.getType();
+      String part = integratedCircuit.getPart();
+      GraphicsUtil.drawCenteredText(graphics2D, type, 0, description.getTopYPlusMargin());
+      GraphicsUtil.drawCenteredText(graphics2D, part, 0, description.getBottomYMinusMargin());
 
       paint(instance, graphics2D);
 
@@ -180,8 +160,11 @@ public abstract class LogisimFactory<T extends LogisimPins>
       instance = createInstance();
       instanceState.setData(instance);
 
-      propagationListener = new PropagationListener<>(instance);
-      instanceState.getProject().getSimulator().addSimulatorListener(propagationListener);
+      if (instance.requiresPropagationListener())
+      {
+        propagationListener = new PropagationListener<>(instance);
+        instanceState.getProject().getSimulator().addSimulatorListener(propagationListener);
+      }
     }
     return instance;
   }

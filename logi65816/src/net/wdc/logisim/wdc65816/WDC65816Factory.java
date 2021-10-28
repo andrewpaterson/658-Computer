@@ -9,7 +9,7 @@ import java.awt.*;
 
 import static net.logisim.common.PortDescription.*;
 
-public class WDC65816LogisimFactory
+public class WDC65816Factory
     extends LogisimFactory<WDC65816LogisimPins>
 {
   // Left side, top to bottom
@@ -32,10 +32,10 @@ public class WDC65816LogisimFactory
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_AddressBus = 15;
 
-  public WDC65816LogisimFactory()
+  public WDC65816Factory()
   {
-    super("W65C816S",
-          new ComponentDescription(240, 240, 10, false,
+    super(WDC65816.class.getSimpleName(),
+          new ComponentDescription(240, 240, 10,
                                    inputShared(PORT_ABORTB, "ABORTB").setTooltip("Abort current instruction (input: active low)"),
                                    inputShared(PORT_IRQB, "IRQB").setTooltip("Interrupt request (input: active low)"),
                                    inputShared(PORT_NMIB, "NMIB").setTooltip("Non-maskable interrupt (input: active low)"),

@@ -17,8 +17,8 @@ public class LVC573Factory
 
   public LVC573Factory()
   {
-    super("LVC573",
-          new ComponentDescription(140, 60, 10, true,
+    super(LVC573.class.getSimpleName(),
+          new ComponentDescription(160, 60, 10,
                                    PortDescription.inputShared(PORT_OEB, "OEB"),
                                    PortDescription.inputShared(PORT_D, "D", 8).setTooltip("Input D (input)"),
                                    PortDescription.inputShared(PORT_LE, "LE"),

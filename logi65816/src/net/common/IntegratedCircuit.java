@@ -52,6 +52,11 @@ public abstract class IntegratedCircuit<SNAPSHOT extends Snapshot, PINS extends 
     }
   }
 
+  public String getPart()
+  {
+    return getClass().getSimpleName();
+  }
+
   public abstract String getType();
 }
 

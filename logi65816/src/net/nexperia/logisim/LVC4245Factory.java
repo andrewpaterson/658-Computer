@@ -18,8 +18,8 @@ public class LVC4245Factory
 
   public LVC4245Factory()
   {
-    super("LVC4245",
-          new ComponentDescription(140, 60, 10, true,
+    super(LVC4245.class.getSimpleName(),
+          new ComponentDescription(160, 60, 10,
                                    PortDescription.inputShared(PORT_OEB, "OEB").setTooltip("Output enable (input: A and B high impedance high, A and B enable low)"),
                                    PortDescription.inoutShared(PORT_B, "B", 8).setTooltip("Data B (input or output)"),
                                    PortDescription.inputShared(PORT_DIR, "DIR").setTooltip("Direction (input: B to A low, A to B high)"),

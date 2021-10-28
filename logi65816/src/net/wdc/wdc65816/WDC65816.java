@@ -2138,7 +2138,7 @@ public class WDC65816
   @Override
   public String getType()
   {
-    return "WDC65C816";
+    return "Microprocessor";
   }
 }
 

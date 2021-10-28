@@ -19,11 +19,14 @@ public abstract class Tickable<
   protected Tickables tickables;
   protected List<Port> ports;
 
+  protected long tickCount;
+
   public Tickable(Tickables tickables)
   {
     this.tickables = tickables;
     this.tickables.add(this);
     this.ports = new ArrayList<>();
+    this.tickCount = 0;
   }
 
   public void addPort(Port port)
@@ -54,6 +57,7 @@ public abstract class Tickable<
   public final void donePropagation()
   {
     snapshot = null;
+    tickCount++;
   }
 
   public List<TraceValue> getTraceValues()
@@ -215,6 +219,11 @@ public abstract class Tickable<
   public String getType()
   {
     return integratedCircuit.getType();
+  }
+
+  public long getTickCount()
+  {
+    return tickCount;
   }
 }
 

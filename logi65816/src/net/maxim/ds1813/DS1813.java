@@ -34,5 +34,10 @@ public class DS1813
   {
     return TYPE;
   }
+
+  public int getResetTickCount()
+  {
+    return 5;
+  }
 }
 

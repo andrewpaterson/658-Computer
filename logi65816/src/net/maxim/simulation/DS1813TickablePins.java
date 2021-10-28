@@ -24,7 +24,7 @@ public class DS1813TickablePins
   @Override
   public void setOut()
   {
-    boolean value = getTickCount() > 5;
+    boolean value = getTickCount() > getIntegratedCircuit().getResetTickCount();
     out.writeBool(value);
   }
 }

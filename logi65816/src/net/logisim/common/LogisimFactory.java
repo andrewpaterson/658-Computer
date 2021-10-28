@@ -51,11 +51,10 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
                                   description.getTopY(),
                                   description.getWidth(),
                                   description.getHeight()));
-    List<Port> ports = addPins(this.description);
-    setPorts(ports);
+    setPorts(createPorts(this.description));
   }
 
-  protected static List<Port> addPins(ComponentDescription description)
+  protected List<Port> createPorts(ComponentDescription description)
   {
     ArrayList<Port> ports = new ArrayList<>();
     List<PortDescription> portInfos = description.getPorts();
@@ -69,11 +68,11 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
         Port port;
         if (isRightSide)
         {
-          port = new Port(description.getRight(), description.getPinStop() - pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+          port = createRightSidePort(description, portDescription, pinPerSide);
         }
         else
         {
-          port = new Port(description.getLeft(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+          port = createLeftSidePort(description, portDescription, pinPerSide);
         }
         port.setToolTip(new StringGetter()
         {
@@ -87,7 +86,16 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
       }
     }
     return ports;
+  }
 
+  protected Port createLeftSidePort(ComponentDescription description, PortDescription portDescription, int pinPerSide)
+  {
+    return new Port(description.getLeft(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+  }
+
+  protected Port createRightSidePort(ComponentDescription description, PortDescription portDescription, int pinPerSide)
+  {
+    return new Port(description.getRight(), description.getPinStop() - pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
   }
 
   @Override

@@ -2,31 +2,34 @@ package net.maxim.logisim;
 
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
-import com.cburch.logisim.std.wiring.Clock;
+import com.cburch.logisim.instance.Port;
 import net.logisim.common.ComponentDescription;
+import net.logisim.common.LogisimFactory;
 import net.logisim.common.LogisimPainter;
 import net.logisim.common.PortDescription;
 import net.maxim.ds1813.DS1813;
 
 import java.awt.*;
 
-import static net.logisim.common.LogisimFactory.TOP_OFFSET;
-import static net.logisim.common.LogisimFactory.WIDTH_8BIT;
-
 public class DS1813Factory
-    extends Clock
+    extends LogisimFactory<DS1813LogisimPins>
     implements LogisimPainter<DS1813LogisimPins>
 {
-  protected static final int PORT_RSTB = 0;
-
-  private final ComponentDescription description;
+  protected static final int PORT_CLOCK = 0;
+  protected static final int PORT_RSTB = 1;
 
   public DS1813Factory()
   {
-    super(DS1813.class.getSimpleName());
-    description = new ComponentDescription(160, 60, 10,
-                                           PortDescription.blank(),
-                                           PortDescription.inoutShared(PORT_RSTB, "RSTB"));
+    super(DS1813.class.getSimpleName(),
+          new ComponentDescription(160, 60, 10,
+                                   PortDescription.inputShared(PORT_CLOCK, ""),
+                                   PortDescription.inoutShared(PORT_RSTB, "RSTB")));
+  }
+
+  @Override
+  protected Port createLeftSidePort(ComponentDescription description, PortDescription portDescription, int pinPerSide)
+  {
+    return new Port(description.getLeft() + description.pixelsPerPin(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
   }
 
   @Override
@@ -44,7 +47,7 @@ public class DS1813Factory
   @Override
   public void paint(DS1813LogisimPins instance, Graphics2D graphics2D)
   {
-    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Reset:", "", true);
+    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Reset:", instance.getResetString(), true);
   }
 
   public DS1813LogisimPins getOrCreateInstance(InstanceState instanceState)

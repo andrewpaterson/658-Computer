@@ -2,6 +2,7 @@ package net.nexperia.logisim;
 
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
+import net.logisim.common.LogisimPainter;
 import net.logisim.common.PortDescription;
 import net.nexperia.lvc573.LVC573;
 
@@ -9,6 +10,7 @@ import java.awt.*;
 
 public class LVC573Factory
     extends LogisimFactory<LVC573LogisimPins>
+    implements LogisimPainter<LVC573LogisimPins>
 {
   protected static final int PORT_LE = 2;
   protected static final int PORT_D = 1;
@@ -31,7 +33,7 @@ public class LVC573Factory
   }
 
   @Override
-  protected void paint(LVC573LogisimPins instance, Graphics2D graphics2D)
+  public void paint(LVC573LogisimPins instance, Graphics2D graphics2D)
   {
     LVC573 latch = instance.getIntegratedCircuit();
     drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Value:", latch.getValueString(), true);

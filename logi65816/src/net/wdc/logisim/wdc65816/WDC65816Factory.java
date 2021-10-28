@@ -58,7 +58,7 @@ public class WDC65816Factory
   }
 
   @Override
-  protected void paint(WDC65816LogisimPins instance, Graphics2D graphics2D)
+  public void paint(WDC65816LogisimPins instance, Graphics2D graphics2D)
   {
     WDC65816 cpu = instance.getCpu();
     boolean isOpcodeValid = cpu.getCycle() != 0;

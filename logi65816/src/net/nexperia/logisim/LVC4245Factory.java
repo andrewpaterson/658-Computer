@@ -2,6 +2,7 @@ package net.nexperia.logisim;
 
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
+import net.logisim.common.LogisimPainter;
 import net.logisim.common.PortDescription;
 import net.nexperia.lvc4245.LVC4245;
 import net.wdc.wdc65816.WDC65816;
@@ -10,6 +11,7 @@ import java.awt.*;
 
 public class LVC4245Factory
     extends LogisimFactory<LVC4245LogisimPins>
+    implements LogisimPainter<LVC4245LogisimPins>
 {
   protected static final int PORT_DIR = 2;
   protected static final int PORT_A = 3;
@@ -32,7 +34,7 @@ public class LVC4245Factory
   }
 
   @Override
-  protected void paint(LVC4245LogisimPins instance, Graphics2D graphics2D)
+  public void paint(LVC4245LogisimPins instance, Graphics2D graphics2D)
   {
     LVC4245 transceiver = instance.getIntegratedCircuit();
     drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Dir:", transceiver.getDirectionString(), transceiver.isDirectionValid());

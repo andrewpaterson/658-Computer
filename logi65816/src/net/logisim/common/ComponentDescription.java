@@ -1,5 +1,8 @@
 package net.logisim.common;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ComponentDescription
 {
   protected final int pixelsPerPin;
@@ -16,15 +19,15 @@ public class ComponentDescription
   protected final int pinStartY;
   protected final int pinStopY;
 
-  protected final PortDescription[] portDescriptions;
+  protected final List<PortDescription> ports;
 
   public ComponentDescription(int width,
                               int height,
                               int verticalMargin,
-                              PortDescription... portDescriptions)
+                              PortDescription... ports)
   {
-    this.portDescriptions = portDescriptions;
-    this.pinsPerSide = portDescriptions.length / 2 + portDescriptions.length % 2;
+    this.ports = Arrays.asList(ports);
+    this.pinsPerSide = ports.length / 2 + ports.length % 2;
 
     this.verticalMargin = verticalMargin;
     this.leftX = -(width / 2);
@@ -39,11 +42,6 @@ public class ComponentDescription
 
     this.pinStartY = pinTopY + verticalMargin;
     this.pinStopY = pinBotY - verticalMargin;
-  }
-
-  public PortDescription[] getPortDescriptions()
-  {
-    return portDescriptions;
   }
 
   public int getVerticalMargin()
@@ -119,6 +117,11 @@ public class ComponentDescription
   public int pixelsPerPin()
   {
     return pixelsPerPin;
+  }
+
+  public List<PortDescription> getPorts()
+  {
+    return ports;
   }
 }
 

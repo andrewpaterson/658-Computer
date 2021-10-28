@@ -5,28 +5,23 @@ import com.cburch.logisim.circuit.CircuitState;
 import com.cburch.logisim.comp.Component;
 import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.Bounds;
-import com.cburch.logisim.data.Direction;
 import com.cburch.logisim.instance.*;
-import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.StringGetter;
-import net.common.IntegratedCircuit;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
 public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
     extends InstanceFactory
+    implements LogisimPainter<T>
+
 {
   public static final int TOP_OFFSET = 30;
   public static final int WIDTH_8BIT = 38;
   public static final int WIDTH_16BIT = 52;
   public static final int WIDTH_24BIT = 70;
 
-  protected final List<PortDescription> portMap;
   protected final ComponentDescription description;
 
   protected PropagationListener<T> propagationListener;
@@ -51,18 +46,19 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
         attributeDefaults);
 
     this.description = description;
-    this.portMap = Arrays.asList(description.getPortDescriptions());
 
     setOffsetBounds(Bounds.create(description.getLeft(),
                                   description.getTopY(),
                                   description.getWidth(),
                                   description.getHeight()));
-    addPins(this.portMap);
+    List<Port> ports = addPins(this.description);
+    setPorts(ports);
   }
 
-  protected void addPins(List<PortDescription> portInfos)
+  protected static List<Port> addPins(ComponentDescription description)
   {
     ArrayList<Port> ports = new ArrayList<>();
+    List<PortDescription> portInfos = description.getPorts();
     for (int index = 0; index < portInfos.size(); index++)
     {
       PortDescription portDescription = portInfos.get(index);
@@ -90,27 +86,8 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
         ports.add(port);
       }
     }
-    setPorts(ports);
-  }
+    return ports;
 
-  protected boolean isClockHigh(T instance)
-  {
-    return instance.isClockHigh();
-  }
-
-  protected void paintPorts(InstancePainter painter, T instance)
-  {
-    boolean clock = !isClockHigh(instance);
-    painter.drawBounds();
-    for (int index = 0; index < portMap.size(); index++)
-    {
-      PortDescription portDescription = portMap.get(index);
-      if (portDescription.mustDraw)
-      {
-        Direction dir = index < description.getPinsPerSide() ? Direction.EAST : Direction.WEST;
-        painter.drawPort(portDescription.index, !clock ? portDescription.lowName : portDescription.highName, dir);
-      }
-    }
   }
 
   @Override
@@ -123,33 +100,8 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
 
   public void paintInstance(InstancePainter painter)
   {
-    Graphics g = painter.getGraphics();
-    if (g instanceof Graphics2D)
-    {
-      Graphics2D graphics2D = (Graphics2D) g;
-      T instance = getOrCreateInstance(painter);
-      paintPorts(painter, instance);
-
-      Font oldFont = graphics2D.getFont();
-      graphics2D.setFont(oldFont.deriveFont(Font.BOLD));
-      Bounds bounds = painter.getBounds();
-
-      AffineTransform oldTransform = graphics2D.getTransform();
-      AffineTransform newTransform = (AffineTransform) oldTransform.clone();
-
-      newTransform.translate(bounds.getX() + bounds.getWidth() / 2.0, bounds.getY() + bounds.getHeight() / 2.0);
-      graphics2D.setTransform(newTransform);
-      IntegratedCircuit<?, ?> integratedCircuit = instance.getIntegratedCircuit();
-      String type = integratedCircuit.getType();
-      String part = integratedCircuit.getPart();
-      GraphicsUtil.drawCenteredText(graphics2D, type, 0, description.getTopYPlusMargin());
-      GraphicsUtil.drawCenteredText(graphics2D, part, 0, description.getBottomYMinusMargin());
-
-      paint(instance, graphics2D);
-
-      graphics2D.setTransform(oldTransform);
-      graphics2D.setFont(oldFont);
-    }
+    T pins = getOrCreateInstance(painter);
+    paintInstance(painter, pins);
   }
 
   public T getOrCreateInstance(InstanceState instanceState)
@@ -179,32 +131,11 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
     }
   }
 
-  protected Color setColour(Graphics g, boolean black)
+  public ComponentDescription getDescription()
   {
-    Color oldColour = g.getColor();
-    if (black)
-    {
-      g.setColor(Color.black);
-    }
-    else
-    {
-      g.setColor(Color.lightGray);
-    }
-    return oldColour;
-  }
-
-  protected void drawField(Graphics g, int topOffset, int rectangleWidth, String label, String value, boolean black)
-  {
-    int y = description.getTopYPlusMargin() + topOffset;
-    g.drawRect(5, y - 5, rectangleWidth, 15);
-    GraphicsUtil.drawText(g, label, -10, y, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
-    Color oldColour = setColour(g, black);
-    GraphicsUtil.drawText(g, value, 10, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
-    g.setColor(oldColour);
+    return description;
   }
 
   protected abstract T createInstance();
-
-  protected abstract void paint(T instance, Graphics2D graphics2D);
 }
 

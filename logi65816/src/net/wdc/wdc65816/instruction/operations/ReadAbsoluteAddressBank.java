@@ -1,6 +1,6 @@
 package net.wdc.wdc65816.instruction.operations;
 
-import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.W65C816;
 
 public class ReadAbsoluteAddressBank
     extends DataOperation
@@ -11,7 +11,7 @@ public class ReadAbsoluteAddressBank
   }
 
   @Override
-  public void execute(WDC65816 cpu)
+  public void execute(W65C816 cpu)
   {
     cpu.setAddressBank(getPinData(cpu));
   }

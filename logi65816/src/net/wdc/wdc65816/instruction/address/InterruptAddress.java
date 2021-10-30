@@ -1,6 +1,6 @@
 package net.wdc.wdc65816.instruction.address;
 
-import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.W65C816;
 import net.wdc.wdc65816.instruction.interrupt.InterruptVector;
 
 public class InterruptAddress
@@ -14,7 +14,7 @@ public class InterruptAddress
   }
 
   @Override
-  public int getOffset(WDC65816 cpu)
+  public int getOffset(W65C816 cpu)
   {
     return interruptVector.getAddress(cpu);
   }

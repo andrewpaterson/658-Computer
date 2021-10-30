@@ -303,7 +303,7 @@ public class Omniport
         }
         else
         {
-          e =  Long.toHexString(value).charAt(0);
+          e = Long.toHexString(value).charAt(0);
         }
         stringBuilder.append(e);
         value = 0;

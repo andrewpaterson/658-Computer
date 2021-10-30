@@ -1,22 +1,22 @@
 package net.wdc.wdc65816.instruction.operations;
 
-import net.wdc.wdc65816.WDC65816;
 import net.wdc.wdc65816.Executor;
+import net.wdc.wdc65816.W65C816;
 
 import static net.wdc.wdc65816.Executor.getMethodName;
 
 public class ExecuteIf8BitIndices
     extends Operation
 {
-  private final Executor<WDC65816> function;
+  private final Executor<W65C816> function;
 
-  public ExecuteIf8BitIndices(Executor<WDC65816> function)
+  public ExecuteIf8BitIndices(Executor<W65C816> function)
   {
     this.function = function;
   }
 
   @Override
-  public void execute(WDC65816 cpu)
+  public void execute(W65C816 cpu)
   {
     if (cpu.isIndex8Bit())
     {

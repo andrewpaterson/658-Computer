@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import static net.wdc.logisim.wdc6502.Logisim65C02Instance.*;
 
-public class Logisim6502Factory
+public class W65C02Factory
     extends InstanceFactory
 {
   private static final int PINS_PER_SIDE = 7;
@@ -62,7 +62,7 @@ public class Logisim6502Factory
   public static final int PORT_DataBus = 11;
   public static final int PORT_AddressBus = 12;
 
-  public Logisim6502Factory()
+  public W65C02Factory()
   {
     super("W65C02S");
     setOffsetBounds(Bounds.create(LEFT_X, TOP_Y, RIGHT_X - LEFT_X, BOT_Y - TOP_Y));
@@ -84,24 +84,24 @@ public class Logisim6502Factory
 
   protected void addStandardPins()
   {
-    ArrayList<Port> ports = new ArrayList<>(Logisim6502Factory.portInfos.length);
-    for (int n = 0; n < Logisim6502Factory.portInfos.length; ++n)
+    ArrayList<Port> ports = new ArrayList<>(W65C02Factory.portInfos.length);
+    for (int n = 0; n < W65C02Factory.portInfos.length; ++n)
     {
-      PortInfo info = Logisim6502Factory.portInfos[n];
+      PortInfo info = W65C02Factory.portInfos[n];
       if (info == null)
       {
         continue;
       }
-      boolean isRightSide = n >= Logisim6502Factory.PINS_PER_SIDE;
-      int pinPerSide = isRightSide ? n - Logisim6502Factory.PINS_PER_SIDE : n;
+      boolean isRightSide = n >= W65C02Factory.PINS_PER_SIDE;
+      int pinPerSide = isRightSide ? n - W65C02Factory.PINS_PER_SIDE : n;
       Port port;
       if (isRightSide)
       {
-        port = new Port(Logisim6502Factory.RIGHT_X, Logisim6502Factory.PIN_STOP_Y - pinPerSide * Logisim6502Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
+        port = new Port(W65C02Factory.RIGHT_X, W65C02Factory.PIN_STOP_Y - pinPerSide * W65C02Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
       }
       else
       {
-        port = new Port(Logisim6502Factory.LEFT_X, Logisim6502Factory.PIN_START_Y + pinPerSide * Logisim6502Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
+        port = new Port(W65C02Factory.LEFT_X, W65C02Factory.PIN_START_Y + pinPerSide * W65C02Factory.PIXELS_PER_PIN, info.type, info.bitWidth, info.exclusive);
       }
       port.setToolTip(new StringGetter()
       {

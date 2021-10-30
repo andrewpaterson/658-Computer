@@ -12,8 +12,8 @@ import static net.util.IntUtil.*;
 import static net.util.StringUtil.*;
 import static net.wdc.wdc65816.CpuFlags.*;
 
-public class WDC65816
-    extends IntegratedCircuit<WDC65816Snapshot, WDC65816Pins>
+public class W65C816
+    extends IntegratedCircuit<W65C816Snapshot, W65C816Pins>
 {
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
@@ -73,7 +73,7 @@ public class WDC65816
   protected boolean fallingEdge;
   protected boolean risingEdge;
 
-  public WDC65816(String name, WDC65816Pins pins)
+  public W65C816(String name, W65C816Pins pins)
   {
     super(name, pins);
 
@@ -2031,52 +2031,52 @@ public class WDC65816
     return z + n + d + i + m + x + c + e + o + b;
   }
 
-  public WDC65816Snapshot createSnapshot()
+  public W65C816Snapshot createSnapshot()
   {
-    return new WDC65816Snapshot(zeroFlag,
-                                negativeFlag,
-                                decimalFlag,
-                                interruptDisableFlag,
-                                accumulatorWidthFlag,
-                                indexWidthFlag,
-                                carryFlag,
-                                emulationFlag,
-                                overflowFlag,
-                                breakFlag,
-                                accumulator,
-                                xIndex,
-                                yIndex,
-                                dataBank,
-                                directPage,
-                                new Address(programCounter),
-                                stackPointer,
-                                clock,
-                                fallingEdge,
-                                risingEdge,
-                                reset,
-                                irq,
-                                nmi,
-                                abort,
-                                busEnable,
-                                cycle,
-                                opCode,
-                                stopped,
-                                new Address(address),
-                                data,
-                                directOffset,
-                                new Address(newProgramCounter),
-                                read,
-                                abortProcessRegister,
-                                abortAccumulator,
-                                abortXIndex,
-                                abortYIndex,
-                                abortDataBank,
-                                abortDirectPage,
-                                new Address(abortProgramCounter),
-                                abortStackPointer);
+    return new W65C816Snapshot(zeroFlag,
+                               negativeFlag,
+                               decimalFlag,
+                               interruptDisableFlag,
+                               accumulatorWidthFlag,
+                               indexWidthFlag,
+                               carryFlag,
+                               emulationFlag,
+                               overflowFlag,
+                               breakFlag,
+                               accumulator,
+                               xIndex,
+                               yIndex,
+                               dataBank,
+                               directPage,
+                               new Address(programCounter),
+                               stackPointer,
+                               clock,
+                               fallingEdge,
+                               risingEdge,
+                               reset,
+                               irq,
+                               nmi,
+                               abort,
+                               busEnable,
+                               cycle,
+                               opCode,
+                               stopped,
+                               new Address(address),
+                               data,
+                               directOffset,
+                               new Address(newProgramCounter),
+                               read,
+                               abortProcessRegister,
+                               abortAccumulator,
+                               abortXIndex,
+                               abortYIndex,
+                               abortDataBank,
+                               abortDirectPage,
+                               new Address(abortProgramCounter),
+                               abortStackPointer);
   }
 
-  public void restoreFromSnapshot(WDC65816Snapshot snapshot)
+  public void restoreFromSnapshot(W65C816Snapshot snapshot)
   {
     zeroFlag = snapshot.zeroFlag;
     negativeFlag = snapshot.negativeFlag;

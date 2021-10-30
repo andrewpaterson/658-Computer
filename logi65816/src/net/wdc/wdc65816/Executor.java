@@ -12,7 +12,7 @@ public interface Executor<T>
             Serializable
 
 {
-  static String getMethodName(Executor<WDC65816> getter)
+  static String getMethodName(Executor<W65C816> getter)
   {
     try
     {
@@ -21,7 +21,7 @@ public interface Executor<T>
       oos.writeObject(getter);
       oos.flush();
       String s = bos.toString();
-      String packageName = WDC65816.class.getName().replace('.', '/');
+      String packageName = W65C816.class.getName().replace('.', '/');
       int start = s.indexOf(packageName);
       int end = s.indexOf(packageName, start + 1);
       s = s.substring(start + packageName.length(), end);

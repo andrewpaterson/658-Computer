@@ -3,14 +3,14 @@ package net.wdc.logisim.wdc65816;
 import com.cburch.logisim.util.GraphicsUtil;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
-import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.W65C816;
 
 import java.awt.*;
 
 import static net.logisim.common.PortDescription.*;
 
-public class WDC65816Factory
-    extends LogisimFactory<WDC65816LogisimPins>
+public class W65C816Factory
+    extends LogisimFactory<W65C816LogisimPins>
 {
   // Left side, top to bottom
   protected static final int PORT_ABORTB = 0;
@@ -32,9 +32,9 @@ public class WDC65816Factory
   protected static final int PORT_DataBus = 14;
   protected static final int PORT_AddressBus = 15;
 
-  public WDC65816Factory()
+  public W65C816Factory()
   {
-    super(WDC65816.class.getSimpleName(),
+    super(W65C816.class.getSimpleName(),
           new ComponentDescription(240, 240, 10,
                                    inputShared(PORT_ABORTB, "ABORTB").setTooltip("Abort current instruction (input: active low)"),
                                    inputShared(PORT_IRQB, "IRQB").setTooltip("Interrupt request (input: active low)"),
@@ -58,9 +58,9 @@ public class WDC65816Factory
   }
 
   @Override
-  public void paint(WDC65816LogisimPins instance, Graphics2D graphics2D)
+  public void paint(W65C816LogisimPins instance, Graphics2D graphics2D)
   {
-    WDC65816 cpu = instance.getCpu();
+    W65C816 cpu = instance.getCpu();
     boolean isOpcodeValid = cpu.getCycle() != 0;
     drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
     drawField(graphics2D, TOP_OFFSET + 20, WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
@@ -102,10 +102,10 @@ public class WDC65816Factory
   }
 
   @Override
-  protected WDC65816LogisimPins createInstance()
+  protected W65C816LogisimPins createInstance()
   {
-    WDC65816LogisimPins pins = new WDC65816LogisimPins();
-    new WDC65816("", pins);
+    W65C816LogisimPins pins = new W65C816LogisimPins();
+    new W65C816("", pins);
     return pins;
   }
 }

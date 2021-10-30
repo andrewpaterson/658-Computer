@@ -4,11 +4,7 @@ import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstanceData;
 import com.cburch.logisim.instance.InstanceState;
-import net.common.BusValue;
-import net.common.IntegratedCircuit;
-import net.common.PinValue;
-import net.common.Pins;
-import net.common.Snapshot;
+import net.common.*;
 
 public abstract class LogisimPins<
     SNAPSHOT extends Snapshot,

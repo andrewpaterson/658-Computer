@@ -1,8 +1,8 @@
 package net.wdc.wdc65816.instruction.address;
 
-import net.wdc.wdc65816.Address;
-import net.wdc.wdc65816.WDC65816;
 import net.util.IntUtil;
+import net.wdc.wdc65816.Address;
+import net.wdc.wdc65816.W65C816;
 import net.wdc.wdc65816.instruction.BusCycleParameter;
 
 import java.util.List;
@@ -22,14 +22,14 @@ public abstract class AddressOffset
     return true;
   }
 
-  public int getBank(WDC65816 cpu)
+  public int getBank(W65C816 cpu)
   {
     return 0;
   }
 
-  public abstract int getOffset(WDC65816 cpu);
+  public abstract int getOffset(W65C816 cpu);
 
-  public static Address getAddress(WDC65816 cpu, List<AddressOffset> addressOffsets)
+  public static Address getAddress(W65C816 cpu, List<AddressOffset> addressOffsets)
   {
     int bank = 0;
     int offset = 0;

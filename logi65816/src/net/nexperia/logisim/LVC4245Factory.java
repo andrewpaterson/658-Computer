@@ -5,7 +5,6 @@ import net.logisim.common.LogisimFactory;
 import net.logisim.common.LogisimPainter;
 import net.logisim.common.PortDescription;
 import net.nexperia.lvc4245.LVC4245;
-import net.wdc.wdc65816.WDC65816;
 
 import java.awt.*;
 

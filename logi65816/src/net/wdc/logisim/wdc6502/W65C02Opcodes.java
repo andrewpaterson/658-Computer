@@ -1,6 +1,6 @@
 package net.wdc.logisim.wdc6502;
 
-public class WDC6502Opcodes
+public class W65C02Opcodes
 {
   public static final byte BRK = (byte) 0x00;
   public static final byte ORA_zero_page_x_indirect = (byte) 0x01;

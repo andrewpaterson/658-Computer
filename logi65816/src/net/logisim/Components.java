@@ -6,8 +6,8 @@ import com.cburch.logisim.tools.Tool;
 import net.maxim.logisim.DS1813Factory;
 import net.nexperia.logisim.LVC4245Factory;
 import net.nexperia.logisim.LVC573Factory;
-import net.wdc.logisim.wdc6502.Logisim6502Factory;
-import net.wdc.logisim.wdc65816.WDC65816Factory;
+import net.wdc.logisim.wdc6502.W65C02Factory;
+import net.wdc.logisim.wdc65816.W65C816Factory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ public class Components
     try
     {
       tools = new ArrayList<>();
-      tools.add(new AddTool(new WDC65816Factory()));
-      tools.add(new AddTool(new Logisim6502Factory()));
+      tools.add(new AddTool(new W65C816Factory()));
+      tools.add(new AddTool(new W65C02Factory()));
       tools.add(new AddTool(new LVC573Factory()));
       tools.add(new AddTool(new LVC4245Factory()));
       tools.add(new AddTool(new DS1813Factory()));

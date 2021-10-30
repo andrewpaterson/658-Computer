@@ -3,16 +3,16 @@ package net.wdc.logisim.wdc65816;
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;
 import net.logisim.common.LogisimPins;
-import net.wdc.wdc65816.WDC65816;
-import net.wdc.wdc65816.WDC65816Pins;
-import net.wdc.wdc65816.WDC65816Snapshot;
+import net.wdc.wdc65816.W65C816Pins;
+import net.wdc.wdc65816.W65C816Snapshot;
+import net.wdc.wdc65816.W65C816;
 
 import static net.util.IntUtil.toByte;
-import static net.wdc.logisim.wdc65816.WDC65816Factory.*;
+import static net.wdc.logisim.wdc65816.W65C816Factory.*;
 
-public class WDC65816LogisimPins
-    extends LogisimPins<WDC65816Snapshot, WDC65816Pins, WDC65816>
-    implements WDC65816Pins
+public class W65C816LogisimPins
+    extends LogisimPins<W65C816Snapshot, W65C816Pins, W65C816>
+    implements W65C816Pins
 {
   protected boolean clock;
 
@@ -153,7 +153,7 @@ public class WDC65816LogisimPins
     return instanceState.getPortValue(PORT_PHI2) == Value.TRUE;
   }
 
-  public WDC65816 getCpu()
+  public W65C816 getCpu()
   {
     return getIntegratedCircuit();
   }

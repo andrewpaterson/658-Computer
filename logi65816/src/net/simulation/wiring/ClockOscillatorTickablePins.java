@@ -2,7 +2,10 @@ package net.simulation.wiring;
 
 import net.common.Pins;
 import net.common.Snapshot;
-import net.simulation.common.*;
+import net.simulation.common.Tickable;
+import net.simulation.common.Tickables;
+import net.simulation.common.Trace;
+import net.simulation.common.Uniport;
 
 public class ClockOscillatorTickablePins
     extends Tickable<Snapshot, ClockOscillatorTickablePins, ClockOscillator>

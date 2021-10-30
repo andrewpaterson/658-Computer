@@ -2,8 +2,8 @@ package net.wdc.wdc65816;
 
 import net.common.Pins;
 
-public interface WDC65816Pins
-    extends Pins<WDC65816Snapshot, WDC65816Pins, WDC65816>
+public interface W65C816Pins
+    extends Pins<W65C816Snapshot, W65C816Pins, W65C816>
 {
   void setAddress(int address);
 

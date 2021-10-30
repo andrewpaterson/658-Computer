@@ -7,8 +7,8 @@ import com.cburch.logisim.instance.InstanceState;
 
 import java.util.Random;
 
-import static net.wdc.logisim.wdc6502.Logisim6502Factory.*;
-import static net.wdc.logisim.wdc6502.WDC6502Opcodes.*;
+import static net.wdc.logisim.wdc6502.W65C02Factory.*;
+import static net.wdc.logisim.wdc6502.W65C02Opcodes.*;
 
 public class Logisim65C02Instance
     implements InstanceData,

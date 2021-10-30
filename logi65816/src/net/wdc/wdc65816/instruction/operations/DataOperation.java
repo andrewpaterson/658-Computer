@@ -1,6 +1,6 @@
 package net.wdc.wdc65816.instruction.operations;
 
-import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.W65C816;
 
 public abstract class DataOperation
     extends Operation
@@ -63,12 +63,12 @@ public abstract class DataOperation
     return false;
   }
 
-  protected int getPinData(WDC65816 cpu)
+  protected int getPinData(W65C816 cpu)
   {
     return cpu.getPins().getData();
   }
 
-  protected void setPinData(WDC65816 cpu, int data)
+  protected void setPinData(W65C816 cpu, int data)
   {
     cpu.getPins().setData(data);
   }

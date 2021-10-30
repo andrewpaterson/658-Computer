@@ -1,7 +1,7 @@
 package net.wdc.wdc65816.instruction.address;
 
-import net.wdc.wdc65816.WDC65816;
 import net.util.EmulatorException;
+import net.wdc.wdc65816.W65C816;
 
 public class ConstantOffset
     extends AddressOffset
@@ -18,7 +18,7 @@ public class ConstantOffset
   }
 
   @Override
-  public int getOffset(WDC65816 cpu)
+  public int getOffset(W65C816 cpu)
   {
     return offset;
   }

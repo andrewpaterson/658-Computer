@@ -1,7 +1,7 @@
 package net.wdc.wdc65816.instruction.operations;
 
-import net.wdc.wdc65816.WDC65816;
 import net.util.IntUtil;
+import net.wdc.wdc65816.W65C816;
 
 public class WriteProgramCounterHigh
     extends DataOperation
@@ -12,7 +12,7 @@ public class WriteProgramCounterHigh
   }
 
   @Override
-  public void execute(WDC65816 cpu)
+  public void execute(W65C816 cpu)
   {
     setPinData(cpu, IntUtil.getHighByte(cpu.getProgramCounter().getOffset()));
   }

@@ -2,13 +2,13 @@ package net.wdc.simulation;
 
 import net.simulation.common.*;
 import net.util.EmulatorException;
-import net.wdc.wdc65816.WDC65816;
-import net.wdc.wdc65816.WDC65816Pins;
-import net.wdc.wdc65816.WDC65816Snapshot;
+import net.wdc.wdc65816.W65C816Pins;
+import net.wdc.wdc65816.W65C816Snapshot;
+import net.wdc.wdc65816.W65C816;
 
-public class WDC65816TickablePins
-    extends Tickable<WDC65816Snapshot, WDC65816Pins, WDC65816>
-    implements WDC65816Pins
+public class W65C816TickablePins
+    extends Tickable<W65C816Snapshot, W65C816Pins, W65C816>
+    implements W65C816Pins
 {
   protected final Omniport addressBus;
   protected final Omniport dataBus;
@@ -27,24 +27,24 @@ public class WDC65816TickablePins
   protected final Uniport validProgramAddress;
   protected final Uniport validDataAddress;
 
-  public WDC65816TickablePins(Tickables tickables,
-                              String name,
-                              Bus addressBus,
-                              Bus dataBus,
-                              Trace rwb,
-                              Trace clock,
-                              Trace abortB,
-                              Trace busEnable,
-                              Trace irqB,
-                              Trace nmiB,
-                              Trace resetB,
-                              Trace emulation,
-                              Trace memoryLockB,
-                              Trace mx,
-                              Trace rdy,
-                              Trace vectorPullB,
-                              Trace validProgramAddress,
-                              Trace validDataAddress)
+  public W65C816TickablePins(Tickables tickables,
+                             String name,
+                             Bus addressBus,
+                             Bus dataBus,
+                             Trace rwb,
+                             Trace clock,
+                             Trace abortB,
+                             Trace busEnable,
+                             Trace irqB,
+                             Trace nmiB,
+                             Trace resetB,
+                             Trace emulation,
+                             Trace memoryLockB,
+                             Trace mx,
+                             Trace rdy,
+                             Trace vectorPullB,
+                             Trace validProgramAddress,
+                             Trace validDataAddress)
   {
     super(tickables);
     this.addressBus = new Omniport(this, "Address Bus", 16);
@@ -377,7 +377,7 @@ public class WDC65816TickablePins
     return memoryLockB;
   }
 
-  public WDC65816 getCpu()
+  public W65C816 getCpu()
   {
     return getIntegratedCircuit();
   }

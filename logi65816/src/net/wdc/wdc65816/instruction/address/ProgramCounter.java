@@ -1,6 +1,6 @@
 package net.wdc.wdc65816.instruction.address;
 
-import net.wdc.wdc65816.WDC65816;
+import net.wdc.wdc65816.W65C816;
 
 public class ProgramCounter
     extends AddressOffset
@@ -11,7 +11,7 @@ public class ProgramCounter
   }
 
   @Override
-  public int getOffset(WDC65816 cpu)
+  public int getOffset(W65C816 cpu)
   {
     return cpu.getProgramCounter().getOffset();
   }

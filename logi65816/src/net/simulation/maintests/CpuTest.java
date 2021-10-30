@@ -1,7 +1,7 @@
 package net.simulation.maintests;
 
-import net.maxim.ds1813.DS1813;
-import net.maxim.simulation.DS1813TickablePins;
+import net.integratedcircuits.maxim.ds1813.DS1813;
+import net.integratedcircuits.maxim.simulation.DS1813TickablePins;
 import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
@@ -14,10 +14,10 @@ import net.simulation.wiring.ClockOscillatorTickablePins;
 import net.simulation.wiring.Constant;
 import net.simulation.wiring.ConstantTickablePins;
 import net.util.StringUtil;
-import net.wdc.simulation.W65C816TickablePins;
-import net.wdc.wdc65816.W65C816;
-import net.wdc.wdc65816.instruction.BusCycle;
-import net.wdc.wdc65816.instruction.Instruction;
+import net.integratedcircuits.wdc.simulation.W65C816TickablePins;
+import net.integratedcircuits.wdc.wdc65816.W65C816;
+import net.integratedcircuits.wdc.wdc65816.instruction.BusCycle;
+import net.integratedcircuits.wdc.wdc65816.instruction.Instruction;
 
 import java.io.File;
 

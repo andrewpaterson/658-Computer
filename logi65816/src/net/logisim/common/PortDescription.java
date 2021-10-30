@@ -1,20 +1,28 @@
 package net.logisim.common;
 
-import static com.cburch.logisim.instance.Port.*;
-
 public class PortDescription
 {
-  public int index;
-  public String lowName;
-  public String highName;
-  public String tooltip;
-  public String type;
-  public String exclusive;
-  public int bitWidth;
-  public boolean mustDraw;
-  public boolean inverting;
+  private final int index;
 
-  private PortDescription(int index, String name, String type, String exclusive, int bitWidth, boolean mustDraw)
+  private String lowName;
+  private String highName;
+  private String tooltip;
+  private String type;
+  private String exclusive;
+  private int bitWidth;
+  private boolean notBlank;
+  private boolean inverting;
+  private PortPosition position;
+
+  private int offset;
+
+  protected PortDescription(int index,
+                            String name,
+                            String type,
+                            String exclusive,
+                            int bitWidth,
+                            boolean notBlank,
+                            PortPosition position)
   {
     this.index = index;
     this.lowName = name;
@@ -23,7 +31,9 @@ public class PortDescription
     this.exclusive = exclusive;
     this.bitWidth = bitWidth;
     this.tooltip = name;
-    this.mustDraw = mustDraw;
+    this.notBlank = notBlank;
+    this.position = position;
+    this.offset = 0;
   }
 
   public PortDescription setHighName(String highName)
@@ -45,44 +55,64 @@ public class PortDescription
     return this;
   }
 
-  public static PortDescription outputShared(int index, String name, int pins)
+  public int index()
   {
-    return new PortDescription(index, name, OUTPUT, SHARED, pins, true);
+    return index;
   }
 
-  public static PortDescription inoutShared(int index, String name, int pins)
+  public boolean notBlank()
   {
-    return new PortDescription(index, name, INOUT, SHARED, pins, true);
+    return notBlank;
   }
 
-  public static PortDescription outputShared(int index, String name)
+  public String getLowName()
   {
-    return new PortDescription(index, name, OUTPUT, SHARED, 1, true);
+    return lowName;
   }
 
-  public static PortDescription outputExclusive(int index, String name)
+  public String getHighName()
   {
-    return new PortDescription(index, name, OUTPUT, EXCLUSIVE, 1, true);
+    return highName;
   }
 
-  public static PortDescription inputShared(int index, String name)
+  public String getTooltip()
   {
-    return new PortDescription(index, name, INPUT, SHARED, 1, true);
+    return tooltip;
   }
 
-  public static PortDescription inputShared(int index, String name, int pins)
+  public String getType()
   {
-    return new PortDescription(index, name, INPUT, SHARED, pins, true);
+    return type;
   }
 
-  public static PortDescription inoutShared(int index, String name)
+  public String getExclusive()
   {
-    return new PortDescription(index, name, INOUT, SHARED, 1, true);
+    return exclusive;
   }
 
-  public static PortDescription blank()
+  public int getBitWidth()
   {
-    return new PortDescription(-1, null, null, null, 0, false);
+    return bitWidth;
+  }
+
+  public boolean isInverting()
+  {
+    return inverting;
+  }
+
+  public int getOffset()
+  {
+    return offset;
+  }
+
+  public boolean isPosition(PortPosition position)
+  {
+    return this.position == position;
+  }
+
+  public void setOffset(int offset)
+  {
+    this.offset = offset;
   }
 }
 

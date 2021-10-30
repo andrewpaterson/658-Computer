@@ -4,35 +4,41 @@ import net.integratedcircuits.nexperia.lvc573.LVC573;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
 import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortDescription;
+import net.logisim.common.PortFactory;
 
 import java.awt.*;
 
-import static net.logisim.common.ComponentDescription.height;
+import static net.logisim.common.PortPosition.LEFT;
+import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC573Factory
     extends LogisimFactory<LVC573LogisimPins>
     implements LogisimPainter<LVC573LogisimPins>
 {
-  protected static final int PORT_OEB = 0;
-  protected static final int PORT_D = 1;
-  protected static final int PORT_LE = 2;
+  protected static int PORT_OEB;
+  protected static int PORT_D;
+  protected static int PORT_LE;
 
-  protected static final int PORT_Q = 3;
+  protected static int PORT_Q;
 
-  public LVC573Factory()
+  public static LVC573Factory create()
   {
-    super(LVC573.class.getSimpleName(),
-          new ComponentDescription(160, height(3),
-                                   PortDescription.inputShared(PORT_OEB, "OEB"),
-                                   PortDescription.inputShared(PORT_D, "D", 8).setTooltip("Input D (input)"),
-                                   PortDescription.inputShared(PORT_LE, "LE"),
+    PortFactory factory = new PortFactory();
 
-                                   PortDescription.blank(),
-                                   PortDescription.outputShared(PORT_Q, "Q", 8).setTooltip("Output Q (output)"),
-                                   PortDescription.blank()
+    PORT_OEB = factory.inputShared("OEB", LEFT).index();
+    PORT_D = factory.inputShared("D", 8, LEFT).setTooltip("Input D (input)").index();
+    PORT_LE = factory.inputShared("LE", LEFT).index();
 
-          ));
+    PORT_Q = factory.outputShared("Q", 8, RIGHT).setTooltip("Output Q (output)").index();
+
+    return new LVC573Factory(new ComponentDescription(LVC573.class.getSimpleName(),
+                                                      160,
+                                                      factory.getPorts()));
+  }
+
+  protected LVC573Factory(ComponentDescription description)
+  {
+    super(description);
   }
 
   @Override

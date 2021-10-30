@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.logisim.common.ComponentDescription.PIXELS_PER_PIN;
+import static net.logisim.common.PortPosition.LEFT;
+import static net.logisim.common.PortPosition.RIGHT;
 
 @SuppressWarnings("unchecked")
 public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
@@ -29,9 +31,9 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
   protected PropagationListener<T> propagationListener;
 
   @SuppressWarnings("rawtypes")
-  public LogisimFactory(String name, ComponentDescription description)
+  public LogisimFactory(ComponentDescription description)
   {
-    super(name);
+    super(description.getName());
     Attribute[] attributesNames;
     Object[] attributeDefaults;
     attributesNames = new Attribute[]{
@@ -53,51 +55,46 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
                                   description.getTopY(),
                                   description.getWidth(),
                                   description.getHeight()));
-    setPorts(createPorts(this.description));
+    setPorts(createPorts());
   }
 
-  protected List<Port> createPorts(ComponentDescription description)
+  protected List<Port> createPorts()
   {
     ArrayList<Port> ports = new ArrayList<>();
-    List<PortDescription> portInfos = description.getPorts();
-    for (int index = 0; index < portInfos.size(); index++)
-    {
-      PortDescription portDescription = portInfos.get(index);
-      if (portDescription.mustDraw)
-      {
-        boolean isRightSide = index >= description.getPinsPerSide();
-        int pinPerSide = isRightSide ? index - description.getPinsPerSide() : index;
-        Port port;
-        if (isRightSide)
-        {
-          port = createRightSidePort(description, portDescription, pinPerSide);
-        }
-        else
-        {
-          port = createLeftSidePort(description, portDescription, pinPerSide);
-        }
-        port.setToolTip(new StringGetter()
-        {
-          @Override
-          public String toString()
-          {
-            return portDescription.tooltip;
-          }
-        });
-        ports.add(port);
-      }
-    }
+
+    createVerticalPorts(ports, LEFT, description.getLeft());
+    createVerticalPorts(ports, RIGHT, description.getRight());
+
     return ports;
   }
 
-  protected Port createLeftSidePort(ComponentDescription description, PortDescription portDescription, int pinPerSide)
+  private void createVerticalPorts(ArrayList<Port> ports, PortPosition right, int right2)
   {
-    return new Port(description.getLeft(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+    for (PortDescription portDescription : description.getPorts(right))
+    {
+      if (portDescription.notBlank())
+      {
+        ports.add(createPort(portDescription, right2));
+      }
+    }
   }
 
-  protected Port createRightSidePort(ComponentDescription description, PortDescription portDescription, int pinPerSide)
+  private Port createPort(PortDescription portDescription, int x)
   {
-    return new Port(description.getRight(), description.getPinStop() - pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+    Port port = new Port(x,
+                         description.getPinStartY() + portDescription.getOffset() * description.pixelsPerPin(),
+                         portDescription.getType(),
+                         portDescription.getBitWidth(),
+                         portDescription.getExclusive());
+    port.setToolTip(new StringGetter()
+    {
+      @Override
+      public String toString()
+      {
+        return portDescription.getTooltip();
+      }
+    });
+    return port;
   }
 
   @Override

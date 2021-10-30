@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.List;
 
+import static net.logisim.common.PortPosition.*;
+
 public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
 {
   ComponentDescription getDescription();
@@ -53,15 +55,36 @@ public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
     boolean clock = !instance.isClockHigh();
     painter.drawBounds();
     List<PortDescription> ports = description.getPorts();
-    for (int index = 0; index < ports.size(); index++)
+    for (PortDescription port : ports)
     {
-      PortDescription portDescription = ports.get(index);
-      if (portDescription.mustDraw)
+      if (port.notBlank())
       {
-        Direction dir = index < description.getPinsPerSide() ? Direction.EAST : Direction.WEST;
-        painter.drawPort(portDescription.index, !clock ? portDescription.lowName : portDescription.highName, dir);
+        String label = !clock ? port.getLowName() : port.getHighName();
+        painter.drawPort(port.index(), label, getDirection(port));
       }
     }
+  }
+
+  private Direction getDirection(PortDescription portDescription)
+  {
+    Direction dir = null;
+    if (portDescription.isPosition(RIGHT))
+    {
+      dir = Direction.WEST;
+    }
+    else if (portDescription.isPosition(LEFT))
+    {
+      dir = Direction.EAST;
+    }
+    else if (portDescription.isPosition(TOP))
+    {
+      dir = Direction.NORTH;
+    }
+    else if (portDescription.isPosition(BOTTOM))
+    {
+      dir = Direction.SOUTH;
+    }
+    return dir;
   }
 
   default void drawField(Graphics g,

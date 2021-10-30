@@ -4,34 +4,40 @@ import net.integratedcircuits.nexperia.lvc4245.LVC4245;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
 import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortDescription;
+import net.logisim.common.PortFactory;
 
 import java.awt.*;
 
-import static net.logisim.common.ComponentDescription.height;
+import static net.logisim.common.PortPosition.LEFT;
+import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC4245Factory
     extends LogisimFactory<LVC4245LogisimPins>
     implements LogisimPainter<LVC4245LogisimPins>
 {
-  protected static final int PORT_DIR = 2;
-  protected static final int PORT_A = 3;
-  protected static final int PORT_B = 1;
-  protected static final int PORT_OEB = 0;
+  protected static int PORT_DIR;
+  protected static int PORT_A;
+  protected static int PORT_B;
+  protected static int PORT_OEB;
 
-  public LVC4245Factory()
+  public static LVC4245Factory create()
   {
-    super(LVC4245.class.getSimpleName(),
-          new ComponentDescription(160, height(3),
-                                   PortDescription.inputShared(PORT_OEB, "OEB").setTooltip("Output enable (input: A and B high impedance high, A and B enable low)"),
-                                   PortDescription.inoutShared(PORT_B, "B", 8).setTooltip("Data B (input or output)"),
-                                   PortDescription.inputShared(PORT_DIR, "DIR").setTooltip("Direction (input: B to A low, A to B high)"),
+    PortFactory factory = new PortFactory();
 
-                                   PortDescription.blank(),
-                                   PortDescription.inoutShared(PORT_A, "A", 8).setTooltip("Data A (input or output)"),
-                                   PortDescription.blank()
+    PORT_OEB = factory.inputShared("OEB", LEFT).setTooltip("Output enable (input: A and B high impedance high, A and B enable low)").index();
+    PORT_B = factory.inoutShared("B", 8, LEFT).setTooltip("Data B (input or output)").index();
+    PORT_DIR = factory.inputShared("DIR", LEFT).setTooltip("Direction (input: B to A low, A to B high)").index();
 
-          ));
+    PORT_A = factory.inoutShared("A", 8, RIGHT).setTooltip("Data A (input or output)").index();
+
+    return new LVC4245Factory(new ComponentDescription(LVC4245.class.getSimpleName(),
+                                                       160,
+                                                       factory.getPorts()));
+  }
+
+  private LVC4245Factory(ComponentDescription description)
+  {
+    super(description);
   }
 
   @Override

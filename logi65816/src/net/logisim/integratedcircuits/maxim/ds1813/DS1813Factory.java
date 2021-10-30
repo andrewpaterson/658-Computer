@@ -4,32 +4,45 @@ import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
 import com.cburch.logisim.instance.Port;
 import net.integratedcircuits.maxim.ds1813.DS1813;
-import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
-import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortDescription;
+import net.logisim.common.*;
 
 import java.awt.*;
+
+import static net.logisim.common.ComponentDescription.height;
+import static net.logisim.common.PortPosition.LEFT;
+import static net.logisim.common.PortPosition.RIGHT;
 
 public class DS1813Factory
     extends LogisimFactory<DS1813LogisimPins>
     implements LogisimPainter<DS1813LogisimPins>
 {
-  protected static final int PORT_CLOCK = 0;
-  protected static final int PORT_RSTB = 1;
+  protected static int PORT_CLOCK;
+  protected static int PORT_RSTB;
 
-  public DS1813Factory()
+  public static DS1813Factory create()
   {
-    super(DS1813.class.getSimpleName(),
-          new ComponentDescription(160, ComponentDescription.height(3),
-                                   PortDescription.inputShared(PORT_CLOCK, ""),
-                                   PortDescription.inoutShared(PORT_RSTB, "RSTB")));
+    PortFactory factory = new PortFactory();
+
+    PORT_CLOCK = factory.inputShared("", LEFT).index();
+    PORT_RSTB = factory.inoutShared("RSTB", RIGHT).index();
+
+    return new DS1813Factory(new ComponentDescription(DS1813.class.getSimpleName(),
+                                                      160, height(3),
+                                                      factory.getPorts()));
   }
 
-  @Override
-  protected Port createLeftSidePort(ComponentDescription description, PortDescription portDescription, int pinPerSide)
+  private DS1813Factory(ComponentDescription description)
   {
-    return new Port(description.getLeft() + description.pixelsPerPin(), description.getPinStart() + pinPerSide * description.pixelsPerPin(), portDescription.type, portDescription.bitWidth, portDescription.exclusive);
+    super(description);
+  }
+
+  protected Port createLeftSidePort(ComponentDescription description, PortDescription portDescription, int sideIndex)
+  {
+    return new Port(description.getLeft() + description.pixelsPerPin(),
+                    description.getPinStartY() + sideIndex * description.pixelsPerPin(),
+                    portDescription.getType(),
+                    portDescription.getBitWidth(),
+                    portDescription.getExclusive());
   }
 
   @Override

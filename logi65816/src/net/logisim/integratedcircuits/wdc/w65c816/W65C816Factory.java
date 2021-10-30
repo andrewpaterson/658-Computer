@@ -4,57 +4,65 @@ import com.cburch.logisim.util.GraphicsUtil;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
+import net.logisim.common.PortFactory;
 
 import java.awt.*;
 
-import static net.logisim.common.PortDescription.*;
+import static net.logisim.common.PortPosition.LEFT;
+import static net.logisim.common.PortPosition.RIGHT;
 
 public class W65C816Factory
     extends LogisimFactory<W65C816LogisimPins>
 {
-  // Left side, top to bottom
-  protected static final int PORT_ABORTB = 0;
-  protected static final int PORT_IRQB = 1;
-  protected static final int PORT_NMIB = 2;
-  protected static final int PORT_RESB = 3;
-  protected static final int PORT_PHI2 = 4;
-  protected static final int PORT_MX = 5;
-  protected static final int PORT_E = 6;
-  protected static final int PORT_MLB = 7;
+  protected static int PORT_ABORTB;
+  protected static int PORT_IRQB;
+  protected static int PORT_NMIB;
+  protected static int PORT_RESB;
+  protected static int PORT_PHI2;
+  protected static int PORT_MX;
+  protected static int PORT_E;
+  protected static int PORT_MLB;
 
-  // Right side, bottom to top
-  protected static final int PORT_BE = 8;
-  protected static final int PORT_VPB = 9;
-  protected static final int PORT_VPA = 10;
-  protected static final int PORT_VDA = 11;
-  protected static final int PORT_RDY = 12;
-  protected static final int PORT_RWB = 13;
-  protected static final int PORT_DataBus = 14;
-  protected static final int PORT_AddressBus = 15;
+  protected static int PORT_BE;
+  protected static int PORT_VPB;
+  protected static int PORT_VPA;
+  protected static int PORT_VDA;
+  protected static int PORT_RDY;
+  protected static int PORT_RWB;
+  protected static int PORT_DataBus;
+  protected static int PORT_AddressBus;
 
-  public W65C816Factory()
+  public static W65C816Factory create()
   {
-    super(W65C816.class.getSimpleName(),
-          new ComponentDescription(240, 240,
-                                   inputShared(PORT_ABORTB, "ABORTB").setTooltip("Abort current instruction (input: active low)"),
-                                   inputShared(PORT_IRQB, "IRQB").setTooltip("Interrupt request (input: active low)"),
-                                   inputShared(PORT_NMIB, "NMIB").setTooltip("Non-maskable interrupt (input: active low)"),
-                                   inputShared(PORT_RESB, "RESB").setTooltip("Reset (input: active low)"),
-                                   inputShared(PORT_PHI2, "PHI2").setTooltip("Clock (input)"),
-                                   outputExclusive(PORT_MX, "M").setHighName("X").setTooltip("Memory width / Index width (8bit high, 16bit low)"),
-                                   outputExclusive(PORT_E, "E").setTooltip("Emulation mode (output: emulation high, native low)"),
-                                   outputExclusive(PORT_MLB, "MLB").setTooltip("Memory lock (output: read-modify-write low)"),
+    PortFactory factory = new PortFactory();
 
-                                   inputShared(PORT_BE, "BE").setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low"),
-                                   outputExclusive(PORT_VPB, "VPB").setTooltip("Interrupt vector pull (output: fetching interrupt address low)"),
-                                   outputExclusive(PORT_VPA, "VPA").setTooltip("Valid program address (output: valid high, invalid low)"),
-                                   outputExclusive(PORT_VDA, "VDA").setTooltip("Valid data address (output: valid high, invalid low)"),
-                                   inoutShared(PORT_RDY, "RDY").setTooltip("Ready (bi-directional - see data sheet)"),
-                                   outputShared(PORT_RWB, "RWB").setTooltip("Read / Write (output: read high, write low)"),
-                                   inoutShared(PORT_DataBus, "D", 8).setHighName("BA").setTooltip("Data / Bank address (bi-directional - see data sheet)"),
-                                   outputShared(PORT_AddressBus, "A", 16).setTooltip("Address (output)")
-          )
-    );
+    PORT_ABORTB = factory.inputShared("ABORTB", LEFT).setTooltip("Abort current instruction (input: active low)").index();
+    PORT_IRQB = factory.inputShared("IRQB", LEFT).setTooltip("Interrupt request (input: active low)").index();
+    PORT_NMIB = factory.inputShared("NMIB", LEFT).setTooltip("Non-maskable interrupt (input: active low)").index();
+    PORT_RESB = factory.inputShared("RESB", LEFT).setTooltip("Reset (input: active low)").index();
+    PORT_PHI2 = factory.inputShared("PHI2", LEFT).setTooltip("Clock (input)").index();
+    PORT_MX = factory.outputExclusive("M", LEFT).setHighName("X").setTooltip("Memory width / Index width (8bit high, 16bit low)").index();
+    PORT_E = factory.outputExclusive("E", LEFT).setTooltip("Emulation mode (output: emulation high, native low)").index();
+    PORT_MLB = factory.outputExclusive("MLB", LEFT).setTooltip("Memory lock (output: read-modify-write low)").index();
+
+    PORT_AddressBus = factory.outputShared("A", 16, RIGHT).setTooltip("Address (output)").index();
+    PORT_DataBus = factory.inoutShared("D", 8, RIGHT).setHighName("BA").setTooltip("Data / Bank address (bi-directional - see data sheet)").index();
+    PORT_RWB = factory.outputShared("RWB", RIGHT).setTooltip("Read / Write (output: read high, write low)").index();
+    PORT_RDY = factory.inoutShared("RDY", RIGHT).setTooltip("Ready (bi-directional - see data sheet)").index();
+    PORT_BE = factory.inputShared("BE", RIGHT).setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low").index();
+    PORT_VDA = factory.outputExclusive("VDA", RIGHT).setTooltip("Valid data address (output: valid high, invalid low)").index();
+    PORT_VPA = factory.outputExclusive("VPA", RIGHT).setTooltip("Valid program address (output: valid high, invalid low)").index();
+    PORT_VPB = factory.outputExclusive("VPB", RIGHT).setTooltip("Interrupt vector pull (output: fetching interrupt address low)").index();
+
+    return new W65C816Factory(new ComponentDescription(W65C816.class.getSimpleName(),
+                                                       240,
+                                                       240,
+                                                       factory.getPorts()));
+  }
+
+  private W65C816Factory(ComponentDescription description)
+  {
+    super(description);
   }
 
   @Override

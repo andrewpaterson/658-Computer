@@ -39,13 +39,13 @@ public class LVC543LogisimPins
   @Override
   public void setOutputError(int index)
   {
-    instanceState.setPort(LVC543Factory.PORT_B[index], Value.createError(BitWidth.create(8)), 2);
+    instanceState.setPort(LVC543Factory.PORT_IO[index], Value.createError(BitWidth.create(8)), 2);
   }
 
   @Override
   public void setOutput(int index, long latchValue)
   {
-    instanceState.setPort(LVC543Factory.PORT_B[index], Value.createKnown(BitWidth.create(8), latchValue), 2);
+    instanceState.setPort(LVC543Factory.PORT_IO[index], Value.createKnown(BitWidth.create(8), latchValue), 2);
   }
 
   @Override
@@ -57,7 +57,7 @@ public class LVC543LogisimPins
   @Override
   public void setOutputHighImpedance(int index)
   {
-    instanceState.setPort(LVC543Factory.PORT_B[index], Value.createUnknown(BitWidth.create(8)), 2);
+    instanceState.setPort(LVC543Factory.PORT_IO[index], Value.createUnknown(BitWidth.create(8)), 2);
   }
 }
 

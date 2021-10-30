@@ -15,7 +15,7 @@ public class Omniport
   protected List<TraceValue> pins;
   protected List<Trace> wires;
 
-  public Omniport(Tickable tickable, String name, int width)
+  public Omniport(TickablePins tickable, String name, int width)
   {
     super(tickable, name);
     wires = new ArrayList<>();

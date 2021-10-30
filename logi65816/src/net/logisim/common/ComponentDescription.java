@@ -3,9 +3,11 @@ package net.logisim.common;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.logisim.common.LogisimFactory.TOP_OFFSET;
+
 public class ComponentDescription
 {
-  protected final int pixelsPerPin;
+  public static final int PIXELS_PER_PIN = 20;
 
   protected final int verticalMargin;
   protected final int pinsPerSide;
@@ -23,45 +25,33 @@ public class ComponentDescription
 
   public ComponentDescription(int width,
                               int height,
-                              int verticalMargin,
+
                               PortDescription... ports)
   {
     this.ports = Arrays.asList(ports);
     this.pinsPerSide = ports.length / 2 + ports.length % 2;
 
-    this.verticalMargin = verticalMargin;
+    this.verticalMargin = 10;
     this.leftX = -(width / 2);
     this.rightX = width / 2;
     this.topY = -(height / 2) - verticalMargin;
     this.botY = (height / 2) + verticalMargin;
 
-    this.pixelsPerPin = 20;
-
-    this.pinTopY = ((pinsPerSide - 1) * pixelsPerPin / -2) - verticalMargin;
-    this.pinBotY = ((pinsPerSide - 1) * pixelsPerPin / 2) + verticalMargin;
+    this.pinTopY = ((pinsPerSide - 1) * PIXELS_PER_PIN / -2) - verticalMargin;
+    this.pinBotY = ((pinsPerSide - 1) * PIXELS_PER_PIN / 2) + verticalMargin;
 
     this.pinStartY = pinTopY + verticalMargin;
     this.pinStopY = pinBotY - verticalMargin;
   }
 
-  public int getVerticalMargin()
+  public static int height(int pinsPerSide)
   {
-    return verticalMargin;
+    return PIXELS_PER_PIN * pinsPerSide;
   }
 
   public int getPinsPerSide()
   {
     return pinsPerSide;
-  }
-
-  public int getPinTopY()
-  {
-    return pinTopY;
-  }
-
-  public int getPinBotY()
-  {
-    return pinBotY;
   }
 
   public int getLeft()
@@ -77,11 +67,6 @@ public class ComponentDescription
   public int getTopY()
   {
     return topY;
-  }
-
-  public int getBotY()
-  {
-    return botY;
   }
 
   public int getPinStart()
@@ -116,7 +101,7 @@ public class ComponentDescription
 
   public int pixelsPerPin()
   {
-    return pixelsPerPin;
+    return PIXELS_PER_PIN;
   }
 
   public List<PortDescription> getPorts()

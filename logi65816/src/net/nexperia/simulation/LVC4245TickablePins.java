@@ -8,7 +8,7 @@ import net.nexperia.lvc4245.LVC4245Snapshot;
 import net.simulation.common.*;
 
 public class LVC4245TickablePins
-    extends Tickable<LVC4245Snapshot, LVC4245Pins, LVC4245>
+    extends TickablePins<LVC4245Snapshot, LVC4245Pins, LVC4245>
     implements LVC4245Pins
 {
   protected LVC4245 transceiver;

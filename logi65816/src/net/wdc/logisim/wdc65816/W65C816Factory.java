@@ -7,6 +7,7 @@ import net.wdc.wdc65816.W65C816;
 
 import java.awt.*;
 
+import static net.logisim.common.ComponentDescription.PIXELS_PER_PIN;
 import static net.logisim.common.PortDescription.*;
 
 public class W65C816Factory
@@ -35,7 +36,7 @@ public class W65C816Factory
   public W65C816Factory()
   {
     super(W65C816.class.getSimpleName(),
-          new ComponentDescription(240, 240, 10,
+          new ComponentDescription(240, 240,
                                    inputShared(PORT_ABORTB, "ABORTB").setTooltip("Abort current instruction (input: active low)"),
                                    inputShared(PORT_IRQB, "IRQB").setTooltip("Interrupt request (input: active low)"),
                                    inputShared(PORT_NMIB, "NMIB").setTooltip("Non-maskable interrupt (input: active low)"),
@@ -62,15 +63,15 @@ public class W65C816Factory
   {
     W65C816 cpu = instance.getCpu();
     boolean isOpcodeValid = cpu.getCycle() != 0;
-    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
-    drawField(graphics2D, TOP_OFFSET + 20, WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
-    drawField(graphics2D, TOP_OFFSET + 40, WIDTH_8BIT, "Cycle:", Integer.toString(cpu.getCycle()), true);
-    drawField(graphics2D, TOP_OFFSET + 60, WIDTH_16BIT, "Accumulator:", cpu.getAccumulatorValueHex(), true);
-    drawField(graphics2D, TOP_OFFSET + 80, WIDTH_16BIT, "X Index:", cpu.getXValueHex(), true);
-    drawField(graphics2D, TOP_OFFSET + 100, WIDTH_16BIT, "Y Index:", cpu.getYValueHex(), true);
-    drawField(graphics2D, TOP_OFFSET + 120, WIDTH_16BIT, "Stack", cpu.getStackValueHex(), true);
-    drawField(graphics2D, TOP_OFFSET + 140, WIDTH_24BIT, "P-Counter:", cpu.getProgramCounterValueHex(), true);
-    drawField(graphics2D, TOP_OFFSET + 160, WIDTH_8BIT, "Data Bank:", cpu.getDataBankValueHex(), true);
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
+    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
+    drawField(graphics2D, getTopOffset(2), WIDTH_8BIT, "Cycle:", Integer.toString(cpu.getCycle()), true);
+    drawField(graphics2D, getTopOffset(3), WIDTH_16BIT, "Accumulator:", cpu.getAccumulatorValueHex(), true);
+    drawField(graphics2D, getTopOffset(4), WIDTH_16BIT, "X Index:", cpu.getXValueHex(), true);
+    drawField(graphics2D, getTopOffset(5), WIDTH_16BIT, "Y Index:", cpu.getYValueHex(), true);
+    drawField(graphics2D, getTopOffset(6), WIDTH_16BIT, "Stack", cpu.getStackValueHex(), true);
+    drawField(graphics2D, getTopOffset(7), WIDTH_24BIT, "P-Counter:", cpu.getProgramCounterValueHex(), true);
+    drawField(graphics2D, getTopOffset(8), WIDTH_8BIT, "Data Bank:", cpu.getDataBankValueHex(), true);
 
     int processorStatusTopOffset = TOP_OFFSET + 185;
     boolean emulationMode = cpu.isEmulation();

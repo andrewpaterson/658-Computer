@@ -11,6 +11,8 @@ import com.cburch.logisim.util.StringGetter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.logisim.common.ComponentDescription.PIXELS_PER_PIN;
+
 @SuppressWarnings("unchecked")
 public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
     extends InstanceFactory
@@ -145,5 +147,10 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
   }
 
   protected abstract T createInstance();
+
+  public int getTopOffset(int offset)
+  {
+    return TOP_OFFSET + offset * PIXELS_PER_PIN;
+  }
 }
 

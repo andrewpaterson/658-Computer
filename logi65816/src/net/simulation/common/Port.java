@@ -9,11 +9,11 @@ import static net.simulation.common.TransmissionState.NotSet;
 
 public abstract class Port
 {
-  protected Tickable tickable;
+  protected TickablePins tickable;
   protected String name;
   protected TransmissionState state;
 
-  public Port(Tickable tickable, String name)
+  public Port(TickablePins tickable, String name)
   {
     this.tickable = tickable;
     this.name = name;
@@ -129,7 +129,7 @@ public abstract class Port
     return getTickable().getDescription() + "." + getName();
   }
 
-  public Tickable getTickable()
+  public TickablePins getTickable()
   {
     return tickable;
   }

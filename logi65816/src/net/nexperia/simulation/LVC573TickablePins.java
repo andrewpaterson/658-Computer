@@ -8,7 +8,7 @@ import net.nexperia.lvc573.LVC573Snapshot;
 import net.simulation.common.*;
 
 public class LVC573TickablePins
-    extends Tickable<LVC573Snapshot, LVC573Pins, LVC573>
+    extends TickablePins<LVC573Snapshot, LVC573Pins, LVC573>
     implements LVC573Pins
 {
   protected Omniport input;
@@ -69,7 +69,13 @@ public class LVC573TickablePins
   @Override
   public PinValue getOEB()
   {
-    return null;
+    return getPinValue(outputEnableB);
+  }
+
+  @Override
+  public void setOutputHighImpedance()
+  {
+    output.highImpedance();
   }
 }
 

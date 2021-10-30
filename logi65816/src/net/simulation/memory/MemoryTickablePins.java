@@ -6,7 +6,7 @@ import net.common.Pins;
 import net.simulation.common.*;
 
 public class MemoryTickablePins
-    extends Tickable<MemorySnapshot, MemoryTickablePins, Memory>
+    extends TickablePins<MemorySnapshot, MemoryTickablePins, Memory>
     implements Pins<MemorySnapshot, MemoryTickablePins, Memory>
 {
   protected final Omniport addressBus;

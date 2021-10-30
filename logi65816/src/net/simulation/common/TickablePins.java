@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Tickable<
+public abstract class TickablePins<
     SNAPSHOT extends Snapshot,
     PINS extends Pins<SNAPSHOT, PINS, ? extends IntegratedCircuit<SNAPSHOT, PINS>>,
     INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
@@ -21,7 +21,7 @@ public abstract class Tickable<
 
   protected long tickCount;
 
-  public Tickable(Tickables tickables)
+  public TickablePins(Tickables tickables)
   {
     this.tickables = tickables;
     this.tickables.add(this);

@@ -1,4 +1,4 @@
-package net.nexperia.logisim;
+package net.nexperia.logisim.lvc4245;
 
 import com.cburch.logisim.data.BitWidth;
 import com.cburch.logisim.data.Value;

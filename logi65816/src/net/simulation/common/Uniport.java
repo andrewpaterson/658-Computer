@@ -15,7 +15,7 @@ public class Uniport
   protected TraceValue pin;
   protected Trace wire;
 
-  public Uniport(Tickable tickable, String name)
+  public Uniport(TickablePins tickable, String name)
   {
     super(tickable, name);
     pin = Unsettled;

@@ -5,7 +5,7 @@ import net.common.Pins;
 import net.simulation.common.*;
 
 public class CounterTickablePins
-    extends Tickable<CounterSnapshot, CounterTickablePins, Counter>
+    extends TickablePins<CounterSnapshot, CounterTickablePins, Counter>
     implements Pins<CounterSnapshot, CounterTickablePins, Counter>
 {
   protected final Omniport value;

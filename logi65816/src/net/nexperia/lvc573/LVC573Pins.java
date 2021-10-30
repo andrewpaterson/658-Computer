@@ -18,5 +18,7 @@ public interface LVC573Pins
   void setOutput(long latchValue);
 
   PinValue getOEB();
+
+  void setOutputHighImpedance();
 }
 

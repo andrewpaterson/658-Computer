@@ -7,7 +7,7 @@ import net.wdc.wdc65816.W65C816Snapshot;
 import net.wdc.wdc65816.W65C816;
 
 public class W65C816TickablePins
-    extends Tickable<W65C816Snapshot, W65C816Pins, W65C816>
+    extends TickablePins<W65C816Snapshot, W65C816Pins, W65C816>
     implements W65C816Pins
 {
   protected final Omniport addressBus;

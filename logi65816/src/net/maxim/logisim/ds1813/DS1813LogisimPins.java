@@ -1,4 +1,4 @@
-package net.maxim.logisim;
+package net.maxim.logisim.ds1813;
 
 import com.cburch.logisim.data.Value;
 import net.logisim.common.LogisimPins;

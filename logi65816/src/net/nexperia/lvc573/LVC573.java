@@ -28,6 +28,7 @@ public class LVC573
 
     boolean outputError = false;
     boolean outputUnset = false;
+    boolean outputHighImpedance = false;
     if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
     {
       outputError = true;
@@ -35,6 +36,10 @@ public class LVC573
     else if (outputEnabledB.isUnknown())
     {
       outputUnset = true;
+    }
+    else if (outputEnabledB.isLow())
+    {
+      outputHighImpedance = true;
     }
 
     if (latchEnabled.isHigh())
@@ -61,6 +66,10 @@ public class LVC573
     else if (outputUnset)
     {
       getPins().setOutputUnsettled();
+    }
+    else if (outputHighImpedance)
+    {
+      getPins().setOutputHighImpedance();
     }
     else
     {

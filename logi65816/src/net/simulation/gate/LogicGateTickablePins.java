@@ -13,7 +13,7 @@ public abstract class LogicGateTickablePins<
     SNAPSHOT extends Snapshot,
     PINS extends Pins<SNAPSHOT, PINS, ? extends IntegratedCircuit<SNAPSHOT, PINS>>,
     INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
-    extends Tickable<SNAPSHOT, PINS, INTEGRATED_CIRCUIT>
+    extends TickablePins<SNAPSHOT, PINS, INTEGRATED_CIRCUIT>
     implements Pins<SNAPSHOT, PINS, INTEGRATED_CIRCUIT>
 {
   protected Uniport out;

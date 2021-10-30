@@ -1,4 +1,4 @@
-package net.maxim.logisim;
+package net.maxim.logisim.ds1813;
 
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -21,7 +21,7 @@ public class DS1813Factory
   public DS1813Factory()
   {
     super(DS1813.class.getSimpleName(),
-          new ComponentDescription(160, 60, 10,
+          new ComponentDescription(160, ComponentDescription.height(3),
                                    PortDescription.inputShared(PORT_CLOCK, ""),
                                    PortDescription.inoutShared(PORT_RSTB, "RSTB")));
   }
@@ -47,7 +47,7 @@ public class DS1813Factory
   @Override
   public void paint(DS1813LogisimPins instance, Graphics2D graphics2D)
   {
-    drawField(graphics2D, TOP_OFFSET, WIDTH_8BIT, "Reset:", instance.getResetString(), true);
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Reset:", instance.getResetString(), true);
   }
 
   public DS1813LogisimPins getOrCreateInstance(InstanceState instanceState)

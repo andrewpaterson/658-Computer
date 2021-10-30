@@ -5,7 +5,7 @@ import net.common.Snapshot;
 import net.simulation.common.*;
 
 public class ConstantTickablePins
-    extends Tickable<Snapshot, ConstantTickablePins, Constant>
+    extends TickablePins<Snapshot, ConstantTickablePins, Constant>
     implements Pins<Snapshot, ConstantTickablePins, Constant>
 
 {

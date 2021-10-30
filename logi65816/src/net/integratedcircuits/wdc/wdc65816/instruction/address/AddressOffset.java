@@ -1,9 +1,9 @@
 package net.integratedcircuits.wdc.wdc65816.instruction.address;
 
-import net.util.IntUtil;
 import net.integratedcircuits.wdc.wdc65816.Address;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.instruction.BusCycleParameter;
+import net.util.IntUtil;
 
 import java.util.List;
 

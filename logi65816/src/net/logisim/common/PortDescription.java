@@ -12,6 +12,7 @@ public class PortDescription
   public String exclusive;
   public int bitWidth;
   public boolean mustDraw;
+  public boolean inverting;
 
   private PortDescription(int index, String name, String type, String exclusive, int bitWidth, boolean mustDraw)
   {
@@ -35,6 +36,12 @@ public class PortDescription
   public PortDescription setTooltip(String tooltip)
   {
     this.tooltip = tooltip;
+    return this;
+  }
+
+  public PortDescription setInverting(boolean inverting)
+  {
+    this.inverting = inverting;
     return this;
   }
 

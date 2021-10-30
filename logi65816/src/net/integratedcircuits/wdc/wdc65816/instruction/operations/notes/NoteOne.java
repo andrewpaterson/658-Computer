@@ -1,9 +1,9 @@
 package net.integratedcircuits.wdc.wdc65816.instruction.operations.notes;
 
-import net.util.EmulatorException;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.WidthFromRegister;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.Operation;
+import net.util.EmulatorException;
 
 import static net.integratedcircuits.wdc.wdc65816.WidthFromRegister.M;
 import static net.integratedcircuits.wdc.wdc65816.WidthFromRegister.XY;

@@ -1,12 +1,16 @@
 package net.simulation.maintests;
 
 import net.integratedcircuits.maxim.ds1813.DS1813;
-import net.integratedcircuits.maxim.simulation.DS1813TickablePins;
+import net.integratedcircuits.wdc.wdc65816.W65C816;
+import net.integratedcircuits.wdc.wdc65816.instruction.BusCycle;
+import net.integratedcircuits.wdc.wdc65816.instruction.Instruction;
 import net.simulation.common.Bus;
 import net.simulation.common.Tickables;
 import net.simulation.common.Trace;
 import net.simulation.gate.NotGate;
 import net.simulation.gate.NotGateTickablePins;
+import net.simulation.integratedcircuits.maxim.DS1813TickablePins;
+import net.simulation.integratedcircuits.wdc.W65C816TickablePins;
 import net.simulation.memory.Memory;
 import net.simulation.memory.MemoryTickablePins;
 import net.simulation.wiring.ClockOscillator;
@@ -14,10 +18,6 @@ import net.simulation.wiring.ClockOscillatorTickablePins;
 import net.simulation.wiring.Constant;
 import net.simulation.wiring.ConstantTickablePins;
 import net.util.StringUtil;
-import net.integratedcircuits.wdc.simulation.W65C816TickablePins;
-import net.integratedcircuits.wdc.wdc65816.W65C816;
-import net.integratedcircuits.wdc.wdc65816.instruction.BusCycle;
-import net.integratedcircuits.wdc.wdc65816.instruction.Instruction;
 
 import java.io.File;
 

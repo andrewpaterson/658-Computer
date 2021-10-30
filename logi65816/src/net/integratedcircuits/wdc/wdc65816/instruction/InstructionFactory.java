@@ -1,9 +1,9 @@
 package net.integratedcircuits.wdc.wdc65816.instruction;
 
-import net.util.EmulatorException;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.InstructionCycles;
 import net.integratedcircuits.wdc.wdc65816.instruction.interrupt.*;
+import net.util.EmulatorException;
 
 import java.util.ArrayList;
 import java.util.List;

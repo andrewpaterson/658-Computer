@@ -1,16 +1,16 @@
 package net.integratedcircuits.wdc.wdc65816;
 
 import net.common.IntegratedCircuit;
-import net.util.EmulatorException;
-import net.util.IntUtil;
 import net.integratedcircuits.wdc.wdc65816.instruction.BusCycle;
 import net.integratedcircuits.wdc.wdc65816.instruction.Instruction;
 import net.integratedcircuits.wdc.wdc65816.instruction.InstructionFactory;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.InstructionCycles;
+import net.util.EmulatorException;
+import net.util.IntUtil;
 
+import static net.integratedcircuits.wdc.wdc65816.CpuFlags.*;
 import static net.util.IntUtil.*;
 import static net.util.StringUtil.*;
-import static net.integratedcircuits.wdc.wdc65816.CpuFlags.*;
 
 public class W65C816
     extends IntegratedCircuit<W65C816Snapshot, W65C816Pins>

@@ -3,12 +3,12 @@ package net.logisim;
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
-import net.integratedcircuits.maxim.logisim.ds1813.DS1813Factory;
-import net.integratedcircuits.nexperia.logisim.lvc16373.LVC16373Factory;
-import net.integratedcircuits.nexperia.logisim.lvc4245.LVC4245Factory;
-import net.integratedcircuits.nexperia.logisim.lvc573.LVC573Factory;
-import net.integratedcircuits.wdc.logisim.wdc6502.W65C02Factory;
-import net.integratedcircuits.wdc.logisim.wdc65816.W65C816Factory;
+import net.logisim.integratedcircuits.maxim.ds1813.DS1813Factory;
+import net.logisim.integratedcircuits.nexperia.lvc16373.LVC16373Factory;
+import net.logisim.integratedcircuits.nexperia.lvc4245.LVC4245Factory;
+import net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory;
+import net.logisim.integratedcircuits.wdc.w65c02.W65C02Factory;
+import net.logisim.integratedcircuits.wdc.w65c816.W65C816Factory;
 
 import java.util.ArrayList;
 import java.util.List;

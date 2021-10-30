@@ -1,13 +1,13 @@
 package net.integratedcircuits.wdc.wdc65816.instruction;
 
-import net.util.EmulatorException;
 import net.integratedcircuits.wdc.wdc65816.Address;
-import net.integratedcircuits.wdc.wdc65816.W65C816Pins;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
+import net.integratedcircuits.wdc.wdc65816.W65C816Pins;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.AddressOffset;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.ConstantOffset;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.DataOperation;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.Operation;
+import net.util.EmulatorException;
 
 import java.util.Arrays;
 import java.util.List;

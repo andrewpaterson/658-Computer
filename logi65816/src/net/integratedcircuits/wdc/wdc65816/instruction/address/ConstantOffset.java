@@ -1,7 +1,7 @@
 package net.integratedcircuits.wdc.wdc65816.instruction.address;
 
-import net.util.EmulatorException;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
+import net.util.EmulatorException;
 
 public class ConstantOffset
     extends AddressOffset

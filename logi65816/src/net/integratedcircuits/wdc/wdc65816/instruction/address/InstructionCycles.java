@@ -1,6 +1,5 @@
 package net.integratedcircuits.wdc.wdc65816.instruction.address;
 
-import net.util.EmulatorException;
 import net.integratedcircuits.wdc.wdc65816.Executor;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.WidthFromRegister;
@@ -8,6 +7,7 @@ import net.integratedcircuits.wdc.wdc65816.instruction.AddressingMode;
 import net.integratedcircuits.wdc.wdc65816.instruction.BusCycle;
 import net.integratedcircuits.wdc.wdc65816.instruction.interrupt.InterruptVector;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.*;
+import net.util.EmulatorException;
 
 import java.util.Arrays;
 import java.util.List;

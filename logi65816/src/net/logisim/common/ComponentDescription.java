@@ -3,8 +3,6 @@ package net.logisim.common;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.logisim.common.LogisimFactory.TOP_OFFSET;
-
 public class ComponentDescription
 {
   public static final int PIXELS_PER_PIN = 20;

@@ -17,7 +17,7 @@ PROGRESS_COP:
 ENDPROGRESS:	
 	DB ']'
 	
-	ORG $F12B
+	ORG $E12B
 RESET:
 	CLC	     		;clear carry
 	XCE	     		;clear emulation

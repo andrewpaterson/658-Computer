@@ -12,8 +12,8 @@ public class LVC543
 {
   public static final String TYPE = "Octal Bi-latch";
 
-  public static final int AB = 0;
-  public static final int BA = 1;
+  public static final int A = 0;
+  public static final int B = 1;
 
   protected long[] latchValue;
 
@@ -26,35 +26,42 @@ public class LVC543
   @Override
   public void tick()
   {
-    tickLatch(AB);
-    tickLatch(BA);
+    tickLatch(A, B);
+    tickLatch(B, A);
   }
 
-  private void tickLatch(int index)
+  private void tickLatch(int inputIndex, int outputIndex)
   {
-    PinValue latchEnabledB = getPins().getLEB(index);
-    PinValue outputEnabledB = getPins().getOEB(index);
-    PinValue chipEnableB = getPins().getCEB(index);
+    PinValue latchEnabledB = getPins().getLEB(inputIndex);
+    PinValue outputEnabledB = getPins().getOEB(inputIndex);
+    PinValue chipEnableB = getPins().getCEB(inputIndex);
 
     boolean outputError = false;
     boolean outputUnset = false;
     boolean outputHighImpedance = false;
-    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
+    if (outputEnabledB.isError() || chipEnableB.isError())
     {
       outputError = true;
     }
-    else if (outputEnabledB.isUnknown())
+    else if (outputEnabledB.isNotConnected() && chipEnableB.isNotConnected())
     {
-      outputUnset = true;
+      outputError = true;
     }
-    else if (outputEnabledB.isHigh())
+    else if (outputEnabledB.isHigh() || chipEnableB.isHigh())
     {
       outputHighImpedance = true;
     }
-
-    if (latchEnabledB.isHigh())
+    else
     {
-      BusValue input = getPins().getInput(index);
+      if (!outputEnabledB.isLow() && !chipEnableB.isLow())
+      {
+        outputUnset = true;
+      }
+    }
+
+    if (latchEnabledB.isLow() && chipEnableB.isLow())
+    {
+      BusValue input = getPins().getInput(inputIndex);
       if (input.isUnknown() || input.isNotConnected())
       {
         outputUnset = true;
@@ -65,25 +72,25 @@ public class LVC543
       }
       else
       {
-        latchValue[index] = input.getValue();
+        latchValue[inputIndex] = input.getValue();
       }
     }
 
     if (outputError)
     {
-      getPins().setOutputError(index);
+      getPins().setOutputError(outputIndex);
     }
     else if (outputUnset)
     {
-      getPins().setOutputUnsettled(index);
+      getPins().setOutputUnsettled(outputIndex);
     }
     else if (outputHighImpedance)
     {
-      getPins().setOutputHighImpedance(index);
+      getPins().setOutputHighImpedance(outputIndex);
     }
     else
     {
-      getPins().setOutput(index, latchValue[index]);
+      getPins().setOutput(outputIndex, latchValue[inputIndex]);
     }
   }
 

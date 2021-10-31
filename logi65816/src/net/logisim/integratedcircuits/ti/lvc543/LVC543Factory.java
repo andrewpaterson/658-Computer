@@ -8,8 +8,8 @@ import net.logisim.common.PortFactory;
 
 import java.awt.*;
 
-import static net.integratedcircuits.ti.lvc543.LVC543.AB;
-import static net.integratedcircuits.ti.lvc543.LVC543.BA;
+import static net.integratedcircuits.ti.lvc543.LVC543.A;
+import static net.integratedcircuits.ti.lvc543.LVC543.B;
 import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
@@ -31,15 +31,15 @@ public class LVC543Factory
 
     PortFactory factory = new PortFactory();
 
-    PORT_LEB[AB] = factory.inputShared("LEAB", LEFT).setInverting().setDrawBar().index();
-    PORT_OEB[AB] = factory.inputShared("OEAB", LEFT).setInverting().setDrawBar().index();
-    PORT_IO[AB] = factory.inputShared("A", 8, LEFT).index();
-    PORT_OEB[AB] = factory.inputShared("CEAB", LEFT).setInverting().setDrawBar().index();
+    PORT_LEB[A] = factory.inputShared("LEAB", LEFT).setInverting().setDrawBar().index();
+    PORT_OEB[A] = factory.inputShared("OEAB", LEFT).setInverting().setDrawBar().index();
+    PORT_IO[A] = factory.inputShared("A", 8, LEFT).index();
+    PORT_CEB[A] = factory.inputShared("CEAB", LEFT).setInverting().setDrawBar().index();
 
-    PORT_LEB[BA] = factory.inputShared("LEBA", RIGHT).setInverting().setDrawBar().index();
-    PORT_OEB[BA] = factory.inputShared("OEBA", RIGHT).setInverting().setDrawBar().index();
-    PORT_IO[BA] = factory.inputShared("B", 8, RIGHT).index();
-    PORT_OEB[BA] = factory.inputShared("CEBA", RIGHT).setInverting().setDrawBar().index();
+    PORT_LEB[B] = factory.inputShared("LEBA", RIGHT).setInverting().setDrawBar().index();
+    PORT_OEB[B] = factory.inputShared("OEBA", RIGHT).setInverting().setDrawBar().index();
+    PORT_IO[B] = factory.inputShared("B", 8, RIGHT).index();
+    PORT_CEB[B] = factory.inputShared("CEBA", RIGHT).setInverting().setDrawBar().index();
 
     return new LVC543Factory(new ComponentDescription(LVC543.class.getSimpleName(),
                                                       160,
@@ -55,8 +55,8 @@ public class LVC543Factory
   public void paint(LVC543LogisimPins instance, Graphics2D graphics2D)
   {
     LVC543 latch = instance.getIntegratedCircuit();
-    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "A:", latch.getValueString(AB), true);
-    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "B:", latch.getValueString(BA), true);
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "A:", latch.getValueString(A), true);
+    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "B:", latch.getValueString(B), true);
   }
 
   @Override

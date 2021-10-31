@@ -55,34 +55,34 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
                                   description.getTopY(),
                                   description.getWidth(),
                                   description.getHeight()));
-    setPorts(createPorts());
+    setPorts(createPorts(description));
   }
 
-  protected List<Port> createPorts()
+  protected List<Port> createPorts(ComponentDescription description)
   {
     ArrayList<Port> ports = new ArrayList<>();
 
-    createVerticalPorts(ports, LEFT, description.getLeft());
-    createVerticalPorts(ports, RIGHT, description.getRight());
+    createVerticalPorts(ports, LEFT);
+    createVerticalPorts(ports, RIGHT);
 
     return ports;
   }
 
-  private void createVerticalPorts(ArrayList<Port> ports, PortPosition right, int right2)
+  private void createVerticalPorts(ArrayList<Port> ports, PortPosition position)
   {
-    for (PortDescription portDescription : description.getPorts(right))
+    for (PortDescription portDescription : description.getPorts(position))
     {
       if (portDescription.notBlank())
       {
-        ports.add(createPort(portDescription, right2));
+        ports.add(createPort(portDescription));
       }
     }
   }
 
-  private Port createPort(PortDescription portDescription, int x)
+  private Port createPort(PortDescription portDescription)
   {
-    Port port = new Port(x,
-                         description.getPinStartY() + portDescription.getOffset() * description.pixelsPerPin(),
+    Port port = new Port(description.getPortX(portDescription),
+                         description.getPortY(portDescription),
                          portDescription.getType(),
                          portDescription.getBitWidth(),
                          portDescription.getExclusive());

@@ -1,7 +1,7 @@
 package net.logisim.common;
 
 import com.cburch.logisim.data.Bounds;
-import com.cburch.logisim.data.Direction;
+import com.cburch.logisim.data.Location;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.util.GraphicsUtil;
 import net.common.IntegratedCircuit;
@@ -25,7 +25,7 @@ public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
     {
       ComponentDescription description = getDescription();
       Graphics2D graphics2D = (Graphics2D) g;
-      paintPorts(painter, instance);
+      paintPorts(painter, instance, graphics2D);
 
       Font oldFont = graphics2D.getFont();
       graphics2D.setFont(oldFont.deriveFont(Font.BOLD));
@@ -49,42 +49,54 @@ public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
     }
   }
 
-  default void paintPorts(InstancePainter painter, T instance)
+  default void paintPorts(InstancePainter painter, T instance, Graphics2D graphics2D)
   {
     ComponentDescription description = getDescription();
     boolean clock = !instance.isClockHigh();
     painter.drawBounds();
+    Location location = painter.getLocation();
+
     List<PortDescription> ports = description.getPorts();
-    for (PortDescription port : ports)
+    Font font = graphics2D.getFont();
+    FontMetrics metrics = graphics2D.getFontMetrics(font);
+    for (PortDescription portDescription : ports)
     {
-      if (port.notBlank())
+      if (portDescription.notBlank())
       {
-        String label = !clock ? port.getLowName() : port.getHighName();
-        painter.drawPort(port.index(), label, getDirection(port));
+        String label = !clock ? portDescription.getLowName() : portDescription.getHighName();
+        painter.drawPort(portDescription.index());
+
+        int width = metrics.stringWidth(label);
+        int height = metrics.getHeight();
+        int x = description.getPortX(portDescription) + location.getX();
+        int y = description.getPortY(portDescription) + location.getY();
+        int vCenter = y - height / 2 + 3;
+        if (portDescription.isPosition(LEFT))
+        {
+          GraphicsUtil.drawText(graphics2D, label, x + 3, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
+          if (portDescription.isInverting())
+          {
+            graphics2D.drawLine(x + 3, vCenter, x + width + 3, vCenter);
+          }
+        }
+        else if (portDescription.isPosition(RIGHT))
+        {
+          GraphicsUtil.drawText(graphics2D, label, x - 3, y, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
+          if (portDescription.isInverting())
+          {
+            graphics2D.drawLine(x - 3 - width, vCenter, x - 3, vCenter);
+          }
+        }
+        else if (portDescription.isPosition(BOTTOM))
+        {
+          GraphicsUtil.drawText(graphics2D, label, x, y - 3, GraphicsUtil.H_CENTER, GraphicsUtil.V_BASELINE);
+        }
+        else if (portDescription.isPosition(TOP))
+        {
+          GraphicsUtil.drawText(graphics2D, label, x, y + 3, GraphicsUtil.H_CENTER, GraphicsUtil.V_TOP);
+        }
       }
     }
-  }
-
-  private Direction getDirection(PortDescription portDescription)
-  {
-    Direction dir = null;
-    if (portDescription.isPosition(RIGHT))
-    {
-      dir = Direction.WEST;
-    }
-    else if (portDescription.isPosition(LEFT))
-    {
-      dir = Direction.EAST;
-    }
-    else if (portDescription.isPosition(TOP))
-    {
-      dir = Direction.NORTH;
-    }
-    else if (portDescription.isPosition(BOTTOM))
-    {
-      dir = Direction.SOUTH;
-    }
-    return dir;
   }
 
   default void drawField(Graphics g,
@@ -96,10 +108,10 @@ public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
   {
     ComponentDescription description = getDescription();
     int y = description.getTopYPlusMargin() + topOffset;
-    g.drawRect(5, y - 5, rectangleWidth, 15);
-    GraphicsUtil.drawText(g, label, -10, y, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
+    g.drawRect(0, y - 5, rectangleWidth, 15);
+    GraphicsUtil.drawText(g, label, -5, y, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
     Color oldColour = setColour(g, black);
-    GraphicsUtil.drawText(g, value, 10, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
+    GraphicsUtil.drawText(g, value, 5, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
     g.setColor(oldColour);
   }
 

@@ -37,7 +37,7 @@ public class LVC573
     {
       outputUnset = true;
     }
-    else if (outputEnabledB.isLow())
+    else if (outputEnabledB.isHigh())
     {
       outputHighImpedance = true;
     }

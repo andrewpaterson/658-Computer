@@ -25,7 +25,7 @@ public class LVC573Factory
   {
     PortFactory factory = new PortFactory();
 
-    PORT_OEB = factory.inputShared("OEB", LEFT).index();
+    PORT_OEB = factory.inputShared("OE", LEFT).setInverting(true).index();
     PORT_D = factory.inputShared("D", 8, LEFT).setTooltip("Input D (input)").index();
     PORT_LE = factory.inputShared("LE", LEFT).index();
 

@@ -31,13 +31,13 @@ public class LVC543Factory
 
     PortFactory factory = new PortFactory();
 
-    PORT_LEB[BA] = factory.inputShared("LEBA", LEFT).setInverting(true).index();
-    PORT_OEB[BA] = factory.inputShared("OEBA", LEFT).setInverting(true).index();
+    PORT_LEB[AB] = factory.inputShared("LEAB", LEFT).setInverting(true).index();
+    PORT_OEB[AB] = factory.inputShared("OEAB", LEFT).setInverting(true).index();
     PORT_IO[AB] = factory.inputShared("A", 8, LEFT).index();
     PORT_OEB[AB] = factory.inputShared("CEAB", LEFT).setInverting(true).index();
 
-    PORT_LEB[AB] = factory.inputShared("LEAB", RIGHT).setInverting(true).index();
-    PORT_OEB[AB] = factory.inputShared("OEAB", RIGHT).setInverting(true).index();
+    PORT_LEB[BA] = factory.inputShared("LEBA", RIGHT).setInverting(true).index();
+    PORT_OEB[BA] = factory.inputShared("OEBA", RIGHT).setInverting(true).index();
     PORT_IO[BA] = factory.inputShared("B", 8, RIGHT).index();
     PORT_OEB[BA] = factory.inputShared("CEBA", RIGHT).setInverting(true).index();
 
@@ -55,8 +55,8 @@ public class LVC543Factory
   public void paint(LVC543LogisimPins instance, Graphics2D graphics2D)
   {
     LVC543 latch = instance.getIntegratedCircuit();
-    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Value A:", latch.getValueString(AB), true);
-    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "Value B:", latch.getValueString(BA), true);
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "A:", latch.getValueString(AB), true);
+    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "B:", latch.getValueString(BA), true);
   }
 
   @Override

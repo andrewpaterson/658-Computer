@@ -150,5 +150,26 @@ public class ComponentDescription
   {
     return name;
   }
+
+  public int getPortX(PortDescription portDescription)
+  {
+    if (portDescription.isPosition(LEFT))
+    {
+      return getLeft();
+    }
+    else if (portDescription.isPosition(RIGHT))
+    {
+      return getRight();
+    }
+    else
+    {
+      return 0;
+    }
+  }
+
+  public int getPortY(PortDescription portDescription)
+  {
+    return getPinStartY() + portDescription.getOffset() * pixelsPerPin();
+  }
 }
 

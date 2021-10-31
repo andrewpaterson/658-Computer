@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.List;
 
+import static net.logisim.common.ComponentDescription.PIXELS_PER_PIN;
 import static net.logisim.common.PortPosition.*;
 
 public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
@@ -68,23 +69,39 @@ public interface LogisimPainter<T extends LogisimPins<?, ?, ?>>
 
         int width = metrics.stringWidth(label);
         int height = metrics.getHeight();
-        int x = description.getPortX(portDescription) + location.getX();
+        int x = description.getPortX(portDescription, false) + location.getX();
         int y = description.getPortY(portDescription) + location.getY();
         int vCenter = y - height / 2 + 3;
         if (portDescription.isPosition(LEFT))
         {
           GraphicsUtil.drawText(graphics2D, label, x + 3, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
-          if (portDescription.isInverting())
+          if (portDescription.isDrawBar())
           {
             graphics2D.drawLine(x + 3, vCenter, x + width + 3, vCenter);
+          }
+
+          if (portDescription.isInverting())
+          {
+            GraphicsUtil.switchToWidth(graphics2D, 2);
+            int halfPixels = PIXELS_PER_PIN / 2 - 1;
+            graphics2D.drawOval(x - halfPixels - 1, y - halfPixels / 2, halfPixels, halfPixels);
+            GraphicsUtil.switchToWidth(graphics2D, 1);
           }
         }
         else if (portDescription.isPosition(RIGHT))
         {
           GraphicsUtil.drawText(graphics2D, label, x - 3, y, GraphicsUtil.H_RIGHT, GraphicsUtil.V_CENTER);
-          if (portDescription.isInverting())
+          if (portDescription.isDrawBar())
           {
             graphics2D.drawLine(x - 3 - width, vCenter, x - 3, vCenter);
+          }
+
+          if (portDescription.isInverting())
+          {
+            GraphicsUtil.switchToWidth(graphics2D, 2);
+            int halfPixels = PIXELS_PER_PIN / 2 - 1;
+            graphics2D.drawOval(x + 1, y - halfPixels / 2, halfPixels, halfPixels);
+            GraphicsUtil.switchToWidth(graphics2D, 1);
           }
         }
         else if (portDescription.isPosition(BOTTOM))

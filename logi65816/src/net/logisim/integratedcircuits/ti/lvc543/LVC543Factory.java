@@ -31,15 +31,15 @@ public class LVC543Factory
 
     PortFactory factory = new PortFactory();
 
-    PORT_LEB[AB] = factory.inputShared("LEAB", LEFT).setInverting(true).index();
-    PORT_OEB[AB] = factory.inputShared("OEAB", LEFT).setInverting(true).index();
+    PORT_LEB[AB] = factory.inputShared("LEAB", LEFT).setInverting().setDrawBar().index();
+    PORT_OEB[AB] = factory.inputShared("OEAB", LEFT).setInverting().setDrawBar().index();
     PORT_IO[AB] = factory.inputShared("A", 8, LEFT).index();
-    PORT_OEB[AB] = factory.inputShared("CEAB", LEFT).setInverting(true).index();
+    PORT_OEB[AB] = factory.inputShared("CEAB", LEFT).setInverting().setDrawBar().index();
 
-    PORT_LEB[BA] = factory.inputShared("LEBA", RIGHT).setInverting(true).index();
-    PORT_OEB[BA] = factory.inputShared("OEBA", RIGHT).setInverting(true).index();
+    PORT_LEB[BA] = factory.inputShared("LEBA", RIGHT).setInverting().setDrawBar().index();
+    PORT_OEB[BA] = factory.inputShared("OEBA", RIGHT).setInverting().setDrawBar().index();
     PORT_IO[BA] = factory.inputShared("B", 8, RIGHT).index();
-    PORT_OEB[BA] = factory.inputShared("CEBA", RIGHT).setInverting(true).index();
+    PORT_OEB[BA] = factory.inputShared("CEBA", RIGHT).setInverting().setDrawBar().index();
 
     return new LVC543Factory(new ComponentDescription(LVC543.class.getSimpleName(),
                                                       160,

@@ -12,6 +12,7 @@ public class PortDescription
   private int bitWidth;
   private boolean notBlank;
   private boolean inverting;
+  private boolean drawBar;
   private PortPosition position;
 
   private int offset;
@@ -34,6 +35,8 @@ public class PortDescription
     this.notBlank = notBlank;
     this.position = position;
     this.offset = 0;
+    this.inverting = false;
+    this.drawBar = false;
   }
 
   public PortDescription setHighName(String highName)
@@ -49,11 +52,18 @@ public class PortDescription
     return this;
   }
 
-  public PortDescription setInverting(boolean inverting)
+  public PortDescription setInverting()
   {
-    this.inverting = inverting;
+    this.inverting = true;
     return this;
   }
+
+  public PortDescription setDrawBar()
+  {
+    this.drawBar = true;
+    return this;
+  }
+
 
   public int index()
   {
@@ -98,6 +108,11 @@ public class PortDescription
   public boolean isInverting()
   {
     return inverting;
+  }
+
+  public boolean isDrawBar()
+  {
+    return drawBar;
   }
 
   public int getOffset()

@@ -55,10 +55,10 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
                                   description.getTopY(),
                                   description.getWidth(),
                                   description.getHeight()));
-    setPorts(createPorts(description));
+    setPorts(createPorts());
   }
 
-  protected List<Port> createPorts(ComponentDescription description)
+  protected List<Port> createPorts()
   {
     ArrayList<Port> ports = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
 
   private Port createPort(PortDescription portDescription)
   {
-    Port port = new Port(description.getPortX(portDescription),
+    Port port = new Port(description.getPortX(portDescription, true),
                          description.getPortY(portDescription),
                          portDescription.getType(),
                          portDescription.getBitWidth(),

@@ -8,7 +8,8 @@ import static net.logisim.common.PortPosition.RIGHT;
 
 public class ComponentDescription
 {
-  public static final int PIXELS_PER_PIN = 20;
+  public static final int PIXELS_PER_GRID = 10;
+  public static final int PIXELS_PER_PIN = PIXELS_PER_GRID * 2;
 
   protected final int verticalMargin;
   protected final int pinsPerSide;
@@ -151,15 +152,25 @@ public class ComponentDescription
     return name;
   }
 
-  public int getPortX(PortDescription portDescription)
+  public int getPortX(PortDescription portDescription, boolean port)
   {
     if (portDescription.isPosition(LEFT))
     {
-      return getLeft();
+      int x = getLeft();
+      if (portDescription.isInverting() && port)
+      {
+        x -= PIXELS_PER_GRID;
+      }
+      return x;
     }
     else if (portDescription.isPosition(RIGHT))
     {
-      return getRight();
+      int x = getRight();
+      if (portDescription.isInverting() && port)
+      {
+        x += PIXELS_PER_GRID;
+      }
+      return x;
     }
     else
     {

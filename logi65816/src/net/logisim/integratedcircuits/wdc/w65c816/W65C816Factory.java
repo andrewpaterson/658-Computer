@@ -36,23 +36,23 @@ public class W65C816Factory
   {
     PortFactory factory = new PortFactory();
 
-    PORT_ABORTB = factory.inputShared("ABORTB", LEFT).setInverting(true).setTooltip("Abort current instruction (input: active low)").index();
-    PORT_IRQB = factory.inputShared("IRQB", LEFT).setInverting(true).setTooltip("Interrupt request (input: active low)").index();
-    PORT_NMIB = factory.inputShared("NMIB", LEFT).setInverting(true).setTooltip("Non-maskable interrupt (input: active low)").index();
-    PORT_RESB = factory.inputShared("RESB", LEFT).setInverting(true).setTooltip("Reset (input: active low)").index();
+    PORT_ABORTB = factory.inputShared("ABORTB", LEFT).setInverting().setTooltip("Abort current instruction (input: active low)").index();
+    PORT_IRQB = factory.inputShared("IRQB", LEFT).setInverting().setTooltip("Interrupt request (input: active low)").index();
+    PORT_NMIB = factory.inputShared("NMIB", LEFT).setInverting().setTooltip("Non-maskable interrupt (input: active low)").index();
+    PORT_RESB = factory.inputShared("RESB", LEFT).setInverting().setTooltip("Reset (input: active low)").index();
     PORT_PHI2 = factory.inputShared("PHI2", LEFT).setTooltip("Clock (input)").index();
     PORT_MX = factory.outputExclusive("M", LEFT).setHighName("X").setTooltip("Memory width / Index width (8bit high, 16bit low)").index();
     PORT_E = factory.outputExclusive("E", LEFT).setTooltip("Emulation mode (output: emulation high, native low)").index();
-    PORT_MLB = factory.outputExclusive("MLB", LEFT).setInverting(true).setTooltip("Memory lock (output: read-modify-write low)").index();
+    PORT_MLB = factory.outputExclusive("MLB", LEFT).setInverting().setTooltip("Memory lock (output: read-modify-write low)").index();
 
     PORT_AddressBus = factory.outputShared("A", 16, RIGHT).setTooltip("Address (output)").index();
     PORT_DataBus = factory.inoutShared("D", 8, RIGHT).setHighName("BA").setTooltip("Data / Bank address (bi-directional - see data sheet)").index();
     PORT_RWB = factory.outputShared("RWB", RIGHT).setTooltip("Read / Write (output: read high, write low)").index();
     PORT_RDY = factory.inoutShared("RDY", RIGHT).setTooltip("Ready (bi-directional - see data sheet)").index();
-    PORT_BE = factory.inputShared("BE", RIGHT).setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low").index();
     PORT_VDA = factory.outputExclusive("VDA", RIGHT).setTooltip("Valid data address (output: valid high, invalid low)").index();
     PORT_VPA = factory.outputExclusive("VPA", RIGHT).setTooltip("Valid program address (output: valid high, invalid low)").index();
-    PORT_VPB = factory.outputExclusive("VPB", RIGHT).setInverting(true).setTooltip("Interrupt vector pull (output: fetching interrupt address low)").index();
+    PORT_VPB = factory.outputExclusive("VPB`", RIGHT).setInverting().setTooltip("Interrupt vector pull (output: fetching interrupt address low)").index();
+    PORT_BE = factory.inputShared("BE", RIGHT).setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low").index();
 
     return new W65C816Factory(new ComponentDescription(W65C816.class.getSimpleName(),
                                                        240,

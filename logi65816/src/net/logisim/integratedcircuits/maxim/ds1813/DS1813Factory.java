@@ -24,7 +24,7 @@ public class DS1813Factory
     PortFactory factory = new PortFactory();
 
     PORT_CLOCK = factory.inputShared("", LEFT).index();
-    PORT_RSTB = factory.inoutShared("RSTB", RIGHT).index();
+    PORT_RSTB = factory.inoutShared("RST", RIGHT).setInverting(true).index();
 
     return new DS1813Factory(new ComponentDescription(DS1813.class.getSimpleName(),
                                                       160, height(3),

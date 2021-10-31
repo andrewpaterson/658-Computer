@@ -24,7 +24,7 @@ public class LVC4245Factory
   {
     PortFactory factory = new PortFactory();
 
-    PORT_OEB = factory.inputShared("OEB", LEFT).setTooltip("Output enable (input: A and B high impedance high, A and B enable low)").index();
+    PORT_OEB = factory.inputShared("OE", LEFT).setInverting(true).setTooltip("Output enable (input: A and B high impedance high, A and B enable low)").index();
     PORT_B = factory.inoutShared("B", 8, LEFT).setTooltip("Data B (input or output)").index();
     PORT_DIR = factory.inputShared("DIR", LEFT).setTooltip("Direction (input: B to A low, A to B high)").index();
 

@@ -30,10 +30,10 @@ public class LVC16373Factory
 
     PortFactory factory = new PortFactory();
 
-    PORT_OEB[0] = factory.inputShared("1OEB", LEFT).index();
+    PORT_OEB[0] = factory.inputShared("1OE", LEFT).setInverting(true).index();
     PORT_D[0] = factory.inputShared("1D", 8, LEFT).setTooltip("Input D(1) (input)").index();
     PORT_LE[0] = factory.inputShared("1LE", LEFT).index();
-    PORT_OEB[1] = factory.inputShared("2OEB", LEFT).index();
+    PORT_OEB[1] = factory.inputShared("2OE", LEFT).setInverting(true).index();
     PORT_D[1] = factory.inputShared("2D", 8, LEFT).setTooltip("Input D(2) (input)").index();
     PORT_LE[1] = factory.inputShared("2LE", LEFT).index();
 

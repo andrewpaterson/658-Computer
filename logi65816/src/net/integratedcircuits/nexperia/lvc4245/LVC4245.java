@@ -112,6 +112,11 @@ public class LVC4245
     return "###";
   }
 
+  public PinValue getDirection()
+  {
+    return direction;
+  }
+
   public boolean isDirectionValid()
   {
     return direction != null && (direction.isHigh() || direction.isLow());

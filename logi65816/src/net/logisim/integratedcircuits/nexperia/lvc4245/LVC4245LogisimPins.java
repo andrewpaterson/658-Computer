@@ -42,7 +42,21 @@ public class LVC4245LogisimPins
   @Override
   public PinValue getDir()
   {
-    return getPinValue(LVC4245Factory.PORT_DIR);
+    PinValue pinValue = getPinValue(LVC4245Factory.PORT_DIR);
+    PinValue direction = getIntegratedCircuit().getDirection();
+    if (direction != pinValue)
+    {
+      if (pinValue.isLow())
+      {
+        instanceState.setPort(ports[PORT_B_INDEX], Value.createUnknown(BitWidth.create(8)), 4);
+      }
+      else if (pinValue.isHigh())
+      {
+        instanceState.setPort(ports[PORT_A_INDEX], Value.createUnknown(BitWidth.create(8)), 4);
+      }
+    }
+
+    return pinValue;
   }
 
   @Override

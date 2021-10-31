@@ -66,5 +66,27 @@ public class BusValue
   {
     return notConnectedValue;
   }
+
+  @Override
+  public String toString()
+  {
+    StringBuilder builder = new StringBuilder();
+    if (error)
+    {
+      builder.append("E");
+    }
+    if (notConnected)
+    {
+      builder.append("NC");
+    }
+    if (unknown)
+    {
+      builder.append("U");
+    }
+    builder.append("[");
+    builder.append(Long.toHexString(value));
+    builder.append("]");
+    return builder.toString();
+  }
 }
 

@@ -1,10 +1,7 @@
 package net.logisim.integratedcircuits.nexperia.lvc573;
 
 import net.integratedcircuits.nexperia.lvc573.LVC573;
-import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
-import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortFactory;
+import net.logisim.common.*;
 
 import java.awt.*;
 
@@ -15,21 +12,21 @@ public class LVC573Factory
     extends LogisimFactory<LVC573LogisimPins>
     implements LogisimPainter<LVC573LogisimPins>
 {
-  protected static int PORT_OEB;
-  protected static int PORT_D;
-  protected static int PORT_LE;
+  protected static LogiPin PORT_OEB;
+  protected static LogiBus PORT_D;
+  protected static LogiPin PORT_LE;
 
-  protected static int PORT_Q;
+  protected static LogiBus PORT_Q;
 
   public static LVC573Factory create()
   {
     PortFactory factory = new PortFactory();
 
-    PORT_OEB = factory.inputShared("OE", LEFT).setInverting().setDrawBar().index();
-    PORT_D = factory.inputShared("D", 8, LEFT).setTooltip("Input D (input)").index();
-    PORT_LE = factory.inputShared("LE", LEFT).index();
+    PORT_OEB = factory.inputShared("OE", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_D = factory.inputShared("D", 8, LEFT).setTooltip("Input D (input)").createBus(2);
+    PORT_LE = factory.inputShared("LE", LEFT).createPin(2);
 
-    PORT_Q = factory.outputShared("Q", 8, RIGHT).setTooltip("Output Q (output)").index();
+    PORT_Q = factory.outputShared("Q", 8, RIGHT).setTooltip("Output Q (output)").createBus(2);
 
     return new LVC573Factory(new ComponentDescription(LVC573.class.getSimpleName(),
                                                       160,

@@ -65,6 +65,27 @@ public abstract class LogisimPins<
     return false;
   }
 
+  public boolean requiresPropagationListener()
+  {
+    return true;
+  }
+
+  public INTEGRATED_CIRCUIT getIntegratedCircuit()
+  {
+    return integratedCircuit;
+  }
+
+  public void setIntegratedCircuit(INTEGRATED_CIRCUIT integratedCircuit)
+  {
+    this.integratedCircuit = integratedCircuit;
+  }
+
+  public int getTickCount()
+  {
+    return instanceState.getTickCount();
+  }
+
+  @Deprecated
   protected BusValue getBusValue(int portIndex, int width, int delay)
   {
     if (instanceState.isPortConnected(portIndex))
@@ -90,6 +111,32 @@ public abstract class LogisimPins<
     }
   }
 
+  protected BusValue getValue(LogiBus logiBus)
+  {
+    if (instanceState.isPortConnected(logiBus.index))
+    {
+      Value portValue = instanceState.getPortValue(logiBus.index);
+      if (portValue.isErrorValue())
+      {
+        return BusValue.error();
+      }
+      else if (portValue.isUnknown())
+      {
+        return BusValue.unknown();
+      }
+      else
+      {
+        instanceState.setPort(logiBus.index, Value.createUnknown(BitWidth.create(logiBus.width)), logiBus.propagationDelay);
+        return new BusValue(portValue.toLongValue());
+      }
+    }
+    else
+    {
+      return BusValue.notConnected();
+    }
+  }
+
+  @Deprecated
   protected PinValue getPinValue(int portIndex)
   {
     Value value = instanceState.getPortValue(portIndex);
@@ -111,24 +158,50 @@ public abstract class LogisimPins<
     }
   }
 
-  public boolean requiresPropagationListener()
+  protected PinValue getValue(LogiPin logiPin)
   {
-    return true;
+    Value value = instanceState.getPortValue(logiPin.index);
+    if (value.isErrorValue())
+    {
+      return PinValue.Error;
+    }
+    else if (value == Value.TRUE)
+    {
+      //You should probably write unknown to this port.
+//      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
+      return PinValue.High;
+    }
+    else if (value == Value.FALSE)
+    {
+      //You should probably write unknown to this port.
+//      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
+      return PinValue.Low;
+    }
+    else
+    {
+      return PinValue.Unknown;
+    }
   }
 
-  public INTEGRATED_CIRCUIT getIntegratedCircuit()
+  protected void setError(LogiBus logiBus)
   {
-    return integratedCircuit;
+    instanceState.setPort(logiBus.index,
+                          Value.createError(BitWidth.create(logiBus.width)),
+                          logiBus.propagationDelay);
   }
 
-  public void setIntegratedCircuit(INTEGRATED_CIRCUIT integratedCircuit)
+  protected void setValue(LogiBus logiBus, long value)
   {
-    this.integratedCircuit = integratedCircuit;
+    instanceState.setPort(logiBus.index,
+                          Value.createKnown(BitWidth.create(logiBus.width), value),
+                          logiBus.propagationDelay);
   }
 
-  public int getTickCount()
+  protected void setHighImpedance(LogiBus logiBus)
   {
-    return instanceState.getTickCount();
+    instanceState.setPort(logiBus.index,
+                          Value.createUnknown(BitWidth.create(logiBus.width)),
+                          logiBus.propagationDelay);
   }
 }
 

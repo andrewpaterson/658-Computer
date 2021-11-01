@@ -7,6 +7,7 @@ import net.common.PinValue;
 import net.integratedcircuits.nexperia.lvc573.LVC573;
 import net.integratedcircuits.nexperia.lvc573.LVC573Pins;
 import net.integratedcircuits.nexperia.lvc573.LVC573Snapshot;
+import net.logisim.common.LogiBus;
 import net.logisim.common.LogisimPins;
 
 import static net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory.PORT_Q;
@@ -18,13 +19,13 @@ public class LVC573LogisimPins
   @Override
   public PinValue getLE()
   {
-    return getPinValue(LVC573Factory.PORT_LE);
+    return getValue(LVC573Factory.PORT_LE);
   }
 
   @Override
   public BusValue getInput()
   {
-    return getBusValue(LVC573Factory.PORT_D, 8, 2);
+    return getValue(LVC573Factory.PORT_D);
   }
 
   @Override
@@ -35,25 +36,25 @@ public class LVC573LogisimPins
   @Override
   public void setOutputError()
   {
-    instanceState.setPort(PORT_Q, Value.createError(BitWidth.create(8)), 2);
+    setError(PORT_Q);
   }
 
   @Override
   public void setOutput(long latchValue)
   {
-    instanceState.setPort(PORT_Q, Value.createKnown(BitWidth.create(8), latchValue), 2);
+    setValue(PORT_Q, latchValue);
   }
 
   @Override
   public PinValue getOEB()
   {
-    return getPinValue(LVC573Factory.PORT_OEB);
+    return getValue(LVC573Factory.PORT_OEB);
   }
 
   @Override
   public void setOutputHighImpedance()
   {
-    instanceState.setPort(PORT_Q, Value.createUnknown(BitWidth.create(8)), 2);
+    setHighImpedance(PORT_Q);
   }
 }
 

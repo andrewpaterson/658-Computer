@@ -56,7 +56,12 @@ public class PortFactory
     createPortDescription(null, 0, position, null, null, false);
   }
 
-  private PortDescription createPortDescription(String name, int pins, PortPosition position, String output, String shared, boolean notBlank)
+  private PortDescription createPortDescription(String name,
+                                                int pins,
+                                                PortPosition position,
+                                                String output,
+                                                String shared,
+                                                boolean notBlank)
   {
     PortDescription port = new PortDescription(index,
                                                name,

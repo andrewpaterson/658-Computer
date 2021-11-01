@@ -129,5 +129,15 @@ public class PortDescription
   {
     this.offset = offset;
   }
+
+  public LogiPin createPin(int propagationDelay)
+  {
+    return new LogiPin(index, propagationDelay);
+  }
+
+  public LogiBus createBus(int propagationDelay)
+  {
+    return new LogiBus(index, bitWidth, propagationDelay);
+  }
 }
 

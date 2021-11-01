@@ -31,7 +31,7 @@ public class BusTest
     Bus addressBus = new Bus(counterData, zeroBus);
 
     new ClockOscillator("", new ClockOscillatorTickablePins(tickables, clockTrace));
-    Counter counter = new Counter("", new CounterTickablePins(tickables, "", 8, counterData, clockTrace));
+    Counter counter = new Counter("", new CounterTickablePins(tickables, 8, counterData, clockTrace));
     new Constant("High", new ConstantTickablePins(tickables, readTrace), true);
     new Constant("Low", new ConstantTickablePins(tickables, lowTrace), false);
     new Constant("00000000", new ConstantTickablePins(tickables, 8, zeroBus), 0);

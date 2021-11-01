@@ -32,6 +32,11 @@ public class Constant
     }
   }
 
+  public void setValue(long value)
+  {
+    this.constantValue = value;
+  }
+
   @Override
   public void tick()
   {

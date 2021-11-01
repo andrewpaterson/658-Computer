@@ -18,7 +18,6 @@ public class LVC4245TickablePins
   protected Uniport dir;
 
   public LVC4245TickablePins(Tickables tickables,
-                             String name,
                              int width,
                              Bus aBus,
                              Bus bBus,

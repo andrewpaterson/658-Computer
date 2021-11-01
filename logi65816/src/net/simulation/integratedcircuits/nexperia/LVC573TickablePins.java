@@ -17,7 +17,6 @@ public class LVC573TickablePins
   protected Uniport latchEnable;
 
   public LVC573TickablePins(Tickables tickables,
-                            String name,
                             int width,
                             Bus inputBus,
                             Bus outputBus,

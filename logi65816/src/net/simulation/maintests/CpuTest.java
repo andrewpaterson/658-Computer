@@ -135,7 +135,6 @@ public class CpuTest
                                readBytes(new File("../Test816/Test816.bin")));
 
     W65C816TickablePins cpuPins = new W65C816TickablePins(tickables,
-                                                          "",
                                                           addressBus,
                                                           dataBus,
                                                           rwbTrace,

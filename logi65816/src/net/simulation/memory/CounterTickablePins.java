@@ -13,7 +13,7 @@ public class CounterTickablePins
 
   private final int width;
 
-  public CounterTickablePins(Tickables tickables, String name, int width, Bus dataBus, Trace clockTrace)
+  public CounterTickablePins(Tickables tickables, int width, Bus dataBus, Trace clockTrace)
   {
     super(tickables);
     this.value = new Omniport(this, "Value", width);

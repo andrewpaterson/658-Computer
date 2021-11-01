@@ -190,11 +190,25 @@ public abstract class LogisimPins<
                           logiBus.propagationDelay);
   }
 
+  protected void setError(LogiPin logiPin)
+  {
+    instanceState.setPort(logiPin.index,
+                          Value.createError(BitWidth.create(1)),
+                          logiPin.propagationDelay);
+  }
+
   protected void setValue(LogiBus logiBus, long value)
   {
     instanceState.setPort(logiBus.index,
                           Value.createKnown(BitWidth.create(logiBus.width), value),
                           logiBus.propagationDelay);
+  }
+
+  protected void setValue(LogiPin logiPin, boolean value)
+  {
+    instanceState.setPort(logiPin.index,
+                          Value.createKnown(BitWidth.create(1), value ? 1 : 0),
+                          logiPin.propagationDelay);
   }
 
   protected void setHighImpedance(LogiBus logiBus)

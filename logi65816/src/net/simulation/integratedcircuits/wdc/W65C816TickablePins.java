@@ -28,7 +28,6 @@ public class W65C816TickablePins
   protected final Uniport validDataAddress;
 
   public W65C816TickablePins(Tickables tickables,
-                             String name,
                              Bus addressBus,
                              Bus dataBus,
                              Trace rwb,

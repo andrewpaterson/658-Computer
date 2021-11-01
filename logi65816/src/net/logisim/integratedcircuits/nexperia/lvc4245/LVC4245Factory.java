@@ -1,10 +1,7 @@
 package net.logisim.integratedcircuits.nexperia.lvc4245;
 
 import net.integratedcircuits.nexperia.lvc4245.LVC4245;
-import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
-import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortFactory;
+import net.logisim.common.*;
 
 import java.awt.*;
 
@@ -15,20 +12,20 @@ public class LVC4245Factory
     extends LogisimFactory<LVC4245LogisimPins>
     implements LogisimPainter<LVC4245LogisimPins>
 {
-  protected static int PORT_DIR;
-  protected static int PORT_A;
-  protected static int PORT_B;
-  protected static int PORT_OEB;
+  protected static LogiPin PORT_DIR;
+  protected static LogiBus PORT_A;
+  protected static LogiBus PORT_B;
+  protected static LogiPin PORT_OEB;
 
   public static LVC4245Factory create()
   {
     PortFactory factory = new PortFactory();
 
-    PORT_OEB = factory.inputShared("OE", LEFT).setInverting().setDrawBar().setTooltip("Output enable (input: A and B high impedance high, A and B enable low)").index();
-    PORT_B = factory.inoutShared("B", 8, LEFT).setTooltip("Data B (input or output)").index();
-    PORT_DIR = factory.inputShared("DIR", LEFT).setTooltip("Direction (input: B to A low, A to B high)").index();
+    PORT_OEB = factory.inputShared("OE", LEFT).setInverting().setDrawBar().setTooltip("Output enable (input: A and B high impedance high, A and B enable low)").createPin(2);
+    PORT_B = factory.inoutShared("B", 8, LEFT).setTooltip("Data B (input or output)").createBus(4);
+    PORT_DIR = factory.inputShared("DIR", LEFT).setTooltip("Direction (input: B to A low, A to B high)").createPin(3);
 
-    PORT_A = factory.inoutShared("A", 8, RIGHT).setTooltip("Data A (input or output)").index();
+    PORT_A = factory.inoutShared("A", 8, RIGHT).setTooltip("Data A (input or output)").createBus(3);
 
     return new LVC4245Factory(new ComponentDescription(LVC4245.class.getSimpleName(),
                                                        160,

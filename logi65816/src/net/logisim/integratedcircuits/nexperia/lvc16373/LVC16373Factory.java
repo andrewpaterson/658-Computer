@@ -1,10 +1,7 @@
 package net.logisim.integratedcircuits.nexperia.lvc16373;
 
 import net.integratedcircuits.nexperia.lvc16373.LVC16373;
-import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
-import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortFactory;
+import net.logisim.common.*;
 
 import java.awt.*;
 
@@ -15,32 +12,32 @@ public class LVC16373Factory
     extends LogisimFactory<LVC16373LogisimPins>
     implements LogisimPainter<LVC16373LogisimPins>
 {
-  protected static int[] PORT_OEB ;
-  protected static int[] PORT_D ;
-  protected static int[] PORT_LE;
+  protected static LogiPin[] PORT_OEB ;
+  protected static LogiBus[] PORT_D ;
+  protected static LogiPin[] PORT_LE;
 
-  protected static int[] PORT_Q ;
+  protected static LogiBus[] PORT_Q ;
 
   public static LVC16373Factory create()
   {
-    PORT_OEB = new int[2];
-    PORT_D = new int[2];
-    PORT_LE = new int[2];
-    PORT_Q = new int[2];
+    PORT_OEB = new LogiPin[2];
+    PORT_D = new LogiBus[2];
+    PORT_LE = new LogiPin[2];
+    PORT_Q = new LogiBus[2];
 
     PortFactory factory = new PortFactory();
 
-    PORT_OEB[0] = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().index();
-    PORT_D[0] = factory.inputShared("1D", 8, LEFT).setTooltip("Input D(1) (input)").index();
-    PORT_LE[0] = factory.inputShared("1LE", LEFT).index();
-    PORT_OEB[1] = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().index();
-    PORT_D[1] = factory.inputShared("2D", 8, LEFT).setTooltip("Input D(2) (input)").index();
-    PORT_LE[1] = factory.inputShared("2LE", LEFT).index();
+    PORT_OEB[0] = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_D[0] = factory.inputShared("1D", 8, LEFT).setTooltip("Input D(1) (input)").createBus(2);
+    PORT_LE[0] = factory.inputShared("1LE", LEFT).createPin(2);
+    PORT_OEB[1] = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_D[1] = factory.inputShared("2D", 8, LEFT).setTooltip("Input D(2) (input)").createBus(2);
+    PORT_LE[1] = factory.inputShared("2LE", LEFT).createPin(2);
 
-    PORT_Q[0] = factory.outputShared("1Q", 8, RIGHT).setTooltip("Output Q(1) (output)").index();
+    PORT_Q[0] = factory.outputShared("1Q", 8, RIGHT).setTooltip("Output Q(1) (output)").createBus(2);
     factory.blank(RIGHT);
     factory.blank(RIGHT);
-    PORT_Q[1] = factory.outputShared("2Q", 8, RIGHT).setTooltip("Output Q(2) (output)").index();
+    PORT_Q[1] = factory.outputShared("2Q", 8, RIGHT).setTooltip("Output Q(2) (output)").createBus(2);
 
     return new LVC16373Factory(new ComponentDescription(LVC16373.class.getSimpleName(),
                                                         160,

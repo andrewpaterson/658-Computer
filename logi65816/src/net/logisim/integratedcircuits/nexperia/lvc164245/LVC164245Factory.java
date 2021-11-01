@@ -1,10 +1,7 @@
 package net.logisim.integratedcircuits.nexperia.lvc164245;
 
 import net.integratedcircuits.nexperia.lvc164245.LVC164245;
-import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
-import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortFactory;
+import net.logisim.common.*;
 
 import java.awt.*;
 
@@ -15,31 +12,31 @@ public class LVC164245Factory
     extends LogisimFactory<LVC164245LogisimPins>
     implements LogisimPainter<LVC164245LogisimPins>
 {
-  protected static int[] PORT_DIR;
-  protected static int[] PORT_A;
-  protected static int[] PORT_B;
-  protected static int[] PORT_OEB;
+  protected static LogiPin[] PORT_DIR;
+  protected static LogiBus[] PORT_A;
+  protected static LogiBus[] PORT_B;
+  protected static LogiPin[] PORT_OEB;
 
   public static LVC164245Factory create()
   {
-    PORT_DIR = new int[2];
-    PORT_A = new int[2];
-    PORT_B = new int[2];
-    PORT_OEB = new int[2];
+    PORT_DIR = new LogiPin[2];
+    PORT_A = new LogiBus[2];
+    PORT_B = new LogiBus[2];
+    PORT_OEB = new LogiPin[2];
 
     PortFactory factory = new PortFactory();
 
-    PORT_OEB[0] = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().index();
-    PORT_B[0] = factory.inoutShared("1B", 8, LEFT).index();
-    PORT_DIR[0] = factory.inputShared("1DIR", LEFT).index();
-    PORT_OEB[1] = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().index();
-    PORT_B[1] = factory.inoutShared("2B", 8, LEFT).index();
-    PORT_DIR[1] = factory.inputShared("2DIR", LEFT).index();
+    PORT_OEB[0] = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_B[0] = factory.inoutShared("1B", 8, LEFT).createBus(2);
+    PORT_DIR[0] = factory.inputShared("1DIR", LEFT).createPin(4);
+    PORT_OEB[1] = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_B[1] = factory.inoutShared("2B", 8, LEFT).createBus(3);
+    PORT_DIR[1] = factory.inputShared("2DIR", LEFT).createPin(4);
 
-    PORT_A[0] = factory.inoutShared("1A", 8, RIGHT).index();
+    PORT_A[0] = factory.inoutShared("1A", 8, RIGHT).createBus(2);
     factory.blank(RIGHT);
     factory.blank(RIGHT);
-    PORT_A[1] = factory.inoutShared("2A", 8, RIGHT).index();
+    PORT_A[1] = factory.inoutShared("2A", 8, RIGHT).createBus(3);
 
     return new LVC164245Factory(new ComponentDescription(LVC164245.class.getSimpleName(),
                                                          160,

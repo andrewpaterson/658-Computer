@@ -80,37 +80,6 @@ public abstract class LogisimPins<
     this.integratedCircuit = integratedCircuit;
   }
 
-  public int getTickCount()
-  {
-    return instanceState.getTickCount();
-  }
-
-  @Deprecated
-  protected BusValue getBusValue(int portIndex, int width, int delay)
-  {
-    if (instanceState.isPortConnected(portIndex))
-    {
-      Value portValue = instanceState.getPortValue(portIndex);
-      if (portValue.isErrorValue())
-      {
-        return BusValue.error();
-      }
-      else if (portValue.isUnknown())
-      {
-        return BusValue.unknown();
-      }
-      else
-      {
-        instanceState.setPort(portIndex, Value.createUnknown(BitWidth.create(width)), delay);
-        return new BusValue(portValue.toLongValue());
-      }
-    }
-    else
-    {
-      return BusValue.notConnected();
-    }
-  }
-
   protected BusValue getValue(LogiBus logiBus)
   {
     if (instanceState.isPortConnected(logiBus.index))
@@ -133,28 +102,6 @@ public abstract class LogisimPins<
     else
     {
       return BusValue.notConnected();
-    }
-  }
-
-  @Deprecated
-  protected PinValue getPinValue(int portIndex)
-  {
-    Value value = instanceState.getPortValue(portIndex);
-    if (value.isErrorValue())
-    {
-      return PinValue.Error;
-    }
-    else if (value == Value.TRUE)
-    {
-      return PinValue.High;
-    }
-    else if (value == Value.FALSE)
-    {
-      return PinValue.Low;
-    }
-    else
-    {
-      return PinValue.Unknown;
     }
   }
 

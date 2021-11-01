@@ -1,10 +1,7 @@
 package net.logisim.integratedcircuits.ti.lvc543;
 
 import net.integratedcircuits.ti.lvc543.LVC543;
-import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
-import net.logisim.common.LogisimPainter;
-import net.logisim.common.PortFactory;
+import net.logisim.common.*;
 
 import java.awt.*;
 
@@ -17,29 +14,29 @@ public class LVC543Factory
     extends LogisimFactory<LVC543LogisimPins>
     implements LogisimPainter<LVC543LogisimPins>
 {
-  protected static int[] PORT_OEB;
-  protected static int[] PORT_IO;
-  protected static int[] PORT_LEB;
-  protected static int[] PORT_CEB;
+  protected static LogiPin[] PORT_OEB;
+  protected static LogiBus[] PORT_IO;
+  protected static LogiPin[] PORT_LEB;
+  protected static LogiPin[] PORT_CEB;
 
   public static LVC543Factory create()
   {
-    PORT_OEB = new int[2];
-    PORT_IO = new int[2];
-    PORT_LEB = new int[2];
-    PORT_CEB = new int[2];
+    PORT_OEB = new LogiPin[2];
+    PORT_IO = new LogiBus[2];
+    PORT_LEB = new LogiPin[2];
+    PORT_CEB = new LogiPin[2];
 
     PortFactory factory = new PortFactory();
 
-    PORT_LEB[A] = factory.inputShared("LEAB", LEFT).setInverting().setDrawBar().index();
-    PORT_OEB[A] = factory.inputShared("OEAB", LEFT).setInverting().setDrawBar().index();
-    PORT_IO[A] = factory.inputShared("A", 8, LEFT).index();
-    PORT_CEB[A] = factory.inputShared("CEAB", LEFT).setInverting().setDrawBar().index();
+    PORT_LEB[A] = factory.inputShared("LEAB", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_OEB[A] = factory.inputShared("OEAB", LEFT).setInverting().setDrawBar().createPin(2);
+    PORT_IO[A] = factory.inputShared("A", 8, LEFT).createBus(2);
+    PORT_CEB[A] = factory.inputShared("CEAB", LEFT).setInverting().setDrawBar().createPin(2);
 
-    PORT_LEB[B] = factory.inputShared("LEBA", RIGHT).setInverting().setDrawBar().index();
-    PORT_OEB[B] = factory.inputShared("OEBA", RIGHT).setInverting().setDrawBar().index();
-    PORT_IO[B] = factory.inputShared("B", 8, RIGHT).index();
-    PORT_CEB[B] = factory.inputShared("CEBA", RIGHT).setInverting().setDrawBar().index();
+    PORT_LEB[B] = factory.inputShared("LEBA", RIGHT).setInverting().setDrawBar().createPin(2);
+    PORT_OEB[B] = factory.inputShared("OEBA", RIGHT).setInverting().setDrawBar().createPin(2);
+    PORT_IO[B] = factory.inputShared("B", 8, RIGHT).createBus(2);
+    PORT_CEB[B] = factory.inputShared("CEBA", RIGHT).setInverting().setDrawBar().createPin(2);
 
     return new LVC543Factory(new ComponentDescription(LVC543.class.getSimpleName(),
                                                       160,

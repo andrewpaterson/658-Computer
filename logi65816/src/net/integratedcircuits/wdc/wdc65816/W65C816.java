@@ -334,8 +334,8 @@ public class W65C816
   {
     boolean currentClock = getPins().isClock();
 
-    risingEdge = !currentClock && this.clock;
-    fallingEdge = currentClock && !this.clock;
+    fallingEdge = !currentClock && this.clock;
+    risingEdge = currentClock && !this.clock;
     clock = currentClock;
 
     reset = getPins().isReset();
@@ -363,7 +363,7 @@ public class W65C816
       nextCycle();
     }
 
-    if (risingEdge)
+    if (fallingEdge)
     {
       abort = getPins().isAbort() || abort;
       irq = getPins().isIRQ() || irq;
@@ -372,7 +372,7 @@ public class W65C816
       getBusCycle().executeFirstHalf(this);
     }
 
-    if (fallingEdge)
+    if (risingEdge)
     {
       irq = getPins().isIRQ() || irq;
       nmi = getPins().isNMI() || nmi;

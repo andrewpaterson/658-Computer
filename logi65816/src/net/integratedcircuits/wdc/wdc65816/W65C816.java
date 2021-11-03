@@ -1985,9 +1985,26 @@ public class W65C816
 
   public String getOpcodeValueHex()
   {
-    if (getCycle() != 0)
+    return getOpcodeValueHex(getCycle(), getOpCode());
+  }
+
+  public String getOpcodeValueHex(W65C816Snapshot snapshot)
+  {
+    if (snapshot != null)
     {
-      int code = getOpCode().getCode();
+      return getOpcodeValueHex(snapshot.cycle, snapshot.opCode);
+    }
+    else
+    {
+      return getOpcodeValueHex();
+    }
+  }
+
+  public String getOpcodeValueHex(int cycle, Instruction opCode)
+  {
+    if (cycle != 0)
+    {
+      int code = opCode.getCode();
       if (code >= 0 && code <= 255)
       {
         return getByteStringHex(code);
@@ -2005,7 +2022,19 @@ public class W65C816
 
   public String getOpcodeMnemonicString()
   {
-    return getOpCode().getName();
+    return opCode.getName();
+  }
+
+  public String getOpcodeMnemonicString(W65C816Snapshot snapshot)
+  {
+    if (snapshot != null)
+    {
+      return snapshot.opCode.getName();
+    }
+    else
+    {
+      return getOpcodeMnemonicString();
+    }
   }
 
   private String getStatusString()
@@ -2139,6 +2168,11 @@ public class W65C816
   public String getType()
   {
     return "Microprocessor";
+  }
+
+  public String getCycleString(W65C816Snapshot snapshot)
+  {
+    return snapshot != null ? Integer.toString(snapshot.cycle) : Integer.toString(cycle);
   }
 }
 

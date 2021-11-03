@@ -2,6 +2,7 @@ package net.logisim.integratedcircuits.wdc.w65c816;
 
 import com.cburch.logisim.util.GraphicsUtil;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
+import net.integratedcircuits.wdc.wdc65816.W65C816Snapshot;
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.LogisimFactory;
 import net.logisim.common.PortFactory;
@@ -69,10 +70,12 @@ public class W65C816Factory
   public void paint(W65C816LogisimPins instance, Graphics2D graphics2D)
   {
     W65C816 cpu = instance.getCpu();
-    boolean isOpcodeValid = cpu.getCycle() != 0;
-    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(), isOpcodeValid);
-    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(), isOpcodeValid);
-    drawField(graphics2D, getTopOffset(2), WIDTH_8BIT, "Cycle:", Integer.toString(cpu.getCycle()), true);
+    W65C816Snapshot snapshot = instance.getPainterSnapshot();
+    boolean isOpcodeValid = snapshot != null &&  snapshot.cycle != 0;
+
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(snapshot), isOpcodeValid);
+    drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(snapshot), isOpcodeValid);
+    drawField(graphics2D, getTopOffset(2), WIDTH_8BIT, "Cycle:", cpu.getCycleString(snapshot), true);
     drawField(graphics2D, getTopOffset(3), WIDTH_16BIT, "Accumulator:", cpu.getAccumulatorValueHex(), true);
     drawField(graphics2D, getTopOffset(4), WIDTH_16BIT, "X Index:", cpu.getXValueHex(), true);
     drawField(graphics2D, getTopOffset(5), WIDTH_16BIT, "Y Index:", cpu.getYValueHex(), true);

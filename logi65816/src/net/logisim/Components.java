@@ -3,13 +3,16 @@ package net.logisim;
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
+import net.integratedcircuits.ti.f521.F521;
 import net.logisim.integratedcircuits.maxim.ds1813.DS1813Factory;
 import net.logisim.integratedcircuits.nexperia.lvc138.LVC138Factory;
 import net.logisim.integratedcircuits.nexperia.lvc161.LVC161Factory;
+import net.logisim.integratedcircuits.nexperia.lvc163.LVC163Factory;
 import net.logisim.integratedcircuits.nexperia.lvc16373.LVC16373Factory;
 import net.logisim.integratedcircuits.nexperia.lvc164245.LVC164245Factory;
 import net.logisim.integratedcircuits.nexperia.lvc4245.LVC4245Factory;
 import net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory;
+import net.logisim.integratedcircuits.ti.f521.F521Factory;
 import net.logisim.integratedcircuits.ti.ls148.LS148Factory;
 import net.logisim.integratedcircuits.ti.lvc543.LVC543Factory;
 import net.logisim.integratedcircuits.wdc.w65c02.W65C02Factory;
@@ -38,6 +41,8 @@ public class Components
       tools.add(new AddTool(LVC138Factory.create()));
       tools.add(new AddTool(LS148Factory.create()));
       tools.add(new AddTool(LVC161Factory.create()));
+      tools.add(new AddTool(LVC163Factory.create()));
+      tools.add(new AddTool(F521Factory.create()));
       tools.add(new AddTool(DS1813Factory.create()));
     }
     catch (Exception e)

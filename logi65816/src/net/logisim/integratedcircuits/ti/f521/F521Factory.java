@@ -1,0 +1,57 @@
+package net.logisim.integratedcircuits.ti.f521;
+
+import net.integratedcircuits.nexperia.lvc573.LVC573;
+import net.logisim.common.*;
+
+import java.awt.*;
+
+import static net.logisim.common.PortPosition.LEFT;
+import static net.logisim.common.PortPosition.RIGHT;
+
+public class F521Factory
+    extends LogisimFactory<F521LogisimPins>
+    implements LogisimPainter<F521LogisimPins>
+{
+  protected static LogiPin PORT_OEB;
+  protected static LogiBus PORT_P;
+
+  protected static LogiPin PORT_P_EQUALS_Q;
+
+
+  public static F521Factory create()
+  {
+    PortFactory factory = new PortFactory();
+
+    PORT_OEB = factory.inputShared("OE", LEFT).setInverting().setDrawBar().createPin(8);
+    PORT_P = factory.inputShared("P", 8, LEFT).setTooltip("Input P (input)").createBus(8);
+    PORT_P = factory.inputShared("Q", 8, LEFT).setTooltip("Input Q (input)").createBus(8);
+
+    PORT_P_EQUALS_Q = factory.outputShared("P=Q", RIGHT).setInverting().setDrawBar().createPin(8);
+
+
+    return new F521Factory(new ComponentDescription(LVC573.class.getSimpleName(),
+                                                    160,
+                                                    factory.getPorts()));
+  }
+
+  protected F521Factory(ComponentDescription description)
+  {
+    super(description);
+  }
+
+  @Override
+  public void paint(F521LogisimPins instance, Graphics2D graphics2D)
+  {
+    LVC573 latch = instance.getIntegratedCircuit();
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Value:", latch.getValueString(), true);
+  }
+
+  @Override
+  protected F521LogisimPins createInstance()
+  {
+    F521LogisimPins pins = new F521LogisimPins();
+    new LVC573("", pins);
+    return pins;
+  }
+}
+

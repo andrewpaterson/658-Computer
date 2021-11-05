@@ -27,7 +27,6 @@ public class LVC163LogisimPins
   @Override
   public void setOutputError()
   {
-    setError(PORT_Q);
   }
 
   @Override
@@ -37,9 +36,9 @@ public class LVC163LogisimPins
   }
 
   @Override
-  public boolean isParallelLoad()
+  public PinValue getPEB()
   {
-    return getValue(PORT_PEB).isLow();
+    return getValue(PORT_PEB);
   }
 
   @Override
@@ -49,9 +48,9 @@ public class LVC163LogisimPins
   }
 
   @Override
-  public boolean isClock()
+  public PinValue isClock()
   {
-    return getValue(PORT_CP).isHigh();
+    return getValue(PORT_CP);
   }
 
   @Override
@@ -74,7 +73,6 @@ public class LVC163LogisimPins
   @Override
   public void setCarryError()
   {
-    setError(PORT_TC);
   }
 
   @Override

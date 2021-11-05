@@ -15,11 +15,11 @@ public interface LVC163Pins
 
   void setOutput(long latchValue);
 
-  boolean isParallelLoad();
+  PinValue getPEB();
 
   PinValue getMRB();
 
-  boolean isClock();
+  PinValue isClock();
 
   PinValue getCEP();
 

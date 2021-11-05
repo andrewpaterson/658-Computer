@@ -15,6 +15,8 @@ public class LVC163
   protected long counterValue;
   protected long oldCounterValue;
 
+  protected boolean reset;
+
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
@@ -24,6 +26,7 @@ public class LVC163
     super(name, pins);
     counterValue = 0;
     oldCounterValue = 0;
+    reset = false;
   }
 
   @Override
@@ -32,84 +35,56 @@ public class LVC163
     PinValue masterResetB = getPins().getMRB();
     PinValue cetValue = getPins().getCET();
     boolean cet = cetValue.isHigh();
+    PinValue parallelLoadB = getPins().getPEB();
 
-    if (masterResetB.isError() || masterResetB.isNotConnected() ||
-        cetValue.isError() || cetValue.isNotConnected())
+    boolean currentClock = getPins().isClock().isHigh();
+
+    fallingEdge = !currentClock && this.clock;
+    risingEdge = currentClock && !this.clock;
+    clock = currentClock;
+
+    if (reset)
     {
-      getPins().setOutputError();
-      getPins().setCarryError();
-    }
-    else if (masterResetB.isUnknown() ||
-             cetValue.isUnknown())
-    {
-      getPins().setOutputUnsettled();
-      getPins().setCarryUnsettled();
-    }
-    else if (masterResetB.isLow())
-    {
-      counterValue = 0;
-      oldCounterValue = 0;
-      getPins().setOutput(0);
-      getPins().setCarry(false);
-    }
-    else if (getPins().isParallelLoad())
-    {
-      BusValue input = getPins().getInput();
-      if (input.isValid())
+      if (risingEdge)
       {
-        oldCounterValue = counterValue;
-
-        counterValue = input.getValue();
-
-        setOutput(cet);
-      }
-      else
-      {
-        getPins().setOutputError();
-        getPins().setCarryError();
+        counterValue = 0;
+        oldCounterValue = 0;
+        getPins().setOutput(0);
+        getPins().setCarry(false);
+        reset = masterResetB.isLow();
       }
     }
     else
     {
-      PinValue countEnabled = getPins().getCEP();
-
-      if (countEnabled.isError() || countEnabled.isNotConnected())
+      reset = masterResetB.isLow();
+      if (parallelLoadB.isLow())
       {
-        getPins().setOutputError();
-        getPins().setCarryError();
-      }
-      else if (countEnabled.isUnknown())
-      {
-        getPins().setOutputUnsettled();
-        getPins().setCarryUnsettled();
-      }
-      else if (countEnabled.isHigh())
-      {
-        boolean currentClock = getPins().isClock();
-
-        fallingEdge = !currentClock && this.clock;
-        risingEdge = currentClock && !this.clock;
-        clock = currentClock;
-
-        if (cet)
+        BusValue input = getPins().getInput();
+        if (input.isValid())
         {
-          if (risingEdge)
-          {
-            oldCounterValue = counterValue;
+          oldCounterValue = counterValue;
+          counterValue = input.getValue();
 
-            counterValue++;
-
-            if (counterValue == 0x10)
-            {
-              counterValue = 0;
-            }
-          }
+          setOutput(cet);
         }
         setOutput(cet);
       }
       else
       {
-        setOutput(cet);
+        PinValue countEnabled = getPins().getCEP();
+        if (countEnabled.isHigh())
+        {
+          if (cet && risingEdge)
+          {
+            oldCounterValue = counterValue;
+            counterValue++;
+            if (counterValue == 0x10)
+            {
+              counterValue = 0;
+            }
+          }
+          setOutput(cet);
+        }
       }
     }
   }
@@ -125,6 +100,7 @@ public class LVC163
   {
     return new LVC163Snapshot(counterValue,
                               oldCounterValue,
+                              reset,
                               clock,
                               fallingEdge,
                               risingEdge);
@@ -135,6 +111,7 @@ public class LVC163
   {
     counterValue = snapshot.counterValue;
     clock = snapshot.clock;
+    reset = snapshot.reset;
     fallingEdge = snapshot.fallingEdge;
     risingEdge = snapshot.risingEdge;
     oldCounterValue = snapshot.oldCounterValue;

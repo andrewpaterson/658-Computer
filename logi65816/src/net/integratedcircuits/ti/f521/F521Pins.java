@@ -7,18 +7,18 @@ import net.common.Pins;
 public interface F521Pins
     extends Pins<F521Snapshot, F521Pins, F521>
 {
-  PinValue getLE();
+  BusValue getP();
 
-  BusValue getInput();
+  BusValue getQ();
 
-  void setOutputUnsettled();
+   PinValue getOEB();
 
-  void setOutputError();
+  void setQEqualPError();
 
-  void setOutput(long latchValue);
+  void setQEqualPUnsettled();
 
-  PinValue getOEB();
+  void setQEqualPHighImpedance();
 
-  void setOutputHighImpedance();
+  void setQEqualP(boolean value);
 }
 

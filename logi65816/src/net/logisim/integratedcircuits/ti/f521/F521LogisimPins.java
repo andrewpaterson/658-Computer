@@ -2,56 +2,56 @@ package net.logisim.integratedcircuits.ti.f521;
 
 import net.common.BusValue;
 import net.common.PinValue;
-import net.integratedcircuits.nexperia.lvc573.LVC573;
-import net.integratedcircuits.nexperia.lvc573.LVC573Pins;
-import net.integratedcircuits.nexperia.lvc573.LVC573Snapshot;
+import net.integratedcircuits.ti.f521.F521;
+import net.integratedcircuits.ti.f521.F521Pins;
+import net.integratedcircuits.ti.f521.F521Snapshot;
 import net.logisim.common.LogisimPins;
 
-import static net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory.PORT_Q;
+import static net.logisim.integratedcircuits.ti.f521.F521Factory.*;
 
 public class F521LogisimPins
-    extends LogisimPins<LVC573Snapshot, LVC573Pins, LVC573>
-    implements LVC573Pins
+    extends LogisimPins<F521Snapshot, F521Pins, F521>
+    implements F521Pins
 {
   @Override
-  public PinValue getLE()
+  public BusValue getP()
   {
-    return getValue(F521Factory.PORT_LE);
+    return getValue(PORT_P);
   }
 
   @Override
-  public BusValue getInput()
+  public BusValue getQ()
   {
-    return getValue(F521Factory.PORT_P);
-  }
-
-  @Override
-  public void setOutputUnsettled()
-  {
-  }
-
-  @Override
-  public void setOutputError()
-  {
-    setError(PORT_Q);
-  }
-
-  @Override
-  public void setOutput(long latchValue)
-  {
-    setValue(PORT_Q, latchValue);
+    return getValue(PORT_Q);
   }
 
   @Override
   public PinValue getOEB()
   {
-    return getValue(F521Factory.PORT_OEB);
+    return getValue(PORT_OEB);
   }
 
   @Override
-  public void setOutputHighImpedance()
+  public void setQEqualPError()
   {
-    setHighImpedance(PORT_Q);
+    setError(PORT_P_EQUALS_Q);
+  }
+
+  @Override
+  public void setQEqualPUnsettled()
+  {
+  }
+
+  @Override
+  public void setQEqualPHighImpedance()
+  {
+    setHighImpedance(PORT_P_EQUALS_Q);
+  }
+
+  @Override
+  public void setQEqualP(boolean value)
+  {
+    setValue(PORT_P_EQUALS_Q, value);
   }
 }
 

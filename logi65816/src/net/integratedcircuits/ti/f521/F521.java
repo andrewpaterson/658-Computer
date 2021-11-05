@@ -10,7 +10,7 @@ import static net.util.IntUtil.toByte;
 public class F521
     extends IntegratedCircuit<F521Snapshot, F521Pins>
 {
-  public static final String TYPE = "Octal Latch";
+  public static final String TYPE = "Octal Comparator";
 
   protected long latchValue;
 
@@ -23,13 +23,16 @@ public class F521
   @Override
   public void tick()
   {
-    PinValue latchEnabled = getPins().getLE();
     PinValue outputEnabledB = getPins().getOEB();
+    BusValue pValue = getPins().getP();
+    BusValue qValue = getPins().getQ();
 
     boolean outputError = false;
     boolean outputUnset = false;
     boolean outputHighImpedance = false;
-    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
+    if (outputEnabledB.isError() || outputEnabledB.isNotConnected() ||
+        pValue.isError() || pValue.isNotConnected() ||
+        qValue.isError() || qValue.isNotConnected())
     {
       outputError = true;
     }
@@ -42,38 +45,24 @@ public class F521
       outputHighImpedance = true;
     }
 
-    if (latchEnabled.isHigh())
-    {
-      BusValue input = getPins().getInput();
-      if (input.isUnknown() || input.isNotConnected())
-      {
-        outputUnset = true;
-      }
-      else if (input.isError())
-      {
-        outputError = true;
-      }
-      else
-      {
-        latchValue = input.getValue();
-      }
-    }
-
     if (outputError)
     {
-      getPins().setOutputError();
+      getPins().setQEqualPError();
     }
     else if (outputUnset)
     {
-      getPins().setOutputUnsettled();
+      getPins().setQEqualPUnsettled();
     }
     else if (outputHighImpedance)
     {
-      getPins().setOutputHighImpedance();
+      getPins().setQEqualPHighImpedance();
     }
     else
     {
-      getPins().setOutput(latchValue);
+      long p = pValue.getValue();
+      long q = qValue.getValue();
+
+      getPins().setQEqualP(p == q);
     }
   }
 

@@ -178,6 +178,13 @@ public abstract class LogisimPins<
                           logiBus.propagationDelay);
   }
 
+  protected void setHighImpedance(LogiPin logiBus)
+  {
+    instanceState.setPort(logiBus.index,
+                          Value.createUnknown(BitWidth.create(1)),
+                          logiBus.propagationDelay);
+  }
+
   public SNAPSHOT getPainterSnapshot()
   {
     return painterSnapshots.get(1);

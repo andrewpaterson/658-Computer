@@ -32,5 +32,10 @@ public enum PinValue
   {
     return this == NotConnected;
   }
+
+  public long getValue()
+  {
+    return isHigh() ? 1 : 0;
+  }
 }
 

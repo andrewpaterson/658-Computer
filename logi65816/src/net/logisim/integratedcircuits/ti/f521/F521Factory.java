@@ -26,7 +26,7 @@ public class F521Factory
     PORT_P = factory.inputShared("P", 8, LEFT).setTooltip("Input P (input)").createBus(8);
     PORT_Q = factory.inputShared("Q", 8, LEFT).setTooltip("Input Q (input)").createBus(8);
 
-    PORT_P_EQUALS_Q = factory.outputShared("P=Q", RIGHT).setInverting().setDrawBar().createPin(8);
+    PORT_P_EQUALS_Q = factory.outputExclusive("P=Q", RIGHT).setInverting().setDrawBar().createPin(8);
 
     return new F521Factory(new ComponentDescription(F521.class.getSimpleName(),
                                                     160,

@@ -7,7 +7,7 @@ import net.common.PinValue;
 public class LVC16244
     extends IntegratedCircuit<LVC16244Snapshot, LVC16244Pins>
 {
-  public static final String TYPE = "Line Driver";
+  public static final String TYPE = "16-bit Line Driver";
 
   public LVC16244(String name, LVC16244Pins pins)
   {

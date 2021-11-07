@@ -1,23 +1,23 @@
-package net.logisim.integratedcircuits.nexperia.lvc16244;
+package net.logisim.integratedcircuits.nexperia.lvc126;
 
-import net.integratedcircuits.nexperia.lvc16244.LVC16244;
+import net.integratedcircuits.nexperia.lvc126.LVC126;
 import net.logisim.common.*;
 
 import java.awt.*;
 
-import static net.integratedcircuits.nexperia.lvc16244.LVC16244Pins.*;
+import static net.integratedcircuits.nexperia.lvc126.LVC126Pins.*;
 import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
-public class LVC16244Factory
-    extends LogisimFactory<LVC16244LogisimPins>
-    implements LogisimPainter<LVC16244LogisimPins>
+public class LVC126Factory
+    extends LogisimFactory<LVC126LogisimPins>
+    implements LogisimPainter<LVC126LogisimPins>
 {
   protected static LogiBus[] PORT_Y;
   protected static LogiBus[] PORT_A;
   protected static LogiPin[] PORT_OEB;
 
-  public static LVC16244Factory create()
+  public static LVC126Factory create()
   {
     PORT_A = new LogiBus[4];
     PORT_Y = new LogiBus[4];
@@ -27,42 +27,34 @@ public class LVC16244Factory
 
     PORT_OEB[PORT_1_INDEX] = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().createPin(2);
     PORT_OEB[PORT_2_INDEX] = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().createPin(2);
-    PORT_OEB[PORT_3_INDEX] = factory.inputShared("3OE", LEFT).setInverting().setDrawBar().createPin(2);
-    PORT_OEB[PORT_4_INDEX] = factory.inputShared("4OE", LEFT).setInverting().setDrawBar().createPin(2);
-    PORT_A[PORT_1_INDEX] = factory.inputShared("1A", 4, LEFT).createBus(2);
-    PORT_A[PORT_2_INDEX] = factory.inputShared("2A", 4, LEFT).createBus(2);
-    PORT_A[PORT_3_INDEX] = factory.inputShared("3A", 4, LEFT).createBus(2);
-    PORT_A[PORT_4_INDEX] = factory.inputShared("4A", 4, LEFT).createBus(2);
+    PORT_A[PORT_1_INDEX] = factory.inputShared("1A", 2, LEFT).createBus(2);
+    PORT_A[PORT_2_INDEX] = factory.inputShared("2A", 2, LEFT).createBus(2);
 
     factory.blank(RIGHT);
     factory.blank(RIGHT);
-    factory.blank(RIGHT);
-    factory.blank(RIGHT);
-    PORT_Y[PORT_1_INDEX] = factory.outputShared("1Y", 4, RIGHT).createBus(2);
-    PORT_Y[PORT_2_INDEX] = factory.outputShared("2y", 4, RIGHT).createBus(2);
-    PORT_Y[PORT_3_INDEX] = factory.outputShared("3Y", 4, RIGHT).createBus(2);
-    PORT_Y[PORT_4_INDEX] = factory.outputShared("4Y", 4, RIGHT).createBus(2);
+    PORT_Y[PORT_1_INDEX] = factory.outputShared("1Y", 2, RIGHT).createBus(2);
+    PORT_Y[PORT_2_INDEX] = factory.outputShared("2y", 2, RIGHT).createBus(2);
 
-    return new LVC16244Factory(new ComponentDescription(LVC16244.class.getSimpleName(),
-                                                        160,
-                                                        factory.getPorts()));
+    return new LVC126Factory(new ComponentDescription(LVC126.class.getSimpleName(),
+                                                      160,
+                                                      factory.getPorts()));
   }
 
-  private LVC16244Factory(ComponentDescription description)
+  private LVC126Factory(ComponentDescription description)
   {
     super(description);
   }
 
   @Override
-  public void paint(LVC16244LogisimPins instance, Graphics2D graphics2D)
+  public void paint(LVC126LogisimPins instance, Graphics2D graphics2D)
   {
   }
 
   @Override
-  protected LVC16244LogisimPins createInstance()
+  protected LVC126LogisimPins createInstance()
   {
-    LVC16244LogisimPins pins = new LVC16244LogisimPins();
-    new LVC16244("", pins);
+    LVC126LogisimPins pins = new LVC126LogisimPins();
+    new LVC126("", pins);
     return pins;
   }
 }

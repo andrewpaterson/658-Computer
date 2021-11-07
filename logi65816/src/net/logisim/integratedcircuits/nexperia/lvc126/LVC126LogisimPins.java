@@ -1,41 +1,35 @@
-package net.logisim.integratedcircuits.nexperia.lvc16244;
+package net.logisim.integratedcircuits.nexperia.lvc126;
 
 import net.common.BusValue;
 import net.common.PinValue;
-import net.integratedcircuits.nexperia.lvc16244.LVC16244;
-import net.integratedcircuits.nexperia.lvc16244.LVC16244Pins;
-import net.integratedcircuits.nexperia.lvc16244.LVC16244Snapshot;
+import net.integratedcircuits.nexperia.lvc126.LVC126;
+import net.integratedcircuits.nexperia.lvc126.LVC126Pins;
+import net.integratedcircuits.nexperia.lvc126.LVC126Snapshot;
 import net.logisim.common.LogiBus;
 import net.logisim.common.LogiPin;
 import net.logisim.common.LogisimPins;
 
-import static net.logisim.integratedcircuits.nexperia.lvc16244.LVC16244Factory.*;
+import static net.logisim.integratedcircuits.nexperia.lvc126.LVC126Factory.*;
 
-public class LVC16244LogisimPins
-    extends LogisimPins<LVC16244Snapshot, LVC16244Pins, LVC16244>
-    implements LVC16244Pins
+public class LVC126LogisimPins
+    extends LogisimPins<LVC126Snapshot, LVC126Pins, LVC126>
+    implements LVC126Pins
 {
   protected LogiBus[] portA;
   protected LogiBus[] portY;
   protected LogiPin[] oeb;
 
-  public LVC16244LogisimPins()
+  public LVC126LogisimPins()
   {
-    portA = new LogiBus[4];
-    portY = new LogiBus[4];
-    oeb = new LogiPin[4];
+    portA = new LogiBus[2];
+    portY = new LogiBus[2];
+    oeb = new LogiPin[2];
     portA[PORT_1_INDEX] = PORT_A[PORT_1_INDEX];
     portA[PORT_2_INDEX] = PORT_A[PORT_2_INDEX];
-    portA[PORT_3_INDEX] = PORT_A[PORT_3_INDEX];
-    portA[PORT_4_INDEX] = PORT_A[PORT_4_INDEX];
     portY[PORT_1_INDEX] = PORT_Y[PORT_1_INDEX];
     portY[PORT_2_INDEX] = PORT_Y[PORT_2_INDEX];
-    portY[PORT_3_INDEX] = PORT_Y[PORT_3_INDEX];
-    portY[PORT_4_INDEX] = PORT_Y[PORT_4_INDEX];
     oeb[PORT_1_INDEX] = PORT_OEB[PORT_1_INDEX];
     oeb[PORT_2_INDEX] = PORT_OEB[PORT_2_INDEX];
-    oeb[PORT_3_INDEX] = PORT_OEB[PORT_3_INDEX];
-    oeb[PORT_4_INDEX] = PORT_OEB[PORT_4_INDEX];
   }
 
   @Override

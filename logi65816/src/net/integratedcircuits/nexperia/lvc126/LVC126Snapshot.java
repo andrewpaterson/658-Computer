@@ -1,12 +1,11 @@
-package net.integratedcircuits.nexperia.lvc16244;
+package net.integratedcircuits.nexperia.lvc126;
 
-import net.common.PinValue;
 import net.common.Snapshot;
 
-public class LVC16244Snapshot
+public class LVC126Snapshot
     implements Snapshot
 {
-  public LVC16244Snapshot()
+  public LVC126Snapshot()
   {
   }
 }

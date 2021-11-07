@@ -1,25 +1,23 @@
-package net.integratedcircuits.nexperia.lvc16244;
+package net.integratedcircuits.nexperia.lvc126;
 
 import net.common.BusValue;
 import net.common.IntegratedCircuit;
 import net.common.PinValue;
 
-public class LVC16244
-    extends IntegratedCircuit<LVC16244Snapshot, LVC16244Pins>
+public class LVC126
+    extends IntegratedCircuit<LVC126Snapshot, LVC126Pins>
 {
-  public static final String TYPE = "16-bit Line Driver";
+  public static final String TYPE = "4-bit Line Driver";
 
-  public LVC16244(String name, LVC16244Pins pins)
+  public LVC126(String name, LVC126Pins pins)
   {
     super(name, pins);
   }
 
   public void tick()
   {
-    tickPort(LVC16244Pins.PORT_1_INDEX);
-    tickPort(LVC16244Pins.PORT_2_INDEX);
-    tickPort(LVC16244Pins.PORT_3_INDEX);
-    tickPort(LVC16244Pins.PORT_4_INDEX);
+    tickPort(LVC126Pins.PORT_1_INDEX);
+    tickPort(LVC126Pins.PORT_2_INDEX);
   }
 
   private void tickPort(int port)
@@ -61,12 +59,12 @@ public class LVC16244
     }
   }
 
-  public LVC16244Snapshot createSnapshot()
+  public LVC126Snapshot createSnapshot()
   {
-    return new LVC16244Snapshot();
+    return new LVC126Snapshot();
   }
 
-  public void restoreFromSnapshot(LVC16244Snapshot snapshot)
+  public void restoreFromSnapshot(LVC126Snapshot snapshot)
   {
   }
 

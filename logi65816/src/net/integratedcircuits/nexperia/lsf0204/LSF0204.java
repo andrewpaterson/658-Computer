@@ -51,7 +51,7 @@ public class LSF0204
   @Override
   public String getType()
   {
-    return "4-Bit Translator";
+    return "4-bit Translator";
   }
 }
 

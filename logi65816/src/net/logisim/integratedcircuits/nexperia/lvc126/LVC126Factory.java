@@ -13,27 +13,35 @@ public class LVC126Factory
     extends LogisimFactory<LVC126LogisimPins>
     implements LogisimPainter<LVC126LogisimPins>
 {
-  protected static LogiBus[] PORT_Y;
-  protected static LogiBus[] PORT_A;
-  protected static LogiPin[] PORT_OEB;
+  protected static LogiPin[] PORT_Y;
+  protected static LogiPin[] PORT_A;
+  protected static LogiPin[] PORT_OE;
 
   public static LVC126Factory create()
   {
-    PORT_A = new LogiBus[4];
-    PORT_Y = new LogiBus[4];
-    PORT_OEB = new LogiPin[4];
+    PORT_A = new LogiPin[4];
+    PORT_Y = new LogiPin[4];
+    PORT_OE = new LogiPin[4];
 
     PortFactory factory = new PortFactory();
 
-    PORT_OEB[PORT_1_INDEX] = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().createPin(2);
-    PORT_OEB[PORT_2_INDEX] = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().createPin(2);
-    PORT_A[PORT_1_INDEX] = factory.inputShared("1A", 2, LEFT).createBus(2);
-    PORT_A[PORT_2_INDEX] = factory.inputShared("2A", 2, LEFT).createBus(2);
+    PORT_OE[PORT_1_INDEX] = factory.inputShared("1OE", LEFT).createPin(2);
+    PORT_OE[PORT_2_INDEX] = factory.inputShared("2OE", LEFT).createPin(2);
+    PORT_OE[PORT_3_INDEX] = factory.inputShared("3OE", LEFT).createPin(2);
+    PORT_OE[PORT_4_INDEX] = factory.inputShared("4OE", LEFT).createPin(2);
+    PORT_A[PORT_1_INDEX] = factory.inputShared("1A", LEFT).createPin(2);
+    PORT_A[PORT_2_INDEX] = factory.inputShared("2A", LEFT).createPin(2);
+    PORT_A[PORT_3_INDEX] = factory.inputShared("3A", LEFT).createPin(2);
+    PORT_A[PORT_4_INDEX] = factory.inputShared("4A", LEFT).createPin(2);
 
     factory.blank(RIGHT);
     factory.blank(RIGHT);
-    PORT_Y[PORT_1_INDEX] = factory.outputShared("1Y", 2, RIGHT).createBus(2);
-    PORT_Y[PORT_2_INDEX] = factory.outputShared("2y", 2, RIGHT).createBus(2);
+    factory.blank(RIGHT);
+    factory.blank(RIGHT);
+    PORT_Y[PORT_1_INDEX] = factory.outputExclusive("1Y", RIGHT).createPin(2);
+    PORT_Y[PORT_2_INDEX] = factory.outputExclusive("2Y", RIGHT).createPin(2);
+    PORT_Y[PORT_3_INDEX] = factory.outputExclusive("3Y", RIGHT).createPin(2);
+    PORT_Y[PORT_4_INDEX] = factory.outputExclusive("4Y", RIGHT).createPin(2);
 
     return new LVC126Factory(new ComponentDescription(LVC126.class.getSimpleName(),
                                                       160,

@@ -27,20 +27,17 @@ public class LSF0204
         if (aValue.isUnknown() && !bValue.isUnknown())
         {
           long value = bValue.getValue();
-          System.out.println("LSF0204.tick: aValue.isUnknown() && !bValue.isUnknown() " + value);
           getPins().setA(value);
         }
         else if (bValue.isUnknown() && !aValue.isUnknown())
         {
           long value = aValue.getValue();
-          System.out.println("LSF0204.tick: bValue.isUnknown() && !aValue.isUnknown() " + value);
           getPins().setB(value);
         }
         else if (!bValue.isUnknown() && !aValue.isUnknown())
         {
           long b = bValue.getValue();
           long a = aValue.getValue();
-          System.out.println("LSF0204.tick: !bValue.isUnknown() && !aValue.isUnknown() " + a + " " + b);
           getPins().setA(b);
           getPins().setB(a);
         }

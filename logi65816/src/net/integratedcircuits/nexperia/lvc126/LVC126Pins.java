@@ -9,6 +9,8 @@ public interface LVC126Pins
 {
   int PORT_1_INDEX = 0;
   int PORT_2_INDEX = 1;
+  int PORT_3_INDEX = 2;
+  int PORT_4_INDEX = 3;
 
   void setYError(int port);
 
@@ -16,10 +18,10 @@ public interface LVC126Pins
 
   void setYHighImpedance(int port);
 
-  void setYValue(int port, long value);
+  void setYValue(int port, boolean value);
 
-  PinValue getOEB(int port);
+  PinValue getOE(int port);
 
-  BusValue getAValue(int port);
+  PinValue getAValue(int port);
 }
 

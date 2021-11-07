@@ -37,5 +37,27 @@ public enum PinValue
   {
     return isHigh() ? 1 : 0;
   }
+
+  @Override
+  public String toString()
+  {
+    StringBuilder builder = new StringBuilder();
+    if (isError())
+    {
+      builder.append("E");
+    }
+    if (isNotConnected())
+    {
+      builder.append("NC");
+    }
+    if (isUnknown())
+    {
+      builder.append("U");
+    }
+    builder.append("[");
+    builder.append(getValue());
+    builder.append("]");
+    return builder.toString();
+  }
 }
 

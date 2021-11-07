@@ -151,14 +151,12 @@ public abstract class LogisimPins<
     }
     else if (value == Value.TRUE)
     {
-      //You should probably write unknown to this port.
-//      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
+      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
       return PinValue.High;
     }
     else if (value == Value.FALSE)
     {
-      //You should probably write unknown to this port.
-//      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
+      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
       return PinValue.Low;
     }
     else

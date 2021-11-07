@@ -7,9 +7,9 @@ import net.common.Pins;
 public interface LVC541Pins
     extends Pins<LVC541Snapshot, LVC541Pins, LVC541>
 {
-  void setYError(int port);
+  void setYError();
 
-  void setYUnsettled(int port);
+  void setYUnsettled();
 
   void setYHighImpedance();
 

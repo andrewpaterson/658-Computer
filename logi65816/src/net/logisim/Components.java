@@ -15,6 +15,7 @@ import net.logisim.integratedcircuits.nexperia.lvc16373.LVC16373Factory;
 import net.logisim.integratedcircuits.nexperia.lvc164245.LVC164245Factory;
 import net.logisim.integratedcircuits.nexperia.lvc373.LVC373Factory;
 import net.logisim.integratedcircuits.nexperia.lvc4245.LVC4245Factory;
+import net.logisim.integratedcircuits.nexperia.lvc541.LVC541Factory;
 import net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory;
 import net.logisim.integratedcircuits.ti.f283.F283Factory;
 import net.logisim.integratedcircuits.ti.f521.F521Factory;

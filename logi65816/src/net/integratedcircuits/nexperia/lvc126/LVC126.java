@@ -1,6 +1,5 @@
 package net.integratedcircuits.nexperia.lvc126;
 
-import net.common.BusValue;
 import net.common.IntegratedCircuit;
 import net.common.PinValue;
 
@@ -18,19 +17,21 @@ public class LVC126
   {
     tickPort(LVC126Pins.PORT_1_INDEX);
     tickPort(LVC126Pins.PORT_2_INDEX);
+    tickPort(LVC126Pins.PORT_3_INDEX);
+    tickPort(LVC126Pins.PORT_4_INDEX);
   }
 
   private void tickPort(int port)
   {
-    PinValue outputEnabledB = getPins().getOEB(port);
+    PinValue outputEnabled = getPins().getOE(port);
 
-    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
+    if (outputEnabled.isError() || outputEnabled.isNotConnected())
     {
       getPins().setYError(port);
     }
     else
     {
-      transmit(port, !outputEnabledB.isHigh());
+      transmit(port, outputEnabled.isHigh());
     }
   }
 
@@ -38,7 +39,7 @@ public class LVC126
   {
     if (outputEnabled)
     {
-      BusValue aValue = getPins().getAValue(port);
+      PinValue aValue = getPins().getAValue(port);
       if (aValue.isError() || aValue.isNotConnected())
       {
         getPins().setYError(port);
@@ -49,8 +50,7 @@ public class LVC126
       }
       else
       {
-        long value = aValue.getValue();
-        getPins().setYValue(port, value);
+        getPins().setYValue(port, aValue.isHigh());
       }
     }
     else

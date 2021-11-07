@@ -16,24 +16,29 @@ public class PortFactory
     ports = new ArrayList<>();
   }
 
-  public PortDescription outputShared(String name, int pins, PortPosition position)
-  {
-    return createPortDescription(name, pins, position, OUTPUT, SHARED, true);
-  }
-
-  public PortDescription inoutShared(String name, int pins, PortPosition position)
-  {
-    return createPortDescription(name, pins, position, INOUT, SHARED, true);
-  }
-
   public PortDescription outputShared(String name, PortPosition position)
   {
     return createPortDescription(name, 1, position, OUTPUT, SHARED, true);
   }
 
+  public PortDescription outputShared(String name, int pins, PortPosition position)
+  {
+    return createPortDescription(name, pins, position, OUTPUT, SHARED, true);
+  }
+
   public PortDescription outputExclusive(String name, PortPosition position)
   {
     return createPortDescription(name, 1, position, OUTPUT, EXCLUSIVE, true);
+  }
+
+  public PortDescription outputExclusive(String name, int pins, PortPosition position)
+  {
+    return createPortDescription(name, pins, position, OUTPUT, EXCLUSIVE, true);
+  }
+
+  public PortDescription inoutShared(String name, int pins, PortPosition position)
+  {
+    return createPortDescription(name, pins, position, INOUT, SHARED, true);
   }
 
   public PortDescription inputShared(String name, PortPosition position)

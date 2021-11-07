@@ -7,7 +7,7 @@ import net.common.PinValue;
 public class LVC541
     extends IntegratedCircuit<LVC541Snapshot, LVC541Pins>
 {
-  public static final String TYPE = "4-bit Line Driver";
+  public static final String TYPE = "Octal Line Driver";
 
   public LVC541(String name, LVC541Pins pins)
   {
@@ -16,36 +16,37 @@ public class LVC541
 
   public void tick()
   {
-    tickPort(0);
+    tickPort();
   }
 
-  private void tickPort(int port)
+  private void tickPort()
   {
     PinValue outputEnabled1B = getPins().getOE1B();
     PinValue outputEnabled2B = getPins().getOE2B();
 
-    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
+    if (outputEnabled1B.isError() || outputEnabled1B.isNotConnected() ||
+        outputEnabled2B.isError() || outputEnabled2B.isNotConnected())
     {
-      getPins().setYError(port);
+      getPins().setYError();
     }
     else
     {
-      transmit(port, !outputEnabledB.isHigh());
+      transmit(!outputEnabled1B.isHigh() && !outputEnabled2B.isHigh());
     }
   }
 
-  private void transmit(int port, boolean outputEnabled)
+  private void transmit(boolean outputEnabled)
   {
     if (outputEnabled)
     {
       BusValue aValue = getPins().getAValue();
       if (aValue.isError() || aValue.isNotConnected())
       {
-        getPins().setYError(port);
+        getPins().setYError();
       }
       else if (aValue.isUnknown())
       {
-        getPins().setYUnsettled(port);
+        getPins().setYUnsettled();
       }
       else
       {

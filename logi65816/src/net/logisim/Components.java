@@ -47,6 +47,7 @@ public class Components
       tools.add(new AddTool(LVC4245Factory.create()));
       tools.add(new AddTool(LVC164245Factory.create()));
       tools.add(new AddTool(LVC126Factory.create()));
+      tools.add(new AddTool(LVC541Factory.create()));
       tools.add(new AddTool(LVC16244Factory.create()));
       tools.add(new AddTool(LVC138Factory.create()));
       tools.add(new AddTool(LS148Factory.create()));

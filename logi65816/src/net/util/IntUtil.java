@@ -12,6 +12,11 @@ public class IntUtil
     return value & 0xff;
   }
 
+  public static int toNybble(int value)
+  {
+    return value & 0xf;
+  }
+
   public static int getLowByte(int value)
   {
     return toByte(value);

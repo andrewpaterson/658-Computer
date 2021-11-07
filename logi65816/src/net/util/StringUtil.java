@@ -50,14 +50,23 @@ public class StringUtil
     return rightJustify(toHexString(value), 2, "0");
   }
 
+  public static String to4BitHex(int value)
+  {
+    return toHexString(value);
+  }
+
   public static String getByteStringHex(int value)
   {
     return "0x" + to8BitHex(value);
   }
-
   public static String getWordStringHex(int value)
   {
     return "0x" + to16BitHex(value);
+  }
+
+  public static String getNybbleStringHex(int value)
+  {
+    return "0x" + to4BitHex(value);
   }
 
   public static String toEnumString(Enum<?> anEnum)

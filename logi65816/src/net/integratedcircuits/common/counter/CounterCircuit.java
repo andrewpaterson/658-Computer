@@ -3,7 +3,7 @@ package net.integratedcircuits.common.counter;
 import net.common.IntegratedCircuit;
 import net.util.StringUtil;
 
-import static net.util.IntUtil.toByte;
+import static net.util.IntUtil.toNybble;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PINS extends CounterCircuitPins>
@@ -57,7 +57,7 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
 
   public String getCounterValueString()
   {
-    return StringUtil.getByteStringHex(toByte((int) counterValue));
+    return StringUtil.getNybbleStringHex(toNybble((int) counterValue));
   }
 
   @Override

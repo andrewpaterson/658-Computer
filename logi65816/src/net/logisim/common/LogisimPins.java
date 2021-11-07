@@ -118,6 +118,30 @@ public abstract class LogisimPins<
     }
   }
 
+  protected BusValue getValueWithoutSet(LogiBus logiBus)
+  {
+    if (instanceState.isPortConnected(logiBus.index))
+    {
+      Value portValue = instanceState.getPortValue(logiBus.index);
+      if (portValue.isErrorValue())
+      {
+        return BusValue.error();
+      }
+      else if (portValue.isUnknown())
+      {
+        return BusValue.unknown();
+      }
+      else
+      {
+        return new BusValue(portValue.toLongValue());
+      }
+    }
+    else
+    {
+      return BusValue.notConnected();
+    }
+  }
+
   protected PinValue getValue(LogiPin logiPin)
   {
     Value value = instanceState.getPortValue(logiPin.index);

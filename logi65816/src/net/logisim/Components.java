@@ -4,6 +4,7 @@ import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
 import net.logisim.integratedcircuits.maxim.ds1813.DS1813Factory;
+import net.logisim.integratedcircuits.nexperia.hc4040.HC4040Factory;
 import net.logisim.integratedcircuits.nexperia.hc590.HC590Factory;
 import net.logisim.integratedcircuits.nexperia.lsf0204.LSF0204Factory;
 import net.logisim.integratedcircuits.nexperia.lvc126.LVC126Factory;
@@ -56,6 +57,7 @@ public class Components
       tools.add(new AddTool(LVC161Factory.create()));
       tools.add(new AddTool(LVC163Factory.create()));
       tools.add(new AddTool(HC590Factory.create()));
+      tools.add(new AddTool(HC4040Factory.create()));
       tools.add(new AddTool(F283Factory.create()));
       tools.add(new AddTool(F521Factory.create()));
       tools.add(new AddTool(DS1813Factory.create()));

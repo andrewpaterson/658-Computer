@@ -27,6 +27,7 @@ public class LVC138Factory
     PORT_A = factory.inputShared("A", 3, LEFT).setTooltip("Input A (input)").createBus(3);
     PORT_E3 = factory.inputShared("E3", LEFT).createPin(3);
 
+    factory.blank(RIGHT);
     PORT_Y = factory.outputShared("Y", 8, RIGHT).setInverting().setDrawBar().createBus(3);
 
     return new LVC138Factory(new ComponentDescription(LVC138.class.getSimpleName(),

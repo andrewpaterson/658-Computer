@@ -89,7 +89,7 @@ public class HC4040
 
   public String getCounterValueString()
   {
-    return StringUtil.getWordStringHex(toByte((int) counterValue));
+    return StringUtil.getWordStringHex((int) (counterValue & 0x1fff));
   }
 }
 

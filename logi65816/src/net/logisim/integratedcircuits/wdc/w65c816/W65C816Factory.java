@@ -71,7 +71,7 @@ public class W65C816Factory
   {
     W65C816 cpu = instance.getCpu();
     W65C816Snapshot snapshot = instance.getPainterSnapshot();
-    boolean isOpcodeValid = snapshot != null &&  snapshot.cycle != 0;
+    boolean isOpcodeValid = snapshot != null && snapshot.cycle != 0;
 
     drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Op-code:", cpu.getOpcodeMnemonicString(snapshot), isOpcodeValid);
     drawField(graphics2D, getTopOffset(1), WIDTH_8BIT, "Op-code:", cpu.getOpcodeValueHex(snapshot), isOpcodeValid);

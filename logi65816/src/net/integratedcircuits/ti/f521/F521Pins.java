@@ -11,7 +11,7 @@ public interface F521Pins
 
   BusValue getQ();
 
-   PinValue getOEB();
+  PinValue getOEB();
 
   void setQEqualPError();
 

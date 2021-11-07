@@ -64,7 +64,6 @@ public class PortDescription
     return this;
   }
 
-
   public int index()
   {
     return index;

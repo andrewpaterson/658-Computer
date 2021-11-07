@@ -1,6 +1,5 @@
 package net.logisim.integratedcircuits.nexperia.lvc126;
 
-import net.common.BusValue;
 import net.common.PinValue;
 import net.integratedcircuits.nexperia.lvc126.LVC126;
 import net.integratedcircuits.nexperia.lvc126.LVC126Pins;

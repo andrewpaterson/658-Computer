@@ -4,8 +4,6 @@ import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.util.StringUtil;
 
-import static net.util.IntUtil.toByte;
-
 public class HC4040
     extends IntegratedCircuit<HC4040Snapshot, HC4040Pins>
 {

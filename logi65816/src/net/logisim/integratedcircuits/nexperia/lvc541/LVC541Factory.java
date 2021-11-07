@@ -23,7 +23,7 @@ public class LVC541Factory
 
     PORT_OE1B = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().createPin(3);
     PORT_OE2B = factory.inputShared("2OE", LEFT).setInverting().setDrawBar().createPin(3);
-    PORT_A= factory.inputShared("A", 8, LEFT).createBus(3);
+    PORT_A = factory.inputShared("A", 8, LEFT).createBus(3);
 
     factory.blank(RIGHT);
     factory.blank(RIGHT);

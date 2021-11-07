@@ -1,6 +1,5 @@
 package net.integratedcircuits.nexperia.lvc126;
 
-import net.common.BusValue;
 import net.common.PinValue;
 import net.common.Pins;
 

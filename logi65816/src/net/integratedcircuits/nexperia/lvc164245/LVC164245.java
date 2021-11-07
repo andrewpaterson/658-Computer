@@ -124,6 +124,7 @@ public class LVC164245
   {
     return direction[port] != null && (direction[port].isHigh() || direction[port].isLow());
   }
+
   public PinValue getDirection(int port)
   {
     return direction[port];

@@ -1,13 +1,10 @@
 package net.logisim.integratedcircuits.nexperia.lvc573;
 
-import com.cburch.logisim.data.BitWidth;
-import com.cburch.logisim.data.Value;
 import net.common.BusValue;
 import net.common.PinValue;
 import net.integratedcircuits.nexperia.lvc573.LVC573;
 import net.integratedcircuits.nexperia.lvc573.LVC573Pins;
 import net.integratedcircuits.nexperia.lvc573.LVC573Snapshot;
-import net.logisim.common.LogiBus;
 import net.logisim.common.LogisimPins;
 
 import static net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory.PORT_Q;

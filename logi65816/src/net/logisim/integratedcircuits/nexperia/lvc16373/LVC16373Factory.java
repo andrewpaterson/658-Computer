@@ -12,11 +12,11 @@ public class LVC16373Factory
     extends LogisimFactory<LVC16373LogisimPins>
     implements LogisimPainter<LVC16373LogisimPins>
 {
-  protected static LogiPin[] PORT_OEB ;
-  protected static LogiBus[] PORT_D ;
+  protected static LogiPin[] PORT_OEB;
+  protected static LogiBus[] PORT_D;
   protected static LogiPin[] PORT_LE;
 
-  protected static LogiBus[] PORT_Q ;
+  protected static LogiBus[] PORT_Q;
 
   public static LVC16373Factory create()
   {

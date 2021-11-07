@@ -9,26 +9,13 @@ public interface LVC161Pins
 {
   BusValue getInput();
 
-  void setOutputUnsettled();
+  PinValue getParallelLoadB();
 
-  void setOutputError();
+  PinValue getMasterResetB();
 
-  void setOutput(long latchValue);
-
-  PinValue getPEB();
-
-  PinValue getMRB();
-
-  PinValue getClock();
-
-  PinValue getCEP();
+  PinValue getCountEnabled();
 
   PinValue getCET();
 
-  void setCarryUnsettled();
-
-  void setCarryError();
-
-  void setCarry(boolean value);
 }
 

@@ -1,5 +1,6 @@
 package net.integratedcircuits.nexperia.lvc163;
 
+import net.common.BusValue;
 import net.common.PinValue;
 import net.integratedcircuits.common.counter.CounterCircuit;
 
@@ -23,9 +24,11 @@ public class LVC163
     PinValue clockValue = getPins().getClock();
     PinValue countEnabledValue = getPins().getCEP();
 
-    updateClock(clockValue);
+    boolean previousReset = reset;
+    reset = masterResetBValue.isLow();
+    updateClock(clockValue.isHigh());
 
-    if (reset)
+    if (previousReset)
     {
       if (risingEdge)
       {
@@ -34,17 +37,18 @@ public class LVC163
     }
     else
     {
-      reset = masterResetBValue.isLow();
       boolean carryInCountEnabled = carryInCountEnabledValue.isHigh();
-      boolean countEnabled = countEnabledValue.isHigh();
 
       if (parallelLoadB.isLow())
       {
-        parallelLoad(carryInCountEnabled);
+        BusValue input = getPins().getInput();
+        parallelLoad(carryInCountEnabled,
+                     input.getValue(),
+                     input.isValid());
       }
       else
       {
-        count(carryInCountEnabled, countEnabled);
+        count(carryInCountEnabled, countEnabledValue.isHigh());
       }
     }
   }

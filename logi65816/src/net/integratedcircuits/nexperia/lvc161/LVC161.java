@@ -1,5 +1,6 @@
 package net.integratedcircuits.nexperia.lvc161;
 
+import net.common.BusValue;
 import net.common.PinValue;
 import net.integratedcircuits.common.counter.CounterCircuit;
 
@@ -17,17 +18,15 @@ public class LVC161
   @Override
   public void tick()
   {
-    PinValue masterResetBValue = getPins().getMRB();
+    PinValue masterResetBValue = getPins().getMasterResetB();
     PinValue carryInCountEnabledValue = getPins().getCET();
-    PinValue parallelLoadB = getPins().getPEB();
+    PinValue parallelLoadB = getPins().getParallelLoadB();
     PinValue clockValue = getPins().getClock();
-    PinValue countEnabledValue = getPins().getCEP();
+    PinValue countEnabledValue = getPins().getCountEnabled();
 
     boolean previousReset = reset;
     reset = masterResetBValue.isLow();
-    updateClock(clockValue);
-
-    System.out.println("LVC161.tick");
+    updateClock(clockValue.isHigh());
 
     if (previousReset)
     {
@@ -36,15 +35,17 @@ public class LVC161
     else
     {
       boolean carryInCountEnabled = carryInCountEnabledValue.isHigh();
-      boolean countEnabled = countEnabledValue.isHigh();
 
       if (parallelLoadB.isLow())
       {
-        parallelLoad(carryInCountEnabled);
+        BusValue input = getPins().getInput();
+        parallelLoad(carryInCountEnabled,
+                     input.getValue(),
+                     input.isValid());
       }
       else
       {
-        count(carryInCountEnabled, countEnabled);
+        count(carryInCountEnabled, countEnabledValue.isHigh());
       }
     }
   }

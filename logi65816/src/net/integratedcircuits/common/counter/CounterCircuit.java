@@ -1,8 +1,6 @@
 package net.integratedcircuits.common.counter;
 
-import net.common.BusValue;
 import net.common.IntegratedCircuit;
-import net.common.PinValue;
 import net.util.StringUtil;
 
 import static net.util.IntUtil.toByte;
@@ -34,13 +32,12 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
     getPins().setCarry(false);
   }
 
-  protected void parallelLoad(boolean carryInCount)
+  protected void parallelLoad(boolean carryInCount, long counterValue, boolean valid)
   {
-    BusValue input = getPins().getInput();
-    if (input.isValid())
+    if (valid)
     {
-      oldCounterValue = counterValue;
-      counterValue = input.getValue();
+      oldCounterValue = this.counterValue;
+      this.counterValue = counterValue;
 
       setOutput(carryInCount);
     }
@@ -74,9 +71,8 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
     oldCounterValue = snapshot.oldCounterValue;
   }
 
-  protected void updateClock(PinValue clockValue)
+  protected void updateClock(boolean currentClock)
   {
-    boolean currentClock = clockValue.isHigh();
     this.fallingEdge = !currentClock && this.clock;
     this.risingEdge = currentClock && !this.clock;
     this.clock = currentClock;

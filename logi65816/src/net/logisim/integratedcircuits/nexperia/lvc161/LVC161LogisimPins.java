@@ -37,13 +37,13 @@ public class LVC161LogisimPins
   }
 
   @Override
-  public PinValue getPEB()
+  public PinValue getParallelLoadB()
   {
     return getValue(PORT_PEB);
   }
 
   @Override
-  public PinValue getMRB()
+  public PinValue getMasterResetB()
   {
     return getValue(PORT_MRB);
   }
@@ -55,7 +55,7 @@ public class LVC161LogisimPins
   }
 
   @Override
-  public PinValue getCEP()
+  public PinValue getCountEnabled()
   {
     return getValue(PORT_CEP);
   }
@@ -64,17 +64,6 @@ public class LVC161LogisimPins
   public PinValue getCET()
   {
     return getValue(PORT_CET);
-  }
-
-  @Override
-  public void setCarryUnsettled()
-  {
-  }
-
-  @Override
-  public void setCarryError()
-  {
-    setError(PORT_TC);
   }
 
   @Override

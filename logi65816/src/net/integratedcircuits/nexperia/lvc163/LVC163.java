@@ -30,7 +30,7 @@ public class LVC163
 
     if (previousReset)
     {
-      if (risingEdge)
+      if (clockRisingEdge)
       {
         reset();
       }
@@ -60,8 +60,7 @@ public class LVC163
                               oldCounterValue,
                               reset,
                               clock,
-                              fallingEdge,
-                              risingEdge);
+                              clockRisingEdge);
   }
 
   @Override

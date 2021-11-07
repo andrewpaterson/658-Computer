@@ -16,6 +16,5 @@ public interface LVC161Pins
   PinValue getCountEnabled();
 
   PinValue getCET();
-
 }
 

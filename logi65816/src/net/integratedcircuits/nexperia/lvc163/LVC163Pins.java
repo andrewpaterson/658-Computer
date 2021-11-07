@@ -9,26 +9,12 @@ public interface LVC163Pins
 {
   BusValue getInput();
 
-  void setOutputUnsettled();
-
-  void setOutputError();
-
-  void setOutput(long latchValue);
-
   PinValue getPEB();
 
   PinValue getMRB();
 
-  PinValue getClock();
-
   PinValue getCEP();
 
   PinValue getCET();
-
-  void setCarryUnsettled();
-
-  void setCarryError();
-
-  void setCarry(boolean value);
 }
 

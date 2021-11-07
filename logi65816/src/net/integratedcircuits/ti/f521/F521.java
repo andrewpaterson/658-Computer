@@ -10,7 +10,7 @@ import static net.util.IntUtil.toByte;
 public class F521
     extends IntegratedCircuit<F521Snapshot, F521Pins>
 {
-  public static final String TYPE = "Octal Comparator";
+  public static final String TYPE = "8-bit Comparator";
 
   protected long latchValue;
 

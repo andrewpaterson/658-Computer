@@ -57,8 +57,7 @@ public class LVC161
                               oldCounterValue,
                               reset,
                               clock,
-                              fallingEdge,
-                              risingEdge);
+                              clockRisingEdge);
   }
 
   @Override

@@ -66,16 +66,6 @@ public class LVC163LogisimPins
   }
 
   @Override
-  public void setCarryUnsettled()
-  {
-  }
-
-  @Override
-  public void setCarryError()
-  {
-  }
-
-  @Override
   public void setCarry(boolean value)
   {
     setValue(PORT_TC, value);

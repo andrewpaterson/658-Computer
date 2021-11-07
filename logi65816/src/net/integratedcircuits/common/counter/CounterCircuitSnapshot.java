@@ -9,17 +9,19 @@ public class CounterCircuitSnapshot
   public long oldCounterValue;
   public boolean reset;
   public boolean clock;
-  public boolean fallingEdge;
-  public boolean risingEdge;
+  public boolean clockRisingEdge;
 
-  public CounterCircuitSnapshot(long counterValue, long oldCounterValue, boolean reset, boolean clock, boolean fallingEdge, boolean risingEdge)
+  public CounterCircuitSnapshot(long counterValue,
+                                long oldCounterValue,
+                                boolean reset,
+                                boolean clock,
+                                boolean clockRisingEdge)
   {
     this.counterValue = counterValue;
     this.oldCounterValue = oldCounterValue;
     this.reset = reset;
     this.clock = clock;
-    this.fallingEdge = fallingEdge;
-    this.risingEdge = risingEdge;
+    this.clockRisingEdge = clockRisingEdge;
   }
 }
 

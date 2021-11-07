@@ -10,7 +10,7 @@ import static net.util.IntUtil.toByte;
 public class LVC573
     extends IntegratedCircuit<LVC573Snapshot, LVC573Pins>
 {
-  public static final String TYPE = "Octal Latch";
+  public static final String TYPE = "8-bit Latch";
 
   protected long latchValue;
 

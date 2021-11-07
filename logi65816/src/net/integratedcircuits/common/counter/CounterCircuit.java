@@ -5,6 +5,7 @@ import net.util.StringUtil;
 
 import static net.util.IntUtil.toByte;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PINS extends CounterCircuitPins>
     extends IntegratedCircuit<SNAPSHOT, PINS>
 {
@@ -13,8 +14,7 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
   protected long oldCounterValue;
   protected boolean reset;
   protected boolean clock;
-  protected boolean fallingEdge;
-  protected boolean risingEdge;
+  protected boolean clockRisingEdge;
 
   public CounterCircuit(String name, CounterCircuitPins pins)
   {
@@ -49,9 +49,9 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
     return limit;
   }
 
-  protected void setOutput(boolean cet)
+  protected void setOutput(boolean carryIn)
   {
-    getPins().setCarry((oldCounterValue + 1 == getLimit()) && cet);
+    getPins().setCarry((oldCounterValue + 1 == getLimit()) && carryIn);
     getPins().setOutput(counterValue);
   }
 
@@ -66,15 +66,13 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
     counterValue = snapshot.counterValue;
     clock = snapshot.clock;
     reset = snapshot.reset;
-    fallingEdge = snapshot.fallingEdge;
-    risingEdge = snapshot.risingEdge;
+    clockRisingEdge = snapshot.clockRisingEdge;
     oldCounterValue = snapshot.oldCounterValue;
   }
 
   protected void updateClock(boolean currentClock)
   {
-    this.fallingEdge = !currentClock && this.clock;
-    this.risingEdge = currentClock && !this.clock;
+    this.clockRisingEdge = currentClock && !this.clock;
     this.clock = currentClock;
   }
 
@@ -82,7 +80,7 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
   {
     if (countEnabled)
     {
-      if (carryInCount && risingEdge)
+      if (carryInCount && clockRisingEdge)
       {
         oldCounterValue = counterValue;
         counterValue++;

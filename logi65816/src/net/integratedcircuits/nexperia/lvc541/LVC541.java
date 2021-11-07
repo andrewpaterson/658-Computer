@@ -7,7 +7,7 @@ import net.common.PinValue;
 public class LVC541
     extends IntegratedCircuit<LVC541Snapshot, LVC541Pins>
 {
-  public static final String TYPE = "Octal Line Driver";
+  public static final String TYPE = "8-bit Line Driver";
 
   public LVC541(String name, LVC541Pins pins)
   {

@@ -1,6 +1,5 @@
 package net.integratedcircuits.common.counter;
 
-import net.common.BusValue;
 import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.common.Pins;
@@ -9,8 +8,6 @@ public interface CounterCircuitPins<SNAPSHOT extends CounterCircuitSnapshot, PIN
     extends Pins<SNAPSHOT, PINS, INTEGRATED_CIRCUIT>
 {
   PinValue getClock();
-
-  BusValue getInput();
 
   void setOutputUnsettled();
 

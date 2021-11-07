@@ -37,9 +37,9 @@ public class LVC161LogisimPins
   }
 
   @Override
-  public boolean isParallelLoad()
+  public PinValue getPEB()
   {
-    return getValue(PORT_PEB).isLow();
+    return getValue(PORT_PEB);
   }
 
   @Override
@@ -49,9 +49,9 @@ public class LVC161LogisimPins
   }
 
   @Override
-  public boolean isClock()
+  public PinValue getClock()
   {
-    return getValue(PORT_CP).isHigh();
+    return getValue(PORT_CP);
   }
 
   @Override

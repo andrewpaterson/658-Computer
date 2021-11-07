@@ -48,7 +48,7 @@ public class LVC163LogisimPins
   }
 
   @Override
-  public PinValue isClock()
+  public PinValue getClock()
   {
     return getValue(PORT_CP);
   }

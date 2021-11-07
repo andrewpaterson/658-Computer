@@ -2,10 +2,10 @@ package net.integratedcircuits.nexperia.lvc163;
 
 import net.common.BusValue;
 import net.common.PinValue;
-import net.common.Pins;
+import net.integratedcircuits.common.counter.CounterCircuitPins;
 
 public interface LVC163Pins
-    extends Pins<LVC163Snapshot, LVC163Pins, LVC163>
+    extends CounterCircuitPins<LVC163Snapshot, LVC163Pins, LVC163>
 {
   BusValue getInput();
 
@@ -19,7 +19,7 @@ public interface LVC163Pins
 
   PinValue getMRB();
 
-  PinValue isClock();
+  PinValue getClock();
 
   PinValue getCEP();
 

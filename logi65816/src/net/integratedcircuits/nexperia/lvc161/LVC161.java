@@ -1,123 +1,52 @@
 package net.integratedcircuits.nexperia.lvc161;
 
-import net.common.BusValue;
-import net.common.IntegratedCircuit;
 import net.common.PinValue;
-import net.util.StringUtil;
-
-import static net.util.IntUtil.toByte;
+import net.integratedcircuits.common.counter.CounterCircuit;
 
 public class LVC161
-    extends IntegratedCircuit<LVC161Snapshot, LVC161Pins>
+    extends CounterCircuit<LVC161Snapshot, LVC161Pins>
 {
   public static final String TYPE = "4-bit Counter";
-
-  protected long counterValue;
-  protected long oldCounterValue;
-
-  protected boolean clock;
-  protected boolean fallingEdge;
-  protected boolean risingEdge;
 
   public LVC161(String name, LVC161Pins pins)
   {
     super(name, pins);
-    counterValue = 0;
-    oldCounterValue = 0;
+    limit = 0x10;
   }
 
   @Override
   public void tick()
   {
-    PinValue masterResetB = getPins().getMRB();
-    PinValue cetValue = getPins().getCET();
-    boolean cet = cetValue.isHigh();
+    PinValue masterResetBValue = getPins().getMRB();
+    PinValue carryInCountEnabledValue = getPins().getCET();
+    PinValue parallelLoadB = getPins().getPEB();
+    PinValue clockValue = getPins().getClock();
+    PinValue countEnabledValue = getPins().getCEP();
 
-    if (masterResetB.isError() || masterResetB.isNotConnected() ||
-        cetValue.isError() || cetValue.isNotConnected())
-    {
-      getPins().setOutputError();
-      getPins().setCarryError();
-    }
-    else if (masterResetB.isUnknown() ||
-             cetValue.isUnknown())
-    {
-      getPins().setOutputUnsettled();
-      getPins().setCarryUnsettled();
-    }
-    else if (masterResetB.isLow())
-    {
-      counterValue = 0;
-      oldCounterValue = 0;
-      getPins().setOutput(0);
-      getPins().setCarry(false);
-    }
-    else if (getPins().isParallelLoad())
-    {
-      BusValue input = getPins().getInput();
-      if (input.isValid())
-      {
-        oldCounterValue = counterValue;
+    boolean previousReset = reset;
+    reset = masterResetBValue.isLow();
+    updateClock(clockValue);
 
-        counterValue = input.getValue();
+    System.out.println("LVC161.tick");
 
-        setOutput(cet);
-      }
-      else
-      {
-        getPins().setOutputError();
-        getPins().setCarryError();
-      }
+    if (previousReset)
+    {
+      reset();
     }
     else
     {
-      PinValue countEnabled = getPins().getCEP();
+      boolean carryInCountEnabled = carryInCountEnabledValue.isHigh();
+      boolean countEnabled = countEnabledValue.isHigh();
 
-      if (countEnabled.isError() || countEnabled.isNotConnected())
+      if (parallelLoadB.isLow())
       {
-        getPins().setOutputError();
-        getPins().setCarryError();
-      }
-      else if (countEnabled.isUnknown())
-      {
-        getPins().setOutputUnsettled();
-        getPins().setCarryUnsettled();
-      }
-      else if (countEnabled.isHigh())
-      {
-        boolean currentClock = getPins().isClock();
-
-        fallingEdge = !currentClock && this.clock;
-        risingEdge = currentClock && !this.clock;
-        clock = currentClock;
-
-        if (cet)
-        {
-          if (risingEdge)
-          {
-            oldCounterValue = counterValue;
-
-            counterValue++;
-
-            if (counterValue == 0x10)
-            {
-              counterValue = 0;
-            }
-          }
-        }
-        setOutput(cet);
+        parallelLoad(carryInCountEnabled);
       }
       else
       {
-        setOutput(cet);
+        count(carryInCountEnabled, countEnabled);
       }
     }
-  }
-
-  private void setOutput(boolean cet)
-  {
-    getPins().setCarry((oldCounterValue + 1 == 0x10) && cet);
-    getPins().setOutput(counterValue);
   }
 
   @Override
@@ -125,24 +54,10 @@ public class LVC161
   {
     return new LVC161Snapshot(counterValue,
                               oldCounterValue,
+                              reset,
                               clock,
                               fallingEdge,
                               risingEdge);
-  }
-
-  @Override
-  public void restoreFromSnapshot(LVC161Snapshot snapshot)
-  {
-    counterValue = snapshot.counterValue;
-    clock = snapshot.clock;
-    fallingEdge = snapshot.fallingEdge;
-    risingEdge = snapshot.risingEdge;
-    oldCounterValue = snapshot.oldCounterValue;
-  }
-
-  public String getCounterValueString()
-  {
-    return StringUtil.getByteStringHex(toByte((int) counterValue));
   }
 
   @Override

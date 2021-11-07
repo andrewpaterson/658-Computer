@@ -1,18 +1,10 @@
 package net.integratedcircuits.nexperia.lvc163;
 
-import net.common.Snapshot;
+import net.integratedcircuits.common.counter.CounterCircuitSnapshot;
 
 public class LVC163Snapshot
-    implements Snapshot
+    extends CounterCircuitSnapshot
 {
-  public long counterValue;
-  public long oldCounterValue;
-  public boolean reset;
-
-  public boolean clock;
-  public boolean fallingEdge;
-  public boolean risingEdge;
-
   public LVC163Snapshot(long counterValue,
                         long oldCounterValue,
                         boolean reset,
@@ -20,12 +12,7 @@ public class LVC163Snapshot
                         boolean fallingEdge,
                         boolean risingEdge)
   {
-    this.counterValue = counterValue;
-    this.oldCounterValue = oldCounterValue;
-    this.reset = reset;
-    this.clock = clock;
-    this.fallingEdge = fallingEdge;
-    this.risingEdge = risingEdge;
+    super(counterValue, oldCounterValue, reset, clock, fallingEdge, risingEdge);
   }
 }
 

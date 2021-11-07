@@ -1,98 +1,52 @@
 package net.integratedcircuits.nexperia.lvc163;
 
-import net.common.BusValue;
-import net.common.IntegratedCircuit;
 import net.common.PinValue;
-import net.util.StringUtil;
-
-import static net.util.IntUtil.toByte;
+import net.integratedcircuits.common.counter.CounterCircuit;
 
 public class LVC163
-    extends IntegratedCircuit<LVC163Snapshot, LVC163Pins>
+    extends CounterCircuit<LVC163Snapshot, LVC163Pins>
 {
   public static final String TYPE = "4-bit Counter";
-
-  protected long counterValue;
-  protected long oldCounterValue;
-
-  protected boolean reset;
-
-  protected boolean clock;
-  protected boolean fallingEdge;
-  protected boolean risingEdge;
 
   public LVC163(String name, LVC163Pins pins)
   {
     super(name, pins);
-    counterValue = 0;
-    oldCounterValue = 0;
-    reset = false;
+    limit = 0x10;
   }
 
   @Override
   public void tick()
   {
-    PinValue masterResetB = getPins().getMRB();
-    PinValue cetValue = getPins().getCET();
-    boolean cet = cetValue.isHigh();
+    PinValue masterResetBValue = getPins().getMRB();
+    PinValue carryInCountEnabledValue = getPins().getCET();
     PinValue parallelLoadB = getPins().getPEB();
+    PinValue clockValue = getPins().getClock();
+    PinValue countEnabledValue = getPins().getCEP();
 
-    boolean currentClock = getPins().isClock().isHigh();
-
-    fallingEdge = !currentClock && this.clock;
-    risingEdge = currentClock && !this.clock;
-    clock = currentClock;
+    updateClock(clockValue);
 
     if (reset)
     {
       if (risingEdge)
       {
-        counterValue = 0;
-        oldCounterValue = 0;
-        getPins().setOutput(0);
-        getPins().setCarry(false);
-        reset = masterResetB.isLow();
+        reset();
       }
     }
     else
     {
-      reset = masterResetB.isLow();
+      reset = masterResetBValue.isLow();
+      boolean carryInCountEnabled = carryInCountEnabledValue.isHigh();
+      boolean countEnabled = countEnabledValue.isHigh();
+
       if (parallelLoadB.isLow())
       {
-        BusValue input = getPins().getInput();
-        if (input.isValid())
-        {
-          oldCounterValue = counterValue;
-          counterValue = input.getValue();
-
-          setOutput(cet);
-        }
-        setOutput(cet);
+        parallelLoad(carryInCountEnabled);
       }
       else
       {
-        PinValue countEnabled = getPins().getCEP();
-        if (countEnabled.isHigh())
-        {
-          if (cet && risingEdge)
-          {
-            oldCounterValue = counterValue;
-            counterValue++;
-            if (counterValue == 0x10)
-            {
-              counterValue = 0;
-            }
-          }
-          setOutput(cet);
-        }
+        count(carryInCountEnabled, countEnabled);
       }
     }
-  }
-
-  private void setOutput(boolean cet)
-  {
-    getPins().setCarry((oldCounterValue + 1 == 0x10) && cet);
-    getPins().setOutput(counterValue);
   }
 
   @Override
@@ -104,22 +58,6 @@ public class LVC163
                               clock,
                               fallingEdge,
                               risingEdge);
-  }
-
-  @Override
-  public void restoreFromSnapshot(LVC163Snapshot snapshot)
-  {
-    counterValue = snapshot.counterValue;
-    clock = snapshot.clock;
-    reset = snapshot.reset;
-    fallingEdge = snapshot.fallingEdge;
-    risingEdge = snapshot.risingEdge;
-    oldCounterValue = snapshot.oldCounterValue;
-  }
-
-  public String getCounterValueString()
-  {
-    return StringUtil.getByteStringHex(toByte((int) counterValue));
   }
 
   @Override

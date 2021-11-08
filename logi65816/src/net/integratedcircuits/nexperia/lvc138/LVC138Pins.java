@@ -19,8 +19,6 @@ public interface LVC138Pins
 
   void setOutputUnsettled();
 
-  void setOutputHighImpedance();
-
   void setOutput(long outputValue);
 }
 

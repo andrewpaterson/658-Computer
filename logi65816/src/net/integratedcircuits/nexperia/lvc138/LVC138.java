@@ -23,7 +23,7 @@ public class LVC138
 
     boolean outputError = false;
     boolean outputUnset = false;
-    boolean outputHighImpedance = false;
+    boolean outputHigh = false;
     if (enabled1B.isError() || enabled1B.isNotConnected() ||
         enabled2B.isError() || enabled2B.isNotConnected() ||
         enabled3.isError() || enabled3.isNotConnected())
@@ -38,7 +38,7 @@ public class LVC138
     }
     else if (enabled1B.isHigh() || enabled2B.isHigh() || enabled3.isLow())
     {
-      outputHighImpedance = true;
+      outputHigh = true;
     }
 
     BusValue input = getPins().getA();
@@ -60,9 +60,9 @@ public class LVC138
     {
       getPins().setOutputUnsettled();
     }
-    else if (outputHighImpedance)
+    else if (outputHigh)
     {
-      getPins().setOutputHighImpedance();
+      getPins().setOutput(0xff);
     }
     else
     {

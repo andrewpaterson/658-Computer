@@ -49,12 +49,6 @@ public class LVC138LogisimPins
   }
 
   @Override
-  public void setOutputHighImpedance()
-  {
-    setHighImpedance(PORT_Y);
-  }
-
-  @Override
   public void setOutput(long outputValue)
   {
     setValue(PORT_Y, outputValue);

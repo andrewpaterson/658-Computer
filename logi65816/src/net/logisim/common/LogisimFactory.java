@@ -33,7 +33,7 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
   @SuppressWarnings("rawtypes")
   public LogisimFactory(ComponentDescription description)
   {
-    super(description.getName());
+    super(description.getType() + " (" + description.getName() + ")");
     Attribute[] attributesNames;
     Object[] attributeDefaults;
     attributesNames = new Attribute[]{

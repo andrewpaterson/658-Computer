@@ -5,6 +5,7 @@ import net.logisim.common.*;
 
 import java.awt.*;
 
+import static net.logisim.common.ComponentDescription.height;
 import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
@@ -39,7 +40,9 @@ public class LVC164245Factory
     PORT_A[1] = factory.inoutShared("2A", 8, RIGHT).createBus(3);
 
     return new LVC164245Factory(new ComponentDescription(LVC164245.class.getSimpleName(),
+                                                         LVC164245.TYPE,
                                                          160,
+                                                         height(7),
                                                          factory.getPorts()));
   }
 

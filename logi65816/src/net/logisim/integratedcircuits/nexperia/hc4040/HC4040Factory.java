@@ -27,6 +27,7 @@ public class HC4040Factory
 
     PORT_Q = factory.outputExclusive("Q", 12, RIGHT).setTooltip("Output Q (output)").createBus(60);
     return new HC4040Factory(new ComponentDescription(HC4040.class.getSimpleName(),
+                                                      HC4040.TYPE,
                                                       160,
                                                       height(3),
                                                       factory.getPorts()));

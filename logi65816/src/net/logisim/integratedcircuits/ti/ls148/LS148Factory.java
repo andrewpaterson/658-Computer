@@ -31,6 +31,7 @@ public class LS148Factory
     PORT_EO = factory.inputShared("EO", RIGHT).createPin(16);
 
     return new LS148Factory(new ComponentDescription(LS148.class.getSimpleName(),
+                                                     LS148.TYPE,
                                                      160, ComponentDescription.height(3),
                                                      factory.getPorts()));
   }

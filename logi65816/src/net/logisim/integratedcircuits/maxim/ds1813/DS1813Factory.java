@@ -27,7 +27,9 @@ public class DS1813Factory
     PORT_RSTB = factory.inoutShared("RST", RIGHT).setInverting().setDrawBar().index();
 
     return new DS1813Factory(new ComponentDescription(DS1813.class.getSimpleName(),
-                                                      160, height(3),
+                                                      DS1813.TYPE,
+                                                      160,
+                                                      height(3),
                                                       factory.getPorts()));
   }
 

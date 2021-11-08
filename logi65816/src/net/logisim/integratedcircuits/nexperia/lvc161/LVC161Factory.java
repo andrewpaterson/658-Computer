@@ -37,6 +37,7 @@ public class LVC161Factory
     PORT_TC = factory.inputShared("TC", RIGHT).setTooltip("Carry (output)").createPin(4);
 
     return new LVC161Factory(new ComponentDescription(LVC161.class.getSimpleName(),
+                                                      LVC161.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

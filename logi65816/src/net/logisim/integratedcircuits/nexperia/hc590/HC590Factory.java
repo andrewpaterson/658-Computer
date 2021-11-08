@@ -34,6 +34,7 @@ public class HC590Factory
     PORT_Q = factory.outputExclusive("Q", 8, RIGHT).setTooltip("Output Q (output)").createBus(19);
     PORT_RCOB = factory.outputExclusive("RCO", RIGHT).setTooltip("Carry (output").setInverting().setDrawBar().createPin(19);
     return new HC590Factory(new ComponentDescription(HC590.class.getSimpleName(),
+                                                     HC590.TYPE,
                                                      160,
                                                      factory.getPorts()));
   }

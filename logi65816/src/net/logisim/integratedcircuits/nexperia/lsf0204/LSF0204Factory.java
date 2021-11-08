@@ -28,6 +28,7 @@ public class LSF0204Factory
     PORT_B = factory.inoutShared("B", 4, RIGHT).setTooltip("B (input or output)").createBus(1);
 
     return new LSF0204Factory(new ComponentDescription(LSF0204.class.getSimpleName(),
+                                                       LSF0204.TYPE,
                                                        160,
                                                        factory.getPorts()));
   }

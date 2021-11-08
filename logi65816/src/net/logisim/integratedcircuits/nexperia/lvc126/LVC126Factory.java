@@ -44,6 +44,7 @@ public class LVC126Factory
     PORT_Y[PORT_4_INDEX] = factory.outputExclusive("4Y", RIGHT).createPin(2);
 
     return new LVC126Factory(new ComponentDescription(LVC126.class.getSimpleName(),
+                                                      LVC126.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

@@ -44,6 +44,7 @@ public class LVC16244Factory
     PORT_Y[PORT_4_INDEX] = factory.outputShared("4Y", 4, RIGHT).createBus(2);
 
     return new LVC16244Factory(new ComponentDescription(LVC16244.class.getSimpleName(),
+                                                        LVC16244.TYPE,
                                                         160,
                                                         factory.getPorts()));
   }

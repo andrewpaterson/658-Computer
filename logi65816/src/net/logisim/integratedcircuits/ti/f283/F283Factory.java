@@ -32,6 +32,7 @@ public class F283Factory
     PORT_CO = factory.outputExclusive("CO", RIGHT).createPin(10);
 
     return new F283Factory(new ComponentDescription(F283.class.getSimpleName(),
+                                                    F283.TYPE,
                                                     160,
                                                     factory.getPorts()));
   }

@@ -582,32 +582,32 @@
     <comp lib="1" loc="(740,360)" name="NOT Gate"/>
     <comp lib="1" loc="(740,410)" name="NOT Gate"/>
     <comp lib="1" loc="(750,710)" name="NOT Gate"/>
-    <comp lib="12" loc="(1390,240)" name="LVC373"/>
-    <comp lib="12" loc="(1390,410)" name="LSF0204"/>
-    <comp lib="12" loc="(1390,630)" name="LVC126"/>
-    <comp lib="12" loc="(1390,810)" name="LVC541"/>
-    <comp lib="12" loc="(1390,90)" name="LVC162373"/>
-    <comp lib="12" loc="(1430,1130)" name="W65C816"/>
+    <comp lib="12" loc="(1390,240)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(1390,410)" name="4-bit Translator (LSF0204)"/>
+    <comp lib="12" loc="(1390,630)" name="4-bit Line Driver (LVC126)"/>
+    <comp lib="12" loc="(1390,810)" name="8-bit Line Driver (LVC541)"/>
+    <comp lib="12" loc="(1390,90)" name="16-bit Latch (LVC162373)"/>
+    <comp lib="12" loc="(1440,1130)" name="Microprocessor (W65C816)"/>
     <comp lib="12" loc="(1700,1130)" name="W65C02S"/>
-    <comp lib="12" loc="(1930,100)" name="HC590"/>
-    <comp lib="12" loc="(1930,280)" name="HC4040"/>
-    <comp lib="12" loc="(1930,420)" name="LVC139"/>
-    <comp lib="12" loc="(1930,550)" name="F251"/>
-    <comp lib="12" loc="(1930,710)" name="LVC257"/>
-    <comp lib="12" loc="(350,1170)" name="DS1813"/>
-    <comp lib="12" loc="(350,240)" name="LVC573"/>
-    <comp lib="12" loc="(350,430)" name="LVC543"/>
-    <comp lib="12" loc="(350,600)" name="LVC543"/>
-    <comp lib="12" loc="(350,760)" name="LVC4245"/>
-    <comp lib="12" loc="(350,90)" name="LVC16373"/>
-    <comp lib="12" loc="(350,980)" name="LVC164245"/>
-    <comp lib="12" loc="(840,70)" name="LVC138"/>
-    <comp lib="12" loc="(850,1140)" name="LVC16244"/>
-    <comp lib="12" loc="(850,260)" name="LS148"/>
-    <comp lib="12" loc="(850,440)" name="LVC161"/>
-    <comp lib="12" loc="(850,610)" name="F521"/>
-    <comp lib="12" loc="(850,760)" name="LVC163"/>
-    <comp lib="12" loc="(850,950)" name="F283"/>
+    <comp lib="12" loc="(1930,100)" name="8-bit Counter (HC590)"/>
+    <comp lib="12" loc="(1930,280)" name="12-bit Counter (HC4040)"/>
+    <comp lib="12" loc="(1930,420)" name="2-to-4 Decoder (LVC139)"/>
+    <comp lib="12" loc="(1930,550)" name="1-of-8 Data Selector (F251)"/>
+    <comp lib="12" loc="(1930,710)" name="4-bit Multiplexer (LVC257)"/>
+    <comp lib="12" loc="(350,1170)" name="EconoReset (DS1813)"/>
+    <comp lib="12" loc="(350,240)" name="8-bit Latch (LVC373)"/>
+    <comp lib="12" loc="(350,430)" name="8-bit Bi-latch (LVC543)"/>
+    <comp lib="12" loc="(350,600)" name="8-bit Bi-latch (LVC543)"/>
+    <comp lib="12" loc="(350,760)" name="8-bit Bus Transceiver (LVC4245)"/>
+    <comp lib="12" loc="(350,90)" name="16-bit Latch (LVC16373)"/>
+    <comp lib="12" loc="(350,980)" name="16-bit Bus Transceiver (LVC164245)"/>
+    <comp lib="12" loc="(840,70)" name="3-to-8 Decoder (LVC138)"/>
+    <comp lib="12" loc="(850,1140)" name="16-bit Line Driver (LVC16244)"/>
+    <comp lib="12" loc="(850,260)" name="8-to-3 Encoder (LS148)"/>
+    <comp lib="12" loc="(850,440)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(850,610)" name="8-bit Comparator (F521)"/>
+    <comp lib="12" loc="(850,760)" name="4-bit Counter (LVC161)"/>
+    <comp lib="12" loc="(850,950)" name="4-bit Full Adder (F283)"/>
     <comp lib="2" loc="(1190,600)" name="Decoder">
       <a name="select" val="2"/>
     </comp>
@@ -1261,7 +1261,6 @@
     <wire from="(750,490)" to="(770,490)"/>
     <wire from="(750,630)" to="(770,630)"/>
     <wire from="(750,710)" to="(760,710)"/>
-    <wire from="(760,240)" to="(770,240)"/>
     <wire from="(760,950)" to="(770,950)"/>
     <wire from="(760,970)" to="(770,970)"/>
     <wire from="(90,1000)" to="(90,1090)"/>
@@ -1278,7 +1277,6 @@
     <wire from="(930,1170)" to="(970,1170)"/>
     <wire from="(930,1190)" to="(970,1190)"/>
     <wire from="(930,1210)" to="(970,1210)"/>
-    <wire from="(930,240)" to="(940,240)"/>
     <wire from="(930,260)" to="(970,260)"/>
     <wire from="(930,280)" to="(970,280)"/>
     <wire from="(930,430)" to="(970,430)"/>

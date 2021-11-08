@@ -735,14 +735,14 @@
     <comp lib="1" loc="(690,450)" name="NOT Gate"/>
     <comp lib="1" loc="(760,170)" name="NOT Gate"/>
     <comp lib="1" loc="(760,270)" name="NOT Gate"/>
-    <comp lib="12" loc="(110,190)" name="DS1813"/>
-    <comp lib="12" loc="(1610,1140)" name="LS148"/>
-    <comp lib="12" loc="(1950,900)" name="LVC4245"/>
-    <comp lib="12" loc="(410,200)" name="W65C816"/>
-    <comp lib="12" loc="(480,1160)" name="LVC16373"/>
-    <comp lib="12" loc="(870,150)" name="LVC573"/>
-    <comp lib="12" loc="(870,290)" name="LVC4245"/>
-    <comp lib="12" loc="(900,1020)" name="LVC4245"/>
+    <comp lib="12" loc="(110,190)" name="EconoReset (DS1813)"/>
+    <comp lib="12" loc="(1610,1140)" name="8-to-3 Encoder (LS148)"/>
+    <comp lib="12" loc="(1950,900)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(410,200)" name="Microprocessor (W65C816)"/>
+    <comp lib="12" loc="(480,1160)" name="16-bit Latch (LVC16373)"/>
+    <comp lib="12" loc="(870,150)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(870,290)" name="8-bit Bus Transceiver (LVC4245)"/>
+    <comp lib="12" loc="(900,1020)" name="8-bit Bus Transceiver (LVC4245)"/>
     <comp lib="4" loc="(1580,140)" name="RAM">
       <a name="addrWidth" val="17"/>
       <a name="appearance" val="classic"/>
@@ -1081,10 +1081,6 @@
       <a name="incoming" val="8"/>
       <a name="spacing" val="3"/>
     </comp>
-    <comp lib="0" loc="(1050,590)" name="Pull Resistor">
-      <a name="facing" val="west"/>
-      <a name="pull" val="1"/>
-    </comp>
     <comp lib="0" loc="(1050,620)" name="Pull Resistor">
       <a name="facing" val="west"/>
       <a name="pull" val="1"/>
@@ -1114,85 +1110,80 @@
       <a name="facing" val="west"/>
       <a name="pull" val="1"/>
     </comp>
-    <comp lib="0" loc="(1350,650)" name="Splitter">
+    <comp lib="0" loc="(1350,670)" name="Splitter">
       <a name="appear" val="right"/>
       <a name="facing" val="west"/>
-      <a name="fanout" val="9"/>
-      <a name="incoming" val="9"/>
+      <a name="fanout" val="10"/>
+      <a name="incoming" val="10"/>
       <a name="spacing" val="2"/>
     </comp>
-    <comp lib="0" loc="(1390,600)" name="Splitter">
-      <a name="fanout" val="9"/>
-      <a name="incoming" val="9"/>
+    <comp lib="0" loc="(1390,610)" name="Splitter">
+      <a name="fanout" val="10"/>
+      <a name="incoming" val="10"/>
       <a name="spacing" val="3"/>
     </comp>
-    <comp lib="0" loc="(1420,680)" name="Tunnel">
+    <comp lib="0" loc="(1420,700)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="RESET_0"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <comp lib="0" loc="(1420,710)" name="Tunnel">
+    <comp lib="0" loc="(1420,730)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="RESET_1"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <comp lib="0" loc="(1420,740)" name="Tunnel">
+    <comp lib="0" loc="(1420,760)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="CLOCK"/>
+      <a name="label" val="CLK"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <comp lib="0" loc="(1420,770)" name="Tunnel">
+    <comp lib="0" loc="(1420,790)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="CLOCK_B"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <comp lib="0" loc="(1440,320)" name="Tunnel">
+    <comp lib="0" loc="(1440,300)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="CLOCK"/>
+      <a name="label" val="CLK"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <comp lib="0" loc="(1440,650)" name="Pin">
+    <comp lib="0" loc="(1440,670)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
-      <a name="label" val="CHANNEL"/>
+      <a name="label" val="SELECTOR"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="output" val="true"/>
       <a name="radix" val="16"/>
-      <a name="width" val="9"/>
+      <a name="width" val="10"/>
     </comp>
-    <comp lib="0" loc="(1440,680)" name="Pin">
+    <comp lib="0" loc="(1440,700)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="RST"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="output" val="true"/>
-      <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(1440,710)" name="Pin">
+    <comp lib="0" loc="(1440,730)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="RST_1"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="output" val="true"/>
-      <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(1440,740)" name="Pin">
+    <comp lib="0" loc="(1440,760)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CLK"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="output" val="true"/>
-      <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(1440,770)" name="Pin">
+    <comp lib="0" loc="(1440,790)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CLK_B"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="output" val="true"/>
-      <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(1640,430)" name="Clock"/>
     <comp lib="0" loc="(270,560)" name="Tunnel">
       <a name="label" val="RESET_0"/>
       <a name="labelfont" val="SansSerif bold 10"/>
@@ -1202,7 +1193,7 @@
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
     <comp lib="0" loc="(270,760)" name="Tunnel">
-      <a name="label" val="CLOCK"/>
+      <a name="label" val="CLK"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
     <comp lib="0" loc="(270,790)" name="Tunnel">
@@ -1247,7 +1238,7 @@
     </comp>
     <comp lib="0" loc="(510,760)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="CLOCK"/>
+      <a name="label" val="CLK"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
     <comp lib="0" loc="(510,780)" name="Pull Resistor">
@@ -1319,15 +1310,15 @@
       <a name="negate3" val="true"/>
       <a name="size" val="30"/>
     </comp>
-    <comp lib="10" loc="(1440,320)" name="Digital Oscilloscope">
-      <a name="inputs" val="9"/>
+    <comp lib="10" loc="(1440,300)" name="Digital Oscilloscope">
+      <a name="inputs" val="10"/>
       <a name="nState" val="16"/>
     </comp>
-    <comp lib="12" loc="(610,460)" name="LVC163"/>
-    <comp lib="12" loc="(610,750)" name="LVC163"/>
-    <comp lib="12" loc="(90,560)" name="DS1813"/>
-    <comp lib="12" loc="(910,450)" name="LVC138"/>
-    <comp lib="12" loc="(910,740)" name="LVC138"/>
+    <comp lib="12" loc="(610,460)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(610,750)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(90,560)" name="EconoReset (DS1813)"/>
+    <comp lib="12" loc="(910,450)" name="3-to-8 Decoder (LVC138)"/>
+    <comp lib="12" loc="(910,740)" name="3-to-8 Decoder (LVC138)"/>
     <comp lib="4" loc="(250,670)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
@@ -1337,12 +1328,15 @@
     <wire from="(1050,500)" to="(1220,500)"/>
     <wire from="(1050,530)" to="(1200,530)"/>
     <wire from="(1050,560)" to="(1180,560)"/>
+    <wire from="(1050,590)" to="(1160,590)"/>
     <wire from="(1100,680)" to="(1100,750)"/>
     <wire from="(1120,460)" to="(1310,460)"/>
     <wire from="(1120,490)" to="(1230,490)"/>
     <wire from="(1120,520)" to="(1210,520)"/>
     <wire from="(1120,550)" to="(1190,550)"/>
     <wire from="(1120,580)" to="(1170,580)"/>
+    <wire from="(1160,590)" to="(1160,640)"/>
+    <wire from="(1160,640)" to="(1330,640)"/>
     <wire from="(1170,580)" to="(1170,620)"/>
     <wire from="(1170,620)" to="(1330,620)"/>
     <wire from="(1180,560)" to="(1180,600)"/>
@@ -1362,24 +1356,25 @@
     <wire from="(1230,500)" to="(1330,500)"/>
     <wire from="(1240,470)" to="(1240,480)"/>
     <wire from="(1240,480)" to="(1330,480)"/>
-    <wire from="(1310,460)" to="(1310,640)"/>
-    <wire from="(1310,640)" to="(1330,640)"/>
-    <wire from="(1350,650)" to="(1390,650)"/>
-    <wire from="(1390,600)" to="(1390,650)"/>
-    <wire from="(1390,650)" to="(1440,650)"/>
-    <wire from="(1410,350)" to="(1440,350)"/>
-    <wire from="(1410,380)" to="(1440,380)"/>
-    <wire from="(1410,410)" to="(1440,410)"/>
-    <wire from="(1410,440)" to="(1440,440)"/>
-    <wire from="(1410,470)" to="(1440,470)"/>
-    <wire from="(1410,500)" to="(1440,500)"/>
-    <wire from="(1410,530)" to="(1440,530)"/>
-    <wire from="(1410,560)" to="(1440,560)"/>
-    <wire from="(1410,590)" to="(1440,590)"/>
-    <wire from="(1420,680)" to="(1440,680)"/>
-    <wire from="(1420,710)" to="(1440,710)"/>
-    <wire from="(1420,740)" to="(1440,740)"/>
-    <wire from="(1420,770)" to="(1440,770)"/>
+    <wire from="(1310,460)" to="(1310,660)"/>
+    <wire from="(1310,660)" to="(1330,660)"/>
+    <wire from="(1350,670)" to="(1390,670)"/>
+    <wire from="(1390,610)" to="(1390,670)"/>
+    <wire from="(1390,670)" to="(1440,670)"/>
+    <wire from="(1410,330)" to="(1440,330)"/>
+    <wire from="(1410,360)" to="(1440,360)"/>
+    <wire from="(1410,390)" to="(1440,390)"/>
+    <wire from="(1410,420)" to="(1440,420)"/>
+    <wire from="(1410,450)" to="(1440,450)"/>
+    <wire from="(1410,480)" to="(1440,480)"/>
+    <wire from="(1410,510)" to="(1440,510)"/>
+    <wire from="(1410,540)" to="(1440,540)"/>
+    <wire from="(1410,570)" to="(1440,570)"/>
+    <wire from="(1410,600)" to="(1440,600)"/>
+    <wire from="(1420,700)" to="(1440,700)"/>
+    <wire from="(1420,730)" to="(1440,730)"/>
+    <wire from="(1420,760)" to="(1440,760)"/>
+    <wire from="(1420,790)" to="(1440,790)"/>
     <wire from="(170,670)" to="(170,760)"/>
     <wire from="(170,670)" to="(210,670)"/>
     <wire from="(170,760)" to="(270,760)"/>

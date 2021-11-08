@@ -29,6 +29,7 @@ public class F521Factory
     PORT_P_EQUALS_Q = factory.outputExclusive("P=Q", RIGHT).setInverting().setDrawBar().createPin(8);
 
     return new F521Factory(new ComponentDescription(F521.class.getSimpleName(),
+                                                    F521.TYPE,
                                                     160,
                                                     factory.getPorts()));
   }

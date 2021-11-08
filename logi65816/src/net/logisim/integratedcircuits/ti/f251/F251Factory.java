@@ -31,6 +31,7 @@ public class F251Factory
     PORT_W = factory.outputShared("W", RIGHT).setInverting().setDrawBar().createPin(6);
 
     return new F251Factory(new ComponentDescription(F251.class.getSimpleName(),
+                                                    F251.TYPE,
                                                     160,
                                                     factory.getPorts()));
   }

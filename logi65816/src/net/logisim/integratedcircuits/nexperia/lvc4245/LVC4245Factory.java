@@ -28,6 +28,7 @@ public class LVC4245Factory
     PORT_A = factory.inoutShared("A", 8, RIGHT).setTooltip("Data A (input or output)").createBus(3);
 
     return new LVC4245Factory(new ComponentDescription(LVC4245.class.getSimpleName(),
+                                                       LVC4245.TYPE,
                                                        160,
                                                        factory.getPorts()));
   }

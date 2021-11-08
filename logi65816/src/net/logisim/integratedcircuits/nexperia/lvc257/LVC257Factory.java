@@ -33,6 +33,7 @@ public class LVC257Factory
     PORT_Y = factory.inoutShared("Y", 4, RIGHT).createBus(3);
 
     return new LVC257Factory(new ComponentDescription(LVC257.class.getSimpleName(),
+                                                      LVC257.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

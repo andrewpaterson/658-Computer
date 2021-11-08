@@ -56,6 +56,7 @@ public class W65C816Factory
     PORT_BE = factory.inputShared("BE", RIGHT).setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low").index();
 
     return new W65C816Factory(new ComponentDescription(W65C816.class.getSimpleName(),
+                                                       W65C816.TYPE,
                                                        240,
                                                        240,
                                                        factory.getPorts()));

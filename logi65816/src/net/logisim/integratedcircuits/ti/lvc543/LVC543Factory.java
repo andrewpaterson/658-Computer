@@ -39,6 +39,7 @@ public class LVC543Factory
     PORT_CEB[B] = factory.inputShared("CEBA", RIGHT).setInverting().setDrawBar().createPin(2);
 
     return new LVC543Factory(new ComponentDescription(LVC543.class.getSimpleName(),
+                                                      LVC543.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

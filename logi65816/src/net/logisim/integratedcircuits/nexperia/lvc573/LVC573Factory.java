@@ -29,6 +29,7 @@ public class LVC573Factory
     PORT_Q = factory.outputShared("Q", 8, RIGHT).setTooltip("Output Q (output)").createBus(2);
 
     return new LVC573Factory(new ComponentDescription(LVC573.class.getSimpleName(),
+                                                      LVC573.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

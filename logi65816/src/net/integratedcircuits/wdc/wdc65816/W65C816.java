@@ -15,6 +15,8 @@ import static net.util.StringUtil.*;
 public class W65C816
     extends IntegratedCircuit<W65C816Snapshot, W65C816Pins>
 {
+  public static final String TYPE = "Microprocessor";
+
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
   protected static Instruction abortOpcode;
@@ -2167,7 +2169,7 @@ public class W65C816
   @Override
   public String getType()
   {
-    return "Microprocessor";
+    return TYPE;
   }
 
   public String getCycleString(W65C816Snapshot snapshot)

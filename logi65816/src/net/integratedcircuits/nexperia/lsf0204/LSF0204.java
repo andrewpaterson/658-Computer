@@ -7,6 +7,8 @@ import net.common.PinValue;
 public class LSF0204
     extends IntegratedCircuit<LSF0204Snapshot, LSF0204Pins>
 {
+  public static final String TYPE = "4-bit Translator";
+
   public LSF0204(String name, LSF0204Pins pins)
   {
     super(name, pins);
@@ -48,7 +50,7 @@ public class LSF0204
   @Override
   public String getType()
   {
-    return "4-bit Translator";
+    return TYPE;
   }
 }
 

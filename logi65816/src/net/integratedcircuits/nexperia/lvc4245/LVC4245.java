@@ -10,7 +10,7 @@ import static net.integratedcircuits.nexperia.lvc4245.LVC4245Pins.PORT_B_INDEX;
 public class LVC4245
     extends IntegratedCircuit<LVC4245Snapshot, LVC4245Pins>
 {
-  public static final String TYPE = "Bus Transceiver";
+  public static final String TYPE = "8-bit Bus Transceiver";
 
   private PinValue direction;
 

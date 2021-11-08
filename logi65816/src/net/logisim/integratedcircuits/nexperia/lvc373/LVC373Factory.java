@@ -29,6 +29,7 @@ public class LVC373Factory
     PORT_Q = factory.outputShared("Q", 8, RIGHT).setTooltip("Output Q (output)").createBus(2);
 
     return new LVC373Factory(new ComponentDescription(LVC373.class.getSimpleName(),
+                                                      LVC373.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

@@ -30,6 +30,7 @@ public class LVC541Factory
     PORT_Y = factory.outputShared("Y", 8, RIGHT).createBus(3);
 
     return new LVC541Factory(new ComponentDescription(LVC541.class.getSimpleName(),
+                                                      LVC541.TYPE,
                                                       160,
                                                       factory.getPorts()));
   }

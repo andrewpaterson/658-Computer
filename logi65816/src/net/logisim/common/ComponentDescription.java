@@ -23,13 +23,16 @@ public class ComponentDescription
   protected final int pinStartY;
 
   protected final String name;
+  protected final String type;
   protected final List<PortDescription> ports;
 
   public ComponentDescription(String name,
+                              String type,
                               int width,
                               List<PortDescription> ports)
   {
     this(name,
+         type,
          width,
          height(Math.max(getPorts(ports, LEFT).size(),
                          getPorts(ports, RIGHT).size())),
@@ -37,6 +40,7 @@ public class ComponentDescription
   }
 
   public ComponentDescription(String name,
+                              String type,
                               int width,
                               int height,
                               List<PortDescription> ports)
@@ -47,6 +51,7 @@ public class ComponentDescription
     this.pinsPerSide = Math.max(leftPorts.size(), rightPorts.size());
 
     this.name = name;
+    this.type = type;
 
     this.verticalMargin = 10;
     this.leftX = -(width / 2);
@@ -181,6 +186,11 @@ public class ComponentDescription
   public int getPortY(PortDescription portDescription)
   {
     return getPinStartY() + portDescription.getOffset() * pixelsPerPin();
+  }
+
+  public String getType()
+  {
+    return type;
   }
 }
 

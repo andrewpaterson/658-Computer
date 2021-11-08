@@ -856,24 +856,24 @@
     <comp lib="1" loc="(680,40)" name="AND Gate">
       <a name="size" val="30"/>
     </comp>
-    <comp lib="12" loc="(1020,380)" name="LVC161"/>
-    <comp lib="12" loc="(1150,1140)" name="LVC573"/>
-    <comp lib="12" loc="(1150,1280)" name="LVC573"/>
-    <comp lib="12" loc="(1170,670)" name="LVC161"/>
-    <comp lib="12" loc="(1200,160)" name="LVC573"/>
-    <comp lib="12" loc="(1200,60)" name="LVC573"/>
-    <comp lib="12" loc="(1290,380)" name="LVC161"/>
-    <comp lib="12" loc="(1470,670)" name="LVC16373"/>
-    <comp lib="12" loc="(1470,930)" name="LVC164245"/>
-    <comp lib="12" loc="(1490,1140)" name="F521"/>
-    <comp lib="12" loc="(1490,1280)" name="F521"/>
-    <comp lib="12" loc="(1610,450)" name="LVC16244"/>
-    <comp lib="12" loc="(360,670)" name="LVC161"/>
-    <comp lib="12" loc="(480,380)" name="LVC161"/>
-    <comp lib="12" loc="(630,670)" name="LVC161"/>
-    <comp lib="12" loc="(750,380)" name="LVC161"/>
-    <comp lib="12" loc="(820,1180)" name="LVC257"/>
-    <comp lib="12" loc="(900,670)" name="LVC161"/>
+    <comp lib="12" loc="(1020,380)" name="4-bit Counter (LVC161)"/>
+    <comp lib="12" loc="(1150,1140)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(1150,1280)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(1170,670)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(1200,160)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(1200,60)" name="8-bit Latch (LVC573)"/>
+    <comp lib="12" loc="(1290,380)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(1470,670)" name="16-bit Bus Transceiver (LVC164245)"/>
+    <comp lib="12" loc="(1470,930)" name="16-bit Bus Transceiver (LVC164245)"/>
+    <comp lib="12" loc="(1490,1140)" name="8-bit Comparator (F521)"/>
+    <comp lib="12" loc="(1490,1280)" name="8-bit Comparator (F521)"/>
+    <comp lib="12" loc="(1610,450)" name="16-bit Line Driver (LVC16244)"/>
+    <comp lib="12" loc="(360,670)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(480,380)" name="4-bit Counter (LVC161)"/>
+    <comp lib="12" loc="(630,670)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(750,380)" name="4-bit Counter (LVC161)"/>
+    <comp lib="12" loc="(820,1180)" name="4-bit Multiplexer (LVC257)"/>
+    <comp lib="12" loc="(900,670)" name="4-bit Counter (LVC163)"/>
     <comp lib="4" loc="(340,1080)" name="RAM">
       <a name="addrWidth" val="24"/>
       <a name="appearance" val="classic"/>
@@ -1208,7 +1208,7 @@
     <comp lib="10" loc="(410,380)" name="Digital Oscilloscope">
       <a name="inputs" val="1"/>
     </comp>
-    <comp lib="12" loc="(150,80)" name="DS1813"/>
+    <comp lib="12" loc="(150,80)" name="EconoReset (DS1813)"/>
     <comp lib="4" loc="(240,190)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
@@ -1280,8 +1280,8 @@
       <a name="output" val="true"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="12" loc="(500,260)" name="LVC163"/>
-    <comp lib="12" loc="(860,240)" name="LVC138"/>
+    <comp lib="12" loc="(500,260)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(860,240)" name="3-to-8 Decoder (LVC138)"/>
     <wire from="(310,240)" to="(380,240)"/>
     <wire from="(310,270)" to="(420,270)"/>
     <wire from="(380,210)" to="(380,240)"/>

@@ -24,7 +24,7 @@ public class LVC257Factory
     PortFactory factory = new PortFactory();
 
     PORT_OEB = factory.inputShared("1OE", LEFT).setInverting().setDrawBar().createPin(3);
-    PORT_S = factory.inputShared("S", LEFT).createPin(3);
+    PORT_S = factory.inputShared("S", LEFT).setTooltip("Input select (input: I0 low, I1 high").createPin(3);
     PORT_INPUT[0] = factory.inputShared("I0", 4, LEFT).createBus(3);
     PORT_INPUT[1] = factory.inputShared("I1", 4, LEFT).createBus(3);
 

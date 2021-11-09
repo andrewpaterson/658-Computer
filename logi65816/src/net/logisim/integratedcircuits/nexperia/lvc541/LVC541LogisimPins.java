@@ -20,7 +20,7 @@ public class LVC541LogisimPins
   @Override
   public void setYError()
   {
-    setError(PORT_A);
+    setError(PORT_Y);
   }
 
   @Override

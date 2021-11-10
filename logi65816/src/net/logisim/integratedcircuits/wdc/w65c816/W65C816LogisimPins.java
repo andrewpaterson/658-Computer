@@ -41,6 +41,13 @@ public class W65C816LogisimPins
   }
 
   @Override
+  public int peekData()
+  {
+    int value = (int) instanceState.getPortValue(PORT_DataBus).toLongValue();
+    return toByte(value);
+  }
+
+  @Override
   public void setData(int data)
   {
     if (getCpu().isBusEnable())

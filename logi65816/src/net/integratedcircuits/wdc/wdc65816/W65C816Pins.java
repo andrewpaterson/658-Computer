@@ -9,6 +9,8 @@ public interface W65C816Pins
 
   int getData();
 
+  int peekData();
+
   void setData(int data);
 
   void setBank(int data);

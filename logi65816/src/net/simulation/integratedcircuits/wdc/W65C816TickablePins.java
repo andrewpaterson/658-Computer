@@ -184,6 +184,13 @@ public class W65C816TickablePins
   }
 
   @Override
+  public int peekData()
+  {
+    dataBus.read();
+    return (int) dataBus.getPinsAsBoolAfterRead();
+  }
+
+  @Override
   public void setData(int data)
   {
     if (getCpu().isBusEnable())

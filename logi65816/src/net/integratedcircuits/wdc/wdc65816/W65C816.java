@@ -5,6 +5,7 @@ import net.integratedcircuits.wdc.wdc65816.instruction.BusCycle;
 import net.integratedcircuits.wdc.wdc65816.instruction.Instruction;
 import net.integratedcircuits.wdc.wdc65816.instruction.InstructionFactory;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.InstructionCycles;
+import net.integratedcircuits.wdc.wdc65816.instruction.operations.DataOperation;
 import net.util.EmulatorException;
 import net.util.IntUtil;
 
@@ -68,12 +69,14 @@ public class W65C816
   protected int data;
   protected int directOffset;
   protected Address newProgramCounter;
-  protected boolean read;
   protected boolean busEnable;
 
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
+
+  protected int time;
+  protected W65C816Timing timing;
 
   public W65C816(String name, W65C816Pins pins)
   {
@@ -118,7 +121,9 @@ public class W65C816
     directOffset = 0;
     newProgramCounter = new Address();
     address = new Address();
-    read = true;
+
+    timing = new W65C816Timing();
+    time = 0;
 
     createAbortValues();
   }
@@ -336,6 +341,8 @@ public class W65C816
   {
     boolean currentClock = getPins().isClock();
 
+    updateTimingValues();
+
     fallingEdge = !currentClock && this.clock;
     risingEdge = currentClock && !this.clock;
     clock = currentClock;
@@ -355,6 +362,9 @@ public class W65C816
       getPins().disableBusses();
     }
 
+    int data = getPins().peekData();
+    System.out.println("W65C816.tick Data: " + Integer.toHexString(data) + " Time: " + time);
+
     if (!fallingEdge && !risingEdge || stopped)
     {
       return;
@@ -367,6 +377,8 @@ public class W65C816
 
     if (fallingEdge)
     {
+      time = 0;
+
       abort = getPins().isAbort() || abort;
       irq = getPins().isIRQ() || irq;
       nmi = getPins().isNMI() || nmi;
@@ -383,6 +395,19 @@ public class W65C816
     }
   }
 
+  private void updateTimingValues()
+  {
+    long timingValue = getPins().getTimingValue();
+    if (timingValue == -1)
+    {
+      timing.setNotConnected();
+    }
+    else
+    {
+      timing.setFromLong(timingValue);
+    }
+  }
+
   public BusCycle getBusCycle()
   {
     InstructionCycles cycles = opCode.getCycles();
@@ -394,14 +419,14 @@ public class W65C816
     return stopped;
   }
 
-  public void setRead(boolean read)
-  {
-    this.read = read;
-  }
-
   public boolean isRead()
   {
-    return read;
+    return getDataOperation().isRead();
+  }
+
+  private DataOperation getDataOperation()
+  {
+    return getBusCycle().getDataOperation();
   }
 
   public boolean isMemory8Bit()
@@ -2096,7 +2121,6 @@ public class W65C816
                                data,
                                directOffset,
                                new Address(newProgramCounter),
-                               read,
                                abortProcessRegister,
                                abortAccumulator,
                                abortXIndex,
@@ -2104,7 +2128,8 @@ public class W65C816
                                abortDataBank,
                                abortDirectPage,
                                new Address(abortProgramCounter),
-                               abortStackPointer);
+                               abortStackPointer,
+                               time);
   }
 
   public void restoreFromSnapshot(W65C816Snapshot snapshot)
@@ -2153,7 +2178,8 @@ public class W65C816
     data = snapshot.data;
     directOffset = snapshot.directOffset;
     newProgramCounter = new Address(snapshot.newProgramCounter);
-    read = snapshot.read;
+
+    time = snapshot.time;
   }
 
   public boolean isBusEnable()
@@ -2175,6 +2201,12 @@ public class W65C816
   public String getCycleString(W65C816Snapshot snapshot)
   {
     return snapshot != null ? Integer.toString(snapshot.cycle) : Integer.toString(cycle);
+  }
+
+  @Override
+  public void doneTick()
+  {
+    time++;
   }
 }
 

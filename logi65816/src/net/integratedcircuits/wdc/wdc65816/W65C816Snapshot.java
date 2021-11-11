@@ -46,7 +46,6 @@ public class W65C816Snapshot
   public int data;
   public int directOffset;
   public Address newProgramCounter;
-  public boolean read;
 
   public int abortProcessRegister;
   public int abortAccumulator;
@@ -56,6 +55,8 @@ public class W65C816Snapshot
   public int abortDirectPage;
   public Address abortProgramCounter;
   public int abortStackPointer;
+
+  public int time;
 
   public W65C816Snapshot(boolean zeroFlag,
                          boolean negativeFlag,
@@ -89,7 +90,6 @@ public class W65C816Snapshot
                          int data,
                          int directOffset,
                          Address newProgramCounter,
-                         boolean read,
                          int abortProcessRegister,
                          int abortAccumulator,
                          int abortXIndex,
@@ -97,7 +97,8 @@ public class W65C816Snapshot
                          int abortDataBank,
                          int abortDirectPage,
                          Address abortProgramCounter,
-                         int abortStackPointer)
+                         int abortStackPointer,
+                         int time)
   {
     this.zeroFlag = zeroFlag;
     this.negativeFlag = negativeFlag;
@@ -132,7 +133,6 @@ public class W65C816Snapshot
     this.data = data;
     this.directOffset = directOffset;
     this.newProgramCounter = newProgramCounter;
-    this.read = read;
 
     this.abortProcessRegister = abortProcessRegister;
     this.abortAccumulator = abortAccumulator;
@@ -142,6 +142,7 @@ public class W65C816Snapshot
     this.abortDirectPage = abortDirectPage;
     this.abortProgramCounter = abortProgramCounter;
     this.abortStackPointer = abortStackPointer;
+    this.time = time;
   }
 }
 

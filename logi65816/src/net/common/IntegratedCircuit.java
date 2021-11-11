@@ -26,6 +26,10 @@ public abstract class IntegratedCircuit<SNAPSHOT extends Snapshot, PINS extends 
 
   public abstract void tick();
 
+  public void doneTick()
+  {
+  }
+
   public SNAPSHOT createSnapshot()
   {
     return null;

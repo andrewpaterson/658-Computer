@@ -138,6 +138,12 @@ public class W65C816TickablePins
   }
 
   @Override
+  public long getTimingValue()
+  {
+    return -1;
+  }
+
+  @Override
   public void setAddress(int address)
   {
     if (getCpu().isBusEnable())

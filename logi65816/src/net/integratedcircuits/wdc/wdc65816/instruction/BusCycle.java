@@ -16,6 +16,7 @@ public class BusCycle
 {
   protected List<AddressOffset> addressOffsets;
   protected List<Operation> operations;
+  protected DataOperation dataOperation;
   protected int cycle;
 
   public BusCycle(AddressOffset[] addressOffsets, Operation... operations)
@@ -25,6 +26,14 @@ public class BusCycle
     this.cycle = -1;
 
     validate();
+
+    for (Operation operation : operations)
+    {
+      if (operation.isData())
+      {
+        dataOperation = (DataOperation) operation;
+      }
+    }
   }
 
   private void validate()
@@ -92,8 +101,6 @@ public class BusCycle
     boolean read = dataOperation.isRead();
     Address address = getAddress(cpu);
 
-    cpu.setRead(read);
-
     W65C816Pins pins = cpu.getPins();
     pins.setMX(cpu.isIndex8Bit());
     pins.setRWB(read);
@@ -112,8 +119,6 @@ public class BusCycle
     DataOperation dataOperation = getDataOperation();
     boolean read = dataOperation.isRead();
     Address address = getAddress(cpu);
-
-    cpu.setRead(read);
 
     W65C816Pins pins = cpu.getPins();
     pins.setRWB(read);

@@ -142,6 +142,11 @@ public class ComponentDescription
     return botY - verticalMargin - 5;
   }
 
+  public int getBottomY()
+  {
+    return botY;
+  }
+
   public int pixelsPerPin()
   {
     return PIXELS_PER_PIN;

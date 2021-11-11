@@ -1,5 +1,6 @@
 package net.integratedcircuits.wdc.wdc65816;
 
+import net.common.BusValue;
 import net.common.Pins;
 
 public interface W65C816Pins
@@ -44,5 +45,7 @@ public interface W65C816Pins
   void disableBusses();
 
   boolean isClock();
+
+  long getTimingValue();
 }
 

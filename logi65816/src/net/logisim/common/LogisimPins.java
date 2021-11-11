@@ -66,6 +66,7 @@ public abstract class LogisimPins<
     painterSnapshots.set(1, painterSnapshots.get(0));
     painterSnapshots.set(0, snapshot);
     snapshot = null;
+    getIntegratedCircuit().doneTick();
   }
 
   public void setInstanceState(InstanceState instanceState)

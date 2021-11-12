@@ -56,8 +56,6 @@ public class W65C816Snapshot
   public Address abortProgramCounter;
   public int abortStackPointer;
 
-  public int time;
-
   public W65C816Snapshot(boolean zeroFlag,
                          boolean negativeFlag,
                          boolean decimalFlag,
@@ -97,8 +95,7 @@ public class W65C816Snapshot
                          int abortDataBank,
                          int abortDirectPage,
                          Address abortProgramCounter,
-                         int abortStackPointer,
-                         int time)
+                         int abortStackPointer)
   {
     this.zeroFlag = zeroFlag;
     this.negativeFlag = negativeFlag;
@@ -142,7 +139,6 @@ public class W65C816Snapshot
     this.abortDirectPage = abortDirectPage;
     this.abortProgramCounter = abortProgramCounter;
     this.abortStackPointer = abortStackPointer;
-    this.time = time;
   }
 }
 

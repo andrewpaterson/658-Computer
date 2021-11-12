@@ -365,11 +365,28 @@ public class W65C816
     int data = getPins().peekData();
     System.out.println("W65C816.tick Data: " + Integer.toHexString(data) + " Time: " + time);
 
-    if (!fallingEdge && !risingEdge || stopped)
+    if (timing.notConnected)
     {
-      return;
-    }
+      if (!fallingEdge && !risingEdge || stopped)
+      {
+        return;
+      }
 
+      tickDisconnectedTiming();
+    }
+    else
+    {
+      if (stopped)
+      {
+        return;
+      }
+
+
+    }
+  }
+
+  private void tickDisconnectedTiming()
+  {
     while (!getBusCycle().mustExecute(this))
     {
       nextCycle();
@@ -2128,8 +2145,7 @@ public class W65C816
                                abortDataBank,
                                abortDirectPage,
                                new Address(abortProgramCounter),
-                               abortStackPointer,
-                               time);
+                               abortStackPointer);
   }
 
   public void restoreFromSnapshot(W65C816Snapshot snapshot)
@@ -2178,8 +2194,6 @@ public class W65C816
     data = snapshot.data;
     directOffset = snapshot.directOffset;
     newProgramCounter = new Address(snapshot.newProgramCounter);
-
-    time = snapshot.time;
   }
 
   public boolean isBusEnable()
@@ -2207,6 +2221,11 @@ public class W65C816
   public void doneTick()
   {
     time++;
+  }
+
+  public int getTime()
+  {
+    return time / 2;
   }
 }
 

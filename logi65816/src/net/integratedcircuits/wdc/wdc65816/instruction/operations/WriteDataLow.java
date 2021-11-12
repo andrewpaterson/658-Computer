@@ -13,7 +13,7 @@ public class WriteDataLow
   @Override
   public void execute(W65C816 cpu)
   {
-    setPinData(cpu, cpu.getDataLow());
+    cpu.writePinData(cpu.getDataLow());
   }
 
   @Override

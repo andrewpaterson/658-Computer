@@ -75,6 +75,7 @@ public class W65C816
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
+  protected int pinData;
 
   protected W65C816Timing timing;
   protected int time;
@@ -116,6 +117,8 @@ public class W65C816
 
     stopped = false;
     busEnable = true;
+
+    pinData = 0;
     clock = false;
     cycle = 0;
     opCode = resetOpcode;
@@ -390,8 +393,29 @@ public class W65C816
 
   private void tickWithConnectedTiming()
   {
-    tickWithDisconnectedTiming();
-//    if (time >= timing.addressOutStart)
+    DataOperation dataOperation = getDataOperation();
+    BusCycle busCycle = getBusCycle();
+    boolean read = dataOperation.isRead();
+    W65C816Pins pins = getPins();
+
+    if (timing.addressOut.timeIn(time))
+    {
+      Address address = busCycle.getAddress(this);
+      pins.setAddress(address.getOffset());
+    }
+    else
+    {
+      pins.setAddressUnknown();
+    }
+
+    if (timing.bankOut.timeIn(time))
+    {
+      pins.setBank(address.getBank());
+    }
+    else if (!read && timing.writeDataOut.timeIn(time))
+    {
+
+    }
   }
 
   private void tickWithDisconnectedTiming()
@@ -426,9 +450,9 @@ public class W65C816
     DataOperation dataOperation = getDataOperation();
     BusCycle busCycle = getBusCycle();
     boolean read = dataOperation.isRead();
+    W65C816Pins pins = getPins();
     Address address = busCycle.getAddress(this);
 
-    W65C816Pins pins = getPins();
     pins.setMX(isIndex8Bit());
     pins.setRWB(read);
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
@@ -446,9 +470,14 @@ public class W65C816
     DataOperation dataOperation = getDataOperation();
     BusCycle busCycle = getBusCycle();
     boolean read = dataOperation.isRead();
+    W65C816Pins pins = getPins();
     Address address = busCycle.getAddress(this);
 
-    W65C816Pins pins = getPins();
+    if (read)
+    {
+      pinData = pins.getData();
+    }
+
     pins.setRWB(read);
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
     pins.setMX(isMemory8Bit());
@@ -462,6 +491,11 @@ public class W65C816
     for (Operation operation : busCycle.getOperations())
     {
       operation.execute(this);
+    }
+
+    if (!read)
+    {
+      pins.setData(pinData);
     }
 
     nextCycle();
@@ -2188,6 +2222,7 @@ public class W65C816
                                clock,
                                fallingEdge,
                                risingEdge,
+                               pinData,
                                reset,
                                irq,
                                nmi,
@@ -2236,6 +2271,8 @@ public class W65C816
     clock = snapshot.clock;
     fallingEdge = snapshot.fallingEdge;
     risingEdge = snapshot.risingEdge;
+    pinData = snapshot.pinData;
+
     reset = snapshot.reset;
     irq = snapshot.irq;
     nmi = snapshot.nmi;
@@ -2286,6 +2323,16 @@ public class W65C816
   public int getTime()
   {
     return time - 1;
+  }
+
+  public void writePinData(int data)
+  {
+    pinData = data;
+  }
+
+  public int readPinData()
+  {
+    return pinData;
   }
 }
 

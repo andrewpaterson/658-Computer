@@ -2,30 +2,28 @@ package net.integratedcircuits.wdc.wdc65816;
 
 public class W65C816Timing
 {
-  public int addressOutStart;
-  public int addressOutStop;  //Inclusive
-
-  public int bankOutStart;
-  public int bankOutStop;  //Inclusive
-
-  public int writeDataOutStart;
-  public int writeDataOutStop;  //Inclusive
-
-  public int readDataRequiredStart;
-  public int readDataRequiredStop;  //Inclusive
-
-  public int mOutStart;
-  public int mOutStop;  //Inclusive
-
-  public int xOutStart;
-  public int xOutStop;  //Inclusive
+  public TimeRange addressOut;
+  public TimeRange bankOut;
+  public TimeRange writeDataOut;
+  public TimeRange readDataRequired;
+  public TimeRange mOut;
+  public TimeRange xOut;
 
   public boolean notConnected;
 
   public W65C816Timing()
   {
+    this.addressOut = new TimeRange();
+    this.bankOut = new TimeRange();
+    this.writeDataOut = new TimeRange();
+    this.readDataRequired = new TimeRange();
+    this.mOut = new TimeRange();
+    this.xOut = new TimeRange();
+
     notConnected = true;
   }
+
+
 
   public void set(int addressOutStart,
                   int addressOutStop,
@@ -42,18 +40,12 @@ public class W65C816Timing
   {
     notConnected = false;
 
-    this.addressOutStart = addressOutStart;
-    this.addressOutStop = addressOutStop;
-    this.bankOutStart = bankOutStart;
-    this.bankOutStop = bankOutStop;
-    this.writeDataOutStart = writeDataOutStart;
-    this.writeDataOutStop = writeDataOutStop;
-    this.readDataRequiredStart = readDataRequiredStart;
-    this.readDataRequiredStop = readDataRequiredStop;
-    this.mOutStart = mOutStart;
-    this.mOutStop = mOutStop;
-    this.xOutStart = xOutStart;
-    this.xOutStop = xOutStop;
+    this.addressOut.set(addressOutStart, addressOutStop);
+    this.bankOut.set(bankOutStart, bankOutStop);
+    this.writeDataOut.set(writeDataOutStart, writeDataOutStop);
+    this.readDataRequired.set(readDataRequiredStart, readDataRequiredStop);
+    this.mOut.set(mOutStart, mOutStop);
+    this.xOut.set(xOutStart, xOutStop);
   }
 
   public void setFromLong(long timingValue)
@@ -74,7 +66,7 @@ public class W65C816Timing
 
   private int get4Bit(int index, long value)
   {
-    int shift =  index * 4;
+    int shift = index * 4;
     value = value >> shift;
     return (int) (value & 0xf);
   }

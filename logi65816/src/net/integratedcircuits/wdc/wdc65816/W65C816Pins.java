@@ -1,12 +1,13 @@
 package net.integratedcircuits.wdc.wdc65816;
 
-import net.common.BusValue;
 import net.common.Pins;
 
 public interface W65C816Pins
     extends Pins<W65C816Snapshot, W65C816Pins, W65C816>
 {
   void setAddress(int address);
+
+  void setAddressUnknown();
 
   int getData();
 

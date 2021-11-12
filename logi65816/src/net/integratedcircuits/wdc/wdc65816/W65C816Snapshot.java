@@ -35,6 +35,7 @@ public class W65C816Snapshot
   public boolean clock;
   public boolean fallingEdge;
   public boolean risingEdge;
+  public int pinData;
 
   public int cycle;
   public Instruction opCode;
@@ -79,6 +80,7 @@ public class W65C816Snapshot
                          boolean clock,
                          boolean fallingEdge,
                          boolean risingEdge,
+                         int pinData,
                          boolean reset,
                          boolean irq,
                          boolean nmi,
@@ -119,9 +121,12 @@ public class W65C816Snapshot
     this.directPage = directPage;
     this.programCounter = programCounter;
     this.stackPointer = stackPointer;
+
     this.clock = clock;
     this.fallingEdge = fallingEdge;
     this.risingEdge = risingEdge;
+    this.pinData = pinData;
+
     this.reset = reset;
     this.irq = irq;
     this.nmi = nmi;

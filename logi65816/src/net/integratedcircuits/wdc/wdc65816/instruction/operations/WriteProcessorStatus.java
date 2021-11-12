@@ -13,7 +13,7 @@ public class WriteProcessorStatus
   @Override
   public void execute(W65C816 cpu)
   {
-    setPinData(cpu, cpu.getProcessorRegisterValue());
+    cpu.writePinData(cpu.getProcessorRegisterValue());
   }
 
   @Override

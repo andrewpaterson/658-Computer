@@ -159,6 +159,15 @@ public class W65C816TickablePins
   }
 
   @Override
+  public void setAddressUnknown()
+  {
+    if (getCpu().isBusEnable())
+    {
+      this.addressBus.unset();
+    }
+  }
+
+  @Override
   public int getData()
   {
     if (getCpu().isRead())

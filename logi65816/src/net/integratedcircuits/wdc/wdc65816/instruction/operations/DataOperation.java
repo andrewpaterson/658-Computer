@@ -62,15 +62,5 @@ public abstract class DataOperation
   {
     return false;
   }
-
-  protected int getPinData(W65C816 cpu)
-  {
-    return cpu.getPins().getData();
-  }
-
-  protected void setPinData(W65C816 cpu, int data)
-  {
-    cpu.getPins().setData(data);
-  }
 }
 

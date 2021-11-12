@@ -13,7 +13,7 @@ public class WriteProgramBank
   @Override
   public void execute(W65C816 cpu)
   {
-    setPinData(cpu, cpu.getProgramCounter().getBank());
+    cpu.writePinData(cpu.getProgramCounter().getBank());
   }
 
   @Override

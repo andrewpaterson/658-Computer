@@ -26,6 +26,15 @@ public class W65C816LogisimPins
   }
 
   @Override
+  public void setAddressUnknown()
+  {
+    if (getCpu().isBusEnable())
+    {
+      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
+    }
+  }
+
+  @Override
   public int getData()
   {
     if (getCpu().isBusEnable())

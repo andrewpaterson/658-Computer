@@ -13,9 +13,9 @@ public class ReadAbsoluteAddressBank
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setAddressBank(getPinData(cpu));
+    cpu.setAddressBank(cpu.readPinData());
   }
-
+  
   @Override
   public String toString()
   {

@@ -41,6 +41,7 @@ public class W65C816Snapshot
   public Instruction opCode;
   public boolean stopped;
   public boolean busEnable;
+  public boolean nextInstruction;
 
   //These are not the values on the pins, they are internal data.
   public Address address;
@@ -86,6 +87,7 @@ public class W65C816Snapshot
                          boolean nmi,
                          boolean abort,
                          boolean busEnable,
+                         boolean nextInstruction,
                          int cycle,
                          Instruction opCode,
                          boolean stopped,
@@ -136,6 +138,8 @@ public class W65C816Snapshot
     this.opCode = opCode;
     this.stopped = stopped;
     this.busEnable = busEnable;
+    this.nextInstruction = nextInstruction;
+
     this.address = address;
     this.data = data;
     this.directOffset = directOffset;

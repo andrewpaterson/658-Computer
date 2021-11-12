@@ -7,9 +7,12 @@ public class DS1813
 {
   public static final String TYPE = "EconoReset";
 
+  public int stretch;
+
   public DS1813(String name, DS1813Pins pins)
   {
     super(name, pins);
+    stretch = 9;
   }
 
   @Override
@@ -37,7 +40,12 @@ public class DS1813
 
   public int getResetTickCount()
   {
-    return 5;
+    return 5 * stretch;
+  }
+
+  public int getStretch()
+  {
+    return stretch;
   }
 }
 

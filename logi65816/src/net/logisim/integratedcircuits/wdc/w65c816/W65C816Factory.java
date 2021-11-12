@@ -51,7 +51,7 @@ public class W65C816Factory
     PORT_E = factory.outputExclusive("E", LEFT).setTooltip("Emulation mode (output: emulation high, native low)").index();
     PORT_MLB = factory.outputExclusive("MLB", LEFT).setInverting().setTooltip("Memory lock (output: read-modify-write low)").index();
     factory.blank(LEFT);
-    PORT_TimingBus = factory.inputShared("", 48, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
+    PORT_TimingBus = factory.inputShared("", 64, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
 
     factory.blank(RIGHT);
     factory.blank(RIGHT);

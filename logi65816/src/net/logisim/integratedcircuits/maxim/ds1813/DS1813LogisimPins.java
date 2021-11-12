@@ -17,12 +17,13 @@ public class DS1813LogisimPins
   public void setOut()
   {
     int tickCount = instanceState.getTickCount();
-    int resetTickCount = getIntegratedCircuit().getResetTickCount();
+    DS1813 econoReset = getIntegratedCircuit();
+    int resetTickCount = econoReset.getResetTickCount();
     boolean value = tickCount > resetTickCount;
     instanceState.setPort(DS1813Factory.PORT_RSTB, value ? Value.TRUE : Value.FALSE, 20);
 
     int width = Math.min(tickCount, resetTickCount + 1);
-    resetString = StringUtil.pad(width, "-");
+    resetString = StringUtil.pad(width / econoReset.getStretch(), "-");
 
   }
 

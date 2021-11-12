@@ -71,6 +71,7 @@ public class W65C816
   protected int directOffset;
   protected Address newProgramCounter;
   protected boolean busEnable;
+  protected boolean nextInstruction;
 
   protected boolean clock;
   protected boolean fallingEdge;
@@ -117,6 +118,7 @@ public class W65C816
 
     stopped = false;
     busEnable = true;
+    nextInstruction = false;
 
     pinData = 0;
     clock = false;
@@ -352,96 +354,188 @@ public class W65C816
     risingEdge = currentClock && !this.clock;
     clock = currentClock;
 
-    reset = getPins().isReset();
-    busEnable = getPins().isBusEnable();
-
-    if (reset)
-    {
-      opCode = resetOpcode;
-      stopped = false;
-      cycle = 0;
-    }
-
-    if (!busEnable)
-    {
-      getPins().disableBusses();
-    }
-
-    int data = getPins().peekData();
-    System.out.println("W65C816.tick Data: " + Integer.toHexString(data) + " Time: " + getTime());
-
     if (timing.notConnected)
     {
-      if ((fallingEdge || risingEdge) && !stopped)
+      reset = getPins().isReset();
+      busEnable = getPins().isBusEnable();
+
+      if (reset)
       {
-        tickWithDisconnectedTiming();
+        opCode = resetOpcode;
+        stopped = false;
+        cycle = 0;
       }
+
+      if (!busEnable)
+      {
+        getPins().disableBusses();
+      }
+
+      tickWithDisconnectedTiming();
     }
     else
     {
-      if (!stopped)
+      busEnable = getPins().isBusEnable();
+
+      if (reset)
       {
-        tickWithConnectedTiming();
+        opCode = resetOpcode;
+        stopped = false;
+        cycle = 0;
       }
+
+      if (!busEnable)
+      {
+        getPins().disableBusses();
+      }
+
+      int data = getPins().peekData();
+      System.out.println("W65C816.tick Data: " + Integer.toHexString(data) + " Time: " + getTime());
+
+      tickWithConnectedTiming();
     }
 
     if (timeMustTick)
     {
+      if (fallingEdge)
+      {
+        time = 0;
+      }
       time++;
     }
   }
 
   private void tickWithConnectedTiming()
   {
-    DataOperation dataOperation = getDataOperation();
-    BusCycle busCycle = getBusCycle();
-    boolean read = dataOperation.isRead();
-    W65C816Pins pins = getPins();
+    if (!stopped)
+    {
+      DataOperation dataOperation = getDataOperation();
+      BusCycle busCycle = getBusCycle();
+      boolean read = dataOperation == null || dataOperation.isRead();
+      boolean write = !read;
+      W65C816Pins pins = getPins();
 
-    if (timing.addressOut.timeIn(time))
-    {
-      Address address = busCycle.getAddress(this);
-      pins.setAddress(address.getOffset());
-    }
-    else
-    {
-      pins.setAddressUnknown();
-    }
+      if ((time == timing.writeDataOut.start - 1) && write)
+      {
+        System.out.println("W65C816.tickWithConnectedTiming: Execute Write");
+        executeOperation();
+      }
 
-    if (timing.bankOut.timeIn(time))
-    {
-      pins.setBank(address.getBank());
-    }
-    else if (!read && timing.writeDataOut.timeIn(time))
-    {
+      if (timing.addressOut.timeIn(time))
+      {
+        Instruction opCode = getOpCode();
+        System.out.println("W65C816.tickWithConnectedTiming: Cycle " + cycle + " Opcode: " + opCode.getName());
+        Address address = busCycle.getAddress(this);
+        pins.setAddress(address.getOffset());
 
+        pins.setRWB(read);
+        pins.setValidDataAddress(dataOperation.isValidDataAddress());
+        pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
+        pins.setMemoryLockB(dataOperation.isNotMemoryLock());
+        pins.setVectorPullB(dataOperation.isNotVectorPull());
+      }
+      else
+      {
+        pins.setAddressUnknown();
+
+        pins.setRWBUnknown();
+        pins.setValidDataAddressUnknown();
+        pins.setValidProgramAddressUnknown();
+        pins.setMemoryLockBUnknown();
+        pins.setVectorPullBUnknown();
+      }
+
+      if (timing.bankOut.timeIn(time))
+      {
+        pins.setBank(address.getBank());
+      }
+      else if (write && timing.writeDataOut.timeIn(time))
+      {
+        pins.setData(pinData);
+      }
+      else if (read && timing.readDataAndIntRequired.timeIn(time))
+      {
+        pinData = pins.getData();
+        System.out.println("W65C816.tickWithConnectedTiming: PinData " + Integer.toHexString(pinData));
+      }
+      else
+      {
+        pins.setDataUnknown();
+      }
+
+      if ((time == timing.readDataAndIntRequired.start) && read)
+      {
+        System.out.println("W65C816.tickWithConnectedTiming: Execute Read");
+        executeOperation();
+      }
+
+      if (timing.mOut.timeIn(time))
+      {
+        pins.setMX(isMemory8Bit());
+      }
+      else if (timing.xOut.timeIn(time))
+      {
+        pins.setMX(isIndex8Bit());
+      }
+      else
+      {
+        pins.setMXUnknown();
+      }
+
+      if (timing.eOut.timeIn(time))
+      {
+        pins.setEmulation(isEmulation());
+      }
+      else
+      {
+        pins.setEmulationUnknown();
+      }
+
+      if (timing.readDataAndIntRequired.timeIn(time))
+      {
+        irq = getPins().isIRQ() || irq;
+        nmi = getPins().isNMI() || nmi;
+        reset = getPins().isNMI() || reset;
+      }
+
+      if (timing.readDataAndIntRequired.timeIn(time))
+      {
+        getPins().setRdy(dataOperation.isReady());
+      }
+      else
+      {
+        getPins().setRdyUnknown();
+      }
+
+      if (fallingEdge)
+      {
+        System.out.println("W65C816.tickWithConnectedTiming: Next cycle");
+
+        cycle();
+      }
     }
   }
 
   private void tickWithDisconnectedTiming()
   {
-    while (!getBusCycle().mustExecute(this))
+    if ((fallingEdge || risingEdge) && !stopped)
     {
-      nextCycle();
-    }
+      if (fallingEdge)
+      {
+        abort = getPins().isAbort() || abort;
+        irq = getPins().isIRQ() || irq;
+        nmi = getPins().isNMI() || nmi;
 
-    if (fallingEdge)
-    {
-      time = 0;
+        executeFirstHalf();
+      }
 
-      abort = getPins().isAbort() || abort;
-      irq = getPins().isIRQ() || irq;
-      nmi = getPins().isNMI() || nmi;
+      if (risingEdge)
+      {
+        irq = getPins().isIRQ() || irq;
+        nmi = getPins().isNMI() || nmi;
 
-      executeFirstHalf();
-    }
-
-    if (risingEdge)
-    {
-      irq = getPins().isIRQ() || irq;
-      nmi = getPins().isNMI() || nmi;
-
-      executeSecondHalf();
+        executeSecondHalf();
+      }
     }
   }
 
@@ -453,14 +547,14 @@ public class W65C816
     W65C816Pins pins = getPins();
     Address address = busCycle.getAddress(this);
 
-    pins.setMX(isIndex8Bit());
     pins.setRWB(read);
+    pins.setMX(isIndex8Bit());
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
     pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
     pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setRdy(dataOperation.isReady());
     pins.setEmulation(isEmulation());
+    pins.setRdy(dataOperation.isReady());
     pins.setAddress(address.getOffset());
     pins.setBank(address.getBank());
   }
@@ -482,23 +576,46 @@ public class W65C816
     pins.setMemoryLockB(dataOperation.isNotMemoryLock());
     pins.setMX(isMemory8Bit());
     pins.setEmulation(isEmulation());
+    pins.setRdy(dataOperation.isReady());
     pins.setValidDataAddress(dataOperation.isValidDataAddress());
     pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
     pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setRdy(dataOperation.isReady());
     pins.setAddress(address.getOffset());
 
-    for (Operation operation : busCycle.getOperations())
-    {
-      operation.execute(this);
-    }
+    executeOperation();
 
     if (!read)
     {
       pins.setData(pinData);
     }
 
+    cycle();
+  }
+
+  private void cycle()
+  {
+    if (nextInstruction)
+    {
+      cycle = -1;
+      nextInstruction = false;
+      nextInstruction();
+    }
+
     nextCycle();
+    while (!getBusCycle().mustExecute(this))
+    {
+      nextCycle();
+    }
+  }
+
+  private void executeOperation()
+  {
+    BusCycle busCycle = getBusCycle();
+
+    for (Operation operation : busCycle.getOperations())
+    {
+      operation.execute(this);
+    }
   }
 
   private boolean updateTimingValues()
@@ -539,7 +656,15 @@ public class W65C816
 
   private DataOperation getDataOperation()
   {
-    return getBusCycle().getDataOperation();
+    BusCycle busCycle = getBusCycle();
+    if (busCycle != null)
+    {
+      return busCycle.getDataOperation();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public boolean isMemory8Bit()
@@ -688,7 +813,11 @@ public class W65C816
 
   public void doneInstruction()
   {
-    cycle = -1;
+    nextInstruction = true;
+  }
+
+  private void nextInstruction()
+  {
     if (!abort)
     {
       createAbortValues();
@@ -2228,6 +2357,7 @@ public class W65C816
                                nmi,
                                abort,
                                busEnable,
+                               nextInstruction,
                                cycle,
                                opCode,
                                stopped,
@@ -2281,6 +2411,7 @@ public class W65C816
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;
     busEnable = snapshot.busEnable;
+    nextInstruction = snapshot.nextInstruction;
 
     abortAccumulator = snapshot.abortAccumulator;
     abortDataBank = snapshot.abortDataBank;

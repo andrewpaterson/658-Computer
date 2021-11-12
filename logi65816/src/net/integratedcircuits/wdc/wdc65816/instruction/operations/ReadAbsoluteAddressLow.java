@@ -14,6 +14,7 @@ public class ReadAbsoluteAddressLow
   public void execute(W65C816 cpu)
   {
     cpu.setAddressLow(cpu.readPinData());
+    System.out.println("ReadAbsoluteAddressLow.execute: " + cpu.getAddress());
   }
 
   @Override

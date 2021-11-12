@@ -5,9 +5,11 @@ public class W65C816Timing
   public TimeRange addressOut;
   public TimeRange bankOut;
   public TimeRange writeDataOut;
-  public TimeRange readDataRequired;
+  public TimeRange readDataAndIntRequired;
   public TimeRange mOut;
   public TimeRange xOut;
+  public TimeRange eOut;
+  public TimeRange readAbourtRequried;
 
   public boolean notConnected;
 
@@ -16,14 +18,14 @@ public class W65C816Timing
     this.addressOut = new TimeRange();
     this.bankOut = new TimeRange();
     this.writeDataOut = new TimeRange();
-    this.readDataRequired = new TimeRange();
+    this.readDataAndIntRequired = new TimeRange();
     this.mOut = new TimeRange();
     this.xOut = new TimeRange();
+    this.eOut = new TimeRange();
+    this.readAbourtRequried = new TimeRange();
 
     notConnected = true;
   }
-
-
 
   public void set(int addressOutStart,
                   int addressOutStop,
@@ -31,21 +33,27 @@ public class W65C816Timing
                   int bankOutStop,
                   int writeDataOutStart,
                   int writeDataOutStop,
-                  int readDataRequiredStart,
-                  int readDataRequiredStop,
+                  int readDataAndIntRequiredStart,
+                  int readDataAndIntRequiredStop,
                   int mOutStart,
                   int mOutStop,
                   int xOutStart,
-                  int xOutStop)
+                  int xOutStop,
+                  int eOutStart,
+                  int eOutStop,
+                  int readAbortRequiredStart,
+                  int readAbortRequiredStop)
   {
     notConnected = false;
 
     this.addressOut.set(addressOutStart, addressOutStop);
     this.bankOut.set(bankOutStart, bankOutStop);
     this.writeDataOut.set(writeDataOutStart, writeDataOutStop);
-    this.readDataRequired.set(readDataRequiredStart, readDataRequiredStop);
+    this.readDataAndIntRequired.set(readDataAndIntRequiredStart, readDataAndIntRequiredStop);
     this.mOut.set(mOutStart, mOutStop);
     this.xOut.set(xOutStart, xOutStop);
+    this.eOut.set(eOutStart, eOutStop);
+    this.readAbourtRequried.set(readAbortRequiredStart, readAbortRequiredStop);
   }
 
   public void setFromLong(long timingValue)
@@ -61,7 +69,11 @@ public class W65C816Timing
         get4Bit(8, timingValue),
         get4Bit(9, timingValue),
         get4Bit(10, timingValue),
-        get4Bit(11, timingValue));
+        get4Bit(11, timingValue),
+        get4Bit(12, timingValue),
+        get4Bit(13, timingValue),
+        get4Bit(14, timingValue),
+        get4Bit(15, timingValue));
   }
 
   private int get4Bit(int index, long value)

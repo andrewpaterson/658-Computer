@@ -1,8 +1,6 @@
 package net.logisim.integratedcircuits.wdc.w65c816;
 
-import com.cburch.logisim.instance.Port;
 import com.cburch.logisim.util.GraphicsUtil;
-import com.cburch.logisim.util.StringGetter;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.W65C816Snapshot;
 import net.logisim.common.ComponentDescription;
@@ -10,10 +8,7 @@ import net.logisim.common.LogisimFactory;
 import net.logisim.common.PortFactory;
 
 import java.awt.*;
-import java.util.List;
 
-import static com.cburch.logisim.instance.Port.INPUT;
-import static com.cburch.logisim.instance.Port.SHARED;
 import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
@@ -39,6 +34,7 @@ public class W65C816Factory
   protected static int PORT_AddressBus;
 
   protected static int PORT_TimingBus;
+  protected static int PORT_TimingClock;
 
   public static W65C816Factory create()
   {
@@ -55,7 +51,7 @@ public class W65C816Factory
     PORT_E = factory.outputExclusive("E", LEFT).setTooltip("Emulation mode (output: emulation high, native low)").index();
     PORT_MLB = factory.outputExclusive("MLB", LEFT).setInverting().setTooltip("Memory lock (output: read-modify-write low)").index();
     factory.blank(LEFT);
-    factory.inputShared("", 48, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
+    PORT_TimingBus = factory.inputShared("", 48, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
 
     factory.blank(RIGHT);
     factory.blank(RIGHT);
@@ -68,7 +64,7 @@ public class W65C816Factory
     PORT_VPB = factory.outputExclusive("VPB`", RIGHT).setInverting().setTooltip("Interrupt vector pull (output: fetching interrupt address low)").index();
     PORT_BE = factory.inputShared("BE", RIGHT).setTooltip("Bus enable (input: A, D and RWB enabled high, A, D and RWB high impedance low").index();
     factory.blank(RIGHT);
-    factory.inputShared("", RIGHT).setTooltip("Clock input to ensure MPU ticks even when PHI2 is not changing.").index();
+    PORT_TimingClock = factory.inputShared("", RIGHT).setTooltip("Clock input to ensure MPU ticks even when PHI2 is not changing.").index();
 
     return new W65C816Factory(new ComponentDescription(W65C816.class.getSimpleName(),
                                                        W65C816.TYPE,

@@ -2,7 +2,6 @@ package net.integratedcircuits.wdc.wdc65816.instruction;
 
 import net.integratedcircuits.wdc.wdc65816.Address;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
-import net.integratedcircuits.wdc.wdc65816.W65C816Pins;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.AddressOffset;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.ConstantOffset;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.DataOperation;
@@ -95,50 +94,6 @@ public class BusCycle
     return done16;
   }
 
-  public final void executeFirstHalf(W65C816 cpu)
-  {
-    DataOperation dataOperation = getDataOperation();
-    boolean read = dataOperation.isRead();
-    Address address = getAddress(cpu);
-
-    W65C816Pins pins = cpu.getPins();
-    pins.setMX(cpu.isIndex8Bit());
-    pins.setRWB(read);
-    pins.setValidDataAddress(dataOperation.isValidDataAddress());
-    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setRdy(dataOperation.isReady());
-    pins.setEmulation(cpu.isEmulation());
-    pins.setAddress(address.getOffset());
-    pins.setBank(address.getBank());
-  }
-
-  public final void executeSecondHalf(W65C816 cpu)
-  {
-    DataOperation dataOperation = getDataOperation();
-    boolean read = dataOperation.isRead();
-    Address address = getAddress(cpu);
-
-    W65C816Pins pins = cpu.getPins();
-    pins.setRWB(read);
-    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setMX(cpu.isMemory8Bit());
-    pins.setEmulation(cpu.isEmulation());
-    pins.setValidDataAddress(dataOperation.isValidDataAddress());
-    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-    pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setRdy(dataOperation.isReady());
-    pins.setAddress(address.getOffset());
-
-    for (Operation operation : operations)
-    {
-      operation.execute(cpu);
-    }
-
-    cpu.nextCycle();
-  }
-
   public boolean mustExecute(W65C816 cpu)
   {
     boolean mustExecute = true;
@@ -208,6 +163,11 @@ public class BusCycle
   public int getCycle()
   {
     return cycle;
+  }
+
+  public List<Operation> getOperations()
+  {
+    return operations;
   }
 }
 

@@ -144,6 +144,12 @@ public class W65C816TickablePins
   }
 
   @Override
+  public boolean isTimingClock()
+  {
+    return false;
+  }
+
+  @Override
   public void setAddress(int address)
   {
     if (getCpu().isBusEnable())

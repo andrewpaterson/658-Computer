@@ -167,6 +167,12 @@ public class W65C816LogisimPins
     return portValue.toLongValue();
   }
 
+  @Override
+  public boolean isTimingClock()
+  {
+    return instanceState.getPortValue(PORT_TimingClock) == Value.TRUE;
+  }
+
   public W65C816 getCpu()
   {
     return getIntegratedCircuit();

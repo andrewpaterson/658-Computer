@@ -642,7 +642,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPullCycles(Executor<W65C816> operation, WidthFromRegister width)
   {
     //22b
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -653,7 +653,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPLBCycles(Executor<W65C816> operation)
   {
     //22b
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -663,7 +663,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPLDCycles(Executor<W65C816> operation)
   {
     //22b
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -674,7 +674,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPLPCycles(Executor<W65C816> operation)
   {
     //22b
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -685,7 +685,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackImpliedPHPCycles(Executor<W65C816> operation)
   {
     //22c
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -695,7 +695,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPushCycles(Executor<W65C816> operation, WidthFromRegister width)
   {
     //22c
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation)),
                                  new BusCycle(Address(S()), Write_DataHigh(), SP_dec(), new NoteOne(width)),
@@ -705,7 +705,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPHBCycles(Executor<W65C816> operation)
   {
     //22c
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(S()), E(operation), Write_DataLow(), SP_dec(), DONE()));
@@ -714,7 +714,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPHDCycles(Executor<W65C816> operation)
   {
     //22c
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(S()), E(operation), Write_DataHigh(), SP_dec()),
@@ -724,7 +724,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPHKCycles(Executor<W65C816> operation)
   {
     //22c
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
                                  new BusCycle(Address(S()), E(operation), Write_DataLow(), SP_dec(), DONE()));
@@ -757,7 +757,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackPERCycles(Executor<W65C816> operation)
   {
     //22f
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_DataLow(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_DataHigh(), PC_inc()),
@@ -769,7 +769,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackRTICycles()
   {
     //22g
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -782,7 +782,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackRTSCycles()
   {
     //22h
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),
@@ -794,7 +794,7 @@ public class InstructionCycleFactory
   public static InstructionCycles createStackRTLCycles()
   {
     //22i
-    return new InstructionCycles(Stack,
+    return new InstructionCycles(StackImplied,
                                  new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), IO()),

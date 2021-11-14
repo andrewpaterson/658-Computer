@@ -1,19 +1,58 @@
 STARTUP SECTION
 
-	ORG	$0000
-	DB '['
-PROGRESS:	
-	DB 'xxxx'
-PROGRESS_NMI:		
-	DB 'xxxx'
-PROGRESS_ABORT:
-	DB 'xxxxxx'
-PROGRESS_BRK:
-	DB 'xxxx'
-PROGRESS_COP:
-	DB 'xxx'
-ENDPROGRESS:	
-	DB ']'
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+FUNCTION_CALL MACRO SUBROUTINE, LOCAL_SIZE
+	JSR SUBROUTINE
+	PHA				;push accumulator
+	PHX				;push x index
+	PHY				;push y index
+	PHD				;push direct page
+	PHP				;push processor status bits
+	REP 	#$20	;16 bit memory
+	LONGA	ON
+	TSC				;transfer stack pointer to accumulator
+	SEC				;carry = 1
+	SBC 	LOCAL_SIZE	;accumulator = accumulator - LOCAL_SIZE - 1 + carry 
+	TCS				;transfer accumulator to stack pointer
+	DEC				;accumulator--
+	TCD				;transfer accumulator to direct page
+	ENDM
+
+FUNCTION_RETURN MACRO LOCAL_SIZE
+	REP 	#$20	;16 bit memory
+	LONGA	ON
+	TSC
+	CLC				;carry = 0
+	ADC 	LOCAL_SIZE	;accumulator = accumulator + LOCAL_SIZE + carry 
+	TCS
+	PLP				;pull processor status bits
+	PLD				;pull direct page
+	PLY
+	PLX
+	PLA
+	RTS				;return from subroutine
+	ENDM
+	
+	ORG $8000
+START:
+	SEP		#$20	;8 bit memory
+	LONGA	OFF
+	
+	LDA		#$E4
+	STA		$F001
+	LDA		#0
+	STA		$F000
+	
+	LDA		$8000
+	
+LOOP:
+	JMP 	LOOP
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
 	
 	ORG $E12B
 RESET:
@@ -25,8 +64,7 @@ RESET:
 	LDA		#$01FF  ;get the stack address
 	TCS	     		;and set the stack to it
 
-
-	SEP		#$20	;8 bit accumulator
+	SEP		#$20	;8 bit memory
 	LONGA 	OFF
 	LDA 	#$00	;get bank of data
 	PHA
@@ -46,10 +84,6 @@ IRQ:
 	PHX				;save X
 	PHY 			;save Y
 	
-	LDX 	#IRQ_STRING
-	LDY 	#PROGRESS
-	JSR 	WRITE_STRING
-	
 	BRA 	EXIT_INTERRUPT 
 
 NMI:
@@ -62,10 +96,6 @@ NMI:
 	PHX				;save X
 	PHY 			;save Y
 
-	LDX 	#NMI_STRING
-	LDY 	#PROGRESS_NMI
-	JSR 	WRITE_STRING
-	
 	BRA 	EXIT_INTERRUPT 
 
 ABORT:
@@ -77,10 +107,6 @@ ABORT:
 	PHA				;save A
 	PHX				;save X
 	PHY 			;save Y
-	
-	LDX 	#ABORT_STRING
-	LDY 	#PROGRESS_ABORT
-	JSR 	WRITE_STRING
 
 	BRA 	EXIT_INTERRUPT 
 
@@ -94,10 +120,6 @@ COP:
 	PHX				;save X
 	PHY 			;save Y
 
-	LDX 	#COP_STRING
-	LDY 	#PROGRESS_COP
-	JSR 	WRITE_STRING
-	
 	BRA 	EXIT_INTERRUPT 
 
 BRK:
@@ -110,10 +132,6 @@ BRK:
 	PHX				;save X
 	PHY 			;save Y
 
-	LDX 	#BRK_STRING
-	LDY 	#PROGRESS_BRK
-	JSR 	WRITE_STRING
-	
 	BRA 	EXIT_INTERRUPT 
 
 EMU:
@@ -125,9 +143,6 @@ EMU:
 	PHA				;save A
 	PHX				;save X
 	PHY 			;save Y
-	
-	LDA 	#"E"
-	JSR 	WRITE_PROGRESS
 
 	BRA 	EXIT_INTERRUPT 
 
@@ -142,65 +157,6 @@ EXIT_INTERRUPT:
     PLB             ;restore DB
 	RTI
 	
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
-	
-	ORG $8000
-START:
-	CLI
-	LDA 	#"."
-	JSR 	WRITE_PROGRESS
-	BRK		12
-	COP		34
-	
-LOOP:
-	JMP 	LOOP
-
-WRITE_PROGRESS:
-	SEP		#$20	;8 bit accumulator
-	LONGA 	OFF
-
-	LDY 	#PROGRESS
-LOOP_DOT:	
-	STA 	0,Y
-	INY
-	CPY 	#ENDPROGRESS
-	BNE 	LOOP_DOT
-	RTS
-	
-WRITE_STRING:	
-	SEP		#$20	;8 bit accumulator
-	LONGA 	OFF
-WRITE_STRING_LOOP:	
-	LDA 	0,X
-	BEQ 	DONE_STRING
-	STA 	0,Y
-	INY
-	INX
-	BRA 	WRITE_STRING_LOOP
-DONE_STRING:
-	REP		#$20    ;back to 16 bit mode
-	LONGA 	ON
-	RTS
-
-IRQ_STRING:	
-	DB 'IRQ'
-	DB #0
-NMI_STRING:	
-	DB 'NMI'
-	DB #0
-ABORT_STRING:	
-	DB 'ABORT'
-	DB #0
-BRK_STRING:	
-	DB 'BRK'
-	DB #0
-COP_STRING:	
-	DB 'COP'
-	DB #0
-EMULATION_STRING:	
-	DB ' - Emulation -  '
-	DB #0
-
 	
 ; This section defines the interrupt and reset vectors.    
 

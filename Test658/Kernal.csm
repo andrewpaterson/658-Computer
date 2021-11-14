@@ -1,0 +1,149 @@
+origin 0x0400
+naked Start()
+{
+	REP 0x30
+	
+	int8	allocated;
+
+					// PEA allocated (2)
+	allocated = AllocateUser()  //JSR AllocateUser (2)
+}
+
+int8 userCount = 0;
+int8 allocatedBanks[0x80] = 0;
+
+subroutine (int8) AllocateUser()
+{
+					// PHP (1), PHD (2)
+	int8	bank;   
+	int8	temp02;	// TSC, SEC, SBC 2, TCS (2) ; SP -= 2
+					// DEC, TCD ; DP = SP-1
+
+	
+	A = *userCount; // SEP #$20, LDA |userCount
+	A == 0xFF		// CMP #$FF
+	BEQ	tooManyUsers;
+	A++;			// INC A
+	A = 0xFF - A	// STA |temp, LDA #$FF, SEC, SBC |temp
+	
+	bank = findNextUnusedBank();
+	
+	copySharedKernal(bank);
+	
+	return 0;  		// SEP #$20, LDA #$1, STA (<6) ; [DP + 6] == allocated
+					// BRA returnFromAllocateUser
+
+tooManyUsers:
+	return 0;  		// SEP #$20, LDA #$0, STA (<6) ; [DP + 6] == allocated
+					// BRA returnFromAllocateUser
+
+	
+returnFromAllocateUser:	
+					// TSC, CLC, ADC 2, TCS (-2) ; SP += 2
+					// PLD (-2), PLP(-1)
+					// RTS (-2)
+}
+
+
+subroutine (int8) findNextUnusedBank()
+
+subroutine () copySharedKernal(int8 bank)
+{
+					// PHP (1), PHD (2)
+	int8	bank;	// TSC, SEC, SBC 1, TCS (1) ; SP--
+	
+	PHB
+	PHK
+	PLB
+	
+	A = bank; 		// SEP #$20, LDA (<0) ;  [DP + 0] == bank
+
+	REP #$10
+	PER moveSharedKernal
+	PLX
+	STA 0, X		// Overwrite destintion of block move with A.	MVN	 #0, A
+	
+	A = SHARED_KERNAL_END - SHARED_KERNAL // REP #$20; LDA #SHARED_KERNAL_END - SHARED_KERNAL
+	A--;			// DEC A
+	X = SHARED_KERNAL;	REP #10, LDX, #SHARED_KERNAL
+	Y = X;			// TXY
+
+moveSharedKernal:
+	MVN	 #0, #0
+	
+	PLB
+					// TSC, CLC, ADC 1, TCS (-1); SP++
+					// PLD (-2), PLP(-1)
+					// RTS (-2)
+}
+
+
+origin 0xE000 SHARED_KERNAL
+naked RESET()
+{
+	C = 0;      	// CLC
+	E = C;			// XCE
+	REP 0x10	
+	A = 0x01FF;		// REP #$20, LDA #$01FF
+	SP = A; 	 	// TCS
+
+	A = 0x00		// SEP #$20, LDA #$00
+	PHA
+	PLB	     	
+	REP 0x20
+
+	JML  	Start
+}
+
+
+interrupt IRQ()
+{
+	//ENTER_INTERRUPT - implied by interrupt
+
+	//EXIT_INTERRUPT - implied by interrupt
+}
+
+origin SHARED_KERNAL_END
+
+
+origin 0xFFE4 
+int16 ? = COP
+int16 ? = BRK
+int16 ? = ABORT
+int16 ? = NMI
+int16 ?
+int16 ? = IRQ
+
+origin 0xFFF4
+int16 ? = EMU
+int16 ?
+int16 ? = EMU
+int16 ? = EMU
+int16 ? = RESET
+int16 ? = EMU
+
+
+origin 0x10000 USER_BANK_MAP
+int8[0x10000] = 0;
+
+macro ENTER_INTERRUPT()
+{
+	PHB
+	PHD
+	REP 0x30
+	PHA
+	PHX
+	PHY
+}
+
+macro EXIT_INTERRUPT()
+{
+	REP	0x30
+	PLY
+    PLX
+    PLA
+    PLD
+    PLB
+	RTI
+}
+

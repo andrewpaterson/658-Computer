@@ -390,7 +390,6 @@ public class W65C816
       }
 
       int data = getPins().peekData();
-      System.out.println("W65C816.tick Data: " + Integer.toHexString(data) + " Time: " + getTime());
 
       tickWithConnectedTiming();
     }
@@ -417,14 +416,12 @@ public class W65C816
 
       if ((time == timing.writeDataOut.start - 1) && write)
       {
-        System.out.println("W65C816.tickWithConnectedTiming: Execute Write");
         executeOperation();
       }
 
       if (timing.addressOut.timeIn(time))
       {
         Instruction opCode = getOpCode();
-        System.out.println("W65C816.tickWithConnectedTiming: Cycle " + cycle + " Opcode: " + opCode.getName());
         Address address = busCycle.getAddress(this);
         pins.setAddress(address.getOffset());
 
@@ -456,7 +453,6 @@ public class W65C816
       else if (read && timing.readDataAndIntRequired.timeIn(time))
       {
         pinData = pins.getData();
-        System.out.println("W65C816.tickWithConnectedTiming: PinData " + Integer.toHexString(pinData));
       }
       else
       {
@@ -465,7 +461,6 @@ public class W65C816
 
       if ((time == timing.readDataAndIntRequired.start) && read)
       {
-        System.out.println("W65C816.tickWithConnectedTiming: Execute Read");
         executeOperation();
       }
 
@@ -509,8 +504,6 @@ public class W65C816
 
       if (fallingEdge)
       {
-        System.out.println("W65C816.tickWithConnectedTiming: Next cycle");
-
         cycle();
       }
     }

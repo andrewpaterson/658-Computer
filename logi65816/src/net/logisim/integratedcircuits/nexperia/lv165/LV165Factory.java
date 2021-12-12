@@ -37,8 +37,8 @@ public class LV165Factory
     PORT_D = factory.inputShared("D", 8, LEFT).setTooltip("Parallel data (input)").createBus(9);
     PORT_DS = factory.inputShared("DS", LEFT).setTooltip("Serial data (input)").createPin(9);
 
-    PORT_Q = factory.inputShared("Q", RIGHT).setTooltip("Serial data (output from last stage)").createPin(5);
-    PORT_QB = factory.inputShared("Q", RIGHT).setTooltip("Complementary serial data (inverse output from last stage)").setInverting().setDrawBar().createPin(5);
+    PORT_Q = factory.outputExclusive("Q", RIGHT).setTooltip("Serial data (output from last stage)").createPin(5);
+    PORT_QB = factory.outputExclusive("Q", RIGHT).setTooltip("Complementary serial data (inverse output from last stage)").setInverting().setDrawBar().createPin(5);
 
     return new LV165Factory(new ComponentDescription(LV165.class.getSimpleName(),
                                                      LV165.TYPE,

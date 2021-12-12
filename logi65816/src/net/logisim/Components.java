@@ -23,6 +23,7 @@ import net.logisim.integratedcircuits.nexperia.lvc373.LVC373Factory;
 import net.logisim.integratedcircuits.nexperia.lvc4245.LVC4245Factory;
 import net.logisim.integratedcircuits.nexperia.lvc541.LVC541Factory;
 import net.logisim.integratedcircuits.nexperia.lvc573.LVC573Factory;
+import net.logisim.integratedcircuits.nexperia.lvc595.LVC595Factory;
 import net.logisim.integratedcircuits.ti.f251.F251Factory;
 import net.logisim.integratedcircuits.ti.f283.F283Factory;
 import net.logisim.integratedcircuits.ti.f521.F521Factory;
@@ -71,6 +72,7 @@ public class Components
       tools.add(new AddTool(F521Factory.create()));
       tools.add(new AddTool(DS1813Factory.create()));
       tools.add(new AddTool(LV165Factory.create()));
+      tools.add(new AddTool(LVC595Factory.create()));
     }
     catch (Exception e)
     {

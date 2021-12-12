@@ -7,6 +7,7 @@ import net.logisim.integratedcircuits.maxim.ds1813.DS1813Factory;
 import net.logisim.integratedcircuits.nexperia.hc4040.HC4040Factory;
 import net.logisim.integratedcircuits.nexperia.hc590.HC590Factory;
 import net.logisim.integratedcircuits.nexperia.lsf0204.LSF0204Factory;
+import net.logisim.integratedcircuits.nexperia.lv165.LV165Factory;
 import net.logisim.integratedcircuits.nexperia.lvc125.LVC125Factory;
 import net.logisim.integratedcircuits.nexperia.lvc126.LVC126Factory;
 import net.logisim.integratedcircuits.nexperia.lvc138.LVC138Factory;
@@ -69,6 +70,7 @@ public class Components
       tools.add(new AddTool(F283Factory.create()));
       tools.add(new AddTool(F521Factory.create()));
       tools.add(new AddTool(DS1813Factory.create()));
+      tools.add(new AddTool(LV165Factory.create()));
     }
     catch (Exception e)
     {

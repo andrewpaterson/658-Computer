@@ -168,7 +168,8 @@ N_ABORT DW    ABORT
 N_NMI   DW    NMI
 N_RSRVD DW    0
 N_IRQ   DW    IRQ
-	DS    4
+
+	ORG	$FFF4
 E_COP   DW    EMU
 E_RSRVD DW    0
 E_ABORT DW    EMU

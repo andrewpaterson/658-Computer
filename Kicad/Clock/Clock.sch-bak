@@ -1,0 +1,375 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L SamacSys_Parts:74LVCU04APW,118 LVCU4
+U 1 1 61C44AF2
+P 5350 3350
+F 0 "LVCU4" H 5850 3615 50  0000 C CNN
+F 1 "74LVCU04APW,118" H 5850 3524 50  0000 C CNN
+F 2 "SOP65P640X110-14N" H 6200 3450 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVCU04A.pdf" H 6200 3350 50  0001 L CNN
+F 4 "74LVCU04A - Hex unbuffered inverter@en-us" H 6200 3250 50  0001 L CNN "Description"
+F 5 "1.1" H 6200 3150 50  0001 L CNN "Height"
+F 6 "771-LVCU04APW118" H 6200 3050 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVCU04APW118?qs=me8TqzrmIYXibrDyFt%252BDyw%3D%3D" H 6200 2950 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 6200 2850 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVCU04APW,118" H 6200 2750 50  0001 L CNN "Manufacturer_Part_Number"
+	1    5350 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L SamacSys_Parts:74LVC74APW,118 LVC74
+U 1 1 61C454FF
+P 3650 5150
+F 0 "LVC74" H 4200 5415 50  0000 C CNN
+F 1 "74LVC74APW,118" H 4200 5324 50  0000 C CNN
+F 2 "SOP65P640X110-14N" H 4600 5250 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVC74A.pdf" H 4600 5150 50  0001 L CNN
+F 4 "74LVC74A - Dual D-type flip-flop with set and reset; positive-edge trigger@en-us" H 4600 5050 50  0001 L CNN "Description"
+F 5 "1.1" H 4600 4950 50  0001 L CNN "Height"
+F 6 "771-74LVC74APW-T" H 4600 4850 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC74APW118?qs=me8TqzrmIYVtXwVfet0lzw%3D%3D" H 4600 4750 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 4600 4650 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVC74APW,118" H 4600 4550 50  0001 L CNN "Manufacturer_Part_Number"
+	1    3650 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Oscillator:OH300 X100Mhz1
+U 1 1 61C47738
+P 3900 3350
+F 0 "X100Mhz1" H 4344 3396 50  0000 L CNN
+F 1 "XLH735100" H 4344 3305 50  0000 L CNN
+F 2 "Oscillator:Oscillator_SMD_IDT_JU6-6_7.0x5.0mm_P2.54mm" H 3900 3000 50  0001 C CNN
+F 3 "http://www.conwin.com/datasheets/cx/cx282.pdf" H 3700 3450 50  0001 C CNN
+	1    3900 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 61C47FD9
+P 4750 3100
+F 0 "C3" H 4865 3146 50  0000 L CNN
+F 1 "C1nF" H 4865 3055 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D4.7mm_W2.5mm_P5.00mm" H 4788 2950 50  0001 C CNN
+F 3 "~" H 4750 3100 50  0001 C CNN
+	1    4750 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR01
+U 1 1 61C48A03
+P 1100 2750
+F 0 "#PWR01" H 1100 2600 50  0001 C CNN
+F 1 "+3.3V" H 1115 2923 50  0000 C CNN
+F 2 "" H 1100 2750 50  0001 C CNN
+F 3 "" H 1100 2750 50  0001 C CNN
+	1    1100 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDREF #PWR02
+U 1 1 61C49261
+P 1100 4400
+F 0 "#PWR02" H 1100 4150 50  0001 C CNN
+F 1 "GNDREF" H 1105 4227 50  0000 C CNN
+F 2 "" H 1100 4400 50  0001 C CNN
+F 3 "" H 1100 4400 50  0001 C CNN
+	1    1100 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6450 3350 6350 3350
+Wire Wire Line
+	6450 3350 6450 3450
+Wire Wire Line
+	6450 3450 6350 3450
+Connection ~ 6450 3350
+Wire Wire Line
+	6350 3550 6450 3550
+Wire Wire Line
+	6450 3550 6450 3650
+Wire Wire Line
+	6450 3650 6350 3650
+Wire Wire Line
+	6350 3750 6450 3750
+Wire Wire Line
+	6450 3750 6450 3850
+Wire Wire Line
+	6450 3850 6350 3850
+Wire Wire Line
+	6450 2750 6450 3350
+Wire Wire Line
+	3900 3650 3900 3700
+$Comp
+L Device:C C1
+U 1 1 61C5537E
+P 3150 3100
+F 0 "C1" H 3265 3146 50  0000 L CNN
+F 1 "C0.1nF" H 3265 3055 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D4.7mm_W2.5mm_P5.00mm" H 3188 2950 50  0001 C CNN
+F 3 "~" H 3150 3100 50  0001 C CNN
+	1    3150 3100
+	1    0    0    -1  
+$EndComp
+Connection ~ 3900 3700
+Wire Wire Line
+	3900 3700 3900 4400
+Wire Wire Line
+	5350 3450 5250 3450
+Wire Wire Line
+	5250 3450 5250 3550
+Wire Wire Line
+	5250 3550 5350 3550
+Wire Wire Line
+	5350 3650 5250 3650
+Wire Wire Line
+	5250 3650 5250 3750
+Wire Wire Line
+	5250 3750 5350 3750
+Wire Wire Line
+	4750 2950 4750 2750
+Connection ~ 4750 2750
+Wire Wire Line
+	3900 2750 3900 3050
+Wire Wire Line
+	3150 2950 3150 2750
+Wire Wire Line
+	3900 2750 4750 2750
+Connection ~ 3900 2750
+Wire Wire Line
+	3900 4400 4750 4400
+Connection ~ 3900 4400
+Connection ~ 4750 4400
+Wire Wire Line
+	3150 3700 3900 3700
+Wire Wire Line
+	3150 2750 3400 2750
+Connection ~ 3150 2750
+Wire Wire Line
+	4300 3350 4650 3350
+Wire Wire Line
+	4750 4400 6200 4400
+Wire Wire Line
+	5350 3850 5300 3850
+Wire Wire Line
+	5300 3850 5300 5450
+Wire Wire Line
+	1100 4400 1500 4400
+Wire Wire Line
+	4750 5350 4950 5350
+Wire Wire Line
+	4950 5350 4950 5750
+Wire Wire Line
+	4950 5750 4750 5750
+Wire Wire Line
+	1350 2750 1350 4700
+Connection ~ 1350 2750
+Wire Wire Line
+	1350 2750 1100 2750
+Wire Wire Line
+	1500 4400 1500 6250
+Connection ~ 1500 4400
+Wire Wire Line
+	1500 4400 1850 4400
+Wire Wire Line
+	4750 5150 4850 5150
+Wire Wire Line
+	4850 5150 4850 4700
+Connection ~ 4850 4700
+Wire Wire Line
+	4850 4700 6200 4700
+$Comp
+L Device:C C2
+U 1 1 61C798B2
+P 3250 5050
+F 0 "C2" H 3365 5096 50  0000 L CNN
+F 1 "C1nF" H 3365 5005 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D4.7mm_W2.5mm_P5.00mm" H 3288 4900 50  0001 C CNN
+F 3 "~" H 3250 5050 50  0001 C CNN
+	1    3250 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 4900 3250 4700
+Wire Wire Line
+	1500 6250 3250 6250
+Wire Wire Line
+	3250 5750 3650 5750
+Wire Wire Line
+	3250 5200 3250 5750
+Connection ~ 3250 6250
+Wire Wire Line
+	3250 6250 6200 6250
+Connection ~ 3250 5750
+Wire Wire Line
+	3250 5750 3250 6250
+Wire Wire Line
+	4850 5150 4850 5250
+Wire Wire Line
+	4850 5250 4750 5250
+Connection ~ 4850 5150
+Wire Wire Line
+	4850 5250 4850 5550
+Wire Wire Line
+	4850 5550 4750 5550
+Connection ~ 4850 5250
+Wire Wire Line
+	4750 5650 4850 5650
+Wire Wire Line
+	4850 5650 4850 5950
+Wire Wire Line
+	4850 5950 3550 5950
+Wire Wire Line
+	3550 5950 3550 5350
+Wire Wire Line
+	3550 5350 3650 5350
+Wire Wire Line
+	3650 5650 3450 5650
+Wire Wire Line
+	3450 5650 3450 5250
+Wire Wire Line
+	3450 5250 3650 5250
+Wire Wire Line
+	1350 4700 3350 4700
+Wire Wire Line
+	3650 5150 3350 5150
+Wire Wire Line
+	3350 5150 3350 4700
+Connection ~ 3350 4700
+Wire Wire Line
+	3350 4700 4850 4700
+Wire Wire Line
+	3350 5150 3350 5450
+Wire Wire Line
+	3350 5450 3650 5450
+Connection ~ 3350 5150
+Wire Wire Line
+	1350 2750 1850 2750
+$Comp
+L Device:CP C5
+U 1 1 61C89760
+P 2500 3100
+F 0 "C5" H 2618 3146 50  0000 L CNN
+F 1 "CP2200uF" H 2618 3055 50  0000 L CNN
+F 2 "" H 2538 2950 50  0001 C CNN
+F 3 "~" H 2500 3100 50  0001 C CNN
+	1    2500 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C4
+U 1 1 61C8A940
+P 1850 3100
+F 0 "C4" H 1968 3146 50  0000 L CNN
+F 1 "CP1000uF" H 1968 3055 50  0000 L CNN
+F 2 "" H 1888 2950 50  0001 C CNN
+F 3 "~" H 1850 3100 50  0001 C CNN
+	1    1850 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 3250 1850 4400
+Connection ~ 1850 4400
+Wire Wire Line
+	2500 3250 2500 4400
+Wire Wire Line
+	2500 2950 2500 2750
+Wire Wire Line
+	1850 2950 1850 2750
+Connection ~ 1850 2750
+Connection ~ 2500 2750
+Wire Wire Line
+	2500 2750 3150 2750
+Connection ~ 2500 4400
+Wire Wire Line
+	2500 4400 3900 4400
+Wire Wire Line
+	1850 4400 2500 4400
+Wire Wire Line
+	1850 2750 2500 2750
+$Comp
+L Connector:Conn_01x02_Male J1
+U 1 1 61C9B9E9
+P 2750 5550
+F 0 "J1" H 2858 5731 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 2858 5640 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2750 5550 50  0001 C CNN
+F 3 "~" H 2750 5550 50  0001 C CNN
+	1    2750 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x04_Male J2
+U 1 1 61C9CBE6
+P 4400 3650
+F 0 "J2" H 4508 3931 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 4300 3350 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 4400 3650 50  0001 C CNN
+F 3 "~" H 4400 3650 50  0001 C CNN
+	1    4400 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 5550 3650 5550
+Wire Wire Line
+	3450 5650 2950 5650
+Connection ~ 3450 5650
+Connection ~ 5300 3850
+Wire Wire Line
+	5250 3650 5150 3650
+Wire Wire Line
+	5150 3650 5150 3750
+Connection ~ 5250 3650
+Wire Wire Line
+	4600 3550 4650 3550
+Wire Wire Line
+	4650 3550 4650 3350
+Wire Wire Line
+	5250 3450 5050 3450
+Wire Wire Line
+	5050 3450 5050 3650
+Connection ~ 5250 3450
+Wire Wire Line
+	4750 3250 4750 3950
+Wire Wire Line
+	4750 2750 6450 2750
+Wire Wire Line
+	4600 3650 5050 3650
+Wire Wire Line
+	4600 3750 5150 3750
+Wire Wire Line
+	4600 3850 5300 3850
+Wire Wire Line
+	4750 3950 5350 3950
+Connection ~ 4750 3950
+Wire Wire Line
+	4750 3950 4750 4400
+Wire Wire Line
+	4650 3350 5350 3350
+Connection ~ 4650 3350
+Wire Wire Line
+	4750 5450 5300 5450
+Wire Wire Line
+	3150 3250 3150 3700
+Wire Wire Line
+	3500 3350 3400 3350
+Wire Wire Line
+	3400 3350 3400 2750
+Connection ~ 3400 2750
+Wire Wire Line
+	3400 2750 3900 2750
+$EndSCHEMATC

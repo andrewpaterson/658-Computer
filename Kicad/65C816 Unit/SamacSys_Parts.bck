@@ -1,8 +1,18 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 74ALVC00PW,118
+D 74ALVC00 - Quad 2-input NAND gate@en-us
+F https://assets.nexperia.com/documents/data-sheet/74ALVC00.pdf
+$ENDCMP
+#
 $CMP 74ALVC164245DGG_11
 D 74ALVC164245 - 16-bit dual supply translating transceiver; 3-state@en-us
 F https://assets.nexperia.com/documents/data-sheet/74ALVC164245.pdf
+$ENDCMP
+#
+$CMP 74LVC138AD-Q100J
+D 74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf
 $ENDCMP
 #
 $CMP 74LVC161PW,112
@@ -10,19 +20,30 @@ D 74LVC161 - Presettable synchronous 4-bit binary counter; asynchronous reset@en
 F https://assets.nexperia.com/documents/data-sheet/74LVC161.pdf
 $ENDCMP
 #
-$CMP 74LVC16373ADGG,118
+$CMP 74LVC16373ADL,118
 D 74LVC16373A; 74LVCH16373A - 16-bit D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us
-F https://assets.nexperia.com/documents/data-sheet/74LVC_LVCH16373A.pdf
+F https://componentsearchengine.com/Datasheets/1/74LVC16373ADL,118.pdf
 $ENDCMP
 #
 $CMP 74LVC1G80GW,125
 D 74LVC1G80 - Single D-type flip-flop; positive-edge trigger@en-us
+K
 F https://assets.nexperia.com/documents/data-sheet/74LVC1G80.pdf
 $ENDCMP
 #
-$CMP 74LVC373ADB,112
+$CMP 74LVC373ADB,118
 D 74LVC373A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-State@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC373A.pdf
+$ENDCMP
+#
+$CMP DSC1001BI2-125.0000T
+D Standard Clock Oscillators MEMS Oscillator, Low Power, -40C-85C, 25ppm
+F https://ww1.microchip.com/downloads/en/DeviceDoc/20005529B.pdf
+$ENDCMP
+#
+$CMP IS63WV1288DBLL-10TLI
+D SRAM 1M (128Kx8) 10ns Async SRAM 3.3v
+F https://www.issi.com/WW/pdf/63-64WV1288DALL-DBLL.pdf
 $ENDCMP
 #
 $CMP NE555DR
@@ -30,10 +51,22 @@ D Single Precision Timer
 F http://www.ti.com/lit/ds/symlink/ne555.pdf
 $ENDCMP
 #
-$CMP IS63WV1288DBLL-10TLI
-D SRAM 1M (128Kx8) 10ns Async SRAM 3.3v
+$CMP 74HC590D,118
+D 74HC590 - 8-bit binary counter with output register; 3-state@en-us
 K
-F https://www.issi.com/WW/pdf/63-64WV1288DALL-DBLL.pdf
+F https://assets.nexperia.com/documents/data-sheet/74HC590.pdf
+$ENDCMP
+#
+$CMP 74LVC1G79GV,125
+D 74LVC1G79 - Single D-type flip-flop; positive-edge trigger@en-us
+K
+F https://assets.nexperia.com/documents/data-sheet/74LVC1G79.pdf
+$ENDCMP
+#
+$CMP 74LVC04AD,118
+D 74LVC04A - Hex inverter@en-us
+K
+F https://assets.nexperia.com/documents/data-sheet/74LVC04A.pdf
 $ENDCMP
 #
 #End Doc Library

@@ -421,9 +421,11 @@ public class W65C816
 
       if (timing.addressOut.timeIn(time))
       {
-        Instruction opCode = getOpCode();
-        Address address = busCycle.getAddress(this);
-        pins.setAddress(address.getOffset());
+        if (busCycle != null)
+        {
+          Address address = busCycle.getAddress(this);
+          pins.setAddress(address.getOffset());
+        }
 
         pins.setRWB(read);
         pins.setValidDataAddress(dataOperation.isValidDataAddress());

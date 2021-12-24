@@ -21,32 +21,6 @@ X Pin_2 2 200 -100 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Connector_Conn_01x04_Male
-#
-DEF Connector_Conn_01x04_Male J 0 40 Y N 1 F N
-F0 "J" 0 200 50 H V C CNN
-F1 "Connector_Conn_01x04_Male" 0 -300 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
-S 34 -195 0 -205 1 1 6 F
-S 34 -95 0 -105 1 1 6 F
-S 34 5 0 -5 1 1 6 F
-S 34 105 0 95 1 1 6 F
-P 2 1 1 6 50 -200 34 -200 N
-P 2 1 1 6 50 -100 34 -100 N
-P 2 1 1 6 50 0 34 0 N
-P 2 1 1 6 50 100 34 100 N
-X Pin_1 1 200 100 150 L 50 50 1 1 P
-X Pin_2 2 200 0 150 L 50 50 1 1 P
-X Pin_3 3 200 -100 150 L 50 50 1 1 P
-X Pin_4 4 200 -200 150 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
 # Connector_Generic_Conn_02x03_Odd_Even
 #
 DEF Connector_Generic_Conn_02x03_Odd_Even J 0 40 Y N 1 F N
@@ -71,24 +45,6 @@ X Pin_3 3 -200 0 150 R 50 50 1 1 P
 X Pin_4 4 300 0 150 L 50 50 1 1 P
 X Pin_5 5 -200 -100 150 R 50 50 1 1 P
 X Pin_6 6 300 -100 150 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Device_C
-#
-DEF Device_C C 0 10 N Y 1 F N
-F0 "C" 25 100 50 H V L CNN
-F1 "Device_C" 25 -100 50 H V L CNN
-F2 "" 38 -150 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- C_*
-$ENDFPLIST
-DRAW
-P 2 0 1 20 -80 -30 80 -30 N
-P 2 0 1 20 -80 30 80 30 N
-X ~ 1 0 150 110 D 50 50 1 1 P
-X ~ 2 0 -150 110 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
@@ -199,6 +155,52 @@ X 3Y 6 0 -500 200 R 50 50 0 0 P
 X GND 7 0 -600 200 R 50 50 0 0 P
 X 4Y 8 1000 -600 200 L 50 50 0 0 P
 X 4A 9 1000 -500 200 L 50 50 0 0 P
+ENDDRAW
+ENDDEF
+#
+# SamacSys_Parts_885012207027
+#
+DEF SamacSys_Parts_885012207027 C 0 30 Y Y 1 F N
+F0 "C" 350 250 50 H V L CNN
+F1 "SamacSys_Parts_885012207027" 350 150 50 H V L CNN
+F2 "CAPC2012X90N" 350 50 50 H I L CNN
+F3 "https://katalog.we-online.com/pbs/datasheet/885012207027.pdf" 350 -50 50 H I L CNN
+F4 "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K016DFCT10000" 350 -150 50 H I L CNN "Description"
+F5 "0.9" 350 -250 50 H I L CNN "Height"
+F6 "710-885012207027" 350 -350 50 H I L CNN "Mouser Part Number"
+F7 "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207027?qs=0KOYDY2FL28IWYVDh0DkrQ%3D%3D" 350 -450 50 H I L CNN "Mouser Price/Stock"
+F8 "Wurth Elektronik" 350 -550 50 H I L CNN "Manufacturer_Name"
+F9 "885012207027" 350 -650 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+P 2 0 1 6 200 0 220 0 N
+P 2 0 1 6 220 100 220 -100 N
+P 2 0 1 6 280 0 300 0 N
+P 2 0 1 6 280 100 280 -100 N
+X ~ 1 0 0 200 R 50 50 0 0 P
+X ~ 2 500 0 200 L 50 50 0 0 P
+ENDDRAW
+ENDDEF
+#
+# Wurth_Elektronik_885012207033
+#
+DEF Wurth_Elektronik_885012207033 C 0 30 Y Y 1 F N
+F0 "C" 350 250 50 H V L CNN
+F1 "Wurth_Elektronik_885012207033" 350 150 50 H V L CNN
+F2 "CAPC2012X90N" 350 50 50 H I L CNN
+F3 "https://katalog.we-online.com/pbs/datasheet/885012207033.pdf" 350 -50 50 H I L CNN
+F4 "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K016DFCT10000" 350 -150 50 H I L CNN "Description"
+F5 "0.9" 350 -250 50 H I L CNN "Height"
+F6 "710-885012207033" 350 -350 50 H I L CNN "Mouser Part Number"
+F7 "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207033?qs=0KOYDY2FL28ky2lrUPvQ%2Fw%3D%3D" 350 -450 50 H I L CNN "Mouser Price/Stock"
+F8 "Wurth Elektronik" 350 -550 50 H I L CNN "Manufacturer_Name"
+F9 "885012207033" 350 -650 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+P 2 0 1 6 200 0 220 0 N
+P 2 0 1 6 220 100 220 -100 N
+P 2 0 1 6 280 0 300 0 N
+P 2 0 1 6 280 100 280 -100 N
+X ~ 1 0 0 200 R 50 50 0 0 P
+X ~ 2 500 0 200 L 50 50 0 0 P
 ENDDRAW
 ENDDEF
 #

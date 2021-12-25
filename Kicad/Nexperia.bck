@@ -10,9 +10,19 @@ D 74ALVC164245 - 16-bit dual supply translating transceiver; 3-state@en-us
 F https://assets.nexperia.com/documents/data-sheet/74ALVC164245.pdf
 $ENDCMP
 #
+$CMP 74HC4040PW,118
+D 74HC(T)4040 - 12-stage binary ripple counter@en-us
+F https://assets.nexperia.com/documents/data-sheet/74HC_HCT4040.pdf
+$ENDCMP
+#
 $CMP 74HC590D,118
 D 74HC590 - 8-bit binary counter with output register; 3-state@en-us
 F https://assets.nexperia.com/documents/data-sheet/74HC590.pdf
+$ENDCMP
+#
+$CMP 74HCT109PW,118
+D 74HC(T)109 - Dual JK flip-flop with set and reset; positive-edge trigger@en-us
+F https://assets.nexperia.com/documents/data-sheet/74HC_HCT109.pdf
 $ENDCMP
 #
 $CMP 74LVC00APW,112
@@ -45,9 +55,39 @@ D 74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf
 $ENDCMP
 #
+$CMP 74LVC138APW-Q100J
+D 74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf
+$ENDCMP
+#
+$CMP 74LVC139PW,118
+D 74LVC139 - Dual 2-to-4 line decoder/demultiplexer@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC139.pdf
+$ENDCMP
+#
 $CMP 74LVC14AD,112
 D NXP 74LVC14AD,112, Hex Schmitt Trigger Inverter, 1.2  3.6 V, 14-Pin SOIC
 F https://assets.nexperia.com/documents/data-sheet/74LVC14A.pdf
+$ENDCMP
+#
+$CMP 74LVC157APW,118
+D NEXPERIA - 74LVC157APW,118 - MUX, QUAD, 8 I/P, TSSOP-16
+F https://assets.nexperia.com/documents/data-sheet/74LVC157A.pdf
+$ENDCMP
+#
+$CMP 74LVC161PW,112
+D 74LVC161 - Presettable synchronous 4-bit binary counter; asynchronous reset@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC161.pdf
+$ENDCMP
+#
+$CMP 74LVC16373ADL,118
+D 74LVC16373A; 74LVCH16373A - 16-bit D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us
+F https://componentsearchengine.com/Datasheets/1/74LVC16373ADL,118.pdf
+$ENDCMP
+#
+$CMP 74LVC163PW,118
+D 74LVC163 - Presettable synchronous 4-bit binary counter; synchronous reset@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC163.pdf
 $ENDCMP
 #
 $CMP 74LVC1G00GV,125
@@ -55,9 +95,19 @@ D NXP 74LVC1G00GV,125, 2-Input NAND Logic Gate, 1.65  5.5 V, 5-Pin SC-74A
 F https://assets.nexperia.com/documents/data-sheet/74LVC1G00.pdf
 $ENDCMP
 #
+$CMP 74LVC1G125GV-Q100,
+D 74LVC1G125-Q100 - Bus buffer/line driver; 3-state@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC1G125_Q100.pdf
+$ENDCMP
+#
 $CMP 74LVC1G27GW,125
 D 74LVC1G27 - Single 3-input NOR gate@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC1G27.pdf
+$ENDCMP
+#
+$CMP 74LVC1G34GV,125
+D 74LVC1G34 - Single buffer@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC1G34.pdf
 $ENDCMP
 #
 $CMP 74LVC1G79GV,125
@@ -70,6 +120,11 @@ D 74LVC1G80 - Single D-type flip-flop; positive-edge trigger@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC1G80.pdf
 $ENDCMP
 #
+$CMP 74LVC257AD,118
+D 74LVC257A - Quad 2-input multiplexer with 5 V tolerant inputs/outputs; 3-state@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC257A.pdf
+$ENDCMP
+#
 $CMP 74LVC2G02DP,125
 D 74LVC2G02 - Dual 2-input NOR gate@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC2G02.pdf
@@ -80,9 +135,49 @@ D 74LVC2G32-Q100 - Dual 2-input OR gate@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC2G32_Q100.pdf
 $ENDCMP
 #
+$CMP 74LVC2G86DC,125
+D 74LVC2G86 - Dual 2-input EXCLUSIVE-OR gate@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC2G86.pdf
+$ENDCMP
+#
+$CMP 74LVC373ADB,118
+D 74LVC373A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-State@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC373A.pdf
+$ENDCMP
+#
+$CMP 74LVC4245APW,118
+D 74LVC4245A - Octal dual supply translating transceiver; 3-state@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC4245A.pdf
+$ENDCMP
+#
+$CMP 74LVC541APW,118
+D 74LVC541A - Octal buffer/line driver with 5 V tolerant inputs/outputs; 3-state@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC541A.pdf
+$ENDCMP
+#
+$CMP 74LVC573AD,112
+D 74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC573A.pdf
+$ENDCMP
+#
+$CMP 74LVC574AD,118
+D 74LVC574A - Octal D-type flip-flop with 5 V tolerant inputs/outputs; positive edge-trigger (3-state)@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC574A.pdf
+$ENDCMP
+#
 $CMP 74LVC74APW,118
 D 74LVC74A - Dual D-type flip-flop with set and reset; positive-edge trigger@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC74A.pdf
+$ENDCMP
+#
+$CMP 74LVCH162373ADGG_1
+D 74LVC(H)162373A - 16-bit D-type transparent latch@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC_LVCH162373A.pdf
+$ENDCMP
+#
+$CMP 74LVCU04APW,118
+D 74LVCU04A - Hex unbuffered inverter@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVCU04A.pdf
 $ENDCMP
 #
 #End Doc Library

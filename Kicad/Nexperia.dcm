@@ -10,9 +10,19 @@ D 74ALVC164245 - 16-bit dual supply translating transceiver; 3-state@en-us
 F https://assets.nexperia.com/documents/data-sheet/74ALVC164245.pdf
 $ENDCMP
 #
+$CMP 74HC4040PW,118
+D 74HC(T)4040 - 12-stage binary ripple counter@en-us
+F https://assets.nexperia.com/documents/data-sheet/74HC_HCT4040.pdf
+$ENDCMP
+#
 $CMP 74HC590D,118
 D 74HC590 - 8-bit binary counter with output register; 3-state@en-us
 F https://assets.nexperia.com/documents/data-sheet/74HC590.pdf
+$ENDCMP
+#
+$CMP 74HCT109PW,118
+D 74HC(T)109 - Dual JK flip-flop with set and reset; positive-edge trigger@en-us
+F https://assets.nexperia.com/documents/data-sheet/74HC_HCT109.pdf
 $ENDCMP
 #
 $CMP 74LVC00APW,112
@@ -85,9 +95,19 @@ D NXP 74LVC1G00GV,125, 2-Input NAND Logic Gate, 1.65  5.5 V, 5-Pin SC-74A
 F https://assets.nexperia.com/documents/data-sheet/74LVC1G00.pdf
 $ENDCMP
 #
+$CMP 74LVC1G125GV-Q100,
+D 74LVC1G125-Q100 - Bus buffer/line driver; 3-state@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC1G125_Q100.pdf
+$ENDCMP
+#
 $CMP 74LVC1G27GW,125
 D 74LVC1G27 - Single 3-input NOR gate@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC1G27.pdf
+$ENDCMP
+#
+$CMP 74LVC1G34GV,125
+D 74LVC1G34 - Single buffer@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC1G34.pdf
 $ENDCMP
 #
 $CMP 74LVC1G79GV,125
@@ -113,6 +133,16 @@ $ENDCMP
 $CMP 74LVC2G32DC-Q100H
 D 74LVC2G32-Q100 - Dual 2-input OR gate@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVC2G32_Q100.pdf
+$ENDCMP
+#
+$CMP 74LVC2G86DC,125
+D 74LVC2G86 - Dual 2-input EXCLUSIVE-OR gate@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC2G86.pdf
+$ENDCMP
+#
+$CMP 74LVC373AD,118
+D 74LVC373A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-State@en-us
+F https://assets.nexperia.com/documents/data-sheet/74LVC373A.pdf
 $ENDCMP
 #
 $CMP 74LVC373ADB,118
@@ -153,6 +183,11 @@ $ENDCMP
 $CMP 74LVCU04APW,118
 D 74LVCU04A - Hex unbuffered inverter@en-us
 F https://assets.nexperia.com/documents/data-sheet/74LVCU04A.pdf
+$ENDCMP
+#
+$CMP LSF0204PW-Q100J
+D Translation - Voltage Levels ANALOG & LOGIC ICS
+F https://assets.nexperia.com/documents/data-sheet/LSF0204_Q100.pdf
 $ENDCMP
 #
 #End Doc Library

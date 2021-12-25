@@ -40,7 +40,7 @@ public class Counter
   @Override
   public void tick()
   {
-    PinValue clockValue = getPins().getPhi2();
+    PinValue clockValue = getPins().getClock();
     if (clockValue.isError())
     {
       getPins().setValueError();

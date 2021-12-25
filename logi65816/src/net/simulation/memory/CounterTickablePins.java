@@ -9,7 +9,7 @@ public class CounterTickablePins
     implements Pins<CounterSnapshot, CounterTickablePins, Counter>
 {
   protected final Omniport value;
-  protected final Uniport phi2;
+  protected final Uniport clock;
 
   private final int width;
 
@@ -17,10 +17,10 @@ public class CounterTickablePins
   {
     super(tickables);
     this.value = new Omniport(this, "Value", width);
-    this.phi2 = new Uniport(this, "Clk");
+    this.clock = new Uniport(this, "Clk");
 
     value.connect(dataBus);
-    phi2.connect(clockTrace);
+    clock.connect(clockTrace);
 
     this.width = width;
   }
@@ -30,9 +30,9 @@ public class CounterTickablePins
     return width;
   }
 
-  public PinValue getPhi2()
+  public PinValue getClock()
   {
-    return getPinValue(phi2);
+    return getPinValue(clock);
   }
 
   public void setValueError()

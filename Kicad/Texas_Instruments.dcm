@@ -15,9 +15,24 @@ D Dual 4-input positive-NAND gates
 F https://www.ti.com/lit/gpn/sn74f20
 $ENDCMP
 #
+$CMP SN74F283D
+D 4-BITBIN FULL ADDER
+F http://www.ti.com/lit/ds/symlink/sn74f283.pdf
+$ENDCMP
+#
 $CMP SN74F521DW
 D Texas Instruments SN74F521DW, 8-Bit, Identity Comparator, Inverting, 4.5  5.5 V, 20-Pin SOIC
 F http://www.ti.com/lit/gpn/SN74F521
+$ENDCMP
+#
+$CMP SN74F521NSR
+D 8-Bit Identity/Magnitude Comparators (P=Q) with Enable
+F http://www.ti.com/lit/gpn/sn74f521
+$ENDCMP
+#
+$CMP SN74LS148NSR
+D 8-line to 3-line priority encoder
+F http://www.ti.com/lit/gpn/sn74ls148
 $ENDCMP
 #
 $CMP SN74LS670NSR
@@ -33,6 +48,11 @@ $ENDCMP
 $CMP SN74LVC1G332DCKR
 D Single 3-Input Positive-OR Gate
 F http://www.ti.com/lit/gpn/sn74lvc1g332
+$ENDCMP
+#
+$CMP SN74LVC543APWR
+D Octal Registered Transceiver With 3-State Outputs
+F http://www.ti.com/lit/gpn/sn74lvc543a
 $ENDCMP
 #
 $CMP TL16C752DPFBR

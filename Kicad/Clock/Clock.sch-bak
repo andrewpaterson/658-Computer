@@ -14,10 +14,10 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L SamacSys_Parts:74LVCU04APW,118 LVCU4
+L SamacSys_Parts:74LVCU04APW,118 LVCU04
 U 1 1 61C44AF2
 P 5050 1750
-F 0 "LVCU4" H 5550 2015 50  0000 C CNN
+F 0 "LVCU04" H 5550 2015 50  0000 C CNN
 F 1 "74LVCU04APW,118" H 5550 1924 50  0000 C CNN
 F 2 "SOP65P640X110-14N" H 5900 1850 50  0001 L CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/74LVCU04A.pdf" H 5900 1750 50  0001 L CNN
@@ -31,10 +31,10 @@ F 9 "74LVCU04APW,118" H 5900 1150 50  0001 L CNN "Manufacturer_Part_Number"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Oscillator:OH300 X100Mhz1
+L Oscillator:OH300 X100Mhz
 U 1 1 61C47738
 P 3600 1900
-F 0 "X100Mhz1" H 3650 2150 50  0000 L CNN
+F 0 "X100Mhz" H 3650 2150 50  0000 L CNN
 F 1 "XLH735100" H 3100 1650 50  0000 L CNN
 F 2 "Oscillator:Oscillator_SMD_IDT_JU6-6_7.0x5.0mm_P2.54mm" H 3600 1550 50  0001 C CNN
 F 3 "http://www.conwin.com/datasheets/cx/cx282.pdf" H 3400 2000 50  0001 C CNN
@@ -456,5 +456,115 @@ F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 8900 2450 50 
 F 3 "~" H 8900 2450 50  0001 C CNN
 	1    8900 2450
 	-1   0    0    1   
+$EndComp
+$Comp
+L Texas_Instruments:SN74F20DR F20
+U 1 1 61C6185B
+P 2500 4600
+F 0 "F20" H 3050 4865 50  0000 C CNN
+F 1 "SN74F20DR" H 3050 4774 50  0000 C CNN
+F 2 "SOIC127P600X175-14N" H 3450 4700 50  0001 L CNN
+F 3 "https://www.ti.com/lit/gpn/sn74f20" H 3450 4600 50  0001 L CNN
+F 4 "Dual 4-input positive-NAND gates" H 3450 4500 50  0001 L CNN "Description"
+F 5 "1.75" H 3450 4400 50  0001 L CNN "Height"
+F 6 "595-SN74F20DR" H 3450 4300 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74F20DR?qs=mE33ZKBHyE7dV637H3Qthw%3D%3D" H 3450 4200 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Texas Instruments" H 3450 4100 50  0001 L CNN "Manufacturer_Name"
+F 9 "SN74F20DR" H 3450 4000 50  0001 L CNN "Manufacturer_Part_Number"
+	1    2500 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Nexperia:74LVC138APW-Q100J LVC138
+U 1 1 61C62B44
+P 6200 5450
+F 0 "LVC138" H 6700 5715 50  0000 C CNN
+F 1 "74LVC138APW-Q100J" H 6700 5624 50  0000 C CNN
+F 2 "SOP65P640X110-16N" H 7050 5550 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf" H 7050 5450 50  0001 L CNN
+F 4 "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us" H 7050 5350 50  0001 L CNN "Description"
+F 5 "1.1" H 7050 5250 50  0001 L CNN "Height"
+F 6 "771-74LVC138APWQ100J" H 7050 5150 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D" H 7050 5050 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 7050 4950 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVC138APW-Q100J" H 7050 4850 50  0001 L CNN "Manufacturer_Part_Number"
+	1    6200 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Nexperia:74LVC163PW,118 LVC163
+U 1 1 61C67470
+P 4250 5250
+F 0 "LVC163" H 4750 5515 50  0000 C CNN
+F 1 "74LVC163PW,118" H 4750 5424 50  0000 C CNN
+F 2 "SOP65P640X110-16N" H 5100 5350 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVC163.pdf" H 5100 5250 50  0001 L CNN
+F 4 "74LVC163 - Presettable synchronous 4-bit binary counter; synchronous reset@en-us" H 5100 5150 50  0001 L CNN "Description"
+F 5 "1.1" H 5100 5050 50  0001 L CNN "Height"
+F 6 "771-74LVC163PW-T" H 5100 4950 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC163PW118?qs=me8TqzrmIYUWRf9xrCNBjw%3D%3D" H 5100 4850 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 5100 4750 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVC163PW,118" H 5100 4650 50  0001 L CNN "Manufacturer_Part_Number"
+	1    4250 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Nexperia:74LVC04AD,118 LVC04
+U 1 1 61C688F8
+P 5250 3950
+F 0 "LVC04" H 5750 4215 50  0000 C CNN
+F 1 "74LVC04AD,118" H 5750 4124 50  0000 C CNN
+F 2 "SOIC127P600X175-14N" H 6100 4050 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVC04A.pdf" H 6100 3950 50  0001 L CNN
+F 4 "74LVC04A - Hex inverter@en-us" H 6100 3850 50  0001 L CNN "Description"
+F 5 "1.75" H 6100 3750 50  0001 L CNN "Height"
+F 6 "771-74LVC04AD-T" H 6100 3650 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC04AD118?qs=me8TqzrmIYWth3Q0Nudt8A%3D%3D" H 6100 3550 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 6100 3450 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVC04AD,118" H 6100 3350 50  0001 L CNN "Manufacturer_Part_Number"
+	1    5250 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Nexperia:74LVC574AD,118 LVC574_1
+U 1 1 61C69B8F
+P 8500 3600
+F 0 "LVC574_1" H 9000 3865 50  0000 C CNN
+F 1 "74LVC574AD,118" H 9000 3774 50  0000 C CNN
+F 2 "SOIC127P1032X265-20N" H 9350 3700 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVC574A.pdf" H 9350 3600 50  0001 L CNN
+F 4 "74LVC574A - Octal D-type flip-flop with 5 V tolerant inputs/outputs; positive edge-trigger (3-state)@en-us" H 9350 3500 50  0001 L CNN "Description"
+F 5 "2.65" H 9350 3400 50  0001 L CNN "Height"
+F 6 "771-74LVC574AD-T" H 9350 3300 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC574AD118?qs=me8TqzrmIYVVWemAtQ0oag%3D%3D" H 9350 3200 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 9350 3100 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVC574AD,118" H 9350 3000 50  0001 L CNN "Manufacturer_Part_Number"
+	1    8500 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5250 5450 6200 5450
+Wire Wire Line
+	5250 5550 6200 5550
+Wire Wire Line
+	5250 5650 6200 5650
+Wire Wire Line
+	5250 5750 6200 5750
+$Comp
+L Nexperia:74LVC574AD,118 LVC574_2
+U 1 1 61C8B160
+P 8500 5100
+F 0 "LVC574_2" H 9000 5365 50  0000 C CNN
+F 1 "74LVC574AD,118" H 9000 5274 50  0000 C CNN
+F 2 "SOIC127P1032X265-20N" H 9350 5200 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74LVC574A.pdf" H 9350 5100 50  0001 L CNN
+F 4 "74LVC574A - Octal D-type flip-flop with 5 V tolerant inputs/outputs; positive edge-trigger (3-state)@en-us" H 9350 5000 50  0001 L CNN "Description"
+F 5 "2.65" H 9350 4900 50  0001 L CNN "Height"
+F 6 "771-74LVC574AD-T" H 9350 4800 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC574AD118?qs=me8TqzrmIYVVWemAtQ0oag%3D%3D" H 9350 4700 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Nexperia" H 9350 4600 50  0001 L CNN "Manufacturer_Name"
+F 9 "74LVC574AD,118" H 9350 4500 50  0001 L CNN "Manufacturer_Part_Number"
+	1    8500 5100
+	1    0    0    -1  
 $EndComp
 $EndSCHEMATC

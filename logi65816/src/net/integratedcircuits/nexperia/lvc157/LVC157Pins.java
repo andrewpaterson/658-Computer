@@ -11,11 +11,9 @@ public interface LVC157Pins
 
   void setYUnsettled();
 
-  void setYHighImpedance();
-
   PinValue getSelector();
 
-  PinValue getOEB();
+  PinValue getEB();
 
   BusValue getInputValue(int port);
 

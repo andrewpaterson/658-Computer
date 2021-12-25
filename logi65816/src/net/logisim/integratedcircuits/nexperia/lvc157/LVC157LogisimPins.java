@@ -29,21 +29,15 @@ public class LVC157LogisimPins
   }
 
   @Override
-  public void setYHighImpedance()
-  {
-    setHighImpedance(PORT_Y);
-  }
-
-  @Override
   public PinValue getSelector()
   {
     return getValue(PORT_S);
   }
 
   @Override
-  public PinValue getOEB()
+  public PinValue getEB()
   {
-    return getValue(PORT_OEB);
+    return getValue(PORT_EB);
   }
 
   @Override

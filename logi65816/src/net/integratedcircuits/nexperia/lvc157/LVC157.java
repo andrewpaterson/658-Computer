@@ -33,16 +33,16 @@ public class LVC157
 
   private void transmit(long port)
   {
-    PinValue outputEnabledB = getPins().getOEB();
+    PinValue enabledB = getPins().getEB();
 
-    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
+    if (enabledB.isError() || enabledB.isNotConnected())
     {
       getPins().setYError();
     }
     else
     {
-      boolean outputEnabled = outputEnabledB.isLow();
-      if (outputEnabled)
+      boolean enabled = enabledB.isLow();
+      if (enabled)
       {
         BusValue readValue = getPins().getInputValue((int) port);
         if (readValue.isError() || readValue.isNotConnected())
@@ -61,7 +61,7 @@ public class LVC157
       }
       else
       {
-        getPins().setYHighImpedance();
+        getPins().setYValue(0);
       }
     }
   }

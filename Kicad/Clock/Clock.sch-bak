@@ -245,10 +245,10 @@ F 9 "74LVC74APW,118" H 6650 1250 50  0001 L CNN "Manufacturer_Part_Number"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Nexperia:74LVCU04APW,118 LVCU04
+L Nexperia:74LVCU04APW,118 LVCU4
 U 1 1 61C7F1FB
 P 3350 1900
-F 0 "LVCU04" H 3850 1600 50  0000 C CNN
+F 0 "LVCU4" H 3850 1600 50  0000 C CNN
 F 1 "74LVCU04APW,118" H 3850 1150 50  0000 C CNN
 F 2 "SOP65P640X110-14N" H 4200 2000 50  0001 L CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/74LVCU04A.pdf" H 4200 1900 50  0001 L CNN
@@ -1568,12 +1568,12 @@ F 3 "~" H 8450 1300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:Conn_01x05_Male J_Multiplexer
+L Connector:Conn_01x05_Male J_Multiplexer2
 U 1 1 61D701C1
 P 6150 7100
-F 0 "J_Multiplexer" H 6500 7350 50  0000 R CNN
+F 0 "J_Multiplexer2" H 6500 7350 50  0000 R CNN
 F 1 "Conn_01x05_Male" H 6122 7123 50  0001 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 6150 7100 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 6150 7100 50  0001 C CNN
 F 3 "~" H 6150 7100 50  0001 C CNN
 	1    6150 7100
 	-1   0    0    1   
@@ -1609,12 +1609,12 @@ M3
 Text Label 5850 7300 0    50   ~ 0
 M4
 $Comp
-L Connector:Conn_01x05_Male J_Multiplexer?
+L Connector:Conn_01x05_Male J_Multiplexer1
 U 1 1 61F4632A
 P 3400 6400
-F 0 "J_Multiplexer?" H 3750 6650 50  0000 R CNN
+F 0 "J_Multiplexer1" H 3750 6650 50  0000 R CNN
 F 1 "Conn_01x05_Male" H 3372 6423 50  0001 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 3400 6400 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 3400 6400 50  0001 C CNN
 F 3 "~" H 3400 6400 50  0001 C CNN
 	1    3400 6400
 	-1   0    0    1   
@@ -1681,6 +1681,4 @@ Wire Bus Line
 	8200 5100 8600 5100
 Wire Bus Line
 	5700 5400 5700 7500
-Text Label 2600 7300 0    50   ~ 0
-CEP
 $EndSCHEMATC

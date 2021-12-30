@@ -62,7 +62,7 @@ public class F521
       long p = pValue.getValue();
       long q = qValue.getValue();
 
-      getPins().setQEqualP(p == q);
+      getPins().setQEqualP(p != q);
     }
   }
 

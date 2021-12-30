@@ -32,6 +32,7 @@ import net.logisim.integratedcircuits.ti.f283.F283Factory;
 import net.logisim.integratedcircuits.ti.f521.F521Factory;
 import net.logisim.integratedcircuits.ti.ls148.LS148Factory;
 import net.logisim.integratedcircuits.ti.lvc543.LVC543Factory;
+import net.logisim.integratedcircuits.toshiba.vhc238.VHC238Factory;
 import net.logisim.integratedcircuits.wdc.w65c02.W65C02Factory;
 import net.logisim.integratedcircuits.wdc.w65c816.W65C816Factory;
 
@@ -67,6 +68,7 @@ public class Components
       tools.add(new AddTool(F251Factory.create()));
       tools.add(new AddTool(LVC139Factory.create()));
       tools.add(new AddTool(LVC138Factory.create()));
+      tools.add(new AddTool(VHC238Factory.create()));
       tools.add(new AddTool(LS148Factory.create()));
       tools.add(new AddTool(LVC157Factory.create()));
       tools.add(new AddTool(LVC257Factory.create()));

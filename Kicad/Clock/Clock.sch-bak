@@ -455,8 +455,6 @@ Wire Wire Line
 Wire Wire Line
 	10800 2450 10800 3000
 Wire Wire Line
-	4350 7300 2800 7300
-Wire Wire Line
 	2000 4700 2400 4700
 Wire Wire Line
 	2400 4700 2400 3000
@@ -1609,14 +1607,14 @@ M3
 Text Label 5850 7300 0    50   ~ 0
 M4
 $Comp
-L Connector:Conn_01x05_Male J_Multiplexer1
+L Connector:Conn_01x04_Male J_Counter
 U 1 1 61F4632A
-P 3400 6400
-F 0 "J_Multiplexer1" H 3750 6650 50  0000 R CNN
-F 1 "Conn_01x05_Male" H 3372 6423 50  0001 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 3400 6400 50  0001 C CNN
-F 3 "~" H 3400 6400 50  0001 C CNN
-	1    3400 6400
+P 3400 6500
+F 0 "J_Counter" H 3750 6750 50  0000 R CNN
+F 1 "Conn_01x05_Male" H 3372 6523 50  0001 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 3400 6500 50  0001 C CNN
+F 3 "~" H 3400 6500 50  0001 C CNN
+	1    3400 6500
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
@@ -1643,13 +1641,6 @@ Wire Wire Line
 Wire Wire Line
 	3200 6300 2900 6300
 Wire Wire Line
-	3200 6200 2800 6200
-Wire Wire Line
-	2800 6200 2800 7300
-Connection ~ 2800 7300
-Wire Wire Line
-	2800 7300 2400 7300
-Wire Wire Line
 	2200 6900 3000 6900
 Wire Wire Line
 	2900 6300 2900 6800
@@ -1675,6 +1666,8 @@ Wire Wire Line
 	2200 7000 3100 7000
 Wire Wire Line
 	2200 6800 2900 6800
+Wire Wire Line
+	2400 7300 4350 7300
 Wire Bus Line
 	8600 3600 8600 5100
 Wire Bus Line

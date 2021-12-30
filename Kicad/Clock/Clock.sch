@@ -1607,10 +1607,10 @@ M3
 Text Label 5850 7300 0    50   ~ 0
 M4
 $Comp
-L Connector:Conn_01x04_Male J_Multiplexer1
+L Connector:Conn_01x04_Male J_Counter1
 U 1 1 61F4632A
 P 3400 6500
-F 0 "J_Multiplexer1" H 3750 6750 50  0000 R CNN
+F 0 "J_Counter1" H 3750 6750 50  0000 R CNN
 F 1 "Conn_01x05_Male" H 3372 6523 50  0001 R CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 3400 6500 50  0001 C CNN
 F 3 "~" H 3400 6500 50  0001 C CNN
@@ -1666,12 +1666,12 @@ Wire Wire Line
 	2200 7000 3100 7000
 Wire Wire Line
 	2200 6800 2900 6800
+Wire Wire Line
+	2400 7300 4350 7300
 Wire Bus Line
 	8600 3600 8600 5100
 Wire Bus Line
 	8200 5100 8600 5100
 Wire Bus Line
 	5700 5400 5700 7500
-Wire Wire Line
-	2400 7300 4350 7300
 $EndSCHEMATC

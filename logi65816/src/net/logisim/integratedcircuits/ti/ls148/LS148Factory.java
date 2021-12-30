@@ -23,10 +23,10 @@ public class LS148Factory
   {
     PortFactory factory = new PortFactory();
 
-    PORT_EI = factory.inputShared("EI", LEFT).setInverting().createPin(16);
-    PORT_INPUT = factory.inputShared("I", 8, LEFT).setInverting().createBus(16);
+    PORT_EI = factory.inputShared("EI", LEFT).setInverting().setDrawBar().createPin(16);
+    PORT_INPUT = factory.inputShared("I", 8, LEFT).setInverting().setDrawBar().createBus(16);
 
-    PORT_GS = factory.outputShared("GS", RIGHT).setInverting().createPin(16);
+    PORT_GS = factory.outputShared("GS", RIGHT).setInverting().setDrawBar().createPin(16);
     PORT_A = factory.outputShared("A", 3, RIGHT).createBus(16);
     PORT_EO = factory.inputShared("EO", RIGHT).createPin(16);
 

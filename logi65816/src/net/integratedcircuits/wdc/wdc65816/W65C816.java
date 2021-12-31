@@ -361,9 +361,7 @@ public class W65C816
 
       if (reset)
       {
-        opCode = resetOpcode;
-        stopped = false;
-        cycle = 0;
+        reset();
       }
 
       if (!busEnable)
@@ -379,9 +377,8 @@ public class W65C816
 
       if (reset)
       {
-        opCode = resetOpcode;
-        stopped = false;
-        cycle = 0;
+        reset = getPins().isReset();
+        reset();
       }
 
       if (!busEnable)
@@ -390,7 +387,7 @@ public class W65C816
       }
 
       int data = getPins().peekData();
-
+      System.out.println("W65C816.tick: " + to8BitHex(data));
       tickWithConnectedTiming();
     }
 
@@ -402,6 +399,15 @@ public class W65C816
       }
       time++;
     }
+  }
+
+  private void reset()
+  {
+    nmi = false;
+    irq = false;
+    opCode = resetOpcode;
+    stopped = false;
+    cycle = 0;
   }
 
   private void tickWithConnectedTiming()
@@ -492,7 +498,7 @@ public class W65C816
       {
         irq = getPins().isIRQ() || irq;
         nmi = getPins().isNMI() || nmi;
-        reset = getPins().isNMI() || reset;
+        reset = getPins().isReset() || reset;
       }
 
       if (timing.readDataAndIntRequired.timeIn(time))

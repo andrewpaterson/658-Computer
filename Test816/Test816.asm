@@ -1,5 +1,3 @@
-;
-
 STARTUP SECTION
 
 	ORG	$0000

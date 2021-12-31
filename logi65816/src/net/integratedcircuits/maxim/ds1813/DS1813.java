@@ -1,6 +1,7 @@
 package net.integratedcircuits.maxim.ds1813;
 
 import net.common.IntegratedCircuit;
+import net.common.PinValue;
 
 public class DS1813
     extends IntegratedCircuit<DS1813Snapshot, DS1813Pins>
@@ -12,12 +13,24 @@ public class DS1813
   public DS1813(String name, DS1813Pins pins)
   {
     super(name, pins);
-    stretch = 9;
+    stretch = 3;
+    startCounter();
+  }
+
+  private void startCounter()
+  {
+    getPins().startCounter();
   }
 
   @Override
   public void tick()
   {
+    PinValue reset = getPins().getReset();
+    if (!reset.isHigh())
+    {
+      startCounter();
+    }
+
     getPins().setOut();
   }
 

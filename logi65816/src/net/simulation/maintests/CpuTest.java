@@ -127,7 +127,7 @@ public class CpuTest
     new ClockOscillator("", new ClockOscillatorTickablePins(tickables, clockTrace));
     new NotGate("", new NotGateTickablePins(tickables, clockTrace, notClockTrace));
 
-    DS1813 econoReset = new DS1813("", new DS1813TickablePins(tickables, resetBTrace));
+    DS1813 econoReset = new DS1813("", new DS1813TickablePins(tickables, resetBTrace, null));
 
     Memory memory = new Memory("",
                                new MemoryTickablePins(tickables,

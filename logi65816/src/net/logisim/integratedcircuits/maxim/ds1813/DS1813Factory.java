@@ -2,7 +2,6 @@ package net.logisim.integratedcircuits.maxim.ds1813;
 
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
-import com.cburch.logisim.instance.Port;
 import net.integratedcircuits.maxim.ds1813.DS1813;
 import net.logisim.common.*;
 
@@ -16,15 +15,18 @@ public class DS1813Factory
     extends LogisimFactory<DS1813LogisimPins>
     implements LogisimPainter<DS1813LogisimPins>
 {
-  protected static int PORT_CLOCK;
-  protected static int PORT_RSTB;
+  protected static LogiPin PORT_CLOCK;
+  protected static LogiPin PORT_RSTB;
+  protected static LogiPin PORT_RESET_SW;
 
   public static DS1813Factory create()
   {
     PortFactory factory = new PortFactory();
 
-    PORT_CLOCK = factory.inputShared("", LEFT).index();
-    PORT_RSTB = factory.inoutShared("RST", RIGHT).setInverting().setDrawBar().index();
+    PORT_RESET_SW = factory.inputShared("RSW", LEFT).setTooltip("Reset Switch (low reset)").createPin(100);
+    factory.blank(LEFT);
+    PORT_CLOCK = factory.inputShared("", LEFT).createPin(1);
+    PORT_RSTB = factory.inoutShared("RST", RIGHT).setInverting().setDrawBar().createPin(100);
 
     return new DS1813Factory(new ComponentDescription(DS1813.class.getSimpleName(),
                                                       DS1813.TYPE,
@@ -36,15 +38,6 @@ public class DS1813Factory
   private DS1813Factory(ComponentDescription description)
   {
     super(description);
-  }
-
-  protected Port createLeftSidePort(ComponentDescription description, PortDescription portDescription, int sideIndex)
-  {
-    return new Port(description.getLeft() + description.pixelsPerPin(),
-                    description.getPinStartY() + sideIndex * description.pixelsPerPin(),
-                    portDescription.getType(),
-                    portDescription.getBitWidth(),
-                    portDescription.getExclusive());
   }
 
   @Override

@@ -387,7 +387,6 @@ public class W65C816
       }
 
       int data = getPins().peekData();
-      System.out.println("W65C816.tick: " + to8BitHex(data));
       tickWithConnectedTiming();
     }
 
@@ -450,6 +449,8 @@ public class W65C816
         pins.setVectorPullBUnknown();
       }
 
+      boolean readDataAndInterruptsTime = timing.readDataAndIntRequired.timeIn(time);
+
       if (timing.bankOut.timeIn(time))
       {
         pins.setBank(address.getBank());
@@ -458,7 +459,7 @@ public class W65C816
       {
         pins.setData(pinData);
       }
-      else if (read && timing.readDataAndIntRequired.timeIn(time))
+      else if (read && readDataAndInterruptsTime)
       {
         pinData = pins.getData();
       }
@@ -494,15 +495,12 @@ public class W65C816
         pins.setEmulationUnknown();
       }
 
-      if (timing.readDataAndIntRequired.timeIn(time))
+      if (readDataAndInterruptsTime)
       {
         irq = getPins().isIRQ() || irq;
         nmi = getPins().isNMI() || nmi;
         reset = getPins().isReset() || reset;
-      }
 
-      if (timing.readDataAndIntRequired.timeIn(time))
-      {
         getPins().setRdy(dataOperation.isReady());
       }
       else
@@ -631,10 +629,10 @@ public class W65C816
       timing.setFromLong(timingValue);
     }
 
-    boolean currentClock = getPins().isTimingClock();
-    boolean risingEdge = currentClock && !this.timingClock;
-    boolean fallingEdge = !currentClock && this.timingClock;
-    timingClock = currentClock;
+    boolean timingClock = getPins().isTimingClock();
+    boolean risingEdge = timingClock && !this.timingClock;
+    boolean fallingEdge = !timingClock && this.timingClock;
+    this.timingClock = timingClock;
 
     return risingEdge || fallingEdge;
   }
@@ -2450,11 +2448,6 @@ public class W65C816
   public String getCycleString(W65C816Snapshot snapshot)
   {
     return snapshot != null ? Integer.toString(snapshot.cycle) : Integer.toString(cycle);
-  }
-
-  public int getTime()
-  {
-    return time - 1;
   }
 
   public void writePinData(int data)

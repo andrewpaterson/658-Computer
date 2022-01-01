@@ -433,10 +433,10 @@ public class W65C816
         }
 
         pins.setRWB(read);
-        pins.setValidDataAddress(dataOperation.isValidDataAddress());
-        pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-        pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-        pins.setVectorPullB(dataOperation.isNotVectorPull());
+        pins.setValidDataAddress(dataOperation != null && dataOperation.isValidDataAddress());
+        pins.setValidProgramAddress(dataOperation != null && dataOperation.isValidProgramAddress());
+        pins.setMemoryLockB(dataOperation == null || dataOperation.isNotMemoryLock());
+        pins.setVectorPullB(dataOperation == null || dataOperation.isNotVectorPull());
       }
       else
       {

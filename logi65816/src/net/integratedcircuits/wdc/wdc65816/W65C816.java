@@ -396,7 +396,10 @@ public class W65C816
       {
         time = 0;
       }
-      time++;
+      else
+      {
+        time++;
+      }
     }
   }
 
@@ -634,6 +637,11 @@ public class W65C816
     this.timingClock = timingClock;
 
     return risingEdge || fallingEdge;
+  }
+
+  public boolean isTimingConnected()
+  {
+    return !timing.notConnected;
   }
 
   public BusCycle getBusCycle()
@@ -2457,6 +2465,11 @@ public class W65C816
   public int readPinData()
   {
     return pinData;
+  }
+
+  public String getTiming()
+  {
+    return Integer.toString(time);
   }
 }
 

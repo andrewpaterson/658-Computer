@@ -4,8 +4,8 @@ import com.cburch.logisim.util.GraphicsUtil;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.W65C816Snapshot;
 import net.logisim.common.ComponentDescription;
-import net.logisim.common.PropagatingInstanceFactory;
 import net.logisim.common.PortFactory;
+import net.logisim.common.PropagatingInstanceFactory;
 import net.logisim.common.SimpleInstancePainter;
 
 import java.awt.*;
@@ -100,22 +100,28 @@ public class W65C816Factory
 
     int processorStatusTopOffset = TOP_OFFSET + 185;
     boolean emulationMode = cpu.isEmulation();
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, -80, "E", emulationMode);
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, -60, "C", cpu.isCarry());
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, -40, "Z", cpu.isZeroFlag());
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, -20, "I", cpu.isInterruptDisable());
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, 0, "D", cpu.isDecimal());
+    int xOffset = 0;
+    if (cpu.isTimingConnected())
+    {
+      xOffset = -20;
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 100, cpu.getTiming(), false);
+    }
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -80 + xOffset, "E", emulationMode);
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -60 + xOffset, "C", cpu.isCarry());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -40 + xOffset, "Z", cpu.isZeroFlag());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, -20 + xOffset, "I", cpu.isInterruptDisable());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, xOffset, "D", cpu.isDecimal());
     if (emulationMode)
     {
-      drawProcessorStatus(graphics2D, processorStatusTopOffset, 20, "B", cpu.isBreak());
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 20 + xOffset, "B", cpu.isBreak());
     }
     else
     {
-      drawProcessorStatus(graphics2D, processorStatusTopOffset, 20, "X", cpu.isIndex8Bit());
-      drawProcessorStatus(graphics2D, processorStatusTopOffset, 40, "M", cpu.isMemory8Bit());
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 20 + xOffset, "X", cpu.isIndex8Bit());
+      drawProcessorStatus(graphics2D, processorStatusTopOffset, 40 + xOffset, "M", cpu.isMemory8Bit());
     }
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, 60, "V", cpu.isOverflowFlag());
-    drawProcessorStatus(graphics2D, processorStatusTopOffset, 80, "N", cpu.isNegative());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, 60 + xOffset, "V", cpu.isOverflowFlag());
+    drawProcessorStatus(graphics2D, processorStatusTopOffset, 80 + xOffset, "N", cpu.isNegative());
   }
 
   private void drawProcessorStatus(Graphics g, int topOffset, int horizontalPosition, String flag, boolean black)

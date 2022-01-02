@@ -104,7 +104,7 @@
     <a name="circuit" val="Microcontroller"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="64.0"/>
-    <comp lib="0" loc="(1060,280)" name="Tunnel">
+    <comp lib="0" loc="(1060,290)" name="Tunnel">
       <a name="label" val="FST"/>
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
@@ -115,52 +115,52 @@
     </comp>
     <comp lib="0" loc="(1060,350)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x4"/>
+      <a name="value" val="0x5"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,370)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x0"/>
+      <a name="value" val="0x9"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,390)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x0"/>
+      <a name="value" val="0x9"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,410)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x0"/>
+      <a name="value" val="0x9"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,430)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x3"/>
+      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,450)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x0"/>
+      <a name="value" val="0x9"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,470)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x0"/>
+      <a name="value" val="0x9"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,490)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x3"/>
+      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,510)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x0"/>
+      <a name="value" val="0x9"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,530)" name="Constant">
       <a name="facing" val="west"/>
-      <a name="value" val="0x3"/>
+      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1060,550)" name="Tunnel">
@@ -690,6 +690,7 @@
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
     <comp lib="0" loc="(1840,1320)" name="Splitter">
+      <a name="appear" val="right"/>
       <a name="bit0" val="1"/>
       <a name="bit2" val="1"/>
       <a name="bit3" val="1"/>
@@ -702,7 +703,6 @@
       <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(1840,1320)" name="Splitter">
-      <a name="appear" val="right"/>
       <a name="bit0" val="1"/>
       <a name="bit2" val="1"/>
       <a name="bit3" val="1"/>
@@ -1510,43 +1510,39 @@
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
     <comp lib="0" loc="(820,350)" name="Constant">
-      <a name="value" val="0x9"/>
+      <a name="value" val="0x8"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,370)" name="Constant">
-      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,390)" name="Constant">
-      <a name="value" val="0x9"/>
+      <a name="value" val="0x8"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,410)" name="Constant">
-      <a name="value" val="0x5"/>
+      <a name="value" val="0x4"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,430)" name="Constant">
-      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,450)" name="Constant">
-      <a name="value" val="0x9"/>
+      <a name="value" val="0x8"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,470)" name="Constant">
-      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,490)" name="Constant">
-      <a name="value" val="0x2"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,510)" name="Constant">
-      <a name="value" val="0x9"/>
+      <a name="value" val="0x8"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,530)" name="Constant">
-      <a name="value" val="0x9"/>
+      <a name="value" val="0x8"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(820,550)" name="Tunnel">
@@ -1880,7 +1876,6 @@
     <wire from="(1060,190)" to="(1180,190)"/>
     <wire from="(1060,210)" to="(1160,210)"/>
     <wire from="(1060,250)" to="(1120,250)"/>
-    <wire from="(1060,280)" to="(1060,290)"/>
     <wire from="(1070,230)" to="(1140,230)"/>
     <wire from="(1080,1050)" to="(1090,1050)"/>
     <wire from="(110,1000)" to="(130,1000)"/>
@@ -3740,26 +3735,6 @@
       <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(710,330)" name="Splitter">
-      <a name="bit0" val="1"/>
-      <a name="bit10" val="1"/>
-      <a name="bit11" val="1"/>
-      <a name="bit12" val="1"/>
-      <a name="bit13" val="1"/>
-      <a name="bit14" val="1"/>
-      <a name="bit15" val="1"/>
-      <a name="bit16" val="0"/>
-      <a name="bit2" val="1"/>
-      <a name="bit3" val="1"/>
-      <a name="bit4" val="1"/>
-      <a name="bit5" val="1"/>
-      <a name="bit6" val="1"/>
-      <a name="bit7" val="1"/>
-      <a name="bit8" val="1"/>
-      <a name="bit9" val="1"/>
-      <a name="incoming" val="17"/>
-      <a name="spacing" val="2"/>
-    </comp>
-    <comp lib="0" loc="(710,330)" name="Splitter">
       <a name="bit0" val="2"/>
       <a name="bit1" val="2"/>
       <a name="bit10" val="1"/>
@@ -3780,6 +3755,26 @@
       <a name="fanout" val="3"/>
       <a name="incoming" val="17"/>
       <a name="spacing" val="3"/>
+    </comp>
+    <comp lib="0" loc="(710,330)" name="Splitter">
+      <a name="bit0" val="1"/>
+      <a name="bit10" val="1"/>
+      <a name="bit11" val="1"/>
+      <a name="bit12" val="1"/>
+      <a name="bit13" val="1"/>
+      <a name="bit14" val="1"/>
+      <a name="bit15" val="1"/>
+      <a name="bit16" val="0"/>
+      <a name="bit2" val="1"/>
+      <a name="bit3" val="1"/>
+      <a name="bit4" val="1"/>
+      <a name="bit5" val="1"/>
+      <a name="bit6" val="1"/>
+      <a name="bit7" val="1"/>
+      <a name="bit8" val="1"/>
+      <a name="bit9" val="1"/>
+      <a name="incoming" val="17"/>
+      <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(780,320)" name="Splitter">
       <a name="appear" val="right"/>

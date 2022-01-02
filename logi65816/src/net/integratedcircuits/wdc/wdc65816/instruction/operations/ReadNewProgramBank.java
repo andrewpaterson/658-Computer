@@ -13,7 +13,7 @@ public class ReadNewProgramBank
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setNewProgramCounterBank(cpu.readPinData());
+    cpu.setNewProgramCounterBank(cpu.getData());
   }
 
   @Override

@@ -13,7 +13,7 @@ public class ReadNewProgramCounterLow
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setNewProgramCounterLow(cpu.readPinData());
+    cpu.setNewProgramCounterLow(cpu.getData());
   }
 
   @Override

@@ -18,7 +18,7 @@ public class InternalOperation
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.readPinData();
+    cpu.getData();
   }
 
   @Override

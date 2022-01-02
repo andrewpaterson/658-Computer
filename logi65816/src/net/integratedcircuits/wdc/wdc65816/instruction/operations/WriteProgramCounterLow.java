@@ -14,7 +14,7 @@ public class WriteProgramCounterLow
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.writePinData(IntUtil.getLowByte(cpu.getProgramCounter().getOffset()));
+    cpu.setData(IntUtil.getLowByte(cpu.getProgramCounter().getOffset()));
   }
 
   @Override

@@ -13,7 +13,7 @@ public class ReadDataHigh
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setDataHigh(cpu.readPinData());
+    cpu.setDataHigh(cpu.getData());
   }
 
   @Override

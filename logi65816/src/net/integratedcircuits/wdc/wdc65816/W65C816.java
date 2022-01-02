@@ -67,7 +67,7 @@ public class W65C816
 
   //These are not the values on the pins, they are internal data.
   protected Address address;
-  protected int data;
+  protected int internal16BitData;
   protected int directOffset;
   protected Address newProgramCounter;
   protected boolean busEnable;
@@ -76,7 +76,8 @@ public class W65C816
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
-  protected int pinData;
+
+  protected int data;
 
   protected W65C816Timing timing;
   protected int time;
@@ -120,11 +121,11 @@ public class W65C816
     busEnable = true;
     nextInstruction = false;
 
-    pinData = 0;
+    data = 0;
     clock = false;
     cycle = 0;
     opCode = resetOpcode;
-    data = 0;
+    internal16BitData = 0;
     directOffset = 0;
     newProgramCounter = new Address();
     address = new Address();
@@ -221,12 +222,12 @@ public class W65C816
     if (isMemory16Bit())
     {
       assert16Bit(data, "Data");
-      this.data = data;
+      this.internal16BitData = data;
     }
     else
     {
       assert8Bit(data, "Data");
-      this.data = setLowByte(this.data, data);
+      this.internal16BitData = setLowByte(this.internal16BitData, data);
     }
     if (updateFlags)
     {
@@ -239,12 +240,12 @@ public class W65C816
     if (isIndex16Bit())
     {
       assert16Bit(data, "Data");
-      this.data = data;
+      this.internal16BitData = data;
     }
     else
     {
       assert8Bit(data, "Data");
-      this.data = setLowByte(this.data, data);
+      this.internal16BitData = setLowByte(this.internal16BitData, data);
     }
     if (updateFlags)
     {
@@ -276,9 +277,9 @@ public class W65C816
     }
   }
 
-  public void setData(int data)
+  public void setInternal16BitData(int internal16BitData)
   {
-    setData(data, true);
+    setData(internal16BitData, true);
   }
 
   public int getA()
@@ -427,6 +428,11 @@ public class W65C816
         executeOperation();
       }
 
+      if (timing.addressOut.start == time)
+      {
+
+      }
+
       if (timing.addressOut.timeIn(time))
       {
         if (busCycle != null)
@@ -458,11 +464,11 @@ public class W65C816
       }
       else if (write && timing.writeDataOut.timeIn(time))
       {
-        pins.setData(pinData);
+        pins.setData(data);
       }
       else if (read && timing.readDataRequired.timeIn(time))
       {
-        pinData = pins.getData();
+        data = pins.getData();
       }
       else
       {
@@ -569,7 +575,7 @@ public class W65C816
 
     if (read)
     {
-      pinData = pins.getData();
+      data = pins.getData();
     }
 
     pins.setRWB(read);
@@ -586,7 +592,7 @@ public class W65C816
 
     if (!read)
     {
-      pins.setData(pinData);
+      pins.setData(data);
     }
 
     cycle();
@@ -758,23 +764,23 @@ public class W65C816
 
   public int getDataLow()
   {
-    return getLowByte(data);
+    return getLowByte(internal16BitData);
   }
 
   public int getDataHigh()
   {
-    return getHighByte(data);
+    return getHighByte(internal16BitData);
   }
 
-  public int getData()
+  public int getInternal16BitData()
   {
     if (isMemory16Bit())
     {
-      return data;
+      return internal16BitData;
     }
     else
     {
-      return toByte(data);
+      return toByte(internal16BitData);
     }
   }
 
@@ -782,17 +788,17 @@ public class W65C816
   {
     if (isIndex16Bit())
     {
-      return data;
+      return internal16BitData;
     }
     else
     {
-      return toByte(data);
+      return toByte(internal16BitData);
     }
   }
 
   public int getData16Bit()
   {
-    return data;
+    return internal16BitData;
   }
 
   public int getDirectPage()
@@ -923,13 +929,13 @@ public class W65C816
   public void setDataLow(int data)
   {
     assert8Bit(data, "Data Low");
-    this.data = setLowByte(this.data, data);
+    this.internal16BitData = setLowByte(this.internal16BitData, data);
   }
 
   public void setDataHigh(int data)
   {
     assert8Bit(data, "Data High");
-    this.data = setHighByte(this.data, data);
+    this.internal16BitData = setHighByte(this.internal16BitData, data);
   }
 
   public void setStackPointer(int data)
@@ -1185,7 +1191,7 @@ public class W65C816
 
   protected void execute8BitADC()
   {
-    int operand = getData();
+    int operand = getInternal16BitData();
     int accumulator = getA();
     int carryValue = getCarry();
 
@@ -1203,7 +1209,7 @@ public class W65C816
 
   protected void execute16BitADC()
   {
-    int operand = getData();
+    int operand = getInternal16BitData();
     int accumulator = getA();
     int carryValue = getCarry();
 
@@ -1231,7 +1237,7 @@ public class W65C816
 
   protected void execute16BitBCDADC()
   {
-    int operand = getData();
+    int operand = getInternal16BitData();
     int accumulator = getA();
 
     BCDResult bcdResult = bcdAdd16Bit(operand, accumulator, isCarrySet());
@@ -1241,7 +1247,7 @@ public class W65C816
 
   public void execute8BitSBC()
   {
-    int value = getData();
+    int value = getInternal16BitData();
     int accumulator = getA();
     int borrowValue = 1 - getCarry();
 
@@ -1259,7 +1265,7 @@ public class W65C816
 
   protected void execute16BitSBC()
   {
-    int value = getData();
+    int value = getInternal16BitData();
     int accumulator = getA();
     int borrowValue = 1 - getCarry();
 
@@ -1287,7 +1293,7 @@ public class W65C816
 
   protected void execute16BitBCDSBC()
   {
-    int value = getData();
+    int value = getInternal16BitData();
     int accumulator = getA();
 
     BCDResult bcdResult = bcdSubtract16Bit(value, accumulator, !isCarrySet());
@@ -1548,11 +1554,11 @@ public class W65C816
 
   public void ASL()
   {
-    int operand = getData();
+    int operand = getInternal16BitData();
     boolean carry = isMemoryNegative(operand);
     operand = trimMemory(operand << 1);
     setCarryFlag(carry);
-    setData(operand);
+    setInternal16BitData(operand);
   }
 
   public void ASL_A()
@@ -1566,7 +1572,7 @@ public class W65C816
 
   public void PER()
   {
-    data = toShort(data + programCounter.getOffset());  // + Carry?
+    internal16BitData = toShort(internal16BitData + programCounter.getOffset());  // + Carry?
   }
 
   public void PLD()
@@ -1576,7 +1582,7 @@ public class W65C816
 
   public void PHD()
   {
-    data = directPage;
+    internal16BitData = directPage;
   }
 
   public void PLB()
@@ -1627,19 +1633,19 @@ public class W65C816
 
   public void ORA()
   {
-    setA(getA() | getData());
+    setA(getA() | getInternal16BitData());
   }
 
   public void TSB()
   {
-    int value = getData();
+    int value = getInternal16BitData();
     setData((value | getA()), false);
     setZeroFlag((value & getA()) == 0);
   }
 
   public void TRB()
   {
-    int value = getData();
+    int value = getInternal16BitData();
     setData(value & trimMemory(~getA()), false);
     setZeroFlag((value & getA()) == 0);
   }
@@ -1680,12 +1686,12 @@ public class W65C816
 
   public void AND()
   {
-    setA((getA() & getData()));
+    setA((getA() & getInternal16BitData()));
   }
 
   public void BIT()
   {
-    int value = getData();
+    int value = getInternal16BitData();
 
     if (isMemory16Bit())
     {
@@ -1705,17 +1711,17 @@ public class W65C816
   {
     if (isMemory16Bit())
     {
-      setZeroFlagFrom16BitValue((getData() & getA()));
+      setZeroFlagFrom16BitValue((getInternal16BitData() & getA()));
     }
     else
     {
-      setZeroFlagFrom8BitValue((getData() & getA()));
+      setZeroFlagFrom8BitValue((getInternal16BitData() & getA()));
     }
   }
 
   public void ROL()
   {
-    setData(rotateLeft(getData()));
+    setInternal16BitData(rotateLeft(getInternal16BitData()));
   }
 
   public void ROL_A()
@@ -1741,7 +1747,7 @@ public class W65C816
 
   public void EOR()
   {
-    int result = trimMemory(getA() ^ getData());
+    int result = trimMemory(getA() ^ getInternal16BitData());
     setSignAndZeroFromMemory(result);
     setA(result);
   }
@@ -1768,7 +1774,7 @@ public class W65C816
 
   public void LSR()
   {
-    setData(shiftRight(getData()));
+    setInternal16BitData(shiftRight(getInternal16BitData()));
   }
 
   public void PHA()
@@ -1830,17 +1836,17 @@ public class W65C816
 
   public void STZ()
   {
-    setData(0);
+    setInternal16BitData(0);
   }
 
   public void PLA()
   {
-    setA(getData());
+    setA(getInternal16BitData());
   }
 
   public void ROR()
   {
-    setData(rotateRight(getData()));
+    setInternal16BitData(rotateRight(getInternal16BitData()));
   }
 
   public void ROR_A()
@@ -1918,28 +1924,28 @@ public class W65C816
   {
     if (isIndex16Bit())
     {
-      setY(data);
+      setY(internal16BitData);
     }
     else
     {
-      setY(toByte(data));
+      setY(toByte(internal16BitData));
     }
   }
 
   public void LDA()
   {
-    setA(getData());
+    setA(getInternal16BitData());
   }
 
   public void LDX()
   {
     if (isIndex16Bit())
     {
-      setX(data);
+      setX(internal16BitData);
     }
     else
     {
-      setX(toByte(data));
+      setX(toByte(internal16BitData));
     }
   }
 
@@ -2015,7 +2021,7 @@ public class W65C816
 
   public void CMP()
   {
-    int value = getData();
+    int value = getInternal16BitData();
     setSignAndZeroFromMemory(trimMemory(getA() - value));
     setCarryFlag(getA() >= value);
   }
@@ -2067,7 +2073,7 @@ public class W65C816
 
   public void DEC()
   {
-    setData(trimMemory(getData() - 1));
+    setInternal16BitData(trimMemory(getInternal16BitData() - 1));
   }
 
   public void INY()
@@ -2136,7 +2142,7 @@ public class W65C816
 
   public void INC()
   {
-    setData(trimMemory(getData() + 1));
+    setInternal16BitData(trimMemory(getInternal16BitData() + 1));
   }
 
   public void INX()
@@ -2357,7 +2363,7 @@ public class W65C816
                                clock,
                                fallingEdge,
                                risingEdge,
-                               pinData,
+                               data,
                                reset,
                                irq,
                                nmi,
@@ -2368,7 +2374,7 @@ public class W65C816
                                opCode,
                                stopped,
                                new Address(address),
-                               data,
+                               internal16BitData,
                                directOffset,
                                new Address(newProgramCounter),
                                abortProcessRegister,
@@ -2407,7 +2413,7 @@ public class W65C816
     clock = snapshot.clock;
     fallingEdge = snapshot.fallingEdge;
     risingEdge = snapshot.risingEdge;
-    pinData = snapshot.pinData;
+    data = snapshot.pinData;
 
     reset = snapshot.reset;
     irq = snapshot.irq;
@@ -2429,7 +2435,7 @@ public class W65C816
     abortStackPointer = snapshot.abortStackPointer;
 
     address = new Address(snapshot.address);
-    data = snapshot.data;
+    internal16BitData = snapshot.data;
     directOffset = snapshot.directOffset;
     newProgramCounter = new Address(snapshot.newProgramCounter);
     time = snapshot.time;
@@ -2457,14 +2463,14 @@ public class W65C816
     return snapshot != null ? Integer.toString(snapshot.cycle) : Integer.toString(cycle);
   }
 
-  public void writePinData(int data)
+  public void setData(int data)
   {
-    pinData = data;
+    this.data = data;
   }
 
-  public int readPinData()
+  public int getData()
   {
-    return pinData;
+    return data;
   }
 
   public String getTiming()

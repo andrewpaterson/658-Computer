@@ -7,6 +7,7 @@ import net.integratedcircuits.wdc.wdc65816.instruction.InstructionFactory;
 import net.integratedcircuits.wdc.wdc65816.instruction.address.InstructionCycles;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.DataOperation;
 import net.integratedcircuits.wdc.wdc65816.instruction.operations.Operation;
+import net.logisim.integratedcircuits.wdc.w65c816.W65C816PinValues;
 import net.util.EmulatorException;
 import net.util.IntUtil;
 
@@ -51,11 +52,6 @@ public class W65C816
   protected Instruction opCode;
   protected boolean stopped;
 
-  protected boolean reset;
-  protected boolean irq;
-  protected boolean nmi;
-  protected boolean abort;
-
   protected int abortProcessRegister;
   protected int abortAccumulator;
   protected int abortXIndex;
@@ -72,12 +68,14 @@ public class W65C816
   protected Address newProgramCounter;
   protected boolean busEnable;
   protected boolean nextInstruction;
+  protected int data;
 
   protected boolean clock;
   protected boolean fallingEdge;
   protected boolean risingEdge;
 
-  protected int data;
+  //Values that will be written (or read) from the pins.
+  W65C816PinValues pinValues;
 
   protected W65C816Timing timing;
   protected int time;
@@ -112,10 +110,7 @@ public class W65C816
     overflowFlag = false;
     breakFlag = false;
 
-    reset = false;
-    irq = false;
-    nmi = false;
-    abort = false;
+    pinValues = new W65C816PinValues();
 
     stopped = false;
     busEnable = true;
@@ -357,10 +352,10 @@ public class W65C816
 
     if (timing.notConnected)
     {
-      reset = getPins().isReset();
+      pinValues.reset = getPins().isReset();
       busEnable = getPins().isBusEnable();
 
-      if (reset)
+      if (pinValues.reset)
       {
         reset();
       }
@@ -376,9 +371,9 @@ public class W65C816
     {
       busEnable = getPins().isBusEnable();
 
-      if (reset)
+      if (pinValues.reset)
       {
-        reset = getPins().isReset();
+        pinValues.reset = getPins().isReset();
         reset();
       }
 
@@ -406,8 +401,8 @@ public class W65C816
 
   private void reset()
   {
-    nmi = false;
-    irq = false;
+    pinValues.nmi = false;
+    pinValues.irq = false;
     opCode = resetOpcode;
     stopped = false;
     cycle = 0;
@@ -430,7 +425,7 @@ public class W65C816
 
       if (timing.addressOut.start == time)
       {
-
+        busCycle.getAddress(this);
       }
 
       if (timing.addressOut.timeIn(time))
@@ -504,9 +499,9 @@ public class W65C816
 
       if (timing.readInterruptsRequired.timeIn(time))
       {
-        irq = getPins().isIRQ() || irq;
-        nmi = getPins().isNMI() || nmi;
-        reset = getPins().isReset() || reset;
+        pinValues.irq = getPins().isIRQ() || pinValues.irq;
+        pinValues.nmi = getPins().isNMI() || pinValues.nmi;
+        pinValues.reset = getPins().isReset() || pinValues.reset;
 
         getPins().setRdy(dataOperation.isReady());
       }
@@ -528,17 +523,17 @@ public class W65C816
     {
       if (fallingEdge)
       {
-        abort = getPins().isAbort() || abort;
-        irq = getPins().isIRQ() || irq;
-        nmi = getPins().isNMI() || nmi;
+        pinValues.abort = getPins().isAbort() || pinValues.abort;
+        pinValues.irq = getPins().isIRQ() || pinValues.irq;
+        pinValues.nmi = getPins().isNMI() || pinValues.nmi;
 
         executeFirstHalf();
       }
 
       if (risingEdge)
       {
-        irq = getPins().isIRQ() || irq;
-        nmi = getPins().isNMI() || nmi;
+        pinValues.irq = getPins().isIRQ() || pinValues.irq;
+        pinValues.nmi = getPins().isNMI() || pinValues.nmi;
 
         executeSecondHalf();
       }
@@ -830,30 +825,30 @@ public class W65C816
 
   private void nextInstruction()
   {
-    if (!abort)
+    if (!pinValues.abort)
     {
       createAbortValues();
     }
 
-    if (irq && interruptDisableFlag)
+    if (pinValues.irq && interruptDisableFlag)
     {
-      irq = false;
+      pinValues.irq = false;
     }
 
-    if (nmi)
+    if (pinValues.nmi)
     {
       opCode = nmiOpcode;
-      nmi = false;
+      pinValues.nmi = false;
     }
-    else if (abort)
+    else if (pinValues.abort)
     {
       opCode = abortOpcode;
-      abort = false;
+      pinValues.abort = false;
     }
-    else if (irq)
+    else if (pinValues.irq)
     {
       opCode = irqOpcode;
-      irq = false;
+      pinValues.irq = false;
     }
     else
     {
@@ -2191,21 +2186,21 @@ public class W65C816
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
-    abort = false;
+    pinValues.abort = false;
   }
 
   public void IRQ()
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
-    irq = false;
+    pinValues.irq = false;
   }
 
   public void NMI()
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
-    nmi = false;
+    pinValues.nmi = false;
   }
 
   public void RES()
@@ -2364,10 +2359,6 @@ public class W65C816
                                fallingEdge,
                                risingEdge,
                                data,
-                               reset,
-                               irq,
-                               nmi,
-                               abort,
                                busEnable,
                                nextInstruction,
                                cycle,
@@ -2377,6 +2368,7 @@ public class W65C816
                                internal16BitData,
                                directOffset,
                                new Address(newProgramCounter),
+                               new W65C816PinValues(pinValues),
                                abortProcessRegister,
                                abortAccumulator,
                                abortXIndex,
@@ -2415,10 +2407,7 @@ public class W65C816
     risingEdge = snapshot.risingEdge;
     data = snapshot.pinData;
 
-    reset = snapshot.reset;
-    irq = snapshot.irq;
-    nmi = snapshot.nmi;
-    abort = snapshot.abort;
+    pinValues = new W65C816PinValues(snapshot.pinValues);
     cycle = snapshot.cycle;
     opCode = snapshot.opCode;
     stopped = snapshot.stopped;

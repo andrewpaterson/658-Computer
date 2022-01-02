@@ -2,6 +2,7 @@ package net.integratedcircuits.wdc.wdc65816;
 
 import net.common.Snapshot;
 import net.integratedcircuits.wdc.wdc65816.instruction.Instruction;
+import net.logisim.integratedcircuits.wdc.w65c816.W65C816PinValues;
 
 public class W65C816Snapshot
     implements Snapshot
@@ -27,11 +28,6 @@ public class W65C816Snapshot
   public Address programCounter;
   public int stackPointer;
 
-  public boolean reset;
-  public boolean irq;
-  public boolean nmi;
-  public boolean abort;
-
   public boolean clock;
   public boolean fallingEdge;
   public boolean risingEdge;
@@ -48,6 +44,8 @@ public class W65C816Snapshot
   public int data;
   public int directOffset;
   public Address newProgramCounter;
+
+  W65C816PinValues pinValues;
 
   public int abortProcessRegister;
   public int abortAccumulator;
@@ -82,10 +80,6 @@ public class W65C816Snapshot
                          boolean fallingEdge,
                          boolean risingEdge,
                          int pinData,
-                         boolean reset,
-                         boolean irq,
-                         boolean nmi,
-                         boolean abort,
                          boolean busEnable,
                          boolean nextInstruction,
                          int cycle,
@@ -95,6 +89,7 @@ public class W65C816Snapshot
                          int data,
                          int directOffset,
                          Address newProgramCounter,
+                         W65C816PinValues pinValues,
                          int abortProcessRegister,
                          int abortAccumulator,
                          int abortXIndex,
@@ -128,11 +123,7 @@ public class W65C816Snapshot
     this.fallingEdge = fallingEdge;
     this.risingEdge = risingEdge;
     this.pinData = pinData;
-
-    this.reset = reset;
-    this.irq = irq;
-    this.nmi = nmi;
-    this.abort = abort;
+    this.pinValues = pinValues;
 
     this.cycle = cycle;
     this.opCode = opCode;

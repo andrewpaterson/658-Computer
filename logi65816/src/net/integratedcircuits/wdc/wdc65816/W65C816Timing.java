@@ -9,7 +9,7 @@ public class W65C816Timing
   public TimeRange mOut;
   public TimeRange xOut;
   public TimeRange eOut;
-  public TimeRange readAbourtRequried;
+  public TimeRange readAbortRequired;
 
   public boolean notConnected;
 
@@ -22,7 +22,7 @@ public class W65C816Timing
     this.mOut = new TimeRange();
     this.xOut = new TimeRange();
     this.eOut = new TimeRange();
-    this.readAbourtRequried = new TimeRange();
+    this.readAbortRequired = new TimeRange();
 
     notConnected = true;
   }
@@ -53,7 +53,7 @@ public class W65C816Timing
     this.mOut.set(mOutStart, mOutStop);
     this.xOut.set(xOutStart, xOutStop);
     this.eOut.set(eOutStart, eOutStop);
-    this.readAbourtRequried.set(readAbortRequiredStart, readAbortRequiredStop);
+    this.readAbortRequired.set(readAbortRequiredStart, readAbortRequiredStop);
   }
 
   public void setFromLong(long timingValue)

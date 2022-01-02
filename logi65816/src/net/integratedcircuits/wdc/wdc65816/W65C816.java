@@ -425,41 +425,53 @@ public class W65C816
 
       if (timing.addressOut.start == time)
       {
-        busCycle.getAddress(this);
+        pinValues.A = busCycle.getAddress(this).getOffset();
+        pinValues.rwb = dataOperation.isRead();
+        pinValues.mlb = dataOperation.isNotMemoryLock();
+        pinValues.vpb = dataOperation.isNotVectorPull();
+        pinValues.vpa = dataOperation.isValidProgramAddress();
+        pinValues.vda = dataOperation.isValidDataAddress();
       }
 
-      if (timing.addressOut.timeIn(time))
+      boolean writeOldValues = cycle % 2 == 0;
+      if (timing.addressOut.timeIn(time) || writeOldValues)
       {
-        if (busCycle != null)
-        {
-          Address address = busCycle.getAddress(this);
-          pins.setAddress(address.getOffset());
-        }
+        pins.setAddress(pinValues.A);
 
-        pins.setRWB(read);
-        pins.setValidDataAddress(dataOperation != null && dataOperation.isValidDataAddress());
-        pins.setValidProgramAddress(dataOperation != null && dataOperation.isValidProgramAddress());
-        pins.setMemoryLockB(dataOperation == null || dataOperation.isNotMemoryLock());
-        pins.setVectorPullB(dataOperation == null || dataOperation.isNotVectorPull());
+        pins.setRWB(pinValues.rwb);
+        pins.setValidDataAddress(pinValues.vda);
+        pins.setValidProgramAddress(pinValues.vpa);
+        pins.setMemoryLockB(pinValues.mlb);
+        pins.setVectorPullB(pinValues.vpb);
       }
       else
       {
-        pins.setAddressUnknown();
+        pins.setAddress(busCycle.getAddress(this).getOffset());
 
-        pins.setRWBUnknown();
-        pins.setValidDataAddressUnknown();
-        pins.setValidProgramAddressUnknown();
-        pins.setMemoryLockBUnknown();
-        pins.setVectorPullBUnknown();
+        pins.setRWB(dataOperation.isRead());
+        pins.setValidDataAddress(dataOperation.isValidDataAddress());
+        pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
+        pins.setMemoryLockB(dataOperation.isNotMemoryLock());
+        pins.setVectorPullB(dataOperation.isNotVectorPull());
+      }
+
+      if (timing.bankOut.start == time)
+      {
+        pinValues.BA = address.getBank();
+      }
+
+      if (timing.writeDataOut.start == time)
+      {
+        pinValues.writeD = data;
       }
 
       if (timing.bankOut.timeIn(time))
       {
-        pins.setBank(address.getBank());
+        pins.setBank(pinValues.BA);
       }
       else if (write && timing.writeDataOut.timeIn(time))
       {
-        pins.setData(data);
+        pins.setData(pinValues.writeD);
       }
       else if (read && timing.readDataRequired.timeIn(time))
       {
@@ -475,26 +487,63 @@ public class W65C816
         executeOperation();
       }
 
+      if (timing.mOut.start == time)
+      {
+        pinValues.m = isMemory8Bit();
+      }
+      if (timing.xOut.start == time)
+      {
+        pinValues.x = isIndex8Bit();
+      }
+
       if (timing.mOut.timeIn(time))
       {
-        pins.setMX(isMemory8Bit());
+        pins.setMX(pinValues.m);
       }
       else if (timing.xOut.timeIn(time))
       {
-        pins.setMX(isIndex8Bit());
+        pins.setMX(pinValues.x);
       }
-      else
+      else if (TimeRange.timeIn(time, timing.mOut.stop, timing.xOut.start))
       {
-        pins.setMXUnknown();
+        if (writeOldValues)
+        {
+          pins.setMX(pinValues.m);
+        }
+        else
+        {
+          pins.setMX(isMemory8Bit());
+        }
+      }
+      else if (TimeRange.timeIn(time, timing.xOut.stop, timing.mOut.start))
+      {
+        if (writeOldValues)
+        {
+          pins.setMX(pinValues.x);
+        }
+        else
+        {
+          pins.setMX(isIndex8Bit());
+        }
       }
 
-      if (timing.eOut.timeIn(time))
+      if (timing.eOut.start == time)
+      {
+        pinValues.e = isEmulation();
+      }
+
+       if (timing.eOut.timeIn(time) || writeOldValues)
+      {
+        pins.setEmulation(pinValues.e);
+      }
+      else
       {
         pins.setEmulation(isEmulation());
       }
-      else
+
+      if (timing.readInterruptsRequired.start == time)
       {
-        pins.setEmulationUnknown();
+        pinValues.rdy = dataOperation.isReady();
       }
 
       if (timing.readInterruptsRequired.timeIn(time))
@@ -502,12 +551,15 @@ public class W65C816
         pinValues.irq = getPins().isIRQ() || pinValues.irq;
         pinValues.nmi = getPins().isNMI() || pinValues.nmi;
         pinValues.reset = getPins().isReset() || pinValues.reset;
+      }
 
-        getPins().setRdy(dataOperation.isReady());
+      if (timing.readInterruptsRequired.timeIn(time) || writeOldValues)
+      {
+        getPins().setRdy(pinValues.rdy);
       }
       else
       {
-        getPins().setRdyUnknown();
+        getPins().setRdy(dataOperation.isReady());
       }
 
       if (fallingEdge)
@@ -670,6 +722,7 @@ public class W65C816
     }
     else
     {
+      System.out.println("W65C816.getDataOperation: BusCycle for OpCode [" + opCode.getName() + "] Cycle [" + cycle + "] cannot be fetch.  OpCode cycles size [" + opCode.getCycles().size() + "].");
       return null;
     }
   }

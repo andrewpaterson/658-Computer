@@ -379,5 +379,10 @@ public class InstructionCycles
     }
     return null;
   }
+
+  public int size()
+  {
+    return cycles.size();
+  }
 }
 

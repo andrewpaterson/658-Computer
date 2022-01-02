@@ -19,6 +19,11 @@ public class TimeRange
 
   public boolean timeIn(int time)
   {
+    return timeIn(time, start, stop);
+  }
+
+  public static boolean timeIn(int time, int start, int stop)
+  {
     if (start == stop)
     {
       return time == start;

@@ -35,6 +35,7 @@ import net.logisim.integratedcircuits.ti.lvc543.LVC543Factory;
 import net.logisim.integratedcircuits.toshiba.vhc238.VHC238Factory;
 import net.logisim.integratedcircuits.wdc.w65c02.W65C02Factory;
 import net.logisim.integratedcircuits.wdc.w65c816.W65C816Factory;
+import net.logisim.integratedcircuits.wdc.w65c816.W65C816TimingFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class Components
     {
       tools = new ArrayList<>();
       tools.add(new AddTool(W65C816Factory.create()));
+      tools.add(new AddTool(W65C816TimingFactory.create()));
       tools.add(new AddTool(new W65C02Factory()));
       tools.add(new AddTool(LVC373Factory.create()));
       tools.add(new AddTool(LVC573Factory.create()));

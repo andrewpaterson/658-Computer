@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC163Factory
-    extends LogisimFactory<LVC163LogisimPins>
+    extends PropagatingInstanceFactory<LVC163LogisimPins>
     implements LogisimPainter<LVC163LogisimPins>
 {
   protected static LogiBus PORT_D;
@@ -39,7 +39,8 @@ public class LVC163Factory
     return new LVC163Factory(new ComponentDescription(LVC163.class.getSimpleName(),
                                                       LVC163.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   protected LVC163Factory(ComponentDescription description)

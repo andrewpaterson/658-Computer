@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class F283Factory
-    extends LogisimFactory<F283LogisimPins>
+    extends PropagatingInstanceFactory<F283LogisimPins>
     implements LogisimPainter<F283LogisimPins>
 {
   protected static LogiBus PORT_A;
@@ -34,7 +34,8 @@ public class F283Factory
     return new F283Factory(new ComponentDescription(F283.class.getSimpleName(),
                                                     F283.TYPE,
                                                     160,
-                                                    factory.getPorts()));
+                                                    factory.getPorts(),
+                                                    factory.getCommonPortNames()));
   }
 
   protected F283Factory(ComponentDescription description)

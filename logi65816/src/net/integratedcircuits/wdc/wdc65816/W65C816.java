@@ -419,7 +419,7 @@ public class W65C816
       boolean write = !read;
       W65C816Pins pins = getPins();
 
-      if ((time == timing.writeDataOut.start - 1) && write)
+      if ((time == timing.executeOperationInWriteCycle) && write)
       {
         executeOperation();
       }
@@ -449,8 +449,6 @@ public class W65C816
         pins.setVectorPullBUnknown();
       }
 
-      boolean readDataAndInterruptsTime = timing.readDataAndIntRequired.timeIn(time);
-
       if (timing.bankOut.timeIn(time))
       {
         pins.setBank(address.getBank());
@@ -459,7 +457,7 @@ public class W65C816
       {
         pins.setData(pinData);
       }
-      else if (read && readDataAndInterruptsTime)
+      else if (read && timing.readDataRequired.timeIn(time))
       {
         pinData = pins.getData();
       }
@@ -468,7 +466,7 @@ public class W65C816
         pins.setDataUnknown();
       }
 
-      if ((time == timing.readDataAndIntRequired.start) && read)
+      if (time == timing.executeOperationInReadCycle && read)
       {
         executeOperation();
       }
@@ -495,7 +493,7 @@ public class W65C816
         pins.setEmulationUnknown();
       }
 
-      if (readDataAndInterruptsTime)
+      if (timing.readInterruptsRequired.timeIn(time))
       {
         irq = getPins().isIRQ() || irq;
         nmi = getPins().isNMI() || nmi;
@@ -619,14 +617,15 @@ public class W65C816
 
   private boolean updateTimingValues()
   {
-    long timingValue = getPins().getTimingValue();
-    if (timingValue == -1)
+    long timing1Value = getPins().getTiming1Value();
+    long timing2Value = getPins().getTiming2Value();
+    if (timing1Value == -1 || timing2Value == -1 || (timing1Value == 0 && timing2Value == 0))
     {
       timing.setNotConnected();
     }
     else
     {
-      timing.setFromLong(timingValue);
+      timing.setFromLong(timing1Value, timing2Value);
     }
 
     boolean timingClock = getPins().isTimingClock();

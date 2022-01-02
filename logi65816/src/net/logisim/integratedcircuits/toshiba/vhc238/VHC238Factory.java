@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class VHC238Factory
-    extends LogisimFactory<VHC238LogisimPins>
+    extends PropagatingInstanceFactory<VHC238LogisimPins>
     implements LogisimPainter<VHC238LogisimPins>
 {
   protected static LogiBus PORT_ABC;
@@ -33,7 +33,8 @@ public class VHC238Factory
     return new VHC238Factory(new ComponentDescription(VHC238.class.getSimpleName(),
                                                       VHC238.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   protected VHC238Factory(ComponentDescription description)

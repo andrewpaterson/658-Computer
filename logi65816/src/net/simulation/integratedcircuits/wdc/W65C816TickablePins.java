@@ -138,7 +138,13 @@ public class W65C816TickablePins
   }
 
   @Override
-  public long getTimingValue()
+  public long getTiming1Value()
+  {
+    return -1;
+  }
+
+  @Override
+  public long getTiming2Value()
   {
     return -1;
   }

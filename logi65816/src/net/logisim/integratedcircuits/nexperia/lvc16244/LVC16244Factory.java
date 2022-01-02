@@ -10,7 +10,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC16244Factory
-    extends LogisimFactory<LVC16244LogisimPins>
+    extends PropagatingInstanceFactory<LVC16244LogisimPins>
     implements LogisimPainter<LVC16244LogisimPins>
 {
   protected static LogiBus[] PORT_Y;
@@ -46,7 +46,8 @@ public class LVC16244Factory
     return new LVC16244Factory(new ComponentDescription(LVC16244.class.getSimpleName(),
                                                         LVC16244.TYPE,
                                                         160,
-                                                        factory.getPorts()));
+                                                        factory.getPorts(),
+                                                        factory.getCommonPortNames()));
   }
 
   private LVC16244Factory(ComponentDescription description)

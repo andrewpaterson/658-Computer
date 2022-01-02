@@ -65,7 +65,9 @@ public interface W65C816Pins
 
   boolean isClock();
 
-  long getTimingValue();
+  long getTiming1Value();
+
+  long getTiming2Value();
 
   boolean isTimingClock();
 }

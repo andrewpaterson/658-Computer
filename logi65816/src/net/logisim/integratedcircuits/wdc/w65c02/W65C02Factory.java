@@ -76,12 +76,6 @@ public class W65C02Factory
     instance.tick(instanceState);
   }
 
-  protected void shred(InstanceState instanceState)
-  {
-    Logisim65C02Instance instance = Logisim65C02Instance.getOrCreate(instanceState);
-    instance.shred();
-  }
-
   protected void addStandardPins()
   {
     ArrayList<Port> ports = new ArrayList<>(W65C02Factory.portInfos.length);

@@ -11,7 +11,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC543Factory
-    extends LogisimFactory<LVC543LogisimPins>
+    extends PropagatingInstanceFactory<LVC543LogisimPins>
     implements LogisimPainter<LVC543LogisimPins>
 {
   protected static LogiPin[] PORT_OEB;
@@ -41,7 +41,8 @@ public class LVC543Factory
     return new LVC543Factory(new ComponentDescription(LVC543.class.getSimpleName(),
                                                       LVC543.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   private LVC543Factory(ComponentDescription description)

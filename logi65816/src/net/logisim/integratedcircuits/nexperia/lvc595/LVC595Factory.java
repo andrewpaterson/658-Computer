@@ -10,7 +10,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC595Factory
-    extends LogisimFactory<LVC595LogisimPins>
+    extends PropagatingInstanceFactory<LVC595LogisimPins>
     implements LogisimPainter<LVC595LogisimPins>
 {
   protected static LogiBus PORT_Q;
@@ -42,7 +42,8 @@ public class LVC595Factory
     return new LVC595Factory(new ComponentDescription(LVC595.class.getSimpleName(),
                                                       LVC595.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   @Override

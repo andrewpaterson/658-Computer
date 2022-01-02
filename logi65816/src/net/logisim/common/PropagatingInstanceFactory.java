@@ -16,24 +16,21 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 @SuppressWarnings("unchecked")
-public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
-    extends InstanceFactory
+public abstract class PropagatingInstanceFactory<T extends LogisimPins<?, ?, ?>>
+    extends SimpleInstanceFactory
     implements LogisimPainter<T>
-
 {
   public static final int TOP_OFFSET = 30;
   public static final int WIDTH_8BIT = 38;
   public static final int WIDTH_16BIT = 52;
   public static final int WIDTH_24BIT = 70;
 
-  protected final ComponentDescription description;
-
   protected PropagationListener<T> propagationListener;
 
   @SuppressWarnings("rawtypes")
-  public LogisimFactory(ComponentDescription description)
+  public PropagatingInstanceFactory(ComponentDescription description)
   {
-    super(description.getType() + " (" + description.getName() + ")");
+    super(description);
     Attribute[] attributesNames;
     Object[] attributeDefaults;
     attributesNames = new Attribute[]{
@@ -48,53 +45,6 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
     setAttributes(
         attributesNames,
         attributeDefaults);
-
-    this.description = description;
-
-    setOffsetBounds(Bounds.create(description.getLeft(),
-                                  description.getTopY(),
-                                  description.getWidth(),
-                                  description.getHeight()));
-    setPorts(createPorts());
-  }
-
-  protected List<Port> createPorts()
-  {
-    ArrayList<Port> ports = new ArrayList<>();
-
-    createVerticalPorts(ports, LEFT);
-    createVerticalPorts(ports, RIGHT);
-
-    return ports;
-  }
-
-  private void createVerticalPorts(ArrayList<Port> ports, PortPosition position)
-  {
-    for (PortDescription portDescription : description.getPorts(position))
-    {
-      if (portDescription.notBlank())
-      {
-        ports.add(createPort(portDescription));
-      }
-    }
-  }
-
-  private Port createPort(PortDescription portDescription)
-  {
-    Port port = new Port(description.getPortX(portDescription, true),
-                         description.getPortY(portDescription),
-                         portDescription.getType(),
-                         portDescription.getBitWidth(),
-                         portDescription.getExclusive());
-    port.setToolTip(new StringGetter()
-    {
-      @Override
-      public String toString()
-      {
-        return portDescription.getTooltip();
-      }
-    });
-    return port;
   }
 
   @Override
@@ -143,11 +93,11 @@ public abstract class LogisimFactory<T extends LogisimPins<?, ?, ?>>
     return description;
   }
 
-  protected abstract T createInstance();
-
   public int getTopOffset(int offset)
   {
     return TOP_OFFSET + offset * PIXELS_PER_PIN;
   }
+
+  protected abstract T createInstance();
 }
 

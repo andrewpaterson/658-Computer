@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC157Factory
-    extends LogisimFactory<LVC157LogisimPins>
+    extends PropagatingInstanceFactory<LVC157LogisimPins>
     implements LogisimPainter<LVC157LogisimPins>
 {
 
@@ -35,7 +35,8 @@ public class LVC157Factory
     return new LVC157Factory(new ComponentDescription(LVC157.class.getSimpleName(),
                                                       LVC157.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   private LVC157Factory(ComponentDescription description)

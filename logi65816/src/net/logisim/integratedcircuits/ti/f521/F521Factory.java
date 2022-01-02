@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class F521Factory
-    extends LogisimFactory<F521LogisimPins>
+    extends PropagatingInstanceFactory<F521LogisimPins>
     implements LogisimPainter<F521LogisimPins>
 {
   protected static LogiPin PORT_OEB;
@@ -31,7 +31,8 @@ public class F521Factory
     return new F521Factory(new ComponentDescription(F521.class.getSimpleName(),
                                                     F521.TYPE,
                                                     160,
-                                                    factory.getPorts()));
+                                                    factory.getPorts(),
+                                                    factory.getCommonPortNames()));
   }
 
   protected F521Factory(ComponentDescription description)

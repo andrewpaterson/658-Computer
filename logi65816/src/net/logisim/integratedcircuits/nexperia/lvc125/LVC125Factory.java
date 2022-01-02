@@ -10,7 +10,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC125Factory
-    extends LogisimFactory<LVC125LogisimPins>
+    extends PropagatingInstanceFactory<LVC125LogisimPins>
     implements LogisimPainter<LVC125LogisimPins>
 {
   protected static LogiPin[] PORT_Y;
@@ -46,7 +46,8 @@ public class LVC125Factory
     return new LVC125Factory(new ComponentDescription(LVC125.class.getSimpleName(),
                                                       LVC125.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   private LVC125Factory(ComponentDescription description)

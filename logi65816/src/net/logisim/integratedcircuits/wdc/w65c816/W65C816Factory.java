@@ -4,8 +4,9 @@ import com.cburch.logisim.util.GraphicsUtil;
 import net.integratedcircuits.wdc.wdc65816.W65C816;
 import net.integratedcircuits.wdc.wdc65816.W65C816Snapshot;
 import net.logisim.common.ComponentDescription;
-import net.logisim.common.LogisimFactory;
+import net.logisim.common.PropagatingInstanceFactory;
 import net.logisim.common.PortFactory;
+import net.logisim.common.SimpleInstancePainter;
 
 import java.awt.*;
 
@@ -13,7 +14,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class W65C816Factory
-    extends LogisimFactory<W65C816LogisimPins>
+    extends PropagatingInstanceFactory<W65C816LogisimPins>
 {
   protected static int PORT_ABORTB;
   protected static int PORT_IRQB;
@@ -33,7 +34,8 @@ public class W65C816Factory
   protected static int PORT_DataBus;
   protected static int PORT_AddressBus;
 
-  protected static int PORT_TimingBus;
+  protected static int PORT_TimingBus1;
+  protected static int PORT_TimingBus2;
   protected static int PORT_TimingClock;
 
   public static W65C816Factory create()
@@ -50,8 +52,8 @@ public class W65C816Factory
     PORT_MX = factory.outputExclusive("M", LEFT).setHighName("X").setTooltip("Memory width / Index width (8bit high, 16bit low)").index();
     PORT_E = factory.outputExclusive("E", LEFT).setTooltip("Emulation mode (output: emulation high, native low)").index();
     PORT_MLB = factory.outputExclusive("MLB", LEFT).setInverting().setTooltip("Memory lock (output: read-modify-write low)").index();
-    factory.blank(LEFT);
-    PORT_TimingBus = factory.inputShared("", 64, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
+    PORT_TimingBus1 = factory.inputShared("", 40, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
+    PORT_TimingBus2 = factory.inputShared("", 40, LEFT).setTooltip("Bus input defining MPU pin timings (only used when PHI2 != CLOCK).").index();
 
     factory.blank(RIGHT);
     factory.blank(RIGHT);
@@ -70,7 +72,8 @@ public class W65C816Factory
                                                        W65C816.TYPE,
                                                        240,
                                                        240,
-                                                       factory.getPorts()));
+                                                       factory.getPorts(),
+                                                       factory.getCommonPortNames()));
   }
 
   private W65C816Factory(ComponentDescription description)
@@ -119,7 +122,7 @@ public class W65C816Factory
   {
     int top = description.getTopYPlusMargin() + topOffset;
     g.drawRect(horizontalPosition - 7, top - 5, 15, 15);
-    Color oldColour = setColour(g, black);
+    Color oldColour = SimpleInstancePainter.setColour(g, black);
     GraphicsUtil.drawText(g, flag, horizontalPosition, top, GraphicsUtil.H_CENTER, GraphicsUtil.V_CENTER);
     g.setColor(oldColour);
   }

@@ -96,74 +96,17 @@ public abstract class LogisimPins<
 
   protected BusValue getValue(LogiBus logiBus)
   {
-    if (instanceState.isPortConnected(logiBus.index))
-    {
-      Value portValue = instanceState.getPortValue(logiBus.index);
-      if (portValue.isErrorValue())
-      {
-        return BusValue.error();
-      }
-      else if (portValue.isUnknown())
-      {
-        return BusValue.unknown();
-      }
-      else
-      {
-        instanceState.setPort(logiBus.index, Value.createUnknown(BitWidth.create(logiBus.width)), logiBus.propagationDelay);
-        return new BusValue(portValue.toLongValue());
-      }
-    }
-    else
-    {
-      return BusValue.notConnected();
-    }
+    return LogiBus.getValue(logiBus, instanceState);
   }
 
   protected BusValue getValueWithoutSet(LogiBus logiBus)
   {
-    if (instanceState.isPortConnected(logiBus.index))
-    {
-      Value portValue = instanceState.getPortValue(logiBus.index);
-      if (portValue.isErrorValue())
-      {
-        return BusValue.error();
-      }
-      else if (portValue.isUnknown())
-      {
-        return BusValue.unknown();
-      }
-      else
-      {
-        return new BusValue(portValue.toLongValue());
-      }
-    }
-    else
-    {
-      return BusValue.notConnected();
-    }
+    return LogiBus.getValueWithoutSet(logiBus, instanceState);
   }
 
   protected PinValue getValue(LogiPin logiPin)
   {
-    Value value = instanceState.getPortValue(logiPin.index);
-    if (value.isErrorValue())
-    {
-      return PinValue.Error;
-    }
-    else if (value == Value.TRUE)
-    {
-      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
-      return PinValue.High;
-    }
-    else if (value == Value.FALSE)
-    {
-      instanceState.setPort(logiPin.index, Value.createUnknown(BitWidth.create(1)), logiPin.propagationDelay);
-      return PinValue.Low;
-    }
-    else
-    {
-      return PinValue.Unknown;
-    }
+    return LogiPin.getValue(logiPin, instanceState);
   }
 
   protected void setError(LogiBus logiBus)
@@ -182,16 +125,12 @@ public abstract class LogisimPins<
 
   protected void setValue(LogiBus logiBus, long value)
   {
-    instanceState.setPort(logiBus.index,
-                          Value.createKnown(BitWidth.create(logiBus.width), value),
-                          logiBus.propagationDelay);
+    LogiBus.setValue(logiBus, value, instanceState);
   }
 
   protected void setValue(LogiPin logiPin, boolean value)
   {
-    instanceState.setPort(logiPin.index,
-                          Value.createKnown(BitWidth.create(1), value ? 1 : 0),
-                          logiPin.propagationDelay);
+    LogiPin.setValue(logiPin, value, instanceState);
   }
 
   protected void setHighImpedance(LogiBus logiBus)

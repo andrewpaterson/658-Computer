@@ -10,7 +10,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC164245Factory
-    extends LogisimFactory<LVC164245LogisimPins>
+    extends PropagatingInstanceFactory<LVC164245LogisimPins>
     implements LogisimPainter<LVC164245LogisimPins>
 {
   protected static LogiPin[] PORT_DIR;
@@ -43,7 +43,8 @@ public class LVC164245Factory
                                                          LVC164245.TYPE,
                                                          160,
                                                          height(7),
-                                                         factory.getPorts()));
+                                                         factory.getPorts(),
+                                                         factory.getCommonPortNames()));
   }
 
   private LVC164245Factory(ComponentDescription description)

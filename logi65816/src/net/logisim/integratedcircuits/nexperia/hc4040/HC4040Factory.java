@@ -10,7 +10,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class HC4040Factory
-    extends LogisimFactory<HC4040LogisimPins>
+    extends PropagatingInstanceFactory<HC4040LogisimPins>
     implements LogisimPainter<HC4040LogisimPins>
 {
   protected static LogiPin PORT_MR;
@@ -30,7 +30,8 @@ public class HC4040Factory
                                                       HC4040.TYPE,
                                                       160,
                                                       height(3),
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   protected HC4040Factory(ComponentDescription description)

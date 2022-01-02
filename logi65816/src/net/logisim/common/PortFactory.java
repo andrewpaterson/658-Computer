@@ -9,11 +9,13 @@ public class PortFactory
 {
   protected int index;
   protected List<PortDescription> ports;
+  protected List<String> commonPortNames;
 
   public PortFactory()
   {
     index = 0;
     ports = new ArrayList<>();
+    commonPortNames = new ArrayList<>();
   }
 
   public PortDescription outputShared(String name, PortPosition position)
@@ -86,6 +88,18 @@ public class PortFactory
   public List<PortDescription> getPorts()
   {
     return ports;
+  }
+
+  public List<String> getCommonPortNames()
+  {
+    return commonPortNames;
+  }
+
+  public PairedLogiBus pairedInputShared(String left, String common, String right, int pins, int propagationDelay)
+  {
+    commonPortNames.add(common);
+    return new PairedLogiBus(inputShared(left, pins, PortPosition.LEFT).setTooltip(common + " " + left).createBus(propagationDelay),
+                             inputShared(right, pins, PortPosition.RIGHT).setTooltip(common + " " + right).createBus(propagationDelay));
   }
 }
 

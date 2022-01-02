@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LSF0102Factory
-    extends LogisimFactory<LSF0102LogisimPins>
+    extends PropagatingInstanceFactory<LSF0102LogisimPins>
     implements LogisimPainter<LSF0102LogisimPins>
 {
   protected static LogiPin PORT_EN;
@@ -30,7 +30,8 @@ public class LSF0102Factory
     return new LSF0102Factory(new ComponentDescription(LSF0102.class.getSimpleName(),
                                                        LSF0102.TYPE,
                                                        160,
-                                                       factory.getPorts()));
+                                                       factory.getPorts(),
+                                                       factory.getCommonPortNames()));
   }
 
   protected LSF0102Factory(ComponentDescription description)

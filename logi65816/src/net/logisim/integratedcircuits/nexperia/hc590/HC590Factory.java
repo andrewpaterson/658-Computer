@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class HC590Factory
-    extends LogisimFactory<HC590LogisimPins>
+    extends PropagatingInstanceFactory<HC590LogisimPins>
     implements LogisimPainter<HC590LogisimPins>
 {
   protected static LogiPin PORT_MRCB;
@@ -36,7 +36,8 @@ public class HC590Factory
     return new HC590Factory(new ComponentDescription(HC590.class.getSimpleName(),
                                                      HC590.TYPE,
                                                      160,
-                                                     factory.getPorts()));
+                                                     factory.getPorts(),
+                                                     factory.getCommonPortNames()));
   }
 
   protected HC590Factory(ComponentDescription description)

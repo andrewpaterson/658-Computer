@@ -1,5 +1,6 @@
 package net.logisim.common;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,27 +26,32 @@ public class ComponentDescription
   protected final String name;
   protected final String type;
   protected final List<PortDescription> ports;
+  protected final List<String> commonPortNames;
 
   public ComponentDescription(String name,
                               String type,
                               int width,
-                              List<PortDescription> ports)
+                              List<PortDescription> ports,
+                              List<String> commonPortNames)
   {
     this(name,
          type,
          width,
          height(Math.max(getPorts(ports, LEFT).size(),
                          getPorts(ports, RIGHT).size())),
-         ports);
+         ports,
+         commonPortNames);
   }
 
   public ComponentDescription(String name,
                               String type,
                               int width,
                               int height,
-                              List<PortDescription> ports)
+                              List<PortDescription> ports,
+                              List<String> commonPortNames)
   {
     this.ports = ports;
+    this.commonPortNames = commonPortNames;
     List<PortDescription> leftPorts = getPorts(LEFT);
     List<PortDescription> rightPorts = getPorts(RIGHT);
     this.pinsPerSide = Math.max(leftPorts.size(), rightPorts.size());
@@ -157,17 +163,22 @@ public class ComponentDescription
     return ports;
   }
 
+  public List<String> getCommonPortNames()
+  {
+    return commonPortNames;
+  }
+
   public String getName()
   {
     return name;
   }
 
-  public int getPortX(PortDescription portDescription, boolean port)
+  public int getPortX(PortDescription portDescription, boolean allowInverting)
   {
     if (portDescription.isPosition(LEFT))
     {
       int x = getLeft();
-      if (portDescription.isInverting() && port)
+      if (portDescription.isInverting() && allowInverting)
       {
         x -= PIXELS_PER_GRID;
       }
@@ -176,7 +187,7 @@ public class ComponentDescription
     else if (portDescription.isPosition(RIGHT))
     {
       int x = getRight();
-      if (portDescription.isInverting() && port)
+      if (portDescription.isInverting() && allowInverting)
       {
         x += PIXELS_PER_GRID;
       }

@@ -230,11 +230,18 @@ public class W65C816LogisimPins
   }
 
   @Override
-  public long getTimingValue()
+  public long getTiming1Value()
   {
-    Value portValue = instanceState.getPortValue(PORT_TimingBus);
+    Value portValue = instanceState.getPortValue(PORT_TimingBus1);
     return portValue.toLongValue();
   }
+
+  @Override
+  public long getTiming2Value()
+  {
+    Value portValue = instanceState.getPortValue(PORT_TimingBus2);
+    return portValue.toLongValue();
+ }
 
   @Override
   public boolean isTimingClock()

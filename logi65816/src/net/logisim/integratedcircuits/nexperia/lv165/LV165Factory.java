@@ -2,7 +2,6 @@ package net.logisim.integratedcircuits.nexperia.lv165;
 
 import com.cburch.logisim.comp.ComponentFactory;
 import net.integratedcircuits.nexperia.lv165.LV165;
-import net.integratedcircuits.nexperia.lvc161.LVC161;
 import net.logisim.common.*;
 
 import java.awt.*;
@@ -11,7 +10,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LV165Factory
-    extends LogisimFactory<LV165LogisimPins>
+    extends PropagatingInstanceFactory<LV165LogisimPins>
     implements LogisimPainter<LV165LogisimPins>
 {
   protected static LogiBus PORT_D;
@@ -43,7 +42,8 @@ public class LV165Factory
     return new LV165Factory(new ComponentDescription(LV165.class.getSimpleName(),
                                                      LV165.TYPE,
                                                      160,
-                                                     factory.getPorts()));
+                                                     factory.getPorts(),
+                                                     factory.getCommonPortNames()));
   }
 
   @Override

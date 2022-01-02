@@ -9,7 +9,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class LVC541Factory
-    extends LogisimFactory<LVC541LogisimPins>
+    extends PropagatingInstanceFactory<LVC541LogisimPins>
     implements LogisimPainter<LVC541LogisimPins>
 {
   protected static LogiBus PORT_Y;
@@ -32,7 +32,8 @@ public class LVC541Factory
     return new LVC541Factory(new ComponentDescription(LVC541.class.getSimpleName(),
                                                       LVC541.TYPE,
                                                       160,
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   private LVC541Factory(ComponentDescription description)

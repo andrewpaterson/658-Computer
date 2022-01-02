@@ -12,7 +12,7 @@ import static net.logisim.common.PortPosition.LEFT;
 import static net.logisim.common.PortPosition.RIGHT;
 
 public class DS1813Factory
-    extends LogisimFactory<DS1813LogisimPins>
+    extends PropagatingInstanceFactory<DS1813LogisimPins>
     implements LogisimPainter<DS1813LogisimPins>
 {
   protected static LogiPin PORT_CLOCK;
@@ -32,7 +32,8 @@ public class DS1813Factory
                                                       DS1813.TYPE,
                                                       160,
                                                       height(3),
-                                                      factory.getPorts()));
+                                                      factory.getPorts(),
+                                                      factory.getCommonPortNames()));
   }
 
   private DS1813Factory(ComponentDescription description)

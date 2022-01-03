@@ -51,8 +51,8 @@ public class LVC163Factory
   @Override
   public void paint(LVC163LogisimPins instance, Graphics2D graphics2D)
   {
-    LVC163 latch = instance.getIntegratedCircuit();
-    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Value:", latch.getCounterValueString(), true);
+    LVC163 counter = instance.getIntegratedCircuit();
+    drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Value:", counter.getCounterValueString(), true);
   }
 
   @Override

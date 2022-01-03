@@ -664,7 +664,6 @@
       <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
     <comp lib="0" loc="(1840,1320)" name="Splitter">
-      <a name="appear" val="right"/>
       <a name="bit0" val="1"/>
       <a name="bit2" val="1"/>
       <a name="bit3" val="1"/>
@@ -677,6 +676,7 @@
       <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(1840,1320)" name="Splitter">
+      <a name="appear" val="right"/>
       <a name="bit0" val="1"/>
       <a name="bit2" val="1"/>
       <a name="bit3" val="1"/>
@@ -2803,7 +2803,7 @@
     <comp lib="12" loc="(1480,380)" name="8-bit Latch (LVC574)"/>
     <comp lib="12" loc="(190,100)" name="EconoReset (DS1813)"/>
     <comp lib="12" loc="(480,180)" name="8-bit serial in shift (LVC595)"/>
-    <comp lib="12" loc="(920,120)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(920,120)" name="4-bit Up Counter (LVC163)"/>
     <comp lib="4" loc="(370,270)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
@@ -3360,7 +3360,7 @@
     <comp lib="12" loc="(1480,220)" name="8-bit Latch (LVC574)"/>
     <comp lib="12" loc="(1480,380)" name="8-bit Latch (LVC574)"/>
     <comp lib="12" loc="(480,180)" name="8-bit serial in shift (LVC595)"/>
-    <comp lib="12" loc="(920,120)" name="4-bit Counter (LVC163)"/>
+    <comp lib="12" loc="(920,120)" name="4-bit Up Counter (LVC163)"/>
     <comp lib="4" loc="(180,100)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
@@ -4248,6 +4248,26 @@
       <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(710,330)" name="Splitter">
+      <a name="bit0" val="1"/>
+      <a name="bit10" val="1"/>
+      <a name="bit11" val="1"/>
+      <a name="bit12" val="1"/>
+      <a name="bit13" val="1"/>
+      <a name="bit14" val="1"/>
+      <a name="bit15" val="1"/>
+      <a name="bit16" val="0"/>
+      <a name="bit2" val="1"/>
+      <a name="bit3" val="1"/>
+      <a name="bit4" val="1"/>
+      <a name="bit5" val="1"/>
+      <a name="bit6" val="1"/>
+      <a name="bit7" val="1"/>
+      <a name="bit8" val="1"/>
+      <a name="bit9" val="1"/>
+      <a name="incoming" val="17"/>
+      <a name="spacing" val="2"/>
+    </comp>
+    <comp lib="0" loc="(710,330)" name="Splitter">
       <a name="bit0" val="2"/>
       <a name="bit1" val="2"/>
       <a name="bit10" val="1"/>
@@ -4268,26 +4288,6 @@
       <a name="fanout" val="3"/>
       <a name="incoming" val="17"/>
       <a name="spacing" val="3"/>
-    </comp>
-    <comp lib="0" loc="(710,330)" name="Splitter">
-      <a name="bit0" val="1"/>
-      <a name="bit10" val="1"/>
-      <a name="bit11" val="1"/>
-      <a name="bit12" val="1"/>
-      <a name="bit13" val="1"/>
-      <a name="bit14" val="1"/>
-      <a name="bit15" val="1"/>
-      <a name="bit16" val="0"/>
-      <a name="bit2" val="1"/>
-      <a name="bit3" val="1"/>
-      <a name="bit4" val="1"/>
-      <a name="bit5" val="1"/>
-      <a name="bit6" val="1"/>
-      <a name="bit7" val="1"/>
-      <a name="bit8" val="1"/>
-      <a name="bit9" val="1"/>
-      <a name="incoming" val="17"/>
-      <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(780,320)" name="Splitter">
       <a name="appear" val="right"/>

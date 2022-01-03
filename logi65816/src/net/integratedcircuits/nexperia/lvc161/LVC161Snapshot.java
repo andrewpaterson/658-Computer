@@ -1,9 +1,9 @@
 package net.integratedcircuits.nexperia.lvc161;
 
-import net.integratedcircuits.common.counter.CounterCircuitSnapshot;
+import net.integratedcircuits.common.counter.UpCounterCircuitSnapshot;
 
 public class LVC161Snapshot
-    extends CounterCircuitSnapshot
+    extends UpCounterCircuitSnapshot
 {
   public LVC161Snapshot(long counterValue,
                         long oldCounterValue,

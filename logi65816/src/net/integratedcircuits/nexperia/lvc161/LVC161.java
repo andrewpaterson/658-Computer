@@ -2,10 +2,10 @@ package net.integratedcircuits.nexperia.lvc161;
 
 import net.common.BusValue;
 import net.common.PinValue;
-import net.integratedcircuits.common.counter.CounterCircuit;
+import net.integratedcircuits.common.counter.UpCounterCircuit;
 
 public class LVC161
-    extends CounterCircuit<LVC161Snapshot, LVC161Pins>
+    extends UpCounterCircuit<LVC161Snapshot, LVC161Pins>
 {
   public static final String TYPE = "4-bit Counter";
 

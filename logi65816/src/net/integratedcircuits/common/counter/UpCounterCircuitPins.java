@@ -4,7 +4,7 @@ import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.common.Pins;
 
-public interface CounterCircuitPins<SNAPSHOT extends CounterCircuitSnapshot, PINS extends CounterCircuitPins<SNAPSHOT, PINS, ? extends CounterCircuit<SNAPSHOT, PINS>>, INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
+public interface UpCounterCircuitPins<SNAPSHOT extends UpCounterCircuitSnapshot, PINS extends UpCounterCircuitPins<SNAPSHOT, PINS, ? extends UpCounterCircuit<SNAPSHOT, PINS>>, INTEGRATED_CIRCUIT extends IntegratedCircuit<SNAPSHOT, PINS>>
     extends Pins<SNAPSHOT, PINS, INTEGRATED_CIRCUIT>
 {
   PinValue getClock();

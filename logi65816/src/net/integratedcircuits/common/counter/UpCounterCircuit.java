@@ -6,7 +6,7 @@ import net.util.StringUtil;
 import static net.util.IntUtil.toNybble;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PINS extends CounterCircuitPins>
+public abstract class UpCounterCircuit<SNAPSHOT extends UpCounterCircuitSnapshot, PINS extends UpCounterCircuitPins>
     extends IntegratedCircuit<SNAPSHOT, PINS>
 {
   protected int limit;
@@ -16,7 +16,7 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
   protected boolean clock;
   protected boolean clockRisingEdge;
 
-  public CounterCircuit(String name, CounterCircuitPins pins)
+  public UpCounterCircuit(String name, UpCounterCircuitPins pins)
   {
     super(name, (PINS) pins);
     counterValue = 0;
@@ -61,7 +61,7 @@ public abstract class CounterCircuit<SNAPSHOT extends CounterCircuitSnapshot, PI
   }
 
   @Override
-  public void restoreFromSnapshot(CounterCircuitSnapshot snapshot)
+  public void restoreFromSnapshot(UpCounterCircuitSnapshot snapshot)
   {
     counterValue = snapshot.counterValue;
     clock = snapshot.clock;

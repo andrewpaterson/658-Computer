@@ -2,7 +2,7 @@ package net.integratedcircuits.common.counter;
 
 import net.common.Snapshot;
 
-public class CounterCircuitSnapshot
+public class UpCounterCircuitSnapshot
     implements Snapshot
 {
   public long counterValue;
@@ -11,11 +11,11 @@ public class CounterCircuitSnapshot
   public boolean clock;
   public boolean clockRisingEdge;
 
-  public CounterCircuitSnapshot(long counterValue,
-                                long oldCounterValue,
-                                boolean reset,
-                                boolean clock,
-                                boolean clockRisingEdge)
+  public UpCounterCircuitSnapshot(long counterValue,
+                                  long oldCounterValue,
+                                  boolean reset,
+                                  boolean clock,
+                                  boolean clockRisingEdge)
   {
     this.counterValue = counterValue;
     this.oldCounterValue = oldCounterValue;

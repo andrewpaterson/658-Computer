@@ -419,7 +419,8 @@
       <a name="appearance" val="NewPins"/>
       <a name="radix" val="16"/>
     </comp>
-    <comp lib="0" loc="(2140,90)" name="Clock"/>
+    <comp lib="0" loc="(2140,100)" name="Clock"/>
+    <comp lib="0" loc="(2140,400)" name="Clock"/>
     <comp lib="0" loc="(220,920)" name="Probe">
       <a name="appearance" val="NewPins"/>
       <a name="radix" val="16"/>
@@ -431,6 +432,16 @@
     <comp lib="0" loc="(2220,220)" name="Constant">
       <a name="value" val="0x32"/>
       <a name="width" val="6"/>
+    </comp>
+    <comp lib="0" loc="(2220,350)" name="Splitter">
+      <a name="appear" val="right"/>
+      <a name="bit0" val="3"/>
+      <a name="bit1" val="2"/>
+      <a name="bit2" val="1"/>
+      <a name="bit3" val="0"/>
+      <a name="fanout" val="4"/>
+      <a name="incoming" val="4"/>
+      <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(2220,60)" name="Constant">
       <a name="value" val="0x3"/>
@@ -458,6 +469,11 @@
     </comp>
     <comp lib="0" loc="(260,610)" name="Probe">
       <a name="appearance" val="NewPins"/>
+      <a name="radix" val="16"/>
+    </comp>
+    <comp lib="0" loc="(2720,380)" name="Probe">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
       <a name="radix" val="16"/>
     </comp>
     <comp lib="0" loc="(2730,110)" name="Probe">
@@ -796,6 +812,7 @@
     <comp lib="1" loc="(210,950)" name="Controlled Buffer">
       <a name="width" val="8"/>
     </comp>
+    <comp lib="1" loc="(2310,360)" name="NOT Gate"/>
     <comp lib="1" loc="(2400,150)" name="AND Gate">
       <a name="inputs" val="3"/>
       <a name="size" val="30"/>
@@ -862,6 +879,7 @@
     <comp lib="12" loc="(1930,710)" name="4-bit Multiplexer (LVC257)"/>
     <comp lib="12" loc="(1930,870)" name="8-bit serial in shift (LVC595)"/>
     <comp lib="12" loc="(2600,240)" name="4-bit Up/Down Counter (HCT193)"/>
+    <comp lib="12" loc="(2600,380)" name="8-bit Latch (LVC273)"/>
     <comp lib="12" loc="(2600,90)" name="4-bit Up/Down Counter (HCT193)"/>
     <comp lib="12" loc="(350,240)" name="8-bit Latch (LVC373)"/>
     <comp lib="12" loc="(350,430)" name="8-bit Bi-latch (LVC543)"/>
@@ -1087,6 +1105,14 @@
       <a name="appearance" val="classic"/>
       <a name="max" val="0x3f"/>
       <a name="width" val="6"/>
+    </comp>
+    <comp lib="4" loc="(2200,350)" name="Counter">
+      <a name="appearance" val="classic"/>
+      <a name="max" val="0xf"/>
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="4" loc="(2320,380)" name="Random">
+      <a name="appearance" val="classic"/>
     </comp>
     <comp lib="4" loc="(2400,80)" name="Random">
       <a name="appearance" val="classic"/>
@@ -1656,11 +1682,14 @@
     <wire from="(210,950)" to="(220,950)"/>
     <wire from="(2110,1290)" to="(2120,1290)"/>
     <wire from="(2120,1250)" to="(2120,1290)"/>
-    <wire from="(2140,90)" to="(2150,90)"/>
+    <wire from="(2140,100)" to="(2150,100)"/>
+    <wire from="(2140,400)" to="(2180,400)"/>
     <wire from="(2150,100)" to="(2360,100)"/>
-    <wire from="(2150,80)" to="(2150,90)"/>
-    <wire from="(2150,90)" to="(2150,100)"/>
+    <wire from="(2150,80)" to="(2150,100)"/>
     <wire from="(2170,60)" to="(2190,60)"/>
+    <wire from="(2180,370)" to="(2180,400)"/>
+    <wire from="(2180,400)" to="(2180,440)"/>
+    <wire from="(2180,440)" to="(2330,440)"/>
     <wire from="(2190,120)" to="(2190,170)"/>
     <wire from="(2190,120)" to="(2220,120)"/>
     <wire from="(2190,170)" to="(2190,200)"/>
@@ -1691,6 +1720,9 @@
     <wire from="(220,950)" to="(270,950)"/>
     <wire from="(220,980)" to="(220,990)"/>
     <wire from="(220,990)" to="(260,990)"/>
+    <wire from="(2200,350)" to="(2220,350)"/>
+    <wire from="(2240,360)" to="(2280,360)"/>
+    <wire from="(2240,400)" to="(2290,400)"/>
     <wire from="(2260,120)" to="(2270,120)"/>
     <wire from="(2260,210)" to="(2270,210)"/>
     <wire from="(2260,40)" to="(2270,40)"/>
@@ -1706,8 +1738,12 @@
     <wire from="(2280,200)" to="(2310,200)"/>
     <wire from="(2280,40)" to="(2280,90)"/>
     <wire from="(2280,40)" to="(2310,40)"/>
+    <wire from="(2290,400)" to="(2290,430)"/>
+    <wire from="(2290,430)" to="(2400,430)"/>
     <wire from="(230,370)" to="(230,400)"/>
     <wire from="(230,400)" to="(260,400)"/>
+    <wire from="(2310,360)" to="(2510,360)"/>
+    <wire from="(2330,420)" to="(2330,440)"/>
     <wire from="(2350,140)" to="(2370,140)"/>
     <wire from="(2350,210)" to="(2360,210)"/>
     <wire from="(2350,60)" to="(2370,60)"/>
@@ -1715,14 +1751,19 @@
     <wire from="(2360,150)" to="(2370,150)"/>
     <wire from="(2360,200)" to="(2360,210)"/>
     <wire from="(2360,200)" to="(2460,200)"/>
+    <wire from="(2360,400)" to="(2380,400)"/>
     <wire from="(2360,70)" to="(2360,100)"/>
     <wire from="(2360,70)" to="(2370,70)"/>
+    <wire from="(2380,380)" to="(2380,400)"/>
+    <wire from="(2380,380)" to="(2520,380)"/>
     <wire from="(240,710)" to="(240,740)"/>
     <wire from="(240,740)" to="(260,740)"/>
     <wire from="(240,870)" to="(240,930)"/>
     <wire from="(240,930)" to="(260,930)"/>
     <wire from="(2400,150)" to="(2410,150)"/>
     <wire from="(2400,180)" to="(2470,180)"/>
+    <wire from="(2400,400)" to="(2400,430)"/>
+    <wire from="(2400,400)" to="(2520,400)"/>
     <wire from="(2400,70)" to="(2450,70)"/>
     <wire from="(2410,120)" to="(2410,130)"/>
     <wire from="(2410,130)" to="(2410,150)"/>
@@ -1757,6 +1798,7 @@
     <wire from="(260,780)" to="(270,780)"/>
     <wire from="(260,970)" to="(270,970)"/>
     <wire from="(2680,220)" to="(2730,220)"/>
+    <wire from="(2680,380)" to="(2720,380)"/>
     <wire from="(2680,70)" to="(2730,70)"/>
     <wire from="(2690,110)" to="(2720,110)"/>
     <wire from="(2690,240)" to="(2730,240)"/>

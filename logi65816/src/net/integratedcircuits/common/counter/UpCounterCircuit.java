@@ -70,10 +70,10 @@ public abstract class UpCounterCircuit<SNAPSHOT extends UpCounterCircuitSnapshot
     oldCounterValue = snapshot.oldCounterValue;
   }
 
-  protected void updateClock(boolean currentClock)
+  protected void updateClock(boolean clock)
   {
-    this.clockRisingEdge = currentClock && !this.clock;
-    this.clock = currentClock;
+    this.clockRisingEdge = clock && !this.clock;
+    this.clock = clock;
   }
 
   protected void count(boolean carryInCount, boolean countEnabled)

@@ -75,7 +75,7 @@ public class Counter
   @Override
   public String getType()
   {
-    return "Counter";
+    return "Up Counter";
   }
 }
 

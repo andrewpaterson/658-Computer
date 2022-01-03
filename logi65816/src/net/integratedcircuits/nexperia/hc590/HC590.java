@@ -9,7 +9,7 @@ import static net.util.IntUtil.toByte;
 public class HC590
     extends IntegratedCircuit<HC590Snapshot, HC590Pins>
 {
-  public static final String TYPE = "8-bit Counter";
+  public static final String TYPE = "8-bit Up Counter";
 
   protected int limit;
   protected long counterValue;

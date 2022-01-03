@@ -7,7 +7,7 @@ import net.util.StringUtil;
 public class HC4040
     extends IntegratedCircuit<HC4040Snapshot, HC4040Pins>
 {
-  public static final String TYPE = "12-bit Counter";
+  public static final String TYPE = "12-bit Up Counter";
 
   protected int limit;
   protected long counterValue;

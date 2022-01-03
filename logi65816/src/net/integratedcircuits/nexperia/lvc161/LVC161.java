@@ -7,7 +7,7 @@ import net.integratedcircuits.common.counter.UpCounterCircuit;
 public class LVC161
     extends UpCounterCircuit<LVC161Snapshot, LVC161Pins>
 {
-  public static final String TYPE = "4-bit Counter";
+  public static final String TYPE = "4-bit Up Counter";
 
   public LVC161(String name, LVC161Pins pins)
   {

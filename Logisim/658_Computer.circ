@@ -109,7 +109,7 @@
   <circuit name="Microcontroller">
     <a name="circuit" val="Microcontroller"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="64.0"/>
+    <a name="simulationFrequency" val="16.0"/>
     <comp lib="0" loc="(1040,2200)" name="Pull Resistor">
       <a name="facing" val="east"/>
       <a name="pull" val="1"/>
@@ -610,7 +610,6 @@
       <a name="radix" val="16"/>
     </comp>
     <comp lib="0" loc="(1730,1380)" name="Splitter">
-      <a name="appear" val="right"/>
       <a name="bit0" val="1"/>
       <a name="bit2" val="1"/>
       <a name="bit3" val="1"/>
@@ -623,6 +622,7 @@
       <a name="spacing" val="2"/>
     </comp>
     <comp lib="0" loc="(1730,1380)" name="Splitter">
+      <a name="appear" val="right"/>
       <a name="bit0" val="1"/>
       <a name="bit2" val="1"/>
       <a name="bit3" val="1"/>
@@ -1947,8 +1947,6 @@
     <comp lib="12" loc="(1280,1210)" name="8-bit Latch (LVC573)"/>
     <comp lib="12" loc="(1280,1420)" name="4-bit Up/Down Counter (HCT193)"/>
     <comp lib="12" loc="(1280,1590)" name="4-bit Up/Down Counter (HCT193)"/>
-    <comp lib="12" loc="(1480,170)" name="8-bit Latch (LVC573)"/>
-    <comp lib="12" loc="(1480,270)" name="8-bit Bus Transceiver (LVC4245)"/>
     <comp lib="12" loc="(1590,1550)" name="8-bit Comparator (F521)"/>
     <comp lib="12" loc="(1620,1340)" name="16-bit Line Driver (LVC16244)"/>
     <comp lib="12" loc="(1660,1860)" name="16-bit Line Driver (LVC16244)"/>

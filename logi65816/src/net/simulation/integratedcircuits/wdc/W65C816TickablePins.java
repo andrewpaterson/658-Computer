@@ -165,15 +165,6 @@ public class W65C816TickablePins
   }
 
   @Override
-  public void setAddressUnknown()
-  {
-    if (getCpu().isBusEnable())
-    {
-      this.addressBus.unset();
-    }
-  }
-
-  @Override
   public int getData()
   {
     if (getCpu().isRead())
@@ -254,21 +245,9 @@ public class W65C816TickablePins
   }
 
   @Override
-  public void setRWBUnknown()
-  {
-    this.rwB.unset();
-  }
-
-  @Override
   public void setEmulation(boolean emulation)
   {
     this.emulation.writeBool(emulation);
-  }
-
-  @Override
-  public void setEmulationUnknown()
-  {
-    this.emulation.unset();
   }
 
   @Override
@@ -278,21 +257,9 @@ public class W65C816TickablePins
   }
 
   @Override
-  public void setMemoryLockBUnknown()
-  {
-    this.memoryLockB.unset();
-  }
-
-  @Override
   public void setMX(boolean m)
   {
     this.mx.writeBool(m);
-  }
-
-  @Override
-  public void setMXUnknown()
-  {
-    this.mx.unset();
   }
 
   @Override
@@ -302,21 +269,9 @@ public class W65C816TickablePins
   }
 
   @Override
-  public void setRdyUnknown()
-  {
-    this.rdy.unset();
-  }
-
-  @Override
   public void setVectorPullB(boolean vectorPullB)
   {
     this.vectorPullB.writeBool(vectorPullB);
-  }
-
-  @Override
-  public void setVectorPullBUnknown()
-  {
-    this.vectorPullB.unset();
   }
 
   @Override
@@ -326,21 +281,9 @@ public class W65C816TickablePins
   }
 
   @Override
-  public void setValidProgramAddressUnknown()
-  {
-    this.validProgramAddress.unset();
-  }
-
-  @Override
   public void setValidDataAddress(boolean validDataAddress)
   {
     this.validDataAddress.writeBool(validDataAddress);
-  }
-
-  @Override
-  public void setValidDataAddressUnknown()
-  {
-    this.validDataAddress.unset();
   }
 
   @Override

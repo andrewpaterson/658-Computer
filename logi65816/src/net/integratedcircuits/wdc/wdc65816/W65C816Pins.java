@@ -7,8 +7,6 @@ public interface W65C816Pins
 {
   void setAddress(int address);
 
-  void setAddressUnknown();
-
   int getData();
 
   int peekData();
@@ -21,35 +19,19 @@ public interface W65C816Pins
 
   void setRWB(boolean rwB);
 
-  void setRWBUnknown();
-
   void setEmulation(boolean emulation);
-
-  void setEmulationUnknown();
 
   void setMemoryLockB(boolean memoryLock);
 
-  void setMemoryLockBUnknown();
-
   void setMX(boolean m);
-
-  void setMXUnknown();
 
   void setRdy(boolean rdy);
 
-  void setRdyUnknown();
-
   void setVectorPullB(boolean vectorPullB);
-
-  void setVectorPullBUnknown();
 
   void setValidProgramAddress(boolean validProgramAddress);
 
-  void setValidProgramAddressUnknown();
-
   void setValidDataAddress(boolean validDataAddress);
-
-  void setValidDataAddressUnknown();
 
   boolean isBusEnable();
 

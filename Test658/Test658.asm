@@ -40,16 +40,26 @@ START:
 	SEP		#$20	;8 bit memory
 	LONGA	OFF
 	
-	LDA		#$E4
-	STA		$F001
-	LDA		#0
+	LDA		#$e4
 	STA		$F000
-	
-	LDA		$8000
-	
-LOOP:
-	JMP 	LOOP
 
+	LDA		#$FF	;user program 0 (0xFF - user program ID)
+	STA		$FB00
+	
+	LDA		#$02
+	STA		$01FF00	;remap user progream 0xFF, bank 0x00 to real bank 0x02
+	
+	PHP				;push processor status
+	LDA		#$80
+	PHA				;push progream counter low-byte
+	LDA		#$20
+	PHA				;push progream counter high-byte
+	LDA		#$00
+	PHA				;push progream counter bank
+
+	REP		#$20	;16 bit memory
+	
+	RTI
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	

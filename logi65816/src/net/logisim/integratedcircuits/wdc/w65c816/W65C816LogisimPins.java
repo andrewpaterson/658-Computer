@@ -26,15 +26,6 @@ public class W65C816LogisimPins
   }
 
   @Override
-  public void setAddressUnknown()
-  {
-    if (getCpu().isBusEnable())
-    {
-      instanceState.setPort(PORT_AddressBus, Value.createUnknown(BitWidth.create(16)), 12);
-    }
-  }
-
-  @Override
   public int getData()
   {
     if (getCpu().isBusEnable())
@@ -93,24 +84,9 @@ public class W65C816LogisimPins
   }
 
   @Override
-  public void setRWBUnknown()
-  {
-    if (getCpu().isBusEnable())
-    {
-      setPortUnknown(PORT_RWB, 9);
-    }
-  }
-
-  @Override
   public void setEmulation(boolean emulation)
   {
     setPort(PORT_E, emulation, 10);
-  }
-
-  @Override
-  public void setEmulationUnknown()
-  {
-    setPortUnknown(PORT_E, 10);
   }
 
   @Override
@@ -120,21 +96,9 @@ public class W65C816LogisimPins
   }
 
   @Override
-  public void setMemoryLockBUnknown()
-  {
-    setPortUnknown(PORT_MLB, 10);
-  }
-
-  @Override
   public void setMX(boolean m)
   {
     setPort(PORT_MX, m, 10);
-  }
-
-  @Override
-  public void setMXUnknown()
-  {
-    setPortUnknown(PORT_MX, 10);
   }
 
   @Override
@@ -144,21 +108,9 @@ public class W65C816LogisimPins
   }
 
   @Override
-  public void setRdyUnknown()
-  {
-    setPortUnknown(PORT_RDY, 10);
-  }
-
-  @Override
   public void setVectorPullB(boolean vectorPullB)
   {
     setPort(PORT_VPB, vectorPullB, 10);
-  }
-
-  @Override
-  public void setVectorPullBUnknown()
-  {
-    setPortUnknown(PORT_VPB, 10);
   }
 
   @Override
@@ -168,21 +120,9 @@ public class W65C816LogisimPins
   }
 
   @Override
-  public void setValidProgramAddressUnknown()
-  {
-    setPortUnknown(PORT_VPA, 10);
-  }
-
-  @Override
   public void setValidDataAddress(boolean validDataAddress)
   {
     setPort(PORT_VDA, validDataAddress, 10);
-  }
-
-  @Override
-  public void setValidDataAddressUnknown()
-  {
-    setPortUnknown(PORT_VDA, 10);
   }
 
   @Override

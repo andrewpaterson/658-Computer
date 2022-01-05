@@ -458,7 +458,6 @@ public class W65C816
       if (timing.bankOut.start == time)
       {
         pinValues.BA = busCycle.getAddress(this).getBank();
-        System.out.println("W65C816.tickWithConnectedTiming pinValues.BA = " + Integer.toHexString(pinValues.BA));
       }
 
       if (timing.writeDataOut.start == time)
@@ -468,7 +467,6 @@ public class W65C816
 
       if (timing.bankOut.timeIn(time))
       {
-        System.out.println("W65C816.tickWithConnectedTiming pins.setBank(pinValues.BA): " + Integer.toHexString(pinValues.BA));
         pins.setBank(pinValues.BA);
       }
       else if (write && timing.writeDataOut.timeIn(time))

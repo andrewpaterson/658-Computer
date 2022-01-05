@@ -42,22 +42,28 @@ START:
 	
 	LDA		#$e4
 	STA		$F000
+	
+	LDA		#$CC
+	LDA		$F000
 
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
 	STA		$FB00
 	
 	LDA		#$02
 	STA		$01FF00	;remap user progream 0xFF, bank 0x00 to real bank 0x02
+	LDA		#$03
+	STA		$01FF01	;remap user progream 0xFF, bank 0x01 to real bank 0x03
 	
-	PHP				;push processor status
-	LDA		#$80
-	PHA				;push progream counter low-byte
-	LDA		#$20
-	PHA				;push progream counter high-byte
 	LDA		#$00
 	PHA				;push progream counter bank
+	LDA		#$04
+	PHA				;push progream counter high-byte
+	LDA		#$1C
+	PHA				;push progream counter low-byte
+	PHP				;push processor status
 
 	REP		#$20	;16 bit memory
+	LONGA	ON
 	
 	RTI
 

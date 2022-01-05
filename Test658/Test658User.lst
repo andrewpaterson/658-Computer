@@ -1,0 +1,46 @@
+  Wed Jan  5 2022 17:31                                                Page 1
+
+
+                     ***************************************
+                     **      WDC 65C816 Macro Assembler   **
+                     **                                   **
+                     **     Version 3.49.1- Feb  6 2006    **
+                     ***************************************
+
+     1                        STARTUP SECTION
+     2                        
+     3                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     4                        
+     5                        
+     6                        	ORG $02041c
+     7 02:041C: C2 10        	REP		#$10    ;16 bit index
+     8                        	LONGI 	ON
+     9 02:041E: E2 20        	SEP		#$20    ;8 bit memory
+    10                        	LONGA 	OFF
+    11                        	
+    12 02:0420: A9 01        	LDA 	#$01	;get bank of data
+    13 02:0422: 48           	PHA
+    14 02:0423: AB           	PLB	     		;set data bank register
+    15                        
+    16 02:0424: A2 00 00     	LDX		#$0000
+    17                        
+    18 02:0427: C2 20        	REP		#$20    ;16 bit memory
+    19                        	LONGA 	ON
+    20                        
+    21 02:0429: A9 CD AB     	LDA		#$ABCD
+    22                        	
+    23                        LOOP:	
+    24 02:042C: 9D 00 10     	STA		$1000,X
+    25 02:042F: E8           	INX
+    26 02:0430: E8           	INX
+    27                        	
+    28 02:0431: E0 08 00     	CPX		#$08
+    29 02:0434: D0 F6        	BNE		LOOP
+    30                        
+    31                        FOREVER:	
+    32 02:0436: 02 00        	COP		
+    33 02:0438: 80 FC        	BRA		FOREVER
+
+
+      Lines assembled: 33
+      Errors: 0

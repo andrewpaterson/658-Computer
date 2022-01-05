@@ -1,4 +1,4 @@
-  Fri Oct 29 2021 14:00                                                Page 1
+  Wed Jan  5 2022 21:39                                                Page 1
 
 
                      ***************************************
@@ -7,252 +7,250 @@
                      **     Version 3.49.1- Feb  6 2006    **
                      ***************************************
 
-     1                        ;
+     1                        STARTUP SECTION
      2                        
-     3                        STARTUP SECTION
-     4                        
-     5                        	ORG	$0000
-     6 00:0000: 5B           	DB '['
-     7                        PROGRESS:	
-     8 00:0001: 78 78 78 78  	DB 'xxxx'
-     9                        PROGRESS_NMI:		
-    10 00:0005: 78 78 78 78  	DB 'xxxx'
-    11                        PROGRESS_ABORT:
-    12 00:0009: 78 78 78 78  	DB 'xxxxxx'
+     3                        	ORG	$0000
+     4 00:0000: 5B           	DB '['
+     5                        PROGRESS:	
+     6 00:0001: 78 78 78 78  	DB 'xxxx'
+     7                        PROGRESS_NMI:		
+     8 00:0005: 78 78 78 78  	DB 'xxxx'
+     9                        PROGRESS_ABORT:
+    10 00:0009: 78 78 78 78  	DB 'xxxxxx'
        00:000D: 78 78 
-    13                        PROGRESS_BRK:
-    14 00:000F: 78 78 78 78  	DB 'xxxx'
-    15                        PROGRESS_COP:
-    16 00:0013: 78 78 78     	DB 'xxx'
-    17                        ENDPROGRESS:	
-    18 00:0016: 5D           	DB ']'
-    19                        	
-    20                        	ORG $E12B
-    21                        RESET:
-    22 00:E12B: 18           	CLC	     		;clear carry
-    23 00:E12C: FB           	XCE	     		;clear emulation
-    24 00:E12D: C2 30        	REP		#$30    ;16 bit registers
-    25                        	LONGI 	ON
-    26                        	LONGA	ON
-    27 00:E12F: A9 FF 01     	LDA		#$01FF  ;get the stack address
-    28 00:E132: 1B           	TCS	     		;and set the stack to it
-    29                        
-    30                        
-    31 00:E133: E2 20        	SEP		#$20	;8 bit accumulator
-    32                        	LONGA 	OFF
-    33 00:E135: A9 00        	LDA 	#$00	;get bank of data
-    34 00:E137: 48           	PHA
-    35 00:E138: AB           	PLB	     		;set data bank register
-    36 00:E139: C2 20        	REP		#$20    ;back to 16 bit mode
-    37                        	LONGA	ON
+    11                        PROGRESS_BRK:
+    12 00:000F: 78 78 78 78  	DB 'xxxx'
+    13                        PROGRESS_COP:
+    14 00:0013: 78 78 78     	DB 'xxx'
+    15                        ENDPROGRESS:	
+    16 00:0016: 5D           	DB ']'
+    17                        	
+    18                        	ORG $E12B
+    19                        RESET:
+    20 00:E12B: 18           	CLC	     		;clear carry
+    21 00:E12C: FB           	XCE	     		;clear emulation
+    22 00:E12D: C2 30        	REP		#$30    ;16 bit registers
+    23                        	LONGI 	ON
+    24                        	LONGA	ON
+    25 00:E12F: A9 FF 01     	LDA		#$01FF  ;get the stack address
+    26 00:E132: 1B           	TCS	     		;and set the stack to it
+    27                        
+    28                        
+    29 00:E133: E2 20        	SEP		#$20	;8 bit accumulator
+    30                        	LONGA 	OFF
+    31 00:E135: A9 00        	LDA 	#$00	;get bank of data
+    32 00:E137: 48           	PHA
+    33 00:E138: AB           	PLB	     		;set data bank register
+    34 00:E139: C2 20        	REP		#$20    ;back to 16 bit mode
+    35                        	LONGA	ON
+    36                        
+    37 00:E13B: 5C 00 40 00  	JML  	START	;long jump in case not bank 0
     38                        
-    39 00:E13B: 5C 00 80 00  	JML  	START	;long jump in case not bank 0
-    40                        
-    41                        IRQ:
-    42 00:E13F: 8B           	PHB				;save DB
-    43 00:E140: 0B           	PHD				;save DP
-    44 00:E141: C2 30        	REP		#$30	;16 bit registers
-    45                        	LONGI 	ON
-    46                        	LONGA	ON
-    47 00:E143: 48           	PHA				;save A
-    48 00:E144: DA           	PHX				;save X
-    49 00:E145: 5A           	PHY 			;save Y
-    50                        	
-    51 00:E146: A2 2E 80     	LDX 	#IRQ_STRING
-  Fri Oct 29 2021 14:00                                                Page 2
+    39                        IRQ:
+    40 00:E13F: 8B           	PHB				;save DB
+    41 00:E140: 0B           	PHD				;save DP
+    42 00:E141: C2 30        	REP		#$30	;16 bit registers
+    43                        	LONGI 	ON
+    44                        	LONGA	ON
+    45 00:E143: 48           	PHA				;save A
+    46 00:E144: DA           	PHX				;save X
+    47 00:E145: 5A           	PHY 			;save Y
+    48                        	
+    49 00:E146: A2 2E 40     	LDX 	#IRQ_STRING
+    50 00:E149: A0 01 00     	LDY 	#PROGRESS
+    51 00:E14C: 20 1D 40     	JSR 	WRITE_STRING
+  Wed Jan  5 2022 21:39                                                Page 2
 
 
-    52 00:E149: A0 01 00     	LDY 	#PROGRESS
-    53 00:E14C: 20 1D 80     	JSR 	WRITE_STRING
-    54                        	
-    55 00:E14F: 80 57        	BRA 	EXIT_INTERRUPT 
-    56                        
-    57                        NMI:
-    58 00:E151: 8B           	PHB				;save DB
-    59 00:E152: 0B           	PHD				;save DP
-    60 00:E153: C2 30        	REP		#$30	;16 bit registers
-    61                        	LONGI 	ON
-    62                        	LONGA	ON
-    63 00:E155: 48           	PHA				;save A
-    64 00:E156: DA           	PHX				;save X
-    65 00:E157: 5A           	PHY 			;save Y
-    66                        
-    67 00:E158: A2 32 80     	LDX 	#NMI_STRING
-    68 00:E15B: A0 05 00     	LDY 	#PROGRESS_NMI
-    69 00:E15E: 20 1D 80     	JSR 	WRITE_STRING
-    70                        	
-    71 00:E161: 80 45        	BRA 	EXIT_INTERRUPT 
-    72                        
-    73                        ABORT:
-    74 00:E163: 8B           	PHB				;save DB
-    75 00:E164: 0B           	PHD				;save DP
-    76 00:E165: C2 30        	REP		#$30	;16 bit registers
-    77                        	LONGI 	ON
-    78                        	LONGA	ON
-    79 00:E167: 48           	PHA				;save A
-    80 00:E168: DA           	PHX				;save X
-    81 00:E169: 5A           	PHY 			;save Y
-    82                        	
-    83 00:E16A: A2 36 80     	LDX 	#ABORT_STRING
-    84 00:E16D: A0 09 00     	LDY 	#PROGRESS_ABORT
-    85 00:E170: 20 1D 80     	JSR 	WRITE_STRING
+    52                        	
+    53 00:E14F: 80 57        	BRA 	EXIT_INTERRUPT 
+    54                        
+    55                        NMI:
+    56 00:E151: 8B           	PHB				;save DB
+    57 00:E152: 0B           	PHD				;save DP
+    58 00:E153: C2 30        	REP		#$30	;16 bit registers
+    59                        	LONGI 	ON
+    60                        	LONGA	ON
+    61 00:E155: 48           	PHA				;save A
+    62 00:E156: DA           	PHX				;save X
+    63 00:E157: 5A           	PHY 			;save Y
+    64                        
+    65 00:E158: A2 32 40     	LDX 	#NMI_STRING
+    66 00:E15B: A0 05 00     	LDY 	#PROGRESS_NMI
+    67 00:E15E: 20 1D 40     	JSR 	WRITE_STRING
+    68                        	
+    69 00:E161: 80 45        	BRA 	EXIT_INTERRUPT 
+    70                        
+    71                        ABORT:
+    72 00:E163: 8B           	PHB				;save DB
+    73 00:E164: 0B           	PHD				;save DP
+    74 00:E165: C2 30        	REP		#$30	;16 bit registers
+    75                        	LONGI 	ON
+    76                        	LONGA	ON
+    77 00:E167: 48           	PHA				;save A
+    78 00:E168: DA           	PHX				;save X
+    79 00:E169: 5A           	PHY 			;save Y
+    80                        	
+    81 00:E16A: A2 36 40     	LDX 	#ABORT_STRING
+    82 00:E16D: A0 09 00     	LDY 	#PROGRESS_ABORT
+    83 00:E170: 20 1D 40     	JSR 	WRITE_STRING
+    84                        
+    85 00:E173: 80 33        	BRA 	EXIT_INTERRUPT 
     86                        
-    87 00:E173: 80 33        	BRA 	EXIT_INTERRUPT 
-    88                        
-    89                        COP:
-    90 00:E175: 8B           	PHB				;save DB
-    91 00:E176: 0B           	PHD				;save DP
-    92 00:E177: C2 30        	REP		#$30	;16 bit registers
-    93                        	LONGI 	ON
-    94                        	LONGA	ON
-    95 00:E179: 48           	PHA				;save A
-    96 00:E17A: DA           	PHX				;save X
-    97 00:E17B: 5A           	PHY 			;save Y
-    98                        
-    99 00:E17C: A2 40 80     	LDX 	#COP_STRING
-   100 00:E17F: A0 13 00     	LDY 	#PROGRESS_COP
-   101 00:E182: 20 1D 80     	JSR 	WRITE_STRING
-   102                        	
-   103 00:E185: 80 21        	BRA 	EXIT_INTERRUPT 
-   104                        
-   105                        BRK:
-   106 00:E187: 8B           	PHB				;save DB
-   107 00:E188: 0B           	PHD				;save DP
-   108 00:E189: C2 30        	REP		#$30	;16 bit registers
-   109                        	LONGI 	ON
-  Fri Oct 29 2021 14:00                                                Page 3
+    87                        COP:
+    88 00:E175: 8B           	PHB				;save DB
+    89 00:E176: 0B           	PHD				;save DP
+    90 00:E177: C2 30        	REP		#$30	;16 bit registers
+    91                        	LONGI 	ON
+    92                        	LONGA	ON
+    93 00:E179: 48           	PHA				;save A
+    94 00:E17A: DA           	PHX				;save X
+    95 00:E17B: 5A           	PHY 			;save Y
+    96                        
+    97 00:E17C: A2 40 40     	LDX 	#COP_STRING
+    98 00:E17F: A0 13 00     	LDY 	#PROGRESS_COP
+    99 00:E182: 20 1D 40     	JSR 	WRITE_STRING
+   100                        	
+   101 00:E185: 80 21        	BRA 	EXIT_INTERRUPT 
+   102                        
+   103                        BRK:
+   104 00:E187: 8B           	PHB				;save DB
+   105 00:E188: 0B           	PHD				;save DP
+   106 00:E189: C2 30        	REP		#$30	;16 bit registers
+   107                        	LONGI 	ON
+   108                        	LONGA	ON
+   109 00:E18B: 48           	PHA				;save A
+  Wed Jan  5 2022 21:39                                                Page 3
 
 
-   110                        	LONGA	ON
-   111 00:E18B: 48           	PHA				;save A
-   112 00:E18C: DA           	PHX				;save X
-   113 00:E18D: 5A           	PHY 			;save Y
-   114                        
-   115 00:E18E: A2 3C 80     	LDX 	#BRK_STRING
-   116 00:E191: A0 0F 00     	LDY 	#PROGRESS_BRK
-   117 00:E194: 20 1D 80     	JSR 	WRITE_STRING
-   118                        	
-   119 00:E197: 80 0F        	BRA 	EXIT_INTERRUPT 
-   120                        
-   121                        EMU:
-   122 00:E199: 8B           	PHB				;save DB
-   123 00:E19A: 0B           	PHD				;save DP
-   124 00:E19B: C2 30        	REP		#$30	;16 bit registers
-   125                        	LONGI 	ON
-   126                        	LONGA	ON
-   127 00:E19D: 48           	PHA				;save A
-   128 00:E19E: DA           	PHX				;save X
-   129 00:E19F: 5A           	PHY 			;save Y
-   130                        	
-   131 00:E1A0: A9 45 00     	LDA 	#"E"
-   132 00:E1A3: 20 0E 80     	JSR 	WRITE_PROGRESS
+   110 00:E18C: DA           	PHX				;save X
+   111 00:E18D: 5A           	PHY 			;save Y
+   112                        
+   113 00:E18E: A2 3C 40     	LDX 	#BRK_STRING
+   114 00:E191: A0 0F 00     	LDY 	#PROGRESS_BRK
+   115 00:E194: 20 1D 40     	JSR 	WRITE_STRING
+   116                        	
+   117 00:E197: 80 0F        	BRA 	EXIT_INTERRUPT 
+   118                        
+   119                        EMU:
+   120 00:E199: 8B           	PHB				;save DB
+   121 00:E19A: 0B           	PHD				;save DP
+   122 00:E19B: C2 30        	REP		#$30	;16 bit registers
+   123                        	LONGI 	ON
+   124                        	LONGA	ON
+   125 00:E19D: 48           	PHA				;save A
+   126 00:E19E: DA           	PHX				;save X
+   127 00:E19F: 5A           	PHY 			;save Y
+   128                        	
+   129 00:E1A0: A9 45 00     	LDA 	#"E"
+   130 00:E1A3: 20 0E 40     	JSR 	WRITE_PROGRESS
+   131                        
+   132 00:E1A6: 80 00        	BRA 	EXIT_INTERRUPT 
    133                        
-   134 00:E1A6: 80 00        	BRA 	EXIT_INTERRUPT 
-   135                        
-   136                        EXIT_INTERRUPT:
-   137 00:E1A8: C2 30        	REP	#$30		;16 bit registers
-   138                        	LONGI 	ON
-   139                        	LONGA	ON
-   140 00:E1AA: 7A           	PLY             ;restore Y
-   141 00:E1AB: FA               PLX             ;restore X
-   142 00:E1AC: 68               PLA             ;restore A
-   143 00:E1AD: 2B               PLD             ;restore DP
-   144 00:E1AE: AB               PLB             ;restore DB
-   145 00:E1AF: 40           	RTI
-   146                        	
-   147                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   134                        EXIT_INTERRUPT:
+   135 00:E1A8: C2 30        	REP		#$30	;16 bit registers
+   136                        	LONGI 	ON
+   137                        	LONGA	ON
+   138 00:E1AA: 7A           	PLY             ;restore Y
+   139 00:E1AB: FA               PLX             ;restore X
+   140 00:E1AC: 68               PLA             ;restore A
+   141 00:E1AD: 2B               PLD             ;restore DP
+   142 00:E1AE: AB               PLB             ;restore DB
+   143 00:E1AF: 40           	RTI
+   144                        	
+   145                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;;;;;;;;;;;;;;;;;;;;;;;	
-   148                        	
-   149                        	ORG $8000
-   150                        START:
-   151 00:8000: 58           	CLI
-   152 00:8001: A9 2E 00     	LDA 	#"."
-   153 00:8004: 20 0E 80     	JSR 	WRITE_PROGRESS
-   154 00:8007: 00 0C        	BRK		12
-   155 00:8009: 02 22        	COP		34
-   156                        	
-   157                        LOOP:
-   158 00:800B: 4C 0B 80     	JMP 	LOOP
-   159                        
-   160                        WRITE_PROGRESS:
-   161 00:800E: E2 20        	SEP		#$20	;8 bit accumulator
-   162                        	LONGA 	OFF
-   163                        
-   164 00:8010: A0 01 00     	LDY 	#PROGRESS
-   165                        LOOP_DOT:	
-   166 00:8013: 99 00 00     	STA 	0,Y
-  Fri Oct 29 2021 14:00                                                Page 4
+   146                        	
+   147                        	ORG $4000
+   148                        START:
+   149 00:4000: 58           	CLI
+   150 00:4001: A9 2E 00     	LDA 	#"."
+   151 00:4004: 20 0E 40     	JSR 	WRITE_PROGRESS
+   152 00:4007: 00 0C        	BRK		12
+   153 00:4009: 02 22        	COP		34
+   154                        	
+   155                        LOOP:
+   156 00:400B: 4C 0B 40     	JMP 	LOOP
+   157                        
+   158                        WRITE_PROGRESS:
+   159 00:400E: E2 20        	SEP		#$20	;8 bit accumulator
+   160                        	LONGA 	OFF
+   161                        
+   162 00:4010: A0 01 00     	LDY 	#PROGRESS
+   163                        LOOP_DOT:	
+   164 00:4013: 99 00 00     	STA 	0,Y
+   165 00:4016: C8           	INY
+   166 00:4017: C0 16 00     	CPY 	#ENDPROGRESS
+  Wed Jan  5 2022 21:39                                                Page 4
 
 
-   167 00:8016: C8           	INY
-   168 00:8017: C0 16 00     	CPY 	#ENDPROGRESS
-   169 00:801A: D0 F7        	BNE 	LOOP_DOT
-   170 00:801C: 60           	RTS
-   171                        	
-   172                        WRITE_STRING:	
-   173 00:801D: E2 20        	SEP		#$20	;8 bit accumulator
-   174                        	LONGA 	OFF
-   175                        WRITE_STRING_LOOP:	
-   176 00:801F: BD 00 00     	LDA 	0,X
-   177 00:8022: F0 07        	BEQ 	DONE_STRING
-   178 00:8024: 99 00 00     	STA 	0,Y
-   179 00:8027: C8           	INY
-   180 00:8028: E8           	INX
-   181 00:8029: 80 F4        	BRA 	WRITE_STRING_LOOP
-   182                        DONE_STRING:
-   183 00:802B: C2 20        	REP		#$20    ;back to 16 bit mode
-   184                        	LONGA 	ON
-   185 00:802D: 60           	RTS
-   186                        
-   187                        IRQ_STRING:	
-   188 00:802E: 49 52 51     	DB 'IRQ'
-   189 00:8031: 00           	DB #0
-   190                        NMI_STRING:	
-   191 00:8032: 4E 4D 49     	DB 'NMI'
-   192 00:8035: 00           	DB #0
-   193                        ABORT_STRING:	
-   194 00:8036: 41 42 4F 52  	DB 'ABORT'
-       00:803A: 54 
-   195 00:803B: 00           	DB #0
-   196                        BRK_STRING:	
-   197 00:803C: 42 52 4B     	DB 'BRK'
-   198 00:803F: 00           	DB #0
-   199                        COP_STRING:	
-   200 00:8040: 43 4F 50     	DB 'COP'
-   201 00:8043: 00           	DB #0
-   202                        EMULATION_STRING:	
-   203 00:8044: 20 2D 20 45  	DB ' - Emulation -  '
-       00:8048: 6D 75 6C 61 
-       00:804C: 74 69 6F 6E 
-       00:8050: 20 2D 20 20 
-   204 00:8054: 00           	DB #0
-   205                        
-   206                        	
-   207                        ; This section defines the interrupt and reset vec
+   167 00:401A: D0 F7        	BNE 	LOOP_DOT
+   168 00:401C: 60           	RTS
+   169                        	
+   170                        WRITE_STRING:	
+   171 00:401D: E2 20        	SEP		#$20	;8 bit accumulator
+   172                        	LONGA 	OFF
+   173                        WRITE_STRING_LOOP:	
+   174 00:401F: BD 00 00     	LDA 	0,X
+   175 00:4022: F0 07        	BEQ 	DONE_STRING
+   176 00:4024: 99 00 00     	STA 	0,Y
+   177 00:4027: C8           	INY
+   178 00:4028: E8           	INX
+   179 00:4029: 80 F4        	BRA 	WRITE_STRING_LOOP
+   180                        DONE_STRING:
+   181 00:402B: C2 20        	REP		#$20    ;back to 16 bit mode
+   182                        	LONGA 	ON
+   183 00:402D: 60           	RTS
+   184                        
+   185                        IRQ_STRING:	
+   186 00:402E: 49 52 51     	DB 'IRQ'
+   187 00:4031: 00           	DB #0
+   188                        NMI_STRING:	
+   189 00:4032: 4E 4D 49     	DB 'NMI'
+   190 00:4035: 00           	DB #0
+   191                        ABORT_STRING:	
+   192 00:4036: 41 42 4F 52  	DB 'ABORT'
+       00:403A: 54 
+   193 00:403B: 00           	DB #0
+   194                        BRK_STRING:	
+   195 00:403C: 42 52 4B     	DB 'BRK'
+   196 00:403F: 00           	DB #0
+   197                        COP_STRING:	
+   198 00:4040: 43 4F 50     	DB 'COP'
+   199 00:4043: 00           	DB #0
+   200                        EMULATION_STRING:	
+   201 00:4044: 20 2D 20 45  	DB ' - Emulation -  '
+       00:4048: 6D 75 6C 61 
+       00:404C: 74 69 6F 6E 
+       00:4050: 20 2D 20 20 
+   202 00:4054: 00           	DB #0
+   203                        
+   204                        	
+   205                        ; This section defines the interrupt and reset vec
                     tors.    
+   206                        
+   207                        	ORG	$FFE4
    208                        
-   209                        	ORG	$FFE4
-   210                        
-   211 00:FFE4: 75 E1        N_COP   DW    COP
-   212 00:FFE6: 87 E1        N_BRK   DW    BRK
-   213 00:FFE8: 63 E1        N_ABORT DW    ABORT
-   214 00:FFEA: 51 E1        N_NMI   DW    NMI
-   215 00:FFEC: 00 00        N_RSRVD DW    0
-   216 00:FFEE: 3F E1        N_IRQ   DW    IRQ
-   217 00:FFF0:              	DS    4
-   218 00:FFF4: 99 E1        E_COP   DW    EMU
-   219 00:FFF6: 00 00        E_RSRVD DW    0
-  Fri Oct 29 2021 14:00                                                Page 5
+   209 00:FFE4: 75 E1        N_COP   DW    COP
+   210 00:FFE6: 87 E1        N_BRK   DW    BRK
+   211 00:FFE8: 63 E1        N_ABORT DW    ABORT
+   212 00:FFEA: 51 E1        N_NMI   DW    NMI
+   213 00:FFEC: 00 00        N_RSRVD DW    0
+   214 00:FFEE: 3F E1        N_IRQ   DW    IRQ
+   215 00:FFF0:              	DS    4
+   216 00:FFF4: 99 E1        E_COP   DW    EMU
+   217 00:FFF6: 00 00        E_RSRVD DW    0
+   218 00:FFF8: 99 E1        E_ABORT DW    EMU
+   219 00:FFFA: 99 E1        E_NMI   DW    EMU
+  Wed Jan  5 2022 21:39                                                Page 5
 
 
-   220 00:FFF8: 99 E1        E_ABORT DW    EMU
-   221 00:FFFA: 99 E1        E_NMI   DW    EMU
-   222 00:FFFC: 2B E1        E_RESET DW    RESET
-   223 00:FFFE: 99 E1        E_IRQ   DW    EMU
-   224                        
-   225 01:0000:              	ENDS
-   226                        	END
+   220 00:FFFC: 2B E1        E_RESET DW    RESET
+   221 00:FFFE: 99 E1        E_IRQ   DW    EMU
+   222                        
+   223 01:0000:              	ENDS
+   224                        	END
 
 
-      Lines assembled: 226
+      Lines assembled: 224
       Errors: 0

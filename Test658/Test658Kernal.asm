@@ -35,7 +35,7 @@ FUNCTION_RETURN MACRO LOCAL_SIZE
 	RTS				;return from subroutine
 	ENDM
 	
-	ORG $8000
+	ORG $4000
 START:
 	LDA		$FFFC
 	CMP		#$E12B
@@ -46,22 +46,15 @@ ABSOLUTE_LONG_READ_OKAY:
 
 	SEP		#$20	;8 bit memory
 	LONGA	OFF
-
-	LDA		$FFFC
-	CMP		#$2B
 	
-	BEQ		ABSOLUTE_SHORT_READ_OKAY
-	BRK
-ABSOLUTE_SHORT_READ_OKAY:
-	
-	LDA		#$e4
-	STA		$F000
+	LDA		#$A4
+	STA		$7800
 	
 	LDA		#$CC
-	LDA		$F000
+	LDA		$7800
 
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
-	STA		$FB00
+	STA		$7700
 	
 	LDA		#$02
 	STA		$01FF00	;remap user progream 0xFF, bank 0x00 to real bank 0x02

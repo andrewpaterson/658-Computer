@@ -132,7 +132,7 @@ EMU:
 	BRA 	EXIT_INTERRUPT 
 
 EXIT_INTERRUPT:
-	REP	#$30		;16 bit registers
+	REP		#$30	;16 bit registers
 	LONGI 	ON
 	LONGA	ON
 	PLY             ;restore Y
@@ -144,7 +144,7 @@ EXIT_INTERRUPT:
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
 	
-	ORG $8000
+	ORG $4000
 START:
 	CLI
 	LDA 	#"."

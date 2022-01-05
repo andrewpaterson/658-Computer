@@ -1,4 +1,4 @@
-  Wed Jan  5 2022 17:59                                                Page 1
+  Wed Jan  5 2022 21:39                                                Page 1
 
 
                      ***************************************
@@ -55,201 +55,194 @@
                     routine
     36                        	ENDM
     37                        	
-    38                        	ORG $8000
+    38                        	ORG $4000
     39                        START:
-    40 00:8000: AD FC FF     	LDA		$FFFC
-    41 00:8003: C9 2B E1     	CMP		#$E12B
-  Wed Jan  5 2022 17:59                                                Page 2
+    40 00:4000: AD FC FF     	LDA		$FFFC
+    41 00:4003: C9 2B E1     	CMP		#$E12B
+  Wed Jan  5 2022 21:39                                                Page 2
 
 
     42                        	
-    43 00:8006: F0 02        	BEQ		ABSOLUTE_LONG_READ_OKAY
-    44 00:8008: 00 00        	BRK
+    43 00:4006: F0 02        	BEQ		ABSOLUTE_LONG_READ_OKAY
+    44 00:4008: 00 00        	BRK
     45                        ABSOLUTE_LONG_READ_OKAY:
     46                        
-    47 00:800A: E2 20        	SEP		#$20	;8 bit memory
+    47 00:400A: E2 20        	SEP		#$20	;8 bit memory
     48                        	LONGA	OFF
-    49                        
-    50 00:800C: AD FC FF     	LDA		$FFFC
-    51 00:800F: C9 2B        	CMP		#$2B
+    49                        	
+    50 00:400C: A9 A4        	LDA		#$A4
+    51 00:400E: 8D 00 78     	STA		$7800
     52                        	
-    53 00:8011: F0 02        	BEQ		ABSOLUTE_SHORT_READ_OKAY
-    54 00:8013: 00 00        	BRK
-    55                        ABSOLUTE_SHORT_READ_OKAY:
-    56                        	
-    57 00:8015: A9 E4        	LDA		#$e4
-    58 00:8017: 8D 00 F0     	STA		$F000
-    59                        	
-    60 00:801A: A9 CC        	LDA		#$CC
-    61 00:801C: AD 00 F0     	LDA		$F000
-    62                        
-    63 00:801F: A9 FF        	LDA		#$FF	;user program 0 (0xFF - 
+    53 00:4011: A9 CC        	LDA		#$CC
+    54 00:4013: AD 00 78     	LDA		$7800
+    55                        
+    56 00:4016: A9 FF        	LDA		#$FF	;user program 0 (0xFF - 
                     user program ID)
-    64 00:8021: 8D 00 FB     	STA		$FB00
-    65                        	
-    66 00:8024: A9 02        	LDA		#$02
-    67 00:8026: 8F 00 FF 01  	STA		$01FF00	;remap user progream 0xF
+    57 00:4018: 8D 00 77     	STA		$7700
+    58                        	
+    59 00:401B: A9 02        	LDA		#$02
+    60 00:401D: 8F 00 FF 01  	STA		$01FF00	;remap user progream 0xF
                     F, bank 0x00 to real bank 0x02
-    68 00:802A: A9 03        	LDA		#$03
-    69 00:802C: 8F 01 FF 01  	STA		$01FF01	;remap user progream 0xF
+    61 00:4021: A9 03        	LDA		#$03
+    62 00:4023: 8F 01 FF 01  	STA		$01FF01	;remap user progream 0xF
                     F, bank 0x01 to real bank 0x03
-    70                        	
-    71 00:8030: A9 00        	LDA		#$00
-    72 00:8032: 48           	PHA				;push progream c
+    63                        	
+    64 00:4027: A9 00        	LDA		#$00
+    65 00:4029: 48           	PHA				;push progream c
                     ounter bank
-    73 00:8033: A9 04        	LDA		#$04
-    74 00:8035: 48           	PHA				;push progream c
+    66 00:402A: A9 04        	LDA		#$04
+    67 00:402C: 48           	PHA				;push progream c
                     ounter high-byte
-    75 00:8036: A9 1C        	LDA		#$1C
-    76 00:8038: 48           	PHA				;push progream c
+    68 00:402D: A9 1C        	LDA		#$1C
+    69 00:402F: 48           	PHA				;push progream c
                     ounter low-byte
-    77 00:8039: 08           	PHP				;push processor 
+    70 00:4030: 08           	PHP				;push processor 
                     status
-    78                        
-    79 00:803A: C2 20        	REP		#$20	;16 bit memory
-    80                        	LONGA	ON
-    81                        	
-    82 00:803C: 40           	RTI
-    83                        
-    84                        
-    85                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
-    86                        	
-    87                        	ORG $E12B
-    88                        RESET:
-    89 00:E12B: 18           	CLC	     		;clear carry
-    90 00:E12C: FB           	XCE	     		;clear emulation
-    91 00:E12D: C2 30        	REP		#$30    ;16 bit registers
-    92                        	LONGI 	ON
-  Wed Jan  5 2022 17:59                                                Page 3
+    71                        
+    72 00:4031: C2 20        	REP		#$20	;16 bit memory
+    73                        	LONGA	ON
+    74                        	
+    75 00:4033: 40           	RTI
+    76                        
+    77                        
+    78                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+    79                        	
+    80                        	ORG $E12B
+    81                        RESET:
+    82 00:E12B: 18           	CLC	     		;clear carry
+    83 00:E12C: FB           	XCE	     		;clear emulation
+    84 00:E12D: C2 30        	REP		#$30    ;16 bit registers
+    85                        	LONGI 	ON
+    86                        	LONGA	ON
+    87 00:E12F: A9 FF 01     	LDA		#$01FF  ;get the stack address
+    88 00:E132: 1B           	TCS	     		;and set the stack to it
+    89                        
+    90 00:E133: E2 20        	SEP		#$20	;8 bit memory
+    91                        	LONGA 	OFF
+    92 00:E135: A9 00        	LDA 	#$00	;get bank of data
+  Wed Jan  5 2022 21:39                                                Page 3
 
 
-    93                        	LONGA	ON
-    94 00:E12F: A9 FF 01     	LDA		#$01FF  ;get the stack address
-    95 00:E132: 1B           	TCS	     		;and set the stack to it
-    96                        
-    97 00:E133: E2 20        	SEP		#$20	;8 bit memory
-    98                        	LONGA 	OFF
-    99 00:E135: A9 00        	LDA 	#$00	;get bank of data
-   100 00:E137: 48           	PHA
-   101 00:E138: AB           	PLB	     		;set data bank register
-   102 00:E139: C2 20        	REP		#$20    ;back to 16 bit mode
-   103                        	LONGA	ON
-   104                        
-   105 00:E13B: 5C 00 80 00  	JML  	START	;long jump in case not bank 0
-   106                        
-   107                        IRQ:
-   108 00:E13F: 8B           	PHB				;save DB
-   109 00:E140: 0B           	PHD				;save DP
-   110 00:E141: C2 30        	REP		#$30	;16 bit registers
-   111                        	LONGI 	ON
-   112                        	LONGA	ON
-   113 00:E143: 48           	PHA				;save A
-   114 00:E144: DA           	PHX				;save X
-   115 00:E145: 5A           	PHY 			;save Y
-   116                        	
-   117 00:E146: 80 2D        	BRA 	EXIT_INTERRUPT 
-   118                        
-   119                        NMI:
-   120 00:E148: 8B           	PHB				;save DB
-   121 00:E149: 0B           	PHD				;save DP
-   122 00:E14A: C2 30        	REP		#$30	;16 bit registers
-   123                        	LONGI 	ON
-   124                        	LONGA	ON
-   125 00:E14C: 48           	PHA				;save A
-   126 00:E14D: DA           	PHX				;save X
-   127 00:E14E: 5A           	PHY 			;save Y
-   128                        
-   129 00:E14F: 80 24        	BRA 	EXIT_INTERRUPT 
-   130                        
-   131                        ABORT:
-   132 00:E151: 8B           	PHB				;save DB
-   133 00:E152: 0B           	PHD				;save DP
-   134 00:E153: C2 30        	REP		#$30	;16 bit registers
-   135                        	LONGI 	ON
-   136                        	LONGA	ON
-   137 00:E155: 48           	PHA				;save A
-   138 00:E156: DA           	PHX				;save X
-   139 00:E157: 5A           	PHY 			;save Y
-   140                        
-   141 00:E158: 80 1B        	BRA 	EXIT_INTERRUPT 
-   142                        
-   143                        COP:
-   144 00:E15A: 8B           	PHB				;save DB
-   145 00:E15B: 0B           	PHD				;save DP
-   146 00:E15C: C2 30        	REP		#$30	;16 bit registers
-   147                        	LONGI 	ON
-   148                        	LONGA	ON
-   149 00:E15E: 48           	PHA				;save A
-   150 00:E15F: DA           	PHX				;save X
-  Wed Jan  5 2022 17:59                                                Page 4
+    93 00:E137: 48           	PHA
+    94 00:E138: AB           	PLB	     		;set data bank register
+    95 00:E139: C2 20        	REP		#$20    ;back to 16 bit mode
+    96                        	LONGA	ON
+    97                        
+    98 00:E13B: 5C 00 40 00  	JML  	START	;long jump in case not bank 0
+    99                        
+   100                        IRQ:
+   101 00:E13F: 8B           	PHB				;save DB
+   102 00:E140: 0B           	PHD				;save DP
+   103 00:E141: C2 30        	REP		#$30	;16 bit registers
+   104                        	LONGI 	ON
+   105                        	LONGA	ON
+   106 00:E143: 48           	PHA				;save A
+   107 00:E144: DA           	PHX				;save X
+   108 00:E145: 5A           	PHY 			;save Y
+   109                        	
+   110 00:E146: 80 2D        	BRA 	EXIT_INTERRUPT 
+   111                        
+   112                        NMI:
+   113 00:E148: 8B           	PHB				;save DB
+   114 00:E149: 0B           	PHD				;save DP
+   115 00:E14A: C2 30        	REP		#$30	;16 bit registers
+   116                        	LONGI 	ON
+   117                        	LONGA	ON
+   118 00:E14C: 48           	PHA				;save A
+   119 00:E14D: DA           	PHX				;save X
+   120 00:E14E: 5A           	PHY 			;save Y
+   121                        
+   122 00:E14F: 80 24        	BRA 	EXIT_INTERRUPT 
+   123                        
+   124                        ABORT:
+   125 00:E151: 8B           	PHB				;save DB
+   126 00:E152: 0B           	PHD				;save DP
+   127 00:E153: C2 30        	REP		#$30	;16 bit registers
+   128                        	LONGI 	ON
+   129                        	LONGA	ON
+   130 00:E155: 48           	PHA				;save A
+   131 00:E156: DA           	PHX				;save X
+   132 00:E157: 5A           	PHY 			;save Y
+   133                        
+   134 00:E158: 80 1B        	BRA 	EXIT_INTERRUPT 
+   135                        
+   136                        COP:
+   137 00:E15A: 8B           	PHB				;save DB
+   138 00:E15B: 0B           	PHD				;save DP
+   139 00:E15C: C2 30        	REP		#$30	;16 bit registers
+   140                        	LONGI 	ON
+   141                        	LONGA	ON
+   142 00:E15E: 48           	PHA				;save A
+   143 00:E15F: DA           	PHX				;save X
+   144 00:E160: 5A           	PHY 			;save Y
+   145                        
+   146 00:E161: 80 12        	BRA 	EXIT_INTERRUPT 
+   147                        
+   148                        BRK:
+   149 00:E163: 8B           	PHB				;save DB
+   150 00:E164: 0B           	PHD				;save DP
+  Wed Jan  5 2022 21:39                                                Page 4
 
 
-   151 00:E160: 5A           	PHY 			;save Y
-   152                        
-   153 00:E161: 80 12        	BRA 	EXIT_INTERRUPT 
-   154                        
-   155                        BRK:
-   156 00:E163: 8B           	PHB				;save DB
-   157 00:E164: 0B           	PHD				;save DP
-   158 00:E165: C2 30        	REP		#$30	;16 bit registers
-   159                        	LONGI 	ON
-   160                        	LONGA	ON
-   161 00:E167: 48           	PHA				;save A
-   162 00:E168: DA           	PHX				;save X
-   163 00:E169: 5A           	PHY 			;save Y
-   164                        
-   165 00:E16A: 80 09        	BRA 	EXIT_INTERRUPT 
-   166                        
-   167                        EMU:
-   168 00:E16C: 8B           	PHB				;save DB
-   169 00:E16D: 0B           	PHD				;save DP
-   170 00:E16E: C2 30        	REP		#$30	;16 bit registers
-   171                        	LONGI 	ON
-   172                        	LONGA	ON
-   173 00:E170: 48           	PHA				;save A
-   174 00:E171: DA           	PHX				;save X
-   175 00:E172: 5A           	PHY 			;save Y
-   176                        
-   177 00:E173: 80 00        	BRA 	EXIT_INTERRUPT 
-   178                        
-   179                        EXIT_INTERRUPT:
-   180 00:E175: C2 30        	REP	#$30		;16 bit registers
-   181                        	LONGI 	ON
-   182                        	LONGA	ON
-   183 00:E177: 7A           	PLY             ;restore Y
-   184 00:E178: FA               PLX             ;restore X
-   185 00:E179: 68               PLA             ;restore A
-   186 00:E17A: 2B               PLD             ;restore DP
-   187 00:E17B: AB               PLB             ;restore DB
-   188 00:E17C: 40           	RTI
-   189                        	
-   190                        	
-   191                        ; This section defines the interrupt and reset vec
+   151 00:E165: C2 30        	REP		#$30	;16 bit registers
+   152                        	LONGI 	ON
+   153                        	LONGA	ON
+   154 00:E167: 48           	PHA				;save A
+   155 00:E168: DA           	PHX				;save X
+   156 00:E169: 5A           	PHY 			;save Y
+   157                        
+   158 00:E16A: 80 09        	BRA 	EXIT_INTERRUPT 
+   159                        
+   160                        EMU:
+   161 00:E16C: 8B           	PHB				;save DB
+   162 00:E16D: 0B           	PHD				;save DP
+   163 00:E16E: C2 30        	REP		#$30	;16 bit registers
+   164                        	LONGI 	ON
+   165                        	LONGA	ON
+   166 00:E170: 48           	PHA				;save A
+   167 00:E171: DA           	PHX				;save X
+   168 00:E172: 5A           	PHY 			;save Y
+   169                        
+   170 00:E173: 80 00        	BRA 	EXIT_INTERRUPT 
+   171                        
+   172                        EXIT_INTERRUPT:
+   173 00:E175: C2 30        	REP	#$30		;16 bit registers
+   174                        	LONGI 	ON
+   175                        	LONGA	ON
+   176 00:E177: 7A           	PLY             ;restore Y
+   177 00:E178: FA               PLX             ;restore X
+   178 00:E179: 68               PLA             ;restore A
+   179 00:E17A: 2B               PLD             ;restore DP
+   180 00:E17B: AB               PLB             ;restore DB
+   181 00:E17C: 40           	RTI
+   182                        	
+   183                        	
+   184                        ; This section defines the interrupt and reset vec
                     tors.    
-   192                        
-   193                        	ORG	$FFE4
+   185                        
+   186                        	ORG	$FFE4
+   187                        
+   188 00:FFE4: 5A E1        N_COP   DW    COP
+   189 00:FFE6: 63 E1        N_BRK   DW    BRK
+   190 00:FFE8: 51 E1        N_ABORT DW    ABORT
+   191 00:FFEA: 48 E1        N_NMI   DW    NMI
+   192 00:FFEC: 00 00        N_RSRVD DW    0
+   193 00:FFEE: 3F E1        N_IRQ   DW    IRQ
    194                        
-   195 00:FFE4: 5A E1        N_COP   DW    COP
-   196 00:FFE6: 63 E1        N_BRK   DW    BRK
-   197 00:FFE8: 51 E1        N_ABORT DW    ABORT
-   198 00:FFEA: 48 E1        N_NMI   DW    NMI
-   199 00:FFEC: 00 00        N_RSRVD DW    0
-   200 00:FFEE: 3F E1        N_IRQ   DW    IRQ
-   201                        
-   202                        	ORG	$FFF4
-   203 00:FFF4: 6C E1        E_COP   DW    EMU
-   204 00:FFF6: 00 00        E_RSRVD DW    0
-   205 00:FFF8: 6C E1        E_ABORT DW    EMU
-   206 00:FFFA: 6C E1        E_NMI   DW    EMU
-   207 00:FFFC: 2B E1        E_RESET DW    RESET
-  Wed Jan  5 2022 17:59                                                Page 5
+   195                        	ORG	$FFF4
+   196 00:FFF4: 6C E1        E_COP   DW    EMU
+   197 00:FFF6: 00 00        E_RSRVD DW    0
+   198 00:FFF8: 6C E1        E_ABORT DW    EMU
+   199 00:FFFA: 6C E1        E_NMI   DW    EMU
+   200 00:FFFC: 2B E1        E_RESET DW    RESET
+   201 00:FFFE: 6C E1        E_IRQ   DW    EMU
+   202                        
+   203 01:0000:              	ENDS
+   204                        	END
 
 
-   208 00:FFFE: 6C E1        E_IRQ   DW    EMU
-   209                        
-   210 01:0000:              	ENDS
-   211                        	END
+      Lines assembled: 204
+  Wed Jan  5 2022 21:39                                                Page 5
 
 
-      Lines assembled: 211
       Errors: 0

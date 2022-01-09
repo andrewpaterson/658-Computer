@@ -3,8 +3,7 @@ STARTUP SECTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-FUNCTION_CALL MACRO SUBROUTINE, LOCAL_SIZE
-	JSR SUBROUTINE
+BEGIN_FUNCTION MACRO LOCAL_SIZE
 	PHA				;push accumulator
 	PHX				;push x index
 	PHY				;push y index
@@ -18,9 +17,9 @@ FUNCTION_CALL MACRO SUBROUTINE, LOCAL_SIZE
 	TCS				;transfer accumulator to stack pointer
 	DEC				;accumulator--
 	TCD				;transfer accumulator to direct page
-	ENDM
+	MACEND
 
-FUNCTION_RETURN MACRO LOCAL_SIZE
+END_RETURN MACRO LOCAL_SIZE
 	REP 	#$20	;16 bit memory
 	LONGA	ON
 	TSC
@@ -32,26 +31,25 @@ FUNCTION_RETURN MACRO LOCAL_SIZE
 	PLY
 	PLX
 	PLA
-	RTS				;return from subroutine
-	ENDM
+	MACEND
 	
 	ORG $4000
 START:
 	LDA		$FFFC
 	CMP		#$E12B
 	
-	BEQ		ABSOLUTE_LONG_READ_OKAY
+	BEQ		ABSOLUTE_READ_OKAY
 	BRK
-ABSOLUTE_LONG_READ_OKAY:
+ABSOLUTE_READ_OKAY
 
 	SEP		#$20	;8 bit memory
 	LONGA	OFF
 	
 	LDA		#$A4
-	STA		$7800
+	STA		$7800	;device 0, address 0
 	
 	LDA		#$CC
-	LDA		$7800
+	LDA		$7800	;device 0, address 0
 
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
 	STA		$7700

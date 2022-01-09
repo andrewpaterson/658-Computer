@@ -1,3 +1,13 @@
+	MACFIRST ON
+COP	MACRO OP            ;co-processor
+	IF OP>$FF
+		EXIT "SIGNATURE MUST BE $00 - $FF"
+	ENDIF
+	DB $02, OP
+	MACEND
+	MACFIRST OFF
+
+
 STARTUP SECTION
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29,5 +39,5 @@ LOOP:
 	BNE		LOOP
 
 FOREVER:	
-	COP		
+	COP		$03
 	BRA		FOREVER

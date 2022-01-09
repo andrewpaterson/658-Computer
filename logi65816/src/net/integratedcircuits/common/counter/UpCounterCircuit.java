@@ -89,8 +89,8 @@ public abstract class UpCounterCircuit<SNAPSHOT extends UpCounterCircuitSnapshot
           counterValue = 0;
         }
       }
-      setOutput(carryInCount);
     }
+    setOutput(carryInCount);
   }
 }
 

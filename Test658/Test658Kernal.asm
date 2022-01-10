@@ -46,13 +46,13 @@ ABSOLUTE_READ_OKAY
 	LONGA	OFF
 	
 	LDA		#$A4
-	STA		$7800	;device 0, address 0
+	STA		$7000	;echo device (device 0, address 0)
 	
 	LDA		#$CC
-	LDA		$7800	;device 0, address 0
+	LDA		$7000	;echo device (device 0, address 0)
 
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
-	STA		$7700
+	STA		$6F00
 	
 	LDA		#$02
 	STA		$01FF00	;remap user progream 0xFF, bank 0x00 to real bank 0x02
@@ -66,9 +66,6 @@ ABSOLUTE_READ_OKAY
 	LDA		#$1C
 	PHA				;push progream counter low-byte
 	PHP				;push processor status
-
-	REP		#$20	;16 bit memory
-	LONGA	ON
 	
 	RTI
 

@@ -43,12 +43,6 @@ public class F521LogisimPins
   }
 
   @Override
-  public void setQEqualPHighImpedance()
-  {
-    setHighImpedance(PORT_P_EQUALS_Q);
-  }
-
-  @Override
   public void setQEqualP(boolean value)
   {
     setValue(PORT_P_EQUALS_Q, value);

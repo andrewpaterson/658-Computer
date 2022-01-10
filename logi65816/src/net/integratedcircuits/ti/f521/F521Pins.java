@@ -17,8 +17,6 @@ public interface F521Pins
 
   void setQEqualPUnsettled();
 
-  void setQEqualPHighImpedance();
-
   void setQEqualP(boolean value);
 }
 

@@ -47,9 +47,16 @@ ABSOLUTE_READ_OKAY
 	
 	LDA		#$A4
 	STA		$7000	;echo device (device 0, address 0)
-	
 	LDA		#$CC
 	LDA		$7000	;echo device (device 0, address 0)
+	INC 	A
+	STA		$7000	;echo device (device 0, address 0)
+	LDA		#$CC
+	LDA		$7000	;echo device (device 0, address 0)
+	CMP		#$A5
+	BEQ		READ_DEVICE_OKAY
+	BRK
+READ_DEVICE_OKAY
 
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
 	STA		$6F00

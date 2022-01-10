@@ -29,7 +29,7 @@ public class F521
 
     boolean outputError = false;
     boolean outputUnset = false;
-    boolean outputHighImpedance = false;
+    boolean outputHigh = false;
     if (outputEnabledB.isError() || outputEnabledB.isNotConnected() ||
         pValue.isError() || pValue.isNotConnected() ||
         qValue.isError() || qValue.isNotConnected())
@@ -42,7 +42,7 @@ public class F521
     }
     else if (outputEnabledB.isHigh())
     {
-      outputHighImpedance = true;
+      outputHigh = true;
     }
 
     if (outputError)
@@ -53,9 +53,9 @@ public class F521
     {
       getPins().setQEqualPUnsettled();
     }
-    else if (outputHighImpedance)
+    else if (outputHigh)
     {
-      getPins().setQEqualPHighImpedance();
+      getPins().setQEqualP(true);
     }
     else
     {

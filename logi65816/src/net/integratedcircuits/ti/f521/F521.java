@@ -30,9 +30,7 @@ public class F521
     boolean outputError = false;
     boolean outputUnset = false;
     boolean outputHigh = false;
-    if (outputEnabledB.isError() || outputEnabledB.isNotConnected() ||
-        pValue.isError() || pValue.isNotConnected() ||
-        qValue.isError() || qValue.isNotConnected())
+    if (outputEnabledB.isError() || outputEnabledB.isNotConnected())
     {
       outputError = true;
     }
@@ -59,10 +57,23 @@ public class F521
     }
     else
     {
-      long p = pValue.getValue();
-      long q = qValue.getValue();
+      if (pValue.isError() || pValue.isNotConnected() ||
+          qValue.isError() || qValue.isNotConnected())
+      {
+        getPins().setQEqualPError();
+      }
+      if (pValue.isUnknown() ||
+          qValue.isUnknown())
+      {
+        getPins().setQEqualPUnsettled();
+      }
+      else
+      {
+        long p = pValue.getValue();
+        long q = qValue.getValue();
 
-      getPins().setQEqualP(p != q);
+        getPins().setQEqualP(p != q);
+      }
     }
   }
 

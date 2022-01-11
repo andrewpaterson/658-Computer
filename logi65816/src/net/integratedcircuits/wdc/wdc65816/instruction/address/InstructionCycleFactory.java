@@ -283,9 +283,9 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), Read_DBR(), PC_inc()),
                                  new BusCycle(Address(PBR(), PC()), Read_AAB(), PC_inc()),
                                  new BusCycle(Address(AAB(), X()), Read_DataLow()),
-                                 new BusCycle(Address(DBR(), Y()), Write_DataLow(), PC_dec(), E(operation)),
-                                 new BusCycle(Address(DBR(), Y()), IO(), PC_dec()),
-                                 new BusCycle(Address(DBR(), Y()), IO(), PC_dec(), DONE()));
+                                 new BusCycle(Address(DBR(), Y()), Write_DataLow(), E(operation)),
+                                 new BusCycle(Address(DBR(), Y()), IO()),
+                                 new BusCycle(Address(DBR(), Y()), IO(), DONE()));
   }
 
   public static InstructionCycles createDirectCycles(Executor<W65C816> operation, WidthFromRegister width)

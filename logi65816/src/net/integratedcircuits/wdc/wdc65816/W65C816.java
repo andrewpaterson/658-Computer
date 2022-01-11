@@ -532,7 +532,7 @@ public class W65C816
         pinValues.e = isEmulation();
       }
 
-       if (timing.eOut.timeIn(time) || writeOldValues)
+      if (timing.eOut.timeIn(time) || writeOldValues)
       {
         pins.setEmulation(pinValues.e);
       }
@@ -958,14 +958,12 @@ public class W65C816
 
   public void incrementStackPointer()
   {
-    this.stackPointer++;
-    stackPointer = toShort(stackPointer);
+    stackPointer = toShort(++stackPointer);
   }
 
   public void decrementStackPointer()
   {
-    this.stackPointer--;
-    stackPointer = toShort(stackPointer);
+    stackPointer = toShort(--stackPointer);
   }
 
   public void setDirectOffset(int data)
@@ -1351,20 +1349,28 @@ public class W65C816
 
   public boolean blockMoveNext()
   {
-    accumulator = toShort(accumulator--);
-    xIndex = trimIndex(xIndex++);
-    yIndex = trimIndex(yIndex++);
-
-    return accumulator != 0xffff;
+    boolean done = accumulator == 0xffff;
+    if (!done)
+    {
+      accumulator = toShort(--accumulator);
+      xIndex = trimIndex(++xIndex);
+      yIndex = trimIndex(++yIndex);
+      this.programCounter.offset(-3, true);
+    }
+    return done;
   }
 
   public boolean blockMovePrevious()
   {
-    accumulator = toShort(accumulator--);
-    xIndex = trimIndex(xIndex--);
-    yIndex = trimIndex(yIndex--);
-
-    return accumulator != 0xffff;
+    boolean done = accumulator == 0xffff;
+    if (!done)
+    {
+      accumulator = toShort(--accumulator);
+      xIndex = trimIndex(--xIndex);
+      yIndex = trimIndex(--yIndex);
+      this.programCounter.offset(-3, true);
+    }
+    return done;
   }
 
   private boolean isMemoryNegative(int operand)
@@ -1806,7 +1812,7 @@ public class W65C816
 
   public void MVP()
   {
-    if (!blockMovePrevious())
+    if (blockMovePrevious())
     {
       doneInstruction();
     }
@@ -1814,7 +1820,7 @@ public class W65C816
 
   public void MVN()
   {
-    if (!blockMoveNext())
+    if (blockMoveNext())
     {
       doneInstruction();
     }

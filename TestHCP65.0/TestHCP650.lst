@@ -1,0 +1,226 @@
+  Tue Jan 11 2022 12:15                                                Page 1
+
+
+                     ***************************************
+                     **      WDC 65C816 Macro Assembler   **
+                     **                                   **
+                     **     Version 3.49.1- Feb  6 2006    **
+                     ***************************************
+
+     1                        M16_I16	MACRO
+     2                        	REP		#$30    ;16 bit registers
+     3                        	LONGI 	ON
+     4                        	LONGA	ON
+     5                        	MACEND
+     6                        
+     7                        M16	MACRO
+     8                        	REP		#$20    ;16 bit memory
+     9                        	LONGA	ON
+    10                        	MACEND
+    11                        	
+    12                        I16	MACRO
+    13                        	REP		#$10    ;16 bit index
+    14                        	LONGI	ON
+    15                        	MACEND
+    16                        	
+    17                        M8_I8	MACRO
+    18                        	SEP		#$30    ;8 bit registers
+    19                        	LONGI 	OFF
+    20                        	LONGA	OFF
+    21                        	MACEND
+    22                        
+    23                        M8	MACRO
+    24                        	SEP		#$20    ;8 bit memory
+    25                        	LONGA	OFF
+    26                        	MACEND
+    27                        	
+    28                        I8	MACRO
+    29                        	SEP		#$10    ;8 bit index
+    30                        	LONGI	OFF
+    31                        	MACEND
+    32                        	
+    33                        
+    34                        INTERRUPT	MACRO   
+    35                        	M16_I16
+    36                        	PHB				;save DB
+    37                        	PHD				;save DP
+    38                        	PHA				;save A
+    39                        	PHX				;save X
+    40                        	PHY 			;save Y
+    41                        	MACEND
+    42                        
+    43                        STARTUP SECTION
+    44                        
+    45                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    46                        
+    47                        	
+    48                        	ORG $8000
+    49                        RESET:
+    50 00:8000: 18           	CLC	     		;clear carry
+    51 00:8001: FB           	XCE	     		;clear emulation
+    52                        	M16_I16
+  Tue Jan 11 2022 12:15                                                Page 2
+
+
++   52 00:8002: C2 30        	REP		#$30    ;16 bit registers
++   52                        	LONGI 	ON
++   52                        	LONGA	ON
+    53 00:8004: A9 00 6E     	LDA		#$6E00  ;get the stack address
+    54 00:8007: 1B           	TCS	     		;and set the stack to it
+    55                        
+    56                        	M8
++   56 00:8008: E2 20        	SEP		#$20    ;8 bit memory
++   56                        	LONGA	OFF
+    57 00:800A: A9 00        	LDA 	#$00	;get bank of data
+    58 00:800C: 48           	PHA
+    59 00:800D: AB           	PLB	     		;set data bank register
+    60                        	M16
++   60 00:800E: C2 20        	REP		#$20    ;16 bit memory
++   60                        	LONGA	ON
+    61                        
+    62                        ;	LDX		#$8000
+    63                        ;	TXY
+    64                        ;	LDA		#$00FE
+    65                        ;	MVN		#$00, #$00
+    66                        
+    67 00:8010: A0 E0 FF     	LDY		#$FFE0
+    68 00:8013: BB           	TYX
+    69 00:8014: A9 1E 00     	LDA		#$001E
+    70 00:8017: 54 00 00     	MVN		#$00, #$00
+    71                        	
+    72                        	M8
++   72 00:801A: E2 20        	SEP		#$20    ;8 bit memory
++   72                        	LONGA	OFF
+    73                        ;	LDA		$6F02
+    74                        ;	ORA		#%00000010
+    75                        ;	STA		$6F02
+    76                        	
+    77 00:801C: A9 05        	LDA		#%00000101
+    78 00:801E: 8D 03 6F     	STA		$6F03
+    79                        
+    80 00:8021: A9 0A        	LDA		#%00001010
+    81 00:8023: 8D 03 6F     	STA		$6F03
+    82                        	
+    83                        IRQ:
+    84                        	INTERRUPT
++   84                        	M16_I16
++   84 00:8026: C2 30        	REP		#$30    ;16 bit registers
++   84                        	LONGI 	ON
++   84                        	LONGA	ON
++   84 00:8028: 8B           	PHB				;save DB
++   84 00:8029: 0B           	PHD				;save DP
++   84 00:802A: 48           	PHA				;save A
++   84 00:802B: DA           	PHX				;save X
++   84 00:802C: 5A           	PHY 			;save Y
+    85 00:802D: 80 2D        	BRA 	EXIT_INTERRUPT 
+    86                        
+    87                        NMI:
+    88                        	INTERRUPT
++   88                        	M16_I16
++   88 00:802F: C2 30        	REP		#$30    ;16 bit registers
++   88                        	LONGI 	ON
++   88                        	LONGA	ON
+  Tue Jan 11 2022 12:15                                                Page 3
+
+
++   88 00:8031: 8B           	PHB				;save DB
++   88 00:8032: 0B           	PHD				;save DP
++   88 00:8033: 48           	PHA				;save A
++   88 00:8034: DA           	PHX				;save X
++   88 00:8035: 5A           	PHY 			;save Y
+    89 00:8036: 80 24        	BRA 	EXIT_INTERRUPT 
+    90                        
+    91                        ABORT:
+    92                        	INTERRUPT
++   92                        	M16_I16
++   92 00:8038: C2 30        	REP		#$30    ;16 bit registers
++   92                        	LONGI 	ON
++   92                        	LONGA	ON
++   92 00:803A: 8B           	PHB				;save DB
++   92 00:803B: 0B           	PHD				;save DP
++   92 00:803C: 48           	PHA				;save A
++   92 00:803D: DA           	PHX				;save X
++   92 00:803E: 5A           	PHY 			;save Y
+    93 00:803F: 80 1B        	BRA 	EXIT_INTERRUPT 
+    94                        
+    95                        COP:
+    96                        	INTERRUPT
++   96                        	M16_I16
++   96 00:8041: C2 30        	REP		#$30    ;16 bit registers
++   96                        	LONGI 	ON
++   96                        	LONGA	ON
++   96 00:8043: 8B           	PHB				;save DB
++   96 00:8044: 0B           	PHD				;save DP
++   96 00:8045: 48           	PHA				;save A
++   96 00:8046: DA           	PHX				;save X
++   96 00:8047: 5A           	PHY 			;save Y
+    97 00:8048: 80 12        	BRA 	EXIT_INTERRUPT 
+    98                        
+    99                        BRK:
+   100                        	INTERRUPT
++  100                        	M16_I16
++  100 00:804A: C2 30        	REP		#$30    ;16 bit registers
++  100                        	LONGI 	ON
++  100                        	LONGA	ON
++  100 00:804C: 8B           	PHB				;save DB
++  100 00:804D: 0B           	PHD				;save DP
++  100 00:804E: 48           	PHA				;save A
++  100 00:804F: DA           	PHX				;save X
++  100 00:8050: 5A           	PHY 			;save Y
+   101 00:8051: 80 09        	BRA 	EXIT_INTERRUPT 
+   102                        
+   103                        EMU:
+   104                        	INTERRUPT
++  104                        	M16_I16
++  104 00:8053: C2 30        	REP		#$30    ;16 bit registers
++  104                        	LONGI 	ON
++  104                        	LONGA	ON
++  104 00:8055: 8B           	PHB				;save DB
++  104 00:8056: 0B           	PHD				;save DP
++  104 00:8057: 48           	PHA				;save A
++  104 00:8058: DA           	PHX				;save X
++  104 00:8059: 5A           	PHY 			;save Y
+   105 00:805A: 80 00        	BRA 	EXIT_INTERRUPT 
+  Tue Jan 11 2022 12:15                                                Page 4
+
+
+   106                        
+   107                        EXIT_INTERRUPT:
+   108                        	M16_I16
++  108 00:805C: C2 30        	REP		#$30    ;16 bit registers
++  108                        	LONGI 	ON
++  108                        	LONGA	ON
+   109 00:805E: 7A           	PLY             ;restore Y
+   110 00:805F: FA               PLX             ;restore X
+   111 00:8060: 68               PLA             ;restore A
+   112 00:8061: 2B               PLD             ;restore DP
+   113 00:8062: AB               PLB             ;restore DB
+   114 00:8063: 40           	RTI
+   115                        	
+   116                        	
+   117                        ; This section defines the interrupt and reset vec
+                    tors.    
+   118                        
+   119                        	ORG	$FFE4
+   120                        
+   121 00:FFE4: 41 80        N_COP   DW    COP
+   122 00:FFE6: 4A 80        N_BRK   DW    BRK
+   123 00:FFE8: 38 80        N_ABORT DW    ABORT
+   124 00:FFEA: 2F 80        N_NMI   DW    NMI
+   125 00:FFEC: 00 00        N_RSRVD DW    0
+   126 00:FFEE: 26 80        N_IRQ   DW    IRQ
+   127                        
+   128                        	ORG	$FFF4
+   129 00:FFF4: 53 80        E_COP   DW    EMU
+   130 00:FFF6: 00 00        E_RSRVD DW    0
+   131 00:FFF8: 53 80        E_ABORT DW    EMU
+   132 00:FFFA: 53 80        E_NMI   DW    EMU
+   133 00:FFFC: 00 80        E_RESET DW    RESET
+   134 00:FFFE: 53 80        E_IRQ   DW    EMU
+   135                        
+   136 01:0000:              	ENDS
+   137                        	END
+
+
+      Lines assembled: 203
+      Errors: 0

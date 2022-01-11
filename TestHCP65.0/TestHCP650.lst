@@ -1,4 +1,4 @@
-  Tue Jan 11 2022 12:15                                                Page 1
+  Tue Jan 11 2022 12:26                                                Page 1
 
 
                      ***************************************
@@ -59,7 +59,7 @@
     50 00:8000: 18           	CLC	     		;clear carry
     51 00:8001: FB           	XCE	     		;clear emulation
     52                        	M16_I16
-  Tue Jan 11 2022 12:15                                                Page 2
+  Tue Jan 11 2022 12:26                                                Page 2
 
 
 +   52 00:8002: C2 30        	REP		#$30    ;16 bit registers
@@ -120,7 +120,7 @@
 +   88 00:802F: C2 30        	REP		#$30    ;16 bit registers
 +   88                        	LONGI 	ON
 +   88                        	LONGA	ON
-  Tue Jan 11 2022 12:15                                                Page 3
+  Tue Jan 11 2022 12:26                                                Page 3
 
 
 +   88 00:8031: 8B           	PHB				;save DB
@@ -181,7 +181,7 @@
 +  104 00:8058: DA           	PHX				;save X
 +  104 00:8059: 5A           	PHY 			;save Y
    105 00:805A: 80 00        	BRA 	EXIT_INTERRUPT 
-  Tue Jan 11 2022 12:15                                                Page 4
+  Tue Jan 11 2022 12:26                                                Page 4
 
 
    106                        

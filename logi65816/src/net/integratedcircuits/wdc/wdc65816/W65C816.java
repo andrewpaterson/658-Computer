@@ -1347,30 +1347,26 @@ public class W65C816
     setA(bcdResult.value);
   }
 
-  public boolean blockMoveNext()
+  public void blockMoveNext()
   {
-    boolean done = accumulator == 0xffff;
-    if (!done)
+    if (accumulator != 0xffff)
     {
       accumulator = toShort(--accumulator);
       xIndex = trimIndex(++xIndex);
       yIndex = trimIndex(++yIndex);
-      this.programCounter.offset(-3, true);
+      programCounter.offset(-3, true);
     }
-    return done;
   }
 
-  public boolean blockMovePrevious()
+  public void blockMovePrevious()
   {
-    boolean done = accumulator == 0xffff;
-    if (!done)
+    if (accumulator != 0xffff)
     {
       accumulator = toShort(--accumulator);
       xIndex = trimIndex(--xIndex);
       yIndex = trimIndex(--yIndex);
-      this.programCounter.offset(-3, true);
+      programCounter.offset(-3, true);
     }
-    return done;
   }
 
   private boolean isMemoryNegative(int operand)
@@ -1812,18 +1808,12 @@ public class W65C816
 
   public void MVP()
   {
-    if (blockMovePrevious())
-    {
-      doneInstruction();
-    }
+    blockMovePrevious();
   }
 
   public void MVN()
   {
-    if (blockMoveNext())
-    {
-      doneInstruction();
-    }
+    blockMoveNext();
   }
 
   public void LSR()

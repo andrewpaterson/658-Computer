@@ -1,4 +1,4 @@
-  Mon Jan 10 2022 15:50                                                Page 1
+  Fri Jan 14 2022 17:34                                                Page 1
 
 
                      ***************************************
@@ -59,7 +59,7 @@
     40                        	
     41 00:4006: F0 02        	BEQ		ABSOLUTE_READ_OKAY
     42 00:4008: 00 00        	BRK
-  Mon Jan 10 2022 15:50                                                Page 2
+  Fri Jan 14 2022 17:34                                                Page 2
 
 
     43                        ABSOLUTE_READ_OKAY
@@ -88,12 +88,12 @@
                     user program ID)
     62 00:4027: 8D 00 6F     	STA		$6F00
     63                        	
-    64 00:402A: A9 02        	LDA		#$02
+    64 00:402A: A9 42        	LDA		#$42
     65 00:402C: 8F 00 FF 01  	STA		$01FF00	;remap user progream 0xF
-                    F, bank 0x00 to real bank 0x02
-    66 00:4030: A9 03        	LDA		#$03
+                    F, bank 0x00 to real bank 0x42
+    66 00:4030: A9 43        	LDA		#$43
     67 00:4032: 8F 01 FF 01  	STA		$01FF01	;remap user progream 0xF
-                    F, bank 0x01 to real bank 0x03
+                    F, bank 0x01 to real bank 0x43
     68                        	
     69 00:4036: A9 00        	LDA		#$00
     70 00:4038: 48           	PHA				;push progream c
@@ -120,7 +120,7 @@
     87                        	LONGI 	ON
     88                        	LONGA	ON
     89 00:E12F: A9 FF 01     	LDA		#$01FF  ;get the stack address
-  Mon Jan 10 2022 15:50                                                Page 3
+  Fri Jan 14 2022 17:34                                                Page 3
 
 
     90 00:E132: 1B           	TCS	     		;and set the stack to it
@@ -181,7 +181,7 @@
    145 00:E15F: DA           	PHX				;save X
    146 00:E160: 5A           	PHY 			;save Y
    147                        
-  Mon Jan 10 2022 15:50                                                Page 4
+  Fri Jan 14 2022 17:34                                                Page 4
 
 
    148 00:E161: 80 12        	BRA 	EXIT_INTERRUPT 
@@ -242,7 +242,7 @@
    202 00:FFFC: 2B E1        E_RESET DW    RESET
    203 00:FFFE: 6C E1        E_IRQ   DW    EMU
    204                        
-  Mon Jan 10 2022 15:50                                                Page 5
+  Fri Jan 14 2022 17:34                                                Page 5
 
 
    205 01:0000:              	ENDS

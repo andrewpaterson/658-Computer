@@ -61,10 +61,10 @@ READ_DEVICE_OKAY
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
 	STA		$6F00
 	
-	LDA		#$02
-	STA		$01FF00	;remap user progream 0xFF, bank 0x00 to real bank 0x02
-	LDA		#$03
-	STA		$01FF01	;remap user progream 0xFF, bank 0x01 to real bank 0x03
+	LDA		#$42
+	STA		$01FF00	;remap user progream 0xFF, bank 0x00 to real bank 0x42
+	LDA		#$43
+	STA		$01FF01	;remap user progream 0xFF, bank 0x01 to real bank 0x43
 	
 	LDA		#$00
 	PHA				;push progream counter bank

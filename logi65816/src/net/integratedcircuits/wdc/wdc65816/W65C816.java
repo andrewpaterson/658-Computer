@@ -383,7 +383,10 @@ public class W65C816
       }
 
       int data = getPins().peekData();
-      tickWithConnectedTiming();
+      if (!pinValues.reset)
+      {
+        tickWithConnectedTiming();
+      }
     }
 
     if (timeMustTick)

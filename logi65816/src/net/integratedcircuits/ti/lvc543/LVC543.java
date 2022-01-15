@@ -37,25 +37,47 @@ public class LVC543
     PinValue chipEnableB = getPins().getCEB(inputIndex);
 
     boolean outputError = false;
+    boolean outputUnset = false;
     boolean outputHighImpedance = false;
-    if (outputEnabledB.isError() || chipEnableB.isError())
+
+    if ((outputEnabledB.isError() || chipEnableB.isError()) ||
+        (outputEnabledB.isNotConnected() || chipEnableB.isNotConnected()))
     {
       outputError = true;
     }
-    else if (!outputEnabledB.isLow() && !chipEnableB.isLow())
+    else if (outputEnabledB.isHigh() || chipEnableB.isHigh())
     {
       outputHighImpedance = true;
+    }
+    else if (!outputEnabledB.isLow() && !chipEnableB.isLow())
+    {
+      outputUnset = true;
     }
 
     if (latchEnabledB.isLow() && chipEnableB.isLow())
     {
       BusValue input = getPins().getInput(inputIndex);
-      latchValue[inputIndex] = input.getValue();
+      if (input.isUnknown() || input.isNotConnected())
+      {
+        outputUnset = true;
+      }
+      else if (input.isError())
+      {
+        outputError = true;
+      }
+      else
+      {
+        latchValue[inputIndex] = input.getValue();
+      }
     }
 
     if (outputError)
     {
       getPins().setOutputError(outputIndex);
+    }
+    else if (outputUnset)
+    {
+      getPins().setOutputUnsettled(outputIndex);
     }
     else if (outputHighImpedance)
     {

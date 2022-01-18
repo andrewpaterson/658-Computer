@@ -5,15 +5,13 @@ import net.common.Snapshot;
 public class CounterSnapshot
     implements Snapshot
 {
-  protected boolean previousClock;
+  protected boolean clock;
   protected long counter;
-  protected long resetValue;
 
-  public CounterSnapshot(boolean previousClock, long counter, long resetValue)
+  public CounterSnapshot(boolean clock, long counter)
   {
-    this.previousClock = previousClock;
+    this.clock = clock;
     this.counter = counter;
-    this.resetValue = resetValue;
   }
 }
 

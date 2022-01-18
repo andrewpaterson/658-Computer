@@ -56,58 +56,70 @@ public class HCT193
     }
     else
     {
-      if (parallelLoadB.isLow())
-      {
-        BusValue input = getPins().getInput();
-        parallelLoad(input.getValue(),
-                     input.isValid());
-      }
-
       boolean carry = false;
       boolean borrow = false;
-
-      if (this.downClock)
+      if (!parallelLoadB.isHigh())
       {
-        if (upClockRisingEdge)
+        BusValue input = getPins().getInput();
+        if (input.isValid())
         {
-          countUp();
-          lastUpCount = true;
-        }
-
-        if (upClockFallingEdge)
-        {
-          if (lastUpCount && counterValue == upperLimit - 1)
-          {
-            carry = true;
-          }
-
-          lastUpCount = false;
+          this.counterValue = input.getValue();
+          this.lastDownCount = false;
+          this.lastUpCount = false;
         }
       }
-
-      if (this.upClock)
+      else
       {
-        if (downClockRisingEdge)
+        if (this.downClock)
         {
-          countDown();
-          lastDownCount = true;
-        }
-
-        if (downClockFallingEdge)
-        {
-          if (lastDownCount && counterValue == lowerLimit + 1)
+          if (upClockRisingEdge)
           {
-            borrow = true;
+            counterValue++;
+            if (counterValue == upperLimit)
+            {
+              counterValue = lowerLimit + 1;
+            }
+            lastUpCount = true;
           }
 
-          lastDownCount = false;
+          if (upClockFallingEdge)
+          {
+            if (lastUpCount && counterValue == upperLimit - 1)
+            {
+              carry = true;
+            }
+
+            lastUpCount = false;
+          }
+        }
+
+        if (this.upClock)
+        {
+          if (downClockRisingEdge)
+          {
+            counterValue--;
+            if (counterValue == lowerLimit)
+            {
+              counterValue = upperLimit - 1;
+            }
+            lastDownCount = true;
+          }
+
+          if (downClockFallingEdge)
+          {
+            if (lastDownCount && counterValue == lowerLimit + 1)
+            {
+              borrow = true;
+            }
+
+            lastDownCount = false;
+          }
         }
       }
 
       getPins().setOutput(counterValue);
       getPins().setTCUB(!carry);
       getPins().setTCDB(!borrow);
-
     }
   }
 
@@ -119,32 +131,6 @@ public class HCT193
     getPins().setOutput(0);
     getPins().setTCUB(true);
     getPins().setTCDB(true);
-  }
-
-  protected void parallelLoad(long counterValue, boolean valid)
-  {
-    if (valid)
-    {
-      this.counterValue = counterValue;
-    }
-  }
-
-  protected void countUp()
-  {
-    counterValue++;
-    if (counterValue == upperLimit)
-    {
-      counterValue = lowerLimit + 1;
-    }
-  }
-
-  protected void countDown()
-  {
-    counterValue--;
-    if (counterValue == lowerLimit)
-    {
-      counterValue = upperLimit - 1;
-    }
   }
 
   @Override

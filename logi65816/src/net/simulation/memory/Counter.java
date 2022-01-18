@@ -6,14 +6,14 @@ import net.common.PinValue;
 public class Counter
     extends IntegratedCircuit<CounterSnapshot, CounterTickablePins>
 {
-  protected boolean previousClock;
+  protected boolean clock;
   protected long counter;
   protected long resetValue;
 
   public Counter(String name, CounterTickablePins pins)
   {
     super(name, pins);
-    previousClock = true;
+    clock = true;
     counter = 0;
     resetValue = 1L << pins.getWidth();
   }
@@ -21,15 +21,14 @@ public class Counter
   @Override
   public CounterSnapshot createSnapshot()
   {
-    return new CounterSnapshot(previousClock, counter, resetValue);
+    return new CounterSnapshot(clock, counter);
   }
 
   @Override
   public void restoreFromSnapshot(CounterSnapshot snapshot)
   {
     counter = snapshot.counter;
-    previousClock = snapshot.previousClock;
-    resetValue = snapshot.resetValue;
+    clock = snapshot.clock;
   }
 
   public long getCounter()
@@ -57,8 +56,8 @@ public class Counter
     {
       boolean clock = clockValue.isHigh();
 
-      boolean clockRisingEdge = clock && !previousClock;
-      previousClock = clock;
+      boolean clockRisingEdge = clock && !this.clock;
+      this.clock = clock;
 
       if (clockRisingEdge)
       {

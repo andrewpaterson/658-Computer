@@ -12,13 +12,6 @@ public class LVC74LogisimPins
     extends LogisimPins<LVC74Snapshot, LVC74Pins, LVC74>
     implements LVC74Pins
 {
-  private PinValue[] dValue;
-
-  public LVC74LogisimPins()
-  {
-    dValue = new PinValue[2];
-  }
-
   @Override
   public PinValue getCPValue(int flipFlop)
   {
@@ -38,12 +31,6 @@ public class LVC74LogisimPins
   }
 
   @Override
-  public PinValue getPrevDValue(int flipFlop)
-  {
-    return dValue[flipFlop];
-  }
-
-  @Override
   public PinValue getSDValue(int flipFlop)
   {
     return getValue(PORT_SD[flipFlop]);
@@ -54,19 +41,6 @@ public class LVC74LogisimPins
   {
     setValue(PORT_Q[flipFlop], value);
     setValue(PORT_QB[flipFlop], !value);
-  }
-
-  @Override
-  public long getTickCount()
-  {
-    return instanceState.getTickCount();
-  }
-
-  @Override
-  public void donePropagation()
-  {
-    dValue[0] = getDValue(0);
-    dValue[1] = getDValue(1);
   }
 }
 

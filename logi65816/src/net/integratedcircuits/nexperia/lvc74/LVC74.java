@@ -35,7 +35,7 @@ public class LVC74
   private void tickFlipFlop(int flipFlop)
   {
     PinValue rdValue = getPins().getRDValue(flipFlop);
-    PinValue dValue = getPins().getPrevDValue(flipFlop);
+    PinValue dValue = getPins().getDValue(flipFlop);
     PinValue cpValue = getPins().getCPValue(flipFlop);
     PinValue sdValue = getPins().getSDValue(flipFlop);
 

@@ -15,12 +15,8 @@ public interface LVC74Pins
 
   PinValue getDValue(int flipFlop);
 
-  PinValue getPrevDValue(int flipFlop);
-
   PinValue getSDValue(int flipFlop);
 
   void setValue(int flipFlop, boolean value);
-
-  long getTickCount();
 }
 

@@ -6,6 +6,7 @@ import com.cburch.logisim.instance.InstanceState;
 import net.common.BusValue;
 
 public class LogiBus
+    extends LogiPort
 {
   public int index;
   public int width;

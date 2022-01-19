@@ -10,27 +10,27 @@ public class HC590Snapshot
   protected long registerValue;
   public boolean reset;
   public boolean clock;
-  public boolean clockRisingEdge;
+  public boolean clockRising;
   public boolean registerClock;
-  public boolean registerClockRisingEdge;
+  public boolean registerClockRising;
 
   public HC590Snapshot(long counterValue,
                        long oldCounterValue,
                        long registerValue,
                        boolean reset,
                        boolean clock,
-                       boolean clockRisingEdge,
+                       boolean clockRising,
                        boolean registerClock,
-                       boolean registerClockRisingEdge)
+                       boolean registerClockRising)
   {
     this.counterValue = counterValue;
     this.oldCounterValue = oldCounterValue;
     this.registerValue = registerValue;
     this.reset = reset;
     this.clock = clock;
-    this.clockRisingEdge = clockRisingEdge;
+    this.clockRising = clockRising;
     this.registerClock = registerClock;
-    this.registerClockRisingEdge = registerClockRisingEdge;
+    this.registerClockRising = registerClockRising;
   }
 }
 

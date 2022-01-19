@@ -6,6 +6,7 @@ import com.cburch.logisim.instance.InstanceState;
 import net.common.PinValue;
 
 public class LogiPin
+    extends LogiPort
 {
   public int index;
   public int propagationDelay;
@@ -44,6 +45,11 @@ public class LogiPin
     instanceState.setPort(logiPin.index,
                           Value.createKnown(BitWidth.create(1), value ? 1 : 0),
                           logiPin.propagationDelay);
+  }
+
+  public boolean hasPreviousValue()
+  {
+    return false;
   }
 }
 

@@ -9,19 +9,19 @@ public class UpCounterCircuitSnapshot
   public long oldCounterValue;
   public boolean reset;
   public boolean clock;
-  public boolean clockRisingEdge;
+  public boolean clockRising;
 
   public UpCounterCircuitSnapshot(long counterValue,
                                   long oldCounterValue,
                                   boolean reset,
                                   boolean clock,
-                                  boolean clockRisingEdge)
+                                  boolean clockRising)
   {
     this.counterValue = counterValue;
     this.oldCounterValue = oldCounterValue;
     this.reset = reset;
     this.clock = clock;
-    this.clockRisingEdge = clockRisingEdge;
+    this.clockRising = clockRising;
   }
 }
 

@@ -17,9 +17,9 @@ public class HC590
   protected long registerValue;
   protected boolean reset;
   protected boolean clock;
-  protected boolean clockRisingEdge;
+  protected boolean clockRising;
   protected boolean registerClock;
-  protected boolean registerClockRisingEdge;
+  protected boolean registerClockRising;
 
   public HC590(String name, HC590Pins pins)
   {
@@ -47,7 +47,7 @@ public class HC590
     }
     else if (countEnabledValue.isHigh())
     {
-      if (clockRisingEdge)
+      if (clockRising)
       {
         oldCounterValue = counterValue;
         counterValue++;
@@ -58,7 +58,7 @@ public class HC590
       }
     }
 
-    if (registerClockRisingEdge)
+    if (registerClockRising)
     {
       registerValue = oldCounterValue;
     }
@@ -76,10 +76,10 @@ public class HC590
 
   protected void updateClock(boolean currentClock, boolean currentRegisterClock)
   {
-    this.clockRisingEdge = currentClock && !this.clock;
+    this.clockRising = currentClock && !this.clock;
     this.clock = currentClock;
 
-    this.registerClockRisingEdge = currentRegisterClock && !this.registerClock;
+    this.registerClockRising = currentRegisterClock && !this.registerClock;
     this.registerClock = currentRegisterClock;
   }
 
@@ -91,9 +91,9 @@ public class HC590
                              registerValue,
                              reset,
                              clock,
-                             clockRisingEdge,
+                             clockRising,
                              registerClock,
-                             registerClockRisingEdge);
+                             registerClockRising);
   }
 
   @Override
@@ -104,9 +104,9 @@ public class HC590
     registerValue = snapshot.registerValue;
     reset = snapshot.reset;
     clock = snapshot.clock;
-    clockRisingEdge = snapshot.clockRisingEdge;
+    clockRising = snapshot.clockRising;
     registerClock = snapshot.registerClock;
-    registerClockRisingEdge = snapshot.registerClockRisingEdge;
+    registerClockRising = snapshot.registerClockRising;
   }
 
   @Override

@@ -57,7 +57,7 @@ public class VHC161
                               oldCounterValue,
                               reset,
                               clock,
-                              clockRisingEdge);
+                              clockRising);
   }
 
   @Override

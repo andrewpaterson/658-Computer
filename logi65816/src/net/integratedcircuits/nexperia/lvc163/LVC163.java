@@ -13,6 +13,7 @@ public class LVC163
   {
     super(name, pins);
     limit = 0x10;
+    reset = false;
   }
 
   @Override
@@ -25,7 +26,7 @@ public class LVC163
     PinValue countEnabledValue = getPins().getCEP();
 
     boolean previousReset = reset;
-    reset = masterResetBValue.isLow();
+    reset |= masterResetBValue.isLow();
     updateClock(clockValue.isHigh());
 
     if (previousReset)
@@ -33,6 +34,7 @@ public class LVC163
       if (clockRising)
       {
         reset();
+        reset = false;
       }
     }
     else

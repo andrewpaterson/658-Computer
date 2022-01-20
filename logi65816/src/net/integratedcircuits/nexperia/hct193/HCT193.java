@@ -15,8 +15,6 @@ public class HCT193
   protected int upperLimit;
   protected int lowerLimit;
   protected long counterValue;
-  protected boolean lastUpCount;
-  protected boolean lastDownCount;
   protected boolean upClock;
   protected boolean downClock;
 
@@ -64,8 +62,6 @@ public class HCT193
         if (input.isValid())
         {
           this.counterValue = input.getValue();
-          this.lastDownCount = false;
-          this.lastUpCount = false;
         }
       }
       else
@@ -79,17 +75,14 @@ public class HCT193
             {
               counterValue = lowerLimit + 1;
             }
-            lastUpCount = true;
           }
 
           if (upClockFallingEdge)
           {
-            if (lastUpCount && counterValue == upperLimit - 1)
+            if (counterValue == upperLimit - 1)
             {
               carry = true;
             }
-
-            lastUpCount = false;
           }
         }
 
@@ -102,17 +95,14 @@ public class HCT193
             {
               counterValue = upperLimit - 1;
             }
-            lastDownCount = true;
           }
 
           if (downClockFallingEdge)
           {
-            if (lastDownCount && counterValue == lowerLimit + 1)
+            if (counterValue == lowerLimit + 1)
             {
               borrow = true;
             }
-
-            lastDownCount = false;
           }
         }
       }
@@ -126,8 +116,6 @@ public class HCT193
   protected void reset()
   {
     counterValue = 0;
-    lastDownCount = false;
-    lastUpCount = false;
     getPins().setOutput(0);
     getPins().setTCUB(true);
     getPins().setTCDB(true);
@@ -138,9 +126,7 @@ public class HCT193
   {
     return new HCT193Snapshot(counterValue,
                               upClock,
-                              downClock,
-                              lastUpCount,
-                              lastDownCount);
+                              downClock);
   }
 
   @Override
@@ -149,8 +135,6 @@ public class HCT193
     counterValue = snapshot.counterValue;
     upClock = snapshot.upClock;
     downClock = snapshot.downClock;
-    lastUpCount = snapshot.lastUpCount;
-    lastDownCount = snapshot.lastDownCount;
   }
 
   @Override

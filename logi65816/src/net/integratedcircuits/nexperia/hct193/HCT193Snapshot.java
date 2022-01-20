@@ -8,20 +8,14 @@ public class HCT193Snapshot
   protected long counterValue;
   protected boolean upClock;
   protected boolean downClock;
-  protected boolean lastUpCount;
-  protected boolean lastDownCount;
 
   public HCT193Snapshot(long counterValue,
                         boolean upClock,
-                        boolean downClock,
-                        boolean lastUpCount,
-                        boolean lastDownCount)
+                        boolean downClock)
   {
     this.counterValue = counterValue;
     this.upClock = upClock;
     this.downClock = downClock;
-    this.lastUpCount = lastUpCount;
-    this.lastDownCount = lastDownCount;
   }
 }
 

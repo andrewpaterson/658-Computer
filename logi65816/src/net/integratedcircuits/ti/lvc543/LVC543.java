@@ -61,11 +61,7 @@ public class LVC543
       {
         outputUnset = true;
       }
-      else if (input.isError())
-      {
-        outputError = true;
-      }
-      else
+      else if (input.isValid())
       {
         latchValue[inputIndex] = input.getValue();
       }

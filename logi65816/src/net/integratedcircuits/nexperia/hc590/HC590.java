@@ -17,9 +17,7 @@ public class HC590
   protected long registerValue;
   protected boolean reset;
   protected boolean clock;
-  protected boolean clockRising;
   protected boolean registerClock;
-  protected boolean registerClockRising;
 
   public HC590(String name, HC590Pins pins)
   {
@@ -32,24 +30,31 @@ public class HC590
   {
     PinValue masterResetBValue = getPins().getMasterResetB();
     PinValue clockValue = getPins().getClock();
-    PinValue countEnabledValue = getPins().getCountEnabledB();
+    PinValue countEnabledB = getPins().getCountEnabledB();
     PinValue counterToRegisterClockValue = getPins().getCounterToRegisterClock();
     PinValue outputEnabledB = getPins().getOutputEnabledB();
 
     boolean previousReset = reset;
     reset = masterResetBValue.isLow();
-    updateClock(clockValue.isHigh(), counterToRegisterClockValue.isHigh());
+
+    boolean currentClock = clockValue.isHigh();
+    boolean currentRegisterClock = counterToRegisterClockValue.isHigh();
+
+    boolean clockRising = currentClock && !this.clock;
+    this.clock = currentClock;
+
+    boolean registerClockRising = currentRegisterClock && !this.registerClock;
+    this.registerClock = currentRegisterClock;
 
     if (previousReset)
     {
       counterValue = 0;
       oldCounterValue = 0;
     }
-    else if (countEnabledValue.isHigh())
+    else if (countEnabledB.isLow())
     {
       if (clockRising)
       {
-        oldCounterValue = counterValue;
         counterValue++;
         if (counterValue == limit)
         {
@@ -62,8 +67,9 @@ public class HC590
     {
       registerValue = oldCounterValue;
     }
+    oldCounterValue = counterValue;
 
-    getPins().setCarry(!(oldCounterValue + 1 == limit));
+    getPins().setCarry(!(registerValue + 1 == limit));
     if (outputEnabledB.isLow())
     {
       getPins().setOutput(registerValue & 0xff);
@@ -74,15 +80,6 @@ public class HC590
     }
   }
 
-  protected void updateClock(boolean currentClock, boolean currentRegisterClock)
-  {
-    this.clockRising = currentClock && !this.clock;
-    this.clock = currentClock;
-
-    this.registerClockRising = currentRegisterClock && !this.registerClock;
-    this.registerClock = currentRegisterClock;
-  }
-
   @Override
   public HC590Snapshot createSnapshot()
   {
@@ -91,9 +88,7 @@ public class HC590
                              registerValue,
                              reset,
                              clock,
-                             clockRising,
-                             registerClock,
-                             registerClockRising);
+                             registerClock);
   }
 
   @Override
@@ -104,9 +99,7 @@ public class HC590
     registerValue = snapshot.registerValue;
     reset = snapshot.reset;
     clock = snapshot.clock;
-    clockRising = snapshot.clockRising;
     registerClock = snapshot.registerClock;
-    registerClockRising = snapshot.registerClockRising;
   }
 
   @Override

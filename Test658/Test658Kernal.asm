@@ -58,6 +58,12 @@ ABSOLUTE_READ_OKAY
 	BRK
 READ_DEVICE_OKAY
 
+	LDX		#$CDEF
+	TXY
+
+	LDX		$6F0C	;instruction counter byte 0 and 1
+	LDY		$6F0E	;instruction counter byte 2 and 3
+
 	LDA		#$FF	;user program 0 (0xFF - user program ID)
 	STA		$6F00
 	
@@ -144,6 +150,15 @@ COP:
 	PHA				;save A
 	PHX				;save X
 	PHY 			;save Y
+
+	SEP		#$20	;8 bit memory
+	LONGA 	OFF
+	LDA 	#$00	;get bank of data
+	PHA
+	PLB	     		;set data bank register
+
+	LDX		$6F0C	;instruction counter byte 0 and 1
+	LDY		$6F0E	;instruction counter byte 2 and 3
 
 	BRA 	EXIT_INTERRUPT 
 

@@ -46,6 +46,7 @@ public class HC590
     boolean registerClockRising = currentRegisterClock && !this.registerClock;
     this.registerClock = currentRegisterClock;
 
+    boolean carry = false;
     if (previousReset)
     {
       counterValue = 0;
@@ -59,6 +60,7 @@ public class HC590
         if (counterValue == limit)
         {
           counterValue = 0;
+          carry = true;
         }
       }
     }
@@ -67,9 +69,11 @@ public class HC590
     {
       registerValue = oldCounterValue;
     }
+
+    getPins().setCarry(!carry);
+
     oldCounterValue = counterValue;
 
-    getPins().setCarry(!(registerValue + 1 == limit));
     if (outputEnabledB.isLow())
     {
       getPins().setOutput(registerValue & 0xff);

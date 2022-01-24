@@ -14,7 +14,6 @@ public abstract class UpCounterCircuit<SNAPSHOT extends UpCounterCircuitSnapshot
   protected long oldCounterValue;
   protected boolean reset;
   protected boolean clock;
-  protected boolean clockRising;
 
   public UpCounterCircuit(String name, UpCounterCircuitPins pins)
   {
@@ -66,17 +65,17 @@ public abstract class UpCounterCircuit<SNAPSHOT extends UpCounterCircuitSnapshot
     counterValue = snapshot.counterValue;
     clock = snapshot.clock;
     reset = snapshot.reset;
-    clockRising = snapshot.clockRising;
     oldCounterValue = snapshot.oldCounterValue;
   }
 
-  protected void updateClock(boolean clock)
+  protected boolean updateClock(boolean clock)
   {
-    this.clockRising = clock && !this.clock;
+    boolean clockRising = clock && !this.clock;
     this.clock = clock;
+    return clockRising;
   }
 
-  protected void count(boolean carryInCount, boolean countEnabled)
+  protected void count(boolean carryInCount, boolean countEnabled, boolean clockRising)
   {
     if (countEnabled)
     {

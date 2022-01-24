@@ -8,10 +8,9 @@ public class VHC161Snapshot
   public VHC161Snapshot(long counterValue,
                         long oldCounterValue,
                         boolean reset,
-                        boolean clock,
-                        boolean risingEdge)
+                        boolean clock)
   {
-    super(counterValue, oldCounterValue, reset, clock, risingEdge);
+    super(counterValue, oldCounterValue, reset, clock);
   }
 }
 

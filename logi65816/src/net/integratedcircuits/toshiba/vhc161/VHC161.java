@@ -26,7 +26,7 @@ public class VHC161
 
     boolean previousReset = reset;
     reset = masterResetBValue.isLow();
-    updateClock(clockValue.isHigh());
+    boolean clockRising = updateClock(clockValue.isHigh());
 
     if (previousReset)
     {
@@ -45,7 +45,7 @@ public class VHC161
       }
       else
       {
-        count(carryInCountEnabled, countEnabledValue.isHigh());
+        count(carryInCountEnabled, countEnabledValue.isHigh(), clockRising);
       }
     }
   }
@@ -56,8 +56,7 @@ public class VHC161
     return new VHC161Snapshot(counterValue,
                               oldCounterValue,
                               reset,
-                              clock,
-                              clockRising);
+                              clock);
   }
 
   @Override

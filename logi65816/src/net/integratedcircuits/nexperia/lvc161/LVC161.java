@@ -26,7 +26,7 @@ public class LVC161
 
     boolean previousReset = reset;
     reset = masterResetBValue.isLow();
-    updateClock(clockValue.isHigh());
+    boolean clockRising = updateClock(clockValue.isHigh());
 
     if (previousReset)
     {
@@ -45,7 +45,7 @@ public class LVC161
       }
       else
       {
-        count(carryInCountEnabled, countEnabledValue.isHigh());
+        count(carryInCountEnabled, countEnabledValue.isHigh(), clockRising);
       }
     }
   }
@@ -56,8 +56,7 @@ public class LVC161
     return new LVC161Snapshot(counterValue,
                               oldCounterValue,
                               reset,
-                              clock,
-                              clockRising);
+                              clock);
   }
 
   @Override

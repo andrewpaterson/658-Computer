@@ -8,10 +8,9 @@ public class LVC163Snapshot
   public LVC163Snapshot(long counterValue,
                         long oldCounterValue,
                         boolean reset,
-                        boolean clock,
-                        boolean risingEdge)
+                        boolean clock)
   {
-    super(counterValue, oldCounterValue, reset, clock, risingEdge);
+    super(counterValue, oldCounterValue, reset, clock);
   }
 }
 

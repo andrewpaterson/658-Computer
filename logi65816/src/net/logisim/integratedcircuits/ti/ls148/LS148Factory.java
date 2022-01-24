@@ -27,7 +27,7 @@ public class LS148Factory
     PORT_INPUT = factory.inputShared("I", 8, LEFT).setInverting().setDrawBar().createBus(16);
 
     PORT_GS = factory.outputShared("GS", RIGHT).setInverting().setDrawBar().createPin(16);
-    PORT_A = factory.outputShared("A", 3, RIGHT).createBus(16);
+    PORT_A = factory.outputShared("A", 3, RIGHT).setInverting().setDrawBar().createBus(16);
     PORT_EO = factory.inputShared("EO", RIGHT).createPin(16);
 
     return new LS148Factory(new ComponentDescription(LS148.class.getSimpleName(),

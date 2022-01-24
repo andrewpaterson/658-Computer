@@ -72,7 +72,6 @@ public class HCT40103
           }
           else
           {
-            System.out.println("HCT40103.tick(clockRisingEdge) syncLoadValue:" + Long.toHexString(syncLoadValue));
             counterValue = syncLoadValue;
             syncLoadValue = -1;
           }

@@ -74,7 +74,7 @@ public class LS148
 
         if (outputValue > 0)
         {
-          getPins().setA(8 - outputValue);
+          getPins().setA(((~outputValue) + 1) & 0x07);
           getPins().setGS(false);
           getPins().setEO(true);
         }

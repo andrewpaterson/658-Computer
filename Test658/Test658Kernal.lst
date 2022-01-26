@@ -1,4 +1,4 @@
-  Sat Jan 22 2022 17:23                                                Page 1
+  Wed Jan 26 2022 16:50                                                Page 1
 
 
                      ***************************************
@@ -59,7 +59,7 @@
     40                        	
     41 00:4006: F0 02        	BEQ		ABSOLUTE_READ_OKAY
     42 00:4008: 00 00        	BRK
-  Sat Jan 22 2022 17:23                                                Page 2
+  Wed Jan 26 2022 16:50                                                Page 2
 
 
     43                        ABSOLUTE_READ_OKAY
@@ -68,16 +68,16 @@
     46                        	LONGA	OFF
     47                        	
     48 00:400C: A9 A4        	LDA		#$A4
-    49 00:400E: 8D 00 70     	STA		$7000	;echo device (device 0, 
+    49 00:400E: 8D 01 70     	STA		$7001	;echo device (device 1, 
                     address 0)
     50 00:4011: A9 CC        	LDA		#$CC
-    51 00:4013: AD 00 70     	LDA		$7000	;echo device (device 0, 
+    51 00:4013: AD 01 70     	LDA		$7001	;echo device (device 1, 
                     address 0)
     52 00:4016: 1A           	INC 	A
-    53 00:4017: 8D 00 70     	STA		$7000	;echo device (device 0, 
+    53 00:4017: 8D 01 70     	STA		$7001	;echo device (device 1, 
                     address 0)
     54 00:401A: A9 CC        	LDA		#$CC
-    55 00:401C: AD 00 70     	LDA		$7000	;echo device (device 0, 
+    55 00:401C: AD 01 70     	LDA		$7001	;echo device (device 1, 
                     address 0)
     56 00:401F: C9 A5        	CMP		#$A5
     57 00:4021: F0 02        	BEQ		READ_DEVICE_OKAY
@@ -120,7 +120,7 @@
     85                        
     86                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
     87                        	
-  Sat Jan 22 2022 17:23                                                Page 3
+  Wed Jan 26 2022 16:50                                                Page 3
 
 
     88                        	ORG $E12B
@@ -181,7 +181,7 @@
    143                        
    144                        COP:
    145 00:E15A: 8B           	PHB				;save DB
-  Sat Jan 22 2022 17:23                                                Page 4
+  Wed Jan 26 2022 16:50                                                Page 4
 
 
    146 00:E15B: 0B           	PHD				;save DP
@@ -242,7 +242,7 @@
    199                        	
    200                        	
    201                        ; This section defines the interrupt and reset vec
-  Sat Jan 22 2022 17:23                                                Page 5
+  Wed Jan 26 2022 16:50                                                Page 5
 
 
                     tors.    

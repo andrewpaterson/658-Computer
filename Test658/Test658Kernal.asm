@@ -46,13 +46,13 @@ ABSOLUTE_READ_OKAY
 	LONGA	OFF
 	
 	LDA		#$A4
-	STA		$7001	;echo device (device 1, address 0)
+	STA		$7012	;echo device (device 1, address 2)
 	LDA		#$CC
-	LDA		$7001	;echo device (device 1, address 0)
+	LDA		$7012	;echo device (device 1, address 2)
 	INC 	A
-	STA		$7001	;echo device (device 1, address 0)
+	STA		$7012	;echo device (device 1, address 2)
 	LDA		#$CC
-	LDA		$7001	;echo device (device 1, address 0)
+	LDA		$7012	;echo device (device 1, address 2)
 	CMP		#$A5
 	BEQ		READ_DEVICE_OKAY
 	BRK

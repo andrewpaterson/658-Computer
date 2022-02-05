@@ -7,7 +7,7 @@ import net.common.PinValue;
 public class F251
     extends IntegratedCircuit<F251Snapshot, F251Pins>
 {
-  public static final String TYPE = "1-of-8 Data Selector";
+  public static final String TYPE = "8-to-1 Multiplexer";
 
   public F251(String name, F251Pins pins)
   {

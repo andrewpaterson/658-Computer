@@ -12,6 +12,7 @@ public class LVC595
   public static final String TYPE = "8-bit serial in shift";
 
   protected int shiftRegister;
+  protected boolean qs7;
   protected int storageRegister;
   protected boolean prevSHCP;
   protected boolean prevSTCP;
@@ -21,6 +22,7 @@ public class LVC595
     super(name, pins);
     shiftRegister = 0;
     storageRegister = 0;
+    qs7 = false;
     prevSHCP = false;
     prevSTCP = false;
   }
@@ -36,6 +38,7 @@ public class LVC595
 
     boolean stcpRising = !prevSTCP && stcp.isHigh();
     boolean shcpRising = !prevSHCP && shcp.isHigh();
+    boolean shcpFalling = prevSHCP && !shcp.isHigh();
     boolean highImpedance = false;
 
     if ((oeB.isError() || oeB.isNotConnected()) ||
@@ -45,14 +48,11 @@ public class LVC595
         shcp.isError())
     {
       getPins().setQError();
-      getPins().setQ7SError();
     }
     else
     {
       if (oeB.isHigh())
       {
-        getPins().setQImpedance();
-        getPins().setQ7S(false);
         highImpedance = true;
       }
 
@@ -71,11 +71,19 @@ public class LVC595
     {
       shift(ds);
     }
+    if (shcpFalling)
+    {
+      qs7 = (shiftRegister & 0x80) == 0x80;
+      getPins().setQ7S(qs7);
+    }
 
     if (!highImpedance)
     {
       getPins().setQ(storageRegister);
-      getPins().setQ7S((shiftRegister & 0x80) == 0x80);
+    }
+    else
+    {
+      getPins().setQImpedance();
     }
 
     prevSTCP = stcp.isHigh();
@@ -91,13 +99,18 @@ public class LVC595
   @Override
   public LVC595Snapshot createSnapshot()
   {
-    return new LVC595Snapshot(shiftRegister, storageRegister, prevSHCP, prevSTCP);
+    return new LVC595Snapshot(shiftRegister,
+                              storageRegister,
+                              prevSHCP,
+                              prevSTCP,
+                              qs7);
   }
 
   @Override
   public void restoreFromSnapshot(LVC595Snapshot snapshot)
   {
     shiftRegister = snapshot.shiftRegister;
+    qs7 = snapshot.qs7;
     storageRegister = snapshot.storageRegister;
     prevSHCP = snapshot.prevSHCP;
     prevSTCP = snapshot.prevSTCP;

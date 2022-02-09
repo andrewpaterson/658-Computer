@@ -1,6 +1,7 @@
 package net.logisim.integratedcircuits.nexperia.lv165;
 
 import com.cburch.logisim.comp.ComponentFactory;
+import com.cburch.logisim.util.GraphicsUtil;
 import net.integratedcircuits.nexperia.lv165.LV165;
 import net.logisim.common.*;
 
@@ -51,6 +52,12 @@ public class LV165Factory
   {
     LV165 shiftRegister = instance.getIntegratedCircuit();
     drawField(graphics2D, getTopOffset(0), WIDTH_8BIT, "Value:", shiftRegister.getValueString(), true);
+
+    int y = description.getTopYPlusMargin() + getTopOffset(1);
+    int rectangleWidth = 32 * 2;
+    int x = -rectangleWidth / 2;
+    graphics2D.drawRect(x, y - 5, rectangleWidth, 15);
+    GraphicsUtil.drawText(graphics2D, shiftRegister.getValueBinaryString(), x + 5, y, GraphicsUtil.H_LEFT, GraphicsUtil.V_CENTER);
   }
 
   @Override

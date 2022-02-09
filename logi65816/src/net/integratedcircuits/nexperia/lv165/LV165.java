@@ -13,6 +13,7 @@ public class LV165
   public static final String TYPE = "8-bit parallel in shift";
 
   protected int q;
+  protected boolean qOut;
   protected boolean previousCP;
   protected boolean previousCEB;
 
@@ -20,6 +21,7 @@ public class LV165
   {
     super(name, pins);
     q = 0;
+    qOut = false;
     previousCEB = false;
     previousCEB = false;
   }
@@ -32,42 +34,54 @@ public class LV165
     PinValue plB = getPins().getPLB();
     PinValue ds = getPins().getDS();
 
+    boolean setQOut = false;
+
     if ((!plB.isError() && !plB.isNotConnected()) &&
         (!plB.isHigh() ||
          ((!ceB.isError() && !ceB.isNotConnected()) &&
           (!cp.isError() && !cp.isNotConnected()))))
     {
+      boolean cpRising = !previousCP && cp.isHigh();
+      boolean cebRising = !previousCEB && ceB.isHigh();
+      previousCEB = ceB.isHigh();
+      previousCP = cp.isHigh();
+
       if (plB.isLow())
       {
         BusValue parallelData = getPins().getD();
         if (parallelData.isValid())
         {
           q = (int) parallelData.getValue();
+          qOut = (q & 0x80) == 0x80;
         }
       }
       else if (plB.isHigh())
       {
-        boolean cpRising = !previousCP && cp.isHigh();
-        boolean cebRising = !previousCEB && ceB.isHigh();
-
         if ((ceB.isLow() && cpRising) ||
             (cp.isLow() && cebRising))
         {
           q = q << 1;
           q = q & 0xFE | (ds.isHigh() ? 1 : 0);
+          qOut = (q & 0x80) == 0x80;
+        }
+        else
+        {
+          setQOut = true;
         }
       }
     }
 
-    previousCEB = ceB.isHigh();
-    previousCP = cp.isHigh();
-    getPins().setQValue((q & 0x80) == 0x80);
+    if (setQOut)
+    {
+      getPins().setQValue(qOut);
+    }
   }
 
   @Override
   public LV165Snapshot createSnapshot()
   {
     return new LV165Snapshot(q,
+                             qOut,
                              previousCP,
                              previousCEB);
   }
@@ -89,6 +103,13 @@ public class LV165
   public String getValueString()
   {
     return StringUtil.getByteStringHex(toByte(q));
+  }
+
+  public String getValueBinaryString()
+  {
+    String s = Integer.toBinaryString(q);
+    s = StringUtil.pad(8 - s.length(), "0") + s;
+    return s;
   }
 }
 

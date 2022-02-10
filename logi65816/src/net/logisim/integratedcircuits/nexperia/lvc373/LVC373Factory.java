@@ -24,7 +24,7 @@ public class LVC373Factory
 
     PORT_OEB = factory.inputShared("OE", LEFT).setInverting().setDrawBar().createPin(2);
     PORT_D = factory.inputShared("D", 8, LEFT).setTooltip("Input D (input)").createBus(2);
-    PORT_LE = factory.inputShared("LE", LEFT).createPin(2);
+    PORT_LE = factory.inputShared("LE", LEFT).setTooltip("Latch data (input: high latch)").createPin(2);
 
     PORT_Q = factory.outputShared("Q", 8, RIGHT).setTooltip("Output Q (output)").createBus(2);
 

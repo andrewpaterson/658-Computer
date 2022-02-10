@@ -44,6 +44,10 @@ public class StringUtil
   {
     return rightJustify(toHexString(value), 4, "0");
   }
+  public static String to12BitHex(int value)
+  {
+    return rightJustify(toHexString(value), 3, "0");
+  }
 
   public static String to8BitHex(int value)
   {

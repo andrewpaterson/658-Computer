@@ -2,6 +2,7 @@ package net.logisim.integratedcircuits.renesas.idt7201;
 
 import net.integratedcircuits.renesas.idt7201.IDT7201;
 import net.logisim.common.*;
+import net.util.StringUtil;
 
 import java.awt.*;
 
@@ -45,7 +46,7 @@ public class IDT7201Factory
 
     return new IDT7201Factory(new ComponentDescription(IDT7201.class.getSimpleName(),
                                                        IDT7201.TYPE,
-                                                       160,
+                                                       240,
                                                        factory.getPorts(),
                                                        factory.getCommonPortNames()));
   }
@@ -60,8 +61,56 @@ public class IDT7201Factory
   {
     IDT7201 fifo = instance.getIntegratedCircuit();
     drawField(graphics2D, getTopOffset(0), WIDTH_16BIT, "Values:", fifo.getSizeAsString(), true);
-    drawField(graphics2D, getTopOffset(1), WIDTH_16BIT, "In:", fifo.getFirstValueAsString(), true);
-    drawField(graphics2D, getTopOffset(2), WIDTH_16BIT, "Out:", fifo.getLastValueAsString(), true);
+
+    Color oldColour = graphics2D.getColor();
+
+    int y = description.getTopYPlusMargin() + getTopOffset(1);
+    int rectangleWidth = 144;
+    int x = -rectangleWidth / 2 + 12;
+
+    graphics2D.setColor(Color.lightGray);
+    int height = 59;
+    graphics2D.fillRect(x - 24, y - 5, rectangleWidth + 24, height);
+
+    graphics2D.setColor(Color.black);
+    graphics2D.drawRect(x, y - 5, rectangleWidth, height);
+
+    Font oldFont = graphics2D.getFont();
+    graphics2D.setFont(oldFont.deriveFont(Font.PLAIN));
+
+    int size = fifo.size();
+    int xi = 0;
+    for (int i = 0; i < size; i++)
+    {
+      char c = fifo.get(i);
+      if (c != (char) -1)
+      {
+        String s = StringUtil.to12BitHex(c);
+        graphics2D.drawString(s, x + xi * 24 + 2, y + 8);
+        xi++;
+        if (xi > 5)
+        {
+          xi = 0;
+          y += 14;
+
+          if (y > 33)
+          {
+            break;
+          }
+        }
+      }
+    }
+
+    y = description.getTopYPlusMargin() + getTopOffset(1);
+    for (int i = 0; i < 4; i++)
+    {
+      String s = Integer.toString(i * 6);
+      graphics2D.drawString(StringUtil.pad(2 - s.length(), "0") + s, x - 16, y + 8);
+      y += 14;
+    }
+
+    graphics2D.setColor(oldColour);
+    graphics2D.setFont(oldFont);
   }
 
   @Override

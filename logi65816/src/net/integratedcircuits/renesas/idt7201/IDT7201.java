@@ -146,7 +146,7 @@ public class IDT7201
     return head == tail;
   }
 
-  private int size()
+  public int size()
   {
     if (head >= tail)
     {
@@ -156,6 +156,21 @@ public class IDT7201
     {
       return SIZE - tail + head;
     }
+  }
+
+  public char get(int indexFromTail)
+  {
+    if (isEmpty() || indexFromTail >= size())
+    {
+      return (char) -1;
+    }
+
+    int index = tail + indexFromTail;
+    if (index >= SIZE)
+    {
+      index = index - SIZE;
+    }
+    return values[index];
   }
 
   @Override

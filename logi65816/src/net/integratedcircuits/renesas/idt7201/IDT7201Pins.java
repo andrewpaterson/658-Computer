@@ -13,7 +13,7 @@ public interface IDT7201Pins
 
   void setOutputQ(long value);
 
-  void setOutputHighImpedance();
+  void setOutputQHighImpedance();
 
   PinValue getWB();
 
@@ -31,7 +31,7 @@ public interface IDT7201Pins
 
   void setXOB_HFB(boolean value);
 
-  void setOutputError();
+  void setOutputQError();
 
   void setEFBError();
 

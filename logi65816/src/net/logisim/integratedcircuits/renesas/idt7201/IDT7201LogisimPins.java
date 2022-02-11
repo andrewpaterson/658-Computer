@@ -26,7 +26,7 @@ public class IDT7201LogisimPins
   }
 
   @Override
-  public void setOutputHighImpedance()
+  public void setOutputQHighImpedance()
   {
     setHighImpedance(PORT_Q);
   }
@@ -80,9 +80,9 @@ public class IDT7201LogisimPins
   }
 
   @Override
-  public void setOutputError()
+  public void setOutputQError()
   {
-    setError(PORT_D);
+    setError(PORT_Q);
   }
 
   @Override

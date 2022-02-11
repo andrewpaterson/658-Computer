@@ -43,7 +43,7 @@ public class IDT7201
 
     if (!expansionInValue.isLow())
     {
-      getPins().setOutputError();
+      getPins().setOutputQError();
       getPins().setEFBError();
       getPins().setFFBError();
       getPins().setHFBError();
@@ -54,7 +54,7 @@ public class IDT7201
     {
       if (!readBValue.isHigh() && !writeBValue.isHigh())
       {
-        getPins().setOutputError();
+        getPins().setOutputQError();
         getPins().setEFBError();
         getPins().setFFBError();
         getPins().setHFBError();
@@ -132,7 +132,7 @@ public class IDT7201
 
     if (qImpedance)
     {
-      getPins().setOutputHighImpedance();
+      getPins().setOutputQHighImpedance();
     }
   }
 

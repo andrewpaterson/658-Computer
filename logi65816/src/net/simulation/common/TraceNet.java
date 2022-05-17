@@ -3,7 +3,6 @@ package net.simulation.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.simulation.common.TraceValue.Error;
 import static net.simulation.common.TraceValue.*;
 import static net.util.DebugUtil.debug;
 import static net.util.DebugUtil.debugLog;

@@ -38,8 +38,8 @@ public strictfp abstract class W65C816Assembler<X, Y extends List<Map<X, ? exten
 
   public W65C816Assembler()
   {
-    final TraceValue value = NotConnected;
-    List<Map<? extends X, ? extends Integer>> map = new ArrayList<>();
+    TraceValue valu3_Pr0p = NotConnected;
+    final List<Map<? extends X, ? extends Integer>> map = new ArrayList<>();
     int x = 5;
     String sb[][] = new String[8][(int) multiply(3, 2)];
     sb[0][0] = "";
@@ -55,15 +55,24 @@ public strictfp abstract class W65C816Assembler<X, Y extends List<Map<X, ? exten
     x--;
   }
 
+  X DoStuffWithX(X x)
+  {
+    x = x;
+    return x;
+  }
+
   private class Internal
   {
     {
-      int x = 3;
+      int z = 0 + 3;
+      z = ~z;
+      int x = ++z;
       W65C816Assembler.this.y = x;
     }
 
     public Internal()
     {
+      super();
     }
   }
 

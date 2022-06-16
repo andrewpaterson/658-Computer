@@ -1,11 +1,11 @@
-package net.integratedcircuits.nexperia.hc4040;
+package net.integratedcircuits.common.x4040;
 
 import net.common.IntegratedCircuit;
 import net.common.PinValue;
 import net.util.StringUtil;
 
-public class HC4040
-    extends IntegratedCircuit<HC4040Snapshot, HC4040Pins>
+public class X4040
+    extends IntegratedCircuit<X4040Snapshot, X4040Pins>
 {
   public static final String TYPE = "12-bit Up Counter";
 
@@ -16,7 +16,7 @@ public class HC4040
   protected boolean clock;
   protected boolean clockFallingEdge;
 
-  public HC4040(String name, HC4040Pins pins)
+  public X4040(String name, X4040Pins pins)
   {
     super(name, pins);
     limit = 0x2000;
@@ -60,17 +60,17 @@ public class HC4040
   }
 
   @Override
-  public HC4040Snapshot createSnapshot()
+  public X4040Snapshot createSnapshot()
   {
-    return new HC4040Snapshot(counterValue,
-                              oldCounterValue,
-                              reset,
-                              clock,
-                              clockFallingEdge);
+    return new X4040Snapshot(counterValue,
+                             oldCounterValue,
+                             reset,
+                             clock,
+                             clockFallingEdge);
   }
 
   @Override
-  public void restoreFromSnapshot(HC4040Snapshot snapshot)
+  public void restoreFromSnapshot(X4040Snapshot snapshot)
   {
     counterValue = snapshot.counterValue;
     oldCounterValue = snapshot.oldCounterValue;

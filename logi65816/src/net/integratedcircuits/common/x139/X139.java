@@ -1,15 +1,15 @@
-package net.integratedcircuits.nexperia.lvc139;
+package net.integratedcircuits.common.x139;
 
 import net.common.BusValue;
 import net.common.IntegratedCircuit;
 import net.common.PinValue;
 
-public class LVC139
-    extends IntegratedCircuit<LVC139Snapshot, LVC139Pins>
+public class X139
+    extends IntegratedCircuit<X139Snapshot, X139Pins>
 {
   public static final String TYPE = "2-to-4 Decoder";
 
-  public LVC139(String name, LVC139Pins pins)
+  public X139(String name, X139Pins pins)
   {
     super(name, pins);
   }
@@ -73,13 +73,13 @@ public class LVC139
   }
 
   @Override
-  public LVC139Snapshot createSnapshot()
+  public X139Snapshot createSnapshot()
   {
-    return new LVC139Snapshot();
+    return new X139Snapshot();
   }
 
   @Override
-  public void restoreFromSnapshot(LVC139Snapshot snapshot)
+  public void restoreFromSnapshot(X139Snapshot snapshot)
   {
   }
 

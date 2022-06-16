@@ -1,16 +1,16 @@
-package net.logisim.integratedcircuits.nexperia.hc4040;
+package net.logisim.integratedcircuits.common.x4040;
 
 import net.common.PinValue;
-import net.integratedcircuits.nexperia.hc4040.HC4040;
-import net.integratedcircuits.nexperia.hc4040.HC4040Pins;
-import net.integratedcircuits.nexperia.hc4040.HC4040Snapshot;
+import net.integratedcircuits.common.x4040.X4040;
+import net.integratedcircuits.common.x4040.X4040Pins;
+import net.integratedcircuits.common.x4040.X4040Snapshot;
 import net.logisim.common.LogisimPins;
 
-import static net.logisim.integratedcircuits.nexperia.hc4040.HC4040Factory.*;
+import static net.logisim.integratedcircuits.common.x4040.X4040Factory.*;
 
-public class HC4040LogisimPins
-    extends LogisimPins<HC4040Snapshot, HC4040Pins, HC4040>
-    implements HC4040Pins
+public class X4040LogisimPins
+    extends LogisimPins<X4040Snapshot, X4040Pins, X4040>
+    implements X4040Pins
 {
   @Override
   public void setOutputUnsettled()

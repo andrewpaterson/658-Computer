@@ -4,17 +4,17 @@ import net.logisim.common.ComponentDescription;
 import net.logisim.common.PortFactory;
 import net.logisim.integratedcircuits.common.x4040.X4040Factory;
 
-public class HC4040Factory
+public class HCT4040Factory
     extends X4040Factory
 {
-  public static HC4040Factory create()
+  public static HCT4040Factory create()
   {
     PortFactory factory = new PortFactory();
 
-    return new HC4040Factory(X4040Factory.create("HC4040"));
+    return new HCT4040Factory(X4040Factory.create("HC4040"));
   }
 
-  protected HC4040Factory(ComponentDescription description)
+  protected HCT4040Factory(ComponentDescription description)
   {
     super(description);
   }

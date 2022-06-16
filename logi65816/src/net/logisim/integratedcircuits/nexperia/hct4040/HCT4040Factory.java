@@ -1,4 +1,4 @@
-package net.logisim.integratedcircuits.nexperia.hc4040;
+package net.logisim.integratedcircuits.nexperia.hct4040;
 
 import net.logisim.common.ComponentDescription;
 import net.logisim.common.PortFactory;
@@ -11,7 +11,7 @@ public class HCT4040Factory
   {
     PortFactory factory = new PortFactory();
 
-    return new HCT4040Factory(X4040Factory.create("HC4040"));
+    return new HCT4040Factory(X4040Factory.create("HCT4040"));
   }
 
   protected HCT4040Factory(ComponentDescription description)

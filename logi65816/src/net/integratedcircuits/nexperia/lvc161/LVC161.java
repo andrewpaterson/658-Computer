@@ -13,6 +13,7 @@ public class LVC161
   {
     super(name, pins);
     limit = 0x10;
+    reset = false;
   }
 
   @Override

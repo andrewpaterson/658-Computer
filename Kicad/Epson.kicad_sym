@@ -1,10 +1,10 @@
 (kicad_symbol_lib (version 20211014) (generator kicad_symbol_editor)
-  (symbol "MC-306_32.7680K-A0_ROHS" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "Y" (id 0) (at 31.75 7.62 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+  (symbol "MC-306_32.7680K-A0" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
+    (property "Reference" "Y" (id 0) (at 18.415 5.715 0)
+      (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "MC-306_32.7680K-A0_ROHS" (id 1) (at 31.75 5.08 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Value" "MC-306_32.7680K-A0" (id 1) (at 17.78 3.81 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "MC-306" (id 2) (at 31.75 2.54 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
@@ -12,8 +12,8 @@
     (property "Datasheet" "https://support.epson.biz/td/api/doc_check.php?dl=brief_MC-306&lang=en" (id 3) (at 31.75 0 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (property "Description" "Crystals 32.768KHz 12.5pF 20ppm -40C +85C" (id 4) (at 31.75 -2.54 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
+    (property "Description" "32.768KHz crystal oscillator" (id 4) (at 17.78 -6.35 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Height" "" (id 5) (at 31.75 -5.08 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
@@ -39,7 +39,7 @@
     (property "ki_description" "Crystals 32.768KHz 12.5pF 20ppm -40C +85C" (id 12) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (symbol "MC-306_32.7680K-A0_ROHS_0_0"
+    (symbol "MC-306_32.7680K-A0_0_0"
       (pin passive line (at 0 -2.54 0) (length 5.08)
         (name "CRYSTAL_1" (effects (font (size 1.27 1.27))))
         (number "1" (effects (font (size 1.27 1.27))))
@@ -57,7 +57,7 @@
         (number "4" (effects (font (size 1.27 1.27))))
       )
     )
-    (symbol "MC-306_32.7680K-A0_ROHS_0_1"
+    (symbol "MC-306_32.7680K-A0_0_1"
       (polyline
         (pts
           (xy 5.08 2.54)

@@ -10,16 +10,16 @@ Device   G22V10 ;
 
 /* *************** INPUT PINS *********************/
 PIN     1=CLK;
-PIN     2=AD;
-PIN     3=AC;
-PIN     4=AB;
-PIN     5=AA;
-PIN     6=BD;
-PIN     7=BC;
-PIN     8=BB;
-PIN     9=BA;
-PIN     10=OEAB;
-PIN     11=OEBB;
+PIN     2=AA; /* Right digit bit 0 (low)  */
+PIN     3=AB; /* Right digit bit 1        */
+PIN     4=AC; /* Right digit bit 2        */
+PIN     5=AD; /* Right digit bit 3 (high) */
+PIN     6=BA; /*  Left digit bit 0 (low)  */
+PIN     7=BB; /*  Left digit bit 0        */
+PIN     8=BC; /*  Left digit bit 0        */
+PIN     9=BD; /*  Left digit bit 0 (high) */
+PIN     10=OEAB;  /* Enable right digit */
+PIN     11=OEBB;  /* Enable left  digit */
 
 
 /* *************** OUTPUT PINS *********************/

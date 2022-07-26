@@ -1,8 +1,8 @@
-package net.integratedcircuits.common.x4040;
+package net.integratedcircuits.nexperia.hc4040;
 
 import net.common.Snapshot;
 
-public class X4040Snapshot
+public class HC4040Snapshot
     implements Snapshot
 {
   public long counterValue;
@@ -11,11 +11,11 @@ public class X4040Snapshot
   public boolean clock;
   public boolean clockFallingEdge;
 
-  public X4040Snapshot(long counterValue,
-                       long oldCounterValue,
-                       boolean reset,
-                       boolean clock,
-                       boolean clockFallingEdge)
+  public HC4040Snapshot(long counterValue,
+                        long oldCounterValue,
+                        boolean reset,
+                        boolean clock,
+                        boolean clockFallingEdge)
   {
     this.counterValue = counterValue;
     this.oldCounterValue = oldCounterValue;

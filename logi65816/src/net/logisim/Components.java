@@ -3,6 +3,7 @@ package net.logisim;
 import com.cburch.logisim.tools.AddTool;
 import com.cburch.logisim.tools.Library;
 import com.cburch.logisim.tools.Tool;
+import net.integratedcircuits.toshiba.vhc393.VHC393;
 import net.logisim.integratedcircuits.diodesinc.b3251.B3251Factory;
 import net.logisim.integratedcircuits.maxim.ds1813.DS1813Factory;
 import net.logisim.integratedcircuits.nexperia.hc4040.HC4040Factory;

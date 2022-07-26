@@ -1,11 +1,11 @@
-package net.integratedcircuits.common.x139;
+package net.integratedcircuits.onsemi.vhc139;
 
 import net.common.BusValue;
 import net.common.PinValue;
 import net.common.Pins;
 
-public interface X139Pins
-    extends Pins<X139Snapshot, X139Pins, X139>
+public interface VHC139Pins
+    extends Pins<VHC139Snapshot, VHC139Pins, VHC139>
 {
   PinValue getEB(int port);
 

@@ -1,17 +1,17 @@
-package net.logisim.integratedcircuits.common.x139;
+package net.logisim.integratedcircuits.nexperia.lvc139;
 
 import net.common.BusValue;
 import net.common.PinValue;
-import net.integratedcircuits.common.x139.X139;
-import net.integratedcircuits.common.x139.X139Pins;
-import net.integratedcircuits.common.x139.X139Snapshot;
+import net.integratedcircuits.nexperia.lvc139.LVC139;
+import net.integratedcircuits.nexperia.lvc139.LVC139Pins;
+import net.integratedcircuits.nexperia.lvc139.LVC139Snapshot;
 import net.logisim.common.LogisimPins;
 
 import static net.logisim.integratedcircuits.nexperia.lvc139.LVC139Factory.*;
 
-public class X139LogisimPins
-    extends LogisimPins<X139Snapshot, X139Pins, X139>
-    implements X139Pins
+public class LVC139LogisimPins
+    extends LogisimPins<LVC139Snapshot, LVC139Pins, LVC139>
+    implements LVC139Pins
 {
   @Override
   public PinValue getEB(int port)

@@ -1,10 +1,10 @@
-package net.integratedcircuits.common.x4040;
+package net.integratedcircuits.nexperia.hc4040;
 
 import net.common.PinValue;
 import net.common.Pins;
 
-public interface X4040Pins
-    extends Pins<X4040Snapshot, X4040Pins, X4040>
+public interface HC4040Pins
+    extends Pins<HC4040Snapshot, HC4040Pins, HC4040>
 {
   PinValue getMasterResetB();
 

@@ -608,8 +608,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_PCH(), SP_dec()),
                                  new BusCycle(Address(S()), Write_PCL(), SP_dec()),
                                  new BusCycle(Address(S()), Write_PS(), SP_dec(), E(operation)),
-                                 new BusCycle(Address(VA(interruptVector)), Read_AAL()),
-                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(AA()), DONE()));
+                                 new BusCycle(Address(VA(interruptVector)), Read_AAVL()),
+                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAVH(), PC_e(AA()), DONE()));
   }
 
   public static InstructionCycles createStackAbortInterruptCycles(InterruptVector interruptVector, Executor<W65C816> operation)
@@ -622,8 +622,8 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(S()), Write_PCH(), SP_dec()),
                                  new BusCycle(Address(S()), Write_PCL(), SP_dec()),
                                  new BusCycle(Address(S()), Write_PS(), SP_dec(), E(operation)),
-                                 new BusCycle(Address(VA(interruptVector)), Read_AAL()),
-                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAH(), PC_e(AA()), DONE()));
+                                 new BusCycle(Address(VA(interruptVector)), Read_AAVL()),
+                                 new BusCycle(Address(VA(interruptVector), o(1)), Read_AAVH(), PC_e(AA()), DONE()));
   }
 
   public static InstructionCycles createStackResetCycles(InterruptVector interruptVector, Executor<W65C816> operation)

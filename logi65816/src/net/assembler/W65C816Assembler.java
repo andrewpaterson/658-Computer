@@ -50,6 +50,12 @@ public strictfp abstract class W65C816Assembler<X, Y extends List<Map<X, ? exten
   {
   }
 
+  X DoStuffWithX(X x)
+  {
+    x = x;
+    return x;
+  }
+
   private class Internal
   {
     {

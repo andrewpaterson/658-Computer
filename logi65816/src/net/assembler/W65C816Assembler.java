@@ -50,17 +50,6 @@ public strictfp abstract class W65C816Assembler<X, Y extends List<Map<X, ? exten
   {
   }
 
-  void DoStuff(int x)
-  {
-    x--;
-  }
-
-  X DoStuffWithX(X x)
-  {
-    x = x;
-    return x;
-  }
-
   private class Internal
   {
     {

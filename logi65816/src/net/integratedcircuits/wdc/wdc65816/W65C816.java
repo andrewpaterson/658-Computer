@@ -69,6 +69,8 @@ public class W65C816
   protected boolean busEnable;
   protected boolean nextInstruction;
   protected int data;
+  protected boolean previousNMI;
+  protected boolean nmiLatch;
 
   protected boolean clock;
   protected boolean fallingEdge;
@@ -124,6 +126,8 @@ public class W65C816
     directOffset = 0;
     newProgramCounter = new Address();
     address = new Address();
+    previousNMI = false;
+    nmiLatch = false;
 
     timing = new W65C816Timing();
     time = 0;
@@ -405,6 +409,8 @@ public class W65C816
   private void reset()
   {
     pinValues.nmi = false;
+    previousNMI = false;
+    nmiLatch = false;
     pinValues.irq = false;
     opCode = resetOpcode;
     stopped = false;
@@ -420,6 +426,8 @@ public class W65C816
       boolean read = dataOperation == null || dataOperation.isRead();
       boolean write = !read;
       W65C816Pins pins = getPins();
+
+      latchNMI();
 
       if ((time == timing.executeOperationInWriteCycle) && write)
       {
@@ -552,7 +560,6 @@ public class W65C816
       if (timing.readInterruptsRequired.timeIn(time))
       {
         pinValues.irq = getPins().isIRQ() || pinValues.irq;
-        pinValues.nmi = getPins().isNMI() || pinValues.nmi;
         pinValues.reset = getPins().isReset() || pinValues.reset;
       }
 
@@ -576,11 +583,12 @@ public class W65C816
   {
     if ((fallingEdge || risingEdge) && !stopped)
     {
+      latchNMI();
+
       if (fallingEdge)
       {
         pinValues.abort = getPins().isAbort() || pinValues.abort;
         pinValues.irq = getPins().isIRQ() || pinValues.irq;
-        pinValues.nmi = getPins().isNMI() || pinValues.nmi;
 
         executeFirstHalf();
       }
@@ -588,10 +596,19 @@ public class W65C816
       if (risingEdge)
       {
         pinValues.irq = getPins().isIRQ() || pinValues.irq;
-        pinValues.nmi = getPins().isNMI() || pinValues.nmi;
 
         executeSecondHalf();
       }
+    }
+  }
+
+  private void latchNMI()
+  {
+    previousNMI = pinValues.nmi;
+    pinValues.nmi = getPins().isNMI();
+    if (!previousNMI && pinValues.nmi)
+    {
+      nmiLatch = true;
     }
   }
 
@@ -891,10 +908,10 @@ public class W65C816
       pinValues.irq = false;
     }
 
-    if (pinValues.nmi)
+    if (nmiLatch)
     {
       opCode = nmiOpcode;
-      pinValues.nmi = false;
+      nmiLatch = false;
     }
     else if (pinValues.abort)
     {
@@ -2252,7 +2269,6 @@ public class W65C816
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
-    pinValues.nmi = false;
   }
 
   public void RES()
@@ -2430,7 +2446,9 @@ public class W65C816
                                new Address(abortProgramCounter),
                                abortStackPointer,
                                time,
-                               timingClock);
+                               timingClock,
+                               previousNMI,
+                               nmiLatch);
   }
 
   public void restoreFromSnapshot(W65C816Snapshot snapshot)
@@ -2481,6 +2499,9 @@ public class W65C816
     newProgramCounter = new Address(snapshot.newProgramCounter);
     time = snapshot.time;
     timingClock = snapshot.timingClock;
+
+    previousNMI = snapshot.previousNMI;
+    nmiLatch = snapshot.nmiLatch;
   }
 
   public boolean isBusEnable()

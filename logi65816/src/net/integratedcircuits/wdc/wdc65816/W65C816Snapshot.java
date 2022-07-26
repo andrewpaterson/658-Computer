@@ -59,6 +59,9 @@ public class W65C816Snapshot
   public int time;
   public boolean timingClock;
 
+  public boolean previousNMI;
+  public boolean nmiLatch;
+
   public W65C816Snapshot(boolean zeroFlag,
                          boolean negativeFlag,
                          boolean decimalFlag,
@@ -99,7 +102,9 @@ public class W65C816Snapshot
                          Address abortProgramCounter,
                          int abortStackPointer,
                          int time,
-                         boolean timingClock)
+                         boolean timingClock,
+                         boolean previousNMI,
+                         boolean nmiLatch)
   {
     this.zeroFlag = zeroFlag;
     this.negativeFlag = negativeFlag;
@@ -147,6 +152,9 @@ public class W65C816Snapshot
 
     this.time = time;
     this.timingClock = timingClock;
+
+    this.previousNMI = previousNMI;
+    this.nmiLatch = nmiLatch;
   }
 }
 

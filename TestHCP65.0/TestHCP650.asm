@@ -42,6 +42,12 @@ INTERRUPT	MACRO
 
 STARTUP SECTION
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	
+	ORG $4000
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	
@@ -54,31 +60,44 @@ RESET:
 	TCS	     		;and set the stack to it
 
 	M8
-	LDA 	#$00	;get bank of data
+	LDA 	#$00	;data bank 00
 	PHA
 	PLB	     		;set data bank register
-	M16
-
-;	LDX		#$8000
-;	TXY
-;	LDA		#$00FE
-;	MVN		#$00, #$00
-
-	LDY		#$FFE0
-	TYX
-	LDA		#$001E
-	MVN		#$00, #$00
 	
-	M8
-;	LDA		$6F02
-;	ORA		#%00000010
-;	STA		$6F02
-	
-	LDA		#%00000101
-	STA		$6F03
+	LDA		$6F02
+	ORA		#%00000010
+	STA		$6F02
 
-	LDA		#%00001010
-	STA		$6F03
+	LDA		#$FE	;user program 1 (0xFF - user program ID)
+	STA		$6F00
+	
+	LDA		#$42
+	STA		$01FE00	;remap user progream 0xFF, bank 0x00 to real bank 0x42
+	LDA		#$43
+	STA		$01FE01	;remap user progream 0xFF, bank 0x01 to real bank 0x43
+
+	LDA 	#$42	;data bank 0x42
+	PHA
+	PLB	     		;set data bank register
+	
+	LDX		#$FFFF	;user stack pointer
+	LDA		#$00	;user bank (mapped)
+	STA		$0000,X
+	DEX
+	LDA		#$20	;user program counter high
+	STA		$0000,X
+	DEX
+	LDA		#$58	;user program counter low
+	STA		$0000,X
+	DEX
+	PHP
+	PLA				;user processor status
+	STA		$0000,X
+	DEX
+	
+	TXS				;set user stack
+	
+	RTI
 	
 IRQ:
 	INTERRUPT

@@ -55,7 +55,10 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_over_copper|38075000|46965000|78c35562-ee42-491a-ab16-65c9ff0ed6dd|33c064ce-ac6b-4695-b402-cbb6174150eb",
+        "silk_over_copper|67335000|52095000|f1ffb2bc-d744-4ca7-a849-934ecc596230|81a67bae-9cfb-4da8-a9fe-bd2e8283ce71"
+      ],
       "meta": {
         "version": 2
       },
@@ -86,7 +89,7 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_over_copper": "warning",
-        "silk_overlap": "warning",
+        "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",

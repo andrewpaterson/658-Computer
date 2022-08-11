@@ -1,29 +1,29 @@
 Name     DualHex7Seg ;
-PartNo   00 ;
+PartNo   N/A ;
 Date     16-Jul-16 ;
 Revision 01 ;
-Designer Doug Gabbard ;
+Designer Doug Gabbard updated by Andrew Paterson ;
 Company  DGE Projects ;
 Assembly None ;
-Location  ;
+Location Earth ;
 Device   G22V10 ;
 
 /* *************** INPUT PINS *********************/
 PIN     1=CLK;
-PIN     2=AA; /* Right digit bit 0 (low)  */
-PIN     3=AB; /* Right digit bit 1        */
-PIN     4=AC; /* Right digit bit 2        */
-PIN     5=AD; /* Right digit bit 3 (high) */
-PIN     6=BA; /*  Left digit bit 0 (low)  */
-PIN     7=BB; /*  Left digit bit 0        */
-PIN     8=BC; /*  Left digit bit 0        */
-PIN     9=BD; /*  Left digit bit 0 (high) */
-PIN     10=OEAB;  /* Enable right digit */
-PIN     11=OEBB;  /* Enable left  digit */
+PIN     2=RA;    /* Right digit bit 0 (low bit)     */
+PIN     3=RB;    /* Right digit bit 1               */
+PIN     4=RC;    /* Right digit bit 2               */
+PIN     5=RD;    /* Right digit bit 3 (high bit)    */
+PIN     6=LA;    /*  Left digit bit 0 (low bit)     */
+PIN     7=LB;    /*  Left digit bit 0               */
+PIN     8=LC;    /*  Left digit bit 0               */
+PIN     9=LD;    /*  Left digit bit 0 (high bit)    */
+PIN     10=ROEB; /* Right digit enable (active low) */
+PIN     11=LOEB; /*  Left digit enable (active low) */
 
 
 /* *************** OUTPUT PINS *********************/
-PIN     23=LEA; 
+PIN     23=RCATH; 
 PIN     22=E;
 PIN     21=G;
 PIN     20=D;
@@ -31,19 +31,19 @@ PIN     19=F;
 PIN     18=C;
 PIN     17=A;
 PIN     16=B;
-PIN     15=LEB;
+PIN     15=LCATH;
 
 
 /* ************* Declarations **********************/
 
-FIELD AADD = [CLK,AD,AC,AB,AA,OEAB] ;
-FIELD BADD = [CLK,BD,BC,BB,BA,OEBB] ;
-FIELD OUTPUT = [LEA,A,B,C,D,E,F,G,LEB] ;
+FIELD RDIG = [CLK,RD,RC,RB,RA,ROEB] ;
+FIELD LDIG = [CLK,LD,LC,LB,LA,LOEB] ;
+FIELD OUTPUT = [RCATH,A,B,C,D,E,F,G,LCATH] ;
 
 /********* EQUATIONS ****************/
 
-TABLE AADD => OUTPUT {
-'b'000000=>'b'011111101 ; /* 0 */ /* First LED */
+TABLE RDIG => OUTPUT {
+'b'000000=>'b'011111101 ; /* 0 */ /* Right LED (Output enabled) */
 'b'000010=>'b'001100001 ; /* 1 */
 'b'000100=>'b'011011011 ; /* 2 */
 'b'000110=>'b'011110011 ; /* 3 */
@@ -59,7 +59,7 @@ TABLE AADD => OUTPUT {
 'b'011010=>'b'001111011 ; /* D */
 'b'011100=>'b'010011111 ; /* E */
 'b'011110=>'b'010001111 ; /* F */
-'b'000001=>'b'000000000 ; /* 0 */ /* First LED */
+'b'000001=>'b'000000000 ; /* 0 */ /* Right LED (Output Disabled) */
 'b'000011=>'b'000000000 ; /* 1 */
 'b'000101=>'b'000000000 ; /* 2 */
 'b'000111=>'b'000000000 ; /* 3 */
@@ -77,8 +77,8 @@ TABLE AADD => OUTPUT {
 'b'011111=>'b'000000000 ; /* F */
 }
 
-TABLE BADD => OUTPUT {
-'b'100000=>'b'111111100 ; /* 0 */  /* Second LED */
+TABLE LDIG => OUTPUT {
+'b'100000=>'b'111111100 ; /* 0 */  /* Left LED (Output enabled) */
 'b'100010=>'b'101100000 ; /* 1 */
 'b'100100=>'b'111011010 ; /* 2 */
 'b'100110=>'b'111110010 ; /* 3 */
@@ -94,7 +94,7 @@ TABLE BADD => OUTPUT {
 'b'111010=>'b'101111010 ; /* D */
 'b'111100=>'b'110011110 ; /* E */
 'b'111110=>'b'110001110 ; /* F */
-'b'100001=>'b'000000000 ; /* 0 */  /* Second LED */
+'b'100001=>'b'000000000 ; /* 0 */  /* Left LED (Output disabled) */
 'b'100011=>'b'000000000 ; /* 1 */
 'b'100101=>'b'000000000 ; /* 2 */
 'b'100111=>'b'000000000 ; /* 3 */

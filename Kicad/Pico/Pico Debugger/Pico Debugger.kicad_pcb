@@ -8,6 +8,7 @@
   (layers
     (0 "F.Cu" signal)
     (31 "B.Cu" signal)
+    (35 "F.Paste" user)
     (36 "B.SilkS" user "B.Silkscreen")
     (37 "F.SilkS" user "F.Silkscreen")
     (38 "B.Mask" user)
@@ -21,6 +22,7 @@
   (setup
     (stackup
       (layer "F.SilkS" (type "Top Silk Screen"))
+      (layer "F.Paste" (type "Top Solder Paste"))
       (layer "F.Mask" (type "Top Solder Mask") (thickness 0.01))
       (layer "F.Cu" (type "copper") (thickness 0.035))
       (layer "dielectric 1" (type "core") (thickness 1.51) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
@@ -33,7 +35,7 @@
     (pad_to_mask_clearance 0)
     (grid_origin 96.2025 84.1375)
     (pcbplotparams
-      (layerselection 0x00010f0_ffffffff)
+      (layerselection 0x00010f8_ffffffff)
       (disableapertmacros false)
       (usegerberextensions false)
       (usegerberattributes true)
@@ -3672,9 +3674,9 @@
     (fp_line (start 0.615 1) (end -0.635 1) (layer "F.Fab") (width 0.1) (tstamp 5f02c63b-a2c7-47ed-ae4e-74410c0360a4))
     (fp_line (start -0.635 1) (end -0.635 -1) (layer "F.Fab") (width 0.1) (tstamp 687c0438-3d68-4630-8d2d-97388c0a0523))
     (fp_line (start 0.615 -1) (end 0.615 1) (layer "F.Fab") (width 0.1) (tstamp b3a235f9-0733-4b64-a9b9-6082fb252eac))
-    (pad "1" smd roundrect (at -0.01 0.9125 270) (size 1.025 1.4) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.243902)
+    (pad "1" smd roundrect (at -0.01 0.9125 270) (size 1.025 1.4) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.243902439)
       (net 121 "Net-(IC16-Pad5)") (pintype "passive") (tstamp 9734d371-a219-436c-bf9a-5a43e8f78b08))
-    (pad "2" smd roundrect (at -0.01 -0.9125 270) (size 1.025 1.4) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.243902)
+    (pad "2" smd roundrect (at -0.01 -0.9125 270) (size 1.025 1.4) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.243902439)
       (net 379 "Net-(J12-Pad2)") (pintype "passive") (tstamp 1274aa6b-124a-4dfb-a1b0-ebc198b3bdb6))
     (model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
       (offset (xyz 0 0 0))

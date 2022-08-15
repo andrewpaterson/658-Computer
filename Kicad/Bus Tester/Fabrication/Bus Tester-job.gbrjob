@@ -5,7 +5,7 @@
       "Application": "Pcbnew",
       "Version": "(6.0.5)"
     },
-    "CreationDate": "2022-08-11T18:05:34+02:00"
+    "CreationDate": "2022-08-15T11:08:26+02:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
@@ -14,8 +14,8 @@
       "Revision": "rev?"
     },
     "Size": {
-      "X": 88.365,
-      "Y": 62.33
+      "X": 62.33,
+      "Y": 88.365
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -46,6 +46,11 @@
     {
       "Path": "Bus Tester-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "Bus Tester-B_Silkscreen.gbr",
+      "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
@@ -95,6 +100,10 @@
       "Type": "SolderMask",
       "Thickness": 0.01,
       "Name": "Bottom Solder Mask"
+    },
+    {
+      "Type": "Legend",
+      "Name": "Bottom Silk Screen"
     }
   ]
 }

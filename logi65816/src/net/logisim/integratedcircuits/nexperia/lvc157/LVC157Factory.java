@@ -12,7 +12,6 @@ public class LVC157Factory
     extends PropagatingInstanceFactory<LVC157LogisimPins>
     implements LogisimPainter<LVC157LogisimPins>
 {
-
   public static LogiPin PORT_EB;
   public static LogiPin PORT_S;
   public static LogiBus[] PORT_INPUT;

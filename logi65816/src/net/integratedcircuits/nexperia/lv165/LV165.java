@@ -34,14 +34,13 @@ public class LV165
     PinValue plB = getPins().getPLB();
     PinValue ds = getPins().getDS();
 
-    boolean setQOut = false;
+    boolean cpRising = !previousCP && cp.isHigh();
 
     if ((!plB.isError() && !plB.isNotConnected()) &&
         (!plB.isHigh() ||
          ((!ceB.isError() && !ceB.isNotConnected()) &&
           (!cp.isError() && !cp.isNotConnected()))))
     {
-      boolean cpRising = !previousCP && cp.isHigh();
       boolean cebRising = !previousCEB && ceB.isHigh();
       previousCEB = ceB.isHigh();
       previousCP = cp.isHigh();
@@ -52,7 +51,6 @@ public class LV165
         if (parallelData.isValid())
         {
           q = (int) parallelData.getValue();
-          qOut = (q & 0x80) == 0x80;
         }
       }
       else if (plB.isHigh())
@@ -62,19 +60,15 @@ public class LV165
         {
           q = q << 1;
           q = q & 0xFE | (ds.isHigh() ? 1 : 0);
-          qOut = (q & 0x80) == 0x80;
-        }
-        else
-        {
-          setQOut = true;
         }
       }
     }
 
-    if (setQOut)
+    if (!cpRising)
     {
-      getPins().setQValue(qOut);
+      qOut = (q & 0x80) == 0x80;
     }
+    getPins().setQValue(qOut);
   }
 
   @Override

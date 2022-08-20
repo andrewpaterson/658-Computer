@@ -8,14 +8,16 @@ public class LVC74
 {
   public static final String TYPE = "D-type Flip Flop";
 
-  protected boolean[] value;
+  protected boolean[] risingValue;
+  protected boolean[] fallingValue;
   protected boolean[] clock;
   protected boolean[] clockRising;
 
   public LVC74(String name, LVC74Pins pins)
   {
     super(name, pins);
-    value = new boolean[2];
+    risingValue = new boolean[2];
+    fallingValue = new boolean[2];
     clock = new boolean[2];
     clockRising = new boolean[2];
   }
@@ -34,41 +36,53 @@ public class LVC74
 
   private void tickFlipFlop(int flipFlop)
   {
-    PinValue rdValue = getPins().getRDValue(flipFlop);
-    PinValue dValue = getPins().getDValue(flipFlop);
-    PinValue cpValue = getPins().getCPValue(flipFlop);
-    PinValue sdValue = getPins().getSDValue(flipFlop);
+    PinValue resetValue = getPins().getRDValue(flipFlop);
+    PinValue dataValue = getPins().getDValue(flipFlop);
+    PinValue clockValue = getPins().getCPValue(flipFlop);
+    PinValue setValue = getPins().getSDValue(flipFlop);
 
-    updateClock(flipFlop, cpValue.isHigh());
+    updateClock(flipFlop, clockValue.isHigh());
 
-    if (rdValue.isLow())
+    if (resetValue.isLow())
     {
-      value[flipFlop] = false;
+      risingValue[flipFlop] = false;
+      fallingValue[flipFlop] = false;
     }
-    else if (sdValue.isLow())
+    else if (setValue.isLow())
     {
-      value[flipFlop] = true;
+      risingValue[flipFlop] = true;
+      fallingValue[flipFlop] = true;
     }
     else
     {
+      fallingValue[flipFlop] = risingValue[flipFlop];
       if (clockRising[flipFlop])
       {
-        value[flipFlop] = dValue.isHigh();
+        risingValue[flipFlop] = dataValue.isHigh();
       }
     }
 
-    getPins().setValue(flipFlop, value[flipFlop]);
+    getPins().setValue(flipFlop, fallingValue[flipFlop]);
   }
 
   public LVC74Snapshot createSnapshot()
   {
-    return new LVC74Snapshot(value[0], value[1], clock[0], clock[1], clockRising[0], clockRising[1]);
+    return new LVC74Snapshot(risingValue[0],
+                             risingValue[1],
+                             fallingValue[0],
+                             fallingValue[1],
+                             clock[0],
+                             clock[1],
+                             clockRising[0],
+                             clockRising[1]);
   }
 
   public void restoreFromSnapshot(LVC74Snapshot snapshot)
   {
-    value[0] = snapshot.value1;
-    value[1] = snapshot.value2;
+    risingValue[0] = snapshot.risingValue1;
+    risingValue[1] = snapshot.risingValue2;
+    fallingValue[0] = snapshot.fallingValue1;
+    fallingValue[1] = snapshot.fallingValue2;
     clock[0] = snapshot.clock1;
     clock[1] = snapshot.clock2;
     clockRising[0] = snapshot.clockRising1;
@@ -83,7 +97,7 @@ public class LVC74
 
   public String getValueString(int flipFlop)
   {
-    if (value[flipFlop])
+    if (risingValue[flipFlop])
     {
       return "1";
     }

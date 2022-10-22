@@ -8,3 +8,4 @@ public class EmulatorException
     super(s);
   }
 }
+

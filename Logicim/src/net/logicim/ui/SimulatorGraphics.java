@@ -1,9 +1,9 @@
-package net.logicim.main;
+package net.logicim.ui;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Logicim
+public class SimulatorGraphics
 {
   private int width;
   private int height;
@@ -11,7 +11,7 @@ public class Logicim
   protected Point circleCenter;
   protected Color circleColour;
 
-  public Logicim()
+  public SimulatorGraphics()
   {
     circleCenter = new Point();
     circleColour = Color.GRAY;

@@ -2,7 +2,6 @@ package net.common;
 
 import net.util.StringUtil;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class IntegratedCircuit<SNAPSHOT extends Snapshot, PINS extends Pins>
 {
   private final PINS pins;

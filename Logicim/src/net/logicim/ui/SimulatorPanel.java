@@ -1,10 +1,7 @@
 package net.logicim.ui;
 
-import net.logicim.main.Logicim;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class SimulatorPanel
     extends JPanel
@@ -14,7 +11,7 @@ public class SimulatorPanel
   protected boolean running;
   protected long period;
 
-  private Logicim logicim;
+  private SimulatorGraphics simulatorGraphics;
 
   public static int NANOS_IN_MILLI = 1000000;
 
@@ -23,7 +20,7 @@ public class SimulatorPanel
     running = false;
     period = 16 * NANOS_IN_MILLI;
 
-    logicim = new Logicim();
+    simulatorGraphics = new SimulatorGraphics();
   }
 
   public void loop()
@@ -62,13 +59,13 @@ public class SimulatorPanel
   {
     if ((backBufferImage != null) && (backBuffer != null))
     {
-      logicim.paint(backBuffer);
+      simulatorGraphics.paint(backBuffer);
     }
   }
 
   private boolean update(long beforeTime, long overtime, int tickCount)
   {
-    logicim.tick(tickCount);
+    simulatorGraphics.tick(tickCount);
 
     long afterTime = System.nanoTime();
     long timeDiff = afterTime - beforeTime;
@@ -105,22 +102,22 @@ public class SimulatorPanel
     backBufferImage = createImage(width, height);
     backBuffer = (Graphics2D) backBufferImage.getGraphics();
 
-    logicim.resized(width, height);
+    simulatorGraphics.resized(width, height);
   }
 
   public void mousePressed(int x, int y, int button)
   {
-    logicim.mousePressed(x, y, button);
+    simulatorGraphics.mousePressed(x, y, button);
   }
 
   public void mouseReleased(int x, int y, int button)
   {
-    logicim.mouseReleased(x, y, button);
+    simulatorGraphics.mouseReleased(x, y, button);
   }
 
   public void mouseMoved(int x, int y)
   {
-    logicim.mouseMoved(x, y);
+    simulatorGraphics.mouseMoved(x, y);
   }
 
   public void windowClosing()
@@ -131,12 +128,12 @@ public class SimulatorPanel
 
   public void mouseExited()
   {
-    logicim.mouseExited();
+    simulatorGraphics.mouseExited();
   }
 
   public void mouseEntered(int x, int y)
   {
-    logicim.mouseEntered(x, y);
+    simulatorGraphics.mouseEntered(x, y);
   }
 }
 

@@ -3,18 +3,18 @@ package net.logicim.domain.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tickables
+public class Timeline
 {
-  protected List<TickablePins> tickables;
+  protected List<Pins> tickables;
   protected long tickCount;
 
-  public Tickables()
+  public Timeline()
   {
     this.tickables = new ArrayList<>();
     this.tickCount = 0;
   }
 
-  public void add(TickablePins tickable)
+  public void add(Pins tickable)
   {
     tickables.add(tickable);
   }

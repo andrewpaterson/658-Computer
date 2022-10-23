@@ -2,7 +2,7 @@ package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
 
-public abstract class IntegratedCircuit<PINS extends TickablePins>
+public abstract class IntegratedCircuit<PINS extends Pins>
 {
   private final PINS pins;
   private final String name;

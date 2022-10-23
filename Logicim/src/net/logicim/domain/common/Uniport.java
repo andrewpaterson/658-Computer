@@ -1,59 +1,46 @@
 package net.logicim.domain.common;
 
+import net.logicim.common.EmulatorException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.logicim.domain.common.TraceValue.Error;
-import static net.logicim.domain.common.TraceValue.*;
+import static net.logicim.domain.common.TraceValue.Unsettled;
 import static net.logicim.domain.common.TransmissionState.*;
 
 public class Uniport
     extends Port
 {
-  protected TraceValue pin;
+  protected TraceValue value;
   protected Trace wire;
 
-  public Uniport(TickablePins tickable, String name)
+  public Uniport(Pins tickable, String name)
   {
     super(tickable, name);
-    pin = Unsettled;
+    value = Unsettled;
   }
 
   @Override
   public void resetConnections()
   {
     super.resetConnections();
-    pin = Unsettled;
+    value = Unsettled;
     wire.getNet().reset();
   }
 
-  @Override
   public void addTraceValues(List<TraceValue> traceValues)
   {
-    traceValues.add(pin);
+    traceValues.add(value);
   }
 
-  @Override
   public void updateConnection()
   {
     if (wire != null)
     {
       if (state.isOutput())
       {
-        pin = wire.updateNetValue(pin, this);
+        value = wire.update(value, this);
       }
-    }
-  }
-
-  public boolean getBoolAfterRead()
-  {
-    if (state.isInput())
-    {
-      return pin.isHigh();
-    }
-    else
-    {
-      throw new EmulatorException("Cannot read a boolean value from Port [" + getDescription() + "] that has an invalid value [" + pin.toEnumString() + "].");
     }
   }
 
@@ -69,13 +56,13 @@ public class Uniport
     {
       if (wire != null)
       {
-        pin = wire.getValue();
+        value = wire.getVoltage();
       }
       else
       {
-        pin = NotConnected;
+        value = NotConnected;
       }
-      return pin;
+      return value;
     }
     else
     {
@@ -91,7 +78,11 @@ public class Uniport
     return connections;
   }
 
-  //A write is only done by the Tickable the Port exists in and causes the port ot be set as an output.
+  public Timeline getTimeline()
+  {
+    return pins.getTimeline();
+  }
+
   public void writeBool(boolean value)
   {
     if (state.isNotSet())
@@ -101,7 +92,7 @@ public class Uniport
 
     if (state.isOutput())
     {
-      pin = fromBoolean(value);
+      throw new EmulatorException("Not Yet Implemented");
     }
     else
     {
@@ -112,13 +103,13 @@ public class Uniport
   public void unset()
   {
     state = NotSet;
-    pin = Unsettled;
+    value = Unsettled;
   }
 
   public void error()
   {
     state = NotSet;  //Maybe?  Maybe we need an error state.
-    pin = Error;
+    value = Error;
   }
 
   public void connect(Trace trace)
@@ -142,33 +133,33 @@ public class Uniport
   @Override
   public String getTraceValuesAsString()
   {
-    return "" + pin.getStringValue();
+    return "" + value.getStringValue();
   }
 
   @Override
   public String getWireValuesAsString()
   {
-    if (wire.isNotConnected())
+    if (wire != null)
     {
-      return " ";
+      if (wire.isNotConnected())
+      {
+        return " ";
+      }
+      else
+      {
+        return "" + wire.toString();
+      }
     }
     else
     {
-      return "" + wire.getStringValue();
+      return " ";
     }
   }
 
   @Override
   public String getConnectionValuesAsString()
   {
-    if (wire != null)
-    {
-      return "" + wire.getStringValue();
-    }
-    else
-    {
-      return " ";
-    }
+    return getWireValuesAsString();
   }
 }
 

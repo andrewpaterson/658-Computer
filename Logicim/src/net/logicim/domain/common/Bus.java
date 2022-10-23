@@ -45,18 +45,5 @@ public class Bus
   {
     return traces;
   }
-
-  public String getStringValue()
-  {
-    StringBuilder stringBuilder = new StringBuilder();
-    for (Trace connection : traces)
-    {
-      TraceValue traceValue = connection.getValue();
-
-      char c = traceValue.getStringValue();
-      stringBuilder.insert(0, c);
-    }
-    return stringBuilder.toString();
-  }
 }
 

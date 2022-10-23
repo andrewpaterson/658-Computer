@@ -3,22 +3,22 @@ package net.logicim.domain.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.logicim.common.DebugUtil.debug;
-import static net.logicim.common.DebugUtil.debugLog;
-import static net.logicim.domain.common.TraceValue.Error;
-import static net.logicim.domain.common.TraceValue.*;
-
 public class TraceNet
 {
+  public static final float Unsettled = 0.5f;
+  public static final float NotConnected = -1.0f;
+
   protected List<Trace> traces;
-  protected TraceValue value;
+  protected float voltage;
+  protected int width;
 
   protected Port _DEBUG_lastPortThatUpdated;
 
   public TraceNet(List<Trace> connected)
   {
     traces = connected;
-    value = Unsettled;
+    width = traces.size();
+    voltage = -1.0f;
 
     _DEBUG_lastPortThatUpdated = null;
   }
@@ -27,46 +27,28 @@ public class TraceNet
   {
     traces = new ArrayList<>();
     traces.add(trace);
-    value = Unsettled;
+    width = 1;
+    voltage = -1.0f;
 
     _DEBUG_lastPortThatUpdated = null;
   }
 
   public void reset()
   {
-    value = Unsettled;
+    voltage = Unsettled;
 
     _DEBUG_lastPortThatUpdated = null;
   }
 
-  public TraceValue update(TraceValue value, Port port)
+  public void update(float value, Port port)
   {
-    if (this.value == value)
-    {
-      _DEBUG_lastPortThatUpdated = port;
-      return value;
-    }
-    else if (this.value == Unsettled || this.value == NotConnected)
-    {
-      _DEBUG_lastPortThatUpdated = port;
-      this.value = value;
-      return value;
-    }
-    else
-    {
-      if (debug)
-      {
-        debugLog("Trace conflict: [" + _DEBUG_lastPortThatUpdated.getDescription() + "] set net value [" + this.value.getStringValue() + "] but [" + port.getDescription() + "] set net value [" + value.getStringValue() + "].");
-      }
-      _DEBUG_lastPortThatUpdated = port;
-      this.value = Error;
-      return Error;
-    }
+    _DEBUG_lastPortThatUpdated = port;
+    this.voltage = value;
   }
 
-  public TraceValue getValue()
+  public float getVoltage()
   {
-    return value;
+    return voltage;
   }
 
   public Port get_DEBUG_lastPortThatUpdated()

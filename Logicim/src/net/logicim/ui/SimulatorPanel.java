@@ -14,6 +14,7 @@ public class SimulatorPanel
   private SimulatorGraphics simulatorGraphics;
 
   public static int NANOS_IN_MILLI = 1000000;
+  public static int NANOS_IN_UNIT =  1000000000;
 
   public SimulatorPanel()
   {

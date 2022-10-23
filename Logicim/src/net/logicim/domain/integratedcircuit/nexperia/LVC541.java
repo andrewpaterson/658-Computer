@@ -21,43 +21,43 @@ public class LVC541
 
   private void tickPort()
   {
-    PinValue outputEnabled1B = getPins().getOE1B();
-    PinValue outputEnabled2B = getPins().getOE2B();
-
-    if (outputEnabled1B.isError() || outputEnabled1B.isNotConnected() ||
-        outputEnabled2B.isError() || outputEnabled2B.isNotConnected())
-    {
-      getPins().setYError();
-    }
-    else
-    {
-      transmit(!outputEnabled1B.isHigh() && !outputEnabled2B.isHigh());
-    }
+//    PinValue outputEnabled1B = getPins().getOE1B();
+//    PinValue outputEnabled2B = getPins().getOE2B();
+//
+//    if (outputEnabled1B.isError() || outputEnabled1B.isNotConnected() ||
+//        outputEnabled2B.isError() || outputEnabled2B.isNotConnected())
+//    {
+//      getPins().setYError();
+//    }
+//    else
+//    {
+//      transmit(!outputEnabled1B.isHigh() && !outputEnabled2B.isHigh());
+//    }
   }
 
   private void transmit(boolean outputEnabled)
   {
-    if (outputEnabled)
-    {
-      BusValue aValue = getPins().getAValue();
-      if (aValue.isError() || aValue.isNotConnected())
-      {
-        getPins().setYError();
-      }
-      else if (aValue.isUnknown())
-      {
-        getPins().setYUnsettled();
-      }
-      else
-      {
-        long value = aValue.getValue();
-        getPins().setYValue(value);
-      }
-    }
-    else
-    {
-      getPins().setYHighImpedance();
-    }
+//    if (outputEnabled)
+//    {
+//      BusValue aValue = getPins().getAValue();
+//      if (aValue.isError() || aValue.isNotConnected())
+//      {
+//        getPins().setYError();
+//      }
+//      else if (aValue.isUnknown())
+//      {
+//        getPins().setYUnsettled();
+//      }
+//      else
+//      {
+//        long value = aValue.getValue();
+//        getPins().setYValue(value);
+//      }
+//    }
+//    else
+//    {
+//      getPins().setYHighImpedance();
+//    }
   }
 
   @Override

@@ -7,21 +7,18 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class TickablePins
+public abstract class Pins
 {
-  protected IntegratedCircuit integratedCircuit;
+  protected IntegratedCircuit<? extends Pins> integratedCircuit;
 
-  protected Tickables tickables;
+  protected Timeline timeline;
   protected List<Port> ports;
 
-  protected long tickCount;
-
-  public TickablePins(Tickables tickables)
+  public Pins(Timeline timeline)
   {
-    this.tickables = tickables;
-    this.tickables.add(this);
+    this.timeline = timeline;
+    this.timeline.add(this);
     this.ports = new ArrayList<>();
-    this.tickCount = 0;
   }
 
   public void addPort(Port port)
@@ -29,35 +26,9 @@ public abstract class TickablePins
     ports.add(port);
   }
 
-  public List<TraceValue> getTraceValues()
-  {
-    List<TraceValue> traceValues = new ArrayList<>();
-    for (Port port : ports)
-    {
-      port.addTraceValues(traceValues);
-    }
-    return traceValues;
-  }
-
-  public void updateConnections()
-  {
-    for (Port port : ports)
-    {
-      port.updateConnection();
-    }
-  }
-
-  public void resetConnections()
-  {
-    for (Port port : ports)
-    {
-      port.resetConnections();
-    }
-  }
-
   public String getName()
   {
-    return getIntegratedCircuit().getName();
+    return integratedCircuit.getName();
   }
 
   public String getDescription()
@@ -70,53 +41,6 @@ public abstract class TickablePins
     else
     {
       return getType() + " \"" + name + "\"";
-    }
-  }
-
-  protected BusValue getBusValue(Omniport omniport)
-  {
-    TraceValue value = omniport.read();
-    if (value.isError())
-    {
-      return BusValue.error();
-    }
-    else if (value.isNotConnected())
-    {
-      return BusValue.notConnected();
-    }
-    else if (value.isUnsettled())
-    {
-      return BusValue.unknown();
-    }
-    else
-    {
-      return new BusValue(omniport.getPinsAsBoolAfterRead());
-    }
-  }
-
-  protected PinValue getPinValue(Uniport uniport)
-  {
-    TraceValue value = uniport.read();
-    return getPinValue(value);
-  }
-
-  protected PinValue getPinValue(TraceValue value)
-  {
-    if (value.isError())
-    {
-      return PinValue.Error;
-    }
-    else if (value.isNotConnected())
-    {
-      return PinValue.NotConnected;
-    }
-    else if (value.isUnsettled())
-    {
-      return PinValue.Unknown;
-    }
-    else
-    {
-      return value.isHigh() ? PinValue.High : PinValue.Low;
     }
   }
 
@@ -175,12 +99,7 @@ public abstract class TickablePins
     return updatingPorts;
   }
 
-  public IntegratedCircuit getIntegratedCircuit()
-  {
-    return integratedCircuit;
-  }
-
-  public void setIntegratedCircuit(IntegratedCircuit integratedCircuit)
+  public void setIntegratedCircuit(IntegratedCircuit<? extends Pins> integratedCircuit)
   {
     this.integratedCircuit = integratedCircuit;
   }
@@ -190,9 +109,9 @@ public abstract class TickablePins
     return integratedCircuit.getType();
   }
 
-  public long getTickCount()
+  public Timeline getTimeline()
   {
-    return tickCount;
+    return timeline;
   }
 }
 

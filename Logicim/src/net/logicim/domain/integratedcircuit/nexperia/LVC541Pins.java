@@ -3,16 +3,16 @@ package net.logicim.domain.integratedcircuit.nexperia;
 import net.logicim.domain.common.*;
 
 public class LVC541Pins
-    extends TickablePins
+    extends Pins
 {
   protected Omniport y;
   protected Omniport a;
   protected Uniport oe1B;
   protected Uniport oe2B;
 
-  public LVC541Pins(Tickables tickables)
+  public LVC541Pins(Timeline timeline)
   {
-    super(tickables);
+    super(timeline);
   }
 
   void setYError()
@@ -33,21 +33,6 @@ public class LVC541Pins
   void setYValue(long value)
   {
     y.writeAllPinsBool(value);
-  }
-
-  PinValue getOE1B()
-  {
-    return getPinValue(oe1B);
-  }
-
-  PinValue getOE2B()
-  {
-    return getPinValue(oe2B);
-  }
-
-  BusValue getAValue()
-  {
-    return getBusValue(a);
   }
 }
 

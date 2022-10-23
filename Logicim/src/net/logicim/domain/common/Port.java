@@ -1,89 +1,26 @@
 package net.logicim.domain.common;
 
-import java.util.Collection;
 import java.util.List;
 
-import static net.logicim.domain.common.TraceValue.Error;
-import static net.logicim.domain.common.TraceValue.*;
 import static net.logicim.domain.common.TransmissionState.NotSet;
 
 public abstract class Port
 {
-  protected TickablePins tickable;
+  protected Pins pins;
   protected String name;
   protected TransmissionState state;
 
-  public Port(TickablePins tickable, String name)
+  protected float highVoltageIn;
+  protected float highVoltageOut;
+  protected int highToLowPropagationDelay;
+  protected int lowToHighPropagationDelay;
+
+  public Port(Pins pins, String name)
   {
-    this.tickable = tickable;
+    this.pins = pins;
     this.name = name;
     this.state = NotSet;
-    tickable.addPort(this);
-  }
-
-  public static TraceValue readStates(Collection<? extends Port> ports)
-  {
-    boolean high = false;
-    boolean low = false;
-    boolean error = false;
-    boolean unsettled = false;
-    boolean connected = false;
-
-    for (Port port : ports)
-    {
-      TraceValue value = port.read();
-      if (value.isConnected())
-      {
-        connected = true;
-      }
-
-      if (value.isError())
-      {
-        error = true;
-      }
-      else if (value.isUnsettled())
-      {
-        unsettled = true;
-      }
-      else if (value.isHigh())
-      {
-        high = true;
-      }
-      else if (value.isLow())
-      {
-        low = true;
-      }
-    }
-
-    return translatePortValue(high, low, error, unsettled, connected);
-  }
-
-  static TraceValue translatePortValue(boolean high, boolean low, boolean error, boolean unsettled, boolean connected)
-  {
-    if (connected)
-    {
-      if (error)
-      {
-        return Error;
-      }
-      else if (unsettled)
-      {
-        return Unsettled;
-      }
-      else if (high && low)
-      {
-        return HighAndLow;
-      }
-      else if (high)
-      {
-        return High;
-      }
-      else if (low)
-      {
-        return Low;
-      }
-    }
-    return NotConnected;
+    pins.addPort(this);
   }
 
   public String getName()
@@ -95,12 +32,6 @@ public abstract class Port
   {
     state = NotSet;
   }
-
-  public abstract void addTraceValues(List<TraceValue> traceValues);
-
-  public abstract void updateConnection();
-
-  public abstract TraceValue read();
 
   public String getPortTransmissionStateAsString()
   {
@@ -126,20 +57,14 @@ public abstract class Port
 
   public String getDescription()
   {
-    return getTickable().getDescription() + "." + getName();
+    return getPins().getDescription() + "." + getName();
   }
 
-  public TickablePins getTickable()
+  public Pins getPins()
   {
-    return tickable;
+    return pins;
   }
 
   public abstract List<Trace> getConnections();
-
-  public abstract String getTraceValuesAsString();
-
-  public abstract String getWireValuesAsString();
-
-  public abstract String getConnectionValuesAsString();
 }
 

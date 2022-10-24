@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class LinkedListIterator<E>
+public class LinkedListIterator<E>
     implements Iterator<E>
 {
   private LinkedList<E> list;
@@ -70,6 +70,12 @@ class LinkedListIterator<E>
     {
       throw new ConcurrentModificationException();
     }
+  }
+
+  public void insertBefore(E value)
+  {
+    LinkedListNode<E> currentNode = getCurrentNode();
+    list.addNodeBefore(currentNode, value);
   }
 }
 

@@ -12,7 +12,7 @@ public class TraceNet
   protected float voltage;
   protected int width;
 
-  protected Port _DEBUG_lastPortThatUpdated;
+  protected Port drivingPort;
 
   public TraceNet(List<Trace> connected)
   {
@@ -20,7 +20,7 @@ public class TraceNet
     width = traces.size();
     voltage = -1.0f;
 
-    _DEBUG_lastPortThatUpdated = null;
+    drivingPort = null;
   }
 
   public TraceNet(Trace trace)
@@ -30,19 +30,18 @@ public class TraceNet
     width = 1;
     voltage = -1.0f;
 
-    _DEBUG_lastPortThatUpdated = null;
+    drivingPort = null;
   }
 
-  public void reset()
+  public void unsettle()
   {
     voltage = Unsettled;
-
-    _DEBUG_lastPortThatUpdated = null;
+    drivingPort = null;
   }
 
   public void update(float value, Port port)
   {
-    _DEBUG_lastPortThatUpdated = port;
+    drivingPort = port;
     this.voltage = value;
   }
 
@@ -51,9 +50,9 @@ public class TraceNet
     return voltage;
   }
 
-  public Port get_DEBUG_lastPortThatUpdated()
+  public Port getDrivingPort()
   {
-    return _DEBUG_lastPortThatUpdated;
+    return drivingPort;
   }
 }
 

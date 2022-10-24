@@ -17,17 +17,14 @@ public class LVC541Pins
 
   void setYError()
   {
-    y.error();
   }
 
   void setYUnsettled()
   {
-    y.unset();
   }
 
   void setYHighImpedance()
   {
-    y.highImpedance();
   }
 
   void setYValue(long value)

@@ -1,6 +1,6 @@
 package net.logicim.common.collection.redblacktree;
 
-import net.logicim.common.EmulatorException;
+import net.logicim.common.SimulatorException;
 
 import java.util.*;
 
@@ -42,7 +42,7 @@ public class RedBlackTree<S extends Comparable, T extends TreeItem<S>>
     }
     else
     {
-      throw new EmulatorException("Can't set node with key [" + obj.getTreeKey() + "].  It does not exist.");
+      throw new SimulatorException("Can't set node with key [" + obj.getTreeKey() + "].  It does not exist.");
     }
   }
 

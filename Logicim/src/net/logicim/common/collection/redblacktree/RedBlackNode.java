@@ -1,6 +1,6 @@
 package net.logicim.common.collection.redblacktree;
 
-import net.logicim.common.EmulatorException;
+import net.logicim.common.SimulatorException;
 
 public class RedBlackNode<S extends Comparable, T extends TreeItem<S>>
 {
@@ -109,7 +109,7 @@ public class RedBlackNode<S extends Comparable, T extends TreeItem<S>>
     }
     else
     {
-      throw new EmulatorException("Child being replaced did not belong to the parent.");
+      throw new SimulatorException("Child being replaced did not belong to the parent.");
     }
   }
 
@@ -142,11 +142,10 @@ public class RedBlackNode<S extends Comparable, T extends TreeItem<S>>
     }
     else if (comp == 0)
     {
-      throw new EmulatorException("Can't add node with duplicate key [" + newNode.getKey() + "].");
+      throw new SimulatorException("Can't add node with duplicate key [" + newNode.getKey() + "].");
     }
   }
 
-  @SuppressWarnings({"unchecked"})
   public RedBlackNode<S, T> findNextNodeOrNull()
   {
     RedBlackNode<S, T> current = this;
@@ -168,7 +167,6 @@ public class RedBlackNode<S extends Comparable, T extends TreeItem<S>>
     return current;
   }
 
-  @SuppressWarnings({"unchecked"})
   public RedBlackNode<S, T> findPreviousNodeOrNull()
   {
     RedBlackNode<S, T> current = this;

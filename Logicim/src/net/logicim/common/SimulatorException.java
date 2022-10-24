@@ -1,9 +1,9 @@
 package net.logicim.common;
 
-public class EmulatorException
+public class SimulatorException
     extends RuntimeException
 {
-  public EmulatorException(String s)
+  public SimulatorException(String s)
   {
     super(s);
   }

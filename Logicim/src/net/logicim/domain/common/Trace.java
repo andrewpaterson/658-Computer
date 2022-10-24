@@ -1,14 +1,20 @@
 package net.logicim.domain.common;
 
+import net.logicim.common.collection.linkedlist.LinkedList;
+import net.logicim.common.collection.linkedlist.LinkedListIterator;
+import net.logicim.common.collection.linkedlist.LinkedListNode;
+
 import static net.logicim.domain.common.TraceNet.Unsettled;
 
 public class Trace
 {
   protected TraceNet net;
+  protected LinkedList<Event> events;
 
   public Trace()
   {
     net = new TraceNet(this);
+    events = new LinkedList<>();
   }
 
   public float getVoltage()
@@ -42,7 +48,7 @@ public class Trace
   {
     if (net != null)
     {
-      return net.get_DEBUG_lastPortThatUpdated();
+      return net.getDrivingPort();
     }
     else
     {
@@ -53,6 +59,20 @@ public class Trace
   public boolean isNotConnected()
   {
     return net == null;
+  }
+
+  public void add(Event event)
+  {
+    LinkedListIterator<Event> iterator = events.iterator();
+    while (iterator.hasNext())
+    {
+      Event existingEvent = iterator.next();
+      if (existingEvent.getTime() > event.getTime())
+      {
+        iterator.insertBefore(event);
+        break;
+      }
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 package net.logicim.domain.common;
 
-import net.logicim.common.EmulatorException;
+import net.logicim.common.SimulatorException;
 
 import java.util.List;
 
@@ -40,13 +40,23 @@ public class Omniport
           float outVoltage = value ? highVoltageOut : 0;
           Trace trace = traces.get(i);
           float traceVoltage = trace.getVoltage();
-          pins.getTimeline().createPropagationEvent(this, trace, outVoltage);
+          if (outVoltage != traceVoltage)
+          {
+            if (outVoltage > traceVoltage)
+            {
+              pins.getTimeline().createPropagationEvent(trace, outVoltage, lowToHighPropagationDelay);
+            }
+            else if (outVoltage < traceVoltage)
+            {
+              pins.getTimeline().createPropagationEvent(trace, outVoltage, highToLowPropagationDelay);
+            }
+          }
         }
       }
     }
     else
     {
-      throw new EmulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
   }
 
@@ -62,7 +72,7 @@ public class Omniport
     }
     else
     {
-      throw new EmulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [" + bus.getWidth() + "].");
+      throw new SimulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [" + bus.getWidth() + "].");
     }
   }
 
@@ -74,7 +84,7 @@ public class Omniport
     }
     else
     {
-      throw new EmulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [1].");
+      throw new SimulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [1].");
     }
   }
 

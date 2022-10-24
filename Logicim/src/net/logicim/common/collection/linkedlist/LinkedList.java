@@ -186,7 +186,7 @@ public class LinkedList<E>
     return result;
   }
 
-  public Iterator<E> iterator()
+  public LinkedListIterator<E> iterator()
   {
     return new LinkedListIterator(this);
   }

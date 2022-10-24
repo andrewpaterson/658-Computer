@@ -1,6 +1,6 @@
 package net.logicim.domain.common;
 
-import net.logicim.common.EmulatorException;
+import net.logicim.common.SimulatorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Uniport
   {
     super.resetConnections();
     value = Unsettled;
-    wire.getNet().reset();
+    wire.getNet().unsettle();
   }
 
   public void addTraceValues(List<TraceValue> traceValues)
@@ -66,7 +66,7 @@ public class Uniport
     }
     else
     {
-      throw new EmulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throw new SimulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
   }
 
@@ -92,11 +92,11 @@ public class Uniport
 
     if (state.isOutput())
     {
-      throw new EmulatorException("Not Yet Implemented");
+      throw new SimulatorException("Not Yet Implemented");
     }
     else
     {
-      throw new EmulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
   }
 
@@ -126,7 +126,7 @@ public class Uniport
 
     if (!state.isImpedance())
     {
-      throw new EmulatorException("Cannot high-impedance Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throw new SimulatorException("Cannot high-impedance Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
   }
 

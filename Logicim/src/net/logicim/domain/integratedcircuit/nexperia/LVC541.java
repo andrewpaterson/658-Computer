@@ -1,17 +1,16 @@
 package net.logicim.domain.integratedcircuit.nexperia;
 
-import net.logicim.domain.common.BusValue;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.PinValue;
+import net.logicim.domain.common.Timeline;
 
 public class LVC541
     extends IntegratedCircuit<LVC541Pins>
 {
   public static final String TYPE = "8-bit Line Driver";
 
-  public LVC541(String name, LVC541Pins pins)
+  public LVC541(String name, Timeline timeline)
   {
-    super(name, pins);
+    super(name, new LVC541Pins(timeline));
   }
 
   public void tick()

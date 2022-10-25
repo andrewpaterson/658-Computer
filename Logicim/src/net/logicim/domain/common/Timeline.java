@@ -1,6 +1,7 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.collection.redblacktree.RedBlackTree;
+import net.logicim.domain.common.trace.Trace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class Timeline
   {
     long eventTime = this.time + propagationDelay;
     Event event = new Event(eventTime, outVoltage, trace);
+
     SimultaneousEvents simultaneousEvents = events.find(eventTime);
     if (simultaneousEvents == null)
     {

@@ -1,5 +1,8 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.common.propagation.Propagation;
+import net.logicim.domain.common.trace.Trace;
+
 import java.util.List;
 
 import static net.logicim.domain.common.TransmissionState.NotSet;
@@ -10,15 +13,13 @@ public abstract class Port
   protected String name;
   protected TransmissionState state;
 
-  protected float highVoltageIn;
-  protected float highVoltageOut;
-  protected int highToLowPropagationDelay;
-  protected int lowToHighPropagationDelay;
+  protected Propagation propagation;
 
-  public Port(Pins pins, String name)
+  public Port(Pins pins, String name, Propagation propagation)
   {
     this.pins = pins;
     this.name = name;
+    this.propagation = propagation;
     this.state = NotSet;
     pins.addPort(this);
   }
@@ -26,11 +27,6 @@ public abstract class Port
   public String getName()
   {
     return name;
-  }
-
-  public void resetConnections()
-  {
-    state = NotSet;
   }
 
   public String getPortTransmissionStateAsString()

@@ -1,86 +1,33 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.common.propagation.InputPropagation;
+import net.logicim.domain.common.propagation.OutputPropagation;
+import net.logicim.domain.common.propagation.Propagation;
+import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.trace.TraceValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.logicim.domain.common.TraceValue.Unsettled;
 import static net.logicim.domain.common.TransmissionState.*;
 
 public class Uniport
     extends Port
 {
-  protected TraceValue value;
-  protected Trace wire;
+  protected Trace trace;
 
-  public Uniport(Pins tickable, String name)
+  public Uniport(Pins pins, String name, Propagation propagation)
   {
-    super(tickable, name);
-    value = Unsettled;
-  }
-
-  @Override
-  public void resetConnections()
-  {
-    super.resetConnections();
-    value = Unsettled;
-    wire.getNet().unsettle();
-  }
-
-  public void addTraceValues(List<TraceValue> traceValues)
-  {
-    traceValues.add(value);
-  }
-
-  public void updateConnection()
-  {
-    if (wire != null)
-    {
-      if (state.isOutput())
-      {
-        value = wire.update(value, this);
-      }
-    }
-  }
-
-  //A read is only done by the Tickable the Port exists in and causes the port to be set as an input.
-  public TraceValue read()
-  {
-    if (state.isNotSet())
-    {
-      state = Input;
-    }
-
-    if (state.isInput())
-    {
-      if (wire != null)
-      {
-        value = wire.getVoltage();
-      }
-      else
-      {
-        value = NotConnected;
-      }
-      return value;
-    }
-    else
-    {
-      throw new SimulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-    }
+    super(pins, name, propagation);
   }
 
   @Override
   public List<Trace> getConnections()
   {
     ArrayList<Trace> connections = new ArrayList<>();
-    connections.add(wire);
+    connections.add(trace);
     return connections;
-  }
-
-  public Timeline getTimeline()
-  {
-    return pins.getTimeline();
   }
 
   public void writeBool(boolean value)
@@ -92,7 +39,15 @@ public class Uniport
 
     if (state.isOutput())
     {
-      throw new SimulatorException("Not Yet Implemented");
+      if (propagation.isOutput())
+      {
+        OutputPropagation outputPropagation = (OutputPropagation) propagation;
+        outputPropagation.createPropagationEvent(value, trace);
+      }
+      else
+      {
+        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
+      }
     }
     else
     {
@@ -100,21 +55,14 @@ public class Uniport
     }
   }
 
-  public void unset()
+  public void writeUnsettled()
   {
-    state = NotSet;
-    value = Unsettled;
-  }
 
-  public void error()
-  {
-    state = NotSet;  //Maybe?  Maybe we need an error state.
-    value = Error;
   }
 
   public void connect(Trace trace)
   {
-    this.wire = trace;
+    this.trace = trace;
   }
 
   public void highImpedance()
@@ -124,42 +72,57 @@ public class Uniport
       state = Impedance;
     }
 
-    if (!state.isImpedance())
+    if (state.isImpedance())
+    {
+
+    }
+    else
     {
       throw new SimulatorException("Cannot high-impedance Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
     }
   }
 
-  @Override
-  public String getTraceValuesAsString()
+  public TraceValue readValue()
   {
-    return "" + value.getStringValue();
+    if (state.isNotSet())
+    {
+      state = Input;
+    }
+
+    if (state.isInput())
+    {
+      if (propagation.isInput())
+      {
+        return ((InputPropagation) propagation).getValue(trace.getVoltage());
+      }
+      else
+      {
+        throw new SimulatorException("Cannot read an input value for port [" + getDescription() + "] without an input propagation configured.");
+      }
+    }
+    else
+    {
+      throw new SimulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+    }
   }
 
-  @Override
   public String getWireValuesAsString()
   {
-    if (wire != null)
+    if (trace != null)
     {
-      if (wire.isNotConnected())
+      if (trace.isNotConnected())
       {
         return " ";
       }
       else
       {
-        return "" + wire.toString();
+        return "" + trace.toString();
       }
     }
     else
     {
       return " ";
     }
-  }
-
-  @Override
-  public String getConnectionValuesAsString()
-  {
-    return getWireValuesAsString();
   }
 }
 

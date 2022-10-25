@@ -4,8 +4,8 @@ import net.logicim.common.util.StringUtil;
 
 public abstract class IntegratedCircuit<PINS extends Pins>
 {
-  private final PINS pins;
-  private final String name;
+  protected PINS pins;
+  protected String name;
 
   public IntegratedCircuit(String name, PINS pins)
   {

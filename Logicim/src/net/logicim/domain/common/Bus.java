@@ -1,5 +1,7 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.common.trace.Trace;
+
 import java.util.ArrayList;
 import java.util.List;
 

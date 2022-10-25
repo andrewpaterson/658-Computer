@@ -1,6 +1,9 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.common.propagation.OutputPropagation;
+import net.logicim.domain.common.propagation.Propagation;
+import net.logicim.domain.common.trace.Trace;
 
 import java.util.List;
 
@@ -12,9 +15,9 @@ public class Omniport
   protected List<Trace> traces;
   protected int width;
 
-  public Omniport(Pins tickable, String name, int width)
+  public Omniport(Pins tickable, String name, int width, Propagation propagation)
   {
-    super(tickable, name);
+    super(tickable, name, propagation);
     this.width = width;
   }
 
@@ -27,31 +30,26 @@ public class Omniport
 
     if (state.isOutput())
     {
-      if (traces.size() == width)
+      if (propagation.isOutput())
       {
-        for (int i = 0; i < traces.size(); i++)
+        OutputPropagation outputPropagation = (OutputPropagation) propagation;
+        if (traces.size() == width)
         {
-          boolean value = false;
-          if ((longValue >> i & 1) == 1)
+          for (int i = 0; i < traces.size(); i++)
           {
-            value = true;
-          }
-
-          float outVoltage = value ? highVoltageOut : 0;
-          Trace trace = traces.get(i);
-          float traceVoltage = trace.getVoltage();
-          if (outVoltage != traceVoltage)
-          {
-            if (outVoltage > traceVoltage)
+            boolean value = false;
+            if ((longValue >> i & 1) == 1)
             {
-              pins.getTimeline().createPropagationEvent(trace, outVoltage, lowToHighPropagationDelay);
+              value = true;
             }
-            else if (outVoltage < traceVoltage)
-            {
-              pins.getTimeline().createPropagationEvent(trace, outVoltage, highToLowPropagationDelay);
-            }
+            Trace trace = traces.get(i);
+            outputPropagation.createPropagationEvent(value, trace);
           }
         }
+      }
+      else
+      {
+        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
       }
     }
     else

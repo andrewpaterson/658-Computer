@@ -9,9 +9,14 @@ public abstract class LongTime
     return (int)(time / 1024);
   }
 
-  public static long nanosecondsToTime(int nanoseconds)
+  public static int nanosecondsToTime(int nanoseconds)
   {
     return nanoseconds * 1024;
+  }
+
+  public static int nanosecondsToTime(float nanoseconds)
+  {
+    return (int) (nanoseconds * 1024);
   }
 
   public float timeToSeconds(long time)

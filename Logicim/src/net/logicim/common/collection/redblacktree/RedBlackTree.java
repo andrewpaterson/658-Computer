@@ -606,6 +606,17 @@ public class RedBlackTree<S extends Comparable, T extends TreeItem<S>>
     return count > limit;
   }
 
+  public int size()
+  {
+    int count = 0;
+    for (Iterator<RedBlackNode<S, T>> it = nodeIterator(); it.hasNext(); )
+    {
+      RedBlackNode<S, T> node = it.next();
+      count++;
+    }
+    return count;
+  }
+
   public boolean isEmpty()
   {
     return !sizeExceeds(0);

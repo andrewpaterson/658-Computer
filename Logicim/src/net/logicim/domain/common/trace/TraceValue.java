@@ -7,7 +7,7 @@ public enum TraceValue
   Low,
   High,
   Unsettled,
-  NotConnected,
+  Undriven,
   Error;
 
   public boolean isHigh()
@@ -32,17 +32,22 @@ public enum TraceValue
 
   public boolean isConnected()
   {
-    return this != NotConnected;
+    return this != Undriven;
   }
 
-  public boolean isNotConnected()
+  public boolean isImpedance()
   {
-    return this == NotConnected;
+    return this == Undriven;
   }
 
   public String toEnumString()
   {
     return StringUtil.toEnumString(this);
+  }
+
+  public static TraceValue getOutputValue(boolean value)
+  {
+    return value ? TraceValue.High : TraceValue.Low;
   }
 }
 

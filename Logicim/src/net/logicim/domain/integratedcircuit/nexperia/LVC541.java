@@ -2,6 +2,9 @@ package net.logicim.domain.integratedcircuit.nexperia;
 
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.Port;
+
+import java.util.List;
 
 public class LVC541
     extends IntegratedCircuit<LVC541Pins>
@@ -13,7 +16,7 @@ public class LVC541
     super(name, new LVC541Pins(timeline));
   }
 
-  public void tick()
+  public void tick(long time, List<Port> updatedPorts)
   {
     tickPort();
   }

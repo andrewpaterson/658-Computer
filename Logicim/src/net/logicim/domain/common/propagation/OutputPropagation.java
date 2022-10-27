@@ -1,10 +1,10 @@
 package net.logicim.domain.common.propagation;
 
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
 
-import static net.logicim.domain.common.trace.TraceNet.NotConnected;
+import static net.logicim.domain.common.trace.TraceNet.Undriven;
 import static net.logicim.domain.common.trace.TraceNet.Unsettled;
 
 public interface OutputPropagation
@@ -19,21 +19,21 @@ public interface OutputPropagation
 
   Timeline getTimeline();
 
-  default float getOutputVoltage(boolean value)
+  default TraceValue getValueOnOutputTrace(TraceNet trace)
   {
-    return value ? getHighVoltageOut() : 0.0f;
-  }
+    if (trace == null)
+    {
+      return TraceValue.Undriven;
+    }
 
-  default TraceValue getValueOnOutputTrace(Trace trace)
-  {
     float traceVoltage = trace.getVoltage();
     if (traceVoltage == Unsettled)
     {
       return TraceValue.Unsettled;
     }
-    else if (traceVoltage == NotConnected)
+    else if (traceVoltage == Undriven)
     {
-      return TraceValue.NotConnected;
+      return TraceValue.Undriven;
     }
     else
     {
@@ -48,21 +48,19 @@ public interface OutputPropagation
     }
   }
 
-  default TraceValue getOutputValue(boolean value)
+  default void createPropagationEvent(TraceValue outValue, TraceNet trace)
   {
-    return value ? TraceValue.High : TraceValue.Low;
-  }
-
-  default void createPropagationEvent(boolean value, Trace trace)
-  {
-    TraceValue outValue = getOutputValue(value);
     TraceValue traceValue = getValueOnOutputTrace(trace);
 
-    if ((traceValue == TraceValue.Low || traceValue == TraceValue.Unsettled || traceValue == TraceValue.NotConnected) && (outValue == TraceValue.High))
+    if ((traceValue == TraceValue.Low || traceValue == TraceValue.Unsettled || traceValue == TraceValue.Undriven) && (outValue == TraceValue.High))
     {
       getTimeline().createPropagationEvent(trace, getHighVoltageOut(), getLowToHighPropagationDelay());
     }
-    else if ((traceValue == TraceValue.High || traceValue == TraceValue.Unsettled || traceValue == TraceValue.NotConnected) && (outValue == TraceValue.Low))
+    else if ((traceValue == TraceValue.High || traceValue == TraceValue.Unsettled || traceValue == TraceValue.Undriven) && (outValue == TraceValue.Low))
+    {
+      getTimeline().createPropagationEvent(trace, getLowVoltageOut(), getHighToLowPropagationDelay());
+    }
+    else if ((traceValue == TraceValue.High || traceValue == TraceValue.Low || traceValue == TraceValue.Unsettled) && (outValue == TraceValue.Undriven))
     {
       getTimeline().createPropagationEvent(trace, getLowVoltageOut(), getHighToLowPropagationDelay());
     }

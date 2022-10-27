@@ -1,6 +1,7 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
+import net.logicim.domain.common.port.Port;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,11 @@ public abstract class Pins
   protected IntegratedCircuit<? extends Pins> integratedCircuit;
 
   protected List<Port> ports;
+  protected Timeline timeline;
 
   public Pins(Timeline timeline)
   {
+    this.timeline = timeline;
     timeline.add(this);
     this.ports = new ArrayList<>();
   }
@@ -43,6 +46,11 @@ public abstract class Pins
   public void setIntegratedCircuit(IntegratedCircuit<? extends Pins> integratedCircuit)
   {
     this.integratedCircuit = integratedCircuit;
+  }
+
+  public IntegratedCircuit<? extends Pins> getIntegratedCircuit()
+  {
+    return integratedCircuit;
   }
 
   public String getType()

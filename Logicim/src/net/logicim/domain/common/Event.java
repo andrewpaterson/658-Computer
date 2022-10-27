@@ -1,14 +1,14 @@
 package net.logicim.domain.common;
 
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.trace.TraceNet;
 
 public class Event
 {
-  protected final long time;
-  protected final float voltage;
-  protected final Trace trace;
+  protected long time;
+  protected float voltage;
+  protected TraceNet trace;
 
-  public Event(long time, float voltage, Trace trace)
+  public Event(long time, float voltage, TraceNet trace)
   {
     this.time = time;
     this.voltage = voltage;
@@ -18,6 +18,16 @@ public class Event
   public long getTime()
   {
     return time;
+  }
+
+  public float getVoltage()
+  {
+    return voltage;
+  }
+
+  public TraceNet getTrace()
+  {
+    return trace;
   }
 }
 

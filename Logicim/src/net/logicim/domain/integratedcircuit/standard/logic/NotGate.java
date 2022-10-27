@@ -1,8 +1,11 @@
 package net.logicim.domain.integratedcircuit.standard.logic;
 
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.Uniport;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceValue;
+
+import java.util.List;
 
 public class NotGate
     extends IntegratedCircuit<NotGatePins>
@@ -13,18 +16,18 @@ public class NotGate
   }
 
   @Override
-  public void tick()
+  public void tick(long time, List<Port> updatedPorts)
   {
     Uniport input = pins.getInput();
     TraceValue inValue = input.readValue();
-    if (inValue.isError() || inValue.isNotConnected())
+    if (inValue.isError() || inValue.isImpedance())
     {
       pins.getOutput().writeUnsettled();
     }
     else
     {
       boolean calculatedValue = !inValue.isHigh();
-      getPins().getOutput().writeBool(calculatedValue);
+      pins.getOutput().writeBool(calculatedValue);
     }
   }
 

@@ -1,8 +1,15 @@
 package net.logicim.domain.integratedcircuit.standard.logic;
 
-import net.logicim.domain.common.*;
+import net.logicim.domain.common.LongTime;
+import net.logicim.domain.common.Pins;
+import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.propagation.BistateOutputPropagation;
 import net.logicim.domain.common.propagation.InputPropagation;
+
+import static net.logicim.domain.common.LongTime.*;
+import static net.logicim.domain.common.port.PortType.Input;
+import static net.logicim.domain.common.port.PortType.Output;
 
 public class NotGatePins
     extends Pins
@@ -13,14 +20,21 @@ public class NotGatePins
   public NotGatePins(Timeline timeline)
   {
     super(timeline);
-    output = new Uniport(this, "Output", new BistateOutputPropagation(timeline,
-                                                                      "",
-                                                                      0.0f,
-                                                                      3.3f,
-                                                                      LongTime.nanosecondsToTime(2.5f),
-                                                                      LongTime.nanosecondsToTime(2.5f)));
-    input = new Uniport(this, "Input", new InputPropagation("", 0.8f, 2.0f));
+    output = new Uniport(Output,
+                         this,
+                         "Output",
+                         new BistateOutputPropagation(timeline,
+                                                      "",
+                                                      0.0f,
+                                                      3.3f,
+                                                      nanosecondsToTime(2.5f),
+                                                      nanosecondsToTime(2.5f)));
+    input = new Uniport(Input,
+                        this,
+                        "Input",
+                        new InputPropagation("", 0.8f, 2.0f));
     addPort(output);
+    addPort(input);
   }
 
   public Uniport getInput()

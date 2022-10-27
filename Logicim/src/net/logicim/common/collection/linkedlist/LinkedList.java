@@ -9,7 +9,7 @@ public class LinkedList<E>
     implements
     Iterable<E>
 {
-  protected LinkedListNode<E> head;
+  protected LinkedListNode<E> terminal;
   protected transient int modifications;
 
   public LinkedList()
@@ -40,7 +40,7 @@ public class LinkedList<E>
   protected void baseClear()
   {
     modifications = 0;
-    head = createRoot();
+    terminal = createRoot();
   }
 
   protected LinkedListNode<E> createRoot()
@@ -55,8 +55,8 @@ public class LinkedList<E>
   // Getters
   public E getFirstOrNull()
   {
-    LinkedListNode<E> result = head.getNext();
-    if (head == result)
+    LinkedListNode<E> result = terminal.getNext();
+    if (terminal == result)
     {
       return null;
     }
@@ -65,20 +65,19 @@ public class LinkedList<E>
 
   public E getLastOrNull()
   {
-    LinkedListNode<E> result = head.getPrevious();
-    if (head == result)
+    LinkedListNode<E> result = terminal.getPrevious();
+    if (terminal == result)
     {
       return null;
     }
     return result.getValue();
   }
 
-  public int sizeMemoryIntensive()
+  public int size()
   {
     int result = 0;
-    for (Iterator iterator = iterator(); iterator.hasNext(); )
+    for (E e : this)
     {
-      iterator.next();
       result++;
     }
     return result;
@@ -86,22 +85,22 @@ public class LinkedList<E>
 
   public boolean isEmpty()
   {
-    return head.getNext() == head;
+    return terminal.getNext() == terminal;
   }
 
-  public LinkedListNode<E> getRoot()
+  public LinkedListNode<E> getTerminal()
   {
-    return head;
+    return terminal;
   }
 
   public LinkedListNode<E> getTail()
   {
-    return head.getPrevious();
+    return terminal.getPrevious();
   }
 
   public LinkedListNode<E> getHead()
   {
-    return head.getNext();
+    return terminal.getNext();
   }
 
   public int getModifications()
@@ -119,7 +118,7 @@ public class LinkedList<E>
 
   protected boolean baseAdd(E value)
   {
-    addNodeBefore(head, value);
+    addNodeBefore(terminal, value);
     return true;
   }
 
@@ -188,7 +187,7 @@ public class LinkedList<E>
 
   public LinkedListIterator<E> iterator()
   {
-    return new LinkedListIterator(this);
+    return new LinkedListIterator<E>(this);
   }
 
   public boolean add(E value)

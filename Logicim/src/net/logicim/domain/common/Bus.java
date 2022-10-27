@@ -1,20 +1,20 @@
 package net.logicim.domain.common;
 
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.trace.TraceNet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bus
 {
-  protected List<Trace> traces;
+  protected List<TraceNet> traces;
 
   public Bus(int width)
   {
     traces = new ArrayList<>(width);
     for (int i = 0; i < width; i++)
     {
-      traces.add(new Trace());
+      traces.add(new TraceNet());
     }
   }
 
@@ -38,12 +38,12 @@ public class Bus
     return traces.size();
   }
 
-  public Trace getTrace(int index)
+  public TraceNet getTrace(int index)
   {
     return traces.get(index);
   }
 
-  public List<Trace> getTraces()
+  public List<TraceNet> getTraces()
   {
     return traces;
   }

@@ -1,49 +1,36 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.domain.common.Port;
+import net.logicim.common.SimulatorException;
+import net.logicim.common.collection.linkedlist.LinkedList;
+import net.logicim.common.collection.linkedlist.LinkedListIterator;
+import net.logicim.domain.common.Event;
+import net.logicim.domain.common.port.Port;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TraceNet
 {
   public static final float Unsettled = 0.5f;
-  public static final float NotConnected = -1.0f;
+  public static final float Undriven = -1.0f;
 
-  protected List<Trace> traces;
+  protected LinkedList<Event> events;
   protected float voltage;
-  protected int width;
 
-  protected Port drivingPort;
+  protected Set<Port> connectedPorts;
 
-  public TraceNet(List<Trace> connected)
+  public TraceNet()
   {
-    traces = connected;
-    width = traces.size();
-    voltage = -1.0f;
-
-    drivingPort = null;
+    events = new LinkedList<>();
+    voltage = Undriven;
+    connectedPorts = new LinkedHashSet<>();
   }
 
-  public TraceNet(Trace trace)
-  {
-    traces = new ArrayList<>();
-    traces.add(trace);
-    width = 1;
-    voltage = -1.0f;
 
-    drivingPort = null;
-  }
-
-  public void unsettle()
+  public void update(float value)
   {
-    voltage = Unsettled;
-    drivingPort = null;
-  }
-
-  public void update(float value, Port port)
-  {
-    drivingPort = port;
     this.voltage = value;
   }
 
@@ -52,9 +39,62 @@ public class TraceNet
     return voltage;
   }
 
-  public Port getDrivingPort()
+
+  public List<Port> getInputPorts()
   {
-    return drivingPort;
+    List<Port> inputPorts = new ArrayList<>();
+    for (Port port : connectedPorts)
+    {
+      if (port.isInput())
+      {
+        inputPorts.add(port);
+      }
+    }
+    return inputPorts;
+  }
+
+  public void add(Event event)
+  {
+    LinkedListIterator<Event> iterator = events.iterator();
+    boolean added = false;
+    while (iterator.hasNext())
+    {
+      Event existingEvent = iterator.next();
+      if (existingEvent.getTime() > event.getTime())
+      {
+        added = true;
+        iterator.insertBefore(event);
+        break;
+      }
+    }
+    if (!added)
+    {
+      events.add(event);
+    }
+  }
+
+  public boolean isUndriven()
+  {
+    return voltage == Undriven;
+  }
+
+  public void initialise()
+  {
+    update(Unsettled);
+  }
+
+  public void remove(Event event)
+  {
+    boolean removed = events.remove(event);
+    if (!removed)
+    {
+      throw new SimulatorException("Cannot remove event");
+    }
+  }
+
+  public void connect(Port port)
+  {
+    connectedPorts.add(port);
   }
 }
 

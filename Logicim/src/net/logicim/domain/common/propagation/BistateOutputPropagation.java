@@ -48,5 +48,11 @@ public class BistateOutputPropagation
   {
     return lowToHighPropagationDelay;
   }
+
+  @Override
+  public  boolean isOutput()
+  {
+    return true;
+  }
 }
 

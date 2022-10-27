@@ -1,6 +1,9 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
+import net.logicim.domain.common.port.Port;
+
+import java.util.List;
 
 public abstract class IntegratedCircuit<PINS extends Pins>
 {
@@ -19,16 +22,6 @@ public abstract class IntegratedCircuit<PINS extends Pins>
     return pins;
   }
 
-  public void startTick()
-  {
-  }
-
-  public abstract void tick();
-
-  public void doneTick()
-  {
-  }
-
   public String getName()
   {
     return name;
@@ -45,6 +38,13 @@ public abstract class IntegratedCircuit<PINS extends Pins>
       return getType() + " \"" + name + "\"";
     }
   }
+
+  public Timeline getTimeline()
+  {
+    return pins.timeline;
+  }
+
+  public abstract void tick(long time, List<Port> updatedPorts);
 
   public abstract String getType();
 }

@@ -1,6 +1,5 @@
 package net.logicim.domain.common.propagation;
 
-import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
 
@@ -29,9 +28,9 @@ public class InputPropagation
     {
       return TraceValue.Unsettled;
     }
-    else if (voltage == TraceNet.NotConnected)
+    else if (voltage == TraceNet.Undriven)
     {
-      return TraceValue.NotConnected;
+      return TraceValue.Undriven;
     }
     else if (voltage <= lowVoltageIn)
     {

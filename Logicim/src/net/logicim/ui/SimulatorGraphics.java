@@ -13,10 +13,14 @@ public class SimulatorGraphics
   private int height;
 
   protected Viewport viewport;
+  protected CircuitEditor circuitEditor;
+  protected MouseMotion mouseMotion;
 
-  public SimulatorGraphics()
+  public SimulatorGraphics(CircuitEditor circuitEditor)
   {
-    viewport = new Viewport();
+    this.circuitEditor = circuitEditor;
+    this.viewport = new Viewport(this);
+    this.mouseMotion = new MouseMotion();
   }
 
   public void windowClosing()
@@ -46,29 +50,30 @@ public class SimulatorGraphics
 
   public void mouseMoved(int x, int y)
   {
+    Position moved = mouseMotion.moved(x, y);
+    if (moved != null)
+    {
+      System.out.println("" + moved.x + ", " + moved.y);
+    }
   }
 
-  public void paint(Graphics2D backBuffer)
+  public void paint(Graphics2D graphics)
   {
-    backBuffer.setColor(Color.WHITE);
-    backBuffer.fillRect(0, 0, width, height);
+    graphics.setColor(Color.WHITE);
+    graphics.fillRect(0, 0, width, height);
 
-    Position position = new Position(0, 0);
-    int left = viewport.transformX(position.x);
-    int top = viewport.transformY(position.y);
-    int width = viewport.transformWidth(2);
-    int height = viewport.transformHeight(2);
-    backBuffer.setStroke(new BasicStroke(2));
-    backBuffer.setColor(Color.BLACK);
-    backBuffer.drawRect(left, top, width, height);
+    viewport.paintGrid(graphics);
+    //circuitEditor.paint(viewport);
   }
 
   public void mouseExited()
   {
+    mouseMotion.invalidate();
   }
 
   public void mouseEntered(int x, int y)
   {
+    mouseMotion.invalidate();
   }
 
   public int getWidth()

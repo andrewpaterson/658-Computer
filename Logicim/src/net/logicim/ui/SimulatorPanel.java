@@ -20,7 +20,7 @@ public class SimulatorPanel
     running = false;
     period = 16 * nS_IN_mS;
 
-    simulatorGraphics = new SimulatorGraphics();
+    simulatorGraphics = new SimulatorGraphics(new CircuitEditor());
   }
 
   public void loop()

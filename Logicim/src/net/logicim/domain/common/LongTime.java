@@ -1,6 +1,6 @@
 package net.logicim.domain.common;
 
-import net.logicim.ui.SimulatorPanel;
+import static net.logicim.domain.common.Units.nS_IN_S;
 
 public abstract class LongTime
 {
@@ -19,9 +19,14 @@ public abstract class LongTime
     return (int) (nanoseconds * 1024);
   }
 
+  public static long secondsToTime(float seconds)
+  {
+    return nanosecondsToTime((long)((double) nS_IN_S * seconds));
+  }
+
   public float timeToSeconds(long time)
   {
-    return (float) ((double) timeToNanoseconds(time) / (double)SimulatorPanel.NANOS_IN_UNIT);
+    return (float) ((double) timeToNanoseconds(time) / (double) nS_IN_S);
   }
 }
 

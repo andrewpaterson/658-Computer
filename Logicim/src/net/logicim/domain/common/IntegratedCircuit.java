@@ -44,7 +44,11 @@ public abstract class IntegratedCircuit<PINS extends Pins>
     return pins.timeline;
   }
 
-  public abstract void tick(long time, List<Port> updatedPorts);
+  public void clockChanged(long time)
+  {
+  }
+
+  public abstract void inputTraceChanged(long time, List<Port> updatedPorts);
 
   public abstract String getType();
 }

@@ -13,9 +13,15 @@ public interface OutputPropagation
 
   float getLowVoltageOut();
 
-  int getHighToLowPropagationDelay();
+  //How long after an input change the transition from unsettled to low finishes.
+  int getHighToLowDecay();
 
-  int getLowToHighPropagationDelay();
+  int getLowToHigDecay();
+
+  //How long after an input change the transition from previous value (high) to unsettled finishes.
+  int getHighToLowSustain();
+
+  int getLowToHigSustain();
 
   Timeline getTimeline();
 
@@ -48,22 +54,11 @@ public interface OutputPropagation
     }
   }
 
-  default void createPropagationEvent(TraceValue outValue, TraceNet trace)
+  default float getUnsettledVoltageOut()
   {
-    TraceValue traceValue = getValueOnOutputTrace(trace);
-
-    if ((traceValue == TraceValue.Low || traceValue == TraceValue.Unsettled || traceValue == TraceValue.Undriven) && (outValue == TraceValue.High))
-    {
-      getTimeline().createPropagationEvent(trace, getHighVoltageOut(), getLowToHighPropagationDelay());
-    }
-    else if ((traceValue == TraceValue.High || traceValue == TraceValue.Unsettled || traceValue == TraceValue.Undriven) && (outValue == TraceValue.Low))
-    {
-      getTimeline().createPropagationEvent(trace, getLowVoltageOut(), getHighToLowPropagationDelay());
-    }
-    else if ((traceValue == TraceValue.High || traceValue == TraceValue.Low || traceValue == TraceValue.Unsettled) && (outValue == TraceValue.Undriven))
-    {
-      getTimeline().createPropagationEvent(trace, getLowVoltageOut(), getHighToLowPropagationDelay());
-    }
+    return Unsettled;
   }
+
+  void createPropagationEvent(TraceValue outValue, TraceNet trace);
 }
 

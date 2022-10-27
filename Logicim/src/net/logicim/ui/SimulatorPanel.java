@@ -3,6 +3,8 @@ package net.logicim.ui;
 import javax.swing.*;
 import java.awt.*;
 
+import static net.logicim.domain.common.Units.nS_IN_mS;
+
 public class SimulatorPanel
     extends JPanel
 {
@@ -13,13 +15,10 @@ public class SimulatorPanel
 
   private SimulatorGraphics simulatorGraphics;
 
-  public static int NANOS_IN_MILLI = 1000000;
-  public static int NANOS_IN_UNIT =  1000000000;
-
   public SimulatorPanel()
   {
     running = false;
-    period = 16 * NANOS_IN_MILLI;
+    period = 16 * nS_IN_mS;
 
     simulatorGraphics = new SimulatorGraphics();
   }
@@ -83,7 +82,7 @@ public class SimulatorPanel
     {
       try
       {
-        Thread.sleep(sleepTime / NANOS_IN_MILLI);
+        Thread.sleep(sleepTime / nS_IN_mS);
       }
       catch (InterruptedException ignored)
       {

@@ -30,11 +30,29 @@ public class Timeline
     tickables.add(tickable);
   }
 
-  public Event createPropagationEvent(TraceNet trace, float outVoltage, int propagationDelay)
+  public TraceEvent createPropagationEvent(TraceNet trace, float outVoltage, long propagationDelay)
   {
-    long eventTime = this.time + propagationDelay;
-    Event event = new Event(eventTime, outVoltage, trace);
+    TraceEvent event = new TraceEvent(this.time + propagationDelay, outVoltage, trace);
+    addEvent(event);
 
+    if (trace != null)
+    {
+      trace.add(event);
+    }
+    return event;
+  }
+
+  public ClockEvent createClockEvent(long propagationDelay, IntegratedCircuit<? extends Pins> integratedCircuit)
+  {
+    ClockEvent event = new ClockEvent(this.time + propagationDelay, integratedCircuit);
+    addEvent(event);
+
+    return event;
+  }
+
+  private void addEvent(Event event)
+  {
+    long eventTime = event.getTime();
     SimultaneousEvents simultaneousEvents = events.find(eventTime);
     if (simultaneousEvents == null)
     {
@@ -42,11 +60,6 @@ public class Timeline
       events.add(simultaneousEvents);
     }
     simultaneousEvents.add(event);
-    if (trace != null)
-    {
-      trace.add(event);
-    }
-    return event;
   }
 
   public void run()
@@ -68,29 +81,39 @@ public class Timeline
         Map<IntegratedCircuit<? extends Pins>, List<Port>> integratedCircuits = new LinkedHashMap<>();
         for (Event event : events.events)
         {
-          TraceNet trace = event.getTrace();
-          trace.update(event.getVoltage());
-
-          List<Port> ports = trace.getInputPorts();
-          for (Port port : ports)
+          if (event instanceof TraceEvent)
           {
-            IntegratedCircuit<? extends Pins> integratedCircuit = port.getPins().getIntegratedCircuit();
-            List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
-            if (inputPorts == null)
+            TraceEvent traceEvent = (TraceEvent) event;
+            TraceNet trace = traceEvent.getTrace();
+            trace.update(traceEvent.getVoltage());
+
+            List<Port> ports = trace.getInputPorts();
+            for (Port port : ports)
             {
-              inputPorts = new ArrayList<>();
-              integratedCircuits.put(integratedCircuit, inputPorts);
+              IntegratedCircuit<? extends Pins> integratedCircuit = port.getPins().getIntegratedCircuit();
+              List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
+              if (inputPorts == null)
+              {
+                inputPorts = new ArrayList<>();
+                integratedCircuits.put(integratedCircuit, inputPorts);
+              }
+              inputPorts.add(port);
             }
-            inputPorts.add(port);
+            trace.remove(traceEvent);
           }
-          trace.remove(event);
+          else if (event instanceof ClockEvent)
+          {
+            ClockEvent clockEvent = (ClockEvent) event;
+            IntegratedCircuit<? extends Pins> integratedCircuit = clockEvent.getIntegratedCircuit();
+            integratedCircuit.clockChanged(time);
+          }
         }
 
         for (Map.Entry<IntegratedCircuit<? extends Pins>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
         {
           IntegratedCircuit<? extends Pins> integratedCircuit = integratedCircuitListEntry.getKey();
           List<Port> ports = integratedCircuitListEntry.getValue();
-          integratedCircuit.tick(time, ports);
+          integratedCircuit.inputTraceChanged(time, ports);
         }
 
         this.events.remove(events);

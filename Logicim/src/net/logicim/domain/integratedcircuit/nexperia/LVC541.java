@@ -16,7 +16,7 @@ public class LVC541
     super(name, new LVC541Pins(timeline));
   }
 
-  public void tick(long time, List<Port> updatedPorts)
+  public void inputTraceChanged(long time, List<Port> updatedPorts)
   {
     tickPort();
   }

@@ -1,33 +1,18 @@
 package net.logicim.domain.common;
 
-import net.logicim.domain.common.trace.TraceNet;
+import java.util.Set;
 
-public class Event
+public abstract class Event
 {
   protected long time;
-  protected float voltage;
-  protected TraceNet trace;
 
-  public Event(long time, float voltage, TraceNet trace)
+  public Event(long time)
   {
     this.time = time;
-    this.voltage = voltage;
-    this.trace = trace;
   }
 
   public long getTime()
   {
     return time;
   }
-
-  public float getVoltage()
-  {
-    return voltage;
-  }
-
-  public TraceNet getTrace()
-  {
-    return trace;
-  }
 }
-

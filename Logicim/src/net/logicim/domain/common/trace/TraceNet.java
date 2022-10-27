@@ -3,7 +3,7 @@ package net.logicim.domain.common.trace;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.collection.linkedlist.LinkedListIterator;
-import net.logicim.domain.common.Event;
+import net.logicim.domain.common.TraceEvent;
 import net.logicim.domain.common.port.Port;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class TraceNet
   public static final float Unsettled = 0.5f;
   public static final float Undriven = -1.0f;
 
-  protected LinkedList<Event> events;
+  protected LinkedList<TraceEvent> events;
   protected float voltage;
 
   protected Set<Port> connectedPorts;
@@ -28,7 +28,6 @@ public class TraceNet
     connectedPorts = new LinkedHashSet<>();
   }
 
-
   public void update(float value)
   {
     this.voltage = value;
@@ -38,7 +37,6 @@ public class TraceNet
   {
     return voltage;
   }
-
 
   public List<Port> getInputPorts()
   {
@@ -53,13 +51,13 @@ public class TraceNet
     return inputPorts;
   }
 
-  public void add(Event event)
+  public void add(TraceEvent event)
   {
-    LinkedListIterator<Event> iterator = events.iterator();
+    LinkedListIterator<TraceEvent> iterator = events.iterator();
     boolean added = false;
     while (iterator.hasNext())
     {
-      Event existingEvent = iterator.next();
+      TraceEvent existingEvent = iterator.next();
       if (existingEvent.getTime() > event.getTime())
       {
         added = true;
@@ -83,7 +81,7 @@ public class TraceNet
     update(Unsettled);
   }
 
-  public void remove(Event event)
+  public void remove(TraceEvent event)
   {
     boolean removed = events.remove(event);
     if (!removed)

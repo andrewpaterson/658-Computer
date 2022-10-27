@@ -67,7 +67,6 @@ public abstract class Port
   public boolean isInput()
   {
     return type == PortType.Input ||
-           type == PortType.InternalInput ||
            type == PortType.Bidirectional ||
            type == PortType.Passive ||
            type == PortType.PowerIn;

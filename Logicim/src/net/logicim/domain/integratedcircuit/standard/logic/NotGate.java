@@ -16,7 +16,7 @@ public class NotGate
   }
 
   @Override
-  public void tick(long time, List<Port> updatedPorts)
+  public void inputTraceChanged(long time, List<Port> updatedPorts)
   {
     Uniport input = pins.getInput();
     TraceValue inValue = input.readValue();

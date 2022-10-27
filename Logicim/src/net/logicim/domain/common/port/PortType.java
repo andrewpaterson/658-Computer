@@ -9,7 +9,5 @@ public enum PortType
   PowerOut,
   Passive,
   NotConnected,
-  InternalInput,
-  InternalOutput;
 }
 

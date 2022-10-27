@@ -2,21 +2,19 @@ package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.state.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pins
 {
-  protected IntegratedCircuit<? extends Pins> integratedCircuit;
+  protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
 
   protected List<Port> ports;
-  protected Timeline timeline;
 
-  public Pins(Timeline timeline)
+  public Pins()
   {
-    this.timeline = timeline;
-    timeline.add(this);
     this.ports = new ArrayList<>();
   }
 
@@ -43,12 +41,12 @@ public abstract class Pins
     }
   }
 
-  public void setIntegratedCircuit(IntegratedCircuit<? extends Pins> integratedCircuit)
+  public void setIntegratedCircuit(IntegratedCircuit<?, ?> integratedCircuit)
   {
     this.integratedCircuit = integratedCircuit;
   }
 
-  public IntegratedCircuit<? extends Pins> getIntegratedCircuit()
+  public IntegratedCircuit<? extends Pins, ? extends State> getIntegratedCircuit()
   {
     return integratedCircuit;
   }

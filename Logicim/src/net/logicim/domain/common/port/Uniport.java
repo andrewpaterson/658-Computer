@@ -2,6 +2,7 @@ package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.Pins;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.propagation.InputPropagation;
 import net.logicim.domain.common.propagation.OutputPropagation;
 import net.logicim.domain.common.propagation.Propagation;
@@ -30,7 +31,7 @@ public class Uniport
     trace.connect(this);
   }
 
-  public void writeBool(boolean value)
+  public void writeBool(Timeline timeline, boolean value)
   {
     if (state.isNotSet())
     {
@@ -44,7 +45,7 @@ public class Uniport
         if (trace != null)
         {
           OutputPropagation outputPropagation = (OutputPropagation) propagation;
-          outputPropagation.createPropagationEvent(TraceValue.getOutputValue(value), trace);
+          outputPropagation.createPropagationEvent(timeline, TraceValue.getOutputValue(value), trace);
         }
       }
       else
@@ -63,7 +64,7 @@ public class Uniport
 
   }
 
-  public void highImpedance()
+  public void highImpedance(Timeline timeline)
   {
     if (state.isNotSet())
     {
@@ -75,7 +76,7 @@ public class Uniport
       if (propagation.isOutput())
       {
         OutputPropagation outputPropagation = (OutputPropagation) propagation;
-        outputPropagation.createPropagationEvent(Undriven, trace);
+        outputPropagation.createPropagationEvent(timeline, Undriven, trace);
       }
       else
       {

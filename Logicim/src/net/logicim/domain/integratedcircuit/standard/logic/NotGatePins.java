@@ -1,13 +1,11 @@
 package net.logicim.domain.integratedcircuit.standard.logic;
 
-import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.propagation.BistateOutputPropagation;
 import net.logicim.domain.common.propagation.InputPropagation;
 
-import static net.logicim.domain.common.LongTime.*;
+import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 import static net.logicim.domain.common.port.PortType.Input;
 import static net.logicim.domain.common.port.PortType.Output;
 
@@ -17,14 +15,13 @@ public class NotGatePins
   private Uniport input;
   private Uniport output;
 
-  public NotGatePins(Timeline timeline)
+  public NotGatePins()
   {
-    super(timeline);
+    super();
     output = new Uniport(Output,
                          this,
                          "Output",
-                         new BistateOutputPropagation(timeline,
-                                                      "",
+                         new BistateOutputPropagation("",
                                                       0.0f,
                                                       3.3f,
                                                       nanosecondsToTime(2.5f),

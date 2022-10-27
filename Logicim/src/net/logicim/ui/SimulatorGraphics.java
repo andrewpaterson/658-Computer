@@ -1,20 +1,22 @@
 package net.logicim.ui;
 
+import net.logicim.ui.common.PanelSize;
+import net.logicim.ui.common.Position;
+import net.logicim.ui.common.Viewport;
+
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class SimulatorGraphics
+    implements PanelSize
 {
   private int width;
   private int height;
 
-  protected Point circleCenter;
-  protected Color circleColour;
+  protected Viewport viewport;
 
   public SimulatorGraphics()
   {
-    circleCenter = new Point();
-    circleColour = Color.GRAY;
+    viewport = new Viewport();
   }
 
   public void windowClosing()
@@ -29,24 +31,11 @@ public class SimulatorGraphics
 
   public void mousePressed(int x, int y, int button)
   {
-    if (button == MouseEvent.BUTTON1)
-    {
-      circleColour = Color.GREEN;
-    }
-    if (button == MouseEvent.BUTTON2)
-    {
-      circleColour = Color.RED;
-    }
-    if (button == MouseEvent.BUTTON3)
-    {
-      circleColour = Color.BLUE;
-    }
 
   }
 
   public void mouseReleased(int x, int y, int button)
   {
-    circleColour = Color.LIGHT_GRAY;
   }
 
   public void resized(int width, int height)
@@ -57,29 +46,39 @@ public class SimulatorGraphics
 
   public void mouseMoved(int x, int y)
   {
-    circleCenter.setLocation(x, y);
   }
 
   public void paint(Graphics2D backBuffer)
   {
-    backBuffer.setColor(Color.DARK_GRAY);
+    backBuffer.setColor(Color.WHITE);
     backBuffer.fillRect(0, 0, width, height);
 
-    backBuffer.setColor(Color.WHITE);
-    backBuffer.drawLine(0, 0, width, height);
-
-    backBuffer.setColor(circleColour);
-    backBuffer.fillOval(circleCenter.x - 10, circleCenter.y - 10, 20, 20);
+    Position position = new Position(0, 0);
+    int left = viewport.transformX(position.x);
+    int top = viewport.transformY(position.y);
+    int width = viewport.transformWidth(2);
+    int height = viewport.transformHeight(2);
+    backBuffer.setStroke(new BasicStroke(2));
+    backBuffer.setColor(Color.BLACK);
+    backBuffer.drawRect(left, top, width, height);
   }
 
   public void mouseExited()
   {
-    circleColour = Color.DARK_GRAY;
   }
 
   public void mouseEntered(int x, int y)
   {
-    circleColour = Color.LIGHT_GRAY;
+  }
+
+  public int getWidth()
+  {
+    return width;
+  }
+
+  public int getHeight()
+  {
+    return height;
   }
 }
 

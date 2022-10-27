@@ -11,7 +11,7 @@ public class InputPropagation
 
   public InputPropagation(String family, float lowVoltageIn, float highVoltageIn)
   {
-    super(null, family);
+    super(family);
     this.lowVoltageIn = lowVoltageIn;
     this.highVoltageIn = highVoltageIn;
   }

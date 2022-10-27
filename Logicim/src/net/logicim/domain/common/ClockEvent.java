@@ -1,16 +1,19 @@
 package net.logicim.domain.common;
 
-public class ClockEvent extends Event
-{
-  protected IntegratedCircuit<? extends Pins> integratedCircuit;
+import net.logicim.domain.common.state.State;
 
-  public ClockEvent(long time, IntegratedCircuit<? extends Pins> integratedCircuit)
+public class ClockEvent
+    extends Event
+{
+  protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
+
+  public ClockEvent(long time, IntegratedCircuit<?, ?> integratedCircuit)
   {
     super(time);
     this.integratedCircuit = integratedCircuit;
   }
 
-  public IntegratedCircuit<? extends Pins> getIntegratedCircuit()
+  public IntegratedCircuit<? extends Pins, ? extends State> getIntegratedCircuit()
   {
     return integratedCircuit;
   }

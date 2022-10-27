@@ -2,7 +2,9 @@ package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.trace.TraceNet;
 
 import java.util.ArrayList;
@@ -14,20 +16,15 @@ import static net.logicim.domain.common.LongTime.timeToNanoseconds;
 
 public class Timeline
 {
-  protected List<Pins> tickables;
   protected long time;
   protected RedBlackTree<Long, SimultaneousEvents> events;
+  protected Simulation simulation;
 
-  public Timeline()
+  public Timeline(Simulation simulation)
   {
-    this.tickables = new ArrayList<>();
+    this.simulation = simulation;
     this.events = new RedBlackTree<>();
     time = 0;
-  }
-
-  public void add(Pins tickable)
-  {
-    tickables.add(tickable);
   }
 
   public TraceEvent createPropagationEvent(TraceNet trace, float outVoltage, long propagationDelay)
@@ -42,7 +39,7 @@ public class Timeline
     return event;
   }
 
-  public ClockEvent createClockEvent(long propagationDelay, IntegratedCircuit<? extends Pins> integratedCircuit)
+  public ClockEvent createClockEvent(long propagationDelay, IntegratedCircuit<?, ?> integratedCircuit)
   {
     ClockEvent event = new ClockEvent(this.time + propagationDelay, integratedCircuit);
     addEvent(event);
@@ -78,7 +75,7 @@ public class Timeline
           throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
         }
 
-        Map<IntegratedCircuit<? extends Pins>, List<Port>> integratedCircuits = new LinkedHashMap<>();
+        Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
         for (Event event : events.events)
         {
           if (event instanceof TraceEvent)
@@ -90,7 +87,7 @@ public class Timeline
             List<Port> ports = trace.getInputPorts();
             for (Port port : ports)
             {
-              IntegratedCircuit<? extends Pins> integratedCircuit = port.getPins().getIntegratedCircuit();
+              IntegratedCircuit<?, ?> integratedCircuit = port.getPins().getIntegratedCircuit();
               List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
               if (inputPorts == null)
               {
@@ -104,16 +101,16 @@ public class Timeline
           else if (event instanceof ClockEvent)
           {
             ClockEvent clockEvent = (ClockEvent) event;
-            IntegratedCircuit<? extends Pins> integratedCircuit = clockEvent.getIntegratedCircuit();
-            integratedCircuit.clockChanged(time);
+            IntegratedCircuit<?, ?> integratedCircuit = clockEvent.getIntegratedCircuit();
+            integratedCircuit.clockChanged(simulation);
           }
         }
 
-        for (Map.Entry<IntegratedCircuit<? extends Pins>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
+        for (Map.Entry<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
         {
-          IntegratedCircuit<? extends Pins> integratedCircuit = integratedCircuitListEntry.getKey();
+          IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitListEntry.getKey();
           List<Port> ports = integratedCircuitListEntry.getValue();
-          integratedCircuit.inputTraceChanged(time, ports);
+          integratedCircuit.inputTraceChanged(simulation, ports);
         }
 
         this.events.remove(events);

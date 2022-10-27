@@ -17,14 +17,13 @@ public class BistateOutputPropagation
   protected int lowToHigSustain;
   protected int lowToHigDecay;
 
-  public BistateOutputPropagation(Timeline timeline,
-                                  String family,
+  public BistateOutputPropagation(String family,
                                   float lowVoltageOut,
                                   float highVoltageOut,
                                   int highToLowPropagation,
                                   int lowToHighPropagation)
   {
-    super(timeline, family);
+    super(family);
     this.highVoltageOut = highVoltageOut;
     this.lowVoltageOut = lowVoltageOut;
     this.highToLowSustain = highToLowPropagation / 2;
@@ -73,7 +72,7 @@ public class BistateOutputPropagation
     return true;
   }
 
-  public void createPropagationEvent(TraceValue outValue, TraceNet trace)
+  public void createPropagationEvent(Timeline timeline, TraceValue outValue, TraceNet trace)
   {
     TraceValue traceValue = getValueOnOutputTrace(trace);
 
@@ -81,16 +80,16 @@ public class BistateOutputPropagation
     {
       if (traceValue != TraceValue.High)
       {
-        getTimeline().createPropagationEvent(trace, getUnsettledVoltageOut(), getLowToHigSustain());
-        getTimeline().createPropagationEvent(trace, getHighVoltageOut(), getLowToHigDecay());
+        timeline.createPropagationEvent(trace, getUnsettledVoltageOut(), getLowToHigSustain());
+        timeline.createPropagationEvent(trace, getHighVoltageOut(), getLowToHigDecay());
       }
     }
     else if (outValue == TraceValue.Low)
     {
       if (traceValue != TraceValue.Low)
       {
-        getTimeline().createPropagationEvent(trace, getUnsettledVoltageOut(), getHighToLowSustain());
-        getTimeline().createPropagationEvent(trace, getLowVoltageOut(), getHighToLowDecay());
+        timeline.createPropagationEvent(trace, getUnsettledVoltageOut(), getHighToLowSustain());
+        timeline.createPropagationEvent(trace, getLowVoltageOut(), getHighToLowDecay());
       }
     }
     else

@@ -1,22 +1,33 @@
 package net.logicim.domain.integratedcircuit.standard.logic;
 
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
 public class NotGate
-    extends IntegratedCircuit<NotGatePins>
+    extends IntegratedCircuit<NotGatePins, Stateless>
 {
-  public NotGate(String name, NotGatePins pins)
+  public NotGate(Circuit circuit, String name, NotGatePins pins)
   {
-    super(name, pins);
+    super(circuit, name, pins);
+    setState(new Stateless(this));
   }
 
   @Override
-  public void inputTraceChanged(long time, List<Port> updatedPorts)
+  public ClockOscillatorState simulationStarted(Simulation simulation)
+  {
+    return null;
+  }
+
+  @Override
+  public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
   {
     Uniport input = pins.getInput();
     TraceValue inValue = input.readValue();
@@ -27,7 +38,7 @@ public class NotGate
     else
     {
       boolean calculatedValue = !inValue.isHigh();
-      pins.getOutput().writeBool(calculatedValue);
+      pins.getOutput().writeBool(simulation.getTimeline(), calculatedValue);
     }
   }
 

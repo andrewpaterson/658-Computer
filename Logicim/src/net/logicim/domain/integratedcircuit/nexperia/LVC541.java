@@ -1,22 +1,33 @@
 package net.logicim.domain.integratedcircuit.nexperia;
 
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.state.Stateless;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
 public class LVC541
-    extends IntegratedCircuit<LVC541Pins>
+    extends IntegratedCircuit<LVC541Pins, Stateless>
 {
   public static final String TYPE = "8-bit Line Driver";
 
-  public LVC541(String name, Timeline timeline)
+  public LVC541(Circuit circuit, String name)
   {
-    super(name, new LVC541Pins(timeline));
+    super(circuit, name, new LVC541Pins());
   }
 
-  public void inputTraceChanged(long time, List<Port> updatedPorts)
+  @Override
+  public ClockOscillatorState simulationStarted(Simulation simulation)
+  {
+
+    return null;
+  }
+
+  @Override
+  public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
   {
     tickPort();
   }

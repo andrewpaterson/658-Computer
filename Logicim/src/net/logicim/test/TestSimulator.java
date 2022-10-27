@@ -1,5 +1,7 @@
 package net.logicim.test;
 
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.integratedcircuit.nexperia.LVC541;
@@ -14,16 +16,18 @@ public class TestSimulator
 {
   public static void main(String[] args)
   {
-    Timeline timeline = new Timeline();
-    ClockOscillator clock = new ClockOscillator("10Mhz", new ClockOscillatorPins(timeline), 10 * MHz);
+    Circuit circuit = new Circuit();
+
+    ClockOscillator clock = new ClockOscillator(circuit, "10Mhz", new ClockOscillatorPins(), 10 * MHz);
     TraceNet clockTrace = new TraceNet();
     clock.getPins().getOutput().connect(clockTrace);
 
-    NotGate notGate = new NotGate("Not", new NotGatePins(timeline));
+    NotGate notGate = new NotGate(circuit, "Not", new NotGatePins());
     notGate.getPins().getInput().connect(clockTrace);
     notGate.getPins().getOutput().connect(new TraceNet());
 
-    timeline.run();
+    Simulation simulation = circuit.resetSimulation();
+    simulation.run();
   }
 }
 

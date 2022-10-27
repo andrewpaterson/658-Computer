@@ -1,7 +1,6 @@
 package net.logicim.domain.integratedcircuit.standard.clock;
 
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.propagation.BistateOutputPropagation;
 
@@ -13,14 +12,13 @@ public class ClockOscillatorPins
 {
   protected Uniport output;
 
-  public ClockOscillatorPins(Timeline timeline)
+  public ClockOscillatorPins()
   {
-    super(timeline);
+    super();
     output = new Uniport(Output,
                          this,
                          "Out",
-                         new BistateOutputPropagation(timeline,
-                                                      "",
+                         new BistateOutputPropagation("",
                                                       0.0f,
                                                       3.3f,
                                                       nanosecondsToTime(5.0f),

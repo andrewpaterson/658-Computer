@@ -23,8 +23,6 @@ public interface OutputPropagation
 
   int getLowToHigSustain();
 
-  Timeline getTimeline();
-
   default TraceValue getValueOnOutputTrace(TraceNet trace)
   {
     if (trace == null)
@@ -59,6 +57,6 @@ public interface OutputPropagation
     return Unsettled;
   }
 
-  void createPropagationEvent(TraceValue outValue, TraceNet trace);
+  void createPropagationEvent(Timeline timeline, TraceValue outValue, TraceNet trace);
 }
 

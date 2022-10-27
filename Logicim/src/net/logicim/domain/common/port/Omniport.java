@@ -1,6 +1,7 @@
 package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Bus;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.propagation.OutputPropagation;
@@ -30,7 +31,7 @@ public class Omniport
     this.width = width;
   }
 
-  public void writeAllPinsBool(long longValue)
+  public void writeAllPinsBool(Simulation simulation, long longValue)
   {
     if (state.isNotSet())
     {
@@ -52,7 +53,7 @@ public class Omniport
               value = High;
             }
             TraceNet trace = traces.get(i);
-            outputPropagation.createPropagationEvent(value, trace);
+            outputPropagation.createPropagationEvent(simulation.getTimeline(), value, trace);
           }
         }
       }

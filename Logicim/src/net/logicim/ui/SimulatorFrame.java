@@ -95,6 +95,16 @@ public class SimulatorFrame
       }
     });
 
+    simulatorPanel.addMouseWheelListener(new MouseAdapter()
+    {
+      @Override
+      public void mouseWheelMoved(MouseWheelEvent e)
+      {
+        super.mouseWheelMoved(e);
+        simulatorPanel.mouseWheel(e.getWheelRotation());
+      }
+    });
+
     simulatorFrame.setTitle("Logicim");
     simulatorFrame.setMinimumSize(new Dimension(320, 240));
     simulatorFrame.setVisible(true);

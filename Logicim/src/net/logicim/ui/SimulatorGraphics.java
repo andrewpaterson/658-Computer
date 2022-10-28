@@ -5,6 +5,7 @@ import net.logicim.ui.common.Position;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class SimulatorGraphics
     implements PanelSize
@@ -15,12 +16,14 @@ public class SimulatorGraphics
   protected Viewport viewport;
   protected CircuitEditor circuitEditor;
   protected MouseMotion mouseMotion;
+  protected MouseButtons mouseButtons;
 
   public SimulatorGraphics(CircuitEditor circuitEditor)
   {
     this.circuitEditor = circuitEditor;
     this.viewport = new Viewport(this);
     this.mouseMotion = new MouseMotion();
+    this.mouseButtons = new MouseButtons();
   }
 
   public void windowClosing()
@@ -35,11 +38,12 @@ public class SimulatorGraphics
 
   public void mousePressed(int x, int y, int button)
   {
-
+    mouseButtons.set(button);
   }
 
   public void mouseReleased(int x, int y, int button)
   {
+    mouseButtons.unset(button);
   }
 
   public void resized(int width, int height)
@@ -51,9 +55,12 @@ public class SimulatorGraphics
   public void mouseMoved(int x, int y)
   {
     Position moved = mouseMotion.moved(x, y);
-    if (moved != null)
+    if (mouseButtons.pressed(MouseEvent.BUTTON2))
     {
-      System.out.println("" + moved.x + ", " + moved.y);
+      if (moved != null)
+      {
+        viewport.scroll(moved);
+      }
     }
   }
 
@@ -69,11 +76,13 @@ public class SimulatorGraphics
   public void mouseExited()
   {
     mouseMotion.invalidate();
+    mouseButtons.invalidate();
   }
 
   public void mouseEntered(int x, int y)
   {
     mouseMotion.invalidate();
+    mouseButtons.invalidate();
   }
 
   public int getWidth()
@@ -84,6 +93,13 @@ public class SimulatorGraphics
   public int getHeight()
   {
     return height;
+  }
+
+  public void mouseWheel(int wheelRotation)
+  {
+    mouseButtons.wheel(wheelRotation);
+    int rotation = mouseButtons.getRotation();
+    viewport.zoom((float)rotation / 10.0f);
   }
 }
 

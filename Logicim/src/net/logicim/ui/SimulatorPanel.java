@@ -135,5 +135,10 @@ public class SimulatorPanel
   {
     simulatorGraphics.mouseEntered(x, y);
   }
+
+  public void mouseWheel(int wheelRotation)
+  {
+    simulatorGraphics.mouseWheel(wheelRotation);
+  }
 }
 

@@ -47,3 +47,4 @@ public class MouseMotion
     previousValid = false;
   }
 }
+

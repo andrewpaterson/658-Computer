@@ -22,26 +22,46 @@ public class Viewport
     largeGridDotColor = new Color(0xABABAB);
   }
 
-  public int transformX(int x)
+  public int transformGridToScreenSpaceX(int x)
   {
-    int center = size.getWidth() / 2;
-    return (int) (x * scale * zoom + center);
+    return (int) (x * scale * zoom + size.getWidth() / 2 + position.x);
   }
 
-  public int transformY(int y)
+  public int transformGridToScreenSpaceY(int y)
   {
-    int center = size.getHeight() / 2;
-    return (int) (y * scale * zoom + center);
+    return (int) (y * scale * zoom + size.getHeight() / 2 + position.y);
   }
 
-  public int transformWidth(int x)
+  public int transformGridToScreenWidth(int x)
   {
     return (int) (x * scale * zoom);
   }
 
-  public int transformHeight(int y)
+  public int transformGridToScreenHeight(int y)
   {
     return (int) (y * scale * zoom);
+  }
+
+  public int transformScreenToGridX(int x)
+  {
+    return (int) ((((x - size.getWidth() / 2) - position.x) / (scale * zoom)) - 0.5f);
+  }
+
+  public int transformScreenToGridY(int y)
+  {
+    return (int) ((((y - size.getHeight() / 2) - position.y) / (scale * zoom)) - 0.5f);
+  }
+
+  public float getLineWidth()
+  {
+    if (zoom < 1)
+    {
+      return 1;
+    }
+    else
+    {
+      return zoom;
+    }
   }
 
   public void paintGrid(Graphics2D graphics)
@@ -55,34 +75,49 @@ public class Viewport
     int top = -(int) ((centerY + position.y) / (scale * zoom)) - 1;
     int dotsDown = (int) (size.getHeight() / (scale * zoom)) + 2;
 
-    if ((zoom >= 0.3f) && (zoom <= 2.0f))
+    if ((zoom >= 0.3f) && (zoom < 1.5f))
     {
-      graphics.setColor(smallGridDotColor);
-      for (int y = 0; y < dotsDown; y++)
-      {
-        int transformY = transformY(top + y) + (int) position.y;
-        for (int x = 0; x < dotsAcross; x++)
-        {
-          int transformX = transformX(left + x) + (int) position.x;
-          graphics.drawLine(transformX, transformY, transformX, transformY);
-        }
-      }
+      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, smallGridDotColor);
     }
-    else if (zoom > 2.0f)
+    if ((zoom >= 1.5f) && (zoom < 2.0f))
     {
-      graphics.setColor(largeGridDotColor);
-      for (int y = 0; y < dotsDown; y++)
-      {
-        int transformY = transformY(top + y) + (int) position.y;
-        for (int x = 0; x < dotsAcross; x++)
-        {
-          int transformX = transformX(left + x) + (int) position.x;
-          graphics.fillOval(transformX, transformY, (int) zoom, (int) zoom);
-        }
-      }
+      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, largeGridDotColor);
+    }
+    else if (zoom >= 2.0f)
+    {
+      drawCircleGrid(graphics, left, dotsAcross, top, dotsDown, largeGridDotColor);
     }
 
     graphics.setColor(color);
+  }
+
+  private void drawCircleGrid(Graphics2D graphics, int left, int dotsAcross, int top, int dotsDown, Color color)
+  {
+    graphics.setColor(color);
+    for (int y = 0; y < dotsDown; y++)
+    {
+      int transformY = transformGridToScreenSpaceY(top + y);
+      for (int x = 0; x < dotsAcross; x++)
+      {
+        int transformX = transformGridToScreenSpaceX(left + x);
+        int zoomHalf = (int) (zoom * 0.5);
+        graphics.fillOval(transformX - zoomHalf, transformY - zoomHalf , (int) zoom, (int) zoom);
+      }
+    }
+  }
+
+  private void drawDotGrid(Graphics2D graphics, int left, int dotsAcross, int top, int dotsDown, Color color)
+  {
+    graphics.setColor(color);
+    for (int y = 0; y < dotsDown; y++)
+    {
+      int transformY = transformGridToScreenSpaceY(top + y);
+      for (int x = 0; x < dotsAcross; x++)
+      {
+        int transformX = transformGridToScreenSpaceX(left + x);
+        graphics.drawLine(transformX, transformY, transformX, transformY);
+      }
+    }
   }
 
   public void scroll(Position relative)

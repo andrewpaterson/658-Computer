@@ -1,8 +1,8 @@
 package net.logicim.ui.clock;
 
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
+import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Position;
 import net.logicim.ui.common.View;
 import net.logicim.ui.common.Viewport;
@@ -16,22 +16,25 @@ public class ClockView
 {
   protected ClockOscillator clock;
 
-  public ClockView(Circuit circuit, Position position)
+  public ClockView(CircuitEditor circuitEditor, Position position)
   {
-    super(position);
-    this.clock = new ClockOscillator(circuit, "", new ClockOscillatorPins(), 1 * Hz);
+    super(circuitEditor, position);
+    this.clock = new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), 1 * Hz);
   }
 
+  @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
 
-    int left = viewport.transformX(anchor.x);
-    int top = viewport.transformY(anchor.y);
-    int width = viewport.transformWidth(2);
-    int height = viewport.transformHeight(2);
-    graphics.setStroke(new BasicStroke(2));
+    int left = viewport.transformGridToScreenSpaceX(position.x);
+    int top = viewport.transformGridToScreenSpaceY(position.y);
+    int width = viewport.transformGridToScreenWidth(2);
+    int height = viewport.transformGridToScreenHeight(2);
+    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setColor(Color.WHITE);
+    graphics.fillRect(left, top, width, height);
     graphics.setColor(Color.BLACK);
     graphics.drawRect(left, top, width, height);
 

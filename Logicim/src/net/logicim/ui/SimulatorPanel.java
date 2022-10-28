@@ -13,14 +13,14 @@ public class SimulatorPanel
   protected boolean running;
   protected long period;
 
-  private SimulatorGraphics simulatorGraphics;
+  private SimulatorEditor simulatorEditor;
 
   public SimulatorPanel()
   {
     running = false;
     period = 16 * nS_IN_mS;
 
-    simulatorGraphics = new SimulatorGraphics(new CircuitEditor());
+    simulatorEditor = new SimulatorEditor(new CircuitEditor());
   }
 
   public void loop()
@@ -59,13 +59,13 @@ public class SimulatorPanel
   {
     if ((backBufferImage != null) && (backBuffer != null))
     {
-      simulatorGraphics.paint(backBuffer);
+      simulatorEditor.paint(backBuffer);
     }
   }
 
   private boolean update(long beforeTime, long overtime, int tickCount)
   {
-    simulatorGraphics.tick(tickCount);
+    simulatorEditor.tick(tickCount);
 
     long afterTime = System.nanoTime();
     long timeDiff = afterTime - beforeTime;
@@ -102,22 +102,22 @@ public class SimulatorPanel
     backBufferImage = createImage(width, height);
     backBuffer = (Graphics2D) backBufferImage.getGraphics();
 
-    simulatorGraphics.resized(width, height);
+    simulatorEditor.resized(width, height);
   }
 
   public void mousePressed(int x, int y, int button)
   {
-    simulatorGraphics.mousePressed(x, y, button);
+    simulatorEditor.mousePressed(x, y, button);
   }
 
   public void mouseReleased(int x, int y, int button)
   {
-    simulatorGraphics.mouseReleased(x, y, button);
+    simulatorEditor.mouseReleased(x, y, button);
   }
 
   public void mouseMoved(int x, int y)
   {
-    simulatorGraphics.mouseMoved(x, y);
+    simulatorEditor.mouseMoved(x, y);
   }
 
   public void windowClosing()
@@ -128,17 +128,17 @@ public class SimulatorPanel
 
   public void mouseExited()
   {
-    simulatorGraphics.mouseExited();
+    simulatorEditor.mouseExited();
   }
 
   public void mouseEntered(int x, int y)
   {
-    simulatorGraphics.mouseEntered(x, y);
+    simulatorEditor.mouseEntered(x, y);
   }
 
   public void mouseWheel(int wheelRotation)
   {
-    simulatorGraphics.mouseWheel(wheelRotation);
+    simulatorEditor.mouseWheel(wheelRotation);
   }
 }
 

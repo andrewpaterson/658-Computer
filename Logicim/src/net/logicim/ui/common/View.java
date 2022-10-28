@@ -1,12 +1,26 @@
 package net.logicim.ui.common;
 
-public class View
-{
-  protected Position anchor;
+import net.logicim.ui.CircuitEditor;
 
-  public View(Position anchor)
+import java.awt.*;
+
+public abstract class View
+{
+  protected CircuitEditor circuitEditor;
+  protected Position position;
+
+  public View(CircuitEditor circuitEditor, Position position)
   {
-    this.anchor = anchor;
+    this.circuitEditor = circuitEditor;
+    this.position = position;
+    circuitEditor.add(this);
+  }
+
+  public abstract void paint(Graphics2D graphics, Viewport viewport);
+
+  public void setAnchor(int x, int y)
+  {
+    this.position.set(x, y);
   }
 }
 

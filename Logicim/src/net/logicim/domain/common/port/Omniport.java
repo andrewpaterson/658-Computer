@@ -95,5 +95,15 @@ public class Omniport
       throw new SimulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [1].");
     }
   }
+
+  @Override
+  public void disconnect()
+  {
+    for (TraceNet trace : traces)
+    {
+      trace.disconnect(this);
+      traces.remove(trace);
+    }
+  }
 }
 

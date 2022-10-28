@@ -1,4 +1,4 @@
-package net.logicim.ui;
+package net.logicim.ui.input;
 
 import net.logicim.ui.common.Position;
 

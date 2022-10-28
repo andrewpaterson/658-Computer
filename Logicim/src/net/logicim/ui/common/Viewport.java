@@ -9,8 +9,7 @@ public class Viewport
   protected float zoom;
   protected float scale;
   protected PanelSize size;
-  protected Color smallGridDotColor;
-  protected Color largeGridDotColor;
+  protected Colours colours;
 
   public Viewport(PanelSize size)
   {
@@ -18,8 +17,7 @@ public class Viewport
     position = new Point2D.Float(0, 0);
     zoom = 1.0f;
     scale = 10.0f;
-    smallGridDotColor = new Color(0xCBCBCB);
-    largeGridDotColor = new Color(0xABABAB);
+    colours = new Colours();
   }
 
   public int transformGridToScreenSpaceX(int x)
@@ -28,6 +26,16 @@ public class Viewport
   }
 
   public int transformGridToScreenSpaceY(int y)
+  {
+    return (int) (y * scale * zoom + size.getHeight() / 2 + position.y);
+  }
+
+  public int transformGridToScreenSpaceX(float x)
+  {
+    return (int) (x * scale * zoom + size.getWidth() / 2 + position.x);
+  }
+
+  public int transformGridToScreenSpaceY(float y)
   {
     return (int) (y * scale * zoom + size.getHeight() / 2 + position.y);
   }
@@ -54,9 +62,20 @@ public class Viewport
 
   public float getLineWidth()
   {
-    if (zoom < 1)
+    if (zoom < 0.5f)
     {
       return 1;
+    }
+    else
+    {
+      return zoom * 2.0f;
+    }
+  }
+  public float getCircleRadius()
+  {
+    if (zoom < 0.3)
+    {
+      return 0.3f;
     }
     else
     {
@@ -77,15 +96,15 @@ public class Viewport
 
     if ((zoom >= 0.3f) && (zoom < 1.5f))
     {
-      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, smallGridDotColor);
+      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, colours.getSmallGridDotColor());
     }
     if ((zoom >= 1.5f) && (zoom < 2.0f))
     {
-      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, largeGridDotColor);
+      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, colours.getLargeGridDotColor());
     }
     else if (zoom >= 2.0f)
     {
-      drawCircleGrid(graphics, left, dotsAcross, top, dotsDown, largeGridDotColor);
+      drawCircleGrid(graphics, left, dotsAcross, top, dotsDown, colours.getLargeGridDotColor());
     }
 
     graphics.setColor(color);
@@ -137,6 +156,11 @@ public class Viewport
     {
       this.zoom = 6.0f;
     }
+  }
+
+  public Colours getColours()
+  {
+    return colours;
   }
 }
 

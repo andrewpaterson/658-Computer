@@ -1,6 +1,7 @@
 package net.logicim.domain.common;
 
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
 
 import java.util.ArrayList;
@@ -48,6 +49,15 @@ public class Circuit
   public void add(IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit)
   {
     integratedCircuits.add(integratedCircuit);
+  }
+
+  public void remove(IntegratedCircuit<?, ?> integratedCircuit)
+  {
+    integratedCircuits.remove(integratedCircuit);
+    for (Port port : integratedCircuit.getPorts())
+    {
+      port.disconnect();
+    }
   }
 }
 

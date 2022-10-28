@@ -3,23 +3,24 @@ package net.logicim.ui.clock;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.Position;
-import net.logicim.ui.common.View;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
 
 import java.awt.*;
 
 import static net.logicim.domain.common.Units.Hz;
 
 public class ClockView
-    extends View
+    extends IntegratedCircuitView<ClockOscillator>
 {
-  protected ClockOscillator clock;
-
-  public ClockView(CircuitEditor circuitEditor, Position position)
+  public ClockView(CircuitEditor circuitEditor, Position position, Rotation rotation)
   {
-    super(circuitEditor, position);
-    this.clock = new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), 1 * Hz);
+    super(circuitEditor,
+          new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), 1 * Hz),
+          position,
+          rotation);
+
+    new PortView(this, integratedCircuit.getPort("Out"), new Position(0, -1));
+    validatePorts();
   }
 
   @Override
@@ -28,8 +29,8 @@ public class ClockView
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
 
-    int left = viewport.transformGridToScreenSpaceX(position.x);
-    int top = viewport.transformGridToScreenSpaceY(position.y);
+    int left = viewport.transformGridToScreenSpaceX(position.x - 1);
+    int top = viewport.transformGridToScreenSpaceY(position.y - 1);
     int width = viewport.transformGridToScreenWidth(2);
     int height = viewport.transformGridToScreenHeight(2);
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
@@ -38,8 +39,44 @@ public class ClockView
     graphics.setColor(Color.BLACK);
     graphics.drawRect(left, top, width, height);
 
+    paintClockWaveform(graphics, viewport);
+
+    super.paint(graphics, viewport);
+
     graphics.setStroke(stroke);
     graphics.setColor(color);
+  }
+
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport)
+  {
+    float voltage = integratedCircuit.getInternalVoltage();
+    Color clockColor = getColorForVoltage(viewport, voltage);
+    graphics.setColor(clockColor);
+
+    float xOffset = 0.5f;
+    float yOffset = 0.33f;
+
+    int x1 = viewport.transformGridToScreenSpaceX(position.x - xOffset);
+    int x2 = viewport.transformGridToScreenSpaceX(position.x - xOffset);
+    int y1 = viewport.transformGridToScreenSpaceY(position.y + 0.0f);
+    int y2 = viewport.transformGridToScreenSpaceY(position.y - yOffset);
+    graphics.drawLine(x1, y1, x2, y2);
+
+    int x3 = viewport.transformGridToScreenSpaceX(position.x + 0.0f);
+    int y3 = viewport.transformGridToScreenSpaceY(position.y - yOffset);
+    graphics.drawLine(x2, y2, x3, y3);
+
+    int x4 = viewport.transformGridToScreenSpaceX(position.x + 0.0f);
+    int y4 = viewport.transformGridToScreenSpaceY(position.y + yOffset);
+    graphics.drawLine(x3, y3, x4, y4);
+
+    int x5 = viewport.transformGridToScreenSpaceX(position.x + xOffset);
+    int y5 = viewport.transformGridToScreenSpaceY(position.y + yOffset);
+    graphics.drawLine(x4, y4, x5, y5);
+
+    int x6 = viewport.transformGridToScreenSpaceX(position.x + xOffset);
+    int y6 = viewport.transformGridToScreenSpaceY(position.y + 0.0f);
+    graphics.drawLine(x5, y5, x6, y6);
   }
 }
 

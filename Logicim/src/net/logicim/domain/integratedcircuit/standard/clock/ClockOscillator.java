@@ -5,6 +5,8 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.TraceValue;
 
 import java.util.List;
 
@@ -51,6 +53,25 @@ public class ClockOscillator
   public String getType()
   {
     return "Clock";
+  }
+
+  public float getInternalVoltage()
+  {
+    if (state != null)
+    {
+      if (state.getState())
+      {
+        return 3.3f;
+      }
+      else
+      {
+        return 0.0f;
+      }
+    }
+    else
+    {
+      return TraceNet.Undriven;
+    }
   }
 }
 

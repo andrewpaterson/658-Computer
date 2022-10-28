@@ -140,5 +140,15 @@ public class SimulatorPanel
   {
     simulatorEditor.mouseWheel(wheelRotation);
   }
+
+  public void keyPressed(int keyCode)
+  {
+    simulatorEditor.keyPressed(keyCode);
+  }
+
+  public void keyReleased(int keyCode)
+  {
+    simulatorEditor.keyReleased(keyCode);
+  }
 }
 

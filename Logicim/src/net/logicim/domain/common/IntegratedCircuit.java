@@ -64,6 +64,11 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
+  public Port getPort(String name)
+  {
+    return pins.getPort(name);
+  }
+
   public void setState(State state)
   {
     this.state = (STATE) state;
@@ -74,5 +79,15 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   public abstract void inputTraceChanged(Simulation simulation, List<Port> updatedPorts);
 
   public abstract String getType();
+
+  public STATE getState()
+  {
+    return state;
+  }
+
+  public List<Port> getPorts()
+  {
+    return pins.getPorts();
+  }
 }
 

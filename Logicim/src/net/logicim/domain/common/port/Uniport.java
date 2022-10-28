@@ -132,9 +132,25 @@ public class Uniport
     }
   }
 
-  public void initialise(TraceValue value)
+  public float getVoltage()
   {
-    trace.initialise();
+    if (trace != null)
+    {
+      return trace.getVoltage();
+    }
+    else
+    {
+      return TraceNet.Undriven;
+    }
+  }
+
+  @Override
+  public void disconnect()
+  {
+    if (trace != null)
+    {
+      trace.disconnect(this);
+    }
   }
 }
 

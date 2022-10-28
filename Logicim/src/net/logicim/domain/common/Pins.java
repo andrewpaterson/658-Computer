@@ -23,6 +23,18 @@ public abstract class Pins
     ports.add(port);
   }
 
+  public Port getPort(String name)
+  {
+    for (Port port : ports)
+    {
+      if (port.getName().equals(name))
+      {
+        return port;
+      }
+    }
+    return null;
+  }
+
   public String getName()
   {
     return integratedCircuit.getName();
@@ -54,6 +66,11 @@ public abstract class Pins
   public String getType()
   {
     return integratedCircuit.getType();
+  }
+
+  public List<Port> getPorts()
+  {
+    return ports;
   }
 }
 

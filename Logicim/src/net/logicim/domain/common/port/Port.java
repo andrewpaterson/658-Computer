@@ -71,5 +71,7 @@ public abstract class Port
            type == PortType.Passive ||
            type == PortType.PowerIn;
   }
+
+  public abstract void disconnect();
 }
 

@@ -1,12 +1,14 @@
 package net.logicim.ui;
 
 import net.logicim.ui.clock.ClockView;
-import net.logicim.ui.common.PanelSize;
-import net.logicim.ui.common.Position;
-import net.logicim.ui.common.View;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
+import net.logicim.ui.input.KeyboardButtons;
+import net.logicim.ui.input.MouseButtons;
+import net.logicim.ui.input.MouseMotion;
+import net.logicim.ui.input.MousePosition;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class SimulatorEditor
@@ -20,6 +22,7 @@ public class SimulatorEditor
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
   protected MousePosition mousePosition;
+  protected KeyboardButtons keyboardButtons;
 
   protected View placementView;
 
@@ -27,11 +30,14 @@ public class SimulatorEditor
   {
     this.circuitEditor = circuitEditor;
     this.viewport = new Viewport(this);
+
     this.mouseMotion = new MouseMotion();
     this.mouseButtons = new MouseButtons();
     this.mousePosition = new MousePosition();
 
-    this.placementView = new ClockView(circuitEditor, new Position(0, 0));
+    this.keyboardButtons = new KeyboardButtons();
+
+    this.placementView = new ClockView(circuitEditor, new Position(0, 0), Rotation.NORTH);
   }
 
   public void windowClosing()
@@ -45,6 +51,11 @@ public class SimulatorEditor
   public void mousePressed(int x, int y, int button)
   {
     mouseButtons.set(button);
+
+    if (placementView != null)
+    {
+      placementView = null;
+    }
   }
 
   public void mouseReleased(int x, int y, int button)
@@ -123,9 +134,40 @@ public class SimulatorEditor
       {
         int x = viewport.transformScreenToGridX(position.x);
         int y = viewport.transformScreenToGridY(position.y);
-        placementView.setAnchor(x, y);
+        placementView.setPosition(x, y);
       }
     }
+  }
+
+  public void keyPressed(int keyCode)
+  {
+    keyboardButtons.set(keyCode);
+
+    if (placementView != null)
+    {
+      if (keyCode == KeyEvent.VK_R)
+      {
+        if (keyboardButtons.pressed(KeyEvent.VK_SHIFT))
+        {
+          placementView.rotateLeft();
+        }
+        else
+        {
+          placementView.rotateRight();
+        }
+      }
+
+      if (keyCode == KeyEvent.VK_ESCAPE)
+      {
+        circuitEditor.remove((IntegratedCircuitView<?>) placementView);
+        placementView = null;
+      }
+    }
+  }
+
+  public void keyReleased(int keyCode)
+  {
+    keyboardButtons.unset(keyCode);
   }
 }
 

@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class TraceNet
 {
-  public static final float Unsettled = 0.5f;
+  public static final float Unsettled = -0.5f;
   public static final float Undriven = -1.0f;
 
   protected LinkedList<TraceEvent> events;
@@ -76,11 +76,6 @@ public class TraceNet
     return voltage == Undriven;
   }
 
-  public void initialise()
-  {
-    update(Unsettled);
-  }
-
   public void remove(TraceEvent event)
   {
     boolean removed = events.remove(event);
@@ -93,6 +88,11 @@ public class TraceNet
   public void connect(Port port)
   {
     connectedPorts.add(port);
+  }
+
+  public void disconnect(Port port)
+  {
+    connectedPorts.remove(port);
   }
 }
 

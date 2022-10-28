@@ -1,5 +1,7 @@
 package net.logicim.ui;
 
+import net.logicim.ui.util.WindowSizer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -102,6 +104,21 @@ public class SimulatorFrame
       {
         super.mouseWheelMoved(e);
         simulatorPanel.mouseWheel(e.getWheelRotation());
+      }
+    });
+
+    simulatorFrame.addKeyListener(new KeyAdapter()
+    {
+      @Override
+      public void keyPressed(KeyEvent e)
+      {
+        simulatorPanel.keyPressed(e.getExtendedKeyCode());
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e)
+      {
+        simulatorPanel.keyReleased(e.getExtendedKeyCode());
       }
     });
 

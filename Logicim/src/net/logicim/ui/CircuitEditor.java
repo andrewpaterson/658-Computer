@@ -2,6 +2,7 @@ package net.logicim.ui;
 
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.clock.ClockView;
+import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.View;
 import net.logicim.ui.common.Viewport;
 
@@ -36,6 +37,12 @@ public class CircuitEditor
   public void add(View view)
   {
     views.add(view);
+  }
+
+  public void remove(IntegratedCircuitView<?> view)
+  {
+    circuit.remove(view.getIntegratedCircuit());
+    views.remove(view);
   }
 }
 

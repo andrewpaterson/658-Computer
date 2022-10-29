@@ -1,6 +1,7 @@
 package net.logicim.ui.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
@@ -25,6 +26,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     super(circuitEditor, position, rotation);
     this.integratedCircuit = integratedCircuit;
     this.ports = new ArrayList<>();
+    this.integratedCircuit.disable();
   }
 
   public void addPortView(PortView portView)
@@ -127,6 +129,13 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   public IC getIntegratedCircuit()
   {
     return integratedCircuit;
+  }
+
+  @Override
+  public void enable(Simulation simulation)
+  {
+    super.enable(simulation);
+    integratedCircuit.enable(simulation);
   }
 }
 

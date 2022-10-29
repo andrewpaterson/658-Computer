@@ -12,14 +12,13 @@ import static net.logicim.domain.common.Units.Hz;
 public class ClockView
     extends IntegratedCircuitView<ClockOscillator>
 {
-  public ClockView(CircuitEditor circuitEditor, Position position, Rotation rotation)
+  public ClockView(CircuitEditor circuitEditor, Position position, Rotation rotation, boolean enabled)
   {
     super(circuitEditor,
           new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), 1 * Hz),
           position,
           rotation);
-
-    new PortView(this, integratedCircuit.getPort("Out"), new Position(0, -1));
+    new PortView(this, this.integratedCircuit.getPort("Out"), new Position(0, -1));
     validatePorts();
   }
 

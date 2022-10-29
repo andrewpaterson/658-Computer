@@ -65,7 +65,7 @@ public class Colours
 
   public Color getTraceVoltage(float voltage)
   {
-    int index = (int) (voltage * 100);
+    int index = (int) (voltage * 10);
     if (index >= voltageColours.length)
     {
       index = voltageColours.length - 1;

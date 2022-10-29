@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 
 import java.awt.*;
@@ -33,6 +34,10 @@ public abstract class View
   public void rotateLeft()
   {
     rotation = rotation.rotateLeft();
+  }
+
+  public void enable(Simulation simulation)
+  {
   }
 }
 

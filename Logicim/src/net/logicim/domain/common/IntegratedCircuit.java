@@ -4,7 +4,6 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   protected PINS pins;
   protected STATE state;
   protected String name;
+  protected boolean enabled;
 
   public IntegratedCircuit(Circuit circuit, String name, PINS pins)
   {
@@ -22,6 +22,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     this.pins = pins;
     this.pins.setIntegratedCircuit(this);
     this.state = null;
+    this.enabled = true;
 
     circuit.add(this);
   }
@@ -72,6 +73,41 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   public void setState(State state)
   {
     this.state = (STATE) state;
+  }
+
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+
+  public void disable()
+  {
+    if (enabled)
+    {
+      if (!isStateless())
+      {
+        state = null;
+      }
+      enabled = false;
+    }
+  }
+
+  public void enable(Simulation simulation)
+  {
+    enabled = true;
+    reset(simulation);
+  }
+
+  public void reset(Simulation simulation)
+  {
+    if (enabled)
+    {
+      if (!isStateless())
+      {
+          State state = simulationStarted(simulation);
+          setState(state);
+      }
+    }
   }
 
   public abstract State simulationStarted(Simulation simulation);

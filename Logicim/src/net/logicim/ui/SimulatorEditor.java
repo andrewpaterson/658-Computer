@@ -1,5 +1,6 @@
 package net.logicim.ui;
 
+import net.logicim.domain.Simulation;
 import net.logicim.ui.clock.ClockView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.input.KeyboardButtons;
@@ -18,17 +19,17 @@ public class SimulatorEditor
   private int height;
 
   protected Viewport viewport;
-  protected CircuitEditor circuitEditor;
+
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
   protected MousePosition mousePosition;
   protected KeyboardButtons keyboardButtons;
 
+  protected CircuitEditor circuitEditor;
   protected View placementView;
 
-  public SimulatorEditor(CircuitEditor circuitEditor)
+  public SimulatorEditor()
   {
-    this.circuitEditor = circuitEditor;
     this.viewport = new Viewport(this);
 
     this.mouseMotion = new MouseMotion();
@@ -37,7 +38,8 @@ public class SimulatorEditor
 
     this.keyboardButtons = new KeyboardButtons();
 
-    this.placementView = new ClockView(circuitEditor, new Position(0, 0), Rotation.NORTH);
+    this.circuitEditor = new CircuitEditor();
+    this.placementView = new ClockView(circuitEditor, new Position(0, 0), Rotation.NORTH, false);
   }
 
   public void windowClosing()
@@ -54,6 +56,8 @@ public class SimulatorEditor
 
     if (placementView != null)
     {
+      circuitEditor.ensureSimulation();
+      placementView.enable(circuitEditor.simulation);
       placementView = null;
     }
   }
@@ -162,6 +166,11 @@ public class SimulatorEditor
         circuitEditor.remove((IntegratedCircuitView<?>) placementView);
         placementView = null;
       }
+    }
+
+    if ((keyCode == KeyEvent.VK_T) && keyboardButtons.pressed(KeyEvent.VK_CONTROL))
+    {
+      circuitEditor.runSimultaneous();
     }
   }
 

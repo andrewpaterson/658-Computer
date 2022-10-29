@@ -20,14 +20,17 @@ public class Circuit
   {
     for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
     {
-      if (!integratedCircuit.isStateless())
+      if (integratedCircuit.isEnabled())
       {
-        State state = simulation.getState(integratedCircuit);
-        if (state == null)
+        if (!integratedCircuit.isStateless())
         {
-          state = integratedCircuit.simulationStarted(simulation);
+          State state = simulation.getState(integratedCircuit);
+          if (state == null)
+          {
+            state = integratedCircuit.simulationStarted(simulation);
+          }
+          integratedCircuit.setState(state);
         }
-        integratedCircuit.setState(state);
       }
     }
   }
@@ -37,11 +40,7 @@ public class Circuit
     Simulation simulation = new Simulation();
     for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
     {
-      if (!integratedCircuit.isStateless())
-      {
-        State state = integratedCircuit.simulationStarted(simulation);
-        integratedCircuit.setState(state);
-      }
+      integratedCircuit.reset(simulation);
     }
     return simulation;
   }

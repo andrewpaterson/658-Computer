@@ -63,63 +63,72 @@ public class Timeline
   {
     for (; ; )
     {
-      SimultaneousEvents events = this.events.findFirst();
-      if (events != null)
-      {
-        if (events.time > time)
-        {
-          time = events.time;
-        }
-        else
-        {
-          throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
-        }
-
-        Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
-        for (Event event : events.events)
-        {
-          if (event instanceof TraceEvent)
-          {
-            TraceEvent traceEvent = (TraceEvent) event;
-            TraceNet trace = traceEvent.getTrace();
-            trace.update(traceEvent.getVoltage());
-
-            List<Port> ports = trace.getInputPorts();
-            for (Port port : ports)
-            {
-              IntegratedCircuit<?, ?> integratedCircuit = port.getPins().getIntegratedCircuit();
-              List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
-              if (inputPorts == null)
-              {
-                inputPorts = new ArrayList<>();
-                integratedCircuits.put(integratedCircuit, inputPorts);
-              }
-              inputPorts.add(port);
-            }
-            trace.remove(traceEvent);
-          }
-          else if (event instanceof ClockEvent)
-          {
-            ClockEvent clockEvent = (ClockEvent) event;
-            IntegratedCircuit<?, ?> integratedCircuit = clockEvent.getIntegratedCircuit();
-            integratedCircuit.clockChanged(simulation);
-          }
-        }
-
-        for (Map.Entry<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
-        {
-          IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitListEntry.getKey();
-          List<Port> ports = integratedCircuitListEntry.getValue();
-          integratedCircuit.inputTraceChanged(simulation, ports);
-        }
-
-        this.events.remove(events);
-        events.done();
-      }
-      else
+      if (!runSimultaneous())
       {
         break;
       }
+    }
+  }
+
+  public boolean runSimultaneous()
+  {
+    SimultaneousEvents events = this.events.findFirst();
+    if (events != null)
+    {
+      if (events.time > time)
+      {
+        time = events.time;
+      }
+      else
+      {
+        throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+      }
+
+      Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
+      for (Event event : events.events)
+      {
+        if (event instanceof TraceEvent)
+        {
+          TraceEvent traceEvent = (TraceEvent) event;
+          TraceNet trace = traceEvent.getTrace();
+          trace.update(traceEvent.getVoltage());
+
+          List<Port> ports = trace.getInputPorts();
+          for (Port port : ports)
+          {
+            IntegratedCircuit<?, ?> integratedCircuit = port.getPins().getIntegratedCircuit();
+            List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
+            if (inputPorts == null)
+            {
+              inputPorts = new ArrayList<>();
+              integratedCircuits.put(integratedCircuit, inputPorts);
+            }
+            inputPorts.add(port);
+          }
+          trace.remove(traceEvent);
+        }
+        else if (event instanceof ClockEvent)
+        {
+          ClockEvent clockEvent = (ClockEvent) event;
+          IntegratedCircuit<?, ?> integratedCircuit = clockEvent.getIntegratedCircuit();
+          integratedCircuit.clockChanged(simulation);
+        }
+      }
+
+      for (Map.Entry<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
+      {
+        IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitListEntry.getKey();
+        List<Port> ports = integratedCircuitListEntry.getValue();
+        integratedCircuit.inputTraceChanged(simulation, ports);
+      }
+
+      this.events.remove(events);
+      events.done();
+      return true;
+    }
+    else
+    {
+      return false;
     }
   }
 

@@ -34,6 +34,11 @@ public class Simulation
     timeline.run();
   }
 
+  public boolean runSimultaneous()
+  {
+    return timeline.runSimultaneous();
+  }
+
   public State getState(IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit)
   {
     return states.get(integratedCircuit);

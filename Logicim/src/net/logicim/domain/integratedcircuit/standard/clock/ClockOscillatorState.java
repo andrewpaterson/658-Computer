@@ -11,7 +11,7 @@ public class ClockOscillatorState
   public ClockOscillatorState(IntegratedCircuit<ClockOscillatorPins, ClockOscillatorState> parent)
   {
     super(parent);
-    state = true;
+    state = false;
   }
 
   public void tick()

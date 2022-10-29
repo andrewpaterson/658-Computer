@@ -16,10 +16,16 @@ public class Float2D
     this.y = y;
   }
 
-  public void set(Float2D position)
+  public Float2D(Int2D p)
   {
-    this.x = position.x;
-    this.y = position.y;
+    this.x = p.x;
+    this.y = p.y;
+  }
+
+  public void set(Float2D p)
+  {
+    this.x = p.x;
+    this.y = p.y;
   }
 
   public void set(float x, float y)
@@ -28,10 +34,16 @@ public class Float2D
     this.y = y;
   }
 
-  public void subtract(Float2D position)
+  public void subtract(Float2D p)
   {
-    this.x -= position.x;
-    this.y -= position.y;
+    this.x -= p.x;
+    this.y -= p.y;
+  }
+
+  public void add(Float2D p)
+  {
+    this.x += p.x;
+    this.y += p.y;
   }
 
   @Override

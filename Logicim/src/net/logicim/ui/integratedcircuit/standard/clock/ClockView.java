@@ -34,17 +34,20 @@ public class ClockView
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
-    Stroke stroke = graphics.getStroke();
-    Color color = graphics.getColor();
+    if (rectangle != null)
+    {
+      Stroke stroke = graphics.getStroke();
+      Color color = graphics.getColor();
 
-    rectangle.paint(graphics, viewport, rotation, position);
+      rectangle.paint(graphics, viewport, rotation, position);
 
-    paintClockWaveform(graphics, viewport);
+      paintClockWaveform(graphics, viewport);
 
-    super.paint(graphics, viewport);
+      super.paint(graphics, viewport);
 
-    graphics.setStroke(stroke);
-    graphics.setColor(color);
+      graphics.setStroke(stroke);
+      graphics.setColor(color);
+    }
   }
 
   private void paintClockWaveform(Graphics2D graphics, Viewport viewport)

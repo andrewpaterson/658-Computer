@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 
@@ -83,28 +82,13 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
-    Int2D position = new Int2D();
     for (PortView portView : ports)
     {
-      position.set(portView.position);
-      rotation.transform(position);
-      int x = viewport.transformGridToScreenSpaceX(position.x + this.position.x);
-      int y = viewport.transformGridToScreenSpaceY(position.y + this.position.y);
-      int lineWidth = (int) (viewport.getCircleRadius() * 3);
-
-      Port port = portView.getPort();
-      Uniport uniport = (Uniport) port;
-      Color color = getColorForVoltage(viewport, uniport.getVoltage());
-
-      graphics.setColor(color);
-      graphics.fillOval(x - lineWidth,
-                        y - lineWidth,
-                        lineWidth * 2,
-                        lineWidth * 2);
+      portView.paint(graphics, viewport, rotation, this.position);
     }
   }
 
-  protected Color getColorForVoltage(Viewport viewport, float voltage)
+  public static Color getColorForVoltage(Viewport viewport, float voltage)
   {
     Color color;
     Colours colours = viewport.getColours();

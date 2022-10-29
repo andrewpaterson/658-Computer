@@ -16,10 +16,10 @@ public class Int2D
     this.y = y;
   }
 
-  public void set(Int2D position)
+  public void set(Int2D p)
   {
-    this.x = position.x;
-    this.y = position.y;
+    this.x = p.x;
+    this.y = p.y;
   }
 
   public void set(int x, int y)
@@ -28,16 +28,22 @@ public class Int2D
     this.y = y;
   }
 
-  public void subtract(Int2D position)
+  public void subtract(Int2D p)
   {
-    this.x -= position.x;
-    this.y -= position.y;
+    this.x -= p.x;
+    this.y -= p.y;
+  }
+
+  public void add(Int2D p)
+  {
+    this.x += p.x;
+    this.y += p.y;
   }
 
   @Override
   public Int2D clone()
   {
-    return new Int2D(x,y);
+    return new Int2D(x, y);
   }
 
   @Override

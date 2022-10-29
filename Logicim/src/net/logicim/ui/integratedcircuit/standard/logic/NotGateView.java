@@ -13,6 +13,8 @@ import net.logicim.ui.shape.PolygonView;
 
 import java.awt.*;
 
+import static net.logicim.ui.common.Rotation.NORTH;
+
 public class NotGateView
     extends IntegratedCircuitView<NotGate>
 {
@@ -27,23 +29,27 @@ public class NotGateView
           position,
           rotation);
     new PortView(this, this.integratedCircuit.getPort("Input"), new Int2D(0, 1));
-    new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
+    new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1)).setInverting(true, NORTH);
+    validatePorts();
 
-    polygon = new PolygonView(new Int2D(0, -1), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
+    polygon = new PolygonView(new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
   }
 
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
-    Stroke stroke = graphics.getStroke();
-    Color color = graphics.getColor();
+    if (polygon != null)
+    {
+      Stroke stroke = graphics.getStroke();
+      Color color = graphics.getColor();
 
-    polygon.paint(graphics, viewport, rotation, position);
+      polygon.paint(graphics, viewport, rotation, position);
 
-    super.paint(graphics, viewport);
+      super.paint(graphics, viewport);
 
-    graphics.setStroke(stroke);
-    graphics.setColor(color);
+      graphics.setStroke(stroke);
+      graphics.setColor(color);
+    }
   }
 }
 

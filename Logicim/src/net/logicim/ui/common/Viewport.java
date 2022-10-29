@@ -1,5 +1,7 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.type.Int2D;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -139,7 +141,7 @@ public class Viewport
     }
   }
 
-  public void scroll(Position relative)
+  public void scroll(Int2D relative)
   {
     position.x -= relative.x;
     position.y -= relative.y;

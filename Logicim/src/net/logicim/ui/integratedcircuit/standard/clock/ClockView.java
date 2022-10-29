@@ -1,5 +1,6 @@
-package net.logicim.ui.clock;
+package net.logicim.ui.integratedcircuit.standard.clock;
 
+import net.logicim.common.type.Int2D;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.ui.CircuitEditor;
@@ -12,13 +13,13 @@ import static net.logicim.domain.common.Units.Hz;
 public class ClockView
     extends IntegratedCircuitView<ClockOscillator>
 {
-  public ClockView(CircuitEditor circuitEditor, Position position, Rotation rotation, boolean enabled)
+  public ClockView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
     super(circuitEditor,
           new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), 1 * Hz),
           position,
           rotation);
-    new PortView(this, this.integratedCircuit.getPort("Out"), new Position(0, -1));
+    new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
     validatePorts();
   }
 

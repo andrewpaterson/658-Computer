@@ -1,23 +1,23 @@
 package net.logicim.ui.input;
 
-import net.logicim.ui.common.Position;
+import net.logicim.common.type.Int2D;
 
 public class MouseMotion
 {
-  protected Position previous;
-  protected Position current;
-  protected Position relative;
+  protected Int2D previous;
+  protected Int2D current;
+  protected Int2D relative;
   protected boolean previousValid;
 
   public MouseMotion()
   {
-    previous = new Position(0, 0);
-    current = new Position(0, 0);
-    relative = new Position(0, 0);
+    previous = new Int2D(0, 0);
+    current = new Int2D(0, 0);
+    relative = new Int2D(0, 0);
     previousValid = false;
   }
 
-  public Position moved(int x, int y)
+  public Int2D moved(int x, int y)
   {
     current.set(x, y);
 

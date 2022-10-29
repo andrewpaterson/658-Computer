@@ -1,6 +1,7 @@
 package net.logicim.ui.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
@@ -20,7 +21,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
 
   public IntegratedCircuitView(CircuitEditor circuitEditor,
                                IC integratedCircuit,
-                               Position position,
+                               Int2D position,
                                Rotation rotation)
   {
     super(circuitEditor, position, rotation);
@@ -82,7 +83,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
-    Position position = new Position();
+    Int2D position = new Int2D();
     for (PortView portView : ports)
     {
       position.set(portView.position);

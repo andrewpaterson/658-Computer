@@ -1,5 +1,8 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.type.Float2D;
+import net.logicim.common.type.Int2D;
+
 public enum Rotation
 {
   CANNOT,
@@ -59,7 +62,23 @@ public enum Rotation
   }
 
   @SuppressWarnings("SuspiciousNameCombination")
-  public void transform(Position p)
+  public void transform(Int2D p)
+  {
+    switch (this)
+    {
+      case EAST:
+        p.set(p.y, -p.x);
+        break;
+      case SOUTH:
+        p.set(-p.x, -p.y);
+        break;
+      case WEST:
+        p.set(-p.y, p.x);
+        break;
+    }
+  }
+  @SuppressWarnings("SuspiciousNameCombination")
+  public void transform(Float2D p)
   {
     switch (this)
     {

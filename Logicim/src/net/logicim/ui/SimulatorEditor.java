@@ -1,12 +1,13 @@
 package net.logicim.ui;
 
-import net.logicim.domain.Simulation;
-import net.logicim.ui.clock.ClockView;
+import net.logicim.common.type.Int2D;
+import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.MouseButtons;
 import net.logicim.ui.input.MouseMotion;
 import net.logicim.ui.input.MousePosition;
+import net.logicim.ui.integratedcircuit.standard.logic.NotGateView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -39,7 +40,7 @@ public class SimulatorEditor
     this.keyboardButtons = new KeyboardButtons();
 
     this.circuitEditor = new CircuitEditor();
-    this.placementView = new ClockView(circuitEditor, new Position(0, 0), Rotation.NORTH, false);
+    this.placementView = null;
   }
 
   public void windowClosing()
@@ -77,7 +78,7 @@ public class SimulatorEditor
   {
     mousePosition.set(x, y);
 
-    Position moved = mouseMotion.moved(x, y);
+    Int2D moved = mouseMotion.moved(x, y);
     if (mouseButtons.pressed(MouseEvent.BUTTON2))
     {
       if (moved != null)
@@ -133,7 +134,7 @@ public class SimulatorEditor
   {
     if (placementView != null)
     {
-      Position position = mousePosition.get();
+      Int2D position = mousePosition.get();
       if (position != null)
       {
         int x = viewport.transformScreenToGridX(position.x);
@@ -163,14 +164,57 @@ public class SimulatorEditor
 
       if (keyCode == KeyEvent.VK_ESCAPE)
       {
-        circuitEditor.remove((IntegratedCircuitView<?>) placementView);
-        placementView = null;
+        discardPlacement();
       }
     }
 
     if ((keyCode == KeyEvent.VK_T) && keyboardButtons.pressed(KeyEvent.VK_CONTROL))
     {
       circuitEditor.runSimultaneous();
+    }
+
+    if ((keyCode == KeyEvent.VK_C) && keyboardButtons.pressed(KeyEvent.VK_SHIFT))
+    {
+      Int2D position = getMousePositionOnGrid();
+      if (position != null)
+      {
+        discardPlacement();
+        placementView = new ClockView(circuitEditor, position, Rotation.NORTH);
+      }
+    }
+
+    if ((keyCode == KeyEvent.VK_N) && keyboardButtons.pressed(KeyEvent.VK_SHIFT))
+    {
+      Int2D position = getMousePositionOnGrid();
+      if (position != null)
+      {
+        discardPlacement();
+        placementView = new NotGateView(circuitEditor, position, Rotation.NORTH);
+      }
+    }
+  }
+
+  private Int2D getMousePositionOnGrid()
+  {
+    Int2D position = mousePosition.get();
+    if (position != null)
+    {
+      int x = viewport.transformScreenToGridX(position.x);
+      int y = viewport.transformScreenToGridY(position.y);
+      return new Int2D(x, y);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  private void discardPlacement()
+  {
+    if (placementView != null)
+    {
+      circuitEditor.remove((IntegratedCircuitView<?>) placementView);
+      placementView = null;
     }
   }
 

@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 
@@ -8,10 +9,10 @@ import java.awt.*;
 public abstract class View
 {
   protected CircuitEditor circuitEditor;
-  protected Position position;
+  protected Int2D position;
   protected Rotation rotation;
 
-  public View(CircuitEditor circuitEditor, Position position, Rotation rotation)
+  public View(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
     this.circuitEditor = circuitEditor;
     this.position = position;

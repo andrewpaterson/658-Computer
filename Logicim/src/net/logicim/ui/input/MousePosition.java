@@ -1,15 +1,15 @@
 package net.logicim.ui.input;
 
-import net.logicim.ui.common.Position;
+import net.logicim.common.type.Int2D;
 
 public class MousePosition
 {
-  Position position;
+  Int2D position;
   boolean valid;
 
   public MousePosition()
   {
-    position = new Position(0, 0);
+    position = new Int2D(0, 0);
     valid = false;
   }
 
@@ -24,7 +24,7 @@ public class MousePosition
     valid = false;
   }
 
-  public Position get()
+  public Int2D get()
   {
     if (valid)
     {

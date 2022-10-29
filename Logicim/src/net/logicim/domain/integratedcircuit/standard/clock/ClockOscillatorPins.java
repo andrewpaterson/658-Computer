@@ -17,7 +17,7 @@ public class ClockOscillatorPins
     super();
     output = new Uniport(Output,
                          this,
-                         "Out",
+                         "Output",
                          new BistateOutputPropagation("",
                                                       0.0f,
                                                       3.3f,

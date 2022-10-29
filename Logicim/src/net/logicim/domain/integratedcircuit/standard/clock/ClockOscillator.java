@@ -6,7 +6,6 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
-import net.logicim.domain.common.trace.TraceValue;
 
 import java.util.List;
 
@@ -34,7 +33,6 @@ public class ClockOscillator
     simulation.getTimeline().createClockEvent(halfCycleTime, this);
     pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
   }
-
 
   @Override
   public ClockOscillatorState simulationStarted(Simulation simulation)

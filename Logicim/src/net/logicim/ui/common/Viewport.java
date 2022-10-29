@@ -52,6 +52,16 @@ public class Viewport
     return (int) (y * scale * zoom);
   }
 
+  public int transformGridToScreenWidth(float x)
+  {
+    return (int) (x * scale * zoom);
+  }
+
+  public int transformGridToScreenHeight(float y)
+  {
+    return (int) (y * scale * zoom);
+  }
+
   public int transformScreenToGridX(int x)
   {
     return (int) ((((x - size.getWidth() / 2) - position.x) / (scale * zoom)) - 0.5f);

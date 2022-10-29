@@ -92,7 +92,7 @@ public class SimulatorEditor
 
   public void paint(Graphics2D graphics)
   {
-    graphics.setColor(Color.WHITE);
+    graphics.setColor(viewport.getColours().getBackground());
     graphics.fillRect(0, 0, width, height);
 
     viewport.paintGrid(graphics);

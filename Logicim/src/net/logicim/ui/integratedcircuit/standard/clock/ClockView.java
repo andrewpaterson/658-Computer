@@ -4,7 +4,11 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.*;
+import net.logicim.ui.common.IntegratedCircuitView;
+import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.Viewport;
+import net.logicim.ui.shape.RectangleView;
 
 import java.awt.*;
 
@@ -13,6 +17,8 @@ import static net.logicim.domain.common.Units.Hz;
 public class ClockView
     extends IntegratedCircuitView<ClockOscillator>
 {
+  protected RectangleView rectangle;
+
   public ClockView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
     super(circuitEditor,
@@ -21,6 +27,8 @@ public class ClockView
           rotation);
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
     validatePorts();
+
+    rectangle = new RectangleView(2, 2);
   }
 
   @Override
@@ -29,15 +37,7 @@ public class ClockView
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
 
-    int left = viewport.transformGridToScreenSpaceX(position.x - 1);
-    int top = viewport.transformGridToScreenSpaceY(position.y - 1);
-    int width = viewport.transformGridToScreenWidth(2);
-    int height = viewport.transformGridToScreenHeight(2);
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.setColor(Color.WHITE);
-    graphics.fillRect(left, top, width, height);
-    graphics.setColor(Color.BLACK);
-    graphics.drawRect(left, top, width, height);
+    rectangle.paint(graphics, viewport, rotation, position);
 
     paintClockWaveform(graphics, viewport);
 

@@ -72,7 +72,10 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public void setState(State state)
   {
-    this.state = (STATE) state;
+    if (!isStateless())
+    {
+      this.state = (STATE) state;
+    }
   }
 
   public boolean isEnabled()

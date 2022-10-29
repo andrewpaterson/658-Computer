@@ -6,9 +6,10 @@ import java.awt.*;
 
 public class Colours
 {
+  protected Color background;
+
   protected Color smallGridDotColor;
   protected Color largeGridDotColor;
-  protected Color chipBorderColor;
 
   protected Color traceUndriven;
   protected Color traceUnsettled;
@@ -16,11 +17,14 @@ public class Colours
 
   Color[] voltageColours;
 
+  protected Color shapeBorder;
+  protected Color shapeFill;
+
   public Colours()
   {
+    background = Color.WHITE;
     smallGridDotColor = new Color(0xCBCBCB);
     largeGridDotColor = new Color(0xABABAB);
-    chipBorderColor = Color.BLACK;
     traceUnsettled = new Color(70, 160, 170);
     traceUndriven = new Color(70, 70, 70);
     traceError = new Color(255, 0, 0);
@@ -31,6 +35,9 @@ public class Colours
                             new Color(0, 180, 0), 33,
                             new Color(100, 255, 100), 50,
                             new Color(255, 253, 75, 255), 70);
+
+     shapeBorder = Color.BLACK;
+     shapeFill = new Color(224, 224, 224);
   }
 
   public Color getSmallGridDotColor()
@@ -41,11 +48,6 @@ public class Colours
   public Color getLargeGridDotColor()
   {
     return largeGridDotColor;
-  }
-
-  public Color getChipBorderColor()
-  {
-    return chipBorderColor;
   }
 
   public Color getTraceUndriven()
@@ -61,6 +63,21 @@ public class Colours
   public Color getTraceError()
   {
     return traceError;
+  }
+
+  public Color getBackground()
+  {
+    return background;
+  }
+
+  public Color getShapeBorder()
+  {
+    return shapeBorder;
+  }
+
+  public Color getShapeFill()
+  {
+    return shapeFill;
   }
 
   public Color getTraceVoltage(float voltage)

@@ -30,9 +30,9 @@ public class NotGateView
           rotation);
     new PortView(this, this.integratedCircuit.getPort("Input"), new Int2D(0, 1));
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1)).setInverting(true, NORTH);
-    validatePorts();
 
-    polygon = new PolygonView(new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
+    polygon = new PolygonView(this, new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
+    finaliseView();
   }
 
   @Override

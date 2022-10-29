@@ -82,6 +82,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
+    super.paint(graphics, viewport);
     for (PortView portView : ports)
     {
       portView.paint(graphics, viewport, rotation, this.position);
@@ -121,6 +122,13 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   {
     super.enable(simulation);
     integratedCircuit.enable(simulation);
+  }
+
+  @Override
+  protected void finaliseView()
+  {
+    super.finaliseView();
+    validatePorts();
   }
 }
 

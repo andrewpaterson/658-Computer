@@ -51,5 +51,17 @@ public class Int2D
   {
     set((Int2D) source);
   }
+
+  @Override
+  public float getX()
+  {
+    return x;
+  }
+
+  @Override
+  public float getY()
+  {
+    return y;
+  }
 }
 

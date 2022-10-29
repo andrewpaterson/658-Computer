@@ -26,9 +26,10 @@ public class ClockView
           position,
           rotation);
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
-    validatePorts();
 
-    rectangle = new RectangleView(2, 2);
+    rectangle = new RectangleView(this, 2, 2);
+
+    finaliseView();
   }
 
   @Override

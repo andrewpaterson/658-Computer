@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
@@ -17,8 +18,9 @@ public class RectangleView
   protected Tuple2 transformedDimension;
   protected Tuple2 transformedPosition;
 
-  public RectangleView(int width, int height)
+  public RectangleView(ShapeHolder shapeHolder, int width, int height)
   {
+    super(shapeHolder);
     this.dimension = new Int2D(width, height);
     if ((width % 2 == 0) && (height % 2 == 0))
     {
@@ -32,8 +34,9 @@ public class RectangleView
     transformedDimension = dimension.clone();
   }
 
-  public RectangleView(int width, int height, int offsetX, int offsetY)
+  public RectangleView(ShapeHolder shapeHolder, int width, int height, int offsetX, int offsetY)
   {
+    super(shapeHolder);
     this.dimension = new Int2D(width, height);
     this.position = new Int2D(offsetX, offsetY);
     transformedPosition = position.clone();
@@ -90,6 +93,15 @@ public class RectangleView
     graphics.fillRect(transformedLeft, transformedTop, transformedWidth, transformedHeight);
     graphics.setColor(viewport.getColours().getShapeBorder());
     graphics.drawRect(transformedLeft, transformedTop, transformedWidth, transformedHeight);
+  }
+
+  @Override
+  public void boundingBoxInclude(BoundingBox boundingBox)
+  {
+    float x = position.getX();
+    float y = position.getY();
+    boundingBox.include(x, y);
+    boundingBox.include(x + dimension.getX(), y + dimension.getY());
   }
 }
 

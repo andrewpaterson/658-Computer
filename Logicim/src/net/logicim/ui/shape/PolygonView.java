@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
@@ -14,18 +15,19 @@ public class PolygonView
     extends ShapeView
 {
   protected List<Tuple2> points;
-  protected List<Tuple2> transformBuffer;
+  protected List<Tuple2> transformedBuffer;
   protected int[] xArray;
   protected int[] yArray;
 
-  public PolygonView(Tuple2... points)
+  public PolygonView(ShapeHolder shapeHolder, Tuple2... points)
   {
+    super(shapeHolder);
     this.points = new ArrayList<>(points.length);
-    this.transformBuffer = new ArrayList<>(points.length);
+    this.transformedBuffer = new ArrayList<>(points.length);
     for (Tuple2 point : points)
     {
       this.points.add(point);
-      this.transformBuffer.add(point.clone());
+      this.transformedBuffer.add(point.clone());
     }
 
     xArray = new int[points.length];
@@ -36,12 +38,12 @@ public class PolygonView
   {
     for (int i = 0; i < points.size(); i++)
     {
-      rotate(transformBuffer.get(i), points.get(i), rotation);
+      rotate(transformedBuffer.get(i), points.get(i), rotation);
     }
 
-    for (int i = 0; i < transformBuffer.size(); i++)
+    for (int i = 0; i < transformedBuffer.size(); i++)
     {
-      Tuple2 tuple2 = transformBuffer.get(i);
+      Tuple2 tuple2 = transformedBuffer.get(i);
       if (tuple2 instanceof Int2D)
       {
         xArray[i] = viewport.transformGridToScreenSpaceX(((Int2D) tuple2).x + position.x);
@@ -58,13 +60,22 @@ public class PolygonView
   public void paint(Graphics2D graphics, Viewport viewport, Rotation rotation, Int2D position)
   {
     transform(rotation, position, viewport);
-    Polygon p = new Polygon(xArray, yArray, transformBuffer.size());
+    Polygon p = new Polygon(xArray, yArray, transformedBuffer.size());
 
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
     graphics.setColor(viewport.getColours().getShapeFill());
     graphics.fillPolygon(p);
     graphics.setColor(viewport.getColours().getShapeBorder());
     graphics.drawPolygon(p);
+  }
+
+  @Override
+  public void boundingBoxInclude(BoundingBox boundingBox)
+  {
+    for (Tuple2 point : points)
+    {
+      boundingBox.include(point);
+    }
   }
 }
 

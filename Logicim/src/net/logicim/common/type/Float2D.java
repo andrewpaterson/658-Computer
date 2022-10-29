@@ -57,5 +57,29 @@ public class Float2D
   {
     set((Float2D) source);
   }
+
+  @Override
+  public float getX()
+  {
+    return x;
+  }
+
+  @Override
+  public float getY()
+  {
+    return y;
+  }
+
+  public void add(float x, float y)
+  {
+    this.x += x;
+    this.y += y;
+  }
+
+  public void subtract(float x, float y)
+  {
+    this.x -= x;
+    this.y -= y;
+  }
 }
 

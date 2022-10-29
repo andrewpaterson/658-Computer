@@ -77,22 +77,7 @@ public class RectangleView
       transformedTop = viewport.transformGridToScreenSpaceY(position.y + ((Float2D) transformedPosition).y);
     }
 
-    if (transformedWidth < 0)
-    {
-      transformedLeft += transformedWidth;
-      transformedWidth *= -1;
-    }
-    if (transformedHeight < 0)
-    {
-      transformedTop += transformedHeight;
-      transformedHeight *= -1;
-    }
-
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.setColor(viewport.getColours().getShapeFill());
-    graphics.fillRect(transformedLeft, transformedTop, transformedWidth, transformedHeight);
-    graphics.setColor(viewport.getColours().getShapeBorder());
-    graphics.drawRect(transformedLeft, transformedTop, transformedWidth, transformedHeight);
+    viewport.paintRectangle(graphics, transformedLeft, transformedTop, transformedWidth, transformedHeight, new BasicStroke(viewport.getLineWidth()), viewport.getColours().getShapeFill(), viewport.getColours().getShapeBorder());
   }
 
   @Override

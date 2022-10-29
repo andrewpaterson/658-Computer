@@ -130,5 +130,15 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     super.finaliseView();
     validatePorts();
   }
+
+  @Override
+  protected void updateBoundingBox()
+  {
+    for (PortView port : ports)
+    {
+      port.updateBoundingBox(boundingBox);
+    }
+    super.updateBoundingBox();
+  }
 }
 

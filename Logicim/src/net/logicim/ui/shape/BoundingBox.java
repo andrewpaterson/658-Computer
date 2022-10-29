@@ -25,14 +25,25 @@ public class BoundingBox
 
   public void include(Tuple2 tuple)
   {
-    include(tuple.getX(), tuple.getY());
+    include(tuple.getX(), tuple.getY(), 0);
+
+  }
+
+  public void include(Tuple2 tuple, float radius)
+  {
+    include(tuple.getX(), tuple.getY(), radius);
   }
 
   public void include(float x, float y)
   {
+    include(x, y, 0);
+  }
+
+  public void include(float x, float y, float radius)
+  {
     if (topLeft == null)
     {
-      topLeft = new Float2D(x, y);
+      topLeft = new Float2D(x - radius, y - radius);
     }
     else
     {
@@ -48,7 +59,7 @@ public class BoundingBox
 
     if (bottomRight == null)
     {
-      bottomRight = new Float2D(x, y);
+      bottomRight = new Float2D(x + radius, y + radius);
     }
     else
     {
@@ -61,6 +72,12 @@ public class BoundingBox
         bottomRight.y = y;
       }
     }
+  }
+
+  public void grow(float size)
+  {
+    topLeft.subtract(size, size);
+    bottomRight.add(size, size);
   }
 
   public void transform(Rotation r)
@@ -88,12 +105,6 @@ public class BoundingBox
   public float getTransformedHeight()
   {
     return transformedHeight;
-  }
-
-  public void grow(float size)
-  {
-    topLeft.subtract(size, size);
-    bottomRight.add(size, size);
   }
 }
 

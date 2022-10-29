@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
+import net.logicim.ui.shape.BoundingBox;
 
 import java.awt.*;
 
@@ -20,6 +21,7 @@ public class PortView
   protected boolean overline;
   protected Float2D bubbleCenter;
   protected Float2D transformedBubbleCenter;
+  protected float bubbleDiameter;
 
   public PortView(IntegratedCircuitView<?> integratedCircuitView, Port port, Int2D position)
   {
@@ -29,6 +31,7 @@ public class PortView
     this.integratedCircuitView.addPortView(this);
     this.bubbleCenter = null;
     this.transformedPosition = position.clone();
+    this.bubbleDiameter = 0.9f;
   }
 
   public PortView setInverting(boolean inverting, Rotation facing)
@@ -71,8 +74,9 @@ public class PortView
       int x = viewport.transformGridToScreenSpaceX(transformedBubbleCenter.x + position.x);
       int y = viewport.transformGridToScreenSpaceY(transformedBubbleCenter.y + position.y);
 
+      graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
       graphics.setColor(viewport.getColours().getShapeBorder());
-      int diameter = viewport.transformGridToScreenWidth(0.9f);
+      int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
       graphics.drawOval(x - diameter / 2,
                         y - diameter / 2,
                         diameter,
@@ -95,6 +99,15 @@ public class PortView
                       lineWidth * 2,
                       lineWidth * 2);
 
+  }
+
+  public void updateBoundingBox(BoundingBox boundingBox)
+  {
+    if (inverting)
+    {
+      boundingBox.include(bubbleCenter, bubbleDiameter / 2);
+    }
+    boundingBox.include(position);
   }
 }
 

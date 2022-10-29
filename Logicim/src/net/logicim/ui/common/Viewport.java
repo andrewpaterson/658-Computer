@@ -64,12 +64,14 @@ public class Viewport
 
   public int transformScreenToGridX(int x)
   {
-    return (int) ((((x - size.getWidth() / 2) - position.x) / (scale * zoom)) - 0.5f);
+    int center = x - size.getWidth() / 2;
+    return Math.round((center - position.x) / (scale * zoom));
   }
 
   public int transformScreenToGridY(int y)
   {
-    return (int) ((((y - size.getHeight() / 2) - position.y) / (scale * zoom)) - 0.5f);
+    int center = y - size.getHeight() / 2;
+    return Math.round((center - position.y) / (scale * zoom));
   }
 
   public float getLineWidth()
@@ -83,6 +85,7 @@ public class Viewport
       return zoom * 2.0f;
     }
   }
+
   public float getCircleRadius()
   {
     if (zoom < 0.3)
@@ -132,7 +135,7 @@ public class Viewport
       {
         int transformX = transformGridToScreenSpaceX(left + x);
         int zoomHalf = (int) (zoom * 0.5);
-        graphics.fillOval(transformX - zoomHalf, transformY - zoomHalf , (int) zoom, (int) zoom);
+        graphics.fillOval(transformX - zoomHalf, transformY - zoomHalf, (int) zoom, (int) zoom);
       }
     }
   }
@@ -173,6 +176,39 @@ public class Viewport
   public Colours getColours()
   {
     return colours;
+  }
+
+  public void paintRectangle(Graphics2D graphics,
+                             int x,
+                             int y,
+                             int width,
+                             int height,
+                             Stroke stroke,
+                             Color shapeFill,
+                             Color shapeBorder)
+  {
+    if (width < 0)
+    {
+      x += width;
+      width *= -1;
+    }
+    if (height < 0)
+    {
+      y += height;
+      height *= -1;
+    }
+
+    graphics.setStroke(stroke);
+    if (shapeFill != null)
+    {
+      graphics.setColor(shapeFill);
+      graphics.fillRect(x, y, width, height);
+    }
+    if (shapeBorder != null)
+    {
+      graphics.setColor(shapeBorder);
+      graphics.drawRect(x, y, width, height);
+    }
   }
 }
 

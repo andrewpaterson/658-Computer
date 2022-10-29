@@ -1,12 +1,12 @@
 package net.logicim.ui;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.MouseButtons;
 import net.logicim.ui.input.MouseMotion;
 import net.logicim.ui.input.MousePosition;
+import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.integratedcircuit.standard.logic.NotGateView;
 
 import java.awt.*;
@@ -87,7 +87,25 @@ public class SimulatorEditor
       }
     }
 
-    paintPlacementView();
+    calculatePlacementViewPosition();
+  }
+
+  private void debugPosition(Graphics2D graphics)
+  {
+    Int2D position = mousePosition.get();
+    if (position != null)
+    {
+      int x = viewport.transformScreenToGridX(position.x);
+      int y = viewport.transformScreenToGridY(position.y);
+
+      int screenSpaceX = viewport.transformGridToScreenSpaceX(x);
+      int screenSpaceY = viewport.transformGridToScreenSpaceY(y);
+
+      graphics.setColor(Color.RED);
+      graphics.drawOval(screenSpaceX - 3, screenSpaceY - 3, 6, 6);
+
+      graphics.drawString("" + x + ", " + y, screenSpaceX - 30, screenSpaceY- 10);
+    }
   }
 
   public void paint(Graphics2D graphics)
@@ -97,6 +115,8 @@ public class SimulatorEditor
 
     viewport.paintGrid(graphics);
     circuitEditor.paint(graphics, viewport);
+
+    debugPosition(graphics);
   }
 
   public void mouseExited()
@@ -127,10 +147,10 @@ public class SimulatorEditor
     int rotation = mouseButtons.getRotation();
     viewport.zoom((float) rotation / 10.0f);
 
-    paintPlacementView();
+    calculatePlacementViewPosition();
   }
 
-  private void paintPlacementView()
+  private void calculatePlacementViewPosition()
   {
     if (placementView != null)
     {

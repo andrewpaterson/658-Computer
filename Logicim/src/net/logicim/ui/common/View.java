@@ -43,7 +43,7 @@ public abstract class View
     updateBoundingBox();
   }
 
-  private void updateBoundingBox()
+  protected void updateBoundingBox()
   {
     for (ShapeView shape : shapes)
     {
@@ -59,15 +59,17 @@ public abstract class View
     {
       throw new SimulatorException("View [" + getClass().getSimpleName() + "] is not finalised.");
     }
+  }
 
+  protected void paintBoundingBox(Graphics2D graphics, Viewport viewport)
+  {
     boundingBox.transform(rotation);
     int x = viewport.transformGridToScreenSpaceX(boundingBox.getTransformedTopLeft().x + position.x);
     int y = viewport.transformGridToScreenSpaceY(boundingBox.getTransformedTopLeft().y + position.y);
     int width = viewport.transformGridToScreenWidth(boundingBox.getTransformedWidth());
     int height = viewport.transformGridToScreenHeight(boundingBox.getTransformedHeight());
 
-    graphics.setColor(Color.ORANGE);
-    graphics.drawRect(x, y, width, height);
+    viewport.paintRectangle(graphics, x, y, width, height, new BasicStroke(1), null, Color.ORANGE);
   }
 
   public void rotateRight()

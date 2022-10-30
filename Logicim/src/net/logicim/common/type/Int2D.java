@@ -10,6 +10,12 @@ public class Int2D
   {
   }
 
+  public Int2D(Int2D p)
+  {
+    this.x = p.x;
+    this.y = p.y;
+  }
+
   public Int2D(int x, int y)
   {
     this.x = x;

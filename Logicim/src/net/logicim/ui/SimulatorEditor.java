@@ -36,7 +36,8 @@ public class SimulatorEditor
   protected CircuitEditor circuitEditor;
   protected View placementView;
   protected View hoverView;
-  private PortView hoverPortView;
+  protected PortView hoverPortView;
+  protected WirePull wirePull;
 
   public SimulatorEditor()
   {
@@ -62,6 +63,16 @@ public class SimulatorEditor
 
   public void tick(int tickCount)
   {
+    if (wirePull != null)
+    {
+      Int2D mousePosition = this.mousePosition.get();
+      if (mousePosition != null)
+      {
+        int x = viewport.transformScreenToGridX(mousePosition.x);
+        int y = viewport.transformScreenToGridY(mousePosition.y);
+        wirePull.update(x, y);
+      }
+    }
   }
 
   public void mousePressed(int x, int y, int button)
@@ -76,12 +87,28 @@ public class SimulatorEditor
         placementView.enable(circuitEditor.simulation);
         placementView = null;
       }
+      else if (hoverPortView != null)
+      {
+        if (wirePull == null)
+        {
+          wirePull = new WirePull();
+          hoverPortView.getGridPosition(wirePull.getFirstPosition());
+        }
+      }
     }
   }
 
   public void mouseReleased(int x, int y, int button)
   {
     mouseButtons.unset(button);
+
+    if (button == BUTTON1)
+    {
+      if (wirePull != null)
+      {
+        wirePull = null;
+      }
+    }
   }
 
   public void resized(int width, int height)
@@ -135,6 +162,11 @@ public class SimulatorEditor
     if (hoverPortView != null)
     {
       hoverPortView.paintHoverPort(graphics, viewport);
+    }
+
+    if (wirePull != null)
+    {
+      wirePull.paint(graphics, viewport);
     }
   }
 

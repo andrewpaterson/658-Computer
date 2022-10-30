@@ -1,4 +1,4 @@
-package net.logicim.ui.input;
+package net.logicim.ui.input.mouse;
 
 import net.logicim.common.type.Int2D;
 

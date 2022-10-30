@@ -37,7 +37,7 @@ public class Colours
                             new Color(255, 253, 75, 255), 70);
 
      shapeBorder = Color.BLACK;
-     shapeFill = new Color(224, 224, 224);
+     shapeFill = new Color(232, 232, 232);
   }
 
   public Color getSmallGridDotColor()

@@ -2,16 +2,21 @@ package net.logicim.ui;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.*;
+import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;
-import net.logicim.ui.input.MouseButtons;
-import net.logicim.ui.input.MouseMotion;
-import net.logicim.ui.input.MousePosition;
-import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
-import net.logicim.ui.integratedcircuit.standard.logic.NotGateView;
+import net.logicim.ui.input.action.InputAction;
+import net.logicim.ui.input.action.InputActions;
+import net.logicim.ui.input.mouse.MouseButtons;
+import net.logicim.ui.input.mouse.MouseMotion;
+import net.logicim.ui.input.mouse.MousePosition;
+import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
+import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+
+import static net.logicim.ui.input.action.ButtonState.*;
 
 public class SimulatorEditor
     implements PanelSize
@@ -20,6 +25,7 @@ public class SimulatorEditor
   private int height;
 
   protected Viewport viewport;
+  protected InputActions actions;
 
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
@@ -39,8 +45,12 @@ public class SimulatorEditor
 
     this.keyboardButtons = new KeyboardButtons();
 
+    this.actions = new InputActions(keyboardButtons, mouseButtons);
+
     this.circuitEditor = new CircuitEditor();
     this.placementView = null;
+
+    addActions();
   }
 
   public void windowClosing()
@@ -104,7 +114,7 @@ public class SimulatorEditor
       graphics.setColor(Color.RED);
       graphics.drawOval(screenSpaceX - 3, screenSpaceY - 3, 6, 6);
 
-      graphics.drawString("" + x + ", " + y, screenSpaceX - 30, screenSpaceY- 10);
+      graphics.drawString("" + x + ", " + y, screenSpaceX - 30, screenSpaceY - 10);
     }
   }
 
@@ -164,53 +174,54 @@ public class SimulatorEditor
     }
   }
 
+  private void addActions()
+  {
+    actions.add(new InputAction(new PlacementRotateLeft(this), KeyEvent.VK_R, Up, Up, Down));
+    actions.add(new InputAction(new PlacementRotateRight(this), KeyEvent.VK_R, Up, Up, Up));
+    actions.add(new InputAction(new StopCurrent(this), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
+    actions.add(new InputAction(new RunOneEvent(this), KeyEvent.VK_T, Up, Up, Up));
+    actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
+    actions.add(new InputAction(new CreatePlacementView(this, new NotGateViewFactory()), KeyEvent.VK_N, Up, Down, Up));
+  }
+
   public void keyPressed(int keyCode)
   {
     keyboardButtons.set(keyCode);
 
+    if (!(keyCode == KeyEvent.VK_ALT || keyCode == KeyEvent.VK_SHIFT || keyCode == KeyEvent.VK_CONTROL))
+    {
+      actions.keyPressed(keyCode);
+    }
+  }
+
+  public void createPlacementView(ViewFactory viewFactory)
+  {
+    Int2D position = getMousePositionOnGrid();
+    if (position != null)
+    {
+      discardPlacement();
+      placementView = viewFactory.create(circuitEditor, position, Rotation.NORTH);
+    }
+  }
+
+  public void runOneEvent()
+  {
+    circuitEditor.runSimultaneous();
+  }
+
+  public void placementRotateRight()
+  {
     if (placementView != null)
     {
-      if (keyCode == KeyEvent.VK_R)
-      {
-        if (keyboardButtons.pressed(KeyEvent.VK_SHIFT))
-        {
-          placementView.rotateLeft();
-        }
-        else
-        {
-          placementView.rotateRight();
-        }
-      }
-
-      if (keyCode == KeyEvent.VK_ESCAPE)
-      {
-        discardPlacement();
-      }
+      placementView.rotateRight();
     }
+  }
 
-    if ((keyCode == KeyEvent.VK_T) && keyboardButtons.pressed(KeyEvent.VK_CONTROL))
+  public void placementRotateLeft()
+  {
+    if (placementView != null)
     {
-      circuitEditor.runSimultaneous();
-    }
-
-    if ((keyCode == KeyEvent.VK_C) && keyboardButtons.pressed(KeyEvent.VK_SHIFT))
-    {
-      Int2D position = getMousePositionOnGrid();
-      if (position != null)
-      {
-        discardPlacement();
-        placementView = new ClockView(circuitEditor, position, Rotation.NORTH);
-      }
-    }
-
-    if ((keyCode == KeyEvent.VK_N) && keyboardButtons.pressed(KeyEvent.VK_SHIFT))
-    {
-      Int2D position = getMousePositionOnGrid();
-      if (position != null)
-      {
-        discardPlacement();
-        placementView = new NotGateView(circuitEditor, position, Rotation.NORTH);
-      }
+      placementView.rotateLeft();
     }
   }
 
@@ -227,6 +238,11 @@ public class SimulatorEditor
     {
       return null;
     }
+  }
+
+  public void stopCurrentEdit()
+  {
+    discardPlacement();
   }
 
   private void discardPlacement()

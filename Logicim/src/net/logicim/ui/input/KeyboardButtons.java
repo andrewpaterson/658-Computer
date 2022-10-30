@@ -2,8 +2,6 @@ package net.logicim.ui.input;
 
 import net.logicim.common.SimulatorException;
 
-import java.awt.event.KeyEvent;
-
 public class KeyboardButtons
 {
   public boolean[] buttons;
@@ -11,12 +9,6 @@ public class KeyboardButtons
   public KeyboardButtons()
   {
     this.buttons = new boolean[0x300];
-  }
-
-  public void set(int button)
-  {
-    button = getButtonIndex(button);
-    buttons[button] = true;
   }
 
   private int getButtonIndex(int button)
@@ -32,13 +24,19 @@ public class KeyboardButtons
     return button;
   }
 
+  public void set(int button)
+  {
+    button = getButtonIndex(button);
+    buttons[button] = true;
+  }
+
   public void unset(int button)
   {
     button = getButtonIndex(button);
     buttons[button] = false;
   }
 
-  public boolean pressed(int button)
+  public boolean isDown(int button)
   {
     button = getButtonIndex(button);
     return buttons[button];

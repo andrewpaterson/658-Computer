@@ -1,4 +1,4 @@
-package net.logicim.ui.input;
+package net.logicim.ui.input.mouse;
 
 public class MouseButtons
 {

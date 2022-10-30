@@ -142,6 +142,7 @@ public class Viewport
 
   private void drawDotGrid(Graphics2D graphics, int left, int dotsAcross, int top, int dotsDown, Color color)
   {
+    graphics.setStroke(new BasicStroke(1));
     graphics.setColor(color);
     for (int y = 0; y < dotsDown; y++)
     {

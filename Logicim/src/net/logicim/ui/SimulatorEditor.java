@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import static java.awt.event.MouseEvent.BUTTON1;
 import static net.logicim.ui.input.action.ButtonState.*;
 
 public class SimulatorEditor
@@ -34,6 +35,8 @@ public class SimulatorEditor
 
   protected CircuitEditor circuitEditor;
   protected View placementView;
+  protected View hoverView;
+  private PortView hoverPortView;
 
   public SimulatorEditor()
   {
@@ -65,11 +68,14 @@ public class SimulatorEditor
   {
     mouseButtons.set(button);
 
-    if (placementView != null)
+    if (button == BUTTON1)
     {
-      circuitEditor.ensureSimulation();
-      placementView.enable(circuitEditor.simulation);
-      placementView = null;
+      if (placementView != null)
+      {
+        circuitEditor.ensureSimulation();
+        placementView.enable(circuitEditor.simulation);
+        placementView = null;
+      }
     }
   }
 
@@ -97,10 +103,10 @@ public class SimulatorEditor
       }
     }
 
-    calculatePlacementViewPosition();
+    mousePositionOnGridChanged();
   }
 
-  private void debugPosition(Graphics2D graphics)
+  private void paintDebugPosition(Graphics2D graphics)
   {
     Int2D position = mousePosition.get();
     if (position != null)
@@ -126,7 +132,10 @@ public class SimulatorEditor
     viewport.paintGrid(graphics);
     circuitEditor.paint(graphics, viewport);
 
-    debugPosition(graphics);
+    if (hoverPortView != null)
+    {
+      hoverPortView.paintHoverPort(graphics, viewport);
+    }
   }
 
   public void mouseExited()
@@ -157,7 +166,43 @@ public class SimulatorEditor
     int rotation = mouseButtons.getRotation();
     viewport.zoom((float) rotation / 10.0f);
 
+    mousePositionOnGridChanged();
+  }
+
+  private void mousePositionOnGridChanged()
+  {
     calculatePlacementViewPosition();
+    calculateHighlightedPort();
+  }
+
+  private void calculateHighlightedPort()
+  {
+    if (placementView == null)
+    {
+      Int2D position = mousePosition.get();
+      if (position != null)
+      {
+        hoverView = getHoverView(position);
+        if (hoverView != null)
+        {
+          int x = viewport.transformScreenToGridX(position.x);
+          int y = viewport.transformScreenToGridY(position.y);
+          hoverPortView = hoverView.getPortInGrid(x, y);
+        }
+        else
+        {
+          hoverPortView = null;
+        }
+        return;
+      }
+    }
+    hoverView = null;
+    hoverPortView = null;
+  }
+
+  private View getHoverView(Int2D position)
+  {
+    return circuitEditor.getView(viewport, position);
   }
 
   private void calculatePlacementViewPosition()

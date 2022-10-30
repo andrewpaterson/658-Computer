@@ -125,6 +125,27 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
+  public boolean isEnabled()
+  {
+    return integratedCircuit.isEnabled();
+  }
+
+  @Override
+  public PortView getPortInGrid(int x, int y)
+  {
+    Int2D portPositionInGrid = new Int2D();
+    for (PortView port : ports)
+    {
+       port.getGridPosition(portPositionInGrid);
+      if (portPositionInGrid.equals(x, y))
+      {
+        return port;
+      }
+    }
+    return null;
+  }
+
+  @Override
   protected void finaliseView()
   {
     super.finaliseView();

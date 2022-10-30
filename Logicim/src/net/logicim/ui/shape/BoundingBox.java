@@ -1,6 +1,7 @@
 package net.logicim.ui.shape;
 
 import net.logicim.common.type.Float2D;
+import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
 
@@ -21,6 +22,25 @@ public class BoundingBox
     bottomRight = null;
     transformedTopLeft = new Float2D();
     transformedBottomRight = new Float2D();
+  }
+
+  public static boolean isContained(Int2D position, Int2D boundBoxPosition, Int2D boundBoxDimension)
+  {
+    return ((position.x >= boundBoxPosition.x) &&
+            (position.x <= boundBoxPosition.x + boundBoxDimension.x)) &&
+           ((position.y >= boundBoxPosition.y) &&
+            (position.y <= boundBoxPosition.y + boundBoxDimension.y));
+  }
+
+  public static float calculateDistance(Int2D position1, Int2D position2)
+  {
+    int x = position2.x - position1.x;
+    int y = position2.y - position1.y;
+
+    x *= x;
+    y *= y;
+
+    return (float) Math.sqrt(x + y);
   }
 
   public void include(Tuple2 tuple)

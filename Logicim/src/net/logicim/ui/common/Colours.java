@@ -20,6 +20,9 @@ public class Colours
   protected Color shapeBorder;
   protected Color shapeFill;
 
+  protected Color portHover;
+  protected Color viewHover;
+
   public Colours()
   {
     background = Color.WHITE;
@@ -38,6 +41,9 @@ public class Colours
 
      shapeBorder = Color.BLACK;
      shapeFill = new Color(232, 232, 232);
+
+    portHover = new Color(0, 255, 0);
+    viewHover = new Color(0, 255, 0);
   }
 
   public Color getSmallGridDotColor()
@@ -92,6 +98,16 @@ public class Colours
       index = 0;
     }
     return voltageColours[index];
+  }
+
+  public Color getPortHover()
+  {
+    return portHover;
+  }
+
+  public Color getViewHover()
+  {
+    return viewHover;
   }
 }
 

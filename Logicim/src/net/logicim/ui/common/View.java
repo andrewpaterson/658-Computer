@@ -61,15 +61,39 @@ public abstract class View
     }
   }
 
-  protected void paintBoundingBox(Graphics2D graphics, Viewport viewport)
+  public void paintBoundingBox(Graphics2D graphics, Viewport viewport)
   {
     boundingBox.transform(rotation);
+
+    Int2D p = new Int2D();
+    Int2D s = new Int2D();
+    getBoundingBoxInScreenSpace(viewport, p, s);
+    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, new BasicStroke(1), null, Color.ORANGE);
+  }
+
+  public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  {
+    boundingBox.transform(rotation);
+
     int x = viewport.transformGridToScreenSpaceX(boundingBox.getTransformedTopLeft().x + position.x);
     int y = viewport.transformGridToScreenSpaceY(boundingBox.getTransformedTopLeft().y + position.y);
+
     int width = viewport.transformGridToScreenWidth(boundingBox.getTransformedWidth());
     int height = viewport.transformGridToScreenHeight(boundingBox.getTransformedHeight());
 
-    viewport.paintRectangle(graphics, x, y, width, height, new BasicStroke(1), null, Color.ORANGE);
+    if (width < 0)
+    {
+      x += width;
+      width *= -1;
+    }
+    if (height < 0)
+    {
+      y += height;
+      height *= -1;
+    }
+
+    destPosition.set(x, y);
+    destDimension.set(width, height);
   }
 
   public void rotateRight()
@@ -90,6 +114,15 @@ public abstract class View
   public void add(ShapeView shapeView)
   {
     shapes.add(shapeView);
+  }
+
+  public abstract boolean isEnabled();
+
+  public abstract PortView getPortInGrid(int x, int y);
+
+  public Int2D getPosition()
+  {
+    return position;
   }
 }
 

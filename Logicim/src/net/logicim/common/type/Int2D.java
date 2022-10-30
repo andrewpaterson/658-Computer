@@ -40,6 +40,12 @@ public class Int2D
     this.y += p.y;
   }
 
+  public void add(int x, int y)
+  {
+    this.x += x;
+    this.y += y;
+  }
+
   @Override
   public Int2D clone()
   {
@@ -62,6 +68,11 @@ public class Int2D
   public float getY()
   {
     return y;
+  }
+
+  public boolean equals(int x, int y)
+  {
+    return this.x == x && this.y == y;
   }
 }
 

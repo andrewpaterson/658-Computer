@@ -1,6 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
@@ -46,6 +47,9 @@ public class SimulatorEditor
   protected PortView hoverPortView;
   protected WirePull wirePull;
 
+  protected boolean running;
+  protected long runTimeStep;
+
   public SimulatorEditor()
   {
     this.viewport = new Viewport(this);
@@ -61,6 +65,9 @@ public class SimulatorEditor
     this.circuitEditor = new CircuitEditor();
     this.placementView = null;
 
+    running = false;
+    runTimeStep = LongTime.nanosecondsToTime(0.25f);
+
     addActions();
   }
 
@@ -68,19 +75,28 @@ public class SimulatorEditor
   {
   }
 
-  public void tick(int tickCount)
+  public boolean tick(int tickCount)
   {
-    if (wirePull != null)
+    if (tickCount == 0)
     {
-      WirePull localPull = wirePull;
-      Int2D mousePosition = this.mousePosition.get();
-      if (mousePosition != null)
+      if (wirePull != null)
       {
-        int x = viewport.transformScreenToGridX(mousePosition.x);
-        int y = viewport.transformScreenToGridY(mousePosition.y);
-        localPull.update(x, y);
+        WirePull localPull = wirePull;
+        Int2D mousePosition = this.mousePosition.get();
+        if (mousePosition != null)
+        {
+          int x = viewport.transformScreenToGridX(mousePosition.x);
+          int y = viewport.transformScreenToGridY(mousePosition.y);
+          localPull.update(x, y);
+        }
+      }
+
+      if (running)
+      {
+        runToTime(runTimeStep);
       }
     }
+    return true;
   }
 
   public void mousePressed(int x, int y, int button)
@@ -336,6 +352,7 @@ public class SimulatorEditor
     actions.add(new InputAction(new RunOneEvent(this), KeyEvent.VK_T, Up, Up, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NotGateViewFactory()), KeyEvent.VK_N, Up, Down, Up));
+    actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
   }
 
   public void keyPressed(int keyCode)
@@ -356,6 +373,11 @@ public class SimulatorEditor
       discardPlacement();
       placementView = viewFactory.create(circuitEditor, position, Rotation.NORTH);
     }
+  }
+
+  public void runToTime(long timeForward)
+  {
+    circuitEditor.runToTime(timeForward);
   }
 
   public void runOneEvent()
@@ -411,6 +433,11 @@ public class SimulatorEditor
   public void keyReleased(int keyCode)
   {
     keyboardButtons.unset(keyCode);
+  }
+
+  public void toggleTunSimulation()
+  {
+    running = !running;
   }
 }
 

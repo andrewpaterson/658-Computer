@@ -32,7 +32,7 @@ public class SimulatorPanel
       long startTime = System.nanoTime();
 
       int tickCount = 0;
-      while (update(startTime, overtime, tickCount))
+      while (!update(startTime, overtime, tickCount))
       {
         tickCount++;
       }
@@ -65,12 +65,12 @@ public class SimulatorPanel
 
   private boolean update(long beforeTime, long overtime, int tickCount)
   {
-    simulatorEditor.tick(tickCount);
+    boolean done = simulatorEditor.tick(tickCount);
 
     long afterTime = System.nanoTime();
     long timeDiff = afterTime - beforeTime;
     long sleepTime = (period - timeDiff) - overtime;
-    return sleepTime > 0;
+    return (sleepTime > 0) || done;
   }
 
   private long sleep(long beforeTime, long overtime)

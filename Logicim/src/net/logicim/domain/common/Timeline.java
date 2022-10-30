@@ -70,66 +70,102 @@ public class Timeline
     }
   }
 
-  public boolean runSimultaneous()
+  public boolean runToTime(long timeForward)
   {
+    long targetTime = time + timeForward;
+
     SimultaneousEvents events = this.events.findFirst();
     if (events != null)
     {
-      if (events.time > time)
+      if (events.time >= time)
       {
-        time = events.time;
+        if (events.time < targetTime)
+        {
+          time = events.time;
+          runEvent(events);
+          return true;
+        }
+        else
+        {
+          time = targetTime;
+          return true;
+        }
       }
       else
       {
         throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
       }
-
-      Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
-      for (Event event : events.events)
-      {
-        if (event instanceof TraceEvent)
-        {
-          TraceEvent traceEvent = (TraceEvent) event;
-          TraceNet trace = traceEvent.getTrace();
-          trace.update(traceEvent.getVoltage());
-
-          List<Port> ports = trace.getInputPorts();
-          for (Port port : ports)
-          {
-            IntegratedCircuit<?, ?> integratedCircuit = port.getPins().getIntegratedCircuit();
-            List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
-            if (inputPorts == null)
-            {
-              inputPorts = new ArrayList<>();
-              integratedCircuits.put(integratedCircuit, inputPorts);
-            }
-            inputPorts.add(port);
-          }
-          trace.remove(traceEvent);
-        }
-        else if (event instanceof ClockEvent)
-        {
-          ClockEvent clockEvent = (ClockEvent) event;
-          IntegratedCircuit<?, ?> integratedCircuit = clockEvent.getIntegratedCircuit();
-          integratedCircuit.clockChanged(simulation);
-        }
-      }
-
-      for (Map.Entry<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
-      {
-        IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitListEntry.getKey();
-        List<Port> ports = integratedCircuitListEntry.getValue();
-        integratedCircuit.inputTraceChanged(simulation, ports);
-      }
-
-      this.events.remove(events);
-      events.done();
-      return true;
     }
     else
     {
       return false;
     }
+  }
+
+  public boolean runSimultaneous()
+  {
+    SimultaneousEvents events = this.events.findFirst();
+    if (events != null)
+    {
+      if (events.time >= time)
+      {
+        time = events.time;
+        runEvent(events);
+        return true;
+      }
+      else
+      {
+        throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+      }
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  private void runEvent(SimultaneousEvents events)
+  {
+    Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
+    for (Event event : events.events)
+    {
+      if (event instanceof TraceEvent)
+      {
+        TraceEvent traceEvent = (TraceEvent) event;
+        TraceNet trace = traceEvent.getTrace();
+        trace.update(traceEvent.getVoltage());
+
+        List<Port> ports = trace.getInputPorts();
+        for (Port port : ports)
+        {
+          IntegratedCircuit<?, ?> integratedCircuit = port.getPins().getIntegratedCircuit();
+          List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
+          if (inputPorts == null)
+          {
+            inputPorts = new ArrayList<>();
+            integratedCircuits.put(integratedCircuit, inputPorts);
+          }
+          inputPorts.add(port);
+        }
+        trace.remove(traceEvent);
+      }
+      else if (event instanceof ClockEvent)
+      {
+        ClockEvent clockEvent = (ClockEvent) event;
+        IntegratedCircuit<?, ?> integratedCircuit = clockEvent.getIntegratedCircuit();
+        integratedCircuit.clockChanged(simulation);
+      }
+    }
+
+    for (Map.Entry<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
+    {
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitListEntry.getKey();
+      List<Port> ports = integratedCircuitListEntry.getValue();
+      integratedCircuit.inputTraceChanged(simulation, ports);
+    }
+
+    this.events.remove(events);
+    events.done();
   }
 
   public long getTime()

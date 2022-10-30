@@ -74,6 +74,14 @@ public class CircuitEditor
     simulation.runSimultaneous();
   }
 
+  public void runToTime(long timeForward)
+  {
+    ensureSimulation();
+
+    simulation.runToTime(timeForward);
+  }
+
+
   public void ensureSimulation()
   {
     if (simulation == null)

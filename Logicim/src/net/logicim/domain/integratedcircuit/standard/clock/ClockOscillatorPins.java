@@ -21,8 +21,8 @@ public class ClockOscillatorPins
                          new BistateOutputPropagation("",
                                                       0.0f,
                                                       3.3f,
-                                                      nanosecondsToTime(5.0f),
-                                                      nanosecondsToTime(5.0f)));
+                                                      nanosecondsToTime(2.0f),
+                                                      nanosecondsToTime(2.0f)));
   }
 
   public Uniport getOutput()

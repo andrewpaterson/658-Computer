@@ -43,5 +43,10 @@ public class Simulation
   {
     return states.get(integratedCircuit);
   }
+
+  public void runToTime(long timeForward)
+  {
+    timeline.runToTime(timeForward);
+  }
 }
 

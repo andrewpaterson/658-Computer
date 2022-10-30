@@ -14,7 +14,7 @@ public class ClockViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new ClockView(circuitEditor, position, rotation, 10 * MHz);
+    return new ClockView(circuitEditor, position, rotation, 50 * MHz);
   }
 }
 

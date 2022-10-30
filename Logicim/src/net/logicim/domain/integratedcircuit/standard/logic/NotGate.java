@@ -37,8 +37,14 @@ public class NotGate
     }
     else
     {
-      boolean calculatedValue = !inValue.isHigh();
-      pins.getOutput().writeBool(simulation.getTimeline(), calculatedValue);
+      if (inValue.isHigh())
+      {
+        pins.getOutput().writeBool(simulation.getTimeline(), false);
+      }
+      else if (inValue.isLow())
+      {
+        pins.getOutput().writeBool(simulation.getTimeline(), true);
+      }
     }
   }
 

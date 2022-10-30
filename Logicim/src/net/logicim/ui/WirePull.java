@@ -53,6 +53,16 @@ public class WirePull
     return firstPosition;
   }
 
+  public Int2D getMiddlePosition()
+  {
+    return middlePosition;
+  }
+
+  public Int2D getSecondPosition()
+  {
+    return secondPosition;
+  }
+
   @SuppressWarnings("ConstantConditions")
   public void update(int mouseX, int mouseY)
   {
@@ -189,7 +199,7 @@ public class WirePull
     int y2 = viewport.transformGridToScreenSpaceY(endPosition.y);
 
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.setColor(Color.BLACK);
+    graphics.setColor(viewport.getColours().getDisconnectedTrace());
     graphics.drawLine(x1, y1, x2, y2);
   }
 }

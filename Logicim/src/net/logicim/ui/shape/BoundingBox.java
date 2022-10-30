@@ -32,6 +32,14 @@ public class BoundingBox
             (position.y <= boundBoxPosition.y + boundBoxDimension.y));
   }
 
+  public static boolean isContained(Int2D position, Float2D boundBoxPosition, Float2D boundBoxDimension)
+  {
+    return ((position.x >= boundBoxPosition.x) &&
+            (position.x <= boundBoxPosition.x + boundBoxDimension.x)) &&
+           ((position.y >= boundBoxPosition.y) &&
+            (position.y <= boundBoxPosition.y + boundBoxDimension.y));
+  }
+
   public static float calculateDistance(Int2D position1, Int2D position2)
   {
     int x = position2.x - position1.x;

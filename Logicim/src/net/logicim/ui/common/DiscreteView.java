@@ -1,6 +1,7 @@
 package net.logicim.ui.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
@@ -11,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class View
+public abstract class DiscreteView
     implements ShapeHolder
 {
   protected CircuitEditor circuitEditor;
@@ -21,7 +22,7 @@ public abstract class View
   protected List<ShapeView> shapes;
   protected boolean finalised;
 
-  public View(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public DiscreteView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
     this.circuitEditor = circuitEditor;
     this.position = position;
@@ -80,6 +81,31 @@ public abstract class View
 
     int width = viewport.transformGridToScreenWidth(boundingBox.getTransformedWidth());
     int height = viewport.transformGridToScreenHeight(boundingBox.getTransformedHeight());
+
+    if (width < 0)
+    {
+      x += width;
+      width *= -1;
+    }
+    if (height < 0)
+    {
+      y += height;
+      height *= -1;
+    }
+
+    destPosition.set(x, y);
+    destDimension.set(width, height);
+  }
+
+  public void getBoundingBoxInGridSpace(Float2D destPosition, Float2D destDimension)
+  {
+    boundingBox.transform(rotation);
+
+    float x = boundingBox.getTransformedTopLeft().x + position.x;
+    float y = boundingBox.getTransformedTopLeft().y + position.y;
+
+    float width = boundingBox.getTransformedWidth();
+    float height = boundingBox.getTransformedHeight();
 
     if (width < 0)
     {

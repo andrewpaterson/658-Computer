@@ -4,25 +4,20 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.IntegratedCircuitView;
-import net.logicim.ui.common.PortView;
-import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
 import net.logicim.ui.shape.RectangleView;
 
 import java.awt.*;
-
-import static net.logicim.domain.common.Units.Hz;
 
 public class ClockView
     extends IntegratedCircuitView<ClockOscillator>
 {
   protected RectangleView rectangle;
 
-  public ClockView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public ClockView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, float frequency)
   {
     super(circuitEditor,
-          new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), 1 * Hz),
+          new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), frequency),
           position,
           rotation);
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
@@ -54,7 +49,7 @@ public class ClockView
   private void paintClockWaveform(Graphics2D graphics, Viewport viewport)
   {
     float voltage = integratedCircuit.getInternalVoltage();
-    Color clockColor = getColorForVoltage(viewport, voltage);
+    Color clockColor = VoltageColour.getColorForVoltage(viewport.getColours(), voltage);
     graphics.setColor(clockColor);
 
     float xOffset = 0.5f;

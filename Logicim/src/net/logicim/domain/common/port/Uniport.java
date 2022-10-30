@@ -152,5 +152,10 @@ public class Uniport
       trace.disconnect(this);
     }
   }
+
+  public TraceNet getTrace()
+  {
+    return trace;
+  }
 }
 

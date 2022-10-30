@@ -23,6 +23,8 @@ public class Colours
   protected Color portHover;
   protected Color viewHover;
 
+  protected Color disconnectedTrace;
+
   public Colours()
   {
     background = Color.WHITE;
@@ -44,6 +46,8 @@ public class Colours
 
     portHover = new Color(0, 255, 0);
     viewHover = new Color(0, 255, 0);
+
+    disconnectedTrace = new Color(0, 170, 250);
   }
 
   public Color getSmallGridDotColor()
@@ -108,6 +112,11 @@ public class Colours
   public Color getViewHover()
   {
     return viewHover;
+  }
+
+  public Color getDisconnectedTrace()
+  {
+    return disconnectedTrace;
   }
 }
 

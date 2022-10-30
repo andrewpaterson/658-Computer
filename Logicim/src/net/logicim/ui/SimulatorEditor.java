@@ -1,6 +1,9 @@
 package net.logicim.ui;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.common.*;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;
@@ -11,10 +14,14 @@ import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
+import net.logicim.ui.trace.TraceView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import static java.awt.event.MouseEvent.BUTTON1;
 import static net.logicim.ui.input.action.ButtonState.*;
@@ -34,8 +41,8 @@ public class SimulatorEditor
   protected KeyboardButtons keyboardButtons;
 
   protected CircuitEditor circuitEditor;
-  protected View placementView;
-  protected View hoverView;
+  protected DiscreteView placementView;
+  protected DiscreteView hoverView;
   protected PortView hoverPortView;
   protected WirePull wirePull;
 
@@ -65,12 +72,13 @@ public class SimulatorEditor
   {
     if (wirePull != null)
     {
+      WirePull localPull = wirePull;
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
       {
         int x = viewport.transformScreenToGridX(mousePosition.x);
         int y = viewport.transformScreenToGridY(mousePosition.y);
-        wirePull.update(x, y);
+        localPull.update(x, y);
       }
     }
   }
@@ -106,9 +114,78 @@ public class SimulatorEditor
     {
       if (wirePull != null)
       {
+        Int2D firstPosition = wirePull.getFirstPosition();
+        Int2D middlePosition = wirePull.getMiddlePosition();
+        Int2D secondPosition = wirePull.getSecondPosition();
+
+        TraceView firstTraceView = createTraceView(firstPosition, middlePosition);
+        TraceView secondTraceView = createTraceView(middlePosition, secondPosition);
+        connectAndClean(firstTraceView, secondTraceView);
+
         wirePull = null;
       }
     }
+  }
+
+  private void connectAndClean(TraceView... traceViews)
+  {
+    Set<PortView> portViews = new LinkedHashSet<>();
+    for (TraceView traceView : traceViews)
+    {
+      if (traceView != null)
+      {
+        getPortViewsInGridSpace(portViews, traceView.getStart());
+        getPortViewsInGridSpace(portViews, traceView.getEnd());
+      }
+    }
+
+    if (portViews.size() > 0)
+    {
+      TraceNet traceNet = new TraceNet();
+      for (PortView portView : portViews)
+      {
+        Port port = portView.getPort();
+        if (port instanceof Uniport)
+        {
+          Uniport uniport = (Uniport) port;
+          uniport.disconnect();
+          uniport.connect(traceNet);
+        }
+      }
+
+      for (TraceView traceView : traceViews)
+      {
+        if (traceView != null)
+        {
+          traceView.setTrace(traceNet);
+        }
+      }
+    }
+  }
+
+  private void getPortViewsInGridSpace(Set<PortView> portViews, Int2D position)
+  {
+    List<DiscreteView> discreteViews = circuitEditor.getDiscreteViewsInGridSpace(position);
+    for (DiscreteView discreteView : discreteViews)
+    {
+      PortView portView = discreteView.getPortInGrid(position.x, position.y);
+      if (portView != null)
+      {
+        portViews.add(portView);
+      }
+    }
+  }
+
+  private TraceView createTraceView(Int2D start, Int2D end)
+  {
+    if ((start != null) && (end != null))
+    {
+      if (((start.x == end.x) || (start.y == end.y)) && !((start.x == end.x) && (start.y == end.y)))
+      {
+        return new TraceView(circuitEditor, start, end);
+      }
+    }
+    return null;
   }
 
   public void resized(int width, int height)
@@ -211,14 +288,14 @@ public class SimulatorEditor
   {
     if (placementView == null)
     {
-      Int2D position = mousePosition.get();
-      if (position != null)
+      Int2D mousePosition = this.mousePosition.get();
+      if (mousePosition != null)
       {
-        hoverView = getHoverView(position);
+        hoverView = getHoverView(mousePosition);
         if (hoverView != null)
         {
-          int x = viewport.transformScreenToGridX(position.x);
-          int y = viewport.transformScreenToGridY(position.y);
+          int x = viewport.transformScreenToGridX(mousePosition.x);
+          int y = viewport.transformScreenToGridY(mousePosition.y);
           hoverPortView = hoverView.getPortInGrid(x, y);
         }
         else
@@ -232,9 +309,9 @@ public class SimulatorEditor
     hoverPortView = null;
   }
 
-  private View getHoverView(Int2D position)
+  private DiscreteView getHoverView(Int2D mousePosition)
   {
-    return circuitEditor.getView(viewport, position);
+    return circuitEditor.getViewInScreenSpace(viewport, mousePosition);
   }
 
   private void calculatePlacementViewPosition()

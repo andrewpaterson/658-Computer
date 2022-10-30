@@ -8,8 +8,6 @@ import net.logicim.ui.shape.BoundingBox;
 
 import java.awt.*;
 
-import static net.logicim.ui.common.IntegratedCircuitView.getColorForVoltage;
-
 public class PortView
 {
   protected IntegratedCircuitView<?> integratedCircuitView;
@@ -91,7 +89,7 @@ public class PortView
 
     Port port = getPort();
     Uniport uniport = (Uniport) port;
-    Color color = getColorForVoltage(viewport, uniport.getVoltage());
+    Color color = VoltageColour.getColorForVoltage(viewport.getColours(), uniport.getVoltage());
 
     graphics.setColor(color);
     graphics.fillOval(x - lineWidth,

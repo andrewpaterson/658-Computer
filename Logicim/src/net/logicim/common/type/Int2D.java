@@ -73,6 +73,13 @@ public class Int2D
   }
 
   @Override
+  public void divide(int i)
+  {
+    this.x /= i;
+    this.y /= i;
+  }
+
+  @Override
   public Int2D clone()
   {
     return new Int2D(x, y);

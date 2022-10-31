@@ -15,8 +15,6 @@ import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
-import net.logicim.ui.common.JunctionView;
-import net.logicim.ui.common.TraceView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -44,8 +42,11 @@ public class SimulatorEditor
 
   protected CircuitEditor circuitEditor;
   protected DiscreteView placementView;
-  protected DiscreteView hoverView;
-  protected PortView hoverPortView;
+
+  protected TraceView hoverTraceView;
+  protected DiscreteView hoverDiscreteView;
+  protected ConnectionView hoverConnectionView;
+
   protected WirePull wirePull;
 
   protected boolean running;
@@ -113,12 +114,12 @@ public class SimulatorEditor
         placementView.enable(circuitEditor.simulation);
         placementView = null;
       }
-      else if (hoverPortView != null)
+      else if (hoverConnectionView != null)
       {
         if (wirePull == null)
         {
           wirePull = new WirePull();
-          hoverPortView.getGridPosition(wirePull.getFirstPosition());
+          hoverConnectionView.getGridPosition(wirePull.getFirstPosition());
         }
       }
     }
@@ -145,34 +146,36 @@ public class SimulatorEditor
     }
   }
 
-
   private void connectAndClean(DiscreteView discreteView)
   {
   }
 
   private void connectAndClean(TraceView... traceViews)
   {
-    Set<PortView> portViews = new LinkedHashSet<>();
+    Set<ConnectionView> portViews = new LinkedHashSet<>();
     for (TraceView traceView : traceViews)
     {
       if (traceView != null)
       {
-        getPortViewsInGridSpace(portViews, traceView.getStart().getPosition());
-        getPortViewsInGridSpace(portViews, traceView.getEnd().getPosition());
+        getConnectionsInGridSpace(portViews, traceView.getStart().getPosition());
+        getConnectionsInGridSpace(portViews, traceView.getEnd().getPosition());
       }
     }
 
     if (portViews.size() > 0)
     {
       TraceNet traceNet = new TraceNet();
-      for (PortView portView : portViews)
+      for (ConnectionView connectionView : portViews)
       {
-        Port port = portView.getPort();
-        if (port instanceof Uniport)
+        if (connectionView instanceof PortView)
         {
-          Uniport uniport = (Uniport) port;
-          uniport.disconnect();
-          uniport.connect(traceNet);
+          Port port = ((PortView) connectionView).getPort();
+          if (port instanceof Uniport)
+          {
+            Uniport uniport = (Uniport) port;
+            uniport.disconnect();
+            uniport.connect(traceNet);
+          }
         }
       }
 
@@ -186,7 +189,7 @@ public class SimulatorEditor
     }
   }
 
-  private void getPortViewsInGridSpace(Set<PortView> portViews, Int2D position)
+  private void getConnectionsInGridSpace(Set<ConnectionView> connectionViews, Int2D position)
   {
     List<DiscreteView> discreteViews = circuitEditor.getDiscreteViewsInGridSpace(position);
     for (DiscreteView discreteView : discreteViews)
@@ -194,8 +197,14 @@ public class SimulatorEditor
       PortView portView = discreteView.getPortInGrid(position.x, position.y);
       if (portView != null)
       {
-        portViews.add(portView);
+        connectionViews.add(portView);
       }
+    }
+
+    List<BaseJunctionView> junctionViews = circuitEditor.getJunctionViewsInGridSpace(position);
+    for (BaseJunctionView junctionView : junctionViews)
+    {
+      connectionViews.add(junctionView);
     }
   }
 
@@ -259,9 +268,9 @@ public class SimulatorEditor
     viewport.paintGrid(graphics);
     circuitEditor.paint(graphics, viewport);
 
-    if (hoverPortView != null)
+    if (hoverConnectionView != null)
     {
-      hoverPortView.paintHoverPort(graphics, viewport);
+      hoverConnectionView.paintHoverPort(graphics, viewport);
     }
 
     if (wirePull != null)
@@ -314,27 +323,47 @@ public class SimulatorEditor
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
       {
-        hoverView = getHoverView(mousePosition);
-        if (hoverView != null)
+        hoverDiscreteView = getHoverView(mousePosition);
+        if (hoverDiscreteView != null)
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
           int y = viewport.transformScreenToGridY(mousePosition.y);
-          hoverPortView = hoverView.getPortInGrid(x, y);
+          hoverConnectionView = hoverDiscreteView.getPortInGrid(x, y);
         }
         else
         {
-          hoverPortView = null;
+          hoverConnectionView = null;
+        }
+
+        if (hoverConnectionView == null)
+        {
+          hoverTraceView = getHoverTrace(mousePosition);
+          if (hoverTraceView != null)
+          {
+            int x = viewport.transformScreenToGridX(mousePosition.x);
+            int y = viewport.transformScreenToGridY(mousePosition.y);
+            hoverConnectionView = hoverTraceView.getJunctionInGrid(x,y);
+          }
+          else
+          {
+            hoverConnectionView = null;
+          }
         }
         return;
       }
     }
-    hoverView = null;
-    hoverPortView = null;
+    hoverDiscreteView = null;
+    hoverConnectionView = null;
+  }
+
+  private TraceView getHoverTrace(Int2D mousePosition)
+  {
+    return circuitEditor.getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
   private DiscreteView getHoverView(Int2D mousePosition)
   {
-    return circuitEditor.getViewInScreenSpace(viewport, mousePosition);
+    return circuitEditor.getDiscreteViewInScreenSpace(viewport, mousePosition);
   }
 
   private void calculatePlacementViewPosition()

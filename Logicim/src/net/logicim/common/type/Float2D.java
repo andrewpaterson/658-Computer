@@ -59,6 +59,13 @@ public class Float2D
     this.y += y;
   }
 
+  @Override
+  public void divide(int i)
+  {
+    this.x /= i;
+    this.y /= i;
+  }
+
   public void add(Float2D p)
   {
     this.x += p.x;

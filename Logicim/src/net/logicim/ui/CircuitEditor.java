@@ -4,11 +4,8 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.common.IntegratedCircuitView;
-import net.logicim.ui.common.DiscreteView;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
 import net.logicim.ui.shape.BoundingBox;
-import net.logicim.ui.common.TraceView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -81,7 +78,6 @@ public class CircuitEditor
     simulation.runToTime(timeForward);
   }
 
-
   public void ensureSimulation()
   {
     if (simulation == null)
@@ -90,7 +86,7 @@ public class CircuitEditor
     }
   }
 
-  public DiscreteView getViewInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public DiscreteView getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
     List<DiscreteView> selectedViews = getDiscreteViewsInScreenSpace(viewport, screenPosition);
 
@@ -159,6 +155,66 @@ public class CircuitEditor
       }
     }
     return selectedViews;
+  }
+
+  public List<TraceView> getTraceViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
+  {
+    int x = viewport.transformScreenToGridX(screenPosition.x);
+    int y = viewport.transformScreenToGridY(screenPosition.y);
+    List<TraceView> traceViews = new ArrayList<>();
+    for (TraceView traceView : this.traceViews)
+    {
+      if (traceView.contains(x, y))
+      {
+        traceViews.add(traceView);
+      }
+    }
+    return traceViews;
+  }
+
+  public List<BaseJunctionView> getJunctionViewsInGridSpace(Int2D gridPosition)
+  {
+    List<BaseJunctionView> junctionViews = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      BaseJunctionView junctionView = traceView.getJunctionInGrid(gridPosition);
+      if (junctionView != null)
+      {
+        junctionViews.add(junctionView);
+      }
+    }
+    return junctionViews;
+  }
+
+  public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)
+  {
+    List<TraceView> selectedViews = getTraceViewsInScreenSpace(viewport, screenPosition);
+
+    if (selectedViews.size() == 1)
+    {
+      return selectedViews.get(0);
+    }
+    else if (selectedViews.size() == 0)
+    {
+      return null;
+    }
+    else
+    {
+      Int2D center = new Int2D();
+      float shortestDistance = Float.MAX_VALUE;
+      TraceView closestView = null;
+      for (TraceView view : selectedViews)
+      {
+        view.getCenter(center);
+        float distance = BoundingBox.calculateDistance(screenPosition, center);
+        if (distance < shortestDistance)
+        {
+          closestView = view;
+          shortestDistance = distance;
+        }
+      }
+      return closestView;
+    }
   }
 }
 

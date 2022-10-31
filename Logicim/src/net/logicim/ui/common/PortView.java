@@ -143,16 +143,12 @@ public class PortView
     destination.set(gridCache.getPosition());
   }
 
-  public void paintHoverPort(Graphics2D graphics, Viewport viewport)
+  @Override
+  public boolean equals(int x, int y)
   {
-    Int2D destination = new Int2D();
-    getGridPosition(destination);
-    int x = viewport.transformGridToScreenSpaceX(destination.x);
-    int y = viewport.transformGridToScreenSpaceY(destination.y);
-    int radius = (int) (viewport.getCircleRadius() * 5);
-    graphics.setColor(viewport.getColours().getPortHover());
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+    updateGridCache();
+
+    return gridCache.getPosition().equals(x, y);
   }
 }
 

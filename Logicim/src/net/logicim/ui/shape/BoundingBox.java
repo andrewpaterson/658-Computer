@@ -54,7 +54,6 @@ public class BoundingBox
   public void include(Tuple2 tuple)
   {
     include(tuple.getX(), tuple.getY(), 0);
-
   }
 
   public void include(Tuple2 tuple, float radius)

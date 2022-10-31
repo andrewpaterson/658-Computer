@@ -3,13 +3,16 @@ package net.logicim.ui.common;
 import net.logicim.common.type.Int2D;
 
 public class JunctionView
-    extends ConnectionView
+    extends BaseJunctionView
 {
-  protected Int2D position;
+  protected TraceView[] traceViews;
+  protected int connectedTraces;
 
   public JunctionView(Int2D position)
   {
-    this.position = position;
+    super(position);
+    this.traceViews = new TraceView[4];
+    this.connectedTraces = 0;
   }
 
   public Int2D getPosition()
@@ -20,7 +23,11 @@ public class JunctionView
   @Override
   public void invalidateCache()
   {
+  }
 
+  public boolean equals(Int2D position)
+  {
+    return this.position.equals(position);
   }
 }
 

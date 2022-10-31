@@ -15,8 +15,8 @@ import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
-import net.logicim.ui.trace.JunctionView;
-import net.logicim.ui.trace.TraceView;
+import net.logicim.ui.common.JunctionView;
+import net.logicim.ui.common.TraceView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

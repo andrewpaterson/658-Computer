@@ -8,7 +8,7 @@ import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.DiscreteView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.BoundingBox;
-import net.logicim.ui.trace.TraceView;
+import net.logicim.ui.common.TraceView;
 
 import java.awt.*;
 import java.util.ArrayList;

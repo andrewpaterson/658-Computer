@@ -9,6 +9,7 @@ import net.logicim.ui.shape.BoundingBox;
 import java.awt.*;
 
 public class PortView
+    extends ConnectionView
 {
   protected IntegratedCircuitView<?> integratedCircuitView;
   protected Port port;

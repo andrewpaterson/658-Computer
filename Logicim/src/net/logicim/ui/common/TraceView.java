@@ -1,9 +1,7 @@
-package net.logicim.ui.trace;
+package net.logicim.ui.common;
 
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.VoltageColour;
 
 import java.awt.*;
 

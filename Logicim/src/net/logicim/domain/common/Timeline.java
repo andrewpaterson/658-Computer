@@ -17,6 +17,8 @@ import static net.logicim.domain.common.LongTime.timeToNanoseconds;
 public class Timeline
 {
   protected long time;
+  protected long previousEventTime;
+  protected long eventTime;
   protected RedBlackTree<Long, SimultaneousEvents> events;
   protected Simulation simulation;
 
@@ -25,6 +27,8 @@ public class Timeline
     this.simulation = simulation;
     this.events = new RedBlackTree<>();
     time = 0;
+    previousEventTime = 0;
+    eventTime = 0;
   }
 
   public TraceEvent createPropagationEvent(TraceNet trace, float outVoltage, long propagationDelay)
@@ -83,13 +87,12 @@ public class Timeline
         {
           time = events.time;
           runEvent(events);
-          return true;
         }
         else
         {
           time = targetTime;
-          return true;
         }
+        return true;
       }
       else
       {
@@ -126,6 +129,9 @@ public class Timeline
 
   private void runEvent(SimultaneousEvents events)
   {
+    previousEventTime = eventTime;
+    eventTime = time;
+
     Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
     for (Event event : events.events)
     {

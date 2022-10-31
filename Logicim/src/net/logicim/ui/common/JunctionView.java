@@ -1,8 +1,9 @@
-package net.logicim.ui.trace;
+package net.logicim.ui.common;
 
 import net.logicim.common.type.Int2D;
 
 public class JunctionView
+    extends ConnectionView
 {
   protected Int2D position;
 

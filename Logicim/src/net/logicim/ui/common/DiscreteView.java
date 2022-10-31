@@ -36,6 +36,8 @@ public abstract class DiscreteView
   public void setPosition(int x, int y)
   {
     this.position.set(x, y);
+
+    invalidateCache();
   }
 
   protected void finaliseView()
@@ -125,11 +127,15 @@ public abstract class DiscreteView
   public void rotateRight()
   {
     rotation = rotation.rotateRight();
+
+    invalidateCache();
   }
 
   public void rotateLeft()
   {
     rotation = rotation.rotateLeft();
+
+    invalidateCache();
   }
 
   public void enable(Simulation simulation)
@@ -149,6 +155,19 @@ public abstract class DiscreteView
   public Int2D getPosition()
   {
     return position;
+  }
+
+  public Rotation getRotation()
+  {
+    return rotation;
+  }
+
+  protected void invalidateCache()
+  {
+    for (ShapeView shape : shapes)
+    {
+      shape.invalidateCache();
+    }
   }
 }
 

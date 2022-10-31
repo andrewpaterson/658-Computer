@@ -43,7 +43,7 @@ public class NotGateView
       Stroke stroke = graphics.getStroke();
       Color color = graphics.getColor();
 
-      polygon.paint(graphics, viewport, rotation, position);
+      polygon.paint(graphics, viewport);
 
       super.paint(graphics, viewport);
 

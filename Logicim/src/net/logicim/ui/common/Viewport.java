@@ -1,6 +1,8 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.type.Tuple2;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -210,6 +212,62 @@ public class Viewport
       graphics.setColor(shapeBorder);
       graphics.drawRect(x, y, width, height);
     }
+  }
+
+  public int transformGridToScreenWidth(Tuple2 tuple2)
+  {
+    if (tuple2 instanceof Int2D)
+    {
+      return transformGridToScreenWidth(((Int2D)tuple2).x);
+    }
+    else if (tuple2 instanceof Float2D)
+    {
+      return transformGridToScreenWidth(((Float2D) tuple2).x);
+    }
+
+    return 0;
+  }
+
+  public int transformGridToScreenHeight(Tuple2 tuple2)
+  {
+    if (tuple2 instanceof Int2D)
+    {
+      return transformGridToScreenHeight(((Int2D)tuple2).y);
+    }
+    else if (tuple2 instanceof Float2D)
+    {
+      return transformGridToScreenHeight(((Float2D) tuple2).y);
+    }
+
+    return 0;
+  }
+
+  public int transformGridToScreenSpaceX(Tuple2 tuple2)
+  {
+    if (tuple2 instanceof Int2D)
+    {
+      return transformGridToScreenSpaceX(((Int2D)tuple2).x);
+    }
+    else if (tuple2 instanceof Float2D)
+    {
+      return transformGridToScreenSpaceX(((Float2D) tuple2).x);
+    }
+
+    return 0;
+  }
+
+  public int transformGridToScreenSpaceY(Tuple2 tuple2)
+  {
+    if (tuple2 instanceof Int2D)
+    {
+      return transformGridToScreenSpaceY(((Int2D)tuple2).y);
+    }
+    else if (tuple2 instanceof Float2D)
+    {
+      return transformGridToScreenSpaceY(((Float2D) tuple2).y);
+    }
+
+    return 0;
   }
 }
 

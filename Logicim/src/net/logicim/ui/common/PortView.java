@@ -13,24 +13,27 @@ public class PortView
 {
   protected IntegratedCircuitView<?> integratedCircuitView;
   protected Port port;
-  protected Int2D position;
-  protected Int2D transformedPosition;
+  protected Int2D positionRelativeToIC;
+
   protected boolean inverting;
   protected String text;
   protected boolean overline;
   protected Float2D bubbleCenter;
-  protected Float2D transformedBubbleCenter;
   protected float bubbleDiameter;
 
-  public PortView(IntegratedCircuitView<?> integratedCircuitView, Port port, Int2D position)
+  protected PortViewGridCache gridCache;
+
+  public PortView(IntegratedCircuitView<?> integratedCircuitView, Port port, Int2D positionRelativeToIC)
   {
     this.integratedCircuitView = integratedCircuitView;
     this.port = port;
-    this.position = position;
+    this.positionRelativeToIC = positionRelativeToIC;
     this.integratedCircuitView.addPortView(this);
+
     this.bubbleCenter = null;
-    this.transformedPosition = position.clone();
     this.bubbleDiameter = 0.9f;
+
+    gridCache = new PortViewGridCache();
   }
 
   public PortView setInverting(boolean inverting, Rotation facing)
@@ -38,12 +41,13 @@ public class PortView
     this.inverting = inverting;
     Int2D portOffset = new Int2D(0, -1);
     facing.transform(portOffset);
-    bubbleCenter = new Float2D(position);
-    position.add(portOffset);
+    bubbleCenter = new Float2D(positionRelativeToIC);
+    positionRelativeToIC.add(portOffset);
     Float2D bubbleOffset = new Float2D(0, -0.5f);
     facing.transform(bubbleOffset);
     bubbleCenter.add(bubbleOffset);
-    transformedBubbleCenter = bubbleCenter.clone();
+
+    gridCache.invalidate();
     return this;
   }
 
@@ -64,40 +68,63 @@ public class PortView
     return port;
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport, Rotation rotation, Int2D position)
+  public void paint(Graphics2D graphics, Viewport viewport)
   {
+    updateGridCache();
+
     if (inverting)
     {
-      transformedBubbleCenter.set(this.bubbleCenter);
-      rotation.transform(transformedBubbleCenter);
-      int x = viewport.transformGridToScreenSpaceX(transformedBubbleCenter.x + position.x);
-      int y = viewport.transformGridToScreenSpaceY(transformedBubbleCenter.y + position.y);
+      Float2D gridBubbleCenter = gridCache.getBubbleCenter();
+      if (gridBubbleCenter != null)
+      {
+        int x = viewport.transformGridToScreenSpaceX(gridBubbleCenter.x);
+        int y = viewport.transformGridToScreenSpaceY(gridBubbleCenter.y);
 
-      graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-      graphics.setColor(viewport.getColours().getShapeBorder());
-      int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
-      graphics.drawOval(x - diameter / 2,
-                        y - diameter / 2,
-                        diameter,
-                        diameter);
+        graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+        graphics.setColor(viewport.getColours().getShapeBorder());
+        int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
+        graphics.drawOval(x - diameter / 2,
+                          y - diameter / 2,
+                          diameter,
+                          diameter);
+      }
     }
 
-    transformedPosition.set(this.position);
-    rotation.transform(transformedPosition);
-    int x = viewport.transformGridToScreenSpaceX(transformedPosition.x + position.x);
-    int y = viewport.transformGridToScreenSpaceY(transformedPosition.y + position.y);
-    int lineWidth = (int) (viewport.getCircleRadius() * 3);
+    Int2D gridPosition = gridCache.getPosition();
+    if (gridPosition != null)
+    {
+      int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
+      int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
+      int lineWidth = (int) (viewport.getCircleRadius() * 3);
 
-    Port port = getPort();
-    Uniport uniport = (Uniport) port;
-    Color color = VoltageColour.getColorForVoltage(viewport.getColours(), uniport.getVoltage());
+      Port port = getPort();
+      Uniport uniport = (Uniport) port;
+      Color color = VoltageColour.getColorForVoltage(viewport.getColours(), uniport.getVoltage());
 
-    graphics.setColor(color);
-    graphics.fillOval(x - lineWidth,
-                      y - lineWidth,
-                      lineWidth * 2,
-                      lineWidth * 2);
+      graphics.setColor(color);
+      graphics.fillOval(x - lineWidth,
+                        y - lineWidth,
+                        lineWidth * 2,
+                        lineWidth * 2);
+    }
+  }
 
+  private void updateGridCache()
+  {
+    if (!gridCache.isValid())
+    {
+      gridCache.update(bubbleCenter,
+                       positionRelativeToIC,
+                       inverting,
+                       integratedCircuitView.getRotation(),
+                       integratedCircuitView.getPosition());
+    }
+  }
+
+  @Override
+  public void invalidateCache()
+  {
+    gridCache.invalidate();
   }
 
   public void updateBoundingBox(BoundingBox boundingBox)
@@ -106,13 +133,14 @@ public class PortView
     {
       boundingBox.include(bubbleCenter, bubbleDiameter / 2);
     }
-    boundingBox.include(position);
+    boundingBox.include(positionRelativeToIC);
   }
 
   public void getGridPosition(Int2D destination)
   {
-    destination.set(integratedCircuitView.getPosition());
-    destination.add(transformedPosition);
+    updateGridCache();
+
+    destination.set(gridCache.getPosition());
   }
 
   public void paintHoverPort(Graphics2D graphics, Viewport viewport)

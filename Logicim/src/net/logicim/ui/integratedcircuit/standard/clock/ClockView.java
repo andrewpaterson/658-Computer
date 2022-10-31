@@ -35,7 +35,7 @@ public class ClockView
       Stroke stroke = graphics.getStroke();
       Color color = graphics.getColor();
 
-      rectangle.paint(graphics, viewport, rotation, position);
+      rectangle.paint(graphics, viewport);
 
       paintClockWaveform(graphics, viewport);
 

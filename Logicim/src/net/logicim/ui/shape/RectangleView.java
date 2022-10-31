@@ -3,7 +3,6 @@ package net.logicim.ui.shape;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
-import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
@@ -13,10 +12,9 @@ public class RectangleView
     extends ShapeView
 {
   protected Tuple2 dimension;
-  protected Tuple2 position;
+  protected Tuple2 positionRelativeToIC;
 
-  protected Tuple2 transformedDimension;
-  protected Tuple2 transformedPosition;
+  protected RectangleGridCache gridCache;
 
   public RectangleView(ShapeHolder shapeHolder, int width, int height)
   {
@@ -24,69 +22,69 @@ public class RectangleView
     this.dimension = new Int2D(width, height);
     if ((width % 2 == 0) && (height % 2 == 0))
     {
-      position = new Int2D(-(width / 2), -(height / 2));
+      positionRelativeToIC = new Int2D(-(width / 2), -(height / 2));
     }
     else
     {
-      position = new Float2D(-((float) width / 2), -((float) height / 2));
+      positionRelativeToIC = new Float2D(-((float) width / 2), -((float) height / 2));
     }
-    transformedPosition = position.clone();
-    transformedDimension = dimension.clone();
+
+    gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
 
   public RectangleView(ShapeHolder shapeHolder, int width, int height, int offsetX, int offsetY)
   {
     super(shapeHolder);
     this.dimension = new Int2D(width, height);
-    this.position = new Int2D(offsetX, offsetY);
-    transformedPosition = position.clone();
-    transformedDimension = dimension.clone();
+    this.positionRelativeToIC = new Int2D(offsetX, offsetY);
+
+    gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, Rotation rotation, Int2D position)
+  public void paint(Graphics2D graphics, Viewport viewport)
   {
-    int transformedWidth = 0;
-    int transformedHeight = 0;
-    int transformedLeft = 0;
-    int transformedTop = 0;
+    updateGridCache();
 
-    rotate(transformedDimension, dimension, rotation);
+    Tuple2 transformedDimension = gridCache.getTransformedDimension();
+    Tuple2 transformedPosition = gridCache.getTransformedPosition();
 
-    if (transformedDimension instanceof Int2D)
+    int x = viewport.transformGridToScreenSpaceX(transformedPosition);
+    int y = viewport.transformGridToScreenSpaceY(transformedPosition);
+    int width = viewport.transformGridToScreenWidth(transformedDimension);
+    int height = viewport.transformGridToScreenHeight(transformedDimension);
+
+    Color shapeFill = viewport.getColours().getShapeFill();
+    Color shapeBorder = viewport.getColours().getShapeBorder();
+
+    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setColor(shapeFill);
+    graphics.fillRect(x, y, width, height);
+    graphics.setColor(shapeBorder);
+    graphics.drawRect(x, y, width, height);
+  }
+
+  private void updateGridCache()
+  {
+    if (!gridCache.isValid())
     {
-      transformedWidth = viewport.transformGridToScreenWidth(((Int2D) transformedDimension).x);
-      transformedHeight = viewport.transformGridToScreenHeight(((Int2D) transformedDimension).y);
+      gridCache.update(dimension, positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
     }
-    else if (transformedDimension instanceof Float2D)
-    {
-      transformedWidth = viewport.transformGridToScreenWidth(((Float2D) transformedDimension).x);
-      transformedHeight = viewport.transformGridToScreenHeight(((Float2D) transformedDimension).y);
-    }
-
-    rotate(transformedPosition, this.position, rotation);
-
-    if (transformedDimension instanceof Int2D)
-    {
-      transformedLeft = viewport.transformGridToScreenSpaceX(position.x + ((Int2D) transformedPosition).x);
-      transformedTop = viewport.transformGridToScreenSpaceY(position.y + ((Int2D) transformedPosition).y);
-    }
-    else if (transformedDimension instanceof Float2D)
-    {
-      transformedLeft = viewport.transformGridToScreenSpaceX(position.x + ((Float2D) transformedPosition).x);
-      transformedTop = viewport.transformGridToScreenSpaceY(position.y + ((Float2D) transformedPosition).y);
-    }
-
-    viewport.paintRectangle(graphics, transformedLeft, transformedTop, transformedWidth, transformedHeight, new BasicStroke(viewport.getLineWidth()), viewport.getColours().getShapeFill(), viewport.getColours().getShapeBorder());
   }
 
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
-    float x = position.getX();
-    float y = position.getY();
+    float x = positionRelativeToIC.getX();
+    float y = positionRelativeToIC.getY();
     boundingBox.include(x, y);
     boundingBox.include(x + dimension.getX(), y + dimension.getY());
+  }
+
+  @Override
+  public void invalidateCache()
+  {
+    gridCache.invalidate();
   }
 }
 

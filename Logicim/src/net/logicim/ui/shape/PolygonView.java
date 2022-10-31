@@ -1,9 +1,6 @@
 package net.logicim.ui.shape;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
-import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
@@ -15,51 +12,35 @@ public class PolygonView
     extends ShapeView
 {
   protected List<Tuple2> points;
-  protected List<Tuple2> transformedBuffer;
-  protected int[] xArray;
-  protected int[] yArray;
+
+  protected PolygonViewGridCache gridCache;
 
   public PolygonView(ShapeHolder shapeHolder, Tuple2... points)
   {
     super(shapeHolder);
     this.points = new ArrayList<>(points.length);
-    this.transformedBuffer = new ArrayList<>(points.length);
     for (Tuple2 point : points)
     {
       this.points.add(point);
-      this.transformedBuffer.add(point.clone());
     }
 
-    xArray = new int[points.length];
-    yArray = new int[points.length];
+    gridCache = new PolygonViewGridCache(this.points);
   }
 
-  protected void transform(Rotation rotation, Int2D position, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport)
   {
-    for (int i = 0; i < points.size(); i++)
-    {
-      rotate(transformedBuffer.get(i), points.get(i), rotation);
-    }
+    updateGridCache();
 
+    List<Tuple2> transformedBuffer = gridCache.getTransformedBuffer();
+    int[] xArray = gridCache.getXArray();
+    int[] yArray = gridCache.getYArray();
     for (int i = 0; i < transformedBuffer.size(); i++)
     {
       Tuple2 tuple2 = transformedBuffer.get(i);
-      if (tuple2 instanceof Int2D)
-      {
-        xArray[i] = viewport.transformGridToScreenSpaceX(((Int2D) tuple2).x + position.x);
-        yArray[i] = viewport.transformGridToScreenSpaceY(((Int2D) tuple2).y + position.y);
-      }
-      else if (tuple2 instanceof Float2D)
-      {
-        xArray[i] = viewport.transformGridToScreenSpaceX(((Float2D) tuple2).x + position.x);
-        yArray[i] = viewport.transformGridToScreenSpaceY(((Float2D) tuple2).y + position.y);
-      }
+      xArray[i] = viewport.transformGridToScreenSpaceX(tuple2.getX());
+      yArray[i] = viewport.transformGridToScreenSpaceY(tuple2.getY());
     }
-  }
 
-  public void paint(Graphics2D graphics, Viewport viewport, Rotation rotation, Int2D position)
-  {
-    transform(rotation, position, viewport);
     Polygon p = new Polygon(xArray, yArray, transformedBuffer.size());
 
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
@@ -75,6 +56,20 @@ public class PolygonView
     for (Tuple2 point : points)
     {
       boundingBox.include(point);
+    }
+  }
+
+  @Override
+  public void invalidateCache()
+  {
+    gridCache.invalidate();
+  }
+
+  private void updateGridCache()
+  {
+    if (!gridCache.isValid())
+    {
+      gridCache.update(points, shapeHolder.getRotation(), shapeHolder.getPosition());
     }
   }
 }

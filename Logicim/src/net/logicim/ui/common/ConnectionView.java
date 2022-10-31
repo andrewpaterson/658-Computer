@@ -1,5 +1,7 @@
 package net.logicim.ui.common;
 
-public class ConnectionView
+public abstract class ConnectionView
 {
+  public abstract void invalidateCache();
 }
+

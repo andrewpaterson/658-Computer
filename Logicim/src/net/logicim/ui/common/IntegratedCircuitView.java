@@ -84,7 +84,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     super.paint(graphics, viewport);
     for (PortView portView : ports)
     {
-      portView.paint(graphics, viewport, rotation, this.position);
+      portView.paint(graphics, viewport);
     }
   }
 
@@ -136,6 +136,16 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       port.updateBoundingBox(boundingBox);
     }
     super.updateBoundingBox();
+  }
+
+  @Override
+  protected void invalidateCache()
+  {
+    super.invalidateCache();
+    for (PortView port : ports)
+    {
+      port.invalidateCache();
+    }
   }
 }
 

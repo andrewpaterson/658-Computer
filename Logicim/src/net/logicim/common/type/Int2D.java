@@ -28,10 +28,24 @@ public class Int2D
     this.y = p.y;
   }
 
+  public void set(Float2D p)
+  {
+    this.x = (int) p.x;
+    this.y = (int) p.y;
+  }
+
+  @Override
   public void set(int x, int y)
   {
     this.x = x;
     this.y = y;
+  }
+
+  @Override
+  public void set(float x, float y)
+  {
+    this.x = (int) x;
+    this.y = (int) y;
   }
 
   public void subtract(Int2D p)
@@ -41,6 +55,12 @@ public class Int2D
   }
 
   public void add(Int2D p)
+  {
+    this.x += p.x;
+    this.y += p.y;
+  }
+
+  public void add(Float2D p)
   {
     this.x += p.x;
     this.y += p.y;
@@ -61,7 +81,15 @@ public class Int2D
   @Override
   public void set(Tuple2 source)
   {
-    set((Int2D) source);
+    if (source instanceof Float2D)
+    {
+      set((Float2D) source);
+    }
+    else if (source instanceof Int2D)
+    {
+      set((Int2D) source);
+    }
+
   }
 
   @Override
@@ -74,6 +102,19 @@ public class Int2D
   public float getY()
   {
     return y;
+  }
+
+  @Override
+  public void add(Tuple2 p)
+  {
+    if (p instanceof Float2D)
+    {
+      add((Float2D) p);
+    }
+    else if (p instanceof Int2D)
+    {
+      add((Int2D) p);
+    }
   }
 
   public boolean equals(int x, int y)

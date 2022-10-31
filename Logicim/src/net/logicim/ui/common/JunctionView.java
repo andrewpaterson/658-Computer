@@ -16,5 +16,11 @@ public class JunctionView
   {
     return position;
   }
+
+  @Override
+  public void invalidateCache()
+  {
+
+  }
 }
 

@@ -2,6 +2,7 @@ package net.logicim.ui.common;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.type.Tuple2;
 
 public enum Rotation
 {
@@ -91,6 +92,19 @@ public enum Rotation
       case WEST:
         p.set(-p.y, p.x);
         break;
+    }
+  }
+
+  public void rotate(Tuple2 dest, Tuple2 source)
+  {
+    dest.set(source);
+    if (dest instanceof Int2D)
+    {
+      transform((Int2D) dest);
+    }
+    else if (dest instanceof Float2D)
+    {
+      transform((Float2D) dest);
     }
   }
 }

@@ -15,6 +15,7 @@ import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
+import net.logicim.ui.trace.JunctionView;
 import net.logicim.ui.trace.TraceView;
 
 import java.awt.*;
@@ -108,6 +109,7 @@ public class SimulatorEditor
       if (placementView != null)
       {
         circuitEditor.ensureSimulation();
+        connectAndClean(placementView);
         placementView.enable(circuitEditor.simulation);
         placementView = null;
       }
@@ -143,6 +145,11 @@ public class SimulatorEditor
     }
   }
 
+
+  private void connectAndClean(DiscreteView discreteView)
+  {
+  }
+
   private void connectAndClean(TraceView... traceViews)
   {
     Set<PortView> portViews = new LinkedHashSet<>();
@@ -150,8 +157,8 @@ public class SimulatorEditor
     {
       if (traceView != null)
       {
-        getPortViewsInGridSpace(portViews, traceView.getStart());
-        getPortViewsInGridSpace(portViews, traceView.getEnd());
+        getPortViewsInGridSpace(portViews, traceView.getStart().getPosition());
+        getPortViewsInGridSpace(portViews, traceView.getEnd().getPosition());
       }
     }
 
@@ -198,7 +205,7 @@ public class SimulatorEditor
     {
       if (((start.x == end.x) || (start.y == end.y)) && !((start.x == end.x) && (start.y == end.y)))
       {
-        return new TraceView(circuitEditor, start, end);
+        return new TraceView(circuitEditor, new JunctionView(start), new JunctionView(end));
       }
     }
     return null;

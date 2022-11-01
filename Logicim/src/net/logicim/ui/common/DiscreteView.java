@@ -169,5 +169,7 @@ public abstract class DiscreteView
       shape.invalidateCache();
     }
   }
+
+  public abstract List<PortView> getPorts();
 }
 

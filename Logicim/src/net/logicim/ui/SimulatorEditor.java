@@ -119,7 +119,7 @@ public class SimulatorEditor
         if (wirePull == null)
         {
           wirePull = new WirePull();
-          hoverConnectionView.getGridPosition(wirePull.getFirstPosition());
+          wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
         }
       }
     }
@@ -148,24 +148,30 @@ public class SimulatorEditor
 
   private void connectAndClean(DiscreteView discreteView)
   {
+    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
+    List<PortView> portViews = discreteView.getPorts();
+    for (PortView portView : portViews)
+    {
+        getConnectionsInGridSpace(connectionViews, portView.getGridPosition());
+    }
   }
 
   private void connectAndClean(TraceView... traceViews)
   {
-    Set<ConnectionView> portViews = new LinkedHashSet<>();
+    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (TraceView traceView : traceViews)
     {
       if (traceView != null)
       {
-        getConnectionsInGridSpace(portViews, traceView.getStart().getPosition());
-        getConnectionsInGridSpace(portViews, traceView.getEnd().getPosition());
+        getConnectionsInGridSpace(connectionViews, traceView.getStart().getPosition());
+        getConnectionsInGridSpace(connectionViews, traceView.getEnd().getPosition());
       }
     }
 
-    if (portViews.size() > 0)
+    if (connectionViews.size() > 0)
     {
       TraceNet traceNet = new TraceNet();
-      for (ConnectionView connectionView : portViews)
+      for (ConnectionView connectionView : connectionViews)
       {
         if (connectionView instanceof PortView)
         {

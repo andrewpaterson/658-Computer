@@ -8,14 +8,13 @@ public abstract class ConnectionView
 {
   public abstract void invalidateCache();
 
-  public abstract void getGridPosition(Int2D destination);
+  public abstract Int2D getGridPosition();
 
   public void paintHoverPort(Graphics2D graphics, Viewport viewport)
   {
-    Int2D destination = new Int2D();
-    getGridPosition(destination);
-    int x = viewport.transformGridToScreenSpaceX(destination.x);
-    int y = viewport.transformGridToScreenSpaceY(destination.y);
+    Int2D gridPosition = getGridPosition();
+    int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
+    int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
     int radius = (int) (viewport.getCircleRadius() * 5);
     graphics.setColor(viewport.getColours().getPortHover());
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));

@@ -136,11 +136,11 @@ public class PortView
     boundingBox.include(positionRelativeToIC);
   }
 
-  public void getGridPosition(Int2D destination)
+  public Int2D getGridPosition()
   {
     updateGridCache();
 
-    destination.set(gridCache.getPosition());
+    return gridCache.getPosition();
   }
 
   @Override

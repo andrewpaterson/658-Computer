@@ -109,11 +109,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public PortView getPortInGrid(int x, int y)
   {
-    Int2D portPositionInGrid = new Int2D();
     for (PortView port : ports)
     {
-      port.getGridPosition(portPositionInGrid);
-      if (portPositionInGrid.equals(x, y))
+      if (port.getGridPosition().equals(x, y))
       {
         return port;
       }
@@ -146,6 +144,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     {
       port.invalidateCache();
     }
+  }
+
+  @Override
+  public List<PortView> getPorts()
+  {
+    return ports;
   }
 }
 

@@ -13,15 +13,25 @@ public abstract class BaseJunctionView
   }
 
   @Override
-  public void getGridPosition(Int2D destination)
+  public Int2D getGridPosition()
   {
-    destination.set(position);
+    return position;
   }
 
   @Override
   public boolean equals(int x, int y)
   {
     return position.equals(x, y);
+  }
+
+  public void set(Int2D position)
+  {
+    this.position.set(position);
+  }
+
+  public void set(int x, int y)
+  {
+    this.position.set(x, y);
   }
 }
 

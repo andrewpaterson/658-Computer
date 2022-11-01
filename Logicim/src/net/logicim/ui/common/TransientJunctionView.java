@@ -14,21 +14,5 @@ public class TransientJunctionView
   public void invalidateCache()
   {
   }
-
-  @Override
-  public void getGridPosition(Int2D destination)
-  {
-    destination.set(position);
-  }
-
-  public void set(Int2D position)
-  {
-    this.position.set(position);
-  }
-
-  public void set(int x, int y)
-  {
-    this.position.set(x, y);
-  }
 }
 

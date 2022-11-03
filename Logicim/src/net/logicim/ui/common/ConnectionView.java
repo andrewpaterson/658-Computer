@@ -1,14 +1,49 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class ConnectionView
+public class ConnectionView
 {
-  public abstract void invalidateCache();
+  public List<ComponentView> connectedComponents;
 
-  public abstract Int2D getGridPosition();
+  public ConnectionView()
+  {
+    connectedComponents = new ArrayList<>();
+  }
+
+  public ConnectionView(ComponentView parentView)
+  {
+    this();
+    connectedComponents.add(parentView);
+  }
+
+  public List<ComponentView> getConnections()
+  {
+    return connectedComponents;
+  }
+
+  public Int2D getGridPosition()
+  {
+    Int2D gridPosition = null;
+    for (ComponentView connectedComponent : connectedComponents)
+    {
+      Int2D position = connectedComponent.getGridPosition(this);
+      if (gridPosition == null)
+      {
+        gridPosition = position;
+      }
+      else if (!gridPosition.equals(position))
+      {
+        throw new SimulatorException("Expected every position in a connection to be equal.");
+      }
+    }
+    return gridPosition;
+  }
 
   public void paintHoverPort(Graphics2D graphics, Viewport viewport)
   {
@@ -20,7 +55,5 @@ public abstract class ConnectionView
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
     graphics.drawOval(x - radius, y - radius, radius * 2, radius * 2);
   }
-
-  public abstract boolean equals(int x, int y);
 }
 

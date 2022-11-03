@@ -76,41 +76,41 @@ public class WirePull
       {
         if (firstPosition.y < mouseY)
         {
-          startOneDirection(mouseY, Rotation.NORTH, firstPosition.y);
+          startOneDirection(mouseY, Rotation.North, firstPosition.y);
         }
         else if (firstPosition.y > mouseY)
         {
-          startOneDirection(firstPosition.y, Rotation.SOUTH, mouseY);
+          startOneDirection(firstPosition.y, Rotation.South, mouseY);
         }
       }
       else if (firstPosition.y == mouseY)
       {
         if (firstPosition.x < mouseX)
         {
-          startOneDirection(mouseX, Rotation.EAST, firstPosition.x);
+          startOneDirection(mouseX, Rotation.East, firstPosition.x);
         }
         else if (firstPosition.x > mouseX)
         {
-          startOneDirection(firstPosition.x, Rotation.WEST, mouseX);
+          startOneDirection(firstPosition.x, Rotation.West, mouseX);
         }
       }
       else
       {
         if (firstDirection != null)
         {
-          if (firstDirection == Rotation.NORTH)
+          if (firstDirection == Rotation.North)
           {
             firstLength = mouseY - firstPosition.y;
           }
-          else if (firstDirection == Rotation.EAST)
+          else if (firstDirection == Rotation.East)
           {
             firstLength = mouseX - firstPosition.x;
           }
-          else if (firstDirection == Rotation.SOUTH)
+          else if (firstDirection == Rotation.South)
           {
             firstLength = firstPosition.y - mouseY;
           }
-          else if (firstDirection == Rotation.WEST)
+          else if (firstDirection == Rotation.West)
           {
             firstLength = firstPosition.x - mouseX;
           }
@@ -127,22 +127,22 @@ public class WirePull
           {
             if (middlePosition.y < mouseY)
             {
-              secondDirection(mouseY, Rotation.NORTH, middlePosition.y);
+              secondDirection(mouseY, Rotation.North, middlePosition.y);
             }
             else if (middlePosition.y > mouseY)
             {
-              secondDirection(middlePosition.y, Rotation.SOUTH, mouseY);
+              secondDirection(middlePosition.y, Rotation.South, mouseY);
             }
           }
           else if (middlePosition.y == mouseY)
           {
             if (middlePosition.x < mouseX)
             {
-              secondDirection(mouseX, Rotation.EAST, middlePosition.x);
+              secondDirection(mouseX, Rotation.East, middlePosition.x);
             }
             else if (middlePosition.x > mouseX)
             {
-              secondDirection(middlePosition.x, Rotation.WEST, mouseX);
+              secondDirection(middlePosition.x, Rotation.West, mouseX);
             }
           }
         }

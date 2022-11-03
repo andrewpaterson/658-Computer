@@ -151,5 +151,19 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   {
     return ports;
   }
+
+  @Override
+  public Int2D getGridPosition(ConnectionView connectionView)
+  {
+    for (PortView portView : ports)
+    {
+      ConnectionView portViewConnections = portView.getConnections();
+      if (portViewConnections == connectionView)
+      {
+        return portView.getGridPosition();
+      }
+    }
+    return null;
+  }
 }
 

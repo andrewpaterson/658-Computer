@@ -6,26 +6,26 @@ import net.logicim.common.type.Tuple2;
 
 public enum Rotation
 {
-  CANNOT,
-  NORTH,
-  EAST,
-  SOUTH,
-  WEST;
+  Cannot,
+  North,
+  East,
+  South,
+  West;
 
   public Rotation rotateRight()
   {
     switch (this)
     {
-      case CANNOT:
-        return CANNOT;
-      case NORTH:
-        return WEST;
-      case WEST:
-        return SOUTH;
-      case SOUTH:
-        return EAST;
+      case Cannot:
+        return Cannot;
+      case North:
+        return West;
+      case West:
+        return South;
+      case South:
+        return East;
       default:
-        return NORTH;
+        return North;
     }
   }
 
@@ -33,16 +33,16 @@ public enum Rotation
   {
     switch (this)
     {
-      case CANNOT:
-        return CANNOT;
-      case NORTH:
-        return EAST;
-      case EAST:
-        return SOUTH;
-      case SOUTH:
-        return WEST;
+      case Cannot:
+        return Cannot;
+      case North:
+        return East;
+      case East:
+        return South;
+      case South:
+        return West;
       default:
-        return NORTH;
+        return North;
     }
   }
 
@@ -50,12 +50,12 @@ public enum Rotation
   {
     switch (this)
     {
-      case CANNOT:
-      case NORTH:
+      case Cannot:
+      case North:
         return 0;
-      case EAST:
+      case East:
         return 90;
-      case SOUTH:
+      case South:
         return 180;
       default:
         return 270;
@@ -67,13 +67,13 @@ public enum Rotation
   {
     switch (this)
     {
-      case EAST:
+      case East:
         p.set(p.y, -p.x);
         break;
-      case SOUTH:
+      case South:
         p.set(-p.x, -p.y);
         break;
-      case WEST:
+      case West:
         p.set(-p.y, p.x);
         break;
     }
@@ -83,13 +83,13 @@ public enum Rotation
   {
     switch (this)
     {
-      case EAST:
+      case East:
         p.set(p.y, -p.x);
         break;
-      case SOUTH:
+      case South:
         p.set(-p.x, -p.y);
         break;
-      case WEST:
+      case West:
         p.set(-p.y, p.x);
         break;
     }
@@ -106,6 +106,34 @@ public enum Rotation
     {
       transform((Float2D) dest);
     }
+  }
+
+  public static Rotation calculateDirection(int startX, int startY, int endX, int endY)
+  {
+    if (startX == endX)
+    {
+      if (startY < endY)
+      {
+        return Rotation.North;
+      }
+      if (startY > endY)
+      {
+        return Rotation.South;
+      }
+    }
+    if (startY == endY)
+    {
+      if (startX < endX)
+      {
+        return Rotation.West;
+      }
+      if (startX > endX)
+      {
+        return Rotation.East;
+      }
+    }
+
+    return Rotation.Cannot;
   }
 }
 

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DiscreteView
+    extends ComponentView
     implements ShapeHolder
 {
   protected CircuitEditor circuitEditor;
@@ -25,7 +26,7 @@ public abstract class DiscreteView
   public DiscreteView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
     this.circuitEditor = circuitEditor;
-    this.position = position;
+    this.position = position.clone();
     this.rotation = rotation;
     circuitEditor.add(this);
     this.boundingBox = new BoundingBox();

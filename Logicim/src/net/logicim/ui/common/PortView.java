@@ -9,9 +9,8 @@ import net.logicim.ui.shape.BoundingBox;
 import java.awt.*;
 
 public class PortView
-    extends ConnectionView
 {
-  protected IntegratedCircuitView<?> integratedCircuitView;
+  protected IntegratedCircuitView<?> owner;
   protected Port port;
   protected Int2D positionRelativeToIC;
 
@@ -21,17 +20,21 @@ public class PortView
   protected Float2D bubbleCenter;
   protected float bubbleDiameter;
 
+  protected ConnectionView connections;
+
   protected PortViewGridCache gridCache;
 
-  public PortView(IntegratedCircuitView<?> integratedCircuitView, Port port, Int2D positionRelativeToIC)
+  public PortView(IntegratedCircuitView<?> integratedCircuit, Port port, Int2D positionRelativeToIC)
   {
-    this.integratedCircuitView = integratedCircuitView;
+    this.owner = integratedCircuit;
     this.port = port;
     this.positionRelativeToIC = positionRelativeToIC;
-    this.integratedCircuitView.addPortView(this);
+    this.owner.addPortView(this);
 
     this.bubbleCenter = null;
     this.bubbleDiameter = 0.9f;
+
+    connections = new ConnectionView(owner);
 
     gridCache = new PortViewGridCache();
   }
@@ -116,12 +119,11 @@ public class PortView
       gridCache.update(bubbleCenter,
                        positionRelativeToIC,
                        inverting,
-                       integratedCircuitView.getRotation(),
-                       integratedCircuitView.getPosition());
+                       owner.getRotation(),
+                       owner.getPosition());
     }
   }
 
-  @Override
   public void invalidateCache()
   {
     gridCache.invalidate();
@@ -143,12 +145,16 @@ public class PortView
     return gridCache.getPosition();
   }
 
-  @Override
   public boolean equals(int x, int y)
   {
     updateGridCache();
 
     return gridCache.getPosition().equals(x, y);
+  }
+
+  public ConnectionView getConnections()
+  {
+    return connections;
   }
 }
 

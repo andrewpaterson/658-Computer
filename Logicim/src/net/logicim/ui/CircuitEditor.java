@@ -1,5 +1,6 @@
 package net.logicim.ui;
 
+import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
@@ -172,20 +173,6 @@ public class CircuitEditor
     return traceViews;
   }
 
-  public List<BaseJunctionView> getJunctionViewsInGridSpace(Int2D gridPosition)
-  {
-    List<BaseJunctionView> junctionViews = new ArrayList<>();
-    for (TraceView traceView : traceViews)
-    {
-      BaseJunctionView junctionView = traceView.getJunctionInGrid(gridPosition);
-      if (junctionView != null)
-      {
-        junctionViews.add(junctionView);
-      }
-    }
-    return junctionViews;
-  }
-
   public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
     List<TraceView> selectedViews = getTraceViewsInScreenSpace(viewport, screenPosition);
@@ -215,6 +202,20 @@ public class CircuitEditor
       }
       return closestView;
     }
+  }
+
+  public List<TraceOverlap> getTracesOverlapping(Line line)
+  {
+    List<TraceOverlap> overlaps = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      TraceOverlap overlap = traceView.getOverlap(line);
+      if (overlap != null)
+      {
+        overlaps.add(overlap);
+      }
+    }
+    return overlaps;
   }
 }
 

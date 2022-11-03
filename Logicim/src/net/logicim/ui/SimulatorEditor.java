@@ -1,5 +1,6 @@
 package net.logicim.ui;
 
+import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
@@ -19,6 +20,7 @@ import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -110,7 +112,7 @@ public class SimulatorEditor
       if (placementView != null)
       {
         circuitEditor.ensureSimulation();
-        connectAndClean(placementView);
+        //connectAndClean(placementView);
         placementView.enable(circuitEditor.simulation);
         placementView = null;
       }
@@ -133,86 +135,53 @@ public class SimulatorEditor
     {
       if (wirePull != null)
       {
-        Int2D firstPosition = wirePull.getFirstPosition();
-        Int2D middlePosition = wirePull.getMiddlePosition();
-        Int2D secondPosition = wirePull.getSecondPosition();
-
-        TraceView firstTraceView = createTraceView(firstPosition, middlePosition);
-        TraceView secondTraceView = createTraceView(middlePosition, secondPosition);
-        connectAndClean(firstTraceView, secondTraceView);
+        executeWirePull(wirePull);
 
         wirePull = null;
       }
     }
   }
 
-  private void connectAndClean(DiscreteView discreteView)
+  private void executeWirePull(WirePull wirePull)
   {
-    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    List<PortView> portViews = discreteView.getPorts();
-    for (PortView portView : portViews)
+    Int2D firstPosition = wirePull.getFirstPosition();
+    Int2D middlePosition = wirePull.getMiddlePosition();
+    Int2D secondPosition = wirePull.getSecondPosition();
+
+    Line firstLine = Line.createLine(firstPosition, middlePosition);
+    Line secondLine = Line.createLine(middlePosition, secondPosition);
+
+    List<TraceOverlap> firstTraceOverlaps = getTracesOverlapping(firstLine);
+    List<TraceOverlap> secondTraceOverlaps = getTracesOverlapping(secondLine);
+
+    List<TraceView> traceViews = new ArrayList<>();
+    if (firstTraceOverlaps.size() == 0 && secondTraceOverlaps.size() == 0)
     {
-        getConnectionsInGridSpace(connectionViews, portView.getGridPosition());
+      addIfNotNull(traceViews, createTraceView(firstPosition, middlePosition));
+      addIfNotNull(traceViews, createTraceView(middlePosition, secondPosition));
     }
   }
 
-  private void connectAndClean(TraceView... traceViews)
+  private <T> void addIfNotNull(List<T> list, T o)
   {
-    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (TraceView traceView : traceViews)
+    if (o != null)
     {
-      if (traceView != null)
-      {
-        getConnectionsInGridSpace(connectionViews, traceView.getStart().getPosition());
-        getConnectionsInGridSpace(connectionViews, traceView.getEnd().getPosition());
-      }
-    }
-
-    if (connectionViews.size() > 0)
-    {
-      TraceNet traceNet = new TraceNet();
-      for (ConnectionView connectionView : connectionViews)
-      {
-        if (connectionView instanceof PortView)
-        {
-          Port port = ((PortView) connectionView).getPort();
-          if (port instanceof Uniport)
-          {
-            Uniport uniport = (Uniport) port;
-            uniport.disconnect();
-            uniport.connect(traceNet);
-          }
-        }
-      }
-
-      for (TraceView traceView : traceViews)
-      {
-        if (traceView != null)
-        {
-          traceView.setTrace(traceNet);
-        }
-      }
+      list.add(o);
     }
   }
 
-  private void getConnectionsInGridSpace(Set<ConnectionView> connectionViews, Int2D position)
+  private List<TraceOverlap> getTracesOverlapping(Line line)
   {
-    List<DiscreteView> discreteViews = circuitEditor.getDiscreteViewsInGridSpace(position);
-    for (DiscreteView discreteView : discreteViews)
+    if (line != null)
     {
-      PortView portView = discreteView.getPortInGrid(position.x, position.y);
-      if (portView != null)
-      {
-        connectionViews.add(portView);
-      }
+      return circuitEditor.getTracesOverlapping(line);
     }
-
-    List<BaseJunctionView> junctionViews = circuitEditor.getJunctionViewsInGridSpace(position);
-    for (BaseJunctionView junctionView : junctionViews)
+    else
     {
-      connectionViews.add(junctionView);
+      return new ArrayList<>();
     }
   }
+
 
   private TraceView createTraceView(Int2D start, Int2D end)
   {
@@ -220,7 +189,7 @@ public class SimulatorEditor
     {
       if (((start.x == end.x) || (start.y == end.y)) && !((start.x == end.x) && (start.y == end.y)))
       {
-        return new TraceView(circuitEditor, new JunctionView(start), new JunctionView(end));
+        return new TraceView(circuitEditor, start, end);
       }
     }
     return null;
@@ -334,7 +303,15 @@ public class SimulatorEditor
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
           int y = viewport.transformScreenToGridY(mousePosition.y);
-          hoverConnectionView = hoverDiscreteView.getPortInGrid(x, y);
+          PortView portView = hoverDiscreteView.getPortInGrid(x, y);
+          if (portView != null)
+          {
+            hoverConnectionView = portView.getConnections();
+          }
+          else
+          {
+            hoverConnectionView = null;
+          }
         }
         else
         {
@@ -348,7 +325,7 @@ public class SimulatorEditor
           {
             int x = viewport.transformScreenToGridX(mousePosition.x);
             int y = viewport.transformScreenToGridY(mousePosition.y);
-            hoverConnectionView = hoverTraceView.getJunctionInGrid(x,y);
+            hoverConnectionView = hoverTraceView.getJunctionInGrid(x, y);
           }
           else
           {
@@ -413,7 +390,7 @@ public class SimulatorEditor
     if (position != null)
     {
       discardPlacement();
-      placementView = viewFactory.create(circuitEditor, position, Rotation.NORTH);
+      placementView = viewFactory.create(circuitEditor, position, Rotation.North);
     }
   }
 

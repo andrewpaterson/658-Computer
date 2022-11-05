@@ -23,6 +23,8 @@ public class TraceView
   protected TraceNet trace;
   protected Rotation direction;
 
+  protected boolean enabled;
+
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
     this.startPosition = start.clone();
@@ -30,8 +32,9 @@ public class TraceView
     this.trace = null;
     circuitEditor.add(this);
     direction = calculateDirection();
-    startJunction = new ConnectionView(this);
-    endJunction = new ConnectionView(this);
+    startJunction = circuitEditor.getOrAddConnection(start, this);
+    endJunction = circuitEditor.getOrAddConnection(end, this);
+    enabled = false;
   }
 
   private Rotation calculateDirection()
@@ -61,12 +64,13 @@ public class TraceView
     graphics.drawLine(x1, y1, x2, y2);
   }
 
-  public void setTrace(TraceNet trace)
+  public void connect(TraceNet trace)
   {
     this.trace = trace;
   }
 
-  public ConnectionView getJunctionInGrid(int x, int y)
+  @Override
+  public ConnectionView getConnectionsInGrid(int x, int y)
   {
     if (startPosition.equals(x, y))
     {
@@ -75,6 +79,16 @@ public class TraceView
     if (endPosition.equals(x, y))
     {
       return endJunction;
+    }
+    return null;
+  }
+
+  public ConnectionView getPotentialConnectionsInGrid(int x, int y)
+  {
+    ConnectionView connections = getConnectionsInGrid(x, y);
+    if (connections != null)
+    {
+      return connections;
     }
 
     boolean positionFallsOnTrace = isPositionOnTrace(x, y);
@@ -87,12 +101,11 @@ public class TraceView
     {
       return null;
     }
-
   }
 
-  public ConnectionView getJunctionInGrid(Int2D gridPosition)
+  public ConnectionView getConnectionsInGrid(Int2D gridPosition)
   {
-    return getJunctionInGrid(gridPosition.x, gridPosition.y);
+    return getConnectionsInGrid(gridPosition.x, gridPosition.y);
   }
 
   private boolean isPositionOnTrace(Int2D gridPosition)
@@ -315,6 +328,20 @@ public class TraceView
     throw new SimulatorException("No opposite found.");
   }
 
+  public ConnectionView getOpposite(ConnectionView connection)
+  {
+    if (startJunction == connection)
+    {
+      return endJunction;
+    }
+    if (endJunction == connection)
+    {
+      return startJunction;
+    }
+
+    throw new SimulatorException("No opposite found.");
+  }
+
   @Override
   public Int2D getGridPosition(ConnectionView connectionView)
   {
@@ -327,6 +354,22 @@ public class TraceView
       return endPosition;
     }
     return null;
+  }
+
+  @Override
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled)
+  {
+    this.enabled = enabled;
+  }
+
+  public TraceNet getTrace()
+  {
+    return trace;
   }
 }
 

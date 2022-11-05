@@ -128,5 +128,28 @@ public class Int2D
   {
     return this.x == x && this.y == y;
   }
+
+  @Override
+  public boolean equals(Object p)
+  {
+    if (p instanceof Int2D)
+    {
+      return this.x == ((Int2D) p).x && this.y == ((Int2D) p).y;
+    }
+    if (p instanceof Float2D)
+    {
+      return this.x == ((Float2D) p).x && this.y == ((Float2D) p).y;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  @Override
+  public String toString()
+  {
+    return "" + x + ", " + y;
+  }
 }
 

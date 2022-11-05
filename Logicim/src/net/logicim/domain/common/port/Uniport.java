@@ -27,8 +27,15 @@ public class Uniport
 
   public void connect(TraceNet trace)
   {
-    this.trace = trace;
-    trace.connect(this);
+    if (this.trace == null)
+    {
+      this.trace = trace;
+      trace.connect(this);
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is already connected.");
+    }
   }
 
   public void writeBool(Timeline timeline, boolean value)
@@ -150,6 +157,7 @@ public class Uniport
     if (trace != null)
     {
       trace.disconnect(this);
+      trace = null;
     }
   }
 

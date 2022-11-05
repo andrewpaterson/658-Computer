@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.shape.BoundingBox;
 
 import java.awt.*;
@@ -155,6 +156,16 @@ public class PortView
   public ConnectionView getConnections()
   {
     return connections;
+  }
+
+  public void connect(TraceNet trace)
+  {
+    if (port instanceof Uniport)
+    {
+      Uniport uniport = (Uniport) port;
+      uniport.disconnect();
+      uniport.connect(trace);
+    }
   }
 }
 

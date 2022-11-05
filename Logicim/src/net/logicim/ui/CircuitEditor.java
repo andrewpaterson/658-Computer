@@ -1,5 +1,6 @@
 package net.logicim.ui;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
@@ -10,7 +11,9 @@ import net.logicim.ui.shape.BoundingBox;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CircuitEditor
 {
@@ -165,9 +168,12 @@ public class CircuitEditor
     List<TraceView> traceViews = new ArrayList<>();
     for (TraceView traceView : this.traceViews)
     {
-      if (traceView.contains(x, y))
+      if (traceView.isEnabled())
       {
-        traceViews.add(traceView);
+        if (traceView.contains(x, y))
+        {
+          traceViews.add(traceView);
+        }
       }
     }
     return traceViews;
@@ -204,18 +210,95 @@ public class CircuitEditor
     }
   }
 
+  public List<TraceView> getTraceViewsInGridSpace(Int2D position)
+  {
+    List<TraceView> result = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      if (traceView.isEnabled())
+      {
+        if (traceView.contains(position))
+        {
+          result.add(traceView);
+        }
+      }
+    }
+    return result;
+  }
+
   public List<TraceOverlap> getTracesOverlapping(Line line)
   {
     List<TraceOverlap> overlaps = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      TraceOverlap overlap = traceView.getOverlap(line);
-      if (overlap != null)
+      if (traceView.isEnabled())
       {
-        overlaps.add(overlap);
+        TraceOverlap overlap = traceView.getOverlap(line);
+        if (overlap != null)
+        {
+          overlaps.add(overlap);
+        }
       }
     }
     return overlaps;
+  }
+
+  public List<ComponentView> getComponents(Int2D position)
+  {
+    ConnectionView connectionView = getConnection(position);
+    return connectionView.getConnectedComponents();
+  }
+
+  public ConnectionView getConnection(Int2D position)
+  {
+    List<DiscreteView> discreteViews = getDiscreteViewsInGridSpace(position);
+    List<TraceView> traceViews = getTraceViewsInGridSpace(position);
+    Set<ConnectionView> connectionViews = new HashSet<>();
+
+    for (TraceView traceView : traceViews)
+    {
+      ConnectionView connectionView = traceView.getConnectionsInGrid(position);
+      if (connectionView != null)
+      {
+        connectionViews.add(connectionView);
+      }
+    }
+
+    for (DiscreteView discreteView : discreteViews)
+    {
+      PortView portView = discreteView.getPortInGrid(position.x, position.y);
+      if (portView != null)
+      {
+        connectionViews.add(portView.getConnections());
+      }
+    }
+
+    if (connectionViews.size() == 1)
+    {
+      return connectionViews.iterator().next();
+    }
+    else if (connectionViews.size() == 0)
+    {
+      return null;
+    }
+    else
+    {
+      throw new SimulatorException("Expected all connections at location [" + position.toString() + "] to be the same.");
+    }
+  }
+
+  public ConnectionView getOrAddConnection(Int2D position, ComponentView componentView)
+  {
+    ConnectionView connection = getConnection(position);
+    if (connection != null)
+    {
+      connection.add(componentView);
+      return connection;
+    }
+    else
+    {
+      return new ConnectionView(componentView);
+    }
   }
 }
 

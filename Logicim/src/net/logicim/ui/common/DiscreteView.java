@@ -149,10 +149,6 @@ public abstract class DiscreteView
     shapes.add(shapeView);
   }
 
-  public abstract boolean isEnabled();
-
-  public abstract PortView getPortInGrid(int x, int y);
-
   public Int2D getPosition()
   {
     return position;
@@ -170,6 +166,10 @@ public abstract class DiscreteView
       shape.invalidateCache();
     }
   }
+
+  public abstract PortView getPortInGrid(int x, int y);
+
+  public abstract boolean isEnabled();
 
   public abstract List<PortView> getPorts();
 }

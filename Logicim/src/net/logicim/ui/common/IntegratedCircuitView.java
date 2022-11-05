@@ -119,6 +119,32 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     return null;
   }
 
+  public PortView getPortInGrid(Int2D position)
+  {
+    return getPortInGrid(position.x, position.y);
+  }
+
+
+  @Override
+  public ConnectionView getConnectionsInGrid(int x, int y)
+  {
+    PortView portView = getPortInGrid(x, y);
+    if (portView != null)
+    {
+      return portView.getConnections();
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  @Override
+  public ConnectionView getConnectionsInGrid(Int2D p)
+  {
+    return getConnectionsInGrid(p.x, p.y);
+  }
+
   @Override
   protected void finaliseView()
   {

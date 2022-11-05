@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ConnectionView
 {
-  public List<ComponentView> connectedComponents;
+  protected List<ComponentView> connectedComponents;
 
   public ConnectionView()
   {
@@ -22,7 +22,7 @@ public class ConnectionView
     connectedComponents.add(parentView);
   }
 
-  public List<ComponentView> getConnections()
+  public List<ComponentView> getConnectedComponents()
   {
     return connectedComponents;
   }
@@ -54,6 +54,23 @@ public class ConnectionView
     graphics.setColor(viewport.getColours().getPortHover());
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
     graphics.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+  }
+
+  public void add(ComponentView componentView)
+  {
+    if (!connectedComponents.contains(componentView))
+    {
+      connectedComponents.add(componentView);
+    }
+    else
+    {
+      throw new SimulatorException("Component has already been added to connection.");
+    }
+  }
+
+  public boolean isConcrete()
+  {
+    return true;
   }
 }
 

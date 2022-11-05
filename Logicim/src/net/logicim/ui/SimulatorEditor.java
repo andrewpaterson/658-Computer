@@ -160,6 +160,67 @@ public class SimulatorEditor
       addIfNotNull(traceViews, createTraceView(firstPosition, middlePosition));
       addIfNotNull(traceViews, createTraceView(middlePosition, secondPosition));
     }
+
+    ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
+    List<ConnectionView> connectionsToProcess = new ArrayList<>();
+    connectionsToProcess.add(firstConnection);
+
+    Set<ConnectionView> connectionsNet = findConnections(connectionsToProcess);
+
+    xxx(connectionsNet);
+  }
+
+  private void xxx(Set<ConnectionView> connectionsNet)
+  {
+    TraceNet trace = new TraceNet();
+    for (ConnectionView connection : connectionsNet)
+    {
+      List<ComponentView> connectedComponents = connection.getConnectedComponents();
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent instanceof TraceView)
+        {
+          ((TraceView) connectedComponent).connect(trace);
+        }
+        else if (connectedComponent instanceof IntegratedCircuitView)
+        {
+          Int2D position = connection.getGridPosition();
+          PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
+          portView.connect(trace);
+        }
+      }
+    }
+  }
+
+  private Set<ConnectionView> findConnections(List<ConnectionView> connectionsToProcess)
+  {
+    Set<ConnectionView> connectionsNet = new LinkedHashSet<>();
+    while (connectionsToProcess.size() > 0)
+    {
+      ConnectionView currentConnection = connectionsToProcess.get(0);
+      connectionsToProcess.remove(0);
+      connectionsNet.add(currentConnection);
+
+      List<ComponentView> components = currentConnection.getConnectedComponents();
+      for (ComponentView component : components)
+      {
+        if (component instanceof TraceView)
+        {
+          TraceView traceView = (TraceView) component;
+          ConnectionView opposite = traceView.getOpposite(currentConnection);
+          if (!connectionsNet.contains(opposite))
+          {
+            connectionsToProcess.add(opposite);
+          }
+        }
+      }
+    }
+    return connectionsNet;
+  }
+
+  private List<ComponentView> getComponents(Int2D position)
+  {
+    return circuitEditor.getComponents(position);
   }
 
   private <T> void addIfNotNull(List<T> list, T o)
@@ -182,12 +243,12 @@ public class SimulatorEditor
     }
   }
 
-
   private TraceView createTraceView(Int2D start, Int2D end)
   {
     if ((start != null) && (end != null))
     {
-      if (((start.x == end.x) || (start.y == end.y)) && !((start.x == end.x) && (start.y == end.y)))
+      if (((start.x == end.x) || (start.y == end.y)) &&
+          !((start.x == end.x) && (start.y == end.y)))
       {
         return new TraceView(circuitEditor, start, end);
       }
@@ -325,7 +386,7 @@ public class SimulatorEditor
           {
             int x = viewport.transformScreenToGridX(mousePosition.x);
             int y = viewport.transformScreenToGridY(mousePosition.y);
-            hoverConnectionView = hoverTraceView.getJunctionInGrid(x, y);
+            hoverConnectionView = hoverTraceView.getPotentialConnectionsInGrid(x, y);
           }
           else
           {

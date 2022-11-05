@@ -22,5 +22,10 @@ public class HoverPortView
   {
     return gridPosition;
   }
+
+  public boolean isConcrete()
+  {
+    return false;
+  }
 }
 

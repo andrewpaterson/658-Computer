@@ -20,6 +20,7 @@ public abstract class DiscreteView
   protected Int2D position;
   protected Rotation rotation;
   protected BoundingBox boundingBox;
+  protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
   protected boolean finalised;
 
@@ -30,6 +31,7 @@ public abstract class DiscreteView
     this.rotation = rotation;
     circuitEditor.add(this);
     this.boundingBox = new BoundingBox();
+    this.selectionBox = new BoundingBox();
     this.shapes = new ArrayList<>();
     this.finalised = false;
   }
@@ -54,6 +56,7 @@ public abstract class DiscreteView
       shape.boundingBoxInclude(boundingBox);
     }
 
+    selectionBox.copy(boundingBox);
     boundingBox.grow(0.5f);
   }
 
@@ -63,6 +66,35 @@ public abstract class DiscreteView
     {
       throw new SimulatorException("View [" + getClass().getSimpleName() + "] is not finalised.");
     }
+  }
+
+  public void paintSelected(Graphics2D graphics, Viewport viewport)
+  {
+    Int2D p = new Int2D();
+    Int2D s = new Int2D();
+
+    getSelectionBoxInScreenSpace(viewport, p, s);
+
+    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    Color color = viewport.getColours().getViewHover();
+    paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
+    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
+    paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
+    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y + s.y, color);
+  }
+
+  private void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
+  {
+    float zoom = viewport.getZoom();
+    float radius = zoom * 3;
+    int left = (int) (x - radius);
+    int top = (int) (y - radius);
+    int width = (int) (radius * 2);
+    int height = (int) (radius * 2);
+    graphics.setColor(viewHover);
+    graphics.fillRect(left, top, width, height);
+    graphics.setColor(Color.BLACK);
+    graphics.drawRect(left, top, width, height);
   }
 
   public void paintBoundingBox(Graphics2D graphics, Viewport viewport)
@@ -76,6 +108,16 @@ public abstract class DiscreteView
   }
 
   public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  {
+    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, boundingBox);
+  }
+
+  public void getSelectionBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  {
+    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, selectionBox);
+  }
+
+  private void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension, BoundingBox boundingBox)
   {
     boundingBox.transform(rotation);
 

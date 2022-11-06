@@ -100,6 +100,11 @@ public class Viewport
     }
   }
 
+  public float getZoom()
+  {
+    return zoom;
+  }
+
   public void paintGrid(Graphics2D graphics)
   {
     Color color = graphics.getColor();

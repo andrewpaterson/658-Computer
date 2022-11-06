@@ -133,5 +133,40 @@ public class BoundingBox
   {
     return transformedHeight;
   }
+
+  protected Float2D getTopLeft()
+  {
+    return topLeft;
+  }
+
+  protected Float2D getBottomRight()
+  {
+    return bottomRight;
+  }
+
+  protected Float2D getTransformedBottomRight()
+  {
+    return transformedBottomRight;
+  }
+
+  public void copy(BoundingBox source)
+  {
+    if (topLeft == null)
+    {
+      topLeft = source.getTopLeft().clone();
+    }
+    else
+    {
+      this.topLeft.set(source.getTopLeft());
+    }
+    if (bottomRight == null)
+    {
+      bottomRight = source.getBottomRight().clone();
+    }
+    else
+    {
+      this.bottomRight.set(source.getBottomRight());
+    }
+  }
 }
 

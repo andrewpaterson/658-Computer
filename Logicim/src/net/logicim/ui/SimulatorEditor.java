@@ -128,6 +128,7 @@ public class SimulatorEditor
         circuitEditor.ensureSimulation();
         executePlacement(placementView);
         placementView = null;
+        mousePositionOnGridChanged();
       }
       else if (wirePull != null)
       {
@@ -284,6 +285,11 @@ public class SimulatorEditor
 
     viewport.paintGrid(graphics);
     circuitEditor.paint(graphics, viewport);
+
+    if ((hoverDiscreteView != null) && (hoverConnectionView == null))
+    {
+      hoverDiscreteView.paintSelected(graphics, viewport);
+    }
 
     if (hoverConnectionView != null)
     {

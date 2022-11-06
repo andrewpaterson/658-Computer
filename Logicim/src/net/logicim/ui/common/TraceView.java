@@ -23,8 +23,6 @@ public class TraceView
   protected TraceNet trace;
   protected Rotation direction;
 
-  protected boolean enabled;
-
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
     this.startPosition = start.clone();
@@ -34,7 +32,6 @@ public class TraceView
     direction = calculateDirection();
     startJunction = circuitEditor.getOrAddConnection(start, this);
     endJunction = circuitEditor.getOrAddConnection(end, this);
-    enabled = false;
   }
 
   private Rotation calculateDirection()
@@ -82,6 +79,12 @@ public class TraceView
     }
     return null;
   }
+
+  public ConnectionView getPotentialConnectionsInGrid(Int2D gridPosition)
+  {
+    return getPotentialConnectionsInGrid(gridPosition.x, gridPosition.y);
+  }
+
 
   public ConnectionView getPotentialConnectionsInGrid(int x, int y)
   {
@@ -356,20 +359,19 @@ public class TraceView
     return null;
   }
 
-  @Override
-  public boolean isEnabled()
-  {
-    return enabled;
-  }
-
-  public void setEnabled(boolean enabled)
-  {
-    this.enabled = enabled;
-  }
-
   public TraceNet getTrace()
   {
     return trace;
+  }
+
+  public Int2D getStartPosition()
+  {
+    return startPosition;
+  }
+
+  public Int2D getEndPosition()
+  {
+    return endPosition;
   }
 }
 

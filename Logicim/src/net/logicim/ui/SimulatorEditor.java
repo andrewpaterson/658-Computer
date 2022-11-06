@@ -127,24 +127,29 @@ public class SimulatorEditor
       if (placementView != null)
       {
         circuitEditor.ensureSimulation();
-        List<PortView> ports = placementView.getPorts();
-        for (PortView portView : ports)
-        {
-          Int2D portPosition = portView.getGridPosition();
-          ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, placementView);
-          portView.setConnection(connectionView);
-          connectConnections(connectionView);
-        }
-        placementView.enable(circuitEditor.simulation);
+        executePlacement(placementView);
         placementView = null;
       }
       else if (wirePull != null)
       {
+        circuitEditor.ensureSimulation();
         executeWirePull(wirePull);
-
         wirePull = null;
       }
     }
+  }
+
+  private void executePlacement(DiscreteView placementView)
+  {
+    List<PortView> ports = placementView.getPorts();
+    for (PortView portView : ports)
+    {
+      Int2D portPosition = portView.getGridPosition();
+      ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, placementView);
+      portView.setConnection(connectionView);
+      connectConnections(connectionView);
+    }
+    placementView.enable(circuitEditor.simulation);
   }
 
   private void executeWirePull(WirePull wirePull)
@@ -159,15 +164,41 @@ public class SimulatorEditor
     List<TraceOverlap> firstTraceOverlaps = getTracesOverlapping(firstLine);
     List<TraceOverlap> secondTraceOverlaps = getTracesOverlapping(secondLine);
 
-    List<TraceView> traceViews = new ArrayList<>();
     if (firstTraceOverlaps.size() == 0 && secondTraceOverlaps.size() == 0)
     {
-      addIfNotNull(traceViews, createTraceView(firstPosition, middlePosition));
-      addIfNotNull(traceViews, createTraceView(middlePosition, secondPosition));
+      if (isValidTrace(firstPosition, middlePosition))
+      {
+        splitTrace(firstPosition);
+        splitTrace(middlePosition);
+         new TraceView(circuitEditor, firstPosition, middlePosition);
+      }
+      if (isValidTrace(middlePosition, secondPosition))
+      {
+        splitTrace(secondPosition);
+         new TraceView(circuitEditor, middlePosition, secondPosition);
+      }
     }
 
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
     connectConnections(firstConnection);
+  }
+
+  private void splitTrace(Int2D position)
+  {
+    List<TraceView> traceViews = circuitEditor.getTraceViewsInGridSpace(position);
+    for (TraceView traceView : traceViews)
+    {
+      ConnectionView connectionView = traceView.getPotentialConnectionsInGrid(position);
+      if (connectionView instanceof HoverPortView)
+      {
+        Int2D startPosition = traceView.getStartPosition();
+        Int2D endPosition = traceView.getEndPosition();
+        circuitEditor.remove(traceView);
+
+        new TraceView(circuitEditor, startPosition, position);
+        new TraceView(circuitEditor, position, endPosition);
+      }
+    }
   }
 
   private void connectConnections(ConnectionView firstConnection)
@@ -235,14 +266,6 @@ public class SimulatorEditor
     return circuitEditor.getComponents(position);
   }
 
-  private <T> void addIfNotNull(List<T> list, T o)
-  {
-    if (o != null)
-    {
-      list.add(o);
-    }
-  }
-
   private List<TraceOverlap> getTracesOverlapping(Line line)
   {
     if (line != null)
@@ -255,19 +278,17 @@ public class SimulatorEditor
     }
   }
 
-  private TraceView createTraceView(Int2D start, Int2D end)
+  private boolean isValidTrace(Int2D start, Int2D end)
   {
     if ((start != null) && (end != null))
     {
       if (((start.x == end.x) || (start.y == end.y)) &&
           !((start.x == end.x) && (start.y == end.y)))
       {
-        TraceView traceView = new TraceView(circuitEditor, start, end);
-        traceView.setEnabled(true);
-        return traceView;
+        return true;
       }
     }
-    return null;
+    return false;
   }
 
   public void resized(int width, int height)

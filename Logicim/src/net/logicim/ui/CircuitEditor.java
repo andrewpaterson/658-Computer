@@ -63,6 +63,12 @@ public class CircuitEditor
     discreteViews.remove(view);
   }
 
+  public void remove(TraceView traceView)
+  {
+    //xxx
+    traceViews.remove(traceView);
+  }
+
   public Simulation reset()
   {
     return circuit.resetSimulation();
@@ -168,12 +174,9 @@ public class CircuitEditor
     List<TraceView> traceViews = new ArrayList<>();
     for (TraceView traceView : this.traceViews)
     {
-      if (traceView.isEnabled())
+      if (traceView.contains(x, y))
       {
-        if (traceView.contains(x, y))
-        {
-          traceViews.add(traceView);
-        }
+        traceViews.add(traceView);
       }
     }
     return traceViews;
@@ -215,12 +218,9 @@ public class CircuitEditor
     List<TraceView> result = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      if (traceView.isEnabled())
+      if (traceView.contains(position))
       {
-        if (traceView.contains(position))
-        {
-          result.add(traceView);
-        }
+        result.add(traceView);
       }
     }
     return result;
@@ -231,13 +231,10 @@ public class CircuitEditor
     List<TraceOverlap> overlaps = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      if (traceView.isEnabled())
+      TraceOverlap overlap = traceView.getOverlap(line);
+      if (overlap != null)
       {
-        TraceOverlap overlap = traceView.getOverlap(line);
-        if (overlap != null)
-        {
-          overlaps.add(overlap);
-        }
+        overlaps.add(overlap);
       }
     }
     return overlaps;

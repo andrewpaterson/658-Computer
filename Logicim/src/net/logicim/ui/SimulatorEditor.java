@@ -13,7 +13,8 @@ import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
-import net.logicim.ui.integratedcircuit.standard.clock.NotGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.NotGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.OrGateViewFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -419,6 +420,7 @@ public class SimulatorEditor
     actions.add(new InputAction(new RunOneEvent(this), KeyEvent.VK_T, Up, Up, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NotGateViewFactory()), KeyEvent.VK_N, Up, Down, Up));
+    actions.add(new InputAction(new CreatePlacementView(this, new OrGateViewFactory()), KeyEvent.VK_O, Up, Down, Up));
     actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
     actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
   }

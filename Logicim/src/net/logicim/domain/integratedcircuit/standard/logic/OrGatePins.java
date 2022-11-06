@@ -5,17 +5,20 @@ import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.propagation.BistateOutputPropagation;
 import net.logicim.domain.common.propagation.InputPropagation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 import static net.logicim.domain.common.port.PortType.Input;
 import static net.logicim.domain.common.port.PortType.Output;
 
-public class NotGatePins
+public class OrGatePins
     extends Pins
 {
-  private Uniport input;
+  private List<Uniport> inputs;
   private Uniport output;
 
-  public NotGatePins()
+  public OrGatePins(int inputCount)
   {
     super();
     output = new Uniport(Output,
@@ -26,20 +29,27 @@ public class NotGatePins
                                                       3.3f,
                                                       nanosecondsToTime(2.5f),
                                                       nanosecondsToTime(2.5f)));
-    input = new Uniport(Input,
-                        this,
-                        "Input",
-                        new InputPropagation("", 0.8f, 2.0f));
-  }
 
-  public Uniport getInput()
-  {
-    return input;
+
+    inputs = new ArrayList<>(inputCount);
+    for (int i = 0; i < inputCount; i++)
+    {
+      Uniport uniport = new Uniport(Input,
+                                    this,
+                                    "Input " + i,
+                                    new InputPropagation("", 0.8f, 2.0f));
+      inputs.add(uniport);
+    }
   }
 
   public Uniport getOutput()
   {
     return output;
+  }
+
+  public List<Uniport> getInputs()
+  {
+    return inputs;
   }
 }
 

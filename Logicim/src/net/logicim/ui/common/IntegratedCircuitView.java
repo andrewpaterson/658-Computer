@@ -131,7 +131,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     PortView portView = getPortInGrid(x, y);
     if (portView != null)
     {
-      return portView.getConnections();
+      return portView.getConnection();
     }
     else
     {
@@ -183,7 +183,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   {
     for (PortView portView : ports)
     {
-      ConnectionView portViewConnections = portView.getConnections();
+      ConnectionView portViewConnections = portView.getConnection();
       if (portViewConnections == connectionView)
       {
         return portView.getGridPosition();

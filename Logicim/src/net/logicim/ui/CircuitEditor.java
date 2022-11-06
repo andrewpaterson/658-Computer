@@ -269,7 +269,7 @@ public class CircuitEditor
       PortView portView = discreteView.getPortInGrid(position.x, position.y);
       if (portView != null)
       {
-        connectionViews.add(portView.getConnections());
+        connectionViews.add(portView.getConnection());
       }
     }
 

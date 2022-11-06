@@ -3,8 +3,6 @@ package net.logicim.ui;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.LongTime;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.common.*;
 import net.logicim.ui.editor.*;
@@ -109,14 +107,7 @@ public class SimulatorEditor
 
     if (button == BUTTON1)
     {
-      if (placementView != null)
-      {
-        circuitEditor.ensureSimulation();
-        //connectAndClean(placementView);
-        placementView.enable(circuitEditor.simulation);
-        placementView = null;
-      }
-      else if (hoverConnectionView != null)
+      if ((hoverConnectionView != null && placementView == null))
       {
         if (wirePull == null)
         {
@@ -133,7 +124,21 @@ public class SimulatorEditor
 
     if (button == BUTTON1)
     {
-      if (wirePull != null)
+      if (placementView != null)
+      {
+        circuitEditor.ensureSimulation();
+        List<PortView> ports = placementView.getPorts();
+        for (PortView portView : ports)
+        {
+          Int2D portPosition = portView.getGridPosition();
+          ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, placementView);
+          portView.setConnection(connectionView);
+          connectConnections(connectionView);
+        }
+        placementView.enable(circuitEditor.simulation);
+        placementView = null;
+      }
+      else if (wirePull != null)
       {
         executeWirePull(wirePull);
 
@@ -162,17 +167,21 @@ public class SimulatorEditor
     }
 
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
+    connectConnections(firstConnection);
+  }
+
+  private void connectConnections(ConnectionView firstConnection)
+  {
     List<ConnectionView> connectionsToProcess = new ArrayList<>();
     connectionsToProcess.add(firstConnection);
 
     Set<ConnectionView> connectionsNet = findConnections(connectionsToProcess);
 
-    xxx(connectionsNet);
+    connect(connectionsNet, new TraceNet());
   }
 
-  private void xxx(Set<ConnectionView> connectionsNet)
+  private void connect(Set<ConnectionView> connectionsNet, TraceNet trace)
   {
-    TraceNet trace = new TraceNet();
     for (ConnectionView connection : connectionsNet)
     {
       List<ComponentView> connectedComponents = connection.getConnectedComponents();
@@ -185,8 +194,11 @@ public class SimulatorEditor
         else if (connectedComponent instanceof IntegratedCircuitView)
         {
           Int2D position = connection.getGridPosition();
-          PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
-          portView.connect(trace);
+          if (position != null)
+          {
+            PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
+            portView.connect(trace);
+          }
         }
       }
     }
@@ -250,7 +262,9 @@ public class SimulatorEditor
       if (((start.x == end.x) || (start.y == end.y)) &&
           !((start.x == end.x) && (start.y == end.y)))
       {
-        return new TraceView(circuitEditor, start, end);
+        TraceView traceView = new TraceView(circuitEditor, start, end);
+        traceView.setEnabled(true);
+        return traceView;
       }
     }
     return null;
@@ -367,7 +381,7 @@ public class SimulatorEditor
           PortView portView = hoverDiscreteView.getPortInGrid(x, y);
           if (portView != null)
           {
-            hoverConnectionView = portView.getConnections();
+            hoverConnectionView = portView.getConnection();
           }
           else
           {

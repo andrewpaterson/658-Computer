@@ -21,7 +21,7 @@ public class PortView
   protected Float2D bubbleCenter;
   protected float bubbleDiameter;
 
-  protected ConnectionView connections;
+  protected ConnectionView connection;
 
   protected PortViewGridCache gridCache;
 
@@ -35,7 +35,7 @@ public class PortView
     this.bubbleCenter = null;
     this.bubbleDiameter = 0.9f;
 
-    connections = new ConnectionView(owner);
+    connection = null;
 
     gridCache = new PortViewGridCache();
   }
@@ -153,9 +153,14 @@ public class PortView
     return gridCache.getPosition().equals(x, y);
   }
 
-  public ConnectionView getConnections()
+  public ConnectionView getConnection()
   {
-    return connections;
+    return connection;
+  }
+
+  public void setConnection(ConnectionView connection)
+  {
+    this.connection = connection;
   }
 
   public void connect(TraceNet trace)

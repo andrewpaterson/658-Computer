@@ -163,7 +163,7 @@ public class PortView
     this.connection = connection;
   }
 
-  public void connect(TraceNet trace)
+  public void connectTraceNet(TraceNet trace)
   {
     if (port instanceof Uniport)
     {
@@ -171,6 +171,11 @@ public class PortView
       uniport.disconnect();
       uniport.connect(trace);
     }
+  }
+
+  public void disconnectTraceNet()
+  {
+    port.disconnect();
   }
 }
 

@@ -31,7 +31,7 @@ public class Colours
     smallGridDotColor = new Color(0xCBCBCB);
     largeGridDotColor = new Color(0xABABAB);
     traceUnsettled = new Color(70, 160, 170);
-    traceUndriven = new Color(70, 70, 70);
+    traceUndriven = new Color(110, 90, 90);
     traceError = new Color(255, 0, 0);
 
     voltageColours = new Color[71];

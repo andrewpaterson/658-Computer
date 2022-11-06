@@ -19,7 +19,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -170,12 +169,12 @@ public class SimulatorEditor
       {
         splitTrace(firstPosition);
         splitTrace(middlePosition);
-         new TraceView(circuitEditor, firstPosition, middlePosition);
+        new TraceView(circuitEditor, firstPosition, middlePosition);
       }
       if (isValidTrace(middlePosition, secondPosition))
       {
         splitTrace(secondPosition);
-         new TraceView(circuitEditor, middlePosition, secondPosition);
+        new TraceView(circuitEditor, middlePosition, secondPosition);
       }
     }
 
@@ -203,62 +202,9 @@ public class SimulatorEditor
 
   private void connectConnections(ConnectionView firstConnection)
   {
-    List<ConnectionView> connectionsToProcess = new ArrayList<>();
-    connectionsToProcess.add(firstConnection);
+    Set<ConnectionView> connectionsNet = circuitEditor.findConnections(firstConnection);
 
-    Set<ConnectionView> connectionsNet = findConnections(connectionsToProcess);
-
-    connect(connectionsNet, new TraceNet());
-  }
-
-  private void connect(Set<ConnectionView> connectionsNet, TraceNet trace)
-  {
-    for (ConnectionView connection : connectionsNet)
-    {
-      List<ComponentView> connectedComponents = connection.getConnectedComponents();
-      for (ComponentView connectedComponent : connectedComponents)
-      {
-        if (connectedComponent instanceof TraceView)
-        {
-          ((TraceView) connectedComponent).connect(trace);
-        }
-        else if (connectedComponent instanceof IntegratedCircuitView)
-        {
-          Int2D position = connection.getGridPosition();
-          if (position != null)
-          {
-            PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
-            portView.connect(trace);
-          }
-        }
-      }
-    }
-  }
-
-  private Set<ConnectionView> findConnections(List<ConnectionView> connectionsToProcess)
-  {
-    Set<ConnectionView> connectionsNet = new LinkedHashSet<>();
-    while (connectionsToProcess.size() > 0)
-    {
-      ConnectionView currentConnection = connectionsToProcess.get(0);
-      connectionsToProcess.remove(0);
-      connectionsNet.add(currentConnection);
-
-      List<ComponentView> components = currentConnection.getConnectedComponents();
-      for (ComponentView component : components)
-      {
-        if (component instanceof TraceView)
-        {
-          TraceView traceView = (TraceView) component;
-          ConnectionView opposite = traceView.getOpposite(currentConnection);
-          if (!connectionsNet.contains(opposite))
-          {
-            connectionsToProcess.add(opposite);
-          }
-        }
-      }
-    }
-    return connectionsNet;
+    circuitEditor.connectToTraceNet(connectionsNet, new TraceNet());
   }
 
   private List<ComponentView> getComponents(Int2D position)
@@ -468,6 +414,7 @@ public class SimulatorEditor
     actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NotGateViewFactory()), KeyEvent.VK_N, Up, Down, Up));
     actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
+    actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
   }
 
   public void keyPressed(int keyCode)
@@ -553,6 +500,20 @@ public class SimulatorEditor
   public void toggleTunSimulation()
   {
     running = !running;
+  }
+
+  public void deleteComponent()
+  {
+    if (hoverTraceView != null)
+    {
+      circuitEditor.remove(hoverTraceView);
+      hoverTraceView = null;
+    }
+    else if (hoverDiscreteView != null)
+    {
+      circuitEditor.remove((IntegratedCircuitView<?>) hoverDiscreteView);
+      hoverDiscreteView = null;
+    }
   }
 }
 

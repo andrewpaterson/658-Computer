@@ -6,14 +6,14 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.BoundingBox;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CircuitEditor
 {
@@ -57,16 +57,56 @@ public class CircuitEditor
     traceViews.add(view);
   }
 
-  public void remove(IntegratedCircuitView<?> view)
+  public void remove(IntegratedCircuitView<?> integratedCircuitView)
   {
-    circuit.remove(view.getIntegratedCircuit());
-    discreteViews.remove(view);
+    List<PortView> portViews = integratedCircuitView.getPorts();
+    for (PortView portView : portViews)
+    {
+      ConnectionView connection = portView.getConnection();
+      disconnectTraceNet(findConnections(connection));
+    }
+
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
+    circuit.remove(integratedCircuit);
+    discreteViews.remove(integratedCircuitView);
   }
 
   public void remove(TraceView traceView)
   {
-    //xxx
+    ConnectionView startConnection = traceView.getStartConnection();
+    ConnectionView endConnection = traceView.getEndConnection();
+
+    disconnectTraceNet(findConnections(startConnection));
+    disconnectTraceNet(findConnections(endConnection));
+
+    startConnection.remove(traceView);
+    endConnection.remove(traceView);
+    traceView.removed();
     traceViews.remove(traceView);
+  }
+
+  public void disconnectTraceNet(Set<ConnectionView> connectionsNet)
+  {
+    for (ConnectionView connection : connectionsNet)
+    {
+      List<ComponentView> connectedComponents = connection.getConnectedComponents();
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent instanceof TraceView)
+        {
+          ((TraceView) connectedComponent).disconnectTraceNet();
+        }
+        else if (connectedComponent instanceof IntegratedCircuitView)
+        {
+          Int2D position = connection.getGridPosition();
+          if (position != null)
+          {
+            PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
+            portView.disconnectTraceNet();
+          }
+        }
+      }
+    }
   }
 
   public Simulation reset()
@@ -295,6 +335,76 @@ public class CircuitEditor
     else
     {
       return new ConnectionView(componentView);
+    }
+  }
+
+  public Set<ConnectionView> findConnections(ConnectionView connection)
+  {
+    if (connection != null)
+    {
+      ArrayList<ConnectionView> connectionsToProcess = new ArrayList<>();
+      connectionsToProcess.add(connection);
+      return findConnections(connectionsToProcess);
+    }
+    else
+    {
+      return new LinkedHashSet<>();
+    }
+  }
+
+  public Set<ConnectionView> findConnections(List<ConnectionView> connectionsToProcess)
+  {
+    Set<ConnectionView> connectionsNet = new LinkedHashSet<>();
+    while (connectionsToProcess.size() > 0)
+    {
+      ConnectionView currentConnection = connectionsToProcess.get(0);
+      connectionsToProcess.remove(0);
+      connectionsNet.add(currentConnection);
+
+      List<ComponentView> components = currentConnection.getConnectedComponents();
+      if (components != null)
+      {
+        for (ComponentView component : components)
+        {
+          if (component instanceof TraceView)
+          {
+            TraceView traceView = (TraceView) component;
+            ConnectionView opposite = traceView.getOpposite(currentConnection);
+            if (opposite != null)
+            {
+              if (!connectionsNet.contains(opposite))
+              {
+                connectionsToProcess.add(opposite);
+              }
+            }
+          }
+        }
+      }
+    }
+    return connectionsNet;
+  }
+
+  public void connectToTraceNet(Set<ConnectionView> connectionsNet, TraceNet trace)
+  {
+    for (ConnectionView connection : connectionsNet)
+    {
+      List<ComponentView> connectedComponents = connection.getConnectedComponents();
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent instanceof TraceView)
+        {
+          ((TraceView) connectedComponent).connect(trace);
+        }
+        else if (connectedComponent instanceof IntegratedCircuitView)
+        {
+          Int2D position = connection.getGridPosition();
+          if (position != null)
+          {
+            PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
+            portView.connectTraceNet(trace);
+          }
+        }
+      }
     }
   }
 }

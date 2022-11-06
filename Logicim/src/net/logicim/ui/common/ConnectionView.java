@@ -47,13 +47,19 @@ public class ConnectionView
 
   public void paintHoverPort(Graphics2D graphics, Viewport viewport)
   {
-    Int2D gridPosition = getGridPosition();
-    int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
-    int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
-    int radius = (int) (viewport.getCircleRadius() * 5);
-    graphics.setColor(viewport.getColours().getPortHover());
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+    try
+    {
+      Int2D gridPosition = getGridPosition();
+      int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
+      int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
+      int radius = (int) (viewport.getCircleRadius() * 5);
+      graphics.setColor(viewport.getColours().getPortHover());
+      graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+      graphics.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+    }
+    catch (RuntimeException ignored)
+    {
+    }
   }
 
   public void add(ComponentView componentView)
@@ -71,6 +77,15 @@ public class ConnectionView
   public boolean isConcrete()
   {
     return true;
+  }
+
+  public void remove(ComponentView traceView)
+  {
+    boolean removed = connectedComponents.remove(traceView);
+    if (!removed)
+    {
+      throw new SimulatorException("Could not remove component from connections.");
+    }
   }
 }
 

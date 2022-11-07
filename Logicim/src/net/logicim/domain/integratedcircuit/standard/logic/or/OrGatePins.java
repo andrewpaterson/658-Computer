@@ -1,4 +1,4 @@
-package net.logicim.domain.integratedcircuit.standard.logic;
+package net.logicim.domain.integratedcircuit.standard.logic.or;
 
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.port.Uniport;
@@ -12,13 +12,13 @@ import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 import static net.logicim.domain.common.port.PortType.Input;
 import static net.logicim.domain.common.port.PortType.Output;
 
-public class AndGatePins
+public class OrGatePins
     extends Pins
 {
   private List<Uniport> inputs;
   private Uniport output;
 
-  public AndGatePins(int inputCount)
+  public OrGatePins(int inputCount)
   {
     super();
     output = new Uniport(Output,
@@ -29,6 +29,7 @@ public class AndGatePins
                                                       3.3f,
                                                       nanosecondsToTime(2.5f),
                                                       nanosecondsToTime(2.5f)));
+
 
     inputs = new ArrayList<>(inputCount);
     for (int i = 0; i < inputCount; i++)

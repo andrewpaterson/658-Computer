@@ -2,8 +2,8 @@ package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.integratedcircuit.standard.logic.NotGate;
-import net.logicim.domain.integratedcircuit.standard.logic.NotGatePins;
+import net.logicim.domain.integratedcircuit.standard.logic.buffer.NotGate;
+import net.logicim.domain.integratedcircuit.standard.logic.buffer.NotGatePins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;

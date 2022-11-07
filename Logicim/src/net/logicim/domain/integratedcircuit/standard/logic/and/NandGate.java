@@ -1,4 +1,4 @@
-package net.logicim.domain.integratedcircuit.standard.logic;
+package net.logicim.domain.integratedcircuit.standard.logic.and;
 
 import net.logicim.domain.common.Circuit;
 

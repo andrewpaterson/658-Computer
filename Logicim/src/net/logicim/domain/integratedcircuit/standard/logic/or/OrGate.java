@@ -1,4 +1,4 @@
-package net.logicim.domain.integratedcircuit.standard.logic;
+package net.logicim.domain.integratedcircuit.standard.logic.or;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
@@ -11,10 +11,10 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
-public class AndGate
-    extends IntegratedCircuit<AndGatePins, Stateless>
+public class OrGate
+    extends IntegratedCircuit<OrGatePins, Stateless>
 {
-  public AndGate(Circuit circuit, String name, AndGatePins pins)
+  public OrGate(Circuit circuit, String name, OrGatePins pins)
   {
     super(circuit, name, pins);
     setState(new Stateless(this));
@@ -46,13 +46,13 @@ public class AndGate
       return;
     }
 
-    boolean value = true;
+    boolean value = false;
     for (Uniport input : inputs)
     {
       TraceValue inValue = input.readValue();
-      if (inValue.isLow())
+      if (inValue.isHigh())
       {
-        value = false;
+        value = true;
         break;
       }
     }
@@ -67,7 +67,7 @@ public class AndGate
   @Override
   public String getType()
   {
-    return "AND Gate";
+    return "OR Gate";
   }
 }
 

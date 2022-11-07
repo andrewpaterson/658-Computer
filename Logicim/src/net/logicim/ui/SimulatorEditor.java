@@ -16,6 +16,7 @@ import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.buffer.NotGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
 
 import java.awt.*;
@@ -423,6 +424,7 @@ public class SimulatorEditor
     actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NotGateViewFactory()), KeyEvent.VK_N, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new OrGateViewFactory()), KeyEvent.VK_O, Up, Down, Up));
+    actions.add(new InputAction(new CreatePlacementView(this, new NorGateViewFactory()), KeyEvent.VK_O, Up, Down, Down));
     actions.add(new InputAction(new CreatePlacementView(this, new AndGateViewFactory()), KeyEvent.VK_A, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NandGateViewFactory()), KeyEvent.VK_A, Up, Down, Down));
     actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));

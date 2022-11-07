@@ -26,44 +26,13 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   public BaseAndGateView(CircuitEditor circuitEditor, IC integratedCircuit, Int2D position, Rotation rotation)
   {
     super(circuitEditor, integratedCircuit, position, rotation);
-    arcViewFront = new ArcView(this, new Float2D(0, -0.4f), 1.5f, 0, 180, true, true);
+
     float height = 1.4f;
+    arcViewFront = new ArcView(this, new Float2D(0, -0.4f), 1.5f, 0, 180, true, true);
     rectangleViewBack = new RectangleView(this, new Float2D(-1.5f, -0.5f), new Float2D(3, height), false, true);
     lineView1 = new LineView(this, new Float2D(-1.5f, -0.5f), new Float2D(-1.5f, -0.5f + height));
     lineView2 = new LineView(this, new Float2D(-1.5f, -0.5f + height), new Float2D(1.5f, -0.5f + height));
     lineView3 = new LineView(this, new Float2D(1.5f, -0.5f + height), new Float2D(1.5f, -0.5f));
-  }
-
-  protected void createLogicGatePorts(int inputCount, boolean negateOutput)
-  {
-    int start;
-    int end;
-    boolean skipZero = false;
-    if (inputCount % 2 == 0)
-    {
-      end = inputCount / 2;
-      skipZero = true;
-    }
-    else
-    {
-      end = inputCount / 2;
-    }
-    start = -end;
-
-    int portNumber = 0;
-    for (int i = start; i <= end; i++)
-    {
-      if (!((i == 0) & skipZero))
-      {
-        new PortView(this, this.integratedCircuit.getPort("Input " + portNumber), new Int2D(i, 1));
-        portNumber++;
-      }
-    }
-    PortView outputPortView = new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -2));
-    if (negateOutput)
-    {
-      outputPortView.setInverting(true, Rotation.North);
-    }
   }
 
   @Override

@@ -1,4 +1,4 @@
-package net.logicim.domain.integratedcircuit.standard.logic;
+package net.logicim.domain.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
@@ -11,10 +11,10 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
-public class OrGate
-    extends IntegratedCircuit<OrGatePins, Stateless>
+public class NotGate
+    extends IntegratedCircuit<NotGatePins, Stateless>
 {
-  public OrGate(Circuit circuit, String name, OrGatePins pins)
+  public NotGate(Circuit circuit, String name, NotGatePins pins)
   {
     super(circuit, name, pins);
     setState(new Stateless(this));
@@ -29,40 +29,29 @@ public class OrGate
   @Override
   public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
   {
-    List<Uniport> inputs = pins.getInputs();
-    boolean unsettled = false;
-    for (Uniport input : inputs)
-    {
-      TraceValue inValue = input.readValue();
-      if (inValue.isError() || inValue.isImpedance())
-      {
-        unsettled = true;
-        break;
-      }
-    }
-    if (unsettled)
+    Uniport input = pins.getInput();
+    TraceValue inValue = input.readValue();
+    if (inValue.isError() || inValue.isImpedance() || inValue.isUnsettled())
     {
       pins.getOutput().writeUnsettled(simulation.getTimeline());
-      return;
     }
-
-    boolean value = false;
-    for (Uniport input : inputs)
+    else
     {
-      TraceValue inValue = input.readValue();
       if (inValue.isHigh())
       {
-        value = true;
-        break;
+        pins.getOutput().writeBool(simulation.getTimeline(), false);
+      }
+      else if (inValue.isLow())
+      {
+        pins.getOutput().writeBool(simulation.getTimeline(), true);
       }
     }
-    pins.getOutput().writeBool(simulation.getTimeline(), value);
   }
 
   @Override
   public String getType()
   {
-    return "OR Gate";
+    return "NOT Gate";
   }
 }
 

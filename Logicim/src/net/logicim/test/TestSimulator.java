@@ -2,13 +2,11 @@ package net.logicim.test;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.trace.TraceNet;
-import net.logicim.domain.integratedcircuit.nexperia.LVC541;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
-import net.logicim.domain.integratedcircuit.standard.logic.NotGate;
-import net.logicim.domain.integratedcircuit.standard.logic.NotGatePins;
+import net.logicim.domain.integratedcircuit.standard.logic.buffer.NotGate;
+import net.logicim.domain.integratedcircuit.standard.logic.buffer.NotGatePins;
 
 import static net.logicim.domain.common.Units.MHz;
 

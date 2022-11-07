@@ -78,30 +78,34 @@ public class Timeline
   {
     long targetTime = time + timeForward;
 
-    SimultaneousEvents events = this.events.findFirst();
-    if (events != null)
+    for (;;)
     {
-      if (events.time >= time)
+      SimultaneousEvents events = this.events.findFirst();
+      if (events != null)
       {
-        if (events.time < targetTime)
+        if (events.time >= time)
         {
-          time = events.time;
-          runEvent(events);
+          if (events.time < targetTime)
+          {
+            time = events.time;
+            runEvent(events);
+          }
+          else
+          {
+            time = targetTime;
+            return true;
+          }
         }
         else
         {
-          time = targetTime;
+          throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
         }
-        return true;
       }
       else
       {
-        throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+        time = targetTime;
+        return false;
       }
-    }
-    else
-    {
-      return false;
     }
   }
 

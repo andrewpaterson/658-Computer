@@ -10,7 +10,7 @@ public class ArcView
     extends ShapeView
 {
   private Float2D circleCenter;
-  private int width;
+  private float width;
   private int startAngle;
   private int arcAngle;
   private boolean border;
@@ -20,7 +20,7 @@ public class ArcView
 
   public ArcView(ShapeHolder shapeHolder,
                  Float2D circleCenter,
-                 int width,
+                 float width,
                  int startAngle,
                  int arcAngle,
                  boolean border,

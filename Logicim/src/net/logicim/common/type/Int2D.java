@@ -66,7 +66,15 @@ public class Int2D
     this.y += p.y;
   }
 
+  @Override
   public void add(int x, int y)
+  {
+    this.x += x;
+    this.y += y;
+  }
+
+  @Override
+  public void add(float x, float y)
   {
     this.x += x;
     this.y += y;

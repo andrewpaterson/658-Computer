@@ -73,6 +73,14 @@ public class OrGateView
   }
 
   @Override
+  protected void updateBoundingBox()
+  {
+    boundingBox.include(1.5f, 0f);
+    boundingBox.include(-1.5f, 0f);
+    super.updateBoundingBox();
+  }
+
+  @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     if ((arcViewRight != null) && (arcViewLeft != null) && (arcViewBottom != null))

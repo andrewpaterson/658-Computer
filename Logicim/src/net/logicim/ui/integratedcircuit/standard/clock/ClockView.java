@@ -22,7 +22,7 @@ public class ClockView
           rotation);
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
 
-    rectangle = new RectangleView(this, 2, 2);
+    rectangle = new RectangleView(this, 2, 2, true, true);
 
     finaliseView();
   }

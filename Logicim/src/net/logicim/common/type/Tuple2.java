@@ -19,4 +19,6 @@ public abstract class Tuple2
   public abstract void add(int x, int y);
 
   public abstract void divide(int i);
+
+  public abstract void add(float x, float y);
 }

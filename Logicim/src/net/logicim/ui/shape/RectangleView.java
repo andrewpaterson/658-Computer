@@ -13,12 +13,16 @@ public class RectangleView
 {
   protected Tuple2 dimension;
   protected Tuple2 positionRelativeToIC;
+  protected boolean border;
+  protected boolean fill;
 
   protected RectangleGridCache gridCache;
 
-  public RectangleView(ShapeHolder shapeHolder, int width, int height)
+  public RectangleView(ShapeHolder shapeHolder, int width, int height, boolean border, boolean fill)
   {
     super(shapeHolder);
+    this.border = border;
+    this.fill = fill;
     this.dimension = new Int2D(width, height);
     if ((width % 2 == 0) && (height % 2 == 0))
     {
@@ -32,11 +36,13 @@ public class RectangleView
     gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
 
-  public RectangleView(ShapeHolder shapeHolder, int width, int height, int offsetX, int offsetY)
+  public RectangleView(ShapeHolder shapeHolder, Tuple2 position, Tuple2 dimension, boolean border, boolean fill)
   {
     super(shapeHolder);
-    this.dimension = new Int2D(width, height);
-    this.positionRelativeToIC = new Int2D(offsetX, offsetY);
+    this.border = border;
+    this.fill = fill;
+    this.dimension = dimension.clone();
+    this.positionRelativeToIC = position.clone();
 
     gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
@@ -58,10 +64,16 @@ public class RectangleView
     Color shapeBorder = viewport.getColours().getShapeBorder();
 
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.setColor(shapeFill);
-    graphics.fillRect(x, y, width, height);
-    graphics.setColor(shapeBorder);
-    graphics.drawRect(x, y, width, height);
+    if (fill)
+    {
+      graphics.setColor(shapeFill);
+      graphics.fillRect(x, y, width, height);
+    }
+    if (border)
+    {
+      graphics.setColor(shapeBorder);
+      graphics.drawRect(x, y, width, height);
+    }
   }
 
   private void updateGridCache()

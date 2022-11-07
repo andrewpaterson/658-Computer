@@ -44,7 +44,7 @@ public class RectangleGridCache
     }
   }
 
-  private void transformFloat2D(Tuple2 positionRelativeToIC)
+  private void transformFloat2D(Tuple2 position)
   {
     float x = 0;
     float y = 0;
@@ -62,8 +62,8 @@ public class RectangleGridCache
       height *= -1;
     }
     transformedDimension.set(width, height);
-    transformedPosition.set(x, y);
-    transformedPosition.add(positionRelativeToIC);
+    transformedPosition.add(x, y);
+    transformedPosition.add(position);
   }
 
   private void transformInt2D(Tuple2 position)

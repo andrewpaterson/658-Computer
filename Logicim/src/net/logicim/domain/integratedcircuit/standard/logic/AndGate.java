@@ -11,10 +11,10 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
-public class NotGate
-    extends IntegratedCircuit<NotGatePins, Stateless>
+public class AndGate
+    extends IntegratedCircuit<AndGatePins, Stateless>
 {
-  public NotGate(Circuit circuit, String name, NotGatePins pins)
+  public AndGate(Circuit circuit, String name, AndGatePins pins)
   {
     super(circuit, name, pins);
     setState(new Stateless(this));
@@ -29,29 +29,40 @@ public class NotGate
   @Override
   public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
   {
-    Uniport input = pins.getInput();
-    TraceValue inValue = input.readValue();
-    if (inValue.isError() || inValue.isImpedance())
+    List<Uniport> inputs = pins.getInputs();
+    boolean unsettled = false;
+    for (Uniport input : inputs)
+    {
+      TraceValue inValue = input.readValue();
+      if (inValue.isError() || inValue.isImpedance())
+      {
+        unsettled = true;
+        break;
+      }
+    }
+    if (unsettled)
     {
       pins.getOutput().writeUnsettled(simulation.getTimeline());
+      return;
     }
-    else
+
+    boolean value = true;
+    for (Uniport input : inputs)
     {
-      if (inValue.isHigh())
+      TraceValue inValue = input.readValue();
+      if (inValue.isLow())
       {
-        pins.getOutput().writeBool(simulation.getTimeline(), false);
-      }
-      else if (inValue.isLow())
-      {
-        pins.getOutput().writeBool(simulation.getTimeline(), true);
+        value = false;
+        break;
       }
     }
+    pins.getOutput().writeBool(simulation.getTimeline(), value);
   }
 
   @Override
   public String getType()
   {
-    return "NOT Gate";
+    return "OR Gate";
   }
 }
 

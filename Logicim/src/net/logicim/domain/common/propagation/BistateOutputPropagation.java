@@ -92,6 +92,13 @@ public class BistateOutputPropagation
         timeline.createPropagationEvent(trace, getLowVoltageOut(), getHighToLowDecay());
       }
     }
+    else if (outValue == TraceValue.Unsettled)
+    {
+      if (traceValue != TraceValue.Unsettled)
+      {
+        timeline.createPropagationEvent(trace, getUnsettledVoltageOut(), getHighToLowSustain());
+      }
+    }
     else
     {
       throw new SimulatorException("Bi-state output cannot change state to [" + StringUtil.toEnumString(outValue) + "].");

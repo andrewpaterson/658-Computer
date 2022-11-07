@@ -36,12 +36,13 @@ public class OrGate
       TraceValue inValue = input.readValue();
       if (inValue.isError() || inValue.isImpedance())
       {
-        pins.getOutput().writeUnsettled();
         unsettled = true;
+        break;
       }
     }
     if (unsettled)
     {
+      pins.getOutput().writeUnsettled(simulation.getTimeline());
       return;
     }
 
@@ -52,6 +53,7 @@ public class OrGate
       if (inValue.isHigh())
       {
         value = true;
+        break;
       }
     }
     pins.getOutput().writeBool(simulation.getTimeline(), value);

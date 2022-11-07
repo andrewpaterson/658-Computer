@@ -66,9 +66,32 @@ public class Uniport
     }
   }
 
-  public void writeUnsettled()
+  public void writeUnsettled(Timeline timeline)
   {
+    if (state.isNotSet())
+    {
+      state = Output;
+    }
 
+    if (state.isOutput())
+    {
+      if (propagation.isOutput())
+      {
+        if (trace != null)
+        {
+          OutputPropagation outputPropagation = (OutputPropagation) propagation;
+          outputPropagation.createPropagationEvent(timeline, TraceValue.Unsettled, trace);
+        }
+      }
+      else
+      {
+        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
+      }
+    }
+    else
+    {
+      throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+    }
   }
 
   public void highImpedance(Timeline timeline)

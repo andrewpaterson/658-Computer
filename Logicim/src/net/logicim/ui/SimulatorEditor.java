@@ -18,6 +18,8 @@ import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.buffer.NotGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -427,6 +429,8 @@ public class SimulatorEditor
     actions.add(new InputAction(new CreatePlacementView(this, new NorGateViewFactory()), KeyEvent.VK_O, Up, Down, Down));
     actions.add(new InputAction(new CreatePlacementView(this, new AndGateViewFactory()), KeyEvent.VK_A, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NandGateViewFactory()), KeyEvent.VK_A, Up, Down, Down));
+    actions.add(new InputAction(new CreatePlacementView(this, new XorGateViewFactory()), KeyEvent.VK_X, Up, Down, Up));
+    actions.add(new InputAction(new CreatePlacementView(this, new XnorGateViewFactory()), KeyEvent.VK_X, Up, Down, Down));
     actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
     actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
   }

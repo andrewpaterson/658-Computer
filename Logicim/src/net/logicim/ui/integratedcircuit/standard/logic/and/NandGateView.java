@@ -18,7 +18,7 @@ public class NandGateView
           new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount)),
           position,
           rotation);
-    createLogicGatePorts(inputCount, true);
+    createLogicGatePorts(inputCount, true, 0);
     finaliseView();
   }
 }

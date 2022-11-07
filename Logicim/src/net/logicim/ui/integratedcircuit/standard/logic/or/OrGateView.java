@@ -18,7 +18,7 @@ public class OrGateView
           new OrGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount)),
           position,
           rotation);
-    createLogicGatePorts(inputCount, false);
+    createLogicGatePorts(inputCount, false, 0);
     finaliseView();
   }
 }

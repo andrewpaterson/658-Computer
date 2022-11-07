@@ -18,7 +18,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     super(circuitEditor, integratedCircuit, position, rotation);
   }
 
-  protected void createLogicGatePorts(int inputCount, boolean negateOutput)
+  protected void createLogicGatePorts(int inputCount, boolean negateOutput, int inputOffset)
   {
     int start;
     int end;
@@ -39,7 +39,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     {
       if (!((i == 0) & skipZero))
       {
-        new PortView(this, this.integratedCircuit.getPort("Input " + portNumber), new Int2D(i, 1));
+        new PortView(this, this.integratedCircuit.getPort("Input " + portNumber), new Int2D(i, 1 + inputOffset));
         portNumber++;
       }
     }

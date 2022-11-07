@@ -18,7 +18,7 @@ public class NorGateView
           new NorGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount)),
           position,
           rotation);
-    createLogicGatePorts(inputCount, true);
+    createLogicGatePorts(inputCount, true, 0);
     finaliseView();
   }
 }

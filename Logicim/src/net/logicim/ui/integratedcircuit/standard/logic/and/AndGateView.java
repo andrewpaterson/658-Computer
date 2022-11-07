@@ -18,7 +18,7 @@ public class AndGateView
           new AndGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount)),
           position,
           rotation);
-    createLogicGatePorts(inputCount, false);
+    createLogicGatePorts(inputCount, false, 0);
     finaliseView();
   }
 }

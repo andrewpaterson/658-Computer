@@ -5,8 +5,8 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
-import net.logicim.domain.integratedcircuit.standard.logic.buffer.NotGate;
-import net.logicim.domain.integratedcircuit.standard.logic.buffer.NotGatePins;
+import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
+import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 
 import static net.logicim.domain.common.Units.MHz;
 
@@ -20,9 +20,9 @@ public class TestSimulator
     TraceNet clockTrace = new TraceNet();
     clock.getPins().getOutput().connect(clockTrace);
 
-    NotGate notGate = new NotGate(circuit, "Not", new NotGatePins());
-    notGate.getPins().getInput().connect(clockTrace);
-    notGate.getPins().getOutput().connect(new TraceNet());
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins());
+    inverter.getPins().getInput().connect(clockTrace);
+    inverter.getPins().getOutput().connect(new TraceNet());
 
     Simulation simulation = circuit.resetSimulation();
     simulation.run();

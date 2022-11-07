@@ -15,7 +15,8 @@ import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.buffer.NotGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.buffer.BufferViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
@@ -424,15 +425,18 @@ public class SimulatorEditor
     actions.add(new InputAction(new StopCurrent(this), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     actions.add(new InputAction(new RunOneEvent(this), KeyEvent.VK_T, Up, Up, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new NotGateViewFactory()), KeyEvent.VK_N, Up, Down, Up));
+    actions.add(new InputAction(new CreatePlacementView(this, new InverterViewFactory()), KeyEvent.VK_N, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new OrGateViewFactory()), KeyEvent.VK_O, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NorGateViewFactory()), KeyEvent.VK_O, Up, Down, Down));
     actions.add(new InputAction(new CreatePlacementView(this, new AndGateViewFactory()), KeyEvent.VK_A, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new NandGateViewFactory()), KeyEvent.VK_A, Up, Down, Down));
     actions.add(new InputAction(new CreatePlacementView(this, new XorGateViewFactory()), KeyEvent.VK_X, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new XnorGateViewFactory()), KeyEvent.VK_X, Up, Down, Down));
+    actions.add(new InputAction(new CreatePlacementView(this, new BufferViewFactory()), KeyEvent.VK_N, Up, Down, Down));
     actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
     actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
+    actions.add(new InputAction(new IncreaseSimulationSpeed(this), KeyEvent.VK_EQUALS, Up, Up, Up));
+    actions.add(new InputAction(new DecreaseSimulationSpeed(this), KeyEvent.VK_MINUS, Up, Up, Up));
   }
 
   public void keyPressed(int keyCode)
@@ -532,6 +536,16 @@ public class SimulatorEditor
       circuitEditor.remove((IntegratedCircuitView<?>) hoverDiscreteView);
       hoverDiscreteView = null;
     }
+  }
+
+  public void increaseSimulationSpeed()
+  {
+    runTimeStep *= 2;
+  }
+
+  public void decreaseSimulationSpeed()
+  {
+    runTimeStep /= 2;
   }
 }
 

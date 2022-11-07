@@ -18,7 +18,7 @@ public class XorGateView
           new XorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount)),
           position,
           rotation);
-    createLogicGatePorts(inputCount, false, 1);
+    createPorts(inputCount, false, 1);
     finaliseView();
   }
 }

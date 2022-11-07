@@ -18,7 +18,7 @@ public class XnorGateView
           new XnorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount)),
           position,
           rotation);
-    createLogicGatePorts(inputCount, true, 1);
+    createPorts(inputCount, true, 1);
     finaliseView();
   }
 }

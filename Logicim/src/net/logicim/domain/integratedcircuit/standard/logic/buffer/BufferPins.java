@@ -9,13 +9,13 @@ import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 import static net.logicim.domain.common.port.PortType.Input;
 import static net.logicim.domain.common.port.PortType.Output;
 
-public class NotGatePins
+public class BufferPins
     extends Pins
 {
   private Uniport input;
   private Uniport output;
 
-  public NotGatePins()
+  public BufferPins()
   {
     super();
     output = new Uniport(Output,

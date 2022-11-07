@@ -34,7 +34,9 @@ public class XorGate
     for (Uniport input : inputs)
     {
       TraceValue inValue = input.readValue();
-      if (inValue.isError() || inValue.isImpedance())
+      if (inValue.isError() ||
+          inValue.isImpedance() ||
+          inValue.isUnsettled())
       {
         unsettled = true;
         break;

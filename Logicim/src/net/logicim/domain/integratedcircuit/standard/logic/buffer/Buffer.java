@@ -11,10 +11,10 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
 import java.util.List;
 
-public class NotGate
-    extends IntegratedCircuit<NotGatePins, Stateless>
+public class Buffer
+    extends IntegratedCircuit<BufferPins, Stateless>
 {
-  public NotGate(Circuit circuit, String name, NotGatePins pins)
+  public Buffer(Circuit circuit, String name, BufferPins pins)
   {
     super(circuit, name, pins);
     setState(new Stateless(this));
@@ -31,7 +31,9 @@ public class NotGate
   {
     Uniport input = pins.getInput();
     TraceValue inValue = input.readValue();
-    if (inValue.isError() || inValue.isImpedance() || inValue.isUnsettled())
+    if (inValue.isError() ||
+        inValue.isImpedance() ||
+        inValue.isUnsettled())
     {
       pins.getOutput().writeUnsettled(simulation.getTimeline());
     }
@@ -39,19 +41,24 @@ public class NotGate
     {
       if (inValue.isHigh())
       {
-        pins.getOutput().writeBool(simulation.getTimeline(), false);
+        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
       }
       else if (inValue.isLow())
       {
-        pins.getOutput().writeBool(simulation.getTimeline(), true);
+        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
       }
     }
+  }
+
+  protected boolean transformOutput(boolean value)
+  {
+    return value;
   }
 
   @Override
   public String getType()
   {
-    return "NOT Gate";
+    return "Buffer";
   }
 }
 

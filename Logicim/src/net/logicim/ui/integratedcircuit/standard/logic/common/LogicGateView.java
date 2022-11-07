@@ -18,7 +18,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     super(circuitEditor, integratedCircuit, position, rotation);
   }
 
-  protected void createLogicGatePorts(int inputCount, boolean negateOutput, int inputOffset)
+  protected void createPorts(int inputCount, boolean negateOutput, int inputOffset)
   {
     int start;
     int end;

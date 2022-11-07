@@ -13,9 +13,9 @@ import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.AndGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.NotGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.OrGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.inverter.NotGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

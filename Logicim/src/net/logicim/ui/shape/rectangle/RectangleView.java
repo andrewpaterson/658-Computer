@@ -1,10 +1,12 @@
-package net.logicim.ui.shape;
+package net.logicim.ui.shape.rectangle;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.shape.common.ShapeView;
 
 import java.awt.*;
 

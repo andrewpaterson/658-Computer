@@ -1,21 +1,23 @@
-package net.logicim.ui.shape;
+package net.logicim.ui.shape.polygon;
 
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.shape.common.GridCache;
 
-import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PolygonViewGridCache
+    extends GridCache
 {
   protected List<Tuple2> transformedBuffer;
   protected int[] xArray;
   protected int[] yArray;
-  protected boolean valid;
 
   public PolygonViewGridCache(List<Tuple2> points)
   {
+    super();
+
     this.transformedBuffer = new ArrayList<>(points.size());
     for (Tuple2 point : points)
     {
@@ -24,22 +26,12 @@ public class PolygonViewGridCache
 
     xArray = new int[points.size()];
     yArray = new int[points.size()];
-    valid = false;
-  }
-
-  public void invalidate()
-  {
-    valid = false;
-  }
-
-  public boolean isValid()
-  {
-    return valid;
   }
 
   public void update(List<Tuple2> points, Rotation rotation, Tuple2 position)
   {
-    valid = true;
+    update();
+
     for (int i = 0; i < points.size(); i++)
     {
       Tuple2 dest = transformedBuffer.get(i);

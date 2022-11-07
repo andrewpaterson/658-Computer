@@ -1,4 +1,4 @@
-package net.logicim.ui.shape;
+package net.logicim.ui.shape.common;
 
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;

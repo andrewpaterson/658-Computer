@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.logic;
+package net.logicim.ui.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
@@ -9,8 +9,8 @@ import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.shape.ArcView;
-import net.logicim.ui.shape.PolygonView;
+import net.logicim.ui.shape.arc.ArcView;
+import net.logicim.ui.shape.polygon.PolygonView;
 
 import java.awt.*;
 

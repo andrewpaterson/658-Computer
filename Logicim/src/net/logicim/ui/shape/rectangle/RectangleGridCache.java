@@ -1,11 +1,13 @@
-package net.logicim.ui.shape;
+package net.logicim.ui.shape.rectangle;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.shape.common.GridCache;
 
 public class RectangleGridCache
+    extends GridCache
 {
   protected Tuple2 transformedDimension;
   protected Tuple2 transformedPosition;
@@ -15,22 +17,12 @@ public class RectangleGridCache
   {
     transformedPosition = position.clone();
     transformedDimension = dimension.clone();
-    valid = false;
-  }
-
-  public boolean isValid()
-  {
-    return valid;
-  }
-
-  public void invalidate()
-  {
-    valid = false;
   }
 
   public void update(Tuple2 dimension, Tuple2 positionRelativeToIC, Rotation rotation, Tuple2 position)
   {
-    valid = true;
+    update();
+
     rotation.rotate(transformedPosition, positionRelativeToIC);
     rotation.rotate(transformedDimension, dimension);
 

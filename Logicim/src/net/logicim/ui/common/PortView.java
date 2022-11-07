@@ -5,7 +5,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
-import net.logicim.ui.shape.BoundingBox;
+import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
 

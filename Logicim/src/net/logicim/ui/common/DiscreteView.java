@@ -5,8 +5,8 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.shape.BoundingBox;
-import net.logicim.ui.shape.ShapeView;
+import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.shape.common.ShapeView;
 
 import java.awt.*;
 import java.util.ArrayList;

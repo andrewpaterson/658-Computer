@@ -1,8 +1,10 @@
-package net.logicim.ui.shape;
+package net.logicim.ui.shape.polygon;
 
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.shape.common.ShapeView;
 
 import java.awt.*;
 import java.util.ArrayList;

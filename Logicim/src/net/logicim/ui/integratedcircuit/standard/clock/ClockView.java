@@ -5,7 +5,7 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
-import net.logicim.ui.shape.RectangleView;
+import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 

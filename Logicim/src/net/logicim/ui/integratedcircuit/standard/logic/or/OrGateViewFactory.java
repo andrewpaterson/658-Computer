@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.logic;
+package net.logicim.ui.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.CircuitEditor;

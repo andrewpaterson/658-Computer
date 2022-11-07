@@ -56,13 +56,18 @@ public class AndGate
         break;
       }
     }
-    pins.getOutput().writeBool(simulation.getTimeline(), value);
+    pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+  }
+
+  protected boolean transformOutput(boolean value)
+  {
+    return value;
   }
 
   @Override
   public String getType()
   {
-    return "OR Gate";
+    return "AND Gate";
   }
 }
 

@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.logic.inverter;
+package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;

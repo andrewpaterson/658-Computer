@@ -31,7 +31,7 @@ public class NotGate
   {
     Uniport input = pins.getInput();
     TraceValue inValue = input.readValue();
-    if (inValue.isError() || inValue.isImpedance())
+    if (inValue.isError() || inValue.isImpedance() || inValue.isUnsettled())
     {
       pins.getOutput().writeUnsettled(simulation.getTimeline());
     }

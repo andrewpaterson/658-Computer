@@ -1,9 +1,5 @@
 package net.logicim.ui.shape;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
-import net.logicim.common.type.Tuple2;
-import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
@@ -12,6 +8,7 @@ import java.awt.*;
 public abstract class ShapeView
 {
   protected ShapeHolder shapeHolder;
+
   public ShapeView(ShapeHolder shapeHolder)
   {
     this.shapeHolder = shapeHolder;

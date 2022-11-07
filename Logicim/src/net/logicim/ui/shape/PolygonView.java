@@ -11,13 +11,20 @@ import java.util.List;
 public class PolygonView
     extends ShapeView
 {
+  private final boolean border;
+  private final boolean fill;
   protected List<Tuple2> points;
 
   protected PolygonViewGridCache gridCache;
 
-  public PolygonView(ShapeHolder shapeHolder, Tuple2... points)
+  public PolygonView(ShapeHolder shapeHolder,
+                     boolean border,
+                     boolean fill,
+                     Tuple2... points)
   {
     super(shapeHolder);
+    this.border = border;
+    this.fill = fill;
     this.points = new ArrayList<>(points.length);
     for (Tuple2 point : points)
     {
@@ -44,10 +51,16 @@ public class PolygonView
     Polygon p = new Polygon(xArray, yArray, transformedBuffer.size());
 
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    graphics.setColor(viewport.getColours().getShapeFill());
-    graphics.fillPolygon(p);
-    graphics.setColor(viewport.getColours().getShapeBorder());
-    graphics.drawPolygon(p);
+    if (fill)
+    {
+      graphics.setColor(viewport.getColours().getShapeFill());
+      graphics.fillPolygon(p);
+    }
+    if (border)
+    {
+      graphics.setColor(viewport.getColours().getShapeBorder());
+      graphics.drawPolygon(p);
+    }
   }
 
   @Override

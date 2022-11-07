@@ -78,6 +78,7 @@ public enum Rotation
         break;
     }
   }
+
   @SuppressWarnings("SuspiciousNameCombination")
   public void transform(Float2D p)
   {
@@ -134,6 +135,40 @@ public enum Rotation
     }
 
     return Rotation.Cannot;
+  }
+
+  public Rotation opposite()
+  {
+    switch (this)
+    {
+      case Cannot:
+        return Cannot;
+      case North:
+        return South;
+      case East:
+        return West;
+      case South:
+        return North;
+      default:
+        return East;
+    }
+  }
+
+  public boolean isStraight(Rotation other)
+  {
+    if ((this == Cannot) || (other == Cannot))
+    {
+      return false;
+    }
+    if (((this == North) || (this == South)) && ((other == North) || (other == South)))
+    {
+      return true;
+    }
+    if (((this == East) || (this == West)) && ((other == East) || (other == West)))
+    {
+      return true;
+    }
+    return false;
   }
 }
 

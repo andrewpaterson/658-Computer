@@ -1,6 +1,5 @@
 package net.logicim.ui;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.LongTime;
@@ -173,26 +172,13 @@ public class SimulatorEditor
     List<TraceOverlap> firstTraceOverlaps = getTracesOverlapping(firstLine);
     List<TraceOverlap> secondTraceOverlaps = getTracesOverlapping(secondLine);
 
-    List<TraceView> traceViews = new ArrayList<>();
     if (firstTraceOverlaps.size() == 0 &&
         secondTraceOverlaps.size() == 0)
     {
-      if (isValidTrace(firstPosition, middlePosition))
-      {
-        splitTrace(firstPosition);
-        splitTrace(middlePosition);
-        TraceView traceView = new TraceView(circuitEditor, firstPosition, middlePosition);
-        traceViews.add(traceView);
-      }
-      if (isValidTrace(middlePosition, secondPosition))
-      {
-        splitTrace(secondPosition);
-        TraceView traceView = new TraceView(circuitEditor, middlePosition, secondPosition);
-        traceViews.add(traceView);
-      }
+      List<TraceView> traceViews = circuitEditor.createTraces(firstPosition, middlePosition, secondPosition);
+      mergeTraces(traceViews);
     }
 
-    mergeTraces(traceViews);
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
 
     connectConnections(firstConnection);
@@ -202,110 +188,8 @@ public class SimulatorEditor
   {
     for (TraceView traceView : traceViews)
     {
-      mergeTrace(traceView);
+      circuitEditor.mergeTrace(traceView);
     }
-  }
-
-  private void mergeTrace(TraceView traceView)
-  {
-    Rotation direction = traceView.getDirection();
-    ConnectionView startConnection = traceView.getStartConnection();
-    ConnectionView endConnection = traceView.getEndConnection();
-
-    List<TraceView> towardsEnd = findStraightTraces(traceView, direction, endConnection);
-    List<TraceView> towardsStart = findStraightTraces(traceView, direction.opposite(), startConnection);
-    if (towardsEnd.size() > 0 | (towardsStart.size() > 0))
-    {
-      List<TraceView> mergeViews = new ArrayList<>(towardsStart);
-      mergeViews.add(traceView);
-      mergeViews.addAll(towardsEnd);
-      Int2D smallest = new Int2D(traceView.getMinimumX(), traceView.getMinimumY());
-      Int2D largest = new Int2D(traceView.getMinimumX(), traceView.getMaximumY());
-      for (TraceView mergeView : mergeViews)
-      {
-        int x1 = mergeView.getMinimumX();
-        if (x1 < smallest.x)
-        {
-          smallest.x = x1;
-        }
-        int y1 = mergeView.getMinimumY();
-        if (y1 < smallest.y)
-        {
-          smallest.y = y1;
-        }
-        int x2 = mergeView.getMaximumX();
-        if (x2 > largest.x)
-        {
-          largest.x = x2;
-        }
-        int y2 = mergeView.getMaximumY();
-        if (y2 > largest.y)
-        {
-          largest.y = y2;
-        }
-        circuitEditor.remove(mergeView);
-      }
-      
-      if (isValidTrace(smallest, largest))
-      {
-        new TraceView(circuitEditor, smallest, largest);
-      }
-      else
-      {
-        throw new SimulatorException("Invalid trace created from merged traces.");
-      }
-    }
-  }
-
-  private List<TraceView> findStraightTraces(TraceView initialTraceView, Rotation direction, ConnectionView endConnection)
-  {
-    ArrayList<TraceView> result = new ArrayList<>();
-
-    for (; ; )
-    {
-      List<ComponentView> connectedComponents = endConnection.getConnectedComponents();
-      TraceView otherTrace = getOtherTraceView(initialTraceView, connectedComponents);
-
-      if (otherTrace != null)
-      {
-        Rotation otherDirection = otherTrace.getDirection();
-        if (direction.isStraight(otherDirection))
-        {
-          result.add(otherTrace);
-          endConnection = otherTrace.getOpposite(endConnection);
-          initialTraceView = otherTrace;
-        }
-        else
-        {
-          break;
-        }
-      }
-      else
-      {
-        break;
-      }
-    }
-
-    return result;
-  }
-
-  private TraceView getOtherTraceView(TraceView initialTraceView, List<ComponentView> connectedComponents)
-  {
-    TraceView otherTrace = null;
-    if (connectedComponents.size() == 2)
-    {
-      for (ComponentView connectedComponent : connectedComponents)
-      {
-        if (connectedComponent != initialTraceView)
-        {
-          if (connectedComponent instanceof TraceView)
-          {
-            otherTrace = (TraceView) connectedComponent;
-          }
-        }
-      }
-    }
-    return otherTrace;
   }
 
   private ArrayList<ConnectionView> createConnectionViewArray(ConnectionView... connectionArray)
@@ -319,24 +203,6 @@ public class SimulatorEditor
       }
     }
     return connectionViews;
-  }
-
-  private void splitTrace(Int2D position)
-  {
-    List<TraceView> traceViews = circuitEditor.getTraceViewsInGridSpace(position);
-    for (TraceView traceView : traceViews)
-    {
-      ConnectionView connectionView = traceView.getPotentialConnectionsInGrid(position);
-      if (connectionView instanceof HoverPortView)
-      {
-        Int2D startPosition = traceView.getStartPosition();
-        Int2D endPosition = traceView.getEndPosition();
-        circuitEditor.remove(traceView);
-
-        new TraceView(circuitEditor, startPosition, position);
-        new TraceView(circuitEditor, position, endPosition);
-      }
-    }
   }
 
   private void connectConnections(ConnectionView firstConnection)
@@ -361,19 +227,6 @@ public class SimulatorEditor
     {
       return new ArrayList<>();
     }
-  }
-
-  private boolean isValidTrace(Int2D start, Int2D end)
-  {
-    if ((start != null) && (end != null))
-    {
-      if (((start.x == end.x) || (start.y == end.y)) &&
-          !((start.x == end.x) && (start.y == end.y)))
-      {
-        return true;
-      }
-    }
-    return false;
   }
 
   public void resized(int width, int height)
@@ -659,7 +512,7 @@ public class SimulatorEditor
   {
     if (hoverTraceView != null)
     {
-      circuitEditor.remove(hoverTraceView);
+      circuitEditor.deleteTrace(hoverTraceView);
       hoverTraceView = null;
       hoverConnectionView = null;
     }

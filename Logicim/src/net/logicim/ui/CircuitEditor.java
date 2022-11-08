@@ -407,5 +407,197 @@ public class CircuitEditor
       }
     }
   }
+
+  public void mergeTrace(TraceView traceView)
+  {
+    Rotation direction = traceView.getDirection();
+    ConnectionView startConnection = traceView.getStartConnection();
+    ConnectionView endConnection = traceView.getEndConnection();
+
+    List<TraceView> towardsEnd = findStraightTraces(traceView, direction, endConnection);
+    List<TraceView> towardsStart = findStraightTraces(traceView, direction.opposite(), startConnection);
+    if (towardsEnd.size() > 0 | (towardsStart.size() > 0))
+    {
+      List<TraceView> mergeViews = new ArrayList<>(towardsStart);
+      mergeViews.add(traceView);
+      mergeViews.addAll(towardsEnd);
+      Int2D smallest = new Int2D(traceView.getMinimumX(), traceView.getMinimumY());
+      Int2D largest = new Int2D(traceView.getMinimumX(), traceView.getMaximumY());
+      for (TraceView mergeView : mergeViews)
+      {
+        int x1 = mergeView.getMinimumX();
+        if (x1 < smallest.x)
+        {
+          smallest.x = x1;
+        }
+        int y1 = mergeView.getMinimumY();
+        if (y1 < smallest.y)
+        {
+          smallest.y = y1;
+        }
+        int x2 = mergeView.getMaximumX();
+        if (x2 > largest.x)
+        {
+          largest.x = x2;
+        }
+        int y2 = mergeView.getMaximumY();
+        if (y2 > largest.y)
+        {
+          largest.y = y2;
+        }
+        remove(mergeView);
+      }
+
+      if (isValidTrace(smallest, largest))
+      {
+        new TraceView(this, smallest, largest);
+      }
+      else
+      {
+        throw new SimulatorException("Invalid trace created from merged traces.");
+      }
+    }
+  }
+
+  private boolean isValidTrace(Int2D start, Int2D end)
+  {
+    if ((start != null) && (end != null))
+    {
+      if (((start.x == end.x) || (start.y == end.y)) &&
+          !((start.x == end.x) && (start.y == end.y)))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private List<TraceView> findStraightTraces(TraceView initialTraceView, Rotation direction, ConnectionView endConnection)
+  {
+    ArrayList<TraceView> result = new ArrayList<>();
+
+    for (; ; )
+    {
+      List<ComponentView> connectedComponents = endConnection.getConnectedComponents();
+      TraceView otherTrace = getOtherTrace(initialTraceView, connectedComponents);
+
+      if (otherTrace != null)
+      {
+        Rotation otherDirection = otherTrace.getDirection();
+        if (direction.isStraight(otherDirection))
+        {
+          result.add(otherTrace);
+          endConnection = otherTrace.getOpposite(endConnection);
+          initialTraceView = otherTrace;
+        }
+        else
+        {
+          break;
+        }
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  private TraceView getOtherTrace(TraceView initialTraceView, List<ComponentView> connectedComponents)
+  {
+    TraceView otherTrace = null;
+    if (connectedComponents.size() == 2)
+    {
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent != initialTraceView)
+        {
+          if (connectedComponent instanceof TraceView)
+          {
+            otherTrace = (TraceView) connectedComponent;
+          }
+        }
+      }
+    }
+    return otherTrace;
+  }
+
+  public List<TraceView> createTraces(Int2D firstPosition, Int2D middlePosition, Int2D secondPosition)
+  {
+    List<TraceView> traceViews = new ArrayList<>();
+    if (isValidTrace(firstPosition, middlePosition))
+    {
+      splitTrace(firstPosition);
+      splitTrace(middlePosition);
+      TraceView traceView = new TraceView(this, firstPosition, middlePosition);
+      traceViews.add(traceView);
+    }
+    if (isValidTrace(middlePosition, secondPosition))
+    {
+      splitTrace(secondPosition);
+      TraceView traceView = new TraceView(this, middlePosition, secondPosition);
+      traceViews.add(traceView);
+    }
+    return traceViews;
+  }
+
+  private void splitTrace(Int2D position)
+  {
+    List<TraceView> traceViews = getTraceViewsInGridSpace(position);
+    for (TraceView traceView : traceViews)
+    {
+      ConnectionView connectionView = traceView.getPotentialConnectionsInGrid(position);
+      if (connectionView instanceof HoverPortView)
+      {
+        Int2D startPosition = traceView.getStartPosition();
+        Int2D endPosition = traceView.getEndPosition();
+        remove(traceView);
+
+        new TraceView(this, startPosition, position);
+        new TraceView(this, position, endPosition);
+      }
+    }
+  }
+
+  public void deleteTrace(TraceView traceView)
+  {
+    ConnectionView startConnection = traceView.getStartConnection();
+    ConnectionView endConnection = traceView.getEndConnection();
+
+    remove(traceView);
+
+    mergeTraceConnection(startConnection);
+    mergeTraceConnection(endConnection);
+  }
+
+  private void mergeTraceConnection(ConnectionView startConnection)
+  {
+    List<ComponentView> connectedComponents = startConnection.getConnectedComponents();
+    TraceView traceView1 = null;
+    TraceView traceView2 = null;
+    if (connectedComponents.size() == 2)
+    {
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent instanceof TraceView)
+        {
+          if (traceView1 == null)
+          {
+            traceView1 = (TraceView) connectedComponent;
+          }
+          else
+          {
+            traceView2 = (TraceView) connectedComponent;
+          }
+        }
+      }
+    }
+
+    if ((traceView1 != null) && (traceView2 != null))
+    {
+      mergeTrace(traceView1);
+    }
+  }
 }
 

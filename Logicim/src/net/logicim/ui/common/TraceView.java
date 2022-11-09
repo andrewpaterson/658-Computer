@@ -7,6 +7,7 @@ import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 
 import java.awt.*;
+import java.util.List;
 
 import static net.logicim.ui.common.LineOverlap.*;
 import static net.logicim.ui.common.Rotation.*;
@@ -84,7 +85,6 @@ public class TraceView
   {
     return getPotentialConnectionsInGrid(gridPosition.x, gridPosition.y);
   }
-
 
   public ConnectionView getPotentialConnectionsInGrid(int x, int y)
   {
@@ -165,7 +165,7 @@ public class TraceView
     center.divide(2);
   }
 
-  public TraceOverlap getOverlap(Line line)
+  public LineOverlap getOverlap(Line line)
   {
     Rotation lineDirection = line.getDirection();
     if (lineDirection == Cannot)
@@ -179,39 +179,12 @@ public class TraceView
       {
         if (line.getStart().x == startPosition.x)
         {
-          int lineMinY = line.getMinimumY();
-          int lineMaxY = line.getMaximumY();
-          int traceMinY = getMinimumY();
-          int traceMaxY = getMaximumY();
-
-          if (lineMaxY <= traceMinY)
-          {
-            return null;
-          }
-          if (lineMinY >= traceMaxY)
-          {
-            return null;
-          }
-
-          if ((lineMinY <= traceMinY) && (lineMaxY >= traceMaxY))
-          {
-            return new TraceOverlap(Fully, this);
-          }
-          if ((lineMinY > traceMinY) && (lineMaxY < traceMaxY))
-          {
-            return new TraceOverlap(Center, this);
-          }
-
-          if ((startPosition.y == lineMinY) || (startPosition.y == lineMaxY))
-          {
-            return new TraceOverlap(Start, this);
-          }
-          if ((endPosition.y == lineMinY) || (endPosition.y == lineMaxY))
-          {
-            return new TraceOverlap(End, this);
-          }
-
-          throw new SimulatorException("Could not determine line over trace overlap.");
+          return calculateOverlap(line.getMinimumY(),
+                                  line.getMaximumY(),
+                                  getMinimumY(),
+                                  getMaximumY(),
+                                  startPosition.y,
+                                  endPosition.y);
         }
         else
         {
@@ -223,39 +196,12 @@ public class TraceView
       {
         if (line.getStart().y == startPosition.y)
         {
-          int lineMinX = line.getMinimumX();
-          int lineMaxX = line.getMaximumX();
-          int traceMinX = getMinimumX();
-          int traceMaxX = getMaximumX();
-
-          if (lineMaxX <= traceMinX)
-          {
-            return null;
-          }
-          if (lineMinX >= traceMaxX)
-          {
-            return null;
-          }
-
-          if ((lineMinX <= traceMinX) && (lineMaxX >= traceMaxX))
-          {
-            return new TraceOverlap(Fully, this);
-          }
-          if ((lineMinX > traceMinX) && (lineMaxX < traceMaxX))
-          {
-            return new TraceOverlap(Center, this);
-          }
-
-          if ((startPosition.x == lineMinX) || (startPosition.x == lineMaxX))
-          {
-            return new TraceOverlap(Start, this);
-          }
-          if ((endPosition.x == lineMinX) || (endPosition.x == lineMaxX))
-          {
-            return new TraceOverlap(End, this);
-          }
-
-          throw new SimulatorException("Could not determine line over trace overlap.");
+          return calculateOverlap(line.getMinimumX(),
+                                  line.getMaximumX(),
+                                  getMinimumX(),
+                                  getMaximumX(),
+                                  startPosition.x,
+                                  endPosition.x);
         }
         else
         {
@@ -267,6 +213,38 @@ public class TraceView
         return null;
       }
     }
+  }
+
+  private LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd)
+  {
+    if (lineMax <= traceMin)
+    {
+      return null;
+    }
+    if (lineMin >= traceMax)
+    {
+      return null;
+    }
+
+    if ((lineMin <= traceMin) && (lineMax >= traceMax))
+    {
+      return Fully;  //The line fully overlaps the center of the trace.
+    }
+    if ((lineMin > traceMin) && (lineMax < traceMax))
+    {
+      return Center;  //The line only overlaps the center of the trace.
+    }
+
+    if ((traceStart >= lineMin) && (traceStart <= lineMax))
+    {
+      return Start;  //The line overlaps the start of the trace (but not the end).
+    }
+    if ((traceEnd >= lineMin) && (traceEnd <= lineMax))
+    {
+      return End;  //The line overlaps the end of the trace (but not the start).
+    }
+
+    throw new SimulatorException("Could not determine line over trace overlap.");
   }
 
   public int getMinimumY()
@@ -403,6 +381,63 @@ public class TraceView
     {
       throw new SimulatorException("Trace must be disconnected before removal.");
     }
+  }
+
+  public boolean isStartStraight()
+  {
+    return areComponentsStraightTraces(startConnection.getConnectedComponents());
+  }
+
+  public boolean isEndStraight()
+  {
+    return areComponentsStraightTraces(endConnection.getConnectedComponents());
+  }
+
+  private boolean areComponentsStraightTraces(List<ComponentView> connectedComponents)
+  {
+    if (connectedComponents.size() == 1)
+    {
+        return true;
+    }
+
+    for (ComponentView connectedComponent : connectedComponents)
+    {
+      if (connectedComponent != this)
+      {
+        if (connectedComponent instanceof TraceView)
+        {
+          TraceView otherTrace = (TraceView) connectedComponent;
+          if (!direction.isStraight(otherTrace.getDirection()))
+          {
+            return false;
+          }
+        }
+        else
+        {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public TraceView getOtherTrace(List<ComponentView> connectedComponents)
+  {
+    TraceView otherTrace = null;
+    if (connectedComponents.size() == 2)
+    {
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent != this)
+        {
+          if (connectedComponent instanceof TraceView)
+          {
+            otherTrace = (TraceView) connectedComponent;
+          }
+        }
+      }
+    }
+    return otherTrace;
   }
 }
 

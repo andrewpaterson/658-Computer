@@ -271,10 +271,10 @@ public class CircuitEditor
     List<TraceOverlap> overlaps = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      TraceOverlap overlap = traceView.getOverlap(line);
+      LineOverlap overlap = traceView.getOverlap(line);
       if (overlap != null)
       {
-        overlaps.add(overlap);
+        overlaps.add(new TraceOverlap(overlap, traceView));
       }
     }
     return overlaps;
@@ -414,8 +414,8 @@ public class CircuitEditor
     ConnectionView startConnection = traceView.getStartConnection();
     ConnectionView endConnection = traceView.getEndConnection();
 
-    List<TraceView> towardsEnd = findStraightTraces(traceView, direction, endConnection);
-    List<TraceView> towardsStart = findStraightTraces(traceView, direction.opposite(), startConnection);
+    List<TraceView> towardsEnd = findStraightTracesInDirection(traceView, direction, endConnection);
+    List<TraceView> towardsStart = findStraightTracesInDirection(traceView, direction.opposite(), startConnection);
     if (towardsEnd.size() > 0 | (towardsStart.size() > 0))
     {
       List<TraceView> mergeViews = new ArrayList<>(towardsStart);
@@ -472,14 +472,16 @@ public class CircuitEditor
     return false;
   }
 
-  private List<TraceView> findStraightTraces(TraceView initialTraceView, Rotation direction, ConnectionView endConnection)
+  private List<TraceView> findStraightTracesInDirection(TraceView traceView, Rotation direction, ConnectionView endConnection)
   {
     ArrayList<TraceView> result = new ArrayList<>();
 
+    TraceView currentTrace = traceView;
+    ConnectionView currentConnection = endConnection;
     for (; ; )
     {
-      List<ComponentView> connectedComponents = endConnection.getConnectedComponents();
-      TraceView otherTrace = getOtherTrace(initialTraceView, connectedComponents);
+      List<ComponentView> connectedComponents = currentConnection.getConnectedComponents();
+      TraceView otherTrace = currentTrace.getOtherTrace(connectedComponents);
 
       if (otherTrace != null)
       {
@@ -487,8 +489,8 @@ public class CircuitEditor
         if (direction.isStraight(otherDirection))
         {
           result.add(otherTrace);
-          endConnection = otherTrace.getOpposite(endConnection);
-          initialTraceView = otherTrace;
+          currentConnection = otherTrace.getOpposite(currentConnection);
+          currentTrace = otherTrace;
         }
         else
         {
@@ -504,45 +506,23 @@ public class CircuitEditor
     return result;
   }
 
-  private TraceView getOtherTrace(TraceView initialTraceView, List<ComponentView> connectedComponents)
+  public List<TraceView> createTraces(Line line)
   {
-    TraceView otherTrace = null;
-    if (connectedComponents.size() == 2)
-    {
-      for (ComponentView connectedComponent : connectedComponents)
-      {
-        if (connectedComponent != initialTraceView)
-        {
-          if (connectedComponent instanceof TraceView)
-          {
-            otherTrace = (TraceView) connectedComponent;
-          }
-        }
-      }
-    }
-    return otherTrace;
-  }
+    Int2D startPosition = line.getStart();
+    Int2D endPosition = line.getEnd();
 
-  public List<TraceView> createTraces(Int2D firstPosition, Int2D middlePosition, Int2D secondPosition)
-  {
     List<TraceView> traceViews = new ArrayList<>();
-    if (isValidTrace(firstPosition, middlePosition))
+    if (isValidTrace(startPosition, endPosition))
     {
-      splitTrace(firstPosition);
-      splitTrace(middlePosition);
-      TraceView traceView = new TraceView(this, firstPosition, middlePosition);
-      traceViews.add(traceView);
-    }
-    if (isValidTrace(middlePosition, secondPosition))
-    {
-      splitTrace(secondPosition);
-      TraceView traceView = new TraceView(this, middlePosition, secondPosition);
+      splitTrace(startPosition, line.getDirection());
+      splitTrace(endPosition, line.getDirection());
+      TraceView traceView = new TraceView(this, startPosition, endPosition);
       traceViews.add(traceView);
     }
     return traceViews;
   }
 
-  private void splitTrace(Int2D position)
+  private void splitTrace(Int2D position, Rotation direction)
   {
     List<TraceView> traceViews = getTraceViewsInGridSpace(position);
     for (TraceView traceView : traceViews)
@@ -550,12 +530,15 @@ public class CircuitEditor
       ConnectionView connectionView = traceView.getPotentialConnectionsInGrid(position);
       if (connectionView instanceof HoverPortView)
       {
-        Int2D startPosition = traceView.getStartPosition();
-        Int2D endPosition = traceView.getEndPosition();
-        remove(traceView);
+        if (!direction.isStraight(traceView.getDirection()))
+        {
+          Int2D startPosition = traceView.getStartPosition();
+          Int2D endPosition = traceView.getEndPosition();
+          remove(traceView);
 
-        new TraceView(this, startPosition, position);
-        new TraceView(this, position, endPosition);
+          new TraceView(this, startPosition, position);
+          new TraceView(this, position, endPosition);
+        }
       }
     }
   }
@@ -597,6 +580,24 @@ public class CircuitEditor
     if ((traceView1 != null) && (traceView2 != null))
     {
       mergeTrace(traceView1);
+    }
+  }
+
+  void xxx(Line line)
+  {
+    List<TraceOverlap> overlapping = getTracesOverlapping(line);
+    Set<ConnectionView> notStraightConnections= new LinkedHashSet<>();
+    for (TraceOverlap overlap : overlapping)
+    {
+      TraceView traceView = overlap.getTraceView();
+      if (!traceView.isStartStraight())
+      {
+        notStraightConnections.add(traceView.getStartConnection());
+      }
+      if (!traceView.isEndStraight())
+      {
+        notStraightConnections.add(traceView.getEndConnection());
+      }
     }
   }
 }

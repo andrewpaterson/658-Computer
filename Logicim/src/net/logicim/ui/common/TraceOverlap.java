@@ -10,5 +10,15 @@ public class TraceOverlap
     this.overlap = overlap;
     this.traceView = traceView;
   }
+
+  public LineOverlap getOverlap()
+  {
+    return overlap;
+  }
+
+  public TraceView getTraceView()
+  {
+    return traceView;
+  }
 }
 

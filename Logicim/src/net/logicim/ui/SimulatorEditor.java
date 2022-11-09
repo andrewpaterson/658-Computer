@@ -169,16 +169,17 @@ public class SimulatorEditor
     Line firstLine = Line.createLine(firstPosition, middlePosition);
     Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-    List<TraceOverlap> firstTraceOverlaps = getTracesOverlapping(firstLine);
-    List<TraceOverlap> secondTraceOverlaps = getTracesOverlapping(secondLine);
-
-    if (firstTraceOverlaps.size() == 0 &&
-        secondTraceOverlaps.size() == 0)
+    if (secondLine == null)
     {
-      List<TraceView> traceViews = circuitEditor.createTraces(firstPosition, middlePosition, secondPosition);
-      mergeTraces(traceViews);
-    }
+      List<TraceOverlap> firstTraceOverlaps = getTracesOverlapping(firstLine);
 
+    }
+    else
+    {
+      List<TraceView> firstTraceViews = circuitEditor.createTraces(firstLine);
+      mergeTraces(firstTraceViews);
+      circuitEditor.createTraces(secondLine);
+    }
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
 
     connectConnections(firstConnection);

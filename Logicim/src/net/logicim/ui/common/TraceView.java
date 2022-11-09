@@ -9,35 +9,23 @@ import net.logicim.ui.CircuitEditor;
 import java.awt.*;
 import java.util.List;
 
-import static net.logicim.ui.common.LineOverlap.*;
-import static net.logicim.ui.common.Rotation.*;
-
 public class TraceView
     extends ComponentView
 {
-  protected Int2D startPosition;
-  protected Int2D endPosition;
+  protected Line line;
 
   protected ConnectionView startConnection;
   protected ConnectionView endConnection;
 
   protected TraceNet trace;
-  protected Rotation direction;
 
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
-    this.startPosition = start.clone();
-    this.endPosition = end.clone();
+    line = new Line(start, end);
     this.trace = null;
     circuitEditor.add(this);
-    direction = calculateDirection();
     startConnection = circuitEditor.getOrAddConnection(start, this);
     endConnection = circuitEditor.getOrAddConnection(end, this);
-  }
-
-  private Rotation calculateDirection()
-  {
-    return Rotation.calculateDirection(startPosition.x, startPosition.y, endPosition.x, endPosition.y);
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -54,10 +42,10 @@ public class TraceView
       color = VoltageColour.getColorForVoltage(viewport.getColours(), voltage);
     }
     graphics.setColor(color);
-    int x1 = viewport.transformGridToScreenSpaceX(startPosition.x);
-    int y1 = viewport.transformGridToScreenSpaceY(startPosition.y);
-    int x2 = viewport.transformGridToScreenSpaceX(endPosition.x);
-    int y2 = viewport.transformGridToScreenSpaceY(endPosition.y);
+    int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
+    int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);
+    int x2 = viewport.transformGridToScreenSpaceX(line.getEnd().x);
+    int y2 = viewport.transformGridToScreenSpaceY(line.getEnd().y);
 
     graphics.drawLine(x1, y1, x2, y2);
   }
@@ -70,11 +58,11 @@ public class TraceView
   @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
-    if (startPosition.equals(x, y))
+    if (line.getStart().equals(x, y))
     {
       return startConnection;
     }
-    if (endPosition.equals(x, y))
+    if (line.getEnd().equals(x, y))
     {
       return endConnection;
     }
@@ -120,32 +108,7 @@ public class TraceView
 
   private boolean isPositionOnTrace(int x, int y)
   {
-    boolean positionFallsOnTrace = false;
-    if ((direction == North) &&
-        (x == startPosition.x) &&
-        ((y >= startPosition.y) && (y <= endPosition.y)))
-    {
-      positionFallsOnTrace = true;
-    }
-    if ((direction == South) &&
-        (x == startPosition.x) &&
-        ((y >= endPosition.y) && (y <= startPosition.y)))
-    {
-      positionFallsOnTrace = true;
-    }
-    if ((direction == West) &&
-        (y == startPosition.y) &&
-        ((x >= startPosition.x) && (x <= endPosition.x)))
-    {
-      positionFallsOnTrace = true;
-    }
-    if ((direction == Rotation.East) &&
-        (y == startPosition.y) &&
-        ((x >= endPosition.x) && (x <= startPosition.x)))
-    {
-      positionFallsOnTrace = true;
-    }
-    return positionFallsOnTrace;
+    return line.isPositionOn(x, y);
   }
 
   public boolean contains(Int2D gridPosition)
@@ -160,148 +123,21 @@ public class TraceView
 
   public void getCenter(Int2D center)
   {
-    center.set(startPosition);
-    center.add(endPosition);
-    center.divide(2);
+    line.getCenter(center);
   }
 
-  public LineOverlap getOverlap(Line line)
+  public LineOverlap getOverlap(Line otherLine)
   {
-    Rotation lineDirection = line.getDirection();
-    if (lineDirection == Cannot)
-    {
-      return null;
-    }
-    else
-    {
-      if ((lineDirection == North || lineDirection == South) &&
-          (direction == North || direction == South))
-      {
-        if (line.getStart().x == startPosition.x)
-        {
-          return calculateOverlap(line.getMinimumY(),
-                                  line.getMaximumY(),
-                                  getMinimumY(),
-                                  getMaximumY(),
-                                  startPosition.y,
-                                  endPosition.y);
-        }
-        else
-        {
-          return null;
-        }
-      }
-      else if ((lineDirection == East || lineDirection == West) &&
-               (direction == East || direction == West))
-      {
-        if (line.getStart().y == startPosition.y)
-        {
-          return calculateOverlap(line.getMinimumX(),
-                                  line.getMaximumX(),
-                                  getMinimumX(),
-                                  getMaximumX(),
-                                  startPosition.x,
-                                  endPosition.x);
-        }
-        else
-        {
-          return null;
-        }
-      }
-      else
-      {
-        return null;
-      }
-    }
-  }
-
-  private LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd)
-  {
-    if (lineMax <= traceMin)
-    {
-      return null;
-    }
-    if (lineMin >= traceMax)
-    {
-      return null;
-    }
-
-    if ((lineMin <= traceMin) && (lineMax >= traceMax))
-    {
-      return Fully;  //The line fully overlaps the center of the trace.
-    }
-    if ((lineMin > traceMin) && (lineMax < traceMax))
-    {
-      return Center;  //The line only overlaps the center of the trace.
-    }
-
-    if ((traceStart >= lineMin) && (traceStart <= lineMax))
-    {
-      return Start;  //The line overlaps the start of the trace (but not the end).
-    }
-    if ((traceEnd >= lineMin) && (traceEnd <= lineMax))
-    {
-      return End;  //The line overlaps the end of the trace (but not the start).
-    }
-
-    throw new SimulatorException("Could not determine line over trace overlap.");
-  }
-
-  public int getMinimumY()
-  {
-    if (startPosition.y < endPosition.y)
-    {
-      return startPosition.y;
-    }
-    else
-    {
-      return endPosition.y;
-    }
-  }
-
-  public int getMinimumX()
-  {
-    if (startPosition.x < endPosition.x)
-    {
-      return startPosition.x;
-    }
-    else
-    {
-      return endPosition.x;
-    }
-  }
-
-  public int getMaximumY()
-  {
-    if (startPosition.y > endPosition.y)
-    {
-      return startPosition.y;
-    }
-    else
-    {
-      return endPosition.y;
-    }
-  }
-
-  public int getMaximumX()
-  {
-    if (startPosition.x > endPosition.x)
-    {
-      return startPosition.x;
-    }
-    else
-    {
-      return endPosition.x;
-    }
+    return line.getOverlap(otherLine);
   }
 
   public ConnectionView getOpposite(Int2D gridPosition)
   {
-    if (startPosition.equals(gridPosition))
+    if (line.getStart().equals(gridPosition))
     {
       return endConnection;
     }
-    if (endPosition.equals(gridPosition))
+    if (line.getEnd().equals(gridPosition))
     {
       return startConnection;
     }
@@ -328,11 +164,11 @@ public class TraceView
   {
     if (startConnection == connectionView)
     {
-      return startPosition;
+      return line.getStart();
     }
     else if (endConnection == connectionView)
     {
-      return endPosition;
+      return line.getEnd();
     }
     return null;
   }
@@ -344,12 +180,12 @@ public class TraceView
 
   public Int2D getStartPosition()
   {
-    return startPosition;
+    return line.getStart();
   }
 
   public Int2D getEndPosition()
   {
-    return endPosition;
+    return line.getEnd();
   }
 
   public ConnectionView getStartConnection()
@@ -364,7 +200,7 @@ public class TraceView
 
   public Rotation getDirection()
   {
-    return direction;
+    return line.getDirection();
   }
 
   public void disconnectTraceNet()
@@ -397,9 +233,10 @@ public class TraceView
   {
     if (connectedComponents.size() == 1)
     {
-        return true;
+      return true;
     }
 
+    Rotation direction = line.getDirection();
     for (ComponentView connectedComponent : connectedComponents)
     {
       if (connectedComponent != this)
@@ -438,6 +275,26 @@ public class TraceView
       }
     }
     return otherTrace;
+  }
+
+  public int getMinimumX()
+  {
+    return line.getMinimumX();
+  }
+
+  public int getMinimumY()
+  {
+    return line.getMinimumY();
+  }
+
+  public int getMaximumX()
+  {
+    return line.getMaximumX();
+  }
+
+  public int getMaximumY()
+  {
+    return line.getMaximumY();
   }
 }
 

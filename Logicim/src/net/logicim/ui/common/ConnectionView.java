@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectionView
+    implements Comparable<ConnectionView>
 {
   protected List<ComponentView> connectedComponents;
 
@@ -86,6 +87,33 @@ public class ConnectionView
     {
       throw new SimulatorException("Could not remove component from connections.");
     }
+  }
+
+  @Override
+  public int compareTo(ConnectionView other)
+  {
+    Int2D position = getGridPosition();
+    Int2D otherPosition = other.getGridPosition();
+    int dx = otherPosition.x - position.x;
+    int dy = otherPosition.y - position.y;
+    if (dx < 0)
+    {
+      dx *= -1;
+    }
+    if (dy < 0)
+    {
+      dy *= -1;
+    }
+
+    if (dx < dy)
+    {
+      return Integer.compare(position.y, otherPosition.y);
+    }
+    else if (dy < dx)
+    {
+      return Integer.compare(position.x, otherPosition.x);
+    }
+    return 0;
   }
 }
 

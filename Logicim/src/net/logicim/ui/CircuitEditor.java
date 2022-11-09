@@ -422,7 +422,7 @@ public class CircuitEditor
       mergeViews.add(traceView);
       mergeViews.addAll(towardsEnd);
       Int2D smallest = new Int2D(traceView.getMinimumX(), traceView.getMinimumY());
-      Int2D largest = new Int2D(traceView.getMinimumX(), traceView.getMaximumY());
+      Int2D largest = new Int2D(traceView.getMaximumX(), traceView.getMaximumY());
       for (TraceView mergeView : mergeViews)
       {
         int x1 = mergeView.getMinimumX();
@@ -508,6 +508,8 @@ public class CircuitEditor
 
   public List<TraceView> createTraces(Line line)
   {
+    xxx(line);
+
     Int2D startPosition = line.getStart();
     Int2D endPosition = line.getEnd();
 
@@ -583,22 +585,40 @@ public class CircuitEditor
     }
   }
 
-  void xxx(Line line)
+  public void xxx(Line line)
+  {
+    List<ConnectionView> sortedConnections = new ArrayList<>(getConnectionsOnLine(line));
+    Collections.sort(sortedConnections);
+
+    for (ConnectionView connectionView : sortedConnections)
+    {
+      System.out.println(connectionView.getGridPosition().toString());
+    }
+  }
+
+  private Set<ConnectionView> getConnectionsOnLine(Line line)
   {
     List<TraceOverlap> overlapping = getTracesOverlapping(line);
-    Set<ConnectionView> notStraightConnections= new LinkedHashSet<>();
+    Set<ConnectionView> notStraightConnections = new LinkedHashSet<>();
     for (TraceOverlap overlap : overlapping)
     {
       TraceView traceView = overlap.getTraceView();
       if (!traceView.isStartStraight())
       {
-        notStraightConnections.add(traceView.getStartConnection());
+        if (line.isPositionOn(traceView.getStartPosition()))
+        {
+          notStraightConnections.add(traceView.getStartConnection());
+        }
       }
       if (!traceView.isEndStraight())
       {
-        notStraightConnections.add(traceView.getEndConnection());
+        if (line.isPositionOn(traceView.getEndPosition()))
+        {
+          notStraightConnections.add(traceView.getEndConnection());
+        }
       }
     }
+    return notStraightConnections;
   }
 }
 

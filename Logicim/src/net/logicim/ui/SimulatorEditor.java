@@ -171,8 +171,11 @@ public class SimulatorEditor
 
     if (secondLine == null)
     {
-      List<TraceOverlap> firstTraceOverlaps = getTracesOverlapping(firstLine);
-
+      if (firstLine != null)
+      {
+        List<TraceView> firstTraceViews = circuitEditor.createTraces(firstLine);
+        mergeTraces(firstTraceViews);
+      }
     }
     else
     {

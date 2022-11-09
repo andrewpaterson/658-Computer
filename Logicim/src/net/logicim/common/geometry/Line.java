@@ -1,7 +1,13 @@
 package net.logicim.common.geometry;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.Rotation;
+
+import static net.logicim.ui.common.LineOverlap.*;
+import static net.logicim.ui.common.LineOverlap.End;
+import static net.logicim.ui.common.Rotation.*;
 
 public class Line
 {
@@ -93,6 +99,130 @@ public class Line
     {
       return end.x;
     }
+  }
+
+  public void getCenter(Int2D center)
+  {
+    center.set(start);
+    center.add(end);
+    center.divide(2);
+  }
+
+  public boolean isPositionOn(Int2D p)
+  {
+    return isPositionOn(p.x, p.y);
+  }
+
+  public boolean isPositionOn(int x, int y)
+  {
+    boolean positionFallsOnTrace = false;
+    if ((direction == North) &&
+        (x == start.x) &&
+        ((y >= start.y) && (y <= end.y)))
+    {
+      positionFallsOnTrace = true;
+    }
+    if ((direction == South) &&
+        (x == start.x) &&
+        ((y >= end.y) && (y <= start.y)))
+    {
+      positionFallsOnTrace = true;
+    }
+    if ((direction == West) &&
+        (y == start.y) &&
+        ((x >= start.x) && (x <= end.x)))
+    {
+      positionFallsOnTrace = true;
+    }
+    if ((direction == Rotation.East) &&
+        (y == start.y) &&
+        ((x >= end.x) && (x <= start.x)))
+    {
+      positionFallsOnTrace = true;
+    }
+    return positionFallsOnTrace;
+  }
+
+  public LineOverlap getOverlap(Line otherLine)
+  {
+    Rotation lineDirection = otherLine.getDirection();
+    if (lineDirection == Cannot)
+    {
+      return null;
+    }
+    else
+    {
+      if ((lineDirection == North || lineDirection == South) &&
+          (direction == North || direction == South))
+      {
+        if (otherLine.getStart().x == otherLine.getStart().x)
+        {
+          return calculateOverlap(otherLine.getMinimumY(),
+                                  otherLine.getMaximumY(),
+                                  getMinimumY(),
+                                  getMaximumY(),
+                                  otherLine.getStart().y,
+                                  otherLine.getEnd().y);
+        }
+        else
+        {
+          return null;
+        }
+      }
+      else if ((lineDirection == East || lineDirection == West) &&
+               (direction == East || direction == West))
+      {
+        if (otherLine.getStart().y == otherLine.getStart().y)
+        {
+          return calculateOverlap(otherLine.getMinimumX(),
+                                  otherLine.getMaximumX(),
+                                  getMinimumX(),
+                                  getMaximumX(),
+                                  otherLine.getStart().x,
+                                  otherLine.getEnd().x);
+        }
+        else
+        {
+          return null;
+        }
+      }
+      else
+      {
+        return null;
+      }
+    }
+  }
+
+  public LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd)
+  {
+    if (lineMax <= traceMin)
+    {
+      return null;
+    }
+    if (lineMin >= traceMax)
+    {
+      return null;
+    }
+
+    if ((lineMin <= traceMin) && (lineMax >= traceMax))
+    {
+      return Fully;  //The line fully overlaps the center of the trace.
+    }
+    if ((lineMin > traceMin) && (lineMax < traceMax))
+    {
+      return Center;  //The line only overlaps the center of the trace.
+    }
+
+    if ((traceStart >= lineMin) && (traceStart <= lineMax))
+    {
+      return Start;  //The line overlaps the start of the trace (but not the end).
+    }
+    if ((traceEnd >= lineMin) && (traceEnd <= lineMax))
+    {
+      return End;  //The line overlaps the end of the trace (but not the start).
+    }
+
+    throw new SimulatorException("Could not determine line over trace overlap.");
   }
 }
 

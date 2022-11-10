@@ -169,7 +169,6 @@ public class SimulatorEditor
 
   private void executeWirePull(WirePull wirePull)
   {
-
     Int2D firstPosition = wirePull.getFirstPosition();
     Int2D middlePosition = wirePull.getMiddlePosition();
     Int2D secondPosition = wirePull.getSecondPosition();
@@ -181,40 +180,17 @@ public class SimulatorEditor
     {
       if (firstLine != null)
       {
-        List<TraceView> firstTraceViews = circuitEditor.createTraces(firstLine);
-        mergeTraces(firstTraceViews);
+        circuitEditor.createTraces(firstLine);
       }
     }
     else
     {
-      List<TraceView> firstTraceViews = circuitEditor.createTraces(firstLine);
-      mergeTraces(firstTraceViews);
+      circuitEditor.createTraces(firstLine);
       circuitEditor.createTraces(secondLine);
     }
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
 
     connectConnections(firstConnection);
-  }
-
-  private void mergeTraces(List<TraceView> traceViews)
-  {
-    for (TraceView traceView : traceViews)
-    {
-      circuitEditor.mergeTrace(traceView);
-    }
-  }
-
-  private ArrayList<ConnectionView> createConnectionViewArray(ConnectionView... connectionArray)
-  {
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    for (ConnectionView connectionView : connectionArray)
-    {
-      if (connectionView != null)
-      {
-        connectionViews.add(connectionView);
-      }
-    }
-    return connectionViews;
   }
 
   private void connectConnections(ConnectionView firstConnection)
@@ -317,10 +293,6 @@ public class SimulatorEditor
     {
       safety--;
     }
-    if (safety == 0)
-    {
-      System.out.println("SimulatorEditor.waitForChangeDone");
-    }
   }
 
   private synchronized void waitForPaintDone()
@@ -330,10 +302,6 @@ public class SimulatorEditor
     while (painting && safety > 0)
     {
       safety--;
-    }
-    if (safety == 0)
-    {
-      System.out.println("SimulatorEditor.waitForPaintDone");
     }
   }
 

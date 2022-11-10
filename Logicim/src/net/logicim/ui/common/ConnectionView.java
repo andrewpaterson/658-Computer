@@ -115,5 +115,11 @@ public class ConnectionView
     }
     return 0;
   }
+
+  @Override
+  public String toString()
+  {
+    return getGridPosition().toString() + " (" + connectedComponents.size() + ")";
+  }
 }
 

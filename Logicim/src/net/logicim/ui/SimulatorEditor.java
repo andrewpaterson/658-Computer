@@ -58,6 +58,9 @@ public class SimulatorEditor
   protected boolean running;
   protected long runTimeStep;
 
+  protected volatile boolean painting;
+  protected volatile boolean changingCircuit;
+
   public SimulatorEditor()
   {
     this.viewport = new Viewport(this);
@@ -126,6 +129,8 @@ public class SimulatorEditor
 
   public void mouseReleased(int x, int y, int button)
   {
+    waitForPaintDone();
+
     mouseButtons.unset(button);
 
     if (button == BUTTON1)
@@ -145,6 +150,8 @@ public class SimulatorEditor
         mousePositionOnGridChanged();
       }
     }
+
+    changingCircuit = false;
   }
 
   private void executePlacement(DiscreteView placementView)
@@ -162,6 +169,7 @@ public class SimulatorEditor
 
   private void executeWirePull(WirePull wirePull)
   {
+
     Int2D firstPosition = wirePull.getFirstPosition();
     Int2D middlePosition = wirePull.getMiddlePosition();
     Int2D secondPosition = wirePull.getSecondPosition();
@@ -275,6 +283,8 @@ public class SimulatorEditor
 
   public void paint(Graphics2D graphics)
   {
+    startPaint();
+
     graphics.setColor(viewport.getColours().getBackground());
     graphics.fillRect(0, 0, width, height);
 
@@ -294,6 +304,36 @@ public class SimulatorEditor
     if (wirePull != null)
     {
       wirePull.paint(graphics, viewport);
+    }
+
+    painting = false;
+  }
+
+  private synchronized void startPaint()
+  {
+    int safety = 100000;
+    painting = true;
+    while (changingCircuit && safety > 0)
+    {
+      safety--;
+    }
+    if (safety == 0)
+    {
+      System.out.println("SimulatorEditor.waitForChangeDone");
+    }
+  }
+
+  private synchronized void waitForPaintDone()
+  {
+    int safety = 100000;
+    changingCircuit = true;
+    while (painting && safety > 0)
+    {
+      safety--;
+    }
+    if (safety == 0)
+    {
+      System.out.println("SimulatorEditor.waitForPaintDone");
     }
   }
 
@@ -429,12 +469,14 @@ public class SimulatorEditor
 
   public void keyPressed(int keyCode)
   {
+    waitForPaintDone();
     keyboardButtons.set(keyCode);
 
     if (!(keyCode == KeyEvent.VK_ALT || keyCode == KeyEvent.VK_SHIFT || keyCode == KeyEvent.VK_CONTROL))
     {
       actions.keyPressed(keyCode);
     }
+    changingCircuit = false;
   }
 
   public void createPlacementView(ViewFactory viewFactory)

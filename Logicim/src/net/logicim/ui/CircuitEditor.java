@@ -255,10 +255,15 @@ public class CircuitEditor
 
   public List<TraceView> getTraceViewsInGridSpace(Int2D position)
   {
+    return getTraceViewsInGridSpace(position.x, position.y);
+  }
+
+  public List<TraceView> getTraceViewsInGridSpace(int x, int y)
+  {
     List<TraceView> result = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      if (traceView.contains(position))
+      if (traceView.contains(x, y))
       {
         result.add(traceView);
       }
@@ -506,31 +511,13 @@ public class CircuitEditor
     return result;
   }
 
-  public List<TraceView> createTraces(Line line)
-  {
-    xxx(line);
-
-    Int2D startPosition = line.getStart();
-    Int2D endPosition = line.getEnd();
-
-    List<TraceView> traceViews = new ArrayList<>();
-    if (isValidTrace(startPosition, endPosition))
-    {
-      splitTrace(startPosition, line.getDirection());
-      splitTrace(endPosition, line.getDirection());
-      TraceView traceView = new TraceView(this, startPosition, endPosition);
-      traceViews.add(traceView);
-    }
-    return traceViews;
-  }
-
   private void splitTrace(Int2D position, Rotation direction)
   {
     List<TraceView> traceViews = getTraceViewsInGridSpace(position);
     for (TraceView traceView : traceViews)
     {
       ConnectionView connectionView = traceView.getPotentialConnectionsInGrid(position);
-      if (connectionView instanceof HoverPortView)
+      if (connectionView instanceof HoverConnectionView)
       {
         if (!direction.isStraight(traceView.getDirection()))
         {
@@ -585,15 +572,113 @@ public class CircuitEditor
     }
   }
 
-  public void xxx(Line line)
+  public List<TraceView> createTraces(Line line)
   {
+    splitTrace(line.getStart(), line.getDirection());
+    splitTrace(line.getEnd(), line.getDirection());
+
     List<ConnectionView> sortedConnections = new ArrayList<>(getConnectionsOnLine(line));
+
     Collections.sort(sortedConnections);
 
-    for (ConnectionView connectionView : sortedConnections)
+    List<TraceView> result = new ArrayList<>();
+    if (sortedConnections.size() == 0)
     {
-      System.out.println(connectionView.getGridPosition().toString());
+      result.add(new TraceView(this, line.getStart(), line.getEnd()));
     }
+    else
+    {
+      if (line.isEastWest())
+      {
+        int minimumX = line.getMinimumX();
+        int maximumX = line.getMaximumX();
+        int y = line.getY();
+
+        Int2D start = new Int2D(minimumX, y);
+        Int2D end = null;
+        ConnectionView firstConnection = sortedConnections.get(0);
+        int index;
+        if (firstConnection.getGridPosition().equals(minimumX, y))
+        {
+          ConnectionView secondConnection = sortedConnections.get(1);
+          end = secondConnection.getGridPosition();
+          index = 1;
+        }
+        else
+        {
+          end = firstConnection.getGridPosition();
+          index = 0;
+        }
+
+        for (; ; )
+        {
+          List<TraceOverlap> tracesOverlapping = getTracesOverlapping(new Line(start, end));
+          if (tracesOverlapping.size() == 0)
+          {
+            TraceView traceView = new TraceView(this, start, end);
+            result.add(traceView);
+          }
+
+          start = end;
+          index++;
+          if (index < sortedConnections.size())
+          {
+            ConnectionView nextConnection = sortedConnections.get(index);
+            end = nextConnection.getGridPosition();
+          }
+          else
+          {
+            end = new Int2D(maximumX, y);
+            tracesOverlapping = getTracesOverlapping(new Line(start, end));
+            if (tracesOverlapping.size() == 0)
+            {
+              TraceView traceView = new TraceView(this, start, end);
+              result.add(traceView);
+            }
+            break;
+          }
+        }
+      }
+      else if (line.isNorthSouth())
+      {
+
+      }
+    }
+    return result;
+  }
+
+  private TraceView getExactTraceView(Int2D start, Int2D end)
+  {
+    ConnectionView startConnection = getConnection(start);
+    if (startConnection == null)
+    {
+      return null;
+    }
+    ConnectionView endConnection = getConnection(end);
+    if (endConnection == null)
+    {
+      return null;
+    }
+
+    Set<TraceView> traceViews = new HashSet<>();
+    for (ComponentView connectedComponent : startConnection.getConnectedComponents())
+    {
+      if (connectedComponent instanceof TraceView)
+      {
+        traceViews.add((TraceView) connectedComponent);
+      }
+    }
+    for (ComponentView connectedComponent : endConnection.getConnectedComponents())
+    {
+      if (connectedComponent instanceof TraceView)
+      {
+        if (traceViews.contains(connectedComponent))
+        {
+          return (TraceView) connectedComponent;
+        }
+      }
+    }
+    return null;
   }
 
   private Set<ConnectionView> getConnectionsOnLine(Line line)

@@ -6,7 +6,6 @@ import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.Rotation;
 
 import static net.logicim.ui.common.LineOverlap.*;
-import static net.logicim.ui.common.LineOverlap.End;
 import static net.logicim.ui.common.Rotation.*;
 
 public class Line
@@ -77,6 +76,7 @@ public class Line
       return end.x;
     }
   }
+
   public int getMaximumY()
   {
     if (start.y > end.y)
@@ -223,6 +223,40 @@ public class Line
     }
 
     throw new SimulatorException("Could not determine line over trace overlap.");
+  }
+
+  public boolean isEastWest()
+  {
+    return direction == West || direction == East;
+  }
+
+  public boolean isNorthSouth()
+  {
+    return direction == North || direction == South;
+  }
+
+  public int getY()
+  {
+    if (start.y == end.y)
+    {
+      return start.y;
+    }
+    else
+    {
+      throw new SimulatorException("Could get single Y for a North / South line.");
+    }
+  }
+
+  public int getX()
+  {
+    if (start.x == end.x)
+    {
+      return start.x;
+    }
+    else
+    {
+      throw new SimulatorException("Could get single X for an East / West line.");
+    }
   }
 }
 

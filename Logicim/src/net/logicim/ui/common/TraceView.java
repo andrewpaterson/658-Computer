@@ -86,7 +86,7 @@ public class TraceView
 
     if (positionFallsOnTrace)
     {
-      return new HoverPortView(this, x, y);
+      return new HoverConnectionView(this, x, y);
     }
     else
     {

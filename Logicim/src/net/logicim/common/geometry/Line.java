@@ -155,14 +155,14 @@ public class Line
       if ((lineDirection == North || lineDirection == South) &&
           (direction == North || direction == South))
       {
-        if (otherLine.getStart().x == otherLine.getStart().x)
+        if (getStart().x == otherLine.getStart().x)
         {
           return calculateOverlap(otherLine.getMinimumY(),
                                   otherLine.getMaximumY(),
                                   getMinimumY(),
                                   getMaximumY(),
-                                  otherLine.getStart().y,
-                                  otherLine.getEnd().y);
+                                  getStart().y,
+                                  getEnd().y);
         }
         else
         {
@@ -172,14 +172,14 @@ public class Line
       else if ((lineDirection == East || lineDirection == West) &&
                (direction == East || direction == West))
       {
-        if (otherLine.getStart().y == otherLine.getStart().y)
+        if (getStart().y == otherLine.getStart().y)
         {
           return calculateOverlap(otherLine.getMinimumX(),
                                   otherLine.getMaximumX(),
                                   getMinimumX(),
                                   getMaximumX(),
-                                  otherLine.getStart().x,
-                                  otherLine.getEnd().x);
+                                  getStart().x,
+                                  getEnd().x);
         }
         else
         {

@@ -274,5 +274,10 @@ public class Viewport
 
     return 0;
   }
+
+  public float getConnectionSize()
+  {
+    return 3;
+  }
 }
 

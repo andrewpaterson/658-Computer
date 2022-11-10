@@ -3,6 +3,8 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 
@@ -48,6 +50,23 @@ public class TraceView
     int y2 = viewport.transformGridToScreenSpaceY(line.getEnd().y);
 
     graphics.drawLine(x1, y1, x2, y2);
+
+    int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
+
+    if (!startConnection.isNonJunctionTracesOnly())
+    {
+      graphics.fillOval(x1 - lineWidth,
+                        y1 - lineWidth,
+                        lineWidth * 2,
+                        lineWidth * 2);
+    }
+    if (!endConnection.isNonJunctionTracesOnly())
+    {
+      graphics.fillOval(x2 - lineWidth,
+                        y2 - lineWidth,
+                        lineWidth * 2,
+                        lineWidth * 2);
+    }
   }
 
   public void connect(TraceNet trace)

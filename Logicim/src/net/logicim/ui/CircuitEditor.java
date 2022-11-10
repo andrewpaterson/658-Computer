@@ -603,7 +603,10 @@ public class CircuitEditor
 
     if ((result != null) && (result.size() >= 1))
     {
-      mergeTrace(result.get(0));
+      for (TraceView traceView : result)
+      {
+        mergeTrace(traceView);
+      }
     }
     return result;
   }

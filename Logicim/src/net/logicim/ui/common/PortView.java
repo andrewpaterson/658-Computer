@@ -99,7 +99,7 @@ public class PortView
     {
       int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
-      int lineWidth = (int) (viewport.getCircleRadius() * 3);
+      int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
       Port port = getPort();
       Uniport uniport = (Uniport) port;

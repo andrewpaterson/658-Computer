@@ -121,5 +121,29 @@ public class ConnectionView
   {
     return getGridPosition().toString() + " (" + connectedComponents.size() + ")";
   }
+
+  public boolean isNonJunctionTracesOnly()
+  {
+    if ((connectedComponents.size() > 0) && (connectedComponents.size() <= 2))
+    {
+      int traceCount = 0;
+      for (ComponentView connectedComponent : connectedComponents)
+      {
+        if (connectedComponent instanceof TraceView)
+        {
+          traceCount++;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      if ((traceCount > 0) && (traceCount <= 2))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 

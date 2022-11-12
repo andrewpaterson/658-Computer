@@ -1,7 +1,5 @@
 package net.logicim.domain.common;
 
-import java.util.Set;
-
 public abstract class Event
 {
   protected long time;
@@ -16,3 +14,4 @@ public abstract class Event
     return time;
   }
 }
+

@@ -30,14 +30,14 @@ public class ClockOscillator
   {
     state.tick();
 
-    simulation.getTimeline().createClockEvent(halfCycleTime, this);
+    simulation.getTimeline().createTickEvent(halfCycleTime, this);
     pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
   }
 
   @Override
   public ClockOscillatorState simulationStarted(Simulation simulation)
   {
-    simulation.getTimeline().createClockEvent(halfCycleTime, this);
+    simulation.getTimeline().createTickEvent(halfCycleTime, this);
 
     return new ClockOscillatorState(this);
   }

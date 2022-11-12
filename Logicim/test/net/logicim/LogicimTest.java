@@ -1,12 +1,13 @@
 package net.logicim;
 
-import net.logicim.test.SimulatorTest;
+
+import net.logicim.domain.SimulationTest;
 
 public class LogicimTest
 {
   public static void main(String[] args)
   {
-    SimulatorTest.test();
+    SimulationTest.test();
   }
 }
 

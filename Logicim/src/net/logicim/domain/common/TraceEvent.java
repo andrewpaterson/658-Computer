@@ -1,12 +1,6 @@
 package net.logicim.domain.common;
 
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
-
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 public class TraceEvent
     extends Event

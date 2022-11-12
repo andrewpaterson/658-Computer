@@ -43,9 +43,9 @@ public class Timeline
     return event;
   }
 
-  public ClockEvent createClockEvent(long propagationDelay, IntegratedCircuit<?, ?> integratedCircuit)
+  public TickEvent createTickEvent(long propagationDelay, IntegratedCircuit<?, ?> integratedCircuit)
   {
-    ClockEvent event = new ClockEvent(this.time + propagationDelay, integratedCircuit);
+    TickEvent event = new TickEvent(this.time + propagationDelay, integratedCircuit);
     addEvent(event);
 
     return event;
@@ -159,10 +159,10 @@ public class Timeline
         }
         trace.remove(traceEvent);
       }
-      else if (event instanceof ClockEvent)
+      else if (event instanceof TickEvent)
       {
-        ClockEvent clockEvent = (ClockEvent) event;
-        IntegratedCircuit<?, ?> integratedCircuit = clockEvent.getIntegratedCircuit();
+        TickEvent tickEvent = (TickEvent) event;
+        IntegratedCircuit<?, ?> integratedCircuit = tickEvent.getIntegratedCircuit();
         integratedCircuit.clockChanged(simulation);
       }
     }

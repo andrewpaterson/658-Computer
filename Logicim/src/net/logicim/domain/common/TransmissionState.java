@@ -6,8 +6,7 @@ public enum TransmissionState
 {
   Input,
   Output,
-  Impedance,
-  NotSet;
+  Impedance;
 
   public boolean isOutput()
   {
@@ -17,11 +16,6 @@ public enum TransmissionState
   public boolean isInput()
   {
     return this == Input;
-  }
-
-  public boolean isNotSet()
-  {
-    return this == NotSet;
   }
 
   public boolean isImpedance()

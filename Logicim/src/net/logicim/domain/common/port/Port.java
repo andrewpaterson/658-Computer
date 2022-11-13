@@ -3,21 +3,14 @@ package net.logicim.domain.common.port;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.collection.linkedlist.LinkedListIterator;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.TransmissionState;
 import net.logicim.domain.common.port.event.PortEvent;
-import net.logicim.domain.common.port.event.UniportSlewEvent;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
-import net.logicim.domain.common.trace.TraceValue;
-
-import static net.logicim.domain.common.TransmissionState.NotSet;
 
 public abstract class Port
 {
-  protected boolean outputDriven;
   protected PortType type;
   protected Pins pins;
   protected String name;
@@ -35,10 +28,22 @@ public abstract class Port
     this.pins = pins;
     this.name = name;
     this.voltageConfiguration = voltageConfiguration;
-    this.state = NotSet;
-    this.outputDriven = false;
+    this.state = stateFromType(type);
     events = new LinkedList<>();
     pins.addPort(this);
+  }
+
+  private TransmissionState stateFromType(PortType type)
+  {
+    switch (type)
+    {
+      case Input:
+        return TransmissionState.Input;
+      case Output:
+        return TransmissionState.Output;
+      default:
+        return null;
+    }
   }
 
   public String getName()
@@ -49,17 +54,17 @@ public abstract class Port
   public String getPortTransmissionStateAsString()
   {
     String portStateString = "  ";
-    if (state.isInput())
+    if (state == null)
+    {
+      portStateString = "..";
+    }
+    else if (state.isInput())
     {
       portStateString = "<-";
     }
     else if (state.isOutput())
     {
       portStateString = "->";
-    }
-    else if (state.isNotSet())
-    {
-      portStateString = "..";
     }
     else if (state.isImpedance())
     {
@@ -76,14 +81,6 @@ public abstract class Port
   public Pins getPins()
   {
     return pins;
-  }
-
-  public boolean isInput()
-  {
-    return type == PortType.Input ||
-           type == PortType.Bidirectional ||
-           type == PortType.Passive ||
-           type == PortType.PowerIn;
   }
 
   public void add(PortEvent event)
@@ -115,11 +112,6 @@ public abstract class Port
     }
   }
 
-  public boolean isDriven()
-  {
-    return outputDriven;
-  }
-
   protected void throwNoOutputVoltageConfigurationException()
   {
     throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without a voltage configuration.");
@@ -149,6 +141,6 @@ public abstract class Port
 
   public abstract boolean isDriven(TraceNet traceNet);
 
-  public abstract float getDrivenVoltage(TraceNet traceNet);
+  public abstract Drive getDrive(TraceNet traceNet);
 }
 

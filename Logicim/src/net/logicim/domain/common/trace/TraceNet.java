@@ -1,11 +1,10 @@
 package net.logicim.domain.common.trace;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.common.port.Drive;
 import net.logicim.domain.common.port.Port;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 public class TraceNet
@@ -17,28 +16,16 @@ public class TraceNet
     connectedPorts = new LinkedHashSet<>();
   }
 
-  public List<Port> getInputPorts()
-  {
-    List<Port> inputPorts = new ArrayList<>();
-    for (Port port : connectedPorts)
-    {
-      if (port.isInput())
-      {
-        inputPorts.add(port);
-      }
-    }
-    return inputPorts;
-  }
-
   public float getDrivenVoltage()
   {
     float drivenVoltage = 0;
     int drivers = 0;
     for (Port port : connectedPorts)
     {
-      if (port.isDriven(this))
+      Drive drive = port.getDrive(this);
+      if (drive.isDriven())
       {
-        drivenVoltage += port.getDrivenVoltage(this);
+        drivenVoltage += drive.getVoltage();
         drivers++;
       }
     }
@@ -72,9 +59,10 @@ public class TraceNet
     float maximumVoltage = -10000;
     for (Port port : connectedPorts)
     {
-      if (port.isDriven(this))
+      Drive drive = port.getDrive(this);
+      if (drive.isDriven())
       {
-        float drivenVoltage = port.getDrivenVoltage(this);
+        float drivenVoltage = drive.getVoltage();
         if (drivenVoltage < minimumVoltage)
         {
           minimumVoltage = drivenVoltage;

@@ -17,7 +17,7 @@ public class Uniport
     extends Port
 {
   protected TraceNet trace;
-  protected float outputVoltage;
+  protected Drive output;
 
   public Uniport(PortType type,
                  Pins pins,
@@ -25,7 +25,7 @@ public class Uniport
                  VoltageConfiguration voltageConfiguration)
   {
     super(type, pins, name, voltageConfiguration);
-    outputVoltage = 0;
+    output = new Drive();
   }
 
   public void connect(TraceNet trace)
@@ -43,17 +43,14 @@ public class Uniport
 
   public void writeBool(Timeline timeline, boolean value)
   {
-    if (state.isNotSet())
-    {
-      state = Output;
-    }
+    state = Output;
 
     if (state.isOutput())
     {
       if (voltageConfiguration.isOutput())
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createOutputEvents(timeline, TraceValue.getOutputValue(value), this);
+        outputVoltageConfiguration.createDriveEvents(timeline, value, this);
       }
       else
       {
@@ -68,17 +65,14 @@ public class Uniport
 
   public void highImpedance(Timeline timeline)
   {
-    if (state.isNotSet())
-    {
-      state = Impedance;
-    }
+    state = Impedance;
 
     if (state.isImpedance())
     {
       if (voltageConfiguration.isOutput())
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createOutputEvents(timeline, Undriven, this);
+        outputVoltageConfiguration.createHighImpedanceEvents(timeline, this);
       }
       else
       {
@@ -93,10 +87,7 @@ public class Uniport
 
   public TraceValue readValue()
   {
-    if (state.isNotSet())
-    {
-      state = Input;
-    }
+    state = Input;
 
     if (state.isInput())
     {
@@ -157,16 +148,21 @@ public class Uniport
   {
     if (trace == this.trace)
     {
-      return outputDriven;
+      return output.isDriven();
     }
     return false;
   }
 
+  public boolean isDriven()
+  {
+    return output.isDriven();
+  }
+
   public float getDrivenVoltage()
   {
-    if (outputDriven)
+    if (isDriven())
     {
-      return outputVoltage;
+      return output.getVoltage();
     }
     else
     {
@@ -175,19 +171,11 @@ public class Uniport
   }
 
   @Override
-  public float getDrivenVoltage(TraceNet trace)
+  public Drive getDrive(TraceNet trace)
   {
     if (trace == this.trace)
     {
-      if (outputDriven)
-      {
-        //Need to check if we're in a slew event.
-        return outputVoltage;
-      }
-      else
-      {
-        throw new SimulatorException("Port [" + getName() + "] is not driven.");
-      }
+      return output;
     }
     else
     {
@@ -202,7 +190,7 @@ public class Uniport
 
   public void voltageDriven(Simulation simulation, float voltage)
   {
-    outputVoltage = voltage;
+    output.driveVoltage(voltage);
   }
 
   public void voltageChanging(Simulation simulation, float startVoltage, float endVoltage, long slewTime)
@@ -233,7 +221,7 @@ public class Uniport
 
   public void writeUnsettled(Timeline timeline)
   {
-    throw new SimulatorException("Not Implemented.");
+    throw new SimulatorException("Not yet implemented.");
   }
 }
 

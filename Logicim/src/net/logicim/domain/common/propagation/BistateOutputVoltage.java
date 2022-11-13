@@ -3,10 +3,10 @@ package net.logicim.domain.common.propagation;
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Omniport;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.port.event.OmniportSlewEvent;
 import net.logicim.domain.common.port.event.UniportSlewEvent;
-import net.logicim.domain.common.trace.TraceValue;
 
 public class BistateOutputVoltage
     extends VoltageConfiguration
@@ -56,10 +56,10 @@ public class BistateOutputVoltage
     return true;
   }
 
-  public void createOutputEvents(Timeline timeline, TraceValue outValue, Uniport uniport)
+  public void createDriveEvents(Timeline timeline, boolean outValue, Uniport uniport)
   {
     float startVoltage = getStartVoltage(outValue, uniport);
-    float intendedVoltage = getIntendedVoltage(outValue);
+    float intendedVoltage = getVoltage(outValue);
     float voltageDiff = intendedVoltage - startVoltage;
 
     float voltsPerTime;
@@ -83,7 +83,7 @@ public class BistateOutputVoltage
   }
 
   @Override
-  public void createOutputEvents(Timeline timeline, TraceValue[] outValues, Omniport omniport)
+  public void createDriveEvents(Timeline timeline, boolean[] outValues, Omniport omniport)
   {
     long[] holdTimes = new long[outValues.length];
     long[] slewTimes = new long[outValues.length];
@@ -92,9 +92,9 @@ public class BistateOutputVoltage
 
     for (int i = 0; i < outValues.length; i++)
     {
-      TraceValue outValue = outValues[i];
+      boolean outValue = outValues[i];
       float startVoltage = getStartVoltage(outValue, omniport, i);
-      float intendedVoltage = getIntendedVoltage(outValue);
+      float intendedVoltage = getVoltage(outValue);
       float voltageDiff = intendedVoltage - startVoltage;
 
       float voltsPerTime;
@@ -125,47 +125,39 @@ public class BistateOutputVoltage
     }
   }
 
-  private float getIntendedVoltage(TraceValue value)
+  @Override
+  public void createHighImpedanceEvents(Timeline timeline, Port port)
   {
-    if (value.isLow())
-    {
-      return getLowVoltageOut();
-    }
-    else if (value.isHigh())
+    throw new SimulatorException("Not yet implemented.");
+  }
+
+  private float getVoltage(boolean value)
+  {
+    if (value)
     {
       return getHighVoltageOut();
     }
     else
     {
-      throw new SimulatorException("No intended voltage for trace value [" + value.toEnumString() + "].");
+      return getLowVoltageOut();
     }
   }
 
-  protected float getStartVoltage(TraceValue outValue, Uniport uniport)
+  protected float getStartVoltage(boolean outValue, Uniport uniport)
   {
-    boolean driven = uniport.isDriven();
-    float startVoltage;
-    if (driven)
+    if (uniport.isDriven())
     {
-      startVoltage = uniport.getDrivenVoltage();
+      return uniport.getDrivenVoltage();
     }
     else
     {
-      if (outValue.isLow())
-      {
-        startVoltage = getLowVoltageOut();
-      }
-      else if (outValue.isHigh())
-      {
-        startVoltage = getHighVoltageOut();
-      }
+      return getVoltage(outValue);
     }
-    return startVoltage;
   }
 
-  private float getStartVoltage(TraceValue outValue, Omniport omniport, int busIndex)
+  private float getStartVoltage(boolean outValue, Omniport omniport, int busIndex)
   {
-    boolean driven = omniport.isDriven();
+    boolean driven = omniport.isDriven(busIndex);
     float startVoltage;
     if (driven)
     {
@@ -173,13 +165,13 @@ public class BistateOutputVoltage
     }
     else
     {
-      if (outValue.isLow())
+      if (outValue)
       {
-        startVoltage = getLowVoltageOut();
+        startVoltage = getHighVoltageOut();
       }
       else
       {
-        startVoltage = getHighVoltageOut();
+        startVoltage = getLowVoltageOut();
       }
     }
     return startVoltage;

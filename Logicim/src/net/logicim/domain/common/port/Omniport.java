@@ -7,17 +7,12 @@ import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
-import net.logicim.domain.common.trace.TraceValue;
-
-import static net.logicim.domain.common.TransmissionState.Output;
-import static net.logicim.domain.common.trace.TraceValue.High;
-import static net.logicim.domain.common.trace.TraceValue.Low;
 
 public class Omniport
     extends Port
 {
   protected TraceNet[] traces;
-  protected float[] outputVoltages;
+  protected Drive[] outputs;
   protected int width;
 
   public Omniport(PortType type,
@@ -28,15 +23,12 @@ public class Omniport
   {
     super(type, pins, name, voltageConfiguration);
     this.width = width;
+    this.traces = new TraceNet[width];
+    this.outputs = new Drive[width];
   }
 
   public void writeAllPinsBool(Simulation simulation, long longValue)
   {
-    if (state.isNotSet())
-    {
-      state = Output;
-    }
-
     if (state.isOutput())
     {
       if (voltageConfiguration.isOutput())
@@ -44,16 +36,16 @@ public class Omniport
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
         if (traces.length == width)
         {
-          TraceValue[] traceValues = new TraceValue[traces.length];
+          boolean[] traceValues = new boolean[traces.length];
           for (int i = 0; i < traces.length; i++)
           {
-            TraceValue value = Low;
+            boolean value = false;
             if ((longValue >> i & 1) == 1)
             {
-              value = High;
+              value = true;
             }
             traceValues[i] = value;
-            outputVoltageConfiguration.createOutputEvents(simulation.getTimeline(), traceValues, this);
+            outputVoltageConfiguration.createDriveEvents(simulation.getTimeline(), traceValues, this);
           }
         }
       }
@@ -99,53 +91,53 @@ public class Omniport
   @Override
   public void disconnect()
   {
-    for (TraceNet trace : traces)
+    for (int i = 0; i < traces.length; i++)
     {
+      TraceNet trace = traces[i];
       trace.disconnect(this);
+      traces[i] = null;
+      outputs[i] = null;
     }
-    traces = null;
-    outputVoltages = null;
   }
 
   @Override
   public boolean isDriven(TraceNet trace)
   {
-    for (TraceNet testTrace : traces)
+    for (int i = 0; i < traces.length; i++)
     {
+      TraceNet testTrace = traces[i];
       if (trace == testTrace)
       {
-        return outputDriven;
+        return outputs[i].isDriven();
       }
     }
     return false;
   }
 
-  @Override
-  public float getDrivenVoltage(TraceNet trace)
+  public boolean isDriven(int busIndex)
   {
-    int index = 0;
-    if (!outputDriven)
-    {
-      throw new SimulatorException("Port [" + getName() + "] is not driven.");
-    }
+    return outputs[busIndex].isDriven();
+  }
 
-    for (TraceNet testTrace : traces)
+  @Override
+  public Drive getDrive(TraceNet trace)
+  {
+    for (int i = 0; i < traces.length; i++)
     {
+      TraceNet testTrace = traces[i];
       if (trace == testTrace)
       {
-        return outputVoltages[index];
+        return outputs[i];
       }
-
-      index++;
     }
     throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
   }
 
   public float getDrivenVoltage(int busIndex)
   {
-    if (outputDriven)
+    if (outputs[busIndex].isDriven())
     {
-      return outputVoltages[busIndex];
+      return outputs[busIndex].voltage;
     }
     else
     {
@@ -155,7 +147,7 @@ public class Omniport
 
   public void setOutputVoltages(float[] outputVoltages)
   {
-    this.outputVoltages = outputVoltages;
+    throw new SimulatorException("Not yet implemented.");
   }
 }
 

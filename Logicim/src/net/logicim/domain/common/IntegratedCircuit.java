@@ -49,7 +49,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public void clockChanged(Simulation simulation)
+  public void executeTick(Simulation simulation)
   {
   }
 

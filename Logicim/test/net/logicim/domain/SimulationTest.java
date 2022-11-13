@@ -1,9 +1,12 @@
 package net.logicim.domain;
 
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
+import net.logicim.domain.integratedcircuit.standard.constant.Constant;
+import net.logicim.domain.integratedcircuit.standard.constant.ConstantPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
 
@@ -32,14 +35,13 @@ public class SimulationTest
     Circuit circuit = new Circuit();
     TraceNet connectingTraceNet = new TraceNet();
     TraceNet outputTraceNet = new TraceNet();
-    Inverter inverter1 = new Inverter(circuit, "Not 1", new BufferPins());
-    inverter1.getPins().getOutput().connect(connectingTraceNet);
-    Inverter inverter2 = new Inverter(circuit, "Not 1", new BufferPins());
-    inverter2.getPins().getInput().connect(connectingTraceNet);
-    inverter2.getPins().getOutput().connect(outputTraceNet);
+    Constant constant = new Constant(circuit, "Constant", new ConstantPins((byte) 1), LongTime.nanosecondsToTime(1), 0);
+    constant.getPins().getOutput().connect(connectingTraceNet);
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins());
+    inverter.getPins().getInput().connect(connectingTraceNet);
+    inverter.getPins().getOutput().connect(outputTraceNet);
 
     Simulation simulation = circuit.resetSimulation();
-    inverter1.inputTransition(simulation, inverter1.getInputPort());
     simulation.runSimultaneous();
 
   }

@@ -93,7 +93,7 @@ public class Uniport
     {
       if (voltageConfiguration.isInput())
       {
-        if (trace.isDriven())
+        if ((trace != null) && (trace.isDriven()))
         {
           return ((InputVoltage) voltageConfiguration).getValue(trace.getDrivenVoltage());
         }

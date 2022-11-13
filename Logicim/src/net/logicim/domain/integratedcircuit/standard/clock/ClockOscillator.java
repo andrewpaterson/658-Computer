@@ -24,7 +24,7 @@ public class ClockOscillator
   }
 
   @Override
-  public void clockChanged(Simulation simulation)
+  public void executeTick(Simulation simulation)
   {
     state.tick();
 

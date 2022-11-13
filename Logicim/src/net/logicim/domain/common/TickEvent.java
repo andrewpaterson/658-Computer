@@ -23,7 +23,7 @@ public class TickEvent
   public void execute(Simulation simulation)
   {
     IntegratedCircuit<?, ?> integratedCircuit = getIntegratedCircuit();
-    integratedCircuit.clockChanged(simulation);
+    integratedCircuit.executeTick(simulation);
   }
 }
 

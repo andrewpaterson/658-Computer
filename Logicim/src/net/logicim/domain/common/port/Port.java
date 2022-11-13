@@ -142,5 +142,7 @@ public abstract class Port
   public abstract boolean isDriven(TraceNet traceNet);
 
   public abstract Drive getDrive(TraceNet traceNet);
+
+  public abstract void connect(TraceNet traceNet);
 }
 

@@ -78,7 +78,7 @@ public class Omniport
 
   public void connect(int index, TraceNet trace)
   {
-    if (width == 1)
+    if (index < width)
     {
       traces[index] = trace;
     }
@@ -86,6 +86,20 @@ public class Omniport
     {
       throw new SimulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [1].");
     }
+  }
+
+  @Override
+  public void connect(TraceNet trace)
+  {
+    if (width == 1)
+    {
+      traces[0] = trace;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [1].");
+    }
+
   }
 
   @Override

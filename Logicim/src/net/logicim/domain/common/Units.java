@@ -8,6 +8,5 @@ public class Units
 
   public static int nS_IN_mS = 1000000;
   public static int nS_IN_S =  1000000000;
-
 }
 

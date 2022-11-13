@@ -3,6 +3,7 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -48,8 +49,17 @@ public class ClockView
 
   private void paintClockWaveform(Graphics2D graphics, Viewport viewport)
   {
-    float voltage = integratedCircuit.getInternalVoltage();
-    Color clockColor = VoltageColour.getColorForVoltage(viewport.getColours(), voltage);
+    ClockOscillatorState state = integratedCircuit.getState();
+    Color clockColor;
+    if (state != null)
+    {
+      float voltage = integratedCircuit.getInternalVoltage();
+      clockColor = VoltageColour.getColorForVoltage(viewport.getColours(), voltage);
+    }
+    else
+    {
+      clockColor = viewport.getColours().getDisconnectedTrace();
+    }
     graphics.setColor(clockColor);
 
     float xOffset = 0.5f;

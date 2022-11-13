@@ -9,8 +9,6 @@ import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
-import java.util.List;
-
 public class Buffer
     extends IntegratedCircuit<BufferPins, Stateless>
 {
@@ -27,12 +25,11 @@ public class Buffer
   }
 
   @Override
-  public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
+  public void inputTransition(Simulation simulation, Port port)
   {
     Uniport input = pins.getInput();
     TraceValue inValue = input.readValue();
-    if (inValue.isError() ||
-        inValue.isImpedance() ||
+    if (inValue.isImpedance() ||
         inValue.isUnsettled())
     {
       pins.getOutput().writeUnsettled(simulation.getTimeline());
@@ -59,6 +56,11 @@ public class Buffer
   public String getType()
   {
     return "Buffer";
+  }
+
+  public Uniport getInputPort()
+  {
+    return getPins().getInput();
   }
 }
 

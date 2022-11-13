@@ -1,11 +1,12 @@
 package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.propagation.InputPropagation;
-import net.logicim.domain.common.propagation.OutputPropagation;
-import net.logicim.domain.common.propagation.Propagation;
+import net.logicim.domain.common.propagation.InputVoltage;
+import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
 
@@ -16,13 +17,15 @@ public class Uniport
     extends Port
 {
   protected TraceNet trace;
+  protected float outputVoltage;
 
   public Uniport(PortType type,
                  Pins pins,
                  String name,
-                 Propagation propagation)
+                 VoltageConfiguration voltageConfiguration)
   {
-    super(type, pins, name, propagation);
+    super(type, pins, name, voltageConfiguration);
+    outputVoltage = 0;
   }
 
   public void connect(TraceNet trace)
@@ -47,50 +50,19 @@ public class Uniport
 
     if (state.isOutput())
     {
-      if (propagation.isOutput())
+      if (voltageConfiguration.isOutput())
       {
-        if (trace != null)
-        {
-          OutputPropagation outputPropagation = (OutputPropagation) propagation;
-          outputPropagation.createPropagationEvent(timeline, TraceValue.getOutputValue(value), trace);
-        }
+        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
+        outputVoltageConfiguration.createOutputEvents(timeline, TraceValue.getOutputValue(value), this);
       }
       else
       {
-        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
+        throwNoOutputVoltageConfigurationException();
       }
     }
     else
     {
-      throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-    }
-  }
-
-  public void writeUnsettled(Timeline timeline)
-  {
-    if (state.isNotSet())
-    {
-      state = Output;
-    }
-
-    if (state.isOutput())
-    {
-      if (propagation.isOutput())
-      {
-        if (trace != null)
-        {
-          OutputPropagation outputPropagation = (OutputPropagation) propagation;
-          outputPropagation.createPropagationEvent(timeline, TraceValue.Unsettled, trace);
-        }
-      }
-      else
-      {
-        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
-      }
-    }
-    else
-    {
-      throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throwCannotWriteToPortException();
     }
   }
 
@@ -103,19 +75,19 @@ public class Uniport
 
     if (state.isImpedance())
     {
-      if (propagation.isOutput())
+      if (voltageConfiguration.isOutput())
       {
-        OutputPropagation outputPropagation = (OutputPropagation) propagation;
-        outputPropagation.createPropagationEvent(timeline, Undriven, trace);
+        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
+        outputVoltageConfiguration.createOutputEvents(timeline, Undriven, this);
       }
       else
       {
-        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
+        throwNoOutputVoltageConfigurationException();
       }
     }
     else
     {
-      throw new SimulatorException("Cannot high-impedance Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throwCannotHighImpedancePortException();
     }
   }
 
@@ -128,26 +100,34 @@ public class Uniport
 
     if (state.isInput())
     {
-      if (propagation.isInput())
+      if (voltageConfiguration.isInput())
       {
-        return ((InputPropagation) propagation).getValue(trace.getVoltage());
+        if (trace.isDriven())
+        {
+          return ((InputVoltage) voltageConfiguration).getValue(trace.getDrivenVoltage());
+        }
+        else
+        {
+          return Undriven;
+        }
       }
       else
       {
-        throw new SimulatorException("Cannot read an input value for port [" + getDescription() + "] without an input propagation configured.");
+        throwNoInputVoltageConfigurationException();
       }
     }
     else
     {
-      throw new SimulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throwCannotReadFromPortException();
     }
+    return null;
   }
 
   public String getWireValuesAsString()
   {
     if (trace != null)
     {
-      if (trace.isUndriven())
+      if (!trace.isDriven())
       {
         return " ";
       }
@@ -162,18 +142,6 @@ public class Uniport
     }
   }
 
-  public float getVoltage()
-  {
-    if (trace != null)
-    {
-      return trace.getVoltage();
-    }
-    else
-    {
-      return TraceNet.Undriven;
-    }
-  }
-
   @Override
   public void disconnect()
   {
@@ -184,9 +152,88 @@ public class Uniport
     }
   }
 
+  @Override
+  public boolean isDriven(TraceNet trace)
+  {
+    if (trace == this.trace)
+    {
+      return outputDriven;
+    }
+    return false;
+  }
+
+  public float getDrivenVoltage()
+  {
+    if (outputDriven)
+    {
+      return outputVoltage;
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not driven.");
+    }
+  }
+
+  @Override
+  public float getDrivenVoltage(TraceNet trace)
+  {
+    if (trace == this.trace)
+    {
+      if (outputDriven)
+      {
+        //Need to check if we're in a slew event.
+        return outputVoltage;
+      }
+      else
+      {
+        throw new SimulatorException("Port [" + getName() + "] is not driven.");
+      }
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
+    }
+  }
+
   public TraceNet getTrace()
   {
     return trace;
+  }
+
+  public void voltageDriven(Simulation simulation, float voltage)
+  {
+    outputVoltage = voltage;
+  }
+
+  public void voltageChanging(Simulation simulation, float startVoltage, float endVoltage, long slewTime)
+  {
+    if (voltageConfiguration.isInput())
+    {
+      InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
+
+      if (startVoltage != endVoltage)
+      {
+        long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
+        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+      }
+    }
+  }
+
+  public void voltageTransition(Simulation simulation, float endVoltage)
+  {
+    getPins().inputTransition(simulation, this);
+  }
+
+  private long calculateTransitionTime(float startVoltage, float endVoltage, long slewTime, float y)
+  {
+    float c = startVoltage;
+    float m = (endVoltage - startVoltage) / slewTime;
+    return Math.round((y - c) / m);
+  }
+
+  public void writeUnsettled(Timeline timeline)
+  {
+    throw new SimulatorException("Not Implemented.");
   }
 }
 

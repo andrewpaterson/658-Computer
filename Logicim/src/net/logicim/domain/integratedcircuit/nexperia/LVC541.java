@@ -7,8 +7,6 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 
-import java.util.List;
-
 public class LVC541
     extends IntegratedCircuit<LVC541Pins, Stateless>
 {
@@ -27,7 +25,7 @@ public class LVC541
   }
 
   @Override
-  public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
+  public void inputTransition(Simulation simulation, Port port)
   {
     tickPort();
   }

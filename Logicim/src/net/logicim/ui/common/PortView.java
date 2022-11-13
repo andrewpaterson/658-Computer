@@ -103,7 +103,7 @@ public class PortView
 
       Port port = getPort();
       Uniport uniport = (Uniport) port;
-      Color color = VoltageColour.getColorForVoltage(viewport.getColours(), uniport.getVoltage());
+      Color color = VoltageColour.getColorForUniport(viewport.getColours(), uniport);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,

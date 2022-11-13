@@ -1,13 +1,11 @@
 package net.logicim.domain.integratedcircuit.standard.clock;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.trace.TraceNet;
-
-import java.util.List;
 
 public class ClockOscillator
     extends IntegratedCircuit<ClockOscillatorPins, ClockOscillatorState>
@@ -21,7 +19,7 @@ public class ClockOscillator
   }
 
   @Override
-  public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
+  public void inputTransition(Simulation simulation, Port port)
   {
   }
 
@@ -68,7 +66,7 @@ public class ClockOscillator
     }
     else
     {
-      return TraceNet.Undriven;
+      throw new SimulatorException("Clock without state cannot get internal voltage.");
     }
   }
 }

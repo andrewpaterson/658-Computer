@@ -27,15 +27,14 @@ public class OrGate
   }
 
   @Override
-  public void inputTraceChanged(Simulation simulation, List<Port> updatedPorts)
+  public void inputTransition(Simulation simulation, Port port)
   {
     List<Uniport> inputs = pins.getInputs();
     boolean unsettled = false;
     for (Uniport input : inputs)
     {
       TraceValue inValue = input.readValue();
-      if (inValue.isError() ||
-          inValue.isImpedance() ||
+      if (inValue.isImpedance() ||
           inValue.isUnsettled())
       {
         unsettled = true;

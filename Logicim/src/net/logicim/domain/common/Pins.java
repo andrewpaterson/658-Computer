@@ -1,7 +1,9 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.state.State;
 
 import java.util.ArrayList;
@@ -71,6 +73,11 @@ public abstract class Pins
   public List<Port> getPorts()
   {
     return ports;
+  }
+
+  public void inputTransition(Simulation simulation, Port port)
+  {
+    getIntegratedCircuit().inputTransition(simulation, port);
   }
 }
 

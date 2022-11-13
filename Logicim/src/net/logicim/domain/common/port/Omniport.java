@@ -4,12 +4,10 @@ import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Bus;
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.propagation.OutputPropagation;
-import net.logicim.domain.common.propagation.Propagation;
+import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
-
-import java.util.List;
 
 import static net.logicim.domain.common.TransmissionState.Output;
 import static net.logicim.domain.common.trace.TraceValue.High;
@@ -18,16 +16,17 @@ import static net.logicim.domain.common.trace.TraceValue.Low;
 public class Omniport
     extends Port
 {
-  protected List<TraceNet> traces;
+  protected TraceNet[] traces;
+  protected float[] outputVoltages;
   protected int width;
 
   public Omniport(PortType type,
                   Pins pins,
                   String name,
                   int width,
-                  Propagation propagation)
+                  VoltageConfiguration voltageConfiguration)
   {
-    super(type, pins, name, propagation);
+    super(type, pins, name, voltageConfiguration);
     this.width = width;
   }
 
@@ -40,31 +39,32 @@ public class Omniport
 
     if (state.isOutput())
     {
-      if (propagation.isOutput())
+      if (voltageConfiguration.isOutput())
       {
-        OutputPropagation outputPropagation = (OutputPropagation) propagation;
-        if (traces.size() == width)
+        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
+        if (traces.length == width)
         {
-          for (int i = 0; i < traces.size(); i++)
+          TraceValue[] traceValues = new TraceValue[traces.length];
+          for (int i = 0; i < traces.length; i++)
           {
             TraceValue value = Low;
             if ((longValue >> i & 1) == 1)
             {
               value = High;
             }
-            TraceNet trace = traces.get(i);
-            outputPropagation.createPropagationEvent(simulation.getTimeline(), value, trace);
+            traceValues[i] = value;
+            outputVoltageConfiguration.createOutputEvents(simulation.getTimeline(), traceValues, this);
           }
         }
       }
       else
       {
-        throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without an output propagation configured.");
+        throwNoOutputVoltageConfigurationException();
       }
     }
     else
     {
-      throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
+      throwCannotWriteToPortException();
     }
   }
 
@@ -75,7 +75,7 @@ public class Omniport
       for (int i = 0; i < width; i++)
       {
         TraceNet trace = bus.getTrace(i);
-        traces.set(i, trace);
+        traces[i] = trace;
       }
     }
     else
@@ -84,11 +84,11 @@ public class Omniport
     }
   }
 
-  public void connect(TraceNet trace)
+  public void connect(int index, TraceNet trace)
   {
     if (width == 1)
     {
-      traces.set(0, trace);
+      traces[index] = trace;
     }
     else
     {
@@ -102,8 +102,60 @@ public class Omniport
     for (TraceNet trace : traces)
     {
       trace.disconnect(this);
-      traces.remove(trace);
     }
+    traces = null;
+    outputVoltages = null;
+  }
+
+  @Override
+  public boolean isDriven(TraceNet trace)
+  {
+    for (TraceNet testTrace : traces)
+    {
+      if (trace == testTrace)
+      {
+        return outputDriven;
+      }
+    }
+    return false;
+  }
+
+  @Override
+  public float getDrivenVoltage(TraceNet trace)
+  {
+    int index = 0;
+    if (!outputDriven)
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not driven.");
+    }
+
+    for (TraceNet testTrace : traces)
+    {
+      if (trace == testTrace)
+      {
+        return outputVoltages[index];
+      }
+
+      index++;
+    }
+    throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
+  }
+
+  public float getDrivenVoltage(int busIndex)
+  {
+    if (outputDriven)
+    {
+      return outputVoltages[busIndex];
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not driven.");
+    }
+  }
+
+  public void setOutputVoltages(float[] outputVoltages)
+  {
+    this.outputVoltages = outputVoltages;
   }
 }
 

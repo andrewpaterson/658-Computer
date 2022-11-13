@@ -4,19 +4,21 @@ import static net.logicim.domain.common.Units.nS_IN_S;
 
 public abstract class LongTime
 {
+  public static final int timeGranularityInNanosecond = 1024;
+
   public static int timeToNanoseconds(long time)
   {
-    return (int)(time / 1024);
+    return (int)(time / timeGranularityInNanosecond);
   }
 
   public static int nanosecondsToTime(int nanoseconds)
   {
-    return nanoseconds * 1024;
+    return nanoseconds * timeGranularityInNanosecond;
   }
 
   public static int nanosecondsToTime(float nanoseconds)
   {
-    return (int) (nanoseconds * 1024);
+    return (int) (nanoseconds * timeGranularityInNanosecond);
   }
 
   public static long secondsToTime(float seconds)

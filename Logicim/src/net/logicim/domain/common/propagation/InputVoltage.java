@@ -1,15 +1,14 @@
 package net.logicim.domain.common.propagation;
 
-import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
 
-public class InputPropagation
-    extends Propagation
+public class InputVoltage
+    extends VoltageConfiguration
 {
   private float lowVoltageIn;
   private float highVoltageIn;
 
-  public InputPropagation(String family, float lowVoltageIn, float highVoltageIn)
+  public InputVoltage(String family, float lowVoltageIn, float highVoltageIn)
   {
     super(family);
     this.lowVoltageIn = lowVoltageIn;
@@ -24,15 +23,7 @@ public class InputPropagation
 
   public TraceValue getValue(float voltage)
   {
-    if (voltage == TraceNet.Unsettled)
-    {
-      return TraceValue.Unsettled;
-    }
-    else if (voltage == TraceNet.Undriven)
-    {
-      return TraceValue.Undriven;
-    }
-    else if (voltage <= lowVoltageIn)
+    if (voltage <= lowVoltageIn)
     {
       return TraceValue.Low;
     }
@@ -44,6 +35,16 @@ public class InputPropagation
     {
       return TraceValue.Unsettled;
     }
+  }
+
+  public float getLowVoltageIn()
+  {
+    return lowVoltageIn;
+  }
+
+  public float getHighVoltageIn()
+  {
+    return highVoltageIn;
   }
 }
 

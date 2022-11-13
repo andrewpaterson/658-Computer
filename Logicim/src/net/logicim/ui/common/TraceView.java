@@ -3,8 +3,6 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 
@@ -33,16 +31,7 @@ public class TraceView
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    Color color;
-    if (trace == null)
-    {
-      color = viewport.getColours().getDisconnectedTrace();
-    }
-    else
-    {
-      float voltage = trace.getVoltage();
-      color = VoltageColour.getColorForVoltage(viewport.getColours(), voltage);
-    }
+    Color color = VoltageColour.getColorForTrace(viewport.getColours(), trace);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);

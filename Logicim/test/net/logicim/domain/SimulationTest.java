@@ -11,7 +11,7 @@ import static net.logicim.domain.common.Units.MHz;
 
 public class SimulationTest
 {
-  public static void test()
+  private static void testClockOscillator()
   {
     Circuit circuit = new Circuit();
 
@@ -26,4 +26,28 @@ public class SimulationTest
     Simulation simulation = circuit.resetSimulation();
     simulation.runSimultaneous();
   }
+
+  private static void testInverterEvents()
+  {
+    Circuit circuit = new Circuit();
+    TraceNet connectingTraceNet = new TraceNet();
+    TraceNet outputTraceNet = new TraceNet();
+    Inverter inverter1 = new Inverter(circuit, "Not 1", new BufferPins());
+    inverter1.getPins().getOutput().connect(connectingTraceNet);
+    Inverter inverter2 = new Inverter(circuit, "Not 1", new BufferPins());
+    inverter2.getPins().getInput().connect(connectingTraceNet);
+    inverter2.getPins().getOutput().connect(outputTraceNet);
+
+    Simulation simulation = circuit.resetSimulation();
+    inverter1.inputTransition(simulation, inverter1.getInputPort());
+    simulation.runSimultaneous();
+
+  }
+
+  public static void test()
+  {
+    testInverterEvents();
+    testClockOscillator();
+  }
 }
+

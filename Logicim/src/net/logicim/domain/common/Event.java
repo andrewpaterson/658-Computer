@@ -1,5 +1,7 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.Simulation;
+
 public abstract class Event
 {
   protected long time;
@@ -13,5 +15,7 @@ public abstract class Event
   {
     return time;
   }
+
+  public abstract void execute(Simulation simulation);
 }
 

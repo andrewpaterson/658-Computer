@@ -7,17 +7,11 @@ public enum TraceValue
   Low,
   High,
   Unsettled,
-  Undriven,
-  Error;
+  Undriven;
 
   public boolean isHigh()
   {
     return this == High;
-  }
-
-  public boolean isError()
-  {
-    return this == Error;
   }
 
   public boolean isLow()

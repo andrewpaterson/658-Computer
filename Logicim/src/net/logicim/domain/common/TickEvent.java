@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
 
 public class TickEvent
@@ -16,6 +17,13 @@ public class TickEvent
   public IntegratedCircuit<? extends Pins, ? extends State> getIntegratedCircuit()
   {
     return integratedCircuit;
+  }
+
+  @Override
+  public void execute(Simulation simulation)
+  {
+    IntegratedCircuit<?, ?> integratedCircuit = getIntegratedCircuit();
+    integratedCircuit.clockChanged(simulation);
   }
 }
 

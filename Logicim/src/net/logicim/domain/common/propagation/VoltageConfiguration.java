@@ -1,10 +1,10 @@
 package net.logicim.domain.common.propagation;
 
-public abstract class Propagation
+public abstract class VoltageConfiguration
 {
   protected String family;
 
-  public Propagation(String family)
+  public VoltageConfiguration(String family)
   {
     this.family = family;
   }

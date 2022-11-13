@@ -1,9 +1,6 @@
 package net.logicim.domain.common.trace;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.common.collection.linkedlist.LinkedListIterator;
-import net.logicim.domain.common.TraceEvent;
 import net.logicim.domain.common.port.Port;
 
 import java.util.ArrayList;
@@ -13,29 +10,11 @@ import java.util.Set;
 
 public class TraceNet
 {
-  public static final float Unsettled = -0.5f;
-  public static final float Undriven = -1.0f;
-
-  protected LinkedList<TraceEvent> events;
-  protected float voltage;
-
   protected Set<Port> connectedPorts;
 
   public TraceNet()
   {
-    events = new LinkedList<>();
-    voltage = Undriven;
     connectedPorts = new LinkedHashSet<>();
-  }
-
-  public void update(float value)
-  {
-    this.voltage = value;
-  }
-
-  public float getVoltage()
-  {
-    return voltage;
   }
 
   public List<Port> getInputPorts()
@@ -51,37 +30,68 @@ public class TraceNet
     return inputPorts;
   }
 
-  public void add(TraceEvent event)
+  public float getDrivenVoltage()
   {
-    LinkedListIterator<TraceEvent> iterator = events.iterator();
-    boolean added = false;
-    while (iterator.hasNext())
+    float drivenVoltage = 0;
+    int drivers = 0;
+    for (Port port : connectedPorts)
     {
-      TraceEvent existingEvent = iterator.next();
-      if (existingEvent.getTime() > event.getTime())
+      if (port.isDriven(this))
       {
-        added = true;
-        iterator.insertBefore(event);
-        break;
+        drivenVoltage += port.getDrivenVoltage(this);
+        drivers++;
       }
     }
-    if (!added)
+    if (drivers == 1)
     {
-      events.add(event);
+      return drivenVoltage;
     }
-  }
-
-  public boolean isUndriven()
-  {
-    return voltage == Undriven;
-  }
-
-  public void remove(TraceEvent event)
-  {
-    boolean removed = events.remove(event);
-    if (!removed)
+    if (drivers == 0)
     {
-      throw new SimulatorException("Cannot remove event");
+      throw new SimulatorException("Trace is not driven.");
+    }
+
+    return drivenVoltage / drivers;
+  }
+
+  public boolean isDriven()
+  {
+    for (Port port : connectedPorts)
+    {
+      if (port.isDriven(this))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public float getShortVoltage()
+  {
+    float minimumVoltage = 10000;
+    float maximumVoltage = -10000;
+    for (Port port : connectedPorts)
+    {
+      if (port.isDriven(this))
+      {
+        float drivenVoltage = port.getDrivenVoltage(this);
+        if (drivenVoltage < minimumVoltage)
+        {
+          minimumVoltage = drivenVoltage;
+        }
+        if (drivenVoltage > maximumVoltage)
+        {
+          maximumVoltage = drivenVoltage;
+        }
+      }
+    }
+    if (minimumVoltage == 10000 || maximumVoltage == -10000)
+    {
+      return 0;
+    }
+    else
+    {
+      return maximumVoltage - minimumVoltage;
     }
   }
 

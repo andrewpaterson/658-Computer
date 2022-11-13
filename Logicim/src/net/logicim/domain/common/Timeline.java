@@ -3,14 +3,9 @@ package net.logicim.domain.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.state.State;
-import net.logicim.domain.common.trace.TraceNet;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import net.logicim.domain.common.port.Omniport;
+import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.port.event.*;
 
 import static net.logicim.domain.common.LongTime.timeToNanoseconds;
 
@@ -31,15 +26,38 @@ public class Timeline
     eventTime = 0;
   }
 
-  public TraceEvent createPropagationEvent(TraceNet trace, float outVoltage, long propagationDelay)
+  public UniportSlewEvent createPortSlewEvent(Uniport port, long holdTime, long slewTime, float startVoltage, float endVoltage)
   {
-    TraceEvent event = new TraceEvent(this.time + propagationDelay, outVoltage, trace);
+    UniportSlewEvent event = new UniportSlewEvent(port, startVoltage, endVoltage, slewTime, time + holdTime);
     addEvent(event);
+    port.add(event);
+    return event;
+  }
 
-    if (trace != null)
-    {
-      trace.add(event);
-    }
+  public UniportDriveEvent createPortDriveEvent(Uniport port, UniportSlewEvent slewEvent)
+  {
+    UniportDriveEvent event = new UniportDriveEvent(port, slewEvent);
+    addEvent(event);
+    port.add(event);
+    return event;
+  }
+
+  public UniportTransitionEvent createPortTransitionEvent(Uniport port, long transitionTime, float voltage)
+  {
+    return new UniportTransitionEvent(port, time + transitionTime, voltage);
+  }
+
+
+  public OmniportSlewEvent createPortSlewEvent(Omniport omniport, long[] holdTimes, long[] slewTimes, float[] startVoltages, float[] endVoltages)
+  {
+    return null;
+  }
+
+  public OmniportDriveEvent createPortDriveEvent(Omniport port, OmniportSlewEvent slewEvent, int busIndex)
+  {
+    OmniportDriveEvent event = new OmniportDriveEvent(port, slewEvent, busIndex);
+    addEvent(event);
+    port.add(event);
     return event;
   }
 
@@ -78,7 +96,7 @@ public class Timeline
   {
     long targetTime = time + timeForward;
 
-    for (;;)
+    for (; ; )
     {
       SimultaneousEvents events = this.events.findFirst();
       if (events != null)
@@ -136,42 +154,9 @@ public class Timeline
     previousEventTime = eventTime;
     eventTime = time;
 
-    Map<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuits = new LinkedHashMap<>();
     for (Event event : events.events)
     {
-      if (event instanceof TraceEvent)
-      {
-        TraceEvent traceEvent = (TraceEvent) event;
-        TraceNet trace = traceEvent.getTrace();
-        trace.update(traceEvent.getVoltage());
-
-        List<Port> ports = trace.getInputPorts();
-        for (Port port : ports)
-        {
-          IntegratedCircuit<?, ?> integratedCircuit = port.getPins().getIntegratedCircuit();
-          List<Port> inputPorts = integratedCircuits.get(integratedCircuit);
-          if (inputPorts == null)
-          {
-            inputPorts = new ArrayList<>();
-            integratedCircuits.put(integratedCircuit, inputPorts);
-          }
-          inputPorts.add(port);
-        }
-        trace.remove(traceEvent);
-      }
-      else if (event instanceof TickEvent)
-      {
-        TickEvent tickEvent = (TickEvent) event;
-        IntegratedCircuit<?, ?> integratedCircuit = tickEvent.getIntegratedCircuit();
-        integratedCircuit.clockChanged(simulation);
-      }
-    }
-
-    for (Map.Entry<IntegratedCircuit<? extends Pins, ? extends State>, List<Port>> integratedCircuitListEntry : integratedCircuits.entrySet())
-    {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitListEntry.getKey();
-      List<Port> ports = integratedCircuitListEntry.getValue();
-      integratedCircuit.inputTraceChanged(simulation, ports);
+      event.execute(simulation);
     }
 
     this.events.remove(events);

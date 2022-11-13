@@ -115,7 +115,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public abstract State simulationStarted(Simulation simulation);
 
-  public abstract void inputTraceChanged(Simulation simulation, List<Port> updatedPorts);
+  public abstract void inputTransition(Simulation simulation, Port port);
 
   public abstract String getType();
 

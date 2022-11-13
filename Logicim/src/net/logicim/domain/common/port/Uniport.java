@@ -28,6 +28,12 @@ public class Uniport
     output = new Drive();
   }
 
+  @Override
+  public boolean isUniport()
+  {
+    return true;
+  }
+
   public void connect(TraceNet trace)
   {
     if (this.trace == null)

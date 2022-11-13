@@ -1,9 +1,9 @@
 package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Bus;
 import net.logicim.domain.common.Pins;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
@@ -27,7 +27,7 @@ public class Omniport
     this.outputs = new Drive[width];
   }
 
-  public void writeAllPinsBool(Simulation simulation, long longValue)
+  public void writeAllPinsBool(Timeline timeline, long longValue)
   {
     if (state.isOutput())
     {
@@ -45,7 +45,7 @@ public class Omniport
               value = true;
             }
             traceValues[i] = value;
-            outputVoltageConfiguration.createDriveEvents(simulation.getTimeline(), traceValues, this);
+            outputVoltageConfiguration.createDriveEvents(timeline, traceValues, this);
           }
         }
       }

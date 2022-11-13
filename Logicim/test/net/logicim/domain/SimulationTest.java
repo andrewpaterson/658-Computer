@@ -2,6 +2,7 @@ package net.logicim.domain;
 
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.LongTime;
+import net.logicim.domain.common.SimultaneousEvents;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -10,6 +11,9 @@ import net.logicim.domain.integratedcircuit.standard.constant.ConstantPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
 
+import java.util.Map;
+
+import static net.logicim.assertions.Validator.validate;
 import static net.logicim.domain.common.Units.MHz;
 
 public class SimulationTest
@@ -42,8 +46,11 @@ public class SimulationTest
     inverter.getPins().getOutput().connect(outputTraceNet);
 
     Simulation simulation = circuit.resetSimulation();
+    Map<Long, SimultaneousEvents> events = simulation.getTimeline().getAllEvents();
+    validate(1, events.size());
     simulation.runSimultaneous();
-
+    validate(1, events.size());
+    simulation.runSimultaneous();
   }
 
   public static void test()

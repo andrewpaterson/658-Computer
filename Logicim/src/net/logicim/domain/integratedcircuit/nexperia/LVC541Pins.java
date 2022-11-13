@@ -32,7 +32,7 @@ public class LVC541Pins
 
   void setYValue(Simulation simulation, long value)
   {
-    y.writeAllPinsBool(simulation, value);
+    y.writeAllPinsBool(simulation.getTimeline(), value);
   }
 }
 

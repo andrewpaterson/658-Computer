@@ -6,12 +6,17 @@ import net.logicim.domain.common.state.State;
 public class ConstantState
     extends State
 {
-  protected int constantValue;
+  protected long constantValue;
 
-  public ConstantState(IntegratedCircuit<ConstantPins, ConstantState> parent, int constantValue)
+  public ConstantState(IntegratedCircuit<ConstantPins, ConstantState> parent, long constantValue)
   {
     super(parent);
     this.constantValue = constantValue;
+  }
+
+  public long getConstantValue()
+  {
+    return constantValue;
   }
 }
 

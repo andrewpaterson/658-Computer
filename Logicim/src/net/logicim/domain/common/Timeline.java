@@ -1,11 +1,16 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.collection.redblacktree.RedBlackNode;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Omniport;
 import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.port.event.*;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static net.logicim.domain.common.LongTime.timeToNanoseconds;
 
@@ -161,6 +166,18 @@ public class Timeline
 
     this.events.remove(events);
     events.done();
+  }
+
+  public Map<Long, SimultaneousEvents> getAllEvents()
+  {
+    Map<Long, SimultaneousEvents> eventsMap = new LinkedHashMap<>();
+    Iterator<RedBlackNode<Long, SimultaneousEvents>> iterator = events.nodeIterator();
+    while (iterator.hasNext())
+    {
+      RedBlackNode<Long, SimultaneousEvents> node = iterator.next();
+      eventsMap.put(node.getKey(), node.getObject());
+    }
+    return eventsMap;
   }
 
   public long getTime()

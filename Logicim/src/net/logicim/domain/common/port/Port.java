@@ -112,6 +112,11 @@ public abstract class Port
     }
   }
 
+  public boolean isUniport()
+  {
+    return false;
+  }
+
   protected void throwNoOutputVoltageConfigurationException()
   {
     throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without a voltage configuration.");

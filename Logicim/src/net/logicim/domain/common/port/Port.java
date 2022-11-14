@@ -3,6 +3,7 @@ package net.logicim.domain.common.port;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.collection.linkedlist.LinkedListIterator;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.TransmissionState;
 import net.logicim.domain.common.port.event.PortEvent;
@@ -112,6 +113,11 @@ public abstract class Port
     }
   }
 
+  public LinkedList<PortEvent> getEvents()
+  {
+    return events;
+  }
+
   public boolean isUniport()
   {
     return false;
@@ -149,5 +155,16 @@ public abstract class Port
   public abstract Drive getDrive(TraceNet traceNet);
 
   public abstract void connect(TraceNet traceNet);
+
+  public abstract void voltageDriven(Simulation simulation, TraceNet trace, float voltage);
+
+  public abstract void voltageChanging(Simulation simulation, TraceNet trace, float startVoltage, float endVoltage, long slewTime);
+
+  protected long calculateTransitionTime(float startVoltage, float endVoltage, long slewTime, float y)
+  {
+    float c = startVoltage;
+    float m = (endVoltage - startVoltage) / slewTime;
+    return Math.round((y - c) / m);
+  }
 }
 

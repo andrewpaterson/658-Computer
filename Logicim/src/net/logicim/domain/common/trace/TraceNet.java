@@ -83,6 +83,11 @@ public class TraceNet
     }
   }
 
+  public Set<Port> getConnectedPorts()
+  {
+    return connectedPorts;
+  }
+
   public void connect(Port port)
   {
     connectedPorts.add(port);

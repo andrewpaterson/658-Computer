@@ -10,6 +10,8 @@ import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
 
+import java.util.Set;
+
 import static net.logicim.domain.common.TransmissionState.*;
 import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
@@ -194,22 +196,38 @@ public class Uniport
     return trace;
   }
 
-  public void voltageDriven(Simulation simulation, float voltage)
+  @Override
+  public void voltageDriven(Simulation simulation, TraceNet trace, float voltage)
   {
-    output.driveVoltage(voltage);
+    if (trace == this.trace)
+    {
+      output.driveVoltage(voltage);
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
+    }
   }
 
-  public void voltageChanging(Simulation simulation, float startVoltage, float endVoltage, long slewTime)
+  @Override
+  public void voltageChanging(Simulation simulation, TraceNet trace, float startVoltage, float endVoltage, long slewTime)
   {
-    if (voltageConfiguration.isInput())
+    if (trace == this.trace)
     {
-      InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
-
-      if (startVoltage != endVoltage)
+      if (voltageConfiguration.isInput())
       {
-        long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
-        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+        InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
+
+        if (startVoltage != endVoltage)
+        {
+          long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
+          simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+        }
       }
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
     }
   }
 
@@ -218,16 +236,14 @@ public class Uniport
     getPins().inputTransition(simulation, this);
   }
 
-  private long calculateTransitionTime(float startVoltage, float endVoltage, long slewTime, float y)
-  {
-    float c = startVoltage;
-    float m = (endVoltage - startVoltage) / slewTime;
-    return Math.round((y - c) / m);
-  }
-
   public void writeUnsettled(Timeline timeline)
   {
     throw new SimulatorException("Not yet implemented.");
+  }
+
+  public Set<Port> getConnectedPorts()
+  {
+    return trace.getConnectedPorts();
   }
 }
 

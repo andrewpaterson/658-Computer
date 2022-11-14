@@ -7,11 +7,13 @@ public class OmniportDriveEvent
     extends OmniportEvent
 {
   protected OmniportSlewEvent slewEvent;
+  protected int busIndex;
 
   public OmniportDriveEvent(Omniport port, OmniportSlewEvent slewEvent, int busIndex)
   {
     super(port, slewEvent.getEndTime(busIndex));
     this.slewEvent = slewEvent;
+    this.busIndex = busIndex;
   }
 
   @Override

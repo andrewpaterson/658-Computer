@@ -239,5 +239,19 @@ public class LinkedList<E>
   {
     return new LinkedListNode<E>(value);
   }
+
+  public E get(int index)
+  {
+    int count = 0;
+    for (E value : this)
+    {
+      if (count == index)
+      {
+        return value;
+      }
+      count++;
+    }
+    throw new ArrayIndexOutOfBoundsException(index);
+  }
 }
 

@@ -17,7 +17,7 @@ public class UniportDriveEvent
   @Override
   public void execute(Simulation simulation)
   {
-    port.voltageDriven(simulation, slewEvent.getEndVoltage());
+    port.voltageDriven(simulation, port.getTrace(), slewEvent.getEndVoltage());
   }
 }
 

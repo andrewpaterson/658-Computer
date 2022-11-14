@@ -11,11 +11,17 @@ public abstract class UniportEvent
   {
     super(time);
     this.port = port;
+    this.port.add(this);
   }
 
   public Uniport getPort()
   {
     return port;
+  }
+  @Override
+  public void removeFromOwner()
+  {
+    port.remove(this);
   }
 }
 

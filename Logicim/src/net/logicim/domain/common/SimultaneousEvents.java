@@ -38,5 +38,20 @@ public class SimultaneousEvents
     time = -1;
     events = null;
   }
+
+  public int size()
+  {
+    return events.size();
+  }
+
+  public long getTime()
+  {
+    return time;
+  }
+
+  public List<Event> getEvents()
+  {
+    return events;
+  }
 }
 

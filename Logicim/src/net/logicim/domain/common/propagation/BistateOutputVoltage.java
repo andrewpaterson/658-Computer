@@ -151,7 +151,7 @@ public class BistateOutputVoltage
     }
     else
     {
-      return getVoltage(outValue);
+      return getVoltage(!outValue);
     }
   }
 

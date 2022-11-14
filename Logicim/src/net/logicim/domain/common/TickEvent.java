@@ -4,14 +4,11 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
 
 public class TickEvent
-    extends Event
+    extends IntegratedCircuitEvent
 {
-  protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
-
   public TickEvent(long time, IntegratedCircuit<?, ?> integratedCircuit)
   {
-    super(time);
-    this.integratedCircuit = integratedCircuit;
+    super(time, integratedCircuit);
   }
 
   public IntegratedCircuit<? extends Pins, ? extends State> getIntegratedCircuit()

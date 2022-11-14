@@ -1,9 +1,11 @@
 package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Bus;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.propagation.InputVoltage;
 import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
@@ -99,7 +101,47 @@ public class Omniport
     {
       throw new SimulatorException("Cannot connect Port [" + getDescription() + "] with width [" + width + "] to Bus with a different width [1].");
     }
+  }
 
+  public int getTraceIndex(TraceNet trace)
+  {
+    for (int i = 0; i < traces.length; i++)
+    {
+      if (traces[i] == trace)
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  @Override
+  public void voltageDriven(Simulation simulation, TraceNet trace, float voltage)
+  {
+
+  }
+
+  @Override
+  public void voltageChanging(Simulation simulation, TraceNet trace, float startVoltage, float endVoltage, long slewTime)
+  {
+    int traceIndex = getTraceIndex(trace);
+    if (traceIndex != -1)
+    {
+      if (voltageConfiguration.isInput())
+      {
+        InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
+
+        if (startVoltage != endVoltage)
+        {
+          long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
+          simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage, traceIndex);
+        }
+      }
+    }
+    else
+    {
+      throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
+    }
   }
 
   @Override
@@ -117,13 +159,10 @@ public class Omniport
   @Override
   public boolean isDriven(TraceNet trace)
   {
-    for (int i = 0; i < traces.length; i++)
+    int traceIndex = getTraceIndex(trace);
+    if (traceIndex != -1)
     {
-      TraceNet testTrace = traces[i];
-      if (trace == testTrace)
-      {
-        return outputs[i].isDriven();
-      }
+      return outputs[traceIndex].isDriven();
     }
     return false;
   }
@@ -136,13 +175,10 @@ public class Omniport
   @Override
   public Drive getDrive(TraceNet trace)
   {
-    for (int i = 0; i < traces.length; i++)
+    int traceIndex = getTraceIndex(trace);
+    if (traceIndex != -1)
     {
-      TraceNet testTrace = traces[i];
-      if (trace == testTrace)
-      {
-        return outputs[i];
-      }
+        return outputs[traceIndex];
     }
     throw new SimulatorException("Port [" + getName() + "] is not connected to trace.");
   }
@@ -162,6 +198,10 @@ public class Omniport
   public void setOutputVoltages(float[] outputVoltages)
   {
     throw new SimulatorException("Not yet implemented.");
+  }
+
+  public void voltageTransition(Simulation simulation, float voltage, int busIndex)
+  {
   }
 }
 

@@ -1,8 +1,11 @@
 package net.logicim.domain.common;
 
+import net.logicim.common.SimulatorException;
+import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.state.State;
 
 import java.util.List;
@@ -15,6 +18,8 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   protected String name;
   protected boolean enabled;
 
+  protected LinkedList<IntegratedCircuitEvent> events;
+
   public IntegratedCircuit(Circuit circuit, String name, PINS pins)
   {
     this.circuit = circuit;
@@ -23,7 +28,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     this.pins.setIntegratedCircuit(this);
     this.state = null;
     this.enabled = true;
-
+    this.events = new LinkedList<>();
     circuit.add(this);
   }
 
@@ -127,6 +132,20 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   public List<Port> getPorts()
   {
     return pins.getPorts();
+  }
+
+  public void add(IntegratedCircuitEvent event)
+  {
+    events.add(event);
+  }
+
+  public void remove(IntegratedCircuitEvent event)
+  {
+    boolean removed = events.remove(event);
+    if (!removed)
+    {
+      throw new SimulatorException("Cannot remove event");
+    }
   }
 }
 

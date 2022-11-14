@@ -35,7 +35,6 @@ public class Timeline
   {
     UniportSlewEvent event = new UniportSlewEvent(port, startVoltage, endVoltage, slewTime, time + holdTime);
     addEvent(event);
-    port.add(event);
     return event;
   }
 
@@ -43,7 +42,6 @@ public class Timeline
   {
     UniportDriveEvent event = new UniportDriveEvent(port, slewEvent);
     addEvent(event);
-    port.add(event);
     return event;
   }
 
@@ -51,7 +49,6 @@ public class Timeline
   {
     return new UniportTransitionEvent(port, time + transitionTime, voltage);
   }
-
 
   public OmniportSlewEvent createPortSlewEvent(Omniport omniport, long[] holdTimes, long[] slewTimes, float[] startVoltages, float[] endVoltages)
   {
@@ -62,8 +59,12 @@ public class Timeline
   {
     OmniportDriveEvent event = new OmniportDriveEvent(port, slewEvent, busIndex);
     addEvent(event);
-    port.add(event);
     return event;
+  }
+
+  public OmniportTransitionEvent createPortTransitionEvent(Omniport port, long transitionTime, float voltage, int busIndex)
+  {
+    return new OmniportTransitionEvent(port, time + transitionTime, voltage, busIndex);
   }
 
   public TickEvent createTickEvent(long propagationDelay, IntegratedCircuit<?, ?> integratedCircuit)
@@ -162,6 +163,7 @@ public class Timeline
     for (Event event : events.events)
     {
       event.execute(simulation);
+      event.removeFromOwner();
     }
 
     this.events.remove(events);

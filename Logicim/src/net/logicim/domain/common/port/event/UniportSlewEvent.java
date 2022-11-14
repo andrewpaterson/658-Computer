@@ -1,7 +1,10 @@
 package net.logicim.domain.common.port.event;
 
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.Uniport;
+
+import java.util.Set;
 
 public class UniportSlewEvent
     extends UniportEvent
@@ -21,7 +24,14 @@ public class UniportSlewEvent
   @Override
   public void execute(Simulation simulation)
   {
-    port.voltageChanging(simulation, startVoltage, endVoltage, slewTime);
+    Set<Port> connectedPorts = port.getConnectedPorts();
+    for (Port connectedPort : connectedPorts)
+    {
+      if (connectedPort != port)
+      {
+        connectedPort.voltageChanging(simulation, port.getTrace(), startVoltage, endVoltage, slewTime);
+      }
+    }
   }
 
   public long getEndTime()

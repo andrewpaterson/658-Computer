@@ -11,11 +11,18 @@ public abstract class OmniportEvent
   {
     super(time);
     this.port = port;
+    this.port.add(this);
   }
 
   public Omniport getPort()
   {
     return port;
+  }
+
+  @Override
+  public void removeFromOwner()
+  {
+    port.remove(this);
   }
 }
 

@@ -48,5 +48,10 @@ public class Simulation
   {
     timeline.runToTime(timeForward);
   }
+
+  public long getTime()
+  {
+    return timeline.getTime();
+  }
 }
 

@@ -28,10 +28,10 @@ public class TraceView
     endConnection = circuitEditor.getOrAddConnection(end, this);
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
-    Color color = VoltageColour.getColorForTrace(viewport.getColours(), trace);
+    Color color = VoltageColour.getColorForTrace(viewport.getColours(), trace, time);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);

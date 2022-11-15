@@ -4,7 +4,6 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateView;
@@ -44,7 +43,7 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     if ((arcViewFront != null) && (rectangleViewBack != null))
     {
@@ -56,7 +55,7 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
       lineView1.paint(graphics, viewport);
       lineView2.paint(graphics, viewport);
       lineView3.paint(graphics, viewport);
-      super.paint(graphics, viewport);
+      super.paint(graphics, viewport, time);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

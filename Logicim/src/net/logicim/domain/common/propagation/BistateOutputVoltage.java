@@ -2,11 +2,8 @@ package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Omniport;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
-import net.logicim.domain.common.port.event.OmniportSlewEvent;
-import net.logicim.domain.common.port.event.UniportSlewEvent;
+import net.logicim.domain.common.port.event.SlewEvent;
 
 public class BistateOutputVoltage
     extends VoltageConfiguration
@@ -40,11 +37,13 @@ public class BistateOutputVoltage
     this.voltsPerTimeHighToLow = (highVoltageOut - lowVoltageOut) / lowToHighSlewTime;
   }
 
+  @Override
   public float getLowVoltageOut()
   {
     return lowVoltageOut;
   }
 
+  @Override
   public float getHighVoltageOut()
   {
     return highVoltageOut;
@@ -56,9 +55,9 @@ public class BistateOutputVoltage
     return true;
   }
 
-  public void createDriveEvents(Timeline timeline, boolean outValue, Uniport uniport)
+  public void createDriveEvents(Timeline timeline, boolean outValue, Port port)
   {
-    float startVoltage = getStartVoltage(outValue, uniport);
+    float startVoltage = calculateVoltageFromBool(outValue);
     float intendedVoltage = getVoltage(outValue);
     float voltageDiff = intendedVoltage - startVoltage;
 
@@ -78,51 +77,8 @@ public class BistateOutputVoltage
       slewTime = -(long) (voltageDiff / voltsPerTime);
     }
 
-    UniportSlewEvent portSlewEvent = timeline.createPortSlewEvent(uniport, holdTime, slewTime, startVoltage, intendedVoltage);
-    timeline.createPortDriveEvent(uniport, portSlewEvent);
-  }
-
-  @Override
-  public void createDriveEvents(Timeline timeline, boolean[] outValues, Omniport omniport)
-  {
-    long[] holdTimes = new long[outValues.length];
-    long[] slewTimes = new long[outValues.length];
-    float[] startVoltages = new float[outValues.length];
-    float[] intendedVoltages = new float[outValues.length];
-
-    for (int i = 0; i < outValues.length; i++)
-    {
-      boolean outValue = outValues[i];
-      float startVoltage = getStartVoltage(outValue, omniport, i);
-      float intendedVoltage = getVoltage(outValue);
-      float voltageDiff = intendedVoltage - startVoltage;
-
-      float voltsPerTime;
-      long holdTime;
-      long slewTime;
-      if (voltageDiff > 0)
-      {
-        voltsPerTime = voltsPerTimeLowToHigh;
-        holdTime = lowToHighHoldTime;
-        slewTime = (long) (voltageDiff / voltsPerTime);
-      }
-      else
-      {
-        voltsPerTime = voltsPerTimeHighToLow;
-        holdTime = highToLowHoldTime;
-        slewTime = -(long) (voltageDiff / voltsPerTime);
-      }
-
-      holdTimes[i] = holdTime;
-      slewTimes[i] = slewTime;
-      startVoltages[i] = startVoltage;
-      intendedVoltages[i] = intendedVoltage;
-    }
-    OmniportSlewEvent portSlewEvent = timeline.createPortSlewEvent(omniport, holdTimes, slewTimes, startVoltages, intendedVoltages);
-    for (int i = 0; i < outValues.length; i++)
-    {
-      timeline.createPortDriveEvent(omniport, portSlewEvent, i);
-    }
+    SlewEvent portSlewEvent = timeline.createPortSlewEvent(port, holdTime, slewTime, startVoltage, intendedVoltage);
+    timeline.createPortDriveEvent(port, portSlewEvent);
   }
 
   @Override
@@ -143,38 +99,9 @@ public class BistateOutputVoltage
     }
   }
 
-  protected float getStartVoltage(boolean outValue, Uniport uniport)
+  protected float calculateVoltageFromBool(boolean outValue)
   {
-    if (uniport.isDriven())
-    {
-      return uniport.getDrivenVoltage();
-    }
-    else
-    {
-      return getVoltage(!outValue);
-    }
-  }
-
-  private float getStartVoltage(boolean outValue, Omniport omniport, int busIndex)
-  {
-    boolean driven = omniport.isDriven(busIndex);
-    float startVoltage;
-    if (driven)
-    {
-      startVoltage = omniport.getDrivenVoltage(busIndex);
-    }
-    else
-    {
-      if (outValue)
-      {
-        startVoltage = getHighVoltageOut();
-      }
-      else
-      {
-        startVoltage = getLowVoltageOut();
-      }
-    }
-    return startVoltage;
+    return getVoltage(!outValue);
   }
 }
 

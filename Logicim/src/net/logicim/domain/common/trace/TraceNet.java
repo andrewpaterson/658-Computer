@@ -16,16 +16,16 @@ public class TraceNet
     connectedPorts = new LinkedHashSet<>();
   }
 
-  public float getDrivenVoltage()
+  public float getVoltage(long time)
   {
     float drivenVoltage = 0;
     int drivers = 0;
     for (Port port : connectedPorts)
     {
-      Drive drive = port.getDrive(this);
-      if (drive.isDriven())
+      float voltage = port.getVoltage(time);
+      if (!Float.isNaN(voltage))
       {
-        drivenVoltage += drive.getVoltage();
+        drivenVoltage += voltage;
         drivers++;
       }
     }
@@ -39,18 +39,6 @@ public class TraceNet
     }
 
     return drivenVoltage / drivers;
-  }
-
-  public boolean isDriven()
-  {
-    for (Port port : connectedPorts)
-    {
-      if (port.isDriven(this))
-      {
-        return true;
-      }
-    }
-    return false;
   }
 
   public float getShortVoltage()

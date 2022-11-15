@@ -79,12 +79,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
-    super.paint(graphics, viewport);
+    super.paint(graphics, viewport, time);
     for (PortView portView : ports)
     {
-      portView.paint(graphics, viewport);
+      portView.paint(graphics, viewport, time);
     }
   }
 

@@ -69,7 +69,7 @@ public abstract class Validator
       Class<?> oClass = o.getClass();
       if (oClass != aClass)
       {
-        throw new ValidationException(toFailureString(aClass.getName(), oClass.getSimpleName()));
+        throw new ValidationException(toFailureString(aClass.getSimpleName(), oClass.getSimpleName()));
       }
     }
     else

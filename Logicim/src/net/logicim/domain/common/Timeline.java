@@ -4,8 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.RedBlackNode;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Omniport;
-import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.*;
 
 import java.util.Iterator;
@@ -31,40 +30,25 @@ public class Timeline
     eventTime = 0;
   }
 
-  public UniportSlewEvent createPortSlewEvent(Uniport port, long holdTime, long slewTime, float startVoltage, float endVoltage)
+  public SlewEvent createPortSlewEvent(Port port, long holdTime, long slewTime, float startVoltage, float endVoltage)
   {
-    UniportSlewEvent event = new UniportSlewEvent(port, startVoltage, endVoltage, slewTime, time + holdTime);
+    SlewEvent event = new SlewEvent(port, startVoltage, endVoltage, slewTime, time + holdTime);
     addEvent(event);
     return event;
   }
 
-  public UniportDriveEvent createPortDriveEvent(Uniport port, UniportSlewEvent slewEvent)
+  public DriveEvent createPortDriveEvent(Port port, SlewEvent slewEvent)
   {
-    UniportDriveEvent event = new UniportDriveEvent(port, slewEvent);
+    DriveEvent event = new DriveEvent(port, slewEvent);
     addEvent(event);
     return event;
   }
 
-  public UniportTransitionEvent createPortTransitionEvent(Uniport port, long transitionTime, float voltage)
+  public TransitionEvent createPortTransitionEvent(Port port, long transitionTime, float voltage)
   {
-    return new UniportTransitionEvent(port, time + transitionTime, voltage);
-  }
-
-  public OmniportSlewEvent createPortSlewEvent(Omniport omniport, long[] holdTimes, long[] slewTimes, float[] startVoltages, float[] endVoltages)
-  {
-    return null;
-  }
-
-  public OmniportDriveEvent createPortDriveEvent(Omniport port, OmniportSlewEvent slewEvent, int busIndex)
-  {
-    OmniportDriveEvent event = new OmniportDriveEvent(port, slewEvent, busIndex);
+    TransitionEvent event = new TransitionEvent(port, time + transitionTime, voltage);
     addEvent(event);
     return event;
-  }
-
-  public OmniportTransitionEvent createPortTransitionEvent(Omniport port, long transitionTime, float voltage, int busIndex)
-  {
-    return new OmniportTransitionEvent(port, time + transitionTime, voltage, busIndex);
   }
 
   public TickEvent createTickEvent(long propagationDelay, IntegratedCircuit<?, ?> integratedCircuit)

@@ -5,7 +5,6 @@ import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.state.State;
 
 import java.util.List;

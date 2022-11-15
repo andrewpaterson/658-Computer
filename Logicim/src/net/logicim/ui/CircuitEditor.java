@@ -31,14 +31,15 @@ public class CircuitEditor
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
+    long time = simulation.getTime();
     for (TraceView traceView : traceViews)
     {
-      traceView.paint(graphics, viewport);
+      traceView.paint(graphics, viewport, time);
     }
 
     for (DiscreteView discreteView : discreteViews)
     {
-      discreteView.paint(graphics, viewport);
+      discreteView.paint(graphics, viewport, time);
     }
   }
 

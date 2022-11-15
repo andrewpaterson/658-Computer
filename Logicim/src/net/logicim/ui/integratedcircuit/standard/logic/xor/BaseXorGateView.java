@@ -56,7 +56,7 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     if ((arcViewRight != null) && (arcViewLeft != null) && (arcViewBottom != null))
     {
@@ -71,7 +71,7 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
       arcViewRight.paint(graphics, viewport);
       arcViewBottom.paint(graphics, viewport);
       arcViewSecondBottom.paint(graphics, viewport);
-      super.paint(graphics, viewport);
+      super.paint(graphics, viewport, time);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

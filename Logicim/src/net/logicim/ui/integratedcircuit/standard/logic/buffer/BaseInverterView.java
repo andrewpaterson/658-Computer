@@ -40,7 +40,7 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     if (polygon != null)
     {
@@ -49,7 +49,7 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
 
       polygon.paint(graphics, viewport);
 
-      super.paint(graphics, viewport);
+      super.paint(graphics, viewport, time);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

@@ -4,7 +4,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -27,8 +26,8 @@ public class Buffer
   @Override
   public void inputTransition(Simulation simulation, Port port)
   {
-    Uniport input = pins.getInput();
-    TraceValue inValue = input.readValue();
+    Port input = pins.getInput();
+    TraceValue inValue = input.readValue(simulation.getTime());
     if (inValue.isImpedance() ||
         inValue.isUnsettled())
     {
@@ -58,7 +57,7 @@ public class Buffer
     return "Buffer";
   }
 
-  public Uniport getInputPort()
+  public Port getInputPort()
   {
     return getPins().getInput();
   }

@@ -1,19 +1,19 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
 
 import java.util.Set;
 
-public class UniportSlewEvent
-    extends UniportEvent
+public class SlewEvent
+    extends PortEvent
 {
   protected float startVoltage;  // @ time
   protected float endVoltage;    // @ time + slewTime
   protected long slewTime;
 
-  public UniportSlewEvent(Uniport port, float startVoltage, float endVoltage, long slewTime, long time)
+  public SlewEvent(Port port, float startVoltage, float endVoltage, long slewTime, long time)
   {
     super(port, time);
     this.startVoltage = startVoltage;
@@ -29,7 +29,7 @@ public class UniportSlewEvent
     {
       if (connectedPort != port)
       {
-        connectedPort.voltageChanging(simulation, port.getTrace(), startVoltage, endVoltage, slewTime);
+        connectedPort.voltageChanging(simulation, startVoltage, endVoltage, slewTime);
       }
     }
   }
@@ -42,6 +42,20 @@ public class UniportSlewEvent
   public float getEndVoltage()
   {
     return endVoltage;
+  }
+
+  public float getVoltage(long time)
+  {
+    if (time <= getEndTime() && time >= this.time)
+    {
+      long l = time - this.time;
+      float fractionStart = l / (float) slewTime;
+      return fractionStart * startVoltage + (1 - fractionStart) * endVoltage;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot get voltage outside of slew time for slew event.");
+    }
   }
 }
 

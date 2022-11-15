@@ -2,6 +2,7 @@ package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.TreeItem;
+import net.logicim.domain.common.port.event.PortEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,11 @@ public class SimultaneousEvents
   public List<Event> getEvents()
   {
     return events;
+  }
+
+  public Event get(int i)
+  {
+    return events.get(i);
   }
 }
 

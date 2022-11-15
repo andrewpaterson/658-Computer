@@ -3,7 +3,6 @@ package net.logicim.ui.common;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.Uniport;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.shape.common.BoundingBox;
 
@@ -72,7 +71,7 @@ public class PortView
     return port;
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     updateGridCache();
 
@@ -102,8 +101,7 @@ public class PortView
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
       Port port = getPort();
-      Uniport uniport = (Uniport) port;
-      Color color = VoltageColour.getColorForUniport(viewport.getColours(), uniport);
+      Color color = VoltageColour.getColorForPort(viewport.getColours(), port, time);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,
@@ -165,11 +163,11 @@ public class PortView
 
   public void connectTraceNet(TraceNet trace)
   {
-    if (port instanceof Uniport)
+    if (port instanceof Port)
     {
-      Uniport uniport = (Uniport) port;
-      uniport.disconnect();
-      uniport.connect(trace);
+      Port port = (Port) this.port;
+      port.disconnect();
+      port.connect(trace);
     }
   }
 

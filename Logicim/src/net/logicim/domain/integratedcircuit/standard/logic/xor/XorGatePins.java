@@ -1,7 +1,7 @@
 package net.logicim.domain.integratedcircuit.standard.logic.xor;
 
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.BistateOutputVoltage;
 import net.logicim.domain.common.propagation.InputVoltage;
 
@@ -15,38 +15,38 @@ import static net.logicim.domain.common.port.PortType.Output;
 public class XorGatePins
     extends Pins
 {
-  private List<Uniport> inputs;
-  private Uniport output;
+  private List<Port> inputs;
+  private Port output;
 
   public XorGatePins(int inputCount)
   {
     super();
-    output = new Uniport(Output,
-                         this,
-                         "Output",
-                         new BistateOutputVoltage("",
-                                                  0.0f,
-                                                  3.3f,
-                                                  nanosecondsToTime(2.5f),
-                                                  nanosecondsToTime(2.5f)));
+    output = new Port(Output,
+                      this,
+                      "Output",
+                      new BistateOutputVoltage("",
+                                               0.0f,
+                                               3.3f,
+                                               nanosecondsToTime(2.5f),
+                                               nanosecondsToTime(2.5f)));
 
     inputs = new ArrayList<>(inputCount);
     for (int i = 0; i < inputCount; i++)
     {
-      Uniport uniport = new Uniport(Input,
-                                    this,
-                                    "Input " + i,
-                                    new InputVoltage("", 0.8f, 2.0f));
-      inputs.add(uniport);
+      Port port = new Port(Input,
+                           this,
+                           "Input " + i,
+                           new InputVoltage("", 0.8f, 2.0f));
+      inputs.add(port);
     }
   }
 
-  public Uniport getOutput()
+  public Port getOutput()
   {
     return output;
   }
 
-  public List<Uniport> getInputs()
+  public List<Port> getInputs()
   {
     return inputs;
   }

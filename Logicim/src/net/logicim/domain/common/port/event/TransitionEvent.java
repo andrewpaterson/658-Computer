@@ -1,14 +1,14 @@
 package net.logicim.domain.common.port.event;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.port.Port;
 
-public class UniportTransitionEvent
-    extends UniportEvent
+public class TransitionEvent
+    extends PortEvent
 {
   protected float voltage;
 
-  public UniportTransitionEvent(Uniport port, long time, float voltage)
+  public TransitionEvent(Port port, long time, float voltage)
   {
     super(port, time);
     this.voltage = voltage;

@@ -1,6 +1,6 @@
 package net.logicim.ui.common;
 
-import net.logicim.domain.common.port.Uniport;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 
 import java.awt.*;
@@ -19,31 +19,35 @@ public abstract class VoltageColour
     }
   }
 
-  public static Color getColorForTrace(Colours colours, TraceNet trace)
+  public static Color getColorForTrace(Colours colours, TraceNet trace, long time)
   {
     if (trace == null)
     {
       return colours.getDisconnectedTrace();
     }
-    else if (trace.isDriven())
-    {
-      float voltage = trace.getDrivenVoltage();
-      return VoltageColour.getColorForVoltage(colours, voltage);
-    }
     else
     {
-      return colours.getTraceUndriven();
+      float voltage = trace.getVoltage(time);
+      if (!Float.isNaN(voltage))
+      {
+        return VoltageColour.getColorForVoltage(colours, voltage);
+      }
+
+      else
+      {
+        return colours.getTraceUndriven();
+      }
     }
   }
 
-  public static Color getColorForUniport(Colours colours, Uniport uniport)
+  public static Color getColorForPort(Colours colours, Port port, long time)
   {
-    TraceNet trace = uniport.getTrace();
+    TraceNet trace = port.getTrace();
     if (trace == null)
     {
-      if (uniport.isDriven())
+      float voltage = port.getVoltage(time);
+      if (!Float.isNaN(voltage))
       {
-        float voltage = uniport.getDrivenVoltage();
         return VoltageColour.getColorForVoltage(colours, voltage);
       }
       else
@@ -53,7 +57,7 @@ public abstract class VoltageColour
     }
     else
     {
-      return getColorForTrace(colours, trace);
+      return getColorForTrace(colours, trace, time);
     }
   }
 }

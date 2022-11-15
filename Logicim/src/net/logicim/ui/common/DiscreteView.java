@@ -60,7 +60,7 @@ public abstract class DiscreteView
     boundingBox.grow(0.5f);
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport)
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     if (!finalised)
     {

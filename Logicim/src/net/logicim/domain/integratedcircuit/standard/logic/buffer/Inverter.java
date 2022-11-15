@@ -1,7 +1,6 @@
 package net.logicim.domain.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.port.Port;
 
 public class Inverter
     extends Buffer

@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
 
 public abstract class IntegratedCircuitEvent
@@ -15,8 +16,9 @@ public abstract class IntegratedCircuitEvent
   }
 
   @Override
-  public void removeFromOwner()
+  public void execute(Simulation simulation)
   {
     integratedCircuit.remove(this);
   }
 }
+

@@ -1,11 +1,13 @@
 package net.logicim.domain;
 
 import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.domain.common.*;
-import net.logicim.domain.common.port.Drive;
+import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Event;
+import net.logicim.domain.common.SimultaneousEvents;
+import net.logicim.domain.common.TickEvent;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.DriveEvent;
+import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.SlewEvent;
 import net.logicim.domain.common.port.event.TransitionEvent;
 import net.logicim.domain.common.trace.TraceNet;
@@ -103,8 +105,8 @@ public class SimulationTest
     validate(treeSlewEvent, portSlewEvent);
     validate(treeDriveEvent, portDriveEvent);
 
-    Drive drive = constantOutput.getDrive(connectingTraceNet);
-    validateFalse(drive.isDriven());
+    float voltage = constantOutput.getVoltage(simulation.getTime());
+    validateTrue(Float.isNaN(voltage));
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
@@ -136,7 +138,6 @@ public class SimulationTest
     LinkedList<PortEvent> portEventsForInverterOutput = inverterOutput.getEvents();
     validate(0, portEventsForInverterOutput.size());
 
-
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
 
@@ -150,10 +151,10 @@ public class SimulationTest
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
 
-    drive = constantOutput.getDrive(connectingTraceNet);
-    validateTrue(drive.isDriven());
-    validate(drive.getVoltage(), 0.0f);
-    validate(connectingTraceNet.getVoltage(simulation.getTime()), 0.0f);
+    voltage = constantOutput.getVoltage(simulation.getTime());
+    validateFalse(Float.isNaN(voltage));
+    validate(0.0f, voltage);
+    validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);

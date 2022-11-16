@@ -39,7 +39,7 @@ public class Timeline
 
   public DriveEvent createPortDriveEvent(Port port, SlewEvent slewEvent)
   {
-    DriveEvent event = new DriveEvent(port, slewEvent);
+    DriveEvent event = new DriveEvent(port, slewEvent.getEndTime(), slewEvent.getEndVoltage());
     addEvent(event);
     return event;
   }
@@ -55,7 +55,6 @@ public class Timeline
   {
     TickEvent event = new TickEvent(this.time + propagationDelay, integratedCircuit);
     addEvent(event);
-
     return event;
   }
 
@@ -147,7 +146,6 @@ public class Timeline
     for (Event event : events.events)
     {
       event.execute(simulation);
-      event.removeFromOwner();
     }
 
     this.events.remove(events);

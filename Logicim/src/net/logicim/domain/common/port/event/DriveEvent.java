@@ -1,28 +1,38 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
 public class DriveEvent
-    extends PortEvent
+    extends PortOutputEvent
 {
-  protected SlewEvent slewEvent;
+  protected float voltage;
 
-  public DriveEvent(Port port, SlewEvent slewEvent)
+  public DriveEvent(Port port, long time, float voltage)
   {
-    super(port, slewEvent.getEndTime());
-    this.slewEvent = slewEvent;
+    super(port, time);
+    this.voltage = voltage;
   }
 
   @Override
   public void execute(Simulation simulation)
   {
-    port.voltageDriven(simulation, slewEvent.getEndVoltage());
+    super.execute(simulation);
+    port.driveEvent(simulation, this);
   }
 
-  public SlewEvent getSlewEvent()
+  @Override
+  public float getVoltage(long time)
   {
-    return slewEvent;
+    if (time >= this.time)
+    {
+      return voltage;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot get voltage before drive time for drive event.");
+    }
   }
 }
 

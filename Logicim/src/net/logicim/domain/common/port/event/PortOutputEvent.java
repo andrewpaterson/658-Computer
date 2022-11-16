@@ -3,23 +3,20 @@ package net.logicim.domain.common.port.event;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
-public class TransitionEvent
-    extends PortInputEvent
+public abstract class PortOutputEvent
+    extends PortEvent
 {
-  protected float voltage;
-
-  public TransitionEvent(Port port, long time, float voltage)
+  public PortOutputEvent(Port port, long time)
   {
     super(port, time);
-    this.voltage = voltage;
   }
+
+  public abstract float getVoltage(long time);
 
   @Override
   public void execute(Simulation simulation)
   {
     super.execute(simulation);
-
-    port.transitionEvent(simulation, this);
   }
 }
 

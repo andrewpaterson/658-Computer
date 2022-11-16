@@ -7,9 +7,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.TransmissionState;
-import net.logicim.domain.common.port.event.PortEvent;
-import net.logicim.domain.common.port.event.DriveEvent;
-import net.logicim.domain.common.port.event.SlewEvent;
+import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.InputVoltage;
 import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
@@ -31,7 +29,7 @@ public class Port
 
   protected LinkedList<PortEvent> events;
   protected TraceNet trace;
-  protected Drive output;
+  protected PortOutputEvent lastOutputEvent;
 
   public Port(PortType type,
               Pins pins,
@@ -45,7 +43,6 @@ public class Port
     this.state = stateFromType(type);
     events = new LinkedList<>();
     pins.addPort(this);
-    output = new Drive();
   }
 
   private TransmissionState stateFromType(PortType type)
@@ -220,36 +217,12 @@ public class Port
 
   public float getVoltage(long time)
   {
-    if (output.isDriven())
+    if (lastOutputEvent == null)
     {
-      return output.getVoltage();
+      return Float.NaN;
     }
 
-    DriveEvent driveEvent = getImmediateDriveEvent();
-    if (driveEvent != null)
-    {
-      SlewEvent slewEvent = driveEvent.getSlewEvent();
-      return slewEvent.getVoltage(time);
-    }
-    return Float.NaN;
-  }
-
-  private DriveEvent getImmediateDriveEvent()
-  {
-    if (!events.isEmpty())
-    {
-      PortEvent next = events.iterator().next();
-      if (next instanceof DriveEvent)
-      {
-        return (DriveEvent) next;
-      }
-    }
-    return null;
-  }
-
-  public Drive getDrive(TraceNet trace)
-  {
-    return output;
+    return lastOutputEvent.getVoltage(time);
   }
 
   public void connect(TraceNet trace)
@@ -270,23 +243,51 @@ public class Port
     return trace;
   }
 
-  public void voltageDriven(Simulation simulation, float voltage)
+  public void driveEvent(Simulation simulation, DriveEvent driveEvent)
   {
-    output.driveVoltage(voltage);
+    setLastOutput(driveEvent);
   }
 
-  public void voltageChanging(Simulation simulation, float startVoltage, float endVoltage, long slewTime)
+  public void slewEvent(Simulation simulation, SlewEvent slewEvent)
   {
-    if (voltageConfiguration.isInput())
-    {
-      InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
+    setLastOutput(slewEvent);
 
-      if (startVoltage != endVoltage)
+    Set<Port> connectedPorts = getConnectedPorts();
+    for (Port connectedPort : connectedPorts)
+    {
+      if (connectedPort != this)
       {
-        long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
-        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+        connectedPort.traceSlew(simulation, slewEvent);
       }
     }
+  }
+
+  public void traceSlew(Simulation simulation, SlewEvent slewEvent)
+  {
+    InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
+    float startVoltage = slewEvent.getStartVoltage();
+    long slewTime = slewEvent.getSlewTime();
+    float endVoltage = slewEvent.getEndVoltage();
+
+    if (startVoltage != endVoltage)
+    {
+      long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
+      simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+    }
+  }
+
+  protected void setLastOutput(PortOutputEvent outputEvent)
+  {
+    this.lastOutputEvent = outputEvent;
+    if (outputEvent.getPort() != this)
+    {
+      throw new SimulatorException("Event was not executed on this port.");
+    }
+  }
+
+  public void transitionEvent(Simulation simulation, TransitionEvent event)
+  {
+    getPins().inputTransition(simulation, this);
   }
 
   protected long calculateTransitionTime(float startVoltage, float endVoltage, long slewTime, float y)
@@ -294,11 +295,6 @@ public class Port
     float c = startVoltage;
     float m = (endVoltage - startVoltage) / slewTime;
     return Math.round((y - c) / m);
-  }
-
-  public void voltageTransition(Simulation simulation, float endVoltage)
-  {
-    getPins().inputTransition(simulation, this);
   }
 
   public void writeUnsettled(Timeline timeline)

@@ -1,5 +1,6 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Event;
 import net.logicim.domain.common.port.Port;
 
@@ -21,8 +22,7 @@ public abstract class PortEvent
     return port;
   }
 
-  @Override
-  public void removeFromOwner()
+  public void execute(Simulation simulation)
   {
     port.remove(this);
   }

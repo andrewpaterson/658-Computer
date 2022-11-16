@@ -7,7 +7,7 @@ import net.logicim.domain.common.port.Port;
 import java.util.Set;
 
 public class SlewEvent
-    extends PortEvent
+    extends PortOutputEvent
 {
   protected float startVoltage;  // @ time
   protected float endVoltage;    // @ time + slewTime
@@ -24,19 +24,23 @@ public class SlewEvent
   @Override
   public void execute(Simulation simulation)
   {
-    Set<Port> connectedPorts = port.getConnectedPorts();
-    for (Port connectedPort : connectedPorts)
-    {
-      if (connectedPort != port)
-      {
-        connectedPort.voltageChanging(simulation, startVoltage, endVoltage, slewTime);
-      }
-    }
+    super.execute(simulation);
+    port.slewEvent(simulation, this);
   }
 
   public long getEndTime()
   {
     return time + slewTime;
+  }
+
+  public float getStartVoltage()
+  {
+    return startVoltage;
+  }
+
+  public long getSlewTime()
+  {
+    return slewTime;
   }
 
   public float getEndVoltage()

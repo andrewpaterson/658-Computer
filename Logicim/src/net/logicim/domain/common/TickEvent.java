@@ -19,6 +19,7 @@ public class TickEvent
   @Override
   public void execute(Simulation simulation)
   {
+    super.execute(simulation);
     IntegratedCircuit<?, ?> integratedCircuit = getIntegratedCircuit();
     integratedCircuit.executeTick(simulation);
   }

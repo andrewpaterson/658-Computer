@@ -31,7 +31,7 @@ public class CircuitEditor
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
-    long time = simulation.getTime();
+    long time = getTime();
     for (TraceView traceView : traceViews)
     {
       traceView.paint(graphics, viewport, time);
@@ -41,6 +41,20 @@ public class CircuitEditor
     {
       discreteView.paint(graphics, viewport, time);
     }
+  }
+
+  protected long getTime()
+  {
+    long time;
+    if (simulation != null)
+    {
+      time = simulation.getTime();
+    }
+    else
+    {
+      time = -1;
+    }
+    return time;
   }
 
   public Circuit getCircuit()

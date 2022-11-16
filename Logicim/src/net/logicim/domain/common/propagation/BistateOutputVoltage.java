@@ -55,9 +55,9 @@ public class BistateOutputVoltage
     return true;
   }
 
-  public void createDriveEvents(Timeline timeline, boolean outValue, Port port)
+  public void createOutputEvents(Timeline timeline, boolean outValue, Port port)
   {
-    float startVoltage = calculateVoltageFromBool(outValue);
+    float startVoltage = calculateStartVoltage(port, timeline.getTime());
     float intendedVoltage = getVoltage(outValue);
     float voltageDiff = intendedVoltage - startVoltage;
 
@@ -79,6 +79,19 @@ public class BistateOutputVoltage
 
     SlewEvent portSlewEvent = timeline.createPortSlewEvent(port, holdTime, slewTime, startVoltage, intendedVoltage);
     timeline.createPortDriveEvent(port, portSlewEvent);
+  }
+
+  protected float calculateStartVoltage(Port port, long time)
+  {
+    float voltage = port.getVoltage(time);
+    if (!Float.isNaN(voltage))
+    {
+      return voltage;
+    }
+    else
+    {
+      return (getHighVoltageOut() + getLowVoltageOut()) / 2;
+    }
   }
 
   @Override

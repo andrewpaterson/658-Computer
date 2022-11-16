@@ -5,7 +5,7 @@ import net.logicim.domain.common.port.Port;
 
 public interface OutputVoltageConfiguration
 {
-  void createDriveEvents(Timeline timeline, boolean outValue, Port port);
+  void createOutputEvents(Timeline timeline, boolean outValue, Port port);
 
   void createHighImpedanceEvents(Timeline timeline, Port port);
 

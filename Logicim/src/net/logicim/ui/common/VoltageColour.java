@@ -21,7 +21,7 @@ public abstract class VoltageColour
 
   public static Color getColorForTrace(Colours colours, TraceNet trace, long time)
   {
-    if (trace == null)
+    if ((trace == null) || (time == -1))
     {
       return colours.getDisconnectedTrace();
     }
@@ -43,7 +43,11 @@ public abstract class VoltageColour
   public static Color getColorForPort(Colours colours, Port port, long time)
   {
     TraceNet trace = port.getTrace();
-    if (trace == null)
+    if (time == -1)
+    {
+      return colours.getDisconnectedTrace();
+    }
+    else if (trace == null)
     {
       float voltage = port.getVoltage(time);
       if (!Float.isNaN(voltage))

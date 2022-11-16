@@ -2,6 +2,7 @@ package net.logicim.domain.common.port.event;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Event;
+import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
 
 public abstract class PortEvent
@@ -25,6 +26,11 @@ public abstract class PortEvent
   public void execute(Simulation simulation)
   {
     port.remove(this);
+  }
+
+  public IntegratedCircuit<?, ?> getIntegratedCircuit()
+  {
+    return port.getPins().getIntegratedCircuit();
   }
 }
 

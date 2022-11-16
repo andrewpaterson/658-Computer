@@ -1,6 +1,7 @@
 package net.logicim.domain.common.trace;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
 
 import java.util.LinkedHashSet;
@@ -34,10 +35,15 @@ public class TraceNet
     }
     if (drivers == 0)
     {
-      throw new SimulatorException("Trace is not driven.");
+      return Float.NaN;
     }
 
     return drivenVoltage / drivers;
+  }
+
+  public String getVoltageString(long time)
+  {
+    return Voltage.getVoltageString(getVoltage(time));
   }
 
   public float getShortVoltage(long time)

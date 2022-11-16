@@ -44,9 +44,9 @@ public class Simulation
     return states.get(integratedCircuit);
   }
 
-  public void runToTime(long timeForward)
+  public boolean runToTime(long timeForward)
   {
-    timeline.runToTime(timeForward);
+    return timeline.runToTime(timeForward);
   }
 
   public long getTime()

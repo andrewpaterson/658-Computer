@@ -61,6 +61,10 @@ public class Timeline
   private void addEvent(Event event)
   {
     long eventTime = event.getTime();
+    if (eventTime < time)
+    {
+      throw new SimulatorException("Cannot add event in the past.  Event time [" + timeToNanoseconds(eventTime) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+    }
     SimultaneousEvents simultaneousEvents = events.find(eventTime);
     if (simultaneousEvents == null)
     {

@@ -4,8 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
-import java.util.Set;
-
 public class SlewEvent
     extends PortOutputEvent
 {
@@ -54,7 +52,7 @@ public class SlewEvent
     {
       long l = time - this.time;
       float fractionStart = l / (float) slewTime;
-      return fractionStart * startVoltage + (1 - fractionStart) * endVoltage;
+      return fractionStart * endVoltage + (1 - fractionStart) * startVoltage;
     }
     else
     {

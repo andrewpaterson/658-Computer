@@ -1,10 +1,7 @@
 package net.logicim.domain;
 
 import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Event;
-import net.logicim.domain.common.SimultaneousEvents;
-import net.logicim.domain.common.TickEvent;
+import net.logicim.domain.common.*;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.DriveEvent;
 import net.logicim.domain.common.port.event.PortEvent;
@@ -53,46 +50,28 @@ public class SimulationTest
     inverter.getPins().getInput().connect(connectingTraceNet);
     inverter.getPins().getOutput().connect(outputTraceNet);
 
+    Port constantOutput = constant.getPort("Output");
+    Port inverterInput = inverter.getPort("Input");
+    Port inverterOutput = inverter.getPort("Output");
+
     Simulation simulation = circuit.resetSimulation();
 
     Map<Long, SimultaneousEvents> events = simulation.getTimeline().getAllEvents();
     validate(1, events.size());
-    long eventTime = getMapKey(0, events);
-    validate(nanosecondsToTime(1), eventTime);
-    SimultaneousEvents simultaneousEvents = events.get(eventTime);
-    validateNotNull(simultaneousEvents);
-    validate(1, simultaneousEvents.size());
-    Event treeTickEvent = simultaneousEvents.get(0);
-    validateClass(TickEvent.class, treeTickEvent);
-    Port constantOutput = constant.getPort("Output");
+    TickEvent treeTickEvent = validateTreeEvent(events, 0, nanosecondsToTime(1), TickEvent.class, constant);
+    SimultaneousEvents simultaneousEvents;
     LinkedList<PortEvent> portEventsForConstant = constantOutput.getEvents();
     validate(0, portEventsForConstant.size());
 
-    Port inverterInput = inverter.getPort("Input");
-    Port inverterOutput = inverter.getPort("Output");
     portEventsForConstant = inverterOutput.getEvents();
     validate(0, portEventsForConstant.size());
 
     boolean eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
-
     events = simulation.getTimeline().getAllEvents();
     validate(2, events.size());
-    eventTime = getMapKey(0, events);
-    validate(nanosecondsToTime(2), eventTime);
-    simultaneousEvents = events.get(eventTime);
-    validateNotNull(simultaneousEvents);
-    validate(1, simultaneousEvents.size());
-    Event treeSlewEvent = simultaneousEvents.get(0);
-    validateClass(SlewEvent.class, treeSlewEvent);
-
-    eventTime = getMapKey(1, events);
-    validate(nanosecondsToTime(4), eventTime);
-    simultaneousEvents = events.get(eventTime);
-    validateNotNull(simultaneousEvents);
-    validate(1, simultaneousEvents.size());
-    Event treeDriveEvent = simultaneousEvents.get(0);
-    validateClass(DriveEvent.class, treeDriveEvent);
+    Event treeSlewEvent = validateTreeEvent(events, 0, nanosecondsToTime(2), SlewEvent.class, constant);
+    Event treeDriveEvent = validateTreeEvent(events, 1, nanosecondsToTime(3), DriveEvent.class, constant);
 
     portEventsForConstant = constantOutput.getEvents();
     validate(2, portEventsForConstant.size());
@@ -101,7 +80,7 @@ public class SimulationTest
     validateClass(SlewEvent.class, portSlewEvent);
     validateClass(DriveEvent.class, portDriveEvent);
     validate(nanosecondsToTime(2), portSlewEvent.getTime());
-    validate(nanosecondsToTime(4), portDriveEvent.getTime());
+    validate(nanosecondsToTime(3), portDriveEvent.getTime());
     validate(treeSlewEvent, portSlewEvent);
     validate(treeDriveEvent, portDriveEvent);
 
@@ -110,20 +89,10 @@ public class SimulationTest
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
-
     events = simulation.getTimeline().getAllEvents();
     validate(2, events.size());
-    eventTime = getMapKey(0, events);
-    validate(3600, eventTime);
-    simultaneousEvents = events.get(eventTime);
-    validate(1, simultaneousEvents.size());
-    Event treeTransitionEvent = simultaneousEvents.get(0);
-    validateClass(TransitionEvent.class, treeTransitionEvent);
-    eventTime = getMapKey(1, events);
-    validate(nanosecondsToTime(4), eventTime);
-    simultaneousEvents = events.get(eventTime);
-    treeDriveEvent = simultaneousEvents.get(0);
-    validateClass(DriveEvent.class, treeDriveEvent);
+    validateTreeEvent(events, 0, 2576, TransitionEvent.class, inverter);
+    validateTreeEvent(events, 1, nanosecondsToTime(3), DriveEvent.class, constant);
 
     portEventsForConstant = constantOutput.getEvents();
     validate(1, portEventsForConstant.size());
@@ -140,6 +109,11 @@ public class SimulationTest
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
+    events = simulation.getTimeline().getAllEvents();
+    validate(3, events.size());
+    validateTreeEvent(events, 0, nanosecondsToTime(3), DriveEvent.class, constant);
+    validateTreeEvent(events, 1, 3856, SlewEvent.class, inverter);
+    validateTreeEvent(events, 2, 5136, DriveEvent.class, inverter);
 
     LinkedList<PortEvent> portEventsForInverter = inverterOutput.getEvents();
     validate(2, portEventsForInverter.size());
@@ -150,18 +124,80 @@ public class SimulationTest
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
+    events = simulation.getTimeline().getAllEvents();
+    validate(2, events.size());
+    validateTreeEvent(events, 0, 3856, SlewEvent.class, inverter);
+    validateTreeEvent(events, 1, 5136, DriveEvent.class, inverter);
 
     voltage = constantOutput.getVoltage(simulation.getTime());
+    validateFalse(Float.isNaN(voltage));
+    validate(0.0f, voltage);
+    validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
+    validateTrue(Float.isNaN(inverterOutput.getVoltage(simulation.getTime())));
+    validateTrue(Float.isNaN(outputTraceNet.getVoltage(simulation.getTime())));
+
+    eventsProcessed = simulation.runSimultaneous();
+    validateTrue(eventsProcessed);
+    events = simulation.getTimeline().getAllEvents();
+    validate(1, events.size());
+    validateTreeEvent(events, 0, 5136, DriveEvent.class, inverter);
+    voltage = constantOutput.getVoltage(simulation.getTime());
+    validate(3856, simulation.getTime());
     validateFalse(Float.isNaN(voltage));
     validate(0.0f, voltage);
     validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
-    eventsProcessed = simulation.runSimultaneous();
-    validateTrue(eventsProcessed);
+    events = simulation.getTimeline().getAllEvents();
+    validate(0, events.size());
+    validate(5136, simulation.getTime());
+    validateFalse(Float.isNaN(voltage));
+    validate(0.0f, voltage);
+    validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
+
     eventsProcessed = simulation.runSimultaneous();
     validateFalse(eventsProcessed);
+  }
+
+  private static void testInverterLevels()
+  {
+    Circuit circuit = new Circuit();
+    TraceNet connectingTraceNet = new TraceNet();
+    TraceNet outputTraceNet = new TraceNet();
+    Constant constant = new Constant(circuit, "Constant", new ConstantPins(), nanosecondsToTime(1), 0);
+    constant.getPins().getOutput().connect(connectingTraceNet);
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins());
+    inverter.getPins().getInput().connect(connectingTraceNet);
+    inverter.getPins().getOutput().connect(outputTraceNet);
+
+    Port constantOutput = constant.getPort("Output");
+    Port inverterInput = inverter.getPort("Input");
+    Port inverterOutput = inverter.getPort("Output");
+    Simulation simulation = circuit.resetSimulation();
+
+    boolean processedEvent=true;
+    while (processedEvent)
+    {
+      String connectingVoltage = connectingTraceNet.getVoltageString(simulation.getTime());
+      String outputVoltage = outputTraceNet.getVoltageString(simulation.getTime());
+      System.out.println(connectingVoltage + " " + outputVoltage);
+      processedEvent = simulation.runToTime(100);
+    }
+  }
+
+  private static <T> T validateTreeEvent(Map<Long, SimultaneousEvents> events, int treeIndex, int expectedEventTime, Class<?> expectedClass, IntegratedCircuit<?, ?> expectedIC)
+  {
+    long actualEventTime = getMapKey(treeIndex, events);
+    validate(expectedEventTime, actualEventTime);
+    SimultaneousEvents simultaneousEvents = events.get(actualEventTime);
+    validateNotNull(simultaneousEvents);
+    validate(1, simultaneousEvents.size());
+    Event event = simultaneousEvents.get(0);
+    validateClass(expectedClass, event);
+    IntegratedCircuit<?, ?> actualIC = event.getIntegratedCircuit();
+    validate(expectedIC, actualIC);
+    return (T) event;
   }
 
   public static <K, V> K getMapKey(int index, Map<K, V> map)
@@ -181,7 +217,8 @@ public class SimulationTest
   public static void test()
   {
     testInverterEvents();
-    testClockOscillator();
+    testInverterLevels();
+//    testClockOscillator();
   }
 }
 

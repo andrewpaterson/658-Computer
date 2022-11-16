@@ -20,5 +20,11 @@ public abstract class IntegratedCircuitEvent
   {
     integratedCircuit.remove(this);
   }
+
+  @Override
+  public IntegratedCircuit<?, ?> getIntegratedCircuit()
+  {
+    return integratedCircuit;
+  }
 }
 

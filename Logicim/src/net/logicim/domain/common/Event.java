@@ -17,5 +17,7 @@ public abstract class Event
   }
 
   public abstract void execute(Simulation simulation);
+
+  public abstract IntegratedCircuit<?, ?> getIntegratedCircuit();
 }
 

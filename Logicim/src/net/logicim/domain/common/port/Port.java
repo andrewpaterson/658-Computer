@@ -7,6 +7,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.TransmissionState;
+import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.InputVoltage;
 import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
@@ -141,7 +142,7 @@ public class Port
       if (voltageConfiguration.isOutput())
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createDriveEvents(timeline, value, this);
+        outputVoltageConfiguration.createOutputEvents(timeline, value, this);
       }
       else
       {
@@ -271,7 +272,24 @@ public class Port
 
     if (startVoltage != endVoltage)
     {
-      long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, inputVoltage.getLowVoltageIn());
+      float lowVoltageIn = inputVoltage.getLowVoltageIn();
+      float highVoltageIn = inputVoltage.getHighVoltageIn();
+      float transitionVoltage;
+      if (endVoltage < lowVoltageIn)
+      {
+        transitionVoltage = lowVoltageIn;
+      }
+      else if (endVoltage > highVoltageIn)
+      {
+        transitionVoltage = highVoltageIn;
+      }
+      else
+      {
+        throw new SimulatorException("Cannot get transition voltage for end voltage [" + Voltage.getVoltageString(endVoltage) + "].");
+      }
+
+      long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, transitionVoltage);
+
       simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
     }
   }
@@ -299,7 +317,23 @@ public class Port
 
   public void writeUnsettled(Timeline timeline)
   {
-    throw new SimulatorException("Not yet implemented.");
+    if (state.isOutput())
+    {
+      if (voltageConfiguration.isOutput())
+      {
+        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
+        outputVoltageConfiguration.createOutputEvents(timeline, value, this);
+      }
+      else
+      {
+        throwNoOutputVoltageConfigurationException();
+      }
+    }
+    else
+    {
+      throwCannotWriteToPortException();
+    }
+
   }
 
   public Set<Port> getConnectedPorts()

@@ -5,12 +5,26 @@ import net.logicim.domain.common.port.Port;
 
 public interface OutputVoltageConfiguration
 {
-  void createOutputEvents(Timeline timeline, boolean outValue, Port port);
+  void createOutputEvents(Timeline timeline, Port port, float outVoltage);
 
   void createHighImpedanceEvents(Timeline timeline, Port port);
 
   float getLowVoltageOut();
 
+  float getMidVoltageOut();
+
   float getHighVoltageOut();
+
+  default float getVoltage(boolean value)
+  {
+    if (value)
+    {
+      return getHighVoltageOut();
+    }
+    else
+    {
+      return getLowVoltageOut();
+    }
+  }
 }
 

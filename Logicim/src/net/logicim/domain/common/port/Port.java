@@ -142,7 +142,7 @@ public class Port
       if (voltageConfiguration.isOutput())
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createOutputEvents(timeline, value, this);
+        outputVoltageConfiguration.createOutputEvents(timeline, this, outputVoltageConfiguration.getVoltage(value));
       }
       else
       {
@@ -322,7 +322,8 @@ public class Port
       if (voltageConfiguration.isOutput())
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createOutputEvents(timeline, value, this);
+        float voltage = outputVoltageConfiguration.getMidVoltageOut();
+        outputVoltageConfiguration.createOutputEvents(timeline, this, voltage);
       }
       else
       {

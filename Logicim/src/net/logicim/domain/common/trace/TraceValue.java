@@ -38,10 +38,5 @@ public enum TraceValue
   {
     return StringUtil.toEnumString(this);
   }
-
-  public static TraceValue getOutputValue(boolean value)
-  {
-    return value ? TraceValue.High : TraceValue.Low;
-  }
 }
 

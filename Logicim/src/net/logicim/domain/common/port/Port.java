@@ -7,7 +7,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.TransmissionState;
-import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.InputVoltage;
 import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
@@ -254,11 +253,14 @@ public class Port
     setLastOutput(slewEvent);
 
     Set<Port> connectedPorts = getConnectedPorts();
-    for (Port connectedPort : connectedPorts)
+    if (connectedPorts != null)
     {
-      if (connectedPort != this)
+      for (Port connectedPort : connectedPorts)
       {
-        connectedPort.traceSlew(simulation, slewEvent);
+        if (connectedPort != this)
+        {
+          connectedPort.traceSlew(simulation, slewEvent);
+        }
       }
     }
   }
@@ -274,23 +276,56 @@ public class Port
     {
       float lowVoltageIn = inputVoltage.getLowVoltageIn();
       float highVoltageIn = inputVoltage.getHighVoltageIn();
-      float transitionVoltage;
-      if (endVoltage < lowVoltageIn)
+      if (endVoltage <= lowVoltageIn)
       {
-        transitionVoltage = lowVoltageIn;
+        long transitionTime = calculateLowTransitionTime(slewEvent, startVoltage, endVoltage, lowVoltageIn);
+        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
       }
-      else if (endVoltage > highVoltageIn)
+      else if (endVoltage >= highVoltageIn)
       {
-        transitionVoltage = highVoltageIn;
+        long transitionTime = calculateHighTransitionTime(slewEvent, startVoltage, endVoltage, highVoltageIn);
+        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, highVoltageIn);
       }
       else
       {
-        throw new SimulatorException("Cannot get transition voltage for end voltage [" + Voltage.getVoltageString(endVoltage) + "].");
+        float midVoltage = (highVoltageIn + lowVoltageIn) / 2;
+        long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, midVoltage);
+        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, midVoltage);
       }
+    }
+  }
 
-      long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, transitionVoltage);
+  protected long calculateLowTransitionTime(SlewEvent slewEvent, float startVoltage, float endVoltage, float lowVoltageIn)
+  {
+    long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewEvent.getSlewTime(), lowVoltageIn);
+    for (; ; )
+    {
+      float voltage = slewEvent.calculateVoltageAtTime(slewEvent.getTime() +transitionTime);
+      if (voltage > lowVoltageIn)
+      {
+        transitionTime++;
+      }
+      else
+      {
+        return transitionTime;
+      }
+    }
+  }
 
-      simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+  protected long calculateHighTransitionTime(SlewEvent slewEvent, float startVoltage, float endVoltage, float highVoltageIn)
+  {
+    long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewEvent.getSlewTime(), highVoltageIn);
+    for (; ; )
+    {
+      float voltage = slewEvent.calculateVoltageAtTime(slewEvent.getTime() + transitionTime);
+      if (voltage < highVoltageIn)
+      {
+        transitionTime++;
+      }
+      else
+      {
+        return transitionTime;
+      }
     }
   }
 
@@ -339,7 +374,14 @@ public class Port
 
   public Set<Port> getConnectedPorts()
   {
-    return trace.getConnectedPorts();
+    if (trace != null)
+    {
+      return trace.getConnectedPorts();
+    }
+    else
+    {
+      return null;
+    }
   }
 }
 

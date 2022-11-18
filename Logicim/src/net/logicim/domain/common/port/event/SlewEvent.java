@@ -46,13 +46,18 @@ public class SlewEvent
     return endVoltage;
   }
 
+  public float calculateVoltageAtTime(long time)
+  {
+    long l = time - this.time;
+    float fractionStart = l / (float) slewTime;
+    return fractionStart * endVoltage + (1 - fractionStart) * startVoltage;
+  }
+
   public float getVoltage(long time)
   {
     if (time <= getEndTime() && time >= this.time)
     {
-      long l = time - this.time;
-      float fractionStart = l / (float) slewTime;
-      return fractionStart * endVoltage + (1 - fractionStart) * startVoltage;
+      return calculateVoltageAtTime(time);
     }
     else
     {

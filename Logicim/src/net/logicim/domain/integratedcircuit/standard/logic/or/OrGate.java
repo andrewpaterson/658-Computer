@@ -30,22 +30,6 @@ public class OrGate
   {
     List<Port> inputs = pins.getInputs();
     boolean unsettled = false;
-    for (Port input : inputs)
-    {
-      TraceValue inValue = input.readValue(simulation.getTime());
-      if (inValue.isImpedance() ||
-          inValue.isUnsettled())
-      {
-        unsettled = true;
-        break;
-      }
-    }
-    if (unsettled)
-    {
-      pins.getOutput().writeUnsettled(simulation.getTimeline());
-      return;
-    }
-
     boolean value = false;
     for (Port input : inputs)
     {
@@ -55,8 +39,16 @@ public class OrGate
         value = true;
         break;
       }
+      if (inValue.isImpedance() ||
+          inValue.isUnsettled())
+      {
+        unsettled = true;
+      }
     }
-    pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+    if (value || !unsettled)
+    {
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+    }
   }
 
   protected boolean transformOutput(boolean value)

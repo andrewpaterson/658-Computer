@@ -44,6 +44,14 @@ public abstract class Validator
     }
   }
 
+  public static void validate(String expected, String actual)
+  {
+    if (!expected.equals(actual))
+    {
+      throw new ValidationException(toFailureString(expected, actual));
+    }
+  }
+
   public static void validate(Object expected, Object actual)
   {
     if (expected != actual)

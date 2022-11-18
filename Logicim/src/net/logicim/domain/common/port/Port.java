@@ -14,6 +14,8 @@ import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static net.logicim.domain.common.TransmissionState.*;
@@ -61,6 +63,11 @@ public class Port
   public String getName()
   {
     return name;
+  }
+
+  public String toDebugString()
+  {
+    return getPins().getIntegratedCircuit().getName() + "." + name;
   }
 
   public String getDescription()
@@ -141,7 +148,7 @@ public class Port
       if (voltageConfiguration.isOutput())
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createOutputEvents(timeline, this, outputVoltageConfiguration.getVoltage(value));
+        outputVoltageConfiguration.createOutputEvent(timeline, this, outputVoltageConfiguration.getVoltage(value));
       }
       else
       {
@@ -250,7 +257,7 @@ public class Port
 
   public void slewEvent(Simulation simulation, SlewEvent slewEvent)
   {
-    setLastOutput(slewEvent);
+    slewEvent.update(simulation.getTimeline());
 
     Set<Port> connectedPorts = getConnectedPorts();
     if (connectedPorts != null)
@@ -263,6 +270,8 @@ public class Port
         }
       }
     }
+
+    setLastOutput(slewEvent);
   }
 
   public void traceSlew(Simulation simulation, SlewEvent slewEvent)
@@ -276,21 +285,27 @@ public class Port
     {
       float lowVoltageIn = inputVoltage.getLowVoltageIn();
       float highVoltageIn = inputVoltage.getHighVoltageIn();
+      long transitionTime;
+      float transitionVoltage;
       if (endVoltage <= lowVoltageIn)
       {
-        long transitionTime = calculateLowTransitionTime(slewEvent, startVoltage, endVoltage, lowVoltageIn);
-        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, endVoltage);
+        transitionVoltage = lowVoltageIn;
+        transitionTime = calculateLowTransitionTime(slewEvent, startVoltage, endVoltage, transitionVoltage);
       }
       else if (endVoltage >= highVoltageIn)
       {
-        long transitionTime = calculateHighTransitionTime(slewEvent, startVoltage, endVoltage, highVoltageIn);
-        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, highVoltageIn);
+        transitionVoltage = highVoltageIn;
+        transitionTime = calculateHighTransitionTime(slewEvent, startVoltage, endVoltage, transitionVoltage);
       }
       else
       {
-        float midVoltage = (highVoltageIn + lowVoltageIn) / 2;
-        long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, midVoltage);
-        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, midVoltage);
+        transitionVoltage = (highVoltageIn + lowVoltageIn) / 2;
+        transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, transitionVoltage);
+      }
+
+      if (transitionTime > 0)
+      {
+        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, transitionVoltage);
       }
     }
   }
@@ -300,7 +315,7 @@ public class Port
     long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewEvent.getSlewTime(), lowVoltageIn);
     for (; ; )
     {
-      float voltage = slewEvent.calculateVoltageAtTime(slewEvent.getTime() +transitionTime);
+      float voltage = slewEvent.calculateVoltageAtTime(slewEvent.getTime() + transitionTime, startVoltage);
       if (voltage > lowVoltageIn)
       {
         transitionTime++;
@@ -317,7 +332,7 @@ public class Port
     long transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewEvent.getSlewTime(), highVoltageIn);
     for (; ; )
     {
-      float voltage = slewEvent.calculateVoltageAtTime(slewEvent.getTime() + transitionTime);
+      float voltage = slewEvent.calculateVoltageAtTime(slewEvent.getTime() + transitionTime, startVoltage);
       if (voltage < highVoltageIn)
       {
         transitionTime++;
@@ -358,7 +373,7 @@ public class Port
       {
         OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
         float voltage = outputVoltageConfiguration.getMidVoltageOut();
-        outputVoltageConfiguration.createOutputEvents(timeline, this, voltage);
+        outputVoltageConfiguration.createOutputEvent(timeline, this, voltage);
       }
       else
       {
@@ -382,6 +397,27 @@ public class Port
     {
       return null;
     }
+  }
+
+  public VoltageConfiguration getVoltageConfiguration()
+  {
+    return voltageConfiguration;
+  }
+
+  public List<PortOutputEvent> getOverlappingEvents(long endTime)
+  {
+    List<PortOutputEvent> result = new ArrayList<>();
+    for (PortEvent event : events)
+    {
+      if (event instanceof PortOutputEvent)
+      {
+        if (event.getTime() <= endTime)
+        {
+          result.add((PortOutputEvent) event);
+        }
+      }
+    }
+    return result;
   }
 }
 

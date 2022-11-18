@@ -25,12 +25,18 @@ public abstract class PortEvent
 
   public void execute(Simulation simulation)
   {
-    port.remove(this);
+    removeFromOwner();
   }
 
   public IntegratedCircuit<?, ?> getIntegratedCircuit()
   {
     return port.getPins().getIntegratedCircuit();
+  }
+
+  @Override
+  public void removeFromOwner()
+  {
+    port.remove(this);
   }
 }
 

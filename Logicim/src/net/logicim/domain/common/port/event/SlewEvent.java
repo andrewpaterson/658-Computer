@@ -2,7 +2,11 @@ package net.logicim.domain.common.port.event;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
+
+import java.util.List;
 
 public class SlewEvent
     extends PortOutputEvent
@@ -11,12 +15,12 @@ public class SlewEvent
   protected float endVoltage;    // @ time + slewTime
   protected long slewTime;
 
-  public SlewEvent(Port port, float startVoltage, float endVoltage, long slewTime, long time)
+  public SlewEvent(Port port, float endVoltage, long time)
   {
     super(port, time);
-    this.startVoltage = startVoltage;
+    this.startVoltage = Float.NaN;
     this.endVoltage = endVoltage;
-    this.slewTime = slewTime;
+    this.slewTime = -1;
   }
 
   @Override
@@ -46,7 +50,7 @@ public class SlewEvent
     return endVoltage;
   }
 
-  public float calculateVoltageAtTime(long time)
+  public float calculateVoltageAtTime(long time, float startVoltage)
   {
     long l = time - this.time;
     float fractionStart = l / (float) slewTime;
@@ -57,12 +61,68 @@ public class SlewEvent
   {
     if (time <= getEndTime() && time >= this.time)
     {
-      return calculateVoltageAtTime(time);
+      return calculateVoltageAtTime(time, startVoltage);
     }
     else
     {
       throw new SimulatorException("Cannot get voltage outside of slew time for slew event.");
     }
+  }
+
+  public DriveEvent update(Timeline timeline)
+  {
+    OutputVoltageConfiguration voltageConfiguration = (OutputVoltageConfiguration) port.getVoltageConfiguration();
+
+    long nowTime = timeline.getTime();
+    startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration)));
+
+    float voltageDiff = endVoltage - startVoltage;
+
+    float voltsPerTime;
+    if (voltageDiff > 0)
+    {
+      voltsPerTime = voltageConfiguration.getVoltsPerTimeLowToHigh();
+      slewTime = (long) (voltageDiff / voltsPerTime);
+    }
+    else if (voltageDiff < 0)
+    {
+      voltsPerTime = voltageConfiguration.getVoltsPerTimeHighToLow();
+      slewTime = -(long) (voltageDiff / voltsPerTime);
+    }
+    else
+    {
+      slewTime = 1;
+    }
+
+    long endTime = getEndTime();
+    List<PortOutputEvent> driveEvents = port.getOverlappingEvents(endTime);
+    if (driveEvents.size() > 0)
+    {
+      for (PortOutputEvent driveEvent : driveEvents)
+      {
+        if (driveEvent instanceof DriveEvent)
+        {
+          timeline.remove(driveEvent);
+        }
+      }
+    }
+
+    return timeline.createPortDriveEvent(port, this);
+  }
+
+  protected float calculateStartVoltage(long nowTime, OutputVoltageConfiguration voltageConfiguration)
+  {
+    float voltage = port.getVoltage(nowTime);
+    if (!Float.isNaN(voltage))
+    {
+      return voltage;
+    }
+    return voltageConfiguration.getMidVoltageOut();
+  }
+
+  public String toDebugString()
+  {
+    return port.toDebugString();
   }
 }
 

@@ -11,11 +11,25 @@ public class ClockOscillator
     extends IntegratedCircuit<ClockOscillatorPins, ClockOscillatorState>
 {
   protected long halfCycleTime;
+  protected long initialisationTime;
+  protected long fullTicks;
 
   public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency)
   {
+    this(circuit, name, pins, frequency, getCycleTime(frequency) / 2);
+  }
+
+  public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency, long initialisationTime)
+  {
     super(circuit, name, pins);
-    halfCycleTime = LongTime.secondsToTime((1.0f / frequency) / 2.0f);
+    halfCycleTime = getCycleTime(frequency) / 2;
+    this.initialisationTime = initialisationTime;
+    this.fullTicks = 0;
+  }
+
+  public static long getCycleTime(float frequency)
+  {
+    return LongTime.secondsToTime((1.0f / frequency));
   }
 
   @Override
@@ -27,6 +41,10 @@ public class ClockOscillator
   public void executeTick(Simulation simulation)
   {
     state.tick();
+    if (state.getState())
+    {
+      fullTicks++;
+    }
 
     simulation.getTimeline().createTickEvent(halfCycleTime, this);
     pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
@@ -35,7 +53,7 @@ public class ClockOscillator
   @Override
   public ClockOscillatorState simulationStarted(Simulation simulation)
   {
-    simulation.getTimeline().createTickEvent(halfCycleTime, this);
+    simulation.getTimeline().createTickEvent(initialisationTime, this);
 
     return new ClockOscillatorState(this);
   }
@@ -68,6 +86,11 @@ public class ClockOscillator
     {
       throw new SimulatorException("Clock without state cannot get internal voltage.");
     }
+  }
+
+  public long getFullTicks()
+  {
+    return fullTicks;
   }
 }
 

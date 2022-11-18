@@ -5,7 +5,9 @@ import net.logicim.common.collection.redblacktree.RedBlackNode;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.event.*;
+import net.logicim.domain.common.port.event.DriveEvent;
+import net.logicim.domain.common.port.event.SlewEvent;
+import net.logicim.domain.common.port.event.TransitionEvent;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -30,9 +32,9 @@ public class Timeline
     eventTime = 0;
   }
 
-  public SlewEvent createPortSlewEvent(Port port, long holdTime, long slewTime, float startVoltage, float endVoltage)
+  public SlewEvent createPortSlewEvent(Port port, long holdTime, float outVoltage)
   {
-    SlewEvent event = new SlewEvent(port, startVoltage, endVoltage, slewTime, time + holdTime);
+    SlewEvent event = new SlewEvent(port, outVoltage, time + holdTime);
     addEvent(event);
     return event;
   }
@@ -171,6 +173,20 @@ public class Timeline
   public long getTime()
   {
     return time;
+  }
+
+  public boolean remove(Event event)
+  {
+    SimultaneousEvents simultaneousEvents = events.find(event.time);
+    event.removeFromOwner();
+    if (simultaneousEvents != null)
+    {
+      return simultaneousEvents.getEvents().remove(event);
+    }
+    else
+    {
+      return false;
+    }
   }
 }
 

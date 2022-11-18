@@ -50,5 +50,10 @@ public class OrGatePins
   {
     return inputs;
   }
+
+  public Port getInput(int i)
+  {
+    return inputs.get(i);
+  }
 }
 

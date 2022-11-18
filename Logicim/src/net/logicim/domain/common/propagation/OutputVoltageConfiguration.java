@@ -2,10 +2,11 @@ package net.logicim.domain.common.propagation;
 
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.SlewEvent;
 
 public interface OutputVoltageConfiguration
 {
-  void createOutputEvents(Timeline timeline, Port port, float outVoltage);
+  SlewEvent createOutputEvent(Timeline timeline, Port port, float outVoltage);
 
   void createHighImpedanceEvents(Timeline timeline, Port port);
 
@@ -14,6 +15,12 @@ public interface OutputVoltageConfiguration
   float getMidVoltageOut();
 
   float getHighVoltageOut();
+
+  float getVoltsPerTimeLowToHigh();
+
+  float getVoltsPerTimeHighToLow();
+
+  float calculateStartVoltage(float portVoltage);
 
   default float getVoltage(boolean value)
   {

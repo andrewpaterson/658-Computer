@@ -14,6 +14,8 @@ import net.logicim.domain.integratedcircuit.standard.constant.Constant;
 import net.logicim.domain.integratedcircuit.standard.constant.ConstantPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
+import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
+import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 
 import java.util.Map;
 
@@ -27,16 +29,143 @@ public class SimulationTest
   {
     Circuit circuit = new Circuit();
 
-    ClockOscillator clock = new ClockOscillator(circuit, "10Mhz", new ClockOscillatorPins(), 10 * MHz);
-    TraceNet clockTrace = new TraceNet();
-    clock.getPins().getOutput().connect(clockTrace);
+    float frequency = 180 * MHz;
+    ClockOscillator clock1 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.5f));
+    ClockOscillator clock2 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.6f));
+    OrGate orGate = new OrGate(circuit, "Or", new OrGatePins(2));
 
-    Inverter inverter = new Inverter(circuit, "Not", new BufferPins());
-    inverter.getPins().getInput().connect(clockTrace);
-    inverter.getPins().getOutput().connect(new TraceNet());
+    TraceNet clock2Trace = new TraceNet();
+    TraceNet clock1Trace = new TraceNet();
+    TraceNet outputTrace = new TraceNet();
+
+    clock2.getPins().getOutput().connect(clock2Trace);
+    clock1.getPins().getOutput().connect(clock1Trace);
+
+    orGate.getPins().getInput(0).connect(clock1Trace);
+    orGate.getPins().getInput(1).connect(clock2Trace);
+    orGate.getPins().getOutput().connect(outputTrace);
 
     Simulation simulation = circuit.resetSimulation();
-    simulation.runSimultaneous();
+
+    while (true)
+    {
+      simulation.runToTime(100);
+      float voltage1 = clock1Trace.getVoltage(simulation.getTime());
+      float voltage2 = clock2Trace.getVoltage(simulation.getTime());
+      if (!Float.isNaN(voltage1) || !Float.isNaN(voltage2))
+      {
+        break;
+      }
+    }
+
+    StringBuilder builder = new StringBuilder();
+    do
+    {
+      String clock1Voltage = clock1Trace.getVoltageString(simulation.getTime());
+      String clock2Voltage = clock2Trace.getVoltageString(simulation.getTime());
+      String outputVoltage = outputTrace.getVoltageString(simulation.getTime());
+      builder.append(clock1Voltage + " " + clock2Voltage + " " + outputVoltage + "\n");
+      simulation.runToTime(100);
+    }
+    while (clock2.getFullTicks() != 3);
+    validate("1.7V ---- ----\n" +
+             "1.8V ---- ----\n" +
+             "2.0V ---- ----\n" +
+             "2.2V ---- ----\n" +
+             "2.3V ---- ----\n" +
+             "2.5V 1.7V ----\n" +
+             "2.6V 1.8V ----\n" +
+             "2.8V 2.0V ----\n" +
+             "3.0V 2.1V ----\n" +
+             "3.1V 2.3V ----\n" +
+             "3.3V 2.5V ----\n" +
+             "3.3V 2.6V ----\n" +
+             "3.3V 2.8V ----\n" +
+             "3.3V 2.9V ----\n" +
+             "3.3V 3.1V ----\n" +
+             "3.3V 3.3V 1.7V\n" +
+             "3.3V 3.3V 1.8V\n" +
+             "3.3V 3.3V 1.9V\n" +
+             "3.3V 3.3V 2.1V\n" +
+             "3.3V 3.3V 2.2V\n" +
+             "3.3V 3.3V 2.3V\n" +
+             "3.3V 3.3V 2.4V\n" +
+             "3.3V 3.3V 2.6V\n" +
+             "3.3V 3.3V 2.7V\n" +
+             "3.3V 3.3V 2.8V\n" +
+             "3.3V 3.3V 3.0V\n" +
+             "3.2V 3.3V 3.1V\n" +
+             "3.0V 3.3V 3.2V\n" +
+             "2.9V 3.3V 3.3V\n" +
+             "2.7V 3.3V 3.3V\n" +
+             "2.6V 3.3V 3.3V\n" +
+             "2.4V 3.2V 3.3V\n" +
+             "2.2V 3.1V 3.3V\n" +
+             "2.1V 2.9V 3.3V\n" +
+             "1.9V 2.7V 3.3V\n" +
+             "1.8V 2.6V 3.3V\n" +
+             "1.6V 2.4V 3.3V\n" +
+             "1.4V 2.3V 3.3V\n" +
+             "1.3V 2.1V 3.3V\n" +
+             "1.1V 1.9V 3.3V\n" +
+             "1.0V 1.8V 3.3V\n" +
+             "0.8V 1.6V 3.3V\n" +
+             "0.6V 1.5V 3.3V\n" +
+             "0.5V 1.3V 3.3V\n" +
+             "0.3V 1.1V 3.3V\n" +
+             "0.1V 1.0V 3.3V\n" +
+             "0.0V 0.8V 3.3V\n" +
+             "0.0V 0.7V 3.3V\n" +
+             "0.0V 0.5V 3.3V\n" +
+             "0.0V 0.3V 3.3V\n" +
+             "0.0V 0.2V 3.3V\n" +
+             "0.0V 0.0V 3.3V\n" +
+             "0.2V 0.0V 3.3V\n" +
+             "0.3V 0.0V 3.3V\n" +
+             "0.5V 0.0V 3.3V\n" +
+             "0.6V 0.0V 3.3V\n" +
+             "0.8V 0.0V 3.3V\n" +
+             "1.0V 0.1V 3.3V\n" +
+             "1.1V 0.3V 3.3V\n" +
+             "1.3V 0.5V 3.3V\n" +
+             "1.4V 0.6V 3.2V\n" +
+             "1.6V 0.8V 3.0V\n" +
+             "1.8V 0.9V 2.9V\n" +
+             "1.9V 1.1V 2.8V\n" +
+             "2.1V 1.3V 2.6V\n" +
+             "2.2V 1.4V 2.5V\n" +
+             "2.4V 1.6V 2.4V\n" +
+             "2.6V 1.7V 2.3V\n" +
+             "2.7V 1.9V 2.1V\n" +
+             "2.9V 2.1V 2.0V\n" +
+             "3.1V 2.2V 1.9V\n" +
+             "3.2V 2.4V 1.7V\n" +
+             "3.3V 2.6V 1.6V\n" +
+             "3.3V 2.7V 1.5V\n" +
+             "3.3V 2.9V 1.4V\n" +
+             "3.3V 3.0V 1.2V\n" +
+             "3.3V 3.2V 1.1V\n" +
+             "3.2V 3.3V 1.2V\n" +
+             "3.1V 3.3V 1.3V\n" +
+             "2.9V 3.3V 1.4V\n" +
+             "2.8V 3.3V 1.5V\n" +
+             "2.6V 3.3V 1.7V\n" +
+             "2.4V 3.3V 1.8V\n" +
+             "2.3V 3.1V 1.9V\n" +
+             "2.1V 2.9V 2.1V\n" +
+             "2.0V 2.8V 2.2V\n" +
+             "1.8V 2.6V 2.3V\n" +
+             "1.6V 2.5V 2.4V\n" +
+             "1.5V 2.3V 2.6V\n" +
+             "1.3V 2.1V 2.7V\n" +
+             "1.1V 2.0V 2.8V\n" +
+             "1.0V 1.8V 3.0V\n" +
+             "0.8V 1.6V 3.1V\n" +
+             "0.7V 1.5V 3.2V\n" +
+             "0.5V 1.3V 3.3V\n" +
+             "0.3V 1.2V 3.3V\n" +
+             "0.2V 1.0V 3.3V\n" +
+             "0.0V 0.8V 3.3V\n", builder.toString());
   }
 
   private static void testInverterEvents()
@@ -69,20 +198,15 @@ public class SimulationTest
     boolean eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
     events = simulation.getTimeline().getAllEvents();
-    validate(2, events.size());
+    validate(1, events.size());
     Event treeSlewEvent = validateTreeEvent(events, 0, nanosecondsToTime(2), SlewEvent.class, constant);
-    Event treeDriveEvent = validateTreeEvent(events, 1, nanosecondsToTime(3), DriveEvent.class, constant);
 
     portEventsForConstant = constantOutput.getEvents();
-    validate(2, portEventsForConstant.size());
+    validate(1, portEventsForConstant.size());
     PortEvent portSlewEvent = portEventsForConstant.get(0);
-    PortEvent portDriveEvent = portEventsForConstant.get(1);
     validateClass(SlewEvent.class, portSlewEvent);
-    validateClass(DriveEvent.class, portDriveEvent);
     validate(nanosecondsToTime(2), portSlewEvent.getTime());
-    validate(nanosecondsToTime(3), portDriveEvent.getTime());
     validate(treeSlewEvent, portSlewEvent);
-    validate(treeDriveEvent, portDriveEvent);
 
     float voltage = constantOutput.getVoltage(simulation.getTime());
     validateTrue(Float.isNaN(voltage));
@@ -96,7 +220,7 @@ public class SimulationTest
 
     portEventsForConstant = constantOutput.getEvents();
     validate(1, portEventsForConstant.size());
-    portDriveEvent = portEventsForConstant.get(0);
+    PortEvent portDriveEvent = portEventsForConstant.get(0);
     validateClass(DriveEvent.class, portDriveEvent);
 
     LinkedList<PortEvent> portEventsForInverterInput = inverterInput.getEvents();
@@ -110,24 +234,20 @@ public class SimulationTest
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
     events = simulation.getTimeline().getAllEvents();
-    validate(3, events.size());
+    validate(2, events.size());
     validateTreeEvent(events, 0, nanosecondsToTime(3), DriveEvent.class, constant);
     validateTreeEvent(events, 1, 3856, SlewEvent.class, inverter);
-    validateTreeEvent(events, 2, 5136, DriveEvent.class, inverter);
 
     LinkedList<PortEvent> portEventsForInverter = inverterOutput.getEvents();
-    validate(2, portEventsForInverter.size());
+    validate(1, portEventsForInverter.size());
     portSlewEvent = portEventsForInverter.get(0);
     validateClass(SlewEvent.class, portSlewEvent);
-    portDriveEvent = portEventsForInverter.get(1);
-    validateClass(DriveEvent.class, portDriveEvent);
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
     events = simulation.getTimeline().getAllEvents();
-    validate(2, events.size());
+    validate(1, events.size());
     validateTreeEvent(events, 0, 3856, SlewEvent.class, inverter);
-    validateTreeEvent(events, 1, 5136, DriveEvent.class, inverter);
 
     voltage = constantOutput.getVoltage(simulation.getTime());
     validateFalse(Float.isNaN(voltage));
@@ -171,19 +291,70 @@ public class SimulationTest
     inverter.getPins().getInput().connect(connectingTraceNet);
     inverter.getPins().getOutput().connect(outputTraceNet);
 
-    Port constantOutput = constant.getPort("Output");
-    Port inverterInput = inverter.getPort("Input");
-    Port inverterOutput = inverter.getPort("Output");
     Simulation simulation = circuit.resetSimulation();
 
-    boolean processedEvent=true;
+    boolean processedEvent = true;
+    StringBuilder builder = new StringBuilder();
     while (processedEvent)
     {
       String connectingVoltage = connectingTraceNet.getVoltageString(simulation.getTime());
       String outputVoltage = outputTraceNet.getVoltageString(simulation.getTime());
-      System.out.println(connectingVoltage + " " + outputVoltage);
+      builder.append(connectingVoltage).append(" ").append(outputVoltage).append("\n");
       processedEvent = simulation.runToTime(100);
     }
+    validate("---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "---- ----\n" +
+             "1.6V ----\n" +
+             "1.4V ----\n" +
+             "1.2V ----\n" +
+             "1.1V ----\n" +
+             "0.9V ----\n" +
+             "0.8V ----\n" +
+             "0.6V ----\n" +
+             "0.4V ----\n" +
+             "0.3V ----\n" +
+             "0.1V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V ----\n" +
+             "0.0V 1.7V\n" +
+             "0.0V 1.8V\n" +
+             "0.0V 2.0V\n" +
+             "0.0V 2.1V\n" +
+             "0.0V 2.2V\n" +
+             "0.0V 2.4V\n" +
+             "0.0V 2.5V\n" +
+             "0.0V 2.6V\n" +
+             "0.0V 2.7V\n" +
+             "0.0V 2.9V\n" +
+             "0.0V 3.0V\n" +
+             "0.0V 3.1V\n" +
+             "0.0V 3.3V\n",
+             builder.toString());
   }
 
   private static <T> T validateTreeEvent(Map<Long, SimultaneousEvents> events, int treeIndex, int expectedEventTime, Class<?> expectedClass, IntegratedCircuit<?, ?> expectedIC)
@@ -218,7 +389,7 @@ public class SimulationTest
   {
     testInverterEvents();
     testInverterLevels();
-//    testClockOscillator();
+    testClockOscillator();
   }
 }
 

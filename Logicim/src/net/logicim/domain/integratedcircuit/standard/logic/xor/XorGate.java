@@ -29,24 +29,9 @@ public class XorGate
   public void inputTransition(Simulation simulation, Port port)
   {
     List<Port> inputs = pins.getInputs();
-    boolean unsettled = false;
-    for (Port input : inputs)
-    {
-      TraceValue inValue = input.readValue(simulation.getTime());
-      if (inValue.isImpedance() ||
-          inValue.isUnsettled())
-      {
-        unsettled = true;
-        break;
-      }
-    }
-    if (unsettled)
-    {
-      pins.getOutput().writeUnsettled(simulation.getTimeline());
-      return;
-    }
 
     int highs = 0;
+    int lows = 0;
     for (Port input : inputs)
     {
       TraceValue inValue = input.readValue(simulation.getTime());
@@ -54,11 +39,18 @@ public class XorGate
       {
         highs++;
       }
+      if (inValue.isLow())
+      {
+        lows++;
+      }
     }
-    boolean value = highs % 2 == 1;
-    pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
-  }
+    if ((highs > 0 || lows > 0))
+    {
+      boolean value = highs % 2 == 1;
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+    }
 
+  }
   protected boolean transformOutput(boolean value)
   {
     return value;

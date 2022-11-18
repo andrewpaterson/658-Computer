@@ -55,37 +55,33 @@ public class BistateOutputVoltage
     return true;
   }
 
-  public void createOutputEvents(Timeline timeline, Port port, float outVoltage)
+  public SlewEvent createOutputEvent(Timeline timeline, Port port, float outVoltage)
   {
-    float startVoltage = calculateStartVoltage(port, timeline.getTime());
+    float startVoltage = calculateStartVoltage(port.getVoltage(timeline.getTime()));
     float voltageDiff = outVoltage - startVoltage;
 
-    float voltsPerTime;
     long holdTime;
-    long slewTime;
     if (voltageDiff > 0)
     {
-      voltsPerTime = voltsPerTimeLowToHigh;
       holdTime = lowToHighHoldTime;
-      slewTime = (long) (voltageDiff / voltsPerTime);
+    }
+    else if (voltageDiff < 0)
+    {
+      holdTime = highToLowHoldTime;
     }
     else
     {
-      voltsPerTime = voltsPerTimeHighToLow;
-      holdTime = highToLowHoldTime;
-      slewTime = -(long) (voltageDiff / voltsPerTime);
+      holdTime = (lowToHighHoldTime + highToLowHoldTime) / 2;
     }
 
-    SlewEvent portSlewEvent = timeline.createPortSlewEvent(port, holdTime, slewTime, startVoltage, outVoltage);
-    timeline.createPortDriveEvent(port, portSlewEvent);
+      return timeline.createPortSlewEvent(port, holdTime, outVoltage);
   }
 
-  protected float calculateStartVoltage(Port port, long time)
+  public float calculateStartVoltage(float portVoltage)
   {
-    float voltage = port.getVoltage(time);
-    if (!Float.isNaN(voltage))
+    if (!Float.isNaN(portVoltage))
     {
-      return voltage;
+      return portVoltage;
     }
     else
     {
@@ -103,6 +99,16 @@ public class BistateOutputVoltage
   public void createHighImpedanceEvents(Timeline timeline, Port port)
   {
     throw new SimulatorException("Not yet implemented.");
+  }
+
+  public float getVoltsPerTimeLowToHigh()
+  {
+    return voltsPerTimeLowToHigh;
+  }
+
+  public float getVoltsPerTimeHighToLow()
+  {
+    return voltsPerTimeHighToLow;
   }
 }
 

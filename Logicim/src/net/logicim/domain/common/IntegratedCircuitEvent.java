@@ -18,13 +18,19 @@ public abstract class IntegratedCircuitEvent
   @Override
   public void execute(Simulation simulation)
   {
-    integratedCircuit.remove(this);
+    removeFromOwner();
   }
 
   @Override
   public IntegratedCircuit<?, ?> getIntegratedCircuit()
   {
     return integratedCircuit;
+  }
+
+  @Override
+  public void removeFromOwner()
+  {
+    integratedCircuit.remove(this);
   }
 }
 

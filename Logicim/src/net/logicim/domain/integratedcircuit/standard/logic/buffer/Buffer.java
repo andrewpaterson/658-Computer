@@ -28,21 +28,13 @@ public class Buffer
   {
     Port input = pins.getInput();
     TraceValue inValue = input.readValue(simulation.getTime());
-    if (inValue.isImpedance() ||
-        inValue.isUnsettled())
+    if (inValue.isHigh())
     {
-      pins.getOutput().writeUnsettled(simulation.getTimeline());
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
     }
-    else
+    else if (inValue.isLow())
     {
-      if (inValue.isHigh())
-      {
-        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
-      }
-      else if (inValue.isLow())
-      {
-        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
-      }
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
     }
   }
 

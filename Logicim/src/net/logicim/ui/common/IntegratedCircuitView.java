@@ -124,7 +124,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     return getPortInGrid(position.x, position.y);
   }
 
-
   @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
@@ -190,6 +189,18 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       }
     }
     return null;
+  }
+
+  @Override
+  public String getName()
+  {
+    return integratedCircuit.getName();
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return integratedCircuit.getType() + " " + integratedCircuit.getName() + " (" + getPosition() + ")";
   }
 }
 

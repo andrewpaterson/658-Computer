@@ -17,16 +17,16 @@ import java.util.*;
 
 public class CircuitEditor
 {
-  protected List<DiscreteView> discreteViews;
-  protected List<TraceView> traceViews;
+  protected Set<DiscreteView> discreteViews;
+  protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
 
   public CircuitEditor()
   {
     circuit = new Circuit();
-    discreteViews = new ArrayList<>();
-    traceViews = new ArrayList<>();
+    discreteViews = new LinkedHashSet<>();
+    traceViews = new LinkedHashSet<>();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -72,13 +72,15 @@ public class CircuitEditor
     traceViews.add(view);
   }
 
-  public void remove(IntegratedCircuitView<?> integratedCircuitView)
+  public void deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
   {
     List<PortView> portViews = integratedCircuitView.getPorts();
     for (PortView portView : portViews)
     {
       ConnectionView connection = portView.getConnection();
       disconnectTraceNet(findConnections(connection));
+
+      connection.remove(integratedCircuitView);
     }
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
@@ -765,6 +767,32 @@ public class CircuitEditor
       }
     }
     return notStraightConnections;
+  }
+
+  public void validateConsistency()
+  {
+    for (TraceView traceView : traceViews)
+    {
+      ConnectionView startConnection = traceView.getStartConnection();
+      for (ComponentView componentView : startConnection.getConnectedComponents())
+      {
+        if (componentView instanceof DiscreteView)
+        {
+          if (!discreteViews.contains(componentView))
+          {
+            throw new SimulatorException("Discrete component [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+          }
+        }
+
+        if (componentView instanceof TraceView)
+        {
+          if (!traceViews.contains(componentView))
+          {
+            throw new SimulatorException("Trace [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+          }
+        }
+      }
+    }
   }
 }
 

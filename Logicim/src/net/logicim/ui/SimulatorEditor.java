@@ -173,6 +173,8 @@ public class SimulatorEditor
       connectConnections(connectionView);
     }
     placementView.enable(circuitEditor.simulation);
+
+    circuitEditor.validateConsistency();
   }
 
   private void executeWirePull(WirePull wirePull)
@@ -199,6 +201,8 @@ public class SimulatorEditor
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
 
     connectConnections(firstConnection);
+
+    circuitEditor.validateConsistency();
   }
 
   private void connectConnections(ConnectionView firstConnection)
@@ -400,7 +404,7 @@ public class SimulatorEditor
 
   private void addActions()
   {
-    actions.add(new InputAction(new PlacementRotateLeft(this), KeyEvent.VK_R, Up, Up, Down));
+    actions.add(new InputAction(new PlacementRotateLeft(this), KeyEvent.VK_R, Up, Down, Up));
     actions.add(new InputAction(new PlacementRotateRight(this), KeyEvent.VK_R, Up, Up, Up));
     actions.add(new InputAction(new StopCurrent(this), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     actions.add(new InputAction(new RunOneEvent(this), KeyEvent.VK_T, Up, Up, Up));
@@ -490,7 +494,7 @@ public class SimulatorEditor
   {
     if (placementView != null)
     {
-      circuitEditor.remove((IntegratedCircuitView<?>) placementView);
+      circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) placementView);
       placementView = null;
     }
   }
@@ -515,10 +519,12 @@ public class SimulatorEditor
     }
     else if (hoverDiscreteView != null)
     {
-      circuitEditor.remove((IntegratedCircuitView<?>) hoverDiscreteView);
+      circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
       hoverDiscreteView = null;
       hoverConnectionView = null;
     }
+
+    circuitEditor.validateConsistency();
   }
 
   public void increaseSimulationSpeed()

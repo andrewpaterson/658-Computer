@@ -181,6 +181,18 @@ public class TraceView
     return null;
   }
 
+  @Override
+  public String getName()
+  {
+    return "Trace";
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
+  }
+
   public TraceNet getTrace()
   {
     return trace;

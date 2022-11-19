@@ -9,4 +9,8 @@ public abstract class ComponentView
   public abstract ConnectionView getConnectionsInGrid(Int2D p);
 
   public abstract Int2D getGridPosition(ConnectionView connectionView);
+
+  public abstract String getName();
+
+  public abstract String getDescription();
 }

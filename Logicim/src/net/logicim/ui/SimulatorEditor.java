@@ -9,6 +9,7 @@ import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
+import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
@@ -28,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
 import static net.logicim.ui.input.action.ButtonState.*;
@@ -35,6 +37,8 @@ import static net.logicim.ui.input.action.ButtonState.*;
 public class SimulatorEditor
     implements PanelSize
 {
+  private ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
+
   private int width;
   private int height;
 
@@ -58,11 +62,10 @@ public class SimulatorEditor
   protected boolean running;
   protected long runTimeStep;
 
-  protected volatile boolean painting;
-  protected volatile boolean changingCircuit;
-
   public SimulatorEditor()
   {
+    inputEvents = new ConcurrentLinkedDeque<>();
+
     this.viewport = new Viewport(this);
 
     this.mouseMotion = new MouseMotion();
@@ -84,10 +87,19 @@ public class SimulatorEditor
 
   public void windowClosing()
   {
+    running = false;
+    System.exit(0);
   }
 
   public boolean tick(int tickCount)
   {
+    SimulatorEditorEvent editorEvent = inputEvents.poll();
+    while (editorEvent != null)
+    {
+      editorEvent.execute(this);
+      editorEvent = inputEvents.poll();
+    }
+
     if (tickCount == 0)
     {
       if (wirePull != null)
@@ -129,8 +141,6 @@ public class SimulatorEditor
 
   public void mouseReleased(int x, int y, int button)
   {
-    waitForPaintDone();
-
     mouseButtons.unset(button);
 
     if (button == BUTTON1)
@@ -150,8 +160,6 @@ public class SimulatorEditor
         mousePositionOnGridChanged();
       }
     }
-
-    changingCircuit = false;
   }
 
   private void executePlacement(DiscreteView placementView)
@@ -259,8 +267,6 @@ public class SimulatorEditor
 
   public void paint(Graphics2D graphics)
   {
-    startPaint();
-
     graphics.setColor(viewport.getColours().getBackground());
     graphics.fillRect(0, 0, width, height);
 
@@ -280,28 +286,6 @@ public class SimulatorEditor
     if (wirePull != null)
     {
       wirePull.paint(graphics, viewport);
-    }
-
-    painting = false;
-  }
-
-  private synchronized void startPaint()
-  {
-    int safety = 100000;
-    painting = true;
-    while (changingCircuit && safety > 0)
-    {
-      safety--;
-    }
-  }
-
-  private synchronized void waitForPaintDone()
-  {
-    int safety = 100000;
-    changingCircuit = true;
-    while (painting && safety > 0)
-    {
-      safety--;
     }
   }
 
@@ -437,14 +421,12 @@ public class SimulatorEditor
 
   public void keyPressed(int keyCode)
   {
-    waitForPaintDone();
     keyboardButtons.set(keyCode);
 
     if (!(keyCode == KeyEvent.VK_ALT || keyCode == KeyEvent.VK_SHIFT || keyCode == KeyEvent.VK_CONTROL))
     {
       actions.keyPressed(keyCode);
     }
-    changingCircuit = false;
   }
 
   public void createPlacementView(ViewFactory viewFactory)
@@ -546,6 +528,11 @@ public class SimulatorEditor
   public void decreaseSimulationSpeed()
   {
     runTimeStep /= 2;
+  }
+
+  public void addInputEvent(SimulatorEditorEvent event)
+  {
+    inputEvents.add(event);
   }
 }
 

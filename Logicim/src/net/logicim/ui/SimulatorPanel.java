@@ -1,5 +1,7 @@
 package net.logicim.ui;
 
+import net.logicim.ui.input.event.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -102,53 +104,52 @@ public class SimulatorPanel
     backBufferImage = createImage(width, height);
     backBuffer = (Graphics2D) backBufferImage.getGraphics();
 
-    simulatorEditor.resized(width, height);
+    simulatorEditor.addInputEvent(new ResizedEvent(width, height));
   }
 
   public void mousePressed(int x, int y, int button)
   {
-    simulatorEditor.mousePressed(x, y, button);
+    simulatorEditor.addInputEvent(new MousePressedEvent(x, y, button));
   }
 
   public void mouseReleased(int x, int y, int button)
   {
-    simulatorEditor.mouseReleased(x, y, button);
+    simulatorEditor.addInputEvent(new MouseReleasedEvent(x, y, button));
   }
 
   public void mouseMoved(int x, int y)
   {
-    simulatorEditor.mouseMoved(x, y);
+    simulatorEditor.addInputEvent(new MouseMovedEvent(x, y));
   }
 
   public void windowClosing()
   {
-    running = false;
-    System.exit(0);
+    simulatorEditor.addInputEvent(new WindowClosingEvent());
   }
 
   public void mouseExited()
   {
-    simulatorEditor.mouseExited();
+    simulatorEditor.addInputEvent(new MouseExitedEvent());
   }
 
   public void mouseEntered(int x, int y)
   {
-    simulatorEditor.mouseEntered(x, y);
+    simulatorEditor.addInputEvent(new MouseEnteredEvent(x, y));
   }
 
   public void mouseWheel(int wheelRotation)
   {
-    simulatorEditor.mouseWheel(wheelRotation);
+    simulatorEditor.addInputEvent(new MouseWheelEvent(wheelRotation));
   }
 
   public void keyPressed(int keyCode)
   {
-    simulatorEditor.keyPressed(keyCode);
+    simulatorEditor.addInputEvent(new KeyPressedEvent(keyCode));
   }
 
   public void keyReleased(int keyCode)
   {
-    simulatorEditor.keyReleased(keyCode);
+    simulatorEditor.addInputEvent(new KeyReleasedEvent(keyCode));
   }
 }
 

@@ -45,7 +45,6 @@ public class AndGate
       {
         unsettled = true;
       }
-
     }
     if (!value || !unsettled)
     {

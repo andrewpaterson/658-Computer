@@ -126,6 +126,7 @@ public class CircuitEditor
 
   public Simulation reset()
   {
+    simulation = null;
     return circuit.resetSimulation();
   }
 

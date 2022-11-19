@@ -419,5 +419,11 @@ public class Port
     }
     return result;
   }
+
+  public void reset()
+  {
+    lastOutputEvent = null;
+    events.clear();
+  }
 }
 

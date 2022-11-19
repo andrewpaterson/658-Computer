@@ -109,10 +109,16 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   {
     if (enabled)
     {
+      events.clear();
+      for (Port port : pins.getPorts())
+      {
+        port.reset();
+      }
+
       if (!isStateless())
       {
-          State state = simulationStarted(simulation);
-          setState(state);
+        State state = simulationStarted(simulation);
+        setState(state);
       }
     }
   }

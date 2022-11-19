@@ -417,6 +417,7 @@ public class SimulatorEditor
     actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
     actions.add(new InputAction(new IncreaseSimulationSpeed(this), KeyEvent.VK_EQUALS, Up, Up, Up));
     actions.add(new InputAction(new DecreaseSimulationSpeed(this), KeyEvent.VK_MINUS, Up, Up, Up));
+    actions.add(new InputAction(new ResetSimulation(this), KeyEvent.VK_R, Up, Up, Down));
   }
 
   public void keyPressed(int keyCode)
@@ -533,6 +534,11 @@ public class SimulatorEditor
   public void addInputEvent(SimulatorEditorEvent event)
   {
     inputEvents.add(event);
+  }
+
+  public void resetSimulation()
+  {
+    circuitEditor.reset();
   }
 }
 

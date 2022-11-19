@@ -43,14 +43,13 @@ public class AndGate
       {
         highs++;
       }
-
     }
 
-    if (lows > 1)
+    if (lows > 0)
     {
       pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
     }
-    else if (highs > 1)
+    else if (highs > 0)
     {
       pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
     }

@@ -3,7 +3,6 @@ package net.logicim.ui;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.LongTime;
-import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.common.*;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;
@@ -26,7 +25,7 @@ import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -186,21 +185,29 @@ public class SimulatorEditor
     Line firstLine = Line.createLine(firstPosition, middlePosition);
     Line secondLine = Line.createLine(middlePosition, secondPosition);
 
+    Set<TraceView> traceViews;
     if (secondLine == null)
     {
       if (firstLine != null)
       {
-        circuitEditor.createTraces(firstLine);
+        traceViews = circuitEditor.createTraces(firstLine);
+      }
+      else
+      {
+        traceViews = new LinkedHashSet<>();
       }
     }
     else
     {
-      circuitEditor.createTraces(firstLine);
-      circuitEditor.createTraces(secondLine);
+      traceViews = new LinkedHashSet<>();
+      traceViews.addAll(circuitEditor.createTraces(firstLine));
+      traceViews.addAll(circuitEditor.createTraces(secondLine));
     }
-    ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
 
-    circuitEditor.connectConnections(firstConnection);
+    for (TraceView traceView : traceViews)
+    {
+      circuitEditor.connectConnections(traceView.getStartConnection());
+    }
 
     circuitEditor.validateConsistency();
   }
@@ -499,6 +506,8 @@ public class SimulatorEditor
       hoverDiscreteView = null;
       hoverConnectionView = null;
     }
+
+    mousePositionOnGridChanged();
 
     circuitEditor.validateConsistency();
   }

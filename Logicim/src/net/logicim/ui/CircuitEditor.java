@@ -84,6 +84,7 @@ public class CircuitEditor
         disconnectTraceNet(findConnections(connection));
 
         connection.remove(integratedCircuitView);
+        connectionViews.add(connection);
       }
     }
 
@@ -447,7 +448,7 @@ public class CircuitEditor
     }
   }
 
-  public void mergeTrace(TraceView traceView)
+  public TraceView mergeTrace(TraceView traceView)
   {
     Rotation direction = traceView.getDirection();
     ConnectionView startConnection = traceView.getStartConnection();
@@ -489,12 +490,16 @@ public class CircuitEditor
 
       if (isValidTrace(smallest, largest))
       {
-        new TraceView(this, smallest, largest);
+        return new TraceView(this, smallest, largest);
       }
       else
       {
         throw new SimulatorException("Invalid trace created from merged traces.");
       }
+    }
+    else
+    {
+      return traceView;
     }
   }
 
@@ -573,14 +578,26 @@ public class CircuitEditor
 
     remove(traceView);
 
-    mergeTraceConnection(startConnection);
-    mergeTraceConnection(endConnection);
-
-    connectConnections(startConnection);
-    connectConnections(endConnection);
+    mergeAndConnect(startConnection);
+    mergeAndConnect(endConnection);
   }
 
-  private void mergeTraceConnection(ConnectionView startConnection)
+  protected void mergeAndConnect(ConnectionView startConnection)
+  {
+    TraceView traceView = mergeTraceConnection(startConnection);
+    ConnectionView connection;
+    if (traceView != null)
+    {
+      connection = traceView.getStartConnection();
+    }
+    else
+    {
+      connection = startConnection;
+    }
+    connectConnections(connection);
+  }
+
+  private TraceView mergeTraceConnection(ConnectionView startConnection)
   {
     List<ComponentView> connectedComponents = startConnection.getConnectedComponents();
     TraceView traceView1 = null;
@@ -605,11 +622,12 @@ public class CircuitEditor
 
     if ((traceView1 != null) && (traceView2 != null))
     {
-      mergeTrace(traceView1);
+      return mergeTrace(traceView1);
     }
+    return null;
   }
 
-  public List<TraceView> createTraces(Line line)
+  public Set<TraceView> createTraces(Line line)
   {
     splitTrace(line.getStart(), line.getDirection());
     splitTrace(line.getEnd(), line.getDirection());
@@ -638,14 +656,16 @@ public class CircuitEditor
       }
     }
 
+    Set<TraceView> mergedTraces = new LinkedHashSet<>();
     if ((result != null) && (result.size() >= 1))
     {
       for (TraceView traceView : result)
       {
-        mergeTrace(traceView);
+        TraceView mergedTrace = mergeTrace(traceView);
+        mergedTraces.add(mergedTrace);
       }
     }
-    return result;
+    return mergedTraces;
   }
 
   private List<TraceView> createTracesBetweenEmptyPositions(List<Int2D> positions)

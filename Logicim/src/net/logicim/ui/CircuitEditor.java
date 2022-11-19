@@ -74,18 +74,27 @@ public class CircuitEditor
 
   public void deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
   {
+    List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = integratedCircuitView.getPorts();
     for (PortView portView : portViews)
     {
       ConnectionView connection = portView.getConnection();
-      disconnectTraceNet(findConnections(connection));
+      if (connection != null)
+      {
+        disconnectTraceNet(findConnections(connection));
 
-      connection.remove(integratedCircuitView);
+        connection.remove(integratedCircuitView);
+      }
     }
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     circuit.remove(integratedCircuit);
     discreteViews.remove(integratedCircuitView);
+
+    for (ConnectionView connectionView : connectionViews)
+    {
+      connectConnections(connectionView);
+    }
   }
 
   public void remove(TraceView traceView)
@@ -124,6 +133,13 @@ public class CircuitEditor
         }
       }
     }
+  }
+
+  public void connectConnections(ConnectionView connectionView)
+  {
+    Set<ConnectionView> connectionsNet = findConnections(connectionView);
+
+    connectToTraceNet(connectionsNet, new TraceNet());
   }
 
   public Simulation reset()
@@ -559,6 +575,9 @@ public class CircuitEditor
 
     mergeTraceConnection(startConnection);
     mergeTraceConnection(endConnection);
+
+    connectConnections(startConnection);
+    connectConnections(endConnection);
   }
 
   private void mergeTraceConnection(ConnectionView startConnection)

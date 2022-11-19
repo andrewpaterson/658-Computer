@@ -29,25 +29,27 @@ public class OrGate
   public void inputTransition(Simulation simulation, Port port)
   {
     List<Port> inputs = pins.getInputs();
-    boolean unsettled = false;
-    boolean value = false;
+    int highs = 0;
+    int lows = 0;
     for (Port input : inputs)
     {
       TraceValue inValue = input.readValue(simulation.getTime());
       if (inValue.isHigh())
       {
-        value = true;
-        break;
+        highs++;
       }
-      if (inValue.isImpedance() ||
-          inValue.isUnsettled())
+      else if (inValue.isLow())
       {
-        unsettled = true;
+        lows++;
       }
     }
-    if (value || !unsettled)
+    if (highs > 0)
     {
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
+    }
+    else if (lows > 0)
+    {
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
     }
   }
 

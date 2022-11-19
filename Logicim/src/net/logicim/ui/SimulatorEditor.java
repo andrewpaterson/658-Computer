@@ -170,7 +170,7 @@ public class SimulatorEditor
       Int2D portPosition = portView.getGridPosition();
       ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, placementView);
       portView.setConnection(connectionView);
-      connectConnections(connectionView);
+      circuitEditor.connectConnections(connectionView);
     }
     placementView.enable(circuitEditor.simulation);
 
@@ -200,33 +200,9 @@ public class SimulatorEditor
     }
     ConnectionView firstConnection = circuitEditor.getConnection(firstPosition);
 
-    connectConnections(firstConnection);
+    circuitEditor.connectConnections(firstConnection);
 
     circuitEditor.validateConsistency();
-  }
-
-  private void connectConnections(ConnectionView firstConnection)
-  {
-    Set<ConnectionView> connectionsNet = circuitEditor.findConnections(firstConnection);
-
-    circuitEditor.connectToTraceNet(connectionsNet, new TraceNet());
-  }
-
-  private List<ComponentView> getComponents(Int2D position)
-  {
-    return circuitEditor.getComponents(position);
-  }
-
-  private List<TraceOverlap> getTracesOverlapping(Line line)
-  {
-    if (line != null)
-    {
-      return circuitEditor.getTracesOverlapping(line);
-    }
-    else
-    {
-      return new ArrayList<>();
-    }
   }
 
   public void resized(int width, int height)

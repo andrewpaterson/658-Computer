@@ -29,26 +29,30 @@ public class AndGate
   public void inputTransition(Simulation simulation, Port port)
   {
     List<Port> inputs = pins.getInputs();
-    boolean unsettled = false;
 
-    boolean value = true;
+    int lows = 0;
+    int highs = 0;
     for (Port input : inputs)
     {
       TraceValue inValue = input.readValue(simulation.getTime());
       if (inValue.isLow())
       {
-        value = false;
-        break;
+        lows++;
       }
-      if (inValue.isImpedance() ||
-          inValue.isUnsettled())
+      else if (inValue.isHigh())
       {
-        unsettled = true;
+        highs++;
       }
+
     }
-    if (!value || !unsettled)
+
+    if (lows > 1)
     {
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
+    }
+    else if (highs > 1)
+    {
+      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
     }
   }
 

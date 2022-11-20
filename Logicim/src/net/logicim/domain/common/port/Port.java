@@ -31,7 +31,7 @@ public class Port
 
   protected LinkedList<PortEvent> events;
   protected TraceNet trace;
-  protected PortOutputEvent lastOutputEvent;
+  protected PortOutputEvent output;
 
   public Port(PortType type,
               Pins pins,
@@ -213,23 +213,28 @@ public class Port
     return null;
   }
 
-  public void disconnect()
+  public void disconnect(Simulation simulation)
   {
     if (trace != null)
     {
       trace.disconnect(this);
       trace = null;
     }
+    for (PortEvent event : events)
+    {
+      simulation.removeEvent(event);
+    }
+    events.clear();
   }
 
   public float getVoltage(long time)
   {
-    if (lastOutputEvent == null)
+    if (output == null)
     {
       return Float.NaN;
     }
 
-    return lastOutputEvent.getVoltage(time);
+    return output.getVoltage(time);
   }
 
   public void connect(TraceNet trace)
@@ -274,7 +279,7 @@ public class Port
     setLastOutput(slewEvent);
   }
 
-  public void traceSlew(Simulation simulation, SlewEvent slewEvent)
+  public boolean traceSlew(Simulation simulation, SlewEvent slewEvent)
   {
     InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
     float startVoltage = slewEvent.getStartVoltage();
@@ -306,7 +311,61 @@ public class Port
       if (transitionTime > 0)
       {
         simulation.getTimeline().createPortTransitionEvent(this, transitionTime, transitionVoltage);
+        return true;
       }
+    }
+    return false;
+  }
+
+  public void traceConnected(Simulation simulation)
+  {
+    if (voltageConfiguration.isInput())
+    {
+      InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
+      TraceNet trace = getTrace();
+      List<PortOutputEvent> outputEvents = trace.getOutputEvents();
+      boolean slewInProgress = false;
+      for (PortOutputEvent outputEvent : outputEvents)
+      {
+        if (outputEvent instanceof SlewEvent)
+        {
+          SlewEvent slewEvent = (SlewEvent) outputEvent;
+          if (slewEvent.forTime(simulation.getTime()))
+          {
+            slewInProgress |= traceSlew(simulation, slewEvent);
+          }
+        }
+      }
+
+      if (!slewInProgress)
+      {
+        createTransitionEventFromExistingVoltage(simulation, inputVoltage, trace);
+      }
+    }
+  }
+
+  protected void createTransitionEventFromExistingVoltage(Simulation simulation, InputVoltage inputVoltage, TraceNet trace)
+  {
+    float endVoltage = trace.getVoltage(simulation.getTime());
+    float lowVoltageIn = inputVoltage.getLowVoltageIn();
+    float highVoltageIn = inputVoltage.getHighVoltageIn();
+
+    float transitionVoltage = 0;
+    boolean traceValid = false;
+    if (endVoltage <= lowVoltageIn)
+    {
+      traceValid = true;
+      transitionVoltage = lowVoltageIn;
+    }
+    else if (endVoltage >= highVoltageIn)
+    {
+      traceValid = true;
+      transitionVoltage = highVoltageIn;
+    }
+
+    if (traceValid)
+    {
+      simulation.getTimeline().createPortTransitionEvent(this, 1, transitionVoltage);
     }
   }
 
@@ -346,7 +405,7 @@ public class Port
 
   protected void setLastOutput(PortOutputEvent outputEvent)
   {
-    this.lastOutputEvent = outputEvent;
+    this.output = outputEvent;
     if (outputEvent.getPort() != this)
     {
       throw new SimulatorException("Event was not executed on this port.");
@@ -422,8 +481,13 @@ public class Port
 
   public void reset()
   {
-    lastOutputEvent = null;
+    output = null;
     events.clear();
+  }
+
+  public PortOutputEvent getOutput()
+  {
+    return output;
   }
 }
 

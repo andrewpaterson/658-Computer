@@ -3,6 +3,7 @@ package net.logicim.ui;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.LongTime;
+import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.*;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;
@@ -173,6 +174,12 @@ public class SimulatorEditor
     }
     placementView.enable(circuitEditor.simulation);
 
+    for (PortView portView : ports)
+    {
+      Port port = portView.getPort();
+      port.traceConnected(circuitEditor.simulation);
+    }
+
     circuitEditor.validateConsistency();
   }
 
@@ -207,6 +214,11 @@ public class SimulatorEditor
     for (TraceView traceView : traceViews)
     {
       circuitEditor.connectConnections(traceView.getStartConnection());
+      List<Port> ports = traceView.getConnectedPorts();
+      for (Port port : ports)
+      {
+        port.traceConnected(circuitEditor.simulation);
+      }
     }
 
     circuitEditor.validateConsistency();

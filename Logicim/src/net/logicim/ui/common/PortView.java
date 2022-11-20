@@ -2,6 +2,7 @@ package net.logicim.ui.common;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -161,19 +162,15 @@ public class PortView
     this.connection = connection;
   }
 
-  public void connectTraceNet(TraceNet trace)
+  public void connectTraceNet(TraceNet trace, Simulation simulation)
   {
-    if (port instanceof Port)
-    {
-      Port port = (Port) this.port;
-      port.disconnect();
-      port.connect(trace);
-    }
+    port.disconnect(simulation);
+    port.connect(trace);
   }
 
-  public void disconnectTraceNet()
+  public void disconnectTraceNet(Simulation simulation)
   {
-    port.disconnect();
+    port.disconnect(simulation);
   }
 }
 

@@ -1,10 +1,13 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.common.SimulatorException;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.PortOutputEvent;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class TraceNet
@@ -88,6 +91,20 @@ public class TraceNet
   public void disconnect(Port port)
   {
     connectedPorts.remove(port);
+  }
+
+  public List<PortOutputEvent> getOutputEvents()
+  {
+    ArrayList<PortOutputEvent> result = new ArrayList<>();
+    for (Port port : connectedPorts)
+    {
+      PortOutputEvent output = port.getOutput();
+      if (output != null)
+      {
+        result.add(output);
+      }
+    }
+    return result;
   }
 }
 

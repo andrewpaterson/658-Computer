@@ -3,10 +3,12 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TraceView
@@ -315,6 +317,18 @@ public class TraceView
   public int getMaximumY()
   {
     return line.getMaximumY();
+  }
+
+  public List<Port> getConnectedPorts()
+  {
+    if (trace != null)
+    {
+      return new ArrayList<>(trace.getConnectedPorts());
+    }
+    else
+    {
+      return new ArrayList<>();
+    }
   }
 }
 

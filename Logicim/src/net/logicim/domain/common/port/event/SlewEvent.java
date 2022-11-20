@@ -59,7 +59,7 @@ public class SlewEvent
 
   public float getVoltage(long time)
   {
-    if (time <= getEndTime() && time >= this.time)
+    if (forTime(time))
     {
       return calculateVoltageAtTime(time, startVoltage);
     }
@@ -123,6 +123,11 @@ public class SlewEvent
   public String toDebugString()
   {
     return port.toDebugString();
+  }
+
+  public boolean forTime(long time)
+  {
+    return time <= getEndTime() && time >= this.time;
   }
 }
 

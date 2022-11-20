@@ -24,7 +24,7 @@ public class Circuit
       {
         if (!integratedCircuit.isStateless())
         {
-          State state = simulation.getState(integratedCircuit);
+          State state = integratedCircuit.getState();
           if (state == null)
           {
             state = integratedCircuit.simulationStarted(simulation);
@@ -50,12 +50,12 @@ public class Circuit
     integratedCircuits.add(integratedCircuit);
   }
 
-  public void remove(IntegratedCircuit<?, ?> integratedCircuit)
+  public void remove(IntegratedCircuit<?, ?> integratedCircuit, Simulation simulation)
   {
     integratedCircuits.remove(integratedCircuit);
     for (Port port : integratedCircuit.getPorts())
     {
-      port.disconnect();
+      port.disconnect(simulation);
     }
   }
 }

@@ -89,7 +89,7 @@ public class CircuitEditor
     }
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
-    circuit.remove(integratedCircuit);
+    circuit.remove(integratedCircuit, simulation);
     discreteViews.remove(integratedCircuitView);
 
     for (ConnectionView connectionView : connectionViews)
@@ -129,7 +129,7 @@ public class CircuitEditor
           if (position != null)
           {
             PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
-            portView.disconnectTraceNet();
+            portView.disconnectTraceNet(simulation);
           }
         }
       }
@@ -441,7 +441,7 @@ public class CircuitEditor
           if (position != null)
           {
             PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
-            portView.connectTraceNet(trace);
+            portView.connectTraceNet(trace, simulation);
           }
         }
       }

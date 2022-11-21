@@ -10,15 +10,19 @@ import net.logicim.ui.common.Rotation;
 public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     extends IntegratedCircuitView<IC>
 {
+  protected int inputCount;
+
   public LogicGateView(CircuitEditor circuitEditor,
-                       IC integratedCircuit,
+                       int inputCount,
                        Int2D position,
                        Rotation rotation)
   {
-    super(circuitEditor, integratedCircuit, position, rotation);
+    super(circuitEditor, position, rotation);
+    this.inputCount = inputCount;
+    xxx();
   }
 
-  protected void createPorts(int inputCount, boolean negateOutput, int inputOffset)
+  protected void createPorts(boolean negateOutput, int inputOffset)
   {
     int start;
     int end;

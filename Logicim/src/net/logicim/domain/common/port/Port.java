@@ -220,11 +220,12 @@ public class Port
       trace.disconnect(this);
       trace = null;
     }
+    List<PortEvent> events = this.events.toList();
     for (PortEvent event : events)
     {
       simulation.removeEvent(event);
     }
-    events.clear();
+    this.events.clear();
   }
 
   public float getVoltage(long time)

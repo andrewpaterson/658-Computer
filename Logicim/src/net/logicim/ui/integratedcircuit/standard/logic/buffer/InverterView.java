@@ -14,11 +14,16 @@ public class InverterView
                       Rotation rotation)
   {
     super(circuitEditor,
-          new Inverter(circuitEditor.getCircuit(), "", new BufferPins()),
           position,
           rotation);
     createPorts(true);
     finaliseView();
+  }
+
+  @Override
+  protected Inverter createIntegratedCircuit()
+  {
+    return new Inverter(circuitEditor.getCircuit(), "", new BufferPins());
   }
 }
 

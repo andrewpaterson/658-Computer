@@ -18,13 +18,16 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   protected List<PortView> ports;
 
   public IntegratedCircuitView(CircuitEditor circuitEditor,
-                               IC integratedCircuit,
                                Int2D position,
                                Rotation rotation)
   {
     super(circuitEditor, position, rotation);
-    this.integratedCircuit = integratedCircuit;
     this.ports = new ArrayList<>();
+  }
+
+  protected void xxx()
+  {
+    this.integratedCircuit = createIntegratedCircuit();
     this.integratedCircuit.disable();
   }
 
@@ -202,5 +205,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   {
     return integratedCircuit.getType() + " " + integratedCircuit.getName() + " (" + getPosition() + ")";
   }
+
+  protected abstract IC createIntegratedCircuit();
 }
 

@@ -25,11 +25,11 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   protected PolygonView polygonViewFillLeft;
 
   public BaseXorGateView(CircuitEditor circuitEditor,
-                         IC integratedCircuit,
+                         int inputCount,
                          Int2D position,
                          Rotation rotation)
   {
-    super(circuitEditor, integratedCircuit, position, rotation);
+    super(circuitEditor, inputCount, position, rotation);
 
     float yTop = 0.6f;
     float yBottom = 3.5f;

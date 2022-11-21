@@ -15,11 +15,16 @@ public class BufferView
                     Rotation rotation)
   {
     super(circuitEditor,
-          new Buffer(circuitEditor.getCircuit(), "", new BufferPins()),
           position,
           rotation);
     createPorts(false);
     finaliseView();
+  }
+
+  @Override
+  protected Buffer createIntegratedCircuit()
+  {
+    return new Buffer(circuitEditor.getCircuit(), "", new BufferPins());
   }
 }
 

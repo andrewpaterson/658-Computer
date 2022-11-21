@@ -24,11 +24,11 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   protected PolygonView polygonViewFillLeft;
 
   public BaseOrGateView(CircuitEditor circuitEditor,
-                        IC integratedCircuit,
+                        int inputCount,
                         Int2D position,
                         Rotation rotation)
   {
-    super(circuitEditor, integratedCircuit, position, rotation);
+    super(circuitEditor, inputCount, position, rotation);
 
     arcViewRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 357, 61, true, false);
     arcViewLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 61, true, false);

@@ -20,11 +20,11 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
   protected PolygonView polygon;
 
   public BaseInverterView(CircuitEditor circuitEditor,
-                          IC integratedCircuit,
                           Int2D position,
                           Rotation rotation)
   {
-    super(circuitEditor, integratedCircuit, position, rotation);
+    super(circuitEditor, position, rotation);
+    xxx();
     polygon = new PolygonView(this, true, true, new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
   }
 

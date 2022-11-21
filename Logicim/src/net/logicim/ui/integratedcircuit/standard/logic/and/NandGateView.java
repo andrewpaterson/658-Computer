@@ -15,11 +15,17 @@ public class NandGateView
                       Rotation rotation)
   {
     super(circuitEditor,
-          new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount)),
+          inputCount,
           position,
           rotation);
-    createPorts(inputCount, true, 0);
+    createPorts(true, 0);
     finaliseView();
+  }
+
+  @Override
+  protected NandGate createIntegratedCircuit()
+  {
+    return new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount));
   }
 }
 

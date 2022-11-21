@@ -14,18 +14,29 @@ public class ClockView
     extends IntegratedCircuitView<ClockOscillator>
 {
   protected RectangleView rectangle;
+  protected float frequency;
 
-  public ClockView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, float frequency)
+  public ClockView(CircuitEditor circuitEditor,
+                   Int2D position,
+                   Rotation rotation,
+                   float frequency)
   {
     super(circuitEditor,
-          new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), frequency),
           position,
           rotation);
+    this.frequency = frequency;
+    xxx();
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
 
     rectangle = new RectangleView(this, 2, 2, true, true);
 
     finaliseView();
+  }
+
+  @Override
+  protected ClockOscillator createIntegratedCircuit()
+  {
+    return new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), frequency);
   }
 
   @Override

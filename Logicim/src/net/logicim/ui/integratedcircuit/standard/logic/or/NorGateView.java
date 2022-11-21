@@ -15,11 +15,17 @@ public class NorGateView
                      Rotation rotation)
   {
     super(circuitEditor,
-          new NorGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount)),
+          inputCount,
           position,
           rotation);
-    createPorts(inputCount, true, 0);
+    createPorts(true, 0);
     finaliseView();
+  }
+
+  @Override
+  protected NorGate createIntegratedCircuit()
+  {
+    return new NorGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount));
   }
 }
 

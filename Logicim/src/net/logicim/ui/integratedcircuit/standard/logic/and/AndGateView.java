@@ -15,11 +15,17 @@ public class AndGateView
                      Rotation rotation)
   {
     super(circuitEditor,
-          new AndGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount)),
+          inputCount,
           position,
           rotation);
-    createPorts(inputCount, false, 0);
+    createPorts(false, 0);
     finaliseView();
+  }
+
+  @Override
+  protected AndGate createIntegratedCircuit()
+  {
+    return new AndGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount));
   }
 }
 

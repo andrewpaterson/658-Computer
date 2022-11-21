@@ -15,11 +15,17 @@ public class XnorGateView
                       Rotation rotation)
   {
     super(circuitEditor,
-          new XnorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount)),
+          inputCount,
           position,
           rotation);
-    createPorts(inputCount, true, 1);
+    createPorts(true, 1);
     finaliseView();
+  }
+
+  @Override
+  protected XnorGate createIntegratedCircuit()
+  {
+    return new XnorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount));
   }
 }
 

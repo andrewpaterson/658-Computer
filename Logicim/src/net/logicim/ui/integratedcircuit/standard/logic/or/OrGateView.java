@@ -15,11 +15,17 @@ public class OrGateView
                     Rotation rotation)
   {
     super(circuitEditor,
-          new OrGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount)),
+          inputCount,
           position,
           rotation);
-    createPorts(inputCount, false, 0);
+    createPorts(false, 0);
     finaliseView();
+  }
+
+  @Override
+  protected OrGate createIntegratedCircuit()
+  {
+    return new OrGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount));
   }
 }
 

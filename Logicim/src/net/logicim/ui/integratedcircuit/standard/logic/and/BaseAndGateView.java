@@ -22,9 +22,12 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   protected LineView lineView2;
   protected LineView lineView3;
 
-  public BaseAndGateView(CircuitEditor circuitEditor, IC integratedCircuit, Int2D position, Rotation rotation)
+  public BaseAndGateView(CircuitEditor circuitEditor,
+                         int inputCount,
+                         Int2D position,
+                         Rotation rotation)
   {
-    super(circuitEditor, integratedCircuit, position, rotation);
+    super(circuitEditor, inputCount, position, rotation);
 
     float height = 1.4f;
     arcViewFront = new ArcView(this, new Float2D(0, -0.4f), 1.5f, 0, 180, true, true);

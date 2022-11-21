@@ -1,6 +1,5 @@
 package net.logicim.domain.common.port.event;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 

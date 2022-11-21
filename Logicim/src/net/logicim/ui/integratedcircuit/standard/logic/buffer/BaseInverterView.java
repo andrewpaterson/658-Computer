@@ -24,7 +24,7 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
                           Rotation rotation)
   {
     super(circuitEditor, position, rotation);
-    xxx();
+    create();
     polygon = new PolygonView(this, true, true, new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
   }
 

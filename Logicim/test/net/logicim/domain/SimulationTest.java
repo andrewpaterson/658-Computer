@@ -7,6 +7,7 @@ import net.logicim.domain.common.port.event.DriveEvent;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.SlewEvent;
 import net.logicim.domain.common.port.event.TransitionEvent;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -30,9 +31,31 @@ public class SimulationTest
     Circuit circuit = new Circuit();
 
     float frequency = 180 * MHz;
-    ClockOscillator clock1 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.5f));
-    ClockOscillator clock2 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.6f));
-    OrGate orGate = new OrGate(circuit, "Or", new OrGatePins(2));
+    ClockOscillator clock1 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(new VoltageConfiguration("",
+                                                                                                   0.8f,
+                                                                                                   2.0f,
+                                                                                                   0.0f,
+                                                                                                   3.3f,
+                                                                                                   nanosecondsToTime(2.0f),
+                                                                                                   nanosecondsToTime(2.0f))
+    {
+    }), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.5f));
+    ClockOscillator clock2 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(new VoltageConfiguration("",
+                                                                                                   0.8f,
+                                                                                                   2.0f,
+                                                                                                   0.0f,
+                                                                                                   3.3f,
+                                                                                                   nanosecondsToTime(2.0f),
+                                                                                                   nanosecondsToTime(2.0f))
+    {
+    }), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.6f));
+    OrGate orGate = new OrGate(circuit, "Or", new OrGatePins(2, new VoltageConfiguration("",
+                                                                       0.8f,
+                                                                       2.0f,
+                                                                       0.0f,
+                                                                       3.3f,
+                                                                       nanosecondsToTime(2.5f),
+                                                                       nanosecondsToTime(2.5f))));
 
     TraceNet clock2Trace = new TraceNet();
     TraceNet clock1Trace = new TraceNet();
@@ -173,9 +196,23 @@ public class SimulationTest
     Circuit circuit = new Circuit();
     TraceNet connectingTraceNet = new TraceNet();
     TraceNet outputTraceNet = new TraceNet();
-    Constant constant = new Constant(circuit, "Constant", new ConstantPins(), nanosecondsToTime(1), 0);
+    Constant constant = new Constant(circuit, "Constant", new ConstantPins(new VoltageConfiguration("",
+                                                                                                    0.8f,
+                                                                                                    2.0f,
+                                                                                                    0.0f,
+                                                                                                    3.3f,
+                                                                                                    nanosecondsToTime(2.0f),
+                                                                                                    nanosecondsToTime(2.0f))), nanosecondsToTime(1), 0);
     constant.getPins().getOutput().connect(connectingTraceNet);
-    Inverter inverter = new Inverter(circuit, "Not", new BufferPins());
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(new VoltageConfiguration("",
+                                                                                             0.8f,
+                                                                                             2.0f,
+                                                                                             0.0f,
+                                                                                             3.3f,
+                                                                                             nanosecondsToTime(2.5f),
+                                                                                             nanosecondsToTime(2.5f))
+    {
+    }));
     inverter.getPins().getInput().connect(connectingTraceNet);
     inverter.getPins().getOutput().connect(outputTraceNet);
 
@@ -285,9 +322,23 @@ public class SimulationTest
     Circuit circuit = new Circuit();
     TraceNet connectingTraceNet = new TraceNet();
     TraceNet outputTraceNet = new TraceNet();
-    Constant constant = new Constant(circuit, "Constant", new ConstantPins(), nanosecondsToTime(1), 0);
+    Constant constant = new Constant(circuit, "Constant", new ConstantPins(new VoltageConfiguration("",
+                                                                                                    0.8f,
+                                                                                                    2.0f,
+                                                                                                    0.0f,
+                                                                                                    3.3f,
+                                                                                                    nanosecondsToTime(2.0f),
+                                                                                                    nanosecondsToTime(2.0f))), nanosecondsToTime(1), 0);
     constant.getPins().getOutput().connect(connectingTraceNet);
-    Inverter inverter = new Inverter(circuit, "Not", new BufferPins());
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(new VoltageConfiguration("",
+                                                                           0.8f,
+                                                                           2.0f,
+                                                                           0.0f,
+                                                                           3.3f,
+                                                                           nanosecondsToTime(2.5f),
+                                                                           nanosecondsToTime(2.5f))
+    {
+    }));
     inverter.getPins().getInput().connect(connectingTraceNet);
     inverter.getPins().getOutput().connect(outputTraceNet);
 

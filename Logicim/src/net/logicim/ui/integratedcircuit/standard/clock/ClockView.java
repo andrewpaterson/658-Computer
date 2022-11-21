@@ -1,6 +1,7 @@
 package net.logicim.ui.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -9,6 +10,8 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
+
+import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
 public class ClockView
     extends IntegratedCircuitView<ClockOscillator>
@@ -25,7 +28,7 @@ public class ClockView
           position,
           rotation);
     this.frequency = frequency;
-    xxx();
+    create();
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
 
     rectangle = new RectangleView(this, 2, 2, true, true);
@@ -36,7 +39,15 @@ public class ClockView
   @Override
   protected ClockOscillator createIntegratedCircuit()
   {
-    return new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(), frequency);
+    return new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(new VoltageConfiguration("",
+                                                                                                                0.8f,
+                                                                                                                2.0f,
+                                                                                                                0.0f,
+                                                                                                                3.3f,
+                                                                                                                nanosecondsToTime(2.0f),
+                                                                                                                nanosecondsToTime(2.0f))
+    {
+    }), frequency);
   }
 
   @Override

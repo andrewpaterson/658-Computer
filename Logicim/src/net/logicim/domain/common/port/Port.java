@@ -8,8 +8,6 @@ import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.TransmissionState;
 import net.logicim.domain.common.port.event.*;
-import net.logicim.domain.common.propagation.InputVoltage;
-import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
@@ -145,15 +143,7 @@ public class Port
 
     if (state.isOutput())
     {
-      if (voltageConfiguration.isOutput())
-      {
-        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createOutputEvent(timeline, this, outputVoltageConfiguration.getVoltage(value));
-      }
-      else
-      {
-        throwNoOutputVoltageConfigurationException();
-      }
+      voltageConfiguration.createOutputEvent(timeline, this, voltageConfiguration.getVoltage(value));
     }
     else
     {
@@ -167,15 +157,7 @@ public class Port
 
     if (state.isImpedance())
     {
-      if (voltageConfiguration.isOutput())
-      {
-        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        outputVoltageConfiguration.createHighImpedanceEvents(timeline, this);
-      }
-      else
-      {
-        throwNoOutputVoltageConfigurationException();
-      }
+      voltageConfiguration.createHighImpedanceEvents(timeline, this);
     }
     else
     {
@@ -189,22 +171,15 @@ public class Port
 
     if (state.isInput())
     {
-      if (voltageConfiguration.isInput())
+      if (trace != null)
       {
-        if (trace != null)
+        float voltage = trace.getVoltage(time);
+        if (!Float.isNaN(voltage))
         {
-          float voltage = trace.getVoltage(time);
-          if (!Float.isNaN(voltage))
-          {
-            return ((InputVoltage) voltageConfiguration).getValue(voltage);
-          }
+          return voltageConfiguration.getValue(voltage);
         }
-        return Undriven;
       }
-      else
-      {
-        throwNoInputVoltageConfigurationException();
-      }
+      return Undriven;
     }
     else
     {
@@ -282,15 +257,14 @@ public class Port
 
   public boolean traceSlew(Simulation simulation, SlewEvent slewEvent)
   {
-    InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
     float startVoltage = slewEvent.getStartVoltage();
     long slewTime = slewEvent.getSlewTime();
     float endVoltage = slewEvent.getEndVoltage();
 
     if (startVoltage != endVoltage)
     {
-      float lowVoltageIn = inputVoltage.getLowVoltageIn();
-      float highVoltageIn = inputVoltage.getHighVoltageIn();
+      float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
+      float highVoltageIn = voltageConfiguration.getHighVoltageIn();
       long transitionTime;
       float transitionVoltage;
       if (endVoltage <= lowVoltageIn)
@@ -320,36 +294,32 @@ public class Port
 
   public void traceConnected(Simulation simulation)
   {
-    if (voltageConfiguration.isInput())
+    TraceNet trace = getTrace();
+    List<PortOutputEvent> outputEvents = trace.getOutputEvents();
+    boolean slewInProgress = false;
+    for (PortOutputEvent outputEvent : outputEvents)
     {
-      InputVoltage inputVoltage = (InputVoltage) voltageConfiguration;
-      TraceNet trace = getTrace();
-      List<PortOutputEvent> outputEvents = trace.getOutputEvents();
-      boolean slewInProgress = false;
-      for (PortOutputEvent outputEvent : outputEvents)
+      if (outputEvent instanceof SlewEvent)
       {
-        if (outputEvent instanceof SlewEvent)
+        SlewEvent slewEvent = (SlewEvent) outputEvent;
+        if (slewEvent.forTime(simulation.getTime()))
         {
-          SlewEvent slewEvent = (SlewEvent) outputEvent;
-          if (slewEvent.forTime(simulation.getTime()))
-          {
-            slewInProgress |= traceSlew(simulation, slewEvent);
-          }
+          slewInProgress |= traceSlew(simulation, slewEvent);
         }
       }
+    }
 
-      if (!slewInProgress)
-      {
-        createTransitionEventFromExistingVoltage(simulation, inputVoltage, trace);
-      }
+    if (!slewInProgress)
+    {
+      createTransitionEventFromExistingVoltage(simulation, trace);
     }
   }
 
-  protected void createTransitionEventFromExistingVoltage(Simulation simulation, InputVoltage inputVoltage, TraceNet trace)
+  protected void createTransitionEventFromExistingVoltage(Simulation simulation, TraceNet trace)
   {
     float endVoltage = trace.getVoltage(simulation.getTime());
-    float lowVoltageIn = inputVoltage.getLowVoltageIn();
-    float highVoltageIn = inputVoltage.getHighVoltageIn();
+    float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
+    float highVoltageIn = voltageConfiguration.getHighVoltageIn();
 
     float transitionVoltage = 0;
     boolean traceValid = false;
@@ -429,16 +399,8 @@ public class Port
   {
     if (state.isOutput())
     {
-      if (voltageConfiguration.isOutput())
-      {
-        OutputVoltageConfiguration outputVoltageConfiguration = (OutputVoltageConfiguration) voltageConfiguration;
-        float voltage = outputVoltageConfiguration.getMidVoltageOut();
-        outputVoltageConfiguration.createOutputEvent(timeline, this, voltage);
-      }
-      else
-      {
-        throwNoOutputVoltageConfigurationException();
-      }
+      float voltage = voltageConfiguration.getMidVoltageOut();
+      voltageConfiguration.createOutputEvent(timeline, this, voltage);
     }
     else
     {

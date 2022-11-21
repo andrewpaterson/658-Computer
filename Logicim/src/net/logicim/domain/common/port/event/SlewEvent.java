@@ -3,7 +3,7 @@ package net.logicim.domain.common.port.event;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.propagation.OutputVoltageConfiguration;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public class SlewEvent
 
   public DriveEvent update(Timeline timeline)
   {
-    OutputVoltageConfiguration voltageConfiguration = (OutputVoltageConfiguration) port.getVoltageConfiguration();
+    VoltageConfiguration voltageConfiguration = port.getVoltageConfiguration();
 
     long nowTime = timeline.getTime();
     startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration)));
@@ -109,7 +109,7 @@ public class SlewEvent
     return timeline.createPortDriveEvent(port, this);
   }
 
-  protected float calculateStartVoltage(long nowTime, OutputVoltageConfiguration voltageConfiguration)
+  protected float calculateStartVoltage(long nowTime, VoltageConfiguration voltageConfiguration)
   {
     float voltage = port.getVoltage(nowTime);
     if (!Float.isNaN(voltage))

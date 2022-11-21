@@ -25,7 +25,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     this.ports = new ArrayList<>();
   }
 
-  protected void xxx()
+  protected void create()
   {
     this.integratedCircuit = createIntegratedCircuit();
     this.integratedCircuit.disable();

@@ -31,7 +31,7 @@ public class DriveEvent
     }
     else
     {
-      throw new SimulatorException("Cannot get voltage before drive time for drive event.");
+      return Float.NaN;
     }
   }
 }

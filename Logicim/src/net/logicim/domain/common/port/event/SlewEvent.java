@@ -65,7 +65,7 @@ public class SlewEvent
     }
     else
     {
-      throw new SimulatorException("Cannot get voltage outside of slew time for slew event.");
+      return Float.NaN;
     }
   }
 

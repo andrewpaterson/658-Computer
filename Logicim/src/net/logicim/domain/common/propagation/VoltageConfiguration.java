@@ -26,8 +26,8 @@ public class VoltageConfiguration
   public VoltageConfiguration(String family,
                               float lowVoltageIn,
                               float highVoltageIn,
-                              float highVoltageOut,
                               float lowVoltageOut,
+                              float highVoltageOut,
                               int highToLowPropagation,
                               int lowToHighPropagation)
   {
@@ -44,7 +44,27 @@ public class VoltageConfiguration
     this.lowToHighSlewTime = lowToHighPropagation;
 
     this.voltsPerTimeLowToHigh = (highVoltageOut - lowVoltageOut) / lowToHighSlewTime;
-    this.voltsPerTimeHighToLow = (highVoltageOut - lowVoltageOut) / lowToHighSlewTime;
+    this.voltsPerTimeHighToLow = (highVoltageOut - lowVoltageOut) / highToLowSlewTime;
+
+    if (highVoltageOut <= lowVoltageOut)
+    {
+      throw new SimulatorException("High voltage out must be greater than low voltage out.");
+    }
+
+    if (highVoltageIn <- lowVoltageIn)
+    {
+      throw new SimulatorException("High voltage in must be greater than low voltage out.");
+    }
+
+    if (highToLowSlewTime <= 0)
+    {
+      throw new SimulatorException("Slew time must be greater than zero.");
+    }
+
+    if (lowToHighSlewTime <= 0)
+    {
+      throw new SimulatorException("Slew time must be greater than zero.");
+    }
   }
 
   public TraceValue getValue(float voltage)

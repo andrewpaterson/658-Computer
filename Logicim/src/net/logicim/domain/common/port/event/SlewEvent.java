@@ -1,5 +1,6 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
@@ -91,6 +92,10 @@ public class SlewEvent
     else
     {
       slewTime = 1;
+    }
+    if (slewTime < 1)
+    {
+      throw new SimulatorException("Slew time must be in the future.");
     }
 
     long endTime = getEndTime();

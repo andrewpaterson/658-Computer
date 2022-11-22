@@ -30,7 +30,19 @@ public abstract class VoltageColour
       float voltage = trace.getVoltage(time);
       if (!Float.isNaN(voltage))
       {
-        return VoltageColour.getColorForVoltage(colours, voltage);
+        float shortVoltage = trace.getShortVoltage(time);
+        Color colorForVoltage = getColorForVoltage(colours, voltage);
+        if (shortVoltage == 0)
+        {
+          return colorForVoltage;
+        }
+        else
+        {
+          Color colorForShort = getColorForShort(colours, shortVoltage);
+          return new Color(clamp(colorForVoltage.getRed() + colorForShort.getRed()),
+                           clamp(colorForVoltage.getGreen() + colorForShort.getGreen()),
+                           clamp(colorForVoltage.getBlue() + colorForShort.getBlue()));
+        }
       }
 
       else
@@ -38,6 +50,31 @@ public abstract class VoltageColour
         return colours.getTraceUndriven();
       }
     }
+  }
+
+  private static int clamp(int colourComponent)
+  {
+    if (colourComponent < 0)
+    {
+      return 0;
+    }
+    if (colourComponent > 255)
+    {
+      return 255;
+    }
+    else
+    {
+      return colourComponent;
+    }
+  }
+
+  private static Color getColorForShort(Colours colours, float shortVoltage)
+  {
+    if (shortVoltage > 7 || (shortVoltage <= 0))
+    {
+      return colours.getTraceError();
+    }
+    return colours.getTraceShort(shortVoltage);
   }
 
   public static Color getColorForPort(Colours colours, Port port, long time)

@@ -14,7 +14,8 @@ public class Colours
   protected Color traceUndriven;
   protected Color traceError;
 
-  Color[] voltageColours;
+  protected Color[] voltageColours;
+  protected Color[] shortColours;
 
   protected Color shapeBorder;
   protected Color shapeFill;
@@ -30,14 +31,20 @@ public class Colours
     smallGridDotColor = new Color(0xCBCBCB);
     largeGridDotColor = new Color(0xABABAB);
     traceUndriven = new Color(110, 90, 90);
-    traceError = new Color(255, 0, 0);
+    traceError = new Color(255, 0, 100);
 
     voltageColours = new Color[71];
     ColourGradient.generate(voltageColours,
                             new Color(0, 50, 0), 0,
                             new Color(0, 180, 0), 33,
                             new Color(100, 255, 100), 50,
-                            new Color(255, 253, 75, 255), 70);
+                            new Color(255, 253, 75), 70);
+    shortColours = new Color[71];
+    ColourGradient.generate(shortColours,
+                            new Color(0, 0, 0), 0,
+                            new Color(200, 0, 0), 33,
+                            new Color(255, 255, 100), 50,
+                            new Color(255, 255, 200), 70);
 
      shapeBorder = Color.BLACK;
      shapeFill = new Color(232, 232, 232);
@@ -110,6 +117,20 @@ public class Colours
   public Color getDisconnectedTrace()
   {
     return disconnectedTrace;
+  }
+
+  public Color getTraceShort(float shortVoltage)
+  {
+    int index = (int) (shortVoltage * 10);
+    if (index >= shortColours.length)
+    {
+      index = shortColours.length - 1;
+    }
+    if (index < 0)
+    {
+      index = 0;
+    }
+    return shortColours[index];
   }
 }
 

@@ -452,5 +452,14 @@ public class Port
   {
     return output;
   }
+
+  public long getTraceId()
+  {
+    if (trace != null)
+    {
+      return trace.getId();
+    }
+    return 0;
+  }
 }
 

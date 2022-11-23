@@ -1,6 +1,5 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortOutputEvent;
@@ -12,11 +11,16 @@ import java.util.Set;
 
 public class TraceNet
 {
+  public static long nextId = 1L;
+
   protected Set<Port> connectedPorts;
+  protected long id;
 
   public TraceNet()
   {
     connectedPorts = new LinkedHashSet<>();
+    id = nextId;
+    nextId++;
   }
 
   public float getVoltage(long time)
@@ -105,6 +109,11 @@ public class TraceNet
       }
     }
     return result;
+  }
+
+  public long getId()
+  {
+    return id;
   }
 }
 

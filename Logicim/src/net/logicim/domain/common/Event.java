@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.data.common.EventData;
 import net.logicim.domain.Simulation;
 
 public abstract class Event
@@ -21,5 +22,7 @@ public abstract class Event
   public abstract IntegratedCircuit<?, ?> getIntegratedCircuit();
 
   public abstract void removeFromOwner();
+
+  public abstract EventData save();
 }
 

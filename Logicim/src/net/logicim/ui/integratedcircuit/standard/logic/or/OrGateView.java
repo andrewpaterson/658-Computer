@@ -1,6 +1,8 @@
 package net.logicim.ui.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.standard.logic.or.OrGateData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
@@ -35,6 +37,15 @@ public class OrGateView
                                                                                                           3.3f,
                                                                                                           nanosecondsToTime(2.5f),
                                                                                                           nanosecondsToTime(2.5f))));
+  }
+
+  @Override
+  public OrGateData save()
+  {
+    return new OrGateData(position,
+                          rotation,
+                          savePorts(),
+                          inputCount);
   }
 }
 

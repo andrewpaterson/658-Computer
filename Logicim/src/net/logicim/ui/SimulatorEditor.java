@@ -2,6 +2,7 @@ package net.logicim.ui;
 
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.*;
@@ -63,7 +64,7 @@ public class SimulatorEditor
   protected boolean running;
   protected long runTimeStep;
 
-  public SimulatorEditor()
+  public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
     inputEvents = new ConcurrentLinkedDeque<>();
 
@@ -83,7 +84,7 @@ public class SimulatorEditor
     running = false;
     runTimeStep = LongTime.nanosecondsToTime(0.25f);
 
-    addActions();
+    addActions(simulatorPanel);
   }
 
   public void windowClosing()
@@ -399,7 +400,7 @@ public class SimulatorEditor
     }
   }
 
-  private void addActions()
+  private void addActions(SimulatorPanel simulatorPanel)
   {
     actions.add(new InputAction(new PlacementRotateLeft(this), KeyEvent.VK_R, Up, Down, Up));
     actions.add(new InputAction(new PlacementRotateRight(this), KeyEvent.VK_R, Up, Up, Up));
@@ -419,6 +420,8 @@ public class SimulatorEditor
     actions.add(new InputAction(new IncreaseSimulationSpeed(this), KeyEvent.VK_EQUALS, Up, Up, Up));
     actions.add(new InputAction(new DecreaseSimulationSpeed(this), KeyEvent.VK_MINUS, Up, Up, Up));
     actions.add(new InputAction(new ResetSimulation(this), KeyEvent.VK_R, Up, Up, Down));
+    actions.add(new InputAction(new SaveSimulation(simulatorPanel), KeyEvent.VK_S, Up, Up, Down));
+    actions.add(new InputAction(new LoadSimulation(simulatorPanel), KeyEvent.VK_L, Up, Up, Down));
   }
 
   public void keyPressed(int keyCode)
@@ -579,6 +582,11 @@ public class SimulatorEditor
   public void resetSimulation()
   {
     circuitEditor.reset();
+  }
+
+  public CircuitData save()
+  {
+    return circuitEditor.save();
   }
 }
 

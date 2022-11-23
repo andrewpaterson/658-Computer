@@ -1,5 +1,7 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.data.common.EventData;
+import net.logicim.data.port.event.PortEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Event;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -38,5 +40,8 @@ public abstract class PortEvent
   {
     port.remove(this);
   }
+
+  @Override
+  public abstract PortEventData save();
 }
 

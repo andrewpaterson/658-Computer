@@ -2,6 +2,8 @@ package net.logicim.ui.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
@@ -22,6 +24,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
                                Rotation rotation)
   {
     super(circuitEditor, position, rotation);
+    circuitEditor.add(this);
     this.ports = new ArrayList<>();
   }
 
@@ -207,5 +210,18 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   }
 
   protected abstract IC createIntegratedCircuit();
+
+  public abstract IntegratedCircuitData save();
+
+  protected List<PortData> savePorts()
+  {
+    List<PortData> portDatas = new ArrayList<>(ports.size());
+    for (PortView port : ports)
+    {
+      PortData portData = port.save();
+      portDatas.add(portData);
+    }
+    return portDatas;
+  }
 }
 

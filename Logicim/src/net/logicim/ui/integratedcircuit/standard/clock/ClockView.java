@@ -1,6 +1,8 @@
 package net.logicim.ui.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.standard.clock.ClockData;
+import net.logicim.data.port.PortData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -10,6 +12,7 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
+import java.util.List;
 
 import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
@@ -45,9 +48,7 @@ public class ClockView
                                                                                                                 0.0f,
                                                                                                                 3.3f,
                                                                                                                 nanosecondsToTime(2.0f),
-                                                                                                                nanosecondsToTime(2.0f))
-    {
-    }), frequency);
+                                                                                                                nanosecondsToTime(2.0f))), frequency);
   }
 
   @Override
@@ -108,6 +109,15 @@ public class ClockView
     int x6 = viewport.transformGridToScreenSpaceX(position.x + xOffset);
     int y6 = viewport.transformGridToScreenSpaceY(position.y + 0.0f);
     graphics.drawLine(x5, y5, x6, y6);
+  }
+
+  public ClockData save()
+  {
+    return new ClockData(position,
+                         rotation,
+                         frequency,
+                         integratedCircuit.getState().getState(),
+                         savePorts());
   }
 }
 

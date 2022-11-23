@@ -14,3 +14,4 @@ public abstract class ComponentView
 
   public abstract String getDescription();
 }
+

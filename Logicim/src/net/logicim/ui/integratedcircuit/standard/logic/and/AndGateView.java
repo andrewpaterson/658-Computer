@@ -1,6 +1,7 @@
 package net.logicim.ui.integratedcircuit.standard.logic.and;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.standard.logic.and.AndGateData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
@@ -34,9 +35,16 @@ public class AndGateView
                                                                                                             0.0f,
                                                                                                             3.3f,
                                                                                                             nanosecondsToTime(2.5f),
-                                                                                                            nanosecondsToTime(2.5f))
-    {
-    }));
+                                                                                                            nanosecondsToTime(2.5f))));
+  }
+
+  @Override
+  public AndGateData save()
+  {
+    return new AndGateData(position,
+                           rotation,
+                           savePorts(),
+                           inputCount);
   }
 }
 

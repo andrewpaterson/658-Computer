@@ -3,6 +3,7 @@ package net.logicim.domain.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.RedBlackNode;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
+import net.logicim.data.TimelineData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.DriveEvent;
@@ -187,6 +188,11 @@ public class Timeline
     {
       return false;
     }
+  }
+
+  public TimelineData save()
+  {
+    return new TimelineData(time, previousEventTime, eventTime);
   }
 }
 

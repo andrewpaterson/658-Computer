@@ -1,6 +1,8 @@
 package net.logicim.domain.common.port.event;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.data.common.EventData;
+import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
@@ -28,6 +30,12 @@ public class SlewEvent
   {
     super.execute(simulation);
     port.slewEvent(simulation, this);
+  }
+
+  @Override
+  public SlewEventData save()
+  {
+    return new SlewEventData(time, startVoltage, endVoltage, slewTime);
   }
 
   public long getEndTime()

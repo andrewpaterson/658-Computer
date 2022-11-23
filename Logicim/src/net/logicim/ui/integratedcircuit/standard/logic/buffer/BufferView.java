@@ -1,6 +1,8 @@
 package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
@@ -32,9 +34,15 @@ public class BufferView
                                                                                               0.0f,
                                                                                               3.3f,
                                                                                               nanosecondsToTime(2.5f),
-                                                                                              nanosecondsToTime(2.5f))
-    {
-    }));
+                                                                                              nanosecondsToTime(2.5f))));
+  }
+
+  @Override
+  public BufferData save()
+  {
+    return new BufferData(position,
+                          rotation,
+                          savePorts());
   }
 }
 

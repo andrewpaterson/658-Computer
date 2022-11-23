@@ -1,5 +1,7 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.data.common.EventData;
+import net.logicim.data.port.event.TransitionEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
@@ -20,6 +22,12 @@ public class TransitionEvent
     super.execute(simulation);
 
     port.transitionEvent(simulation, this);
+  }
+
+  @Override
+  public TransitionEventData save()
+  {
+    return new TransitionEventData(time, voltage);
   }
 }
 

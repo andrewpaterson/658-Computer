@@ -4,6 +4,10 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.CircuitData;
+import net.logicim.data.TimelineData;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.trace.TraceData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -17,7 +21,7 @@ import java.util.*;
 
 public class CircuitEditor
 {
-  protected Set<DiscreteView> discreteViews;
+  protected Set<IntegratedCircuitView<?>> integratedCircuitViews;
   protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
@@ -25,7 +29,7 @@ public class CircuitEditor
   public CircuitEditor()
   {
     circuit = new Circuit();
-    discreteViews = new LinkedHashSet<>();
+    integratedCircuitViews = new LinkedHashSet<>();
     traceViews = new LinkedHashSet<>();
   }
 
@@ -37,7 +41,7 @@ public class CircuitEditor
       traceView.paint(graphics, viewport, time);
     }
 
-    for (DiscreteView discreteView : discreteViews)
+    for (DiscreteView discreteView : integratedCircuitViews)
     {
       discreteView.paint(graphics, viewport, time);
     }
@@ -62,9 +66,9 @@ public class CircuitEditor
     return circuit;
   }
 
-  public void add(DiscreteView view)
+  public void add(IntegratedCircuitView<?> view)
   {
-    discreteViews.add(view);
+    integratedCircuitViews.add(view);
   }
 
   public void add(TraceView view)
@@ -90,7 +94,7 @@ public class CircuitEditor
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     circuit.remove(integratedCircuit, simulation);
-    discreteViews.remove(integratedCircuitView);
+    integratedCircuitViews.remove(integratedCircuitView);
 
     for (ConnectionView connectionView : connectionViews)
     {
@@ -100,16 +104,16 @@ public class CircuitEditor
 
   public void remove(TraceView traceView)
   {
-      ConnectionView startConnection = traceView.getStartConnection();
-      ConnectionView endConnection = traceView.getEndConnection();
+    ConnectionView startConnection = traceView.getStartConnection();
+    ConnectionView endConnection = traceView.getEndConnection();
 
-      disconnectTraceNet(findConnections(startConnection));
-      disconnectTraceNet(findConnections(endConnection));
+    disconnectTraceNet(findConnections(startConnection));
+    disconnectTraceNet(findConnections(endConnection));
 
-      startConnection.remove(traceView);
-      endConnection.remove(traceView);
-      traceView.removed();
-      traceViews.remove(traceView);
+    startConnection.remove(traceView);
+    endConnection.remove(traceView);
+    traceView.removed();
+    traceViews.remove(traceView);
   }
 
   public void disconnectTraceNet(Set<ConnectionView> connectionsNet)
@@ -209,7 +213,7 @@ public class CircuitEditor
     Int2D boundBoxPosition = new Int2D();
     Int2D boundBoxDimension = new Int2D();
     List<DiscreteView> selectedViews = new ArrayList<>();
-    for (DiscreteView view : discreteViews)
+    for (DiscreteView view : integratedCircuitViews)
     {
       if (view.isEnabled())
       {
@@ -228,7 +232,7 @@ public class CircuitEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
     List<DiscreteView> selectedViews = new ArrayList<>();
-    for (DiscreteView view : discreteViews)
+    for (DiscreteView view : integratedCircuitViews)
     {
       if (view.isEnabled())
       {
@@ -778,7 +782,7 @@ public class CircuitEditor
   private Set<ConnectionView> getDiscretePortConnectionsOnLine(Line line)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (DiscreteView discreteView : discreteViews)
+    for (DiscreteView discreteView : integratedCircuitViews)
     {
       List<PortView> ports = discreteView.getPorts();
       for (PortView port : ports)
@@ -820,7 +824,7 @@ public class CircuitEditor
       {
         if (componentView instanceof DiscreteView)
         {
-          if (!discreteViews.contains(componentView))
+          if (!integratedCircuitViews.contains(componentView))
           {
             throw new SimulatorException("Discrete component [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
           }
@@ -835,6 +839,28 @@ public class CircuitEditor
         }
       }
     }
+  }
+
+  public CircuitData save()
+  {
+    ArrayList<IntegratedCircuitData> integratedCircuitDatas = new ArrayList<>();
+    for (IntegratedCircuitView<?> integratedCircuitView : integratedCircuitViews)
+    {
+      IntegratedCircuitData integratedCircuitData = integratedCircuitView.save();
+      integratedCircuitDatas.add(integratedCircuitData);
+    }
+
+    ArrayList<TraceData> traceDatas = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      TraceData traceData = traceView.save();
+      traceDatas.add(traceData);
+    }
+
+    TimelineData timelineData = simulation.getTimeline().save();
+    return new CircuitData(timelineData,
+                           integratedCircuitDatas,
+                           traceDatas);
   }
 }
 

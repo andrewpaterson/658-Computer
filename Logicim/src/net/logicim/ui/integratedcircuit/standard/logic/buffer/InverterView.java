@@ -1,6 +1,7 @@
 package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.standard.logic.buffer.InverterData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
@@ -32,9 +33,15 @@ public class InverterView
                                                                                                 0.0f,
                                                                                                 3.3f,
                                                                                                 nanosecondsToTime(2.5f),
-                                                                                                nanosecondsToTime(2.5f))
-    {
-    }));
+                                                                                                nanosecondsToTime(2.5f))));
+  }
+
+  @Override
+  public InverterData save()
+  {
+    return new InverterData(position,
+                            rotation,
+                            savePorts());
   }
 }
 

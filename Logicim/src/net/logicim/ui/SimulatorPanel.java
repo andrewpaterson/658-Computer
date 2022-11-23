@@ -1,5 +1,6 @@
 package net.logicim.ui;
 
+import net.logicim.data.CircuitData;
 import net.logicim.ui.input.event.*;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class SimulatorPanel
     running = false;
     period = 16 * nS_IN_mS;
 
-    simulatorEditor = new SimulatorEditor();
+    simulatorEditor = new SimulatorEditor(this);
   }
 
   public void loop()
@@ -150,6 +151,16 @@ public class SimulatorPanel
   public void keyReleased(int keyCode)
   {
     simulatorEditor.addInputEvent(new KeyReleasedEvent(keyCode));
+  }
+
+  public void saveSimulation()
+  {
+    CircuitData circuitData = simulatorEditor.save();
+  }
+
+  public void loadSimulation()
+  {
+
   }
 }
 

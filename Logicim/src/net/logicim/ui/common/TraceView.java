@@ -3,6 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.trace.TraceData;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
@@ -334,6 +335,11 @@ public class TraceView
   public boolean isRemoved()
   {
     return startConnection == null || endConnection == null;
+  }
+
+  public TraceData save()
+  {
+    return new TraceData(trace.getId(), new Int2D(getStartPosition()), new Int2D(getEndPosition()));
   }
 }
 

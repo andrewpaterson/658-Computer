@@ -1,6 +1,8 @@
 package net.logicim.ui.integratedcircuit.standard.logic.xor;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.standard.logic.xor.XnorGateData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGatePins;
@@ -34,9 +36,16 @@ public class XorGateView
                                                                                                             0.0f,
                                                                                                             3.3f,
                                                                                                             nanosecondsToTime(2.5f),
-                                                                                                            nanosecondsToTime(2.5f))
-    {
-    }));
+                                                                                                            nanosecondsToTime(2.5f))));
+  }
+
+  @Override
+  public XnorGateData save()
+  {
+    return new XnorGateData(position,
+                            rotation,
+                            savePorts(),
+                            inputCount);
   }
 }
 

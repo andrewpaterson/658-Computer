@@ -1,6 +1,8 @@
 package net.logicim.ui.integratedcircuit.standard.logic.and;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.standard.logic.and.NandGateData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.domain.integratedcircuit.standard.logic.and.NandGate;
@@ -34,9 +36,16 @@ public class NandGateView
                                                                                                              0.0f,
                                                                                                              3.3f,
                                                                                                              nanosecondsToTime(2.5f),
-                                                                                                             nanosecondsToTime(2.5f))
-    {
-    }));
+                                                                                                             nanosecondsToTime(2.5f))));
+  }
+
+  @Override
+  public IntegratedCircuitData save()
+  {
+    return new NandGateData(position,
+                            rotation,
+                            savePorts(),
+                            inputCount);
   }
 }
 

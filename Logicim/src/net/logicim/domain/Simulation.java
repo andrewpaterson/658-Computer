@@ -1,13 +1,7 @@
 package net.logicim.domain;
 
-import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.event.PortEvent;
-import net.logicim.domain.common.state.State;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class Simulation
 {
@@ -22,7 +16,6 @@ public class Simulation
   {
     return timeline;
   }
-
 
   public void run()
   {

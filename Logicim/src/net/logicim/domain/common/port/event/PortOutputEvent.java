@@ -1,5 +1,6 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
@@ -18,5 +19,8 @@ public abstract class PortOutputEvent
   {
     super.execute(simulation);
   }
+
+  @Override
+  public abstract PortOutputEventData save();
 }
 

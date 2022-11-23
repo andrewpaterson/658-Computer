@@ -3,7 +3,7 @@ package net.logicim.ui.editor;
 import net.logicim.ui.SimulatorEditor;
 
 public class PlacementRotateRight
-    extends EditorAction
+    extends SimulatorEditorAction
 {
   public PlacementRotateRight(SimulatorEditor editor)
   {

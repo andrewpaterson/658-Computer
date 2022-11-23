@@ -1,13 +1,21 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.common.EventData;
+import net.logicim.data.port.PortData;
+import net.logicim.data.port.event.PortEventData;
+import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.PortEvent;
+import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class PortView
 {
@@ -171,6 +179,31 @@ public class PortView
   public void disconnectTraceNet(Simulation simulation)
   {
     port.disconnect(simulation);
+  }
+
+  public PortData save()
+  {
+    PortOutputEvent portOutputEvent = port.getOutput();
+    LinkedList<PortEvent> portEvents = port.getEvents();
+    ArrayList<EventData> eventDatas = new ArrayList<>(portEvents.size());
+    PortOutputEventData portOutputEventData = null;
+    for (PortEvent event : portEvents)
+    {
+      PortEventData portEventData = event.save();
+      if (portOutputEvent == event)
+      {
+        portOutputEventData = (PortOutputEventData) portEventData;
+      }
+    }
+    if (portOutputEventData == null)
+    {
+      if (portOutputEvent != null)
+      {
+        portOutputEventData = portOutputEvent.save();
+      }
+    }
+
+    return new PortData(eventDatas, portOutputEventData, port.getTraceId());
   }
 }
 

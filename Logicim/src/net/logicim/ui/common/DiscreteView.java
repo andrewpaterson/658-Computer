@@ -3,6 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -29,7 +30,6 @@ public abstract class DiscreteView
     this.circuitEditor = circuitEditor;
     this.position = position.clone();
     this.rotation = rotation;
-    circuitEditor.add(this);
     this.boundingBox = new BoundingBox();
     this.selectionBox = new BoundingBox();
     this.shapes = new ArrayList<>();

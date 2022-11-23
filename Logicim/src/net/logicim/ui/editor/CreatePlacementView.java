@@ -4,7 +4,7 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.ViewFactory;
 
 public class CreatePlacementView
-    extends EditorAction
+    extends SimulatorEditorAction
 {
   private ViewFactory viewFactory;
 

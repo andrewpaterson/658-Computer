@@ -1,5 +1,7 @@
 package net.logicim.domain.common.port.event;
 
+import net.logicim.data.common.EventData;
+import net.logicim.data.port.event.DriveEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
@@ -32,6 +34,12 @@ public class DriveEvent
     {
       return Float.NaN;
     }
+  }
+
+  @Override
+  public DriveEventData save()
+  {
+    return new DriveEventData(time, voltage);
   }
 }
 

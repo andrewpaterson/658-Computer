@@ -47,7 +47,7 @@ public class ArcView
     int x = viewport.transformGridToScreenSpaceX(gridCache.circleCenter.x);
     int y = viewport.transformGridToScreenSpaceY(gridCache.circleCenter.y);
 
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setStroke(viewport.getStroke());
     if (fill)
     {
       graphics.setColor(viewport.getColours().getShapeFill());

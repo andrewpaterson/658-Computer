@@ -52,7 +52,7 @@ public class PolygonView
 
     Polygon p = new Polygon(xArray, yArray, transformedBuffer.size());
 
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setStroke(viewport.getStroke());
     if (fill)
     {
       graphics.setColor(viewport.getColours().getShapeFill());

@@ -84,7 +84,7 @@ public class PortView
         int x = viewport.transformGridToScreenSpaceX(gridBubbleCenter.x);
         int y = viewport.transformGridToScreenSpaceY(gridBubbleCenter.y);
 
-        graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+        graphics.setStroke(viewport.getStroke());
         graphics.setColor(viewport.getColours().getShapeBorder());
         int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
         graphics.drawOval(x - diameter / 2,

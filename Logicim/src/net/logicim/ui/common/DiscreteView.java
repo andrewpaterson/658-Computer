@@ -75,7 +75,7 @@ public abstract class DiscreteView
 
     getSelectionBoxInScreenSpace(viewport, p, s);
 
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setStroke(viewport.getStroke());
     Color color = viewport.getColours().getViewHover();
     paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
     paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
@@ -104,7 +104,7 @@ public abstract class DiscreteView
     Int2D p = new Int2D();
     Int2D s = new Int2D();
     getBoundingBoxInScreenSpace(viewport, p, s);
-    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, new BasicStroke(1), null, Color.ORANGE);
+    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getStroke(1), null, Color.ORANGE);
   }
 
   public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)

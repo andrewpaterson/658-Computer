@@ -65,7 +65,7 @@ public class RectangleView
     Color shapeFill = viewport.getColours().getShapeFill();
     Color shapeBorder = viewport.getColours().getShapeBorder();
 
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setStroke(viewport.getStroke());
     if (fill)
     {
       graphics.setColor(shapeFill);

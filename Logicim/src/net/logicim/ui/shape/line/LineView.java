@@ -38,7 +38,7 @@ public class LineView
     int x2 = viewport.transformGridToScreenSpaceX(transformedEnd);
     int y2 = viewport.transformGridToScreenSpaceY(transformedEnd);
 
-    graphics.setStroke(new BasicStroke(viewport.getLineWidth()));
+    graphics.setStroke(viewport.getStroke());
     graphics.setColor(viewport.getColours().getShapeBorder());
 
     graphics.drawLine(x1, y1, x2, y2);

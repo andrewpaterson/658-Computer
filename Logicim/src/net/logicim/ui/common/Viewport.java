@@ -13,6 +13,7 @@ public class Viewport
   protected float scale;
   protected PanelSize size;
   protected Colours colours;
+  protected Strokes strokes;
 
   public Viewport(PanelSize size)
   {
@@ -21,6 +22,7 @@ public class Viewport
     zoom = 1.0f;
     scale = 10.0f;
     colours = new Colours();
+    strokes = new Strokes();
   }
 
   public int transformGridToScreenSpaceX(int x)
@@ -148,7 +150,7 @@ public class Viewport
 
   private void drawDotGrid(Graphics2D graphics, int left, int dotsAcross, int top, int dotsDown, Color color)
   {
-    graphics.setStroke(new BasicStroke(1));
+    graphics.setStroke(getStroke(1));
     graphics.setColor(color);
     for (int y = 0; y < dotsDown; y++)
     {
@@ -303,6 +305,16 @@ public class Viewport
   public float getConnectionSize()
   {
     return 3;
+  }
+
+  public Stroke getStroke(float width)
+  {
+    return strokes.getStroke(width);
+  }
+
+  public Stroke getStroke()
+  {
+    return strokes.getStroke(getLineWidth());
   }
 }
 

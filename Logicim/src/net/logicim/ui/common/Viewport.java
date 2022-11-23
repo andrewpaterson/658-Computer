@@ -5,11 +5,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 
 public class Viewport
 {
-  protected Point2D.Float position;
+  protected Float2D position;
   protected float zoom;
   protected float scale;
   protected PanelSize size;
@@ -18,7 +17,7 @@ public class Viewport
   public Viewport(PanelSize size)
   {
     this.size = size;
-    position = new Point2D.Float(0, 0);
+    position = new Float2D(0, 0);
     zoom = 1.0f;
     scale = 10.0f;
     colours = new Colours();
@@ -168,6 +167,17 @@ public class Viewport
     position.y -= relative.y;
   }
 
+  public void zoomTo(Int2D mousePosition, float zoom)
+  {
+    Float2D positionInGrid = transformScreenSpaceToGrid(mousePosition);
+    zoom(zoom);
+    Float2D positionInGridZoomed = transformScreenSpaceToGrid(mousePosition);
+    positionInGrid.subtract(positionInGridZoomed);
+    int width = transformGridToScreenWidth(positionInGrid.x);
+    int height = transformGridToScreenHeight(positionInGrid.y);
+    position.subtract(width, height);
+  }
+
   public void zoom(float zoom)
   {
     this.zoom -= zoom;
@@ -179,6 +189,21 @@ public class Viewport
     {
       this.zoom = 6.0f;
     }
+  }
+
+  public Float2D transformGridToScreenSpace(Float2D p)
+  {
+    return new Float2D(p.x * scale * zoom + size.getWidth() / 2.0f + position.x,
+                       p.y * scale * zoom + size.getHeight() / 2.0f + position.y);
+  }
+
+  public Float2D transformScreenSpaceToGrid(Int2D p)
+  {
+    float centerX = p.x - size.getWidth() / 2.0f;
+    float fx = (centerX - position.x) / (scale * zoom);
+    float centerY = p.y - size.getHeight() / 2.0f;
+    float fy = (centerY - position.y) / (scale * zoom);
+    return new Float2D(fx, fy);
   }
 
   public Colours getColours()
@@ -223,7 +248,7 @@ public class Viewport
   {
     if (tuple2 instanceof Int2D)
     {
-      return transformGridToScreenWidth(((Int2D)tuple2).x);
+      return transformGridToScreenWidth(((Int2D) tuple2).x);
     }
     else if (tuple2 instanceof Float2D)
     {
@@ -237,7 +262,7 @@ public class Viewport
   {
     if (tuple2 instanceof Int2D)
     {
-      return transformGridToScreenHeight(((Int2D)tuple2).y);
+      return transformGridToScreenHeight(((Int2D) tuple2).y);
     }
     else if (tuple2 instanceof Float2D)
     {
@@ -251,7 +276,7 @@ public class Viewport
   {
     if (tuple2 instanceof Int2D)
     {
-      return transformGridToScreenSpaceX(((Int2D)tuple2).x);
+      return transformGridToScreenSpaceX(((Int2D) tuple2).x);
     }
     else if (tuple2 instanceof Float2D)
     {
@@ -265,7 +290,7 @@ public class Viewport
   {
     if (tuple2 instanceof Int2D)
     {
-      return transformGridToScreenSpaceY(((Int2D)tuple2).y);
+      return transformGridToScreenSpaceY(((Int2D) tuple2).y);
     }
     else if (tuple2 instanceof Float2D)
     {

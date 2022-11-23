@@ -314,7 +314,8 @@ public class SimulatorEditor
   {
     mouseButtons.wheel(wheelRotation);
     int rotation = mouseButtons.getRotation();
-    viewport.zoom((float) rotation / 10.0f);
+
+    viewport.zoomTo(mousePosition.get(), (float) rotation / 10.0f);
 
     mousePositionOnGridChanged();
   }

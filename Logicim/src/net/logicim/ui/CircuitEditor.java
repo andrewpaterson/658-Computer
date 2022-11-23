@@ -100,16 +100,16 @@ public class CircuitEditor
 
   public void remove(TraceView traceView)
   {
-    ConnectionView startConnection = traceView.getStartConnection();
-    ConnectionView endConnection = traceView.getEndConnection();
+      ConnectionView startConnection = traceView.getStartConnection();
+      ConnectionView endConnection = traceView.getEndConnection();
 
-    disconnectTraceNet(findConnections(startConnection));
-    disconnectTraceNet(findConnections(endConnection));
+      disconnectTraceNet(findConnections(startConnection));
+      disconnectTraceNet(findConnections(endConnection));
 
-    startConnection.remove(traceView);
-    endConnection.remove(traceView);
-    traceView.removed();
-    traceViews.remove(traceView);
+      startConnection.remove(traceView);
+      endConnection.remove(traceView);
+      traceView.removed();
+      traceViews.remove(traceView);
   }
 
   public void disconnectTraceNet(Set<ConnectionView> connectionsNet)
@@ -573,13 +573,16 @@ public class CircuitEditor
 
   public void deleteTrace(TraceView traceView)
   {
-    ConnectionView startConnection = traceView.getStartConnection();
-    ConnectionView endConnection = traceView.getEndConnection();
+    if (!traceView.isRemoved())
+    {
+      ConnectionView startConnection = traceView.getStartConnection();
+      ConnectionView endConnection = traceView.getEndConnection();
 
-    remove(traceView);
+      remove(traceView);
 
-    mergeAndConnect(startConnection);
-    mergeAndConnect(endConnection);
+      mergeAndConnect(startConnection);
+      mergeAndConnect(endConnection);
+    }
   }
 
   protected void mergeAndConnect(ConnectionView startConnection)

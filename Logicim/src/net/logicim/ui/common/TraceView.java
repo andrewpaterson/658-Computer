@@ -330,5 +330,10 @@ public class TraceView
       return new ArrayList<>();
     }
   }
+
+  public boolean isRemoved()
+  {
+    return startConnection == null || endConnection == null;
+  }
 }
 

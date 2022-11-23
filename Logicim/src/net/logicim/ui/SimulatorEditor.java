@@ -26,6 +26,7 @@ import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -507,18 +508,53 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
-    if (hoverTraceView != null)
+    if (hoverConnectionView != null)
     {
-      circuitEditor.deleteTrace(hoverTraceView);
-      hoverTraceView = null;
-      hoverConnectionView = null;
+      if (hoverTraceView != null)
+      {
+        if (!hoverConnectionView.isConcrete())
+        {
+          circuitEditor.deleteTrace(hoverTraceView);
+        }
+        else
+        {
+          List<ComponentView> connectedComponents = new ArrayList<>(hoverConnectionView.getConnectedComponents());
+          for (ComponentView componentView : connectedComponents)
+          {
+            if (componentView instanceof TraceView)
+            {
+              circuitEditor.deleteTrace((TraceView) componentView);
+            }
+          }
+        }
+      }
+      else
+      {
+        List<ComponentView> connectedComponents = new ArrayList<>(hoverConnectionView.getConnectedComponents());
+        boolean traceDeleted = false;
+        for (ComponentView componentView : connectedComponents)
+        {
+          if (componentView instanceof TraceView)
+          {
+            traceDeleted = true;
+            circuitEditor.deleteTrace((TraceView) componentView);
+          }
+        }
+
+        if (!traceDeleted && (hoverDiscreteView != null))
+        {
+          circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
+        }
+      }
     }
     else if (hoverDiscreteView != null)
     {
       circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
-      hoverDiscreteView = null;
-      hoverConnectionView = null;
     }
+
+    hoverDiscreteView = null;
+    hoverConnectionView = null;
+    hoverTraceView = null;
 
     mousePositionOnGridChanged();
 

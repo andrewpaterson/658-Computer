@@ -1,8 +1,8 @@
 package net.logicim.domain.common.port.event;
 
-import net.logicim.data.common.EventData;
 import net.logicim.data.port.event.DriveEventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 
 public class DriveEvent
@@ -10,9 +10,15 @@ public class DriveEvent
 {
   protected float voltage;
 
-  public DriveEvent(Port port, long time, float voltage)
+  public DriveEvent(Port port, long time, float voltage, Timeline timeline)
   {
-    super(port, time);
+    super(port, timeline.getTime() + time, timeline);
+    this.voltage = voltage;
+  }
+
+  public DriveEvent(Port port, long time, long id, float voltage, Timeline timeline)
+  {
+    super(port, time, id, timeline);
     this.voltage = voltage;
   }
 
@@ -39,7 +45,7 @@ public class DriveEvent
   @Override
   public DriveEventData save()
   {
-    return new DriveEventData(time, voltage);
+    return new DriveEventData(time, id, voltage);
   }
 }
 

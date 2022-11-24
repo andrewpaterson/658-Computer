@@ -4,6 +4,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -20,7 +21,12 @@ public class OrGate
   }
 
   @Override
-  public ClockOscillatorState simulationStarted(Simulation simulation)
+  public void simulationStarted(Simulation simulation)
+  {
+  }
+
+  @Override
+  public State createState(Simulation simulation)
   {
     return null;
   }

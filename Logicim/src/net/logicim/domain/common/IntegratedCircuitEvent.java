@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
 
@@ -8,9 +9,16 @@ public abstract class IntegratedCircuitEvent
 {
   protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
 
-  public IntegratedCircuitEvent(long time, IntegratedCircuit<?, ?> integratedCircuit)
+  public IntegratedCircuitEvent(long time, IntegratedCircuit<?, ?> integratedCircuit, Timeline timeline)
   {
-    super(time);
+    super(time, timeline);
+    this.integratedCircuit = integratedCircuit;
+    this.integratedCircuit.add(this);
+  }
+
+  public IntegratedCircuitEvent(long time, long id, IntegratedCircuit<?, ?> integratedCircuit, Timeline timeline)
+  {
+    super(time, id, timeline);
     this.integratedCircuit = integratedCircuit;
     this.integratedCircuit.add(this);
   }
@@ -32,5 +40,8 @@ public abstract class IntegratedCircuitEvent
   {
     integratedCircuit.remove(this);
   }
+
+  @Override
+  public abstract IntegratedCircuitEventData<?> save();
 }
 

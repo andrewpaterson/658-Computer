@@ -42,6 +42,7 @@ public class BufferView
   {
     return new BufferData(position,
                           rotation,
+                          saveEvents(),
                           savePorts());
   }
 }

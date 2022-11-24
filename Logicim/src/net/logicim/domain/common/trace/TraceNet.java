@@ -23,6 +23,16 @@ public class TraceNet
     nextId++;
   }
 
+  public TraceNet(long id)
+  {
+    connectedPorts = new LinkedHashSet<>();
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
+  }
+
   public float getVoltage(long time)
   {
     float drivenVoltage = 0;
@@ -114,6 +124,11 @@ public class TraceNet
   public long getId()
   {
     return id;
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1L;
   }
 }
 

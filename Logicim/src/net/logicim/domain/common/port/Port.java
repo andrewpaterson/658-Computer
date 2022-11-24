@@ -215,7 +215,7 @@ public class Port
 
       if (transitionTime > 0)
       {
-        simulation.getTimeline().createPortTransitionEvent(this, transitionTime, transitionVoltage);
+        new TransitionEvent(this, transitionVoltage, transitionTime, simulation.getTimeline());
         return true;
       }
     }
@@ -266,7 +266,7 @@ public class Port
 
     if (traceValid)
     {
-      simulation.getTimeline().createPortTransitionEvent(this, 1, transitionVoltage);
+      new TransitionEvent(this, transitionVoltage, (long) 1, simulation.getTimeline());
     }
   }
 
@@ -373,6 +373,11 @@ public class Port
   public PortOutputEvent getOutput()
   {
     return output;
+  }
+
+  public void setOutput(PortOutputEvent output)
+  {
+    this.output = output;
   }
 
   public long getTraceId()

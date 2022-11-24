@@ -1,7 +1,6 @@
 package net.logicim.domain.common.port.event;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.data.common.EventData;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
@@ -17,12 +16,20 @@ public class SlewEvent
   protected float endVoltage;    // @ time + slewTime
   protected long slewTime;
 
-  public SlewEvent(Port port, float endVoltage, long time)
+  public SlewEvent(Port port, float endVoltage, long time, Timeline timeline)
   {
-    super(port, time);
+    super(port, timeline.getTime() + time, timeline);
     this.startVoltage = Float.NaN;
     this.endVoltage = endVoltage;
     this.slewTime = -1;
+  }
+
+  public SlewEvent(Port port, long time, long id, float startVoltage, float endVoltage, long slewTime, Timeline timeline)
+  {
+    super(port, time, id, timeline);
+    this.startVoltage = startVoltage;
+    this.endVoltage = endVoltage;
+    this.slewTime = slewTime;
   }
 
   @Override
@@ -35,7 +42,7 @@ public class SlewEvent
   @Override
   public SlewEventData save()
   {
-    return new SlewEventData(time, startVoltage, endVoltage, slewTime);
+    return new SlewEventData(time, id, startVoltage, endVoltage, slewTime);
   }
 
   public long getEndTime()
@@ -119,7 +126,7 @@ public class SlewEvent
       }
     }
 
-    return timeline.createPortDriveEvent(port, this);
+    return new DriveEvent(port, getSlewTime(), getEndVoltage(), timeline);
   }
 
   protected float calculateStartVoltage(long nowTime, VoltageConfiguration voltageConfiguration)

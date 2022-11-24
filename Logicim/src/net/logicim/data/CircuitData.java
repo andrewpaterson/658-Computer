@@ -7,9 +7,9 @@ import java.util.List;
 
 public class CircuitData
 {
-  protected TimelineData timelineData;
-  protected List<IntegratedCircuitData> integratedCircuits;
-  protected List<TraceData> traces;
+  public TimelineData timelineData;
+  public List<IntegratedCircuitData> integratedCircuits;
+  public List<TraceData> traces;
 
   public CircuitData(TimelineData timelineData,
                      List<IntegratedCircuitData> integratedCircuits,
@@ -18,6 +18,21 @@ public class CircuitData
     this.timelineData = timelineData;
     this.integratedCircuits = integratedCircuits;
     this.traces = traces;
+  }
+
+  public TimelineData getTimelineData()
+  {
+    return timelineData;
+  }
+
+  public List<IntegratedCircuitData> getIntegratedCircuits()
+  {
+    return integratedCircuits;
+  }
+
+  public List<TraceData> getTraces()
+  {
+    return traces;
   }
 }
 

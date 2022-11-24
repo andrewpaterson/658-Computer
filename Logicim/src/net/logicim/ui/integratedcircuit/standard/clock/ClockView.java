@@ -2,7 +2,7 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
-import net.logicim.data.port.PortData;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -12,7 +12,6 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
-import java.util.List;
 
 import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
@@ -117,6 +116,7 @@ public class ClockView
                          rotation,
                          frequency,
                          integratedCircuit.getState().getState(),
+                         saveEvents(),
                          savePorts());
   }
 }

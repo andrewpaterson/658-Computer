@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.TickEvent;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
@@ -44,11 +45,15 @@ public class Constant
   }
 
   @Override
-  public State simulationStarted(Simulation simulation)
+  public State createState(Simulation simulation)
   {
-    simulation.getTimeline().createTickEvent(propagationTime, this);
-
     return new ConstantState(this, defaultValue);
+  }
+
+  @Override
+  public void simulationStarted(Simulation simulation)
+  {
+    new TickEvent(propagationTime, this, simulation.getTimeline());
   }
 }
 

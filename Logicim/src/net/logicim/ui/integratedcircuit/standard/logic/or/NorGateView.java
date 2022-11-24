@@ -1,7 +1,6 @@
 package net.logicim.ui.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.standard.logic.or.NorGateData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.NorGate;
@@ -44,6 +43,7 @@ public class NorGateView
   {
     return new NorGateData(position,
                            rotation,
+                           saveEvents(),
                            savePorts(),
                            inputCount);
   }

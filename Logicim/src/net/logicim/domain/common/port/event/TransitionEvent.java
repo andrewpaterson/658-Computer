@@ -1,8 +1,8 @@
 package net.logicim.domain.common.port.event;
 
-import net.logicim.data.common.EventData;
 import net.logicim.data.port.event.TransitionEventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 
 public class TransitionEvent
@@ -10,9 +10,15 @@ public class TransitionEvent
 {
   protected float voltage;
 
-  public TransitionEvent(Port port, long time, float voltage)
+  public TransitionEvent(Port port, float voltage, long time, Timeline timeline)
   {
-    super(port, time);
+    super(port, timeline.getTime() + time, timeline);
+    this.voltage = voltage;
+  }
+
+  public TransitionEvent(Port port, float voltage, long time, long id, Timeline timeline)
+  {
+    super(port, time, id, timeline);
     this.voltage = voltage;
   }
 
@@ -27,7 +33,7 @@ public class TransitionEvent
   @Override
   public TransitionEventData save()
   {
-    return new TransitionEventData(time, voltage);
+    return new TransitionEventData(time, id, voltage);
   }
 }
 

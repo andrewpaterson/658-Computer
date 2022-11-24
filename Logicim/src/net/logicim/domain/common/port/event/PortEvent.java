@@ -1,10 +1,10 @@
 package net.logicim.domain.common.port.event;
 
-import net.logicim.data.common.EventData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Event;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 
 public abstract class PortEvent
@@ -12,12 +12,18 @@ public abstract class PortEvent
 {
   protected Port port;
 
-  public PortEvent(Port port, long time)
+  public PortEvent(Port port, long time, Timeline timeline)
   {
-    super(time);
+    super(time, timeline);
     this.port = port;
     this.port.add(this);
+  }
 
+  public PortEvent(Port port, long time, long id, Timeline timeline)
+  {
+    super(time, id, timeline);
+    this.port = port;
+    this.port.add(this);
   }
 
   public Port getPort()
@@ -42,6 +48,6 @@ public abstract class PortEvent
   }
 
   @Override
-  public abstract PortEventData save();
+  public abstract PortEventData<?> save();
 }
 

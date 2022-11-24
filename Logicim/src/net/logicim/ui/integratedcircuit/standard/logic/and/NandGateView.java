@@ -40,10 +40,11 @@ public class NandGateView
   }
 
   @Override
-  public IntegratedCircuitData save()
+  public NandGateData save()
   {
     return new NandGateData(position,
                             rotation,
+                            saveEvents(),
                             savePorts(),
                             inputCount);
   }

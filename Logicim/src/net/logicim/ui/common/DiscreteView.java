@@ -3,7 +3,6 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -181,10 +180,6 @@ public abstract class DiscreteView
     invalidateCache();
   }
 
-  public void enable(Simulation simulation)
-  {
-  }
-
   @Override
   public void add(ShapeView shapeView)
   {
@@ -214,5 +209,9 @@ public abstract class DiscreteView
   public abstract boolean isEnabled();
 
   public abstract List<PortView> getPorts();
+
+  public abstract void enable(Simulation simulation);
+
+  public abstract void simulationStarted(Simulation simulation);
 }
 

@@ -1,6 +1,5 @@
 package net.logicim.domain.common;
 
-import net.logicim.data.common.EventData;
 import net.logicim.data.integratedcircuit.event.TickEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
@@ -8,9 +7,14 @@ import net.logicim.domain.common.state.State;
 public class TickEvent
     extends IntegratedCircuitEvent
 {
-  public TickEvent(long time, IntegratedCircuit<?, ?> integratedCircuit)
+  public TickEvent(long time, IntegratedCircuit<?, ?> integratedCircuit, Timeline timeline)
   {
-    super(time, integratedCircuit);
+    super(timeline.getTime() + time, integratedCircuit, timeline);
+  }
+
+  public TickEvent(long time, long id, IntegratedCircuit<?, ?> integratedCircuit, Timeline timeline)
+  {
+    super(time, id, integratedCircuit, timeline);
   }
 
   public IntegratedCircuit<? extends Pins, ? extends State> getIntegratedCircuit()
@@ -21,7 +25,7 @@ public class TickEvent
   @Override
   public TickEventData save()
   {
-    return new TickEventData(time);
+    return new TickEventData(time, id);
   }
 
   @Override

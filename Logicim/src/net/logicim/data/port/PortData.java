@@ -1,17 +1,17 @@
 package net.logicim.data.port;
 
-import net.logicim.data.common.EventData;
+import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
 
 import java.util.List;
 
 public class PortData
 {
-  protected List<EventData> events;
-  protected PortOutputEventData output;
-  protected long traceId;
+  public List<PortEventData<?>> events;
+  public PortOutputEventData<?> output;
+  public long traceId;
 
-  public PortData(List<EventData> events, PortOutputEventData output, long traceId)
+  public PortData(List<PortEventData<?>> events, PortOutputEventData<?> output, long traceId)
   {
     this.events = events;
     this.output = output;

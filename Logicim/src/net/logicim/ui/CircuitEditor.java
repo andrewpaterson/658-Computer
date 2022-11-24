@@ -8,9 +8,12 @@ import net.logicim.data.CircuitData;
 import net.logicim.data.TimelineData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.trace.TraceData;
+import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -644,7 +647,7 @@ public class CircuitEditor
     }
 
     Set<TraceView> mergedTraces = new LinkedHashSet<>();
-    if ((result != null) && (result.size() >= 1))
+    if ((null != result) && (result.size() >= 1))
     {
       for (TraceView traceView : result)
       {
@@ -845,8 +848,60 @@ public class CircuitEditor
 
   public void load(CircuitData circuitData)
   {
-    circuit = new Circuit();
-    simulation = circuit.resetSimulation();
+    simulation.getTimeline().load(circuitData.timelineData);
+
+    TraceLoader traceLoader = new TraceLoader();
+
+    for (TraceData traceData : circuitData.traces)
+    {
+      traceData.create(this, traceLoader);
+    }
+
+    for (IntegratedCircuitData<?> integratedCircuitData : circuitData.integratedCircuits)
+    {
+      integratedCircuitData.create(this, traceLoader);
+    }
+  }
+
+  public void createAndConnectDiscreteView(DiscreteView discreteView)
+  {
+    List<PortView> ports = discreteView.getPorts();
+    for (PortView portView : ports)
+    {
+      Int2D portPosition = portView.getGridPosition();
+      ConnectionView connectionView = getOrAddConnection(portPosition, discreteView);
+      portView.setConnection(connectionView);
+      connectConnections(connectionView);
+    }
+    discreteView.enable(simulation);
+    discreteView.simulationStarted(simulation);
+  }
+
+  public void createConnectionViews(DiscreteView discreteView)
+  {
+    List<PortView> ports = discreteView.getPorts();
+    for (PortView portView : ports)
+    {
+      Int2D portPosition = portView.getGridPosition();
+      ConnectionView connectionView = getOrAddConnection(portPosition, discreteView);
+      portView.setConnection(connectionView);
+    }
+    discreteView.enable(simulation);
+  }
+
+  public void fireTraceEvents(DiscreteView placementView)
+  {
+    List<PortView> ports = placementView.getPorts();
+    for (PortView portView : ports)
+    {
+      Port port = portView.getPort();
+      port.traceConnected(simulation);
+    }
+  }
+
+  public Timeline getTimeline()
+  {
+    return simulation.getTimeline();
   }
 }
 

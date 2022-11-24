@@ -53,6 +53,7 @@ public class SimulatorEditor
   protected KeyboardButtons keyboardButtons;
 
   protected CircuitEditor circuitEditor;
+
   protected DiscreteView placementView;
 
   protected TraceView hoverTraceView;
@@ -164,21 +165,8 @@ public class SimulatorEditor
 
   private void executePlacement(DiscreteView placementView)
   {
-    List<PortView> ports = placementView.getPorts();
-    for (PortView portView : ports)
-    {
-      Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, placementView);
-      portView.setConnection(connectionView);
-      circuitEditor.connectConnections(connectionView);
-    }
-    placementView.enable(circuitEditor.simulation);
-
-    for (PortView portView : ports)
-    {
-      Port port = portView.getPort();
-      port.traceConnected(circuitEditor.simulation);
-    }
+    circuitEditor.createAndConnectDiscreteView(placementView);
+    circuitEditor.fireTraceEvents(placementView);
 
     circuitEditor.validateConsistency();
   }
@@ -585,6 +573,18 @@ public class SimulatorEditor
   public CircuitData save()
   {
     return circuitEditor.save();
+  }
+
+  public void load(CircuitData circuitData)
+  {
+    placementView = null;
+    hoverTraceView = null;
+    hoverDiscreteView = null;
+    hoverConnectionView = null;
+    wirePull = null;
+
+    circuitEditor = new CircuitEditor();
+    circuitEditor.load(circuitData);
   }
 }
 

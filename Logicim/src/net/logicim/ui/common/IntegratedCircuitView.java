@@ -1,11 +1,14 @@
 package net.logicim.ui.common;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
 
@@ -102,8 +105,13 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void enable(Simulation simulation)
   {
-    super.enable(simulation);
     integratedCircuit.enable(simulation);
+  }
+
+  @Override
+  public void simulationStarted(Simulation simulation)
+  {
+    integratedCircuit.simulationStarted(simulation);
   }
 
   @Override
@@ -211,7 +219,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
 
   protected abstract IC createIntegratedCircuit();
 
-  public abstract IntegratedCircuitData save();
+  public abstract IntegratedCircuitData<?> save();
 
   protected List<PortData> savePorts()
   {
@@ -222,6 +230,23 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       portDatas.add(portData);
     }
     return portDatas;
+  }
+
+  public PortView getPort(int index)
+  {
+    return ports.get(index);
+  }
+
+  protected List<IntegratedCircuitEventData<?>> saveEvents()
+  {
+    LinkedList<IntegratedCircuitEvent> integratedCircuitEvents = integratedCircuit.getEvents();
+    ArrayList<IntegratedCircuitEventData<?>> eventDatas = new ArrayList<>(integratedCircuitEvents.size());
+    for (IntegratedCircuitEvent event : integratedCircuitEvents)
+    {
+      IntegratedCircuitEventData<?> integratedCircuitEventData = event.save();
+      eventDatas.add(integratedCircuitEventData);
+    }
+    return eventDatas;
   }
 }
 

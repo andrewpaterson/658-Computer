@@ -1,11 +1,13 @@
 package net.logicim.data.port.event;
 
-public class PortInputEventData
-    extends PortEventData
+import net.logicim.domain.common.port.event.PortInputEvent;
+
+public abstract class PortInputEventData<E extends PortInputEvent>
+    extends PortEventData<E>
 {
-  public PortInputEventData(long time)
+  public PortInputEventData(long time, long id)
   {
-    super(time);
+    super(time, id);
   }
 }
 

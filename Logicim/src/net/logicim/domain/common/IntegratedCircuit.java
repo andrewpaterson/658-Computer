@@ -117,13 +117,15 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
       if (!isStateless())
       {
-        State state = simulationStarted(simulation);
+        State state = createState(simulation);
         setState(state);
       }
     }
   }
 
-  public abstract State simulationStarted(Simulation simulation);
+  public abstract State createState(Simulation simulation);
+
+  public abstract void simulationStarted(Simulation simulation);
 
   public abstract void inputTransition(Simulation simulation, Port port);
 
@@ -142,6 +144,11 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   public void add(IntegratedCircuitEvent event)
   {
     events.add(event);
+  }
+
+  public LinkedList<IntegratedCircuitEvent> getEvents()
+  {
+    return events;
   }
 
   public void remove(IntegratedCircuitEvent event)

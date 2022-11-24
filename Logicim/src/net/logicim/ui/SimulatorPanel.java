@@ -11,6 +11,8 @@ import static net.logicim.domain.common.Units.nS_IN_mS;
 public class SimulatorPanel
     extends JPanel
 {
+  public static CircuitData savedData;  //Delete me, please.
+
   protected Image backBufferImage;
   protected Graphics2D backBuffer;
   protected boolean running;
@@ -155,12 +157,12 @@ public class SimulatorPanel
 
   public void saveSimulation()
   {
-    CircuitData circuitData = simulatorEditor.save();
+    savedData = simulatorEditor.save();
   }
 
   public void loadSimulation()
   {
-
+    simulatorEditor.load(savedData);
   }
 }
 

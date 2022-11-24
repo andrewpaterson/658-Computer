@@ -126,7 +126,7 @@ public class VoltageConfiguration
       holdTime = (lowToHighHoldTime + highToLowHoldTime) / 2;
     }
 
-    return timeline.createPortSlewEvent(port, holdTime, outVoltage);
+    return new SlewEvent(port, outVoltage, holdTime, timeline);
   }
 
   public float calculateStartVoltage(float portVoltage)

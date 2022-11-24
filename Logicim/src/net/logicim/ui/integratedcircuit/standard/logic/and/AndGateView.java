@@ -43,6 +43,7 @@ public class AndGateView
   {
     return new AndGateData(position,
                            rotation,
+                           saveEvents(),
                            savePorts(),
                            inputCount);
   }

@@ -1,11 +1,21 @@
 package net.logicim.data.integratedcircuit.event;
 
+import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.TickEvent;
+import net.logicim.domain.common.Timeline;
+
 public class TickEventData
-    extends IntegratedCircuitEventData
+    extends IntegratedCircuitEventData<TickEvent>
 {
-  public TickEventData(long time)
+  public TickEventData(long time, long id)
   {
-    super(time);
+    super(time, id);
+  }
+
+  @Override
+  public TickEvent create(IntegratedCircuit<?, ?> integratedCircuit, Timeline timeline)
+  {
+    return new TickEvent(time, id, integratedCircuit, timeline);
   }
 }
 

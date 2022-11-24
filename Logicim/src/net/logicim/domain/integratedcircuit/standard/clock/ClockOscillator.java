@@ -5,6 +5,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.LongTime;
+import net.logicim.domain.common.TickEvent;
 import net.logicim.domain.common.port.Port;
 
 public class ClockOscillator
@@ -46,16 +47,20 @@ public class ClockOscillator
       fullTicks++;
     }
 
-    simulation.getTimeline().createTickEvent(halfCycleTime, this);
+    new TickEvent(halfCycleTime, this, simulation.getTimeline());
     pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
   }
 
   @Override
-  public ClockOscillatorState simulationStarted(Simulation simulation)
+  public ClockOscillatorState createState(Simulation simulation)
   {
-    simulation.getTimeline().createTickEvent(initialisationTime, this);
-
     return new ClockOscillatorState(this);
+  }
+
+  @Override
+  public void simulationStarted(Simulation simulation)
+  {
+    new TickEvent(initialisationTime, this, simulation.getTimeline());
   }
 
   public long getHalfCycleTime()

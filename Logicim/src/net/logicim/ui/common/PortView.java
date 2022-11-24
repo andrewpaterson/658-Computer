@@ -3,7 +3,6 @@ package net.logicim.ui.common;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.common.EventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
@@ -185,14 +184,15 @@ public class PortView
   {
     PortOutputEvent portOutputEvent = port.getOutput();
     LinkedList<PortEvent> portEvents = port.getEvents();
-    ArrayList<EventData> eventDatas = new ArrayList<>(portEvents.size());
-    PortOutputEventData portOutputEventData = null;
+    ArrayList<PortEventData<?>> eventDatas = new ArrayList<>(portEvents.size());
+    PortOutputEventData<?> portOutputEventData = null;
     for (PortEvent event : portEvents)
     {
-      PortEventData portEventData = event.save();
+      PortEventData<?> portEventData = event.save();
+      eventDatas.add(portEventData);
       if (portOutputEvent == event)
       {
-        portOutputEventData = (PortOutputEventData) portEventData;
+        portOutputEventData = (PortOutputEventData<?>) portEventData;
       }
     }
     if (portOutputEventData == null)

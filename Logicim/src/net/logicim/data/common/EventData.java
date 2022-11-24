@@ -1,12 +1,16 @@
 package net.logicim.data.common;
 
-public class EventData
-{
-  protected long time;
+import net.logicim.domain.common.Event;
 
-  public EventData(long time)
+public abstract class EventData<E extends Event>
+{
+  public long time;
+  public long id;
+
+  public EventData(long time, long id)
   {
     this.time = time;
+    this.id = id;
   }
 }
 

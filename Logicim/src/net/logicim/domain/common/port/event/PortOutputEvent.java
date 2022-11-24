@@ -2,14 +2,20 @@ package net.logicim.domain.common.port.event;
 
 import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 
 public abstract class PortOutputEvent
     extends PortEvent
 {
-  public PortOutputEvent(Port port, long time)
+  public PortOutputEvent(Port port, long time, Timeline timeline)
   {
-    super(port, time);
+    super(port, time, timeline);
+  }
+
+  public PortOutputEvent(Port port, long time, long id, Timeline timeline)
+  {
+    super(port, time, id, timeline);
   }
 
   public abstract float getVoltage(long time);
@@ -21,6 +27,6 @@ public abstract class PortOutputEvent
   }
 
   @Override
-  public abstract PortOutputEventData save();
+  public abstract PortOutputEventData<?> save();
 }
 

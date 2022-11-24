@@ -5,10 +5,6 @@ import net.logicim.common.collection.redblacktree.RedBlackNode;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
 import net.logicim.data.TimelineData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.event.DriveEvent;
-import net.logicim.domain.common.port.event.SlewEvent;
-import net.logicim.domain.common.port.event.TransitionEvent;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -33,40 +29,21 @@ public class Timeline
     eventTime = 0;
   }
 
-  public SlewEvent createPortSlewEvent(Port port, long holdTime, float outVoltage)
+  public void addFutureEvent(Event event)
   {
-    SlewEvent event = new SlewEvent(port, outVoltage, time + holdTime);
-    addEvent(event);
-    return event;
+    boolean b = addEvent(event);
+    if (!b)
+    {
+      throw new SimulatorException("Cannot add event in the past.  Event time [" + timeToNanoseconds(eventTime) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+    }
   }
 
-  public DriveEvent createPortDriveEvent(Port port, SlewEvent slewEvent)
-  {
-    DriveEvent event = new DriveEvent(port, slewEvent.getEndTime(), slewEvent.getEndVoltage());
-    addEvent(event);
-    return event;
-  }
-
-  public TransitionEvent createPortTransitionEvent(Port port, long transitionTime, float voltage)
-  {
-    TransitionEvent event = new TransitionEvent(port, time + transitionTime, voltage);
-    addEvent(event);
-    return event;
-  }
-
-  public TickEvent createTickEvent(long propagationDelay, IntegratedCircuit<?, ?> integratedCircuit)
-  {
-    TickEvent event = new TickEvent(this.time + propagationDelay, integratedCircuit);
-    addEvent(event);
-    return event;
-  }
-
-  private void addEvent(Event event)
+  public boolean addEvent(Event event)
   {
     long eventTime = event.getTime();
     if (eventTime < time)
     {
-      throw new SimulatorException("Cannot add event in the past.  Event time [" + timeToNanoseconds(eventTime) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+      return false;
     }
     SimultaneousEvents simultaneousEvents = events.find(eventTime);
     if (simultaneousEvents == null)
@@ -75,6 +52,7 @@ public class Timeline
       events.add(simultaneousEvents);
     }
     simultaneousEvents.add(event);
+    return true;
   }
 
   public void run()
@@ -193,6 +171,13 @@ public class Timeline
   public TimelineData save()
   {
     return new TimelineData(time, previousEventTime, eventTime);
+  }
+
+  public void load(TimelineData timelineData)
+  {
+    this.time = timelineData.time;
+    this.previousEventTime = timelineData.previousEventTime;
+    this.eventTime = timelineData.eventTime;
   }
 }
 

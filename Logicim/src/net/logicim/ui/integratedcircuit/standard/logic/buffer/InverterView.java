@@ -41,6 +41,7 @@ public class InverterView
   {
     return new InverterData(position,
                             rotation,
+                            saveEvents(),
                             savePorts());
   }
 }

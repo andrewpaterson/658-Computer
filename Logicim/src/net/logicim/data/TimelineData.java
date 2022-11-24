@@ -2,9 +2,9 @@ package net.logicim.data;
 
 public class TimelineData
 {
-  protected long time;
-  protected long previousEventTime;
-  protected long eventTime;
+  public long time;
+  public long previousEventTime;
+  public long eventTime;
 
   public TimelineData(long time, long previousEventTime, long eventTime)
   {

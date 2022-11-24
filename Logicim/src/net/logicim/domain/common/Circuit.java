@@ -16,31 +16,13 @@ public class Circuit
     integratedCircuits = new ArrayList<>();
   }
 
-  public void setSimulation(Simulation simulation)
-  {
-    for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
-    {
-      if (integratedCircuit.isEnabled())
-      {
-        if (!integratedCircuit.isStateless())
-        {
-          State state = integratedCircuit.getState();
-          if (state == null)
-          {
-            state = integratedCircuit.simulationStarted(simulation);
-          }
-          integratedCircuit.setState(state);
-        }
-      }
-    }
-  }
-
   public Simulation resetSimulation()
   {
     Simulation simulation = new Simulation();
     for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
     {
       integratedCircuit.reset(simulation);
+      integratedCircuit.simulationStarted(simulation);
     }
     return simulation;
   }

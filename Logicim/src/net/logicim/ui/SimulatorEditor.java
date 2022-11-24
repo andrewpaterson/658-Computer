@@ -149,14 +149,12 @@ public class SimulatorEditor
     {
       if (placementView != null)
       {
-        circuitEditor.ensureSimulation();
         executePlacement(placementView);
         placementView = null;
         mousePositionOnGridChanged();
       }
       else if (wirePull != null)
       {
-        circuitEditor.ensureSimulation();
         executeWirePull(wirePull);
         wirePull = null;
         mousePositionOnGridChanged();

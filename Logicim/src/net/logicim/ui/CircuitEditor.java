@@ -29,6 +29,7 @@ public class CircuitEditor
   public CircuitEditor()
   {
     circuit = new Circuit();
+    simulation = circuit.resetSimulation();
     integratedCircuitViews = new LinkedHashSet<>();
     traceViews = new LinkedHashSet<>();
   }
@@ -49,16 +50,7 @@ public class CircuitEditor
 
   protected long getTime()
   {
-    long time;
-    if (simulation != null)
-    {
-      time = simulation.getTime();
-    }
-    else
-    {
-      time = -1;
-    }
-    return time;
+    return simulation.getTime();
   }
 
   public Circuit getCircuit()
@@ -149,30 +141,18 @@ public class CircuitEditor
 
   public Simulation reset()
   {
-    simulation = null;
-    return circuit.resetSimulation();
+    simulation = circuit.resetSimulation();
+    return simulation;
   }
 
   public void runSimultaneous()
   {
-    ensureSimulation();
-
     simulation.runSimultaneous();
   }
 
   public void runToTime(long timeForward)
   {
-    ensureSimulation();
-
     simulation.runToTime(timeForward);
-  }
-
-  public void ensureSimulation()
-  {
-    if (simulation == null)
-    {
-      simulation = circuit.resetSimulation();
-    }
   }
 
   public DiscreteView getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
@@ -861,6 +841,12 @@ public class CircuitEditor
     return new CircuitData(timelineData,
                            integratedCircuitDatas,
                            traceDatas);
+  }
+
+  public void load(CircuitData circuitData)
+  {
+    circuit = new Circuit();
+    simulation = circuit.resetSimulation();
   }
 }
 

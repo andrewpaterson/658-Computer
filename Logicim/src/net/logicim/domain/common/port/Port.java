@@ -6,7 +6,6 @@ import net.logicim.common.collection.linkedlist.LinkedListIterator;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.TransmissionState;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static net.logicim.domain.common.TransmissionState.*;
 import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
 public class Port
@@ -24,7 +22,6 @@ public class Port
   protected PortType type;
   protected Pins pins;
   protected String name;
-  protected TransmissionState state;
   protected VoltageConfiguration voltageConfiguration;
 
   protected LinkedList<PortEvent> events;
@@ -40,22 +37,8 @@ public class Port
     this.pins = pins;
     this.name = name;
     this.voltageConfiguration = voltageConfiguration;
-    this.state = stateFromType(type);
     events = new LinkedList<>();
     pins.addPort(this);
-  }
-
-  private TransmissionState stateFromType(PortType type)
-  {
-    switch (type)
-    {
-      case Input:
-        return TransmissionState.Input;
-      case Output:
-        return TransmissionState.Output;
-      default:
-        return null;
-    }
   }
 
   public String getName()
@@ -112,80 +95,27 @@ public class Port
     return events;
   }
 
-  protected void throwNoOutputVoltageConfigurationException()
-  {
-    throw new SimulatorException("Cannot write an output value for port [" + getDescription() + "] without a voltage configuration.");
-  }
-
-  protected void throwNoInputVoltageConfigurationException()
-  {
-    throw new SimulatorException("Cannot read an input value for port [" + getDescription() + "] without an input voltage configuration.");
-  }
-
-  protected void throwCannotWriteToPortException()
-  {
-    throw new SimulatorException("Cannot write to Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-  }
-
-  protected void throwCannotReadFromPortException()
-  {
-    throw new SimulatorException("Cannot read from Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-  }
-
-  protected void throwCannotHighImpedancePortException()
-  {
-    throw new SimulatorException("Cannot high-impedance Port [" + getDescription() + "] in state [" + state.toEnumString() + "].");
-  }
-
   public void writeBool(Timeline timeline, boolean value)
   {
-    state = Output;
-
-    if (state.isOutput())
-    {
-      voltageConfiguration.createOutputEvent(timeline, this, voltageConfiguration.getVoltage(value));
-    }
-    else
-    {
-      throwCannotWriteToPortException();
-    }
+    voltageConfiguration.createOutputEvent(timeline, this, voltageConfiguration.getVoltage(value));
   }
 
   public void highImpedance(Timeline timeline)
   {
-    state = Impedance;
-
-    if (state.isImpedance())
-    {
-      voltageConfiguration.createHighImpedanceEvents(timeline, this);
-    }
-    else
-    {
-      throwCannotHighImpedancePortException();
-    }
+    voltageConfiguration.createHighImpedanceEvents(timeline, this);
   }
 
   public TraceValue readValue(long time)
   {
-    state = Input;
-
-    if (state.isInput())
+    if (trace != null)
     {
-      if (trace != null)
+      float voltage = trace.getVoltage(time);
+      if (!Float.isNaN(voltage))
       {
-        float voltage = trace.getVoltage(time);
-        if (!Float.isNaN(voltage))
-        {
-          return voltageConfiguration.getValue(voltage);
-        }
+        return voltageConfiguration.getValue(voltage);
       }
-      return Undriven;
     }
-    else
-    {
-      throwCannotReadFromPortException();
-    }
-    return null;
+    return Undriven;
   }
 
   public void disconnect(Simulation simulation)
@@ -397,16 +327,8 @@ public class Port
 
   public void writeUnsettled(Timeline timeline)
   {
-    if (state.isOutput())
-    {
-      float voltage = voltageConfiguration.getMidVoltageOut();
-      voltageConfiguration.createOutputEvent(timeline, this, voltage);
-    }
-    else
-    {
-      throwCannotWriteToPortException();
-    }
-
+    float voltage = voltageConfiguration.getMidVoltageOut();
+    voltageConfiguration.createOutputEvent(timeline, this, voltage);
   }
 
   public Set<Port> getConnectedPorts()

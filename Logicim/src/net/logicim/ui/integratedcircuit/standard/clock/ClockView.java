@@ -2,7 +2,6 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -112,8 +111,8 @@ public class ClockView
 
   public ClockData save()
   {
-    return new ClockData(position,
-                         rotation,
+    return new ClockData(toInt2DData(position),
+                         toRotationData(rotation),
                          frequency,
                          integratedCircuit.getState().getState(),
                          saveEvents(),

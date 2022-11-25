@@ -1,8 +1,8 @@
 package net.logicim.data.integratedcircuit.event;
 
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.event.TickEvent;
 
 public class TickEventData
     extends IntegratedCircuitEventData<TickEvent>

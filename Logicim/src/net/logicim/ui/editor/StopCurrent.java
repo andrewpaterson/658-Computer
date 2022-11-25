@@ -2,7 +2,8 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 
-public class StopCurrent extends SimulatorEditorAction
+public class StopCurrent
+    extends SimulatorEditorAction
 {
   public StopCurrent(SimulatorEditor editor)
   {

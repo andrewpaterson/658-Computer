@@ -2,6 +2,7 @@ package net.logicim.data.trace;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.SaveData;
+import net.logicim.data.common.Int2DData;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.TraceView;

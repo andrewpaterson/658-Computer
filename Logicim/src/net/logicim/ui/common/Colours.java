@@ -46,8 +46,8 @@ public class Colours
                             new Color(255, 255, 100), 50,
                             new Color(255, 255, 200), 70);
 
-     shapeBorder = Color.BLACK;
-     shapeFill = new Color(232, 232, 232);
+    shapeBorder = Color.BLACK;
+    shapeFill = new Color(232, 232, 232);
 
     portHover = new Color(0, 255, 0);
     viewHover = new Color(0, 255, 0);

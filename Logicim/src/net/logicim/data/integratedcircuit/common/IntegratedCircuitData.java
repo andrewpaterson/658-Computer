@@ -1,7 +1,8 @@
 package net.logicim.data.integratedcircuit.common;
 
-import net.logicim.common.type.Int2D;
 import net.logicim.data.SaveData;
+import net.logicim.data.common.Int2DData;
+import net.logicim.data.common.RotationData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
@@ -13,7 +14,6 @@ import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;
-import net.logicim.ui.common.Rotation;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,14 +22,14 @@ import java.util.Map;
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>>
     extends SaveData
 {
-  protected Int2D position;
-  protected Rotation rotation;
+  protected Int2DData position;
+  protected RotationData rotation;
 
   protected List<IntegratedCircuitEventData<?>> events;
   protected List<PortData> ports;
 
-  public IntegratedCircuitData(Int2D position,
-                               Rotation rotation,
+  public IntegratedCircuitData(Int2DData position,
+                               RotationData rotation,
                                List<IntegratedCircuitEventData<?>> events,
                                List<PortData> ports)
   {
@@ -92,7 +92,6 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   }
 
   public abstract ICV create(CircuitEditor circuitEditor, TraceLoader traceLoader);
-
 
 }
 

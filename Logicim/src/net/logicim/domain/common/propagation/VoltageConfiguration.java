@@ -51,7 +51,7 @@ public class VoltageConfiguration
       throw new SimulatorException("High voltage out must be greater than low voltage out.");
     }
 
-    if (highVoltageIn <- lowVoltageIn)
+    if (highVoltageIn < -lowVoltageIn)
     {
       throw new SimulatorException("High voltage in must be greater than low voltage out.");
     }

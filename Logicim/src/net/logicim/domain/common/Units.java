@@ -7,6 +7,6 @@ public class Units
   public static final float Hz = 1;
 
   public static int nS_IN_mS = 1000000;
-  public static int nS_IN_S =  1000000000;
+  public static int nS_IN_S = 1000000000;
 }
 

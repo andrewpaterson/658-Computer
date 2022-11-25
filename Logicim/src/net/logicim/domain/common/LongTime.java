@@ -8,7 +8,7 @@ public abstract class LongTime
 
   public static int timeToNanoseconds(long time)
   {
-    return (int)(time / timeGranularityInNanosecond);
+    return (int) (time / timeGranularityInNanosecond);
   }
 
   public static int nanosecondsToTime(int nanoseconds)
@@ -23,7 +23,7 @@ public abstract class LongTime
 
   public static long secondsToTime(float seconds)
   {
-    return nanosecondsToTime((long)((double) nS_IN_S * seconds));
+    return nanosecondsToTime((long) ((double) nS_IN_S * seconds));
   }
 
   public float timeToSeconds(long time)

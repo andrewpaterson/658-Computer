@@ -1,4 +1,4 @@
-package net.logicim.data.trace;
+package net.logicim.data.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.SaveData;

@@ -16,6 +16,7 @@ public class LineGridCache
     transformedEnd = start.clone();
     transformedStart = end.clone();
   }
+
   public void update(Tuple2 start, Tuple2 end, Rotation rotation, Tuple2 position)
   {
     update();

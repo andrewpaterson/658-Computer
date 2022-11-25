@@ -1,7 +1,6 @@
 package net.logicim.ui.input.action;
 
 import net.logicim.ui.editor.EditorAction;
-import net.logicim.ui.editor.SimulatorEditorAction;
 
 public class InputAction
 {

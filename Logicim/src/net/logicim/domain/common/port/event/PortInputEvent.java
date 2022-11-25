@@ -10,7 +10,7 @@ public abstract class PortInputEvent
 {
   public PortInputEvent(Port port, long time, Timeline timeline)
   {
-    super(port, time,timeline);
+    super(port, time, timeline);
   }
 
   public PortInputEvent(Port port, long time, long id, Timeline timeline)

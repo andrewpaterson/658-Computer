@@ -41,8 +41,8 @@ public class NorGateView
   @Override
   public NorGateData save()
   {
-    return new NorGateData(position,
-                           rotation,
+    return new NorGateData(toInt2DData(position),
+                           toRotationData(rotation),
                            saveEvents(),
                            savePorts(),
                            inputCount);

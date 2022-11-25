@@ -2,9 +2,9 @@ package net.logicim.domain.common.port.event;
 
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.event.Event;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.event.Event;
 import net.logicim.domain.common.port.Port;
 
 public abstract class PortEvent

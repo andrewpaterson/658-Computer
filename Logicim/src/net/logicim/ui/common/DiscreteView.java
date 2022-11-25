@@ -3,6 +3,8 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.common.Int2DData;
+import net.logicim.data.common.RotationData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -202,6 +204,16 @@ public abstract class DiscreteView
     {
       shape.invalidateCache();
     }
+  }
+
+  protected Int2DData toInt2DData(Int2D p)
+  {
+    return new Int2DData(p);
+  }
+
+  protected RotationData toRotationData(Rotation r)
+  {
+    return new RotationData(r);
   }
 
   public abstract PortView getPortInGrid(int x, int y);

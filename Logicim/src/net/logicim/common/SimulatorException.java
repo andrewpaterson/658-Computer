@@ -7,5 +7,10 @@ public class SimulatorException
   {
     super(s);
   }
+
+  public SimulatorException(String s, Object... p)
+  {
+    this(String.format(s, p));
+  }
 }
 

@@ -1,6 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.data.CircuitData;
+import net.logicim.file.LogicimFileWriter;
 import net.logicim.ui.input.event.*;
 
 import javax.swing.*;
@@ -158,6 +159,8 @@ public class SimulatorPanel
   public void saveSimulation()
   {
     savedData = simulatorEditor.save();
+    LogicimFileWriter fileWriter = new LogicimFileWriter();
+    fileWriter.writeXML(savedData);
   }
 
   public void loadSimulation()

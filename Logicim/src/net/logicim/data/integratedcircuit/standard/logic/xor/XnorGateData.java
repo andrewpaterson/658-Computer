@@ -26,11 +26,7 @@ public class XnorGateData
   @Override
   public XnorGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    XnorGateView xnorGateView = new XnorGateView(circuitEditor, inputCount, position, rotation);
-    circuitEditor.createConnectionViews(xnorGateView);
-    loadEvents(circuitEditor, xnorGateView);
-    loadPorts(circuitEditor, traceLoader, xnorGateView);
-    return xnorGateView;
+    return new XnorGateView(circuitEditor, inputCount, position, rotation);
   }
 }
 

@@ -26,11 +26,7 @@ public class NandGateData
   @Override
   public NandGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    NandGateView nandGateView = new NandGateView(circuitEditor, inputCount, position, rotation);
-    circuitEditor.createConnectionViews(nandGateView);
-    loadEvents(circuitEditor, nandGateView);
-    loadPorts(circuitEditor, traceLoader, nandGateView);
-    return nandGateView;
+    return new NandGateView(circuitEditor, inputCount, position, rotation);
   }
 }
 

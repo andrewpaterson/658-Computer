@@ -33,11 +33,7 @@ public class ClockData
   @Override
   public ClockView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    ClockView clockView = new ClockView(circuitEditor, position, rotation, frequency);
-    circuitEditor.createConnectionViews(clockView);
-    loadEvents(circuitEditor, clockView);
-    loadPorts(circuitEditor, traceLoader, clockView);
-    return clockView;
+    return new ClockView(circuitEditor, position, rotation, frequency);
   }
 }
 

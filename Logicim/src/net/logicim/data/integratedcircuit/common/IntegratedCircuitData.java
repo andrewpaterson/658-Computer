@@ -68,8 +68,6 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
     }
   }
 
-  public abstract ICV create(CircuitEditor circuitEditor, TraceLoader traceLoader);
-
   protected void loadEvents(CircuitEditor circuitEditor, ICV integratedCircuitView)
   {
     for (IntegratedCircuitEventData<?> event : events)
@@ -77,5 +75,21 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
       event.create(integratedCircuitView.getIntegratedCircuit(), circuitEditor.getTimeline());
     }
   }
+
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ICV integratedCircuitView)
+  {
+    circuitEditor.createConnectionViews(integratedCircuitView);
+    loadEvents(circuitEditor, integratedCircuitView);
+    loadPorts(circuitEditor, traceLoader, integratedCircuitView);
+  }
+
+  public ICV createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  {
+    ICV integratedCircuitView = create(circuitEditor, traceLoader);
+    connectAndLoad(circuitEditor, traceLoader, integratedCircuitView);
+    return integratedCircuitView;
+  }
+
+  public abstract ICV create(CircuitEditor circuitEditor, TraceLoader traceLoader);
 }
 

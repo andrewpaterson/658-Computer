@@ -25,11 +25,7 @@ public class AndGateData
 
   public AndGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    AndGateView andGateView = new AndGateView(circuitEditor, inputCount, position, rotation);
-    circuitEditor.createConnectionViews(andGateView);
-    loadEvents(circuitEditor, andGateView);
-    loadPorts(circuitEditor, traceLoader, andGateView);
-    return andGateView;
+    return new AndGateView(circuitEditor, inputCount, position, rotation);
   }
 }
 

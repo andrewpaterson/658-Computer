@@ -26,11 +26,7 @@ public class OrGateData
   @Override
   public OrGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    OrGateView orGateView = new OrGateView(circuitEditor, inputCount, position, rotation);
-    circuitEditor.createConnectionViews(orGateView);
-    loadEvents(circuitEditor, orGateView);
-    loadPorts(circuitEditor, traceLoader, orGateView);
-    return orGateView;
+    return new OrGateView(circuitEditor, inputCount, position, rotation);
   }
 }
 

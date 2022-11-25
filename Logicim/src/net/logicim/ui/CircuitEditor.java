@@ -859,7 +859,7 @@ public class CircuitEditor
 
     for (IntegratedCircuitData<?> integratedCircuitData : circuitData.integratedCircuits)
     {
-      integratedCircuitData.create(this, traceLoader);
+      integratedCircuitData.createAndLoad(this, traceLoader);
     }
   }
 

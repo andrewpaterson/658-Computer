@@ -25,11 +25,7 @@ public class BufferData
   @Override
   public BufferView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    BufferView bufferView = new BufferView(circuitEditor, position, rotation);
-    circuitEditor.createConnectionViews(bufferView);
-    loadEvents(circuitEditor, bufferView);
-    loadPorts(circuitEditor, traceLoader, bufferView);
-    return bufferView;
+    return new BufferView(circuitEditor, position, rotation);
   }
 }
 

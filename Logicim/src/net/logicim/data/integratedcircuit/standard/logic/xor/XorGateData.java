@@ -26,11 +26,7 @@ public class XorGateData
   @Override
   public XorGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    XorGateView xorGateView = new XorGateView(circuitEditor, inputCount, position, rotation);
-    circuitEditor.createConnectionViews(xorGateView);
-    loadEvents(circuitEditor, xorGateView);
-    loadPorts(circuitEditor, traceLoader, xorGateView);
-    return xorGateView;
+    return new XorGateView(circuitEditor, inputCount, position, rotation);
   }
 }
 

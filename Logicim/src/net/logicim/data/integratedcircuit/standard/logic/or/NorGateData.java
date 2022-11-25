@@ -26,11 +26,7 @@ public class NorGateData
   @Override
   public NorGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    NorGateView norGateView = new NorGateView(circuitEditor, inputCount, position, rotation);
-    circuitEditor.createConnectionViews(norGateView);
-    loadEvents(circuitEditor, norGateView);
-    loadPorts(circuitEditor, traceLoader, norGateView);
-    return norGateView;
+    return new NorGateView(circuitEditor, inputCount, position, rotation);
   }
 }
 

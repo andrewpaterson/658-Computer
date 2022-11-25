@@ -25,11 +25,7 @@ public class InverterData
   @Override
   public InverterView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    InverterView inverterView = new InverterView(circuitEditor, position, rotation);
-    circuitEditor.createConnectionViews(inverterView);
-    loadEvents(circuitEditor, inverterView);
-    loadPorts(circuitEditor, traceLoader, inverterView);
-    return inverterView;
+    return new InverterView(circuitEditor, position, rotation);
   }
 }
 

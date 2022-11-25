@@ -5,6 +5,7 @@ import net.logicim.common.collection.redblacktree.RedBlackNode;
 import net.logicim.common.collection.redblacktree.RedBlackTree;
 import net.logicim.data.TimelineData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.event.Event;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -156,7 +157,7 @@ public class Timeline
 
   public boolean remove(Event event)
   {
-    SimultaneousEvents simultaneousEvents = events.find(event.time);
+    SimultaneousEvents simultaneousEvents = events.find(event.getTime());
     event.removeFromOwner();
     if (simultaneousEvents != null)
     {

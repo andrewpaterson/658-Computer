@@ -339,7 +339,7 @@ public class TraceView
 
   public TraceData save()
   {
-    return new TraceData(trace.getId(), new Int2D(getStartPosition()), new Int2D(getEndPosition()));
+    return new TraceData(trace.getId(), getStartPosition(), getEndPosition());
   }
 }
 

@@ -826,10 +826,10 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    ArrayList<IntegratedCircuitData> integratedCircuitDatas = new ArrayList<>();
+    ArrayList<IntegratedCircuitData<?>> integratedCircuitDatas = new ArrayList<>();
     for (IntegratedCircuitView<?> integratedCircuitView : integratedCircuitViews)
     {
-      IntegratedCircuitData integratedCircuitData = integratedCircuitView.save();
+      IntegratedCircuitData<?> integratedCircuitData = integratedCircuitView.save();
       integratedCircuitDatas.add(integratedCircuitData);
     }
 

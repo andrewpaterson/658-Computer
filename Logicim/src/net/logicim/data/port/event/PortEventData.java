@@ -1,6 +1,6 @@
 package net.logicim.data.port.event;
 
-import net.logicim.data.common.EventData;
+import net.logicim.data.common.event.EventData;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;

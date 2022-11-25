@@ -8,7 +8,7 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.IntegratedCircuitEvent;
+import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
 

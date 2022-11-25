@@ -6,13 +6,14 @@ import net.logicim.data.trace.TraceData;
 import java.util.List;
 
 public class CircuitData
+    extends SaveData
 {
   public TimelineData timelineData;
-  public List<IntegratedCircuitData> integratedCircuits;
+  public List<IntegratedCircuitData<?>> integratedCircuits;
   public List<TraceData> traces;
 
   public CircuitData(TimelineData timelineData,
-                     List<IntegratedCircuitData> integratedCircuits,
+                     List<IntegratedCircuitData<?>> integratedCircuits,
                      List<TraceData> traces)
   {
     this.timelineData = timelineData;
@@ -25,7 +26,7 @@ public class CircuitData
     return timelineData;
   }
 
-  public List<IntegratedCircuitData> getIntegratedCircuits()
+  public List<IntegratedCircuitData<?>> getIntegratedCircuits()
   {
     return integratedCircuits;
   }

@@ -1,6 +1,7 @@
 package net.logicim.data;
 
 public class TimelineData
+    extends SaveData
 {
   public long time;
   public long previousEventTime;

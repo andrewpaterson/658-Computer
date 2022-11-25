@@ -1,8 +1,8 @@
 package net.logicim.data.integratedcircuit.event;
 
-import net.logicim.data.common.EventData;
+import net.logicim.data.common.event.EventData;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.IntegratedCircuitEvent;
+import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.Timeline;
 
 public abstract class IntegratedCircuitEventData<E extends IntegratedCircuitEvent>

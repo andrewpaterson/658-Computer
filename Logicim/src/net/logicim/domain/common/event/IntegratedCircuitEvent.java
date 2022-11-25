@@ -1,7 +1,10 @@
-package net.logicim.domain.common;
+package net.logicim.domain.common.event;
 
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Pins;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.state.State;
 
 public abstract class IntegratedCircuitEvent

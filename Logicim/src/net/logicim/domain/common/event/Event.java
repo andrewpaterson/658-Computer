@@ -1,7 +1,9 @@
-package net.logicim.domain.common;
+package net.logicim.domain.common.event;
 
-import net.logicim.data.common.EventData;
+import net.logicim.data.common.event.EventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 
 public abstract class Event
 {

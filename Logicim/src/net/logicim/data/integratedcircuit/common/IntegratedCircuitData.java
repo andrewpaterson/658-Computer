@@ -1,6 +1,7 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.SaveData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
@@ -91,5 +92,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   }
 
   public abstract ICV create(CircuitEditor circuitEditor, TraceLoader traceLoader);
+
+
 }
 

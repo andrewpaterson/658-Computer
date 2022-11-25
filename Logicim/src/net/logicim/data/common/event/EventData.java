@@ -1,8 +1,10 @@
-package net.logicim.data.common;
+package net.logicim.data.common.event;
 
-import net.logicim.domain.common.Event;
+import net.logicim.data.SaveData;
+import net.logicim.domain.common.event.Event;
 
 public abstract class EventData<E extends Event>
+    extends SaveData
 {
   public long time;
   public long id;

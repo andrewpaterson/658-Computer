@@ -2,7 +2,7 @@ package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.TreeItem;
-import net.logicim.domain.common.port.event.PortEvent;
+import net.logicim.domain.common.event.Event;
 
 import java.util.ArrayList;
 import java.util.List;

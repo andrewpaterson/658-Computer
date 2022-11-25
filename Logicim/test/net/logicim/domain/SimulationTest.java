@@ -2,6 +2,8 @@ package net.logicim.domain;
 
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.domain.common.*;
+import net.logicim.domain.common.event.Event;
+import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.DriveEvent;
 import net.logicim.domain.common.port.event.PortEvent;

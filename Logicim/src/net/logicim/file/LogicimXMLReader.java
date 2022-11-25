@@ -1,7 +1,6 @@
 package net.logicim.file;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.List;
 public class LogicimXMLReader
     extends DefaultHandler
 {
-
   private Baeldung website;
   private StringBuilder elementValue;
 
@@ -54,7 +52,7 @@ public class LogicimXMLReader
   }
 
   @Override
-  public void endElement(String uri, String localName, String qName) throws SAXException
+  public void endElement(String uri, String localName, String qName)
   {
     switch (qName)
     {
@@ -72,11 +70,6 @@ public class LogicimXMLReader
     List<BaeldungArticle> articleList = website.articleList;
     int latestArticleIndex = articleList.size() - 1;
     return articleList.get(latestArticleIndex);
-  }
-
-  public Baeldung getWebsite()
-  {
-    return website;
   }
 }
 

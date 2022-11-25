@@ -41,8 +41,8 @@ public class XnorGateView
   @Override
   public XnorGateData save()
   {
-    return new XnorGateData(toInt2DData(position),
-                            toRotationData(rotation),
+    return new XnorGateData(position,
+                            rotation,
                             saveEvents(),
                             savePorts(),
                             inputCount);

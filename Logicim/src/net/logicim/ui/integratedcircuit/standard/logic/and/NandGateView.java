@@ -41,8 +41,8 @@ public class NandGateView
   @Override
   public NandGateData save()
   {
-    return new NandGateData(toInt2DData(position),
-                            toRotationData(rotation),
+    return new NandGateData(position,
+                            rotation,
                             saveEvents(),
                             savePorts(),
                             inputCount);

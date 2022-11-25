@@ -41,8 +41,8 @@ public class XorGateView
   @Override
   public XorGateData save()
   {
-    return new XorGateData(toInt2DData(position),
-                           toRotationData(rotation),
+    return new XorGateData(position,
+                           rotation,
                            saveEvents(),
                            savePorts(),
                            inputCount);

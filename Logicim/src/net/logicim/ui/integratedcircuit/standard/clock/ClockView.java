@@ -111,8 +111,8 @@ public class ClockView
 
   public ClockData save()
   {
-    return new ClockData(toInt2DData(position),
-                         toRotationData(rotation),
+    return new ClockData(position,
+                         rotation,
                          frequency,
                          integratedCircuit.getState().getState(),
                          saveEvents(),

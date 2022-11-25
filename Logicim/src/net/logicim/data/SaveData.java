@@ -2,6 +2,8 @@ package net.logicim.data;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.reflect.InstanceInspector;
+import net.logicim.common.type.Int2D;
+import net.logicim.ui.common.Rotation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -53,12 +55,30 @@ public abstract class SaveData
     return node;
 
   }
+
   public Node writeBoolean(Document doc, String elementName, boolean value)
   {
     Element node = doc.createElement(elementName);
     node.appendChild(doc.createTextNode(Boolean.toString(value)));
 
     return node;
+  }
+
+  public void writeInt2D(Document doc, Element parent, String elementName, Int2D p)
+  {
+    Element node = doc.createElement(elementName);
+    node.setAttribute("Type", Int2D.class.getSimpleName());
+    node.setAttribute("x", Integer.toString(p.x));
+    node.setAttribute("y", Integer.toString(p.y));
+    parent.appendChild(node);
+  }
+
+  public void writeRotation(Document doc, Element parent, String elementName, Rotation r)
+  {
+    Element node = doc.createElement(elementName);
+    node.setAttribute("Type", Rotation.class.getSimpleName());
+    node.setAttribute("rotation", r.toString());
+    parent.appendChild(node);
   }
 
   public void writeXML(Document doc, Node parent)
@@ -83,6 +103,7 @@ public abstract class SaveData
     int size = list.size();
 
     Element listContainer = doc.createElement(name);
+    listContainer.setAttribute("Type", list.getClass().getSimpleName());
     listContainer.setAttribute("size", Integer.toString(size));
     parent.appendChild(listContainer);
 
@@ -145,6 +166,14 @@ public abstract class SaveData
       else if (fieldValue instanceof List)
       {
         writeList(doc, parent, fieldName, (List<?>) fieldValue);
+      }
+      else if (fieldValue instanceof Int2D)
+      {
+        writeInt2D(doc, parent, fieldName, (Int2D) fieldValue);
+      }
+      else if (fieldValue instanceof Rotation)
+      {
+        writeRotation(doc, parent, fieldName, (Rotation) fieldValue);
       }
       else
       {

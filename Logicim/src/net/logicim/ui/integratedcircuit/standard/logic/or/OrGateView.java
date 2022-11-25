@@ -41,8 +41,8 @@ public class OrGateView
   @Override
   public OrGateData save()
   {
-    return new OrGateData(toInt2DData(position),
-                          toRotationData(rotation),
+    return new OrGateData(position,
+                          rotation,
                           saveEvents(),
                           savePorts(),
                           inputCount);

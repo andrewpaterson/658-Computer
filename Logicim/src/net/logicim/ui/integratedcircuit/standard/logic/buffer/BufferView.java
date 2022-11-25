@@ -39,8 +39,8 @@ public class BufferView
   @Override
   public BufferData save()
   {
-    return new BufferData(toInt2DData(position),
-                          toRotationData(rotation),
+    return new BufferData(position,
+                          rotation,
                           saveEvents(),
                           savePorts());
   }

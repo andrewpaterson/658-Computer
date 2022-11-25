@@ -1,12 +1,12 @@
 package net.logicim.data.integratedcircuit.standard.logic.and;
 
-import net.logicim.data.common.Int2DData;
-import net.logicim.data.common.RotationData;
+import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateView;
 
 import java.util.List;
@@ -14,8 +14,8 @@ import java.util.List;
 public class NandGateData
     extends LogicGateData<NandGateView>
 {
-  public NandGateData(Int2DData position,
-                      RotationData rotation,
+  public NandGateData(Int2D position,
+                      Rotation rotation,
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> portData,
                       int inputCount)
@@ -28,8 +28,8 @@ public class NandGateData
   {
     return new NandGateView(circuitEditor,
                             inputCount,
-                            position.toInt2D(),
-                            rotation.toRotation());
+                            position,
+                            rotation);
   }
 }
 

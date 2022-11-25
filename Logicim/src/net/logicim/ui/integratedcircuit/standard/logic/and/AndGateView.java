@@ -41,8 +41,8 @@ public class AndGateView
   @Override
   public AndGateData save()
   {
-    return new AndGateData(toInt2DData(position),
-                           toRotationData(rotation),
+    return new AndGateData(position,
+                           rotation,
                            saveEvents(),
                            savePorts(),
                            inputCount);

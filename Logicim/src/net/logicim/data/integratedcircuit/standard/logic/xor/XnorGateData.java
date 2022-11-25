@@ -1,8 +1,6 @@
 package net.logicim.data.integratedcircuit.standard.logic.xor;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.common.Int2DData;
-import net.logicim.data.common.RotationData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.port.PortData;
@@ -16,8 +14,8 @@ import java.util.List;
 public class XnorGateData
     extends LogicGateData<XnorGateView>
 {
-  public XnorGateData(Int2DData position,
-                      RotationData rotation,
+  public XnorGateData(Int2D position,
+                      Rotation rotation,
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> ports,
                       int inputCount)
@@ -30,8 +28,8 @@ public class XnorGateData
   {
     return new XnorGateView(circuitEditor,
                             inputCount,
-                            position.toInt2D(),
-                            rotation.toRotation());
+                            position,
+                            rotation);
   }
 }
 

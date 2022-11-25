@@ -39,8 +39,8 @@ public class InverterView
   @Override
   public InverterData save()
   {
-    return new InverterData(toInt2DData(position),
-                            toRotationData(rotation),
+    return new InverterData(position,
+                            rotation,
                             saveEvents(),
                             savePorts());
   }

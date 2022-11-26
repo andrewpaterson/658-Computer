@@ -14,6 +14,10 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
 {
   protected int inputCount;
 
+  public LogicGateData()
+  {
+  }
+
   public LogicGateData(Int2D position,
                        Rotation rotation,
                        List<IntegratedCircuitEventData<?>> events,

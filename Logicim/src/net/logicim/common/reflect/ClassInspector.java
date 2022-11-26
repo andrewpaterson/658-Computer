@@ -308,7 +308,7 @@ public class ClassInspector
   {
     try
     {
-      Constructor constructor = aClass.getDeclaredConstructor(parameterTypes);
+      Constructor<?> constructor = aClass.getDeclaredConstructor(parameterTypes);
       constructor.setAccessible(true);
       return constructor.newInstance(arguments);
     }
@@ -320,11 +320,11 @@ public class ClassInspector
 
   public Object bestGuessNewInstance(Object... arguments)
   {
-    List<Constructor> matchingConstructors = findAllMatchingConstructors(arguments);
+    List<Constructor<?>> matchingConstructors = findAllMatchingConstructors(arguments);
 
     if (matchingConstructors.size() == 1)
     {
-      Constructor constructor = matchingConstructors.get(0);
+      Constructor<?> constructor = matchingConstructors.get(0);
       try
       {
         return newInstance(constructor.getParameterTypes(), arguments);
@@ -344,11 +344,11 @@ public class ClassInspector
     }
   }
 
-  private List<Constructor> findAllMatchingConstructors(Object... arguments)
+  private List<Constructor<?>> findAllMatchingConstructors(Object... arguments)
   {
-    List<Constructor> matchingConstructors = new ArrayList<>();
+    List<Constructor<?>> matchingConstructors = new ArrayList<>();
 
-    for (Constructor constructor : aClass.getDeclaredConstructors())
+    for (Constructor<?> constructor : aClass.getDeclaredConstructors())
     {
       if (doesConstructorMatch(constructor, arguments))
       {
@@ -358,7 +358,7 @@ public class ClassInspector
     return matchingConstructors;
   }
 
-  private boolean doesConstructorMatch(Constructor constructor, Object... arguments)
+  private boolean doesConstructorMatch(Constructor<?> constructor, Object... arguments)
   {
     Class<?>[] parameterTypes = constructor.getParameterTypes();
 
@@ -396,7 +396,7 @@ public class ClassInspector
     }
   }
 
-  private synchronized Constructor getNoArgsConstructor()
+  private synchronized Constructor<?> getNoArgsConstructor()
   {
     if (specialNoArgConstructor == null)
     {
@@ -406,13 +406,13 @@ public class ClassInspector
     return specialNoArgConstructor;
   }
 
-  Constructor createNoArgsConstructor(Class<?> mappedClass)
+  Constructor<?> createNoArgsConstructor(Class<?> mappedClass)
   {
     try
     {
-      Constructor<Object> randomNoArgConstructor = Object.class.getDeclaredConstructor();
+      Constructor<?> randomNoArgConstructor = Object.class.getDeclaredConstructor();
       ReflectionFactory reflectionFactory = ReflectionFactory.getReflectionFactory();
-      Constructor constructor = reflectionFactory.newConstructorForSerialization(mappedClass, randomNoArgConstructor);
+      Constructor<?> constructor = reflectionFactory.newConstructorForSerialization(mappedClass, randomNoArgConstructor);
       constructor.setAccessible(true);
       return constructor;
     }
@@ -427,7 +427,7 @@ public class ClassInspector
     return toList(aClass.getDeclaredMethods());
   }
 
-  private Constructor _findConstructorOrNull(Class<?>[] parameterTypes)
+  private Constructor<?> _findConstructorOrNull(Class<?>[] parameterTypes)
   {
     try
     {
@@ -519,7 +519,7 @@ public class ClassInspector
            isSubclassOf(Number.class);
   }
 
-  public List<Constructor> getConstructors()
+  public List<Constructor<?>> getConstructors()
   {
     return Arrays.asList(aClass.getConstructors());
   }
@@ -560,7 +560,7 @@ public class ClassInspector
 
   private void sortFieldsByName(List<Field> result)
   {
-    Collections.sort(result, new Comparator<Field>()
+    result.sort(new Comparator<Field>()
     {
       public int compare(Field o1, Field o2)
       {

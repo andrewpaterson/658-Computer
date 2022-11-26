@@ -14,6 +14,10 @@ import java.util.List;
 public class InverterData
     extends IntegratedCircuitData<InverterView>
 {
+  public InverterData()
+  {
+  }
+
   public InverterData(Int2D position,
                       Rotation rotation,
                       List<IntegratedCircuitEventData<?>> events,

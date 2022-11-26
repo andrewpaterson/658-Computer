@@ -1,7 +1,8 @@
 package net.logicim.ui;
 
 import net.logicim.common.util.FileUtil;
-import net.logicim.data.CircuitData;
+import net.logicim.data.circuit.CircuitData;
+import net.logicim.file.LogicimFileReader;
 import net.logicim.file.LogicimFileWriter;
 import net.logicim.ui.input.event.*;
 
@@ -15,8 +16,6 @@ import static net.logicim.domain.common.Units.nS_IN_mS;
 public class SimulatorPanel
     extends JPanel
 {
-  public static CircuitData savedData;  //Delete me, please.
-
   protected Image backBufferImage;
   protected Graphics2D backBuffer;
   protected boolean running;
@@ -166,9 +165,10 @@ public class SimulatorPanel
   {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Save circuit simulation");
-    FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("Logicim files (*.logic)", "logic");
-    fileChooser.addChoosableFileFilter(xmlFilter);
-    fileChooser.setFileFilter(xmlFilter);
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Logicim files (*.logic)", "logic");
+    fileChooser.addChoosableFileFilter(filter);
+    fileChooser.setFileFilter(filter);
+
 
     int userSelection = fileChooser.showSaveDialog(frame);
     if (userSelection == JFileChooser.APPROVE_OPTION)
@@ -177,8 +177,7 @@ public class SimulatorPanel
       if (file != null)
       {
         File newFile = new File(FileUtil.removeExtension(file).getPath() + "." + "logic");
-
-        savedData = simulatorEditor.save();
+        CircuitData savedData = simulatorEditor.save();
 
         SwingUtilities.invokeLater(() -> new LogicimFileWriter().writeXML(savedData, newFile));
       }
@@ -187,7 +186,23 @@ public class SimulatorPanel
 
   public void loadSimulation()
   {
-    simulatorEditor.load(savedData);
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Load circuit simulation");
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Logicim files (*.logic)", "logic");
+    fileChooser.addChoosableFileFilter(filter);
+    fileChooser.setFileFilter(filter);
+
+    int userSelection = fileChooser.showOpenDialog(frame);
+    if (userSelection == JFileChooser.APPROVE_OPTION)
+    {
+      File file = fileChooser.getSelectedFile();
+      if (file != null)
+      {
+        CircuitData savedData = new LogicimFileReader().load(file);
+        simulatorEditor.load(savedData);
+
+      }
+    }
   }
 }
 

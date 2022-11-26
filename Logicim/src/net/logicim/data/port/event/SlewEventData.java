@@ -11,6 +11,10 @@ public class SlewEventData
   protected float endVoltage;
   protected long slewTime;
 
+  public SlewEventData()
+  {
+  }
+
   public SlewEventData(long time, long id, float startVoltage, float endVoltage, long slewTime)
   {
     super(time, id);

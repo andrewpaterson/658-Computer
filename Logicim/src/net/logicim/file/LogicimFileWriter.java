@@ -1,7 +1,7 @@
 package net.logicim.file;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.data.CircuitData;
+import net.logicim.data.circuit.CircuitData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static net.logicim.data.ReflectiveData.LOGICIM_TAG_NAME;
+
 public class LogicimFileWriter
 {
   public void writeXML(CircuitData circuitData, File file)
@@ -28,7 +30,8 @@ public class LogicimFileWriter
       DocumentBuilder builder = factory.newDocumentBuilder();
       Document doc = builder.newDocument();
 
-      Element root = doc.createElement("Logicim");
+
+      Element root = doc.createElement(LOGICIM_TAG_NAME);
       doc.appendChild(root);
 
       circuitData.writeXML(doc, root);

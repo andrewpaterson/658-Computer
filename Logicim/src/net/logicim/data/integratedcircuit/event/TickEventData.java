@@ -7,6 +7,10 @@ import net.logicim.domain.common.event.TickEvent;
 public class TickEventData
     extends IntegratedCircuitEventData<TickEvent>
 {
+  public TickEventData()
+  {
+  }
+
   public TickEventData(long time, long id)
   {
     super(time, id);

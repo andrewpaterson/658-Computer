@@ -71,5 +71,22 @@ public class LogicimXMLReader
     int latestArticleIndex = articleList.size() - 1;
     return articleList.get(latestArticleIndex);
   }
+
+  public static final String xml = "<baeldung>\n" +
+                                   "    <articles>\n" +
+                                   "        <article>\n" +
+                                   "            <title>Parsing an XML File Using SAX Parser</title>\n" +
+                                   "            <content>SAX Parser's Lorem ipsum...</content>\n" +
+                                   "        </article>\n" +
+                                   "        <article>\n" +
+                                   "            <title>Parsing an XML File Using DOM Parser</title>\n" +
+                                   "            <content>DOM Parser's Lorem ipsum...</content>\n" +
+                                   "        </article>\n" +
+                                   "        <article>\n" +
+                                   "            <title>Parsing an XML File Using StAX Parser</title>\n" +
+                                   "            <content>StAX's Lorem ipsum...</content>\n" +
+                                   "        </article>\n" +
+                                   "    </articles>\n" +
+                                   "</baeldung>\n";
 }
 

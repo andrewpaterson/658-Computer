@@ -14,6 +14,10 @@ import java.util.List;
 public class OrGateData
     extends LogicGateData<OrGateView>
 {
+  public OrGateData()
+  {
+  }
+
   public OrGateData(Int2D position,
                     Rotation rotation,
                     List<IntegratedCircuitEventData<?>> events,

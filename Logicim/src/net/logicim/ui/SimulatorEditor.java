@@ -2,7 +2,7 @@ package net.logicim.ui;
 
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.CircuitData;
+import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.*;

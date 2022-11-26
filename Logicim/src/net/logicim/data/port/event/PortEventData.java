@@ -8,6 +8,10 @@ import net.logicim.domain.common.port.event.PortEvent;
 public abstract class PortEventData<E extends PortEvent>
     extends EventData<E>
 {
+  public PortEventData()
+  {
+  }
+
   public PortEventData(long time, long id)
   {
     super(time, id);

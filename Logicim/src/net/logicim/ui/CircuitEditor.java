@@ -4,8 +4,8 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.CircuitData;
-import net.logicim.data.TimelineData;
+import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.trace.TraceData;
 import net.logicim.data.trace.TraceLoader;
@@ -848,7 +848,7 @@ public class CircuitEditor
 
   public void load(CircuitData circuitData)
   {
-    simulation.getTimeline().load(circuitData.timelineData);
+    simulation.getTimeline().load(circuitData.timeline);
 
     TraceLoader traceLoader = new TraceLoader();
 

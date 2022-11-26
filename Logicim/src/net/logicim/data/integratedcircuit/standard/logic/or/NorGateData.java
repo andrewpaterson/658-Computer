@@ -14,6 +14,10 @@ import java.util.List;
 public class NorGateData
     extends LogicGateData<NorGateView>
 {
+  public NorGateData()
+  {
+  }
+
   public NorGateData(Int2D position,
                      Rotation rotation,
                      List<IntegratedCircuitEventData<?>> events,

@@ -14,6 +14,10 @@ import java.util.List;
 public class BufferData
     extends IntegratedCircuitData<BufferView>
 {
+  public BufferData()
+  {
+  }
+
   public BufferData(Int2D position,
                     Rotation rotation,
                     List<IntegratedCircuitEventData<?>> events,

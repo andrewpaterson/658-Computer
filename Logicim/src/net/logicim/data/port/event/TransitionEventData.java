@@ -9,6 +9,15 @@ public class TransitionEventData
 {
   protected float voltage;
 
+  public TransitionEventData()
+  {
+  }
+
+  public TransitionEventData(long time, long id)
+  {
+    super(time, id);
+  }
+
   public TransitionEventData(long time, long id, float voltage)
   {
     super(time, id);

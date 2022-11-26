@@ -14,6 +14,10 @@ import java.util.List;
 public class NandGateData
     extends LogicGateData<NandGateView>
 {
+  public NandGateData()
+  {
+  }
+
   public NandGateData(Int2D position,
                       Rotation rotation,
                       List<IntegratedCircuitEventData<?>> events,

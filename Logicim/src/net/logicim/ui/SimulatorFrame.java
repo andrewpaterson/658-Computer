@@ -1,10 +1,14 @@
 package net.logicim.ui;
 
+import net.logicim.common.reflect.ClassInspector;
+import net.logicim.data.SaveData;
+import net.logicim.data.SaveDataClassStore;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class SimulatorFrame
     extends JFrame
@@ -12,6 +16,8 @@ public class SimulatorFrame
   public static void main(String[] args)
   {
     SimulatorFrame simulatorFrame = new SimulatorFrame();
+
+    ensureDataConstructors();
 
     JPanel newLeftComponent = new JPanel();
     newLeftComponent.setMinimumSize(new Dimension(150, 200));
@@ -130,6 +136,16 @@ public class SimulatorFrame
     WindowSizer.centre(simulatorFrame);
 
     simulatorPanel.loop();
+  }
+
+  protected static void ensureDataConstructors()
+  {
+    List<Class<SaveData>> classes = SaveDataClassStore.getInstance().findAll();
+    for (Class<SaveData> aClass : classes)
+    {
+      ClassInspector classInspector = ClassInspector.forClass(aClass);
+      classInspector.newInstance();
+    }
   }
 }
 

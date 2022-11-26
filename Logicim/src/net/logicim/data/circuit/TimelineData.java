@@ -1,11 +1,17 @@
-package net.logicim.data;
+package net.logicim.data.circuit;
+
+import net.logicim.data.ReflectiveData;
 
 public class TimelineData
-    extends SaveData
+    extends ReflectiveData
 {
   public long time;
   public long previousEventTime;
   public long eventTime;
+
+  public TimelineData()
+  {
+  }
 
   public TimelineData(long time, long previousEventTime, long eventTime)
   {

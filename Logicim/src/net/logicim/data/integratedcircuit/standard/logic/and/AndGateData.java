@@ -14,6 +14,10 @@ import java.util.List;
 public class AndGateData
     extends LogicGateData<AndGateView>
 {
+  public AndGateData()
+  {
+  }
+
   public AndGateData(Int2D position,
                      Rotation rotation,
                      List<IntegratedCircuitEventData<?>> events,

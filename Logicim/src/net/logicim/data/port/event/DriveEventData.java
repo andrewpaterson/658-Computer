@@ -9,6 +9,10 @@ public class DriveEventData
 {
   protected float voltage;
 
+  public DriveEventData()
+  {
+  }
+
   public DriveEventData(long time, long id, float voltage)
   {
     super(time, id);

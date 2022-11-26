@@ -14,6 +14,10 @@ import java.util.List;
 public class XnorGateData
     extends LogicGateData<XnorGateView>
 {
+  public XnorGateData()
+  {
+  }
+
   public XnorGateData(Int2D position,
                       Rotation rotation,
                       List<IntegratedCircuitEventData<?>> events,

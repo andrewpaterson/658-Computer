@@ -14,6 +14,10 @@ import java.util.List;
 public class XorGateData
     extends LogicGateData<XorGateView>
 {
+  public XorGateData()
+  {
+  }
+
   public XorGateData(Int2D position,
                      Rotation rotation,
                      List<IntegratedCircuitEventData<?>> events,

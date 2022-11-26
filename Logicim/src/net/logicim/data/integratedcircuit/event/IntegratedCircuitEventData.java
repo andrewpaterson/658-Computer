@@ -8,6 +8,10 @@ import net.logicim.domain.common.event.IntegratedCircuitEvent;
 public abstract class IntegratedCircuitEventData<E extends IntegratedCircuitEvent>
     extends EventData<E>
 {
+  public IntegratedCircuitEventData()
+  {
+  }
+
   public IntegratedCircuitEventData(long time, long id)
   {
     super(time, id);

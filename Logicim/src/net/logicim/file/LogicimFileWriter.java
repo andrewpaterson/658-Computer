@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static net.logicim.data.ReflectiveData.CIRCUIT_DATA_TAG_NAME;
 import static net.logicim.data.ReflectiveData.LOGICIM_TAG_NAME;
 
 public class LogicimFileWriter
@@ -30,11 +31,10 @@ public class LogicimFileWriter
       DocumentBuilder builder = factory.newDocumentBuilder();
       Document doc = builder.newDocument();
 
-
       Element root = doc.createElement(LOGICIM_TAG_NAME);
       doc.appendChild(root);
 
-      circuitData.writeXML(doc, root);
+      circuitData.writeXML(doc, CIRCUIT_DATA_TAG_NAME, root);
 
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();

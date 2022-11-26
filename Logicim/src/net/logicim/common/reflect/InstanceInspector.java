@@ -55,7 +55,7 @@ public class InstanceInspector
   public void setFieldValue(String fieldName, Object value)
   {
     int index = fieldName.indexOf('.');
-    Field field = null;
+    Field field;
     if (index == -1)
     {
       field = classInspector.getField(fieldName);
@@ -92,6 +92,12 @@ public class InstanceInspector
   public Collection<String> getFieldNames()
   {
     return classInspector.getAllInstanceFieldNames();
+  }
+
+  public Class<?> getFieldClass(String fieldName)
+  {
+    Field field = getField(fieldName);
+    return field.getType();
   }
 }
 

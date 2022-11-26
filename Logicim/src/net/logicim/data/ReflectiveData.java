@@ -16,19 +16,23 @@ public abstract class ReflectiveData
 {
   public static final String LOGICIM_TAG_NAME = "Logicim";
   public static final String TYPE = "Type";
+  public static final String INDEX = "index";
+  public static final String CIRCUIT_DATA_TAG_NAME = "circuitData";
 
   public ReflectiveData()
   {
   }
 
+  @Override
+  public Object getObject()
+  {
+    return this;
+  }
+
   protected String getXMLTag()
   {
-    String simpleName = getClass().getSimpleName();
-    if (simpleName.endsWith("Data"))
-    {
-      simpleName = simpleName.substring(0, simpleName.length() - 4);
-    }
-    return simpleName;
+    Class<?> aClass = getClass();
+    return getXMLTag(aClass);
   }
 
   public Node writeString(Document doc, String elementName, String value)

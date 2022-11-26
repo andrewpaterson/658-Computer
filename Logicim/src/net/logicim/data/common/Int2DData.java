@@ -3,6 +3,8 @@ package net.logicim.data.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.PrimitiveData;
 
+import java.util.Map;
+
 public class Int2DData
     extends PrimitiveData
 {
@@ -10,7 +12,21 @@ public class Int2DData
 
   public Int2DData()
   {
-    int2D = new Int2D();
+    int2D = null;
+  }
+
+  @Override
+  public void load(Map<String, String> fields)
+  {
+    int x = Integer.parseInt(fields.get("x"));
+    int y = Integer.parseInt(fields.get("y"));
+    int2D = new Int2D(x, y);
+  }
+
+  @Override
+  public Object getObject()
+  {
+    return int2D;
   }
 }
 

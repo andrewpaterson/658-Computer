@@ -15,7 +15,7 @@ public class SimulatorFrame
 
     JPanel newLeftComponent = new JPanel();
     newLeftComponent.setMinimumSize(new Dimension(150, 200));
-    SimulatorPanel simulatorPanel = new SimulatorPanel();
+    SimulatorPanel simulatorPanel = new SimulatorPanel(simulatorFrame);
     JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, newLeftComponent, simulatorPanel);
     splitPane.setOneTouchExpandable(true);
     splitPane.setDividerLocation(150);

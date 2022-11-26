@@ -1,11 +1,14 @@
 package net.logicim.ui;
 
+import net.logicim.common.util.FileUtil;
 import net.logicim.data.CircuitData;
 import net.logicim.file.LogicimFileWriter;
 import net.logicim.ui.input.event.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
 
 import static net.logicim.domain.common.Units.nS_IN_mS;
 
@@ -19,14 +22,17 @@ public class SimulatorPanel
   protected boolean running;
   protected long period;
 
-  private SimulatorEditor simulatorEditor;
+  protected SimulatorEditor simulatorEditor;
+  protected JFrame frame;
 
-  public SimulatorPanel()
+  public SimulatorPanel(JFrame frame)
   {
+    this.frame = frame;
     running = false;
     period = 16 * nS_IN_mS;
 
     simulatorEditor = new SimulatorEditor(this);
+
   }
 
   public void loop()
@@ -158,9 +164,25 @@ public class SimulatorPanel
 
   public void saveSimulation()
   {
-    savedData = simulatorEditor.save();
-    LogicimFileWriter fileWriter = new LogicimFileWriter();
-    fileWriter.writeXML(savedData);
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Save circuit simulation");
+    FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("Logicim files (*.logic)", "logic");
+    fileChooser.addChoosableFileFilter(xmlFilter);
+    fileChooser.setFileFilter(xmlFilter);
+
+    int userSelection = fileChooser.showSaveDialog(frame);
+    if (userSelection == JFileChooser.APPROVE_OPTION)
+    {
+      File file = fileChooser.getSelectedFile();
+      if (file != null)
+      {
+        File newFile = new File(FileUtil.removeExtension(file).getPath() + "." + "logic");
+
+        savedData = simulatorEditor.save();
+
+        SwingUtilities.invokeLater(() -> new LogicimFileWriter().writeXML(savedData, newFile));
+      }
+    }
   }
 
   public void loadSimulation()

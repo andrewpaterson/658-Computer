@@ -14,10 +14,13 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class LogicimFileWriter
 {
-  public void writeXML(CircuitData circuitData)
+  public void writeXML(CircuitData circuitData, File file)
   {
     try
     {
@@ -39,11 +42,12 @@ public class LogicimFileWriter
 
       DOMSource source = new DOMSource(doc);
 
-      StreamResult console = new StreamResult(System.out);
-
-      transformer.transform(source, console);
+      FileWriter writer = new FileWriter(file);
+      StreamResult streamResult = new StreamResult(writer);
+      transformer.transform(source, streamResult);
+      writer.close();
     }
-    catch (ParserConfigurationException | TransformerException e)
+    catch (ParserConfigurationException | TransformerException | IOException e)
     {
       throw new SimulatorException(e.getMessage());
     }

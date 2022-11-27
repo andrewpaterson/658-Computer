@@ -1,5 +1,6 @@
 package net.logicim.domain.common.event;
 
+import net.logicim.assertions.SmoothVoltage;
 import net.logicim.assertions.Validator;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.Simulation;
@@ -259,11 +260,16 @@ public class EventPropagationTest
       }
     }
 
+    SmoothVoltage andGateVoltage = new SmoothVoltage(andOutput, 0.2f, simulation);
+
     do
     {
+      andGateVoltage.validate();
+
       System.out.println(Voltage.getVoltageString(andOutput.getVoltage(simulation.getTime())));
       simulation.runToTime(100);
-    }while (clock.getFullTicks() != 2);
+    }
+    while (clock.getFullTicks() != 2);
   }
 
   public static void test()

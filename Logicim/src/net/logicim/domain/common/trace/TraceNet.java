@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class TraceNet
+    implements Voltage
 {
   public static long nextId = 1L;
 
@@ -33,6 +34,7 @@ public class TraceNet
     }
   }
 
+  @Override
   public float getVoltage(long time)
   {
     float drivenVoltage = 0;
@@ -56,6 +58,12 @@ public class TraceNet
     }
 
     return drivenVoltage / drivers;
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return "Trace";
   }
 
   public String getVoltageString(long time)

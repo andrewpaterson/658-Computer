@@ -1,5 +1,6 @@
 package net.logicim.domain;
 
+import net.logicim.assertions.SmoothVoltage;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.domain.common.*;
 import net.logicim.domain.common.event.Event;
@@ -83,13 +84,18 @@ public class SimulationTest
       }
     }
 
+    SmoothVoltage clock1Voltage = new SmoothVoltage(clock1Trace, 0.2f, simulation);
+    SmoothVoltage clock2Voltage = new SmoothVoltage(clock2Trace, 0.2f, simulation);
+    SmoothVoltage outputVoltage = new SmoothVoltage(outputTrace, 0.2f, simulation);
     StringBuilder builder = new StringBuilder();
     do
     {
-      String clock1Voltage = clock1Trace.getVoltageString(simulation.getTime());
-      String clock2Voltage = clock2Trace.getVoltageString(simulation.getTime());
-      String outputVoltage = outputTrace.getVoltageString(simulation.getTime());
-      builder.append(clock1Voltage + " " + clock2Voltage + " " + outputVoltage + "\n");
+      clock1Voltage.validate();
+      clock2Voltage.validate();
+      outputVoltage.validate();
+      builder.append(clock1Trace.getVoltageString(simulation.getTime()) + " " +
+                     clock2Trace.getVoltageString(simulation.getTime()) + " " +
+                     outputTrace.getVoltageString(simulation.getTime()) + "\n");
       simulation.runToTime(100);
     }
     while (clock2.getFullTicks() != 3);

@@ -6,6 +6,7 @@ import net.logicim.common.collection.linkedlist.LinkedListIterator;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;
@@ -18,6 +19,7 @@ import java.util.Set;
 import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
 public class Port
+    implements Voltage
 {
   protected PortType type;
   protected Pins pins;
@@ -133,6 +135,7 @@ public class Port
     this.events.clear();
   }
 
+  @Override
   public float getVoltage(long time)
   {
     if (output == null)

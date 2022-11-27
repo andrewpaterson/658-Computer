@@ -1,8 +1,12 @@
 package net.logicim.domain.common;
 
-public class Voltage
+public interface Voltage
 {
-  public static String getVoltageString(float voltage)
+  float getVoltage(long time);
+
+  String getDescription();
+
+  static String getVoltageString(float voltage)
   {
     if (!Float.isNaN(voltage))
     {

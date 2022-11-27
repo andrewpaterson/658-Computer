@@ -16,12 +16,14 @@ public class AndGateView
   public AndGateView(CircuitEditor circuitEditor,
                      int inputCount,
                      Int2D position,
-                     Rotation rotation)
+                     Rotation rotation,
+                     String name)
   {
     super(circuitEditor,
           inputCount,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(false, 0);
     finaliseView();
   }
@@ -43,6 +45,7 @@ public class AndGateView
   {
     return new AndGateData(position,
                            rotation,
+                           name,
                            saveEvents(),
                            savePorts(),
                            inputCount);

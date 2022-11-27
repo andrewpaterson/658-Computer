@@ -40,5 +40,18 @@ public class Circuit
       port.disconnect(simulation);
     }
   }
+
+  public List<IntegratedCircuit<? extends Pins, ? extends State>> getIntegratedCircuits(String type)
+  {
+    ArrayList<IntegratedCircuit<? extends Pins, ? extends State>> result = new ArrayList<>();
+    for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
+    {
+      if (integratedCircuit.getType().equals(type))
+      {
+        result.add(integratedCircuit);
+      }
+    }
+    return result;
+  }
 }
 

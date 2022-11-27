@@ -16,12 +16,14 @@ public class XorGateView
   public XorGateView(CircuitEditor circuitEditor,
                      int inputCount,
                      Int2D position,
-                     Rotation rotation)
+                     Rotation rotation,
+                     String name)
   {
     super(circuitEditor,
           inputCount,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(false, 1);
     finaliseView();
   }
@@ -43,6 +45,7 @@ public class XorGateView
   {
     return new XorGateData(position,
                            rotation,
+                           name,
                            saveEvents(),
                            savePorts(),
                            inputCount);

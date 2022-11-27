@@ -22,11 +22,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   protected IC integratedCircuit;
   protected List<PortView> ports;
 
-  public IntegratedCircuitView(CircuitEditor circuitEditor,
-                               Int2D position,
-                               Rotation rotation)
+  public IntegratedCircuitView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, String name)
   {
-    super(circuitEditor, position, rotation);
+    super(circuitEditor, position, rotation, name);
     circuitEditor.add(this);
     this.ports = new ArrayList<>();
   }

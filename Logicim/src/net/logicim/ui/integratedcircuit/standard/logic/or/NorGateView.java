@@ -16,12 +16,14 @@ public class NorGateView
   public NorGateView(CircuitEditor circuitEditor,
                      int inputCount,
                      Int2D position,
-                     Rotation rotation)
+                     Rotation rotation,
+                     String name)
   {
     super(circuitEditor,
           inputCount,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(true, 0);
     finaliseView();
   }
@@ -43,6 +45,7 @@ public class NorGateView
   {
     return new NorGateData(position,
                            rotation,
+                           name,
                            saveEvents(),
                            savePorts(),
                            inputCount);

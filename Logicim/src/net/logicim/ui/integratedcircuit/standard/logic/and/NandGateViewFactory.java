@@ -12,7 +12,7 @@ public class NandGateViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new NandGateView(circuitEditor, 2, position, rotation);
+    return new NandGateView(circuitEditor, 2, position, rotation, "");
   }
 }
 

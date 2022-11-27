@@ -12,7 +12,7 @@ public class AndGateViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new AndGateView(circuitEditor, 2, position, rotation);
+    return new AndGateView(circuitEditor, 2, position, rotation, "");
   }
 }
 

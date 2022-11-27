@@ -24,6 +24,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
 {
   protected Int2D position;
   protected Rotation rotation;
+  protected String name;
 
   protected List<IntegratedCircuitEventData<?>> events;
   protected List<PortData> ports;
@@ -34,11 +35,13 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
 
   public IntegratedCircuitData(Int2D position,
                                Rotation rotation,
+                               String name,
                                List<IntegratedCircuitEventData<?>> events,
                                List<PortData> ports)
   {
     this.position = position;
     this.rotation = rotation;
+    this.name = name;
     this.events = events;
     this.ports = ports;
   }

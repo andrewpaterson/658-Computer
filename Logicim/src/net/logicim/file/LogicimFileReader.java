@@ -23,9 +23,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +49,21 @@ public class LogicimFileReader
       SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
       SAXParser parser = saxParserFactory.newSAXParser();
       parser.parse(new FileInputStream(file), this);
+    }
+    catch (ParserConfigurationException | SAXException | IOException e)
+    {
+      throw new SimulatorException(e.getMessage());
+    }
+    return circuitData;
+  }
+
+  public CircuitData load(String contents)
+  {
+    try
+    {
+      SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+      SAXParser parser = saxParserFactory.newSAXParser();
+      parser.parse(new ByteArrayInputStream(contents.getBytes()), this);
     }
     catch (ParserConfigurationException | SAXException | IOException e)
     {

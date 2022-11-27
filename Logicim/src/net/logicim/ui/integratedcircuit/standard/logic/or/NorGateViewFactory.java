@@ -12,7 +12,7 @@ public class NorGateViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new NorGateView(circuitEditor, 2, position, rotation);
+    return new NorGateView(circuitEditor, 2, position, rotation, "");
   }
 }
 

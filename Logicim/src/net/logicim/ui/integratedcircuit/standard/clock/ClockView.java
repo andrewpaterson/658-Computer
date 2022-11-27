@@ -23,11 +23,13 @@ public class ClockView
   public ClockView(CircuitEditor circuitEditor,
                    Int2D position,
                    Rotation rotation,
+                   String name,
                    float frequency)
   {
     super(circuitEditor,
           position,
-          rotation);
+          rotation,
+          name);
     this.frequency = frequency;
     create();
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
@@ -113,6 +115,7 @@ public class ClockView
   {
     return new ClockData(position,
                          rotation,
+                         name,
                          frequency,
                          integratedCircuit.getState().getState(),
                          saveEvents(),

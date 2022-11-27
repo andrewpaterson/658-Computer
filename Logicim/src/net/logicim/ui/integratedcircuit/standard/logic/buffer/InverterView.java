@@ -15,11 +15,13 @@ public class InverterView
 {
   public InverterView(CircuitEditor circuitEditor,
                       Int2D position,
-                      Rotation rotation)
+                      Rotation rotation,
+                      String name)
   {
     super(circuitEditor,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(true);
     finaliseView();
   }
@@ -41,6 +43,7 @@ public class InverterView
   {
     return new InverterData(position,
                             rotation,
+                            name,
                             saveEvents(),
                             savePorts());
   }

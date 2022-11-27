@@ -20,11 +20,17 @@ public class AndGateData
 
   public AndGateData(Int2D position,
                      Rotation rotation,
+                     String name,
                      List<IntegratedCircuitEventData<?>> events,
                      List<PortData> portData,
                      int inputCount)
   {
-    super(position, rotation, events, portData, inputCount);
+    super(position,
+          rotation,
+          name,
+          events,
+          portData,
+          inputCount);
   }
 
   public AndGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
@@ -32,7 +38,8 @@ public class AndGateData
     return new AndGateView(circuitEditor,
                            inputCount,
                            position,
-                           rotation);
+                           rotation,
+                           name);
   }
 }
 

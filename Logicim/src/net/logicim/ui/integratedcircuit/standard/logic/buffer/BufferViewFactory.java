@@ -12,7 +12,7 @@ public class BufferViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new BufferView(circuitEditor, position, rotation);
+    return new BufferView(circuitEditor, position, rotation, "");
   }
 }
 

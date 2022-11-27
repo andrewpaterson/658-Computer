@@ -13,6 +13,8 @@ import java.util.List;
 public class XorGate
     extends IntegratedCircuit<XorGatePins, Stateless>
 {
+  public static final String TYPE = "XOR Gate";
+
   public XorGate(Circuit circuit, String name, XorGatePins pins)
   {
     super(circuit, name, pins);
@@ -65,7 +67,7 @@ public class XorGate
   @Override
   public String getType()
   {
-    return "XOR Gate";
+    return TYPE;
   }
 }
 

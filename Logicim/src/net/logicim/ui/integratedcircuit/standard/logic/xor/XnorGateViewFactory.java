@@ -12,7 +12,7 @@ public class XnorGateViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new XnorGateView(circuitEditor, 2, position, rotation);
+    return new XnorGateView(circuitEditor, 2, position, rotation, "");
   }
 }
 

@@ -15,9 +15,10 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   public LogicGateView(CircuitEditor circuitEditor,
                        int inputCount,
                        Int2D position,
-                       Rotation rotation)
+                       Rotation rotation,
+                       String name)
   {
-    super(circuitEditor, position, rotation);
+    super(circuitEditor, position, rotation, name);
     this.inputCount = inputCount;
     create();
   }

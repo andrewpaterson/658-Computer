@@ -13,6 +13,8 @@ import java.util.List;
 public class OrGate
     extends IntegratedCircuit<OrGatePins, Stateless>
 {
+  public static final String TYPE = "OR Gate";
+
   public OrGate(Circuit circuit, String name, OrGatePins pins)
   {
     super(circuit, name, pins);
@@ -66,7 +68,7 @@ public class OrGate
   @Override
   public String getType()
   {
-    return "OR Gate";
+    return TYPE;
   }
 }
 

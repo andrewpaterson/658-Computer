@@ -23,12 +23,17 @@ public class ClockData
 
   public ClockData(Int2D position,
                    Rotation rotation,
+                   String name,
                    float frequency,
                    boolean state,
                    List<IntegratedCircuitEventData<?>> events,
                    List<PortData> portData)
   {
-    super(position, rotation, events, portData);
+    super(position,
+          rotation,
+          name,
+          events,
+          portData);
     this.frequency = frequency;
     this.state = state;
   }
@@ -39,6 +44,7 @@ public class ClockData
     return new ClockView(circuitEditor,
                          position,
                          rotation,
+                         name,
                          frequency);
   }
 }

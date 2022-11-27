@@ -11,6 +11,7 @@ import net.logicim.domain.common.port.Port;
 public class ClockOscillator
     extends IntegratedCircuit<ClockOscillatorPins, ClockOscillatorState>
 {
+  public static final String TYPE = "Clock";
   protected long halfCycleTime;
   protected long initialisationTime;
   protected long fullTicks;
@@ -71,7 +72,7 @@ public class ClockOscillator
   @Override
   public String getType()
   {
-    return "Clock";
+    return TYPE;
   }
 
   public float getInternalVoltage()

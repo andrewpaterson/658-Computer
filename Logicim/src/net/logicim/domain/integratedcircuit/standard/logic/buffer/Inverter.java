@@ -5,6 +5,8 @@ import net.logicim.domain.common.Circuit;
 public class Inverter
     extends Buffer
 {
+  public static final String TYPE = "Inverter";
+
   public Inverter(Circuit circuit, String name, BufferPins pins)
   {
     super(circuit, name, pins);
@@ -18,7 +20,7 @@ public class Inverter
   @Override
   public String getType()
   {
-    return "Inverter";
+    return TYPE;
   }
 }
 

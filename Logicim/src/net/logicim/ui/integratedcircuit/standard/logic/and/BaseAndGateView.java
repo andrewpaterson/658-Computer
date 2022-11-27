@@ -25,9 +25,14 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   public BaseAndGateView(CircuitEditor circuitEditor,
                          int inputCount,
                          Int2D position,
-                         Rotation rotation)
+                         Rotation rotation,
+                         String name)
   {
-    super(circuitEditor, inputCount, position, rotation);
+    super(circuitEditor,
+          inputCount,
+          position,
+          rotation,
+          name);
 
     float height = 1.4f;
     arcViewFront = new ArcView(this, new Float2D(0, -0.4f), 1.5f, 0, 180, true, true);

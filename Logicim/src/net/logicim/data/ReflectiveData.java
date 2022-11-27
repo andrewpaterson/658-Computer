@@ -39,7 +39,6 @@ public abstract class ReflectiveData
   {
     Element node = doc.createElement(elementName);
     node.appendChild(doc.createTextNode(value));
-
     return node;
   }
 
@@ -47,7 +46,6 @@ public abstract class ReflectiveData
   {
     Element node = doc.createElement(elementName);
     node.appendChild(doc.createTextNode(Long.toString(value)));
-
     return node;
   }
 
@@ -55,7 +53,6 @@ public abstract class ReflectiveData
   {
     Element node = doc.createElement(elementName);
     node.appendChild(doc.createTextNode(Integer.toString(value)));
-
     return node;
   }
 
@@ -63,16 +60,20 @@ public abstract class ReflectiveData
   {
     Element node = doc.createElement(elementName);
     node.appendChild(doc.createTextNode(Float.toString(value)));
-
     return node;
+  }
 
+  public Node writeDouble(Document doc, String elementName, double value)
+  {
+    Element node = doc.createElement(elementName);
+    node.appendChild(doc.createTextNode(Double.toString(value)));
+    return node;
   }
 
   public Node writeBoolean(Document doc, String elementName, boolean value)
   {
     Element node = doc.createElement(elementName);
     node.appendChild(doc.createTextNode(Boolean.toString(value)));
-
     return node;
   }
 
@@ -141,56 +142,60 @@ public abstract class ReflectiveData
     Collection<String> fieldNames = instanceInspector.getFieldNames();
     for (String fieldName : fieldNames)
     {
+      Class<?> fieldClass = instanceInspector.getFieldClass(fieldName);
       Object fieldValue = instanceInspector.getFieldValue(fieldName);
-      if (fieldValue == null)
+      if (ReflectiveData.class.isAssignableFrom(fieldClass))
       {
+        writeReflectiveData(doc, parent, fieldName, (ReflectiveData) fieldValue);
       }
-      else if (fieldValue instanceof ReflectiveData)
+      else if (String.class.isAssignableFrom(fieldClass))
       {
-        ReflectiveData saveData = (ReflectiveData) fieldValue;
-        saveData.writeXML(doc, fieldName, parent);
+        parent.appendChild(writeString(doc, fieldName, (String) fieldValue));
       }
-      else if (fieldValue instanceof String)
+      else if (Long.class.isAssignableFrom(fieldClass) || long.class.isAssignableFrom(fieldClass))
       {
-        Node node = writeString(doc, fieldName, (String) fieldValue);
-        parent.appendChild(node);
+        parent.appendChild(writeLong(doc, fieldName, (Long) fieldValue));
       }
-      else if (fieldValue instanceof Long)
+      else if (Integer.class.isAssignableFrom(fieldClass) || int.class.isAssignableFrom(fieldClass))
       {
-        Node node = writeLong(doc, fieldName, (Long) fieldValue);
-        parent.appendChild(node);
+        parent.appendChild(writeInt(doc, fieldName, (Integer) fieldValue));
       }
-      else if (fieldValue instanceof Integer)
+      else if (Float.class.isAssignableFrom(fieldClass) || float.class.isAssignableFrom(fieldClass))
       {
-        Node node = writeInt(doc, fieldName, (Integer) fieldValue);
-        parent.appendChild(node);
+        parent.appendChild(writeFloat(doc, fieldName, (Float) fieldValue));
       }
-      else if (fieldValue instanceof Float)
+      else if (Double.class.isAssignableFrom(fieldClass) || double.class.isAssignableFrom(fieldClass))
       {
-        Node node = writeFloat(doc, fieldName, (Float) fieldValue);
-        parent.appendChild(node);
+        parent.appendChild(writeDouble(doc, fieldName, (Double) fieldValue));
       }
-      else if (fieldValue instanceof Boolean)
+      else if (Boolean.class.isAssignableFrom(fieldClass) || boolean.class.isAssignableFrom(fieldClass))
       {
-        Node node = writeBoolean(doc, fieldName, (Boolean) fieldValue);
-        parent.appendChild(node);
+        parent.appendChild(writeBoolean(doc, fieldName, (Boolean) fieldValue));
       }
-      else if (fieldValue instanceof List)
+      else if (List.class.isAssignableFrom(fieldClass))
       {
         writeList(doc, parent, fieldName, (List<?>) fieldValue);
       }
-      else if (fieldValue instanceof Int2D)
+      else if (Int2D.class.isAssignableFrom(fieldClass))
       {
         writeInt2D(doc, parent, fieldName, (Int2D) fieldValue);
       }
-      else if (fieldValue instanceof Rotation)
+      else if (Rotation.class.isAssignableFrom(fieldClass))
       {
         writeRotation(doc, parent, fieldName, (Rotation) fieldValue);
       }
       else
       {
-        throw new SimulatorException("Unknown field class [" + fieldValue.getClass().getSimpleName() + "] writing field [" + getClass().getSimpleName() + "." + fieldName + "].");
+        throw new SimulatorException("Unknown field class [" + fieldClass.getSimpleName() + "] writing field [" + getClass().getSimpleName() + "." + fieldName + "] with value [" + fieldValue + "].");
       }
+    }
+  }
+
+  protected void writeReflectiveData(Document doc, Element parent, String fieldName, ReflectiveData reflectiveData)
+  {
+    if (reflectiveData != null)
+    {
+      reflectiveData.writeXML(doc, fieldName, parent);
     }
   }
 }

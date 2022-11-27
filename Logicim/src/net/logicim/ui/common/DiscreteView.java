@@ -19,16 +19,21 @@ public abstract class DiscreteView
   protected CircuitEditor circuitEditor;
   protected Int2D position;
   protected Rotation rotation;
+  protected String name;
   protected BoundingBox boundingBox;
   protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
   protected boolean finalised;
 
-  public DiscreteView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public DiscreteView(CircuitEditor circuitEditor,
+                      Int2D position,
+                      Rotation rotation,
+                      String name)
   {
     this.circuitEditor = circuitEditor;
     this.position = position.clone();
     this.rotation = rotation;
+    this.name = name;
     this.boundingBox = new BoundingBox();
     this.selectionBox = new BoundingBox();
     this.shapes = new ArrayList<>();

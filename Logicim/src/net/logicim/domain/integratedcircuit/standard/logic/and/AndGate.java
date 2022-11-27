@@ -13,6 +13,8 @@ import java.util.List;
 public class AndGate
     extends IntegratedCircuit<AndGatePins, Stateless>
 {
+  public static final String TYPE = "AND Gate";
+
   public AndGate(Circuit circuit, String name, AndGatePins pins)
   {
     super(circuit, name, pins);
@@ -68,7 +70,7 @@ public class AndGate
   @Override
   public String getType()
   {
-    return "AND Gate";
+    return TYPE;
   }
 }
 

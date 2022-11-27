@@ -16,12 +16,14 @@ public class XnorGateView
   public XnorGateView(CircuitEditor circuitEditor,
                       int inputCount,
                       Int2D position,
-                      Rotation rotation)
+                      Rotation rotation,
+                      String name)
   {
     super(circuitEditor,
           inputCount,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(true, 1);
     finaliseView();
   }
@@ -43,6 +45,7 @@ public class XnorGateView
   {
     return new XnorGateData(position,
                             rotation,
+                            name,
                             saveEvents(),
                             savePorts(),
                             inputCount);

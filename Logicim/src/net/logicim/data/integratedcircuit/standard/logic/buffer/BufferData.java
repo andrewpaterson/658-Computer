@@ -20,10 +20,15 @@ public class BufferData
 
   public BufferData(Int2D position,
                     Rotation rotation,
+                    String name,
                     List<IntegratedCircuitEventData<?>> events,
                     List<PortData> portData)
   {
-    super(position, rotation, events, portData);
+    super(position,
+          rotation,
+          name,
+          events,
+          portData);
   }
 
   @Override
@@ -31,7 +36,8 @@ public class BufferData
   {
     return new BufferView(circuitEditor,
                           position,
-                          rotation);
+                          rotation,
+                          name);
   }
 }
 

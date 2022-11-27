@@ -5,6 +5,8 @@ import net.logicim.domain.common.Circuit;
 public class XnorGate
     extends XorGate
 {
+  public static final String TYPE = "XNOR Gate";
+
   public XnorGate(Circuit circuit, String name, XorGatePins pins)
   {
     super(circuit, name, pins);
@@ -19,7 +21,7 @@ public class XnorGate
   @Override
   public String getType()
   {
-    return "XNOR Gate";
+    return TYPE;
   }
 }
 

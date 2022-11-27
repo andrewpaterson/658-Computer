@@ -20,11 +20,12 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
 
   public LogicGateData(Int2D position,
                        Rotation rotation,
+                       String name,
                        List<IntegratedCircuitEventData<?>> events,
                        List<PortData> portData,
                        int inputCount)
   {
-    super(position, rotation, events, portData);
+    super(position, rotation, name, events, portData);
     this.inputCount = inputCount;
   }
 }

@@ -5,6 +5,8 @@ import net.logicim.domain.common.Circuit;
 public class NorGate
     extends OrGate
 {
+  public static final String TYPE = "NOR Gate";
+
   public NorGate(Circuit circuit, String name, OrGatePins pins)
   {
     super(circuit, name, pins);
@@ -19,7 +21,7 @@ public class NorGate
   @Override
   public String getType()
   {
-    return "NOR Gate";
+    return TYPE;
   }
 }
 

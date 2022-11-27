@@ -5,6 +5,8 @@ import net.logicim.domain.common.Circuit;
 public class NandGate
     extends AndGate
 {
+  public static final String TYPE = "NAND Gate";
+
   public NandGate(Circuit circuit, String name, AndGatePins pins)
   {
     super(circuit, name, pins);
@@ -19,7 +21,7 @@ public class NandGate
   @Override
   public String getType()
   {
-    return "NAND Gate";
+    return TYPE;
   }
 }
 

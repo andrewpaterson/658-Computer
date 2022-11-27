@@ -12,7 +12,7 @@ public class InverterViewFactory
   @Override
   public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new InverterView(circuitEditor, position, rotation);
+    return new InverterView(circuitEditor, position, rotation, "");
   }
 }
 

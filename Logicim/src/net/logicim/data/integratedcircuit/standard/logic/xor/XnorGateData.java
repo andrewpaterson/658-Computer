@@ -20,11 +20,17 @@ public class XnorGateData
 
   public XnorGateData(Int2D position,
                       Rotation rotation,
+                      String name,
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> ports,
                       int inputCount)
   {
-    super(position, rotation, events, ports, inputCount);
+    super(position,
+          rotation,
+          name,
+          events,
+          ports,
+          inputCount);
   }
 
   @Override
@@ -33,7 +39,8 @@ public class XnorGateData
     return new XnorGateView(circuitEditor,
                             inputCount,
                             position,
-                            rotation);
+                            rotation,
+                            name);
   }
 }
 

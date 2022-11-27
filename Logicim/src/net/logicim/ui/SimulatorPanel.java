@@ -200,7 +200,6 @@ public class SimulatorPanel
       {
         CircuitData savedData = new LogicimFileReader().load(file);
         simulatorEditor.load(savedData);
-
       }
     }
   }

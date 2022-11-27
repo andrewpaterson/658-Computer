@@ -15,11 +15,13 @@ public class BufferView
 {
   public BufferView(CircuitEditor circuitEditor,
                     Int2D position,
-                    Rotation rotation)
+                    Rotation rotation,
+                    String name)
   {
     super(circuitEditor,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(false);
     finaliseView();
   }
@@ -41,6 +43,7 @@ public class BufferView
   {
     return new BufferData(position,
                           rotation,
+                          name,
                           saveEvents(),
                           savePorts());
   }

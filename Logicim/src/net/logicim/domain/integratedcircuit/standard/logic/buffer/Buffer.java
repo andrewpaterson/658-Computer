@@ -11,6 +11,8 @@ import net.logicim.domain.common.trace.TraceValue;
 public class Buffer
     extends IntegratedCircuit<BufferPins, Stateless>
 {
+  public static final String TYPE = "Buffer";
+
   public Buffer(Circuit circuit, String name, BufferPins pins)
   {
     super(circuit, name, pins);
@@ -51,7 +53,7 @@ public class Buffer
   @Override
   public String getType()
   {
-    return "Buffer";
+    return TYPE;
   }
 
   public Port getInputPort()

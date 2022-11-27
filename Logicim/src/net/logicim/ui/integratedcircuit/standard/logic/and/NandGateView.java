@@ -16,12 +16,14 @@ public class NandGateView
   public NandGateView(CircuitEditor circuitEditor,
                       int inputCount,
                       Int2D position,
-                      Rotation rotation)
+                      Rotation rotation,
+                      String name)
   {
     super(circuitEditor,
           inputCount,
           position,
-          rotation);
+          rotation,
+          name);
     createPorts(true, 0);
     finaliseView();
   }
@@ -43,6 +45,7 @@ public class NandGateView
   {
     return new NandGateData(position,
                             rotation,
+                            name,
                             saveEvents(),
                             savePorts(),
                             inputCount);

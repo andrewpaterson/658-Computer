@@ -20,11 +20,17 @@ public class NandGateData
 
   public NandGateData(Int2D position,
                       Rotation rotation,
+                      String name,
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> portData,
                       int inputCount)
   {
-    super(position, rotation, events, portData, inputCount);
+    super(position,
+          rotation,
+          name,
+          events,
+          portData,
+          inputCount);
   }
 
   @Override
@@ -33,7 +39,8 @@ public class NandGateData
     return new NandGateView(circuitEditor,
                             inputCount,
                             position,
-                            rotation);
+                            rotation,
+                            name);
   }
 }
 

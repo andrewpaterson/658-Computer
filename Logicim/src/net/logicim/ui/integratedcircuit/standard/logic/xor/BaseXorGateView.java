@@ -27,9 +27,10 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   public BaseXorGateView(CircuitEditor circuitEditor,
                          int inputCount,
                          Int2D position,
-                         Rotation rotation)
+                         Rotation rotation,
+                         String name)
   {
-    super(circuitEditor, inputCount, position, rotation);
+    super(circuitEditor, inputCount, position, rotation, name);
 
     float yTop = 0.6f;
     float yBottom = 3.5f;

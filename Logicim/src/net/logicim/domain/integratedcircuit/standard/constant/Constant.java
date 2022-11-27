@@ -12,6 +12,8 @@ import net.logicim.domain.common.state.State;
 public class Constant
     extends IntegratedCircuit<ConstantPins, ConstantState>
 {
+  public static final String  TYPE = "Constant";
+
   protected int propagationTime;
   protected long defaultValue;
 
@@ -41,7 +43,7 @@ public class Constant
   @Override
   public String getType()
   {
-    return "Constant";
+    return TYPE;
   }
 
   @Override

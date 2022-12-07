@@ -1,0 +1,68 @@
+%SIGNAL
+PIN  19 = !A 
+PIN  18 = !B 
+PIN  17 = !C 
+PIN   1 =  CLK 
+PIN  16 = !D 
+PIN  15 = !E 
+PIN  14 = !F 
+PIN  13 = !G 
+PIN   2 =  I0 
+PIN   3 =  I1 
+PIN   4 =  I2 
+PIN   5 =  I3 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+!A.d  =>
+    I0 & I1 & I2 & !I3
+  # !I1 & !I3
+  # I1 & I3
+  # I0 & !I2
+  # !I0 & I2
+
+!B.d  =>
+    !I0 & !I1 & !I2 & I3
+  # I0 & !I2 & I3
+  # !I0 & I2 & I3
+  # !I0 & !I2 & !I3
+  # !I1 & !I3
+
+!C.d  =>
+    !I0 & !I1 & !I2 & !I3
+  # !I0 & !I1 & I2 & I3
+  # I0 & !I1
+  # !I0 & I1
+  # !I2 & I3
+
+!D.d  =>
+    I0 & !I2 & !I3
+  # !I0 & !I1 & !I3
+  # I1 & I2 & !I3
+  # I1 & !I2 & I3
+  # !I1 & I2 & I3
+
+!E.d  =>
+    !I1 & !I3
+  # I0 & I1
+  # I2 & !I3
+  # I0 & I2
+
+!F.d  =>
+    !I0 & I1 & !I2
+  # I0 & I2
+  # I0 & !I1
+  # !I2 & !I3
+  # I1 & !I3
+
+!G.d  =>
+    !I0 & I1 & !I3
+  # I0 & I1 & I2
+  # I1 & !I2 & I3
+  # !I1 & I2
+  # I0 & !I1
+
+%END

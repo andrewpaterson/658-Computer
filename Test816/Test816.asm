@@ -153,7 +153,7 @@ START:
 	COP		34
 	
 LOOP:
-	JMP 	LOOP
+	JMP 	START
 
 WRITE_PROGRESS:
 	SEP		#$20	;8 bit accumulator

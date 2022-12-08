@@ -114,17 +114,11 @@ public class SlewEvent
       throw new SimulatorException("Slew time must be in the future.");
     }
 
-    long endTime = getEndTime();
-    List<PortOutputEvent> driveEvents = port.getOverlappingEvents(endTime);
+    long startTime = getTime();
+    List<DriveEvent> driveEvents = port.getFutureDriveEvents(startTime);
     if (driveEvents.size() > 0)
     {
-      for (PortOutputEvent driveEvent : driveEvents)
-      {
-        if (driveEvent instanceof DriveEvent)
-        {
-          timeline.remove(driveEvent);
-        }
-      }
+      timeline.removeAll(driveEvents);
     }
 
     return new DriveEvent(port, getSlewTime(), getEndVoltage(), timeline);

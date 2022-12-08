@@ -92,6 +92,11 @@ public class Port
     }
   }
 
+  public void removeAll(List<? extends PortEvent> event)
+  {
+    events.removeAll(event);
+  }
+
   public LinkedList<PortEvent> getEvents()
   {
     return events;
@@ -351,19 +356,20 @@ public class Port
     return voltageConfiguration;
   }
 
-  public List<PortOutputEvent> getOverlappingEvents(long endTime)
+  public List<DriveEvent> getFutureDriveEvents(long time)
   {
-    List<PortOutputEvent> result = new ArrayList<>();
+    List<DriveEvent> result = new ArrayList<>();
     for (PortEvent event : events)
     {
-      if (event instanceof PortOutputEvent)
+      if (event instanceof DriveEvent)
       {
-        if (event.getTime() <= endTime)
+        if (event.getTime() >= time)
         {
-          result.add((PortOutputEvent) event);
+          result.add((DriveEvent) event);
         }
       }
     }
+
     return result;
   }
 

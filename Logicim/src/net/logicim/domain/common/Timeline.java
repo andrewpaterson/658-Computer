@@ -9,6 +9,7 @@ import net.logicim.domain.common.event.Event;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static net.logicim.domain.common.LongTime.timeToNanoseconds;
@@ -167,6 +168,15 @@ public class Timeline
     {
       return false;
     }
+  }
+  public boolean removeAll(List<? extends Event> events)
+  {
+    boolean result = false;
+    for (Event event : events)
+    {
+      result |= remove(event);
+    }
+    return result;
   }
 
   public TimelineData save()

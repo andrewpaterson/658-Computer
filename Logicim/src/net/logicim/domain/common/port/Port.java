@@ -391,5 +391,17 @@ public class Port
     }
     return 0;
   }
+
+  public String toEventsString()
+  {
+    StringBuilder builder = new StringBuilder();
+    builder.append( "Events [" + events.size() + "]:  ");
+    for (PortEvent event : events)
+    {
+      builder.append(event.toShortString());
+      builder.append(",  ");
+    }
+    return builder.toString();
+  }
 }
 

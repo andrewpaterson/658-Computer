@@ -50,5 +50,11 @@ public abstract class Event
   public abstract void removeFromOwner();
 
   public abstract EventData<?> save();
+
+  public String toShortString()
+  {
+    String string = getClass().getSimpleName().replace("Event", "");
+    return string + ": Time [" + time + "]";
+  }
 }
 

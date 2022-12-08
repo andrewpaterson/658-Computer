@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 
@@ -147,6 +148,12 @@ public class SlewEvent
   public boolean forTime(long time)
   {
     return time <= getEndTime() && time >= this.time;
+  }
+
+  @Override
+  public String toShortString()
+  {
+    return super.toShortString() + " " + Voltage.getVoltageString(startVoltage) + " -> " + Voltage.getVoltageString(endVoltage);
   }
 }
 

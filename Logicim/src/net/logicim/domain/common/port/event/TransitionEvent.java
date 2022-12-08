@@ -3,6 +3,7 @@ package net.logicim.domain.common.port.event;
 import net.logicim.data.port.event.TransitionEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
 
 public class TransitionEvent
@@ -34,6 +35,12 @@ public class TransitionEvent
   public TransitionEventData save()
   {
     return new TransitionEventData(time, id, voltage);
+  }
+
+  @Override
+  public String toShortString()
+  {
+    return super.toShortString() + " " + Voltage.getVoltageString(voltage);
   }
 }
 

@@ -3,6 +3,7 @@ package net.logicim.domain.common.port.event;
 import net.logicim.data.port.event.DriveEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
 
 public class DriveEvent
@@ -46,6 +47,12 @@ public class DriveEvent
   public DriveEventData save()
   {
     return new DriveEventData(time, id, voltage);
+  }
+
+  @Override
+  public String toShortString()
+  {
+    return super.toShortString() + " " + Voltage.getVoltageString(voltage);
   }
 }
 

@@ -16,19 +16,24 @@ public abstract class LongTime
     return nanoseconds * timeGranularityInNanosecond;
   }
 
-  public static int nanosecondsToTime(float nanoseconds)
+  public static int nanosecondsToTime(double nanoseconds)
   {
     return (int) (nanoseconds * timeGranularityInNanosecond);
   }
 
-  public static long secondsToTime(float seconds)
+  public static long secondsToTime(double seconds)
   {
-    return nanosecondsToTime((long) ((double) nS_IN_S * seconds));
+    return nanosecondsToTime(((double) nS_IN_S * seconds));
   }
 
-  public float timeToSeconds(long time)
+  public double timeToSeconds(long time)
   {
-    return (float) ((double) timeToNanoseconds(time) / (double) nS_IN_S);
+    return timeToNanoseconds(time) / (double) nS_IN_S;
+  }
+
+  public static long frequencyToTime(double frequency)
+  {
+    return secondsToTime((1.0f / frequency));
   }
 }
 

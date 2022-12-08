@@ -25,5 +25,10 @@ public class OscilloscopePins
       inputs.add(port);
     }
   }
+
+  public List<Port> getInputs()
+  {
+    return inputs;
+  }
 }
 

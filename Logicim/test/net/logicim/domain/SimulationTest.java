@@ -24,6 +24,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 import java.util.Map;
 
 import static net.logicim.assertions.Validator.*;
+import static net.logicim.domain.common.LongTime.frequencyToTime;
 import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 import static net.logicim.domain.common.Units.MHz;
 
@@ -42,7 +43,7 @@ public class SimulationTest
                                                                                                                      nanosecondsToTime(2.0f),
                                                                                                                      nanosecondsToTime(2.0f))
     {
-    }), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.5f));
+    }), frequency, (long) (frequencyToTime(frequency) * 0.5f));
     ClockOscillator clock2 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(new VoltageConfiguration("",
                                                                                                                      0.8f,
                                                                                                                      2.0f,
@@ -51,7 +52,7 @@ public class SimulationTest
                                                                                                                      nanosecondsToTime(2.0f),
                                                                                                                      nanosecondsToTime(2.0f))
     {
-    }), frequency, (long) (ClockOscillator.getCycleTime(frequency) * 0.6f));
+    }), frequency, (long) (frequencyToTime(frequency) * 0.6f));
     OrGate orGate = new OrGate(circuit, "Or", new OrGatePins(2, new VoltageConfiguration("",
                                                                                          0.8f,
                                                                                          2.0f,

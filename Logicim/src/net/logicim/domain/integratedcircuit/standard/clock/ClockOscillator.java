@@ -8,6 +8,8 @@ import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.Port;
 
+import static net.logicim.domain.common.LongTime.frequencyToTime;
+
 public class ClockOscillator
     extends IntegratedCircuit<ClockOscillatorPins, ClockOscillatorState>
 {
@@ -18,20 +20,15 @@ public class ClockOscillator
 
   public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency)
   {
-    this(circuit, name, pins, frequency, getCycleTime(frequency) / 2);
+    this(circuit, name, pins, frequency, frequencyToTime(frequency) / 2);
   }
 
   public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency, long initialisationTime)
   {
     super(circuit, name, pins);
-    halfCycleTime = getCycleTime(frequency) / 2;
+    this.halfCycleTime = frequencyToTime(frequency) / 2;
     this.initialisationTime = initialisationTime;
     this.fullTicks = 0;
-  }
-
-  public static long getCycleTime(float frequency)
-  {
-    return LongTime.secondsToTime((1.0f / frequency));
   }
 
   @Override

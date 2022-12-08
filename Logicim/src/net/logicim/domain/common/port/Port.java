@@ -195,36 +195,39 @@ public class Port
 
   public boolean traceSlew(Simulation simulation, SlewEvent slewEvent)
   {
-    float startVoltage = slewEvent.getStartVoltage();
-    long slewTime = slewEvent.getSlewTime();
-    float endVoltage = slewEvent.getEndVoltage();
-
-    if (startVoltage != endVoltage)
+    if (voltageConfiguration != null)
     {
-      float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
-      float highVoltageIn = voltageConfiguration.getHighVoltageIn();
-      long transitionTime;
-      float transitionVoltage;
-      if (endVoltage <= lowVoltageIn)
-      {
-        transitionVoltage = lowVoltageIn;
-        transitionTime = calculateLowTransitionTime(slewEvent, startVoltage, endVoltage, transitionVoltage);
-      }
-      else if (endVoltage >= highVoltageIn)
-      {
-        transitionVoltage = highVoltageIn;
-        transitionTime = calculateHighTransitionTime(slewEvent, startVoltage, endVoltage, transitionVoltage);
-      }
-      else
-      {
-        transitionVoltage = (highVoltageIn + lowVoltageIn) / 2;
-        transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, transitionVoltage);
-      }
+      float startVoltage = slewEvent.getStartVoltage();
+      long slewTime = slewEvent.getSlewTime();
+      float endVoltage = slewEvent.getEndVoltage();
 
-      if (transitionTime > 0)
+      if (startVoltage != endVoltage)
       {
-        new TransitionEvent(this, transitionVoltage, transitionTime, simulation.getTimeline());
-        return true;
+        float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
+        float highVoltageIn = voltageConfiguration.getHighVoltageIn();
+        long transitionTime;
+        float transitionVoltage;
+        if (endVoltage <= lowVoltageIn)
+        {
+          transitionVoltage = lowVoltageIn;
+          transitionTime = calculateLowTransitionTime(slewEvent, startVoltage, endVoltage, transitionVoltage);
+        }
+        else if (endVoltage >= highVoltageIn)
+        {
+          transitionVoltage = highVoltageIn;
+          transitionTime = calculateHighTransitionTime(slewEvent, startVoltage, endVoltage, transitionVoltage);
+        }
+        else
+        {
+          transitionVoltage = (highVoltageIn + lowVoltageIn) / 2;
+          transitionTime = calculateTransitionTime(startVoltage, endVoltage, slewTime, transitionVoltage);
+        }
+
+        if (transitionTime > 0)
+        {
+          new TransitionEvent(this, transitionVoltage, transitionTime, simulation.getTimeline());
+          return true;
+        }
       }
     }
     return false;

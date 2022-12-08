@@ -255,26 +255,29 @@ public class Port
 
   protected void createTransitionEventFromExistingVoltage(Simulation simulation, TraceNet trace)
   {
-    float endVoltage = trace.getVoltage(simulation.getTime());
-    float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
-    float highVoltageIn = voltageConfiguration.getHighVoltageIn();
+    if (voltageConfiguration != null)
+    {
+      float endVoltage = trace.getVoltage(simulation.getTime());
+      float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
+      float highVoltageIn = voltageConfiguration.getHighVoltageIn();
 
-    float transitionVoltage = 0;
-    boolean traceValid = false;
-    if (endVoltage <= lowVoltageIn)
-    {
-      traceValid = true;
-      transitionVoltage = lowVoltageIn;
-    }
-    else if (endVoltage >= highVoltageIn)
-    {
-      traceValid = true;
-      transitionVoltage = highVoltageIn;
-    }
+      float transitionVoltage = 0;
+      boolean traceValid = false;
+      if (endVoltage <= lowVoltageIn)
+      {
+        traceValid = true;
+        transitionVoltage = lowVoltageIn;
+      }
+      else if (endVoltage >= highVoltageIn)
+      {
+        traceValid = true;
+        transitionVoltage = highVoltageIn;
+      }
 
-    if (traceValid)
-    {
-      new TransitionEvent(this, transitionVoltage, (long) 1, simulation.getTimeline());
+      if (traceValid)
+      {
+        new TransitionEvent(this, transitionVoltage, 1, simulation.getTimeline());
+      }
     }
   }
 

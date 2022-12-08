@@ -23,7 +23,6 @@ public class Oscilloscope
   @Override
   public void simulationStarted(Simulation simulation)
   {
-
   }
 
   @Override

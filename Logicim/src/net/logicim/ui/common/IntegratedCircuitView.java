@@ -54,6 +54,11 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
 
   protected void validatePorts()
   {
+    if ((integratedCircuit.getPorts().size() > 0) && (ports.size() == 0))
+    {
+      throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
+    }
+
     List<Port> missing = new ArrayList<>();
     for (Port port : integratedCircuit.getPorts())
     {
@@ -81,7 +86,15 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
         builder.append(port.getName());
 
       }
-      throw new SimulatorException("Ports [" + builder.toString() + "] not configured on IC view.");
+      throw new SimulatorException("Ports [" + builder.toString() + "] not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
+    }
+  }
+
+  private void validateIntegratedCircuit()
+  {
+    if (integratedCircuit == null)
+    {
+      throw new SimulatorException("Integrated Circuit not configured on IC view.  Call create().");
     }
   }
 
@@ -160,6 +173,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   protected void finaliseView()
   {
     super.finaliseView();
+    validateIntegratedCircuit();
     validatePorts();
   }
 

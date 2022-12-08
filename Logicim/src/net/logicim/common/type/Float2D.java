@@ -46,12 +46,6 @@ public class Float2D
     this.y = y;
   }
 
-  public void subtract(Float2D p)
-  {
-    this.x -= p.x;
-    this.y -= p.y;
-  }
-
   @Override
   public void add(int x, int y)
   {
@@ -76,6 +70,30 @@ public class Float2D
   {
     this.x += p.x;
     this.y += p.y;
+  }
+
+  public void subtract(float x, float y)
+  {
+    this.x -= x;
+    this.y -= y;
+  }
+
+  public void subtract(int x, int y)
+  {
+    this.x -= x;
+    this.y -= y;
+  }
+
+  public void subtract(Float2D p)
+  {
+    this.x -= p.x;
+    this.y -= p.y;
+  }
+
+  public void subtract(Int2D p)
+  {
+    this.x -= p.x;
+    this.y -= p.y;
   }
 
   @Override
@@ -135,10 +153,17 @@ public class Float2D
     this.y += y;
   }
 
-  public void subtract(float x, float y)
+  @Override
+  public void subtract(Tuple2 p)
   {
-    this.x -= x;
-    this.y -= y;
+    if (p instanceof Float2D)
+    {
+      subtract((Float2D) p);
+    }
+    else if (p instanceof Int2D)
+    {
+      subtract((Int2D) p);
+    }
   }
 
   @Override

@@ -14,6 +14,7 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
+import net.logicim.ui.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
@@ -401,6 +402,7 @@ public class SimulatorEditor
     actions.add(new InputAction(new CreatePlacementView(this, new XorGateViewFactory()), KeyEvent.VK_X, Up, Down, Up));
     actions.add(new InputAction(new CreatePlacementView(this, new XnorGateViewFactory()), KeyEvent.VK_X, Up, Down, Down));
     actions.add(new InputAction(new CreatePlacementView(this, new BufferViewFactory()), KeyEvent.VK_N, Up, Down, Down));
+    actions.add(new InputAction(new CreatePlacementView(this, new OscilloscopeViewFactory()), KeyEvent.VK_P, Up, Down, Up));
     actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
     actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
     actions.add(new InputAction(new IncreaseSimulationSpeed(this), KeyEvent.VK_EQUALS, Up, Up, Up));

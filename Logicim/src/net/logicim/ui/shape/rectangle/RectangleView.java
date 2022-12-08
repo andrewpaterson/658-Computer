@@ -38,13 +38,14 @@ public class RectangleView
     gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
 
-  public RectangleView(ShapeHolder shapeHolder, Tuple2 position, Tuple2 dimension, boolean border, boolean fill)
+  public RectangleView(ShapeHolder shapeHolder, Tuple2 topLeft, Tuple2 bottomRight, boolean border, boolean fill)
   {
     super(shapeHolder);
     this.border = border;
     this.fill = fill;
-    this.dimension = dimension.clone();
-    this.positionRelativeToIC = position.clone();
+    this.dimension = bottomRight.clone();
+    this.dimension.subtract(topLeft);
+    this.positionRelativeToIC = topLeft.clone();
 
     gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
@@ -62,17 +63,16 @@ public class RectangleView
     int width = viewport.transformGridToScreenWidth(transformedDimension);
     int height = viewport.transformGridToScreenHeight(transformedDimension);
 
-    Color shapeFill = viewport.getColours().getShapeFill();
-    Color shapeBorder = viewport.getColours().getShapeBorder();
-
     graphics.setStroke(viewport.getStroke());
     if (fill)
     {
+      Color shapeFill = getFillColour(viewport);
       graphics.setColor(shapeFill);
       graphics.fillRect(x, y, width, height);
     }
     if (border)
     {
+      Color shapeBorder = getBorderColour(viewport);
       graphics.setColor(shapeBorder);
       graphics.drawRect(x, y, width, height);
     }

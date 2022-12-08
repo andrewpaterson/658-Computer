@@ -55,12 +55,12 @@ public class PolygonView
     graphics.setStroke(viewport.getStroke());
     if (fill)
     {
-      graphics.setColor(viewport.getColours().getShapeFill());
+      graphics.setColor(getFillColour(viewport));
       graphics.fillPolygon(p);
     }
     if (border)
     {
-      graphics.setColor(viewport.getColours().getShapeBorder());
+      graphics.setColor(getBorderColour(viewport));
       graphics.drawPolygon(p);
     }
   }

@@ -5,8 +5,9 @@ import net.logicim.assertions.Validator;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Voltage;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.voltage.NullVoltageColours;
+import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.file.LogicimFileReader;
@@ -19,7 +20,7 @@ public class EventPropagationTest
 
   private static void testEventPropagation()
   {
-    CircuitEditor circuitEditor = new CircuitEditor();
+    CircuitEditor circuitEditor = new CircuitEditor(new NullVoltageColours());
 
     LogicimFileReader fileReader = new LogicimFileReader();
     CircuitData circuitData = fileReader.load(MultipleXORIntoAndSourceXML.xml);

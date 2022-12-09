@@ -34,7 +34,7 @@ public class TraceView
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     graphics.setStroke(viewport.getStroke());
-    Color color = VoltageColour.getColorForTrace(viewport.getColours(), trace, time);
+    Color color = VoltageColour.getColourForTrace(viewport.getColours(), trace, time);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);

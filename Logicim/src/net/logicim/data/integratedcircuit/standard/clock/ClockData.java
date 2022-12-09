@@ -14,12 +14,12 @@ import java.util.List;
 public class ClockData
     extends IntegratedCircuitData<ClockView>
 {
+  protected float frequency;
+  protected boolean state;
+
   public ClockData()
   {
   }
-
-  protected float frequency;
-  protected boolean state;
 
   public ClockData(Int2D position,
                    Rotation rotation,

@@ -1,10 +1,12 @@
 package net.logicim.ui.common;
 
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.ui.colour.ColourGradient;
 
 import java.awt.*;
 
 public class Colours
+    implements VoltageRepresentation
 {
   protected Color background;
 

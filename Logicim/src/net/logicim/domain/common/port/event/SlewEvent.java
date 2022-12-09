@@ -4,7 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.Voltage;
+import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 

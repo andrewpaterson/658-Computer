@@ -77,7 +77,7 @@ public class ClockView
     if (state != null)
     {
       float voltage = integratedCircuit.getInternalVoltage();
-      clockColor = VoltageColour.getColorForVoltage(viewport.getColours(), voltage);
+      clockColor = VoltageColour.getColourForVoltage(viewport.getColours(), voltage);
     }
     else
     {

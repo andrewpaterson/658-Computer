@@ -1,4 +1,4 @@
-package net.logicim.domain.common;
+package net.logicim.domain.common.voltage;
 
 public interface Voltage
 {

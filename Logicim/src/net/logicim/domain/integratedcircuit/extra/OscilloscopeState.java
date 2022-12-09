@@ -2,52 +2,109 @@ package net.logicim.domain.integratedcircuit.extra;
 
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Pins;
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.state.State;
+import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.ui.common.VoltageColour;
+
+import java.awt.*;
 
 public class OscilloscopeState
     extends State
 {
-  protected int width;
   protected int inputCount;
-  protected float[][] values;
-  protected int resolution;
+  protected int sampleCount;
+  protected float[][] minVoltage;
+  protected float[][] maxVoltage;
+  protected int[][] colour;
   protected int tickPosition;
 
-  public OscilloscopeState(IntegratedCircuit<? extends Pins, ? extends State> parent, int width, int inputCount, int resolution)
+  public OscilloscopeState(IntegratedCircuit<? extends Pins, ? extends State> parent, int inputCount, int sampleCount)
   {
     super(parent);
-    this.width = width;
     this.inputCount = inputCount;
-    values = new float[inputCount][];
-    this.resolution = resolution;
-    for (int i = 0; i < values.length; i++)
+    this.sampleCount = sampleCount;
+
+    minVoltage = new float[inputCount][];
+    for (int i = 0; i < minVoltage.length; i++)
     {
-      values[i] = new float[width * resolution];
+      minVoltage[i] = new float[sampleCount];
     }
+
+    maxVoltage = new float[inputCount][];
+    for (int i = 0; i < maxVoltage.length; i++)
+    {
+      maxVoltage[i] = new float[sampleCount];
+    }
+
+    colour = new int[inputCount][];
+    for (int i = 0; i < colour.length; i++)
+    {
+      colour[i] = new int[sampleCount];
+    }
+
     tickPosition = 0;
   }
 
   public void tick()
   {
     tickPosition++;
-    if (tickPosition >= width * resolution)
+    if (tickPosition >= sampleCount)
     {
       tickPosition = 0;
     }
   }
 
-  public void sample(int input, float voltage)
+  public void sample(int input, TraceNet trace, VoltageRepresentation colours, long time)
   {
-    if (Float.isNaN(voltage))
+    Color colour;
+    float minimumVoltage;
+    float maximumVoltage;
+    if ((trace == null) || (time == -1))
     {
-      voltage = 0;
+      colour = colours.getDisconnectedTrace();
+      minimumVoltage = 0;
+      maximumVoltage = 0;
     }
-    values[input][tickPosition] = voltage;
+    else
+    {
+      minimumVoltage = trace.getMinimumVoltage(time);
+      maximumVoltage = trace.getMaximumVoltage(time);
+
+      colour = VoltageColour.getColourForTrace(colours, trace, time);
+      if (Float.isNaN(minimumVoltage))
+      {
+        minimumVoltage = 0;
+      }
+      if (Float.isNaN(maximumVoltage))
+      {
+        maximumVoltage = 0;
+      }
+    }
+
+    this.minVoltage[input][tickPosition] = minimumVoltage;
+    this.maxVoltage[input][tickPosition] = maximumVoltage;
+    this.colour[input][tickPosition] = colour.getRGB();
   }
 
-  public float[][] getValues()
+  public float[][] getMinVoltage()
   {
-    return values;
+    return minVoltage;
+  }
+
+  public float[][] getMaxVoltage()
+  {
+    return maxVoltage;
+  }
+
+  public int[][] getColour()
+  {
+    return colour;
+  }
+
+  public int getTickPosition()
+  {
+    return tickPosition;
   }
 }
 

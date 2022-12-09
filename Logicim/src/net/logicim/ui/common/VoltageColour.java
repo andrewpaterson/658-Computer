@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 
@@ -7,7 +8,7 @@ import java.awt.*;
 
 public abstract class VoltageColour
 {
-  public static Color getColorForVoltage(Colours colours, float voltage)
+  public static Color getColourForVoltage(VoltageRepresentation colours, float voltage)
   {
     if ((voltage < 0.0f) || (voltage > 7.0f))
     {
@@ -19,7 +20,7 @@ public abstract class VoltageColour
     }
   }
 
-  public static Color getColorForTrace(Colours colours, TraceNet trace, long time)
+  public static Color getColourForTrace(VoltageRepresentation colours, TraceNet trace, long time)
   {
     if ((trace == null) || (time == -1))
     {
@@ -28,31 +29,35 @@ public abstract class VoltageColour
     else
     {
       float voltage = trace.getVoltage(time);
-      if (!Float.isNaN(voltage))
-      {
-        float shortVoltage = trace.getShortVoltage(time);
-        Color colorForVoltage = getColorForVoltage(colours, voltage);
-        if (shortVoltage == 0)
-        {
-          return colorForVoltage;
-        }
-        else
-        {
-          Color colorForShort = getColorForShort(colours, shortVoltage);
-          return new Color(clamp(colorForVoltage.getRed() + colorForShort.getRed()),
-                           clamp(colorForVoltage.getGreen() + colorForShort.getGreen()),
-                           clamp(colorForVoltage.getBlue() + colorForShort.getBlue()));
-        }
-      }
-
-      else
-      {
-        return colours.getTraceUndriven();
-      }
+      return getColourForTrace(colours, trace, time, voltage);
     }
   }
 
-  private static int clamp(int colourComponent)
+  public static Color getColourForTrace(VoltageRepresentation colours, TraceNet trace, long time, float voltage)
+  {
+    if (!Float.isNaN(voltage))
+    {
+      float shortVoltage = trace.getShortVoltage(time);
+      Color colorForVoltage = getColourForVoltage(colours, voltage);
+      if (shortVoltage == 0)
+      {
+        return colorForVoltage;
+      }
+      else
+      {
+        Color colorForShort = getColorForShort(colours, shortVoltage);
+        return new Color(clamp(colorForVoltage.getRed() + colorForShort.getRed()),
+                         clamp(colorForVoltage.getGreen() + colorForShort.getGreen()),
+                         clamp(colorForVoltage.getBlue() + colorForShort.getBlue()));
+      }
+    }
+    else
+    {
+      return colours.getTraceUndriven();
+    }
+  }
+
+  public static int clamp(int colourComponent)
   {
     if (colourComponent < 0)
     {
@@ -68,7 +73,7 @@ public abstract class VoltageColour
     }
   }
 
-  private static Color getColorForShort(Colours colours, float shortVoltage)
+  private static Color getColorForShort(VoltageRepresentation colours, float shortVoltage)
   {
     if (shortVoltage > 7 || (shortVoltage <= 0))
     {
@@ -77,7 +82,7 @@ public abstract class VoltageColour
     return colours.getTraceShort(shortVoltage);
   }
 
-  public static Color getColorForPort(Colours colours, Port port, long time)
+  public static Color getColorForPort(VoltageRepresentation colours, Port port, long time)
   {
     TraceNet trace = port.getTrace();
     if (time == -1)
@@ -89,7 +94,7 @@ public abstract class VoltageColour
       float voltage = port.getVoltage(time);
       if (!Float.isNaN(voltage))
       {
-        return VoltageColour.getColorForVoltage(colours, voltage);
+        return VoltageColour.getColourForVoltage(colours, voltage);
       }
       else
       {
@@ -98,7 +103,7 @@ public abstract class VoltageColour
     }
     else
     {
-      return getColorForTrace(colours, trace, time);
+      return getColourForTrace(colours, trace, time);
     }
   }
 }

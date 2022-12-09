@@ -6,7 +6,7 @@ import net.logicim.common.collection.linkedlist.LinkedListIterator;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.Voltage;
+import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.trace.TraceNet;

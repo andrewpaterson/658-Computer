@@ -3,6 +3,7 @@ package net.logicim.domain.integratedcircuit.extra;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
@@ -19,16 +20,24 @@ public class Oscilloscope
 
   protected float sampleFrequency;
   protected long sampleTime;
-  protected int width;
-  protected int resolution;
+  protected int numberOfDivsWide;
+  protected int samplesPerDiv;
+  protected VoltageRepresentation colours;
 
-  public Oscilloscope(Circuit circuit, String name, OscilloscopePins pins, float sampleFrequency, int width, int resolution)
+  public Oscilloscope(Circuit circuit,
+                      String name,
+                      OscilloscopePins pins,
+                      float sampleFrequency,
+                      int numberOfDivsWide,
+                      int samplesPerDiv,
+                      VoltageRepresentation colours)
   {
     super(circuit, name, pins);
     this.sampleFrequency = sampleFrequency;
     this.sampleTime = frequencyToTime(sampleFrequency);
-    this.width = width;
-    this.resolution = resolution;
+    this.numberOfDivsWide = numberOfDivsWide;
+    this.samplesPerDiv = samplesPerDiv;
+    this.colours = colours;
   }
 
   @Override
@@ -37,27 +46,19 @@ public class Oscilloscope
     new TickEvent(sampleTime, this, simulation.getTimeline());
     List<Port> inputs = pins.getInputs();
     state.tick();
-    for (int i = 0; i < inputs.size(); i++)
+    long time = simulation.getTime();
+    for (int input = 0; input < inputs.size(); input++)
     {
-      Port port = inputs.get(i);
+      Port port = inputs.get(input);
       TraceNet trace = port.getTrace();
-      float voltage;
-      if (trace != null)
-      {
-        voltage = trace.getVoltage(simulation.getTime());
-      }
-      else
-      {
-        voltage = Float.NaN;
-      }
-      state.sample(i, voltage);
+      state.sample(input, trace, colours, time);
     }
   }
 
   @Override
   public State createState(Simulation simulation)
   {
-    return new OscilloscopeState(this, width, pins.getInputs().size(), resolution);
+    return new OscilloscopeState(this, pins.getInputs().size(), numberOfDivsWide * samplesPerDiv);
   }
 
   @Override

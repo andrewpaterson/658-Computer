@@ -13,6 +13,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.common.*;
@@ -28,13 +29,15 @@ public class CircuitEditor
   protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
+  protected VoltageRepresentation colours;
 
-  public CircuitEditor()
+  public CircuitEditor(VoltageRepresentation colours)
   {
-    circuit = new Circuit();
-    simulation = circuit.resetSimulation();
-    integratedCircuitViews = new LinkedHashSet<>();
-    traceViews = new LinkedHashSet<>();
+    this.circuit = new Circuit();
+    this.simulation = circuit.resetSimulation();
+    this.integratedCircuitViews = new LinkedHashSet<>();
+    this.traceViews = new LinkedHashSet<>();
+    this.colours = colours;
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -902,6 +905,11 @@ public class CircuitEditor
   public Timeline getTimeline()
   {
     return simulation.getTimeline();
+  }
+
+  public VoltageRepresentation getColours()
+  {
+    return colours;
   }
 }
 

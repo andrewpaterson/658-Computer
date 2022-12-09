@@ -1,6 +1,6 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.domain.common.Voltage;
+import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 
@@ -97,6 +97,54 @@ public class TraceNet
     else
     {
       return maximumVoltage - minimumVoltage;
+    }
+  }
+
+  public float getMinimumVoltage(long time)
+  {
+    float minimumVoltage = 10000;
+    for (Port port : connectedPorts)
+    {
+      float voltage = port.getVoltage(time);
+      if (!Float.isNaN(voltage))
+      {
+        if (voltage < minimumVoltage)
+        {
+          minimumVoltage = voltage;
+        }
+      }
+    }
+    if (minimumVoltage == 10000)
+    {
+      return Float.NaN;
+    }
+    else
+    {
+      return minimumVoltage;
+    }
+  }
+
+  public float getMaximumVoltage(long time)
+  {
+    float maximumVoltage = -10000;
+    for (Port port : connectedPorts)
+    {
+      float voltage = port.getVoltage(time);
+      if (!Float.isNaN(voltage))
+      {
+        if (voltage > maximumVoltage)
+        {
+          maximumVoltage = voltage;
+        }
+      }
+    }
+    if (maximumVoltage == -10000)
+    {
+      return Float.NaN;
+    }
+    else
+    {
+      return maximumVoltage;
     }
   }
 

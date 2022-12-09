@@ -4,7 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.Port;
 

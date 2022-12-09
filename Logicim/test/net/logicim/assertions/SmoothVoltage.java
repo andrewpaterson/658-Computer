@@ -1,7 +1,7 @@
 package net.logicim.assertions;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Voltage;
+import net.logicim.domain.common.voltage.Voltage;
 
 public class SmoothVoltage
 {

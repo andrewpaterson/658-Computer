@@ -86,6 +86,83 @@ public abstract class ReflectiveData
     parent.appendChild(node);
   }
 
+  private void writeIntArray(Document doc, Element parent, String elementName, int[] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, int[].class.getSimpleName());
+    arrayContainer.setAttribute("length", Integer.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    StringBuilder builder = new StringBuilder();
+    if (fieldValue.length > 0)
+    {
+      builder.append("\n");
+      for (int i = 0; i < fieldValue.length; i++)
+      {
+        if ((i % 20 == 0) && (i != 0))
+        {
+          builder.append("\n");
+        }
+        builder.append(fieldValue[i]);
+        builder.append(",");
+      }
+      int length = builder.length();
+      builder.delete(length - 1, length);
+    }
+    arrayContainer.appendChild(doc.createTextNode(builder.toString()));
+  }
+  private void writeInt2DArray(Document doc, Element parent, String elementName, int[][] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, int[][].class.getSimpleName());
+    arrayContainer.setAttribute("length", Integer.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    for (int i = 0; i < fieldValue.length; i++)
+    {
+      writeIntArray(doc, arrayContainer, "array" + i, fieldValue[i]);
+    }
+  }
+
+  private void writeFloatArray(Document doc, Element parent, String elementName, float[] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, float[].class.getSimpleName());
+    arrayContainer.setAttribute("length", Integer.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    StringBuilder builder = new StringBuilder();
+    if (fieldValue.length > 0)
+    {
+      builder.append("\n");
+      for (int i = 0; i < fieldValue.length; i++)
+      {
+        if ((i % 20 == 0) && (i != 0))
+        {
+          builder.append("\n");
+        }
+        builder.append(fieldValue[i]);
+        builder.append(",");
+      }
+      int length = builder.length();
+      builder.delete(length - 1, length);
+    }
+    arrayContainer.appendChild(doc.createTextNode(builder.toString()));
+  }
+
+  private void writeFloat2DArray(Document doc, Element parent, String elementName, float[][] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, float[][].class.getSimpleName());
+    arrayContainer.setAttribute("length", Integer.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    for (int i = 0; i < fieldValue.length; i++)
+    {
+      writeFloatArray(doc, arrayContainer, "array" + i, fieldValue[i]);
+    }
+  }
+
   public void writeRotation(Document doc, Element parent, String elementName, Rotation r)
   {
     Element node = doc.createElement(elementName);
@@ -183,6 +260,14 @@ public abstract class ReflectiveData
       else if (Rotation.class.isAssignableFrom(fieldClass))
       {
         writeRotation(doc, parent, fieldName, (Rotation) fieldValue);
+      }
+      else if (float[][].class.isAssignableFrom(fieldClass))
+      {
+        writeFloat2DArray(doc, parent, fieldName, (float[][]) fieldValue);
+      }
+      else if (int[][].class.isAssignableFrom(fieldClass))
+      {
+        writeInt2DArray(doc, parent, fieldName, (int[][]) fieldValue);
       }
       else
       {

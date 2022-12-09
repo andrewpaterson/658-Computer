@@ -3,6 +3,7 @@ package net.logicim.ui.integratedcircuit.extra;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
@@ -217,10 +218,54 @@ public class OscilloscopeView
     }
   }
 
+  int[][] cloneInt2DArray(int[][] matrix)
+  {
+    int[][] cloned = new int[matrix.length][];
+    for (int i = 0; i < matrix.length; i++)
+    {
+      cloned[i] = matrix[i].clone();
+    }
+    return cloned;
+  }
+
+  float[][] cloneFloat2DArray(float[][] matrix)
+  {
+    float[][] cloned = new float[matrix.length][];
+    for (int i = 0; i < matrix.length; i++)
+    {
+      cloned[i] = matrix[i].clone();
+    }
+    return cloned;
+  }
+
   @Override
   public IntegratedCircuitData<?> save()
   {
-    return null;
+    OscilloscopeState state = getIntegratedCircuit().getState();
+    int[][] colour = null;
+    float[][] minVoltage = null;
+    float[][] maxVoltage = null;
+    int tickPosition = 0;
+    if (state != null)
+    {
+      minVoltage = cloneFloat2DArray(state.getMinVoltage());
+      maxVoltage = cloneFloat2DArray(state.getMaxVoltage());
+      colour = cloneInt2DArray(state.getColour());
+      tickPosition = state.getTickPosition();
+    }
+    return new OscilloscopeData(position, rotation,
+                                name,
+                                saveEvents(),
+                                savePorts(),
+                                inputCount,
+                                numberOfDivsWide,
+                                samplesPerDiv,
+                                divHeightInGrids,
+                                samplingFrequency,
+                                minVoltage,
+                                maxVoltage,
+                                colour,
+                                tickPosition);
   }
 }
 

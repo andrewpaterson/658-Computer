@@ -32,7 +32,7 @@ public class NandGateView
   protected NandGate createIntegratedCircuit()
   {
     return new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount, new VoltageConfiguration("",
-                                                                                                             0.8f,
+                                                                                                             3.3f, 0.8f,
                                                                                                              2.0f,
                                                                                                              0.0f,
                                                                                                              3.3f,

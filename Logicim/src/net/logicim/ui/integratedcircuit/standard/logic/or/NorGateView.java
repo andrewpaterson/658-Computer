@@ -32,7 +32,7 @@ public class NorGateView
   protected NorGate createIntegratedCircuit()
   {
     return new NorGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount, new VoltageConfiguration("",
-                                                                                                           0.8f,
+                                                                                                           3.3f, 0.8f,
                                                                                                            2.0f,
                                                                                                            0.0f,
                                                                                                            3.3f,

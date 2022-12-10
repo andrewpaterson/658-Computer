@@ -9,21 +9,31 @@ import net.logicim.domain.common.trace.TraceValue;
 public class VoltageConfiguration
 {
   protected String family;
+  protected float vcc;
 
   protected float lowVoltageIn;
   protected float highVoltageIn;
 
   protected float highVoltageOut;
   protected float lowVoltageOut;
+
   protected int highToLowHoldTime;
   protected int highToLowSlewTime;
   protected int lowToHighHoldTime;
   protected int lowToHighSlewTime;
 
-  protected float voltsPerTimeLowToHigh;
-  protected float voltsPerTimeHighToLow;
+  protected int highToDisableHoldTime;
+  protected int highToDisableSlewTime;
+  protected int lowToDisableHoldTime;
+  protected int lowToDisableSlewTime;
+
+  protected int highToEnableHoldTime;
+  protected int highToEnableSlewTime;
+  protected int lowToEnableHoldTime;
+  protected int lowToEnableSlewTime;
 
   public VoltageConfiguration(String family,
+                              float vcc,
                               float lowVoltageIn,
                               float highVoltageIn,
                               float lowVoltageOut,
@@ -32,30 +42,140 @@ public class VoltageConfiguration
                               int lowToHighPropagation)
   {
     this.family = family;
+    this.vcc = vcc;
 
+    setVoltages(lowVoltageIn, highVoltageIn, lowVoltageOut, highVoltageOut);
+    setPropagationTime(highToLowPropagation, lowToHighPropagation);
+
+    this.highToDisableHoldTime = (int) (highToLowHoldTime * 1.2f);
+    this.highToDisableSlewTime = (int) (highToLowSlewTime * 1.2f);
+    this.lowToDisableHoldTime = (int) (lowToHighHoldTime * 1.2f);
+    this.lowToDisableSlewTime = (int) (lowToHighSlewTime * 1.2f);
+
+    this.highToEnableHoldTime = (int) (highToLowHoldTime * 1.2f);
+    this.highToEnableSlewTime = (int) (highToLowSlewTime * 1.2f);
+    this.lowToEnableHoldTime = (int) (lowToHighHoldTime * 1.2f);
+    this.lowToEnableSlewTime = (int) (lowToHighSlewTime * 1.2f);
+
+    validateVoltages();
+    validateSlewTimes();
+  }
+
+  protected void setVoltages(float lowVoltageIn, float highVoltageIn, float lowVoltageOut, float highVoltageOut)
+  {
     this.lowVoltageIn = lowVoltageIn;
     this.highVoltageIn = highVoltageIn;
 
     this.highVoltageOut = highVoltageOut;
     this.lowVoltageOut = lowVoltageOut;
-    this.highToLowHoldTime = highToLowPropagation / 2;
+  }
+
+  public VoltageConfiguration(String family,
+                              float vcc,
+                              float lowVoltageIn,
+                              float highVoltageIn,
+                              float lowVoltageOut,
+                              float highVoltageOut,
+                              int highToLowPropagation,
+                              int lowToHighPropagation,
+                              int highToDisEnPropagation,
+                              int lowToDisEnPropagation)
+  {
+    this.family = family;
+    this.vcc = vcc;
+
+    setVoltages(lowVoltageIn, highVoltageIn, lowVoltageOut, highVoltageOut);
+
+    setPropagationTime(highToLowPropagation, lowToHighPropagation);
+    setDisableTime(highToDisEnPropagation, lowToDisEnPropagation);
+    setEnableTime(highToDisEnPropagation, lowToDisEnPropagation);
+
+    validateVoltages();
+    validateSlewTimes();
+  }
+
+  public VoltageConfiguration(String family,
+                              float vcc,
+                              float lowVoltageIn,
+                              float highVoltageIn,
+                              float highVoltageOut,
+                              float lowVoltageOut,
+                              int highToLowHoldTime,
+                              int highToLowSlewTime,
+                              int lowToHighHoldTime,
+                              int lowToHighSlewTime,
+                              int highToDisableHoldTime,
+                              int highToDisableSlewTime,
+                              int lowToDisableHoldTime,
+                              int lowToDisableSlewTime,
+                              int highToEnableHoldTime,
+                              int highToEnableSlewTime,
+                              int lowToEnableHoldTime,
+                              int lowToEnableSlewTime)
+  {
+    this.family = family;
+    this.vcc = vcc;
+
+    setVoltages(lowVoltageIn, highVoltageIn, lowVoltageOut, highVoltageOut);
+
+    this.highToLowHoldTime = highToLowHoldTime;
+    this.highToLowSlewTime = highToLowSlewTime;
+    this.lowToHighHoldTime = lowToHighHoldTime;
+    this.lowToHighSlewTime = lowToHighSlewTime;
+
+    this.highToDisableHoldTime = highToDisableHoldTime;
+    this.highToDisableSlewTime = highToDisableSlewTime;
+    this.lowToDisableHoldTime = lowToDisableHoldTime;
+    this.lowToDisableSlewTime = lowToDisableSlewTime;
+
+    this.highToEnableHoldTime = highToEnableHoldTime;
+    this.highToEnableSlewTime = highToEnableSlewTime;
+    this.lowToEnableHoldTime = lowToEnableHoldTime;
+    this.lowToEnableSlewTime = lowToEnableSlewTime;
+
+    validateVoltages();
+    validateSlewTimes();
+  }
+
+  protected void setPropagationTime(int highToLowPropagation, int lowToHighPropagation)
+  {
+    this.highToLowHoldTime = (int) Math.round(highToLowPropagation / 2.0);
     this.highToLowSlewTime = highToLowPropagation;
-    this.lowToHighHoldTime = lowToHighPropagation / 2;
+    this.lowToHighHoldTime = (int) Math.round(lowToHighPropagation / 2.0);
     this.lowToHighSlewTime = lowToHighPropagation;
+  }
 
-    this.voltsPerTimeLowToHigh = (highVoltageOut - lowVoltageOut) / lowToHighSlewTime;
-    this.voltsPerTimeHighToLow = (highVoltageOut - lowVoltageOut) / highToLowSlewTime;
+  protected void setEnableTime(int highToLowEnable, int lowToHighEnable)
+  {
+    this.highToEnableHoldTime = (int) Math.round(highToLowEnable / 2.0);
+    this.highToEnableSlewTime = highToLowEnable;
+    this.lowToEnableHoldTime = (int) Math.round(lowToHighEnable / 2.0);
+    this.lowToEnableSlewTime = lowToHighEnable;
+  }
 
-    if (highVoltageOut <= lowVoltageOut)
+  protected void setDisableTime(int highToLowDisable, int lowToHighDisable)
+  {
+    this.highToDisableHoldTime = (int) Math.round(highToLowDisable / 2.0);
+    this.highToDisableSlewTime = highToLowDisable;
+    this.lowToDisableHoldTime = (int) Math.round(lowToHighDisable / 2.0);
+    this.lowToDisableSlewTime = lowToHighDisable;
+  }
+
+  protected void validateVoltages()
+  {
+    if (this.highVoltageOut <= this.lowVoltageOut)
     {
       throw new SimulatorException("High voltage out must be greater than low voltage out.");
     }
 
-    if (highVoltageIn < -lowVoltageIn)
+    if (this.highVoltageIn <= this.lowVoltageIn)
     {
       throw new SimulatorException("High voltage in must be greater than low voltage out.");
     }
+  }
 
+  protected void validateSlewTimes()
+  {
     if (highToLowSlewTime <= 0)
     {
       throw new SimulatorException("Slew time must be greater than zero.");
@@ -65,6 +185,31 @@ public class VoltageConfiguration
     {
       throw new SimulatorException("Slew time must be greater than zero.");
     }
+
+    if (highToDisableSlewTime <= 0)
+    {
+      throw new SimulatorException("Slew time must be greater than zero.");
+    }
+
+    if (lowToDisableSlewTime <= 0)
+    {
+      throw new SimulatorException("Slew time must be greater than zero.");
+    }
+
+    if (highToEnableSlewTime <= 0)
+    {
+      throw new SimulatorException("Slew time must be greater than zero.");
+    }
+
+    if (lowToEnableSlewTime <= 0)
+    {
+      throw new SimulatorException("Slew time must be greater than zero.");
+    }
+  }
+
+  protected float getVoltsPerTime(int time)
+  {
+    return (highVoltageOut - lowVoltageOut) / time;
   }
 
   public TraceValue getValue(float voltage)
@@ -153,12 +298,12 @@ public class VoltageConfiguration
 
   public float getVoltsPerTimeLowToHigh()
   {
-    return voltsPerTimeLowToHigh;
+    return getVoltsPerTime(lowToHighSlewTime);
   }
 
   public float getVoltsPerTimeHighToLow()
   {
-    return voltsPerTimeHighToLow;
+    return getVoltsPerTime(highToLowSlewTime);
   }
 
   public float getVoltage(boolean value)
@@ -171,6 +316,16 @@ public class VoltageConfiguration
     {
       return getLowVoltageOut();
     }
+  }
+
+  public String getFamily()
+  {
+    return family;
+  }
+
+  public float getVcc()
+  {
+    return vcc;
   }
 }
 

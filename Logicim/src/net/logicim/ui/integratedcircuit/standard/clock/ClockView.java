@@ -3,7 +3,6 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
-import net.logicim.domain.common.state.State;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -44,7 +43,7 @@ public class ClockView
   protected ClockOscillator createIntegratedCircuit()
   {
     return new ClockOscillator(circuitEditor.getCircuit(), "", new ClockOscillatorPins(new VoltageConfiguration("",
-                                                                                                                0.8f,
+                                                                                                                3.3f, 0.8f,
                                                                                                                 2.0f,
                                                                                                                 0.0f,
                                                                                                                 3.3f,

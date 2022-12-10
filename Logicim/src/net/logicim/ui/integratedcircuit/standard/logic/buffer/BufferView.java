@@ -30,7 +30,7 @@ public class BufferView
   protected Buffer createIntegratedCircuit()
   {
     return new Buffer(circuitEditor.getCircuit(), "", new BufferPins(new VoltageConfiguration("",
-                                                                                              0.8f,
+                                                                                              3.3f, 0.8f,
                                                                                               2.0f,
                                                                                               0.0f,
                                                                                               3.3f,

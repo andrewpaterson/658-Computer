@@ -10,7 +10,7 @@ import net.logicim.domain.common.voltage.NullVoltageColours;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
-import net.logicim.file.LogicimFileReader;
+import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.ui.CircuitEditor;
 
 import java.util.List;

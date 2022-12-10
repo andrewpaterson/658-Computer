@@ -5,6 +5,8 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.state.State;
+import net.logicim.domain.common.state.Stateless;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateView;
@@ -23,6 +25,7 @@ public class NorGateData
                      String name,
                      List<IntegratedCircuitEventData<?>> events,
                      List<PortData> portData,
+                     State state,
                      int inputCount)
   {
     super(position,
@@ -30,6 +33,7 @@ public class NorGateData
           name,
           events,
           portData,
+          state,
           inputCount);
   }
 

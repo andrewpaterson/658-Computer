@@ -16,7 +16,7 @@ public class Buffer
   public Buffer(Circuit circuit, String name, BufferPins pins)
   {
     super(circuit, name, pins);
-    setState(new Stateless(this));
+    setState(new Stateless());
   }
 
   @Override

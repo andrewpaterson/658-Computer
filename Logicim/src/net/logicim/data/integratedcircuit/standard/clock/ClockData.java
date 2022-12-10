@@ -5,6 +5,7 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
@@ -12,10 +13,9 @@ import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 import java.util.List;
 
 public class ClockData
-    extends IntegratedCircuitData<ClockView>
+    extends IntegratedCircuitData<ClockView, ClockOscillatorState>
 {
   protected float frequency;
-  protected boolean state;
 
   public ClockData()
   {
@@ -25,17 +25,17 @@ public class ClockData
                    Rotation rotation,
                    String name,
                    float frequency,
-                   boolean state,
                    List<IntegratedCircuitEventData<?>> events,
-                   List<PortData> portData)
+                   List<PortData> portData,
+                   ClockOscillatorState state)
   {
     super(position,
           rotation,
           name,
           events,
-          portData);
+          portData,
+          state);
     this.frequency = frequency;
-    this.state = state;
   }
 
   @Override

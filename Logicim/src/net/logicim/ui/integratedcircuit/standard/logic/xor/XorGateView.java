@@ -48,6 +48,7 @@ public class XorGateView
                            name,
                            saveEvents(),
                            savePorts(),
+                           saveState(),
                            inputCount);
   }
 }

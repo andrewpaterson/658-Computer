@@ -1,10 +1,8 @@
 package net.logicim.domain.integratedcircuit.extra;
 
-import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.ui.common.VoltageColour;
 
 import java.awt.*;
@@ -12,17 +10,20 @@ import java.awt.*;
 public class OscilloscopeState
     extends State
 {
-  protected int inputCount;
   protected int sampleCount;
   protected float[][] minVoltage;
   protected float[][] maxVoltage;
   protected int[][] colour;
   protected int tickPosition;
 
-  public OscilloscopeState(IntegratedCircuit<? extends Pins, ? extends State> parent, int inputCount, int sampleCount)
+  public OscilloscopeState()
   {
-    super(parent);
-    this.inputCount = inputCount;
+    super();
+  }
+
+  public OscilloscopeState(int inputCount, int sampleCount)
+  {
+    super();
     this.sampleCount = sampleCount;
 
     minVoltage = new float[inputCount][];
@@ -53,6 +54,15 @@ public class OscilloscopeState
     {
       tickPosition = 0;
     }
+  }
+
+  public OscilloscopeState(int sampleCount, float[][] minVoltage, float[][] maxVoltage, int[][] colour, int tickPosition)
+  {
+    this.sampleCount = sampleCount;
+    this.minVoltage = minVoltage;
+    this.maxVoltage = maxVoltage;
+    this.colour = colour;
+    this.tickPosition = tickPosition;
   }
 
   public void sample(int input, TraceNet trace, VoltageRepresentation colours, long time)

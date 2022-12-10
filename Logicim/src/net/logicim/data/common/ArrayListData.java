@@ -1,17 +1,17 @@
 package net.logicim.data.common;
 
-import net.logicim.data.PrimitiveData;
+import net.logicim.data.ObjectData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ArrayData
-    extends PrimitiveData
+public class ArrayListData
+    extends ObjectData
 {
   public List list;
 
-  public ArrayData()
+  public ArrayListData()
   {
     list = null;
   }

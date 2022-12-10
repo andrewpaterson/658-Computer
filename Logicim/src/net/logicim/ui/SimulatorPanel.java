@@ -2,8 +2,8 @@ package net.logicim.ui;
 
 import net.logicim.common.util.FileUtil;
 import net.logicim.data.circuit.CircuitData;
-import net.logicim.file.LogicimFileReader;
-import net.logicim.file.LogicimFileWriter;
+import net.logicim.file.reader.LogicimFileReader;
+import net.logicim.file.writer.LogicimFileWriter;
 import net.logicim.ui.input.event.*;
 
 import javax.swing.*;
@@ -179,7 +179,7 @@ public class SimulatorPanel
         File newFile = new File(FileUtil.removeExtension(file).getPath() + "." + "logic");
         CircuitData savedData = simulatorEditor.save();
 
-        SwingUtilities.invokeLater(() -> new LogicimFileWriter().writeXML(savedData, newFile));
+        new LogicimFileWriter().writeXML(savedData, newFile);
       }
     }
   }

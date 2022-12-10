@@ -48,6 +48,7 @@ public class NorGateView
                            name,
                            saveEvents(),
                            savePorts(),
+                           saveState(),
                            inputCount);
   }
 }

@@ -5,6 +5,7 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.extra.OscilloscopeView;
@@ -12,18 +13,13 @@ import net.logicim.ui.integratedcircuit.extra.OscilloscopeView;
 import java.util.List;
 
 public class OscilloscopeData
-    extends IntegratedCircuitData<OscilloscopeView>
+    extends IntegratedCircuitData<OscilloscopeView, OscilloscopeState>
 {
   protected int inputCount;
   protected int numberOfDivsWide;
   protected int samplesPerDiv;
   protected int divHeightInGrids;
   protected float sampleFrequency;
-
-  protected float[][] minVoltage;
-  protected float[][] maxVoltage;
-  protected int[][] colour;
-  protected int tickPosition;
 
   public OscilloscopeData()
   {
@@ -34,26 +30,19 @@ public class OscilloscopeData
                           String name,
                           List<IntegratedCircuitEventData<?>> events,
                           List<PortData> ports,
+                          OscilloscopeState state,
                           int inputCount,
                           int numberOfDivsWide,
                           int samplesPerDiv,
                           int divHeightInGrids,
-                          float sampleFrequency,
-                          float[][] minVoltage,
-                          float[][] maxVoltage,
-                          int[][] colour,
-                          int tickPosition)
+                          float sampleFrequency)
   {
-    super(position, rotation, name, events, ports);
+    super(position, rotation, name, events, ports, state);
     this.inputCount = inputCount;
     this.numberOfDivsWide = numberOfDivsWide;
     this.samplesPerDiv = samplesPerDiv;
     this.divHeightInGrids = divHeightInGrids;
     this.sampleFrequency = sampleFrequency;
-    this.minVoltage = minVoltage;
-    this.maxVoltage = maxVoltage;
-    this.colour = colour;
-    this.tickPosition = tickPosition;
   }
 
   @Override

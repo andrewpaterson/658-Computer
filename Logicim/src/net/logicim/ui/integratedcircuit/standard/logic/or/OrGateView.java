@@ -48,6 +48,7 @@ public class OrGateView
                           name,
                           saveEvents(),
                           savePorts(),
+                          saveState(),
                           inputCount);
   }
 }

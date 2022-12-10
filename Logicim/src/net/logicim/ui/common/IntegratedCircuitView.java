@@ -10,6 +10,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
 
 import java.awt.*;
@@ -231,7 +232,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
 
   protected abstract IC createIntegratedCircuit();
 
-  public abstract IntegratedCircuitData<?> save();
+  public abstract IntegratedCircuitData<?, ?> save();
 
   protected List<PortData> savePorts()
   {
@@ -259,6 +260,18 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       eventDatas.add(integratedCircuitEventData);
     }
     return eventDatas;
+  }
+
+  protected State saveState()
+  {
+    if (integratedCircuit.isStateless())
+    {
+      return null;
+    }
+    else
+    {
+      throw new SimulatorException("saveState must be implemented on [" + getClass().getSimpleName() + "].");
+    }
   }
 }
 

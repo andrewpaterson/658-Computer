@@ -49,7 +49,7 @@ public class Constant
   @Override
   public State createState(Simulation simulation)
   {
-    return new ConstantState(this, defaultValue);
+    return new ConstantState(defaultValue);
   }
 
   @Override

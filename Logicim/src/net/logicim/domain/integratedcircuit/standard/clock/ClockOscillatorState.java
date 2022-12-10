@@ -1,6 +1,7 @@
 package net.logicim.domain.integratedcircuit.standard.clock;
 
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.state.State;
 
 public class ClockOscillatorState
@@ -8,10 +9,15 @@ public class ClockOscillatorState
 {
   protected boolean state;
 
-  public ClockOscillatorState(IntegratedCircuit<ClockOscillatorPins, ClockOscillatorState> parent)
+  public ClockOscillatorState()
   {
-    super(parent);
-    state = false;
+    super();
+  }
+
+  public ClockOscillatorState(boolean state)
+  {
+    super();
+    this.state = state;
   }
 
   public void tick()

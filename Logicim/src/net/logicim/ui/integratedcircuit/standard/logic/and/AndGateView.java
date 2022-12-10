@@ -48,6 +48,7 @@ public class AndGateView
                            name,
                            saveEvents(),
                            savePorts(),
+                           saveState(),
                            inputCount);
   }
 }

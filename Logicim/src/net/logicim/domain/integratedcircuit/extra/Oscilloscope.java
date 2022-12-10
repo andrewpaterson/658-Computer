@@ -58,7 +58,7 @@ public class Oscilloscope
   @Override
   public State createState(Simulation simulation)
   {
-    return new OscilloscopeState(this, pins.getInputs().size(), numberOfDivsWide * samplesPerDiv);
+    return new OscilloscopeState(pins.getInputs().size(), numberOfDivsWide * samplesPerDiv);
   }
 
   @Override

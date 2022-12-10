@@ -18,7 +18,7 @@ public class XorGate
   public XorGate(Circuit circuit, String name, XorGatePins pins)
   {
     super(circuit, name, pins);
-    setState(new Stateless(this));
+    setState(new Stateless());
   }
 
   @Override

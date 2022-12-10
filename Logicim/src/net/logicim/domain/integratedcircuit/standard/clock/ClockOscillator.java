@@ -51,7 +51,7 @@ public class ClockOscillator
   @Override
   public ClockOscillatorState createState(Simulation simulation)
   {
-    return new ClockOscillatorState(this);
+    return new ClockOscillatorState();
   }
 
   @Override

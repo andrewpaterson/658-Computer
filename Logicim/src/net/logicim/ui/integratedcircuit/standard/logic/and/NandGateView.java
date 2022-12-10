@@ -48,6 +48,7 @@ public class NandGateView
                             name,
                             saveEvents(),
                             savePorts(),
+                            saveState(),
                             inputCount);
   }
 }

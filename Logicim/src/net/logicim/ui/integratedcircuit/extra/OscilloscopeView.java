@@ -239,33 +239,28 @@ public class OscilloscopeView
   }
 
   @Override
-  public IntegratedCircuitData<?> save()
+  public IntegratedCircuitData<?, ?> save()
   {
-    OscilloscopeState state = getIntegratedCircuit().getState();
-    int[][] colour = null;
-    float[][] minVoltage = null;
-    float[][] maxVoltage = null;
-    int tickPosition = 0;
-    if (state != null)
-    {
-      minVoltage = cloneFloat2DArray(state.getMinVoltage());
-      maxVoltage = cloneFloat2DArray(state.getMaxVoltage());
-      colour = cloneInt2DArray(state.getColour());
-      tickPosition = state.getTickPosition();
-    }
     return new OscilloscopeData(position, rotation,
                                 name,
                                 saveEvents(),
                                 savePorts(),
+                                saveState(),
                                 inputCount,
                                 numberOfDivsWide,
                                 samplesPerDiv,
                                 divHeightInGrids,
-                                samplingFrequency,
-                                minVoltage,
-                                maxVoltage,
-                                colour,
-                                tickPosition);
+                                samplingFrequency);
+  }
+
+  public OscilloscopeState saveState()
+  {
+    OscilloscopeState state = getIntegratedCircuit().getState();
+    return new OscilloscopeState(numberOfDivsWide * samplesPerDiv,
+                                 cloneFloat2DArray(state.getMinVoltage()),
+                                 cloneFloat2DArray(state.getMaxVoltage()),
+                                 cloneInt2DArray(state.getColour()),
+                                 state.getTickPosition());
   }
 }
 

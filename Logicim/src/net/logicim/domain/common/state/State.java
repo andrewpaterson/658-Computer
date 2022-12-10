@@ -1,24 +1,23 @@
 package net.logicim.domain.common.state;
 
-import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.Pins;
+import net.logicim.data.SaveData;
 
-public class State
+public abstract class State
+    extends SaveData
 {
-  IntegratedCircuit<? extends Pins, ? extends State> parent;
-
-  public State(IntegratedCircuit<? extends Pins, ? extends State> parent)
+  public State()
   {
-    this.parent = parent;
-  }
-
-  public IntegratedCircuit<? extends Pins, ? extends State> getParent()
-  {
-    return parent;
   }
 
   public boolean isStateless()
   {
     return false;
   }
+
+  @Override
+  public Object getObject()
+  {
+    return this;
+  }
 }
+

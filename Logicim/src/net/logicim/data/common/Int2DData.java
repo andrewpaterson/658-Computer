@@ -1,12 +1,12 @@
 package net.logicim.data.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.PrimitiveData;
+import net.logicim.data.ObjectData;
 
 import java.util.Map;
 
 public class Int2DData
-    extends PrimitiveData
+    extends ObjectData
 {
   public Int2D int2D;
 

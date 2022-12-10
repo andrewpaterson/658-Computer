@@ -1,12 +1,12 @@
 package net.logicim.data.common;
 
-import net.logicim.data.PrimitiveData;
+import net.logicim.data.ObjectData;
 import net.logicim.ui.common.Rotation;
 
 import java.util.Map;
 
 public class RotationData
-    extends PrimitiveData
+    extends ObjectData
 {
   public Rotation rotation;
 

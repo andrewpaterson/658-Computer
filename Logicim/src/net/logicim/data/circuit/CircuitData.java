@@ -10,7 +10,7 @@ public class CircuitData
     extends ReflectiveData
 {
   public TimelineData timeline;
-  public List<IntegratedCircuitData<?>> integratedCircuits;
+  public List<IntegratedCircuitData<?, ?>> integratedCircuits;
   public List<TraceData> traces;
 
   public CircuitData()
@@ -18,7 +18,7 @@ public class CircuitData
   }
 
   public CircuitData(TimelineData timeline,
-                     List<IntegratedCircuitData<?>> integratedCircuits,
+                     List<IntegratedCircuitData<?, ?>> integratedCircuits,
                      List<TraceData> traces)
   {
     this.timeline = timeline;
@@ -31,7 +31,7 @@ public class CircuitData
     return timeline;
   }
 
-  public List<IntegratedCircuitData<?>> getIntegratedCircuits()
+  public List<IntegratedCircuitData<?, ?>> getIntegratedCircuits()
   {
     return integratedCircuits;
   }
@@ -46,7 +46,7 @@ public class CircuitData
     this.timeline = timeline;
   }
 
-  public void setIntegratedCircuits(List<IntegratedCircuitData<?>> integratedCircuits)
+  public void setIntegratedCircuits(List<IntegratedCircuitData<?, ?>> integratedCircuits)
   {
     this.integratedCircuits = integratedCircuits;
   }

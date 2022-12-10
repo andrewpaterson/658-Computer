@@ -3,6 +3,7 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
+import net.logicim.domain.common.state.State;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -117,9 +118,15 @@ public class ClockView
                          rotation,
                          name,
                          frequency,
-                         integratedCircuit.getState().getState(),
                          saveEvents(),
-                         savePorts());
+                         savePorts(),
+                         saveState());
+  }
+
+  @Override
+  protected ClockOscillatorState saveState()
+  {
+    return new ClockOscillatorState(integratedCircuit.getState().getState());
   }
 }
 

@@ -26,7 +26,13 @@ public class SaveDataClassStore
   public SaveDataClassStore()
   {
     classMap = new HashMap<>();
-    PackageInspector packageInspector = PackageInspectorStore.getInstance().getPackageInspector("net.logicim.data");
+    xxx("net.logicim.data");
+    xxx("net.logicim.domain.integratedcircuit");
+  }
+
+  protected void xxx(String packageName)
+  {
+    PackageInspector packageInspector = PackageInspectorStore.getInstance().getPackageInspector(packageName);
     List<Class<SaveData>> instantiableSubClasses = packageInspector.getInstantiableSubClasses(SaveData.class);
     for (Class<SaveData> instantiableSubClass : instantiableSubClasses)
     {

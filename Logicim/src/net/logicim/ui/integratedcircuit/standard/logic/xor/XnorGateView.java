@@ -48,6 +48,7 @@ public class XnorGateView
                             name,
                             saveEvents(),
                             savePorts(),
+                            saveState(),
                             inputCount);
   }
 }

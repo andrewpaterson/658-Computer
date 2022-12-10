@@ -79,7 +79,14 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   {
     if (!isStateless())
     {
-      this.state = (STATE) state;
+      if (state != null)
+      {
+        this.state = (STATE) state;
+      }
+      else
+      {
+        throw new SimulatorException("Cannot set state to [null] on %s.", getDescription());
+      }
     }
   }
 

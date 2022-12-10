@@ -829,10 +829,10 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    ArrayList<IntegratedCircuitData<?>> integratedCircuitDatas = new ArrayList<>();
+    ArrayList<IntegratedCircuitData<?, ?>> integratedCircuitDatas = new ArrayList<>();
     for (IntegratedCircuitView<?> integratedCircuitView : integratedCircuitViews)
     {
-      IntegratedCircuitData<?> integratedCircuitData = integratedCircuitView.save();
+      IntegratedCircuitData<?, ?> integratedCircuitData = integratedCircuitView.save();
       integratedCircuitDatas.add(integratedCircuitData);
     }
 
@@ -860,7 +860,7 @@ public class CircuitEditor
       traceData.create(this, traceLoader);
     }
 
-    for (IntegratedCircuitData<?> integratedCircuitData : circuitData.integratedCircuits)
+    for (IntegratedCircuitData<?, ?> integratedCircuitData : circuitData.integratedCircuits)
     {
       integratedCircuitData.createAndLoad(this, traceLoader);
     }

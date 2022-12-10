@@ -18,7 +18,7 @@ public class OrGate
   public OrGate(Circuit circuit, String name, OrGatePins pins)
   {
     super(circuit, name, pins);
-    setState(new Stateless(this));
+    setState(new Stateless());
   }
 
   @Override

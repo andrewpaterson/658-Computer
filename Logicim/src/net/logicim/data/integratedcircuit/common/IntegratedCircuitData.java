@@ -6,9 +6,11 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
+import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.IntegratedCircuitView;
@@ -19,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>>
+public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>, STATE extends State>
     extends ReflectiveData
 {
   protected Int2D position;
@@ -29,6 +31,8 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   protected List<IntegratedCircuitEventData<?>> events;
   protected List<PortData> ports;
 
+  protected STATE state;
+
   public IntegratedCircuitData()
   {
   }
@@ -37,13 +41,15 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
                                Rotation rotation,
                                String name,
                                List<IntegratedCircuitEventData<?>> events,
-                               List<PortData> ports)
+                               List<PortData> ports,
+                               STATE state)
   {
     this.position = position;
     this.rotation = rotation;
     this.name = name;
     this.events = events;
     this.ports = ports;
+    this.state = state;
   }
 
   protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, ICV integratedCircuitView)
@@ -87,8 +93,15 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ICV integratedCircuitView)
   {
     circuitEditor.createConnectionViews(integratedCircuitView);
+    loadState(integratedCircuitView);
     loadEvents(circuitEditor, integratedCircuitView);
     loadPorts(circuitEditor, traceLoader, integratedCircuitView);
+  }
+
+  private void loadState(ICV integratedCircuitView)
+  {
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
+    integratedCircuit.setState(state);
   }
 
   public ICV createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)

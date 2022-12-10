@@ -45,7 +45,8 @@ public class BufferView
                           rotation,
                           name,
                           saveEvents(),
-                          savePorts());
+                          savePorts(),
+                          saveState());
   }
 }
 

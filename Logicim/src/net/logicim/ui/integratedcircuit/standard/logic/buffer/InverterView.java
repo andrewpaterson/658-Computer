@@ -45,7 +45,8 @@ public class InverterView
                             rotation,
                             name,
                             saveEvents(),
-                            savePorts());
+                            savePorts(),
+                            saveState());
   }
 }
 

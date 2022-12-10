@@ -5,6 +5,8 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.state.State;
+import net.logicim.domain.common.state.Stateless;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterView;
@@ -12,7 +14,7 @@ import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterView;
 import java.util.List;
 
 public class InverterData
-    extends IntegratedCircuitData<InverterView>
+    extends IntegratedCircuitData<InverterView, State>
 {
   public InverterData()
   {
@@ -22,13 +24,15 @@ public class InverterData
                       Rotation rotation,
                       String name,
                       List<IntegratedCircuitEventData<?>> events,
-                      List<PortData> portData)
+                      List<PortData> portData,
+                      State state)
   {
     super(position,
           rotation,
           name,
           events,
-          portData);
+          portData,
+          state);
   }
 
   @Override

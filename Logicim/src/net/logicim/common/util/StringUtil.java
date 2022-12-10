@@ -1,5 +1,10 @@
 package net.logicim.common.util;
 
+import net.logicim.common.SimulatorException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Integer.toHexString;
 
 public class StringUtil
@@ -116,6 +121,132 @@ public class StringUtil
   public static boolean isEmptyOrNull(String string)
   {
     return (string == null) || string.trim().isEmpty();
+  }
+
+  public static List<String> split(String string, String separator)
+  {
+    List<String> strings = new ArrayList<>();
+
+    if (separator.length() > 1)
+    {
+      throw new SimulatorException("Separator[%s] must be one character long", separator);
+    }
+
+    char charSeparator = separator.charAt(0);
+
+    int index = 0;
+    for (int i = 0; i < string.length(); i++)
+    {
+      char c = string.charAt(i);
+      if (charSeparator == c)
+      {
+        strings.add(string.substring(index, i));
+        index = i + 1;
+      }
+    }
+
+    int length = string.length();
+    if (index > length)
+    {
+      strings.add("");
+    }
+    else
+    {
+      strings.add(string.substring(index, length));
+    }
+
+    return strings;
+  }
+
+  public static String stripSurroundingWhitespace(String value)
+  {
+    return stripSurroundingCharacters(value, ' ');
+  }
+
+  public static String stripSurroundingCharacters(String string, char match)
+  {
+    if (string == null)
+    {
+      return null;
+    }
+
+    if (StringUtil.containsOnly(string, match))
+    {
+      return "";
+    }
+
+    int start = leadingCharacterEnd(string, match);
+    int end = trailingCharacterStart(string, match);
+
+    return string.substring(start, end);
+  }
+
+  public static boolean containsOnly(String string, char match)
+  {
+    for (int i = 0; i < string.length(); i++)
+    {
+      char c = string.charAt(i);
+      if (c != match)
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int leadingCharacterEnd(String string, char match)
+  {
+    int endOfWhiteSpace = string.length();
+
+    for (int i = 0; i < string.length(); i++)
+    {
+      char c = string.charAt(i);
+
+      if (c != match)
+      {
+        endOfWhiteSpace = i;
+        break;
+      }
+    }
+    return endOfWhiteSpace;
+  }
+
+  public static int trailingCharacterStart(String string, char match)
+  {
+    int startOfWhiteSpace = 0;
+    int end = string.length() - 1;
+
+    for (int i = end; i >= 0; i--)
+    {
+      char c = string.charAt(i);
+      if (c != match)
+      {
+        startOfWhiteSpace = i + 1;
+        break;
+      }
+    }
+    return startOfWhiteSpace;
+  }
+
+  public static List<String> splitAndTrim(String string, String separator)
+  {
+    if (string == null)
+    {
+      return new ArrayList<>();
+    }
+    if (string.trim().isEmpty())
+    {
+      return new ArrayList<>();
+    }
+
+    List<String> tokens = StringUtil.split(string, separator);
+    for (int i = 0; i < tokens.size(); i++)
+    {
+      String token = tokens.get(i);
+      token = token.trim();
+      tokens.set(i, token);
+    }
+    return tokens;
   }
 }
 

@@ -15,6 +15,8 @@ import java.util.List;
 
 public abstract class ReflectiveWriter
 {
+  public static final int ARRAY_ROW_LENGTH = 10;
+
   public static final String LOGICIM_TAG_NAME = "Logicim";
   public static final String INDEX = "index";
   public static final String CIRCUIT_DATA_TAG_NAME = "circuitData";
@@ -100,7 +102,7 @@ public abstract class ReflectiveWriter
       builder.append("\n");
       for (int i = 0; i < fieldValue.length; i++)
       {
-        if ((i % 20 == 0) && (i != 0))
+        if ((i % ARRAY_ROW_LENGTH == 0) && (i != 0))
         {
           builder.append("\n");
         }
@@ -139,7 +141,7 @@ public abstract class ReflectiveWriter
       builder.append("\n");
       for (int i = 0; i < fieldValue.length; i++)
       {
-        if ((i % 20 == 0) && (i != 0))
+        if ((i % ARRAY_ROW_LENGTH == 0) && (i != 0))
         {
           builder.append("\n");
         }

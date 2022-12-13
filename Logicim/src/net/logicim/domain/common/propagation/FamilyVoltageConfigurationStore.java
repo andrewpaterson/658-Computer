@@ -18,11 +18,11 @@ public class FamilyVoltageConfigurationStore
 {
   protected static FamilyVoltageConfigurationStore instance;
 
-  protected Map<String, VoltageConfiguration> voltageConfigurations;
+  protected LinkedHashMap<String, FamilyVoltageConfiguration> map;
 
   public FamilyVoltageConfigurationStore()
   {
-    voltageConfigurations = new LinkedHashMap<>();
+    map = new LinkedHashMap<>();
   }
 
   public static FamilyVoltageConfigurationStore getInstance()
@@ -42,19 +42,34 @@ public class FamilyVoltageConfigurationStore
       for (String family : familyPropagationMap.keySet())
       {
         Map<Float, List<VoltagePropagationTimeRow>> voltagePropagationMap = familyPropagationMap.get(family);
+        String logicLevel = "";
         for (Float vcc : voltagePropagationMap.keySet())
         {
-          VoltageConfiguration voltageConfiguration = VoltageConfiguration(voltagePropagationMap, family, vcc);
-          instance.add(voltageConfiguration);
+          List<VoltagePropagationTimeRow> rows = voltagePropagationMap.get(vcc);
+          VoltageConfiguration voltageConfiguration = createVoltageConfiguration(family, vcc, rows);
+
+          for (VoltagePropagationTimeRow row : rows)
+          {
+            if (!StringUtil.isEmptyOrNull(row.logicLevel))
+            {
+              logicLevel = row.logicLevel;
+            }
+          }
+
+          instance.add(voltageConfiguration, logicLevel);
         }
       }
+      instance.allConfigurationsAdded();
     }
     return instance;
   }
 
-  static VoltageConfiguration VoltageConfiguration(Map<Float, List<VoltagePropagationTimeRow>> voltagePropagationMap, String family, Float vcc)
+  protected void allConfigurationsAdded()
   {
-    List<VoltagePropagationTimeRow> rows = voltagePropagationMap.get(vcc);
+  }
+
+  static VoltageConfiguration createVoltageConfiguration(String family, Float vcc, List<VoltagePropagationTimeRow> rows)
+  {
     VoltagePropagationTimeRow tPHL = null;
     VoltagePropagationTimeRow tPLH = null;
     VoltagePropagationTimeRow tPZH = null;
@@ -221,9 +236,9 @@ public class FamilyVoltageConfigurationStore
     }
   }
 
-  public static VoltageConfiguration get(String family)
+  public static FamilyVoltageConfiguration get(String family)
   {
-    return getInstance().getVoltageConfigurations().get(family);
+    return getInstance().getMap().get(family);
   }
 
   protected static int ns(double nanoseconds)
@@ -231,23 +246,21 @@ public class FamilyVoltageConfigurationStore
     return nanosecondsToTime(nanoseconds);
   }
 
-  public Map<String, VoltageConfiguration> getVoltageConfigurations()
+  protected Map<String, FamilyVoltageConfiguration> getMap()
   {
-    return voltageConfigurations;
+    return map;
   }
 
-  public void add(VoltageConfiguration voltageConfiguration)
+  public void add(VoltageConfiguration voltageConfiguration, String logicLevel)
   {
     String family = voltageConfiguration.getFamily();
-    VoltageConfiguration existingConfiguration = voltageConfigurations.get(family);
-    if (existingConfiguration != null)
+    FamilyVoltageConfiguration familyVoltageConfiguration = map.get(family);
+    if (familyVoltageConfiguration == null)
     {
-      throw new SimulatorException("Voltage configuration for [%s] already added.", family);
+      familyVoltageConfiguration = new FamilyVoltageConfiguration(family);
+      map.put(family, familyVoltageConfiguration);
     }
-    else
-    {
-      voltageConfigurations.put(family, voltageConfiguration);
-    }
+    familyVoltageConfiguration.add(voltageConfiguration, logicLevel);
   }
 }
 

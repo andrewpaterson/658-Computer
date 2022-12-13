@@ -3,12 +3,18 @@ package net.logicim.common.util;
 import net.logicim.common.SimulatorException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Integer.toHexString;
 
-public class StringUtil
+public abstract class StringUtil
 {
+  protected static final String separatorString = ",";
+  protected static final String quoteString = "\"";
+  protected static final String quoteQuoteString = quoteString + quoteString;
+  protected static final String lineFeedString = "\n";
+
   public static String rightJustify(String source, int width, String padCharacter)
   {
     return pad(width - source.length(), padCharacter) + source;
@@ -247,6 +253,147 @@ public class StringUtil
       tokens.set(i, token);
     }
     return tokens;
+  }
+
+  public static String separateList(List<String> strings, String separator, String lastSeparator)
+  {
+    if (strings == null || strings.size() == 0)
+    {
+      return "";
+    }
+
+    StringBuilder stringBuffer = new StringBuilder();
+    for (int i = 0; i < strings.size(); i++)
+    {
+      String s = strings.get(i);
+      stringBuffer.append(s);
+      if (i < strings.size() - 2)
+      {
+        stringBuffer.append(separator);
+      }
+      else if (i == strings.size() - 2)
+      {
+        stringBuffer.append(lastSeparator);
+      }
+    }
+    return stringBuffer.toString();
+  }
+
+  public static String separateArray(String[] strings, String separator)
+  {
+    List<String> list = Arrays.asList(strings);
+    return separateList(list, separator);
+  }
+
+  public static String commaSeparateList(List<String> strings)
+  {
+    return commaSeparateList(strings, ", ");
+  }
+
+  public static String commaSeparateList(String... strings)
+  {
+    return commaSeparateList(CollectionUtil.newList(strings), ", ");
+  }
+
+  public static String commaSeparateList(List<String> strings, String lastSeparator)
+  {
+    return separateList(strings, ", ", lastSeparator);
+  }
+
+  public static String convertToCSVRow(List<String> strings)
+  {
+    List<String> result = new ArrayList<>(strings.size());
+    for (String string : strings)
+    {
+      result.add(modifyForCSV(string));
+    }
+    return separateList(result, ",");
+  }
+
+  private static String modifyForCSV(String string) //also see BaseCSVFileWriter
+  {
+    if (string != null && string.length() > 0)
+    {
+      boolean containsQuote = string.contains(quoteString);
+      boolean mustDelimit = mustDelimit(string, containsQuote);
+
+      StringBuilder stringBuilder = new StringBuilder();
+      if (mustDelimit)
+      {
+        stringBuilder.append(quoteString);
+      }
+
+      if (containsQuote)
+      {
+        string = string.replaceAll(quoteString, quoteQuoteString);
+      }
+      stringBuilder.append(string);
+
+      if (mustDelimit)
+      {
+        stringBuilder.append(quoteString);
+      }
+
+      return stringBuilder.toString();
+    }
+    else
+    {
+      return "";
+    }
+  }
+
+  private static boolean mustDelimit(String string, boolean containsQuote)
+  {
+    return containsQuote || string.contains(separatorString) || string.contains(lineFeedString);
+  }
+
+  public static String separateList(List<String> strings, String separator)
+  {
+    return separateList(strings, separator, separator);
+  }
+
+  public static String stripDoubleQuotes(String value)
+  {
+    return stripSurroundingCharacters(value, "\"");
+  }
+
+  public static String stripSingleQuotes(String value)
+  {
+    return stripSurroundingCharacters(value, "'");
+  }
+
+  private static String stripSurroundingCharacters(String value, String character)
+  {
+    if (value == null)
+    {
+      return null;
+    }
+    if (value.length() >= 2)
+    {
+      if ((value.startsWith(character)) && (value.endsWith(character)))
+      {
+        return value.substring(1, value.length() - 1);
+      }
+    }
+    return value;
+  }
+
+  public static int occurrencesOf(String text, char c)
+  {
+    if (text == null)
+    {
+      return 0;
+    }
+
+    int count = 0;
+    for (int i = 0; i < text.length(); i++)
+    {
+      if (text.charAt(i) == c)
+      {
+        count++;
+      }
+    }
+    return count;
   }
 }
 

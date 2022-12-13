@@ -2,6 +2,7 @@ package net.logicim.ui;
 
 import net.logicim.common.util.FileUtil;
 import net.logicim.data.circuit.CircuitData;
+import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
 import net.logicim.ui.input.event.*;
@@ -31,7 +32,7 @@ public class SimulatorPanel
     period = 16 * nS_IN_mS;
 
     simulatorEditor = new SimulatorEditor(this);
-
+    FamilyVoltageConfigurationStore.getInstance();
   }
 
   public void loop()

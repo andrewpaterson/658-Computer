@@ -5,6 +5,8 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
@@ -28,6 +30,7 @@ public class OscilloscopeData
   public OscilloscopeData(Int2D position,
                           Rotation rotation,
                           String name,
+                          String family,
                           List<IntegratedCircuitEventData<?>> events,
                           List<PortData> ports,
                           OscilloscopeState state,
@@ -37,7 +40,7 @@ public class OscilloscopeData
                           int divHeightInGrids,
                           float sampleFrequency)
   {
-    super(position, rotation, name, events, ports, state);
+    super(position, rotation, name, family, events, ports, state);
     this.inputCount = inputCount;
     this.numberOfDivsWide = numberOfDivsWide;
     this.samplesPerDiv = samplesPerDiv;
@@ -56,7 +59,8 @@ public class OscilloscopeData
                                 sampleFrequency,
                                 position,
                                 rotation,
-                                name);
+                                name,
+                                FamilyStore.getInstance().get(family));
   }
 }
 

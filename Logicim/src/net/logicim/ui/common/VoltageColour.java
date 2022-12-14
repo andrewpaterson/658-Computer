@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
@@ -82,7 +83,7 @@ public abstract class VoltageColour
     return colours.getTraceShort(shortVoltage);
   }
 
-  public static Color getColorForPort(VoltageRepresentation colours, Port port, long time)
+  public static Color getColorForPort(VoltageRepresentation colours, BasePort port, long time)
   {
     TraceNet trace = port.getTrace();
     if (time == -1)

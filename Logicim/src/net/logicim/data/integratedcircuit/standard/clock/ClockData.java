@@ -5,6 +5,7 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
@@ -24,6 +25,7 @@ public class ClockData
   public ClockData(Int2D position,
                    Rotation rotation,
                    String name,
+                   String family,
                    float frequency,
                    List<IntegratedCircuitEventData<?>> events,
                    List<PortData> portData,
@@ -32,6 +34,7 @@ public class ClockData
     super(position,
           rotation,
           name,
+          family,
           events,
           portData,
           state);
@@ -45,6 +48,7 @@ public class ClockData
                          position,
                          rotation,
                          name,
+                         FamilyStore.getInstance().get(family),
                          frequency);
   }
 }

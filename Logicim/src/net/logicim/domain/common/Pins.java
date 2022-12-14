@@ -2,7 +2,10 @@ package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.VoltageCommon;
+import net.logicim.domain.common.port.VoltageGround;
 import net.logicim.domain.common.state.State;
 
 import java.util.ArrayList;
@@ -12,21 +15,26 @@ public abstract class Pins
 {
   protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
 
-  protected List<Port> ports;
+  protected VoltageCommon vcc;
+  protected VoltageGround vss;
+  protected List<BasePort> ports;
 
   public Pins()
   {
+    this.vcc = addPort(new VoltageCommon(this));
+    this.vss = addPort(new VoltageGround(this));
     this.ports = new ArrayList<>();
   }
 
-  public void addPort(Port port)
+  public <T extends BasePort> T addPort(T port)
   {
     ports.add(port);
+    return port;
   }
 
-  public Port getPort(String name)
+  public BasePort getPort(String name)
   {
-    for (Port port : ports)
+    for (BasePort port : ports)
     {
       if (port.getName().equals(name))
       {
@@ -69,7 +77,7 @@ public abstract class Pins
     return integratedCircuit.getType();
   }
 
-  public List<Port> getPorts()
+  public List<BasePort> getPorts()
   {
     return ports;
   }
@@ -77,6 +85,16 @@ public abstract class Pins
   public void inputTransition(Simulation simulation, Port port)
   {
     getIntegratedCircuit().inputTransition(simulation, port);
+  }
+
+  public VoltageCommon getVoltageCommon()
+  {
+    return vcc;
+  }
+
+  public VoltageGround getVoltageGround()
+  {
+    return vss;
   }
 }
 

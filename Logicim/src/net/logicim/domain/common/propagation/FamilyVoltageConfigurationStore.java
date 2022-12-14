@@ -18,7 +18,7 @@ public class FamilyVoltageConfigurationStore
 {
   protected static FamilyVoltageConfigurationStore instance;
 
-  protected LinkedHashMap<String, FamilyVoltageConfiguration> map;
+  protected LinkedHashMap<Family, FamilyVoltageConfiguration> map;
 
   public FamilyVoltageConfigurationStore()
   {
@@ -29,46 +29,52 @@ public class FamilyVoltageConfigurationStore
   {
     if (instance == null)
     {
-      instance = new FamilyVoltageConfigurationStore();
-
-      String programDir = EnvironmentInspector.getProgramDir();
-      File file = new File(programDir + "/../Documents/Propagation Times (541).csv");
-      Map<String, Map<Float, List<VoltagePropagationTimeRow>>> familyPropagationMap = new LinkedHashMap<>();
-      if (file.exists())
-      {
-        familyPropagationMap = readVoltagePropagationMap(file);
-      }
-
-      for (String family : familyPropagationMap.keySet())
-      {
-        Map<Float, List<VoltagePropagationTimeRow>> voltagePropagationMap = familyPropagationMap.get(family);
-        String logicLevel = "";
-        for (Float vcc : voltagePropagationMap.keySet())
-        {
-          List<VoltagePropagationTimeRow> rows = voltagePropagationMap.get(vcc);
-          VoltageConfiguration voltageConfiguration = createVoltageConfiguration(family, vcc, rows);
-
-          for (VoltagePropagationTimeRow row : rows)
-          {
-            if (!StringUtil.isEmptyOrNull(row.logicLevel))
-            {
-              logicLevel = row.logicLevel;
-            }
-          }
-
-          instance.add(voltageConfiguration, logicLevel);
-        }
-      }
-      instance.allConfigurationsAdded();
+      instance = initialiseFamilyVoltageConfigurationStore();
     }
     return instance;
+  }
+
+  static FamilyVoltageConfigurationStore initialiseFamilyVoltageConfigurationStore()
+  {
+    FamilyVoltageConfigurationStore familyVoltageConfigurationStore = new FamilyVoltageConfigurationStore();
+
+    String programDir = EnvironmentInspector.getProgramDir();
+    File file = new File(programDir + "/../Documents/Propagation Times (541).csv");
+    Map<String, Map<Float, List<VoltagePropagationTimeRow>>> familyPropagationMap = new LinkedHashMap<>();
+    if (file.exists())
+    {
+      familyPropagationMap = readVoltagePropagationMap(file);
+    }
+
+    for (String family : familyPropagationMap.keySet())
+    {
+      Map<Float, List<VoltagePropagationTimeRow>> voltagePropagationMap = familyPropagationMap.get(family);
+      String logicLevel = "";
+      for (Float vcc : voltagePropagationMap.keySet())
+      {
+        List<VoltagePropagationTimeRow> rows = voltagePropagationMap.get(vcc);
+        VoltageConfiguration voltageConfiguration = createVoltageConfiguration(vcc, rows);
+
+        for (VoltagePropagationTimeRow row : rows)
+        {
+          if (!StringUtil.isEmptyOrNull(row.logicLevel))
+          {
+            logicLevel = row.logicLevel;
+          }
+        }
+
+        familyVoltageConfigurationStore.add(voltageConfiguration, logicLevel, family);
+      }
+    }
+    familyVoltageConfigurationStore.allConfigurationsAdded();
+    return familyVoltageConfigurationStore;
   }
 
   protected void allConfigurationsAdded()
   {
   }
 
-  static VoltageConfiguration createVoltageConfiguration(String family, Float vcc, List<VoltagePropagationTimeRow> rows)
+  static VoltageConfiguration createVoltageConfiguration(Float vcc, List<VoltagePropagationTimeRow> rows)
   {
     VoltagePropagationTimeRow tPHL = null;
     VoltagePropagationTimeRow tPLH = null;
@@ -148,8 +154,8 @@ public class FamilyVoltageConfigurationStore
       throw new SimulatorException("VIH, VIL, VOH and VOL must all be provided.");
     }
 
-    return new VoltageConfiguration(family,
-                                    vcc,
+    return new VoltageConfiguration(
+        vcc,
                                     vil, vih,
                                     voh, vol,
                                     ns(tPHL.typicalDelay / 2),
@@ -236,24 +242,34 @@ public class FamilyVoltageConfigurationStore
     }
   }
 
-  public static FamilyVoltageConfiguration get(String family)
+  public static FamilyVoltageConfiguration get(String familyName)
+  {
+    Family family = FamilyStore.getInstance().get(familyName);
+    return getInstance().getMap().get(family);
+  }
+
+  public static FamilyVoltageConfiguration get(Family family)
   {
     return getInstance().getMap().get(family);
   }
 
   protected static int ns(double nanoseconds)
   {
-    return nanosecondsToTime(nanoseconds);
+    return (int) nanosecondsToTime(nanoseconds);
   }
 
-  protected Map<String, FamilyVoltageConfiguration> getMap()
+  protected Map<Family, FamilyVoltageConfiguration> getMap()
   {
     return map;
   }
 
-  public void add(VoltageConfiguration voltageConfiguration, String logicLevel)
+  public void add(VoltageConfiguration voltageConfiguration, String logicLevel, String familyName)
   {
-    String family = voltageConfiguration.getFamily();
+    Family family = FamilyStore.getInstance().get(familyName);
+    if (family == null)
+    {
+      family = FamilyStore.getInstance().add(familyName);
+    }
     FamilyVoltageConfiguration familyVoltageConfiguration = map.get(family);
     if (familyVoltageConfiguration == null)
     {

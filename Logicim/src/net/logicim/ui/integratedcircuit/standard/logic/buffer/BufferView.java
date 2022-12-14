@@ -2,6 +2,8 @@ package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferData;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
@@ -16,26 +18,22 @@ public class BufferView
   public BufferView(CircuitEditor circuitEditor,
                     Int2D position,
                     Rotation rotation,
-                    String name)
+                    String name,
+                    Family family)
   {
     super(circuitEditor,
           position,
           rotation,
-          name);
+          name,
+          family);
     createPorts(false);
     finaliseView();
   }
 
   @Override
-  protected Buffer createIntegratedCircuit()
+  protected Buffer createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Buffer(circuitEditor.getCircuit(), "", new BufferPins(new VoltageConfiguration("",
-                                                                                              3.3f, 0.8f,
-                                                                                              2.0f,
-                                                                                              0.0f,
-                                                                                              3.3f,
-                                                                                              nanosecondsToTime(2.5f),
-                                                                                              nanosecondsToTime(2.5f))));
+    return new Buffer(circuitEditor.getCircuit(), "", new BufferPins(familyVoltageConfiguration));
   }
 
   @Override
@@ -44,6 +42,7 @@ public class BufferView
     return new BufferData(position,
                           rotation,
                           name,
+                          family.getFamily(),
                           saveEvents(),
                           savePorts(),
                           saveState());

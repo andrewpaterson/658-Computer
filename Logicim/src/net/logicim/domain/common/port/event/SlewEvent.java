@@ -4,9 +4,10 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
+import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 
 import java.util.List;
 
@@ -87,22 +88,23 @@ public class SlewEvent
 
   public DriveEvent update(Timeline timeline)
   {
-    VoltageConfiguration voltageConfiguration = port.getVoltageConfiguration();
+    VoltageConfigurationSource voltageConfiguration = port.getVoltageConfigurationSource();
+    float vcc = port.getVoltageCommon(timeline.getTime());
 
     long nowTime = timeline.getTime();
-    startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration)));
+    startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration, vcc)), vcc);
 
     float voltageDiff = endVoltage - startVoltage;
 
     float voltsPerTime;
     if (voltageDiff > 0)
     {
-      voltsPerTime = voltageConfiguration.getVoltsPerTimeLowToHigh();
+      voltsPerTime = voltageConfiguration.getVoltsPerTimeLowToHigh(vcc);
       slewTime = (long) (voltageDiff / voltsPerTime);
     }
     else if (voltageDiff < 0)
     {
-      voltsPerTime = voltageConfiguration.getVoltsPerTimeHighToLow();
+      voltsPerTime = voltageConfiguration.getVoltsPerTimeHighToLow(vcc);
       slewTime = -(long) (voltageDiff / voltsPerTime);
     }
     else
@@ -124,14 +126,14 @@ public class SlewEvent
     return new DriveEvent(port, getSlewTime(), getEndVoltage(), timeline);
   }
 
-  protected float calculateStartVoltage(long nowTime, VoltageConfiguration voltageConfiguration)
+  protected float calculateStartVoltage(long nowTime, VoltageConfigurationSource voltageConfiguration, float vcc)
   {
     float voltage = port.getVoltage(nowTime);
     if (!Float.isNaN(voltage))
     {
       return voltage;
     }
-    return voltageConfiguration.getMidVoltageOut();
+    return voltageConfiguration.getMidVoltageOut(vcc);
   }
 
   public String toDebugString()

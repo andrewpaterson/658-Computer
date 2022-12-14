@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.trace.TraceData;
+import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
@@ -320,7 +321,7 @@ public class TraceView
     return line.getMaximumY();
   }
 
-  public List<Port> getConnectedPorts()
+  public List<BasePort> getConnectedPorts()
   {
     if (trace != null)
     {

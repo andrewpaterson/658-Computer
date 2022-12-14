@@ -3,6 +3,7 @@ package net.logicim.ui.integratedcircuit.standard.logic.or;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -27,13 +28,15 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
                         int inputCount,
                         Int2D position,
                         Rotation rotation,
-                        String name)
+                        String name,
+                        Family family)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
-          name);
+          name,
+          family);
 
     arcViewRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 357, 61, true, false);
     arcViewLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 61, true, false);

@@ -2,7 +2,9 @@ package net.logicim.domain.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
+import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 
 import static net.logicim.domain.common.port.PortType.Input;
 import static net.logicim.domain.common.port.PortType.Output;
@@ -13,7 +15,7 @@ public class BufferPins
   private Port input;
   private Port output;
 
-  public BufferPins(VoltageConfiguration voltageConfiguration)
+  public BufferPins(VoltageConfigurationSource voltageConfiguration)
   {
     super();
     output = new Port(Output,

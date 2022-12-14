@@ -5,6 +5,7 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.ui.CircuitEditor;
@@ -23,6 +24,7 @@ public class XorGateData
   public XorGateData(Int2D position,
                      Rotation rotation,
                      String name,
+                     String family,
                      List<IntegratedCircuitEventData<?>> events,
                      List<PortData> ports,
                      State state,
@@ -31,6 +33,7 @@ public class XorGateData
     super(position,
           rotation,
           name,
+          family,
           events,
           ports,
           state,
@@ -45,7 +48,8 @@ public class XorGateData
                            inputCount,
                            position,
                            rotation,
-                           name);
+                           name,
+                           FamilyStore.getInstance().get(family));
   }
 }
 

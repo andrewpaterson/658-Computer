@@ -13,6 +13,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
@@ -897,7 +898,7 @@ public class CircuitEditor
     List<PortView> ports = placementView.getPorts();
     for (PortView portView : ports)
     {
-      Port port = portView.getPort();
+      BasePort port = portView.getPort();
       port.traceConnected(simulation);
     }
   }

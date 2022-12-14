@@ -2,6 +2,7 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.DefaultFamily;
 import net.logicim.ui.common.DiscreteView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ViewFactory;
@@ -18,6 +19,7 @@ public class ClockViewFactory
                          position,
                          rotation,
                          "",
+                         DefaultFamily.get(),
                          50 * MHz);
   }
 }

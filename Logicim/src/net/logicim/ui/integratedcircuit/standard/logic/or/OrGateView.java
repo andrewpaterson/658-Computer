@@ -2,6 +2,8 @@ package net.logicim.ui.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.or.OrGateData;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
@@ -17,27 +19,23 @@ public class OrGateView
                     int inputCount,
                     Int2D position,
                     Rotation rotation,
-                    String name)
+                    String name,
+                    Family family)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
-          name);
+          name,
+          family);
     createPorts(false, 0);
     finaliseView();
   }
 
   @Override
-  protected OrGate createIntegratedCircuit()
+  protected OrGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new OrGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount, new VoltageConfiguration("",
-                                                                                                          3.3f, 0.8f,
-                                                                                                          2.0f,
-                                                                                                          0.0f,
-                                                                                                          3.3f,
-                                                                                                          nanosecondsToTime(2.5f),
-                                                                                                          nanosecondsToTime(2.5f))));
+    return new OrGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -46,6 +44,7 @@ public class OrGateView
     return new OrGateData(position,
                           rotation,
                           name,
+                          family.getFamily(),
                           saveEvents(),
                           savePorts(),
                           saveState(),

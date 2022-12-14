@@ -1,19 +1,23 @@
 package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.trace.TraceValue;
 import net.logicim.domain.common.voltage.Voltage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyVoltageConfiguration
+    extends VoltageConfigurationSource
 {
-  protected String family;
+  protected Family family;
   protected List<VoltageConfiguration> voltageConfigurations;
   protected VoltageConfiguration ttlConfiguration;
   protected VoltageConfiguration cmosConfiguration;
 
-  public FamilyVoltageConfiguration(String family)
+  public FamilyVoltageConfiguration(Family family)
   {
     this.family = family;
     this.ttlConfiguration = null;
@@ -21,6 +25,7 @@ public class FamilyVoltageConfiguration
     this.voltageConfigurations = new ArrayList<>();
   }
 
+  @Override
   public VoltageConfiguration get(float vcc)
   {
     for (VoltageConfiguration voltageConfiguration : voltageConfigurations)
@@ -51,6 +56,51 @@ public class FamilyVoltageConfiguration
     {
       cmosConfiguration = voltageConfiguration;
     }
+  }
+
+  public float getHighVoltageIn(float vcc)
+  {
+    return 0;
+  }
+
+  public float getLowVoltageIn(float vcc)
+  {
+    return 0;
+  }
+
+  public float getMidVoltageOut(float vcc)
+  {
+    return 0;
+  }
+
+  public float getVoltageOut(boolean value, float vcc)
+  {
+    return 0;
+  }
+
+  public void createOutputEvent(Timeline timeline, Port port, float voltageOut)
+  {
+
+  }
+
+  public TraceValue getValue(float vin, float vcc)
+  {
+    return null;
+  }
+
+  public float calculateStartVoltage(float portVoltage, float vcc)
+  {
+    return 0;
+  }
+
+  public float getVoltsPerTimeLowToHigh(float vcc)
+  {
+    return 0;
+  }
+
+  public float getVoltsPerTimeHighToLow(float vcc)
+  {
+    return 0;
   }
 }
 

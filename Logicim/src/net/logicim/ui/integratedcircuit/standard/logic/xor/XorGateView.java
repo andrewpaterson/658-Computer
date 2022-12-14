@@ -2,6 +2,8 @@ package net.logicim.ui.integratedcircuit.standard.logic.xor;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.xor.XorGateData;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGatePins;
@@ -17,27 +19,23 @@ public class XorGateView
                      int inputCount,
                      Int2D position,
                      Rotation rotation,
-                     String name)
+                     String name,
+                     Family family)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
-          name);
+          name,
+          family);
     createPorts(false, 1);
     finaliseView();
   }
 
   @Override
-  protected XorGate createIntegratedCircuit()
+  protected XorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount, new VoltageConfiguration("",
-                                                                                                            3.3f, 0.8f,
-                                                                                                            2.0f,
-                                                                                                            0.0f,
-                                                                                                            3.3f,
-                                                                                                            nanosecondsToTime(2.5f),
-                                                                                                            nanosecondsToTime(2.5f))));
+    return new XorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -46,6 +44,7 @@ public class XorGateView
     return new XorGateData(position,
                            rotation,
                            name,
+                           family.getFamily(),
                            saveEvents(),
                            savePorts(),
                            saveState(),

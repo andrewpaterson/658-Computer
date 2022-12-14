@@ -2,6 +2,8 @@ package net.logicim.ui.integratedcircuit.standard.logic.and;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.and.NandGateData;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.domain.integratedcircuit.standard.logic.and.NandGate;
@@ -17,27 +19,23 @@ public class NandGateView
                       int inputCount,
                       Int2D position,
                       Rotation rotation,
-                      String name)
+                      String name,
+                      Family family)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
-          name);
+          name,
+          family);
     createPorts(true, 0);
     finaliseView();
   }
 
   @Override
-  protected NandGate createIntegratedCircuit()
+  protected NandGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount, new VoltageConfiguration("",
-                                                                                                             3.3f, 0.8f,
-                                                                                                             2.0f,
-                                                                                                             0.0f,
-                                                                                                             3.3f,
-                                                                                                             nanosecondsToTime(2.5f),
-                                                                                                             nanosecondsToTime(2.5f))));
+    return new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -46,6 +44,7 @@ public class NandGateView
     return new NandGateData(position,
                             rotation,
                             name,
+                            family.getFamily(),
                             saveEvents(),
                             savePorts(),
                             saveState(),

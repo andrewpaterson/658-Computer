@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
@@ -7,6 +8,7 @@ import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class PortView
 {
   protected IntegratedCircuitView<?> owner;
-  protected Port port;
+  protected BasePort port;
   protected Int2D positionRelativeToIC;
 
   protected boolean inverting;
@@ -32,7 +34,7 @@ public class PortView
 
   protected PortViewGridCache gridCache;
 
-  public PortView(IntegratedCircuitView<?> integratedCircuit, Port port, Int2D positionRelativeToIC)
+  public PortView(IntegratedCircuitView<?> integratedCircuit, BasePort port, Int2D positionRelativeToIC)
   {
     this.owner = integratedCircuit;
     this.port = port;
@@ -74,7 +76,7 @@ public class PortView
     return this;
   }
 
-  public Port getPort()
+  public BasePort getPort()
   {
     return port;
   }
@@ -108,7 +110,7 @@ public class PortView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-      Port port = getPort();
+      BasePort port = getPort();
       Color color = VoltageColour.getColorForPort(viewport.getColours(), port, time);
 
       graphics.setColor(color);
@@ -182,28 +184,36 @@ public class PortView
 
   public PortData save()
   {
-    PortOutputEvent portOutputEvent = port.getOutput();
-    LinkedList<PortEvent> portEvents = port.getEvents();
-    ArrayList<PortEventData<?>> eventDatas = new ArrayList<>(portEvents.size());
-    PortOutputEventData<?> portOutputEventData = null;
-    for (PortEvent event : portEvents)
+    if (port.isLogicPort())
     {
-      PortEventData<?> portEventData = event.save();
-      eventDatas.add(portEventData);
-      if (portOutputEvent == event)
+      Port port = (Port) this.port;
+      PortOutputEvent portOutputEvent = port.getOutput();
+      LinkedList<PortEvent> portEvents = port.getEvents();
+      ArrayList<PortEventData<?>> eventDatas = new ArrayList<>(portEvents.size());
+      PortOutputEventData<?> portOutputEventData = null;
+      for (PortEvent event : portEvents)
       {
-        portOutputEventData = (PortOutputEventData<?>) portEventData;
+        PortEventData<?> portEventData = event.save();
+        eventDatas.add(portEventData);
+        if (portOutputEvent == event)
+        {
+          portOutputEventData = (PortOutputEventData<?>) portEventData;
+        }
       }
-    }
-    if (portOutputEventData == null)
-    {
-      if (portOutputEvent != null)
+      if (portOutputEventData == null)
       {
-        portOutputEventData = portOutputEvent.save();
+        if (portOutputEvent != null)
+        {
+          portOutputEventData = portOutputEvent.save();
+        }
       }
-    }
 
-    return new PortData(eventDatas, portOutputEventData, port.getTraceId());
+      return new PortData(eventDatas, portOutputEventData, port.getTraceId());
+    }
+    else
+    {
+      throw new SimulatorException("implement saving for non-logic ports.");
+    }
   }
 }
 

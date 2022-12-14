@@ -5,6 +5,7 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
+import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.ui.CircuitEditor;
@@ -23,6 +24,7 @@ public class InverterData
   public InverterData(Int2D position,
                       Rotation rotation,
                       String name,
+                      String family,
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> portData,
                       State state)
@@ -30,6 +32,7 @@ public class InverterData
     super(position,
           rotation,
           name,
+          family,
           events,
           portData,
           state);
@@ -41,7 +44,8 @@ public class InverterData
     return new InverterView(circuitEditor,
                             position,
                             rotation,
-                            name);
+                            name,
+                            FamilyStore.getInstance().get(family));
   }
 }
 

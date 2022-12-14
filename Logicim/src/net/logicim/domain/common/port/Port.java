@@ -6,11 +6,13 @@ import net.logicim.common.collection.linkedlist.LinkedListIterator;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.port.event.*;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
+import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
+import net.logicim.domain.common.voltage.Voltage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,48 +21,28 @@ import java.util.Set;
 import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
 public class Port
+    extends BasePort
     implements Voltage
 {
-  protected PortType type;
-  protected Pins pins;
-  protected String name;
-  protected VoltageConfiguration voltageConfiguration;
+
+  protected VoltageConfigurationSource voltageConfigurationSource;
+  protected VoltageCommon vcc;
+  protected VoltageGround gnd;
 
   protected LinkedList<PortEvent> events;
-  protected TraceNet trace;
   protected PortOutputEvent output;
 
   public Port(PortType type,
               Pins pins,
               String name,
-              VoltageConfiguration voltageConfiguration)
+              VoltageConfigurationSource voltageConfigurationSource)
   {
-    this.type = type;
-    this.pins = pins;
-    this.name = name;
-    this.voltageConfiguration = voltageConfiguration;
-    events = new LinkedList<>();
+    super(type, name, pins);
+    this.voltageConfigurationSource = voltageConfigurationSource;
+    this.vcc = pins.getVoltageCommon();
+    this.gnd = pins.getVoltageGround();
+    this.events = new LinkedList<>();
     pins.addPort(this);
-  }
-
-  public String getName()
-  {
-    return name;
-  }
-
-  public String toDebugString()
-  {
-    return getPins().getIntegratedCircuit().getName() + "." + name;
-  }
-
-  public String getDescription()
-  {
-    return getPins().getDescription() + "." + getName();
-  }
-
-  public Pins getPins()
-  {
-    return pins;
   }
 
   public void add(PortEvent event)
@@ -92,11 +74,6 @@ public class Port
     }
   }
 
-  public void removeAll(List<? extends PortEvent> event)
-  {
-    events.removeAll(event);
-  }
-
   public LinkedList<PortEvent> getEvents()
   {
     return events;
@@ -104,12 +81,10 @@ public class Port
 
   public void writeBool(Timeline timeline, boolean value)
   {
-    voltageConfiguration.createOutputEvent(timeline, this, voltageConfiguration.getVoltage(value));
-  }
-
-  public void highImpedance(Timeline timeline)
-  {
-    voltageConfiguration.createHighImpedanceEvents(timeline, this);
+    float vcc = this.vcc.getVoltage(timeline.getTime());
+    voltageConfigurationSource.createOutputEvent(timeline,
+                                                 this,
+                                                 voltageConfigurationSource.getVoltageOut(value, vcc));
   }
 
   public TraceValue readValue(long time)
@@ -119,7 +94,7 @@ public class Port
       float voltage = trace.getVoltage(time);
       if (!Float.isNaN(voltage))
       {
-        return voltageConfiguration.getValue(voltage);
+        return voltageConfigurationSource.getValue(voltage, vcc.getVoltage(time));
       }
     }
     return Undriven;
@@ -127,11 +102,8 @@ public class Port
 
   public void disconnect(Simulation simulation)
   {
-    if (trace != null)
-    {
-      trace.disconnect(this);
-      trace = null;
-    }
+    super.disconnect(simulation);
+
     List<PortEvent> events = this.events.toList();
     for (PortEvent event : events)
     {
@@ -151,24 +123,6 @@ public class Port
     return output.getVoltage(time);
   }
 
-  public void connect(TraceNet trace)
-  {
-    if (this.trace == null)
-    {
-      this.trace = trace;
-      trace.connect(this);
-    }
-    else
-    {
-      throw new SimulatorException("Port [" + getName() + "] is already connected.");
-    }
-  }
-
-  public TraceNet getTrace()
-  {
-    return trace;
-  }
-
   public void driveEvent(Simulation simulation, DriveEvent driveEvent)
   {
     setLastOutput(driveEvent);
@@ -178,14 +132,17 @@ public class Port
   {
     slewEvent.update(simulation.getTimeline());
 
-    Set<Port> connectedPorts = getConnectedPorts();
+    Set<BasePort> connectedPorts = getConnectedPorts();
     if (connectedPorts != null)
     {
-      for (Port connectedPort : connectedPorts)
+      for (BasePort connectedPort : connectedPorts)
       {
         if (connectedPort != this)
         {
-          connectedPort.traceSlew(simulation, slewEvent);
+          if (connectedPort.isLogicPort())
+          {
+            ((Port) connectedPort).traceSlew(simulation, slewEvent);
+          }
         }
       }
     }
@@ -195,7 +152,7 @@ public class Port
 
   public boolean traceSlew(Simulation simulation, SlewEvent slewEvent)
   {
-    if (voltageConfiguration != null)
+    if (voltageConfigurationSource != null)
     {
       float startVoltage = slewEvent.getStartVoltage();
       long slewTime = slewEvent.getSlewTime();
@@ -203,8 +160,10 @@ public class Port
 
       if (startVoltage != endVoltage)
       {
-        float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
-        float highVoltageIn = voltageConfiguration.getHighVoltageIn();
+        long simulationTime = simulation.getTime();
+
+        float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(vcc.getVoltage(simulationTime));
+        float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(vcc.getVoltage(simulationTime));
         long transitionTime;
         float transitionVoltage;
         if (endVoltage <= lowVoltageIn)
@@ -235,7 +194,6 @@ public class Port
 
   public void traceConnected(Simulation simulation)
   {
-    TraceNet trace = getTrace();
     List<PortOutputEvent> outputEvents = trace.getOutputEvents();
     boolean slewInProgress = false;
     for (PortOutputEvent outputEvent : outputEvents)
@@ -258,11 +216,13 @@ public class Port
 
   protected void createTransitionEventFromExistingVoltage(Simulation simulation, TraceNet trace)
   {
-    if (voltageConfiguration != null)
+    if (voltageConfigurationSource != null)
     {
-      float endVoltage = trace.getVoltage(simulation.getTime());
-      float lowVoltageIn = voltageConfiguration.getLowVoltageIn();
-      float highVoltageIn = voltageConfiguration.getHighVoltageIn();
+      long simulationTime = simulation.getTime();
+
+      float endVoltage = trace.getVoltage(simulationTime);
+      float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(vcc.getVoltage(simulationTime));
+      float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(vcc.getVoltage(simulationTime));
 
       float transitionVoltage = 0;
       boolean traceValid = false;
@@ -341,25 +301,13 @@ public class Port
 
   public void writeUnsettled(Timeline timeline)
   {
-    float voltage = voltageConfiguration.getMidVoltageOut();
-    voltageConfiguration.createOutputEvent(timeline, this, voltage);
+    float voltage = voltageConfigurationSource.getMidVoltageOut(vcc.getVoltage(timeline.getTime()));
+    voltageConfigurationSource.createOutputEvent(timeline, this, voltage);
   }
 
-  public Set<Port> getConnectedPorts()
+  public VoltageConfigurationSource getVoltageConfigurationSource()
   {
-    if (trace != null)
-    {
-      return trace.getConnectedPorts();
-    }
-    else
-    {
-      return null;
-    }
-  }
-
-  public VoltageConfiguration getVoltageConfiguration()
-  {
-    return voltageConfiguration;
+    return voltageConfigurationSource;
   }
 
   public List<DriveEvent> getFutureDriveEvents(long time)
@@ -395,25 +343,32 @@ public class Port
     this.output = output;
   }
 
-  public long getTraceId()
-  {
-    if (trace != null)
-    {
-      return trace.getId();
-    }
-    return 0;
-  }
-
   public String toEventsString()
   {
     StringBuilder builder = new StringBuilder();
-    builder.append( "Events [" + events.size() + "]:  ");
+    builder.append("Events [" + events.size() + "]:  ");
     for (PortEvent event : events)
     {
       builder.append(event.toShortString());
       builder.append(",  ");
     }
     return builder.toString();
+  }
+
+  public float getVoltageCommon(long time)
+  {
+    return vcc.getVoltage(time);
+  }
+
+  public float getVoltageGround(long time)
+  {
+    return gnd.getVoltage(time);
+  }
+
+  @Override
+  public boolean isLogicPort()
+  {
+    return true;
   }
 }
 

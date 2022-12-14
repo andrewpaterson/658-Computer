@@ -1,8 +1,9 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.domain.common.voltage.Voltage;
+import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortOutputEvent;
+import net.logicim.domain.common.voltage.Voltage;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -14,7 +15,7 @@ public class TraceNet
 {
   public static long nextId = 1L;
 
-  protected Set<Port> connectedPorts;
+  protected Set<BasePort> connectedPorts;
   protected long id;
 
   public TraceNet()
@@ -39,7 +40,7 @@ public class TraceNet
   {
     float drivenVoltage = 0;
     int drivers = 0;
-    for (Port port : connectedPorts)
+    for (BasePort port : connectedPorts)
     {
       float voltage = port.getVoltage(time);
       if (!Float.isNaN(voltage))
@@ -75,7 +76,7 @@ public class TraceNet
   {
     float minimumVoltage = 10000;
     float maximumVoltage = -10000;
-    for (Port port : connectedPorts)
+    for (BasePort port : connectedPorts)
     {
       float voltage = port.getVoltage(time);
       if (!Float.isNaN(voltage))
@@ -103,7 +104,7 @@ public class TraceNet
   public float getMinimumVoltage(long time)
   {
     float minimumVoltage = 10000;
-    for (Port port : connectedPorts)
+    for (BasePort port : connectedPorts)
     {
       float voltage = port.getVoltage(time);
       if (!Float.isNaN(voltage))
@@ -127,7 +128,7 @@ public class TraceNet
   public float getMaximumVoltage(long time)
   {
     float maximumVoltage = -10000;
-    for (Port port : connectedPorts)
+    for (BasePort port : connectedPorts)
     {
       float voltage = port.getVoltage(time);
       if (!Float.isNaN(voltage))
@@ -148,17 +149,17 @@ public class TraceNet
     }
   }
 
-  public Set<Port> getConnectedPorts()
+  public Set<BasePort> getConnectedPorts()
   {
     return connectedPorts;
   }
 
-  public void connect(Port port)
+  public void connect(BasePort port)
   {
     connectedPorts.add(port);
   }
 
-  public void disconnect(Port port)
+  public void disconnect(BasePort port)
   {
     connectedPorts.remove(port);
   }
@@ -166,12 +167,15 @@ public class TraceNet
   public List<PortOutputEvent> getOutputEvents()
   {
     ArrayList<PortOutputEvent> result = new ArrayList<>();
-    for (Port port : connectedPorts)
+    for (BasePort port : connectedPorts)
     {
-      PortOutputEvent output = port.getOutput();
-      if (output != null)
+      if (port.isLogicPort())
       {
-        result.add(output);
+        PortOutputEvent output = ((Port) port).getOutput();
+        if (output != null)
+        {
+          result.add(output);
+        }
       }
     }
     return result;

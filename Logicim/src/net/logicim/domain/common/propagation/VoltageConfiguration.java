@@ -8,7 +8,6 @@ import net.logicim.domain.common.trace.TraceValue;
 
 public class VoltageConfiguration
 {
-  protected String family;
   protected float vcc;
 
   protected float lowVoltageIn;
@@ -32,8 +31,7 @@ public class VoltageConfiguration
   protected int lowToEnableHoldTime;
   protected int lowToEnableSlewTime;
 
-  public VoltageConfiguration(String family,
-                              float vcc,
+  public VoltageConfiguration(float vcc,
                               float lowVoltageIn,
                               float highVoltageIn,
                               float lowVoltageOut,
@@ -41,7 +39,6 @@ public class VoltageConfiguration
                               int highToLowPropagation,
                               int lowToHighPropagation)
   {
-    this.family = family;
     this.vcc = vcc;
 
     setVoltages(lowVoltageIn, highVoltageIn, lowVoltageOut, highVoltageOut);
@@ -70,8 +67,7 @@ public class VoltageConfiguration
     this.lowVoltageOut = lowVoltageOut;
   }
 
-  public VoltageConfiguration(String family,
-                              float vcc,
+  public VoltageConfiguration(float vcc,
                               float lowVoltageIn,
                               float highVoltageIn,
                               float lowVoltageOut,
@@ -81,7 +77,6 @@ public class VoltageConfiguration
                               int highToDisEnPropagation,
                               int lowToDisEnPropagation)
   {
-    this.family = family;
     this.vcc = vcc;
 
     setVoltages(lowVoltageIn, highVoltageIn, lowVoltageOut, highVoltageOut);
@@ -94,8 +89,7 @@ public class VoltageConfiguration
     validateSlewTimes();
   }
 
-  public VoltageConfiguration(String family,
-                              float vcc,
+  public VoltageConfiguration(float vcc,
                               float lowVoltageIn,
                               float highVoltageIn,
                               float highVoltageOut,
@@ -113,7 +107,6 @@ public class VoltageConfiguration
                               int lowToEnableHoldTime,
                               int lowToEnableSlewTime)
   {
-    this.family = family;
     this.vcc = vcc;
 
     setVoltages(lowVoltageIn, highVoltageIn, lowVoltageOut, highVoltageOut);
@@ -306,7 +299,7 @@ public class VoltageConfiguration
     return getVoltsPerTime(highToLowSlewTime);
   }
 
-  public float getVoltage(boolean value)
+  public float getVoltageOut(boolean value)
   {
     if (value)
     {
@@ -316,11 +309,6 @@ public class VoltageConfiguration
     {
       return getLowVoltageOut();
     }
-  }
-
-  public String getFamily()
-  {
-    return family;
   }
 
   public float getVcc()

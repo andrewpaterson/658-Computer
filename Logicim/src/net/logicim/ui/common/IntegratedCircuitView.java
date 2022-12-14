@@ -9,7 +9,10 @@ import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
+import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
 
@@ -22,17 +25,24 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
 {
   protected IC integratedCircuit;
   protected List<PortView> ports;
+  protected Family family;
 
-  public IntegratedCircuitView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, String name)
+  public IntegratedCircuitView(CircuitEditor circuitEditor,
+                               Int2D position,
+                               Rotation rotation,
+                               String name,
+                               Family family)
   {
     super(circuitEditor, position, rotation, name);
-    circuitEditor.add(this);
+    this.family = family;
     this.ports = new ArrayList<>();
+    circuitEditor.add(this);
   }
 
   protected void create()
   {
-    this.integratedCircuit = createIntegratedCircuit();
+    FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(family);
+    this.integratedCircuit = createIntegratedCircuit(familyVoltageConfiguration);
     this.integratedCircuit.disable();
   }
 
@@ -41,7 +51,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     ports.add(portView);
   }
 
-  public PortView getPortView(Port port)
+  public PortView getPortView(BasePort port)
   {
     for (PortView portView : ports)
     {
@@ -60,8 +70,8 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
     }
 
-    List<Port> missing = new ArrayList<>();
-    for (Port port : integratedCircuit.getPorts())
+    List<BasePort> missing = new ArrayList<>();
+    for (BasePort port : integratedCircuit.getPorts())
     {
       PortView portView = getPortView(port);
       if (portView == null)
@@ -74,7 +84,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     {
       StringBuilder builder = new StringBuilder();
       boolean first = true;
-      for (Port port : missing)
+      for (BasePort port : missing)
       {
         if (first)
         {
@@ -230,7 +240,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     return integratedCircuit.getType() + " " + integratedCircuit.getName() + " (" + getPosition() + ")";
   }
 
-  protected abstract IC createIntegratedCircuit();
+  protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save();
 

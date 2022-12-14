@@ -4,6 +4,8 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
+import net.logicim.domain.common.propagation.Family;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
@@ -46,9 +48,10 @@ public class OscilloscopeView
                           float samplingFrequency,
                           Int2D position,
                           Rotation rotation,
-                          String name)
+                          String name,
+                          Family family)
   {
-    super(circuitEditor, position, rotation, name);
+    super(circuitEditor, position, rotation, name, family);
     this.inputCount = inputCount;
     this.numberOfDivsWide = numberOfDivsWide;
     this.divHeightInGrids = divHeightInGrids;
@@ -105,7 +108,7 @@ public class OscilloscopeView
   }
 
   @Override
-  protected Oscilloscope createIntegratedCircuit()
+  protected Oscilloscope createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new Oscilloscope(circuitEditor.getCircuit(),
                             "",
@@ -243,6 +246,7 @@ public class OscilloscopeView
   {
     return new OscilloscopeData(position, rotation,
                                 name,
+                                family.getFamily(),
                                 saveEvents(),
                                 savePorts(),
                                 saveState(),

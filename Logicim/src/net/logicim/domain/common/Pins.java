@@ -21,9 +21,9 @@ public abstract class Pins
 
   public Pins()
   {
+    this.ports = new ArrayList<>();
     this.vcc = addPort(new VoltageCommon(this));
     this.vss = addPort(new VoltageGround(this));
-    this.ports = new ArrayList<>();
   }
 
   public <T extends BasePort> T addPort(T port)

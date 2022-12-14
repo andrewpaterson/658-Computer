@@ -7,7 +7,7 @@ public class VoltageGround
 {
   public VoltageGround(Pins pins)
   {
-    super(PortType.PowerIn, "VCC", pins);
+    super(PortType.PowerIn, "GND", pins);
   }
 
   @Override

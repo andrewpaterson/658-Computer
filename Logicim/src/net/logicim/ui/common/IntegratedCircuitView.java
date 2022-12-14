@@ -73,10 +73,13 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     List<BasePort> missing = new ArrayList<>();
     for (BasePort port : integratedCircuit.getPorts())
     {
-      PortView portView = getPortView(port);
-      if (portView == null)
+      if (port.isLogicPort())
       {
-        missing.add(port);
+        PortView portView = getPortView(port);
+        if (portView == null)
+        {
+          missing.add(port);
+        }
       }
     }
 

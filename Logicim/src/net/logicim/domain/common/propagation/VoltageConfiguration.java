@@ -7,6 +7,7 @@ import net.logicim.domain.common.port.event.SlewEvent;
 import net.logicim.domain.common.trace.TraceValue;
 
 public class VoltageConfiguration
+    implements Comparable<VoltageConfiguration>
 {
   protected float vcc;
 
@@ -314,6 +315,12 @@ public class VoltageConfiguration
   public float getVcc()
   {
     return vcc;
+  }
+
+  @Override
+  public int compareTo(VoltageConfiguration o)
+  {
+    return Float.compare(vcc, o.vcc);
   }
 }
 

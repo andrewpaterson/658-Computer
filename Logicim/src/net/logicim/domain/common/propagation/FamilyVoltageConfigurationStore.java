@@ -72,6 +72,10 @@ public class FamilyVoltageConfigurationStore
 
   protected void allConfigurationsAdded()
   {
+    for (FamilyVoltageConfiguration familyVoltageConfiguration : map.values())
+    {
+      familyVoltageConfiguration.sort();
+    }
   }
 
   static VoltageConfiguration createVoltageConfiguration(Float vcc, List<VoltagePropagationTimeRow> rows)

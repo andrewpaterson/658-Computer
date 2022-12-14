@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 
 public class FamilyStore
 {
-  protected static FamilyStore instance;
+  protected static FamilyStore instance = null;
 
   protected LinkedHashMap<String, Family> map;
 

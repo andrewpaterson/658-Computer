@@ -7,6 +7,7 @@ import net.logicim.domain.common.trace.TraceValue;
 import net.logicim.domain.common.voltage.Voltage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FamilyVoltageConfiguration
@@ -38,6 +39,32 @@ public class FamilyVoltageConfiguration
     return null;
   }
 
+  public VoltageConfiguration getEqualOrHigherConfiguration(float vcc)
+  {
+    for (VoltageConfiguration voltageConfiguration : voltageConfigurations)
+    {
+      if (voltageConfiguration.vcc >= vcc)
+      {
+        return voltageConfiguration;
+      }
+    }
+    return null;
+  }
+
+  public VoltageConfiguration getLowerConfiguration(float vcc)
+  {
+    VoltageConfiguration previousVoltageConfiguration = null;
+    for (VoltageConfiguration voltageConfiguration : voltageConfigurations)
+    {
+      if (voltageConfiguration.vcc >= vcc)
+      {
+        return previousVoltageConfiguration;
+      }
+      previousVoltageConfiguration = voltageConfiguration;
+    }
+    return previousVoltageConfiguration;
+  }
+
   public void add(VoltageConfiguration voltageConfiguration, String logicLevel)
   {
     VoltageConfiguration existingVoltageConfiguration = get(voltageConfiguration.vcc);
@@ -60,7 +87,47 @@ public class FamilyVoltageConfiguration
 
   public float getHighVoltageIn(float vcc)
   {
-    return 0;
+    if (vcc == 0)
+    {
+      return 0;
+    }
+
+    VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
+    if (higherConfiguration != null)
+    {
+      if (higherConfiguration.vcc == vcc)
+      {
+        return higherConfiguration.getHighVoltageIn();
+      }
+      else
+      {
+        VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+        if (lowerConfiguration != null)
+        {
+          return linearInterpolateVoltage(higherConfiguration.getHighVoltageIn(), lowerConfiguration.getHighVoltageIn(), higherConfiguration.vcc, lowerConfiguration.vcc, vcc);
+        }
+        else
+        {
+          return linearInterpolateVoltage(higherConfiguration.getHighVoltageIn(), 0, higherConfiguration.vcc, 0, vcc);
+        }
+      }
+    }
+    else
+    {
+      VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+      float fraction = vcc / lowerConfiguration.vcc;
+      return lowerConfiguration.getHighVoltageIn() * fraction;
+    }
+  }
+
+  float linearInterpolateVoltage(float higherVoltage, float lowerVoltage, float higherVCC, float lowerVCC, float vcc)
+  {
+    float configurationVCCDiff = higherVCC - lowerVCC;
+    float vccDiff = vcc - lowerVCC;
+    float fraction = vccDiff / configurationVCCDiff;
+
+    float configurationHighVoltageDiff = higherVoltage - lowerVoltage;
+    return lowerVoltage + configurationHighVoltageDiff * fraction;
   }
 
   public float getLowVoltageIn(float vcc)
@@ -101,6 +168,11 @@ public class FamilyVoltageConfiguration
   public float getVoltsPerTimeHighToLow(float vcc)
   {
     return 0;
+  }
+
+  public void sort()
+  {
+    Collections.sort(voltageConfigurations);
   }
 }
 

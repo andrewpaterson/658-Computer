@@ -7,7 +7,7 @@ import static net.logicim.assertions.Validator.validateNotNull;
 
 public class FamilyVoltageConfigurationTest
 {
-  public static void test()
+  static void testHighVoltageIn()
   {
     FamilyVoltageConfigurationStore.getInstance();
     testHighVoltageIn("LVC", "0.0V -> 0.0V\n" +
@@ -179,6 +179,134 @@ public class FamilyVoltageConfigurationTest
       builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
     }
     validate(expected, builder.toString());
+  }
+
+  static void testLowVoltageIn()
+  {
+    FamilyVoltageConfigurationStore.getInstance();
+    testLowVoltageIn("LVC", "0.0V -> 0.0V\n" +
+                            "0.1V -> 0.0V\n" +
+                            "0.2V -> 0.1V\n" +
+                            "0.3V -> 0.1V\n" +
+                            "0.4V -> 0.1V\n" +
+                            "0.5V -> 0.2V\n" +
+                            "0.6V -> 0.2V\n" +
+                            "0.7V -> 0.2V\n" +
+                            "0.8V -> 0.3V\n" +
+                            "0.9V -> 0.3V\n" +
+                            "1.0V -> 0.3V\n" +
+                            "1.1V -> 0.4V\n" +
+                            "1.2V -> 0.4V\n" +
+                            "1.3V -> 0.4V\n" +
+                            "1.4V -> 0.5V\n" +
+                            "1.5V -> 0.5V\n" +
+                            "1.6V -> 0.5V\n" +
+                            "1.7V -> 0.6V\n" +
+                            "1.8V -> 0.6V\n" +
+                            "1.9V -> 0.6V\n" +
+                            "2.0V -> 0.6V\n" +
+                            "2.1V -> 0.6V\n" +
+                            "2.2V -> 0.6V\n" +
+                            "2.3V -> 0.7V\n" +
+                            "2.4V -> 0.7V\n" +
+                            "2.5V -> 0.7V\n" +
+                            "2.6V -> 0.7V\n" +
+                            "2.7V -> 0.7V\n" +
+                            "2.8V -> 0.7V\n" +
+                            "2.9V -> 0.7V\n" +
+                            "3.0V -> 0.7V\n" +
+                            "3.1V -> 0.8V\n" +
+                            "3.2V -> 0.8V\n" +
+                            "3.3V -> 0.8V\n" +
+                            "3.4V -> 0.8V\n" +
+                            "3.5V -> 0.8V\n" +
+                            "3.6V -> 0.9V\n" +
+                            "3.7V -> 0.9V\n" +
+                            "3.8V -> 0.9V\n" +
+                            "3.9V -> 0.9V\n" +
+                            "4.0V -> 1.0V\n" +
+                            "4.1V -> 1.0V\n" +
+                            "4.2V -> 1.0V\n" +
+                            "4.3V -> 1.0V\n" +
+                            "4.4V -> 1.1V\n" +
+                            "4.5V -> 1.1V\n" +
+                            "4.6V -> 1.1V\n" +
+                            "4.7V -> 1.1V\n" +
+                            "4.8V -> 1.2V\n" +
+                            "4.9V -> 1.2V\n" +
+                            "5.0V -> 1.2V\n");
+
+    testLowVoltageIn("F", "0.0V -> 0.0V\n" +
+                          "0.1V -> 0.0V\n" +
+                          "0.2V -> 0.0V\n" +
+                          "0.3V -> 0.0V\n" +
+                          "0.4V -> 0.1V\n" +
+                          "0.5V -> 0.1V\n" +
+                          "0.6V -> 0.1V\n" +
+                          "0.7V -> 0.1V\n" +
+                          "0.8V -> 0.1V\n" +
+                          "0.9V -> 0.1V\n" +
+                          "1.0V -> 0.2V\n" +
+                          "1.1V -> 0.2V\n" +
+                          "1.2V -> 0.2V\n" +
+                          "1.3V -> 0.2V\n" +
+                          "1.4V -> 0.2V\n" +
+                          "1.5V -> 0.2V\n" +
+                          "1.6V -> 0.3V\n" +
+                          "1.7V -> 0.3V\n" +
+                          "1.8V -> 0.3V\n" +
+                          "1.9V -> 0.3V\n" +
+                          "2.0V -> 0.3V\n" +
+                          "2.1V -> 0.3V\n" +
+                          "2.2V -> 0.4V\n" +
+                          "2.3V -> 0.4V\n" +
+                          "2.4V -> 0.4V\n" +
+                          "2.5V -> 0.4V\n" +
+                          "2.6V -> 0.4V\n" +
+                          "2.7V -> 0.4V\n" +
+                          "2.8V -> 0.4V\n" +
+                          "2.9V -> 0.5V\n" +
+                          "3.0V -> 0.5V\n" +
+                          "3.1V -> 0.5V\n" +
+                          "3.2V -> 0.5V\n" +
+                          "3.3V -> 0.5V\n" +
+                          "3.4V -> 0.5V\n" +
+                          "3.5V -> 0.6V\n" +
+                          "3.6V -> 0.6V\n" +
+                          "3.7V -> 0.6V\n" +
+                          "3.8V -> 0.6V\n" +
+                          "3.9V -> 0.6V\n" +
+                          "4.0V -> 0.6V\n" +
+                          "4.1V -> 0.7V\n" +
+                          "4.2V -> 0.7V\n" +
+                          "4.3V -> 0.7V\n" +
+                          "4.4V -> 0.7V\n" +
+                          "4.5V -> 0.7V\n" +
+                          "4.6V -> 0.7V\n" +
+                          "4.7V -> 0.8V\n" +
+                          "4.8V -> 0.8V\n" +
+                          "4.9V -> 0.8V\n" +
+                          "5.0V -> 0.8V\n");
+  }
+
+  static void testLowVoltageIn(String family, String expected)
+  {
+    FamilyVoltageConfiguration voltageConfiguration = FamilyVoltageConfigurationStore.get(family);
+    validateNotNull(voltageConfiguration);
+
+    StringBuilder builder = new StringBuilder();
+    for (float vcc = 0; vcc <= 5; vcc += 0.1f)
+    {
+      float voltage = voltageConfiguration.getLowVoltageIn(vcc);
+      builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
+    }
+    validate(expected, builder.toString());
+  }
+
+  public static void test()
+  {
+    testHighVoltageIn();
+    testLowVoltageIn();
   }
 }
 

@@ -120,19 +120,39 @@ public class FamilyVoltageConfiguration
     }
   }
 
-  float linearInterpolateVoltage(float higherVoltage, float lowerVoltage, float higherVCC, float lowerVCC, float vcc)
-  {
-    float configurationVCCDiff = higherVCC - lowerVCC;
-    float vccDiff = vcc - lowerVCC;
-    float fraction = vccDiff / configurationVCCDiff;
-
-    float configurationHighVoltageDiff = higherVoltage - lowerVoltage;
-    return lowerVoltage + configurationHighVoltageDiff * fraction;
-  }
-
   public float getLowVoltageIn(float vcc)
   {
-    return 0;
+    if (vcc == 0)
+    {
+      return 0;
+    }
+
+    VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
+    if (higherConfiguration != null)
+    {
+      if (higherConfiguration.vcc == vcc)
+      {
+        return higherConfiguration.getLowVoltageIn();
+      }
+      else
+      {
+        VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+        if (lowerConfiguration != null)
+        {
+          return linearInterpolateVoltage(higherConfiguration.getLowVoltageIn(), lowerConfiguration.getLowVoltageIn(), higherConfiguration.vcc, lowerConfiguration.vcc, vcc);
+        }
+        else
+        {
+          return linearInterpolateVoltage(higherConfiguration.getLowVoltageIn(), 0, higherConfiguration.vcc, 0, vcc);
+        }
+      }
+    }
+    else
+    {
+      VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+      float fraction = vcc / lowerConfiguration.vcc;
+      return lowerConfiguration.getLowVoltageIn() * fraction;
+    }
   }
 
   public float getMidVoltageOut(float vcc)
@@ -147,7 +167,6 @@ public class FamilyVoltageConfiguration
 
   public void createOutputEvent(Timeline timeline, Port port, float voltageOut)
   {
-
   }
 
   public TraceValue getValue(float vin, float vcc)
@@ -168,6 +187,16 @@ public class FamilyVoltageConfiguration
   public float getVoltsPerTimeHighToLow(float vcc)
   {
     return 0;
+  }
+
+  float linearInterpolateVoltage(float higherVoltage, float lowerVoltage, float higherVCC, float lowerVCC, float vcc)
+  {
+    float configurationVCCDiff = higherVCC - lowerVCC;
+    float vccDiff = vcc - lowerVCC;
+    float fraction = vccDiff / configurationVCCDiff;
+
+    float configurationHighVoltageDiff = higherVoltage - lowerVoltage;
+    return lowerVoltage + configurationHighVoltageDiff * fraction;
   }
 
   public void sort()

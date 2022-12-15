@@ -1,5 +1,6 @@
 package net.logicim.domain.common.propagation;
 
+import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.voltage.Voltage;
 
 import static net.logicim.assertions.Validator.validate;
@@ -176,7 +177,7 @@ public class FamilyVoltageConfigurationTest
     for (float vcc = 0; vcc <= 5; vcc += 0.1f)
     {
       float voltage = voltageConfiguration.getHighVoltageIn(vcc);
-      builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
+      builder.append((Voltage.toVoltageString(vcc) + " -> " + Voltage.toVoltageString(voltage) + "\n"));
     }
     validate(expected, builder.toString());
   }
@@ -298,7 +299,7 @@ public class FamilyVoltageConfigurationTest
     for (float vcc = 0; vcc <= 5; vcc += 0.1f)
     {
       float voltage = voltageConfiguration.getLowVoltageIn(vcc);
-      builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
+      builder.append((Voltage.toVoltageString(vcc) + " -> " + Voltage.toVoltageString(voltage) + "\n"));
     }
     validate(expected, builder.toString());
   }
@@ -420,7 +421,7 @@ public class FamilyVoltageConfigurationTest
     for (float vcc = 0; vcc <= 5; vcc += 0.1f)
     {
       float voltage = voltageConfiguration.getMidVoltageOut(vcc);
-      builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
+      builder.append((Voltage.toVoltageString(vcc) + " -> " + Voltage.toVoltageString(voltage) + "\n"));
     }
     validate(expected, builder.toString());
   }
@@ -542,7 +543,7 @@ public class FamilyVoltageConfigurationTest
     for (float vcc = 0; vcc <= 5; vcc += 0.1f)
     {
       float voltage = voltageConfiguration.getVoltageOut(true, vcc);
-      builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
+      builder.append((Voltage.toVoltageString(vcc) + " -> " + Voltage.toVoltageString(voltage) + "\n"));
     }
     validate(expected, builder.toString());
   }
@@ -664,11 +665,29 @@ public class FamilyVoltageConfigurationTest
     for (float vcc = 0; vcc <= 5; vcc += 0.1f)
     {
       float voltage = voltageConfiguration.getVoltageOut(false, vcc);
-      builder.append((Voltage.getVoltageString(vcc) + " -> " + Voltage.getVoltageString(voltage) + "\n"));
+      builder.append((Voltage.toVoltageString(vcc) + " -> " + Voltage.toVoltageString(voltage) + "\n"));
     }
     validate(expected, builder.toString());
   }
 
+  static void testCalculateHoldTime()
+  {
+    testCalculateHoldTime("LVC", 3.1f, 0.2f, "");
+  }
+
+  static void testCalculateHoldTime(String family, float outVoltage, float portVoltage, String expected)
+  {
+    FamilyVoltageConfiguration voltageConfiguration = FamilyVoltageConfigurationStore.get(family);
+    validateNotNull(voltageConfiguration);
+
+    StringBuilder builder = new StringBuilder();
+    for (float vcc = 0.3333f; vcc <= 5; vcc += 0.1666f)
+    {
+      long time = voltageConfiguration.calculateHoldTime(outVoltage, portVoltage, vcc);
+      builder.append((Voltage.toVoltageString(vcc) + " -> " + LongTime.toNanosecondsString(time) + "\n"));
+    }
+    validate(expected, builder.toString());
+  }
   public static void test()
   {
     testHighVoltageIn();
@@ -676,6 +695,7 @@ public class FamilyVoltageConfigurationTest
     testMidVoltageOut();
     testHighVoltageOut();
     testLowVoltageOut();
+    testCalculateHoldTime();
   }
 }
 

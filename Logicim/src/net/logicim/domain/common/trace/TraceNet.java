@@ -69,7 +69,7 @@ public class TraceNet
 
   public String getVoltageString(long time)
   {
-    return Voltage.getVoltageString(getVoltage(time));
+    return Voltage.toVoltageString(getVoltage(time));
   }
 
   public float getShortVoltage(long time)

@@ -52,7 +52,7 @@ public class DriveEvent
   @Override
   public String toShortString()
   {
-    return super.toShortString() + " " + Voltage.getVoltageString(voltage);
+    return super.toShortString() + " " + Voltage.toVoltageString(voltage);
   }
 }
 

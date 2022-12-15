@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.logicim.domain.common.LongTime.timeToNanoseconds;
+import static net.logicim.domain.common.LongTime.toNanosecondsString;
 
 public class Timeline
 {
@@ -36,7 +36,7 @@ public class Timeline
     boolean b = addEvent(event);
     if (!b)
     {
-      throw new SimulatorException("Cannot add event in the past.  Event time [" + timeToNanoseconds(eventTime) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+      throw new SimulatorException("Cannot add event in the past.  Event time [" + toNanosecondsString(eventTime) + "] must be after current time [" + toNanosecondsString(time) + "].");
     }
   }
 
@@ -92,7 +92,7 @@ public class Timeline
         }
         else
         {
-          throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+          throw new SimulatorException("Cannot update simulation time.  Event time [" + toNanosecondsString(events.time) + "] must be after current time [" + toNanosecondsString(time) + "].");
         }
       }
       else
@@ -116,7 +116,7 @@ public class Timeline
       }
       else
       {
-        throw new SimulatorException("Cannot update simulation time.  Event time [" + timeToNanoseconds(events.time) + "] must be after current time [" + timeToNanoseconds(time) + "].");
+        throw new SimulatorException("Cannot update simulation time.  Event time [" + toNanosecondsString(events.time) + "] must be after current time [" + toNanosecondsString(time) + "].");
       }
     }
     else
@@ -169,6 +169,7 @@ public class Timeline
       return false;
     }
   }
+
   public boolean removeAll(List<? extends Event> events)
   {
     boolean result = false;

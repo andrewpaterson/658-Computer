@@ -6,7 +6,7 @@ public interface Voltage
 
   String getDescription();
 
-  static String getVoltageString(float voltage)
+  static String toVoltageString(float voltage)
   {
     if (!Float.isNaN(voltage))
     {

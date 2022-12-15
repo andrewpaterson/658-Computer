@@ -26,7 +26,7 @@ public class SmoothVoltage
       float delta = Math.abs(voltage - lastValue);
       if (delta > maximumDelta)
       {
-        throw new ValidationException("[" + voltageSource.getDescription() + "] voltage changed by [" + Voltage.getVoltageString(delta) + "] from [" + Voltage.getVoltageString(lastValue) + "] to [" + Voltage.getVoltageString(voltage) + "].");
+        throw new ValidationException("[" + voltageSource.getDescription() + "] voltage changed by [" + Voltage.toVoltageString(delta) + "] from [" + Voltage.toVoltageString(lastValue) + "] to [" + Voltage.toVoltageString(voltage) + "].");
       }
     }
     this.lastValue = voltage;

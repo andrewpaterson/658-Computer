@@ -150,7 +150,7 @@ public class EventPropagationTest
       float voltage = testPort.getVoltage(simulation.getTime());
       if ((voltage != 0.0f) || (previousVoltage != 0.0f))
       {
-        builder.append("Time [" + simulation.getTime() + "]  " + Voltage.getVoltageString(voltage) + "\n");
+        builder.append("Time [" + simulation.getTime() + "]  " + Voltage.toVoltageString(voltage) + "\n");
       }
       if ((voltage == 0.0f) && (previousVoltage != 0.0f))
       {

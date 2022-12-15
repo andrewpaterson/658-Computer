@@ -7,8 +7,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.event.*;
-import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
@@ -81,10 +79,13 @@ public class Port
 
   public void writeBool(Timeline timeline, boolean value)
   {
-    float vcc = this.vcc.getVoltage(timeline.getTime());
-    voltageConfigurationSource.createOutputEvent(timeline,
-                                                 this,
-                                                 voltageConfigurationSource.getVoltageOut(value, vcc));
+    long time = timeline.getTime();
+    float vcc = this.vcc.getVoltage(time);
+
+    float outVoltage = voltageConfigurationSource.getVoltageOut(value, vcc);
+    long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, this.getVoltage(time), vcc);
+
+    new SlewEvent(this, outVoltage, holdTime, timeline);
   }
 
   public TraceValue readValue(long time)
@@ -297,12 +298,6 @@ public class Port
     float c = startVoltage;
     float m = (endVoltage - startVoltage) / slewTime;
     return Math.round((y - c) / m);
-  }
-
-  public void writeUnsettled(Timeline timeline)
-  {
-    float voltage = voltageConfigurationSource.getMidVoltageOut(vcc.getVoltage(timeline.getTime()));
-    voltageConfigurationSource.createOutputEvent(timeline, this, voltage);
   }
 
   public VoltageConfigurationSource getVoltageConfigurationSource()

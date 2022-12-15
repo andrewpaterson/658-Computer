@@ -4,7 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.port.Port;
@@ -149,7 +148,7 @@ public class SlewEvent
   @Override
   public String toShortString()
   {
-    return super.toShortString() + " " + Voltage.getVoltageString(startVoltage) + " -> " + Voltage.getVoltageString(endVoltage);
+    return super.toShortString() + " " + Voltage.toVoltageString(startVoltage) + " -> " + Voltage.toVoltageString(endVoltage);
   }
 }
 

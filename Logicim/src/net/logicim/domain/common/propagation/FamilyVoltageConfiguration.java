@@ -1,8 +1,6 @@
 package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceValue;
 import net.logicim.domain.common.voltage.Voltage;
 
@@ -70,7 +68,7 @@ public class FamilyVoltageConfiguration
     VoltageConfiguration existingVoltageConfiguration = get(voltageConfiguration.vcc);
     if (existingVoltageConfiguration != null)
     {
-      throw new SimulatorException("Voltage configuration for Family [%s], VCC [%s] already added.", family, Voltage.getVoltageString(voltageConfiguration.vcc));
+      throw new SimulatorException("Voltage configuration for Family [%s], VCC [%s] already added.", family, Voltage.toVoltageString(voltageConfiguration.vcc));
     }
 
     voltageConfigurations.add(voltageConfiguration);
@@ -225,8 +223,39 @@ public class FamilyVoltageConfiguration
     }
   }
 
-  public void createOutputEvent(Timeline timeline, Port port, float voltageOut)
+  public long calculateHoldTime(float outVoltage, float portVoltage, float vcc)
   {
+    if (vcc == 0)
+    {
+      throw new SimulatorException("Cannot calculate hold time for a VCC of [0V].");
+    }
+
+    VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
+    if (higherConfiguration != null)
+    {
+      if (higherConfiguration.vcc == vcc)
+      {
+        return higherConfiguration.calculateHoldTime(outVoltage, portVoltage);
+      }
+      else
+      {
+        VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+        if (lowerConfiguration != null)
+        {
+          return linearInterpolateTime(higherConfiguration.calculateHoldTime(outVoltage, portVoltage), lowerConfiguration.calculateHoldTime(outVoltage, portVoltage), higherConfiguration.vcc, lowerConfiguration.vcc, vcc);
+        }
+        else
+        {
+          return linearInterpolateTime(higherConfiguration.calculateHoldTime(outVoltage, portVoltage), 0, higherConfiguration.vcc, 0, vcc);
+        }
+      }
+    }
+    else
+    {
+      VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+      float fraction = vcc / lowerConfiguration.vcc;
+      return (long) (lowerConfiguration.calculateHoldTime(outVoltage, portVoltage) * fraction);
+    }
   }
 
   public TraceValue getValue(float vin, float vcc)
@@ -257,6 +286,16 @@ public class FamilyVoltageConfiguration
 
     float configurationHighVoltageDiff = higherVoltage - lowerVoltage;
     return lowerVoltage + configurationHighVoltageDiff * fraction;
+  }
+
+  long linearInterpolateTime(long higherTime, long lowerTime, float higherVCC, float lowerVCC, float vcc)
+  {
+    float configurationVCCDiff = higherVCC - lowerVCC;
+    float vccDiff = vcc - lowerVCC;
+    float fraction = vccDiff / configurationVCCDiff;
+
+    long configurationHighTimeDiff = higherTime - lowerTime;
+    return lowerTime + (long) (configurationHighTimeDiff * fraction);
   }
 
   public void sort()

@@ -1,7 +1,5 @@
 package net.logicim.domain.common.propagation;
 
-import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceValue;
 
 public class TestVoltageConfiguration
@@ -56,12 +54,6 @@ public class TestVoltageConfiguration
   }
 
   @Override
-  public void createOutputEvent(Timeline timeline, Port port, float voltageOut)
-  {
-    voltageConfiguration.createOutputEvent(timeline, port, voltageOut);
-  }
-
-  @Override
   public float getVoltageOut(boolean value, float vcc)
   {
     return voltageConfiguration.getVoltageOut(value);
@@ -89,6 +81,12 @@ public class TestVoltageConfiguration
   public float getVoltsPerTimeHighToLow(float vcc)
   {
     return voltageConfiguration.getVoltsPerTimeHighToLow();
+  }
+
+  @Override
+  public long calculateHoldTime(float outVoltage, float portVoltage, float vcc)
+  {
+    return voltageConfiguration.calculateHoldTime(outVoltage, portVoltage);
   }
 }
 

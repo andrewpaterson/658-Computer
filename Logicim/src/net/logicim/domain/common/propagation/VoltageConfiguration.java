@@ -248,7 +248,14 @@ public class VoltageConfiguration
 
   public SlewEvent createOutputEvent(Timeline timeline, Port port, float outVoltage)
   {
-    float startVoltage = calculateStartVoltage(port.getVoltage(timeline.getTime()));
+    long holdTime = calculateHoldTime(outVoltage, port.getVoltage(timeline.getTime()));
+
+    return new SlewEvent(port, outVoltage, holdTime, timeline);
+  }
+
+  public long calculateHoldTime(float outVoltage, float portVoltage)
+  {
+    float startVoltage = calculateStartVoltage(portVoltage);
     float voltageDiff = outVoltage - startVoltage;
 
     long holdTime;
@@ -264,8 +271,7 @@ public class VoltageConfiguration
     {
       holdTime = (lowToHighHoldTime + highToLowHoldTime) / 2;
     }
-
-    return new SlewEvent(port, outVoltage, holdTime, timeline);
+    return holdTime;
   }
 
   public float calculateStartVoltage(float portVoltage)

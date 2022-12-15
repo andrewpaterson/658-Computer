@@ -29,7 +29,7 @@ public class SimultaneousEvents
   {
     if (event.getTime() != time)
     {
-      throw new SimulatorException("Simultaneous time [" + LongTime.timeToNanoseconds(time) + "] is not equal to event time [" + LongTime.timeToNanoseconds(event.getTime()) + "].");
+      throw new SimulatorException("Simultaneous time [" + LongTime.toNanosecondsString(time) + "] is not equal to event time [" + LongTime.toNanosecondsString(event.getTime()) + "].");
     }
     events.add(event);
   }

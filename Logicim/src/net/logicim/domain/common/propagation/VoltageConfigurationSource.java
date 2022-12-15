@@ -1,7 +1,5 @@
 package net.logicim.domain.common.propagation;
 
-import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceValue;
 
 public abstract class VoltageConfigurationSource
@@ -14,8 +12,6 @@ public abstract class VoltageConfigurationSource
 
   public abstract float getMidVoltageOut(float vcc);
 
-  public abstract void createOutputEvent(Timeline timeline, Port port, float voltageOut);
-
   public abstract float getVoltageOut(boolean value, float vcc);
 
   public abstract TraceValue getValue(float voltage, float vcc);
@@ -25,5 +21,7 @@ public abstract class VoltageConfigurationSource
   public abstract float getVoltsPerTimeLowToHigh(float vcc);
 
   public abstract float getVoltsPerTimeHighToLow(float vcc);
+
+  public abstract long calculateHoldTime(float outVoltage, float portVoltage, float vcc);
 }
 

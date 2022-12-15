@@ -6,9 +6,9 @@ public abstract class LongTime
 {
   public static final long timeGranularityInNanosecond = 1024;
 
-  public static long timeToNanoseconds(long time)
+  public static double timeToNanoseconds(long time)
   {
-    return (time / timeGranularityInNanosecond);
+    return time / (double) timeGranularityInNanosecond;
   }
 
   public static long nanosecondsToTime(long nanoseconds)
@@ -34,6 +34,12 @@ public abstract class LongTime
   public static long frequencyToTime(double frequency)
   {
     return secondsToTime((1.0f / frequency));
+  }
+
+  public static String toNanosecondsString(long time)
+  {
+    double nanoseconds = timeToNanoseconds(time);
+    return String.format("%.1fns", nanoseconds).replace(',', '.');
   }
 }
 

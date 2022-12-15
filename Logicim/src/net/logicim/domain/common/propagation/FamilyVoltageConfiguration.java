@@ -157,7 +157,37 @@ public class FamilyVoltageConfiguration
 
   public float getMidVoltageOut(float vcc)
   {
-    return 0;
+    if (vcc == 0)
+    {
+      return 0;
+    }
+
+    VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
+    if (higherConfiguration != null)
+    {
+      if (higherConfiguration.vcc == vcc)
+      {
+        return higherConfiguration.getMidVoltageOut();
+      }
+      else
+      {
+        VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+        if (lowerConfiguration != null)
+        {
+          return linearInterpolateVoltage(higherConfiguration.getMidVoltageOut(), lowerConfiguration.getMidVoltageOut(), higherConfiguration.vcc, lowerConfiguration.vcc, vcc);
+        }
+        else
+        {
+          return linearInterpolateVoltage(higherConfiguration.getMidVoltageOut(), 0, higherConfiguration.vcc, 0, vcc);
+        }
+      }
+    }
+    else
+    {
+      VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+      float fraction = vcc / lowerConfiguration.vcc;
+      return lowerConfiguration.getMidVoltageOut() * fraction;
+    }
   }
 
   public float getVoltageOut(boolean value, float vcc)

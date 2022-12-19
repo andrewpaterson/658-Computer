@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -13,8 +12,6 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
-
-import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
 public class ClockView
     extends IntegratedCircuitView<ClockOscillator>

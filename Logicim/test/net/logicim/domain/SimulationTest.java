@@ -1,6 +1,7 @@
 package net.logicim.domain;
 
 import net.logicim.assertions.SmoothVoltage;
+import net.logicim.assertions.TraceSmoothVoltage;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -87,9 +88,9 @@ public class SimulationTest
       }
     }
 
-    SmoothVoltage clock1Voltage = new SmoothVoltage(clock1Trace, 0.2f, simulation);
-    SmoothVoltage clock2Voltage = new SmoothVoltage(clock2Trace, 0.2f, simulation);
-    SmoothVoltage outputVoltage = new SmoothVoltage(outputTrace, 0.2f, simulation);
+    SmoothVoltage clock1Voltage = new TraceSmoothVoltage(clock1Trace, 0.2f, simulation);
+    SmoothVoltage clock2Voltage = new TraceSmoothVoltage(clock2Trace, 0.2f, simulation);
+    SmoothVoltage outputVoltage = new TraceSmoothVoltage(outputTrace, 0.2f, simulation);
     StringBuilder builder = new StringBuilder();
     do
     {
@@ -224,7 +225,7 @@ public class SimulationTest
                                                                                                         3.3f,
                                                                                                         (int) nanosecondsToTime(2.0f),
                                                                                                         (int) nanosecondsToTime(2.0f))),
-                                     (int)nanosecondsToTime(1), 0);
+                                     (int) nanosecondsToTime(1), 0);
     constant.getPins().getOutput().connect(connectingTraceNet);
     Inverter inverter = new Inverter(circuit, "Not", new BufferPins(new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                  2.0f,
@@ -243,8 +244,7 @@ public class SimulationTest
 
     Map<Long, SimultaneousEvents> events = simulation.getTimeline().getAllEvents();
     validate(1, events.size());
-    TickEvent treeTickEvent = validateTreeEvent(events, 0, nanosecondsToTime(1), TickEvent.class, constant);
-    SimultaneousEvents simultaneousEvents;
+    validateTreeEvent(events, 0, nanosecondsToTime(1), TickEvent.class, constant);
     LinkedList<PortEvent> portEventsForConstant = constantOutput.getEvents();
     validate(0, portEventsForConstant.size());
 
@@ -264,7 +264,7 @@ public class SimulationTest
     validate(nanosecondsToTime(2), portSlewEvent.getTime());
     validate(treeSlewEvent, portSlewEvent);
 
-    float voltage = constantOutput.getVoltage(simulation.getTime());
+    float voltage = constantOutput.getVoltageOut(simulation.getTime());
     validateTrue(Float.isNaN(voltage));
 
     eventsProcessed = simulation.runSimultaneous();
@@ -305,11 +305,11 @@ public class SimulationTest
     validate(1, events.size());
     validateTreeEvent(events, 0, 3856, SlewEvent.class, inverter);
 
-    voltage = constantOutput.getVoltage(simulation.getTime());
+    voltage = constantOutput.getVoltageOut(simulation.getTime());
     validateFalse(Float.isNaN(voltage));
     validate(0.0f, voltage);
     validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
-    validateTrue(Float.isNaN(inverterOutput.getVoltage(simulation.getTime())));
+    validateTrue(Float.isNaN(inverterOutput.getVoltageOut(simulation.getTime())));
     validateTrue(Float.isNaN(outputTraceNet.getVoltage(simulation.getTime())));
 
     eventsProcessed = simulation.runSimultaneous();
@@ -317,7 +317,7 @@ public class SimulationTest
     events = simulation.getTimeline().getAllEvents();
     validate(1, events.size());
     validateTreeEvent(events, 0, 5136, DriveEvent.class, inverter);
-    voltage = constantOutput.getVoltage(simulation.getTime());
+    voltage = constantOutput.getVoltageOut(simulation.getTime());
     validate(3856, simulation.getTime());
     validateFalse(Float.isNaN(voltage));
     validate(0.0f, voltage);
@@ -345,16 +345,16 @@ public class SimulationTest
                                                                                                         2.0f,
                                                                                                         0.0f,
                                                                                                         3.3f,
-                                                                                                        (int)nanosecondsToTime(2.0f),
-                                                                                                        (int)nanosecondsToTime(2.0f))),
-                                     (int)nanosecondsToTime(1), 0);
+                                                                                                        (int) nanosecondsToTime(2.0f),
+                                                                                                        (int) nanosecondsToTime(2.0f))),
+                                     (int) nanosecondsToTime(1), 0);
     constant.getPins().getOutput().connect(connectingTraceNet);
     Inverter inverter = new Inverter(circuit, "Not", new BufferPins(new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                  2.0f,
                                                                                                  0.0f,
                                                                                                  3.3f,
-                                                                                                 (int)nanosecondsToTime(2.5f),
-                                                                                                 (int)nanosecondsToTime(2.5f))));
+                                                                                                 (int) nanosecondsToTime(2.5f),
+                                                                                                 (int) nanosecondsToTime(2.5f))));
     inverter.getPins().getInput().connect(connectingTraceNet);
     inverter.getPins().getOutput().connect(outputTraceNet);
 

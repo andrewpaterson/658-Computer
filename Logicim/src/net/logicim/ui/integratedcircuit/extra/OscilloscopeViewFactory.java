@@ -4,6 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Units;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.defaults.DefaultFamily;
 
 public class OscilloscopeViewFactory
     extends ViewFactory

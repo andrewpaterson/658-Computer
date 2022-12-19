@@ -10,7 +10,6 @@ import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.trace.TraceValue;
-import net.logicim.domain.common.voltage.Voltage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +19,7 @@ import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
 public class Port
     extends BasePort
-    implements Voltage
 {
-
   protected VoltageConfigurationSource voltageConfigurationSource;
   protected VoltageCommon vcc;
   protected VoltageGround gnd;
@@ -80,10 +77,10 @@ public class Port
   public void writeBool(Timeline timeline, boolean value)
   {
     long time = timeline.getTime();
-    float vcc = this.vcc.getVoltage(time);
+    float vcc = getVCC();
 
     float outVoltage = voltageConfigurationSource.getVoltageOut(value, vcc);
-    long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, this.getVoltage(time), vcc);
+    long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, this.getVoltageOut(time), vcc);
     if (holdTime != Long.MAX_VALUE)
     {
       new SlewEvent(this, outVoltage, holdTime, timeline);
@@ -97,7 +94,7 @@ public class Port
       float voltage = trace.getVoltage(time);
       if (!Float.isNaN(voltage))
       {
-        return voltageConfigurationSource.getValue(voltage, vcc.getVoltage(time));
+        return voltageConfigurationSource.getValue(voltage, getVCC());
       }
     }
     return Undriven;
@@ -115,8 +112,7 @@ public class Port
     this.events.clear();
   }
 
-  @Override
-  public float getVoltage(long time)
+  public float getVoltageOut(long time)
   {
     if (output == null)
     {
@@ -165,8 +161,8 @@ public class Port
       {
         long simulationTime = simulation.getTime();
 
-        float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(vcc.getVoltage(simulationTime));
-        float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(vcc.getVoltage(simulationTime));
+        float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(getVCC());
+        float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(getVCC());
         long transitionTime;
         float transitionVoltage;
         if (endVoltage <= lowVoltageIn)
@@ -224,8 +220,8 @@ public class Port
       long simulationTime = simulation.getTime();
 
       float endVoltage = trace.getVoltage(simulationTime);
-      float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(vcc.getVoltage(simulationTime));
-      float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(vcc.getVoltage(simulationTime));
+      float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(getVCC());
+      float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(getVCC());
 
       float transitionVoltage = 0;
       boolean traceValid = false;
@@ -352,14 +348,14 @@ public class Port
     return builder.toString();
   }
 
-  public float getVoltageCommon(long time)
+  public float getVCC()
   {
-    return vcc.getVoltage(time);
+    return vcc.getVoltageIn();
   }
 
-  public float getVoltageGround(long time)
+  public float getGND()
   {
-    return gnd.getVoltage(time);
+    return gnd.getVoltageIn();
   }
 
   @Override

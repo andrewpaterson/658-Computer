@@ -1,5 +1,6 @@
 package net.logicim.domain.common.event;
 
+import net.logicim.assertions.PortSmoothVoltage;
 import net.logicim.assertions.SmoothVoltage;
 import net.logicim.assertions.Validator;
 import net.logicim.data.circuit.CircuitData;
@@ -41,14 +42,14 @@ public class EventPropagationTest
     while (true)
     {
       simulation.runToTime(100);
-      float voltage1 = andOutput.getVoltage(simulation.getTime());
+      float voltage1 = andOutput.getVoltageOut(simulation.getTime());
       if (!Float.isNaN(voltage1))
       {
         break;
       }
     }
 
-    SmoothVoltage andGateSmoothVoltage = new SmoothVoltage(andOutput, 0.3f, simulation);
+    SmoothVoltage andGateSmoothVoltage = new PortSmoothVoltage(andOutput, 0.3f, simulation);
 
     String simulationResult = runSimulation(andOutput, clock, simulation, andGateSmoothVoltage);
     Validator.validate("Time [13900]  1.8V\n" +
@@ -147,7 +148,7 @@ public class EventPropagationTest
     {
       smoothVoltage.validate();
 
-      float voltage = testPort.getVoltage(simulation.getTime());
+      float voltage = testPort.getVoltageOut(simulation.getTime());
       if ((voltage != 0.0f) || (previousVoltage != 0.0f))
       {
         builder.append("Time [" + simulation.getTime() + "]  " + Voltage.toVoltageString(voltage) + "\n");

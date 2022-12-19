@@ -15,8 +15,7 @@ public class VoltageCommon
   {
   }
 
-  @Override
-  public float getVoltage(long time)
+  public float getVoltageIn()
   {
     return 0;
   }

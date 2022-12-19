@@ -1,9 +1,10 @@
 package net.logicim.ui.common;
 
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PowerSource;
 import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 
 import java.awt.*;
 
@@ -85,14 +86,25 @@ public abstract class VoltageColour
 
   public static Color getColorForPort(VoltageRepresentation colours, BasePort port, long time)
   {
-    TraceNet trace = port.getTrace();
     if (time == -1)
     {
       return colours.getDisconnectedTrace();
     }
-    else if (trace == null)
+
+
+    TraceNet trace = port.getTrace();
+    if (trace == null)
     {
-      float voltage = port.getVoltage(time);
+      float voltage = Float.NaN;
+      if (port.isLogicPort())
+      {
+        voltage = ((Port)port).getVoltageOut(time);
+      }
+      else if (port.isPowerOut())
+      {
+        voltage = ((PowerSource) port).getVoltageOut();
+      }
+
       if (!Float.isNaN(voltage))
       {
         return VoltageColour.getColourForVoltage(colours, voltage);

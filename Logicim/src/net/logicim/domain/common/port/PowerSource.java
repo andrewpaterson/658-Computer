@@ -2,12 +2,12 @@ package net.logicim.domain.common.port;
 
 import net.logicim.domain.common.Pins;
 
-public class VoltageGround
+public class PowerSource
     extends BasePort
 {
-  public VoltageGround(Pins pins)
+  public PowerSource(PortType type, String name, Pins pins)
   {
-    super(PortType.PowerIn, "GND", pins);
+    super(type, name, pins);
   }
 
   @Override
@@ -15,7 +15,7 @@ public class VoltageGround
   {
   }
 
-  public float getVoltageIn()
+  public float getVoltageOut()
   {
     return 0;
   }

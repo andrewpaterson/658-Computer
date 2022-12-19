@@ -258,22 +258,102 @@ public class FamilyVoltageConfiguration
 
   public TraceValue getValue(float vin, float vcc)
   {
-    return null;
+    if (vcc == 0 || Float.isNaN(vin))
+    {
+      return TraceValue.Undriven;
+    }
+
+    float highVoltageIn = getHighVoltageIn(vcc);
+    if (vin>=highVoltageIn)
+    {
+      return TraceValue.High;
+    }
+
+    float lowVoltageIn = getLowVoltageIn(vcc);
+    if (vin<=lowVoltageIn)
+    {
+      return TraceValue.Low;
+    }
+
+    return TraceValue.Unsettled;
   }
 
   public float calculateStartVoltage(float portVoltage, float vcc)
   {
-    return 0;
+    if (!Float.isNaN(portVoltage))
+    {
+      return portVoltage;
+    }
+    else
+    {
+      return getMidVoltageOut(vcc);
+    }
   }
 
   public float getVoltsPerTimeLowToHigh(float vcc)
   {
-    return 0;
+    if (vcc == 0)
+    {
+      return Float.POSITIVE_INFINITY;
+    }
+
+    VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
+    if (higherConfiguration != null)
+    {
+      if (higherConfiguration.vcc == vcc)
+      {
+        return higherConfiguration.getVoltsPerTimeLowToHigh();
+      }
+      else
+      {
+        VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+        if (lowerConfiguration != null)
+        {
+          return linearInterpolateVoltage(higherConfiguration.getVoltsPerTimeLowToHigh(), lowerConfiguration.getVoltsPerTimeLowToHigh(), higherConfiguration.vcc, lowerConfiguration.vcc, vcc);
+        }
+        else
+        {
+          return Float.POSITIVE_INFINITY;
+        }
+      }
+    }
+    else
+    {
+      return Float.POSITIVE_INFINITY;
+    }
   }
 
   public float getVoltsPerTimeHighToLow(float vcc)
   {
-    return 0;
+    if (vcc == 0)
+    {
+      return Float.POSITIVE_INFINITY;
+    }
+
+    VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
+    if (higherConfiguration != null)
+    {
+      if (higherConfiguration.vcc == vcc)
+      {
+        return higherConfiguration.getVoltsPerTimeHighToLow();
+      }
+      else
+      {
+        VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
+        if (lowerConfiguration != null)
+        {
+          return linearInterpolateVoltage(higherConfiguration.getVoltsPerTimeHighToLow(), lowerConfiguration.getVoltsPerTimeHighToLow(), higherConfiguration.vcc, lowerConfiguration.vcc, vcc);
+        }
+        else
+        {
+          return Float.POSITIVE_INFINITY;
+        }
+      }
+    }
+    else
+    {
+      return Float.POSITIVE_INFINITY;
+    }
   }
 
   float linearInterpolateVoltage(float higherVoltage, float lowerVoltage, float higherVCC, float lowerVCC, float vcc)

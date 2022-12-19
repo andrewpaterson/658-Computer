@@ -4,9 +4,9 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 import net.logicim.domain.common.voltage.Voltage;
-import net.logicim.domain.common.port.Port;
 
 import java.util.List;
 
@@ -88,28 +88,12 @@ public class SlewEvent
   public DriveEvent update(Timeline timeline)
   {
     VoltageConfigurationSource voltageConfiguration = port.getVoltageConfigurationSource();
-    float vcc = port.getVoltageCommon(timeline.getTime());
+    float vcc = port.getVCC();
 
     long nowTime = timeline.getTime();
     startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration, vcc)), vcc);
 
-    float voltageDiff = endVoltage - startVoltage;
-
-    float voltsPerTime;
-    if (voltageDiff > 0)
-    {
-      voltsPerTime = voltageConfiguration.getVoltsPerTimeLowToHigh(vcc);
-      slewTime = (long) (voltageDiff / voltsPerTime);
-    }
-    else if (voltageDiff < 0)
-    {
-      voltsPerTime = voltageConfiguration.getVoltsPerTimeHighToLow(vcc);
-      slewTime = -(long) (voltageDiff / voltsPerTime);
-    }
-    else
-    {
-      slewTime = 1;
-    }
+    slewTime = calculateSlewTime(voltageConfiguration, vcc);
     if (slewTime < 1)
     {
       throw new SimulatorException("Slew time must be in the future.");
@@ -125,9 +109,44 @@ public class SlewEvent
     return new DriveEvent(port, getSlewTime(), getEndVoltage(), timeline);
   }
 
+  long calculateSlewTime(VoltageConfigurationSource voltageConfiguration, float vcc)
+  {
+    float voltageDiff = endVoltage - startVoltage;
+
+    float voltsPerTime;
+    if (voltageDiff > 0)
+    {
+      voltsPerTime = voltageConfiguration.getVoltsPerTimeLowToHigh(vcc);
+      if (!Float.isInfinite(voltsPerTime))
+      {
+        return (long) (voltageDiff / voltsPerTime);
+      }
+      else
+      {
+        return Long.MAX_VALUE;
+      }
+    }
+    else if (voltageDiff < 0)
+    {
+      voltsPerTime = voltageConfiguration.getVoltsPerTimeHighToLow(vcc);
+      if (!Float.isInfinite(voltsPerTime))
+      {
+        return -(long) (voltageDiff / voltsPerTime);
+      }
+      else
+      {
+        return Long.MAX_VALUE;
+      }
+    }
+    else
+    {
+      return 1;
+    }
+  }
+
   protected float calculateStartVoltage(long nowTime, VoltageConfigurationSource voltageConfiguration, float vcc)
   {
-    float voltage = port.getVoltage(nowTime);
+    float voltage = port.getVoltageOut(nowTime);
     if (!Float.isNaN(voltage))
     {
       return voltage;

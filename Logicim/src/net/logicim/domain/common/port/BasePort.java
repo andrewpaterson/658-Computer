@@ -69,6 +69,11 @@ public abstract class BasePort
     return false;
   }
 
+  public boolean isPowerOut()
+  {
+    return false;
+  }
+
   public void connect(TraceNet trace)
   {
     if (this.trace == null)
@@ -96,10 +101,8 @@ public abstract class BasePort
 
   public abstract void reset();
 
-  public abstract float getVoltage(long time);
-
   public void traceConnected(Simulation simulation)
   {
-
   }
 }
+

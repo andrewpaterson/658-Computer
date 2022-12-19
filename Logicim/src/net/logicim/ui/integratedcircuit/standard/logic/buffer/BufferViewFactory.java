@@ -17,7 +17,8 @@ public class BufferViewFactory
                           position,
                           rotation,
                           "",
-                          DefaultFamily.get());
+                          DefaultFamily.get(),
+                          true);
   }
 }
 

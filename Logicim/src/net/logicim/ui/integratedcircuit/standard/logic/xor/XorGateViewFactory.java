@@ -18,7 +18,8 @@ public class XorGateViewFactory
                            position,
                            rotation,
                            "",
-                           DefaultFamily.get());
+                           DefaultFamily.get(),
+                           true);
   }
 }
 

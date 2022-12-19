@@ -29,14 +29,16 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
                         Int2D position,
                         Rotation rotation,
                         String name,
-                        Family family)
+                        Family family,
+                        boolean explicitPowerPorts)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
           name,
-          family);
+          family,
+          explicitPowerPorts);
 
     arcViewRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 357, 61, true, false);
     arcViewLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 61, true, false);

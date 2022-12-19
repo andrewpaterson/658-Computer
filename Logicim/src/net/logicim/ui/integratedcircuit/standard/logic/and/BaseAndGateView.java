@@ -28,14 +28,16 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
                          Int2D position,
                          Rotation rotation,
                          String name,
-                         Family family)
+                         Family family,
+                         boolean explicitPowerPorts)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
           name,
-          family);
+          family,
+          explicitPowerPorts);
 
     float height = 1.4f;
     float bottom = -0.5f + height;

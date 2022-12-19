@@ -28,7 +28,8 @@ public class AndGateData
                      List<IntegratedCircuitEventData<?>> events,
                      List<PortData> portData,
                      State state,
-                     int inputCount)
+                     int inputCount,
+                     boolean explicitPowerPorts)
   {
     super(position,
           rotation,
@@ -37,7 +38,8 @@ public class AndGateData
           events,
           portData,
           state,
-          inputCount);
+          inputCount,
+          explicitPowerPorts);
   }
 
   public AndGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
@@ -47,7 +49,8 @@ public class AndGateData
                            position,
                            rotation,
                            name,
-                           FamilyStore.getInstance().get(family));
+                           FamilyStore.getInstance().get(family),
+                           explicitPowerPorts);
   }
 }
 

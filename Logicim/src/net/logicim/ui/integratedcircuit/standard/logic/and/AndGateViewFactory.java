@@ -18,7 +18,8 @@ public class AndGateViewFactory
                            position,
                            rotation,
                            "",
-                           DefaultFamily.get());
+                           DefaultFamily.get(),
+                           true);
   }
 }
 

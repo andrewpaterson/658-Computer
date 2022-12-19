@@ -28,7 +28,8 @@ public class XorGateData
                      List<IntegratedCircuitEventData<?>> events,
                      List<PortData> ports,
                      State state,
-                     int inputCount)
+                     int inputCount,
+                     boolean explicitPowerPorts)
   {
     super(position,
           rotation,
@@ -37,8 +38,8 @@ public class XorGateData
           events,
           ports,
           state,
-          inputCount);
-
+          inputCount,
+          explicitPowerPorts);
   }
 
   @Override
@@ -49,7 +50,8 @@ public class XorGateData
                            position,
                            rotation,
                            name,
-                           FamilyStore.getInstance().get(family));
+                           FamilyStore.getInstance().get(family),
+                           explicitPowerPorts);
   }
 }
 

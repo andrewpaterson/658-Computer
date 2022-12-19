@@ -1,7 +1,7 @@
 package net.logicim.data.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
@@ -14,10 +14,9 @@ import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 import java.util.List;
 
 public class ClockData
-    extends IntegratedCircuitData<ClockView, ClockOscillatorState>
+    extends StandardIntegratedCircuitData<ClockView, ClockOscillatorState>
 {
   protected float frequency;
-  protected boolean explicitPowerPorts;
   protected boolean inverseOut;
 
   public ClockData()
@@ -41,10 +40,10 @@ public class ClockData
           family,
           events,
           portData,
-          state);
+          state,
+          explicitPowerPorts);
     this.frequency = frequency;
     this.inverseOut = inverseOut;
-    this.explicitPowerPorts = explicitPowerPorts;
   }
 
   @Override

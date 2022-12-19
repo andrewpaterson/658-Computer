@@ -18,7 +18,8 @@ public class NorGateViewFactory
                            position,
                            rotation,
                            "",
-                           DefaultFamily.get());
+                           DefaultFamily.get(),
+                           true);
   }
 }
 

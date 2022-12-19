@@ -18,7 +18,8 @@ public class NandGateViewFactory
                             position,
                             rotation,
                             "",
-                            DefaultFamily.get());
+                            DefaultFamily.get(),
+                            true);
   }
 }
 

@@ -19,19 +19,22 @@ public class BufferView
                     Int2D position,
                     Rotation rotation,
                     String name,
-                    Family family)
+                    Family family,
+                    boolean explicitPowerPorts)
   {
     super(circuitEditor,
           position,
           rotation,
           name,
-          family);
+          family,
+          explicitPowerPorts);
     finaliseView();
   }
 
   @Override
   protected void createPorts()
   {
+    super.createPorts();
     createPorts(false);
   }
 
@@ -51,7 +54,8 @@ public class BufferView
                           family.getFamily(),
                           saveEvents(),
                           savePorts(),
-                          saveState());
+                          saveState(),
+                          explicitPowerPorts);
   }
 }
 

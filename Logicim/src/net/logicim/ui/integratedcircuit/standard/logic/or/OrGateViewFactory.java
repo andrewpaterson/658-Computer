@@ -18,7 +18,8 @@ public class OrGateViewFactory
                           position,
                           rotation,
                           "",
-                          DefaultFamily.get());
+                          DefaultFamily.get(),
+                          true);
   }
 }
 

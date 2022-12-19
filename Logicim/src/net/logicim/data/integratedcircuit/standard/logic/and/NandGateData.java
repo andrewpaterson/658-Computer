@@ -28,7 +28,8 @@ public class NandGateData
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> portData,
                       State state,
-                      int inputCount)
+                      int inputCount,
+                      boolean explicitPowerPorts)
   {
     super(position,
           rotation,
@@ -37,7 +38,8 @@ public class NandGateData
           events,
           portData,
           state,
-          inputCount);
+          inputCount,
+          explicitPowerPorts);
   }
 
   @Override
@@ -48,7 +50,8 @@ public class NandGateData
                             position,
                             rotation,
                             name,
-                            FamilyStore.getInstance().get(family));
+                            FamilyStore.getInstance().get(family),
+                            explicitPowerPorts);
   }
 }
 

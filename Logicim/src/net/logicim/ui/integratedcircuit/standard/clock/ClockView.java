@@ -57,18 +57,12 @@ public class ClockView
   @Override
   protected void createPorts()
   {
+    super.createPorts();
+
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
     if (inverseOut)
     {
       new PortView(this, this.integratedCircuit.getPort("Output2"), new Int2D(2, -1));
-    }
-
-    if (explicitPowerPorts)
-    {
-      updateBoundingBox();
-
-      new PortView(this, this.integratedCircuit.getPort("VCC"), new Int2D(-1, 0));
-      new PortView(this, this.integratedCircuit.getPort("GND"), new Int2D(3, 0));
     }
   }
 

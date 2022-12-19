@@ -17,20 +17,23 @@ public class NorGateView
                      Int2D position,
                      Rotation rotation,
                      String name,
-                     Family family)
+                     Family family,
+                     boolean explicitPowerPorts)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
           name,
-          family);
+          family,
+          explicitPowerPorts);
     finaliseView();
   }
 
   @Override
   protected void createPorts()
   {
+    super.createPorts();
     createPorts(true, 0);
   }
 
@@ -50,7 +53,8 @@ public class NorGateView
                            saveEvents(),
                            savePorts(),
                            saveState(),
-                           inputCount);
+                           inputCount,
+                           explicitPowerPorts);
   }
 }
 

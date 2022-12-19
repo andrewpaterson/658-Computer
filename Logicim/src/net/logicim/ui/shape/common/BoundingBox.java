@@ -144,6 +144,16 @@ public class BoundingBox
     return bottomRight;
   }
 
+  public float getLeft()
+  {
+    return topLeft.x;
+  }
+
+  public float getRight()
+  {
+    return bottomRight.x;
+  }
+
   protected Float2D getTransformedBottomRight()
   {
     return transformedBottomRight;

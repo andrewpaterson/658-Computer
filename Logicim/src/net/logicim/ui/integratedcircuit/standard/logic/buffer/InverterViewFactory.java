@@ -17,7 +17,8 @@ public class InverterViewFactory
                             position,
                             rotation,
                             "",
-                            DefaultFamily.get());
+                            DefaultFamily.get(),
+                            true);
   }
 }
 

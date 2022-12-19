@@ -4,12 +4,12 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
-    extends IntegratedCircuitView<IC>
+    extends StandardIntegratedCircuitView<IC>
 {
   protected int inputCount;
 
@@ -18,9 +18,15 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
                        Int2D position,
                        Rotation rotation,
                        String name,
-                       Family family)
+                       Family family,
+                       boolean explicitPowerPorts)
   {
-    super(circuitEditor, position, rotation, name, family);
+    super(circuitEditor,
+          position,
+          rotation,
+          name,
+          family,
+          explicitPowerPorts);
     this.inputCount = inputCount;
     createIntegratedCircuit();
   }

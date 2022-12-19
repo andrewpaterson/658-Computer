@@ -18,7 +18,8 @@ public class XnorGateViewFactory
                             position,
                             rotation,
                             "",
-                            DefaultFamily.get());
+                            DefaultFamily.get(),
+                            true);
   }
 }
 

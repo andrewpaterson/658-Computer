@@ -30,14 +30,16 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
                          Int2D position,
                          Rotation rotation,
                          String name,
-                         Family family)
+                         Family family,
+                         boolean explicitPowerPorts)
   {
     super(circuitEditor,
           inputCount,
           position,
           rotation,
           name,
-          family);
+          family,
+          explicitPowerPorts);
 
     float yTop = 0.6f;
     float yBottom = 3.5f;

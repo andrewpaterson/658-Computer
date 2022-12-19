@@ -16,19 +16,22 @@ public class InverterView
                       Int2D position,
                       Rotation rotation,
                       String name,
-                      Family family)
+                      Family family,
+                      boolean explicitPowerPorts)
   {
     super(circuitEditor,
           position,
           rotation,
           name,
-          family);
+          family,
+          explicitPowerPorts);
     finaliseView();
   }
 
   @Override
   protected void createPorts()
   {
+    super.createPorts();
     createPorts(true);
   }
 
@@ -47,7 +50,8 @@ public class InverterView
                             family.getFamily(),
                             saveEvents(),
                             savePorts(),
-                            saveState());
+                            saveState(),
+                            explicitPowerPorts);
   }
 }
 

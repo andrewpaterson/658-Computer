@@ -7,7 +7,6 @@ import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.common.state.Stateless;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateView;
@@ -28,7 +27,8 @@ public class OrGateData
                     List<IntegratedCircuitEventData<?>> events,
                     List<PortData> portData,
                     State state,
-                    int inputCount)
+                    int inputCount,
+                    boolean explicitPowerPorts)
   {
     super(position,
           rotation,
@@ -37,7 +37,8 @@ public class OrGateData
           events,
           portData,
           state,
-          inputCount);
+          inputCount,
+          explicitPowerPorts);
   }
 
   @Override
@@ -48,7 +49,8 @@ public class OrGateData
                           position,
                           rotation,
                           name,
-                          FamilyStore.getInstance().get(family));
+                          FamilyStore.getInstance().get(family),
+                          explicitPowerPorts);
   }
 }
 

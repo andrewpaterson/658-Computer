@@ -17,7 +17,7 @@ public class PowerInVCC
 
   public float getVoltageIn()
   {
-    return 0;
+    return 3.3f;
   }
 }
 

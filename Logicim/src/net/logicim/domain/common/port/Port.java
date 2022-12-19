@@ -84,8 +84,10 @@ public class Port
 
     float outVoltage = voltageConfigurationSource.getVoltageOut(value, vcc);
     long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, this.getVoltage(time), vcc);
-
-    new SlewEvent(this, outVoltage, holdTime, timeline);
+    if (holdTime != Long.MAX_VALUE)
+    {
+      new SlewEvent(this, outVoltage, holdTime, timeline);
+    }
   }
 
   public TraceValue readValue(long time)

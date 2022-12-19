@@ -227,7 +227,7 @@ public class FamilyVoltageConfiguration
   {
     if (vcc == 0)
     {
-      throw new SimulatorException("Cannot calculate hold time for a VCC of [0V].");
+      return Long.MAX_VALUE;
     }
 
     VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
@@ -246,15 +246,13 @@ public class FamilyVoltageConfiguration
         }
         else
         {
-          return linearInterpolateTime(higherConfiguration.calculateHoldTime(outVoltage, portVoltage), 0, higherConfiguration.vcc, 0, vcc);
+          return Long.MAX_VALUE;
         }
       }
     }
     else
     {
-      VoltageConfiguration lowerConfiguration = getLowerConfiguration(vcc);
-      float fraction = vcc / lowerConfiguration.vcc;
-      return (long) (lowerConfiguration.calculateHoldTime(outVoltage, portVoltage) * fraction);
+      return Long.MAX_VALUE;
     }
   }
 

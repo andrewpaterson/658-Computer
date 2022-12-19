@@ -672,7 +672,39 @@ public class FamilyVoltageConfigurationTest
 
   static void testCalculateHoldTime()
   {
-    testCalculateHoldTime("LVC", 3.1f, 0.2f, "");
+    testCalculateHoldTime("LVC", 3.1f, 0.2f, "1.8V -> 3.3ns\n" +
+                                             "1.9V -> 3.1ns\n" +
+                                             "2.0V -> 2.9ns\n" +
+                                             "2.1V -> 2.8ns\n" +
+                                             "2.2V -> 2.6ns\n" +
+                                             "2.3V -> 2.4ns\n" +
+                                             "2.4V -> 2.3ns\n" +
+                                             "2.5V -> 2.1ns\n" +
+                                             "2.6V -> 1.9ns\n" +
+                                             "2.7V -> 1.8ns\n" +
+                                             "2.8V -> 1.7ns\n" +
+                                             "2.9V -> 1.7ns\n" +
+                                             "3.0V -> 1.6ns\n" +
+                                             "3.1V -> 1.5ns\n" +
+                                             "3.2V -> 1.5ns\n" +
+                                             "3.3V -> 1.5ns\n");
+
+    testCalculateHoldTime("ALVC", 3.1f, 0.2f, "1.8V -> 1.5ns\n" +
+                                              "1.9V -> 1.5ns\n" +
+                                              "2.0V -> 1.4ns\n" +
+                                              "2.1V -> 1.4ns\n" +
+                                              "2.2V -> 1.4ns\n" +
+                                              "2.3V -> 1.4ns\n" +
+                                              "2.4V -> 1.3ns\n" +
+                                              "2.5V -> 1.3ns\n" +
+                                              "2.6V -> 1.3ns\n" +
+                                              "2.7V -> 1.3ns\n" +
+                                              "2.8V -> 1.2ns\n" +
+                                              "2.9V -> 1.2ns\n" +
+                                              "3.0V -> 1.2ns\n" +
+                                              "3.1V -> 1.2ns\n" +
+                                              "3.2V -> 1.2ns\n" +
+                                              "3.3V -> 1.2ns\n");
   }
 
   static void testCalculateHoldTime(String family, float outVoltage, float portVoltage, String expected)
@@ -681,10 +713,13 @@ public class FamilyVoltageConfigurationTest
     validateNotNull(voltageConfiguration);
 
     StringBuilder builder = new StringBuilder();
-    for (float vcc = 0.3333f; vcc <= 5; vcc += 0.1666f)
+    for (float vcc = 0.1f; vcc <= 5; vcc += 0.1f)
     {
       long time = voltageConfiguration.calculateHoldTime(outVoltage, portVoltage, vcc);
-      builder.append((Voltage.toVoltageString(vcc) + " -> " + LongTime.toNanosecondsString(time) + "\n"));
+      if (time != Long.MAX_VALUE)
+      {
+        builder.append((Voltage.toVoltageString(vcc) + " -> " + LongTime.toNanosecondsString(time) + "\n"));
+      }
     }
     validate(expected, builder.toString());
   }

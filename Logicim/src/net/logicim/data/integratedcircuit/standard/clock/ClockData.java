@@ -17,6 +17,8 @@ public class ClockData
     extends IntegratedCircuitData<ClockView, ClockOscillatorState>
 {
   protected float frequency;
+  protected boolean explicitPowerPorts;
+  protected boolean inverseOut;
 
   public ClockData()
   {
@@ -29,7 +31,9 @@ public class ClockData
                    float frequency,
                    List<IntegratedCircuitEventData<?>> events,
                    List<PortData> portData,
-                   ClockOscillatorState state)
+                   ClockOscillatorState state,
+                   boolean inverseOut,
+                   boolean explicitPowerPorts)
   {
     super(position,
           rotation,
@@ -39,6 +43,8 @@ public class ClockData
           portData,
           state);
     this.frequency = frequency;
+    this.inverseOut = inverseOut;
+    this.explicitPowerPorts = explicitPowerPorts;
   }
 
   @Override
@@ -49,7 +55,9 @@ public class ClockData
                          rotation,
                          name,
                          FamilyStore.getInstance().get(family),
-                         frequency);
+                         frequency,
+                         inverseOut,
+                         explicitPowerPorts);
   }
 }
 

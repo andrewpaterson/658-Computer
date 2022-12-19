@@ -44,18 +44,14 @@ public class SimulationTest
         0.0f,
         3.3f,
         (int) nanosecondsToTime(2.0f),
-        (int) nanosecondsToTime(2.0f))
-    {
-    }), frequency, (long) (frequencyToTime(frequency) * 0.5f));
+        (int) nanosecondsToTime(2.0f)), false), frequency, (long) (frequencyToTime(frequency) * 0.5f));
     ClockOscillator clock2 = new ClockOscillator(circuit, "180Mhz", new ClockOscillatorPins(new TestVoltageConfiguration(
         3.3f, 0.8f,
         2.0f,
         0.0f,
         3.3f,
         (int) nanosecondsToTime(2.0f),
-        (int) nanosecondsToTime(2.0f))
-    {
-    }), frequency, (long) (frequencyToTime(frequency) * 0.6f));
+        (int) nanosecondsToTime(2.0f)), false), frequency, (long) (frequencyToTime(frequency) * 0.6f));
     OrGate orGate = new OrGate(circuit, "Or", new OrGatePins(2, new TestVoltageConfiguration(
         3.3f, 0.8f,
         2.0f,

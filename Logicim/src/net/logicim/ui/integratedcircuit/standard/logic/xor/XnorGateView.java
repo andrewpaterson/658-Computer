@@ -28,9 +28,15 @@ public class XnorGateView
           rotation,
           name,
           family);
-    createPorts(true, 1);
     finaliseView();
   }
+
+  @Override
+  protected void createPorts()
+  {
+    createPorts(true, 1);
+  }
+
 
   @Override
   protected XnorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)

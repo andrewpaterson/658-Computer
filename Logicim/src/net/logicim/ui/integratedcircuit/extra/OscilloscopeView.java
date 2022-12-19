@@ -57,7 +57,7 @@ public class OscilloscopeView
     this.divHeightInGrids = divHeightInGrids;
     this.samplesPerDiv = samplesPerDiv;
     this.samplingFrequency = samplingFrequency;
-    create();
+    createIntegratedCircuit();
 
     frameRectangleViews = new ArrayList<>();
     frameArcViews = new ArrayList<>();
@@ -85,12 +85,15 @@ public class OscilloscopeView
     rectangleView = new RectangleView(this, new Float2D(outerWidth * 1 - 0.2f, -outerWidth * 3), new Float2D(numberOfDivsWide + outerWidth + 0.2f, bottom + outerWidth), true, true);
     rectangleView.setFillColour(Color.WHITE);
 
+    finaliseView();
+  }
+
+  protected void createPorts()
+  {
     for (int portNumber = 0; portNumber < inputCount; portNumber++)
     {
       new PortView(this, this.integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * divHeightInGrids));
     }
-
-    finaliseView();
   }
 
   protected RectangleView createRectangleView(Color frameColour, float left, float top, float right, float bottom)

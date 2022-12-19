@@ -26,9 +26,15 @@ public class BufferView
           rotation,
           name,
           family);
-    createPorts(false);
     finaliseView();
   }
+
+  @Override
+  protected void createPorts()
+  {
+    createPorts(false);
+  }
+
 
   @Override
   protected Buffer createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)

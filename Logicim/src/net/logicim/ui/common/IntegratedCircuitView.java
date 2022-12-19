@@ -39,7 +39,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     circuitEditor.add(this);
   }
 
-  protected void create()
+  protected void createIntegratedCircuit()
   {
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(family);
     this.integratedCircuit = createIntegratedCircuit(familyVoltageConfiguration);
@@ -186,6 +186,8 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   @Override
   protected void finaliseView()
   {
+    createIntegratedCircuit();
+    createPorts();
     super.finaliseView();
     validateIntegratedCircuit();
     validatePorts();
@@ -243,10 +245,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     return integratedCircuit.getType() + " " + integratedCircuit.getName() + " (" + getPosition() + ")";
   }
 
-  protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
-
-  public abstract IntegratedCircuitData<?, ?> save();
-
   protected List<PortData> savePorts()
   {
     List<PortData> portDatas = new ArrayList<>(ports.size());
@@ -286,5 +284,11 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       throw new SimulatorException("saveState must be implemented on [" + getClass().getSimpleName() + "].");
     }
   }
+
+  protected abstract void createPorts();
+
+  protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
+
+  public abstract IntegratedCircuitData<?, ?> save();
 }
 

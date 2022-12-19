@@ -28,9 +28,15 @@ public class XorGateView
           rotation,
           name,
           family);
-    createPorts(false, 1);
     finaliseView();
   }
+
+  @Override
+  protected void createPorts()
+  {
+    createPorts(false, 1);
+  }
+
 
   @Override
   protected XorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)

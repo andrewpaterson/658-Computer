@@ -25,8 +25,13 @@ public class NorGateView
           rotation,
           name,
           family);
-    createPorts(true, 0);
     finaliseView();
+  }
+
+  @Override
+  protected void createPorts()
+  {
+    createPorts(true, 0);
   }
 
   @Override

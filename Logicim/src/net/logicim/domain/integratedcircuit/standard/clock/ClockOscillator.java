@@ -46,6 +46,10 @@ public class ClockOscillator
 
     new TickEvent(halfCycleTime, this, simulation.getTimeline());
     pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
+    if (pins.getOutput2() != null)
+    {
+      pins.getOutput2().writeBool(simulation.getTimeline(), !state.getState());
+    }
   }
 
   @Override

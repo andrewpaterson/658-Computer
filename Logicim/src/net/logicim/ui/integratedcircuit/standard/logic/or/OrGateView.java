@@ -28,8 +28,12 @@ public class OrGateView
           rotation,
           name,
           family);
-    createPorts(false, 0);
     finaliseView();
+  }
+  @Override
+  protected void createPorts()
+  {
+    createPorts(false, 0);
   }
 
   @Override

@@ -4,13 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.and.AndGateData;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-
-import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
 public class AndGateView
     extends BaseAndGateView<AndGate>
@@ -28,8 +25,13 @@ public class AndGateView
           rotation,
           name,
           family);
-    createPorts(false, 0);
     finaliseView();
+  }
+
+  @Override
+  protected void createPorts()
+  {
+    createPorts(false, 0);
   }
 
   @Override

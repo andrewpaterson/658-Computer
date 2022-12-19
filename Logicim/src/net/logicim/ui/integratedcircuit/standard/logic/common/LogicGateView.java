@@ -22,7 +22,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   {
     super(circuitEditor, position, rotation, name, family);
     this.inputCount = inputCount;
-    create();
+    createIntegratedCircuit();
   }
 
   protected void createPorts(boolean negateOutput, int inputOffset)

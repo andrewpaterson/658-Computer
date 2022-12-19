@@ -20,7 +20,9 @@ public class ClockViewFactory
                          rotation,
                          "",
                          DefaultFamily.get(),
-                         50 * MHz);
+                         50 * MHz,
+                         true,
+                         true);
   }
 }
 

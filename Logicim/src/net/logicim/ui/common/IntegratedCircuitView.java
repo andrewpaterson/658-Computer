@@ -116,6 +116,10 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);
+  }
+
+  protected void paintPorts(Graphics2D graphics, Viewport viewport, long time)
+  {
     for (PortView portView : ports)
     {
       portView.paint(graphics, viewport, time);

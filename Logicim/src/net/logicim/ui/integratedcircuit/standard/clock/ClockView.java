@@ -76,6 +76,8 @@ public class ClockView
   @Override
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
+    super.paint(graphics, viewport, time);
+
     if (rectangle != null)
     {
       Stroke stroke = graphics.getStroke();
@@ -85,7 +87,7 @@ public class ClockView
 
       paintClockWaveform(graphics, viewport);
 
-      super.paint(graphics, viewport, time);
+      paintPorts(graphics, viewport, time);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

@@ -215,5 +215,10 @@ public class PortView
       throw new SimulatorException("implement saving for non-logic ports.");
     }
   }
+
+  public Int2D getPosition()
+  {
+    return positionRelativeToIC;
+  }
 }
 

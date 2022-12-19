@@ -2,12 +2,12 @@ package net.logicim.domain.common.port;
 
 import net.logicim.domain.common.Pins;
 
-public class VoltageGround
+public class PowerInVCC
     extends BasePort
 {
-  public VoltageGround(Pins pins)
+  public PowerInVCC(Pins pins)
   {
-    super(PortType.PowerIn, "GND", pins);
+    super(PortType.PowerIn, "VCC", pins);
   }
 
   @Override

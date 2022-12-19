@@ -2,10 +2,6 @@ package net.logicim.domain.integratedcircuit.standard.logic.or;
 
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.VoltageCommon;
-import net.logicim.domain.common.port.VoltageGround;
-import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 
 import java.util.ArrayList;

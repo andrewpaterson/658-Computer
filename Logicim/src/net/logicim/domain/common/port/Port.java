@@ -21,8 +21,8 @@ public class Port
     extends BasePort
 {
   protected VoltageConfigurationSource voltageConfigurationSource;
-  protected VoltageCommon vcc;
-  protected VoltageGround gnd;
+  protected PowerInVCC vcc;
+  protected PowerInGND gnd;
 
   protected LinkedList<PortEvent> events;
   protected PortOutputEvent output;

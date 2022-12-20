@@ -6,7 +6,6 @@ import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.BasePort;
 import net.logicim.ui.common.*;
-import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
@@ -14,16 +13,8 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
-import net.logicim.ui.integratedcircuit.extra.OscilloscopeViewFactory;
-import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.buffer.BufferViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
+import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -35,7 +26,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
-import static net.logicim.ui.input.action.ButtonState.*;
 
 public class SimulatorEditor
     implements PanelSize
@@ -389,27 +379,12 @@ public class SimulatorEditor
 
   private void addActions(SimulatorPanel simulatorPanel)
   {
-    actions.add(new InputAction(new PlacementRotateLeft(this), KeyEvent.VK_R, Up, Down, Up));
-    actions.add(new InputAction(new PlacementRotateRight(this), KeyEvent.VK_R, Up, Up, Up));
-    actions.add(new InputAction(new StopCurrent(this), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
-    actions.add(new InputAction(new RunOneEvent(this), KeyEvent.VK_T, Up, Up, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new InverterViewFactory()), KeyEvent.VK_N, Up, Down, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new OrGateViewFactory()), KeyEvent.VK_O, Up, Down, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new NorGateViewFactory()), KeyEvent.VK_O, Up, Down, Down));
-    actions.add(new InputAction(new CreatePlacementView(this, new AndGateViewFactory()), KeyEvent.VK_A, Up, Down, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new NandGateViewFactory()), KeyEvent.VK_A, Up, Down, Down));
-    actions.add(new InputAction(new CreatePlacementView(this, new XorGateViewFactory()), KeyEvent.VK_X, Up, Down, Up));
-    actions.add(new InputAction(new CreatePlacementView(this, new XnorGateViewFactory()), KeyEvent.VK_X, Up, Down, Down));
-    actions.add(new InputAction(new CreatePlacementView(this, new BufferViewFactory()), KeyEvent.VK_N, Up, Down, Down));
-    actions.add(new InputAction(new CreatePlacementView(this, new OscilloscopeViewFactory(viewport.getColours())), KeyEvent.VK_P, Up, Down, Up));
-    actions.add(new InputAction(new ToggleRunSimulation(this), KeyEvent.VK_K, Up, Up, Down));
-    actions.add(new InputAction(new DeleteComponent(this), KeyEvent.VK_DELETE, Up, Up, Up));
-    actions.add(new InputAction(new IncreaseSimulationSpeed(this), KeyEvent.VK_EQUALS, Up, Up, Up));
-    actions.add(new InputAction(new DecreaseSimulationSpeed(this), KeyEvent.VK_MINUS, Up, Up, Up));
-    actions.add(new InputAction(new ResetSimulation(this), KeyEvent.VK_R, Up, Up, Down));
-    actions.add(new InputAction(new SaveSimulation(simulatorPanel), KeyEvent.VK_S, Up, Up, Down));
-    actions.add(new InputAction(new LoadSimulation(simulatorPanel), KeyEvent.VK_L, Up, Up, Down));
+    SimulatorActions.create(this, simulatorPanel);
+  }
+
+  public void addAction(InputAction inputAction)
+  {
+    actions.add(inputAction);
   }
 
   public void keyPressed(int keyCode)
@@ -540,7 +515,14 @@ public class SimulatorEditor
     }
     else if (hoverDiscreteView != null)
     {
-      circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
+      if (hoverDiscreteView instanceof IntegratedCircuitView)
+      {
+        circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
+      }
+      if (hoverDiscreteView instanceof PowerSourceView)
+      {
+        circuitEditor.deletePowerSource((PowerSourceView) hoverDiscreteView);
+      }
     }
 
     hoverDiscreteView = null;
@@ -587,6 +569,11 @@ public class SimulatorEditor
 
     circuitEditor = new CircuitEditor(viewport.getColours());
     circuitEditor.load(circuitData);
+  }
+
+  public Colours getColours()
+  {
+    return viewport.getColours();
   }
 }
 

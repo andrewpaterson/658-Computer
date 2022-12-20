@@ -91,7 +91,7 @@ public class OscilloscopeView
   {
     for (int portNumber = 0; portNumber < inputCount; portNumber++)
     {
-      new PortView(this, this.integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * divHeightInGrids));
+      new PortView(this, integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * divHeightInGrids));
     }
   }
 

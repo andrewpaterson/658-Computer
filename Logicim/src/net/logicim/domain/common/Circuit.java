@@ -3,6 +3,7 @@ package net.logicim.domain.common;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.state.State;
+import net.logicim.domain.power.PowerSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,12 @@ import java.util.List;
 public class Circuit
 {
   protected List<IntegratedCircuit<? extends Pins, ? extends State>> integratedCircuits;
+  protected List<PowerSource> powerSources;
 
   public Circuit()
   {
     integratedCircuits = new ArrayList<>();
+    powerSources = new ArrayList<>();
   }
 
   public Simulation resetSimulation()
@@ -32,10 +35,24 @@ public class Circuit
     integratedCircuits.add(integratedCircuit);
   }
 
+  public void add(PowerSource powerSource)
+  {
+    powerSources.add(powerSource);
+  }
+
   public void remove(IntegratedCircuit<?, ?> integratedCircuit, Simulation simulation)
   {
     integratedCircuits.remove(integratedCircuit);
     for (BasePort port : integratedCircuit.getPorts())
+    {
+      port.disconnect(simulation);
+    }
+  }
+
+  public void remove(PowerSource powerSource, Simulation simulation)
+  {
+    powerSources.remove(powerSource);
+    for (BasePort port : powerSource.getPorts())
     {
       port.disconnect(simulation);
     }

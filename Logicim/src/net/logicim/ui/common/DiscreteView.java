@@ -3,6 +3,9 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.SaveData;
+import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
@@ -273,25 +276,13 @@ public abstract class DiscreteView
   }
 
   @Override
-  public Int2D getGridPosition(ConnectionView connectionView)
-  {
-    for (PortView portView : ports)
-    {
-      ConnectionView portViewConnections = portView.getConnection();
-      if (portViewConnections == connectionView)
-      {
-        return portView.getGridPosition();
-      }
-    }
-    return null;
-  }
-
-  @Override
   public String getName()
   {
     return name;
   }
 
   protected abstract void createPortViews();
+
+  public abstract DiscreteData save();
 }
 

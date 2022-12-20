@@ -13,6 +13,7 @@ public class PowerSource
   protected List<BasePort> ports;
   protected Circuit circuit;
   protected String name;
+  protected boolean enabled;
 
   public PowerSource(Circuit circuit, String name, float voltage)
   {
@@ -21,6 +22,7 @@ public class PowerSource
 
     this.circuit = circuit;
     this.name = name;
+    this.enabled = true;
   }
 
   public List<BasePort> getPorts()
@@ -53,6 +55,11 @@ public class PowerSource
       }
     }
     return null;
+  }
+
+  public void disable()
+  {
+    enabled = false;
   }
 }
 

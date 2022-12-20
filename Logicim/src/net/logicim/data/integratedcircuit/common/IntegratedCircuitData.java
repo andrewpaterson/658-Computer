@@ -1,7 +1,6 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
@@ -23,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>, STATE extends State>
-    extends ReflectiveData
+    extends DiscreteData
 {
   protected Int2D position;
   protected Rotation rotation;

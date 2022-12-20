@@ -18,6 +18,7 @@ public abstract class PowerSourceView
     extends DiscreteView
 {
   protected PowerSource powerSource;
+  protected boolean enabled;
 
   public PowerSourceView(CircuitEditor circuitEditor,
                          Int2D position,
@@ -28,6 +29,7 @@ public abstract class PowerSourceView
           position,
           rotation,
           name);
+    circuitEditor.add(this);
   }
 
   @Override
@@ -39,32 +41,22 @@ public abstract class PowerSourceView
     validatePorts();
   }
 
-  protected PowerSource createPowerSource()
+  protected void createPowerSource()
   {
-    return new PowerSource(circuitEditor.getCircuit(), name, getSourceVoltage());
-  }
-
-  @Override
-  public PortView getPortInGrid(int x, int y)
-  {
-    return null;
+    powerSource = new PowerSource(circuitEditor.getCircuit(), name, getSourceVoltage());
+    powerSource.disable();
   }
 
   @Override
   public boolean isEnabled()
   {
-    return false;
-  }
-
-  @Override
-  public List<PortView> getPorts()
-  {
-    return null;
+    return enabled;
   }
 
   @Override
   public void enable(Simulation simulation)
   {
+    enabled = true;
   }
 
   @Override
@@ -80,12 +72,6 @@ public abstract class PowerSourceView
 
   @Override
   public ConnectionView getConnectionsInGrid(Int2D p)
-  {
-    return null;
-  }
-
-  @Override
-  public Int2D getGridPosition(ConnectionView connectionView)
   {
     return null;
   }
@@ -132,6 +118,11 @@ public abstract class PowerSourceView
       }
       throw new SimulatorException("Ports [" + builder.toString() + "] not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
     }
+  }
+
+  public PowerSource getPowerSource()
+  {
+    return powerSource;
   }
 
   public abstract float getSourceVoltage();

@@ -51,11 +51,11 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     {
       if (!((i == 0) & skipZero))
       {
-        new PortView(this, this.integratedCircuit.getPort("Input " + portNumber), new Int2D(i, 1 + inputOffset));
+        new PortView(this, integratedCircuit.getPort("Input " + portNumber), new Int2D(i, 1 + inputOffset));
         portNumber++;
       }
     }
-    PortView outputPortView = new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -2));
+    PortView outputPortView = new PortView(this, integratedCircuit.getPort("Output"), new Int2D(0, -2));
     if (negateOutput)
     {
       outputPortView.setInverting(true, Rotation.North);

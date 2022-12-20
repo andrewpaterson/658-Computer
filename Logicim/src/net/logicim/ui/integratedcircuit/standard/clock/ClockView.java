@@ -59,10 +59,10 @@ public class ClockView
   {
     super.createPortViews();
 
-    new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
+    new PortView(this, integratedCircuit.getPort("Output"), new Int2D(0, -1));
     if (inverseOut)
     {
-      new PortView(this, this.integratedCircuit.getPort("Output2"), new Int2D(2, -1));
+      new PortView(this, integratedCircuit.getPort("Output2"), new Int2D(2, -1));
     }
   }
 
@@ -78,20 +78,19 @@ public class ClockView
   {
     super.paint(graphics, viewport, time);
 
+    Stroke stroke = graphics.getStroke();
+    Color color = graphics.getColor();
+
     if (rectangle != null)
     {
-      Stroke stroke = graphics.getStroke();
-      Color color = graphics.getColor();
-
       rectangle.paint(graphics, viewport);
 
       paintClockWaveform(graphics, viewport);
-
-      paintPorts(graphics, viewport, time);
-
-      graphics.setStroke(stroke);
-      graphics.setColor(color);
     }
+    paintPorts(graphics, viewport, time);
+
+    graphics.setStroke(stroke);
+    graphics.setColor(color);
   }
 
   private void paintClockWaveform(Graphics2D graphics, Viewport viewport)

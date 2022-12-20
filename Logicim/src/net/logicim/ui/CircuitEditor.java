@@ -6,7 +6,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.TimelineData;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.common.DiscreteData;
 import net.logicim.data.trace.TraceData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.Simulation;
@@ -16,7 +16,9 @@ import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.BasePort;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
+import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
+import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -25,7 +27,7 @@ import java.util.*;
 
 public class CircuitEditor
 {
-  protected Set<IntegratedCircuitView<?>> integratedCircuitViews;
+  protected Set<DiscreteView> discreteViews;
   protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
@@ -35,7 +37,7 @@ public class CircuitEditor
   {
     this.circuit = new Circuit();
     this.simulation = circuit.resetSimulation();
-    this.integratedCircuitViews = new LinkedHashSet<>();
+    this.discreteViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
     this.colours = colours;
   }
@@ -48,7 +50,7 @@ public class CircuitEditor
       traceView.paint(graphics, viewport, time);
     }
 
-    for (DiscreteView discreteView : integratedCircuitViews)
+    for (DiscreteView discreteView : discreteViews)
     {
       discreteView.paint(graphics, viewport, time);
     }
@@ -64,9 +66,9 @@ public class CircuitEditor
     return circuit;
   }
 
-  public void add(IntegratedCircuitView<?> view)
+  public void add(DiscreteView discreteView)
   {
-    integratedCircuitViews.add(view);
+    discreteViews.add(discreteView);
   }
 
   public void add(TraceView view)
@@ -92,7 +94,33 @@ public class CircuitEditor
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     circuit.remove(integratedCircuit, simulation);
-    integratedCircuitViews.remove(integratedCircuitView);
+    discreteViews.remove(integratedCircuitView);
+
+    for (ConnectionView connectionView : connectionViews)
+    {
+      connectConnections(connectionView);
+    }
+  }
+
+  public void deletePowerSource(PowerSourceView powerSourceView)
+  {
+    List<ConnectionView> connectionViews = new ArrayList<>();
+    List<PortView> portViews = powerSourceView.getPorts();
+    for (PortView portView : portViews)
+    {
+      ConnectionView connection = portView.getConnection();
+      if (connection != null)
+      {
+        disconnectTraceNet(findConnections(connection));
+
+        connection.remove(powerSourceView);
+        connectionViews.add(connection);
+      }
+    }
+
+    PowerSource powerSource = powerSourceView.getPowerSource();
+    circuit.remove(powerSource, simulation);
+    discreteViews.remove(powerSourceView);
 
     for (ConnectionView connectionView : connectionViews)
     {
@@ -199,7 +227,7 @@ public class CircuitEditor
     Int2D boundBoxPosition = new Int2D();
     Int2D boundBoxDimension = new Int2D();
     List<DiscreteView> selectedViews = new ArrayList<>();
-    for (DiscreteView view : integratedCircuitViews)
+    for (DiscreteView view : discreteViews)
     {
       if (view.isEnabled())
       {
@@ -218,7 +246,7 @@ public class CircuitEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
     List<DiscreteView> selectedViews = new ArrayList<>();
-    for (DiscreteView view : integratedCircuitViews)
+    for (DiscreteView view : discreteViews)
     {
       if (view.isEnabled())
       {
@@ -768,7 +796,7 @@ public class CircuitEditor
   private Set<ConnectionView> getDiscretePortConnectionsOnLine(Line line)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (DiscreteView discreteView : integratedCircuitViews)
+    for (DiscreteView discreteView : discreteViews)
     {
       List<PortView> ports = discreteView.getPorts();
       for (PortView port : ports)
@@ -810,7 +838,7 @@ public class CircuitEditor
       {
         if (componentView instanceof DiscreteView)
         {
-          if (!integratedCircuitViews.contains(componentView))
+          if (!discreteViews.contains(componentView))
           {
             throw new SimulatorException("Discrete component [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
           }
@@ -829,11 +857,11 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    ArrayList<IntegratedCircuitData<?, ?>> integratedCircuitDatas = new ArrayList<>();
-    for (IntegratedCircuitView<?> integratedCircuitView : integratedCircuitViews)
+    ArrayList<DiscreteData> discreteDatas = new ArrayList<>();
+    for (DiscreteView discreteView : discreteViews)
     {
-      IntegratedCircuitData<?, ?> integratedCircuitData = integratedCircuitView.save();
-      integratedCircuitDatas.add(integratedCircuitData);
+      DiscreteData discreteData = discreteView.save();
+      discreteDatas.add(discreteData);
     }
 
     ArrayList<TraceData> traceDatas = new ArrayList<>();
@@ -845,7 +873,7 @@ public class CircuitEditor
 
     TimelineData timelineData = simulation.getTimeline().save();
     return new CircuitData(timelineData,
-                           integratedCircuitDatas,
+                           discreteDatas,
                            traceDatas);
   }
 
@@ -860,9 +888,9 @@ public class CircuitEditor
       traceData.create(this, traceLoader);
     }
 
-    for (IntegratedCircuitData<?, ?> integratedCircuitData : circuitData.integratedCircuits)
+    for (DiscreteData discreteData : circuitData.integratedCircuits)
     {
-      integratedCircuitData.createAndLoad(this, traceLoader);
+      discreteData.createAndLoad(this, traceLoader);
     }
   }
 

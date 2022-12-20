@@ -51,7 +51,18 @@ public abstract class ComponentView
 
   public abstract ConnectionView getConnectionsInGrid(Int2D p);
 
-  public abstract Int2D getGridPosition(ConnectionView connectionView);
+  public Int2D getGridPosition(ConnectionView connectionView)
+  {
+    for (PortView portView : ports)
+    {
+      ConnectionView portViewConnections = portView.getConnection();
+      if (portViewConnections == connectionView)
+      {
+        return portView.getGridPosition();
+      }
+    }
+    return null;
+  }
 
   public abstract String getName();
 

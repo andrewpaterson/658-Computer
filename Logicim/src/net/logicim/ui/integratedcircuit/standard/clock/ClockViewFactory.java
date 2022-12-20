@@ -21,7 +21,7 @@ public class ClockViewFactory
                          "",
                          DefaultFamily.get(),
                          50 * MHz,
-                         true,
+                         false,
                          true);
   }
 }

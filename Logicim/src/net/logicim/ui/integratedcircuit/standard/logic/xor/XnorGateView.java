@@ -4,13 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.xor.XnorGateData;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XnorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGatePins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-
-import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
 public class XnorGateView
     extends BaseXorGateView<XnorGate>
@@ -34,9 +31,9 @@ public class XnorGateView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
+    super.createPortViews();
     createPorts(true, 1);
   }
 
@@ -44,7 +41,7 @@ public class XnorGateView
   @Override
   protected XnorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XnorGate(circuitEditor.getCircuit(), "", new XorGatePins(inputCount, familyVoltageConfiguration));
+    return new XnorGate(circuitEditor.getCircuit(), name, new XorGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override

@@ -28,7 +28,6 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
           family,
           explicitPowerPorts);
     this.inputCount = inputCount;
-    createIntegratedCircuit();
   }
 
   protected void createPorts(boolean negateOutput, int inputOffset)

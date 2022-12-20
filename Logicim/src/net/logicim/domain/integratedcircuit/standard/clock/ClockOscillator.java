@@ -5,7 +5,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.TickEvent;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 
 import static net.logicim.domain.common.LongTime.frequencyToTime;
 
@@ -31,7 +31,7 @@ public class ClockOscillator
   }
 
   @Override
-  public void inputTransition(Simulation simulation, Port port)
+  public void inputTransition(Simulation simulation, LogicPort port)
   {
   }
 

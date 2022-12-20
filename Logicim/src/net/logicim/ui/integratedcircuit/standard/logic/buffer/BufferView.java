@@ -4,13 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferData;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-
-import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
 public class BufferView
     extends BaseInverterView<Buffer>
@@ -32,17 +29,17 @@ public class BufferView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
-    createPorts(false);
+    super.createPortViews();
+    createPortViews(false);
   }
 
 
   @Override
   protected Buffer createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Buffer(circuitEditor.getCircuit(), "", new BufferPins(familyVoltageConfiguration));
+    return new Buffer(circuitEditor.getCircuit(), name, new BufferPins(familyVoltageConfiguration));
   }
 
   @Override

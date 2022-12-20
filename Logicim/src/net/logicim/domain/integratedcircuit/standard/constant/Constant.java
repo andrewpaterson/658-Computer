@@ -6,7 +6,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.event.TickEvent;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
 
 public class Constant
@@ -25,7 +25,7 @@ public class Constant
   }
 
   @Override
-  public void inputTransition(Simulation simulation, Port port)
+  public void inputTransition(Simulation simulation, LogicPort port)
   {
     throw new SimulatorException("Input transition not allowed on Constant.");
   }
@@ -36,7 +36,7 @@ public class Constant
     ConstantState state = getState();
     Timeline timeline = simulation.getTimeline();
     long constantValue = state.getConstantValue();
-    Port output = pins.getOutput();
+    LogicPort output = pins.getOutput();
     output.writeBool(timeline, (constantValue & 1) == 1);
   }
 

@@ -6,7 +6,7 @@ import net.logicim.assertions.Validator;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.voltage.NullVoltageColours;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
@@ -31,7 +31,7 @@ public class EventPropagationTest
     List<AndGate> andGates = (List) circuit.getIntegratedCircuits(AndGate.TYPE);
     Validator.validate(andGates.size(), 1);
     AndGate andGate = andGates.get(0);
-    Port andOutput = andGate.getPins().getOutput();
+    LogicPort andOutput = andGate.getPins().getOutput();
 
     List<ClockOscillator> clocks = (List) circuit.getIntegratedCircuits(ClockOscillator.TYPE);
     Validator.validate(clocks.size(), 1);
@@ -140,7 +140,7 @@ public class EventPropagationTest
                        "              ...\n", simulationResult);
   }
 
-  private static String runSimulation(Port testPort, ClockOscillator clock, Simulation simulation, SmoothVoltage smoothVoltage)
+  private static String runSimulation(LogicPort testPort, ClockOscillator clock, Simulation simulation, SmoothVoltage smoothVoltage)
   {
     StringBuilder builder = new StringBuilder();
     float previousVoltage = Float.NaN;

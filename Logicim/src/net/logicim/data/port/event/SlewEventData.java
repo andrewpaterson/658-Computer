@@ -1,7 +1,7 @@
 package net.logicim.data.port.event;
 
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.SlewEvent;
 
 public class SlewEventData
@@ -24,7 +24,7 @@ public class SlewEventData
   }
 
   @Override
-  public SlewEvent create(Port port, Timeline timeline)
+  public SlewEvent create(LogicPort port, Timeline timeline)
   {
     return new SlewEvent(port, time, id, startVoltage, endVoltage, slewTime, timeline);
   }

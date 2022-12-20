@@ -4,20 +4,20 @@ import net.logicim.data.port.event.DriveEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.voltage.Voltage;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 
 public class DriveEvent
     extends PortOutputEvent
 {
   protected float voltage;
 
-  public DriveEvent(Port port, long time, float voltage, Timeline timeline)
+  public DriveEvent(LogicPort port, long time, float voltage, Timeline timeline)
   {
     super(port, timeline.getTime() + time, timeline);
     this.voltage = voltage;
   }
 
-  public DriveEvent(Port port, long time, long id, float voltage, Timeline timeline)
+  public DriveEvent(LogicPort port, long time, long id, float voltage, Timeline timeline)
   {
     super(port, time, id, timeline);
     this.voltage = voltage;

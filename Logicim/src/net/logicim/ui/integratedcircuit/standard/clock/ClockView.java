@@ -55,9 +55,9 @@ public class ClockView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
+    super.createPortViews();
 
     new PortView(this, this.integratedCircuit.getPort("Output"), new Int2D(0, -1));
     if (inverseOut)
@@ -69,7 +69,7 @@ public class ClockView
   @Override
   protected ClockOscillator createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(circuitEditor.getCircuit(), "",
+    return new ClockOscillator(circuitEditor.getCircuit(), name,
                                new ClockOscillatorPins(familyVoltageConfiguration, inverseOut), frequency);
   }
 

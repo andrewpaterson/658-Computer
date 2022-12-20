@@ -8,7 +8,7 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.SimultaneousEvents;
 import net.logicim.domain.common.event.Event;
 import net.logicim.domain.common.event.TickEvent;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.DriveEvent;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.SlewEvent;
@@ -232,9 +232,9 @@ public class SimulationTest
     inverter.getPins().getInput().connect(connectingTraceNet);
     inverter.getPins().getOutput().connect(outputTraceNet);
 
-    Port constantOutput = (Port) constant.getPort("Output");
-    Port inverterInput = (Port) inverter.getPort("Input");
-    Port inverterOutput = (Port) inverter.getPort("Output");
+    LogicPort constantOutput = (LogicPort) constant.getPort("Output");
+    LogicPort inverterInput = (LogicPort) inverter.getPort("Input");
+    LogicPort inverterOutput = (LogicPort) inverter.getPort("Output");
 
     Simulation simulation = circuit.resetSimulation();
 

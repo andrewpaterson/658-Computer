@@ -5,28 +5,28 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.event.Event;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 
 public abstract class PortEvent
     extends Event
 {
-  protected Port port;
+  protected LogicPort port;
 
-  public PortEvent(Port port, long time, Timeline timeline)
+  public PortEvent(LogicPort port, long time, Timeline timeline)
   {
     super(time, timeline);
     this.port = port;
     this.port.add(this);
   }
 
-  public PortEvent(Port port, long time, long id, Timeline timeline)
+  public PortEvent(LogicPort port, long time, long id, Timeline timeline)
   {
     super(time, id, timeline);
     this.port = port;
     this.port.add(this);
   }
 
-  public Port getPort()
+  public LogicPort getPort()
   {
     return port;
   }

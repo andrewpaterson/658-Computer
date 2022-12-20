@@ -31,16 +31,16 @@ public class NorGateView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
+    super.createPortViews();
     createPorts(true, 0);
   }
 
   @Override
   protected NorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NorGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount, familyVoltageConfiguration));
+    return new NorGate(circuitEditor.getCircuit(), name, new OrGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override

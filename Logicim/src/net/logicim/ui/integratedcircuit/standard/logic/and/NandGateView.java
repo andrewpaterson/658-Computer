@@ -31,16 +31,16 @@ public class NandGateView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
+    super.createPortViews();
     createPorts(true, 0);
   }
 
   @Override
   protected NandGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NandGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount, familyVoltageConfiguration));
+    return new NandGate(circuitEditor.getCircuit(), name, new AndGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override

@@ -3,6 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -38,6 +39,7 @@ public abstract class DiscreteView
     this.selectionBox = new BoundingBox();
     this.shapes = new ArrayList<>();
     this.finalised = false;
+    this.ports = new ArrayList<>();
   }
 
   public void setPosition(int x, int y)
@@ -45,6 +47,20 @@ public abstract class DiscreteView
     this.position.set(x, y);
 
     invalidateCache();
+  }
+
+  @Override
+  public ConnectionView getConnectionsInGrid(int x, int y)
+  {
+    PortView portView = getPortInGrid(x, y);
+    if (portView != null)
+    {
+      return portView.getConnection();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   protected void finaliseView()
@@ -62,6 +78,16 @@ public abstract class DiscreteView
 
     selectionBox.copy(boundingBox);
     boundingBox.grow(0.5f);
+
+    updateBoundingBoxFromPorts();
+  }
+
+  private void updateBoundingBoxFromPorts()
+  {
+    for (PortView port : ports)
+    {
+      port.updateBoundingBox(boundingBox);
+    }
   }
 
   public void paint(Graphics2D graphics, Viewport viewport, long time)
@@ -207,16 +233,65 @@ public abstract class DiscreteView
     {
       shape.invalidateCache();
     }
+
+    for (PortView port : ports)
+    {
+      port.invalidateCache();
+    }
   }
 
-  public abstract PortView getPortInGrid(int x, int y);
+  public void addPortView(PortView portView)
+  {
+    ports.add(portView);
+  }
 
   public abstract boolean isEnabled();
-
-  public abstract List<PortView> getPorts();
 
   public abstract void enable(Simulation simulation);
 
   public abstract void simulationStarted(Simulation simulation);
+
+  public List<PortView> getPorts()
+  {
+    return ports;
+  }
+
+  protected List<PortData> savePorts()
+  {
+    List<PortData> portDatas = new ArrayList<>(ports.size());
+    for (PortView port : ports)
+    {
+      PortData portData = port.save();
+      portDatas.add(portData);
+    }
+    return portDatas;
+  }
+
+  public PortView getPort(int index)
+  {
+    return ports.get(index);
+  }
+
+  @Override
+  public Int2D getGridPosition(ConnectionView connectionView)
+  {
+    for (PortView portView : ports)
+    {
+      ConnectionView portViewConnections = portView.getConnection();
+      if (portViewConnections == connectionView)
+      {
+        return portView.getGridPosition();
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  protected abstract void createPortViews();
 }
 

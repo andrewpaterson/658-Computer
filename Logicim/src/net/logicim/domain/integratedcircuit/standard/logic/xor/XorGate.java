@@ -3,7 +3,7 @@ package net.logicim.domain.integratedcircuit.standard.logic.xor;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
@@ -33,13 +33,13 @@ public class XorGate
   }
 
   @Override
-  public void inputTransition(Simulation simulation, Port port)
+  public void inputTransition(Simulation simulation, LogicPort port)
   {
-    List<Port> inputs = pins.getInputs();
+    List<LogicPort> inputs = pins.getInputs();
 
     int highs = 0;
     int lows = 0;
-    for (Port input : inputs)
+    for (LogicPort input : inputs)
     {
       TraceValue inValue = input.readValue(simulation.getTime());
       if (inValue.isHigh())

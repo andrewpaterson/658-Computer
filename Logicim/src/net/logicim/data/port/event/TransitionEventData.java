@@ -1,7 +1,7 @@
 package net.logicim.data.port.event;
 
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.TransitionEvent;
 
 public class TransitionEventData
@@ -25,7 +25,7 @@ public class TransitionEventData
   }
 
   @Override
-  public TransitionEvent create(Port port, Timeline timeline)
+  public TransitionEvent create(LogicPort port, Timeline timeline)
   {
     return new TransitionEvent(port, voltage, time, id, timeline);
   }

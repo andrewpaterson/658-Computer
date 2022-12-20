@@ -3,7 +3,10 @@ package net.logicim.ui.integratedcircuit.extra;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Units;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.*;
+import net.logicim.ui.common.Colours;
+import net.logicim.ui.common.DiscreteView;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.ViewFactory;
 import net.logicim.ui.common.defaults.DefaultFamily;
 
 public class OscilloscopeViewFactory

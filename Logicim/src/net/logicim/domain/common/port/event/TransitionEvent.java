@@ -4,20 +4,20 @@ import net.logicim.data.port.event.TransitionEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.voltage.Voltage;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 
 public class TransitionEvent
     extends PortInputEvent
 {
   protected float voltage;
 
-  public TransitionEvent(Port port, float voltage, long time, Timeline timeline)
+  public TransitionEvent(LogicPort port, float voltage, long time, Timeline timeline)
   {
     super(port, timeline.getTime() + time, timeline);
     this.voltage = voltage;
   }
 
-  public TransitionEvent(Port port, float voltage, long time, long id, Timeline timeline)
+  public TransitionEvent(LogicPort port, float voltage, long time, long id, Timeline timeline)
   {
     super(port, time, id, timeline);
     this.voltage = voltage;

@@ -6,7 +6,7 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
 
 import java.util.List;
@@ -136,7 +136,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public abstract void simulationStarted(Simulation simulation);
 
-  public abstract void inputTransition(Simulation simulation, Port port);
+  public abstract void inputTransition(Simulation simulation, LogicPort port);
 
   public abstract String getType();
 

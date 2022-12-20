@@ -29,16 +29,16 @@ public class InverterView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
-    createPorts(true);
+    super.createPortViews();
+    createPortViews(true);
   }
 
   @Override
   protected Inverter createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Inverter(circuitEditor.getCircuit(), "", new BufferPins(familyVoltageConfiguration));
+    return new Inverter(circuitEditor.getCircuit(), name, new BufferPins(familyVoltageConfiguration));
   }
 
   @Override

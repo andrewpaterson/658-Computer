@@ -1,7 +1,7 @@
 package net.logicim.domain.integratedcircuit.standard.clock;
 
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 
 import static net.logicim.domain.common.port.PortType.Output;
@@ -9,31 +9,31 @@ import static net.logicim.domain.common.port.PortType.Output;
 public class ClockOscillatorPins
     extends Pins
 {
-  protected Port output;
-  protected Port output2;
+  protected LogicPort output;
+  protected LogicPort output2;
 
   public ClockOscillatorPins(VoltageConfigurationSource voltageConfiguration, boolean inverseOut)
   {
     super();
-    output = new Port(Output,
-                      this,
-                      "Output",
-                      voltageConfiguration);
+    output = new LogicPort(Output,
+                           this,
+                           "Output",
+                           voltageConfiguration);
     if (inverseOut)
     {
-      output2 = new Port(Output,
-                        this,
-                        "Output2",
-                        voltageConfiguration);
+      output2 = new LogicPort(Output,
+                              this,
+                              "Output2",
+                              voltageConfiguration);
     }
   }
 
-  public Port getOutput()
+  public LogicPort getOutput()
   {
     return output;
   }
 
-  public Port getOutput2()
+  public LogicPort getOutput2()
   {
     return output2;
   }

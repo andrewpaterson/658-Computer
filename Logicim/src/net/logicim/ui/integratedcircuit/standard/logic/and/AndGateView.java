@@ -31,16 +31,16 @@ public class AndGateView
   }
 
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
+    super.createPortViews();
     createPorts(false, 0);
   }
 
   @Override
   protected AndGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new AndGate(circuitEditor.getCircuit(), "", new AndGatePins(inputCount, familyVoltageConfiguration));
+    return new AndGate(circuitEditor.getCircuit(), name, new AndGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override

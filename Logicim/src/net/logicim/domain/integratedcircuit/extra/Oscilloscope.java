@@ -5,7 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.event.TickEvent;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.trace.TraceNet;
 
@@ -44,12 +44,12 @@ public class Oscilloscope
   public void executeTick(Simulation simulation)
   {
     new TickEvent(sampleTime, this, simulation.getTimeline());
-    List<Port> inputs = pins.getInputs();
+    List<LogicPort> inputs = pins.getInputs();
     state.tick();
     long time = simulation.getTime();
     for (int input = 0; input < inputs.size(); input++)
     {
-      Port port = inputs.get(input);
+      LogicPort port = inputs.get(input);
       TraceNet trace = port.getTrace();
       state.sample(input, trace, colours, time);
     }
@@ -68,7 +68,7 @@ public class Oscilloscope
   }
 
   @Override
-  public void inputTransition(Simulation simulation, Port port)
+  public void inputTransition(Simulation simulation, LogicPort port)
   {
   }
 

@@ -1,8 +1,7 @@
 package net.logicim.domain.integratedcircuit.standard.logic.and;
 
 import net.logicim.domain.common.Pins;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
 
 import java.util.ArrayList;
@@ -14,34 +13,34 @@ import static net.logicim.domain.common.port.PortType.Output;
 public class AndGatePins
     extends Pins
 {
-  private List<Port> inputs;
-  private Port output;
+  private List<LogicPort> inputs;
+  private LogicPort output;
 
   public AndGatePins(int inputCount, VoltageConfigurationSource voltageConfiguration)
   {
     super();
-    output = new Port(Output,
-                      this,
-                      "Output",
-                      voltageConfiguration);
+    output = new LogicPort(Output,
+                           this,
+                           "Output",
+                           voltageConfiguration);
 
     inputs = new ArrayList<>(inputCount);
     for (int i = 0; i < inputCount; i++)
     {
-      Port port = new Port(Input,
-                           this,
+      LogicPort port = new LogicPort(Input,
+                                     this,
                            "Input " + i,
-                           voltageConfiguration);
+                                     voltageConfiguration);
       inputs.add(port);
     }
   }
 
-  public Port getOutput()
+  public LogicPort getOutput()
   {
     return output;
   }
 
-  public List<Port> getInputs()
+  public List<LogicPort> getInputs()
   {
     return inputs;
   }

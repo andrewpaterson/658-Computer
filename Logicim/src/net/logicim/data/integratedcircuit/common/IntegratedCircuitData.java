@@ -8,7 +8,7 @@ import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
@@ -69,7 +69,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
 
       if (port.isLogicPort())
       {
-        Port logicPort = (Port) port;
+        LogicPort logicPort = (LogicPort) port;
         Map<Long, PortEvent> portEventMap = new HashMap<>();
         for (PortEventData<?> eventData : portData.events)
         {

@@ -57,7 +57,6 @@ public class OscilloscopeView
     this.divHeightInGrids = divHeightInGrids;
     this.samplesPerDiv = samplesPerDiv;
     this.samplingFrequency = samplingFrequency;
-    createIntegratedCircuit();
 
     frameRectangleViews = new ArrayList<>();
     frameArcViews = new ArrayList<>();
@@ -88,7 +87,7 @@ public class OscilloscopeView
     finaliseView();
   }
 
-  protected void createPorts()
+  protected void createPortViews()
   {
     for (int portNumber = 0; portNumber < inputCount; portNumber++)
     {
@@ -114,7 +113,7 @@ public class OscilloscopeView
   protected Oscilloscope createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new Oscilloscope(circuitEditor.getCircuit(),
-                            "",
+                            name,
                             new OscilloscopePins(inputCount),
                             samplingFrequency,
                             numberOfDivsWide,
@@ -131,6 +130,8 @@ public class OscilloscopeView
   @Override
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
+    super.paint(graphics, viewport, time);
+
     if ((frameArcViews != null))
     {
       Stroke stroke = graphics.getStroke();
@@ -217,7 +218,7 @@ public class OscilloscopeView
           }
         }
       }
-      super.paint(graphics, viewport, time);
+paintPorts(graphics, viewport, time);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

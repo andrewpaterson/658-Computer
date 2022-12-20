@@ -5,7 +5,6 @@ import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
@@ -24,7 +23,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     extends DiscreteView
 {
   protected IC integratedCircuit;
-  protected List<PortView> ports;
   protected Family family;
 
   public IntegratedCircuitView(CircuitEditor circuitEditor,
@@ -35,7 +33,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   {
     super(circuitEditor, position, rotation, name);
     this.family = family;
-    this.ports = new ArrayList<>();
     circuitEditor.add(this);
   }
 
@@ -44,23 +41,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(family);
     this.integratedCircuit = createIntegratedCircuit(familyVoltageConfiguration);
     this.integratedCircuit.disable();
-  }
-
-  public void addPortView(PortView portView)
-  {
-    ports.add(portView);
-  }
-
-  public PortView getPortView(BasePort port)
-  {
-    for (PortView portView : ports)
-    {
-      if (portView.getPort() == port)
-      {
-        return portView;
-      }
-    }
-    return null;
   }
 
   protected void validatePorts()
@@ -118,14 +98,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     super.paint(graphics, viewport, time);
   }
 
-  protected void paintPorts(Graphics2D graphics, Viewport viewport, long time)
-  {
-    for (PortView portView : ports)
-    {
-      portView.paint(graphics, viewport, time);
-    }
-  }
-
   public IC getIntegratedCircuit()
   {
     return integratedCircuit;
@@ -150,38 +122,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public PortView getPortInGrid(int x, int y)
-  {
-    for (PortView port : ports)
-    {
-      if (port.getGridPosition().equals(x, y))
-      {
-        return port;
-      }
-    }
-    return null;
-  }
-
-  public PortView getPortInGrid(Int2D position)
-  {
-    return getPortInGrid(position.x, position.y);
-  }
-
-  @Override
-  public ConnectionView getConnectionsInGrid(int x, int y)
-  {
-    PortView portView = getPortInGrid(x, y);
-    if (portView != null)
-    {
-      return portView.getConnection();
-    }
-    else
-    {
-      return null;
-    }
-  }
-
-  @Override
   public ConnectionView getConnectionsInGrid(Int2D p)
   {
     return getConnectionsInGrid(p.x, p.y);
@@ -191,78 +131,16 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
   protected void finaliseView()
   {
     createIntegratedCircuit();
-    createPorts();
+    createPortViews();
     super.finaliseView();
     validateIntegratedCircuit();
     validatePorts();
   }
 
   @Override
-  protected void updateBoundingBox()
-  {
-    for (PortView port : ports)
-    {
-      port.updateBoundingBox(boundingBox);
-    }
-    super.updateBoundingBox();
-  }
-
-  @Override
-  protected void invalidateCache()
-  {
-    super.invalidateCache();
-    for (PortView port : ports)
-    {
-      port.invalidateCache();
-    }
-  }
-
-  @Override
-  public List<PortView> getPorts()
-  {
-    return ports;
-  }
-
-  @Override
-  public Int2D getGridPosition(ConnectionView connectionView)
-  {
-    for (PortView portView : ports)
-    {
-      ConnectionView portViewConnections = portView.getConnection();
-      if (portViewConnections == connectionView)
-      {
-        return portView.getGridPosition();
-      }
-    }
-    return null;
-  }
-
-  @Override
-  public String getName()
-  {
-    return integratedCircuit.getName();
-  }
-
-  @Override
   public String getDescription()
   {
-    return integratedCircuit.getType() + " " + integratedCircuit.getName() + " (" + getPosition() + ")";
-  }
-
-  protected List<PortData> savePorts()
-  {
-    List<PortData> portDatas = new ArrayList<>(ports.size());
-    for (PortView port : ports)
-    {
-      PortData portData = port.save();
-      portDatas.add(portData);
-    }
-    return portDatas;
-  }
-
-  public PortView getPort(int index)
-  {
-    return ports.get(index);
+    return integratedCircuit.getType() + " " + getName() + " (" + getPosition() + ")";
   }
 
   protected List<IntegratedCircuitEventData<?>> saveEvents()
@@ -288,8 +166,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       throw new SimulatorException("saveState must be implemented on [" + getClass().getSimpleName() + "].");
     }
   }
-
-  protected abstract void createPorts();
 
   protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
 

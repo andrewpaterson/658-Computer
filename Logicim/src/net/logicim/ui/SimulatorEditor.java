@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.*;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.KeyboardButtons;

@@ -3,9 +3,9 @@ package net.logicim.domain.common;
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PowerInVCC;
-import net.logicim.domain.common.port.PowerInGND;
+import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.PortType;
+import net.logicim.domain.common.port.PowerIn;
 import net.logicim.domain.common.state.State;
 
 import java.util.ArrayList;
@@ -15,15 +15,15 @@ public abstract class Pins
 {
   protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
 
-  protected PowerInVCC vcc;
-  protected PowerInGND vss;
+  protected PowerIn vcc;
+  protected PowerIn vss;
   protected List<BasePort> ports;
 
   public Pins()
   {
     this.ports = new ArrayList<>();
-    this.vcc = addPort(new PowerInVCC(this));
-    this.vss = addPort(new PowerInGND(this));
+    this.vcc = addPort(new PowerIn(PortType.PowerIn, "VCC", this));
+    this.vss = addPort(new PowerIn(PortType.PowerIn, "GND", this));
   }
 
   public <T extends BasePort> T addPort(T port)
@@ -82,17 +82,17 @@ public abstract class Pins
     return ports;
   }
 
-  public void inputTransition(Simulation simulation, Port port)
+  public void inputTransition(Simulation simulation, LogicPort port)
   {
     getIntegratedCircuit().inputTransition(simulation, port);
   }
 
-  public PowerInVCC getVoltageCommon()
+  public PowerIn getVoltageCommon()
   {
     return vcc;
   }
 
-  public PowerInGND getVoltageGround()
+  public PowerIn getVoltageGround()
   {
     return vss;
   }

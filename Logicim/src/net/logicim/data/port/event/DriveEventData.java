@@ -1,7 +1,7 @@
 package net.logicim.data.port.event;
 
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.DriveEvent;
 
 public class DriveEventData
@@ -20,7 +20,7 @@ public class DriveEventData
   }
 
   @Override
-  public DriveEvent create(Port port, Timeline timeline)
+  public DriveEvent create(LogicPort port, Timeline timeline)
   {
     return new DriveEvent(port, time, id, voltage, timeline);
   }

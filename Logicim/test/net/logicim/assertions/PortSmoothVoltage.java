@@ -1,14 +1,14 @@
 package net.logicim.assertions;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 
 public class PortSmoothVoltage
     extends SmoothVoltage
 {
-  protected Port port;
+  protected LogicPort port;
 
-  public PortSmoothVoltage(Port port, float maximumDelta, Simulation simulation)
+  public PortSmoothVoltage(LogicPort port, float maximumDelta, Simulation simulation)
   {
     super(maximumDelta, simulation);
     this.port = port;

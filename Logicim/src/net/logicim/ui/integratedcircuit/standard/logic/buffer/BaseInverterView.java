@@ -36,7 +36,7 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
     polygon = new PolygonView(this, true, true, new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
   }
 
-  protected void createPorts(boolean negateOutput)
+  protected void createPortViews(boolean negateOutput)
   {
     new PortView(this, this.integratedCircuit.getPort("Input"), new Int2D(0, 1));
 

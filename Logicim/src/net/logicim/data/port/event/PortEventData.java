@@ -2,7 +2,7 @@ package net.logicim.data.port.event;
 
 import net.logicim.data.common.event.EventData;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.PortEvent;
 
 public abstract class PortEventData<E extends PortEvent>
@@ -17,6 +17,6 @@ public abstract class PortEventData<E extends PortEvent>
     super(time, id);
   }
 
-  public abstract E create(Port port, Timeline timeline);
+  public abstract E create(LogicPort port, Timeline timeline);
 }
 

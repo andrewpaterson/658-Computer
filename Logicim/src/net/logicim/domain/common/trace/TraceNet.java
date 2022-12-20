@@ -1,8 +1,8 @@
 package net.logicim.domain.common.trace;
 
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PowerSource;
+import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.PowerSourcePort;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.voltage.Voltage;
 
@@ -45,11 +45,11 @@ public class TraceNet
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((Port) port).getVoltageOut(time);
+        voltage = ((LogicPort) port).getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSource) port).getVoltageOut();
+        voltage = ((PowerSourcePort) port).getVoltageOut();
       }
       if (!Float.isNaN(voltage))
       {
@@ -88,11 +88,11 @@ public class TraceNet
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((Port) port).getVoltageOut(time);
+        voltage = ((LogicPort) port).getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSource) port).getVoltageOut();
+        voltage = ((PowerSourcePort) port).getVoltageOut();
       }
 
       if (!Float.isNaN(voltage))
@@ -126,11 +126,11 @@ public class TraceNet
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((Port) port).getVoltageOut(time);
+        voltage = ((LogicPort) port).getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSource) port).getVoltageOut();
+        voltage = ((PowerSourcePort) port).getVoltageOut();
       }
 
       if (!Float.isNaN(voltage))
@@ -159,11 +159,11 @@ public class TraceNet
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((Port) port).getVoltageOut(time);
+        voltage = ((LogicPort) port).getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSource) port).getVoltageOut();
+        voltage = ((PowerSourcePort) port).getVoltageOut();
       }
 
       if (!Float.isNaN(voltage))
@@ -206,7 +206,7 @@ public class TraceNet
     {
       if (port.isLogicPort())
       {
-        PortOutputEvent output = ((Port) port).getOutput();
+        PortOutputEvent output = ((LogicPort) port).getOutput();
         if (output != null)
         {
           result.add(output);

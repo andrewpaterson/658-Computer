@@ -14,9 +14,8 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.BasePort;
-import net.logicim.domain.common.voltage.VoltageRepresentation;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
 

@@ -4,13 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.or.OrGateData;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
-import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-
-import static net.logicim.domain.common.LongTime.nanosecondsToTime;
 
 public class OrGateView
     extends BaseOrGateView<OrGate>
@@ -33,16 +30,16 @@ public class OrGateView
     finaliseView();
   }
   @Override
-  protected void createPorts()
+  protected void createPortViews()
   {
-    super.createPorts();
+    super.createPortViews();
     createPorts(false, 0);
   }
 
   @Override
   protected OrGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new OrGate(circuitEditor.getCircuit(), "", new OrGatePins(inputCount, familyVoltageConfiguration));
+    return new OrGate(circuitEditor.getCircuit(), name, new OrGatePins(inputCount, familyVoltageConfiguration));
   }
 
   @Override

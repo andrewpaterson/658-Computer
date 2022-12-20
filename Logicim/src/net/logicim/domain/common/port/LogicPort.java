@@ -17,22 +17,24 @@ import java.util.Set;
 
 import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
-public class Port
+public class LogicPort
     extends BasePort
 {
+  protected Pins pins;
   protected VoltageConfigurationSource voltageConfigurationSource;
-  protected PowerInVCC vcc;
-  protected PowerInGND gnd;
+  protected PowerIn vcc;
+  protected PowerIn gnd;
 
   protected LinkedList<PortEvent> events;
   protected PortOutputEvent output;
 
-  public Port(PortType type,
-              Pins pins,
-              String name,
-              VoltageConfigurationSource voltageConfigurationSource)
+  public LogicPort(PortType type,
+                   Pins pins,
+                   String name,
+                   VoltageConfigurationSource voltageConfigurationSource)
   {
-    super(type, name, pins);
+    super(type, name);
+    this.pins = pins;
     this.voltageConfigurationSource = voltageConfigurationSource;
     this.vcc = pins.getVoltageCommon();
     this.gnd = pins.getVoltageGround();
@@ -80,7 +82,7 @@ public class Port
     float vcc = getVCC();
 
     float outVoltage = voltageConfigurationSource.getVoltageOut(value, vcc);
-    long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, this.getVoltageOut(time), vcc);
+    long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, getVoltageOut(time), vcc);
     if (holdTime != Long.MAX_VALUE)
     {
       new SlewEvent(this, outVoltage, holdTime, timeline);
@@ -140,7 +142,7 @@ public class Port
         {
           if (connectedPort.isLogicPort())
           {
-            ((Port) connectedPort).traceSlew(simulation, slewEvent);
+            ((LogicPort) connectedPort).traceSlew(simulation, slewEvent);
           }
         }
       }
@@ -356,6 +358,23 @@ public class Port
   public float getGND()
   {
     return gnd.getVoltageIn();
+  }
+
+  public Pins getPins()
+  {
+    return pins;
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return getPins().getIntegratedCircuit().getName() + "." + name;
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return getPins().getDescription() + "." + getName();
   }
 
   @Override

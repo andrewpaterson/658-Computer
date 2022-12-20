@@ -2,7 +2,6 @@ package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.trace.TraceNet;
 
 import java.util.Set;
@@ -11,34 +10,17 @@ public abstract class BasePort
 {
   protected PortType type;
   protected String name;
-  protected Pins pins;
   protected TraceNet trace;
 
-  public BasePort(PortType type, String name, Pins pins)
+  public BasePort(PortType type, String name)
   {
     this.type = type;
     this.name = name;
-    this.pins = pins;
   }
 
   public String getName()
   {
     return name;
-  }
-
-  public Pins getPins()
-  {
-    return pins;
-  }
-
-  public String toDebugString()
-  {
-    return getPins().getIntegratedCircuit().getName() + "." + name;
-  }
-
-  public String getDescription()
-  {
-    return getPins().getDescription() + "." + getName();
   }
 
   public TraceNet getTrace()
@@ -63,6 +45,10 @@ public abstract class BasePort
       trace = null;
     }
   }
+
+  public abstract String toDebugString();
+
+  public abstract String getDescription();
 
   public boolean isLogicPort()
   {

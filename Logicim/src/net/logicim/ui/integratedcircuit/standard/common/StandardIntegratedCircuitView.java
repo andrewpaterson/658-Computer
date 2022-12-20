@@ -25,7 +25,7 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
     this.explicitPowerPorts = explicitPowerPorts;
   }
 
-  protected void createPorts()
+  protected void createPortViews()
   {
     if (explicitPowerPorts)
     {

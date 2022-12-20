@@ -2,8 +2,7 @@ package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.event.SlewEvent;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.trace.TraceValue;
 
 public class VoltageConfiguration
@@ -284,7 +283,7 @@ public class VoltageConfiguration
     return (getHighVoltageOut() + getLowVoltageOut()) / 2;
   }
 
-  public void createHighImpedanceEvents(Timeline timeline, Port port)
+  public void createHighImpedanceEvents(Timeline timeline, LogicPort port)
   {
     throw new SimulatorException("Not yet implemented.");
   }

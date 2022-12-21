@@ -34,7 +34,7 @@ public class NandGateView
   protected void createPortViews()
   {
     super.createPortViews();
-    createPorts(true, 0);
+    createPortViews(true, 0);
   }
 
   @Override

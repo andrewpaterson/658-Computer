@@ -34,9 +34,8 @@ public class XnorGateView
   protected void createPortViews()
   {
     super.createPortViews();
-    createPorts(true, 1);
+    createPortViews(true, 1);
   }
-
 
   @Override
   protected XnorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)

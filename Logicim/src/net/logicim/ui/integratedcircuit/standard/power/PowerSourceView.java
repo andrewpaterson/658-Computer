@@ -38,7 +38,12 @@ public abstract class PowerSourceView
     createPowerSource();
     createPortViews();
     super.finaliseView();
+    validatePowerSource();
     validatePorts();
+  }
+
+  private void validatePowerSource()
+  {
   }
 
   protected void createPowerSource()

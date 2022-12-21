@@ -33,7 +33,7 @@ public class OrGateView
   protected void createPortViews()
   {
     super.createPortViews();
-    createPorts(false, 0);
+    createPortViews(false, 0);
   }
 
   @Override

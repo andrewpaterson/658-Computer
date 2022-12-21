@@ -34,7 +34,7 @@ public class XorGateView
   protected void createPortViews()
   {
     super.createPortViews();
-    createPorts(false, 1);
+    createPortViews(false, 1);
   }
 
   @Override

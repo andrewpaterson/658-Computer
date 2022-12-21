@@ -34,7 +34,7 @@ public class AndGateView
   protected void createPortViews()
   {
     super.createPortViews();
-    createPorts(false, 0);
+    createPortViews(false, 0);
   }
 
   @Override

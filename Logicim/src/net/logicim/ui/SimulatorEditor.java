@@ -13,7 +13,6 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
-import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
@@ -457,7 +456,7 @@ public class SimulatorEditor
   {
     if (placementView != null)
     {
-      circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) placementView);
+      circuitEditor.deleteDiscreteView(placementView);
       placementView = null;
     }
   }
@@ -509,20 +508,14 @@ public class SimulatorEditor
 
         if (!traceDeleted && (hoverDiscreteView != null))
         {
-          circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
+          circuitEditor.deleteDiscreteView(hoverDiscreteView);
         }
       }
     }
     else if (hoverDiscreteView != null)
     {
-      if (hoverDiscreteView instanceof IntegratedCircuitView)
-      {
-        circuitEditor.deleteIntegratedCircuit((IntegratedCircuitView<?>) hoverDiscreteView);
-      }
-      if (hoverDiscreteView instanceof PowerSourceView)
-      {
-        circuitEditor.deletePowerSource((PowerSourceView) hoverDiscreteView);
-      }
+      circuitEditor.deleteDiscreteView(hoverDiscreteView);
+
     }
 
     hoverDiscreteView = null;

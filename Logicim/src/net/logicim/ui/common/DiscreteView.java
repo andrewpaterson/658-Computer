@@ -3,9 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.SaveData;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
@@ -69,23 +67,22 @@ public abstract class DiscreteView
   protected void finaliseView()
   {
     finalised = true;
-    updateBoundingBox();
+
+    updateBoundingBoxFromShapes(boundingBox);
+    updateBoundingBoxFromPorts(boundingBox);
+    selectionBox.copy(this.boundingBox);
+    this.boundingBox.grow(0.5f);
   }
 
-  protected void updateBoundingBox()
+  protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
   {
     for (ShapeView shape : shapes)
     {
       shape.boundingBoxInclude(boundingBox);
     }
-
-    selectionBox.copy(boundingBox);
-    boundingBox.grow(0.5f);
-
-    updateBoundingBoxFromPorts();
   }
 
-  private void updateBoundingBoxFromPorts()
+  protected void updateBoundingBoxFromPorts(BoundingBox boundingBox)
   {
     for (PortView port : ports)
     {

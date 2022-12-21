@@ -9,6 +9,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateView;
 import net.logicim.ui.shape.arc.ArcView;
+import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.polygon.PolygonView;
 
 import java.awt.*;
@@ -51,11 +52,11 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  protected void updateBoundingBox()
+  protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
   {
-    boundingBox.include(1.5f, 0f);
-    boundingBox.include(-1.5f, 0f);
-    super.updateBoundingBox();
+    super.updateBoundingBoxFromShapes(boundingBox);
+    this.boundingBox.include(1.5f, 0f);
+    this.boundingBox.include(-1.5f, 0f);
   }
 
   @Override

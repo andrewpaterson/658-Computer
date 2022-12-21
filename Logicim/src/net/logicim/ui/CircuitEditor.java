@@ -76,7 +76,27 @@ public class CircuitEditor
     traceViews.add(view);
   }
 
-  public void deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
+  public void deleteDiscreteView(DiscreteView discreteView)
+  {
+    if (discreteView instanceof IntegratedCircuitView)
+    {
+      deleteIntegratedCircuit((IntegratedCircuitView<?>) discreteView);
+    }
+    else if (discreteView instanceof PowerSourceView)
+    {
+      deletePowerSource((PowerSourceView) discreteView);
+    }
+    else if (discreteView == null)
+    {
+      throw new SimulatorException("Cannot delete null view.");
+    }
+    else
+    {
+      throw new SimulatorException("Cannot delete view of class [%s].", discreteView.getClass().getSimpleName());
+    }
+  }
+
+  protected void deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = integratedCircuitView.getPorts();
@@ -102,7 +122,7 @@ public class CircuitEditor
     }
   }
 
-  public void deletePowerSource(PowerSourceView powerSourceView)
+  protected void deletePowerSource(PowerSourceView powerSourceView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = powerSourceView.getPorts();

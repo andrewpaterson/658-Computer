@@ -122,12 +122,6 @@ public class OscilloscopeView
   }
 
   @Override
-  protected void updateBoundingBox()
-  {
-    super.updateBoundingBox();
-  }
-
-  @Override
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);

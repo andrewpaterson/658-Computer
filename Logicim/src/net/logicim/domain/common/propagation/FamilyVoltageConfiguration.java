@@ -85,9 +85,9 @@ public class FamilyVoltageConfiguration
 
   public float getHighVoltageIn(float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
-      return 0;
+      return Float.NaN;
     }
 
     VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
@@ -120,9 +120,9 @@ public class FamilyVoltageConfiguration
 
   public float getLowVoltageIn(float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
-      return 0;
+      return Float.NaN;
     }
 
     VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
@@ -155,9 +155,9 @@ public class FamilyVoltageConfiguration
 
   public float getMidVoltageOut(float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
-      return 0;
+      return Float.NaN;
     }
 
     VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
@@ -190,9 +190,9 @@ public class FamilyVoltageConfiguration
 
   public float getVoltageOut(boolean value, float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
-      return 0;
+      return Float.NaN;
     }
 
     VoltageConfiguration higherConfiguration = getEqualOrHigherConfiguration(vcc);
@@ -225,7 +225,7 @@ public class FamilyVoltageConfiguration
 
   public long calculateHoldTime(float outVoltage, float portVoltage, float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
       return Long.MAX_VALUE;
     }
@@ -258,19 +258,19 @@ public class FamilyVoltageConfiguration
 
   public TraceValue getValue(float vin, float vcc)
   {
-    if (vcc == 0 || Float.isNaN(vin))
+    if ((vcc == 0) || Float.isNaN(vcc) || Float.isNaN(vin))
     {
       return TraceValue.Undriven;
     }
 
     float highVoltageIn = getHighVoltageIn(vcc);
-    if (vin>=highVoltageIn)
+    if (vin >= highVoltageIn)
     {
       return TraceValue.High;
     }
 
     float lowVoltageIn = getLowVoltageIn(vcc);
-    if (vin<=lowVoltageIn)
+    if (vin <= lowVoltageIn)
     {
       return TraceValue.Low;
     }
@@ -292,7 +292,7 @@ public class FamilyVoltageConfiguration
 
   public float getVoltsPerTimeLowToHigh(float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
       return Float.POSITIVE_INFINITY;
     }
@@ -325,7 +325,7 @@ public class FamilyVoltageConfiguration
 
   public float getVoltsPerTimeHighToLow(float vcc)
   {
-    if (vcc == 0)
+    if ((vcc == 0) || Float.isNaN(vcc))
     {
       return Float.POSITIVE_INFINITY;
     }

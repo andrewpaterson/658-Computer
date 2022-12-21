@@ -22,8 +22,6 @@ public class LogicPort
 {
   protected Pins pins;
   protected VoltageConfigurationSource voltageConfigurationSource;
-  protected PowerInPort vcc;
-  protected PowerInPort gnd;
 
   protected LinkedList<PortEvent> events;
   protected PortOutputEvent output;
@@ -36,8 +34,6 @@ public class LogicPort
     super(type, name);
     this.pins = pins;
     this.voltageConfigurationSource = voltageConfigurationSource;
-    this.vcc = pins.getVoltageCommon();
-    this.gnd = pins.getVoltageGround();
     this.events = new LinkedList<>();
     pins.addPort(this);
   }
@@ -79,7 +75,7 @@ public class LogicPort
   public void writeBool(Timeline timeline, boolean value)
   {
     long time = timeline.getTime();
-    float vcc = getVCC();
+    float vcc = getVCC(time);
 
     float outVoltage = voltageConfigurationSource.getVoltageOut(value, vcc);
     long holdTime = voltageConfigurationSource.calculateHoldTime(outVoltage, getVoltageOut(time), vcc);
@@ -96,7 +92,7 @@ public class LogicPort
       float voltage = trace.getVoltage(time);
       if (!Float.isNaN(voltage))
       {
-        return voltageConfigurationSource.getValue(voltage, getVCC());
+        return voltageConfigurationSource.getValue(voltage, getVCC(time));
       }
     }
     return Undriven;
@@ -161,10 +157,10 @@ public class LogicPort
 
       if (startVoltage != endVoltage)
       {
-        long simulationTime = simulation.getTime();
+        long time = simulation.getTime();
 
-        float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(getVCC());
-        float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(getVCC());
+        float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(getVCC(time));
+        float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(getVCC(time));
         long transitionTime;
         float transitionVoltage;
         if (endVoltage <= lowVoltageIn)
@@ -219,11 +215,11 @@ public class LogicPort
   {
     if (voltageConfigurationSource != null)
     {
-      long simulationTime = simulation.getTime();
+      long time = simulation.getTime();
 
-      float endVoltage = trace.getVoltage(simulationTime);
-      float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(getVCC());
-      float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(getVCC());
+      float endVoltage = trace.getVoltage(time);
+      float lowVoltageIn = voltageConfigurationSource.getLowVoltageIn(getVCC(time));
+      float highVoltageIn = voltageConfigurationSource.getHighVoltageIn(getVCC(time));
 
       float transitionVoltage = 0;
       boolean traceValid = false;
@@ -350,14 +346,14 @@ public class LogicPort
     return builder.toString();
   }
 
-  public float getVCC()
+  public float getVCC(long time)
   {
-    return vcc.getVoltageIn();
+    return pins.getVoltageCommon().getVoltageIn(time);
   }
 
-  public float getGND()
+  public float getGND(long time)
   {
-    return gnd.getVoltageIn();
+    return pins.getVoltageGround().getVoltageIn(time);
   }
 
   public Pins getPins()

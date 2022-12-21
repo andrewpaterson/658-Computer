@@ -36,9 +36,9 @@ public class PowerInPort
     return true;
   }
 
-  public float getVoltageIn()
+  public float getVoltageIn(long time)
   {
-    return 3.3f;
+    return getTrace().getVoltage(time);
   }
 
   public Pins getPins()

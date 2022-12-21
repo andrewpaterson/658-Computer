@@ -88,7 +88,7 @@ public class SlewEvent
   public DriveEvent update(Timeline timeline)
   {
     VoltageConfigurationSource voltageConfiguration = port.getVoltageConfigurationSource();
-    float vcc = port.getVCC();
+    float vcc = port.getVCC(time);
 
     long nowTime = timeline.getTime();
     startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration, vcc)), vcc);

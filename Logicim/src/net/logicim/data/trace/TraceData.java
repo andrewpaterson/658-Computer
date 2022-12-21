@@ -29,7 +29,7 @@ public class TraceData
   {
     TraceView traceView = new TraceView(circuitEditor, start, end);
     TraceNet trace = traceLoader.create(id);
-    traceView.connect(trace);
+    traceView.connectTraceNet(trace, circuitEditor.getSimulation());
     return traceView;
   }
 }

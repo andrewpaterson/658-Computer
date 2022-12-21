@@ -1,7 +1,7 @@
 package net.logicim.ui.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 
 import java.awt.*;
 import java.util.List;
@@ -10,7 +10,7 @@ public abstract class ComponentView
 {
   protected List<PortView> ports;
 
-  public PortView getPortView(BasePort port)
+  public PortView getPortView(Port port)
   {
     for (PortView portView : ports)
     {

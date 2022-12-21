@@ -8,7 +8,7 @@ import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PortView
 {
   protected DiscreteView owner;
-  protected BasePort port;
+  protected Port port;
   protected Int2D positionRelativeToIC;
 
   protected boolean inverting;
@@ -34,7 +34,7 @@ public class PortView
 
   protected PortViewGridCache gridCache;
 
-  public PortView(DiscreteView integratedCircuit, BasePort port, Int2D positionRelativeToIC)
+  public PortView(DiscreteView integratedCircuit, Port port, Int2D positionRelativeToIC)
   {
     this.owner = integratedCircuit;
     this.port = port;
@@ -76,7 +76,7 @@ public class PortView
     return this;
   }
 
-  public BasePort getPort()
+  public Port getPort()
   {
     return port;
   }
@@ -110,7 +110,7 @@ public class PortView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-      BasePort port = getPort();
+      Port port = getPort();
       Color color = VoltageColour.getColorForPort(viewport.getColours(), port, time);
 
       graphics.setColor(color);

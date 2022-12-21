@@ -36,7 +36,7 @@ public class PositivePowerView
   }
 
   @Override
-  public float getSourceVoltage()
+  public float getVoltageOut()
   {
     return voltage;
   }

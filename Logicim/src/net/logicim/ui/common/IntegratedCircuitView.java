@@ -8,7 +8,7 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -50,8 +50,8 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
       throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
     }
 
-    List<BasePort> missing = new ArrayList<>();
-    for (BasePort port : integratedCircuit.getPorts())
+    List<Port> missing = new ArrayList<>();
+    for (Port port : integratedCircuit.getPorts())
     {
       if (port.isLogicPort())
       {
@@ -67,7 +67,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     {
       StringBuilder builder = new StringBuilder();
       boolean first = true;
-      for (BasePort port : missing)
+      for (Port port : missing)
       {
         if (first)
         {

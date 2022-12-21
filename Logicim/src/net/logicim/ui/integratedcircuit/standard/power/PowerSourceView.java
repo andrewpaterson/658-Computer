@@ -3,7 +3,7 @@ package net.logicim.ui.integratedcircuit.standard.power;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
@@ -48,7 +48,7 @@ public abstract class PowerSourceView
 
   protected void createPowerSource()
   {
-    powerSource = new PowerSource(circuitEditor.getCircuit(), name, getSourceVoltage());
+    powerSource = new PowerSource(circuitEditor.getCircuit(), name, getVoltageOut());
     powerSource.disable();
   }
 
@@ -94,8 +94,8 @@ public abstract class PowerSourceView
       throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
     }
 
-    List<BasePort> missing = new ArrayList<>();
-    for (BasePort port : powerSource.getPorts())
+    List<Port> missing = new ArrayList<>();
+    for (Port port : powerSource.getPorts())
     {
       PortView portView = getPortView(port);
       if (portView == null)
@@ -108,7 +108,7 @@ public abstract class PowerSourceView
     {
       StringBuilder builder = new StringBuilder();
       boolean first = true;
-      for (BasePort port : missing)
+      for (Port port : missing)
       {
         if (first)
         {
@@ -130,6 +130,6 @@ public abstract class PowerSourceView
     return powerSource;
   }
 
-  public abstract float getSourceVoltage();
+  public abstract float getVoltageOut();
 }
 

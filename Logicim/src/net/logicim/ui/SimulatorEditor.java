@@ -4,7 +4,7 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.*;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
@@ -192,8 +192,8 @@ public class SimulatorEditor
     for (TraceView traceView : traceViews)
     {
       circuitEditor.connectConnections(traceView.getStartConnection());
-      List<BasePort> ports = traceView.getConnectedPorts();
-      for (BasePort port : ports)
+      List<Port> ports = traceView.getConnectedPorts();
+      for (Port port : ports)
       {
         port.traceConnected(circuitEditor.simulation);
       }
@@ -515,7 +515,6 @@ public class SimulatorEditor
     else if (hoverDiscreteView != null)
     {
       circuitEditor.deleteDiscreteView(hoverDiscreteView);
-
     }
 
     hoverDiscreteView = null;

@@ -35,7 +35,7 @@ public class GroundView
   }
 
   @Override
-  public float getSourceVoltage()
+  public float getVoltageOut()
   {
     return 0;
   }

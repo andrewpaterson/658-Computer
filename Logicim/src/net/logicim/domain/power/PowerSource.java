@@ -1,16 +1,16 @@
 package net.logicim.domain.power;
 
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortType;
-import net.logicim.domain.common.port.PowerSourcePort;
+import net.logicim.domain.common.port.PowerOutPort;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PowerSource
 {
-  protected List<BasePort> ports;
+  protected List<Port> ports;
   protected Circuit circuit;
   protected String name;
   protected boolean enabled;
@@ -18,14 +18,14 @@ public class PowerSource
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     ports = new ArrayList<>();
-    ports.add(new PowerSourcePort(PortType.PowerOut, "Power", voltage));
+    ports.add(new PowerOutPort(PortType.PowerOut, "Power", voltage));
 
     this.circuit = circuit;
     this.name = name;
     this.enabled = true;
   }
 
-  public List<BasePort> getPorts()
+  public List<Port> getPorts()
   {
     return ports;
   }
@@ -35,9 +35,9 @@ public class PowerSource
     return getPowerSourcePort().getVoltageOut();
   }
 
-  protected PowerSourcePort getPowerSourcePort()
+  protected PowerOutPort getPowerSourcePort()
   {
-    return (PowerSourcePort)ports.get(0);
+    return (PowerOutPort)ports.get(0);
   }
 
   public String getType()
@@ -45,9 +45,9 @@ public class PowerSource
     return "Power Source";
   }
 
-  public BasePort getPort(String name)
+  public Port getPort(String name)
   {
-    for (BasePort port : ports)
+    for (Port port : ports)
     {
       if (port.getName().equals(name))
       {

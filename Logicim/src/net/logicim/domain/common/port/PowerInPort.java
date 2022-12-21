@@ -2,12 +2,12 @@ package net.logicim.domain.common.port;
 
 import net.logicim.domain.common.Pins;
 
-public class PowerIn
-    extends BasePort
+public class PowerInPort
+    extends Port
 {
   protected Pins pins;
 
-  public PowerIn(PortType portType, String name, Pins pins)
+  public PowerInPort(PortType portType, String name, Pins pins)
   {
     super(portType, name);
     this.pins = pins;
@@ -28,6 +28,12 @@ public class PowerIn
   @Override
   public void reset()
   {
+  }
+
+  @Override
+  public boolean isPowerIn()
+  {
+    return true;
   }
 
   public float getVoltageIn()

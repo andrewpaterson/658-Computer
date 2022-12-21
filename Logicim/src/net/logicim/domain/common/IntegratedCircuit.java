@@ -5,7 +5,7 @@ import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
 
@@ -71,7 +71,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public BasePort getPort(String name)
+  public Port getPort(String name)
   {
     return pins.getPort(name);
   }
@@ -119,7 +119,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     if (enabled)
     {
       events.clear();
-      for (BasePort port : pins.getPorts())
+      for (Port port : pins.getPorts())
       {
         port.reset();
       }
@@ -145,7 +145,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     return state;
   }
 
-  public List<BasePort> getPorts()
+  public List<Port> getPorts()
   {
     return pins.getPorts();
   }

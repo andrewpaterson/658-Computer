@@ -6,13 +6,13 @@ import net.logicim.domain.common.trace.TraceNet;
 
 import java.util.Set;
 
-public abstract class BasePort
+public abstract class Port
 {
   protected PortType type;
   protected String name;
   protected TraceNet trace;
 
-  public BasePort(PortType type, String name)
+  public Port(PortType type, String name)
   {
     this.type = type;
     this.name = name;
@@ -60,6 +60,11 @@ public abstract class BasePort
     return false;
   }
 
+  public boolean isPowerIn()
+  {
+    return false;
+  }
+
   public void connect(TraceNet trace)
   {
     if (this.trace == null)
@@ -73,7 +78,7 @@ public abstract class BasePort
     }
   }
 
-  public Set<BasePort> getConnectedPorts()
+  public Set<Port> getConnectedPorts()
   {
     if (trace != null)
     {

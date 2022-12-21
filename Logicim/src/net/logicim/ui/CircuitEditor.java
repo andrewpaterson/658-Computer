@@ -13,7 +13,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.power.PowerSource;
@@ -471,14 +471,14 @@ public class CircuitEditor
       {
         if (connectedComponent instanceof TraceView)
         {
-          ((TraceView) connectedComponent).connect(trace);
+          ((TraceView) connectedComponent).connectTraceNet(trace, simulation);
         }
-        else if (connectedComponent instanceof IntegratedCircuitView)
+        else if (connectedComponent instanceof DiscreteView)
         {
           Int2D position = connection.getGridPosition();
           if (position != null)
           {
-            PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
+            PortView portView = connectedComponent.getPortInGrid(position);
             portView.connectTraceNet(trace, simulation);
           }
         }
@@ -945,7 +945,7 @@ public class CircuitEditor
     List<PortView> ports = placementView.getPorts();
     for (PortView portView : ports)
     {
-      BasePort port = portView.getPort();
+      Port port = portView.getPort();
       port.traceConnected(simulation);
     }
   }
@@ -958,6 +958,11 @@ public class CircuitEditor
   public VoltageRepresentation getColours()
   {
     return colours;
+  }
+
+  public Simulation getSimulation()
+  {
+    return simulation;
   }
 }
 

@@ -6,7 +6,7 @@ import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
@@ -63,7 +63,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
       PortData portData = ports.get(i);
 
       TraceNet trace = traceLoader.create(portData.traceId);
-      BasePort port = portView.getPort();
+      Port port = portView.getPort();
       port.connect(trace);
 
       if (port.isLogicPort())
@@ -119,6 +119,5 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   }
 
   public abstract ICV create(CircuitEditor circuitEditor, TraceLoader traceLoader);
-
 }
 

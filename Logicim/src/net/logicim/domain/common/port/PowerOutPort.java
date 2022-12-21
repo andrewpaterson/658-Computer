@@ -2,12 +2,12 @@ package net.logicim.domain.common.port;
 
 import net.logicim.domain.common.voltage.Voltage;
 
-public class PowerSourcePort
-    extends BasePort
+public class PowerOutPort
+    extends Port
 {
   protected float voltage;
 
-  public PowerSourcePort(PortType type, String name, float voltage)
+  public PowerOutPort(PortType type, String name, float voltage)
   {
     super(type, name);
     this.voltage = voltage;
@@ -28,6 +28,12 @@ public class PowerSourcePort
   @Override
   public void reset()
   {
+  }
+
+  @Override
+  public boolean isPowerOut()
+  {
+    return true;
   }
 
   public float getVoltageOut()

@@ -1,7 +1,7 @@
 package net.logicim.domain.common;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.power.PowerSource;
 
@@ -43,7 +43,7 @@ public class Circuit
   public void remove(IntegratedCircuit<?, ?> integratedCircuit, Simulation simulation)
   {
     integratedCircuits.remove(integratedCircuit);
-    for (BasePort port : integratedCircuit.getPorts())
+    for (Port port : integratedCircuit.getPorts())
     {
       port.disconnect(simulation);
     }
@@ -52,7 +52,7 @@ public class Circuit
   public void remove(PowerSource powerSource, Simulation simulation)
   {
     powerSources.remove(powerSource);
-    for (BasePort port : powerSource.getPorts())
+    for (Port port : powerSource.getPorts())
     {
       port.disconnect(simulation);
     }

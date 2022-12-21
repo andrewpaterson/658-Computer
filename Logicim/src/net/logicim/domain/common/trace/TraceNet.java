@@ -1,8 +1,8 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.domain.common.port.BasePort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
-import net.logicim.domain.common.port.PowerSourcePort;
+import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.voltage.Voltage;
 
@@ -16,7 +16,7 @@ public class TraceNet
 {
   public static long nextId = 1L;
 
-  protected Set<BasePort> connectedPorts;
+  protected Set<Port> connectedPorts;
   protected long id;
 
   public TraceNet()
@@ -40,7 +40,7 @@ public class TraceNet
   {
     float drivenVoltage = 0;
     int drivers = 0;
-    for (BasePort port : connectedPorts)
+    for (Port port : connectedPorts)
     {
       float voltage = Float.NaN;
       if (port.isLogicPort())
@@ -49,7 +49,7 @@ public class TraceNet
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSourcePort) port).getVoltageOut();
+        voltage = ((PowerOutPort) port).getVoltageOut();
       }
       if (!Float.isNaN(voltage))
       {
@@ -83,7 +83,7 @@ public class TraceNet
   {
     float minimumVoltage = 10000;
     float maximumVoltage = -10000;
-    for (BasePort port : connectedPorts)
+    for (Port port : connectedPorts)
     {
       float voltage = Float.NaN;
       if (port.isLogicPort())
@@ -92,7 +92,7 @@ public class TraceNet
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSourcePort) port).getVoltageOut();
+        voltage = ((PowerOutPort) port).getVoltageOut();
       }
 
       if (!Float.isNaN(voltage))
@@ -121,7 +121,7 @@ public class TraceNet
   public float getMinimumVoltage(long time)
   {
     float minimumVoltage = 10000;
-    for (BasePort port : connectedPorts)
+    for (Port port : connectedPorts)
     {
       float voltage = Float.NaN;
       if (port.isLogicPort())
@@ -130,7 +130,7 @@ public class TraceNet
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSourcePort) port).getVoltageOut();
+        voltage = ((PowerOutPort) port).getVoltageOut();
       }
 
       if (!Float.isNaN(voltage))
@@ -154,7 +154,7 @@ public class TraceNet
   public float getMaximumVoltage(long time)
   {
     float maximumVoltage = -10000;
-    for (BasePort port : connectedPorts)
+    for (Port port : connectedPorts)
     {
       float voltage = Float.NaN;
       if (port.isLogicPort())
@@ -163,7 +163,7 @@ public class TraceNet
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerSourcePort) port).getVoltageOut();
+        voltage = ((PowerOutPort) port).getVoltageOut();
       }
 
       if (!Float.isNaN(voltage))
@@ -184,17 +184,17 @@ public class TraceNet
     }
   }
 
-  public Set<BasePort> getConnectedPorts()
+  public Set<Port> getConnectedPorts()
   {
     return connectedPorts;
   }
 
-  public void connect(BasePort port)
+  public void connect(Port port)
   {
     connectedPorts.add(port);
   }
 
-  public void disconnect(BasePort port)
+  public void disconnect(Port port)
   {
     connectedPorts.remove(port);
   }
@@ -202,7 +202,7 @@ public class TraceNet
   public List<PortOutputEvent> getOutputEvents()
   {
     ArrayList<PortOutputEvent> result = new ArrayList<>();
-    for (BasePort port : connectedPorts)
+    for (Port port : connectedPorts)
     {
       if (port.isLogicPort())
       {

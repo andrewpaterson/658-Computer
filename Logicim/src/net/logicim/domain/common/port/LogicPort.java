@@ -18,12 +18,12 @@ import java.util.Set;
 import static net.logicim.domain.common.trace.TraceValue.Undriven;
 
 public class LogicPort
-    extends BasePort
+    extends Port
 {
   protected Pins pins;
   protected VoltageConfigurationSource voltageConfigurationSource;
-  protected PowerIn vcc;
-  protected PowerIn gnd;
+  protected PowerInPort vcc;
+  protected PowerInPort gnd;
 
   protected LinkedList<PortEvent> events;
   protected PortOutputEvent output;
@@ -133,10 +133,10 @@ public class LogicPort
   {
     slewEvent.update(simulation.getTimeline());
 
-    Set<BasePort> connectedPorts = getConnectedPorts();
+    Set<Port> connectedPorts = getConnectedPorts();
     if (connectedPorts != null)
     {
-      for (BasePort connectedPort : connectedPorts)
+      for (Port connectedPort : connectedPorts)
       {
         if (connectedPort != this)
         {

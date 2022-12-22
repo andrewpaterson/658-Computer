@@ -946,7 +946,7 @@ public class CircuitEditor
     for (PortView portView : ports)
     {
       Port port = portView.getPort();
-      port.traceConnected(simulation);
+      port.traceConnected(simulation, port);
     }
   }
 

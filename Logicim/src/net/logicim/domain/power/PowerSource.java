@@ -1,7 +1,9 @@
 package net.logicim.domain.power;
 
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PortHolder;
 import net.logicim.domain.common.port.PortType;
 import net.logicim.domain.common.port.PowerOutPort;
 
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PowerSource
+    extends PortHolder
 {
-  protected List<Port> ports;
   protected Circuit circuit;
   protected String name;
   protected boolean enabled;
@@ -18,7 +20,7 @@ public class PowerSource
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     ports = new ArrayList<>();
-    ports.add(new PowerOutPort(PortType.PowerOut, "Power", voltage));
+    ports.add(new PowerOutPort(PortType.PowerOut, "Power", this, voltage));
 
     this.circuit = circuit;
     this.name = name;
@@ -30,6 +32,23 @@ public class PowerSource
     return ports;
   }
 
+  @Override
+  public void traceConnected(Simulation simulation, Port port)
+  {
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return null;
+  }
+
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
   public float getVoltageOut()
   {
     return getPowerSourcePort().getVoltageOut();
@@ -37,7 +56,7 @@ public class PowerSource
 
   protected PowerOutPort getPowerSourcePort()
   {
-    return (PowerOutPort)ports.get(0);
+    return (PowerOutPort) ports.get(0);
   }
 
   public String getType()

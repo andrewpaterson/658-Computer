@@ -5,8 +5,9 @@ import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.state.State;
 
 import java.util.List;
@@ -132,11 +133,27 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
+  public void traceConnected(Simulation simulation, Port port)
+  {
+  }
+
   public abstract State createState(Simulation simulation);
 
   public abstract void simulationStarted(Simulation simulation);
 
   public abstract void inputTransition(Simulation simulation, LogicPort port);
+
+  protected float getVCC(long time)
+  {
+    PowerInPort voltageCommon = getPins().getVoltageCommon();
+    return voltageCommon.getVoltageIn(time);
+  }
+
+  protected float getGND(long time)
+  {
+    PowerInPort voltageGround = getPins().getVoltageGround();
+    return voltageGround.getVoltageIn(time);
+  }
 
   public abstract String getType();
 

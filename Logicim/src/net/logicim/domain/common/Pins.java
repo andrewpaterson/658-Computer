@@ -2,46 +2,25 @@ package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.LogicPort;
-import net.logicim.domain.common.port.PortType;
-import net.logicim.domain.common.port.PowerInPort;
+import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.state.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pins
+    extends PortHolder
 {
   protected IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit;
 
   protected PowerInPort vcc;
   protected PowerInPort vss;
-  protected List<Port> ports;
 
   public Pins()
   {
-    this.ports = new ArrayList<>();
+    super();
     this.vcc = addPort(new PowerInPort(PortType.PowerIn, "VCC", this));
     this.vss = addPort(new PowerInPort(PortType.PowerIn, "GND", this));
-  }
-
-  public <T extends Port> T addPort(T port)
-  {
-    ports.add(port);
-    return port;
-  }
-
-  public Port getPort(String name)
-  {
-    for (Port port : ports)
-    {
-      if (port.getName().equals(name))
-      {
-        return port;
-      }
-    }
-    return null;
   }
 
   public String getName()
@@ -77,11 +56,6 @@ public abstract class Pins
     return integratedCircuit.getType();
   }
 
-  public List<Port> getPorts()
-  {
-    return ports;
-  }
-
   public void inputTransition(Simulation simulation, LogicPort port)
   {
     getIntegratedCircuit().inputTransition(simulation, port);
@@ -95,6 +69,12 @@ public abstract class Pins
   public PowerInPort getVoltageGround()
   {
     return vss;
+  }
+
+  @Override
+  public void traceConnected(Simulation simulation, Port port)
+  {
+    integratedCircuit.traceConnected(simulation, port);
   }
 }
 

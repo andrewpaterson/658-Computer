@@ -20,7 +20,6 @@ import static net.logicim.domain.common.trace.TraceValue.Undriven;
 public class LogicPort
     extends Port
 {
-  protected Pins pins;
   protected VoltageConfigurationSource voltageConfigurationSource;
 
   protected LinkedList<PortEvent> events;
@@ -31,11 +30,9 @@ public class LogicPort
                    String name,
                    VoltageConfigurationSource voltageConfigurationSource)
   {
-    super(type, name);
-    this.pins = pins;
+    super(type, name, pins);
     this.voltageConfigurationSource = voltageConfigurationSource;
     this.events = new LinkedList<>();
-    pins.addPort(this);
   }
 
   public void add(PortEvent event)
@@ -189,8 +186,10 @@ public class LogicPort
     return false;
   }
 
-  public void traceConnected(Simulation simulation)
+  public void traceConnected(Simulation simulation, Port port)
   {
+    super.traceConnected(simulation, port);
+
     List<PortOutputEvent> outputEvents = trace.getOutputEvents();
     boolean slewInProgress = false;
     for (PortOutputEvent outputEvent : outputEvents)
@@ -348,17 +347,12 @@ public class LogicPort
 
   public float getVCC(long time)
   {
-    return pins.getVoltageCommon().getVoltageIn(time);
+    return getPins().getVoltageCommon().getVoltageIn(time);
   }
 
   public float getGND(long time)
   {
-    return pins.getVoltageGround().getVoltageIn(time);
-  }
-
-  public Pins getPins()
-  {
-    return pins;
+    return getPins().getVoltageGround().getVoltageIn(time);
   }
 
   @Override
@@ -368,15 +362,14 @@ public class LogicPort
   }
 
   @Override
-  public String getDescription()
-  {
-    return getPins().getDescription() + "." + getName();
-  }
-
-  @Override
   public boolean isLogicPort()
   {
     return true;
+  }
+
+  public Pins getPins()
+  {
+    return (Pins) holder;
   }
 }
 

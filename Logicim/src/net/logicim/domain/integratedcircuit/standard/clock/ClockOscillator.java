@@ -4,8 +4,10 @@ import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.Port;
 
 import static net.logicim.domain.common.LongTime.frequencyToTime;
 
@@ -38,18 +40,27 @@ public class ClockOscillator
   @Override
   public void executeTick(Simulation simulation)
   {
-    state.tick();
-    if (state.getState())
+    float vcc = getVCC(simulation.getTime());
+    if (!Float.isNaN(vcc) && vcc > 0.0f)
     {
-      fullTicks++;
-    }
+      state.tick();
+      if (state.getState())
+      {
+        fullTicks++;
+      }
 
-    new TickEvent(halfCycleTime, this, simulation.getTimeline());
-    pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
-    if (pins.getOutput2() != null)
-    {
-      pins.getOutput2().writeBool(simulation.getTimeline(), !state.getState());
+      createTickEvent(simulation, halfCycleTime);
+      pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
+      if (pins.getOutput2() != null)
+      {
+        pins.getOutput2().writeBool(simulation.getTimeline(), !state.getState());
+      }
     }
+  }
+
+  protected void createTickEvent(Simulation simulation, long halfCycleTime)
+  {
+    new TickEvent(halfCycleTime, this, simulation.getTimeline());
   }
 
   @Override
@@ -61,12 +72,7 @@ public class ClockOscillator
   @Override
   public void simulationStarted(Simulation simulation)
   {
-    new TickEvent(initialisationTime, this, simulation.getTimeline());
-  }
-
-  public long getHalfCycleTime()
-  {
-    return halfCycleTime;
+    createTickEvent(simulation, initialisationTime);
   }
 
   @Override
@@ -97,6 +103,36 @@ public class ClockOscillator
   public long getFullTicks()
   {
     return fullTicks;
+  }
+
+  @Override
+  public void traceConnected(Simulation simulation, Port port)
+  {
+    super.traceConnected(simulation, port);
+
+    if (port.isPowerIn())
+    {
+      float vcc = getVCC(simulation.getTime());
+      if (!Float.isNaN(vcc) && vcc > 0.0f)
+      {
+        if (!hasTickEvent())
+        {
+          createTickEvent(simulation, halfCycleTime);
+        }
+      }
+    }
+  }
+
+  private boolean hasTickEvent()
+  {
+    for (IntegratedCircuitEvent event : events)
+    {
+      if (event instanceof TickEvent)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

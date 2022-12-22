@@ -5,24 +5,21 @@ import net.logicim.domain.common.Pins;
 public class PowerInPort
     extends Port
 {
-  protected Pins pins;
-
   public PowerInPort(PortType portType, String name, Pins pins)
   {
-    super(portType, name);
-    this.pins = pins;
+    super(portType, name, pins);
   }
 
   @Override
   public String toDebugString()
   {
-    return getPins().getIntegratedCircuit().getName() + "." + name;
+    return getHolder().getName() + "." + name;
   }
 
   @Override
   public String getDescription()
   {
-    return getPins().getDescription() + "." + getName();
+    return getHolder().getDescription() + "." + getName();
   }
 
   @Override
@@ -39,11 +36,6 @@ public class PowerInPort
   public float getVoltageIn(long time)
   {
     return getTrace().getVoltage(time);
-  }
-
-  public Pins getPins()
-  {
-    return pins;
   }
 }
 

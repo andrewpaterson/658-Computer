@@ -195,7 +195,7 @@ public class SimulatorEditor
       List<Port> ports = traceView.getConnectedPorts();
       for (Port port : ports)
       {
-        port.traceConnected(circuitEditor.simulation);
+        port.traceConnected(circuitEditor.simulation, port);
       }
     }
 

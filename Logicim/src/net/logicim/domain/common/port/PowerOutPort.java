@@ -1,5 +1,6 @@
 package net.logicim.domain.common.port;
 
+import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.voltage.Voltage;
 
 public class PowerOutPort
@@ -7,9 +8,9 @@ public class PowerOutPort
 {
   protected float voltage;
 
-  public PowerOutPort(PortType type, String name, float voltage)
+  public PowerOutPort(PortType type, String name, PortHolder holder, float voltage)
   {
-    super(type, name);
+    super(type, name, holder);
     this.voltage = voltage;
   }
 

@@ -4,7 +4,6 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
-import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.*;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
@@ -155,9 +154,9 @@ public class SimulatorEditor
 
   private void executePlacement(DiscreteView placementView)
   {
-    circuitEditor.createAndConnectDiscreteView(placementView);
-    circuitEditor.fireTraceEvents(placementView);
+    Set<PortView> updatedPortViews = circuitEditor.createAndConnectDiscreteView(placementView);
 
+    circuitEditor.fireConnectionEvents(updatedPortViews);
     circuitEditor.validateConsistency();
   }
 
@@ -189,16 +188,13 @@ public class SimulatorEditor
       traceViews.addAll(circuitEditor.createTraces(secondLine));
     }
 
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (TraceView traceView : traceViews)
     {
-      circuitEditor.connectConnections(traceView.getStartConnection());
-      List<Port> ports = traceView.getConnectedPorts();
-      for (Port port : ports)
-      {
-        port.traceConnected(circuitEditor.simulation, port);
-      }
+      updatedPortViews.addAll(circuitEditor.connectConnections(traceView.getStartConnection()));
     }
 
+    circuitEditor.fireConnectionEvents(updatedPortViews);
     circuitEditor.validateConsistency();
   }
 
@@ -473,13 +469,14 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     if (hoverConnectionView != null)
     {
       if (hoverTraceView != null)
       {
         if (!hoverConnectionView.isConcrete())
         {
-          circuitEditor.deleteTrace(hoverTraceView);
+          updatedPortViews = circuitEditor.deleteTrace(hoverTraceView);
         }
         else
         {
@@ -488,7 +485,7 @@ public class SimulatorEditor
           {
             if (componentView instanceof TraceView)
             {
-              circuitEditor.deleteTrace((TraceView) componentView);
+              updatedPortViews = circuitEditor.deleteTrace((TraceView) componentView);
             }
           }
         }
@@ -502,19 +499,19 @@ public class SimulatorEditor
           if (componentView instanceof TraceView)
           {
             traceDeleted = true;
-            circuitEditor.deleteTrace((TraceView) componentView);
+            updatedPortViews = circuitEditor.deleteTrace((TraceView) componentView);
           }
         }
 
         if (!traceDeleted && (hoverDiscreteView != null))
         {
-          circuitEditor.deleteDiscreteView(hoverDiscreteView);
+          updatedPortViews = circuitEditor.deleteDiscreteView(hoverDiscreteView);
         }
       }
     }
     else if (hoverDiscreteView != null)
     {
-      circuitEditor.deleteDiscreteView(hoverDiscreteView);
+      updatedPortViews = circuitEditor.deleteDiscreteView(hoverDiscreteView);
     }
 
     hoverDiscreteView = null;
@@ -523,6 +520,7 @@ public class SimulatorEditor
 
     mousePositionOnGridChanged();
 
+    circuitEditor.fireConnectionEvents(updatedPortViews);
     circuitEditor.validateConsistency();
   }
 

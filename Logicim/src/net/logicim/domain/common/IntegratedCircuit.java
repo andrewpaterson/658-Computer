@@ -185,5 +185,12 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
       throw new SimulatorException("Cannot remove event");
     }
   }
+
+  protected boolean isPowered(long time)
+  {
+    float vcc = getVCC(time);
+    float gnd = getGND(time);
+    return (!Float.isNaN(vcc) && vcc > 0.0f) && (!Float.isNaN(gnd) && gnd == 0.0f);
+  }
 }
 

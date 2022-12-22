@@ -40,8 +40,7 @@ public class ClockOscillator
   @Override
   public void executeTick(Simulation simulation)
   {
-    float vcc = getVCC(simulation.getTime());
-    if (!Float.isNaN(vcc) && vcc > 0.0f)
+    if (isPowered(simulation.getTime()))
     {
       state.tick();
       if (state.getState())
@@ -112,8 +111,7 @@ public class ClockOscillator
 
     if (port.isPowerIn())
     {
-      float vcc = getVCC(simulation.getTime());
-      if (!Float.isNaN(vcc) && vcc > 0.0f)
+      if (isPowered(simulation.getTime()))
       {
         if (!hasTickEvent())
         {

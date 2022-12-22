@@ -76,15 +76,15 @@ public class CircuitEditor
     traceViews.add(view);
   }
 
-  public void deleteDiscreteView(DiscreteView discreteView)
+  public Set<PortView> deleteDiscreteView(DiscreteView discreteView)
   {
     if (discreteView instanceof IntegratedCircuitView)
     {
-      deleteIntegratedCircuit((IntegratedCircuitView<?>) discreteView);
+      return deleteIntegratedCircuit((IntegratedCircuitView<?>) discreteView);
     }
     else if (discreteView instanceof PowerSourceView)
     {
-      deletePowerSource((PowerSourceView) discreteView);
+      return deletePowerSource((PowerSourceView) discreteView);
     }
     else if (discreteView == null)
     {
@@ -96,7 +96,7 @@ public class CircuitEditor
     }
   }
 
-  protected void deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
+  protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = integratedCircuitView.getPorts();
@@ -116,13 +116,16 @@ public class CircuitEditor
     circuit.remove(integratedCircuit, simulation);
     discreteViews.remove(integratedCircuitView);
 
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {
-      connectConnections(connectionView);
+      updatedPortViews.addAll(connectConnections(connectionView));
     }
+
+    return updatedPortViews;
   }
 
-  protected void deletePowerSource(PowerSourceView powerSourceView)
+  protected Set<PortView> deletePowerSource(PowerSourceView powerSourceView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = powerSourceView.getPorts();
@@ -142,10 +145,13 @@ public class CircuitEditor
     circuit.remove(powerSource, simulation);
     discreteViews.remove(powerSourceView);
 
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {
-      connectConnections(connectionView);
+      updatedPortViews.addAll(connectConnections(connectionView));
     }
+
+    return updatedPortViews;
   }
 
   public void remove(TraceView traceView)
@@ -186,11 +192,10 @@ public class CircuitEditor
     }
   }
 
-  public void connectConnections(ConnectionView connectionView)
+  public Set<PortView> connectConnections(ConnectionView connectionView)
   {
     Set<ConnectionView> connectionsNet = findConnections(connectionView);
-
-    connectToTraceNet(connectionsNet, new TraceNet());
+    return connectToTraceNet(connectionsNet, new TraceNet());
   }
 
   public Simulation reset()
@@ -462,8 +467,9 @@ public class CircuitEditor
     return connectionsNet;
   }
 
-  public void connectToTraceNet(Set<ConnectionView> connectionsNet, TraceNet trace)
+  public Set<PortView> connectToTraceNet(Set<ConnectionView> connectionsNet, TraceNet trace)
   {
+    Set<PortView> connectedPorts = new LinkedHashSet<>();
     for (ConnectionView connection : connectionsNet)
     {
       List<ComponentView> connectedComponents = connection.getConnectedComponents();
@@ -480,10 +486,12 @@ public class CircuitEditor
           {
             PortView portView = connectedComponent.getPortInGrid(position);
             portView.connectTraceNet(trace, simulation);
+            connectedPorts.add(portView);
           }
         }
       }
     }
+    return connectedPorts;
   }
 
   public TraceView mergeTrace(TraceView traceView)
@@ -609,7 +617,7 @@ public class CircuitEditor
     }
   }
 
-  public void deleteTrace(TraceView traceView)
+  public Set<PortView> deleteTrace(TraceView traceView)
   {
     if (!traceView.isRemoved())
     {
@@ -618,12 +626,14 @@ public class CircuitEditor
 
       remove(traceView);
 
-      mergeAndConnect(startConnection);
-      mergeAndConnect(endConnection);
+      Set<PortView> portViews = mergeAndConnect(startConnection);
+      portViews.addAll(mergeAndConnect(endConnection));
+      return portViews;
     }
+    return new LinkedHashSet<>();
   }
 
-  protected void mergeAndConnect(ConnectionView startConnection)
+  protected Set<PortView> mergeAndConnect(ConnectionView startConnection)
   {
     TraceView traceView = mergeTraceConnection(startConnection);
     ConnectionView connection;
@@ -635,7 +645,7 @@ public class CircuitEditor
     {
       connection = startConnection;
     }
-    connectConnections(connection);
+    return connectConnections(connection);
   }
 
   private TraceView mergeTraceConnection(ConnectionView startConnection)
@@ -914,18 +924,21 @@ public class CircuitEditor
     }
   }
 
-  public void createAndConnectDiscreteView(DiscreteView discreteView)
+  public Set<PortView> createAndConnectDiscreteView(DiscreteView discreteView)
   {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     List<PortView> ports = discreteView.getPorts();
     for (PortView portView : ports)
     {
       Int2D portPosition = portView.getGridPosition();
       ConnectionView connectionView = getOrAddConnection(portPosition, discreteView);
       portView.setConnection(connectionView);
-      connectConnections(connectionView);
+      updatedPortViews.addAll(connectConnections(connectionView));
     }
     discreteView.enable(simulation);
     discreteView.simulationStarted(simulation);
+
+    return updatedPortViews;
   }
 
   public void createConnectionViews(DiscreteView discreteView)
@@ -940,10 +953,9 @@ public class CircuitEditor
     discreteView.enable(simulation);
   }
 
-  public void fireTraceEvents(DiscreteView placementView)
+  public void fireConnectionEvents(Set<PortView> updatedPortViews)
   {
-    List<PortView> ports = placementView.getPorts();
-    for (PortView portView : ports)
+    for (PortView portView : updatedPortViews)
     {
       Port port = portView.getPort();
       port.traceConnected(simulation, port);

@@ -85,7 +85,7 @@ public class ClockView
     {
       rectangle.paint(graphics, viewport);
 
-      paintClockWaveform(graphics, viewport);
+      paintClockWaveform(graphics, viewport, time);
     }
     paintPorts(graphics, viewport, time);
 
@@ -93,13 +93,13 @@ public class ClockView
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport)
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, long time)
   {
     ClockOscillatorState state = integratedCircuit.getState();
     Color clockColor;
     if (state != null)
     {
-      float voltage = integratedCircuit.getInternalVoltage();
+      float voltage = integratedCircuit.getInternalVoltage(time);
       clockColor = VoltageColour.getColourForVoltage(viewport.getColours(), voltage);
     }
     else

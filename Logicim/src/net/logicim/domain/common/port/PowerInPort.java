@@ -1,6 +1,7 @@
 package net.logicim.domain.common.port;
 
 import net.logicim.domain.common.Pins;
+import net.logicim.domain.common.trace.TraceNet;
 
 public class PowerInPort
     extends Port
@@ -35,7 +36,15 @@ public class PowerInPort
 
   public float getVoltageIn(long time)
   {
-    return getTrace().getVoltage(time);
+    TraceNet trace = getTrace();
+    if (trace != null)
+    {
+      return trace.getVoltage(time);
+    }
+    else
+    {
+      return Float.NaN;
+    }
   }
 }
 

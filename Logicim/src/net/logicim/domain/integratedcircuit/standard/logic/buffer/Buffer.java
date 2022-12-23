@@ -4,6 +4,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
@@ -33,15 +34,18 @@ public class Buffer
   @Override
   public void inputTransition(Simulation simulation, LogicPort port)
   {
-    LogicPort input = pins.getInput();
-    TraceValue inValue = input.readValue(simulation.getTime());
-    if (inValue.isHigh())
+    if (isPowered(simulation.getTime()))
     {
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
-    }
-    else if (inValue.isLow())
-    {
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
+      LogicPort input = pins.getInput();
+      TraceValue inValue = input.readValue(simulation.getTime());
+      if (inValue.isHigh())
+      {
+        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
+      }
+      else if (inValue.isLow())
+      {
+        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
+      }
     }
   }
 
@@ -54,11 +58,6 @@ public class Buffer
   public String getType()
   {
     return TYPE;
-  }
-
-  public LogicPort getInputPort()
-  {
-    return getPins().getInput();
   }
 }
 

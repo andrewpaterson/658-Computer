@@ -247,8 +247,9 @@ public class VoltageConfiguration
 
   public long calculateHoldTime(float outVoltage, float portVoltage)
   {
-    float startVoltage = calculateStartVoltage(portVoltage);
-    float voltageDiff = outVoltage - startVoltage;
+    portVoltage = calculateStartVoltage(portVoltage);
+    outVoltage = calculateStartVoltage(outVoltage);
+    float voltageDiff = outVoltage - portVoltage;
 
     long holdTime;
     if (voltageDiff > 0)

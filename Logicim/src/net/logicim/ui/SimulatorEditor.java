@@ -485,7 +485,7 @@ public class SimulatorEditor
           {
             if (componentView instanceof TraceView)
             {
-              updatedPortViews = circuitEditor.deleteTrace((TraceView) componentView);
+              updatedPortViews.addAll(circuitEditor.deleteTrace((TraceView) componentView));
             }
           }
         }
@@ -499,13 +499,13 @@ public class SimulatorEditor
           if (componentView instanceof TraceView)
           {
             traceDeleted = true;
-            updatedPortViews = circuitEditor.deleteTrace((TraceView) componentView);
+            updatedPortViews.addAll( circuitEditor.deleteTrace((TraceView) componentView));
           }
         }
 
         if (!traceDeleted && (hoverDiscreteView != null))
         {
-          updatedPortViews = circuitEditor.deleteDiscreteView(hoverDiscreteView);
+          updatedPortViews.addAll(circuitEditor.deleteDiscreteView(hoverDiscreteView));
         }
       }
     }

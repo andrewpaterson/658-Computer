@@ -80,18 +80,11 @@ public class ClockOscillator
     return TYPE;
   }
 
-  public float getInternalVoltage()
+  public float getInternalVoltage(long time)
   {
     if (state != null)
     {
-      if (state.getState())
-      {
-        return 3.3f;
-      }
-      else
-      {
-        return 0.0f;
-      }
+      return getPins().getOutput().getVoltageConfigurationSource().getVoltageOut(state.getState(), getVCC(time));
     }
     else
     {
@@ -116,6 +109,15 @@ public class ClockOscillator
         if (!hasTickEvent())
         {
           createTickEvent(simulation, halfCycleTime);
+        }
+      }
+      else
+      {
+        LogicPort output = pins.getOutput();
+        output.writeImpedance(simulation.getTimeline());
+        if (pins.getOutput2() != null)
+        {
+          pins.getOutput2().writeImpedance(simulation.getTimeline());
         }
       }
     }

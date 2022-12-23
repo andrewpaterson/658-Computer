@@ -3,7 +3,7 @@ package net.logicim.data.integratedcircuit.standard.clock;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.LogicPortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -29,7 +29,7 @@ public class ClockData
                    String family,
                    float frequency,
                    List<IntegratedCircuitEventData<?>> events,
-                   List<PortData> portData,
+                   List<LogicPortData> logicPortData,
                    ClockOscillatorState state,
                    boolean inverseOut,
                    boolean explicitPowerPorts)
@@ -39,7 +39,7 @@ public class ClockData
           name,
           family,
           events,
-          portData,
+          logicPortData,
           state,
           explicitPowerPorts);
     this.frequency = frequency;

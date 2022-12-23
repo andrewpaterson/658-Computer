@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.collection.linkedlist.LinkedListIterator;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.event.*;
@@ -80,6 +81,11 @@ public class LogicPort
     {
       new SlewEvent(this, outVoltage, holdTime, timeline);
     }
+  }
+
+  public void writeImpedance(Timeline timeline)
+  {
+    new DriveEvent(this, LongTime.nanosecondsToTime(0.01), Float.NaN, timeline);
   }
 
   public TraceValue readValue(long time)

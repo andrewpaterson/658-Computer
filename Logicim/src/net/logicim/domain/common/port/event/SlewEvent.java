@@ -94,20 +94,27 @@ public class SlewEvent
     startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration, vcc)), vcc);
 
     slewTime = calculateSlewTime(voltageConfiguration, vcc);
-    if (slewTime < 1)
+    if (slewTime != Long.MAX_VALUE)
     {
-      throw new SimulatorException("Slew time must be in the future.");
-    }
+      if (slewTime < 1)
+      {
+        throw new SimulatorException("Slew time must be in the future.");
+      }
 
-    long startTime = getTime();
-    List<DriveEvent> driveEvents = port.getFutureDriveEvents(startTime);
-    if (driveEvents.size() > 0)
+      long startTime = getTime();
+      List<DriveEvent> driveEvents = port.getFutureDriveEvents(startTime);
+      if (driveEvents.size() > 0)
+      {
+        timeline.removeAll(driveEvents);
+      }
+
+      return new DriveEvent(port, getSlewTime(), getEndVoltage(), timeline);
+    }
+    else
     {
-      timeline.removeAll(driveEvents);
+      return null;
     }
-
-    return new DriveEvent(port, getSlewTime(), getEndVoltage(), timeline);
-  }
+ }
 
   long calculateSlewTime(VoltageConfigurationSource voltageConfiguration, float vcc)
   {

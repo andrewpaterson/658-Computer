@@ -2,7 +2,7 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.LogicPortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -30,7 +30,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   protected String family;
 
   protected List<IntegratedCircuitEventData<?>> events;
-  protected List<PortData> ports;
+  protected List<LogicPortData> ports;
 
   protected STATE state;
 
@@ -43,7 +43,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
                                String name,
                                String family,
                                List<IntegratedCircuitEventData<?>> events,
-                               List<PortData> ports,
+                               List<LogicPortData> ports,
                                STATE state)
   {
     this.position = position;
@@ -60,9 +60,9 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
     for (int i = 0; i < ports.size(); i++)
     {
       PortView portView = integratedCircuitView.getPort(i);
-      PortData portData = ports.get(i);
+      LogicPortData logicPortData = ports.get(i);
 
-      TraceNet trace = traceLoader.create(portData.traceId);
+      TraceNet trace = traceLoader.create(logicPortData.traceId);
       Port port = portView.getPort();
       port.connect(trace);
 
@@ -70,18 +70,18 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
       {
         LogicPort logicPort = (LogicPort) port;
         Map<Long, PortEvent> portEventMap = new HashMap<>();
-        for (PortEventData<?> eventData : portData.events)
+        for (PortEventData<?> eventData : logicPortData.events)
         {
           PortEvent portEvent = eventData.create(logicPort, circuitEditor.getTimeline());
           portEventMap.put(eventData.id, portEvent);
         }
 
-        if ((portData.output != null) && (portData.output.id > 0))
+        if ((logicPortData.output != null) && (logicPortData.output.id > 0))
         {
-          PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(portData.output.id);
+          PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
           if (outputPortEvent == null)
           {
-            outputPortEvent = portData.output.create(logicPort, circuitEditor.getTimeline());
+            outputPortEvent = logicPortData.output.create(logicPort, circuitEditor.getTimeline());
           }
           logicPort.setOutput(outputPortEvent);
         }

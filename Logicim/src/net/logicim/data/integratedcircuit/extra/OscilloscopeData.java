@@ -3,9 +3,8 @@ package net.logicim.data.integratedcircuit.extra;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.LogicPortData;
 import net.logicim.data.trace.TraceLoader;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
@@ -32,7 +31,7 @@ public class OscilloscopeData
                           String name,
                           String family,
                           List<IntegratedCircuitEventData<?>> events,
-                          List<PortData> ports,
+                          List<LogicPortData> ports,
                           OscilloscopeState state,
                           int inputCount,
                           int numberOfDivsWide,

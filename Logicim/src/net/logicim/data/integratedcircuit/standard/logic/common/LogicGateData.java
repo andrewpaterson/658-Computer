@@ -1,10 +1,9 @@
 package net.logicim.data.integratedcircuit.standard.logic.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.LogicPortData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateView;
@@ -25,7 +24,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
                        String name,
                        String family,
                        List<IntegratedCircuitEventData<?>> events,
-                       List<PortData> portData,
+                       List<LogicPortData> logicPortData,
                        State state,
                        int inputCount,
                        boolean explicitPowerPorts)
@@ -35,7 +34,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
           name,
           family,
           events,
-          portData,
+          logicPortData,
           state,
           explicitPowerPorts);
     this.inputCount = inputCount;

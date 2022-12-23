@@ -10,8 +10,6 @@ public abstract class VoltageConfigurationSource
 
   public abstract float getHighVoltageIn(float vcc);
 
-  public abstract float getMidVoltageOut(float vcc);
-
   public abstract float getVoltageOut(boolean value, float vcc);
 
   public abstract TraceValue getValue(float voltage, float vcc);

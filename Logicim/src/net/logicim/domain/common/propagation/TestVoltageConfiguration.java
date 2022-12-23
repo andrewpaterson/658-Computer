@@ -48,12 +48,6 @@ public class TestVoltageConfiguration
   }
 
   @Override
-  public float getMidVoltageOut(float vcc)
-  {
-    return voltageConfiguration.getMidVoltageOut();
-  }
-
-  @Override
   public float getVoltageOut(boolean value, float vcc)
   {
     return voltageConfiguration.getVoltageOut(value);

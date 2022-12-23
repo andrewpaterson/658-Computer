@@ -158,7 +158,7 @@ public class SlewEvent
     {
       return voltage;
     }
-    return voltageConfiguration.getMidVoltageOut(vcc);
+    return voltageConfiguration.getVoltageOut(false, vcc);
   }
 
   public String toDebugString()

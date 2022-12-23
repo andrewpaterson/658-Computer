@@ -275,18 +275,8 @@ public class VoltageConfiguration
     }
     else
     {
-      return getMidVoltageOut();
+      return getLowVoltageOut();
     }
-  }
-
-  public float getMidVoltageOut()
-  {
-    return (getHighVoltageOut() + getLowVoltageOut()) / 2;
-  }
-
-  public void createHighImpedanceEvents(Timeline timeline, LogicPort port)
-  {
-    throw new SimulatorException("Not yet implemented.");
   }
 
   public float getVoltsPerTimeLowToHigh()

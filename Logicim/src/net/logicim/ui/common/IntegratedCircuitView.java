@@ -3,6 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
@@ -32,6 +33,10 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
                                Family family)
   {
     super(circuitEditor, position, rotation, name);
+    if (family == null)
+    {
+      throw new SimulatorException("Family may not be null on IC [%s].", name);
+    }
     this.family = family;
     circuitEditor.add(this);
   }

@@ -5,6 +5,7 @@ import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
+import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.*;
 
 import javax.swing.*;
@@ -170,7 +171,6 @@ public class SimulatorPanel
     fileChooser.addChoosableFileFilter(filter);
     fileChooser.setFileFilter(filter);
 
-
     int userSelection = fileChooser.showSaveDialog(frame);
     if (userSelection == JFileChooser.APPROVE_OPTION)
     {
@@ -180,7 +180,15 @@ public class SimulatorPanel
         File newFile = new File(FileUtil.removeExtension(file).getPath() + "." + "logic");
         CircuitData savedData = simulatorEditor.save();
 
-        new LogicimFileWriter().writeXML(savedData, newFile);
+        try
+        {
+          new LogicimFileWriter().writeXML(savedData, newFile);
+        }
+        catch (RuntimeException exception)
+        {
+          exception.printStackTrace();
+          ErrorFrame.createWindow(frame, exception);
+        }
       }
     }
   }
@@ -200,7 +208,15 @@ public class SimulatorPanel
       if (file != null)
       {
         CircuitData savedData = new LogicimFileReader().load(file);
-        simulatorEditor.load(savedData);
+        try
+        {
+          simulatorEditor.load(savedData);
+        }
+        catch (RuntimeException exception)
+        {
+          exception.printStackTrace();
+          ErrorFrame.createWindow(frame, exception);
+        }
       }
     }
   }

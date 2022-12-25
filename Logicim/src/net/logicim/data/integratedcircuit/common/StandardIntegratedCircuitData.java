@@ -3,6 +3,7 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.LogicPortData;
+import net.logicim.data.port.PortData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.IntegratedCircuitView;
 import net.logicim.ui.common.Rotation;
@@ -23,7 +24,7 @@ public abstract class StandardIntegratedCircuitData<ICV extends IntegratedCircui
                                        String name,
                                        String family,
                                        List<IntegratedCircuitEventData<?>> events,
-                                       List<LogicPortData> ports,
+                                       List<PortData> ports,
                                        STATE state,
                                        boolean explicitPowerPorts)
   {

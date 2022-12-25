@@ -5,6 +5,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
 import net.logicim.data.port.LogicPortData;
+import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -256,15 +257,15 @@ public abstract class DiscreteView
     return ports;
   }
 
-  protected List<LogicPortData> savePorts()
+  protected List<PortData> savePorts()
   {
-    List<LogicPortData> logicPortDatas = new ArrayList<>(ports.size());
+    List<PortData> portDatas = new ArrayList<>(ports.size());
     for (PortView port : ports)
     {
-      LogicPortData logicPortData = port.save();
-      logicPortDatas.add(logicPortData);
+      PortData portData = port.save();
+      portDatas.add(portData);
     }
-    return logicPortDatas;
+    return portDatas;
   }
 
   public PortView getPort(int index)

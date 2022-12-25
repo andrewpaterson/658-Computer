@@ -5,11 +5,16 @@ import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.port.LogicPortData;
+import net.logicim.data.port.PortData;
+import net.logicim.data.port.PowerInPortData;
+import net.logicim.data.port.PowerOutPortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PowerInPort;
+import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.trace.TraceNet;
@@ -182,7 +187,7 @@ public class PortView
     port.disconnect(simulation);
   }
 
-  public LogicPortData save()
+  public PortData save()
   {
     if (port.isLogicPort())
     {
@@ -212,11 +217,13 @@ public class PortView
     }
     else if (port.isPowerIn())
     {
-      throw new SimulatorException("implement saving for power-in ports.");
+      PowerInPort port = (PowerInPort) this.port;
+      return new PowerInPortData(port.getTraceId());
     }
     else if (port.isPowerOut())
     {
-      throw new SimulatorException("implement saving for power-out ports.");
+      PowerOutPort port = (PowerOutPort) this.port;
+      return new PowerOutPortData(port.getTraceId());
     }
     else
     {

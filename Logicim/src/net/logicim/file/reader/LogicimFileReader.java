@@ -263,6 +263,14 @@ public class LogicimFileReader
     {
       value = Double.parseDouble(characters);
     }
+    else if (fieldClass.equals(Character.class) || fieldClass.equals(char.class))
+    {
+      value = characters.charAt(0);
+    }
+    else if (fieldClass.equals(String.class))
+    {
+      value = characters;
+    }
     return value;
   }
 

@@ -3,6 +3,7 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.LogicPortData;
+import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -30,7 +31,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   protected String family;
 
   protected List<IntegratedCircuitEventData<?>> events;
-  protected List<LogicPortData> ports;
+  protected List<PortData> ports;
 
   protected STATE state;
 
@@ -43,7 +44,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
                                String name,
                                String family,
                                List<IntegratedCircuitEventData<?>> events,
-                               List<LogicPortData> ports,
+                               List<PortData> ports,
                                STATE state)
   {
     this.position = position;
@@ -60,14 +61,15 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
     for (int i = 0; i < ports.size(); i++)
     {
       PortView portView = integratedCircuitView.getPort(i);
-      LogicPortData logicPortData = ports.get(i);
+      PortData portData = ports.get(i);
 
-      TraceNet trace = traceLoader.create(logicPortData.traceId);
+      TraceNet trace = traceLoader.create(portData.traceId);
       Port port = portView.getPort();
       port.connect(trace);
 
       if (port.isLogicPort())
       {
+        LogicPortData logicPortData = (LogicPortData) portData;
         LogicPort logicPort = (LogicPort) port;
         Map<Long, PortEvent> portEventMap = new HashMap<>();
         for (PortEventData<?> eventData : logicPortData.events)

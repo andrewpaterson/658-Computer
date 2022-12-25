@@ -25,9 +25,6 @@ import java.util.Map;
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>, STATE extends State>
     extends DiscreteData
 {
-  protected Int2D position;
-  protected Rotation rotation;
-  protected String name;
   protected String family;
 
   protected List<IntegratedCircuitEventData<?>> events;
@@ -47,9 +44,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
                                List<PortData> ports,
                                STATE state)
   {
-    this.position = position;
-    this.rotation = rotation;
-    this.name = name;
+    super(position, rotation, name);
     this.family = family;
     this.events = events;
     this.ports = ports;

@@ -891,6 +891,11 @@ public class CircuitEditor
     for (DiscreteView discreteView : discreteViews)
     {
       DiscreteData discreteData = discreteView.save();
+      if (discreteData == null)
+      {
+        throw new SimulatorException("%s [%s] save may not return null.", discreteView.getClass().getSimpleName(), discreteView.getName());
+      }
+
       discreteDatas.add(discreteData);
     }
 

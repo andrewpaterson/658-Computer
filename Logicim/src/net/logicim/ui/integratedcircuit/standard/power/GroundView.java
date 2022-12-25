@@ -3,6 +3,7 @@ package net.logicim.ui.integratedcircuit.standard.power;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.standard.power.GroundPortData;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
@@ -28,8 +29,8 @@ public class GroundView
 
     float yOffset = 0.5f;
     line1 = new LineView(this, new Float2D(-0.9f, yOffset), new Float2D(0.9f, yOffset));
-    line2 = new LineView(this, new Float2D(-0.6f, yOffset+0.333f), new Float2D(0.6f, yOffset+0.333f));
-    line3 = new LineView(this, new Float2D(-0.3f, yOffset+0.666f), new Float2D(0.3f, yOffset+0.666f));
+    line2 = new LineView(this, new Float2D(-0.6f, yOffset + 0.333f), new Float2D(0.6f, yOffset + 0.333f));
+    line3 = new LineView(this, new Float2D(-0.3f, yOffset + 0.666f), new Float2D(0.3f, yOffset + 0.666f));
     line4 = new LineView(this, new Float2D(0, 0), new Float2D(0, yOffset));
     finaliseView();
   }
@@ -49,7 +50,7 @@ public class GroundView
   @Override
   public DiscreteData save()
   {
-    return null;
+    return new GroundPortData(position, rotation, name);
   }
 
   @Override

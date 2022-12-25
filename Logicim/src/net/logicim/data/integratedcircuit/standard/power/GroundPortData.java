@@ -6,28 +6,25 @@ import net.logicim.data.trace.TraceLoader;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.DiscreteView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.integratedcircuit.standard.power.PositivePowerView;
+import net.logicim.ui.integratedcircuit.standard.power.GroundView;
 
-public class PositivePowerPortData
+public class GroundPortData
     extends DiscreteData
 {
-  private float voltage;
-
-  public PositivePowerPortData()
+  public GroundPortData()
   {
   }
 
-  public PositivePowerPortData(Int2D position, Rotation rotation, String name, float voltage)
+  public GroundPortData(Int2D position, Rotation rotation, String name)
   {
     super(position, rotation, name);
-    this.voltage = voltage;
   }
 
   @Override
   public DiscreteView createAndLoad(CircuitEditor circuitEditor,
                                     TraceLoader traceLoader)
   {
-    return new PositivePowerView(circuitEditor, position, rotation, name, voltage);
+    return new GroundView(circuitEditor, position, rotation, name);
   }
 }
 

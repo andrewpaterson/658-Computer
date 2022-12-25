@@ -2,6 +2,7 @@ package net.logicim.ui.integratedcircuit.standard.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.standard.power.PositivePowerPortData;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.PortView;
@@ -50,7 +51,7 @@ public class PositivePowerView
   @Override
   public DiscreteData save()
   {
-    return null;
+    return new PositivePowerPortData(position, rotation, name, voltage);
   }
 
   @Override

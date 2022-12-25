@@ -51,7 +51,11 @@ public class PositivePowerView
   @Override
   public DiscreteData save()
   {
-    return new PositivePowerPortData(position, rotation, name, voltage);
+    return new PositivePowerPortData(position,
+                                     rotation,
+                                     name,
+                                     savePorts(),
+                                     voltage);
   }
 
   @Override

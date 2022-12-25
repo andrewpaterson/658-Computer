@@ -7,15 +7,14 @@ import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.DiscreteView;
 import net.logicim.ui.common.IntegratedCircuitView;
-import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 
 import java.util.HashMap;
@@ -28,7 +27,6 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   protected String family;
 
   protected List<IntegratedCircuitEventData<?>> events;
-  protected List<PortData> ports;
 
   protected STATE state;
 
@@ -44,44 +42,34 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
                                List<PortData> ports,
                                STATE state)
   {
-    super(position, rotation, name);
+    super(position, rotation, name, ports);
     this.family = family;
     this.events = events;
-    this.ports = ports;
     this.state = state;
   }
 
-  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, ICV integratedCircuitView)
+  @Override
+  protected void loadPort(CircuitEditor circuitEditor, PortData portData, Port port)
   {
-    for (int i = 0; i < ports.size(); i++)
+    if (port.isLogicPort())
     {
-      PortView portView = integratedCircuitView.getPort(i);
-      PortData portData = ports.get(i);
-
-      TraceNet trace = traceLoader.create(portData.traceId);
-      Port port = portView.getPort();
-      port.connect(trace);
-
-      if (port.isLogicPort())
+      LogicPortData logicPortData = (LogicPortData) portData;
+      LogicPort logicPort = (LogicPort) port;
+      Map<Long, PortEvent> portEventMap = new HashMap<>();
+      for (PortEventData<?> eventData : logicPortData.events)
       {
-        LogicPortData logicPortData = (LogicPortData) portData;
-        LogicPort logicPort = (LogicPort) port;
-        Map<Long, PortEvent> portEventMap = new HashMap<>();
-        for (PortEventData<?> eventData : logicPortData.events)
-        {
-          PortEvent portEvent = eventData.create(logicPort, circuitEditor.getTimeline());
-          portEventMap.put(eventData.id, portEvent);
-        }
+        PortEvent portEvent = eventData.create(logicPort, circuitEditor.getTimeline());
+        portEventMap.put(eventData.id, portEvent);
+      }
 
-        if ((logicPortData.output != null) && (logicPortData.output.id > 0))
+      if ((logicPortData.output != null) && (logicPortData.output.id > 0))
+      {
+        PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
+        if (outputPortEvent == null)
         {
-          PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
-          if (outputPortEvent == null)
-          {
-            outputPortEvent = logicPortData.output.create(logicPort, circuitEditor.getTimeline());
-          }
-          logicPort.setOutput(outputPortEvent);
+          outputPortEvent = logicPortData.output.create(logicPort, circuitEditor.getTimeline());
         }
+        logicPort.setOutput(outputPortEvent);
       }
     }
   }
@@ -94,8 +82,10 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
     }
   }
 
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ICV integratedCircuitView)
+  @Override
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView discreteView)
   {
+    ICV integratedCircuitView = (ICV) discreteView;
     circuitEditor.createConnectionViews(integratedCircuitView);
     loadState(integratedCircuitView);
     loadEvents(circuitEditor, integratedCircuitView);
@@ -106,13 +96,6 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>
   {
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     integratedCircuit.setState(state);
-  }
-
-  public ICV createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
-  {
-    ICV integratedCircuitView = create(circuitEditor, traceLoader);
-    connectAndLoad(circuitEditor, traceLoader, integratedCircuitView);
-    return integratedCircuitView;
   }
 
   public abstract ICV create(CircuitEditor circuitEditor, TraceLoader traceLoader);

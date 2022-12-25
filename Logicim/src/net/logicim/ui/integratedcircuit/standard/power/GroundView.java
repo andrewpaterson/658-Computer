@@ -50,7 +50,10 @@ public class GroundView
   @Override
   public DiscreteData save()
   {
-    return new GroundPortData(position, rotation, name);
+    return new GroundPortData(position,
+                              rotation,
+                              name,
+                              savePorts());
   }
 
   @Override

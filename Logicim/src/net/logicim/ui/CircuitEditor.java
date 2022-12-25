@@ -828,10 +828,10 @@ public class CircuitEditor
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (DiscreteView discreteView : discreteViews)
     {
-      List<PortView> ports = discreteView.getPorts();
-      for (PortView port : ports)
+      List<PortView> portViews = discreteView.getPorts();
+      for (PortView portView : portViews)
       {
-        ConnectionView connection = port.getConnection();
+        ConnectionView connection = portView.getConnection();
         if (line.isPositionOn(connection.getGridPosition()))
         {
           connectionViews.add(connection);
@@ -981,5 +981,7 @@ public class CircuitEditor
   {
     return simulation;
   }
+
+
 }
 

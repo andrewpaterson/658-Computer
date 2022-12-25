@@ -3,7 +3,6 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Int2D;
-import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;

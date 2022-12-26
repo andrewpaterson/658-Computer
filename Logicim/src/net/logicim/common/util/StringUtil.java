@@ -395,5 +395,87 @@ public abstract class StringUtil
     }
     return count;
   }
+
+  public static String javaNameToHumanReadable(String name)
+  {
+    return javaNameToHumanReadable(name, false);
+  }
+
+  public static String javaNameToHumanReadable(String name, boolean separateOutNumbers)
+  {
+    if (name == null)
+    {
+      return null;
+    }
+    if (name.equals(""))
+    {
+      return "";
+    }
+
+    StringBuilder buffer = new StringBuilder();
+    name = name.replace('_', ' ');
+
+    for (int i = 0; i < name.length(); i++)
+    {
+      char charCurr = name.charAt(i);
+      char charOut;
+      char charNext = 'Z';
+      char charPrev = 'z';
+      if (i < name.length() - 1)
+      {
+        charNext = name.charAt(i + 1);
+      }
+      if (i > 0)
+      {
+        charPrev = name.charAt(i - 1);
+      }
+      if (i == 0)
+      {
+        charOut = Character.toUpperCase(charCurr);
+      }
+      else
+      {
+        if (charIsUpperCase(charCurr) && charIsLetter(charNext) && charIsLowerCase(charNext))
+        {
+          if (charPrev != ' ')
+          {
+            buffer.append(' ');
+          }
+          charOut = Character.toLowerCase(charCurr);
+        }
+        else if (charIsLowerCase(charPrev) && charIsLetter(charPrev) && (charIsUpperCase(charCurr) || (separateOutNumbers && charIsNumeric(charCurr))))
+        {
+          buffer.append(' ');
+          charOut = charCurr;
+        }
+        else
+        {
+          charOut = charCurr;
+        }
+      }
+      buffer.append(charOut);
+    }
+    return buffer.toString();
+  }
+
+  public static boolean charIsLetter(char c)
+  {
+    return (((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')));
+  }
+
+  private static boolean charIsUpperCase(char c)
+  {
+    return ((c >= 'A') && (c <= 'Z'));
+  }
+
+  private static boolean charIsLowerCase(char c)
+  {
+    return ((c >= 'a') && (c <= 'z'));
+  }
+
+  private static boolean charIsNumeric(char c)
+  {
+    return (c >= '0') && (c <= '9');
+  }
 }
 

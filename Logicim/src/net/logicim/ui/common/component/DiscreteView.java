@@ -20,6 +20,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     implements ShapeHolder
 {
   protected PROPERTIES properties;
+
   protected CircuitEditor circuitEditor;
   protected Int2D position;
   protected Rotation rotation;
@@ -289,5 +290,10 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   public abstract DiscreteData save();
 
   protected abstract PROPERTIES createProperties();
+
+  public PROPERTIES getProperties()
+  {
+    return properties;
+  }
 }
 

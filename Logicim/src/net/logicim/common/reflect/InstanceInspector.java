@@ -94,6 +94,11 @@ public class InstanceInspector
     return classInspector.getAllInstanceFieldNames();
   }
 
+  public Collection<Field> getFields()
+  {
+    return classInspector.getAllFields();
+  }
+
   public Class<?> getFieldClass(String fieldName)
   {
     Field field = getField(fieldName);

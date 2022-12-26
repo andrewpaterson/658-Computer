@@ -16,7 +16,7 @@ public class Button
   @Override
   public void actionPerformed(ActionEvent e)
   {
-      }
+  }
 
   public String getText()
   {

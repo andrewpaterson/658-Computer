@@ -7,5 +7,5 @@ public class ClockProperties
 {
   public float frequency;
   public boolean inverseOut;
-
 }
+

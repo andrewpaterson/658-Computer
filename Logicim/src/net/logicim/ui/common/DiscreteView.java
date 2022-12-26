@@ -281,6 +281,8 @@ public abstract class DiscreteView
 
   protected abstract void createPortViews();
 
+  public abstract String getType();
+
   public abstract DiscreteData save();
 }
 

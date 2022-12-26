@@ -220,5 +220,10 @@ public class SimulatorPanel
       }
     }
   }
+
+  public JFrame getFrame()
+  {
+    return frame;
+  }
 }
 

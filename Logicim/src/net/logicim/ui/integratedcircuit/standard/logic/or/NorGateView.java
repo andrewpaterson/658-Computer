@@ -56,5 +56,11 @@ public class NorGateView
                            inputCount,
                            explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "NOR Gate";
+  }
 }
 

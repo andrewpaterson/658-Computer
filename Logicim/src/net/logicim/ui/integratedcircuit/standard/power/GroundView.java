@@ -73,5 +73,12 @@ public class GroundView
     graphics.setStroke(stroke);
     graphics.setColor(color);
   }
+
+  @Override
+  public String getType()
+  {
+    return "Ground";
+  }
+
 }
 

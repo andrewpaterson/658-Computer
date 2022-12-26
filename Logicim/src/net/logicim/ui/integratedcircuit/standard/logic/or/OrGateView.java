@@ -55,5 +55,11 @@ public class OrGateView
                           inputCount,
                           explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "OR Gate";
+  }
 }
 

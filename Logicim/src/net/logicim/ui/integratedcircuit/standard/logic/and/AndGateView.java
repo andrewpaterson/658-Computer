@@ -38,6 +38,12 @@ public class AndGateView
   }
 
   @Override
+  public String getType()
+  {
+    return "AND Gate";
+  }
+
+  @Override
   protected AndGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new AndGate(circuitEditor.getCircuit(), name, new AndGatePins(inputCount, familyVoltageConfiguration));

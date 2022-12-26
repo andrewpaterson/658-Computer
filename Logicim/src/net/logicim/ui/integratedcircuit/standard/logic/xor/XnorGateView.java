@@ -56,5 +56,11 @@ public class XnorGateView
                             inputCount,
                             explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "XNOR Gate";
+  }
 }
 

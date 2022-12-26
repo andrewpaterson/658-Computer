@@ -264,5 +264,11 @@ paintPorts(graphics, viewport, time);
                                  cloneInt2DArray(state.getColour()),
                                  state.getTickPosition());
   }
+
+  @Override
+  public String getType()
+  {
+    return "Oscilloscope";
+  }
 }
 

@@ -561,6 +561,11 @@ public class SimulatorEditor
     circuitEditor.load(circuitData);
   }
 
+  public DiscreteView getHoverDiscreteView()
+  {
+    return hoverDiscreteView;
+  }
+
   public Colours getColours()
   {
     return viewport.getColours();

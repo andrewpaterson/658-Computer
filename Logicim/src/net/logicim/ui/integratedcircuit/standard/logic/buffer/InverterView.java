@@ -53,5 +53,11 @@ public class InverterView
                             saveState(),
                             explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "Inverter";
+  }
 }
 

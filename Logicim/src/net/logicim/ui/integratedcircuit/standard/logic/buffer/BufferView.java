@@ -54,5 +54,11 @@ public class BufferView
                           saveState(),
                           explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "Buffer";
+  }
 }
 

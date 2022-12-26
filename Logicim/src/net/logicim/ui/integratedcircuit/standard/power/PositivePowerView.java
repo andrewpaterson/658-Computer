@@ -102,5 +102,12 @@ public class PositivePowerView
     graphics.setFont(font);
     graphics.drawString(text, sx, sy);
   }
+
+  @Override
+  public String getType()
+  {
+    return "Positive Power";
+  }
+
 }
 

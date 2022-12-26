@@ -56,5 +56,11 @@ public class XorGateView
                            inputCount,
                            explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "XOR Gate";
+  }
 }
 

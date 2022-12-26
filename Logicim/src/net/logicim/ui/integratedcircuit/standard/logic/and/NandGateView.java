@@ -56,5 +56,11 @@ public class NandGateView
                             inputCount,
                             explicitPowerPorts);
   }
+
+  @Override
+  public String getType()
+  {
+    return "NAND Gate";
+  }
 }
 

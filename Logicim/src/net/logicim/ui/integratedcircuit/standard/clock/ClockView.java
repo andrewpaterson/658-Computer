@@ -158,5 +158,11 @@ public class ClockView
   {
     return new ClockOscillatorState(integratedCircuit.getState().getState());
   }
+
+  @Override
+  public String getType()
+  {
+    return "Clock Oscillator";
+  }
 }
 

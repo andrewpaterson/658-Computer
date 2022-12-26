@@ -11,7 +11,6 @@ public class RectangleGridCache
 {
   protected Tuple2 transformedDimension;
   protected Tuple2 transformedPosition;
-  protected boolean valid;
 
   public RectangleGridCache(Tuple2 dimension, Tuple2 position)
   {

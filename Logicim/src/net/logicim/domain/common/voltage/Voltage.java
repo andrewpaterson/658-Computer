@@ -13,5 +13,24 @@ public interface Voltage
       return "----";
     }
   }
+
+  static String toVoltageString(float voltage, boolean includeV)
+  {
+    if (includeV)
+    {
+      return toVoltageString(voltage);
+    }
+    else
+    {
+      if (!Float.isNaN(voltage))
+      {
+        return String.format("%.1f", voltage).replace(',', '.');
+      }
+      else
+      {
+        return "---";
+      }
+    }
+  }
 }
 

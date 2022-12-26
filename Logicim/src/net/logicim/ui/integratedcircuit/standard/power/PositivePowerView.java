@@ -1,13 +1,16 @@
 package net.logicim.ui.integratedcircuit.standard.power;
 
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
 import net.logicim.data.integratedcircuit.standard.power.PositivePowerPortData;
+import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
@@ -17,6 +20,7 @@ public class PositivePowerView
 {
   protected float voltage;
   protected RectangleView rectangle;
+  protected PolygonView polygonView;
 
   public PositivePowerView(CircuitEditor circuitEditor,
                            Int2D position,
@@ -26,7 +30,11 @@ public class PositivePowerView
   {
     super(circuitEditor, position, rotation, name);
     this.voltage = voltage;
-    rectangle = new RectangleView(this, 2, 2, true, true);
+    float yTop = 0.4f;
+    float yBottom = -1f;
+    float radius = 0.9f;
+    rectangle = new RectangleView(this, new Float2D(-radius, yBottom + 0.4f), new Float2D(radius, yTop), true, true);
+    polygonView = new PolygonView(this, true, true, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
     finaliseView();
   }
 
@@ -62,11 +70,37 @@ public class PositivePowerView
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);
-    if (rectangle != null)
-    {
-      rectangle.paint(graphics, viewport);
-    }
+
+    Color color = graphics.getColor();
+    Stroke stroke = graphics.getStroke();
+    Font font = graphics.getFont();
+
+    polygonView.paint(graphics, viewport);
+    rectangle.updateGridCache();  // Suspect to the max.
+    drawCenteredString(graphics, viewport, Voltage.toVoltageString(voltage, false));
+
     paintPorts(graphics, viewport, time);
+    graphics.setColor(color);
+    graphics.setStroke(stroke);
+    graphics.setFont(font);
+  }
+
+  public void drawCenteredString(Graphics graphics, Viewport viewport, String text)
+  {
+    Font font = graphics.getFont().deriveFont(Font.BOLD, (int) (11 * viewport.getZoom()));
+    Color voltageColour = viewport.getColours().getTraceVoltage(this.voltage);
+    graphics.setColor(voltageColour);
+
+    FontMetrics metrics = graphics.getFontMetrics(font);
+    int x = viewport.transformGridToScreenSpaceX(rectangle.getTransformedPosition());
+    int y = viewport.transformGridToScreenSpaceY(rectangle.getTransformedPosition());
+    int width = viewport.transformGridToScreenWidth(rectangle.getTransformedDimension());
+    int height = viewport.transformGridToScreenHeight(rectangle.getTransformedDimension());
+
+    int sx = x + (width - metrics.stringWidth(text)) / 2;
+    int sy = y + ((height - metrics.getHeight()) / 2) + metrics.getAscent();
+    graphics.setFont(font);
+    graphics.drawString(text, sx, sy);
   }
 }
 

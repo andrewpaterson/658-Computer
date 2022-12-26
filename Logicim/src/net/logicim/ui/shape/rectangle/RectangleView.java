@@ -78,7 +78,7 @@ public class RectangleView
     }
   }
 
-  private void updateGridCache()
+  public void updateGridCache()
   {
     if (!gridCache.isValid())
     {
@@ -99,6 +99,16 @@ public class RectangleView
   public void invalidateCache()
   {
     gridCache.invalidate();
+  }
+
+  public Tuple2 getTransformedPosition()
+  {
+    return gridCache.transformedPosition;
+  }
+
+  public Tuple2 getTransformedDimension()
+  {
+    return gridCache.transformedDimension;
   }
 }
 

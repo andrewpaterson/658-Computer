@@ -2,10 +2,17 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.DiscreteView;
+import net.logicim.ui.components.Button;
+import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Vector;
+
+import static java.awt.GridBagConstraints.BOTH;
+import static net.logicim.ui.util.ButtonUtil.buildButtons;
 
 public class EditParameters
     extends SimulatorEditorAction
@@ -33,7 +40,27 @@ public class EditParameters
       mousePosition.x -= 50;
       mousePosition.y -= 50;
       dialog.setLocation(WindowSizer.ensureOnScreen(mousePosition, dimension));
-      dialog.setContentPane(new JPanel());
+
+      Container contentPane = dialog.getContentPane();
+      contentPane.setLayout(new GridBagLayout());
+
+      JPanel topPanel = new JPanel();
+      contentPane.add(topPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
+      DefaultTableModel model = new DefaultTableModel();
+      JTable comp = new JTable(model);
+      model.addColumn("Col1");
+      model.addRow(new Object[] { "r1" });
+      model.addRow(new Object[] { "r2" });
+      model.addRow(new Object[] { "r3" });
+
+      Vector<Vector> dataVector = model.getDataVector();
+
+      topPanel.add(comp);
+
+      JPanel bottomPanel = new JPanel();
+      contentPane.add(bottomPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 0, BOTH));
+
+      buildButtons(bottomPanel, new Button("Okay"), new Button("Cancel"));
 
       SwingUtilities.invokeLater(new Runnable()
       {

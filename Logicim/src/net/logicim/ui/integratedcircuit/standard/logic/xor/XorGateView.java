@@ -40,7 +40,9 @@ public class XorGateView
   @Override
   protected XorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XorGate(circuitEditor.getCircuit(), name, new XorGatePins(inputCount, familyVoltageConfiguration));
+    return new XorGate(circuitEditor.getCircuit(),
+                       properties.name,
+                       new XorGatePins(properties.inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -48,13 +50,13 @@ public class XorGateView
   {
     return new XorGateData(position,
                            rotation,
-                           name,
-                           family.getFamily(),
+                           properties.name,
+                           properties.family.getFamily(),
                            saveEvents(),
                            savePorts(),
                            saveState(),
-                           inputCount,
-                           explicitPowerPorts);
+                           properties.inputCount,
+                           properties.explicitPowerPorts);
   }
 
   @Override

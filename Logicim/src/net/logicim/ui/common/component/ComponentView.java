@@ -1,7 +1,10 @@
-package net.logicim.ui.common;
+package net.logicim.ui.common.component;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.port.Port;
+import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
 import java.util.List;

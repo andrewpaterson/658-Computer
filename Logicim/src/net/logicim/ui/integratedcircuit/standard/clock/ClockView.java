@@ -19,11 +19,9 @@ import net.logicim.ui.shape.rectangle.RectangleView;
 import java.awt.*;
 
 public class ClockView
-    extends StandardIntegratedCircuitView<ClockOscillator>
+    extends StandardIntegratedCircuitView<ClockOscillator, ClockProperties>
 {
   protected RectangleView rectangle;
-  protected float frequency;
-  protected boolean inverseOut;
 
   public ClockView(CircuitEditor circuitEditor,
                    Int2D position,
@@ -40,8 +38,8 @@ public class ClockView
           name,
           family,
           explicitPowerPorts);
-    this.frequency = frequency;
-    this.inverseOut = inverseOut;
+    this.properties.frequency = frequency;
+    this.properties.inverseOut = inverseOut;
     if (!inverseOut)
     {
       rectangle = new RectangleView(this, 2, 2, true, true);
@@ -60,7 +58,7 @@ public class ClockView
     super.createPortViews();
 
     new PortView(this, integratedCircuit.getPort("Output"), new Int2D(0, -1));
-    if (inverseOut)
+    if (properties.inverseOut)
     {
       new PortView(this, integratedCircuit.getPort("Output2"), new Int2D(2, -1));
     }
@@ -69,8 +67,8 @@ public class ClockView
   @Override
   protected ClockOscillator createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(circuitEditor.getCircuit(), name,
-                               new ClockOscillatorPins(familyVoltageConfiguration, inverseOut), frequency);
+    return new ClockOscillator(circuitEditor.getCircuit(), properties.name,
+                               new ClockOscillatorPins(familyVoltageConfiguration, properties.inverseOut), properties.frequency);
   }
 
   @Override
@@ -110,7 +108,7 @@ public class ClockView
 
     float xOffset = 0.5f;
     float xi = 0;
-    if (inverseOut)
+    if (properties.inverseOut)
     {
       xi = 1f;
     }
@@ -143,14 +141,20 @@ public class ClockView
   {
     return new ClockData(position,
                          rotation,
-                         name,
-                         family.getFamily(),
-                         frequency,
+                         properties.name,
+                         properties.family.getFamily(),
+                         properties.frequency,
                          saveEvents(),
                          savePorts(),
                          saveState(),
-                         inverseOut,
-                         explicitPowerPorts);
+                         properties.inverseOut,
+                         properties.explicitPowerPorts);
+  }
+
+  @Override
+  protected ClockProperties createProperties()
+  {
+    return new ClockProperties();
   }
 
   @Override

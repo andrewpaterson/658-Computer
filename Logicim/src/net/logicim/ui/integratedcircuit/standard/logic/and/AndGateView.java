@@ -46,7 +46,9 @@ public class AndGateView
   @Override
   protected AndGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new AndGate(circuitEditor.getCircuit(), name, new AndGatePins(inputCount, familyVoltageConfiguration));
+    return new AndGate(circuitEditor.getCircuit(),
+                       properties.name,
+                       new AndGatePins(properties.inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -54,13 +56,13 @@ public class AndGateView
   {
     return new AndGateData(position,
                            rotation,
-                           name,
-                           family.getFamily(),
+                           properties.name,
+                           properties.family.getFamily(),
                            saveEvents(),
                            savePorts(),
                            saveState(),
-                           inputCount,
-                           explicitPowerPorts);
+                           properties.inputCount,
+                           properties.explicitPowerPorts);
   }
 }
 

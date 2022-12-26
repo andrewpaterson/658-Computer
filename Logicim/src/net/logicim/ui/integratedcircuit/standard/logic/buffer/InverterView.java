@@ -38,7 +38,9 @@ public class InverterView
   @Override
   protected Inverter createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Inverter(circuitEditor.getCircuit(), name, new BufferPins(familyVoltageConfiguration));
+    return new Inverter(circuitEditor.getCircuit(),
+                        properties.name,
+                        new BufferPins(familyVoltageConfiguration));
   }
 
   @Override
@@ -46,12 +48,12 @@ public class InverterView
   {
     return new InverterData(position,
                             rotation,
-                            name,
-                            family.getFamily(),
+                            properties.name,
+                            properties.family.getFamily(),
                             saveEvents(),
                             savePorts(),
                             saveState(),
-                            explicitPowerPorts);
+                            properties.explicitPowerPorts);
   }
 
   @Override

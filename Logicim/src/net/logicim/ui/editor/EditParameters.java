@@ -1,12 +1,13 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.DiscreteView;
+import net.logicim.ui.common.component.DiscreteView;
 import net.logicim.ui.components.Button;
 import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Vector;
@@ -35,7 +36,7 @@ public class EditParameters
     if (discreteView != null)
     {
       JDialog dialog = new JDialog(frame, discreteView.getType() + " Properties", true);
-      Dimension dimension = new Dimension(1280, 640);
+      Dimension dimension = new Dimension(640, 480);
       dialog.setSize(dimension);
       mousePosition.x -= 50;
       mousePosition.y -= 50;
@@ -44,18 +45,36 @@ public class EditParameters
       Container contentPane = dialog.getContentPane();
       contentPane.setLayout(new GridBagLayout());
 
-      JPanel topPanel = new JPanel();
+      JPanel topPanel = new JPanel(new GridBagLayout());
       contentPane.add(topPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
-      DefaultTableModel model = new DefaultTableModel();
-      JTable comp = new JTable(model);
+      DefaultTableModel model = new DefaultTableModel()
+      {
+        @Override
+        public boolean isCellEditable(int row, int column)
+        {
+          if (column == 0)
+          {
+            return false;
+          }
+          else
+          {
+            return super.isCellEditable(row, column);
+          }
+        }
+      };
+
+      JTable table = new JTable(model);
+      table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
       model.addColumn("Col1");
-      model.addRow(new Object[] { "r1" });
-      model.addRow(new Object[] { "r2" });
-      model.addRow(new Object[] { "r3" });
+      model.addColumn("Col2");
+      model.addRow(new Object[]{"r1", ""});
+      model.addRow(new Object[]{"r2", ""});
+      model.addRow(new Object[]{"r3", ""});
 
       Vector<Vector> dataVector = model.getDataVector();
 
-      topPanel.add(comp);
+      topPanel.add(new JScrollPane(table), GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
+      topPanel.setBorder(new EmptyBorder(5, 5, 0, 5));
 
       JPanel bottomPanel = new JPanel();
       contentPane.add(bottomPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 0, BOTH));

@@ -39,7 +39,9 @@ public class BufferView
   @Override
   protected Buffer createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Buffer(circuitEditor.getCircuit(), name, new BufferPins(familyVoltageConfiguration));
+    return new Buffer(circuitEditor.getCircuit(),
+                      properties.name,
+                      new BufferPins(familyVoltageConfiguration));
   }
 
   @Override
@@ -47,12 +49,12 @@ public class BufferView
   {
     return new BufferData(position,
                           rotation,
-                          name,
-                          family.getFamily(),
+                          properties.name,
+                          properties.family.getFamily(),
                           saveEvents(),
                           savePorts(),
                           saveState(),
-                          explicitPowerPorts);
+                          properties.explicitPowerPorts);
   }
 
   @Override

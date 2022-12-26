@@ -1,13 +1,13 @@
-package net.logicim.ui.common;
+package net.logicim.ui.common.component;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
-import net.logicim.data.port.LogicPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
 
@@ -15,14 +15,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DiscreteView
+public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     extends ComponentView
     implements ShapeHolder
 {
+  protected PROPERTIES properties;
   protected CircuitEditor circuitEditor;
   protected Int2D position;
   protected Rotation rotation;
-  protected String name;
   protected BoundingBox boundingBox;
   protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
@@ -33,15 +33,18 @@ public abstract class DiscreteView
                       Rotation rotation,
                       String name)
   {
+    this.properties = createProperties();
+
     this.circuitEditor = circuitEditor;
     this.position = position.clone();
     this.rotation = rotation;
-    this.name = name;
     this.boundingBox = new BoundingBox();
     this.selectionBox = new BoundingBox();
     this.shapes = new ArrayList<>();
     this.finalised = false;
     this.ports = new ArrayList<>();
+
+    this.properties.name = name;
   }
 
   public void setPosition(int x, int y)
@@ -276,7 +279,7 @@ public abstract class DiscreteView
   @Override
   public String getName()
   {
-    return name;
+    return properties.name;
   }
 
   protected abstract void createPortViews();
@@ -284,5 +287,7 @@ public abstract class DiscreteView
   public abstract String getType();
 
   public abstract DiscreteData save();
+
+  protected abstract PROPERTIES createProperties();
 }
 

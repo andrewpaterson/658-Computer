@@ -18,6 +18,7 @@ import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.ui.common.component.DiscreteView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;

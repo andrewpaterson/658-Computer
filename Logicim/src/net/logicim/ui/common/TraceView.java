@@ -8,6 +8,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.component.ComponentView;
 
 import java.awt.*;
 import java.util.ArrayList;

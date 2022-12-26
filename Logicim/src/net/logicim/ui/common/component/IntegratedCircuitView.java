@@ -1,4 +1,4 @@
-package net.logicim.ui.common;
+package net.logicim.ui.common.component;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
@@ -14,16 +14,19 @@ import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
-    extends DiscreteView
+public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends IntegratedCircuitProperties>
+    extends DiscreteView<PROPERTIES>
 {
   protected IC integratedCircuit;
-  protected Family family;
 
   public IntegratedCircuitView(CircuitEditor circuitEditor,
                                Int2D position,
@@ -36,13 +39,14 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
     {
       throw new SimulatorException("Family may not be null on IC [%s].", name);
     }
-    this.family = family;
+
+    this.properties.family = family;
     circuitEditor.add(this);
   }
 
   protected void createIntegratedCircuit()
   {
-    FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(family);
+    FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     this.integratedCircuit = createIntegratedCircuit(familyVoltageConfiguration);
     this.integratedCircuit.disable();
   }

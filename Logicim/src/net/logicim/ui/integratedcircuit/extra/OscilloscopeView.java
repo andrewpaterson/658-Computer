@@ -10,7 +10,7 @@ import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.IntegratedCircuitView;
+import net.logicim.ui.common.component.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -25,7 +25,7 @@ import java.util.List;
 import static net.logicim.ui.common.VoltageColour.clamp;
 
 public class OscilloscopeView
-    extends IntegratedCircuitView<Oscilloscope>
+    extends IntegratedCircuitView<Oscilloscope, OscilloscopeProperties>
 {
   protected int inputCount;
   protected int numberOfDivsWide;
@@ -113,7 +113,7 @@ public class OscilloscopeView
   protected Oscilloscope createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new Oscilloscope(circuitEditor.getCircuit(),
-                            name,
+                            properties.name,
                             new OscilloscopePins(inputCount),
                             samplingFrequency,
                             numberOfDivsWide,
@@ -243,8 +243,8 @@ paintPorts(graphics, viewport, time);
   public IntegratedCircuitData<?, ?> save()
   {
     return new OscilloscopeData(position, rotation,
-                                name,
-                                family.getFamily(),
+                                properties.name,
+                                properties.family.getFamily(),
                                 saveEvents(),
                                 savePorts(),
                                 saveState(),
@@ -253,6 +253,12 @@ paintPorts(graphics, viewport, time);
                                 samplesPerDiv,
                                 divHeightInGrids,
                                 samplingFrequency);
+  }
+
+  @Override
+  protected OscilloscopeProperties createProperties()
+  {
+    return new OscilloscopeProperties();
   }
 
   public OscilloscopeState saveState()

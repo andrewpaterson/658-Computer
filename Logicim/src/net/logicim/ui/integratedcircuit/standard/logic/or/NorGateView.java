@@ -40,7 +40,9 @@ public class NorGateView
   @Override
   protected NorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NorGate(circuitEditor.getCircuit(), name, new OrGatePins(inputCount, familyVoltageConfiguration));
+    return new NorGate(circuitEditor.getCircuit(),
+                       properties.name,
+                       new OrGatePins(properties.inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -48,13 +50,13 @@ public class NorGateView
   {
     return new NorGateData(position,
                            rotation,
-                           name,
-                           family.getFamily(),
+                           properties.name,
+                           properties.family.getFamily(),
                            saveEvents(),
                            savePorts(),
                            saveState(),
-                           inputCount,
-                           explicitPowerPorts);
+                           properties.inputCount,
+                           properties.explicitPowerPorts);
   }
 
   @Override

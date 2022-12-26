@@ -40,7 +40,9 @@ public class XnorGateView
   @Override
   protected XnorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XnorGate(circuitEditor.getCircuit(), name, new XorGatePins(inputCount, familyVoltageConfiguration));
+    return new XnorGate(circuitEditor.getCircuit(),
+                        properties.name,
+                        new XorGatePins(properties.inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -48,13 +50,13 @@ public class XnorGateView
   {
     return new XnorGateData(position,
                             rotation,
-                            name,
-                            family.getFamily(),
+                            properties.name,
+                            properties.family.getFamily(),
                             saveEvents(),
                             savePorts(),
                             saveState(),
-                            inputCount,
-                            explicitPowerPorts);
+                            properties.inputCount,
+                            properties.explicitPowerPorts);
   }
 
   @Override

@@ -40,7 +40,9 @@ public class NandGateView
   @Override
   protected NandGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NandGate(circuitEditor.getCircuit(), name, new AndGatePins(inputCount, familyVoltageConfiguration));
+    return new NandGate(circuitEditor.getCircuit(),
+                        properties.name,
+                        new AndGatePins(properties.inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -48,13 +50,13 @@ public class NandGateView
   {
     return new NandGateData(position,
                             rotation,
-                            name,
-                            family.getFamily(),
+                            properties.name,
+                            properties.family.getFamily(),
                             saveEvents(),
                             savePorts(),
                             saveState(),
-                            inputCount,
-                            explicitPowerPorts);
+                            properties.inputCount,
+                            properties.explicitPowerPorts);
   }
 
   @Override

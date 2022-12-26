@@ -7,7 +7,7 @@ import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.DiscreteView;
+import net.logicim.ui.common.component.DiscreteView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 

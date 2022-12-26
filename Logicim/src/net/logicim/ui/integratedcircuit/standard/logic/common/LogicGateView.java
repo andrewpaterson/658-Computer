@@ -9,10 +9,8 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
-    extends StandardIntegratedCircuitView<IC>
+    extends StandardIntegratedCircuitView<IC, LogicGateProperties>
 {
-  protected int inputCount;
-
   public LogicGateView(CircuitEditor circuitEditor,
                        int inputCount,
                        Int2D position,
@@ -27,7 +25,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
           name,
           family,
           explicitPowerPorts);
-    this.inputCount = inputCount;
+    this.properties.inputCount = inputCount;
   }
 
   protected void createPortViews(boolean negateOutput, int inputOffset)
@@ -35,14 +33,10 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     int start;
     int end;
     boolean skipZero = false;
-    if (inputCount % 2 == 0)
+    end = properties.inputCount / 2;
+    if (properties.inputCount % 2 == 0)
     {
-      end = inputCount / 2;
       skipZero = true;
-    }
-    else
-    {
-      end = inputCount / 2;
     }
     start = -end;
 
@@ -60,6 +54,12 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     {
       outputPortView.setInverting(true, Rotation.North);
     }
+  }
+
+  @Override
+  protected LogicGateProperties createProperties()
+  {
+    return new LogicGateProperties();
   }
 }
 

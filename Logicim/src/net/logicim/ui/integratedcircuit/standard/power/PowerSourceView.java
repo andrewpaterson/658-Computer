@@ -7,15 +7,16 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.DiscreteView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.component.DiscreteProperties;
+import net.logicim.ui.common.component.DiscreteView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PowerSourceView
-    extends DiscreteView
+public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
+    extends DiscreteView<PROPERTIES>
 {
   protected PowerSource powerSource;
   protected boolean enabled;
@@ -48,7 +49,9 @@ public abstract class PowerSourceView
 
   protected void createPowerSource()
   {
-    powerSource = new PowerSource(circuitEditor.getCircuit(), name, getVoltageOut());
+    powerSource = new PowerSource(circuitEditor.getCircuit(),
+                                  properties.name,
+                                  getVoltageOut());
     powerSource.disable();
   }
 
@@ -84,7 +87,7 @@ public abstract class PowerSourceView
   @Override
   public String getDescription()
   {
-    return powerSource.getType() + " " + name + " (" + getPosition() + ")";
+    return powerSource.getType() + " " + properties.name + " (" + getPosition() + ")";
   }
 
   protected void validatePorts()

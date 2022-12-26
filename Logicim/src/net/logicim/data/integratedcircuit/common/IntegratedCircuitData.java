@@ -13,15 +13,15 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.DiscreteView;
-import net.logicim.ui.common.IntegratedCircuitView;
+import net.logicim.ui.common.component.DiscreteView;
+import net.logicim.ui.common.component.IntegratedCircuitView;
 import net.logicim.ui.common.Rotation;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?>, STATE extends State>
+public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?, ?>, STATE extends State>
     extends DiscreteData
 {
   protected String family;

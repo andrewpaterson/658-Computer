@@ -39,7 +39,9 @@ public class OrGateView
   @Override
   protected OrGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new OrGate(circuitEditor.getCircuit(), name, new OrGatePins(inputCount, familyVoltageConfiguration));
+    return new OrGate(circuitEditor.getCircuit(),
+                      properties.name,
+                      new OrGatePins(properties.inputCount, familyVoltageConfiguration));
   }
 
   @Override
@@ -47,13 +49,13 @@ public class OrGateView
   {
     return new OrGateData(position,
                           rotation,
-                          name,
-                          family.getFamily(),
+                          properties.name,
+                          properties.family.getFamily(),
                           saveEvents(),
                           savePorts(),
                           saveState(),
-                          inputCount,
-                          explicitPowerPorts);
+                          properties.inputCount,
+                          properties.explicitPowerPorts);
   }
 
   @Override

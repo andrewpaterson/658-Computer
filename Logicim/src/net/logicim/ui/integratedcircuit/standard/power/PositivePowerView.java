@@ -10,15 +10,15 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.component.DiscreteProperties;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 
 public class PositivePowerView
-    extends PowerSourceView
+    extends PowerSourceView<PositivePowerProperties>
 {
-  protected float voltage;
   protected RectangleView rectangle;
   protected PolygonView polygonView;
 
@@ -29,7 +29,7 @@ public class PositivePowerView
                            float voltage)
   {
     super(circuitEditor, position, rotation, name);
-    this.voltage = voltage;
+    this.properties.voltage = voltage;
     float yTop = 0.4f;
     float yBottom = -1f;
     float radius = 0.9f;
@@ -40,14 +40,16 @@ public class PositivePowerView
 
   protected void createPowerSource()
   {
-    powerSource = new PowerSource(circuitEditor.getCircuit(), name, voltage);
+    powerSource = new PowerSource(circuitEditor.getCircuit(),
+                                  properties.name,
+                                  properties.voltage);
     powerSource.disable();
   }
 
   @Override
   public float getVoltageOut()
   {
-    return voltage;
+    return properties.voltage;
   }
 
   @Override
@@ -61,9 +63,15 @@ public class PositivePowerView
   {
     return new PositivePowerPortData(position,
                                      rotation,
-                                     name,
+                                     properties.name,
                                      savePorts(),
-                                     voltage);
+                                     properties.voltage);
+  }
+
+  @Override
+  protected PositivePowerProperties createProperties()
+  {
+    return new PositivePowerProperties();
   }
 
   @Override
@@ -77,7 +85,7 @@ public class PositivePowerView
 
     polygonView.paint(graphics, viewport);
     rectangle.updateGridCache();  // Suspect to the max.
-    drawCenteredString(graphics, viewport, Voltage.toVoltageString(voltage, false));
+    drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage, false));
 
     paintPorts(graphics, viewport, time);
     graphics.setColor(color);
@@ -88,7 +96,7 @@ public class PositivePowerView
   public void drawCenteredString(Graphics graphics, Viewport viewport, String text)
   {
     Font font = graphics.getFont().deriveFont(Font.BOLD, (int) (11 * viewport.getZoom()));
-    Color voltageColour = viewport.getColours().getTraceVoltage(this.voltage);
+    Color voltageColour = viewport.getColours().getTraceVoltage(properties.voltage);
     graphics.setColor(voltageColour);
 
     FontMetrics metrics = graphics.getFontMetrics(font);
@@ -108,6 +116,5 @@ public class PositivePowerView
   {
     return "Positive Power";
   }
-
 }
 

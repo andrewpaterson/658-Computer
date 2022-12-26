@@ -16,7 +16,7 @@ import java.awt.*;
 import static net.logicim.ui.common.Rotation.North;
 
 public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
-    extends StandardIntegratedCircuitView<IC>
+    extends StandardIntegratedCircuitView<IC, BufferProperties>
 {
   protected PolygonView polygon;
 
@@ -51,7 +51,7 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);
-    
+
     if (polygon != null)
     {
       Stroke stroke = graphics.getStroke();
@@ -64,6 +64,12 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
       graphics.setStroke(stroke);
       graphics.setColor(color);
     }
+  }
+
+  @Override
+  protected BufferProperties createProperties()
+  {
+    return new BufferProperties();
   }
 }
 

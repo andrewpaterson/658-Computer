@@ -13,7 +13,7 @@ import net.logicim.ui.shape.line.LineView;
 import java.awt.*;
 
 public class GroundView
-    extends PowerSourceView
+    extends PowerSourceView<GroundProperties>
 {
   protected LineView line1;
   protected LineView line2;
@@ -52,8 +52,14 @@ public class GroundView
   {
     return new GroundPortData(position,
                               rotation,
-                              name,
+                              properties.name,
                               savePorts());
+  }
+
+  @Override
+  protected GroundProperties createProperties()
+  {
+    return new GroundProperties();
   }
 
   @Override
@@ -79,6 +85,5 @@ public class GroundView
   {
     return "Ground";
   }
-
 }
 

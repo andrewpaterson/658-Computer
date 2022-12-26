@@ -6,7 +6,6 @@ import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.DiscreteView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.power.GroundView;
 

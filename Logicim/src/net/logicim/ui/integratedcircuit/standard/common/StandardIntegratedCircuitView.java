@@ -4,7 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.IntegratedCircuitView;
+import net.logicim.ui.common.component.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -13,22 +13,21 @@ import net.logicim.ui.shape.line.LineView;
 
 import java.awt.*;
 
-public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit<?, ?>>
-    extends IntegratedCircuitView<IC>
+public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends StandardIntegratedCircuitProperties>
+    extends IntegratedCircuitView<IC, PROPERTIES>
 {
-  protected boolean explicitPowerPorts;
   protected LineView vccLine;
   protected LineView gndLine;
 
   public StandardIntegratedCircuitView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, String name, Family family, boolean explicitPowerPorts)
   {
     super(circuitEditor, position, rotation, name, family);
-    this.explicitPowerPorts = explicitPowerPorts;
+    this.properties.explicitPowerPorts = explicitPowerPorts;
   }
 
   protected void createPortViews()
   {
-    if (explicitPowerPorts)
+    if (properties.explicitPowerPorts)
     {
       BoundingBox boundingBox = new BoundingBox();
       updateBoundingBoxFromShapes(boundingBox);

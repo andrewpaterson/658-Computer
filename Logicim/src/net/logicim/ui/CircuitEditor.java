@@ -18,6 +18,9 @@ import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.component.ComponentView;
+import net.logicim.ui.common.component.DiscreteView;
+import net.logicim.ui.common.component.IntegratedCircuitView;
 import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.shape.common.BoundingBox;
 
@@ -80,7 +83,7 @@ public class CircuitEditor
   {
     if (discreteView instanceof IntegratedCircuitView)
     {
-      return deleteIntegratedCircuit((IntegratedCircuitView<?>) discreteView);
+      return deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) discreteView);
     }
     else if (discreteView instanceof PowerSourceView)
     {
@@ -96,7 +99,7 @@ public class CircuitEditor
     }
   }
 
-  protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?> integratedCircuitView)
+  protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = integratedCircuitView.getPorts();
@@ -184,7 +187,7 @@ public class CircuitEditor
           Int2D position = connection.getGridPosition();
           if (position != null)
           {
-            PortView portView = ((IntegratedCircuitView<?>) connectedComponent).getPortInGrid(position);
+            PortView portView = ((IntegratedCircuitView<?, ?>) connectedComponent).getPortInGrid(position);
             portView.disconnectTraceNet(simulation);
           }
         }

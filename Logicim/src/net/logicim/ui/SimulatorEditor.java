@@ -5,6 +5,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.component.ComponentView;
+import net.logicim.ui.common.component.DiscreteView;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;

@@ -18,7 +18,7 @@ public class Form
     verticalCount = 0;
   }
 
-  public void add(JComponent left, JComponent right)
+  public void addComponents(JComponent left, JComponent right)
   {
     add(left, gridBagConstraints(0, verticalCount, 1, 0, GridBagConstraints.HORIZONTAL));
     JPanel horizontalSpacer = new JPanel();

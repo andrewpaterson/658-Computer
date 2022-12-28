@@ -4,9 +4,11 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.components.Label;
 import net.logicim.ui.components.button.Button;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.components.form.Form;
+import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
@@ -63,18 +65,16 @@ public class EditProperties
       for (Field field : fields)
       {
         Object fieldValue = instanceInspector.getFieldValue(field);
-        String name = field.getName();
-        int index = name.indexOf('_');
+        String fieldName = field.getName();
+        int index = fieldName.indexOf('_');
+        String name = fieldName;
         if (index != -1)
         {
-          String unit = " " + name.substring(index + 1);
-          name = name.substring(0, index);
-          fieldValue = fieldValue.toString() + unit;
+          name = fieldName.substring(0, index);
         }
         name = javaNameToHumanReadable(name);
-        JTextField textField = new JTextField();
-        textField.setText(String.valueOf(fieldValue));
-        form.add(new JLabel(name+ ":"), textField);
+
+        form.addComponents(new Label(name), TypeEditorFactory.getInstance().createEditor(field.getType(), fieldName, fieldValue));
       }
 
       topPanel.add(form, gridBagConstraints(0, 0, 1, 0, HORIZONTAL));

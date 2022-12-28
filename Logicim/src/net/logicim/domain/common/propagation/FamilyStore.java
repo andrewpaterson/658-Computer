@@ -2,7 +2,9 @@ package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class FamilyStore
 {
@@ -39,6 +41,11 @@ public class FamilyStore
   public Family get(String familyName)
   {
     return map.get(familyName);
+  }
+
+  public List<String> findAllNames()
+  {
+    return new ArrayList<>(map.keySet());
   }
 }
 

@@ -5,6 +5,10 @@ import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
+import net.logicim.ui.components.typeeditor.FamilyPropertyEditor;
+import net.logicim.ui.components.typeeditor.PropertyEditor;
+import net.logicim.ui.components.typeeditor.TypeEditorFactory;
+import net.logicim.ui.editor.EditProperties;
 import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.*;
 
@@ -34,6 +38,7 @@ public class SimulatorPanel
 
     simulatorEditor = new SimulatorEditor(this);
     FamilyVoltageConfigurationStore.getInstance();
+    TypeEditorFactory.getInstance().add(new FamilyPropertyEditor());
   }
 
   public void loop()

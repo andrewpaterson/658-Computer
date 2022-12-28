@@ -5,7 +5,7 @@ import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircui
 public class ClockProperties
     extends StandardIntegratedCircuitProperties
 {
-  public float frequency;
+  public float frequency_Hz;
   public boolean inverseOut;
 }
 

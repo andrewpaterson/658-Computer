@@ -38,7 +38,7 @@ public class ClockView
           name,
           family,
           explicitPowerPorts);
-    this.properties.frequency = frequency;
+    this.properties.frequency_Hz = frequency;
     this.properties.inverseOut = inverseOut;
     if (!inverseOut)
     {
@@ -68,7 +68,7 @@ public class ClockView
   protected ClockOscillator createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new ClockOscillator(circuitEditor.getCircuit(), properties.name,
-                               new ClockOscillatorPins(familyVoltageConfiguration, properties.inverseOut), properties.frequency);
+                               new ClockOscillatorPins(familyVoltageConfiguration, properties.inverseOut), properties.frequency_Hz);
   }
 
   @Override
@@ -143,7 +143,7 @@ public class ClockView
                          rotation,
                          properties.name,
                          properties.family.getFamily(),
-                         properties.frequency,
+                         properties.frequency_Hz,
                          saveEvents(),
                          savePorts(),
                          saveState(),

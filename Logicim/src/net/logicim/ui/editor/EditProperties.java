@@ -4,6 +4,9 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.component.DiscreteProperties;
 import net.logicim.ui.common.component.DiscreteView;
+import net.logicim.ui.common.table.Table;
+import net.logicim.ui.common.table.TableModel;
+import net.logicim.ui.common.table.TableValue;
 import net.logicim.ui.components.Button;
 import net.logicim.ui.components.CancelButton;
 import net.logicim.ui.util.GridBagUtil;
@@ -54,37 +57,30 @@ public class EditProperties
 
       JPanel topPanel = new JPanel(new GridBagLayout());
       contentPane.add(topPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
-      DefaultTableModel model = new DefaultTableModel()
-      {
-        @Override
-        public boolean isCellEditable(int row, int column)
-        {
-          if (column == 0)
-          {
-            return false;
-          }
-          else
-          {
-            return super.isCellEditable(row, column);
-          }
-        }
-      };
 
       DiscreteProperties properties = discreteView.getProperties();
       InstanceInspector instanceInspector = new InstanceInspector(properties);
-      List<Field> fields = new ArrayList<Field>(instanceInspector.getFields());
+      List<Field> fields = new ArrayList<>(instanceInspector.getFields());
       Collections.reverse(fields);
 
-      JTable table = new JTable(model);
+      Table table = new Table();
       table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+      TableModel model = table.getModel();
       model.addColumn("Property");
       model.addColumn("Value");
       for (Field field : fields)
       {
         Object fieldValue = instanceInspector.getFieldValue(field);
         String name = field.getName();
+        int index = name.indexOf('_');
+        if (index != -1)
+        {
+          String unit = " " + name.substring(index + 1);
+          name = name.substring(0, index);
+          fieldValue = fieldValue.toString() + unit;
+        }
         name = javaNameToHumanReadable(name);
-        model.addRow(new Object[]{name, fieldValue});
+        model.addRow(new Object[]{new TableValue(name), new TableValue(fieldValue)});
       }
 
       Vector<Vector> dataVector = model.getDataVector();

@@ -4,12 +4,9 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
-import net.logicim.ui.components.table.Table;
-import net.logicim.ui.components.table.TableModel;
-import net.logicim.ui.components.table.TableValue;
 import net.logicim.ui.components.button.Button;
 import net.logicim.ui.components.button.CancelButton;
-import net.logicim.ui.util.GridBagUtil;
+import net.logicim.ui.components.form.Form;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
@@ -19,11 +16,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
-import static java.awt.GridBagConstraints.BOTH;
+import static java.awt.GridBagConstraints.*;
 import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
+import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public class EditProperties
     extends SimulatorEditorAction
@@ -45,7 +42,7 @@ public class EditProperties
     if (discreteView != null)
     {
       JDialog dialog = new JDialog(frame, discreteView.getType() + " Properties", true);
-      Dimension dimension = new Dimension(640, 480);
+      Dimension dimension = new Dimension(360, 320);
       dialog.setSize(dimension);
       mousePosition.x -= 50;
       mousePosition.y -= 50;
@@ -55,18 +52,14 @@ public class EditProperties
       contentPane.setLayout(new GridBagLayout());
 
       JPanel topPanel = new JPanel(new GridBagLayout());
-      contentPane.add(topPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
+      contentPane.add(topPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
       DiscreteProperties properties = discreteView.getProperties();
       InstanceInspector instanceInspector = new InstanceInspector(properties);
       List<Field> fields = new ArrayList<>(instanceInspector.getFields());
       Collections.reverse(fields);
 
-      Table table = new Table();
-      table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-      TableModel model = table.getModel();
-      model.addColumn("Property");
-      model.addColumn("Value");
+      Form form = new Form();
       for (Field field : fields)
       {
         Object fieldValue = instanceInspector.getFieldValue(field);
@@ -79,16 +72,17 @@ public class EditProperties
           fieldValue = fieldValue.toString() + unit;
         }
         name = javaNameToHumanReadable(name);
-        model.addRow(new Object[]{new TableValue(name), new TableValue(fieldValue)});
+        JTextField textField = new JTextField();
+        textField.setText(String.valueOf(fieldValue));
+        form.add(new JLabel(name+ ":"), textField);
       }
 
-      Vector<Vector> dataVector = model.getDataVector();
-
-      topPanel.add(new JScrollPane(table), GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
+      topPanel.add(form, gridBagConstraints(0, 0, 1, 0, HORIZONTAL));
+      topPanel.add(new JPanel(), gridBagConstraints(0, 1, 0, 1, VERTICAL));
       topPanel.setBorder(new EmptyBorder(5, 5, 0, 5));
 
       JPanel bottomPanel = new JPanel();
-      contentPane.add(bottomPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 0, BOTH));
+      contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
 
       buildButtons(bottomPanel, new Button("Okay"), new CancelButton("Cancel", dialog));
 

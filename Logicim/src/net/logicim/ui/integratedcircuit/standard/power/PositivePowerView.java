@@ -10,7 +10,6 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.component.DiscreteProperties;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 

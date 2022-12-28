@@ -9,8 +9,8 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.component.DiscreteProperties;
-import net.logicim.ui.common.component.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
 
 import java.util.ArrayList;
 import java.util.List;

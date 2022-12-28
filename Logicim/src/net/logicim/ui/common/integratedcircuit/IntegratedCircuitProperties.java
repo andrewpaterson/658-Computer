@@ -1,4 +1,4 @@
-package net.logicim.ui.common.component;
+package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.domain.common.propagation.Family;
 

@@ -1,6 +1,6 @@
 package net.logicim.ui.integratedcircuit.standard.common;
 
-import net.logicim.ui.common.component.IntegratedCircuitProperties;
+import net.logicim.ui.common.integratedcircuit.IntegratedCircuitProperties;
 
 public class StandardIntegratedCircuitProperties
     extends IntegratedCircuitProperties

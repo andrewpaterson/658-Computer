@@ -1,4 +1,4 @@
-package net.logicim.ui.common.component;
+package net.logicim.ui.common.integratedcircuit;
 
 public class DiscreteProperties
 {

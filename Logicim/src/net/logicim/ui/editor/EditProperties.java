@@ -2,19 +2,18 @@ package net.logicim.ui.editor;
 
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.component.DiscreteProperties;
-import net.logicim.ui.common.component.DiscreteView;
-import net.logicim.ui.common.table.Table;
-import net.logicim.ui.common.table.TableModel;
-import net.logicim.ui.common.table.TableValue;
-import net.logicim.ui.components.Button;
-import net.logicim.ui.components.CancelButton;
+import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.components.table.Table;
+import net.logicim.ui.components.table.TableModel;
+import net.logicim.ui.components.table.TableValue;
+import net.logicim.ui.components.button.Button;
+import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

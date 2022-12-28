@@ -1,6 +1,6 @@
 package net.logicim.ui.util;
 
-import net.logicim.ui.components.Button;
+import net.logicim.ui.components.button.Button;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

@@ -1,4 +1,4 @@
-package net.logicim.ui.components;
+package net.logicim.ui.components.button;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package net.logicim.ui.common.component;
+package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.port.Port;

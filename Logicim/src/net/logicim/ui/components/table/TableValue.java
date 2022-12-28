@@ -1,4 +1,4 @@
-package net.logicim.ui.common.table;
+package net.logicim.ui.components.table;
 
 public class TableValue
 {

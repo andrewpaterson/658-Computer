@@ -18,9 +18,9 @@ import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.component.ComponentView;
-import net.logicim.ui.common.component.DiscreteView;
-import net.logicim.ui.common.component.IntegratedCircuitView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.shape.common.BoundingBox;
 

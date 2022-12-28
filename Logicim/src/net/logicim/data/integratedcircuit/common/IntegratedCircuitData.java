@@ -13,8 +13,8 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.component.DiscreteView;
-import net.logicim.ui.common.component.IntegratedCircuitView;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.Rotation;
 
 import java.util.HashMap;

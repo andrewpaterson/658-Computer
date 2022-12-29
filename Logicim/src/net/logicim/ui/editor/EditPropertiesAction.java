@@ -1,14 +1,19 @@
 package net.logicim.ui.editor;
 
+import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.Button;
+import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Field;
+import java.util.Map;
 
 import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
@@ -16,24 +21,38 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public class EditPropertiesAction
     extends SimulatorEditorAction
+    implements ButtonAction
 {
-  protected JFrame frame;
+  protected JFrame parentFrame;
+  protected PropertiesPanel propertiesPanel;
+  protected JDialog dialog;
+  protected DiscreteView<?> discreteView;
 
-  public EditPropertiesAction(SimulatorEditor editor, JFrame frame)
+  public EditPropertiesAction(SimulatorEditor editor, JFrame parentFrame)
   {
     super(editor);
-    this.frame = frame;
+    this.parentFrame = parentFrame;
+  }
+
+  @Override
+  public void executeAction()
+  {
+    DiscreteProperties properties = discreteView.getProperties();
+    InstanceInspector instanceInspector = new InstanceInspector(properties);
+    Map<Field, Object> map = propertiesPanel.getProperties();
+    dialog.setVisible(false);
+    dialog.dispose();
   }
 
   @Override
   public void execute()
   {
-    DiscreteView<?> discreteView = editor.getHoverDiscreteView();
+    discreteView = editor.getHoverDiscreteView();
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
 
     if (discreteView != null)
     {
-      JDialog dialog = new JDialog(frame, discreteView.getType() + " Properties", true);
+      dialog = new JDialog(parentFrame, discreteView.getType() + " Properties", true);
       Dimension dimension = new Dimension(360, 320);
       dialog.setSize(dimension);
       mousePosition.x -= 50;
@@ -44,12 +63,13 @@ public class EditPropertiesAction
       contentPane.setLayout(new GridBagLayout());
 
       DiscreteProperties properties = discreteView.getProperties();
-      contentPane.add(new PropertiesPanel(properties), gridBagConstraints(0, 0, 1, 1, BOTH));
+      propertiesPanel = new PropertiesPanel(properties);
+      contentPane.add(propertiesPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
       JPanel bottomPanel = new JPanel();
       contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
 
-      buildButtons(bottomPanel, new Button("Okay"), new CancelButton("Cancel", dialog));
+      buildButtons(bottomPanel, new ActionButton("Okay", this), new CancelButton("Cancel", dialog));
 
       SwingUtilities.invokeLater(new Runnable()
       {

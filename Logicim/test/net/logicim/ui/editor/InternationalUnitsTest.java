@@ -6,6 +6,12 @@ public class InternationalUnitsTest
 {
   public static void test()
   {
+    testToString();
+    testParse();
+  }
+
+  protected static void testToString()
+  {
     Validator.validate("1.00 Hz", InternationalUnits.toString(1, "Hz"));
     Validator.validate("10.0 Hz", InternationalUnits.toString(10, "Hz"));
     Validator.validate("100 Hz", InternationalUnits.toString(100, "Hz"));
@@ -35,6 +41,14 @@ public class InternationalUnitsTest
     Validator.validate("99.0 mHz", InternationalUnits.toString(0.099, "Hz"));
     Validator.validate("10.0 mHz", InternationalUnits.toString(0.01, "Hz"));
     Validator.validate("9.90 mHz", InternationalUnits.toString(0.0099, "Hz"));
+  }
+
+  protected static void testParse()
+  {
+    Validator.validate(1e6d, InternationalUnits.parse("1 MHz", "Hz"));
+    Validator.validate(1, InternationalUnits.parse("1 Hz", "Hz"));
+    Validator.validate(0, InternationalUnits.parse("0 Hz", "Hz"));
+    Validator.validate(1, InternationalUnits.parse("1", "Hz"));
   }
 }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TypeEditorFactory
 {
-  protected List<PropertyEditor> customEditors;
+  protected List<PropertyEditorFactory> customEditors;
 
   protected static TypeEditorFactory instance;
 
@@ -27,36 +27,23 @@ public class TypeEditorFactory
     return instance;
   }
 
-  public JComponent createEditor(Class<?> fieldClass, String fieldName, Object fieldValue)
+  public PropertyEditor createEditor(Class<?> fieldClass, String fieldName, Object fieldValue)
   {
     if (String.class.equals(fieldClass))
     {
-      JTextField textField = new JTextField();
-      textField.setText((String) fieldValue);
-      return textField;
+      return new TextPropertyEditor((String) fieldValue);
     }
     else if (Boolean.class.equals(fieldClass) || boolean.class.equals(fieldClass))
     {
-      JCheckBox checkBox = new JCheckBox();
-      checkBox.setSelected((Boolean) fieldValue);
-      return checkBox;
+      return new BooleanPropertyEditor((Boolean) fieldValue);
     }
     else if (Float.class.equals(fieldClass) || float.class.equals(fieldClass))
     {
-      int index = fieldName.indexOf('_');
-      String unit = "";
-      if (index != -1)
-      {
-        unit = fieldName.substring(index + 1);
-      }
-
-      JTextField textField = new JTextField();
-      textField.setText(InternationalUnits.toString((float) fieldValue, unit));
-      return textField;
+      return new FloatPropertyEditor((float) fieldValue, getUnit(fieldName));
     }
     else
     {
-      for (PropertyEditor customEditor : customEditors)
+      for (PropertyEditorFactory customEditor : customEditors)
       {
         if (customEditor.getPropertyClass().equals(fieldClass))
         {
@@ -68,9 +55,20 @@ public class TypeEditorFactory
     }
   }
 
-  public void add(PropertyEditor propertyEditor)
+  protected String getUnit(String fieldName)
   {
-    customEditors.add(propertyEditor);
+    int index = fieldName.indexOf('_');
+    String unit = "";
+    if (index != -1)
+    {
+      unit = fieldName.substring(index + 1);
+    }
+    return unit;
+  }
+
+  public void add(PropertyEditorFactory propertyEditorFactory)
+  {
+    customEditors.add(propertyEditorFactory);
   }
 }
 

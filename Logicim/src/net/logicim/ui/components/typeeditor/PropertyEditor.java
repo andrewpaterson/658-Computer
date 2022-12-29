@@ -2,10 +2,9 @@ package net.logicim.ui.components.typeeditor;
 
 import javax.swing.*;
 
-public abstract class PropertyEditor
+public interface PropertyEditor
 {
-  public abstract Class<?> getPropertyClass();
+  Object getValue();
 
-  public abstract JComponent createEditor(String fieldName, Object fieldValue);
+  JComponent getComponent();
 }
-

@@ -4,6 +4,9 @@ import net.logicim.common.SimulatorException;
 
 public class InternationalUnits
 {
+  public static char[] greaterPrefixes = {'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'};
+  public static char[] lesserPrefixes = {'m', 'u', 'n', 'p', 'f', 'a', 'z', 'y'};
+
   public static String toString(double f, String unit)
   {
     if (f > 0)
@@ -116,60 +119,86 @@ public class InternationalUnits
 
   protected static String getGreaterModifier(int scale)
   {
-    String modifier;
-    switch (scale)
+    if (scale == 0)
     {
-      case 0:
-        modifier = "";
-        break;
-      case 1:
-        modifier = "K";
-        break;
-      case 2:
-        modifier = "M";
-        break;
-      case 3:
-        modifier = "G";
-        break;
-      case 4:
-        modifier = "T";
-        break;
-      case 5:
-        modifier = "P";
-        break;
-      default:
-        throw new SimulatorException("Cannot get SI unit for [%s] digits.", scale * 3);
+      return "";
     }
-    return modifier;
+    else
+    {
+      int index = scale - 1;
+      if (index >= 0 && index < greaterPrefixes.length)
+      {
+        return "" + greaterPrefixes[scale - 1];
+      }
+      else
+      {
+        throw new SimulatorException("Cannot get SI magnitude for [%s] digits.", scale * 3);
+      }
+    }
   }
 
   protected static String getLesserModifier(int scale)
   {
-    String modifier;
-    switch (scale)
+    if (scale == 0)
     {
-      case 0:
-        modifier = "";
-        break;
-      case 1:
-        modifier = "m";
-        break;
-      case 2:
-        modifier = "u";
-        break;
-      case 3:
-        modifier = "n";
-        break;
-      case 4:
-        modifier = "p";
-        break;
-      case 5:
-        modifier = "f";
-        break;
-      default:
-        throw new SimulatorException("Cannot get SI unit for [%s] digits.", scale * 3);
+      return "";
     }
-    return modifier;
+    else
+    {
+      int index = scale - 1;
+      if (index >= 0 && index < lesserPrefixes.length)
+      {
+        return "" + lesserPrefixes[scale - 1];
+      }
+      else
+      {
+        throw new SimulatorException("Cannot get SI magnitude for [-%s] digits.", scale * 3);
+      }
+    }
+  }
+
+  public static double parse(String s, String unit)
+  {
+    s = s.trim();
+    int index = s.lastIndexOf(unit);
+    char prefix = ' ';
+    if (index != -1)
+    {
+      prefix = s.charAt(index - 1);
+      s = s.substring(0, index - 1);
+      s = s.trim();
+    }
+    double value = Double.parseDouble(s);
+    int magnitude = getPrefixMagnitude(prefix);
+    double multiplier = Math.pow(10, magnitude);
+    return value * multiplier;
+  }
+
+  protected static int getPrefixMagnitude(char prefix)
+  {
+    if (prefix != ' ')
+    {
+      for (int i = 0; i < greaterPrefixes.length; i++)
+      {
+        char greaterPrefix = greaterPrefixes[i];
+        if (prefix == greaterPrefix)
+        {
+          return (i + 1) * 3;
+        }
+      }
+
+      for (int i = 0; i < lesserPrefixes.length; i++)
+      {
+        char lesserPrefix = lesserPrefixes[i];
+        if (prefix == lesserPrefix)
+        {
+          return (-i - 1) * 3;
+        }
+      }
+
+      throw new SimulatorException("Cannot get SI magnitude for prefix [%s].", prefix);
+    }
+    return 0;
   }
 }
 

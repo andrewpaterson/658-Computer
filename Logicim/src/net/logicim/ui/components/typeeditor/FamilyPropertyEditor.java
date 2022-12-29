@@ -9,19 +9,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class FamilyPropertyEditor
-    extends PropertyEditor
+    implements PropertyEditor
 {
-  @Override
-  public Class<?> getPropertyClass()
-  {
-    return Family.class;
-  }
+  protected  JComboBox<String> comboBox;
 
-  @Override
-  public JComponent createEditor(String fieldName, Object fieldValue)
+  public FamilyPropertyEditor(Family family)
   {
-    JComboBox<String> comboBox = new JComboBox<>();
-    Family family = (Family) fieldValue;
+    comboBox = new JComboBox<>();
     List<String> names = FamilyStore.getInstance().findAllNames();
     Collections.sort(names);
     for (String familyName : names)
@@ -35,6 +29,18 @@ public class FamilyPropertyEditor
     Dimension preferredSize = comboBox.getPreferredSize();
     preferredSize.height -= 5;
     comboBox.setPreferredSize(preferredSize);
+  }
+
+  @Override
+  public Object getValue()
+  {
+    Family family = FamilyStore.getInstance().get((String) comboBox.getSelectedItem());
+    return family;
+  }
+
+  @Override
+  public JComponent getComponent()
+  {
     return comboBox;
   }
 }

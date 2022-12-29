@@ -48,7 +48,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Up, Up, Down));
     editor.addAction(new InputAction(new CreatePlacementView(editor, new GroundViewFactory()), KeyEvent.VK_G, Up, Up, Up));
     editor.addAction(new InputAction(new CreatePlacementView(editor, new PositivePowerViewFactory()), KeyEvent.VK_V, Up, Up, Up));
-    editor.addAction(new InputAction(new EditProperties(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
+    editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
   }
 }
 

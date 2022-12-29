@@ -1,6 +1,7 @@
 package net.logicim.ui.components.typeeditor;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.ui.editor.InternationalUnits;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -42,8 +43,15 @@ public class TypeEditorFactory
     }
     else if (Float.class.equals(fieldClass) || float.class.equals(fieldClass))
     {
+      int index = fieldName.indexOf('_');
+      String unit = "";
+      if (index != -1)
+      {
+        unit = fieldName.substring(index + 1);
+      }
+
       JTextField textField = new JTextField();
-      textField.setText(Float.toString((Float) fieldValue));
+      textField.setText(InternationalUnits.toString((float) fieldValue, unit));
       return textField;
     }
     else

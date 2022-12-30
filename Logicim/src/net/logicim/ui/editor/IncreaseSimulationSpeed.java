@@ -11,7 +11,7 @@ public class IncreaseSimulationSpeed
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     editor.increaseSimulationSpeed();
   }

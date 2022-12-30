@@ -34,7 +34,7 @@ public class EditPropertiesAction
   }
 
   @Override
-  public void executeAction()
+  public void executeButtonAction()
   {
     DiscreteProperties properties = discreteView.getProperties();
     InstanceInspector instanceInspector = new InstanceInspector(properties);
@@ -51,7 +51,7 @@ public class EditPropertiesAction
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     discreteView = editor.getHoverDiscreteView();
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();

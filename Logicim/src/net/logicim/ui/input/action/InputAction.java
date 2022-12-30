@@ -28,7 +28,7 @@ public class InputAction
 
   public void execute()
   {
-    action.execute();
+    action.executeEditorAction();
   }
 
   public boolean matched(int keyCode, boolean alt, boolean shift, boolean ctrl)

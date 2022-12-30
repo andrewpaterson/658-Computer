@@ -11,7 +11,7 @@ public class StopCurrent
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     editor.stopCurrentEdit();
   }

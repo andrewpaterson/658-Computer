@@ -11,7 +11,7 @@ public class ResetSimulation
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     editor.resetSimulation();
   }

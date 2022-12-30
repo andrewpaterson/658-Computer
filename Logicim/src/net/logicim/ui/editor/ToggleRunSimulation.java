@@ -11,7 +11,7 @@ public class ToggleRunSimulation
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     editor.toggleTunSimulation();
   }

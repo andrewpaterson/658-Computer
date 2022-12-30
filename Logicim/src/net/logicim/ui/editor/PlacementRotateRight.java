@@ -11,7 +11,7 @@ public class PlacementRotateRight
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     editor.placementRotateRight();
   }

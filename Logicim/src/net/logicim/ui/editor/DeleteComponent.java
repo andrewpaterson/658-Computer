@@ -11,7 +11,7 @@ public class DeleteComponent
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     editor.deleteComponent();
   }

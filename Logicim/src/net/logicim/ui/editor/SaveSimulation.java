@@ -13,7 +13,7 @@ public class SaveSimulation
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     panel.saveSimulation();
   }

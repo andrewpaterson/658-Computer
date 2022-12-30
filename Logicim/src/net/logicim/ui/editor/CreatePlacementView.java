@@ -17,7 +17,7 @@ public class CreatePlacementView
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(discreteViewClass);
     editor.createPlacementView(viewFactory);

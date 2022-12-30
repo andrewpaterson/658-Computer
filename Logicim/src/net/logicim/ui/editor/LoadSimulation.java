@@ -13,7 +13,7 @@ public class LoadSimulation
   }
 
   @Override
-  public void execute()
+  public void executeEditorAction()
   {
     panel.loadSimulation();
   }

@@ -3,7 +3,6 @@ package net.logicim.ui.integratedcircuit.standard.logic.xor;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -26,24 +25,6 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   protected ArcView arcViewFillLeft;
   protected PolygonView polygonViewFillRight;
   protected PolygonView polygonViewFillLeft;
-
-  public BaseXorGateView(CircuitEditor circuitEditor,
-                         int inputCount,
-                         Int2D position,
-                         Rotation rotation,
-                         String name,
-                         Family family,
-                         boolean explicitPowerPorts)
-  {
-    super(circuitEditor,
-          inputCount,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
-    createGraphics();
-  }
 
   public BaseXorGateView(CircuitEditor circuitEditor,
                          Int2D position,

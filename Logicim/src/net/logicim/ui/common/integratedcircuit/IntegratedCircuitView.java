@@ -9,7 +9,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.state.State;
@@ -27,22 +26,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     extends DiscreteView<PROPERTIES>
 {
   protected IC integratedCircuit;
-
-  public IntegratedCircuitView(CircuitEditor circuitEditor,
-                               Int2D position,
-                               Rotation rotation,
-                               String name,
-                               Family family)
-  {
-    super(circuitEditor, position, rotation, name);
-    if (family == null)
-    {
-      throw new SimulatorException("Family may not be null on IC [%s].", name);
-    }
-
-    this.properties.family = family;
-    circuitEditor.add(this);
-  }
 
   public IntegratedCircuitView(CircuitEditor circuitEditor,
                                Int2D position,

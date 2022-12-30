@@ -24,21 +24,10 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
   public PowerSourceView(CircuitEditor circuitEditor,
                          Int2D position,
                          Rotation rotation,
-                         String name)
-  {
-    super(circuitEditor,
-          position,
-          rotation,
-          name);
-    circuitEditor.add(this);
-  }
-
-  public PowerSourceView(CircuitEditor circuitEditor,
-                         Int2D position,
-                         Rotation rotation,
                          PROPERTIES properties)
   {
     super(circuitEditor, position, rotation, properties);
+    circuitEditor.add(this);
   }
 
   @Override

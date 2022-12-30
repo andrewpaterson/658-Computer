@@ -48,7 +48,7 @@ public class EditPropertiesAction
     {
       Field field = entry.getKey();
       Object value = entry.getValue();
-      instanceInspector.setFieldValue(field, value);
+      instanceInspector.setFieldValue(field, coerce(value, field.getType()));
     }
 
     CircuitEditor circuitEditor = editor.getCircuitEditor();
@@ -65,6 +65,48 @@ public class EditPropertiesAction
 
     dialog.setVisible(false);
     dialog.dispose();
+  }
+
+  protected Object coerce(Object value, Class<?> type)
+  {
+    if (value == null)
+    {
+      return null;
+    }
+
+    if (value instanceof Long)
+    {
+      if (type.equals(Integer.class) || type.equals(int.class))
+      {
+        return ((Long) value).intValue();
+      }
+    }
+
+    if (value instanceof Double)
+    {
+      if (type.equals(Float.class) || type.equals(float.class))
+      {
+        return ((Double) value).floatValue();
+      }
+    }
+
+    if (value instanceof Integer)
+    {
+      if (type.equals(Long.class) || type.equals(long.class))
+      {
+        return ((Integer) value).longValue();
+      }
+    }
+
+    if (value instanceof Float)
+    {
+      if (type.equals(Double.class) || type.equals(double.class))
+      {
+        return ((Float) value).doubleValue();
+      }
+    }
+
+    return value;
   }
 
   @Override

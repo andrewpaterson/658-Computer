@@ -3,7 +3,6 @@ package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
@@ -19,22 +18,6 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
     extends StandardIntegratedCircuitView<IC, BufferProperties>
 {
   protected PolygonView polygon;
-
-  public BaseInverterView(CircuitEditor circuitEditor,
-                          Int2D position,
-                          Rotation rotation,
-                          String name,
-                          Family family,
-                          boolean explicitPowerPorts)
-  {
-    super(circuitEditor,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
-    createGraphics();
-  }
 
   public BaseInverterView(CircuitEditor circuitEditor,
                           Int2D position,

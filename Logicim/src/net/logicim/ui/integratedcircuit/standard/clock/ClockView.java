@@ -3,7 +3,6 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -22,28 +21,6 @@ public class ClockView
     extends StandardIntegratedCircuitView<ClockOscillator, ClockProperties>
 {
   protected RectangleView rectangle;
-
-  public ClockView(CircuitEditor circuitEditor,
-                   Int2D position,
-                   Rotation rotation,
-                   String name,
-                   Family family,
-                   float frequency,
-                   boolean inverseOut,
-                   boolean explicitPowerPorts)
-  {
-    super(circuitEditor,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
-    this.properties.frequency_Hz = frequency;
-    this.properties.inverseOut = inverseOut;
-
-    createGraphics();
-    finaliseView();
-  }
 
   public ClockView(CircuitEditor circuitEditor,
                    Int2D position,

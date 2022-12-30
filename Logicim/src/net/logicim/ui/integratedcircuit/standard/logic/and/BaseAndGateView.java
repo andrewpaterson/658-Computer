@@ -3,7 +3,6 @@ package net.logicim.ui.integratedcircuit.standard.logic.and;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -24,24 +23,6 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   protected LineView lineView1;
   protected LineView lineView2;
   protected LineView lineView3;
-
-  public BaseAndGateView(CircuitEditor circuitEditor,
-                         int inputCount,
-                         Int2D position,
-                         Rotation rotation,
-                         String name,
-                         Family family,
-                         boolean explicitPowerPorts)
-  {
-    super(circuitEditor,
-          inputCount,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
-    createGraphics();
-  }
 
   public BaseAndGateView(CircuitEditor circuitEditor,
                          Int2D position,

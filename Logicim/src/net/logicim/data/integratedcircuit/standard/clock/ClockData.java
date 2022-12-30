@@ -9,6 +9,7 @@ import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.standard.clock.ClockProperties;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 
 import java.util.List;
@@ -52,11 +53,11 @@ public class ClockData
     return new ClockView(circuitEditor,
                          position,
                          rotation,
-                         name,
-                         FamilyStore.getInstance().get(family),
-                         frequency,
-                         inverseOut,
-                         explicitPowerPorts);
+                         new ClockProperties(name,
+                                             FamilyStore.getInstance().get(family),
+                                             explicitPowerPorts,
+                                             frequency,
+                                             inverseOut));
   }
 }
 

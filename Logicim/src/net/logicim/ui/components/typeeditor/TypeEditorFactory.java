@@ -39,6 +39,10 @@ public class TypeEditorFactory
     {
       return new FloatPropertyEditor((float) fieldValue, getUnit(fieldName));
     }
+    else if (Integer.class.equals(fieldClass) || int.class.equals(fieldClass))
+    {
+      return new IntegerPropertyEditor((int) fieldValue);
+    }
     else
     {
       for (PropertyEditorFactory customEditor : customEditors)

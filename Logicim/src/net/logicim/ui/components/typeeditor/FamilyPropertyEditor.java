@@ -11,7 +11,7 @@ import java.util.List;
 public class FamilyPropertyEditor
     implements PropertyEditor
 {
-  protected  JComboBox<String> comboBox;
+  protected JComboBox<String> comboBox;
 
   public FamilyPropertyEditor(Family family)
   {

@@ -4,10 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.line.LineView;
 

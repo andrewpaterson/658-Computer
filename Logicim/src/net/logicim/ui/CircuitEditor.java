@@ -984,7 +984,5 @@ public class CircuitEditor
   {
     return simulation;
   }
-
-
 }
 

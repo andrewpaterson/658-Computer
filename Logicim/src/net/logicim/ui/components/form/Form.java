@@ -1,11 +1,9 @@
 package net.logicim.ui.components.form;
 
-import net.logicim.ui.util.GridBagUtil;
-
 import javax.swing.*;
 import java.awt.*;
 
-import static net.logicim.ui.util.GridBagUtil.*;
+import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public class Form
     extends JPanel

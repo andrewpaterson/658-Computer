@@ -35,7 +35,6 @@ public class BufferView
     createPortViews(false);
   }
 
-
   @Override
   protected Buffer createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
   {

@@ -10,10 +10,11 @@ import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -27,6 +28,8 @@ import static net.logicim.ui.common.VoltageColour.clamp;
 public class OscilloscopeView
     extends IntegratedCircuitView<Oscilloscope, OscilloscopeProperties>
 {
+  protected Colours colours;
+
   protected int inputCount;
   protected int numberOfDivsWide;
   protected int divHeightInGrids;
@@ -212,7 +215,7 @@ public class OscilloscopeView
           }
         }
       }
-paintPorts(graphics, viewport, time);
+      paintPorts(graphics, viewport, time);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

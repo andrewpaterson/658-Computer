@@ -1,7 +1,7 @@
 package net.logicim.ui.common;
 
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
@@ -91,14 +91,13 @@ public abstract class VoltageColour
       return colours.getDisconnectedTrace();
     }
 
-
     TraceNet trace = port.getTrace();
     if (trace == null)
     {
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((LogicPort)port).getVoltageOut(time);
+        voltage = ((LogicPort) port).getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {

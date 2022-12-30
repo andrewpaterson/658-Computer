@@ -29,6 +29,7 @@ public class OrGateView
           explicitPowerPorts);
     finaliseView();
   }
+
   @Override
   protected void createPortViews()
   {

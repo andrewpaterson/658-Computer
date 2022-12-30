@@ -38,7 +38,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new CreatePlacementView(editor, new XorGateViewFactory()), KeyEvent.VK_X, Up, Down, Up));
     editor.addAction(new InputAction(new CreatePlacementView(editor, new XnorGateViewFactory()), KeyEvent.VK_X, Up, Down, Down));
     editor.addAction(new InputAction(new CreatePlacementView(editor, new BufferViewFactory()), KeyEvent.VK_N, Up, Down, Down));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new OscilloscopeViewFactory(editor.getColours())), KeyEvent.VK_P, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, new OscilloscopeViewFactory()), KeyEvent.VK_P, Up, Down, Up));
     editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Down));
     editor.addAction(new InputAction(new DeleteComponent(editor), KeyEvent.VK_DELETE, Up, Up, Up));
     editor.addAction(new InputAction(new IncreaseSimulationSpeed(editor), KeyEvent.VK_EQUALS, Up, Up, Up));

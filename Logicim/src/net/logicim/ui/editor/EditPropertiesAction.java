@@ -5,7 +5,6 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.components.button.ActionButton;
-import net.logicim.ui.components.button.Button;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.util.WindowSizer;
@@ -40,6 +39,13 @@ public class EditPropertiesAction
     DiscreteProperties properties = discreteView.getProperties();
     InstanceInspector instanceInspector = new InstanceInspector(properties);
     Map<Field, Object> map = propertiesPanel.getProperties();
+    for (Map.Entry<Field, Object> entry : map.entrySet())
+    {
+      Field field = entry.getKey();
+      Object value = entry.getValue();
+      instanceInspector.setFieldValue(field, value);
+    }
+
     dialog.setVisible(false);
     dialog.dispose();
   }

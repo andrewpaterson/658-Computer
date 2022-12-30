@@ -6,5 +6,5 @@ import net.logicim.ui.common.integratedcircuit.DiscreteView;
 
 public abstract class ViewFactory
 {
-  public abstract DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation);
+  public abstract DiscreteView<?> create(CircuitEditor circuitEditor, Int2D position, Rotation rotation);
 }

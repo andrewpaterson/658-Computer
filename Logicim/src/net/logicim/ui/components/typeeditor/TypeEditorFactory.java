@@ -1,9 +1,7 @@
 package net.logicim.ui.components.typeeditor;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.ui.editor.InternationalUnits;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 

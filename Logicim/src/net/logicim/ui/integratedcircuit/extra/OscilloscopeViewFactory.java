@@ -3,8 +3,6 @@ package net.logicim.ui.integratedcircuit.extra;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Units;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ViewFactory;
 import net.logicim.ui.common.defaults.DefaultFamily;
@@ -12,15 +10,13 @@ import net.logicim.ui.common.defaults.DefaultFamily;
 public class OscilloscopeViewFactory
     extends ViewFactory
 {
-  private Colours colours;
 
-  public OscilloscopeViewFactory(Colours colours)
+  public OscilloscopeViewFactory()
   {
-    this.colours = colours;
   }
 
   @Override
-  public DiscreteView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public OscilloscopeView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
     return new OscilloscopeView(circuitEditor,
                                 4,

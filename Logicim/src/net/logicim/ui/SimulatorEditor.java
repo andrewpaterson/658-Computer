@@ -501,7 +501,7 @@ public class SimulatorEditor
           if (componentView instanceof TraceView)
           {
             traceDeleted = true;
-            updatedPortViews.addAll( circuitEditor.deleteTrace((TraceView) componentView));
+            updatedPortViews.addAll(circuitEditor.deleteTrace((TraceView) componentView));
           }
         }
 

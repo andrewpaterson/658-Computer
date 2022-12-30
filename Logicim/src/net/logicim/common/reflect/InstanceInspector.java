@@ -69,6 +69,11 @@ public class InstanceInspector
       return;
     }
 
+    setFieldValue(field, value);
+  }
+
+  public void setFieldValue(Field field, Object value)
+  {
     try
     {
       field.set(instance, value);

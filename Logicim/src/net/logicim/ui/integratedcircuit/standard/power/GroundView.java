@@ -23,16 +23,20 @@ public class GroundView
   public GroundView(CircuitEditor circuitEditor,
                     Int2D position,
                     Rotation rotation,
-                    String name)
+                    GroundProperties properties)
   {
-    super(circuitEditor, position, rotation, name);
+    super(circuitEditor, position, rotation, properties);
+    createGraphics();
+    finaliseView();
+  }
 
+  protected void createGraphics()
+  {
     float yOffset = 0.5f;
     line1 = new LineView(this, new Float2D(-0.9f, yOffset), new Float2D(0.9f, yOffset));
     line2 = new LineView(this, new Float2D(-0.6f, yOffset + 0.333f), new Float2D(0.6f, yOffset + 0.333f));
     line3 = new LineView(this, new Float2D(-0.3f, yOffset + 0.666f), new Float2D(0.3f, yOffset + 0.666f));
     line4 = new LineView(this, new Float2D(0, 0), new Float2D(0, yOffset));
-    finaliseView();
   }
 
   @Override

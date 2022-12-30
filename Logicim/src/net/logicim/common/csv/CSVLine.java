@@ -18,7 +18,7 @@ public class CSVLine
   public void append(int character)
   {
     lastEmpty = false;
-    getCSVLineValues().appendChar((char)character);
+    getCSVLineValues().appendChar((char) character);
   }
 
   @Override

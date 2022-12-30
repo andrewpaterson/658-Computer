@@ -4,12 +4,11 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Units;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
-import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 import net.logicim.ui.common.defaults.DefaultFamily;
+import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 
 public class OscilloscopeViewFactory
-    extends ViewFactory
+    extends ViewFactory<OscilloscopeView, OscilloscopeProperties>
 {
 
   public OscilloscopeViewFactory()
@@ -19,20 +18,26 @@ public class OscilloscopeViewFactory
   @Override
   public OscilloscopeView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new OscilloscopeView(circuitEditor,
-                                4,
-                                32,
-                                4,
-                                30,
-                                6 * Units.GHz,
-                                position,
-                                rotation,
-                                "",
-                                DefaultFamily.get());
+    return create(circuitEditor,
+                  position,
+                  rotation,
+                  new OscilloscopeProperties("",
+                                             DefaultFamily.get(),
+                                             4,
+                                             32,
+                                             4,
+                                             30,
+                                             6 * Units.GHz));
   }
 
   @Override
-  public Class<? extends DiscreteView<?>> getViewClass()
+  public OscilloscopeView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, OscilloscopeProperties properties)
+  {
+    return new OscilloscopeView(circuitEditor, position, rotation, properties);
+  }
+
+  @Override
+  public Class<OscilloscopeView> getViewClass()
   {
     return OscilloscopeView.class;
   }

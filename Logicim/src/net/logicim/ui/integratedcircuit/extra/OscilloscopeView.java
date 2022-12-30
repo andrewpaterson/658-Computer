@@ -4,13 +4,11 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -28,14 +26,6 @@ import static net.logicim.ui.common.VoltageColour.clamp;
 public class OscilloscopeView
     extends IntegratedCircuitView<Oscilloscope, OscilloscopeProperties>
 {
-  protected Colours colours;
-
-  protected int inputCount;
-  protected int numberOfDivsWide;
-  protected int divHeightInGrids;
-  protected int samplesPerDiv;
-
-  protected float samplingFrequency;
   protected List<ArcView> frameArcViews;
   protected List<RectangleView> frameRectangleViews;
   protected List<LineView> frameLineViews;
@@ -43,24 +33,15 @@ public class OscilloscopeView
   protected RectangleView rectangleView;
   protected float outerWidth;
 
-  public OscilloscopeView(CircuitEditor circuitEditor,
-                          int inputCount,
-                          int numberOfDivsWide,
-                          int divHeightInGrids,
-                          int samplesPerDiv,
-                          float samplingFrequency,
-                          Int2D position,
-                          Rotation rotation,
-                          String name,
-                          Family family)
+  public OscilloscopeView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, OscilloscopeProperties properties)
   {
-    super(circuitEditor, position, rotation, name, family);
-    this.inputCount = inputCount;
-    this.numberOfDivsWide = numberOfDivsWide;
-    this.divHeightInGrids = divHeightInGrids;
-    this.samplesPerDiv = samplesPerDiv;
-    this.samplingFrequency = samplingFrequency;
+    super(circuitEditor, position, rotation, properties);
+    createGraphics();
+    finaliseView();
+  }
 
+  protected void createGraphics()
+  {
     frameRectangleViews = new ArrayList<>();
     frameArcViews = new ArrayList<>();
     frameLineViews = new ArrayList<>();
@@ -68,33 +49,31 @@ public class OscilloscopeView
     Color frameColour = new Color(0, 208, 208);
 
     outerWidth = 1.0f;
-    float bottom = (inputCount - 1) * divHeightInGrids;
+    float bottom = (properties.inputCount - 1) * properties.divHeightInGrids;
     int top = -4;
     frameArcViews.add(createArcView(frameColour, outerWidth, 0, top, 90));
-    frameArcViews.add(createArcView(frameColour, outerWidth, numberOfDivsWide, top, 0));
-    frameArcViews.add(createArcView(frameColour, outerWidth, numberOfDivsWide, bottom, 270));
+    frameArcViews.add(createArcView(frameColour, outerWidth, properties.numberOfDivsWide, top, 0));
+    frameArcViews.add(createArcView(frameColour, outerWidth, properties.numberOfDivsWide, bottom, 270));
     frameArcViews.add(createArcView(frameColour, outerWidth, 0, bottom, 180));
 
-    frameRectangleViews.add(createRectangleView(frameColour, outerWidth - 0.1f, top, numberOfDivsWide + outerWidth + 0.1f, bottom + outerWidth * 2));
+    frameRectangleViews.add(createRectangleView(frameColour, outerWidth - 0.1f, top, properties.numberOfDivsWide + outerWidth + 0.1f, bottom + outerWidth * 2));
     frameRectangleViews.add(createRectangleView(frameColour, 0, top + outerWidth - 0.1f, outerWidth, bottom + outerWidth + 0.1f));
-    frameRectangleViews.add(createRectangleView(frameColour, numberOfDivsWide + outerWidth, top + outerWidth - 0.1f, numberOfDivsWide + outerWidth * 2, bottom + outerWidth + 0.1f));
+    frameRectangleViews.add(createRectangleView(frameColour, properties.numberOfDivsWide + outerWidth, top + outerWidth - 0.1f, properties.numberOfDivsWide + outerWidth * 2, bottom + outerWidth + 0.1f));
 
-    frameLineViews.add(new LineView(this, new Float2D(outerWidth, top), new Float2D(numberOfDivsWide + outerWidth, top)));
+    frameLineViews.add(new LineView(this, new Float2D(outerWidth, top), new Float2D(properties.numberOfDivsWide + outerWidth, top)));
     frameLineViews.add(new LineView(this, new Float2D(0, top + outerWidth), new Float2D(0, bottom + outerWidth)));
-    frameLineViews.add(new LineView(this, new Float2D(outerWidth, bottom + outerWidth * 2), new Float2D(numberOfDivsWide + outerWidth, bottom + outerWidth * 2)));
-    frameLineViews.add(new LineView(this, new Float2D(numberOfDivsWide + outerWidth * 2, top + outerWidth), new Float2D(numberOfDivsWide + outerWidth * 2, bottom + outerWidth)));
+    frameLineViews.add(new LineView(this, new Float2D(outerWidth, bottom + outerWidth * 2), new Float2D(properties.numberOfDivsWide + outerWidth, bottom + outerWidth * 2)));
+    frameLineViews.add(new LineView(this, new Float2D(properties.numberOfDivsWide + outerWidth * 2, top + outerWidth), new Float2D(properties.numberOfDivsWide + outerWidth * 2, bottom + outerWidth)));
 
-    rectangleView = new RectangleView(this, new Float2D(outerWidth * 1 - 0.2f, -outerWidth * 3), new Float2D(numberOfDivsWide + outerWidth + 0.2f, bottom + outerWidth), true, true);
+    rectangleView = new RectangleView(this, new Float2D(outerWidth * 1 - 0.2f, -outerWidth * 3), new Float2D(properties.numberOfDivsWide + outerWidth + 0.2f, bottom + outerWidth), true, true);
     rectangleView.setFillColour(Color.WHITE);
-
-    finaliseView();
   }
 
   protected void createPortViews()
   {
-    for (int portNumber = 0; portNumber < inputCount; portNumber++)
+    for (int portNumber = 0; portNumber < properties.inputCount; portNumber++)
     {
-      new PortView(this, integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * divHeightInGrids));
+      new PortView(this, integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * properties.divHeightInGrids));
     }
   }
 
@@ -117,10 +96,10 @@ public class OscilloscopeView
   {
     return new Oscilloscope(circuitEditor.getCircuit(),
                             properties.name,
-                            new OscilloscopePins(inputCount),
-                            samplingFrequency,
-                            numberOfDivsWide,
-                            samplesPerDiv,
+                            new OscilloscopePins(properties.inputCount),
+                            properties.samplingFrequency_Hz,
+                            properties.numberOfDivsWide,
+                            properties.samplesPerDiv,
                             circuitEditor.getColours());
   }
 
@@ -156,12 +135,12 @@ public class OscilloscopeView
         int[][] colourGrid = state.getColour();
         int tickPosition = state.getTickPosition();
 
-        int tickX = viewport.transformGridToScreenSpaceX(1 + ((float) tickPosition / this.samplesPerDiv) + position.x);
+        int tickX = viewport.transformGridToScreenSpaceX(1 + ((float) tickPosition / properties.samplesPerDiv) + position.x);
 
         graphics.setStroke(viewport.getStroke(viewport.getLineWidth() / 2));
         Color oscilloscopeReferenceColour = new Color(232, 232, 232);
         graphics.setColor(oscilloscopeReferenceColour);
-        float bottom = (inputCount - 1) * divHeightInGrids + outerWidth - 0.25f;
+        float bottom = (properties.inputCount - 1) * properties.divHeightInGrids + outerWidth - 0.25f;
         float top = -outerWidth * 3.0f + 0.25f;
 
         graphics.drawLine(tickX, viewport.transformGridToScreenSpaceY(top + position.y), tickX, viewport.transformGridToScreenSpaceY(bottom + position.y));
@@ -174,7 +153,7 @@ public class OscilloscopeView
           int[] colourLine = colourGrid[input];
 
           int portX1 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1);
-          int portX2 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + numberOfDivsWide);
+          int portX2 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + properties.numberOfDivsWide);
           int lineY = viewport.transformGridToScreenSpaceY(port.getGridPosition().y);
           graphics.setColor(oscilloscopeReferenceColour);
           graphics.drawLine(portX1, lineY, portX2, lineY);
@@ -206,9 +185,9 @@ public class OscilloscopeView
                             clamp((int) (c.getBlue() * colourFraction + 255 * whiteFraction)));
             }
 
-            int portX = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1 + ((float) i / this.samplesPerDiv));
-            int portY1 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (minimumVoltage / 8.0f) * divHeightInGrids);
-            int portY2 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (maximumVoltage / 8.0f) * divHeightInGrids);
+            int portX = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1 + ((float) i / properties.samplesPerDiv));
+            int portY1 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (minimumVoltage / 8.0f) * properties.divHeightInGrids);
+            int portY2 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (maximumVoltage / 8.0f) * properties.divHeightInGrids);
 
             graphics.setColor(c);
             graphics.drawRect(portX, portY2, 1, portY1 - portY2 + 1);
@@ -251,11 +230,11 @@ public class OscilloscopeView
                                 saveEvents(),
                                 savePorts(),
                                 saveState(),
-                                inputCount,
-                                numberOfDivsWide,
-                                samplesPerDiv,
-                                divHeightInGrids,
-                                samplingFrequency);
+                                properties.inputCount,
+                                properties.numberOfDivsWide,
+                                properties.samplesPerDiv,
+                                properties.divHeightInGrids,
+                                properties.samplingFrequency_Hz);
   }
 
   @Override
@@ -267,7 +246,7 @@ public class OscilloscopeView
   public OscilloscopeState saveState()
   {
     OscilloscopeState state = getIntegratedCircuit().getState();
-    return new OscilloscopeState(numberOfDivsWide * samplesPerDiv,
+    return new OscilloscopeState(properties.numberOfDivsWide * properties.samplesPerDiv,
                                  cloneFloat2DArray(state.getMinVoltage()),
                                  cloneFloat2DArray(state.getMaxVoltage()),
                                  cloneInt2DArray(state.getColour()),

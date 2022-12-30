@@ -44,6 +44,20 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     circuitEditor.add(this);
   }
 
+  public IntegratedCircuitView(CircuitEditor circuitEditor,
+                               Int2D position,
+                               Rotation rotation,
+                               PROPERTIES properties)
+  {
+    super(circuitEditor, position, rotation, properties);
+    if (properties.family == null)
+    {
+      throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
+    }
+
+    circuitEditor.add(this);
+  }
+
   protected void createIntegratedCircuit()
   {
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);

@@ -28,6 +28,14 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     this.properties.inputCount = inputCount;
   }
 
+  public LogicGateView(CircuitEditor circuitEditor,
+                       Int2D position,
+                       Rotation rotation,
+                       LogicGateProperties properties)
+  {
+    super(circuitEditor, position, rotation, properties);
+  }
+
   protected void createPortViews(boolean negateOutput, int inputOffset)
   {
     int start;

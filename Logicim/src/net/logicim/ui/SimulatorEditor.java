@@ -540,5 +540,10 @@ public class SimulatorEditor
   {
     return viewport.getColours();
   }
+
+  public CircuitEditor getCircuitEditor()
+  {
+    return circuitEditor;
+  }
 }
 

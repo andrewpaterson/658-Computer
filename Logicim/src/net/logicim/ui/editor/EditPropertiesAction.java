@@ -1,12 +1,17 @@
 package net.logicim.ui.editor;
 
 import net.logicim.common.reflect.InstanceInspector;
+import net.logicim.common.type.Int2D;
+import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
+import net.logicim.ui.integratedcircuit.factory.ViewFactory;
+import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
@@ -45,6 +50,18 @@ public class EditPropertiesAction
       Object value = entry.getValue();
       instanceInspector.setFieldValue(field, value);
     }
+
+    CircuitEditor circuitEditor = editor.getCircuitEditor();
+
+    Rotation rotation = discreteView.getRotation();
+    Int2D position = discreteView.getPosition();
+
+    Class<? extends DiscreteView<?>> aClass = (Class<? extends DiscreteView<?>>) discreteView.getClass();
+    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
+    DiscreteView<?> newDiscreteView = viewFactory.create(circuitEditor, position, rotation, properties);
+
+    circuitEditor.deleteDiscreteView(this.discreteView);
+    circuitEditor.placeDiscreteView(newDiscreteView);
 
     dialog.setVisible(false);
     dialog.dispose();

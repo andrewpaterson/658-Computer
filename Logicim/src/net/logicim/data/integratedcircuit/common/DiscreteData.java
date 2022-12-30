@@ -7,9 +7,9 @@ import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
 
 import java.util.List;
 

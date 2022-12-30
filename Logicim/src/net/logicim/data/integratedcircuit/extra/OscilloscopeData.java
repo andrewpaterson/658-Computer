@@ -9,6 +9,7 @@ import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.extra.OscilloscopeProperties;
 import net.logicim.ui.integratedcircuit.extra.OscilloscopeView;
 
 import java.util.List;
@@ -51,15 +52,15 @@ public class OscilloscopeData
   public OscilloscopeView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     return new OscilloscopeView(circuitEditor,
-                                inputCount,
-                                numberOfDivsWide,
-                                divHeightInGrids,
-                                samplesPerDiv,
-                                sampleFrequency,
                                 position,
                                 rotation,
-                                name,
-                                FamilyStore.getInstance().get(family));
+                                new OscilloscopeProperties(name,
+                                                           FamilyStore.getInstance().get(family),
+                                                           inputCount,
+                                                           numberOfDivsWide,
+                                                           divHeightInGrids,
+                                                           samplesPerDiv,
+                                                           sampleFrequency));
   }
 }
 

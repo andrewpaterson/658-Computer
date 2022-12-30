@@ -7,6 +7,7 @@ import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateView;
 import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -40,7 +41,20 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
           name,
           family,
           explicitPowerPorts);
+    createGraphics();
+  }
 
+  public BaseOrGateView(CircuitEditor circuitEditor,
+                        Int2D position,
+                        Rotation rotation,
+                        LogicGateProperties properties)
+  {
+    super(circuitEditor, position, rotation, properties);
+    createGraphics();
+  }
+
+  protected void createGraphics()
+  {
     arcViewRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 357, 61, true, false);
     arcViewLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 61, true, false);
     arcViewBottom = new ArcView(this, new Float2D(0, 3.5f), 3, 61, 58, true, false);

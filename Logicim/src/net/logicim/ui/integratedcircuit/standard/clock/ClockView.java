@@ -40,7 +40,28 @@ public class ClockView
           explicitPowerPorts);
     this.properties.frequency_Hz = frequency;
     this.properties.inverseOut = inverseOut;
-    if (!inverseOut)
+
+    createGraphics();
+    finaliseView();
+  }
+
+  public ClockView(CircuitEditor circuitEditor,
+                   Int2D position,
+                   Rotation rotation,
+                   ClockProperties properties)
+  {
+    super(circuitEditor,
+          position,
+          rotation,
+          properties);
+
+    createGraphics();
+    finaliseView();
+  }
+
+  protected void createGraphics()
+  {
+    if (!properties.inverseOut)
     {
       rectangle = new RectangleView(this, 2, 2, true, true);
     }
@@ -48,8 +69,6 @@ public class ClockView
     {
       rectangle = new RectangleView(this, new Float2D(-0.5f, -1), new Float2D(2.5f, 1), true, true);
     }
-
-    finaliseView();
   }
 
   @Override

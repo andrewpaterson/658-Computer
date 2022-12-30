@@ -48,6 +48,23 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     this.properties.name = name;
   }
 
+  public DiscreteView(CircuitEditor circuitEditor,
+                      Int2D position,
+                      Rotation rotation,
+                      PROPERTIES properties)
+  {
+    this.properties = properties;
+
+    this.circuitEditor = circuitEditor;
+    this.position = position.clone();
+    this.rotation = rotation;
+    this.boundingBox = new BoundingBox();
+    this.selectionBox = new BoundingBox();
+    this.shapes = new ArrayList<>();
+    this.finalised = false;
+    this.ports = new ArrayList<>();
+  }
+
   public void setPosition(int x, int y)
   {
     this.position.set(x, y);

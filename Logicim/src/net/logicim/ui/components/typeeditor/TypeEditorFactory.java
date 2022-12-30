@@ -69,7 +69,7 @@ public class TypeEditorFactory
     customEditors.add(propertyEditorFactory);
   }
 
-  public void addAll(PropertyEditorFactory ... propertyEditorFactories)
+  public void addAll(PropertyEditorFactory... propertyEditorFactories)
   {
     for (PropertyEditorFactory propertyEditorFactory : propertyEditorFactories)
     {

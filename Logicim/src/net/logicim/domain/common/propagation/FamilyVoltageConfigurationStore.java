@@ -160,20 +160,20 @@ public class FamilyVoltageConfigurationStore
 
     return new VoltageConfiguration(
         vcc,
-                                    vil, vih,
-                                    voh, vol,
-                                    ns(tPHL.typicalDelay / 2),
-                                    ns(tPHL.typicalDelay),
-                                    ns(tPLH.typicalDelay / 2),
-                                    ns(tPLH.typicalDelay),
-                                    ns(tPHZ.typicalDelay / 2),
-                                    ns(tPHZ.typicalDelay),
-                                    ns(tPLZ.typicalDelay / 2),
-                                    ns(tPLZ.typicalDelay),
-                                    ns(tPZH.typicalDelay / 2),
-                                    ns(tPZH.typicalDelay),
-                                    ns(tPZL.typicalDelay / 2),
-                                    ns(tPZL.typicalDelay));
+        vil, vih,
+        voh, vol,
+        ns(tPHL.typicalDelay / 2),
+        ns(tPHL.typicalDelay),
+        ns(tPLH.typicalDelay / 2),
+        ns(tPLH.typicalDelay),
+        ns(tPHZ.typicalDelay / 2),
+        ns(tPHZ.typicalDelay),
+        ns(tPLZ.typicalDelay / 2),
+        ns(tPLZ.typicalDelay),
+        ns(tPZH.typicalDelay / 2),
+        ns(tPZH.typicalDelay),
+        ns(tPZL.typicalDelay / 2),
+        ns(tPZL.typicalDelay));
   }
 
   static Map<String, Map<Float, List<VoltagePropagationTimeRow>>> readVoltagePropagationMap(File file)

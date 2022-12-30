@@ -7,6 +7,7 @@ import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.standard.power.PositivePowerProperties;
 import net.logicim.ui.integratedcircuit.standard.power.PositivePowerView;
 
 import java.util.List;
@@ -29,7 +30,10 @@ public class PositivePowerPortData
   @Override
   protected PositivePowerView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    return new PositivePowerView(circuitEditor, position, rotation, name, voltage);
+    return new PositivePowerView(circuitEditor,
+                                 position,
+                                 rotation,
+                                 new PositivePowerProperties(name, voltage));
   }
 
   @Override

@@ -2,7 +2,6 @@ package net.logicim.ui.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferData;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
@@ -15,16 +14,9 @@ public class BufferView
   public BufferView(CircuitEditor circuitEditor,
                     Int2D position,
                     Rotation rotation,
-                    String name,
-                    Family family,
-                    boolean explicitPowerPorts)
+                    BufferProperties properties)
   {
-    super(circuitEditor,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
+    super(circuitEditor, position, rotation, properties);
     finaliseView();
   }
 

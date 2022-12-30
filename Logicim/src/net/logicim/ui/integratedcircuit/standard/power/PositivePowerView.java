@@ -24,17 +24,20 @@ public class PositivePowerView
   public PositivePowerView(CircuitEditor circuitEditor,
                            Int2D position,
                            Rotation rotation,
-                           String name,
-                           float voltage)
+                           PositivePowerProperties properties)
   {
-    super(circuitEditor, position, rotation, name);
-    this.properties.voltage = voltage;
+    super(circuitEditor, position, rotation, properties);
+    createGraphics();
+    finaliseView();
+  }
+
+  protected void createGraphics()
+  {
     float yTop = 0.4f;
     float yBottom = -1f;
     float radius = 0.9f;
     rectangle = new RectangleView(this, new Float2D(-radius, yBottom + 0.4f), new Float2D(radius, yTop), true, true);
     polygonView = new PolygonView(this, true, true, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
-    finaliseView();
   }
 
   protected void createPowerSource()

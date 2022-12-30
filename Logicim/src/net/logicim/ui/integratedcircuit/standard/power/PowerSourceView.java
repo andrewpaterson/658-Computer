@@ -33,6 +33,14 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
     circuitEditor.add(this);
   }
 
+  public PowerSourceView(CircuitEditor circuitEditor,
+                         Int2D position,
+                         Rotation rotation,
+                         PROPERTIES properties)
+  {
+    super(circuitEditor, position, rotation, properties);
+  }
+
   @Override
   protected void finaliseView()
   {

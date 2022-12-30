@@ -2,31 +2,22 @@ package net.logicim.ui.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.or.NorGateData;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.NorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class NorGateView
     extends BaseOrGateView<NorGate>
 {
   public NorGateView(CircuitEditor circuitEditor,
-                     int inputCount,
                      Int2D position,
                      Rotation rotation,
-                     String name,
-                     Family family,
-                     boolean explicitPowerPorts)
+                     LogicGateProperties properties)
   {
-    super(circuitEditor,
-          inputCount,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
+    super(circuitEditor, position, rotation, properties);
     finaliseView();
   }
 

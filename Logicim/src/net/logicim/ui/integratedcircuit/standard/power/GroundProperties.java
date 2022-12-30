@@ -5,4 +5,12 @@ import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 public class GroundProperties
     extends DiscreteProperties
 {
+  public GroundProperties()
+  {
+  }
+
+  public GroundProperties(String name)
+  {
+    super(name);
+  }
 }

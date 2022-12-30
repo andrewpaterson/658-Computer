@@ -7,6 +7,7 @@ import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateView;
 import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -41,7 +42,20 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
           name,
           family,
           explicitPowerPorts);
+    createGraphics();
+  }
 
+  public BaseXorGateView(CircuitEditor circuitEditor,
+                         Int2D position,
+                         Rotation rotation,
+                         LogicGateProperties properties)
+  {
+    super(circuitEditor, position, rotation, properties);
+    createGraphics();
+  }
+
+  protected void createGraphics()
+  {
     float yTop = 0.6f;
     float yBottom = 3.5f;
     float yMiddle = 0.9f;

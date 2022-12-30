@@ -1,7 +1,7 @@
 package net.logicim.domain.common.trace;
 
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.voltage.Voltage;

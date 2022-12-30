@@ -1,8 +1,6 @@
 package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.trace.TraceValue;
 
 public class VoltageConfiguration

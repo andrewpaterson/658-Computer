@@ -2,31 +2,22 @@ package net.logicim.ui.integratedcircuit.standard.logic.and;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.and.AndGateData;
-import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class AndGateView
     extends BaseAndGateView<AndGate>
 {
   public AndGateView(CircuitEditor circuitEditor,
-                     int inputCount,
                      Int2D position,
                      Rotation rotation,
-                     String name,
-                     Family family,
-                     boolean explicitPowerPorts)
+                     LogicGateProperties properties)
   {
-    super(circuitEditor,
-          inputCount,
-          position,
-          rotation,
-          name,
-          family,
-          explicitPowerPorts);
+    super(circuitEditor, position, rotation, properties);
     finaliseView();
   }
 

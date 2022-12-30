@@ -114,7 +114,7 @@ public class SlewEvent
     {
       return null;
     }
- }
+  }
 
   long calculateSlewTime(VoltageConfigurationSource voltageConfiguration, float vcc)
   {

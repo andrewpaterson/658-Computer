@@ -7,6 +7,7 @@ import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.integratedcircuit.standard.power.GroundProperties;
 import net.logicim.ui.integratedcircuit.standard.power.GroundView;
 
 import java.util.List;
@@ -25,7 +26,10 @@ public class GroundPortData
 
   protected GroundView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    return new GroundView(circuitEditor, position, rotation, name);
+    return new GroundView(circuitEditor,
+                          position,
+                          rotation,
+                          new GroundProperties(name));
   }
 
   @Override

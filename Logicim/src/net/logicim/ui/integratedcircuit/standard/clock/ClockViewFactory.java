@@ -3,30 +3,35 @@ package net.logicim.ui.integratedcircuit.standard.clock;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
-import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 import net.logicim.ui.common.defaults.DefaultFamily;
+import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 
 import static net.logicim.domain.common.Units.MHz;
 
 public class ClockViewFactory
-    extends ViewFactory
+    extends ViewFactory<ClockView, ClockProperties>
 {
   @Override
   public ClockView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new ClockView(circuitEditor,
-                         position,
-                         rotation,
-                         "",
-                         DefaultFamily.get(),
-                         25 * MHz,
-                         false,
-                         true);
+    return create(circuitEditor,
+                  position,
+                  rotation,
+                  new ClockProperties("",
+                                      DefaultFamily.get(),
+                                      true,
+                                      25 * MHz,
+                                      false));
   }
 
   @Override
-  public Class<? extends DiscreteView<?>> getViewClass()
+  public ClockView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, ClockProperties properties)
+  {
+    return new ClockView(circuitEditor, position, rotation, properties);
+  }
+
+  @Override
+  public Class<ClockView> getViewClass()
   {
     return ClockView.class;
   }

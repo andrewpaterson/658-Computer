@@ -25,6 +25,11 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
     this.properties.explicitPowerPorts = explicitPowerPorts;
   }
 
+  public StandardIntegratedCircuitView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
+  {
+    super(circuitEditor, position, rotation, properties);
+  }
+
   protected void createPortViews()
   {
     if (properties.explicitPowerPorts)
@@ -44,8 +49,16 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);
-    vccLine.paint(graphics, viewport);
-    gndLine.paint(graphics, viewport);
+
+    if (vccLine != null)
+    {
+      vccLine.paint(graphics, viewport);
+    }
+
+    if (gndLine != null)
+    {
+      gndLine.paint(graphics, viewport);
+    }
   }
 }
 

@@ -29,7 +29,7 @@ public class XorGatePins
     {
       LogicPort port = new LogicPort(Input,
                                      this,
-                           "Input " + i,
+                                     "Input " + i,
                                      voltageConfiguration);
       inputs.add(port);
     }

@@ -6,4 +6,15 @@ public class IntegratedCircuitProperties
     extends DiscreteProperties
 {
   public Family family;
+
+  public IntegratedCircuitProperties()
+  {
+    family = null;
+  }
+
+  public IntegratedCircuitProperties(String name, Family family)
+  {
+    super(name);
+    this.family = family;
+  }
 }

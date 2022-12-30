@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class PortView
 {
-  protected DiscreteView owner;
+  protected DiscreteView<?> owner;
   protected Port port;
   protected Int2D positionRelativeToIC;
 
@@ -40,7 +40,7 @@ public class PortView
 
   protected PortViewGridCache gridCache;
 
-  public PortView(DiscreteView integratedCircuit, Port port, Int2D positionRelativeToIC)
+  public PortView(DiscreteView<?> integratedCircuit, Port port, Int2D positionRelativeToIC)
   {
     this.owner = integratedCircuit;
     this.port = port;

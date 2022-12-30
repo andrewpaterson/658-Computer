@@ -83,7 +83,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView discreteView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView<?> discreteView)
   {
     ICV integratedCircuitView = (ICV) discreteView;
     circuitEditor.createConnectionViews(integratedCircuitView);

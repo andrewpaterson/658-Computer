@@ -68,5 +68,13 @@ public class TypeEditorFactory
   {
     customEditors.add(propertyEditorFactory);
   }
+
+  public void addAll(PropertyEditorFactory ... propertyEditorFactories)
+  {
+    for (PropertyEditorFactory propertyEditorFactory : propertyEditorFactories)
+    {
+      customEditors.add(propertyEditorFactory);
+    }
+  }
 }
 

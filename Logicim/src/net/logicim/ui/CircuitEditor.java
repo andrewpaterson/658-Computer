@@ -53,7 +53,7 @@ public class CircuitEditor
       traceView.paint(graphics, viewport, time);
     }
 
-    for (DiscreteView discreteView : discreteViews)
+    for (DiscreteView<?> discreteView : discreteViews)
     {
       discreteView.paint(graphics, viewport, time);
     }
@@ -69,7 +69,7 @@ public class CircuitEditor
     return circuit;
   }
 
-  public void add(DiscreteView discreteView)
+  public void add(DiscreteView<?> discreteView)
   {
     discreteViews.add(discreteView);
   }
@@ -79,15 +79,17 @@ public class CircuitEditor
     traceViews.add(view);
   }
 
-  public Set<PortView> deleteDiscreteView(DiscreteView discreteView)
+  public void deleteDiscreteView(DiscreteView<?> discreteView)
   {
     if (discreteView instanceof IntegratedCircuitView)
     {
-      return deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) discreteView);
+      Set<PortView> updatedPortViews = deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) discreteView);
+      fireConnectionEvents(updatedPortViews);
     }
     else if (discreteView instanceof PowerSourceView)
     {
-      return deletePowerSource((PowerSourceView) discreteView);
+      Set<PortView> updatedPortViews = deletePowerSource((PowerSourceView<?>) discreteView);
+      fireConnectionEvents(updatedPortViews);
     }
     else if (discreteView == null)
     {
@@ -97,6 +99,8 @@ public class CircuitEditor
     {
       throw new SimulatorException("Cannot delete view of class [%s].", discreteView.getClass().getSimpleName());
     }
+
+    validateConsistency();
   }
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
@@ -128,7 +132,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  protected Set<PortView> deletePowerSource(PowerSourceView powerSourceView)
+  protected Set<PortView> deletePowerSource(PowerSourceView<?> powerSourceView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = powerSourceView.getPorts();
@@ -155,6 +159,52 @@ public class CircuitEditor
     }
 
     return updatedPortViews;
+  }
+
+  public boolean deleteTraces(ConnectionView connectionView)
+  {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    List<ComponentView> connectedComponents = new ArrayList<>(connectionView.getConnectedComponents());
+    boolean traceDeleted = false;
+    for (ComponentView componentView : connectedComponents)
+    {
+      if (componentView instanceof TraceView)
+      {
+        traceDeleted = true;
+        updatedPortViews.addAll(deleteTrace((TraceView) componentView));
+      }
+    }
+
+    if (traceDeleted)
+    {
+      fireConnectionEvents(updatedPortViews);
+      validateConsistency();
+    }
+
+    return traceDeleted;
+  }
+
+  protected void deleteTrace(ConnectionView connectionView, TraceView traceView)
+  {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    if (!connectionView.isConcrete())
+    {
+      updatedPortViews = deleteTrace(traceView);
+    }
+    else
+    {
+      List<ComponentView> connectedComponents = new ArrayList<>(connectionView.getConnectedComponents());
+      for (ComponentView componentView : connectedComponents)
+      {
+        if (componentView instanceof TraceView)
+        {
+          updatedPortViews.addAll(deleteTrace((TraceView) componentView));
+        }
+      }
+    }
+
+    fireConnectionEvents(updatedPortViews);
+    validateConsistency();
   }
 
   public void remove(TraceView traceView)
@@ -217,7 +267,7 @@ public class CircuitEditor
     simulation.runToTime(timeForward);
   }
 
-  public DiscreteView getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public DiscreteView<?> getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
     List<DiscreteView> selectedViews = getDiscreteViewsInScreenSpace(viewport, screenPosition);
 
@@ -234,8 +284,8 @@ public class CircuitEditor
       Int2D boundBoxPosition = new Int2D();
       Int2D boundBoxDimension = new Int2D();
       float shortestDistance = Float.MAX_VALUE;
-      DiscreteView closestView = null;
-      for (DiscreteView view : selectedViews)
+      DiscreteView<?> closestView = null;
+      for (DiscreteView<?> view : selectedViews)
       {
         view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
         boundBoxPosition.add(boundBoxDimension.x / 2, boundBoxDimension.y / 2);
@@ -255,7 +305,7 @@ public class CircuitEditor
     Int2D boundBoxPosition = new Int2D();
     Int2D boundBoxDimension = new Int2D();
     List<DiscreteView> selectedViews = new ArrayList<>();
-    for (DiscreteView view : discreteViews)
+    for (DiscreteView<?> view : discreteViews)
     {
       if (view.isEnabled())
       {
@@ -274,7 +324,7 @@ public class CircuitEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
     List<DiscreteView> selectedViews = new ArrayList<>();
-    for (DiscreteView view : discreteViews)
+    for (DiscreteView<?> view : discreteViews)
     {
       if (view.isEnabled())
       {
@@ -387,7 +437,7 @@ public class CircuitEditor
       }
     }
 
-    for (DiscreteView discreteView : discreteViews)
+    for (DiscreteView<?> discreteView : discreteViews)
     {
       PortView portView = discreteView.getPortInGrid(position.x, position.y);
       if (portView != null)
@@ -829,7 +879,7 @@ public class CircuitEditor
   private Set<ConnectionView> getDiscretePortConnectionsOnLine(Line line)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (DiscreteView discreteView : discreteViews)
+    for (DiscreteView<?> discreteView : discreteViews)
     {
       List<PortView> portViews = discreteView.getPorts();
       for (PortView portView : portViews)
@@ -891,7 +941,7 @@ public class CircuitEditor
   public CircuitData save()
   {
     ArrayList<DiscreteData> discreteDatas = new ArrayList<>();
-    for (DiscreteView discreteView : discreteViews)
+    for (DiscreteView<?> discreteView : discreteViews)
     {
       DiscreteData discreteData = discreteView.save();
       if (discreteData == null)
@@ -932,7 +982,7 @@ public class CircuitEditor
     }
   }
 
-  public Set<PortView> createAndConnectDiscreteView(DiscreteView discreteView)
+  public Set<PortView> createAndConnectDiscreteView(DiscreteView<?> discreteView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     List<PortView> ports = discreteView.getPorts();
@@ -949,7 +999,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public void createConnectionViews(DiscreteView discreteView)
+  public void createConnectionViews(DiscreteView<?> discreteView)
   {
     List<PortView> ports = discreteView.getPorts();
     for (PortView portView : ports)
@@ -983,6 +1033,14 @@ public class CircuitEditor
   public Simulation getSimulation()
   {
     return simulation;
+  }
+
+  public void placeDiscreteView(DiscreteView<?> discreteView)
+  {
+    Set<PortView> updatedPortViews = createAndConnectDiscreteView(discreteView);
+
+    fireConnectionEvents(updatedPortViews);
+    validateConsistency();
   }
 }
 

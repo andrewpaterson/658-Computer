@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
@@ -14,14 +13,13 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
+import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
@@ -45,10 +43,10 @@ public class SimulatorEditor
 
   protected CircuitEditor circuitEditor;
 
-  protected DiscreteView placementView;
+  protected DiscreteView<?> placementView;
 
   protected TraceView hoverTraceView;
-  protected DiscreteView hoverDiscreteView;
+  protected DiscreteView<?> hoverDiscreteView;
   protected ConnectionView hoverConnectionView;
 
   protected WirePull wirePull;
@@ -154,12 +152,9 @@ public class SimulatorEditor
     }
   }
 
-  private void executePlacement(DiscreteView placementView)
+  private void executePlacement(DiscreteView<?> placementView)
   {
-    Set<PortView> updatedPortViews = circuitEditor.createAndConnectDiscreteView(placementView);
-
-    circuitEditor.fireConnectionEvents(updatedPortViews);
-    circuitEditor.validateConsistency();
+    circuitEditor.placeDiscreteView(placementView);
   }
 
   private void executeWirePull(WirePull wirePull)
@@ -355,7 +350,7 @@ public class SimulatorEditor
     return circuitEditor.getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
-  private DiscreteView getHoverView(Int2D mousePosition)
+  private DiscreteView<?> getHoverView(Int2D mousePosition)
   {
     return circuitEditor.getDiscreteViewInScreenSpace(viewport, mousePosition);
   }
@@ -471,49 +466,25 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
-    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     if (hoverConnectionView != null)
     {
       if (hoverTraceView != null)
       {
-        if (!hoverConnectionView.isConcrete())
-        {
-          updatedPortViews = circuitEditor.deleteTrace(hoverTraceView);
-        }
-        else
-        {
-          List<ComponentView> connectedComponents = new ArrayList<>(hoverConnectionView.getConnectedComponents());
-          for (ComponentView componentView : connectedComponents)
-          {
-            if (componentView instanceof TraceView)
-            {
-              updatedPortViews.addAll(circuitEditor.deleteTrace((TraceView) componentView));
-            }
-          }
-        }
+        circuitEditor.deleteTrace(hoverConnectionView, hoverTraceView);
       }
       else
       {
-        List<ComponentView> connectedComponents = new ArrayList<>(hoverConnectionView.getConnectedComponents());
-        boolean traceDeleted = false;
-        for (ComponentView componentView : connectedComponents)
-        {
-          if (componentView instanceof TraceView)
-          {
-            traceDeleted = true;
-            updatedPortViews.addAll(circuitEditor.deleteTrace((TraceView) componentView));
-          }
-        }
+        boolean traceDeleted = circuitEditor.deleteTraces(hoverConnectionView);
 
         if (!traceDeleted && (hoverDiscreteView != null))
         {
-          updatedPortViews.addAll(circuitEditor.deleteDiscreteView(hoverDiscreteView));
+          circuitEditor.deleteDiscreteView(hoverDiscreteView);
         }
       }
     }
     else if (hoverDiscreteView != null)
     {
-      updatedPortViews = circuitEditor.deleteDiscreteView(hoverDiscreteView);
+      circuitEditor.deleteDiscreteView(hoverDiscreteView);
     }
 
     hoverDiscreteView = null;
@@ -521,9 +492,6 @@ public class SimulatorEditor
     hoverTraceView = null;
 
     mousePositionOnGridChanged();
-
-    circuitEditor.fireConnectionEvents(updatedPortViews);
-    circuitEditor.validateConsistency();
   }
 
   public void increaseSimulationSpeed()
@@ -563,7 +531,7 @@ public class SimulatorEditor
     circuitEditor.load(circuitData);
   }
 
-  public DiscreteView getHoverDiscreteView()
+  public DiscreteView<?> getHoverDiscreteView()
   {
     return hoverDiscreteView;
   }

@@ -4,18 +4,18 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.action.InputAction;
-import net.logicim.ui.integratedcircuit.extra.OscilloscopeViewFactory;
-import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.buffer.BufferViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.power.GroundViewFactory;
-import net.logicim.ui.integratedcircuit.standard.power.PositivePowerViewFactory;
+import net.logicim.ui.integratedcircuit.extra.OscilloscopeView;
+import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
+import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateView;
+import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateView;
+import net.logicim.ui.integratedcircuit.standard.logic.buffer.BufferView;
+import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterView;
+import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateView;
+import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateView;
+import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateView;
+import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.integratedcircuit.standard.power.GroundView;
+import net.logicim.ui.integratedcircuit.standard.power.PositivePowerView;
 
 import java.awt.event.KeyEvent;
 
@@ -29,16 +29,20 @@ public class SimulatorActions
     editor.addAction(new InputAction(new PlacementRotateRight(editor), KeyEvent.VK_R, Up, Up, Up));
     editor.addAction(new InputAction(new StopCurrent(editor), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     editor.addAction(new InputAction(new RunOneEvent(editor), KeyEvent.VK_T, Up, Up, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new ClockViewFactory()), KeyEvent.VK_C, Up, Down, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new InverterViewFactory()), KeyEvent.VK_N, Up, Down, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new OrGateViewFactory()), KeyEvent.VK_O, Up, Down, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new NorGateViewFactory()), KeyEvent.VK_O, Up, Down, Down));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new AndGateViewFactory()), KeyEvent.VK_A, Up, Down, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new NandGateViewFactory()), KeyEvent.VK_A, Up, Down, Down));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new XorGateViewFactory()), KeyEvent.VK_X, Up, Down, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new XnorGateViewFactory()), KeyEvent.VK_X, Up, Down, Down));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new BufferViewFactory()), KeyEvent.VK_N, Up, Down, Down));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new OscilloscopeViewFactory()), KeyEvent.VK_P, Up, Down, Up));
+
+    editor.addAction(new InputAction(new CreatePlacementView(editor, ClockView.class), KeyEvent.VK_C, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, InverterView.class), KeyEvent.VK_N, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, OrGateView.class), KeyEvent.VK_O, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, NorGateView.class), KeyEvent.VK_O, Up, Down, Down));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, AndGateView.class), KeyEvent.VK_A, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, NandGateView.class), KeyEvent.VK_A, Up, Down, Down));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, XorGateView.class), KeyEvent.VK_X, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, XnorGateView.class), KeyEvent.VK_X, Up, Down, Down));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, BufferView.class), KeyEvent.VK_N, Up, Down, Down));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, OscilloscopeView.class), KeyEvent.VK_P, Up, Down, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, GroundView.class), KeyEvent.VK_G, Up, Up, Up));
+    editor.addAction(new InputAction(new CreatePlacementView(editor, PositivePowerView.class), KeyEvent.VK_V, Up, Up, Up));
+
     editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Down));
     editor.addAction(new InputAction(new DeleteComponent(editor), KeyEvent.VK_DELETE, Up, Up, Up));
     editor.addAction(new InputAction(new IncreaseSimulationSpeed(editor), KeyEvent.VK_EQUALS, Up, Up, Up));
@@ -46,8 +50,6 @@ public class SimulatorActions
     editor.addAction(new InputAction(new ResetSimulation(editor), KeyEvent.VK_R, Up, Up, Down));
     editor.addAction(new InputAction(new SaveSimulation(panel), KeyEvent.VK_S, Up, Up, Down));
     editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Up, Up, Down));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new GroundViewFactory()), KeyEvent.VK_G, Up, Up, Up));
-    editor.addAction(new InputAction(new CreatePlacementView(editor, new PositivePowerViewFactory()), KeyEvent.VK_V, Up, Up, Up));
     editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
   }
 }

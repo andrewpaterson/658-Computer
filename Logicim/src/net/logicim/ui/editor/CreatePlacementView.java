@@ -1,22 +1,25 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.ViewFactory;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.integratedcircuit.factory.ViewFactory;
+import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
 
 public class CreatePlacementView
     extends SimulatorEditorAction
 {
-  private ViewFactory viewFactory;
+  private Class<? extends DiscreteView<?>> discreteViewClass;
 
-  public CreatePlacementView(SimulatorEditor editor, ViewFactory viewFactory)
+  public CreatePlacementView(SimulatorEditor editor, Class<? extends DiscreteView<?>> discreteViewClass)
   {
     super(editor);
-    this.viewFactory = viewFactory;
+    this.discreteViewClass = discreteViewClass;
   }
 
   @Override
   public void execute()
   {
+    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(discreteViewClass);
     editor.createPlacementView(viewFactory);
   }
 }

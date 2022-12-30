@@ -9,6 +9,19 @@ import net.logicim.ui.components.typeeditor.FamilyPropertyEditorFactory;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.*;
+import net.logicim.ui.integratedcircuit.extra.OscilloscopeViewFactory;
+import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
+import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.buffer.BufferViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.buffer.InverterViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
+import net.logicim.ui.integratedcircuit.standard.power.GroundViewFactory;
+import net.logicim.ui.integratedcircuit.standard.power.PositivePowerViewFactory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -36,7 +49,22 @@ public class SimulatorPanel
 
     simulatorEditor = new SimulatorEditor(this);
     FamilyVoltageConfigurationStore.getInstance();
-    TypeEditorFactory.getInstance().add(new FamilyPropertyEditorFactory());
+
+    TypeEditorFactory.getInstance().addAll(new FamilyPropertyEditorFactory());
+
+    ViewFactoryStore.getInstance().addAll(new ClockViewFactory(),
+                                          new InverterViewFactory(),
+                                          new OrGateViewFactory(),
+                                          new NorGateViewFactory(),
+                                          new AndGateViewFactory(),
+                                          new NandGateViewFactory(),
+                                          new XorGateViewFactory(),
+                                          new XnorGateViewFactory(),
+                                          new BufferViewFactory(),
+                                          new OscilloscopeViewFactory(),
+                                          new GroundViewFactory(),
+                                          new PositivePowerViewFactory());
+
   }
 
   public void loop()

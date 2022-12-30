@@ -33,7 +33,7 @@ public abstract class DiscreteData
     this.ports = ports;
   }
 
-  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView discreteView)
+  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView<?> discreteView)
   {
     for (int i = 0; i < ports.size(); i++)
     {
@@ -48,20 +48,20 @@ public abstract class DiscreteData
     }
   }
 
-  public DiscreteView createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public DiscreteView<?> createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    DiscreteView integratedCircuitView = create(circuitEditor, traceLoader);
+    DiscreteView<?> integratedCircuitView = create(circuitEditor, traceLoader);
     connectAndLoad(circuitEditor, traceLoader, integratedCircuitView);
     return integratedCircuitView;
   }
 
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView discreteView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView<?> discreteView)
   {
     circuitEditor.createConnectionViews(discreteView);
     loadPorts(circuitEditor, traceLoader, discreteView);
   }
 
-  protected abstract DiscreteView create(CircuitEditor circuitEditor, TraceLoader traceLoader);
+  protected abstract DiscreteView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader);
 
   protected abstract void loadPort(CircuitEditor circuitEditor, PortData portData, Port port);
 }

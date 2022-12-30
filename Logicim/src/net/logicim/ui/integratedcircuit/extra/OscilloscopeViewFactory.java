@@ -4,7 +4,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Units;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.ViewFactory;
+import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 import net.logicim.ui.common.defaults.DefaultFamily;
 
 public class OscilloscopeViewFactory
@@ -28,6 +29,12 @@ public class OscilloscopeViewFactory
                                 rotation,
                                 "",
                                 DefaultFamily.get());
+  }
+
+  @Override
+  public Class<? extends DiscreteView<?>> getViewClass()
+  {
+    return OscilloscopeView.class;
   }
 }
 

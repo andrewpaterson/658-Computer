@@ -295,5 +295,10 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   {
     return properties;
   }
+
+  public void setProperties(PROPERTIES properties)
+  {
+    this.properties = properties;
+  }
 }
 

@@ -187,6 +187,11 @@ public class TraceView
   }
 
   @Override
+  public void paintSelected(Graphics2D graphics, Viewport viewport)
+  {
+  }
+
+  @Override
   public String getName()
   {
     return "Trace";

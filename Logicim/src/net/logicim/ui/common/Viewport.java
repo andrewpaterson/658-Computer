@@ -71,10 +71,22 @@ public class Viewport
     return Math.round((center - position.x) / (scale * zoom));
   }
 
+  public float transformScreenToGridX(float x)
+  {
+    float center = x - (float) size.getWidth() / 2;
+    return (center - position.x) / (scale * zoom);
+  }
+
   public int transformScreenToGridY(int y)
   {
     int center = y - size.getHeight() / 2;
     return Math.round((center - position.y) / (scale * zoom));
+  }
+
+  public float transformScreenToGridY(float y)
+  {
+    float center = y - (float) size.getHeight() / 2;
+    return (center - position.y) / (scale * zoom);
   }
 
   public float getLineWidth()
@@ -199,6 +211,12 @@ public class Viewport
                        p.y * scale * zoom + size.getHeight() / 2.0f + position.y);
   }
 
+  public Int2D transformGridToScreenSpace(Int2D p)
+  {
+    return new Int2D(Math.round(p.x * scale * zoom + size.getWidth() / 2.0f + position.x),
+                     Math.round((p.y * scale * zoom + size.getHeight() / 2.0f + position.y)));
+  }
+
   public Float2D transformScreenSpaceToGrid(Int2D p)
   {
     float centerX = p.x - size.getWidth() / 2.0f;
@@ -309,12 +327,12 @@ public class Viewport
 
   public Stroke getStroke(float width)
   {
-    return strokes.getStroke(width);
+    return strokes.getSolidStroke(width);
   }
 
   public Stroke getStroke()
   {
-    return strokes.getStroke(getLineWidth());
+    return strokes.getSolidStroke(getLineWidth());
   }
 }
 

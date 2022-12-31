@@ -30,7 +30,7 @@ import java.util.*;
 
 public class CircuitEditor
 {
-  protected Set<DiscreteView> discreteViews;
+  protected Set<DiscreteView<?>> discreteViews;
   protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
@@ -237,7 +237,7 @@ public class CircuitEditor
           Int2D position = connection.getGridPosition();
           if (position != null)
           {
-            PortView portView = ((IntegratedCircuitView<?, ?>) connectedComponent).getPortInGrid(position);
+            PortView portView = connectedComponent.getPortInGrid(position);
             portView.disconnectTraceNet(simulation);
           }
         }
@@ -269,7 +269,7 @@ public class CircuitEditor
 
   public DiscreteView<?> getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
-    List<DiscreteView> selectedViews = getDiscreteViewsInScreenSpace(viewport, screenPosition);
+    List<DiscreteView<?>> selectedViews = getDiscreteViewsInScreenSpace(viewport, screenPosition);
 
     if (selectedViews.size() == 1)
     {
@@ -300,17 +300,17 @@ public class CircuitEditor
     }
   }
 
-  public List<DiscreteView> getDiscreteViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public List<DiscreteView<?>> getDiscreteViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
     Int2D boundBoxPosition = new Int2D();
     Int2D boundBoxDimension = new Int2D();
-    List<DiscreteView> selectedViews = new ArrayList<>();
+    List<DiscreteView<?>> selectedViews = new ArrayList<>();
     for (DiscreteView<?> view : discreteViews)
     {
       if (view.isEnabled())
       {
         view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
-        if (BoundingBox.isContained(screenPosition, boundBoxPosition, boundBoxDimension))
+        if (BoundingBox.containsPoint(screenPosition, boundBoxPosition, boundBoxDimension))
         {
           selectedViews.add(view);
         }
@@ -319,17 +319,17 @@ public class CircuitEditor
     return selectedViews;
   }
 
-  public List<DiscreteView> getDiscreteViewsInGridSpace(Int2D gridPosition)
+  public List<DiscreteView<?>> getDiscreteViewsInGridSpace(Int2D gridPosition)
   {
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
-    List<DiscreteView> selectedViews = new ArrayList<>();
+    List<DiscreteView<?>> selectedViews = new ArrayList<>();
     for (DiscreteView<?> view : discreteViews)
     {
       if (view.isEnabled())
       {
         view.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
-        if (BoundingBox.isContained(gridPosition, boundBoxPosition, boundBoxDimension))
+        if (BoundingBox.containsPoint(gridPosition, boundBoxPosition, boundBoxDimension))
         {
           selectedViews.add(view);
         }
@@ -424,7 +424,7 @@ public class CircuitEditor
 
   public ConnectionView getConnection(Int2D position)
   {
-    List<DiscreteView> discreteViews = getDiscreteViewsInGridSpace(position);
+    List<DiscreteView<?>> discreteViews = getDiscreteViewsInGridSpace(position);
     List<TraceView> traceViews = getTraceViewsInGridSpace(position);
     Set<ConnectionView> connectionViews = new HashSet<>();
 
@@ -1041,6 +1041,27 @@ public class CircuitEditor
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();
+  }
+
+  public List<ComponentView> getSelection(Float2D start, Float2D end)
+  {
+    boolean includeIntersections = start.x > end.x;
+
+    Float2D boundBoxPosition = new Float2D();
+    Float2D boundBoxDimension = new Float2D();
+    List<ComponentView> selectedViews = new ArrayList<>();
+    for (DiscreteView<?> discreteView : discreteViews)
+    {
+      if (discreteView.isEnabled())
+      {
+        discreteView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+        if (BoundingBox.containsBox(start, end, boundBoxPosition, boundBoxDimension, includeIntersections))
+        {
+          selectedViews.add(discreteView);
+        }
+      }
+    }
+    return selectedViews;
   }
 }
 

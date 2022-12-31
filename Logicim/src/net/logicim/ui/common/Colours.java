@@ -24,6 +24,7 @@ public class Colours
 
   protected Color portHover;
   protected Color viewHover;
+  protected Color selected;
 
   protected Color disconnectedTrace;
 
@@ -53,6 +54,7 @@ public class Colours
 
     portHover = new Color(0, 255, 0);
     viewHover = new Color(0, 255, 0);
+    selected = new Color(255, 255, 255);
 
     disconnectedTrace = new Color(0, 170, 250);
   }
@@ -133,6 +135,11 @@ public class Colours
       index = 0;
     }
     return shortColours[index];
+  }
+
+  public Color getSelected()
+  {
+    return selected;
   }
 }
 

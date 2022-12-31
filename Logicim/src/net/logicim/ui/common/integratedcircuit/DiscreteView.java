@@ -120,7 +120,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     }
   }
 
-  public void paintSelected(Graphics2D graphics, Viewport viewport)
+  public void paintSelected(Graphics2D graphics, Viewport viewport, Color color)
   {
     Int2D p = new Int2D();
     Int2D s = new Int2D();
@@ -128,11 +128,21 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     getSelectionBoxInScreenSpace(viewport, p, s);
 
     graphics.setStroke(viewport.getStroke());
-    Color color = viewport.getColours().getViewHover();
     paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
     paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
     paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
     paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y + s.y, color);
+  }
+
+  @Override
+  public void paintSelected(Graphics2D graphics, Viewport viewport)
+  {
+    paintSelected(graphics, viewport, viewport.getColours().getSelected());
+  }
+
+  public void paintHover(Graphics2D graphics, Viewport viewport)
+  {
+    paintSelected(graphics, viewport, viewport.getColours().getViewHover());
   }
 
   private void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)

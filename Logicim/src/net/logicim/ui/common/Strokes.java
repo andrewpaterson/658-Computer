@@ -6,20 +6,20 @@ import java.util.Map;
 
 public class Strokes
 {
-  protected Map<Float, Stroke> strokes;
+  protected Map<Float, Stroke> solidStrokes;
 
   public Strokes()
   {
-    strokes = new HashMap<>();
+    solidStrokes = new HashMap<>();
   }
 
-  public Stroke getStroke(float width)
+  public Stroke getSolidStroke(float width)
   {
-    Stroke stroke = strokes.get(width);
+    Stroke stroke = solidStrokes.get(width);
     if (stroke == null)
     {
       stroke = new BasicStroke(width);
-      strokes.put(width, stroke);
+      solidStrokes.put(width, stroke);
     }
     return stroke;
   }

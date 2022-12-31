@@ -67,6 +67,8 @@ public abstract class ComponentView
     return null;
   }
 
+  public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
+
   public abstract String getName();
 
   public abstract String getDescription();

@@ -22,6 +22,12 @@ public class Int2D
     this.y = y;
   }
 
+  public Int2D(Float2D p)
+  {
+    this.x = Math.round(p.x);
+    this.y = Math.round(p.y);
+  }
+
   public void set(Int2D p)
   {
     this.x = p.x;

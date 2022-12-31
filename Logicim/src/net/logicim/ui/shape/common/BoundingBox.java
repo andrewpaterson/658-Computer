@@ -24,7 +24,7 @@ public class BoundingBox
     transformedBottomRight = new Float2D();
   }
 
-  public static boolean isContained(Int2D position, Int2D boundBoxPosition, Int2D boundBoxDimension)
+  public static boolean containsPoint(Int2D position, Int2D boundBoxPosition, Int2D boundBoxDimension)
   {
     return ((position.x >= boundBoxPosition.x) &&
             (position.x <= boundBoxPosition.x + boundBoxDimension.x)) &&
@@ -32,7 +32,7 @@ public class BoundingBox
             (position.y <= boundBoxPosition.y + boundBoxDimension.y));
   }
 
-  public static boolean isContained(Int2D position, Float2D boundBoxPosition, Float2D boundBoxDimension)
+  public static boolean containsPoint(Int2D position, Float2D boundBoxPosition, Float2D boundBoxDimension)
   {
     return ((position.x >= boundBoxPosition.x) &&
             (position.x <= boundBoxPosition.x + boundBoxDimension.x)) &&
@@ -49,6 +49,45 @@ public class BoundingBox
     y *= y;
 
     return (float) Math.sqrt(x + y);
+  }
+
+  public static boolean containsBox(Float2D start, Float2D end, Float2D boundBoxPosition, Float2D boundBoxDimension, boolean includeIntersections)
+  {
+    float x1 = start.x;
+    float x2 = end.x;
+    float y1 = start.y;
+    float y2 = end.y;
+    if (x1 > x2)
+    {
+      float i = x2;
+      x2 = x1;
+      x1 = i;
+    }
+    if (y1 > y2)
+    {
+      float i = y2;
+      y2 = y1;
+      y1 = i;
+    }
+
+    if (!includeIntersections)
+    {
+      if ((x1 <= boundBoxPosition.x) && (y1 <= boundBoxPosition.y) &&
+          (x2 >= boundBoxPosition.x + boundBoxDimension.x) && (y2 >= boundBoxPosition.y + boundBoxDimension.y))
+      {
+        return true;
+      }
+    }
+    else
+    {
+      if ((x1 - boundBoxDimension.x <= boundBoxPosition.x) && (y1 - boundBoxDimension.y <= boundBoxPosition.y) &&
+          (x2 >= boundBoxPosition.x) && (y2 >= boundBoxPosition.y))
+      {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public void include(Tuple2 tuple)

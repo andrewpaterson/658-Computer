@@ -189,6 +189,13 @@ public class TraceView
   @Override
   public void paintSelected(Graphics2D graphics, Viewport viewport)
   {
+    int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
+    int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);
+    int x2 = viewport.transformGridToScreenSpaceX(line.getEnd().x);
+    int y2 = viewport.transformGridToScreenSpaceY(line.getEnd().y);
+
+    paintSelectionRectangle(graphics, viewport, x1, y1, viewport.getColours().getSelected());
+    paintSelectionRectangle(graphics, viewport, x2, y2, viewport.getColours().getSelected());
   }
 
   @Override
@@ -347,6 +354,11 @@ public class TraceView
   public TraceData save()
   {
     return new TraceData(trace.getId(), getStartPosition(), getEndPosition());
+  }
+
+  public Line getLine()
+  {
+    return line;
   }
 }
 

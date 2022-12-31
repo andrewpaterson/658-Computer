@@ -202,5 +202,10 @@ public class WirePull
     graphics.setColor(viewport.getColours().getDisconnectedTrace());
     graphics.drawLine(x1, y1, x2, y2);
   }
+
+  public boolean isEmpty()
+  {
+    return middlePosition == null;
+  }
 }
 

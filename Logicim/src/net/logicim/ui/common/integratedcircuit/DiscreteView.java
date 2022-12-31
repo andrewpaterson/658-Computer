@@ -145,20 +145,6 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     paintSelected(graphics, viewport, viewport.getColours().getViewHover());
   }
 
-  private void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
-  {
-    float zoom = viewport.getZoom();
-    float radius = zoom * 3;
-    int left = (int) (x - radius);
-    int top = (int) (y - radius);
-    int width = (int) (radius * 2);
-    int height = (int) (radius * 2);
-    graphics.setColor(viewHover);
-    graphics.fillRect(left, top, width, height);
-    graphics.setColor(Color.BLACK);
-    graphics.drawRect(left, top, width, height);
-  }
-
   public void paintBoundingBox(Graphics2D graphics, Viewport viewport)
   {
     boundingBox.transform(rotation);

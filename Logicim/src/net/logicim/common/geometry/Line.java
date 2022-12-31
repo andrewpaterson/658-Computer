@@ -1,6 +1,7 @@
 package net.logicim.common.geometry;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.Rotation;
@@ -257,6 +258,16 @@ public class Line
     {
       throw new SimulatorException("Could get single X for an East / West line.");
     }
+  }
+
+  public void getBoundingBoxInGridSpace(Float2D boundBoxPosition, Float2D boundBoxDimension)
+  {
+    int y1 = getMinimumY();
+    int x1 = getMinimumX();
+    int x2 = getMaximumX();
+    int y2 = getMaximumY();
+    boundBoxPosition.set(x1, y1);
+    boundBoxDimension.set(x2 - x1, y2 - y1);
   }
 }
 

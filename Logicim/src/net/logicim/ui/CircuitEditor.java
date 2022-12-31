@@ -198,7 +198,8 @@ public class CircuitEditor
       {
         if (componentView instanceof TraceView)
         {
-          updatedPortViews.addAll(deleteTrace((TraceView) componentView));
+          TraceView concreteTraceView1 = (TraceView) componentView;
+          updatedPortViews.addAll(deleteTrace(concreteTraceView1));
         }
       }
     }
@@ -1055,13 +1056,68 @@ public class CircuitEditor
       if (discreteView.isEnabled())
       {
         discreteView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+        if (isPoint(start, end))
+        {
+          if (BoundingBox.containsPoint(new Int2D(start), boundBoxPosition, boundBoxDimension))
+          {
+            selectedViews.add(discreteView);
+          }
+        }
+        else
+        {
+          if (BoundingBox.containsBox(start, end, boundBoxPosition, boundBoxDimension, includeIntersections))
+          {
+            selectedViews.add(discreteView);
+          }
+        }
+      }
+    }
+
+    for (TraceView traceView : traceViews)
+    {
+      Line line = traceView.getLine();
+      line.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+      if (isPoint(start, end))
+      {
+        if (line.isPositionOn(new Int2D(start)))
+        {
+          selectedViews.add(traceView);
+        }
+      }
+      else
+      {
         if (BoundingBox.containsBox(start, end, boundBoxPosition, boundBoxDimension, includeIntersections))
         {
-          selectedViews.add(discreteView);
+          selectedViews.add(traceView);
         }
       }
     }
     return selectedViews;
+  }
+
+  protected boolean isPoint(Float2D start, Float2D end)
+  {
+    return (Math.round(start.x) == Math.round(end.x)) &&
+           (Math.round(start.y) == Math.round(end.y));
+  }
+
+  public void deleteComponent(ComponentView componentView)
+  {
+    if (componentView != null)
+    {
+      if (componentView instanceof TraceView)
+      {
+        deleteTrace((TraceView) componentView);
+      }
+      else if (componentView instanceof DiscreteView)
+      {
+        deleteDiscreteView((DiscreteView<?>) componentView);
+      }
+      else
+      {
+        throw new SimulatorException("Don't know how to delete component [%s].", componentView.getClass().getSimpleName());
+      }
+    }
   }
 }
 

@@ -101,18 +101,6 @@ public class SimulatorEditor
 
     if (tickCount == 0)
     {
-      if (wirePull != null)
-      {
-        WirePull localPull = wirePull;
-        Int2D mousePosition = this.mousePosition.get();
-        if (mousePosition != null)
-        {
-          int x = viewport.transformScreenToGridX(mousePosition.x);
-          int y = viewport.transformScreenToGridY(mousePosition.y);
-          localPull.update(x, y);
-        }
-      }
-
       if (running)
       {
         runToTime(runTimeStep);
@@ -137,8 +125,12 @@ public class SimulatorEditor
       }
       else
       {
-        selectionRectangle = new SelectionRectangle();
-        selectionRectangle.start(viewport, x, y);
+        if (placementView == null)
+        {
+          selectionRectangle = new SelectionRectangle();
+          selectionRectangle.start(viewport, x, y);
+          updateSelection();
+        }
       }
     }
   }
@@ -157,9 +149,21 @@ public class SimulatorEditor
       }
       else if (wirePull != null)
       {
-        executeWirePull(wirePull);
-        wirePull = null;
-        mousePositionOnGridChanged();
+        if (!wirePull.isEmpty())
+        {
+          executeWirePull(wirePull);
+          wirePull = null;
+          mousePositionOnGridChanged();
+        }
+        else
+        {
+          discardWirePull();
+
+          selectionRectangle = new SelectionRectangle();
+          selectionRectangle.start(viewport, x, y);
+          updateSelection();
+          selectionRectangle = null;
+        }
       }
 
       if (selectionRectangle != null)
@@ -231,6 +235,19 @@ public class SimulatorEditor
       if (moved != null)
       {
         viewport.scroll(moved);
+      }
+    }
+
+    if (wirePull != null)
+    {
+      wirePull.update(viewport.transformScreenToGridX(x), viewport.transformScreenToGridY(y));
+
+      if (!wirePull.isEmpty())
+      {
+        if (!selection.isEmpty())
+        {
+          selection = new ArrayList<>();
+        }
       }
     }
 
@@ -484,6 +501,18 @@ public class SimulatorEditor
   public void stopCurrentEdit()
   {
     discardPlacement();
+    discardWirePull();
+    stopSelection();
+  }
+
+  private void stopSelection()
+  {
+    selection = new ArrayList<>();
+  }
+
+  private void discardWirePull()
+  {
+    wirePull = null;
   }
 
   private void discardPlacement()
@@ -507,27 +536,37 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
-    if (hoverConnectionView != null)
+    if (selection.isEmpty())
     {
-      if (hoverTraceView != null)
+      if (hoverConnectionView != null)
       {
-        circuitEditor.deleteTrace(hoverConnectionView, hoverTraceView);
-      }
-      else
-      {
-        boolean traceDeleted = circuitEditor.deleteTraces(hoverConnectionView);
-
-        if (!traceDeleted && (hoverDiscreteView != null))
+        if (hoverTraceView != null)
         {
-          circuitEditor.deleteDiscreteView(hoverDiscreteView);
+          circuitEditor.deleteTrace(hoverConnectionView, hoverTraceView);
+        }
+        else
+        {
+          boolean traceDeleted = circuitEditor.deleteTraces(hoverConnectionView);
+
+          if (!traceDeleted && (hoverDiscreteView != null))
+          {
+            circuitEditor.deleteDiscreteView(hoverDiscreteView);
+          }
         }
       }
+      else if (hoverDiscreteView != null)
+      {
+        circuitEditor.deleteDiscreteView(hoverDiscreteView);
+      }
     }
-    else if (hoverDiscreteView != null)
+    else
     {
-      circuitEditor.deleteDiscreteView(hoverDiscreteView);
+      for (ComponentView componentView : selection)
+      {
+        circuitEditor.deleteComponent(componentView);
+      }
+      selection = new ArrayList<>();
     }
-
     hoverDiscreteView = null;
     hoverConnectionView = null;
     hoverTraceView = null;

@@ -104,32 +104,37 @@ public class ClockView
 
     float xOffset = 0.5f;
     float xi = 0;
-    if (properties.inverseOut)
+    float yi = 0;
+    if (properties.inverseOut && rotation.isNorthSouth())
     {
       xi = 1f;
+    }
+    if (properties.inverseOut && rotation.isEastWest())
+    {
+      yi = 1f;
     }
     float yOffset = 0.33f;
 
     int x1 = viewport.transformGridToScreenSpaceX(position.x - xOffset + xi);
     int x2 = viewport.transformGridToScreenSpaceX(position.x - xOffset + xi);
-    int y1 = viewport.transformGridToScreenSpaceY(position.y + 0.0f);
-    int y2 = viewport.transformGridToScreenSpaceY(position.y - yOffset);
+    int y1 = viewport.transformGridToScreenSpaceY(position.y + 0.0f + yi);
+    int y2 = viewport.transformGridToScreenSpaceY(position.y - yOffset + yi);
     graphics.drawLine(x1, y1, x2, y2);
 
     int x3 = viewport.transformGridToScreenSpaceX(position.x + 0.0f + xi);
-    int y3 = viewport.transformGridToScreenSpaceY(position.y - yOffset);
+    int y3 = viewport.transformGridToScreenSpaceY(position.y - yOffset + yi);
     graphics.drawLine(x2, y2, x3, y3);
 
     int x4 = viewport.transformGridToScreenSpaceX(position.x + 0.0f + xi);
-    int y4 = viewport.transformGridToScreenSpaceY(position.y + yOffset);
+    int y4 = viewport.transformGridToScreenSpaceY(position.y + yOffset + yi);
     graphics.drawLine(x3, y3, x4, y4);
 
     int x5 = viewport.transformGridToScreenSpaceX(position.x + xOffset + xi);
-    int y5 = viewport.transformGridToScreenSpaceY(position.y + yOffset);
+    int y5 = viewport.transformGridToScreenSpaceY(position.y + yOffset + yi);
     graphics.drawLine(x4, y4, x5, y5);
 
     int x6 = viewport.transformGridToScreenSpaceX(position.x + xOffset + xi);
-    int y6 = viewport.transformGridToScreenSpaceY(position.y + 0.0f);
+    int y6 = viewport.transformGridToScreenSpaceY(position.y + 0.0f + yi);
     graphics.drawLine(x5, y5, x6, y6);
   }
 

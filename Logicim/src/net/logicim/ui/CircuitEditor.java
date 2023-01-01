@@ -105,37 +105,30 @@ public class CircuitEditor
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
-    List<ConnectionView> connectionViews = new ArrayList<>();
-    List<PortView> portViews = integratedCircuitView.getPorts();
-    for (PortView portView : portViews)
-    {
-      ConnectionView connection = portView.getConnection();
-      if (connection != null)
-      {
-        disconnectTraceNet(findConnections(connection));
-
-        connection.remove(integratedCircuitView);
-        connectionViews.add(connection);
-      }
-    }
+    List<ConnectionView> connectionViews = disconnectDiscrete(integratedCircuitView);
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     circuit.remove(integratedCircuit, simulation);
     discreteViews.remove(integratedCircuitView);
 
-    Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    for (ConnectionView connectionView : connectionViews)
-    {
-      updatedPortViews.addAll(connectConnections(connectionView));
-    }
-
-    return updatedPortViews;
+    return connectConnections(connectionViews);
   }
 
   protected Set<PortView> deletePowerSource(PowerSourceView<?> powerSourceView)
   {
+    List<ConnectionView> connectionViews = disconnectDiscrete(powerSourceView);
+
+    PowerSource powerSource = powerSourceView.getPowerSource();
+    circuit.remove(powerSource, simulation);
+    discreteViews.remove(powerSourceView);
+
+    return connectConnections(connectionViews);
+  }
+
+  public List<ConnectionView> disconnectDiscrete(DiscreteView<?> discreteView)
+  {
     List<ConnectionView> connectionViews = new ArrayList<>();
-    List<PortView> portViews = powerSourceView.getPorts();
+    List<PortView> portViews = discreteView.getPorts();
     for (PortView portView : portViews)
     {
       ConnectionView connection = portView.getConnection();
@@ -143,15 +136,15 @@ public class CircuitEditor
       {
         disconnectTraceNet(findConnections(connection));
 
-        connection.remove(powerSourceView);
+        connection.remove(discreteView);
         connectionViews.add(connection);
       }
     }
+    return connectionViews;
+  }
 
-    PowerSource powerSource = powerSourceView.getPowerSource();
-    circuit.remove(powerSource, simulation);
-    discreteViews.remove(powerSourceView);
-
+  public Set<PortView> connectConnections(List<ConnectionView> connectionViews)
+  {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {
@@ -1044,6 +1037,24 @@ public class CircuitEditor
     validateConsistency();
   }
 
+  public void placeComponentViews(List<ComponentView> componentViews)
+  {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    for (ComponentView componentView : componentViews)
+    {
+      if (componentView instanceof DiscreteView)
+      {
+        updatedPortViews.addAll(createAndConnectDiscreteView((DiscreteView<?>) componentView));
+      }
+      else if (componentView instanceof TraceView)
+      {
+      }
+    }
+
+    fireConnectionEvents(updatedPortViews);
+    validateConsistency();
+  }
+
   public List<ComponentView> getSelection(Float2D start, Float2D end)
   {
     boolean includeIntersections = start.x > end.x;
@@ -1118,6 +1129,19 @@ public class CircuitEditor
         throw new SimulatorException("Don't know how to delete component [%s].", componentView.getClass().getSimpleName());
       }
     }
+  }
+
+  public void disconnectComponent(ComponentView componentView)
+  {
+    if (componentView instanceof DiscreteView)
+    {
+      disconnectDiscrete((DiscreteView<?>) componentView);
+    }
+    else if (componentView instanceof TraceView)
+    {
+    }
+
+    validateConsistency();
   }
 }
 

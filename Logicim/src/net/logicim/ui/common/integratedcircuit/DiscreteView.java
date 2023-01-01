@@ -265,8 +265,6 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
 
   public abstract boolean isEnabled();
 
-  public abstract void enable(Simulation simulation);
-
   public abstract void simulationStarted(Simulation simulation);
 
   public List<PortView> getPorts()
@@ -294,6 +292,12 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   public String getName()
   {
     return properties.name;
+  }
+
+  @Override
+  public Int2D getGridPosition()
+  {
+    return position;
   }
 
   protected abstract void createPortViews();

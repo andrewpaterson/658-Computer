@@ -1,6 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.common.geometry.Line;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
@@ -15,6 +16,7 @@ import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.integratedcircuit.factory.ViewFactory;
+import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
@@ -56,6 +58,8 @@ public class SimulatorEditor
   protected List<ComponentView> selection;
 
   protected WirePull wirePull;
+
+  protected MoveComponents moveComponents;
 
   protected boolean running;
   protected long runTimeStep;
@@ -115,7 +119,15 @@ public class SimulatorEditor
 
     if (button == BUTTON1)
     {
-      if ((hoverConnectionView != null && placementView == null))
+      if (isInSelectedComponent(x, y))
+      {
+        moveComponents = new MoveComponents(viewport, x, y, selection);
+        for (ComponentView componentView : selection)
+        {
+          circuitEditor.disconnectComponent(componentView);
+        }
+      }
+      else if ((hoverConnectionView != null && placementView == null))
       {
         if (wirePull == null)
         {
@@ -165,6 +177,12 @@ public class SimulatorEditor
           selectionRectangle = null;
         }
       }
+      else if (moveComponents != null)
+      {
+        circuitEditor.placeComponentViews(moveComponents.getComponents());
+        selection = new ArrayList<>();
+        moveComponents = null;
+      }
 
       if (selectionRectangle != null)
       {
@@ -174,6 +192,94 @@ public class SimulatorEditor
         selectionRectangle = null;
       }
     }
+  }
+
+  public void mouseMoved(int x, int y)
+  {
+    mousePosition.set(x, y);
+
+    Int2D moved = mouseMotion.moved(x, y);
+    if (mouseButtons.pressed(MouseEvent.BUTTON2))
+    {
+      if (moved != null)
+      {
+        viewport.scroll(moved);
+      }
+    }
+
+    if (placementView != null)
+    {
+      placementView.setPosition(viewport.transformScreenToGridX(x),
+                                viewport.transformScreenToGridY(y));
+    }
+
+    if (wirePull != null)
+    {
+      wirePull.update(viewport.transformScreenToGridX(x),
+                      viewport.transformScreenToGridY(y));
+
+      if (!wirePull.isEmpty())
+      {
+        if (!selection.isEmpty())
+        {
+          selection = new ArrayList<>();
+        }
+      }
+    }
+
+    if (selectionRectangle != null)
+    {
+      selectionRectangle.drag(viewport, x, y);
+      updateSelection();
+    }
+    else
+    {
+      if (moveComponents != null)
+      {
+        moveComponents.calculateDiff(viewport, x, y);
+
+        for (ComponentView componentView : selection)
+        {
+          Int2D position = moveComponents.getPosition(componentView);
+          componentView.setPosition(position.x, position.y);
+        }
+      }
+    }
+
+    mousePositionOnGridChanged();
+  }
+
+  private boolean isInSelectedComponent(int mouseX, int mouseY)
+  {
+    float fx = viewport.transformScreenToGridX((float) mouseX);
+    float fy = viewport.transformScreenToGridY((float) mouseY);
+    int ix = viewport.transformScreenToGridX(mouseX);
+    int iy = viewport.transformScreenToGridY(mouseY);
+
+    Float2D boundBoxPosition = new Float2D();
+    Float2D boundBoxDimension = new Float2D();
+
+    for (ComponentView componentView : selection)
+    {
+      if (componentView instanceof DiscreteView)
+      {
+        DiscreteView<?> discreteView = (DiscreteView<?>) componentView;
+        discreteView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+        if (BoundingBox.containsPoint(new Int2D(fx, fy), boundBoxPosition, boundBoxDimension))
+        {
+          return true;
+        }
+      }
+      else if (componentView instanceof TraceView)
+      {
+        TraceView traceView = (TraceView) componentView;
+        if (traceView.getLine().isPositionOn(ix, iy))
+        {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private void executePlacement(DiscreteView<?> placementView)
@@ -223,41 +329,6 @@ public class SimulatorEditor
   {
     this.width = width;
     this.height = height;
-  }
-
-  public void mouseMoved(int x, int y)
-  {
-    mousePosition.set(x, y);
-
-    Int2D moved = mouseMotion.moved(x, y);
-    if (mouseButtons.pressed(MouseEvent.BUTTON2))
-    {
-      if (moved != null)
-      {
-        viewport.scroll(moved);
-      }
-    }
-
-    if (wirePull != null)
-    {
-      wirePull.update(viewport.transformScreenToGridX(x), viewport.transformScreenToGridY(y));
-
-      if (!wirePull.isEmpty())
-      {
-        if (!selection.isEmpty())
-        {
-          selection = new ArrayList<>();
-        }
-      }
-    }
-
-    if (selectionRectangle != null)
-    {
-      selectionRectangle.drag(viewport, x, y);
-      updateSelection();
-    }
-
-    mousePositionOnGridChanged();
   }
 
   private void updateSelection()
@@ -351,7 +422,6 @@ public class SimulatorEditor
 
   private void mousePositionOnGridChanged()
   {
-    calculatePlacementViewPosition();
     calculateHighlightedPort();
   }
 
@@ -413,20 +483,6 @@ public class SimulatorEditor
     return circuitEditor.getDiscreteViewInScreenSpace(viewport, mousePosition);
   }
 
-  private void calculatePlacementViewPosition()
-  {
-    if (placementView != null)
-    {
-      Int2D position = mousePosition.get();
-      if (position != null)
-      {
-        int x = viewport.transformScreenToGridX(position.x);
-        int y = viewport.transformScreenToGridY(position.y);
-        placementView.setPosition(x, y);
-      }
-    }
-  }
-
   private void addActions(SimulatorPanel simulatorPanel)
   {
     SimulatorActions.create(this, simulatorPanel);
@@ -447,7 +503,7 @@ public class SimulatorEditor
     }
   }
 
-  public void createPlacementView(ViewFactory viewFactory)
+  public void createPlacementView(ViewFactory<?, ?> viewFactory)
   {
     Int2D position = getMousePositionOnGrid();
     if (position != null)

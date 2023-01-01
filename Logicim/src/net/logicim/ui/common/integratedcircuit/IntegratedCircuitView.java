@@ -109,15 +109,20 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
+  public void simulationStarted(Simulation simulation)
+  {
+    integratedCircuit.simulationStarted(simulation);
+  }
+
+  @Override
   public void enable(Simulation simulation)
   {
     integratedCircuit.enable(simulation);
   }
 
-  @Override
-  public void simulationStarted(Simulation simulation)
+  public void disable()
   {
-    integratedCircuit.simulationStarted(simulation);
+    integratedCircuit.disable();
   }
 
   @Override

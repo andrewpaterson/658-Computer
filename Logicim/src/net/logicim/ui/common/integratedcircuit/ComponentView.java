@@ -1,6 +1,7 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.PortView;
@@ -86,5 +87,13 @@ public abstract class ComponentView
   public abstract String getName();
 
   public abstract String getDescription();
+
+  public abstract Int2D getGridPosition();
+
+  public abstract void enable(Simulation simulation);
+
+  public abstract void disable();
+
+  public abstract void setPosition(int x, int y);
 }
 

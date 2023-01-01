@@ -27,5 +27,11 @@ public abstract class Tuple2
   public abstract void subtract(float x, float y);
 
   public abstract void divide(int i);
+
+  @Override
+  public String toString()
+  {
+    return super.toString();
+  }
 }
 

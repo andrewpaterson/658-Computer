@@ -19,7 +19,6 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
     extends DiscreteView<PROPERTIES>
 {
   protected PowerSource powerSource;
-  protected boolean enabled;
 
   public PowerSourceView(CircuitEditor circuitEditor,
                          Int2D position,
@@ -50,18 +49,6 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
                                   properties.name,
                                   getVoltageOut());
     powerSource.disable();
-  }
-
-  @Override
-  public boolean isEnabled()
-  {
-    return enabled;
-  }
-
-  @Override
-  public void enable(Simulation simulation)
-  {
-    enabled = true;
   }
 
   @Override
@@ -128,6 +115,24 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
   public PowerSource getPowerSource()
   {
     return powerSource;
+  }
+
+  @Override
+  public boolean isEnabled()
+  {
+    return powerSource.isEnabled();
+  }
+
+  @Override
+  public void enable(Simulation simulation)
+  {
+    powerSource.enable(simulation);
+  }
+
+  @Override
+  public void disable()
+  {
+    powerSource.disable();
   }
 
   public abstract float getVoltageOut();

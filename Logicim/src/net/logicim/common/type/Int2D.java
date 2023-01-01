@@ -22,6 +22,12 @@ public class Int2D
     this.y = y;
   }
 
+  public Int2D(float x, float y)
+  {
+    this.x = Math.round(x);
+    this.y = Math.round(y);
+  }
+
   public Int2D(Float2D p)
   {
     this.x = Math.round(p.x);

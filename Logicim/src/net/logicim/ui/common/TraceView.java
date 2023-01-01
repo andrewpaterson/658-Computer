@@ -210,6 +210,32 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
+  @Override
+  public Int2D getGridPosition()
+  {
+    return line.getStart();
+  }
+
+  @Override
+  public void enable(Simulation simulation)
+  {
+  }
+
+  @Override
+  public void disable()
+  {
+  }
+
+  @Override
+  public void setPosition(int x, int y)
+  {
+    Int2D length = new Int2D(line.getEnd());
+    length.subtract(line.getStart());
+    line.getStart().set(x, y);
+    line.getEnd().set(x, y);
+    line.getEnd().add(length);
+  }
+
   public TraceNet getTrace()
   {
     return trace;

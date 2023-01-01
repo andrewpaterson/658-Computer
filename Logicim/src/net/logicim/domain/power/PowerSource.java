@@ -80,5 +80,15 @@ public class PowerSource
   {
     enabled = false;
   }
+
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+
+  public void enable(Simulation simulation)
+  {
+    enabled = true;
+  }
 }
 

@@ -7,12 +7,14 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PortHolder;
 import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.state.State;
 
 import java.util.List;
 
 public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
+    implements Discrete
 {
   protected Circuit circuit;
   protected PINS pins;
@@ -182,7 +184,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     boolean removed = events.remove(event);
     if (!removed)
     {
-      throw new SimulatorException("Cannot remove event");
+      throw new SimulatorException("Cannot remove event on %s [%S].", getClass().getSimpleName(), getDescription());
     }
   }
 
@@ -191,6 +193,25 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     float vcc = getVCC(time);
     float gnd = getGND(time);
     return (!Float.isNaN(vcc) && vcc > 0.0f) && (!Float.isNaN(gnd) && gnd == 0.0f);
+  }
+
+  @Override
+  public PortHolder getPortHolder()
+  {
+    return pins;
+  }
+
+  @Override
+  public void disconnect(Simulation simulation)
+  {
+    disconnectPorts(simulation);
+
+    List<IntegratedCircuitEvent> events = this.events.toList();
+    for (IntegratedCircuitEvent event : events)
+    {
+      simulation.removeEvent(event);
+    }
+    this.events.clear();
   }
 }
 

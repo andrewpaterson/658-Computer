@@ -1,7 +1,6 @@
 package net.logicim.domain.common;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.power.PowerSource;
 
@@ -40,22 +39,19 @@ public class Circuit
     powerSources.add(powerSource);
   }
 
-  public void remove(IntegratedCircuit<?, ?> integratedCircuit, Simulation simulation)
+  public void remove(IntegratedCircuit<?, ?> integratedCircuit)
   {
     integratedCircuits.remove(integratedCircuit);
-    for (Port port : integratedCircuit.getPorts())
-    {
-      port.disconnect(simulation);
-    }
   }
 
-  public void remove(PowerSource powerSource, Simulation simulation)
+  public void remove(PowerSource powerSource)
   {
     powerSources.remove(powerSource);
-    for (Port port : powerSource.getPorts())
-    {
-      port.disconnect(simulation);
-    }
+  }
+
+  public void disconnectDiscrete(Discrete discrete, Simulation simulation)
+  {
+    discrete.disconnect(simulation);
   }
 
   public List<IntegratedCircuit<? extends Pins, ? extends State>> getIntegratedCircuits(String type)

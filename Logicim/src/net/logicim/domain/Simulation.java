@@ -1,6 +1,7 @@
 package net.logicim.domain;
 
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.event.Event;
 import net.logicim.domain.common.port.event.PortEvent;
 
 public class Simulation
@@ -37,7 +38,7 @@ public class Simulation
     return timeline.getTime();
   }
 
-  public void removeEvent(PortEvent event)
+  public void removeEvent(Event event)
   {
     timeline.remove(event);
   }

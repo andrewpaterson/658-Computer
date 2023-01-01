@@ -108,7 +108,7 @@ public class CircuitEditor
     List<ConnectionView> connectionViews = disconnectDiscrete(integratedCircuitView);
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
-    circuit.remove(integratedCircuit, simulation);
+    circuit.remove(integratedCircuit);
     discreteViews.remove(integratedCircuitView);
 
     return connectConnections(connectionViews);
@@ -119,7 +119,7 @@ public class CircuitEditor
     List<ConnectionView> connectionViews = disconnectDiscrete(powerSourceView);
 
     PowerSource powerSource = powerSourceView.getPowerSource();
-    circuit.remove(powerSource, simulation);
+    circuit.remove(powerSource);
     discreteViews.remove(powerSourceView);
 
     return connectConnections(connectionViews);
@@ -140,6 +140,9 @@ public class CircuitEditor
         connectionViews.add(connection);
       }
     }
+
+    circuit.disconnectDiscrete(discreteView.getDiscrete(), simulation);
+
     return connectionViews;
   }
 
@@ -164,7 +167,7 @@ public class CircuitEditor
       if (componentView instanceof TraceView)
       {
         traceDeleted = true;
-        updatedPortViews.addAll(deleteTrace((TraceView) componentView));
+        updatedPortViews.addAll(deleteTraceView((TraceView) componentView));
       }
     }
 
@@ -177,12 +180,12 @@ public class CircuitEditor
     return traceDeleted;
   }
 
-  protected void deleteTrace(ConnectionView connectionView, TraceView traceView)
+  protected void deleteTraceView(ConnectionView connectionView, TraceView traceView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     if (!connectionView.isConcrete())
     {
-      updatedPortViews = deleteTrace(traceView);
+      updatedPortViews = deleteTraceView(traceView);
     }
     else
     {
@@ -192,7 +195,7 @@ public class CircuitEditor
         if (componentView instanceof TraceView)
         {
           TraceView concreteTraceView1 = (TraceView) componentView;
-          updatedPortViews.addAll(deleteTrace(concreteTraceView1));
+          updatedPortViews.addAll(deleteTraceView(concreteTraceView1));
         }
       }
     }
@@ -201,7 +204,14 @@ public class CircuitEditor
     validateConsistency();
   }
 
-  public void remove(TraceView traceView)
+  public void removeTraceView(TraceView traceView)
+  {
+    disconnectTraceView(traceView);
+    traceView.removed();
+    traceViews.remove(traceView);
+  }
+
+  protected List<ConnectionView> disconnectTraceView(TraceView traceView)
   {
     ConnectionView startConnection = traceView.getStartConnection();
     ConnectionView endConnection = traceView.getEndConnection();
@@ -211,8 +221,11 @@ public class CircuitEditor
 
     startConnection.remove(traceView);
     endConnection.remove(traceView);
-    traceView.removed();
-    traceViews.remove(traceView);
+
+    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    connectionViews.add(startConnection);
+    connectionViews.add(endConnection);
+    return connectionViews;
   }
 
   public void disconnectTraceNet(Set<ConnectionView> connectionsNet)
@@ -578,7 +591,7 @@ public class CircuitEditor
         {
           largest.y = y2;
         }
-        remove(mergeView);
+        removeTraceView(mergeView);
       }
 
       if (isValidTrace(smallest, largest))
@@ -655,7 +668,7 @@ public class CircuitEditor
         {
           Int2D startPosition = traceView.getStartPosition();
           Int2D endPosition = traceView.getEndPosition();
-          remove(traceView);
+          removeTraceView(traceView);
 
           new TraceView(this, startPosition, position);
           new TraceView(this, position, endPosition);
@@ -664,14 +677,14 @@ public class CircuitEditor
     }
   }
 
-  public Set<PortView> deleteTrace(TraceView traceView)
+  public Set<PortView> deleteTraceView(TraceView traceView)
   {
     if (!traceView.isRemoved())
     {
       ConnectionView startConnection = traceView.getStartConnection();
       ConnectionView endConnection = traceView.getEndConnection();
 
-      remove(traceView);
+      removeTraceView(traceView);
 
       Set<PortView> portViews = mergeAndConnect(startConnection);
       portViews.addAll(mergeAndConnect(endConnection));
@@ -725,7 +738,7 @@ public class CircuitEditor
     return null;
   }
 
-  public Set<TraceView> createTraces(Line line)
+  public Set<TraceView> createTraceViews(Line line)
   {
     splitTrace(line.getStart(), line.getDirection());
     splitTrace(line.getEnd(), line.getDirection());
@@ -910,22 +923,25 @@ public class CircuitEditor
   {
     for (TraceView traceView : traceViews)
     {
-      ConnectionView startConnection = traceView.getStartConnection();
-      for (ComponentView componentView : startConnection.getConnectedComponents())
+      if (!traceView.isRemoved())
       {
-        if (componentView instanceof DiscreteView)
+        ConnectionView startConnection = traceView.getStartConnection();
+        for (ComponentView componentView : startConnection.getConnectedComponents())
         {
-          if (!discreteViews.contains(componentView))
+          if (componentView instanceof DiscreteView)
           {
-            throw new SimulatorException("Discrete component [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+            if (!discreteViews.contains(componentView))
+            {
+              throw new SimulatorException("Discrete component [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+            }
           }
-        }
 
-        if (componentView instanceof TraceView)
-        {
-          if (!traceViews.contains(componentView))
+          if (componentView instanceof TraceView)
           {
-            throw new SimulatorException("Trace [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+            if (!traceViews.contains(componentView))
+            {
+              throw new SimulatorException("Trace [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+            }
           }
         }
       }
@@ -1037,17 +1053,42 @@ public class CircuitEditor
     validateConsistency();
   }
 
-  public void placeComponentViews(List<ComponentView> componentViews)
+  public void startMoveComponents(List<ComponentView> componentViews)
   {
-    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ComponentView componentView : componentViews)
     {
       if (componentView instanceof DiscreteView)
       {
-        updatedPortViews.addAll(createAndConnectDiscreteView((DiscreteView<?>) componentView));
+        DiscreteView<?> discreteView = (DiscreteView<?>) componentView;
+        List<ConnectionView> connectionViews = disconnectDiscrete(discreteView);
+
+        connectConnections(connectionViews);
       }
       else if (componentView instanceof TraceView)
       {
+        TraceView traceView = (TraceView) componentView;
+        deleteTraceView(traceView);
+      }
+    }
+    validateConsistency();
+  }
+
+  public void doneMoveComponents(List<ComponentView> componentViews)
+  {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+
+    for (ComponentView componentView : componentViews)
+    {
+      if (componentView instanceof DiscreteView)
+      {
+        DiscreteView<?> discreteView = (DiscreteView<?>) componentView;
+        updatedPortViews.addAll(createAndConnectDiscreteView(discreteView));
+      }
+      else if (componentView instanceof TraceView)
+      {
+        TraceView traceView = (TraceView) componentView;
+        Set<TraceView> newTraces = createTraceViews(traceView.getLine());
+        finaliseCreatedTraces(newTraces);
       }
     }
 
@@ -1118,7 +1159,7 @@ public class CircuitEditor
     {
       if (componentView instanceof TraceView)
       {
-        deleteTrace((TraceView) componentView);
+        deleteTraceView((TraceView) componentView);
       }
       else if (componentView instanceof DiscreteView)
       {
@@ -1131,16 +1172,15 @@ public class CircuitEditor
     }
   }
 
-  public void disconnectComponent(ComponentView componentView)
+  protected void finaliseCreatedTraces(Set<TraceView> traceViews)
   {
-    if (componentView instanceof DiscreteView)
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    for (TraceView traceView : traceViews)
     {
-      disconnectDiscrete((DiscreteView<?>) componentView);
-    }
-    else if (componentView instanceof TraceView)
-    {
+      updatedPortViews.addAll(connectConnections(traceView.getStartConnection()));
     }
 
+    fireConnectionEvents(updatedPortViews);
     validateConsistency();
   }
 }

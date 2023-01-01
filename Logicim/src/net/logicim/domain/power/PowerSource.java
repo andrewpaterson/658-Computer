@@ -2,6 +2,7 @@ package net.logicim.domain.power;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Discrete;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
 import net.logicim.domain.common.port.PortType;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class PowerSource
     extends PortHolder
+    implements Discrete
 {
   protected Circuit circuit;
   protected String name;
@@ -89,6 +91,18 @@ public class PowerSource
   public void enable(Simulation simulation)
   {
     enabled = true;
+  }
+
+  @Override
+  public PortHolder getPortHolder()
+  {
+    return this;
+  }
+
+  @Override
+  public void disconnect(Simulation simulation)
+  {
+    disconnectPorts(simulation);
   }
 }
 

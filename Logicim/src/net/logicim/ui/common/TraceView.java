@@ -47,19 +47,22 @@ public class TraceView
 
     int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-    if (!startConnection.isNonJunctionTracesOnly())
+    if (!isRemoved())
     {
-      graphics.fillOval(x1 - lineWidth,
-                        y1 - lineWidth,
-                        lineWidth * 2,
-                        lineWidth * 2);
-    }
-    if (!endConnection.isNonJunctionTracesOnly())
-    {
-      graphics.fillOval(x2 - lineWidth,
-                        y2 - lineWidth,
-                        lineWidth * 2,
-                        lineWidth * 2);
+      if (!startConnection.isNonJunctionTracesOnly())
+      {
+        graphics.fillOval(x1 - lineWidth,
+                          y1 - lineWidth,
+                          lineWidth * 2,
+                          lineWidth * 2);
+      }
+      if (!endConnection.isNonJunctionTracesOnly())
+      {
+        graphics.fillOval(x2 - lineWidth,
+                          y2 - lineWidth,
+                          lineWidth * 2,
+                          lineWidth * 2);
+      }
     }
   }
 
@@ -280,45 +283,6 @@ public class TraceView
     {
       throw new SimulatorException("Trace must be disconnected before removal.");
     }
-  }
-
-  public boolean isStartStraight()
-  {
-    return areComponentsStraightTraces(startConnection.getConnectedComponents());
-  }
-
-  public boolean isEndStraight()
-  {
-    return areComponentsStraightTraces(endConnection.getConnectedComponents());
-  }
-
-  private boolean areComponentsStraightTraces(List<ComponentView> connectedComponents)
-  {
-    if (connectedComponents.size() == 1)
-    {
-      return true;
-    }
-
-    Rotation direction = line.getDirection();
-    for (ComponentView connectedComponent : connectedComponents)
-    {
-      if (connectedComponent != this)
-      {
-        if (connectedComponent instanceof TraceView)
-        {
-          TraceView otherTrace = (TraceView) connectedComponent;
-          if (!direction.isStraight(otherTrace.getDirection()))
-          {
-            return false;
-          }
-        }
-        else
-        {
-          return false;
-        }
-      }
-    }
-    return true;
   }
 
   public TraceView getOtherTrace(List<ComponentView> connectedComponents)

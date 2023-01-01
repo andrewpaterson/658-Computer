@@ -3,7 +3,9 @@ package net.logicim.ui.integratedcircuit.standard.power;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Discrete;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PortHolder;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
@@ -54,6 +56,12 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
   @Override
   public void simulationStarted(Simulation simulation)
   {
+  }
+
+  @Override
+  public Discrete getDiscrete()
+  {
+    return powerSource;
   }
 
   @Override

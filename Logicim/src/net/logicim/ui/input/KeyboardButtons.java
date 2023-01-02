@@ -2,6 +2,8 @@ package net.logicim.ui.input;
 
 import net.logicim.common.SimulatorException;
 
+import java.util.Arrays;
+
 public class KeyboardButtons
 {
   public boolean[] buttons;
@@ -40,6 +42,11 @@ public class KeyboardButtons
   {
     button = getButtonIndex(button);
     return buttons[button];
+  }
+
+  public void clear()
+  {
+    Arrays.fill(buttons, false);
   }
 }
 

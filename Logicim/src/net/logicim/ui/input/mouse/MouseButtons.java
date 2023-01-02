@@ -1,5 +1,7 @@
 package net.logicim.ui.input.mouse;
 
+import java.util.Arrays;
+
 public class MouseButtons
 {
   public boolean[] buttons;
@@ -40,6 +42,11 @@ public class MouseButtons
   public void invalidate()
   {
     mouseWheel = 0;
+  }
+
+  public void clear()
+  {
+    Arrays.fill(buttons, false);
   }
 }
 

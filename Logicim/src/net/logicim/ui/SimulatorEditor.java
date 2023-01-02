@@ -275,6 +275,8 @@ public class SimulatorEditor
   {
     this.selection = circuitEditor.doneMoveComponents(moveComponents.getComponents());
     moveComponents = null;
+
+    mousePositionOnGridChanged();
   }
 
   private void clearSelection()
@@ -456,7 +458,7 @@ public class SimulatorEditor
 
   private void calculateHighlightedPort()
   {
-    if ((placementView == null) && selectionRectangle == null)
+    if ((placementView == null) && (selectionRectangle == null) && selection.isEmpty())
     {
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
@@ -707,6 +709,26 @@ public class SimulatorEditor
     return hoverDiscreteView;
   }
 
+  public DiscreteView<?> getSingleSelectionDiscreteView()
+  {
+    DiscreteView<?> singleDiscreteView = null;
+    for (ComponentView componentView : selection)
+    {
+      if (componentView instanceof DiscreteView)
+      {
+        if (singleDiscreteView == null)
+        {
+          singleDiscreteView = (DiscreteView<?>) componentView;
+        }
+        else
+        {
+          return null;
+        }
+      }
+    }
+    return singleDiscreteView;
+  }
+
   public Colours getColours()
   {
     return viewport.getColours();
@@ -715,6 +737,12 @@ public class SimulatorEditor
   public CircuitEditor getCircuitEditor()
   {
     return circuitEditor;
+  }
+
+  public void clearButtons()
+  {
+    mouseButtons.clear();
+    keyboardButtons.clear();
   }
 }
 

@@ -250,6 +250,7 @@ public class SimulatorPanel
         }
       }
     }
+    simulatorEditor.clearButtons();
   }
 
   public JFrame getFrame()

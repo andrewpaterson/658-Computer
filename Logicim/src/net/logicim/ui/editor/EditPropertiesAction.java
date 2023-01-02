@@ -23,6 +23,7 @@ import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class EditPropertiesAction
     extends SimulatorEditorAction
     implements ButtonAction
@@ -113,6 +114,10 @@ public class EditPropertiesAction
   public void executeEditorAction()
   {
     discreteView = editor.getHoverDiscreteView();
+    if (discreteView == null)
+    {
+      discreteView = editor.getSingleSelectionDiscreteView();
+    }
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
 
     if (discreteView != null)

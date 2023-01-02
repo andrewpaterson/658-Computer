@@ -559,7 +559,7 @@ public class CircuitEditor
     return connectedPorts;
   }
 
-  public TraceView mergeTrace(TraceView traceView)
+  public TraceView mergeTrace(TraceView traceView, boolean forDelete)
   {
     Rotation direction = traceView.getDirection();
     ConnectionView startConnection = traceView.getStartConnection();
@@ -601,7 +601,14 @@ public class CircuitEditor
 
       if (isValidTrace(smallest, largest))
       {
-        return new TraceView(this, smallest, largest);
+        if (!forDelete)
+        {
+          return new TraceView(this, smallest, largest);
+        }
+        else
+        {
+          return null;
+        }
       }
       else
       {
@@ -693,16 +700,16 @@ public class CircuitEditor
 
       removeTraceView(traceView);
 
-      Set<PortView> portViews = mergeAndConnect(startConnection);
-      portViews.addAll(mergeAndConnect(endConnection));
+      Set<PortView> portViews = mergeAndConnectForDelete(startConnection);
+      portViews.addAll(mergeAndConnectForDelete(endConnection));
       return portViews;
     }
     return new LinkedHashSet<>();
   }
 
-  protected Set<PortView> mergeAndConnect(ConnectionView startConnection)
+  protected Set<PortView> mergeAndConnectForDelete(ConnectionView startConnection)
   {
-    TraceView traceView = mergeTraceConnection(startConnection);
+    TraceView traceView = mergeTraceConnectionForDelete(startConnection);
     ConnectionView connection;
     if (traceView != null)
     {
@@ -715,7 +722,7 @@ public class CircuitEditor
     return connectConnections(connection);
   }
 
-  private TraceView mergeTraceConnection(ConnectionView startConnection)
+  private TraceView mergeTraceConnectionForDelete(ConnectionView startConnection)
   {
     List<ComponentView> connectedComponents = startConnection.getConnectedComponents();
     TraceView traceView1 = null;
@@ -740,7 +747,7 @@ public class CircuitEditor
 
     if ((traceView1 != null) && (traceView2 != null))
     {
-      return mergeTrace(traceView1);
+      return mergeTrace(traceView1, true);
     }
     return null;
   }
@@ -779,7 +786,7 @@ public class CircuitEditor
     {
       for (TraceView traceView : editedTraceViews)
       {
-        TraceView mergedTrace = mergeTrace(traceView);
+        TraceView mergedTrace = mergeTrace(traceView, false);
         if (!mergedTrace.isRemoved())
         {
           mergedTraces.add(mergedTrace);

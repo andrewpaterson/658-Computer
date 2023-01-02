@@ -273,8 +273,7 @@ public class SimulatorEditor
 
   protected void doneMoveComponents()
   {
-    circuitEditor.doneMoveComponents(moveComponents.getComponents());
-    clearSelection();
+    this.selection = circuitEditor.doneMoveComponents(moveComponents.getComponents());
     moveComponents = null;
   }
 
@@ -687,6 +686,8 @@ public class SimulatorEditor
   public void load(CircuitData circuitData)
   {
     placementView = null;
+    moveComponents = null;
+    clearSelection();
     clearHover();
     wirePull = null;
 

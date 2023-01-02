@@ -213,6 +213,11 @@ public class CircuitEditor
 
   protected List<ConnectionView> disconnectTraceView(TraceView traceView)
   {
+    if (traceView.isRemoved())
+    {
+      throw new SimulatorException("Cannot disconnect a removed trace.");
+    }
+
     ConnectionView startConnection = traceView.getStartConnection();
     ConnectionView endConnection = traceView.getEndConnection();
 
@@ -656,8 +661,9 @@ public class CircuitEditor
     return result;
   }
 
-  private void splitTrace(Int2D position, Rotation direction)
+  private List<TraceView> splitTrace(Int2D position, Rotation direction)
   {
+    List<TraceView> result = new ArrayList<>();
     List<TraceView> traceViews = getTraceViewsInGridSpace(position);
     for (TraceView traceView : traceViews)
     {
@@ -670,11 +676,12 @@ public class CircuitEditor
           Int2D endPosition = traceView.getEndPosition();
           removeTraceView(traceView);
 
-          new TraceView(this, startPosition, position);
-          new TraceView(this, position, endPosition);
+          result.add(new TraceView(this, startPosition, position));
+          result.add(new TraceView(this, position, endPosition));
         }
       }
     }
+    return result;
   }
 
   public Set<PortView> deleteTraceView(TraceView traceView)
@@ -740,40 +747,43 @@ public class CircuitEditor
 
   public Set<TraceView> createTraceViews(Line line)
   {
-    splitTrace(line.getStart(), line.getDirection());
-    splitTrace(line.getEnd(), line.getDirection());
+    List<TraceView> editedTraceViews = new ArrayList<>();
+
+    editedTraceViews.addAll(splitTrace(line.getStart(), line.getDirection()));
+    editedTraceViews.addAll(splitTrace(line.getEnd(), line.getDirection()));
 
     List<ConnectionView> sortedConnections = new ArrayList<>(getConnectionsOnLine(line));
 
     Collections.sort(sortedConnections);
 
-    List<TraceView> result = null;
     if (sortedConnections.size() == 0)
     {
-      result = new ArrayList<>();
-      result.add(new TraceView(this, line.getStart(), line.getEnd()));
+      editedTraceViews.add(new TraceView(this, line.getStart(), line.getEnd()));
     }
     else
     {
       if (line.isEastWest())
       {
         List<Int2D> positions = getEastWestPositions(line, sortedConnections);
-        result = createTracesBetweenEmptyPositions(positions);
+        editedTraceViews.addAll(createTracesBetweenEmptyPositions(positions));
       }
       else if (line.isNorthSouth())
       {
         List<Int2D> positions = getNorthSouthPositions(line, sortedConnections);
-        result = createTracesBetweenEmptyPositions(positions);
+        editedTraceViews.addAll(createTracesBetweenEmptyPositions(positions));
       }
     }
 
     Set<TraceView> mergedTraces = new LinkedHashSet<>();
-    if ((null != result) && (result.size() >= 1))
+    if (!editedTraceViews.isEmpty())
     {
-      for (TraceView traceView : result)
+      for (TraceView traceView : editedTraceViews)
       {
         TraceView mergedTrace = mergeTrace(traceView);
-        mergedTraces.add(mergedTrace);
+        if (!mergedTrace.isRemoved())
+        {
+          mergedTraces.add(mergedTrace);
+        }
       }
     }
     return mergedTraces;
@@ -1067,33 +1077,68 @@ public class CircuitEditor
       else if (componentView instanceof TraceView)
       {
         TraceView traceView = (TraceView) componentView;
-        deleteTraceView(traceView);
+        disconnectTraceView(traceView);
+        traceView.removed();
       }
     }
     validateConsistency();
   }
 
-  public void doneMoveComponents(List<ComponentView> componentViews)
+  public List<ComponentView> doneMoveComponents(List<ComponentView> componentViews)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
 
+    List<Line> lines = new ArrayList<>();
+
+    for (ComponentView componentView : componentViews)
+    {
+      if (componentView instanceof TraceView)
+      {
+        TraceView traceView = (TraceView) componentView;
+        traceViews.remove(traceView);
+        lines.add(traceView.getLine());
+      }
+    }
+
+    List<ComponentView> selection = new ArrayList<>();
     for (ComponentView componentView : componentViews)
     {
       if (componentView instanceof DiscreteView)
       {
         DiscreteView<?> discreteView = (DiscreteView<?>) componentView;
         updatedPortViews.addAll(createAndConnectDiscreteView(discreteView));
+        selection.add(discreteView);
       }
-      else if (componentView instanceof TraceView)
-      {
-        TraceView traceView = (TraceView) componentView;
-        Set<TraceView> newTraces = createTraceViews(traceView.getLine());
-        finaliseCreatedTraces(newTraces);
-      }
+    }
+
+    for (Line line : lines)
+    {
+      Set<TraceView> newTraces = createTraceViews(line);
+      finaliseCreatedTraces(newTraces);
+      selection.addAll(newTraces);
     }
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();
+
+    List<ComponentView> cleanSelection = new ArrayList<>();
+    for (ComponentView componentView : selection)
+    {
+      if (componentView instanceof TraceView)
+      {
+        TraceView traceView = (TraceView) componentView;
+        if (!traceView.isRemoved())
+        {
+          cleanSelection.add(componentView);
+        }
+      }
+      else
+      {
+        cleanSelection.add(componentView);
+      }
+    }
+
+    return cleanSelection;
   }
 
   public List<ComponentView> getSelection(Float2D start, Float2D end)
@@ -1177,6 +1222,10 @@ public class CircuitEditor
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (TraceView traceView : traceViews)
     {
+      if (traceView.isRemoved())
+      {
+        throw new SimulatorException("Cannot finalise a removed Trace.");
+      }
       updatedPortViews.addAll(connectConnections(traceView.getStartConnection()));
     }
 

@@ -58,6 +58,7 @@ public class SimulatorEditor
   protected WirePull wirePull;
 
   protected MoveComponents moveComponents;
+  protected UndoStack undoStack;
 
   protected boolean running;
   protected long runTimeStep;
@@ -66,7 +67,7 @@ public class SimulatorEditor
 
   public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
-    inputEvents = new ConcurrentLinkedDeque<>();
+    this.inputEvents = new ConcurrentLinkedDeque<>();
 
     this.viewport = new Viewport(this);
 
@@ -82,8 +83,11 @@ public class SimulatorEditor
     this.placementView = null;
     this.creationRotation = Rotation.North;
 
-    running = false;
-    runTimeStep = LongTime.nanosecondsToTime(0.25f);
+    this.running = false;
+    this.runTimeStep = LongTime.nanosecondsToTime(0.25f);
+
+    this.moveComponents = null;
+    this.undoStack = new UndoStack();
 
     addActions(simulatorPanel);
   }
@@ -138,12 +142,16 @@ public class SimulatorEditor
     {
       if (isInSelectedComponent(x, y))
       {
+        pushUndo();
+
         startMoveComponents(x, y);
       }
       else if ((hoverConnectionView != null && placementView == null))
       {
         if (wirePull == null)
         {
+          pushUndo();
+
           wirePull = new WirePull();
           wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
         }
@@ -158,6 +166,11 @@ public class SimulatorEditor
         }
       }
     }
+  }
+
+  protected void pushUndo()
+  {
+    undoStack.push(save());
   }
 
   public void mouseReleased(int x, int y, int button)
@@ -314,7 +327,7 @@ public class SimulatorEditor
   private void executePlacement(DiscreteView<?> placementView)
   {
     circuitEditor.placeDiscreteView(placementView);
-  }
+}
 
   private void executeWirePull(WirePull wirePull)
   {
@@ -517,6 +530,8 @@ public class SimulatorEditor
 
   public void createPlacementView(ViewFactory<?, ?> viewFactory)
   {
+    pushUndo();
+
     Int2D position = getMousePositionOnGrid();
     if (position != null)
     {
@@ -572,14 +587,29 @@ public class SimulatorEditor
   {
     discardPlacement();
     discardWirePull();
-    circuitEditor.clearSelection();
+    clearSelection();
 
     calculateHighlightedPort();
   }
 
+  protected void clearSelection()
+  {
+   if (!circuitEditor.isSelectionEmpty())
+   {
+     pushUndo();
+
+     circuitEditor.clearSelection();
+   }
+  }
+
   private void discardWirePull()
   {
-    wirePull = null;
+    if (wirePull != null)
+    {
+      wirePull = null;
+
+      undoStack.discard();
+    }
   }
 
   private void discardPlacement()
@@ -588,6 +618,8 @@ public class SimulatorEditor
     {
       circuitEditor.deleteDiscreteView(placementView);
       placementView = null;
+
+      undoStack.discard();
     }
   }
 
@@ -697,6 +729,24 @@ public class SimulatorEditor
   {
     mouseButtons.clear();
     keyboardButtons.clear();
+  }
+
+  public void undo()
+  {
+    CircuitData circuitData = undoStack.pop();
+    if (circuitData != null)
+    {
+      load(circuitData);
+    }
+  }
+
+  public void redo()
+  {
+    CircuitData circuitData = undoStack.unpop();
+    if (circuitData != null)
+    {
+      load(circuitData);
+    }
   }
 }
 

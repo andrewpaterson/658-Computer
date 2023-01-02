@@ -26,11 +26,11 @@ public class TraceView
 
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
-    line = new Line(start, end);
+    this.line = new Line(start, end);
     this.trace = null;
     circuitEditor.add(this);
-    startConnection = circuitEditor.getOrAddConnection(start, this);
-    endConnection = circuitEditor.getOrAddConnection(end, this);
+    this.startConnection = circuitEditor.getOrAddConnection(start, this);
+    this.endConnection = circuitEditor.getOrAddConnection(end, this);
   }
 
   public void paint(Graphics2D graphics, Viewport viewport, long time)
@@ -343,10 +343,22 @@ public class TraceView
 
   public TraceData save(boolean selected)
   {
-    return new TraceData(trace.getId(),
+    return new TraceData(getTraceId(),
                          getStartPosition(),
                          getEndPosition(),
                          selected);
+  }
+
+  protected long getTraceId()
+  {
+    if (trace != null)
+    {
+      return trace.getId();
+    }
+    else
+    {
+      return 0L;
+    }
   }
 
   public Line getLine()

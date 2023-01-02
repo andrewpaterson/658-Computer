@@ -75,8 +75,11 @@ public abstract class Port
   {
     if (this.trace == null)
     {
-      this.trace = trace;
-      trace.connect(this);
+      if (trace != null)
+      {
+        this.trace = trace;
+        this.trace.connect(this);
+      }
     }
     else
     {

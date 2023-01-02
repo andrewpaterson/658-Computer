@@ -50,7 +50,8 @@ public class SimulatorActions
     editor.addAction(new InputAction(new ResetSimulation(editor), KeyEvent.VK_R, Up, Up, Down));
     editor.addAction(new InputAction(new SaveSimulation(panel), KeyEvent.VK_S, Up, Up, Down));
     editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Up, Up, Down));
-    editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
+    editor.addAction(new InputAction(new UndoAction(editor), KeyEvent.VK_Z, Up, Up, Down));
+    editor.addAction(new InputAction(new RedoAction(editor), KeyEvent.VK_Y, Up, Up, Down));
   }
 }
 

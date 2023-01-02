@@ -52,12 +52,13 @@ public class GroundView
   }
 
   @Override
-  public DiscreteData save()
+  public DiscreteData save(boolean selected)
   {
     return new GroundPortData(position,
                               rotation,
                               properties.name,
-                              savePorts());
+                              savePorts(),
+                              selected);
   }
 
   @Override

@@ -37,7 +37,7 @@ public class XorGateView
   }
 
   @Override
-  public XorGateData save()
+  public XorGateData save(boolean selected)
   {
     return new XorGateData(position,
                            rotation,
@@ -45,6 +45,7 @@ public class XorGateView
                            properties.family.getFamily(),
                            saveEvents(),
                            savePorts(),
+                           selected,
                            saveState(),
                            properties.inputCount,
                            properties.explicitPowerPorts);

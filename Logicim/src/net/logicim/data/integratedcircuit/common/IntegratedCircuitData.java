@@ -40,9 +40,10 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                String family,
                                List<IntegratedCircuitEventData<?>> events,
                                List<PortData> ports,
+                               boolean selected,
                                STATE state)
   {
-    super(position, rotation, name, ports);
+    super(position, rotation, name, ports, selected);
     this.family = family;
     this.events = events;
     this.state = state;

@@ -37,7 +37,7 @@ public class XnorGateView
   }
 
   @Override
-  public XnorGateData save()
+  public XnorGateData save(boolean selected)
   {
     return new XnorGateData(position,
                             rotation,
@@ -45,6 +45,7 @@ public class XnorGateView
                             properties.family.getFamily(),
                             saveEvents(),
                             savePorts(),
+                            selected,
                             saveState(),
                             properties.inputCount,
                             properties.explicitPowerPorts);

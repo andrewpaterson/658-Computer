@@ -7,7 +7,6 @@ import net.logicim.data.integratedcircuit.common.DiscreteData;
 import net.logicim.data.port.PortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Discrete;
-import net.logicim.domain.common.port.PortHolder;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -306,7 +305,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
 
   public abstract String getType();
 
-  public abstract DiscreteData save();
+  public abstract DiscreteData save(boolean selected);
 
   protected abstract PROPERTIES createProperties();
 

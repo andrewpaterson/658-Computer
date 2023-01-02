@@ -36,7 +36,7 @@ public class InverterView
   }
 
   @Override
-  public InverterData save()
+  public InverterData save(boolean selected)
   {
     return new InverterData(position,
                             rotation,
@@ -44,6 +44,7 @@ public class InverterView
                             properties.family.getFamily(),
                             saveEvents(),
                             savePorts(),
+                            selected,
                             saveState(),
                             properties.explicitPowerPorts);
   }

@@ -27,6 +27,7 @@ public class OrGateData
                     String family,
                     List<IntegratedCircuitEventData<?>> events,
                     List<PortData> ports,
+                    boolean selected,
                     State state,
                     int inputCount,
                     boolean explicitPowerPorts)
@@ -37,6 +38,7 @@ public class OrGateData
           family,
           events,
           ports,
+          selected,
           state,
           inputCount,
           explicitPowerPorts);

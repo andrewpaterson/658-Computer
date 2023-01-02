@@ -61,12 +61,13 @@ public class PositivePowerView
   }
 
   @Override
-  public DiscreteData save()
+  public DiscreteData save(boolean selected)
   {
     return new PositivePowerPortData(position,
                                      rotation,
                                      properties.name,
                                      savePorts(),
+                                     selected,
                                      properties.voltage);
   }
 

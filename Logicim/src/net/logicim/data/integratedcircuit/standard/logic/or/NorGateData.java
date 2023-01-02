@@ -27,6 +27,7 @@ public class NorGateData
                      String family,
                      List<IntegratedCircuitEventData<?>> events,
                      List<PortData> ports,
+                     boolean selected,
                      State state,
                      int inputCount,
                      boolean explicitPowerPorts)
@@ -37,6 +38,7 @@ public class NorGateData
           family,
           events,
           ports,
+          selected,
           state,
           inputCount,
           explicitPowerPorts);

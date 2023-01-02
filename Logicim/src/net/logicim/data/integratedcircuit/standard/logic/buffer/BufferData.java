@@ -27,6 +27,7 @@ public class BufferData
                     String family,
                     List<IntegratedCircuitEventData<?>> events,
                     List<PortData> ports,
+                    boolean selected,
                     State state,
                     boolean explicitPowerPorts)
   {
@@ -36,6 +37,7 @@ public class BufferData
           family,
           events,
           ports,
+          selected,
           state,
           explicitPowerPorts);
   }

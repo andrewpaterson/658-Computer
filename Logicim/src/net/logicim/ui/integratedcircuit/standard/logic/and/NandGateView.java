@@ -37,7 +37,7 @@ public class NandGateView
   }
 
   @Override
-  public NandGateData save()
+  public NandGateData save(boolean selected)
   {
     return new NandGateData(position,
                             rotation,
@@ -45,6 +45,7 @@ public class NandGateView
                             properties.family.getFamily(),
                             saveEvents(),
                             savePorts(),
+                            selected,
                             saveState(),
                             properties.inputCount,
                             properties.explicitPowerPorts);

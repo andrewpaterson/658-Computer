@@ -37,7 +37,7 @@ public class OrGateView
   }
 
   @Override
-  public OrGateData save()
+  public OrGateData save(boolean selected)
   {
     return new OrGateData(position,
                           rotation,
@@ -45,6 +45,7 @@ public class OrGateView
                           properties.family.getFamily(),
                           saveEvents(),
                           savePorts(),
+                          selected,
                           saveState(),
                           properties.inputCount,
                           properties.explicitPowerPorts);

@@ -341,9 +341,12 @@ public class TraceView
     return startConnection == null || endConnection == null;
   }
 
-  public TraceData save()
+  public TraceData save(boolean selected)
   {
-    return new TraceData(trace.getId(), getStartPosition(), getEndPosition());
+    return new TraceData(trace.getId(),
+                         getStartPosition(),
+                         getEndPosition(),
+                         selected);
   }
 
   public Line getLine()

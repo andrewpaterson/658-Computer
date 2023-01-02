@@ -222,13 +222,14 @@ public class OscilloscopeView
   }
 
   @Override
-  public IntegratedCircuitData<?, ?> save()
+  public IntegratedCircuitData<?, ?> save(boolean selected)
   {
     return new OscilloscopeData(position, rotation,
                                 properties.name,
                                 properties.family.getFamily(),
                                 saveEvents(),
                                 savePorts(),
+                                selected,
                                 saveState(),
                                 properties.inputCount,
                                 properties.numberOfDivsWide,

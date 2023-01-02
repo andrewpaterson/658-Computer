@@ -27,6 +27,7 @@ public class XnorGateData
                       String family,
                       List<IntegratedCircuitEventData<?>> events,
                       List<PortData> ports,
+                      boolean selected,
                       State state,
                       int inputCount,
                       boolean explicitPowerPorts)
@@ -37,6 +38,7 @@ public class XnorGateData
           family,
           events,
           ports,
+          selected,
           state,
           inputCount,
           explicitPowerPorts);

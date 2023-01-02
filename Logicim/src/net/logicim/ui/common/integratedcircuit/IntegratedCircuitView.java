@@ -10,7 +10,6 @@ import net.logicim.domain.common.Discrete;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PortHolder;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.state.State;
@@ -181,7 +180,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 
   protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
 
-  public abstract IntegratedCircuitData<?, ?> save();
+  public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 
   @Override
   public Discrete getDiscrete()

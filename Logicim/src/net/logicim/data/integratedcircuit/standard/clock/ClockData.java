@@ -31,6 +31,7 @@ public class ClockData
                    float frequency,
                    List<IntegratedCircuitEventData<?>> events,
                    List<PortData> ports,
+                   boolean selected,
                    ClockOscillatorState state,
                    boolean inverseOut,
                    boolean explicitPowerPorts)
@@ -41,6 +42,7 @@ public class ClockData
           family,
           events,
           ports,
+          selected,
           state,
           explicitPowerPorts);
     this.frequency = frequency;

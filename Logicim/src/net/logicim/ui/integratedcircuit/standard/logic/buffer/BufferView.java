@@ -36,7 +36,7 @@ public class BufferView
   }
 
   @Override
-  public BufferData save()
+  public BufferData save(boolean selected)
   {
     return new BufferData(position,
                           rotation,
@@ -44,6 +44,7 @@ public class BufferView
                           properties.family.getFamily(),
                           saveEvents(),
                           savePorts(),
+                          selected,
                           saveState(),
                           properties.explicitPowerPorts);
   }

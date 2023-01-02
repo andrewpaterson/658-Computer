@@ -25,6 +25,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
                        String family,
                        List<IntegratedCircuitEventData<?>> events,
                        List<PortData> ports,
+                       boolean selected,
                        State state,
                        int inputCount,
                        boolean explicitPowerPorts)
@@ -35,6 +36,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
           family,
           events,
           ports,
+          selected,
           state,
           explicitPowerPorts);
     this.inputCount = inputCount;

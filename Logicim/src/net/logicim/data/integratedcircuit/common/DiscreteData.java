@@ -16,21 +16,30 @@ import java.util.List;
 public abstract class DiscreteData
     extends ReflectiveData
 {
+  protected String name;
+
   protected Int2D position;
   protected Rotation rotation;
-  protected String name;
+
   protected List<PortData> ports;
+
+  protected boolean selected;
 
   public DiscreteData()
   {
   }
 
-  public DiscreteData(Int2D position, Rotation rotation, String name, List<PortData> ports)
+  public DiscreteData(Int2D position,
+                      Rotation rotation,
+                      String name,
+                      List<PortData> ports,
+                      boolean selected)
   {
     this.position = position;
     this.rotation = rotation;
     this.name = name;
     this.ports = ports;
+    this.selected = selected;
   }
 
   protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView<?> discreteView)
@@ -50,9 +59,14 @@ public abstract class DiscreteData
 
   public DiscreteView<?> createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    DiscreteView<?> integratedCircuitView = create(circuitEditor, traceLoader);
-    connectAndLoad(circuitEditor, traceLoader, integratedCircuitView);
-    return integratedCircuitView;
+    DiscreteView<?> discreteView = create(circuitEditor, traceLoader);
+    connectAndLoad(circuitEditor, traceLoader, discreteView);
+
+    if (selected)
+    {
+      circuitEditor.select(discreteView);
+    }
+    return discreteView;
   }
 
   protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView<?> discreteView)

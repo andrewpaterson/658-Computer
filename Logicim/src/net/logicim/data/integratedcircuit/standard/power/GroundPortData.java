@@ -19,9 +19,13 @@ public class GroundPortData
   {
   }
 
-  public GroundPortData(Int2D position, Rotation rotation, String name, List<PortData> ports)
+  public GroundPortData(Int2D position,
+                        Rotation rotation,
+                        String name,
+                        List<PortData> ports,
+                        boolean selected)
   {
-    super(position, rotation, name, ports);
+    super(position, rotation, name, ports,selected);
   }
 
   protected GroundView create(CircuitEditor circuitEditor, TraceLoader traceLoader)

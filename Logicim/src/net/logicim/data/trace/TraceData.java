@@ -14,15 +14,18 @@ public class TraceData
   public Int2D start;
   public Int2D end;
 
+  protected boolean selected;
+
   public TraceData()
   {
   }
 
-  public TraceData(long id, Int2D start, Int2D end)
+  public TraceData(long id, Int2D start, Int2D end, boolean selected)
   {
     this.id = id;
     this.start = start.clone();
     this.end = end.clone();
+    this.selected = selected;
   }
 
   public TraceView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
@@ -30,6 +33,12 @@ public class TraceData
     TraceView traceView = new TraceView(circuitEditor, start, end);
     TraceNet trace = traceLoader.create(id);
     traceView.connectTraceNet(trace, circuitEditor.getSimulation());
+
+    if (selected)
+    {
+      circuitEditor.select(traceView);
+    }
+
     return traceView;
   }
 }

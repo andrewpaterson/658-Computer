@@ -21,9 +21,14 @@ public class PositivePowerPortData
   {
   }
 
-  public PositivePowerPortData(Int2D position, Rotation rotation, String name, List<PortData> ports, float voltage)
+  public PositivePowerPortData(Int2D position,
+                               Rotation rotation,
+                               String name,
+                               List<PortData> ports,
+                               boolean selected,
+                               float voltage)
   {
-    super(position, rotation, name, ports);
+    super(position, rotation, name, ports, selected);
     this.voltage = voltage;
   }
 

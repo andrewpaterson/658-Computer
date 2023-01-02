@@ -37,7 +37,7 @@ public class NorGateView
   }
 
   @Override
-  public NorGateData save()
+  public NorGateData save(boolean selected)
   {
     return new NorGateData(position,
                            rotation,
@@ -45,6 +45,7 @@ public class NorGateView
                            properties.family.getFamily(),
                            saveEvents(),
                            savePorts(),
+                           selected,
                            saveState(),
                            properties.inputCount,
                            properties.explicitPowerPorts);

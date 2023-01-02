@@ -116,8 +116,9 @@ public class EditPropertiesAction
     discreteView = editor.getHoverDiscreteView();
     if (discreteView == null)
     {
-      discreteView = editor.getSingleSelectionDiscreteView();
+      discreteView = editor.getCircuitEditor().getSingleSelectionDiscreteView();
     }
+
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
 
     if (discreteView != null)

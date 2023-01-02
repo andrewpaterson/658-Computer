@@ -43,7 +43,7 @@ public class AndGateView
   }
 
   @Override
-  public AndGateData save()
+  public AndGateData save(boolean selected)
   {
     return new AndGateData(position,
                            rotation,
@@ -51,6 +51,7 @@ public class AndGateView
                            properties.family.getFamily(),
                            saveEvents(),
                            savePorts(),
+                           selected,
                            saveState(),
                            properties.inputCount,
                            properties.explicitPowerPorts);

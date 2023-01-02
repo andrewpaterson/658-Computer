@@ -33,6 +33,7 @@ public class OscilloscopeData
                           String family,
                           List<IntegratedCircuitEventData<?>> events,
                           List<PortData> ports,
+                          boolean selected,
                           OscilloscopeState state,
                           int inputCount,
                           int numberOfDivsWide,
@@ -40,7 +41,7 @@ public class OscilloscopeData
                           int divHeightInGrids,
                           float sampleFrequency)
   {
-    super(position, rotation, name, family, events, ports, state);
+    super(position, rotation, name, family, events, ports, selected, state);
     this.inputCount = inputCount;
     this.numberOfDivsWide = numberOfDivsWide;
     this.samplesPerDiv = samplesPerDiv;

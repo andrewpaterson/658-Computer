@@ -35,6 +35,8 @@ public class CircuitEditor
   protected Circuit circuit;
   protected Simulation simulation;
   protected VoltageRepresentation colours;
+  protected List<ComponentView> selection;
+
 
   public CircuitEditor(VoltageRepresentation colours)
   {
@@ -43,6 +45,7 @@ public class CircuitEditor
     this.discreteViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
     this.colours = colours;
+    this.selection = new ArrayList<>();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -967,10 +970,11 @@ public class CircuitEditor
 
   public CircuitData save()
   {
+    Set<ComponentView> selection = new HashSet<>(this.selection);
     ArrayList<DiscreteData> discreteDatas = new ArrayList<>();
     for (DiscreteView<?> discreteView : discreteViews)
     {
-      DiscreteData discreteData = discreteView.save();
+      DiscreteData discreteData = discreteView.save(selection.contains(discreteView));
       if (discreteData == null)
       {
         throw new SimulatorException("%s [%s] save may not return null.", discreteView.getClass().getSimpleName(), discreteView.getName());
@@ -982,7 +986,7 @@ public class CircuitEditor
     ArrayList<TraceData> traceDatas = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      TraceData traceData = traceView.save();
+      TraceData traceData = traceView.save(selection.contains(traceView));
       traceDatas.add(traceData);
     }
 
@@ -994,6 +998,7 @@ public class CircuitEditor
 
   public void load(CircuitData circuitData)
   {
+    clearSelection();
     simulation.getTimeline().load(circuitData.timeline);
 
     TraceLoader traceLoader = new TraceLoader();
@@ -1089,9 +1094,17 @@ public class CircuitEditor
       }
     }
     validateConsistency();
+
+    clearSelection();
   }
 
-  public List<ComponentView> doneMoveComponents(List<ComponentView> componentViews)
+  public void updateSelection(SelectionRectangle selectionRectangle)
+  {
+    selection = getSelection(selectionRectangle.start, selectionRectangle.end);
+  }
+
+
+  public void doneMoveComponents(List<ComponentView> componentViews)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
 
@@ -1145,7 +1158,25 @@ public class CircuitEditor
       }
     }
 
-    return cleanSelection;
+    this.selection = cleanSelection;
+  }
+
+  public List<ComponentView> getSelection()
+  {
+    return selection;
+  }
+
+  public void clearSelection()
+  {
+    if (!selection.isEmpty())
+    {
+      selection = new ArrayList<>();
+    }
+  }
+
+  public boolean isSelectionEmpty()
+  {
+    return selection.isEmpty();
   }
 
   public List<ComponentView> getSelection(Float2D start, Float2D end)
@@ -1238,6 +1269,40 @@ public class CircuitEditor
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();
+  }
+
+  public void deleteSelection()
+  {
+    for (ComponentView componentView : selection)
+    {
+      deleteComponent(componentView);
+    }
+    clearSelection();
+  }
+
+  public DiscreteView<?> getSingleSelectionDiscreteView()
+  {
+    DiscreteView<?> singleDiscreteView = null;
+    for (ComponentView componentView : selection)
+    {
+      if (componentView instanceof DiscreteView)
+      {
+        if (singleDiscreteView == null)
+        {
+          singleDiscreteView = (DiscreteView<?>) componentView;
+        }
+        else
+        {
+          return null;
+        }
+      }
+    }
+    return singleDiscreteView;
+  }
+
+  public void select(ComponentView componentView)
+  {
+    selection.add(componentView);
   }
 }
 

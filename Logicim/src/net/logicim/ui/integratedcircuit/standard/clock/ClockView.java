@@ -138,7 +138,7 @@ public class ClockView
     graphics.drawLine(x5, y5, x6, y6);
   }
 
-  public ClockData save()
+  public ClockData save(boolean selected)
   {
     return new ClockData(position,
                          rotation,
@@ -147,6 +147,7 @@ public class ClockView
                          properties.frequency_Hz,
                          saveEvents(),
                          savePorts(),
+                         selected,
                          saveState(),
                          properties.inverseOut,
                          properties.explicitPowerPorts);

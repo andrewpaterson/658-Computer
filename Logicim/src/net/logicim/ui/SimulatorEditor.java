@@ -22,7 +22,6 @@ import net.logicim.ui.util.SimulatorActions;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +54,6 @@ public class SimulatorEditor
   protected ConnectionView hoverConnectionView;
 
   protected SelectionRectangle selectionRectangle;
-  protected List<ComponentView> selection;
 
   protected WirePull wirePull;
 
@@ -67,7 +65,6 @@ public class SimulatorEditor
   public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
     inputEvents = new ConcurrentLinkedDeque<>();
-    selection = new ArrayList<>();
 
     this.viewport = new Viewport(this);
 
@@ -154,7 +151,7 @@ public class SimulatorEditor
         {
           selectionRectangle = new SelectionRectangle();
           selectionRectangle.start(viewport, x, y);
-          updateSelection();
+          circuitEditor.updateSelection(selectionRectangle);
         }
       }
     }
@@ -170,7 +167,7 @@ public class SimulatorEditor
       {
         executePlacement(placementView);
         placementView = null;
-        mousePositionOnGridChanged();
+        calculateHighlightedPort();
       }
       else if (wirePull != null)
       {
@@ -178,7 +175,7 @@ public class SimulatorEditor
         {
           executeWirePull(wirePull);
           wirePull = null;
-          mousePositionOnGridChanged();
+          calculateHighlightedPort();
         }
         else
         {
@@ -186,7 +183,7 @@ public class SimulatorEditor
 
           selectionRectangle = new SelectionRectangle();
           selectionRectangle.start(viewport, x, y);
-          updateSelection();
+          circuitEditor.updateSelection(selectionRectangle);
           selectionRectangle = null;
         }
       }
@@ -198,7 +195,7 @@ public class SimulatorEditor
       if (selectionRectangle != null)
       {
         selectionRectangle.drag(viewport, x, y);
-        updateSelection();
+        circuitEditor.updateSelection(selectionRectangle);
 
         selectionRectangle = null;
       }
@@ -231,14 +228,14 @@ public class SimulatorEditor
 
       if (!wirePull.isEmpty())
       {
-        clearSelection();
+        circuitEditor.clearSelection();
       }
     }
 
     if (selectionRectangle != null)
     {
       selectionRectangle.drag(viewport, x, y);
-      updateSelection();
+      circuitEditor.updateSelection(selectionRectangle);
     }
     else
     {
@@ -248,16 +245,15 @@ public class SimulatorEditor
       }
     }
 
-    mousePositionOnGridChanged();
+    calculateHighlightedPort();
   }
 
   protected void startMoveComponents(int mouseX, int mouseY)
   {
-    moveComponents = new MoveComponents(viewport, mouseX, mouseY, selection);
+    moveComponents = new MoveComponents(viewport, mouseX, mouseY, circuitEditor.getSelection());
     circuitEditor.startMoveComponents(moveComponents.getComponents());
 
     clearHover();
-    clearSelection();
   }
 
   protected void moveComponents(int mouseX, int mouseY)
@@ -273,18 +269,10 @@ public class SimulatorEditor
 
   protected void doneMoveComponents()
   {
-    this.selection = circuitEditor.doneMoveComponents(moveComponents.getComponents());
+    circuitEditor.doneMoveComponents(moveComponents.getComponents());
     moveComponents = null;
 
-    mousePositionOnGridChanged();
-  }
-
-  private void clearSelection()
-  {
-    if (!selection.isEmpty())
-    {
-      selection = new ArrayList<>();
-    }
+    calculateHighlightedPort();
   }
 
   private boolean isInSelectedComponent(int mouseX, int mouseY)
@@ -297,7 +285,7 @@ public class SimulatorEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
 
-    for (ComponentView componentView : selection)
+    for (ComponentView componentView : circuitEditor.getSelection())
     {
       if (componentView instanceof DiscreteView)
       {
@@ -362,11 +350,6 @@ public class SimulatorEditor
     this.height = height;
   }
 
-  private void updateSelection()
-  {
-    selection = circuitEditor.getSelection(selectionRectangle.start, selectionRectangle.end);
-  }
-
   private void paintDebugPosition(Graphics2D graphics)
   {
     Int2D position = mousePosition.get();
@@ -413,7 +396,7 @@ public class SimulatorEditor
       selectionRectangle.paint(graphics, viewport);
     }
 
-    for (ComponentView componentView : selection)
+    for (ComponentView componentView : circuitEditor.getSelection())
     {
       componentView.paintSelected(graphics, viewport);
     }
@@ -448,17 +431,12 @@ public class SimulatorEditor
 
     viewport.zoomTo(mousePosition.get(), (float) rotation / 10.0f);
 
-    mousePositionOnGridChanged();
-  }
-
-  private void mousePositionOnGridChanged()
-  {
     calculateHighlightedPort();
   }
 
   private void calculateHighlightedPort()
   {
-    if ((placementView == null) && (selectionRectangle == null) && selection.isEmpty())
+    if ((placementView == null) && (selectionRectangle == null) && circuitEditor.isSelectionEmpty())
     {
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
@@ -589,12 +567,9 @@ public class SimulatorEditor
   {
     discardPlacement();
     discardWirePull();
-    stopSelection();
-  }
+    circuitEditor.clearSelection();
 
-  private void stopSelection()
-  {
-    clearSelection();
+    calculateHighlightedPort();
   }
 
   private void discardWirePull()
@@ -623,7 +598,7 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
-    if (selection.isEmpty())
+    if (circuitEditor.isSelectionEmpty())
     {
       if (hoverConnectionView != null)
       {
@@ -648,16 +623,11 @@ public class SimulatorEditor
     }
     else
     {
-      for (ComponentView componentView : selection)
-      {
-        circuitEditor.deleteComponent(componentView);
-      }
-      clearSelection();
+      circuitEditor.deleteSelection();
     }
 
     clearHover();
-
-    mousePositionOnGridChanged();
+    calculateHighlightedPort();
   }
 
   public void increaseSimulationSpeed()
@@ -689,7 +659,6 @@ public class SimulatorEditor
   {
     placementView = null;
     moveComponents = null;
-    clearSelection();
     clearHover();
     wirePull = null;
 
@@ -707,26 +676,6 @@ public class SimulatorEditor
   public DiscreteView<?> getHoverDiscreteView()
   {
     return hoverDiscreteView;
-  }
-
-  public DiscreteView<?> getSingleSelectionDiscreteView()
-  {
-    DiscreteView<?> singleDiscreteView = null;
-    for (ComponentView componentView : selection)
-    {
-      if (componentView instanceof DiscreteView)
-      {
-        if (singleDiscreteView == null)
-        {
-          singleDiscreteView = (DiscreteView<?>) componentView;
-        }
-        else
-        {
-          return null;
-        }
-      }
-    }
-    return singleDiscreteView;
   }
 
   public Colours getColours()

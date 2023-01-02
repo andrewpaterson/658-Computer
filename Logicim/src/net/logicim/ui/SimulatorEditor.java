@@ -62,6 +62,8 @@ public class SimulatorEditor
   protected boolean running;
   protected long runTimeStep;
 
+  protected Rotation creationRotation;
+
   public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
     inputEvents = new ConcurrentLinkedDeque<>();
@@ -78,6 +80,7 @@ public class SimulatorEditor
 
     this.circuitEditor = new CircuitEditor(viewport.getColours());
     this.placementView = null;
+    this.creationRotation = Rotation.North;
 
     running = false;
     runTimeStep = LongTime.nanosecondsToTime(0.25f);
@@ -518,7 +521,7 @@ public class SimulatorEditor
     if (position != null)
     {
       discardPlacement();
-      placementView = viewFactory.create(circuitEditor, position, Rotation.North);
+      placementView = viewFactory.create(circuitEditor, position, creationRotation);
     }
   }
 
@@ -537,6 +540,7 @@ public class SimulatorEditor
     if (placementView != null)
     {
       placementView.rotateRight();
+      creationRotation = placementView.getRotation();
     }
   }
 
@@ -545,6 +549,7 @@ public class SimulatorEditor
     if (placementView != null)
     {
       placementView.rotateLeft();
+      creationRotation = placementView.getRotation();
     }
   }
 

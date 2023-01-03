@@ -2,7 +2,6 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
-import net.logicim.ui.integratedcircuit.factory.ViewFactory;
 import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
 
 public class CreatePlacementView
@@ -19,7 +18,7 @@ public class CreatePlacementView
   @Override
   public void executeEditorAction()
   {
-    editor.createPlacementView(ViewFactoryStore.getInstance().get(discreteViewClass));
+    editor.startPlacementView(ViewFactoryStore.getInstance().get(discreteViewClass));
   }
 }
 

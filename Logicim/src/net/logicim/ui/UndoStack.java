@@ -8,44 +8,84 @@ import java.util.List;
 public class UndoStack
 {
   protected List<CircuitData> undoStack;
+  protected int size;
+  protected boolean lastPop;
+  protected boolean lastUnpop;
 
   public UndoStack()
   {
     undoStack = new ArrayList<>();
+    size = 0;
+    lastPop = false;
+    lastUnpop = false;
   }
 
   public void push(CircuitData circuitData)
   {
+    lastPop = false;
+    lastUnpop = true;
+
+    if (size != undoStack.size())
+    {
+      for (int i = undoStack.size() - 1; i > size; i--)
+      {
+        undoStack.remove(i);
+      }
+      size = undoStack.size();
+    }
+
     undoStack.add(circuitData);
-    System.out.println("UndoStack.push depth [" + undoStack.size() + "]");
+    size++;
+    System.out.println("UndoStack.push depth [" + size + ", " + undoStack.size() + "]");
   }
 
   public CircuitData pop()
   {
-    if (!undoStack.isEmpty())
+    lastPop = true;
+    if (size > 0)
     {
-      CircuitData circuitData = undoStack.get(undoStack.size() - 1);
-      undoStack.remove(undoStack.size() - 1);
-      System.out.println("UndoStack.pop depth [" + undoStack.size() + "]");
+      if (lastUnpop)
+      {
+        if (size > 1)
+        {
+          size--;
+        }
+      }
+      CircuitData circuitData = undoStack.get(size - 1);
+      size--;
+      lastUnpop = false;
+      System.out.println("UndoStack.pop depth [" + size + ", " + undoStack.size() + "]");
       return circuitData;
     }
     else
     {
+      lastUnpop = false;
       return null;
     }
   }
 
   public CircuitData unpop()
   {
-    return null;
-  }
-
-  public void discard()
-  {
-    if (!undoStack.isEmpty())
+    lastUnpop = true;
+    if (size < undoStack.size())
     {
-      undoStack.remove(undoStack.size() - 1);
-      System.out.println("UndoStack.discard depth [" + undoStack.size() + "]");
+      if (lastPop)
+      {
+        if (size < undoStack.size() - 1)
+        {
+          size++;
+        }
+      }
+      CircuitData circuitData = undoStack.get(size);
+      size++;
+      lastPop = false;
+      System.out.println("UndoStack.unpop depth [" + size + ", " + undoStack.size() + "]");
+      return circuitData;
+    }
+    else
+    {
+      lastPop = false;
+      return null;
     }
   }
 }

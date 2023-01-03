@@ -45,17 +45,13 @@ public class EditPropertiesAction
   {
     Map<Field, Object> map = propertiesPanel.getProperties();
 
-    editor.pushUndo();
     DiscreteProperties properties = discreteView.getProperties();
     boolean propertyChanged = updateProperties(map, properties);
 
     if (propertyChanged)
     {
       recreateDiscreteView(properties);
-    }
-    else
-    {
-      editor.discardUndo();
+      editor.pushUndo();
     }
 
     dialog.setVisible(false);

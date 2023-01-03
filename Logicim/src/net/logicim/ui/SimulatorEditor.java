@@ -95,6 +95,8 @@ public class SimulatorEditor
     this.previousSelection = new HashSet<>();
 
     addActions(simulatorPanel);
+
+    pushUndo();
   }
 
   public void windowClosing()
@@ -147,18 +149,13 @@ public class SimulatorEditor
     {
       if (isInSelectedComponent(x, y))
       {
-        pushUndo();
-
         startMoveComponents(x, y);
       }
       else if ((hoverConnectionView != null && placementView == null))
       {
         if (wirePull == null)
         {
-          pushUndo();
-
-          wirePull = new WirePull();
-          wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
+          startWirePull();
         }
       }
       else
@@ -171,11 +168,15 @@ public class SimulatorEditor
     }
   }
 
+  protected void startWirePull()
+  {
+    wirePull = new WirePull();
+    wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
+  }
+
   protected void startSelection(int x, int y)
   {
     previousSelection = new HashSet<>(circuitEditor.getSelection());
-    pushUndo();
-
     selectionRectangle = new SelectionRectangle();
     selectionRectangle.start(viewport, x, y);
     circuitEditor.updateSelection(selectionRectangle);
@@ -186,17 +187,12 @@ public class SimulatorEditor
     selectionRectangle.drag(viewport, x, y);
     circuitEditor.updateSelection(selectionRectangle);
 
-    if (!hasSelectionChanged())
+    if (hasSelectionChanged())
     {
-      discardUndo();
+      pushUndo();
     }
 
     selectionRectangle = null;
-  }
-
-  public void discardUndo()
-  {
-    undoStack.discard();
   }
 
   private boolean hasSelectionChanged()
@@ -222,11 +218,6 @@ public class SimulatorEditor
     return false;
   }
 
-  public void pushUndo()
-  {
-    undoStack.push(save());
-  }
-
   public void mouseReleased(int x, int y, int button)
   {
     mouseButtons.unset(button);
@@ -235,7 +226,7 @@ public class SimulatorEditor
     {
       if (placementView != null)
       {
-        executePlacement(placementView);
+        donePlacementView(placementView);
         placementView = null;
         calculateHighlightedPort();
       }
@@ -243,7 +234,7 @@ public class SimulatorEditor
       {
         if (!wirePull.isEmpty())
         {
-          executeWirePull(wirePull);
+          doneWirePull(wirePull);
           wirePull = null;
           calculateHighlightedPort();
         }
@@ -336,9 +327,9 @@ public class SimulatorEditor
   {
     circuitEditor.doneMoveComponents(moveComponents.getComponents());
 
-    if (!moveComponents.hasDiff())
+    if (moveComponents.hasDiff())
     {
-      discardUndo();
+      pushUndo();
     }
     moveComponents = null;
 
@@ -378,12 +369,13 @@ public class SimulatorEditor
     return false;
   }
 
-  private void executePlacement(DiscreteView<?> placementView)
+  private void donePlacementView(DiscreteView<?> placementView)
   {
     circuitEditor.placeDiscreteView(placementView);
+    pushUndo();
   }
 
-  private void executeWirePull(WirePull wirePull)
+  private void doneWirePull(WirePull wirePull)
   {
     Int2D firstPosition = wirePull.getFirstPosition();
     Int2D middlePosition = wirePull.getMiddlePosition();
@@ -412,6 +404,8 @@ public class SimulatorEditor
     }
 
     circuitEditor.finaliseCreatedTraces(traceViews);
+
+    pushUndo();
   }
 
   public void resized(int width, int height)
@@ -582,10 +576,8 @@ public class SimulatorEditor
     }
   }
 
-  public void createPlacementView(ViewFactory<?, ?> viewFactory)
+  public void startPlacementView(ViewFactory<?, ?> viewFactory)
   {
-    pushUndo();
-
     Int2D position = getMousePositionOnGrid();
     if (position != null)
     {
@@ -650,8 +642,6 @@ public class SimulatorEditor
   {
     if (!circuitEditor.isSelectionEmpty())
     {
-      pushUndo();
-
       circuitEditor.clearSelection();
     }
   }
@@ -661,8 +651,6 @@ public class SimulatorEditor
     if (wirePull != null)
     {
       wirePull = null;
-
-      discardUndo();
     }
   }
 
@@ -672,8 +660,6 @@ public class SimulatorEditor
     {
       circuitEditor.deleteDiscreteView(placementView);
       placementView = null;
-
-      discardUndo();
     }
   }
 
@@ -689,10 +675,12 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
-    pushUndo();
-
     boolean componentDeleted = deleteComponentIfPossible();
-    if (!componentDeleted)
+    if (componentDeleted)
+    {
+      pushUndo();
+    }
+    else
     {
       discardPlacement();
     }
@@ -775,8 +763,8 @@ public class SimulatorEditor
 
   public void loadFile(CircuitData circuitData)
   {
-    pushUndo();
     load(circuitData);
+    pushUndo();
   }
 
   protected void clearHover()
@@ -805,6 +793,11 @@ public class SimulatorEditor
   {
     mouseButtons.clear();
     keyboardButtons.clear();
+  }
+
+  public void pushUndo()
+  {
+    undoStack.push(save());
   }
 
   public void undo()

@@ -22,6 +22,7 @@ import net.logicim.ui.util.SimulatorActions;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,6 +55,7 @@ public class SimulatorEditor
   protected ConnectionView hoverConnectionView;
 
   protected SelectionRectangle selectionRectangle;
+  protected Set<ComponentView> previousSelection;
 
   protected WirePull wirePull;
 
@@ -88,6 +90,9 @@ public class SimulatorEditor
 
     this.moveComponents = null;
     this.undoStack = new UndoStack();
+
+    this.selectionRectangle = null;
+    this.previousSelection = new HashSet<>();
 
     addActions(simulatorPanel);
   }
@@ -160,12 +165,56 @@ public class SimulatorEditor
       {
         if (placementView == null)
         {
-          selectionRectangle = new SelectionRectangle();
-          selectionRectangle.start(viewport, x, y);
-          circuitEditor.updateSelection(selectionRectangle);
+          startSelection(x, y);
         }
       }
     }
+  }
+
+  protected void startSelection(int x, int y)
+  {
+    previousSelection = new HashSet<>(circuitEditor.getSelection());
+    pushUndo();
+
+    selectionRectangle = new SelectionRectangle();
+    selectionRectangle.start(viewport, x, y);
+    circuitEditor.updateSelection(selectionRectangle);
+  }
+
+  protected void doneSelection(int x, int y)
+  {
+    selectionRectangle.drag(viewport, x, y);
+    circuitEditor.updateSelection(selectionRectangle);
+
+    if (!hasSelectionChanged())
+    {
+      undoStack.discard();
+    }
+
+    selectionRectangle = null;
+  }
+
+  private boolean hasSelectionChanged()
+  {
+    Set<ComponentView> selection = new HashSet<>(circuitEditor.getSelection());
+    if (selection.isEmpty() && previousSelection.isEmpty())
+    {
+      return false;
+    }
+    if (selection.size() != previousSelection.size())
+    {
+      return true;
+    }
+
+    for (ComponentView componentView : selection)
+    {
+      if (!previousSelection.contains(componentView))
+      {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   protected void pushUndo()
@@ -197,9 +246,7 @@ public class SimulatorEditor
         {
           discardWirePull();
 
-          selectionRectangle = new SelectionRectangle();
-          selectionRectangle.start(viewport, x, y);
-          circuitEditor.updateSelection(selectionRectangle);
+          startSelection(x, y);
           selectionRectangle = null;
         }
       }
@@ -210,10 +257,7 @@ public class SimulatorEditor
 
       if (selectionRectangle != null)
       {
-        selectionRectangle.drag(viewport, x, y);
-        circuitEditor.updateSelection(selectionRectangle);
-
-        selectionRectangle = null;
+        doneSelection(x, y);
       }
     }
   }
@@ -286,6 +330,11 @@ public class SimulatorEditor
   protected void doneMoveComponents()
   {
     circuitEditor.doneMoveComponents(moveComponents.getComponents());
+
+    if (!moveComponents.hasDiff())
+    {
+      undoStack.discard();
+    }
     moveComponents = null;
 
     calculateHighlightedPort();
@@ -327,7 +376,7 @@ public class SimulatorEditor
   private void executePlacement(DiscreteView<?> placementView)
   {
     circuitEditor.placeDiscreteView(placementView);
-}
+  }
 
   private void executeWirePull(WirePull wirePull)
   {
@@ -594,12 +643,12 @@ public class SimulatorEditor
 
   protected void clearSelection()
   {
-   if (!circuitEditor.isSelectionEmpty())
-   {
-     pushUndo();
+    if (!circuitEditor.isSelectionEmpty())
+    {
+      pushUndo();
 
-     circuitEditor.clearSelection();
-   }
+      circuitEditor.clearSelection();
+    }
   }
 
   private void discardWirePull()
@@ -635,6 +684,20 @@ public class SimulatorEditor
 
   public void deleteComponent()
   {
+    pushUndo();
+
+    boolean componentDeleted = deleteComponentIfPossible();
+    if (!componentDeleted)
+    {
+      discardPlacement();
+    }
+
+    clearHover();
+    calculateHighlightedPort();
+  }
+
+  protected boolean deleteComponentIfPossible()
+  {
     if (circuitEditor.isSelectionEmpty())
     {
       if (hoverConnectionView != null)
@@ -642,6 +705,7 @@ public class SimulatorEditor
         if (hoverTraceView != null)
         {
           circuitEditor.deleteTraceView(hoverConnectionView, hoverTraceView);
+          return true;
         }
         else
         {
@@ -651,20 +715,21 @@ public class SimulatorEditor
           {
             circuitEditor.deleteDiscreteView(hoverDiscreteView);
           }
+          return true;
         }
       }
       else if (hoverDiscreteView != null)
       {
         circuitEditor.deleteDiscreteView(hoverDiscreteView);
+        return true;
       }
     }
     else
     {
       circuitEditor.deleteSelection();
+      return true;
     }
-
-    clearHover();
-    calculateHighlightedPort();
+    return false;
   }
 
   public void increaseSimulationSpeed()
@@ -701,6 +766,12 @@ public class SimulatorEditor
 
     circuitEditor = new CircuitEditor(viewport.getColours());
     circuitEditor.load(circuitData);
+  }
+
+  public void loadFile(CircuitData circuitData)
+  {
+    pushUndo();
+    load(circuitData);
   }
 
   protected void clearHover()

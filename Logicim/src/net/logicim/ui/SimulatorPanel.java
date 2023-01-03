@@ -241,7 +241,7 @@ public class SimulatorPanel
         CircuitData savedData = new LogicimFileReader().load(file);
         try
         {
-          simulatorEditor.load(savedData);
+          simulatorEditor.loadFile(savedData);
         }
         catch (RuntimeException exception)
         {

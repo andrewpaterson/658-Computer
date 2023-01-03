@@ -35,7 +35,7 @@ public abstract class DiscreteData
                       List<PortData> ports,
                       boolean selected)
   {
-    this.position = position;
+    this.position = new Int2D(position);
     this.rotation = rotation;
     this.name = name;
     this.ports = ports;

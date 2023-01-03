@@ -171,5 +171,12 @@ public class Float2D
   {
     return "" + x + ", " + y;
   }
+
+  @Override
+  public boolean isZero()
+  {
+    return x == 0 &&
+           y == 0;
+  }
 }
 

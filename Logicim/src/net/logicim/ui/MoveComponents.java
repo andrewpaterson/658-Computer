@@ -61,5 +61,10 @@ public class MoveComponents
   {
     return new ArrayList<>(componentStartPositions.keySet());
   }
+
+  public boolean hasDiff()
+  {
+    return !diff.isZero();
+  }
 }
 

@@ -33,5 +33,7 @@ public abstract class Tuple2
   {
     return super.toString();
   }
+
+  public abstract boolean isZero();
 }
 

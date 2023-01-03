@@ -25,8 +25,6 @@ public class SimulatorActions
 {
   public static void create(SimulatorEditor editor, SimulatorPanel panel)
   {
-    editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Down, Up));
-    editor.addAction(new InputAction(new PlacementRotateRight(editor), KeyEvent.VK_R, Up, Up, Up));
     editor.addAction(new InputAction(new StopCurrent(editor), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     editor.addAction(new InputAction(new RunOneEvent(editor), KeyEvent.VK_T, Up, Up, Up));
 
@@ -43,6 +41,9 @@ public class SimulatorActions
     editor.addAction(new InputAction(new CreatePlacementView(editor, GroundView.class), KeyEvent.VK_G, Up, Up, Up));
     editor.addAction(new InputAction(new CreatePlacementView(editor, PositivePowerView.class), KeyEvent.VK_V, Up, Up, Up));
 
+    editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
+    editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Down, Up));
+    editor.addAction(new InputAction(new PlacementRotateRight(editor), KeyEvent.VK_R, Up, Up, Up));
     editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Down));
     editor.addAction(new InputAction(new DeleteComponent(editor), KeyEvent.VK_DELETE, Up, Up, Up));
     editor.addAction(new InputAction(new IncreaseSimulationSpeed(editor), KeyEvent.VK_EQUALS, Up, Up, Up));

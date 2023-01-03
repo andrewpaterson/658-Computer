@@ -188,10 +188,15 @@ public class SimulatorEditor
 
     if (!hasSelectionChanged())
     {
-      undoStack.discard();
+      discardUndo();
     }
 
     selectionRectangle = null;
+  }
+
+  public void discardUndo()
+  {
+    undoStack.discard();
   }
 
   private boolean hasSelectionChanged()
@@ -217,7 +222,7 @@ public class SimulatorEditor
     return false;
   }
 
-  protected void pushUndo()
+  public void pushUndo()
   {
     undoStack.push(save());
   }
@@ -333,7 +338,7 @@ public class SimulatorEditor
 
     if (!moveComponents.hasDiff())
     {
-      undoStack.discard();
+      discardUndo();
     }
     moveComponents = null;
 
@@ -657,7 +662,7 @@ public class SimulatorEditor
     {
       wirePull = null;
 
-      undoStack.discard();
+      discardUndo();
     }
   }
 
@@ -668,7 +673,7 @@ public class SimulatorEditor
       circuitEditor.deleteDiscreteView(placementView);
       placementView = null;
 
-      undoStack.discard();
+      discardUndo();
     }
   }
 

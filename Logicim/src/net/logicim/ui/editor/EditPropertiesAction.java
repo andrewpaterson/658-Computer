@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
@@ -42,16 +43,27 @@ public class EditPropertiesAction
   @Override
   public void executeButtonAction()
   {
-    DiscreteProperties properties = discreteView.getProperties();
-    InstanceInspector instanceInspector = new InstanceInspector(properties);
     Map<Field, Object> map = propertiesPanel.getProperties();
-    for (Map.Entry<Field, Object> entry : map.entrySet())
+
+    editor.pushUndo();
+    DiscreteProperties properties = discreteView.getProperties();
+    boolean propertyChanged = updateProperties(map, properties);
+
+    if (propertyChanged)
     {
-      Field field = entry.getKey();
-      Object value = entry.getValue();
-      instanceInspector.setFieldValue(field, coerce(value, field.getType()));
+      recreateDiscreteView(properties);
+    }
+    else
+    {
+      editor.discardUndo();
     }
 
+    dialog.setVisible(false);
+    dialog.dispose();
+  }
+
+  protected void recreateDiscreteView(DiscreteProperties properties)
+  {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
 
     Rotation rotation = discreteView.getRotation();
@@ -63,9 +75,25 @@ public class EditPropertiesAction
 
     circuitEditor.deleteDiscreteView(this.discreteView);
     circuitEditor.placeDiscreteView(newDiscreteView);
+  }
 
-    dialog.setVisible(false);
-    dialog.dispose();
+  protected boolean updateProperties(Map<Field, Object> map, DiscreteProperties properties)
+  {
+    InstanceInspector instanceInspector = new InstanceInspector(properties);
+    boolean propertyChanged = false;
+    for (Map.Entry<Field, Object> entry : map.entrySet())
+    {
+      Field field = entry.getKey();
+      Object newValue = entry.getValue();
+      Object oldValue = instanceInspector.getFieldValue(field);
+
+      if (!Objects.equals(newValue, oldValue))
+      {
+        propertyChanged = true;
+        instanceInspector.setFieldValue(field, coerce(newValue, field.getType()));
+      }
+    }
+    return propertyChanged;
   }
 
   protected Object coerce(Object value, Class<?> type)

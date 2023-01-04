@@ -22,6 +22,11 @@ public class UndoStack
 
   public void push(CircuitData circuitData)
   {
+    if (lastUnpop)
+    {
+      size--;
+    }
+    
     lastPop = false;
     lastUnpop = true;
 

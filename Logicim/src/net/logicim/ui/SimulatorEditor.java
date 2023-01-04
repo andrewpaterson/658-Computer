@@ -817,5 +817,10 @@ public class SimulatorEditor
       load(circuitData);
     }
   }
+
+  public void replaceSelection(ComponentView newView, ComponentView oldView)
+  {
+    circuitEditor.replaceSelection(newView, oldView);
+  }
 }
 

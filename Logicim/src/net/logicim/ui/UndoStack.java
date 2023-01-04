@@ -26,7 +26,7 @@ public class UndoStack
     {
       size--;
     }
-    
+
     lastPop = false;
     lastUnpop = true;
 
@@ -41,7 +41,6 @@ public class UndoStack
 
     undoStack.add(circuitData);
     size++;
-    System.out.println("UndoStack.push depth [" + size + ", " + undoStack.size() + "]");
   }
 
   public CircuitData pop()
@@ -59,7 +58,6 @@ public class UndoStack
       CircuitData circuitData = undoStack.get(size - 1);
       size--;
       lastUnpop = false;
-      System.out.println("UndoStack.pop depth [" + size + ", " + undoStack.size() + "]");
       return circuitData;
     }
     else
@@ -84,7 +82,6 @@ public class UndoStack
       CircuitData circuitData = undoStack.get(size);
       size++;
       lastPop = false;
-      System.out.println("UndoStack.unpop depth [" + size + ", " + undoStack.size() + "]");
       return circuitData;
     }
     else

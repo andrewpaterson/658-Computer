@@ -50,27 +50,13 @@ public class EditPropertiesAction
 
     if (propertyChanged)
     {
-      recreateDiscreteView(properties);
+      DiscreteView<?> discreteView = recreateDiscreteView(properties);
+      editor.replaceSelection(discreteView, this.discreteView);
       editor.pushUndo();
     }
 
     dialog.setVisible(false);
     dialog.dispose();
-  }
-
-  protected void recreateDiscreteView(DiscreteProperties properties)
-  {
-    CircuitEditor circuitEditor = editor.getCircuitEditor();
-
-    Rotation rotation = discreteView.getRotation();
-    Int2D position = discreteView.getPosition();
-
-    Class<? extends DiscreteView<?>> aClass = (Class<? extends DiscreteView<?>>) discreteView.getClass();
-    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    DiscreteView<?> newDiscreteView = viewFactory.create(circuitEditor, position, rotation, properties);
-
-    circuitEditor.deleteDiscreteView(this.discreteView);
-    circuitEditor.placeDiscreteView(newDiscreteView);
   }
 
   protected boolean updateProperties(Map<Field, Object> map, DiscreteProperties properties)
@@ -90,6 +76,23 @@ public class EditPropertiesAction
       }
     }
     return propertyChanged;
+  }
+
+  protected DiscreteView<?> recreateDiscreteView(DiscreteProperties properties)
+  {
+    CircuitEditor circuitEditor = editor.getCircuitEditor();
+
+    Rotation rotation = discreteView.getRotation();
+    Int2D position = discreteView.getPosition();
+
+    Class<? extends DiscreteView<?>> aClass = (Class<? extends DiscreteView<?>>) discreteView.getClass();
+    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
+    DiscreteView<?> newDiscreteView = viewFactory.create(circuitEditor, position, rotation, properties);
+
+    circuitEditor.deleteDiscreteView(this.discreteView);
+    circuitEditor.placeDiscreteView(newDiscreteView);
+
+    return newDiscreteView;
   }
 
   protected Object coerce(Object value, Class<?> type)

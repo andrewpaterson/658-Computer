@@ -1304,5 +1304,14 @@ public class CircuitEditor
   {
     selection.add(componentView);
   }
+
+  public void replaceSelection(ComponentView newView, ComponentView oldView)
+  {
+    int i = selection.indexOf(oldView);
+    if (i != -1)
+    {
+      selection.set(i, newView);
+    }
+  }
 }
 

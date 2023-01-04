@@ -11,7 +11,7 @@ public class FamilyVoltageConfigurationTest
   static void testHighVoltageIn()
   {
     FamilyVoltageConfigurationStore.getInstance();
-    testHighVoltageIn("LVC", "0.0V -> 0.0V\n" +
+    testHighVoltageIn("LVC", "0.0V -> ----\n" +
                              "0.1V -> 0.1V\n" +
                              "0.2V -> 0.1V\n" +
                              "0.3V -> 0.2V\n" +
@@ -63,7 +63,7 @@ public class FamilyVoltageConfigurationTest
                              "4.9V -> 3.0V\n" +
                              "5.0V -> 3.0V\n");
 
-    testHighVoltageIn("LVX", "0.0V -> 0.0V\n" +
+    testHighVoltageIn("LVX", "0.0V -> ----\n" +
                              "0.1V -> 0.1V\n" +
                              "0.2V -> 0.2V\n" +
                              "0.3V -> 0.2V\n" +
@@ -115,7 +115,7 @@ public class FamilyVoltageConfigurationTest
                              "4.9V -> 3.3V\n" +
                              "5.0V -> 3.3V\n");
 
-    testHighVoltageIn("F", "0.0V -> 0.0V\n" +
+    testHighVoltageIn("F", "0.0V -> ----\n" +
                            "0.1V -> 0.0V\n" +
                            "0.2V -> 0.1V\n" +
                            "0.3V -> 0.1V\n" +
@@ -185,7 +185,7 @@ public class FamilyVoltageConfigurationTest
   static void testLowVoltageIn()
   {
     FamilyVoltageConfigurationStore.getInstance();
-    testLowVoltageIn("LVC", "0.0V -> 0.0V\n" +
+    testLowVoltageIn("LVC", "0.0V -> ----\n" +
                             "0.1V -> 0.0V\n" +
                             "0.2V -> 0.1V\n" +
                             "0.3V -> 0.1V\n" +
@@ -237,7 +237,7 @@ public class FamilyVoltageConfigurationTest
                             "4.9V -> 1.2V\n" +
                             "5.0V -> 1.2V\n");
 
-    testLowVoltageIn("F", "0.0V -> 0.0V\n" +
+    testLowVoltageIn("F", "0.0V -> ----\n" +
                           "0.1V -> 0.0V\n" +
                           "0.2V -> 0.0V\n" +
                           "0.3V -> 0.0V\n" +
@@ -307,7 +307,7 @@ public class FamilyVoltageConfigurationTest
   static void testHighVoltageOut()
   {
     FamilyVoltageConfigurationStore.getInstance();
-    testHighVoltageOut("LVC", "0.0V -> 0.0V\n" +
+    testHighVoltageOut("LVC", "0.0V -> ----\n" +
                               "0.1V -> 0.1V\n" +
                               "0.2V -> 0.2V\n" +
                               "0.3V -> 0.3V\n" +
@@ -359,7 +359,7 @@ public class FamilyVoltageConfigurationTest
                               "4.9V -> 4.6V\n" +
                               "5.0V -> 4.7V\n");
 
-    testHighVoltageOut("F", "0.0V -> 0.0V\n" +
+    testHighVoltageOut("F", "0.0V -> ----\n" +
                             "0.1V -> 0.1V\n" +
                             "0.2V -> 0.1V\n" +
                             "0.3V -> 0.2V\n" +
@@ -429,7 +429,7 @@ public class FamilyVoltageConfigurationTest
   static void testLowVoltageOut()
   {
     FamilyVoltageConfigurationStore.getInstance();
-    testLowVoltageOut("LVC", "0.0V -> 0.0V\n" +
+    testLowVoltageOut("LVC", "0.0V -> ----\n" +
                              "0.1V -> 0.0V\n" +
                              "0.2V -> 0.0V\n" +
                              "0.3V -> 0.0V\n" +
@@ -481,7 +481,7 @@ public class FamilyVoltageConfigurationTest
                              "4.9V -> 0.3V\n" +
                              "5.0V -> 0.3V\n");
 
-    testLowVoltageOut("F", "0.0V -> 0.0V\n" +
+    testLowVoltageOut("F", "0.0V -> ----\n" +
                            "0.1V -> 0.0V\n" +
                            "0.2V -> 0.0V\n" +
                            "0.3V -> 0.0V\n" +

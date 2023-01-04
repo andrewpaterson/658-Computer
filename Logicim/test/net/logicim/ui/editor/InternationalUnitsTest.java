@@ -4,12 +4,6 @@ import net.logicim.assertions.Validator;
 
 public class InternationalUnitsTest
 {
-  public static void test()
-  {
-    testToString();
-    testParse();
-  }
-
   protected static void testToString()
   {
     Validator.validate("1.00 Hz", InternationalUnits.toString(1, "Hz"));
@@ -49,6 +43,15 @@ public class InternationalUnitsTest
     Validator.validate(1, InternationalUnits.parse("1 Hz", "Hz"));
     Validator.validate(0, InternationalUnits.parse("0 Hz", "Hz"));
     Validator.validate(1, InternationalUnits.parse("1", "Hz"));
+    Validator.validate(1e6d, InternationalUnits.parse("1MHz", "Hz"));
+    Validator.validate(1e6d, InternationalUnits.parse("1Mhz", "Hz"));
+    Validator.validate(0.001, InternationalUnits.parse("1mhz", "Hz"));
+  }
+
+  public static void test()
+  {
+    testToString();
+    testParse();
   }
 }
 

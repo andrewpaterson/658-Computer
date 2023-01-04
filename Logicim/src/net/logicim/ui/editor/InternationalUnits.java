@@ -163,7 +163,7 @@ public class InternationalUnits
     char prefix = ' ';
     if (!unit.isEmpty())
     {
-      int index = s.lastIndexOf(unit);
+      int index = s.toLowerCase().lastIndexOf(unit.toLowerCase());
       if (index != -1)
       {
         prefix = s.charAt(index - 1);

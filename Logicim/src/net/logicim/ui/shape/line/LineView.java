@@ -39,7 +39,7 @@ public class LineView
     int y2 = viewport.transformGridToScreenSpaceY(transformedEnd);
 
     graphics.setStroke(viewport.getStroke());
-    graphics.setColor(getBorderColour(viewport));
+    graphics.setColor(getBorderColour());
 
     graphics.drawLine(x1, y1, x2, y2);
   }

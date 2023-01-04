@@ -8,10 +8,7 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.PortView;
-import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.VoltageColour;
+import net.logicim.ui.common.*;
 import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
@@ -97,11 +94,11 @@ public class ClockView
     if (state != null)
     {
       float voltage = integratedCircuit.getInternalVoltage(time);
-      clockColor = VoltageColour.getColourForVoltage(viewport.getColours(), voltage);
+      clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
     }
     else
     {
-      clockColor = viewport.getColours().getDisconnectedTrace();
+      clockColor = Colours.getInstance().getDisconnectedTrace();
     }
     graphics.setColor(clockColor);
 

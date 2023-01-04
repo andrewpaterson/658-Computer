@@ -12,7 +12,7 @@ public class Viewport
   protected float zoom;
   protected float scale;
   protected PanelSize size;
-  protected Colours colours;
+
   protected Strokes strokes;
 
   public Viewport(PanelSize size)
@@ -21,7 +21,7 @@ public class Viewport
     position = new Float2D(0, 0);
     zoom = 1.0f;
     scale = 10.0f;
-    colours = new Colours();
+    Colours.getInstance().getInstance();
     strokes = new Strokes();
   }
 
@@ -131,15 +131,15 @@ public class Viewport
 
     if ((zoom >= 0.3f) && (zoom < 1.5f))
     {
-      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, colours.getSmallGridDotColor());
+      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, Colours.getInstance().getSmallGridDotColor());
     }
     if ((zoom >= 1.5f) && (zoom < 2.0f))
     {
-      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, colours.getLargeGridDotColor());
+      drawDotGrid(graphics, left, dotsAcross, top, dotsDown, Colours.getInstance().getLargeGridDotColor());
     }
     else if (zoom >= 2.0f)
     {
-      drawCircleGrid(graphics, left, dotsAcross, top, dotsDown, colours.getLargeGridDotColor());
+      drawCircleGrid(graphics, left, dotsAcross, top, dotsDown, Colours.getInstance().getLargeGridDotColor());
     }
 
     graphics.setColor(color);
@@ -224,11 +224,6 @@ public class Viewport
     float centerY = p.y - size.getHeight() / 2.0f;
     float fy = (centerY - position.y) / (scale * zoom);
     return new Float2D(fx, fy);
-  }
-
-  public Colours getColours()
-  {
-    return colours;
   }
 
   public void paintRectangle(Graphics2D graphics,

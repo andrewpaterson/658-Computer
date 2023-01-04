@@ -1,5 +1,6 @@
 package net.logicim.ui.shape.common;
 
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
@@ -19,13 +20,21 @@ public abstract class ShapeView
     this.borderColour = null;
   }
 
+  public ShapeView(ShapeHolder shapeHolder, Color fillColour, Color borderColour)
+  {
+    this.shapeHolder = shapeHolder;
+    shapeHolder.add(this);
+    this.fillColour = fillColour;
+    this.borderColour = borderColour;
+  }
+
   public abstract void paint(Graphics2D graphics, Viewport viewport);
 
-  protected Color getFillColour(Viewport viewport)
+  protected Color getFillColour()
   {
     if (fillColour == null)
     {
-      return viewport.getColours().getShapeFill();
+      return Colours.getInstance().getShapeFill();
     }
     else
     {
@@ -33,11 +42,11 @@ public abstract class ShapeView
     }
   }
 
-  protected Color getBorderColour(Viewport viewport)
+  protected Color getBorderColour()
   {
     if (borderColour == null)
     {
-      return viewport.getColours().getShapeBorder();
+      return Colours.getInstance().getShapeBorder();
     }
     else
     {

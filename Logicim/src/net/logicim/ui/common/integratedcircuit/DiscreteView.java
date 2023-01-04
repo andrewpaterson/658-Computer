@@ -138,12 +138,12 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   @Override
   public void paintSelected(Graphics2D graphics, Viewport viewport)
   {
-    paintSelected(graphics, viewport, viewport.getColours().getSelected());
+    paintSelected(graphics, viewport, Colours.getInstance().getSelected());
   }
 
   public void paintHover(Graphics2D graphics, Viewport viewport)
   {
-    paintSelected(graphics, viewport, viewport.getColours().getViewHover());
+    paintSelected(graphics, viewport, Colours.getInstance().getViewHover());
   }
 
   public void paintBoundingBox(Graphics2D graphics, Viewport viewport)

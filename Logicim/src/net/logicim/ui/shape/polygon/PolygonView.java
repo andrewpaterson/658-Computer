@@ -13,8 +13,8 @@ import java.util.List;
 public class PolygonView
     extends ShapeView
 {
-  private final boolean border;
-  private final boolean fill;
+  protected final boolean fill;
+  protected final boolean border;
   protected List<Tuple2> points;
 
   protected PolygonViewGridCache gridCache;
@@ -24,9 +24,18 @@ public class PolygonView
                      boolean fill,
                      Tuple2... points)
   {
-    super(shapeHolder);
-    this.border = border;
+    this(shapeHolder, null, border, fill, points);
+  }
+
+  public PolygonView(ShapeHolder shapeHolder,
+                     Color fillColour,
+                     boolean border,
+                     boolean fill,
+                     Tuple2... points)
+  {
+    super(shapeHolder, fillColour, null);
     this.fill = fill;
+    this.border = border;
     this.points = new ArrayList<>(points.length);
     for (Tuple2 point : points)
     {
@@ -55,12 +64,12 @@ public class PolygonView
     graphics.setStroke(viewport.getStroke());
     if (fill)
     {
-      graphics.setColor(getFillColour(viewport));
+      graphics.setColor(getFillColour());
       graphics.fillPolygon(p);
     }
     if (border)
     {
-      graphics.setColor(getBorderColour(viewport));
+      graphics.setColor(getBorderColour());
       graphics.drawPolygon(p);
     }
   }

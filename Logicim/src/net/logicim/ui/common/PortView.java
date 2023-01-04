@@ -91,6 +91,7 @@ public class PortView
   {
     updateGridCache();
 
+    Colours colours = Colours.getInstance();
     if (inverting)
     {
       Float2D gridBubbleCenter = gridCache.getBubbleCenter();
@@ -100,7 +101,7 @@ public class PortView
         int y = viewport.transformGridToScreenSpaceY(gridBubbleCenter.y);
 
         graphics.setStroke(viewport.getStroke());
-        graphics.setColor(viewport.getColours().getShapeBorder());
+        graphics.setColor(colours.getShapeBorder());
         int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
         graphics.drawOval(x - diameter / 2,
                           y - diameter / 2,
@@ -117,7 +118,7 @@ public class PortView
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
       Port port = getPort();
-      Color color = VoltageColour.getColorForPort(viewport.getColours(), port, time);
+      Color color = VoltageColour.getColorForPort(colours, port, time);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,

@@ -50,13 +50,13 @@ public class ArcView
     graphics.setStroke(viewport.getStroke());
     if (fill)
     {
-      graphics.setColor(getFillColour(viewport));
+      graphics.setColor(getFillColour());
       int diameter = viewport.transformGridToScreenWidth(gridCache.diameter);
       graphics.fillArc(x, y, diameter, diameter, gridCache.startAngle, arcAngle);
     }
     if (border)
     {
-      graphics.setColor(getBorderColour(viewport));
+      graphics.setColor(getBorderColour());
       int diameter = viewport.transformGridToScreenWidth(gridCache.diameter);
       graphics.drawArc(x, y, diameter, diameter, gridCache.startAngle, arcAngle);
     }

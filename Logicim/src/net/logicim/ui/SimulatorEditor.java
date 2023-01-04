@@ -81,7 +81,7 @@ public class SimulatorEditor
 
     this.actions = new InputActions(keyboardButtons, mouseButtons);
 
-    this.circuitEditor = new CircuitEditor(viewport.getColours());
+    this.circuitEditor = new CircuitEditor();
     this.placementView = null;
     this.creationRotation = Rotation.North;
 
@@ -434,7 +434,7 @@ public class SimulatorEditor
 
   public void paint(Graphics2D graphics)
   {
-    graphics.setColor(viewport.getColours().getBackground());
+    graphics.setColor(Colours.getInstance().getBackground());
     graphics.fillRect(0, 0, width, height);
 
     viewport.paintGrid(graphics);
@@ -757,7 +757,7 @@ public class SimulatorEditor
     clearHover();
     wirePull = null;
 
-    circuitEditor = new CircuitEditor(viewport.getColours());
+    circuitEditor = new CircuitEditor();
     circuitEditor.load(circuitData);
   }
 
@@ -777,11 +777,6 @@ public class SimulatorEditor
   public DiscreteView<?> getHoverDiscreteView()
   {
     return hoverDiscreteView;
-  }
-
-  public Colours getColours()
-  {
-    return viewport.getColours();
   }
 
   public CircuitEditor getCircuitEditor()

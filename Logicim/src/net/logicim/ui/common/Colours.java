@@ -21,12 +21,15 @@ public class Colours
 
   protected Color shapeBorder;
   protected Color shapeFill;
+  protected Color darkShapeFill;
 
   protected Color portHover;
   protected Color viewHover;
   protected Color selected;
 
   protected Color disconnectedTrace;
+
+  protected static Colours instance;
 
   public Colours()
   {
@@ -51,12 +54,22 @@ public class Colours
 
     shapeBorder = Color.BLACK;
     shapeFill = new Color(232, 232, 232);
+    darkShapeFill = new Color(170, 170, 170);
 
     portHover = new Color(0, 255, 0);
     viewHover = new Color(0, 255, 0);
     selected = new Color(255, 255, 255);
 
     disconnectedTrace = new Color(0, 170, 250);
+  }
+
+  public static Colours getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new Colours();
+    }
+    return instance;
   }
 
   public Color getSmallGridDotColor()
@@ -92,6 +105,11 @@ public class Colours
   public Color getShapeFill()
   {
     return shapeFill;
+  }
+
+  public Color getDarkShapeFill()
+  {
+    return darkShapeFill;
   }
 
   public Color getTraceVoltage(float voltage)

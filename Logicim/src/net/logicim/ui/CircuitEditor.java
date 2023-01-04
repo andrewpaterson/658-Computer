@@ -15,7 +15,6 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
-import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -34,23 +33,28 @@ public class CircuitEditor
   protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
-  protected VoltageRepresentation colours;
   protected List<ComponentView> selection;
 
-
-  public CircuitEditor(VoltageRepresentation colours)
+  public CircuitEditor()
   {
     this.circuit = new Circuit();
     this.simulation = circuit.resetSimulation();
     this.discreteViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
-    this.colours = colours;
     this.selection = new ArrayList<>();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     long time = getTime();
+    List<TraceView> traceViews;
+    List<DiscreteView<?>> discreteViews;
+    synchronized (this)
+    {
+      traceViews = new ArrayList<>(this.traceViews);
+      discreteViews = new ArrayList<>(this.discreteViews);
+    }
+
     for (TraceView traceView : traceViews)
     {
       traceView.paint(graphics, viewport, time);
@@ -70,16 +74,6 @@ public class CircuitEditor
   public Circuit getCircuit()
   {
     return circuit;
-  }
-
-  public void add(DiscreteView<?> discreteView)
-  {
-    discreteViews.add(discreteView);
-  }
-
-  public void add(TraceView view)
-  {
-    traceViews.add(view);
   }
 
   public void deleteDiscreteView(DiscreteView<?> discreteView)
@@ -112,7 +106,7 @@ public class CircuitEditor
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     circuit.remove(integratedCircuit);
-    discreteViews.remove(integratedCircuitView);
+    _removeDiscreteView(integratedCircuitView);
 
     return connectConnections(connectionViews);
   }
@@ -123,7 +117,7 @@ public class CircuitEditor
 
     PowerSource powerSource = powerSourceView.getPowerSource();
     circuit.remove(powerSource);
-    discreteViews.remove(powerSourceView);
+    _removeDiscreteView(powerSourceView);
 
     return connectConnections(connectionViews);
   }
@@ -211,7 +205,7 @@ public class CircuitEditor
   {
     disconnectTraceView(traceView);
     traceView.removed();
-    traceViews.remove(traceView);
+    _removeTraceView(traceView);
   }
 
   protected List<ConnectionView> disconnectTraceView(TraceView traceView)
@@ -1057,11 +1051,6 @@ public class CircuitEditor
     return simulation.getTimeline();
   }
 
-  public VoltageRepresentation getColours()
-  {
-    return colours;
-  }
-
   public Simulation getSimulation()
   {
     return simulation;
@@ -1103,7 +1092,6 @@ public class CircuitEditor
     selection = getSelection(selectionRectangle.start, selectionRectangle.end);
   }
 
-
   public void doneMoveComponents(List<ComponentView> componentViews)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
@@ -1115,7 +1103,7 @@ public class CircuitEditor
       if (componentView instanceof TraceView)
       {
         TraceView traceView = (TraceView) componentView;
-        traceViews.remove(traceView);
+        _removeTraceView(traceView);
         lines.add(traceView.getLine());
       }
     }
@@ -1311,6 +1299,38 @@ public class CircuitEditor
     if (i != -1)
     {
       selection.set(i, newView);
+    }
+  }
+
+  public void _addDiscreteView(DiscreteView<?> discreteView)
+  {
+    synchronized (this)
+    {
+      discreteViews.add(discreteView);
+    }
+  }
+
+  public void _removeDiscreteView(DiscreteView<?> discreteView)
+  {
+    synchronized (this)
+    {
+      discreteViews.remove(discreteView);
+    }
+  }
+
+  public void _addTraceView(TraceView view)
+  {
+    synchronized (this)
+    {
+      traceViews.add(view);
+    }
+  }
+
+  protected boolean _removeTraceView(TraceView traceView)
+  {
+    synchronized (this)
+    {
+      return traceViews.remove(traceView);
     }
   }
 }

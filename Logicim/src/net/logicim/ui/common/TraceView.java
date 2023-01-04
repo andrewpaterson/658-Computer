@@ -28,7 +28,7 @@ public class TraceView
   {
     this.line = new Line(start, end);
     this.trace = null;
-    circuitEditor.add(this);
+    circuitEditor._addTraceView(this);
     this.startConnection = circuitEditor.getOrAddConnection(start, this);
     this.endConnection = circuitEditor.getOrAddConnection(end, this);
   }
@@ -36,7 +36,7 @@ public class TraceView
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     graphics.setStroke(viewport.getStroke());
-    Color color = VoltageColour.getColourForTrace(viewport.getColours(), trace, time);
+    Color color = VoltageColour.getColourForTrace(Colours.getInstance(), trace, time);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);
@@ -197,8 +197,9 @@ public class TraceView
     int x2 = viewport.transformGridToScreenSpaceX(line.getEnd().x);
     int y2 = viewport.transformGridToScreenSpaceY(line.getEnd().y);
 
-    paintSelectionRectangle(graphics, viewport, x1, y1, viewport.getColours().getSelected());
-    paintSelectionRectangle(graphics, viewport, x2, y2, viewport.getColours().getSelected());
+    Color selectedColour = Colours.getInstance().getSelected();
+    paintSelectionRectangle(graphics, viewport, x1, y1, selectedColour);
+    paintSelectionRectangle(graphics, viewport, x2, y2, selectedColour);
   }
 
   @Override

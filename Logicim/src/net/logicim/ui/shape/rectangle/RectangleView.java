@@ -66,13 +66,13 @@ public class RectangleView
     graphics.setStroke(viewport.getStroke());
     if (fill)
     {
-      Color shapeFill = getFillColour(viewport);
+      Color shapeFill = getFillColour();
       graphics.setColor(shapeFill);
       graphics.fillRect(x, y, width, height);
     }
     if (border)
     {
-      Color shapeBorder = getBorderColour(viewport);
+      Color shapeBorder = getBorderColour();
       graphics.setColor(shapeBorder);
       graphics.drawRect(x, y, width, height);
     }

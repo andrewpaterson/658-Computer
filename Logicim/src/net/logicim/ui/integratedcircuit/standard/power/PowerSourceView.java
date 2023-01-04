@@ -27,7 +27,7 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
                          PROPERTIES properties)
   {
     super(circuitEditor, position, rotation, properties);
-    circuitEditor.add(this);
+    circuitEditor._addDiscreteView(this);
   }
 
   @Override

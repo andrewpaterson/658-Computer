@@ -7,6 +7,7 @@ import net.logicim.data.integratedcircuit.standard.power.PositivePowerPortData;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -39,7 +40,19 @@ public class PositivePowerView
     float yBottom = -1f;
     float radius = 0.9f;
     rectangle = new RectangleView(this, new Float2D(-radius, yBottom + 0.4f), new Float2D(radius, yTop), true, true);
-    polygonView = new PolygonView(this, true, true, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
+    polygonView = new PolygonView(this, getFillColour(), true, true, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
+  }
+
+  private Color getFillColour()
+  {
+    if (getVoltageOut() <= 4.0f)
+    {
+      return Colours.getInstance().getShapeFill();
+    }
+    else
+    {
+      return Colours.getInstance().getDarkShapeFill();
+    }
   }
 
   protected void createPowerSource()
@@ -108,7 +121,7 @@ public class PositivePowerView
   public void drawCenteredString(Graphics graphics, Viewport viewport, String text)
   {
     Font font = graphics.getFont().deriveFont(Font.BOLD, (int) (11 * viewport.getZoom()));
-    Color voltageColour = viewport.getColours().getTraceVoltage(properties.voltage_V);
+    Color voltageColour = Colours.getInstance().getTraceVoltage(properties.voltage_V);
     graphics.setColor(voltageColour);
 
     FontMetrics metrics = graphics.getFontMetrics(font);

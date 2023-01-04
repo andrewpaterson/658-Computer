@@ -1,6 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 
@@ -199,7 +200,7 @@ public class WirePull
     int y2 = viewport.transformGridToScreenSpaceY(endPosition.y);
 
     graphics.setStroke(viewport.getStroke());
-    graphics.setColor(viewport.getColours().getDisconnectedTrace());
+    graphics.setColor(Colours.getInstance().getDisconnectedTrace());
     graphics.drawLine(x1, y1, x2, y2);
   }
 

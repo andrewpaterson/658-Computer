@@ -68,5 +68,11 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
   {
     return new BufferProperties();
   }
+
+  @Override
+  public void clampProperties()
+  {
+    super.clampProperties();
+  }
 }
 

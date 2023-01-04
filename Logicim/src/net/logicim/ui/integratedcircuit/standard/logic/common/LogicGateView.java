@@ -7,6 +7,8 @@ import net.logicim.ui.common.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
+import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
+
 public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     extends StandardIntegratedCircuitView<IC, LogicGateProperties>
 {
@@ -51,6 +53,13 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   protected LogicGateProperties createProperties()
   {
     return new LogicGateProperties();
+  }
+
+  @Override
+  public void clampProperties()
+  {
+    super.clampProperties();
+    properties.inputCount = clamp(properties.inputCount, 1, 8);
   }
 }
 

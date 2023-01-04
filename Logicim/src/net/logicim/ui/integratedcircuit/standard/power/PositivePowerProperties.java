@@ -5,16 +5,17 @@ import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 public class PositivePowerProperties
     extends DiscreteProperties
 {
-  public float voltage;
+  public float voltage_V;
 
   public PositivePowerProperties()
   {
-    voltage = 0;
+    voltage_V = 0;
   }
 
-  public PositivePowerProperties(String name, float voltage)
+  public PositivePowerProperties(String name, float voltage_V)
   {
     super(name);
-    this.voltage = voltage;
+    this.voltage_V = voltage_V;
   }
 }
+

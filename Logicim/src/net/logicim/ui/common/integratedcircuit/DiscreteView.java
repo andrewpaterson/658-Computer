@@ -320,5 +320,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   }
 
   public abstract Discrete getDiscrete();
+
+  public abstract void clampProperties();
 }
 

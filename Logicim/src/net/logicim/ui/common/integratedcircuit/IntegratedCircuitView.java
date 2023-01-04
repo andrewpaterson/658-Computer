@@ -187,5 +187,10 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   {
     return integratedCircuit;
   }
+
+  @Override
+  public void clampProperties()
+  {
+  }
 }
 

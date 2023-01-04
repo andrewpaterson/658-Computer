@@ -68,6 +68,12 @@ public class GroundView
   }
 
   @Override
+  public void clampProperties()
+  {
+    super.clampProperties();
+  }
+
+  @Override
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);

@@ -160,13 +160,16 @@ public class InternationalUnits
   public static double parse(String s, String unit)
   {
     s = s.trim();
-    int index = s.lastIndexOf(unit);
     char prefix = ' ';
-    if (index != -1)
+    if (!unit.isEmpty())
     {
-      prefix = s.charAt(index - 1);
-      s = s.substring(0, index - 1);
-      s = s.trim();
+      int index = s.lastIndexOf(unit);
+      if (index != -1)
+      {
+        prefix = s.charAt(index - 1);
+        s = s.substring(0, index - 1);
+        s = s.trim();
+      }
     }
     double value = Double.parseDouble(s);
     int magnitude = getPrefixMagnitude(prefix);

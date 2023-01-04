@@ -45,12 +45,12 @@ public class EditPropertiesAction
   {
     Map<Field, Object> map = propertiesPanel.getProperties();
 
-    DiscreteProperties properties = discreteView.getProperties();
-    boolean propertyChanged = updateProperties(map, properties);
+    boolean propertyChanged = updateProperties(map, discreteView.getProperties());
 
     if (propertyChanged)
     {
-      DiscreteView<?> discreteView = recreateDiscreteView(properties);
+      this.discreteView.clampProperties();
+      DiscreteView<?> discreteView = recreateDiscreteView(this.discreteView.getProperties());
       editor.replaceSelection(discreteView, this.discreteView);
       editor.pushUndo();
     }

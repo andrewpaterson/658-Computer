@@ -21,7 +21,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.logicim.domain.common.Units.GHz;
 import static net.logicim.ui.common.VoltageColour.clamp;
+import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
 
 public class OscilloscopeView
     extends IntegratedCircuitView<Oscilloscope, OscilloscopeProperties>
@@ -258,6 +260,17 @@ public class OscilloscopeView
   public String getType()
   {
     return "Oscilloscope";
+  }
+
+  @Override
+  public void clampProperties()
+  {
+    super.clampProperties();
+    properties.inputCount = clamp(properties.inputCount, 1, 24);
+    properties.numberOfDivsWide = clamp(properties.numberOfDivsWide, 4, 128);
+    properties.divHeightInGrids = clamp(properties.divHeightInGrids, 2, 6);
+    properties.samplesPerDiv = clamp(properties.samplesPerDiv, 4, 64);
+    properties.samplingFrequency_Hz = clamp(properties.samplingFrequency_Hz, 0.01f, 999 * GHz);
   }
 }
 

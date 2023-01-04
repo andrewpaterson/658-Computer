@@ -15,6 +15,8 @@ import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 
+import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
+
 public class PositivePowerView
     extends PowerSourceView<PositivePowerProperties>
 {
@@ -44,14 +46,14 @@ public class PositivePowerView
   {
     powerSource = new PowerSource(circuitEditor.getCircuit(),
                                   properties.name,
-                                  properties.voltage);
+                                  properties.voltage_V);
     powerSource.disable();
   }
 
   @Override
   public float getVoltageOut()
   {
-    return properties.voltage;
+    return properties.voltage_V;
   }
 
   @Override
@@ -68,13 +70,20 @@ public class PositivePowerView
                                      properties.name,
                                      savePorts(),
                                      selected,
-                                     properties.voltage);
+                                     properties.voltage_V);
   }
 
   @Override
   protected PositivePowerProperties createProperties()
   {
     return new PositivePowerProperties();
+  }
+
+  @Override
+  public void clampProperties()
+  {
+    super.clampProperties();
+    properties.voltage_V = clamp(properties.voltage_V, 0.01f, 7.0f);
   }
 
   @Override
@@ -88,7 +97,7 @@ public class PositivePowerView
 
     polygonView.paint(graphics, viewport);
     rectangle.updateGridCache();  // Suspect to the max.
-    drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage, false));
+    drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
     paintPorts(graphics, viewport, time);
     graphics.setColor(color);
@@ -99,7 +108,7 @@ public class PositivePowerView
   public void drawCenteredString(Graphics graphics, Viewport viewport, String text)
   {
     Font font = graphics.getFont().deriveFont(Font.BOLD, (int) (11 * viewport.getZoom()));
-    Color voltageColour = viewport.getColours().getTraceVoltage(properties.voltage);
+    Color voltageColour = viewport.getColours().getTraceVoltage(properties.voltage_V);
     graphics.setColor(voltageColour);
 
     FontMetrics metrics = graphics.getFontMetrics(font);

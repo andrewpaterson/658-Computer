@@ -17,6 +17,9 @@ import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 
+import static net.logicim.domain.common.Units.GHz;
+import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
+
 public class ClockView
     extends StandardIntegratedCircuitView<ClockOscillator, ClockProperties>
 {
@@ -169,6 +172,13 @@ public class ClockView
   public String getType()
   {
     return "Clock Oscillator";
+  }
+
+  @Override
+  public void clampProperties()
+  {
+    super.clampProperties();
+    properties.frequency_Hz = clamp(properties.frequency_Hz, 0, 999 * GHz);
   }
 }
 

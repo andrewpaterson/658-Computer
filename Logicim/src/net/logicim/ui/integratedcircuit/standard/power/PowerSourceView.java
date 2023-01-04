@@ -8,7 +8,7 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;

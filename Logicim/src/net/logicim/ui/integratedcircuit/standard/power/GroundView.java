@@ -5,7 +5,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
 import net.logicim.data.integratedcircuit.standard.power.GroundPortData;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.line.LineView;

@@ -9,6 +9,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Discrete;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
 
@@ -29,25 +30,6 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
   protected boolean finalised;
-
-  public DiscreteView(CircuitEditor circuitEditor,
-                      Int2D position,
-                      Rotation rotation,
-                      String name)
-  {
-    this.properties = createProperties();
-
-    this.circuitEditor = circuitEditor;
-    this.position = position.clone();
-    this.rotation = rotation;
-    this.boundingBox = new BoundingBox();
-    this.selectionBox = new BoundingBox();
-    this.shapes = new ArrayList<>();
-    this.finalised = false;
-    this.ports = new ArrayList<>();
-
-    this.properties.name = name;
-  }
 
   public DiscreteView(CircuitEditor circuitEditor,
                       Int2D position,

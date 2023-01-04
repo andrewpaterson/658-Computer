@@ -10,7 +10,7 @@ import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;

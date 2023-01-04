@@ -8,6 +8,8 @@ import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.common.trace.TraceView;
 import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;

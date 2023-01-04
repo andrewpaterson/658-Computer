@@ -1,5 +1,7 @@
 package net.logicim.ui.common;
 
+import net.logicim.ui.common.trace.TraceView;
+
 public class TraceOverlap
 {
   protected LineOverlap overlap;

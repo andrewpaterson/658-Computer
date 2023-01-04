@@ -9,6 +9,7 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 

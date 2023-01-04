@@ -20,6 +20,8 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
+import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.common.trace.TraceView;
 import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.shape.common.BoundingBox;
 
@@ -539,7 +541,7 @@ public class CircuitEditor
       {
         if (connectedComponent instanceof TraceView)
         {
-          ((TraceView) connectedComponent).connectTraceNet(trace, simulation);
+          ((TraceView) connectedComponent).connectTraceNet(trace);
         }
         else if (connectedComponent instanceof DiscreteView)
         {

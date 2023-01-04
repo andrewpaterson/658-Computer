@@ -4,7 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.TraceView;
+import net.logicim.ui.common.trace.TraceView;
 
 public class TraceData
     extends ReflectiveData
@@ -32,7 +32,7 @@ public class TraceData
   {
     TraceView traceView = new TraceView(circuitEditor, start, end);
     TraceNet trace = traceLoader.create(id);
-    traceView.connectTraceNet(trace, circuitEditor.getSimulation());
+    traceView.connectTraceNet(trace);
 
     if (selected)
     {

@@ -15,7 +15,7 @@ import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.PortView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 

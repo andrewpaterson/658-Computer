@@ -8,10 +8,10 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.port.PortView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +66,7 @@ public abstract class PowerSourceView<PROPERTIES extends DiscreteProperties>
   @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
-    return null;
-  }
-
-  @Override
-  public ConnectionView getConnectionsInGrid(Int2D p)
-  {
+    //??
     return null;
   }
 

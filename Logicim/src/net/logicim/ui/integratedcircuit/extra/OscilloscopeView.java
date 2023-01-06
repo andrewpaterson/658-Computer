@@ -10,10 +10,10 @@ import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -140,7 +140,7 @@ public class OscilloscopeView
 
         int tickX = viewport.transformGridToScreenSpaceX(1 + ((float) tickPosition / properties.samplesPerDiv) + position.x);
 
-        graphics.setStroke(viewport.getStroke(viewport.getLineWidth() / 2));
+        graphics.setStroke(viewport.getAbsoluteStroke(viewport.getDefaultLineWidth() / 2));
         Color oscilloscopeReferenceColour = new Color(232, 232, 232);
         graphics.setColor(oscilloscopeReferenceColour);
         float bottom = (properties.inputCount - 1) * properties.divHeightInGrids + outerWidth - 0.25f;

@@ -13,7 +13,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
@@ -133,7 +132,7 @@ public class CircuitEditor
       ConnectionView connection = portView.getConnection();
       if (connection != null)
       {
-        disconnectTraceNet(findConnections(connection));
+        disconnectConnectionViews(findConnections(connection));
 
         connection.remove(discreteView);
         connectionViews.add(connection);
@@ -150,7 +149,7 @@ public class CircuitEditor
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {
-      updatedPortViews.addAll(connectConnections(connectionView));
+      updatedPortViews.addAll(connectNewConnections(connectionView));
     }
 
     return updatedPortViews;
@@ -220,8 +219,8 @@ public class CircuitEditor
     ConnectionView startConnection = traceView.getStartConnection();
     ConnectionView endConnection = traceView.getEndConnection();
 
-    disconnectTraceNet(findConnections(startConnection));
-    disconnectTraceNet(findConnections(endConnection));
+    disconnectConnectionViews(findConnections(startConnection));
+    disconnectConnectionViews(findConnections(endConnection));
 
     startConnection.remove(traceView);
     endConnection.remove(traceView);
@@ -232,7 +231,7 @@ public class CircuitEditor
     return connectionViews;
   }
 
-  public void disconnectTraceNet(Set<ConnectionView> connectionsNet)
+  public void disconnectConnectionViews(Set<ConnectionView> connectionsNet)
   {
     for (ConnectionView connection : connectionsNet)
     {
@@ -243,23 +242,24 @@ public class CircuitEditor
         {
           ((TraceView) connectedComponent).disconnectTraceNet();
         }
-        else if (connectedComponent instanceof IntegratedCircuitView)
+        else if (connectedComponent instanceof DiscreteView)
         {
+          DiscreteView<?> discreteView = (DiscreteView<?>) connectedComponent;
           Int2D position = connection.getGridPosition();
           if (position != null)
           {
-            PortView portView = connectedComponent.getPortInGrid(position);
-            portView.disconnectTraceNet(simulation);
+            PortView portView = discreteView.getPortInGrid(position);
+            portView.disconnect(simulation);
           }
         }
       }
     }
   }
 
-  public Set<PortView> connectConnections(ConnectionView connectionView)
+  public Set<PortView> connectNewConnections(ConnectionView connectionView)
   {
     Set<ConnectionView> connectionsNet = findConnections(connectionView);
-    return connectToTraceNet(connectionsNet, new TraceNet());
+    return connectNewTraceNet(connectionsNet);
   }
 
   public Simulation reset()
@@ -531,29 +531,41 @@ public class CircuitEditor
     return connectionsNet;
   }
 
-  public Set<PortView> connectToTraceNet(Set<ConnectionView> connectionsNet, TraceNet trace)
+  public Set<PortView> connectNewTraceNet(Set<ConnectionView> connectionsNet)
   {
     Set<PortView> connectedPorts = new LinkedHashSet<>();
+    int numberOfTraces = 0;
     for (ConnectionView connection : connectionsNet)
     {
       List<ComponentView> connectedComponents = connection.getConnectedComponents();
       for (ComponentView connectedComponent : connectedComponents)
       {
-        if (connectedComponent instanceof TraceView)
+        Int2D position = connection.getGridPosition();
+        if (position != null)
         {
-          ((TraceView) connectedComponent).connectTraceNet(trace);
-        }
-        else if (connectedComponent instanceof DiscreteView)
-        {
-          Int2D position = connection.getGridPosition();
-          if (position != null)
+          if (connectedComponent instanceof DiscreteView)
           {
-            PortView portView = connectedComponent.getPortInGrid(position);
-            portView.connectTraceNet(trace, simulation);
+            DiscreteView<?> discreteView = (DiscreteView<?>) connectedComponent;
+            PortView portView = discreteView.getPortInGrid(position);
+            if (portView.numberOfPorts() > numberOfTraces)
+            {
+              numberOfTraces = portView.numberOfPorts();
+            }
             connectedPorts.add(portView);
           }
         }
       }
+    }
+
+    List<TraceNet> traces = new ArrayList<>(numberOfTraces);
+    for (int i = 0; i < numberOfTraces; i++)
+    {
+      traces.add(new TraceNet());
+    }
+
+    for (PortView connectedPort : connectedPorts)
+    {
+      connectedPort.connectTraceNet(traces, simulation);
     }
     return connectedPorts;
   }
@@ -642,7 +654,7 @@ public class CircuitEditor
     for (; ; )
     {
       List<ComponentView> connectedComponents = currentConnection.getConnectedComponents();
-      TraceView otherTrace = currentTrace.getOtherTrace(connectedComponents);
+      TraceView otherTrace = currentTrace.getOtherTraceView(connectedComponents);
 
       if (otherTrace != null)
       {
@@ -718,7 +730,7 @@ public class CircuitEditor
     {
       connection = startConnection;
     }
-    return connectConnections(connection);
+    return connectNewConnections(connection);
   }
 
   private TraceView mergeTraceConnectionForDelete(ConnectionView startConnection)
@@ -1019,7 +1031,7 @@ public class CircuitEditor
       Int2D portPosition = portView.getGridPosition();
       ConnectionView connectionView = getOrAddConnection(portPosition, discreteView);
       portView.setConnection(connectionView);
-      updatedPortViews.addAll(connectConnections(connectionView));
+      updatedPortViews.addAll(connectNewConnections(connectionView));
     }
     discreteView.enable(simulation);
     discreteView.simulationStarted(simulation);
@@ -1043,8 +1055,7 @@ public class CircuitEditor
   {
     for (PortView portView : updatedPortViews)
     {
-      Port port = portView.getPort();
-      port.traceConnected(simulation, port);
+      portView.traceConnected(simulation);
     }
   }
 
@@ -1254,7 +1265,7 @@ public class CircuitEditor
       {
         throw new SimulatorException("Cannot finalise a removed Trace.");
       }
-      updatedPortViews.addAll(connectConnections(traceView.getStartConnection()));
+      updatedPortViews.addAll(connectNewConnections(traceView.getStartConnection()));
     }
 
     fireConnectionEvents(updatedPortViews);

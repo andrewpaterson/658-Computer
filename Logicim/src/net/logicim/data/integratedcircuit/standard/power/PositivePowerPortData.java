@@ -2,6 +2,7 @@ package net.logicim.data.integratedcircuit.standard.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
@@ -24,7 +25,7 @@ public class PositivePowerPortData
   public PositivePowerPortData(Int2D position,
                                Rotation rotation,
                                String name,
-                               List<PortData> ports,
+                               List<MultiPortData> ports,
                                boolean selected,
                                float voltage)
   {

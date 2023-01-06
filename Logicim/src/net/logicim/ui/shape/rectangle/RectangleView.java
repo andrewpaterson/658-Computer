@@ -63,7 +63,7 @@ public class RectangleView
     int width = viewport.transformGridToScreenWidth(transformedDimension);
     int height = viewport.transformGridToScreenHeight(transformedDimension);
 
-    graphics.setStroke(viewport.getStroke());
+    graphics.setStroke(viewport.getZoomableStroke());
     if (fill)
     {
       Color shapeFill = getFillColour();

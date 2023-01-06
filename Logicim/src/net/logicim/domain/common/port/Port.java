@@ -104,9 +104,9 @@ public abstract class Port
     return holder;
   }
 
-  public void traceConnected(Simulation simulation, Port port)
+  public void traceConnected(Simulation simulation)
   {
-    holder.traceConnected(simulation, port);
+    holder.traceConnected(simulation, this);
   }
 
   public abstract void reset();

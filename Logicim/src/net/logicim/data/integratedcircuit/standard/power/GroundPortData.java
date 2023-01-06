@@ -2,6 +2,7 @@ package net.logicim.data.integratedcircuit.standard.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
@@ -22,10 +23,10 @@ public class GroundPortData
   public GroundPortData(Int2D position,
                         Rotation rotation,
                         String name,
-                        List<PortData> ports,
+                        List<MultiPortData> ports,
                         boolean selected)
   {
-    super(position, rotation, name, ports,selected);
+    super(position, rotation, name, ports, selected);
   }
 
   protected GroundView create(CircuitEditor circuitEditor, TraceLoader traceLoader)

@@ -4,10 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.port.LogicPortData;
-import net.logicim.data.port.PortData;
-import net.logicim.data.port.PowerInPortData;
-import net.logicim.data.port.PowerOutPortData;
+import net.logicim.data.port.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
@@ -24,13 +21,13 @@ import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PortView
 {
   protected DiscreteView<?> owner;
-  protected Port port;
-  protected Int2D positionRelativeToIC;
 
+  protected Int2D positionRelativeToIC;
   protected boolean inverting;
   protected String text;
   protected boolean overline;
@@ -40,20 +37,23 @@ public class PortView
   protected ConnectionView connection;
 
   protected PortViewGridCache gridCache;
+  protected List<Port> ports;
 
-  public PortView(DiscreteView<?> integratedCircuit, Port port, Int2D positionRelativeToIC)
+  public PortView(DiscreteView<?> discreteView, Port port, Int2D positionRelativeToIC)
   {
-    this.owner = integratedCircuit;
-    this.port = port;
-    this.positionRelativeToIC = positionRelativeToIC;
-    this.owner.addPortView(this);
+    this(discreteView, singlePort(port), positionRelativeToIC);
+  }
 
+  public PortView(DiscreteView<?> discreteView, List<Port> ports, Int2D positionRelativeToIC)
+  {
+    this.owner = discreteView;
+    this.owner.addPortView(this);
+    this.positionRelativeToIC = positionRelativeToIC;
     this.bubbleCenter = null;
     this.bubbleDiameter = 0.9f;
-
     connection = null;
-
     gridCache = new PortViewGridCache();
+    this.ports = ports;
   }
 
   public PortView setInverting(boolean inverting, Rotation facing)
@@ -83,53 +83,7 @@ public class PortView
     return this;
   }
 
-  public Port getPort()
-  {
-    return port;
-  }
-
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
-  {
-    updateGridCache();
-
-    Colours colours = Colours.getInstance();
-    if (inverting)
-    {
-      Float2D gridBubbleCenter = gridCache.getBubbleCenter();
-      if (gridBubbleCenter != null)
-      {
-        int x = viewport.transformGridToScreenSpaceX(gridBubbleCenter.x);
-        int y = viewport.transformGridToScreenSpaceY(gridBubbleCenter.y);
-
-        graphics.setStroke(viewport.getStroke());
-        graphics.setColor(colours.getShapeBorder());
-        int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
-        graphics.drawOval(x - diameter / 2,
-                          y - diameter / 2,
-                          diameter,
-                          diameter);
-      }
-    }
-
-    Int2D gridPosition = gridCache.getPosition();
-    if (gridPosition != null)
-    {
-      int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
-      int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
-      int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
-
-      Port port = getPort();
-      Color color = VoltageColour.getColorForPort(colours, port, time);
-
-      graphics.setColor(color);
-      graphics.fillOval(x - lineWidth,
-                        y - lineWidth,
-                        lineWidth * 2,
-                        lineWidth * 2);
-    }
-  }
-
-  private void updateGridCache()
+  protected void updateGridCache()
   {
     if (!gridCache.isValid())
     {
@@ -179,64 +133,186 @@ public class PortView
     this.connection = connection;
   }
 
-  public void connectTraceNet(TraceNet trace, Simulation simulation)
-  {
-    port.disconnect(simulation);
-    port.connect(trace);
-  }
-
-  public void disconnectTraceNet(Simulation simulation)
-  {
-    port.disconnect(simulation);
-  }
-
-  public PortData save()
-  {
-    if (port.isLogicPort())
-    {
-      LogicPort port = (LogicPort) this.port;
-      PortOutputEvent portOutputEvent = port.getOutput();
-      LinkedList<PortEvent> portEvents = port.getEvents();
-      ArrayList<PortEventData<?>> eventDatas = new ArrayList<>(portEvents.size());
-      PortOutputEventData<?> portOutputEventData = null;
-      for (PortEvent event : portEvents)
-      {
-        PortEventData<?> portEventData = event.save();
-        eventDatas.add(portEventData);
-        if (portOutputEvent == event)
-        {
-          portOutputEventData = (PortOutputEventData<?>) portEventData;
-        }
-      }
-      if (portOutputEventData == null)
-      {
-        if (portOutputEvent != null)
-        {
-          portOutputEventData = portOutputEvent.save();
-        }
-      }
-
-      return new LogicPortData(eventDatas, portOutputEventData, port.getTraceId());
-    }
-    else if (port.isPowerIn())
-    {
-      PowerInPort port = (PowerInPort) this.port;
-      return new PowerInPortData(port.getTraceId());
-    }
-    else if (port.isPowerOut())
-    {
-      PowerOutPort port = (PowerOutPort) this.port;
-      return new PowerOutPortData(port.getTraceId());
-    }
-    else
-    {
-      throw new SimulatorException("implement saving for non-logic ports.");
-    }
-  }
-
   public Int2D getPosition()
   {
     return positionRelativeToIC;
   }
-}
 
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  {
+    updateGridCache();
+
+    Colours colours = Colours.getInstance();
+    if (inverting)
+    {
+      Float2D gridBubbleCenter = gridCache.getBubbleCenter();
+      if (gridBubbleCenter != null)
+      {
+        int x = viewport.transformGridToScreenSpaceX(gridBubbleCenter.x);
+        int y = viewport.transformGridToScreenSpaceY(gridBubbleCenter.y);
+
+        graphics.setStroke(viewport.getZoomableStroke());
+        graphics.setColor(colours.getShapeBorder());
+        int diameter = viewport.transformGridToScreenWidth(bubbleDiameter);
+        graphics.drawOval(x - diameter / 2,
+                          y - diameter / 2,
+                          diameter,
+                          diameter);
+      }
+    }
+
+    Int2D gridPosition = gridCache.getPosition();
+    if (gridPosition != null)
+    {
+      int x = viewport.transformGridToScreenSpaceX(gridPosition.x);
+      int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
+      int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
+
+      Color color = getPortColour(time, colours);
+
+      graphics.setColor(color);
+      graphics.fillOval(x - lineWidth,
+                        y - lineWidth,
+                        lineWidth * 2,
+                        lineWidth * 2);
+    }
+  }
+
+  protected static List<Port> singlePort(Port port)
+  {
+    ArrayList<Port> ports = new ArrayList<>(1);
+    ports.add(port);
+    return ports;
+  }
+
+  public void connectTraceNet(List<TraceNet> traces, Simulation simulation)
+  {
+    for (int i = 0; i < ports.size(); i++)
+    {
+      Port port = ports.get(i);
+      TraceNet trace = traces.get(i);
+      port.disconnect(simulation);
+      port.connect(trace);
+    }
+  }
+
+  public void disconnect(Simulation simulation)
+  {
+    for (Port port : ports)
+    {
+      port.disconnect(simulation);
+    }
+  }
+
+  public MultiPortData save()
+  {
+    ArrayList<PortData> portDatas = new ArrayList<>();
+    for (Port port : this.ports)
+    {
+      if (port.isLogicPort())
+      {
+        portDatas.add(saveLogicPort((LogicPort) port));
+      }
+      else if (port.isPowerIn())
+      {
+        portDatas.add(savePowerInPort((PowerInPort) port));
+      }
+      else if (port.isPowerOut())
+      {
+        portDatas.add(savePowerOutPort((PowerOutPort) port));
+      }
+      else
+      {
+        throw new SimulatorException("implement saving for non-logic ports.");
+      }
+    }
+    return new MultiPortData(portDatas);
+  }
+
+  protected PowerOutPortData savePowerOutPort(PowerOutPort powerOutPort)
+  {
+    return new PowerOutPortData(powerOutPort.getTraceId());
+  }
+
+  protected PowerInPortData savePowerInPort(PowerInPort powerInPort)
+  {
+    return new PowerInPortData(powerInPort.getTraceId());
+  }
+
+  protected LogicPortData saveLogicPort(LogicPort logicPort)
+  {
+    PortOutputEvent portOutputEvent = logicPort.getOutput();
+    LinkedList<PortEvent> portEvents = logicPort.getEvents();
+    ArrayList<PortEventData<?>> eventDatas = new ArrayList<>(portEvents.size());
+    PortOutputEventData<?> portOutputEventData = null;
+    for (PortEvent event : portEvents)
+    {
+      PortEventData<?> portEventData = event.save();
+      eventDatas.add(portEventData);
+      if (portOutputEvent == event)
+      {
+        portOutputEventData = (PortOutputEventData<?>) portEventData;
+      }
+    }
+    if (portOutputEventData == null)
+    {
+      if (portOutputEvent != null)
+      {
+        portOutputEventData = portOutputEvent.save();
+      }
+    }
+
+    return new LogicPortData(eventDatas, portOutputEventData, logicPort.getTraceId());
+  }
+
+  protected Color getPortColour(long time, Colours colours)
+  {
+    Color colour = null;
+    for (Port port : ports)
+    {
+      Color portColour = VoltageColour.getColorForPort(Colours.getInstance(), port, time);
+      if (colour == null)
+      {
+        colour = portColour;
+      }
+      else
+      {
+        if (colour.getRGB() != portColour.getRGB())
+        {
+          return Colours.getInstance().getDifferingBusTrace();
+        }
+      }
+    }
+    return colour;
+  }
+
+  public void traceConnected(Simulation simulation)
+  {
+    for (Port port : ports)
+    {
+      port.traceConnected(simulation);
+    }
+  }
+
+  public boolean containsPort(Port port)
+  {
+    for (Port otherPort : ports)
+    {
+      if (otherPort == port)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public List<Port> getPorts()
+  {
+    return ports;
+  }
+
+  public int numberOfPorts()
+  {
+    return ports.size();
+  }
+}

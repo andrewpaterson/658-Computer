@@ -28,6 +28,7 @@ public class Colours
   protected Color selected;
 
   protected Color disconnectedTrace;
+  protected Color differingBusTrace;
 
   protected static Colours instance;
 
@@ -61,6 +62,7 @@ public class Colours
     selected = new Color(255, 255, 255);
 
     disconnectedTrace = new Color(0, 170, 250);
+    differingBusTrace = new Color(20, 230, 180);
   }
 
   public static Colours getInstance()
@@ -139,6 +141,11 @@ public class Colours
   public Color getDisconnectedTrace()
   {
     return disconnectedTrace;
+  }
+
+  public Color getDifferingBusTrace()
+  {
+    return differingBusTrace;
   }
 
   public Color getTraceShort(float shortVoltage)

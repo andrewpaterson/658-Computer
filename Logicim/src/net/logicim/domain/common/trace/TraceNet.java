@@ -36,6 +36,18 @@ public class TraceNet
     }
   }
 
+  public static long getId(TraceNet trace)
+  {
+    if (trace != null)
+    {
+      return trace.getId();
+    }
+    else
+    {
+      return 0;
+    }
+  }
+
   public float getVoltage(long time)
   {
     float drivenVoltage = 0;

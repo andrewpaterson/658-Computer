@@ -65,13 +65,6 @@ public class SplitterView
   @Override
   public void clampProperties()
   {
-
-  }
-
-  @Override
-  public ConnectionView getConnectionsInGrid(Int2D p)
-  {
-    return null;
   }
 
   @Override

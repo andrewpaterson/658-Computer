@@ -2,14 +2,15 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.port.PortView;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public abstract class DiscreteData
   protected Int2D position;
   protected Rotation rotation;
 
-  protected List<PortData> ports;
+  protected List<MultiPortData> ports;
 
   protected boolean selected;
 
@@ -32,7 +33,7 @@ public abstract class DiscreteData
   public DiscreteData(Int2D position,
                       Rotation rotation,
                       String name,
-                      List<PortData> ports,
+                      List<MultiPortData> ports,
                       boolean selected)
   {
     this.position = new Int2D(position);
@@ -47,13 +48,18 @@ public abstract class DiscreteData
     for (int i = 0; i < ports.size(); i++)
     {
       PortView portView = discreteView.getPort(i);
-      PortData portData = ports.get(i);
+      MultiPortData multiPortData = ports.get(i);
 
-      TraceNet trace = traceLoader.create(portData.traceId);
-      Port port = portView.getPort();
-      port.connect(trace);
+      List<Port> ports = portView.getPorts();
+      for (int j = 0; j < ports.size(); j++)
+      {
+        Port port = ports.get(j);
+        PortData portData = multiPortData.ports.get(j);
+        TraceNet trace = traceLoader.create(portData.traceId);
+        port.connect(trace);
 
-      loadPort(circuitEditor, portData, port);
+        loadPort(circuitEditor, portData, port);
+      }
     }
   }
 

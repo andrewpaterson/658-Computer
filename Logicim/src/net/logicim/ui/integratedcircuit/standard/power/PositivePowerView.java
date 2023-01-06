@@ -8,9 +8,9 @@ import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 

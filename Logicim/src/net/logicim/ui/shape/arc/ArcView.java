@@ -47,7 +47,7 @@ public class ArcView
     int x = viewport.transformGridToScreenSpaceX(gridCache.circleCenter.x);
     int y = viewport.transformGridToScreenSpaceY(gridCache.circleCenter.y);
 
-    graphics.setStroke(viewport.getStroke());
+    graphics.setStroke(viewport.getZoomableStroke());
     if (fill)
     {
       graphics.setColor(getFillColour());

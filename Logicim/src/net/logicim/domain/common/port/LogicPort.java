@@ -192,9 +192,9 @@ public class LogicPort
     return false;
   }
 
-  public void traceConnected(Simulation simulation, Port port)
+  public void traceConnected(Simulation simulation)
   {
-    super.traceConnected(simulation, port);
+    super.traceConnected(simulation);
 
     List<PortOutputEvent> outputEvents = trace.getOutputEvents();
     boolean slewInProgress = false;

@@ -3,6 +3,7 @@ package net.logicim.data.integratedcircuit.standard.logic.or;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
@@ -26,7 +27,7 @@ public class OrGateData
                     String name,
                     String family,
                     List<IntegratedCircuitEventData<?>> events,
-                    List<PortData> ports,
+                    List<MultiPortData> ports,
                     boolean selected,
                     State state,
                     int inputCount,

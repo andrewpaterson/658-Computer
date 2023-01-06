@@ -57,7 +57,7 @@ public class ConnectionView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int radius = (int) (viewport.getCircleRadius() * 5);
       graphics.setColor(Colours.getInstance().getPortHover());
-      graphics.setStroke(viewport.getStroke());
+      graphics.setStroke(viewport.getZoomableStroke());
       graphics.drawOval(x - radius, y - radius, radius * 2, radius * 2);
     }
     catch (RuntimeException ignored)

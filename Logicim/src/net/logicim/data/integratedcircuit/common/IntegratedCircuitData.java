@@ -3,6 +3,7 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.LogicPortData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.trace.TraceLoader;
@@ -39,7 +40,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                String name,
                                String family,
                                List<IntegratedCircuitEventData<?>> events,
-                               List<PortData> ports,
+                               List<MultiPortData> ports,
                                boolean selected,
                                STATE state)
   {

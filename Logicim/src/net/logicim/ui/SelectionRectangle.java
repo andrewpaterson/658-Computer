@@ -26,7 +26,7 @@ public class SelectionRectangle
       Color color = graphics.getColor();
       Int2D start = new Int2D(viewport.transformGridToScreenSpace(this.start));
       Int2D end = new Int2D(viewport.transformGridToScreenSpace(this.end));
-      Stroke dashed = new BasicStroke(viewport.getLineWidth(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL,
+      Stroke dashed = new BasicStroke(viewport.getDefaultLineWidth(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL,
                                       0, new float[]{9}, 0);
       graphics.setStroke(dashed);
       graphics.setColor(Color.BLACK);

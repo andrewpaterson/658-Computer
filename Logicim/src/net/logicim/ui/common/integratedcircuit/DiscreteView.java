@@ -4,9 +4,10 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Discrete;
+import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.port.PortView;
@@ -30,6 +31,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
   protected boolean finalised;
+  protected List<PortView> ports;
 
   public DiscreteView(CircuitEditor circuitEditor,
                       Int2D position,
@@ -79,6 +81,56 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     this.boundingBox.grow(0.5f);
   }
 
+  public PortView getPortView(Port port)
+  {
+    for (PortView portView : ports)
+    {
+      if (portView.containsPort(port))
+      {
+        return portView;
+      }
+    }
+    return null;
+  }
+
+  protected void paintPorts(Graphics2D graphics, Viewport viewport, long time)
+  {
+    for (PortView portView : ports)
+    {
+      portView.paint(graphics, viewport, time);
+    }
+  }
+
+  public PortView getPortInGrid(int x, int y)
+  {
+    for (PortView port : ports)
+    {
+      if (port.getGridPosition().equals(x, y))
+      {
+        return port;
+      }
+    }
+    return null;
+  }
+
+  public PortView getPortInGrid(Int2D position)
+  {
+    return getPortInGrid(position.x, position.y);
+  }
+
+  public Int2D getGridPosition(ConnectionView connectionView)
+  {
+    for (PortView portView : ports)
+    {
+      ConnectionView portViewConnections = portView.getConnection();
+      if (portViewConnections == connectionView)
+      {
+        return portView.getGridPosition();
+      }
+    }
+    return null;
+  }
+
   protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
   {
     for (ShapeView shape : shapes)
@@ -110,7 +162,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
 
     getSelectionBoxInScreenSpace(viewport, p, s);
 
-    graphics.setStroke(viewport.getStroke());
+    graphics.setStroke(viewport.getZoomableStroke());
     paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
     paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
     paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
@@ -135,7 +187,7 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     Int2D p = new Int2D();
     Int2D s = new Int2D();
     getBoundingBoxInScreenSpace(viewport, p, s);
-    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getStroke(1), null, Color.ORANGE);
+    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getAbsoluteStroke(1), null, Color.ORANGE);
   }
 
   public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
@@ -255,12 +307,12 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     return ports;
   }
 
-  protected List<PortData> savePorts()
+  protected List<MultiPortData> savePorts()
   {
-    List<PortData> portDatas = new ArrayList<>(ports.size());
+    List<MultiPortData> portDatas = new ArrayList<>(ports.size());
     for (PortView port : ports)
     {
-      PortData portData = port.save();
+      MultiPortData portData = port.save();
       portDatas.add(portData);
     }
     return portDatas;

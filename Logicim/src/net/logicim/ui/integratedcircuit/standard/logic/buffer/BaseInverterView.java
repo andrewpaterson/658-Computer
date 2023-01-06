@@ -4,9 +4,9 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 import net.logicim.ui.shape.polygon.PolygonView;
 

@@ -199,7 +199,7 @@ public class WirePull
     int x2 = viewport.transformGridToScreenSpaceX(endPosition.x);
     int y2 = viewport.transformGridToScreenSpaceY(endPosition.y);
 
-    graphics.setStroke(viewport.getStroke());
+    graphics.setStroke(viewport.getZoomableStroke());
     graphics.setColor(Colours.getInstance().getDisconnectedTrace());
     graphics.drawLine(x1, y1, x2, y2);
   }

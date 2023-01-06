@@ -89,15 +89,20 @@ public class Viewport
     return (center - position.y) / (scale * zoom);
   }
 
-  public float getLineWidth()
+  public float getDefaultLineWidth()
+  {
+    return getLineWidth(2.0f);
+  }
+
+  protected float getLineWidth(float v)
   {
     if (zoom < 0.5f)
     {
-      return 1;
+      return 0.5f * v;
     }
     else
     {
-      return zoom * 2.0f;
+      return zoom * v;
     }
   }
 
@@ -162,7 +167,7 @@ public class Viewport
 
   private void drawDotGrid(Graphics2D graphics, int left, int dotsAcross, int top, int dotsDown, Color color)
   {
-    graphics.setStroke(getStroke(1));
+    graphics.setStroke(getAbsoluteStroke(1));
     graphics.setColor(color);
     for (int y = 0; y < dotsDown; y++)
     {
@@ -320,14 +325,19 @@ public class Viewport
     return 3;
   }
 
-  public Stroke getStroke(float width)
+  public Stroke getAbsoluteStroke(float width)
   {
     return strokes.getSolidStroke(width);
   }
 
-  public Stroke getStroke()
+  public Stroke getZoomableStroke()
   {
-    return strokes.getSolidStroke(getLineWidth());
+    return strokes.getSolidStroke(getDefaultLineWidth());
+  }
+
+  public Stroke getZoomableStroke(float scale)
+  {
+    return strokes.getSolidStroke(getLineWidth(scale));
   }
 }
 

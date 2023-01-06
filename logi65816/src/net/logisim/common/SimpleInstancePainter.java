@@ -136,5 +136,5 @@ public class SimpleInstancePainter
     }
     return oldColour;
   }
-
 }
+

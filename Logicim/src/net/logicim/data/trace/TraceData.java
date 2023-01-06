@@ -6,10 +6,13 @@ import net.logicim.domain.common.trace.TraceNet;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.trace.TraceView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TraceData
     extends ReflectiveData
 {
-  public long id;
+  public long[] ids;
 
   public Int2D start;
   public Int2D end;
@@ -20,9 +23,10 @@ public class TraceData
   {
   }
 
-  public TraceData(long id, Int2D start, Int2D end, boolean selected)
+  public TraceData(long[] ids, Int2D start, Int2D end, boolean selected)
   {
-    this.id = id;
+    this.ids = ids;
+
     this.start = start.clone();
     this.end = end.clone();
     this.selected = selected;
@@ -31,8 +35,13 @@ public class TraceData
   public TraceView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     TraceView traceView = new TraceView(circuitEditor, start, end);
-    TraceNet trace = traceLoader.create(id);
-    traceView.connectTraceNet(trace);
+    List<TraceNet> traces = new ArrayList<>(ids.length);
+    for (long id : ids)
+    {
+      TraceNet trace = traceLoader.create(id);
+      traces.add(trace);
+    }
+    traceView.connectTraceNet(traces);
 
     if (selected)
     {

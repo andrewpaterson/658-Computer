@@ -61,7 +61,7 @@ public class PolygonView
 
     Polygon p = new Polygon(xArray, yArray, transformedBuffer.size());
 
-    graphics.setStroke(viewport.getStroke());
+    graphics.setStroke(viewport.getZoomableStroke());
     if (fill)
     {
       graphics.setColor(getFillColour());

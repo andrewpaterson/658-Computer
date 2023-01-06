@@ -128,6 +128,45 @@ public abstract class ReflectiveWriter
     }
   }
 
+  public static void writeLongArray(Document doc, Element parent, String elementName, long[] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, long[].class.getSimpleName());
+    arrayContainer.setAttribute("length", Long.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    StringBuilder builder = new StringBuilder();
+    if (fieldValue.length > 0)
+    {
+      builder.append("\n");
+      for (int i = 0; i < fieldValue.length; i++)
+      {
+        if ((i % ARRAY_ROW_LENGTH == 0) && (i != 0))
+        {
+          builder.append("\n");
+        }
+        builder.append(fieldValue[i]);
+        builder.append(",");
+      }
+      int length = builder.length();
+      builder.delete(length - 1, length);
+    }
+    arrayContainer.appendChild(doc.createTextNode(builder.toString()));
+  }
+
+  public static void writeLong2DArray(Document doc, Element parent, String elementName, long[][] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, long[][].class.getSimpleName());
+    arrayContainer.setAttribute("length", Long.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    for (int i = 0; i < fieldValue.length; i++)
+    {
+      writeLongArray(doc, arrayContainer, "array" + i, fieldValue[i]);
+    }
+  }
+
   public static void writeFloatArray(Document doc, Element parent, String elementName, float[] fieldValue)
   {
     Element arrayContainer = doc.createElement(elementName);
@@ -164,6 +203,45 @@ public abstract class ReflectiveWriter
     for (int i = 0; i < fieldValue.length; i++)
     {
       writeFloatArray(doc, arrayContainer, "array" + i, fieldValue[i]);
+    }
+  }
+
+  public static void writeDoubleArray(Document doc, Element parent, String elementName, double[] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, double[].class.getSimpleName());
+    arrayContainer.setAttribute("length", Integer.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    StringBuilder builder = new StringBuilder();
+    if (fieldValue.length > 0)
+    {
+      builder.append("\n");
+      for (int i = 0; i < fieldValue.length; i++)
+      {
+        if ((i % ARRAY_ROW_LENGTH == 0) && (i != 0))
+        {
+          builder.append("\n");
+        }
+        builder.append(fieldValue[i]);
+        builder.append(",");
+      }
+      int length = builder.length();
+      builder.delete(length - 1, length);
+    }
+    arrayContainer.appendChild(doc.createTextNode(builder.toString()));
+  }
+
+  public static void writeDouble2DArray(Document doc, Element parent, String elementName, double[][] fieldValue)
+  {
+    Element arrayContainer = doc.createElement(elementName);
+    arrayContainer.setAttribute(TYPE, double[][].class.getSimpleName());
+    arrayContainer.setAttribute("length", Integer.toString(fieldValue.length));
+    parent.appendChild(arrayContainer);
+
+    for (int i = 0; i < fieldValue.length; i++)
+    {
+      writeDoubleArray(doc, arrayContainer, "array" + i, fieldValue[i]);
     }
   }
 
@@ -269,13 +347,37 @@ public abstract class ReflectiveWriter
       {
         writeRotation(doc, parent, fieldName, (Rotation) fieldValue);
       }
+      else if (int[][].class.isAssignableFrom(fieldClass))
+      {
+        writeInt2DArray(doc, parent, fieldName, (int[][]) fieldValue);
+      }
+      else if (long[][].class.isAssignableFrom(fieldClass))
+      {
+        writeLong2DArray(doc, parent, fieldName, (long[][]) fieldValue);
+      }
       else if (float[][].class.isAssignableFrom(fieldClass))
       {
         writeFloat2DArray(doc, parent, fieldName, (float[][]) fieldValue);
       }
-      else if (int[][].class.isAssignableFrom(fieldClass))
+      else if (double[][].class.isAssignableFrom(fieldClass))
       {
-        writeInt2DArray(doc, parent, fieldName, (int[][]) fieldValue);
+        writeDouble2DArray(doc, parent, fieldName, (double[][]) fieldValue);
+      }
+      else if (int[].class.isAssignableFrom(fieldClass))
+      {
+        writeIntArray(doc, parent, fieldName, (int[]) fieldValue);
+      }
+      else if (long[].class.isAssignableFrom(fieldClass))
+      {
+        writeLongArray(doc, parent, fieldName, (long[]) fieldValue);
+      }
+      else if (float[].class.isAssignableFrom(fieldClass))
+      {
+        writeFloatArray(doc, parent, fieldName, (float[]) fieldValue);
+      }
+      else if (double[].class.isAssignableFrom(fieldClass))
+      {
+        writeDoubleArray(doc, parent, fieldName, (double[]) fieldValue);
       }
       else
       {

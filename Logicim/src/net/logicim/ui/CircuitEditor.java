@@ -534,6 +534,7 @@ public class CircuitEditor
   public Set<PortView> connectNewTraceNet(Set<ConnectionView> connectionsNet)
   {
     Set<PortView> connectedPorts = new LinkedHashSet<>();
+    Set<TraceView> connectedTraceViews = new LinkedHashSet<>();
     int numberOfTraces = 0;
     for (ConnectionView connection : connectionsNet)
     {
@@ -553,6 +554,10 @@ public class CircuitEditor
             }
             connectedPorts.add(portView);
           }
+          else if (connectedComponent instanceof TraceView)
+          {
+            connectedTraceViews.add((TraceView) connectedComponent);
+          }
         }
       }
     }
@@ -563,9 +568,13 @@ public class CircuitEditor
       traces.add(new TraceNet());
     }
 
-    for (PortView connectedPort : connectedPorts)
+    for (PortView connectedPortView : connectedPorts)
     {
-      connectedPort.connectTraceNet(traces, simulation);
+      connectedPortView.connectTraceNet(traces, simulation);
+    }
+    for (TraceView connectedTraceView : connectedTraceViews)
+    {
+      connectedTraceView.connectTraceNet(traces);
     }
     return connectedPorts;
   }

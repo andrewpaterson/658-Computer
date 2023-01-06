@@ -330,7 +330,7 @@ public class TraceView
   protected Color getTraceColour(long time)
   {
     Colours colours = Colours.getInstance();
-    Color colour = colours.getTraceError();
+    Color colour = null;
     for (TraceNet trace : traces)
     {
       Color traceColour = VoltageColour.getColourForTrace(colours, trace, time);
@@ -345,6 +345,10 @@ public class TraceView
           return colours.getDifferingBusTrace();
         }
       }
+    }
+    if (colour == null)
+    {
+      colour = colours.getTraceError();
     }
     return colour;
   }

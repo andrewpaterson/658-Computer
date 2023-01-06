@@ -96,17 +96,33 @@ public class LogicimFileReader
     {
       return new IntArrayData();
     }
+    else if (long[].class.getSimpleName().equals(type))
+    {
+      return new LongArrayData();
+    }
     else if (float[].class.getSimpleName().equals(type))
     {
       return new FloatArrayData();
+    }
+    else if (double[].class.getSimpleName().equals(type))
+    {
+      return new DoubleArrayData();
+    }
+    else if (int[][].class.getSimpleName().equals(type))
+    {
+      return new IntArray2DData();
+    }
+    else if (long[][].class.getSimpleName().equals(type))
+    {
+      return new LongArray2DData();
     }
     else if (float[][].class.getSimpleName().equals(type))
     {
       return new FloatArray2DData();
     }
-    else if (int[][].class.getSimpleName().equals(type))
+    else if (double[][].class.getSimpleName().equals(type))
     {
-      return new IntArray2DData();
+      return new DoubleArray2DData();
     }
     else
     {

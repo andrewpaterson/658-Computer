@@ -1,8 +1,11 @@
 package net.logicim.data.port;
 
+import net.logicim.data.ReflectiveData;
+
 import java.util.List;
 
 public class MultiPortData
+    extends ReflectiveData
 {
   public List<PortData> ports;
 

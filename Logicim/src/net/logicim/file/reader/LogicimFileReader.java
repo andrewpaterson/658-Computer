@@ -176,33 +176,21 @@ public class LogicimFileReader
         {
           processed = false;
           SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataField;
-          if (containingClassField.typeInstance instanceof IntArray2DData)
+          if (saveXMLDataField.typeInstance instanceof IntArrayData)
           {
-            if (saveXMLDataField.typeInstance instanceof IntArrayData)
-            {
-              parseIntArray((IntArrayData) saveXMLDataField.typeInstance, trim);
-            }
+            parseIntArray((IntArrayData) saveXMLDataField.typeInstance, trim);
           }
-          else if (containingClassField.typeInstance instanceof LongArray2DData)
+          else if (saveXMLDataField.typeInstance instanceof LongArrayData)
           {
-            if (saveXMLDataField.typeInstance instanceof LongArrayData)
-            {
-              parseLongArray((LongArrayData) saveXMLDataField.typeInstance, trim);
-            }
+            parseLongArray((LongArrayData) saveXMLDataField.typeInstance, trim);
           }
-          else if (containingClassField.typeInstance instanceof FloatArray2DData)
+          else if (saveXMLDataField.typeInstance instanceof FloatArrayData)
           {
-            if (saveXMLDataField.typeInstance instanceof FloatArrayData)
-            {
-              parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, trim);
-            }
+            parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, trim);
           }
-          else if (containingClassField.typeInstance instanceof DoubleArray2DData)
+          else if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
           {
-            if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
-            {
-              parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, trim);
-            }
+            parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, trim);
           }
         }
         if (processed)

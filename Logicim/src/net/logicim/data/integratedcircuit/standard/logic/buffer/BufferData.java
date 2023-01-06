@@ -18,6 +18,8 @@ import java.util.List;
 public class BufferData
     extends StandardIntegratedCircuitData<BufferView, State>
 {
+  protected int bufferCount;
+
   public BufferData()
   {
   }
@@ -30,6 +32,7 @@ public class BufferData
                     List<MultiPortData> ports,
                     boolean selected,
                     State state,
+                    int bufferCount,
                     boolean explicitPowerPorts)
   {
     super(position,
@@ -41,6 +44,7 @@ public class BufferData
           selected,
           state,
           explicitPowerPorts);
+    this.bufferCount = bufferCount;
   }
 
   @Override
@@ -52,7 +56,8 @@ public class BufferData
                           new BufferProperties(
                               name,
                               FamilyStore.getInstance().get(family),
-                              explicitPowerPorts));
+                              explicitPowerPorts,
+                              bufferCount));
   }
 }
 

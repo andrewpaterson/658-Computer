@@ -8,6 +8,8 @@ import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.trace.TraceValue;
 
+import java.util.List;
+
 public class Buffer
     extends IntegratedCircuit<BufferPins, Stateless>
 {
@@ -35,15 +37,22 @@ public class Buffer
   {
     if (isPowered(simulation.getTime()))
     {
-      LogicPort input = pins.getInput();
-      TraceValue inValue = input.readValue(simulation.getTime());
-      if (inValue.isHigh())
+      List<LogicPort> inputs = pins.getInputs();
+      List<LogicPort> outputs = pins.getOutputs();
+
+      for (int i = 0; i < inputs.size(); i++)
       {
-        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
-      }
-      else if (inValue.isLow())
-      {
-        pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
+        LogicPort input = inputs.get(i);
+        LogicPort output = outputs.get(i);
+        TraceValue inValue = input.readValue(simulation.getTime());
+        if (inValue.isHigh())
+        {
+          output.writeBool(simulation.getTimeline(), transformOutput(true));
+        }
+        else if (inValue.isLow())
+        {
+          output.writeBool(simulation.getTimeline(), transformOutput(false));
+        }
       }
     }
   }

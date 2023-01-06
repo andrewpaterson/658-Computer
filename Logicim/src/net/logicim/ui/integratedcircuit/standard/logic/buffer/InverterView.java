@@ -32,7 +32,8 @@ public class InverterView
   {
     return new Inverter(circuitEditor.getCircuit(),
                         properties.name,
-                        new BufferPins(familyVoltageConfiguration));
+                        new BufferPins(properties.bufferCount,
+                                       familyVoltageConfiguration));
   }
 
   @Override
@@ -46,6 +47,7 @@ public class InverterView
                             savePorts(),
                             selected,
                             saveState(),
+                            properties.bufferCount,
                             properties.explicitPowerPorts);
   }
 

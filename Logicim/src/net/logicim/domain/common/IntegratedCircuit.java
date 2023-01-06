@@ -79,6 +79,12 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     return pins.getPort(name);
   }
 
+  public List<Port> getPorts(String commonName)
+  {
+    return pins.getPorts(commonName);
+  }
+
+
   public void setState(State state)
   {
     if (!isStateless())

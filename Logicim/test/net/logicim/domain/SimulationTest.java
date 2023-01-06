@@ -223,14 +223,15 @@ public class SimulationTest
                                                                                                         (int) nanosecondsToTime(2.0f))),
                                      (int) nanosecondsToTime(1), 0);
     constant.getPins().getOutput().connect(connectingTraceNet);
-    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(new TestVoltageConfiguration(3.3f, 0.8f,
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(1,
+                                                                    new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                  2.0f,
                                                                                                  0.0f,
                                                                                                  3.3f,
                                                                                                  (int) nanosecondsToTime(2.5f),
                                                                                                  (int) nanosecondsToTime(2.5f))));
-    inverter.getPins().getInput().connect(connectingTraceNet);
-    inverter.getPins().getOutput().connect(outputTraceNet);
+    inverter.getPins().getInputs().get(0).connect(connectingTraceNet);
+    inverter.getPins().getOutputs().get(0).connect(outputTraceNet);
 
     LogicPort constantOutput = (LogicPort) constant.getPort("Output");
     LogicPort inverterInput = (LogicPort) inverter.getPort("Input");
@@ -345,14 +346,15 @@ public class SimulationTest
                                                                                                         (int) nanosecondsToTime(2.0f))),
                                      (int) nanosecondsToTime(1), 0);
     constant.getPins().getOutput().connect(connectingTraceNet);
-    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(new TestVoltageConfiguration(3.3f, 0.8f,
+    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(1,
+                                                                    new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                  2.0f,
                                                                                                  0.0f,
                                                                                                  3.3f,
                                                                                                  (int) nanosecondsToTime(2.5f),
                                                                                                  (int) nanosecondsToTime(2.5f))));
-    inverter.getPins().getInput().connect(connectingTraceNet);
-    inverter.getPins().getOutput().connect(outputTraceNet);
+    inverter.getPins().getInputs().get(0).connect(connectingTraceNet);
+    inverter.getPins().getOutputs().get(0).connect(outputTraceNet);
 
     Simulation simulation = circuit.resetSimulation();
 

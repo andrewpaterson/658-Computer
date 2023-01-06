@@ -32,6 +32,19 @@ public abstract class PortHolder
     return null;
   }
 
+  public List<Port> getPorts(String commonName)
+  {
+    List<Port> result = new ArrayList<>();
+    for (Port port : ports)
+    {
+      if (port.getName().contains(commonName))
+      {
+        result.add(port);
+      }
+    }
+    return result;
+  }
+
   public List<Port> getPorts()
   {
     return ports;

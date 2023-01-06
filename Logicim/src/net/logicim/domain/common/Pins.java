@@ -5,6 +5,8 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.state.State;
 
+import java.util.List;
+
 public abstract class Pins
     extends PortHolder
 {

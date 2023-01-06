@@ -6,12 +6,17 @@ import net.logicim.ui.integratedcircuit.standard.common.StandardIntegratedCircui
 public class BufferProperties
     extends StandardIntegratedCircuitProperties
 {
+  public int bufferCount;
+
   public BufferProperties()
   {
+    bufferCount = 0;
   }
 
-  public BufferProperties(String name, Family family, boolean explicitPowerPorts)
+  public BufferProperties(String name, Family family, boolean explicitPowerPorts, int bufferCount)
   {
     super(name, family, explicitPowerPorts);
+    this.bufferCount = bufferCount;
   }
 }
+

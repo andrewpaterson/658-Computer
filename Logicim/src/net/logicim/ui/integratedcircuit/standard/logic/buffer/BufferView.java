@@ -32,7 +32,8 @@ public class BufferView
   {
     return new Buffer(circuitEditor.getCircuit(),
                       properties.name,
-                      new BufferPins(familyVoltageConfiguration));
+                      new BufferPins(properties.bufferCount,
+                                     familyVoltageConfiguration));
   }
 
   @Override
@@ -46,6 +47,7 @@ public class BufferView
                           savePorts(),
                           selected,
                           saveState(),
+                          properties.bufferCount,
                           properties.explicitPowerPorts);
   }
 

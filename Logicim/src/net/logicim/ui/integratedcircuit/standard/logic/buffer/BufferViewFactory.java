@@ -17,7 +17,8 @@ public class BufferViewFactory
                   rotation,
                   new BufferProperties("",
                                        DefaultFamily.get(),
-                                       true));
+                                       true,
+                                       1));
   }
 
   @Override

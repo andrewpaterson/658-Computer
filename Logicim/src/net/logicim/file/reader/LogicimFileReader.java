@@ -176,18 +176,32 @@ public class LogicimFileReader
         {
           processed = false;
           SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataField;
-          if (containingClassField.typeInstance instanceof FloatArray2DData)
+          if (containingClassField.typeInstance instanceof IntArray2DData)
+          {
+            if (saveXMLDataField.typeInstance instanceof IntArrayData)
+            {
+              parseIntArray((IntArrayData) saveXMLDataField.typeInstance, trim);
+            }
+          }
+          else if (containingClassField.typeInstance instanceof LongArray2DData)
+          {
+            if (saveXMLDataField.typeInstance instanceof LongArrayData)
+            {
+              parseLongArray((LongArrayData) saveXMLDataField.typeInstance, trim);
+            }
+          }
+          else if (containingClassField.typeInstance instanceof FloatArray2DData)
           {
             if (saveXMLDataField.typeInstance instanceof FloatArrayData)
             {
               parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, trim);
             }
           }
-          else if (containingClassField.typeInstance instanceof IntArray2DData)
+          else if (containingClassField.typeInstance instanceof DoubleArray2DData)
           {
-            if (saveXMLDataField.typeInstance instanceof IntArrayData)
+            if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
             {
-              parseIntArray((IntArrayData) saveXMLDataField.typeInstance, trim);
+              parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, trim);
             }
           }
         }
@@ -198,6 +212,44 @@ public class LogicimFileReader
         }
       }
     }
+  }
+
+  private boolean parseIntArray(IntArrayData arrayData, String string)
+  {
+    List<String> strings = StringUtil.splitAndTrim(string, ",");
+    for (String s : strings)
+    {
+      if (!s.isEmpty())
+      {
+        int i = Integer.parseInt(s);
+        arrayData.array[arrayData.index] = i;
+        arrayData.index++;
+        if (arrayData.index == arrayData.array.length)
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private boolean parseLongArray(LongArrayData arrayData, String string)
+  {
+    List<String> strings = StringUtil.splitAndTrim(string, ",");
+    for (String s : strings)
+    {
+      if (!s.isEmpty())
+      {
+        long i = Long.parseLong(s);
+        arrayData.array[arrayData.index] = i;
+        arrayData.index++;
+        if (arrayData.index == arrayData.array.length)
+        {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private boolean parseFloatArray(FloatArrayData arrayData, String string)
@@ -219,14 +271,14 @@ public class LogicimFileReader
     return false;
   }
 
-  private boolean parseIntArray(IntArrayData arrayData, String string)
+  private boolean parseDoubleArray(DoubleArrayData arrayData, String string)
   {
     List<String> strings = StringUtil.splitAndTrim(string, ",");
     for (String s : strings)
     {
       if (!s.isEmpty())
       {
-        int f = Integer.parseInt(s);
+        double f = Double.parseDouble(s);
         arrayData.array[arrayData.index] = f;
         arrayData.index++;
         if (arrayData.index == arrayData.array.length)
@@ -386,17 +438,29 @@ public class LogicimFileReader
               ArrayListData listData = (ArrayListData) containingClassField.typeInstance;
               listData.list.set(index, saveXMLDataField.typeInstance.getObject());
             }
+            else if (containingClassField.typeInstance instanceof IntArray2DData)
+            {
+              int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
+              IntArray2DData intArray2DData = (IntArray2DData) containingClassField.typeInstance;
+              intArray2DData.array[index] = ((IntArrayData) saveXMLDataField.typeInstance).array;
+            }
+            else if (containingClassField.typeInstance instanceof LongArray2DData)
+            {
+              int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
+              LongArray2DData longArray2DData = (LongArray2DData) containingClassField.typeInstance;
+              longArray2DData.array[index] = ((LongArrayData) saveXMLDataField.typeInstance).array;
+            }
             else if (containingClassField.typeInstance instanceof FloatArray2DData)
             {
               int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
               FloatArray2DData floatArray2DData = (FloatArray2DData) containingClassField.typeInstance;
               floatArray2DData.array[index] = ((FloatArrayData) saveXMLDataField.typeInstance).array;
             }
-            else if (containingClassField.typeInstance instanceof IntArray2DData)
+            else if (containingClassField.typeInstance instanceof DoubleArray2DData)
             {
               int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
-              IntArray2DData intArray2DData = (IntArray2DData) containingClassField.typeInstance;
-              intArray2DData.array[index] = ((IntArrayData) saveXMLDataField.typeInstance).array;
+              DoubleArray2DData doubleArray2DData = (DoubleArray2DData) containingClassField.typeInstance;
+              doubleArray2DData.array[index] = ((DoubleArrayData) saveXMLDataField.typeInstance).array;
             }
             else
             {

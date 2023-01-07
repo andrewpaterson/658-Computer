@@ -35,7 +35,7 @@ public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
 
   protected void createPortViews(boolean negateOutput)
   {
-    new PortView(this, integratedCircuit.getPort("Input"), new Int2D(0, 1));
+    new PortView(this, integratedCircuit.getPorts("Input"), new Int2D(0, 1));
 
     PortView outputPortView = new PortView(this, integratedCircuit.getPorts("Output"), new Int2D(0, -1));
     if (negateOutput)

@@ -9,7 +9,7 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 
 public class BufferView
-    extends BaseInverterView<Buffer>
+    extends BaseBufferView<Buffer>
 {
   public BufferView(CircuitEditor circuitEditor,
                     Int2D position,

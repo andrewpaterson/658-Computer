@@ -14,15 +14,15 @@ import java.awt.*;
 
 import static net.logicim.ui.common.Rotation.North;
 
-public abstract class BaseInverterView<IC extends IntegratedCircuit<?, ?>>
+public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
     extends StandardIntegratedCircuitView<IC, BufferProperties>
 {
   protected PolygonView polygon;
 
-  public BaseInverterView(CircuitEditor circuitEditor,
-                          Int2D position,
-                          Rotation rotation,
-                          BufferProperties properties)
+  public BaseBufferView(CircuitEditor circuitEditor,
+                        Int2D position,
+                        Rotation rotation,
+                        BufferProperties properties)
   {
     super(circuitEditor, position, rotation, properties);
     createGraphics();

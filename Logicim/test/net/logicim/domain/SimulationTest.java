@@ -14,7 +14,7 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.SlewEvent;
 import net.logicim.domain.common.port.event.TransitionEvent;
 import net.logicim.domain.common.propagation.TestVoltageConfiguration;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.constant.Constant;
@@ -60,9 +60,9 @@ public class SimulationTest
         (int) nanosecondsToTime(2.5f),
         (int) nanosecondsToTime(2.5f))));
 
-    TraceNet clock2Trace = new TraceNet();
-    TraceNet clock1Trace = new TraceNet();
-    TraceNet outputTrace = new TraceNet();
+    Trace clock2Trace = new Trace();
+    Trace clock1Trace = new Trace();
+    Trace outputTrace = new Trace();
 
     clock2.getPins().getOutput().connect(clock2Trace);
     clock1.getPins().getOutput().connect(clock1Trace);
@@ -213,8 +213,8 @@ public class SimulationTest
   private static void testInverterEvents()
   {
     Circuit circuit = new Circuit();
-    TraceNet connectingTraceNet = new TraceNet();
-    TraceNet outputTraceNet = new TraceNet();
+    Trace connectingTrace = new Trace();
+    Trace outputTrace = new Trace();
     Constant constant = new Constant(circuit, "Constant", new ConstantPins(new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                         2.0f,
                                                                                                         0.0f,
@@ -222,7 +222,7 @@ public class SimulationTest
                                                                                                         (int) nanosecondsToTime(2.0f),
                                                                                                         (int) nanosecondsToTime(2.0f))),
                                      (int) nanosecondsToTime(1), 0);
-    constant.getPins().getOutput().connect(connectingTraceNet);
+    constant.getPins().getOutput().connect(connectingTrace);
     Inverter inverter = new Inverter(circuit, "Not", new BufferPins(1,
                                                                     new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                  2.0f,
@@ -230,8 +230,8 @@ public class SimulationTest
                                                                                                  3.3f,
                                                                                                  (int) nanosecondsToTime(2.5f),
                                                                                                  (int) nanosecondsToTime(2.5f))));
-    inverter.getPins().getInputs().get(0).connect(connectingTraceNet);
-    inverter.getPins().getOutputs().get(0).connect(outputTraceNet);
+    inverter.getPins().getInputs().get(0).connect(connectingTrace);
+    inverter.getPins().getOutputs().get(0).connect(outputTrace);
 
     LogicPort constantOutput = (LogicPort) constant.getPort("Output");
     LogicPort inverterInput = (LogicPort) inverter.getPort("Input");
@@ -305,9 +305,9 @@ public class SimulationTest
     voltage = constantOutput.getVoltageOut(simulation.getTime());
     validateFalse(Float.isNaN(voltage));
     validate(0.0f, voltage);
-    validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
+    validate(0.0f, connectingTrace.getVoltage(simulation.getTime()));
     validateTrue(Float.isNaN(inverterOutput.getVoltageOut(simulation.getTime())));
-    validateTrue(Float.isNaN(outputTraceNet.getVoltage(simulation.getTime())));
+    validateTrue(Float.isNaN(outputTrace.getVoltage(simulation.getTime())));
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
@@ -318,7 +318,7 @@ public class SimulationTest
     validate(3856, simulation.getTime());
     validateFalse(Float.isNaN(voltage));
     validate(0.0f, voltage);
-    validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
+    validate(0.0f, connectingTrace.getVoltage(simulation.getTime()));
 
     eventsProcessed = simulation.runSimultaneous();
     validateTrue(eventsProcessed);
@@ -327,7 +327,7 @@ public class SimulationTest
     validate(5136, simulation.getTime());
     validateFalse(Float.isNaN(voltage));
     validate(0.0f, voltage);
-    validate(0.0f, connectingTraceNet.getVoltage(simulation.getTime()));
+    validate(0.0f, connectingTrace.getVoltage(simulation.getTime()));
 
     eventsProcessed = simulation.runSimultaneous();
     validateFalse(eventsProcessed);
@@ -336,8 +336,8 @@ public class SimulationTest
   private static void testInverterLevels()
   {
     Circuit circuit = new Circuit();
-    TraceNet connectingTraceNet = new TraceNet();
-    TraceNet outputTraceNet = new TraceNet();
+    Trace connectingTrace = new Trace();
+    Trace outputTrace = new Trace();
     Constant constant = new Constant(circuit, "Constant", new ConstantPins(new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                         2.0f,
                                                                                                         0.0f,
@@ -345,7 +345,7 @@ public class SimulationTest
                                                                                                         (int) nanosecondsToTime(2.0f),
                                                                                                         (int) nanosecondsToTime(2.0f))),
                                      (int) nanosecondsToTime(1), 0);
-    constant.getPins().getOutput().connect(connectingTraceNet);
+    constant.getPins().getOutput().connect(connectingTrace);
     Inverter inverter = new Inverter(circuit, "Not", new BufferPins(1,
                                                                     new TestVoltageConfiguration(3.3f, 0.8f,
                                                                                                  2.0f,
@@ -353,8 +353,8 @@ public class SimulationTest
                                                                                                  3.3f,
                                                                                                  (int) nanosecondsToTime(2.5f),
                                                                                                  (int) nanosecondsToTime(2.5f))));
-    inverter.getPins().getInputs().get(0).connect(connectingTraceNet);
-    inverter.getPins().getOutputs().get(0).connect(outputTraceNet);
+    inverter.getPins().getInputs().get(0).connect(connectingTrace);
+    inverter.getPins().getOutputs().get(0).connect(outputTrace);
 
     Simulation simulation = circuit.resetSimulation();
 
@@ -362,8 +362,8 @@ public class SimulationTest
     StringBuilder builder = new StringBuilder();
     while (processedEvent)
     {
-      String connectingVoltage = connectingTraceNet.getVoltageString(simulation.getTime());
-      String outputVoltage = outputTraceNet.getVoltageString(simulation.getTime());
+      String connectingVoltage = connectingTrace.getVoltageString(simulation.getTime());
+      String outputVoltage = outputTrace.getVoltageString(simulation.getTime());
       builder.append(connectingVoltage).append(" ").append(outputVoltage).append("\n");
       processedEvent = simulation.runToTime(100);
     }

@@ -9,7 +9,7 @@ import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.common.trace.TraceValue;
 
 import java.util.ArrayList;
@@ -216,7 +216,7 @@ public class LogicPort
     }
   }
 
-  protected void createTransitionEventFromExistingVoltage(Simulation simulation, TraceNet trace)
+  protected void createTransitionEventFromExistingVoltage(Simulation simulation, Trace trace)
   {
     if (voltageConfigurationSource != null)
     {

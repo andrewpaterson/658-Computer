@@ -2,7 +2,7 @@ package net.logicim.data.trace;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.trace.TraceView;
 
@@ -35,10 +35,10 @@ public class TraceData
   public TraceView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     TraceView traceView = new TraceView(circuitEditor, start, end);
-    List<TraceNet> traces = new ArrayList<>(ids.length);
+    List<Trace> traces = new ArrayList<>(ids.length);
     for (long id : ids)
     {
-      TraceNet trace = traceLoader.create(id);
+      Trace trace = traceLoader.create(id);
       traces.add(trace);
     }
     traceView.connectTraceNet(traces);

@@ -1,29 +1,29 @@
 package net.logicim.assertions;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 
 public class TraceSmoothVoltage
     extends SmoothVoltage
 {
-  protected TraceNet traceNet;
+  protected Trace trace;
 
-  public TraceSmoothVoltage(TraceNet traceNet, float maximumDelta, Simulation simulation)
+  public TraceSmoothVoltage(Trace trace, float maximumDelta, Simulation simulation)
   {
     super(maximumDelta, simulation);
-    this.traceNet = traceNet;
+    this.trace = trace;
   }
 
   @Override
   protected float getVoltage(long time)
   {
-    return traceNet.getVoltage(time);
+    return trace.getVoltage(time);
   }
 
   @Override
   protected String getDescription()
   {
-    return traceNet.getDescription();
+    return trace.getDescription();
   }
 }
 

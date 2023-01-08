@@ -6,7 +6,7 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class Oscilloscope
     for (int input = 0; input < inputs.size(); input++)
     {
       LogicPort port = inputs.get(input);
-      TraceNet trace = port.getTrace();
+      Trace trace = port.getTrace();
       state.sample(input, trace, colours, time);
     }
   }

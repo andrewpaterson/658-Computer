@@ -5,7 +5,7 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.trace.TraceData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -17,7 +17,7 @@ import java.util.List;
 public class TraceView
     extends ComponentView
 {
-  protected List<TraceNet> traces;
+  protected List<Trace> traces;
   protected Line line;
   protected ConnectionView startConnection;
   protected ConnectionView endConnection;
@@ -289,7 +289,7 @@ public class TraceView
     }
   }
 
-  public void connectTraceNet(List<TraceNet> traces)
+  public void connectTraceNet(List<Trace> traces)
   {
     this.traces = traces;
   }
@@ -306,7 +306,7 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
-  public List<TraceNet> getTraces()
+  public List<Trace> getTraces()
   {
     return traces;
   }
@@ -331,7 +331,7 @@ public class TraceView
   {
     Colours colours = Colours.getInstance();
     Color colour = null;
-    for (TraceNet trace : traces)
+    for (Trace trace : traces)
     {
       Color traceColour = VoltageColour.getColourForTrace(colours, trace, time);
       if (colour == null)
@@ -377,8 +377,8 @@ public class TraceView
     long[] ids = new long[traces.size()];
     for (int i = 0; i < traces.size(); i++)
     {
-      TraceNet trace = traces.get(i);
-      ids[i] = TraceNet.getId(trace);
+      Trace trace = traces.get(i);
+      ids[i] = Trace.getId(trace);
     }
     return new TraceData(ids,
                          getStartPosition(),

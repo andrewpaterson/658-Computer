@@ -14,7 +14,7 @@ import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -185,12 +185,12 @@ public class PortView
     return ports;
   }
 
-  public void connectTraceNet(List<TraceNet> traces, Simulation simulation)
+  public void connectTraceNet(List<Trace> traces, Simulation simulation)
   {
     for (int i = 0; i < ports.size(); i++)
     {
       Port port = ports.get(i);
-      TraceNet trace = traces.get(i);
+      Trace trace = traces.get(i);
       port.disconnect(simulation);
       port.connect(trace);
     }

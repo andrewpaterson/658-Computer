@@ -2,7 +2,7 @@ package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ public abstract class Port
 {
   protected PortType type;
   protected String name;
-  protected TraceNet trace;
+  protected Trace trace;
   protected PortHolder holder;
 
   public Port(PortType type, String name, PortHolder holder)
@@ -26,7 +26,7 @@ public abstract class Port
     return name;
   }
 
-  public TraceNet getTrace()
+  public Trace getTrace()
   {
     return trace;
   }
@@ -71,7 +71,7 @@ public abstract class Port
     return false;
   }
 
-  public void connect(TraceNet trace)
+  public void connect(Trace trace)
   {
     if (this.trace == null)
     {

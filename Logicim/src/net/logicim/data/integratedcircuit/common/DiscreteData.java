@@ -6,7 +6,7 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
@@ -55,7 +55,7 @@ public abstract class DiscreteData
       {
         Port port = ports.get(j);
         PortData portData = multiPortData.ports.get(j);
-        TraceNet trace = traceLoader.create(portData.traceId);
+        Trace trace = traceLoader.create(portData.traceId);
         port.connect(trace);
 
         loadPort(circuitEditor, portData, port);

@@ -3,7 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerOutPort;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ public abstract class VoltageColour
     }
   }
 
-  public static Color getColourForTrace(VoltageRepresentation colours, TraceNet trace, long time)
+  public static Color getColourForTrace(VoltageRepresentation colours, Trace trace, long time)
   {
     if ((trace == null) || (time == -1))
     {
@@ -35,7 +35,7 @@ public abstract class VoltageColour
     }
   }
 
-  public static Color getColourForTrace(VoltageRepresentation colours, TraceNet trace, long time, float voltage)
+  public static Color getColourForTrace(VoltageRepresentation colours, Trace trace, long time, float voltage)
   {
     if (!Float.isNaN(voltage))
     {
@@ -91,7 +91,7 @@ public abstract class VoltageColour
       return colours.getDisconnectedTrace();
     }
 
-    TraceNet trace = port.getTrace();
+    Trace trace = port.getTrace();
     if (trace == null)
     {
       float voltage = Float.NaN;

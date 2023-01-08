@@ -13,7 +13,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -562,10 +562,10 @@ public class CircuitEditor
       }
     }
 
-    List<TraceNet> traces = new ArrayList<>(numberOfTraces);
+    List<Trace> traces = new ArrayList<>(numberOfTraces);
     for (int i = 0; i < numberOfTraces; i++)
     {
-      traces.add(new TraceNet());
+      traces.add(new Trace());
     }
 
     for (PortView connectedPortView : connectedPorts)

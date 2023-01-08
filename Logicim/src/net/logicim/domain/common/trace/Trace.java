@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TraceNet
+public class Trace
     implements Voltage
 {
   public static long nextId = 1L;
@@ -19,14 +19,14 @@ public class TraceNet
   protected Set<Port> connectedPorts;
   protected long id;
 
-  public TraceNet()
+  public Trace()
   {
     connectedPorts = new LinkedHashSet<>();
     id = nextId;
     nextId++;
   }
 
-  public TraceNet(long id)
+  public Trace(long id)
   {
     connectedPorts = new LinkedHashSet<>();
     this.id = id;
@@ -36,7 +36,7 @@ public class TraceNet
     }
   }
 
-  public static long getId(TraceNet trace)
+  public static long getId(Trace trace)
   {
     if (trace != null)
     {

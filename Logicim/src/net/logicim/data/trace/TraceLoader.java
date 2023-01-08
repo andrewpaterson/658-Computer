@@ -1,28 +1,28 @@
 package net.logicim.data.trace;
 
-import net.logicim.domain.common.trace.TraceNet;
+import net.logicim.domain.common.trace.Trace;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TraceLoader
 {
-  protected Map<Long, TraceNet> tracesById;
+  protected Map<Long, Trace> tracesById;
 
   public TraceLoader()
   {
-    TraceNet.resetNextId();
+    Trace.resetNextId();
     tracesById = new HashMap<>();
   }
 
-  public TraceNet create(long id)
+  public Trace create(long id)
   {
     if (id > 0)
     {
-      TraceNet trace = tracesById.get(id);
+      Trace trace = tracesById.get(id);
       if (trace == null)
       {
-        trace = new TraceNet(id);
+        trace = new Trace(id);
         tracesById.put(id, trace);
       }
       return trace;

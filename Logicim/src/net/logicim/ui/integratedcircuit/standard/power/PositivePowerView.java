@@ -87,12 +87,6 @@ public class PositivePowerView
   }
 
   @Override
-  protected PositivePowerProperties createProperties()
-  {
-    return new PositivePowerProperties();
-  }
-
-  @Override
   public void clampProperties()
   {
     super.clampProperties();

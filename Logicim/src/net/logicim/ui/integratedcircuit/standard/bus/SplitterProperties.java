@@ -1,8 +1,22 @@
 package net.logicim.ui.integratedcircuit.standard.bus;
 
-import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 public class SplitterProperties
-    extends DiscreteProperties
+    extends ComponentProperties
 {
+  protected int outputCount;
+  protected int outputOffset;
+  protected int spacing;
+
+  public SplitterProperties()
+  {
+  }
+
+  public SplitterProperties(String name, int outputCount, int outputOffset)
+  {
+    super(name);
+    this.outputCount = outputCount;
+    this.outputOffset = outputOffset;
+  }
 }

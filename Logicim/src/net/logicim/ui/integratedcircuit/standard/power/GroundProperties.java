@@ -1,9 +1,9 @@
 package net.logicim.ui.integratedcircuit.standard.power;
 
-import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 public class GroundProperties
-    extends DiscreteProperties
+    extends ComponentProperties
 {
   public GroundProperties()
   {

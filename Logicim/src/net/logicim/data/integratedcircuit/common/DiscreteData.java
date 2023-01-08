@@ -15,16 +15,9 @@ import net.logicim.ui.common.port.PortView;
 import java.util.List;
 
 public abstract class DiscreteData
-    extends ReflectiveData
+    extends NonTraceData
 {
-  protected String name;
-
-  protected Int2D position;
-  protected Rotation rotation;
-
-  protected List<MultiPortData> ports;
-
-  protected boolean selected;
+ protected List<MultiPortData> ports;
 
   public DiscreteData()
   {
@@ -36,11 +29,8 @@ public abstract class DiscreteData
                       List<MultiPortData> ports,
                       boolean selected)
   {
-    this.position = new Int2D(position);
-    this.rotation = rotation;
-    this.name = name;
+    super(name, position, rotation, selected);
     this.ports = ports;
-    this.selected = selected;
   }
 
   protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, DiscreteView<?> discreteView)

@@ -1,36 +1,27 @@
 package net.logicim.ui.common.integratedcircuit;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.common.NonTraceData;
 import net.logicim.data.port.MultiPortData;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Discrete;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.*;
+import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.ShapeHolder;
+import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
-import net.logicim.ui.shape.common.ShapeView;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
-    extends ComponentView
+public abstract class DiscreteView<PROPERTIES extends ComponentProperties>
+    extends NonTraceView<PROPERTIES>
     implements ShapeHolder
 {
-  protected PROPERTIES properties;
-
-  protected CircuitEditor circuitEditor;
-  protected Int2D position;
-  protected Rotation rotation;
-  protected BoundingBox boundingBox;
-  protected BoundingBox selectionBox;
-  protected List<ShapeView> shapes;
-  protected boolean finalised;
   protected List<PortView> ports;
 
   public DiscreteView(CircuitEditor circuitEditor,
@@ -38,22 +29,14 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
                       Rotation rotation,
                       PROPERTIES properties)
   {
-    this.properties = properties;
+    super(circuitEditor, position, rotation, properties);
 
-    this.circuitEditor = circuitEditor;
-    this.position = position.clone();
-    this.rotation = rotation;
-    this.boundingBox = new BoundingBox();
-    this.selectionBox = new BoundingBox();
-    this.shapes = new ArrayList<>();
-    this.finalised = false;
     this.ports = new ArrayList<>();
   }
 
   public void setPosition(int x, int y)
   {
-    this.position.set(x, y);
-
+    super.setPosition(x, y);
     invalidateCache();
   }
 
@@ -69,16 +52,6 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     {
       return null;
     }
-  }
-
-  protected void finaliseView()
-  {
-    finalised = true;
-
-    updateBoundingBoxFromShapes(boundingBox);
-    updateBoundingBoxFromPorts(boundingBox);
-    selectionBox.copy(this.boundingBox);
-    this.boundingBox.grow(0.5f);
   }
 
   public PortView getPortView(Port port)
@@ -118,175 +91,9 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     return getPortInGrid(position.x, position.y);
   }
 
-  public Int2D getGridPosition(ConnectionView connectionView)
-  {
-    for (PortView portView : ports)
-    {
-      ConnectionView portViewConnections = portView.getConnection();
-      if (portViewConnections == connectionView)
-      {
-        return portView.getGridPosition();
-      }
-    }
-    return null;
-  }
-
-  protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
-  {
-    for (ShapeView shape : shapes)
-    {
-      shape.boundingBoxInclude(boundingBox);
-    }
-  }
-
-  protected void updateBoundingBoxFromPorts(BoundingBox boundingBox)
-  {
-    for (PortView port : ports)
-    {
-      port.updateBoundingBox(boundingBox);
-    }
-  }
-
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
-  {
-    if (!finalised)
-    {
-      throw new SimulatorException("View [" + getClass().getSimpleName() + "] is not finalised.");
-    }
-  }
-
-  public void paintSelected(Graphics2D graphics, Viewport viewport, Color color)
-  {
-    Int2D p = new Int2D();
-    Int2D s = new Int2D();
-
-    getSelectionBoxInScreenSpace(viewport, p, s);
-
-    graphics.setStroke(viewport.getZoomableStroke());
-    paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
-    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
-    paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
-    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y + s.y, color);
-  }
-
-  @Override
-  public void paintSelected(Graphics2D graphics, Viewport viewport)
-  {
-    paintSelected(graphics, viewport, Colours.getInstance().getSelected());
-  }
-
-  public void paintHover(Graphics2D graphics, Viewport viewport)
-  {
-    paintSelected(graphics, viewport, Colours.getInstance().getViewHover());
-  }
-
-  public void paintBoundingBox(Graphics2D graphics, Viewport viewport)
-  {
-    boundingBox.transform(rotation);
-
-    Int2D p = new Int2D();
-    Int2D s = new Int2D();
-    getBoundingBoxInScreenSpace(viewport, p, s);
-    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getAbsoluteStroke(1), null, Color.ORANGE);
-  }
-
-  public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
-  {
-    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, boundingBox);
-  }
-
-  public void getSelectionBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
-  {
-    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, selectionBox);
-  }
-
-  private void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension, BoundingBox boundingBox)
-  {
-    boundingBox.transform(rotation);
-
-    int x = viewport.transformGridToScreenSpaceX(boundingBox.getTransformedTopLeft().x + position.x);
-    int y = viewport.transformGridToScreenSpaceY(boundingBox.getTransformedTopLeft().y + position.y);
-
-    int width = viewport.transformGridToScreenWidth(boundingBox.getTransformedWidth());
-    int height = viewport.transformGridToScreenHeight(boundingBox.getTransformedHeight());
-
-    if (width < 0)
-    {
-      x += width;
-      width *= -1;
-    }
-    if (height < 0)
-    {
-      y += height;
-      height *= -1;
-    }
-
-    destPosition.set(x, y);
-    destDimension.set(width, height);
-  }
-
-  public void getBoundingBoxInGridSpace(Float2D destPosition, Float2D destDimension)
-  {
-    boundingBox.transform(rotation);
-
-    float x = boundingBox.getTransformedTopLeft().x + position.x;
-    float y = boundingBox.getTransformedTopLeft().y + position.y;
-
-    float width = boundingBox.getTransformedWidth();
-    float height = boundingBox.getTransformedHeight();
-
-    if (width < 0)
-    {
-      x += width;
-      width *= -1;
-    }
-    if (height < 0)
-    {
-      y += height;
-      height *= -1;
-    }
-
-    destPosition.set(x, y);
-    destDimension.set(width, height);
-  }
-
-  public void rotateRight()
-  {
-    rotation = rotation.rotateRight();
-
-    invalidateCache();
-  }
-
-  public void rotateLeft()
-  {
-    rotation = rotation.rotateLeft();
-
-    invalidateCache();
-  }
-
-  @Override
-  public void add(ShapeView shapeView)
-  {
-    shapes.add(shapeView);
-  }
-
-  public Int2D getPosition()
-  {
-    return position;
-  }
-
-  public Rotation getRotation()
-  {
-    return rotation;
-  }
-
   protected void invalidateCache()
   {
-    for (ShapeView shape : shapes)
-    {
-      shape.invalidateCache();
-    }
-
+    super.invalidateCache();
     for (PortView port : ports)
     {
       port.invalidateCache();
@@ -297,10 +104,6 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
   {
     ports.add(portView);
   }
-
-  public abstract boolean isEnabled();
-
-  public abstract void simulationStarted(Simulation simulation);
 
   public List<PortView> getPorts()
   {
@@ -323,38 +126,32 @@ public abstract class DiscreteView<PROPERTIES extends DiscreteProperties>
     return ports.get(index);
   }
 
-  @Override
-  public String getName()
+  public Int2D getConnectionPosition(ConnectionView connectionView)
   {
-    return properties.name;
+    for (PortView portView : ports)
+    {
+      ConnectionView portViewConnections = portView.getConnection();
+      if (portViewConnections == connectionView)
+      {
+        return portView.getGridPosition();
+      }
+    }
+    return null;
   }
 
   @Override
-  public Int2D getGridPosition()
+  protected void updateBoundingBoxFromConnections(BoundingBox boundingBox)
   {
-    return position;
+    for (PortView port : ports)
+    {
+      port.updateBoundingBox(boundingBox);
+    }
   }
 
   protected abstract void createPortViews();
 
-  public abstract String getType();
-
-  public abstract DiscreteData save(boolean selected);
-
-  protected abstract PROPERTIES createProperties();
-
-  public PROPERTIES getProperties()
-  {
-    return properties;
-  }
-
-  public void setProperties(PROPERTIES properties)
-  {
-    this.properties = properties;
-  }
-
   public abstract Discrete getDiscrete();
 
-  public abstract void clampProperties();
+  public abstract DiscreteData save(boolean selected);
 }
 

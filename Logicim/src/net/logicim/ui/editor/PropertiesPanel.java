@@ -1,7 +1,7 @@
 package net.logicim.ui.editor;
 
 import net.logicim.common.reflect.InstanceInspector;
-import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
@@ -24,7 +24,7 @@ public class PropertiesPanel
 {
   protected Map<Field, PropertyEditor> fieldProperties;
 
-  public PropertiesPanel(DiscreteProperties properties)
+  public PropertiesPanel(ComponentProperties properties)
   {
     super(new GridBagLayout());
 

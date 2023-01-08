@@ -64,12 +64,6 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  protected BufferProperties createProperties()
-  {
-    return new BufferProperties();
-  }
-
-  @Override
   public void clampProperties()
   {
     super.clampProperties();

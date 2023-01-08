@@ -5,7 +5,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
@@ -59,7 +59,7 @@ public class EditPropertiesAction
     dialog.dispose();
   }
 
-  protected boolean updateProperties(Map<Field, Object> map, DiscreteProperties properties)
+  protected boolean updateProperties(Map<Field, Object> map, ComponentProperties properties)
   {
     InstanceInspector instanceInspector = new InstanceInspector(properties);
     boolean propertyChanged = false;
@@ -78,7 +78,7 @@ public class EditPropertiesAction
     return propertyChanged;
   }
 
-  protected DiscreteView<?> recreateDiscreteView(DiscreteProperties properties)
+  protected DiscreteView<?> recreateDiscreteView(ComponentProperties properties)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
 
@@ -160,7 +160,7 @@ public class EditPropertiesAction
       Container contentPane = dialog.getContentPane();
       contentPane.setLayout(new GridBagLayout());
 
-      DiscreteProperties properties = discreteView.getProperties();
+      ComponentProperties properties = discreteView.getProperties();
       propertiesPanel = new PropertiesPanel(properties);
       contentPane.add(propertiesPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 

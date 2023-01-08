@@ -7,6 +7,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.splitter.SplitterData;
 import net.logicim.data.trace.TraceData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.Simulation;
@@ -21,6 +22,7 @@ import net.logicim.ui.common.integratedcircuit.DiscreteView;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.trace.TraceView;
+import net.logicim.ui.integratedcircuit.standard.bus.SplitterView;
 import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.shape.common.BoundingBox;
 
@@ -32,6 +34,7 @@ public class CircuitEditor
 {
   protected Set<DiscreteView<?>> discreteViews;
   protected Set<TraceView> traceViews;
+  protected Set<SplitterView> splitterViews;
   protected Circuit circuit;
   protected Simulation simulation;
   protected List<ComponentView> selection;
@@ -42,6 +45,7 @@ public class CircuitEditor
     this.simulation = circuit.resetSimulation();
     this.discreteViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
+    this.splitterViews = new LinkedHashSet<>();
     this.selection = new ArrayList<>();
   }
 
@@ -50,10 +54,17 @@ public class CircuitEditor
     long time = getTime();
     List<TraceView> traceViews;
     List<DiscreteView<?>> discreteViews;
+    List<SplitterView> splitterViews;
     synchronized (this)
     {
       traceViews = new ArrayList<>(this.traceViews);
       discreteViews = new ArrayList<>(this.discreteViews);
+      splitterViews = new ArrayList<>(this.splitterViews);
+    }
+
+    for (SplitterView splitterView : splitterViews)
+    {
+      splitterView.paint(graphics, viewport, time);
     }
 
     for (TraceView traceView : traceViews)
@@ -442,6 +453,15 @@ public class CircuitEditor
     for (TraceView traceView : traceViews)
     {
       ConnectionView connectionView = traceView.getConnectionsInGrid(position);
+      if (connectionView != null)
+      {
+        connectionViews.add(connectionView);
+      }
+    }
+
+    for (SplitterView splitterView : splitterViews)
+    {
+      ConnectionView connectionView = splitterView.getConnectionsInGrid(position);
       if (connectionView != null)
       {
         connectionViews.add(connectionView);
@@ -965,11 +985,12 @@ public class CircuitEditor
         ConnectionView startConnection = traceView.getStartConnection();
         for (ComponentView componentView : startConnection.getConnectedComponents())
         {
+          boolean contained = true;
           if (componentView instanceof DiscreteView)
           {
             if (!discreteViews.contains(componentView))
             {
-              throw new SimulatorException("Discrete component [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+              contained = false;
             }
           }
 
@@ -977,8 +998,21 @@ public class CircuitEditor
           {
             if (!traceViews.contains(componentView))
             {
-              throw new SimulatorException("Trace [" + componentView.getDescription() + "] referenced by trace [" + traceView.getDescription() + "].");
+              contained = false;
             }
+          }
+
+          if (componentView instanceof SplitterView)
+          {
+            if (!splitterViews.contains(componentView))
+            {
+              contained = false;
+            }
+          }
+
+          if (!contained)
+          {
+            throw new SimulatorException(componentView.getDescription() + " referenced by trace [" + traceView.getDescription() + "] does not include trace.");
           }
         }
       }
@@ -998,6 +1032,13 @@ public class CircuitEditor
       }
 
       discreteDatas.add(discreteData);
+    }
+
+    ArrayList<SplitterData> splitterDatas = new ArrayList<>();
+    for (SplitterView splitterView : splitterViews)
+    {
+      SplitterData splitterData = splitterView.save(selection.contains(splitterView));
+      splitterDatas.add(splitterData);
     }
 
     ArrayList<TraceData> traceDatas = new ArrayList<>();
@@ -1218,6 +1259,25 @@ public class CircuitEditor
       }
     }
 
+    for (SplitterView splitterView : splitterViews)
+    {
+      splitterView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+      if (isPoint(start, end))
+      {
+        if (BoundingBox.containsPoint(new Int2D(start), boundBoxPosition, boundBoxDimension))
+        {
+          selectedViews.add(splitterView);
+        }
+      }
+      else
+      {
+        if (BoundingBox.containsBox(start, end, boundBoxPosition, boundBoxDimension, includeIntersections))
+        {
+          selectedViews.add(splitterView);
+        }
+      }
+    }
+
     for (TraceView traceView : traceViews)
     {
       Line line = traceView.getLine();
@@ -1354,6 +1414,11 @@ public class CircuitEditor
     {
       return traceViews.remove(traceView);
     }
+  }
+
+  public void addSplitterView(SplitterView splitterView)
+  {
+
   }
 }
 

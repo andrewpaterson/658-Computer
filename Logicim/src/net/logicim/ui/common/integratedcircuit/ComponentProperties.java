@@ -1,15 +1,15 @@
 package net.logicim.ui.common.integratedcircuit;
 
-public class DiscreteProperties
+public class ComponentProperties
 {
   public String name;
 
-  public DiscreteProperties()
+  public ComponentProperties()
   {
     name = null;
   }
 
-  public DiscreteProperties(String name)
+  public ComponentProperties(String name)
   {
     this.name = name;
   }

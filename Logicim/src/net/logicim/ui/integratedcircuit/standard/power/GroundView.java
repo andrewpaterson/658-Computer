@@ -62,12 +62,6 @@ public class GroundView
   }
 
   @Override
-  protected GroundProperties createProperties()
-  {
-    return new GroundProperties();
-  }
-
-  @Override
   public void clampProperties()
   {
     super.clampProperties();

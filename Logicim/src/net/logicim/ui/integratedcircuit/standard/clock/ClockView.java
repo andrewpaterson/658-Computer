@@ -155,12 +155,6 @@ public class ClockView
   }
 
   @Override
-  protected ClockProperties createProperties()
-  {
-    return new ClockProperties();
-  }
-
-  @Override
   protected ClockOscillatorState saveState()
   {
     return new ClockOscillatorState(integratedCircuit.getState().getState());

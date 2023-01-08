@@ -29,7 +29,7 @@ public class MoveComponents
     componentStartPositions = new LinkedHashMap<>(selection.size());
     for (ComponentView componentView : selection)
     {
-      componentStartPositions.put(componentView, new Int2D(componentView.getGridPosition()));
+      componentStartPositions.put(componentView, new Int2D(componentView.getPosition()));
       componentView.disable();
     }
   }

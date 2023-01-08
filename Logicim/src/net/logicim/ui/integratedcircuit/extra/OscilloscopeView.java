@@ -241,12 +241,6 @@ public class OscilloscopeView
                                 properties.samplingFrequency_Hz);
   }
 
-  @Override
-  protected OscilloscopeProperties createProperties()
-  {
-    return new OscilloscopeProperties();
-  }
-
   public OscilloscopeState saveState()
   {
     OscilloscopeState state = getIntegratedCircuit().getState();

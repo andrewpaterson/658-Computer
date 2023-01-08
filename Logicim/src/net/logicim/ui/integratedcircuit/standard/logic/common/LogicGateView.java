@@ -50,12 +50,6 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  protected LogicGateProperties createProperties()
-  {
-    return new LogicGateProperties();
-  }
-
-  @Override
   public void clampProperties()
   {
     super.clampProperties();

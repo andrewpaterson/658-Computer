@@ -1,9 +1,9 @@
 package net.logicim.ui.integratedcircuit.standard.power;
 
-import net.logicim.ui.common.integratedcircuit.DiscreteProperties;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 public class PositivePowerProperties
-    extends DiscreteProperties
+    extends ComponentProperties
 {
   public float voltage_V;
 

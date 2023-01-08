@@ -132,7 +132,7 @@ public class TraceView
   }
 
   @Override
-  public Int2D getGridPosition(ConnectionView connectionView)
+  public Int2D getConnectionPosition(ConnectionView connectionView)
   {
     if (startConnection == connectionView)
     {
@@ -151,7 +151,7 @@ public class TraceView
   }
 
   @Override
-  public Int2D getGridPosition()
+  public Int2D getPosition()
   {
     return line.getStart();
   }
@@ -244,6 +244,7 @@ public class TraceView
     return line;
   }
 
+  @Override
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     graphics.setStroke(getTraceStroke(viewport));

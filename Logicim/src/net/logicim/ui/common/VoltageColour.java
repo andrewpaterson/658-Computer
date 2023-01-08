@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.domain.common.port.OutputPortHelper;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
@@ -140,7 +141,8 @@ public abstract class VoltageColour
     int drivenPorts = 0;
     for (Port port : ports)
     {
-      float voltageOut = port.getVoltageOut(time);
+      float voltageOut = OutputPortHelper.getPortOutputVoltage(port, time);
+
       if (!Float.isNaN(voltageOut))
       {
         averageVoltageOut += voltageOut;

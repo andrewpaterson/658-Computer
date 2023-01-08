@@ -113,7 +113,6 @@ public class LogicPort
     this.events.clear();
   }
 
-  @Override
   public float getVoltageOut(long time)
   {
     if (output == null)
@@ -360,12 +359,6 @@ public class LogicPort
   public float getGND(long time)
   {
     return getPins().getVoltageGround().getVoltageIn(time);
-  }
-
-  @Override
-  public String toDebugString()
-  {
-    return getPins().getIntegratedCircuit().getName() + "." + name;
   }
 
   @Override

@@ -339,9 +339,30 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public abstract ComponentData save(boolean selected);
 
-  public abstract void clampProperties();
+  @Override
+  public void enable(Simulation simulation)
+  {
+    getComponent().enable(simulation);
+  }
 
-  public abstract boolean isEnabled();
+  @Override
+  public void disable()
+  {
+    getComponent().disable();
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return getComponent().getType() + " " + properties.name + " (" + getPosition() + ")";
+  }
+
+  public boolean isEnabled()
+  {
+    return getComponent().isEnabled();
+  }
+
+  public abstract void clampProperties();
 
   public abstract void simulationStarted(Simulation simulation);
 }

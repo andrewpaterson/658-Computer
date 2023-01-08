@@ -41,7 +41,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     circuitEditor.addSemiconductorView(this);
   }
 
-  protected void createIntegratedCircuit()
+  protected void createComponent()
   {
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     this.integratedCircuit = createIntegratedCircuit(familyVoltageConfiguration);
@@ -89,11 +89,11 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
   }
 
-  private void validateIntegratedCircuit()
+  private void validateComponent()
   {
-    if (integratedCircuit == null)
+    if (getComponent() == null)
     {
-      throw new SimulatorException("Integrated Circuit not configured on IC view.  Call create().");
+      throw new SimulatorException("Integrated Circuit not configured on [%s].  Call create().", getClass().getSimpleName());
     }
   }
 
@@ -134,10 +134,10 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   @Override
   protected void finaliseView()
   {
-    createIntegratedCircuit();
+    createComponent();
     createPortViews();
     super.finaliseView();
-    validateIntegratedCircuit();
+    validateComponent();
     validatePorts();
   }
 

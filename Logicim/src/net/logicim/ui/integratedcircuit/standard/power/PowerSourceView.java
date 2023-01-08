@@ -1,20 +1,14 @@
 package net.logicim.ui.integratedcircuit.standard.power;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.power.PowerSource;
+import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
-import net.logicim.ui.common.port.PortView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
     extends PassiveView<PROPERTIES>
@@ -31,20 +25,7 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  protected void finaliseView()
-  {
-    createPowerSource();
-    createPortViews();
-    super.finaliseView();
-    validatePowerSource();
-    validatePorts();
-  }
-
-  private void validatePowerSource()
-  {
-  }
-
-  protected void createPowerSource()
+  protected void createComponent()
   {
     powerSource = new PowerSource(circuitEditor.getCircuit(),
                                   properties.name,
@@ -70,71 +51,9 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
     return null;
   }
 
-  @Override
-  public String getDescription()
-  {
-    return powerSource.getType() + " " + properties.name + " (" + getPosition() + ")";
-  }
-
-  protected void validatePorts()
-  {
-    if ((powerSource.getPorts().size() > 0) && (ports.size() == 0))
-    {
-      throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
-    }
-
-    List<Port> missing = new ArrayList<>();
-    for (Port port : powerSource.getPorts())
-    {
-      PortView portView = getPortView(port);
-      if (portView == null)
-      {
-        missing.add(port);
-      }
-    }
-
-    if (missing.size() > 0)
-    {
-      StringBuilder builder = new StringBuilder();
-      boolean first = true;
-      for (Port port : missing)
-      {
-        if (first)
-        {
-          first = false;
-        }
-        else
-        {
-          builder.append(", ");
-        }
-        builder.append(port.getName());
-
-      }
-      throw new SimulatorException("Ports [" + builder.toString() + "] not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
-    }
-  }
-
   public PowerSource getPowerSource()
   {
     return powerSource;
-  }
-
-  @Override
-  public boolean isEnabled()
-  {
-    return powerSource.isEnabled();
-  }
-
-  @Override
-  public void enable(Simulation simulation)
-  {
-    powerSource.enable(simulation);
-  }
-
-  @Override
-  public void disable()
-  {
-    powerSource.disable();
   }
 
   @Override

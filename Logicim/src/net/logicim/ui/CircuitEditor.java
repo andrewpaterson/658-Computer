@@ -15,7 +15,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.trace.Trace;
-import net.logicim.domain.power.PowerSource;
+import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;

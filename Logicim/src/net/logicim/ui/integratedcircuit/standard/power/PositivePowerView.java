@@ -5,7 +5,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.standard.power.PositivePowerPortData;
 import net.logicim.domain.common.voltage.Voltage;
-import net.logicim.domain.power.PowerSource;
+import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
@@ -53,14 +53,6 @@ public class PositivePowerView
     {
       return Colours.getInstance().getDarkShapeFill();
     }
-  }
-
-  protected void createPowerSource()
-  {
-    powerSource = new PowerSource(circuitEditor.getCircuit(),
-                                  properties.name,
-                                  properties.voltage_V);
-    powerSource.disable();
   }
 
   @Override

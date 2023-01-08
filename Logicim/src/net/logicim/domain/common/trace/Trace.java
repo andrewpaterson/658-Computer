@@ -11,6 +11,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.logicim.domain.common.port.OutputPortHelper.getPortOutputVoltage;
+
 public class Trace
     implements Voltage
 {
@@ -54,15 +56,8 @@ public class Trace
     int drivers = 0;
     for (Port port : connectedPorts)
     {
-      float voltage = Float.NaN;
-      if (port.isLogicPort())
-      {
-        voltage = port.getVoltageOut(time);
-      }
-      else if (port.isPowerOut())
-      {
-        voltage = port.getVoltageOut(time);
-      }
+      float voltage = getPortOutputVoltage(port, time);
+
       if (!Float.isNaN(voltage))
       {
         drivenVoltage += voltage;
@@ -97,15 +92,7 @@ public class Trace
     float maximumVoltage = -10000;
     for (Port port : connectedPorts)
     {
-      float voltage = Float.NaN;
-      if (port.isLogicPort())
-      {
-        voltage = port.getVoltageOut(time);
-      }
-      else if (port.isPowerOut())
-      {
-        voltage = port.getVoltageOut(time);
-      }
+      float voltage = getPortOutputVoltage(port, time);
 
       if (!Float.isNaN(voltage))
       {
@@ -135,15 +122,7 @@ public class Trace
     float minimumVoltage = 10000;
     for (Port port : connectedPorts)
     {
-      float voltage = Float.NaN;
-      if (port.isLogicPort())
-      {
-        voltage = port.getVoltageOut(time);
-      }
-      else if (port.isPowerOut())
-      {
-        voltage = port.getVoltageOut(time);
-      }
+      float voltage = getPortOutputVoltage(port, time);
 
       if (!Float.isNaN(voltage))
       {
@@ -168,15 +147,7 @@ public class Trace
     float maximumVoltage = -10000;
     for (Port port : connectedPorts)
     {
-      float voltage = Float.NaN;
-      if (port.isLogicPort())
-      {
-        voltage = port.getVoltageOut(time);
-      }
-      else if (port.isPowerOut())
-      {
-        voltage = port.getVoltageOut(time);
-      }
+      float voltage = getPortOutputVoltage(port, time);
 
       if (!Float.isNaN(voltage))
       {

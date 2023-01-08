@@ -24,11 +24,6 @@ public class PowerInPort
   }
 
   @Override
-  public void reset()
-  {
-  }
-
-  @Override
   public boolean isPowerIn()
   {
     return true;
@@ -45,12 +40,6 @@ public class PowerInPort
     {
       return Float.NaN;
     }
-  }
-
-  @Override
-  public float getVoltageOut(long time)
-  {
-    return Float.NaN;
   }
 }
 

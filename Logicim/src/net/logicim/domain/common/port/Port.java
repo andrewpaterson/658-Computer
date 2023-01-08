@@ -49,7 +49,10 @@ public abstract class Port
     }
   }
 
-  public abstract String toDebugString();
+  public String toDebugString()
+  {
+    return getHolder().getName() + "." + name;
+  }
 
   public String getDescription()
   {
@@ -109,8 +112,10 @@ public abstract class Port
     holder.traceConnected(simulation, this);
   }
 
-  public abstract void reset();
+  public void reset()
+  {
+  }
 
-  public abstract float getVoltageOut(long time);
+  //public abstract float getVoltageOut(long time);
 }
 

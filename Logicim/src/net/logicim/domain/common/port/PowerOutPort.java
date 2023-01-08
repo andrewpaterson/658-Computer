@@ -7,9 +7,9 @@ public class PowerOutPort
 {
   protected float voltage;
 
-  public PowerOutPort(PortType type, String name, PortHolder holder, float voltage)
+  public PowerOutPort(String name, PortHolder holder, float voltage)
   {
-    super(type, name, holder);
+    super(PortType.PowerOut, name, holder);
     this.voltage = voltage;
   }
 
@@ -26,17 +26,11 @@ public class PowerOutPort
   }
 
   @Override
-  public void reset()
-  {
-  }
-
-  @Override
   public boolean isPowerOut()
   {
     return true;
   }
 
-  @Override
   public float getVoltageOut(long time)
   {
     return voltage;

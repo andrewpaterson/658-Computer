@@ -4,6 +4,8 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.splitter.SplitterData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Component;
+import net.logicim.domain.passive.wiring.Splitter;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -21,6 +23,7 @@ public class SplitterView
 {
   protected List<PortView> endPorts;
   protected PortView startPort;
+  protected Splitter splitter;
 
   public SplitterView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, SplitterProperties properties)
   {
@@ -43,7 +46,7 @@ public class SplitterView
     ArrayList<PortView> portViews = new ArrayList<>(properties.outputCount);
     for (int i = 0; i < properties.outputCount; i++)
     {
-      portViews.add(new PortView(this));
+      portViews.add(new PortView(this, splitter.getEndPort(i)));
     }
     return portViews;
   }
@@ -101,6 +104,12 @@ public class SplitterView
   }
 
   @Override
+  protected void createPortViews()
+  {
+
+  }
+
+  @Override
   public String getDescription()
   {
     return "Splitter (" + position + ") width [" + properties.outputCount + "]";
@@ -141,6 +150,12 @@ public class SplitterView
   }
 
   @Override
+  protected void createComponent()
+  {
+    splitter = new Splitter();
+  }
+
+  @Override
   public void clampProperties()
   {
   }
@@ -157,8 +172,9 @@ public class SplitterView
   }
 
   @Override
-  protected void updateBoundingBoxFromPorts(BoundingBox boundingBox)
+  public Component getComponent()
   {
+    return splitter;
   }
 }
 

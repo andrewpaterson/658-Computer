@@ -348,7 +348,7 @@ public class TraceView
     }
     if (colour == null)
     {
-      colour = colours.getTraceError();
+      colour = colours.getDisconnectedTrace();
     }
     return colour;
   }

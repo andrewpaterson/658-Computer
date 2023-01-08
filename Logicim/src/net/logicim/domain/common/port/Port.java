@@ -110,5 +110,7 @@ public abstract class Port
   }
 
   public abstract void reset();
+
+  public abstract float getVoltageOut(long time);
 }
 

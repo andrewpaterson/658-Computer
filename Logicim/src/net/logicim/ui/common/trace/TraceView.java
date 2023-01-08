@@ -329,28 +329,7 @@ public class TraceView
 
   protected Color getTraceColour(long time)
   {
-    Colours colours = Colours.getInstance();
-    Color colour = null;
-    for (Trace trace : traces)
-    {
-      Color traceColour = VoltageColour.getColourForTrace(colours, trace, time);
-      if (colour == null)
-      {
-        colour = traceColour;
-      }
-      else
-      {
-        if (colour.getRGB() != traceColour.getRGB())
-        {
-          return colours.getDifferingBusTrace();
-        }
-      }
-    }
-    if (colour == null)
-    {
-      colour = colours.getDisconnectedTrace();
-    }
-    return colour;
+    return VoltageColour.getColourForTraces(Colours.getInstance(), traces, time);
   }
 
   public TraceView getOtherTraceView(List<ComponentView> connectedComponents)

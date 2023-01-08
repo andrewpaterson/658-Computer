@@ -1,12 +1,11 @@
 package net.logicim.ui.common;
 
-import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class VoltageColour
 {
@@ -28,15 +27,8 @@ public abstract class VoltageColour
     {
       return colours.getDisconnectedTrace();
     }
-    else
-    {
-      float voltage = trace.getVoltage(time);
-      return getColourForTrace(colours, trace, time, voltage);
-    }
-  }
 
-  public static Color getColourForTrace(VoltageRepresentation colours, Trace trace, long time, float voltage)
-  {
+    float voltage = trace.getVoltage(time);
     if (!Float.isNaN(voltage))
     {
       float shortVoltage = trace.getShortVoltage(time);
@@ -56,6 +48,59 @@ public abstract class VoltageColour
     else
     {
       return colours.getTraceUndriven();
+    }
+  }
+
+  public static Color getColourForTraces(VoltageRepresentation colours, List<Trace> traces, long time)
+  {
+    if ((traces.isEmpty()) || (time == -1))
+    {
+      return colours.getDisconnectedTrace();
+    }
+
+    float averageVoltage = 0;
+    int undrivenCount = 0;
+    float maximumShortVoltage = 0;
+    for (Trace trace : traces)
+    {
+      float voltage = trace.getVoltage(time);
+      if (!Float.isNaN(voltage))
+      {
+        float shortVoltage = trace.getShortVoltage(time);
+        averageVoltage += voltage;
+        if (shortVoltage != 0)
+        {
+          if (shortVoltage > maximumShortVoltage)
+          {
+            maximumShortVoltage = shortVoltage;
+          }
+        }
+      }
+      else
+      {
+        undrivenCount++;
+      }
+    }
+
+    if (undrivenCount == traces.size())
+    {
+      return colours.getTraceUndriven();
+    }
+    else
+    {
+      averageVoltage /= (traces.size() - undrivenCount);
+      Color colorForVoltage = getColourForVoltage(colours, averageVoltage);
+      if (maximumShortVoltage == 0)
+      {
+        return colorForVoltage;
+      }
+      else
+      {
+        Color colorForShort = getColorForShort(colours, maximumShortVoltage);
+        return new Color(clamp(colorForVoltage.getRed() + colorForShort.getRed()),
+                         clamp(colorForVoltage.getGreen() + colorForShort.getGreen()),
+                         clamp(colorForVoltage.getBlue() + colorForShort.getBlue()));
+      }
     }
   }
 
@@ -84,38 +129,33 @@ public abstract class VoltageColour
     return colours.getTraceShort(shortVoltage);
   }
 
-  public static Color getColorForPort(VoltageRepresentation colours, Port port, long time)
+  public static Color getColorForPorts(VoltageRepresentation colours, List<Port> ports, long time)
   {
     if (time == -1)
     {
       return colours.getDisconnectedTrace();
     }
 
-    Trace trace = port.getTrace();
-    if (trace == null)
+    float averageVoltageOut = 0;
+    int drivenPorts = 0;
+    for (Port port : ports)
     {
-      float voltage = Float.NaN;
-      if (port.isLogicPort())
+      float voltageOut = port.getVoltageOut(time);
+      if (!Float.isNaN(voltageOut))
       {
-        voltage = ((LogicPort) port).getVoltageOut(time);
+        averageVoltageOut += voltageOut;
+        drivenPorts++;
       }
-      else if (port.isPowerOut())
-      {
-        voltage = ((PowerOutPort) port).getVoltageOut();
-      }
+    }
 
-      if (!Float.isNaN(voltage))
-      {
-        return VoltageColour.getColourForVoltage(colours, voltage);
-      }
-      else
-      {
-        return colours.getTraceUndriven();
-      }
+    if (drivenPorts == 0)
+    {
+      return colours.getTraceUndriven();
     }
     else
     {
-      return getColourForTrace(colours, trace, time);
+      averageVoltageOut /= drivenPorts;
+      return getColourForVoltage(colours, averageVoltageOut);
     }
   }
 }

@@ -46,5 +46,11 @@ public class PowerInPort
       return Float.NaN;
     }
   }
+
+  @Override
+  public float getVoltageOut(long time)
+  {
+    return Float.NaN;
+  }
 }
 

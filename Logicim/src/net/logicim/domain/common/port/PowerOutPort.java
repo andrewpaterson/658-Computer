@@ -36,7 +36,8 @@ public class PowerOutPort
     return true;
   }
 
-  public float getVoltageOut()
+  @Override
+  public float getVoltageOut(long time)
   {
     return voltage;
   }

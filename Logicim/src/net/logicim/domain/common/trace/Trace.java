@@ -57,11 +57,11 @@ public class Trace
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((LogicPort) port).getVoltageOut(time);
+        voltage = port.getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerOutPort) port).getVoltageOut();
+        voltage = port.getVoltageOut(time);
       }
       if (!Float.isNaN(voltage))
       {
@@ -100,11 +100,11 @@ public class Trace
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((LogicPort) port).getVoltageOut(time);
+        voltage = port.getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerOutPort) port).getVoltageOut();
+        voltage = port.getVoltageOut(time);
       }
 
       if (!Float.isNaN(voltage))
@@ -138,11 +138,11 @@ public class Trace
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((LogicPort) port).getVoltageOut(time);
+        voltage = port.getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerOutPort) port).getVoltageOut();
+        voltage = port.getVoltageOut(time);
       }
 
       if (!Float.isNaN(voltage))
@@ -171,11 +171,11 @@ public class Trace
       float voltage = Float.NaN;
       if (port.isLogicPort())
       {
-        voltage = ((LogicPort) port).getVoltageOut(time);
+        voltage = port.getVoltageOut(time);
       }
       else if (port.isPowerOut())
       {
-        voltage = ((PowerOutPort) port).getVoltageOut();
+        voltage = port.getVoltageOut(time);
       }
 
       if (!Float.isNaN(voltage))

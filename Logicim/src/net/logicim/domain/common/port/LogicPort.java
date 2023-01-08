@@ -113,6 +113,7 @@ public class LogicPort
     this.events.clear();
   }
 
+  @Override
   public float getVoltageOut(long time)
   {
     if (output == null)

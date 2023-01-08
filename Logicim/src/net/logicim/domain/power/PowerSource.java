@@ -51,9 +51,9 @@ public class PowerSource
     return name;
   }
 
-  public float getVoltageOut()
+  public float getVoltageOut(long time)
   {
-    return getPowerSourcePort().getVoltageOut();
+    return getPowerSourcePort().getVoltageOut(time);
   }
 
   protected PowerOutPort getPowerSourcePort()

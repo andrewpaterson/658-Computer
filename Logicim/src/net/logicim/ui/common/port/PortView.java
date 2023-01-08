@@ -168,7 +168,7 @@ public class PortView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-      Color color = getPortColour(time, colours);
+      Color color = getPortColour(time);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,
@@ -265,25 +265,9 @@ public class PortView
     return new LogicPortData(eventDatas, portOutputEventData, logicPort.getTraceId());
   }
 
-  protected Color getPortColour(long time, Colours colours)
+  protected Color getPortColour(long time)
   {
-    Color colour = null;
-    for (Port port : ports)
-    {
-      Color portColour = VoltageColour.getColorForPort(Colours.getInstance(), port, time);
-      if (colour == null)
-      {
-        colour = portColour;
-      }
-      else
-      {
-        if (colour.getRGB() != portColour.getRGB())
-        {
-          return Colours.getInstance().getDifferingBusTrace();
-        }
-      }
-    }
-    return colour;
+    return VoltageColour.getColorForPorts(Colours.getInstance(), ports, time);
   }
 
   public void traceConnected(Simulation simulation)

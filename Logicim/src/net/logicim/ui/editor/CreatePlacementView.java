@@ -1,15 +1,15 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.integratedcircuit.SemiconductorView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
 
 public class CreatePlacementView
     extends SimulatorEditorAction
 {
-  private Class<? extends SemiconductorView<?>> discreteViewClass;
+  private Class<? extends ComponentView<?>> discreteViewClass;
 
-  public CreatePlacementView(SimulatorEditor editor, Class<? extends SemiconductorView<?>> discreteViewClass)
+  public CreatePlacementView(SimulatorEditor editor, Class<? extends ComponentView<?>> discreteViewClass)
   {
     super(editor);
     this.discreteViewClass = discreteViewClass;

@@ -4,12 +4,12 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.splitter.SplitterData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -17,13 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplitterView
-    extends ComponentView<SplitterProperties>
+    extends PassiveView<SplitterProperties>
 {
-  protected List<Trace> traces;
-  protected ConnectionView startConnection;
-  protected List<ConnectionView> endConnections;
-
-  protected List<Int2D> ends;
+  protected List<PortView> endPorts;
+  protected PortView startPort;
 
   public SplitterView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, SplitterProperties properties)
   {
@@ -32,35 +29,23 @@ public class SplitterView
     this.rotation = rotation;
     this.properties = properties;
 
-    this.endConnections = createEndConnections(properties);
-    this.ends = createEnds(properties);
+    this.endPorts = createEndPorts(properties);
 
     this.boundingBox = new BoundingBox();
     this.selectionBox = new BoundingBox();
-    this.traces = new ArrayList<>();
 
-    circuitEditor.addSplitterView(this);
+    circuitEditor.addPassiveView(this);
     calculateEnds();
   }
 
-  protected List<ConnectionView> createEndConnections(SplitterProperties properties)
+  protected List<PortView> createEndPorts(SplitterProperties properties)
   {
-    ArrayList<ConnectionView> endConnections = new ArrayList<>(properties.outputCount);
+    ArrayList<PortView> portViews = new ArrayList<>(properties.outputCount);
     for (int i = 0; i < properties.outputCount; i++)
     {
-      endConnections.add(new ConnectionView(this));
+      portViews.add(new PortView(this));
     }
-    return endConnections;
-  }
-
-  protected List<Int2D> createEnds(SplitterProperties properties)
-  {
-    ArrayList<Int2D> ends = new ArrayList<>(properties.outputCount);
-    for (int i = 0; i < properties.outputCount; i++)
-    {
-      ends.add(new Int2D(position));
-    }
-    return ends;
+    return portViews;
   }
 
   @Override
@@ -71,33 +56,34 @@ public class SplitterView
   @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
-    if (position.equals(x, y))
+    if (startPort.getGridPosition().equals(x, y))
     {
-      return startConnection;
+      return startPort.getConnection();
     }
-    for (int i = 0; i < ends.size(); i++)
+
+    for (PortView portView : endPorts)
     {
-      Int2D end = ends.get(i);
-      if (end.equals(x, y))
+      if (portView.getGridPosition().equals(x, y))
       {
-        return endConnections.get(i);
+        return portView.getConnection();
       }
     }
     return null;
   }
 
   @Override
-  public Int2D getConnectionPosition(ConnectionView connectionView)
+  public Int2D getConnectionGridPosition(ConnectionView connectionView)
   {
-    if (startConnection == connectionView)
+    if (startPort.getConnection() == connectionView)
     {
       return position;
     }
-    for (int i = 0; i < endConnections.size(); i++)
+    for (int i = 0; i < endPorts.size(); i++)
     {
-      if (endConnections.get(i) == connectionView)
+      PortView portView = endPorts.get(i);
+      if (portView.getConnection() == connectionView)
       {
-        return ends.get(i);
+        return portView.getConnection().getGridPosition();
       }
     }
     return null;
@@ -133,7 +119,7 @@ public class SplitterView
   @Override
   public void setPosition(int x, int y)
   {
-    super.setPosition(x,y);
+    super.setPosition(x, y);
     calculateEnds();
   }
 
@@ -141,9 +127,10 @@ public class SplitterView
   {
     Int2D position = new Int2D(this.position);
     position.add(3, -properties.outputOffset);
-    for (Int2D end : ends)
+    for (PortView endPort : endPorts)
     {
-      rotation.rotate(end, position);
+      Int2D relativePosition = endPort.getRelativePosition();
+      rotation.rotate(relativePosition, position);
       position.add(0, properties.spacing);
     }
   }
@@ -156,7 +143,6 @@ public class SplitterView
   @Override
   public void clampProperties()
   {
-
   }
 
   @Override
@@ -168,13 +154,11 @@ public class SplitterView
   @Override
   public void simulationStarted(Simulation simulation)
   {
-
   }
 
   @Override
-  protected void updateBoundingBoxFromConnections(BoundingBox boundingBox)
+  protected void updateBoundingBoxFromPorts(BoundingBox boundingBox)
   {
-
   }
 }
 

@@ -33,8 +33,8 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
       PortView vccPortView = new PortView(this, integratedCircuit.getPort("VCC"), new Int2D((int) Math.floor(boundingBox.getLeft()), 0));
       PortView gndPortView = new PortView(this, integratedCircuit.getPort("GND"), new Int2D((int) Math.ceil(boundingBox.getRight()), 0));
 
-      vccLine = new LineView(this, vccPortView.getPosition(), new Int2D(vccPortView.getPosition().x + 1, vccPortView.getPosition().y));
-      gndLine = new LineView(this, gndPortView.getPosition(), new Int2D(gndPortView.getPosition().x - 1, gndPortView.getPosition().y));
+      vccLine = new LineView(this, vccPortView.getRelativePosition(), new Int2D(vccPortView.getRelativePosition().x + 1, vccPortView.getRelativePosition().y));
+      gndLine = new LineView(this, gndPortView.getRelativePosition(), new Int2D(gndPortView.getRelativePosition().x - 1, gndPortView.getRelativePosition().y));
     }
   }
 

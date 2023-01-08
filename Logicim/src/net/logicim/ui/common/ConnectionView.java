@@ -35,7 +35,7 @@ public class ConnectionView
     Int2D gridPosition = null;
     for (View connectedComponent : connectedComponents)
     {
-      Int2D position = connectedComponent.getConnectionPosition(this);
+      Int2D position = connectedComponent.getConnectionGridPosition(this);
       if (gridPosition == null)
       {
         gridPosition = position;

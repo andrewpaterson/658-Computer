@@ -6,7 +6,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Semiconductor;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends IntegratedCircuitProperties>
-    extends SemiconductorView<PROPERTIES>
+    extends ComponentView<PROPERTIES>
 {
   protected IC integratedCircuit;
 
@@ -38,7 +38,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
     }
 
-    circuitEditor._addDiscreteView(this);
+    circuitEditor.addSemiconductorView(this);
   }
 
   protected void createIntegratedCircuit()
@@ -176,7 +176,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 
   @Override
-  public Semiconductor getDiscrete()
+  public Component getComponent()
   {
     return integratedCircuit;
   }

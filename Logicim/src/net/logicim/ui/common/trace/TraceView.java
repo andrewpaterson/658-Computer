@@ -29,7 +29,7 @@ public class TraceView
     this.startConnection = circuitEditor.getOrAddConnection(start, this);
     this.endConnection = circuitEditor.getOrAddConnection(end, this);
     this.traces = new ArrayList<>();
-    circuitEditor._addTraceView(this);
+    circuitEditor.addTraceView(this);
   }
 
   @Override
@@ -132,7 +132,7 @@ public class TraceView
   }
 
   @Override
-  public Int2D getConnectionPosition(ConnectionView connectionView)
+  public Int2D getConnectionGridPosition(ConnectionView connectionView)
   {
     if (startConnection == connectionView)
     {

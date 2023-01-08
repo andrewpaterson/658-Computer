@@ -13,10 +13,11 @@ public class SplitterProperties
   {
   }
 
-  public SplitterProperties(String name, int outputCount, int outputOffset)
+  public SplitterProperties(String name, int outputCount, int outputOffset, int spacing)
   {
     super(name);
     this.outputCount = outputCount;
     this.outputOffset = outputOffset;
+    this.spacing = spacing;
   }
 }

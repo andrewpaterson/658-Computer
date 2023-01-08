@@ -6,8 +6,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
-import net.logicim.ui.common.integratedcircuit.SemiconductorView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.trace.TraceView;
 import net.logicim.ui.input.KeyboardButtons;
@@ -50,10 +50,10 @@ public class SimulatorEditor
 
   protected CircuitEditor circuitEditor;
 
-  protected SemiconductorView<?> placementView;
+  protected ComponentView<?> placementView;
 
   protected TraceView hoverTraceView;
-  protected SemiconductorView<?> hoverSemiconductorView;
+  protected ComponentView<?> hoverComponentView;
   protected ConnectionView hoverConnectionView;
 
   protected SelectionRectangle selectionRectangle;
@@ -350,10 +350,10 @@ public class SimulatorEditor
 
     for (View view : circuitEditor.getSelection())
     {
-      if (view instanceof SemiconductorView)
+      if (view instanceof ComponentView)
       {
-        SemiconductorView<?> semiconductorView = (SemiconductorView<?>) view;
-        semiconductorView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+        ComponentView<?> componentView = (ComponentView<?>) view;
+        componentView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
         if (BoundingBox.containsPoint(new Int2D(fx, fy), boundBoxPosition, boundBoxDimension))
         {
           return true;
@@ -371,9 +371,9 @@ public class SimulatorEditor
     return false;
   }
 
-  private void donePlacementView(SemiconductorView<?> placementView)
+  private void donePlacementView(ComponentView<?> placementView)
   {
-    circuitEditor.placeDiscreteView(placementView);
+    circuitEditor.placeComponentView(placementView);
     pushUndo();
   }
 
@@ -442,9 +442,9 @@ public class SimulatorEditor
     viewport.paintGrid(graphics);
     circuitEditor.paint(graphics, viewport);
 
-    if ((hoverSemiconductorView != null) && (hoverConnectionView == null))
+    if ((hoverComponentView != null) && (hoverConnectionView == null))
     {
-      hoverSemiconductorView.paintHover(graphics, viewport);
+      hoverComponentView.paintHover(graphics, viewport);
     }
 
     if (hoverConnectionView != null)
@@ -507,12 +507,12 @@ public class SimulatorEditor
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
       {
-        hoverSemiconductorView = getHoverView(mousePosition);
-        if (hoverSemiconductorView != null)
+        hoverComponentView = getHoverView(mousePosition);
+        if (hoverComponentView != null)
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
           int y = viewport.transformScreenToGridY(mousePosition.y);
-          PortView portView = hoverSemiconductorView.getPortInGrid(x, y);
+          PortView portView = hoverComponentView.getPortInGrid(x, y);
           if (portView != null)
           {
             hoverConnectionView = portView.getConnection();
@@ -544,7 +544,7 @@ public class SimulatorEditor
         return;
       }
     }
-    hoverSemiconductorView = null;
+    hoverComponentView = null;
     hoverConnectionView = null;
   }
 
@@ -553,7 +553,7 @@ public class SimulatorEditor
     return circuitEditor.getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
-  private SemiconductorView<?> getHoverView(Int2D mousePosition)
+  private ComponentView<?> getHoverView(Int2D mousePosition)
   {
     return circuitEditor.getDiscreteViewInScreenSpace(viewport, mousePosition);
   }
@@ -660,7 +660,7 @@ public class SimulatorEditor
   {
     if (placementView != null)
     {
-      circuitEditor.deleteDiscreteView(placementView);
+      circuitEditor.deleteComponentView(placementView);
       placementView = null;
     }
   }
@@ -704,18 +704,18 @@ public class SimulatorEditor
         }
         else
         {
-          boolean traceDeleted = circuitEditor.deleteTraces(hoverConnectionView);
+          boolean traceDeleted = circuitEditor.deleteTraceViews(hoverConnectionView);
 
-          if (!traceDeleted && (hoverSemiconductorView != null))
+          if (!traceDeleted && (hoverComponentView != null))
           {
-            circuitEditor.deleteDiscreteView(hoverSemiconductorView);
+            circuitEditor.deleteComponentView(hoverComponentView);
           }
           return true;
         }
       }
-      else if (hoverSemiconductorView != null)
+      else if (hoverComponentView != null)
       {
-        circuitEditor.deleteDiscreteView(hoverSemiconductorView);
+        circuitEditor.deleteComponentView(hoverComponentView);
         return true;
       }
     }
@@ -772,13 +772,13 @@ public class SimulatorEditor
   protected void clearHover()
   {
     hoverTraceView = null;
-    hoverSemiconductorView = null;
+    hoverComponentView = null;
     hoverConnectionView = null;
   }
 
-  public SemiconductorView<?> getHoverSemiconductorView()
+  public ComponentView<?> getHoverComponentView()
   {
-    return hoverSemiconductorView;
+    return hoverComponentView;
   }
 
   public CircuitEditor getCircuitEditor()

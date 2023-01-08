@@ -38,7 +38,7 @@ public abstract class View
 
   public abstract ConnectionView getConnectionsInGrid(int x, int y);
 
-  public abstract Int2D getConnectionPosition(ConnectionView connectionView);
+  public abstract Int2D getConnectionGridPosition(ConnectionView connectionView);
 
   public abstract void paint(Graphics2D graphics, Viewport viewport, long time);
 

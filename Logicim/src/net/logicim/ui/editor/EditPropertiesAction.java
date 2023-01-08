@@ -6,7 +6,7 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.SemiconductorView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
@@ -32,7 +32,7 @@ public class EditPropertiesAction
   protected JFrame parentFrame;
   protected PropertiesPanel propertiesPanel;
   protected JDialog dialog;
-  protected SemiconductorView<?> semiconductorView;
+  protected ComponentView<?> componentView;
 
   public EditPropertiesAction(SimulatorEditor editor, JFrame parentFrame)
   {
@@ -45,13 +45,13 @@ public class EditPropertiesAction
   {
     Map<Field, Object> map = propertiesPanel.getProperties();
 
-    boolean propertyChanged = updateProperties(map, semiconductorView.getProperties());
+    boolean propertyChanged = updateProperties(map, componentView.getProperties());
 
     if (propertyChanged)
     {
-      this.semiconductorView.clampProperties();
-      SemiconductorView<?> semiconductorView = recreateDiscreteView(this.semiconductorView.getProperties());
-      editor.replaceSelection(semiconductorView, this.semiconductorView);
+      this.componentView.clampProperties();
+      ComponentView<?> componentView = recreateComponentView(this.componentView.getProperties());
+      editor.replaceSelection(componentView, this.componentView);
       editor.pushUndo();
     }
 
@@ -78,19 +78,19 @@ public class EditPropertiesAction
     return propertyChanged;
   }
 
-  protected SemiconductorView<?> recreateDiscreteView(ComponentProperties properties)
+  protected ComponentView<?> recreateComponentView(ComponentProperties properties)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
 
-    Rotation rotation = semiconductorView.getRotation();
-    Int2D position = semiconductorView.getPosition();
+    Rotation rotation = componentView.getRotation();
+    Int2D position = componentView.getPosition();
 
-    Class<? extends SemiconductorView<?>> aClass = (Class<? extends SemiconductorView<?>>) semiconductorView.getClass();
+    Class<? extends ComponentView<?>> aClass = (Class<? extends ComponentView<?>>) componentView.getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    SemiconductorView<?> newSemiconductorView = viewFactory.create(circuitEditor, position, rotation, properties);
+    ComponentView<?> newSemiconductorView = viewFactory.create(circuitEditor, position, rotation, properties);
 
-    circuitEditor.deleteDiscreteView(this.semiconductorView);
-    circuitEditor.placeDiscreteView(newSemiconductorView);
+    circuitEditor.deleteComponentView(this.componentView);
+    circuitEditor.placeComponentView(newSemiconductorView);
 
     return newSemiconductorView;
   }
@@ -140,17 +140,17 @@ public class EditPropertiesAction
   @Override
   public void executeEditorAction()
   {
-    semiconductorView = editor.getHoverSemiconductorView();
-    if (semiconductorView == null)
+    componentView = editor.getHoverComponentView();
+    if (componentView == null)
     {
-      semiconductorView = editor.getCircuitEditor().getSingleSelectionDiscreteView();
+      componentView = editor.getCircuitEditor().getSingleSelectionDiscreteView();
     }
 
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
 
-    if (semiconductorView != null)
+    if (componentView != null)
     {
-      dialog = new JDialog(parentFrame, semiconductorView.getType() + " Properties", true);
+      dialog = new JDialog(parentFrame, componentView.getType() + " Properties", true);
       Dimension dimension = new Dimension(360, 320);
       dialog.setSize(dimension);
       mousePosition.x -= 50;
@@ -160,7 +160,7 @@ public class EditPropertiesAction
       Container contentPane = dialog.getContentPane();
       contentPane.setLayout(new GridBagLayout());
 
-      ComponentProperties properties = semiconductorView.getProperties();
+      ComponentProperties properties = componentView.getProperties();
       propertiesPanel = new PropertiesPanel(properties);
       contentPane.add(propertiesPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 

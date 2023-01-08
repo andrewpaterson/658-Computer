@@ -1,7 +1,8 @@
 package net.logicim.data.circuit;
 
 import net.logicim.data.ReflectiveData;
-import net.logicim.data.integratedcircuit.common.SemiconductorData;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.trace.TraceData;
 
 import java.util.List;
@@ -10,7 +11,8 @@ public class CircuitData
     extends ReflectiveData
 {
   public TimelineData timeline;
-  public List<SemiconductorData> integratedCircuits;
+  public List<IntegratedCircuitData<?, ?>> integratedCircuits;
+  public List<PassiveData> passives;
   public List<TraceData> traces;
 
   public CircuitData()
@@ -18,11 +20,13 @@ public class CircuitData
   }
 
   public CircuitData(TimelineData timeline,
-                     List<SemiconductorData> integratedCircuits,
+                     List<IntegratedCircuitData<?, ?>> integratedCircuits,
+                     List<PassiveData> passives,
                      List<TraceData> traces)
   {
     this.timeline = timeline;
     this.integratedCircuits = integratedCircuits;
+    this.passives = passives;
     this.traces = traces;
   }
 
@@ -31,29 +35,9 @@ public class CircuitData
     return timeline;
   }
 
-  public List<SemiconductorData> getIntegratedCircuits()
-  {
-    return integratedCircuits;
-  }
-
-  public List<TraceData> getTraces()
-  {
-    return traces;
-  }
-
   public void setTimeline(TimelineData timeline)
   {
     this.timeline = timeline;
-  }
-
-  public void setIntegratedCircuits(List<SemiconductorData> integratedCircuits)
-  {
-    this.integratedCircuits = integratedCircuits;
-  }
-
-  public void setTraces(List<TraceData> traces)
-  {
-    this.traces = traces;
   }
 }
 

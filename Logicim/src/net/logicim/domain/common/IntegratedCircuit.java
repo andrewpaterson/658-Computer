@@ -14,7 +14,7 @@ import net.logicim.domain.common.state.State;
 import java.util.List;
 
 public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
-    implements Semiconductor
+    implements Component
 {
   protected Circuit circuit;
   protected PINS pins;

@@ -15,7 +15,7 @@ import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.SemiconductorView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?, ?>, STATE extends State>
-    extends SemiconductorData
+    extends ComponentData
 {
   protected String family;
 
@@ -85,9 +85,9 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, SemiconductorView<?> semiconductorView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ComponentView<?> componentView)
   {
-    ICV integratedCircuitView = (ICV) semiconductorView;
+    ICV integratedCircuitView = (ICV) componentView;
     circuitEditor.createConnectionViews(integratedCircuitView);
     loadState(integratedCircuitView);
     loadEvents(circuitEditor, integratedCircuitView);

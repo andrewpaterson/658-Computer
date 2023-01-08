@@ -6,8 +6,8 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.TimelineData;
-import net.logicim.data.integratedcircuit.common.SemiconductorData;
-import net.logicim.data.splitter.SplitterData;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
+import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.trace.TraceData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.domain.Simulation;
@@ -17,12 +17,12 @@ import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
-import net.logicim.ui.common.integratedcircuit.SemiconductorView;
+import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.trace.TraceView;
-import net.logicim.ui.integratedcircuit.standard.bus.SplitterView;
 import net.logicim.ui.integratedcircuit.standard.power.PowerSourceView;
 import net.logicim.ui.shape.common.BoundingBox;
 
@@ -32,9 +32,9 @@ import java.util.*;
 
 public class CircuitEditor
 {
-  protected Set<SemiconductorView<?>> semiconductorViews;
+  protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
+  protected Set<PassiveView<?>> passiveViews;
   protected Set<TraceView> traceViews;
-  protected Set<SplitterView> splitterViews;
   protected Circuit circuit;
   protected Simulation simulation;
   protected List<View> selection;
@@ -43,9 +43,9 @@ public class CircuitEditor
   {
     this.circuit = new Circuit();
     this.simulation = circuit.resetSimulation();
-    this.semiconductorViews = new LinkedHashSet<>();
+    this.integratedCircuitViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
-    this.splitterViews = new LinkedHashSet<>();
+    this.passiveViews = new LinkedHashSet<>();
     this.selection = new ArrayList<>();
   }
 
@@ -53,18 +53,13 @@ public class CircuitEditor
   {
     long time = getTime();
     List<TraceView> traceViews;
-    List<SemiconductorView<?>> semiconductorViews;
-    List<SplitterView> splitterViews;
+    List<IntegratedCircuitView<?, ?>> semiconductorViews;
+    List<PassiveView<?>> passiveViews;
     synchronized (this)
     {
       traceViews = new ArrayList<>(this.traceViews);
-      semiconductorViews = new ArrayList<>(this.semiconductorViews);
-      splitterViews = new ArrayList<>(this.splitterViews);
-    }
-
-    for (SplitterView splitterView : splitterViews)
-    {
-      splitterView.paint(graphics, viewport, time);
+      semiconductorViews = new ArrayList<>(this.integratedCircuitViews);
+      passiveViews = new ArrayList<>(this.passiveViews);
     }
 
     for (TraceView traceView : traceViews)
@@ -72,9 +67,14 @@ public class CircuitEditor
       traceView.paint(graphics, viewport, time);
     }
 
-    for (SemiconductorView<?> semiconductorView : semiconductorViews)
+    for (PassiveView<?> passiveView : passiveViews)
     {
-      semiconductorView.paint(graphics, viewport, time);
+      passiveView.paint(graphics, viewport, time);
+    }
+
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : semiconductorViews)
+    {
+      integratedCircuitView.paint(graphics, viewport, time);
     }
   }
 
@@ -88,25 +88,25 @@ public class CircuitEditor
     return circuit;
   }
 
-  public void deleteDiscreteView(SemiconductorView<?> semiconductorView)
+  public void deleteComponentView(ComponentView<?> componentView)
   {
-    if (semiconductorView instanceof IntegratedCircuitView)
+    if (componentView instanceof IntegratedCircuitView)
     {
-      Set<PortView> updatedPortViews = deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) semiconductorView);
+      Set<PortView> updatedPortViews = deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView);
       fireConnectionEvents(updatedPortViews);
     }
-    else if (semiconductorView instanceof PowerSourceView)
+    else if (componentView instanceof PowerSourceView)
     {
-      Set<PortView> updatedPortViews = deletePowerSource((PowerSourceView<?>) semiconductorView);
+      Set<PortView> updatedPortViews = deletePassiveView((PowerSourceView<?>) componentView);
       fireConnectionEvents(updatedPortViews);
     }
-    else if (semiconductorView == null)
+    else if (componentView == null)
     {
       throw new SimulatorException("Cannot delete null view.");
     }
     else
     {
-      throw new SimulatorException("Cannot delete view of class [%s].", semiconductorView.getClass().getSimpleName());
+      throw new SimulatorException("Cannot delete view of class [%s].", componentView.getClass().getSimpleName());
     }
 
     validateConsistency();
@@ -114,30 +114,30 @@ public class CircuitEditor
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
-    List<ConnectionView> connectionViews = disconnectDiscrete(integratedCircuitView);
+    List<ConnectionView> connectionViews = disconnectComponentView(integratedCircuitView);
 
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
     circuit.remove(integratedCircuit);
-    _removeDiscreteView(integratedCircuitView);
+    removeIntegratedCircuitView(integratedCircuitView);
 
     return connectConnections(connectionViews);
   }
 
-  protected Set<PortView> deletePowerSource(PowerSourceView<?> powerSourceView)
+  protected Set<PortView> deletePassiveView(PowerSourceView<?> powerSourceView)
   {
-    List<ConnectionView> connectionViews = disconnectDiscrete(powerSourceView);
+    List<ConnectionView> connectionViews = disconnectComponentView(powerSourceView);
 
     PowerSource powerSource = powerSourceView.getPowerSource();
     circuit.remove(powerSource);
-    _removeDiscreteView(powerSourceView);
+    removePassiveView(powerSourceView);
 
     return connectConnections(connectionViews);
   }
 
-  public List<ConnectionView> disconnectDiscrete(SemiconductorView<?> semiconductorView)
+  public List<ConnectionView> disconnectComponentView(ComponentView<?> componentView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
-    List<PortView> portViews = semiconductorView.getPorts();
+    List<PortView> portViews = componentView.getPorts();
     for (PortView portView : portViews)
     {
       ConnectionView connection = portView.getConnection();
@@ -145,12 +145,12 @@ public class CircuitEditor
       {
         disconnectConnectionViews(findConnections(connection));
 
-        connection.remove(semiconductorView);
+        connection.remove(componentView);
         connectionViews.add(connection);
       }
     }
 
-    circuit.disconnectDiscrete(semiconductorView.getDiscrete(), simulation);
+    circuit.disconnectDiscrete(componentView.getComponent(), simulation);
 
     return connectionViews;
   }
@@ -166,7 +166,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public boolean deleteTraces(ConnectionView connectionView)
+  public boolean deleteTraceViews(ConnectionView connectionView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     List<View> connectedComponents = new ArrayList<>(connectionView.getConnectedComponents());
@@ -176,7 +176,8 @@ public class CircuitEditor
       if (view instanceof TraceView)
       {
         traceDeleted = true;
-        updatedPortViews.addAll(deleteTraceView((TraceView) view));
+        Set<PortView> localUpdatedPortViews = deleteTraceView((TraceView) view);
+        updatedPortViews.addAll(localUpdatedPortViews);
       }
     }
 
@@ -213,11 +214,11 @@ public class CircuitEditor
     validateConsistency();
   }
 
-  public void removeTraceView(TraceView traceView)
+  public void deleteTraceViewInternal(TraceView traceView)
   {
     disconnectTraceView(traceView);
     traceView.removed();
-    _removeTraceView(traceView);
+    removeTraceView(traceView);
   }
 
   protected List<ConnectionView> disconnectTraceView(TraceView traceView)
@@ -253,13 +254,13 @@ public class CircuitEditor
         {
           ((TraceView) connectedComponent).disconnectTraceNet();
         }
-        else if (connectedComponent instanceof SemiconductorView)
+        else if (connectedComponent instanceof IntegratedCircuitView)
         {
-          SemiconductorView<?> semiconductorView = (SemiconductorView<?>) connectedComponent;
+          IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) connectedComponent;
           Int2D position = connection.getGridPosition();
           if (position != null)
           {
-            PortView portView = semiconductorView.getPortInGrid(position);
+            PortView portView = integratedCircuitView.getPortInGrid(position);
             portView.disconnect(simulation);
           }
         }
@@ -289,9 +290,9 @@ public class CircuitEditor
     simulation.runToTime(timeForward);
   }
 
-  public SemiconductorView<?> getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public IntegratedCircuitView<?, ?> getDiscreteViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
-    List<SemiconductorView<?>> selectedViews = getDiscreteViewsInScreenSpace(viewport, screenPosition);
+    List<IntegratedCircuitView<?, ?>> selectedViews = getDiscreteViewsInScreenSpace(viewport, screenPosition);
 
     if (selectedViews.size() == 1)
     {
@@ -306,8 +307,8 @@ public class CircuitEditor
       Int2D boundBoxPosition = new Int2D();
       Int2D boundBoxDimension = new Int2D();
       float shortestDistance = Float.MAX_VALUE;
-      SemiconductorView<?> closestView = null;
-      for (SemiconductorView<?> view : selectedViews)
+      IntegratedCircuitView<?, ?> closestView = null;
+      for (IntegratedCircuitView<?, ?> view : selectedViews)
       {
         view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
         boundBoxPosition.add(boundBoxDimension.x / 2, boundBoxDimension.y / 2);
@@ -322,12 +323,12 @@ public class CircuitEditor
     }
   }
 
-  public List<SemiconductorView<?>> getDiscreteViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public List<IntegratedCircuitView<?, ?>> getDiscreteViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
     Int2D boundBoxPosition = new Int2D();
     Int2D boundBoxDimension = new Int2D();
-    List<SemiconductorView<?>> selectedViews = new ArrayList<>();
-    for (SemiconductorView<?> view : semiconductorViews)
+    List<IntegratedCircuitView<?, ?>> selectedViews = new ArrayList<>();
+    for (IntegratedCircuitView<?, ?> view : integratedCircuitViews)
     {
       if (view.isEnabled())
       {
@@ -341,12 +342,12 @@ public class CircuitEditor
     return selectedViews;
   }
 
-  public List<SemiconductorView<?>> getDiscreteViewsInGridSpace(Int2D gridPosition)
+  public List<IntegratedCircuitView<?, ?>> getDiscreteViewsInGridSpace(Int2D gridPosition)
   {
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
-    List<SemiconductorView<?>> selectedViews = new ArrayList<>();
-    for (SemiconductorView<?> view : semiconductorViews)
+    List<IntegratedCircuitView<?, ?>> selectedViews = new ArrayList<>();
+    for (IntegratedCircuitView<?, ?> view : integratedCircuitViews)
     {
       if (view.isEnabled())
       {
@@ -438,15 +439,9 @@ public class CircuitEditor
     return overlaps;
   }
 
-  public List<View> getComponents(Int2D position)
-  {
-    ConnectionView connectionView = getConnection(position);
-    return connectionView.getConnectedComponents();
-  }
-
   public ConnectionView getConnection(Int2D position)
   {
-    List<SemiconductorView<?>> semiconductorViews = getDiscreteViewsInGridSpace(position);
+    List<IntegratedCircuitView<?, ?>> semiconductorViews = getDiscreteViewsInGridSpace(position);
     List<TraceView> traceViews = getTraceViewsInGridSpace(position);
     Set<ConnectionView> connectionViews = new HashSet<>();
 
@@ -459,18 +454,18 @@ public class CircuitEditor
       }
     }
 
-    for (SplitterView splitterView : splitterViews)
+    for (PassiveView<?> passiveView : passiveViews)
     {
-      ConnectionView connectionView = splitterView.getConnectionsInGrid(position);
+      ConnectionView connectionView = passiveView.getConnectionsInGrid(position);
       if (connectionView != null)
       {
         connectionViews.add(connectionView);
       }
     }
 
-    for (SemiconductorView<?> semiconductorView : semiconductorViews)
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : semiconductorViews)
     {
-      PortView portView = semiconductorView.getPortInGrid(position.x, position.y);
+      PortView portView = integratedCircuitView.getPortInGrid(position.x, position.y);
       if (portView != null)
       {
         connectionViews.add(portView.getConnection());
@@ -564,10 +559,10 @@ public class CircuitEditor
         Int2D position = connection.getGridPosition();
         if (position != null)
         {
-          if (connectedComponent instanceof SemiconductorView)
+          if (connectedComponent instanceof IntegratedCircuitView)
           {
-            SemiconductorView<?> semiconductorView = (SemiconductorView<?>) connectedComponent;
-            PortView portView = semiconductorView.getPortInGrid(position);
+            IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) connectedComponent;
+            PortView portView = integratedCircuitView.getPortInGrid(position);
             if (portView.numberOfPorts() > numberOfTraces)
             {
               numberOfTraces = portView.numberOfPorts();
@@ -636,7 +631,7 @@ public class CircuitEditor
         {
           largest.y = y2;
         }
-        removeTraceView(mergeView);
+        deleteTraceViewInternal(mergeView);
       }
 
       if (isValidTrace(smallest, largest))
@@ -721,7 +716,7 @@ public class CircuitEditor
         {
           Int2D startPosition = traceView.getStartPosition();
           Int2D endPosition = traceView.getEndPosition();
-          removeTraceView(traceView);
+          deleteTraceViewInternal(traceView);
 
           result.add(new TraceView(this, startPosition, position));
           result.add(new TraceView(this, position, endPosition));
@@ -738,16 +733,16 @@ public class CircuitEditor
       ConnectionView startConnection = traceView.getStartConnection();
       ConnectionView endConnection = traceView.getEndConnection();
 
-      removeTraceView(traceView);
+      deleteTraceViewInternal(traceView);
 
-      Set<PortView> portViews = mergeAndConnectForDelete(startConnection);
-      portViews.addAll(mergeAndConnectForDelete(endConnection));
+      Set<PortView> portViews = mergeAndConnectAfterDelete(startConnection);
+      portViews.addAll(mergeAndConnectAfterDelete(endConnection));
       return portViews;
     }
     return new LinkedHashSet<>();
   }
 
-  protected Set<PortView> mergeAndConnectForDelete(ConnectionView startConnection)
+  protected Set<PortView> mergeAndConnectAfterDelete(ConnectionView startConnection)
   {
     TraceView traceView = mergeTraceConnectionForDelete(startConnection);
     ConnectionView connection;
@@ -898,40 +893,6 @@ public class CircuitEditor
     return positions;
   }
 
-  private TraceView getExactTraceView(Int2D start, Int2D end)
-  {
-    ConnectionView startConnection = getConnection(start);
-    if (startConnection == null)
-    {
-      return null;
-    }
-    ConnectionView endConnection = getConnection(end);
-    if (endConnection == null)
-    {
-      return null;
-    }
-
-    Set<TraceView> traceViews = new HashSet<>();
-    for (View connectedComponent : startConnection.getConnectedComponents())
-    {
-      if (connectedComponent instanceof TraceView)
-      {
-        traceViews.add((TraceView) connectedComponent);
-      }
-    }
-    for (View connectedComponent : endConnection.getConnectedComponents())
-    {
-      if (connectedComponent instanceof TraceView)
-      {
-        if (traceViews.contains(connectedComponent))
-        {
-          return (TraceView) connectedComponent;
-        }
-      }
-    }
-    return null;
-  }
-
   private Set<ConnectionView> getConnectionsOnLine(Line line)
   {
     Set<ConnectionView> notStraightConnections = new LinkedHashSet<>();
@@ -943,9 +904,9 @@ public class CircuitEditor
   private Set<ConnectionView> getDiscretePortConnectionsOnLine(Line line)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (SemiconductorView<?> semiconductorView : semiconductorViews)
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
     {
-      List<PortView> portViews = semiconductorView.getPorts();
+      List<PortView> portViews = integratedCircuitView.getPorts();
       for (PortView portView : portViews)
       {
         ConnectionView connection = portView.getConnection();
@@ -986,9 +947,9 @@ public class CircuitEditor
         for (View view : startConnection.getConnectedComponents())
         {
           boolean contained = true;
-          if (view instanceof SemiconductorView)
+          if (view instanceof IntegratedCircuitView)
           {
-            if (!semiconductorViews.contains(view))
+            if (!integratedCircuitViews.contains(view))
             {
               contained = false;
             }
@@ -1002,9 +963,9 @@ public class CircuitEditor
             }
           }
 
-          if (view instanceof SplitterView)
+          if (view instanceof PassiveView)
           {
-            if (!splitterViews.contains(view))
+            if (!passiveViews.contains(view))
             {
               contained = false;
             }
@@ -1022,23 +983,27 @@ public class CircuitEditor
   public CircuitData save()
   {
     Set<View> selection = new HashSet<>(this.selection);
-    ArrayList<SemiconductorData> semiconductorDatas = new ArrayList<>();
-    for (SemiconductorView<?> semiconductorView : semiconductorViews)
+    ArrayList<IntegratedCircuitData<?, ?>> semiconductorDatas = new ArrayList<>();
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
     {
-      SemiconductorData semiconductorData = semiconductorView.save(selection.contains(semiconductorView));
-      if (semiconductorData == null)
+      IntegratedCircuitData<?, ?> integratedCircuitData = integratedCircuitView.save(selection.contains(integratedCircuitView));
+      if (integratedCircuitData == null)
       {
-        throw new SimulatorException("%s [%s] save may not return null.", semiconductorView.getClass().getSimpleName(), semiconductorView.getName());
+        throw new SimulatorException("%s [%s] save may not return null.", integratedCircuitView.getClass().getSimpleName(), integratedCircuitView.getName());
       }
 
-      semiconductorDatas.add(semiconductorData);
+      semiconductorDatas.add(integratedCircuitData);
     }
 
-    ArrayList<SplitterData> splitterDatas = new ArrayList<>();
-    for (SplitterView splitterView : splitterViews)
+    ArrayList<PassiveData> passiveDatas = new ArrayList<>();
+    for (PassiveView<?> passiveView : passiveViews)
     {
-      SplitterData splitterData = splitterView.save(selection.contains(splitterView));
-      splitterDatas.add(splitterData);
+      PassiveData passiveData = passiveView.save(selection.contains(passiveView));
+      if (passiveData == null)
+      {
+        throw new SimulatorException("%s [%s] save may not return null.", passiveView.getClass().getSimpleName(), passiveView.getName());
+      }
+      passiveDatas.add(passiveData);
     }
 
     ArrayList<TraceData> traceDatas = new ArrayList<>();
@@ -1051,6 +1016,7 @@ public class CircuitEditor
     TimelineData timelineData = simulation.getTimeline().save();
     return new CircuitData(timelineData,
                            semiconductorDatas,
+                           passiveDatas,
                            traceDatas);
   }
 
@@ -1066,39 +1032,53 @@ public class CircuitEditor
       traceData.create(this, traceLoader);
     }
 
-    for (SemiconductorData semiconductorData : circuitData.integratedCircuits)
+    for (PassiveData passiveData : circuitData.passives)
     {
-      semiconductorData.createAndLoad(this, traceLoader);
+      passiveData.createAndLoad(this, traceLoader);
+    }
+
+    for (IntegratedCircuitData<?, ?> integratedCircuitData : circuitData.integratedCircuits)
+    {
+      integratedCircuitData.createAndLoad(this, traceLoader);
     }
   }
 
-  public Set<PortView> createAndConnectDiscreteView(SemiconductorView<?> semiconductorView)
+  public Set<PortView> createAndConnectSemiconductorView(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    List<PortView> ports = semiconductorView.getPorts();
+    List<PortView> ports = integratedCircuitView.getPorts();
     for (PortView portView : ports)
     {
       Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = getOrAddConnection(portPosition, semiconductorView);
+      ConnectionView connectionView = getOrAddConnection(portPosition, integratedCircuitView);
       portView.setConnection(connectionView);
       updatedPortViews.addAll(connectNewConnections(connectionView));
     }
-    semiconductorView.enable(simulation);
-    semiconductorView.simulationStarted(simulation);
+    integratedCircuitView.enable(simulation);
+    integratedCircuitView.simulationStarted(simulation);
 
     return updatedPortViews;
   }
 
-  public void createConnectionViews(SemiconductorView<?> semiconductorView)
+  public Set<PortView> createAndConnectPassiveView(PassiveView<?> passiveView)
   {
-    List<PortView> ports = semiconductorView.getPorts();
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    passiveView.enable(simulation);
+    passiveView.simulationStarted(simulation);
+
+    return updatedPortViews;
+  }
+
+  public void createConnectionViews(ComponentView<?> componentView)
+  {
+    List<PortView> ports = componentView.getPorts();
     for (PortView portView : ports)
     {
       Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = getOrAddConnection(portPosition, semiconductorView);
+      ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
       portView.setConnection(connectionView);
     }
-    semiconductorView.enable(simulation);
+    componentView.enable(simulation);
   }
 
   public void fireConnectionEvents(Set<PortView> updatedPortViews)
@@ -1119,22 +1099,32 @@ public class CircuitEditor
     return simulation;
   }
 
-  public void placeDiscreteView(SemiconductorView<?> semiconductorView)
+  public void placeComponentView(ComponentView<?> componentView)
   {
-    Set<PortView> updatedPortViews = createAndConnectDiscreteView(semiconductorView);
+    if (componentView instanceof IntegratedCircuitView)
+    {
+      Set<PortView> updatedPortViews = createAndConnectSemiconductorView((IntegratedCircuitView<?, ?>) componentView);
 
-    fireConnectionEvents(updatedPortViews);
-    validateConsistency();
+      fireConnectionEvents(updatedPortViews);
+      validateConsistency();
+    }
+    if (componentView instanceof PassiveView)
+    {
+      Set<PortView> updatedPortViews = createAndConnectPassiveView((PassiveView<?>) componentView);
+
+      fireConnectionEvents(updatedPortViews);
+      validateConsistency();
+    }
   }
 
   public void startMoveComponents(List<View> views)
   {
     for (View view : views)
     {
-      if (view instanceof SemiconductorView)
+      if (view instanceof IntegratedCircuitView)
       {
-        SemiconductorView<?> semiconductorView = (SemiconductorView<?>) view;
-        List<ConnectionView> connectionViews = disconnectDiscrete(semiconductorView);
+        IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) view;
+        List<ConnectionView> connectionViews = disconnectComponentView(integratedCircuitView);
 
         connectConnections(connectionViews);
       }
@@ -1166,7 +1156,7 @@ public class CircuitEditor
       if (view instanceof TraceView)
       {
         TraceView traceView = (TraceView) view;
-        _removeTraceView(traceView);
+        removeTraceView(traceView);
         lines.add(traceView.getLine());
       }
     }
@@ -1174,11 +1164,11 @@ public class CircuitEditor
     List<View> selection = new ArrayList<>();
     for (View view : views)
     {
-      if (view instanceof SemiconductorView)
+      if (view instanceof IntegratedCircuitView)
       {
-        SemiconductorView<?> semiconductorView = (SemiconductorView<?>) view;
-        updatedPortViews.addAll(createAndConnectDiscreteView(semiconductorView));
-        selection.add(semiconductorView);
+        IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) view;
+        updatedPortViews.addAll(createAndConnectSemiconductorView(integratedCircuitView));
+        selection.add(integratedCircuitView);
       }
     }
 
@@ -1237,43 +1227,43 @@ public class CircuitEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
     List<View> selectedViews = new ArrayList<>();
-    for (SemiconductorView<?> semiconductorView : semiconductorViews)
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
     {
-      if (semiconductorView.isEnabled())
+      if (integratedCircuitView.isEnabled())
       {
-        semiconductorView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+        integratedCircuitView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
         if (isPoint(start, end))
         {
           if (BoundingBox.containsPoint(new Int2D(start), boundBoxPosition, boundBoxDimension))
           {
-            selectedViews.add(semiconductorView);
+            selectedViews.add(integratedCircuitView);
           }
         }
         else
         {
           if (BoundingBox.containsBox(start, end, boundBoxPosition, boundBoxDimension, includeIntersections))
           {
-            selectedViews.add(semiconductorView);
+            selectedViews.add(integratedCircuitView);
           }
         }
       }
     }
 
-    for (SplitterView splitterView : splitterViews)
+    for (PassiveView<?> passiveView : passiveViews)
     {
-      splitterView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+      passiveView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
       if (isPoint(start, end))
       {
         if (BoundingBox.containsPoint(new Int2D(start), boundBoxPosition, boundBoxDimension))
         {
-          selectedViews.add(splitterView);
+          selectedViews.add(passiveView);
         }
       }
       else
       {
         if (BoundingBox.containsBox(start, end, boundBoxPosition, boundBoxDimension, includeIntersections))
         {
-          selectedViews.add(splitterView);
+          selectedViews.add(passiveView);
         }
       }
     }
@@ -1314,9 +1304,9 @@ public class CircuitEditor
       {
         deleteTraceView((TraceView) view);
       }
-      else if (view instanceof SemiconductorView)
+      else if (view instanceof IntegratedCircuitView)
       {
-        deleteDiscreteView((SemiconductorView<?>) view);
+        deleteComponentView((IntegratedCircuitView<?, ?>) view);
       }
       else
       {
@@ -1350,16 +1340,16 @@ public class CircuitEditor
     clearSelection();
   }
 
-  public SemiconductorView<?> getSingleSelectionDiscreteView()
+  public IntegratedCircuitView<?, ?> getSingleSelectionDiscreteView()
   {
-    SemiconductorView<?> singleSemiconductorView = null;
+    IntegratedCircuitView<?, ?> singleSemiconductorView = null;
     for (View view : selection)
     {
-      if (view instanceof SemiconductorView)
+      if (view instanceof IntegratedCircuitView)
       {
         if (singleSemiconductorView == null)
         {
-          singleSemiconductorView = (SemiconductorView<?>) view;
+          singleSemiconductorView = (IntegratedCircuitView<?, ?>) view;
         }
         else
         {
@@ -1384,23 +1374,39 @@ public class CircuitEditor
     }
   }
 
-  public void _addDiscreteView(SemiconductorView<?> semiconductorView)
+  public void addSemiconductorView(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
     synchronized (this)
     {
-      semiconductorViews.add(semiconductorView);
+      integratedCircuitViews.add(integratedCircuitView);
     }
   }
 
-  public void _removeDiscreteView(SemiconductorView<?> semiconductorView)
+  public void removeIntegratedCircuitView(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
     synchronized (this)
     {
-      semiconductorViews.remove(semiconductorView);
+      integratedCircuitViews.remove(integratedCircuitView);
     }
   }
 
-  public void _addTraceView(TraceView view)
+  public void addPassiveView(PassiveView<?> view)
+  {
+    synchronized (this)
+    {
+      passiveViews.add(view);
+    }
+  }
+
+  protected boolean removePassiveView(PassiveView<?> passiveView)
+  {
+    synchronized (this)
+    {
+      return passiveViews.remove(passiveView);
+    }
+  }
+
+  public void addTraceView(TraceView view)
   {
     synchronized (this)
     {
@@ -1408,17 +1414,12 @@ public class CircuitEditor
     }
   }
 
-  protected boolean _removeTraceView(TraceView traceView)
+  protected boolean removeTraceView(TraceView traceView)
   {
     synchronized (this)
     {
       return traceViews.remove(traceView);
     }
-  }
-
-  public void addSplitterView(SplitterView splitterView)
-  {
-
   }
 }
 

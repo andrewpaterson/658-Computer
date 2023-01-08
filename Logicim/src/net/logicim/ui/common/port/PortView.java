@@ -16,7 +16,7 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.SemiconductorView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -25,9 +25,9 @@ import java.util.List;
 
 public class PortView
 {
-  protected SemiconductorView<?> owner;
+  protected ComponentView<?> owner;
 
-  protected Int2D positionRelativeToIC;
+  protected Int2D relativePosition;
   protected boolean inverting;
   protected String text;
   protected boolean overline;
@@ -39,16 +39,16 @@ public class PortView
   protected PortViewGridCache gridCache;
   protected List<Port> ports;
 
-  public PortView(SemiconductorView<?> semiconductorView, Port port, Int2D positionRelativeToIC)
+  public PortView(ComponentView<?> componentView, Port port, Int2D relativePosition)
   {
-    this(semiconductorView, singlePort(port), positionRelativeToIC);
+    this(componentView, singlePort(port), relativePosition);
   }
 
-  public PortView(SemiconductorView<?> semiconductorView, List<Port> ports, Int2D positionRelativeToIC)
+  public PortView(ComponentView<?> componentView, List<Port> ports, Int2D relativePosition)
   {
-    this.owner = semiconductorView;
+    this.owner = componentView;
     this.owner.addPortView(this);
-    this.positionRelativeToIC = positionRelativeToIC;
+    this.relativePosition = relativePosition;
     this.bubbleCenter = null;
     this.bubbleDiameter = 0.9f;
     connection = null;
@@ -61,8 +61,8 @@ public class PortView
     this.inverting = inverting;
     Int2D portOffset = new Int2D(0, -1);
     facing.transform(portOffset);
-    bubbleCenter = new Float2D(positionRelativeToIC);
-    positionRelativeToIC.add(portOffset);
+    bubbleCenter = new Float2D(relativePosition);
+    relativePosition.add(portOffset);
     Float2D bubbleOffset = new Float2D(0, -0.5f);
     facing.transform(bubbleOffset);
     bubbleCenter.add(bubbleOffset);
@@ -88,7 +88,7 @@ public class PortView
     if (!gridCache.isValid())
     {
       gridCache.update(bubbleCenter,
-                       positionRelativeToIC,
+                       relativePosition,
                        inverting,
                        owner.getRotation(),
                        owner.getPosition());
@@ -106,7 +106,7 @@ public class PortView
     {
       boundingBox.include(bubbleCenter, bubbleDiameter / 2);
     }
-    boundingBox.include(positionRelativeToIC);
+    boundingBox.include(relativePosition);
   }
 
   public Int2D getGridPosition()
@@ -133,9 +133,9 @@ public class PortView
     this.connection = connection;
   }
 
-  public Int2D getPosition()
+  public Int2D getRelativePosition()
   {
-    return positionRelativeToIC;
+    return relativePosition;
   }
 
   public void paint(Graphics2D graphics, Viewport viewport, long time)
@@ -288,6 +288,11 @@ public class PortView
       }
     }
     return false;
+  }
+
+  public void setRelativePosition(Int2D relativePosition)
+  {
+    this.relativePosition = relativePosition;
   }
 
   public List<Port> getPorts()

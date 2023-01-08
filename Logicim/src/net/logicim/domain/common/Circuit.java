@@ -49,9 +49,9 @@ public class Circuit
     powerSources.remove(powerSource);
   }
 
-  public void disconnectDiscrete(Semiconductor semiconductor, Simulation simulation)
+  public void disconnectDiscrete(Component component, Simulation simulation)
   {
-    semiconductor.disconnect(simulation);
+    component.disconnect(simulation);
   }
 
   public List<IntegratedCircuit<? extends Pins, ? extends State>> getIntegratedCircuits(String type)

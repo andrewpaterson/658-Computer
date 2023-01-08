@@ -1,20 +1,20 @@
 package net.logicim.ui.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.View;
 
 public class HoverConnectionView
     extends ConnectionView
 {
   protected Int2D gridPosition;
 
-  public HoverConnectionView(ComponentView componentView, int x, int y)
+  public HoverConnectionView(View view, int x, int y)
   {
-    super(componentView);
+    super(view);
     this.gridPosition = new Int2D(x, y);
   }
 
-  public ComponentView getParent()
+  public View getParent()
   {
     return connectedComponents.get(0);
   }

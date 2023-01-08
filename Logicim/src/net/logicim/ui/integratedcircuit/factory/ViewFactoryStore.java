@@ -1,13 +1,13 @@
 package net.logicim.ui.integratedcircuit.factory;
 
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.SemiconductorView;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ViewFactoryStore
 {
-  protected Map<Class<? extends DiscreteView<?>>, ViewFactory> factories;
+  protected Map<Class<? extends SemiconductorView<?>>, ViewFactory> factories;
 
   protected static ViewFactoryStore instance;
 
@@ -38,7 +38,7 @@ public class ViewFactoryStore
     }
   }
 
-  public ViewFactory get(Class<? extends DiscreteView<?>> discreteViewClass)
+  public ViewFactory get(Class<? extends SemiconductorView<?>> discreteViewClass)
   {
     return factories.get(discreteViewClass);
   }

@@ -3,21 +3,21 @@ package net.logicim.ui.integratedcircuit.standard.power;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Discrete;
+import net.logicim.domain.common.Semiconductor;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.SemiconductorView;
 import net.logicim.ui.common.port.PortView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
-    extends DiscreteView<PROPERTIES>
+    extends SemiconductorView<PROPERTIES>
 {
   protected PowerSource powerSource;
 
@@ -58,7 +58,7 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public Discrete getDiscrete()
+  public Semiconductor getDiscrete()
   {
     return powerSource;
   }

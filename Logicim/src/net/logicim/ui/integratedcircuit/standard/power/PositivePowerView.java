@@ -2,7 +2,7 @@ package net.logicim.ui.integratedcircuit.standard.power;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.common.SemiconductorData;
 import net.logicim.data.integratedcircuit.standard.power.PositivePowerPortData;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.power.PowerSource;
@@ -76,7 +76,7 @@ public class PositivePowerView
   }
 
   @Override
-  public DiscreteData save(boolean selected)
+  public SemiconductorData save(boolean selected)
   {
     return new PositivePowerPortData(position,
                                      rotation,

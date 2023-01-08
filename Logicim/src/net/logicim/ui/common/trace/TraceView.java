@@ -8,14 +8,14 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.View;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TraceView
-    extends ComponentView
+    extends View
 {
   protected List<Trace> traces;
   protected Line line;
@@ -333,12 +333,12 @@ public class TraceView
     return VoltageColour.getColourForTraces(Colours.getInstance(), traces, time);
   }
 
-  public TraceView getOtherTraceView(List<ComponentView> connectedComponents)
+  public TraceView getOtherTraceView(List<View> connectedComponents)
   {
     TraceView otherTrace = null;
     if (connectedComponents.size() == 2)
     {
-      for (ComponentView connectedComponent : connectedComponents)
+      for (View connectedComponent : connectedComponents)
       {
         if (connectedComponent != this)
         {

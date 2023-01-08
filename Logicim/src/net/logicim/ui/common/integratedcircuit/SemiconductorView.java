@@ -1,10 +1,9 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.DiscreteData;
-import net.logicim.data.integratedcircuit.common.NonTraceData;
+import net.logicim.data.integratedcircuit.common.SemiconductorData;
 import net.logicim.data.port.MultiPortData;
-import net.logicim.domain.common.Discrete;
+import net.logicim.domain.common.Semiconductor;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
@@ -18,16 +17,16 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DiscreteView<PROPERTIES extends ComponentProperties>
-    extends NonTraceView<PROPERTIES>
+public abstract class SemiconductorView<PROPERTIES extends ComponentProperties>
+    extends ComponentView<PROPERTIES>
     implements ShapeHolder
 {
   protected List<PortView> ports;
 
-  public DiscreteView(CircuitEditor circuitEditor,
-                      Int2D position,
-                      Rotation rotation,
-                      PROPERTIES properties)
+  public SemiconductorView(CircuitEditor circuitEditor,
+                           Int2D position,
+                           Rotation rotation,
+                           PROPERTIES properties)
   {
     super(circuitEditor, position, rotation, properties);
 
@@ -150,8 +149,8 @@ public abstract class DiscreteView<PROPERTIES extends ComponentProperties>
 
   protected abstract void createPortViews();
 
-  public abstract Discrete getDiscrete();
+  public abstract Semiconductor getDiscrete();
 
-  public abstract DiscreteData save(boolean selected);
+  public abstract SemiconductorData save(boolean selected);
 }
 

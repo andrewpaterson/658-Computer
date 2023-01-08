@@ -2,7 +2,7 @@ package net.logicim.ui.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.trace.TraceView;
 
 import java.awt.*;
@@ -12,20 +12,20 @@ import java.util.List;
 public class ConnectionView
     implements Comparable<ConnectionView>
 {
-  protected List<ComponentView> connectedComponents;
+  protected List<View> connectedComponents;
 
   public ConnectionView()
   {
     connectedComponents = new ArrayList<>();
   }
 
-  public ConnectionView(ComponentView parentView)
+  public ConnectionView(View parentView)
   {
     this();
     connectedComponents.add(parentView);
   }
 
-  public List<ComponentView> getConnectedComponents()
+  public List<View> getConnectedComponents()
   {
     return connectedComponents;
   }
@@ -33,7 +33,7 @@ public class ConnectionView
   public Int2D getGridPosition()
   {
     Int2D gridPosition = null;
-    for (ComponentView connectedComponent : connectedComponents)
+    for (View connectedComponent : connectedComponents)
     {
       Int2D position = connectedComponent.getConnectionPosition(this);
       if (gridPosition == null)
@@ -65,11 +65,11 @@ public class ConnectionView
     }
   }
 
-  public void add(ComponentView componentView)
+  public void add(View view)
   {
-    if (!connectedComponents.contains(componentView))
+    if (!connectedComponents.contains(view))
     {
-      connectedComponents.add(componentView);
+      connectedComponents.add(view);
     }
     else
     {
@@ -82,7 +82,7 @@ public class ConnectionView
     return true;
   }
 
-  public void remove(ComponentView traceView)
+  public void remove(View traceView)
   {
     boolean removed = connectedComponents.remove(traceView);
     if (!removed)
@@ -129,7 +129,7 @@ public class ConnectionView
     if ((connectedComponents.size() > 0) && (connectedComponents.size() <= 2))
     {
       int traceCount = 0;
-      for (ComponentView connectedComponent : connectedComponents)
+      for (View connectedComponent : connectedComponents)
       {
         if (connectedComponent instanceof TraceView)
         {

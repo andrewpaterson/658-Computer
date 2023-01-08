@@ -4,7 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.ui.common.Rotation;
 
-public class NonTraceData
+public class ComponentData
     extends ReflectiveData
 {
   protected String name;
@@ -12,11 +12,11 @@ public class NonTraceData
   protected Rotation rotation;
   protected boolean selected;
 
-  public NonTraceData()
+  public ComponentData()
   {
   }
 
-  public NonTraceData(String name, Int2D position, Rotation rotation, boolean selected)
+  public ComponentData(String name, Int2D position, Rotation rotation, boolean selected)
   {
     this.position = new Int2D(position);
     this.rotation = rotation;

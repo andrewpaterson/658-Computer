@@ -4,7 +4,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
 
-public interface Discrete
+public interface Semiconductor
 {
   PortHolder getPortHolder();
 
@@ -18,3 +18,4 @@ public interface Discrete
     }
   }
 }
+

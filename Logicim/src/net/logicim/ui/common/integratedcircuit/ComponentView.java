@@ -1,9 +1,12 @@
 package net.logicim.ui.common.integratedcircuit;
 
+import net.logicim.common.SimulatorException;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -13,45 +16,221 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ComponentView
+public abstract class ComponentView<PROPERTIES extends ComponentProperties>
+    extends View
 {
-  public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
+  protected PROPERTIES properties;
 
-  protected void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
+  protected CircuitEditor circuitEditor;
+  protected Int2D position;
+  protected Rotation rotation;
+  protected BoundingBox boundingBox;
+  protected BoundingBox selectionBox;
+  protected List<ShapeView> shapes;
+  protected boolean finalised;
+
+  public ComponentView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
   {
-    float zoom = viewport.getZoom();
-    float radius = zoom * 3;
-    int left = (int) (x - radius);
-    int top = (int) (y - radius);
-    int width = (int) (radius * 2);
-    int height = (int) (radius * 2);
-    graphics.setColor(viewHover);
-    graphics.fillRect(left, top, width, height);
-    graphics.setColor(Color.BLACK);
-    graphics.drawRect(left, top, width, height);
+    this.properties = properties;
+
+    this.circuitEditor = circuitEditor;
+    this.position = position.clone();
+    this.rotation = rotation;
+    this.boundingBox = new BoundingBox();
+    this.selectionBox = new BoundingBox();
+    this.shapes = new ArrayList<>();
+    this.finalised = false;
   }
 
-  public ConnectionView getConnectionsInGrid(Int2D p)
+  public void rotateRight()
   {
-    return getConnectionsInGrid(p.x, p.y);
+    rotation = rotation.rotateRight();
+
+    invalidateCache();
   }
 
-  public abstract ConnectionView getConnectionsInGrid(int x, int y);
+  public void rotateLeft()
+  {
+    rotation = rotation.rotateLeft();
 
-  public abstract Int2D getConnectionPosition(ConnectionView connectionView);
+    invalidateCache();
+  }
 
-  public abstract void paint(Graphics2D graphics, Viewport viewport, long time);
+  public void add(ShapeView shapeView)
+  {
+    shapes.add(shapeView);
+  }
 
-  public abstract String getName();
+  public Int2D getPosition()
+  {
+    return position;
+  }
 
-  public abstract String getDescription();
+  public void setPosition(int x, int y)
+  {
+    this.position.set(x, y);
+  }
 
-  public abstract Int2D getPosition();
+  public Rotation getRotation()
+  {
+    return rotation;
+  }
 
-  public abstract void enable(Simulation simulation);
+  protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
+  {
+    for (ShapeView shape : shapes)
+    {
+      shape.boundingBoxInclude(boundingBox);
+    }
+  }
 
-  public abstract void disable();
+  public void paintSelected(Graphics2D graphics, Viewport viewport, Color color)
+  {
+    Int2D p = new Int2D();
+    Int2D s = new Int2D();
 
-  public abstract void setPosition(int x, int y);
+    getSelectionBoxInScreenSpace(viewport, p, s);
+
+    graphics.setStroke(viewport.getZoomableStroke());
+    paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
+    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
+    paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
+    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y + s.y, color);
+  }
+
+  @Override
+  public void paintSelected(Graphics2D graphics, Viewport viewport)
+  {
+    paintSelected(graphics, viewport, Colours.getInstance().getSelected());
+  }
+
+  public void paintHover(Graphics2D graphics, Viewport viewport)
+  {
+    paintSelected(graphics, viewport, Colours.getInstance().getViewHover());
+  }
+
+  public void paintBoundingBox(Graphics2D graphics, Viewport viewport)
+  {
+    boundingBox.transform(rotation);
+
+    Int2D p = new Int2D();
+    Int2D s = new Int2D();
+    getBoundingBoxInScreenSpace(viewport, p, s);
+    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getAbsoluteStroke(1), null, Color.ORANGE);
+  }
+
+  public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  {
+    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, boundingBox);
+  }
+
+  public void getSelectionBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  {
+    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, selectionBox);
+  }
+
+  private void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension, BoundingBox boundingBox)
+  {
+    boundingBox.transform(rotation);
+
+    int x = viewport.transformGridToScreenSpaceX(boundingBox.getTransformedTopLeft().x + position.x);
+    int y = viewport.transformGridToScreenSpaceY(boundingBox.getTransformedTopLeft().y + position.y);
+
+    int width = viewport.transformGridToScreenWidth(boundingBox.getTransformedWidth());
+    int height = viewport.transformGridToScreenHeight(boundingBox.getTransformedHeight());
+
+    if (width < 0)
+    {
+      x += width;
+      width *= -1;
+    }
+    if (height < 0)
+    {
+      y += height;
+      height *= -1;
+    }
+
+    destPosition.set(x, y);
+    destDimension.set(width, height);
+  }
+
+  public void getBoundingBoxInGridSpace(Float2D destPosition, Float2D destDimension)
+  {
+    boundingBox.transform(rotation);
+
+    float x = boundingBox.getTransformedTopLeft().x + position.x;
+    float y = boundingBox.getTransformedTopLeft().y + position.y;
+
+    float width = boundingBox.getTransformedWidth();
+    float height = boundingBox.getTransformedHeight();
+
+    if (width < 0)
+    {
+      x += width;
+      width *= -1;
+    }
+    if (height < 0)
+    {
+      y += height;
+      height *= -1;
+    }
+
+    destPosition.set(x, y);
+    destDimension.set(width, height);
+  }
+
+  protected void finaliseView()
+  {
+    finalised = true;
+
+    updateBoundingBoxFromShapes(boundingBox);
+    updateBoundingBoxFromConnections(boundingBox);
+    selectionBox.copy(this.boundingBox);
+    this.boundingBox.grow(0.5f);
+  }
+
+  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  {
+    if (!finalised)
+    {
+      throw new SimulatorException("View [" + getClass().getSimpleName() + "] is not finalised.");
+    }
+  }
+
+  protected void invalidateCache()
+  {
+    for (ShapeView shape : shapes)
+    {
+      shape.invalidateCache();
+    }
+  }
+
+  @Override
+  public String getName()
+  {
+    return properties.name;
+  }
+
+  public PROPERTIES getProperties()
+  {
+    return properties;
+  }
+
+  public void setProperties(PROPERTIES properties)
+  {
+    this.properties = properties;
+  }
+
+  public abstract String getType();
+
+  public abstract ComponentData save(boolean selected);
+
+  public abstract void clampProperties();
+
+  public abstract boolean isEnabled();
+
+  public abstract void simulationStarted(Simulation simulation);
+
+  protected abstract void updateBoundingBoxFromConnections(BoundingBox boundingBox);
 }
 

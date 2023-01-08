@@ -16,7 +16,7 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.SemiconductorView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class PortView
 {
-  protected DiscreteView<?> owner;
+  protected SemiconductorView<?> owner;
 
   protected Int2D positionRelativeToIC;
   protected boolean inverting;
@@ -39,14 +39,14 @@ public class PortView
   protected PortViewGridCache gridCache;
   protected List<Port> ports;
 
-  public PortView(DiscreteView<?> discreteView, Port port, Int2D positionRelativeToIC)
+  public PortView(SemiconductorView<?> semiconductorView, Port port, Int2D positionRelativeToIC)
   {
-    this(discreteView, singlePort(port), positionRelativeToIC);
+    this(semiconductorView, singlePort(port), positionRelativeToIC);
   }
 
-  public PortView(DiscreteView<?> discreteView, List<Port> ports, Int2D positionRelativeToIC)
+  public PortView(SemiconductorView<?> semiconductorView, List<Port> ports, Int2D positionRelativeToIC)
   {
-    this.owner = discreteView;
+    this.owner = semiconductorView;
     this.owner.addPortView(this);
     this.positionRelativeToIC = positionRelativeToIC;
     this.bubbleCenter = null;

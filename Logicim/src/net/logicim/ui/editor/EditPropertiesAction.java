@@ -6,7 +6,7 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.DiscreteView;
+import net.logicim.ui.common.integratedcircuit.SemiconductorView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
@@ -32,7 +32,7 @@ public class EditPropertiesAction
   protected JFrame parentFrame;
   protected PropertiesPanel propertiesPanel;
   protected JDialog dialog;
-  protected DiscreteView<?> discreteView;
+  protected SemiconductorView<?> semiconductorView;
 
   public EditPropertiesAction(SimulatorEditor editor, JFrame parentFrame)
   {
@@ -45,13 +45,13 @@ public class EditPropertiesAction
   {
     Map<Field, Object> map = propertiesPanel.getProperties();
 
-    boolean propertyChanged = updateProperties(map, discreteView.getProperties());
+    boolean propertyChanged = updateProperties(map, semiconductorView.getProperties());
 
     if (propertyChanged)
     {
-      this.discreteView.clampProperties();
-      DiscreteView<?> discreteView = recreateDiscreteView(this.discreteView.getProperties());
-      editor.replaceSelection(discreteView, this.discreteView);
+      this.semiconductorView.clampProperties();
+      SemiconductorView<?> semiconductorView = recreateDiscreteView(this.semiconductorView.getProperties());
+      editor.replaceSelection(semiconductorView, this.semiconductorView);
       editor.pushUndo();
     }
 
@@ -78,21 +78,21 @@ public class EditPropertiesAction
     return propertyChanged;
   }
 
-  protected DiscreteView<?> recreateDiscreteView(ComponentProperties properties)
+  protected SemiconductorView<?> recreateDiscreteView(ComponentProperties properties)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
 
-    Rotation rotation = discreteView.getRotation();
-    Int2D position = discreteView.getPosition();
+    Rotation rotation = semiconductorView.getRotation();
+    Int2D position = semiconductorView.getPosition();
 
-    Class<? extends DiscreteView<?>> aClass = (Class<? extends DiscreteView<?>>) discreteView.getClass();
+    Class<? extends SemiconductorView<?>> aClass = (Class<? extends SemiconductorView<?>>) semiconductorView.getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    DiscreteView<?> newDiscreteView = viewFactory.create(circuitEditor, position, rotation, properties);
+    SemiconductorView<?> newSemiconductorView = viewFactory.create(circuitEditor, position, rotation, properties);
 
-    circuitEditor.deleteDiscreteView(this.discreteView);
-    circuitEditor.placeDiscreteView(newDiscreteView);
+    circuitEditor.deleteDiscreteView(this.semiconductorView);
+    circuitEditor.placeDiscreteView(newSemiconductorView);
 
-    return newDiscreteView;
+    return newSemiconductorView;
   }
 
   protected Object coerce(Object value, Class<?> type)
@@ -140,17 +140,17 @@ public class EditPropertiesAction
   @Override
   public void executeEditorAction()
   {
-    discreteView = editor.getHoverDiscreteView();
-    if (discreteView == null)
+    semiconductorView = editor.getHoverSemiconductorView();
+    if (semiconductorView == null)
     {
-      discreteView = editor.getCircuitEditor().getSingleSelectionDiscreteView();
+      semiconductorView = editor.getCircuitEditor().getSingleSelectionDiscreteView();
     }
 
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
 
-    if (discreteView != null)
+    if (semiconductorView != null)
     {
-      dialog = new JDialog(parentFrame, discreteView.getType() + " Properties", true);
+      dialog = new JDialog(parentFrame, semiconductorView.getType() + " Properties", true);
       Dimension dimension = new Dimension(360, 320);
       dialog.setSize(dimension);
       mousePosition.x -= 50;
@@ -160,7 +160,7 @@ public class EditPropertiesAction
       Container contentPane = dialog.getContentPane();
       contentPane.setLayout(new GridBagLayout());
 
-      ComponentProperties properties = discreteView.getProperties();
+      ComponentProperties properties = semiconductorView.getProperties();
       propertiesPanel = new PropertiesPanel(properties);
       contentPane.add(propertiesPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 

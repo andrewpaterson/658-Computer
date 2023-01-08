@@ -1,7 +1,7 @@
 package net.logicim.data.integratedcircuit.standard.power;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.common.SemiconductorData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.trace.TraceLoader;
@@ -14,7 +14,7 @@ import net.logicim.ui.integratedcircuit.standard.power.PositivePowerView;
 import java.util.List;
 
 public class PositivePowerPortData
-    extends DiscreteData
+    extends SemiconductorData
 {
   private float voltage;
 

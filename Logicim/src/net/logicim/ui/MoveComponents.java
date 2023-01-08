@@ -3,7 +3,7 @@ package net.logicim.ui;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.View;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -16,9 +16,9 @@ public class MoveComponents
   protected Int2D end;
   protected Int2D diff;
 
-  protected Map<ComponentView, Int2D> componentStartPositions;
+  protected Map<View, Int2D> componentStartPositions;
 
-  public MoveComponents(Viewport viewport, int mouseX, int mouseY, List<ComponentView> selection)
+  public MoveComponents(Viewport viewport, int mouseX, int mouseY, List<View> selection)
   {
     start = new Int2D(viewport.transformScreenToGridX(mouseX),
                       viewport.transformScreenToGridY(mouseY));
@@ -27,10 +27,10 @@ public class MoveComponents
     diff.subtract(start);
 
     componentStartPositions = new LinkedHashMap<>(selection.size());
-    for (ComponentView componentView : selection)
+    for (View view : selection)
     {
-      componentStartPositions.put(componentView, new Int2D(componentView.getPosition()));
-      componentView.disable();
+      componentStartPositions.put(view, new Int2D(view.getPosition()));
+      view.disable();
     }
   }
 
@@ -42,9 +42,9 @@ public class MoveComponents
     diff.subtract(start);
   }
 
-  public Int2D getPosition(ComponentView componentView)
+  public Int2D getPosition(View view)
   {
-    Int2D start = componentStartPositions.get(componentView);
+    Int2D start = componentStartPositions.get(view);
     if (start != null)
     {
       Int2D position = new Int2D(start);
@@ -53,11 +53,11 @@ public class MoveComponents
     }
     else
     {
-      throw new SimulatorException("Cannot get position for %s [%s].", componentView.getClass().getSimpleName(), componentView.getDescription());
+      throw new SimulatorException("Cannot get position for %s [%s].", view.getClass().getSimpleName(), view.getDescription());
     }
   }
 
-  public List<ComponentView> getComponents()
+  public List<View> getComponents()
   {
     return new ArrayList<>(componentStartPositions.keySet());
   }

@@ -2,7 +2,7 @@ package net.logicim.ui.integratedcircuit.standard.power;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.common.SemiconductorData;
 import net.logicim.data.integratedcircuit.standard.power.GroundPortData;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
@@ -52,7 +52,7 @@ public class GroundView
   }
 
   @Override
-  public DiscreteData save(boolean selected)
+  public SemiconductorData save(boolean selected)
   {
     return new GroundPortData(position,
                               rotation,

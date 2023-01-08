@@ -9,7 +9,7 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.integratedcircuit.NonTraceView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplitterView
-    extends NonTraceView<SplitterProperties>
+    extends ComponentView<SplitterProperties>
 {
   protected List<Trace> traces;
   protected ConnectionView startConnection;

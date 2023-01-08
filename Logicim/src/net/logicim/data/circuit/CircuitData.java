@@ -1,7 +1,7 @@
 package net.logicim.data.circuit;
 
 import net.logicim.data.ReflectiveData;
-import net.logicim.data.integratedcircuit.common.DiscreteData;
+import net.logicim.data.integratedcircuit.common.SemiconductorData;
 import net.logicim.data.trace.TraceData;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public class CircuitData
     extends ReflectiveData
 {
   public TimelineData timeline;
-  public List<DiscreteData> integratedCircuits;
+  public List<SemiconductorData> integratedCircuits;
   public List<TraceData> traces;
 
   public CircuitData()
@@ -18,7 +18,7 @@ public class CircuitData
   }
 
   public CircuitData(TimelineData timeline,
-                     List<DiscreteData> integratedCircuits,
+                     List<SemiconductorData> integratedCircuits,
                      List<TraceData> traces)
   {
     this.timeline = timeline;
@@ -31,7 +31,7 @@ public class CircuitData
     return timeline;
   }
 
-  public List<DiscreteData> getIntegratedCircuits()
+  public List<SemiconductorData> getIntegratedCircuits()
   {
     return integratedCircuits;
   }
@@ -46,7 +46,7 @@ public class CircuitData
     this.timeline = timeline;
   }
 
-  public void setIntegratedCircuits(List<DiscreteData> integratedCircuits)
+  public void setIntegratedCircuits(List<SemiconductorData> integratedCircuits)
   {
     this.integratedCircuits = integratedCircuits;
   }

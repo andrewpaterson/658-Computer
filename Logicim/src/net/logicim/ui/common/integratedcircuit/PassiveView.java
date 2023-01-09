@@ -93,7 +93,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     return passive;
   }
 
-  public abstract PassiveData save(boolean selected);
+  public abstract PassiveData<?> save(boolean selected);
 
   protected abstract PASSIVE createPassive();
 }

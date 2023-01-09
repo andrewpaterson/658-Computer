@@ -15,8 +15,8 @@ import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateView;
 import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateView;
-import net.logicim.ui.integratedcircuit.standard.power.GroundView;
-import net.logicim.ui.integratedcircuit.standard.power.PositivePowerView;
+import net.logicim.ui.integratedcircuit.standard.passive.power.GroundView;
+import net.logicim.ui.integratedcircuit.standard.passive.power.PositivePowerView;
 
 import java.awt.event.KeyEvent;
 
@@ -41,7 +41,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new CreateComponentView(editor, OscilloscopeView.class), KeyEvent.VK_P, Up, Down, Up));
     editor.addAction(new InputAction(new CreateComponentView(editor, GroundView.class), KeyEvent.VK_G, Up, Up, Up));
     editor.addAction(new InputAction(new CreateComponentView(editor, PositivePowerView.class), KeyEvent.VK_V, Up, Up, Up));
-    editor.addAction(new InputAction(new CreateComponentView(editor, SplitterView.class), KeyEvent.VK_S, Up, Up, Up));
+    editor.addAction(new InputAction(new CreateComponentView(editor, SplitterView.class), KeyEvent.VK_S, Up, Down, Up));
 
     editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
     editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Down, Up));

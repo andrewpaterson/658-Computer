@@ -53,11 +53,5 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
       gndLine.paint(graphics, viewport);
     }
   }
-
-  @Override
-  public void clampProperties()
-  {
-    super.clampProperties();
-  }
 }
 

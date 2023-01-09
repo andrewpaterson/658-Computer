@@ -7,6 +7,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 
 public class InverterView
     extends BaseBufferView<Inverter>
@@ -55,6 +56,12 @@ public class InverterView
   public String getType()
   {
     return "Inverter";
+  }
+
+  @Override
+  public void clampProperties()
+  {
+    properties.bufferCount = PropertyClamp.clamp(properties.bufferCount, 1, 32);
   }
 }
 

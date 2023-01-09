@@ -12,18 +12,6 @@ public class PowerInPort
   }
 
   @Override
-  public String toDebugString()
-  {
-    return getHolder().getName() + "." + name;
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return getHolder().getDescription() + "." + getName();
-  }
-
-  @Override
   public boolean isPowerIn()
   {
     return true;

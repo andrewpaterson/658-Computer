@@ -6,26 +6,26 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.integratedcircuit.standard.power.PositivePowerProperties;
-import net.logicim.ui.integratedcircuit.standard.power.PositivePowerView;
+import net.logicim.ui.integratedcircuit.standard.passive.power.PositivePowerProperties;
+import net.logicim.ui.integratedcircuit.standard.passive.power.PositivePowerView;
 
 import java.util.List;
 
-public class PositivePowerPortData
+public class PositivePowerData
     extends PassiveData<PositivePowerView>
 {
   private float voltage;
 
-  public PositivePowerPortData()
+  public PositivePowerData()
   {
   }
 
-  public PositivePowerPortData(Int2D position,
-                               Rotation rotation,
-                               String name,
-                               List<MultiPortData> ports,
-                               boolean selected,
-                               float voltage)
+  public PositivePowerData(Int2D position,
+                           Rotation rotation,
+                           String name,
+                           List<MultiPortData> ports,
+                           boolean selected,
+                           float voltage)
   {
     super(position, rotation, name, ports, selected);
     this.voltage = voltage;

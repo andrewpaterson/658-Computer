@@ -11,6 +11,7 @@ import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.*;
 import net.logicim.ui.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
+import net.logicim.ui.integratedcircuit.standard.bus.SplitterViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;
@@ -20,8 +21,8 @@ import net.logicim.ui.integratedcircuit.standard.logic.or.NorGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.or.OrGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.xor.XorGateViewFactory;
-import net.logicim.ui.integratedcircuit.standard.power.GroundViewFactory;
-import net.logicim.ui.integratedcircuit.standard.power.PositivePowerViewFactory;
+import net.logicim.ui.integratedcircuit.standard.passive.power.GroundViewFactory;
+import net.logicim.ui.integratedcircuit.standard.passive.power.PositivePowerViewFactory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -63,7 +64,8 @@ public class SimulatorPanel
                                           new BufferViewFactory(),
                                           new OscilloscopeViewFactory(),
                                           new GroundViewFactory(),
-                                          new PositivePowerViewFactory());
+                                          new PositivePowerViewFactory(),
+                                          new SplitterViewFactory());
 
   }
 

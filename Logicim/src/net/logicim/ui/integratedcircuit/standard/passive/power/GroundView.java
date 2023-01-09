@@ -1,8 +1,8 @@
-package net.logicim.ui.integratedcircuit.standard.power;
+package net.logicim.ui.integratedcircuit.standard.passive.power;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.standard.power.GroundPortData;
+import net.logicim.data.integratedcircuit.standard.power.GroundData;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -51,19 +51,18 @@ public class GroundView
   }
 
   @Override
-  public GroundPortData save(boolean selected)
+  public GroundData save(boolean selected)
   {
-    return new GroundPortData(position,
-                              rotation,
-                              properties.name,
-                              savePorts(),
-                              selected);
+    return new GroundData(position,
+                          rotation,
+                          properties.name,
+                          savePorts(),
+                          selected);
   }
 
   @Override
   public void clampProperties()
   {
-    super.clampProperties();
   }
 
   @Override

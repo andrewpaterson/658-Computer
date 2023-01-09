@@ -1,11 +1,10 @@
-package net.logicim.ui.integratedcircuit.standard.power;
+package net.logicim.ui.integratedcircuit.standard.passive.power;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.data.integratedcircuit.standard.power.PositivePowerPortData;
+import net.logicim.data.integratedcircuit.standard.power.PositivePowerData;
 import net.logicim.domain.common.voltage.Voltage;
-import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
@@ -68,20 +67,19 @@ public class PositivePowerView
   }
 
   @Override
-  public PassiveData save(boolean selected)
+  public PositivePowerData save(boolean selected)
   {
-    return new PositivePowerPortData(position,
-                                     rotation,
-                                     properties.name,
-                                     savePorts(),
-                                     selected,
-                                     properties.voltage_V);
+    return new PositivePowerData(position,
+                                 rotation,
+                                 properties.name,
+                                 savePorts(),
+                                 selected,
+                                 properties.voltage_V);
   }
 
   @Override
   public void clampProperties()
   {
-    super.clampProperties();
     properties.voltage_V = clamp(properties.voltage_V, 0.01f, 7.0f);
   }
 

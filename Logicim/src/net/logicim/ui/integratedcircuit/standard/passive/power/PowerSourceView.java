@@ -1,11 +1,9 @@
-package net.logicim.ui.integratedcircuit.standard.power;
+package net.logicim.ui.integratedcircuit.standard.passive.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
@@ -28,23 +26,11 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public ConnectionView getConnectionsInGrid(int x, int y)
-  {
-    //??
-    return null;
-  }
-
-  @Override
-  public void clampProperties()
-  {
-  }
-
-  @Override
   protected PowerSource createPassive()
   {
     return new PowerSource(circuitEditor.getCircuit(),
-                                  properties.name,
-                                  getVoltageOut());
+                           properties.name,
+                           getVoltageOut());
   }
 
   public abstract float getVoltageOut();

@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.power;
+package net.logicim.ui.integratedcircuit.standard.passive.power;
 
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 

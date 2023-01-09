@@ -1,17 +1,41 @@
 package net.logicim.data.splitter;
 
+import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.data.port.MultiPortData;
 import net.logicim.data.trace.TraceLoader;
 import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.bus.SplitterProperties;
 import net.logicim.ui.integratedcircuit.standard.bus.SplitterView;
+
+import java.util.List;
 
 public class SplitterData
     extends PassiveData<SplitterView>
 {
-  protected int outputCount;
-  protected int outputOffset;
+  protected int endCount;
+  protected int endOffset;
   protected int spacing;
+
+  public SplitterData()
+  {
+  }
+
+  public SplitterData(Int2D position,
+                      Rotation rotation,
+                      String name,
+                      List<MultiPortData> ports,
+                      boolean selected,
+                      int endCount,
+                      int endOffset,
+                      int spacing)
+  {
+    super(position, rotation, name, ports, selected);
+    this.endCount = endCount;
+    this.endOffset = endOffset;
+    this.spacing = spacing;
+  }
 
   @Override
   protected SplitterView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
@@ -20,8 +44,8 @@ public class SplitterData
                             position,
                             rotation,
                             new SplitterProperties(name,
-                                                   outputCount,
-                                                   outputOffset,
+                                                   endCount,
+                                                   endOffset,
                                                    spacing));
   }
 }

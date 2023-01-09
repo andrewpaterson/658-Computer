@@ -114,23 +114,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  public void enable(Simulation simulation)
-  {
-    integratedCircuit.enable(simulation);
-  }
-
-  public void disable()
-  {
-    integratedCircuit.disable();
-  }
-
-  @Override
-  public boolean isEnabled()
-  {
-    return integratedCircuit.isEnabled();
-  }
-
-  @Override
   protected void finaliseView()
   {
     createComponent();
@@ -138,12 +121,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     super.finaliseView();
     validateComponent();
     validatePorts();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return integratedCircuit.getType() + " " + getName() + " (" + getPosition() + ")";
   }
 
   protected List<IntegratedCircuitEventData<?>> saveEvents()
@@ -168,11 +145,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     {
       throw new SimulatorException("saveState must be implemented on [" + getClass().getSimpleName() + "].");
     }
-  }
-
-  @Override
-  public void clampProperties()
-  {
   }
 
   @Override

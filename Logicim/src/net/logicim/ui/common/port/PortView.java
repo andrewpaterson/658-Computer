@@ -8,10 +8,7 @@ import net.logicim.data.port.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.port.LogicPort;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PowerInPort;
-import net.logicim.domain.common.port.PowerOutPort;
+import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.trace.Trace;
@@ -209,21 +206,25 @@ public class PortView
     ArrayList<PortData> portDatas = new ArrayList<>();
     for (Port port : this.ports)
     {
-      if (port.isLogicPort())
+      if (port instanceof LogicPort)
       {
         portDatas.add(saveLogicPort((LogicPort) port));
       }
-      else if (port.isPowerIn())
+      else if (port instanceof PowerInPort)
       {
         portDatas.add(savePowerInPort((PowerInPort) port));
       }
-      else if (port.isPowerOut())
+      else if (port instanceof PowerOutPort)
       {
         portDatas.add(savePowerOutPort((PowerOutPort) port));
       }
+      else if (port instanceof TracePort)
+      {
+        portDatas.add(saveTracePort((TracePort) port));
+      }
       else
       {
-        throw new SimulatorException("implement saving for non-logic ports.");
+        throw new SimulatorException("implement saving for [%s] ports.", port.getClass().getSimpleName());
       }
     }
     return new MultiPortData(portDatas);
@@ -232,6 +233,11 @@ public class PortView
   protected PowerOutPortData savePowerOutPort(PowerOutPort powerOutPort)
   {
     return new PowerOutPortData(powerOutPort.getTraceId());
+  }
+
+  protected TracePortData saveTracePort(TracePort powerOutPort)
+  {
+    return new TracePortData(powerOutPort.getTraceId());
   }
 
   protected PowerInPortData savePowerInPort(PowerInPort powerInPort)

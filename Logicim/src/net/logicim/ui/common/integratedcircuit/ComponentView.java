@@ -354,7 +354,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   @Override
   public String getDescription()
   {
-    return getComponent().getType() + " " + properties.name + " (" + getPosition() + ")";
+    return getComponent().getType() + " " + getName() + " (" + getPosition() + ")";
   }
 
   public boolean isEnabled()

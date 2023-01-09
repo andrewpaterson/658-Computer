@@ -62,11 +62,5 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
       graphics.setColor(color);
     }
   }
-
-  @Override
-  public void clampProperties()
-  {
-    super.clampProperties();
-  }
 }
 

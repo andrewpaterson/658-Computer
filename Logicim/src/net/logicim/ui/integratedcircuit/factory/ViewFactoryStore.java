@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ViewFactoryStore
 {
-  protected Map<Class<? extends ComponentView<?>>, ViewFactory> factories;
+  protected Map<Class<? extends ComponentView<?>>, ViewFactory<?, ?>> factories;
 
   protected static ViewFactoryStore instance;
 
@@ -25,20 +25,20 @@ public class ViewFactoryStore
     return instance;
   }
 
-  public void add(ViewFactory viewFactory)
+  public void add(ViewFactory<?, ?> viewFactory)
   {
     factories.put(viewFactory.getViewClass(), viewFactory);
   }
 
-  public void addAll(ViewFactory... viewFactories)
+  public void addAll(ViewFactory<?, ?>... viewFactories)
   {
-    for (ViewFactory viewFactory : viewFactories)
+    for (ViewFactory<?, ?> viewFactory : viewFactories)
     {
       add(viewFactory);
     }
   }
 
-  public ViewFactory get(Class<? extends ComponentView<?>> discreteViewClass)
+  public ViewFactory<?, ?> get(Class<? extends ComponentView<?>> discreteViewClass)
   {
     return factories.get(discreteViewClass);
   }

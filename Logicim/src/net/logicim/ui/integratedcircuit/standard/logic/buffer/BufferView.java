@@ -7,6 +7,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 
 public class BufferView
     extends BaseBufferView<Buffer>
@@ -49,6 +50,12 @@ public class BufferView
                           saveState(),
                           properties.bufferCount,
                           properties.explicitPowerPorts);
+  }
+
+  @Override
+  public void clampProperties()
+  {
+    properties.bufferCount = PropertyClamp.clamp(properties.bufferCount, 1, 32);
   }
 
   @Override

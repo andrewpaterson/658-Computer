@@ -1,6 +1,5 @@
 package net.logicim.ui.integratedcircuit.standard.bus;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.splitter.SplitterData;
 import net.logicim.domain.Simulation;
@@ -30,25 +29,14 @@ public class SplitterView
     this.rotation = rotation;
     this.properties = properties;
 
-    this.endPorts = createEndPorts(properties);
+    this.endPorts = null;
+    this.startPort = null;
 
     this.boundingBox = new BoundingBox();
     this.selectionBox = new BoundingBox();
 
     circuitEditor.addPassiveView(this);
-  }
-
-  protected List<PortView> createEndPorts(SplitterProperties properties)
-  {
-    Int2D position = new Int2D(this.position);
-    position.add(3, -properties.endOffset);
-    ArrayList<PortView> portViews = new ArrayList<>(properties.endCount);
-    for (int i = 0; i < properties.endCount; i++)
-    {
-      portViews.add(new PortView(this, passive.getEndPort(i), new Int2D(position)));
-      position.add(0, properties.spacing);
-    }
-    return portViews;
+    finaliseView();
   }
 
   @Override
@@ -75,26 +63,17 @@ public class SplitterView
   }
 
   @Override
-  public Int2D getConnectionGridPosition(ConnectionView connectionView)
-  {
-    if (startPort.getConnection() == connectionView)
-    {
-      return position;
-    }
-
-    for (PortView portView : endPorts)
-    {
-      if (portView.getConnection() == connectionView)
-      {
-        return portView.getConnection().getGridPosition();
-      }
-    }
-    return null;
-  }
-
-  @Override
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
+    super.paint(graphics, viewport, time);
+
+    Color color = graphics.getColor();
+    Stroke stroke = graphics.getStroke();
+
+    paintPorts(graphics, viewport, time);
+
+    graphics.setColor(color);
+    graphics.setStroke(stroke);
   }
 
   @Override
@@ -103,31 +82,16 @@ public class SplitterView
     return "Splitter";
   }
 
-  @Override
-  protected void createPortViews()
-  {
-
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Splitter (" + position + ") width [" + properties.endCount + "]";
-  }
-
-  @Override
-  public void enable(Simulation simulation)
-  {
-  }
-
-  @Override
-  public void disable()
-  {
-  }
-
   public SplitterData save(boolean selected)
   {
-    throw new SimulatorException("Not yet implemented");
+    return new SplitterData(position,
+                            rotation,
+                            properties.name,
+                            savePorts(),
+                            selected,
+                            properties.endCount,
+                            properties.endOffset,
+                            properties.spacing);
   }
 
   @Override
@@ -139,14 +103,27 @@ public class SplitterView
   }
 
   @Override
-  public void clampProperties()
+  protected void createPortViews()
   {
+    startPort = new PortView(this, passive.getStartPorts(), new Int2D(-2, -properties.endOffset));
+    endPorts = createEndPorts(properties);
+  }
+
+  protected List<PortView> createEndPorts(SplitterProperties properties)
+  {
+    Int2D position = new Int2D(1, 0);
+    ArrayList<PortView> portViews = new ArrayList<>(properties.endCount);
+    for (int i = 0; i < properties.endCount; i++)
+    {
+      portViews.add(new PortView(this, passive.getEndPort(i), new Int2D(position)));
+      position.subtract(0, properties.spacing);
+    }
+    return portViews;
   }
 
   @Override
-  public boolean isEnabled()
+  public void clampProperties()
   {
-    return false;
   }
 
   @Override

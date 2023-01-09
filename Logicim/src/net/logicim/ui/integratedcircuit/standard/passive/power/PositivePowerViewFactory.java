@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.power;
+package net.logicim.ui.integratedcircuit.standard.passive.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.CircuitEditor;

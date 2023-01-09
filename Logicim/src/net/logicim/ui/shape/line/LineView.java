@@ -11,6 +11,7 @@ import java.awt.*;
 public class LineView
     extends ShapeView
 {
+  protected float width;
   protected Tuple2 start;
   protected Tuple2 end;
 
@@ -18,9 +19,15 @@ public class LineView
 
   public LineView(ShapeHolder shapeHolder, Tuple2 start, Tuple2 end)
   {
+    this(shapeHolder, start, end, 2);
+  }
+
+  public LineView(ShapeHolder shapeHolder, Tuple2 start, Tuple2 end, float width)
+  {
     super(shapeHolder);
     this.start = start.clone();
     this.end = end.clone();
+    this.width = width;
 
     this.gridCache = new LineGridCache(start, end);
   }
@@ -38,7 +45,7 @@ public class LineView
     int x2 = viewport.transformGridToScreenSpaceX(transformedEnd);
     int y2 = viewport.transformGridToScreenSpaceY(transformedEnd);
 
-    graphics.setStroke(viewport.getZoomableStroke());
+    graphics.setStroke(viewport.getZoomableStroke(width));
     graphics.setColor(getBorderColour());
 
     graphics.drawLine(x1, y1, x2, y2);

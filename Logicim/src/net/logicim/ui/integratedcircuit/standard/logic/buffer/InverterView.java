@@ -61,7 +61,7 @@ public class InverterView
   @Override
   public void clampProperties()
   {
-    properties.bufferCount = PropertyClamp.clamp(properties.bufferCount, 1, 32);
+    properties.bufferCount = PropertyClamp.clamp(properties.bufferCount, 1, PropertyClamp.MAX);
   }
 }
 

@@ -2,6 +2,8 @@ package net.logicim.ui.common.integratedcircuit;
 
 public class PropertyClamp
 {
+  public static final int MAX = 64;
+
   public static int clamp(int value, int min, int max)
   {
     if (value > max)

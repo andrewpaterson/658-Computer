@@ -9,8 +9,10 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.shape.line.LineView;
+import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,27 +23,60 @@ public class SplitterView
 {
   protected List<PortView> endPorts;
   protected PortView startPort;
+  protected List<LineView> lineViews;
 
-  public SplitterView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, SplitterProperties properties)
+  public SplitterView(CircuitEditor circuitEditor,
+                      Int2D position,
+                      Rotation rotation,
+                      SplitterProperties properties)
   {
     super(circuitEditor, position, rotation, properties);
-    this.position = position;
-    this.rotation = rotation;
-    this.properties = properties;
 
     this.endPorts = null;
     this.startPort = null;
 
-    this.boundingBox = new BoundingBox();
-    this.selectionBox = new BoundingBox();
-
     circuitEditor.addPassiveView(this);
+    createGraphics();
     finaliseView();
   }
 
-  @Override
-  public void paintSelected(Graphics2D graphics, Viewport viewport)
+  private void createGraphics()
   {
+    lineViews = new ArrayList<>();
+    Int2D startPosition = createStartPosition();
+    Int2D endPosition;
+    if (startPosition.y > 0)
+    {
+      endPosition = createEndPosition(0);
+    }
+    else if (startPosition.y < -(properties.endCount - 1) * properties.spacing)
+    {
+      endPosition = createEndPosition(properties.endCount - 1);
+    }
+    else
+    {
+      endPosition = createEndPosition(0);
+      endPosition.y = startPosition.y;
+    }
+    int centerX = 0;
+    endPosition.x = centerX;
+    LineView startLineView = new LineView(this, startPosition, endPosition, 3);
+    lineViews.add(startLineView);
+
+    for (int i = 0; i < properties.endCount; i++)
+    {
+      Int2D p1 = createEndPosition(i);
+      Int2D p2 = p1.clone();
+      p1.x = 0;
+      LineView lineView = new LineView(this, p1, p2);
+      lineViews.add(lineView);
+    }
+
+    Int2D p1 = createEndPosition(0);
+    p1.x = centerX;
+    Int2D p2 = createEndPosition(properties.endCount - 1);
+    p2.x = centerX;
+    lineViews.add(new LineView(this, p1, p2, 3));
   }
 
   @Override
@@ -69,6 +104,11 @@ public class SplitterView
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
+
+    for (LineView lineView : lineViews)
+    {
+      lineView.paint(graphics, viewport);
+    }
 
     paintPorts(graphics, viewport, time);
 
@@ -105,25 +145,37 @@ public class SplitterView
   @Override
   protected void createPortViews()
   {
-    startPort = new PortView(this, passive.getStartPorts(), new Int2D(-2, -properties.endOffset));
+    startPort = new PortView(this, passive.getStartPorts(), createStartPosition());
     endPorts = createEndPorts(properties);
   }
 
   protected List<PortView> createEndPorts(SplitterProperties properties)
   {
-    Int2D position = new Int2D(1, 0);
     ArrayList<PortView> portViews = new ArrayList<>(properties.endCount);
     for (int i = 0; i < properties.endCount; i++)
     {
+      Int2D position = createEndPosition(i);
       portViews.add(new PortView(this, passive.getEndPort(i), new Int2D(position)));
-      position.subtract(0, properties.spacing);
     }
     return portViews;
+  }
+
+  private Int2D createStartPosition()
+  {
+    return new Int2D(-1, -properties.endOffset);
+  }
+
+  private Int2D createEndPosition(int endIndex)
+  {
+    return new Int2D(1, -endIndex * properties.spacing);
   }
 
   @Override
   public void clampProperties()
   {
+    properties.endCount = PropertyClamp.clamp(properties.endCount, 1, PropertyClamp.MAX);
+    properties.spacing = PropertyClamp.clamp(properties.spacing, 1, 12);
+    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.endCount * properties.spacing - 1);
   }
 
   @Override

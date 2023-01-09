@@ -475,15 +475,6 @@ public class CircuitEditor
       }
     }
 
-    for (PassiveView<?, ?> passiveView : passiveViews)
-    {
-      ConnectionView connectionView = passiveView.getConnectionsInGrid(position);
-      if (connectionView != null)
-      {
-        connectionViews.add(connectionView);
-      }
-    }
-
     for (ComponentView<?> integratedCircuitView : componentViews)
     {
       PortView portView = integratedCircuitView.getPortInGrid(position.x, position.y);

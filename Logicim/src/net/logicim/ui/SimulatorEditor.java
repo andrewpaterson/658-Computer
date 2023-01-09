@@ -555,7 +555,7 @@ public class SimulatorEditor
 
   private ComponentView<?> getHoverView(Int2D mousePosition)
   {
-    return circuitEditor.getDiscreteViewInScreenSpace(viewport, mousePosition);
+    return circuitEditor.getComponentViewInScreenSpace(viewport, mousePosition);
   }
 
   private void addActions(SimulatorPanel simulatorPanel)

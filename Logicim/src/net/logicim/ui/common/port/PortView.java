@@ -51,8 +51,8 @@ public class PortView
     this.relativePosition = relativePosition;
     this.bubbleCenter = null;
     this.bubbleDiameter = 0.9f;
-    connection = null;
-    gridCache = new PortViewGridCache();
+    this.connection = null;
+    this.gridCache = new PortViewGridCache();
     this.ports = ports;
   }
 

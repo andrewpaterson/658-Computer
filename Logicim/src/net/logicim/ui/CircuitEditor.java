@@ -580,9 +580,9 @@ public class CircuitEditor
         Int2D position = connection.getGridPosition();
         if (position != null)
         {
-          if (connectedComponent instanceof IntegratedCircuitView)
+          if (connectedComponent instanceof ComponentView)
           {
-            IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) connectedComponent;
+            ComponentView<?> integratedCircuitView = (ComponentView<?>) connectedComponent;
             PortView portView = integratedCircuitView.getPortInGrid(position);
             if (portView.numberOfPorts() > numberOfTraces)
             {
@@ -1304,9 +1304,9 @@ public class CircuitEditor
       {
         deleteTraceView((TraceView) view);
       }
-      else if (view instanceof IntegratedCircuitView)
+      else if (view instanceof ComponentView<?>)
       {
-        deleteComponentView((IntegratedCircuitView<?, ?>) view);
+        deleteComponentView((ComponentView<?>) view);
       }
       else
       {

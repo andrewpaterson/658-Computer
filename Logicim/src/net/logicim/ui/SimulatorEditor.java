@@ -170,12 +170,6 @@ public class SimulatorEditor
     }
   }
 
-  protected void startWirePull()
-  {
-    wirePull = new WirePull();
-    wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
-  }
-
   protected void startSelection(int x, int y)
   {
     previousSelection = new HashSet<>(circuitEditor.getSelection());
@@ -306,38 +300,6 @@ public class SimulatorEditor
     calculateHighlightedPort();
   }
 
-  protected void startMoveComponents(int mouseX, int mouseY)
-  {
-    moveComponents = new MoveComponents(viewport, mouseX, mouseY, circuitEditor.getSelection());
-    circuitEditor.startMoveComponents(moveComponents.getComponents());
-
-    clearHover();
-  }
-
-  protected void moveComponents(int mouseX, int mouseY)
-  {
-    moveComponents.calculateDiff(viewport, mouseX, mouseY);
-    List<View> components = moveComponents.getComponents();
-    for (View view : components)
-    {
-      Int2D position = moveComponents.getPosition(view);
-      view.setPosition(position.x, position.y);
-    }
-  }
-
-  protected void doneMoveComponents()
-  {
-    circuitEditor.doneMoveComponents(moveComponents.getComponents());
-
-    if (moveComponents.hasDiff())
-    {
-      pushUndo();
-    }
-    moveComponents = null;
-
-    calculateHighlightedPort();
-  }
-
   private boolean isInSelectedComponent(int mouseX, int mouseY)
   {
     float fx = viewport.transformScreenToGridX((float) mouseX);
@@ -371,10 +333,48 @@ public class SimulatorEditor
     return false;
   }
 
+  protected void startMoveComponents(int mouseX, int mouseY)
+  {
+    moveComponents = new MoveComponents(viewport, mouseX, mouseY, circuitEditor.getSelection());
+    circuitEditor.startMoveComponents(moveComponents.getComponents());
+
+    clearHover();
+  }
+
+  protected void moveComponents(int mouseX, int mouseY)
+  {
+    moveComponents.calculateDiff(viewport, mouseX, mouseY);
+    List<View> components = moveComponents.getComponents();
+    for (View view : components)
+    {
+      Int2D position = moveComponents.getPosition(view);
+      view.setPosition(position.x, position.y);
+    }
+  }
+
+  protected void doneMoveComponents()
+  {
+    circuitEditor.doneMoveComponents(moveComponents.getComponents());
+
+    if (moveComponents.hasDiff())
+    {
+      pushUndo();
+    }
+    moveComponents = null;
+
+    calculateHighlightedPort();
+  }
+
   private void donePlacementView(ComponentView<?> placementView)
   {
     circuitEditor.placeComponentView(placementView);
     pushUndo();
+  }
+
+  protected void startWirePull()
+  {
+    wirePull = new WirePull();
+    wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
   }
 
   private void doneWirePull(WirePull wirePull)

@@ -2,6 +2,7 @@ package net.logicim.domain.common;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
+import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.power.PowerSource;
 
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ import java.util.List;
 public class Circuit
 {
   protected List<IntegratedCircuit<? extends Pins, ? extends State>> integratedCircuits;
-  protected List<PowerSource> powerSources;
+  protected List<Passive> passives;
 
   public Circuit()
   {
     integratedCircuits = new ArrayList<>();
-    powerSources = new ArrayList<>();
+    passives = new ArrayList<>();
   }
 
   public Simulation resetSimulation()
@@ -36,7 +37,7 @@ public class Circuit
 
   public void add(PowerSource powerSource)
   {
-    powerSources.add(powerSource);
+    passives.add(powerSource);
   }
 
   public void remove(IntegratedCircuit<?, ?> integratedCircuit)
@@ -44,9 +45,9 @@ public class Circuit
     integratedCircuits.remove(integratedCircuit);
   }
 
-  public void remove(PowerSource powerSource)
+  public void remove(Passive passive)
   {
-    powerSources.remove(powerSource);
+    passives.remove(passive);
   }
 
   public void disconnectDiscrete(Component component, Simulation simulation)

@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.port.PortView;
@@ -11,9 +12,11 @@ import net.logicim.ui.common.port.PortView;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PassiveView<PROPERTIES extends ComponentProperties>
+public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
 {
+  protected PASSIVE passive;
+
   public PassiveView(CircuitEditor circuitEditor,
                      Int2D position,
                      Rotation rotation,
@@ -22,7 +25,11 @@ public abstract class PassiveView<PROPERTIES extends ComponentProperties>
     super(circuitEditor, position, rotation, properties);
   }
 
-  public abstract PassiveData save(boolean selected);
+  protected void createComponent()
+  {
+    this.passive = createPassive();
+    this.passive.disable();
+  }
 
   protected void validateComponent()
   {
@@ -81,6 +88,13 @@ public abstract class PassiveView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected abstract void createComponent();
+  public PASSIVE getComponent()
+  {
+    return passive;
+  }
+
+  public abstract PassiveData save(boolean selected);
+
+  protected abstract PASSIVE createPassive();
 }
 

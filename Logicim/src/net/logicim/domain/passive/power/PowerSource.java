@@ -3,7 +3,6 @@ package net.logicim.domain.passive.power;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PortType;
 import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.passive.common.Passive;
 
@@ -13,7 +12,7 @@ public class PowerSource
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     super(circuit, name);
-    ports.add(new PowerOutPort(PortType.PowerOut, "Power", this, voltage));
+    ports.add(new PowerOutPort("Power", this, voltage));
   }
 
   @Override

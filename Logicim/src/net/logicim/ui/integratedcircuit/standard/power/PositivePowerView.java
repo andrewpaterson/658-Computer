@@ -64,7 +64,7 @@ public class PositivePowerView
   @Override
   protected void createPortViews()
   {
-    new PortView(this, powerSource.getPort("Power"), new Int2D(0, 1));
+    new PortView(this, passive.getPort("Power"), new Int2D(0, 1));
   }
 
   @Override

@@ -11,10 +11,8 @@ import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 
 public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
-    extends PassiveView<PROPERTIES>
+    extends PassiveView<PowerSource, PROPERTIES>
 {
-  protected PowerSource powerSource;
-
   public PowerSourceView(CircuitEditor circuitEditor,
                          Int2D position,
                          Rotation rotation,
@@ -25,23 +23,8 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  protected void createComponent()
-  {
-    powerSource = new PowerSource(circuitEditor.getCircuit(),
-                                  properties.name,
-                                  getVoltageOut());
-    powerSource.disable();
-  }
-
-  @Override
   public void simulationStarted(Simulation simulation)
   {
-  }
-
-  @Override
-  public Component getComponent()
-  {
-    return powerSource;
   }
 
   @Override
@@ -51,14 +34,17 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
     return null;
   }
 
-  public PowerSource getPowerSource()
-  {
-    return powerSource;
-  }
-
   @Override
   public void clampProperties()
   {
+  }
+
+  @Override
+  protected PowerSource createPassive()
+  {
+    return new PowerSource(circuitEditor.getCircuit(),
+                                  properties.name,
+                                  getVoltageOut());
   }
 
   public abstract float getVoltageOut();

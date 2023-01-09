@@ -15,6 +15,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -33,7 +34,7 @@ import java.util.*;
 public class CircuitEditor
 {
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
-  protected Set<PassiveView<?>> passiveViews;
+  protected Set<PassiveView<?, ?>> passiveViews;
   protected Set<TraceView> traceViews;
   protected Circuit circuit;
   protected Simulation simulation;
@@ -54,7 +55,7 @@ public class CircuitEditor
     long time = getTime();
     List<TraceView> traceViews;
     List<IntegratedCircuitView<?, ?>> semiconductorViews;
-    List<PassiveView<?>> passiveViews;
+    List<PassiveView<?, ?>> passiveViews;
     synchronized (this)
     {
       traceViews = new ArrayList<>(this.traceViews);
@@ -67,7 +68,7 @@ public class CircuitEditor
       traceView.paint(graphics, viewport, time);
     }
 
-    for (PassiveView<?> passiveView : passiveViews)
+    for (PassiveView<?, ?> passiveView : passiveViews)
     {
       passiveView.paint(graphics, viewport, time);
     }
@@ -95,9 +96,9 @@ public class CircuitEditor
       Set<PortView> updatedPortViews = deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView);
       fireConnectionEvents(updatedPortViews);
     }
-    else if (componentView instanceof PowerSourceView)
+    else if (componentView instanceof PassiveView)
     {
-      Set<PortView> updatedPortViews = deletePassiveView((PowerSourceView<?>) componentView);
+      Set<PortView> updatedPortViews = deletePassiveView((PassiveView<?, ?>) componentView);
       fireConnectionEvents(updatedPortViews);
     }
     else if (componentView == null)
@@ -123,13 +124,13 @@ public class CircuitEditor
     return connectConnections(connectionViews);
   }
 
-  protected Set<PortView> deletePassiveView(PowerSourceView<?> powerSourceView)
+  protected Set<PortView> deletePassiveView(PassiveView<?, ?> passiveView)
   {
-    List<ConnectionView> connectionViews = disconnectComponentView(powerSourceView);
+    List<ConnectionView> connectionViews = disconnectComponentView(passiveView);
 
-    PowerSource powerSource = powerSourceView.getPowerSource();
+    Passive powerSource = passiveView.getComponent();
     circuit.remove(powerSource);
-    removePassiveView(powerSourceView);
+    removePassiveView(passiveView);
 
     return connectConnections(connectionViews);
   }
@@ -454,7 +455,7 @@ public class CircuitEditor
       }
     }
 
-    for (PassiveView<?> passiveView : passiveViews)
+    for (PassiveView<?, ?> passiveView : passiveViews)
     {
       ConnectionView connectionView = passiveView.getConnectionsInGrid(position);
       if (connectionView != null)
@@ -996,7 +997,7 @@ public class CircuitEditor
     }
 
     ArrayList<PassiveData> passiveDatas = new ArrayList<>();
-    for (PassiveView<?> passiveView : passiveViews)
+    for (PassiveView<?, ?> passiveView : passiveViews)
     {
       PassiveData passiveData = passiveView.save(selection.contains(passiveView));
       if (passiveData == null)
@@ -1060,7 +1061,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public Set<PortView> createAndConnectPassiveView(PassiveView<?> passiveView)
+  public Set<PortView> createAndConnectPassiveView(PassiveView<?, ?> passiveView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     passiveView.enable(simulation);
@@ -1110,7 +1111,7 @@ public class CircuitEditor
     }
     if (componentView instanceof PassiveView)
     {
-      Set<PortView> updatedPortViews = createAndConnectPassiveView((PassiveView<?>) componentView);
+      Set<PortView> updatedPortViews = createAndConnectPassiveView((PassiveView<?, ?>) componentView);
 
       fireConnectionEvents(updatedPortViews);
       validateConsistency();
@@ -1249,7 +1250,7 @@ public class CircuitEditor
       }
     }
 
-    for (PassiveView<?> passiveView : passiveViews)
+    for (PassiveView<?, ?> passiveView : passiveViews)
     {
       passiveView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
       if (isPoint(start, end))
@@ -1390,7 +1391,7 @@ public class CircuitEditor
     }
   }
 
-  public void addPassiveView(PassiveView<?> view)
+  public void addPassiveView(PassiveView<?, ?> view)
   {
     synchronized (this)
     {
@@ -1398,7 +1399,7 @@ public class CircuitEditor
     }
   }
 
-  protected boolean removePassiveView(PassiveView<?> passiveView)
+  protected boolean removePassiveView(PassiveView<?, ?> passiveView)
   {
     synchronized (this)
     {

@@ -6,7 +6,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
@@ -171,19 +170,19 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
   }
 
-  protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
-
-  public abstract IntegratedCircuitData<?, ?> save(boolean selected);
-
-  @Override
-  public Component getComponent()
-  {
-    return integratedCircuit;
-  }
-
   @Override
   public void clampProperties()
   {
   }
+
+  @Override
+  public IC getComponent()
+  {
+    return integratedCircuit;
+  }
+
+  protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
+
+  public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 }
 

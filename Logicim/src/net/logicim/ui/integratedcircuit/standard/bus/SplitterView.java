@@ -4,7 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.splitter.SplitterData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.passive.wiring.Splitter;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
@@ -19,11 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplitterView
-    extends PassiveView<SplitterProperties>
+    extends PassiveView<Splitter, SplitterProperties>
 {
   protected List<PortView> endPorts;
   protected PortView startPort;
-  protected Splitter splitter;
 
   public SplitterView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, SplitterProperties properties)
   {
@@ -38,15 +36,17 @@ public class SplitterView
     this.selectionBox = new BoundingBox();
 
     circuitEditor.addPassiveView(this);
-    calculateEnds();
   }
 
   protected List<PortView> createEndPorts(SplitterProperties properties)
   {
-    ArrayList<PortView> portViews = new ArrayList<>(properties.outputCount);
-    for (int i = 0; i < properties.outputCount; i++)
+    Int2D position = new Int2D(this.position);
+    position.add(3, -properties.endOffset);
+    ArrayList<PortView> portViews = new ArrayList<>(properties.endCount);
+    for (int i = 0; i < properties.endCount; i++)
     {
-      portViews.add(new PortView(this, splitter.getEndPort(i)));
+      portViews.add(new PortView(this, passive.getEndPort(i), new Int2D(position)));
+      position.add(0, properties.spacing);
     }
     return portViews;
   }
@@ -81,9 +81,9 @@ public class SplitterView
     {
       return position;
     }
-    for (int i = 0; i < endPorts.size(); i++)
+
+    for (PortView portView : endPorts)
     {
-      PortView portView = endPorts.get(i);
       if (portView.getConnection() == connectionView)
       {
         return portView.getConnection().getGridPosition();
@@ -112,7 +112,7 @@ public class SplitterView
   @Override
   public String getDescription()
   {
-    return "Splitter (" + position + ") width [" + properties.outputCount + "]";
+    return "Splitter (" + position + ") width [" + properties.endCount + "]";
   }
 
   @Override
@@ -125,34 +125,17 @@ public class SplitterView
   {
   }
 
-  @Override
-  public void setPosition(int x, int y)
-  {
-    super.setPosition(x, y);
-    calculateEnds();
-  }
-
-  private void calculateEnds()
-  {
-    Int2D position = new Int2D(this.position);
-    position.add(3, -properties.outputOffset);
-    for (PortView endPort : endPorts)
-    {
-      Int2D relativePosition = endPort.getRelativePosition();
-      rotation.rotate(relativePosition, position);
-      position.add(0, properties.spacing);
-    }
-  }
-
   public SplitterData save(boolean selected)
   {
     throw new SimulatorException("Not yet implemented");
   }
 
   @Override
-  protected void createComponent()
+  protected Splitter createPassive()
   {
-    splitter = new Splitter();
+    return new Splitter(circuitEditor.getCircuit(),
+                        properties.name,
+                        properties.endCount);
   }
 
   @Override
@@ -169,12 +152,6 @@ public class SplitterView
   @Override
   public void simulationStarted(Simulation simulation)
   {
-  }
-
-  @Override
-  public Component getComponent()
-  {
-    return splitter;
   }
 }
 

@@ -5,19 +5,23 @@ import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 public class SplitterProperties
     extends ComponentProperties
 {
-  protected int outputCount;
-  protected int outputOffset;
+  protected int endCount;
+  protected int endOffset;
   protected int spacing;
 
   public SplitterProperties()
   {
   }
 
-  public SplitterProperties(String name, int outputCount, int outputOffset, int spacing)
+  public SplitterProperties(String name,
+                            int endCount,
+                            int endOffset,
+                            int spacing)
   {
     super(name);
-    this.outputCount = outputCount;
-    this.outputOffset = outputOffset;
+    this.endCount = endCount;
+    this.endOffset = endOffset;
     this.spacing = spacing;
   }
 }
+

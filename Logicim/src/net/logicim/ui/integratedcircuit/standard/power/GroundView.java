@@ -47,7 +47,7 @@ public class GroundView
   @Override
   protected void createPortViews()
   {
-    new PortView(this, powerSource.getPort("Power"), new Int2D(0, 0));
+    new PortView(this, passive.getPort("Power"), new Int2D(0, 0));
   }
 
   @Override

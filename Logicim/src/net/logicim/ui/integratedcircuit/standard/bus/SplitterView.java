@@ -185,7 +185,25 @@ public class SplitterView
   @Override
   public List<ConnectionView> getConnectedConnections(ConnectionView connection)
   {
-    return super.getConnectedConnections(connection);
+    List<ConnectionView> result = new ArrayList<>();
+    for (PortView endPort : endPorts)
+    {
+      if (endPort.getConnection() == connection)
+      {
+        result.add(startPort.getConnection());
+        return result;
+      }
+    }
+
+    if (startPort.getConnection() == connection)
+    {
+      for (PortView endPort : endPorts)
+      {
+        result.add(endPort.getConnection());
+      }
+    }
+
+    return result;
   }
 }
 

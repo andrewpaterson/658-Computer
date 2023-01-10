@@ -142,7 +142,8 @@ public class CircuitEditor
       ConnectionView connection = portView.getConnection();
       if (connection != null)
       {
-        disconnectConnectionViews(findConnections(connection));
+        Set<ConnectionView> connectionsFromConnection = findConnections(connection);
+        disconnectConnectionViews(connectionsFromConnection);
 
         connection.remove(componentView);
         connectionViews.add(connection);
@@ -518,40 +519,35 @@ public class CircuitEditor
     {
       ArrayList<ConnectionView> connectionsToProcess = new ArrayList<>();
       connectionsToProcess.add(connection);
-      return findConnections(connectionsToProcess);
+      Set<ConnectionView> connectionsNet = new LinkedHashSet<>();
+      while (connectionsToProcess.size() > 0)
+      {
+        ConnectionView currentConnection = connectionsToProcess.get(0);
+        connectionsToProcess.remove(0);
+        connectionsNet.add(currentConnection);
+
+        List<View> components = currentConnection.getConnectedComponents();
+        if (components != null)
+        {
+          for (View component : components)
+          {
+            List<ConnectionView> connectedConnections = component.getConnectedConnections(currentConnection);
+            for (ConnectionView connectedConnection : connectedConnections)
+            {
+              if (!connectionsNet.contains(connectedConnection))
+              {
+                connectionsToProcess.add(connectedConnection);
+              }
+            }
+          }
+        }
+      }
+      return connectionsNet;
     }
     else
     {
       return new LinkedHashSet<>();
     }
-  }
-
-  public Set<ConnectionView> findConnections(List<ConnectionView> connectionsToProcess)
-  {
-    Set<ConnectionView> connectionsNet = new LinkedHashSet<>();
-    while (connectionsToProcess.size() > 0)
-    {
-      ConnectionView currentConnection = connectionsToProcess.get(0);
-      connectionsToProcess.remove(0);
-      connectionsNet.add(currentConnection);
-
-      List<View> components = currentConnection.getConnectedComponents();
-      if (components != null)
-      {
-        for (View component : components)
-        {
-          List<ConnectionView> connectedConnections = component.getConnectedConnections(currentConnection);
-          for (ConnectionView connectedConnection : connectedConnections)
-          {
-            if (!connectionsNet.contains(connectedConnection))
-            {
-              connectionsToProcess.add(connectedConnection);
-            }
-          }
-        }
-      }
-    }
-    return connectionsNet;
   }
 
   public Set<PortView> connectNewTraceNet(Set<ConnectionView> connectionsNet)

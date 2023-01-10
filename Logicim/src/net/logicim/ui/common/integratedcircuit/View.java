@@ -2,15 +2,10 @@ package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
-import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.shape.common.BoundingBox;
-import net.logicim.ui.shape.common.ShapeView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class View

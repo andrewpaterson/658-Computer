@@ -296,11 +296,6 @@ public class PortView
     return false;
   }
 
-  public void setRelativePosition(Int2D relativePosition)
-  {
-    this.relativePosition = relativePosition;
-  }
-
   public List<Port> getPorts()
   {
     return ports;
@@ -311,3 +306,4 @@ public class PortView
     return ports.size();
   }
 }
+

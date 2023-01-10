@@ -103,20 +103,6 @@ public class TraceView
     return line.getOverlap(otherLine);
   }
 
-  public ConnectionView getOpposite(Int2D gridPosition)
-  {
-    if (line.getStart().equals(gridPosition))
-    {
-      return endConnection;
-    }
-    if (line.getEnd().equals(gridPosition))
-    {
-      return startConnection;
-    }
-
-    throw new SimulatorException("No opposite found.");
-  }
-
   public ConnectionView getOpposite(ConnectionView connection)
   {
     if (startConnection == connection)
@@ -187,6 +173,18 @@ public class TraceView
     line.getStart().set(x, y);
     line.getEnd().set(x, y);
     line.getEnd().add(length);
+  }
+
+  @Override
+  public List<ConnectionView> getConnectedConnections(ConnectionView connection)
+  {
+    ArrayList<ConnectionView> result = new ArrayList<>();
+    ConnectionView opposite = getOpposite(connection);
+    if (opposite != null)
+    {
+      result.add(opposite);
+    }
+    return result;
   }
 
   public Int2D getStartPosition()

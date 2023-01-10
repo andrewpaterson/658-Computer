@@ -475,9 +475,9 @@ public class CircuitEditor
       }
     }
 
-    for (ComponentView<?> integratedCircuitView : componentViews)
+    for (ComponentView<?> componentView : componentViews)
     {
-      PortView portView = integratedCircuitView.getPortInGrid(position.x, position.y);
+      PortView portView = componentView.getPortInGrid(position.x, position.y);
       if (portView != null)
       {
         connectionViews.add(portView.getConnection());
@@ -540,16 +540,12 @@ public class CircuitEditor
       {
         for (View component : components)
         {
-          if (component instanceof TraceView)
+          List<ConnectionView> connectedConnections = component.getConnectedConnections(currentConnection);
+          for (ConnectionView connectedConnection : connectedConnections)
           {
-            TraceView traceView = (TraceView) component;
-            ConnectionView opposite = traceView.getOpposite(currentConnection);
-            if (opposite != null)
+            if (!connectionsNet.contains(connectedConnection))
             {
-              if (!connectionsNet.contains(opposite))
-              {
-                connectionsToProcess.add(opposite);
-              }
+              connectionsToProcess.add(connectedConnection);
             }
           }
         }
@@ -1059,13 +1055,21 @@ public class CircuitEditor
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     List<PortView> ports = componentView.getPorts();
+    List<ConnectionView> newConnections = new ArrayList<>();
     for (PortView portView : ports)
     {
       Int2D portPosition = portView.getGridPosition();
       ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
       portView.setConnection(connectionView);
-      updatedPortViews.addAll(connectNewConnections(connectionView));
+      newConnections.add(connectionView);
     }
+
+    for (ConnectionView connectionView : newConnections)
+    {
+      Set<PortView> portViews = connectNewConnections(connectionView);
+      updatedPortViews.addAll(portViews);
+    }
+
     componentView.enable(simulation);
     componentView.simulationStarted(simulation);
 

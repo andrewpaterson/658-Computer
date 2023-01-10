@@ -243,6 +243,12 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
+  public List<ConnectionView> getConnectedConnections(ConnectionView connection)
+  {
+    return new ArrayList<>();
+  }
+
+  @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
     PortView portView = getPortInGrid(x, y);

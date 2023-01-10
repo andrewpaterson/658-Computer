@@ -14,9 +14,11 @@ import java.util.List;
 public class SplitterData
     extends PassiveData<SplitterView>
 {
+  protected int bitWidth;
   protected int endCount;
   protected int endOffset;
-  protected int spacing;
+  protected int girdSpacing;
+  protected int[] splitIndices;
 
   public SplitterData()
   {
@@ -29,12 +31,12 @@ public class SplitterData
                       boolean selected,
                       int endCount,
                       int endOffset,
-                      int spacing)
+                      int girdSpacing)
   {
     super(position, rotation, name, ports, selected);
     this.endCount = endCount;
     this.endOffset = endOffset;
-    this.spacing = spacing;
+    this.girdSpacing = girdSpacing;
   }
 
   @Override
@@ -44,9 +46,11 @@ public class SplitterData
                             position,
                             rotation,
                             new SplitterProperties(name,
+                                                   bitWidth,
                                                    endCount,
                                                    endOffset,
-                                                   spacing));
+                                                   girdSpacing,
+                                                   splitIndices));
   }
 }
 

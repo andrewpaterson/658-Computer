@@ -12,7 +12,6 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
-import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class SplitterView
     {
       endPosition = createEndPosition(0);
     }
-    else if (startPosition.y < -(properties.endCount - 1) * properties.spacing)
+    else if (startPosition.y < -(properties.endCount - 1) * properties.gridSpacing)
     {
       endPosition = createEndPosition(properties.endCount - 1);
     }
@@ -131,7 +130,7 @@ public class SplitterView
                             selected,
                             properties.endCount,
                             properties.endOffset,
-                            properties.spacing);
+                            properties.gridSpacing);
   }
 
   @Override
@@ -167,20 +166,26 @@ public class SplitterView
 
   private Int2D createEndPosition(int endIndex)
   {
-    return new Int2D(1, -endIndex * properties.spacing);
+    return new Int2D(1, -endIndex * properties.gridSpacing);
   }
 
   @Override
   public void clampProperties()
   {
     properties.endCount = PropertyClamp.clamp(properties.endCount, 1, PropertyClamp.MAX);
-    properties.spacing = PropertyClamp.clamp(properties.spacing, 1, 12);
-    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.endCount * properties.spacing - 1);
+    properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);
+    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.endCount * properties.gridSpacing - 1);
   }
 
   @Override
   public void simulationStarted(Simulation simulation)
   {
+  }
+
+  @Override
+  public List<ConnectionView> getConnectedConnections(ConnectionView connection)
+  {
+    return super.getConnectedConnections(connection);
   }
 }
 

@@ -53,5 +53,7 @@ public abstract class View
   public abstract void disable();
 
   public abstract void setPosition(int x, int y);
+
+  public abstract List<ConnectionView> getConnectedConnections(ConnectionView connection);
 }
 

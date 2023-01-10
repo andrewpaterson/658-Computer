@@ -4,7 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.common.trace.Trace;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.trace.TraceView;
+import net.logicim.ui.common.wire.TraceView;
 
 import java.util.ArrayList;
 import java.util.List;

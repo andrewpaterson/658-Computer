@@ -1,6 +1,6 @@
 package net.logicim.ui.common;
 
-import net.logicim.ui.common.trace.TraceView;
+import net.logicim.ui.common.wire.TraceView;
 
 public class TraceOverlap
 {

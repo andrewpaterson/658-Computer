@@ -10,8 +10,6 @@ import java.util.List;
 
 public abstract class View
 {
-  public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
-
   protected void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
   {
     float zoom = viewport.getZoom();
@@ -25,6 +23,8 @@ public abstract class View
     graphics.setColor(Color.BLACK);
     graphics.drawRect(left, top, width, height);
   }
+
+  public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
 
   public ConnectionView getConnectionsInGrid(Int2D p)
   {

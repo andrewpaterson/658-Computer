@@ -3,7 +3,7 @@ package net.logicim.ui.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.integratedcircuit.View;
-import net.logicim.ui.common.trace.TraceView;
+import net.logicim.ui.common.wire.TraceView;
 
 import java.awt.*;
 import java.util.ArrayList;

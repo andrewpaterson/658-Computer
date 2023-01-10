@@ -1,6 +1,6 @@
-package net.logicim.data.trace;
+package net.logicim.data.wire;
 
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 
 import java.util.HashMap;
 import java.util.Map;

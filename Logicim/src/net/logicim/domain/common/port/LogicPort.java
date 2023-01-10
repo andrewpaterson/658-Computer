@@ -9,14 +9,14 @@ import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.event.*;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
-import net.logicim.domain.common.trace.Trace;
-import net.logicim.domain.common.trace.TraceValue;
+import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.common.wire.TraceValue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static net.logicim.domain.common.trace.TraceValue.Undriven;
+import static net.logicim.domain.common.wire.TraceValue.Undriven;
 
 public class LogicPort
     extends Port

@@ -3,8 +3,8 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.trace.TraceData;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.data.wire.TraceData;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -330,6 +330,7 @@ public class TraceView
       Trace trace = traces.get(i);
       ids[i] = Trace.getId(trace);
     }
+
     return new TraceData(ids,
                          getStartPosition(),
                          getEndPosition(),

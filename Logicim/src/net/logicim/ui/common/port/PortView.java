@@ -11,7 +11,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -34,14 +34,14 @@ public class PortView
   protected ConnectionView connection;
 
   protected PortViewGridCache gridCache;
-  protected List<Port> ports;
+  protected List<? extends Port> ports;
 
   public PortView(ComponentView<?> componentView, Port port, Int2D relativePosition)
   {
     this(componentView, singlePort(port), relativePosition);
   }
 
-  public PortView(ComponentView<?> componentView, List<Port> ports, Int2D relativePosition)
+  public PortView(ComponentView<?> componentView, List<? extends Port> ports, Int2D relativePosition)
   {
     this.owner = componentView;
     this.owner.addPortView(this);
@@ -296,7 +296,7 @@ public class PortView
     return false;
   }
 
-  public List<Port> getPorts()
+  public List<? extends Port> getPorts()
   {
     return ports;
   }

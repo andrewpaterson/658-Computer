@@ -6,7 +6,7 @@ import net.logicim.data.port.LogicPortData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
-import net.logicim.data.trace.TraceLoader;
+import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;

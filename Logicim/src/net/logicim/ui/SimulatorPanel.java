@@ -11,7 +11,7 @@ import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.*;
 import net.logicim.ui.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.integratedcircuit.factory.ViewFactoryStore;
-import net.logicim.ui.integratedcircuit.standard.bus.SplitterViewFactory;
+import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterViewFactory;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateViewFactory;

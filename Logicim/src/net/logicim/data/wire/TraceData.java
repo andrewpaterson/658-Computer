@@ -1,8 +1,8 @@
-package net.logicim.data.trace;
+package net.logicim.data.wire;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.wire.TraceView;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class TraceData
     extends ReflectiveData
 {
-  public long[] ids;
+  public long[] traceIds;
 
   public Int2D start;
   public Int2D end;
@@ -23,9 +23,9 @@ public class TraceData
   {
   }
 
-  public TraceData(long[] ids, Int2D start, Int2D end, boolean selected)
+  public TraceData(long[] traceIds, Int2D start, Int2D end, boolean selected)
   {
-    this.ids = ids;
+    this.traceIds = traceIds;
 
     this.start = start.clone();
     this.end = end.clone();
@@ -35,8 +35,8 @@ public class TraceData
   public TraceView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     TraceView traceView = new TraceView(circuitEditor, start, end);
-    List<Trace> traces = new ArrayList<>(ids.length);
-    for (long id : ids)
+    List<Trace> traces = new ArrayList<>(traceIds.length);
+    for (long id : traceIds)
     {
       Trace trace = traceLoader.create(id);
       traces.add(trace);

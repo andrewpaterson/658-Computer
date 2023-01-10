@@ -3,7 +3,7 @@ package net.logicim.data.circuit;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.data.trace.TraceData;
+import net.logicim.data.wire.TraceData;
 
 import java.util.List;
 

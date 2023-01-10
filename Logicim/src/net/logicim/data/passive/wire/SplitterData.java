@@ -1,13 +1,13 @@
-package net.logicim.data.splitter;
+package net.logicim.data.passive.wire;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
-import net.logicim.data.trace.TraceLoader;
+import net.logicim.data.wire.TraceLoader;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.integratedcircuit.standard.bus.SplitterProperties;
-import net.logicim.ui.integratedcircuit.standard.bus.SplitterView;
+import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterProperties;
+import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
 
 import java.util.List;
 

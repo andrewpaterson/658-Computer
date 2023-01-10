@@ -14,7 +14,7 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.SlewEvent;
 import net.logicim.domain.common.port.event.TransitionEvent;
 import net.logicim.domain.common.propagation.TestVoltageConfiguration;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.constant.Constant;

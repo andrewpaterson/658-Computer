@@ -1,7 +1,7 @@
 package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.common.trace.TraceValue;
+import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.common.voltage.Voltage;
 
 import java.util.ArrayList;

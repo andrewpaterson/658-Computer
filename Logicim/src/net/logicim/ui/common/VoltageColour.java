@@ -2,7 +2,7 @@ package net.logicim.ui.common;
 
 import net.logicim.domain.common.port.OutputPortHelper;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 
 import java.awt.*;
@@ -130,7 +130,7 @@ public abstract class VoltageColour
     return colours.getTraceShort(shortVoltage);
   }
 
-  public static Color getColorForPorts(VoltageRepresentation colours, List<Port> ports, long time)
+  public static Color getColorForPorts(VoltageRepresentation colours, List<? extends Port> ports, long time)
   {
     if (time == -1)
     {

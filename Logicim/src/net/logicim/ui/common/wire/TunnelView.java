@@ -1,14 +1,18 @@
 package net.logicim.ui.common.wire;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.wire.TunnelData;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
+import java.util.List;
 
 public class TunnelView
     extends WireView
 {
+  protected List<Trace> traces;
   protected ConnectionView connection;
   protected String name;
   protected Int2D position;
@@ -65,6 +69,20 @@ public class TunnelView
   public void setPosition(int x, int y)
   {
     position.set(x, y);
+  }
+
+  public TunnelData save(boolean selected)
+  {
+    long[] ids = new long[traces.size()];
+    for (int i = 0; i < traces.size(); i++)
+    {
+      Trace trace = traces.get(i);
+      ids[i] = Trace.getId(trace);
+    }
+
+    return new TunnelData(ids,
+                          getPosition(),
+                          selected);
   }
 }
 

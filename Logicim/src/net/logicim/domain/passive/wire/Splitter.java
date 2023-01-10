@@ -1,4 +1,4 @@
-package net.logicim.domain.passive.wiring;
+package net.logicim.domain.passive.wire;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
@@ -12,8 +12,8 @@ import java.util.List;
 public class Splitter
     extends Passive
 {
-  public List<Port> startPorts;
-  public List<Port> endPorts;
+  public List<TracePort> startPorts;
+  public List<TracePort> endPorts;
 
   public Splitter(Circuit circuit, String name, int endCount)
   {
@@ -51,12 +51,12 @@ public class Splitter
   {
   }
 
-  public Port getEndPort(int i)
+  public TracePort getEndPort(int i)
   {
     return endPorts.get(i);
   }
 
-  public List<Port> getStartPorts()
+  public List<TracePort> getStartPorts()
   {
     return startPorts;
   }

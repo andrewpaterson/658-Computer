@@ -5,7 +5,7 @@ import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.integratedcircuit.extra.OscilloscopeView;
-import net.logicim.ui.integratedcircuit.standard.bus.SplitterView;
+import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
 import net.logicim.ui.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.integratedcircuit.standard.logic.and.NandGateView;

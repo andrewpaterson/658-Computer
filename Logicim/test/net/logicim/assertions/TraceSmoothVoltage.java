@@ -1,7 +1,7 @@
 package net.logicim.assertions;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 
 public class TraceSmoothVoltage
     extends SmoothVoltage

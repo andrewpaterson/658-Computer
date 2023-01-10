@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.bus;
+package net.logicim.ui.integratedcircuit.standard.passive.splitter;
 
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 

@@ -6,7 +6,7 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 
 import java.util.List;

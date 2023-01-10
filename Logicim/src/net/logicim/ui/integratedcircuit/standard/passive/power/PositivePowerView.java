@@ -2,8 +2,7 @@ package net.logicim.ui.integratedcircuit.standard.passive.power;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.data.integratedcircuit.standard.power.PositivePowerData;
+import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Colours;

@@ -232,10 +232,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.properties = properties;
   }
 
-  public abstract String getType();
-
-  protected abstract void createPortViews();
-
   public void setPosition(int x, int y)
   {
     this.position.set(x, y);
@@ -334,6 +330,10 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       port.updateBoundingBox(boundingBox);
     }
   }
+
+  public abstract String getType();
+
+  protected abstract void createPortViews();
 
   public abstract Component getComponent();
 

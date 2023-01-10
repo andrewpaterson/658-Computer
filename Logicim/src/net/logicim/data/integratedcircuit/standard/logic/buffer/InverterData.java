@@ -4,7 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.MultiPortData;
-import net.logicim.data.trace.TraceLoader;
+import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.CircuitEditor;

@@ -1,4 +1,4 @@
-package net.logicim.ui.integratedcircuit.standard.bus;
+package net.logicim.ui.integratedcircuit.standard.passive.splitter;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.CircuitEditor;

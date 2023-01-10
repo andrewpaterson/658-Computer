@@ -1,11 +1,10 @@
-package net.logicim.ui.integratedcircuit.standard.bus;
+package net.logicim.ui.integratedcircuit.standard.passive.splitter;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.splitter.SplitterData;
+import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.passive.wiring.Splitter;
+import net.logicim.domain.passive.wire.Splitter;
 import net.logicim.ui.CircuitEditor;
-import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
@@ -20,8 +19,6 @@ import java.util.List;
 public class SplitterView
     extends PassiveView<Splitter, SplitterProperties>
 {
-  protected List<PortView> endPorts;
-  protected PortView startPort;
   protected List<LineView> lineViews;
 
   public SplitterView(CircuitEditor circuitEditor,
@@ -30,9 +27,6 @@ public class SplitterView
                       SplitterProperties properties)
   {
     super(circuitEditor, position, rotation, properties);
-
-    this.endPorts = null;
-    this.startPort = null;
 
     circuitEditor.addPassiveView(this);
     createGraphics();
@@ -76,24 +70,6 @@ public class SplitterView
     Int2D p2 = createEndPosition(properties.endCount - 1);
     p2.x = centerX;
     lineViews.add(new LineView(this, p1, p2, 3));
-  }
-
-  @Override
-  public ConnectionView getConnectionsInGrid(int x, int y)
-  {
-    if (startPort.getGridPosition().equals(x, y))
-    {
-      return startPort.getConnection();
-    }
-
-    for (PortView portView : endPorts)
-    {
-      if (portView.getGridPosition().equals(x, y))
-      {
-        return portView.getConnection();
-      }
-    }
-    return null;
   }
 
   @Override
@@ -146,19 +122,17 @@ public class SplitterView
   @Override
   protected void createPortViews()
   {
-    startPort = new PortView(this, passive.getStartPorts(), createStartPosition());
-    endPorts = createEndPorts(properties);
+    new PortView(this, passive.getStartPorts(), createStartPosition());
+    createEndPorts(properties);
   }
 
-  protected List<PortView> createEndPorts(SplitterProperties properties)
+  protected void createEndPorts(SplitterProperties properties)
   {
-    ArrayList<PortView> portViews = new ArrayList<>(properties.endCount);
     for (int i = 0; i < properties.endCount; i++)
     {
       Int2D position = createEndPosition(i);
-      portViews.add(new PortView(this, passive.getEndPort(i), new Int2D(position)));
+      new PortView(this, passive.getEndPort(i), new Int2D(position));
     }
-    return portViews;
   }
 
   private Int2D createStartPosition()

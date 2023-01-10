@@ -1,9 +1,9 @@
-package net.logicim.data.integratedcircuit.standard.power;
+package net.logicim.data.passive.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
-import net.logicim.data.trace.TraceLoader;
+import net.logicim.data.wire.TraceLoader;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.integratedcircuit.standard.passive.power.GroundProperties;

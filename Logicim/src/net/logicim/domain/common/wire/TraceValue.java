@@ -1,4 +1,4 @@
-package net.logicim.domain.common.trace;
+package net.logicim.domain.common.wire;
 
 import net.logicim.common.util.StringUtil;
 

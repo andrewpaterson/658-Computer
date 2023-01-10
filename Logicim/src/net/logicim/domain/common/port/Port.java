@@ -2,7 +2,7 @@ package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 
 import java.util.Set;
 

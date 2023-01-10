@@ -4,9 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
-import net.logicim.data.trace.TraceLoader;
+import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.trace.Trace;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -49,7 +49,7 @@ public abstract class ComponentData
       PortView portView = componentView.getPort(i);
       MultiPortData multiPortData = ports.get(i);
 
-      List<Port> ports = portView.getPorts();
+      List<? extends Port> ports = portView.getPorts();
       for (int j = 0; j < ports.size(); j++)
       {
         Port port = ports.get(j);

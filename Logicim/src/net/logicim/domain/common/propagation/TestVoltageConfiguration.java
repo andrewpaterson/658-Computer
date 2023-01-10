@@ -1,6 +1,6 @@
 package net.logicim.domain.common.propagation;
 
-import net.logicim.domain.common.trace.TraceValue;
+import net.logicim.domain.common.wire.TraceValue;
 
 public class TestVoltageConfiguration
     extends VoltageConfigurationSource

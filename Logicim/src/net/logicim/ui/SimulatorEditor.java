@@ -222,7 +222,7 @@ public class SimulatorEditor
     {
       if (placementView != null)
       {
-        donePlacementView(placementView);
+        donePlaceComponent(placementView);
         placementView = null;
         calculateHighlightedPort();
       }
@@ -365,7 +365,17 @@ public class SimulatorEditor
     calculateHighlightedPort();
   }
 
-  private void donePlacementView(ComponentView<?> placementView)
+  public void startPlaceComponent(ViewFactory<?, ?> viewFactory)
+  {
+    Int2D position = getMousePositionOnGrid();
+    if (position != null)
+    {
+      discardPlacement();
+      placementView = viewFactory.create(circuitEditor, position, creationRotation);
+    }
+  }
+
+  private void donePlaceComponent(ComponentView<?> placementView)
   {
     circuitEditor.placeComponentView(placementView);
     pushUndo();
@@ -575,16 +585,6 @@ public class SimulatorEditor
     if (!(keyCode == KeyEvent.VK_ALT || keyCode == KeyEvent.VK_SHIFT || keyCode == KeyEvent.VK_CONTROL))
     {
       actions.keyPressed(keyCode);
-    }
-  }
-
-  public void startPlacementView(ViewFactory<?, ?> viewFactory)
-  {
-    Int2D position = getMousePositionOnGrid();
-    if (position != null)
-    {
-      discardPlacement();
-      placementView = viewFactory.create(circuitEditor, position, creationRotation);
     }
   }
 

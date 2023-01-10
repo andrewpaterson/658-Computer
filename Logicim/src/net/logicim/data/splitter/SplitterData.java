@@ -29,14 +29,18 @@ public class SplitterData
                       String name,
                       List<MultiPortData> ports,
                       boolean selected,
+                      int bitWidth,
                       int endCount,
                       int endOffset,
-                      int girdSpacing)
+                      int girdSpacing,
+                      int[] splitIndices)
   {
     super(position, rotation, name, ports, selected);
+    this.bitWidth = bitWidth;
     this.endCount = endCount;
     this.endOffset = endOffset;
     this.girdSpacing = girdSpacing;
+    this.splitIndices = splitIndices;
   }
 
   @Override

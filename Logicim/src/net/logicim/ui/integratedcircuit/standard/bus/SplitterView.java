@@ -128,9 +128,11 @@ public class SplitterView
                             properties.name,
                             savePorts(),
                             selected,
+                            properties.bitWidth,
                             properties.endCount,
                             properties.endOffset,
-                            properties.gridSpacing);
+                            properties.gridSpacing,
+                            properties.splitIndices);
   }
 
   @Override
@@ -180,30 +182,6 @@ public class SplitterView
   @Override
   public void simulationStarted(Simulation simulation)
   {
-  }
-
-  @Override
-  public List<ConnectionView> getConnectedConnections(ConnectionView connection)
-  {
-    List<ConnectionView> result = new ArrayList<>();
-    for (PortView endPort : endPorts)
-    {
-      if (endPort.getConnection() == connection)
-      {
-        result.add(startPort.getConnection());
-        return result;
-      }
-    }
-
-    if (startPort.getConnection() == connection)
-    {
-      for (PortView endPort : endPorts)
-      {
-        result.add(endPort.getConnection());
-      }
-    }
-
-    return result;
   }
 }
 

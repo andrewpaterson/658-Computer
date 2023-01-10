@@ -175,18 +175,6 @@ public class TraceView
     line.getEnd().add(length);
   }
 
-  @Override
-  public List<ConnectionView> getConnectedConnections(ConnectionView connection)
-  {
-    ArrayList<ConnectionView> result = new ArrayList<>();
-    ConnectionView opposite = getOpposite(connection);
-    if (opposite != null)
-    {
-      result.add(opposite);
-    }
-    return result;
-  }
-
   public Int2D getStartPosition()
   {
     return line.getStart();

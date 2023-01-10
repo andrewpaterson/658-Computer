@@ -529,14 +529,15 @@ public class CircuitEditor
         List<View> components = currentConnection.getConnectedComponents();
         if (components != null)
         {
-          for (View component : components)
+          for (View view : components)
           {
-            List<ConnectionView> connectedConnections = component.getConnectedConnections(currentConnection);
-            for (ConnectionView connectedConnection : connectedConnections)
+            if (view instanceof TraceView)
             {
-              if (!connectionsNet.contains(connectedConnection))
+              TraceView traceView = (TraceView) view;
+              ConnectionView opposite = traceView.getOpposite(currentConnection);
+              if (opposite != null && !connectionsNet.contains(opposite))
               {
-                connectionsToProcess.add(connectedConnection);
+                connectionsToProcess.add(opposite);
               }
             }
           }

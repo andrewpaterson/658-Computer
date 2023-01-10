@@ -18,7 +18,7 @@ public class CreateComponentView
   @Override
   public void executeEditorAction()
   {
-    editor.startPlacementView(ViewFactoryStore.getInstance().get(discreteViewClass));
+    editor.startPlaceComponent(ViewFactoryStore.getInstance().get(discreteViewClass));
   }
 }
 

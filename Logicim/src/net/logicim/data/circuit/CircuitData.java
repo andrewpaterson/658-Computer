@@ -12,7 +12,7 @@ public class CircuitData
 {
   public TimelineData timeline;
   public List<IntegratedCircuitData<?, ?>> integratedCircuits;
-  public List<PassiveData> passives;
+  public List<PassiveData<?>> passives;
   public List<TraceData> traces;
 
   public CircuitData()
@@ -21,7 +21,7 @@ public class CircuitData
 
   public CircuitData(TimelineData timeline,
                      List<IntegratedCircuitData<?, ?>> integratedCircuits,
-                     List<PassiveData> passives,
+                     List<PassiveData<?>> passives,
                      List<TraceData> traces)
   {
     this.timeline = timeline;

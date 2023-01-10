@@ -1000,10 +1000,10 @@ public class CircuitEditor
       semiconductorDatas.add(integratedCircuitData);
     }
 
-    ArrayList<PassiveData> passiveDatas = new ArrayList<>();
+    ArrayList<PassiveData<?>> passiveDatas = new ArrayList<>();
     for (PassiveView<?, ?> passiveView : passiveViews)
     {
-      PassiveData passiveData = passiveView.save(selection.contains(passiveView));
+      PassiveData<?> passiveData = passiveView.save(selection.contains(passiveView));
       if (passiveData == null)
       {
         throw new SimulatorException("%s [%s] save may not return null.", passiveView.getClass().getSimpleName(), passiveView.getName());
@@ -1037,7 +1037,7 @@ public class CircuitEditor
       traceData.create(this, traceLoader);
     }
 
-    for (PassiveData passiveData : circuitData.passives)
+    for (PassiveData<?> passiveData : circuitData.passives)
     {
       passiveData.createAndLoad(this, traceLoader);
     }

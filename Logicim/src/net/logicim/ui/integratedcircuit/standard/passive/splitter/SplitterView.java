@@ -33,6 +33,22 @@ public class SplitterView
     finaliseView();
   }
 
+  @Override
+  protected void createPortViews()
+  {
+    new PortView(this, passive.getStartPorts(), createStartPosition());
+    createEndPorts(properties);
+  }
+
+  protected void createEndPorts(SplitterProperties properties)
+  {
+    for (int i = 0; i < properties.endCount; i++)
+    {
+      Int2D position = createEndPosition(i);
+      new PortView(this, passive.getEndPort(i), new Int2D(position));
+    }
+  }
+
   private void createGraphics()
   {
     lineViews = new ArrayList<>();
@@ -117,22 +133,6 @@ public class SplitterView
     return new Splitter(circuitEditor.getCircuit(),
                         properties.name,
                         properties.endCount);
-  }
-
-  @Override
-  protected void createPortViews()
-  {
-    new PortView(this, passive.getStartPorts(), createStartPosition());
-    createEndPorts(properties);
-  }
-
-  protected void createEndPorts(SplitterProperties properties)
-  {
-    for (int i = 0; i < properties.endCount; i++)
-    {
-      Int2D position = createEndPosition(i);
-      new PortView(this, passive.getEndPort(i), new Int2D(position));
-    }
   }
 
   private Int2D createStartPosition()

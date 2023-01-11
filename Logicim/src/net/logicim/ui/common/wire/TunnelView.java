@@ -3,19 +3,32 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TunnelView
     extends WireView
 {
+  protected Set<TunnelView> tunnels;
   protected List<Trace> traces;
   protected ConnectionView connection;
   protected String name;
   protected Int2D position;
+
+  public TunnelView(CircuitEditor circuitEditor, Int2D position, String name)
+  {
+    this.connection = circuitEditor.getOrAddConnection(position, this);
+    this.position = position.clone();
+    this.traces = new ArrayList<>();
+    this.name = name;
+    this.tunnels = circuitEditor.addTunnel(this);
+  }
 
   @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
@@ -83,6 +96,21 @@ public class TunnelView
     return new TunnelData(ids,
                           getPosition(),
                           selected);
+  }
+
+  public Set<TunnelView> getTunnels()
+  {
+    return tunnels;
+  }
+
+  public List<Trace> getTraces()
+  {
+    return traces;
+  }
+
+  public ConnectionView getConnection()
+  {
+    return connection;
   }
 }
 

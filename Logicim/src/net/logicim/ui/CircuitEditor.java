@@ -23,6 +23,7 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -34,6 +35,7 @@ public class CircuitEditor
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
   protected Set<PassiveView<?, ?>> passiveViews;
   protected Set<TraceView> traceViews;
+  protected Map<String, Set<TunnelView>> tunnelViews;
   protected Circuit circuit;
   protected Simulation simulation;
   protected List<View> selection;
@@ -44,6 +46,7 @@ public class CircuitEditor
     this.simulation = circuit.resetSimulation();
     this.integratedCircuitViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
+    this.tunnelViews = new LinkedHashMap<>();
     this.passiveViews = new LinkedHashSet<>();
     this.selection = new ArrayList<>();
   }
@@ -1411,6 +1414,22 @@ public class CircuitEditor
     synchronized (this)
     {
       return traceViews.remove(traceView);
+    }
+  }
+
+  public Set<TunnelView> addTunnel(TunnelView tunnelView)
+  {
+    synchronized (this)
+    {
+      String name = tunnelView.getName();
+      Set<TunnelView> tunnelViews = this.tunnelViews.get(name);
+      if (tunnelViews == null)
+      {
+        tunnelViews = new LinkedHashSet<>();
+        this.tunnelViews.put(name, tunnelViews);
+      }
+      tunnelViews.add(tunnelView);
+      return tunnelViews;
     }
   }
 }

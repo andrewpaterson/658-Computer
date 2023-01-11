@@ -2,7 +2,6 @@ package net.logicim.domain;
 
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.event.Event;
-import net.logicim.domain.common.port.event.PortEvent;
 
 public class Simulation
 {

@@ -37,7 +37,6 @@ public class Splitter
   @Override
   public void traceConnected(Simulation simulation, Port port)
   {
-
   }
 
   @Override

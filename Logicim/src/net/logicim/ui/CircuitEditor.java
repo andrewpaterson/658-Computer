@@ -901,12 +901,12 @@ public class CircuitEditor
   private Set<ConnectionView> getConnectionsOnLine(Line line)
   {
     Set<ConnectionView> notStraightConnections = new LinkedHashSet<>();
-    notStraightConnections.addAll(getDiscretePortConnectionsOnLine(line));
+    notStraightConnections.addAll(getIntegratedCircuitPortConnectionsOnLine(line));
     notStraightConnections.addAll(getTraceConnectionsOnLine(line));
     return notStraightConnections;
   }
 
-  private Set<ConnectionView> getDiscretePortConnectionsOnLine(Line line)
+  private Set<ConnectionView> getIntegratedCircuitPortConnectionsOnLine(Line line)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)

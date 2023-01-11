@@ -24,6 +24,7 @@ import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
@@ -1076,6 +1077,35 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
+  public void createComponentView(ComponentView<?> componentView)
+  {
+    List<PortView> ports = componentView.getPorts();
+    for (PortView portView : ports)
+    {
+      Int2D portPosition = portView.getGridPosition();
+      ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
+      portView.setConnection(connectionView);
+    }
+  }
+
+  public Set<PortView> connectComponentView(ComponentView<?> componentView)
+  {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    List<PortView> ports = componentView.getPorts();
+
+    for (PortView portView : ports)
+    {
+      PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+      portTraceFinder.findAndConnectTraces(portView.getConnection());
+      updatedPortViews.addAll(portTraceFinder.getPortViews());
+    }
+
+    componentView.enable(simulation);
+    componentView.simulationStarted(simulation);
+
+    return updatedPortViews;
+  }
+
   public void createConnectionViews(ComponentView<?> componentView)
   {
     List<PortView> ports = componentView.getPorts();
@@ -1108,7 +1138,8 @@ public class CircuitEditor
 
   public void placeComponentView(ComponentView<?> componentView)
   {
-    Set<PortView> updatedPortViews = createAndConnectComponentView(componentView);
+    createComponentView(componentView);
+    Set<PortView> updatedPortViews = connectComponentView(componentView);
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();

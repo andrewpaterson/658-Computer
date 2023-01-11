@@ -16,6 +16,7 @@ import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.shape.common.ShapeView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,6 +53,15 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     if ((integratedCircuit.getPorts().size() > 0) && (ports.size() == 0))
     {
       throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
+    }
+
+    for (PortView portView : ports)
+    {
+      List<? extends Port> ports = portView.getPorts();
+      if (ports.size() < 1)
+      {
+        throw new SimulatorException("PortView must have at lease one port.");
+      }
     }
 
     List<Port> missing = new ArrayList<>();

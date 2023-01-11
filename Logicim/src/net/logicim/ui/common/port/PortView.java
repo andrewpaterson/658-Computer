@@ -305,5 +305,14 @@ public class PortView
   {
     return ports.size();
   }
+
+  public Port getPort(int index)
+  {
+    if (index < ports.size())
+    {
+      return ports.get(index);
+    }
+    return null;
+  }
 }
 

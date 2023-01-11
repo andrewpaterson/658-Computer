@@ -310,6 +310,18 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return ports.get(index);
   }
 
+  public PortView getPort(ConnectionView connectionView)
+  {
+    for (PortView portView : ports)
+    {
+      if (portView.getConnection() == connectionView)
+      {
+        return portView;
+      }
+    }
+    return null;
+  }
+
   public Int2D getConnectionGridPosition(ConnectionView connectionView)
   {
     for (PortView portView : ports)

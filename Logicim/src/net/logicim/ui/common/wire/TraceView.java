@@ -5,7 +5,7 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
 

@@ -34,8 +34,7 @@ public class FamilyPropertyEditor
   @Override
   public Object getValue()
   {
-    Family family = FamilyStore.getInstance().get((String) comboBox.getSelectedItem());
-    return family;
+    return FamilyStore.getInstance().get((String) comboBox.getSelectedItem());
   }
 
   @Override

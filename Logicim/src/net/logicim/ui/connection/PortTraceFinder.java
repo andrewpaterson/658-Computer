@@ -7,7 +7,7 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.WireView;
-import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.util.*;
 

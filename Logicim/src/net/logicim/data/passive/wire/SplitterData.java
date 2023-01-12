@@ -4,10 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterProperties;
-import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterProperties;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.util.List;
 

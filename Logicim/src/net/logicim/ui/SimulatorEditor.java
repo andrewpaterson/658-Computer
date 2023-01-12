@@ -17,8 +17,9 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
-import net.logicim.ui.integratedcircuit.factory.ViewFactory;
+import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;

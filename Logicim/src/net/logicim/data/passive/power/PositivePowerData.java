@@ -4,10 +4,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.integratedcircuit.standard.passive.power.PositivePowerProperties;
-import net.logicim.ui.integratedcircuit.standard.passive.power.PositivePowerView;
+import net.logicim.ui.simulation.component.passive.power.PositivePowerProperties;
+import net.logicim.ui.simulation.component.passive.power.PositivePowerView;
 
 import java.util.List;
 

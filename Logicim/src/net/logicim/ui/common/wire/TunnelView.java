@@ -3,7 +3,7 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 

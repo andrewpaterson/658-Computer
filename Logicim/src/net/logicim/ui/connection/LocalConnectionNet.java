@@ -7,7 +7,7 @@ import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.WireView;
-import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

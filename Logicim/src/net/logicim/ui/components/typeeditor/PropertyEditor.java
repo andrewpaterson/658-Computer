@@ -8,3 +8,4 @@ public interface PropertyEditor
 
   JComponent getComponent();
 }
+

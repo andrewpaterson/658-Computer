@@ -7,10 +7,10 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
-import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.integratedcircuit.standard.logic.common.LogicGateProperties;
-import net.logicim.ui.integratedcircuit.standard.logic.xor.XnorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 
 import java.util.List;
 

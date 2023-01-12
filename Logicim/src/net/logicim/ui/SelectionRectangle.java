@@ -53,5 +53,15 @@ public class SelectionRectangle
               viewport.transformScreenToGridY((float) y));
     }
   }
+
+  public Float2D getStart()
+  {
+    return start;
+  }
+
+  public Float2D getEnd()
+  {
+    return end;
+  }
 }
 

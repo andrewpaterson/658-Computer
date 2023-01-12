@@ -11,7 +11,7 @@ import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.file.reader.LogicimFileReader;
-import net.logicim.ui.CircuitEditor;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.List;
 

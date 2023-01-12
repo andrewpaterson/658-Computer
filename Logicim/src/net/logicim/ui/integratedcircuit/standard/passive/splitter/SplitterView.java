@@ -1,5 +1,6 @@
 package net.logicim.ui.integratedcircuit.standard.passive.splitter;
 
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
@@ -12,6 +13,7 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
+import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 import java.util.List;
@@ -21,6 +23,8 @@ public class SplitterView
     extends PassiveView<Splitter, SplitterProperties>
 {
   protected List<LineView> lineViews;
+  protected RectangleView rectangleView;
+
   protected List<PortView> endPortViews;
   protected PortView startPortView;
 
@@ -75,7 +79,7 @@ public class SplitterView
     }
     int centerX = 0;
     endPosition.x = centerX;
-    LineView startLineView = new LineView(this, startPosition, endPosition, 3);
+    LineView startLineView = new LineView(this, startPosition, endPosition, 4);
     lineViews.add(startLineView);
 
     for (int i = 0; i < properties.fanOut; i++)
@@ -87,11 +91,11 @@ public class SplitterView
       lineViews.add(lineView);
     }
 
-    Int2D p1 = createEndPosition(0);
-    p1.x = centerX;
-    Int2D p2 = createEndPosition(properties.fanOut - 1);
-    p2.x = centerX;
-    lineViews.add(new LineView(this, p1, p2, 3));
+    Float2D p1 = new Float2D(createEndPosition(0));
+    p1.x = centerX - 0.1f;
+    Float2D p2 = new Float2D(createEndPosition(properties.fanOut - 1));
+    p2.x = centerX + 0.1f;
+    rectangleView = new RectangleView(this, p1, p2, true, true);
   }
 
   @Override
@@ -106,6 +110,7 @@ public class SplitterView
     {
       lineView.paint(graphics, viewport);
     }
+    rectangleView.paint(graphics, viewport);
 
     paintPorts(graphics, viewport, time);
 

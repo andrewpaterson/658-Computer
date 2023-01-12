@@ -256,7 +256,7 @@ public class CircuitEditor
       {
         if (connectedComponent instanceof TraceView)
         {
-          ((TraceView) connectedComponent).disconnectTraceNet();
+          ((TraceView) connectedComponent).disconnectTraces();
         }
         else if (connectedComponent instanceof IntegratedCircuitView)
         {
@@ -275,7 +275,7 @@ public class CircuitEditor
   public Set<PortView> connectNewConnections(ConnectionView connectionView)
   {
     Set<ConnectionView> connectionsNet = findConnections(connectionView);
-    return connectNewTraceNet(connectionsNet);
+    return connectNewTraces(connectionsNet);
   }
 
   public Simulation reset()
@@ -555,7 +555,7 @@ public class CircuitEditor
     }
   }
 
-  public Set<PortView> connectNewTraceNet(Set<ConnectionView> connectionsNet)
+  public Set<PortView> connectNewTraces(Set<ConnectionView> connectionsNet)
   {
     Set<PortView> connectedPorts = new LinkedHashSet<>();
     Set<TraceView> connectedTraceViews = new LinkedHashSet<>();
@@ -594,11 +594,11 @@ public class CircuitEditor
 
     for (PortView connectedPortView : connectedPorts)
     {
-      connectedPortView.connectTraceNet(traces, simulation);
+      connectedPortView.connectTraces(traces, simulation);
     }
     for (TraceView connectedTraceView : connectedTraceViews)
     {
-      connectedTraceView.connectTraceNet(traces);
+      connectedTraceView.connectTraces(traces);
     }
     return connectedPorts;
   }

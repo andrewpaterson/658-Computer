@@ -41,7 +41,7 @@ public class TraceData
       Trace trace = traceLoader.create(id);
       traces.add(trace);
     }
-    traceView.connectTraceNet(traces);
+    traceView.connectTraces(traces);
 
     if (selected)
     {

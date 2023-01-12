@@ -6,9 +6,13 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PortTraceFinder
 {
@@ -48,14 +52,23 @@ public class PortTraceFinder
     for (LocalConnectionNet connectionNet : connectionNets)
     {
       List<PortConnections> portConnections = connectionNet.getPortConnections();
+      List<Trace> traces = new ArrayList<>();
       for (PortConnections portConnection : portConnections)
       {
         Trace trace = new Trace();
+        traces.add(trace);
         List<Port> ports = portConnection.getConnectedPorts();
         for (Port port : ports)
         {
           port.disconnect(simulation);
           port.connect(trace);
+        }
+
+        List<ComponentConnection<WireView>> wireConnections = connectionNet.getConnectedWires();
+        for (ComponentConnection<WireView> wireConnection : wireConnections)
+        {
+          WireView wireView = wireConnection.component;
+          wireView.connectTraces(traces);
         }
       }
     }

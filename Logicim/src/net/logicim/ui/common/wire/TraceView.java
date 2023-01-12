@@ -16,7 +16,6 @@ import java.util.List;
 public class TraceView
     extends WireView
 {
-  protected List<Trace> traces;
   protected Line line;
   protected ConnectionView startConnection;
   protected ConnectionView endConnection;
@@ -265,11 +264,6 @@ public class TraceView
     }
   }
 
-  public void connectTraceNet(List<Trace> traces)
-  {
-    this.traces = traces;
-  }
-
   @Override
   public String getName()
   {
@@ -280,11 +274,6 @@ public class TraceView
   public String getDescription()
   {
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
-  }
-
-  public void disconnectTraceNet()
-  {
-    traces = new ArrayList<>();
   }
 
   public void removed()

@@ -182,7 +182,7 @@ public class PortView
     return ports;
   }
 
-  public void connectTraceNet(List<Trace> traces, Simulation simulation)
+  public void connectTraces(List<Trace> traces, Simulation simulation)
   {
     for (int i = 0; i < ports.size(); i++)
     {

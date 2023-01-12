@@ -9,14 +9,12 @@ import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class TunnelView
     extends WireView
 {
   protected Set<TunnelView> tunnels;
-  protected List<Trace> traces;
   protected ConnectionView connection;
   protected String name;
   protected Int2D position;
@@ -101,11 +99,6 @@ public class TunnelView
   public Set<TunnelView> getTunnels()
   {
     return tunnels;
-  }
-
-  public List<Trace> getTraces()
-  {
-    return traces;
   }
 
   public ConnectionView getConnection()

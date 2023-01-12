@@ -23,7 +23,7 @@ public class OscilloscopeViewFactory
                   rotation,
                   new OscilloscopeProperties("",
                                              DefaultFamily.get(),
-                                             4,
+                                             2,
                                              32,
                                              4,
                                              30,

@@ -44,7 +44,11 @@ public class PortTraceFinder
     while (stackIndex < splitterViewStack.size())
     {
       ComponentConnection<SplitterView> splitterViewConnection = splitterViewStack.get(stackIndex);
-      processLocalConnections(splitterViewConnection.connection);
+      ConnectionView connectionView = splitterViewConnection.connection;
+      if (!processedSplitterViewConnections.containsKey(connectionView))
+      {
+        processLocalConnections(connectionView);
+      }
 
       stackIndex++;
     }

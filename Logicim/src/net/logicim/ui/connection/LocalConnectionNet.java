@@ -69,16 +69,13 @@ public class LocalConnectionNet
         if (connectedView instanceof ComponentView)
         {
           ComponentView<?> componentView = (ComponentView<?>) connectedView;
-          if (!(componentView instanceof SplitterView))
+          PortView portView = componentView.getPort(connectionView);
+          if (portView.numberOfPorts() < minimumPorts)
           {
-            PortView portView = componentView.getPort(connectionView);
-            if (portView.numberOfPorts() < minimumPorts)
+            minimumPorts = portView.numberOfPorts();
+            if (minimumPorts == 1)
             {
-              minimumPorts = portView.numberOfPorts();
-              if (minimumPorts == 1)
-              {
-                break;
-              }
+              break;
             }
           }
         }
@@ -161,6 +158,19 @@ public class LocalConnectionNet
       portViews.add(portView);
     }
     return portViews;
+  }
+
+  public String toString()
+  {
+    StringBuilder builder = new StringBuilder();
+    for (ComponentConnection<ComponentView<?>> connectedComponent : connectedComponents)
+    {
+      ComponentView<?> component = connectedComponent.component;
+      ConnectionView connection = connectedComponent.connection;
+
+      builder.append(component.getType() + " (" + connection.getGridPosition() + ")@" + System.identityHashCode(connection) + "\n");
+    }
+    return builder.toString();
   }
 }
 

@@ -1095,9 +1095,12 @@ public class CircuitEditor
 
     for (PortView portView : ports)
     {
-      PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-      portTraceFinder.findAndConnectTraces(portView.getConnection());
-      updatedPortViews.addAll(portTraceFinder.getPortViews());
+      if (!updatedPortViews.contains(portView))
+      {
+        PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+        portTraceFinder.findAndConnectTraces(portView.getConnection());
+        updatedPortViews.addAll(portTraceFinder.getPortViews());
+      }
     }
 
     componentView.enable(simulation);

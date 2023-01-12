@@ -8,11 +8,11 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -19,12 +19,12 @@ import static java.awt.GridBagConstraints.VERTICAL;
 import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
-public class PropertiesPanel
+public class ReflectivePropertiesPanel
     extends JPanel
 {
   protected Map<Field, PropertyEditor> fieldProperties;
 
-  public PropertiesPanel(ComponentProperties properties)
+  public ReflectivePropertiesPanel(ComponentProperties properties)
   {
     super(new GridBagLayout());
 

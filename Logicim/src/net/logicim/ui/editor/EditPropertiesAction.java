@@ -28,7 +28,7 @@ public class EditPropertiesAction
 
     if (componentView != null)
     {
-      new EditPropertiesDialogHelper(parentFrame, editor, componentView).showPropertyEditorDialog();
+      new EditPropertiesDialogHelper().showPropertyEditorDialog(parentFrame, editor, componentView);
     }
   }
 }

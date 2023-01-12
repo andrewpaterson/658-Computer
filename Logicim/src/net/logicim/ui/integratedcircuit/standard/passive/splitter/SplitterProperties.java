@@ -1,5 +1,6 @@
 package net.logicim.ui.integratedcircuit.standard.passive.splitter;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ public class SplitterProperties
     extends ComponentProperties
 {
   protected int bitWidth;
-  protected int endCount;
+  protected int fanOut;
   protected int endOffset;
   protected int gridSpacing;
   protected int[] splitIndices;
@@ -19,31 +20,36 @@ public class SplitterProperties
 
   public SplitterProperties(String name,
                             int bitWidth,
-                            int endCount,
+                            int fanOut,
                             int endOffset,
                             int gridSpacing,
                             int[] splitIndices)
   {
     super(name);
     this.bitWidth = bitWidth;
-    this.endCount = endCount;
+    this.fanOut = fanOut;
     this.endOffset = endOffset;
     this.gridSpacing = gridSpacing;
     this.splitIndices = splitIndices;
+
+    if (splitIndices.length != bitWidth)
+    {
+      throw new SimulatorException("Split indices size must match bit-width");
+    }
   }
 
   public SplitterProperties(String name,
                             int bitWidth,
-                            int endCount,
+                            int fanOut,
                             int endOffset,
                             int gridSpacing)
   {
     this(name,
          bitWidth,
-         endCount,
+         fanOut,
          endOffset,
          gridSpacing,
-         createSplitIndices(bitWidth, endCount));
+         createSplitIndices(bitWidth, fanOut));
   }
 
   private static int[] createSplitIndices(int bitWidth, int endCount)

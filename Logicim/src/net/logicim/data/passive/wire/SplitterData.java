@@ -15,7 +15,7 @@ public class SplitterData
     extends PassiveData<SplitterView>
 {
   protected int bitWidth;
-  protected int endCount;
+  protected int fanOut;
   protected int endOffset;
   protected int girdSpacing;
   protected int[] splitIndices;
@@ -30,14 +30,14 @@ public class SplitterData
                       List<MultiPortData> ports,
                       boolean selected,
                       int bitWidth,
-                      int endCount,
+                      int fanOut,
                       int endOffset,
                       int girdSpacing,
                       int[] splitIndices)
   {
     super(position, rotation, name, ports, selected);
     this.bitWidth = bitWidth;
-    this.endCount = endCount;
+    this.fanOut = fanOut;
     this.endOffset = endOffset;
     this.girdSpacing = girdSpacing;
     this.splitIndices = splitIndices;
@@ -51,7 +51,7 @@ public class SplitterData
                             rotation,
                             new SplitterProperties(name,
                                                    bitWidth,
-                                                   endCount,
+                                                   fanOut,
                                                    endOffset,
                                                    girdSpacing,
                                                    splitIndices));

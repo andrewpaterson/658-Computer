@@ -3,6 +3,7 @@ package net.logicim.ui.integratedcircuit.standard.passive.splitter;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.wire.Splitter;
 import net.logicim.ui.CircuitEditor;
 import net.logicim.ui.common.Rotation;
@@ -13,13 +14,15 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 public class SplitterView
     extends PassiveView<Splitter, SplitterProperties>
 {
   protected List<LineView> lineViews;
+  protected List<PortView> endPortViews;
+  protected PortView startPortView;
 
   public SplitterView(CircuitEditor circuitEditor,
                       Int2D position,
@@ -36,17 +39,20 @@ public class SplitterView
   @Override
   protected void createPortViews()
   {
-    new PortView(this, passive.getStartPorts(), createStartPosition());
-    createEndPorts(properties);
+    startPortView = new PortView(this, passive.getStartPorts(), createStartPosition());
+    endPortViews = createEndPorts(properties);
   }
 
-  protected void createEndPorts(SplitterProperties properties)
+  protected List<PortView> createEndPorts(SplitterProperties properties)
   {
-    for (int i = 0; i < properties.endCount; i++)
+    List<PortView> portViews = new ArrayList<>();
+    for (int i = 0; i < properties.fanOut; i++)
     {
       Int2D position = createEndPosition(i);
-      new PortView(this, passive.getEndPort(i), new Int2D(position));
+      PortView portView = new PortView(this, passive.getEndPort(i), new Int2D(position));
+      portViews.add(portView);
     }
+    return portViews;
   }
 
   private void createGraphics()
@@ -58,9 +64,9 @@ public class SplitterView
     {
       endPosition = createEndPosition(0);
     }
-    else if (startPosition.y < -(properties.endCount - 1) * properties.gridSpacing)
+    else if (startPosition.y < -(properties.fanOut - 1) * properties.gridSpacing)
     {
-      endPosition = createEndPosition(properties.endCount - 1);
+      endPosition = createEndPosition(properties.fanOut - 1);
     }
     else
     {
@@ -72,7 +78,7 @@ public class SplitterView
     LineView startLineView = new LineView(this, startPosition, endPosition, 3);
     lineViews.add(startLineView);
 
-    for (int i = 0; i < properties.endCount; i++)
+    for (int i = 0; i < properties.fanOut; i++)
     {
       Int2D p1 = createEndPosition(i);
       Int2D p2 = p1.clone();
@@ -83,7 +89,7 @@ public class SplitterView
 
     Int2D p1 = createEndPosition(0);
     p1.x = centerX;
-    Int2D p2 = createEndPosition(properties.endCount - 1);
+    Int2D p2 = createEndPosition(properties.fanOut - 1);
     p2.x = centerX;
     lineViews.add(new LineView(this, p1, p2, 3));
   }
@@ -121,7 +127,7 @@ public class SplitterView
                             savePorts(),
                             selected,
                             properties.bitWidth,
-                            properties.endCount,
+                            properties.fanOut,
                             properties.endOffset,
                             properties.gridSpacing,
                             properties.splitIndices);
@@ -132,7 +138,7 @@ public class SplitterView
   {
     return new Splitter(circuitEditor.getCircuit(),
                         properties.name,
-                        properties.endCount);
+                        properties.fanOut);
   }
 
   private Int2D createStartPosition()
@@ -148,14 +154,34 @@ public class SplitterView
   @Override
   public void clampProperties()
   {
-    properties.endCount = PropertyClamp.clamp(properties.endCount, 1, PropertyClamp.MAX);
+    properties.fanOut = PropertyClamp.clamp(properties.fanOut, 1, PropertyClamp.MAX);
     properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);
-    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.endCount * properties.gridSpacing - 1);
+    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
   }
 
   @Override
   public void simulationStarted(Simulation simulation)
   {
+  }
+
+  public Map<Port, Port> getBidirectionalPortMap()
+  {
+    List<? extends Port> ports = startPortView.getPorts();
+    int[] endPortViewPortIndex = new int[properties.fanOut];
+    Arrays.fill(endPortViewPortIndex, 0);
+
+    HashMap<Port, Port> result = new HashMap<>();
+
+    for (int i = 0; i < properties.bitWidth; i++)
+    {
+      Port startPort = ports.get(i);
+      int endPortIndex = properties.splitIndices[i];
+      PortView endPortView = endPortViews.get(endPortIndex);
+      Port endPort = endPortView.getPort(endPortViewPortIndex[endPortIndex]);
+      result.put(startPort, endPort);
+      result.put(endPort, startPort);
+    }
+    return result;
   }
 }
 

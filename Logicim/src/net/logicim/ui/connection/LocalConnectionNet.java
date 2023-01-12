@@ -1,5 +1,7 @@
 package net.logicim.ui.connection;
 
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -8,6 +10,7 @@ import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +20,9 @@ public class LocalConnectionNet
   protected List<ComponentConnection<WireView>> connectedWires;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  protected List<PortConnections> portConnections;
+  protected List<WireConnection> wireConnections;
+
+  protected Set<Trace> traces = new LinkedHashSet<>();
 
   public LocalConnectionNet(ConnectionView inputConnectionView)
   {
@@ -32,14 +37,14 @@ public class LocalConnectionNet
     int minimumPorts = calculateMinimumPorts(connections);
     if (isValid(minimumPorts))
     {
-      portConnections = createPortConnections(minimumPorts);
+      wireConnections = createPortConnections(minimumPorts);
 
       findConnections(connections);
       traceConnections();
     }
     else
     {
-      portConnections = new ArrayList<>();
+      wireConnections = new ArrayList<>();
     }
   }
 
@@ -48,14 +53,14 @@ public class LocalConnectionNet
     return minimumPorts != Integer.MAX_VALUE;
   }
 
-  protected List<PortConnections> createPortConnections(int minimumPorts)
+  protected List<WireConnection> createPortConnections(int minimumPorts)
   {
-    List<PortConnections> portConnections = new ArrayList<>(minimumPorts);
+    List<WireConnection> wireConnections = new ArrayList<>(minimumPorts);
     for (int i = 0; i < minimumPorts; i++)
     {
-      portConnections.add(new PortConnections());
+      wireConnections.add(new WireConnection(this));
     }
-    return portConnections;
+    return wireConnections;
   }
 
   protected int calculateMinimumPorts(Set<ConnectionView> connections)
@@ -116,12 +121,18 @@ public class LocalConnectionNet
       ComponentView<?> componentView = connectedComponent.component;
       ConnectionView connection = connectedComponent.connection;
 
+      boolean isSplitter = componentView instanceof SplitterView;
       PortView portView = componentView.getPort(connection);
 
-      for (int i = 0; i < portConnections.size(); i++)
+      for (int i = 0; i < wireConnections.size(); i++)
       {
-        PortConnections portConnection = portConnections.get(i);
-        portConnection.add(portView.getPort(i));
+        WireConnection portConnection = wireConnections.get(i);
+        Port port = portView.getPort(i);
+        portConnection.addPort(port);
+        if (isSplitter)
+        {
+          portConnection.addSplitterPort(port);
+        }
       }
     }
   }
@@ -141,9 +152,9 @@ public class LocalConnectionNet
     return splitterViews;
   }
 
-  public List<PortConnections> getPortConnections()
+  public List<WireConnection> getWireConnections()
   {
-    return portConnections;
+    return wireConnections;
   }
 
   public List<PortView> getPortViews()
@@ -171,6 +182,16 @@ public class LocalConnectionNet
       builder.append(component.getType() + " (" + connection.getGridPosition() + ")@" + System.identityHashCode(connection) + "\n");
     }
     return builder.toString();
+  }
+
+  public void addTrace(Trace trace)
+  {
+    traces.add(trace);
+  }
+
+  public List<Trace> getTraces()
+  {
+    return new ArrayList<>(traces);
   }
 }
 

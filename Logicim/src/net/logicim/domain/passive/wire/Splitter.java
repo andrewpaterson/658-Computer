@@ -15,19 +15,19 @@ public class Splitter
   public List<TracePort> startPorts;
   public List<TracePort> endPorts;
 
-  public Splitter(Circuit circuit, String name, int endCount)
+  public Splitter(Circuit circuit, String name, int fanOut)
   {
     super(circuit, name);
 
-    startPorts = new ArrayList<>(endCount);
-    for (int i = 0; i < endCount; i++)
+    startPorts = new ArrayList<>(fanOut);
+    for (int i = 0; i < fanOut; i++)
     {
       startPorts.add(new TracePort("Start " + i, this));
     }
     ports.addAll(startPorts);
 
-    endPorts = new ArrayList<>(endCount);
-    for (int i = 0; i < endCount; i++)
+    endPorts = new ArrayList<>(fanOut);
+    for (int i = 0; i < fanOut; i++)
     {
       endPorts.add(new TracePort("End " + i, this));
     }

@@ -9,10 +9,7 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.integratedcircuit.standard.passive.splitter.SplitterView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PortTraceFinder
 {
@@ -53,29 +50,96 @@ public class PortTraceFinder
       stackIndex++;
     }
 
+    Map<Port, Port> totalSplitterPortMap = createSplitterPortMap();
+    Map<Port, WireConnection> totalPortWireMap = createPortWireMap();
+
+    Set<WireConnection> processedWires = new HashSet<>();
+
+    List<FullWire> fullWires = new ArrayList<>();
     for (LocalConnectionNet connectionNet : connectionNets)
     {
-      List<PortConnections> portConnections = connectionNet.getPortConnections();
-      List<Trace> traces = new ArrayList<>();
-      for (PortConnections portConnection : portConnections)
+      List<WireConnection> wireConnections = connectionNet.getWireConnections();
+      for (WireConnection wireConnection : wireConnections)
       {
-        Trace trace = new Trace();
-        traces.add(trace);
-        List<Port> ports = portConnection.getConnectedPorts();
-        for (Port port : ports)
+        if (!processedWires.contains(wireConnection))
+        {
+          FullWire fullWire = new FullWire();
+          fullWire.process(wireConnection);
+          processedWires.add(wireConnection);
+          while (fullWire.hasPortToProcess())
+          {
+            Port port = fullWire.getNextPort();
+            Port oppositeSplitterPort = totalSplitterPortMap.get(port);
+            WireConnection wireConnection1 = totalPortWireMap.get(oppositeSplitterPort);
+            if (!processedWires.contains(wireConnection1))
+            {
+              fullWire.process(wireConnection1);
+              processedWires.add(wireConnection1);
+            }
+          }
+          fullWire.done();
+          fullWires.add(fullWire);
+        }
+      }
+    }
+
+    for (FullWire fullWire : fullWires)
+    {
+      Trace trace = new Trace();
+      Set<WireConnection> localWires = fullWire.getLocalWires();
+      for (WireConnection localWire : localWires)
+      {
+        for (Port port : localWire.connectedPorts)
         {
           port.disconnect(simulation);
           port.connect(trace);
         }
+        localWire.localConnectionNet.addTrace(trace);
+      }
+    }
 
-        List<ComponentConnection<WireView>> wireConnections = connectionNet.getConnectedWires();
-        for (ComponentConnection<WireView> wireConnection : wireConnections)
+    for (LocalConnectionNet connectionNet : connectionNets)
+    {
+      for (ComponentConnection<WireView> connectedWire : connectionNet.getConnectedWires())
+      {
+        WireView wireView = connectedWire.component;
+        wireView.connectTraces(connectionNet.getTraces());
+      }
+    }
+  }
+
+  protected Map<Port, Port> createSplitterPortMap()
+  {
+    Map<Port, Port> totalSplitterPortMap = new HashMap<>();
+    for (LocalConnectionNet connectionNet : connectionNets)
+    {
+      List<ComponentConnection<SplitterView>> splitterViewConnections = connectionNet.getSplitterViews();
+      for (ComponentConnection<SplitterView> splitterViewConnection : splitterViewConnections)
+      {
+        SplitterView splitterView = splitterViewConnection.component;
+        Map<Port, Port> portMap = splitterView.getBidirectionalPortMap();
+        totalSplitterPortMap.putAll(portMap);
+      }
+    }
+    return totalSplitterPortMap;
+  }
+
+  protected Map<Port, WireConnection> createPortWireMap()
+  {
+    Map<Port, WireConnection> totalPortWireMap = new HashMap<>();
+    for (LocalConnectionNet connectionNet : connectionNets)
+    {
+      List<WireConnection> wireConnections = connectionNet.getWireConnections();
+      for (WireConnection wireConnection : wireConnections)
+      {
+        Set<Port> splitterPorts = wireConnection.splitterPorts;
+        for (Port splitterPort : splitterPorts)
         {
-          WireView wireView = wireConnection.component;
-          wireView.connectTraces(traces);
+          totalPortWireMap.put(splitterPort, wireConnection);
         }
       }
     }
+    return totalPortWireMap;
   }
 
   protected void processLocalConnections(ConnectionView inputConnectionView)
@@ -114,7 +178,6 @@ public class PortTraceFinder
     {
       portViews.addAll(connectionNet.getPortViews());
     }
-
     return portViews;
   }
 }

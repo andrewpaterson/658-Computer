@@ -1,4 +1,4 @@
-package net.logicim.ui.editor;
+package net.logicim.ui.property;
 
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;

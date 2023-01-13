@@ -20,7 +20,7 @@ import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public class ReflectivePropertiesPanel
-    extends JPanel
+    extends PropertiesPanel
 {
   protected Map<Field, PropertyEditor> fieldProperties;
 
@@ -47,14 +47,12 @@ public class ReflectivePropertiesPanel
       }
       name = javaNameToHumanReadable(name);
 
-      PropertyEditor component = TypeEditorFactory.getInstance().createEditor(field.getType(), fieldName, fieldValue);
-      form.addComponents(new Label(name), component.getComponent());
-      fieldProperties.put(field, component);
+      PropertyEditor propertyEditor = TypeEditorFactory.getInstance().createEditor(field.getType(), fieldName, fieldValue);
+      form.addComponents(new Label(name), propertyEditor.getComponent());
+      fieldProperties.put(field, propertyEditor);
     }
 
-    add(form, gridBagConstraints(0, 0, 1, 0, HORIZONTAL));
-    add(new JPanel(), gridBagConstraints(0, 1, 0, 1, VERTICAL));
-    setBorder(new EmptyBorder(5, 5, 0, 5));
+    addPropertyFormView(form);
   }
 
   public Map<Field, Object> getProperties()

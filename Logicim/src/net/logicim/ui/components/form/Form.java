@@ -18,6 +18,11 @@ public class Form
 
   public void addComponents(JComponent left, JComponent right)
   {
+    addComponents(left, right, 2);
+  }
+
+  public void addComponents(JComponent left, JComponent right, int verticalSpacing)
+  {
     add(left, gridBagConstraints(0, verticalCount, 1, 0, GridBagConstraints.HORIZONTAL));
     JPanel horizontalSpacer = new JPanel();
     horizontalSpacer.setPreferredSize(new Dimension(5, 5));
@@ -25,10 +30,13 @@ public class Form
     add(right, gridBagConstraints(2, verticalCount, 1, 0, GridBagConstraints.HORIZONTAL));
     verticalCount++;
 
-    JPanel verticalSpacer = new JPanel();
-    verticalSpacer.setPreferredSize(new Dimension(2, 2));
-    add(verticalSpacer, gridBagConstraints(0, verticalCount, 0, 0, GridBagConstraints.NONE));
-    verticalCount++;
+    if (verticalSpacing > 0)
+    {
+      JPanel verticalSpacer = new JPanel();
+      verticalSpacer.setPreferredSize(new Dimension(verticalSpacing, verticalSpacing));
+      add(verticalSpacer, gridBagConstraints(0, verticalCount, 0, 0, GridBagConstraints.NONE));
+      verticalCount++;
+    }
   }
 }
 

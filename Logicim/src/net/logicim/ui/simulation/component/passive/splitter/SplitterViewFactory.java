@@ -37,7 +37,7 @@ public class SplitterViewFactory
   @Override
   public PropertyEditorDialog createEditorDialog(JFrame parentFrame, SimulatorEditor editor, ComponentView<?> componentView)
   {
-    return new SplitterPropertyEditorDialog(parentFrame, editor, componentView);
+    return new SplitterPropertyEditorDialog(parentFrame, editor, (SplitterView) componentView);
   }
 }
 

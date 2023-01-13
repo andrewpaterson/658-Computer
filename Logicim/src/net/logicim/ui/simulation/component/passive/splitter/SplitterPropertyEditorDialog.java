@@ -1,7 +1,6 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.property.PropertyEditorDialog;
 
 import javax.swing.*;
@@ -10,17 +9,20 @@ import java.awt.*;
 public class SplitterPropertyEditorDialog
     extends PropertyEditorDialog
 {
+  protected SplitterPropertiesPanel splitterPropertiesPanel;
+
   public SplitterPropertyEditorDialog(Frame owner,
                                       SimulatorEditor editor,
-                                      ComponentView<?> componentView)
+                                      SplitterView componentView)
   {
     super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
+    splitterPropertiesPanel = new SplitterPropertiesPanel(componentView.getProperties());
   }
 
   @Override
   protected JPanel createEditorPanel()
   {
-    return new JPanel();
+    return splitterPropertiesPanel;
   }
 
   @Override

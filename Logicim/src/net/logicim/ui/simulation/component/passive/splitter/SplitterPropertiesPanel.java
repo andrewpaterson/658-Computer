@@ -5,6 +5,7 @@ import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
+import net.logicim.ui.util.ButtonUtil;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -48,9 +49,12 @@ public class SplitterPropertiesPanel
     form.addComponents(new Label(NAME), name.getComponent());
     form.addComponents(new Label(FAN_OUT), fanOut.getComponent());
     form.addComponents(new Label(BIT_WIDTH), bitWidth.getComponent());
-    form.addComponents(new Label(APPEARANCE), appearance.getComponent());
     form.addComponents(new Label(SPACING), spacing.getComponent());
+    form.addComponents(new Label(APPEARANCE), appearance.getComponent());
     form.addComponents(new Label(OFFSET), offset.getComponent(), 5);
+    form.addComponent(ButtonUtil.buildButtons(105,
+                                              new SplitterOrderButton(this, "Descending"),
+                                              new SplitterOrderButton(this, "Ascending")));
 
     indices = new ArrayList<>(properties.bitWidth);
     for (int i = 0; i < properties.bitWidth; i++)
@@ -68,17 +72,17 @@ public class SplitterPropertiesPanel
   public void focusLost(FocusEvent e)
   {
     SplitterProperties properties = createProperties();
+    int bitWidthValue = bitWidth.getValue();
+    if (!(bitWidthValue > 0 && bitWidthValue < 99))
+    {
+      bitWidth.setText("1");
+    }
     dialog.focusLost(properties);
   }
 
   public SplitterProperties createProperties()
   {
     int bitWidthValue = bitWidth.getValue();
-    if (!(bitWidthValue > 0 && bitWidthValue < 99))
-    {
-      bitWidthValue = 1;
-      bitWidth.setText("1");
-    }
 
     int[] splitIndices = new int[bitWidthValue];
 
@@ -95,5 +99,34 @@ public class SplitterPropertiesPanel
                                   spacing.getValue(),
                                   splitIndices);
   }
-}
 
+  static void reverseArray(int[] array)
+  {
+    int size = array.length;
+    for (int i = 0; i < size / 2; i++)
+    {
+      int temp = array[i];
+      array[i] = array[size - i - 1];
+      array[size - i - 1] = temp;
+    }
+  }
+
+  public void orderFanOut(String buttonText)
+  {
+    int bitWidthValue = bitWidth.getValue();
+    int[] splitIndices = SplitterProperties.createSplitIndices(bitWidthValue, fanOut.getValue());
+
+    if (buttonText.equals("Descending"))
+    {
+      reverseArray(splitIndices);
+    }
+
+    for (int i = 0; i < splitIndices.length; i++)
+    {
+      int splitIndex = splitIndices[i];
+
+      IntegerPropertyEditor index = indices.get(i);
+      index.setText(Integer.toString(splitIndex));
+    }
+  }
+}

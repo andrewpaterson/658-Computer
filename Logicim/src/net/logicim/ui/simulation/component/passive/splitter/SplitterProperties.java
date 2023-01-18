@@ -52,7 +52,7 @@ public class SplitterProperties
          createSplitIndices(bitWidth, fanOut));
   }
 
-  private static int[] createSplitIndices(int bitWidth, int endCount)
+  public static int[] createSplitIndices(int bitWidth, int endCount)
   {
     int[] splitIndices;
     if (endCount == 1)

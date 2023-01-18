@@ -11,11 +11,14 @@ import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
+import net.logicim.ui.util.ButtonUtil;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 import static java.awt.GridBagConstraints.BOTH;
+import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
@@ -50,7 +53,11 @@ public abstract class PropertyEditorDialog
     JPanel bottomPanel = new JPanel();
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
 
-    buildButtons(bottomPanel, new ActionButton("Okay", this), new CancelButton("Cancel", this));
+    buildButtons(bottomPanel,
+                 DEFAULT_WIDTH,
+                 new ActionButton("Okay", this),
+                 new CancelButton("Cancel", this));
+    bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
   }
 
   public Dimension getDimension()

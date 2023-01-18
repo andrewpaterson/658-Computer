@@ -17,7 +17,7 @@ public class SplitterPropertyEditorDialog
                                       SimulatorEditor editor,
                                       SplitterView componentView)
   {
-    super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
+    super(owner, componentView.getType() + " Properties", new Dimension(392, 460), editor, componentView);
     this.componentView = componentView;
     currentBitWidth = this.componentView.getProperties().bitWidth;
     componentViewProperties = this.componentView.getProperties();

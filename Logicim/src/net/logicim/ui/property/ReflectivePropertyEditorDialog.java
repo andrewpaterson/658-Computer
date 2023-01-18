@@ -22,8 +22,7 @@ public class ReflectivePropertyEditorDialog
   @Override
   protected JPanel createEditorPanel()
   {
-    ReflectivePropertiesPanel reflectivePropertiesPanel = new ReflectivePropertiesPanel(componentView.getProperties());
-    return reflectivePropertiesPanel;
+    return new ReflectivePropertiesPanel(componentView.getProperties());
   }
 
   protected boolean updateProperties(Map<Field, Object> map, ComponentProperties properties)

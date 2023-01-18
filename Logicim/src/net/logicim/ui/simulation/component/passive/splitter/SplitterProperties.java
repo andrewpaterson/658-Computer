@@ -84,13 +84,32 @@ public class SplitterProperties
         sourceCounter++;
       }
     }
-
-//    for (int i = 0; i < temp.length; i++)
-//    {
-//      int distributionIndex = temp[i];
-//      System.out.print(distributionIndex + ", ");
-//      temp[i] = distributionIndex;
-//    }
     return temp;
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    SplitterProperties other = (SplitterProperties) o;
+    return bitWidth == other.bitWidth &&
+           fanOut == other.fanOut &&
+           endOffset == other.endOffset &&
+           gridSpacing == other.gridSpacing &&
+           Arrays.equals(splitIndices, other.splitIndices);
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return 0;
+  }
 }
+

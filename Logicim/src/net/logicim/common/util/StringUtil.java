@@ -2,9 +2,7 @@ package net.logicim.common.util;
 
 import net.logicim.common.SimulatorException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Integer.toHexString;
 

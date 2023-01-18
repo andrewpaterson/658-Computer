@@ -6,7 +6,6 @@ import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class SplitterPropertiesPanel
   protected TextPropertyEditor name;
   protected IntegerPropertyEditor fanOut;
   protected IntegerPropertyEditor bitWidth;
-  protected IntegerPropertyEditor appearance;
+  protected SplitterAppearanceEditor appearance;
   protected IntegerPropertyEditor spacing;
   protected IntegerPropertyEditor offset;
 
@@ -40,9 +39,9 @@ public class SplitterPropertiesPanel
 
     Form form = new Form();
     name = new TextPropertyEditor(this, NAME, properties.name);
-    fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
-    appearance = new IntegerPropertyEditor(this, APPEARANCE, 0);
+    fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
+    appearance = new SplitterAppearanceEditor(this, APPEARANCE, SplitterAppearance.LEFT);
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);
     offset = new IntegerPropertyEditor(this, OFFSET, properties.endOffset);
 
@@ -57,7 +56,7 @@ public class SplitterPropertiesPanel
     for (int i = 0; i < properties.bitWidth; i++)
     {
       String name = BIT + i;
-      IntegerPropertyEditor bitEditor = new IntegerPropertyEditor(this, name, 0);
+      IntegerPropertyEditor bitEditor = new IntegerPropertyEditor(this, name, properties.splitIndices[i]);
       form.addComponents(new Label(name), bitEditor.getComponent(), 0);
       indices.add(bitEditor);
     }
@@ -75,9 +74,10 @@ public class SplitterPropertiesPanel
   public SplitterProperties createProperties()
   {
     int bitWidthValue = bitWidth.getValue();
-    if (!(bitWidthValue >= 0 && bitWidthValue < 99))
+    if (!(bitWidthValue > 0 && bitWidthValue < 99))
     {
-      bitWidthValue = 0;
+      bitWidthValue = 1;
+      bitWidth.setText("1");
     }
 
     int[] splitIndices = new int[bitWidthValue];

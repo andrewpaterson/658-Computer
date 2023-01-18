@@ -23,12 +23,12 @@ public abstract class PropertiesPanel
     super(layout);
   }
 
-  protected void addPropertyFormView(Form form)
+  protected void addPropertyFormView(Component component)
   {
     GridBagConstraints constraints = gridBagConstraints(0, 0, 1, 1, BOTH);
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
-    panel.add(form, BorderLayout.NORTH);
+    panel.add(component, BorderLayout.NORTH);
     JScrollPane scrollPane = new JScrollPane(panel);
     scrollPane.setBorder(null);
     add(scrollPane, constraints);

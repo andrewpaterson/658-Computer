@@ -24,7 +24,15 @@ public class IntegerPropertyEditor
   @Override
   public Integer getValue()
   {
-    return Integer.parseInt(getText());
+    try
+    {
+      return Integer.parseInt(getText());
+    }
+    catch (NumberFormatException e)
+    {
+      setText("0");
+      return 0;
+    }
   }
 
   @Override

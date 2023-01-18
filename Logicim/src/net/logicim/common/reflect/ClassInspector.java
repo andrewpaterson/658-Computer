@@ -18,6 +18,7 @@ public class ClassInspector
   private Map<String, Field> localFields;
   private Map<String, Field> superFields;
   private Map<String, Field> allFields;
+  private Map<MethodKey, Method> _allMethodsMap;
   private Constructor<?> specialNoArgConstructor;
 
   private ClassInspector(Class<?> aClass)
@@ -567,6 +568,78 @@ public class ClassInspector
         return o1.getName().compareTo(o2.getName());
       }
     });
+  }
+
+  public Object invokeByTypes(String methodName)
+  {
+    return invokeByTypes(methodName, new Class[]{}, new Object[]{});
+  }
+
+  public Object invokeByTypes(String methodName, Class[] argTypes, Object[] args)
+  {
+    Method method = getMethod(methodName, argTypes);
+    assertIsStatic(method, methodName);
+
+    try
+    {
+      return method.invoke(aClass, args);
+    }
+    catch (Exception e)
+    {
+      throw new SimulatorException(e.getMessage());
+    }
+  }
+
+  private Map<MethodKey, Method> getAllMethodsMap()
+  {
+    if (_allMethodsMap == null)
+    {
+      _allMethodsMap = new HashMap<>();
+
+      Class<?> clazz = aClass;
+      while (clazz != null)
+      {
+        addToAllMethodsMap(clazz);
+
+        clazz = clazz.getSuperclass();
+      }
+    }
+
+    return _allMethodsMap;
+  }
+
+  private void addToAllMethodsMap(Class clazz)
+  {
+    Method[] declaredMethods = clazz.getDeclaredMethods();
+
+    for (Method method : declaredMethods)
+    {
+      MethodKey methodKey = new MethodKey(method);
+      if (!_allMethodsMap.containsKey(methodKey))
+      {
+        method.setAccessible(true);
+        _allMethodsMap.put(methodKey, method);
+      }
+    }
+  }
+
+  protected Method getMethodOrNull(String methodName, Class<?>[] parameterTypes)
+  {
+    return getAllMethodsMap().get(new MethodKey(methodName, parameterTypes));
+  }
+
+  public Method getMethod(String methodName, Class<?>[] parameterTypes)
+  {
+    Method result = getMethodOrNull(methodName, parameterTypes);
+
+    if (result != null)
+    {
+      return result;
+    }
+    else
+    {
+      throw new SimulatorException(String.format("ClassInspector could not find method with name [%s] and parameter types [%s] from class [%s]", methodName, Arrays.toString(parameterTypes), aClass.getSimpleName()));
+    }
   }
 }
 

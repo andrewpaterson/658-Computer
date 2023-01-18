@@ -30,5 +30,11 @@ public class BooleanPropertyEditor
   {
     return this;
   }
+
+  @Override
+  public PropertiesPanel getPropertiesPanel()
+  {
+    return propertiesPanel;
+  }
 }
 

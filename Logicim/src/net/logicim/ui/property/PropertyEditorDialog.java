@@ -26,6 +26,7 @@ public abstract class PropertyEditorDialog
   protected Dimension dimension;
   protected SimulatorEditor editor;
   protected ComponentView<?> componentView;
+  protected PropertiesPanel propertiesPanel;
 
   public PropertyEditorDialog(Frame owner, String title, Dimension dimension, SimulatorEditor editor, ComponentView<?> componentView)
   {
@@ -42,7 +43,9 @@ public abstract class PropertyEditorDialog
     Container contentPane = getContentPane();
     contentPane.setLayout(new GridBagLayout());
 
-    contentPane.add(createEditorPanel(), gridBagConstraints(0, 0, 1, 1, BOTH));
+    JPanel editorPanel = createEditorPanel();
+    propertiesPanel = (PropertiesPanel) editorPanel;
+    contentPane.add(editorPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
     JPanel bottomPanel = new JPanel();
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
@@ -87,6 +90,11 @@ public abstract class PropertyEditorDialog
 
     setVisible(false);
     dispose();
+  }
+
+  public PropertiesPanel getPropertiesPanel()
+  {
+    return propertiesPanel;
   }
 
   protected abstract JPanel createEditorPanel();

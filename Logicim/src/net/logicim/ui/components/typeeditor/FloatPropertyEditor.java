@@ -33,5 +33,11 @@ public class FloatPropertyEditor
   {
     return this;
   }
+
+  @Override
+  public PropertiesPanel getPropertiesPanel()
+  {
+    return propertiesPanel;
+  }
 }
 

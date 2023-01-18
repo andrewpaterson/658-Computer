@@ -10,8 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import static java.awt.GridBagConstraints.HORIZONTAL;
-import static java.awt.GridBagConstraints.VERTICAL;
+import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public abstract class PropertiesPanel
@@ -26,15 +25,19 @@ public abstract class PropertiesPanel
 
   protected void addPropertyFormView(Form form)
   {
-    add(form, gridBagConstraints(0, 0, 1, 0, HORIZONTAL));
-    add(new JPanel(), gridBagConstraints(0, 1, 0, 1, VERTICAL));
+    GridBagConstraints constraints = gridBagConstraints(0, 0, 1, 1, BOTH);
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());
+    panel.add(form, BorderLayout.NORTH);
+    JScrollPane scrollPane = new JScrollPane(panel);
+    scrollPane.setBorder(null);
+    add(scrollPane, constraints);
     setBorder(new EmptyBorder(5, 5, 0, 5));
   }
 
   @Override
   public void focusGained(FocusEvent e)
   {
-    System.out.println(e.getComponent().getName());
   }
 
   @Override

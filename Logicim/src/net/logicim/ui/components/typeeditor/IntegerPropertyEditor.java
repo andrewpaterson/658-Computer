@@ -22,7 +22,7 @@ public class IntegerPropertyEditor
   }
 
   @Override
-  public Object getValue()
+  public Integer getValue()
   {
     return Integer.parseInt(getText());
   }
@@ -31,6 +31,11 @@ public class IntegerPropertyEditor
   public JComponent getComponent()
   {
     return this;
+  }
+
+  public PropertiesPanel getPropertiesPanel()
+  {
+    return propertiesPanel;
   }
 }
 

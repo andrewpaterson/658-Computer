@@ -14,17 +14,15 @@ import java.util.Objects;
 public class ReflectivePropertyEditorDialog
     extends PropertyEditorDialog
 {
-  protected ReflectivePropertiesPanel reflectivePropertiesPanel;
-
   public ReflectivePropertyEditorDialog(Frame owner, ComponentView<?> componentView, SimulatorEditor editor)
   {
     super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
-    reflectivePropertiesPanel = new ReflectivePropertiesPanel(componentView.getProperties());
   }
 
   @Override
   protected JPanel createEditorPanel()
   {
+    ReflectivePropertiesPanel reflectivePropertiesPanel = new ReflectivePropertiesPanel(componentView.getProperties());
     return reflectivePropertiesPanel;
   }
 
@@ -92,7 +90,7 @@ public class ReflectivePropertyEditorDialog
   @Override
   protected boolean updateProperties()
   {
-    Map<Field, Object> map = reflectivePropertiesPanel.getProperties();
+    Map<Field, Object> map = ((ReflectivePropertiesPanel) getPropertiesPanel()).getProperties();
     return updateProperties(map, componentView.getProperties());
   }
 }

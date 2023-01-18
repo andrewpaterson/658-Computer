@@ -9,26 +9,54 @@ import java.awt.*;
 public class SplitterPropertyEditorDialog
     extends PropertyEditorDialog
 {
-  protected SplitterPropertiesPanel splitterPropertiesPanel;
+  protected SplitterView componentView;
+  protected int currentBitWidth;
+  private SplitterProperties componentViewProperties;
 
   public SplitterPropertyEditorDialog(Frame owner,
                                       SimulatorEditor editor,
                                       SplitterView componentView)
   {
     super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
-    splitterPropertiesPanel = new SplitterPropertiesPanel(componentView.getProperties());
+    this.componentView = componentView;
+    currentBitWidth = this.componentView.getProperties().bitWidth;
+    componentViewProperties = this.componentView.getProperties();
   }
 
   @Override
   protected JPanel createEditorPanel()
   {
-    return splitterPropertiesPanel;
+    return new SplitterPropertiesPanel(this, componentViewProperties);
   }
 
   @Override
   protected boolean updateProperties()
   {
-    return false;
+    SplitterProperties newProperties = createProperties();
+    if (componentView.getProperties().equals(newProperties))
+    {
+      return false;
+    }
+    else
+    {
+      componentView.setProperties(newProperties);
+      return true;
+    }
+  }
+
+  private SplitterProperties createProperties()
+  {
+    return ((SplitterPropertiesPanel) getPropertiesPanel()).createProperties();
+  }
+
+  public void focusLost(SplitterProperties properties)
+  {
+    componentViewProperties = properties;
+    if (properties.bitWidth != currentBitWidth)
+    {
+      getContentPane().removeAll();
+      build();
+    }
   }
 }
 

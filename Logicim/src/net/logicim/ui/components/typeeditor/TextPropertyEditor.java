@@ -18,7 +18,7 @@ public class TextPropertyEditor
   }
 
   @Override
-  public Object getValue()
+  public String getValue()
   {
     return getText();
   }
@@ -27,6 +27,12 @@ public class TextPropertyEditor
   public JComponent getComponent()
   {
     return this;
+  }
+
+  @Override
+  public PropertiesPanel getPropertiesPanel()
+  {
+    return propertiesPanel;
   }
 }
 

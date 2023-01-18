@@ -46,5 +46,11 @@ public class FamilyPropertyEditor
   {
     return comboBox;
   }
+
+  @Override
+  public PropertiesPanel getPropertiesPanel()
+  {
+    return propertiesPanel;
+  }
 }
 

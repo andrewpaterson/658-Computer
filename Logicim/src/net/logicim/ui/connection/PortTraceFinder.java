@@ -70,6 +70,10 @@ public class PortTraceFinder
           {
             Port port = fullWire.getNextPort();
             Port oppositeSplitterPort = totalSplitterPortMap.get(port);
+            if (oppositeSplitterPort == null)
+            {
+              throw new SimulatorException("Could not find opposite port for splitter.");
+            }
             WireConnection wireConnection1 = totalPortWireMap.get(oppositeSplitterPort);
             if (!processedWires.contains(wireConnection1))
             {

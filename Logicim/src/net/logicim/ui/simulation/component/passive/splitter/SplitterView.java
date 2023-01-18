@@ -191,15 +191,19 @@ public class SplitterView
 
     HashMap<Port, Port> result = new HashMap<>();
 
-    for (int i = 0; i < properties.bitWidth; i++)
+    int i = 0;
+    for (int fanIndex = 0; fanIndex < properties.fanOut; fanIndex++)
     {
-      Port startPort = ports.get(i);
-      int endPortIndex = properties.splitIndices[i];
-      PortView endPortView = endPortViews.get(endPortIndex);
-      Port endPort = endPortView.getPort(endPortViewPortIndex[endPortIndex]);
-      result.put(startPort, endPort);
-      result.put(endPort, startPort);
+      List<Port> portsForFanoutIndex = getPortsForFanoutIndex(fanIndex);
+      for (Port endPort : portsForFanoutIndex)
+      {
+        Port startPort = ports.get(i);
+        result.put(startPort, endPort);
+        result.put(endPort, startPort);
+        i++;
+      }
     }
+
     return result;
   }
 }

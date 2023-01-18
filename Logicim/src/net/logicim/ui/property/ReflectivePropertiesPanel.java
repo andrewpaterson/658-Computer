@@ -7,17 +7,12 @@ import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.*;
 
-import static java.awt.GridBagConstraints.HORIZONTAL;
-import static java.awt.GridBagConstraints.VERTICAL;
 import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
-import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public class ReflectivePropertiesPanel
     extends PropertiesPanel
@@ -47,7 +42,7 @@ public class ReflectivePropertiesPanel
       }
       name = javaNameToHumanReadable(name);
 
-      PropertyEditor propertyEditor = TypeEditorFactory.getInstance().createEditor(field.getType(), fieldName, fieldValue);
+      PropertyEditor propertyEditor = TypeEditorFactory.getInstance().createEditor(this, field.getType(), fieldName, fieldValue);
       form.addComponents(new Label(name), propertyEditor.getComponent());
       fieldProperties.put(field, propertyEditor);
     }

@@ -1,14 +1,20 @@
 package net.logicim.ui.components.typeeditor;
 
+import net.logicim.ui.property.PropertiesPanel;
+
 import javax.swing.*;
 
 public class TextPropertyEditor
     extends JTextField
     implements PropertyEditor
 {
-  public TextPropertyEditor(String text)
+  protected PropertiesPanel propertiesPanel;
+
+  public TextPropertyEditor(PropertiesPanel propertiesPanel, String name, String text)
   {
     super(text);
+    setName(name);
+    this.propertiesPanel = propertiesPanel;
   }
 
   @Override

@@ -7,5 +7,7 @@ public interface PropertyEditor
   Object getValue();
 
   JComponent getComponent();
+
+
 }
 

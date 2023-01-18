@@ -1,6 +1,7 @@
 package net.logicim.ui.components.typeeditor;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.ui.property.PropertiesPanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,23 +26,23 @@ public class TypeEditorFactory
     return instance;
   }
 
-  public PropertyEditor createEditor(Class<?> fieldClass, String fieldName, Object fieldValue)
+  public PropertyEditor createEditor(PropertiesPanel propertiesPanel, Class<?> fieldClass, String fieldName, Object fieldValue)
   {
     if (String.class.equals(fieldClass))
     {
-      return new TextPropertyEditor((String) fieldValue);
+      return new TextPropertyEditor(propertiesPanel, fieldName, (String) fieldValue);
     }
     else if (Boolean.class.equals(fieldClass) || boolean.class.equals(fieldClass))
     {
-      return new BooleanPropertyEditor((Boolean) fieldValue);
+      return new BooleanPropertyEditor(propertiesPanel, fieldName, (Boolean) fieldValue);
     }
     else if (Float.class.equals(fieldClass) || float.class.equals(fieldClass))
     {
-      return new FloatPropertyEditor((float) fieldValue, getUnit(fieldName));
+      return new FloatPropertyEditor(propertiesPanel, fieldName, (float) fieldValue, getUnit(fieldName));
     }
     else if (Integer.class.equals(fieldClass) || int.class.equals(fieldClass))
     {
-      return new IntegerPropertyEditor((int) fieldValue);
+      return new IntegerPropertyEditor(propertiesPanel, fieldName, (int) fieldValue);
     }
     else
     {
@@ -49,7 +50,7 @@ public class TypeEditorFactory
       {
         if (customEditor.getPropertyClass().equals(fieldClass))
         {
-          return customEditor.createEditor(fieldName, fieldValue);
+          return customEditor.createEditor(propertiesPanel, fieldName, fieldValue);
         }
       }
 

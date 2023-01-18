@@ -1,6 +1,6 @@
 package net.logicim.ui.components.typeeditor;
 
-import net.logicim.ui.editor.InternationalUnits;
+import net.logicim.ui.property.PropertiesPanel;
 
 import javax.swing.*;
 
@@ -8,10 +8,17 @@ public class IntegerPropertyEditor
     extends JTextField
     implements PropertyEditor
 {
-  public IntegerPropertyEditor(int value)
+  private PropertiesPanel propertiesPanel;
+
+  public IntegerPropertyEditor(PropertiesPanel propertiesPanel, String name, int value)
   {
     super();
+    setName(name);
+    this.propertiesPanel = propertiesPanel;
+
     setText(Integer.toString(value));
+    addFocusListener(propertiesPanel);
+    addActionListener(propertiesPanel);
   }
 
   @Override

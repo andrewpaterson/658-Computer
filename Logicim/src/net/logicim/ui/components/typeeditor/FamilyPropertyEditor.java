@@ -2,6 +2,7 @@ package net.logicim.ui.components.typeeditor;
 
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.domain.common.propagation.FamilyStore;
+import net.logicim.ui.property.PropertiesPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,13 @@ public class FamilyPropertyEditor
     implements PropertyEditor
 {
   protected JComboBox<String> comboBox;
+  protected PropertiesPanel propertiesPanel;
 
-  public FamilyPropertyEditor(Family family)
+  public FamilyPropertyEditor(PropertiesPanel propertiesPanel, String name, Family family)
   {
+    this.propertiesPanel = propertiesPanel;
     comboBox = new JComboBox<>();
+    comboBox.setName(name);
     List<String> names = FamilyStore.getInstance().findAllNames();
     Collections.sort(names);
     for (String familyName : names)

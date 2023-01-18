@@ -1,6 +1,7 @@
 package net.logicim.ui.components.typeeditor;
 
 import net.logicim.domain.common.propagation.Family;
+import net.logicim.ui.property.PropertiesPanel;
 
 public class FamilyPropertyEditorFactory
     extends PropertyEditorFactory
@@ -12,9 +13,9 @@ public class FamilyPropertyEditorFactory
   }
 
   @Override
-  public PropertyEditor createEditor(String fieldName, Object fieldValue)
+  public PropertyEditor createEditor(PropertiesPanel propertiesPanel, String fieldName, Object fieldValue)
   {
-    return new FamilyPropertyEditor((Family) fieldValue);
+    return new FamilyPropertyEditor(propertiesPanel, fieldName, (Family) fieldValue);
   }
 }
 

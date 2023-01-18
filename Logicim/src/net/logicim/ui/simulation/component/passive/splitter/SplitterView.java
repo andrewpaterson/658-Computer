@@ -6,7 +6,6 @@ import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.wire.Splitter;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
@@ -14,6 +13,7 @@ import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.List;
@@ -47,13 +47,27 @@ public class SplitterView
     endPortViews = createEndPorts(properties);
   }
 
+  protected List<Port> getPortsForFanoutIndex(int fanIndex)
+  {
+    List<Port> ports = new ArrayList<>();
+    for (int i = 0; i < properties.splitIndices.length; i++)
+    {
+      int x = properties.splitIndices[i];
+      if (x == fanIndex)
+      {
+        ports.add(passive.getEndPort(i));
+      }
+    }
+    return ports;
+  }
+
   protected List<PortView> createEndPorts(SplitterProperties properties)
   {
     List<PortView> portViews = new ArrayList<>();
     for (int i = 0; i < properties.fanOut; i++)
     {
       Int2D position = createEndPosition(i);
-      PortView portView = new PortView(this, passive.getEndPort(i), new Int2D(position));
+      PortView portView = new PortView(this, getPortsForFanoutIndex(i), new Int2D(position));
       portViews.add(portView);
     }
     return portViews;
@@ -143,7 +157,7 @@ public class SplitterView
   {
     return new Splitter(circuitEditor.getCircuit(),
                         properties.name,
-                        properties.fanOut);
+                        properties.bitWidth);
   }
 
   private Int2D createStartPosition()

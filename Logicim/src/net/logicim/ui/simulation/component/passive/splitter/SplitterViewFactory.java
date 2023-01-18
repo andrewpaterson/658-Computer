@@ -19,7 +19,7 @@ public class SplitterViewFactory
     return new SplitterView(circuitEditor,
                             position,
                             rotation,
-                            new SplitterProperties("", 2, 2, -1, 2));
+                            new SplitterProperties("", 8, 3, -1, 2));
   }
 
   @Override

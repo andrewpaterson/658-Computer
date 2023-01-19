@@ -4,13 +4,13 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.domain.common.voltage.Voltage;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.rectangle.RectangleView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 
@@ -103,7 +103,7 @@ public class PositivePowerView
 
   public void drawCenteredString(Graphics graphics, Viewport viewport, String text)
   {
-    Font font = graphics.getFont().deriveFont(Font.BOLD, (int) (11 * viewport.getZoom()));
+    Font font = viewport.getBoldFont(11 * viewport.getZoom());
     Color voltageColour = Colours.getInstance().getTraceVoltage(properties.voltage_V);
     graphics.setColor(voltageColour);
 

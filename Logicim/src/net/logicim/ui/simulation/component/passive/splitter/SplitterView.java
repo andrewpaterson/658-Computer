@@ -128,6 +128,8 @@ public class SplitterView
 
     paintPorts(graphics, viewport, time);
 
+    //graphics.drawString();
+
     graphics.setColor(color);
     graphics.setStroke(stroke);
   }
@@ -187,9 +189,6 @@ public class SplitterView
   public Map<Port, Port> getBidirectionalPortMap()
   {
     List<? extends Port> ports = startPortView.getPorts();
-    int[] endPortViewPortIndex = new int[properties.fanOut];
-    Arrays.fill(endPortViewPortIndex, 0);
-
     HashMap<Port, Port> result = new HashMap<>();
 
     int i = 0;

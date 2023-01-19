@@ -14,6 +14,7 @@ public class Viewport
   protected PanelSize size;
 
   protected Strokes strokes;
+  protected Fonts fonts;
 
   public Viewport(PanelSize size)
   {
@@ -23,6 +24,7 @@ public class Viewport
     scale = 10.0f;
     Colours.getInstance().getInstance();
     strokes = new Strokes();
+    fonts = new Fonts();
   }
 
   public int transformGridToScreenSpaceX(int x)
@@ -338,6 +340,16 @@ public class Viewport
   public Stroke getZoomableStroke(float scale)
   {
     return strokes.getSolidStroke(getLineWidth(scale));
+  }
+
+  public void ensureDefaultFont(Font font)
+  {
+    fonts.ensureDefaultFont(font);
+  }
+
+  public Font getBoldFont(float size)
+  {
+    return fonts.getBoldFont(size);
   }
 }
 

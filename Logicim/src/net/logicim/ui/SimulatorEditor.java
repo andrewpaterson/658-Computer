@@ -447,6 +447,8 @@ public class SimulatorEditor
 
   public void paint(Graphics2D graphics)
   {
+    viewport.ensureDefaultFont(graphics.getFont());
+
     graphics.setColor(Colours.getInstance().getBackground());
     graphics.fillRect(0, 0, width, height);
 

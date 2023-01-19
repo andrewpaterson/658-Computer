@@ -69,8 +69,10 @@ public class GroundView
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);
+
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
+
     if (line1 != null)
     {
       line1.paint(graphics, viewport);
@@ -79,6 +81,7 @@ public class GroundView
       line4.paint(graphics, viewport);
     }
     paintPorts(graphics, viewport, time);
+
     graphics.setStroke(stroke);
     graphics.setColor(color);
   }

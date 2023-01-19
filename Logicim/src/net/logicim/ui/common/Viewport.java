@@ -351,5 +351,22 @@ public class Viewport
   {
     return fonts.getBoldFont(size);
   }
+
+  public Font getPlainFont(float size)
+  {
+    return fonts.getPlainFont(size);
+  }
+
+  public Font getFont(float size, boolean bold)
+  {
+    if (bold)
+    {
+      return getBoldFont(size);
+    }
+    else
+    {
+      return getPlainFont(size);
+    }
+  }
 }
 

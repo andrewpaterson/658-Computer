@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
@@ -13,9 +14,12 @@ import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
+import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.List;
 import java.util.*;
 
@@ -24,6 +28,7 @@ public class SplitterView
 {
   protected List<LineView> lineViews;
   protected RectangleView rectangleView;
+  protected List<TextView> textViews;
 
   protected List<PortView> endPortViews;
   protected PortView startPortView;
@@ -43,7 +48,7 @@ public class SplitterView
   @Override
   protected void createPortViews()
   {
-    startPortView = new PortView(this, passive.getStartPorts(), createStartPosition());
+    startPortView = new PortView(this, passive.getStartPorts(), new Int2D(createStartPosition()));
     endPortViews = createEndPorts(properties);
   }
 
@@ -61,12 +66,26 @@ public class SplitterView
     return ports;
   }
 
+  protected List<Integer> getPortIndicesForFanoutIndex(int fanIndex)
+  {
+    List<Integer> ports = new ArrayList<>();
+    for (int i = 0; i < properties.splitIndices.length; i++)
+    {
+      int x = properties.splitIndices[i];
+      if (x == fanIndex)
+      {
+        ports.add(i);
+      }
+    }
+    return ports;
+  }
+
   protected List<PortView> createEndPorts(SplitterProperties properties)
   {
     List<PortView> portViews = new ArrayList<>();
     for (int i = 0; i < properties.fanOut; i++)
     {
-      Int2D position = createEndPosition(i);
+      Float2D position = createEndPosition(i);
       PortView portView = new PortView(this, getPortsForFanoutIndex(i), new Int2D(position));
       portViews.add(portView);
     }
@@ -75,41 +94,146 @@ public class SplitterView
 
   private void createGraphics()
   {
-    lineViews = new ArrayList<>();
-    Int2D startPosition = createStartPosition();
-    Int2D endPosition;
-    if (startPosition.y > 0)
+    int centerX = 0;
+
+    this.lineViews = createLineViews(centerX,
+                                     properties.fanOut,
+                                     properties.gridSpacing,
+                                     properties.appearance);
+
+    rectangleView = createRectangleView(centerX, properties.fanOut);
+
+    textViews = new ArrayList<>();
+    for (int i = 0; i < properties.fanOut; i++)
     {
-      endPosition = createEndPosition(0);
+      Float2D p2 = createMidPosition(i);
+      p2.x += 0.25;
+      p2.y += 0.1;
+      List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(i);
+      String text = toText(portIndicesForFanoutIndex);
+      TextView textView = new TextView(this, p2, text, 7, false, SwingConstants.LEFT, SwingConstants.TOP);
+      textViews.add(textView);
     }
-    else if (startPosition.y < -(properties.fanOut - 1) * properties.gridSpacing)
+  }
+
+  private String toText(List<Integer> indices)
+  {
+    Collections.sort(indices);
+    StringBuilder builder = new StringBuilder();
+    Integer previous = null;
+    int skipped = 0;
+    for (Integer index : indices)
     {
-      endPosition = createEndPosition(properties.fanOut - 1);
+      if (previous != null)
+      {
+        if (index - 1 == previous)
+        {
+          skipped++;
+        }
+        else
+        {
+          appendPreviousDigit(builder, previous, skipped);
+          skipped = 0;
+          builder.append(",");
+          builder.append(index);
+        }
+      }
+      else
+      {
+        builder.append(index);
+      }
+      previous = index;
+    }
+    appendPreviousDigit(builder, previous, skipped);
+    return builder.toString();
+  }
+
+  private void appendPreviousDigit(StringBuilder builder, Integer previous, int skipped)
+  {
+    if (skipped == 1)
+    {
+      builder.append(",");
+      builder.append(previous);
+    }
+    else if (skipped > 1)
+    {
+      builder.append("-");
+      builder.append(previous);
+    }
+  }
+
+  private List<LineView> createLineViews(int centerX, int fanOut, int gridSpacing, SplitterAppearance appearance)
+  {
+    List<LineView> lineViews = new ArrayList<>();
+
+    Float2D startPosition = createStartPosition();
+    Float2D endPosition = createEndPosition(centerX, fanOut, gridSpacing, startPosition, appearance);
+    LineView startLineView = new LineView(this, startPosition, endPosition, 4);
+    lineViews.add(startLineView);
+
+    for (int i = 0; i < fanOut; i++)
+    {
+      Float2D p1 = createEndPosition(i);
+      Float2D p2 = createMidPosition(i);
+
+      LineView lineView = new LineView(this, p1, p2);
+      lineViews.add(lineView);
+    }
+
+    return lineViews;
+  }
+
+  private Float2D createEndPosition(int centerX, int fanOut, int gridSpacing, Float2D startPosition, SplitterAppearance appearance)
+  {
+    Float2D endPosition;
+    if (appearance == SplitterAppearance.LEFT)
+    {
+      if (startPosition.y > 0)
+      {
+        endPosition = createEndPosition(0);
+      }
+      else if (startPosition.y < -(fanOut - 1) * gridSpacing)
+      {
+        endPosition = createEndPosition(fanOut - 1);
+      }
+      else
+      {
+        endPosition = createEndPosition(0);
+        endPosition.y = startPosition.y;
+      }
+    }
+    else if (appearance == SplitterAppearance.RIGHT)
+    {
+      if (startPosition.y > (fanOut - 1) * gridSpacing)
+      {
+        endPosition = createEndPosition(fanOut - 1);
+      }
+      else if (startPosition.y < 0)
+      {
+        endPosition = createEndPosition(0);
+      }
+      else
+      {
+        endPosition = createEndPosition(0);
+        endPosition.y = startPosition.y;
+      }
     }
     else
     {
       endPosition = createEndPosition(0);
       endPosition.y = startPosition.y;
     }
-    int centerX = 0;
     endPosition.x = centerX;
-    LineView startLineView = new LineView(this, startPosition, endPosition, 4);
-    lineViews.add(startLineView);
+    return endPosition;
+  }
 
-    for (int i = 0; i < properties.fanOut; i++)
-    {
-      Int2D p1 = createEndPosition(i);
-      Int2D p2 = p1.clone();
-      p1.x = 0;
-      LineView lineView = new LineView(this, p1, p2);
-      lineViews.add(lineView);
-    }
-
-    Float2D p1 = new Float2D(createEndPosition(0));
+  private RectangleView createRectangleView(int centerX, int fanOut)
+  {
+    Float2D p1 = createEndPosition(0);
     p1.x = centerX - 0.1f;
-    Float2D p2 = new Float2D(createEndPosition(properties.fanOut - 1));
+    Float2D p2 = createEndPosition(fanOut - 1);
     p2.x = centerX + 0.1f;
-    rectangleView = new RectangleView(this, p1, p2, true, true);
+    return new RectangleView(this, p1, p2, true, true);
   }
 
   @Override
@@ -117,8 +241,10 @@ public class SplitterView
   {
     super.paint(graphics, viewport, time);
 
+    AffineTransform transform = graphics.getTransform();
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
+    Font font = graphics.getFont();
 
     for (LineView lineView : lineViews)
     {
@@ -128,10 +254,15 @@ public class SplitterView
 
     paintPorts(graphics, viewport, time);
 
-    //graphics.drawString();
+    for (TextView textView : textViews)
+    {
+      textView.paint(graphics, viewport);
+    }
 
+    graphics.setFont(font);
     graphics.setColor(color);
     graphics.setStroke(stroke);
+    graphics.setTransform(transform);
   }
 
   @Override
@@ -163,14 +294,46 @@ public class SplitterView
                         properties.bitWidth);
   }
 
-  private Int2D createStartPosition()
+  private Float2D createStartPosition()
   {
-    return new Int2D(-1, -properties.endOffset);
+    if (properties.appearance == SplitterAppearance.LEFT)
+    {
+      return new Float2D(-1, -properties.endOffset);
+    }
+    else if (properties.appearance == SplitterAppearance.RIGHT)
+    {
+      return new Float2D(-1, properties.endOffset);
+    }
+    else
+    {
+      return new Float2D(-1, ((properties.fanOut / 4.0f) * properties.gridSpacing) - properties.endOffset);
+    }
   }
 
-  private Int2D createEndPosition(int endIndex)
+  private Float2D createEndPosition(int endIndex)
   {
-    return new Int2D(1, -endIndex * properties.gridSpacing);
+    return createPosition(endIndex, 2);
+  }
+
+  private Float2D createMidPosition(int endIndex)
+  {
+    return createPosition(endIndex, 0);
+  }
+
+  private Float2D createPosition(int endIndex, int x)
+  {
+    if (properties.appearance == SplitterAppearance.LEFT)
+    {
+      return new Float2D(x, -endIndex * properties.gridSpacing);
+    }
+    else if (properties.appearance == SplitterAppearance.RIGHT)
+    {
+      return new Float2D(x, endIndex * properties.gridSpacing);
+    }
+    else
+    {
+      return new Float2D(x, (-endIndex + (properties.fanOut / 2.0f)) * properties.gridSpacing);
+    }
   }
 
   @Override
@@ -179,6 +342,11 @@ public class SplitterView
     properties.fanOut = PropertyClamp.clamp(properties.fanOut, 1, PropertyClamp.MAX);
     properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);
     properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
+    for (int i = 0; i < properties.splitIndices.length; i++)
+    {
+      int index = properties.splitIndices[i];
+      properties.splitIndices[i] = PropertyClamp.clamp(index, 0, properties.fanOut - 1);
+    }
   }
 
   @Override

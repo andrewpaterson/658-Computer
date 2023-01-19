@@ -47,7 +47,7 @@ public class RectangleView
     this.dimension.subtract(topLeft);
     this.positionRelativeToIC = topLeft.clone();
 
-    gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
+    this.gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
 
   @Override

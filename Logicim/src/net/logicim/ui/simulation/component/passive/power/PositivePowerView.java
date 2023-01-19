@@ -92,7 +92,7 @@ public class PositivePowerView
     Font font = graphics.getFont();
 
     polygonView.paint(graphics, viewport);
-    rectangle.updateGridCache();  // Suspect to the max.
+
     drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
     paintPorts(graphics, viewport, time);
@@ -103,16 +103,18 @@ public class PositivePowerView
 
   public void drawCenteredString(Graphics graphics, Viewport viewport, String text)
   {
+    rectangle.updateGridCache();  // Suspect to the max.
+
     Font font = viewport.getBoldFont(11 * viewport.getZoom());
     Color voltageColour = Colours.getInstance().getTraceVoltage(properties.voltage_V);
     graphics.setColor(voltageColour);
 
-    FontMetrics metrics = graphics.getFontMetrics(font);
     int x = viewport.transformGridToScreenSpaceX(rectangle.getTransformedPosition());
     int y = viewport.transformGridToScreenSpaceY(rectangle.getTransformedPosition());
     int width = viewport.transformGridToScreenWidth(rectangle.getTransformedDimension());
     int height = viewport.transformGridToScreenHeight(rectangle.getTransformedDimension());
 
+    FontMetrics metrics = graphics.getFontMetrics(font);
     int sx = x + (width - metrics.stringWidth(text)) / 2;
     int sy = y + ((height - metrics.getHeight()) / 2) + metrics.getAscent();
     graphics.setFont(font);

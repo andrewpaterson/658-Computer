@@ -3,6 +3,7 @@ package net.logicim.file.writer;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
@@ -20,7 +21,7 @@ public abstract class ReflectiveWriter
   public static final String LOGICIM_TAG_NAME = "Logicim";
   public static final String INDEX = "index";
   public static final String CIRCUIT_DATA_TAG_NAME = "circuitData";
-  public static final String TYPE = "Type";
+  public static final String TYPE = "type";
 
   public static String getXMLTag(Object o)
   {
@@ -232,6 +233,15 @@ public abstract class ReflectiveWriter
     arrayContainer.appendChild(doc.createTextNode(builder.toString()));
   }
 
+  public static void writeEnum(Document doc, Element parent, String elementName, Class<?> fieldClass, Enum<?> fieldValue)
+  {
+    Element node = doc.createElement(elementName);
+    node.setAttribute(TYPE, Enum.class.getSimpleName());
+    node.setAttribute("class", fieldClass.getSimpleName());
+    node.setAttribute("enum", StringUtil.toEnumString(fieldValue));
+    parent.appendChild(node);
+  }
+
   public static void writeDouble2DArray(Document doc, Element parent, String elementName, double[][] fieldValue)
   {
     Element arrayContainer = doc.createElement(elementName);
@@ -378,6 +388,10 @@ public abstract class ReflectiveWriter
       else if (double[].class.isAssignableFrom(fieldClass))
       {
         writeDoubleArray(doc, parent, fieldName, (double[]) fieldValue);
+      }
+      else if (Enum.class.isAssignableFrom(fieldClass))
+      {
+        writeEnum(doc, parent, fieldName, fieldClass, (Enum<?>) fieldValue);
       }
       else
       {

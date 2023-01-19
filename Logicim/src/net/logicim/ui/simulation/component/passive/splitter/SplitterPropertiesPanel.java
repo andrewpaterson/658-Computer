@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
+import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
@@ -71,13 +72,18 @@ public class SplitterPropertiesPanel
   @Override
   public void focusLost(FocusEvent e)
   {
+    dialog.focusLost();
+  }
+
+  public SplitterProperties valueMaybeChanged()
+  {
     SplitterProperties properties = createProperties();
     int bitWidthValue = bitWidth.getValue();
     if (!(bitWidthValue > 0 && bitWidthValue < 99))
     {
       bitWidth.setText("1");
     }
-    dialog.focusLost(properties);
+    return properties;
   }
 
   public SplitterProperties createProperties()
@@ -95,8 +101,9 @@ public class SplitterPropertiesPanel
     return new SplitterProperties(name.getValue(),
                                   bitWidthValue,
                                   fanOut.getValue(),
-                                  offset.getValue(),
                                   spacing.getValue(),
+                                  appearance.getValue(),
+                                  offset.getValue(),
                                   splitIndices);
   }
 

@@ -52,5 +52,10 @@ public class PackageInspectorStore
       }
     }
   }
+
+  public Map<String, PackageInspector> getPackageInspectors()
+  {
+    return packageInspectors;
+  }
 }
 

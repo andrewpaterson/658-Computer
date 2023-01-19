@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
+import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.components.typeeditor.PropertyEditorFactory;

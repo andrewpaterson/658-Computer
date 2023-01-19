@@ -147,8 +147,9 @@ public class SplitterView
                             selected,
                             properties.bitWidth,
                             properties.fanOut,
-                            properties.endOffset,
                             properties.gridSpacing,
+                            properties.appearance,
+                            properties.endOffset,
                             properties.splitIndices);
   }
 

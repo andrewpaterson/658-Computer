@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -19,7 +20,12 @@ public class SplitterViewFactory
     return new SplitterView(circuitEditor,
                             position,
                             rotation,
-                            new SplitterProperties("", 8, 3, -1, 2));
+                            new SplitterProperties("",
+                                                   2,
+                                                   2,
+                                                   2,
+                                                   SplitterAppearance.LEFT,
+                                                   -1));
   }
 
   @Override

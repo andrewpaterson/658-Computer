@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.common.util.EnumUtil;
-import net.logicim.domain.common.propagation.FamilyStore;
+import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
 
@@ -38,9 +38,17 @@ public class SplitterAppearanceEditor
   }
 
   @Override
-  public Object getValue()
+  public SplitterAppearance getValue()
   {
-    return FamilyStore.getInstance().get((String) comboBox.getSelectedItem());
+    Object selectedItem = comboBox.getSelectedItem();
+    if (selectedItem != null)
+    {
+      return (SplitterAppearance) EnumUtil.getEnum(SplitterAppearance.class, (String)selectedItem);
+    }
+    else
+    {
+      return null;
+    }
   }
 
   @Override

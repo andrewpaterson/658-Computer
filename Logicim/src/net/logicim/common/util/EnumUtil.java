@@ -8,20 +8,34 @@ import java.util.Map;
 
 public class EnumUtil
 {
-  public static List<Enum<?>> toList(Class<? extends Enum<?>> aClass)
+  public static List<Enum<?>> toList(Class<? extends Enum<?>> anEnum)
   {
-    Enum<?>[] enums = (Enum<?>[]) ClassInspector.forClass(aClass).invokeByTypes("values");
+    Enum<?>[] enums = (Enum<?>[]) ClassInspector.forClass(anEnum).invokeByTypes("values");
     return CollectionUtil.newList(enums);
   }
 
   public static Map<Enum<?>, String> toEnumMap(List<? extends Enum<?>> enums)
   {
     Map<Enum<?>, String> result = new LinkedHashMap<>();
-    for (Enum<?> enumElement : enums)
+    for (Enum<?> element : enums)
     {
-      result.put(enumElement, StringUtil.toEnumString(enumElement));
+      result.put(element, StringUtil.toEnumString(element));
     }
     return result;
+  }
+
+  public static Enum<?> getEnum(Class<? extends Enum<?>> anEnum, String enumName)
+  {
+    List<Enum<?>> enums = toList(anEnum);
+    for (Enum<?> element : enums)
+    {
+      String elementName = StringUtil.toEnumString(element);
+      if (elementName.equals(enumName))
+      {
+        return element;
+      }
+    }
+    return null;
   }
 }
 

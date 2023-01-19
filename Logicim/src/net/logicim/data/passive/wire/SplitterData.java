@@ -16,8 +16,9 @@ public class SplitterData
 {
   protected int bitWidth;
   protected int fanOut;
-  protected int endOffset;
   protected int girdSpacing;
+  protected SplitterAppearance appearance;
+  protected int endOffset;
   protected int[] splitIndices;
 
   public SplitterData()
@@ -31,13 +32,15 @@ public class SplitterData
                       boolean selected,
                       int bitWidth,
                       int fanOut,
-                      int endOffset,
                       int girdSpacing,
+                      SplitterAppearance appearance,
+                      int endOffset,
                       int[] splitIndices)
   {
     super(position, rotation, name, ports, selected);
     this.bitWidth = bitWidth;
     this.fanOut = fanOut;
+    this.appearance = appearance;
     this.endOffset = endOffset;
     this.girdSpacing = girdSpacing;
     this.splitIndices = splitIndices;
@@ -52,8 +55,9 @@ public class SplitterData
                             new SplitterProperties(name,
                                                    bitWidth,
                                                    fanOut,
-                                                   endOffset,
                                                    girdSpacing,
+                                                   appearance,
+                                                   endOffset,
                                                    splitIndices));
   }
 }

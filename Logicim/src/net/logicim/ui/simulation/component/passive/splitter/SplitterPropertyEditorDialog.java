@@ -46,17 +46,30 @@ public class SplitterPropertyEditorDialog
 
   private SplitterProperties createProperties()
   {
-    return ((SplitterPropertiesPanel) getPropertiesPanel()).createProperties();
+    return getSplitterPropertiesPanel().createProperties();
   }
 
-  public void focusLost(SplitterProperties properties)
+  private SplitterPropertiesPanel getSplitterPropertiesPanel()
   {
-    componentViewProperties = properties;
-    if (properties.bitWidth != currentBitWidth)
+    return (SplitterPropertiesPanel) getPropertiesPanel();
+  }
+
+  public void focusLost()
+  {
+    componentViewProperties = getSplitterPropertiesPanel().valueMaybeChanged();
+    if (componentViewProperties.bitWidth != currentBitWidth)
     {
+      currentBitWidth = componentViewProperties.bitWidth;
       getContentPane().removeAll();
       build();
     }
+  }
+
+  @Override
+  public void okay()
+  {
+    focusLost();
+    super.okay();
   }
 }
 

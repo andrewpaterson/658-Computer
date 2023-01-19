@@ -124,6 +124,10 @@ public class LogicimFileReader
     {
       return new DoubleArray2DData();
     }
+    else if (Enum.class.getSimpleName().equals(type))
+    {
+      return new EnumData();
+    }
     else
     {
       String savedDataClassName = type;

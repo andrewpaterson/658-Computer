@@ -1,4 +1,4 @@
-package net.logicim.ui.simulation.component.passive.splitter;
+package net.logicim.data.passive.wire;
 
 public enum SplitterAppearance
 {

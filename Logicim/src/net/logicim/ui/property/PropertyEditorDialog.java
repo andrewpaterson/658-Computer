@@ -85,6 +85,11 @@ public abstract class PropertyEditorDialog
   @Override
   public void executeButtonAction()
   {
+    okay();
+  }
+
+  public void okay()
+  {
     boolean propertyChanged = updateProperties();
 
     if (propertyChanged)

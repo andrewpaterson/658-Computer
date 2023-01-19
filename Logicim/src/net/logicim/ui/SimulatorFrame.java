@@ -1,6 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.common.reflect.ClassInspector;
+import net.logicim.common.reflect.EnumStore;
 import net.logicim.data.SaveData;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.ui.util.WindowSizer;
@@ -18,6 +19,7 @@ public class SimulatorFrame
     SimulatorFrame simulatorFrame = new SimulatorFrame();
 
     ensureDataConstructors();
+    ensureEnumStores();
 
     SimulatorPanel simulatorPanel = new SimulatorPanel(simulatorFrame);
     simulatorFrame.add(simulatorPanel);
@@ -130,6 +132,11 @@ public class SimulatorFrame
     WindowSizer.centre(simulatorFrame);
 
     simulatorPanel.loop();
+  }
+
+  protected static void ensureEnumStores()
+  {
+    EnumStore.getInstance();
   }
 
   protected static void ensureDataConstructors()

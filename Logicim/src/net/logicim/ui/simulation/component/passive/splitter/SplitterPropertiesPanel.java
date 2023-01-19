@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.data.passive.wire.SplitterAppearance;
+import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
@@ -43,7 +44,7 @@ public class SplitterPropertiesPanel
     name = new TextPropertyEditor(this, NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
     fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
-    appearance = new SplitterAppearanceEditor(this, APPEARANCE, SplitterAppearance.LEFT);
+    appearance = new SplitterAppearanceEditor(this, APPEARANCE, properties.appearance);
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);
     offset = new IntegerPropertyEditor(this, OFFSET, properties.endOffset);
 
@@ -79,7 +80,7 @@ public class SplitterPropertiesPanel
   {
     SplitterProperties properties = createProperties();
     int bitWidthValue = bitWidth.getValue();
-    if (!(bitWidthValue > 0 && bitWidthValue < 99))
+    if (!(bitWidthValue > 0 && bitWidthValue < PropertyClamp.MAX))
     {
       bitWidth.setText("1");
     }

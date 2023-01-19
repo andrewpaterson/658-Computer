@@ -52,7 +52,7 @@ public class SplitterView
     endPortViews = createEndPorts(properties);
   }
 
-  protected List<Port> getPortsForFanoutIndex(int fanIndex)
+  protected List<Port> getPortsForFanOutIndex(int fanIndex)
   {
     List<Port> ports = new ArrayList<>();
     for (int i = 0; i < properties.splitIndices.length; i++)
@@ -85,9 +85,13 @@ public class SplitterView
     List<PortView> portViews = new ArrayList<>();
     for (int i = 0; i < properties.fanOut; i++)
     {
-      Float2D position = createEndPosition(i);
-      PortView portView = new PortView(this, getPortsForFanoutIndex(i), new Int2D(position));
-      portViews.add(portView);
+      List<Port> portsForFanOut = getPortsForFanOutIndex(i);
+      if (portsForFanOut.size() > 0)
+      {
+        Float2D position = createEndPosition(i);
+        PortView portView = new PortView(this, portsForFanOut, new Int2D(position));
+        portViews.add(portView);
+      }
     }
     return portViews;
   }
@@ -103,7 +107,13 @@ public class SplitterView
 
     rectangleView = createRectangleView(centerX, properties.fanOut);
 
-    textViews = new ArrayList<>();
+    this.textViews = createTextViews();
+  }
+
+  private List<TextView> createTextViews()
+  {
+    List<TextView> textViews = new ArrayList<>();
+    int halfWay = properties.fanOut / 2;
     for (int i = 0; i < properties.fanOut; i++)
     {
       Float2D p2 = createMidPosition(i);
@@ -111,9 +121,65 @@ public class SplitterView
       p2.y += 0.1;
       List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(i);
       String text = toText(portIndicesForFanoutIndex);
-      TextView textView = new TextView(this, p2, text, 7, false, SwingConstants.LEFT, SwingConstants.TOP);
+      int horizontalAlignment;
+      int verticalAlignment;
+      if (properties.appearance == SplitterAppearance.LEFT)
+      {
+        if (rotation == Rotation.North)
+        {
+          horizontalAlignment = SwingConstants.LEFT;
+          verticalAlignment = SwingConstants.TOP;
+          p2.x += 0.1;
+          p2.y += 0.1;
+        }
+        else if (rotation == Rotation.South)
+        {
+          horizontalAlignment = SwingConstants.RIGHT;
+          verticalAlignment = SwingConstants.BOTTOM;
+          p2.x += 0.1;
+          p2.y += 0.1;
+        }
+        else
+        {
+          horizontalAlignment = SwingConstants.CENTER;
+          verticalAlignment = SwingConstants.CENTER;
+          p2.x += 0;
+          p2.y += 0;
+        }
+      }
+      else if (properties.appearance == SplitterAppearance.RIGHT)
+      {
+        if (rotation == Rotation.North)
+        {
+          horizontalAlignment = SwingConstants.LEFT;
+          verticalAlignment = SwingConstants.BOTTOM;
+          p2.x += 0.1;
+          p2.y += -0.2;
+        }
+        else if (rotation == Rotation.South)
+        {
+          horizontalAlignment = SwingConstants.RIGHT;
+          verticalAlignment = SwingConstants.BOTTOM;
+          p2.x += 0.1;
+          p2.y += -1.25;
+        }
+        else
+        {
+          horizontalAlignment = SwingConstants.CENTER;
+          verticalAlignment = SwingConstants.CENTER;
+          p2.x += 0;
+          p2.y += 0;
+        }
+      }
+      else
+      {
+        horizontalAlignment = SwingConstants.LEFT;
+        verticalAlignment = SwingConstants.TOP;
+      }
+      TextView textView = new TextView(this, p2, text, 7, false, horizontalAlignment, verticalAlignment);
       textViews.add(textView);
     }
+    return textViews;
   }
 
   private String toText(List<Integer> indices)
@@ -341,7 +407,14 @@ public class SplitterView
   {
     properties.fanOut = PropertyClamp.clamp(properties.fanOut, 1, PropertyClamp.MAX);
     properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);
-    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
+    if (properties.appearance == SplitterAppearance.CENTER)
+    {
+      properties.endOffset = PropertyClamp.clamp(properties.endOffset, properties.fanOut * properties.gridSpacing, properties.fanOut * properties.gridSpacing / 2 - 1);
+    }
+    else
+    {
+      properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
+    }
     for (int i = 0; i < properties.splitIndices.length; i++)
     {
       int index = properties.splitIndices[i];
@@ -362,7 +435,7 @@ public class SplitterView
     int i = 0;
     for (int fanIndex = 0; fanIndex < properties.fanOut; fanIndex++)
     {
-      List<Port> portsForFanoutIndex = getPortsForFanoutIndex(fanIndex);
+      List<Port> portsForFanoutIndex = getPortsForFanOutIndex(fanIndex);
       for (Port endPort : portsForFanoutIndex)
       {
         Port startPort = ports.get(i);

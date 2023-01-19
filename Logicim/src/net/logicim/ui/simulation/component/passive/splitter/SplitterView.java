@@ -113,73 +113,98 @@ public class SplitterView
   private List<TextView> createTextViews()
   {
     List<TextView> textViews = new ArrayList<>();
-    int halfWay = properties.fanOut / 2;
-    for (int i = 0; i < properties.fanOut; i++)
+    for (int endIndex = 0; endIndex < properties.fanOut; endIndex++)
     {
-      Float2D p2 = createMidPosition(i);
-      p2.x += 0.25;
-      p2.y += 0.1;
-      List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(i);
+      List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(endIndex);
       String text = toText(portIndicesForFanoutIndex);
-      int horizontalAlignment;
-      int verticalAlignment;
-      if (properties.appearance == SplitterAppearance.LEFT)
-      {
-        if (rotation == Rotation.North)
-        {
-          horizontalAlignment = SwingConstants.LEFT;
-          verticalAlignment = SwingConstants.TOP;
-          p2.x += 0.1;
-          p2.y += 0.1;
-        }
-        else if (rotation == Rotation.South)
-        {
-          horizontalAlignment = SwingConstants.RIGHT;
-          verticalAlignment = SwingConstants.BOTTOM;
-          p2.x += 0.1;
-          p2.y += 0.1;
-        }
-        else
-        {
-          horizontalAlignment = SwingConstants.CENTER;
-          verticalAlignment = SwingConstants.CENTER;
-          p2.x += 0;
-          p2.y += 0;
-        }
-      }
-      else if (properties.appearance == SplitterAppearance.RIGHT)
-      {
-        if (rotation == Rotation.North)
-        {
-          horizontalAlignment = SwingConstants.LEFT;
-          verticalAlignment = SwingConstants.BOTTOM;
-          p2.x += 0.1;
-          p2.y += -0.2;
-        }
-        else if (rotation == Rotation.South)
-        {
-          horizontalAlignment = SwingConstants.RIGHT;
-          verticalAlignment = SwingConstants.BOTTOM;
-          p2.x += 0.1;
-          p2.y += -1.25;
-        }
-        else
-        {
-          horizontalAlignment = SwingConstants.CENTER;
-          verticalAlignment = SwingConstants.CENTER;
-          p2.x += 0;
-          p2.y += 0;
-        }
-      }
-      else
-      {
-        horizontalAlignment = SwingConstants.LEFT;
-        verticalAlignment = SwingConstants.TOP;
-      }
-      TextView textView = new TextView(this, p2, text, 7, false, horizontalAlignment, verticalAlignment);
+      Float2D position = createMidPosition(endIndex);
+      TextView textView = new TextView(this, position, text, 7, false);
+      setTextViewThing(textView, position);
       textViews.add(textView);
     }
     return textViews;
+  }
+
+  private void setTextViewThing(TextView textView, Float2D position)
+  {
+    position.x += 0.25;
+    position.y += 0.1;
+
+    int halfWay = properties.fanOut / 2;
+    int horizontalAlignment;
+    int verticalAlignment;
+    Rotation degrees = Rotation.North;
+    if (properties.appearance == SplitterAppearance.LEFT)
+    {
+      if (rotation == Rotation.North)
+      {
+        horizontalAlignment = SwingConstants.LEFT;
+        verticalAlignment = SwingConstants.TOP;
+        position.x += 0.1;
+        position.y += 0.1;
+      }
+      else if (rotation == Rotation.South)
+      {
+        horizontalAlignment = SwingConstants.RIGHT;
+        verticalAlignment = SwingConstants.BOTTOM;
+        position.x += 0.1;
+        position.y += 0.1;
+      }
+      else if (rotation == Rotation.East)
+      {
+        horizontalAlignment = SwingConstants.TOP;
+        verticalAlignment = SwingConstants.LEFT;
+        position.x += 0.1;
+        position.y += 0.1;
+        degrees = Rotation.East;
+      }
+      else if (rotation == Rotation.West)
+      {
+        horizontalAlignment = SwingConstants.TOP;
+        verticalAlignment = SwingConstants.RIGHT;
+        position.x += 0.1;
+        position.y += 1.0;
+        degrees = Rotation.East;
+      }
+      else
+      {
+        horizontalAlignment = SwingConstants.CENTER;
+        verticalAlignment = SwingConstants.CENTER;
+        position.x += 0;
+        position.y += 0;
+      }
+    }
+    else if (properties.appearance == SplitterAppearance.RIGHT)
+    {
+      if (rotation == Rotation.North)
+      {
+        horizontalAlignment = SwingConstants.LEFT;
+        verticalAlignment = SwingConstants.BOTTOM;
+        position.x += 0.1;
+        position.y += -0.2;
+      }
+      else if (rotation == Rotation.South)
+      {
+        horizontalAlignment = SwingConstants.RIGHT;
+        verticalAlignment = SwingConstants.BOTTOM;
+        position.x += 0.1;
+        position.y += -1.2;
+      }
+      else
+      {
+        horizontalAlignment = SwingConstants.CENTER;
+        verticalAlignment = SwingConstants.CENTER;
+        position.x += 0;
+        position.y += 0;
+      }
+    }
+    else
+    {
+      horizontalAlignment = SwingConstants.LEFT;
+      verticalAlignment = SwingConstants.TOP;
+    }
+    textView.setParameters(false, degrees, horizontalAlignment, verticalAlignment);
+    textView.setPositionRelativeToIC(position.clone());
   }
 
   private String toText(List<Integer> indices)
@@ -446,6 +471,30 @@ public class SplitterView
     }
 
     return result;
+  }
+
+  protected void updateTextViews()
+  {
+    for (int endIndex = 0; endIndex < textViews.size(); endIndex++)
+    {
+      TextView textView = textViews.get(endIndex);
+      Float2D position = createMidPosition(endIndex);
+      setTextViewThing(textView, position);
+    }
+  }
+
+  @Override
+  public void rotateRight()
+  {
+    super.rotateRight();
+    updateTextViews();
+  }
+
+  @Override
+  public void rotateLeft()
+  {
+    super.rotateLeft();
+    updateTextViews();
   }
 }
 

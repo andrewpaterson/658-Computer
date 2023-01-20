@@ -6,6 +6,7 @@ public class ComponentProperties
 {
   public String name;
 
+
   public ComponentProperties()
   {
     name = null;

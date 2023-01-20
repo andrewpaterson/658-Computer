@@ -4,14 +4,13 @@ import net.logicim.common.type.Int2D;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
-import net.logicim.ui.util.ButtonUtil;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -28,10 +27,10 @@ public abstract class PropertyEditorDialog
 {
   protected Dimension dimension;
   protected SimulatorEditor editor;
-  protected ComponentView<?> componentView;
+  protected StaticView<?> componentView;
   protected PropertiesPanel propertiesPanel;
 
-  public PropertyEditorDialog(Frame owner, String title, Dimension dimension, SimulatorEditor editor, ComponentView<?> componentView)
+  public PropertyEditorDialog(Frame owner, String title, Dimension dimension, SimulatorEditor editor, StaticView<?> componentView)
   {
     super(owner, title, true);
 
@@ -65,16 +64,16 @@ public abstract class PropertyEditorDialog
     return dimension;
   }
 
-  protected ComponentView<?> recreateComponentView(ComponentProperties properties)
+  protected StaticView<?> recreateComponentView(ComponentProperties properties)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
 
     Rotation rotation = componentView.getRotation();
     Int2D position = componentView.getPosition();
 
-    Class<? extends ComponentView<?>> aClass = (Class<? extends ComponentView<?>>) componentView.getClass();
+    Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) componentView.getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    ComponentView<?> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
+    StaticView<?> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
 
     circuitEditor.deleteComponentView(this.componentView);
     circuitEditor.placeComponentView(newComponentView);
@@ -95,7 +94,7 @@ public abstract class PropertyEditorDialog
     if (propertyChanged)
     {
       this.componentView.clampProperties();
-      ComponentView<?> componentView = recreateComponentView(this.componentView.getProperties());
+      StaticView<?> componentView = recreateComponentView(this.componentView.getProperties());
       editor.replaceSelection(componentView, this.componentView);
       editor.pushUndo();
     }

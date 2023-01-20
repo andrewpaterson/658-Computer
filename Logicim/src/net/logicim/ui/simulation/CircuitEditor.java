@@ -7,7 +7,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
-import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
@@ -18,15 +18,13 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.SelectionRectangle;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
-import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
-import net.logicim.ui.common.integratedcircuit.PassiveView;
-import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 import java.awt.*;
 import java.util.List;
@@ -36,8 +34,11 @@ public class CircuitEditor
 {
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
   protected Set<PassiveView<?, ?>> passiveViews;
+  protected Set<DecorativeView<?>> decorativeViews;
+
   protected Set<TraceView> traceViews;
   protected Map<String, Set<TunnelView>> tunnelViews;
+
   protected Circuit circuit;
   protected Simulation simulation;
   protected List<View> selection;
@@ -50,36 +51,33 @@ public class CircuitEditor
     this.traceViews = new LinkedHashSet<>();
     this.tunnelViews = new LinkedHashMap<>();
     this.passiveViews = new LinkedHashSet<>();
+    this.decorativeViews = new LinkedHashSet<>();
     this.selection = new ArrayList<>();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     long time = getTime();
-    List<TraceView> traceViews;
-    List<IntegratedCircuitView<?, ?>> semiconductorViews;
-    List<PassiveView<?, ?>> passiveViews;
+    List<View> views;
     synchronized (this)
     {
-      traceViews = new ArrayList<>(this.traceViews);
-      semiconductorViews = new ArrayList<>(this.integratedCircuitViews);
-      passiveViews = new ArrayList<>(this.passiveViews);
+      views = getAllViews();
     }
 
-    for (TraceView traceView : traceViews)
+    for (View view : views)
     {
-      traceView.paint(graphics, viewport, time);
+      view.paint(graphics, viewport, time);
     }
+  }
 
-    for (PassiveView<?, ?> passiveView : passiveViews)
-    {
-      passiveView.paint(graphics, viewport, time);
-    }
-
-    for (IntegratedCircuitView<?, ?> integratedCircuitView : semiconductorViews)
-    {
-      integratedCircuitView.paint(graphics, viewport, time);
-    }
+  protected List<View> getAllViews()
+  {
+    List<View> views = new ArrayList<>();
+    views.addAll(decorativeViews);
+    views.addAll(traceViews);
+    views.addAll(passiveViews);
+    views.addAll(integratedCircuitViews);
+    return views;
   }
 
   protected long getTime()
@@ -92,7 +90,7 @@ public class CircuitEditor
     return circuit;
   }
 
-  public void deleteComponentView(ComponentView<?> componentView)
+  public void deleteComponentView(StaticView<?> componentView)
   {
     if (componentView instanceof IntegratedCircuitView)
     {
@@ -103,6 +101,10 @@ public class CircuitEditor
     {
       Set<PortView> updatedPortViews = deletePassiveView((PassiveView<?, ?>) componentView);
       fireConnectionEvents(updatedPortViews);
+    }
+    else if (componentView instanceof DecorativeView)
+    {
+      deleteDecorativeView((DecorativeView<?>) componentView);
     }
     else if (componentView == null)
     {
@@ -136,6 +138,11 @@ public class CircuitEditor
     removePassiveView(passiveView);
 
     return connectConnections(connectionViews);
+  }
+
+  protected void deleteDecorativeView(DecorativeView<?> decorativeView)
+  {
+    removeDecorativeView(decorativeView);
   }
 
   public List<ConnectionView> disconnectComponentView(ComponentView<?> componentView)
@@ -295,9 +302,9 @@ public class CircuitEditor
     simulation.runToTime(timeForward);
   }
 
-  public ComponentView<?> getComponentViewInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public StaticView<?> getComponentViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
-    List<ComponentView<?>> selectedViews = getComponentViewsInScreenSpace(viewport, screenPosition);
+    List<StaticView<?>> selectedViews = getComponentViewsInScreenSpace(viewport, screenPosition);
 
     if (selectedViews.size() == 1)
     {
@@ -312,8 +319,8 @@ public class CircuitEditor
       Int2D boundBoxPosition = new Int2D();
       Int2D boundBoxDimension = new Int2D();
       float shortestDistance = Float.MAX_VALUE;
-      ComponentView<?> closestView = null;
-      for (ComponentView<?> view : selectedViews)
+      StaticView<?> closestView = null;
+      for (StaticView<?> view : selectedViews)
       {
         view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
         boundBoxPosition.add(boundBoxDimension.x / 2, boundBoxDimension.y / 2);
@@ -328,64 +335,70 @@ public class CircuitEditor
     }
   }
 
-  public List<ComponentView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public StaticViewIterator staticViewIterator()
   {
-    Int2D boundBoxPosition = new Int2D();
-    Int2D boundBoxDimension = new Int2D();
-    List<ComponentView<?>> selectedViews = new ArrayList<>();
-    for (IntegratedCircuitView<?, ?> view : integratedCircuitViews)
+    return new StaticViewIterator(integratedCircuitViews, passiveViews, decorativeViews);
+  }
+
+  public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
+  {
+    List<StaticView<?>> selectedViews = new ArrayList<>();
+    StaticViewIterator iterator = staticViewIterator();
+    while (iterator.hasNext())
     {
-      if (view.isEnabled())
+      StaticView<?> view = iterator.next();
+      if (isInScreenSpaceBoundingBox(viewport, screenPosition, view))
       {
-        view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
-        if (BoundingBox.containsPoint(screenPosition, boundBoxPosition, boundBoxDimension))
-        {
-          selectedViews.add(view);
-        }
-      }
-    }
-    for (PassiveView<?, ?> view : passiveViews)
-    {
-      if (view.isEnabled())
-      {
-        view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
-        if (BoundingBox.containsPoint(screenPosition, boundBoxPosition, boundBoxDimension))
-        {
-          selectedViews.add(view);
-        }
+        selectedViews.add(view);
       }
     }
     return selectedViews;
   }
 
-  public List<ComponentView<?>> getComponentViewsInGridSpace(Int2D gridPosition)
+  public List<StaticView<?>> getComponentViewsInGridSpace(Int2D gridPosition)
   {
-    Float2D boundBoxPosition = new Float2D();
-    Float2D boundBoxDimension = new Float2D();
-    List<ComponentView<?>> selectedViews = new ArrayList<>();
-    for (ComponentView<?> view : integratedCircuitViews)
+    List<StaticView<?>> selectedViews = new ArrayList<>();
+    StaticViewIterator iterator = staticViewIterator();
+    while (iterator.hasNext())
     {
-      if (view.isEnabled())
+      StaticView<?> view = iterator.next();
+      if (isInGridSpaceBoundBox(gridPosition, view))
       {
-        view.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
-        if (BoundingBox.containsPoint(gridPosition, boundBoxPosition, boundBoxDimension))
-        {
-          selectedViews.add(view);
-        }
-      }
-    }
-    for (PassiveView<?, ?> view : passiveViews)
-    {
-      if (view.isEnabled())
-      {
-        view.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
-        if (BoundingBox.containsPoint(gridPosition, boundBoxPosition, boundBoxDimension))
-        {
-          selectedViews.add(view);
-        }
+        selectedViews.add(view);
       }
     }
     return selectedViews;
+  }
+
+  protected boolean isInScreenSpaceBoundingBox(Viewport viewport, Int2D screenPosition, StaticView<?> view)
+  {
+    if (view.isEnabled())
+    {
+      Int2D boundBoxPosition = new Int2D();
+      Int2D boundBoxDimension = new Int2D();
+      view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
+      if (BoundingBox.containsPoint(screenPosition, boundBoxPosition, boundBoxDimension))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  protected boolean isInGridSpaceBoundBox(Int2D gridPosition, StaticView<?> view)
+  {
+
+    if (view.isEnabled())
+    {
+      Float2D boundBoxPosition = new Float2D();
+      Float2D boundBoxDimension = new Float2D();
+      view.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
+      if (BoundingBox.containsPoint(gridPosition, boundBoxPosition, boundBoxDimension))
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   public List<TraceView> getTraceViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
@@ -468,7 +481,7 @@ public class CircuitEditor
 
   public ConnectionView getConnection(Int2D position)
   {
-    List<ComponentView<?>> componentViews = getComponentViewsInGridSpace(position);
+    List<StaticView<?>> componentViews = getComponentViewsInGridSpace(position);
     List<TraceView> traceViews = getTraceViewsInGridSpace(position);
     Set<ConnectionView> connectionViews = new HashSet<>();
 
@@ -481,7 +494,7 @@ public class CircuitEditor
       }
     }
 
-    for (ComponentView<?> componentView : componentViews)
+    for (StaticView<?> componentView : componentViews)
     {
       PortView portView = componentView.getPortInGrid(position.x, position.y);
       if (portView != null)
@@ -981,6 +994,14 @@ public class CircuitEditor
             }
           }
 
+          if (view instanceof DecorativeView)
+          {
+            if (!decorativeViews.contains(view))
+            {
+              contained = false;
+            }
+          }
+
           if (!contained)
           {
             throw new SimulatorException(view.getDescription() + " referenced by trace [" + traceView.getDescription() + "] does not include trace.");
@@ -993,27 +1014,18 @@ public class CircuitEditor
   public CircuitData save()
   {
     Set<View> selection = new HashSet<>(this.selection);
-    ArrayList<IntegratedCircuitData<?, ?>> semiconductorDatas = new ArrayList<>();
-    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
+    ArrayList<StaticData> componentDatas = new ArrayList<>();
+    StaticViewIterator iterator = staticViewIterator();
+    while (iterator.hasNext())
     {
-      IntegratedCircuitData<?, ?> integratedCircuitData = integratedCircuitView.save(selection.contains(integratedCircuitView));
-      if (integratedCircuitData == null)
+      StaticView<?> staticView = iterator.next();
+      StaticData staticData = (StaticData) staticView.save(selection.contains(staticView));
+      if (staticData == null)
       {
-        throw new SimulatorException("%s [%s] save may not return null.", integratedCircuitView.getClass().getSimpleName(), integratedCircuitView.getName());
+        throw new SimulatorException("%s [%s] save may not return null.", staticView.getClass().getSimpleName(), staticView.getName());
       }
 
-      semiconductorDatas.add(integratedCircuitData);
-    }
-
-    ArrayList<PassiveData<?>> passiveDatas = new ArrayList<>();
-    for (PassiveView<?, ?> passiveView : passiveViews)
-    {
-      PassiveData<?> passiveData = passiveView.save(selection.contains(passiveView));
-      if (passiveData == null)
-      {
-        throw new SimulatorException("%s [%s] save may not return null.", passiveView.getClass().getSimpleName(), passiveView.getName());
-      }
-      passiveDatas.add(passiveData);
+      componentDatas.add(staticData);
     }
 
     ArrayList<TraceData> traceDatas = new ArrayList<>();
@@ -1025,8 +1037,7 @@ public class CircuitEditor
 
     TimelineData timelineData = simulation.getTimeline().save();
     return new CircuitData(timelineData,
-                           semiconductorDatas,
-                           passiveDatas,
+                           componentDatas,
                            traceDatas);
   }
 
@@ -1042,14 +1053,9 @@ public class CircuitEditor
       traceData.create(this, traceLoader);
     }
 
-    for (PassiveData<?> passiveData : circuitData.passives)
+    for (StaticData staticData : circuitData.components)
     {
-      passiveData.createAndLoad(this, traceLoader);
-    }
-
-    for (IntegratedCircuitData<?, ?> integratedCircuitData : circuitData.integratedCircuits)
-    {
-      integratedCircuitData.createAndLoad(this, traceLoader);
+      staticData.createAndLoad(this, traceLoader);
     }
   }
 
@@ -1078,7 +1084,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public void createComponentView(ComponentView<?> componentView)
+  public Set<PortView> connectComponentView(ComponentView<?> componentView)
   {
     List<PortView> ports = componentView.getPorts();
     for (PortView portView : ports)
@@ -1087,13 +1093,8 @@ public class CircuitEditor
       ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
       portView.setConnection(connectionView);
     }
-  }
 
-  public Set<PortView> connectComponentView(ComponentView<?> componentView)
-  {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    List<PortView> ports = componentView.getPorts();
-
     for (PortView portView : ports)
     {
       if (!updatedPortViews.contains(portView))
@@ -1110,7 +1111,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public void createConnectionViews(ComponentView<?> componentView)
+  public void createConnectionViewsFromComponentPorts(ComponentView<?> componentView)
   {
     List<PortView> ports = componentView.getPorts();
     for (PortView portView : ports)
@@ -1119,7 +1120,6 @@ public class CircuitEditor
       ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
       portView.setConnection(connectionView);
     }
-    componentView.enable(simulation);
   }
 
   public void fireConnectionEvents(Set<PortView> updatedPortViews)
@@ -1140,12 +1140,19 @@ public class CircuitEditor
     return simulation;
   }
 
-  public void placeComponentView(ComponentView<?> componentView)
+  public void placeComponentView(StaticView<?> componentView)
   {
-    createComponentView(componentView);
-    Set<PortView> updatedPortViews = connectComponentView(componentView);
+    if (componentView instanceof ComponentView)
+    {
+      Set<PortView> updatedPortViews = connectComponentView((ComponentView<?>) componentView);
 
-    fireConnectionEvents(updatedPortViews);
+      fireConnectionEvents(updatedPortViews);
+    }
+    else
+    {
+      componentView.enable(simulation);
+    }
+
     validateConsistency();
   }
 
@@ -1433,6 +1440,14 @@ public class CircuitEditor
     synchronized (this)
     {
       return passiveViews.remove(passiveView);
+    }
+  }
+
+  protected boolean removeDecorativeView(DecorativeView<?> decorativeView)
+  {
+    synchronized (this)
+    {
+      return decorativeViews.remove(decorativeView);
     }
   }
 

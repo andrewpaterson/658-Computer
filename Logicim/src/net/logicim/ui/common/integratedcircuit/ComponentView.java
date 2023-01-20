@@ -19,16 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ComponentView<PROPERTIES extends ComponentProperties>
-    extends StaticView
+    extends StaticView<PROPERTIES>
     implements ShapeHolder
 {
-  protected PROPERTIES properties;
-
   protected List<PortView> ports;
 
   public ComponentView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
   {
-    super(circuitEditor, position, rotation);
+    super(circuitEditor, position, rotation, properties);
     this.properties = properties;
 
     this.ports = new ArrayList<>();
@@ -204,15 +202,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return getComponent().isEnabled();
   }
 
-  public abstract String getType();
-
   protected abstract void createPortViews();
 
   public abstract Component getComponent();
 
   public abstract ComponentData save(boolean selected);
-
-  public abstract void clampProperties();
 
   public abstract void simulationStarted(Simulation simulation);
 }

@@ -32,7 +32,7 @@ public class TraceData
     this.selected = selected;
   }
 
-  public TraceView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public void create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     TraceView traceView = new TraceView(circuitEditor, start, end);
     List<Trace> traces = new ArrayList<>(traceIds.length);
@@ -47,8 +47,6 @@ public class TraceData
     {
       circuitEditor.select(traceView);
     }
-
-    return traceView;
   }
 }
 

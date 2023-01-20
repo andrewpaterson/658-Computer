@@ -3,7 +3,7 @@ package net.logicim.ui.property;
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class ReflectivePropertyEditorDialog
     extends PropertyEditorDialog
 {
-  public ReflectivePropertyEditorDialog(Frame owner, ComponentView<?> componentView, SimulatorEditor editor)
+  public ReflectivePropertyEditorDialog(Frame owner, StaticView<?> componentView, SimulatorEditor editor)
   {
     super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
   }

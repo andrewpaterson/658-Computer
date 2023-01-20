@@ -3,10 +3,12 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.ReflectiveData;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -15,26 +17,32 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class StaticView
+public abstract class StaticView<PROPERTIES extends ComponentProperties>
     extends View
     implements ShapeHolder
 {
+  protected PROPERTIES properties;
+
   protected CircuitEditor circuitEditor;
   protected Int2D position;
   protected Rotation rotation;
   protected BoundingBox boundingBox;
   protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
+
   protected boolean finalised;
 
-  public StaticView(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public StaticView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
   {
+    this.properties = properties;
+
     this.circuitEditor = circuitEditor;
     this.position = position.clone();
     this.rotation = rotation;
     this.boundingBox = new BoundingBox();
     this.selectionBox = new BoundingBox();
     this.shapes = new ArrayList<>();
+
     this.finalised = false;
   }
 
@@ -192,6 +200,21 @@ public abstract class StaticView
     invalidateCache();
   }
 
+  public PROPERTIES getProperties()
+  {
+    return properties;
+  }
+
   protected abstract void finaliseView();
+
+  public abstract boolean isEnabled();
+
+  public abstract PortView getPortInGrid(int x, int y);
+
+  public abstract void clampProperties();
+
+  public abstract ReflectiveData save(boolean selected);
+
+  public abstract String getType();
 }
 

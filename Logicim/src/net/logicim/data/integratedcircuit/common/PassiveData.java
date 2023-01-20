@@ -36,7 +36,9 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
   protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ComponentView<?> componentView)
   {
     PASSIVE passive = (PASSIVE) componentView;
-    circuitEditor.createConnectionViews(passive);
+    circuitEditor.createConnectionViewsFromComponentPorts(passive);
+    componentView.enable(circuitEditor.getSimulation());
+
     loadPorts(circuitEditor, traceLoader, passive);
   }
 

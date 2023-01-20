@@ -5,6 +5,7 @@ import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
@@ -41,7 +42,7 @@ public class SplitterViewFactory
   }
 
   @Override
-  public PropertyEditorDialog createEditorDialog(JFrame parentFrame, SimulatorEditor editor, ComponentView<?> componentView)
+  public PropertyEditorDialog createEditorDialog(JFrame parentFrame, SimulatorEditor editor, StaticView<?> componentView)
   {
     return new SplitterPropertyEditorDialog(parentFrame, editor, (SplitterView) componentView);
   }

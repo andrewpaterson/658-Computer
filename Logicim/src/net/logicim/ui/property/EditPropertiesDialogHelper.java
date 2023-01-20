@@ -2,6 +2,7 @@ package net.logicim.ui.property;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.util.WindowSizer;
@@ -17,10 +18,10 @@ public class EditPropertiesDialogHelper
 
   public void showPropertyEditorDialog(JFrame parentFrame,
                                        SimulatorEditor editor,
-                                       ComponentView<?> componentView)
+                                       StaticView<?> componentView)
   {
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
-    Class<? extends ComponentView<?>> aClass = (Class<? extends ComponentView<?>>) componentView.getClass();
+    Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) componentView.getClass();
     ViewFactory<?, ?> viewFactory = ViewFactoryStore.getInstance().get(aClass);
     PropertyEditorDialog dialog = viewFactory.createEditorDialog(parentFrame, editor, componentView);
     dialog.build();

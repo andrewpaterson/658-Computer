@@ -7,6 +7,7 @@ import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
@@ -17,9 +18,9 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
-import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
@@ -51,10 +52,10 @@ public class SimulatorEditor
 
   protected CircuitEditor circuitEditor;
 
-  protected ComponentView<?> placementView;
+  protected StaticView<?> placementView;
 
   protected TraceView hoverTraceView;
-  protected ComponentView<?> hoverComponentView;
+  protected StaticView<?> hoverComponentView;
   protected ConnectionView hoverConnectionView;
 
   protected SelectionRectangle selectionRectangle;
@@ -376,7 +377,7 @@ public class SimulatorEditor
     }
   }
 
-  private void donePlaceComponent(ComponentView<?> placementView)
+  private void donePlaceComponent(StaticView<?> placementView)
   {
     circuitEditor.placeComponentView(placementView);
     pushUndo();
@@ -425,24 +426,6 @@ public class SimulatorEditor
   {
     this.width = width;
     this.height = height;
-  }
-
-  private void paintDebugPosition(Graphics2D graphics)
-  {
-    Int2D position = mousePosition.get();
-    if (position != null)
-    {
-      int x = viewport.transformScreenToGridX(position.x);
-      int y = viewport.transformScreenToGridY(position.y);
-
-      int screenSpaceX = viewport.transformGridToScreenSpaceX(x);
-      int screenSpaceY = viewport.transformGridToScreenSpaceY(y);
-
-      graphics.setColor(Color.RED);
-      graphics.drawOval(screenSpaceX - 3, screenSpaceY - 3, 6, 6);
-
-      graphics.drawString("" + x + ", " + y, screenSpaceX - 30, screenSpaceY - 10);
-    }
   }
 
   public void paint(Graphics2D graphics)
@@ -566,7 +549,7 @@ public class SimulatorEditor
     return circuitEditor.getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
-  private ComponentView<?> getHoverView(Int2D mousePosition)
+  private StaticView<?> getHoverView(Int2D mousePosition)
   {
     return circuitEditor.getComponentViewInScreenSpace(viewport, mousePosition);
   }
@@ -779,7 +762,7 @@ public class SimulatorEditor
     hoverConnectionView = null;
   }
 
-  public ComponentView<?> getHoverComponentView()
+  public StaticView<?> getHoverComponentView()
   {
     return hoverComponentView;
   }

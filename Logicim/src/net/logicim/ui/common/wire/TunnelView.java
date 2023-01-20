@@ -8,6 +8,7 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
@@ -16,22 +17,22 @@ import java.util.List;
 import java.util.Set;
 
 public class TunnelView
-    extends StaticView
+    extends StaticView<TunnelProperties>
     implements WireView
 {
   protected Set<TunnelView> tunnels;
   protected ConnectionView connection;
-  protected String name;
   protected Int2D position;
   protected List<Trace> traces;
+  public boolean enabled;
 
   public TunnelView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, String name)
   {
-    super(circuitEditor, position, rotation);
+    super(circuitEditor, position, rotation, new TunnelProperties(name));
+    this.enabled = false;
     this.connection = circuitEditor.getOrAddConnection(position, this);
     this.position = position.clone();
     this.traces = new ArrayList<>();
-    this.name = name;
     this.tunnels = circuitEditor.addTunnel(this);
   }
 
@@ -68,13 +69,13 @@ public class TunnelView
   @Override
   public String getName()
   {
-    return name;
+    return properties.name;
   }
 
   @Override
   public String getDescription()
   {
-    return "Tunnel [" + name + "] (" + position + ")";
+    return "Tunnel [" + getName() + "] (" + position + ")";
   }
 
   @Override
@@ -86,11 +87,36 @@ public class TunnelView
   @Override
   public void enable(Simulation simulation)
   {
+    enabled = true;
   }
 
   @Override
   public void disable()
   {
+    enabled = false;
+  }
+
+  @Override
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+
+  @Override
+  public PortView getPortInGrid(int x, int y)
+  {
+    return null;
+  }
+
+  @Override
+  public void clampProperties()
+  {
+  }
+
+  @Override
+  public String getType()
+  {
+    return "Tunnel";
   }
 
   @Override

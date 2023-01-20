@@ -210,5 +210,14 @@ public class Int2D
     return x == 0 &&
            y == 0;
   }
+
+  public static Int2D safeClone(Int2D d)
+  {
+    if (d != null)
+    {
+      return d.clone();
+    }
+    return null;
+  }
 }
 

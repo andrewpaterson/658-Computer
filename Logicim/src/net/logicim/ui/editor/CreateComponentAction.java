@@ -2,14 +2,15 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
-public class CreateComponentView
+public class CreateComponentAction
     extends SimulatorEditorAction
 {
-  private Class<? extends ComponentView<?>> discreteViewClass;
+  private Class<? extends StaticView<?>> discreteViewClass;
 
-  public CreateComponentView(SimulatorEditor editor, Class<? extends ComponentView<?>> discreteViewClass)
+  public CreateComponentAction(SimulatorEditor editor, Class<? extends StaticView<?>> discreteViewClass)
   {
     super(editor);
     this.discreteViewClass = discreteViewClass;

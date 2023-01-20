@@ -258,7 +258,7 @@ public class OscilloscopeView
   }
 
   @Override
-  public void clampProperties()
+  public void propertyChanged()
   {
     properties.inputCount = clamp(properties.inputCount, 1, 24);
     properties.numberOfDivsWide = clamp(properties.numberOfDivsWide, 4, 128);

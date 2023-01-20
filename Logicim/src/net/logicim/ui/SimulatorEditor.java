@@ -686,7 +686,6 @@ public class SimulatorEditor
         if (hoverTraceView != null)
         {
           circuitEditor.deleteTraceView(hoverConnectionView, hoverTraceView);
-          return true;
         }
         else
         {
@@ -696,8 +695,8 @@ public class SimulatorEditor
           {
             circuitEditor.deleteComponentView(hoverComponentView);
           }
-          return true;
         }
+        return true;
       }
       else if (hoverComponentView != null)
       {

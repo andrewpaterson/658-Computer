@@ -17,7 +17,6 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
                          PROPERTIES properties)
   {
     super(circuitEditor, position, rotation, properties);
-    circuitEditor.addPassiveView(this);
   }
 
   @Override

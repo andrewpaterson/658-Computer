@@ -29,6 +29,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   {
     this.passive = createPassive();
     this.passive.disable();
+    circuitEditor.addPassiveView(this);
   }
 
   protected void validateComponent()

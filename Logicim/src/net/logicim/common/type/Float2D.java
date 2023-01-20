@@ -178,5 +178,14 @@ public class Float2D
     return x == 0 &&
            y == 0;
   }
+
+  public static Float2D safeClone(Float2D d)
+  {
+    if (d != null)
+    {
+      return d.clone();
+    }
+    return null;
+  }
 }
 

@@ -2,6 +2,15 @@ package net.logicim.common.type;
 
 public abstract class Tuple2
 {
+  public static Tuple2 safeClone(Tuple2 d)
+  {
+    if (d != null)
+    {
+      return d.clone();
+    }
+    return null;
+  }
+
   public abstract Tuple2 clone();
 
   public abstract float getX();

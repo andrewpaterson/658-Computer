@@ -12,6 +12,10 @@ import net.logicim.ui.simulation.component.decorative.label.LabelView;
 public class LabelData
     extends DecorativeData
 {
+  public LabelData()
+  {
+  }
+
   public LabelData(String name, Int2D position, Rotation rotation, boolean selected)
   {
     super(name, position, rotation, selected);

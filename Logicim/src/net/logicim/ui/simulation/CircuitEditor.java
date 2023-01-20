@@ -1411,7 +1411,7 @@ public class CircuitEditor
     }
   }
 
-  public void addSemiconductorView(IntegratedCircuitView<?, ?> integratedCircuitView)
+  public void addIntegratedCircuitView(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
     synchronized (this)
     {
@@ -1432,6 +1432,14 @@ public class CircuitEditor
     synchronized (this)
     {
       passiveViews.add(view);
+    }
+  }
+
+  public void addDecorativeView(DecorativeView<?> view)
+  {
+    synchronized (this)
+    {
+      decorativeViews.add(view);
     }
   }
 

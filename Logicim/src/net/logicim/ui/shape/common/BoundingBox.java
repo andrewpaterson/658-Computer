@@ -142,8 +142,14 @@ public class BoundingBox
 
   public void grow(float size)
   {
-    topLeft.subtract(size, size);
-    bottomRight.add(size, size);
+    if (topLeft != null)
+    {
+      topLeft.subtract(size, size);
+    }
+    if (bottomRight != null)
+    {
+      bottomRight.add(size, size);
+    }
   }
 
   public void transform(Rotation r)
@@ -202,7 +208,7 @@ public class BoundingBox
   {
     if (topLeft == null)
     {
-      topLeft = source.getTopLeft().clone();
+      topLeft = Float2D.safeClone(source.getTopLeft());
     }
     else
     {
@@ -210,7 +216,7 @@ public class BoundingBox
     }
     if (bottomRight == null)
     {
-      bottomRight = source.getBottomRight().clone();
+      bottomRight = Float2D.safeClone(source.getBottomRight());
     }
     else
     {

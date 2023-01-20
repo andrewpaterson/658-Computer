@@ -109,7 +109,7 @@ public class TunnelView
   }
 
   @Override
-  public void clampProperties()
+  public void propertyChanged()
   {
   }
 

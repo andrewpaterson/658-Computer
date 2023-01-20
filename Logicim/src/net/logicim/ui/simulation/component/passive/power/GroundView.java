@@ -61,7 +61,7 @@ public class GroundView
   }
 
   @Override
-  public void clampProperties()
+  public void propertyChanged()
   {
   }
 

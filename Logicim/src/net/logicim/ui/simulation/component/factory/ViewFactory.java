@@ -11,7 +11,7 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import javax.swing.*;
 
-public abstract class ViewFactory<DISCRETE extends net.logicim.ui.common.integratedcircuit.StaticView<PROPERTIES>, PROPERTIES extends ComponentProperties>
+public abstract class ViewFactory<DISCRETE extends StaticView<PROPERTIES>, PROPERTIES extends ComponentProperties>
 {
   public abstract DISCRETE create(CircuitEditor circuitEditor, Int2D position, Rotation rotation);
 

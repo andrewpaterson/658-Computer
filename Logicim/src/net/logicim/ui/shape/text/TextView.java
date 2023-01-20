@@ -1,6 +1,8 @@
 package net.logicim.ui.shape.text;
 
 import net.logicim.common.type.Tuple2;
+import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.data.integratedcircuit.decorative.VerticalAlignment;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
@@ -8,7 +10,6 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
 import net.logicim.ui.shape.point.PointGridCache;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -22,14 +23,14 @@ public class TextView
   protected boolean useHolderRotation;
   protected Rotation rotation;
 
-  protected int horizontalAlignment;
-  protected int verticalAlignment;
+  protected HorizontalAlignment horizontalAlignment;
+  protected VerticalAlignment verticalAlignment;
 
   protected PointGridCache gridCache;
 
   public TextView(ShapeHolder shapeHolder, Tuple2 positionRelativeToIC, String text, float size, boolean bold)
   {
-    this(shapeHolder, positionRelativeToIC, text, size, bold, SwingConstants.LEFT, SwingConstants.TOP);
+    this(shapeHolder, positionRelativeToIC, text, size, bold, HorizontalAlignment.LEFT, VerticalAlignment.TOP);
   }
 
   public TextView(ShapeHolder shapeHolder,
@@ -37,8 +38,8 @@ public class TextView
                   String text,
                   float size,
                   boolean bold,
-                  int horizontalAlignment,
-                  int verticalAlignment)
+                  HorizontalAlignment horizontalAlignment,
+                  VerticalAlignment verticalAlignment)
   {
     this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, horizontalAlignment, verticalAlignment);
   }
@@ -50,8 +51,8 @@ public class TextView
                   boolean bold,
                   boolean useHolderRotation,
                   Rotation rotation,
-                  int horizontalAlignment,
-                  int verticalAlignment)
+                  HorizontalAlignment horizontalAlignment,
+                  VerticalAlignment verticalAlignment)
   {
     super(shapeHolder);
     this.positionRelativeToIC = positionRelativeToIC;
@@ -91,11 +92,11 @@ public class TextView
     if (rotation.isNorthSouth() || rotation == Rotation.Cannot)
     {
       xOffset = 0;
-      if (horizontalAlignment == SwingConstants.CENTER)
+      if (horizontalAlignment == HorizontalAlignment.CENTER)
       {
         xOffset = (-metrics.stringWidth(text)) / 2;
       }
-      else if (horizontalAlignment == SwingConstants.RIGHT)
+      else if (horizontalAlignment == HorizontalAlignment.RIGHT)
       {
         xOffset = -metrics.stringWidth(text);
       }
@@ -103,15 +104,15 @@ public class TextView
     else
     {
       xOffset = 0;
-      if (verticalAlignment == SwingConstants.BOTTOM)
+      if (verticalAlignment == VerticalAlignment.BOTTOM)
       {
         xOffset = -metrics.getHeight() + metrics.getAscent();
       }
-      else if (verticalAlignment == SwingConstants.CENTER)
+      else if (verticalAlignment == VerticalAlignment.CENTER)
       {
         xOffset = ((-metrics.getHeight()) / 2) + metrics.getAscent();
       }
-      else if (verticalAlignment == SwingConstants.TOP)
+      else if (verticalAlignment == VerticalAlignment.TOP)
       {
         xOffset = metrics.getAscent();
       }
@@ -121,15 +122,15 @@ public class TextView
     if (rotation.isNorthSouth() || rotation == Rotation.Cannot)
     {
       yOffset = 0;
-      if (verticalAlignment == SwingConstants.BOTTOM)
+      if (verticalAlignment == VerticalAlignment.BOTTOM)
       {
         yOffset = -metrics.getHeight() + metrics.getAscent();
       }
-      else if (verticalAlignment == SwingConstants.CENTER)
+      else if (verticalAlignment == VerticalAlignment.CENTER)
       {
         yOffset = ((-metrics.getHeight()) / 2) + metrics.getAscent();
       }
-      else if (verticalAlignment == SwingConstants.TOP)
+      else if (verticalAlignment == VerticalAlignment.TOP)
       {
         yOffset = metrics.getAscent();
       }
@@ -137,11 +138,11 @@ public class TextView
     else
     {
       yOffset = 0;
-      if (horizontalAlignment == SwingConstants.CENTER)
+      if (horizontalAlignment == HorizontalAlignment.CENTER)
       {
         yOffset = (-metrics.stringWidth(text)) / 2;
       }
-      else if (horizontalAlignment == SwingConstants.RIGHT)
+      else if (horizontalAlignment == HorizontalAlignment.RIGHT)
       {
         yOffset = -metrics.stringWidth(text);
       }
@@ -181,16 +182,16 @@ public class TextView
     gridCache.invalidate();
   }
 
-  public void setParameters(int horizontalAlignment,
-                            int verticalAlignment)
+  public void setParameters(HorizontalAlignment horizontalAlignment,
+                            VerticalAlignment verticalAlignment)
   {
     setParameters(false, Rotation.North, horizontalAlignment, verticalAlignment);
   }
 
   public void setParameters(boolean useHolderRotation,
                             Rotation rotation,
-                            int horizontalAlignment,
-                            int verticalAlignment)
+                            HorizontalAlignment horizontalAlignment,
+                            VerticalAlignment verticalAlignment)
   {
     this.useHolderRotation = useHolderRotation;
     this.rotation = rotation;

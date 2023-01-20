@@ -19,18 +19,19 @@ public abstract class DecorativeView<T extends DecorativeProperties>
                         T properties)
   {
     super(circuitEditor, position, rotation, properties);
+    circuitEditor.addDecorativeView(this);
   }
 
   @Override
   protected void finaliseView()
   {
-    this.finalised = true;
-    this.enabled = false;
+    finalised = true;
+    enabled = false;
 
     updateBoundingBoxFromShapes(boundingBox);
 
-    this.selectionBox.copy(this.boundingBox);
-    this.boundingBox.grow(0.5f);
+    selectionBox.copy(boundingBox);
+    boundingBox.grow(0.5f);
   }
 
   @Override

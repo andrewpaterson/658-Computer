@@ -2,6 +2,8 @@ package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.data.integratedcircuit.decorative.VerticalAlignment;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
@@ -17,7 +19,6 @@ import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.List;
@@ -40,7 +41,6 @@ public class SplitterView
   {
     super(circuitEditor, position, rotation, properties);
 
-    circuitEditor.addPassiveView(this);
     createGraphics();
     finaliseView();
   }
@@ -131,45 +131,45 @@ public class SplitterView
     position.y += 0.1;
 
     int halfWay = properties.fanOut / 2;
-    int horizontalAlignment;
-    int verticalAlignment;
+    HorizontalAlignment horizontalAlignment;
+    VerticalAlignment verticalAlignment;
     Rotation degrees = Rotation.North;
     if (properties.appearance == SplitterAppearance.LEFT)
     {
       if (rotation == Rotation.North)
       {
-        horizontalAlignment = SwingConstants.LEFT;
-        verticalAlignment = SwingConstants.TOP;
+        horizontalAlignment = HorizontalAlignment.LEFT;
+        verticalAlignment = VerticalAlignment.TOP;
         position.x += 0.1;
         position.y += 0.1;
       }
       else if (rotation == Rotation.South)
       {
-        horizontalAlignment = SwingConstants.RIGHT;
-        verticalAlignment = SwingConstants.BOTTOM;
+        horizontalAlignment = HorizontalAlignment.RIGHT;
+        verticalAlignment = VerticalAlignment.BOTTOM;
         position.x += 0.1;
         position.y += 0.1;
       }
       else if (rotation == Rotation.East)
       {
-        horizontalAlignment = SwingConstants.TOP;
-        verticalAlignment = SwingConstants.LEFT;
+        horizontalAlignment = HorizontalAlignment.LEFT;
+        verticalAlignment = VerticalAlignment.TOP;
         position.x += 0.1;
         position.y += 0.1;
         degrees = Rotation.East;
       }
       else if (rotation == Rotation.West)
       {
-        horizontalAlignment = SwingConstants.TOP;
-        verticalAlignment = SwingConstants.RIGHT;
+        horizontalAlignment = HorizontalAlignment.RIGHT;
+        verticalAlignment = VerticalAlignment.TOP;
         position.x += 0.1;
         position.y += 1.0;
         degrees = Rotation.East;
       }
       else
       {
-        horizontalAlignment = SwingConstants.CENTER;
-        verticalAlignment = SwingConstants.CENTER;
+        horizontalAlignment = HorizontalAlignment.CENTER;
+        verticalAlignment = VerticalAlignment.CENTER;
         position.x += 0;
         position.y += 0;
       }
@@ -178,30 +178,30 @@ public class SplitterView
     {
       if (rotation == Rotation.North)
       {
-        horizontalAlignment = SwingConstants.LEFT;
-        verticalAlignment = SwingConstants.BOTTOM;
+        horizontalAlignment = HorizontalAlignment.LEFT;
+        verticalAlignment = VerticalAlignment.BOTTOM;
         position.x += 0.1;
         position.y += -0.2;
       }
       else if (rotation == Rotation.South)
       {
-        horizontalAlignment = SwingConstants.RIGHT;
-        verticalAlignment = SwingConstants.BOTTOM;
+        horizontalAlignment = HorizontalAlignment.RIGHT;
+        verticalAlignment = VerticalAlignment.BOTTOM;
         position.x += 0.1;
         position.y += -1.2;
       }
       else
       {
-        horizontalAlignment = SwingConstants.CENTER;
-        verticalAlignment = SwingConstants.CENTER;
+        horizontalAlignment = HorizontalAlignment.CENTER;
+        verticalAlignment = VerticalAlignment.CENTER;
         position.x += 0;
         position.y += 0;
       }
     }
     else
     {
-      horizontalAlignment = SwingConstants.LEFT;
-      verticalAlignment = SwingConstants.TOP;
+      horizontalAlignment = HorizontalAlignment.LEFT;
+      verticalAlignment = VerticalAlignment.TOP;
     }
     textView.setParameters(false, degrees, horizontalAlignment, verticalAlignment);
     textView.setPositionRelativeToIC(position.clone());
@@ -428,7 +428,7 @@ public class SplitterView
   }
 
   @Override
-  public void clampProperties()
+  public void propertyChanged()
   {
     properties.fanOut = PropertyClamp.clamp(properties.fanOut, 1, PropertyClamp.MAX);
     properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);

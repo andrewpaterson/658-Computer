@@ -93,7 +93,7 @@ public abstract class PropertyEditorDialog
 
     if (propertyChanged)
     {
-      this.componentView.clampProperties();
+      this.componentView.propertyChanged();
       StaticView<?> componentView = recreateComponentView(this.componentView.getProperties());
       editor.replaceSelection(componentView, this.componentView);
       editor.pushUndo();

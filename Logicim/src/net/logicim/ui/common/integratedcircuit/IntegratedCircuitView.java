@@ -37,7 +37,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
     }
 
-    circuitEditor.addSemiconductorView(this);
+    circuitEditor.addIntegratedCircuitView(this);
   }
 
   protected void createComponent()

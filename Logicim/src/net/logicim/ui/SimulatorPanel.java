@@ -9,6 +9,7 @@ import net.logicim.ui.components.typeeditor.FamilyPropertyEditorFactory;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.*;
+import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterViewFactory;
@@ -65,7 +66,8 @@ public class SimulatorPanel
                                           new OscilloscopeViewFactory(),
                                           new GroundViewFactory(),
                                           new PositivePowerViewFactory(),
-                                          new SplitterViewFactory());
+                                          new SplitterViewFactory(),
+                                          new LabelViewFactory());
 
   }
 

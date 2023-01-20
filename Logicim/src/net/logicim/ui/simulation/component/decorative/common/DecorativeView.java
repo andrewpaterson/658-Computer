@@ -28,10 +28,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
     finalised = true;
     enabled = false;
 
-    updateBoundingBoxFromShapes(boundingBox);
-
-    selectionBox.copy(boundingBox);
-    boundingBox.grow(0.5f);
+    updateBoundingBox();
   }
 
   @Override

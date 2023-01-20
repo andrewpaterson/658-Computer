@@ -387,7 +387,6 @@ public class CircuitEditor
 
   protected boolean isInGridSpaceBoundBox(Int2D gridPosition, StaticView<?> view)
   {
-
     if (view.isEnabled())
     {
       Float2D boundBoxPosition = new Float2D();

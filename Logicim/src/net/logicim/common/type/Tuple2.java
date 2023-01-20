@@ -37,6 +37,8 @@ public abstract class Tuple2
 
   public abstract void divide(int i);
 
+  public abstract void divide(float f);
+
   @Override
   public String toString()
   {

@@ -1,5 +1,6 @@
 package net.logicim.ui.shape.text;
 
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.integratedcircuit.decorative.VerticalAlignment;
@@ -8,26 +9,28 @@ import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
-import net.logicim.ui.shape.point.PointGridCache;
+import net.logicim.ui.shape.rectangle.RectangleGridCache;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 public class TextView
     extends ShapeView
 {
   protected Tuple2 positionRelativeToIC;
+  protected Tuple2 dimension;
+
   protected String text;
   protected float size;
   protected boolean bold;
   protected boolean useHolderRotation;
-  protected boolean includeBoundingBox;
   protected Rotation rotation;
 
   protected HorizontalAlignment horizontalAlignment;
   protected VerticalAlignment verticalAlignment;
 
-  protected PointGridCache gridCache;
+  protected RectangleGridCache gridCache;
 
   public TextView(ShapeHolder shapeHolder, Tuple2 positionRelativeToIC, String text, float size, boolean bold)
   {
@@ -42,7 +45,7 @@ public class TextView
                   HorizontalAlignment horizontalAlignment,
                   VerticalAlignment verticalAlignment)
   {
-    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, horizontalAlignment, verticalAlignment, false);
+    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, horizontalAlignment, verticalAlignment);
   }
 
   public TextView(ShapeHolder shapeHolder,
@@ -53,113 +56,109 @@ public class TextView
                   boolean useHolderRotation,
                   Rotation rotation,
                   HorizontalAlignment horizontalAlignment,
-                  VerticalAlignment verticalAlignment,
-                  boolean includeBoundingBox)
+                  VerticalAlignment verticalAlignment)
   {
     super(shapeHolder);
     this.positionRelativeToIC = positionRelativeToIC;
+    this.dimension = null;
+
     this.text = text;
     this.size = size;
     this.bold = bold;
     this.useHolderRotation = useHolderRotation;
-    this.includeBoundingBox = includeBoundingBox;
     this.rotation = rotation;
     this.horizontalAlignment = horizontalAlignment;
     this.verticalAlignment = verticalAlignment;
 
-    this.gridCache = new PointGridCache(positionRelativeToIC);
+    this.gridCache = new RectangleGridCache(null, positionRelativeToIC);
   }
 
   public void updateGridCache()
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(dimension, positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
     }
+  }
+
+  public Tuple2 getDimension()
+  {
+    return dimension;
   }
 
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
+    updateDimension(graphics, viewport);
     updateGridCache();
 
-    Tuple2 transformed = gridCache.getTransformed();
-    int x = viewport.transformGridToScreenSpaceX(transformed);
-    int y = viewport.transformGridToScreenSpaceY(transformed);
+    Tuple2 transformedPosition = gridCache.getTransformedPosition();
+    int x = viewport.transformGridToScreenSpaceX(transformedPosition);
+    int y = viewport.transformGridToScreenSpaceY(transformedPosition);
 
     Font font = viewport.getFont(size * viewport.getZoom(), bold);
     FontMetrics metrics = graphics.getFontMetrics(font);
-    Rotation rotation = getRotation();
 
-    int xOffset;
-    if (rotation.isNorthSouth() || rotation == Rotation.Cannot)
+    float width = dimension.getX() * viewport.getZoom() * viewport.getScale();
+    float height = dimension.getY() * viewport.getZoom() * viewport.getScale();
+    float xOffset;
+    if (horizontalAlignment == HorizontalAlignment.LEFT)
     {
       xOffset = 0;
-      if (horizontalAlignment == HorizontalAlignment.CENTER)
-      {
-        xOffset = (-metrics.stringWidth(text)) / 2;
-      }
-      else if (horizontalAlignment == HorizontalAlignment.RIGHT)
-      {
-        xOffset = -metrics.stringWidth(text);
-      }
+    }
+    else if (horizontalAlignment == HorizontalAlignment.CENTER)
+    {
+      xOffset = -(width / 2f);
     }
     else
     {
-      xOffset = 0;
-      if (verticalAlignment == VerticalAlignment.BOTTOM)
-      {
-        xOffset = -metrics.getHeight() + metrics.getAscent();
-      }
-      else if (verticalAlignment == VerticalAlignment.CENTER)
-      {
-        xOffset = ((-metrics.getHeight()) / 2) + metrics.getAscent();
-      }
-      else if (verticalAlignment == VerticalAlignment.TOP)
-      {
-        xOffset = metrics.getAscent();
-      }
+      xOffset = -width;
     }
 
-    int yOffset;
-    if (rotation.isNorthSouth() || rotation == Rotation.Cannot)
+    float yOffset;
+    if (verticalAlignment == VerticalAlignment.TOP)
     {
-      yOffset = 0;
-      if (verticalAlignment == VerticalAlignment.BOTTOM)
-      {
-        yOffset = -metrics.getHeight() + metrics.getAscent();
-      }
-      else if (verticalAlignment == VerticalAlignment.CENTER)
-      {
-        yOffset = ((-metrics.getHeight()) / 2) + metrics.getAscent();
-      }
-      else if (verticalAlignment == VerticalAlignment.TOP)
-      {
-        yOffset = metrics.getAscent();
-      }
+      yOffset = height;
+    }
+    else if (verticalAlignment == VerticalAlignment.CENTER)
+    {
+      yOffset = height / 2f;
     }
     else
     {
       yOffset = 0;
-      if (horizontalAlignment == HorizontalAlignment.CENTER)
-      {
-        yOffset = (-metrics.stringWidth(text)) / 2;
-      }
-      else if (horizontalAlignment == HorizontalAlignment.RIGHT)
-      {
-        yOffset = -metrics.stringWidth(text);
-      }
     }
-
-    int sx = x + xOffset;
-    int sy = y + yOffset;
 
     AffineTransform affineTransform = new AffineTransform();
-    affineTransform.rotate(Math.toRadians(getRotation().rotationToDegrees()), 0, 0);
-    font = font.deriveFont(affineTransform);
+    affineTransform.translate(xOffset, yOffset);
+    affineTransform.rotate(Math.toRadians(getRotation().rotationToDegrees()));
+    graphics.setTransform(affineTransform);
 
     graphics.setFont(font);
-    graphics.drawString(text, sx, sy);
+    graphics.drawString(text, x, y);
+  }
+
+  public void updateDimension(Graphics2D graphics, Viewport viewport)
+  {
+    if (dimension == null)
+    {
+      Font font = viewport.getFont(size, bold);
+      FontMetrics metrics = graphics.getFontMetrics(font);
+
+      Rectangle2D stringBounds = metrics.getStringBounds(text, graphics);
+
+      Float2D topLeft = new Float2D(stringBounds.getMinX(), stringBounds.getMinY());
+      float scale = viewport.getScale();
+      float yOffset = (metrics.getAscent()) / scale;
+      topLeft.divide(scale);
+      topLeft.y += yOffset;
+      Float2D bottomRight = new Float2D(stringBounds.getMaxX(), stringBounds.getMaxY());
+      bottomRight.divide(scale);
+      bottomRight.y += yOffset;
+
+      dimension = new Float2D(bottomRight);
+      dimension.subtract(topLeft);
+    }
   }
 
   protected Rotation getRotation()
@@ -177,10 +176,6 @@ public class TextView
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
-    if (includeBoundingBox)
-    {
-
-    }
   }
 
   @Override

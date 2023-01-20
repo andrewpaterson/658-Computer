@@ -207,6 +207,14 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   protected abstract void finaliseView();
 
+  protected void updateBoundingBox()
+  {
+    updateBoundingBoxFromShapes(boundingBox);
+
+    selectionBox.copy(boundingBox);
+    boundingBox.grow(0.5f);
+  }
+
   public abstract boolean isEnabled();
 
   public abstract PortView getPortInGrid(int x, int y);

@@ -20,7 +20,11 @@ public class RectangleView
 
   protected RectangleGridCache gridCache;
 
-  public RectangleView(ShapeHolder shapeHolder, int width, int height, boolean border, boolean fill)
+  public RectangleView(ShapeHolder shapeHolder,
+                       int width,
+                       int height,
+                       boolean border,
+                       boolean fill)
   {
     super(shapeHolder);
     this.border = border;
@@ -38,7 +42,11 @@ public class RectangleView
     gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
   }
 
-  public RectangleView(ShapeHolder shapeHolder, Tuple2 topLeft, Tuple2 bottomRight, boolean border, boolean fill)
+  public RectangleView(ShapeHolder shapeHolder,
+                       Tuple2 topLeft,
+                       Tuple2 bottomRight,
+                       boolean border,
+                       boolean fill)
   {
     super(shapeHolder);
     this.border = border;

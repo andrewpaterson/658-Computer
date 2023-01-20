@@ -15,7 +15,7 @@ public class RectangleGridCache
   public RectangleGridCache(Tuple2 dimension, Tuple2 position)
   {
     transformedPosition = position.clone();
-    transformedDimension = dimension.clone();
+    transformedDimension = Tuple2.safeClone(dimension);
   }
 
   public void update(Tuple2 dimension, Tuple2 positionRelativeToIC, Rotation rotation, Tuple2 position)
@@ -23,15 +23,23 @@ public class RectangleGridCache
     update();
 
     rotation.rotate(transformedPosition, positionRelativeToIC);
-    rotation.rotate(transformedDimension, dimension);
 
-    if (transformedDimension instanceof Int2D)
+    if (dimension != null)
     {
-      transformInt2D(position);
-    }
-    if (transformedDimension instanceof Float2D)
-    {
-      transformFloat2D(position);
+      if (transformedDimension == null)
+      {
+        transformedDimension = Tuple2.safeClone(dimension);
+      }
+
+      rotation.rotate(transformedDimension, dimension);
+      if (transformedDimension instanceof Int2D)
+      {
+        transformInt2D(position);
+      }
+      if (transformedDimension instanceof Float2D)
+      {
+        transformFloat2D(position);
+      }
     }
   }
 

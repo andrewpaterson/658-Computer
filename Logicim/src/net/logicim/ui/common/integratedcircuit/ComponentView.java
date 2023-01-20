@@ -36,11 +36,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     finalised = true;
 
-    updateBoundingBoxFromShapes(boundingBox);
     updateBoundingBoxFromPorts(boundingBox);
-
-    selectionBox.copy(this.boundingBox);
-    this.boundingBox.grow(0.5f);
+    updateBoundingBox();
   }
 
   public PortView getPortInGrid(Int2D position)

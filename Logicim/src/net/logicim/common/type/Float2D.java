@@ -16,6 +16,12 @@ public class Float2D
     this.y = y;
   }
 
+  public Float2D(double x, double y)
+  {
+    this.x = (float) x;
+    this.y = (float) y;
+  }
+
   public Float2D(Int2D p)
   {
     this.x = p.x;
@@ -58,6 +64,13 @@ public class Float2D
   {
     this.x /= i;
     this.y /= i;
+  }
+
+  @Override
+  public void divide(float f)
+  {
+    this.x /= f;
+    this.y /= f;
   }
 
   public void add(Float2D p)

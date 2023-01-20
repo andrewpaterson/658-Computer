@@ -129,11 +129,9 @@ public class TunnelView
   protected void finaliseView()
   {
     finalised = true;
+    enabled = true;
 
-    updateBoundingBoxFromShapes(boundingBox);
-
-    selectionBox.copy(this.boundingBox);
-    this.boundingBox.grow(0.5f);
+    updateBoundingBox();
   }
 
   public TunnelData save(boolean selected)

@@ -368,5 +368,10 @@ public class Viewport
       return getPlainFont(size);
     }
   }
+
+  public float getScale()
+  {
+    return scale;
+  }
 }
 

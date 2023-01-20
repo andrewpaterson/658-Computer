@@ -1,50 +1,17 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.common.port.Port;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.wire.WireView;
 
 public class WireConnection
 {
-  protected LocalConnectionNet localConnectionNet;
+  protected WireView component;
+  protected ConnectionView connection;
 
-  protected List<Port> connectedPorts;
-  protected Set<Port> splitterPorts;
-
-  public WireConnection(LocalConnectionNet localConnectionNet)
+  public WireConnection(WireView component, ConnectionView connection)
   {
-    this.localConnectionNet = localConnectionNet;
-    this.connectedPorts = new ArrayList<>();
-    this.splitterPorts = new HashSet<>();
-  }
-
-  public void addPort(Port port)
-  {
-    if (port != null)
-    {
-      connectedPorts.add(port);
-    }
-  }
-
-  public void addSplitterPort(Port port)
-  {
-    if (port != null)
-    {
-      splitterPorts.add(port);
-    }
-  }
-
-  public List<Port> getConnectedPorts()
-  {
-    return connectedPorts;
-  }
-
-  public Set<Port> getSplitterPorts()
-  {
-    return splitterPorts;
+    this.component = component;
+    this.connection = connection;
   }
 }
 

@@ -17,10 +17,10 @@ import java.util.Set;
 public class LocalConnectionNet
 {
   protected List<ComponentConnection<ComponentView<?>>> connectedComponents;
-  protected List<ComponentConnection<WireView>> connectedWires;
+  protected List<WireConnection> connectedWires;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  protected List<WireConnection> wireConnections;
+  protected List<PortConnection> portConnections;
 
   protected Set<Trace> traces = new LinkedHashSet<>();
 
@@ -37,14 +37,14 @@ public class LocalConnectionNet
     int minimumPorts = calculateMinimumPorts(connections);
     if (isValid(minimumPorts))
     {
-      wireConnections = createPortConnections(minimumPorts);
+      portConnections = createPortConnections(minimumPorts);
 
       findConnections(connections);
       traceConnections();
     }
     else
     {
-      wireConnections = new ArrayList<>();
+      portConnections = new ArrayList<>();
     }
   }
 
@@ -53,14 +53,14 @@ public class LocalConnectionNet
     return minimumPorts != Integer.MAX_VALUE;
   }
 
-  protected List<WireConnection> createPortConnections(int minimumPorts)
+  protected List<PortConnection> createPortConnections(int minimumPorts)
   {
-    List<WireConnection> wireConnections = new ArrayList<>(minimumPorts);
+    List<PortConnection> portConnections = new ArrayList<>(minimumPorts);
     for (int i = 0; i < minimumPorts; i++)
     {
-      wireConnections.add(new WireConnection(this));
+      portConnections.add(new PortConnection(this));
     }
-    return wireConnections;
+    return portConnections;
   }
 
   protected int calculateMinimumPorts(Set<ConnectionView> connections)
@@ -108,7 +108,7 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof WireView)
         {
-          connectedWires.add(new ComponentConnection<>((WireView) connectedView, connectionView));
+          connectedWires.add(new WireConnection((WireView) connectedView, connectionView));
         }
       }
     }
@@ -124,9 +124,9 @@ public class LocalConnectionNet
       boolean isSplitter = componentView instanceof SplitterView;
       PortView portView = componentView.getPort(connection);
 
-      for (int i = 0; i < wireConnections.size(); i++)
+      for (int i = 0; i < portConnections.size(); i++)
       {
-        WireConnection portConnection = wireConnections.get(i);
+        PortConnection portConnection = portConnections.get(i);
         Port port = portView.getPort(i);
         portConnection.addPort(port);
         if (isSplitter)
@@ -137,12 +137,7 @@ public class LocalConnectionNet
     }
   }
 
-  public List<ComponentConnection<ComponentView<?>>> getConnectedComponents()
-  {
-    return connectedComponents;
-  }
-
-  public List<ComponentConnection<WireView>> getConnectedWires()
+  public List<WireConnection> getConnectedWires()
   {
     return connectedWires;
   }
@@ -152,9 +147,9 @@ public class LocalConnectionNet
     return splitterViews;
   }
 
-  public List<WireConnection> getWireConnections()
+  public List<PortConnection> getPortConnections()
   {
-    return wireConnections;
+    return portConnections;
   }
 
   public List<PortView> getPortViews()

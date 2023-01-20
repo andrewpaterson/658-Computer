@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class FullWire
 {
-  protected Set<WireConnection> localWires;
+  protected Set<PortConnection> localWires;
   protected List<Port> portStack;
   protected int portStackIndex;
 
@@ -20,10 +20,10 @@ public class FullWire
     portStackIndex = 0;
   }
 
-  public void process(WireConnection wireConnection)
+  public void process(PortConnection portConnection)
   {
-    localWires.add(wireConnection);
-    Set<Port> splitterPorts = wireConnection.getSplitterPorts();
+    localWires.add(portConnection);
+    Set<Port> splitterPorts = portConnection.getSplitterPorts();
     for (Port splitterPort : splitterPorts)
     {
       portStack.add(splitterPort);
@@ -51,7 +51,7 @@ public class FullWire
     portStack = null;
   }
 
-  public Set<WireConnection> getLocalWires()
+  public Set<PortConnection> getLocalWires()
   {
     return localWires;
   }

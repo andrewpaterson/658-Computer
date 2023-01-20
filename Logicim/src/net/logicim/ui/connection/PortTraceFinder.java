@@ -51,21 +51,21 @@ public class PortTraceFinder
     }
 
     Map<Port, Port> totalSplitterPortMap = createSplitterPortMap();
-    Map<Port, WireConnection> totalPortWireMap = createPortWireMap();
+    Map<Port, PortConnection> totalPortWireMap = createPortWireMap();
 
-    Set<WireConnection> processedWires = new HashSet<>();
+    Set<PortConnection> processedWires = new HashSet<>();
 
     List<FullWire> fullWires = new ArrayList<>();
     for (LocalConnectionNet connectionNet : connectionNets)
     {
-      List<WireConnection> wireConnections = connectionNet.getWireConnections();
-      for (WireConnection wireConnection : wireConnections)
+      List<PortConnection> portConnections = connectionNet.getPortConnections();
+      for (PortConnection portConnection : portConnections)
       {
-        if (!processedWires.contains(wireConnection))
+        if (!processedWires.contains(portConnection))
         {
           FullWire fullWire = new FullWire();
-          fullWire.process(wireConnection);
-          processedWires.add(wireConnection);
+          fullWire.process(portConnection);
+          processedWires.add(portConnection);
           while (fullWire.hasPortToProcess())
           {
             Port port = fullWire.getNextPort();
@@ -74,11 +74,11 @@ public class PortTraceFinder
             {
               throw new SimulatorException("Could not find opposite port for splitter.");
             }
-            WireConnection wireConnection1 = totalPortWireMap.get(oppositeSplitterPort);
-            if (!processedWires.contains(wireConnection1))
+            PortConnection portConnection1 = totalPortWireMap.get(oppositeSplitterPort);
+            if (!processedWires.contains(portConnection1))
             {
-              fullWire.process(wireConnection1);
-              processedWires.add(wireConnection1);
+              fullWire.process(portConnection1);
+              processedWires.add(portConnection1);
             }
           }
           fullWire.done();
@@ -90,8 +90,8 @@ public class PortTraceFinder
     for (FullWire fullWire : fullWires)
     {
       Trace trace = new Trace();
-      Set<WireConnection> localWires = fullWire.getLocalWires();
-      for (WireConnection localWire : localWires)
+      Set<PortConnection> localWires = fullWire.getLocalWires();
+      for (PortConnection localWire : localWires)
       {
         for (Port port : localWire.connectedPorts)
         {
@@ -104,7 +104,7 @@ public class PortTraceFinder
 
     for (LocalConnectionNet connectionNet : connectionNets)
     {
-      for (ComponentConnection<WireView> connectedWire : connectionNet.getConnectedWires())
+      for (WireConnection connectedWire : connectionNet.getConnectedWires())
       {
         WireView wireView = connectedWire.component;
         wireView.connectTraces(connectionNet.getTraces());
@@ -128,18 +128,18 @@ public class PortTraceFinder
     return totalSplitterPortMap;
   }
 
-  protected Map<Port, WireConnection> createPortWireMap()
+  protected Map<Port, PortConnection> createPortWireMap()
   {
-    Map<Port, WireConnection> totalPortWireMap = new HashMap<>();
+    Map<Port, PortConnection> totalPortWireMap = new HashMap<>();
     for (LocalConnectionNet connectionNet : connectionNets)
     {
-      List<WireConnection> wireConnections = connectionNet.getWireConnections();
-      for (WireConnection wireConnection : wireConnections)
+      List<PortConnection> portConnections = connectionNet.getPortConnections();
+      for (PortConnection portConnection : portConnections)
       {
-        Set<Port> splitterPorts = wireConnection.splitterPorts;
+        Set<Port> splitterPorts = portConnection.splitterPorts;
         for (Port splitterPort : splitterPorts)
         {
-          totalPortWireMap.put(splitterPort, wireConnection);
+          totalPortWireMap.put(splitterPort, portConnection);
         }
       }
     }

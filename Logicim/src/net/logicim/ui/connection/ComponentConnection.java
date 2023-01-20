@@ -14,3 +14,4 @@ public class ComponentConnection<T extends View>
     this.connection = connection;
   }
 }
+

@@ -4,21 +4,24 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TraceView
-    extends WireView
+    extends View
+    implements WireView
 {
   protected Line line;
   protected ConnectionView startConnection;
   protected ConnectionView endConnection;
+  protected List<Trace> traces;
 
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
@@ -138,6 +141,16 @@ public class TraceView
   public Int2D getPosition()
   {
     return line.getStart();
+  }
+
+  @Override
+  public void enable(Simulation simulation)
+  {
+  }
+
+  @Override
+  public void disable()
+  {
   }
 
   @Override
@@ -324,6 +337,21 @@ public class TraceView
                          getStartPosition(),
                          getEndPosition(),
                          selected);
+  }
+
+  public void connectTraces(List<Trace> traces)
+  {
+    this.traces = traces;
+  }
+
+  public void disconnectTraces()
+  {
+    traces = new ArrayList<>();
+  }
+
+  public List<Trace> getTraces()
+  {
+    return traces;
   }
 }
 

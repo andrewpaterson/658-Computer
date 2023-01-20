@@ -2,25 +2,32 @@ package net.logicim.ui.common.wire;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class TunnelView
-    extends WireView
+    extends StaticView
+    implements WireView
 {
   protected Set<TunnelView> tunnels;
   protected ConnectionView connection;
   protected String name;
   protected Int2D position;
+  protected List<Trace> traces;
 
-  public TunnelView(CircuitEditor circuitEditor, Int2D position, String name)
+  public TunnelView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, String name)
   {
+    super(circuitEditor, position, rotation);
     this.connection = circuitEditor.getOrAddConnection(position, this);
     this.position = position.clone();
     this.traces = new ArrayList<>();
@@ -77,9 +84,30 @@ public class TunnelView
   }
 
   @Override
+  public void enable(Simulation simulation)
+  {
+  }
+
+  @Override
+  public void disable()
+  {
+  }
+
+  @Override
   public void setPosition(int x, int y)
   {
     position.set(x, y);
+  }
+
+  @Override
+  protected void finaliseView()
+  {
+    finalised = true;
+
+    updateBoundingBoxFromShapes(boundingBox);
+
+    selectionBox.copy(this.boundingBox);
+    this.boundingBox.grow(0.5f);
   }
 
   public TunnelData save(boolean selected)
@@ -104,6 +132,23 @@ public class TunnelView
   public ConnectionView getConnection()
   {
     return connection;
+  }
+
+  public void connectTraces(List<Trace> traces)
+  {
+    this.traces = traces;
+  }
+
+  @Override
+  public void disconnectTraces()
+  {
+    traces = new ArrayList<>();
+  }
+
+  @Override
+  public List<Trace> getTraces()
+  {
+    return traces;
   }
 }
 

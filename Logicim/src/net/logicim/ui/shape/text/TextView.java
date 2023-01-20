@@ -21,6 +21,7 @@ public class TextView
   protected float size;
   protected boolean bold;
   protected boolean useHolderRotation;
+  protected boolean includeBoundingBox;
   protected Rotation rotation;
 
   protected HorizontalAlignment horizontalAlignment;
@@ -41,7 +42,7 @@ public class TextView
                   HorizontalAlignment horizontalAlignment,
                   VerticalAlignment verticalAlignment)
   {
-    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, horizontalAlignment, verticalAlignment);
+    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, horizontalAlignment, verticalAlignment, false);
   }
 
   public TextView(ShapeHolder shapeHolder,
@@ -52,7 +53,8 @@ public class TextView
                   boolean useHolderRotation,
                   Rotation rotation,
                   HorizontalAlignment horizontalAlignment,
-                  VerticalAlignment verticalAlignment)
+                  VerticalAlignment verticalAlignment,
+                  boolean includeBoundingBox)
   {
     super(shapeHolder);
     this.positionRelativeToIC = positionRelativeToIC;
@@ -60,6 +62,7 @@ public class TextView
     this.size = size;
     this.bold = bold;
     this.useHolderRotation = useHolderRotation;
+    this.includeBoundingBox = includeBoundingBox;
     this.rotation = rotation;
     this.horizontalAlignment = horizontalAlignment;
     this.verticalAlignment = verticalAlignment;
@@ -174,6 +177,10 @@ public class TextView
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
+    if (includeBoundingBox)
+    {
+
+    }
   }
 
   @Override

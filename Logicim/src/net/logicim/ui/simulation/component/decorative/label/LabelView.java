@@ -11,7 +11,6 @@ import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 

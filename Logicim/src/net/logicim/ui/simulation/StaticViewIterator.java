@@ -5,7 +5,10 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class StaticViewIterator
     implements Iterator<StaticView<?>>
@@ -13,14 +16,25 @@ public class StaticViewIterator
   public List<Iterator<? extends StaticView<?>>> iterators;
   public int iteratorIndex;
 
-  public StaticViewIterator(Set<IntegratedCircuitView<?, ?>> integratedCircuitViews, Set<PassiveView<?, ?>> passiveViews, Set<DecorativeView<?>> decorativeViews)
+  public StaticViewIterator(Set<IntegratedCircuitView<?, ?>> integratedCircuitViews,
+                            Set<PassiveView<?, ?>> passiveViews,
+                            Set<DecorativeView<?>> decorativeViews)
   {
     iterators = new ArrayList<>();
-    iterators.add(integratedCircuitViews.iterator());
-    iterators.add(passiveViews.iterator());
-    iterators.add(decorativeViews.iterator());
+    addIterator(integratedCircuitViews);
+    addIterator(passiveViews);
+    addIterator(decorativeViews);
 
     iteratorIndex = 0;
+  }
+
+  protected void addIterator(Set<? extends StaticView<?>> staticViews)
+  {
+    Iterator<? extends StaticView<?>> iterator = staticViews.iterator();
+    if (iterator.hasNext())
+    {
+      iterators.add(iterator);
+    }
   }
 
   @Override

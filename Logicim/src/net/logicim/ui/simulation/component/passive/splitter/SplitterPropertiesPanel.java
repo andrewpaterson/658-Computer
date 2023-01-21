@@ -25,6 +25,7 @@ public class SplitterPropertiesPanel
   public static final String OFFSET = "Offset";
   public static final String BIT = "Bit ";
 
+  protected RotationEditor rotationEditor;
   protected TextPropertyEditor name;
   protected IntegerPropertyEditor fanOut;
   protected IntegerPropertyEditor bitWidth;
@@ -35,12 +36,14 @@ public class SplitterPropertiesPanel
   protected List<IntegerPropertyEditor> indices;
   protected SplitterPropertyEditorDialog dialog;
 
-  public SplitterPropertiesPanel(SplitterPropertyEditorDialog dialog, SplitterProperties properties)
+  public SplitterPropertiesPanel(SplitterPropertyEditorDialog dialog, SplitterView componentView)
   {
     super(new GridBagLayout());
+    SplitterProperties properties = componentView.getProperties();
     this.dialog = dialog;
 
     Form form = new Form();
+    rotationEditor = new RotationEditor(this, "rotation", componentView.getRotation());
     name = new TextPropertyEditor(this, NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
     fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);

@@ -230,6 +230,12 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     boundingBox.grow(0.5f);
   }
 
+  public void setRotation(Rotation rotation)
+  {
+    this.rotation = rotation;
+    invalidateCache();
+  }
+
   public abstract boolean isEnabled();
 
   public abstract PortView getPortInGrid(int x, int y);

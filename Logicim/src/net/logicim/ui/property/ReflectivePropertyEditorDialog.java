@@ -2,7 +2,7 @@ package net.logicim.ui.property;
 
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
 import javax.swing.*;
@@ -22,26 +22,7 @@ public class ReflectivePropertyEditorDialog
   @Override
   protected JPanel createEditorPanel()
   {
-    return new ReflectivePropertiesPanel(componentView.getProperties());
-  }
-
-  protected boolean updateProperties(Map<Field, Object> map, ComponentProperties properties)
-  {
-    InstanceInspector instanceInspector = new InstanceInspector(properties);
-    boolean propertyChanged = false;
-    for (Map.Entry<Field, Object> entry : map.entrySet())
-    {
-      Field field = entry.getKey();
-      Object newValue = entry.getValue();
-      Object oldValue = instanceInspector.getFieldValue(field);
-
-      if (!Objects.equals(newValue, oldValue))
-      {
-        propertyChanged = true;
-        instanceInspector.setFieldValue(field, coerce(newValue, field.getType()));
-      }
-    }
-    return propertyChanged;
+    return new ReflectivePropertiesPanel(componentView);
   }
 
   protected Object coerce(Object value, Class<?> type)
@@ -89,8 +70,31 @@ public class ReflectivePropertyEditorDialog
   @Override
   protected boolean updateProperties()
   {
-    Map<Field, Object> map = ((ReflectivePropertiesPanel) getPropertiesPanel()).getProperties();
-    return updateProperties(map, componentView.getProperties());
+    ReflectivePropertiesPanel reflectivePropertiesPanel = (ReflectivePropertiesPanel) getPropertiesPanel();
+    Map<Field, Object> map = reflectivePropertiesPanel.getProperties();
+
+    boolean propertyChanged = false;
+    Rotation rotation = reflectivePropertiesPanel.getRotation();
+    if (componentView.getRotation() != rotation)
+    {
+      componentView.setRotation(rotation);
+      propertyChanged = true;
+    }
+
+    InstanceInspector instanceInspector = new InstanceInspector(componentView.getProperties());
+    for (Map.Entry<Field, Object> entry : map.entrySet())
+    {
+      Field field = entry.getKey();
+      Object newValue = entry.getValue();
+      Object oldValue = instanceInspector.getFieldValue(field);
+
+      if (!Objects.equals(newValue, oldValue))
+      {
+        propertyChanged = true;
+        instanceInspector.setFieldValue(field, coerce(newValue, field.getType()));
+      }
+    }
+    return propertyChanged;
   }
 }
 

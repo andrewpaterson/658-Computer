@@ -1,11 +1,14 @@
 package net.logicim.ui.property;
 
 import net.logicim.common.reflect.InstanceInspector;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
+import net.logicim.ui.simulation.component.passive.splitter.RotationEditor;
 
 import java.awt.*;
 import java.lang.reflect.Field;
@@ -18,10 +21,12 @@ public class ReflectivePropertiesPanel
     extends PropertiesPanel
 {
   protected Map<Field, PropertyEditor> fieldProperties;
+  protected RotationEditor rotationEditor;
 
-  public ReflectivePropertiesPanel(ComponentProperties properties)
+  public ReflectivePropertiesPanel(StaticView<?> componentView)
   {
     super(new GridBagLayout());
+    ComponentProperties properties = componentView.getProperties();
 
     fieldProperties = new LinkedHashMap<>();
 
@@ -30,6 +35,8 @@ public class ReflectivePropertiesPanel
     Collections.reverse(fields);
 
     Form form = new Form();
+    rotationEditor = new RotationEditor(this, "rotation", componentView.getRotation());
+    form.addComponents(new Label("Rotation"), rotationEditor.getComponent());
     for (Field field : fields)
     {
       Object fieldValue = instanceInspector.getFieldValue(field);
@@ -59,6 +66,11 @@ public class ReflectivePropertiesPanel
       hashMap.put(field, propertyEditor.getValue());
     }
     return hashMap;
+  }
+
+  public Rotation getRotation()
+  {
+    return rotationEditor.getValue();
   }
 }
 

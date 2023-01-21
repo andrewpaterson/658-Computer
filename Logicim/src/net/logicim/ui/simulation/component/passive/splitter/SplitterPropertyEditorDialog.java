@@ -26,7 +26,7 @@ public class SplitterPropertyEditorDialog
   @Override
   protected JPanel createEditorPanel()
   {
-    return new SplitterPropertiesPanel(this, componentViewProperties);
+    return new SplitterPropertiesPanel(this, componentView);
   }
 
   @Override

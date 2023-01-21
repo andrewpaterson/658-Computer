@@ -44,6 +44,10 @@ public class TypeEditorFactory
     {
       return new IntegerPropertyEditor(propertiesPanel, fieldName, (int) fieldValue);
     }
+    else if (Enum.class.isAssignableFrom(fieldClass))
+    {
+      return new GeneralEnumPropertyEditor(propertiesPanel, fieldName, (Class<Enum<?>>) fieldClass, (Enum<?>) fieldValue);
+    }
     else
     {
       for (PropertyEditorFactory customEditor : customEditors)

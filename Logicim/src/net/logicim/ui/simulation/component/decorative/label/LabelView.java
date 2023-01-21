@@ -14,6 +14,8 @@ import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 import java.awt.*;
 
+import static net.logicim.ui.common.Rotation.Cannot;
+
 public class LabelView
     extends DecorativeView<LabelProperties>
 {
@@ -34,9 +36,10 @@ public class LabelView
                             new Int2D(0, 0),
                             properties.name,
                             size,
-                            bold,
+                            properties.bold,
                             true,
-                            Rotation.Cannot);
+                            Cannot,
+                            properties.alignment);
     textView.updateDimension(graphics, viewport);
 
     Float2D topLeft = textView.getTextOffset();
@@ -45,8 +48,8 @@ public class LabelView
     rectangleView = new RectangleView(this,
                                       topLeft,
                                       bottomRight,
-                                      true,
-                                      true);
+                                      properties.border,
+                                      properties.fill);
 
     updateBoundingBox();
   }
@@ -59,7 +62,14 @@ public class LabelView
   @Override
   public ReflectiveData save(boolean selected)
   {
-    return new LabelData(properties.name, position, rotation, selected);
+    return new LabelData(properties.name,
+                         position,
+                         rotation,
+                         selected,
+                         properties.alignment,
+                         properties.bold,
+                         properties.fill,
+                         properties.border);
   }
 
   @Override
@@ -80,6 +90,11 @@ public class LabelView
     if (textView == null)
     {
       createGraphics(graphics, viewport);
+    }
+
+    if (rectangleView != null)
+    {
+      rectangleView.paint(graphics, viewport);
     }
 
     if (textView != null)

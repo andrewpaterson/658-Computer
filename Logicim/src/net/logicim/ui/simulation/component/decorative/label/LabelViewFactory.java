@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.decorative.label;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.shape.text.HorizontalAlignment;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 
@@ -11,7 +12,14 @@ public class LabelViewFactory
   @Override
   public LabelView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
   {
-    return new LabelView(circuitEditor, position, rotation, new LabelProperties("Hello"));
+    return new LabelView(circuitEditor,
+                         position,
+                         rotation,
+                         new LabelProperties("Hello",
+                                             HorizontalAlignment.LEFT,
+                                             false,
+                                             true,
+                                             true));
   }
 
   @Override

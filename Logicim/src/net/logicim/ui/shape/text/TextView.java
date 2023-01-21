@@ -12,6 +12,9 @@ import net.logicim.ui.shape.point.PointGridCache;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
+import static net.logicim.ui.shape.text.HorizontalAlignment.CENTER;
+import static net.logicim.ui.shape.text.HorizontalAlignment.RIGHT;
+
 public class TextView
     extends ShapeView
 {
@@ -24,6 +27,7 @@ public class TextView
   protected boolean bold;
   protected boolean useHolderRotation;
   protected Rotation rotation;
+  protected HorizontalAlignment alignment;
 
   protected PointGridCache gridCache;
 
@@ -31,9 +35,10 @@ public class TextView
                   Tuple2 positionRelativeToIC,
                   String text,
                   float size,
-                  boolean bold)
+                  boolean bold,
+                  HorizontalAlignment alignment)
   {
-    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North);
+    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, alignment);
   }
 
   public TextView(ShapeHolder shapeHolder,
@@ -42,10 +47,12 @@ public class TextView
                   float size,
                   boolean bold,
                   boolean useHolderRotation,
-                  Rotation rotation)
+                  Rotation rotation,
+                  HorizontalAlignment alignment)
   {
     super(shapeHolder);
     this.positionRelativeToIC = positionRelativeToIC;
+    this.alignment = alignment;
     this.textDimension = null;
 
     this.text = text;
@@ -103,6 +110,17 @@ public class TextView
     float height = textDimension.getY() * viewport.getZoom() * viewport.getScale();
     float halfHeight = height / 2f;
     float degrees;
+
+    float widthAdjust = 0;
+    if (alignment == CENTER)
+    {
+      widthAdjust = -width / 2;
+    }
+    else if (alignment == RIGHT)
+    {
+      widthAdjust = -width;
+    }
+
     Rotation rotation = getRotation();
     if (rotation.isNorthSouth() || rotation.isCannot())
     {
@@ -118,23 +136,23 @@ public class TextView
 
     if (rotation.isNorth() || rotation.isCannot())
     {
-      xOffset = 0;
+      xOffset = 0 + widthAdjust;
       yOffset = halfHeight;
     }
     else if (rotation.isSouth())
     {
-      xOffset = -width;
+      xOffset = -width + widthAdjust;
       yOffset = halfHeight;
     }
     else if (rotation.isEast())
     {
       xOffset = -halfHeight;
-      yOffset = -width;
+      yOffset = -width + widthAdjust;
     }
     else if (rotation.isWest())
     {
       xOffset = -halfHeight;
-      yOffset = 0;
+      yOffset = 0 + widthAdjust;
     }
 
     AffineTransform affineTransform = AffineTransform.getRotateInstance(Math.toRadians(degrees));

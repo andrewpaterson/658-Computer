@@ -108,10 +108,6 @@ public abstract class PropertyEditorDialog
     return propertiesPanel;
   }
 
-  protected abstract JPanel createEditorPanel();
-
-  protected abstract boolean updateProperties();
-
   protected boolean updateRotation(RotationEditorHolder rotationEditorHolder)
   {
     boolean propertyChanged = false;
@@ -123,5 +119,9 @@ public abstract class PropertyEditorDialog
     }
     return propertyChanged;
   }
+
+  protected abstract JPanel createEditorPanel();
+
+  protected abstract boolean updateProperties();
 }
 

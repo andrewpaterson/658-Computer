@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.port.Port;
 
 import java.util.ArrayList;
@@ -22,6 +23,11 @@ public class FullWire
 
   public void process(PortConnection portConnection)
   {
+    if (portConnection == null)
+    {
+      throw new SimulatorException("PortConnection may not be null.");
+    }
+
     localWires.add(portConnection);
     Set<Port> splitterPorts = portConnection.getSplitterPorts();
     for (Port splitterPort : splitterPorts)

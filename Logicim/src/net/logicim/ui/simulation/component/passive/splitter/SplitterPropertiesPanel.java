@@ -40,22 +40,23 @@ public class SplitterPropertiesPanel
   protected List<IntegerPropertyEditor> indices;
   protected SplitterPropertyEditorDialog dialog;
 
-  public SplitterPropertiesPanel(SplitterPropertyEditorDialog dialog, SplitterView componentView)
+  public SplitterPropertiesPanel(SplitterPropertyEditorDialog dialog, SplitterProperties properties, Rotation rotation)
   {
     super(new GridBagLayout());
-    SplitterProperties properties = componentView.getProperties();
+
     this.dialog = dialog;
 
     Form form = new Form();
-    rotation = new RotationEditor(this, ROTATION, componentView.getRotation());
+    this.rotation = new RotationEditor(this, ROTATION, rotation);
     name = new TextPropertyEditor(this, NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
+    System.out.println("SplitterPropertiesPanel.SplitterPropertiesPanel " + properties.bitWidth);
     fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
     appearance = new SplitterAppearanceEditor(this, APPEARANCE, properties.appearance);
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);
     offset = new IntegerPropertyEditor(this, OFFSET, properties.endOffset);
 
-    form.addComponents(new Label(ROTATION), rotation.getComponent());
+    form.addComponents(new Label(ROTATION), this.rotation.getComponent());
     form.addComponents(new Label(NAME), name.getComponent());
     form.addComponents(new Label(FAN_OUT), fanOut.getComponent());
     form.addComponents(new Label(BIT_WIDTH), bitWidth.getComponent());

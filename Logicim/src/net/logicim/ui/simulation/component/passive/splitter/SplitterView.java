@@ -132,10 +132,10 @@ public class SplitterView
     Rotation degrees = Rotation.North;
     if (properties.appearance == SplitterAppearance.LEFT)
     {
-      if (rotation == Rotation.North)
+      if (rotation.isNorth() || rotation.isCannot())
       {
-        position.x += 0.1;
-        position.y += 0.1;
+        position.x += 0.0;
+        position.y += 0.3;
       }
       else if (rotation == Rotation.South)
       {
@@ -145,19 +145,19 @@ public class SplitterView
       else if (rotation == Rotation.East)
       {
         position.x += 0.1;
-        position.y += 0.1;
+        position.y += 0.7;
         degrees = Rotation.East;
       }
       else if (rotation == Rotation.West)
       {
         position.x += 0.1;
-        position.y += 1.0;
+        position.y += 0.3;
         degrees = Rotation.East;
       }
       else
       {
-        position.x += 0;
-        position.y += 0;
+        position.x += 0.1;
+        position.y += 0.7;
       }
     }
     else if (properties.appearance == SplitterAppearance.RIGHT)

@@ -84,7 +84,6 @@ public class TextView
       float halfHeight = (float) height / 2f;
 
       Float2D topLeft = new Float2D(0, -halfHeight);
-
       Float2D bottomRight = new Float2D(width, halfHeight);
 
       float scale = viewport.getScale();
@@ -106,20 +105,13 @@ public class TextView
 
     Font font = viewport.getFont(size * viewport.getZoom(), bold);
 
-    float width = textDimension.getX() * viewport.getZoom() * viewport.getScale();
-    float height = textDimension.getY() * viewport.getZoom() * viewport.getScale();
-    float halfHeight = height / 2f;
+    float factor = viewport.getZoom() * viewport.getScale();
+    float width = textDimension.getX() * factor;
+    float height = textDimension.getY() * factor;
+    float halfHeight = height / 3.5f;  //Some magic number.  Not half the height.
     float degrees;
 
-    float widthAdjust = 0;
-    if (alignment == CENTER)
-    {
-      widthAdjust = -width / 2;
-    }
-    else if (alignment == RIGHT)
-    {
-      widthAdjust = -width;
-    }
+    float widthAdjust = getWidthAdjust() * factor;
 
     Rotation rotation = getRotation();
     if (rotation.isNorthSouth() || rotation.isCannot())
@@ -164,6 +156,22 @@ public class TextView
     int y = viewport.transformGridToScreenSpaceY(transformedPosition);
 
     graphics.drawString(text, x + xOffset, y + yOffset);
+  }
+
+  public float getWidthAdjust()
+  {
+    float width = textDimension.getX();
+
+    float widthAdjust = 0.1f;
+    if (alignment == CENTER)
+    {
+      widthAdjust += -width / 2;
+    }
+    else if (alignment == RIGHT)
+    {
+      widthAdjust += -width;
+    }
+    return widthAdjust;
   }
 
   protected Rotation getRotation()

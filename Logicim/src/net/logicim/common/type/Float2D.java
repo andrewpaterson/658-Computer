@@ -34,6 +34,12 @@ public class Float2D
     this.y = p.y;
   }
 
+  public Float2D(Tuple2 p)
+  {
+    this.x = p.getX();
+    this.y = p.getY();
+  }
+
   public void set(Float2D p)
   {
     this.x = p.x;

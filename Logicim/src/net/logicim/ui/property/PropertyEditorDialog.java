@@ -111,5 +111,17 @@ public abstract class PropertyEditorDialog
   protected abstract JPanel createEditorPanel();
 
   protected abstract boolean updateProperties();
+
+  protected boolean updateRotation(RotationEditorHolder rotationEditorHolder)
+  {
+    boolean propertyChanged = false;
+    Rotation rotation = rotationEditorHolder.getRotation();
+    if (componentView.getRotation() != rotation)
+    {
+      componentView.setRotation(rotation);
+      propertyChanged = true;
+    }
+    return propertyChanged;
+  }
 }
 

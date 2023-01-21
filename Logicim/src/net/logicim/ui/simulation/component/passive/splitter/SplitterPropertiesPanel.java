@@ -1,12 +1,14 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
-import net.logicim.data.passive.wire.SplitterAppearance;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
+import net.logicim.ui.property.RotationEditor;
+import net.logicim.ui.property.RotationEditorHolder;
 import net.logicim.ui.util.ButtonUtil;
 
 import java.awt.*;
@@ -16,7 +18,9 @@ import java.util.List;
 
 public class SplitterPropertiesPanel
     extends PropertiesPanel
+    implements RotationEditorHolder
 {
+  public static final String ROTATION = "Rotation";
   public static final String NAME = "Name";
   public static final String FAN_OUT = "Fan Out";
   public static final String BIT_WIDTH = "Bit Width";
@@ -25,7 +29,7 @@ public class SplitterPropertiesPanel
   public static final String OFFSET = "Offset";
   public static final String BIT = "Bit ";
 
-  protected RotationEditor rotationEditor;
+  protected RotationEditor rotation;
   protected TextPropertyEditor name;
   protected IntegerPropertyEditor fanOut;
   protected IntegerPropertyEditor bitWidth;
@@ -43,7 +47,7 @@ public class SplitterPropertiesPanel
     this.dialog = dialog;
 
     Form form = new Form();
-    rotationEditor = new RotationEditor(this, "rotation", componentView.getRotation());
+    rotation = new RotationEditor(this, ROTATION, componentView.getRotation());
     name = new TextPropertyEditor(this, NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
     fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
@@ -51,6 +55,7 @@ public class SplitterPropertiesPanel
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);
     offset = new IntegerPropertyEditor(this, OFFSET, properties.endOffset);
 
+    form.addComponents(new Label(ROTATION), rotation.getComponent());
     form.addComponents(new Label(NAME), name.getComponent());
     form.addComponents(new Label(FAN_OUT), fanOut.getComponent());
     form.addComponents(new Label(BIT_WIDTH), bitWidth.getComponent());
@@ -140,4 +145,10 @@ public class SplitterPropertiesPanel
       index.setText(Integer.toString(splitIndex));
     }
   }
+
+  public Rotation getRotation()
+  {
+    return rotation.getValue();
+  }
 }
+

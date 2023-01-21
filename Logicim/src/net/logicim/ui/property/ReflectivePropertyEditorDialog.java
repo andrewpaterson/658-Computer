@@ -70,16 +70,10 @@ public class ReflectivePropertyEditorDialog
   @Override
   protected boolean updateProperties()
   {
-    ReflectivePropertiesPanel reflectivePropertiesPanel = (ReflectivePropertiesPanel) getPropertiesPanel();
+    ReflectivePropertiesPanel reflectivePropertiesPanel = getReflectivePropertiesPanel();
     Map<Field, Object> map = reflectivePropertiesPanel.getProperties();
 
-    boolean propertyChanged = false;
-    Rotation rotation = reflectivePropertiesPanel.getRotation();
-    if (componentView.getRotation() != rotation)
-    {
-      componentView.setRotation(rotation);
-      propertyChanged = true;
-    }
+    boolean propertyChanged = updateRotation(reflectivePropertiesPanel);
 
     InstanceInspector instanceInspector = new InstanceInspector(componentView.getProperties());
     for (Map.Entry<Field, Object> entry : map.entrySet())
@@ -95,6 +89,11 @@ public class ReflectivePropertyEditorDialog
       }
     }
     return propertyChanged;
+  }
+
+  private ReflectivePropertiesPanel getReflectivePropertiesPanel()
+  {
+    return (ReflectivePropertiesPanel) getPropertiesPanel();
   }
 }
 

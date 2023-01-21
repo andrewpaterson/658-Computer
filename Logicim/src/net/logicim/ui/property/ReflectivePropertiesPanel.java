@@ -8,7 +8,6 @@ import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
-import net.logicim.ui.simulation.component.passive.splitter.RotationEditor;
 
 import java.awt.*;
 import java.lang.reflect.Field;
@@ -19,6 +18,7 @@ import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
 
 public class ReflectivePropertiesPanel
     extends PropertiesPanel
+    implements RotationEditorHolder
 {
   protected Map<Field, PropertyEditor> fieldProperties;
   protected RotationEditor rotationEditor;
@@ -68,6 +68,7 @@ public class ReflectivePropertiesPanel
     return hashMap;
   }
 
+  @Override
   public Rotation getRotation()
   {
     return rotationEditor.getValue();

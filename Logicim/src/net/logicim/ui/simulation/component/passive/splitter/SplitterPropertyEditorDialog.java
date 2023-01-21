@@ -32,10 +32,12 @@ public class SplitterPropertyEditorDialog
   @Override
   protected boolean updateProperties()
   {
+    boolean propertyChanged = updateRotation(getSplitterPropertiesPanel());
+
     SplitterProperties newProperties = createProperties();
     if (componentView.getProperties().equals(newProperties))
     {
-      return false;
+      return propertyChanged;
     }
     else
     {

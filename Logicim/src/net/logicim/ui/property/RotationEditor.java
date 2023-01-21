@@ -1,4 +1,4 @@
-package net.logicim.ui.simulation.component.passive.splitter;
+package net.logicim.ui.property;
 
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.components.typeeditor.EnumPropertyEditor;

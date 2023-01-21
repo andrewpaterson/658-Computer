@@ -13,7 +13,6 @@ import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class LabelView
     extends DecorativeView<LabelProperties>
@@ -81,11 +80,6 @@ public class LabelView
     if (textView == null)
     {
       createGraphics(graphics, viewport);
-    }
-
-    if (rectangleView != null)
-    {
-      rectangleView.paint(graphics, viewport);
     }
 
     if (textView != null)

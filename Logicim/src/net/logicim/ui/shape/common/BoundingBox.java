@@ -223,5 +223,10 @@ public class BoundingBox
       this.bottomRight.set(source.getBottomRight());
     }
   }
+
+  public boolean isNull()
+  {
+    return (topLeft == null) || (bottomRight == null);
+  }
 }
 

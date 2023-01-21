@@ -90,13 +90,14 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     Int2D p = new Int2D();
     Int2D s = new Int2D();
 
-    getSelectionBoxInScreenSpace(viewport, p, s);
-
-    graphics.setStroke(viewport.getZoomableStroke());
-    paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
-    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
-    paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
-    paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y + s.y, color);
+    if (getSelectionBoxInScreenSpace(viewport, p, s))
+    {
+      graphics.setStroke(viewport.getZoomableStroke());
+      paintSelectionRectangle(graphics, viewport, p.x, p.y, color);
+      paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y, color);
+      paintSelectionRectangle(graphics, viewport, p.x, p.y + s.y, color);
+      paintSelectionRectangle(graphics, viewport, p.x + s.x, p.y + s.y, color);
+    }
   }
 
   @Override
@@ -116,18 +117,30 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
     Int2D p = new Int2D();
     Int2D s = new Int2D();
-    getBoundingBoxInScreenSpace(viewport, p, s);
-    viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getAbsoluteStroke(1), null, Color.ORANGE);
+    if (getBoundingBoxInScreenSpace(viewport, p, s))
+    {
+      viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getAbsoluteStroke(1), null, Color.ORANGE);
+    }
   }
 
-  public void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  public boolean getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
   {
-    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, boundingBox);
+    if (boundingBox != null && !boundingBox.isNull())
+    {
+      getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, boundingBox);
+      return true;
+    }
+    return false;
   }
 
-  public void getSelectionBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
+  public boolean getSelectionBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension)
   {
-    getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, selectionBox);
+    if (selectionBox != null && !selectionBox.isNull())
+    {
+      getBoundingBoxInScreenSpace(viewport, destPosition, destDimension, selectionBox);
+      return true;
+    }
+    return false;
   }
 
   private void getBoundingBoxInScreenSpace(Viewport viewport, Int2D destPosition, Int2D destDimension, BoundingBox boundingBox)

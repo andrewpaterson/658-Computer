@@ -326,13 +326,15 @@ public class CircuitEditor
       StaticView<?> closestView = null;
       for (StaticView<?> view : selectedViews)
       {
-        view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
-        boundBoxPosition.add(boundBoxDimension.x / 2, boundBoxDimension.y / 2);
-        float distance = BoundingBox.calculateDistance(screenPosition, boundBoxPosition);
-        if (distance < shortestDistance)
+        if (view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension))
         {
-          closestView = view;
-          shortestDistance = distance;
+          boundBoxPosition.add(boundBoxDimension.x / 2, boundBoxDimension.y / 2);
+          float distance = BoundingBox.calculateDistance(screenPosition, boundBoxPosition);
+          if (distance < shortestDistance)
+          {
+            closestView = view;
+            shortestDistance = distance;
+          }
         }
       }
       return closestView;

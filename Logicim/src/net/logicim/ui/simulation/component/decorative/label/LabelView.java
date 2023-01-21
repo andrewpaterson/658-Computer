@@ -1,11 +1,10 @@
 package net.logicim.ui.simulation.component.decorative.label;
 
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.data.ReflectiveData;
-import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
-import net.logicim.data.integratedcircuit.decorative.VerticalAlignment;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -38,16 +37,15 @@ public class LabelView
                             size,
                             bold,
                             true,
-                            Rotation.Cannot,
-                            HorizontalAlignment.LEFT,
-                            VerticalAlignment.TOP);
+                            Rotation.Cannot);
     textView.updateDimension(graphics, viewport);
 
-    Tuple2 dimension = textView.getDimension();
-
+    Float2D topLeft = textView.getTextOffset();
+    Tuple2 bottomRight = textView.getTextDimension();
+    bottomRight.add(topLeft);
     rectangleView = new RectangleView(this,
-                                      new Int2D(0, 0),
-                                      dimension,
+                                      topLeft,
+                                      bottomRight,
                                       true,
                                       true);
 

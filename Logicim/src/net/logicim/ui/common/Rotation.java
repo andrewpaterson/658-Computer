@@ -173,20 +173,37 @@ public enum Rotation
 
   public boolean isNorthSouth()
   {
-    if (this == Cannot)
-    {
-      return false;
-    }
     return (this == North) || (this == South);
   }
 
   public boolean isEastWest()
   {
-    if (this == Cannot)
-    {
-      return false;
-    }
     return (this == West) || (this == East);
+  }
+
+  public boolean isSouth()
+  {
+    return this == South;
+  }
+
+  public boolean isEast()
+  {
+    return this == East;
+  }
+
+  public boolean isNorth()
+  {
+    return this == North;
+  }
+
+  public boolean isWest()
+  {
+    return this == West;
+  }
+
+  public boolean isCannot()
+  {
+    return this == Cannot;
   }
 }
 

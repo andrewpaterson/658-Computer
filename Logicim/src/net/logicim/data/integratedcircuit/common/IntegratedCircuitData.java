@@ -13,6 +13,7 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -85,7 +86,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ComponentView<?> componentView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
   {
     ICV integratedCircuitView = (ICV) componentView;
     circuitEditor.createConnectionViewsFromComponentPorts(integratedCircuitView);

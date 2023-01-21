@@ -1,17 +1,25 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.port.LogicPortData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
+import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.PortEvent;
+import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.simulation.CircuitEditor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ComponentData
     extends StaticData
@@ -32,12 +40,14 @@ public abstract class ComponentData
     this.ports = ports;
   }
 
-  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, ComponentView<?> componentView)
+  @Override
+  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
   {
+    List<PortView> portViews = componentView.getPorts();
     for (int i = 0; i < ports.size(); i++)
     {
-      PortView portView = componentView.getPort(i);
       MultiPortData multiPortData = ports.get(i);
+      PortView portView = portViews.get(i);
 
       List<? extends Port> ports = portView.getPorts();
       for (int j = 0; j < ports.size(); j++)
@@ -52,28 +62,31 @@ public abstract class ComponentData
     }
   }
 
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ComponentView<?> componentView)
+  protected void loadPort(CircuitEditor circuitEditor, PortData portData, Port port)
   {
-    circuitEditor.createConnectionViewsFromComponentPorts(componentView);
-    componentView.enable(circuitEditor.getSimulation());
-
-    loadPorts(circuitEditor, traceLoader, componentView);
-  }
-
-  @Override
-  public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
-  {
-    ComponentView<?> componentView = create(circuitEditor, traceLoader);
-    connectAndLoad(circuitEditor, traceLoader, componentView);
-
-    if (selected)
+    if (port.isLogicPort())
     {
-      circuitEditor.select(componentView);
+      LogicPortData logicPortData = (LogicPortData) portData;
+      LogicPort logicPort = (LogicPort) port;
+      Map<Long, PortEvent> portEventMap = new HashMap<>();
+      for (PortEventData<?> eventData : logicPortData.events)
+      {
+        PortEvent portEvent = eventData.create(logicPort, circuitEditor.getTimeline());
+        portEventMap.put(eventData.id, portEvent);
+      }
+
+      if ((logicPortData.output != null) && (logicPortData.output.id > 0))
+      {
+        PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
+        if (outputPortEvent == null)
+        {
+          outputPortEvent = logicPortData.output.create(logicPort, circuitEditor.getTimeline());
+        }
+        logicPort.setOutput(outputPortEvent);
+      }
     }
   }
 
   protected abstract ComponentView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader);
-
-  protected abstract void loadPort(CircuitEditor circuitEditor, PortData portData, Port port);
 }
 

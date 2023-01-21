@@ -314,9 +314,9 @@ public class SimulatorEditor
 
     for (View view : circuitEditor.getSelection())
     {
-      if (view instanceof ComponentView)
+      if (view instanceof StaticView)
       {
-        ComponentView<?> componentView = (ComponentView<?>) view;
+        StaticView<?> componentView = (StaticView<?>) view;
         componentView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
         if (BoundingBox.containsPoint(new Int2D(fx, fy), boundBoxPosition, boundBoxDimension))
         {

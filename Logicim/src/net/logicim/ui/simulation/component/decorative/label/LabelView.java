@@ -74,7 +74,6 @@ public class LabelView
   {
     super.paint(graphics, viewport, time);
 
-    AffineTransform transform = graphics.getTransform();
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
@@ -98,7 +97,6 @@ public class LabelView
     graphics.setFont(font);
     graphics.setColor(color);
     graphics.setStroke(stroke);
-    graphics.setTransform(transform);
   }
 }
 

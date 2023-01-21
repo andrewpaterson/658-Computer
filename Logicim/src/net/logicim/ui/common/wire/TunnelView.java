@@ -3,6 +3,7 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -13,6 +14,7 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -117,6 +119,23 @@ public class TunnelView
   public String getType()
   {
     return "Tunnel";
+  }
+
+  @Override
+  public List<PortView> getPorts()
+  {
+    return Collections.emptyList();
+  }
+
+  @Override
+  public void simulationStarted(Simulation simulation)
+  {
+  }
+
+  @Override
+  public Component getComponent()
+  {
+    return null;
   }
 
   @Override

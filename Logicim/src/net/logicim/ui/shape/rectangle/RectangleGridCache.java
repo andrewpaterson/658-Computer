@@ -12,13 +12,13 @@ public class RectangleGridCache
   protected Tuple2 transformedDimension;
   protected Tuple2 transformedPosition;
 
-  public RectangleGridCache(Tuple2 dimension, Tuple2 position)
+  public RectangleGridCache(Tuple2 position, Tuple2 dimension)
   {
     transformedPosition = position.clone();
     transformedDimension = Tuple2.safeClone(dimension);
   }
 
-  public void update(Tuple2 dimension, Tuple2 positionRelativeToIC, Rotation rotation, Tuple2 position)
+  public void update(Tuple2 positionRelativeToIC, Tuple2 dimension, Rotation rotation, Tuple2 position)
   {
     update();
 

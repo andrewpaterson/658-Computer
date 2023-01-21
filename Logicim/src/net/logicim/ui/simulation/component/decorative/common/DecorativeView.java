@@ -2,16 +2,20 @@ package net.logicim.ui.simulation.component.decorative.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Component;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.simulation.CircuitEditor;
 
+import java.util.Collections;
+import java.util.List;
+
 public abstract class DecorativeView<T extends DecorativeProperties>
     extends StaticView<T>
 {
-  public boolean enabled;
+  protected boolean enabled;
 
   public DecorativeView(CircuitEditor circuitEditor,
                         Int2D position,
@@ -39,6 +43,23 @@ public abstract class DecorativeView<T extends DecorativeProperties>
 
   @Override
   public PortView getPortInGrid(int x, int y)
+  {
+    return null;
+  }
+
+  @Override
+  public List<PortView> getPorts()
+  {
+    return Collections.emptyList();
+  }
+
+  @Override
+  public void simulationStarted(Simulation simulation)
+  {
+  }
+
+  @Override
+  public Component getComponent()
   {
     return null;
   }

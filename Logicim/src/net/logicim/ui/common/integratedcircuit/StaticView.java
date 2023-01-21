@@ -4,6 +4,8 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Component;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
@@ -224,5 +226,11 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract ReflectiveData save(boolean selected);
 
   public abstract String getType();
+
+  public abstract List<PortView> getPorts();
+
+  public abstract void simulationStarted(Simulation simulation);
+
+  public abstract Component getComponent();
 }
 

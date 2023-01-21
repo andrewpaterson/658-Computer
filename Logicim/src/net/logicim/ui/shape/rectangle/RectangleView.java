@@ -39,7 +39,7 @@ public class RectangleView
       positionRelativeToIC = new Float2D(-((float) width / 2), -((float) height / 2));
     }
 
-    gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
+    gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
   }
 
   public RectangleView(ShapeHolder shapeHolder,
@@ -55,7 +55,7 @@ public class RectangleView
     this.dimension.subtract(topLeft);
     this.positionRelativeToIC = topLeft.clone();
 
-    this.gridCache = new RectangleGridCache(dimension, positionRelativeToIC);
+    this.gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
   }
 
   @Override
@@ -90,7 +90,7 @@ public class RectangleView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(dimension, positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(positionRelativeToIC, dimension, shapeHolder.getRotation(), shapeHolder.getPosition());
     }
   }
 

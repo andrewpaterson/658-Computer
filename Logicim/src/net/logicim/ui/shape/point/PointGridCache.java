@@ -7,26 +7,26 @@ import net.logicim.ui.shape.common.GridCache;
 public class PointGridCache
     extends GridCache
 {
-  protected Tuple2 transformed;
+  protected Tuple2 transformedPosition;
 
   public PointGridCache(Tuple2 point)
   {
     super();
-    transformed = point.clone();
+    transformedPosition = point.clone();
   }
 
   public void update(Tuple2 point, Rotation rotation, Tuple2 position)
   {
     update();
 
-    rotation.rotate(transformed, point);
+    rotation.rotate(transformedPosition, point);
 
-    transformed.add(position);
+    transformedPosition.add(position);
   }
 
-  public Tuple2 getTransformed()
+  public Tuple2 getTransformedPosition()
   {
-    return transformed;
+    return transformedPosition;
   }
 }
 

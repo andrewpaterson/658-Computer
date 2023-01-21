@@ -7,7 +7,7 @@ import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
-import net.logicim.ui.shape.rectangle.RectangleGridCache;
+import net.logicim.ui.shape.point.PointGridCache;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -25,7 +25,7 @@ public class TextView
   protected boolean useHolderRotation;
   protected Rotation rotation;
 
-  protected RectangleGridCache gridCache;
+  protected PointGridCache gridCache;
 
   public TextView(ShapeHolder shapeHolder,
                   Tuple2 positionRelativeToIC,
@@ -54,25 +54,41 @@ public class TextView
     this.useHolderRotation = useHolderRotation;
     this.rotation = rotation;
 
-    this.gridCache = new RectangleGridCache(null, positionRelativeToIC);
+    this.gridCache = new PointGridCache(positionRelativeToIC);
   }
 
   public void updateGridCache()
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(textDimension, positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
     }
   }
 
-  public Tuple2 getTextDimension()
+  public void updateDimension(Graphics2D graphics, Viewport viewport)
   {
-    return textDimension;
-  }
+    if (textDimension == null)
+    {
+      Font font = viewport.getFont(size, bold);
+      FontMetrics metrics = graphics.getFontMetrics(font);
 
-  public Float2D getTextOffset()
-  {
-    return textOffset;
+      int height = metrics.getAscent() + metrics.getDescent();
+      int width = metrics.stringWidth(text);
+      float halfHeight = (float) height / 2f;
+
+      Float2D topLeft = new Float2D(0, -halfHeight);
+
+      Float2D bottomRight = new Float2D(width, halfHeight);
+
+      float scale = viewport.getScale();
+      topLeft.divide(scale);
+      bottomRight.divide(scale);
+
+      textDimension = new Float2D(bottomRight);
+      textDimension.subtract(topLeft);
+
+      textOffset = topLeft.clone();
+    }
   }
 
   @Override
@@ -85,6 +101,7 @@ public class TextView
 
     float width = textDimension.getX() * viewport.getZoom() * viewport.getScale();
     float height = textDimension.getY() * viewport.getZoom() * viewport.getScale();
+    float halfHeight = height / 2f;
     float degrees;
     Rotation rotation = getRotation();
     if (rotation.isNorthSouth() || rotation.isCannot())
@@ -102,11 +119,21 @@ public class TextView
     if (rotation.isNorth() || rotation.isCannot())
     {
       xOffset = 0;
-      yOffset = 0;
+      yOffset = halfHeight;
     }
     else if (rotation.isSouth())
     {
-      xOffset = 0;
+      xOffset = -width;
+      yOffset = halfHeight;
+    }
+    else if (rotation.isEast())
+    {
+      xOffset = -halfHeight;
+      yOffset = -width;
+    }
+    else if (rotation.isWest())
+    {
+      xOffset = -halfHeight;
       yOffset = 0;
     }
 
@@ -119,30 +146,6 @@ public class TextView
     int y = viewport.transformGridToScreenSpaceY(transformedPosition);
 
     graphics.drawString(text, x + xOffset, y + yOffset);
-  }
-
-  public void updateDimension(Graphics2D graphics, Viewport viewport)
-  {
-    if (textDimension == null)
-    {
-      Font font = viewport.getFont(size, bold);
-      FontMetrics metrics = graphics.getFontMetrics(font);
-
-      int height = metrics.getAscent() + metrics.getDescent();
-      int width = metrics.stringWidth(text);
-
-      Float2D topLeft = new Float2D(0, -metrics.getAscent());
-      float scale = viewport.getScale();
-
-      topLeft.divide(scale);
-      Float2D bottomRight = new Float2D(width, metrics.getDescent());
-      bottomRight.divide(scale);
-
-      textDimension = new Float2D(bottomRight);
-      textDimension.subtract(topLeft);
-
-      textOffset = topLeft.clone();
-    }
   }
 
   protected Rotation getRotation()
@@ -182,6 +185,16 @@ public class TextView
     this.positionRelativeToIC = positionRelativeToIC;
 
     invalidateCache();
+  }
+
+  public Tuple2 getTextDimension()
+  {
+    return textDimension;
+  }
+
+  public Float2D getTextOffset()
+  {
+    return textOffset;
   }
 }
 

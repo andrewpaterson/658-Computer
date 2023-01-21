@@ -6,12 +6,12 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.TimelineData;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.wire.Trace;
@@ -145,7 +145,7 @@ public class CircuitEditor
     removeDecorativeView(decorativeView);
   }
 
-  public List<ConnectionView> disconnectComponentView(ComponentView<?> componentView)
+  public List<ConnectionView> disconnectComponentView(StaticView<?> componentView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = componentView.getPorts();
@@ -162,7 +162,11 @@ public class CircuitEditor
       }
     }
 
-    circuit.disconnectDiscrete(componentView.getComponent(), simulation);
+    Component component = componentView.getComponent();
+    if (component != null)
+    {
+      circuit.disconnectDiscrete(component, simulation);
+    }
 
     return connectionViews;
   }
@@ -1058,7 +1062,7 @@ public class CircuitEditor
     }
   }
 
-  public Set<PortView> createAndConnectComponentView(ComponentView<?> componentView)
+  public Set<PortView> createAndConnectComponentView(StaticView<?> componentView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     List<PortView> ports = componentView.getPorts();
@@ -1083,7 +1087,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public Set<PortView> connectComponentView(ComponentView<?> componentView)
+  public Set<PortView> connectComponentView(StaticView<?> componentView)
   {
     List<PortView> ports = componentView.getPorts();
     for (PortView portView : ports)
@@ -1110,7 +1114,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public void createConnectionViewsFromComponentPorts(ComponentView<?> componentView)
+  public void createConnectionViewsFromComponentPorts(StaticView<?> componentView)
   {
     List<PortView> ports = componentView.getPorts();
     for (PortView portView : ports)
@@ -1141,16 +1145,9 @@ public class CircuitEditor
 
   public void placeComponentView(StaticView<?> componentView)
   {
-    if (componentView instanceof ComponentView)
-    {
-      Set<PortView> updatedPortViews = connectComponentView((ComponentView<?>) componentView);
+    Set<PortView> updatedPortViews = connectComponentView(componentView);
 
-      fireConnectionEvents(updatedPortViews);
-    }
-    else
-    {
-      componentView.enable(simulation);
-    }
+    fireConnectionEvents(updatedPortViews);
 
     validateConsistency();
   }
@@ -1202,10 +1199,9 @@ public class CircuitEditor
     List<View> selection = new ArrayList<>();
     for (View view : views)
     {
-      if ((view instanceof IntegratedCircuitView) ||
-          (view instanceof PassiveView))
+      if ((view instanceof StaticView))
       {
-        ComponentView<?> componentView = (ComponentView<?>) view;
+        StaticView<?> componentView = (StaticView<?>) view;
         updatedPortViews.addAll(createAndConnectComponentView(componentView));
         selection.add(componentView);
       }
@@ -1266,14 +1262,11 @@ public class CircuitEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
     List<View> selectedViews = new ArrayList<>();
-    for (ComponentView<?> componentView : integratedCircuitViews)
+    StaticViewIterator iterator = staticViewIterator();
+    while (iterator.hasNext())
     {
-      updateSelectedViews(start, end, includeIntersections, boundBoxPosition, boundBoxDimension, selectedViews, componentView);
-    }
-
-    for (ComponentView<?> componentView : passiveViews)
-    {
-      updateSelectedViews(start, end, includeIntersections, boundBoxPosition, boundBoxDimension, selectedViews, componentView);
+      StaticView<?> staticView = iterator.next();
+      updateSelectedViews(start, end, includeIntersections, boundBoxPosition, boundBoxDimension, selectedViews, staticView);
     }
 
     for (TraceView traceView : traceViews)
@@ -1304,7 +1297,7 @@ public class CircuitEditor
                                      Float2D boundBoxPosition,
                                      Float2D boundBoxDimension,
                                      List<View> selectedViews,
-                                     ComponentView<?> componentView)
+                                     StaticView<?> componentView)
   {
     if (componentView.isEnabled())
     {
@@ -1340,9 +1333,9 @@ public class CircuitEditor
       {
         deleteTraceView((TraceView) view);
       }
-      else if (view instanceof ComponentView<?>)
+      else if (view instanceof StaticView<?>)
       {
-        deleteComponentView((ComponentView<?>) view);
+        deleteComponentView((StaticView<?>) view);
       }
       else
       {

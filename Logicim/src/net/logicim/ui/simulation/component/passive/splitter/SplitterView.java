@@ -132,55 +132,35 @@ public class SplitterView
 
   private void setTextViewThing(TextView textView, Float2D position)
   {
-    int halfWay = properties.fanOut / 2;
+    if (rotation.isNorth() || rotation.isCannot())
+    {
+      position.x += 0.2;
+    }
+    else if (rotation.isSouth())
+    {
+      position.x += 0.5;
+    }
+    else if (rotation.isEast())
+    {
+      position.x += 0.4;
+    }
+    else if (rotation.isWest())
+    {
+      position.x += 0.2;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot set position for unknown rotation.");
+    }
+
     double y = 0.35;
     if (properties.appearance == SplitterAppearance.LEFT_HANDED)
     {
       position.y += y;
-      if (rotation.isNorth() || rotation.isCannot())
-      {
-        position.x += 0.2;
-      }
-      else if (rotation.isSouth())
-      {
-        position.x += 0.5;
-      }
-      else if (rotation.isEast())
-      {
-        position.x += 0.4;
-      }
-      else if (rotation.isWest())
-      {
-        position.x += 0.2;
-      }
-      else
-      {
-        throw new SimulatorException("Cannot set position for unknown rotation.");
-      }
     }
     else if (properties.appearance == SplitterAppearance.RIGHT_HANDED)
     {
       position.y -= y;
-      if (rotation.isNorth() || rotation.isCannot())
-      {
-        position.x += 0.2;
-      }
-      else if (rotation.isSouth())
-      {
-        position.x += 0.5;
-      }
-      else if (rotation.isEast())
-      {
-        position.x += 0.4;
-      }
-      else if (rotation.isWest())
-      {
-        position.x += 0.2;
-      }
-      else
-      {
-        throw new SimulatorException("Cannot set position for unknown rotation.");
-      }
     }
 
     textView.setPositionRelativeToIC(position.clone());

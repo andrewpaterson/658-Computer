@@ -15,6 +15,10 @@ import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
@@ -23,7 +27,10 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public abstract class PropertyEditorDialog
     extends JDialog
-    implements ButtonAction
+    implements ButtonAction,
+               KeyListener,
+               ContainerListener
+
 {
   protected Dimension dimension;
   protected SimulatorEditor editor;
@@ -38,6 +45,67 @@ public abstract class PropertyEditorDialog
     setSize(dimension);
     this.editor = editor;
     this.componentView = componentView;
+
+    addKeyAndContainerListenerRecursively(this);
+  }
+
+  public void componentAdded(ContainerEvent e)
+  {
+    addKeyAndContainerListenerRecursively(e.getChild());
+  }
+
+  @Override
+  public void componentRemoved(ContainerEvent e)
+  {
+  }
+
+  private void addKeyAndContainerListenerRecursively(Component c)
+  {
+
+    c.addKeyListener(this);
+
+    if (c instanceof Container)
+    {
+
+      Container cont = (Container) c;
+
+      cont.addContainerListener(this);
+
+      Component[] children = cont.getComponents();
+
+      for (Component child : children)
+      {
+        addKeyAndContainerListenerRecursively(child);
+      }
+    }
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e)
+  {
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e)
+  {
+
+  }
+
+  public void keyPressed(KeyEvent keyEvent)
+  {
+    if ((keyEvent.getExtendedKeyCode() == KeyEvent.VK_ENTER) &&
+        keyEvent.isControlDown() &&
+        !keyEvent.isShiftDown() &&
+        !keyEvent.isAltDown() &&
+        !keyEvent.isMetaDown())
+    {
+      okay();
+    }
+
+    if ((keyEvent.getExtendedKeyCode() == KeyEvent.VK_ESCAPE))
+    {
+      close();
+    }
   }
 
   public void build()
@@ -99,6 +167,11 @@ public abstract class PropertyEditorDialog
       editor.pushUndo();
     }
 
+    close();
+  }
+
+  protected void close()
+  {
     setVisible(false);
     dispose();
   }

@@ -50,7 +50,6 @@ public class SplitterPropertiesPanel
     this.rotation = new RotationEditor(this, ROTATION, rotation);
     name = new TextPropertyEditor(this, NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
-    System.out.println("SplitterPropertiesPanel.SplitterPropertiesPanel " + properties.bitWidth);
     fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
     appearance = new SplitterAppearanceEditor(this, APPEARANCE, properties.appearance);
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);

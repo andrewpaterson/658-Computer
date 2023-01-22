@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -25,7 +24,7 @@ public class SplitterViewFactory
                                                    2,
                                                    2,
                                                    2,
-                                                   SplitterAppearance.LEFT,
+                                                   SplitterAppearance.LEFT_HANDED,
                                                    -1));
   }
 

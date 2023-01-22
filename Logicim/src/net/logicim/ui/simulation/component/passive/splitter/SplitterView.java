@@ -134,7 +134,7 @@ public class SplitterView
   {
     int halfWay = properties.fanOut / 2;
     double y = 0.35;
-    if (properties.appearance == SplitterAppearance.LEFT)
+    if (properties.appearance == SplitterAppearance.LEFT_HANDED)
     {
       position.y += y;
       if (rotation.isNorth() || rotation.isCannot())
@@ -158,7 +158,7 @@ public class SplitterView
         throw new SimulatorException("Cannot set position for unknown rotation.");
       }
     }
-    else if (properties.appearance == SplitterAppearance.RIGHT)
+    else if (properties.appearance == SplitterAppearance.RIGHT_HANDED)
     {
       position.y -= y;
       if (rotation.isNorth() || rotation.isCannot())
@@ -181,9 +181,6 @@ public class SplitterView
       {
         throw new SimulatorException("Cannot set position for unknown rotation.");
       }
-    }
-    else
-    {
     }
 
     textView.setPositionRelativeToIC(position.clone());
@@ -259,7 +256,7 @@ public class SplitterView
   private Float2D createEndPosition(int centerX, int fanOut, int gridSpacing, Float2D startPosition, SplitterAppearance appearance)
   {
     Float2D endPosition;
-    if (appearance == SplitterAppearance.LEFT)
+    if (appearance == SplitterAppearance.LEFT_HANDED)
     {
       if (startPosition.y > 0)
       {
@@ -275,7 +272,7 @@ public class SplitterView
         endPosition.y = startPosition.y;
       }
     }
-    else if (appearance == SplitterAppearance.RIGHT)
+    else if (appearance == SplitterAppearance.RIGHT_HANDED)
     {
       if (startPosition.y > (fanOut - 1) * gridSpacing)
       {
@@ -367,11 +364,11 @@ public class SplitterView
 
   private Float2D createStartPosition()
   {
-    if (properties.appearance == SplitterAppearance.LEFT)
+    if (properties.appearance == SplitterAppearance.LEFT_HANDED)
     {
       return new Float2D(-1, -properties.endOffset);
     }
-    else if (properties.appearance == SplitterAppearance.RIGHT)
+    else if (properties.appearance == SplitterAppearance.RIGHT_HANDED)
     {
       return new Float2D(-1, properties.endOffset);
     }
@@ -393,11 +390,11 @@ public class SplitterView
 
   private Float2D createPosition(int endIndex, int x)
   {
-    if (properties.appearance == SplitterAppearance.LEFT)
+    if (properties.appearance == SplitterAppearance.LEFT_HANDED)
     {
       return new Float2D(x, -endIndex * properties.gridSpacing);
     }
-    else if (properties.appearance == SplitterAppearance.RIGHT)
+    else if (properties.appearance == SplitterAppearance.RIGHT_HANDED)
     {
       return new Float2D(x, endIndex * properties.gridSpacing);
     }
@@ -412,14 +409,7 @@ public class SplitterView
   {
     properties.fanOut = PropertyClamp.clamp(properties.fanOut, 1, PropertyClamp.MAX);
     properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);
-    if (properties.appearance == SplitterAppearance.CENTER)
-    {
-      properties.endOffset = PropertyClamp.clamp(properties.endOffset, properties.fanOut * properties.gridSpacing, properties.fanOut * properties.gridSpacing / 2 - 1);
-    }
-    else
-    {
-      properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
-    }
+    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
     for (int i = 0; i < properties.splitIndices.length; i++)
     {
       int index = properties.splitIndices[i];

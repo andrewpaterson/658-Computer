@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
@@ -18,7 +19,6 @@ import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.util.List;
 import java.util.*;
 
@@ -118,7 +118,12 @@ public class SplitterView
       List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(endIndex);
       String text = toText(portIndicesForFanoutIndex);
       Float2D position = createMidPosition(endIndex);
-      TextView textView = new TextView(this, position, text, 7, false, LEFT);
+      TextView textView = new TextView(this,
+                                       position,
+                                       text,
+                                       7,
+                                       false,
+                                       LEFT);
       setTextViewThing(textView, position);
       textViews.add(textView);
     }
@@ -127,63 +132,60 @@ public class SplitterView
 
   private void setTextViewThing(TextView textView, Float2D position)
   {
-    position.x += 0.25;
-    position.y += 0.1;
-
     int halfWay = properties.fanOut / 2;
-    Rotation degrees = Rotation.North;
+    double y = 0.35;
     if (properties.appearance == SplitterAppearance.LEFT)
     {
+      position.y += y;
       if (rotation.isNorth() || rotation.isCannot())
       {
-        position.x += 0.0;
-        position.y += 0.3;
+        position.x += 0.2;
       }
-      else if (rotation == Rotation.South)
+      else if (rotation.isSouth())
       {
-        position.x += 0.1;
-        position.y += 0.1;
+        position.x += 0.5;
       }
-      else if (rotation == Rotation.East)
+      else if (rotation.isEast())
       {
-        position.x += 0.1;
-        position.y += 0.7;
-        degrees = Rotation.East;
+        position.x += 0.4;
       }
-      else if (rotation == Rotation.West)
+      else if (rotation.isWest())
       {
-        position.x += 0.1;
-        position.y += 0.3;
-        degrees = Rotation.East;
+        position.x += 0.2;
       }
       else
       {
-        position.x += 0.1;
-        position.y += 0.7;
+        throw new SimulatorException("Cannot set position for unknown rotation.");
       }
     }
     else if (properties.appearance == SplitterAppearance.RIGHT)
     {
-      if (rotation == Rotation.North)
+      position.y -= y;
+      if (rotation.isNorth() || rotation.isCannot())
       {
-        position.x += 0.1;
-        position.y += -0.2;
+        position.x += 0.2;
       }
-      else if (rotation == Rotation.South)
+      else if (rotation.isSouth())
       {
-        position.x += 0.1;
-        position.y += -1.2;
+        position.x += 0.5;
+      }
+      else if (rotation.isEast())
+      {
+        position.x += 0.4;
+      }
+      else if (rotation.isWest())
+      {
+        position.x += 0.2;
       }
       else
       {
-        position.x += 0;
-        position.y += 0;
+        throw new SimulatorException("Cannot set position for unknown rotation.");
       }
     }
     else
     {
     }
-    textView.setParameters(false, degrees);
+
     textView.setPositionRelativeToIC(position.clone());
   }
 
@@ -312,7 +314,6 @@ public class SplitterView
   {
     super.paint(graphics, viewport, time);
 
-    AffineTransform transform = graphics.getTransform();
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
@@ -333,7 +334,6 @@ public class SplitterView
     graphics.setFont(font);
     graphics.setColor(color);
     graphics.setStroke(stroke);
-    graphics.setTransform(transform);
   }
 
   @Override

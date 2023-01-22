@@ -30,14 +30,11 @@ public class LabelView
   private void createGraphics(Graphics2D graphics, Viewport viewport)
   {
     int size = 10;
-    boolean bold = false;
     textView = new TextView(this,
                             new Int2D(0, 0),
                             properties.name,
                             size,
                             properties.bold,
-                            true,
-                            Cannot,
                             properties.alignment);
     textView.updateDimension(graphics, viewport);
 

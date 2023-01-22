@@ -3,6 +3,7 @@ package net.logicim.ui.shape.text;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
@@ -13,8 +14,7 @@ import net.logicim.ui.shape.point.PointGridCache;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.CENTER;
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.RIGHT;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.*;
 
 public class TextView
     extends ShapeView
@@ -26,8 +26,6 @@ public class TextView
   protected String text;
   protected float size;
   protected boolean bold;
-  protected boolean useHolderRotation;
-  protected Rotation rotation;
   protected HorizontalAlignment alignment;
 
   protected PointGridCache gridCache;
@@ -39,18 +37,6 @@ public class TextView
                   boolean bold,
                   HorizontalAlignment alignment)
   {
-    this(shapeHolder, positionRelativeToIC, text, size, bold, false, Rotation.North, alignment);
-  }
-
-  public TextView(ShapeHolder shapeHolder,
-                  Tuple2 positionRelativeToIC,
-                  String text,
-                  float size,
-                  boolean bold,
-                  boolean useHolderRotation,
-                  Rotation rotation,
-                  HorizontalAlignment alignment)
-  {
     super(shapeHolder);
     this.positionRelativeToIC = positionRelativeToIC;
     this.alignment = alignment;
@@ -59,8 +45,6 @@ public class TextView
     this.text = text;
     this.size = size;
     this.bold = bold;
-    this.useHolderRotation = useHolderRotation;
-    this.rotation = rotation;
 
     this.gridCache = new PointGridCache(positionRelativeToIC);
   }
@@ -114,7 +98,7 @@ public class TextView
 
     float widthAdjust = getWidthAdjust() * factor;
 
-    Rotation rotation = getRotation();
+    Rotation rotation = shapeHolder.getRotation();
     if (rotation.isNorthSouth() || rotation.isCannot())
     {
       degrees = 0;
@@ -156,6 +140,7 @@ public class TextView
     int x = viewport.transformGridToScreenSpaceX(transformedPosition);
     int y = viewport.transformGridToScreenSpaceY(transformedPosition);
 
+    graphics.setColor(Colours.getInstance().getText());
     graphics.drawString(text, x + xOffset, y + yOffset);
   }
 
@@ -175,18 +160,6 @@ public class TextView
     return widthAdjust;
   }
 
-  protected Rotation getRotation()
-  {
-    if (useHolderRotation)
-    {
-      return shapeHolder.getRotation();
-    }
-    else
-    {
-      return rotation;
-    }
-  }
-
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
@@ -196,15 +169,6 @@ public class TextView
   public void invalidateCache()
   {
     gridCache.invalidate();
-  }
-
-  public void setParameters(boolean useHolderRotation,
-                            Rotation rotation)
-  {
-    this.useHolderRotation = useHolderRotation;
-    this.rotation = rotation;
-
-    invalidateCache();
   }
 
   public void setPositionRelativeToIC(Tuple2 positionRelativeToIC)

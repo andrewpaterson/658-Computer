@@ -30,6 +30,8 @@ public class Colours
   protected Color disconnectedTrace;
   protected Color differingBusTrace;
 
+  protected Color text;
+
   protected static Colours instance;
 
   public Colours()
@@ -63,6 +65,8 @@ public class Colours
 
     disconnectedTrace = new Color(0, 170, 250);
     differingBusTrace = new Color(20, 230, 180);
+
+    text = new Color(0, 0, 0);
   }
 
   public static Colours getInstance()
@@ -165,6 +169,11 @@ public class Colours
   public Color getSelected()
   {
     return selected;
+  }
+
+  public Color getText()
+  {
+    return text;
   }
 }
 

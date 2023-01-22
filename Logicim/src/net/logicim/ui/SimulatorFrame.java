@@ -13,16 +13,15 @@ import java.util.List;
 
 public class SimulatorFrame
     extends JFrame
+    implements WindowListener,
+               KeyListener
 {
-  public static void main(String[] args)
+  private SimulatorPanel simulatorPanel;
+
+  public SimulatorFrame() throws HeadlessException
   {
-    SimulatorFrame simulatorFrame = new SimulatorFrame();
-
-    ensureDataConstructors();
-    ensureEnumStores();
-
-    SimulatorPanel simulatorPanel = new SimulatorPanel(simulatorFrame);
-    simulatorFrame.add(simulatorPanel);
+    simulatorPanel = new SimulatorPanel(this);
+    add(simulatorPanel);
 
     JMenuBar menuBar;
     JMenu menu;
@@ -38,91 +37,18 @@ public class SimulatorFrame
     menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
     menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
     menu.add(menuItem);
-    simulatorFrame.setJMenuBar(menuBar);
+    setJMenuBar(menuBar);
 
-    simulatorFrame.addWindowListener(new WindowAdapter()
-    {
-      public void windowClosing(WindowEvent e)
-      {
-        simulatorPanel.windowClosing();
-      }
-    });
+    addWindowListener(this);
+    addKeyListener(this);
+  }
 
-    simulatorPanel.addComponentListener(new ComponentAdapter()
-    {
-      @Override
-      public void componentResized(ComponentEvent e)
-      {
-        simulatorPanel.componentResized(e.getComponent().getWidth(), e.getComponent().getHeight());
-      }
-    });
+  public static void main(String[] args)
+  {
+    ensureDataConstructors();
+    ensureEnumStores();
 
-    simulatorPanel.addMouseListener(new MouseAdapter()
-    {
-      @Override
-      public void mousePressed(MouseEvent e)
-      {
-        simulatorPanel.mousePressed(e.getX(), e.getY(), e.getButton());
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e)
-      {
-        simulatorPanel.mouseReleased(e.getX(), e.getY(), e.getButton());
-      }
-
-      @Override
-      public void mouseEntered(MouseEvent e)
-      {
-        simulatorPanel.mouseEntered(e.getX(), e.getY());
-      }
-
-      @Override
-      public void mouseExited(MouseEvent e)
-      {
-        simulatorPanel.mouseExited();
-      }
-    });
-
-    simulatorPanel.addMouseMotionListener(new MouseMotionAdapter()
-    {
-      @Override
-      public void mouseMoved(MouseEvent e)
-      {
-        simulatorPanel.mouseMoved(e.getX(), e.getY());
-      }
-
-      @Override
-      public void mouseDragged(MouseEvent e)
-      {
-        simulatorPanel.mouseMoved(e.getX(), e.getY());
-      }
-    });
-
-    simulatorPanel.addMouseWheelListener(new MouseAdapter()
-    {
-      @Override
-      public void mouseWheelMoved(MouseWheelEvent e)
-      {
-        super.mouseWheelMoved(e);
-        simulatorPanel.mouseWheel(e.getWheelRotation());
-      }
-    });
-
-    simulatorFrame.addKeyListener(new KeyAdapter()
-    {
-      @Override
-      public void keyPressed(KeyEvent e)
-      {
-        simulatorPanel.keyPressed(e.getExtendedKeyCode());
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e)
-      {
-        simulatorPanel.keyReleased(e.getExtendedKeyCode());
-      }
-    });
+    SimulatorFrame simulatorFrame = new SimulatorFrame();
 
     simulatorFrame.setTitle("Logicim");
     simulatorFrame.setMinimumSize(new Dimension(320, 240));
@@ -131,6 +57,11 @@ public class SimulatorFrame
     WindowSizer.setPercentageOfScreenSize(simulatorFrame, 65.0, 65.0);
     WindowSizer.centre(simulatorFrame);
 
+    simulatorFrame.loop();
+  }
+
+  private void loop()
+  {
     simulatorPanel.loop();
   }
 
@@ -147,6 +78,60 @@ public class SimulatorFrame
       ClassInspector classInspector = ClassInspector.forClass(aClass);
       classInspector.newInstance();
     }
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e)
+  {
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e)
+  {
+    simulatorPanel. keyPressed(e);
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e)
+  {
+    simulatorPanel.keyReleased(e);
+  }
+
+
+  @Override
+  public void windowOpened(WindowEvent e)
+  {
+  }
+
+  @Override
+  public void windowClosing(WindowEvent e)
+  {
+    simulatorPanel.windowClosing();
+  }
+
+  @Override
+  public void windowClosed(WindowEvent e)
+  {
+  }
+
+  @Override
+  public void windowIconified(WindowEvent e)
+  {
+  }
+
+  @Override
+  public void windowDeiconified(WindowEvent e)
+  {
+  }
+
+  @Override
+  public void windowActivated(WindowEvent e)
+  {
+  }
+
+  @Override
+  public void windowDeactivated(WindowEvent e)
+  {
   }
 }
 

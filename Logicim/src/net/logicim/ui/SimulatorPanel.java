@@ -8,11 +8,11 @@ import net.logicim.file.writer.LogicimFileWriter;
 import net.logicim.ui.components.typeeditor.FamilyPropertyEditorFactory;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.error.ErrorFrame;
+import net.logicim.ui.input.event.MouseWheelEvent;
 import net.logicim.ui.input.event.*;
 import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
-import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
-import net.logicim.ui.simulation.component.passive.splitter.SplitterViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateViewFactory;
@@ -24,16 +24,22 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateViewFactory;
 import net.logicim.ui.simulation.component.passive.power.GroundViewFactory;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerViewFactory;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterViewFactory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 
 import static net.logicim.domain.common.Units.nS_IN_mS;
 
 public class SimulatorPanel
     extends JPanel
+    implements MouseListener,
+               ComponentListener,
+               MouseMotionListener,
+               MouseWheelListener
 {
   protected Image backBufferImage;
   protected Graphics2D backBuffer;
@@ -69,6 +75,10 @@ public class SimulatorPanel
                                           new SplitterViewFactory(),
                                           new LabelViewFactory());
 
+    addComponentListener(this);
+    addMouseListener(this);
+    addMouseMotionListener(this);
+    addMouseWheelListener(this);
   }
 
   public void loop()
@@ -188,14 +198,20 @@ public class SimulatorPanel
     simulatorEditor.addInputEvent(new MouseWheelEvent(wheelRotation));
   }
 
-  public void keyPressed(int keyCode)
+  public void keyPressed(KeyEvent keyEvent)
   {
-    simulatorEditor.addInputEvent(new KeyPressedEvent(keyCode));
+    simulatorEditor.addInputEvent(new KeyPressedEvent(keyEvent.getKeyCode(),
+                                                      keyEvent.isControlDown(),
+                                                      keyEvent.isAltDown(),
+                                                      keyEvent.isShiftDown()));
   }
 
-  public void keyReleased(int keyCode)
+  public void keyReleased(KeyEvent keyEvent)
   {
-    simulatorEditor.addInputEvent(new KeyReleasedEvent(keyCode));
+    simulatorEditor.addInputEvent(new KeyReleasedEvent(keyEvent.getKeyCode(),
+                                                       keyEvent.isControlDown(),
+                                                       keyEvent.isAltDown(),
+                                                       keyEvent.isShiftDown()));
   }
 
   public void saveSimulation()
@@ -260,6 +276,75 @@ public class SimulatorPanel
   public JFrame getFrame()
   {
     return frame;
+  }
+
+  @Override
+  public void mouseClicked(MouseEvent e)
+  {
+
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e)
+  {
+    mousePressed(e.getX(), e.getY(), e.getButton());
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent e)
+  {
+    mouseReleased(e.getX(), e.getY(), e.getButton());
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent e)
+  {
+    mouseEntered(e.getX(), e.getY());
+  }
+
+  @Override
+  public void mouseExited(MouseEvent e)
+  {
+    mouseExited();
+  }
+
+  @Override
+  public void componentResized(ComponentEvent e)
+  {
+    componentResized(e.getComponent().getWidth(), e.getComponent().getHeight());
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e)
+  {
+  }
+
+  @Override
+  public void componentShown(ComponentEvent e)
+  {
+  }
+
+  @Override
+  public void componentHidden(ComponentEvent e)
+  {
+  }
+
+  @Override
+  public void mouseMoved(MouseEvent e)
+  {
+    mouseMoved(e.getX(), e.getY());
+  }
+
+  @Override
+  public void mouseDragged(MouseEvent e)
+  {
+    mouseMoved(e.getX(), e.getY());
+  }
+
+  @Override
+  public void mouseWheelMoved(java.awt.event.MouseWheelEvent e)
+  {
+    mouseWheel(e.getWheelRotation());
   }
 }
 

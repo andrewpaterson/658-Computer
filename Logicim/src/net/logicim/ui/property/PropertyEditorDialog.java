@@ -93,7 +93,7 @@ public abstract class PropertyEditorDialog
 
   public void keyPressed(KeyEvent keyEvent)
   {
-    if ((keyEvent.getExtendedKeyCode() == KeyEvent.VK_ENTER) &&
+    if ((keyEvent.getKeyCode() == KeyEvent.VK_ENTER) &&
         keyEvent.isControlDown() &&
         !keyEvent.isShiftDown() &&
         !keyEvent.isAltDown() &&
@@ -102,7 +102,7 @@ public abstract class PropertyEditorDialog
       okay();
     }
 
-    if ((keyEvent.getExtendedKeyCode() == KeyEvent.VK_ESCAPE))
+    if ((keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE))
     {
       close();
     }

@@ -6,12 +6,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
-import net.logicim.ui.input.KeyboardButtons;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
@@ -24,7 +22,6 @@ import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -48,7 +45,6 @@ public class SimulatorEditor
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
   protected MousePosition mousePosition;
-  protected KeyboardButtons keyboardButtons;
 
   protected CircuitEditor circuitEditor;
 
@@ -81,9 +77,7 @@ public class SimulatorEditor
     this.mouseButtons = new MouseButtons();
     this.mousePosition = new MousePosition();
 
-    this.keyboardButtons = new KeyboardButtons();
-
-    this.actions = new InputActions(keyboardButtons, mouseButtons);
+    this.actions = new InputActions(mouseButtons);
 
     this.circuitEditor = new CircuitEditor();
     this.placementView = null;
@@ -564,14 +558,9 @@ public class SimulatorEditor
     actions.add(inputAction);
   }
 
-  public void keyPressed(int keyCode)
+  public void keyPressed(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
   {
-    keyboardButtons.set(keyCode);
-
-    if (!(keyCode == KeyEvent.VK_ALT || keyCode == KeyEvent.VK_SHIFT || keyCode == KeyEvent.VK_CONTROL))
-    {
-      actions.keyPressed(keyCode);
-    }
+    actions.keyPressed(keyCode, controlDown, altDown, shiftDown);
   }
 
   public void runToTime(long timeForward)
@@ -651,9 +640,8 @@ public class SimulatorEditor
     }
   }
 
-  public void keyReleased(int keyCode)
+  public void keyReleased(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
   {
-    keyboardButtons.unset(keyCode);
   }
 
   public void toggleTunSimulation()
@@ -774,7 +762,6 @@ public class SimulatorEditor
   public void clearButtons()
   {
     mouseButtons.clear();
-    keyboardButtons.clear();
   }
 
   public void pushUndo()

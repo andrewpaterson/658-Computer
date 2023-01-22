@@ -22,6 +22,7 @@ import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
@@ -106,6 +107,10 @@ public class CircuitEditor
     {
       deleteDecorativeView((DecorativeView<?>) componentView);
     }
+    else if (componentView instanceof TunnelView)
+    {
+      deleteTunnelView((TunnelView) componentView);
+    }
     else if (componentView == null)
     {
       throw new SimulatorException("Cannot delete null view.");
@@ -117,6 +122,16 @@ public class CircuitEditor
 
     validateConsistency();
   }
+
+  public Set<PortView> deleteTunnelView(TunnelView tunnelView)
+  {
+      ConnectionView connectionView = tunnelView.getStartConnection();
+
+      deleteWireViewInternal(tunnelView);
+
+    return mergeAndConnectAfterDelete(connectionView);
+  }
+
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
@@ -220,8 +235,7 @@ public class CircuitEditor
       {
         if (view instanceof TraceView)
         {
-          TraceView concreteTraceView1 = (TraceView) view;
-          updatedPortViews.addAll(deleteTraceView(concreteTraceView1));
+          updatedPortViews.addAll(deleteTraceView((TraceView) view));
         }
       }
     }
@@ -230,33 +244,40 @@ public class CircuitEditor
     validateConsistency();
   }
 
-  public void deleteTraceViewInternal(TraceView traceView)
+  public void deleteWireViewInternal(WireView wireView)
   {
-    disconnectTraceView(traceView);
-    traceView.removed();
-    removeTraceView(traceView);
+    disconnectTraceView(wireView);
+    wireView.removed();
+    if (wireView instanceof TraceView)
+    {
+      removeTraceView((TraceView) wireView);
+    }
+    else if (wireView instanceof TunnelView)
+    {
+      removeTunnelView((TunnelView) wireView);
+    }
   }
 
-  protected List<ConnectionView> disconnectTraceView(TraceView traceView)
+  protected List<ConnectionView> disconnectTraceView(WireView wireView)
   {
-    if (traceView.isRemoved())
+    if (wireView.isRemoved())
     {
-      throw new SimulatorException("Cannot disconnect a removed trace.");
+      throw new SimulatorException("Cannot disconnect a removed wire.");
     }
 
-    ConnectionView startConnection = traceView.getStartConnection();
-    ConnectionView endConnection = traceView.getEndConnection();
+    List<ConnectionView> connectionViews = wireView.getConnections();
 
-    disconnectConnectionViews(findConnections(startConnection));
-    disconnectConnectionViews(findConnections(endConnection));
+    for (ConnectionView connectionView : connectionViews)
+    {
+      disconnectConnectionViews(findConnections(connectionView));
+    }
 
-    startConnection.remove(traceView);
-    endConnection.remove(traceView);
+    for (ConnectionView connectionView : connectionViews)
+    {
+      connectionView.remove(wireView.getView());
+    }
 
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    connectionViews.add(startConnection);
-    connectionViews.add(endConnection);
-    return connectionViews;
+    return new ArrayList<>(connectionViews);
   }
 
   public void disconnectConnectionViews(Set<ConnectionView> connectionsNet)
@@ -659,7 +680,7 @@ public class CircuitEditor
         {
           largest.y = y2;
         }
-        deleteTraceViewInternal(mergeView);
+        deleteWireViewInternal(mergeView);
       }
 
       if (isValidTrace(smallest, largest))
@@ -744,7 +765,7 @@ public class CircuitEditor
         {
           Int2D startPosition = traceView.getStartPosition();
           Int2D endPosition = traceView.getEndPosition();
-          deleteTraceViewInternal(traceView);
+          deleteWireViewInternal(traceView);
 
           result.add(new TraceView(this, startPosition, position));
           result.add(new TraceView(this, position, endPosition));
@@ -761,7 +782,7 @@ public class CircuitEditor
       ConnectionView startConnection = traceView.getStartConnection();
       ConnectionView endConnection = traceView.getEndConnection();
 
-      deleteTraceViewInternal(traceView);
+      deleteWireViewInternal(traceView);
 
       Set<PortView> portViews = mergeAndConnectAfterDelete(startConnection);
       portViews.addAll(mergeAndConnectAfterDelete(endConnection));
@@ -1466,6 +1487,14 @@ public class CircuitEditor
     synchronized (this)
     {
       return traceViews.remove(traceView);
+    }
+  }
+
+  protected boolean removeTunnelView(TunnelView tunnelView)
+  {
+    synchronized (this)
+    {
+      return tunnelViews.remove(tunnelView);
     }
   }
 

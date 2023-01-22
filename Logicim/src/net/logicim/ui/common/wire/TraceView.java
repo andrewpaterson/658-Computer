@@ -226,6 +226,12 @@ public class TraceView
     return startConnection == null || endConnection == null;
   }
 
+  @Override
+  public TraceView getView()
+  {
+    return this;
+  }
+
   public Line getLine()
   {
     return line;

@@ -42,8 +42,18 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
     arcViewFillRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 0, 58, false, true);
     arcViewFillLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 58, false, true);
 
-    polygonViewFillLeft = new PolygonView(this, false, true, new Float2D(-1.5f, 0.9f), new Float2D(-1.5f, 0.0f), new Float2D(0, 0.0f));
-    polygonViewFillRight = new PolygonView(this, false, true, new Float2D(1.5f, 0.9f), new Float2D(1.5f, 0.0f), new Float2D(0, 0.0f));
+    polygonViewFillLeft = new PolygonView(this,
+                                          false,
+                                          true,
+                                          new Float2D(-1.5f, 0.9f),
+                                          new Float2D(-1.5f, 0.0f),
+                                          new Float2D(0, 0.0f));
+    polygonViewFillRight = new PolygonView(this,
+                                           false,
+                                           true,
+                                           new Float2D(1.5f, 0.9f),
+                                           new Float2D(1.5f, 0.0f),
+                                           new Float2D(0, 0.0f));
   }
 
   @Override

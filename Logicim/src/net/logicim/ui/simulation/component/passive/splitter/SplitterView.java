@@ -98,14 +98,12 @@ public class SplitterView
 
   private void createGraphics()
   {
-    int centerX = 0;
-
-    this.lineViews = createLineViews(centerX,
+    this.lineViews = createLineViews(0,
                                      properties.fanOut,
                                      properties.gridSpacing,
                                      properties.appearance);
 
-    rectangleView = createRectangleView(centerX, properties.fanOut);
+    rectangleView = createRectangleView(0, properties.fanOut);
 
     this.textViews = createTextViews();
   }

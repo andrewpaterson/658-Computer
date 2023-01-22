@@ -2,6 +2,7 @@ package net.logicim.ui.util;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.SimulatorPanel;
+import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
@@ -43,6 +44,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new CreateComponentAction(editor, GroundView.class), KeyEvent.VK_G, Up, Up, Up));
     editor.addAction(new InputAction(new CreateComponentAction(editor, PositivePowerView.class), KeyEvent.VK_V, Up, Up, Up));
     editor.addAction(new InputAction(new CreateComponentAction(editor, SplitterView.class), KeyEvent.VK_S, Up, Down, Up));
+    editor.addAction(new InputAction(new CreateComponentAction(editor, TunnelView.class), KeyEvent.VK_T, Up, Down, Up));
     editor.addAction(new InputAction(new CreateComponentAction(editor, LabelView.class), KeyEvent.VK_L, Up, Down, Up));
 
     editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));

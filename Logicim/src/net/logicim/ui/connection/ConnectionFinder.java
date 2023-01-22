@@ -56,7 +56,7 @@ public class ConnectionFinder
     Set<TunnelView> tunnels = tunnelView.getTunnels();
     for (TunnelView tunnel : tunnels)
     {
-      ConnectionView connection1 = tunnel.getConnection();
+      ConnectionView connection1 = tunnel.getStartConnection();
       addConnectionToProcess(connection1);
     }
   }

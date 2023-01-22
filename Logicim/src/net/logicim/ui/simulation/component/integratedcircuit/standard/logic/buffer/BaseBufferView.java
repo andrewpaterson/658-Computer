@@ -30,7 +30,12 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
 
   protected void createGraphics()
   {
-    polygon = new PolygonView(this, true, true, new Float2D(0, -0.9f), new Float2D(0.75f, 1), new Float2D(-0.75f, 1));
+    polygon = new PolygonView(this,
+                              true,
+                              true,
+                              new Float2D(0, -0.9f),
+                              new Float2D(0.75f, 1),
+                              new Float2D(-0.75f, 1));
   }
 
   protected void createPortViews(boolean negateOutput)

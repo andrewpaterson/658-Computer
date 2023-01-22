@@ -49,8 +49,18 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
     arcViewFillRight = new ArcView(this, new Float2D(-1.5f, yTop), 3, 0, 58, false, true);
     arcViewFillLeft = new ArcView(this, new Float2D(1.5f, yTop), 3, 122, 58, false, true);
 
-    polygonViewFillLeft = new PolygonView(this, false, true, new Float2D(-1.5f, yMiddle), new Float2D(-1.5f, yZero), new Float2D(0, yZero));
-    polygonViewFillRight = new PolygonView(this, false, true, new Float2D(1.5f, yMiddle), new Float2D(1.5f, yZero), new Float2D(0, yZero));
+    polygonViewFillLeft = new PolygonView(this,
+                                          false,
+                                          true,
+                                          new Float2D(-1.5f, yMiddle),
+                                          new Float2D(-1.5f, yZero),
+                                          new Float2D(0, yZero));
+    polygonViewFillRight = new PolygonView(this,
+                                           false,
+                                           true,
+                                           new Float2D(1.5f, yMiddle),
+                                           new Float2D(1.5f, yZero),
+                                           new Float2D(0, yZero));
   }
 
   @Override

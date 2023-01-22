@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.decorative.label;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.common.type.Tuple2;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
 import net.logicim.ui.common.Rotation;
@@ -15,8 +14,6 @@ import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import java.awt.*;
 
 import static net.logicim.ui.common.Rotation.Cannot;
-import static net.logicim.ui.shape.text.HorizontalAlignment.CENTER;
-import static net.logicim.ui.shape.text.HorizontalAlignment.RIGHT;
 
 public class LabelView
     extends DecorativeView<LabelProperties>

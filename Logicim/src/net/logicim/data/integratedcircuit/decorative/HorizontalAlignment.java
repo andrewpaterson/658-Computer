@@ -1,4 +1,4 @@
-package net.logicim.ui.shape.text;
+package net.logicim.data.integratedcircuit.decorative;
 
 public enum HorizontalAlignment
 {

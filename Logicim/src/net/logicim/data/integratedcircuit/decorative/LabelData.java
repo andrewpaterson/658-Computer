@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DecorativeData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.shape.text.HorizontalAlignment;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import net.logicim.ui.simulation.component.decorative.label.LabelProperties;

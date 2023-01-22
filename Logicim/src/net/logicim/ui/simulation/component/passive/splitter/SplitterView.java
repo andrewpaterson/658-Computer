@@ -14,7 +14,6 @@ import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
-import net.logicim.ui.shape.text.HorizontalAlignment;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;
 
@@ -23,8 +22,7 @@ import java.awt.geom.AffineTransform;
 import java.util.List;
 import java.util.*;
 
-import static net.logicim.ui.shape.text.HorizontalAlignment.LEFT;
-import static net.logicim.ui.shape.text.HorizontalAlignment.RIGHT;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.LEFT;
 
 public class SplitterView
     extends PassiveView<Splitter, SplitterProperties>

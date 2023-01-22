@@ -2,6 +2,7 @@ package net.logicim.ui.shape.text;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Tuple2;
+import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
@@ -12,8 +13,8 @@ import net.logicim.ui.shape.point.PointGridCache;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-import static net.logicim.ui.shape.text.HorizontalAlignment.CENTER;
-import static net.logicim.ui.shape.text.HorizontalAlignment.RIGHT;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.CENTER;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.RIGHT;
 
 public class TextView
     extends ShapeView

@@ -28,6 +28,10 @@ public class ClassInspector
 
   public static ClassInspector forClass(Class<?> aClass)
   {
+    if (aClass == null)
+    {
+      throw new SimulatorException("Cannot get ClassInspector for [null] Class.");
+    }
     ClassInspector classInspector = classInspectorCache.get(aClass);
     if (classInspector == null)
     {

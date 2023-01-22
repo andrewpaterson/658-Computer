@@ -347,25 +347,37 @@ public class Viewport
     fonts.ensureDefaultFont(font);
   }
 
-  public Font getBoldFont(float size)
+  public Font getBoldFont(float degrees, float size)
   {
-    return fonts.getBoldFont(size);
+    return fonts.getBoldFont(degrees, size);
   }
 
-  public Font getPlainFont(float size)
+  public Font getPlainFont(float degrees, float size)
   {
-    return fonts.getPlainFont(size);
+    return fonts.getPlainFont(degrees, size);
   }
 
   public Font getFont(float size, boolean bold)
   {
     if (bold)
     {
-      return getBoldFont(size);
+      return getBoldFont(0, size);
     }
     else
     {
-      return getPlainFont(size);
+      return getPlainFont(0, size);
+    }
+  }
+
+  public Font getFont(float degrees, float size, boolean bold)
+  {
+    if (bold)
+    {
+      return getBoldFont(degrees, size);
+    }
+    else
+    {
+      return getPlainFont(degrees, size);
     }
   }
 

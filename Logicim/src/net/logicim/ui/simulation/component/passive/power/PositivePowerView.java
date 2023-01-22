@@ -105,7 +105,7 @@ public class PositivePowerView
   {
     rectangle.updateGridCache();  // Suspect to the max.
 
-    Font font = viewport.getBoldFont(11 * viewport.getZoom());
+    Font font = viewport.getBoldFont(0, 11 * viewport.getZoom());
     Color voltageColour = Colours.getInstance().getTraceVoltage(properties.voltage_V);
     graphics.setColor(voltageColour);
 

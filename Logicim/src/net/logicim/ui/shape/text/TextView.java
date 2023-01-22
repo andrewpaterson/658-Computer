@@ -12,9 +12,9 @@ import net.logicim.ui.shape.common.ShapeView;
 import net.logicim.ui.shape.point.PointGridCache;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.*;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.CENTER;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.RIGHT;
 
 public class TextView
     extends ShapeView
@@ -88,8 +88,6 @@ public class TextView
     updateDimension(graphics, viewport);
     updateGridCache();
 
-    Font font = viewport.getFont(size * viewport.getZoom(), bold);
-
     float factor = viewport.getZoom() * viewport.getScale();
     float width = textDimension.getX() * factor;
     float height = textDimension.getY() * factor;
@@ -132,8 +130,7 @@ public class TextView
       yOffset = 0 + widthAdjust;
     }
 
-    AffineTransform affineTransform = AffineTransform.getRotateInstance(Math.toRadians(degrees));
-    font = font.deriveFont(affineTransform);
+    Font font = viewport.getFont(degrees, size * viewport.getZoom(), bold);
     graphics.setFont(font);
 
     Tuple2 transformedPosition = gridCache.getTransformedPosition();

@@ -502,15 +502,7 @@ public class SimulatorEditor
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
           int y = viewport.transformScreenToGridY(mousePosition.y);
-          PortView portView = hoverComponentView.getPortInGrid(x, y);
-          if (portView != null)
-          {
-            hoverConnectionView = portView.getConnection();
-          }
-          else
-          {
-            hoverConnectionView = null;
-          }
+          hoverConnectionView = hoverComponentView.getConnectionsInGrid(x, y);
         }
         else
         {

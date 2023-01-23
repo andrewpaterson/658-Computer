@@ -198,6 +198,13 @@ public class Float2D
            y == 0;
   }
 
+  @Override
+  public boolean equals(int x, int y)
+  {
+    return this.x == x &&
+           this.y == y;
+  }
+
   public static Float2D safeClone(Float2D d)
   {
     if (d != null)

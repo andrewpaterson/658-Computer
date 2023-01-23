@@ -12,6 +12,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -35,12 +36,20 @@ public class TunnelView
   protected TextView textView;
   protected PolygonView polygonView;
 
+  protected Int2D startPosition;
+  protected Int2D endPosition;
+  protected PointGridCache startCache;
+  protected PointGridCache endCache;
+
   public TunnelView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, TunnelProperties properties)
   {
     super(circuitEditor, position, rotation, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
-    this.connections.add(circuitEditor.getOrAddConnection(position, this));
+    this.startPosition = new Int2D(0, 0);
+    this.startCache = new PointGridCache(startPosition);
+    this.endCache = new PointGridCache(startPosition);
+    this.connections.add(circuitEditor.getOrAddConnection(startPosition, this));
     this.traces = new ArrayList<>();
     this.tunnels = circuitEditor.addTunnel(this);
     finaliseView();
@@ -111,12 +120,30 @@ public class TunnelView
     return null;
   }
 
+  public void updateGridCache()
+  {
+    if (!startCache.isValid())
+    {
+      startCache.update(startPosition, rotation, position);
+      if (properties.doubleSided)
+      {
+        endCache.update(endPosition, rotation, position);
+      }
+    }
+  }
+
   @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
-    if (position.equals(x, y))
+    updateGridCache();
+
+    if (startCache.getTransformedPosition().equals(x, y))
     {
       return getStartConnection();
+    }
+    if (properties.doubleSided && endCache.getTransformedPosition().equals(x, y))
+    {
+      return getEndConnection();
     }
     return null;
   }
@@ -124,9 +151,15 @@ public class TunnelView
   @Override
   public Int2D getConnectionGridPosition(ConnectionView connectionView)
   {
-    if (this.getEndConnection() == connectionView)
+    updateGridCache();
+
+    if (getStartConnection() == connectionView)
     {
-      return position;
+      return (Int2D) startCache.getTransformedPosition();
+    }
+    if (properties.doubleSided && getEndConnection() == connectionView)
+    {
+      return (Int2D) endCache.getTransformedPosition();
     }
     return null;
   }
@@ -301,6 +334,14 @@ public class TunnelView
   public TunnelView getView()
   {
     return this;
+  }
+
+  @Override
+  protected void invalidateCache()
+  {
+    super.invalidateCache();
+    startCache.invalidate();
+    endCache.invalidate();
   }
 }
 

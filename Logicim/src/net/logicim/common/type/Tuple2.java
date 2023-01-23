@@ -46,5 +46,7 @@ public abstract class Tuple2
   }
 
   public abstract boolean isZero();
+
+  public abstract boolean equals(int x, int y);
 }
 

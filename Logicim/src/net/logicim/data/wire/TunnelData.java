@@ -1,27 +1,68 @@
 package net.logicim.data.wire;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.integratedcircuit.common.StaticData;
+import net.logicim.domain.common.wire.Trace;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.common.wire.TunnelProperties;
+import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.simulation.CircuitEditor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TunnelData
-    extends ReflectiveData
+    extends StaticData
 {
   public long[] traceIds;
-  public Int2D position;
-  protected boolean selected;
+  public boolean doubleSided;
 
   public TunnelData()
   {
   }
 
-  public TunnelData(long[] traceIds,
+  public TunnelData(String name,
                     Int2D position,
-                    boolean selected)
+                    Rotation rotation,
+                    boolean selected,
+                    long[] traceIds,
+                    boolean doubleSided)
   {
-
+    super(name, position, rotation, selected);
     this.traceIds = traceIds;
-    this.position = position;
-    this.selected = selected;
+    this.doubleSided = doubleSided;
+  }
+
+  @Override
+  public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  {
+    TunnelView tunnelView = new TunnelView(circuitEditor, position, rotation, new TunnelProperties(name, doubleSided));
+    List<Trace> traces = new ArrayList<>(traceIds.length);
+    for (long id : traceIds)
+    {
+      Trace trace = traceLoader.create(id);
+      traces.add(trace);
+    }
+    tunnelView.connectTraces(traces);
+    tunnelView.enable(circuitEditor.getSimulation());
+
+    if (selected)
+    {
+      circuitEditor.select(tunnelView);
+    }
+  }
+
+  @Override
+  protected TunnelView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  {
+    throw new SimulatorException("Create should not be called from TunnelData.");
+  }
+
+  @Override
+  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
+  {
   }
 }
 

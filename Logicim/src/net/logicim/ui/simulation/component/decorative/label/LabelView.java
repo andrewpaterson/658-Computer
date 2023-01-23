@@ -13,8 +13,6 @@ import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 import java.awt.*;
 
-import static net.logicim.ui.common.Rotation.Cannot;
-
 public class LabelView
     extends DecorativeView<LabelProperties>
 {
@@ -40,11 +38,12 @@ public class LabelView
 
     Float2D topLeft = textView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(textView.getTextDimension());
+    float height = bottomRight.y;
     bottomRight.add(topLeft);
 
     float widthAdjust = textView.getWidthAdjust();
-    topLeft.x += widthAdjust;
-    bottomRight.x += widthAdjust;
+    topLeft.x += widthAdjust - height / 4f;
+    bottomRight.x += widthAdjust + height / 4f;
 
     rectangleView = new RectangleView(this,
                                       topLeft,

@@ -19,16 +19,16 @@ public class TraceView
     implements WireView
 {
   protected Line line;
-  protected ConnectionView startConnection;
-  protected ConnectionView endConnection;
+  protected List<ConnectionView> connections;
   protected List<Trace> traces;
 
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
     super();
     this.line = new Line(start, end);
-    this.startConnection = circuitEditor.getOrAddConnection(start, this);
-    this.endConnection = circuitEditor.getOrAddConnection(end, this);
+    connections = new ArrayList<>(2);
+    connections.add(circuitEditor.getOrAddConnection(start, this));
+    connections.add(circuitEditor.getOrAddConnection(end, this));
     this.traces = new ArrayList<>();
     circuitEditor.addTraceView(this);
   }
@@ -38,11 +38,11 @@ public class TraceView
   {
     if (line.getStart().equals(x, y))
     {
-      return startConnection;
+      return getStartConnection();
     }
     if (line.getEnd().equals(x, y))
     {
-      return endConnection;
+      return getEndConnection();
     }
     return null;
   }
@@ -106,13 +106,13 @@ public class TraceView
 
   public ConnectionView getOpposite(ConnectionView connection)
   {
-    if (startConnection == connection)
+    if (getStartConnection() == connection)
     {
-      return endConnection;
+      return getEndConnection();
     }
-    if (endConnection == connection)
+    if (getEndConnection() == connection)
     {
-      return startConnection;
+      return getStartConnection();
     }
 
     throw new SimulatorException("No opposite found.");
@@ -121,11 +121,11 @@ public class TraceView
   @Override
   public Int2D getConnectionGridPosition(ConnectionView connectionView)
   {
-    if (startConnection == connectionView)
+    if (getStartConnection() == connectionView)
     {
       return line.getStart();
     }
-    else if (endConnection == connectionView)
+    else if (getEndConnection() == connectionView)
     {
       return line.getEnd();
     }
@@ -188,12 +188,12 @@ public class TraceView
 
   public ConnectionView getStartConnection()
   {
-    return startConnection;
+    return connections.get(0);
   }
 
   public ConnectionView getEndConnection()
   {
-    return endConnection;
+    return connections.get(1);
   }
 
   public Rotation getDirection()
@@ -223,7 +223,13 @@ public class TraceView
 
   public boolean isRemoved()
   {
-    return startConnection == null || endConnection == null;
+    return getStartConnection() == null || getEndConnection() == null;
+  }
+
+  @Override
+  public List<ConnectionView> getConnections()
+  {
+    return connections;
   }
 
   @Override
@@ -254,14 +260,14 @@ public class TraceView
 
     if (!isRemoved())
     {
-      if (!startConnection.isNonJunctionTracesOnly())
+      if (!getStartConnection().isNonJunctionTracesOnly())
       {
         graphics.fillOval(x1 - lineWidth,
                           y1 - lineWidth,
                           lineWidth * 2,
                           lineWidth * 2);
       }
-      if (!endConnection.isNonJunctionTracesOnly())
+      if (!getEndConnection().isNonJunctionTracesOnly())
       {
         graphics.fillOval(x2 - lineWidth,
                           y2 - lineWidth,
@@ -297,8 +303,8 @@ public class TraceView
 
   public void removed()
   {
-    startConnection = null;
-    endConnection = null;
+    connections.set(1, null);
+    connections.set(0, null);
 
     if (!traces.isEmpty())
     {

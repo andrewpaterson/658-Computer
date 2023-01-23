@@ -497,7 +497,7 @@ public class SimulatorEditor
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
       {
-        hoverComponentView = getHoverView(mousePosition);
+        hoverComponentView = calculateHoverView(mousePosition);
         if (hoverComponentView != null)
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
@@ -543,7 +543,7 @@ public class SimulatorEditor
     return circuitEditor.getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
-  private StaticView<?> getHoverView(Int2D mousePosition)
+  private StaticView<?> calculateHoverView(Int2D mousePosition)
   {
     return circuitEditor.getComponentViewInScreenSpace(viewport, mousePosition);
   }

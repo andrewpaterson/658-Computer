@@ -1,5 +1,6 @@
 package net.logicim.ui.common.wire;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
@@ -28,10 +29,8 @@ public class TunnelView
     implements WireView
 {
   protected Set<TunnelView> tunnels;
-  protected ConnectionView startConnection;
-  protected ConnectionView EndConnection;
+  protected List<ConnectionView> connections;
   protected List<Trace> traces;
-  protected Int2D position;
   protected boolean enabled;
   protected TextView textView;
   protected PolygonView polygonView;
@@ -40,8 +39,8 @@ public class TunnelView
   {
     super(circuitEditor, position, rotation, properties);
     this.enabled = false;
-    this.startConnection = circuitEditor.getOrAddConnection(position, this);
-    this.position = position.clone();
+    this.connections = new ArrayList<>(2);
+    this.connections.add(circuitEditor.getOrAddConnection(position, this));
     this.traces = new ArrayList<>();
     this.tunnels = circuitEditor.addTunnel(this);
     finaliseView();
@@ -49,8 +48,10 @@ public class TunnelView
 
   private void createGraphics(Graphics2D graphics, Viewport viewport)
   {
+    float offsetX = 0.75f;
+    float flatX = 0.4f;
     textView = new TextView(this,
-                            new Int2D(1, 0),
+                            new Float2D(offsetX, 0),
                             properties.name,
                             11,
                             true,
@@ -60,17 +61,54 @@ public class TunnelView
     Float2D topLeft = textView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(textView.getTextDimension());
     bottomRight.add(topLeft);
+    float middleY = (topLeft.y + bottomRight.y) / 2;
+    float height = bottomRight.y - topLeft.y;
+    offsetX = height / 2;
 
-    polygonView = new PolygonView(this,
-                                  true,
-                                  true,
-                                  topLeft,
-                                  new Float2D(bottomRight.x, topLeft.y),
-                                  bottomRight,
-                                  new Float2D(topLeft.x, bottomRight.y));
+    if (!properties.doubleSided)
+    {
+      polygonView = new PolygonView(this,
+                                    true,
+                                    true,
+                                    new Float2D(0, middleY),
+                                    new Float2D(topLeft.x + offsetX, topLeft.y),
+                                    new Float2D(bottomRight.x + offsetX + flatX, topLeft.y),
+                                    new Float2D(bottomRight.x + offsetX + flatX, bottomRight.y),
+                                    new Float2D(topLeft.x + offsetX, bottomRight.y));
+    }
+    else
+    {
+      polygonView = new PolygonView(this,
+                                    true,
+                                    true,
+                                    new Float2D(0, middleY),
+                                    new Float2D(topLeft.x + offsetX, topLeft.y),
+                                    new Float2D(bottomRight.x + offsetX, topLeft.y),
+                                    new Float2D(bottomRight.x + offsetX + offsetX, middleY),
+                                    new Float2D(bottomRight.x + offsetX, bottomRight.y),
+                                    new Float2D(topLeft.x + offsetX, bottomRight.y));
+
+    }
 
     updateBoundingBox();
+  }
 
+  public ConnectionView getStartConnection()
+  {
+    if (connections.size() > 0)
+    {
+      return connections.get(0);
+    }
+    return null;
+  }
+
+  public ConnectionView getEndConnection()
+  {
+    if (connections.size() > 1)
+    {
+      return connections.get(1);
+    }
+    return null;
   }
 
   @Override
@@ -78,7 +116,7 @@ public class TunnelView
   {
     if (position.equals(x, y))
     {
-      return startConnection;
+      return getStartConnection();
     }
     return null;
   }
@@ -86,7 +124,7 @@ public class TunnelView
   @Override
   public Int2D getConnectionGridPosition(ConnectionView connectionView)
   {
-    if (this.startConnection == connectionView)
+    if (this.getEndConnection() == connectionView)
     {
       return position;
     }
@@ -134,12 +172,6 @@ public class TunnelView
   public String getDescription()
   {
     return "Tunnel [" + getName() + "] (" + position + ")";
-  }
-
-  @Override
-  public Int2D getPosition()
-  {
-    return position;
   }
 
   @Override
@@ -195,12 +227,6 @@ public class TunnelView
   }
 
   @Override
-  public void setPosition(int x, int y)
-  {
-    position.set(x, y);
-  }
-
-  @Override
   protected void finaliseView()
   {
     finalised = true;
@@ -218,19 +244,17 @@ public class TunnelView
       ids[i] = Trace.getId(trace);
     }
 
-    return new TunnelData(ids,
-                          getPosition(),
-                          selected);
+    return new TunnelData(properties.name,
+                          position,
+                          rotation,
+                          selected,
+                          ids,
+                          properties.doubleSided);
   }
 
   public Set<TunnelView> getTunnels()
   {
     return tunnels;
-  }
-
-  public ConnectionView getStartConnection()
-  {
-    return startConnection;
   }
 
   public void connectTraces(List<Trace> traces)
@@ -253,19 +277,24 @@ public class TunnelView
   @Override
   public boolean isRemoved()
   {
-    return startConnection == null || endConnection == null;return false;
+    return connections.isEmpty();
   }
 
   @Override
   public List<ConnectionView> getConnections()
   {
-    return null;
+    return connections;
   }
 
   @Override
   public void removed()
   {
+    connections.clear();
 
+    if (!traces.isEmpty())
+    {
+      throw new SimulatorException("Trace must be disconnected before removal.");
+    }
   }
 
   @Override

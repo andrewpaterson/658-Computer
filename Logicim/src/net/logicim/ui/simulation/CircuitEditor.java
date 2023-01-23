@@ -38,7 +38,8 @@ public class CircuitEditor
   protected Set<DecorativeView<?>> decorativeViews;
 
   protected Set<TraceView> traceViews;
-  protected Map<String, Set<TunnelView>> tunnelViews;
+  protected Set<TunnelView> tunnelViews;
+  protected Map<String, Set<TunnelView>> tunnelViewsMap;
 
   protected Circuit circuit;
   protected Simulation simulation;
@@ -50,8 +51,9 @@ public class CircuitEditor
     this.simulation = circuit.resetSimulation();
     this.integratedCircuitViews = new LinkedHashSet<>();
     this.traceViews = new LinkedHashSet<>();
-    this.tunnelViews = new LinkedHashMap<>();
+    this.tunnelViewsMap = new LinkedHashMap<>();
     this.passiveViews = new LinkedHashSet<>();
+    this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
     this.selection = new ArrayList<>();
   }
@@ -73,9 +75,9 @@ public class CircuitEditor
 
   protected List<View> getAllViews()
   {
-    List<View> views = new ArrayList<>();
+    List<View> views = new ArrayList<>(traceViews);
+    views.addAll(tunnelViews);
     views.addAll(decorativeViews);
-    views.addAll(traceViews);
     views.addAll(passiveViews);
     views.addAll(integratedCircuitViews);
     return views;
@@ -125,13 +127,12 @@ public class CircuitEditor
 
   public Set<PortView> deleteTunnelView(TunnelView tunnelView)
   {
-      ConnectionView connectionView = tunnelView.getStartConnection();
+    ConnectionView connectionView = tunnelView.getStartConnection();
 
-      deleteWireViewInternal(tunnelView);
+    deleteWireViewInternal(tunnelView);
 
     return mergeAndConnectAfterDelete(connectionView);
   }
-
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
   {
@@ -364,7 +365,7 @@ public class CircuitEditor
 
   public StaticViewIterator staticViewIterator()
   {
-    return new StaticViewIterator(integratedCircuitViews, passiveViews, decorativeViews);
+    return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, decorativeViews);
   }
 
   public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
@@ -1494,6 +1495,9 @@ public class CircuitEditor
   {
     synchronized (this)
     {
+      String name = tunnelView.getName();
+      this.tunnelViews.remove(tunnelView);
+      Set<TunnelView> tunnelViews = this.tunnelViewsMap.get(name);
       return tunnelViews.remove(tunnelView);
     }
   }
@@ -1502,12 +1506,14 @@ public class CircuitEditor
   {
     synchronized (this)
     {
+      this.tunnelViews.add(tunnelView);
+
       String name = tunnelView.getName();
-      Set<TunnelView> tunnelViews = this.tunnelViews.get(name);
+      Set<TunnelView> tunnelViews = this.tunnelViewsMap.get(name);
       if (tunnelViews == null)
       {
         tunnelViews = new LinkedHashSet<>();
-        this.tunnelViews.put(name, tunnelViews);
+        this.tunnelViewsMap.put(name, tunnelViews);
       }
       tunnelViews.add(tunnelView);
       return tunnelViews;

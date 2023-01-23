@@ -22,7 +22,6 @@ public abstract class DecorativeData
   @Override
   protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
   {
-
   }
 
   protected abstract DecorativeView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader);

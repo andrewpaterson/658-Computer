@@ -3,6 +3,7 @@ package net.logicim.ui.shape.common;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
+import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.ui.common.Rotation;
 
 public class BoundingBox
@@ -18,8 +19,13 @@ public class BoundingBox
 
   public BoundingBox()
   {
-    topLeft = null;
-    bottomRight = null;
+    this(null, null);
+  }
+
+  public BoundingBox(Float2D topLeft, Float2D bottomRight)
+  {
+    this.topLeft = topLeft;
+    this.bottomRight = bottomRight;
     transformedTopLeft = new Float2D();
     transformedBottomRight = new Float2D();
   }
@@ -227,6 +233,35 @@ public class BoundingBox
   public boolean isNull()
   {
     return (topLeft == null) || (bottomRight == null);
+  }
+
+  public BoundingBoxData save()
+  {
+    return new BoundingBoxData(topLeft, bottomRight);
+  }
+
+  public void setTopLeft(Float2D topLeft)
+  {
+    if (this.topLeft == null)
+    {
+      this.topLeft = Float2D.safeClone(topLeft);
+    }
+    else
+    {
+      this.topLeft.set(topLeft);
+    }
+  }
+
+  public void setBottomRight(Float2D bottomRight)
+  {
+    if (this.bottomRight == null)
+    {
+      this.bottomRight = Float2D.safeClone(bottomRight);
+    }
+    else
+    {
+      this.bottomRight.set(bottomRight);
+    }
   }
 }
 

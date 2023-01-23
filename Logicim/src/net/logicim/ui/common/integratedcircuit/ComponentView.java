@@ -36,8 +36,17 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     finalised = true;
 
-    updateBoundingBoxFromPorts(boundingBox);
     updateBoundingBox();
+  }
+
+  @Override
+  protected void updateBoundingBox()
+  {
+    if (boundingBox.isNull())
+    {
+      updateBoundingBoxFromPorts(boundingBox);
+      updateSelectionBox();
+    }
   }
 
   public PortView getPortInGrid(Int2D position)

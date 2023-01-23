@@ -2,6 +2,7 @@ package net.logicim.file.writer;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.reflect.InstanceInspector;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.ReflectiveData;
@@ -87,6 +88,15 @@ public abstract class ReflectiveWriter
     node.setAttribute(TYPE, Int2D.class.getSimpleName());
     node.setAttribute("x", Integer.toString(p.x));
     node.setAttribute("y", Integer.toString(p.y));
+    parent.appendChild(node);
+  }
+
+  public static void writeFloat2D(Document doc, Element parent, String elementName, Float2D p)
+  {
+    Element node = doc.createElement(elementName);
+    node.setAttribute(TYPE, Float2D.class.getSimpleName());
+    node.setAttribute("x", Float.toString(p.x));
+    node.setAttribute("y", Float.toString(p.y));
     parent.appendChild(node);
   }
 
@@ -352,6 +362,10 @@ public abstract class ReflectiveWriter
       else if (Int2D.class.isAssignableFrom(fieldClass))
       {
         writeInt2D(doc, parent, fieldName, (Int2D) fieldValue);
+      }
+      else if (Float2D.class.isAssignableFrom(fieldClass))
+      {
+        writeFloat2D(doc, parent, fieldName, (Float2D) fieldValue);
       }
       else if (Rotation.class.isAssignableFrom(fieldClass))
       {

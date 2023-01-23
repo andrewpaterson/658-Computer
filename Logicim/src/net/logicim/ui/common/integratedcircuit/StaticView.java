@@ -36,13 +36,18 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public StaticView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
   {
+    this(circuitEditor, position, rotation, new BoundingBox(), new BoundingBox(), properties);
+  }
+
+  public StaticView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, BoundingBox boundingBox, BoundingBox selectionBox, PROPERTIES properties)
+  {
     this.properties = properties;
 
     this.circuitEditor = circuitEditor;
     this.position = position.clone();
     this.rotation = rotation;
-    this.boundingBox = new BoundingBox();
-    this.selectionBox = new BoundingBox();
+    this.boundingBox = boundingBox;
+    this.selectionBox = selectionBox;
     this.shapes = new ArrayList<>();
 
     this.finalised = false;
@@ -220,9 +225,15 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     return properties;
   }
 
-  protected abstract void finaliseView();
-
   protected void updateBoundingBox()
+  {
+    if (boundingBox.isNull())
+    {
+      updateSelectionBox();
+    }
+  }
+
+  protected void updateSelectionBox()
   {
     updateBoundingBoxFromShapes(boundingBox);
 
@@ -235,6 +246,14 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     this.rotation = rotation;
     invalidateCache();
   }
+
+  public void setBoundingBox(Float2D topLeft, Float2D bottomRight)
+  {
+    boundingBox.setTopLeft(topLeft);
+    boundingBox.setBottomRight(bottomRight);
+  }
+
+  protected abstract void finaliseView();
 
   public abstract boolean isEnabled();
 

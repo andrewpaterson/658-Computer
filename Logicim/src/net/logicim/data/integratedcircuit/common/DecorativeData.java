@@ -16,7 +16,7 @@ public abstract class DecorativeData
 
   public DecorativeData(String name, Int2D position, Rotation rotation, boolean selected)
   {
-    super(name, position, rotation, selected);
+    super(name, position, rotation, null, null, selected);
   }
 
   @Override

@@ -4,10 +4,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 public abstract class StaticData
     extends ReflectiveData
@@ -15,17 +13,26 @@ public abstract class StaticData
   protected String name;
   protected Int2D position;
   protected Rotation rotation;
+  protected BoundingBoxData boundingBox;
+  protected BoundingBoxData selectionBox;
   protected boolean selected;
 
   public StaticData()
   {
   }
 
-  public StaticData(String name, Int2D position, Rotation rotation, boolean selected)
+  public StaticData(String name,
+                    Int2D position,
+                    Rotation rotation,
+                    BoundingBoxData boundingBox,
+                    BoundingBoxData selectionBox,
+                    boolean selected)
   {
     this.name = name;
     this.position = position;
     this.rotation = rotation;
+    this.boundingBox = boundingBox;
+    this.selectionBox = selectionBox;
     this.selected = selected;
   }
 

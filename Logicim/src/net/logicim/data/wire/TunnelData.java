@@ -2,6 +2,7 @@ package net.logicim.data.wire;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Rotation;
@@ -26,11 +27,18 @@ public class TunnelData
   public TunnelData(String name,
                     Int2D position,
                     Rotation rotation,
+                    BoundingBoxData boundingBox,
+                    BoundingBoxData selectionBox,
                     boolean selected,
                     long[] traceIds,
                     boolean doubleSided)
   {
-    super(name, position, rotation, selected);
+    super(name,
+          position,
+          rotation,
+          boundingBox,
+          selectionBox,
+          selected);
     this.traceIds = traceIds;
     this.doubleSided = doubleSided;
   }
@@ -38,7 +46,12 @@ public class TunnelData
   @Override
   public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    TunnelView tunnelView = new TunnelView(circuitEditor, position, rotation, new TunnelProperties(name, doubleSided));
+    TunnelView tunnelView = new TunnelView(circuitEditor,
+                                           position,
+                                           rotation,
+                                           boundingBox.create(),
+                                           selectionBox.create(),
+                                           new TunnelProperties(name, doubleSided));
     List<Trace> traces = new ArrayList<>(traceIds.length);
     for (long id : traceIds)
     {

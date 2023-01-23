@@ -12,6 +12,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.text.TextView;
@@ -41,14 +42,27 @@ public class TunnelView
   protected PointGridCache startCache;
   protected PointGridCache endCache;
 
-  public TunnelView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, TunnelProperties properties)
+  public TunnelView(CircuitEditor circuitEditor,
+                    Int2D position,
+                    Rotation rotation,
+                    TunnelProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    this(circuitEditor, position, rotation, new BoundingBox(), new BoundingBox(), properties);
+  }
+
+  public TunnelView(CircuitEditor circuitEditor,
+                    Int2D position,
+                    Rotation rotation,
+                    BoundingBox boundingBox,
+                    BoundingBox selectionBox,
+                    TunnelProperties properties)
+  {
+    super(circuitEditor, position, rotation, boundingBox, selectionBox, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
     this.startPosition = new Int2D(0, 0);
-    this.startCache = new PointGridCache(startPosition);
-    this.endCache = new PointGridCache(startPosition);
+    this.startCache = new PointGridCache(new Int2D());
+    this.endCache = new PointGridCache(new Int2D());
     this.connections.add(circuitEditor.getOrAddConnection(startPosition, this));
     this.traces = new ArrayList<>();
     this.tunnels = circuitEditor.addTunnel(this);
@@ -70,36 +84,49 @@ public class TunnelView
     Float2D topLeft = textView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(textView.getTextDimension());
     bottomRight.add(topLeft);
-    float middleY = (topLeft.y + bottomRight.y) / 2;
     float height = bottomRight.y - topLeft.y;
     offsetX = height / 2;
 
+    startPosition = new Int2D();
+
     if (!properties.doubleSided)
     {
+      endPosition = null;
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    new Float2D(0, middleY),
+                                    startPosition,
                                     new Float2D(topLeft.x + offsetX, topLeft.y),
                                     new Float2D(bottomRight.x + offsetX + flatX, topLeft.y),
                                     new Float2D(bottomRight.x + offsetX + flatX, bottomRight.y),
                                     new Float2D(topLeft.x + offsetX, bottomRight.y));
+      invalidateCache();
+      updateBoundingBox();
     }
     else
     {
+      endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    new Float2D(0, middleY),
+                                    startPosition,
                                     new Float2D(topLeft.x + offsetX, topLeft.y),
-                                    new Float2D(bottomRight.x + offsetX, topLeft.y),
-                                    new Float2D(bottomRight.x + offsetX + offsetX, middleY),
-                                    new Float2D(bottomRight.x + offsetX, bottomRight.y),
+                                    new Float2D(endPosition.x - offsetX, topLeft.y),
+                                    endPosition,
+                                    new Float2D(endPosition.x - offsetX, bottomRight.y),
                                     new Float2D(topLeft.x + offsetX, bottomRight.y));
+      invalidateCache();
+      updateBoundingBox();
 
+      if (connections.size() == 1)
+      {
+        this.connections.add(circuitEditor.getOrAddConnection(endPosition, this));
+      }
+      else
+      {
+        throw new SimulatorException("Expected exactly one (the start) connection to be present.");
+      }
     }
-
-    updateBoundingBox();
   }
 
   public ConnectionView getStartConnection()
@@ -280,6 +307,8 @@ public class TunnelView
     return new TunnelData(properties.name,
                           position,
                           rotation,
+                          boundingBox.save(),
+                          selectionBox.save(),
                           selected,
                           ids,
                           properties.doubleSided);

@@ -36,7 +36,7 @@ public abstract class ComponentData
                        List<MultiPortData> ports,
                        boolean selected)
   {
-    super(name, position, rotation, selected);
+    super(name, position, rotation, null, null, selected);
     this.ports = ports;
   }
 

@@ -3,6 +3,7 @@ package net.logicim.file.reader;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.reflect.ClassInspector;
 import net.logicim.common.reflect.InstanceInspector;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.*;
@@ -87,6 +88,10 @@ public class LogicimFileReader
     else if (Int2D.class.getSimpleName().equals(type))
     {
       return new Int2DData();
+    }
+    else if (Float2D.class.getSimpleName().equals(type))
+    {
+      return new Float2DData();
     }
     else if (Rotation.class.getSimpleName().equals(type))
     {

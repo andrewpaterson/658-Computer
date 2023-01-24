@@ -125,12 +125,35 @@ public class SimulatorPanel
 
   private boolean update(long beforeTime, long overtime, int tickCount)
   {
-    boolean done = simulatorEditor.tick(tickCount);
+    boolean done = true;
+    try
+    {
+      done = simulatorEditor.tick(tickCount);
+    }
+    catch (RuntimeException e)
+    {
+      handleException(e);
+    }
 
     long afterTime = System.nanoTime();
     long timeDiff = afterTime - beforeTime;
     long sleepTime = (period - timeDiff) - overtime;
     return (sleepTime > 0) || done;
+  }
+
+  public void handleException(RuntimeException e)
+  {
+    simulatorEditor.running = false;
+    simulatorEditor.undo();
+
+    SwingUtilities.invokeLater(new Runnable()
+    {
+      @Override
+      public void run()
+      {
+        ErrorFrame.createWindow(frame, e);
+      }
+    });
   }
 
   private long sleep(long beforeTime, long overtime)

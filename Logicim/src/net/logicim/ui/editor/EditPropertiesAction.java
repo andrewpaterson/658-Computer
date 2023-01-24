@@ -1,6 +1,7 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.EditPropertiesDialogHelper;
 
@@ -9,12 +10,12 @@ import javax.swing.*;
 public class EditPropertiesAction
     extends SimulatorEditorAction
 {
-  protected JFrame parentFrame;
+  protected SimulatorPanel simulatorPanel;
 
-  public EditPropertiesAction(SimulatorEditor editor, JFrame parentFrame)
+  public EditPropertiesAction(SimulatorEditor editor, SimulatorPanel simulatorPanel)
   {
     super(editor);
-    this.parentFrame = parentFrame;
+    this.simulatorPanel = simulatorPanel;
   }
 
   @Override
@@ -28,7 +29,9 @@ public class EditPropertiesAction
 
     if (componentView != null)
     {
-      new EditPropertiesDialogHelper().showPropertyEditorDialog(parentFrame, editor, componentView);
+      new EditPropertiesDialogHelper().showPropertyEditorDialog(simulatorPanel.getFrame(),
+                                                                editor,
+                                                                componentView);
     }
   }
 }

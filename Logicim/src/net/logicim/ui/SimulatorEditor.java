@@ -9,6 +9,7 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.event.SimulatorEditorEvent;

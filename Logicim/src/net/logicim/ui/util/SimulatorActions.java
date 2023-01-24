@@ -47,7 +47,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new CreateComponentAction(editor, TunnelView.class), KeyEvent.VK_T, Up, Down, Up));
     editor.addAction(new InputAction(new CreateComponentAction(editor, LabelView.class), KeyEvent.VK_L, Up, Down, Up));
 
-    editor.addAction(new InputAction(new EditPropertiesAction(editor, panel.getFrame()), KeyEvent.VK_E, Up, Up, Up));
+    editor.addAction(new InputAction(new EditPropertiesAction(editor, panel), KeyEvent.VK_E, Up, Up, Up));
     editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Down, Up));
     editor.addAction(new InputAction(new PlacementRotateRight(editor), KeyEvent.VK_R, Up, Up, Up));
     editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Down));

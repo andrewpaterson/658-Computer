@@ -6,10 +6,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
-import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.ShapeHolder;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
@@ -251,6 +248,17 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   {
     boundingBox.setTopLeft(topLeft);
     boundingBox.setBottomRight(bottomRight);
+  }
+
+  public void createConnections(CircuitEditor circuitEditor)
+  {
+    List<PortView> portViews = getPorts();
+    for (PortView portView : portViews)
+    {
+      Int2D portPosition = portView.getGridPosition();
+      ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, this);
+      portView.setConnection(connectionView);
+    }
   }
 
   protected abstract void finaliseView();

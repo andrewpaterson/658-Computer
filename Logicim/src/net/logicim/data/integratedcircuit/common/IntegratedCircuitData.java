@@ -89,7 +89,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
   {
     ICV integratedCircuitView = (ICV) componentView;
-    circuitEditor.createConnectionViewsFromComponentPorts(integratedCircuitView);
+    integratedCircuitView.createConnections(circuitEditor);
     componentView.enable(circuitEditor.getSimulation());
 
     loadState(integratedCircuitView);

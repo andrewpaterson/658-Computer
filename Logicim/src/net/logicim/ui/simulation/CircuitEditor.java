@@ -114,6 +114,7 @@ public class CircuitEditor
     else if (componentView instanceof TunnelView)
     {
       deleteTunnelView((TunnelView) componentView);
+      //Fire connection events for traces here.
     }
     else if (componentView == null)
     {
@@ -238,7 +239,8 @@ public class CircuitEditor
       {
         if (view instanceof TraceView)
         {
-          updatedPortViews.addAll(deleteTraceView((TraceView) view));
+          Set<PortView> portViews = deleteTraceView((TraceView) view);
+          updatedPortViews.addAll(portViews);
         }
       }
     }
@@ -608,7 +610,6 @@ public class CircuitEditor
 
   public Set<PortView> connectNewTraces(Set<ConnectionView> connectionsNet)
   {
-
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionsNet)
     {
@@ -1082,16 +1083,10 @@ public class CircuitEditor
 
   public Set<PortView> connectComponentView(StaticView<?> componentView)
   {
-    List<PortView> portViews = componentView.getPorts();
-    for (PortView portView : portViews)
-    {
-      Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
-      portView.setConnection(connectionView);
-    }
+    componentView.createConnections(this);
 
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    for (PortView portView : portViews)
+    for (PortView portView : componentView.getPorts())
     {
       if (!updatedPortViews.contains(portView))
       {
@@ -1105,17 +1100,6 @@ public class CircuitEditor
     componentView.simulationStarted(simulation);
 
     return updatedPortViews;
-  }
-
-  public void createConnectionViewsFromComponentPorts(StaticView<?> componentView)
-  {
-    List<PortView> ports = componentView.getPorts();
-    for (PortView portView : ports)
-    {
-      Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
-      portView.setConnection(connectionView);
-    }
   }
 
   public void fireConnectionEvents(Set<PortView> updatedPortViews)
@@ -1141,7 +1125,6 @@ public class CircuitEditor
     Set<PortView> updatedPortViews = connectComponentView(componentView);
 
     fireConnectionEvents(updatedPortViews);
-
     validateConsistency();
   }
 
@@ -1203,17 +1186,20 @@ public class CircuitEditor
       if ((view instanceof StaticView))
       {
         StaticView<?> componentView = (StaticView<?>) view;
-        updatedPortViews.addAll(connectComponentView(componentView));
+        Set<PortView> portViews = connectComponentView(componentView);
+        updatedPortViews.addAll(portViews);
         selection.add(componentView);
       }
     }
 
+    Set<TraceView> newTraces = new LinkedHashSet<>();
     for (Line line : lines)
     {
-      Set<TraceView> newTraces = createTraceViews(line);
-      finaliseCreatedTraces(newTraces);
-      selection.addAll(newTraces);
+      Set<TraceView> createdTraces = createTraceViews(line);
+      newTraces.addAll(createdTraces);
+      selection.addAll(createdTraces);
     }
+    finaliseCreatedTraces(newTraces);
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();
@@ -1354,7 +1340,8 @@ public class CircuitEditor
       {
         throw new SimulatorException("Cannot finalise a removed Trace.");
       }
-      updatedPortViews.addAll(connectNewConnections(traceView.getStartConnection()));
+      Set<PortView> portViews = connectNewConnections(traceView.getStartConnection());
+      updatedPortViews.addAll(portViews);
     }
 
     fireConnectionEvents(updatedPortViews);

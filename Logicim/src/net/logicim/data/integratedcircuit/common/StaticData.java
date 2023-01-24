@@ -38,7 +38,7 @@ public abstract class StaticData
 
   protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
   {
-    circuitEditor.createConnectionViewsFromComponentPorts(componentView);
+    componentView.createConnections(circuitEditor);
     componentView.enable(circuitEditor.getSimulation());
 
     loadPorts(circuitEditor, traceLoader, componentView);

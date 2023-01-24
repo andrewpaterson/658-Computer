@@ -280,7 +280,10 @@ public class PortView
   {
     for (Port port : ports)
     {
-      port.traceConnected(simulation);
+      if (port.getTrace() != null)
+      {
+        port.traceConnected(simulation);
+      }
     }
   }
 

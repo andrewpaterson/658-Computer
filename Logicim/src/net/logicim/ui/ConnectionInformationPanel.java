@@ -68,7 +68,8 @@ public class ConnectionInformationPanel
                               yOffset,
                               componentString);
 
-      if (!(previousComponent instanceof TraceView && connectedComponent instanceof TraceView))
+      if (!((previousComponent instanceof TraceView || previousComponent == null) &&
+            connectedComponent instanceof TraceView))
       {
         y += ySpacing;
       }

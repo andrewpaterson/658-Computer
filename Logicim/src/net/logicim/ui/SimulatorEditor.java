@@ -502,7 +502,7 @@ public class SimulatorEditor
               y = 0;
             }
 
-            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport).drawConnectionDetails(x, y, infoWidth, infoHeight);
+            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(x, y);
           }
 
           graphics.setFont(font);

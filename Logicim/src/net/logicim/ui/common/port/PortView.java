@@ -314,5 +314,10 @@ public class PortView
     }
     return null;
   }
+
+  public String getText()
+  {
+    return text;
+  }
 }
 

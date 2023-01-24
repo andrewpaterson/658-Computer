@@ -116,6 +116,12 @@ public abstract class Port
   {
   }
 
+  public String getType()
+  {
+    return getClass().getSimpleName().replace("Port", "");
+  }
+
+
   //public abstract float getVoltageOut(long time);
 }
 

@@ -444,5 +444,15 @@ public class SplitterView
     super.rotateLeft();
     updateTextViews();
   }
+
+  public List<PortView> getEndPortViews()
+  {
+    return endPortViews;
+  }
+
+  public PortView getStartPortView()
+  {
+    return startPortView;
+  }
 }
 

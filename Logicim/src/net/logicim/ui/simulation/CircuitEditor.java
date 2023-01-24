@@ -292,15 +292,23 @@ public class CircuitEditor
         {
           ((TraceView) connectedComponent).disconnectTraces();
         }
-        else if (connectedComponent instanceof IntegratedCircuitView)
+        else if (connectedComponent instanceof StaticView)
         {
-          IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) connectedComponent;
+          StaticView<?> integratedCircuitView = (StaticView<?>) connectedComponent;
           Int2D position = connection.getGridPosition();
           if (position != null)
           {
             PortView portView = integratedCircuitView.getPortInGrid(position);
             portView.disconnect(simulation);
           }
+        }
+        else if (connectedComponent == null)
+        {
+          throw new SimulatorException("Cannot disconnect null view.");
+        }
+        else
+        {
+          throw new SimulatorException("Cannot disconnect view of class [%s].", connectedComponent.getClass().getSimpleName());
         }
       }
     }
@@ -989,6 +997,11 @@ public class CircuitEditor
 
   public void validateConsistency()
   {
+    validateTracesContainOnlyCurrentViews();
+  }
+
+  protected void validateTracesContainOnlyCurrentViews()
+  {
     for (TraceView traceView : traceViews)
     {
       if (!traceView.isRemoved())
@@ -1004,29 +1017,41 @@ public class CircuitEditor
               contained = false;
             }
           }
-
-          if (view instanceof TraceView)
+          else if (view instanceof TraceView)
           {
             if (!traceViews.contains(view))
             {
               contained = false;
             }
           }
-
-          if (view instanceof PassiveView)
+          else if (view instanceof PassiveView)
           {
             if (!passiveViews.contains(view))
             {
               contained = false;
             }
           }
-
-          if (view instanceof DecorativeView)
+          else if (view instanceof DecorativeView)
           {
             if (!decorativeViews.contains(view))
             {
               contained = false;
             }
+          }
+          else if (view instanceof TunnelView)
+          {
+            if (!tunnelViews.contains(view))
+            {
+              contained = false;
+            }
+          }
+          else if (view == null)
+          {
+            throw new SimulatorException("Trace [" + traceView.getDescription() + "] does not include trace has null connection.");
+          }
+          else
+          {
+            throw new SimulatorException(view.getDescription() + " referenced by trace [" + traceView.getDescription() + "] has not been included in validateConsistency.");
           }
 
           if (!contained)
@@ -1084,31 +1109,6 @@ public class CircuitEditor
     {
       staticData.createAndLoad(this, traceLoader);
     }
-  }
-
-  public Set<PortView> createAndConnectComponentView(StaticView<?> componentView)
-  {
-    Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    List<PortView> ports = componentView.getPorts();
-    List<ConnectionView> newConnections = new ArrayList<>();
-    for (PortView portView : ports)
-    {
-      Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
-      portView.setConnection(connectionView);
-      newConnections.add(connectionView);
-    }
-
-    for (ConnectionView connectionView : newConnections)
-    {
-      Set<PortView> portViews = connectNewConnections(connectionView);
-      updatedPortViews.addAll(portViews);
-    }
-
-    componentView.enable(simulation);
-    componentView.simulationStarted(simulation);
-
-    return updatedPortViews;
   }
 
   public Set<PortView> connectComponentView(StaticView<?> componentView)
@@ -1180,10 +1180,10 @@ public class CircuitEditor
   {
     for (View view : views)
     {
-      if (view instanceof IntegratedCircuitView)
+      if (view instanceof StaticView)
       {
-        IntegratedCircuitView<?, ?> integratedCircuitView = (IntegratedCircuitView<?, ?>) view;
-        List<ConnectionView> connectionViews = disconnectComponentView(integratedCircuitView);
+        StaticView<?> componentView = (StaticView<?>) view;
+        List<ConnectionView> connectionViews = disconnectComponentView(componentView);
 
         connectConnections(connectionViews);
       }
@@ -1192,6 +1192,14 @@ public class CircuitEditor
         TraceView traceView = (TraceView) view;
         disconnectTraceView(traceView);
         traceView.removed();
+      }
+      else if (view == null)
+      {
+        throw new SimulatorException("Cannot move null view.");
+      }
+      else
+      {
+        throw new SimulatorException("Cannot move view of class [%s].", view.getClass().getSimpleName());
       }
     }
     validateConsistency();
@@ -1226,7 +1234,7 @@ public class CircuitEditor
       if ((view instanceof StaticView))
       {
         StaticView<?> componentView = (StaticView<?>) view;
-        updatedPortViews.addAll(createAndConnectComponentView(componentView));
+        updatedPortViews.addAll(connectComponentView(componentView));
         selection.add(componentView);
       }
     }
@@ -1393,16 +1401,16 @@ public class CircuitEditor
     clearSelection();
   }
 
-  public IntegratedCircuitView<?, ?> getSingleSelectionDiscreteView()
+  public StaticView<?> getSingleSelectionStaticView()
   {
-    IntegratedCircuitView<?, ?> singleSemiconductorView = null;
+    StaticView<?> componentView = null;
     for (View view : selection)
     {
-      if (view instanceof IntegratedCircuitView)
+      if (view instanceof StaticView)
       {
-        if (singleSemiconductorView == null)
+        if (componentView == null)
         {
-          singleSemiconductorView = (IntegratedCircuitView<?, ?>) view;
+          componentView = (StaticView<?>) view;
         }
         else
         {
@@ -1410,7 +1418,7 @@ public class CircuitEditor
         }
       }
     }
-    return singleSemiconductorView;
+    return componentView;
   }
 
   public void select(View view)

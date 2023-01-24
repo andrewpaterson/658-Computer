@@ -259,6 +259,12 @@ public class TunnelView
   }
 
   @Override
+  public PortView getPortInGrid(Int2D position)
+  {
+    return null;
+  }
+
+  @Override
   public void propertyChanged()
   {
   }

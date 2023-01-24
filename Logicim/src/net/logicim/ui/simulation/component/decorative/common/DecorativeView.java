@@ -48,6 +48,12 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
+  public PortView getPortInGrid(Int2D position)
+  {
+    return null;
+  }
+
+  @Override
   public List<PortView> getPorts()
   {
     return Collections.emptyList();

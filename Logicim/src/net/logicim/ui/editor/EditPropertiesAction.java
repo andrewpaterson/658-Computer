@@ -1,7 +1,6 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.EditPropertiesDialogHelper;
 
@@ -24,7 +23,7 @@ public class EditPropertiesAction
     StaticView<?> componentView = editor.getHoverComponentView();
     if (componentView == null)
     {
-      componentView = editor.getCircuitEditor().getSingleSelectionDiscreteView();
+      componentView = editor.getCircuitEditor().getSingleSelectionStaticView();
     }
 
     if (componentView != null)

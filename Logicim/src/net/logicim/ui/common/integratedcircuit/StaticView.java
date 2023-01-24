@@ -259,6 +259,8 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract PortView getPortInGrid(int x, int y);
 
+  public abstract PortView getPortInGrid(Int2D position);
+
   public abstract void propertyChanged();
 
   public abstract ReflectiveData save(boolean selected);

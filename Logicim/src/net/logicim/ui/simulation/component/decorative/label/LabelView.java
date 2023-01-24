@@ -6,6 +6,7 @@ import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.CircuitEditor;

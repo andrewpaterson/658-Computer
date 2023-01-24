@@ -185,60 +185,60 @@ public class SimulatorPanel
     backBufferImage = createImage(width, height);
     backBuffer = (Graphics2D) backBufferImage.getGraphics();
 
-    simulatorEditor.addInputEvent(new ResizedEvent(width, height));
+    simulatorEditor.addEditorEvent(new ResizedEvent(width, height));
   }
 
   public void mousePressed(int x, int y, int button)
   {
-    simulatorEditor.addInputEvent(new MousePressedEvent(x, y, button));
+    simulatorEditor.addEditorEvent(new MousePressedEvent(x, y, button));
   }
 
   public void mouseReleased(int x, int y, int button)
   {
-    simulatorEditor.addInputEvent(new MouseReleasedEvent(x, y, button));
+    simulatorEditor.addEditorEvent(new MouseReleasedEvent(x, y, button));
   }
 
   public void mouseMoved(int x, int y)
   {
-    simulatorEditor.addInputEvent(new MouseMovedEvent(x, y));
+    simulatorEditor.addEditorEvent(new MouseMovedEvent(x, y));
   }
 
   public void windowClosing()
   {
-    simulatorEditor.addInputEvent(new WindowClosingEvent());
+    simulatorEditor.addEditorEvent(new WindowClosingEvent());
   }
 
   public void mouseExited()
   {
-    simulatorEditor.addInputEvent(new MouseExitedEvent());
+    simulatorEditor.addEditorEvent(new MouseExitedEvent());
   }
 
   public void mouseEntered(int x, int y)
   {
-    simulatorEditor.addInputEvent(new MouseEnteredEvent(x, y));
+    simulatorEditor.addEditorEvent(new MouseEnteredEvent(x, y));
   }
 
   public void mouseWheel(int wheelRotation)
   {
-    simulatorEditor.addInputEvent(new MouseWheelEvent(wheelRotation));
+    simulatorEditor.addEditorEvent(new MouseWheelEvent(wheelRotation));
   }
 
   public void keyPressed(KeyEvent keyEvent)
   {
-    simulatorEditor.addInputEvent(new KeyPressedEvent(keyEvent.getKeyCode(),
-                                                      keyEvent.isControlDown(),
-                                                      keyEvent.isAltDown(),
-                                                      keyEvent.isShiftDown(),
-                                                      keyEvent.isMetaDown()));
-  }
-
-  public void keyReleased(KeyEvent keyEvent)
-  {
-    simulatorEditor.addInputEvent(new KeyReleasedEvent(keyEvent.getKeyCode(),
+    simulatorEditor.addEditorEvent(new KeyPressedEvent(keyEvent.getKeyCode(),
                                                        keyEvent.isControlDown(),
                                                        keyEvent.isAltDown(),
                                                        keyEvent.isShiftDown(),
                                                        keyEvent.isMetaDown()));
+  }
+
+  public void keyReleased(KeyEvent keyEvent)
+  {
+    simulatorEditor.addEditorEvent(new KeyReleasedEvent(keyEvent.getKeyCode(),
+                                                        keyEvent.isControlDown(),
+                                                        keyEvent.isAltDown(),
+                                                        keyEvent.isShiftDown(),
+                                                        keyEvent.isMetaDown()));
   }
 
   public void saveSimulation()

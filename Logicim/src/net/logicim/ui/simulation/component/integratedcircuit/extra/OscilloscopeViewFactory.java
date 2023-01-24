@@ -20,7 +20,7 @@ public class OscilloscopeViewFactory
   {
     return create(circuitEditor,
                   position,
-                  rotation,
+                  Rotation.Cannot,
                   new OscilloscopeProperties(null,
                                              DefaultFamily.get(),
                                              2,

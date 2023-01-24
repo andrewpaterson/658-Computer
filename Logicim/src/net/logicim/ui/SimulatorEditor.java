@@ -9,7 +9,6 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
-import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
@@ -627,7 +626,11 @@ public class SimulatorEditor
     if (placementView != null)
     {
       placementView.rotateRight();
-      creationRotation = placementView.getRotation();
+      Rotation rotation = placementView.getRotation();
+      if ((rotation != Rotation.Cannot))
+      {
+        creationRotation = rotation;
+      }
     }
   }
 
@@ -636,7 +639,11 @@ public class SimulatorEditor
     if (placementView != null)
     {
       placementView.rotateLeft();
-      creationRotation = placementView.getRotation();
+      Rotation rotation = placementView.getRotation();
+      if ((rotation != Rotation.Cannot))
+      {
+        creationRotation = rotation;
+      }
     }
   }
 
@@ -760,7 +767,7 @@ public class SimulatorEditor
     runTimeStep /= 2;
   }
 
-  public void addInputEvent(SimulatorEditorEvent event)
+  public void addEditorEvent(SimulatorEditorEvent event)
   {
     inputEvents.add(event);
   }

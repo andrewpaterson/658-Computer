@@ -1,16 +1,11 @@
 package net.logicim.ui.property;
 
-import net.logicim.common.type.Int2D;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
-import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.component.factory.ViewFactory;
-import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -30,7 +25,6 @@ public abstract class PropertyEditorDialog
     implements ButtonAction,
                KeyListener,
                ContainerListener
-
 {
   protected Dimension dimension;
   protected SimulatorEditor editor;
@@ -132,23 +126,6 @@ public abstract class PropertyEditorDialog
     return dimension;
   }
 
-  protected StaticView<?> recreateComponentView(ComponentProperties properties)
-  {
-    CircuitEditor circuitEditor = editor.getCircuitEditor();
-
-    Rotation rotation = componentView.getRotation();
-    Int2D position = componentView.getPosition();
-
-    Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) componentView.getClass();
-    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    StaticView<?> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
-
-    circuitEditor.deleteComponentView(this.componentView);
-    circuitEditor.placeComponentView(newComponentView);
-
-    return newComponentView;
-  }
-
   @Override
   public void executeButtonAction()
   {
@@ -161,10 +138,7 @@ public abstract class PropertyEditorDialog
 
     if (propertyChanged)
     {
-      this.componentView.propertyChanged();
-      StaticView<?> componentView = recreateComponentView(this.componentView.getProperties());
-      editor.replaceSelection(componentView, this.componentView);
-      editor.pushUndo();
+      editor.addEditorEvent(new PropertyEditEvent(componentView));
     }
 
     close();

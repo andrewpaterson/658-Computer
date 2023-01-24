@@ -4,15 +4,11 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
-import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelProperties;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.CircuitEditor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TunnelData
     extends StaticData
@@ -52,19 +48,11 @@ public class TunnelData
                                            boundingBox.create(),
                                            selectionBox.create(),
                                            new TunnelProperties(name, doubleSided));
-    List<Trace> traces = new ArrayList<>(traceIds.length);
-    for (long id : traceIds)
-    {
-      Trace trace = traceLoader.create(id);
-      traces.add(trace);
-    }
-    tunnelView.connectTraces(traces);
-    tunnelView.enable(circuitEditor.getSimulation());
-
-    if (selected)
-    {
-      circuitEditor.select(tunnelView);
-    }
+    WireDataHelper.wireCreate(circuitEditor,
+                              traceLoader,
+                              tunnelView,
+                              traceIds,
+                              selected);
   }
 
   @Override

@@ -2,12 +2,8 @@ package net.logicim.data.wire;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
-import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.wire.TraceView;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.logicim.ui.simulation.CircuitEditor;
 
 public class TraceData
     extends ReflectiveData
@@ -34,19 +30,14 @@ public class TraceData
 
   public void create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    TraceView traceView = new TraceView(circuitEditor, start, end);
-    List<Trace> traces = new ArrayList<>(traceIds.length);
-    for (long id : traceIds)
-    {
-      Trace trace = traceLoader.create(id);
-      traces.add(trace);
-    }
-    traceView.connectTraces(traces);
-
-    if (selected)
-    {
-      circuitEditor.select(traceView);
-    }
+    TraceView traceView = new TraceView(circuitEditor,
+                                        start,
+                                        end);
+    WireDataHelper.wireCreate(circuitEditor,
+                              traceLoader,
+                              traceView,
+                              traceIds,
+                              selected);
   }
 }
 

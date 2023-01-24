@@ -7,8 +7,8 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferView;
 
@@ -52,11 +52,10 @@ public class BufferData
     return new BufferView(circuitEditor,
                           position,
                           rotation,
-                          new BufferProperties(
-                              name,
-                              FamilyStore.getInstance().get(family),
-                              explicitPowerPorts,
-                              bufferCount));
+                          new BufferProperties(name,
+                                               FamilyStore.getInstance().get(family),
+                                               explicitPowerPorts,
+                                               bufferCount));
   }
 }
 

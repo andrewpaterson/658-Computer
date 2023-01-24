@@ -14,7 +14,7 @@ public class TunnelViewFactory
     return new TunnelView(circuitEditor,
                           position,
                           rotation,
-                          new TunnelProperties("War",
+                          new TunnelProperties("  ",
                                                false));
   }
 

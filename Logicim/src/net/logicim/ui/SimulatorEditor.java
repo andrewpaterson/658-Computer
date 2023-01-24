@@ -8,11 +8,11 @@ import net.logicim.domain.common.LongTime;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
+import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
@@ -46,6 +46,8 @@ public class SimulatorEditor
   protected MouseButtons mouseButtons;
   protected MousePosition mousePosition;
 
+  protected KeyboardButtons keyboardButtons;
+
   protected CircuitEditor circuitEditor;
 
   protected StaticView<?> placementView;
@@ -76,6 +78,8 @@ public class SimulatorEditor
     this.mouseMotion = new MouseMotion();
     this.mouseButtons = new MouseButtons();
     this.mousePosition = new MousePosition();
+
+    this.keyboardButtons = new KeyboardButtons();
 
     this.actions = new InputActions(mouseButtons);
 
@@ -440,6 +444,8 @@ public class SimulatorEditor
     if (hoverConnectionView != null)
     {
       hoverConnectionView.paintHoverPort(graphics, viewport);
+
+      drawConnectionDetails(graphics);
     }
 
     if (wirePull != null)
@@ -458,6 +464,54 @@ public class SimulatorEditor
     }
   }
 
+  protected void drawConnectionDetails(Graphics2D graphics)
+  {
+    if (keyboardButtons.isAltDown())
+    {
+      int infoWidth = 300;
+      int infoHeight = 300;
+      if (width > infoWidth &&
+          height > infoHeight)
+      {
+        Int2D mousePosition = this.mousePosition.get();
+        if (mousePosition != null)
+        {
+          Font font = graphics.getFont();
+          Color color = graphics.getColor();
+
+          Int2D mousePositionOnGrid = getMousePositionOnGrid();
+          if (mousePositionOnGrid != null)
+          {
+            int x = mousePosition.x - infoWidth / 2;
+            int y = mousePosition.y;
+            if (x < 0)
+            {
+              x = 0;
+            }
+            if (x > width - infoWidth)
+            {
+              x = width - infoWidth;
+            }
+
+            if (y < height / 2)
+            {
+              y = height - infoHeight;
+            }
+            else
+            {
+              y = 0;
+            }
+
+            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport).drawConnectionDetails(x, y, infoWidth, infoHeight);
+          }
+
+          graphics.setFont(font);
+          graphics.setColor(color);
+        }
+      }
+    }
+  }
+
   public void mouseExited()
   {
     mouseMotion.invalidate();
@@ -466,6 +520,7 @@ public class SimulatorEditor
 
   public void mouseEntered(int x, int y)
   {
+    mousePosition.set(x, y);
     mouseMotion.invalidate();
     mouseButtons.invalidate();
   }
@@ -552,6 +607,7 @@ public class SimulatorEditor
 
   public void keyPressed(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
   {
+    keyboardButtons.set(altDown, controlDown, shiftDown);
     actions.keyPressed(keyCode, controlDown, altDown, shiftDown);
   }
 
@@ -632,8 +688,9 @@ public class SimulatorEditor
     }
   }
 
-  public void keyReleased(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
+  public void keyReleased(boolean controlDown, boolean altDown, boolean shiftDown)
   {
+    keyboardButtons.set(altDown, controlDown, shiftDown);
   }
 
   public void toggleTunSimulation()

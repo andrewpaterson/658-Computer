@@ -32,6 +32,9 @@ public class Colours
 
   protected Color text;
 
+  protected Color infoBackground;
+  protected Color infoBorder;
+
   protected static Colours instance;
 
   public Colours()
@@ -67,6 +70,9 @@ public class Colours
     differingBusTrace = new Color(20, 230, 180);
 
     text = new Color(0, 0, 0);
+
+    infoBackground = new Color(220, 220, 220);
+    infoBorder = new Color(128, 128, 128);
   }
 
   public static Colours getInstance()
@@ -174,6 +180,16 @@ public class Colours
   public Color getText()
   {
     return text;
+  }
+
+  public Color getInfoBackground()
+  {
+    return infoBackground;
+  }
+
+  public Color getInfoBorder()
+  {
+    return infoBorder;
   }
 }
 

@@ -14,7 +14,7 @@ public class PositivePowerViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new PositivePowerProperties("",
+                  new PositivePowerProperties(null,
                                               3.3f));
   }
 

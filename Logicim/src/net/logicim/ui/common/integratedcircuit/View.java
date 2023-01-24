@@ -39,6 +39,8 @@ public abstract class View
 
   public abstract String getName();
 
+  public abstract String getType();
+
   public abstract String getDescription();
 
   public abstract Int2D getPosition();

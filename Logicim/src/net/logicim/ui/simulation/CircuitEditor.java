@@ -14,11 +14,13 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.SelectionRectangle;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.*;
+import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
+import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
@@ -606,50 +608,15 @@ public class CircuitEditor
 
   public Set<PortView> connectNewTraces(Set<ConnectionView> connectionsNet)
   {
-    Set<PortView> connectedPorts = new LinkedHashSet<>();
-    Set<TraceView> connectedTraceViews = new LinkedHashSet<>();
-    int numberOfTraces = 0;
-    for (ConnectionView connection : connectionsNet)
-    {
-      List<View> connectedComponents = connection.getConnectedComponents();
-      for (View connectedComponent : connectedComponents)
-      {
-        Int2D position = connection.getGridPosition();
-        if (position != null)
-        {
-          if (connectedComponent instanceof ComponentView)
-          {
-            ComponentView<?> integratedCircuitView = (ComponentView<?>) connectedComponent;
-            PortView portView = integratedCircuitView.getPortInGrid(position);
-            if (portView.numberOfPorts() > numberOfTraces)
-            {
-              numberOfTraces = portView.numberOfPorts();
-            }
-            connectedPorts.add(portView);
-          }
-          else if (connectedComponent instanceof TraceView)
-          {
-            connectedTraceViews.add((TraceView) connectedComponent);
-          }
-        }
-      }
-    }
 
-    List<Trace> traces = new ArrayList<>(numberOfTraces);
-    for (int i = 0; i < numberOfTraces; i++)
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    for (ConnectionView connectionView : connectionsNet)
     {
-      traces.add(new Trace());
+      PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+      portTraceFinder.findAndConnectTraces(connectionView);
+      updatedPortViews.addAll(portTraceFinder.getPortViews());
     }
-
-    for (PortView connectedPortView : connectedPorts)
-    {
-      connectedPortView.connectTraces(traces, simulation);
-    }
-    for (TraceView connectedTraceView : connectedTraceViews)
-    {
-      connectedTraceView.connectTraces(traces);
-    }
-    return connectedPorts;
+    return updatedPortViews;
   }
 
   public TraceView mergeTrace(TraceView traceView, boolean forDelete)
@@ -954,17 +921,19 @@ public class CircuitEditor
   private Set<ConnectionView> getConnectionsOnLine(Line line)
   {
     Set<ConnectionView> notStraightConnections = new LinkedHashSet<>();
-    notStraightConnections.addAll(getIntegratedCircuitPortConnectionsOnLine(line));
+    notStraightConnections.addAll(getComponentPortConnectionsOnLine(line));
     notStraightConnections.addAll(getTraceConnectionsOnLine(line));
     return notStraightConnections;
   }
 
-  private Set<ConnectionView> getIntegratedCircuitPortConnectionsOnLine(Line line)
+  private Set<ConnectionView> getComponentPortConnectionsOnLine(Line line)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
+    StaticViewIterator staticViewIterator = staticViewIterator();
+    while (staticViewIterator.hasNext())
     {
-      List<PortView> portViews = integratedCircuitView.getPorts();
+      StaticView<?> staticView = staticViewIterator.next();
+      List<PortView> portViews = staticView.getPorts();
       for (PortView portView : portViews)
       {
         ConnectionView connection = portView.getConnection();
@@ -1113,8 +1082,8 @@ public class CircuitEditor
 
   public Set<PortView> connectComponentView(StaticView<?> componentView)
   {
-    List<PortView> ports = componentView.getPorts();
-    for (PortView portView : ports)
+    List<PortView> portViews = componentView.getPorts();
+    for (PortView portView : portViews)
     {
       Int2D portPosition = portView.getGridPosition();
       ConnectionView connectionView = getOrAddConnection(portPosition, componentView);
@@ -1122,7 +1091,7 @@ public class CircuitEditor
     }
 
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    for (PortView portView : ports)
+    for (PortView portView : portViews)
     {
       if (!updatedPortViews.contains(portView))
       {

@@ -205,7 +205,8 @@ public class SimulatorPanel
     simulatorEditor.addInputEvent(new KeyPressedEvent(keyEvent.getKeyCode(),
                                                       keyEvent.isControlDown(),
                                                       keyEvent.isAltDown(),
-                                                      keyEvent.isShiftDown()));
+                                                      keyEvent.isShiftDown(),
+                                                      keyEvent.isMetaDown()));
   }
 
   public void keyReleased(KeyEvent keyEvent)
@@ -213,7 +214,8 @@ public class SimulatorPanel
     simulatorEditor.addInputEvent(new KeyReleasedEvent(keyEvent.getKeyCode(),
                                                        keyEvent.isControlDown(),
                                                        keyEvent.isAltDown(),
-                                                       keyEvent.isShiftDown()));
+                                                       keyEvent.isShiftDown(),
+                                                       keyEvent.isMetaDown()));
   }
 
   public void saveSimulation()

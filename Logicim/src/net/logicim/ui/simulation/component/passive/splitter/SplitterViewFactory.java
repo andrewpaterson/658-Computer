@@ -20,7 +20,7 @@ public class SplitterViewFactory
     return new SplitterView(circuitEditor,
                             position,
                             rotation,
-                            new SplitterProperties("",
+                            new SplitterProperties(null,
                                                    2,
                                                    2,
                                                    2,

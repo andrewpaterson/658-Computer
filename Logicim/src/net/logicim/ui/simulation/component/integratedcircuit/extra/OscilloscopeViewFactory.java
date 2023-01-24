@@ -21,7 +21,7 @@ public class OscilloscopeViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new OscilloscopeProperties("",
+                  new OscilloscopeProperties(null,
                                              DefaultFamily.get(),
                                              2,
                                              32,

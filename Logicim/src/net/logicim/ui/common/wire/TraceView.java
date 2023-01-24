@@ -292,6 +292,12 @@ public class TraceView
   @Override
   public String getName()
   {
+    return null;
+  }
+
+  @Override
+  public String getType()
+  {
     return "Trace";
   }
 

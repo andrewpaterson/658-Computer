@@ -15,7 +15,7 @@ public class LabelViewFactory
     return new LabelView(circuitEditor,
                          position,
                          rotation,
-                         new LabelProperties("Hello",
+                         new LabelProperties("  ",
                                              HorizontalAlignment.LEFT,
                                              false,
                                              true,

@@ -612,7 +612,7 @@ public class CircuitEditor
     return updatedPortViews;
   }
 
-  public TraceView mergeTrace(TraceView traceView, boolean forDelete)
+  public TraceView mergeTrace(TraceView traceView)
   {
     Rotation direction = traceView.getDirection();
     ConnectionView startConnection = traceView.getStartConnection();
@@ -654,14 +654,7 @@ public class CircuitEditor
 
       if (isValidTrace(smallest, largest))
       {
-        if (!forDelete)
-        {
-          return new TraceView(this, smallest, largest);
-        }
-        else
-        {
-          return null;
-        }
+        return new TraceView(this, smallest, largest);
       }
       else
       {
@@ -800,7 +793,7 @@ public class CircuitEditor
 
     if ((traceView1 != null) && (traceView2 != null))
     {
-      return mergeTrace(traceView1, true);
+      return mergeTrace(traceView1);
     }
     return null;
   }
@@ -839,7 +832,7 @@ public class CircuitEditor
     {
       for (TraceView traceView : editedTraceViews)
       {
-        TraceView mergedTrace = mergeTrace(traceView, false);
+        TraceView mergedTrace = mergeTrace(traceView);
         if (!mergedTrace.isRemoved())
         {
           mergedTraces.add(mergedTrace);

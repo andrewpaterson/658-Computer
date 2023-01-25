@@ -371,5 +371,11 @@ public class TraceView
   {
     return traces;
   }
+
+  public boolean hasOverlap(Int2D start, Int2D end)
+  {
+    LineOverlap overlap = getOverlap(new Line(start, end));
+    return overlap != LineOverlap.None;
+  }
 }
 

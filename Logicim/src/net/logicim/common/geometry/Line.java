@@ -269,5 +269,11 @@ public class Line
     boundBoxPosition.set(x1, y1);
     boundBoxDimension.set(x2 - x1, y2 - y1);
   }
+
+  @Override
+  public Line clone()
+  {
+    return new Line(start, end);
+  }
 }
 

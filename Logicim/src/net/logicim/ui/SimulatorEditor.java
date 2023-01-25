@@ -348,19 +348,14 @@ public class SimulatorEditor
       circuitEditor.startMoveComponents(moveComponents.getComponents());
     }
 
-    List<View> components = moveComponents.getComponents();
-    for (View view : components)
-    {
-      Int2D position = moveComponents.getPosition(view);
-      view.setPosition(position.x, position.y);
-    }
+    moveComponents.moveComponents();
   }
 
   protected void doneMoveComponents()
   {
     if (moveComponents.hadDiff())
     {
-      circuitEditor.doneMoveComponents(moveComponents.getComponents());
+      circuitEditor.doneMoveComponents(moveComponents.getComponents(), moveComponents.getSelectedComponents());
       if (moveComponents.hasDiff())
       {
         pushUndo();
@@ -368,8 +363,11 @@ public class SimulatorEditor
     }
     else
     {
-      startSelection(mousePosition.get().x, mousePosition.get().y);
-      doneSelection(mousePosition.get().x, mousePosition.get().y);
+      if (!moveComponents.getSelectedComponents().isEmpty())
+      {
+        startSelection(mousePosition.get().x, mousePosition.get().y);
+        doneSelection(mousePosition.get().x, mousePosition.get().y);
+      }
     }
     moveComponents = null;
 
@@ -632,7 +630,7 @@ public class SimulatorEditor
     circuitEditor.runSimultaneous();
   }
 
-  public void placementRotateRight()
+  public void rotateRight()
   {
     if (placementView != null)
     {
@@ -643,9 +641,43 @@ public class SimulatorEditor
         creationRotation = rotation;
       }
     }
+    else
+    {
+      rotateMoveComponents(true);
+    }
   }
 
-  public void placementRotateLeft()
+  protected void rotateMoveComponents(boolean right)
+  {
+    boolean moveComponentsNull = moveComponents == null;
+    if (moveComponentsNull)
+    {
+      if (hoverComponentView != null)
+      {
+        moveComponents = new MoveComponents(viewport, hoverComponentView);
+      }
+      else
+      {
+        List<View> selection = circuitEditor.getSelection();
+        if (!selection.isEmpty())
+        {
+          moveComponents = new MoveComponents(viewport, mousePosition.get().x, mousePosition.get().y, selection);
+        }
+      }
+    }
+
+    if (moveComponents != null)
+    {
+      moveComponents.rotate(right);
+    }
+
+    if (moveComponentsNull)
+    {
+      doneMoveComponents();
+    }
+  }
+
+  public void rotateLeft()
   {
     if (placementView != null)
     {
@@ -655,6 +687,10 @@ public class SimulatorEditor
       {
         creationRotation = rotation;
       }
+    }
+    else
+    {
+      rotateMoveComponents(false);
     }
   }
 

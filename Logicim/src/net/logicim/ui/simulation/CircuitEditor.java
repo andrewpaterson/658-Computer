@@ -1153,7 +1153,7 @@ public class CircuitEditor
     selection = getSelection(selectionRectangle.getStart(), selectionRectangle.getEnd());
   }
 
-  public void doneMoveComponents(List<View> views)
+  public void doneMoveComponents(List<View> views, Set<StaticView<?>> selectedComponents)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
 
@@ -1177,7 +1177,10 @@ public class CircuitEditor
         StaticView<?> componentView = (StaticView<?>) view;
         Set<PortView> portViews = connectComponentView(componentView);
         updatedPortViews.addAll(portViews);
-        selection.add(componentView);
+        if (selectedComponents.contains(view))
+        {
+          selection.add(componentView);
+        }
       }
     }
 
@@ -1222,7 +1225,7 @@ public class CircuitEditor
     List<View> newSelection = new ArrayList<>();
     for (View selected : selection)
     {
-      if (!(selected instanceof TraceView) || ((TraceView)selected).isRemoved())
+      if (!(selected instanceof TraceView) || !(((TraceView) selected).isRemoved()))
       {
         newSelection.add(selected);
       }

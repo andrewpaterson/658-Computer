@@ -53,14 +53,18 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public void rotateRight()
   {
     rotation = rotation.rotateRight();
-
     invalidateCache();
   }
 
   public void rotateLeft()
   {
     rotation = rotation.rotateLeft();
+    invalidateCache();
+  }
 
+  public void setRotation(Rotation rotation)
+  {
+    this.rotation = rotation;
     invalidateCache();
   }
 
@@ -238,18 +242,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     boundingBox.grow(0.5f);
   }
 
-  public void setRotation(Rotation rotation)
-  {
-    this.rotation = rotation;
-    invalidateCache();
-  }
-
-  public void setBoundingBox(Float2D topLeft, Float2D bottomRight)
-  {
-    boundingBox.setTopLeft(topLeft);
-    boundingBox.setBottomRight(bottomRight);
-  }
-
   public void createConnections(CircuitEditor circuitEditor)
   {
     List<PortView> portViews = getPorts();
@@ -280,5 +272,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract void simulationStarted(Simulation simulation);
 
   public abstract Component getComponent();
+
+  public abstract void disable();
 }
 

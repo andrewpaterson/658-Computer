@@ -205,5 +205,15 @@ public enum Rotation
   {
     return this == Cannot;
   }
+
+  public Rotation rotateRight(int rightRotations)
+  {
+    Rotation rotation = this;
+    for (int i = 0; i < rightRotations; i++)
+    {
+      rotation = rotation.rotateRight();
+    }
+    return rotation;
+  }
 }
 

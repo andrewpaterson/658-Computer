@@ -149,11 +149,6 @@ public class TraceView
   }
 
   @Override
-  public void disable()
-  {
-  }
-
-  @Override
   public void paintSelected(Graphics2D graphics, Viewport viewport)
   {
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
@@ -376,6 +371,11 @@ public class TraceView
   {
     LineOverlap overlap = getOverlap(new Line(start, end));
     return overlap != LineOverlap.None;
+  }
+
+  public void setLine(Int2D start, Int2D end)
+  {
+    line.set(start, end);
   }
 }
 

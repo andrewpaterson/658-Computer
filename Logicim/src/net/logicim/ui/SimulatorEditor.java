@@ -335,7 +335,8 @@ public class SimulatorEditor
 
   protected void startMoveComponents(int mouseX, int mouseY)
   {
-    moveComponents = new MoveComponents(viewport, mouseX, mouseY, circuitEditor.getSelection());
+    moveComponents = new MoveComponents(circuitEditor.getSelection(), new Int2D(viewport.transformScreenToGridX(mouseX),
+                                                                                viewport.transformScreenToGridY(mouseY)));
 
     clearHover();
   }
@@ -345,7 +346,7 @@ public class SimulatorEditor
     moveComponents.calculateDiff(viewport, mouseX, mouseY);
     if (moveComponents.hasMoved())
     {
-      circuitEditor.startMoveComponents(moveComponents.getComponents());
+      circuitEditor.startMoveComponents(moveComponents.getStaticViews(), moveComponents.getTraces());
     }
 
     moveComponents.moveComponents();
@@ -355,7 +356,7 @@ public class SimulatorEditor
   {
     if (moveComponents.hadDiff())
     {
-      circuitEditor.doneMoveComponents(moveComponents.getComponents(), moveComponents.getSelectedComponents());
+      circuitEditor.doneMoveComponents(moveComponents.getStaticViews(), moveComponents.getTraces(), moveComponents.getSelectedViews());
       if (moveComponents.hasDiff())
       {
         pushUndo();
@@ -363,7 +364,7 @@ public class SimulatorEditor
     }
     else
     {
-      if (!moveComponents.getSelectedComponents().isEmpty())
+      if (!moveComponents.getSelectedViews().isEmpty())
       {
         startSelection(mousePosition.get().x, mousePosition.get().y);
         doneSelection(mousePosition.get().x, mousePosition.get().y);
@@ -654,14 +655,15 @@ public class SimulatorEditor
     {
       if (hoverComponentView != null)
       {
-        moveComponents = new MoveComponents(viewport, hoverComponentView);
+        moveComponents = new MoveComponents(hoverComponentView);
       }
       else
       {
         List<View> selection = circuitEditor.getSelection();
         if (!selection.isEmpty())
         {
-          moveComponents = new MoveComponents(viewport, mousePosition.get().x, mousePosition.get().y, selection);
+          moveComponents = new MoveComponents(selection, new Int2D(viewport.transformScreenToGridX(mousePosition.get().x),
+                                                                   viewport.transformScreenToGridY(mousePosition.get().y)));
         }
       }
     }
@@ -669,6 +671,7 @@ public class SimulatorEditor
     if (moveComponents != null)
     {
       moveComponents.rotate(right);
+      moveComponents.moveComponents();
     }
 
     if (moveComponentsNull)

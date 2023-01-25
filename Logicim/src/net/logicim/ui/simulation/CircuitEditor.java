@@ -1113,36 +1113,20 @@ public class CircuitEditor
     validateConsistency();
   }
 
-  public void startMoveComponents(List<View> views)
+  public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
-    for (View view : views)
+    for (StaticView<?> staticView : staticViews)
     {
-      if (view != null)
-      {
-        view.disable();
-
-        if (view instanceof StaticView)
-        {
-          StaticView<?> componentView = (StaticView<?>) view;
-          List<ConnectionView> connectionViews = disconnectComponentView(componentView);
-          connectConnections(connectionViews);
-        }
-        else if (view instanceof TraceView)
-        {
-          TraceView traceView = (TraceView) view;
-          disconnectTraceView(traceView);
-          traceView.removed();
-        }
-        else
-        {
-          throw new SimulatorException("Cannot move view of class [%s].", view.getClass().getSimpleName());
-        }
-      }
-      else
-      {
-        throw new SimulatorException("Cannot move null view.");
-      }
+      staticView.disable();
+      List<ConnectionView> connectionViews = disconnectComponentView(staticView);
+      connectConnections(connectionViews);
     }
+    for (TraceView traceView : traceViews)
+    {
+      disconnectTraceView(traceView);
+      traceView.removed();
+    }
+
     validateConsistency();
 
     clearSelection();
@@ -1153,34 +1137,26 @@ public class CircuitEditor
     selection = getSelection(selectionRectangle.getStart(), selectionRectangle.getEnd());
   }
 
-  public void doneMoveComponents(List<View> views, Set<StaticView<?>> selectedComponents)
+  public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
 
     List<Line> lines = new ArrayList<>();
 
-    for (View view : views)
+    for (TraceView traceView : traceViews)
     {
-      if (view instanceof TraceView)
-      {
-        TraceView traceView = (TraceView) view;
-        removeTraceView(traceView);
-        lines.add(traceView.getLine());
-      }
+      removeTraceView(traceView);
+      lines.add(traceView.getLine());
     }
 
     List<View> selection = new ArrayList<>();
-    for (View view : views)
+    for (StaticView<?> staticView : staticViews)
     {
-      if ((view instanceof StaticView))
+      Set<PortView> portViews = connectComponentView(staticView);
+      updatedPortViews.addAll(portViews);
+      if (selectedViews.contains(staticView))
       {
-        StaticView<?> componentView = (StaticView<?>) view;
-        Set<PortView> portViews = connectComponentView(componentView);
-        updatedPortViews.addAll(portViews);
-        if (selectedComponents.contains(view))
-        {
-          selection.add(componentView);
-        }
+        selection.add(staticView);
       }
     }
 

@@ -47,8 +47,6 @@ public abstract class View
 
   public abstract void enable(Simulation simulation);
 
-  public abstract void disable();
-
   public abstract void setPosition(int x, int y);
 }
 

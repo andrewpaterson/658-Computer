@@ -21,10 +21,10 @@ public class Line
     this.start = start.clone();
     this.end = end.clone();
 
-    this.direction = Rotation.calculateDirection(start.x,
-                                                 start.y,
-                                                 end.x,
-                                                 end.y);
+    this.direction = Rotation.calculateDirection(this.start.x,
+                                                 this.start.y,
+                                                 this.end.x,
+                                                 this.end.y);
   }
 
   public static Line createLine(Int2D start, Int2D end)
@@ -268,6 +268,17 @@ public class Line
     int y2 = getMaximumY();
     boundBoxPosition.set(x1, y1);
     boundBoxDimension.set(x2 - x1, y2 - y1);
+  }
+
+  public void set(Int2D start, Int2D end)
+  {
+    this.start.set(start);
+    this.end.set(end);
+
+    this.direction = Rotation.calculateDirection(this.start.x,
+                                                 this.start.y,
+                                                 this.end.x,
+                                                 this.end.y);
   }
 
   @Override

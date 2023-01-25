@@ -12,6 +12,7 @@ import net.logicim.ui.common.wire.TraceView;
 import java.util.*;
 
 import static net.logicim.ui.common.Rotation.Cannot;
+import static net.logicim.ui.common.Rotation.North;
 
 public class MoveComponents
 {
@@ -28,10 +29,9 @@ public class MoveComponents
   protected Rotation rotation;
   protected int rightRotations;
 
-  public MoveComponents(Viewport viewport, StaticView<?> componentView)
+  public MoveComponents(StaticView<?> componentView)
   {
-    start = new Int2D(viewport.transformScreenToGridX(componentView.getPosition().x),
-                      viewport.transformScreenToGridY(componentView.getPosition().y));
+    start = componentView.getPosition().clone();
     ArrayList<View> views = new ArrayList<>();
     views.add(componentView);
     end = new Int2D(start);
@@ -61,11 +61,10 @@ public class MoveComponents
     }
   }
 
-  public MoveComponents(Viewport viewport, int mouseX, int mouseY, List<View> views)
+  public MoveComponents(List<View> views, Int2D start)
   {
-    start = new Int2D(viewport.transformScreenToGridX(mouseX),
-                      viewport.transformScreenToGridY(mouseY));
-    end = new Int2D(start);
+    this.start = start;
+    end = new Int2D(this.start);
     diff = new Int2D();
     hadDiff = false;
     previousHadDiff = false;
@@ -147,19 +146,24 @@ public class MoveComponents
     }
   }
 
-  public List<View> getComponents()
+  public List<StaticView<?>> getStaticViews()
   {
     return new ArrayList<>(componentStartPositions.keySet());
   }
 
-  public Set<StaticView<?>> getSelectedComponents()
+  public Set<StaticView<?>> getSelectedViews()
   {
     return selectedComponents;
   }
 
+  public List<TraceView> getTraces()
+  {
+    return new ArrayList<>(traces.keySet());
+  }
+
   public boolean hasDiff()
   {
-    return !diff.isZero();
+    return !diff.isZero() && rightRotations != 0;
   }
 
   public boolean hadDiff()
@@ -196,32 +200,57 @@ public class MoveComponents
 
   public void moveComponents()
   {
-    List<View> components = getComponents();
-    for (View view : components)
+    for (Map.Entry<StaticView<?>, Int2D> staticViewInt2DEntry : componentStartPositions.entrySet())
     {
-      if (view instanceof StaticView)
+      StaticView<?> staticView = staticViewInt2DEntry.getKey();
+      Int2D startPosition = staticViewInt2DEntry.getValue();
+      Rotation startRotation = componentStartRotations.get(staticView);
+
+      if ((startPosition != null) && (startRotation != null))
       {
-        StaticView<?> staticView = (StaticView<?>) view;
-        Int2D startPosition = componentStartPositions.get(view);
-        Rotation startRotation = componentStartRotations.get(view);
+        Rotation rotation = North.rotateRight(rightRotations);
 
-        if ((startPosition != null) && (startRotation != null))
-        {
-          Int2D position = new Int2D(startPosition);
-
-          position.add(diff);
-          staticView.setPosition(position.x, position.y);
-          staticView.setRotation(startRotation);
-        }
-        else
-        {
-          throw new SimulatorException("Cannot get position for %s [%s].", view.getClass().getSimpleName(), view.getDescription());
-        }
-
+        Int2D position = new Int2D(startPosition);
+        position.subtract(start);
+        rotation.transform(position);
+        position.add(start);
+        position.add(diff);
+        staticView.setPosition(position.x, position.y);
+        staticView.setRotation(startRotation.rotateRight(rightRotations));
       }
       else
       {
+        throw new SimulatorException("Cannot get position for %s [%s].", staticView.getClass().getSimpleName(), staticView.getDescription());
+      }
+    }
 
+    for (Map.Entry<TraceView, Line> traceViewLineEntry : traces.entrySet())
+    {
+      TraceView traceView = traceViewLineEntry.getKey();
+      Line line = traceViewLineEntry.getValue();
+      if (line != null)
+      {
+        Int2D startPosition = line.getStart();
+        Int2D position = new Int2D(startPosition);
+        position.subtract(start);
+        rotation.transform(position);
+        position.add(start);
+        position.add(diff);
+        startPosition = position;
+
+        Int2D endPosition = line.getEnd();
+        position = new Int2D(endPosition);
+        position.subtract(start);
+        rotation.transform(position);
+        position.add(start);
+        position.add(diff);
+        endPosition = position;
+
+        traceView.setLine(startPosition, endPosition);
+      }
+      else
+      {
+        throw new SimulatorException("Cannot get position for %s [%s].", traceView.getClass().getSimpleName(), traceView.getDescription());
       }
     }
   }

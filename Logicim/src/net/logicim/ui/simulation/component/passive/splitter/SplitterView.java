@@ -98,12 +98,12 @@ public class SplitterView
 
   private void createGraphics()
   {
-    this.lineViews = createLineViews(0,
-                                     properties.fanOut,
+    this.lineViews = createLineViews(
+        properties.fanOut,
                                      properties.gridSpacing,
                                      properties.appearance);
 
-    rectangleView = createRectangleView(0, properties.fanOut);
+    rectangleView = createRectangleView(properties.fanOut);
 
     this.textViews = createTextViews();
   }
@@ -210,12 +210,12 @@ public class SplitterView
     }
   }
 
-  private List<LineView> createLineViews(int centerX, int fanOut, int gridSpacing, SplitterAppearance appearance)
+  private List<LineView> createLineViews(int fanOut, int gridSpacing, SplitterAppearance appearance)
   {
     List<LineView> lineViews = new ArrayList<>();
 
     Float2D startPosition = createStartPosition();
-    Float2D endPosition = createEndPosition(centerX, fanOut, gridSpacing, startPosition, appearance);
+    Float2D endPosition = createEndPosition(fanOut, gridSpacing, startPosition, appearance);
     LineView startLineView = new LineView(this, startPosition, endPosition, 4);
     lineViews.add(startLineView);
 
@@ -231,7 +231,7 @@ public class SplitterView
     return lineViews;
   }
 
-  private Float2D createEndPosition(int centerX, int fanOut, int gridSpacing, Float2D startPosition, SplitterAppearance appearance)
+  private Float2D createEndPosition(int fanOut, int gridSpacing, Float2D startPosition, SplitterAppearance appearance)
   {
     Float2D endPosition;
     if (appearance == SplitterAppearance.LEFT_HANDED)
@@ -271,16 +271,16 @@ public class SplitterView
       endPosition = createEndPosition(0);
       endPosition.y = startPosition.y;
     }
-    endPosition.x = centerX;
+    endPosition.x = 0;
     return endPosition;
   }
 
-  private RectangleView createRectangleView(int centerX, int fanOut)
+  private RectangleView createRectangleView(int fanOut)
   {
     Float2D p1 = createEndPosition(0);
-    p1.x = centerX - 0.1f;
+    p1.x = 0 - 0.1f;
     Float2D p2 = createEndPosition(fanOut - 1);
-    p2.x = centerX + 0.1f;
+    p2.x = 0 + 0.1f;
     return new RectangleView(this, p1, p2, true, true);
   }
 
@@ -445,14 +445,5 @@ public class SplitterView
     updateTextViews();
   }
 
-  public List<PortView> getEndPortViews()
-  {
-    return endPortViews;
-  }
-
-  public PortView getStartPortView()
-  {
-    return startPortView;
-  }
 }
 

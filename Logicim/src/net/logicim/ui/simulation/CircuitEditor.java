@@ -1117,26 +1117,30 @@ public class CircuitEditor
   {
     for (View view : views)
     {
-      if (view instanceof StaticView)
+      if (view != null)
       {
-        StaticView<?> componentView = (StaticView<?>) view;
-        List<ConnectionView> connectionViews = disconnectComponentView(componentView);
+        view.disable();
 
-        connectConnections(connectionViews);
-      }
-      else if (view instanceof TraceView)
-      {
-        TraceView traceView = (TraceView) view;
-        disconnectTraceView(traceView);
-        traceView.removed();
-      }
-      else if (view == null)
-      {
-        throw new SimulatorException("Cannot move null view.");
+        if (view instanceof StaticView)
+        {
+          StaticView<?> componentView = (StaticView<?>) view;
+          List<ConnectionView> connectionViews = disconnectComponentView(componentView);
+          connectConnections(connectionViews);
+        }
+        else if (view instanceof TraceView)
+        {
+          TraceView traceView = (TraceView) view;
+          disconnectTraceView(traceView);
+          traceView.removed();
+        }
+        else
+        {
+          throw new SimulatorException("Cannot move view of class [%s].", view.getClass().getSimpleName());
+        }
       }
       else
       {
-        throw new SimulatorException("Cannot move view of class [%s].", view.getClass().getSimpleName());
+        throw new SimulatorException("Cannot move null view.");
       }
     }
     validateConsistency();
@@ -1180,10 +1184,14 @@ public class CircuitEditor
     Set<TraceView> newTraces = new LinkedHashSet<>();
     for (Line line : lines)
     {
-      Set<TraceView> createdTraces = createTraceViews(line);
-      newTraces.addAll(createdTraces);
-      selection.addAll(createdTraces);
+      Set<TraceView> localNewTraces = createTraceViews(line);
+      newTraces.addAll(localNewTraces);
+      selection.addAll(localNewTraces);
     }
+
+    newTraces = findNonRemovedTraceViews(newTraces);
+    selection = findNonRemovedViews(selection);
+
     finaliseCreatedTraces(newTraces);
 
     fireConnectionEvents(updatedPortViews);
@@ -1207,6 +1215,32 @@ public class CircuitEditor
     }
 
     this.selection = cleanSelection;
+  }
+
+  protected List<View> findNonRemovedViews(List<View> selection)
+  {
+    List<View> newSelection = new ArrayList<>();
+    for (View selected : selection)
+    {
+      if (!(selected instanceof TraceView) || ((TraceView)selected).isRemoved())
+      {
+        newSelection.add(selected);
+      }
+    }
+    return newSelection;
+  }
+
+  protected Set<TraceView> findNonRemovedTraceViews(Set<TraceView> newTraces)
+  {
+    Set<TraceView> correctedNewTraceViews = new LinkedHashSet<>(newTraces.size());
+    for (TraceView newTrace : newTraces)
+    {
+      if (!newTrace.isRemoved())
+      {
+        correctedNewTraceViews.add(newTrace);
+      }
+    }
+    return correctedNewTraceViews;
   }
 
   public List<View> getSelection()

@@ -15,6 +15,8 @@ public class MoveComponents
   protected Int2D start;
   protected Int2D end;
   protected Int2D diff;
+  protected boolean hadDiff;
+  protected boolean previousHadDiff;
 
   protected Map<View, Int2D> componentStartPositions;
 
@@ -23,14 +25,14 @@ public class MoveComponents
     start = new Int2D(viewport.transformScreenToGridX(mouseX),
                       viewport.transformScreenToGridY(mouseY));
     end = new Int2D(start);
-    diff = new Int2D(end);
-    diff.subtract(start);
+    diff = new Int2D();
+    hadDiff = false;
+    previousHadDiff = false;
 
     componentStartPositions = new LinkedHashMap<>(selection.size());
     for (View view : selection)
     {
       componentStartPositions.put(view, new Int2D(view.getPosition()));
-      view.disable();
     }
   }
 
@@ -40,6 +42,12 @@ public class MoveComponents
             viewport.transformScreenToGridY(mouseY));
     diff.set(end);
     diff.subtract(start);
+
+    previousHadDiff = hadDiff;
+    if (!diff.isZero())
+    {
+      hadDiff = true;
+    }
   }
 
   public Int2D getPosition(View view)
@@ -65,6 +73,16 @@ public class MoveComponents
   public boolean hasDiff()
   {
     return !diff.isZero();
+  }
+
+  public boolean hadDiff()
+  {
+    return hadDiff;
+  }
+
+  public boolean hasMoved()
+  {
+    return !previousHadDiff && hadDiff;
   }
 }
 

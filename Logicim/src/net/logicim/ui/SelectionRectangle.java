@@ -38,10 +38,10 @@ public class SelectionRectangle
     }
   }
 
-  public void start(Viewport viewport, int x, int y)
+  public void start(Viewport viewport, int screenX, int screenY)
   {
-    start = new Float2D(viewport.transformScreenToGridX((float) x),
-                        viewport.transformScreenToGridY((float) y));
+    start = new Float2D(viewport.transformScreenToGridX((float) screenX),
+                        viewport.transformScreenToGridY((float) screenY));
     end = new Float2D(start);
   }
 

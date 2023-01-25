@@ -336,7 +336,6 @@ public class SimulatorEditor
   protected void startMoveComponents(int mouseX, int mouseY)
   {
     moveComponents = new MoveComponents(viewport, mouseX, mouseY, circuitEditor.getSelection());
-    circuitEditor.startMoveComponents(moveComponents.getComponents());
 
     clearHover();
   }
@@ -344,6 +343,11 @@ public class SimulatorEditor
   protected void moveComponents(int mouseX, int mouseY)
   {
     moveComponents.calculateDiff(viewport, mouseX, mouseY);
+    if (moveComponents.hasMoved())
+    {
+      circuitEditor.startMoveComponents(moveComponents.getComponents());
+    }
+
     List<View> components = moveComponents.getComponents();
     for (View view : components)
     {
@@ -354,11 +358,18 @@ public class SimulatorEditor
 
   protected void doneMoveComponents()
   {
-    circuitEditor.doneMoveComponents(moveComponents.getComponents());
-
-    if (moveComponents.hasDiff())
+    if (moveComponents.hadDiff())
     {
-      pushUndo();
+      circuitEditor.doneMoveComponents(moveComponents.getComponents());
+      if (moveComponents.hasDiff())
+      {
+        pushUndo();
+      }
+    }
+    else
+    {
+      startSelection(mousePosition.get().x, mousePosition.get().y);
+      doneSelection(mousePosition.get().x, mousePosition.get().y);
     }
     moveComponents = null;
 

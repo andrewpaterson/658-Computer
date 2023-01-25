@@ -144,6 +144,8 @@ public class SimulatorPanel
   public void handleException(RuntimeException e)
   {
     simulatorEditor.running = false;
+    e.printStackTrace();
+
     simulatorEditor.undo();
 
     SwingUtilities.invokeLater(new Runnable()

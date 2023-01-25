@@ -17,10 +17,7 @@ import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.SelectionRectangle;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
-import net.logicim.ui.common.integratedcircuit.PassiveView;
-import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
@@ -290,29 +287,24 @@ public class CircuitEditor
     for (ConnectionView connection : connectionsNet)
     {
       List<View> connectedComponents = connection.getConnectedComponents();
-      for (View connectedComponent : connectedComponents)
+      for (View view : connectedComponents)
       {
-        if (connectedComponent instanceof TraceView)
+        if (view instanceof WireView)
         {
-          ((TraceView) connectedComponent).disconnectTraces();
+          ((WireView) view).disconnectTraces();
         }
-        else if (connectedComponent instanceof StaticView)
+        else if (view instanceof ComponentView)
         {
-          StaticView<?> integratedCircuitView = (StaticView<?>) connectedComponent;
-          Int2D position = connection.getGridPosition();
-          if (position != null)
-          {
-            PortView portView = integratedCircuitView.getPortInGrid(position);
-            portView.disconnect(simulation);
-          }
+          ComponentView<?> componentView = (ComponentView<?>) view;
+          componentView.disconnect(simulation, connection);
         }
-        else if (connectedComponent == null)
+        else if (view == null)
         {
           throw new SimulatorException("Cannot disconnect null view.");
         }
         else
         {
-          throw new SimulatorException("Cannot disconnect view of class [%s].", connectedComponent.getClass().getSimpleName());
+          throw new SimulatorException("Cannot disconnect view of class [%s].", view.getClass().getSimpleName());
         }
       }
     }

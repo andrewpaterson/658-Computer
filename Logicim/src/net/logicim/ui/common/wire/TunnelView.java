@@ -267,6 +267,10 @@ public class TunnelView
   @Override
   public void propertyChanged()
   {
+    if (properties.name.trim().isEmpty())
+    {
+      properties.name = "  ";
+    }
   }
 
   @Override

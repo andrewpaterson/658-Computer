@@ -12,15 +12,27 @@ public class TextPropertyEditor
 
   public TextPropertyEditor(PropertiesPanel propertiesPanel, String name, String text)
   {
-    super(text);
+    super(calculateText(text));
     setName(name);
     this.propertiesPanel = propertiesPanel;
+  }
+
+  protected static String calculateText(String text)
+  {
+    if (text != null)
+    {
+      return text.trim();
+    }
+    else
+    {
+      return "";
+    }
   }
 
   @Override
   public String getValue()
   {
-    return getText();
+    return getText().trim();
   }
 
   @Override

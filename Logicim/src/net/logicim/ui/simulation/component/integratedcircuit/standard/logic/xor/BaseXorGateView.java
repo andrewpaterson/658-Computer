@@ -67,8 +67,8 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
   {
     super.updateBoundingBoxFromShapes(boundingBox);
-    this.boundingBox.include(1.5f, 0f);
-    this.boundingBox.include(-1.5f, 0f);
+    boundingBox.include(1.5f, 0f);
+    boundingBox.include(-1.5f, 0f);
   }
 
   @Override

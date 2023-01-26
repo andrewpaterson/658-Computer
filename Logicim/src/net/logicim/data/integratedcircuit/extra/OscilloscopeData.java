@@ -7,8 +7,8 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 

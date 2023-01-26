@@ -233,7 +233,7 @@ public class MoveComponents
       if (line != null)
       {
         Rotation rotation = North.rotateRight(rightRotations);
-        
+
         Int2D startPosition = line.getStart();
         Int2D position = new Int2D(startPosition);
         position.subtract(start);

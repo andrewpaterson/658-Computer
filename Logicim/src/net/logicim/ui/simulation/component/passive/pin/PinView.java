@@ -5,10 +5,10 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.passive.wire.Pin;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 public class PinView
     extends PassiveView<Pin, PinProperties>

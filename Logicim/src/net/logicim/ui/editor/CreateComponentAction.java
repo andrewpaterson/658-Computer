@@ -1,7 +1,6 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 

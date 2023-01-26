@@ -49,7 +49,7 @@ public class Fonts
     return font;
   }
 
-  public Font getPlainFont(float rotation,float size)
+  public Font getPlainFont(float rotation, float size)
   {
     Map<Float, Font> rotationMap = plain.get(rotation);
     if (rotationMap == null)

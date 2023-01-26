@@ -5,7 +5,6 @@ import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class SplitterProperties
     extends ComponentProperties

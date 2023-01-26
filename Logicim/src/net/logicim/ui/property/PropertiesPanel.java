@@ -1,7 +1,5 @@
 package net.logicim.ui.property;
 
-import net.logicim.ui.components.form.Form;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

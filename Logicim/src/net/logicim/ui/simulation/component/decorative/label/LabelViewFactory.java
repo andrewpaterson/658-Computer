@@ -1,8 +1,8 @@
 package net.logicim.ui.simulation.component.decorative.label;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.ui.common.Rotation;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 

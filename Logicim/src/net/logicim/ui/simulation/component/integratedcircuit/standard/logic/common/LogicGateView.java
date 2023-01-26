@@ -2,9 +2,9 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.com
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;

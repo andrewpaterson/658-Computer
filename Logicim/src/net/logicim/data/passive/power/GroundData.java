@@ -4,8 +4,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.passive.power.GroundProperties;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
 

@@ -2,7 +2,6 @@ package net.logicim.ui.property;
 
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.components.typeeditor.EnumPropertyEditor;
-import net.logicim.ui.property.PropertiesPanel;
 
 import java.util.HashSet;
 import java.util.Set;

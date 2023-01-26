@@ -212,7 +212,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public abstract Component getComponent();
 
-    public void disconnect(Simulation simulation, ConnectionView connection)
+  public void disconnect(Simulation simulation, ConnectionView connection)
   {
     for (PortView portView : ports)
     {

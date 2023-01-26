@@ -30,8 +30,8 @@ public class KeyReleasedEvent
   {
     simulatorEditor.keyReleased(
         controlDown,
-                                altDown,
-                                shiftDown
+        altDown,
+        shiftDown
     );
   }
 }

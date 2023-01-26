@@ -4,9 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.passive.pin.PinProperties;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 

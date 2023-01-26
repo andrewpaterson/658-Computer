@@ -2,13 +2,13 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.line.LineView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 

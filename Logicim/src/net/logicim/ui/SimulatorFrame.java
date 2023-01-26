@@ -88,7 +88,7 @@ public class SimulatorFrame
   @Override
   public void keyPressed(KeyEvent e)
   {
-    simulatorPanel. keyPressed(e);
+    simulatorPanel.keyPressed(e);
   }
 
   @Override
@@ -96,7 +96,6 @@ public class SimulatorFrame
   {
     simulatorPanel.keyReleased(e);
   }
-
 
   @Override
   public void windowOpened(WindowEvent e)

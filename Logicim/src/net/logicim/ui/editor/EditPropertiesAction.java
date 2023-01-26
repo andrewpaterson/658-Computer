@@ -5,8 +5,6 @@ import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.EditPropertiesDialogHelper;
 
-import javax.swing.*;
-
 public class EditPropertiesAction
     extends SimulatorEditorAction
 {

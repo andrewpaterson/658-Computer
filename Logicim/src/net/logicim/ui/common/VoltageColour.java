@@ -2,8 +2,8 @@ package net.logicim.ui.common;
 
 import net.logicim.domain.common.port.OutputPortHelper;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
+import net.logicim.domain.common.wire.Trace;
 
 import java.awt.*;
 import java.util.List;

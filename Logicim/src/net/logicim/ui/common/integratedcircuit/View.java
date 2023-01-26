@@ -6,7 +6,6 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
-import java.util.List;
 
 public abstract class View
 {

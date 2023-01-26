@@ -7,11 +7,14 @@ import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
-import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.common.*;
+import net.logicim.ui.common.Colours;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.VoltageColour;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 import net.logicim.ui.shape.rectangle.RectangleView;
+import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.awt.*;
 

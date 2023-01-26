@@ -3,12 +3,12 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 import net.logicim.ui.shape.polygon.PolygonView;
+import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.awt.*;
 

@@ -100,8 +100,8 @@ public class SplitterView
   {
     this.lineViews = createLineViews(
         properties.fanOut,
-                                     properties.gridSpacing,
-                                     properties.appearance);
+        properties.gridSpacing,
+        properties.appearance);
 
     rectangleView = createRectangleView(properties.fanOut);
 

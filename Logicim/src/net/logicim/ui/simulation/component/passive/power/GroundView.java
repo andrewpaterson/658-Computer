@@ -3,11 +3,11 @@ package net.logicim.ui.simulation.component.passive.power;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.GroundData;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 

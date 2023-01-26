@@ -2,7 +2,6 @@ package net.logicim.ui.property;
 
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
 import javax.swing.*;

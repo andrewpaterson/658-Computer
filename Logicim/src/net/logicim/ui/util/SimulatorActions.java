@@ -7,7 +7,6 @@ import net.logicim.ui.editor.*;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
-import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
@@ -19,6 +18,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerView;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.awt.event.KeyEvent;
 

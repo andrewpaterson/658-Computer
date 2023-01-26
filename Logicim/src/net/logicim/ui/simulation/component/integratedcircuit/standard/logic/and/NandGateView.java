@@ -5,8 +5,8 @@ import net.logicim.data.integratedcircuit.standard.logic.and.NandGateData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.domain.integratedcircuit.standard.logic.and.NandGate;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class NandGateView

@@ -1194,6 +1194,8 @@ public class CircuitEditor
     }
 
     this.selection = cleanSelection;
+
+    validateConsistency();
   }
 
   protected List<View> findNonRemovedViews(List<View> selection)
@@ -1479,6 +1481,37 @@ public class CircuitEditor
       }
       tunnelViews.add(tunnelView);
       return tunnelViews;
+    }
+  }
+
+  public Int2D getSelectionCenter()
+  {
+    if (isSelectionEmpty())
+    {
+      return null;
+    }
+    else
+    {
+      Int2D position = new Int2D();
+      int count = 0;
+      for (View view : selection)
+      {
+        if (view instanceof StaticView)
+        {
+          StaticView<?> staticView = (StaticView<?>) view;
+          position.add(staticView.getPosition());
+          count++;
+        }
+        else if (view instanceof TraceView)
+        {
+          TraceView traceView = (TraceView) view;
+          position.add(traceView.getStartPosition());
+          position.add(traceView.getEndPosition());
+          count += 2;
+        }
+      }
+      position.set(Math.round((float) position.x / count), Math.round((float) position.y / count));
+      return position;
     }
   }
 }

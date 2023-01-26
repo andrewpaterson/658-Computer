@@ -163,7 +163,7 @@ public class MoveComponents
 
   public boolean hasDiff()
   {
-    return !diff.isZero() && rightRotations != 0;
+    return !diff.isZero() || rightRotations != 0;
   }
 
   public boolean hadDiff()
@@ -178,6 +178,8 @@ public class MoveComponents
 
   public void rotate(boolean right)
   {
+    previousHadDiff = hadDiff;
+    hadDiff = true;
     if (right)
     {
       rotation = rotation.rotateRight();

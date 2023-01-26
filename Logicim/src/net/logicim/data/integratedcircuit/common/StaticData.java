@@ -29,7 +29,7 @@ public abstract class StaticData
                     boolean selected)
   {
     this.name = name;
-    this.position = position;
+    this.position = position.clone();
     this.rotation = rotation;
     this.boundingBox = boundingBox;
     this.selectionBox = selectionBox;

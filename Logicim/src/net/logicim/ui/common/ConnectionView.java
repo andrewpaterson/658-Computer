@@ -121,7 +121,18 @@ public class ConnectionView
   @Override
   public String toString()
   {
-    return getGridPosition().toString() + " (" + connectedComponents.size() + ")";
+    Int2D position = getGridPosition();
+    String positionString = "?, ?";
+    if (position != null)
+    {
+      positionString = position.toString();
+    }
+    String connectedComponentsSizeString = "?";
+    if (connectedComponents != null)
+    {
+      connectedComponentsSizeString = Integer.toString(connectedComponents.size());
+    }
+    return positionString + " (" + connectedComponentsSizeString + ")";
   }
 
   public boolean isNonJunctionTracesOnly()

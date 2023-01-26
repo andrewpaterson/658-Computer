@@ -19,7 +19,10 @@ public class TraceData
   {
   }
 
-  public TraceData(long[] traceIds, Int2D start, Int2D end, boolean selected)
+  public TraceData(long[] traceIds,
+                   Int2D start,
+                   Int2D end,
+                   boolean selected)
   {
     this.traceIds = traceIds;
 

@@ -293,7 +293,8 @@ public class SimulatorEditor
     {
       if (moveComponents != null)
       {
-        moveComponents(x, y);
+        moveComponents.calculateDiff(viewport, x, y);
+        moveComponents();
       }
     }
 
@@ -341,9 +342,8 @@ public class SimulatorEditor
     clearHover();
   }
 
-  protected void moveComponents(int mouseX, int mouseY)
+  protected void moveComponents()
   {
-    moveComponents.calculateDiff(viewport, mouseX, mouseY);
     if (moveComponents.hasMoved())
     {
       circuitEditor.startMoveComponents(moveComponents.getStaticViews(), moveComponents.getTraces());
@@ -356,7 +356,9 @@ public class SimulatorEditor
   {
     if (moveComponents.hadDiff())
     {
-      circuitEditor.doneMoveComponents(moveComponents.getStaticViews(), moveComponents.getTraces(), moveComponents.getSelectedViews());
+      circuitEditor.doneMoveComponents(moveComponents.getStaticViews(),
+                                       moveComponents.getTraces(),
+                                       moveComponents.getSelectedViews());
       if (moveComponents.hasDiff())
       {
         pushUndo();
@@ -648,38 +650,6 @@ public class SimulatorEditor
     }
   }
 
-  protected void rotateMoveComponents(boolean right)
-  {
-    boolean moveComponentsNull = moveComponents == null;
-    if (moveComponentsNull)
-    {
-      if (hoverComponentView != null)
-      {
-        moveComponents = new MoveComponents(hoverComponentView);
-      }
-      else
-      {
-        List<View> selection = circuitEditor.getSelection();
-        if (!selection.isEmpty())
-        {
-          moveComponents = new MoveComponents(selection, new Int2D(viewport.transformScreenToGridX(mousePosition.get().x),
-                                                                   viewport.transformScreenToGridY(mousePosition.get().y)));
-        }
-      }
-    }
-
-    if (moveComponents != null)
-    {
-      moveComponents.rotate(right);
-      moveComponents.moveComponents();
-    }
-
-    if (moveComponentsNull)
-    {
-      doneMoveComponents();
-    }
-  }
-
   public void rotateLeft()
   {
     if (placementView != null)
@@ -694,6 +664,43 @@ public class SimulatorEditor
     else
     {
       rotateMoveComponents(false);
+    }
+  }
+
+  protected void rotateMoveComponents(boolean right)
+  {
+    boolean moveComponentsNull = moveComponents == null;
+    if (moveComponentsNull)
+    {
+      if (hoverComponentView != null)
+      {
+        moveComponents = new MoveComponents(hoverComponentView);
+        clearHover();
+      }
+      else
+      {
+        Int2D position = circuitEditor.getSelectionCenter();
+        if (position != null)
+        {
+          List<View> selection = circuitEditor.getSelection();
+          moveComponents = new MoveComponents(selection, position);
+          clearHover();
+        }
+      }
+    }
+
+    if (moveComponents != null)
+    {
+      moveComponents.rotate(right);
+      moveComponents();
+    }
+
+    if (moveComponentsNull)
+    {
+      if (moveComponents != null)
+      {
+        doneMoveComponents();
+      }
     }
   }
 

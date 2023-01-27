@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?, ?>, STATE extends State>
-    extends ComponentData
+    extends ComponentData<ICV>
 {
   protected String family;
 
@@ -85,11 +85,10 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, ICV integratedCircuitView)
   {
-    ICV integratedCircuitView = (ICV) componentView;
     integratedCircuitView.createConnections(circuitEditor);
-    componentView.enable(circuitEditor.getSimulation());
+    integratedCircuitView.enable(circuitEditor.getSimulation());
 
     loadState(integratedCircuitView);
     loadEvents(circuitEditor, integratedCircuitView);

@@ -42,26 +42,19 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public PortView getPortInGrid(int x, int y)
-  {
-    return null;
-  }
-
-  @Override
-  public PortView getPortInGrid(Int2D position)
-  {
-    return null;
-  }
-
-  @Override
-  public List<PortView> getPorts()
-  {
-    return Collections.emptyList();
-  }
-
-  @Override
   public void simulationStarted(Simulation simulation)
   {
+  }
+
+  @Override
+  public void createConnections(CircuitEditor circuitEditor)
+  {
+  }
+
+  @Override
+  public List<ConnectionView> getConnections()
+  {
+    return Collections.emptyList();
   }
 
   @Override

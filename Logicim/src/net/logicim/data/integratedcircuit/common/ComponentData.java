@@ -13,7 +13,6 @@ import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.simulation.CircuitEditor;
 
@@ -21,8 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ComponentData
-    extends StaticData
+public abstract class ComponentData<T extends ComponentView<?>>
+    extends StaticData<T>
 {
   protected List<MultiPortData> ports;
 
@@ -40,8 +39,15 @@ public abstract class ComponentData
     this.ports = ports;
   }
 
-  @Override
-  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
+  {
+    componentView.createConnections(circuitEditor);
+    componentView.enable(circuitEditor.getSimulation());
+
+    loadPorts(circuitEditor, traceLoader, componentView);
+  }
+
+  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
   {
     List<PortView> portViews = componentView.getPorts();
     for (int i = 0; i < ports.size(); i++)
@@ -87,6 +93,6 @@ public abstract class ComponentData
     }
   }
 
-  protected abstract ComponentView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader);
+  protected abstract T create(CircuitEditor circuitEditor, TraceLoader traceLoader);
 }
 

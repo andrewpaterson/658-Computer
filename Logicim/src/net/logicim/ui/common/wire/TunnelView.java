@@ -11,7 +11,6 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.polygon.PolygonView;
@@ -20,7 +19,6 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -61,12 +59,18 @@ public class TunnelView
     this.enabled = false;
     this.connections = new ArrayList<>(2);
     this.startPosition = new Int2D(0, 0);
+    this.endPosition = null;
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
     this.connections.add(circuitEditor.getOrAddConnection(startPosition, this));
     this.traces = new ArrayList<>();
     this.tunnels = circuitEditor.addTunnel(this);
     finaliseView();
+  }
+
+  @Override
+  public void createConnections(CircuitEditor circuitEditor)
+  {
   }
 
   private void createGraphics(Graphics2D graphics, Viewport viewport)
@@ -253,18 +257,6 @@ public class TunnelView
   }
 
   @Override
-  public PortView getPortInGrid(int x, int y)
-  {
-    return null;
-  }
-
-  @Override
-  public PortView getPortInGrid(Int2D position)
-  {
-    return null;
-  }
-
-  @Override
   public void propertyChanged()
   {
     if (properties.name.trim().isEmpty())
@@ -277,12 +269,6 @@ public class TunnelView
   public String getType()
   {
     return "Tunnel";
-  }
-
-  @Override
-  public List<PortView> getPorts()
-  {
-    return Collections.emptyList();
   }
 
   @Override

@@ -242,24 +242,9 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     boundingBox.grow(0.5f);
   }
 
-  public void createConnections(CircuitEditor circuitEditor)
-  {
-    List<PortView> portViews = getPorts();
-    for (PortView portView : portViews)
-    {
-      Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, this);
-      portView.setConnection(connectionView);
-    }
-  }
-
   protected abstract void finaliseView();
 
   public abstract boolean isEnabled();
-
-  public abstract PortView getPortInGrid(int x, int y);
-
-  public abstract PortView getPortInGrid(Int2D position);
 
   public abstract void propertyChanged();
 
@@ -267,12 +252,14 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract List<PortView> getPorts();
-
   public abstract void simulationStarted(Simulation simulation);
 
   public abstract Component getComponent();
 
   public abstract void disable();
+
+  public abstract void createConnections(CircuitEditor circuitEditor);
+
+  public abstract List<ConnectionView> getConnections();
 }
 

@@ -9,6 +9,7 @@ import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.common.Colours;
+import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -256,6 +257,12 @@ public class OscilloscopeView
   public String getType()
   {
     return "Oscilloscope";
+  }
+
+  @Override
+  public List<ConnectionView> getConnections()
+  {
+    return null;
   }
 
   @Override

@@ -184,5 +184,15 @@ public class PortTraceFinder
     }
     return portViews;
   }
+
+  public List<ConnectionView> getConnectionViews()
+  {
+    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    for (LocalConnectionNet connectionNet : connectionNets)
+    {
+      connectionViews.addAll(connectionNet.getConnectionViews());
+    }
+    return connectionViews;
+  }
 }
 

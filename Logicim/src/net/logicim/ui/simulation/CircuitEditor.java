@@ -164,17 +164,16 @@ public class CircuitEditor
   public List<ConnectionView> disconnectComponentView(StaticView<?> componentView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
-    List<PortView> portViews = componentView.getPorts();
-    for (PortView portView : portViews)
+    List<ConnectionView> connections = componentView.getConnections();
+    for (ConnectionView connectionView : connections)
     {
-      ConnectionView connection = portView.getConnection();
-      if (connection != null)
+      if (connectionView != null)
       {
-        Set<ConnectionView> connectionsFromConnection = findConnections(connection);
+        Set<ConnectionView> connectionsFromConnection = findConnections(connectionView);
         disconnectConnectionViews(connectionsFromConnection);
 
-        connection.remove(componentView);
-        connectionViews.add(connection);
+        connectionView.remove(componentView);
+        connectionViews.add(connectionView);
       }
     }
 
@@ -527,10 +526,10 @@ public class CircuitEditor
 
     for (StaticView<?> componentView : componentViews)
     {
-      PortView portView = componentView.getPortInGrid(position.x, position.y);
-      if (portView != null)
+      ConnectionView connectionView = componentView.getConnectionsInGrid(position.x, position.y);
+      if (connectionView != null)
       {
-        connectionViews.add(portView.getConnection());
+        connectionViews.add(connectionView);
       }
     }
 
@@ -919,13 +918,12 @@ public class CircuitEditor
     while (staticViewIterator.hasNext())
     {
       StaticView<?> staticView = staticViewIterator.next();
-      List<PortView> portViews = staticView.getPorts();
-      for (PortView portView : portViews)
+      List<ConnectionView> connections = staticView.getConnections();
+      for (ConnectionView connectionView : connections)
       {
-        ConnectionView connection = portView.getConnection();
-        if (line.isPositionOn(connection.getGridPosition()))
+        if (line.isPositionOn(connectionView.getGridPosition()))
         {
-          connectionViews.add(connection);
+          connectionViews.add(connectionView);
         }
       }
     }
@@ -1066,23 +1064,42 @@ public class CircuitEditor
     }
   }
 
-  public Set<PortView> connectComponentView(StaticView<?> componentView)
+  public Set<PortView> connectComponentView(StaticView<?> staticView)
   {
-    componentView.createConnections(this);
+    staticView.createConnections(this);
 
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    for (PortView portView : componentView.getPorts())
+    if (staticView instanceof ComponentView)
     {
-      if (!updatedPortViews.contains(portView))
+      ComponentView<?> componentView = (ComponentView<?>) staticView;
+      for (PortView portView : componentView.getPorts())
       {
-        PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-        portTraceFinder.findAndConnectTraces(portView.getConnection());
-        updatedPortViews.addAll(portTraceFinder.getPortViews());
+        if (!updatedPortViews.contains(portView))
+        {
+          PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+          portTraceFinder.findAndConnectTraces(portView.getConnection());
+          updatedPortViews.addAll(portTraceFinder.getPortViews());
+        }
+      }
+    }
+    else if (staticView instanceof TunnelView)
+    {
+      TunnelView tunnelView = (TunnelView) staticView;
+      Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+      for (ConnectionView connectionView : tunnelView.getConnections())
+      {
+        if (!updatedConnectionViews.contains(connectionView))
+        {
+          PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+          portTraceFinder.findAndConnectTraces(connectionView);
+          updatedPortViews.addAll(portTraceFinder.getPortViews());
+          updatedConnectionViews.addAll(portTraceFinder.getConnectionViews());
+        }
       }
     }
 
-    componentView.enable(simulation);
-    componentView.simulationStarted(simulation);
+    staticView.enable(simulation);
+    staticView.simulationStarted(simulation);
 
     return updatedPortViews;
   }

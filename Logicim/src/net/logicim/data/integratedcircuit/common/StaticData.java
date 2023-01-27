@@ -7,7 +7,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitEditor;
 
-public abstract class StaticData
+public abstract class StaticData<T extends StaticView<?>>
     extends ReflectiveData
 {
   protected String name;
@@ -36,17 +36,15 @@ public abstract class StaticData
     this.selected = selected;
   }
 
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
+  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
   {
     componentView.createConnections(circuitEditor);
     componentView.enable(circuitEditor.getSimulation());
-
-    loadPorts(circuitEditor, traceLoader, componentView);
   }
 
   public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
-    StaticView<?> componentView = create(circuitEditor, traceLoader);
+    T componentView = create(circuitEditor, traceLoader);
     connectAndLoad(circuitEditor, traceLoader, componentView);
 
     if (selected)
@@ -55,8 +53,6 @@ public abstract class StaticData
     }
   }
 
-  protected abstract void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView);
-
-  protected abstract StaticView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader);
+  protected abstract T create(CircuitEditor circuitEditor, TraceLoader traceLoader);
 }
 

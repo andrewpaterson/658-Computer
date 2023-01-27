@@ -10,7 +10,7 @@ import net.logicim.ui.simulation.component.decorative.label.LabelProperties;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 
 public class LabelData
-    extends DecorativeData
+    extends DecorativeData<LabelView>
 {
   protected HorizontalAlignment alignment;
   protected boolean bold;
@@ -38,7 +38,7 @@ public class LabelData
   }
 
   @Override
-  protected DecorativeView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  protected LabelView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     return new LabelView(circuitEditor,
                          position,

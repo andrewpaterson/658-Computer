@@ -11,7 +11,7 @@ import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.CircuitEditor;
 
 public class TunnelData
-    extends StaticData
+    extends StaticData<TunnelView>
 {
   public long[] traceIds;
   public boolean doubleSided;
@@ -59,11 +59,6 @@ public class TunnelData
   protected TunnelView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     throw new SimulatorException("Create should not be called from TunnelData.");
-  }
-
-  @Override
-  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, StaticView<?> componentView)
-  {
   }
 }
 

@@ -158,12 +158,23 @@ public class LocalConnectionNet
     for (ComponentConnection<ComponentView<?>> connectedComponent : connectedComponents)
     {
       ComponentView<?> componentView = connectedComponent.component;
-      ConnectionView connection = connectedComponent.connection;
+      ConnectionView connectionView = connectedComponent.connection;
 
-      PortView portView = componentView.getPort(connection);
+      PortView portView = componentView.getPort(connectionView);
       portViews.add(portView);
     }
     return portViews;
+  }
+
+  public List<ConnectionView> getConnectionViews()
+  {
+    List<ConnectionView> connectionViews = new ArrayList<>(connectedComponents.size());
+    for (ComponentConnection<ComponentView<?>> connectedComponent : connectedComponents)
+    {
+      ConnectionView connectionView = connectedComponent.connection;
+      connectionViews.add(connectionView);
+    }
+    return connectionViews;
   }
 
   public String toString()

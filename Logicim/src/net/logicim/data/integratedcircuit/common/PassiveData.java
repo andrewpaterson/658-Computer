@@ -8,7 +8,7 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import java.util.List;
 
 public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
-    extends ComponentData
+    extends ComponentData<PASSIVE>
 {
   public PassiveData()
   {

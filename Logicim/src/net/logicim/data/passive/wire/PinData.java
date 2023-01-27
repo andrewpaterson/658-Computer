@@ -33,7 +33,7 @@ public class PinData
   }
 
   @Override
-  protected ComponentView<?> create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  protected PinView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     return new PinView(circuitEditor,
                        position,

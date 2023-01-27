@@ -49,11 +49,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public PortView getPortInGrid(Int2D position)
-  {
-    return getPortInGrid(position.x, position.y);
-  }
-
   protected void invalidateCache()
   {
     super.invalidateCache();
@@ -78,6 +73,17 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   public void setProperties(PROPERTIES properties)
   {
     this.properties = properties;
+  }
+
+  public void createConnections(CircuitEditor circuitEditor)
+  {
+    List<PortView> portViews = getPorts();
+    for (PortView portView : portViews)
+    {
+      Int2D portPosition = portView.getGridPosition();
+      ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, this);
+      portView.setConnection(connectionView);
+    }
   }
 
   @Override
@@ -134,6 +140,21 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   public List<PortView> getPorts()
   {
     return ports;
+  }
+
+  @Override
+  public List<ConnectionView> getConnections()
+  {
+    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    for (PortView port : ports)
+    {
+      ConnectionView connectionView = port.getConnection();
+      if (connectionView != null)
+      {
+        connectionViews.add(connectionView);
+      }
+    }
+    return connectionViews;
   }
 
   protected List<MultiPortData> savePorts()

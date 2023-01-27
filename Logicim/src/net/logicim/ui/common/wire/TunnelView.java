@@ -28,6 +28,8 @@ public class TunnelView
     extends StaticView<TunnelProperties>
     implements WireView
 {
+  public static final int FONT_SIZE = 11;
+
   protected Set<TunnelView> tunnels;
   protected List<ConnectionView> connections;
   protected List<Trace> traces;
@@ -35,7 +37,6 @@ public class TunnelView
   protected TextView textView;
   protected PolygonView polygonView;
 
-  protected Int2D startPosition;
   protected Int2D endPosition;
   protected PointGridCache startCache;
   protected PointGridCache endCache;
@@ -58,48 +59,53 @@ public class TunnelView
     super(circuitEditor, position, rotation, boundingBox, selectionBox, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
-    this.startPosition = new Int2D(0, 0);
     this.endPosition = null;
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
-    this.connections.add(circuitEditor.getOrAddConnection(startPosition, this));
     this.traces = new ArrayList<>();
     this.tunnels = circuitEditor.addTunnel(this);
+    createGraphics();
     finaliseView();
   }
 
   @Override
   public void createConnections(CircuitEditor circuitEditor)
   {
+    this.connections.clear();
+    this.connections.add(circuitEditor.getOrAddConnection(position, this));
+    if (properties.doubleSided)
+    {
+      this.connections.add(circuitEditor.getOrAddConnection(endPosition, this));
+    }
   }
 
-  private void createGraphics(Graphics2D graphics, Viewport viewport)
+  private void createGraphics()
   {
     float offsetX = 0.75f;
     float flatX = 0.4f;
     textView = new TextView(this,
                             new Float2D(offsetX, 0),
                             properties.name,
-                            11,
+                            FONT_SIZE,
                             true,
                             LEFT);
-    textView.updateDimension(graphics, viewport);
-
     Float2D topLeft = textView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(textView.getTextDimension());
     bottomRight.add(topLeft);
     float height = bottomRight.y - topLeft.y;
     offsetX = height / 2;
 
-    startPosition = new Int2D();
+    if (endPosition == null)
+    {
+      endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
+    }
 
     if (!properties.doubleSided)
     {
-      endPosition = null;
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    startPosition,
+                                    new Int2D(0, 0),
                                     new Float2D(topLeft.x + offsetX, topLeft.y),
                                     new Float2D(bottomRight.x + offsetX + flatX, topLeft.y),
                                     new Float2D(bottomRight.x + offsetX + flatX, bottomRight.y),
@@ -109,11 +115,10 @@ public class TunnelView
     }
     else
     {
-      endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    startPosition,
+                                    new Int2D(0, 0),
                                     new Float2D(topLeft.x + offsetX, topLeft.y),
                                     new Float2D(endPosition.x - offsetX, topLeft.y),
                                     endPosition,
@@ -121,15 +126,6 @@ public class TunnelView
                                     new Float2D(topLeft.x + offsetX, bottomRight.y));
       invalidateCache();
       updateBoundingBox();
-
-      if (connections.size() == 1)
-      {
-        this.connections.add(circuitEditor.getOrAddConnection(endPosition, this));
-      }
-      else
-      {
-        throw new SimulatorException("Expected exactly one (the start) connection to be present.");
-      }
     }
   }
 
@@ -155,7 +151,7 @@ public class TunnelView
   {
     if (!startCache.isValid())
     {
-      startCache.update(startPosition, rotation, position);
+      startCache.update(new Int2D(0, 0), rotation, position);
       if (properties.doubleSided)
       {
         endCache.update(endPosition, rotation, position);
@@ -204,11 +200,6 @@ public class TunnelView
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
 
-    if (textView == null)
-    {
-      createGraphics(graphics, viewport);
-    }
-
     if (polygonView != null)
     {
       polygonView.paint(graphics, viewport);
@@ -223,7 +214,6 @@ public class TunnelView
     graphics.setFont(font);
     graphics.setColor(color);
     graphics.setStroke(stroke);
-
   }
 
   @Override
@@ -263,6 +253,7 @@ public class TunnelView
     {
       properties.name = "  ";
     }
+    endPosition = null;
   }
 
   @Override

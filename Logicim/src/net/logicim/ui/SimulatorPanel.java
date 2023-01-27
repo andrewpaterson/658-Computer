@@ -5,6 +5,7 @@ import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
+import net.logicim.ui.common.Fonts;
 import net.logicim.ui.common.wire.TunnelViewFactory;
 import net.logicim.ui.components.typeeditor.FamilyPropertyEditorFactory;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
@@ -43,7 +44,7 @@ public class SimulatorPanel
                MouseWheelListener
 {
   protected Image backBufferImage;
-  protected Graphics2D backBuffer;
+  protected Graphics2D graphics;
   protected boolean running;
   protected long period;
 
@@ -117,9 +118,9 @@ public class SimulatorPanel
 
   private void render()
   {
-    if ((backBufferImage != null) && (backBuffer != null))
+    if ((backBufferImage != null) && (graphics != null))
     {
-      simulatorEditor.paint(backBuffer);
+      simulatorEditor.paint(graphics);
     }
   }
 
@@ -185,7 +186,8 @@ public class SimulatorPanel
   public void componentResized(int width, int height)
   {
     backBufferImage = createImage(width, height);
-    backBuffer = (Graphics2D) backBufferImage.getGraphics();
+    graphics = (Graphics2D) backBufferImage.getGraphics();
+    Fonts.getInstance().ensureDefaultFont(graphics);
 
     simulatorEditor.addEditorEvent(new ResizedEvent(width, height));
   }

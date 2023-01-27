@@ -8,9 +8,20 @@ public class Strokes
 {
   protected Map<Float, Stroke> solidStrokes;
 
+  private static Strokes instance = null;
+
   public Strokes()
   {
     solidStrokes = new HashMap<>();
+  }
+
+  public static Strokes getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new Strokes();
+    }
+    return instance;
   }
 
   public Stroke getSolidStroke(float width)

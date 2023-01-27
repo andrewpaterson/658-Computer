@@ -1,6 +1,7 @@
 package net.logicim.ui.common;
 
 import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,6 +12,9 @@ public class Fonts
   protected Map<Float, Map<Float, Font>> bold;
 
   protected Font defaultGraphicsFont;
+  protected FontRenderContext fontRenderContext;
+
+  private static Fonts instance = null;
 
   public Fonts()
   {
@@ -18,12 +22,28 @@ public class Fonts
     bold = new LinkedHashMap<>();
   }
 
-  public void ensureDefaultFont(Font font)
+  public void ensureDefaultFont(Graphics2D graphics)
   {
     if (defaultGraphicsFont == null)
     {
-      defaultGraphicsFont = font;
+      defaultGraphicsFont = graphics.getFont();
+      fontRenderContext = graphics.getFontRenderContext();
+
+      for (int i = 1; i <= 20; i++)
+      {
+        getPlainFont(0, i);
+        getBoldFont(0, i);
+      }
     }
+  }
+
+  public static Fonts getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new Fonts();
+    }
+    return instance;
   }
 
   public Font getBoldFont(float rotation, float size)
@@ -70,6 +90,23 @@ public class Fonts
       rotationMap.put(size, font);
     }
     return font;
+  }
+
+  public Font getFont(float size, boolean bold)
+  {
+    if (bold)
+    {
+      return getBoldFont(0, size);
+    }
+    else
+    {
+      return getPlainFont(0, size);
+    }
+  }
+
+  public FontRenderContext getFontRenderContext()
+  {
+    return fontRenderContext;
   }
 }
 

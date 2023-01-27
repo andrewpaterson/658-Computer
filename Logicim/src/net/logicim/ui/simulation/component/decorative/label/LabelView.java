@@ -22,10 +22,11 @@ public class LabelView
   public LabelView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, LabelProperties properties)
   {
     super(circuitEditor, position, rotation, properties);
+    createGraphics();
     finaliseView();
   }
 
-  private void createGraphics(Graphics2D graphics, Viewport viewport)
+  private void createGraphics()
   {
     int size = 10;
     textView = new TextView(this,
@@ -34,7 +35,6 @@ public class LabelView
                             size,
                             properties.bold,
                             properties.alignment);
-    textView.updateDimension(graphics, viewport);
 
     Float2D topLeft = textView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(textView.getTextDimension());
@@ -86,11 +86,6 @@ public class LabelView
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
-
-    if (textView == null)
-    {
-      createGraphics(graphics, viewport);
-    }
 
     if (rectangleView != null)
     {

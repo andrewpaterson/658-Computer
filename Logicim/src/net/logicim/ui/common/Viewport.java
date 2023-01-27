@@ -8,87 +8,84 @@ import java.awt.*;
 
 public class Viewport
 {
+  protected static final float SCALE = 10f;
+
   protected Float2D position;
   protected float zoom;
-  protected float scale;
   protected PanelSize size;
-
-  protected Strokes strokes;
-  protected Fonts fonts;
 
   public Viewport(PanelSize size)
   {
     this.size = size;
     position = new Float2D(0, 0);
     zoom = 1.0f;
-    scale = 10.0f;
-    Colours.getInstance().getInstance();
-    strokes = new Strokes();
-    fonts = new Fonts();
+    Colours.getInstance();
+    Fonts.getInstance();
+    Strokes.getInstance();
   }
 
   public int transformGridToScreenSpaceX(int x)
   {
-    return (int) (x * scale * zoom + size.getWidth() / 2 + position.x);
+    return (int) (x * SCALE * zoom + size.getWidth() / 2 + position.x);
   }
 
   public int transformGridToScreenSpaceY(int y)
   {
-    return (int) (y * scale * zoom + size.getHeight() / 2 + position.y);
+    return (int) (y * SCALE * zoom + size.getHeight() / 2 + position.y);
   }
 
   public int transformGridToScreenSpaceX(float x)
   {
-    return (int) (x * scale * zoom + size.getWidth() / 2 + position.x);
+    return (int) (x * SCALE * zoom + size.getWidth() / 2 + position.x);
   }
 
   public int transformGridToScreenSpaceY(float y)
   {
-    return (int) (y * scale * zoom + size.getHeight() / 2 + position.y);
+    return (int) (y * SCALE * zoom + size.getHeight() / 2 + position.y);
   }
 
   public int transformGridToScreenWidth(int x)
   {
-    return (int) (x * scale * zoom);
+    return (int) (x * SCALE * zoom);
   }
 
   public int transformGridToScreenHeight(int y)
   {
-    return (int) (y * scale * zoom);
+    return (int) (y * SCALE * zoom);
   }
 
   public int transformGridToScreenWidth(float x)
   {
-    return (int) (x * scale * zoom);
+    return (int) (x * SCALE * zoom);
   }
 
   public int transformGridToScreenHeight(float y)
   {
-    return (int) (y * scale * zoom);
+    return (int) (y * SCALE * zoom);
   }
 
   public int transformScreenToGridX(int x)
   {
     int center = x - size.getWidth() / 2;
-    return Math.round((center - position.x) / (scale * zoom));
+    return Math.round((center - position.x) / (SCALE * zoom));
   }
 
   public float transformScreenToGridX(float x)
   {
     float center = x - (float) size.getWidth() / 2;
-    return (center - position.x) / (scale * zoom);
+    return (center - position.x) / (SCALE * zoom);
   }
 
   public int transformScreenToGridY(int y)
   {
     int center = y - size.getHeight() / 2;
-    return Math.round((center - position.y) / (scale * zoom));
+    return Math.round((center - position.y) / (SCALE * zoom));
   }
 
   public float transformScreenToGridY(float y)
   {
     float center = y - (float) size.getHeight() / 2;
-    return (center - position.y) / (scale * zoom);
+    return (center - position.y) / (SCALE * zoom);
   }
 
   public float getDefaultLineWidth()
@@ -131,10 +128,10 @@ public class Viewport
 
     int centerX = size.getWidth() / 2;
     int centerY = size.getHeight() / 2;
-    int left = -(int) ((centerX + position.x) / (scale * zoom)) - 1;
-    int dotsAcross = (int) (size.getWidth() / (scale * zoom)) + 2;
-    int top = -(int) ((centerY + position.y) / (scale * zoom)) - 1;
-    int dotsDown = (int) (size.getHeight() / (scale * zoom)) + 2;
+    int left = -(int) ((centerX + position.x) / (SCALE * zoom)) - 1;
+    int dotsAcross = (int) (size.getWidth() / (SCALE * zoom)) + 2;
+    int top = -(int) ((centerY + position.y) / (SCALE * zoom)) - 1;
+    int dotsDown = (int) (size.getHeight() / (SCALE * zoom)) + 2;
 
     if ((zoom >= 0.3f) && (zoom < 1.5f))
     {
@@ -214,22 +211,22 @@ public class Viewport
 
   public Float2D transformGridToScreenSpace(Float2D p)
   {
-    return new Float2D(p.x * scale * zoom + size.getWidth() / 2.0f + position.x,
-                       p.y * scale * zoom + size.getHeight() / 2.0f + position.y);
+    return new Float2D(p.x * SCALE * zoom + size.getWidth() / 2.0f + position.x,
+                       p.y * SCALE * zoom + size.getHeight() / 2.0f + position.y);
   }
 
   public Int2D transformGridToScreenSpace(Int2D p)
   {
-    return new Int2D(Math.round(p.x * scale * zoom + size.getWidth() / 2.0f + position.x),
-                     Math.round((p.y * scale * zoom + size.getHeight() / 2.0f + position.y)));
+    return new Int2D(Math.round(p.x * SCALE * zoom + size.getWidth() / 2.0f + position.x),
+                     Math.round((p.y * SCALE * zoom + size.getHeight() / 2.0f + position.y)));
   }
 
   public Float2D transformScreenSpaceToGrid(Int2D p)
   {
     float centerX = p.x - size.getWidth() / 2.0f;
-    float fx = (centerX - position.x) / (scale * zoom);
+    float fx = (centerX - position.x) / (SCALE * zoom);
     float centerY = p.y - size.getHeight() / 2.0f;
-    float fy = (centerY - position.y) / (scale * zoom);
+    float fy = (centerY - position.y) / (SCALE * zoom);
     return new Float2D(fx, fy);
   }
 
@@ -329,32 +326,27 @@ public class Viewport
 
   public Stroke getAbsoluteStroke(float width)
   {
-    return strokes.getSolidStroke(width);
+    return Strokes.getInstance().getSolidStroke(width);
   }
 
   public Stroke getZoomableStroke()
   {
-    return strokes.getSolidStroke(getDefaultLineWidth());
+    return Strokes.getInstance().getSolidStroke(getDefaultLineWidth());
   }
 
   public Stroke getZoomableStroke(float scale)
   {
-    return strokes.getSolidStroke(getLineWidth(scale));
-  }
-
-  public void ensureDefaultFont(Font font)
-  {
-    fonts.ensureDefaultFont(font);
+    return Strokes.getInstance().getSolidStroke(getLineWidth(scale));
   }
 
   public Font getBoldFont(float degrees, float size)
   {
-    return fonts.getBoldFont(degrees, size);
+    return Fonts.getInstance().getBoldFont(degrees, size);
   }
 
   public Font getPlainFont(float degrees, float size)
   {
-    return fonts.getPlainFont(degrees, size);
+    return Fonts.getInstance().getPlainFont(degrees, size);
   }
 
   public Font getFont(float size, boolean bold)
@@ -381,9 +373,14 @@ public class Viewport
     }
   }
 
-  public float getScale()
+  public static float getScale()
   {
-    return scale;
+    return SCALE;
+  }
+
+  public float getScaledZoom()
+  {
+    return zoom * Viewport.getScale();
   }
 }
 

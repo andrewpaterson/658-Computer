@@ -41,6 +41,8 @@ public class TunnelView
   protected PointGridCache startCache;
   protected PointGridCache endCache;
 
+  protected String sanitisedName;
+
   public TunnelView(CircuitEditor circuitEditor,
                     Int2D position,
                     Rotation rotation,
@@ -63,9 +65,15 @@ public class TunnelView
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
     this.traces = new ArrayList<>();
+    this.sanitisedName = createSanitisedName(properties);
     this.tunnels = circuitEditor.addTunnel(this);
     createGraphics();
     finaliseView();
+  }
+
+  protected String createSanitisedName(TunnelProperties properties)
+  {
+    return properties.name.trim().toLowerCase();
   }
 
   @Override
@@ -249,7 +257,8 @@ public class TunnelView
   @Override
   public void propertyChanged()
   {
-    if (properties.name.trim().isEmpty())
+    sanitisedName = createSanitisedName(properties);
+    if (sanitisedName.isEmpty())
     {
       properties.name = "  ";
     }
@@ -358,6 +367,11 @@ public class TunnelView
     super.invalidateCache();
     startCache.invalidate();
     endCache.invalidate();
+  }
+
+  public String getSanitisedName()
+  {
+    return sanitisedName;
   }
 }
 

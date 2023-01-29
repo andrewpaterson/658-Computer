@@ -260,12 +260,6 @@ public class OscilloscopeView
   }
 
   @Override
-  public List<ConnectionView> getConnections()
-  {
-    return null;
-  }
-
-  @Override
   public void propertyChanged()
   {
     properties.inputCount = clamp(properties.inputCount, 1, 24);

@@ -38,9 +38,10 @@ public class PropertyEditEvent
 
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) componentView.getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    StaticView<?> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
 
     circuitEditor.deleteComponentView(this.componentView);
+
+    StaticView<?> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
     circuitEditor.placeComponentView(newComponentView);
 
     return newComponentView;

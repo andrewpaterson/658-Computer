@@ -163,8 +163,17 @@ public class CircuitEditor
 
   public List<ConnectionView> disconnectComponentView(StaticView<?> componentView)
   {
+    if (componentView == null)
+    {
+      throw new SimulatorException("Cannot disconnect [null] component.");
+    }
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<ConnectionView> connections = componentView.getConnections();
+    if (connections == null)
+    {
+      throw new SimulatorException("Cannot disconnect component [%s] with [null] connections.", componentView.getDescription());
+    }
+
     for (ConnectionView connectionView : connections)
     {
       if (connectionView != null)
@@ -1019,12 +1028,12 @@ public class CircuitEditor
   public CircuitData save()
   {
     Set<View> selection = new HashSet<>(this.selection);
-    ArrayList<StaticData> componentDatas = new ArrayList<>();
+    ArrayList<StaticData<?>> componentDatas = new ArrayList<>();
     StaticViewIterator iterator = staticViewIterator();
     while (iterator.hasNext())
     {
       StaticView<?> staticView = iterator.next();
-      StaticData staticData = (StaticData) staticView.save(selection.contains(staticView));
+      StaticData<?> staticData = (StaticData<?>) staticView.save(selection.contains(staticView));
       if (staticData == null)
       {
         throw new SimulatorException("%s [%s] save may not return null.", staticView.getClass().getSimpleName(), staticView.getName());
@@ -1058,7 +1067,7 @@ public class CircuitEditor
       traceData.create(this, traceLoader);
     }
 
-    for (StaticData staticData : circuitData.components)
+    for (StaticData<?> staticData : circuitData.components)
     {
       staticData.createAndLoad(this, traceLoader);
     }
@@ -1476,10 +1485,18 @@ public class CircuitEditor
   {
     synchronized (this)
     {
-      String name = tunnelView.getName();
-      this.tunnelViews.remove(tunnelView);
-      Set<TunnelView> tunnelViews = this.tunnelViewsMap.get(name);
-      return tunnelViews.remove(tunnelView);
+      String name = tunnelView.getSanitisedName();
+      boolean removed = this.tunnelViews.remove(tunnelView);
+      if (!name.isEmpty())
+      {
+        Set<TunnelView> tunnelViews = this.tunnelViewsMap.get(name);
+        tunnelViews.remove(tunnelView);
+        if (tunnelViews.isEmpty())
+        {
+          this.tunnelViewsMap.remove(name);
+        }
+      }
+      return removed;
     }
   }
 
@@ -1489,14 +1506,17 @@ public class CircuitEditor
     {
       this.tunnelViews.add(tunnelView);
 
-      String name = tunnelView.getName();
-      Set<TunnelView> tunnelViews = this.tunnelViewsMap.get(name);
-      if (tunnelViews == null)
+      String name = tunnelView.getSanitisedName();
+      if (!name.isEmpty())
       {
-        tunnelViews = new LinkedHashSet<>();
-        this.tunnelViewsMap.put(name, tunnelViews);
+        Set<TunnelView> tunnelViews = this.tunnelViewsMap.get(name);
+        if (tunnelViews == null)
+        {
+          tunnelViews = new LinkedHashSet<>();
+          this.tunnelViewsMap.put(name, tunnelViews);
+        }
       }
-      tunnelViews.add(tunnelView);
+
       return tunnelViews;
     }
   }

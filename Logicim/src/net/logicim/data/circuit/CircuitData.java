@@ -10,7 +10,7 @@ public class CircuitData
     extends ReflectiveData
 {
   public TimelineData timeline;
-  public List<StaticData> components;
+  public List<StaticData<?>> components;
   public List<TraceData> traces;
 
   public CircuitData()
@@ -18,7 +18,7 @@ public class CircuitData
   }
 
   public CircuitData(TimelineData timeline,
-                     List<StaticData> components,
+                     List<StaticData<?>> components,
                      List<TraceData> traces)
   {
     this.timeline = timeline;

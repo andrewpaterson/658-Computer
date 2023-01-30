@@ -42,6 +42,7 @@ public class TunnelView
   protected PointGridCache endCache;
 
   protected String sanitisedName;
+  private Int2D startPosition;
 
   public TunnelView(CircuitEditor circuitEditor,
                     Int2D position,
@@ -61,15 +62,15 @@ public class TunnelView
     super(circuitEditor, position, rotation, boundingBox, selectionBox, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
-    this.endPosition = null;
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
     this.traces = new ArrayList<>();
     this.sanitisedName = createSanitisedName(properties);
     this.tunnels = circuitEditor.addTunnel(this);
+    this.startPosition = new Int2D(0, 0);
+    this.endPosition = createGraphics();
 
     createConnections(circuitEditor);
-    createGraphics();
     finaliseView();
   }
 
@@ -78,22 +79,12 @@ public class TunnelView
     return properties.name.trim().toLowerCase();
   }
 
-  private void createConnections(CircuitEditor circuitEditor)
-  {
-    this.connections.clear();
-    this.connections.add(circuitEditor.getOrAddConnection(position, this));
-    if (properties.doubleSided)
-    {
-      this.connections.add(circuitEditor.getOrAddConnection(endPosition, this));
-    }
-  }
-
-  private void createGraphics()
+  private Int2D createGraphics()
   {
     float offsetX = 0.75f;
     float flatX = 0.4f;
     textView = new TextView(this,
-                            new Float2D(offsetX, 0),
+                            new Float2D(startPosition.x + offsetX, startPosition.y),
                             properties.name,
                             FONT_SIZE,
                             true,
@@ -104,37 +95,44 @@ public class TunnelView
     float height = bottomRight.y - topLeft.y;
     offsetX = height / 2;
 
-    if (endPosition == null)
-    {
-      endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
-    }
+    Int2D endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
 
     if (!properties.doubleSided)
     {
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    new Int2D(0, 0),
+                                    startPosition,
                                     new Float2D(topLeft.x + offsetX, topLeft.y),
                                     new Float2D(bottomRight.x + offsetX + flatX, topLeft.y),
                                     new Float2D(bottomRight.x + offsetX + flatX, bottomRight.y),
                                     new Float2D(topLeft.x + offsetX, bottomRight.y));
-      invalidateCache();
-      updateBoundingBox();
     }
     else
     {
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    new Int2D(0, 0),
+                                    startPosition,
                                     new Float2D(topLeft.x + offsetX, topLeft.y),
                                     new Float2D(endPosition.x - offsetX, topLeft.y),
                                     endPosition,
                                     new Float2D(endPosition.x - offsetX, bottomRight.y),
                                     new Float2D(topLeft.x + offsetX, bottomRight.y));
-      invalidateCache();
-      updateBoundingBox();
+    }
+    invalidateCache();
+    updateBoundingBox();
+
+    return endPosition;
+  }
+
+  private void createConnections(CircuitEditor circuitEditor)
+  {
+    this.connections.clear();
+    this.connections.add(circuitEditor.getOrAddConnection(position, this));
+    if (properties.doubleSided)
+    {
+      this.connections.add(circuitEditor.getOrAddConnection(endPosition, this));
     }
   }
 

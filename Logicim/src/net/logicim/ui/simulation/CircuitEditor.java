@@ -1138,6 +1138,10 @@ public class CircuitEditor
     {
       return connectTunnelView((TunnelView) staticView);
     }
+    else if (staticView instanceof DecorativeView)
+    {
+      return new LinkedHashSet<>();
+    }
     else
     {
       throw new SimulatorException("Don't know how to connect component view of class [%s].", staticView.getClass().getSimpleName());

@@ -319,8 +319,7 @@ public class TunnelView
     this.traces = traces;
   }
 
-  @Override
-  public void disconnectTraces()
+  public void disconnect()
   {
     traces = new ArrayList<>();
   }

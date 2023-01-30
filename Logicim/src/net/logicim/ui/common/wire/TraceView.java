@@ -357,7 +357,7 @@ public class TraceView
     this.traces = traces;
   }
 
-  public void disconnectTraces()
+  public void disconnect()
   {
     traces = new ArrayList<>();
   }

@@ -177,14 +177,14 @@ public class CircuitEditor
     {
       throw new SimulatorException("Cannot disconnect [null] component.");
     }
-    List<ConnectionView> connectionViews = new ArrayList<>();
-    List<ConnectionView> connections = componentView.getConnections();
-    if (connections == null)
+    List<ConnectionView> updatedConnectionViews = new ArrayList<>();
+    List<ConnectionView> connectionViews = componentView.getConnections();
+    if (connectionViews == null)
     {
       throw new SimulatorException("Cannot disconnect component [%s] with [null] connections.", componentView.getDescription());
     }
 
-    for (ConnectionView connectionView : connections)
+    for (ConnectionView connectionView : connectionViews)
     {
       if (connectionView != null)
       {
@@ -192,7 +192,7 @@ public class CircuitEditor
         disconnectConnectionViews(connectionsFromConnection);
 
         connectionView.remove(componentView);
-        connectionViews.add(connectionView);
+        updatedConnectionViews.add(connectionView);
       }
     }
 
@@ -202,7 +202,7 @@ public class CircuitEditor
       circuit.disconnectDiscrete(component, simulation);
     }
 
-    return connectionViews;
+    return updatedConnectionViews;
   }
 
   public Set<PortView> connectConnections(List<ConnectionView> connectionViews)
@@ -307,14 +307,17 @@ public class CircuitEditor
       List<View> connectedComponents = connection.getConnectedComponents();
       for (View view : connectedComponents)
       {
-        if (view instanceof WireView)
+        if (view instanceof TraceView)
         {
-          ((WireView) view).disconnectTraces();
+          ((TraceView) view).disconnect();  //Are the connections actually disconnected?  Add tests on validate.
         }
         else if (view instanceof ComponentView)
         {
-          ComponentView<?> componentView = (ComponentView<?>) view;
-          componentView.disconnect(simulation, connection);
+          ((ComponentView<?>) view).disconnect(simulation, connection);
+        }
+        else if (view instanceof TunnelView)
+        {
+          ((TunnelView) view).disconnect();
         }
         else if (view == null)
         {

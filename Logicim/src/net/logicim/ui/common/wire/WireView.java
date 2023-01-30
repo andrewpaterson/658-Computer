@@ -11,8 +11,6 @@ public interface WireView
 {
   void connectTraces(List<Trace> traces);
 
-  void disconnectTraces();
-
   List<Trace> getTraces();
 
   void removed();

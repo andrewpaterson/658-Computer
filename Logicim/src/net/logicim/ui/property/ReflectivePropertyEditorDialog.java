@@ -1,7 +1,9 @@
 package net.logicim.ui.property;
 
+import net.logicim.common.reflect.ClassInspector;
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
 import javax.swing.*;
@@ -67,27 +69,39 @@ public class ReflectivePropertyEditorDialog
   }
 
   @Override
-  protected boolean updateProperties()
+  protected ComponentProperties updateProperties()
   {
     ReflectivePropertiesPanel reflectivePropertiesPanel = getReflectivePropertiesPanel();
     Map<Field, Object> map = reflectivePropertiesPanel.getProperties();
 
     boolean propertyChanged = updateRotation(reflectivePropertiesPanel);
 
-    InstanceInspector instanceInspector = new InstanceInspector(componentView.getProperties());
+    ComponentProperties oldProperties = componentView.getProperties();
+    ClassInspector classInspector = ClassInspector.forClass(oldProperties.getClass());
+    ComponentProperties newProperties = (ComponentProperties) classInspector.newInstance();
+
+    InstanceInspector oldInspector = new InstanceInspector(oldProperties);
+    InstanceInspector newInspector = new InstanceInspector(newProperties);
     for (Map.Entry<Field, Object> entry : map.entrySet())
     {
       Field field = entry.getKey();
       Object newValue = entry.getValue();
-      Object oldValue = instanceInspector.getFieldValue(field);
+      Object oldValue = oldInspector.getFieldValue(field);
 
       if (!Objects.equals(newValue, oldValue))
       {
         propertyChanged = true;
-        instanceInspector.setFieldValue(field, coerce(newValue, field.getType()));
       }
+      newInspector.setFieldValue(field, coerce(newValue, field.getType()));
     }
-    return propertyChanged;
+    if (propertyChanged)
+    {
+      return newProperties;
+    }
+    else
+    {
+      return null;
+    }
   }
 
   private ReflectivePropertiesPanel getReflectivePropertiesPanel()

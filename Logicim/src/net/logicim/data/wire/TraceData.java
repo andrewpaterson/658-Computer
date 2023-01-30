@@ -36,11 +36,11 @@ public class TraceData
     TraceView traceView = new TraceView(circuitEditor,
                                         start,
                                         end);
-    WireDataHelper.wireCreate(circuitEditor,
-                              traceLoader,
-                              traceView,
-                              traceIds,
-                              selected);
+    WireDataHelper.wireConnect(circuitEditor,
+                               traceLoader,
+                               traceView,
+                               traceIds,
+                               selected);
   }
 }
 

@@ -67,6 +67,8 @@ public class TunnelView
     this.traces = new ArrayList<>();
     this.sanitisedName = createSanitisedName(properties);
     this.tunnels = circuitEditor.addTunnel(this);
+
+    createConnections(circuitEditor);
     createGraphics();
     finaliseView();
   }
@@ -76,8 +78,7 @@ public class TunnelView
     return properties.name.trim().toLowerCase();
   }
 
-  @Override
-  public void createConnections(CircuitEditor circuitEditor)
+  private void createConnections(CircuitEditor circuitEditor)
   {
     this.connections.clear();
     this.connections.add(circuitEditor.getOrAddConnection(position, this));

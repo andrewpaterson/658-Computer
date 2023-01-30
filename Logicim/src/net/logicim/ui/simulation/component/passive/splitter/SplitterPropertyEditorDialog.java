@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.property.PropertyEditorDialog;
 
 import javax.swing.*;
@@ -30,19 +31,22 @@ public class SplitterPropertyEditorDialog
   }
 
   @Override
-  protected boolean updateProperties()
+  protected ComponentProperties updateProperties()
   {
     boolean propertyChanged = updateRotation(getSplitterPropertiesPanel());
 
     SplitterProperties newProperties = createProperties();
     if (componentView.getProperties().equals(newProperties))
     {
-      return propertyChanged;
+      if (propertyChanged)
+      {
+        return newProperties;
+      }
+      return null;
     }
     else
     {
-      componentView.setProperties(newProperties);
-      return true;
+      return newProperties;
     }
   }
 

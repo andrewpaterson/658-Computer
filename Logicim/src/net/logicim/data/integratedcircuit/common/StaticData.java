@@ -36,22 +36,7 @@ public abstract class StaticData<T extends StaticView<?>>
     this.selected = selected;
   }
 
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
-  {
-    componentView.createConnections(circuitEditor);
-    componentView.enable(circuitEditor.getSimulation());
-  }
-
-  public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
-  {
-    T componentView = create(circuitEditor, traceLoader);
-    connectAndLoad(circuitEditor, traceLoader, componentView);
-
-    if (selected)
-    {
-      circuitEditor.select(componentView);
-    }
-  }
+  public abstract void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader);
 
   protected abstract T create(CircuitEditor circuitEditor, TraceLoader traceLoader);
 }

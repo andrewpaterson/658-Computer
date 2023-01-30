@@ -43,7 +43,7 @@ public class ConnectionFinder
             }
             else if (view instanceof TunnelView)
             {
-              processTunnel((TunnelView) view);
+              processTunnel(currentConnection, (TunnelView) view);
             }
           }
         }
@@ -51,13 +51,21 @@ public class ConnectionFinder
     }
   }
 
-  protected void processTunnel(TunnelView tunnelView)
+  protected void processTunnel(ConnectionView currentConnection, TunnelView tunnelView)
   {
     Set<TunnelView> tunnels = tunnelView.getTunnels();
-    for (TunnelView tunnel : tunnels)
+    if (tunnels != null)
     {
-      ConnectionView connection1 = tunnel.getStartConnection();
-      addConnectionToProcess(connection1);
+      for (TunnelView tunnel : tunnels)
+      {
+        for (ConnectionView connection : tunnel.getConnections())
+        {
+          if (connection != currentConnection)
+          {
+            addConnectionToProcess(connection);
+          }
+        }
+      }
     }
   }
 

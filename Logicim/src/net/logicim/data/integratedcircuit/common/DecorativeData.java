@@ -12,6 +12,15 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
   public DecorativeData()
   {
   }
+  public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  {
+    T componentView = create(circuitEditor, traceLoader);
+
+    if (selected)
+    {
+      circuitEditor.select(componentView);
+    }
+  }
 
   public DecorativeData(String name, Int2D position, Rotation rotation, boolean selected)
   {

@@ -2,6 +2,7 @@ package net.logicim.ui.property;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
@@ -134,11 +135,11 @@ public abstract class PropertyEditorDialog
 
   public void okay()
   {
-    boolean propertyChanged = updateProperties();
+    ComponentProperties newComponentProperties = updateProperties();
 
-    if (propertyChanged)
+    if (newComponentProperties != null)
     {
-      editor.addEditorEvent(new PropertyEditEvent(componentView));
+      editor.addEditorEvent(new PropertyEditEvent(componentView, newComponentProperties));
     }
 
     close();
@@ -169,6 +170,6 @@ public abstract class PropertyEditorDialog
 
   protected abstract JPanel createEditorPanel();
 
-  protected abstract boolean updateProperties();
+  protected abstract ComponentProperties updateProperties();
 }
 

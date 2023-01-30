@@ -14,17 +14,19 @@ public class PropertyEditEvent
     extends SimulatorEditorEvent
 {
   protected StaticView<?> componentView;
+  private ComponentProperties newComponentProperties;
 
-  public PropertyEditEvent(StaticView<?> componentView)
+  public PropertyEditEvent(StaticView<?> componentView, ComponentProperties newComponentProperties)
   {
     this.componentView = componentView;
+    this.newComponentProperties = newComponentProperties;
   }
 
   @Override
   public void execute(SimulatorEditor editor)
   {
     componentView.propertyChanged();
-    StaticView<?> newComponentView = recreateComponentView(componentView.getProperties(), editor);
+    StaticView<?> newComponentView = recreateComponentView(newComponentProperties, editor);
     editor.replaceSelection(newComponentView, componentView);
     editor.pushUndo();
   }

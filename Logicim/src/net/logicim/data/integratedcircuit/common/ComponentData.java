@@ -39,6 +39,17 @@ public abstract class ComponentData<T extends ComponentView<?>>
     this.ports = ports;
   }
 
+  public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  {
+    T componentView = create(circuitEditor, traceLoader);
+    connectAndLoad(circuitEditor, traceLoader, componentView);
+
+    if (selected)
+    {
+      circuitEditor.select(componentView);
+    }
+  }
+
   protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
   {
     componentView.createConnections(circuitEditor);

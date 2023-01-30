@@ -258,8 +258,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disable();
 
-  public abstract void createConnections(CircuitEditor circuitEditor);
-
   public abstract List<ConnectionView> getConnections();
 }
 

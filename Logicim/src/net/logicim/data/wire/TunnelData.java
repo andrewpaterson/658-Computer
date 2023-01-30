@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelProperties;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -48,11 +47,11 @@ public class TunnelData
                                            boundingBox.create(),
                                            selectionBox.create(),
                                            new TunnelProperties(name, doubleSided));
-    WireDataHelper.wireCreate(circuitEditor,
-                              traceLoader,
-                              tunnelView,
-                              traceIds,
-                              selected);
+    WireDataHelper.wireConnect(circuitEditor,
+                               traceLoader,
+                               tunnelView,
+                               traceIds,
+                               selected);
   }
 
   @Override

@@ -47,11 +47,6 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void createConnections(CircuitEditor circuitEditor)
-  {
-  }
-
-  @Override
   public List<ConnectionView> getConnections()
   {
     return Collections.emptyList();

@@ -127,11 +127,21 @@ public class CircuitEditor
 
   public Set<PortView> deleteTunnelView(TunnelView tunnelView)
   {
-    ConnectionView connectionView = tunnelView.getStartConnection();
+    if (!tunnelView.isRemoved())
+    {
+      ConnectionView startConnection = tunnelView.getStartConnection();
+      ConnectionView endConnection = tunnelView.getEndConnection();
 
-    deleteWireViewInternal(tunnelView);
+      deleteWireViewInternal(tunnelView);
 
-    return mergeAndConnectAfterDelete(connectionView);
+      Set<PortView> portViews = mergeAndConnectAfterDelete(startConnection);
+      if (endConnection != null)
+      {
+        portViews.addAll(mergeAndConnectAfterDelete(endConnection));
+      }
+      return portViews;
+    }
+    return new LinkedHashSet<>();
   }
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
@@ -256,7 +266,7 @@ public class CircuitEditor
 
   public void deleteWireViewInternal(WireView wireView)
   {
-    disconnectTraceView(wireView);
+    disconnectWireView(wireView);
     wireView.removed();
     if (wireView instanceof TraceView)
     {
@@ -268,7 +278,7 @@ public class CircuitEditor
     }
   }
 
-  protected List<ConnectionView> disconnectTraceView(WireView wireView)
+  protected List<ConnectionView> disconnectWireView(WireView wireView)
   {
     if (wireView.isRemoved())
     {
@@ -761,9 +771,9 @@ public class CircuitEditor
     return new LinkedHashSet<>();
   }
 
-  protected Set<PortView> mergeAndConnectAfterDelete(ConnectionView startConnection)
+  protected Set<PortView> mergeAndConnectAfterDelete(ConnectionView connectionView)
   {
-    TraceView traceView = mergeTraceConnectionForDelete(startConnection);
+    TraceView traceView = mergeTraceConnectionForDelete(connectionView);
     ConnectionView connection;
     if (traceView != null)
     {
@@ -771,7 +781,7 @@ public class CircuitEditor
     }
     else
     {
-      connection = startConnection;
+      connection = connectionView;
     }
     return connectNewConnections(connection);
   }
@@ -960,6 +970,49 @@ public class CircuitEditor
   public void validateConsistency()
   {
     validateTracesContainOnlyCurrentViews();
+
+    validateTunnelViews();
+  }
+
+  protected void validateTunnelViews()
+  {
+    for (TunnelView tunnelView : tunnelViews)
+    {
+      if (!tunnelView.isRemoved())
+      {
+        String name = tunnelView.getName();
+        String sanitisedName = name.trim().toLowerCase();
+        if (!tunnelView.getSanitisedName().equals(sanitisedName))
+        {
+          throw new SimulatorException("Tunnel view sanitised name is [%s] but should be [%s].", tunnelView.getSanitisedName(), sanitisedName);
+        }
+
+        Set<TunnelView> tunnelViews = tunnelViewsMap.get(sanitisedName);
+        if (!sanitisedName.isEmpty())
+        {
+          if (tunnelViews == null)
+          {
+            throw new SimulatorException("TunnelViewsMap did not contain a map for name [%s]", tunnelView.getName());
+          }
+          if (!tunnelViews.contains(tunnelView))
+          {
+            throw new SimulatorException("TunnelViewsMap did not contain tunnel view [%s].", tunnelView.getName());
+          }
+        }
+      }
+    }
+
+    for (String sanitisedName : tunnelViewsMap.keySet())
+    {
+      Set<TunnelView> tunnelViews = tunnelViewsMap.get(sanitisedName);
+      for (TunnelView tunnelView : tunnelViews)
+      {
+        if (!this.tunnelViews.contains(tunnelView))
+        {
+          throw new SimulatorException("TunnelViews did not contain tunnel view [%s].", tunnelView.getName());
+        }
+      }
+    }
   }
 
   protected void validateTracesContainOnlyCurrentViews()
@@ -1071,44 +1124,64 @@ public class CircuitEditor
     {
       staticData.createAndLoad(this, traceLoader);
     }
+
+    validateConsistency();
   }
 
   public Set<PortView> connectComponentView(StaticView<?> staticView)
   {
-    staticView.createConnections(this);
-
-    Set<PortView> updatedPortViews = new LinkedHashSet<>();
     if (staticView instanceof ComponentView)
     {
-      ComponentView<?> componentView = (ComponentView<?>) staticView;
-      for (PortView portView : componentView.getPorts())
-      {
-        if (!updatedPortViews.contains(portView))
-        {
-          PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-          portTraceFinder.findAndConnectTraces(portView.getConnection());
-          updatedPortViews.addAll(portTraceFinder.getPortViews());
-        }
-      }
+      return connectComponentView((ComponentView<?>) staticView);
     }
     else if (staticView instanceof TunnelView)
     {
-      TunnelView tunnelView = (TunnelView) staticView;
-      Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-      for (ConnectionView connectionView : tunnelView.getConnections())
+      return connectTunnelView((TunnelView) staticView);
+    }
+    else
+    {
+      throw new SimulatorException("Don't know how to connect component view of class [%s].", staticView.getClass().getSimpleName());
+    }
+  }
+
+  public Set<PortView> connectComponentView(ComponentView<?> componentView)
+  {
+    componentView.createConnections(this);
+
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    for (PortView portView : componentView.getPorts())
+    {
+      if (!updatedPortViews.contains(portView))
       {
-        if (!updatedConnectionViews.contains(connectionView))
-        {
-          PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-          portTraceFinder.findAndConnectTraces(connectionView);
-          updatedPortViews.addAll(portTraceFinder.getPortViews());
-          updatedConnectionViews.addAll(portTraceFinder.getConnectionViews());
-        }
+        PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+        portTraceFinder.findAndConnectTraces(portView.getConnection());
+        updatedPortViews.addAll(portTraceFinder.getPortViews());
       }
     }
 
-    staticView.enable(simulation);
-    staticView.simulationStarted(simulation);
+    componentView.enable(simulation);
+    componentView.simulationStarted(simulation);
+
+    return updatedPortViews;
+  }
+
+  public Set<PortView> connectTunnelView(TunnelView tunnelView)
+  {
+    Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+    for (ConnectionView connectionView : tunnelView.getConnections())
+    {
+      if (!updatedConnectionViews.contains(connectionView))
+      {
+        PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+        portTraceFinder.findAndConnectTraces(connectionView);
+        updatedPortViews.addAll(portTraceFinder.getPortViews());
+        updatedConnectionViews.addAll(portTraceFinder.getConnectionViews());
+      }
+    }
+
+    tunnelView.enable(simulation);
+    tunnelView.simulationStarted(simulation);
 
     return updatedPortViews;
   }
@@ -1149,7 +1222,7 @@ public class CircuitEditor
     }
     for (TraceView traceView : traceViews)
     {
-      disconnectTraceView(traceView);
+      disconnectWireView(traceView);
       traceView.removed();
     }
 
@@ -1515,9 +1588,11 @@ public class CircuitEditor
           tunnelViews = new LinkedHashSet<>();
           this.tunnelViewsMap.put(name, tunnelViews);
         }
+        tunnelViews.add(tunnelView);
+        return tunnelViews;
       }
 
-      return tunnelViews;
+      return null;
     }
   }
 

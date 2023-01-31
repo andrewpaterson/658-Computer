@@ -110,8 +110,8 @@ public class CircuitEditor
     }
     else if (componentView instanceof TunnelView)
     {
-      deleteTunnelView((TunnelView) componentView);
-      //Fire connection events for traces here.
+      Set<PortView> updatedPortViews = deleteTunnelView((TunnelView) componentView);
+      fireConnectionEvents(updatedPortViews);
     }
     else if (componentView == null)
     {
@@ -240,7 +240,7 @@ public class CircuitEditor
     return traceDeleted;
   }
 
-  public void deleteTraceView(ConnectionView connectionView, TraceView traceView)
+  public void editActionDeleteTraceView(ConnectionView connectionView, TraceView traceView)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     if (!connectionView.isConcrete())
@@ -1174,6 +1174,8 @@ public class CircuitEditor
 
   public Set<PortView> connectTunnelView(TunnelView tunnelView)
   {
+    tunnelView.createConnections(this);
+
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : tunnelView.getConnections())

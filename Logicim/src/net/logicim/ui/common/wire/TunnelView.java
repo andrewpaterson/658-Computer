@@ -126,13 +126,15 @@ public class TunnelView
     return endPosition;
   }
 
-  private void createConnections(CircuitEditor circuitEditor)
+  public void createConnections(CircuitEditor circuitEditor)
   {
+    updateGridCache();
+
     this.connections.clear();
-    this.connections.add(circuitEditor.getOrAddConnection(position, this));
+    this.connections.add(circuitEditor.getOrAddConnection((Int2D)startCache.getTransformedPosition(), this));
     if (properties.doubleSided)
     {
-      this.connections.add(circuitEditor.getOrAddConnection(endPosition, this));
+      this.connections.add(circuitEditor.getOrAddConnection((Int2D)endCache.getTransformedPosition(), this));
     }
   }
 
@@ -158,7 +160,7 @@ public class TunnelView
   {
     if (!startCache.isValid())
     {
-      startCache.update(new Int2D(0, 0), rotation, position);
+      startCache.update(startPosition, rotation, position);
       if (properties.doubleSided)
       {
         endCache.update(endPosition, rotation, position);

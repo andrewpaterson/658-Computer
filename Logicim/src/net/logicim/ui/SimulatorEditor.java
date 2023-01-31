@@ -761,9 +761,9 @@ public class SimulatorEditor
     running = !running;
   }
 
-  public void deleteComponent()
+  public void editActionDeleteComponent()
   {
-    boolean componentDeleted = deleteComponentIfPossible();
+    boolean componentDeleted = editActionDeleteComponentIfPossible();
     if (componentDeleted)
     {
       pushUndo();
@@ -777,7 +777,7 @@ public class SimulatorEditor
     calculateHighlightedPort();
   }
 
-  protected boolean deleteComponentIfPossible()
+  protected boolean editActionDeleteComponentIfPossible()
   {
     if (circuitEditor.isSelectionEmpty())
     {
@@ -785,7 +785,7 @@ public class SimulatorEditor
       {
         if (hoverTraceView != null)
         {
-          circuitEditor.deleteTraceView(hoverConnectionView, hoverTraceView);
+          circuitEditor.editActionDeleteTraceView(hoverConnectionView, hoverTraceView);
         }
         else
         {

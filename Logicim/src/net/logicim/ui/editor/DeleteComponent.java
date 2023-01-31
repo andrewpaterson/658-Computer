@@ -13,7 +13,7 @@ public class DeleteComponent
   @Override
   public void executeEditorAction()
   {
-    editor.deleteComponent();
+    editor.editActionDeleteComponent();
   }
 }
 

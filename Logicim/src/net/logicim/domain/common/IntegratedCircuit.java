@@ -189,7 +189,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     boolean removed = events.remove(event);
     if (!removed)
     {
-      throw new SimulatorException("Cannot remove event on %s [%S].", getClass().getSimpleName(), getDescription());
+      throw new SimulatorException("Cannot remove event on %s [%s].", getClass().getSimpleName(), getDescription());
     }
   }
 

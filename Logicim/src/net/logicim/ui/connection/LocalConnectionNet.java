@@ -75,12 +75,15 @@ public class LocalConnectionNet
         {
           ComponentView<?> componentView = (ComponentView<?>) connectedView;
           PortView portView = componentView.getPort(connectionView);
-          if (portView.numberOfPorts() < minimumPorts)
+          if (portView != null)
           {
-            minimumPorts = portView.numberOfPorts();
-            if (minimumPorts == 1)
+            if (portView.numberOfPorts() < minimumPorts)
             {
-              break;
+              minimumPorts = portView.numberOfPorts();
+              if (minimumPorts == 1)
+              {
+                break;
+              }
             }
           }
         }

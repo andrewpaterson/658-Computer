@@ -5,6 +5,7 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -33,7 +34,6 @@ public class TraceView
     circuitEditor.addTraceView(this);
   }
 
-  @Override
   public ConnectionView getConnectionsInGrid(int x, int y)
   {
     if (line.getStart().equals(x, y))
@@ -119,25 +119,6 @@ public class TraceView
   }
 
   @Override
-  public Int2D getConnectionGridPosition(ConnectionView connectionView)
-  {
-    if (getStartConnection() == connectionView)
-    {
-      return line.getStart();
-    }
-    else if (getEndConnection() == connectionView)
-    {
-      return line.getEnd();
-    }
-    return null;
-  }
-
-  public ConnectionView getConnectionsInGrid(Int2D gridPosition)
-  {
-    return getConnectionsInGrid(gridPosition.x, gridPosition.y);
-  }
-
-  @Override
   public Int2D getPosition()
   {
     return line.getStart();
@@ -216,15 +197,29 @@ public class TraceView
     return line.getMaximumY();
   }
 
-  public boolean isRemoved()
+  public boolean hasNoConnetions()
   {
-    return getStartConnection() == null || getEndConnection() == null;
+      return getStartConnection() == null || getEndConnection() == null;
   }
 
   @Override
   public List<ConnectionView> getConnections()
   {
-    return connections;
+    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    for (ConnectionView connection : connections)
+    {
+      if (connection != null)
+      {
+        connectionViews.add(connection);
+      }
+    }
+    return connectionViews;
+  }
+
+  @Override
+  public Component getComponent()
+  {
+    return null;
   }
 
   @Override
@@ -253,7 +248,7 @@ public class TraceView
 
     int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-    if (!isRemoved())
+    if (!hasNoConnetions())
     {
       if (!getStartConnection().isNonJunctionTracesOnly())
       {
@@ -302,17 +297,6 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
-  public void removed()
-  {
-    connections.set(1, null);
-    connections.set(0, null);
-
-    if (!traces.isEmpty())
-    {
-      throw new SimulatorException("Trace must be disconnected before removal.");
-    }
-  }
-
   protected Color getTraceColour(long time)
   {
     return VoltageColour.getColourForTraces(Colours.getInstance(), traces, time);
@@ -357,20 +341,20 @@ public class TraceView
     this.traces = traces;
   }
 
-  public void disconnect()
+  public void disconnect(Simulation simulation, ConnectionView connection)
   {
-    traces = new ArrayList<>();
+    int index = connections.indexOf(connection);
+    if (index == -1)
+    {
+      throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
+    }
+    connections.set(index, null);
+    traces.clear();
   }
 
   public List<Trace> getTraces()
   {
     return traces;
-  }
-
-  public boolean hasOverlap(Int2D start, Int2D end)
-  {
-    LineOverlap overlap = getOverlap(new Line(start, end));
-    return overlap != LineOverlap.None;
   }
 
   public void setLine(Int2D start, Int2D end)

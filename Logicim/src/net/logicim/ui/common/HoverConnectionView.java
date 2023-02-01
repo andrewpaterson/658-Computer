@@ -6,12 +6,9 @@ import net.logicim.ui.common.integratedcircuit.View;
 public class HoverConnectionView
     extends ConnectionView
 {
-  protected Int2D gridPosition;
-
   public HoverConnectionView(View view, int x, int y)
   {
-    super(view);
-    this.gridPosition = new Int2D(x, y);
+    super(view, x, y);
   }
 
   public View getParent()

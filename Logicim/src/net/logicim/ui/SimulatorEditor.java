@@ -382,6 +382,7 @@ public class SimulatorEditor
     Int2D position = getMousePositionOnGrid();
     if (position != null)
     {
+      circuitEditor.clearSelection();
       discardPlacement();
       placementView = viewFactory.create(circuitEditor, position, creationRotation);
     }
@@ -567,7 +568,7 @@ public class SimulatorEditor
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
           int y = viewport.transformScreenToGridY(mousePosition.y);
-          hoverConnectionView = hoverComponentView.getConnectionsInGrid(x, y);
+          hoverConnectionView = circuitEditor.getConnection(x, y);
         }
         else
         {

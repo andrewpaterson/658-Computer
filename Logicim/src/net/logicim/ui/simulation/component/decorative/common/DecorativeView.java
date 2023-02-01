@@ -59,18 +59,6 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public ConnectionView getConnectionsInGrid(int x, int y)
-  {
-    return null;
-  }
-
-  @Override
-  public Int2D getConnectionGridPosition(ConnectionView connectionView)
-  {
-    return null;
-  }
-
-  @Override
   public String getName()
   {
     return "";
@@ -92,6 +80,11 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   public void disable()
   {
     enabled = false;
+  }
+
+  @Override
+  public void disconnect(Simulation simulation, ConnectionView connection)
+  {
   }
 }
 

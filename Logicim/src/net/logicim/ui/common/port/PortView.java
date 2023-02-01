@@ -182,23 +182,13 @@ public class PortView
     return ports;
   }
 
-  public void connectTraces(List<Trace> traces, Simulation simulation)
-  {
-    for (int i = 0; i < ports.size(); i++)
-    {
-      Port port = ports.get(i);
-      Trace trace = traces.get(i);
-      port.disconnect(simulation);
-      port.connect(trace);
-    }
-  }
-
   public void disconnect(Simulation simulation)
   {
     for (Port port : ports)
     {
       port.disconnect(simulation);
     }
+    connection = null;
   }
 
   public MultiPortData save()

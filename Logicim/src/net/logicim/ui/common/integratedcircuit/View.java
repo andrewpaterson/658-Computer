@@ -2,10 +2,12 @@ package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Component;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class View
 {
@@ -25,15 +27,6 @@ public abstract class View
 
   public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
 
-  public ConnectionView getConnectionsInGrid(Int2D p)
-  {
-    return getConnectionsInGrid(p.x, p.y);
-  }
-
-  public abstract ConnectionView getConnectionsInGrid(int x, int y);
-
-  public abstract Int2D getConnectionGridPosition(ConnectionView connectionView);
-
   public abstract void paint(Graphics2D graphics, Viewport viewport, long time);
 
   public abstract String getName();
@@ -44,8 +37,19 @@ public abstract class View
 
   public abstract Int2D getPosition();
 
+  public String toIdentifierString()
+  {
+    return getClass().getSimpleName() + " [" + getName() + "]";
+  }
+
   public abstract void enable(Simulation simulation);
 
   public abstract void setPosition(int x, int y);
+
+  public abstract void disconnect(Simulation simulation, ConnectionView connection);
+
+  public abstract List<ConnectionView> getConnections();
+
+  public abstract Component getComponent();
 }
 

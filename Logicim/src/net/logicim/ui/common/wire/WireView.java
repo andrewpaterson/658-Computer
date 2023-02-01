@@ -13,10 +13,6 @@ public interface WireView
 
   List<Trace> getTraces();
 
-  void removed();
-
-  boolean isRemoved();
-
   List<ConnectionView> getConnections();
 
   View getView();

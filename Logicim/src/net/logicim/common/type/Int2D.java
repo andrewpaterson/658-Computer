@@ -226,5 +226,14 @@ public class Int2D
     }
     return null;
   }
+
+  public static String toString(Int2D p)
+  {
+    if (p != null)
+    {
+      return p.toString();
+    }
+    return "null";
+  }
 }
 

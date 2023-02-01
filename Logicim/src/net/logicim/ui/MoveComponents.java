@@ -222,7 +222,7 @@ public class MoveComponents
       }
       else
       {
-        throw new SimulatorException("Cannot get position for %s [%s].", staticView.getClass().getSimpleName(), staticView.getDescription());
+        throw new SimulatorException("Cannot get position for %s.", staticView.toIdentifierString());
       }
     }
 
@@ -254,7 +254,7 @@ public class MoveComponents
       }
       else
       {
-        throw new SimulatorException("Cannot get position for %s [%s].", traceView.getClass().getSimpleName(), traceView.getDescription());
+        throw new SimulatorException("Cannot get position for %s.", traceView.toIdentifierString());
       }
     }
   }

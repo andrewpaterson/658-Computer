@@ -130,11 +130,10 @@ public class TunnelView
   {
     updateGridCache();
 
-    this.connections.clear();
-    this.connections.add(circuitEditor.getOrAddConnection((Int2D)startCache.getTransformedPosition(), this));
+    this.connections.add(circuitEditor.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this));
     if (properties.doubleSided)
     {
-      this.connections.add(circuitEditor.getOrAddConnection((Int2D)endCache.getTransformedPosition(), this));
+      this.connections.add(circuitEditor.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this));
     }
   }
 
@@ -166,38 +165,6 @@ public class TunnelView
         endCache.update(endPosition, rotation, position);
       }
     }
-  }
-
-  @Override
-  public ConnectionView getConnectionsInGrid(int x, int y)
-  {
-    updateGridCache();
-
-    if (startCache.getTransformedPosition().equals(x, y))
-    {
-      return getStartConnection();
-    }
-    if (properties.doubleSided && endCache.getTransformedPosition().equals(x, y))
-    {
-      return getEndConnection();
-    }
-    return null;
-  }
-
-  @Override
-  public Int2D getConnectionGridPosition(ConnectionView connectionView)
-  {
-    updateGridCache();
-
-    if (getStartConnection() == connectionView)
-    {
-      return (Int2D) startCache.getTransformedPosition();
-    }
-    if (properties.doubleSided && getEndConnection() == connectionView)
-    {
-      return (Int2D) endCache.getTransformedPosition();
-    }
-    return null;
   }
 
   @Override
@@ -321,9 +288,16 @@ public class TunnelView
     this.traces = traces;
   }
 
-  public void disconnect()
+  @Override
+  public void disconnect(Simulation simulation, ConnectionView connection)
   {
-    traces = new ArrayList<>();
+    int index = connections.indexOf(connection);
+    if (index == -1)
+    {
+      throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
+    }
+    connections.set(index, null);
+    traces.clear();
   }
 
   @Override
@@ -332,7 +306,6 @@ public class TunnelView
     return traces;
   }
 
-  @Override
   public boolean isRemoved()
   {
     return connections.isEmpty();
@@ -342,17 +315,6 @@ public class TunnelView
   public List<ConnectionView> getConnections()
   {
     return connections;
-  }
-
-  @Override
-  public void removed()
-  {
-    connections.clear();
-
-    if (!traces.isEmpty())
-    {
-      throw new SimulatorException("Trace must be disconnected before removal.");
-    }
   }
 
   @Override

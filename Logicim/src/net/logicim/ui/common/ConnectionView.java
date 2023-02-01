@@ -13,16 +13,30 @@ public class ConnectionView
     implements Comparable<ConnectionView>
 {
   protected List<View> connectedComponents;
+  protected Int2D gridPosition;
 
-  public ConnectionView()
+  public ConnectionView(View parentView, Int2D gridPosition)
   {
-    connectedComponents = new ArrayList<>();
+    this(parentView, gridPosition.x, gridPosition.y);
   }
 
-  public ConnectionView(View parentView)
+  public ConnectionView(View parentView, int x, int y)
   {
-    this();
+    connectedComponents = new ArrayList<>();
     connectedComponents.add(parentView);
+    this.gridPosition = new Int2D(x, y);
+  }
+
+  public static String toPositionString(ConnectionView connectionView)
+  {
+    if (connectionView != null)
+    {
+      return Int2D.toString(connectionView.getGridPosition());
+    }
+    else
+    {
+      return "null";
+    }
   }
 
   public List<View> getConnectedComponents()
@@ -32,19 +46,6 @@ public class ConnectionView
 
   public Int2D getGridPosition()
   {
-    Int2D gridPosition = null;
-    for (View connectedComponent : connectedComponents)
-    {
-      Int2D position = connectedComponent.getConnectionGridPosition(this);
-      if (gridPosition == null)
-      {
-        gridPosition = position;
-      }
-      else if (!gridPosition.equals(position))
-      {
-        throw new SimulatorException("Expected every position in a connection to be equal.");
-      }
-    }
     return gridPosition;
   }
 
@@ -82,12 +83,12 @@ public class ConnectionView
     return true;
   }
 
-  public void remove(View traceView)
+  public void remove(View view)
   {
-    boolean removed = connectedComponents.remove(traceView);
+    boolean removed = connectedComponents.remove(view);
     if (!removed)
     {
-      throw new SimulatorException("Could not remove component from connections.");
+      throw new SimulatorException("Could not remove %s from connections.", view.toIdentifierString());
     }
   }
 
@@ -157,6 +158,11 @@ public class ConnectionView
       }
     }
     return false;
+  }
+
+  public boolean isConnectedComponentsEmpty()
+  {
+    return connectedComponents.isEmpty();
   }
 }
 

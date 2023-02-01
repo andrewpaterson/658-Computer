@@ -1,5 +1,6 @@
 package net.logicim.ui.common.integratedcircuit;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.MultiPortData;
@@ -86,20 +87,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  @Override
-  public ConnectionView getConnectionsInGrid(int x, int y)
-  {
-    PortView portView = getPortInGrid(x, y);
-    if (portView != null)
-    {
-      return portView.getConnection();
-    }
-    else
-    {
-      return null;
-    }
-  }
-
   public PortView getPortView(Port port)
   {
     for (PortView portView : ports)
@@ -118,18 +105,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     {
       portView.paint(graphics, viewport, time);
     }
-  }
-
-  public PortView getPortInGrid(int x, int y)
-  {
-    for (PortView port : ports)
-    {
-      if (port.getGridPosition().equals(x, y))
-      {
-        return port;
-      }
-    }
-    return null;
   }
 
   public void addPortView(PortView portView)
@@ -185,19 +160,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return null;
   }
 
-  public Int2D getConnectionGridPosition(ConnectionView connectionView)
-  {
-    for (PortView portView : ports)
-    {
-      ConnectionView portViewConnections = portView.getConnection();
-      if (portViewConnections == connectionView)
-      {
-        return portView.getGridPosition();
-      }
-    }
-    return null;
-  }
-
   protected void updateBoundingBoxFromPorts(BoundingBox boundingBox)
   {
     for (PortView port : ports)
@@ -240,11 +202,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       if (portView.getConnection() == connection)
       {
         portView.disconnect(simulation);
+        return;
       }
     }
+
+    throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
   }
 
-  public abstract ComponentData save(boolean selected);
+  public abstract ComponentData<?> save(boolean selected);
 
   public abstract void simulationStarted(Simulation simulation);
 }

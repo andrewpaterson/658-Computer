@@ -18,5 +18,7 @@ public interface WireView
   View getView();
 
   void enable(Simulation simulation);
+
+  ConnectionView getOpposite(ConnectionView connection);
 }
 

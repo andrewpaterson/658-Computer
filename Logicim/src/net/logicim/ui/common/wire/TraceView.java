@@ -197,7 +197,7 @@ public class TraceView
     return line.getMaximumY();
   }
 
-  public boolean hasNoConnetions()
+  public boolean hasNoConnections()
   {
       return getStartConnection() == null || getEndConnection() == null;
   }
@@ -248,7 +248,7 @@ public class TraceView
 
     int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-    if (!hasNoConnetions())
+    if (!hasNoConnections())
     {
       if (!getStartConnection().isNonJunctionTracesOnly())
       {

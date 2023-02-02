@@ -53,7 +53,6 @@ public class LabelView
                                       properties.border,
                                       properties.fill);
 
-    updateBoundingBox();
   }
 
   @Override

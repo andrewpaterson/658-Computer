@@ -6,7 +6,6 @@ import net.logicim.domain.common.Component;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.Collections;

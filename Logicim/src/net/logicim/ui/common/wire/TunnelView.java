@@ -217,6 +217,21 @@ public class TunnelView
   }
 
   @Override
+  public ConnectionView getOpposite(ConnectionView connection)
+  {
+    if (getStartConnection() == connection)
+    {
+      return getEndConnection();
+    }
+    if (getEndConnection() == connection)
+    {
+      return getStartConnection();
+    }
+
+    return null;
+  }
+
+  @Override
   public void disable()
   {
     enabled = false;

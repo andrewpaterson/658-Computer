@@ -276,8 +276,8 @@ public class CircuitEditor
 
   public Set<PortView> connectNewConnections(ConnectionView connectionView)
   {
-    PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-    List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(connectionView);
+    PortTraceFinder portTraceFinder = new PortTraceFinder();
+    List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(simulation, connectionView);
     return new LinkedHashSet<>(portTraceFinder.getPortViews(connectionNets));
   }
 
@@ -478,18 +478,6 @@ public class CircuitEditor
   public ConnectionView getOrAddConnection(Int2D position, View view)
   {
     return connectionViewCache.getOrAddConnection(position, view);
-  }
-
-  public Set<PortView> connectNewTraces(Set<ConnectionView> connectionsNet)
-  {
-    Set<PortView> updatedPortViews = new LinkedHashSet<>();
-    for (ConnectionView connectionView : connectionsNet)
-    {
-      PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-      List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(connectionView);
-      updatedPortViews.addAll(portTraceFinder.getPortViews(connectionNets));
-    }
-    return updatedPortViews;
   }
 
   public TraceView mergeTrace(TraceView traceView)
@@ -1085,8 +1073,8 @@ public class CircuitEditor
     {
       if (!updatedPortViews.contains(portView))
       {
-        PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-        List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(portView.getConnection());
+        PortTraceFinder portTraceFinder = new PortTraceFinder();
+        List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(simulation, portView.getConnection());
         updatedPortViews.addAll(portTraceFinder.getPortViews(connectionNets));
       }
     }
@@ -1102,8 +1090,8 @@ public class CircuitEditor
     {
       if (!updatedConnectionViews.contains(connectionView))
       {
-        PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-        List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(connectionView);
+        PortTraceFinder portTraceFinder = new PortTraceFinder();
+        List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(simulation, connectionView);
         updatedPortViews.addAll(portTraceFinder.getPortViews(connectionNets));
         updatedConnectionViews.addAll(portTraceFinder.getConnectionViews(connectionNets));
       }

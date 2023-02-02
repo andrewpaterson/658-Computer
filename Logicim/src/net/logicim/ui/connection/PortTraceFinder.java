@@ -13,28 +13,23 @@ import java.util.*;
 
 public class PortTraceFinder
 {
-  protected Simulation simulation;
-
   protected List<ComponentConnection<SplitterView>> splitterViewStack;
   protected Map<ConnectionView, SplitterView> processedSplitterViewConnections;
-  protected int stackIndex;
 
-  public PortTraceFinder(Simulation simulation)
+  public PortTraceFinder()
   {
-    this.simulation = simulation;
     splitterViewStack = new ArrayList<>();
     processedSplitterViewConnections = new HashMap<>();
-    stackIndex = 0;
   }
 
-  public List<LocalConnectionNet> findAndConnectTraces(ConnectionView inputConnectionView)
+  public List<LocalConnectionNet> findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView)
   {
     List<LocalConnectionNet> connectionNets = new ArrayList<>();
-    findAndConnectTraces(inputConnectionView, connectionNets);
+    findAndConnectTraces(simulation, inputConnectionView, connectionNets);
     return connectionNets;
   }
 
-    protected void findAndConnectTraces(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  protected void findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     List<FullWire> fullWires = findFullWires(inputConnectionView, connectionNets);
 
@@ -76,7 +71,7 @@ public class PortTraceFinder
     }
 
     processLocalConnections(inputConnectionView, connectionNets);
-
+    int stackIndex = 0;
     while (stackIndex < splitterViewStack.size())
     {
       ComponentConnection<SplitterView> splitterViewConnection = splitterViewStack.get(stackIndex);

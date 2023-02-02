@@ -1132,8 +1132,6 @@ public class CircuitEditor
 
   public Set<PortView> connectTunnelView(TunnelView tunnelView)
   {
-    tunnelView.createConnections(this);
-
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : tunnelView.getConnections())

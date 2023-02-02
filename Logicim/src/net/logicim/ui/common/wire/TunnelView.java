@@ -62,6 +62,8 @@ public class TunnelView
     super(circuitEditor, position, rotation, boundingBox, selectionBox, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
+    this.connections.add(null);
+    this.connections.add(null);
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
     this.traces = new ArrayList<>();
@@ -130,10 +132,14 @@ public class TunnelView
   {
     updateGridCache();
 
-    this.connections.add(circuitEditor.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this));
+    this.connections.set(0, circuitEditor.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this));
     if (properties.doubleSided)
     {
-      this.connections.add(circuitEditor.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this));
+      this.connections.set(1, circuitEditor.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this));
+    }
+    else
+    {
+      this.connections.set(1, null);
     }
   }
 
@@ -314,7 +320,15 @@ public class TunnelView
   @Override
   public List<ConnectionView> getConnections()
   {
-    return connections;
+    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    for (ConnectionView connection : connections)
+    {
+      if (connection != null)
+      {
+        connectionViews.add(connection);
+      }
+    }
+    return connectionViews;
   }
 
   @Override

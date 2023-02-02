@@ -257,7 +257,5 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract Component getComponent();
 
   public abstract void disable();
-
-  public abstract List<ConnectionView> getConnections();
 }
 

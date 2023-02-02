@@ -908,7 +908,16 @@ public class CircuitEditor
       List<ConnectionView> localConnectionViews = staticView.getConnections();
       for (ConnectionView connectionView : localConnectionViews)
       {
+        if (connectionView == null)
+        {
+          throw new SimulatorException("Connection on %s cannot be null.", staticView.toIdentifierString());
+        }
         Int2D connectionPosition = connectionView.getGridPosition();
+        if (connectionPosition == null)
+        {
+          throw new SimulatorException("Position on connection on %s cannot be null.", staticView.toIdentifierString());
+        }
+
         ConnectionView cacheConnectionView = connectionViewCache.getConnection(connectionPosition);
         if (cacheConnectionView != connectionView)
         {

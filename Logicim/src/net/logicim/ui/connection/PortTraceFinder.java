@@ -11,25 +11,16 @@ import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.util.*;
 
-public class PortTraceFinder
+public abstract class PortTraceFinder
 {
-  protected List<ComponentConnection<SplitterView>> splitterViewStack;
-  protected Map<ConnectionView, SplitterView> processedSplitterViewConnections;
-
-  public PortTraceFinder()
-  {
-    splitterViewStack = new ArrayList<>();
-    processedSplitterViewConnections = new HashMap<>();
-  }
-
-  public List<LocalConnectionNet> findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView)
+  public static List<LocalConnectionNet> findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView)
   {
     List<LocalConnectionNet> connectionNets = new ArrayList<>();
     findAndConnectTraces(simulation, inputConnectionView, connectionNets);
     return connectionNets;
   }
 
-  protected void findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  protected static void findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     List<FullWire> fullWires = findFullWires(inputConnectionView, connectionNets);
 
@@ -58,19 +49,18 @@ public class PortTraceFinder
     }
   }
 
-  protected List<FullWire> findFullWires(ConnectionView inputConnectionView)
-  {
-    return findFullWires(inputConnectionView, new ArrayList<>());
-  }
-
-  protected List<FullWire> findFullWires(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  protected static List<FullWire> findFullWires(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     if (inputConnectionView == null)
     {
       throw new SimulatorException("Input connection may not be null.");
     }
 
-    processLocalConnections(inputConnectionView, connectionNets);
+    List<ComponentConnection<SplitterView>> splitterViewStack = new ArrayList<>();
+    Map<ConnectionView, SplitterView> processedSplitterViewConnections = new HashMap<>();
+
+    processLocalConnections(inputConnectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
+
     int stackIndex = 0;
     while (stackIndex < splitterViewStack.size())
     {
@@ -78,7 +68,7 @@ public class PortTraceFinder
       ConnectionView connectionView = splitterViewConnection.connection;
       if (!processedSplitterViewConnections.containsKey(connectionView))
       {
-        processLocalConnections(connectionView, connectionNets);
+        processLocalConnections(connectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
       }
 
       stackIndex++;
@@ -123,7 +113,7 @@ public class PortTraceFinder
     return fullWires;
   }
 
-  protected Map<Port, Port> createSplitterPortMap(List<LocalConnectionNet> connectionNets)
+  protected static Map<Port, Port> createSplitterPortMap(List<LocalConnectionNet> connectionNets)
   {
     Map<Port, Port> totalSplitterPortMap = new HashMap<>();
     for (LocalConnectionNet connectionNet : connectionNets)
@@ -139,7 +129,7 @@ public class PortTraceFinder
     return totalSplitterPortMap;
   }
 
-  protected Map<Port, PortConnection> createPortWireMap(List<LocalConnectionNet> connectionNets)
+  protected static Map<Port, PortConnection> createPortWireMap(List<LocalConnectionNet> connectionNets)
   {
     Map<Port, PortConnection> totalPortWireMap = new HashMap<>();
     for (LocalConnectionNet connectionNet : connectionNets)
@@ -157,7 +147,7 @@ public class PortTraceFinder
     return totalPortWireMap;
   }
 
-  protected void processLocalConnections(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  protected static void processLocalConnections(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets, List<ComponentConnection<SplitterView>> splitterViewStack, Map<ConnectionView, SplitterView> processedSplitterViewConnections)
   {
     LocalConnectionNet connectionNet = new LocalConnectionNet(inputConnectionView);
     connectionNets.add(connectionNet);
@@ -186,7 +176,7 @@ public class PortTraceFinder
     }
   }
 
-  public List<PortView> getPortViews(List<LocalConnectionNet> connectionNets)
+  public static List<PortView> getPortViews(List<LocalConnectionNet> connectionNets)
   {
     ArrayList<PortView> portViews = new ArrayList<>();
     for (LocalConnectionNet connectionNet : connectionNets)
@@ -196,7 +186,7 @@ public class PortTraceFinder
     return portViews;
   }
 
-  public List<ConnectionView> getConnectionViews(List<LocalConnectionNet> connectionNets)
+  public static List<ConnectionView> getConnectionViews(List<LocalConnectionNet> connectionNets)
   {
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
     for (LocalConnectionNet connectionNet : connectionNets)

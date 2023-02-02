@@ -22,6 +22,7 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.common.wire.WireView;
+import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
@@ -275,8 +276,9 @@ public class CircuitEditor
 
   public Set<PortView> connectNewConnections(ConnectionView connectionView)
   {
-    Set<ConnectionView> connectionsNet = findConnections(connectionView);
-    return connectNewTraces(connectionsNet);
+    PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
+    List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(connectionView);
+    return new LinkedHashSet<>(portTraceFinder.getPortViews(connectionNets));
   }
 
   public Simulation reset()
@@ -478,52 +480,14 @@ public class CircuitEditor
     return connectionViewCache.getOrAddConnection(position, view);
   }
 
-  public Set<ConnectionView> findConnections(ConnectionView connectionView)
-  {
-    if (connectionView != null)
-    {
-      ArrayList<ConnectionView> connectionsToProcess = new ArrayList<>();
-      connectionsToProcess.add(connectionView);
-      Set<ConnectionView> connectionsNet = new LinkedHashSet<>();
-      while (connectionsToProcess.size() > 0)
-      {
-        ConnectionView currentConnection = connectionsToProcess.get(0);
-        connectionsToProcess.remove(0);
-        connectionsNet.add(currentConnection);
-
-        List<View> components = currentConnection.getConnectedComponents();
-        if (components != null)
-        {
-          for (View view : components)
-          {
-            if (view instanceof WireView)
-            {
-              WireView traceView = (WireView) view;
-              ConnectionView opposite = traceView.getOpposite(currentConnection);
-              if (opposite != null && !connectionsNet.contains(opposite))
-              {
-                connectionsToProcess.add(opposite);
-              }
-            }
-          }
-        }
-      }
-      return connectionsNet;
-    }
-    else
-    {
-      return new LinkedHashSet<>();
-    }
-  }
-
   public Set<PortView> connectNewTraces(Set<ConnectionView> connectionsNet)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionsNet)
     {
       PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-      portTraceFinder.findAndConnectTraces(connectionView);
-      updatedPortViews.addAll(portTraceFinder.getPortViews());
+      List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(connectionView);
+      updatedPortViews.addAll(portTraceFinder.getPortViews(connectionNets));
     }
     return updatedPortViews;
   }
@@ -1122,8 +1086,8 @@ public class CircuitEditor
       if (!updatedPortViews.contains(portView))
       {
         PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-        portTraceFinder.findAndConnectTraces(portView.getConnection());
-        updatedPortViews.addAll(portTraceFinder.getPortViews());
+        List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(portView.getConnection());
+        updatedPortViews.addAll(portTraceFinder.getPortViews(connectionNets));
       }
     }
 
@@ -1139,9 +1103,9 @@ public class CircuitEditor
       if (!updatedConnectionViews.contains(connectionView))
       {
         PortTraceFinder portTraceFinder = new PortTraceFinder(simulation);
-        portTraceFinder.findAndConnectTraces(connectionView);
-        updatedPortViews.addAll(portTraceFinder.getPortViews());
-        updatedConnectionViews.addAll(portTraceFinder.getConnectionViews());
+        List<LocalConnectionNet> connectionNets = portTraceFinder.findAndConnectTraces(connectionView);
+        updatedPortViews.addAll(portTraceFinder.getPortViews(connectionNets));
+        updatedConnectionViews.addAll(portTraceFinder.getConnectionViews(connectionNets));
       }
     }
 

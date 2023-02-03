@@ -115,7 +115,8 @@ public class TraceView
       return getStartConnection();
     }
 
-    throw new SimulatorException("No opposite found.");
+    //throw new SimulatorException("No opposite found.");
+    return null;
   }
 
   @Override
@@ -199,7 +200,7 @@ public class TraceView
 
   public boolean hasNoConnections()
   {
-      return getStartConnection() == null || getEndConnection() == null;
+    return getStartConnection() == null || getEndConnection() == null;
   }
 
   @Override
@@ -343,12 +344,15 @@ public class TraceView
 
   public void disconnect(Simulation simulation, ConnectionView connection)
   {
-    int index = connections.indexOf(connection);
-    if (index == -1)
+    throw new SimulatorException("Cannot call .disconnect() on a WireView.");
+  }
+
+  public void disconnect(Simulation simulation)
+  {
+    for (int i = 0; i < connections.size(); i++)
     {
-      throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
+      connections.set(i, null);
     }
-    connections.set(index, null);
     traces.clear();
   }
 

@@ -6,6 +6,7 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConnectionViewCache
@@ -105,6 +106,14 @@ public class ConnectionViewCache
           throw new SimulatorException("Connection map position in cache (%s) must be equal to connection position (%s).", new Int2D(x, y).toString(), connectionPosition.toString());
         }
       }
+    }
+  }
+
+  public void removeAll(View view, List<ConnectionView> connectionViews)
+  {
+    for (ConnectionView connectionView : connectionViews)
+    {
+      remove(view, connectionView);
     }
   }
 }

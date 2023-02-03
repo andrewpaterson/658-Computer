@@ -21,6 +21,7 @@ import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -184,10 +185,19 @@ public class CircuitEditor
     {
       throw new SimulatorException("Cannot disconnect %s with [null] connections.", view.toIdentifierString());
     }
-    for (ConnectionView connectionView : connectionViews)
+
+    if (!(view instanceof WireView))
     {
-      connectionViewCache.remove(view, connectionView);
-      view.disconnect(simulation, connectionView);
+      connectionViewCache.removeAll(view, connectionViews);
+      for (ConnectionView connectionView : connectionViews)
+      {
+        view.disconnect(simulation, connectionView);
+      }
+    }
+    else
+    {
+      connectionViewCache.removeAll(view, connectionViews);
+      ((WireView) view).disconnect(simulation);
     }
 
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
@@ -512,6 +522,10 @@ public class CircuitEditor
 
   private List<TraceView> findStraightTracesInDirection(TraceView traceView, Rotation direction, ConnectionView endConnection)
   {
+    if (endConnection == null)
+    {
+      throw new SimulatorException("End connection may not be null.");
+    }
     ArrayList<TraceView> result = new ArrayList<>();
 
     TraceView currentTrace = traceView;
@@ -557,6 +571,7 @@ public class CircuitEditor
         {
           Int2D startPosition = traceView.getStartPosition();
           Int2D endPosition = traceView.getEndPosition();
+          disconnectView(traceView);
           removeTraceView(traceView);
 
           result.add(new TraceView(this, startPosition, position));
@@ -580,7 +595,11 @@ public class CircuitEditor
       updatedPortViews.addAll(mergeAndConnectTracesAfterDelete(endConnection));
       return updatedPortViews;
     }
-    return new LinkedHashSet<>();
+    else
+    {
+      removeTraceView(traceView);
+      return new LinkedHashSet<>();
+    }
   }
 
   protected Set<PortView> mergeAndConnectTracesAfterDelete(ConnectionView connectionView)

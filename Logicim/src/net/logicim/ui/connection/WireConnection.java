@@ -5,13 +5,18 @@ import net.logicim.ui.common.wire.WireView;
 
 public class WireConnection
 {
-  protected WireView component;
-  protected ConnectionView connection;
+  protected WireView wireView;
+  protected ConnectionView connectionView;
 
-  public WireConnection(WireView component, ConnectionView connection)
+  public WireConnection(WireView wireView, ConnectionView connectionView)
   {
-    this.component = component;
-    this.connection = connection;
+    this.wireView = wireView;
+    this.connectionView = connectionView;
+  }
+
+  public WireView getWireView()
+  {
+    return wireView;
   }
 }
 

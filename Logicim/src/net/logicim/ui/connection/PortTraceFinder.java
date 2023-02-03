@@ -22,8 +22,32 @@ public abstract class PortTraceFinder
 
   protected static void findAndConnectTraces(Simulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
-    List<FullWire> fullWires = findFullWires(inputConnectionView, connectionNets);
+    WireList wireList = findWires(inputConnectionView, connectionNets);
 
+    connectFullWires(simulation, wireList.getFullWires());
+
+    List<PartialWire> partialWires = wireList.getPartialWires();
+    for (PartialWire partialWire : partialWires)
+    {
+      for (WireConnection wireConnection : partialWire.connectedWires)
+      {
+        WireView wireView = wireConnection.getWireView();
+        wireView.disconnect(simulation);
+      }
+    }
+
+    for (LocalConnectionNet connectionNet : connectionNets)
+    {
+      for (WireConnection connectedWire : connectionNet.getConnectedWires())
+      {
+        WireView wireView = connectedWire.wireView;
+        wireView.connectTraces(connectionNet.getTraces());
+      }
+    }
+  }
+
+  private static void connectFullWires(Simulation simulation, List<FullWire> fullWires)
+  {
     for (FullWire fullWire : fullWires)
     {
       Trace trace = new Trace();
@@ -38,18 +62,9 @@ public abstract class PortTraceFinder
         localWire.localConnectionNet.addTrace(trace);
       }
     }
-
-    for (LocalConnectionNet connectionNet : connectionNets)
-    {
-      for (WireConnection connectedWire : connectionNet.getConnectedWires())
-      {
-        WireView wireView = connectedWire.component;
-        wireView.connectTraces(connectionNet.getTraces());
-      }
-    }
   }
 
-  protected static List<FullWire> findFullWires(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  protected static WireList findWires(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     if (inputConnectionView == null)
     {
@@ -74,47 +89,58 @@ public abstract class PortTraceFinder
       stackIndex++;
     }
 
+    return createWireList(connectionNets);
+  }
+
+  protected static WireList createWireList(List<LocalConnectionNet> connectionNets)
+  {
     Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(connectionNets);
     Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
 
     Set<PortConnection> processedWires = new HashSet<>();
-
-    List<FullWire> fullWires = new ArrayList<>();
+    WireList wireList = new WireList();
     for (LocalConnectionNet connectionNet : connectionNets)
     {
       List<PortConnection> portConnections = connectionNet.getPortConnections();
-      for (PortConnection portConnection : portConnections)
+      if (!portConnections.isEmpty())
       {
-        if (!processedWires.contains(portConnection))
+        for (PortConnection portConnection : portConnections)
         {
-          List<Port> portStack = new ArrayList<>();
-          int portStackIndex = 0;
-
-          FullWire fullWire = new FullWire();
-          fullWire.process(portConnection, portStack);
-          processedWires.add(portConnection);
-          while (portStackIndex < portStack.size())
+          if (!processedWires.contains(portConnection))
           {
-            Port port = portStack.get(portStackIndex);
-            portStackIndex++;
+            List<Port> portStack = new ArrayList<>();
+            int portStackIndex = 0;
 
-            Port oppositeSplitterPort = totalSplitterPortMap.get(port);
-            if (oppositeSplitterPort == null)
+            FullWire fullWire = new FullWire();
+            fullWire.process(portConnection, portStack);
+            processedWires.add(portConnection);
+            while (portStackIndex < portStack.size())
             {
-              throw new SimulatorException("Could not find opposite port for splitter.");
+              Port port = portStack.get(portStackIndex);
+              portStackIndex++;
+
+              Port oppositeSplitterPort = totalSplitterPortMap.get(port);
+              if (oppositeSplitterPort == null)
+              {
+                throw new SimulatorException("Could not find opposite port for splitter.");
+              }
+              PortConnection oppositePortConnection = totalPortWireMap.get(oppositeSplitterPort);
+              if (!processedWires.contains(oppositePortConnection) && oppositePortConnection != null)
+              {
+                fullWire.process(oppositePortConnection, portStack);
+                processedWires.add(oppositePortConnection);
+              }
             }
-            PortConnection oppositePortConnection = totalPortWireMap.get(oppositeSplitterPort);
-            if (!processedWires.contains(oppositePortConnection) && oppositePortConnection != null)
-            {
-              fullWire.process(oppositePortConnection, portStack);
-              processedWires.add(oppositePortConnection);
-            }
+            wireList.add(fullWire);
           }
-          fullWires.add(fullWire);
         }
       }
+      else
+      {
+        wireList.add(new PartialWire(connectionNet.connectedWires));
+      }
     }
-    return fullWires;
+    return wireList;
   }
 
   protected static Map<Port, Port> createSplitterPortMap(List<LocalConnectionNet> connectionNets)

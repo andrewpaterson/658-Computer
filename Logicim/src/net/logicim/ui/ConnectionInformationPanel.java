@@ -5,6 +5,7 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.HoverConnectionView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -53,7 +54,8 @@ public class ConnectionInformationPanel
     int yOffset = top + 10 + metrics.getAscent();
     int y = 0;
     int xOffset = left + 10;
-    graphics.drawString("  < Position: " + connectionView.getGridPosition().x + ", " + connectionView.getGridPosition().y + " >", xOffset, y + yOffset);
+    String hover = connectionView instanceof HoverConnectionView ? "(hover) " : "";
+    graphics.drawString("  < Position: " + connectionView.getGridPosition().x + ", " + connectionView.getGridPosition().y + " " + hover + ">", xOffset, y + yOffset);
     y += fontHeight + ySpacing;
     View previousComponent = null;
     for (View connectedComponent : connectedComponents)

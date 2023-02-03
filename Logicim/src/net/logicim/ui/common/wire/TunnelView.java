@@ -267,26 +267,25 @@ public class TunnelView
                           properties.doubleSided);
   }
 
-  public Set<TunnelView> getTunnels()
-  {
-    return tunnels;
-  }
-
   public void connectTraces(List<Trace> traces)
   {
     this.traces = traces;
   }
 
   @Override
+  public void disconnect(Simulation simulation)
+  {
+    for (int i = 0; i < connections.size(); i++)
+    {
+      connections.set(i, null);
+    }
+    traces.clear();
+  }
+
+  @Override
   public void disconnect(Simulation simulation, ConnectionView connection)
   {
-    int index = connections.indexOf(connection);
-    if (index == -1)
-    {
-      throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
-    }
-    connections.set(index, null);
-    traces.clear();
+    throw new SimulatorException("Cannot call .disconnect() on a WireView.");
   }
 
   @Override

@@ -21,7 +21,6 @@ import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
-import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -131,17 +130,15 @@ public class CircuitEditor
 
   public Set<PortView> deleteTunnelView(TunnelView tunnelView)
   {
-    ConnectionView startConnection = tunnelView.getStartConnection();
-    ConnectionView endConnection = tunnelView.getEndConnection();
+    Set<ConnectionView> connectionViews = tunnelView.getAllConnectedTunnelConnections();
+    removeTunnelView(tunnelView);
 
-    deleteWireViewInternal(tunnelView);
-
-    Set<PortView> portViews = mergeAndConnectAfterDelete(startConnection);
-    if (endConnection != null)
+    LinkedHashSet<PortView> updatedPortViews = new LinkedHashSet<>();
+    for (ConnectionView connectionView : connectionViews)
     {
-      portViews.addAll(mergeAndConnectAfterDelete(endConnection));
+      updatedPortViews.addAll(mergeAndConnectAfterDelete(connectionView));
     }
-    return portViews;
+    return updatedPortViews;
   }
 
   protected Set<PortView> deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
@@ -268,19 +265,6 @@ public class CircuitEditor
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();
-  }
-
-  public void deleteWireViewInternal(WireView wireView)
-  {
-    disconnectView(wireView.getView());
-    if (wireView instanceof TraceView)
-    {
-      removeTraceView((TraceView) wireView);
-    }
-    else if (wireView instanceof TunnelView)
-    {
-      removeTunnelView((TunnelView) wireView);
-    }
   }
 
   public Set<PortView> connectNewConnections(ConnectionView connectionView)
@@ -495,7 +479,7 @@ public class CircuitEditor
         {
           largest.y = y2;
         }
-        deleteWireViewInternal(mergeView);
+        removeTraceView(mergeView);
       }
 
       if (isValidTrace(smallest, largest))
@@ -573,7 +557,7 @@ public class CircuitEditor
         {
           Int2D startPosition = traceView.getStartPosition();
           Int2D endPosition = traceView.getEndPosition();
-          deleteWireViewInternal(traceView);
+          removeTraceView(traceView);
 
           result.add(new TraceView(this, startPosition, position));
           result.add(new TraceView(this, position, endPosition));
@@ -590,11 +574,11 @@ public class CircuitEditor
       ConnectionView startConnection = traceView.getStartConnection();
       ConnectionView endConnection = traceView.getEndConnection();
 
-      deleteWireViewInternal(traceView);
+      removeTraceView(traceView);
 
-      Set<PortView> portViews = mergeAndConnectAfterDelete(startConnection);
-      portViews.addAll(mergeAndConnectAfterDelete(endConnection));
-      return portViews;
+      Set<PortView> updatedPortViews = mergeAndConnectAfterDelete(startConnection);
+      updatedPortViews.addAll(mergeAndConnectAfterDelete(endConnection));
+      return updatedPortViews;
     }
     return new LinkedHashSet<>();
   }

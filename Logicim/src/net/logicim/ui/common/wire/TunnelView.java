@@ -19,6 +19,7 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -143,24 +144,6 @@ public class TunnelView
     }
   }
 
-  public ConnectionView getStartConnection()
-  {
-    if (connections.size() > 0)
-    {
-      return connections.get(0);
-    }
-    return null;
-  }
-
-  public ConnectionView getEndConnection()
-  {
-    if (connections.size() > 1)
-    {
-      return connections.get(1);
-    }
-    return null;
-  }
-
   public void updateGridCache()
   {
     if (!startCache.isValid())
@@ -214,21 +197,6 @@ public class TunnelView
   public void enable(Simulation simulation)
   {
     enabled = true;
-  }
-
-  @Override
-  public ConnectionView getOpposite(ConnectionView connection)
-  {
-    if (getStartConnection() == connection)
-    {
-      return getEndConnection();
-    }
-    if (getEndConnection() == connection)
-    {
-      return getStartConnection();
-    }
-
-    return null;
   }
 
   @Override
@@ -363,6 +331,16 @@ public class TunnelView
   public String getSanitisedName()
   {
     return sanitisedName;
+  }
+
+  public Set<ConnectionView> getAllConnectedTunnelConnections()
+  {
+    LinkedHashSet<ConnectionView> connectionViews = new LinkedHashSet<>();
+    for (TunnelView tunnelView : tunnels)
+    {
+      connectionViews.addAll(tunnelView.getConnections());
+    }
+    return connectionViews;
   }
 }
 

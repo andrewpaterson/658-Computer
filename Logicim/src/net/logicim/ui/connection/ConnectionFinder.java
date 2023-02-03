@@ -53,18 +53,12 @@ public class ConnectionFinder
 
   protected void processTunnel(ConnectionView currentConnection, TunnelView tunnelView)
   {
-    Set<TunnelView> tunnels = tunnelView.getTunnels();
-    if (tunnels != null)
+    Set<ConnectionView> tunnelConnections = tunnelView.getAllConnectedTunnelConnections();
+    for (ConnectionView connectionView : tunnelConnections)
     {
-      for (TunnelView tunnel : tunnels)
+      if (connectionView != currentConnection)
       {
-        for (ConnectionView connection : tunnel.getConnections())
-        {
-          if (connection != currentConnection)
-          {
-            addConnectionToProcess(connection);
-          }
-        }
+        addConnectionToProcess(connectionView);
       }
     }
   }

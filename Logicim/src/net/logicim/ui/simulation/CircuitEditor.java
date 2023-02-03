@@ -136,7 +136,7 @@ public class CircuitEditor
     LinkedHashSet<PortView> updatedPortViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {
-      updatedPortViews.addAll(mergeAndConnectAfterDelete(connectionView));
+      updatedPortViews.addAll(connectNewConnections(connectionView));
     }
     return updatedPortViews;
   }
@@ -576,14 +576,14 @@ public class CircuitEditor
 
       removeTraceView(traceView);
 
-      Set<PortView> updatedPortViews = mergeAndConnectAfterDelete(startConnection);
-      updatedPortViews.addAll(mergeAndConnectAfterDelete(endConnection));
+      Set<PortView> updatedPortViews = mergeAndConnectTracesAfterDelete(startConnection);
+      updatedPortViews.addAll(mergeAndConnectTracesAfterDelete(endConnection));
       return updatedPortViews;
     }
     return new LinkedHashSet<>();
   }
 
-  protected Set<PortView> mergeAndConnectAfterDelete(ConnectionView connectionView)
+  protected Set<PortView> mergeAndConnectTracesAfterDelete(ConnectionView connectionView)
   {
     TraceView traceView = mergeTraceConnectionForDelete(connectionView);
     ConnectionView connection;
@@ -934,16 +934,16 @@ public class CircuitEditor
           }
           else if (view == null)
           {
-            throw new SimulatorException("Trace [" + traceView.getDescription() + "] does not include trace has null connection.");
+            throw new SimulatorException("TraceView [" + traceView.getDescription() + "] does not include trace has null connection.");
           }
           else
           {
-            throw new SimulatorException(view.getDescription() + " referenced by trace [" + traceView.getDescription() + "] has not been included in validateConsistency.");
+            throw new SimulatorException(view.getDescription() + " referenced by TraceView [" + traceView.getDescription() + "] has not been included in validateConsistency.");
           }
 
           if (!contained)
           {
-            throw new SimulatorException(view.getDescription() + " referenced by trace [" + traceView.getDescription() + "] does not include trace.");
+            throw new SimulatorException(view.getDescription() + " referenced by TraceView [" + traceView.getDescription() + "] does not include trace.");
           }
         }
       }

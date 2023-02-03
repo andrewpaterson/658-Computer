@@ -336,9 +336,12 @@ public class TunnelView
   public Set<ConnectionView> getAllConnectedTunnelConnections()
   {
     LinkedHashSet<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (TunnelView tunnelView : tunnels)
+    if (tunnels != null)
     {
-      connectionViews.addAll(tunnelView.getConnections());
+      for (TunnelView tunnelView : tunnels)
+      {
+        connectionViews.addAll(tunnelView.getConnections());
+      }
     }
     return connectionViews;
   }

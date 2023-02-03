@@ -87,12 +87,17 @@ public abstract class PortTraceFinder
       {
         if (!processedWires.contains(portConnection))
         {
+          List<Port> portStack = new ArrayList<>();
+          int portStackIndex = 0;
+
           FullWire fullWire = new FullWire();
-          fullWire.process(portConnection);
+          fullWire.process(portConnection, portStack);
           processedWires.add(portConnection);
-          while (fullWire.hasPortToProcess())
+          while (portStackIndex < portStack.size())
           {
-            Port port = fullWire.getNextPort();
+            Port port = portStack.get(portStackIndex);
+            portStackIndex++;
+
             Port oppositeSplitterPort = totalSplitterPortMap.get(port);
             if (oppositeSplitterPort == null)
             {
@@ -101,11 +106,10 @@ public abstract class PortTraceFinder
             PortConnection oppositePortConnection = totalPortWireMap.get(oppositeSplitterPort);
             if (!processedWires.contains(oppositePortConnection) && oppositePortConnection != null)
             {
-              fullWire.process(oppositePortConnection);
+              fullWire.process(oppositePortConnection, portStack);
               processedWires.add(oppositePortConnection);
             }
           }
-          fullWire.done();
           fullWires.add(fullWire);
         }
       }

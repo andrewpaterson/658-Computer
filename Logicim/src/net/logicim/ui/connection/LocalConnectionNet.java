@@ -45,6 +45,8 @@ public class LocalConnectionNet
     else
     {
       portConnections = new ArrayList<>();
+
+      findConnections(connections);
     }
   }
 

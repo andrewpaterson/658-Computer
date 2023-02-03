@@ -50,12 +50,6 @@ public abstract class Passive
     enabled = true;
   }
 
-  @Override
-  public PortHolder getPortHolder()
-  {
-    return this;
-  }
-
   public List<Port> getPorts()
   {
     return ports;
@@ -78,7 +72,6 @@ public abstract class Passive
   @Override
   public void disconnect(Simulation simulation)
   {
-    disconnectPorts(simulation);
   }
 }
 

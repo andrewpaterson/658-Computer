@@ -50,7 +50,7 @@ public class Circuit
     passives.remove(passive);
   }
 
-  public void disconnectDiscrete(Component component, Simulation simulation)
+  public void disconnectComponent(Component component, Simulation simulation)
   {
     component.disconnect(simulation);
   }

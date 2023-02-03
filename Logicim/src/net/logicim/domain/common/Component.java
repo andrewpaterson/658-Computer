@@ -8,19 +8,9 @@ import java.util.List;
 
 public interface Component
 {
-  PortHolder getPortHolder();
-
   List<Port> getPorts();
 
   void disconnect(Simulation simulation);
-
-  default void disconnectPorts(Simulation simulation)
-  {
-    for (Port port : getPortHolder().getPorts())
-    {
-      port.disconnect(simulation);
-    }
-  }
 
   boolean isEnabled();
 

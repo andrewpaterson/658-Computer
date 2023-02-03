@@ -187,17 +187,26 @@ public class CircuitEditor
     {
       throw new SimulatorException("Cannot disconnect %s with [null] connections.", view.toIdentifierString());
     }
-    //connectionViews = new ArrayList<>(connectionViews);
     for (ConnectionView connectionView : connectionViews)
     {
       connectionViewCache.remove(view, connectionView);
       view.disconnect(simulation, connectionView);
     }
 
+    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+    for (ConnectionView connectionView : connectionViews)
+    {
+      if (!updatedConnectionViews.contains(connectionView))
+      {
+        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(simulation, connectionView);
+        updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
+      }
+    }
+
     Component component = view.getComponent();
     if (component != null)
     {
-      circuit.disconnectDiscrete(component, simulation);
+      circuit.disconnectComponent(component, simulation);
     }
     return connectionViews;
   }
@@ -351,21 +360,6 @@ public class CircuitEditor
     return selectedViews;
   }
 
-  public List<StaticView<?>> getComponentViewsInGridSpace(Int2D gridPosition)
-  {
-    List<StaticView<?>> selectedViews = new ArrayList<>();
-    StaticViewIterator iterator = staticViewIterator();
-    while (iterator.hasNext())
-    {
-      StaticView<?> view = iterator.next();
-      if (isInGridSpaceBoundBox(gridPosition, view))
-      {
-        selectedViews.add(view);
-      }
-    }
-    return selectedViews;
-  }
-
   protected boolean isInScreenSpaceBoundingBox(Viewport viewport, Int2D screenPosition, StaticView<?> view)
   {
     if (view.isEnabled())
@@ -374,21 +368,6 @@ public class CircuitEditor
       Int2D boundBoxDimension = new Int2D();
       view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
       if (BoundingBox.containsPoint(screenPosition, boundBoxPosition, boundBoxDimension))
-      {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  protected boolean isInGridSpaceBoundBox(Int2D gridPosition, StaticView<?> view)
-  {
-    if (view.isEnabled())
-    {
-      Float2D boundBoxPosition = new Float2D();
-      Float2D boundBoxDimension = new Float2D();
-      view.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
-      if (BoundingBox.containsPoint(gridPosition, boundBoxPosition, boundBoxDimension))
       {
         return true;
       }

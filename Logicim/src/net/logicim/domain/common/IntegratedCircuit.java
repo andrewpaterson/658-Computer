@@ -7,7 +7,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PortHolder;
 import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.state.State;
 
@@ -201,16 +200,8 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   }
 
   @Override
-  public PortHolder getPortHolder()
-  {
-    return pins;
-  }
-
-  @Override
   public void disconnect(Simulation simulation)
   {
-    disconnectPorts(simulation);
-
     List<IntegratedCircuitEvent> events = this.events.toList();
     for (IntegratedCircuitEvent event : events)
     {

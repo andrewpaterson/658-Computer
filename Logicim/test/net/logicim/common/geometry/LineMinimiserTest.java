@@ -97,15 +97,6 @@ public class LineMinimiserTest
     Validator.validateEquals(new Int2D(0, 5), line.getEnd());
   }
 
-  public static void test()
-  {
-    testEdgesOverlapping();
-    testAllOverlapping();
-    testSomeOverlapping();
-    testParallelWithOverlapping();
-    testOrthogonal();
-  }
-
   protected static Line horizontalLine(int start, int end, int y)
   {
     return new Line(new Int2D(start, y), new Int2D(end, y));
@@ -114,6 +105,15 @@ public class LineMinimiserTest
   protected static Line verticalLine(int start, int end, int x)
   {
     return new Line(new Int2D(x, start), new Int2D(x, end));
+  }
+
+  public static void test()
+  {
+    testEdgesOverlapping();
+    testAllOverlapping();
+    testSomeOverlapping();
+    testParallelWithOverlapping();
+    testOrthogonal();
   }
 }
 

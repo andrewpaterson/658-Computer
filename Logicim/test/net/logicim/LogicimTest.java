@@ -2,6 +2,7 @@ package net.logicim;
 
 
 import net.logicim.common.geometry.LineMinimiserTest;
+import net.logicim.common.geometry.LineSplitterTest;
 import net.logicim.domain.SimulationTest;
 import net.logicim.domain.common.event.EventPropagationTest;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationTest;
@@ -14,6 +15,7 @@ public class LogicimTest
     InternationalUnitsTest.test();
     FamilyVoltageConfigurationTest.test();
     LineMinimiserTest.test();
+    LineSplitterTest.test();
     SimulationTest.test();
     EventPropagationTest.test();
   }

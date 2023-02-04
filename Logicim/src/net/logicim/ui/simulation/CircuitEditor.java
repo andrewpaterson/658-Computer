@@ -3,8 +3,11 @@ package net.logicim.ui.simulation;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.geometry.LineMinimiser;
+import net.logicim.common.geometry.LinePositionCache;
+import net.logicim.common.geometry.LineSplitter;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.type.Positions;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.integratedcircuit.common.StaticData;
@@ -1167,7 +1170,11 @@ public class CircuitEditor
       }
     }
 
-    lines =  LineMinimiser.minimise(lines);
+    Set<Line> mergedLines = LineMinimiser.minimise(lines);
+    Positions positionMap = new Positions(lines);
+    LinePositionCache lineCache = new LinePositionCache(mergedLines);
+    Set<Line> splitLines = LineSplitter.split(mergedLines, positionMap);
+xxx
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)

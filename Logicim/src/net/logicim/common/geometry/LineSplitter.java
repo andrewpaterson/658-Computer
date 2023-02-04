@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Positions;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,10 +15,10 @@ public class LineSplitter
     Set<Int2D> junctions = calculateJunctions(positions, cache);
     for (Int2D junction : junctions)
     {
-      
+      cache.split(junction);
     }
 
-    return new LinkedHashSet<>();
+    return cache.getLines();
   }
 
   protected static Set<Int2D> calculateJunctions(Positions positions, LinePositionCache cache)
@@ -32,12 +31,11 @@ public class LineSplitter
       Set<Integer> ys = entry.getValue();
       for (Integer y : ys)
       {
-        Map<Integer, List<Line>> horizontalLines = cache.getHorizontalLines();
-        Line horizontalLine = getHorizontalLine(horizontalLines, x, y);
+
+        Line horizontalLine = cache.getHorizontalLine(x, y);
         if (horizontalLine != null)
         {
-          Map<Integer, List<Line>> verticalLines = cache.getVerticalLines();
-          Line verticalLine = getVerticalLine(verticalLines, x, y);
+          Line verticalLine = cache.getVerticalLine(x, y);
           if (verticalLine != null)
           {
             if (isJunction(verticalLine, horizontalLine, x, y))
@@ -63,37 +61,5 @@ public class LineSplitter
     }
 
     return false;
-  }
-
-  protected static Line getHorizontalLine(Map<Integer, List<Line>> horizontalLines, int x, int y)
-  {
-    List<Line> horizontalList = horizontalLines.get(y);
-    if (horizontalList != null)
-    {
-      for (Line line : horizontalList)
-      {
-        if (line.isPositionOn(x, y))
-        {
-          return line;
-        }
-      }
-    }
-    return null;
-  }
-
-  protected static Line getVerticalLine(Map<Integer, List<Line>> verticalLines, int x, int y)
-  {
-    List<Line> verticalList = verticalLines.get(x);
-    if (verticalList != null)
-    {
-      for (Line line : verticalList)
-      {
-        if (line.isPositionOn(x, y))
-        {
-          return line;
-        }
-      }
-    }
-    return null;
   }
 }

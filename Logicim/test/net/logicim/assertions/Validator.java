@@ -2,6 +2,9 @@ package net.logicim.assertions;
 
 public abstract class Validator
 {
+  private static final String NULL = "null";
+  private static final String NOT_NULL = "not null";
+
   public static void validate(boolean expected, boolean actual)
   {
     if (expected != actual)
@@ -60,13 +63,46 @@ public abstract class Validator
     }
   }
 
-  public static void validate(Object expected, Object actual)
+  public static void validateIdentity(Object expected, Object actual)
   {
     if (expected != actual)
     {
-      int expectedHash = System.identityHashCode(expected);
-      int actualHash = System.identityHashCode(actual);
-      throw new ValidationException(toFailureString("0x" + Integer.toHexString(expectedHash), "0x" + Integer.toHexString(actualHash)));
+      throw new ValidationException(toFailureString(toIdentityHashCode(expected), toIdentityHashCode(actual)));
+    }
+  }
+
+  protected static String toIdentityHashCode(Object expected)
+  {
+    return "0x" + Integer.toHexString(System.identityHashCode(expected));
+  }
+
+  public static void validateEquals(Object expected, Object actual)
+  {
+    if ((expected == null) && (actual == null))
+    {
+      return;
+    }
+
+    if (expected == null || actual == null)
+    {
+      throw new ValidationException(toFailureString(toNullString(expected), toNullString(actual)));
+    }
+
+    if (!expected.equals(actual))
+    {
+      throw new ValidationException(toFailureString(expected.toString(), actual.toString()));
+    }
+  }
+
+  private static String toNullString(Object o)
+  {
+    if (o == null)
+    {
+      return NULL;
+    }
+    else
+    {
+      return NOT_NULL;
     }
   }
 
@@ -74,7 +110,7 @@ public abstract class Validator
   {
     if (o == null)
     {
-      throw new ValidationException(toFailureString("Not null", "null"));
+      throw new ValidationException(toFailureString(NOT_NULL, NULL));
     }
   }
 
@@ -90,7 +126,7 @@ public abstract class Validator
     }
     else
     {
-      throw new ValidationException(toFailureString(aClass.getName(), "null"));
+      throw new ValidationException(toFailureString(aClass.getName(), NULL));
     }
   }
 

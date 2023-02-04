@@ -99,9 +99,9 @@ public class TraceView
     line.getCenter(center);
   }
 
-  public LineOverlap getOverlap(Line otherLine)
+  public LineOverlap getOverlap(Line otherLine, boolean endInclusive)
   {
-    return line.getOverlap(otherLine);
+    return line.getOverlap(otherLine, endInclusive);
   }
 
   public ConnectionView getOpposite(ConnectionView connection)

@@ -27,6 +27,11 @@ public class Line
                                                  this.end.y);
   }
 
+  public Line(Line line)
+  {
+    this(line.getStart(), line.getEnd());
+  }
+
   public static Line createLine(Int2D start, Int2D end)
   {
     if ((start != null) && (end != null))
@@ -144,12 +149,12 @@ public class Line
     return positionFallsOnTrace;
   }
 
-  public LineOverlap getOverlap(Line otherLine)
+  public LineOverlap getOverlap(Line otherLine, boolean endInclusive)
   {
     Rotation lineDirection = otherLine.getDirection();
-    if (lineDirection == Cannot)
+    if (lineDirection == Cannot || this.direction == Cannot)
     {
-      return null;
+      return None;
     }
     else
     {
@@ -163,11 +168,12 @@ public class Line
                                   getMinimumY(),
                                   getMaximumY(),
                                   getStart().y,
-                                  getEnd().y);
+                                  getEnd().y,
+                                  endInclusive);
         }
         else
         {
-          return null;
+          return None;
         }
       }
       else if ((lineDirection == East || lineDirection == West) &&
@@ -180,29 +186,45 @@ public class Line
                                   getMinimumX(),
                                   getMaximumX(),
                                   getStart().x,
-                                  getEnd().x);
+                                  getEnd().x,
+                                  endInclusive);
         }
         else
         {
-          return null;
+          return None;
         }
       }
       else
       {
-        return null;
+        return None;
       }
     }
   }
 
-  public LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd)
+    public LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd, boolean endInclusive)
   {
-    if (lineMax <= traceMin)
+    if (endInclusive)
     {
-      return null;
+      if (lineMax < traceMin)
+      {
+        return None;
+      }
+      if (lineMin > traceMax)
+      {
+        return None;
+      }
     }
-    if (lineMin >= traceMax)
+    else
     {
-      return null;
+      if (lineMax <= traceMin)
+      {
+        return None;
+      }
+      if (lineMin >= traceMax)
+      {
+        return None;
+      }
+
     }
 
     if ((lineMin <= traceMin) && (lineMax >= traceMax))
@@ -285,6 +307,50 @@ public class Line
   public Line clone()
   {
     return new Line(start, end);
+  }
+
+  public void extend(Line otherLine)
+  {
+    Rotation lineDirection = otherLine.getDirection();
+    if (lineDirection != Cannot && this.direction != Cannot)
+    {
+      if ((lineDirection == North || lineDirection == South) &&
+          (direction == North || direction == South))
+      {
+        if (getStart().x == otherLine.getStart().x)
+        {
+          int minimumY = getMinimumY();
+          int otherMinimumY = otherLine.getMinimumY();
+          minimumY = Math.min(minimumY, otherMinimumY);
+
+          int maximumY = getMaximumY();
+          int otherMaximumY = otherLine.getMaximumY();
+          maximumY = Math.max(maximumY, otherMaximumY);
+
+          start.y = minimumY;
+          end.y = maximumY;
+          direction = North;
+        }
+      }
+      else if ((lineDirection == East || lineDirection == West) &&
+               (direction == East || direction == West))
+      {
+        if (getStart().y == otherLine.getStart().y)
+        {
+          int minimumX = getMinimumX();
+          int otherMinimumX = otherLine.getMinimumX();
+          minimumX = Math.min(minimumX, otherMinimumX);
+
+          int maximumX = getMaximumX();
+          int otherMaximumX = otherLine.getMaximumX();
+          maximumX = Math.max(maximumX, otherMaximumX);
+
+          start.x = minimumX;
+          end.x = maximumX;
+          direction = East;
+        }
+      }
+    }
   }
 }
 

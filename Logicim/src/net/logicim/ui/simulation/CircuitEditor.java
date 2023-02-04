@@ -2,6 +2,7 @@ package net.logicim.ui.simulation;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
+import net.logicim.common.geometry.LineMinimiser;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
@@ -438,7 +439,7 @@ public class CircuitEditor
     List<TraceOverlap> overlaps = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      LineOverlap overlap = traceView.getOverlap(line);
+      LineOverlap overlap = traceView.getOverlap(line, false);
       if (overlap != null)
       {
         overlaps.add(new TraceOverlap(overlap, traceView));
@@ -489,6 +490,7 @@ public class CircuitEditor
         {
           largest.y = y2;
         }
+        disconnectView(traceView);
         removeTraceView(mergeView);
       }
 
@@ -520,19 +522,23 @@ public class CircuitEditor
     return false;
   }
 
-  private List<TraceView> findStraightTracesInDirection(TraceView traceView, Rotation direction, ConnectionView endConnection)
+  private List<TraceView> findStraightTracesInDirection(TraceView traceView, Rotation direction, ConnectionView connectionView)
   {
-    if (endConnection == null)
+    if (connectionView == null)
     {
       throw new SimulatorException("End connection may not be null.");
     }
     ArrayList<TraceView> result = new ArrayList<>();
 
     TraceView currentTrace = traceView;
-    ConnectionView currentConnection = endConnection;
-    for (; ; )
+    for (int i = 0; ; i++)
     {
-      List<View> connectedComponents = currentConnection.getConnectedComponents();
+      if (connectionView == null)
+      {
+        throw new SimulatorException("Cannot find traces from a null connection.  Iteration [%s].", i);
+      }
+
+      List<View> connectedComponents = connectionView.getConnectedComponents();
       TraceView otherTrace = currentTrace.getOtherTraceView(connectedComponents);
 
       if (otherTrace != null)
@@ -541,7 +547,7 @@ public class CircuitEditor
         if (direction.isStraight(otherDirection))
         {
           result.add(otherTrace);
-          currentConnection = otherTrace.getOpposite(currentConnection);
+          connectionView = otherTrace.getOpposite(connectionView);
           currentTrace = otherTrace;
         }
         else
@@ -571,11 +577,18 @@ public class CircuitEditor
         {
           Int2D startPosition = traceView.getStartPosition();
           Int2D endPosition = traceView.getEndPosition();
+
           disconnectView(traceView);
           removeTraceView(traceView);
 
-          result.add(new TraceView(this, startPosition, position));
-          result.add(new TraceView(this, position, endPosition));
+          if (!position.equals(startPosition))
+          {
+            result.add(new TraceView(this, startPosition, position));
+          }
+          if (!position.equals(endPosition))
+          {
+            result.add(new TraceView(this, position, endPosition));
+          }
         }
       }
     }
@@ -589,6 +602,7 @@ public class CircuitEditor
       ConnectionView startConnection = traceView.getStartConnection();
       ConnectionView endConnection = traceView.getEndConnection();
 
+      disconnectView(traceView);
       removeTraceView(traceView);
 
       Set<PortView> updatedPortViews = mergeAndConnectTracesAfterDelete(startConnection);
@@ -642,7 +656,10 @@ public class CircuitEditor
 
     if ((traceView1 != null) && (traceView2 != null))
     {
-      return mergeTrace(traceView1);
+      if (!traceView1.hasNoConnections())
+      {
+        return mergeTrace(traceView1);
+      }
     }
     return null;
   }
@@ -1131,6 +1148,28 @@ public class CircuitEditor
     selection = getSelection(selectionRectangle.getStart(), selectionRectangle.getEnd());
   }
 
+  public void createTraceViews(List<Line> inputLines)
+  {
+    Set<TraceView> overlappingTraceViews = new LinkedHashSet<>();
+    Set<Line> lines = new LinkedHashSet<>(inputLines);
+
+    for (Line line : inputLines)
+    {
+      List<TraceOverlap> tracesOverlapping = getTracesOverlapping(line);
+      for (TraceOverlap traceOverlap : tracesOverlapping)
+      {
+        if (traceOverlap.getOverlap() != LineOverlap.None)
+        {
+          TraceView traceView = traceOverlap.getTraceView();
+          overlappingTraceViews.add(traceView);
+          lines.add(traceView.getLine());
+        }
+      }
+    }
+
+    lines =  LineMinimiser.minimise(lines);
+  }
+
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
@@ -1144,6 +1183,15 @@ public class CircuitEditor
     }
 
     List<View> selection = new ArrayList<>();
+
+    Set<TraceView> newTraces = new LinkedHashSet<>();
+    for (Line line : lines)
+    {
+      Set<TraceView> localNewTraces = createTraceViews(line);
+      newTraces.addAll(localNewTraces);
+      selection.addAll(localNewTraces);
+    }
+
     for (StaticView<?> staticView : staticViews)
     {
       Set<PortView> portViews = connectComponentView(staticView);
@@ -1152,14 +1200,6 @@ public class CircuitEditor
       {
         selection.add(staticView);
       }
-    }
-
-    Set<TraceView> newTraces = new LinkedHashSet<>();
-    for (Line line : lines)
-    {
-      Set<TraceView> localNewTraces = createTraceViews(line);
-      newTraces.addAll(localNewTraces);
-      selection.addAll(localNewTraces);
     }
 
     newTraces = findNonRemovedTraceViews(newTraces);
@@ -1328,14 +1368,16 @@ public class CircuitEditor
   public void finaliseCreatedTraces(Set<TraceView> traceViews)
   {
     Set<PortView> updatedPortViews = new LinkedHashSet<>();
+    int i = 0;
     for (TraceView traceView : traceViews)
     {
       if (traceView.hasNoConnections())
       {
-        throw new SimulatorException("Cannot finalise a removed Trace.");
+        throw new SimulatorException("Cannot finalise a removed Trace.  Iteration [%s].", i);
       }
       Set<PortView> portViews = connectNewConnections(traceView.getStartConnection());
       updatedPortViews.addAll(portViews);
+      i++;
     }
 
     fireConnectionEvents(updatedPortViews);
@@ -1443,9 +1485,16 @@ public class CircuitEditor
 
   protected boolean removeTraceView(TraceView traceView)
   {
-    synchronized (this)
+    if (traceView.hasNoConnections())
     {
-      return traceViews.remove(traceView);
+      synchronized (this)
+      {
+        return traceViews.remove(traceView);
+      }
+    }
+    else
+    {
+      throw new SimulatorException("Cannot remove trace view with connections.");
     }
   }
 

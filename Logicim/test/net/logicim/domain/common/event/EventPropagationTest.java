@@ -17,7 +17,6 @@ import java.util.List;
 
 public class EventPropagationTest
 {
-
   private static void testEventPropagation()
   {
     CircuitEditor circuitEditor = new CircuitEditor();

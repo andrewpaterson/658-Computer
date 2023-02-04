@@ -259,7 +259,7 @@ public class SimulationTest
     PortEvent portSlewEvent = portEventsForConstant.get(0);
     validateClass(SlewEvent.class, portSlewEvent);
     validate(nanosecondsToTime(2), portSlewEvent.getTime());
-    validate(treeSlewEvent, portSlewEvent);
+    validateIdentity(treeSlewEvent, portSlewEvent);
 
     float voltage = constantOutput.getVoltageOut(simulation.getTime());
     validateTrue(Float.isNaN(voltage));
@@ -436,7 +436,7 @@ public class SimulationTest
     Event event = simultaneousEvents.get(0);
     validateClass(expectedClass, event);
     IntegratedCircuit<?, ?> actualIC = event.getIntegratedCircuit();
-    validate(expectedIC, actualIC);
+    validateIdentity(expectedIC, actualIC);
     return (T) event;
   }
 

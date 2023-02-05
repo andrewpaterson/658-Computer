@@ -409,26 +409,7 @@ public class SimulatorEditor
     Line firstLine = Line.createLine(firstPosition, middlePosition);
     Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-    Set<TraceView> traceViews;
-    if (secondLine == null)
-    {
-      if (firstLine != null)
-      {
-        traceViews = circuitEditor.createTraceViews(firstLine);
-      }
-      else
-      {
-        traceViews = new LinkedHashSet<>();
-      }
-    }
-    else
-    {
-      traceViews = new LinkedHashSet<>();
-      traceViews.addAll(circuitEditor.createTraceViews(firstLine));
-      traceViews.addAll(circuitEditor.createTraceViews(secondLine));
-    }
-
-    circuitEditor.finaliseCreatedTraces(traceViews);
+    circuitEditor.createTraceViews(Line.lines(firstLine, secondLine));
 
     pushUndo();
   }

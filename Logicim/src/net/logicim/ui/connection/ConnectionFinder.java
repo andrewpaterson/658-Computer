@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class ConnectionFinder
 {
-  protected ArrayList<ConnectionView> connectionsToProcess;
+  protected List<ConnectionView> connectionsToProcess;
   protected Set<ConnectionView> connectionsNet;
 
   public ConnectionFinder()
@@ -21,30 +21,34 @@ public class ConnectionFinder
     connectionsNet = new LinkedHashSet<>();
   }
 
-  public void findConnections(ConnectionView connection)
+  public void addConnection(ConnectionView connection)
   {
     if (connection != null)
     {
       connectionsToProcess.add(connection);
-      while (connectionsToProcess.size() > 0)
-      {
-        ConnectionView currentConnection = connectionsToProcess.get(0);
-        connectionsToProcess.remove(0);
-        connectionsNet.add(currentConnection);
+    }
+  }
 
-        List<View> components = currentConnection.getConnectedComponents();
-        if (components != null)
+  public void process()
+  {
+    while (connectionsToProcess.size() > 0)
+    {
+      ConnectionView currentConnection = connectionsToProcess.get(0);
+      connectionsToProcess.remove(0);
+      connectionsNet.add(currentConnection);
+
+      List<View> components = currentConnection.getConnectedComponents();
+      if (components != null)
+      {
+        for (View view : components)
         {
-          for (View view : components)
+          if (view instanceof TraceView)
           {
-            if (view instanceof TraceView)
-            {
-              processTraceView(currentConnection, (TraceView) view);
-            }
-            else if (view instanceof TunnelView)
-            {
-              processTunnel(currentConnection, (TunnelView) view);
-            }
+            processTraceView(currentConnection, (TraceView) view);
+          }
+          else if (view instanceof TunnelView)
+          {
+            processTunnel(currentConnection, (TunnelView) view);
           }
         }
       }

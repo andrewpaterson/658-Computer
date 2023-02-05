@@ -31,7 +31,8 @@ public class LocalConnectionNet
     splitterViews = new ArrayList<>();
 
     ConnectionFinder connectionFinder = new ConnectionFinder();
-    connectionFinder.findConnections(inputConnectionView);
+    connectionFinder.addConnection(inputConnectionView);
+    connectionFinder.process();
     Set<ConnectionView> connections = connectionFinder.getConnections();
 
     int minimumPorts = calculateMinimumPorts(connections);

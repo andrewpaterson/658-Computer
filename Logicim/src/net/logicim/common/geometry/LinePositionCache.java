@@ -76,7 +76,7 @@ public class LinePositionCache
     {
       int minimumX = horizontalLine.getMinimumX();
       int maximumX = horizontalLine.getMaximumX();
-      if (y > minimumX && y < maximumX)
+      if (x > minimumX && x < maximumX)
       {
         removeHorizontalLine(horizontalLine);
         Line line1 = new Line(new Int2D(minimumX, y), new Int2D(x, y));

@@ -13,11 +13,6 @@ public class TraceOverlap
     this.traceView = traceView;
   }
 
-  public LineOverlap getOverlap()
-  {
-    return overlap;
-  }
-
   public TraceView getTraceView()
   {
     return traceView;

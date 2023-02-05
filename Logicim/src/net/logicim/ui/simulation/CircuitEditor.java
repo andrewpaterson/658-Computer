@@ -3,7 +3,6 @@ package net.logicim.ui.simulation;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.geometry.LineMinimiser;
-import net.logicim.common.geometry.LinePositionCache;
 import net.logicim.common.geometry.LineSplitter;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
@@ -23,6 +22,7 @@ import net.logicim.ui.SelectionRectangle;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.common.wire.TraceFinder;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.common.wire.WireView;
@@ -443,7 +443,21 @@ public class CircuitEditor
     for (TraceView traceView : traceViews)
     {
       LineOverlap overlap = traceView.getOverlap(line, false);
-      if (overlap != null)
+      if (overlap != LineOverlap.None)
+      {
+        overlaps.add(new TraceOverlap(overlap, traceView));
+      }
+    }
+    return overlaps;
+  }
+
+  public List<TraceOverlap> getTracesTouching(Line line)
+  {
+    List<TraceOverlap> overlaps = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      LineOverlap overlap = traceView.touches(line);
+      if (overlap != LineOverlap.None)
       {
         overlaps.add(new TraceOverlap(overlap, traceView));
       }
@@ -1153,28 +1167,37 @@ public class CircuitEditor
 
   public void createTraceViews(List<Line> inputLines)
   {
-    Set<TraceView> overlappingTraceViews = new LinkedHashSet<>();
     Set<Line> lines = new LinkedHashSet<>(inputLines);
 
+    TraceFinder traceFinder = new TraceFinder();
     for (Line line : inputLines)
     {
-      List<TraceOverlap> tracesOverlapping = getTracesOverlapping(line);
-      for (TraceOverlap traceOverlap : tracesOverlapping)
+      List<TraceOverlap> tracesTouching = getTracesTouching(line);
+      for (TraceOverlap traceOverlap : tracesTouching)
       {
-        if (traceOverlap.getOverlap() != LineOverlap.None)
-        {
-          TraceView traceView = traceOverlap.getTraceView();
-          overlappingTraceViews.add(traceView);
-          lines.add(traceView.getLine());
-        }
+        traceFinder.add(traceOverlap.getTraceView());
       }
+    }
+    traceFinder.process();
+
+    Set<TraceView> touchingTraceViews =  traceFinder.getTraceViews();
+    for (TraceView traceView : touchingTraceViews)
+    {
+      lines.add(traceView.getLine());
+      deleteTraceView(traceView);
     }
 
     Set<Line> mergedLines = LineMinimiser.minimise(lines);
     Positions positionMap = new Positions(lines);
-    LinePositionCache lineCache = new LinePositionCache(mergedLines);
     Set<Line> splitLines = LineSplitter.split(mergedLines, positionMap);
-xxx
+
+    Set<TraceView> traceViews = new LinkedHashSet<>();
+    for (Line line : splitLines)
+    {
+      traceViews.add(new TraceView(this, line));
+    }
+
+    finaliseCreatedTraces(traceViews);
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)

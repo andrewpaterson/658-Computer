@@ -6,6 +6,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.Rotation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.logicim.ui.common.LineOverlap.*;
 import static net.logicim.ui.common.Rotation.*;
 
@@ -42,6 +45,19 @@ public class Line
       }
     }
     return null;
+  }
+
+  public static List<Line> lines(Line... lines)
+  {
+    ArrayList<Line> result = new ArrayList<>(lines.length);
+    for (Line line : lines)
+    {
+      if (line != null)
+      {
+        result.add(line);
+      }
+    }
+    return result;
   }
 
   public Int2D getStart()
@@ -201,7 +217,7 @@ public class Line
     }
   }
 
-    public LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd, boolean endInclusive)
+  public LineOverlap calculateOverlap(int lineMin, int lineMax, int traceMin, int traceMax, int traceStart, int traceEnd, boolean endInclusive)
   {
     if (endInclusive)
     {

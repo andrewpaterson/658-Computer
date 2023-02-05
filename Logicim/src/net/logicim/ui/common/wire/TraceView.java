@@ -23,6 +23,11 @@ public class TraceView
   protected List<ConnectionView> connections;
   protected List<Trace> traces;
 
+  public TraceView(CircuitEditor circuitEditor, Line line)
+  {
+    this(circuitEditor, line.getStart(), line.getEnd());
+  }
+
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
     super();
@@ -364,6 +369,24 @@ public class TraceView
   public void setLine(Int2D start, Int2D end)
   {
     line.set(start, end);
+  }
+
+  public LineOverlap touches(Line line)
+  {
+    LineOverlap overlap = getOverlap(line, true);
+    if (overlap != LineOverlap.None)
+    {
+      return overlap;
+    }
+    if (isPositionOnTrace(line.getStart()))
+    {
+      return LineOverlap.Orthogonal;
+    }
+    if (isPositionOnTrace(line.getEnd()))
+    {
+      return LineOverlap.Orthogonal;
+    }
+    return LineOverlap.None;
   }
 }
 

@@ -19,10 +19,7 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.SelectionRectangle;
-import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.LineOverlap;
-import net.logicim.ui.common.TraceOverlap;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceFinder;
@@ -264,10 +261,34 @@ public class CircuitEditor
 
   public void editActionDeleteTraceView(ConnectionView connectionView, TraceView traceView)
   {
+    if (connectionView instanceof HoverConnectionView)
+    {
+      Set<TraceView> traceViews = new LinkedHashSet<>();
+      traceViews.add(traceView);
+      deleteTraceViews(traceViews);
+    }
+    else
+    {
+      editActionDeleteTraceViews(connectionView);
+    }
   }
 
-  public boolean editActionDeleteTraceView(ConnectionView connectionView)
+  public boolean editActionDeleteTraceViews(ConnectionView connectionView)
   {
+    List<View> connectedComponents = connectionView.getConnectedComponents();
+    Set<TraceView> traceViews = new LinkedHashSet<>();
+    for (View connectedComponent : connectedComponents)
+    {
+      if (connectedComponent instanceof TraceView)
+      {
+        traceViews.add((TraceView) connectedComponent);
+      }
+    }
+    if (traceViews.size() > 0)
+    {
+      deleteTraceViews(traceViews);
+      return true;
+    }
     return false;
   }
 

@@ -24,7 +24,6 @@ import net.logicim.ui.util.SimulatorActions;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -771,7 +770,7 @@ public class SimulatorEditor
         }
         else
         {
-          boolean traceDeleted = circuitEditor.editActionDeleteTraceView(hoverConnectionView);
+          boolean traceDeleted = circuitEditor.editActionDeleteTraceViews(hoverConnectionView);
 
           if (!traceDeleted && (hoverComponentView != null))
           {

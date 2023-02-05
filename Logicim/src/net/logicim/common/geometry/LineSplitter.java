@@ -3,16 +3,19 @@ package net.logicim.common.geometry;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Positions;
 
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LineSplitter
 {
   public static Set<Line> split(Set<Line> lines, Positions positions)
   {
-    LinePositionCache cache = new LinePositionCache(lines);
+    return split(new LinePositionCache(lines), positions, new ArrayList<>());
+  }
+
+  public static Set<Line> split(LinePositionCache cache, Positions positions, List<Int2D> additionalJunctions)
+  {
     Set<Int2D> junctions = calculateJunctions(positions, cache);
+    junctions.addAll(additionalJunctions);
     for (Int2D junction : junctions)
     {
       cache.split(junction);

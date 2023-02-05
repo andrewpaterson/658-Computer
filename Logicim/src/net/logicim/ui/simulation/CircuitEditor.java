@@ -3,6 +3,7 @@ package net.logicim.ui.simulation;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.geometry.LineMinimiser;
+import net.logicim.common.geometry.LinePositionCache;
 import net.logicim.common.geometry.LineSplitter;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
@@ -802,24 +803,15 @@ public class CircuitEditor
         traceFinder.add(traceOverlap.getTraceView());
       }
     }
-    traceFinder.process();
 
+    traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
     for (TraceView traceView : touchingTraceViews)
     {
       lines.add(traceView.getLine());
     }
     removeTraceViews(touchingTraceViews);
-
-    Set<Line> mergedLines = LineMinimiser.minimise(lines);
-    Positions positionMap = new Positions(lines);
-    Set<Line> splitLines = LineSplitter.split(mergedLines, positionMap);
-
-    Set<TraceView> traceViews = new LinkedHashSet<>();
-    for (Line line : splitLines)
-    {
-      traceViews.add(new TraceView(this, line));
-    }
+    Set<TraceView> traceViews = generateNewTraces(lines);
 
     finaliseCreatedTraces(traceViews);
     return traceViews;
@@ -833,13 +825,11 @@ public class CircuitEditor
 
     for (TraceView traceView : traceViews)
     {
-      removeTraceView(traceView);
       lines.add(traceView.getLine());
     }
+    removeTraceViews(new LinkedHashSet<>(traceViews));
 
-    Set<TraceView> localNewTraces = createTraceViews(lines);
-    Set<TraceView> newTraces = new LinkedHashSet<>(localNewTraces);
-    List<View> selection = new ArrayList<>(localNewTraces);
+    List<View> selection = new ArrayList<>();
 
     for (StaticView<?> staticView : staticViews)
     {
@@ -851,10 +841,9 @@ public class CircuitEditor
       }
     }
 
-    newTraces = findNonRemovedTraceViews(newTraces);
-    selection = findNonRemovedViews(selection);
-
+    Set<TraceView> newTraces = createTraceViews(lines);
     finaliseCreatedTraces(newTraces);
+    selection.addAll(newTraces);
 
     fireConnectionEvents(updatedPortViews);
     validateConsistency();
@@ -879,32 +868,6 @@ public class CircuitEditor
     this.selection = cleanSelection;
 
     validateConsistency();
-  }
-
-  protected List<View> findNonRemovedViews(List<View> selection)
-  {
-    List<View> newSelection = new ArrayList<>();
-    for (View selected : selection)
-    {
-      if (!(selected instanceof TraceView) || ((TraceView) selected).hasConnections())
-      {
-        newSelection.add(selected);
-      }
-    }
-    return newSelection;
-  }
-
-  protected Set<TraceView> findNonRemovedTraceViews(Set<TraceView> newTraces)
-  {
-    Set<TraceView> correctedNewTraceViews = new LinkedHashSet<>(newTraces.size());
-    for (TraceView newTrace : newTraces)
-    {
-      if (newTrace.hasConnections())
-      {
-        correctedNewTraceViews.add(newTrace);
-      }
-    }
-    return correctedNewTraceViews;
   }
 
   public List<View> getSelection()
@@ -1064,26 +1027,50 @@ public class CircuitEditor
 
     removeTraceViews(inputTraceViews);
 
+    Set<Line> lines = new LinkedHashSet<>();
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    Set<Line> lines = new LinkedHashSet<>();
     for (TraceView traceView : touchingTraceViews)
     {
       lines.add(traceView.getLine());
     }
     removeTraceViews(touchingTraceViews);
+    Set<TraceView> traceViews1 = generateNewTraces(lines);
 
+    finaliseCreatedTraces(traceViews1);
+  }
+
+  private Set<TraceView> generateNewTraces(Set<Line> lines)
+  {
     Set<Line> mergedLines = LineMinimiser.minimise(lines);
     Positions positionMap = new Positions(lines);
-    Set<Line> splitLines = LineSplitter.split(mergedLines, positionMap);
+
+    LinePositionCache lineCache = new LinePositionCache(mergedLines);
+    StaticViewIterator iterator = staticViewIterator();
+    List<Int2D> componentConnections = new ArrayList<>();
+
+    while (iterator.hasNext())
+    {
+      StaticView<?> staticView = iterator.next();
+      List<ConnectionView> connections = staticView.getConnections();
+      for (ConnectionView connection : connections)
+      {
+        Int2D position = connection.getGridPosition();
+        if (lineCache.touchesLine(position.x, position.y))
+        {
+          componentConnections.add(position.clone());
+        }
+      }
+    }
+
+    Set<Line> splitLines = LineSplitter.split(lineCache, positionMap, componentConnections);
 
     Set<TraceView> traceViews = new LinkedHashSet<>();
     for (Line line : splitLines)
     {
       traceViews.add(new TraceView(this, line));
     }
-
-    finaliseCreatedTraces(traceViews);
+    return traceViews;
   }
 
   public StaticView<?> getSingleSelectionStaticView()

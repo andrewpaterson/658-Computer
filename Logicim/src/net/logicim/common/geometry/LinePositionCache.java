@@ -146,5 +146,22 @@ public class LinePositionCache
     }
     return result;
   }
+
+  public boolean touchesLine(int x, int y)
+  {
+    Line verticalLine = getVerticalLine(x, y);
+    if (verticalLine != null)
+    {
+      return true;
+    }
+
+    Line horizontalLine = getHorizontalLine(x, y);
+    if (horizontalLine != null)
+    {
+      return true;
+    }
+
+    return false;
+  }
 }
 

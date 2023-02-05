@@ -203,9 +203,9 @@ public class TraceView
     return line.getMaximumY();
   }
 
-  public boolean hasNoConnections()
+  public boolean hasConnections()
   {
-    return getStartConnection() == null || getEndConnection() == null;
+    return getStartConnection() != null && getEndConnection() != null;
   }
 
   @Override
@@ -254,7 +254,7 @@ public class TraceView
 
     int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-    if (!hasNoConnections())
+    if (hasConnections())
     {
       if (!getStartConnection().isNonJunctionTracesOnly())
       {
@@ -352,12 +352,18 @@ public class TraceView
     throw new SimulatorException("Cannot call .disconnect() on a WireView.");
   }
 
-  public void disconnect(Simulation simulation)
+  public void disconnect()
   {
     for (int i = 0; i < connections.size(); i++)
     {
       connections.set(i, null);
     }
+    clearTraces();
+  }
+
+  @Override
+  public void clearTraces()
+  {
     traces.clear();
   }
 

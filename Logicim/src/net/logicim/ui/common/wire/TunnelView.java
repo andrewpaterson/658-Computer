@@ -272,13 +272,18 @@ public class TunnelView
     this.traces = traces;
   }
 
-  @Override
-  public void disconnect(Simulation simulation)
+  public void disconnect()
   {
     for (int i = 0; i < connections.size(); i++)
     {
       connections.set(i, null);
     }
+    clearTraces();
+  }
+
+  @Override
+  public void clearTraces()
+  {
     traces.clear();
   }
 

@@ -6,6 +6,7 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.common.port.PortViewFinder;
 import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
@@ -69,26 +70,15 @@ public class LocalConnectionNet
   protected int calculateMinimumPorts(Set<ConnectionView> connections)
   {
     int minimumPorts = Integer.MAX_VALUE;
-    for (ConnectionView connectionView : connections)
+    Set<PortView> portViews = PortViewFinder.findPortViews(connections);
+    for (PortView portView : portViews)
     {
-      List<View> connectedComponents = connectionView.getConnectedComponents();
-      for (View connectedView : connectedComponents)
+      if (portView.numberOfPorts() < minimumPorts)
       {
-        if (connectedView instanceof ComponentView)
+        minimumPorts = portView.numberOfPorts();
+        if (minimumPorts == 1)
         {
-          ComponentView<?> componentView = (ComponentView<?>) connectedView;
-          PortView portView = componentView.getPort(connectionView);
-          if (portView != null)
-          {
-            if (portView.numberOfPorts() < minimumPorts)
-            {
-              minimumPorts = portView.numberOfPorts();
-              if (minimumPorts == 1)
-              {
-                break;
-              }
-            }
-          }
+          break;
         }
       }
     }

@@ -771,7 +771,7 @@ public class SimulatorEditor
         }
         else
         {
-          boolean traceDeleted = circuitEditor.deleteTraceViews(hoverConnectionView);
+          boolean traceDeleted = circuitEditor.editActionDeleteTraceView(hoverConnectionView);
 
           if (!traceDeleted && (hoverComponentView != null))
           {

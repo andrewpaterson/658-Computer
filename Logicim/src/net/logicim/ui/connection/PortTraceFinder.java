@@ -32,7 +32,7 @@ public abstract class PortTraceFinder
       for (WireConnection wireConnection : partialWire.connectedWires)
       {
         WireView wireView = wireConnection.getWireView();
-        wireView.disconnect(simulation);
+        wireView.clearTraces();
       }
     }
 

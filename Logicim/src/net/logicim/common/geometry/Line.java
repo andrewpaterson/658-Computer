@@ -345,7 +345,7 @@ public class Line
 
           start.y = minimumY;
           end.y = maximumY;
-          direction = North;
+          direction = calculateDirection(start.x, start.y, end.x, end.y);
         }
       }
       else if ((lineDirection == East || lineDirection == West) &&
@@ -363,7 +363,7 @@ public class Line
 
           start.x = minimumX;
           end.x = maximumX;
-          direction = East;
+          direction = calculateDirection(start.x, start.y, end.x, end.y);
         }
       }
     }

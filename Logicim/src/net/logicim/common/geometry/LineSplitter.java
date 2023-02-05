@@ -31,7 +31,6 @@ public class LineSplitter
       Set<Integer> ys = entry.getValue();
       for (Integer y : ys)
       {
-
         Line horizontalLine = cache.getHorizontalLine(x, y);
         if (horizontalLine != null)
         {

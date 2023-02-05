@@ -11,8 +11,6 @@ public interface WireView
 {
   void connectTraces(List<Trace> traces);
 
-  void disconnect(Simulation simulation);
-
   List<Trace> getTraces();
 
   List<ConnectionView> getConnections();
@@ -20,5 +18,7 @@ public interface WireView
   View getView();
 
   void enable(Simulation simulation);
+
+  void clearTraces();
 }
 

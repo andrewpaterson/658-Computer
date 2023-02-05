@@ -78,11 +78,6 @@ public class ConnectionView
     }
   }
 
-  public boolean isConcrete()
-  {
-    return true;
-  }
-
   public void remove(View view)
   {
     boolean removed = connectedComponents.remove(view);

@@ -73,7 +73,7 @@ public class TunnelView
     this.startPosition = new Int2D(0, 0);
     this.endPosition = createGraphics();
 
-    createConnections(circuitEditor);
+    //createConnections(circuitEditor);
     finaliseView();
   }
 
@@ -129,19 +129,25 @@ public class TunnelView
     return endPosition;
   }
 
-  public void createConnections(CircuitEditor circuitEditor)
+  public List<ConnectionView> createConnections(CircuitEditor circuitEditor)
   {
     updateGridCache();
 
-    this.connections.set(0, circuitEditor.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this));
+    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    ConnectionView startConnection = circuitEditor.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this);
+    this.connections.set(0, startConnection);
+    connectionViews.add(startConnection);
     if (properties.doubleSided)
     {
-      this.connections.set(1, circuitEditor.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this));
+      ConnectionView endConnection = circuitEditor.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this);
+      this.connections.set(1, endConnection);
+      connectionViews.add(endConnection);
     }
     else
     {
       this.connections.set(1, null);
     }
+    return connectionViews;
   }
 
   public void updateGridCache()

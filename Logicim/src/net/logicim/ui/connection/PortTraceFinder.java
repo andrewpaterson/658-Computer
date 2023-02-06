@@ -206,16 +206,6 @@ public abstract class PortTraceFinder
     }
   }
 
-  public static List<PortView> getPortViews(List<LocalConnectionNet> connectionNets)
-  {
-    ArrayList<PortView> portViews = new ArrayList<>();
-    for (LocalConnectionNet connectionNet : connectionNets)
-    {
-      portViews.addAll(connectionNet.getPortViews());
-    }
-    return portViews;
-  }
-
   public static List<ConnectionView> getConnectionViews(List<LocalConnectionNet> connectionNets)
   {
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();

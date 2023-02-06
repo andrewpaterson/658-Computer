@@ -632,18 +632,18 @@ public class CircuitEditor
 
   public Set<ConnectionView> connectStaticView(StaticView<?> staticView)
   {
-    Set<ConnectionView> updatedPortViews;
+    Set<ConnectionView> updatedConnectionViews;
     if (staticView instanceof ComponentView)
     {
-      updatedPortViews = connectComponentView((ComponentView<?>) staticView);
+      updatedConnectionViews = connectComponentView((ComponentView<?>) staticView);
     }
     else if (staticView instanceof TunnelView)
     {
-      updatedPortViews = connectTunnelView((TunnelView) staticView);
+      updatedConnectionViews = connectTunnelView((TunnelView) staticView);
     }
     else if (staticView instanceof DecorativeView)
     {
-      updatedPortViews = new LinkedHashSet<>();
+      updatedConnectionViews = new LinkedHashSet<>();
     }
     else
     {
@@ -653,30 +653,27 @@ public class CircuitEditor
     staticView.enable(simulation);
     staticView.simulationStarted(simulation);
 
-    return updatedPortViews;
+    return updatedConnectionViews;
   }
 
   public Set<ConnectionView> connectComponentView(ComponentView<?> componentView)
   {
     List<ConnectionView> connectionViews = componentView.createConnections(this);
 
-    Set<ConnectionView> updatedConnectionViews = new HashSet<>();
-    for (ConnectionView connectionView : connectionViews)
-    {
-      if (!updatedConnectionViews.contains(connectionView))
-      {
-        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(simulation, connectionView);
-        updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
-      }
-    }
-
-    return updatedConnectionViews;
+    return createComponentConnections(connectionViews);
   }
 
   public Set<ConnectionView> connectTunnelView(TunnelView tunnelView)
   {
-    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    for (ConnectionView connectionView : tunnelView.getConnections())
+    List<ConnectionView> connectionViews = tunnelView.createConnections(this);
+
+    return createComponentConnections(connectionViews);
+  }
+
+  protected Set<ConnectionView> createComponentConnections(List<ConnectionView> connectionViews)
+  {
+    Set<ConnectionView> updatedConnectionViews = new HashSet<>();
+    for (ConnectionView connectionView : connectionViews)
     {
       if (!updatedConnectionViews.contains(connectionView))
       {

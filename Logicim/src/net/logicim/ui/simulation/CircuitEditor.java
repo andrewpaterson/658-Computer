@@ -249,12 +249,6 @@ public class CircuitEditor
     return false;
   }
 
-  public Set<ConnectionView> connectNewConnections(ConnectionView connectionView)
-  {
-    List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(simulation, connectionView);
-    return new HashSet<>(PortTraceFinder.getConnectionViews(connectionNets));
-  }
-
   public Simulation reset()
   {
     simulation = circuit.resetSimulation();
@@ -636,7 +630,7 @@ public class CircuitEditor
     validateConsistency();
   }
 
-  public Set<ConnectionView> connectComponentView(StaticView<?> staticView)
+  public Set<ConnectionView> connectStaticView(StaticView<?> staticView)
   {
     Set<ConnectionView> updatedPortViews;
     if (staticView instanceof ComponentView)
@@ -732,9 +726,9 @@ public class CircuitEditor
     return simulation;
   }
 
-  public void placeComponentView(StaticView<?> componentView)
+  public void placeComponentView(StaticView<?> staticView)
   {
-    Set<ConnectionView> updatedConnectionViews = connectComponentView(componentView);
+    Set<ConnectionView> updatedConnectionViews = connectStaticView(staticView);
 
     fireConnectionEvents(updatedConnectionViews);
     validateConsistency();
@@ -809,7 +803,7 @@ public class CircuitEditor
 
     for (StaticView<?> staticView : staticViews)
     {
-      Set<ConnectionView> portViews = connectComponentView(staticView);
+      Set<ConnectionView> portViews = connectStaticView(staticView);
       updatedConnectionViews.addAll(portViews);
       if (selectedViews.contains(staticView))
       {
@@ -824,7 +818,7 @@ public class CircuitEditor
     fireConnectionEvents(updatedConnectionViews);
     validateConsistency();
 
-    List<View> cleanSelection = new ArrayList<>();
+    List<View> newSelection = new ArrayList<>();
     for (View view : newSelectedViews)
     {
       if (view instanceof TraceView)
@@ -832,16 +826,16 @@ public class CircuitEditor
         TraceView traceView = (TraceView) view;
         if (traceView.hasConnections())
         {
-          cleanSelection.add(view);
+          newSelection.add(view);
         }
       }
       else
       {
-        cleanSelection.add(view);
+        newSelection.add(view);
       }
     }
 
-    this.selection = cleanSelection;
+    this.selection = newSelection;
 
     validateConsistency();
   }
@@ -936,6 +930,8 @@ public class CircuitEditor
 
   public void finaliseCreatedTraces(Set<TraceView> traceViews)
   {
+    Set<ConnectionView> connectionViews = new HashSet<>();
+    Set<ConnectionView> updatedConnectionViews;
     int i = 0;
     for (TraceView traceView : traceViews)
     {
@@ -943,20 +939,10 @@ public class CircuitEditor
       {
         throw new SimulatorException("Cannot finalise a removed Trace.  Iteration [%s].", i);
       }
+      connectionViews.add(traceView.getStartConnection());
       i++;
     }
-
-    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    for (TraceView traceView : traceViews)
-    {
-      if (!traceView.hasConnections())
-      {
-        throw new SimulatorException("Cannot finalise a removed Trace.  Iteration [%s].", i);
-      }
-      Set<ConnectionView> connectionViews = connectNewConnections(traceView.getStartConnection());
-      updatedConnectionViews.addAll(connectionViews);
-      i++;
-    }
+    updatedConnectionViews = connectConnectionViews(connectionViews);
 
     fireConnectionEvents(updatedConnectionViews);
     validateConsistency();

@@ -633,42 +633,27 @@ public class CircuitEditor
 
   public Set<ConnectionView> connectStaticView(StaticView<?> staticView)
   {
-    Set<ConnectionView> updatedConnectionViews;
-    if (staticView instanceof ComponentView)
-    {
-      updatedConnectionViews = connectComponentView((ComponentView<?>) staticView);
-    }
-    else if (staticView instanceof TunnelView)
-    {
-      updatedConnectionViews = connectTunnelView((TunnelView) staticView);
-    }
-    else if (staticView instanceof DecorativeView)
-    {
-      updatedConnectionViews = new LinkedHashSet<>();
-    }
-    else
-    {
-      throw new SimulatorException("Don't know how to connect component view of class [%s].", staticView.getClass().getSimpleName());
-    }
+    ArrayList<StaticView<?>> staticViews = new ArrayList<>();
+    staticViews.add(staticView);
+    return connectStaticViews(staticViews);
+  }
 
-    staticView.enable(simulation);
-    staticView.simulationStarted(simulation);
+  public Set<ConnectionView> connectStaticViews(List<StaticView<?>> staticViews)
+  {
+    List<ConnectionView> connectionViews = new ArrayList<>();
+    for (StaticView<?> staticView : staticViews)
+    {
+      connectionViews.addAll(staticView.createConnections(this));
+    }
+    Set<ConnectionView> updatedConnectionViews = createComponentConnections(connectionViews);
+
+    for (StaticView<?> staticView : staticViews)
+    {
+      staticView.enable(simulation);
+      staticView.simulationStarted(simulation);
+    }
 
     return updatedConnectionViews;
-  }
-
-  public Set<ConnectionView> connectComponentView(ComponentView<?> componentView)
-  {
-    List<ConnectionView> connectionViews = componentView.createConnections(this);
-
-    return createComponentConnections(connectionViews);
-  }
-
-  public Set<ConnectionView> connectTunnelView(TunnelView tunnelView)
-  {
-    List<ConnectionView> connectionViews = tunnelView.createConnections(this);
-
-    return createComponentConnections(connectionViews);
   }
 
   protected Set<ConnectionView> createComponentConnections(List<ConnectionView> connectionViews)
@@ -783,7 +768,6 @@ public class CircuitEditor
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)
   {
-    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
 
     List<Line> lines = new ArrayList<>();
 
@@ -793,40 +777,22 @@ public class CircuitEditor
     }
     removeTraceViews(new LinkedHashSet<>(traceViews));
 
-    List<View> newSelectedViews = new ArrayList<>();
+    Set<ConnectionView> updatedConnectionViews = connectStaticViews(staticViews);
 
+    List<View> newSelection = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
-      Set<ConnectionView> portViews = connectStaticView(staticView);
-      updatedConnectionViews.addAll(portViews);
       if (selectedViews.contains(staticView))
       {
-        newSelectedViews.add(staticView);
+        newSelection.add(staticView);
       }
     }
 
     Set<TraceView> newTraces = createTraceViews(lines);
     connectCreatedTraces(newTraces);
-    newSelectedViews.addAll(newTraces);
+    newSelection.addAll(newTraces);
 
     fireConnectionEvents(updatedConnectionViews);
-
-    List<View> newSelection = new ArrayList<>();
-    for (View view : newSelectedViews)
-    {
-      if (view instanceof TraceView)
-      {
-        TraceView traceView = (TraceView) view;
-        if (traceView.hasConnections())
-        {
-          newSelection.add(view);
-        }
-      }
-      else
-      {
-        newSelection.add(view);
-      }
-    }
 
     this.selection = newSelection;
   }

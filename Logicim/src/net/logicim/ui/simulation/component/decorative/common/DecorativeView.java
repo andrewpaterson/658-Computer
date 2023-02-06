@@ -8,6 +8,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitEditor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -84,6 +85,12 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   @Override
   public void disconnect(Simulation simulation, ConnectionView connection)
   {
+  }
+
+  @Override
+  public List<ConnectionView> createConnections(CircuitEditor circuitEditor)
+  {
+    return new ArrayList<>();
   }
 }
 

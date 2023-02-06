@@ -47,6 +47,7 @@ public class TunnelData
                                            boundingBox.create(),
                                            selectionBox.create(),
                                            new TunnelProperties(name, doubleSided));
+    tunnelView.createConnections(circuitEditor);
     WireDataHelper.wireConnect(circuitEditor,
                                traceLoader,
                                tunnelView,

@@ -19,7 +19,7 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -337,9 +337,9 @@ public class TunnelView
     return sanitisedName;
   }
 
-  public Set<ConnectionView> getAllConnectedTunnelConnections()
+  public List<ConnectionView> getAllConnectedTunnelConnections()
   {
-    LinkedHashSet<ConnectionView> connectionViews = new LinkedHashSet<>();
+    Set<ConnectionView> connectionViews = new HashSet<>();
     if (tunnels != null)
     {
       for (TunnelView tunnelView : tunnels)
@@ -347,7 +347,7 @@ public class TunnelView
         connectionViews.addAll(tunnelView.getConnections());
       }
     }
-    return connectionViews;
+    return new ArrayList<>(connectionViews);
   }
 }
 

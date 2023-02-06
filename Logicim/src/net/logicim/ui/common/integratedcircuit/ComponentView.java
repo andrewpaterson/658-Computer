@@ -76,15 +76,18 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.properties = properties;
   }
 
-  public void createConnections(CircuitEditor circuitEditor)
+  public List<ConnectionView> createConnections(CircuitEditor circuitEditor)
   {
+    List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = getPorts();
     for (PortView portView : portViews)
     {
       Int2D portPosition = portView.getGridPosition();
       ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, this);
       portView.setConnection(connectionView);
+      connectionViews.add(connectionView);
     }
+    return connectionViews;
   }
 
   public PortView getPortView(Port port)

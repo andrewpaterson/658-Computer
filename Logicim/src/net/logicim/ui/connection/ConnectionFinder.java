@@ -57,7 +57,7 @@ public class ConnectionFinder
 
   protected void processTunnel(ConnectionView currentConnection, TunnelView tunnelView)
   {
-    Set<ConnectionView> tunnelConnections = tunnelView.getAllConnectedTunnelConnections();
+    List<ConnectionView> tunnelConnections = tunnelView.getAllConnectedTunnelConnections();
     for (ConnectionView connectionView : tunnelConnections)
     {
       if (connectionView != currentConnection)

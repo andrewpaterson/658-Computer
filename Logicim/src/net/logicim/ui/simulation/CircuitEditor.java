@@ -142,7 +142,6 @@ public class CircuitEditor
 
     Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews);
     fireConnectionEvents(updatedConnectionViews);
-    validateConsistency();
   }
 
   protected void deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView)
@@ -241,12 +240,16 @@ public class CircuitEditor
         traceViews.add((TraceView) connectedComponent);
       }
     }
+
     if (traceViews.size() > 0)
     {
       deleteTraceViews(traceViews);
       return true;
     }
-    return false;
+    else
+    {
+      return false;
+    }
   }
 
   public Simulation reset()
@@ -626,8 +629,6 @@ public class CircuitEditor
     {
       staticData.createAndLoad(this, traceLoader);
     }
-
-    validateConsistency();
   }
 
   public Set<ConnectionView> connectStaticView(StaticView<?> staticView)
@@ -728,7 +729,6 @@ public class CircuitEditor
     Set<ConnectionView> updatedConnectionViews = connectStaticView(staticView);
 
     fireConnectionEvents(updatedConnectionViews);
-    validateConsistency();
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
@@ -747,9 +747,6 @@ public class CircuitEditor
     }
 
     connectConnectionViews(connectionViews);
-
-    validateConsistency();
-
     clearSelection();
   }
 
@@ -780,7 +777,7 @@ public class CircuitEditor
     removeTraceViews(touchingTraceViews);
     Set<TraceView> traceViews = generateNewTraces(lines);
 
-    finaliseCreatedTraces(traceViews);
+    connectCreatedTraces(traceViews);
     return traceViews;
   }
 
@@ -809,11 +806,10 @@ public class CircuitEditor
     }
 
     Set<TraceView> newTraces = createTraceViews(lines);
-    finaliseCreatedTraces(newTraces);
+    connectCreatedTraces(newTraces);
     newSelectedViews.addAll(newTraces);
 
     fireConnectionEvents(updatedConnectionViews);
-    validateConsistency();
 
     List<View> newSelection = new ArrayList<>();
     for (View view : newSelectedViews)
@@ -833,8 +829,6 @@ public class CircuitEditor
     }
 
     this.selection = newSelection;
-
-    validateConsistency();
   }
 
   public List<View> getSelection()
@@ -925,7 +919,7 @@ public class CircuitEditor
            (Math.round(start.y) == Math.round(end.y));
   }
 
-  public void finaliseCreatedTraces(Set<TraceView> traceViews)
+  public void connectCreatedTraces(Set<TraceView> traceViews)
   {
     Set<ConnectionView> connectionViews = new HashSet<>();
     Set<ConnectionView> updatedConnectionViews;
@@ -942,7 +936,6 @@ public class CircuitEditor
     updatedConnectionViews = connectConnectionViews(connectionViews);
 
     fireConnectionEvents(updatedConnectionViews);
-    validateConsistency();
   }
 
   public void deleteSelection()
@@ -995,9 +988,9 @@ public class CircuitEditor
       lines.add(traceView.getLine());
     }
     removeTraceViews(touchingTraceViews);
-    Set<TraceView> traceViews1 = generateNewTraces(lines);
 
-    finaliseCreatedTraces(traceViews1);
+    Set<TraceView> traceViews = generateNewTraces(lines);
+    connectCreatedTraces(traceViews);
   }
 
   private Set<TraceView> generateNewTraces(Set<Line> lines)

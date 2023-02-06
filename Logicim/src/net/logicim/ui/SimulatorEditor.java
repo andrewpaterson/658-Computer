@@ -860,6 +860,7 @@ public class SimulatorEditor
   public void pushUndo()
   {
     undoStack.push(save());
+    circuitEditor.validateConsistency();
   }
 
   public void undo()

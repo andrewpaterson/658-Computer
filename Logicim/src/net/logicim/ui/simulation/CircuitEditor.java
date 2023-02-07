@@ -342,6 +342,11 @@ public class CircuitEditor
   {
     int x = viewport.transformScreenToGridX(screenPosition.x);
     int y = viewport.transformScreenToGridY(screenPosition.y);
+    return getTraceViewsInGridSpace(x, y);
+  }
+
+  protected List<TraceView> getTraceViewsInGridSpace(int x, int y)
+  {
     List<TraceView> traceViews = new ArrayList<>();
     for (TraceView traceView : this.traceViews)
     {
@@ -635,28 +640,34 @@ public class CircuitEditor
   {
     ArrayList<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
-    return connectStaticViews(staticViews);
+
+    List<ConnectionView> connectionViews = createStaticViewConnections(staticViews);
+    Set<ConnectionView> updatedConnectionViews = createConnectConnectionViewTraces(connectionViews);
+    enableStaticViews(staticViews);
+
+    return updatedConnectionViews;
   }
 
-  public Set<ConnectionView> connectStaticViews(List<StaticView<?>> staticViews)
+  protected List<ConnectionView> createStaticViewConnections(List<StaticView<?>> staticViews)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
       connectionViews.addAll(staticView.createConnections(this));
     }
-    Set<ConnectionView> updatedConnectionViews = createComponentConnections(connectionViews);
+    return connectionViews;
+  }
 
+  private void enableStaticViews(List<StaticView<?>> staticViews)
+  {
     for (StaticView<?> staticView : staticViews)
     {
       staticView.enable(simulation);
       staticView.simulationStarted(simulation);
     }
-
-    return updatedConnectionViews;
   }
 
-  protected Set<ConnectionView> createComponentConnections(List<ConnectionView> connectionViews)
+  protected Set<ConnectionView> createConnectConnectionViewTraces(List<ConnectionView> connectionViews)
   {
     Set<ConnectionView> updatedConnectionViews = new HashSet<>();
     for (ConnectionView connectionView : connectionViews)
@@ -718,6 +729,11 @@ public class CircuitEditor
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
+    List<TraceView> connectedTraceViews = findImmediateConnectedTraceViews(staticViews);
+
+    Set<TraceView> allConnectedTraceViews = new HashSet<>(connectedTraceViews);
+    allConnectedTraceViews.removeAll(traceViews);
+
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> staticView : staticViews)
     {
@@ -733,6 +749,29 @@ public class CircuitEditor
 
     connectConnectionViews(connectionViews);
     clearSelection();
+
+    recreateTraceViews(new HashSet<>(), allConnectedTraceViews);
+  }
+
+  protected List<TraceView> findImmediateConnectedTraceViews(List<StaticView<?>> staticViews)
+  {
+    List<TraceView> connectedTraceViews = new ArrayList<>();
+    for (StaticView<?> staticView : staticViews)
+    {
+      List<ConnectionView> connectionViews = staticView.getConnections();
+      for (ConnectionView connectionView : connectionViews)
+      {
+        List<View> connectedComponents = connectionView.getConnectedComponents();
+        for (View connectedComponent : connectedComponents)
+        {
+          if (connectedComponent instanceof TraceView)
+          {
+            connectedTraceViews.add((TraceView) connectedComponent);
+          }
+        }
+      }
+    }
+    return connectedTraceViews;
   }
 
   public void updateSelection(SelectionRectangle selectionRectangle)
@@ -755,6 +794,11 @@ public class CircuitEditor
 
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
+    return recreateTraceViews(lines, touchingTraceViews);
+  }
+
+  protected Set<TraceView> recreateTraceViews(Set<Line> lines, Set<TraceView> touchingTraceViews)
+  {
     for (TraceView traceView : touchingTraceViews)
     {
       lines.add(traceView.getLine());
@@ -768,16 +812,31 @@ public class CircuitEditor
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)
   {
-
-    List<Line> lines = new ArrayList<>();
-
+    List<Line> newLines = new ArrayList<>();
     for (TraceView traceView : traceViews)
     {
-      lines.add(traceView.getLine());
+      newLines.add(traceView.getLine());
     }
     removeTraceViews(new LinkedHashSet<>(traceViews));
 
-    Set<ConnectionView> updatedConnectionViews = connectStaticViews(staticViews);
+    List<ConnectionView> connectionViews = createStaticViewConnections(staticViews);
+    Set<ConnectionView> junctions = getComponentConnectionPositions(staticViews);
+    Set<TraceView> existingTraceViews = new LinkedHashSet<>();
+    for (ConnectionView junction : junctions)
+    {
+      Int2D position = junction.getGridPosition();
+      existingTraceViews.addAll(getTraceViewsInGridSpace(position.x, position.y));
+    }
+
+    List<Line> existingLines = new ArrayList<>();
+    for (TraceView existingTraceView : existingTraceViews)
+    {
+      existingLines.add(existingTraceView.getLine());
+    }
+    removeTraceViews(existingTraceViews);
+
+    Set<ConnectionView> updatedConnectionViews = createConnectConnectionViewTraces(connectionViews);
+    enableStaticViews(staticViews);
 
     List<View> newSelection = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
@@ -788,13 +847,30 @@ public class CircuitEditor
       }
     }
 
-    Set<TraceView> newTraces = createTraceViews(lines);
+    Set<TraceView> existingTraces = createTraceViews(existingLines);
+    connectCreatedTraces(existingTraces);
+
+    Set<TraceView> newTraces = createTraceViews(newLines);
     connectCreatedTraces(newTraces);
     newSelection.addAll(newTraces);
 
     fireConnectionEvents(updatedConnectionViews);
 
     this.selection = newSelection;
+  }
+
+  protected Set<ConnectionView> getComponentConnectionPositions(List<StaticView<?>> staticViews)
+  {
+    Set<ConnectionView> junctions = new HashSet<>();
+    for (StaticView<?> staticView : staticViews)
+    {
+      List<ConnectionView> connectionViews = staticView.getConnections();
+      for (ConnectionView connectionView : connectionViews)
+      {
+        junctions.add(connectionView);
+      }
+    }
+    return junctions;
   }
 
   public List<View> getSelection()
@@ -949,14 +1025,7 @@ public class CircuitEditor
     Set<Line> lines = new LinkedHashSet<>();
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    for (TraceView traceView : touchingTraceViews)
-    {
-      lines.add(traceView.getLine());
-    }
-    removeTraceViews(touchingTraceViews);
-
-    Set<TraceView> traceViews = generateNewTraces(lines);
-    connectCreatedTraces(traceViews);
+    recreateTraceViews(lines, touchingTraceViews);
   }
 
   private Set<TraceView> generateNewTraces(Set<Line> lines)
@@ -966,8 +1035,8 @@ public class CircuitEditor
 
     LinePositionCache lineCache = new LinePositionCache(mergedLines);
     StaticViewIterator iterator = staticViewIterator();
-    List<Int2D> componentConnections = new ArrayList<>();
 
+    List<Int2D> additionalJunctions = new ArrayList<>();
     while (iterator.hasNext())
     {
       StaticView<?> staticView = iterator.next();
@@ -977,12 +1046,12 @@ public class CircuitEditor
         Int2D position = connection.getGridPosition();
         if (lineCache.touchesLine(position.x, position.y))
         {
-          componentConnections.add(position.clone());
+          additionalJunctions.add(position.clone());
         }
       }
     }
 
-    Set<Line> splitLines = LineSplitter.split(lineCache, positionMap, componentConnections);
+    Set<Line> splitLines = LineSplitter.split(lineCache, positionMap, additionalJunctions);
 
     Set<TraceView> traceViews = new LinkedHashSet<>();
     for (Line line : splitLines)

@@ -3,6 +3,7 @@ package net.logicim.ui.common.wire;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.connection.ConnectionFinder;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -21,6 +22,14 @@ public class TraceFinder
   {
     traceViews.add(traceView);
     connectionsToProcess.addAll(traceView.getConnections());
+  }
+
+  public void addAll(Collection<TraceView> traceViews)
+  {
+    for (TraceView traceView : traceViews)
+    {
+      add(traceView);
+    }
   }
 
   public Set<TraceView> getTraceViews()

@@ -19,7 +19,6 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.common.Passive;
-import net.logicim.ui.simulation.selection.SelectionRectangle;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
@@ -30,6 +29,8 @@ import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
+import net.logicim.ui.simulation.selection.Selection;
+import net.logicim.ui.simulation.selection.SelectionRectangle;
 
 import java.awt.*;
 import java.util.List;
@@ -47,7 +48,7 @@ public class CircuitEditor
 
   protected Circuit circuit;
   protected Simulation simulation;
-  protected List<View> selection;
+  protected Selection selection;
 
   protected ConnectionViewCache connectionViewCache;
 
@@ -61,7 +62,7 @@ public class CircuitEditor
     this.passiveViews = new LinkedHashSet<>();
     this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
-    this.selection = new ArrayList<>();
+    this.selection = new Selection();
     this.connectionViewCache = new ConnectionViewCache();
   }
 
@@ -590,7 +591,7 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    Set<View> selection = new HashSet<>(this.selection);
+    Set<View> selection = new HashSet<>(this.selection.getSelection());
     ArrayList<StaticData<?>> componentDatas = new ArrayList<>();
     StaticViewIterator iterator = staticViewIterator();
     while (iterator.hasNext())
@@ -620,7 +621,7 @@ public class CircuitEditor
 
   public void load(CircuitData circuitData)
   {
-    clearSelection();
+    selection.clearSelection();
     simulation.getTimeline().load(circuitData.timeline);
 
     TraceLoader traceLoader = new TraceLoader();
@@ -748,7 +749,7 @@ public class CircuitEditor
     }
 
     connectConnectionViews(connectionViews);
-    clearSelection();
+    selection.clearSelection();
 
     recreateTraceViews(new HashSet<>(), allConnectedTraceViews);
   }
@@ -774,8 +775,9 @@ public class CircuitEditor
     return connectedTraceViews;
   }
 
-  public List<View> getSelectionFromRectangle(SelectionRectangle selectionRectangle)
+  public List<View> getSelectionFromRectangle()
   {
+    SelectionRectangle selectionRectangle = selection.getSelectionRectangle();
     return getSelectionFromRectangle(selectionRectangle.getStart(), selectionRectangle.getEnd());
   }
 
@@ -856,7 +858,7 @@ public class CircuitEditor
 
     fireConnectionEvents(updatedConnectionViews);
 
-    this.selection = newSelection;
+    this.selection.setSelection(newSelection);
   }
 
   protected Set<ConnectionView> getComponentConnectionPositions(List<StaticView<?>> staticViews)
@@ -873,22 +875,9 @@ public class CircuitEditor
     return junctions;
   }
 
-  public List<View> getSelection()
+  public Selection getSelection()
   {
     return selection;
-  }
-
-  public void clearSelection()
-  {
-    if (!selection.isEmpty())
-    {
-      selection = new ArrayList<>();
-    }
-  }
-
-  public boolean isSelectionEmpty()
-  {
-    return selection.isEmpty();
   }
 
   public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
@@ -983,7 +972,8 @@ public class CircuitEditor
   public void deleteSelection()
   {
     Set<TraceView> traceViews = new HashSet<>();
-    for (View view : selection)
+    List<View> selectedViews = selection.getSelection();
+    for (View view : selectedViews)
     {
       if (view instanceof TraceView)
       {
@@ -993,7 +983,7 @@ public class CircuitEditor
     deleteTraceViews(traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();
-    for (View view : selection)
+    for (View view : selectedViews)
     {
       if (view instanceof StaticView)
       {
@@ -1001,7 +991,7 @@ public class CircuitEditor
       }
     }
     deleteComponentViews(staticViews);
-    clearSelection();
+    selection.clearSelection();
   }
 
   private void deleteTraceViews(Set<TraceView> inputTraceViews)
@@ -1064,7 +1054,7 @@ public class CircuitEditor
   public StaticView<?> getSingleSelectionStaticView()
   {
     StaticView<?> componentView = null;
-    for (View view : selection)
+    for (View view : selection.getSelection())
     {
       if (view instanceof StaticView)
       {
@@ -1088,11 +1078,7 @@ public class CircuitEditor
 
   public void replaceSelection(View newView, View oldView)
   {
-    int i = selection.indexOf(oldView);
-    if (i != -1)
-    {
-      selection.set(i, newView);
-    }
+    selection.replaceSelection(newView, oldView);
   }
 
   public void addIntegratedCircuitView(IntegratedCircuitView<?, ?> integratedCircuitView)
@@ -1213,33 +1199,7 @@ public class CircuitEditor
 
   public Int2D getSelectionCenter()
   {
-    if (isSelectionEmpty())
-    {
-      return null;
-    }
-    else
-    {
-      Int2D position = new Int2D();
-      int count = 0;
-      for (View view : selection)
-      {
-        if (view instanceof StaticView)
-        {
-          StaticView<?> staticView = (StaticView<?>) view;
-          position.add(staticView.getPosition());
-          count++;
-        }
-        else if (view instanceof TraceView)
-        {
-          TraceView traceView = (TraceView) view;
-          position.add(traceView.getStartPosition());
-          position.add(traceView.getEndPosition());
-          count += 2;
-        }
-      }
-      position.set(Math.round((float) position.x / count), Math.round((float) position.y / count));
-      return position;
-    }
+    return selection.getSelectionCenter();
   }
 
   public ConnectionView getConnection(int x, int y)
@@ -1247,9 +1207,25 @@ public class CircuitEditor
     return connectionViewCache.getConnection(x, y);
   }
 
-  public void setSelection(List<View> selection)
+  public void startSelection(Viewport viewport, int x, int y)
   {
-    this.selection = selection;
+    selection.startSelection(viewport, x, y);
+    List<View> views = getSelectionFromRectangle();
+    selection.setSelection(views);
+  }
+
+  public boolean doneSelection(Viewport viewport, int x, int y)
+  {
+    selection.drag(viewport, x, y);
+    List<View> views = getSelectionFromRectangle();
+    selection.setSelection(views);
+    selection.clearRectangle();
+    return selection.hasSelectionChanged();
+  }
+
+  public boolean isSelecting()
+  {
+    return getSelection().isSelecting();
   }
 }
 

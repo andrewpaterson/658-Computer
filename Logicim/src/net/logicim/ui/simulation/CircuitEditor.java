@@ -19,7 +19,7 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.common.Passive;
-import net.logicim.ui.SelectionRectangle;
+import net.logicim.ui.simulation.selection.SelectionRectangle;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;

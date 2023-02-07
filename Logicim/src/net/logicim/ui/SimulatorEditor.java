@@ -19,6 +19,9 @@ import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
+import net.logicim.ui.simulation.selection.Selection;
+import net.logicim.ui.simulation.selection.SelectionMode;
+import net.logicim.ui.simulation.selection.SelectionRectangle;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
@@ -449,7 +452,8 @@ public class SimulatorEditor
 
     if (selectionRectangle != null)
     {
-      selectionRectangle.paint(graphics, viewport);
+      SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
+      selectionRectangle.paint(graphics, viewport, selectionMode);
     }
 
     for (View view : circuitEditor.getSelection())

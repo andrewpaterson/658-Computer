@@ -774,9 +774,9 @@ public class CircuitEditor
     return connectedTraceViews;
   }
 
-  public void updateSelection(SelectionRectangle selectionRectangle)
+  public List<View> getSelectionFromRectangle(SelectionRectangle selectionRectangle)
   {
-    selection = getSelection(selectionRectangle.getStart(), selectionRectangle.getEnd());
+    return getSelectionFromRectangle(selectionRectangle.getStart(), selectionRectangle.getEnd());
   }
 
   public Set<TraceView> createTraceViews(List<Line> inputLines)
@@ -891,7 +891,7 @@ public class CircuitEditor
     return selection.isEmpty();
   }
 
-  public List<View> getSelection(Float2D start, Float2D end)
+  public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
   {
     boolean includeIntersections = start.x > end.x;
 
@@ -1245,6 +1245,11 @@ public class CircuitEditor
   public ConnectionView getConnection(int x, int y)
   {
     return connectionViewCache.getConnection(x, y);
+  }
+
+  public void setSelection(List<View> selection)
+  {
+    this.selection = selection;
   }
 }
 

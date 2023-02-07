@@ -192,9 +192,9 @@ public class SimulatorPanel
     simulatorEditor.addEditorEvent(new ResizedEvent(width, height));
   }
 
-  public void mousePressed(int x, int y, int button)
+  public void mousePressed(int x, int y, int button, int clickCount)
   {
-    simulatorEditor.addEditorEvent(new MousePressedEvent(x, y, button));
+    simulatorEditor.addEditorEvent(new MousePressedEvent(x, y, button, clickCount));
   }
 
   public void mouseReleased(int x, int y, int button)
@@ -318,7 +318,7 @@ public class SimulatorPanel
   @Override
   public void mousePressed(MouseEvent e)
   {
-    mousePressed(e.getX(), e.getY(), e.getButton());
+    mousePressed(e.getX(), e.getY(), e.getButton(), e.getClickCount());
   }
 
   @Override

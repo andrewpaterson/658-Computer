@@ -23,7 +23,6 @@ import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -143,28 +142,31 @@ public class SimulatorEditor
     return true;
   }
 
-  public void mousePressed(int x, int y, int button)
+  public void mousePressed(int x, int y, int button, int clickCount)
   {
     mouseButtons.set(button);
 
-    if (button == BUTTON1)
+    if (clickCount == 1 || clickCount == 2)
     {
-      if (isInSelectedComponent(x, y))
+      if (button == BUTTON1)
       {
-        startMoveComponents(x, y);
-      }
-      else if ((hoverConnectionView != null && placementView == null))
-      {
-        if (wirePull == null)
+        if (isInSelectedComponent(x, y))
         {
-          startWirePull();
+          startMoveComponents(x, y);
         }
-      }
-      else
-      {
-        if (placementView == null)
+        else if ((hoverConnectionView != null && placementView == null))
         {
-          startSelection(x, y);
+          if (wirePull == null)
+          {
+            startWirePull();
+          }
+        }
+        else
+        {
+          if (placementView == null)
+          {
+            startSelection(x, y);
+          }
         }
       }
     }
@@ -175,13 +177,13 @@ public class SimulatorEditor
     previousSelection = new HashSet<>(circuitEditor.getSelection());
     selectionRectangle = new SelectionRectangle();
     selectionRectangle.start(viewport, x, y);
-    circuitEditor.updateSelection(selectionRectangle);
+    circuitEditor.setSelection(circuitEditor.getSelectionFromRectangle(selectionRectangle));
   }
 
   protected void doneSelection(int x, int y)
   {
     selectionRectangle.drag(viewport, x, y);
-    circuitEditor.updateSelection(selectionRectangle);
+    circuitEditor.setSelection(circuitEditor.getSelectionFromRectangle(selectionRectangle));
 
     if (hasSelectionChanged())
     {
@@ -287,7 +289,7 @@ public class SimulatorEditor
     if (selectionRectangle != null)
     {
       selectionRectangle.drag(viewport, x, y);
-      circuitEditor.updateSelection(selectionRectangle);
+      circuitEditor.setSelection(circuitEditor.getSelectionFromRectangle(selectionRectangle));
     }
     else
     {

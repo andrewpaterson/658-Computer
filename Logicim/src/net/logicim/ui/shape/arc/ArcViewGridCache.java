@@ -25,6 +25,13 @@ public class ArcViewGridCache
 
     rotation.rotate(this.circleCenter, circleCenter);
 
+    if (rotation.isEastWest())
+    {
+      float temp = width;
+      width = height;
+      height = temp;
+    }
+
     this.circleCenter.add(position);
     this.circleCenter.subtract(width, height);
     int degrees = rotation.rotationToDegrees();

@@ -37,11 +37,25 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   {
     float height = 1.4f;
     float bottom = -0.5f + height;
-    arcViewFront = new ArcView(this, new Float2D(0, -0.4f), 1.5f, 0, 180, true, true);
-    rectangleViewBack = new RectangleView(this, new Float2D(-1.5f, -0.5f), new Float2D(1.5f, bottom), false, true);
-    lineView1 = new LineView(this, new Float2D(-1.5f, -0.5f), new Float2D(-1.5f, bottom));
-    lineView2 = new LineView(this, new Float2D(-1.5f, bottom), new Float2D(1.5f, bottom));
-    lineView3 = new LineView(this, new Float2D(1.5f, bottom), new Float2D(1.5f, -0.5f));
+    float width = calculateWidth(properties.inputCount);
+    arcViewFront = new ArcView(this, new Float2D(0, -0.4f), width, 1.5f, 0, 180, true, true);
+    rectangleViewBack = new RectangleView(this, new Float2D(-width, -0.5f), new Float2D(width, bottom), false, true);
+    lineView1 = new LineView(this, new Float2D(-width, -0.5f), new Float2D(-width, bottom));
+    lineView2 = new LineView(this, new Float2D(-width, bottom), new Float2D(width, bottom));
+    lineView3 = new LineView(this, new Float2D(width, bottom), new Float2D(width, -0.5f));
+  }
+
+  private float calculateWidth(int inputCount)
+  {
+    if (inputCount <= 3)
+    {
+      return 1.5f;
+    }
+    else
+    {
+      int i = (inputCount / 2) - 1;
+      return 1.5f + i;
+    }
   }
 
   @Override

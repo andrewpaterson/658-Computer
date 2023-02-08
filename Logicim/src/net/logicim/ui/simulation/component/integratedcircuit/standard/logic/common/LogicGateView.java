@@ -54,5 +54,18 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   {
     properties.inputCount = clamp(properties.inputCount, 1, 8);
   }
+
+  protected float calculateWidth(int inputCount)
+  {
+    if (inputCount <= 3)
+    {
+      return 1.5f;
+    }
+    else
+    {
+      int i = (inputCount / 2) - 1;
+      return 1.5f + i;
+    }
+  }
 }
 

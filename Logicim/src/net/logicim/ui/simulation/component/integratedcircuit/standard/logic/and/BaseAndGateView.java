@@ -45,19 +45,6 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
     lineView3 = new LineView(this, new Float2D(width, bottom), new Float2D(width, -0.5f));
   }
 
-  private float calculateWidth(int inputCount)
-  {
-    if (inputCount <= 3)
-    {
-      return 1.5f;
-    }
-    else
-    {
-      int i = (inputCount / 2) - 1;
-      return 1.5f + i;
-    }
-  }
-
   @Override
   protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
   {

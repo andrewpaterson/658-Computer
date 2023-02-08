@@ -36,23 +36,25 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
 
   protected void createGraphics()
   {
-    arcViewRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 357, 61, true, false);
-    arcViewLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 61, true, false);
-    arcViewBottom = new ArcView(this, new Float2D(0, 3.5f), 3, 61, 58, true, false);
-    arcViewFillRight = new ArcView(this, new Float2D(-1.5f, 0.6f), 3, 0, 58, false, true);
-    arcViewFillLeft = new ArcView(this, new Float2D(1.5f, 0.6f), 3, 122, 58, false, true);
+    float width = calculateWidth(properties.inputCount);
+    float radius = width * 2;
+    arcViewRight = new ArcView(this, new Float2D(-width, 0.6f), radius, 3, 357, 61, true, false);
+    arcViewLeft = new ArcView(this, new Float2D(width, 0.6f), radius, 3, 122, 61, true, false);
+    arcViewBottom = new ArcView(this, new Float2D(0, 3.5f), radius, 3, 61, 58, true, false);
+    arcViewFillRight = new ArcView(this, new Float2D(-width, 0.6f), radius, 3, 0, 58, false, true);
+    arcViewFillLeft = new ArcView(this, new Float2D(width, 0.6f), radius, 3, 122, 58, false, true);
 
     polygonViewFillLeft = new PolygonView(this,
                                           false,
                                           true,
-                                          new Float2D(-1.5f, 0.9f),
-                                          new Float2D(-1.5f, 0.0f),
+                                          new Float2D(-width, 0.9f),
+                                          new Float2D(-width, 0.0f),
                                           new Float2D(0, 0.0f));
     polygonViewFillRight = new PolygonView(this,
                                            false,
                                            true,
-                                           new Float2D(1.5f, 0.9f),
-                                           new Float2D(1.5f, 0.0f),
+                                           new Float2D(width, 0.9f),
+                                           new Float2D(width, 0.0f),
                                            new Float2D(0, 0.0f));
   }
 

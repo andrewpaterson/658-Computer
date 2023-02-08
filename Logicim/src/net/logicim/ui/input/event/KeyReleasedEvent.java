@@ -28,10 +28,10 @@ public class KeyReleasedEvent
   @Override
   public void execute(SimulatorEditor simulatorEditor)
   {
-    simulatorEditor.keyReleased(
-        controlDown,
-        altDown,
-        shiftDown
+    simulatorEditor.keyReleased(keyCode,
+                                controlDown,
+                                altDown,
+                                shiftDown
     );
   }
 }

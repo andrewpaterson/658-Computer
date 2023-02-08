@@ -39,9 +39,9 @@ public class Selection
 
   public static SelectionMode calculateSelectionMode(KeyboardButtons keyboardButtons)
   {
-    boolean altDown = keyboardButtons.isAltDown();
+    boolean ctrlDown = keyboardButtons.isControlDown();
     boolean shiftDown = keyboardButtons.isShiftDown();
-    if (altDown && shiftDown)
+    if (ctrlDown && shiftDown)
     {
       return SelectionMode.SUBTRACT;
     }
@@ -73,6 +73,12 @@ public class Selection
     previousSelection = new HashSet<>(selection);
     selectionRectangle = new SelectionRectangle();
     selectionRectangle.start(viewport, x, y);
+  }
+
+  public void startSelection(KeyboardButtons keyboardButtons, List<View> views)
+  {
+    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
+    selection = calculateSelection(views, selectionMode);
   }
 
   public SelectionRectangle getSelectionRectangle()
@@ -178,7 +184,44 @@ public class Selection
 
   public boolean isSelecting()
   {
-    return hasRectangle() || !isSelectionEmpty();
+    return hasRectangle();
+  }
+
+  public List<View> calculateSelection(List<View> views, SelectionMode selectionMode)
+  {
+    if (selectionMode == SelectionMode.REPLACE)
+    {
+      return views;
+    }
+    else if (selectionMode == SelectionMode.ADD)
+    {
+      Set<View> newSelection = new HashSet<>(views);
+      newSelection.addAll(previousSelection);
+      return new ArrayList<>(newSelection);
+    }
+    else if (selectionMode == SelectionMode.SUBTRACT)
+    {
+      Set<View> newSelection = new HashSet<>(previousSelection);
+      newSelection.removeAll(views);
+      return new ArrayList<>(newSelection);
+    }
+    return null;
+  }
+
+  public boolean doneSelection(KeyboardButtons keyboardButtons, List<View> views)
+  {
+    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
+    selection = calculateSelection(views, selectionMode);
+    clearRectangle();
+    boolean hasSelectionChanged = hasSelectionChanged();
+    previousSelection = null;
+    return hasSelectionChanged;
+  }
+
+  public void selectionMoved(KeyboardButtons keyboardButtons, List<View> views)
+  {
+    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
+    selection = calculateSelection(views, selectionMode);
   }
 }
 

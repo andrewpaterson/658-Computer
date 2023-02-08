@@ -52,14 +52,12 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public void rotateRight()
   {
-    rotation = rotation.rotateRight();
-    invalidateCache();
+    setRotation(rotation.rotateRight());
   }
 
   public void rotateLeft()
   {
-    rotation = rotation.rotateLeft();
-    invalidateCache();
+    setRotation(rotation.rotateLeft());
   }
 
   public void setRotation(Rotation rotation)

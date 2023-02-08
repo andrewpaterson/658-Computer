@@ -122,13 +122,13 @@ public class SplitterView
                                        7,
                                        false,
                                        LEFT);
-      setTextViewThing(textView, position);
+      adjustTextViewPosition(textView, position);
       textViews.add(textView);
     }
     return textViews;
   }
 
-  private void setTextViewThing(TextView textView, Float2D position)
+  private void adjustTextViewPosition(TextView textView, Float2D position)
   {
     if (rotation.isNorth() || rotation.isCannot())
     {
@@ -427,23 +427,15 @@ public class SplitterView
     {
       TextView textView = textViews.get(endIndex);
       Float2D position = createMidPosition(endIndex);
-      setTextViewThing(textView, position);
+      adjustTextViewPosition(textView, position);
     }
   }
 
   @Override
-  public void rotateRight()
+  public void setRotation(Rotation rotation)
   {
-    super.rotateRight();
+    super.setRotation(rotation);
     updateTextViews();
   }
-
-  @Override
-  public void rotateLeft()
-  {
-    super.rotateLeft();
-    updateTextViews();
-  }
-
 }
 

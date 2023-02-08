@@ -73,7 +73,6 @@ public class TunnelView
     this.startPosition = new Int2D(0, 0);
     this.endPosition = createGraphics();
 
-    //createConnections(circuitEditor);
     finaliseView();
   }
 

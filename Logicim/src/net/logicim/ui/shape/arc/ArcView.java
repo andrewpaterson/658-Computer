@@ -13,6 +13,7 @@ public class ArcView
 {
   private Float2D circleCenter;
   private float width;
+  private float height;
   private int startAngle;
   private int arcAngle;
   private boolean border;
@@ -22,7 +23,26 @@ public class ArcView
 
   public ArcView(ShapeHolder shapeHolder,
                  Float2D circleCenter,
+                 float radius,
+                 int startAngle,
+                 int arcAngle,
+                 boolean border,
+                 boolean fill)
+  {
+    this(shapeHolder,
+         circleCenter,
+         radius,
+         radius,
+         startAngle,
+         arcAngle,
+         border,
+         fill);
+  }
+
+  public ArcView(ShapeHolder shapeHolder,
+                 Float2D circleCenter,
                  float width,
+                 float height,
                  int startAngle,
                  int arcAngle,
                  boolean border,
@@ -31,6 +51,7 @@ public class ArcView
     super(shapeHolder);
     this.circleCenter = circleCenter;
     this.width = width;
+    this.height = height;
     this.startAngle = startAngle;
     this.arcAngle = arcAngle;
     this.border = border;
@@ -48,17 +69,17 @@ public class ArcView
     int y = viewport.transformGridToScreenSpaceY(gridCache.circleCenter.y);
 
     graphics.setStroke(viewport.getZoomableStroke());
+    int widthDiameter = viewport.transformGridToScreenWidth(gridCache.widthDiameter);
+    int heightDiameter = viewport.transformGridToScreenHeight(gridCache.heightDiameter);
     if (fill)
     {
       graphics.setColor(getFillColour());
-      int diameter = viewport.transformGridToScreenWidth(gridCache.diameter);
-      graphics.fillArc(x, y, diameter, diameter, gridCache.startAngle, arcAngle);
+      graphics.fillArc(x, y, widthDiameter, heightDiameter, gridCache.startAngle, arcAngle);
     }
     if (border)
     {
       graphics.setColor(getBorderColour());
-      int diameter = viewport.transformGridToScreenWidth(gridCache.diameter);
-      graphics.drawArc(x, y, diameter, diameter, gridCache.startAngle, arcAngle);
+      graphics.drawArc(x, y, widthDiameter, heightDiameter, gridCache.startAngle, arcAngle);
     }
   }
 
@@ -66,7 +87,12 @@ public class ArcView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(shapeHolder.getRotation(), shapeHolder.getPosition(), circleCenter, width, startAngle);
+      gridCache.update(shapeHolder.getRotation(),
+                       shapeHolder.getPosition(),
+                       circleCenter,
+                       width,
+                       height,
+                       startAngle);
     }
   }
 

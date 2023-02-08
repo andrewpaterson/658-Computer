@@ -10,7 +10,8 @@ public class ArcViewGridCache
 {
   protected Float2D circleCenter;
   protected int startAngle;
-  protected int diameter;
+  protected int widthDiameter;
+  protected int heightDiameter;
 
   public ArcViewGridCache()
   {
@@ -18,17 +19,18 @@ public class ArcViewGridCache
     circleCenter = new Float2D();
   }
 
-  public void update(Rotation rotation, Tuple2 position, Float2D circleCenter, float width, int startAngle)
+  public void update(Rotation rotation, Tuple2 position, Float2D circleCenter, float width, float height, int startAngle)
   {
     update();
 
     rotation.rotate(this.circleCenter, circleCenter);
 
     this.circleCenter.add(position);
-    this.circleCenter.subtract(width, width);
+    this.circleCenter.subtract(width, height);
     int degrees = rotation.rotationToDegrees();
     this.startAngle = startAngle + degrees;
-    this.diameter = (int) (width * 2.0f);
+    this.widthDiameter = (int) (width * 2.0f);
+    this.heightDiameter = (int) (height * 2.0f);
   }
 }
 

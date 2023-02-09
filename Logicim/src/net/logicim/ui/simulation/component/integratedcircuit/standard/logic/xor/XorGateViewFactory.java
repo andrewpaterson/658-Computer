@@ -19,7 +19,8 @@ public class XorGateViewFactory
                   new LogicGateProperties("",
                                           DefaultFamily.get(),
                                           true,
-                                          2));
+                                          2,
+                                          1));
   }
 
   @Override

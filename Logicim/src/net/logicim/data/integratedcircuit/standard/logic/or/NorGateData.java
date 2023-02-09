@@ -30,6 +30,7 @@ public class NorGateData
                      boolean selected,
                      State state,
                      int inputCount,
+                     int inputWidth,
                      boolean explicitPowerPorts)
   {
     super(position,
@@ -41,6 +42,7 @@ public class NorGateData
           selected,
           state,
           inputCount,
+          inputWidth,
           explicitPowerPorts);
   }
 
@@ -53,7 +55,8 @@ public class NorGateData
                            new LogicGateProperties(name,
                                                    FamilyStore.getInstance().get(family),
                                                    explicitPowerPorts,
-                                                   inputCount));
+                                                   inputCount,
+                                                   inputWidth));
   }
 }
 

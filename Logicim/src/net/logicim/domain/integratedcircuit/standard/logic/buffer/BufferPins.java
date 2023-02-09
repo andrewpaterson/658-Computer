@@ -27,7 +27,7 @@ public class BufferPins
     {
       LogicPort input = new LogicPort(Input,
                                       this,
-                                      "Input" + i,
+                                      "Input " + i,
                                       voltageConfiguration);
       inputs.add(input);
 

@@ -17,7 +17,7 @@ import java.util.List;
 
 public abstract class ReflectiveWriter
 {
-  public static final int ARRAY_ROW_LENGTH = 5;
+  public static final int ARRAY_ROW_LENGTH = 3;
 
   public static final String LOGICIM_TAG_NAME = "Logicim";
   public static final String INDEX = "index";

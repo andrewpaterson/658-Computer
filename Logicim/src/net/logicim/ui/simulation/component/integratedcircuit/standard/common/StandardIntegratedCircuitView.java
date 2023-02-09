@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.port.Port;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -11,6 +12,8 @@ import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends StandardIntegratedCircuitProperties>
     extends IntegratedCircuitView<IC, PROPERTIES>
@@ -36,6 +39,17 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
       vccLine = new LineView(this, vccPortView.getRelativePosition(), new Int2D(vccPortView.getRelativePosition().x + 1, vccPortView.getRelativePosition().y));
       gndLine = new LineView(this, gndPortView.getRelativePosition(), new Int2D(gndPortView.getRelativePosition().x - 1, gndPortView.getRelativePosition().y));
     }
+  }
+
+  protected List<Port> getPortsInRange(String prefix, int portNumber, int inputWidth)
+  {
+    ArrayList<Port> ports1 = new ArrayList<>();
+    for (int i = portNumber * inputWidth; i < (portNumber + 1) * inputWidth; i++)
+    {
+      Port port = integratedCircuit.getPort(prefix + i);
+      ports1.add(port);
+    }
+    return ports1;
   }
 
   @Override

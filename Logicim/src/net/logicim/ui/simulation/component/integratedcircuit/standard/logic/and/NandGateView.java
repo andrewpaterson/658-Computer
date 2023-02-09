@@ -33,7 +33,8 @@ public class NandGateView
   {
     return new NandGate(circuitEditor.getCircuit(),
                         properties.name,
-                        new AndGatePins(properties.inputCount, familyVoltageConfiguration));
+                        new AndGatePins(properties.inputWidth * properties.inputCount,
+                                        familyVoltageConfiguration));
   }
 
   @Override
@@ -48,6 +49,7 @@ public class NandGateView
                             selected,
                             saveState(),
                             properties.inputCount,
+                            properties.inputWidth,
                             properties.explicitPowerPorts);
   }
 

@@ -33,7 +33,8 @@ public class NorGateView
   {
     return new NorGate(circuitEditor.getCircuit(),
                        properties.name,
-                       new OrGatePins(properties.inputCount, familyVoltageConfiguration));
+                       new OrGatePins(properties.inputWidth * properties.inputCount,
+                                      familyVoltageConfiguration));
   }
 
   @Override
@@ -48,6 +49,7 @@ public class NorGateView
                            selected,
                            saveState(),
                            properties.inputCount,
+                           properties.inputWidth,
                            properties.explicitPowerPorts);
   }
 

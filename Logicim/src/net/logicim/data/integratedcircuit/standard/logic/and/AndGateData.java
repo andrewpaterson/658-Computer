@@ -30,6 +30,7 @@ public class AndGateData
                      boolean selected,
                      State state,
                      int inputCount,
+                     int inputWidth,
                      boolean explicitPowerPorts)
   {
     super(position,
@@ -41,9 +42,11 @@ public class AndGateData
           selected,
           state,
           inputCount,
+          inputWidth,
           explicitPowerPorts);
   }
 
+  @Override
   public AndGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
   {
     return new AndGateView(circuitEditor,
@@ -52,7 +55,8 @@ public class AndGateData
                            new LogicGateProperties(name,
                                                    FamilyStore.getInstance().get(family),
                                                    explicitPowerPorts,
-                                                   inputCount));
+                                                   inputCount,
+                                                   inputWidth));
   }
 }
 

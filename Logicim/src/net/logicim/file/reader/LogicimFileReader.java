@@ -218,7 +218,15 @@ public class LogicimFileReader
     {
       if (!s.isEmpty())
       {
-        int i = Integer.parseInt(s);
+        int i;
+        try
+        {
+          i = Integer.parseInt(s);
+        }
+        catch (NumberFormatException e)
+        {
+          throw new SimulatorException("Could not parse [%s] as int.", string);
+        }
         arrayData.array[arrayData.index] = i;
         arrayData.index++;
         if (arrayData.index == arrayData.array.length)

@@ -33,7 +33,8 @@ public class OrGateView
   {
     return new OrGate(circuitEditor.getCircuit(),
                       properties.name,
-                      new OrGatePins(properties.inputCount, familyVoltageConfiguration));
+                      new OrGatePins(properties.inputWidth * properties.inputCount,
+                                     familyVoltageConfiguration));
   }
 
   @Override
@@ -48,6 +49,7 @@ public class OrGateView
                           selected,
                           saveState(),
                           properties.inputCount,
+                          properties.inputWidth,
                           properties.explicitPowerPorts);
   }
 

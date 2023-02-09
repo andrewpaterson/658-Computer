@@ -14,6 +14,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
     extends StandardIntegratedCircuitData<ICV, State>
 {
   protected int inputCount;
+  protected int inputWidth;
 
   public LogicGateData()
   {
@@ -28,6 +29,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
                        boolean selected,
                        State state,
                        int inputCount,
+                       int inputWidth,
                        boolean explicitPowerPorts)
   {
     super(position,
@@ -40,6 +42,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
           state,
           explicitPowerPorts);
     this.inputCount = inputCount;
+    this.inputWidth = inputWidth;
   }
 }
 

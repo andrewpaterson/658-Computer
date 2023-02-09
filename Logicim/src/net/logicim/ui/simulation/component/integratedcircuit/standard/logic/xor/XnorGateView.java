@@ -33,7 +33,8 @@ public class XnorGateView
   {
     return new XnorGate(circuitEditor.getCircuit(),
                         properties.name,
-                        new XorGatePins(properties.inputCount, familyVoltageConfiguration));
+                        new XorGatePins(properties.inputWidth * properties.inputCount,
+                                        familyVoltageConfiguration));
   }
 
   @Override
@@ -48,6 +49,7 @@ public class XnorGateView
                             selected,
                             saveState(),
                             properties.inputCount,
+                            properties.inputWidth,
                             properties.explicitPowerPorts);
   }
 

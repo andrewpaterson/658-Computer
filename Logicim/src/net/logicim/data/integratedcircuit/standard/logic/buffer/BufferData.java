@@ -17,8 +17,8 @@ import java.util.List;
 public class BufferData
     extends StandardIntegratedCircuitData<BufferView, State>
 {
-  protected int inputWidth;
   protected int inputCount;
+  protected int inputWidth;
 
   public BufferData()
   {

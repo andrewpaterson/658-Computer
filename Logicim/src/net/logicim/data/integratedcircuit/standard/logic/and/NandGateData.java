@@ -30,6 +30,7 @@ public class NandGateData
                       boolean selected,
                       State state,
                       int inputCount,
+                      int inputWidth,
                       boolean explicitPowerPorts)
   {
     super(position,
@@ -41,6 +42,7 @@ public class NandGateData
           selected,
           state,
           inputCount,
+          inputWidth,
           explicitPowerPorts);
   }
 
@@ -53,7 +55,8 @@ public class NandGateData
                             new LogicGateProperties(name,
                                                     FamilyStore.getInstance().get(family),
                                                     explicitPowerPorts,
-                                                    inputCount));
+                                                    inputCount,
+                                                    inputWidth));
   }
 }
 

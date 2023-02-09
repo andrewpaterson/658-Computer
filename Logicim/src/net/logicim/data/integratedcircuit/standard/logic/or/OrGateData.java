@@ -30,6 +30,7 @@ public class OrGateData
                     boolean selected,
                     State state,
                     int inputCount,
+                    int inputWidth,
                     boolean explicitPowerPorts)
   {
     super(position,
@@ -41,6 +42,7 @@ public class OrGateData
           selected,
           state,
           inputCount,
+          inputWidth,
           explicitPowerPorts);
   }
 
@@ -53,7 +55,8 @@ public class OrGateData
                           new LogicGateProperties(name,
                                                   FamilyStore.getInstance().get(family),
                                                   explicitPowerPorts,
-                                                  inputCount));
+                                                  inputCount,
+                                                  inputWidth));
   }
 }
 

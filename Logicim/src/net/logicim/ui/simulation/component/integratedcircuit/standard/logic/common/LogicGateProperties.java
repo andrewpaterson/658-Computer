@@ -7,16 +7,23 @@ public class LogicGateProperties
     extends StandardIntegratedCircuitProperties
 {
   public int inputCount;
+  public int inputWidth;
 
   public LogicGateProperties()
   {
     inputCount = 0;
+    inputWidth = 0;
   }
 
-  public LogicGateProperties(String name, Family family, boolean explicitPowerPorts, int inputCount)
+  public LogicGateProperties(String name,
+                             Family family,
+                             boolean explicitPowerPorts,
+                             int inputCount,
+                             int inputWidth)
   {
     super(name, family, explicitPowerPorts);
     this.inputCount = inputCount;
+    this.inputWidth = inputWidth;
   }
 }
 

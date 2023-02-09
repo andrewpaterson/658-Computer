@@ -6,17 +6,24 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.common.Sta
 public class BufferProperties
     extends StandardIntegratedCircuitProperties
 {
-  public int bufferCount;
+  public int inputCount;
+  public int inputWidth;
 
   public BufferProperties()
   {
-    bufferCount = 0;
+    inputCount = 0;
+    inputWidth = 0;
   }
 
-  public BufferProperties(String name, Family family, boolean explicitPowerPorts, int bufferCount)
+  public BufferProperties(String name,
+                          Family family,
+                          boolean explicitPowerPorts,
+                          int inputCount,
+                          int inputWidth)
   {
     super(name, family, explicitPowerPorts);
-    this.bufferCount = bufferCount;
+    this.inputCount = inputCount;
+    this.inputWidth = inputWidth;
   }
 }
 

@@ -13,19 +13,19 @@ import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 public class PropertyEditEvent
     extends SimulatorEditorEvent
 {
-  protected StaticView<?> componentView;
-  private ComponentProperties newComponentProperties;
+  protected StaticView<ComponentProperties> componentView;
+  protected ComponentProperties newComponentProperties;
 
   public PropertyEditEvent(StaticView<?> componentView, ComponentProperties newComponentProperties)
   {
-    this.componentView = componentView;
+    this.componentView = (StaticView<ComponentProperties>) componentView;
     this.newComponentProperties = newComponentProperties;
   }
 
   @Override
   public void execute(SimulatorEditor editor)
   {
-    componentView.propertyChanged();
+    componentView.propertyChanged(newComponentProperties);
     StaticView<?> newComponentView = recreateComponentView(newComponentProperties, editor);
     editor.replaceSelection(newComponentView, componentView);
     editor.pushUndo();

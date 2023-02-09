@@ -18,6 +18,7 @@ public class BufferViewFactory
                   new BufferProperties("",
                                        DefaultFamily.get(),
                                        true,
+                                       1,
                                        1));
   }
 

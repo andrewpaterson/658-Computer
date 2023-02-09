@@ -38,24 +38,29 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   {
     float width = calculateWidth(properties.inputCount);
     float radius = width * 2;
-    arcViewRight = new ArcView(this, new Float2D(-width, 0.6f), radius, 3, 357, 61, true, false);
-    arcViewLeft = new ArcView(this, new Float2D(width, 0.6f), radius, 3, 122, 61, true, false);
-    arcViewBottom = new ArcView(this, new Float2D(0, 3.5f), radius, 3, 61, 58, true, false);
-    arcViewFillRight = new ArcView(this, new Float2D(-width, 0.6f), radius, 3, 0, 58, false, true);
-    arcViewFillLeft = new ArcView(this, new Float2D(width, 0.6f), radius, 3, 122, 58, false, true);
+    float yTop = 0.6f;
+    float yBottom = 3.5f;
+    float yMiddle = 0.9f;
+    float yZero = 0.0f;
+
+    arcViewRight = new ArcView(this, new Float2D(-width, yTop), radius, 3, OR_ARC_RIGHT_START, OR_ARC_SIDE_LENGTH, true, false);
+    arcViewLeft = new ArcView(this, new Float2D(width, yTop), radius, 3, OR_ARC_LEFT_START, OR_ARC_SIDE_LENGTH, true, false);
+    arcViewBottom = new ArcView(this, new Float2D(0, yBottom), radius, 3, OR_ARC_BOTTOM_START, OR_ARC_BOTTOM_LENGTH, true, false);
+    arcViewFillRight = new ArcView(this, new Float2D(-width, yTop), radius, 3, OR_ARC_RIGHT_START + OR_ARC_FILL_OFFSET, OR_ARC_SIDE_LENGTH - OR_ARC_FILL_OFFSET, false, true);
+    arcViewFillLeft = new ArcView(this, new Float2D(width, yTop), radius, 3, OR_ARC_LEFT_START, OR_ARC_SIDE_LENGTH - OR_ARC_FILL_OFFSET, false, true);
 
     polygonViewFillLeft = new PolygonView(this,
                                           false,
                                           true,
-                                          new Float2D(-width, 0.9f),
-                                          new Float2D(-width, 0.0f),
-                                          new Float2D(0, 0.0f));
+                                          new Float2D(-width, yMiddle),
+                                          new Float2D(-width + OR_FILL_OFFSET, yZero),
+                                          new Float2D(0, yZero));
     polygonViewFillRight = new PolygonView(this,
                                            false,
                                            true,
-                                           new Float2D(width, 0.9f),
-                                           new Float2D(width, 0.0f),
-                                           new Float2D(0, 0.0f));
+                                           new Float2D(width, yMiddle),
+                                           new Float2D(width - OR_FILL_OFFSET, yZero),
+                                           new Float2D(0, yZero));
   }
 
   @Override

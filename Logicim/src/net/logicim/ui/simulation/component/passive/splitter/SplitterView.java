@@ -383,15 +383,15 @@ public class SplitterView
   }
 
   @Override
-  public void propertyChanged()
+  public void propertyChanged(SplitterProperties newProperties)
   {
-    properties.fanOut = PropertyClamp.clamp(properties.fanOut, 1, PropertyClamp.MAX);
-    properties.gridSpacing = PropertyClamp.clamp(properties.gridSpacing, 1, 12);
-    properties.endOffset = PropertyClamp.clamp(properties.endOffset, -1, properties.fanOut * properties.gridSpacing - 1);
-    for (int i = 0; i < properties.splitIndices.length; i++)
+    newProperties.fanOut = PropertyClamp.clamp(newProperties.fanOut, 1, PropertyClamp.MAX);
+    newProperties.gridSpacing = PropertyClamp.clamp(newProperties.gridSpacing, 1, 12);
+    newProperties.endOffset = PropertyClamp.clamp(newProperties.endOffset, -1, newProperties.fanOut * newProperties.gridSpacing - 1);
+    for (int i = 0; i < newProperties.splitIndices.length; i++)
     {
-      int index = properties.splitIndices[i];
-      properties.splitIndices[i] = PropertyClamp.clamp(index, 0, properties.fanOut - 1);
+      int index = newProperties.splitIndices[i];
+      newProperties.splitIndices[i] = PropertyClamp.clamp(index, 0, newProperties.fanOut - 1);
     }
   }
 

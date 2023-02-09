@@ -4,8 +4,6 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
-import net.logicim.domain.Simulation;
-import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -56,7 +54,7 @@ public class LabelView
   }
 
   @Override
-  public void propertyChanged()
+  public void propertyChanged(LabelProperties newProperties)
   {
   }
 

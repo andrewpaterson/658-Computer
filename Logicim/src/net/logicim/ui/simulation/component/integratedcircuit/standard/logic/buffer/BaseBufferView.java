@@ -11,13 +11,15 @@ import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.logicim.ui.common.Rotation.North;
 
 public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
     extends StandardIntegratedCircuitView<IC, BufferProperties>
 {
-  protected PolygonView polygon;
+  protected List<PolygonView> polygons;
 
   public BaseBufferView(CircuitEditor circuitEditor,
                         Int2D position,
@@ -25,17 +27,22 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
                         BufferProperties properties)
   {
     super(circuitEditor, position, rotation, properties);
+    polygons = null;
     createGraphics();
   }
 
   protected void createGraphics()
   {
-    polygon = new PolygonView(this,
-                              true,
-                              true,
-                              new Float2D(0, -0.9f),
-                              new Float2D(0.75f, 1),
-                              new Float2D(-0.75f, 1));
+    polygons = new ArrayList<>();
+    for (int i = 0; i < properties.inputCount; i++)
+    {
+      polygons.add(new PolygonView(this,
+                                   true,
+                                   true,
+                                   new Float2D(0, -0.9f),
+                                   new Float2D(0.75f, 1),
+                                   new Float2D(-0.75f, 1)));
+    }
   }
 
   protected void createPortViews(boolean negateOutput)
@@ -54,13 +61,15 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   {
     super.paint(graphics, viewport, time);
 
-    if (polygon != null)
+    if (polygons != null)
     {
       Stroke stroke = graphics.getStroke();
       Color color = graphics.getColor();
 
-      polygon.paint(graphics, viewport);
-
+      for (PolygonView polygon : polygons)
+      {
+        polygon.paint(graphics, viewport);
+      }
       paintPorts(graphics, viewport, time);
 
       graphics.setStroke(stroke);

@@ -9,7 +9,6 @@ import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -260,13 +259,13 @@ public class OscilloscopeView
   }
 
   @Override
-  public void propertyChanged()
+  public void propertyChanged(OscilloscopeProperties newProperties)
   {
-    properties.inputCount = clamp(properties.inputCount, 1, 24);
-    properties.numberOfDivsWide = clamp(properties.numberOfDivsWide, 4, 128);
-    properties.divHeightInGrids = clamp(properties.divHeightInGrids, 2, 6);
-    properties.samplesPerDiv = clamp(properties.samplesPerDiv, 4, 64);
-    properties.samplingFrequency_Hz = clamp(properties.samplingFrequency_Hz, 0.01f, 999 * GHz);
+    newProperties.inputCount = clamp(newProperties.inputCount, 1, 24);
+    newProperties.numberOfDivsWide = clamp(newProperties.numberOfDivsWide, 4, 128);
+    newProperties.divHeightInGrids = clamp(newProperties.divHeightInGrids, 2, 6);
+    newProperties.samplesPerDiv = clamp(newProperties.samplesPerDiv, 4, 64);
+    newProperties.samplingFrequency_Hz = clamp(newProperties.samplingFrequency_Hz, 0.01f, 999 * GHz);
   }
 }
 

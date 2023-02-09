@@ -7,7 +7,6 @@ import net.logicim.data.ReflectiveData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -244,7 +243,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract boolean isEnabled();
 
-  public abstract void propertyChanged();
+  public abstract void propertyChanged(PROPERTIES newProperties);
 
   public abstract ReflectiveData save(boolean selected);
 

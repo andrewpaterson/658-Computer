@@ -61,7 +61,7 @@ public class GroundView
   }
 
   @Override
-  public void propertyChanged()
+  public void propertyChanged(GroundProperties newProperties)
   {
   }
 

@@ -217,12 +217,12 @@ public class TunnelView
   }
 
   @Override
-  public void propertyChanged()
+  public void propertyChanged(TunnelProperties newProperties)
   {
-    sanitisedName = createSanitisedName(properties);
+    sanitisedName = createSanitisedName(newProperties);
     if (sanitisedName.isEmpty())
     {
-      properties.name = "  ";
+      newProperties.name = "  ";
     }
     endPosition = null;
   }

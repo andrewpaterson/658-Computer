@@ -33,7 +33,7 @@ public class BufferView
   {
     return new Buffer(circuitEditor.getCircuit(),
                       properties.name,
-                      new BufferPins(properties.bufferCount,
+                      new BufferPins(properties.inputWidth * properties.inputCount,
                                      familyVoltageConfiguration));
   }
 
@@ -48,14 +48,16 @@ public class BufferView
                           savePorts(),
                           selected,
                           saveState(),
-                          properties.bufferCount,
+                          properties.inputCount,
+                          properties.inputWidth,
                           properties.explicitPowerPorts);
   }
 
   @Override
-  public void propertyChanged()
+  public void propertyChanged(BufferProperties newProperties)
   {
-    properties.bufferCount = PropertyClamp.clamp(properties.bufferCount, 1, PropertyClamp.MAX);
+    newProperties.inputCount = PropertyClamp.clamp(newProperties.inputCount, 1, PropertyClamp.MAX);
+    newProperties.inputWidth = PropertyClamp.clamp(newProperties.inputWidth, 1, PropertyClamp.MAX);
   }
 
   @Override

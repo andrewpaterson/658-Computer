@@ -18,13 +18,17 @@ public class InverterViewFactory
                   new BufferProperties("",
                                        DefaultFamily.get(),
                                        true,
+                                       1,
                                        1));
   }
 
   @Override
   public InverterView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, BufferProperties properties)
   {
-    return new InverterView(circuitEditor, position, rotation, properties);
+    return new InverterView(circuitEditor,
+                            position,
+                            rotation,
+                            properties);
   }
 
   @Override

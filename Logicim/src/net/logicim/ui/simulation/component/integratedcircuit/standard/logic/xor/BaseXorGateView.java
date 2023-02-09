@@ -42,24 +42,26 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
     float yMiddle = 0.9f;
     float yZero = 0.0f;
 
-    arcViewRight = new ArcView(this, new Float2D(-1.5f, yTop), 3, 357, 61, true, false);
-    arcViewLeft = new ArcView(this, new Float2D(1.5f, yTop), 3, 122, 61, true, false);
-    arcViewBottom = new ArcView(this, new Float2D(0, yBottom), 3, 61, 58, true, false);
-    arcViewSecondBottom = new ArcView(this, new Float2D(0, yBottom + 1), 3, 61, 58, true, false);
-    arcViewFillRight = new ArcView(this, new Float2D(-1.5f, yTop), 3, 0, 58, false, true);
-    arcViewFillLeft = new ArcView(this, new Float2D(1.5f, yTop), 3, 122, 58, false, true);
+    float width = calculateWidth(properties.inputCount);
+    float radius = width * 2;
+    arcViewRight = new ArcView(this, new Float2D(-width, yTop), radius, 3, 357, 61, true, false);
+    arcViewLeft = new ArcView(this, new Float2D(width, yTop), radius, 3, 122, 61, true, false);
+    arcViewBottom = new ArcView(this, new Float2D(0, yBottom), radius, 3, 61, 58, true, false);
+    arcViewSecondBottom = new ArcView(this, new Float2D(0, yBottom + 1), radius, 3, 61, 58, true, false);
+    arcViewFillRight = new ArcView(this, new Float2D(-width, yTop), radius, 3, 0, 58, false, true);
+    arcViewFillLeft = new ArcView(this, new Float2D(width, yTop), radius, 3, 122, 58, false, true);
 
     polygonViewFillLeft = new PolygonView(this,
                                           false,
                                           true,
-                                          new Float2D(-1.5f, yMiddle),
-                                          new Float2D(-1.5f, yZero),
+                                          new Float2D(-width, yMiddle),
+                                          new Float2D(-width, yZero),
                                           new Float2D(0, yZero));
     polygonViewFillRight = new PolygonView(this,
                                            false,
                                            true,
-                                           new Float2D(1.5f, yMiddle),
-                                           new Float2D(1.5f, yZero),
+                                           new Float2D(width, yMiddle),
+                                           new Float2D(width, yZero),
                                            new Float2D(0, yZero));
   }
 

@@ -52,11 +52,6 @@ public class TraceView
     return null;
   }
 
-  public ConnectionView getPotentialConnectionsInGrid(Int2D gridPosition)
-  {
-    return getPotentialConnectionsInGrid(gridPosition.x, gridPosition.y);
-  }
-
   public ConnectionView getPotentialConnectionsInGrid(int x, int y)
   {
     ConnectionView connections = getConnectionsInGrid(x, y);
@@ -178,31 +173,6 @@ public class TraceView
     return connections.get(1);
   }
 
-  public Rotation getDirection()
-  {
-    return line.getDirection();
-  }
-
-  public int getMinimumX()
-  {
-    return line.getMinimumX();
-  }
-
-  public int getMinimumY()
-  {
-    return line.getMinimumY();
-  }
-
-  public int getMaximumX()
-  {
-    return line.getMaximumX();
-  }
-
-  public int getMaximumY()
-  {
-    return line.getMaximumY();
-  }
-
   public boolean hasConnections()
   {
     return getStartConnection() != null && getEndConnection() != null;
@@ -306,25 +276,6 @@ public class TraceView
   protected Color getTraceColour(long time)
   {
     return VoltageColour.getColourForTraces(Colours.getInstance(), traces, time);
-  }
-
-  public TraceView getOtherTraceView(List<View> connectedComponents)
-  {
-    TraceView otherTrace = null;
-    if (connectedComponents.size() == 2)
-    {
-      for (View connectedComponent : connectedComponents)
-      {
-        if (connectedComponent != this)
-        {
-          if (connectedComponent instanceof TraceView)
-          {
-            otherTrace = (TraceView) connectedComponent;
-          }
-        }
-      }
-    }
-    return otherTrace;
   }
 
   public TraceData save(boolean selected)

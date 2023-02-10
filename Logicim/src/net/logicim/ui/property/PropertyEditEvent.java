@@ -25,7 +25,7 @@ public class PropertyEditEvent
   @Override
   public void execute(SimulatorEditor editor)
   {
-    componentView.propertyChanged(newComponentProperties);
+    componentView.clampProperties(newComponentProperties);
     StaticView<?> newComponentView = recreateComponentView(newComponentProperties, editor);
     editor.replaceSelection(newComponentView, componentView);
     editor.pushUndo();

@@ -25,12 +25,6 @@ public class PowerOutPort
     return name + " (" + Voltage.toVoltageString(voltage) + ")";
   }
 
-  @Override
-  public boolean isPowerOut()
-  {
-    return true;
-  }
-
   public float getVoltageOut(long time)
   {
     return voltage;

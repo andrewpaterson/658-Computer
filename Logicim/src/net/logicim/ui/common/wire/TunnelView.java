@@ -97,10 +97,10 @@ public class TunnelView
     float height = bottomRight.y - topLeft.y;
     offsetX = height / 2;
 
-    Int2D endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
-
+    Int2D endPosition;
     if (!properties.doubleSided)
     {
+      endPosition = new Int2D(bottomRight.x + offsetX + offsetX, 0);
       polygonView = new PolygonView(this,
                                     true,
                                     true,
@@ -112,6 +112,7 @@ public class TunnelView
     }
     else
     {
+      endPosition = new Int2D(bottomRight.x + offsetX + offsetX + 0.5f, 0);
       polygonView = new PolygonView(this,
                                     true,
                                     true,
@@ -217,14 +218,13 @@ public class TunnelView
   }
 
   @Override
-  public void propertyChanged(TunnelProperties newProperties)
+  public void clampProperties(TunnelProperties newProperties)
   {
-    sanitisedName = createSanitisedName(newProperties);
+    String sanitisedName = createSanitisedName(newProperties);
     if (sanitisedName.isEmpty())
     {
       newProperties.name = "  ";
     }
-    endPosition = null;
   }
 
   @Override

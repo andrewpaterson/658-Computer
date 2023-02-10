@@ -383,7 +383,7 @@ public class SplitterView
   }
 
   @Override
-  public void propertyChanged(SplitterProperties newProperties)
+  public void clampProperties(SplitterProperties newProperties)
   {
     newProperties.fanOut = PropertyClamp.clamp(newProperties.fanOut, 1, PropertyClamp.MAX);
     newProperties.gridSpacing = PropertyClamp.clamp(newProperties.gridSpacing, 1, 12);

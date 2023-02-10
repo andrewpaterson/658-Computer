@@ -50,7 +50,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void propertyChanged(LogicGateProperties newProperties)
+  public void clampProperties(LogicGateProperties newProperties)
   {
     newProperties.inputCount = clamp(newProperties.inputCount, 1, 13);
   }

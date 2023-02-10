@@ -54,7 +54,7 @@ public class BufferView
   }
 
   @Override
-  public void propertyChanged(BufferProperties newProperties)
+  public void clampProperties(BufferProperties newProperties)
   {
     newProperties.inputCount = PropertyClamp.clamp(newProperties.inputCount, 1, PropertyClamp.MAX);
     newProperties.inputWidth = PropertyClamp.clamp(newProperties.inputWidth, 1, PropertyClamp.MAX);

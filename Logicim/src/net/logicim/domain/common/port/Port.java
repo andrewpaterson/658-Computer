@@ -64,11 +64,6 @@ public abstract class Port
     return false;
   }
 
-  public boolean isPowerOut()
-  {
-    return false;
-  }
-
   public boolean isPowerIn()
   {
     return false;

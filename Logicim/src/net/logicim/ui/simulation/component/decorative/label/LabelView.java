@@ -54,7 +54,7 @@ public class LabelView
   }
 
   @Override
-  public void propertyChanged(LabelProperties newProperties)
+  public void clampProperties(LabelProperties newProperties)
   {
   }
 

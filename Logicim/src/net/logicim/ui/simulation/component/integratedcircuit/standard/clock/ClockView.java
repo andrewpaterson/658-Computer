@@ -170,7 +170,7 @@ public class ClockView
   }
 
   @Override
-  public void propertyChanged(ClockProperties newProperties)
+  public void clampProperties(ClockProperties newProperties)
   {
     newProperties.frequency_Hz = clamp(newProperties.frequency_Hz, 0, 999 * GHz);
   }

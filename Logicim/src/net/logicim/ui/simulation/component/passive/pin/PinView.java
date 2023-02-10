@@ -47,7 +47,7 @@ public class PinView
   }
 
   @Override
-  public void propertyChanged(PinProperties newProperties)
+  public void clampProperties(PinProperties newProperties)
   {
   }
 

@@ -77,7 +77,7 @@ public class PositivePowerView
   }
 
   @Override
-  public void propertyChanged(PositivePowerProperties newProperties)
+  public void clampProperties(PositivePowerProperties newProperties)
   {
     newProperties.voltage_V = clamp(newProperties.voltage_V, 0.01f, 7.0f);
   }

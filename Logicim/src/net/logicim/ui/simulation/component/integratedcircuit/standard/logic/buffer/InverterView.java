@@ -60,7 +60,7 @@ public class InverterView
   }
 
   @Override
-  public void propertyChanged(BufferProperties newProperties)
+  public void clampProperties(BufferProperties newProperties)
   {
     newProperties.inputWidth = PropertyClamp.clamp(newProperties.inputWidth, 1, PropertyClamp.MAX);
     newProperties.inputCount = PropertyClamp.clamp(newProperties.inputCount, 1, PropertyClamp.MAX);

@@ -243,7 +243,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract boolean isEnabled();
 
-  public abstract void propertyChanged(PROPERTIES newProperties);
+  public abstract void clampProperties(PROPERTIES newProperties);
 
   public abstract ReflectiveData save(boolean selected);
 

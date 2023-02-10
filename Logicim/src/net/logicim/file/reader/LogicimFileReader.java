@@ -39,9 +39,12 @@ public class LogicimFileReader
   protected CircuitData circuitData;
   protected List<XMLDataField> dataStack;
 
+  protected List<String> characters;
+
   public LogicimFileReader()
   {
     circuitData = null;
+    characters = null;
   }
 
   public CircuitData load(File file)
@@ -166,47 +169,56 @@ public class LogicimFileReader
   @Override
   public void characters(char[] ch, int start, int length)
   {
-    String trim = String.valueOf(ch, start, length).trim();
+    if (characters == null)
+    {
+      characters = new ArrayList<>();
+    }
+    String trim = StringUtil.stripSurroundingWhitespace(String.valueOf(ch, start, length));
     if (!trim.isEmpty())
     {
-      if (dataStack.size() - 2 >= 0)
+      characters.add(trim);
+    }
+  }
+
+  protected void processCharacters(String string)
+  {
+    if (dataStack.size() - 2 >= 0)
+    {
+      XMLDataField xmlDataField = dataStack.get(dataStack.size() - 1);
+      SaveXMLDataField containingClassField = (SaveXMLDataField) dataStack.get(dataStack.size() - 2);
+      InstanceInspector instanceInspector = new InstanceInspector(containingClassField.typeInstance);
+      boolean processed = true;
+      if (xmlDataField instanceof UnknownXMLDataField)
       {
-        XMLDataField xmlDataField = dataStack.get(dataStack.size() - 1);
-        SaveXMLDataField containingClassField = (SaveXMLDataField) dataStack.get(dataStack.size() - 2);
-        InstanceInspector instanceInspector = new InstanceInspector(containingClassField.typeInstance);
-        boolean processed = true;
-        if (xmlDataField instanceof UnknownXMLDataField)
+        UnknownXMLDataField unknownDataField = (UnknownXMLDataField) xmlDataField;
+        Object value = parsePrimitive(string.trim(), unknownDataField, containingClassField, instanceInspector);
+        setPrimitiveFieldValue(unknownDataField, containingClassField, instanceInspector, value);
+      }
+      else if (xmlDataField instanceof SaveXMLDataField)
+      {
+        processed = false;
+        SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataField;
+        if (saveXMLDataField.typeInstance instanceof IntArrayData)
         {
-          UnknownXMLDataField unknownDataField = (UnknownXMLDataField) xmlDataField;
-          Object value = parsePrimitive(trim, unknownDataField, containingClassField, instanceInspector);
-          setPrimitiveFieldValue(unknownDataField, containingClassField, instanceInspector, value);
+          parseIntArray((IntArrayData) saveXMLDataField.typeInstance, string);
         }
-        else if (xmlDataField instanceof SaveXMLDataField)
+        else if (saveXMLDataField.typeInstance instanceof LongArrayData)
         {
-          processed = false;
-          SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataField;
-          if (saveXMLDataField.typeInstance instanceof IntArrayData)
-          {
-            parseIntArray((IntArrayData) saveXMLDataField.typeInstance, trim);
-          }
-          else if (saveXMLDataField.typeInstance instanceof LongArrayData)
-          {
-            parseLongArray((LongArrayData) saveXMLDataField.typeInstance, trim);
-          }
-          else if (saveXMLDataField.typeInstance instanceof FloatArrayData)
-          {
-            parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, trim);
-          }
-          else if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
-          {
-            parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, trim);
-          }
+          parseLongArray((LongArrayData) saveXMLDataField.typeInstance, string);
         }
-        if (processed)
+        else if (saveXMLDataField.typeInstance instanceof FloatArrayData)
         {
-          dataStack.remove(dataStack.size() - 1);
-          dataStack.add(new ProcessedXMLDataField(xmlDataField.fieldName, xmlDataField.attributes));
+          parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, string);
         }
+        else if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
+        {
+          parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, string);
+        }
+      }
+      if (processed)
+      {
+        dataStack.remove(dataStack.size() - 1);
+        dataStack.add(new ProcessedXMLDataField(xmlDataField.fieldName, xmlDataField.attributes));
       }
     }
   }
@@ -218,16 +230,7 @@ public class LogicimFileReader
     {
       if (!s.isEmpty())
       {
-        int i;
-        try
-        {
-          i = Integer.parseInt(s);
-        }
-        catch (NumberFormatException e)
-        {
-          throw new SimulatorException("Could not parse [%s] as int.", string);
-        }
-        arrayData.array[arrayData.index] = i;
+        arrayData.array[arrayData.index] = parseInt(s);
         arrayData.index++;
         if (arrayData.index == arrayData.array.length)
         {
@@ -236,6 +239,20 @@ public class LogicimFileReader
       }
     }
     return false;
+  }
+
+  private int parseInt(String s)
+  {
+    int value;
+    try
+    {
+      value = Integer.parseInt(s);
+    }
+    catch (NumberFormatException e)
+    {
+      throw new SimulatorException("Could not parse [%s] as int.", s);
+    }
+    return value;
   }
 
   private boolean parseLongArray(LongArrayData arrayData, String string)
@@ -245,8 +262,7 @@ public class LogicimFileReader
     {
       if (!s.isEmpty())
       {
-        long i = Long.parseLong(s);
-        arrayData.array[arrayData.index] = i;
+        arrayData.array[arrayData.index] = parseLong(s);
         arrayData.index++;
         if (arrayData.index == arrayData.array.length)
         {
@@ -255,6 +271,20 @@ public class LogicimFileReader
       }
     }
     return false;
+  }
+
+  private long parseLong(String s)
+  {
+    long value;
+    try
+    {
+      value = Long.parseLong(s);
+    }
+    catch (NumberFormatException e)
+    {
+      throw new SimulatorException("Could not parse [%s] as long.", s);
+    }
+    return value;
   }
 
   private boolean parseFloatArray(FloatArrayData arrayData, String string)
@@ -264,8 +294,7 @@ public class LogicimFileReader
     {
       if (!s.isEmpty())
       {
-        float f = Float.parseFloat(s);
-        arrayData.array[arrayData.index] = f;
+        arrayData.array[arrayData.index] = parseFloat(s);
         arrayData.index++;
         if (arrayData.index == arrayData.array.length)
         {
@@ -276,6 +305,20 @@ public class LogicimFileReader
     return false;
   }
 
+  private float parseFloat(String s)
+  {
+    float value;
+    try
+    {
+      value = Float.parseFloat(s);
+    }
+    catch (NumberFormatException e)
+    {
+      throw new SimulatorException("Could not parse [%s] as float.", s);
+    }
+    return value;
+  }
+
   private boolean parseDoubleArray(DoubleArrayData arrayData, String string)
   {
     List<String> strings = StringUtil.splitAndTrim(string, ",");
@@ -283,8 +326,7 @@ public class LogicimFileReader
     {
       if (!s.isEmpty())
       {
-        double f = Double.parseDouble(s);
-        arrayData.array[arrayData.index] = f;
+        arrayData.array[arrayData.index] = parseDouble(s);
         arrayData.index++;
         if (arrayData.index == arrayData.array.length)
         {
@@ -293,6 +335,20 @@ public class LogicimFileReader
       }
     }
     return false;
+  }
+
+  private double parseDouble(String s)
+  {
+    double value;
+    try
+    {
+      value = Double.parseDouble(s);
+    }
+    catch (NumberFormatException e)
+    {
+      throw new SimulatorException("Could not parse [%s] as double.", s);
+    }
+    return value;
   }
 
   protected void setPrimitiveFieldValue(UnknownXMLDataField unknownDataField, SaveXMLDataField containingClassField, InstanceInspector instanceInspector, Object value)
@@ -414,6 +470,19 @@ public class LogicimFileReader
   @Override
   public void endElement(String uri, String localName, String qName)
   {
+    if (characters != null)
+    {
+      StringBuilder builder = new StringBuilder();
+      for (String string : characters)
+      {
+        builder.append(string);
+      }
+      characters = null;
+      String string = builder.toString();
+      builder = null;
+      processCharacters(string);
+    }
+
     if (qName.equals(LOGICIM_TAG_NAME))
     {
       dataStack = null;

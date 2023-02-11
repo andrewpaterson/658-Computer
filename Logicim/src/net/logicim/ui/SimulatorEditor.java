@@ -16,6 +16,8 @@ import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
+import net.logicim.ui.placement.MoveComponents;
+import net.logicim.ui.placement.WirePull;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
@@ -50,15 +52,14 @@ public class SimulatorEditor
 
   protected CircuitEditor circuitEditor;
 
-  protected StaticView<?> placementView;
-
   protected TraceView hoverTraceView;
   protected StaticView<?> hoverComponentView;
   protected ConnectionView hoverConnectionView;
 
+  protected StaticView<?> placementView;
   protected WirePull wirePull;
-
   protected MoveComponents moveComponents;
+
   protected UndoStack undoStack;
 
   protected boolean running;
@@ -299,8 +300,10 @@ public class SimulatorEditor
 
   protected void startMoveComponents(int mouseX, int mouseY)
   {
-    moveComponents = new MoveComponents(circuitEditor.getSelection().getSelection(), new Int2D(viewport.transformScreenToGridX(mouseX),
-                                                                                               viewport.transformScreenToGridY(mouseY)));
+    moveComponents = new MoveComponents(circuitEditor.getSelection().getSelection(),
+                                        new Int2D(viewport.transformScreenToGridX(mouseX),
+                                                  viewport.transformScreenToGridY(mouseY))
+    );
 
     clearHover();
   }

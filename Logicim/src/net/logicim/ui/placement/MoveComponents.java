@@ -1,4 +1,4 @@
-package net.logicim.ui;
+package net.logicim.ui.placement;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
@@ -15,6 +15,7 @@ import static net.logicim.ui.common.Rotation.Cannot;
 import static net.logicim.ui.common.Rotation.North;
 
 public class MoveComponents
+    extends StatefulMove
 {
   protected Int2D start;
   protected Int2D end;
@@ -64,6 +65,7 @@ public class MoveComponents
   public MoveComponents(List<View> views, Int2D start)
   {
     this.start = start;
+
     end = new Int2D(this.start);
     diff = new Int2D();
     hadDiff = false;

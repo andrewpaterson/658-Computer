@@ -1,5 +1,6 @@
 package net.logicim.ui.placement;
 
-public class StatefulMove
+public abstract class StatefulMove
 {
 }
+

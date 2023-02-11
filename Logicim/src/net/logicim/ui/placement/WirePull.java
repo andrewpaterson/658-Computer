@@ -1,4 +1,4 @@
-package net.logicim.ui;
+package net.logicim.ui.placement;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.Colours;
@@ -8,6 +8,7 @@ import net.logicim.ui.common.Viewport;
 import java.awt.*;
 
 public class WirePull
+    extends StatefulMove
 {
   protected Int2D firstPosition;
   protected Rotation firstDirection;

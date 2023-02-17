@@ -1,6 +1,5 @@
 package net.logicim.ui;
 
-import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
@@ -16,25 +15,25 @@ import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
-import net.logicim.ui.placement.MoveComponents;
-import net.logicim.ui.placement.WirePull;
+import net.logicim.ui.placement.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionMode;
+import net.logicim.ui.undo.Undo;
 import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
 
 public class SimulatorEditor
-    implements PanelSize
+    implements PanelSize,
+               Undo
 {
   private ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
 
@@ -56,9 +55,7 @@ public class SimulatorEditor
   protected StaticView<?> hoverComponentView;
   protected ConnectionView hoverConnectionView;
 
-  protected StaticView<?> placementView;
-  protected WirePull wirePull;
-  protected MoveComponents moveComponents;
+  protected StatefulEdit statefulEdit;
 
   protected UndoStack undoStack;
 
@@ -82,13 +79,12 @@ public class SimulatorEditor
     this.actions = new InputActions(mouseButtons);
 
     this.circuitEditor = new CircuitEditor();
-    this.placementView = null;
+    this.statefulEdit = null;
     this.creationRotation = Rotation.North;
 
     this.running = false;
     this.runTimeStep = LongTime.nanosecondsToTime(0.25f);
 
-    this.moveComponents = null;
     this.undoStack = new UndoStack();
 
     addActions(simulatorPanel);
@@ -123,19 +119,7 @@ public class SimulatorEditor
 
   private boolean canRun()
   {
-    if (moveComponents != null)
-    {
-      return false;
-    }
-    if (placementView != null)
-    {
-      return false;
-    }
-    if (wirePull != null)
-    {
-      return false;
-    }
-    return true;
+    return statefulEdit == null;
   }
 
   public void mousePressed(int x, int y, int button, int clickCount)
@@ -146,35 +130,44 @@ public class SimulatorEditor
     {
       if (button == BUTTON1)
       {
-        if (isInSelectedComponent(x, y))
+        if (statefulEdit != null)
         {
-          startMoveComponents(x, y);
-        }
-        else if ((hoverConnectionView != null && placementView == null))
-        {
-          if (wirePull == null)
-          {
-            startWirePull();
-          }
+          statefulEdit.done(x, y);
+          statefulEdit = null;
+          calculateHighlightedPort();
         }
         else
         {
-          if (placementView == null)
+          StatefulMove edit;
+          if (isInSelectedComponent(x, y))
           {
-            circuitEditor.startSelection(viewport, x, y, keyboardButtons);
+            edit = new InSelectedComponent(keyboardButtons);
           }
+          else if ((hoverConnectionView != null))
+          {
+            edit = new InSelectedPort(keyboardButtons);
+          }
+          else
+          {
+            edit = new RectangleSelection(keyboardButtons);
+          }
+          statefulEdit = createStatefulEditor(edit, x, y);
         }
       }
     }
   }
 
-  protected void doneSelection(int x, int y)
+  protected StatefulEdit createStatefulEditor(StatefulMove edit, int x, int y)
   {
-    boolean hasSelectionChanged = circuitEditor.doneSelection(viewport, x, y, keyboardButtons);
-    if (hasSelectionChanged)
-    {
-      pushUndo();
-    }
+    StatefulEdit statefulEdit = new StatefulEdit(toFloatingGridPosition(x, y), edit, circuitEditor, this);
+    clearHover();
+    return statefulEdit;
+  }
+
+  protected Float2D toFloatingGridPosition(float x, float y)
+  {
+    return new Float2D(viewport.transformScreenToGridX(x),
+                       viewport.transformScreenToGridY(y));
   }
 
   public void mouseReleased(int x, int y, int button)
@@ -183,36 +176,11 @@ public class SimulatorEditor
 
     if (button == BUTTON1)
     {
-      if (placementView != null)
+      if (statefulEdit != null)
       {
-        donePlaceComponent(placementView);
-        placementView = null;
+        statefulEdit.done(x, y);
+        statefulEdit = null;
         calculateHighlightedPort();
-      }
-      else if (wirePull != null)
-      {
-        if (!wirePull.isEmpty())
-        {
-          doneWirePull(wirePull);
-          wirePull = null;
-          calculateHighlightedPort();
-        }
-        else
-        {
-          discardWirePull();
-
-          circuitEditor.startSelection(viewport, x, y, keyboardButtons);
-          doneSelection(x, y);
-        }
-      }
-      else if (moveComponents != null)
-      {
-        mouseReleaseWithMoveComponents();
-      }
-
-      if (circuitEditor.getSelection().hasRectangle())
-      {
-        doneSelection(x, y);
       }
     }
   }
@@ -230,36 +198,10 @@ public class SimulatorEditor
       }
     }
 
-    if (placementView != null)
+    if (statefulEdit != null)
     {
-      placementView.setPosition(viewport.transformScreenToGridX(x),
-                                viewport.transformScreenToGridY(y));
-    }
-
-    if (wirePull != null)
-    {
-      wirePull.update(viewport.transformScreenToGridX(x),
-                      viewport.transformScreenToGridY(y));
-
-      if (!wirePull.isEmpty())
-      {
-        circuitEditor.getSelection().clearSelection();
-      }
-    }
-
-    if (circuitEditor.isSelecting())
-    {
-      circuitEditor.getSelection().drag(viewport, x, y);
-      List<View> views = circuitEditor.getSelectionFromRectangle();
-      circuitEditor.getSelection().selectionMoved(keyboardButtons, views);
-    }
-    else
-    {
-      if (moveComponents != null)
-      {
-        moveComponents.calculateDiff(viewport, x, y);
-        moveComponents();
-      }
+      statefulEdit.move(viewport.transformScreenToGridX((float) x),
+                        viewport.transformScreenToGridY((float) y));
     }
 
     calculateHighlightedPort();
@@ -298,86 +240,18 @@ public class SimulatorEditor
     return false;
   }
 
-  protected void startMoveComponents(int mouseX, int mouseY)
-  {
-    moveComponents = new MoveComponents(circuitEditor.getSelection().getSelection(),
-                                        new Int2D(viewport.transformScreenToGridX(mouseX),
-                                                  viewport.transformScreenToGridY(mouseY))
-    );
-
-    clearHover();
-  }
-
-  protected void moveComponents()
-  {
-    if (moveComponents.hasMoved())
-    {
-      circuitEditor.startMoveComponents(moveComponents.getStaticViews(), moveComponents.getTraces());
-    }
-
-    moveComponents.moveComponents();
-  }
-
-  protected void mouseReleaseWithMoveComponents()
-  {
-    if (moveComponents.hadDiff())
-    {
-      circuitEditor.doneMoveComponents(moveComponents.getStaticViews(),
-                                       moveComponents.getTraces(),
-                                       moveComponents.getSelectedViews());
-      if (moveComponents.hasDiff())
-      {
-        pushUndo();
-      }
-    }
-    else
-    {
-      if (!moveComponents.getSelectedViews().isEmpty())
-      {
-        circuitEditor.startSelection(viewport, mousePosition.get().x, mousePosition.get().y, keyboardButtons);
-        doneSelection(mousePosition.get().x, mousePosition.get().y);
-      }
-    }
-    moveComponents = null;
-
-    calculateHighlightedPort();
-  }
-
   public void startPlaceComponent(ViewFactory<?, ?> viewFactory)
   {
-    Int2D position = getMousePositionOnGrid();
-    if (position != null)
+    Int2D position = mousePosition.get();
+    if (statefulEdit == null && position != null)
     {
       circuitEditor.getSelection().clearSelection();
-      discardPlacement();
-      placementView = viewFactory.create(circuitEditor, position, creationRotation);
+      StaticView<?> staticView = viewFactory.create(circuitEditor,
+                                                    new Int2D(viewport.transformScreenToGridX(position.x),
+                                                              viewport.transformScreenToGridY(position.y)),
+                                                    creationRotation);
+      statefulEdit = createStatefulEditor(new MoveComponents(staticView), position.x, position.y);
     }
-  }
-
-  private void donePlaceComponent(StaticView<?> placementView)
-  {
-    circuitEditor.placeComponentView(placementView);
-    pushUndo();
-  }
-
-  protected void startWirePull()
-  {
-    wirePull = new WirePull();
-    wirePull.getFirstPosition().set(hoverConnectionView.getGridPosition());
-  }
-
-  private void doneWirePull(WirePull wirePull)
-  {
-    Int2D firstPosition = wirePull.getFirstPosition();
-    Int2D middlePosition = wirePull.getMiddlePosition();
-    Int2D secondPosition = wirePull.getSecondPosition();
-
-    Line firstLine = Line.createLine(firstPosition, middlePosition);
-    Line secondLine = Line.createLine(middlePosition, secondPosition);
-
-    circuitEditor.createTraceViews(Line.lines(firstLine, secondLine));
-
-    pushUndo();
   }
 
   public void resized(int width, int height)
@@ -406,9 +280,9 @@ public class SimulatorEditor
       drawConnectionDetails(graphics);
     }
 
-    if (wirePull != null)
+    if (statefulEdit != null)
     {
-      wirePull.paint(graphics, viewport);
+      statefulEdit.paint(graphics, viewport);
     }
 
     SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
@@ -498,7 +372,7 @@ public class SimulatorEditor
 
   private void calculateHighlightedPort()
   {
-    if ((placementView == null) && !circuitEditor.isSelecting() && circuitEditor.isSelectionEmpty())
+    if ((statefulEdit == null) && !circuitEditor.isSelecting() && circuitEditor.isSelectionEmpty())
     {
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
@@ -595,71 +469,30 @@ public class SimulatorEditor
 
   public void rotateRight()
   {
-    if (placementView != null)
-    {
-      placementView.rotateRight();
-      Rotation rotation = placementView.getRotation();
-      if ((rotation != Rotation.Cannot))
-      {
-        creationRotation = rotation;
-      }
-    }
-    else
-    {
-      rotateMoveComponents(true);
-    }
+    rotateMoveComponents(true);
   }
 
   public void rotateLeft()
   {
-    if (placementView != null)
-    {
-      placementView.rotateLeft();
-      Rotation rotation = placementView.getRotation();
-      if ((rotation != Rotation.Cannot))
-      {
-        creationRotation = rotation;
-      }
-    }
-    else
-    {
-      rotateMoveComponents(false);
-    }
+    rotateMoveComponents(false);
   }
 
   protected void rotateMoveComponents(boolean right)
   {
-    boolean moveComponentsNull = moveComponents == null;
-    if (moveComponentsNull)
+    if (statefulEdit != null)
+    {
+      statefulEdit.rotate(right);
+    }
+    else
     {
       if (hoverComponentView != null)
       {
-        moveComponents = new MoveComponents(hoverComponentView);
+        Int2D position = hoverComponentView.getPosition();
+
+        createStatefulEditor(new MoveComponents(hoverComponentView),
+                             viewport.transformGridToScreenSpaceX(position.x),
+                             viewport.transformGridToScreenSpaceY(position.y));
         clearHover();
-      }
-      else
-      {
-        Int2D position = circuitEditor.getSelectionCenter();
-        if (position != null)
-        {
-          List<View> selection = circuitEditor.getSelection().getSelection();
-          moveComponents = new MoveComponents(selection, position);
-          clearHover();
-        }
-      }
-    }
-
-    if (moveComponents != null)
-    {
-      moveComponents.rotate(right);
-      moveComponents();
-    }
-
-    if (moveComponentsNull)
-    {
-      if (moveComponents != null)
-      {
-        mouseReleaseWithMoveComponents();
       }
     }
   }
@@ -681,33 +514,17 @@ public class SimulatorEditor
 
   public void stopCurrentEdit()
   {
-    discardPlacement();
-    discardWirePull();
+    if (statefulEdit != null)
+    {
+      statefulEdit.discard();
+    }
     clearSelection();
-
     calculateHighlightedPort();
   }
 
   protected void clearSelection()
   {
     circuitEditor.getSelection().clearSelection();
-  }
-
-  private void discardWirePull()
-  {
-    if (wirePull != null)
-    {
-      wirePull = null;
-    }
-  }
-
-  private void discardPlacement()
-  {
-    if (placementView != null)
-    {
-      circuitEditor.deleteComponentView(placementView);
-      placementView = null;
-    }
   }
 
   public void toggleTunSimulation()
@@ -721,10 +538,6 @@ public class SimulatorEditor
     if (componentDeleted)
     {
       pushUndo();
-    }
-    else
-    {
-      discardPlacement();
     }
 
     clearHover();
@@ -793,10 +606,9 @@ public class SimulatorEditor
 
   public void load(CircuitData circuitData)
   {
-    placementView = null;
-    moveComponents = null;
+    statefulEdit = null;
+
     clearHover();
-    wirePull = null;
 
     circuitEditor = new CircuitEditor();
     circuitEditor.load(circuitData);
@@ -830,6 +642,7 @@ public class SimulatorEditor
     mouseButtons.clear();
   }
 
+  @Override
   public void pushUndo()
   {
     undoStack.push(save());

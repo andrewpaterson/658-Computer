@@ -31,7 +31,6 @@ import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import net.logicim.ui.simulation.selection.Selection;
-import net.logicim.ui.simulation.selection.SelectionMode;
 import net.logicim.ui.simulation.selection.SelectionRectangle;
 
 import java.awt.*;
@@ -777,10 +776,10 @@ public class CircuitEditor
     return connectedTraceViews;
   }
 
-  public List<View> getSelectionFromRectangle()
+  public List<View> getSelectionFromRectangle(SelectionRectangle selectionRectangle1)
   {
-    SelectionRectangle selectionRectangle = selection.getSelectionRectangle();
-    return getSelectionFromRectangle(selectionRectangle.getStart(), selectionRectangle.getEnd());
+    return getSelectionFromRectangle(selectionRectangle1.getStart(),
+                                     selectionRectangle1.getEnd());
   }
 
   public Set<TraceView> createTraceViews(List<Line> inputLines)
@@ -1209,17 +1208,17 @@ public class CircuitEditor
     return connectionViewCache.getConnection(x, y);
   }
 
-  public void startSelection(Viewport viewport, int x, int y, KeyboardButtons keyboardButtons)
+  public void startSelection(float x, float y, KeyboardButtons keyboardButtons)
   {
-    selection.startSelection(viewport, x, y);
-    List<View> views = getSelectionFromRectangle();
+    selection.startSelection(x, y);
+    List<View> views = getSelectionFromRectangle(selection.getSelectionRectangle());
     selection.startSelection(keyboardButtons, views);
   }
 
-  public boolean doneSelection(Viewport viewport, int x, int y, KeyboardButtons keyboardButtons)
+  public boolean doneSelection(float x, float y, KeyboardButtons keyboardButtons)
   {
-    selection.drag(viewport, x, y);
-    List<View> views = getSelectionFromRectangle();
+    selection.drag(x, y);
+    List<View> views = getSelectionFromRectangle(selection.getSelectionRectangle());
     return selection.doneSelection(keyboardButtons, views);
   }
 

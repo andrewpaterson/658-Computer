@@ -8,7 +8,10 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.simulation.CircuitEditor;
 
+import java.awt.*;
+import java.util.List;
 import java.util.*;
 
 import static net.logicim.ui.common.Rotation.Cannot;
@@ -17,30 +20,35 @@ import static net.logicim.ui.common.Rotation.North;
 public class MoveComponents
     extends StatefulMove
 {
-  protected Int2D start;
-  protected Int2D end;
-  protected Int2D diff;
-  protected boolean hadDiff;
-  protected boolean previousHadDiff;
-
   protected Map<StaticView<?>, Int2D> componentStartPositions;
   protected Map<StaticView<?>, Rotation> componentStartRotations;
   protected Map<TraceView, Line> traces;
   protected Set<StaticView<?>> selectedComponents;
   protected Rotation rotation;
-  protected int rightRotations;
 
   public MoveComponents(StaticView<?> componentView)
   {
-    start = componentView.getPosition().clone();
     ArrayList<View> views = new ArrayList<>();
     views.add(componentView);
-    end = new Int2D(start);
-    diff = new Int2D();
-    hadDiff = false;
-    previousHadDiff = false;
+    constructor(views);
+  }
+
+  public MoveComponents(List<View> views)
+  {
+    constructor(views);
+    for (View view : views)
+    {
+      if (view instanceof StaticView)
+      {
+        StaticView<?> staticView = (StaticView<?>) view;
+        selectedComponents.add(staticView);
+      }
+    }
+  }
+
+  protected void constructor(List<View> views)
+  {
     rotation = calculateRotation(views);
-    rightRotations = 0;
 
     selectedComponents = new HashSet<>();
     componentStartPositions = new LinkedHashMap<>();
@@ -62,35 +70,35 @@ public class MoveComponents
     }
   }
 
-  public MoveComponents(List<View> views, Int2D start)
+  @Override
+  public void start(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
-    this.start = start;
+    circuitEditor.startMoveComponents(getStaticViews(), getTraces());
+  }
 
-    end = new Int2D(this.start);
-    diff = new Int2D();
-    hadDiff = false;
-    previousHadDiff = false;
-    rotation = calculateRotation(views);
+  @Override
+  public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    moveComponents(statefulEdit.getRightRotations(), statefulEdit.getStart(), statefulEdit.getDiff());
+    return this;
+  }
 
-    selectedComponents = new HashSet<>();
-    componentStartPositions = new LinkedHashMap<>();
-    componentStartRotations = new LinkedHashMap<>();
-    traces = new LinkedHashMap<>();
-    for (View view : views)
+  @Override
+  public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    circuitEditor.doneMoveComponents(getStaticViews(),
+                                     getTraces(),
+                                     getSelectedViews());
+    if (statefulEdit.hasDiff())
     {
-      if (view instanceof StaticView)
-      {
-        StaticView<?> staticView = (StaticView<?>) view;
-        componentStartPositions.put(staticView, new Int2D(staticView.getPosition()));
-        componentStartRotations.put(staticView, staticView.getRotation());
-        selectedComponents.add(staticView);
-      }
-      else if (view instanceof TraceView)
-      {
-        TraceView traceView = (TraceView) view;
-        traces.put(traceView, traceView.getLine().clone());
-      }
+      statefulEdit.pushUndo();
     }
+
+  }
+
+  @Override
+  public void paint(Graphics2D graphics, Viewport viewport)
+  {
   }
 
   private Rotation calculateRotation(List<View> views)
@@ -134,20 +142,6 @@ public class MoveComponents
     return finalRotation;
   }
 
-  public void calculateDiff(Viewport viewport, int mouseX, int mouseY)
-  {
-    end.set(viewport.transformScreenToGridX(mouseX),
-            viewport.transformScreenToGridY(mouseY));
-    diff.set(end);
-    diff.subtract(start);
-
-    previousHadDiff = hadDiff;
-    if (!diff.isZero())
-    {
-      hadDiff = true;
-    }
-  }
-
   public List<StaticView<?>> getStaticViews()
   {
     return new ArrayList<>(componentStartPositions.keySet());
@@ -163,46 +157,19 @@ public class MoveComponents
     return new ArrayList<>(traces.keySet());
   }
 
-  public boolean hasDiff()
-  {
-    return !diff.isZero() || rightRotations != 0;
-  }
-
-  public boolean hadDiff()
-  {
-    return hadDiff;
-  }
-
-  public boolean hasMoved()
-  {
-    return !previousHadDiff && hadDiff;
-  }
-
   public void rotate(boolean right)
   {
-    previousHadDiff = hadDiff;
-    hadDiff = true;
     if (right)
     {
       rotation = rotation.rotateRight();
-      rightRotations++;
-      if (rightRotations > 3)
-      {
-        rightRotations = 0;
-      }
     }
     else
     {
       rotation = rotation.rotateLeft();
-      rightRotations--;
-      if (rightRotations < 0)
-      {
-        rightRotations = 3;
-      }
     }
   }
 
-  public void moveComponents()
+  public void moveComponents(int rightRotations, Int2D start, Int2D diff)
   {
     for (Map.Entry<StaticView<?>, Int2D> staticViewInt2DEntry : componentStartPositions.entrySet())
     {

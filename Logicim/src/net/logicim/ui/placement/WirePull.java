@@ -1,9 +1,11 @@
 package net.logicim.ui.placement;
 
+import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 
@@ -23,8 +25,40 @@ public class WirePull
 
   public WirePull()
   {
-    this.firstPosition = null;
     resetStart();
+  }
+
+  @Override
+  public void start(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    firstPosition = new Int2D(x, y);
+  }
+
+  @Override
+  public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    update((int) x, (int) y);
+
+    if (!isEmpty())
+    {
+      circuitEditor.getSelection().clearSelection();
+    }
+
+    return this;
+  }
+
+  @Override
+  public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    if (!isEmpty())
+    {
+      Line firstLine = Line.createLine(firstPosition, middlePosition);
+      Line secondLine = Line.createLine(middlePosition, secondPosition);
+
+      circuitEditor.createTraceViews(Line.lines(firstLine, secondLine));
+
+      statefulEdit.pushUndo();
+    }
   }
 
   private void resetStart()
@@ -48,10 +82,6 @@ public class WirePull
 
   public Int2D getFirstPosition()
   {
-    if (firstPosition == null)
-    {
-      firstPosition = new Int2D();
-    }
     return firstPosition;
   }
 
@@ -65,35 +95,34 @@ public class WirePull
     return secondPosition;
   }
 
-  @SuppressWarnings("ConstantConditions")
-  public void update(int mouseX, int mouseY)
+  public void update(int x, int y)
   {
     if (firstPosition != null)
     {
-      if (firstPosition.equals(mouseX, mouseY))
+      if (firstPosition.equals(x, y))
       {
         resetStart();
       }
-      else if (firstPosition.x == mouseX)
+      else if (firstPosition.x == x)
       {
-        if (firstPosition.y < mouseY)
+        if (firstPosition.y < y)
         {
-          startOneDirection(mouseY, Rotation.North, firstPosition.y);
+          startOneDirection(y, Rotation.North, firstPosition.y);
         }
-        else if (firstPosition.y > mouseY)
+        else if (firstPosition.y > y)
         {
-          startOneDirection(firstPosition.y, Rotation.South, mouseY);
+          startOneDirection(firstPosition.y, Rotation.South, y);
         }
       }
-      else if (firstPosition.y == mouseY)
+      else if (firstPosition.y == y)
       {
-        if (firstPosition.x < mouseX)
+        if (firstPosition.x < x)
         {
-          startOneDirection(mouseX, Rotation.East, firstPosition.x);
+          startOneDirection(x, Rotation.East, firstPosition.x);
         }
-        else if (firstPosition.x > mouseX)
+        else if (firstPosition.x > x)
         {
-          startOneDirection(firstPosition.x, Rotation.West, mouseX);
+          startOneDirection(firstPosition.x, Rotation.West, x);
         }
       }
       else
@@ -102,49 +131,49 @@ public class WirePull
         {
           if (firstDirection == Rotation.North)
           {
-            firstLength = mouseY - firstPosition.y;
+            firstLength = y - firstPosition.y;
           }
           else if (firstDirection == Rotation.East)
           {
-            firstLength = mouseX - firstPosition.x;
+            firstLength = x - firstPosition.x;
           }
           else if (firstDirection == Rotation.South)
           {
-            firstLength = firstPosition.y - mouseY;
+            firstLength = firstPosition.y - y;
           }
           else if (firstDirection == Rotation.West)
           {
-            firstLength = firstPosition.x - mouseX;
+            firstLength = firstPosition.x - x;
           }
 
           middlePosition.set(0, firstLength);
           firstDirection.transform(middlePosition);
           middlePosition.add(firstPosition);
 
-          if (middlePosition.equals(mouseX, mouseY))
+          if (middlePosition.equals(x, y))
           {
             resetSecond();
           }
-          else if (middlePosition.x == mouseX)
+          else if (middlePosition.x == x)
           {
-            if (middlePosition.y < mouseY)
+            if (middlePosition.y < y)
             {
-              secondDirection(mouseY, Rotation.North, middlePosition.y);
+              secondDirection(y, Rotation.North, middlePosition.y);
             }
-            else if (middlePosition.y > mouseY)
+            else if (middlePosition.y > y)
             {
-              secondDirection(middlePosition.y, Rotation.South, mouseY);
+              secondDirection(middlePosition.y, Rotation.South, y);
             }
           }
-          else if (middlePosition.y == mouseY)
+          else if (middlePosition.y == y)
           {
-            if (middlePosition.x < mouseX)
+            if (middlePosition.x < x)
             {
-              secondDirection(mouseX, Rotation.East, middlePosition.x);
+              secondDirection(x, Rotation.East, middlePosition.x);
             }
-            else if (middlePosition.x > mouseX)
+            else if (middlePosition.x > x)
             {
-              secondDirection(middlePosition.x, Rotation.West, mouseX);
+              secondDirection(middlePosition.x, Rotation.West, x);
             }
           }
         }

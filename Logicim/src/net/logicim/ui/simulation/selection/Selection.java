@@ -68,11 +68,11 @@ public class Selection
     return selection.isEmpty();
   }
 
-  public void startSelection(Viewport viewport, int x, int y)
+  public void startSelection(float x, float y)
   {
     previousSelection = new HashSet<>(selection);
     selectionRectangle = new SelectionRectangle();
-    selectionRectangle.start(viewport, x, y);
+    selectionRectangle.start(x, y);
   }
 
   public void startSelection(KeyboardButtons keyboardButtons, List<View> views)
@@ -109,9 +109,9 @@ public class Selection
     return false;
   }
 
-  public void drag(Viewport viewport, int x, int y)
+  public void drag(float x, float y)
   {
-    selectionRectangle.drag(viewport, x, y);
+    selectionRectangle.drag(x, y);
   }
 
   public void clearRectangle()

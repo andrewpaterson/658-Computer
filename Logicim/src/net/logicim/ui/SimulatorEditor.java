@@ -479,11 +479,13 @@ public class SimulatorEditor
   public void rotateRight()
   {
     rotateMoveComponents(true);
+    creationRotation = creationRotation.rotateRight();
   }
 
   public void rotateLeft()
   {
     rotateMoveComponents(false);
+    creationRotation = creationRotation.rotateLeft();
   }
 
   protected void rotateMoveComponents(boolean right)

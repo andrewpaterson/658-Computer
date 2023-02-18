@@ -27,6 +27,7 @@ import net.logicim.ui.util.SimulatorActions;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
@@ -160,7 +161,10 @@ public class SimulatorEditor
 
   protected StatefulEdit createStatefulEditor(StatefulMove edit, int x, int y)
   {
-    StatefulEdit statefulEdit = new StatefulEdit(toFloatingGridPosition(x, y), edit, circuitEditor, this);
+    StatefulEdit statefulEdit = new StatefulEdit(toFloatingGridPosition(x, y),
+                                                 edit,
+                                                 circuitEditor,
+                                                 this);
     clearHover();
     return statefulEdit;
   }
@@ -498,14 +502,29 @@ public class SimulatorEditor
     {
       if (hoverComponentView != null)
       {
-        Int2D position = hoverComponentView.getPosition();
-
-        createStatefulEditor(new MoveComponents(hoverComponentView, false),
-                             viewport.transformGridToScreenSpaceX(position.x),
-                             viewport.transformGridToScreenSpaceY(position.y));
-        clearHover();
+        rotateSelection(right, new MoveComponents(hoverComponentView, false));
+      }
+      else
+      {
+        List<View> selection = getCircuitEditor().getSelection().getSelection();
+        if (!selection.isEmpty())
+        {
+          rotateSelection(right, new MoveComponents(selection, false));
+        }
       }
     }
+  }
+
+  private void rotateSelection(boolean right, MoveComponents moveComponents)
+  {
+    Int2D position = mousePosition.get();
+
+    statefulEdit = createStatefulEditor(moveComponents, position.x, position.y);
+    statefulEdit.rotate(right);
+    statefulEdit.done(viewport.transformScreenToGridX(position.x),
+                      viewport.transformScreenToGridY(position.y));
+    statefulEdit = null;
+    calculateHighlightedPort();
   }
 
   private Int2D getMousePositionOnGrid()
@@ -624,6 +643,7 @@ public class SimulatorEditor
 
     circuitEditor = new CircuitEditor();
     circuitEditor.load(circuitData);
+    calculateHighlightedPort();
   }
 
   public void loadFile(CircuitData circuitData)

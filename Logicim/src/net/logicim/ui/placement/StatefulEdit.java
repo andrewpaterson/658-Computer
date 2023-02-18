@@ -51,6 +51,7 @@ public class StatefulEdit
 
   public void discard()
   {
+    edit.discard(circuitEditor, this);
   }
 
   public void move(float x, float y)
@@ -82,6 +83,8 @@ public class StatefulEdit
     return !diff.isZero() || rightRotations != 0;
   }
 
+
+
   public boolean hadDiff()
   {
     return hadDiff;
@@ -112,6 +115,8 @@ public class StatefulEdit
         rightRotations = 3;
       }
     }
+
+    edit = edit.rotate(right, this);
   }
 
   public int getRightRotations()
@@ -137,6 +142,11 @@ public class StatefulEdit
   public void pushUndo()
   {
     undo.pushUndo();
+  }
+
+  public void undo()
+  {
+    undo.undo();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)

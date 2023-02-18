@@ -11,7 +11,11 @@ public abstract class StatefulMove
 
   public abstract StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit);
 
+  public abstract StatefulMove rotate(boolean right, StatefulEdit statefulEdit);
+
   public abstract void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit);
+
+  public abstract void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit);
 
   public abstract void paint(Graphics2D graphics, Viewport viewport);
 }

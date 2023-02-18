@@ -1,5 +1,6 @@
 package net.logicim.ui.placement;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
@@ -39,6 +40,12 @@ public class RectangleSelection
   }
 
   @Override
+  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  {
+    return this;
+  }
+
+  @Override
   public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
     boolean hasSelectionChanged = circuitEditor.doneSelection(x, y, keyboardButtons);
@@ -46,6 +53,12 @@ public class RectangleSelection
     {
       statefulEdit.pushUndo();
     }
+  }
+
+  @Override
+  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    throw new SimulatorException();
   }
 
   @Override

@@ -1,5 +1,6 @@
 package net.logicim.ui.placement;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
@@ -31,10 +32,21 @@ public class InSelectedComponent
   }
 
   @Override
+  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  {
+    throw new SimulatorException();
+  }
+
+  @Override
   public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
     circuitEditor.startSelection(x, y, keyboardButtons);
     circuitEditor.doneSelection(x, y, keyboardButtons);
+  }
+
+  @Override
+  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
   }
 
   @Override

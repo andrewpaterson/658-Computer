@@ -48,6 +48,12 @@ public class WirePull
   }
 
   @Override
+  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  {
+    return this;
+  }
+
+  @Override
   public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
     if (!isEmpty())
@@ -59,6 +65,11 @@ public class WirePull
 
       statefulEdit.pushUndo();
     }
+  }
+
+  @Override
+  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
   }
 
   private void resetStart()
@@ -78,21 +89,6 @@ public class WirePull
     secondLength = 0;
     secondPosition = null;
     secondEnd = null;
-  }
-
-  public Int2D getFirstPosition()
-  {
-    return firstPosition;
-  }
-
-  public Int2D getMiddlePosition()
-  {
-    return middlePosition;
-  }
-
-  public Int2D getSecondPosition()
-  {
-    return secondPosition;
   }
 
   public void update(int x, int y)
@@ -120,7 +116,7 @@ public class WirePull
         {
           startOneDirection(x, Rotation.East, firstPosition.x);
         }
-        else if (firstPosition.x > x)
+        else
         {
           startOneDirection(firstPosition.x, Rotation.West, x);
         }
@@ -171,7 +167,7 @@ public class WirePull
             {
               secondDirection(x, Rotation.East, middlePosition.x);
             }
-            else if (middlePosition.x > x)
+            else
             {
               secondDirection(middlePosition.x, Rotation.West, x);
             }

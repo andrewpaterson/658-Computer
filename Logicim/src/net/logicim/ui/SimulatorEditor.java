@@ -651,6 +651,7 @@ public class SimulatorEditor
     circuitEditor.validateConsistency();
   }
 
+  @Override
   public void undo()
   {
     CircuitData circuitData = undoStack.pop();

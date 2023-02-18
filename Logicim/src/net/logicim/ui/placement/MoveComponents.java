@@ -93,7 +93,12 @@ public class MoveComponents
     {
       statefulEdit.pushUndo();
     }
+  }
 
+  @Override
+  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  {
+    statefulEdit.undo();
   }
 
   @Override
@@ -157,7 +162,8 @@ public class MoveComponents
     return new ArrayList<>(traces.keySet());
   }
 
-  public void rotate(boolean right)
+  @Override
+  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
   {
     if (right)
     {
@@ -167,6 +173,7 @@ public class MoveComponents
     {
       rotation = rotation.rotateLeft();
     }
+    return  this;
   }
 
   public void moveComponents(int rightRotations, Int2D start, Int2D diff)

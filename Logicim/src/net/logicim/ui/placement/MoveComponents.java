@@ -14,7 +14,6 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
-import static net.logicim.ui.common.Rotation.Cannot;
 import static net.logicim.ui.common.Rotation.North;
 
 public class MoveComponents
@@ -24,7 +23,6 @@ public class MoveComponents
   protected Map<StaticView<?>, Rotation> componentStartRotations;
   protected Map<TraceView, Line> traces;
   protected Set<StaticView<?>> selectedComponents;
-  protected Rotation rotation;
 
   public MoveComponents(StaticView<?> componentView)
   {
@@ -48,8 +46,6 @@ public class MoveComponents
 
   protected void constructor(List<View> views)
   {
-    rotation = calculateRotation(views);
-
     selectedComponents = new HashSet<>();
     componentStartPositions = new LinkedHashMap<>();
     componentStartRotations = new LinkedHashMap<>();
@@ -106,47 +102,6 @@ public class MoveComponents
   {
   }
 
-  private Rotation calculateRotation(List<View> views)
-  {
-    Map<Rotation, Integer> rotations = new LinkedHashMap<>();
-    for (View view : views)
-    {
-      if (view instanceof StaticView)
-      {
-        StaticView<?> staticView = (StaticView<?>) view;
-        Rotation rotation = staticView.getRotation();
-        Integer integer = rotations.get(rotation);
-        if (integer == null)
-        {
-          integer = 0;
-        }
-        integer = integer + 1;
-        rotations.put(rotation, integer);
-      }
-    }
-
-    int max = 0;
-    Rotation finalRotation = Cannot;
-    if (rotations.get(Cannot) != null)
-    {
-      return Cannot;
-    }
-    else
-    {
-      for (Map.Entry<Rotation, Integer> rotationIntegerEntry : rotations.entrySet())
-      {
-        Rotation rotation = rotationIntegerEntry.getKey();
-        Integer count = rotationIntegerEntry.getValue();
-        if (count > max)
-        {
-          max = count;
-          finalRotation = rotation;
-        }
-      }
-    }
-    return finalRotation;
-  }
-
   public List<StaticView<?>> getStaticViews()
   {
     return new ArrayList<>(componentStartPositions.keySet());
@@ -165,15 +120,8 @@ public class MoveComponents
   @Override
   public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
   {
-    if (right)
-    {
-      rotation = rotation.rotateRight();
-    }
-    else
-    {
-      rotation = rotation.rotateLeft();
-    }
-    return  this;
+    moveComponents(statefulEdit.getRightRotations(), statefulEdit.getStart(), statefulEdit.getDiff());
+    return this;
   }
 
   public void moveComponents(int rightRotations, Int2D start, Int2D diff)

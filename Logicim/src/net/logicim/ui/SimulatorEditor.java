@@ -132,7 +132,8 @@ public class SimulatorEditor
       {
         if (statefulEdit != null)
         {
-          statefulEdit.done(x, y);
+          statefulEdit.done(viewport.transformScreenToGridX(x),
+                            viewport.transformScreenToGridY(y));
           statefulEdit = null;
           calculateHighlightedPort();
         }
@@ -178,7 +179,8 @@ public class SimulatorEditor
     {
       if (statefulEdit != null)
       {
-        statefulEdit.done(x, y);
+        statefulEdit.done(viewport.transformScreenToGridX(x),
+                          viewport.transformScreenToGridY(y));
         statefulEdit = null;
         calculateHighlightedPort();
       }

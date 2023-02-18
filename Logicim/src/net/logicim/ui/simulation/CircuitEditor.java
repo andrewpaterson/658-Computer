@@ -1198,11 +1198,6 @@ public class CircuitEditor
     }
   }
 
-  public Int2D getSelectionCenter()
-  {
-    return selection.getSelectionCenter();
-  }
-
   public ConnectionView getConnection(int x, int y)
   {
     return connectionViewCache.getConnection(x, y);

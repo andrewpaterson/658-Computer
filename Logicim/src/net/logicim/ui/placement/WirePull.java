@@ -37,7 +37,7 @@ public class WirePull
   @Override
   public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
-    update((int) x, (int) y);
+    update(Math.round(x), Math.round(y));
 
     if (!isEmpty())
     {

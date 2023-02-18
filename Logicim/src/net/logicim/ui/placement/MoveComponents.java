@@ -94,7 +94,10 @@ public class MoveComponents
   @Override
   public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
-    statefulEdit.undo();
+    moveComponents(0, statefulEdit.getStart(), new Int2D());
+    circuitEditor.doneMoveComponents(getStaticViews(),
+                                     getTraces(),
+                                     getSelectedViews());
   }
 
   @Override

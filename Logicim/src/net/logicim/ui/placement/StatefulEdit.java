@@ -83,18 +83,6 @@ public class StatefulEdit
     return !diff.isZero() || rightRotations != 0;
   }
 
-
-
-  public boolean hadDiff()
-  {
-    return hadDiff;
-  }
-
-  public boolean hasMoved()
-  {
-    return !previousHadDiff && hadDiff;
-  }
-
   public void rotate(boolean right)
   {
     previousHadDiff = hadDiff;

@@ -519,6 +519,7 @@ public class SimulatorEditor
     if (statefulEdit != null)
     {
       statefulEdit.discard();
+      statefulEdit = null;
     }
     clearSelection();
     calculateHighlightedPort();

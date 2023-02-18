@@ -245,14 +245,21 @@ public class SimulatorEditor
   public void startPlaceComponent(ViewFactory<?, ?> viewFactory)
   {
     Int2D position = mousePosition.get();
-    if (statefulEdit == null && position != null)
+
+    if (position != null)
     {
+      if (statefulEdit != null)
+      {
+        statefulEdit.discard();
+        statefulEdit = null;
+      }
+
       circuitEditor.getSelection().clearSelection();
       StaticView<?> staticView = viewFactory.create(circuitEditor,
                                                     new Int2D(viewport.transformScreenToGridX(position.x),
                                                               viewport.transformScreenToGridY(position.y)),
                                                     creationRotation);
-      statefulEdit = createStatefulEditor(new MoveComponents(staticView), position.x, position.y);
+      statefulEdit = createStatefulEditor(new MoveComponents(staticView, true), position.x, position.y);
     }
   }
 
@@ -491,7 +498,7 @@ public class SimulatorEditor
       {
         Int2D position = hoverComponentView.getPosition();
 
-        createStatefulEditor(new MoveComponents(hoverComponentView),
+        createStatefulEditor(new MoveComponents(hoverComponentView, false),
                              viewport.transformGridToScreenSpaceX(position.x),
                              viewport.transformGridToScreenSpaceY(position.y));
         clearHover();

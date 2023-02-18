@@ -2,12 +2,10 @@ package net.logicim.ui.placement;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
-import java.util.List;
 
 public class InSelectedComponent
     extends StatefulMove
@@ -27,8 +25,7 @@ public class InSelectedComponent
   @Override
   public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
-    List<View> selection = circuitEditor.getSelection().getSelection();
-    return new MoveComponents(selection);
+    return new MoveComponents(circuitEditor.getSelection().getSelection(), false);
   }
 
   @Override

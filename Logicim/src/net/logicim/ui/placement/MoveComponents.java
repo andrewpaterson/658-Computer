@@ -23,17 +23,18 @@ public class MoveComponents
   protected Map<StaticView<?>, Rotation> componentStartRotations;
   protected Map<TraceView, Line> traces;
   protected Set<StaticView<?>> selectedComponents;
+  protected boolean deleteOnDiscard;
 
-  public MoveComponents(StaticView<?> componentView)
+  public MoveComponents(StaticView<?> componentView, boolean deleteOnDiscard)
   {
     ArrayList<View> views = new ArrayList<>();
     views.add(componentView);
-    constructor(views);
+    constructor(views, deleteOnDiscard);
   }
 
-  public MoveComponents(List<View> views)
+  public MoveComponents(List<View> views, boolean deleteOnDiscard)
   {
-    constructor(views);
+    constructor(views, deleteOnDiscard);
     for (View view : views)
     {
       if (view instanceof StaticView)
@@ -44,8 +45,10 @@ public class MoveComponents
     }
   }
 
-  protected void constructor(List<View> views)
+  protected void constructor(List<View> views, boolean deleteOnDiscard)
   {
+    this.deleteOnDiscard = deleteOnDiscard;
+
     selectedComponents = new HashSet<>();
     componentStartPositions = new LinkedHashMap<>();
     componentStartRotations = new LinkedHashMap<>();
@@ -94,10 +97,17 @@ public class MoveComponents
   @Override
   public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
   {
-    moveComponents(0, statefulEdit.getStart(), new Int2D());
-    circuitEditor.doneMoveComponents(getStaticViews(),
-                                     getTraces(),
-                                     getSelectedViews());
+    if (!deleteOnDiscard)
+    {
+      moveComponents(0, statefulEdit.getStart(), new Int2D());
+      circuitEditor.doneMoveComponents(getStaticViews(),
+                                       getTraces(),
+                                       getSelectedViews());
+    }
+    else
+    {
+      circuitEditor.deleteComponentViews(getStaticViews());
+    }
   }
 
   @Override

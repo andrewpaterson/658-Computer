@@ -19,8 +19,7 @@ import net.logicim.ui.placement.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
-import net.logicim.ui.simulation.selection.Selection;
-import net.logicim.ui.simulation.selection.SelectionMode;
+import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
 import net.logicim.ui.util.SimulatorActions;
 
@@ -151,7 +150,7 @@ public class SimulatorEditor
           }
           else
           {
-            edit = new RectangleSelection(keyboardButtons);
+            edit = new SelectionEdit(keyboardButtons);
           }
           simulatorEdit = createStatefulEditor(edit, x, y);
         }
@@ -298,8 +297,7 @@ public class SimulatorEditor
       simulatorEdit.paint(graphics, viewport);
     }
 
-    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
-    circuitEditor.getSelection().paint(graphics, viewport, selectionMode);
+    circuitEditor.getSelection().paint(graphics, viewport);
   }
 
   protected void drawConnectionDetails(Graphics2D graphics)
@@ -385,7 +383,7 @@ public class SimulatorEditor
 
   private void calculateHighlightedPort()
   {
-    if ((simulatorEdit == null) && !circuitEditor.isSelecting() && circuitEditor.isSelectionEmpty())
+    if ((simulatorEdit == null) && circuitEditor.isSelectionEmpty())
     {
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)

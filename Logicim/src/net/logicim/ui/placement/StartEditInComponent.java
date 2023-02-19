@@ -1,11 +1,16 @@
 package net.logicim.ui.placement;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.type.Float2D;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.List;
 
 public class StartEditInComponent
     extends StatefulEdit
@@ -39,8 +44,14 @@ public class StartEditInComponent
   public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
     CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
-    circuitEditor.startSelection(x, y, keyboardButtons);
-    circuitEditor.doneSelection(x, y, keyboardButtons);
+    List<View> previousSelection = circuitEditor.getSelection().getSelection();
+    List<View> selection = circuitEditor.getSelectionFromRectangle(new Float2D(x, y), new Float2D(x, y));
+    boolean hasSelectionChanged = Selection.hasSelectionChanged(new HashSet<>(selection), new HashSet<>(previousSelection));
+    if (hasSelectionChanged)
+    {
+      circuitEditor.getSelection().setSelection(selection);
+      simulatorEdit.pushUndo();
+    }
   }
 
   @Override

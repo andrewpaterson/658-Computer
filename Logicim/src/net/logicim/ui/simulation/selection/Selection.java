@@ -15,15 +15,10 @@ import java.util.Set;
 
 public class Selection
 {
-  protected SelectionRectangle selectionRectangle;
-
-  protected Set<View> previousSelection;
   protected List<View> selection;
 
   public Selection()
   {
-    this.selectionRectangle = null;
-    this.previousSelection = null;
     this.selection = new ArrayList<>();
   }
 
@@ -68,69 +63,8 @@ public class Selection
     return selection.isEmpty();
   }
 
-  public void startSelection(float x, float y)
+  public void paint(Graphics2D graphics, Viewport viewport)
   {
-    previousSelection = new HashSet<>(selection);
-    selectionRectangle = new SelectionRectangle();
-    selectionRectangle.start(x, y);
-  }
-
-  public void startSelection(KeyboardButtons keyboardButtons, List<View> views)
-  {
-    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
-    selection = calculateSelection(views, selectionMode);
-  }
-
-  public SelectionRectangle getSelectionRectangle()
-  {
-    return selectionRectangle;
-  }
-
-  public boolean hasSelectionChanged()
-  {
-    Set<View> selection = new HashSet<>(this.selection);
-    if (selection.isEmpty() && previousSelection.isEmpty())
-    {
-      return false;
-    }
-    if (selection.size() != previousSelection.size())
-    {
-      return true;
-    }
-
-    for (View view : selection)
-    {
-      if (!previousSelection.contains(view))
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  public void drag(float x, float y)
-  {
-    selectionRectangle.drag(x, y);
-  }
-
-  public void clearRectangle()
-  {
-    selectionRectangle = null;
-  }
-
-  public boolean hasRectangle()
-  {
-    return selectionRectangle != null;
-  }
-
-  public void paint(Graphics2D graphics, Viewport viewport, SelectionMode selectionMode)
-  {
-    if (hasRectangle())
-    {
-      selectionRectangle.paint(graphics, viewport, selectionMode);
-    }
-
     for (View view : selection)
     {
       view.paintSelected(graphics, viewport);
@@ -182,12 +116,7 @@ public class Selection
     }
   }
 
-  public boolean isSelecting()
-  {
-    return hasRectangle();
-  }
-
-  public List<View> calculateSelection(List<View> views, SelectionMode selectionMode)
+  public List<View> calculateSelection(List<View> views, Set<View> previousSelection, SelectionMode selectionMode)
   {
     if (selectionMode == SelectionMode.REPLACE)
     {
@@ -208,20 +137,26 @@ public class Selection
     return null;
   }
 
-  public boolean doneSelection(KeyboardButtons keyboardButtons, List<View> views)
+  public static boolean hasSelectionChanged(Set<View> selection, Set<View> previousSelection)
   {
-    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
-    selection = calculateSelection(views, selectionMode);
-    clearRectangle();
-    boolean hasSelectionChanged = hasSelectionChanged();
-    previousSelection = null;
-    return hasSelectionChanged;
-  }
+    if (selection.isEmpty() && previousSelection.isEmpty())
+    {
+      return false;
+    }
+    if (selection.size() != previousSelection.size())
+    {
+      return true;
+    }
 
-  public void selectionMoved(KeyboardButtons keyboardButtons, List<View> views)
-  {
-    SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
-    selection = calculateSelection(views, selectionMode);
+    for (View view : selection)
+    {
+      if (!previousSelection.contains(view))
+      {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
 

@@ -27,11 +27,9 @@ import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
-import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import net.logicim.ui.simulation.selection.Selection;
-import net.logicim.ui.simulation.selection.SelectionRectangle;
 
 import java.awt.*;
 import java.util.List;
@@ -776,12 +774,6 @@ public class CircuitEditor
     return connectedTraceViews;
   }
 
-  public List<View> getSelectionFromRectangle(SelectionRectangle selectionRectangle1)
-  {
-    return getSelectionFromRectangle(selectionRectangle1.getStart(),
-                                     selectionRectangle1.getEnd());
-  }
-
   public Set<TraceView> createTraceViews(List<Line> inputLines)
   {
     Set<Line> lines = new LinkedHashSet<>(inputLines);
@@ -1201,25 +1193,6 @@ public class CircuitEditor
   public ConnectionView getConnection(int x, int y)
   {
     return connectionViewCache.getConnection(x, y);
-  }
-
-  public void startSelection(float x, float y, KeyboardButtons keyboardButtons)
-  {
-    selection.startSelection(x, y);
-    List<View> views = getSelectionFromRectangle(selection.getSelectionRectangle());
-    selection.startSelection(keyboardButtons, views);
-  }
-
-  public boolean doneSelection(float x, float y, KeyboardButtons keyboardButtons)
-  {
-    selection.drag(x, y);
-    List<View> views = getSelectionFromRectangle(selection.getSelectionRectangle());
-    return selection.doneSelection(keyboardButtons, views);
-  }
-
-  public boolean isSelecting()
-  {
-    return getSelection().isSelecting();
   }
 
   public boolean isSelectionEmpty()

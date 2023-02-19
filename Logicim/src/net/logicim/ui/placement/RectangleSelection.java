@@ -11,7 +11,7 @@ import java.util.List;
 
 //This should be SelectionRectangle but Selection classes are proper fucked.
 public class RectangleSelection
-    extends StatefulMove
+    extends StatefulEdit
 {
   private KeyboardButtons keyboardButtons;
 
@@ -21,15 +21,15 @@ public class RectangleSelection
   }
 
   @Override
-  public void start(float x, float y, StatefulEdit statefulEdit)
+  public void start(float x, float y, SimulatorEdit simulatorEdit)
   {
-    statefulEdit.getCircuitEditor().startSelection(x, y, keyboardButtons);
+    simulatorEdit.getCircuitEditor().startSelection(x, y, keyboardButtons);
   }
 
   @Override
-  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
+  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
   {
-    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
+    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
     if (circuitEditor.isSelecting())
     {
       circuitEditor.getSelection().drag(x, y);
@@ -41,23 +41,23 @@ public class RectangleSelection
   }
 
   @Override
-  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
   {
     return this;
   }
 
   @Override
-  public void done(float x, float y, StatefulEdit statefulEdit)
+  public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
-    boolean hasSelectionChanged = statefulEdit.getCircuitEditor().doneSelection(x, y, keyboardButtons);
+    boolean hasSelectionChanged = simulatorEdit.getCircuitEditor().doneSelection(x, y, keyboardButtons);
     if (hasSelectionChanged)
     {
-      statefulEdit.pushUndo();
+      simulatorEdit.pushUndo();
     }
   }
 
   @Override
-  public void discard(StatefulEdit statefulEdit)
+  public void discard(SimulatorEdit simulatorEdit)
   {
     throw new SimulatorException();
   }

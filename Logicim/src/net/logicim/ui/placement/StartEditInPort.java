@@ -7,43 +7,43 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 
-public class InSelectedPort
-    extends StatefulMove
+public class StartEditInPort
+    extends StatefulEdit
 {
   protected KeyboardButtons keyboardButtons;
 
-  public InSelectedPort(KeyboardButtons keyboardButtons)
+  public StartEditInPort(KeyboardButtons keyboardButtons)
   {
     this.keyboardButtons = keyboardButtons;
   }
 
   @Override
-  public void start(float x, float y, StatefulEdit statefulEdit)
+  public void start(float x, float y, SimulatorEdit simulatorEdit)
   {
   }
 
   @Override
-  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
+  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
   {
     return new WirePull();
   }
 
   @Override
-  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
   {
     throw new SimulatorException();
   }
 
   @Override
-  public void done(float x, float y, StatefulEdit statefulEdit)
+  public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
-    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
+    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
     circuitEditor.startSelection(x, y, keyboardButtons);
     circuitEditor.doneSelection(x, y, keyboardButtons);
   }
 
   @Override
-  public void discard(StatefulEdit statefulEdit)
+  public void discard(SimulatorEdit simulatorEdit)
   {
   }
 

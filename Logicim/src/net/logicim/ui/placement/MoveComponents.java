@@ -17,7 +17,7 @@ import java.util.*;
 import static net.logicim.ui.common.Rotation.North;
 
 public class MoveComponents
-    extends StatefulMove
+    extends StatefulEdit
 {
   protected Map<StaticView<?>, Int2D> componentStartPositions;
   protected Map<StaticView<?>, Rotation> componentStartRotations;
@@ -70,37 +70,37 @@ public class MoveComponents
   }
 
   @Override
-  public void start(float x, float y, StatefulEdit statefulEdit)
+  public void start(float x, float y, SimulatorEdit simulatorEdit)
   {
-    statefulEdit.getCircuitEditor().startMoveComponents(getStaticViews(), getTraces());
+    simulatorEdit.getCircuitEditor().startMoveComponents(getStaticViews(), getTraces());
   }
 
   @Override
-  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
+  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
   {
-    moveComponents(statefulEdit.getRightRotations(), statefulEdit.getStart(), statefulEdit.getDiff());
+    moveComponents(simulatorEdit.getRightRotations(), simulatorEdit.getStart(), simulatorEdit.getDiff());
     return this;
   }
 
   @Override
-  public void done(float x, float y, StatefulEdit statefulEdit)
+  public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
-    statefulEdit.getCircuitEditor().doneMoveComponents(getStaticViews(),
-                                                       getTraces(),
-                                                       getSelectedViews());
-    if (statefulEdit.hasDiff())
+    simulatorEdit.getCircuitEditor().doneMoveComponents(getStaticViews(),
+                                                        getTraces(),
+                                                        getSelectedViews());
+    if (simulatorEdit.hasDiff())
     {
-      statefulEdit.pushUndo();
+      simulatorEdit.pushUndo();
     }
   }
 
   @Override
-  public void discard(StatefulEdit statefulEdit)
+  public void discard(SimulatorEdit simulatorEdit)
   {
-    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
+    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
     if (!deleteOnDiscard)
     {
-      moveComponents(0, statefulEdit.getStart(), new Int2D());
+      moveComponents(0, simulatorEdit.getStart(), new Int2D());
       circuitEditor.doneMoveComponents(getStaticViews(),
                                        getTraces(),
                                        getSelectedViews());
@@ -132,9 +132,9 @@ public class MoveComponents
   }
 
   @Override
-  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
   {
-    moveComponents(statefulEdit.getRightRotations(), statefulEdit.getStart(), statefulEdit.getDiff());
+    moveComponents(simulatorEdit.getRightRotations(), simulatorEdit.getStart(), simulatorEdit.getDiff());
     return this;
   }
 

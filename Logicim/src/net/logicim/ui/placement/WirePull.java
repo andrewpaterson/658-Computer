@@ -9,7 +9,7 @@ import net.logicim.ui.common.Viewport;
 import java.awt.*;
 
 public class WirePull
-    extends StatefulMove
+    extends StatefulEdit
 {
   protected Int2D firstPosition;
   protected Rotation firstDirection;
@@ -28,46 +28,46 @@ public class WirePull
   }
 
   @Override
-  public void start(float x, float y, StatefulEdit statefulEdit)
+  public void start(float x, float y, SimulatorEdit simulatorEdit)
   {
     firstPosition = new Int2D(x, y);
   }
 
   @Override
-  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
+  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
   {
     update(Math.round(x), Math.round(y));
 
     if (!isEmpty())
     {
-      statefulEdit.getCircuitEditor().getSelection().clearSelection();
+      simulatorEdit.getCircuitEditor().getSelection().clearSelection();
     }
 
     return this;
   }
 
   @Override
-  public StatefulMove rotate(boolean right, StatefulEdit statefulEdit)
+  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
   {
     return this;
   }
 
   @Override
-  public void done(float x, float y, StatefulEdit statefulEdit)
+  public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
     if (!isEmpty())
     {
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      statefulEdit.getCircuitEditor().createTraceViews(Line.lines(firstLine, secondLine));
+      simulatorEdit.getCircuitEditor().createTraceViews(Line.lines(firstLine, secondLine));
 
-      statefulEdit.pushUndo();
+      simulatorEdit.pushUndo();
     }
   }
 
   @Override
-  public void discard(StatefulEdit statefulEdit)
+  public void discard(SimulatorEdit simulatorEdit)
   {
   }
 

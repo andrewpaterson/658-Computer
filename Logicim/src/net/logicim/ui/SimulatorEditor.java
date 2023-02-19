@@ -56,7 +56,7 @@ public class SimulatorEditor
   protected StaticView<?> hoverComponentView;
   protected ConnectionView hoverConnectionView;
 
-  protected StatefulEdit statefulEdit;
+  protected SimulatorEdit simulatorEdit;
 
   protected UndoStack undoStack;
 
@@ -80,7 +80,7 @@ public class SimulatorEditor
     this.actions = new InputActions(mouseButtons);
 
     this.circuitEditor = new CircuitEditor();
-    this.statefulEdit = null;
+    this.simulatorEdit = null;
     this.creationRotation = Rotation.North;
 
     this.running = false;
@@ -120,7 +120,7 @@ public class SimulatorEditor
 
   private boolean canRun()
   {
-    return statefulEdit == null;
+    return simulatorEdit == null;
   }
 
   public void mousePressed(int x, int y, int button, int clickCount)
@@ -131,42 +131,42 @@ public class SimulatorEditor
     {
       if (button == BUTTON1)
       {
-        if (statefulEdit != null)
+        if (simulatorEdit != null)
         {
-          statefulEdit.done(viewport.transformScreenToGridX(x),
-                            viewport.transformScreenToGridY(y));
-          statefulEdit = null;
+          simulatorEdit.done(viewport.transformScreenToGridX(x),
+                             viewport.transformScreenToGridY(y));
+          simulatorEdit = null;
           calculateHighlightedPort();
         }
         else
         {
-          StatefulMove edit;
+          StatefulEdit edit;
           if (isInSelectedComponent(x, y))
           {
-            edit = new InSelectedComponent(keyboardButtons);
+            edit = new StartEditInComponent(keyboardButtons);
           }
           else if ((hoverConnectionView != null))
           {
-            edit = new InSelectedPort(keyboardButtons);
+            edit = new StartEditInPort(keyboardButtons);
           }
           else
           {
             edit = new RectangleSelection(keyboardButtons);
           }
-          statefulEdit = createStatefulEditor(edit, x, y);
+          simulatorEdit = createStatefulEditor(edit, x, y);
         }
       }
     }
   }
 
-  protected StatefulEdit createStatefulEditor(StatefulMove edit, int x, int y)
+  protected SimulatorEdit createStatefulEditor(StatefulEdit edit, int x, int y)
   {
-    StatefulEdit statefulEdit = new StatefulEdit(toFloatingGridPosition(x, y),
-                                                 edit,
-                                                 circuitEditor,
-                                                 this);
+    SimulatorEdit simulatorEdit = new SimulatorEdit(toFloatingGridPosition(x, y),
+                                                    edit,
+                                                    circuitEditor,
+                                                    this);
     clearHover();
-    return statefulEdit;
+    return simulatorEdit;
   }
 
   protected Float2D toFloatingGridPosition(float x, float y)
@@ -181,11 +181,11 @@ public class SimulatorEditor
 
     if (button == BUTTON1)
     {
-      if (statefulEdit != null)
+      if (simulatorEdit != null)
       {
-        statefulEdit.done(viewport.transformScreenToGridX(x),
-                          viewport.transformScreenToGridY(y));
-        statefulEdit = null;
+        simulatorEdit.done(viewport.transformScreenToGridX(x),
+                           viewport.transformScreenToGridY(y));
+        simulatorEdit = null;
         calculateHighlightedPort();
       }
     }
@@ -204,10 +204,10 @@ public class SimulatorEditor
       }
     }
 
-    if (statefulEdit != null)
+    if (simulatorEdit != null)
     {
-      statefulEdit.move(viewport.transformScreenToGridX((float) x),
-                        viewport.transformScreenToGridY((float) y));
+      simulatorEdit.move(viewport.transformScreenToGridX((float) x),
+                         viewport.transformScreenToGridY((float) y));
     }
 
     calculateHighlightedPort();
@@ -252,10 +252,10 @@ public class SimulatorEditor
 
     if (position != null)
     {
-      if (statefulEdit != null)
+      if (simulatorEdit != null)
       {
-        statefulEdit.discard();
-        statefulEdit = null;
+        simulatorEdit.discard();
+        simulatorEdit = null;
       }
 
       circuitEditor.getSelection().clearSelection();
@@ -263,7 +263,7 @@ public class SimulatorEditor
                                                     new Int2D(viewport.transformScreenToGridX(position.x),
                                                               viewport.transformScreenToGridY(position.y)),
                                                     creationRotation);
-      statefulEdit = createStatefulEditor(new MoveComponents(staticView, true), position.x, position.y);
+      simulatorEdit = createStatefulEditor(new MoveComponents(staticView, true), position.x, position.y);
     }
   }
 
@@ -293,9 +293,9 @@ public class SimulatorEditor
       drawConnectionDetails(graphics);
     }
 
-    if (statefulEdit != null)
+    if (simulatorEdit != null)
     {
-      statefulEdit.paint(graphics, viewport);
+      simulatorEdit.paint(graphics, viewport);
     }
 
     SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
@@ -385,7 +385,7 @@ public class SimulatorEditor
 
   private void calculateHighlightedPort()
   {
-    if ((statefulEdit == null) && !circuitEditor.isSelecting() && circuitEditor.isSelectionEmpty())
+    if ((simulatorEdit == null) && !circuitEditor.isSelecting() && circuitEditor.isSelectionEmpty())
     {
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
@@ -494,9 +494,9 @@ public class SimulatorEditor
 
   protected void rotateMoveComponents(boolean right)
   {
-    if (statefulEdit != null)
+    if (simulatorEdit != null)
     {
-      statefulEdit.rotate(right);
+      simulatorEdit.rotate(right);
     }
     else
     {
@@ -519,11 +519,11 @@ public class SimulatorEditor
   {
     Int2D position = mousePosition.get();
 
-    statefulEdit = createStatefulEditor(moveComponents, position.x, position.y);
-    statefulEdit.rotate(right);
-    statefulEdit.done(viewport.transformScreenToGridX(position.x),
-                      viewport.transformScreenToGridY(position.y));
-    statefulEdit = null;
+    simulatorEdit = createStatefulEditor(moveComponents, position.x, position.y);
+    simulatorEdit.rotate(right);
+    simulatorEdit.done(viewport.transformScreenToGridX(position.x),
+                       viewport.transformScreenToGridY(position.y));
+    simulatorEdit = null;
     calculateHighlightedPort();
   }
 
@@ -544,10 +544,10 @@ public class SimulatorEditor
 
   public void stopCurrentEdit()
   {
-    if (statefulEdit != null)
+    if (simulatorEdit != null)
     {
-      statefulEdit.discard();
-      statefulEdit = null;
+      simulatorEdit.discard();
+      simulatorEdit = null;
     }
     clearSelection();
     calculateHighlightedPort();
@@ -637,7 +637,7 @@ public class SimulatorEditor
 
   public void load(CircuitData circuitData)
   {
-    statefulEdit = null;
+    simulatorEdit = null;
 
     clearHover();
 

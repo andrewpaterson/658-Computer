@@ -36,31 +36,31 @@ public class StatefulEdit
     this.hadDiff = false;
     this.previousHadDiff = false;
 
-    edit.start(start.x, start.y, circuitEditor, this);
+    edit.start(start.x, start.y, this);
   }
 
   public void start(float x, float y)
   {
-    edit.start(x, y, circuitEditor, this);
+    edit.start(x, y, this);
   }
 
   public void done(float x, float y)
   {
-    edit.done(x, y, circuitEditor, this);
+    edit.done(x, y, this);
   }
 
   public void discard()
   {
-    edit.discard(circuitEditor, this);
+    edit.discard(this);
   }
 
   public void move(float x, float y)
   {
     calculateDiff(Math.round(x), Math.round(y));
-    StatefulMove newEdit = edit.move(x, y, circuitEditor, this);
+    StatefulMove newEdit = edit.move(x, y, this);
     if (newEdit != edit)
     {
-      newEdit.start(x, y, circuitEditor, this);
+      newEdit.start(x, y, this);
       edit = newEdit;
     }
   }
@@ -130,11 +130,6 @@ public class StatefulEdit
   public void pushUndo()
   {
     undo.pushUndo();
-  }
-
-  public void undo()
-  {
-    undo.undo();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)

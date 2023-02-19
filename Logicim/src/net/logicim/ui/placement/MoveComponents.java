@@ -70,24 +70,24 @@ public class MoveComponents
   }
 
   @Override
-  public void start(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void start(float x, float y, StatefulEdit statefulEdit)
   {
-    circuitEditor.startMoveComponents(getStaticViews(), getTraces());
+    statefulEdit.getCircuitEditor().startMoveComponents(getStaticViews(), getTraces());
   }
 
   @Override
-  public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
   {
     moveComponents(statefulEdit.getRightRotations(), statefulEdit.getStart(), statefulEdit.getDiff());
     return this;
   }
 
   @Override
-  public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void done(float x, float y, StatefulEdit statefulEdit)
   {
-    circuitEditor.doneMoveComponents(getStaticViews(),
-                                     getTraces(),
-                                     getSelectedViews());
+    statefulEdit.getCircuitEditor().doneMoveComponents(getStaticViews(),
+                                                       getTraces(),
+                                                       getSelectedViews());
     if (statefulEdit.hasDiff())
     {
       statefulEdit.pushUndo();
@@ -95,8 +95,9 @@ public class MoveComponents
   }
 
   @Override
-  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void discard(StatefulEdit statefulEdit)
   {
+    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
     if (!deleteOnDiscard)
     {
       moveComponents(0, statefulEdit.getStart(), new Int2D());

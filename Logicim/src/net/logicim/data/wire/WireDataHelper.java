@@ -10,10 +10,10 @@ import java.util.List;
 public abstract class WireDataHelper
 {
   protected static void wireConnect(CircuitEditor circuitEditor,
-                                 TraceLoader traceLoader,
-                                 WireView wireView,
-                                 long[] traceIds,
-                                 boolean selected)
+                                    TraceLoader traceLoader,
+                                    WireView wireView,
+                                    long[] traceIds,
+                                    boolean selected)
   {
     List<Trace> traces = new ArrayList<>(traceIds.length);
     for (long id : traceIds)

@@ -21,14 +21,15 @@ public class RectangleSelection
   }
 
   @Override
-  public void start(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void start(float x, float y, StatefulEdit statefulEdit)
   {
-    circuitEditor.startSelection(x, y, keyboardButtons);
+    statefulEdit.getCircuitEditor().startSelection(x, y, keyboardButtons);
   }
 
   @Override
-  public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
   {
+    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
     if (circuitEditor.isSelecting())
     {
       circuitEditor.getSelection().drag(x, y);
@@ -46,9 +47,9 @@ public class RectangleSelection
   }
 
   @Override
-  public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void done(float x, float y, StatefulEdit statefulEdit)
   {
-    boolean hasSelectionChanged = circuitEditor.doneSelection(x, y, keyboardButtons);
+    boolean hasSelectionChanged = statefulEdit.getCircuitEditor().doneSelection(x, y, keyboardButtons);
     if (hasSelectionChanged)
     {
       statefulEdit.pushUndo();
@@ -56,7 +57,7 @@ public class RectangleSelection
   }
 
   @Override
-  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void discard(StatefulEdit statefulEdit)
   {
     throw new SimulatorException();
   }

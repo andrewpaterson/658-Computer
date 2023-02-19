@@ -2,7 +2,6 @@ package net.logicim.domain.common;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.PortHolder;
 
 import java.util.List;
 

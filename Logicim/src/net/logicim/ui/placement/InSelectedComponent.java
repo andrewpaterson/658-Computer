@@ -18,13 +18,14 @@ public class InSelectedComponent
   }
 
   @Override
-  public void start(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void start(float x, float y, StatefulEdit statefulEdit)
   {
   }
 
   @Override
-  public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
   {
+    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
     return new MoveComponents(circuitEditor.getSelection().getSelection(), false);
   }
 
@@ -35,14 +36,15 @@ public class InSelectedComponent
   }
 
   @Override
-  public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void done(float x, float y, StatefulEdit statefulEdit)
   {
+    CircuitEditor circuitEditor = statefulEdit.getCircuitEditor();
     circuitEditor.startSelection(x, y, keyboardButtons);
     circuitEditor.doneSelection(x, y, keyboardButtons);
   }
 
   @Override
-  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void discard(StatefulEdit statefulEdit)
   {
   }
 

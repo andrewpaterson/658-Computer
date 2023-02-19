@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 
@@ -29,19 +28,19 @@ public class WirePull
   }
 
   @Override
-  public void start(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void start(float x, float y, StatefulEdit statefulEdit)
   {
     firstPosition = new Int2D(x, y);
   }
 
   @Override
-  public StatefulMove move(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public StatefulMove move(float x, float y, StatefulEdit statefulEdit)
   {
     update(Math.round(x), Math.round(y));
 
     if (!isEmpty())
     {
-      circuitEditor.getSelection().clearSelection();
+      statefulEdit.getCircuitEditor().getSelection().clearSelection();
     }
 
     return this;
@@ -54,21 +53,21 @@ public class WirePull
   }
 
   @Override
-  public void done(float x, float y, CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void done(float x, float y, StatefulEdit statefulEdit)
   {
     if (!isEmpty())
     {
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      circuitEditor.createTraceViews(Line.lines(firstLine, secondLine));
+      statefulEdit.getCircuitEditor().createTraceViews(Line.lines(firstLine, secondLine));
 
       statefulEdit.pushUndo();
     }
   }
 
   @Override
-  public void discard(CircuitEditor circuitEditor, StatefulEdit statefulEdit)
+  public void discard(StatefulEdit statefulEdit)
   {
   }
 

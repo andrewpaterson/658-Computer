@@ -15,5 +15,11 @@ public class RedoAction
   {
     editor.redo();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Redo";
+  }
 }
 

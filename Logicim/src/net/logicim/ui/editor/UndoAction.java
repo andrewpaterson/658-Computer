@@ -15,5 +15,11 @@ public class UndoAction
   {
     editor.undo();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Undo";
+  }
 }
 

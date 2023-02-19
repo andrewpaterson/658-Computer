@@ -1,5 +1,6 @@
 package net.logicim.ui;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
@@ -26,7 +27,10 @@ import net.logicim.ui.util.SimulatorActions;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
@@ -434,6 +438,49 @@ public class SimulatorEditor
   private void addActions(SimulatorPanel simulatorPanel)
   {
     SimulatorActions.create(this, simulatorPanel);
+    validateActionKeyBindings();
+  }
+
+  private void validateActionKeyBindings()
+  {
+    Map<Integer, List<InputAction>> keyActionMap = getActionsByKeyCode();
+    for (List<InputAction> inputActions : keyActionMap.values())
+    {
+      for (InputAction inputActionOuter : inputActions)
+      {
+        for (InputAction inputActionInner : inputActions)
+        {
+          if (inputActionInner != inputActionOuter)
+          {
+            if (inputActionInner.isSame(inputActionOuter))
+            {
+              String innerKeyString = inputActionInner.toKeyString();
+              String outerKeyString = inputActionOuter.toKeyString();
+              String innerActionString = inputActionInner.toActionDescriptionString();
+              String outerActionString = inputActionOuter.toActionDescriptionString();
+              throw new SimulatorException("%s bound to action [%s] and also %s bound to action [%s].", innerKeyString, innerActionString, outerKeyString, outerActionString);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private Map<Integer, List<InputAction>> getActionsByKeyCode()
+  {
+    Map<Integer, List<InputAction>> keyActionMap = new LinkedHashMap<>();
+    for (InputAction inputAction : actions.getActions())
+    {
+      int keyPressedCode = inputAction.getKeyPressedCode();
+      List<InputAction> inputActionList = keyActionMap.get(keyPressedCode);
+      if (inputActionList == null)
+      {
+        inputActionList = new ArrayList<>();
+        keyActionMap.put(keyPressedCode, inputActionList);
+      }
+      inputActionList.add(inputAction);
+    }
+    return keyActionMap;
   }
 
   public void addAction(InputAction inputAction)
@@ -540,7 +587,7 @@ public class SimulatorEditor
     }
   }
 
-  public void stopCurrentEdit()
+  public void stopSimulatorEdit()
   {
     if (simulatorEdit != null)
     {
@@ -561,7 +608,7 @@ public class SimulatorEditor
     running = !running;
   }
 
-  public void editActionDeleteComponent()
+  public void editActionDelete()
   {
     boolean componentDeleted = editActionDeleteComponentIfPossible();
     if (componentDeleted)
@@ -701,6 +748,31 @@ public class SimulatorEditor
   public void replaceSelection(View newView, View oldView)
   {
     circuitEditor.replaceSelection(newView, oldView);
+  }
+
+  public void editActionCopy()
+  {
+
+  }
+
+  public void editActionCut()
+  {
+
+  }
+
+  public void editActionDuplicate()
+  {
+
+  }
+
+  public void editActionPaste()
+  {
+
+  }
+
+  public void editActionMove()
+  {
+
   }
 }
 

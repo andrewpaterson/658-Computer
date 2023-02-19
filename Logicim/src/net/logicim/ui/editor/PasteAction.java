@@ -2,10 +2,10 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 
-public class RunOneEvent
+public class PasteAction
     extends SimulatorEditorAction
 {
-  public RunOneEvent(SimulatorEditor editor)
+  public PasteAction(SimulatorEditor editor)
   {
     super(editor);
   }
@@ -13,13 +13,13 @@ public class RunOneEvent
   @Override
   public void executeEditorAction()
   {
-    editor.runOneEvent();
+    editor.editActionPaste();
   }
 
   @Override
   public String getDescription()
   {
-    return "Step Once";
+    return "Paste";
   }
 }
 

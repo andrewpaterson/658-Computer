@@ -20,5 +20,11 @@ public class CreateComponentAction
   {
     editor.startPlaceComponent(ViewFactoryStore.getInstance().get(discreteViewClass));
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Create Component";
+  }
 }
 

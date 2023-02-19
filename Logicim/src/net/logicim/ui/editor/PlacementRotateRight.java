@@ -15,5 +15,11 @@ public class PlacementRotateRight
   {
     editor.rotateRight();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Rotate Right";
+  }
 }
 

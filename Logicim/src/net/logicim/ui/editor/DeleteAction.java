@@ -2,10 +2,10 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 
-public class RunOneEvent
+public class DeleteAction
     extends SimulatorEditorAction
 {
-  public RunOneEvent(SimulatorEditor editor)
+  public DeleteAction(SimulatorEditor editor)
   {
     super(editor);
   }
@@ -13,13 +13,13 @@ public class RunOneEvent
   @Override
   public void executeEditorAction()
   {
-    editor.runOneEvent();
+    editor.editActionDelete();
   }
 
   @Override
   public String getDescription()
   {
-    return "Step Once";
+    return "Delete";
   }
 }
 

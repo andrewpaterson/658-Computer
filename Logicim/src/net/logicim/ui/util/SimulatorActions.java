@@ -28,7 +28,7 @@ public class SimulatorActions
 {
   public static void create(SimulatorEditor editor, SimulatorPanel panel)
   {
-    editor.addAction(new InputAction(new StopCurrent(editor), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
+    editor.addAction(new InputAction(new StopEditAction(editor), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     editor.addAction(new InputAction(new RunOneEvent(editor), KeyEvent.VK_T, Up, Up, Up));
 
     editor.addAction(new InputAction(new CreateComponentAction(editor, ClockView.class), KeyEvent.VK_C, Up, Down, Up));
@@ -51,7 +51,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Down, Up));
     editor.addAction(new InputAction(new PlacementRotateRight(editor), KeyEvent.VK_R, Up, Up, Up));
     editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Down));
-    editor.addAction(new InputAction(new DeleteComponent(editor), KeyEvent.VK_DELETE, Up, Up, Up));
+    editor.addAction(new InputAction(new DeleteAction(editor), KeyEvent.VK_DELETE, Up, Up, Up));
     editor.addAction(new InputAction(new IncreaseSimulationSpeed(editor), KeyEvent.VK_EQUALS, Up, Up, Up));
     editor.addAction(new InputAction(new DecreaseSimulationSpeed(editor), KeyEvent.VK_MINUS, Up, Up, Up));
     editor.addAction(new InputAction(new ResetSimulation(editor), KeyEvent.VK_R, Up, Up, Down));
@@ -59,6 +59,12 @@ public class SimulatorActions
     editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Up, Up, Down));
     editor.addAction(new InputAction(new UndoAction(editor), KeyEvent.VK_Z, Up, Up, Down));
     editor.addAction(new InputAction(new RedoAction(editor), KeyEvent.VK_Y, Up, Up, Down));
+
+    editor.addAction(new InputAction(new MoveAction(editor), KeyEvent.VK_M, Up, Up, Up));
+    editor.addAction(new InputAction(new CopyAction(editor), KeyEvent.VK_C, Up, Up, Down));
+    editor.addAction(new InputAction(new PasteAction(editor), KeyEvent.VK_V, Up, Up, Down));
+    editor.addAction(new InputAction(new CutAction(editor), KeyEvent.VK_X, Up, Up, Down));
+    editor.addAction(new InputAction(new DuplicateAction(editor), KeyEvent.VK_D, Up, Up, Down));
   }
 }
 

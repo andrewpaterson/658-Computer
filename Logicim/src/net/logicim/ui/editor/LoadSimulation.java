@@ -17,5 +17,11 @@ public class LoadSimulation
   {
     panel.loadSimulation();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Load";
+  }
 }
 

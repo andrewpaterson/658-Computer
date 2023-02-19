@@ -2,10 +2,10 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 
-public class DeleteComponent
+public class MoveAction
     extends SimulatorEditorAction
 {
-  public DeleteComponent(SimulatorEditor editor)
+  public MoveAction(SimulatorEditor editor)
   {
     super(editor);
   }
@@ -13,7 +13,13 @@ public class DeleteComponent
   @Override
   public void executeEditorAction()
   {
-    editor.editActionDeleteComponent();
+    editor.editActionMove();
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return "Move";
   }
 }
 

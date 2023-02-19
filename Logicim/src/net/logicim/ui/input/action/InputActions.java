@@ -33,5 +33,10 @@ public class InputActions
       }
     }
   }
+
+  public List<InputAction> getActions()
+  {
+    return actions;
+  }
 }
 

@@ -15,5 +15,11 @@ public class ResetSimulation
   {
     editor.resetSimulation();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Reset";
+  }
 }
 

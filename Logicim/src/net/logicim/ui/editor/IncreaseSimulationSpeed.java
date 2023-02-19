@@ -15,4 +15,10 @@ public class IncreaseSimulationSpeed
   {
     editor.increaseSimulationSpeed();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Increase Simulation Speed";
+  }
 }

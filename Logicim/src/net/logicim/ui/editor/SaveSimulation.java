@@ -17,5 +17,11 @@ public class SaveSimulation
   {
     panel.saveSimulation();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Save";
+  }
 }
 

@@ -1,6 +1,9 @@
 package net.logicim.ui.input.action;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.ui.editor.EditorAction;
+
+import java.awt.event.KeyEvent;
 
 public class InputAction
 {
@@ -10,7 +13,6 @@ public class InputAction
   protected ButtonState shiftHeld;
   protected ButtonState ctrlHeld;
   protected int keyPressedCode;
-  protected int mousePressedCode;
 
   public InputAction(EditorAction action,
                      int keyPressedCode,
@@ -23,7 +25,6 @@ public class InputAction
     this.shiftHeld = shiftHeld;
     this.ctrlHeld = ctrlHeld;
     this.keyPressedCode = keyPressedCode;
-    this.mousePressedCode = 0;
   }
 
   public void execute()
@@ -57,6 +58,83 @@ public class InputAction
       return true;
     }
     return false;
+  }
+
+  public ButtonState getAltHeld()
+  {
+    return altHeld;
+  }
+
+  public ButtonState getShiftHeld()
+  {
+    return shiftHeld;
+  }
+
+  public ButtonState getCtrlHeld()
+  {
+    return ctrlHeld;
+  }
+
+  public int getKeyPressedCode()
+  {
+    return keyPressedCode;
+  }
+
+  public boolean isSame(InputAction other)
+  {
+    if (this == other)
+    {
+      return true;
+    }
+    return keyPressedCode == other.keyPressedCode &&
+           isSame(altHeld, other.altHeld) &&
+           isSame(shiftHeld, other.shiftHeld) &&
+           isSame(ctrlHeld, other.ctrlHeld);
+  }
+
+  private boolean isSame(ButtonState thisHeld, ButtonState otherHeld)
+  {
+    if (thisHeld == otherHeld)
+    {
+      return true;
+    }
+    else if ((thisHeld == ButtonState.DontCare) ||
+             (otherHeld == ButtonState.DontCare))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public String toKeyString()
+  {
+    String keyText = KeyEvent.getKeyText(keyPressedCode);
+    return String.format("Key [%s]: Alt [%s], Ctrl [%s], Shift [%s]", keyText, toModifierString(altHeld), toModifierString(ctrlHeld), toModifierString(shiftHeld));
+  }
+
+  private String toModifierString(ButtonState buttonState)
+  {
+    if (buttonState == ButtonState.DontCare)
+    {
+      return "Don't Care";
+    }
+    if (buttonState == ButtonState.Up)
+    {
+      return "Up";
+    }
+    if (buttonState == ButtonState.Down)
+    {
+      return "Down";
+    }
+    throw new SimulatorException("Don't know how to convert modifier string.");
+  }
+
+  public String toActionDescriptionString()
+  {
+    return action.getDescription();
   }
 }
 

@@ -32,5 +32,11 @@ public class EditPropertiesAction
                                                                 componentView);
     }
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Edit";
+  }
 }
 

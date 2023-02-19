@@ -15,5 +15,11 @@ public class ToggleRunSimulation
   {
     editor.toggleTunSimulation();
   }
+
+  @Override
+  public String getDescription()
+  {
+    return "Toggle Simulation Run";
+  }
 }
 

@@ -2,10 +2,10 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 
-public class StopCurrent
+public class CutAction
     extends SimulatorEditorAction
 {
-  public StopCurrent(SimulatorEditor editor)
+  public CutAction(SimulatorEditor editor)
   {
     super(editor);
   }
@@ -13,6 +13,13 @@ public class StopCurrent
   @Override
   public void executeEditorAction()
   {
-    editor.stopCurrentEdit();
+    editor.editActionCut();
+  }
+
+  @Override
+  public String getDescription()
+  {
+    return "Cut";
   }
 }
+

@@ -14,6 +14,8 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.component.factory.ViewFactory;
+import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -750,9 +750,19 @@ public class SimulatorEditor
     circuitEditor.replaceSelection(newView, oldView);
   }
 
+  private List<View> duplicateViews(List<View> views)
+  {
+    ArrayList<View> duplicates = new ArrayList<>();
+    for (View view : views)
+    {
+      View duplicate = view.duplicate(circuitEditor);
+      duplicates.add(duplicate);
+    }
+    return duplicates;
+  }
+
   public void editActionCopy()
   {
-
   }
 
   public void editActionCut()
@@ -762,7 +772,20 @@ public class SimulatorEditor
 
   public void editActionDuplicate()
   {
+    if (simulatorEdit == null)
+    {
+      Int2D position = mousePosition.get();
 
+      if (position != null)
+      {
+        List<View> selection = circuitEditor.getSelection().getSelection();
+        if (selection.size() > 0)
+        {
+          List<View> duplicates = duplicateViews(selection);
+          simulatorEdit = createStatefulEditor(new MoveComponents(duplicates, true), position.x, position.y);
+        }
+      }
+    }
   }
 
   public void editActionPaste()
@@ -772,7 +795,19 @@ public class SimulatorEditor
 
   public void editActionMove()
   {
+    if (simulatorEdit == null)
+    {
+      Int2D position = mousePosition.get();
 
+      if (position != null)
+      {
+        List<View> selection = circuitEditor.getSelection().getSelection();
+        if (selection.size() > 0)
+        {
+          simulatorEdit = createStatefulEditor(new MoveComponents(selection, false), position.x, position.y);
+        }
+      }
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 
 import net.logicim.domain.common.propagation.Family;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
 
 public class ClockProperties
@@ -20,6 +21,16 @@ public class ClockProperties
     super(name, family, explicitPowerPorts);
     this.frequency_Hz = frequency;
     this.inverseOut = inverseOut;
+  }
+
+  @Override
+  public ClockProperties duplicate()
+  {
+    return new ClockProperties(name,
+                               family,
+                               explicitPowerPorts,
+                               frequency_Hz,
+                               inverseOut);
   }
 }
 

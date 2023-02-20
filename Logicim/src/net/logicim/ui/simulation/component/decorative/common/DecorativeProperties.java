@@ -2,7 +2,7 @@ package net.logicim.ui.simulation.component.decorative.common;
 
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
-public class DecorativeProperties
+public abstract class DecorativeProperties
     extends ComponentProperties
 {
   public DecorativeProperties()

@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.domain.common.propagation.Family;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
 
 public class BufferProperties
@@ -24,6 +25,12 @@ public class BufferProperties
     super(name, family, explicitPowerPorts);
     this.inputCount = inputCount;
     this.inputWidth = inputWidth;
+  }
+
+  @Override
+  public ComponentProperties duplicate()
+  {
+    return new BufferProperties(name, family, explicitPowerPorts, inputCount, inputWidth);
   }
 }
 

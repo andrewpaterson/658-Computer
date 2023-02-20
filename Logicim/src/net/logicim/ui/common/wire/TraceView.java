@@ -199,6 +199,14 @@ public class TraceView
   }
 
   @Override
+  public View duplicate(CircuitEditor circuitEditor)
+  {
+    TraceView traceView = new TraceView(circuitEditor, line);
+    traceView.disconnect();
+    return traceView;
+  }
+
+  @Override
   public TraceView getView()
   {
     return this;

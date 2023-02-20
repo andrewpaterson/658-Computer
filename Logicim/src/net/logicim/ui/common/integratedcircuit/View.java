@@ -5,6 +5,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.List;
@@ -51,5 +52,7 @@ public abstract class View
   public abstract List<ConnectionView> getConnections();
 
   public abstract Component getComponent();
+
+  public abstract View duplicate(CircuitEditor circuitEditor);
 }
 

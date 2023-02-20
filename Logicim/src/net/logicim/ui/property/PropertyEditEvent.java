@@ -5,6 +5,7 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
@@ -34,16 +35,8 @@ public class PropertyEditEvent
   protected StaticView<?> recreateComponentView(ComponentProperties properties, SimulatorEditor editor)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
-
-    Rotation rotation = componentView.getRotation();
-    Int2D position = componentView.getPosition();
-
-    Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) componentView.getClass();
-    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-
+    StaticView<?> newComponentView = componentView.duplicate(circuitEditor, properties);
     circuitEditor.deleteComponentView(this.componentView);
-
-    StaticView<?> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
     circuitEditor.placeComponentView(newComponentView);
 
     return newComponentView;

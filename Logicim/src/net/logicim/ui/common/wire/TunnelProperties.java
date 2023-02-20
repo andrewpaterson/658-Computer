@@ -16,5 +16,11 @@ public class TunnelProperties
     super(name);
     this.doubleSided = doubleSided;
   }
+
+  @Override
+  public TunnelProperties duplicate()
+  {
+    return new TunnelProperties(name, doubleSided);
+  }
 }
 

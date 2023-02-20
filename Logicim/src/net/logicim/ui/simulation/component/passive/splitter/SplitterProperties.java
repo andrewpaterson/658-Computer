@@ -116,5 +116,17 @@ public class SplitterProperties
            appearance == that.appearance &&
            Arrays.equals(splitIndices, that.splitIndices);
   }
+
+  @Override
+  public SplitterProperties duplicate()
+  {
+    return new SplitterProperties(name,
+                                  bitWidth,
+                                  fanOut,
+                                  gridSpacing,
+                                  appearance,
+                                  endOffset,
+                                  Arrays.copyOf(splitIndices, splitIndices.length));
+  }
 }
 

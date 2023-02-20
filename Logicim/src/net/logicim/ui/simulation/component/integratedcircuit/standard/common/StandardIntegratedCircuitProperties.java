@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitProperties;
 
-public class StandardIntegratedCircuitProperties
+public abstract class StandardIntegratedCircuitProperties
     extends IntegratedCircuitProperties
 {
   public boolean explicitPowerPorts;

@@ -36,5 +36,17 @@ public class OscilloscopeProperties
     this.samplesPerDiv = samplesPerDiv;
     this.samplingFrequency_Hz = samplingFrequency;
   }
+
+  @Override
+  public OscilloscopeProperties duplicate()
+  {
+    return new OscilloscopeProperties(name,
+                                      family,
+                                      inputCount,
+                                      numberOfDivsWide,
+                                      divHeightInGrids,
+                                      samplesPerDiv,
+                                      samplingFrequency_Hz);
+  }
 }
 

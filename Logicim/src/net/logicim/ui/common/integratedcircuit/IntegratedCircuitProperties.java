@@ -2,7 +2,7 @@ package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.domain.common.propagation.Family;
 
-public class IntegratedCircuitProperties
+public abstract class IntegratedCircuitProperties
     extends ComponentProperties
 {
   public Family family;

@@ -10,6 +10,8 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.component.factory.ViewFactory;
+import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -237,6 +239,21 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
     selectionBox.copy(boundingBox);
     boundingBox.grow(0.5f);
+  }
+
+  @Override
+  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor)
+  {
+    return duplicate(circuitEditor, (PROPERTIES) properties.duplicate());
+  }
+
+  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor, PROPERTIES properties)
+  {
+    Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) getClass();
+    ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
+    StaticView<PROPERTIES> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
+
+    return newComponentView;
   }
 
   protected abstract void finaliseView();

@@ -2,7 +2,7 @@ package net.logicim.ui.common.integratedcircuit;
 
 import java.util.Objects;
 
-public class ComponentProperties
+public abstract class ComponentProperties
 {
   public String name;
 
@@ -30,4 +30,7 @@ public class ComponentProperties
     ComponentProperties that = (ComponentProperties) o;
     return Objects.equals(name, that.name);
   }
+
+  public abstract ComponentProperties duplicate();
 }
+

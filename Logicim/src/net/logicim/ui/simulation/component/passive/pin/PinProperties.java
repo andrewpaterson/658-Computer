@@ -16,5 +16,11 @@ public class PinProperties
     super(name);
     this.bitWidth = bitWidth;
   }
+
+  @Override
+  public PinProperties duplicate()
+  {
+    return new PinProperties(name, bitWidth);
+  }
 }
 

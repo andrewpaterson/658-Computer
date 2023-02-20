@@ -13,4 +13,10 @@ public class GroundProperties
   {
     super(name);
   }
+
+  @Override
+  public GroundProperties duplicate()
+  {
+    return new GroundProperties(name);
+  }
 }

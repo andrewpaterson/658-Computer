@@ -30,11 +30,24 @@ public class TraceView
 
   public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
   {
+    this(circuitEditor, start, end, true);
+  }
+
+  public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end, boolean addConnections)
+  {
     super();
     this.line = new Line(start, end);
     connections = new ArrayList<>(2);
-    connections.add(circuitEditor.getOrAddConnection(start, this));
-    connections.add(circuitEditor.getOrAddConnection(end, this));
+    if (addConnections)
+    {
+      connections.add(circuitEditor.getOrAddConnection(start, this));
+      connections.add(circuitEditor.getOrAddConnection(end, this));
+    }
+    else
+    {
+      connections.add(null);
+      connections.add(null);
+    }
     this.traces = new ArrayList<>();
     circuitEditor.addTraceView(this);
   }
@@ -201,7 +214,10 @@ public class TraceView
   @Override
   public View duplicate(CircuitEditor circuitEditor)
   {
-    TraceView traceView = new TraceView(circuitEditor, line);
+    TraceView traceView = new TraceView(circuitEditor,
+                                        line.getStart(),
+                                        line.getEnd(),
+                                        false);
     traceView.disconnect();
     return traceView;
   }

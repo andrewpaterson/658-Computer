@@ -31,16 +31,21 @@ public class TraceData
     this.selected = selected;
   }
 
-  public void create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public TraceView create(CircuitEditor circuitEditor, TraceLoader traceLoader, boolean createConnections)
   {
     TraceView traceView = new TraceView(circuitEditor,
                                         start,
-                                        end);
-    WireDataHelper.wireConnect(circuitEditor,
-                               traceLoader,
-                               traceView,
-                               traceIds,
-                               selected);
+                                        end,
+                                        createConnections);
+    if (createConnections)
+    {
+      WireDataHelper.wireConnect(circuitEditor,
+                                 traceLoader,
+                                 traceView,
+                                 traceIds,
+                                 selected);
+    }
+    return traceView;
   }
 }
 

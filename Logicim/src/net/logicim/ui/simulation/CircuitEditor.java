@@ -19,6 +19,7 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
@@ -618,22 +619,59 @@ public class CircuitEditor
                            traceDatas);
   }
 
+  public ClipboardData copyViews(List<View> views)
+  {
+    ArrayList<StaticData<?>> componentDatas = new ArrayList<>();
+    ArrayList<TraceData> traceDatas = new ArrayList<>();
+    for (View view : views)
+    {
+      if (view instanceof StaticView)
+      {
+        StaticView<?> staticView = (StaticView<?>) view;
+        StaticData<?> staticData = (StaticData<?>) staticView.save(false);
+        if (staticData == null)
+        {
+          throw new SimulatorException("%s save may not return null.", staticView.toIdentifierString());
+        }
+
+        componentDatas.add(staticData);
+      }
+      else if (view instanceof TraceView)
+      {
+        TraceView traceView = (TraceView) view;
+        TraceData traceData = traceView.save(false);
+        traceDatas.add(traceData);
+      }
+    }
+
+    return new ClipboardData(componentDatas, traceDatas);
+  }
+
   public void load(CircuitData circuitData)
   {
     selection.clearSelection();
     simulation.getTimeline().load(circuitData.timeline);
 
+    loadViews(circuitData.traces, circuitData.components, true);
+  }
+
+  public List<View> loadViews(List<TraceData> traces, List<StaticData<?>> components, boolean createConnections)
+  {
+    ArrayList<View> views = new ArrayList<>();
     TraceLoader traceLoader = new TraceLoader();
 
-    for (TraceData traceData : circuitData.traces)
+    for (TraceData traceData : traces)
     {
-      traceData.create(this, traceLoader);
+      TraceView traceView = traceData.create(this, traceLoader, createConnections);
+      views.add(traceView);
     }
 
-    for (StaticData<?> staticData : circuitData.components)
+    for (StaticData<?> staticData : components)
     {
-      staticData.createAndLoad(this, traceLoader);
+      StaticView<?> staticView = staticData.createAndLoad(this, traceLoader, createConnections);
+      views.add(staticView);
     }
+    return views;
   }
 
   public Set<ConnectionView> connectStaticView(StaticView<?> staticView)

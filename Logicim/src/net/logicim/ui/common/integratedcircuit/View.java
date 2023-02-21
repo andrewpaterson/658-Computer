@@ -1,6 +1,7 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.SaveData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.ui.common.ConnectionView;

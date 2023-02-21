@@ -39,7 +39,7 @@ public class TunnelData
   }
 
   @Override
-  public void createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public TunnelView createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, boolean createConnections)
   {
     TunnelView tunnelView = new TunnelView(circuitEditor,
                                            position,
@@ -47,12 +47,16 @@ public class TunnelData
                                            boundingBox.create(),
                                            selectionBox.create(),
                                            new TunnelProperties(name, doubleSided));
-    tunnelView.createConnections(circuitEditor);
-    WireDataHelper.wireConnect(circuitEditor,
-                               traceLoader,
-                               tunnelView,
-                               traceIds,
-                               selected);
+    if (createConnections)
+    {
+      tunnelView.createConnections(circuitEditor);
+      WireDataHelper.wireConnect(circuitEditor,
+                                 traceLoader,
+                                 tunnelView,
+                                 traceIds,
+                                 selected);
+    }
+    return tunnelView;
   }
 
   @Override

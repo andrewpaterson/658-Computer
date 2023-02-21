@@ -5,6 +5,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
+import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -68,6 +69,8 @@ public class SimulatorEditor
 
   protected Rotation creationRotation;
 
+  protected ClipboardData clipboard;
+
   public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
     this.inputEvents = new ConcurrentLinkedDeque<>();
@@ -90,6 +93,7 @@ public class SimulatorEditor
     this.runTimeStep = LongTime.nanosecondsToTime(0.25f);
 
     this.undoStack = new UndoStack();
+    this.clipboard = null;
 
     addActions(simulatorPanel);
 
@@ -763,6 +767,18 @@ public class SimulatorEditor
 
   public void editActionCopy()
   {
+    if (simulatorEdit == null)
+    {
+      Int2D position = mousePosition.get();
+      if (position != null)
+      {
+        List<View> selection = circuitEditor.getSelection().getSelection();
+        if (selection.size() > 0)
+        {
+          clipboard = circuitEditor.copyViews(selection);
+        }
+      }
+    }
   }
 
   public void editActionCut()
@@ -775,7 +791,6 @@ public class SimulatorEditor
     if (simulatorEdit == null)
     {
       Int2D position = mousePosition.get();
-
       if (position != null)
       {
         List<View> selection = circuitEditor.getSelection().getSelection();
@@ -790,7 +805,18 @@ public class SimulatorEditor
 
   public void editActionPaste()
   {
-
+    if (simulatorEdit == null)
+    {
+      Int2D position = mousePosition.get();
+      if (position != null)
+      {
+        if (clipboard != null)
+        {
+          List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents(), false);
+          simulatorEdit = createStatefulEditor(new MoveComponents(views, false), position.x, position.y);
+        }
+      }
+    }
   }
 
   public void editActionMove()

@@ -6,7 +6,7 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.selection.Selection;
+import net.logicim.ui.simulation.selection.SelectionEdit;
 
 import java.awt.*;
 import java.util.HashSet;
@@ -45,11 +45,9 @@ public class StartEditInComponent
   {
     CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
     List<View> previousSelection = circuitEditor.getSelection().getSelection();
-    List<View> selection = circuitEditor.getSelectionFromRectangle(new Float2D(x, y), new Float2D(x, y));
-    boolean hasSelectionChanged = Selection.hasSelectionChanged(new HashSet<>(selection), new HashSet<>(previousSelection));
+    boolean hasSelectionChanged = SelectionEdit.calculateSelection(circuitEditor, new Float2D(x, y), new Float2D(x, y), keyboardButtons, new HashSet<>(previousSelection));
     if (hasSelectionChanged)
     {
-      circuitEditor.getSelection().setSelection(selection);
       simulatorEdit.pushUndo();
     }
   }

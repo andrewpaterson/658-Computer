@@ -106,20 +106,21 @@ public class SelectionEdit
     start(x, y);
   }
 
-  public boolean hasSelectionChanged(CircuitEditor circuitEditor)
+  public boolean doneSelection(SimulatorEdit simulatorEdit)
   {
-    Set<View> selection = new HashSet<>(circuitEditor.getSelection().getSelection());
-    return Selection.hasSelectionChanged(selection, previousSelection);
+    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
+    boolean hasSelectionChanged = calculateSelection(circuitEditor, start, end, keyboardButtons, previousSelection);
+    previousSelection = null;
+    return hasSelectionChanged;
   }
 
-  public boolean doneSelection(CircuitEditor circuitEditor, KeyboardButtons keyboardButtons, List<View> views)
+  public static boolean calculateSelection(CircuitEditor circuitEditor, Float2D startPosition, Float2D endPosition, KeyboardButtons keyboardButtons, Set<View> previousSelection)
   {
+    List<View> views = circuitEditor.getSelectionFromRectangle(startPosition, endPosition);
     SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
     List<View> selection = circuitEditor.getSelection().calculateSelection(views, previousSelection, selectionMode);
     circuitEditor.getSelection().setSelection(selection);
-    boolean hasSelectionChanged = hasSelectionChanged(circuitEditor);
-    previousSelection = null;
-    return hasSelectionChanged;
+    return Selection.hasSelectionChanged(new HashSet<>(selection), previousSelection);
   }
 
   public Float2D getStart()
@@ -160,9 +161,7 @@ public class SelectionEdit
   @Override
   public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
-    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
-    List<View> views = circuitEditor.getSelectionFromRectangle(start, end);
-    boolean hasSelectionChanged = doneSelection(circuitEditor, keyboardButtons, views);
+    boolean hasSelectionChanged = doneSelection(simulatorEdit);
     if (hasSelectionChanged)
     {
       simulatorEdit.pushUndo();

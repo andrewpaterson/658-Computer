@@ -43,7 +43,7 @@ public class Timeline
   public boolean addEvent(Event event)
   {
     long eventTime = event.getTime();
-    if (eventTime < time)
+    if (eventTime < time || eventTime == time)
     {
       return false;
     }

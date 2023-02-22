@@ -783,7 +783,19 @@ public class SimulatorEditor
 
   public void editActionCut()
   {
-
+    if (simulatorEdit == null)
+    {
+      Int2D position = mousePosition.get();
+      if (position != null)
+      {
+        List<View> selection = circuitEditor.getSelection().getSelection();
+        if (selection.size() > 0)
+        {
+          clipboard = circuitEditor.copyViews(selection);
+          circuitEditor.deleteSelection();
+        }
+      }
+    }
   }
 
   public void editActionDuplicate()
@@ -813,15 +825,6 @@ public class SimulatorEditor
         if (clipboard != null)
         {
           List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents(), false);
-          for (View view : views)
-          {
-            if (view instanceof StaticView)
-            {
-              StaticView<?> staticView = (StaticView<?>) view;
-              circuitEditor.disconnectStaticView(staticView);
-              staticView.disable();
-            }
-          }
           simulatorEdit = createStatefulEditor(new MoveComponents(views, false), position.x, position.y);
         }
       }

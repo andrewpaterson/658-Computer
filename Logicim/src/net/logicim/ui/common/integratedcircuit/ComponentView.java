@@ -212,6 +212,16 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
   }
 
+  @Override
+  public void disconnect(Simulation simulation)
+  {
+    for (PortView portView : ports)
+    {
+      portView.disconnect(simulation);
+      return;
+    }
+  }
+
   public abstract ComponentData<?> save(boolean selected);
 
   public abstract void simulationStarted(Simulation simulation);

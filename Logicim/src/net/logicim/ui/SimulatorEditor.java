@@ -813,6 +813,15 @@ public class SimulatorEditor
         if (clipboard != null)
         {
           List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents(), false);
+          for (View view : views)
+          {
+            if (view instanceof StaticView)
+            {
+              StaticView<?> staticView = (StaticView<?>) view;
+              circuitEditor.disconnectStaticView(staticView);
+              staticView.disable();
+            }
+          }
           simulatorEdit = createStatefulEditor(new MoveComponents(views, false), position.x, position.y);
         }
       }

@@ -277,7 +277,8 @@ public class TunnelView
     this.traces = traces;
   }
 
-  public void disconnect()
+  @Override
+  public void disconnect(Simulation simulation)
   {
     for (int i = 0; i < connections.size(); i++)
     {

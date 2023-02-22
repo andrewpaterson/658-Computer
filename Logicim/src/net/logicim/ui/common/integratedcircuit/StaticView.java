@@ -51,16 +51,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     this.finalised = false;
   }
 
-  public void rotateRight()
-  {
-    setRotation(rotation.rotateRight());
-  }
-
-  public void rotateLeft()
-  {
-    setRotation(rotation.rotateLeft());
-  }
-
   public void setRotation(Rotation rotation)
   {
     this.rotation = rotation;
@@ -271,6 +261,8 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract Component getComponent();
 
   public abstract void disable();
+
+  public abstract void disconnect(Simulation simulation);
 
   public abstract List<ConnectionView> createConnections(CircuitEditor circuitEditor);
 }

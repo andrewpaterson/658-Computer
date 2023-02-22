@@ -118,7 +118,7 @@ public class CircuitEditor
         throw new SimulatorException("Cannot delete a [null] view.");
       }
 
-      connectionViews.addAll(disconnectComponentView(componentView));
+      connectionViews.addAll(disconnectStaticView(componentView));
       if (componentView instanceof IntegratedCircuitView)
       {
         deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView);
@@ -166,7 +166,7 @@ public class CircuitEditor
     traceView.disconnect();
   }
 
-  protected List<ConnectionView> disconnectComponentView(StaticView<?> staticView)
+  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView)
   {
     if (staticView == null)
     {
@@ -179,19 +179,8 @@ public class CircuitEditor
       throw new SimulatorException("Cannot disconnect %s with [null] connections.", staticView.toIdentifierString());
     }
 
-    if (!(staticView instanceof TunnelView))
-    {
-      connectionViewCache.removeAll(staticView, connectionViews);
-      for (ConnectionView connectionView : connectionViews)
-      {
-        staticView.disconnect(simulation, connectionView);
-      }
-    }
-    else
-    {
-      connectionViewCache.removeAll(staticView, connectionViews);
-      ((TunnelView) staticView).disconnect();
-    }
+    connectionViewCache.removeAll(staticView, connectionViews);
+    staticView.disconnect(simulation);
 
     Component component = staticView.getComponent();
     if (component != null)
@@ -658,7 +647,11 @@ public class CircuitEditor
   public List<View> loadViews(List<TraceData> traces, List<StaticData<?>> components, boolean createConnections)
   {
     ArrayList<View> views = new ArrayList<>();
-    TraceLoader traceLoader = new TraceLoader();
+    TraceLoader traceLoader = null;
+    if (createConnections)
+    {
+      traceLoader = new TraceLoader();
+    }
 
     for (TraceData traceData : traces)
     {
@@ -776,7 +769,7 @@ public class CircuitEditor
     for (StaticView<?> staticView : staticViews)
     {
       staticView.disable();
-      connectionViews.addAll(disconnectComponentView(staticView));
+      connectionViews.addAll(disconnectStaticView(staticView));
     }
 
     for (TraceView traceView : traceViews)

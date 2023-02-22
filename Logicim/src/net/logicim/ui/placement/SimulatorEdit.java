@@ -57,11 +57,14 @@ public class SimulatorEdit
   public void move(float x, float y)
   {
     calculateDiff(Math.round(x), Math.round(y));
-    StatefulEdit newEdit = edit.move(x, y, this);
-    if (newEdit != edit)
+    if (hadDiff)
     {
-      newEdit.start(x, y, this);
-      edit = newEdit;
+      StatefulEdit newEdit = edit.move(x, y, this);
+      if (newEdit != edit)
+      {
+        newEdit.start(x, y, this);
+        edit = newEdit;
+      }
     }
   }
 
@@ -72,7 +75,7 @@ public class SimulatorEdit
     diff.subtract(start);
 
     previousHadDiff = hadDiff;
-    if (!diff.isZero())
+    if (!diff.isZero() || rightRotations != 0)
     {
       hadDiff = true;
     }

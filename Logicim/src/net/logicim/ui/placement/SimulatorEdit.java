@@ -62,7 +62,7 @@ public class SimulatorEdit
       StatefulEdit newEdit = edit.move(x, y, this);
       if (newEdit != edit)
       {
-        newEdit.start(x, y, this);
+        newEdit.start(start.x, start.y, this);
         edit = newEdit;
       }
     }

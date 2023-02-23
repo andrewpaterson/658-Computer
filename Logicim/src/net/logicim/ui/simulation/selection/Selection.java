@@ -85,17 +85,13 @@ public class Selection
     }
   }
 
-  public Int2D getSelectionCenter()
+  public static Int2D getViewsCenter(List<View> views)
   {
-    if (isSelectionEmpty())
+    if (!views.isEmpty())
     {
-      return null;
-    }
-    else
-    {
-      Int2D position = new Int2D();
       int count = 0;
-      for (View view : selection)
+      Int2D position = new Int2D();
+      for (View view : views)
       {
         if (view instanceof StaticView)
         {
@@ -113,6 +109,10 @@ public class Selection
       }
       position.set(Math.round((float) position.x / count), Math.round((float) position.y / count));
       return position;
+    }
+    else
+    {
+      return null;
     }
   }
 

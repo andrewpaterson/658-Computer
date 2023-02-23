@@ -21,6 +21,7 @@ import net.logicim.ui.placement.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
+import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
 import net.logicim.ui.util.SimulatorActions;
@@ -160,15 +161,15 @@ public class SimulatorEditor
           {
             edit = new SelectionEdit(keyboardButtons);
           }
-          simulatorEdit = createStatefulEditor(edit, x, y);
+          simulatorEdit = createStatefulEditor(edit, toFloatingGridPosition(x, y));
         }
       }
     }
   }
 
-  protected SimulatorEdit createStatefulEditor(StatefulEdit edit, int x, int y)
+  protected SimulatorEdit createStatefulEditor(StatefulEdit edit, Float2D start)
   {
-    SimulatorEdit simulatorEdit = new SimulatorEdit(toFloatingGridPosition(x, y),
+    SimulatorEdit simulatorEdit = new SimulatorEdit(start,
                                                     edit,
                                                     circuitEditor,
                                                     this);
@@ -270,7 +271,7 @@ public class SimulatorEditor
                                                     new Int2D(viewport.transformScreenToGridX(position.x),
                                                               viewport.transformScreenToGridY(position.y)),
                                                     creationRotation);
-      simulatorEdit = createStatefulEditor(new MoveComponents(staticView, true), position.x, position.y);
+      simulatorEdit = createStatefulEditor(new MoveComponents(staticView, true), toFloatingGridPosition(position.x, position.y));
     }
   }
 
@@ -568,7 +569,7 @@ public class SimulatorEditor
   {
     Int2D position = mousePosition.get();
 
-    simulatorEdit = createStatefulEditor(moveComponents, position.x, position.y);
+    simulatorEdit = createStatefulEditor(moveComponents, toFloatingGridPosition(position.x, position.y));
     simulatorEdit.rotate(right);
     simulatorEdit.done(viewport.transformScreenToGridX(position.x),
                        viewport.transformScreenToGridY(position.y));
@@ -802,14 +803,15 @@ public class SimulatorEditor
   {
     if (simulatorEdit == null)
     {
-      Int2D position = mousePosition.get();
-      if (position != null)
+      List<View> selection = circuitEditor.getSelection().getSelection();
+      if (selection.size() > 0)
       {
-        List<View> selection = circuitEditor.getSelection().getSelection();
-        if (selection.size() > 0)
+        List<View> duplicates = duplicateViews(selection);
+        Int2D center = Selection.getViewsCenter(duplicates);
+        if (center != null)
         {
-          List<View> duplicates = duplicateViews(selection);
-          simulatorEdit = createStatefulEditor(new MoveComponents(duplicates, true), position.x, position.y);
+          Float2D floatingCenter = new Float2D(center);
+          simulatorEdit = createStatefulEditor(new MoveComponents(duplicates, true), floatingCenter);
         }
       }
     }
@@ -819,13 +821,14 @@ public class SimulatorEditor
   {
     if (simulatorEdit == null)
     {
-      Int2D position = mousePosition.get();
-      if (position != null)
+      if (clipboard != null)
       {
-        if (clipboard != null)
+        List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents(), false);
+        Int2D center = Selection.getViewsCenter(views);
+        if (center != null)
         {
-          List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents(), false);
-          simulatorEdit = createStatefulEditor(new MoveComponents(views, false), position.x, position.y);
+          Float2D floatingCenter = new Float2D(center);
+          simulatorEdit = createStatefulEditor(new MoveComponents(views, false), floatingCenter);
         }
       }
     }
@@ -842,7 +845,7 @@ public class SimulatorEditor
         List<View> selection = circuitEditor.getSelection().getSelection();
         if (selection.size() > 0)
         {
-          simulatorEdit = createStatefulEditor(new MoveComponents(selection, false), position.x, position.y);
+          simulatorEdit = createStatefulEditor(new MoveComponents(selection, false), toFloatingGridPosition(position.x, position.y));
         }
       }
     }

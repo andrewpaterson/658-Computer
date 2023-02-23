@@ -107,6 +107,10 @@ public class MoveComponents
     }
     else
     {
+      for (TraceView traceView : traces.keySet())
+      {
+        circuitEditor.removeTraceView(traceView);
+      }
       circuitEditor.deleteComponentViews(getStaticViews());
     }
   }

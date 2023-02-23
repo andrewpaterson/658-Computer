@@ -398,7 +398,7 @@ public class CircuitEditor
     return connectionViewCache.getOrAddConnection(position, view);
   }
 
-  public void removeTraceViews(Set<TraceView> traceViews)
+  public void removeTraceViews(Collection<TraceView> traceViews)
   {
     for (TraceView traceView : traceViews)
     {
@@ -1161,7 +1161,7 @@ public class CircuitEditor
     }
   }
 
-  protected void removeTraceView(TraceView traceView)
+  public void removeTraceView(TraceView traceView)
   {
     if (!traceView.hasConnections())
     {

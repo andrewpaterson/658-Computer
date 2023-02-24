@@ -11,12 +11,14 @@ public abstract class Event
 
   protected long time;
   protected long id;
+  protected boolean removed;
 
   public Event(long time, Timeline timeline)
   {
     this.time = time;
     id = nextId;
     nextId++;
+    removed = false;
 
     timeline.addFutureEvent(this);
   }
@@ -33,9 +35,14 @@ public abstract class Event
     timeline.addEvent(this);
   }
 
-  public static void resetNextId()
+  public void removeFromOwner()
   {
-    nextId = 1L;
+    removed = true;
+  }
+
+  public boolean isRemoved()
+  {
+    return removed;
   }
 
   public long getTime()
@@ -46,8 +53,6 @@ public abstract class Event
   public abstract void execute(Simulation simulation);
 
   public abstract IntegratedCircuit<?, ?> getIntegratedCircuit();
-
-  public abstract void removeFromOwner();
 
   public abstract EventData<?> save();
 

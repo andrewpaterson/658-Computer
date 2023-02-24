@@ -4,19 +4,18 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.redblacktree.TreeItem;
 import net.logicim.domain.common.event.Event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 public class SimultaneousEvents
     implements TreeItem<Long>
 {
   protected long time;
-  protected List<Event> events;
+  protected LinkedHashSet<Event> events;
 
   public SimultaneousEvents(long time)
   {
     this.time = time;
-    this.events = new ArrayList<>();
+    this.events = new LinkedHashSet<>();
   }
 
   @Override
@@ -31,7 +30,11 @@ public class SimultaneousEvents
     {
       throw new SimulatorException("Simultaneous time [" + LongTime.toNanosecondsString(time) + "] is not equal to event time [" + LongTime.toNanosecondsString(event.getTime()) + "].");
     }
-    events.add(event);
+    boolean alreadyContained = !events.add(event);
+    if (alreadyContained)
+    {
+      throw new SimulatorException("Event [%s] has already been added.", event.toShortString());
+    }
   }
 
   public void done()
@@ -50,14 +53,21 @@ public class SimultaneousEvents
     return time;
   }
 
-  public List<Event> getEvents()
+  public Event getFirst()
   {
-    return events;
+    if (events.size() > 0)
+    {
+      return events.iterator().next();
+    }
+    else
+    {
+      return null;
+    }
   }
 
-  public Event get(int i)
+  public boolean remove(Event event)
   {
-    return events.get(i);
+    return events.remove(event);
   }
 }
 

@@ -7,10 +7,7 @@ import net.logicim.data.circuit.TimelineData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.Event;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.logicim.domain.common.LongTime.toNanosecondsString;
 
@@ -125,18 +122,23 @@ public class Timeline
     }
   }
 
-  private void runEvent(SimultaneousEvents events)
+  private void runEvent(SimultaneousEvents simultaneousEvents)
   {
     previousEventTime = eventTime;
     eventTime = time;
 
-    for (Event event : events.events)
+    LinkedHashSet<Event> events = simultaneousEvents.events;
+    LinkedHashSet<Event> startingEvents = new LinkedHashSet<>(events);
+    for (Event event : startingEvents)
     {
-      event.execute(simulation);
+      if (!event.isRemoved())
+      {
+        event.execute(simulation);
+      }
     }
 
-    this.events.remove(events);
-    events.done();
+    this.events.remove(simultaneousEvents);
+    simultaneousEvents.done();
   }
 
   public Map<Long, SimultaneousEvents> getAllEvents()
@@ -162,7 +164,7 @@ public class Timeline
     event.removeFromOwner();
     if (simultaneousEvents != null)
     {
-      return simultaneousEvents.getEvents().remove(event);
+      return simultaneousEvents.remove(event);
     }
     else
     {

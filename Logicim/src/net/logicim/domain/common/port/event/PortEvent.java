@@ -44,6 +44,7 @@ public abstract class PortEvent
   @Override
   public void removeFromOwner()
   {
+    super.removeFromOwner();
     port.remove(this);
   }
 

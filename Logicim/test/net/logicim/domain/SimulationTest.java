@@ -433,7 +433,7 @@ public class SimulationTest
     SimultaneousEvents simultaneousEvents = events.get(actualEventTime);
     validateNotNull(simultaneousEvents);
     validate(1, simultaneousEvents.size());
-    Event event = simultaneousEvents.get(0);
+    Event event = simultaneousEvents.getFirst();
     validateClass(expectedClass, event);
     IntegratedCircuit<?, ?> actualIC = event.getIntegratedCircuit();
     validateIdentity(expectedIC, actualIC);

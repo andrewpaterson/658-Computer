@@ -41,6 +41,7 @@ public abstract class IntegratedCircuitEvent
   @Override
   public void removeFromOwner()
   {
+    super.removeFromOwner();
     integratedCircuit.remove(this);
   }
 

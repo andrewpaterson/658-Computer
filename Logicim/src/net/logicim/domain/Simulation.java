@@ -17,11 +17,6 @@ public class Simulation
     return timeline;
   }
 
-  public void run()
-  {
-    timeline.run();
-  }
-
   public boolean runSimultaneous()
   {
     return timeline.runSimultaneous();

@@ -5,6 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
+import net.logicim.domain.common.state.State;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public abstract class Passive
   public void enable(Simulation simulation)
   {
     enabled = true;
+    reset(simulation);
   }
 
   public List<Port> getPorts()
@@ -72,6 +74,17 @@ public abstract class Passive
   @Override
   public void disconnect(Simulation simulation)
   {
+  }
+
+  public void reset(Simulation simulation)
+  {
+    if (enabled)
+    {
+      for (Port port : getPorts())
+      {
+        port.reset();
+      }
+    }
   }
 }
 

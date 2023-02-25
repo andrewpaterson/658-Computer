@@ -27,6 +27,10 @@ public class Circuit
       integratedCircuit.reset(simulation);
       integratedCircuit.simulationStarted(simulation);
     }
+    for (Passive passive : passives)
+    {
+      passive.reset(simulation);
+    }
     return simulation;
   }
 

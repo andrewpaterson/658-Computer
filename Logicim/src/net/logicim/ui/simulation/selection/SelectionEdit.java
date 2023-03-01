@@ -118,8 +118,8 @@ public class SelectionEdit
   {
     List<View> views = circuitEditor.getSelectionFromRectangle(startPosition, endPosition);
     SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
-    List<View> selection = circuitEditor.getSelection().calculateSelection(views, previousSelection, selectionMode);
-    circuitEditor.getSelection().setSelection(selection);
+    List<View> selection = circuitEditor.getCurrentSelection().calculateSelection(views, previousSelection, selectionMode);
+    circuitEditor.getCurrentSelection().setSelection(selection);
     return Selection.hasSelectionChanged(new HashSet<>(selection), previousSelection);
   }
 
@@ -137,7 +137,7 @@ public class SelectionEdit
   public void start(float x, float y, SimulatorEdit simulatorEdit)
   {
     CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
-    startSelection(x, y, circuitEditor.getSelection().getSelection());
+    startSelection(x, y, circuitEditor.getCurrentSelection().getSelection());
   }
 
   @Override
@@ -147,8 +147,8 @@ public class SelectionEdit
     drag(x, y);
     List<View> views = circuitEditor.getSelectionFromRectangle(start, end);
     SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
-    List<View> selection = circuitEditor.getSelection().calculateSelection(views, previousSelection, selectionMode);
-    circuitEditor.getSelection().setSelection(selection);
+    List<View> selection = circuitEditor.getCurrentSelection().calculateSelection(views, previousSelection, selectionMode);
+    circuitEditor.getCurrentSelection().setSelection(selection);
     return this;
   }
 

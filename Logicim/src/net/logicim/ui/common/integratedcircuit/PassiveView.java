@@ -3,11 +3,12 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +18,20 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 {
   protected PASSIVE passive;
 
-  public PassiveView(CircuitEditor circuitEditor,
+  public PassiveView(SubcircuitView subcircuitView,
+                     Circuit circuit,
                      Int2D position,
                      Rotation rotation,
                      PROPERTIES properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
   }
 
-  protected void createComponent()
+  protected void createComponent(Circuit circuit)
   {
-    this.passive = createPassive();
+    this.passive = createPassive(circuit);
     this.passive.disable();
-    circuitEditor.addPassiveView(this);
+    subcircuitView.addPassiveView(this);
   }
 
   protected void validateComponent()
@@ -41,11 +43,11 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  protected void finaliseView()
+  protected void finaliseView(Circuit circuit)
   {
-    createComponent();
+    createComponent(circuit);
     createPortViews();
-    super.finaliseView();
+    super.finaliseView(circuit);
     validateComponent();
     validatePorts();
   }
@@ -96,6 +98,6 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
   public abstract PassiveData<?> save(boolean selected);
 
-  protected abstract PASSIVE createPassive();
+  protected abstract PASSIVE createPassive(Circuit circuit);
 }
 

@@ -1,7 +1,9 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
@@ -13,12 +15,13 @@ import java.util.List;
 public abstract class BaseGateView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends StandardIntegratedCircuitProperties>
     extends StandardIntegratedCircuitView<IC, PROPERTIES>
 {
-  public BaseGateView(CircuitEditor circuitEditor,
+  public BaseGateView(SubcircuitView subcircuitView,
+                      Circuit circuit,
                       Int2D position,
                       Rotation rotation,
                       PROPERTIES properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
   }
 
   protected static List<Integer> calculatePortOffsets(int inputCount)

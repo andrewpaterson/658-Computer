@@ -3,17 +3,18 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.VoltageColour;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.rectangle.RectangleView;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.awt.*;
@@ -26,18 +27,20 @@ public class ClockView
 {
   protected RectangleView rectangle;
 
-  public ClockView(CircuitEditor circuitEditor,
+  public ClockView(SubcircuitView subcircuitView,
+                   Circuit circuit,
                    Int2D position,
                    Rotation rotation,
                    ClockProperties properties)
   {
-    super(circuitEditor,
+    super(subcircuitView,
+          circuit,
           position,
           rotation,
           properties);
 
     createGraphics();
-    finaliseView();
+    finaliseView(circuit);
   }
 
   protected void createGraphics()
@@ -65,10 +68,13 @@ public class ClockView
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(circuitEditor.getCircuit(), properties.name,
-                               new ClockOscillatorPins(familyVoltageConfiguration, properties.inverseOut), properties.frequency_Hz);
+    return new ClockOscillator(circuit,
+                               properties.name,
+                               new ClockOscillatorPins(familyVoltageConfiguration,
+                                                       properties.inverseOut),
+                               properties.frequency_Hz);
   }
 
   @Override

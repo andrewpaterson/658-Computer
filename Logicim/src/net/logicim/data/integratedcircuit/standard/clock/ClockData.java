@@ -5,10 +5,11 @@ import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 
@@ -50,9 +51,10 @@ public class ClockData
   }
 
   @Override
-  public ClockView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public ClockView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new ClockView(circuitEditor,
+    return new ClockView(subcircuitView,
+                         circuit,
                          position,
                          rotation,
                          new ClockProperties(name,

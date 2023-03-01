@@ -5,10 +5,11 @@ import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.InverterView;
 
@@ -50,9 +51,10 @@ public class InverterData
   }
 
   @Override
-  public InverterView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public InverterView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new InverterView(circuitEditor,
+    return new InverterView(subcircuitView,
+                            circuit,
                             position,
                             rotation,
                             new BufferProperties(name,

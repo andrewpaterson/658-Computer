@@ -2,7 +2,9 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
@@ -21,12 +23,13 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
 {
   protected List<PolygonView> polygons;
 
-  public BaseBufferView(CircuitEditor circuitEditor,
+  public BaseBufferView(SubcircuitView subcircuitView,
+                        Circuit circuit,
                         Int2D position,
                         Rotation rotation,
                         BufferProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
     polygons = null;
     createGraphics();
   }

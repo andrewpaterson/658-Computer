@@ -15,7 +15,9 @@ import java.util.Objects;
 public class ReflectivePropertyEditorDialog
     extends PropertyEditorDialog
 {
-  public ReflectivePropertyEditorDialog(Frame owner, StaticView<?> componentView, SimulatorEditor editor)
+  public ReflectivePropertyEditorDialog(Frame owner,
+                                        StaticView<?> componentView,
+                                        SimulatorEditor editor)
   {
     super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
   }

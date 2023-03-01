@@ -6,15 +6,17 @@ import net.logicim.data.port.MultiPortData;
 import net.logicim.data.port.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,30 +41,30 @@ public abstract class ComponentData<T extends ComponentView<?>>
     this.ports = ports;
   }
 
-  public T createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, boolean createConnections)
+  public T createAndLoad(SubcircuitView subcircuitView, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
   {
-    T componentView = create(circuitEditor, traceLoader);
+    T componentView = create(subcircuitView, circuit, traceLoader);
     if (createConnections)
     {
-      connectAndLoad(circuitEditor, traceLoader, componentView);
+      connectAndLoad(subcircuitView, simulation, traceLoader, componentView);
     }
 
     if (selected)
     {
-      circuitEditor.select(componentView);
+      subcircuitView.select(componentView);
     }
     return componentView;
   }
 
-  protected void connectAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
+  protected void connectAndLoad(SubcircuitView subcircuitView, Simulation simulation, TraceLoader traceLoader, T componentView)
   {
-    componentView.createConnections(circuitEditor);
-    componentView.enable(circuitEditor.getSimulation());
+    componentView.createConnections(subcircuitView);
+    componentView.enable(simulation);
 
-    loadPorts(circuitEditor, traceLoader, componentView);
+    loadPorts(traceLoader, componentView, simulation);
   }
 
-  protected void loadPorts(CircuitEditor circuitEditor, TraceLoader traceLoader, T componentView)
+  protected void loadPorts(TraceLoader traceLoader, T componentView, Simulation simulation)
   {
     List<PortView> portViews = componentView.getPorts();
     for (int i = 0; i < ports.size(); i++)
@@ -78,12 +80,12 @@ public abstract class ComponentData<T extends ComponentView<?>>
         Trace trace = traceLoader.create(portData.traceId);
         port.connect(trace);
 
-        loadPort(circuitEditor, portData, port);
+        loadPort(simulation, portData, port);
       }
     }
   }
 
-  protected void loadPort(CircuitEditor circuitEditor, PortData portData, Port port)
+  protected void loadPort(Simulation simulation, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -92,7 +94,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
       Map<Long, PortEvent> portEventMap = new HashMap<>();
       for (PortEventData<?> eventData : logicPortData.events)
       {
-        PortEvent portEvent = eventData.create(logicPort, circuitEditor.getTimeline());
+        PortEvent portEvent = eventData.create(logicPort, simulation.getTimeline());
         portEventMap.put(eventData.id, portEvent);
       }
 
@@ -101,13 +103,13 @@ public abstract class ComponentData<T extends ComponentView<?>>
         PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
         if (outputPortEvent == null)
         {
-          outputPortEvent = logicPortData.output.create(logicPort, circuitEditor.getTimeline());
+          outputPortEvent = logicPortData.output.create(logicPort, simulation.getTimeline());
         }
         logicPort.setOutput(outputPortEvent);
       }
     }
   }
 
-  protected abstract T create(CircuitEditor circuitEditor, TraceLoader traceLoader);
+  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader);
 }
 

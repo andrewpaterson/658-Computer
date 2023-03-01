@@ -1,5 +1,6 @@
 package net.logicim.ui.property;
 
+import net.logicim.domain.common.Circuit;
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
@@ -31,6 +32,7 @@ public abstract class PropertyEditorDialog
   protected SimulatorEditor editor;
   protected StaticView<?> componentView;
   protected PropertiesPanel propertiesPanel;
+  protected  Circuit circuit;
 
   public PropertyEditorDialog(Frame owner, String title, Dimension dimension, SimulatorEditor editor, StaticView<?> componentView)
   {
@@ -39,6 +41,7 @@ public abstract class PropertyEditorDialog
     this.dimension = dimension;
     setSize(dimension);
     this.editor = editor;
+    this.circuit = this.editor.getCircuitEditor().getCircuit();
     this.componentView = componentView;
 
     addKeyAndContainerListenerRecursively(this);
@@ -139,7 +142,7 @@ public abstract class PropertyEditorDialog
 
     if (newComponentProperties != null)
     {
-      editor.addEditorEvent(new PropertyEditEvent(componentView, newComponentProperties));
+      editor.addEditorEvent(new PropertyEditEvent(componentView, newComponentProperties, editor.getCircuitEditor().getCurrentSubcircuitView(), circuit));
     }
 
     close();

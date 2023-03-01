@@ -6,8 +6,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.wire.Splitter;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
@@ -16,7 +18,6 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.List;
@@ -34,15 +35,16 @@ public class SplitterView
   protected List<PortView> endPortViews;
   protected PortView startPortView;
 
-  public SplitterView(CircuitEditor circuitEditor,
+  public SplitterView(SubcircuitView subcircuitView,
+                      Circuit circuit,
                       Int2D position,
                       Rotation rotation,
                       SplitterProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
 
     createGraphics();
-    finaliseView();
+    finaliseView(circuit);
   }
 
   @Override
@@ -333,9 +335,9 @@ public class SplitterView
   }
 
   @Override
-  protected Splitter createPassive()
+  protected Splitter createPassive(Circuit circuit)
   {
-    return new Splitter(circuitEditor.getCircuit(),
+    return new Splitter(circuit,
                         properties.name,
                         properties.bitWidth);
   }

@@ -5,8 +5,10 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -15,7 +17,6 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.text.TextView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -45,22 +46,24 @@ public class TunnelView
   protected String sanitisedName;
   private Int2D startPosition;
 
-  public TunnelView(CircuitEditor circuitEditor,
+  public TunnelView(SubcircuitView subcircuitView,
+                    Circuit circuit,
                     Int2D position,
                     Rotation rotation,
                     TunnelProperties properties)
   {
-    this(circuitEditor, position, rotation, new BoundingBox(), new BoundingBox(), properties);
+    this(subcircuitView, circuit, position, rotation, new BoundingBox(), new BoundingBox(), properties);
   }
 
-  public TunnelView(CircuitEditor circuitEditor,
+  public TunnelView(SubcircuitView subcircuitView,
+                    Circuit circuit,
                     Int2D position,
                     Rotation rotation,
                     BoundingBox boundingBox,
                     BoundingBox selectionBox,
                     TunnelProperties properties)
   {
-    super(circuitEditor, position, rotation, boundingBox, selectionBox, properties);
+    super(subcircuitView, circuit, position, rotation, boundingBox, selectionBox, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
     this.connections.add(null);
@@ -69,11 +72,11 @@ public class TunnelView
     this.endCache = new PointGridCache(new Int2D());
     this.traces = new ArrayList<>();
     this.sanitisedName = createSanitisedName(properties);
-    this.tunnels = circuitEditor.addTunnel(this);
+    this.tunnels = subcircuitView.addTunnel(this);
     this.startPosition = new Int2D(0, 0);
     this.endPosition = createGraphics();
 
-    finaliseView();
+    finaliseView(circuit);
   }
 
   protected String createSanitisedName(TunnelProperties properties)
@@ -129,17 +132,17 @@ public class TunnelView
     return endPosition;
   }
 
-  public List<ConnectionView> createConnections(CircuitEditor circuitEditor)
+  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
   {
     updateGridCache();
 
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    ConnectionView startConnection = circuitEditor.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this);
+    ConnectionView startConnection = subcircuitView.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this);
     this.connections.set(0, startConnection);
     connectionViews.add(startConnection);
     if (properties.doubleSided)
     {
-      ConnectionView endConnection = circuitEditor.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this);
+      ConnectionView endConnection = subcircuitView.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this);
       this.connections.set(1, endConnection);
       connectionViews.add(endConnection);
     }
@@ -245,7 +248,7 @@ public class TunnelView
   }
 
   @Override
-  protected void finaliseView()
+  protected void finaliseView(Circuit circuit)
   {
     finalised = true;
     enabled = true;

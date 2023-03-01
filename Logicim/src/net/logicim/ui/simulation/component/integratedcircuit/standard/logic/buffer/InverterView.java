@@ -2,23 +2,25 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.InverterData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
-import net.logicim.ui.simulation.CircuitEditor;
 
 public class InverterView
     extends BaseBufferView<Inverter>
 {
-  public InverterView(CircuitEditor circuitEditor,
+  public InverterView(SubcircuitView subcircuitView,
+                      Circuit circuit,
                       Int2D position,
                       Rotation rotation,
                       BufferProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
-    finaliseView();
+    super(subcircuitView, circuit, position, rotation, properties);
+    finaliseView(circuit);
   }
 
   @Override
@@ -29,9 +31,9 @@ public class InverterView
   }
 
   @Override
-  protected Inverter createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Inverter createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Inverter(circuitEditor.getCircuit(),
+    return new Inverter(circuit,
                         properties.name,
                         new BufferPins(properties.inputWidth * properties.inputCount,
                                        familyVoltageConfiguration));

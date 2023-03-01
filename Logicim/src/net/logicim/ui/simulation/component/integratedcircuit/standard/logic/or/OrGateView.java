@@ -2,23 +2,25 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.or.OrGateData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class OrGateView
     extends BaseOrGateView<OrGate>
 {
-  public OrGateView(CircuitEditor circuitEditor,
+  public OrGateView(SubcircuitView subcircuitView,
+                    Circuit circuit,
                     Int2D position,
                     Rotation rotation,
                     LogicGateProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
-    finaliseView();
+    super(subcircuitView, circuit, position, rotation, properties);
+    finaliseView(circuit);
   }
 
   @Override
@@ -29,9 +31,9 @@ public class OrGateView
   }
 
   @Override
-  protected OrGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected OrGate createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new OrGate(circuitEditor.getCircuit(),
+    return new OrGate(circuit,
                       properties.name,
                       new OrGatePins(properties.inputWidth * properties.inputCount,
                                      familyVoltageConfiguration));

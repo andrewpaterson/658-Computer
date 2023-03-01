@@ -31,7 +31,7 @@ public class StartEditInComponent
   public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
   {
     CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
-    return new MoveComponents(circuitEditor.getSelection().getSelection(), false);
+    return new MoveComponents(circuitEditor.getCurrentSelection().getSelection(), false);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class StartEditInComponent
   public void done(float x, float y, SimulatorEdit simulatorEdit)
   {
     CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
-    List<View> previousSelection = circuitEditor.getSelection().getSelection();
+    List<View> previousSelection = circuitEditor.getCurrentSelection().getSelection();
     boolean hasSelectionChanged = SelectionEdit.calculateSelection(circuitEditor, new Float2D(x, y), new Float2D(x, y), keyboardButtons, new HashSet<>(previousSelection));
     if (hasSelectionChanged)
     {

@@ -5,15 +5,16 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,15 +26,19 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 {
   protected List<PortView> ports;
 
-  public ComponentView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
+  public ComponentView(SubcircuitView subcircuitView,
+                       Circuit circuit,
+                       Int2D position,
+                       Rotation rotation,
+                       PROPERTIES properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
     this.properties = properties;
 
     this.ports = new ArrayList<>();
   }
 
-  protected void finaliseView()
+  protected void finaliseView(Circuit circuit)
   {
     finalised = true;
 
@@ -76,14 +81,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.properties = properties;
   }
 
-  public List<ConnectionView> createConnections(CircuitEditor circuitEditor)
+  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = getPorts();
     for (PortView portView : portViews)
     {
       Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = circuitEditor.getOrAddConnection(portPosition, this);
+      ConnectionView connectionView = subcircuitView.getOrAddConnection(portPosition, this);
       portView.setConnection(connectionView);
       connectionViews.add(connectionView);
     }

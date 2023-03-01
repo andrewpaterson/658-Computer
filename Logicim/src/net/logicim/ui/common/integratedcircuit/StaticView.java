@@ -5,7 +5,9 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
@@ -23,7 +25,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 {
   protected PROPERTIES properties;
 
-  protected CircuitEditor circuitEditor;
+  protected SubcircuitView subcircuitView;
   protected Int2D position;
   protected Rotation rotation;
   protected BoundingBox boundingBox;
@@ -32,16 +34,26 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   protected boolean finalised;
 
-  public StaticView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
+  public StaticView(SubcircuitView subcircuitView,
+                    Circuit circuit,
+                    Int2D position,
+                    Rotation rotation,
+                    PROPERTIES properties)
   {
-    this(circuitEditor, position, rotation, new BoundingBox(), new BoundingBox(), properties);
+    this(subcircuitView, circuit, position, rotation, new BoundingBox(), new BoundingBox(), properties);
   }
 
-  public StaticView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, BoundingBox boundingBox, BoundingBox selectionBox, PROPERTIES properties)
+  public StaticView(SubcircuitView subcircuitView,
+                    Circuit circuit,
+                    Int2D position,
+                    Rotation rotation,
+                    BoundingBox boundingBox,
+                    BoundingBox selectionBox,
+                    PROPERTIES properties)
   {
     this.properties = properties;
 
-    this.circuitEditor = circuitEditor;
+    this.subcircuitView = subcircuitView;
     this.position = position.clone();
     this.rotation = rotation;
     this.boundingBox = boundingBox;
@@ -232,21 +244,21 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor)
+  public StaticView<PROPERTIES> duplicate(SubcircuitView subcircuitView, Circuit circuit)
   {
-    return duplicate(circuitEditor, (PROPERTIES) properties.duplicate());
+    return duplicate(subcircuitView, circuit, (PROPERTIES) properties.duplicate());
   }
 
-  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor, PROPERTIES properties)
+  public StaticView<PROPERTIES> duplicate(SubcircuitView subcircuitView, Circuit circuit, PROPERTIES properties)
   {
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    StaticView<PROPERTIES> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
+    StaticView<PROPERTIES> newComponentView = viewFactory.create(subcircuitView, circuit, position, rotation, properties);
 
     return newComponentView;
   }
 
-  protected abstract void finaliseView();
+  protected abstract void finaliseView(Circuit circuit);
 
   public abstract boolean isEnabled();
 
@@ -264,6 +276,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disconnect(Simulation simulation);
 
-  public abstract List<ConnectionView> createConnections(CircuitEditor circuitEditor);
+  public abstract List<ConnectionView> createConnections(SubcircuitView subcircuitView);
 }
 

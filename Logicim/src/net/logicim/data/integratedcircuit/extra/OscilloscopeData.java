@@ -5,10 +5,11 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 
@@ -50,9 +51,10 @@ public class OscilloscopeData
   }
 
   @Override
-  public OscilloscopeView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public OscilloscopeView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new OscilloscopeView(circuitEditor,
+    return new OscilloscopeView(subcircuitView,
+                                circuit,
                                 position,
                                 rotation,
                                 new OscilloscopeProperties(name,

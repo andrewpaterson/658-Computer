@@ -5,7 +5,6 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
-import net.logicim.domain.common.state.State;
 
 import java.util.List;
 

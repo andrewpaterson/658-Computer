@@ -5,11 +5,12 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,25 +24,25 @@ public class TraceView
   protected List<ConnectionView> connections;
   protected List<Trace> traces;
 
-  public TraceView(CircuitEditor circuitEditor, Line line)
+  public TraceView(SubcircuitView subcircuitView, Line line)
   {
-    this(circuitEditor, line.getStart(), line.getEnd());
+    this(subcircuitView, line.getStart(), line.getEnd());
   }
 
-  public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end)
+  public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end)
   {
-    this(circuitEditor, start, end, true);
+    this(subcircuitView, start, end, true);
   }
 
-  public TraceView(CircuitEditor circuitEditor, Int2D start, Int2D end, boolean addConnections)
+  public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end, boolean addConnections)
   {
     super();
     this.line = new Line(start, end);
     connections = new ArrayList<>(2);
     if (addConnections)
     {
-      connections.add(circuitEditor.getOrAddConnection(start, this));
-      connections.add(circuitEditor.getOrAddConnection(end, this));
+      connections.add(subcircuitView.getOrAddConnection(start, this));
+      connections.add(subcircuitView.getOrAddConnection(end, this));
     }
     else
     {
@@ -49,7 +50,7 @@ public class TraceView
       connections.add(null);
     }
     this.traces = new ArrayList<>();
-    circuitEditor.addTraceView(this);
+    subcircuitView.addTraceView(this);
   }
 
   public ConnectionView getConnectionsInGrid(int x, int y)
@@ -212,9 +213,9 @@ public class TraceView
   }
 
   @Override
-  public View duplicate(CircuitEditor circuitEditor)
+  public View duplicate(SubcircuitView subcircuitView, Circuit circuit)
   {
-    TraceView traceView = new TraceView(circuitEditor,
+    TraceView traceView = new TraceView(subcircuitView,
                                         line.getStart(),
                                         line.getEnd(),
                                         false);

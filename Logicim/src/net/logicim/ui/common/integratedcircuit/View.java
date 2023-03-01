@@ -1,12 +1,12 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.SaveData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.List;
@@ -54,6 +54,6 @@ public abstract class View
 
   public abstract Component getComponent();
 
-  public abstract View duplicate(CircuitEditor circuitEditor);
+  public abstract View duplicate(SubcircuitView subcircuitView, Circuit circuit);
 }
 

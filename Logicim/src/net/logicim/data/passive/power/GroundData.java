@@ -4,8 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.passive.power.GroundProperties;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
 
@@ -31,9 +32,10 @@ public class GroundData
           selected);
   }
 
-  protected GroundView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  protected GroundView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new GroundView(circuitEditor,
+    return new GroundView(subcircuitView,
+                          circuit,
                           position,
                           rotation,
                           new GroundProperties(name));

@@ -2,11 +2,12 @@ package net.logicim.ui.simulation.component.decorative.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,17 +18,18 @@ public abstract class DecorativeView<T extends DecorativeProperties>
 {
   protected boolean enabled;
 
-  public DecorativeView(CircuitEditor circuitEditor,
+  public DecorativeView(SubcircuitView subcircuitView,
+                        Circuit circuit,
                         Int2D position,
                         Rotation rotation,
                         T properties)
   {
-    super(circuitEditor, position, rotation, properties);
-    circuitEditor.addDecorativeView(this);
+    super(subcircuitView, circuit, position, rotation, properties);
+    subcircuitView.addDecorativeView(this);
   }
 
   @Override
-  protected void finaliseView()
+  protected void finaliseView(Circuit circuit)
   {
     finalised = true;
     enabled = false;
@@ -93,7 +95,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public List<ConnectionView> createConnections(CircuitEditor circuitEditor)
+  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
   {
     return new ArrayList<>();
   }

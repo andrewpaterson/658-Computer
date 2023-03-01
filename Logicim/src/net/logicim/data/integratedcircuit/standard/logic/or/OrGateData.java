@@ -5,10 +5,11 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 
@@ -47,9 +48,10 @@ public class OrGateData
   }
 
   @Override
-  public OrGateView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  public OrGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new OrGateView(circuitEditor,
+    return new OrGateView(subcircuitView,
+                          circuit,
                           position,
                           rotation,
                           new LogicGateProperties(name,

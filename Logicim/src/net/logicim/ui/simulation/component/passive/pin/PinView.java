@@ -4,23 +4,25 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.wire.Pin;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 public class PinView
     extends PassiveView<Pin, PinProperties>
 {
-  private PortView port;
+  protected PortView port;
 
-  public PinView(CircuitEditor circuitEditor,
+  public PinView(SubcircuitView subcircuitView,
+                 Circuit circuit,
                  Int2D position,
                  Rotation rotation,
                  PinProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
   }
 
   @Override
@@ -58,9 +60,9 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive()
+  protected Pin createPassive(Circuit circuit)
   {
-    return new Pin(circuitEditor.getCircuit(),
+    return new Pin(circuit,
                    properties.name,
                    properties.bitWidth);
   }

@@ -4,10 +4,12 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -16,7 +18,6 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,11 +37,15 @@ public class OscilloscopeView
   protected RectangleView rectangleView;
   protected float outerWidth;
 
-  public OscilloscopeView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, OscilloscopeProperties properties)
+  public OscilloscopeView(SubcircuitView subcircuitView,
+                          Circuit circuit,
+                          Int2D position,
+                          Rotation rotation,
+                          OscilloscopeProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
     createGraphics();
-    finaliseView();
+    finaliseView(circuit);
   }
 
   protected void createGraphics()
@@ -95,9 +100,9 @@ public class OscilloscopeView
   }
 
   @Override
-  protected Oscilloscope createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Oscilloscope createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Oscilloscope(circuitEditor.getCircuit(),
+    return new Oscilloscope(circuit,
                             properties.name,
                             new OscilloscopePins(properties.inputCount),
                             properties.samplingFrequency_Hz,

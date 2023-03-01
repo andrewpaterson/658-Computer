@@ -4,8 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterProperties;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
@@ -47,9 +48,10 @@ public class SplitterData
   }
 
   @Override
-  protected SplitterView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  protected SplitterView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new SplitterView(circuitEditor,
+    return new SplitterView(subcircuitView,
+                            circuit,
                             position,
                             rotation,
                             new SplitterProperties(name,

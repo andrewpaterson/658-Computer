@@ -4,11 +4,12 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 import java.awt.*;
@@ -19,11 +20,15 @@ public class LabelView
   protected TextView textView;
   protected RectangleView rectangleView;
 
-  public LabelView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, LabelProperties properties)
+  public LabelView(SubcircuitView subcircuitView,
+                   Circuit circuit,
+                   Int2D position,
+                   Rotation rotation,
+                   LabelProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
     createGraphics();
-    finaliseView();
+    finaliseView(circuit);
   }
 
   private void createGraphics()

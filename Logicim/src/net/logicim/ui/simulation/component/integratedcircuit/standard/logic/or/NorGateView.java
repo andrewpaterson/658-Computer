@@ -2,23 +2,25 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.or.NorGateData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.NorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class NorGateView
     extends BaseOrGateView<NorGate>
 {
-  public NorGateView(CircuitEditor circuitEditor,
+  public NorGateView(SubcircuitView subcircuitView,
+                     Circuit circuit,
                      Int2D position,
                      Rotation rotation,
                      LogicGateProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
-    finaliseView();
+    super(subcircuitView, circuit, position, rotation, properties);
+    finaliseView(circuit);
   }
 
   @Override
@@ -29,9 +31,9 @@ public class NorGateView
   }
 
   @Override
-  protected NorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected NorGate createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NorGate(circuitEditor.getCircuit(),
+    return new NorGate(circuit,
                        properties.name,
                        new OrGatePins(properties.inputWidth * properties.inputCount,
                                       familyVoltageConfiguration));

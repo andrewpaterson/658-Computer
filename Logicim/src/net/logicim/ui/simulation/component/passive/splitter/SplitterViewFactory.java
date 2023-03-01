@@ -2,11 +2,12 @@ package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
+import net.logicim.domain.common.Circuit;
 import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 
 import javax.swing.*;
@@ -15,9 +16,13 @@ public class SplitterViewFactory
     extends ViewFactory<SplitterView, SplitterProperties>
 {
   @Override
-  public SplitterView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public SplitterView create(SubcircuitView subcircuitView,
+                             Circuit circuit,
+                             Int2D position,
+                             Rotation rotation)
   {
-    return new SplitterView(circuitEditor,
+    return new SplitterView(subcircuitView,
+                            circuit,
                             position,
                             rotation,
                             new SplitterProperties(null,
@@ -29,9 +34,17 @@ public class SplitterViewFactory
   }
 
   @Override
-  public SplitterView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, SplitterProperties properties)
+  public SplitterView create(SubcircuitView subcircuitView,
+                             Circuit circuit,
+                             Int2D position,
+                             Rotation rotation,
+                             SplitterProperties properties)
   {
-    return new SplitterView(circuitEditor, position, rotation, properties);
+    return new SplitterView(subcircuitView,
+                            circuit,
+                            position,
+                            rotation,
+                            properties);
   }
 
   @Override

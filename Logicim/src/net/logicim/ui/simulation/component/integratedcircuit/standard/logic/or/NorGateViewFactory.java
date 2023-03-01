@@ -1,9 +1,10 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.defaults.DefaultFamily;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 
@@ -11,9 +12,13 @@ public class NorGateViewFactory
     extends ViewFactory<NorGateView, LogicGateProperties>
 {
   @Override
-  public NorGateView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public NorGateView create(SubcircuitView subcircuitView,
+                            Circuit circuit,
+                            Int2D position,
+                            Rotation rotation)
   {
-    return create(circuitEditor,
+    return create(subcircuitView,
+                  circuit,
                   position,
                   rotation,
                   new LogicGateProperties("",
@@ -24,9 +29,17 @@ public class NorGateViewFactory
   }
 
   @Override
-  public NorGateView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, LogicGateProperties properties)
+  public NorGateView create(SubcircuitView subcircuitView,
+                            Circuit circuit,
+                            Int2D position,
+                            Rotation rotation,
+                            LogicGateProperties properties)
   {
-    return new NorGateView(circuitEditor, position, rotation, properties);
+    return new NorGateView(subcircuitView,
+                           circuit,
+                           position,
+                           rotation,
+                           properties);
   }
 
   @Override

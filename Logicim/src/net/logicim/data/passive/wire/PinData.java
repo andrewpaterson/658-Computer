@@ -4,8 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.passive.pin.PinProperties;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
@@ -32,9 +33,10 @@ public class PinData
   }
 
   @Override
-  protected PinView create(CircuitEditor circuitEditor, TraceLoader traceLoader)
+  protected PinView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
   {
-    return new PinView(circuitEditor,
+    return new PinView(subcircuitView,
+                       circuit,
                        position,
                        rotation,
                        new PinProperties(name,

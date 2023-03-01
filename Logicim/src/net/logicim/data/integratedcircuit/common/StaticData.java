@@ -3,9 +3,11 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 public abstract class StaticData<T extends StaticView<?>>
     extends ReflectiveData
@@ -36,8 +38,12 @@ public abstract class StaticData<T extends StaticView<?>>
     this.selected = selected;
   }
 
-  public abstract T createAndLoad(CircuitEditor circuitEditor, TraceLoader traceLoader, boolean createConnections);
+  public abstract T createAndLoad(SubcircuitView subcircuitView,
+                                  TraceLoader traceLoader,
+                                  boolean createConnections,
+                                  Simulation simulation,
+                                  Circuit circuit);
 
-  protected abstract T create(CircuitEditor circuitEditor, TraceLoader traceLoader);
+  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader);
 }
 

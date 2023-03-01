@@ -6,16 +6,17 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.state.State;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,24 +27,25 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 {
   protected IC integratedCircuit;
 
-  public IntegratedCircuitView(CircuitEditor circuitEditor,
+  public IntegratedCircuitView(SubcircuitView subcircuitView,
+                               Circuit circuit,
                                Int2D position,
                                Rotation rotation,
                                PROPERTIES properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
     if (properties.family == null)
     {
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
     }
 
-    circuitEditor.addIntegratedCircuitView(this);
+    subcircuitView.addIntegratedCircuitView(this);
   }
 
-  protected void createComponent()
+  protected void createComponent(Circuit circuit)
   {
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    this.integratedCircuit = createIntegratedCircuit(familyVoltageConfiguration);
+    this.integratedCircuit = createIntegratedCircuit(circuit, familyVoltageConfiguration);
     this.integratedCircuit.disable();
   }
 
@@ -123,11 +125,11 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  protected void finaliseView()
+  protected void finaliseView(Circuit circuit)
   {
-    createComponent();
+    createComponent(circuit);
     createPortViews();
-    super.finaliseView();
+    super.finaliseView(circuit);
     validateComponent();
     validatePorts();
   }
@@ -162,7 +164,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return integratedCircuit;
   }
 
-  protected abstract IC createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration);
+  protected abstract IC createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 }

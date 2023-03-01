@@ -2,23 +2,25 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.xor.XnorGateData;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XnorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGatePins;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class XnorGateView
     extends BaseXorGateView<XnorGate>
 {
-  public XnorGateView(CircuitEditor circuitEditor,
+  public XnorGateView(SubcircuitView subcircuitView,
+                      Circuit circuit,
                       Int2D position,
                       Rotation rotation,
                       LogicGateProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
-    finaliseView();
+    super(subcircuitView, circuit, position, rotation, properties);
+    finaliseView(circuit);
   }
 
   @Override
@@ -29,9 +31,9 @@ public class XnorGateView
   }
 
   @Override
-  protected XnorGate createIntegratedCircuit(FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected XnorGate createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XnorGate(circuitEditor.getCircuit(),
+    return new XnorGate(circuit,
                         properties.name,
                         new XorGatePins(properties.inputWidth * properties.inputCount,
                                         familyVoltageConfiguration));

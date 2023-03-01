@@ -2,17 +2,22 @@ package net.logicim.ui.simulation.component.decorative.label;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.domain.common.Circuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 
 public class LabelViewFactory
     extends ViewFactory<LabelView, LabelProperties>
 {
   @Override
-  public LabelView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation)
+  public LabelView create(SubcircuitView subcircuitView,
+                          Circuit circuit,
+                          Int2D position,
+                          Rotation rotation)
   {
-    return new LabelView(circuitEditor,
+    return new LabelView(subcircuitView,
+                         circuit,
                          position,
                          rotation,
                          new LabelProperties("  ",
@@ -23,9 +28,17 @@ public class LabelViewFactory
   }
 
   @Override
-  public LabelView create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, LabelProperties properties)
+  public LabelView create(SubcircuitView subcircuitView,
+                          Circuit circuit,
+                          Int2D position,
+                          Rotation rotation,
+                          LabelProperties properties)
   {
-    return new LabelView(circuitEditor, position, rotation, properties);
+    return new LabelView(subcircuitView,
+                         circuit,
+                         position,
+                         rotation,
+                         properties);
   }
 
   @Override

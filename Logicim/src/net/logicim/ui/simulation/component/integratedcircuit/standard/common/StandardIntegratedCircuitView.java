@@ -1,8 +1,10 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -21,9 +23,13 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   protected LineView vccLine;
   protected LineView gndLine;
 
-  public StandardIntegratedCircuitView(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties)
+  public StandardIntegratedCircuitView(SubcircuitView subcircuitView,
+                                       Circuit circuit,
+                                       Int2D position,
+                                       Rotation rotation,
+                                       PROPERTIES properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
   }
 
   protected void createPortViews()

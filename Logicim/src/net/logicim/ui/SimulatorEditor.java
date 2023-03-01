@@ -155,7 +155,7 @@ public class SimulatorEditor
           }
           else if ((hoverConnectionView != null))
           {
-            edit = new StartEditInPort(keyboardButtons);
+            edit = new StartEditInPort(keyboardButtons, getCircuitEditor().getCircuitSimulation());
           }
           else
           {
@@ -231,7 +231,7 @@ public class SimulatorEditor
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
 
-    for (View view : circuitEditor.getSelection().getSelection())
+    for (View view : circuitEditor.getCurrentSelection().getSelection())
     {
       if (view instanceof StaticView)
       {
@@ -266,8 +266,9 @@ public class SimulatorEditor
         simulatorEdit = null;
       }
 
-      circuitEditor.getSelection().clearSelection();
-      StaticView<?> staticView = viewFactory.create(circuitEditor,
+      circuitEditor.getCurrentSelection().clearSelection();
+      StaticView<?> staticView = viewFactory.create(circuitEditor.getCurrentSubcircuitView(),
+                                                    circuitEditor.getCircuit(),
                                                     new Int2D(viewport.transformScreenToGridX(position.x),
                                                               viewport.transformScreenToGridY(position.y)),
                                                     creationRotation);
@@ -306,7 +307,7 @@ public class SimulatorEditor
       simulatorEdit.paint(graphics, viewport);
     }
 
-    circuitEditor.getSelection().paint(graphics, viewport);
+    circuitEditor.getCurrentSelection().paint(graphics, viewport);
   }
 
   protected void drawConnectionDetails(Graphics2D graphics)
@@ -392,7 +393,7 @@ public class SimulatorEditor
 
   private void calculateHighlightedPort()
   {
-    if ((simulatorEdit == null) && circuitEditor.isSelectionEmpty())
+    if ((simulatorEdit == null) && circuitEditor.isCurrentSelectionEmpty())
     {
       Int2D mousePosition = this.mousePosition.get();
       if (mousePosition != null)
@@ -402,7 +403,7 @@ public class SimulatorEditor
         {
           int x = viewport.transformScreenToGridX(mousePosition.x);
           int y = viewport.transformScreenToGridY(mousePosition.y);
-          hoverConnectionView = circuitEditor.getConnection(x, y);
+          hoverConnectionView = circuitEditor.getConnectionInCurrentSubcircuit(x, y);
         }
         else
         {
@@ -432,7 +433,7 @@ public class SimulatorEditor
 
   private TraceView getHoverTrace(Int2D mousePosition)
   {
-    return circuitEditor.getTraceViewInScreenSpace(viewport, mousePosition);
+    return circuitEditor.getCurrentSubcircuitView().getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
   private StaticView<?> calculateHoverView(Int2D mousePosition)
@@ -556,7 +557,7 @@ public class SimulatorEditor
       }
       else
       {
-        List<View> selection = getCircuitEditor().getSelection().getSelection();
+        List<View> selection = getCircuitEditor().getCurrentSelection().getSelection();
         if (!selection.isEmpty())
         {
           rotateSelection(right, new MoveComponents(selection, false));
@@ -605,7 +606,7 @@ public class SimulatorEditor
 
   protected void clearSelection()
   {
-    circuitEditor.getSelection().clearSelection();
+    circuitEditor.getCurrentSelection().clearSelection();
   }
 
   public void toggleTunSimulation()
@@ -627,7 +628,7 @@ public class SimulatorEditor
 
   protected boolean editActionDeleteComponentIfPossible()
   {
-    if (circuitEditor.getSelection().isSelectionEmpty())
+    if (circuitEditor.getCurrentSelection().isSelectionEmpty())
     {
       if (hoverConnectionView != null)
       {
@@ -750,20 +751,14 @@ public class SimulatorEditor
     }
   }
 
-  public void replaceSelection(View newView, View oldView)
+  public void replaceSelectionInCurrentSubcircuitView(View newView, View oldView)
   {
     circuitEditor.replaceSelection(newView, oldView);
   }
 
   private List<View> duplicateViews(List<View> views)
   {
-    ArrayList<View> duplicates = new ArrayList<>();
-    for (View view : views)
-    {
-      View duplicate = view.duplicate(circuitEditor);
-      duplicates.add(duplicate);
-    }
-    return duplicates;
+    return circuitEditor.duplicateViews(views);
   }
 
   public void editActionCopy()
@@ -773,7 +768,7 @@ public class SimulatorEditor
       Int2D position = mousePosition.get();
       if (position != null)
       {
-        List<View> selection = circuitEditor.getSelection().getSelection();
+        List<View> selection = circuitEditor.getCurrentSelection().getSelection();
         if (selection.size() > 0)
         {
           clipboard = circuitEditor.copyViews(selection);
@@ -789,7 +784,7 @@ public class SimulatorEditor
       Int2D position = mousePosition.get();
       if (position != null)
       {
-        List<View> selection = circuitEditor.getSelection().getSelection();
+        List<View> selection = circuitEditor.getCurrentSelection().getSelection();
         if (selection.size() > 0)
         {
           clipboard = circuitEditor.copyViews(selection);
@@ -803,7 +798,7 @@ public class SimulatorEditor
   {
     if (simulatorEdit == null)
     {
-      List<View> selection = circuitEditor.getSelection().getSelection();
+      List<View> selection = circuitEditor.getCurrentSelection().getSelection();
       if (selection.size() > 0)
       {
         List<View> duplicates = duplicateViews(selection);
@@ -823,7 +818,7 @@ public class SimulatorEditor
     {
       if (clipboard != null)
       {
-        List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents(), false);
+        List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents());
         Int2D center = Selection.getViewsCenter(views);
         if (center != null)
         {
@@ -842,7 +837,7 @@ public class SimulatorEditor
 
       if (position != null)
       {
-        List<View> selection = circuitEditor.getSelection().getSelection();
+        List<View> selection = circuitEditor.getCurrentSelection().getSelection();
         if (selection.size() > 0)
         {
           simulatorEdit = createStatefulEditor(new MoveComponents(selection, false), toFloatingGridPosition(position.x, position.y));

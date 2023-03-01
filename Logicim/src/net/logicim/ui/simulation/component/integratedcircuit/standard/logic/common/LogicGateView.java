@@ -1,7 +1,9 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -21,12 +23,13 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   public static final int OR_ARC_BOTTOM_LENGTH = 58;
   public static final int OR_ARC_FILL_OFFSET = 6;
 
-  public LogicGateView(CircuitEditor circuitEditor,
+  public LogicGateView(SubcircuitView subcircuitView,
+                       Circuit circuit,
                        Int2D position,
                        Rotation rotation,
                        LogicGateProperties properties)
   {
-    super(circuitEditor, position, rotation, properties);
+    super(subcircuitView, circuit, position, rotation, properties);
   }
 
   protected void createPortViews(boolean negateOutput, int inputOffset)

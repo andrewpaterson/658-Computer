@@ -64,7 +64,7 @@ public class WirePull
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      editAction.getCircuitEditor().getCurrentSubcircuitView().createTraceViews(Line.lines(firstLine, secondLine), simulation);
+      editAction.getCircuitEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine), simulation);
 
       editAction.pushUndo();
     }

@@ -2,28 +2,28 @@ package net.logicim.ui.property;
 
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 public class PropertyEditEvent
     extends SimulatorEditorEvent
 {
   protected StaticView<ComponentProperties> componentView;
   protected ComponentProperties newComponentProperties;
-  protected SubcircuitView subcircuitView;
+  protected SubcircuitEditor subcircuitEditor;
   protected Circuit circuit;
 
   public PropertyEditEvent(StaticView<?> componentView,
                            ComponentProperties newComponentProperties,
-                           SubcircuitView subcircuitView,
+                           SubcircuitEditor subcircuitEditor,
                            Circuit circuit)
   {
     this.componentView = (StaticView<ComponentProperties>) componentView;
     this.newComponentProperties = newComponentProperties;
-    this.subcircuitView = subcircuitView;
+    this.subcircuitEditor = subcircuitEditor;
     this.circuit = circuit;
   }
 
@@ -39,7 +39,7 @@ public class PropertyEditEvent
   protected StaticView<?> recreateComponentView(ComponentProperties properties, SimulatorEditor editor)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
-    StaticView<?> newComponentView = componentView.duplicate(subcircuitView, circuit, properties);
+    StaticView<?> newComponentView = componentView.duplicate(subcircuitEditor.getSubcircuitView(), circuit, properties);
     circuitEditor.deleteComponentView(this.componentView);
     circuitEditor.placeComponentView(newComponentView);
 

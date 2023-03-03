@@ -17,6 +17,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,17 +42,17 @@ public abstract class ComponentData<T extends ComponentView<?>>
     this.ports = ports;
   }
 
-  public T createAndLoad(SubcircuitView subcircuitView, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
+  public T createAndLoad(SubcircuitEditor subcircuitEditor, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
   {
-    T componentView = create(subcircuitView, circuit, traceLoader);
+    T componentView = create(subcircuitEditor.getSubcircuitView(), circuit, traceLoader);
     if (createConnections)
     {
-      connectAndLoad(subcircuitView, simulation, traceLoader, componentView);
+      connectAndLoad(subcircuitEditor.getSubcircuitView(), simulation, traceLoader, componentView);
     }
 
     if (selected)
     {
-      subcircuitView.select(componentView);
+      subcircuitEditor.select(componentView);
     }
     return componentView;
   }

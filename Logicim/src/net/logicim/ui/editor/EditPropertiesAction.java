@@ -22,7 +22,7 @@ public class EditPropertiesAction
     StaticView<?> componentView = editor.getHoverComponentView();
     if (componentView == null)
     {
-      componentView = editor.getCircuitEditor().getCurrentSubcircuitView().getSingleSelectionStaticView();
+      componentView = editor.getCircuitEditor().getCurrentSubcircuitEditor().getSingleSelectionStaticView();
     }
 
     if (componentView != null)

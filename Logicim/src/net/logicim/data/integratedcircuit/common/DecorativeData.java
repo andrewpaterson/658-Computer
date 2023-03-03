@@ -6,6 +6,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 public abstract class DecorativeData<T extends DecorativeView<?>>
@@ -15,13 +16,17 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
   {
   }
 
-  public T createAndLoad(SubcircuitView subcircuitView, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
+  public T createAndLoad(SubcircuitEditor subcircuitEditor,
+                         TraceLoader traceLoader,
+                         boolean createConnections,
+                         Simulation simulation,
+                         Circuit circuit)
   {
-    T componentView = create(subcircuitView, circuit, traceLoader);
+    T componentView = create(subcircuitEditor.getSubcircuitView(), circuit, traceLoader);
 
     if (selected)
     {
-      subcircuitView.select(componentView);
+      subcircuitEditor.select(componentView);
     }
     return componentView;
   }

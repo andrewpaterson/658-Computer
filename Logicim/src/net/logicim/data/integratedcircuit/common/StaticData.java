@@ -8,6 +8,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 public abstract class StaticData<T extends StaticView<?>>
     extends ReflectiveData
@@ -38,7 +39,7 @@ public abstract class StaticData<T extends StaticView<?>>
     this.selected = selected;
   }
 
-  public abstract T createAndLoad(SubcircuitView subcircuitView,
+  public abstract T createAndLoad(SubcircuitEditor subcircuitEditor,
                                   TraceLoader traceLoader,
                                   boolean createConnections,
                                   Simulation simulation,

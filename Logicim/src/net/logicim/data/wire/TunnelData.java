@@ -10,6 +10,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.wire.TunnelProperties;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 public class TunnelData
     extends StaticData<TunnelView>
@@ -41,9 +42,9 @@ public class TunnelData
   }
 
   @Override
-  public TunnelView createAndLoad(SubcircuitView subcircuitView, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
+  public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
   {
-    TunnelView tunnelView = new TunnelView(subcircuitView,
+    TunnelView tunnelView = new TunnelView(subcircuitEditor.getSubcircuitView(),
                                            circuit,
                                            position,
                                            rotation,
@@ -52,8 +53,8 @@ public class TunnelData
                                            new TunnelProperties(name, doubleSided));
     if (createConnections)
     {
-      tunnelView.createConnections(subcircuitView);
-      WireDataHelper.wireConnect(subcircuitView,
+      tunnelView.createConnections(subcircuitEditor.getSubcircuitView());
+      WireDataHelper.wireConnect(subcircuitEditor,
                                  simulation,
                                  traceLoader,
                                  tunnelView,

@@ -433,7 +433,7 @@ public class SimulatorEditor
 
   private TraceView getHoverTrace(Int2D mousePosition)
   {
-    return circuitEditor.getCurrentSubcircuitView().getTraceViewInScreenSpace(viewport, mousePosition);
+    return circuitEditor.getCurrentSubcircuitEditor().getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
   private StaticView<?> calculateHoverView(Int2D mousePosition)
@@ -818,7 +818,7 @@ public class SimulatorEditor
     {
       if (clipboard != null)
       {
-        List<View> views = circuitEditor.loadViews(clipboard.getTraces(), clipboard.getComponents());
+        List<View> views = circuitEditor.pasteClipboardViews(clipboard.getTraces(), clipboard.getComponents());
         Int2D center = Selection.getViewsCenter(views);
         if (center != null)
         {

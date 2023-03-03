@@ -142,7 +142,7 @@ public abstract class PropertyEditorDialog
 
     if (newComponentProperties != null)
     {
-      editor.addEditorEvent(new PropertyEditEvent(componentView, newComponentProperties, editor.getCircuitEditor().getCurrentSubcircuitView(), circuit));
+      editor.addEditorEvent(new PropertyEditEvent(componentView, newComponentProperties, editor.getCircuitEditor().getCurrentSubcircuitEditor(), circuit));
     }
 
     close();

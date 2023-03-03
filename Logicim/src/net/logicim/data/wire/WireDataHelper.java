@@ -2,15 +2,15 @@ package net.logicim.data.wire;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.wire.WireView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class WireDataHelper
 {
-  protected static void wireConnect(SubcircuitView subcircuitView,
+  protected static void wireConnect(SubcircuitEditor subcircuitEditor,
                                     Simulation simulation,
                                     TraceLoader traceLoader,
                                     WireView wireView,
@@ -28,7 +28,7 @@ public abstract class WireDataHelper
 
     if (selected)
     {
-      subcircuitView.select(wireView.getView());
+      subcircuitEditor.select(wireView.getView());
     }
   }
 }

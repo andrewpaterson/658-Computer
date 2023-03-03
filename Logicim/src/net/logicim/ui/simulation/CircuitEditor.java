@@ -33,17 +33,17 @@ public class CircuitEditor
 {
   protected CircuitSimulation simulation;
 
-  protected SubcircuitView currentSubcircuitView;
+  protected SubcircuitEditor currentSubcircuitEditor;
 
   public CircuitEditor()
   {
     this.simulation = new CircuitSimulation();
-    this.currentSubcircuitView = new SubcircuitView();
+    this.currentSubcircuitEditor = new SubcircuitEditor();
   }
 
   private List<View> getAllViews()
   {
-    return currentSubcircuitView.getAllViews();
+    return currentSubcircuitEditor.getAllViews();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -77,7 +77,7 @@ public class CircuitEditor
     {
       Set<TraceView> traceViews = new LinkedHashSet<>();
       traceViews.add(traceView);
-      currentSubcircuitView.deleteTraceViews(traceViews, simulation);
+      currentSubcircuitEditor.deleteTraceViews(traceViews, simulation);
     }
     else
     {
@@ -99,7 +99,7 @@ public class CircuitEditor
 
     if (traceViews.size() > 0)
     {
-      currentSubcircuitView.deleteTraceViews(traceViews, simulation);
+      currentSubcircuitEditor.deleteTraceViews(traceViews, simulation);
       return true;
     }
     else
@@ -158,44 +158,14 @@ public class CircuitEditor
     }
   }
 
-  public StaticViewIterator staticViewIterator()
-  {
-    return currentSubcircuitView.staticViewIterator();
-  }
-
   public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
-    List<StaticView<?>> selectedViews = new ArrayList<>();
-    StaticViewIterator iterator = staticViewIterator();
-    while (iterator.hasNext())
-    {
-      StaticView<?> view = iterator.next();
-      if (isInScreenSpaceBoundingBox(viewport, screenPosition, view))
-      {
-        selectedViews.add(view);
-      }
-    }
-    return selectedViews;
-  }
-
-  protected boolean isInScreenSpaceBoundingBox(Viewport viewport, Int2D screenPosition, StaticView<?> view)
-  {
-    if (view.isEnabled())
-    {
-      Int2D boundBoxPosition = new Int2D();
-      Int2D boundBoxDimension = new Int2D();
-      view.getBoundingBoxInScreenSpace(viewport, boundBoxPosition, boundBoxDimension);
-      if (BoundingBox.containsPoint(screenPosition, boundBoxPosition, boundBoxDimension))
-      {
-        return true;
-      }
-    }
-    return false;
+    return currentSubcircuitEditor.getComponentViewsInScreenSpace(viewport, screenPosition);
   }
 
   public CircuitData save()
   {
-    SubcircuitData subcircuitData = currentSubcircuitView.save();
+    SubcircuitData subcircuitData = currentSubcircuitEditor.save();
 
     TimelineData timelineData = getTimeline().save();
     ArrayList<SubcircuitData> data = new ArrayList<>();
@@ -233,24 +203,24 @@ public class CircuitEditor
 
   public void load(CircuitData circuitData)
   {
-    currentSubcircuitView = null;
+    currentSubcircuitEditor = null;
     getTimeline().load(circuitData.timeline);
 
     for (SubcircuitData subcircuitData : circuitData.subcircuitData)
     {
-      SubcircuitView subcircuitView = new SubcircuitView();
-      subcircuitView.loadViews(subcircuitData, simulation);
+      SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
+      subcircuitEditor.loadViews(subcircuitData, simulation);
 
-      if (currentSubcircuitView == null)
+      if (currentSubcircuitEditor == null)
       {
-        currentSubcircuitView = subcircuitView;
+        currentSubcircuitEditor = subcircuitEditor;
       }
     }
   }
 
-  public List<View> loadViews(List<TraceData> traces, List<StaticData<?>> components)
+  public List<View> pasteClipboardViews(List<TraceData> traces, List<StaticData<?>> components)
   {
-    return currentSubcircuitView.loadViews(traces, components, simulation, false);
+    return currentSubcircuitEditor.pasteClipboardViews(traces, components, simulation);
   }
 
   public Timeline getTimeline()
@@ -265,90 +235,87 @@ public class CircuitEditor
 
   public void placeComponentView(StaticView<?> staticView)
   {
-    Set<ConnectionView> updatedConnectionViews = currentSubcircuitView.connectStaticView(staticView, simulation);
-
-    currentSubcircuitView.fireConnectionEvents(updatedConnectionViews, simulation);
+    currentSubcircuitEditor.placeComponentView(staticView, simulation);
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
-    currentSubcircuitView.startMoveComponents(staticViews, traceViews, simulation);
+    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, simulation);
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)
   {
-    currentSubcircuitView.doneMoveComponents(staticViews, traceViews, selectedViews, simulation);
+    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, simulation);
   }
 
   public Selection getCurrentSelection()
   {
-    return currentSubcircuitView.getSelection();
+    return currentSubcircuitEditor.getSelection();
   }
 
   public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
   {
-    return currentSubcircuitView.getSelectionFromRectangle(start, end);
+    return currentSubcircuitEditor.getSelectionFromRectangle(start, end);
   }
 
   public void deleteSelection()
   {
-    currentSubcircuitView.deleteSelection(simulation);
+    currentSubcircuitEditor.deleteSelection(simulation);
   }
 
-  public SubcircuitView getCurrentSubcircuitView()
+  public SubcircuitEditor getCurrentSubcircuitEditor()
   {
-    return currentSubcircuitView;
+    return currentSubcircuitEditor;
   }
 
   public boolean isCurrentSelectionEmpty()
   {
-    return currentSubcircuitView.isSelectionEmpty();
+    return currentSubcircuitEditor.isSelectionEmpty();
   }
 
   public ConnectionView getConnectionInCurrentSubcircuit(int x, int y)
   {
-    return currentSubcircuitView.getConnection(x, y);
+    return currentSubcircuitEditor.getConnection(x, y);
   }
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitView.deleteComponentView(staticView, simulation);
+    currentSubcircuitEditor.deleteComponentView(staticView, simulation);
   }
 
   public void validateConsistency()
   {
-    currentSubcircuitView.validateConsistency();
+    currentSubcircuitEditor.validateConsistency();
   }
 
   public void replaceSelection(View newView, View oldView)
   {
-    currentSubcircuitView.replaceSelection(newView, oldView);
+    currentSubcircuitEditor.replaceSelection(newView, oldView);
   }
 
   public List<View> duplicateViews(List<View> views)
   {
-    ArrayList<View> duplicates = new ArrayList<>();
-    for (View view : views)
-    {
-      View duplicate = view.duplicate(currentSubcircuitView, simulation.getCircuit());
-      duplicates.add(duplicate);
-    }
-    return duplicates;
+    return currentSubcircuitEditor.duplicateViews(views, simulation);
   }
 
   public void removeTraceView(TraceView traceView)
   {
-    currentSubcircuitView.removeTraceView(traceView);
+    currentSubcircuitEditor.removeTraceView(traceView);
   }
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitView.deleteComponentViews(staticViews, simulation);
+    currentSubcircuitEditor.deleteComponentViews(staticViews, simulation);
   }
 
   public CircuitSimulation getCircuitSimulation()
   {
     return simulation;
+  }
+
+  public SubcircuitView getCurrentSubcircuitView()
+  {
+    return currentSubcircuitEditor.getSubcircuitView();
   }
 }
 

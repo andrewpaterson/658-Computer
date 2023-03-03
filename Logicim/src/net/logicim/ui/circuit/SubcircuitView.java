@@ -11,7 +11,6 @@ import net.logicim.common.type.Positions;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
-import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -19,7 +18,6 @@ import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
-import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceFinder;
@@ -31,7 +29,6 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.ConnectionViewCache;
 import net.logicim.ui.simulation.StaticViewIterator;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
-import net.logicim.ui.simulation.selection.Selection;
 
 import java.util.*;
 
@@ -45,8 +42,6 @@ public class SubcircuitView
   protected Set<TunnelView> tunnelViews;
   protected Map<String, Set<TunnelView>> tunnelViewsMap;
 
-  protected Selection selection;
-
   protected ConnectionViewCache connectionViewCache;
 
   public SubcircuitView()
@@ -57,7 +52,6 @@ public class SubcircuitView
     this.passiveViews = new LinkedHashSet<>();
     this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
-    this.selection = new Selection();
     this.connectionViewCache = new ConnectionViewCache();
   }
 
@@ -565,45 +559,7 @@ public class SubcircuitView
     return portViews;
   }
 
-  public void loadViews(SubcircuitData subcircuitData, CircuitSimulation simulation)
-  {
-    loadViews(subcircuitData.traces, subcircuitData.components, simulation, true);
-  }
-
-  public List<View> loadViews(List<TraceData> traces,
-                              List<StaticData<?>> components,
-                              CircuitSimulation simulation,
-                              boolean createConnections)
-  {
-    ArrayList<View> views = new ArrayList<>();
-    TraceLoader traceLoader = null;
-    if (createConnections)
-    {
-      traceLoader = new TraceLoader();
-    }
-
-    for (TraceData traceData : traces)
-    {
-      TraceView traceView = traceData.create(this, simulation.getSimulation(), traceLoader, createConnections);
-      views.add(traceView);
-    }
-
-    for (StaticData<?> staticData : components)
-    {
-      StaticView<?> staticView = staticData.createAndLoad(this, traceLoader, createConnections, simulation.getSimulation(), simulation.getCircuit());
-      views.add(staticView);
-    }
-    return views;
-  }
-
-  public List<TraceView> getTraceViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
-  {
-    int x = viewport.transformScreenToGridX(screenPosition.x);
-    int y = viewport.transformScreenToGridY(screenPosition.y);
-    return getTraceViewsInGridSpace(x, y);
-  }
-
-  protected List<TraceView> getTraceViewsInGridSpace(int x, int y)
+  public List<TraceView> getTraceViewsInGridSpace(int x, int y)
   {
     List<TraceView> traceViews = new ArrayList<>();
     for (TraceView traceView : getTraceViews())
@@ -614,37 +570,6 @@ public class SubcircuitView
       }
     }
     return traceViews;
-  }
-
-  public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)
-  {
-    List<TraceView> selectedViews = getTraceViewsInScreenSpace(viewport, screenPosition);
-
-    if (selectedViews.size() == 1)
-    {
-      return selectedViews.get(0);
-    }
-    else if (selectedViews.size() == 0)
-    {
-      return null;
-    }
-    else
-    {
-      Int2D center = new Int2D();
-      float shortestDistance = Float.MAX_VALUE;
-      TraceView closestView = null;
-      for (TraceView view : selectedViews)
-      {
-        view.getCenter(center);
-        float distance = BoundingBox.calculateDistance(screenPosition, center);
-        if (distance < shortestDistance)
-        {
-          closestView = view;
-          shortestDistance = distance;
-        }
-      }
-      return closestView;
-    }
   }
 
   public List<TraceOverlap> getTracesTouching(Line line)
@@ -768,9 +693,8 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews, simulation);
   }
 
-  public SubcircuitData save()
+  public SubcircuitData save(Set<View> selection)
   {
-    Set<View> selection = new HashSet<>(this.selection.getSelection());
     ArrayList<StaticData<?>> componentDatas = new ArrayList<>();
     StaticViewIterator iterator = staticViewIterator();
     while (iterator.hasNext())
@@ -796,47 +720,9 @@ public class SubcircuitView
                               traceDatas);
   }
 
-  public void clearSelection()
-  {
-    selection.clearSelection();
-  }
-
-  public void select(View view)
-  {
-    selection.add(view);
-  }
-
-  public void replaceSelection(View newView, View oldView)
-  {
-    selection.replaceSelection(newView, oldView);
-  }
-
-  public boolean isSelectionEmpty()
-  {
-    return selection.isSelectionEmpty();
-  }
-
-  public StaticView<?> getSingleSelectionStaticView()
-  {
-    StaticView<?> componentView = null;
-    for (View view : selection.getSelection())
-    {
-      if (view instanceof StaticView)
-      {
-        if (componentView == null)
-        {
-          componentView = (StaticView<?>) view;
-        }
-        else
-        {
-          return null;
-        }
-      }
-    }
-    return componentView;
-  }
-
-  public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, CircuitSimulation simulation)
+  public void startMoveComponents(List<StaticView<?>> staticViews,
+                                  List<TraceView> traceViews,
+                                  CircuitSimulation simulation)
   {
     List<TraceView> connectedTraceViews = findImmediateConnectedTraceViews(staticViews);
 
@@ -857,15 +743,14 @@ public class SubcircuitView
     }
 
     connectConnectionViews(connectionViews, simulation);
-    clearSelection();
 
     recreateTraceViews(new HashSet<>(), allConnectedTraceViews, simulation);
   }
 
-  public void doneMoveComponents(List<StaticView<?>> staticViews,
-                                 List<TraceView> traceViews,
-                                 Set<StaticView<?>> selectedViews,
-                                 CircuitSimulation simulation)
+  public List<View> doneMoveComponents(List<StaticView<?>> staticViews,
+                                       List<TraceView> traceViews,
+                                       Set<StaticView<?>> selectedViews,
+                                       CircuitSimulation simulation)
   {
     List<Line> newLines = new ArrayList<>();
     for (TraceView traceView : traceViews)
@@ -893,6 +778,21 @@ public class SubcircuitView
     Set<ConnectionView> updatedConnectionViews = createConnectConnectionViewTraces(connectionViews, simulation);
     enableStaticViews(staticViews, simulation);
 
+    Set<TraceView> existingTraces = createTraceViews(existingLines, simulation);
+    connectCreatedTraces(existingTraces, simulation);
+
+    Set<TraceView> newTraces = createTraceViews(newLines, simulation);
+    connectCreatedTraces(newTraces, simulation);
+
+    fireConnectionEvents(updatedConnectionViews, simulation);
+
+    return calculateNewSelection(staticViews, selectedViews, newTraces);
+  }
+
+  protected List<View> calculateNewSelection(List<StaticView<?>> staticViews,
+                                             Set<StaticView<?>> selectedViews,
+                                             Set<TraceView> newTraces)
+  {
     List<View> newSelection = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
@@ -901,17 +801,9 @@ public class SubcircuitView
         newSelection.add(staticView);
       }
     }
-
-    Set<TraceView> existingTraces = createTraceViews(existingLines, simulation);
-    connectCreatedTraces(existingTraces, simulation);
-
-    Set<TraceView> newTraces = createTraceViews(newLines, simulation);
-    connectCreatedTraces(newTraces, simulation);
     newSelection.addAll(newTraces);
 
-    fireConnectionEvents(updatedConnectionViews, simulation);
-
-    this.selection.setSelection(newSelection);
+    return newSelection;
   }
 
   protected List<TraceView> findImmediateConnectedTraceViews(List<StaticView<?>> staticViews)
@@ -947,36 +839,6 @@ public class SubcircuitView
       }
     }
     return junctions;
-  }
-
-  public Selection getSelection()
-  {
-    return selection;
-  }
-
-  public void deleteSelection(CircuitSimulation simulation)
-  {
-    Set<TraceView> traceViews = new HashSet<>();
-    List<View> selectedViews = selection.getSelection();
-    for (View view : selectedViews)
-    {
-      if (view instanceof TraceView)
-      {
-        traceViews.add((TraceView) view);
-      }
-    }
-    deleteTraceViews(traceViews, simulation);
-
-    List<StaticView<?>> staticViews = new ArrayList<>();
-    for (View view : selectedViews)
-    {
-      if (view instanceof StaticView)
-      {
-        staticViews.add((StaticView<?>) view);
-      }
-    }
-    deleteComponentViews(staticViews, simulation);
-    selection.clearSelection();
   }
 
   public List<View> getSelectionFromRectangle(Float2D start, Float2D end)

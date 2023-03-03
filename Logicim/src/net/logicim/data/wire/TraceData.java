@@ -3,8 +3,8 @@ package net.logicim.data.wire;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.Simulation;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 public class TraceData
     extends ReflectiveData
@@ -32,18 +32,18 @@ public class TraceData
     this.selected = selected;
   }
 
-  public TraceView create(SubcircuitView subcircuitView,
+  public TraceView create(SubcircuitEditor subcircuitEditor,
                           Simulation simulation,
                           TraceLoader traceLoader,
                           boolean createConnections)
   {
-    TraceView traceView = new TraceView(subcircuitView,
+    TraceView traceView = new TraceView(subcircuitEditor.getSubcircuitView(),
                                         start,
                                         end,
                                         createConnections);
     if (createConnections)
     {
-      WireDataHelper.wireConnect(subcircuitView,
+      WireDataHelper.wireConnect(subcircuitEditor,
                                  simulation,
                                  traceLoader,
                                  traceView,

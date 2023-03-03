@@ -4,7 +4,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.wire.WireView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.ArrayList;
 import java.util.List;

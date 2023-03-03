@@ -70,37 +70,37 @@ public class MoveComponents
   }
 
   @Override
-  public void start(float x, float y, SimulatorEdit simulatorEdit)
+  public void start(float x, float y, EditAction editAction)
   {
-    simulatorEdit.getCircuitEditor().startMoveComponents(getStaticViews(), getTraces());
+    editAction.getCircuitEditor().startMoveComponents(getStaticViews(), getTraces());
   }
 
   @Override
-  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
+  public StatefulEdit move(float x, float y, EditAction editAction)
   {
-    moveComponents(simulatorEdit.getRightRotations(), simulatorEdit.getStart(), simulatorEdit.getDiff());
+    moveComponents(editAction.getRightRotations(), editAction.getStart(), editAction.getDiff());
     return this;
   }
 
   @Override
-  public void done(float x, float y, SimulatorEdit simulatorEdit)
+  public void done(float x, float y, EditAction editAction)
   {
-    simulatorEdit.getCircuitEditor().doneMoveComponents(getStaticViews(),
-                                                        getTraces(),
-                                                        getSelectedViews());
-    if (simulatorEdit.hasDiff())
+    editAction.getCircuitEditor().doneMoveComponents(getStaticViews(),
+                                                     getTraces(),
+                                                     getSelectedViews());
+    if (editAction.hasDiff())
     {
-      simulatorEdit.pushUndo();
+      editAction.pushUndo();
     }
   }
 
   @Override
-  public void discard(SimulatorEdit simulatorEdit)
+  public void discard(EditAction editAction)
   {
-    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
+    CircuitEditor circuitEditor = editAction.getCircuitEditor();
     if (!deleteOnDiscard)
     {
-      moveComponents(0, simulatorEdit.getStart(), new Int2D());
+      moveComponents(0, editAction.getStart(), new Int2D());
       circuitEditor.doneMoveComponents(getStaticViews(),
                                        getTraces(),
                                        getSelectedViews());
@@ -136,9 +136,9 @@ public class MoveComponents
   }
 
   @Override
-  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
+  public StatefulEdit rotate(boolean right, EditAction editAction)
   {
-    moveComponents(simulatorEdit.getRightRotations(), simulatorEdit.getStart(), simulatorEdit.getDiff());
+    moveComponents(editAction.getRightRotations(), editAction.getStart(), editAction.getDiff());
     return this;
   }
 

@@ -1,7 +1,6 @@
 package net.logicim.ui.simulation.component.decorative.label;
 
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeProperties;
 
 public class LabelProperties

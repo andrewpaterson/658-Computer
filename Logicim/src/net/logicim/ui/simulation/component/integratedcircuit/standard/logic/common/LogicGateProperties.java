@@ -1,7 +1,6 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common;
 
 import net.logicim.domain.common.propagation.Family;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
 
 public class LogicGateProperties

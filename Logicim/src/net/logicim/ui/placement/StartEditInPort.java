@@ -25,36 +25,36 @@ public class StartEditInPort
   }
 
   @Override
-  public void start(float x, float y, SimulatorEdit simulatorEdit)
+  public void start(float x, float y, EditAction editAction)
   {
   }
 
   @Override
-  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
+  public StatefulEdit move(float x, float y, EditAction editAction)
   {
     return new WirePull(simulation);
   }
 
   @Override
-  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
+  public StatefulEdit rotate(boolean right, EditAction editAction)
   {
     throw new SimulatorException();
   }
 
   @Override
-  public void done(float x, float y, SimulatorEdit simulatorEdit)
+  public void done(float x, float y, EditAction editAction)
   {
-    CircuitEditor circuitEditor = simulatorEdit.getCircuitEditor();
+    CircuitEditor circuitEditor = editAction.getCircuitEditor();
     java.util.List<View> previousSelection = circuitEditor.getCurrentSelection().getSelection();
     boolean hasSelectionChanged = SelectionEdit.calculateSelection(circuitEditor, new Float2D(x, y), new Float2D(x, y), keyboardButtons, new HashSet<>(previousSelection));
     if (hasSelectionChanged)
     {
-      simulatorEdit.pushUndo();
+      editAction.pushUndo();
     }
   }
 
   @Override
-  public void discard(SimulatorEdit simulatorEdit)
+  public void discard(EditAction editAction)
   {
   }
 

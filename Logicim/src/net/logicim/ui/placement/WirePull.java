@@ -32,46 +32,46 @@ public class WirePull
   }
 
   @Override
-  public void start(float x, float y, SimulatorEdit simulatorEdit)
+  public void start(float x, float y, EditAction editAction)
   {
     firstPosition = new Int2D(x, y);
   }
 
   @Override
-  public StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit)
+  public StatefulEdit move(float x, float y, EditAction editAction)
   {
     update(Math.round(x), Math.round(y));
 
     if (!isEmpty())
     {
-      simulatorEdit.getCircuitEditor().getCurrentSelection().clearSelection();
+      editAction.getCircuitEditor().getCurrentSelection().clearSelection();
     }
 
     return this;
   }
 
   @Override
-  public StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit)
+  public StatefulEdit rotate(boolean right, EditAction editAction)
   {
     return this;
   }
 
   @Override
-  public void done(float x, float y, SimulatorEdit simulatorEdit)
+  public void done(float x, float y, EditAction editAction)
   {
     if (!isEmpty())
     {
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      simulatorEdit.getCircuitEditor().getCurrentSubcircuitView().createTraceViews(Line.lines(firstLine, secondLine), simulation);
+      editAction.getCircuitEditor().getCurrentSubcircuitView().createTraceViews(Line.lines(firstLine, secondLine), simulation);
 
-      simulatorEdit.pushUndo();
+      editAction.pushUndo();
     }
   }
 
   @Override
-  public void discard(SimulatorEdit simulatorEdit)
+  public void discard(EditAction editAction)
   {
   }
 

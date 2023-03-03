@@ -6,15 +6,15 @@ import java.awt.*;
 
 public abstract class StatefulEdit
 {
-  public abstract void start(float x, float y, SimulatorEdit simulatorEdit);
+  public abstract void start(float x, float y, EditAction editAction);
 
-  public abstract StatefulEdit move(float x, float y, SimulatorEdit simulatorEdit);
+  public abstract StatefulEdit move(float x, float y, EditAction editAction);
 
-  public abstract StatefulEdit rotate(boolean right, SimulatorEdit simulatorEdit);
+  public abstract StatefulEdit rotate(boolean right, EditAction editAction);
 
-  public abstract void done(float x, float y, SimulatorEdit simulatorEdit);
+  public abstract void done(float x, float y, EditAction editAction);
 
-  public abstract void discard(SimulatorEdit simulatorEdit);
+  public abstract void discard(EditAction editAction);
 
   public abstract void paint(Graphics2D graphics, Viewport viewport);
 }

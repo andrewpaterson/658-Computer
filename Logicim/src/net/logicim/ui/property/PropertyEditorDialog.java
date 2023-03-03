@@ -32,7 +32,7 @@ public abstract class PropertyEditorDialog
   protected SimulatorEditor editor;
   protected StaticView<?> componentView;
   protected PropertiesPanel propertiesPanel;
-  protected  Circuit circuit;
+  protected Circuit circuit;
 
   public PropertyEditorDialog(Frame owner, String title, Dimension dimension, SimulatorEditor editor, StaticView<?> componentView)
   {

@@ -5,7 +5,6 @@ import net.logicim.data.ReflectiveData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.wire.TraceView;
-import net.logicim.ui.simulation.CircuitEditor;
 
 public class TraceData
     extends ReflectiveData

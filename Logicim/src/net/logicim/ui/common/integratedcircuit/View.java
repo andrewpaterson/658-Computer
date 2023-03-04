@@ -52,8 +52,6 @@ public abstract class View
 
   public abstract List<ConnectionView> getConnections();
 
-  public abstract Component getComponent();
-
   public abstract View duplicate(SubcircuitView subcircuitView, Circuit circuit);
 }
 

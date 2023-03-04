@@ -34,6 +34,8 @@ import java.util.*;
 
 public class SubcircuitView
 {
+  protected String name;
+
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
   protected Set<PassiveView<?, ?>> passiveViews;
   protected Set<DecorativeView<?>> decorativeViews;
@@ -88,10 +90,13 @@ public class SubcircuitView
     connectionViewCache.removeAll(staticView, connectionViews);
     staticView.disconnect(simulation.getSimulation());
 
-    Component component = staticView.getComponent();
-    if (component != null)
+    if (staticView instanceof ComponentView)
     {
-      simulation.getCircuit().disconnectComponent(component, simulation.getSimulation());
+      Component component = ((ComponentView) staticView).getComponent();
+      if (component != null)
+      {
+        simulation.getCircuit().disconnectComponent(component, simulation.getSimulation());
+      }
     }
 
     return connectionViews;
@@ -909,6 +914,11 @@ public class SubcircuitView
   {
     return (Math.round(start.x) == Math.round(end.x)) &&
            (Math.round(start.y) == Math.round(end.y));
+  }
+
+  public String getName()
+  {
+    return name;
   }
 }
 

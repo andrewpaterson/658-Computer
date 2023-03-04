@@ -55,12 +55,6 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public Component getComponent()
-  {
-    return null;
-  }
-
-  @Override
   public String getName()
   {
     return "";

@@ -6,7 +6,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Component;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -268,8 +267,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract String getType();
 
   public abstract void simulationStarted(Simulation simulation);
-
-  public abstract Component getComponent();
 
   public abstract void disable();
 

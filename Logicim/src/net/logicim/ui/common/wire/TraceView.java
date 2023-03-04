@@ -207,12 +207,6 @@ public class TraceView
   }
 
   @Override
-  public Component getComponent()
-  {
-    return null;
-  }
-
-  @Override
   public View duplicate(SubcircuitView subcircuitView, Circuit circuit)
   {
     TraceView traceView = new TraceView(subcircuitView,

@@ -242,12 +242,6 @@ public class TunnelView
   }
 
   @Override
-  public Component getComponent()
-  {
-    return null;
-  }
-
-  @Override
   protected void finaliseView(Circuit circuit)
   {
     finalised = true;

@@ -1,13 +1,11 @@
-package net.logicim.ui.property;
+package net.logicim.ui.circuit;
 
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.SimulatorEditor;
-import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
+import net.logicim.ui.property.PropertiesPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +20,7 @@ import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
-public abstract class PropertyEditorDialog
+public class NewSubcircuitDialog
     extends JDialog
     implements ButtonAction,
                KeyListener,
@@ -30,23 +28,18 @@ public abstract class PropertyEditorDialog
 {
   protected Dimension dimension;
   protected SimulatorEditor editor;
-  protected StaticView<?> componentView;
-  protected PropertiesPanel propertiesPanel;
+  protected SubcircuitPropertiesPanel propertiesPanel;
   protected Circuit circuit;
 
-  public PropertyEditorDialog(Frame owner,
-                              String title,
-                              Dimension dimension,
-                              SimulatorEditor editor,
-                              StaticView<?> componentView)
+  public NewSubcircuitDialog(Frame owner,
+                             SimulatorEditor editor)
   {
-    super(owner, title, true);
+    super(owner, "Create subcircuit", true);
 
-    this.dimension = dimension;
+    this.dimension = new Dimension(392, 260);
     setSize(dimension);
     this.editor = editor;
     this.circuit = this.editor.getCircuitEditor().getCircuit();
-    this.componentView = componentView;
 
     addKeyAndContainerListenerRecursively(this);
   }
@@ -116,7 +109,7 @@ public abstract class PropertyEditorDialog
     contentPane.setLayout(new GridBagLayout());
 
     JPanel editorPanel = createEditorPanel();
-    propertiesPanel = (PropertiesPanel) editorPanel;
+    propertiesPanel = (SubcircuitPropertiesPanel) editorPanel;
     contentPane.add(editorPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
     JPanel bottomPanel = new JPanel();
@@ -142,15 +135,8 @@ public abstract class PropertyEditorDialog
 
   public void okay()
   {
-    ComponentProperties newComponentProperties = updateProperties();
-
-    if (newComponentProperties != null)
-    {
-      editor.addEditorEvent(new PropertyEditEvent(componentView,
-                                                  newComponentProperties,
-                                                  editor.getCircuitEditor().getCurrentSubcircuitEditor(),
-                                                  circuit));
-    }
+    String name = propertiesPanel.getSubcircuitName();
+    editor.addEditorEvent(new NewSubcircuitEvent(name));
 
     close();
   }
@@ -166,20 +152,9 @@ public abstract class PropertyEditorDialog
     return propertiesPanel;
   }
 
-  protected boolean updateRotation(RotationEditorHolder rotationEditorHolder)
+  protected JPanel createEditorPanel()
   {
-    boolean propertyChanged = false;
-    Rotation rotation = rotationEditorHolder.getRotation();
-    if (componentView.getRotation() != rotation)
-    {
-      componentView.setRotation(rotation);
-      propertyChanged = true;
-    }
-    return propertyChanged;
+    return new SubcircuitPropertiesPanel("");
   }
-
-  protected abstract JPanel createEditorPanel();
-
-  protected abstract ComponentProperties updateProperties();
 }
 

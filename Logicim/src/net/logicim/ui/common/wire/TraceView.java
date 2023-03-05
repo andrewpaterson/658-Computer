@@ -1,12 +1,10 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
@@ -315,11 +313,6 @@ public class TraceView
   public void connectTraces(List<Trace> traces)
   {
     this.traces = traces;
-  }
-
-  public void disconnect(Simulation simulation, ConnectionView connection)
-  {
-    throw new SimulatorException("Cannot call .disconnect() on a WireView.");
   }
 
   public void disconnect()

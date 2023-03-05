@@ -21,10 +21,13 @@ public class StaticSubcircuitView
   public StaticSubcircuitView(SubcircuitView subcircuitView,
                               Circuit circuit,
                               Int2D position,
-                              Rotation rotation,
-                              SubcircuitProperties properties)
+                              Rotation rotation)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView,
+          circuit,
+          position,
+          rotation,
+          new SubcircuitProperties());
     this.enabled = false;
     this.name = "";
   }
@@ -84,11 +87,6 @@ public class StaticSubcircuitView
   public boolean isEnabled()
   {
     return enabled;
-  }
-
-  @Override
-  public void disconnect(Simulation simulation, ConnectionView connection)
-  {
   }
 
   @Override

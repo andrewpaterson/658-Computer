@@ -1,12 +1,10 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
@@ -288,12 +286,6 @@ public class TunnelView
   public void clearTraces()
   {
     traces.clear();
-  }
-
-  @Override
-  public void disconnect(Simulation simulation, ConnectionView connection)
-  {
-    throw new SimulatorException("Cannot call .disconnect() on a WireView.");
   }
 
   @Override

@@ -65,6 +65,19 @@ public class SimulatorActions
     editor.addAction(new InputAction(new PasteAction(editor), KeyEvent.VK_V, Up, Up, Down));
     editor.addAction(new InputAction(new CutAction(editor), KeyEvent.VK_X, Up, Up, Down));
     editor.addAction(new InputAction(new DuplicateAction(editor), KeyEvent.VK_D, Up, Up, Down));
+
+    editor.addAction(new InputAction(new NewSubcircuitAction(editor, panel), KeyEvent.VK_ENTER, Up, Down, Up));
+    editor.addAction(new InputAction(new PreviousSubcircuitAction(editor), KeyEvent.VK_LEFT, Down, Up, Up));
+    editor.addAction(new InputAction(new NextSubcircuitAction(editor), KeyEvent.VK_RIGHT, Down, Up, Up));
+    editor.addAction(new InputAction(new LeaveSubcircuitAction(editor), KeyEvent.VK_BACK_SPACE, Down, Up, Up));
+    editor.addAction(new InputAction(new ReenterSubcircuitAction(editor), KeyEvent.VK_ENTER, Down, Up, Up));
+
+    for (int i = 0; i < 10; i++)
+    {
+      editor.addAction(new InputAction(new BookmarkSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Down));
+      editor.addAction(new InputAction(new GotoSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Up));
+      editor.addAction(new InputAction(new CreateSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Down, Down));
+    }
   }
 }
 

@@ -92,7 +92,7 @@ public class SubcircuitView
 
     if (staticView instanceof ComponentView)
     {
-      Component component = ((ComponentView) staticView).getComponent();
+      Component component = ((ComponentView<?>) staticView).getComponent();
       if (component != null)
       {
         simulation.getCircuit().disconnectComponent(component, simulation.getSimulation());

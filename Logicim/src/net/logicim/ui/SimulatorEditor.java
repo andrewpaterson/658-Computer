@@ -20,7 +20,9 @@ import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.placement.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
+import net.logicim.ui.simulation.component.subcircuit.StaticSubcircuitView;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
@@ -72,6 +74,8 @@ public class SimulatorEditor
 
   protected ClipboardData clipboard;
 
+  protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
+
   public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
     this.inputEvents = new ConcurrentLinkedDeque<>();
@@ -95,6 +99,8 @@ public class SimulatorEditor
 
     this.undoStack = new UndoStack();
     this.clipboard = null;
+
+    this.subcircuitBookmarks = new LinkedHashMap<>();
 
     addActions(simulatorPanel);
 
@@ -273,6 +279,37 @@ public class SimulatorEditor
                                                               viewport.transformScreenToGridY(position.y)),
                                                     creationRotation);
       editAction = createEdit(new MoveComponents(staticView, true), toFloatingGridPosition(position.x, position.y));
+    }
+  }
+
+  public void startPlaceSubcircuit(int bookmarkIndex)
+  {
+    SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkIndex);
+    if (subcircuitEditor != null)
+    {
+      startPlaceSubcircuit(subcircuitEditor);
+    }
+  }
+
+  public void startPlaceSubcircuit(SubcircuitEditor subcircuitEditor)
+  {
+    Int2D position = mousePosition.get();
+
+    if (position != null)
+    {
+      if (editAction != null)
+      {
+        editAction.discard();
+        editAction = null;
+      }
+
+      circuitEditor.getCurrentSelection().clearSelection();
+      StaticSubcircuitView subcircuitView = new StaticSubcircuitView(subcircuitEditor.getSubcircuitView(),
+                                                                     circuitEditor.getCircuit(),
+                                                                     new Int2D(viewport.transformScreenToGridX(position.x),
+                                                                               viewport.transformScreenToGridY(position.y)),
+                                                                     Rotation.North);
+      editAction = createEdit(new MoveComponents(subcircuitView, true), toFloatingGridPosition(position.x, position.y));
     }
   }
 
@@ -844,6 +881,70 @@ public class SimulatorEditor
         }
       }
     }
+  }
+
+  public void newSubcircuitAction(String subcircuitName)
+  {
+
+  }
+
+  public void gotoSubcircuit(int bookmarkIndex)
+  {
+    SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkIndex);
+    if (subcircuitEditor != null)
+    {
+      if (editAction != null)
+      {
+        editAction.discard();
+        editAction = null;
+      }
+
+      circuitEditor.gotoSubcircuit(subcircuitEditor);
+    }
+  }
+
+  public void gotoPreviousSubcircuit()
+  {
+    if (circuitEditor.hasMultipleSubcircuits())
+    {
+      if (editAction != null)
+      {
+        editAction.discard();
+        editAction = null;
+      }
+
+      circuitEditor.gotoPreviousSubcircuit();
+    }
+  }
+
+  public void gotoNextSubcircuit()
+  {
+    if (circuitEditor.hasMultipleSubcircuits())
+    {
+      if (editAction != null)
+      {
+        editAction.discard();
+        editAction = null;
+      }
+
+      circuitEditor.gotoNextSubcircuit();
+    }
+  }
+
+  public void bookmarkSubcircuit(int bookmarkIndex)
+  {
+    SubcircuitEditor subcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+    subcircuitBookmarks.put(bookmarkIndex, subcircuitEditor);
+  }
+
+  public void leaveSubcircuit()
+  {
+    throw new SimulatorException();
+  }
+
+  public void reenterSubcircuit()
+  {
+    throw new SimulatorException();
   }
 }
 

@@ -1,6 +1,5 @@
 package net.logicim.ui.common.integratedcircuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.MultiPortData;
@@ -202,20 +201,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   protected abstract void createPortViews();
 
   public abstract Component getComponent();
-
-  public void disconnect(Simulation simulation, ConnectionView connection)
-  {
-    for (PortView portView : ports)
-    {
-      if (portView.getConnection() == connection)
-      {
-        portView.disconnect(simulation);
-        return;
-      }
-    }
-
-    throw new SimulatorException("Could not disconnect connection from %s.", toIdentifierString());
-  }
 
   @Override
   public void disconnect(Simulation simulation)

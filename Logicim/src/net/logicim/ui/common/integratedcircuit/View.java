@@ -48,8 +48,6 @@ public abstract class View
 
   public abstract void setPosition(int x, int y);
 
-  public abstract void disconnect(Simulation simulation, ConnectionView connection);
-
   public abstract List<ConnectionView> getConnections();
 
   public abstract View duplicate(SubcircuitView subcircuitView, Circuit circuit);

@@ -19,7 +19,11 @@ public class ReflectivePropertyEditorDialog
                                         StaticView<?> componentView,
                                         SimulatorEditor editor)
   {
-    super(owner, componentView.getType() + " Properties", new Dimension(360, 320), editor, componentView);
+    super(owner,
+          componentView.getType() + " Properties",
+          new Dimension(360, 320),
+          editor,
+          componentView);
   }
 
   @Override

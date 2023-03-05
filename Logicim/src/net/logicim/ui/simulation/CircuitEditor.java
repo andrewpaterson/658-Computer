@@ -33,12 +33,15 @@ public class CircuitEditor
 {
   protected CircuitSimulation simulation;
 
+  protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
 
   public CircuitEditor()
   {
-    this.simulation = new CircuitSimulation();
-    this.currentSubcircuitEditor = new SubcircuitEditor();
+    simulation = new CircuitSimulation();
+    subcircuitEditors = new ArrayList<>();
+    currentSubcircuitEditor = new SubcircuitEditor();
+    subcircuitEditors.add(currentSubcircuitEditor);
   }
 
   private List<View> getAllViews()
@@ -316,6 +319,55 @@ public class CircuitEditor
   public SubcircuitView getCurrentSubcircuitView()
   {
     return currentSubcircuitEditor.getSubcircuitView();
+  }
+
+  public void gotoSubcircuit(SubcircuitEditor subcircuitEditor)
+  {
+    if (subcircuitEditor != null)
+    {
+      if (subcircuitEditors.contains(subcircuitEditor))
+      {
+        setCurrentSubcircuitEditor(subcircuitEditor);
+      }
+    }
+  }
+
+  protected void setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
+  {
+    currentSubcircuitEditor = subcircuitEditor;
+  }
+
+  public boolean hasMultipleSubcircuits()
+  {
+    return subcircuitEditors.size() > 1;
+  }
+
+  public void gotoPreviousSubcircuit()
+  {
+    int index = subcircuitEditors.indexOf(currentSubcircuitEditor);
+    if (index != -1)
+    {
+      index--;
+      if (index < 0)
+      {
+        index = subcircuitEditors.size() - 1;
+      }
+      setCurrentSubcircuitEditor(subcircuitEditors.get(index));
+    }
+  }
+
+  public void gotoNextSubcircuit()
+  {
+    int index = subcircuitEditors.indexOf(currentSubcircuitEditor);
+    if (index != -1)
+    {
+      index++;
+      if (index > subcircuitEditors.size() - 1)
+      {
+        index = 0;
+      }
+      setCurrentSubcircuitEditor(subcircuitEditors.get(index));
+    }
   }
 }
 

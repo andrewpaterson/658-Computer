@@ -40,8 +40,7 @@ public class CircuitEditor
   {
     simulation = new CircuitSimulation();
     subcircuitEditors = new ArrayList<>();
-    currentSubcircuitEditor = new SubcircuitEditor();
-    subcircuitEditors.add(currentSubcircuitEditor);
+    addNewSubcircuit("Main");
   }
 
   private List<View> getAllViews()
@@ -368,6 +367,22 @@ public class CircuitEditor
       }
       setCurrentSubcircuitEditor(subcircuitEditors.get(index));
     }
+  }
+
+  public void addNewSubcircuit(String subcircuitName)
+  {
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      if (subcircuitEditor.getTypeName().equals(subcircuitName))
+      {
+        throw new SimulatorException("Cannot add a subcircuit type named [%s], it is already in use.", subcircuitName);
+      }
+    }
+    SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
+    subcircuitEditor.setTypeName(subcircuitName);
+    subcircuitEditors.add(subcircuitEditor);
+
+    currentSubcircuitEditor = subcircuitEditor;
   }
 }
 

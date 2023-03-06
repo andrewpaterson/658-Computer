@@ -68,7 +68,7 @@ public class StaticSubcircuitView
   @Override
   public String getDescription()
   {
-    return getType() + " " + subcircuitView.getName() + "(" + getName() + ") (" + getPosition() + ")";
+    return getType() + " " + subcircuitView.getTypeName() + "(" + getName() + ") (" + getPosition() + ")";
   }
 
   @Override

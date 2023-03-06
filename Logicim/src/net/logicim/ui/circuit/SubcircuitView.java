@@ -34,7 +34,7 @@ import java.util.*;
 
 public class SubcircuitView
 {
-  protected String name;
+  protected String typeName;  //The subcircuit instance name is on the StaticSubcircuitView.
 
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
   protected Set<PassiveView<?, ?>> passiveViews;
@@ -916,9 +916,14 @@ public class SubcircuitView
            (Math.round(start.y) == Math.round(end.y));
   }
 
-  public String getName()
+  public String getTypeName()
   {
-    return name;
+    return typeName;
+  }
+
+  public void setTypeName(String typeName)
+  {
+    this.typeName = typeName;
   }
 }
 

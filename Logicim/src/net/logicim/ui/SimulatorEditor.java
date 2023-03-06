@@ -885,7 +885,7 @@ public class SimulatorEditor
 
   public void newSubcircuitAction(String subcircuitName)
   {
-
+    circuitEditor.addNewSubcircuit(subcircuitName);
   }
 
   public void gotoSubcircuit(int bookmarkIndex)

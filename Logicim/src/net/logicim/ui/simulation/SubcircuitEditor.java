@@ -312,5 +312,15 @@ public class SubcircuitEditor
     }
     return views;
   }
+
+  public String getTypeName()
+  {
+    return subcircuitView.getTypeName();
+  }
+
+  public void setTypeName(String subcircuitName)
+  {
+    subcircuitView.setTypeName(subcircuitName);
+  }
 }
 

@@ -4,6 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.defaults.DefaultFamily;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 
 public class PinViewFactory
@@ -24,7 +25,9 @@ public class PinViewFactory
                                          SubcircuitPinAlignment.LEFT,
                                          false,
                                          false,
-                                         false));
+                                         false,
+                                         DefaultFamily.get(),
+                                         Radix.BINARY));
   }
 
   @Override

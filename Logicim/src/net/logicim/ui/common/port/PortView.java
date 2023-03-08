@@ -276,17 +276,7 @@ public class PortView
 
   protected Color getPortColour(long time)
   {
-    boolean allTracePorts = true;
-    for (Port port : ports)
-    {
-      if (!(port instanceof TracePort))
-      {
-        allTracePorts = false;
-        break;
-      }
-    }
-
-    if (!allTracePorts)
+    if (!allTracePorts())
     {
       return VoltageColour.getColorForPorts(Colours.getInstance(), ports, time);
     }
@@ -294,6 +284,18 @@ public class PortView
     {
       return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(), time);
     }
+  }
+
+  private boolean allTracePorts()
+  {
+    for (Port port : ports)
+    {
+      if (!(port instanceof TracePort))
+      {
+        return false;
+      }
+    }
+    return true;
   }
 
   private List<Trace> getTraces()

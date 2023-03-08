@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
+import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 public class PinProperties
@@ -10,6 +11,8 @@ public class PinProperties
   protected boolean inverting;
   protected boolean overline;
   protected boolean clockNotch;
+  protected Family family;
+  protected Radix radix;
 
   public PinProperties()
   {
@@ -20,7 +23,9 @@ public class PinProperties
                        SubcircuitPinAlignment alignment,
                        boolean inverting,
                        boolean overline,
-                       boolean clockNotch)
+                       boolean clockNotch,
+                       Family family,
+                       Radix radix)
   {
     super(name);
     this.bitWidth = bitWidth;
@@ -28,6 +33,8 @@ public class PinProperties
     this.inverting = inverting;
     this.overline = overline;
     this.clockNotch = clockNotch;
+    this.family = family;
+    this.radix = radix;
   }
 
   @Override
@@ -38,7 +45,9 @@ public class PinProperties
                              alignment,
                              inverting,
                              overline,
-                             clockNotch);
+                             clockNotch,
+                             family,
+                             radix);
   }
 }
 

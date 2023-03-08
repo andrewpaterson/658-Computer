@@ -5,15 +5,15 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.component.passive.pin.PinProperties;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
+import net.logicim.ui.simulation.component.passive.pin.Radix;
 import net.logicim.ui.simulation.component.passive.pin.SubcircuitPinAlignment;
 
 import java.util.List;
-
-import static net.logicim.ui.simulation.component.passive.pin.SubcircuitPinAlignment.LEFT;
 
 public class PinData
     extends PassiveData<PinView>
@@ -23,12 +23,25 @@ public class PinData
   protected boolean inverting;
   protected boolean overline;
   protected boolean clockNotch;
+  protected String family;
+  protected Radix radix;
 
   public PinData()
   {
   }
 
-  public PinData(Int2D position, Rotation rotation, String name, List<MultiPortData> ports, boolean selected, int bitWidth, SubcircuitPinAlignment alignment, boolean inverting, boolean overline, boolean clockNotch)
+  public PinData(Int2D position,
+                 Rotation rotation,
+                 String name,
+                 List<MultiPortData> ports,
+                 boolean selected,
+                 int bitWidth,
+                 SubcircuitPinAlignment alignment,
+                 boolean inverting,
+                 boolean overline,
+                 boolean clockNotch,
+                 String family,
+                 Radix radix)
   {
     super(position, rotation, name, ports, selected);
     this.bitWidth = bitWidth;
@@ -36,6 +49,8 @@ public class PinData
     this.inverting = inverting;
     this.overline = overline;
     this.clockNotch = clockNotch;
+    this.family = family;
+    this.radix = radix;
   }
 
   @Override
@@ -50,7 +65,9 @@ public class PinData
                                          alignment,
                                          inverting,
                                          overline,
-                                         clockNotch));
+                                         clockNotch,
+                                         FamilyStore.getInstance().get(family),
+                                         radix));
   }
 }
 

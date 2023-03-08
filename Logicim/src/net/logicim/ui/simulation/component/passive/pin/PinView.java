@@ -6,6 +6,9 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
+import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
+import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -24,6 +27,7 @@ public class PinView
   protected PortView port;
   protected long id;
   protected Int2D relativeSubcircuitPosition;
+  protected FamilyVoltageConfiguration familyVoltageConfiguration;
 
   protected CircleView circleView;
 
@@ -38,6 +42,7 @@ public class PinView
           position,
           rotation,
           properties);
+    this.familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     id = nextId;
     nextId++;
     relativeSubcircuitPosition = new Int2D();
@@ -75,7 +80,9 @@ public class PinView
                        properties.alignment,
                        properties.inverting,
                        properties.overline,
-                       properties.clockNotch);
+                       properties.clockNotch,
+                       properties.family.getFamily(),
+                       properties.radix);
   }
 
   @Override
@@ -107,6 +114,8 @@ public class PinView
     Font font = graphics.getFont();
 
     circleView.paint(graphics, viewport);
+
+
 
     //drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 

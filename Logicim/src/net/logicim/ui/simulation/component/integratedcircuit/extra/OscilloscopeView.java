@@ -15,7 +15,6 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
@@ -30,11 +29,10 @@ import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
 public class OscilloscopeView
     extends IntegratedCircuitView<Oscilloscope, OscilloscopeProperties>
 {
-  protected List<ArcView> frameArcViews;
-  protected List<RectangleView> frameRectangleViews;
   protected List<LineView> frameLineViews;
 
   protected RectangleView rectangleView;
+  protected FrameView frameView;
   protected float outerWidth;
 
   public OscilloscopeView(SubcircuitView subcircuitView,
@@ -50,24 +48,15 @@ public class OscilloscopeView
 
   protected void createGraphics()
   {
-    frameRectangleViews = new ArrayList<>();
-    frameArcViews = new ArrayList<>();
-    frameLineViews = new ArrayList<>();
-
     Color frameColour = new Color(0, 208, 208);
 
     outerWidth = 1.0f;
     float bottom = (properties.inputCount - 1) * properties.divHeightInGrids;
     int top = -4;
-    frameArcViews.add(createArcView(frameColour, outerWidth, 0, top, 90));
-    frameArcViews.add(createArcView(frameColour, outerWidth, properties.numberOfDivsWide, top, 0));
-    frameArcViews.add(createArcView(frameColour, outerWidth, properties.numberOfDivsWide, bottom, 270));
-    frameArcViews.add(createArcView(frameColour, outerWidth, 0, bottom, 180));
 
-    frameRectangleViews.add(createRectangleView(frameColour, outerWidth - 0.1f, top, properties.numberOfDivsWide + outerWidth + 0.1f, bottom + outerWidth * 2));
-    frameRectangleViews.add(createRectangleView(frameColour, 0, top + outerWidth - 0.1f, outerWidth, bottom + outerWidth + 0.1f));
-    frameRectangleViews.add(createRectangleView(frameColour, properties.numberOfDivsWide + outerWidth, top + outerWidth - 0.1f, properties.numberOfDivsWide + outerWidth * 2, bottom + outerWidth + 0.1f));
+    frameView = new FrameView(this, frameColour, outerWidth, properties.numberOfDivsWide, top, bottom);
 
+    frameLineViews = new ArrayList<>();
     frameLineViews.add(new LineView(this, new Float2D(outerWidth, top), new Float2D(properties.numberOfDivsWide + outerWidth, top)));
     frameLineViews.add(new LineView(this, new Float2D(0, top + outerWidth), new Float2D(0, bottom + outerWidth)));
     frameLineViews.add(new LineView(this, new Float2D(outerWidth, bottom + outerWidth * 2), new Float2D(properties.numberOfDivsWide + outerWidth, bottom + outerWidth * 2)));
@@ -83,20 +72,6 @@ public class OscilloscopeView
     {
       new PortView(this, integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * properties.divHeightInGrids));
     }
-  }
-
-  protected RectangleView createRectangleView(Color frameColour, float left, float top, float right, float bottom)
-  {
-    RectangleView rectangleView = new RectangleView(this, new Float2D(left, top), new Float2D(right, bottom), false, true);
-    rectangleView.setFillColour(frameColour);
-    return rectangleView;
-  }
-
-  protected ArcView createArcView(Color frameColour, float width, float x, float y, int startAngle)
-  {
-    ArcView arcView = new ArcView(this, new Float2D(width + x, width + y), width, startAngle, 90, true, true);
-    arcView.setFillColour(frameColour);
-    return arcView;
   }
 
   @Override
@@ -116,19 +91,13 @@ public class OscilloscopeView
   {
     super.paint(graphics, viewport, time);
 
-    if ((frameArcViews != null))
+    if ((frameView != null))
     {
       Stroke stroke = graphics.getStroke();
       Color color = graphics.getColor();
 
-      for (RectangleView rectangleView : frameRectangleViews)
-      {
-        rectangleView.paint(graphics, viewport);
-      }
-      for (ArcView arcView : frameArcViews)
-      {
-        arcView.paint(graphics, viewport);
-      }
+      frameView.paint(graphics, viewport);
+
       for (LineView lineView : frameLineViews)
       {
         lineView.paint(graphics, viewport);

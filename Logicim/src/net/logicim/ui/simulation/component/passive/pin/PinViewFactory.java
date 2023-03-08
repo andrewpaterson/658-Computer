@@ -21,7 +21,7 @@ public class PinViewFactory
                        position,
                        rotation,
                        new PinProperties("",
-                                         1,
+                                         2,
                                          SubcircuitPinAlignment.LEFT,
                                          false,
                                          false,

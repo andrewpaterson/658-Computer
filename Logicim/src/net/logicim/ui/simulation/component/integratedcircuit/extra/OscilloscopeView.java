@@ -19,8 +19,6 @@ import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static net.logicim.domain.common.Units.GHz;
 import static net.logicim.ui.common.VoltageColour.clamp;
@@ -29,8 +27,6 @@ import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
 public class OscilloscopeView
     extends IntegratedCircuitView<Oscilloscope, OscilloscopeProperties>
 {
-  protected List<LineView> frameLineViews;
-
   protected RectangleView rectangleView;
   protected FrameView frameView;
   protected float outerWidth;
@@ -54,13 +50,7 @@ public class OscilloscopeView
     float bottom = (properties.inputCount - 1) * properties.divHeightInGrids;
     int top = -4;
 
-    frameView = new FrameView(this, frameColour, outerWidth, properties.numberOfDivsWide, top, bottom);
-
-    frameLineViews = new ArrayList<>();
-    frameLineViews.add(new LineView(this, new Float2D(outerWidth, top), new Float2D(properties.numberOfDivsWide + outerWidth, top)));
-    frameLineViews.add(new LineView(this, new Float2D(0, top + outerWidth), new Float2D(0, bottom + outerWidth)));
-    frameLineViews.add(new LineView(this, new Float2D(outerWidth, bottom + outerWidth * 2), new Float2D(properties.numberOfDivsWide + outerWidth, bottom + outerWidth * 2)));
-    frameLineViews.add(new LineView(this, new Float2D(properties.numberOfDivsWide + outerWidth * 2, top + outerWidth), new Float2D(properties.numberOfDivsWide + outerWidth * 2, bottom + outerWidth)));
+    frameView = new FrameView(this, frameColour, outerWidth, properties.numberOfDivsWide, 0, top, bottom);
 
     rectangleView = new RectangleView(this, new Float2D(outerWidth * 1 - 0.2f, -outerWidth * 3), new Float2D(properties.numberOfDivsWide + outerWidth + 0.2f, bottom + outerWidth), true, true);
     rectangleView.setFillColour(Color.WHITE);
@@ -98,10 +88,6 @@ public class OscilloscopeView
 
       frameView.paint(graphics, viewport);
 
-      for (LineView lineView : frameLineViews)
-      {
-        lineView.paint(graphics, viewport);
-      }
       rectangleView.paint(graphics, viewport);
 
       OscilloscopeState state = integratedCircuit.getState();

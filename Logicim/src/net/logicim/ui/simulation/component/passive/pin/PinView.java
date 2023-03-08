@@ -8,14 +8,15 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
-import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.circle.CircleView;
+import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 
 import java.awt.*;
 
@@ -30,6 +31,7 @@ public class PinView
   protected FamilyVoltageConfiguration familyVoltageConfiguration;
 
   protected CircleView circleView;
+  protected FrameView frameView;
 
   public PinView(SubcircuitView subcircuitView,
                  Circuit circuit,
@@ -53,7 +55,22 @@ public class PinView
 
   protected void createGraphics()
   {
-    circleView = new CircleView(this, new Float2D(0, 1), 1, true, true);
+    if (((properties.radix == Radix.BINARY) &&
+         (properties.bitWidth <= 1)) ||
+        ((properties.radix == Radix.DECIMAL) &&
+         (properties.bitWidth <= 3)) ||
+        ((properties.radix == Radix.HEXADECIMAL) &&
+         (properties.bitWidth <= 4)))
+    {
+      circleView = new CircleView(this, new Float2D(0, 1), 1, true, true);
+      frameView = null;
+    }
+    else
+    {
+      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, -1, 0, 2);
+      circleView = null;
+    }
+
   }
 
   @Override
@@ -113,10 +130,14 @@ public class PinView
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
 
-    circleView.paint(graphics, viewport);
-
-
-
+    if (circleView != null)
+    {
+      circleView.paint(graphics, viewport);
+    }
+    if (frameView != null)
+    {
+      frameView.paint(graphics, viewport);
+    }
     //drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
     paintPorts(graphics, viewport, time);

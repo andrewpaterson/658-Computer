@@ -22,7 +22,7 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
-import net.logicim.ui.simulation.component.subcircuit.StaticSubcircuitView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
@@ -304,11 +304,11 @@ public class SimulatorEditor
       }
 
       circuitEditor.getCurrentSelection().clearSelection();
-      StaticSubcircuitView subcircuitView = new StaticSubcircuitView(subcircuitEditor.getSubcircuitView(),
-                                                                     circuitEditor.getCircuit(),
-                                                                     new Int2D(viewport.transformScreenToGridX(position.x),
+      SubcircuitInstanceView subcircuitView = new SubcircuitInstanceView(subcircuitEditor.getSubcircuitView(),
+                                                                         circuitEditor.getCircuit(),
+                                                                         new Int2D(viewport.transformScreenToGridX(position.x),
                                                                                viewport.transformScreenToGridY(position.y)),
-                                                                     Rotation.North);
+                                                                         Rotation.North);
       editAction = createEdit(new MoveComponents(subcircuitView, true), toFloatingGridPosition(position.x, position.y));
     }
   }

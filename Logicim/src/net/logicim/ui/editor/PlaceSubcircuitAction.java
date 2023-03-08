@@ -2,12 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 
-public class CreateSubcircuitAction
+public class PlaceSubcircuitAction
     extends SimulatorEditorAction
 {
   protected int index;
 
-  public CreateSubcircuitAction(SimulatorEditor editor, int index)
+  public PlaceSubcircuitAction(SimulatorEditor editor, int index)
   {
     super(editor);
     this.index = index;
@@ -22,7 +22,7 @@ public class CreateSubcircuitAction
   @Override
   public String getDescription()
   {
-    return "Create Subcircuit";
+    return "Place Subcircuit";
   }
 }
 

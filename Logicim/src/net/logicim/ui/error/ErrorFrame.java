@@ -6,8 +6,13 @@ public class ErrorFrame
 {
   public static void createWindow(JFrame frame, RuntimeException exception)
   {
+    String message = "";
+    if (exception.getMessage() != null)
+    {
+      message = ": " + exception.getMessage();
+    }
     JOptionPane.showMessageDialog(frame,
-                                  exception.getMessage(),
+                                  exception.getClass().getSimpleName() + message,
                                   "Exception Occurred",
                                   JOptionPane.ERROR_MESSAGE);
   }

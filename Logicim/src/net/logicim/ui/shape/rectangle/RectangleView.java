@@ -90,7 +90,10 @@ public class RectangleView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(positionRelativeToIC, dimension, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(positionRelativeToIC,
+                       dimension,
+                       shapeHolder.getRotation(),
+                       shapeHolder.getPosition());
     }
   }
 

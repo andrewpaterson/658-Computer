@@ -12,6 +12,8 @@ import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.util.List;
 
+import static net.logicim.ui.simulation.component.passive.pin.SubcircuitPinAlignment.LEFT;
+
 public class PinData
     extends PassiveData<PinView>
 {
@@ -40,7 +42,11 @@ public class PinData
                        position,
                        rotation,
                        new PinProperties(name,
-                                         bitWidth));
+                                         bitWidth,
+                                         LEFT,
+                                         false,
+                                         false,
+                                         false));
   }
 }
 

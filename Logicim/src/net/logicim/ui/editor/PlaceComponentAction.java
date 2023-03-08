@@ -4,12 +4,12 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
-public class CreateComponentAction
+public class PlaceComponentAction
     extends SimulatorEditorAction
 {
   private Class<? extends StaticView<?>> discreteViewClass;
 
-  public CreateComponentAction(SimulatorEditor editor, Class<? extends StaticView<?>> discreteViewClass)
+  public PlaceComponentAction(SimulatorEditor editor, Class<? extends StaticView<?>> discreteViewClass)
   {
     super(editor);
     this.discreteViewClass = discreteViewClass;
@@ -24,7 +24,7 @@ public class CreateComponentAction
   @Override
   public String getDescription()
   {
-    return "Create Component";
+    return "Place Component";
   }
 }
 

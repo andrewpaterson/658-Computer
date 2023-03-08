@@ -25,9 +25,10 @@ public class PortView
   protected ComponentView<?> owner;
 
   protected Int2D relativePosition;
-  protected boolean inverting;
   protected String text;
+  protected boolean inverting;
   protected boolean overline;
+  protected boolean clockNotch;
   protected Float2D bubbleCenter;
   protected float bubbleDiameter;
 
@@ -36,12 +37,18 @@ public class PortView
   protected PortViewGridCache gridCache;
   protected List<? extends Port> ports;
 
-  public PortView(ComponentView<?> componentView, Port port, Int2D relativePosition)
+  public PortView(ComponentView<?> componentView,
+                  Port port,
+                  Int2D relativePosition)
   {
-    this(componentView, singlePort(port), relativePosition);
+    this(componentView,
+         singlePort(port),
+         relativePosition);
   }
 
-  public PortView(ComponentView<?> componentView, List<? extends Port> ports, Int2D relativePosition)
+  public PortView(ComponentView<?> componentView,
+                  List<? extends Port> ports,
+                  Int2D relativePosition)
   {
     this.owner = componentView;
     this.owner.addPortView(this);
@@ -71,6 +78,12 @@ public class PortView
   public PortView setDrawBar(boolean drawBar)
   {
     this.overline = drawBar;
+    return this;
+  }
+
+  public PortView setDrawClock(boolean drawClock)
+  {
+    this.clockNotch = drawClock;
     return this;
   }
 

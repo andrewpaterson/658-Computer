@@ -99,7 +99,6 @@ public class ArcView
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
-
   }
 
   @Override

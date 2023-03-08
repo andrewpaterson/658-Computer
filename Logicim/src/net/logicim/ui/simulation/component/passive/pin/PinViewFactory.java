@@ -19,7 +19,12 @@ public class PinViewFactory
                        circuit,
                        position,
                        rotation,
-                       new PinProperties());
+                       new PinProperties("",
+                                         1,
+                                         SubcircuitPinAlignment.LEFT,
+                                         false,
+                                         false,
+                                         false));
   }
 
   @Override

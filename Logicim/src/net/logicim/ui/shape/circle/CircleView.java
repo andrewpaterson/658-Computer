@@ -69,8 +69,8 @@ public class CircleView
   {
     float x = circleCenter.getX();
     float y = circleCenter.getY();
-    boundingBox.include(x, y);
-    boundingBox.include(x, y);
+    boundingBox.include(x - width, y - height);
+    boundingBox.include(x + width, y + height);
   }
 
   @Override

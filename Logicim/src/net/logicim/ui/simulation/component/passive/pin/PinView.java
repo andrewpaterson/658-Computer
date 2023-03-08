@@ -6,7 +6,6 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -49,7 +48,7 @@ public class PinView
 
   protected void createGraphics()
   {
-    circleView = new CircleView(this, new Float2D(), 1, true, true);
+    circleView = new CircleView(this, new Float2D(0, 1), 1, true, true);
   }
 
   @Override
@@ -72,7 +71,11 @@ public class PinView
                        getName(),
                        savePorts(),
                        selected,
-                       properties.bitWidth);
+                       properties.bitWidth,
+                       properties.alignment,
+                       properties.inverting,
+                       properties.overline,
+                       properties.clockNotch);
   }
 
   @Override

@@ -55,22 +55,26 @@ public class PinView
 
   protected void createGraphics()
   {
-    if (((properties.radix == Radix.BINARY) &&
-         (properties.bitWidth <= 1)) ||
-        ((properties.radix == Radix.DECIMAL) &&
-         (properties.bitWidth <= 3)) ||
-        ((properties.radix == Radix.HEXADECIMAL) &&
-         (properties.bitWidth <= 4)))
+    if (isSingleDigit())
     {
       circleView = new CircleView(this, new Float2D(0, 1), 1, true, true);
       frameView = null;
     }
     else
     {
-      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, -1, 0, 2);
+      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, 1, 0, 4);
       circleView = null;
     }
+  }
 
+  private boolean isSingleDigit()
+  {
+    return ((properties.radix == Radix.BINARY) &&
+            (properties.bitWidth <= 1)) ||
+        ((properties.radix == Radix.DECIMAL) &&
+         (properties.bitWidth <= 3)) ||
+        ((properties.radix == Radix.HEXADECIMAL) &&
+         (properties.bitWidth <= 4));
   }
 
   @Override

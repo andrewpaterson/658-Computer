@@ -19,22 +19,24 @@ public class FrameView
 
   public FrameView(ShapeHolder shapeHolder, Color colour, float arcWidth, float left, float right, float top, float bottom)
   {
+    float twiceArcWidth = arcWidth * 2;
+
     frameArcViews = new ArrayList<>();
     frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, left, top, 90));
-    frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, right, top, 0));
-    frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, right, bottom, 270));
-    frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, left, bottom, 180));
+    frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, right - twiceArcWidth, top, 0));
+    frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, right - twiceArcWidth, bottom- twiceArcWidth, 270));
+    frameArcViews.add(createArcView(shapeHolder, colour, arcWidth, left, bottom - twiceArcWidth, 180));
 
     frameRectangleViews = new ArrayList<>();
-    frameRectangleViews.add(createRectangleView(shapeHolder, colour, left + arcWidth - 0.1f, top, right + arcWidth + 0.1f, bottom + arcWidth * 2));
-    frameRectangleViews.add(createRectangleView(shapeHolder, colour, left, top + arcWidth - 0.1f, arcWidth, bottom + arcWidth + 0.1f));
-    frameRectangleViews.add(createRectangleView(shapeHolder, colour, right + arcWidth, top + arcWidth - 0.1f, right + arcWidth * 2, bottom + arcWidth + 0.1f));
+    frameRectangleViews.add(createRectangleView(shapeHolder, colour, left + arcWidth - 0.1f, top, right - arcWidth + 0.1f, bottom));
+    frameRectangleViews.add(createRectangleView(shapeHolder, colour, left, top + arcWidth - 0.1f, arcWidth, bottom - arcWidth + 0.1f));
+    frameRectangleViews.add(createRectangleView(shapeHolder, colour, right - arcWidth, top + arcWidth - 0.1f, right, bottom - arcWidth + 0.1f));
 
     frameLineViews = new ArrayList<>();
-    frameLineViews.add(new LineView(shapeHolder, new Float2D(left + arcWidth, top), new Float2D(right + arcWidth, top)));
-    frameLineViews.add(new LineView(shapeHolder, new Float2D(left, top + arcWidth), new Float2D(left, bottom + arcWidth)));
-    frameLineViews.add(new LineView(shapeHolder, new Float2D(left + arcWidth, bottom + arcWidth * 2), new Float2D(right + arcWidth, bottom + arcWidth * 2)));
-    frameLineViews.add(new LineView(shapeHolder, new Float2D(right + arcWidth * 2, top + arcWidth), new Float2D(right + arcWidth * 2, bottom + arcWidth)));
+    frameLineViews.add(new LineView(shapeHolder, new Float2D(left + arcWidth, top), new Float2D(right - arcWidth, top)));
+    frameLineViews.add(new LineView(shapeHolder, new Float2D(left, top + arcWidth), new Float2D(left, bottom -  arcWidth)));
+    frameLineViews.add(new LineView(shapeHolder, new Float2D(left + arcWidth, bottom), new Float2D(right - arcWidth, bottom)));
+    frameLineViews.add(new LineView(shapeHolder, new Float2D(right, top + arcWidth), new Float2D(right, bottom - arcWidth)));
   }
 
   protected RectangleView createRectangleView(ShapeHolder shapeHolder, Color frameColour, float left, float top, float right, float bottom)

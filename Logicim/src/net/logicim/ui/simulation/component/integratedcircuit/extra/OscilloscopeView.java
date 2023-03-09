@@ -15,7 +15,6 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
@@ -50,9 +49,9 @@ public class OscilloscopeView
     float bottom = (properties.inputCount - 1) * properties.divHeightInGrids;
     int top = -4;
 
-    frameView = new FrameView(this, frameColour, outerWidth, properties.numberOfDivsWide, 0, top, bottom);
+    frameView = new FrameView(this, frameColour, outerWidth, 0, properties.numberOfDivsWide + 2 * outerWidth, top, bottom + 2 * outerWidth);
 
-    rectangleView = new RectangleView(this, new Float2D(outerWidth * 1 - 0.2f, -outerWidth * 3), new Float2D(properties.numberOfDivsWide + outerWidth + 0.2f, bottom + outerWidth), true, true);
+    rectangleView = new RectangleView(this, new Float2D(outerWidth - 0.2f, -outerWidth * 3), new Float2D(properties.numberOfDivsWide + outerWidth + 0.2f, bottom + outerWidth), true, true);
     rectangleView.setFillColour(Color.WHITE);
   }
 

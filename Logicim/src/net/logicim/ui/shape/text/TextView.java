@@ -1,5 +1,6 @@
 package net.logicim.ui.shape.text;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
@@ -12,8 +13,7 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.CENTER;
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.RIGHT;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.*;
 
 public class TextView
     extends ShapeView
@@ -99,11 +99,11 @@ public class TextView
     Rotation rotation = shapeHolder.getRotation();
     if (rotation.isNorthSouth() || rotation.isCannot())
     {
-      degrees = 0;
+      degrees = 90;
     }
     else
     {
-      degrees = 90;
+      degrees = 0;
     }
 
     float xOffset = Float.NaN;
@@ -111,23 +111,23 @@ public class TextView
 
     if (rotation.isNorth() || rotation.isCannot())
     {
-      xOffset = 0 + widthAdjust;
-      yOffset = halfHeight;
+      xOffset = -halfHeight;
+      yOffset = -width - widthAdjust;
     }
     else if (rotation.isSouth())
     {
-      xOffset = -width + widthAdjust;
-      yOffset = halfHeight;
+      xOffset = -halfHeight;
+      yOffset = 0 + widthAdjust;
     }
     else if (rotation.isEast())
     {
-      xOffset = -halfHeight;
-      yOffset = -width + widthAdjust;
+      xOffset = -width - widthAdjust;
+      yOffset = halfHeight;
     }
     else if (rotation.isWest())
     {
-      xOffset = -halfHeight;
-      yOffset = 0 + widthAdjust;
+      xOffset = 0 + widthAdjust;
+      yOffset = halfHeight;
     }
 
     Font font = viewport.getFont(degrees, size * viewport.getZoom(), bold);
@@ -145,16 +145,22 @@ public class TextView
   {
     float width = textDimension.getX();
 
-    float widthAdjust = 0.1f;
+    if (alignment == LEFT)
+    {
+      return 0.1f;
+    }
     if (alignment == CENTER)
     {
-      widthAdjust += -width / 2;
+      return 0.1f - width / 2;
     }
     else if (alignment == RIGHT)
     {
-      widthAdjust += -width;
+      return 0.1f - width;
     }
-    return widthAdjust;
+    else
+    {
+      throw new SimulatorException("Cannot calculate width adjustment.");
+    }
   }
 
   @Override

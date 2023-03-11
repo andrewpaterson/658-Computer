@@ -48,7 +48,7 @@ public class SubcircuitInstanceView
   protected void finaliseView(Circuit circuit)
   {
     finalised = true;
-    updateBoundingBox();
+    updateBoundingBoxes();
     createSubcircuitComponents(circuit);
   }
 

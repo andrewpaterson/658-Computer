@@ -15,7 +15,11 @@ public class LabelProperties
   {
   }
 
-  public LabelProperties(String name, HorizontalAlignment alignment, boolean bold, boolean fill, boolean border)
+  public LabelProperties(String name,
+                         HorizontalAlignment alignment,
+                         boolean bold,
+                         boolean fill,
+                         boolean border)
   {
     super(name);
     this.alignment = alignment;

@@ -33,7 +33,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
     finalised = true;
     enabled = false;
 
-    updateBoundingBox();
+    updateBoundingBoxes();
   }
 
   @Override

@@ -17,6 +17,8 @@ import java.awt.*;
 public class LabelView
     extends DecorativeView<LabelProperties>
 {
+  public static int FONT_SIZE = 10;
+
   protected TextView textView;
   protected RectangleView rectangleView;
 
@@ -33,7 +35,7 @@ public class LabelView
 
   private void createGraphics()
   {
-    int size = 10;
+    int size = FONT_SIZE;
     textView = new TextView(this,
                             new Int2D(0, 0),
                             properties.name,
@@ -49,6 +51,9 @@ public class LabelView
     float widthAdjust = textView.getWidthAdjust();
     topLeft.x += widthAdjust - height / 4f;
     bottomRight.x += widthAdjust + height / 4f;
+
+    Rotation.East.rotate(topLeft, topLeft);
+    Rotation.East.rotate(bottomRight, bottomRight);
 
     rectangleView = new RectangleView(this,
                                       topLeft,

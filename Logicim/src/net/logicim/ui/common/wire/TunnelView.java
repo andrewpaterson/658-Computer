@@ -87,7 +87,7 @@ public class TunnelView
     float offsetX = 0.75f;
     float flatX = 0.4f;
     textView = new TextView(this,
-                            new Float2D(startPosition.x + offsetX, startPosition.y),
+                            new Float2D(startPosition.x, startPosition.y + offsetX - 1.25f),
                             properties.name,
                             FONT_SIZE,
                             true,
@@ -95,7 +95,7 @@ public class TunnelView
     Float2D topLeft = textView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(textView.getTextDimension());
     bottomRight.add(topLeft);
-    float height = bottomRight.y - topLeft.y;
+    float height = bottomRight.y - topLeft.y - 0.25f;
     offsetX = height / 2;
 
     Int2D endPosition;
@@ -105,11 +105,11 @@ public class TunnelView
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    startPosition,
-                                    new Float2D(topLeft.x + offsetX, topLeft.y),
-                                    new Float2D(bottomRight.x + offsetX + flatX, topLeft.y),
-                                    new Float2D(bottomRight.x + offsetX + flatX, bottomRight.y),
-                                    new Float2D(topLeft.x + offsetX, bottomRight.y));
+                                    toFloat2D(startPosition.x, startPosition.y),
+                                    toFloat2D(topLeft.x + offsetX, topLeft.y),
+                                    toFloat2D(bottomRight.x + offsetX + flatX, topLeft.y),
+                                    toFloat2D(bottomRight.x + offsetX + flatX, bottomRight.y),
+                                    toFloat2D(topLeft.x + offsetX, bottomRight.y));
     }
     else
     {
@@ -117,17 +117,24 @@ public class TunnelView
       polygonView = new PolygonView(this,
                                     true,
                                     true,
-                                    startPosition,
-                                    new Float2D(topLeft.x + offsetX, topLeft.y),
-                                    new Float2D(endPosition.x - offsetX, topLeft.y),
-                                    endPosition,
-                                    new Float2D(endPosition.x - offsetX, bottomRight.y),
-                                    new Float2D(topLeft.x + offsetX, bottomRight.y));
+                                    toFloat2D(startPosition.x, startPosition.y),
+                                    toFloat2D(topLeft.x + offsetX, topLeft.y),
+                                    toFloat2D(endPosition.x - offsetX, topLeft.y),
+                                    toFloat2D(endPosition.x, endPosition.y),
+                                    toFloat2D(endPosition.x - offsetX, bottomRight.y),
+                                    toFloat2D(topLeft.x + offsetX, bottomRight.y));
     }
     invalidateCache();
-    updateBoundingBox();
+    updateBoundingBoxes();
 
     return endPosition;
+  }
+
+  private Float2D toFloat2D(float x, float y)
+  {
+    Float2D f = new Float2D(x, y);
+    Rotation.East.rotate(f, f);
+    return f;
   }
 
   public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
@@ -243,9 +250,9 @@ public class TunnelView
   protected void finaliseView(Circuit circuit)
   {
     finalised = true;
-    enabled = true;
+    enabled = false;
 
-    updateBoundingBox();
+    updateBoundingBoxes();
   }
 
   public TunnelData save(boolean selected)

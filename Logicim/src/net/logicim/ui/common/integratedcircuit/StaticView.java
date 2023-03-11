@@ -225,15 +225,15 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     return properties;
   }
 
-  protected void updateBoundingBox()
+  protected void updateBoundingBoxes()
   {
     if (boundingBox.isNull())
     {
-      updateSelectionBox();
+      updateBoundingBoxAndSelectionBox();
     }
   }
 
-  protected void updateSelectionBox()
+  protected void updateBoundingBoxAndSelectionBox()
   {
     updateBoundingBoxFromShapes(boundingBox);
 

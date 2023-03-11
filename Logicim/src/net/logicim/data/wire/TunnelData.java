@@ -61,6 +61,7 @@ public class TunnelData
                                  traceIds,
                                  selected);
     }
+    tunnelView.enable(simulation);
     return tunnelView;
   }
 

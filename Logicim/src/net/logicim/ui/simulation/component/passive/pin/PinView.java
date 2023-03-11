@@ -1,8 +1,11 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
@@ -16,6 +19,7 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.circle.CircleView;
+import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 
 import java.awt.*;
@@ -23,6 +27,7 @@ import java.awt.*;
 public class PinView
     extends PassiveView<Pin, PinProperties>
 {
+  public static int FONT_SIZE = 10;
   public static long nextId = 1L;
 
   protected PortView port;
@@ -32,6 +37,8 @@ public class PinView
 
   protected CircleView circleView;
   protected FrameView frameView;
+  protected TextView labelView;
+  protected TextView dataView;
 
   public PinView(SubcircuitView subcircuitView,
                  Circuit circuit,
@@ -55,26 +62,65 @@ public class PinView
 
   protected void createGraphics()
   {
-    if (isSingleDigit())
+    int maxDigits = maxDigits();
+    String text = StringUtil.pad(maxDigits, "X");
+
+    dataView = new TextView(this, new Float2D(0, -0.5f), text, FONT_SIZE, false, HorizontalAlignment.LEFT);
+    Float2D topLeft = dataView.getTextOffset().clone();
+    Float2D bottomRight = new Float2D(dataView.getTextDimension());
+    float fontLength = (float) Math.ceil(bottomRight.x - topLeft.x);
+
+    labelView = new TextView(this, new Float2D(0, -fontLength + 1), properties.name, FONT_SIZE, true, HorizontalAlignment.LEFT);
+
+    if (maxDigits == 1)
     {
       circleView = new CircleView(this, new Float2D(0, 1), 1, true, true);
       frameView = null;
     }
     else
     {
-      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, 1, 0, 4);
+      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, 1, 0, fontLength);
       circleView = null;
     }
   }
 
-  private boolean isSingleDigit()
+  private int maxDigits()
   {
-    return ((properties.radix == Radix.BINARY) &&
-            (properties.bitWidth <= 1)) ||
-        ((properties.radix == Radix.DECIMAL) &&
-         (properties.bitWidth <= 3)) ||
-        ((properties.radix == Radix.HEXADECIMAL) &&
-         (properties.bitWidth <= 4));
+    int maxDigits = 0;
+    if (properties.radix == Radix.BINARY)
+    {
+      maxDigits = properties.bitWidth;
+    }
+    else if (properties.radix == Radix.HEXADECIMAL)
+    {
+      maxDigits = properties.bitWidth / 16 + 1;
+    }
+    else if (properties.radix == Radix.DECIMAL)
+    {
+      if (properties.bitWidth < 63)
+      {
+        long maxInt = 1 << properties.bitWidth - 1;
+        String s = Long.toString(maxInt);
+        maxDigits = s.length();
+      }
+      else if (properties.bitWidth == 64)
+      {
+        maxDigits = 20;
+      }
+      else if (properties.bitWidth == 63)
+      {
+        maxDigits = 19;
+      }
+      else
+      {
+        throw new SimulatorException("Cannot calculate maximum decimal digits for bitwidth [%s].", properties.bitWidth);
+      }
+    }
+    if (maxDigits < 1)
+    {
+      maxDigits = 1;
+    }
+    return maxDigits;
   }
 
   @Override
@@ -142,7 +188,9 @@ public class PinView
     {
       frameView.paint(graphics, viewport);
     }
-    //drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
+
+    dataView.paint(graphics, viewport);
+    labelView.paint(graphics, viewport);
 
     paintPorts(graphics, viewport, time);
     graphics.setColor(color);

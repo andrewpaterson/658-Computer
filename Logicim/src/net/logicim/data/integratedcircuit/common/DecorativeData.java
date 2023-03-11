@@ -23,6 +23,7 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
                          Circuit circuit)
   {
     T componentView = create(subcircuitEditor.getSubcircuitView(), circuit, traceLoader);
+    componentView.enable(simulation);
 
     if (selected)
     {

@@ -41,16 +41,16 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     finalised = true;
 
-    updateBoundingBox();
+    updateBoundingBoxes();
   }
 
   @Override
-  protected void updateBoundingBox()
+  protected void updateBoundingBoxes()
   {
     if (boundingBox.isNull())
     {
       updateBoundingBoxFromPorts(boundingBox);
-      updateSelectionBox();
+      updateBoundingBoxAndSelectionBox();
     }
   }
 

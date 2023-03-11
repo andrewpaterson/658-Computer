@@ -127,6 +127,7 @@ public class TunnelView
     invalidateCache();
     updateBoundingBoxes();
 
+    Rotation.East.rotate(endPosition, endPosition);
     return endPosition;
   }
 

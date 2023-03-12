@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.passive.pin;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.point.PointGridCache;
@@ -28,7 +27,7 @@ public class SubcircuitPinView
     this.subcircuitView = subcircuitView;
     this.connection = null;
     this.positionRelativeToIC = positionRelativeToIC.clone();
-    this.positionCache =  new PointGridCache(positionRelativeToIC);
+    this.positionCache = new PointGridCache(positionRelativeToIC);
   }
 
   public ConnectionView getConnection()

@@ -38,7 +38,13 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
                     Rotation rotation,
                     PROPERTIES properties)
   {
-    this(subcircuitView, circuit, position, rotation, new BoundingBox(), new BoundingBox(), properties);
+    this(subcircuitView,
+         circuit,
+         position,
+         rotation,
+         new BoundingBox(),
+         new BoundingBox(),
+         properties);
   }
 
   public StaticView(SubcircuitView subcircuitView,

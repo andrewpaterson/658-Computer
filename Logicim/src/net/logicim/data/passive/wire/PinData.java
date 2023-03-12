@@ -1,6 +1,8 @@
 package net.logicim.data.passive.wire;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.circuit.SubcircuitPinAlignment;
+import net.logicim.data.common.Radix;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
@@ -10,8 +12,6 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.component.passive.pin.PinProperties;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
-import net.logicim.ui.simulation.component.passive.pin.Radix;
-import net.logicim.ui.simulation.component.passive.pin.SubcircuitPinAlignment;
 
 import java.util.List;
 

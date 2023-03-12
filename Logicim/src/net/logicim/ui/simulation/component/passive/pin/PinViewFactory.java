@@ -1,6 +1,8 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.circuit.SubcircuitPinAlignment;
+import net.logicim.data.common.Radix;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -20,8 +22,8 @@ public class PinViewFactory
                        circuit,
                        position,
                        rotation,
-                       new PinProperties("",
-                                         2,
+                       new PinProperties("Pin",
+                                         8,
                                          SubcircuitPinAlignment.LEFT,
                                          false,
                                          false,

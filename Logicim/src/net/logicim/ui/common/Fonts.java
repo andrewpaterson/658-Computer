@@ -2,24 +2,24 @@ package net.logicim.ui.common;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static java.awt.Font.SANS_SERIF;
+
 public class Fonts
 {
-  protected Map<Float, Map<Float, Font>> plain;
-  protected Map<Float, Map<Float, Font>> bold;
+  protected Map<String, NamedFont> fonts;
 
   protected Font defaultGraphicsFont;
+  protected NamedFont defaultFont;
   protected FontRenderContext fontRenderContext;
 
   private static Fonts instance = null;
 
   public Fonts()
   {
-    plain = new LinkedHashMap<>();
-    bold = new LinkedHashMap<>();
+    fonts = new LinkedHashMap<>();
   }
 
   public void ensureDefaultFont(Graphics2D graphics)
@@ -28,6 +28,8 @@ public class Fonts
     {
       defaultGraphicsFont = graphics.getFont();
       fontRenderContext = graphics.getFontRenderContext();
+
+      defaultFont = getFont(SANS_SERIF);
 
       for (int i = 1; i <= 20; i++)
       {
@@ -46,62 +48,37 @@ public class Fonts
     return instance;
   }
 
+  private NamedFont getFont(String fontName)
+  {
+    NamedFont namedFont = fonts.get(fontName);
+    if (namedFont == null)
+    {
+      Font font = new Font(fontName, defaultGraphicsFont.getStyle(), defaultGraphicsFont.getSize());
+      namedFont = new NamedFont(font);
+      fonts.put(fontName, namedFont);
+    }
+    return namedFont;
+  }
+
   public Font getBoldFont(float rotation, float size)
   {
-    Map<Float, Font> rotationMap = bold.get(rotation);
-    if (rotationMap == null)
-    {
-      rotationMap = new LinkedHashMap<>();
-      bold.put(rotation, rotationMap);
-    }
-
-    Font font = rotationMap.get(size);
-    if (font == null)
-    {
-      font = defaultGraphicsFont.deriveFont(Font.BOLD, size);
-      if (rotation != 0)
-      {
-        AffineTransform affineTransform = AffineTransform.getRotateInstance(Math.toRadians(rotation));
-        font = font.deriveFont(affineTransform);
-      }
-      rotationMap.put(size, font);
-    }
-    return font;
+    return defaultFont.getBoldFont(rotation, size);
   }
 
   public Font getPlainFont(float rotation, float size)
   {
-    Map<Float, Font> rotationMap = plain.get(rotation);
-    if (rotationMap == null)
-    {
-      rotationMap = new LinkedHashMap<>();
-      plain.put(rotation, rotationMap);
-    }
-
-    Font font = rotationMap.get(size);
-    if (font == null)
-    {
-      font = defaultGraphicsFont.deriveFont(Font.PLAIN, size);
-      if (rotation != 0)
-      {
-        AffineTransform affineTransform = AffineTransform.getRotateInstance(Math.toRadians(rotation));
-        font = font.deriveFont(affineTransform);
-      }
-      rotationMap.put(size, font);
-    }
-    return font;
+    return defaultFont.getPlainFont(rotation, size);
   }
 
   public Font getFont(float size, boolean bold)
   {
-    if (bold)
-    {
-      return getBoldFont(0, size);
-    }
-    else
-    {
-      return getPlainFont(0, size);
-    }
+    return defaultFont.getFont(0, size, bold);
+  }
+
+  public Font getFont(String fontName, float degrees, float size, boolean bold)
+  {
+    NamedFont namedFont = getFont(fontName);
+    return namedFont.getFont(degrees, size, bold);
   }
 
   public FontRenderContext getFontRenderContext()

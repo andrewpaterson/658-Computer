@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
+import net.logicim.data.common.Radix;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
@@ -23,6 +24,9 @@ import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 
 import java.awt.*;
+
+import static java.awt.Font.MONOSPACED;
+import static java.awt.Font.SANS_SERIF;
 
 public class PinView
     extends PassiveView<Pin, PinProperties>
@@ -65,21 +69,34 @@ public class PinView
     int maxDigits = maxDigits();
     String text = StringUtil.pad(maxDigits, "X");
 
-    dataView = new TextView(this, new Float2D(0, -0.5f), text, FONT_SIZE, false, HorizontalAlignment.LEFT);
+    dataView = new TextView(this,
+                            new Float2D(),
+                            text,
+                            MONOSPACED,
+                            FONT_SIZE,
+                            false,
+                            HorizontalAlignment.CENTER);
     Float2D topLeft = dataView.getTextOffset().clone();
     Float2D bottomRight = new Float2D(dataView.getTextDimension());
-    float fontLength = (float) Math.ceil(bottomRight.x - topLeft.x);
+    float fontLength = (float) Math.ceil(bottomRight.x - topLeft.x + 0.5f);
+    dataView.setPositionRelativeToIC(new Float2D(0.0f, -fontLength / 2.0f));
 
-    labelView = new TextView(this, new Float2D(0, -fontLength + 1), properties.name, FONT_SIZE, true, HorizontalAlignment.LEFT);
+    labelView = new TextView(this,
+                             new Float2D(0, -fontLength - 0.25f),
+                             properties.name,
+                             SANS_SERIF,
+                             FONT_SIZE,
+                             true,
+                             HorizontalAlignment.LEFT);
 
     if (maxDigits == 1)
     {
-      circleView = new CircleView(this, new Float2D(0, 1), 1, true, true);
+      circleView = new CircleView(this, new Float2D(0, -1), 1, true, true);
       frameView = null;
     }
     else
     {
-      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, 1, 0, fontLength);
+      frameView = new FrameView(this, Colours.getInstance().getShapeFill(), 1, -1, 1, -fontLength, 0);
       circleView = null;
     }
   }
@@ -201,6 +218,30 @@ public class PinView
   public Int2D getRelativeInstancePosition()
   {
     return relativeSubcircuitPosition;
+  }
+
+  @Override
+  public void setRotation(Rotation rotation)
+  {
+    super.setRotation(rotation);
+    updateTextViews();
+  }
+
+  protected void updateTextViews()
+  {
+//    Float2D topLeft = dataView.getTextOffset().clone();
+//    Float2D bottomRight = new Float2D(dataView.getTextDimension());
+//    float fontLength = (float) Math.ceil(bottomRight.x - topLeft.x);
+//    if (rotation.isNorth() || rotation.isWest() || rotation.isCannot())
+//    {
+//      dataView.setPositionRelativeToIC(new Float2D(0, -0.25f));
+//      dataView.setHorizontalAlignment(HorizontalAlignment.LEFT);
+//    }
+//    else
+//    {
+//      dataView.setPositionRelativeToIC(new Float2D(0, -0.25f));
+//      dataView.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+//    }
   }
 }
 

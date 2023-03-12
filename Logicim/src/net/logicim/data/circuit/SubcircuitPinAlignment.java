@@ -1,4 +1,4 @@
-package net.logicim.ui.simulation.component.passive.pin;
+package net.logicim.data.circuit;
 
 public enum SubcircuitPinAlignment
 {

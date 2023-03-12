@@ -23,7 +23,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.LEFT;
+import static java.awt.Font.SANS_SERIF;
 import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.RIGHT;
 
 public class SplitterView
@@ -124,6 +124,7 @@ public class SplitterView
       TextView textView = new TextView(this,
                                        position,
                                        text,
+                                       SANS_SERIF,
                                        FONT_SIZE,
                                        false,
                                        RIGHT);

@@ -361,18 +361,6 @@ public class Viewport
     }
   }
 
-  public Font getFont(float degrees, float size, boolean bold)
-  {
-    if (bold)
-    {
-      return getBoldFont(degrees, size);
-    }
-    else
-    {
-      return getPlainFont(degrees, size);
-    }
-  }
-
   public static float getScale()
   {
     return SCALE;

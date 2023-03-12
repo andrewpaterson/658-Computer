@@ -14,6 +14,8 @@ import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 import java.awt.*;
 
+import static java.awt.Font.SANS_SERIF;
+
 public class LabelView
     extends DecorativeView<LabelProperties>
 {
@@ -39,6 +41,7 @@ public class LabelView
     textView = new TextView(this,
                             new Int2D(0, 0),
                             properties.name,
+                            SANS_SERIF,
                             size,
                             properties.bold,
                             properties.alignment);

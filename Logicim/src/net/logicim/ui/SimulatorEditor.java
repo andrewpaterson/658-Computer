@@ -307,7 +307,7 @@ public class SimulatorEditor
       SubcircuitInstanceView subcircuitView = new SubcircuitInstanceView(subcircuitEditor.getSubcircuitView(),
                                                                          circuitEditor.getCircuit(),
                                                                          new Int2D(viewport.transformScreenToGridX(position.x),
-                                                                               viewport.transformScreenToGridY(position.y)),
+                                                                                   viewport.transformScreenToGridY(position.y)),
                                                                          Rotation.North);
       editAction = createEdit(new MoveComponents(subcircuitView, true), toFloatingGridPosition(position.x, position.y));
     }

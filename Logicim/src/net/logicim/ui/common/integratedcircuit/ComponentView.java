@@ -31,7 +31,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
                        Rotation rotation,
                        PROPERTIES properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView,
+          circuit,
+          position,
+          rotation,
+          properties);
     this.properties = properties;
 
     this.ports = new ArrayList<>();

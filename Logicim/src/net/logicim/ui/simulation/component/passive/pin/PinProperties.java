@@ -1,5 +1,7 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
+import net.logicim.data.circuit.SubcircuitPinAlignment;
+import net.logicim.data.common.Radix;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 

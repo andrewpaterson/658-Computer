@@ -4,7 +4,6 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.circuit.EditSubcircuitDialogHelper;
 import net.logicim.ui.circuit.NewSubcircuitDialog;
-import net.logicim.ui.circuit.NewSubcircuitEvent;
 
 public class NewSubcircuitAction
     extends SimulatorEditorAction

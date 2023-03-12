@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.awt.Font.SANS_SERIF;
 import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.LEFT;
 
 public class TunnelView
@@ -89,6 +90,7 @@ public class TunnelView
     textView = new TextView(this,
                             new Float2D(startPosition.x, startPosition.y + offsetX - 1.25f),
                             properties.name,
+                            SANS_SERIF,
                             FONT_SIZE,
                             true,
                             LEFT);

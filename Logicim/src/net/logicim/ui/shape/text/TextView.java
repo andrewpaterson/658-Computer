@@ -23,6 +23,7 @@ public class TextView
   protected Float2D textDimension;
 
   protected String text;
+  protected String fontName;
   protected float size;
   protected boolean bold;
   protected HorizontalAlignment alignment;
@@ -32,12 +33,14 @@ public class TextView
   public TextView(ShapeHolder shapeHolder,
                   Tuple2 positionRelativeToIC,
                   String text,
+                  String fontName,
                   float size,
                   boolean bold,
                   HorizontalAlignment alignment)
   {
     super(shapeHolder);
     this.positionRelativeToIC = positionRelativeToIC;
+    this.fontName = fontName;
     this.alignment = alignment;
 
     this.text = text;
@@ -46,8 +49,7 @@ public class TextView
 
     this.gridCache = new PointGridCache(positionRelativeToIC);
 
-    this.textDimension = calculateDimension();
-
+    calculateDimension();
   }
 
   public void updateGridCache()
@@ -58,7 +60,7 @@ public class TextView
     }
   }
 
-  public Float2D calculateDimension()
+  public void calculateDimension()
   {
     Font font = getFont();
     FontRenderContext fontRenderContext = Fonts.getInstance().getFontRenderContext();
@@ -78,9 +80,8 @@ public class TextView
     Float2D textDimension = new Float2D(bottomRight);
     textDimension.subtract(topLeft);
 
-    textOffset = topLeft.clone();
-
-    return textDimension;
+    this.textOffset = topLeft.clone();
+    this.textDimension = textDimension;
   }
 
   @Override
@@ -130,7 +131,7 @@ public class TextView
       yOffset = halfHeight;
     }
 
-    Font font = viewport.getFont(degrees, size * viewport.getZoom(), bold);
+    Font font = Fonts.getInstance().getFont(fontName, degrees, size * viewport.getZoom(), bold);
     graphics.setFont(font);
 
     Tuple2 transformedPosition = gridCache.getTransformedPosition();
@@ -193,7 +194,7 @@ public class TextView
 
   public Font getFont()
   {
-    return Fonts.getInstance().getFont(size, bold);
+    return Fonts.getInstance().getFont(fontName, 0, size, bold);
   }
 }
 

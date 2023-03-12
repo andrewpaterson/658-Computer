@@ -24,7 +24,11 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
                      Rotation rotation,
                      PROPERTIES properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView,
+          circuit,
+          position,
+          rotation,
+          properties);
   }
 
   protected void createComponent(Circuit circuit)

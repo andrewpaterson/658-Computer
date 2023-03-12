@@ -182,6 +182,13 @@ public class TextView
     invalidateCache();
   }
 
+  public void setText(String text)
+  {
+    this.text = text;
+    calculateDimension();
+    invalidateCache();
+  }
+
   public Tuple2 getTextDimension()
   {
     return textDimension;

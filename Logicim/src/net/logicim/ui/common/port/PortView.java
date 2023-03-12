@@ -11,7 +11,9 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -357,6 +359,25 @@ public class PortView
   public String getText()
   {
     return text;
+  }
+
+  public TraceValue[] getValue(long time, FamilyVoltageConfiguration voltageConfiguration, float vcc)
+  {
+    TraceValue[] traceValues = new TraceValue[ports.size()];
+    for (int i = 0; i < ports.size(); i++)
+    {
+      Port port = ports.get(i);
+      if (port != null && port.getTrace() != null)
+      {
+        float voltage = port.getTrace().getVoltage(time);
+        traceValues[i] = voltageConfiguration.getValue(voltage, vcc);
+      }
+      else
+      {
+        traceValues[i] = TraceValue.Undriven;
+      }
+    }
+    return traceValues;
   }
 }
 

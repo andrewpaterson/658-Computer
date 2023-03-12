@@ -205,17 +205,17 @@ public class VoltageConfiguration
 
   public TraceValue getValue(float voltage)
   {
-    if (voltage <= lowVoltageIn)
+    if (Float.isNaN(voltage))
+    {
+      return TraceValue.Undriven;
+    }
+    else if (voltage <= lowVoltageIn)
     {
       return TraceValue.Low;
     }
     else if (voltage >= highVoltageIn)
     {
       return TraceValue.High;
-    }
-    else if (Float.isNaN(voltage))
-    {
-      return TraceValue.Undriven;
     }
     else
     {

@@ -12,7 +12,7 @@ public class PowerSource
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     super(circuit, name);
-    ports.add(new PowerOutPort("Power", this, voltage));
+    new PowerOutPort("Power", this, voltage);
   }
 
   @Override

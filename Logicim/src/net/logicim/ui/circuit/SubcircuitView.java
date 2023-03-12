@@ -200,7 +200,7 @@ public class SubcircuitView
       if (staticView instanceof ComponentView)
       {
         ComponentView<?> componentView = (ComponentView<?>) staticView;
-        List<PortView> portViews = componentView.getPorts();
+        List<PortView> portViews = componentView.getPortViews();
         for (PortView portView : portViews)
         {
           Int2D portPosition = portView.getGridPosition();

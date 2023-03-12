@@ -16,8 +16,8 @@ public abstract class Pins
   public Pins()
   {
     super();
-    this.vcc = addPort(new PowerInPort(PortType.PowerIn, "VCC", this));
-    this.vss = addPort(new PowerInPort(PortType.PowerIn, "GND", this));
+    this.vcc = new PowerInPort(PortType.PowerIn, "VCC", this);
+    this.vss = new PowerInPort(PortType.PowerIn, "GND", this);
   }
 
   public String getName()

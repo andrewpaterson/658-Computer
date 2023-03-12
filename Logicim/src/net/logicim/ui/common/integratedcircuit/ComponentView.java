@@ -1,6 +1,8 @@
 package net.logicim.ui.common.integratedcircuit;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.MultiPortData;
 import net.logicim.domain.Simulation;
@@ -16,14 +18,14 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     extends StaticView<PROPERTIES>
     implements ShapeHolder
 {
-  protected List<PortView> ports;
+  protected List<PortView> portViews;
 
   public ComponentView(SubcircuitView subcircuitView,
                        Circuit circuit,
@@ -38,7 +40,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
           properties);
     this.properties = properties;
 
-    this.ports = new ArrayList<>();
+    this.portViews = new ArrayList<>();
   }
 
   protected void finaliseView(Circuit circuit)
@@ -62,7 +64,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     super.invalidateCache();
 
-    for (PortView port : ports)
+    for (PortView port : portViews)
     {
       port.invalidateCache();
     }
@@ -87,7 +89,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
-    List<PortView> portViews = getPorts();
+    List<PortView> portViews = getPortViews();
     for (PortView portView : portViews)
     {
       Int2D portPosition = portView.getGridPosition();
@@ -100,7 +102,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public PortView getPortView(Port port)
   {
-    for (PortView portView : ports)
+    for (PortView portView : portViews)
     {
       if (portView.containsPort(port))
       {
@@ -112,7 +114,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void paintPorts(Graphics2D graphics, Viewport viewport, long time)
   {
-    for (PortView portView : ports)
+    for (PortView portView : portViews)
     {
       portView.paint(graphics, viewport, time);
     }
@@ -120,19 +122,19 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public void addPortView(PortView portView)
   {
-    ports.add(portView);
+    portViews.add(portView);
   }
 
-  public List<PortView> getPorts()
+  public List<PortView> getPortViews()
   {
-    return ports;
+    return portViews;
   }
 
   @Override
   public List<ConnectionView> getConnections()
   {
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    for (PortView port : ports)
+    for (PortView port : portViews)
     {
       ConnectionView connectionView = port.getConnection();
       if (connectionView != null)
@@ -145,8 +147,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected List<MultiPortData> savePorts()
   {
-    List<MultiPortData> portDatas = new ArrayList<>(ports.size());
-    for (PortView port : ports)
+    List<MultiPortData> portDatas = new ArrayList<>(portViews.size());
+    for (PortView port : portViews)
     {
       MultiPortData portData = port.save();
       portDatas.add(portData);
@@ -156,12 +158,12 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public PortView getPort(int index)
   {
-    return ports.get(index);
+    return portViews.get(index);
   }
 
   public PortView getPort(ConnectionView connectionView)
   {
-    for (PortView portView : ports)
+    for (PortView portView : portViews)
     {
       if (portView.getConnection() == connectionView)
       {
@@ -173,7 +175,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void updateBoundingBoxFromPorts(BoundingBox boundingBox)
   {
-    for (PortView port : ports)
+    for (PortView port : portViews)
     {
       port.updateBoundingBox(boundingBox);
     }
@@ -197,24 +199,56 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return getComponent().getType() + " " + getName() + " (" + getPosition() + ")";
   }
 
+  protected void validateAtLeastOnePort(List<PortView> portViews)
+  {
+    for (PortView portView : portViews)
+    {
+      List<? extends Port> ports = portView.getPorts();
+      if (ports.size() < 1)
+      {
+        throw new SimulatorException("PortView [%s] must have at lease one port on view [%s].", portView.getText(), getDescription());
+      }
+    }
+  }
+
+  protected void validateNoDuplicatePorts(List<Port> ports)
+  {
+    Set<String> portNames = new HashSet<>();
+    Set<String> duplicatePortNames = new LinkedHashSet<>();
+    for (Port port : ports)
+    {
+      String portName = port.getName();
+      if (portNames.contains(portName))
+      {
+        duplicatePortNames.add(portName);
+      }
+      portNames.add(portName);
+    }
+
+    if (duplicatePortNames.size() > 0)
+    {
+      throw new SimulatorException("Duplicate Ports [%s] on view [%s].", StringUtil.commaSeparateList(new ArrayList<>(duplicatePortNames)), getDescription());
+    }
+  }
+
   public boolean isEnabled()
   {
     return getComponent().isEnabled();
   }
 
-  protected abstract void createPortViews();
-
-  public abstract Component getComponent();
-
   @Override
   public void disconnect(Simulation simulation)
   {
-    for (PortView portView : ports)
+    for (PortView portView : portViews)
     {
       portView.disconnect(simulation);
       return;
     }
   }
+
+  protected abstract void createPortViews();
+
+  public abstract Component getComponent();
 
   public abstract ComponentData<?> save(boolean selected);
 

@@ -6,15 +6,21 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.common.Passive;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pin
     extends Passive
 {
+  protected List<TracePort> tracePorts;
+
   public Pin(Circuit circuit, String name, int portCount)
   {
     super(circuit, name);
+    tracePorts = new ArrayList<>();
     for (int i = 0; i < portCount; i++)
     {
-      ports.add(new TracePort("Port " + i, this));
+      tracePorts.add(new TracePort("Port " + i, this));
     }
   }
 

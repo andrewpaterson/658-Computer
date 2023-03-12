@@ -67,7 +67,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
 
   protected void loadPorts(TraceLoader traceLoader, T componentView, Simulation simulation)
   {
-    List<PortView> portViews = componentView.getPorts();
+    List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
     {
       MultiPortData multiPortData = ports.get(i);

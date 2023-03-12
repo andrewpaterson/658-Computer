@@ -2,6 +2,7 @@ package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
@@ -10,8 +11,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.port.PortView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
@@ -58,12 +58,20 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
   protected void validatePorts()
   {
-    List<Port> ports = getComponent().getPorts();
-    if ((ports.size() > 0) && (this.ports.size() == 0))
+    List<Port> ports = passive.getPorts();
+
+    if ((ports.size() > 0) && (portViews.size() == 0))
     {
-      throw new SimulatorException("Ports not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
+      throw new SimulatorException("Ports not configured on Pas view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
     }
 
+    validateAtLeastOnePort(portViews);
+    validateNoMissingPorts(ports);
+    validateNoDuplicatePorts(ports);
+  }
+
+  protected void validateNoMissingPorts(List<Port> ports)
+  {
     List<Port> missing = new ArrayList<>();
     for (Port port : ports)
     {
@@ -76,22 +84,12 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
     if (missing.size() > 0)
     {
-      StringBuilder builder = new StringBuilder();
-      boolean first = true;
+      List<String> missingNames = new ArrayList<>();
       for (Port port : missing)
       {
-        if (first)
-        {
-          first = false;
-        }
-        else
-        {
-          builder.append(", ");
-        }
-        builder.append(port.getName());
-
+        missingNames.add(port.getName());
       }
-      throw new SimulatorException("Ports [" + builder.toString() + "] not configured on IC view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
+      throw new SimulatorException("Ports [%s] not configured on view.  Call new PortView(Port) for each Port on view [%s].", StringUtil.commaSeparateList(missingNames), getDescription());
     }
   }
 

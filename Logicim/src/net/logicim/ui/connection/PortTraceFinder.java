@@ -194,7 +194,7 @@ public abstract class PortTraceFinder
     {
       SplitterView splitterView = splitterViewConnection.component;
 
-      List<PortView> portViews = splitterView.getPorts();
+      List<PortView> portViews = splitterView.getPortViews();
       for (PortView portView : portViews)
       {
         ConnectionView connectionView = portView.getConnection();

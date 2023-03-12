@@ -18,8 +18,8 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     extends StaticView<PROPERTIES>
@@ -211,6 +211,59 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
+  public boolean isEnabled()
+  {
+    return getComponent().isEnabled();
+  }
+
+  @Override
+  public void disconnect(Simulation simulation)
+  {
+    for (PortView portView : portViews)
+    {
+      portView.disconnect(simulation);
+      return;
+    }
+  }
+
+  protected void validatePorts(List<Port> ports, List<PortView> portViews)
+  {
+    if ((ports.size() > 0) && (portViews.size() == 0))
+    {
+      throw new SimulatorException("Ports not configured on view.  Call new PortView(Port) for each Port on view [%s].", getDescription());
+    }
+
+    validateAtLeastOnePort(portViews);
+    validateNoMissingPorts(ports);
+    validateNoDuplicatePorts(ports);
+  }
+
+  protected void validateNoMissingPorts(List<Port> ports)
+  {
+    List<Port> missing = new ArrayList<>();
+    for (Port port : ports)
+    {
+      if (port.isLogicPort())
+      {
+        PortView portView = getPortView(port);
+        if (portView == null)
+        {
+          missing.add(port);
+        }
+      }
+    }
+
+    if (missing.size() > 0)
+    {
+      List<String> missingNames = new ArrayList<>();
+      for (Port port : missing)
+      {
+        missingNames.add(port.getName());
+      }
+      throw new SimulatorException("Ports [%s] not configured on view.  Call new PortView(Port) for each Port on view [%s].", StringUtil.commaSeparateList(missingNames), getDescription());
+    }
+  }
+
   protected void validateNoDuplicatePorts(List<Port> ports)
   {
     Set<String> portNames = new HashSet<>();
@@ -228,21 +281,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     if (duplicatePortNames.size() > 0)
     {
       throw new SimulatorException("Duplicate Ports [%s] on view [%s].", StringUtil.commaSeparateList(new ArrayList<>(duplicatePortNames)), getDescription());
-    }
-  }
-
-  public boolean isEnabled()
-  {
-    return getComponent().isEnabled();
-  }
-
-  @Override
-  public void disconnect(Simulation simulation)
-  {
-    for (PortView portView : portViews)
-    {
-      portView.disconnect(simulation);
-      return;
     }
   }
 

@@ -58,39 +58,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
   protected void validatePorts()
   {
-    List<Port> ports = passive.getPorts();
-
-    if ((ports.size() > 0) && (portViews.size() == 0))
-    {
-      throw new SimulatorException("Ports not configured on Pas view.  Call new PortView(Port) for each Port on the IntegratedCircuit.");
-    }
-
-    validateAtLeastOnePort(portViews);
-    validateNoMissingPorts(ports);
-    validateNoDuplicatePorts(ports);
-  }
-
-  protected void validateNoMissingPorts(List<Port> ports)
-  {
-    List<Port> missing = new ArrayList<>();
-    for (Port port : ports)
-    {
-      PortView portView = getPortView(port);
-      if (portView == null)
-      {
-        missing.add(port);
-      }
-    }
-
-    if (missing.size() > 0)
-    {
-      List<String> missingNames = new ArrayList<>();
-      for (Port port : missing)
-      {
-        missingNames.add(port.getName());
-      }
-      throw new SimulatorException("Ports [%s] not configured on view.  Call new PortView(Port) for each Port on view [%s].", StringUtil.commaSeparateList(missingNames), getDescription());
-    }
+    validatePorts(passive.getPorts(), portViews);
   }
 
   public PASSIVE getComponent()

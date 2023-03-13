@@ -87,7 +87,6 @@ public class SplitterView
 
   protected List<PortView> createEndPorts(SplitterProperties properties)
   {
-    System.out.println("SplitterView.createEndPorts");
     List<PortView> portViews = new ArrayList<>();
     int portIndex = 0;
     for (int fanOutIndex = 0; fanOutIndex < properties.fanOut; fanOutIndex++)
@@ -95,34 +94,19 @@ public class SplitterView
       List<Integer> portIndicesForFanOutIndex = getPortIndexForFanOutIndex(fanOutIndex);
       if (portIndicesForFanOutIndex.size() > 0)
       {
-        List<Port> portsForFanOutIndex = getEndPortsForIndices(portIndicesForFanOutIndex);
+        List<Port> portsForFanOutIndex = new ArrayList<>();
+        for (int i = 0; i < portIndicesForFanOutIndex.size(); i++)
+        {
+          portsForFanOutIndex.add(getEndPort(portIndex));
+          portIndex++;
+        }
+
         Float2D position = createEndPosition(fanOutIndex);
         PortView portView = new PortView(this, portsForFanOutIndex, new Int2D(position));
         portViews.add(portView);
-
-        System.out.println(fanOutIndex + ": " + toPortIndicesString(portIndicesForFanOutIndex));
       }
     }
     return portViews;
-  }
-
-  private String toPortIndicesString(List<Integer> portIndicesForFanOutIndex)
-  {
-    StringBuilder builder = new StringBuilder();
-    boolean first = true;
-    for (Integer index : portIndicesForFanOutIndex)
-    {
-      if (first)
-      {
-        first = false;
-      }
-      else
-      {
-        builder.append(", ");
-      }
-      builder.append(index);
-    }
-    return builder.toString();
   }
 
   private List<Port> getEndPortsForIndices(List<Integer> portIndicesForFanOutIndex)

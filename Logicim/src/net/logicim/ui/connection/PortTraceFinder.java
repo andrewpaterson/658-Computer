@@ -24,24 +24,6 @@ public abstract class PortTraceFinder
   {
     WireList wireList = findWires(inputConnectionView, connectionNets);
 
-    List<FullWire> fullWires = wireList.getFullWires();
-    for (FullWire fullWire : fullWires)
-    {
-      Set<PortConnection> localWires = fullWire.getLocalWires();
-      System.out.println("Full wire local size [" + localWires.size() + "]");
-      for (PortConnection localWire : localWires)
-      {
-        Set<Port> splitterPorts = localWire.getSplitterPorts();
-        StringBuilder builder = new StringBuilder();
-        for (Port splitterPort : splitterPorts)
-        {
-          builder.append(splitterPort.getDescription());
-          builder.append(", ");
-        }
-        System.out.println(builder.toString());
-      }
-    }
-
     connectFullWires(simulation, wireList.getFullWires());
 
     List<PartialWire> partialWires = wireList.getPartialWires();
@@ -173,11 +155,6 @@ public abstract class PortTraceFinder
         Map<Port, Port> portMap = splitterView.getBidirectionalPortMap();
         totalSplitterPortMap.putAll(portMap);
       }
-    }
-
-    for (Map.Entry<Port, Port> entry : totalSplitterPortMap.entrySet())
-    {
-      System.out.println(entry.getKey().getDescription() + " -> " + entry.getValue().getDescription());
     }
 
     return totalSplitterPortMap;

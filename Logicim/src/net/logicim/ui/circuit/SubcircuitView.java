@@ -478,6 +478,7 @@ public class SubcircuitView
 
   public Set<ConnectionView> connectConnectionViews(Set<ConnectionView> connectionViews, CircuitSimulation simulation)
   {
+    System.out.println("SubcircuitView.connectConnectionViews");
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {
@@ -532,6 +533,7 @@ public class SubcircuitView
 
   public Set<ConnectionView> createConnectConnectionViewTraces(List<ConnectionView> connectionViews, CircuitSimulation simulation)
   {
+    System.out.println("SubcircuitView.createConnectConnectionViewTraces");
     Set<ConnectionView> updatedConnectionViews = new HashSet<>();
     for (ConnectionView connectionView : connectionViews)
     {

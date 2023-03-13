@@ -57,15 +57,15 @@ public class SplitterView
     endPortViews = createEndPorts(properties);
   }
 
-  protected List<Port> getPortsForFanOutIndex(int fanIndex)
+  protected List<Integer> getPortIndexForFanOutIndex(int fanIndex)
   {
-    List<Port> ports = new ArrayList<>();
+    List<Integer> ports = new ArrayList<>();
     for (int i = 0; i < properties.splitIndices.length; i++)
     {
       int x = properties.splitIndices[i];
       if (x == fanIndex)
       {
-        ports.add(passive.getEndPort(i));
+        ports.add(i);
       }
     }
     return ports;
@@ -87,18 +87,57 @@ public class SplitterView
 
   protected List<PortView> createEndPorts(SplitterProperties properties)
   {
+    System.out.println("SplitterView.createEndPorts");
     List<PortView> portViews = new ArrayList<>();
-    for (int i = 0; i < properties.fanOut; i++)
+    int portIndex = 0;
+    for (int fanOutIndex = 0; fanOutIndex < properties.fanOut; fanOutIndex++)
     {
-      List<Port> portsForFanOut = getPortsForFanOutIndex(i);
-      if (portsForFanOut.size() > 0)
+      List<Integer> portIndicesForFanOutIndex = getPortIndexForFanOutIndex(fanOutIndex);
+      if (portIndicesForFanOutIndex.size() > 0)
       {
-        Float2D position = createEndPosition(i);
-        PortView portView = new PortView(this, portsForFanOut, new Int2D(position));
+        List<Port> portsForFanOutIndex = getEndPortsForIndices(portIndicesForFanOutIndex);
+        Float2D position = createEndPosition(fanOutIndex);
+        PortView portView = new PortView(this, portsForFanOutIndex, new Int2D(position));
         portViews.add(portView);
+
+        System.out.println(fanOutIndex + ": " + toPortIndicesString(portIndicesForFanOutIndex));
       }
     }
     return portViews;
+  }
+
+  private String toPortIndicesString(List<Integer> portIndicesForFanOutIndex)
+  {
+    StringBuilder builder = new StringBuilder();
+    boolean first = true;
+    for (Integer index : portIndicesForFanOutIndex)
+    {
+      if (first)
+      {
+        first = false;
+      }
+      else
+      {
+        builder.append(", ");
+      }
+      builder.append(index);
+    }
+    return builder.toString();
+  }
+
+  private List<Port> getEndPortsForIndices(List<Integer> portIndicesForFanOutIndex)
+  {
+    List<Port> portsForFanOutIndex = new ArrayList<>(portIndicesForFanOutIndex.size());
+    for (Integer indicesForFanOutIndex : portIndicesForFanOutIndex)
+    {
+      portsForFanOutIndex.add(getEndPort(indicesForFanOutIndex));
+    }
+    return portsForFanOutIndex;
+  }
+
+  private Port getEndPort(Integer endPortIndex)
+  {
+    return passive.endPorts.get(endPortIndex);
   }
 
   private void createGraphics()
@@ -425,6 +464,12 @@ public class SplitterView
     }
 
     return result;
+  }
+
+  private List<Port> getPortsForFanOutIndex(int fanIndex)
+  {
+    List<Integer> portIndicesForFanOutIndex = getPortIndicesForFanoutIndex(fanIndex);
+    return getEndPortsForIndices(portIndicesForFanOutIndex);
   }
 
   protected void updateTextViews()

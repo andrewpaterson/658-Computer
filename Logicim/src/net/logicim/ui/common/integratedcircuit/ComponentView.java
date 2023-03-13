@@ -156,7 +156,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return portDatas;
   }
 
-  public PortView getPort(int index)
+  public PortView getPortView(int index)
   {
     return portViews.get(index);
   }

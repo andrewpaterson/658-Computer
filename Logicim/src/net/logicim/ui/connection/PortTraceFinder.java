@@ -24,6 +24,24 @@ public abstract class PortTraceFinder
   {
     WireList wireList = findWires(inputConnectionView, connectionNets);
 
+    List<FullWire> fullWires = wireList.getFullWires();
+    for (FullWire fullWire : fullWires)
+    {
+      Set<PortConnection> localWires = fullWire.getLocalWires();
+      System.out.println("Full wire local size [" + localWires.size() + "]");
+      for (PortConnection localWire : localWires)
+      {
+        Set<Port> splitterPorts = localWire.getSplitterPorts();
+        StringBuilder builder = new StringBuilder();
+        for (Port splitterPort : splitterPorts)
+        {
+          builder.append(splitterPort.getDescription());
+          builder.append(", ");
+        }
+        System.out.println(builder.toString());
+      }
+    }
+
     connectFullWires(simulation, wireList.getFullWires());
 
     List<PartialWire> partialWires = wireList.getPartialWires();
@@ -156,6 +174,12 @@ public abstract class PortTraceFinder
         totalSplitterPortMap.putAll(portMap);
       }
     }
+
+    for (Map.Entry<Port, Port> entry : totalSplitterPortMap.entrySet())
+    {
+      System.out.println(entry.getKey().getDescription() + " -> " + entry.getValue().getDescription());
+    }
+
     return totalSplitterPortMap;
   }
 
@@ -177,30 +201,36 @@ public abstract class PortTraceFinder
     return totalPortWireMap;
   }
 
-  protected static void processLocalConnections(ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets, List<ComponentConnection<SplitterView>> splitterViewStack, Map<ConnectionView, SplitterView> processedSplitterViewConnections)
+  protected static void processLocalConnections(ConnectionView inputConnectionView,
+                                                List<LocalConnectionNet> connectionNets,
+                                                List<ComponentConnection<SplitterView>> splitterViewStack,
+                                                Map<ConnectionView, SplitterView> processedSplitterViewConnections)
   {
     LocalConnectionNet connectionNet = new LocalConnectionNet(inputConnectionView);
     connectionNets.add(connectionNet);
 
     List<ComponentConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();
-    for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
+    if (splitterViews.size() > 0)
     {
-      SplitterView splitterView = splitterViewConnection.component;
-      ConnectionView connection = splitterViewConnection.connection;
-      processedSplitterViewConnections.put(connection, splitterView);
-    }
-
-    for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
-    {
-      SplitterView splitterView = splitterViewConnection.component;
-
-      List<PortView> portViews = splitterView.getPortViews();
-      for (PortView portView : portViews)
+      for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
       {
-        ConnectionView connectionView = portView.getConnection();
-        if (!processedSplitterViewConnections.containsKey(connectionView))
+        SplitterView splitterView = splitterViewConnection.component;
+        ConnectionView connection = splitterViewConnection.connection;
+        processedSplitterViewConnections.put(connection, splitterView);
+      }
+
+      for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
+      {
+        SplitterView splitterView = splitterViewConnection.component;
+
+        List<PortView> portViews = splitterView.getPortViews();
+        for (PortView portView : portViews)
         {
-          splitterViewStack.add(new ComponentConnection<>(splitterView, connectionView));
+          ConnectionView connectionView = portView.getConnection();
+          if (!processedSplitterViewConnections.containsKey(connectionView))
+          {
+            splitterViewStack.add(new ComponentConnection<>(splitterView, connectionView));
+          }
         }
       }
     }

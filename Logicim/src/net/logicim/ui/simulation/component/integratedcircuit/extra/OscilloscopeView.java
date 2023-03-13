@@ -109,7 +109,7 @@ public class OscilloscopeView
 
         for (int input = 0; input < minimumVoltageGrid.length; input++)
         {
-          PortView port = getPort(input);
+          PortView port = getPortView(input);
           float[] minimumVoltageLine = minimumVoltageGrid[input];
           float[] maximumVoltageLine = maximumVoltageGrid[input];
           int[] colourLine = colourGrid[input];

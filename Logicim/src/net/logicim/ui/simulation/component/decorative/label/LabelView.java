@@ -1,6 +1,5 @@
 package net.logicim.ui.simulation.component.decorative.label;
 
-import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
@@ -46,24 +45,11 @@ public class LabelView
                             properties.bold,
                             properties.alignment);
 
-    Float2D topLeft = textView.getTextOffset().clone();
-    Float2D bottomRight = new Float2D(textView.getTextDimension());
-    float height = bottomRight.y;
-    bottomRight.add(topLeft);
-
-    float widthAdjust = textView.getWidthAdjust();
-    topLeft.x += widthAdjust - height / 4f;
-    bottomRight.x += widthAdjust + height / 4f;
-
-    Rotation.East.rotate(topLeft, topLeft);
-    Rotation.East.rotate(bottomRight, bottomRight);
-
     rectangleView = new RectangleView(this,
-                                      topLeft,
-                                      bottomRight,
+                                      textView.calculateTopLeft(),
+                                      textView.calculateBottomRight(),
                                       properties.border,
                                       properties.fill);
-
   }
 
   @Override

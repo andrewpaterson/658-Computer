@@ -167,6 +167,8 @@ public class TextView
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
+    boundingBox.include(calculateTopLeft());
+    boundingBox.include(calculateBottomRight());
   }
 
   @Override
@@ -202,6 +204,39 @@ public class TextView
   public Font getFont()
   {
     return Fonts.getInstance().getFont(fontName, 0, size, bold);
+  }
+
+  public Float2D calculateTopLeft()
+  {
+    Float2D topLeft = getTextOffset().clone();
+    Float2D bottomRight = new Float2D(getTextDimension());
+    float height = bottomRight.y;
+    bottomRight.add(topLeft);
+
+    float widthAdjust = getWidthAdjust();
+    topLeft.x += widthAdjust - height / 4f;
+    bottomRight.x += widthAdjust + height / 4f;
+
+    Rotation.East.rotate(topLeft, topLeft);
+    topLeft.add(positionRelativeToIC);
+
+    return topLeft;
+  }
+
+  public Float2D calculateBottomRight()
+  {
+    Float2D topLeft = getTextOffset().clone();
+    Float2D bottomRight = new Float2D(getTextDimension());
+    float height = bottomRight.y;
+    bottomRight.add(topLeft);
+
+    float widthAdjust = getWidthAdjust();
+    bottomRight.x += widthAdjust + height / 4f;
+
+    Rotation.East.rotate(bottomRight, bottomRight);
+    bottomRight.add(positionRelativeToIC);
+
+    return bottomRight;
   }
 }
 

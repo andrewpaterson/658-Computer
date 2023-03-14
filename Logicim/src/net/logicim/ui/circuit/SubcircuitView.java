@@ -23,6 +23,7 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceFinder;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.connection.ConnectionFinder;
 import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -476,7 +477,7 @@ public class SubcircuitView
     return connectionViewCache.getConnection(x, y);
   }
 
-  public Set<ConnectionView> connectConnectionViews(Set<ConnectionView> connectionViews, CircuitSimulation simulation)
+  public Set<ConnectionView> connectConnectionViews(Collection<ConnectionView> connectionViews, CircuitSimulation simulation)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : connectionViews)
@@ -487,6 +488,7 @@ public class SubcircuitView
         updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
       }
     }
+
     return updatedConnectionViews;
   }
 
@@ -505,7 +507,7 @@ public class SubcircuitView
     staticViews.add(staticView);
 
     List<ConnectionView> connectionViews = createStaticViewConnections(staticViews);
-    Set<ConnectionView> updatedConnectionViews = createConnectConnectionViewTraces(connectionViews, simulation);
+    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews, simulation);
     enableStaticViews(staticViews, simulation);
 
     return updatedConnectionViews;
@@ -528,21 +530,6 @@ public class SubcircuitView
       staticView.enable(simulation.getSimulation());
       staticView.simulationStarted(simulation.getSimulation());
     }
-  }
-
-  public Set<ConnectionView> createConnectConnectionViewTraces(List<ConnectionView> connectionViews, CircuitSimulation simulation)
-  {
-    Set<ConnectionView> updatedConnectionViews = new HashSet<>();
-    for (ConnectionView connectionView : connectionViews)
-    {
-      if (!updatedConnectionViews.contains(connectionView))
-      {
-        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(simulation.getSimulation(), connectionView);
-        updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
-      }
-    }
-
-    return updatedConnectionViews;
   }
 
   public Set<PortView> getPortViews(Set<ConnectionView> connectionViews)
@@ -618,7 +605,8 @@ public class SubcircuitView
     removeTraceViews(touchingTraceViews);
     Set<TraceView> traceViews = generateNewTraces(lines);
 
-    connectCreatedTraces(traceViews, simulation);
+    Set<ConnectionView> updatedConnectionViews = connectCreatedTraces(traceViews, simulation);
+    fireConnectionEvents(updatedConnectionViews, simulation);
     return traceViews;
   }
 
@@ -638,12 +626,47 @@ public class SubcircuitView
       }
     }
 
+    Set<ConnectionView> nonTraceConnectionViews = findNonTraceConnections(inputTraceViews);
     removeTraceViews(inputTraceViews);
 
     Set<Line> lines = new LinkedHashSet<>();
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
     recreateTraceViews(lines, touchingTraceViews, simulation);
+
+    findAndConnectNonTraceViewsForDeletion(simulation, nonTraceConnectionViews);
+  }
+
+  protected void findAndConnectNonTraceViewsForDeletion(CircuitSimulation simulation, Set<ConnectionView> nonTraceConnectionViews)
+  {
+    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+    for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
+    {
+      List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(simulation.getSimulation(), nonTraceConnectionView);
+      updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
+    }
+    fireConnectionEvents(updatedConnectionViews, simulation);
+  }
+
+  protected Set<ConnectionView> findNonTraceConnections(Set<TraceView> inputTraceViews)
+  {
+    Set<ConnectionView> nonTraceConnectionViews = new LinkedHashSet<>();
+    for (TraceView inputTraceView : inputTraceViews)
+    {
+      List<ConnectionView> connectionViews = inputTraceView.getConnections();
+      for (ConnectionView connectionView : connectionViews)
+      {
+        List<View> connectedComponents = connectionView.getConnectedComponents();
+        for (View connectedComponent : connectedComponents)
+        {
+          if (!(connectedComponent instanceof TraceView))
+          {
+            nonTraceConnectionViews.add(connectionView);
+          }
+        }
+      }
+    }
+    return nonTraceConnectionViews;
   }
 
   private Set<TraceView> generateNewTraces(Set<Line> lines)
@@ -679,7 +702,7 @@ public class SubcircuitView
     return traceViews;
   }
 
-  public void connectCreatedTraces(Set<TraceView> traceViews, CircuitSimulation simulation)
+  public Set<ConnectionView> connectCreatedTraces(Set<TraceView> traceViews, CircuitSimulation simulation)
   {
     Set<ConnectionView> connectionViews = new HashSet<>();
     Set<ConnectionView> updatedConnectionViews;
@@ -694,8 +717,7 @@ public class SubcircuitView
       i++;
     }
     updatedConnectionViews = connectConnectionViews(connectionViews, simulation);
-
-    fireConnectionEvents(updatedConnectionViews, simulation);
+    return updatedConnectionViews;
   }
 
   public SubcircuitData save(Set<View> selection)
@@ -780,14 +802,14 @@ public class SubcircuitView
     }
     removeTraceViews(existingTraceViews);
 
-    Set<ConnectionView> updatedConnectionViews = createConnectConnectionViewTraces(connectionViews, simulation);
+    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews, simulation);
     enableStaticViews(staticViews, simulation);
 
     Set<TraceView> existingTraces = createTraceViews(existingLines, simulation);
-    connectCreatedTraces(existingTraces, simulation);
+    updatedConnectionViews.addAll(connectCreatedTraces(existingTraces, simulation));
 
     Set<TraceView> newTraces = createTraceViews(newLines, simulation);
-    connectCreatedTraces(newTraces, simulation);
+    updatedConnectionViews.addAll(connectCreatedTraces(newTraces, simulation));
 
     fireConnectionEvents(updatedConnectionViews, simulation);
 

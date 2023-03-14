@@ -24,14 +24,6 @@ public class TraceFinder
     connectionsToProcess.addAll(traceView.getConnections());
   }
 
-  public void addAll(Collection<TraceView> traceViews)
-  {
-    for (TraceView traceView : traceViews)
-    {
-      add(traceView);
-    }
-  }
-
   public Set<TraceView> getTraceViews()
   {
     return traceViews;

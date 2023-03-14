@@ -77,11 +77,14 @@ public abstract class ComponentData<T extends ComponentView<?>>
       for (int j = 0; j < ports.size(); j++)
       {
         Port port = ports.get(j);
-        PortData portData = multiPortData.ports.get(j);
-        Trace trace = traceLoader.create(portData.traceId);
-        port.connect(trace);
+        if (j < multiPortData.ports.size())
+        {
+          PortData portData = multiPortData.ports.get(j);
+          Trace trace = traceLoader.create(portData.traceId);
+          port.connect(trace);
 
-        loadPort(simulation, portData, port);
+          loadPort(simulation, portData, port);
+        }
       }
     }
   }

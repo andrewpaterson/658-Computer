@@ -3,6 +3,8 @@ package net.logicim.domain.passive.wire;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.PortType;
+import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.common.Passive;
 
@@ -13,6 +15,8 @@ public class Pin
     extends Passive
 {
   protected List<TracePort> tracePorts;
+  protected PowerInPort vcc;
+  protected PowerInPort vss;
 
   public Pin(Circuit circuit, String name, int portCount)
   {
@@ -22,6 +26,9 @@ public class Pin
     {
       tracePorts.add(new TracePort("Port " + i, this));
     }
+
+    vcc = new PowerInPort(PortType.PowerIn, "VCC", this);
+    vss = new PowerInPort(PortType.PowerIn, "GND", this);
   }
 
   @Override
@@ -33,6 +40,31 @@ public class Pin
   @Override
   public void traceConnected(Simulation simulation, Port port)
   {
+  }
+
+  public PowerInPort getVoltageCommon()
+  {
+    return vcc;
+  }
+
+  public float getVCC(long time)
+  {
+    return vcc.getVoltageIn(time);
+  }
+
+  public float getGND(long time)
+  {
+    return vss.getVoltageIn(time);
+  }
+
+  public PowerInPort getVoltageGround()
+  {
+    return vss;
+  }
+
+  public List<TracePort> getTracePorts()
+  {
+    return tracePorts;
   }
 }
 

@@ -6,9 +6,9 @@ import net.logicim.domain.common.wire.Trace;
 public class PowerInPort
     extends Port
 {
-  public PowerInPort(PortType portType, String name, Pins pins)
+  public PowerInPort(PortType portType, String name, PortHolder portHolder)
   {
-    super(portType, name, pins);
+    super(portType, name, portHolder);
   }
 
   @Override

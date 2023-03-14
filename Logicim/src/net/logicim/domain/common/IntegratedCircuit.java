@@ -106,6 +106,16 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
+  public PowerInPort getVoltageCommon()
+  {
+    return pins.getVoltageCommon();
+  }
+
+  public PowerInPort getVoltageGround()
+  {
+    return pins.getVoltageGround();
+  }
+
   public boolean isEnabled()
   {
     return enabled;
@@ -151,12 +161,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   {
   }
 
-  public abstract State createState(Simulation simulation);
-
-  public abstract void simulationStarted(Simulation simulation);
-
-  public abstract void inputTransition(Simulation simulation, LogicPort port);
-
   protected float getVCC(long time)
   {
     PowerInPort voltageCommon = getPins().getVoltageCommon();
@@ -168,8 +172,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     PowerInPort voltageGround = getPins().getVoltageGround();
     return voltageGround.getVoltageIn(time);
   }
-
-  public abstract String getType();
 
   public STATE getState()
   {
@@ -217,5 +219,13 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
     this.events.clear();
   }
+
+  public abstract State createState(Simulation simulation);
+
+  public abstract void simulationStarted(Simulation simulation);
+
+  public abstract void inputTransition(Simulation simulation, LogicPort port);
+
+  public abstract String getType();
 }
 

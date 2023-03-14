@@ -152,7 +152,10 @@ public class PinView
   @Override
   protected void createPortViews()
   {
-    port = new PortView(this, passive.getPorts(), new Int2D());
+    port = new PortView(this, passive.getTracePorts(), new Int2D());
+
+    new PortView(this, passive.getVoltageCommon(), new Int2D((int) Math.floor(1), -1));
+    new PortView(this, passive.getVoltageGround(), new Int2D((int) Math.ceil(-1), -1));
   }
 
   @Override
@@ -215,7 +218,7 @@ public class PinView
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
-    TraceValue[] values = port.getValue(time, familyVoltageConfiguration, 3.3f);
+    TraceValue[] values = port.getValue(time, familyVoltageConfiguration, passive.getVCC(time));
 
     dataView.setText(getStringValue(values));
     dataView.paint(graphics, viewport);

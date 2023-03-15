@@ -57,20 +57,6 @@ public class SplitterView
     endPortViews = createEndPorts(properties);
   }
 
-  protected List<Integer> getPortIndexForFanOutIndex(int fanIndex)
-  {
-    List<Integer> ports = new ArrayList<>();
-    for (int i = 0; i < properties.splitIndices.length; i++)
-    {
-      int x = properties.splitIndices[i];
-      if (x == fanIndex)
-      {
-        ports.add(i);
-      }
-    }
-    return ports;
-  }
-
   protected List<Integer> getPortIndicesForFanoutIndex(int fanIndex)
   {
     List<Integer> ports = new ArrayList<>();
@@ -91,7 +77,7 @@ public class SplitterView
     int portIndex = 0;
     for (int fanOutIndex = 0; fanOutIndex < properties.fanOut; fanOutIndex++)
     {
-      List<Integer> portIndicesForFanOutIndex = getPortIndexForFanOutIndex(fanOutIndex);
+      List<Integer> portIndicesForFanOutIndex = getPortIndicesForFanoutIndex(fanOutIndex);
       if (portIndicesForFanOutIndex.size() > 0)
       {
         List<Port> portsForFanOutIndex = new ArrayList<>();

@@ -9,19 +9,19 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
-public class StaticSubcircuitData
+public class SubcircuitInstanceData
     extends StaticData<SubcircuitInstanceView>
 {
-  public StaticSubcircuitData()
+  public SubcircuitInstanceData()
   {
   }
 
-  public StaticSubcircuitData(String name,
-                              Int2D position,
-                              Rotation rotation,
-                              BoundingBoxData boundingBox,
-                              BoundingBoxData selectionBox,
-                              boolean selected)
+  public SubcircuitInstanceData(String name,
+                                Int2D position,
+                                Rotation rotation,
+                                BoundingBoxData boundingBox,
+                                BoundingBoxData selectionBox,
+                                boolean selected)
   {
     super(name,
           position,

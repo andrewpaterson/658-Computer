@@ -10,6 +10,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Positions;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.integratedcircuit.common.StaticData;
+import net.logicim.data.integratedcircuit.common.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
@@ -30,6 +31,7 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.ConnectionViewCache;
 import net.logicim.ui.simulation.StaticViewIterator;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.*;
 
@@ -45,6 +47,8 @@ public class SubcircuitView
   protected Set<TunnelView> tunnelViews;
   protected Map<String, Set<TunnelView>> tunnelViewsMap;
 
+  protected Set<SubcircuitInstanceView> subcircuitInstanceViews;
+
   protected ConnectionViewCache connectionViewCache;
 
   public SubcircuitView()
@@ -55,6 +59,7 @@ public class SubcircuitView
     this.passiveViews = new LinkedHashSet<>();
     this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
+    this.subcircuitInstanceViews = new LinkedHashSet<>();
     this.connectionViewCache = new ConnectionViewCache();
   }
 
@@ -65,6 +70,7 @@ public class SubcircuitView
     views.addAll(decorativeViews);
     views.addAll(passiveViews);
     views.addAll(integratedCircuitViews);
+    views.addAll(subcircuitInstanceViews);
     return views;
   }
 
@@ -177,7 +183,7 @@ public class SubcircuitView
 
   public StaticViewIterator staticViewIterator()
   {
-    return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, decorativeViews);
+    return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, decorativeViews, subcircuitInstanceViews);
   }
 
   public Set<TraceView> getTraceViews()
@@ -338,6 +344,13 @@ public class SubcircuitView
               contained = false;
             }
           }
+          else if (view instanceof SubcircuitInstanceView)
+          {
+            if (!subcircuitInstanceViews.contains(view))
+            {
+              contained = false;
+            }
+          }
           else if (view == null)
           {
             throw new SimulatorException("TraceView [" + traceView.getDescription() + "] does not include trace has null connection.");
@@ -469,6 +482,22 @@ public class SubcircuitView
       }
 
       return null;
+    }
+  }
+
+  public void addSubcircuitInstanceView(SubcircuitInstanceView subcircuitInstanceView)
+  {
+    synchronized (this)
+    {
+      subcircuitInstanceViews.add(subcircuitInstanceView);
+    }
+  }
+
+  public void removeSubcircuitInstanceView(SubcircuitInstanceView subcircuitInstanceView)
+  {
+    synchronized (this)
+    {
+      subcircuitInstanceViews.remove(subcircuitInstanceView);
     }
   }
 

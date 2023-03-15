@@ -3,6 +3,7 @@ package net.logicim.ui.simulation;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.circuit.TimelineData;
@@ -371,6 +372,11 @@ public class CircuitEditor
 
   public void addNewSubcircuit(String subcircuitName)
   {
+    if (StringUtil.isEmptyOrNull(subcircuitName))
+    {
+      throw new SimulatorException("Cannot add a subcircuit type named [].", subcircuitName);
+    }
+
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
       if (subcircuitEditor.getTypeName().equals(subcircuitName))

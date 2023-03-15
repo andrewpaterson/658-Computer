@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.subcircuit;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.ReflectiveData;
-import net.logicim.data.integratedcircuit.common.StaticSubcircuitData;
+import net.logicim.data.integratedcircuit.common.SubcircuitInstanceData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -88,12 +88,12 @@ public class SubcircuitInstanceView
   @Override
   public ReflectiveData save(boolean selected)
   {
-    return new StaticSubcircuitData(properties.name,
-                                    position,
-                                    rotation,
-                                    boundingBox.save(),
-                                    selectionBox.save(),
-                                    selected);
+    return new SubcircuitInstanceData(properties.name,
+                                      position,
+                                      rotation,
+                                      boundingBox.save(),
+                                      selectionBox.save(),
+                                      selected);
   }
 
   @Override

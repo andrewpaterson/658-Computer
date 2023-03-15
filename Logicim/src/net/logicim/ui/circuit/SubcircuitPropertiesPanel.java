@@ -1,5 +1,6 @@
 package net.logicim.ui.circuit;
 
+import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;

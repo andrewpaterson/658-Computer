@@ -372,23 +372,34 @@ public class CircuitEditor
 
   public void addNewSubcircuit(String subcircuitName)
   {
+    String error = getSubcircuitNameError(subcircuitName);
+    if (error != null)
+    {
+      throw new SimulatorException(error);
+    }
+
+    SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
+    subcircuitEditor.setTypeName(subcircuitName);
+    subcircuitEditors.add(subcircuitEditor);
+
+    currentSubcircuitEditor = subcircuitEditor;
+  }
+
+  public String getSubcircuitNameError(String subcircuitName)
+  {
     if (StringUtil.isEmptyOrNull(subcircuitName))
     {
-      throw new SimulatorException("Cannot add a subcircuit type named [].", subcircuitName);
+      return "Cannot add a subcircuit type named [].";
     }
 
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
       if (subcircuitEditor.getTypeName().equals(subcircuitName))
       {
-        throw new SimulatorException("Cannot add a subcircuit type named [%s], it is already in use.", subcircuitName);
+        return "Cannot add a subcircuit type named [%s], it is already in use.";
       }
     }
-    SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
-    subcircuitEditor.setTypeName(subcircuitName);
-    subcircuitEditors.add(subcircuitEditor);
-
-    currentSubcircuitEditor = subcircuitEditor;
+    return null;
   }
 }
 

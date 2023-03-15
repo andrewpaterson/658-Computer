@@ -35,7 +35,7 @@ public class SplitterPropertyEditorDialog
   {
     boolean propertyChanged = updateRotation(getSplitterPropertiesPanel());
 
-    SplitterProperties newProperties = createProperties();
+    SplitterProperties newProperties = getSplitterPropertiesPanel().createProperties();
     if (componentView.getProperties().equals(newProperties))
     {
       if (propertyChanged)
@@ -48,11 +48,6 @@ public class SplitterPropertyEditorDialog
     {
       return newProperties;
     }
-  }
-
-  private SplitterProperties createProperties()
-  {
-    return getSplitterPropertiesPanel().createProperties();
   }
 
   private SplitterPropertiesPanel getSplitterPropertiesPanel()

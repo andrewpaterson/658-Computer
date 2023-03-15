@@ -73,6 +73,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new NextSubcircuitAction(editor), KeyEvent.VK_RIGHT, Down, Up, Up));
     editor.addAction(new InputAction(new LeaveSubcircuitAction(editor), KeyEvent.VK_BACK_SPACE, Down, Up, Up));
     editor.addAction(new InputAction(new ReenterSubcircuitAction(editor), KeyEvent.VK_ENTER, Down, Up, Up));
+    editor.addAction(new InputAction(new EditSubcircuitAction(editor, panel), KeyEvent.VK_E, Up, Down, Down));
 
     for (int i = 0; i < 10; i++)
     {

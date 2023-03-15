@@ -2,20 +2,16 @@ package net.logicim.ui.property;
 
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
-import net.logicim.ui.components.button.ButtonAction;
 import net.logicim.ui.components.button.CancelButton;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
@@ -23,12 +19,8 @@ import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public abstract class PropertyEditorDialog
-    extends JDialog
-    implements ButtonAction,
-               KeyListener,
-               ContainerListener
+    extends InputDialog
 {
-  protected Dimension dimension;
   protected SimulatorEditor editor;
   protected StaticView<?> componentView;
   protected PropertiesPanel propertiesPanel;
@@ -40,74 +32,11 @@ public abstract class PropertyEditorDialog
                               SimulatorEditor editor,
                               StaticView<?> componentView)
   {
-    super(owner, title, true);
+    super(owner, title, true, dimension);
 
-    this.dimension = dimension;
-    setSize(dimension);
     this.editor = editor;
     this.circuit = this.editor.getCircuitEditor().getCircuit();
     this.componentView = componentView;
-
-    addKeyAndContainerListenerRecursively(this);
-  }
-
-  public void componentAdded(ContainerEvent e)
-  {
-    addKeyAndContainerListenerRecursively(e.getChild());
-  }
-
-  @Override
-  public void componentRemoved(ContainerEvent e)
-  {
-  }
-
-  private void addKeyAndContainerListenerRecursively(Component c)
-  {
-
-    c.addKeyListener(this);
-
-    if (c instanceof Container)
-    {
-
-      Container cont = (Container) c;
-
-      cont.addContainerListener(this);
-
-      Component[] children = cont.getComponents();
-
-      for (Component child : children)
-      {
-        addKeyAndContainerListenerRecursively(child);
-      }
-    }
-  }
-
-  @Override
-  public void keyTyped(KeyEvent e)
-  {
-  }
-
-  @Override
-  public void keyReleased(KeyEvent e)
-  {
-
-  }
-
-  public void keyPressed(KeyEvent keyEvent)
-  {
-    if ((keyEvent.getKeyCode() == KeyEvent.VK_ENTER) &&
-        keyEvent.isControlDown() &&
-        !keyEvent.isShiftDown() &&
-        !keyEvent.isAltDown() &&
-        !keyEvent.isMetaDown())
-    {
-      okay();
-    }
-
-    if ((keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE))
-    {
-      close();
-    }
   }
 
   public void build()
@@ -129,17 +58,6 @@ public abstract class PropertyEditorDialog
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
   }
 
-  public Dimension getDimension()
-  {
-    return dimension;
-  }
-
-  @Override
-  public void executeButtonAction()
-  {
-    okay();
-  }
-
   public void okay()
   {
     ComponentProperties newComponentProperties = updateProperties();
@@ -153,12 +71,6 @@ public abstract class PropertyEditorDialog
     }
 
     close();
-  }
-
-  protected void close()
-  {
-    setVisible(false);
-    dispose();
   }
 
   public PropertiesPanel getPropertiesPanel()

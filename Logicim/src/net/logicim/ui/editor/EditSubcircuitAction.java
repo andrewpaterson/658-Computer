@@ -2,15 +2,15 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.SimulatorPanel;
+import net.logicim.ui.circuit.EditSubcircuitDialog;
 import net.logicim.ui.circuit.EditorDialogHelper;
-import net.logicim.ui.circuit.NewSubcircuitDialog;
 
-public class NewSubcircuitAction
+public class EditSubcircuitAction
     extends SimulatorEditorAction
 {
   protected SimulatorPanel simulatorPanel;
 
-  public NewSubcircuitAction(SimulatorEditor editor, SimulatorPanel simulatorPanel)
+  public EditSubcircuitAction(SimulatorEditor editor, SimulatorPanel simulatorPanel)
   {
     super(editor);
     this.simulatorPanel = simulatorPanel;
@@ -19,7 +19,7 @@ public class NewSubcircuitAction
   @Override
   public void executeEditorAction()
   {
-    NewSubcircuitDialog subcircuitDialog = new NewSubcircuitDialog(simulatorPanel.getFrame(), editor);
+    EditSubcircuitDialog subcircuitDialog = new EditSubcircuitDialog(simulatorPanel.getFrame(), editor);
     new EditorDialogHelper().showPropertyEditorDialog(subcircuitDialog);
   }
 

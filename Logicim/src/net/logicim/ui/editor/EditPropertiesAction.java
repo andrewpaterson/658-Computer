@@ -16,14 +16,20 @@ public class EditPropertiesAction
     this.simulatorPanel = simulatorPanel;
   }
 
-  @Override
-  public void executeEditorAction()
+  protected StaticView<?> getComponent()
   {
     StaticView<?> componentView = editor.getHoverComponentView();
     if (componentView == null)
     {
       componentView = editor.getCircuitEditor().getCurrentSubcircuitEditor().getSingleSelectionStaticView();
     }
+    return componentView;
+  }
+
+  @Override
+  public void executeEditorAction()
+  {
+    StaticView<?> componentView = getComponent();
 
     if (componentView != null)
     {

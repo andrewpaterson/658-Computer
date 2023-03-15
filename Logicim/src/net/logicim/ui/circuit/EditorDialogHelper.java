@@ -5,27 +5,26 @@ import net.logicim.ui.util.WindowSizer;
 import javax.swing.*;
 import java.awt.*;
 
-public class EditSubcircuitDialogHelper
+public class EditorDialogHelper
 {
-  public EditSubcircuitDialogHelper()
+  public EditorDialogHelper()
   {
   }
 
-  public void showPropertyEditorDialog(NewSubcircuitDialog newSubcircuitDialog)
+  public void showPropertyEditorDialog(InputDialog inputDialog)
   {
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
-    NewSubcircuitDialog dialog = newSubcircuitDialog;
-    dialog.build();
+    inputDialog.build();
     mousePosition.x -= 50;
     mousePosition.y -= 50;
-    dialog.setLocation(WindowSizer.ensureOnScreen(mousePosition, dialog.getDimension()));
+    inputDialog.setLocation(WindowSizer.ensureOnScreen(mousePosition, inputDialog.getDimension()));
 
     SwingUtilities.invokeLater(new Runnable()
     {
       @Override
       public void run()
       {
-        dialog.setVisible(true);
+        inputDialog.setVisible(true);
       }
     });
   }

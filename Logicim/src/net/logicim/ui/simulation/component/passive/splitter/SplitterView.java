@@ -38,6 +38,8 @@ public class SplitterView
   protected List<PortView> endPortViews;
   protected PortView startPortView;
 
+  protected Map<Port, Port> bidirectionalPortMap;
+
   public SplitterView(SubcircuitView subcircuitView,
                       Circuit circuit,
                       Int2D position,
@@ -55,6 +57,8 @@ public class SplitterView
   {
     startPortView = new PortView(this, passive.getStartPorts(), new Int2D(createStartPosition()));
     endPortViews = createEndPorts(properties);
+
+    bidirectionalPortMap = calculateBidirectionalPortMap();
   }
 
   protected List<Integer> getPortIndicesForFanoutIndex(int fanIndex)
@@ -416,6 +420,11 @@ public class SplitterView
   }
 
   public Map<Port, Port> getBidirectionalPortMap()
+  {
+    return bidirectionalPortMap;
+  }
+
+  public Map<Port, Port> calculateBidirectionalPortMap()
   {
     List<? extends Port> ports = startPortView.getPorts();
     HashMap<Port, Port> result = new HashMap<>();

@@ -11,10 +11,14 @@ import java.awt.*;
 public class EditSubcircuitDialog
     extends PropertyEditorDialog
 {
+  protected SubcircuitView subcircuitView;
+
   public EditSubcircuitDialog(Frame owner,
-                              SimulatorEditor editor)
+                              SimulatorEditor editor,
+                              SubcircuitView subcircuitView)
   {
     super(owner, "Create subcircuit", new Dimension(392, 260), editor, null);
+    this.subcircuitView = subcircuitView;
   }
 
   public PropertiesPanel getPropertiesPanel()
@@ -24,7 +28,7 @@ public class EditSubcircuitDialog
 
   protected JPanel createEditorPanel()
   {
-    return new SubcircuitPropertiesPanel(getSubcircuitView().getTypeName());
+    return new SubcircuitPropertiesPanel(subcircuitView.getTypeName());
   }
 
   private SubcircuitPropertiesPanel getSubcircuitPropertiesPanel()
@@ -35,15 +39,14 @@ public class EditSubcircuitDialog
   @Override
   protected ComponentProperties updateProperties()
   {
-    String typeName = getSubcircuitPropertiesPanel().getSubcircuitName();
-    editor.getCircuitEditor().getSubcircuitNameError(typeName);
-    getSubcircuitView().setTypeName(typeName);
-    return null;
-  }
+    String oldTypeName = subcircuitView.getTypeName();
 
-  private SubcircuitView getSubcircuitView()
-  {
-    return editor.getCircuitEditor().getCurrentSubcircuitView();
+    String newTypeName = getSubcircuitPropertiesPanel().getSubcircuitName();
+    editor.getCircuitEditor().getSubcircuitNameError(newTypeName);
+    subcircuitView.setTypeName(newTypeName);
+
+    editor.renameSubcircuit(oldTypeName, newTypeName);
+    return null;
   }
 
   @Override

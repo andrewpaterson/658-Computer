@@ -3,6 +3,7 @@ package net.logicim.ui;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -10,6 +11,7 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.editor.SubcircuitViewParameters;
 import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
@@ -43,6 +45,8 @@ public class SimulatorEditor
     implements PanelSize,
                Undo
 {
+  public static final String MAIN_SUBCIRCUIT_TYPE_NAME = "Main";
+
   private ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
 
   private int width;
@@ -75,6 +79,7 @@ public class SimulatorEditor
   protected ClipboardData clipboard;
 
   protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
+  protected Map<String, SubcircuitViewParameters> subcircuitViewParameters;
 
   public SimulatorEditor(SimulatorPanel simulatorPanel)
   {
@@ -90,7 +95,7 @@ public class SimulatorEditor
 
     this.actions = new InputActions(mouseButtons);
 
-    this.circuitEditor = new CircuitEditor();
+    this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
     this.editAction = null;
     this.creationRotation = Rotation.North;
 
@@ -101,6 +106,9 @@ public class SimulatorEditor
     this.clipboard = null;
 
     this.subcircuitBookmarks = new LinkedHashMap<>();
+    this.subcircuitViewParameters = new LinkedHashMap<>();
+
+    setViewportParameters(MAIN_SUBCIRCUIT_TYPE_NAME);
 
     addActions(simulatorPanel);
 
@@ -215,6 +223,7 @@ public class SimulatorEditor
       if (moved != null)
       {
         viewport.scroll(moved);
+        setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
       }
     }
 
@@ -225,6 +234,22 @@ public class SimulatorEditor
     }
 
     calculateHighlightedPort();
+  }
+
+  protected void setSubcircuitParameters(String typeName)
+  {
+    SubcircuitViewParameters subcircuitViewParameters = this.subcircuitViewParameters.get(typeName);
+    if (subcircuitViewParameters == null)
+    {
+      this.subcircuitViewParameters.put(typeName,
+                                        new SubcircuitViewParameters(viewport.getPosition().clone(),
+                                                                     viewport.getZoom()));
+    }
+    else
+    {
+      subcircuitViewParameters.set(viewport.getPosition().clone(),
+                                   viewport.getZoom());
+    }
   }
 
   private boolean isInSelectedComponent(int mouseX, int mouseY)
@@ -424,6 +449,7 @@ public class SimulatorEditor
     int rotation = mouseButtons.getRotation();
 
     viewport.zoomTo(mousePosition.get(), (float) rotation / 10.0f);
+    setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
 
     calculateHighlightedPort();
   }
@@ -729,7 +755,7 @@ public class SimulatorEditor
 
     clearHover();
 
-    circuitEditor = new CircuitEditor();
+    circuitEditor = new CircuitEditor("Main");
     circuitEditor.load(circuitData);
     calculateHighlightedPort();
   }
@@ -883,9 +909,28 @@ public class SimulatorEditor
     }
   }
 
-  public void newSubcircuitAction(String subcircuitName)
+  public void newSubcircuitAction(String subcircuitTypeName)
   {
-    circuitEditor.addNewSubcircuit(subcircuitName);
+    circuitEditor.addNewSubcircuit(subcircuitTypeName);
+    setViewportParameters(subcircuitTypeName);
+  }
+
+  public void deleteSubcircuitAction(String subcircuitTypeName)
+  {
+    subcircuitViewParameters.remove(subcircuitTypeName);
+  }
+
+  public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)
+  {
+    if (!oldSubcircuitTypeName.equals(newSubcircuitTypeName))
+    {
+      SubcircuitViewParameters subcircuitViewParameters = this.subcircuitViewParameters.get(oldSubcircuitTypeName);
+      if (subcircuitViewParameters != null)
+      {
+        this.subcircuitViewParameters.remove(oldSubcircuitTypeName);
+        this.subcircuitViewParameters.put(newSubcircuitTypeName, subcircuitViewParameters);
+      }
+    }
   }
 
   public void gotoSubcircuit(int bookmarkIndex)
@@ -899,7 +944,20 @@ public class SimulatorEditor
         editAction = null;
       }
 
-      circuitEditor.gotoSubcircuit(subcircuitEditor);
+      String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor);
+      setViewportParameters(subcircuitTypeName);
+    }
+  }
+
+  private void setViewportParameters(String subcircuitTypeName)
+  {
+    if (!StringUtil.isEmptyOrNull(subcircuitTypeName))
+    {
+      SubcircuitViewParameters parameters = this.subcircuitViewParameters.get(subcircuitTypeName);
+      if (parameters != null)
+      {
+        viewport.setParameters(parameters.getPosition(), parameters.getZoom());
+      }
     }
   }
 
@@ -913,7 +971,8 @@ public class SimulatorEditor
         editAction = null;
       }
 
-      circuitEditor.gotoPreviousSubcircuit();
+      String subcircuitTypeName = circuitEditor.gotoPreviousSubcircuit();
+      setViewportParameters(subcircuitTypeName);
     }
   }
 
@@ -927,7 +986,8 @@ public class SimulatorEditor
         editAction = null;
       }
 
-      circuitEditor.gotoNextSubcircuit();
+      String subcircuitTypeName = circuitEditor.gotoNextSubcircuit();
+      setViewportParameters(subcircuitTypeName);
     }
   }
 

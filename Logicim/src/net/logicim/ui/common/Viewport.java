@@ -370,5 +370,16 @@ public class Viewport
   {
     return zoom * Viewport.getScale();
   }
+
+  public void setParameters(Float2D position, float zoom)
+  {
+    this.position = position.clone();
+    this.zoom = zoom;
+  }
+
+  public Float2D getPosition()
+  {
+    return position;
+  }
 }
 

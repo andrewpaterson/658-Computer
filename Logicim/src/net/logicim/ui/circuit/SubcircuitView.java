@@ -775,7 +775,8 @@ public class SubcircuitView
     }
 
     return new SubcircuitData(componentDatas,
-                              traceDatas);
+                              traceDatas,
+                              typeName);
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews,

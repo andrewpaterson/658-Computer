@@ -8,16 +8,16 @@ public class CircuitData
     extends ReflectiveData
 {
   public TimelineData timeline;
-  public List<SubcircuitData> subcircuitData;
+  public List<SubcircuitData> subcircuit;
 
   public CircuitData()
   {
   }
 
-  public CircuitData(TimelineData timeline, List<SubcircuitData> subcircuitData)
+  public CircuitData(TimelineData timeline, List<SubcircuitData> subcircuit)
   {
     this.timeline = timeline;
-    this.subcircuitData = subcircuitData;
+    this.subcircuit = subcircuit;
   }
 
   public TimelineData getTimeline()

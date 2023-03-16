@@ -19,7 +19,7 @@ public class EventPropagationTest
 {
   private static void testEventPropagation()
   {
-    CircuitEditor circuitEditor = new CircuitEditor();
+    CircuitEditor circuitEditor = new CircuitEditor("Main");
 
     LogicimFileReader fileReader = new LogicimFileReader();
     CircuitData circuitData = fileReader.load(MultipleXORIntoAndSourceXML.xml);

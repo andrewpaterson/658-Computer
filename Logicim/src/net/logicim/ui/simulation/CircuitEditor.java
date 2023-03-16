@@ -37,11 +37,11 @@ public class CircuitEditor
   protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
 
-  public CircuitEditor()
+  public CircuitEditor(String mainSubcircuitTypeName)
   {
     simulation = new CircuitSimulation();
     subcircuitEditors = new ArrayList<>();
-    addNewSubcircuit("Main");
+    addNewSubcircuit(mainSubcircuitTypeName);
   }
 
   private List<View> getAllViews()
@@ -209,7 +209,7 @@ public class CircuitEditor
     currentSubcircuitEditor = null;
     getTimeline().load(circuitData.timeline);
 
-    for (SubcircuitData subcircuitData : circuitData.subcircuitData)
+    for (SubcircuitData subcircuitData : circuitData.subcircuit)
     {
       SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
       subcircuitEditor.loadViews(subcircuitData, simulation);
@@ -321,20 +321,22 @@ public class CircuitEditor
     return currentSubcircuitEditor.getSubcircuitView();
   }
 
-  public void gotoSubcircuit(SubcircuitEditor subcircuitEditor)
+  public String gotoSubcircuit(SubcircuitEditor subcircuitEditor)
   {
     if (subcircuitEditor != null)
     {
       if (subcircuitEditors.contains(subcircuitEditor))
       {
-        setCurrentSubcircuitEditor(subcircuitEditor);
+        return setCurrentSubcircuitEditor(subcircuitEditor);
       }
     }
+    return null;
   }
 
-  protected void setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
+  protected String setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
     currentSubcircuitEditor = subcircuitEditor;
+    return currentSubcircuitEditor.getTypeName();
   }
 
   public boolean hasMultipleSubcircuits()
@@ -342,7 +344,7 @@ public class CircuitEditor
     return subcircuitEditors.size() > 1;
   }
 
-  public void gotoPreviousSubcircuit()
+  public String gotoPreviousSubcircuit()
   {
     int index = subcircuitEditors.indexOf(currentSubcircuitEditor);
     if (index != -1)
@@ -352,11 +354,12 @@ public class CircuitEditor
       {
         index = subcircuitEditors.size() - 1;
       }
-      setCurrentSubcircuitEditor(subcircuitEditors.get(index));
+      return setCurrentSubcircuitEditor(subcircuitEditors.get(index));
     }
+    return null;
   }
 
-  public void gotoNextSubcircuit()
+  public String gotoNextSubcircuit()
   {
     int index = subcircuitEditors.indexOf(currentSubcircuitEditor);
     if (index != -1)
@@ -366,8 +369,9 @@ public class CircuitEditor
       {
         index = 0;
       }
-      setCurrentSubcircuitEditor(subcircuitEditors.get(index));
+      return setCurrentSubcircuitEditor(subcircuitEditors.get(index));
     }
+    return null;
   }
 
   public void addNewSubcircuit(String subcircuitName)

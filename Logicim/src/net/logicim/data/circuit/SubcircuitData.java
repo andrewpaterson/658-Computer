@@ -11,14 +11,17 @@ public class SubcircuitData
 {
   public List<StaticData<?>> components;
   public List<TraceData> traces;
+  public String typeName;
 
   public SubcircuitData()
   {
   }
 
-  public SubcircuitData(List<StaticData<?>> components, List<TraceData> traces)
+  public SubcircuitData(List<StaticData<?>> components, List<TraceData> traces, String typeName)
   {
     this.components = components;
     this.traces = traces;
+    this.typeName = typeName;
   }
 }
+

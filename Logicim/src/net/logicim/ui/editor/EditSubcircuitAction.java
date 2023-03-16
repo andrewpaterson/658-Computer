@@ -4,6 +4,7 @@ import net.logicim.ui.SimulatorEditor;
 import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.circuit.EditSubcircuitDialog;
 import net.logicim.ui.circuit.EditorDialogHelper;
+import net.logicim.ui.circuit.SubcircuitView;
 
 public class EditSubcircuitAction
     extends SimulatorEditorAction
@@ -19,7 +20,8 @@ public class EditSubcircuitAction
   @Override
   public void executeEditorAction()
   {
-    EditSubcircuitDialog subcircuitDialog = new EditSubcircuitDialog(simulatorPanel.getFrame(), editor);
+    SubcircuitView subcircuitView = editor.getCircuitEditor().getCurrentSubcircuitView();
+    EditSubcircuitDialog subcircuitDialog = new EditSubcircuitDialog(simulatorPanel.getFrame(), editor, subcircuitView);
     new EditorDialogHelper().showPropertyEditorDialog(subcircuitDialog);
   }
 

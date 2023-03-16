@@ -918,6 +918,16 @@ public class SimulatorEditor
   public void deleteSubcircuitAction(String subcircuitTypeName)
   {
     subcircuitViewParameters.remove(subcircuitTypeName);
+    List<Integer> bookmarkIds = new ArrayList<>(subcircuitBookmarks.keySet());
+    for (Integer bookmarkId : bookmarkIds)
+    {
+      SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkId);
+
+      if (subcircuitEditor.getTypeName().equals(subcircuitTypeName))
+      {
+        subcircuitBookmarks.remove(bookmarkId);
+      }
+    }
   }
 
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)

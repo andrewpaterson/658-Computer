@@ -15,6 +15,7 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.util.ArrayList;
@@ -318,9 +319,28 @@ public class SubcircuitEditor
     return subcircuitView.getTypeName();
   }
 
+  public List<String> getTypeNameAsList()
+  {
+    ArrayList<String> list = new ArrayList<>();
+    list.add(getTypeName());
+    return list;
+
+  }
+
   public void setTypeName(String subcircuitName)
   {
     subcircuitView.setTypeName(subcircuitName);
+  }
+
+  public List<String> getSubcircuitInstanceNames()
+  {
+    Set<String> names = new HashSet<>();
+    Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      names.add(subcircuitInstanceView.getTypeName());
+    }
+    return new ArrayList<>(names);
   }
 }
 

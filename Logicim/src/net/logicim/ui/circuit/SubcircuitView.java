@@ -979,5 +979,10 @@ public class SubcircuitView
   {
     this.typeName = typeName;
   }
+
+  public Set<SubcircuitInstanceView> getSubcircuitInstanceViews()
+  {
+    return subcircuitInstanceViews;
+  }
 }
 

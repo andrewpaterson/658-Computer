@@ -26,10 +26,8 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class CircuitEditor
 {
@@ -169,16 +167,24 @@ public class CircuitEditor
 
   public CircuitData save()
   {
+    ArrayList<SubcircuitData> data = new ArrayList<>();
 
+    LinkedHashMap<SubcircuitEditor, List<String>> fulfillmentsMap = new LinkedHashMap<>();
+    LinkedHashMap<SubcircuitEditor, List<String>> requirementsMap = new LinkedHashMap<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-xxx
+      fulfillmentsMap.put(subcircuitEditor, subcircuitEditor.getTypeNameAsList());
+      requirementsMap.put(subcircuitEditor, subcircuitEditor.getSubcircuitInstanceNames());
     }
 
+    List<SubcircuitEditor> orderedSubcircuitEditors = Orderer.order(fulfillmentsMap, requirementsMap);
+    for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
+    {
+      SubcircuitData subcircuitData = subcircuitEditor.save();
+      data.add(subcircuitData);
+    }
 
     TimelineData timelineData = getTimeline().save();
-    ArrayList<SubcircuitData> data = new ArrayList<>();
-    data.add(subcircuitData);
     return new CircuitData(timelineData, data);
   }
 

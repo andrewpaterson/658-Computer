@@ -5,16 +5,16 @@ import net.logicim.data.ReflectiveData;
 public class BookmarkData
     extends ReflectiveData
 {
-  public int bookmarkIndex;
+  public int bookmarkKey;
   public String subcircuitTypeName;
 
   public BookmarkData()
   {
   }
 
-  public BookmarkData(int bookmarkIndex, String subcircuitTypeName)
+  public BookmarkData(int bookmarkKey, String subcircuitTypeName)
   {
-    this.bookmarkIndex = bookmarkIndex;
+    this.bookmarkKey = bookmarkKey;
     this.subcircuitTypeName = subcircuitTypeName;
   }
 }

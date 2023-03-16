@@ -5,6 +5,9 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.editor.BookmarkData;
+import net.logicim.data.editor.EditorData;
+import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.common.LongTime;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
@@ -744,9 +747,43 @@ public class SimulatorEditor
     circuitEditor.reset();
   }
 
-  public CircuitData save()
+  public EditorData save()
   {
-    return circuitEditor.save();
+    CircuitData circuitData = circuitEditor.save();
+    ArrayList<BookmarkData> subcircuitBookmarks = saveBookmarks();
+    ArrayList<SubcircuitParameterData> subcircuitParameters = saveSubcircuitViewParameters();
+    return new EditorData(circuitData,
+                          running,
+                          runTimeStep,
+                          creationRotation,
+                          subcircuitBookmarks,
+                          subcircuitParameters);
+  }
+
+  protected ArrayList<SubcircuitParameterData> saveSubcircuitViewParameters()
+  {
+    ArrayList<SubcircuitParameterData> subcircuitParameters = new ArrayList<>();
+    for (Map.Entry<String, SubcircuitViewParameters> entry : this.subcircuitViewParameters.entrySet())
+    {
+      String subcircuitTypeName = entry.getKey();
+      SubcircuitViewParameters viewParameters = entry.getValue();
+      subcircuitParameters.add(new SubcircuitParameterData(subcircuitTypeName,
+                                                           viewParameters.getPosition().clone(),
+                                                           viewParameters.getZoom()));
+    }
+    return subcircuitParameters;
+  }
+
+  protected ArrayList<BookmarkData> saveBookmarks()
+  {
+    ArrayList<BookmarkData> subcircuitBookmarks = new ArrayList<>();
+    for (Map.Entry<Integer, SubcircuitEditor> entry : this.subcircuitBookmarks.entrySet())
+    {
+      Integer bookmarkKey = entry.getKey();
+      SubcircuitEditor subcircuitEditor = entry.getValue();
+      subcircuitBookmarks.add(new BookmarkData(bookmarkKey, subcircuitEditor.getTypeName()));
+    }
+    return subcircuitBookmarks;
   }
 
   public void load(CircuitData circuitData)

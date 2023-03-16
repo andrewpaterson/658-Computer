@@ -109,6 +109,11 @@ public class SubcircuitInstanceView
     return "Subcircuit";
   }
 
+  public String getTypeName()
+  {
+    return subcircuitView.getTypeName();
+  }
+
   @Override
   public String getDescription()
   {

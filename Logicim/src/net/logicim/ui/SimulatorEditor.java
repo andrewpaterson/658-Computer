@@ -108,7 +108,7 @@ public class SimulatorEditor
     this.subcircuitBookmarks = new LinkedHashMap<>();
     this.subcircuitViewParameters = new LinkedHashMap<>();
 
-    setViewportParameters(MAIN_SUBCIRCUIT_TYPE_NAME);
+    setSubcircuitParameters(MAIN_SUBCIRCUIT_TYPE_NAME);
 
     addActions(simulatorPanel);
 

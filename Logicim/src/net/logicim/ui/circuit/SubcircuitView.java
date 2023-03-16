@@ -10,7 +10,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Positions;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.integratedcircuit.common.StaticData;
-import net.logicim.data.integratedcircuit.common.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
@@ -24,7 +23,6 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceFinder;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
-import net.logicim.ui.connection.ConnectionFinder;
 import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -142,6 +140,10 @@ public class SubcircuitView
       else if (componentView instanceof TunnelView)
       {
         removeTunnelView((TunnelView) componentView);
+      }
+      else if (componentView instanceof SubcircuitInstanceView)
+      {
+        removeSubcircuitInstanceView((SubcircuitInstanceView) componentView);
       }
       else
       {

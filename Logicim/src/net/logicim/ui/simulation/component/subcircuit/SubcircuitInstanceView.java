@@ -40,6 +40,7 @@ public class SubcircuitInstanceView
     this.enabled = false;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
+    subcircuitView.addSubcircuitInstanceView(this);
     createGraphics();
     finaliseView(circuit);
   }

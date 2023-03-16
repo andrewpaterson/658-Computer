@@ -79,7 +79,7 @@ public class SimulatorActions
     {
       editor.addAction(new InputAction(new BookmarkSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Down));
       editor.addAction(new InputAction(new GotoSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Up));
-      editor.addAction(new InputAction(new PlaceSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Down, Down));
+      editor.addAction(new InputAction(new PlaceSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Down, Up));
     }
   }
 }

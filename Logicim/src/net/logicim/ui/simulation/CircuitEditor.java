@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.dependency.Orderer;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
@@ -168,7 +169,12 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    SubcircuitData subcircuitData = currentSubcircuitEditor.save();
+
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+xxx
+    }
+
 
     TimelineData timelineData = getTimeline().save();
     ArrayList<SubcircuitData> data = new ArrayList<>();

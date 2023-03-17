@@ -2,6 +2,7 @@ package net.logicim.ui;
 
 import net.logicim.common.util.FileUtil;
 import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.editor.EditorData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
@@ -262,7 +263,7 @@ public class SimulatorPanel
       if (file != null)
       {
         File newFile = new File(FileUtil.removeExtension(file).getPath() + "." + "logic");
-        CircuitData savedData = simulatorEditor.save();
+        EditorData savedData = simulatorEditor.save();
 
         try
         {
@@ -291,7 +292,7 @@ public class SimulatorPanel
       File file = fileChooser.getSelectedFile();
       if (file != null)
       {
-        CircuitData savedData = new LogicimFileReader().load(file);
+        EditorData savedData = new LogicimFileReader().load(file);
         try
         {
           simulatorEditor.loadFile(savedData);

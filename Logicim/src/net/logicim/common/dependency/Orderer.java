@@ -29,7 +29,7 @@ public class Orderer
         }
       }
 
-      if (!toRemove.isEmpty())
+      if (toRemove.isEmpty())
       {
         throw new SimulatorException("Cannot fulfil all dependencies (circular or non existent dependency)");
       }

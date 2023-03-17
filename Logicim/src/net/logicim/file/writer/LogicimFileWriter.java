@@ -1,7 +1,7 @@
 package net.logicim.file.writer;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.editor.EditorData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -18,12 +18,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static net.logicim.file.writer.ReflectiveWriter.CIRCUIT_DATA_TAG_NAME;
+import static net.logicim.file.writer.ReflectiveWriter.EDITOR_DATA_TAG_NAME;
 import static net.logicim.file.writer.ReflectiveWriter.LOGICIM_TAG_NAME;
 
 public class LogicimFileWriter
 {
-  public void writeXML(CircuitData circuitData, File file)
+  public void writeXML(EditorData editorData, File file)
   {
     try
     {
@@ -34,7 +34,7 @@ public class LogicimFileWriter
       Element root = doc.createElement(LOGICIM_TAG_NAME);
       doc.appendChild(root);
 
-      ReflectiveWriter.writeXML(circuitData, doc, CIRCUIT_DATA_TAG_NAME, root);
+      ReflectiveWriter.writeXML(editorData, doc, EDITOR_DATA_TAG_NAME, root);
 
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();

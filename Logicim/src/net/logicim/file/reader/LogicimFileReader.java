@@ -9,6 +9,7 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.*;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.common.*;
+import net.logicim.data.editor.EditorData;
 import net.logicim.data.field.ProcessedXMLDataField;
 import net.logicim.data.field.SaveXMLDataField;
 import net.logicim.data.field.UnknownXMLDataField;
@@ -36,7 +37,7 @@ import static net.logicim.file.writer.ReflectiveWriter.*;
 public class LogicimFileReader
     extends DefaultHandler
 {
-  protected CircuitData circuitData;
+  protected EditorData circuitData;
   protected List<XMLDataField> dataStack;
 
   protected List<String> characters;
@@ -47,7 +48,7 @@ public class LogicimFileReader
     characters = null;
   }
 
-  public CircuitData load(File file)
+  public EditorData load(File file)
   {
     try
     {
@@ -62,7 +63,7 @@ public class LogicimFileReader
     return circuitData;
   }
 
-  public CircuitData load(String contents)
+  public EditorData load(String contents)
   {
     try
     {
@@ -489,10 +490,10 @@ public class LogicimFileReader
     }
     else
     {
-      if (qName.equals(CIRCUIT_DATA_TAG_NAME))
+      if (qName.equals(EDITOR_DATA_TAG_NAME))
       {
         SaveXMLDataField saveDataField = (SaveXMLDataField) dataStack.get(dataStack.size() - 1);
-        circuitData = (CircuitData) saveDataField.typeInstance;
+        circuitData = (EditorData) saveDataField.typeInstance;
       }
       else
       {

@@ -1,13 +1,13 @@
 package net.logicim.ui;
 
-import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.editor.EditorData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UndoStack
 {
-  protected List<CircuitData> undoStack;
+  protected List<EditorData> undoStack;
   protected int size;
   protected boolean lastPop;
   protected boolean lastUnpop;
@@ -20,7 +20,7 @@ public class UndoStack
     lastUnpop = false;
   }
 
-  public void push(CircuitData circuitData)
+  public void push(EditorData editorData)
   {
     if (lastUnpop)
     {
@@ -39,11 +39,11 @@ public class UndoStack
       size = undoStack.size();
     }
 
-    undoStack.add(circuitData);
+    undoStack.add(editorData);
     size++;
   }
 
-  public CircuitData pop()
+  public EditorData pop()
   {
     lastPop = true;
     if (size > 0)
@@ -55,7 +55,7 @@ public class UndoStack
           size--;
         }
       }
-      CircuitData circuitData = undoStack.get(size - 1);
+      EditorData circuitData = undoStack.get(size - 1);
       size--;
       lastUnpop = false;
       return circuitData;
@@ -67,7 +67,7 @@ public class UndoStack
     }
   }
 
-  public CircuitData unpop()
+  public EditorData unpop()
   {
     lastUnpop = true;
     if (size < undoStack.size())
@@ -79,10 +79,10 @@ public class UndoStack
           size++;
         }
       }
-      CircuitData circuitData = undoStack.get(size);
+      EditorData editorData = undoStack.get(size);
       size++;
       lastPop = false;
-      return circuitData;
+      return editorData;
     }
     else
     {

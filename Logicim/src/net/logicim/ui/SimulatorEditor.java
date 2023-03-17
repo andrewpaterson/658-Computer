@@ -786,20 +786,20 @@ public class SimulatorEditor
     return subcircuitBookmarks;
   }
 
-  public void load(CircuitData circuitData)
+  public void load(EditorData editorData)
   {
     editAction = null;
 
     clearHover();
 
     circuitEditor = new CircuitEditor("Main");
-    circuitEditor.load(circuitData);
+    circuitEditor.load(editorData.circuit);
     calculateHighlightedPort();
   }
 
-  public void loadFile(CircuitData circuitData)
+  public void loadFile(EditorData editorData)
   {
-    load(circuitData);
+    load(editorData);
     pushUndo();
   }
 
@@ -835,19 +835,19 @@ public class SimulatorEditor
   @Override
   public void undo()
   {
-    CircuitData circuitData = undoStack.pop();
-    if (circuitData != null)
+    EditorData editorData = undoStack.pop();
+    if (editorData != null)
     {
-      load(circuitData);
+      load(editorData);
     }
   }
 
   public void redo()
   {
-    CircuitData circuitData = undoStack.unpop();
-    if (circuitData != null)
+    EditorData editorData = undoStack.unpop();
+    if (editorData != null)
     {
-      load(circuitData);
+      load(editorData);
     }
   }
 

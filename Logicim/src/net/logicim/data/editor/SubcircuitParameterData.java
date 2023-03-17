@@ -10,6 +10,10 @@ public class SubcircuitParameterData
   public Float2D position;
   public float zoom;
 
+  public SubcircuitParameterData()
+  {
+  }
+
   public SubcircuitParameterData(String subcircuitTypeName, Float2D position, float zoom)
   {
     this.subcircuitTypeName = subcircuitTypeName;

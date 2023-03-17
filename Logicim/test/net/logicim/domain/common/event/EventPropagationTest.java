@@ -4,6 +4,7 @@ import net.logicim.assertions.PortSmoothVoltage;
 import net.logicim.assertions.SmoothVoltage;
 import net.logicim.assertions.Validator;
 import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.editor.EditorData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.LogicPort;
@@ -22,8 +23,8 @@ public class EventPropagationTest
     CircuitEditor circuitEditor = new CircuitEditor("Main");
 
     LogicimFileReader fileReader = new LogicimFileReader();
-    CircuitData circuitData = fileReader.load(MultipleXORIntoAndSourceXML.xml);
-    circuitEditor.load(circuitData);
+    EditorData editorData = fileReader.load(MultipleXORIntoAndSourceXML.xml);
+    circuitEditor.load(editorData.circuit);
     Circuit circuit = circuitEditor.getCircuit();
 
     List<AndGate> andGates = (List) circuit.getIntegratedCircuits(AndGate.TYPE);

@@ -21,7 +21,7 @@ public abstract class ReflectiveWriter
 
   public static final String LOGICIM_TAG_NAME = "Logicim";
   public static final String INDEX = "index";
-  public static final String CIRCUIT_DATA_TAG_NAME = "circuitData";
+  public static final String EDITOR_DATA_TAG_NAME = "editorData";
   public static final String TYPE = "type";
 
   public static String getXMLTag(Object o)

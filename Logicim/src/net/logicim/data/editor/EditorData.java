@@ -16,6 +16,10 @@ public class EditorData
   public List<BookmarkData> subcircuitBookmarks;
   public List<SubcircuitParameterData> subcircuitParameters;
 
+  public EditorData()
+  {
+  }
+
   public EditorData(CircuitData circuit,
                     boolean running,
                     long runTimeStep,

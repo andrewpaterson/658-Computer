@@ -1,7 +1,7 @@
 package net.logicim.ui.circuit;
 
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.property.PropertiesPanel;
@@ -18,12 +18,12 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public class NewSubcircuitDialog
     extends InputDialog
 {
-  protected SimulatorEditor editor;
+  protected Logicim editor;
   protected SubcircuitPropertiesPanel propertiesPanel;
   protected Circuit circuit;
 
   public NewSubcircuitDialog(Frame owner,
-                             SimulatorEditor editor)
+                             Logicim editor)
   {
     super(owner, "Create subcircuit", true, new Dimension(392, 260));
 

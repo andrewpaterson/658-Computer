@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class RunOneEvent
     extends SimulatorEditorAction
 {
-  public RunOneEvent(SimulatorEditor editor)
+  public RunOneEvent(Logicim editor)
   {
     super(editor);
   }

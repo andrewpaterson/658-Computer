@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class StopEditAction
     extends SimulatorEditorAction
 {
-  public StopEditAction(SimulatorEditor editor)
+  public StopEditAction(Logicim editor)
   {
     super(editor);
   }

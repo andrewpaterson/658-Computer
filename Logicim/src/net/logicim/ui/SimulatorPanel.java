@@ -1,7 +1,6 @@
 package net.logicim.ui;
 
 import net.logicim.common.util.FileUtil;
-import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
@@ -50,7 +49,7 @@ public class SimulatorPanel
   protected boolean running;
   protected long period;
 
-  protected SimulatorEditor simulatorEditor;
+  protected Logicim logicim;
   protected JFrame frame;
 
   public SimulatorPanel(JFrame frame)
@@ -59,7 +58,7 @@ public class SimulatorPanel
     running = false;
     period = 16 * nS_IN_mS;
 
-    simulatorEditor = new SimulatorEditor(this);
+    logicim = new Logicim(this);
     FamilyVoltageConfigurationStore.getInstance();
 
     TypeEditorFactory.getInstance().addAll(new FamilyPropertyEditorFactory());
@@ -123,7 +122,7 @@ public class SimulatorPanel
   {
     if ((backBufferImage != null) && (graphics != null))
     {
-      simulatorEditor.paint(graphics);
+      logicim.paint(graphics);
     }
   }
 
@@ -132,7 +131,7 @@ public class SimulatorPanel
     boolean done = true;
     try
     {
-      done = simulatorEditor.tick(tickCount);
+      done = logicim.tick(tickCount);
     }
     catch (RuntimeException e)
     {
@@ -147,10 +146,10 @@ public class SimulatorPanel
 
   public void handleException(RuntimeException e)
   {
-    simulatorEditor.running = false;
+    logicim.running = false;
     e.printStackTrace();
 
-    simulatorEditor.undo();
+    logicim.undo();
 
     SwingUtilities.invokeLater(new Runnable()
     {
@@ -192,60 +191,60 @@ public class SimulatorPanel
     graphics = (Graphics2D) backBufferImage.getGraphics();
     Fonts.getInstance().ensureDefaultFont(graphics);
 
-    simulatorEditor.addEditorEvent(new ResizedEvent(width, height));
+    logicim.addEditorEvent(new ResizedEvent(width, height));
   }
 
   public void mousePressed(int x, int y, int button, int clickCount)
   {
-    simulatorEditor.addEditorEvent(new MousePressedEvent(x, y, button, clickCount));
+    logicim.addEditorEvent(new MousePressedEvent(x, y, button, clickCount));
   }
 
   public void mouseReleased(int x, int y, int button)
   {
-    simulatorEditor.addEditorEvent(new MouseReleasedEvent(x, y, button));
+    logicim.addEditorEvent(new MouseReleasedEvent(x, y, button));
   }
 
   public void mouseMoved(int x, int y)
   {
-    simulatorEditor.addEditorEvent(new MouseMovedEvent(x, y));
+    logicim.addEditorEvent(new MouseMovedEvent(x, y));
   }
 
   public void windowClosing()
   {
-    simulatorEditor.addEditorEvent(new WindowClosingEvent());
+    logicim.addEditorEvent(new WindowClosingEvent());
   }
 
   public void mouseExited()
   {
-    simulatorEditor.addEditorEvent(new MouseExitedEvent());
+    logicim.addEditorEvent(new MouseExitedEvent());
   }
 
   public void mouseEntered(int x, int y)
   {
-    simulatorEditor.addEditorEvent(new MouseEnteredEvent(x, y));
+    logicim.addEditorEvent(new MouseEnteredEvent(x, y));
   }
 
   public void mouseWheel(int wheelRotation)
   {
-    simulatorEditor.addEditorEvent(new MouseWheelEvent(wheelRotation));
+    logicim.addEditorEvent(new MouseWheelEvent(wheelRotation));
   }
 
   public void keyPressed(KeyEvent keyEvent)
   {
-    simulatorEditor.addEditorEvent(new KeyPressedEvent(keyEvent.getKeyCode(),
-                                                       keyEvent.isControlDown(),
-                                                       keyEvent.isAltDown(),
-                                                       keyEvent.isShiftDown(),
-                                                       keyEvent.isMetaDown()));
+    logicim.addEditorEvent(new KeyPressedEvent(keyEvent.getKeyCode(),
+                                               keyEvent.isControlDown(),
+                                               keyEvent.isAltDown(),
+                                               keyEvent.isShiftDown(),
+                                               keyEvent.isMetaDown()));
   }
 
   public void keyReleased(KeyEvent keyEvent)
   {
-    simulatorEditor.addEditorEvent(new KeyReleasedEvent(keyEvent.getKeyCode(),
-                                                        keyEvent.isControlDown(),
-                                                        keyEvent.isAltDown(),
-                                                        keyEvent.isShiftDown(),
-                                                        keyEvent.isMetaDown()));
+    logicim.addEditorEvent(new KeyReleasedEvent(keyEvent.getKeyCode(),
+                                                keyEvent.isControlDown(),
+                                                keyEvent.isAltDown(),
+                                                keyEvent.isShiftDown(),
+                                                keyEvent.isMetaDown()));
   }
 
   public void saveSimulation()
@@ -263,7 +262,7 @@ public class SimulatorPanel
       if (file != null)
       {
         File newFile = new File(FileUtil.removeExtension(file).getPath() + "." + "logic");
-        EditorData savedData = simulatorEditor.save();
+        EditorData savedData = logicim.save();
 
         try
         {
@@ -295,7 +294,7 @@ public class SimulatorPanel
         EditorData savedData = new LogicimFileReader().load(file);
         try
         {
-          simulatorEditor.loadFile(savedData);
+          logicim.loadFile(savedData);
         }
         catch (RuntimeException exception)
         {
@@ -304,7 +303,7 @@ public class SimulatorPanel
         }
       }
     }
-    simulatorEditor.clearButtons();
+    logicim.clearButtons();
   }
 
   public JFrame getFrame()

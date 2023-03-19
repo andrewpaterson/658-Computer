@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
@@ -9,7 +9,7 @@ public class PlaceComponentAction
 {
   private Class<? extends StaticView<?>> discreteViewClass;
 
-  public PlaceComponentAction(SimulatorEditor editor, Class<? extends StaticView<?>> discreteViewClass)
+  public PlaceComponentAction(Logicim editor, Class<? extends StaticView<?>> discreteViewClass)
   {
     super(editor);
     this.discreteViewClass = discreteViewClass;

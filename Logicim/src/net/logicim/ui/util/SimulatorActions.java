@@ -1,6 +1,6 @@
 package net.logicim.ui.util;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.editor.*;
@@ -27,7 +27,7 @@ import static net.logicim.ui.input.action.ButtonState.*;
 
 public class SimulatorActions
 {
-  public static void create(SimulatorEditor editor, SimulatorPanel panel)
+  public static void create(Logicim editor, SimulatorPanel panel)
   {
     editor.addAction(new InputAction(new StopEditAction(editor), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     editor.addAction(new InputAction(new RunOneEvent(editor), KeyEvent.VK_T, Up, Up, Up));

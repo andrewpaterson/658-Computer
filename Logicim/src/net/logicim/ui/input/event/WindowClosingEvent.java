@@ -1,14 +1,14 @@
 package net.logicim.ui.input.event;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class WindowClosingEvent
     extends SimulatorEditorEvent
 {
   @Override
-  public void execute(SimulatorEditor simulatorEditor)
+  public void execute(Logicim logicim)
   {
-    simulatorEditor.windowClosing();
+    logicim.windowClosing();
   }
 }
 

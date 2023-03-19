@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class CopyAction
     extends SimulatorEditorAction
 {
-  public CopyAction(SimulatorEditor editor)
+  public CopyAction(Logicim editor)
   {
     super(editor);
   }

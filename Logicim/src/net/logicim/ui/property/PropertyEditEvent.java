@@ -1,7 +1,7 @@
 package net.logicim.ui.property;
 
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
@@ -28,7 +28,7 @@ public class PropertyEditEvent
   }
 
   @Override
-  public void execute(SimulatorEditor editor)
+  public void execute(Logicim editor)
   {
     componentView.clampProperties(newComponentProperties);
     StaticView<?> newComponentView = recreateComponentView(newComponentProperties, editor);
@@ -36,7 +36,7 @@ public class PropertyEditEvent
     editor.pushUndo();
   }
 
-  protected StaticView<?> recreateComponentView(ComponentProperties properties, SimulatorEditor editor)
+  protected StaticView<?> recreateComponentView(ComponentProperties properties, Logicim editor)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
     StaticView<?> newComponentView = componentView.duplicate(subcircuitEditor.getSubcircuitView(),

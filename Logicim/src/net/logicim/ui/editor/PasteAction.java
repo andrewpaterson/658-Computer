@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class PasteAction
     extends SimulatorEditorAction
 {
-  public PasteAction(SimulatorEditor editor)
+  public PasteAction(Logicim editor)
   {
     super(editor);
   }

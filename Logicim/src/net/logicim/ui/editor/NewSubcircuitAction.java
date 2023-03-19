@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.circuit.EditorDialogHelper;
 import net.logicim.ui.circuit.NewSubcircuitDialog;
@@ -10,7 +10,7 @@ public class NewSubcircuitAction
 {
   protected SimulatorPanel simulatorPanel;
 
-  public NewSubcircuitAction(SimulatorEditor editor, SimulatorPanel simulatorPanel)
+  public NewSubcircuitAction(Logicim editor, SimulatorPanel simulatorPanel)
   {
     super(editor);
     this.simulatorPanel = simulatorPanel;

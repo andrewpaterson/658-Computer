@@ -1,6 +1,6 @@
 package net.logicim.ui.input.event;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class KeyReleasedEvent
     extends SimulatorEditorEvent
@@ -26,12 +26,12 @@ public class KeyReleasedEvent
   }
 
   @Override
-  public void execute(SimulatorEditor simulatorEditor)
+  public void execute(Logicim logicim)
   {
-    simulatorEditor.keyReleased(keyCode,
-                                controlDown,
-                                altDown,
-                                shiftDown
+    logicim.keyReleased(keyCode,
+                        controlDown,
+                        altDown,
+                        shiftDown
     );
   }
 }

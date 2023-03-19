@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.property.PropertiesPanel;
 import net.logicim.ui.property.PropertyEditorDialog;
@@ -14,7 +14,7 @@ public class EditSubcircuitDialog
   protected SubcircuitView subcircuitView;
 
   public EditSubcircuitDialog(Frame owner,
-                              SimulatorEditor editor,
+                              Logicim editor,
                               SubcircuitView subcircuitView)
   {
     super(owner, "Create subcircuit", new Dimension(392, 260), editor, null);

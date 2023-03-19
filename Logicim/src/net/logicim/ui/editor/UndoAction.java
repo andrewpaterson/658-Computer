@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class UndoAction
     extends SimulatorEditorAction
 {
-  public UndoAction(SimulatorEditor editor)
+  public UndoAction(Logicim editor)
   {
     super(editor);
   }

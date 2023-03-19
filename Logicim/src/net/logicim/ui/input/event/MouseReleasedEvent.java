@@ -1,6 +1,6 @@
 package net.logicim.ui.input.event;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class MouseReleasedEvent
     extends SimulatorEditorEvent
@@ -18,9 +18,9 @@ public class MouseReleasedEvent
   }
 
   @Override
-  public void execute(SimulatorEditor simulatorEditor)
+  public void execute(Logicim logicim)
   {
-    simulatorEditor.mouseReleased(x, y, button);
+    logicim.mouseReleased(x, y, button);
   }
 }
 

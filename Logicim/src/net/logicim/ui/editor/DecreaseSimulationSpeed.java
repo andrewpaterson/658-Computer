@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class DecreaseSimulationSpeed
     extends SimulatorEditorAction
 {
-  public DecreaseSimulationSpeed(SimulatorEditor editor)
+  public DecreaseSimulationSpeed(Logicim editor)
   {
     super(editor);
   }

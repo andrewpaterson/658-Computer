@@ -1,6 +1,6 @@
 package net.logicim.ui.input.event;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class ResizedEvent
     extends SimulatorEditorEvent
@@ -16,9 +16,9 @@ public class ResizedEvent
   }
 
   @Override
-  public void execute(SimulatorEditor simulatorEditor)
+  public void execute(Logicim logicim)
   {
-    simulatorEditor.resized(width, height);
+    logicim.resized(width, height);
   }
 }
 

@@ -1,13 +1,13 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class BookmarkSubcircuitAction
     extends SimulatorEditorAction
 {
   protected int index;
 
-  public BookmarkSubcircuitAction(SimulatorEditor editor, int index)
+  public BookmarkSubcircuitAction(Logicim editor, int index)
   {
     super(editor);
     this.index = index;

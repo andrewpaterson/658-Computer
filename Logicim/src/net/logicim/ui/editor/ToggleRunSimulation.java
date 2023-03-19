@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class ToggleRunSimulation
     extends SimulatorEditorAction
 {
-  public ToggleRunSimulation(SimulatorEditor editor)
+  public ToggleRunSimulation(Logicim editor)
   {
     super(editor);
   }

@@ -44,7 +44,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
 
-public class SimulatorEditor
+public class Logicim
     implements PanelSize,
                Undo
 {
@@ -84,7 +84,7 @@ public class SimulatorEditor
   protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
   protected Map<String, SubcircuitViewParameters> subcircuitViewParameters;
 
-  public SimulatorEditor(SimulatorPanel simulatorPanel)
+  public Logicim(SimulatorPanel simulatorPanel)
   {
     this.inputEvents = new ConcurrentLinkedDeque<>();
 

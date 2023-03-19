@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.property.PropertyEditorDialog;
 
@@ -15,7 +15,7 @@ public class SplitterPropertyEditorDialog
   private SplitterProperties componentViewProperties;
 
   public SplitterPropertyEditorDialog(Frame owner,
-                                      SimulatorEditor editor,
+                                      Logicim editor,
                                       SplitterView componentView)
   {
     super(owner, componentView.getType() + " Properties", new Dimension(392, 460), editor, componentView);

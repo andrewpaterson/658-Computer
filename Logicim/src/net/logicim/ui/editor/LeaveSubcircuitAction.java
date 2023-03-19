@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class LeaveSubcircuitAction
     extends SimulatorEditorAction
 {
-  public LeaveSubcircuitAction(SimulatorEditor editor)
+  public LeaveSubcircuitAction(Logicim editor)
   {
     super(editor);
   }

@@ -1,9 +1,9 @@
 package net.logicim.ui.input.event;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public abstract class SimulatorEditorEvent
 {
-  public abstract void execute(SimulatorEditor simulatorEditor);
+  public abstract void execute(Logicim logicim);
 }
 

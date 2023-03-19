@@ -1,12 +1,12 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class PlacementRotateLeft
     extends SimulatorEditorAction
 {
 
-  public PlacementRotateLeft(SimulatorEditor editor)
+  public PlacementRotateLeft(Logicim editor)
   {
     super(editor);
   }

@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class RedoAction
     extends SimulatorEditorAction
 {
-  public RedoAction(SimulatorEditor editor)
+  public RedoAction(Logicim editor)
   {
     super(editor);
   }

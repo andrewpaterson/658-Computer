@@ -1,6 +1,6 @@
 package net.logicim.ui.input.event;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class MouseWheelEvent
     extends SimulatorEditorEvent
@@ -14,9 +14,9 @@ public class MouseWheelEvent
   }
 
   @Override
-  public void execute(SimulatorEditor simulatorEditor)
+  public void execute(Logicim logicim)
   {
-    simulatorEditor.mouseWheel(wheelRotation);
+    logicim.mouseWheel(wheelRotation);
   }
 }
 

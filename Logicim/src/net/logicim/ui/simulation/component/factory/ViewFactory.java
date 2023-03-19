@@ -2,7 +2,7 @@ package net.logicim.ui.simulation.component.factory;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
@@ -20,7 +20,7 @@ public abstract class ViewFactory<DISCRETE extends StaticView<PROPERTIES>, PROPE
 
   public abstract Class<DISCRETE> getViewClass();
 
-  public PropertyEditorDialog createEditorDialog(JFrame parentFrame, SimulatorEditor editor, StaticView<?> componentView)
+  public PropertyEditorDialog createEditorDialog(JFrame parentFrame, Logicim editor, StaticView<?> componentView)
   {
     return new ReflectivePropertyEditorDialog(parentFrame, componentView, editor);
   }

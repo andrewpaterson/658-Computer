@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 
 public class NewSubcircuitEvent
@@ -14,7 +14,7 @@ public class NewSubcircuitEvent
   }
 
   @Override
-  public void execute(SimulatorEditor editor)
+  public void execute(Logicim editor)
   {
     editor.newSubcircuitAction(subcircuitName);
   }

@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class CutAction
     extends SimulatorEditorAction
 {
-  public CutAction(SimulatorEditor editor)
+  public CutAction(Logicim editor)
   {
     super(editor);
   }

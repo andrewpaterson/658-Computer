@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class DeleteAction
     extends SimulatorEditorAction
 {
-  public DeleteAction(SimulatorEditor editor)
+  public DeleteAction(Logicim editor)
   {
     super(editor);
   }

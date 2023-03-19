@@ -1,6 +1,6 @@
 package net.logicim.ui.property;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
@@ -16,7 +16,7 @@ public class EditPropertiesDialogHelper
   }
 
   public void showPropertyEditorDialog(JFrame parentFrame,
-                                       SimulatorEditor editor,
+                                       Logicim editor,
                                        StaticView<?> componentView)
   {
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();

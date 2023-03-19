@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class NextSubcircuitAction
     extends SimulatorEditorAction
 {
-  public NextSubcircuitAction(SimulatorEditor editor)
+  public NextSubcircuitAction(Logicim editor)
   {
     super(editor);
   }

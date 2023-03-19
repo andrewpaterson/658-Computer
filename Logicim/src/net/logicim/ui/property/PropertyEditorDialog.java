@@ -1,7 +1,7 @@
 package net.logicim.ui.property;
 
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
@@ -21,7 +21,7 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public abstract class PropertyEditorDialog
     extends InputDialog
 {
-  protected SimulatorEditor editor;
+  protected Logicim editor;
   protected StaticView<?> componentView;
   protected PropertiesPanel propertiesPanel;
   protected Circuit circuit;
@@ -29,7 +29,7 @@ public abstract class PropertyEditorDialog
   public PropertyEditorDialog(Frame owner,
                               String title,
                               Dimension dimension,
-                              SimulatorEditor editor,
+                              Logicim editor,
                               StaticView<?> componentView)
   {
     super(owner, title, true, dimension);

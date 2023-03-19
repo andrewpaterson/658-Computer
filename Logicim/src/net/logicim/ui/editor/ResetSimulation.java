@@ -1,11 +1,11 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public class ResetSimulation
     extends SimulatorEditorAction
 {
-  public ResetSimulation(SimulatorEditor editor)
+  public ResetSimulation(Logicim editor)
   {
     super(editor);
   }

@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.SimulatorPanel;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.EditPropertiesDialogHelper;
@@ -10,7 +10,7 @@ public class EditPropertiesAction
 {
   protected SimulatorPanel simulatorPanel;
 
-  public EditPropertiesAction(SimulatorEditor editor, SimulatorPanel simulatorPanel)
+  public EditPropertiesAction(Logicim editor, SimulatorPanel simulatorPanel)
   {
     super(editor);
     this.simulatorPanel = simulatorPanel;

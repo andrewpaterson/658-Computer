@@ -1,13 +1,13 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 
 public abstract class SimulatorEditorAction
     extends EditorAction
 {
-  protected SimulatorEditor editor;
+  protected Logicim editor;
 
-  public SimulatorEditorAction(SimulatorEditor editor)
+  public SimulatorEditorAction(Logicim editor)
   {
     this.editor = editor;
   }

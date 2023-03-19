@@ -2,7 +2,7 @@ package net.logicim.ui.property;
 
 import net.logicim.common.reflect.ClassInspector;
 import net.logicim.common.reflect.InstanceInspector;
-import net.logicim.ui.SimulatorEditor;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
@@ -17,7 +17,7 @@ public class ReflectivePropertyEditorDialog
 {
   public ReflectivePropertyEditorDialog(Frame owner,
                                         StaticView<?> componentView,
-                                        SimulatorEditor editor)
+                                        Logicim editor)
   {
     super(owner,
           componentView.getType() + " Properties",

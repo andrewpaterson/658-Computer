@@ -332,12 +332,13 @@ public class Logicim
       }
 
       circuitEditor.getCurrentSelection().clearSelection();
-      SubcircuitInstanceView subcircuitView = new SubcircuitInstanceView(subcircuitEditor.getSubcircuitView(),
+      SubcircuitInstanceView subcircuitInstanceView = new SubcircuitInstanceView(circuitEditor.getCurrentSubcircuitView(),
+                                                                         subcircuitEditor.getSubcircuitView(),
                                                                          circuitEditor.getCircuit(),
                                                                          new Int2D(viewport.transformScreenToGridX(position.x),
                                                                                    viewport.transformScreenToGridY(position.y)),
                                                                          Rotation.North);
-      editAction = createEdit(new MoveComponents(subcircuitView, true), toFloatingGridPosition(position.x, position.y));
+      editAction = createEdit(new MoveComponents(subcircuitInstanceView, true), toFloatingGridPosition(position.x, position.y));
     }
   }
 

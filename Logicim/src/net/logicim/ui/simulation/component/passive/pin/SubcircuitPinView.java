@@ -11,7 +11,6 @@ import java.awt.*;
 
 public class SubcircuitPinView
 {
-  protected long pinViewId;
   protected ConnectionView connection;
 
   protected PinView pinView;
@@ -22,7 +21,6 @@ public class SubcircuitPinView
 
   public SubcircuitPinView(PinView pinView, SubcircuitInstanceView subcircuitView, Int2D positionRelativeToIC)
   {
-    this.pinViewId = pinView.id;
     this.pinView = pinView;
     this.subcircuitView = subcircuitView;
     this.connection = null;

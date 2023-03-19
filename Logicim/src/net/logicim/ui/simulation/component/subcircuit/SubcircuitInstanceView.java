@@ -26,8 +26,10 @@ public class SubcircuitInstanceView
   protected boolean subcircuitComponentsCreated;
   protected List<SubcircuitPinView> pinViews;
   protected RectangleView rectangle;
+  protected SubcircuitView instanceSubcircuitView;
 
   public SubcircuitInstanceView(SubcircuitView subcircuitView,
+                                SubcircuitView instanceSubcircuitView,
                                 Circuit circuit,
                                 Int2D position,
                                 Rotation rotation)
@@ -37,10 +39,11 @@ public class SubcircuitInstanceView
           position,
           rotation,
           new SubcircuitInstanceProperties(""));
+    this.instanceSubcircuitView = instanceSubcircuitView;
     this.enabled = false;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
-    subcircuitView.addSubcircuitInstanceView(this);
+    this.subcircuitView.addSubcircuitInstanceView(this);
     createGraphics();
     finaliseView(circuit);
   }
@@ -89,9 +92,10 @@ public class SubcircuitInstanceView
   @Override
   public ReflectiveData save(boolean selected)
   {
-    return new SubcircuitInstanceData(properties.name,
+    return new SubcircuitInstanceData(getTypeName(),
                                       position,
                                       rotation,
+                                      properties.name,
                                       boundingBox.save(),
                                       selectionBox.save(),
                                       selected);
@@ -111,13 +115,13 @@ public class SubcircuitInstanceView
 
   public String getTypeName()
   {
-    return subcircuitView.getTypeName();
+    return instanceSubcircuitView.getTypeName();
   }
 
   @Override
   public String getDescription()
   {
-    return getType() + " " + subcircuitView.getTypeName() + "(" + getName() + ") (" + getPosition() + ")";
+    return getType() + " " + getTypeName() + "(" + getName() + ") (" + getPosition() + ")";
   }
 
   @Override

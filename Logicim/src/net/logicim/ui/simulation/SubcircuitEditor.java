@@ -326,7 +326,11 @@ public class SubcircuitEditor
     ArrayList<String> list = new ArrayList<>();
     list.add(getTypeName());
     return list;
+  }
 
+  public SubcircuitEditor getSubcircuitEditor(String subcircuitTypeName)
+  {
+    return circuitEditor.getSubcircuitEditor(subcircuitTypeName);
   }
 
   public void setTypeName(String subcircuitName)

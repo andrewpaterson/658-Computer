@@ -34,10 +34,8 @@ public class PinView
     extends PassiveView<Pin, PinProperties>
 {
   public static int FONT_SIZE = 10;
-  public static long nextId = 1L;
 
   protected PortView port;
-  protected long id;
   protected Int2D relativeSubcircuitPosition;
   protected FamilyVoltageConfiguration familyVoltageConfiguration;
 
@@ -59,8 +57,6 @@ public class PinView
           rotation,
           properties);
     this.familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    id = nextId;
-    nextId++;
     relativeSubcircuitPosition = new Int2D();
     maxDigits = calculateMaxDigits();
 

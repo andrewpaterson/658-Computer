@@ -40,7 +40,9 @@ public class SplitterPropertiesPanel
   protected List<IntegerPropertyEditor> indices;
   protected SplitterPropertyEditorDialog dialog;
 
-  public SplitterPropertiesPanel(SplitterPropertyEditorDialog dialog, SplitterProperties properties, Rotation rotation)
+  public SplitterPropertiesPanel(SplitterPropertyEditorDialog dialog,
+                                 SplitterProperties properties,
+                                 Rotation rotation)
   {
     super(new GridBagLayout());
 

@@ -192,5 +192,10 @@ public class SubcircuitInstanceView
       pinView.paint(graphics, viewport);
     }
   }
+
+  public void updateTypeName()
+  {
+    properties.subcircuitTypeName = instanceSubcircuitView.getTypeName();
+  }
 }
 

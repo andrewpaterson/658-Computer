@@ -263,6 +263,11 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     return newComponentView;
   }
 
+  public SubcircuitView getSubcircuitView()
+  {
+    return subcircuitView;
+  }
+
   protected abstract void finaliseView(Circuit circuit);
 
   public abstract boolean isEnabled();

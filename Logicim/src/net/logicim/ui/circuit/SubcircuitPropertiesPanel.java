@@ -1,6 +1,5 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
@@ -11,7 +10,7 @@ import java.awt.*;
 public class SubcircuitPropertiesPanel
     extends PropertiesPanel
 {
-  public static final String NAME = "Name";
+  public static final String TYPE_NAME = "Name";
 
   protected TextPropertyEditor name;
 
@@ -19,8 +18,8 @@ public class SubcircuitPropertiesPanel
   {
     super(new GridBagLayout());
     Form form = new Form();
-    this.name = new TextPropertyEditor(this, NAME, name);
-    form.addComponents(new Label(NAME), this.name.getComponent());
+    this.name = new TextPropertyEditor(this, TYPE_NAME, name);
+    form.addComponents(new Label(TYPE_NAME), this.name.getComponent());
 
     addPropertyFormView(form);
   }

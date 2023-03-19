@@ -269,7 +269,7 @@ public class SubcircuitEditor
     subcircuitView.validateConsistency();
   }
 
-  public List<View> duplicateViews(List<View> views, CircuitSimulation simulation)
+  public List<View> duplicateViews(List<View> views)
   {
     ArrayList<View> duplicates = new ArrayList<>();
     for (View view : views)

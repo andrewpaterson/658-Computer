@@ -1,7 +1,6 @@
 package net.logicim.ui.simulation;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.common.dependency.Orderer;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
@@ -23,11 +22,14 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.*;
+import java.util.Set;
 
 public class CircuitEditor
 {
@@ -172,25 +174,25 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    ArrayList<SubcircuitData> data = new ArrayList<>();
+    SubcircuitOrderer orderer = new SubcircuitOrderer(subcircuitEditors);
+    List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
 
-    LinkedHashMap<SubcircuitEditor, List<String>> fulfillmentsMap = new LinkedHashMap<>();
-    LinkedHashMap<SubcircuitEditor, List<String>> requirementsMap = new LinkedHashMap<>();
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    if (orderedSubcircuitEditors != null)
     {
-      fulfillmentsMap.put(subcircuitEditor, subcircuitEditor.getTypeNameAsList());
-      requirementsMap.put(subcircuitEditor, subcircuitEditor.getSubcircuitInstanceNames());
-    }
+      ArrayList<SubcircuitData> data = new ArrayList<>();
+      for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
+      {
+        SubcircuitData subcircuitData = subcircuitEditor.save();
+        data.add(subcircuitData);
+      }
 
-    List<SubcircuitEditor> orderedSubcircuitEditors = Orderer.order(fulfillmentsMap, requirementsMap);
-    for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
+      TimelineData timelineData = getTimeline().save();
+      return new CircuitData(timelineData, data);
+    }
+    else
     {
-      SubcircuitData subcircuitData = subcircuitEditor.save();
-      data.add(subcircuitData);
+      return null;
     }
-
-    TimelineData timelineData = getTimeline().save();
-    return new CircuitData(timelineData, data);
   }
 
   public ClipboardData copyViews(List<View> views)
@@ -302,6 +304,11 @@ public class CircuitEditor
     return null;
   }
 
+  public List<SubcircuitEditor> getSubcircuitEditors()
+  {
+    return new ArrayList<>(subcircuitEditors);
+  }
+
   public boolean isCurrentSelectionEmpty()
   {
     return currentSubcircuitEditor.isSelectionEmpty();
@@ -329,7 +336,7 @@ public class CircuitEditor
 
   public List<View> duplicateViews(List<View> views)
   {
-    return currentSubcircuitEditor.duplicateViews(views, simulation);
+    return currentSubcircuitEditor.duplicateViews(views);
   }
 
   public void removeTraceView(TraceView traceView)

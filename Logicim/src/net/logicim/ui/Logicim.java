@@ -8,7 +8,9 @@ import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.editor.BookmarkData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.LongTime;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
@@ -28,6 +30,7 @@ import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
+import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
@@ -36,10 +39,8 @@ import net.logicim.ui.util.SimulatorActions;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
@@ -332,11 +333,11 @@ public class Logicim
 
       circuitEditor.getCurrentSelection().clearSelection();
       SubcircuitInstanceView subcircuitInstanceView = new SubcircuitInstanceView(circuitEditor.getCurrentSubcircuitView(),
-                                                                         subcircuitEditor.getSubcircuitView(),
-                                                                         circuitEditor.getCircuit(),
-                                                                         new Int2D(viewport.transformScreenToGridX(position.x),
-                                                                                   viewport.transformScreenToGridY(position.y)),
-                                                                         Rotation.North);
+                                                                                 subcircuitEditor.getSubcircuitView(),
+                                                                                 circuitEditor.getCircuit(),
+                                                                                 new Int2D(viewport.transformScreenToGridX(position.x),
+                                                                                           viewport.transformScreenToGridY(position.y)),
+                                                                                 Rotation.North);
       editAction = createEdit(new MoveComponents(subcircuitInstanceView, true), toFloatingGridPosition(position.x, position.y));
     }
   }
@@ -990,7 +991,7 @@ public class Logicim
     setSubcircuitParameters(subcircuitTypeName);
   }
 
-  public void deleteSubcircuitAction(String subcircuitTypeName)
+  public void deleteSubcircuitAction(String subcircuitTypeName, CircuitSimulation simulation)
   {
     subcircuitViewParameters.remove(subcircuitTypeName);
     List<Integer> bookmarkIds = new ArrayList<>(subcircuitBookmarks.keySet());
@@ -1001,6 +1002,19 @@ public class Logicim
       if (subcircuitEditor.getTypeName().equals(subcircuitTypeName))
       {
         subcircuitBookmarks.remove(bookmarkId);
+      }
+    }
+
+    for (SubcircuitEditor subcircuitEditor : circuitEditor.getSubcircuitEditors())
+    {
+      Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().getSubcircuitInstanceViews();
+      for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+      {
+        if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
+        {
+          SubcircuitView subcircuitView = subcircuitInstanceView.getSubcircuitView();
+          subcircuitView.deleteComponentView(subcircuitInstanceView, simulation);
+        }
       }
     }
   }
@@ -1014,6 +1028,18 @@ public class Logicim
       {
         this.subcircuitViewParameters.remove(oldSubcircuitTypeName);
         this.subcircuitViewParameters.put(newSubcircuitTypeName, subcircuitViewParameters);
+      }
+
+      for (SubcircuitEditor subcircuitEditor : circuitEditor.getSubcircuitEditors())
+      {
+        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().getSubcircuitInstanceViews();
+        for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+        {
+          if (subcircuitInstanceView.getTypeName().equals(oldSubcircuitTypeName))
+          {
+            subcircuitInstanceView.updateTypeName();
+          }
+        }
       }
     }
   }
@@ -1090,6 +1116,32 @@ public class Logicim
   public void reenterSubcircuit()
   {
     throw new SimulatorException();
+  }
+
+  public List<SubcircuitEditor> getSubcircuitEditors()
+  {
+    return circuitEditor.getSubcircuitEditors();
+  }
+
+  public List<String> getAllowedSubcircuitTypeNamesForSubcircuitInstance(SubcircuitInstanceView subcircuitInstanceView)
+  {
+    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+    ArrayList<String> result = new ArrayList<>();
+    for (SubcircuitEditor subcircuitEditor : getSubcircuitEditors())
+    {
+      SubcircuitOrderer orderer = new SubcircuitOrderer(circuitEditor.getSubcircuitEditors());
+      if (subcircuitEditor != currentSubcircuitEditor)
+      {
+        orderer.addRequirement(currentSubcircuitEditor, subcircuitEditor.getTypeName());
+        List<SubcircuitEditor> order = orderer.order();
+        if (order != null)
+        {
+          result.add(subcircuitEditor.getTypeName());
+        }
+      }
+    }
+    Collections.sort(result);
+    return result;
   }
 }
 

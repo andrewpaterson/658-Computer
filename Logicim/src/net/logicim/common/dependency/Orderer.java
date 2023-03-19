@@ -1,7 +1,5 @@
 package net.logicim.common.dependency;
 
-import net.logicim.common.SimulatorException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +29,7 @@ public class Orderer
 
       if (toRemove.isEmpty())
       {
-        throw new SimulatorException("Cannot fulfil all dependencies (circular or non existent dependency)");
+        return null;
       }
 
       toProcess.removeAll(toRemove);

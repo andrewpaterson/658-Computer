@@ -17,7 +17,7 @@ public class EditSubcircuitDialog
                               Logicim editor,
                               SubcircuitView subcircuitView)
   {
-    super(owner, "Create subcircuit", new Dimension(392, 260), editor, null);
+    super(owner, "Create subcircuit", new Dimension(360, 320), editor, null);
     this.subcircuitView = subcircuitView;
   }
 

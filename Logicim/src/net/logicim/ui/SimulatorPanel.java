@@ -5,7 +5,7 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
-import net.logicim.ui.circuit.SubcircuitViewFactory;
+import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.common.Fonts;
 import net.logicim.ui.common.wire.TunnelViewFactory;
 import net.logicim.ui.components.typeeditor.FamilyPropertyEditorFactory;
@@ -80,7 +80,7 @@ public class SimulatorPanel
                                           new TunnelViewFactory(),
                                           new LabelViewFactory(),
                                           new PinViewFactory(),
-                                          new SubcircuitViewFactory());
+                                          new SubcircuitInstanceViewFactory());
 
     addComponentListener(this);
     addMouseListener(this);

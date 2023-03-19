@@ -26,16 +26,18 @@ import java.util.Set;
 public class SubcircuitEditor
 {
   protected Selection selection;
-
   protected SubcircuitView subcircuitView;
+  protected CircuitEditor circuitEditor;
 
-  public SubcircuitEditor()
+  public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
-    this(new SubcircuitView());
+    this(circuitEditor, new SubcircuitView());
+    this.setTypeName(typeName);
   }
 
-  public SubcircuitEditor(SubcircuitView subcircuitView)
+  public SubcircuitEditor(CircuitEditor circuitEditor, SubcircuitView subcircuitView)
   {
+    this.circuitEditor = circuitEditor;
     this.subcircuitView = subcircuitView;
     this.selection = new Selection();
   }

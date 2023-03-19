@@ -26,8 +26,8 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class CircuitEditor
 {
@@ -36,10 +36,15 @@ public class CircuitEditor
   protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
 
-  public CircuitEditor(String mainSubcircuitTypeName)
+  public CircuitEditor()
   {
     simulation = new CircuitSimulation();
     subcircuitEditors = new ArrayList<>();
+  }
+
+  public CircuitEditor(String mainSubcircuitTypeName)
+  {
+    this();
     addNewSubcircuit(mainSubcircuitTypeName);
   }
 
@@ -223,7 +228,9 @@ public class CircuitEditor
 
     for (SubcircuitData subcircuitData : circuitData.subcircuit)
     {
-      SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
+      SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitData.typeName);
+      subcircuitEditors.add(subcircuitEditor);
+
       subcircuitEditor.loadViews(subcircuitData, simulation);
 
       if (currentSubcircuitEditor == null)
@@ -281,6 +288,18 @@ public class CircuitEditor
   public SubcircuitEditor getCurrentSubcircuitEditor()
   {
     return currentSubcircuitEditor;
+  }
+
+  public SubcircuitEditor getSubcircuitEditor(String subcircuitTypeName)
+  {
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      if (subcircuitEditor.getTypeName().equals(subcircuitTypeName))
+      {
+        return subcircuitEditor;
+      }
+    }
+    return null;
   }
 
   public boolean isCurrentSelectionEmpty()
@@ -345,7 +364,7 @@ public class CircuitEditor
     return null;
   }
 
-  protected String setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
+  public String setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
     currentSubcircuitEditor = subcircuitEditor;
     return currentSubcircuitEditor.getTypeName();
@@ -394,8 +413,7 @@ public class CircuitEditor
       throw new SimulatorException(error);
     }
 
-    SubcircuitEditor subcircuitEditor = new SubcircuitEditor();
-    subcircuitEditor.setTypeName(subcircuitName);
+    SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
     subcircuitEditors.add(subcircuitEditor);
 
     currentSubcircuitEditor = subcircuitEditor;

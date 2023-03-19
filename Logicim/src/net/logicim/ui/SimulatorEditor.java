@@ -757,7 +757,8 @@ public class SimulatorEditor
                           runTimeStep,
                           creationRotation,
                           subcircuitBookmarks,
-                          subcircuitParameters);
+                          subcircuitParameters,
+                          circuitEditor.getCurrentSubcircuitEditor().getTypeName());
   }
 
   protected ArrayList<SubcircuitParameterData> saveSubcircuitViewParameters()
@@ -792,9 +793,46 @@ public class SimulatorEditor
 
     clearHover();
 
-    circuitEditor = new CircuitEditor("Main");
+    circuitEditor = new CircuitEditor();
     circuitEditor.load(editorData.circuit);
+
+    running = editorData.running;
+    runTimeStep = editorData.runTimeStep;
+    creationRotation = editorData.creationRotation;
+    subcircuitViewParameters = loadSubcircuitViewParameters(editorData);
+    subcircuitBookmarks = loadSubcircuitBookmarks(editorData);
+
+    SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(editorData.currentSubcircuit);
+    String subcircuitTypeName = circuitEditor.setCurrentSubcircuitEditor(subcircuitEditor);
+    setViewportParameters(subcircuitTypeName);
+
     calculateHighlightedPort();
+  }
+
+  protected Map<Integer, SubcircuitEditor> loadSubcircuitBookmarks(EditorData editorData)
+  {
+    Map<Integer, SubcircuitEditor> subcircuitBookmarks = new LinkedHashMap<>();
+    for (BookmarkData subcircuitBookmark : editorData.subcircuitBookmarks)
+    {
+      subcircuitBookmarks.put(subcircuitBookmark.bookmarkKey, getSubcircuit(subcircuitBookmark.subcircuitTypeName));
+    }
+    return subcircuitBookmarks;
+  }
+
+  protected Map<String, SubcircuitViewParameters> loadSubcircuitViewParameters(EditorData editorData)
+  {
+    Map<String, SubcircuitViewParameters> subcircuitViewParameters = new LinkedHashMap<>();
+    for (SubcircuitParameterData subcircuitParameter : editorData.subcircuitParameters)
+    {
+      subcircuitViewParameters.put(subcircuitParameter.subcircuitTypeName, new SubcircuitViewParameters(subcircuitParameter.position,
+                                                                                                        subcircuitParameter.zoom));
+    }
+    return subcircuitViewParameters;
+  }
+
+  private SubcircuitEditor getSubcircuit(String subcircuitTypeName)
+  {
+    return circuitEditor.getSubcircuitEditor(subcircuitTypeName);
   }
 
   public void loadFile(EditorData editorData)
@@ -949,7 +987,7 @@ public class SimulatorEditor
   public void newSubcircuitAction(String subcircuitTypeName)
   {
     circuitEditor.addNewSubcircuit(subcircuitTypeName);
-    setViewportParameters(subcircuitTypeName);
+    setSubcircuitParameters(subcircuitTypeName);
   }
 
   public void deleteSubcircuitAction(String subcircuitTypeName)

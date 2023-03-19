@@ -15,6 +15,7 @@ public class EditorData
   public Rotation creationRotation;
   public List<BookmarkData> subcircuitBookmarks;
   public List<SubcircuitParameterData> subcircuitParameters;
+  public String currentSubcircuit;
 
   public EditorData()
   {
@@ -25,7 +26,8 @@ public class EditorData
                     long runTimeStep,
                     Rotation creationRotation,
                     List<BookmarkData> subcircuitBookmarks,
-                    List<SubcircuitParameterData> subcircuitParameters)
+                    List<SubcircuitParameterData> subcircuitParameters,
+                    String currentSubcircuit)
   {
     this.circuit = circuit;
     this.running = running;
@@ -33,6 +35,7 @@ public class EditorData
     this.creationRotation = creationRotation;
     this.subcircuitBookmarks = subcircuitBookmarks;
     this.subcircuitParameters = subcircuitParameters;
+    this.currentSubcircuit = currentSubcircuit;
   }
 }
 

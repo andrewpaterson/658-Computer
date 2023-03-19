@@ -301,11 +301,10 @@ public class Logicim
       }
 
       circuitEditor.getCurrentSelection().clearSelection();
-      StaticView<?> staticView = viewFactory.create(circuitEditor.getCurrentSubcircuitView(),
-                                                    circuitEditor.getCircuit(),
-                                                    new Int2D(viewport.transformScreenToGridX(position.x),
-                                                              viewport.transformScreenToGridY(position.y)),
-                                                    creationRotation);
+      StaticView<?> staticView = viewFactory.create(
+          circuitEditor, new Int2D(viewport.transformScreenToGridX(position.x),
+                                   viewport.transformScreenToGridY(position.y)),
+          creationRotation);
       editAction = createEdit(new MoveComponents(staticView, true), toFloatingGridPosition(position.x, position.y));
     }
   }

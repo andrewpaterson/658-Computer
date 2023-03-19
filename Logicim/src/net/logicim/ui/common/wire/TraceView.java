@@ -9,6 +9,7 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -205,8 +206,9 @@ public class TraceView
   }
 
   @Override
-  public View duplicate(SubcircuitView subcircuitView, Circuit circuit)
+  public View duplicate(CircuitEditor circuitEditor)
   {
+    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     TraceView traceView = new TraceView(subcircuitView,
                                         line.getStart(),
                                         line.getEnd(),

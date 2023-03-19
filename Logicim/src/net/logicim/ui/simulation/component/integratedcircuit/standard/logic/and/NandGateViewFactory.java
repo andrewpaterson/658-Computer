@@ -5,6 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.defaults.DefaultFamily;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
 
@@ -12,13 +13,11 @@ public class NandGateViewFactory
     extends ViewFactory<NandGateView, LogicGateProperties>
 {
   @Override
-  public NandGateView create(SubcircuitView subcircuitView,
-                             Circuit circuit,
+  public NandGateView create(CircuitEditor circuitEditor,
                              Int2D position,
                              Rotation rotation)
   {
-    return create(subcircuitView,
-                  circuit,
+    return create(circuitEditor,
                   position,
                   rotation,
                   new LogicGateProperties("",
@@ -29,12 +28,13 @@ public class NandGateViewFactory
   }
 
   @Override
-  public NandGateView create(SubcircuitView subcircuitView,
-                             Circuit circuit,
+  public NandGateView create(CircuitEditor circuitEditor,
                              Int2D position,
                              Rotation rotation,
                              LogicGateProperties properties)
   {
+    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
+    Circuit circuit = circuitEditor.getCircuit();
     return new NandGateView(subcircuitView,
                             circuit,
                             position,

@@ -39,9 +39,7 @@ public class PropertyEditEvent
   protected StaticView<?> recreateComponentView(ComponentProperties properties, Logicim editor)
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
-    StaticView<?> newComponentView = componentView.duplicate(subcircuitEditor.getSubcircuitView(),
-                                                             circuit,
-                                                             properties);
+    StaticView<?> newComponentView = componentView.duplicate(circuitEditor, properties);
     circuitEditor.deleteComponentView(this.componentView);
     circuitEditor.placeComponentView(newComponentView);
 

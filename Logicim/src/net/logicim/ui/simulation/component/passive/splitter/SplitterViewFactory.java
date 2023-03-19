@@ -8,6 +8,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 
 import javax.swing.*;
@@ -16,30 +17,29 @@ public class SplitterViewFactory
     extends ViewFactory<SplitterView, SplitterProperties>
 {
   @Override
-  public SplitterView create(SubcircuitView subcircuitView,
-                             Circuit circuit,
+  public SplitterView create(CircuitEditor circuitEditor,
                              Int2D position,
                              Rotation rotation)
   {
-    return new SplitterView(subcircuitView,
-                            circuit,
-                            position,
-                            rotation,
-                            new SplitterProperties(null,
-                                                   2,
-                                                   2,
-                                                   2,
-                                                   SplitterAppearance.LEFT_HANDED,
-                                                   -1));
+    return create(circuitEditor,
+                  position,
+                  rotation,
+                  new SplitterProperties(null,
+                                         2,
+                                         2,
+                                         2,
+                                         SplitterAppearance.LEFT_HANDED,
+                                         -1));
   }
 
   @Override
-  public SplitterView create(SubcircuitView subcircuitView,
-                             Circuit circuit,
+  public SplitterView create(CircuitEditor circuitEditor,
                              Int2D position,
                              Rotation rotation,
                              SplitterProperties properties)
   {
+    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
+    Circuit circuit = circuitEditor.getCircuit();
     return new SplitterView(subcircuitView,
                             circuit,
                             position,

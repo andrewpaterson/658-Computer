@@ -274,7 +274,7 @@ public class SubcircuitEditor
     ArrayList<View> duplicates = new ArrayList<>();
     for (View view : views)
     {
-      View duplicate = view.duplicate(subcircuitView, simulation.getCircuit());
+      View duplicate = view.duplicate(circuitEditor);
       duplicates.add(duplicate);
     }
     return duplicates;

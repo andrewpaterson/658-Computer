@@ -10,6 +10,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
+import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
@@ -248,16 +249,16 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public StaticView<PROPERTIES> duplicate(SubcircuitView subcircuitView, Circuit circuit)
+  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor)
   {
-    return duplicate(subcircuitView, circuit, (PROPERTIES) properties.duplicate());
+    return duplicate(circuitEditor, (PROPERTIES) properties.duplicate());
   }
 
-  public StaticView<PROPERTIES> duplicate(SubcircuitView subcircuitView, Circuit circuit, PROPERTIES properties)
+  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor, PROPERTIES properties)
   {
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    StaticView<PROPERTIES> newComponentView = viewFactory.create(subcircuitView, circuit, position, rotation, properties);
+    StaticView<PROPERTIES> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
 
     return newComponentView;
   }

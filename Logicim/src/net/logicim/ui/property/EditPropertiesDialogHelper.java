@@ -1,5 +1,6 @@
 package net.logicim.ui.property;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
@@ -22,6 +23,10 @@ public class EditPropertiesDialogHelper
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) componentView.getClass();
     ViewFactory<?, ?> viewFactory = ViewFactoryStore.getInstance().get(aClass);
+    if (viewFactory == null)
+    {
+      throw new SimulatorException("Cannot find ViewFactory for class [%s]. Call  ViewFactoryStore.getInstance.addAll()");
+    }
     PropertyEditorDialog dialog = viewFactory.createEditorDialog(parentFrame, editor, componentView);
     dialog.build();
     mousePosition.x -= 50;

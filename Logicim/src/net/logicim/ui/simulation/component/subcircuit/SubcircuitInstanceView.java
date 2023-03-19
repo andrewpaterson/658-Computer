@@ -38,7 +38,7 @@ public class SubcircuitInstanceView
           circuit,
           position,
           rotation,
-          new SubcircuitInstanceProperties(""));
+          new SubcircuitInstanceProperties("", instanceSubcircuitView.getTypeName()));
     this.instanceSubcircuitView = instanceSubcircuitView;
     this.enabled = false;
     this.subcircuitComponentsCreated = false;

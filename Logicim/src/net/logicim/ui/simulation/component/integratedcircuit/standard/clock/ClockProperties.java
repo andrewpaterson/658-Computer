@@ -15,7 +15,11 @@ public class ClockProperties
     inverseOut = false;
   }
 
-  public ClockProperties(String name, Family family, boolean explicitPowerPorts, float frequency, boolean inverseOut)
+  public ClockProperties(String name,
+                         Family family,
+                         boolean explicitPowerPorts,
+                         float frequency,
+                         boolean inverseOut)
   {
     super(name, family, explicitPowerPorts);
     this.frequency_Hz = frequency;

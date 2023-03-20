@@ -201,6 +201,12 @@ public class OscilloscopeView
                                 properties.samplingFrequency_Hz);
   }
 
+  @Override
+  protected boolean mustIncludeExplicitPowerPorts(FamilyVoltageConfiguration familyVoltageConfiguration)
+  {
+    return false;
+  }
+
   public OscilloscopeState saveState()
   {
     OscilloscopeState state = getIntegratedCircuit().getState();

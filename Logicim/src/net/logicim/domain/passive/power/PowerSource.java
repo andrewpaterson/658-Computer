@@ -9,10 +9,16 @@ import net.logicim.domain.passive.common.Passive;
 public class PowerSource
     extends Passive
 {
+  protected PowerOutPort powerOutPort;
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     super(circuit, name);
-    new PowerOutPort("Power", this, voltage);
+    powerOutPort = new PowerOutPort("Power", this, voltage);
+  }
+
+  public PowerOutPort getPowerOutPort()
+  {
+    return powerOutPort;
   }
 
   @Override

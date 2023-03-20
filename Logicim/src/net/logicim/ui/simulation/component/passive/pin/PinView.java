@@ -12,12 +12,16 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
+import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
+import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.defaults.DefaultLogicLevels;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
@@ -151,7 +155,7 @@ public class PinView
   {
     port = new PortView(this, passive.getTracePorts(), new Int2D());
 
-    if (properties.explicitPowerPorts)
+    if (mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
       new PortView(this, passive.getVoltageCommon(), new Int2D((int) Math.floor(1), -1));
       new PortView(this, passive.getVoltageGround(), new Int2D((int) Math.ceil(-1), -1));
@@ -181,6 +185,7 @@ public class PinView
   public void clampProperties(PinProperties newProperties)
   {
     newProperties.bitWidth = PropertyClamp.clamp(newProperties.bitWidth, 1, PropertyClamp.MAX_WIDTH);
+    newProperties.weight = PropertyClamp.clamp(newProperties.weight, 1, 32);
   }
 
   @Override
@@ -191,9 +196,51 @@ public class PinView
   @Override
   protected Pin createPassive(Circuit circuit)
   {
-    return new Pin(circuit,
-                   properties.name,
-                   properties.bitWidth);
+    Pin pin = new Pin(circuit,
+                      properties.name,
+                      properties.bitWidth);
+    if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
+    {
+      createPowerPorts(circuit, familyVoltageConfiguration, pin);
+    }
+    return pin;
+  }
+
+  protected void createPowerPorts(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration, Pin pin)
+  {
+    VoltageConfiguration voltageConfiguration = familyVoltageConfiguration.getDefaultVoltageConfiguration(DefaultLogicLevels.get());
+
+    Trace vccTrace = new Trace();
+    pin.getVoltageCommon().connect(vccTrace);
+
+    PowerSource vccPowerSource = new PowerSource(circuit, "", voltageConfiguration.getVcc());
+    vccPowerSource.getPowerOutPort().connect(vccTrace);
+
+    Trace gndTrace = new Trace();
+    pin.getVoltageGround().connect(gndTrace);
+
+    PowerSource gndPowerSource = new PowerSource(circuit, "", 0);
+    gndPowerSource.getPowerOutPort().connect(gndTrace);
+  }
+
+  protected boolean mustIncludeExplicitPowerPorts(FamilyVoltageConfiguration familyVoltageConfiguration)
+  {
+    if (properties.explicitPowerPorts)
+    {
+      return true;
+    }
+    else
+    {
+      VoltageConfiguration voltageConfiguration = familyVoltageConfiguration.getDefaultVoltageConfiguration(DefaultLogicLevels.get());
+      if (voltageConfiguration == null)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
   }
 
   @Override

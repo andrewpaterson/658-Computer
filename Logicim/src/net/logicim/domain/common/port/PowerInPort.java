@@ -1,6 +1,5 @@
 package net.logicim.domain.common.port;
 
-import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.wire.Trace;
 
 public class PowerInPort

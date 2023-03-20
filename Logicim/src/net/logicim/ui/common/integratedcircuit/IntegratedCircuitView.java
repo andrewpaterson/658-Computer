@@ -11,10 +11,14 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.state.State;
+import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.defaults.DefaultLogicLevels;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,8 +47,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   protected void createComponent(Circuit circuit)
   {
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    this.integratedCircuit = createIntegratedCircuit(circuit, familyVoltageConfiguration);
-    this.integratedCircuit.disable();
+    integratedCircuit = createIntegratedCircuit(circuit, familyVoltageConfiguration);
+    createPowerPortsIfNecessary(circuit, familyVoltageConfiguration);
+    integratedCircuit.disable();
   }
 
   protected void validatePorts()
@@ -87,6 +92,31 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     validatePorts();
   }
 
+  protected void createPowerPortsIfNecessary(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  {
+    if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
+    {
+      createPowerPorts(circuit, familyVoltageConfiguration);
+    }
+  }
+
+  protected void createPowerPorts(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  {
+    VoltageConfiguration voltageConfiguration = familyVoltageConfiguration.getDefaultVoltageConfiguration(DefaultLogicLevels.get());
+
+    Trace vccTrace = new Trace();
+    integratedCircuit.getPins().getVoltageCommon().connect(vccTrace);
+
+    PowerSource vccPowerSource = new PowerSource(circuit, "", voltageConfiguration.getVcc());
+    vccPowerSource.getPowerOutPort().connect(vccTrace);
+
+    Trace gndTrace = new Trace();
+    integratedCircuit.getPins().getVoltageGround().connect(gndTrace);
+
+    PowerSource gndPowerSource = new PowerSource(circuit, "", 0);
+    gndPowerSource.getPowerOutPort().connect(gndTrace);
+  }
+
   protected List<IntegratedCircuitEventData<?>> saveEvents()
   {
     LinkedList<IntegratedCircuitEvent> integratedCircuitEvents = integratedCircuit.getEvents();
@@ -120,5 +150,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   protected abstract IC createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
+
+  protected abstract boolean mustIncludeExplicitPowerPorts(FamilyVoltageConfiguration familyVoltageConfiguration);
 }
 

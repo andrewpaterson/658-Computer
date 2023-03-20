@@ -18,14 +18,14 @@ public class ClockViewFactory
                           Int2D position,
                           Rotation rotation)
   {
-    return create(
-        circuitEditor, position,
-        rotation,
-        new ClockProperties("",
-                            DefaultFamily.get(),
-                            true,
-                            25 * MHz,
-                            false));
+    return create(circuitEditor,
+                  position,
+                  rotation,
+                  new ClockProperties("",
+                                      DefaultFamily.get(),
+                                      false,
+                                      25 * MHz,
+                                      false));
   }
 
   @Override

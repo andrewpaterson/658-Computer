@@ -3,10 +3,15 @@ package net.logicim.domain.common.propagation;
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.wire.TraceValue;
+import net.logicim.ui.common.defaults.DefaultFamily;
+import net.logicim.ui.common.defaults.DefaultLogicLevels;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static net.logicim.ui.common.defaults.DefaultLogicLevels.CMOS;
+import static net.logicim.ui.common.defaults.DefaultLogicLevels.TTL;
 
 public class FamilyVoltageConfiguration
     extends VoltageConfigurationSource
@@ -73,11 +78,11 @@ public class FamilyVoltageConfiguration
 
     voltageConfigurations.add(voltageConfiguration);
 
-    if (logicLevel.equalsIgnoreCase("TTL"))
+    if (logicLevel.equalsIgnoreCase(TTL))
     {
       ttlConfiguration = voltageConfiguration;
     }
-    else if (logicLevel.equalsIgnoreCase("CMOS"))
+    else if (logicLevel.equalsIgnoreCase(DefaultLogicLevels.CMOS))
     {
       cmosConfiguration = voltageConfiguration;
     }
@@ -339,6 +344,22 @@ public class FamilyVoltageConfiguration
 
     long configurationHighTimeDiff = higherTime - lowerTime;
     return lowerTime + (long) (configurationHighTimeDiff * fraction);
+  }
+
+  public VoltageConfiguration getDefaultVoltageConfiguration(String logicLevel)
+  {
+    if (logicLevel.equals(TTL))
+    {
+      return ttlConfiguration;
+    }
+    else if ((logicLevel.equals(CMOS)))
+    {
+      return cmosConfiguration;
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public void sort()

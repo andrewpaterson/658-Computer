@@ -4,9 +4,16 @@ import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
+import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
+import net.logicim.domain.common.propagation.VoltageConfiguration;
+import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
+import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.defaults.DefaultLogicLevels;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -33,7 +40,7 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
 
   protected void createPortViews()
   {
-    if (properties.explicitPowerPorts)
+    if (mustIncludeExplicitPowerPorts(FamilyVoltageConfigurationStore.get(properties.family)))
     {
       BoundingBox boundingBox = new BoundingBox();
       updateBoundingBoxFromShapes(boundingBox);
@@ -55,6 +62,27 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
       ports1.add(port);
     }
     return ports1;
+  }
+
+  @Override
+  protected boolean mustIncludeExplicitPowerPorts(FamilyVoltageConfiguration familyVoltageConfiguration)
+  {
+    if (properties.explicitPowerPorts)
+    {
+      return true;
+    }
+    else
+    {
+      VoltageConfiguration voltageConfiguration = familyVoltageConfiguration.getDefaultVoltageConfiguration(DefaultLogicLevels.get());
+      if (voltageConfiguration == null)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
   }
 
   @Override

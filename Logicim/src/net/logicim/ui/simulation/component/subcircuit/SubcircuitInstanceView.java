@@ -16,6 +16,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
+import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.passive.pin.SubcircuitPinView;
@@ -82,12 +83,22 @@ public class SubcircuitInstanceView
     name = null;
     if (!StringUtil.isEmptyOrNull(properties.name))
     {
-      name = new TextView(this, new Float2D(0, 0), properties.name, SANS_SERIF, 10, true, HorizontalAlignment.CENTER);
+      name = new TextView(this, new Float2D(0, 0), properties.name, SANS_SERIF, 10, false, HorizontalAlignment.CENTER);
     }
 
     TextView.centerHorizontally(typeName, comment, name);
+    BoundingBox boundingBox = new BoundingBox();
+    BoundingBox.calculateBoundingBox(boundingBox, typeName, comment, name);
 
-    rectangle = new RectangleView(this, 10, 10, true, true);
+    Float2D topLeft = new Float2D(boundingBox.getTopLeft());
+    topLeft.x = (float) Math.floor(topLeft.x - 0.5f);
+    topLeft.y = (float) Math.floor(topLeft.y - 0.5f);
+
+    Float2D bottomRight = new Float2D(boundingBox.getBottomRight());
+    bottomRight.x = (float) Math.ceil(bottomRight.x + 0.5f);
+    bottomRight.y = (float) Math.ceil(bottomRight.y + 0.5f);
+
+    rectangle = new RectangleView(this, new Int2D(topLeft), new Int2D(bottomRight), true, true);
   }
 
   private void createSubcircuitComponents(Circuit circuit)

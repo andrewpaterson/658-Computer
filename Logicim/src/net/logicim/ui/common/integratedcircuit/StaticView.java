@@ -18,6 +18,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.logicim.ui.shape.common.BoundingBox.calculateBoundingBox;
+
 public abstract class StaticView<PROPERTIES extends ComponentProperties>
     extends View
     implements ShapeHolder
@@ -91,10 +93,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
   {
-    for (ShapeView shape : shapes)
-    {
-      shape.boundingBoxInclude(boundingBox);
-    }
+    calculateBoundingBox(boundingBox, shapes);
   }
 
   public void paintSelected(Graphics2D graphics, Viewport viewport, Color color)

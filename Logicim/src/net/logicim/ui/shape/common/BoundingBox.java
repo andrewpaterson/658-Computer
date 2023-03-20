@@ -6,6 +6,8 @@ import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.ui.common.Rotation;
 
+import java.util.List;
+
 public class BoundingBox
 {
   protected Float2D topLeft;
@@ -185,12 +187,12 @@ public class BoundingBox
     return transformedHeight;
   }
 
-  protected Float2D getTopLeft()
+  public Float2D getTopLeft()
   {
     return topLeft;
   }
 
-  protected Float2D getBottomRight()
+  public Float2D getBottomRight()
   {
     return bottomRight;
   }
@@ -261,6 +263,28 @@ public class BoundingBox
     else
     {
       this.bottomRight.set(bottomRight);
+    }
+  }
+
+  public static void calculateBoundingBox(BoundingBox boundingBox, List<ShapeView> shapes)
+  {
+    for (ShapeView shape : shapes)
+    {
+      if (shape != null)
+      {
+        shape.boundingBoxInclude(boundingBox);
+      }
+    }
+  }
+
+  public static void calculateBoundingBox(BoundingBox boundingBox, ShapeView... shapes)
+  {
+    for (ShapeView shape : shapes)
+    {
+      if (shape != null)
+      {
+        shape.boundingBoxInclude(boundingBox);
+      }
     }
   }
 }

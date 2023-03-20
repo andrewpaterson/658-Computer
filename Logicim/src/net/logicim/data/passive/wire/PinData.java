@@ -20,12 +20,13 @@ public class PinData
     extends PassiveData<PinView>
 {
   protected int bitWidth;
+  protected String family;
+  protected boolean explicitPowerPorts;
   protected SubcircuitPinAlignment alignment;
   protected SubcircuitPinAnchour offset;
   protected int weight;
   protected boolean inverting;
   protected boolean clockNotch;
-  protected String family;
   protected Radix radix;
 
   public PinData()
@@ -44,6 +45,7 @@ public class PinData
                  boolean inverting,
                  boolean clockNotch,
                  String family,
+                 boolean explicitPowerPorts,
                  Radix radix)
   {
     super(position, rotation, name, ports, selected);
@@ -54,6 +56,7 @@ public class PinData
     this.inverting = inverting;
     this.clockNotch = clockNotch;
     this.family = family;
+    this.explicitPowerPorts = explicitPowerPorts;
     this.radix = radix;
   }
 
@@ -72,6 +75,7 @@ public class PinData
                                          inverting,
                                          clockNotch,
                                          FamilyStore.getInstance().get(family),
+                                         explicitPowerPorts,
                                          radix));
   }
 }

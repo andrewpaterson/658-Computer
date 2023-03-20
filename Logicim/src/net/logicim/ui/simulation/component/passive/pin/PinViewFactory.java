@@ -30,6 +30,7 @@ public class PinViewFactory
                                     false,
                                     false,
                                     DefaultFamily.get(),
+                                    false,
                                     Radix.BINARY));
   }
 

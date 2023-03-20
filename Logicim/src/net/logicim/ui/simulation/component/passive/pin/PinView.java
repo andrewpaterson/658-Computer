@@ -19,6 +19,7 @@ import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.circle.CircleView;
 import net.logicim.ui.shape.text.TextView;
@@ -150,8 +151,11 @@ public class PinView
   {
     port = new PortView(this, passive.getTracePorts(), new Int2D());
 
-    new PortView(this, passive.getVoltageCommon(), new Int2D((int) Math.floor(1), -1));
-    new PortView(this, passive.getVoltageGround(), new Int2D((int) Math.ceil(-1), -1));
+    if (properties.explicitPowerPorts)
+    {
+      new PortView(this, passive.getVoltageCommon(), new Int2D((int) Math.floor(1), -1));
+      new PortView(this, passive.getVoltageGround(), new Int2D((int) Math.ceil(-1), -1));
+    }
   }
 
   @Override
@@ -169,16 +173,14 @@ public class PinView
                        properties.inverting,
                        properties.clockNotch,
                        properties.family.getFamily(),
+                       properties.explicitPowerPorts,
                        properties.radix);
   }
 
   @Override
   public void clampProperties(PinProperties newProperties)
   {
-    if (properties.bitWidth < 1)
-    {
-      properties.bitWidth = 1;
-    }
+    newProperties.bitWidth = PropertyClamp.clamp(newProperties.bitWidth, 1, PropertyClamp.MAX_WIDTH);
   }
 
   @Override

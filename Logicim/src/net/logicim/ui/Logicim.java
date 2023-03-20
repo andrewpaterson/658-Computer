@@ -102,7 +102,7 @@ public class Logicim
 
     this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
     this.editAction = null;
-    this.creationRotation = Rotation.East;
+    this.creationRotation = Rotation.West;
 
     this.running = false;
     this.runTimeStep = LongTime.nanosecondsToTime(0.25f);

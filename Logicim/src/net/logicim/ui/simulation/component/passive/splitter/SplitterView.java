@@ -404,7 +404,7 @@ public class SplitterView
   @Override
   public void clampProperties(SplitterProperties newProperties)
   {
-    newProperties.fanOut = PropertyClamp.clamp(newProperties.fanOut, 1, PropertyClamp.MAX);
+    newProperties.fanOut = PropertyClamp.clamp(newProperties.fanOut, 1, PropertyClamp.MAX_WIDTH);
     newProperties.gridSpacing = PropertyClamp.clamp(newProperties.gridSpacing, 1, 12);
     newProperties.endOffset = PropertyClamp.clamp(newProperties.endOffset, -1, newProperties.fanOut * newProperties.gridSpacing - 1);
     for (int i = 0; i < newProperties.splitIndices.length; i++)

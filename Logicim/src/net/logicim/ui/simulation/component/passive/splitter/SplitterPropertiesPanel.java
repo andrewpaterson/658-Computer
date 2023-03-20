@@ -90,7 +90,7 @@ public class SplitterPropertiesPanel
   {
     SplitterProperties properties = createProperties();
     int bitWidthValue = bitWidth.getValue();
-    if (!(bitWidthValue > 0 && bitWidthValue < PropertyClamp.MAX))
+    if (!(bitWidthValue > 0 && bitWidthValue < PropertyClamp.MAX_WIDTH))
     {
       bitWidth.setText("1");
     }

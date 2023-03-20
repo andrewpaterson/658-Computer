@@ -34,9 +34,11 @@ public class PinProperties
                        boolean inverting,
                        boolean clockNotch,
                        Family family,
+                       boolean explicitPowerPorts,
                        Radix radix)
   {
     super(name);
+    this.explicitPowerPorts = explicitPowerPorts;
     this.instanceLocation = null;
     this.instanceDisplay = null;
     this.bitWidth = bitWidth;
@@ -60,6 +62,7 @@ public class PinProperties
                              inverting,
                              clockNotch,
                              family,
+                             explicitPowerPorts,
                              radix);
   }
 }

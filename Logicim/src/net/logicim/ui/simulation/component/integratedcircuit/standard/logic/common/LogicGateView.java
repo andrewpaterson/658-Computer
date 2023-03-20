@@ -5,6 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 
 import java.util.List;
@@ -54,7 +55,8 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void clampProperties(LogicGateProperties newProperties)
   {
-    newProperties.inputCount = clamp(newProperties.inputCount, 1, 13);
+    newProperties.inputCount = clamp(newProperties.inputCount, 1, PropertyClamp.MAX_WIDTH);
+    newProperties.inputWidth = clamp(newProperties.inputWidth, 1, PropertyClamp.MAX_WIDTH);
   }
 }
 

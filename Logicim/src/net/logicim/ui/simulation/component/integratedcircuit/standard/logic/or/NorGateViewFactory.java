@@ -22,7 +22,7 @@ public class NorGateViewFactory
                   rotation,
                   new LogicGateProperties("",
                                           DefaultFamily.get(),
-                                          true,
+                                          false,
                                           2,
                                           1));
   }

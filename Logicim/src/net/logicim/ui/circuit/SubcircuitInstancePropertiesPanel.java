@@ -5,6 +5,7 @@ import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.ComboBoxPropertyEditor;
+import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
 import net.logicim.ui.property.RotationEditor;
@@ -21,10 +22,16 @@ public class SubcircuitInstancePropertiesPanel
   public static final String NAME = "Name";
   public static final String TYPE_NAME = "Type Name";
   public static final String ROTATION = "Rotation";
+  public static final String WIDTH = "Width";
+  public static final String HEIGHT = "Height";
+  public static final String COMMENT = "Comment";
 
   protected TextPropertyEditor name;
   protected ComboBoxPropertyEditor typeName;
   protected RotationEditor rotation;
+  protected TextPropertyEditor comment;
+  protected IntegerPropertyEditor width;
+  protected IntegerPropertyEditor height;
 
   protected SubcircuitInstancePropertyEditorDialog dialog;
 
@@ -41,17 +48,18 @@ public class SubcircuitInstancePropertiesPanel
     this.typeName = new ComboBoxPropertyEditor(this, TYPE_NAME, allowedSubcircuitTypeNames, properties.subcircuitTypeName);
     this.name = new TextPropertyEditor(this, NAME, properties.name);
     this.rotation = new RotationEditor(this, ROTATION, rotation);
+    this.width = new IntegerPropertyEditor(this, WIDTH, properties.width);
+    this.height = new IntegerPropertyEditor(this, HEIGHT, properties.height);
+    this.comment = new TextPropertyEditor(this, COMMENT, properties.comment);
 
-    form.addComponents(new Label(NAME), this.typeName.getComponent());
-    form.addComponents(new Label(TYPE_NAME), this.name.getComponent());
+    form.addComponents(new Label(TYPE_NAME), this.typeName.getComponent());
+    form.addComponents(new Label(NAME), this.name.getComponent());
     form.addComponents(new Label(ROTATION), this.rotation.getComponent());
+    form.addComponents(new Label(WIDTH), this.width.getComponent());
+    form.addComponents(new Label(HEIGHT), this.height.getComponent());
+    form.addComponents(new Label(COMMENT), this.comment.getComponent());
 
     addPropertyFormView(form);
-  }
-
-  public String getSubcircuitName()
-  {
-    return name.getValue();
   }
 
   @Override
@@ -69,7 +77,10 @@ public class SubcircuitInstancePropertiesPanel
   public SubcircuitInstanceProperties createProperties()
   {
     return new SubcircuitInstanceProperties(name.getValue(),
-                                            typeName.getValue());
+                                            typeName.getValue(),
+                                            comment.getValue(),
+                                            width.getValue(),
+                                            height.getValue());
   }
 }
 

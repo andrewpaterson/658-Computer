@@ -48,6 +48,7 @@ public class SubcircuitPinView
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
+    updateGridCache();
     Tuple2 transformedPosition = positionCache.getTransformedPosition();
   }
 }

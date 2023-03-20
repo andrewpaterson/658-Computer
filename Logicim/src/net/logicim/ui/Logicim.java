@@ -15,6 +15,7 @@ import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.editor.SubcircuitViewParameters;
 import net.logicim.ui.input.action.InputAction;
@@ -332,12 +333,18 @@ public class Logicim
       }
 
       circuitEditor.getCurrentSelection().clearSelection();
+      SubcircuitView instanceSubcircuitView = subcircuitEditor.getSubcircuitView();
       SubcircuitInstanceView subcircuitInstanceView = new SubcircuitInstanceView(circuitEditor.getCurrentSubcircuitView(),
-                                                                                 subcircuitEditor.getSubcircuitView(),
+                                                                                 instanceSubcircuitView,
                                                                                  circuitEditor.getCircuit(),
                                                                                  new Int2D(viewport.transformScreenToGridX(position.x),
                                                                                            viewport.transformScreenToGridY(position.y)),
-                                                                                 Rotation.North);
+                                                                                 Rotation.North,
+                                                                                 new SubcircuitInstanceProperties("",
+                                                                                                                  instanceSubcircuitView.getTypeName(),
+                                                                                                                  "",
+                                                                                                                  0,
+                                                                                                                  0));
       editAction = createEdit(new MoveComponents(subcircuitInstanceView, true), toFloatingGridPosition(position.x, position.y));
     }
   }

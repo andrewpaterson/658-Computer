@@ -27,6 +27,7 @@ public class TextView
   protected float size;
   protected boolean bold;
   protected HorizontalAlignment alignment;
+  protected Color color;
 
   protected PointGridCache gridCache;
 
@@ -46,10 +47,39 @@ public class TextView
     this.text = text;
     this.size = size;
     this.bold = bold;
+    this.color = Colours.getInstance().getText();
 
     this.gridCache = new PointGridCache(positionRelativeToIC);
 
     calculateDimension();
+  }
+
+  public static void centerHorizontally(TextView... textViews)
+  {
+    float height = 0;
+    float maximumTextOffset = 0;
+    for (TextView textView : textViews)
+    {
+      if (textView != null)
+      {
+        height += textView.getTextDimension().getY();
+        float textOffset = -textView.getTextOffset().getY();
+        if (textOffset > maximumTextOffset)
+        {
+          maximumTextOffset = textOffset;
+        }
+      }
+    }
+
+    float offset = -height / 2 + maximumTextOffset;
+    for (TextView textView : textViews)
+    {
+      if (textView != null)
+      {
+        textView.setPositionRelativeToIC(new Float2D(offset, textView.getTextOffset().getX()));
+        offset += textView.getTextDimension().getY();
+      }
+    }
   }
 
   public void updateGridCache()
@@ -58,6 +88,11 @@ public class TextView
     {
       gridCache.update(positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
     }
+  }
+
+  public void setColor(Color color)
+  {
+    this.color = color;
   }
 
   public void calculateDimension()
@@ -138,7 +173,7 @@ public class TextView
     int x = viewport.transformGridToScreenSpaceX(transformedPosition);
     int y = viewport.transformGridToScreenSpaceY(transformedPosition);
 
-    graphics.setColor(Colours.getInstance().getText());
+    graphics.setColor(color);
     graphics.drawString(text, x + xOffset, y + yOffset);
   }
 

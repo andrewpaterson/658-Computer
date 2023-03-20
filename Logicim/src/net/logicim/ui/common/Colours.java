@@ -31,6 +31,7 @@ public class Colours
   protected Color differingBusTrace;
 
   protected Color text;
+  protected Color commentText;
 
   protected Color infoBackground;
   protected Color infoBorder;
@@ -70,6 +71,7 @@ public class Colours
     differingBusTrace = new Color(20, 230, 180);
 
     text = new Color(0, 0, 0);
+    commentText = new Color(64, 64, 64);
 
     infoBackground = new Color(220, 220, 220);
     infoBorder = new Color(128, 128, 128);
@@ -180,6 +182,11 @@ public class Colours
   public Color getText()
   {
     return text;
+  }
+
+  public Color getCommentText()
+  {
+    return commentText;
   }
 
   public Color getInfoBackground()

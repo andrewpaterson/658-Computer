@@ -1,23 +1,30 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.util.StringUtil;
 import net.logicim.data.ReflectiveData;
 import net.logicim.data.integratedcircuit.common.SubcircuitInstanceData;
+import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.shape.rectangle.RectangleView;
+import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.passive.pin.SubcircuitPinView;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.awt.Font.SANS_SERIF;
 
 public class SubcircuitInstanceView
     extends StaticView<SubcircuitInstanceProperties>
@@ -25,20 +32,25 @@ public class SubcircuitInstanceView
   protected boolean enabled;
   protected boolean subcircuitComponentsCreated;
   protected List<SubcircuitPinView> pinViews;
-  protected RectangleView rectangle;
   protected SubcircuitView instanceSubcircuitView;
+
+  protected RectangleView rectangle;
+  protected TextView typeName;
+  protected TextView name;
+  protected TextView comment;
 
   public SubcircuitInstanceView(SubcircuitView subcircuitView,
                                 SubcircuitView instanceSubcircuitView,
                                 Circuit circuit,
                                 Int2D position,
-                                Rotation rotation)
+                                Rotation rotation,
+                                SubcircuitInstanceProperties properties)
   {
     super(subcircuitView,
           circuit,
           position,
           rotation,
-          new SubcircuitInstanceProperties("", instanceSubcircuitView.getTypeName()));
+          properties);
     this.instanceSubcircuitView = instanceSubcircuitView;
     this.enabled = false;
     this.subcircuitComponentsCreated = false;
@@ -58,6 +70,23 @@ public class SubcircuitInstanceView
 
   private void createGraphics()
   {
+    typeName = new TextView(this, new Float2D(0, 0), properties.subcircuitTypeName, SANS_SERIF, 13, true, HorizontalAlignment.CENTER);
+
+    comment = null;
+    if (!StringUtil.isEmptyOrNull(properties.comment))
+    {
+      comment = new TextView(this, new Float2D(0, 0), properties.comment, SANS_SERIF, 10, false, HorizontalAlignment.CENTER);
+      comment.setColor(Colours.getInstance().getCommentText());
+    }
+
+    name = null;
+    if (!StringUtil.isEmptyOrNull(properties.name))
+    {
+      name = new TextView(this, new Float2D(0, 0), properties.name, SANS_SERIF, 10, true, HorizontalAlignment.CENTER);
+    }
+
+    TextView.centerHorizontally(typeName, comment, name);
+
     rectangle = new RectangleView(this, 10, 10, true, true);
   }
 
@@ -98,7 +127,10 @@ public class SubcircuitInstanceView
                                       properties.name,
                                       boundingBox.save(),
                                       selectionBox.save(),
-                                      selected);
+                                      selected,
+                                      properties.comment,
+                                      properties.width,
+                                      properties.height);
   }
 
   @Override
@@ -184,18 +216,50 @@ public class SubcircuitInstanceView
   public void paint(Graphics2D graphics, Viewport viewport, long time)
   {
     super.paint(graphics, viewport, time);
+
+    Color color = graphics.getColor();
+    Stroke stroke = graphics.getStroke();
+    Font font = graphics.getFont();
+
     rectangle.updateGridCache();
     rectangle.paint(graphics, viewport);
     for (SubcircuitPinView pinView : pinViews)
     {
-      pinView.updateGridCache();
       pinView.paint(graphics, viewport);
     }
+
+    if (typeName != null)
+    {
+      typeName.paint(graphics, viewport);
+    }
+    if (comment != null)
+    {
+      comment.paint(graphics, viewport);
+    }
+    if (name != null)
+    {
+      name.paint(graphics, viewport);
+    }
+
+    graphics.setFont(font);
+    graphics.setColor(color);
+    graphics.setStroke(stroke);
   }
 
   public void updateTypeName()
   {
     properties.subcircuitTypeName = instanceSubcircuitView.getTypeName();
+  }
+
+  @Override
+  public void setRotation(Rotation rotation)
+  {
+    super.setRotation(rotation);
+    updateTextViews();
+  }
+
+  private void updateTextViews()
+  {
   }
 }
 

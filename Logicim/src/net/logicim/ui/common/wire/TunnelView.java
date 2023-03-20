@@ -51,7 +51,13 @@ public class TunnelView
                     Rotation rotation,
                     TunnelProperties properties)
   {
-    this(subcircuitView, circuit, position, rotation, new BoundingBox(), new BoundingBox(), properties);
+    this(subcircuitView,
+         circuit,
+         position,
+         rotation,
+         new BoundingBox(),
+         new BoundingBox(),
+         properties);
   }
 
   public TunnelView(SubcircuitView subcircuitView,

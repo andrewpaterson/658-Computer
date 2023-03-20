@@ -3,11 +3,11 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.data.wire.WireDataHelper;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
@@ -15,6 +15,9 @@ public class SubcircuitInstanceData
     extends StaticData<SubcircuitInstanceView>
 {
   public String subcircuitTypeName;
+  public String comment;
+  public int width;
+  public int height;
 
   public SubcircuitInstanceData()
   {
@@ -26,7 +29,10 @@ public class SubcircuitInstanceData
                                 String name,
                                 BoundingBoxData boundingBox,
                                 BoundingBoxData selectionBox,
-                                boolean selected)
+                                boolean selected,
+                                String comment,
+                                int width,
+                                int height)
   {
     super(name,
           position,
@@ -35,6 +41,9 @@ public class SubcircuitInstanceData
           selectionBox,
           selected);
     this.subcircuitTypeName = subcircuitTypeName;
+    this.comment = comment;
+    this.width = width;
+    this.height = height;
   }
 
   @Override
@@ -49,7 +58,12 @@ public class SubcircuitInstanceData
                                                                                instanceSubcircuitEditor.getSubcircuitView(),
                                                                                circuit,
                                                                                position,
-                                                                               rotation);
+                                                                               rotation,
+                                                                               new SubcircuitInstanceProperties(name,
+                                                                                                                subcircuitTypeName,
+                                                                                                                comment,
+                                                                                                                width,
+                                                                                                                height));
 //    if (createConnections)
 //    {
 //      subcircuitInstanceView.createConnections(subcircuitEditor.getSubcircuitView());

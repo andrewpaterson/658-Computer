@@ -38,7 +38,8 @@ public class SubcircuitInstanceViewFactory
                                       instanceSubcircuitEditor.getSubcircuitView(),
                                       circuit,
                                       position,
-                                      rotation);
+                                      rotation,
+                                      properties);
   }
 
   @Override

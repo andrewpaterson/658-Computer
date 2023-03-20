@@ -164,6 +164,8 @@ public class PinView
                        selected,
                        properties.bitWidth,
                        properties.alignment,
+                       properties.offset,
+                       properties.weight,
                        properties.inverting,
                        properties.overline,
                        properties.clockNotch,

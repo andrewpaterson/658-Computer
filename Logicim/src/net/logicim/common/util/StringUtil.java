@@ -88,9 +88,15 @@ public abstract class StringUtil
 
   public static String toEnumString(Enum<?> anEnum)
   {
-    String stringWithoutUnderscores = anEnum.toString().toLowerCase().replace('_', ' ');
-
-    return capitaliseEachWord(stringWithoutUnderscores);
+    if (anEnum != null)
+    {
+      String stringWithoutUnderscores = anEnum.toString().toLowerCase().replace('_', ' ');
+      return capitaliseEachWord(stringWithoutUnderscores);
+    }
+    else
+    {
+      return "";
+    }
   }
 
   public static String capitaliseEachWord(String string)

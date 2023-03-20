@@ -32,7 +32,6 @@ public class ReflectivePropertiesPanel
 
     InstanceInspector instanceInspector = new InstanceInspector(properties);
     List<Field> fields = new ArrayList<>(instanceInspector.getFields());
-    Collections.reverse(fields);
 
     Form form = new Form();
     rotationEditor = new RotationEditor(this, "rotation", componentView.getRotation());

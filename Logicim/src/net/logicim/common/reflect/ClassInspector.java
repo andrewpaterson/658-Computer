@@ -185,8 +185,8 @@ public class ClassInspector
       clazz = clazz.getSuperclass();
     }
 
-    allFields.putAll(localFields);
     allFields.putAll(superFields);
+    allFields.putAll(localFields);
   }
 
   private void initialiseFields(Class<?> clazz, Map<String, Field> fields)

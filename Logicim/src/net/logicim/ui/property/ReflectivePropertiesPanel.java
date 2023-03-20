@@ -8,13 +8,16 @@ import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
+import net.logicim.ui.util.SeparatorUtil;
 
 import java.awt.*;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 
-import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
+import static net.logicim.ui.property.FieldNameHelper.calculateHumanReadableName;
 
 public class ReflectivePropertiesPanel
     extends PropertiesPanel
@@ -38,18 +41,25 @@ public class ReflectivePropertiesPanel
     form.addComponents(new Label("Rotation"), rotationEditor.getComponent());
     for (Field field : fields)
     {
+      Class<?> fieldType = field.getType();
       Object fieldValue = instanceInspector.getFieldValue(field);
       String fieldName = field.getName();
-      int index = fieldName.indexOf('_');
-      String name = fieldName;
-      if (index != -1)
-      {
-        name = fieldName.substring(0, index);
-      }
-      name = javaNameToHumanReadable(name);
+      String name = calculateHumanReadableName(fieldName);
 
-      PropertyEditor propertyEditor = TypeEditorFactory.getInstance().createEditor(this, field.getType(), fieldName, fieldValue);
-      form.addComponents(new Label(name), propertyEditor.getComponent());
+      PropertyEditor propertyEditor = TypeEditorFactory.getInstance().createEditor(this, fieldType, fieldName, fieldValue);
+      if (!propertyEditor.isDivider())
+      {
+        form.addComponents(new Label(name), propertyEditor.getComponent());
+      }
+      else
+      {
+        if (!form.isFirst())
+        {
+          form.addVerticalSpacer(10);
+        }
+
+        form.addComponent(SeparatorUtil.buildSeparator(propertyEditor.getComponent()));
+      }
       fieldProperties.put(field, propertyEditor);
     }
 

@@ -11,5 +11,10 @@ public interface PropertyEditor
   JComponent getComponent();
 
   PropertiesPanel getPropertiesPanel();
+
+  default boolean isDivider()
+  {
+    return false;
+  }
 }
 

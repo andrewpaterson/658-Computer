@@ -164,10 +164,9 @@ public class PinView
                        selected,
                        properties.bitWidth,
                        properties.alignment,
-                       properties.offset,
+                       properties.anchour,
                        properties.weight,
                        properties.inverting,
-                       properties.overline,
                        properties.clockNotch,
                        properties.family.getFamily(),
                        properties.radix);

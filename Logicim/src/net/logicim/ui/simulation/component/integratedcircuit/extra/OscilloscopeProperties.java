@@ -6,11 +6,11 @@ import net.logicim.ui.common.integratedcircuit.IntegratedCircuitProperties;
 public class OscilloscopeProperties
     extends IntegratedCircuitProperties
 {
-  protected int inputCount;
-  protected int numberOfDivsWide;
-  protected int divHeightInGrids;
-  protected int samplesPerDiv;
-  protected float samplingFrequency_Hz;
+  public int inputCount;
+  public int numberOfDivsWide;
+  public int divHeightInGrids;
+  public int samplesPerDiv;
+  public float samplingFrequency_Hz;
 
   public OscilloscopeProperties()
   {

@@ -1,7 +1,9 @@
 package net.logicim.ui.components.typeeditor;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.ui.property.DividerPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
+import net.logicim.ui.simulation.component.ui.Divider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,10 @@ public class TypeEditorFactory
     if (String.class.equals(fieldClass))
     {
       return new TextPropertyEditor(propertiesPanel, fieldName, (String) fieldValue);
+    }
+    if (Divider.class.equals(fieldClass))
+    {
+      return new DividerPropertyEditor(propertiesPanel, fieldName);
     }
     else if (Boolean.class.equals(fieldClass) || boolean.class.equals(fieldClass))
     {

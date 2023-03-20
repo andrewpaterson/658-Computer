@@ -1,7 +1,7 @@
 package net.logicim.data.passive.wire;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.circuit.SubcircuitPinPosition;
+import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
 import net.logicim.data.integratedcircuit.common.PassiveData;
@@ -20,11 +20,10 @@ public class PinData
     extends PassiveData<PinView>
 {
   protected int bitWidth;
-  protected SubcircuitPinPosition alignment;
+  protected SubcircuitPinAlignment alignment;
   protected SubcircuitPinAnchour offset;
   protected int weight;
   protected boolean inverting;
-  protected boolean overline;
   protected boolean clockNotch;
   protected String family;
   protected Radix radix;
@@ -39,11 +38,10 @@ public class PinData
                  List<MultiPortData> ports,
                  boolean selected,
                  int bitWidth,
-                 SubcircuitPinPosition alignment,
+                 SubcircuitPinAlignment alignment,
                  SubcircuitPinAnchour offset,
                  int weight,
                  boolean inverting,
-                 boolean overline,
                  boolean clockNotch,
                  String family,
                  Radix radix)
@@ -54,7 +52,6 @@ public class PinData
     this.offset = offset;
     this.weight = weight;
     this.inverting = inverting;
-    this.overline = overline;
     this.clockNotch = clockNotch;
     this.family = family;
     this.radix = radix;
@@ -73,7 +70,6 @@ public class PinData
                                          offset,
                                          weight,
                                          inverting,
-                                         overline,
                                          clockNotch,
                                          FamilyStore.getInstance().get(family),
                                          radix));

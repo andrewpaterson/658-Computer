@@ -5,7 +5,7 @@ import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 public class TunnelProperties
     extends ComponentProperties
 {
-  protected boolean doubleSided;
+  public boolean doubleSided;
 
   public TunnelProperties()
   {

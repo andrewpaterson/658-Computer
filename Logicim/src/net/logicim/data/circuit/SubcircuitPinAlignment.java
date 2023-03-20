@@ -1,6 +1,6 @@
 package net.logicim.data.circuit;
 
-public enum SubcircuitPinPosition
+public enum SubcircuitPinAlignment
 {
   LEFT,
   RIGHT,

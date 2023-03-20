@@ -9,12 +9,12 @@ import java.util.Arrays;
 public class SplitterProperties
     extends ComponentProperties
 {
-  protected int bitWidth;
-  protected int fanOut;
-  protected int gridSpacing;
-  protected SplitterAppearance appearance;
-  protected int endOffset;
-  protected int[] splitIndices;
+  public int bitWidth;
+  public int fanOut;
+  public int gridSpacing;
+  public SplitterAppearance appearance;
+  public int endOffset;
+  public int[] splitIndices;
 
   public SplitterProperties()
   {

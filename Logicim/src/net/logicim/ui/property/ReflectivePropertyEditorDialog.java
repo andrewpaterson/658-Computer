@@ -21,9 +21,17 @@ public class ReflectivePropertyEditorDialog
   {
     super(owner,
           componentView.getType() + " Properties",
-          new Dimension(360, 320),
+          new Dimension(360, getPropertiesFieldCount(componentView) * 26 + 32 + 32 + 32),
           editor,
           componentView);
+  }
+
+  public static int getPropertiesFieldCount(StaticView<?> componentView)
+  {
+    ComponentProperties properties = componentView.getProperties();
+
+    InstanceInspector instanceInspector = new InstanceInspector(properties);
+    return instanceInspector.getFields().size();
   }
 
   @Override

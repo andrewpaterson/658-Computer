@@ -1,23 +1,26 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
-import net.logicim.data.circuit.SubcircuitPinPosition;
+import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.ui.simulation.component.ui.Divider;
 
 public class PinProperties
     extends ComponentProperties
 {
-  protected int bitWidth;
-  protected SubcircuitPinPosition alignment;
-  protected SubcircuitPinAnchour offset;
-  protected int weight;
-  protected boolean inverting;
-  protected boolean overline;
-  protected boolean clockNotch;
-  protected Family family;
-  protected Radix radix;
+  public int bitWidth;
+  public Family family;
+  public boolean explicitPowerPorts;
+  public Divider instanceLocation;
+  public SubcircuitPinAlignment alignment;
+  public SubcircuitPinAnchour anchour;
+  public int weight;
+  public Divider instanceDisplay;
+  public boolean inverting;
+  public boolean clockNotch;
+  public Radix radix;
 
   public PinProperties()
   {
@@ -25,22 +28,22 @@ public class PinProperties
 
   public PinProperties(String name,
                        int bitWidth,
-                       SubcircuitPinPosition alignment,
-                       SubcircuitPinAnchour offset,
+                       SubcircuitPinAlignment alignment,
+                       SubcircuitPinAnchour anchour,
                        int weight,
                        boolean inverting,
-                       boolean overline,
                        boolean clockNotch,
                        Family family,
                        Radix radix)
   {
     super(name);
+    this.instanceLocation = null;
+    this.instanceDisplay = null;
     this.bitWidth = bitWidth;
     this.alignment = alignment;
-    this.offset = offset;
+    this.anchour = anchour;
     this.weight = weight;
     this.inverting = inverting;
-    this.overline = overline;
     this.clockNotch = clockNotch;
     this.family = family;
     this.radix = radix;
@@ -52,10 +55,9 @@ public class PinProperties
     return new PinProperties(name,
                              bitWidth,
                              alignment,
-                             offset,
+                             anchour,
                              weight,
                              inverting,
-                             overline,
                              clockNotch,
                              family,
                              radix);

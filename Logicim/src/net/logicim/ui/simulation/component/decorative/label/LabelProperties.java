@@ -6,10 +6,10 @@ import net.logicim.ui.simulation.component.decorative.common.DecorativePropertie
 public class LabelProperties
     extends DecorativeProperties
 {
-  protected HorizontalAlignment alignment;
-  protected boolean bold;
-  protected boolean fill;
-  protected boolean border;
+  public HorizontalAlignment alignment;
+  public boolean bold;
+  public boolean fill;
+  public boolean border;
 
   public LabelProperties()
   {

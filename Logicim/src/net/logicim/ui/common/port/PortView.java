@@ -29,7 +29,6 @@ public class PortView
   protected Int2D relativePosition;
   protected String text;
   protected boolean inverting;
-  protected boolean overline;
   protected boolean clockNotch;
   protected Float2D bubbleCenter;
   protected float bubbleDiameter;
@@ -74,12 +73,6 @@ public class PortView
     bubbleCenter.add(bubbleOffset);
 
     gridCache.invalidate();
-    return this;
-  }
-
-  public PortView setDrawBar(boolean drawBar)
-  {
-    this.overline = drawBar;
     return this;
   }
 

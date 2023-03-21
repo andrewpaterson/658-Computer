@@ -20,11 +20,17 @@ public class NorGateViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new LogicGateProperties("",
-                                          DefaultFamily.get(),
-                                          false,
-                                          2,
-                                          1));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public LogicGateProperties createInitialProperties()
+  {
+    return new LogicGateProperties("",
+                                   DefaultFamily.get(),
+                                   false,
+                                   2,
+                                   1);
   }
 
   @Override

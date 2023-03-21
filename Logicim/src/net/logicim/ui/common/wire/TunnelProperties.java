@@ -22,5 +22,20 @@ public class TunnelProperties
   {
     return new TunnelProperties(name, doubleSided);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    TunnelProperties that = (TunnelProperties) o;
+    return doubleSided == that.doubleSided;
+  }
 }
 

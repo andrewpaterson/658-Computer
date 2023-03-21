@@ -37,5 +37,23 @@ public class LabelProperties
                                fill,
                                border);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    LabelProperties that = (LabelProperties) o;
+    return bold == that.bold &&
+           fill == that.fill &&
+           border == that.border &&
+           alignment == that.alignment;
+  }
 }
 

@@ -2,5 +2,5 @@ package net.logicim.ui.components.button;
 
 public interface ButtonAction
 {
-  void executeButtonAction();
+  boolean executeButtonAction(ActionButton actionButton);
 }

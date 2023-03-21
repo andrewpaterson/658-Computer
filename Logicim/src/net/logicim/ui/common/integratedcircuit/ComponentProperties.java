@@ -1,6 +1,6 @@
 package net.logicim.ui.common.integratedcircuit;
 
-import java.util.Objects;
+import net.logicim.common.SimulatorException;
 
 public abstract class ComponentProperties
 {
@@ -19,16 +19,7 @@ public abstract class ComponentProperties
   @Override
   public boolean equals(Object o)
   {
-    if (this == o)
-    {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass())
-    {
-      return false;
-    }
-    ComponentProperties that = (ComponentProperties) o;
-    return Objects.equals(name, that.name);
+    throw new SimulatorException(getClass().getSimpleName() + ".equals not implemented.");
   }
 
   public abstract ComponentProperties duplicate();

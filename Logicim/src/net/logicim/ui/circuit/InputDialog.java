@@ -1,5 +1,6 @@
 package net.logicim.ui.circuit;
 
+import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 
 import javax.swing.*;
@@ -17,8 +18,12 @@ public abstract class InputDialog
 
 {
   protected Dimension dimension;
+  protected ActionButton okayButton;
 
-  public InputDialog(Frame owner, String title, boolean modal, Dimension dimension)
+  public InputDialog(Frame owner,
+                     String title,
+                     boolean modal,
+                     Dimension dimension)
   {
     super(owner, title, modal);
     this.dimension = dimension;
@@ -31,15 +36,25 @@ public abstract class InputDialog
     return dimension;
   }
 
+  public void setOkayButton(ActionButton okayButton)
+  {
+    this.okayButton = okayButton;
+  }
+
   protected void close()
   {
     setVisible(false);
     dispose();
   }
 
-  public void executeButtonAction()
+  public boolean executeButtonAction(ActionButton actionButton)
   {
-    okay();
+    if (actionButton == okayButton)
+    {
+      okay();
+      return true;
+    }
+    return false;
   }
 
   protected void addKeyAndContainerListenerRecursively(Component c)
@@ -88,7 +103,7 @@ public abstract class InputDialog
         !keyEvent.isAltDown() &&
         !keyEvent.isMetaDown())
     {
-      executeButtonAction();
+      executeButtonAction(okayButton);
     }
 
     if ((keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE))

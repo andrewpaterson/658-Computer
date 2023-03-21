@@ -3,7 +3,6 @@ package net.logicim.ui.common.wire;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.connection.ConnectionFinder;
 
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

@@ -1,5 +1,7 @@
 package net.logicim.ui.property;
 
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -52,5 +54,7 @@ public abstract class PropertiesPanel
       manager.focusNextComponent();
     }
   }
+
+  public abstract ComponentProperties createProperties(ComponentProperties oldProperties);
 }
 

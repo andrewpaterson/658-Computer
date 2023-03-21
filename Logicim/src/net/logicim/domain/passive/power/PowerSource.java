@@ -10,6 +10,7 @@ public class PowerSource
     extends Passive
 {
   protected PowerOutPort powerOutPort;
+
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     super(circuit, name);

@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
@@ -88,7 +89,7 @@ public class SplitterPropertiesPanel
 
   public SplitterProperties valueMaybeChanged()
   {
-    SplitterProperties properties = createProperties();
+    SplitterProperties properties = createProperties(dialog.getComponentView().getProperties());
     int bitWidthValue = bitWidth.getValue();
     if (!(bitWidthValue > 0 && bitWidthValue < PropertyClamp.MAX_WIDTH))
     {
@@ -97,7 +98,8 @@ public class SplitterPropertiesPanel
     return properties;
   }
 
-  public SplitterProperties createProperties()
+  @Override
+  public SplitterProperties createProperties(ComponentProperties oldProperties)
   {
     int bitWidthValue = bitWidth.getValue();
 

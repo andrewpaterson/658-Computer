@@ -2,6 +2,7 @@ package net.logicim.ui.circuit;
 
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -20,7 +21,7 @@ public class SubcircuitInstancePropertyEditorDialog
                                                 Logicim editor,
                                                 SubcircuitInstanceView componentView)
   {
-    super(owner, componentView.getType() + " Properties", new Dimension(392, 260), editor, componentView);
+    super(owner, componentView.getType() + " Properties", new Dimension(DEFAULT_PROPERTY_DIALOG_WIDTH, 260), editor, (StaticView) componentView);
     this.componentView = componentView;
     componentViewProperties = this.componentView.getProperties();
   }
@@ -40,7 +41,7 @@ public class SubcircuitInstancePropertyEditorDialog
   {
     boolean propertyChanged = updateRotation(getSubcircuitInstancePropertiesPanel());
 
-    SubcircuitInstanceProperties newProperties = getSubcircuitInstancePropertiesPanel().createProperties();
+    SubcircuitInstanceProperties newProperties = getSubcircuitInstancePropertiesPanel().createProperties(componentView.getProperties());
     if (componentView.getProperties().equals(newProperties))
     {
       if (propertyChanged)

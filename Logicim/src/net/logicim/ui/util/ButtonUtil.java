@@ -12,15 +12,27 @@ public class ButtonUtil
 {
   public static final int DEFAULT_WIDTH = 120;
 
-  public static void buildButtons(JPanel panel, int width, Button... buttons)
+  public static JPanel buildButtons(int width, Button... buttons)
   {
+    return buildButtons(0, width, buttons);
+  }
+
+  public static JPanel buildButtons(int spacerIndex, int width, Button... buttons)
+  {
+    JPanel panel = new JPanel();
+
     panel.setLayout(new GridBagLayout());
     int x = 0;
-    panel.add(new JPanel(), GridBagUtil.gridBagConstraints(x, 0, 1, 0, BOTH));
-    x++;
     boolean first = true;
     for (Button button : buttons)
     {
+      if (x == spacerIndex)
+      {
+        panel.add(new JPanel(), GridBagUtil.gridBagConstraints(x, 0, 1, 0, BOTH));
+        x++;
+        first = true;
+      }
+
       if (first)
       {
         first = false;
@@ -40,12 +52,6 @@ public class ButtonUtil
       panel.add(jButton, GridBagUtil.gridBagConstraints(x, 0, 0, 0, NONE));
       x++;
     }
-  }
-
-  public static JPanel buildButtons(int width, Button... buttons)
-  {
-    JPanel panel = new JPanel();
-    buildButtons(panel, width, buttons);
     return panel;
   }
 }

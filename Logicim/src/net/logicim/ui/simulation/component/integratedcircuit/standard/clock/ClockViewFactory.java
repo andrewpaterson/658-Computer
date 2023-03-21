@@ -21,11 +21,17 @@ public class ClockViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new ClockProperties("",
-                                      DefaultFamily.get(),
-                                      false,
-                                      25 * MHz,
-                                      false));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public ClockProperties createInitialProperties()
+  {
+    return new ClockProperties("",
+                               DefaultFamily.get(),
+                               false,
+                               25 * MHz,
+                               false);
   }
 
   @Override

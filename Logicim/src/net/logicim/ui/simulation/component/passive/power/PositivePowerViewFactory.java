@@ -18,8 +18,13 @@ public class PositivePowerViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new PositivePowerProperties(null,
-                                              3.3f));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public PositivePowerProperties createInitialProperties()
+  {
+    return new PositivePowerProperties(null, 3.3f);
   }
 
   @Override

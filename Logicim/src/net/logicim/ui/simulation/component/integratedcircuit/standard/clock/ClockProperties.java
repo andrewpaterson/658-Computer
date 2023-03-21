@@ -35,5 +35,21 @@ public class ClockProperties
                                frequency_Hz,
                                inverseOut);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    ClockProperties that = (ClockProperties) o;
+    return Float.compare(that.frequency_Hz, frequency_Hz) == 0 &&
+           inverseOut == that.inverseOut;
+  }
 }
 

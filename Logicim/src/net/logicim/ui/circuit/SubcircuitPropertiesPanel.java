@@ -1,5 +1,7 @@
 package net.logicim.ui.circuit;
 
+import net.logicim.common.SimulatorException;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
@@ -27,6 +29,12 @@ public class SubcircuitPropertiesPanel
   public String getSubcircuitName()
   {
     return name.getValue();
+  }
+
+  @Override
+  public ComponentProperties createProperties(ComponentProperties oldProperties)
+  {
+    throw new SimulatorException("Cannot call create properties for SubcircuitPropertiesPanel.");
   }
 }
 

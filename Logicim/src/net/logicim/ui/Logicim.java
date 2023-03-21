@@ -10,12 +10,12 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.LongTime;
+import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
-import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.editor.SubcircuitViewParameters;
 import net.logicim.ui.input.action.InputAction;
@@ -30,6 +30,7 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
+import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
@@ -202,6 +203,12 @@ public class Logicim
                        viewport.transformScreenToGridY(y));
   }
 
+  protected Int2D toIntegerGridPosition(int x, int y)
+  {
+    return new Int2D(viewport.transformScreenToGridX(x),
+                     viewport.transformScreenToGridY(y));
+  }
+
   public void mouseReleased(int x, int y, int button)
   {
     mouseButtons.unset(button);
@@ -303,10 +310,7 @@ public class Logicim
       }
 
       circuitEditor.getCurrentSelection().clearSelection();
-      StaticView<?> staticView = viewFactory.create(
-          circuitEditor, new Int2D(viewport.transformScreenToGridX(position.x),
-                                   viewport.transformScreenToGridY(position.y)),
-          creationRotation);
+      StaticView<?> staticView = viewFactory.create(circuitEditor, toIntegerGridPosition(position.x, position.y), creationRotation);
       editAction = createEdit(new MoveComponents(staticView, true), toFloatingGridPosition(position.x, position.y));
     }
   }
@@ -334,17 +338,9 @@ public class Logicim
 
       circuitEditor.getCurrentSelection().clearSelection();
       SubcircuitView instanceSubcircuitView = subcircuitEditor.getSubcircuitView();
-      SubcircuitInstanceView subcircuitInstanceView = new SubcircuitInstanceView(circuitEditor.getCurrentSubcircuitView(),
-                                                                                 instanceSubcircuitView,
-                                                                                 circuitEditor.getCircuit(),
-                                                                                 new Int2D(viewport.transformScreenToGridX(position.x),
-                                                                                           viewport.transformScreenToGridY(position.y)),
-                                                                                 Rotation.North,
-                                                                                 new SubcircuitInstanceProperties("",
-                                                                                                                  instanceSubcircuitView.getTypeName(),
-                                                                                                                  "",
-                                                                                                                  0,
-                                                                                                                  0));
+      SubcircuitInstanceViewFactory viewFactory = (SubcircuitInstanceViewFactory) ViewFactoryStore.getInstance().get(SubcircuitInstanceView.class);
+      viewFactory.setSubcircuitTypeName(instanceSubcircuitView.getTypeName());
+      SubcircuitInstanceView subcircuitInstanceView = viewFactory.create(circuitEditor, toIntegerGridPosition(position.x, position.y), creationRotation);
       editAction = createEdit(new MoveComponents(subcircuitInstanceView, true), toFloatingGridPosition(position.x, position.y));
     }
   }
@@ -657,9 +653,7 @@ public class Logicim
     Int2D position = mousePosition.get();
     if (position != null)
     {
-      int x = viewport.transformScreenToGridX(position.x);
-      int y = viewport.transformScreenToGridY(position.y);
-      return new Int2D(x, y);
+      return toIntegerGridPosition(position.x, position.y);
     }
     else
     {

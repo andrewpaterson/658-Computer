@@ -7,7 +7,6 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.*;
-import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.common.*;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.field.ProcessedXMLDataField;

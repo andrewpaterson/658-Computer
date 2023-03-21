@@ -19,11 +19,17 @@ public class InverterViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new BufferProperties("",
-                                       DefaultFamily.get(),
-                                       true,
-                                       1,
-                                       1));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public BufferProperties createInitialProperties()
+  {
+    return new BufferProperties("",
+                                DefaultFamily.get(),
+                                true,
+                                1,
+                                1);
   }
 
   @Override

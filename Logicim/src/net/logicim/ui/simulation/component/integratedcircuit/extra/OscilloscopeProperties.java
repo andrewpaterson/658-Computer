@@ -48,5 +48,24 @@ public class OscilloscopeProperties
                                       samplesPerDiv,
                                       samplingFrequency_Hz);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    OscilloscopeProperties that = (OscilloscopeProperties) o;
+    return inputCount == that.inputCount &&
+           numberOfDivsWide == that.numberOfDivsWide &&
+           divHeightInGrids == that.divHeightInGrids &&
+           samplesPerDiv == that.samplesPerDiv &&
+           Float.compare(that.samplingFrequency_Hz, samplingFrequency_Hz) == 0;
+  }
 }
 

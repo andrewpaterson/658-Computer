@@ -25,13 +25,19 @@ public class OscilloscopeViewFactory
     return create(
         circuitEditor, position,
         Rotation.Cannot,
-        new OscilloscopeProperties(null,
-                                   DefaultFamily.get(),
-                                   2,
-                                   32,
-                                   4,
-                                   30,
-                                   6 * Units.GHz));
+        createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public OscilloscopeProperties createInitialProperties()
+  {
+    return new OscilloscopeProperties(null,
+                                      DefaultFamily.get(),
+                                      2,
+                                      32,
+                                      4,
+                                      30,
+                                      6 * Units.GHz);
   }
 
   @Override

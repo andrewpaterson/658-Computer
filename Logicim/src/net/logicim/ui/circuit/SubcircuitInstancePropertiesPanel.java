@@ -1,6 +1,7 @@
 package net.logicim.ui.circuit;
 
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;
@@ -74,7 +75,7 @@ public class SubcircuitInstancePropertiesPanel
     return rotation.getValue();
   }
 
-  public SubcircuitInstanceProperties createProperties()
+  public SubcircuitInstanceProperties createProperties(ComponentProperties oldProperties)
   {
     return new SubcircuitInstanceProperties(name.getValue(),
                                             typeName.getValue(),

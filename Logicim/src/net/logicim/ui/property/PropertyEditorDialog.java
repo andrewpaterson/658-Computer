@@ -21,16 +21,19 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public abstract class PropertyEditorDialog
     extends InputDialog
 {
+  protected static final int DEFAULT_PROPERTY_DIALOG_WIDTH = 440;
+
   protected Logicim editor;
-  protected StaticView<?> componentView;
+  protected StaticView<ComponentProperties> componentView;
   protected PropertiesPanel propertiesPanel;
   protected Circuit circuit;
+  protected ActionButton saveAsDefaultButton;
 
   public PropertyEditorDialog(Frame owner,
                               String title,
                               Dimension dimension,
                               Logicim editor,
-                              StaticView<?> componentView)
+                              StaticView<ComponentProperties> componentView)
   {
     super(owner, title, true, dimension);
 
@@ -48,13 +51,16 @@ public abstract class PropertyEditorDialog
     propertiesPanel = (PropertiesPanel) editorPanel;
     contentPane.add(editorPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
-    JPanel bottomPanel = new JPanel();
-    contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
+    ActionButton okayButton = new ActionButton("Okay", this);
+    setOkayButton(okayButton);
 
-    buildButtons(bottomPanel,
-                 DEFAULT_WIDTH,
-                 new ActionButton("Okay", this),
-                 new CancelButton("Cancel", this));
+    saveAsDefaultButton = new ActionButton("Save Defaults", this);
+    JPanel bottomPanel = buildButtons(1,
+                                      DEFAULT_WIDTH,
+                                      saveAsDefaultButton,
+                                      okayButton,
+                                      new CancelButton("Cancel", this));
+    contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
   }
 
@@ -78,6 +84,25 @@ public abstract class PropertyEditorDialog
     return propertiesPanel;
   }
 
+  @Override
+  public boolean executeButtonAction(ActionButton actionButton)
+  {
+    boolean handled = super.executeButtonAction(actionButton);
+    if (handled)
+    {
+      return true;
+    }
+
+    if (actionButton == saveAsDefaultButton)
+    {
+      ComponentProperties properties = getPropertiesPanel().createProperties(componentView.getProperties());
+      componentView.clampProperties(properties);
+      DefaultComponentProperties.getInstance().put((Class<? extends StaticView<?>>) componentView.getClass(), properties);
+      return true;
+    }
+    return false;
+  }
+
   protected boolean updateRotation(RotationEditorHolder rotationEditorHolder)
   {
     boolean propertyChanged = false;
@@ -88,6 +113,11 @@ public abstract class PropertyEditorDialog
       propertyChanged = true;
     }
     return propertyChanged;
+  }
+
+  public StaticView<?> getComponentView()
+  {
+    return componentView;
   }
 
   protected abstract JPanel createEditorPanel();

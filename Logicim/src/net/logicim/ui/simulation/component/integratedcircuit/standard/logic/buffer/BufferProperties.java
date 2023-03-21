@@ -32,5 +32,21 @@ public class BufferProperties
   {
     return new BufferProperties(name, family, explicitPowerPorts, inputCount, inputWidth);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    BufferProperties that = (BufferProperties) o;
+    return inputCount == that.inputCount &&
+           inputWidth == that.inputWidth;
+  }
 }
 

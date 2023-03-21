@@ -2,16 +2,11 @@ package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
-import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.port.PortView;
-
-import java.util.*;
 
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>

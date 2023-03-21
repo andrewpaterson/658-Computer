@@ -104,10 +104,6 @@ public class SplitterProperties
     {
       return false;
     }
-    if (!super.equals(o))
-    {
-      return false;
-    }
     SplitterProperties that = (SplitterProperties) o;
     return bitWidth == that.bitWidth &&
            fanOut == that.fanOut &&

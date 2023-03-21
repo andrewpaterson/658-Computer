@@ -7,18 +7,18 @@ import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 public class PlaceComponentAction
     extends SimulatorEditorAction
 {
-  private Class<? extends StaticView<?>> discreteViewClass;
+  private Class<? extends StaticView<?>> staticViewClass;
 
-  public PlaceComponentAction(Logicim editor, Class<? extends StaticView<?>> discreteViewClass)
+  public PlaceComponentAction(Logicim editor, Class<? extends StaticView<?>> staticViewClass)
   {
     super(editor);
-    this.discreteViewClass = discreteViewClass;
+    this.staticViewClass = staticViewClass;
   }
 
   @Override
   public void executeEditorAction()
   {
-    editor.startPlaceComponent(ViewFactoryStore.getInstance().get(discreteViewClass));
+    editor.startPlaceComponent(ViewFactoryStore.getInstance().get(staticViewClass));
   }
 
   @Override

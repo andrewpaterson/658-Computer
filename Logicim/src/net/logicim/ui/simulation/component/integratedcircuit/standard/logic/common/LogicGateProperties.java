@@ -35,5 +35,21 @@ public class LogicGateProperties
                                    inputCount,
                                    inputWidth);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    LogicGateProperties that = (LogicGateProperties) o;
+    return inputCount == that.inputCount &&
+           inputWidth == that.inputWidth;
+  }
 }
 

@@ -7,6 +7,8 @@ import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.simulation.component.ui.Divider;
 
+import java.util.Objects;
+
 public class PinProperties
     extends ComponentProperties
 {
@@ -64,6 +66,31 @@ public class PinProperties
                              family,
                              explicitPowerPorts,
                              radix);
+  }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    PinProperties that = (PinProperties) o;
+    return bitWidth == that.bitWidth &&
+           explicitPowerPorts == that.explicitPowerPorts &&
+           weight == that.weight &&
+           inverting == that.inverting &&
+           clockNotch == that.clockNotch &&
+           Objects.equals(family, that.family) &&
+           instanceLocation == that.instanceLocation &&
+           alignment == that.alignment &&
+           anchour == that.anchour &&
+           instanceDisplay == that.instanceDisplay &&
+           radix == that.radix;
   }
 }
 

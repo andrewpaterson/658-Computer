@@ -18,7 +18,13 @@ public class GroundViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new GroundProperties(""));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public GroundProperties createInitialProperties()
+  {
+    return new GroundProperties("");
   }
 
   @Override

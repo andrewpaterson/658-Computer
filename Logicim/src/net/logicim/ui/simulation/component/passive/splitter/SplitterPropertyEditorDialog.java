@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.passive.splitter;
 
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
 
 import javax.swing.*;
@@ -18,7 +19,11 @@ public class SplitterPropertyEditorDialog
                                       Logicim editor,
                                       SplitterView componentView)
   {
-    super(owner, componentView.getType() + " Properties", new Dimension(392, 460), editor, componentView);
+    super(owner,
+          componentView.getType() + " Properties",
+          new Dimension(DEFAULT_PROPERTY_DIALOG_WIDTH, 460),
+          editor,
+          (StaticView) componentView);
     this.componentView = componentView;
     currentBitWidth = this.componentView.getProperties().bitWidth;
     componentViewProperties = this.componentView.getProperties();
@@ -35,7 +40,7 @@ public class SplitterPropertyEditorDialog
   {
     boolean propertyChanged = updateRotation(getSplitterPropertiesPanel());
 
-    SplitterProperties newProperties = getSplitterPropertiesPanel().createProperties();
+    SplitterProperties newProperties = getSplitterPropertiesPanel().createProperties(componentView.getProperties());
     if (componentView.getProperties().equals(newProperties))
     {
       if (propertyChanged)

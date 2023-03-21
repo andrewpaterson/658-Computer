@@ -23,5 +23,20 @@ public class PositivePowerProperties
   {
     return new PositivePowerProperties(name, voltage_V);
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
+    PositivePowerProperties that = (PositivePowerProperties) o;
+    return Float.compare(that.voltage_V, voltage_V) == 0;
+  }
 }
 

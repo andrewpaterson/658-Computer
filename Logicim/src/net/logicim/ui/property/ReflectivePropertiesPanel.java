@@ -1,5 +1,6 @@
 package net.logicim.ui.property;
 
+import net.logicim.common.reflect.ClassInspector;
 import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
@@ -75,6 +76,66 @@ public class ReflectivePropertiesPanel
       hashMap.put(field, propertyEditor.getValue());
     }
     return hashMap;
+  }
+
+  protected Object coerce(Object value, Class<?> type)
+  {
+    if (value == null)
+    {
+      return null;
+    }
+
+    if (value instanceof Long)
+    {
+      if (type.equals(Integer.class) || type.equals(int.class))
+      {
+        return ((Long) value).intValue();
+      }
+    }
+
+    if (value instanceof Double)
+    {
+      if (type.equals(Float.class) || type.equals(float.class))
+      {
+        return ((Double) value).floatValue();
+      }
+    }
+
+    if (value instanceof Integer)
+    {
+      if (type.equals(Long.class) || type.equals(long.class))
+      {
+        return ((Integer) value).longValue();
+      }
+    }
+
+    if (value instanceof Float)
+    {
+      if (type.equals(Double.class) || type.equals(double.class))
+      {
+        return ((Float) value).doubleValue();
+      }
+    }
+
+    return value;
+  }
+
+  @Override
+  public ComponentProperties createProperties(ComponentProperties oldProperties)
+  {
+    Map<Field, Object> map = getProperties();
+
+    ClassInspector classInspector = ClassInspector.forClass(oldProperties.getClass());
+    ComponentProperties newProperties = (ComponentProperties) classInspector.newInstance();
+
+    InstanceInspector newInspector = new InstanceInspector(newProperties);
+    for (Map.Entry<Field, Object> entry : map.entrySet())
+    {
+      Field field = entry.getKey();
+      Object newValue = entry.getValue();
+      newInspector.setFieldValue(field, coerce(newValue, field.getType()));
+    }
+    return newProperties;
   }
 
   @Override

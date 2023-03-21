@@ -18,8 +18,13 @@ public class TunnelViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new TunnelProperties("  ",
-                                       false));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public TunnelProperties createInitialProperties()
+  {
+    return new TunnelProperties("  ", false);
   }
 
   @Override

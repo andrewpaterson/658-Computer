@@ -1,6 +1,5 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
@@ -18,12 +17,39 @@ import javax.swing.*;
 public class SubcircuitInstanceViewFactory
     extends ViewFactory<SubcircuitInstanceView, SubcircuitInstanceProperties>
 {
+  protected String subcircuitTypeName;
+
+  public SubcircuitInstanceViewFactory()
+  {
+    subcircuitTypeName = "";
+  }
+
   @Override
   public SubcircuitInstanceView create(CircuitEditor circuitEditor,
                                        Int2D position,
                                        Rotation rotation)
   {
-    throw new SimulatorException("Cannot call SubcircuitViewFactory.create().  Use startPlaceSubcircuit() instead.");
+    SubcircuitInstanceProperties defaultProperties = createDefaultProperties(getViewClass());
+    defaultProperties.subcircuitTypeName = subcircuitTypeName;
+    return create(circuitEditor,
+                  position,
+                  rotation,
+                  defaultProperties);
+  }
+
+  public void setSubcircuitTypeName(String subcircuitTypeName)
+  {
+    this.subcircuitTypeName = subcircuitTypeName;
+  }
+
+  @Override
+  public SubcircuitInstanceProperties createInitialProperties()
+  {
+    return new SubcircuitInstanceProperties("",
+                                            "",
+                                            "",
+                                            0,
+                                            0);
   }
 
   @Override

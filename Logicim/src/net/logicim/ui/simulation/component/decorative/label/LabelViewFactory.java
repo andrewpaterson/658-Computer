@@ -19,11 +19,17 @@ public class LabelViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new LabelProperties("  ",
-                                      HorizontalAlignment.LEFT,
-                                      false,
-                                      true,
-                                      true));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public LabelProperties createInitialProperties()
+  {
+    return new LabelProperties("  ",
+                               HorizontalAlignment.LEFT,
+                               false,
+                               true,
+                               true);
   }
 
   @Override

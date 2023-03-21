@@ -16,7 +16,7 @@ public class ActionButton
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    action.executeButtonAction();
+    action.executeButtonAction(this);
   }
 }
 

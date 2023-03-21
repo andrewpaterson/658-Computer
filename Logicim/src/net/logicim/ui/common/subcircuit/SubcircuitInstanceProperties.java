@@ -50,12 +50,6 @@ public class SubcircuitInstanceProperties
     {
       return false;
     }
-
-    if (!super.equals(o))
-    {
-      return false;
-    }
-
     SubcircuitInstanceProperties other = (SubcircuitInstanceProperties) o;
     return width == other.width &&
            height == other.height &&

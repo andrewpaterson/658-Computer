@@ -24,12 +24,18 @@ public class SplitterViewFactory
     return create(circuitEditor,
                   position,
                   rotation,
-                  new SplitterProperties(null,
-                                         2,
-                                         2,
-                                         2,
-                                         SplitterAppearance.LEFT_HANDED,
-                                         -1));
+                  createDefaultProperties(getViewClass()));
+  }
+
+  @Override
+  public SplitterProperties createInitialProperties()
+  {
+    return new SplitterProperties(null,
+                                  2,
+                                  2,
+                                  2,
+                                  SplitterAppearance.LEFT_HANDED,
+                                  -1);
   }
 
   @Override

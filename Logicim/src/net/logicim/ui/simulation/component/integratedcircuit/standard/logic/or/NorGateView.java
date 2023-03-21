@@ -8,7 +8,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.or.NorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class NorGateView
     extends BaseOrGateView<NorGate>
@@ -45,7 +45,7 @@ public class NorGateView
     return new NorGateData(position,
                            rotation,
                            properties.name,
-                           properties.family.getFamily(),
+                           properties.family,
                            saveEvents(),
                            savePorts(),
                            selected,

@@ -5,6 +5,7 @@ import net.logicim.common.csv.CSVFileReader;
 import net.logicim.common.csv.CSVRow;
 import net.logicim.common.util.EnvironmentInspector;
 import net.logicim.common.util.StringUtil;
+import net.logicim.data.family.Family;
 
 import java.io.File;
 import java.util.ArrayList;

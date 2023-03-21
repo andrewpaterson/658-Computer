@@ -1,7 +1,7 @@
-package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
+package net.logicim.data.integratedcircuit.common;
 
-import net.logicim.domain.common.propagation.Family;
-import net.logicim.ui.common.integratedcircuit.IntegratedCircuitProperties;
+import net.logicim.data.family.Family;
+import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
 
 public abstract class StandardIntegratedCircuitProperties
     extends IntegratedCircuitProperties

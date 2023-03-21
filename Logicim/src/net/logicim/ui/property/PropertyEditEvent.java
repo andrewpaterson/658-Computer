@@ -2,7 +2,7 @@ package net.logicim.ui.property;
 
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.simulation.CircuitEditor;

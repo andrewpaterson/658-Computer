@@ -1,6 +1,6 @@
 package net.logicim.data.field;
 
-import net.logicim.data.SaveData;
+import net.logicim.data.common.SaveData;
 
 import java.util.Map;
 

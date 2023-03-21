@@ -4,6 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
+import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;

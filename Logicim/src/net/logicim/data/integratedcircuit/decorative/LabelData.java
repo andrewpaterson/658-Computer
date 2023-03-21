@@ -6,7 +6,7 @@ import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.decorative.label.LabelProperties;
+import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 
 public class LabelData

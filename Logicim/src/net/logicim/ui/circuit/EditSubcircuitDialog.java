@@ -1,7 +1,7 @@
 package net.logicim.ui.circuit;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.property.PropertiesPanel;
 import net.logicim.ui.property.PropertyEditorDialog;
 

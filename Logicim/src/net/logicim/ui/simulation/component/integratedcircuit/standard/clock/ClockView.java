@@ -153,7 +153,7 @@ public class ClockView
     return new ClockData(position,
                          rotation,
                          properties.name,
-                         properties.family.getFamily(),
+                         properties.family,
                          properties.frequency_Hz,
                          saveEvents(),
                          savePorts(),

@@ -1,7 +1,7 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;

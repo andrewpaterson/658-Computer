@@ -1,8 +1,8 @@
-package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer;
+package net.logicim.data.integratedcircuit.standard.logic.buffer;
 
-import net.logicim.domain.common.propagation.Family;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
+import net.logicim.data.family.Family;
+import net.logicim.data.common.properties.ComponentProperties;
+import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 
 import java.util.Objects;
 

@@ -1,6 +1,7 @@
-package net.logicim.ui.common.integratedcircuit;
+package net.logicim.data.integratedcircuit.common;
 
-import net.logicim.domain.common.propagation.Family;
+import net.logicim.data.family.Family;
+import net.logicim.data.common.properties.ComponentProperties;
 
 public abstract class IntegratedCircuitProperties
     extends ComponentProperties

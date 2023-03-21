@@ -8,7 +8,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class OrGateView
     extends BaseOrGateView<OrGate>
@@ -45,7 +45,7 @@ public class OrGateView
     return new OrGateData(position,
                           rotation,
                           properties.name,
-                          properties.family.getFamily(),
+                          properties.family,
                           saveEvents(),
                           savePorts(),
                           selected,

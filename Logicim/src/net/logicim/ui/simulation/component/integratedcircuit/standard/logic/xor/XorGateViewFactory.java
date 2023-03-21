@@ -7,7 +7,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.defaults.DefaultFamily;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class XorGateViewFactory
     extends ViewFactory<XorGateView, LogicGateProperties>

@@ -5,7 +5,9 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.editor.BookmarkData;
+import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
@@ -26,6 +28,7 @@ import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
 import net.logicim.ui.placement.*;
+import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -754,13 +757,29 @@ public class Logicim
     CircuitData circuitData = circuitEditor.save();
     ArrayList<BookmarkData> subcircuitBookmarks = saveBookmarks();
     ArrayList<SubcircuitParameterData> subcircuitParameters = saveSubcircuitViewParameters();
+    List<DefaultComponentPropertiesData> defaultProperties = saveDefaultComponentProperties();
+    String currentSubcircuit = circuitEditor.getCurrentSubcircuitEditor().getTypeName();
     return new EditorData(circuitData,
                           running,
                           runTimeStep,
                           creationRotation,
                           subcircuitBookmarks,
                           subcircuitParameters,
-                          circuitEditor.getCurrentSubcircuitEditor().getTypeName());
+                          currentSubcircuit,
+                          defaultProperties);
+  }
+
+  protected List<DefaultComponentPropertiesData> saveDefaultComponentProperties()
+  {
+    ArrayList<DefaultComponentPropertiesData> defaultProperties = new ArrayList<>();
+    Map<Class<? extends StaticView<?>>, ComponentProperties> propertiesMap = DefaultComponentProperties.getInstance().findAll();
+    for (Map.Entry<Class<? extends StaticView<?>>, ComponentProperties> entry : propertiesMap.entrySet())
+    {
+      String className = entry.getKey().getSimpleName();
+      ComponentProperties properties = entry.getValue();
+      defaultProperties.add(new DefaultComponentPropertiesData(className, properties));
+    }
+    return defaultProperties;
   }
 
   protected ArrayList<SubcircuitParameterData> saveSubcircuitViewParameters()

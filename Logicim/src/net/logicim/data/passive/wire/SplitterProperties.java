@@ -1,8 +1,7 @@
-package net.logicim.ui.simulation.component.passive.splitter;
+package net.logicim.data.passive.wire;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.data.passive.wire.SplitterAppearance;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 
 import java.util.Arrays;
 import java.util.Objects;

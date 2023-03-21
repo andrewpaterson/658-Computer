@@ -8,6 +8,7 @@ import net.logicim.data.common.Radix;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
+import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
@@ -176,7 +177,7 @@ public class PinView
                        properties.weight,
                        properties.inverting,
                        properties.clockNotch,
-                       properties.family.getFamily(),
+                       properties.family,
                        properties.explicitPowerPorts,
                        properties.radix);
   }

@@ -1,7 +1,5 @@
 package net.logicim.data.common;
 
-import net.logicim.data.ObjectData;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

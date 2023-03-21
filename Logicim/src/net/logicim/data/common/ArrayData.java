@@ -1,4 +1,4 @@
-package net.logicim.data;
+package net.logicim.data.common;
 
 import java.util.Map;
 

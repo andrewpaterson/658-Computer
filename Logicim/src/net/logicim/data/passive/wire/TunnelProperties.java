@@ -1,6 +1,6 @@
-package net.logicim.ui.common.wire;
+package net.logicim.data.passive.wire;
 
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 
 import java.util.Objects;
 

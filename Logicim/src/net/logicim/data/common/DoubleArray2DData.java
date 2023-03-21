@@ -1,7 +1,5 @@
 package net.logicim.data.common;
 
-import net.logicim.data.ArrayData;
-
 import java.util.Map;
 
 public class DoubleArray2DData

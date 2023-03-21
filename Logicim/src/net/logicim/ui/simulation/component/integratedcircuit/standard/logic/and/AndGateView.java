@@ -8,7 +8,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class AndGateView
     extends BaseAndGateView<AndGate>
@@ -51,7 +51,7 @@ public class AndGateView
     return new AndGateData(position,
                            rotation,
                            properties.name,
-                           properties.family.getFamily(),
+                           properties.family,
                            saveEvents(),
                            savePorts(),
                            selected,

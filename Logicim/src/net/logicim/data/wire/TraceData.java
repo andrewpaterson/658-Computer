@@ -1,7 +1,7 @@
 package net.logicim.data.wire;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 import net.logicim.domain.Simulation;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.simulation.SubcircuitEditor;

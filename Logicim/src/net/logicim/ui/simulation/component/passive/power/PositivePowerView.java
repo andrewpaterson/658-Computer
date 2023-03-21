@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.passive.power;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
+import net.logicim.data.passive.power.PositivePowerProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.ui.circuit.SubcircuitView;

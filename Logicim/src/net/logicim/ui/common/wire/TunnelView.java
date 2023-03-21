@@ -2,6 +2,7 @@ package net.logicim.ui.common.wire;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;

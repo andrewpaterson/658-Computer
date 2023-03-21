@@ -1,6 +1,6 @@
 package net.logicim.data.editor;
 
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.ui.common.Rotation;
 
@@ -16,6 +16,7 @@ public class EditorData
   public List<BookmarkData> subcircuitBookmarks;
   public List<SubcircuitParameterData> subcircuitParameters;
   public String currentSubcircuit;
+  public List<DefaultComponentPropertiesData> defaultProperties;
 
   public EditorData()
   {
@@ -27,7 +28,8 @@ public class EditorData
                     Rotation creationRotation,
                     List<BookmarkData> subcircuitBookmarks,
                     List<SubcircuitParameterData> subcircuitParameters,
-                    String currentSubcircuit)
+                    String currentSubcircuit,
+                    List<DefaultComponentPropertiesData> defaultProperties)
   {
     this.circuit = circuit;
     this.running = running;
@@ -36,6 +38,7 @@ public class EditorData
     this.subcircuitBookmarks = subcircuitBookmarks;
     this.subcircuitParameters = subcircuitParameters;
     this.currentSubcircuit = currentSubcircuit;
+    this.defaultProperties = defaultProperties;
   }
 }
 

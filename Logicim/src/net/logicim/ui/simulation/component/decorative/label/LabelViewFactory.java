@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.decorative.label;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;

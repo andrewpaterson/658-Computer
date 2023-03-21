@@ -1,6 +1,6 @@
 package net.logicim.data.common.event;
 
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 import net.logicim.domain.common.event.Event;
 
 public abstract class EventData<E extends Event>

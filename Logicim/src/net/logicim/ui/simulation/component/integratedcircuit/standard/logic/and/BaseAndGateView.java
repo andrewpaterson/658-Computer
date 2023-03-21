@@ -11,7 +11,7 @@ import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateView;
 
 import java.awt.*;

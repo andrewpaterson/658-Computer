@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferData;
+import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
@@ -45,7 +46,7 @@ public class BufferView
     return new BufferData(position,
                           rotation,
                           properties.name,
-                          properties.family.getFamily(),
+                          properties.family,
                           saveEvents(),
                           savePorts(),
                           selected,

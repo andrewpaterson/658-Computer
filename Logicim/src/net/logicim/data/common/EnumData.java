@@ -3,7 +3,6 @@ package net.logicim.data.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.reflect.EnumStore;
 import net.logicim.common.util.EnumUtil;
-import net.logicim.data.ObjectData;
 
 import java.util.Map;
 

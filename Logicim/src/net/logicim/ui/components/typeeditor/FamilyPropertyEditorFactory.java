@@ -1,6 +1,6 @@
 package net.logicim.ui.components.typeeditor;
 
-import net.logicim.domain.common.propagation.Family;
+import net.logicim.data.family.Family;
 import net.logicim.ui.property.PropertiesPanel;
 
 public class FamilyPropertyEditorFactory

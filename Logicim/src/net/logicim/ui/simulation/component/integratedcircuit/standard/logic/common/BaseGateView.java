@@ -5,7 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
+import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.util.ArrayList;

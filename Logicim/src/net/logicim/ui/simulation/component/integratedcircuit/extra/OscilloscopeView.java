@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
+import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
@@ -189,7 +190,7 @@ public class OscilloscopeView
     return new OscilloscopeData(position,
                                 rotation,
                                 properties.name,
-                                properties.family.getFamily(),
+                                properties.family,
                                 saveEvents(),
                                 savePorts(),
                                 selected,

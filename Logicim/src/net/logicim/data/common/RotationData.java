@@ -1,6 +1,5 @@
 package net.logicim.data.common;
 
-import net.logicim.data.ObjectData;
 import net.logicim.ui.common.Rotation;
 
 import java.util.Map;

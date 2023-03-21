@@ -1,6 +1,6 @@
 package net.logicim.data.editor;
 
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 
 public class BookmarkData
     extends ReflectiveData

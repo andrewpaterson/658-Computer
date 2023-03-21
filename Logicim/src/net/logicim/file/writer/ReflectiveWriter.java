@@ -5,7 +5,7 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import org.w3c.dom.Document;
@@ -32,12 +32,7 @@ public abstract class ReflectiveWriter
 
   public static String getXMLTag(Class<?> aClass)
   {
-    String simpleName = aClass.getSimpleName();
-    if (simpleName.endsWith("Data"))
-    {
-      simpleName = simpleName.substring(0, simpleName.length() - 4);
-    }
-    return simpleName;
+    return aClass.getSimpleName();
   }
 
   public static Node writeString(Document doc, String elementName, String value)

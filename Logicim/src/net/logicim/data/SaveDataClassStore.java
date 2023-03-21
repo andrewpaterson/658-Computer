@@ -2,6 +2,7 @@ package net.logicim.data;
 
 import net.logicim.common.reflect.PackageInspector;
 import net.logicim.common.reflect.PackageInspectorStore;
+import net.logicim.data.common.SaveData;
 
 import java.util.ArrayList;
 import java.util.HashMap;

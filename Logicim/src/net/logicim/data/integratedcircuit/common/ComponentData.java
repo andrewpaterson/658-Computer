@@ -1,9 +1,9 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.port.LogicPortData;
-import net.logicim.data.port.MultiPortData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.common.LogicPortData;
+import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;

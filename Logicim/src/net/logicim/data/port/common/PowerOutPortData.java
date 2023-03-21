@@ -1,4 +1,4 @@
-package net.logicim.data.port;
+package net.logicim.data.port.common;
 
 public class PowerOutPortData
     extends PortData

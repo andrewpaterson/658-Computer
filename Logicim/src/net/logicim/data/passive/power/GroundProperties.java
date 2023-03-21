@@ -1,6 +1,6 @@
-package net.logicim.ui.simulation.component.passive.power;
+package net.logicim.data.passive.power;
 
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 
 import java.util.Objects;
 

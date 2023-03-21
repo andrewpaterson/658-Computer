@@ -1,10 +1,10 @@
-package net.logicim.ui.simulation.component.passive.pin;
+package net.logicim.data.passive.wire;
 
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
-import net.logicim.domain.common.propagation.Family;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.family.Family;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.simulation.component.ui.Divider;
 
 import java.util.Objects;

@@ -1,6 +1,6 @@
-package net.logicim.data.port;
+package net.logicim.data.port.common;
 
-import net.logicim.data.ReflectiveData;
+import net.logicim.data.common.ReflectiveData;
 
 import java.util.List;
 

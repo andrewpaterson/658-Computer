@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.InverterData;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
@@ -45,7 +46,7 @@ public class InverterView
     return new InverterData(position,
                             rotation,
                             properties.name,
-                            properties.family.getFamily(),
+                            properties.family,
                             saveEvents(),
                             savePorts(),
                             selected,

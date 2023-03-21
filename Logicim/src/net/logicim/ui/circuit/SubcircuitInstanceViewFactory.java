@@ -5,7 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
+import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;

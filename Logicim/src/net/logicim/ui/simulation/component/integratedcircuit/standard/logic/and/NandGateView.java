@@ -8,7 +8,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.domain.integratedcircuit.standard.logic.and.NandGate;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class NandGateView
     extends BaseAndGateView<NandGate>
@@ -45,7 +45,7 @@ public class NandGateView
     return new NandGateData(position,
                             rotation,
                             properties.name,
-                            properties.family.getFamily(),
+                            properties.family,
                             saveEvents(),
                             savePorts(),
                             selected,

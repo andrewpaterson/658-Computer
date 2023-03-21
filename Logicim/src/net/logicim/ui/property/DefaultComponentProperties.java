@@ -1,6 +1,6 @@
 package net.logicim.ui.property;
 
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
 import java.util.LinkedHashMap;
@@ -39,6 +39,11 @@ public class DefaultComponentProperties
   public void put(Class<? extends StaticView<?>> componentViewClass, ComponentProperties componentProperties)
   {
     properties.put(componentViewClass, componentProperties);
+  }
+
+  public Map<Class<? extends StaticView<?>>, ComponentProperties> findAll()
+  {
+    return properties;
   }
 }
 

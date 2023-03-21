@@ -138,15 +138,10 @@ public class LogicimFileReader
     }
     else
     {
-      String savedDataClassName = type;
-      if (!type.endsWith("State"))
-      {
-        savedDataClassName = type + "Data";
-      }
-      Class aClass = SaveDataClassStore.getInstance().getClass(savedDataClassName);
+      Class aClass = SaveDataClassStore.getInstance().getClass(type);
       if (aClass == null)
       {
-        throw new SimulatorException("Cannot instantiate class [%s].", savedDataClassName);
+        throw new SimulatorException("Cannot instantiate class [%s].", type);
       }
       ClassInspector classInspector = ClassInspector.forClass(aClass);
       return (SaveData) classInspector.newInstance();

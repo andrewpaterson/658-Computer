@@ -1,10 +1,11 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.LogicPortData;
-import net.logicim.data.port.MultiPortData;
-import net.logicim.data.port.PortData;
+import net.logicim.data.port.common.LogicPortData;
+import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
@@ -26,7 +27,7 @@ import java.util.Map;
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?, ?>, STATE extends State>
     extends ComponentData<ICV>
 {
-  protected String family;
+  protected Family family;
 
   protected List<IntegratedCircuitEventData<?>> events;
 
@@ -39,7 +40,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   public IntegratedCircuitData(Int2D position,
                                Rotation rotation,
                                String name,
-                               String family,
+                               Family family,
                                List<IntegratedCircuitEventData<?>> events,
                                List<MultiPortData> ports,
                                boolean selected,

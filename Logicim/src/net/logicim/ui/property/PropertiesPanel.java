@@ -1,6 +1,6 @@
 package net.logicim.ui.property;
 
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

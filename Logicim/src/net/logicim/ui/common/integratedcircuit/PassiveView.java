@@ -3,6 +3,7 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;

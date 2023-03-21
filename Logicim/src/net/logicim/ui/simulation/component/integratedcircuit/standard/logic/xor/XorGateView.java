@@ -8,7 +8,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGatePins;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
 public class XorGateView
     extends BaseXorGateView<XorGate>
@@ -45,7 +45,7 @@ public class XorGateView
     return new XorGateData(position,
                            rotation,
                            properties.name,
-                           properties.family.getFamily(),
+                           properties.family,
                            saveEvents(),
                            savePorts(),
                            selected,

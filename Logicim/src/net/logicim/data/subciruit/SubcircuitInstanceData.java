@@ -1,13 +1,15 @@
-package net.logicim.data.integratedcircuit.common;
+package net.logicim.data.subciruit;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.common.BoundingBoxData;
+import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.subcircuit.SubcircuitInstanceProperties;
+import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 

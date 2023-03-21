@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.passive.power;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.GroundData;
+import net.logicim.data.passive.power.GroundProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;

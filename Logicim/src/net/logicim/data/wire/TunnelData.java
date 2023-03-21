@@ -8,7 +8,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.wire.TunnelProperties;
+import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 

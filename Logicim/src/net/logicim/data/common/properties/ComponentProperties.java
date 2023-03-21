@@ -1,10 +1,12 @@
-package net.logicim.ui.common.integratedcircuit;
+package net.logicim.data.common.properties;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.data.common.ReflectiveData;
 
 import java.util.Objects;
 
 public abstract class ComponentProperties
+    extends ReflectiveData
 {
   public String name;
 
@@ -23,7 +25,6 @@ public abstract class ComponentProperties
   {
     throw new SimulatorException(getClass().getSimpleName() + ".equals not implemented.");
   }
-
 
   @Override
   public int hashCode()

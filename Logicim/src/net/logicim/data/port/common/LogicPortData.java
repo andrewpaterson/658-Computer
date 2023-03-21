@@ -1,4 +1,4 @@
-package net.logicim.data.port;
+package net.logicim.data.port.common;
 
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;

@@ -1,7 +1,7 @@
-package net.logicim.ui.simulation.component.decorative.label;
+package net.logicim.data.decorative.label;
 
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
-import net.logicim.ui.simulation.component.decorative.common.DecorativeProperties;
+import net.logicim.data.decorative.common.DecorativeProperties;
 
 import java.util.Objects;
 

@@ -1,8 +1,15 @@
-package net.logicim.domain.common.propagation;
+package net.logicim.data.family;
+
+import net.logicim.data.common.ReflectiveData;
 
 public class Family
+    extends ReflectiveData
 {
   protected String family;
+
+  public Family()
+  {
+  }
 
   public Family(String family)
   {

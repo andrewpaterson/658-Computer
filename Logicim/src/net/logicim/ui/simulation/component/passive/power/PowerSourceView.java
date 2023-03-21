@@ -6,7 +6,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 
 public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>

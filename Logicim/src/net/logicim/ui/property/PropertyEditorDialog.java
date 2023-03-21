@@ -4,7 +4,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.ComponentProperties;
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;

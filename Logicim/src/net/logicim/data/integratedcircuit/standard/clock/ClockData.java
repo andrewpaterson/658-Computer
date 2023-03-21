@@ -1,9 +1,10 @@
 package net.logicim.data.integratedcircuit.standard.clock;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.MultiPortData;
+import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
@@ -28,7 +29,7 @@ public class ClockData
   public ClockData(Int2D position,
                    Rotation rotation,
                    String name,
-                   String family,
+                   Family family,
                    float frequency,
                    List<IntegratedCircuitEventData<?>> events,
                    List<MultiPortData> ports,

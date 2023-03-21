@@ -250,22 +250,17 @@ public class FamilyVoltageConfigurationStore
   public static FamilyVoltageConfiguration get(String familyName)
   {
     Family family = FamilyStore.getInstance().get(familyName);
-    return getInstance().getMap().get(family);
+    return getInstance().map.get(family);
   }
 
   public static FamilyVoltageConfiguration get(Family family)
   {
-    return getInstance().getMap().get(family);
+    return get(family.getFamily());
   }
 
   protected static int ns(double nanoseconds)
   {
     return (int) nanosecondsToTime(nanoseconds);
-  }
-
-  protected Map<Family, FamilyVoltageConfiguration> getMap()
-  {
-    return map;
   }
 
   public void add(VoltageConfiguration voltageConfiguration, String logicLevel, String familyName)
@@ -275,6 +270,7 @@ public class FamilyVoltageConfigurationStore
     {
       family = FamilyStore.getInstance().add(familyName);
     }
+    
     FamilyVoltageConfiguration familyVoltageConfiguration = map.get(family);
     if (familyVoltageConfiguration == null)
     {

@@ -13,7 +13,9 @@ public abstract class StandardIntegratedCircuitProperties
     explicitPowerPorts = false;
   }
 
-  public StandardIntegratedCircuitProperties(String name, Family family, boolean explicitPowerPorts)
+  public StandardIntegratedCircuitProperties(String name,
+                                             Family family,
+                                             boolean explicitPowerPorts)
   {
     super(name, family);
     this.explicitPowerPorts = explicitPowerPorts;

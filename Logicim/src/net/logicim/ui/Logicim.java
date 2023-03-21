@@ -1,6 +1,8 @@
 package net.logicim.ui;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.reflect.PackageInspector;
+import net.logicim.common.reflect.PackageInspectorStore;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
@@ -826,6 +828,13 @@ public class Logicim
     SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(editorData.currentSubcircuit);
     String subcircuitTypeName = circuitEditor.setCurrentSubcircuitEditor(subcircuitEditor);
     setViewportParameters(subcircuitTypeName);
+
+    PackageInspector packageInspector = PackageInspectorStore.getInstance().getPackageInspector("net.logicim.ui");
+    for (DefaultComponentPropertiesData defaultProperty : editorData.defaultProperties)
+    {
+      Class<? extends StaticView<?>> staticViewClass = (Class<? extends StaticView<?>>) packageInspector.findClassBySimpleName(defaultProperty.propertiesClassName);
+      DefaultComponentProperties.getInstance().put(staticViewClass, defaultProperty.properties);
+    }
 
     calculateHighlightedPort();
   }

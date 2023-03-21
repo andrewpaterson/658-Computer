@@ -18,7 +18,7 @@ public abstract class ViewFactory<STATIC extends StaticView<PROPERTIES>, PROPERT
 
   protected PROPERTIES createDefaultProperties(Class<STATIC> viewClass)
   {
-    PROPERTIES defaultProperties = (PROPERTIES) DefaultComponentProperties.get(viewClass);
+    PROPERTIES defaultProperties = DefaultComponentProperties.get(viewClass);
     if (defaultProperties != null)
     {
       PROPERTIES properties = (PROPERTIES) defaultProperties.duplicate();

@@ -19,7 +19,7 @@ public class PackageInspector
 
   public void sortClasses()
   {
-    classes.sort(new Comparator<Class<?>>()
+    classes.sort(new Comparator<>()
     {
       public int compare(Class<?> o1, Class<?> o2)
       {
@@ -105,7 +105,7 @@ public class PackageInspector
 
   private Collection<Class<?>> findClassesBySimpleName(String simpleName)
   {
-    Collection<Class<?>> results = new ArrayList<Class<?>>();
+    Collection<Class<?>> results = new ArrayList<>();
 
     for (Class<?> aClass : classes)
     {

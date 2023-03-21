@@ -2,6 +2,8 @@ package net.logicim.ui.common.wire;
 
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
+import java.util.Objects;
+
 public class TunnelProperties
     extends ComponentProperties
 {
@@ -35,7 +37,8 @@ public class TunnelProperties
       return false;
     }
     TunnelProperties that = (TunnelProperties) o;
-    return doubleSided == that.doubleSided;
+    return doubleSided == that.doubleSided &&
+           Objects.equals(name, that.name);
   }
 }
 

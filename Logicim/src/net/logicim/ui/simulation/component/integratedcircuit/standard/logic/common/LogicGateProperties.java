@@ -3,6 +3,8 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.com
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
 
+import java.util.Objects;
+
 public class LogicGateProperties
     extends StandardIntegratedCircuitProperties
 {
@@ -49,7 +51,8 @@ public class LogicGateProperties
     }
     LogicGateProperties that = (LogicGateProperties) o;
     return inputCount == that.inputCount &&
-           inputWidth == that.inputWidth;
+           inputWidth == that.inputWidth &&
+           Objects.equals(name, that.name);
   }
 }
 

@@ -3,6 +3,8 @@ package net.logicim.ui.simulation.component.integratedcircuit.extra;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitProperties;
 
+import java.util.Objects;
+
 public class OscilloscopeProperties
     extends IntegratedCircuitProperties
 {
@@ -65,7 +67,8 @@ public class OscilloscopeProperties
            numberOfDivsWide == that.numberOfDivsWide &&
            divHeightInGrids == that.divHeightInGrids &&
            samplesPerDiv == that.samplesPerDiv &&
-           Float.compare(that.samplingFrequency_Hz, samplingFrequency_Hz) == 0;
+           Float.compare(that.samplingFrequency_Hz, samplingFrequency_Hz) == 0 &&
+           Objects.equals(name, that.name);
   }
 }
 

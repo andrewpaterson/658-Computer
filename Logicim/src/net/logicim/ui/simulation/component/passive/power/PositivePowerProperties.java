@@ -2,6 +2,8 @@ package net.logicim.ui.simulation.component.passive.power;
 
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
+import java.util.Objects;
+
 public class PositivePowerProperties
     extends ComponentProperties
 {
@@ -36,7 +38,8 @@ public class PositivePowerProperties
       return false;
     }
     PositivePowerProperties that = (PositivePowerProperties) o;
-    return Float.compare(that.voltage_V, voltage_V) == 0;
+    return Float.compare(that.voltage_V, voltage_V) == 0 &&
+           Objects.equals(name, that.name);
   }
 }
 

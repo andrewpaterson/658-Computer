@@ -2,6 +2,8 @@ package net.logicim.ui.simulation.component.passive.power;
 
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
+import java.util.Objects;
+
 public class GroundProperties
     extends ComponentProperties
 {
@@ -31,7 +33,8 @@ public class GroundProperties
     {
       return false;
     }
-    return true;
+    GroundProperties that = (GroundProperties) o;
+    return Objects.equals(name, that.name);
   }
 }
 

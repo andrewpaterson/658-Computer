@@ -54,7 +54,8 @@ public class SubcircuitInstanceProperties
     return width == other.width &&
            height == other.height &&
            Objects.equals(subcircuitTypeName, other.subcircuitTypeName) &&
-           Objects.equals(comment, other.comment);
+           Objects.equals(comment, other.comment) &&
+           Objects.equals(name, other.name);
   }
 }
 

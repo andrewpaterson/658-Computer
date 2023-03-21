@@ -3,6 +3,8 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
 
+import java.util.Objects;
+
 public class ClockProperties
     extends StandardIntegratedCircuitProperties
 {
@@ -49,7 +51,8 @@ public class ClockProperties
     }
     ClockProperties that = (ClockProperties) o;
     return Float.compare(that.frequency_Hz, frequency_Hz) == 0 &&
-           inverseOut == that.inverseOut;
+           inverseOut == that.inverseOut &&
+           Objects.equals(name, that.name);
   }
 }
 

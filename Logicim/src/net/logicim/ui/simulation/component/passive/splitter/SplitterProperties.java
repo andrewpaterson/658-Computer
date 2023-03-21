@@ -5,6 +5,7 @@ import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SplitterProperties
     extends ComponentProperties
@@ -110,7 +111,8 @@ public class SplitterProperties
            gridSpacing == that.gridSpacing &&
            endOffset == that.endOffset &&
            appearance == that.appearance &&
-           Arrays.equals(splitIndices, that.splitIndices);
+           Arrays.equals(splitIndices, that.splitIndices) &&
+           Objects.equals(name, that.name);
   }
 
   @Override

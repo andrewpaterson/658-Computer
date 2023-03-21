@@ -90,7 +90,8 @@ public class PinProperties
            alignment == that.alignment &&
            anchour == that.anchour &&
            instanceDisplay == that.instanceDisplay &&
-           radix == that.radix;
+           radix == that.radix &&
+           Objects.equals(name, that.name);
   }
 }
 

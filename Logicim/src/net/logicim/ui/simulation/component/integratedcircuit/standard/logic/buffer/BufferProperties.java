@@ -4,6 +4,8 @@ import net.logicim.domain.common.propagation.Family;
 import net.logicim.ui.common.integratedcircuit.ComponentProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitProperties;
 
+import java.util.Objects;
+
 public class BufferProperties
     extends StandardIntegratedCircuitProperties
 {
@@ -46,7 +48,8 @@ public class BufferProperties
     }
     BufferProperties that = (BufferProperties) o;
     return inputCount == that.inputCount &&
-           inputWidth == that.inputWidth;
+           inputWidth == that.inputWidth &&
+           Objects.equals(name, that.name);
   }
 }
 

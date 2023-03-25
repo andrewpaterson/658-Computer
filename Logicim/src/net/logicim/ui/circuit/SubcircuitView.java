@@ -29,6 +29,7 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.ConnectionViewCache;
 import net.logicim.ui.simulation.StaticViewIterator;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
+import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.*;
@@ -983,6 +984,19 @@ public class SubcircuitView
   public Set<SubcircuitInstanceView> getSubcircuitInstanceViews()
   {
     return subcircuitInstanceViews;
+  }
+
+  public List<PinView> findAllPins()
+  {
+    ArrayList<PinView> pinViews = new ArrayList<>();
+    for (PassiveView<?, ?> passiveView : passiveViews)
+    {
+      if (passiveView instanceof PinView)
+      {
+        pinViews.add((PinView) passiveView);
+      }
+    }
+    return pinViews;
   }
 }
 

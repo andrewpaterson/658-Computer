@@ -270,7 +270,7 @@ public class FamilyVoltageConfigurationStore
     {
       family = FamilyStore.getInstance().add(familyName);
     }
-    
+
     FamilyVoltageConfiguration familyVoltageConfiguration = map.get(family);
     if (familyVoltageConfiguration == null)
     {

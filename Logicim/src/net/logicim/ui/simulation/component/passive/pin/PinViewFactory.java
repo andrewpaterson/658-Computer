@@ -20,10 +20,13 @@ public class PinViewFactory
                         Int2D position,
                         Rotation rotation)
   {
+    PinPropertyHelper pinPropertyHelper = new PinPropertyHelper(circuitEditor.getCurrentSubcircuitView().findAllPins());
+    PinProperties defaultProperties = createDefaultProperties(getViewClass());
+    pinPropertyHelper.updatePinName(defaultProperties);
     return create(circuitEditor,
                   position,
                   rotation,
-                  createDefaultProperties(getViewClass()));
+                  defaultProperties);
   }
 
   @Override

@@ -49,7 +49,7 @@ public class XorGateData
   }
 
   @Override
-  public XorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public XorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new XorGateView(subcircuitView,
                            circuit,

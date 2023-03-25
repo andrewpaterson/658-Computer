@@ -42,7 +42,7 @@ public class TunnelData
   }
 
   @Override
-  public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
+  public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor, TraceLoader traceLoader, boolean fullLoad, Simulation simulation, Circuit circuit)
   {
     TunnelView tunnelView = new TunnelView(subcircuitEditor.getSubcircuitView(),
                                            circuit,
@@ -51,7 +51,7 @@ public class TunnelData
                                            boundingBox.create(),
                                            selectionBox.create(),
                                            new TunnelProperties(name, doubleSided));
-    if (createConnections)
+    if (fullLoad)
     {
       tunnelView.createConnections(subcircuitEditor.getSubcircuitView());
       WireDataHelper.wireConnect(subcircuitEditor,
@@ -66,7 +66,7 @@ public class TunnelData
   }
 
   @Override
-  protected TunnelView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected TunnelView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     throw new SimulatorException("Create should not be called from TunnelData.");
   }

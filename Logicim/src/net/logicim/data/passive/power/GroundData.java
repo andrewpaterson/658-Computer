@@ -31,7 +31,7 @@ public class GroundData
           selected);
   }
 
-  protected GroundView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected GroundView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new GroundView(subcircuitView,
                           circuit,

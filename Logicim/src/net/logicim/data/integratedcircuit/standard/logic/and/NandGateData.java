@@ -49,7 +49,7 @@ public class NandGateData
   }
 
   @Override
-  public NandGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public NandGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new NandGateView(subcircuitView,
                             circuit,

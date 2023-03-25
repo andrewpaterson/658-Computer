@@ -49,7 +49,7 @@ public class NorGateData
   }
 
   @Override
-  public NorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public NorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new NorGateView(subcircuitView,
                            circuit,

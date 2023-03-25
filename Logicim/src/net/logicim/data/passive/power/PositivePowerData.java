@@ -32,7 +32,7 @@ public class PositivePowerData
   }
 
   @Override
-  protected PositivePowerView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected PositivePowerView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new PositivePowerView(subcircuitView,
                                  circuit,

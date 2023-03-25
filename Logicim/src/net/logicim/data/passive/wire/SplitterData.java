@@ -47,7 +47,7 @@ public class SplitterData
   }
 
   @Override
-  protected SplitterView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected SplitterView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new SplitterView(subcircuitView,
                             circuit,

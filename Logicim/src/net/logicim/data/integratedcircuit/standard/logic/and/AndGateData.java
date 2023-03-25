@@ -49,7 +49,7 @@ public class AndGateData
   }
 
   @Override
-  public AndGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public AndGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new AndGateView(subcircuitView,
                            circuit,

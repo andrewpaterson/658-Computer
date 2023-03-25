@@ -18,11 +18,14 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
 
   public T createAndLoad(SubcircuitEditor subcircuitEditor,
                          TraceLoader traceLoader,
-                         boolean createConnections,
+                         boolean fullLoad,
                          Simulation simulation,
                          Circuit circuit)
   {
-    T componentView = create(subcircuitEditor.getSubcircuitView(), circuit, traceLoader);
+    T componentView = create(subcircuitEditor.getSubcircuitView(),
+                             circuit,
+                             traceLoader,
+                             fullLoad);
     componentView.enable(simulation);
 
     if (selected)
@@ -37,6 +40,6 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
     super(name, position, rotation, null, null, selected);
   }
 
-  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader);
+  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

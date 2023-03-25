@@ -20,17 +20,17 @@ public class PinPropertyHelper
 
   public void updatePinProperties(PinProperties properties)
   {
-    updatePinWeight(properties);
-    updatePinName(properties);
+    properties.weight = updatePinWeight(properties.alignment, properties.anchour, properties.weight);
+    properties.name = updatePinName(properties.name);
   }
 
-  protected void updatePinWeight(PinProperties properties)
+  protected int updatePinWeight(SubcircuitPinAlignment alignment, SubcircuitPinAnchour anchour, int propertiesWeight)
   {
     Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> alignmentMap = groupPinsByLocation();
-    Map<SubcircuitPinAnchour, List<PinView>> anchourMap = alignmentMap.get(properties.alignment);
+    Map<SubcircuitPinAnchour, List<PinView>> anchourMap = alignmentMap.get(alignment);
     if (anchourMap != null)
     {
-      List<PinView> similarPinViews = anchourMap.get(properties.anchour);
+      List<PinView> similarPinViews = anchourMap.get(anchour);
       if (similarPinViews != null)
       {
         int maxWeight = -1;
@@ -42,15 +42,16 @@ public class PinPropertyHelper
             maxWeight = weight;
           }
         }
-        properties.weight = maxWeight + 1;
+        propertiesWeight = maxWeight + 1;
       }
     }
+    return propertiesWeight;
   }
 
-  protected void updatePinName(PinProperties properties)
+  protected String updatePinName(String propertiesName)
   {
     Map<String, List<PinViewNumber>> nameMap = groupPinsByName();
-    PinViewNumber pinViewNumber = createPinViewNumber(null, properties.name);
+    PinViewNumber pinViewNumber = createPinViewNumber(null, propertiesName);
     Integer number = pinViewNumber.number;
     String name = pinViewNumber.name;
 
@@ -80,9 +81,10 @@ public class PinPropertyHelper
       }
       if (exactNumber || maxNumber == 0)
       {
-        properties.name = name + " " + (maxNumber + 1);
+        propertiesName = name + " " + (maxNumber + 1);
       }
     }
+    return propertiesName;
   }
 
   private Map<String, List<PinViewNumber>> groupPinsByName()

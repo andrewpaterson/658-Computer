@@ -49,7 +49,7 @@ public class XnorGateData
   }
 
   @Override
-  public XnorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public XnorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new XnorGateView(subcircuitView,
                             circuit,

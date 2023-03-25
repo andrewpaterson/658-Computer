@@ -991,7 +991,7 @@ public class Logicim
         if (center != null)
         {
           Float2D floatingCenter = new Float2D(center);
-          editAction = createEdit(new MoveComponents(views, false), floatingCenter);
+          editAction = createEdit(new MoveComponents(views, true), floatingCenter);
         }
       }
     }

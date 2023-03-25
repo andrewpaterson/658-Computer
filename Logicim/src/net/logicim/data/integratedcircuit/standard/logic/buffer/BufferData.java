@@ -51,7 +51,7 @@ public class BufferData
   }
 
   @Override
-  public BufferView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public BufferView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new BufferView(subcircuitView,
                           circuit,

@@ -12,6 +12,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.util.List;
@@ -61,22 +62,28 @@ public class PinData
   }
 
   @Override
-  protected PinView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected PinView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
+    PinProperties properties = new PinProperties(name,
+                                                 bitWidth,
+                                                 alignment,
+                                                 offset,
+                                                 weight,
+                                                 inverting,
+                                                 clockNotch,
+                                                 FamilyStore.getInstance().get(family),
+                                                 explicitPowerPorts,
+                                                 radix);
+    if (!fullLoad)
+    {
+      PinPropertyHelper pinPropertyHelper = new PinPropertyHelper(subcircuitView.findAllPins());
+      pinPropertyHelper.updatePinProperties(properties);
+    }
     return new PinView(subcircuitView,
                        circuit,
                        position,
                        rotation,
-                       new PinProperties(name,
-                                         bitWidth,
-                                         alignment,
-                                         offset,
-                                         weight,
-                                         inverting,
-                                         clockNotch,
-                                         FamilyStore.getInstance().get(family),
-                                         explicitPowerPorts,
-                                         radix));
+                       properties);
   }
 }
 

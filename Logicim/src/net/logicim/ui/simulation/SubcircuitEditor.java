@@ -293,24 +293,31 @@ public class SubcircuitEditor
   public List<View> loadViews(List<TraceData> traces,
                               List<StaticData<?>> components,
                               CircuitSimulation simulation,
-                              boolean createConnections)
+                              boolean fullLoad)
   {
     ArrayList<View> views = new ArrayList<>();
     TraceLoader traceLoader = null;
-    if (createConnections)
+    if (fullLoad)
     {
       traceLoader = new TraceLoader();
     }
 
     for (TraceData traceData : traces)
     {
-      TraceView traceView = traceData.create(this, simulation.getSimulation(), traceLoader, createConnections);
+      TraceView traceView = traceData.create(this,
+                                             simulation.getSimulation(),
+                                             traceLoader,
+                                             fullLoad);
       views.add(traceView);
     }
 
     for (StaticData<?> staticData : components)
     {
-      StaticView<?> staticView = staticData.createAndLoad(this, traceLoader, createConnections, simulation.getSimulation(), simulation.getCircuit());
+      StaticView<?> staticView = staticData.createAndLoad(this,
+                                                          traceLoader,
+                                                          fullLoad,
+                                                          simulation.getSimulation(),
+                                                          simulation.getCircuit());
       views.add(staticView);
     }
     return views;

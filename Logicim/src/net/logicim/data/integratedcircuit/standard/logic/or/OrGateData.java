@@ -49,7 +49,7 @@ public class OrGateData
   }
 
   @Override
-  public OrGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public OrGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new OrGateView(subcircuitView,
                           circuit,

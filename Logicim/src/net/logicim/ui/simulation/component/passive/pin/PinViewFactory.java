@@ -20,9 +20,7 @@ public class PinViewFactory
                         Int2D position,
                         Rotation rotation)
   {
-    PinPropertyHelper pinPropertyHelper = new PinPropertyHelper(circuitEditor.getCurrentSubcircuitView().findAllPins());
     PinProperties defaultProperties = createDefaultProperties(getViewClass());
-    pinPropertyHelper.updatePinName(defaultProperties);
     return create(circuitEditor,
                   position,
                   rotation,
@@ -50,6 +48,8 @@ public class PinViewFactory
                         Rotation rotation,
                         PinProperties properties)
   {
+    PinPropertyHelper pinPropertyHelper = new PinPropertyHelper(circuitEditor.getCurrentSubcircuitView().findAllPins());
+    pinPropertyHelper.updatePinProperties(properties);
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     Circuit circuit = circuitEditor.getCircuit();
     return new PinView(subcircuitView,

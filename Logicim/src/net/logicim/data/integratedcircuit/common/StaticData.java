@@ -41,10 +41,10 @@ public abstract class StaticData<T extends StaticView<?>>
 
   public abstract T createAndLoad(SubcircuitEditor subcircuitEditor,
                                   TraceLoader traceLoader,
-                                  boolean createConnections,
+                                  boolean fullLoad,
                                   Simulation simulation,
                                   Circuit circuit);
 
-  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader);
+  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

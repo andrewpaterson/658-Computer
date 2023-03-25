@@ -52,7 +52,7 @@ public class ClockData
   }
 
   @Override
-  public ClockView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public ClockView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new ClockView(subcircuitView,
                          circuit,

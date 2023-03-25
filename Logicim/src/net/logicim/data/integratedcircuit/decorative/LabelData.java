@@ -38,7 +38,7 @@ public class LabelData
   }
 
   @Override
-  protected LabelView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected LabelView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new LabelView(subcircuitView,
                          circuit,

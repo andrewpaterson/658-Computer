@@ -51,7 +51,7 @@ public class OscilloscopeData
   }
 
   @Override
-  public OscilloscopeView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public OscilloscopeView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new OscilloscopeView(subcircuitView,
                                 circuit,

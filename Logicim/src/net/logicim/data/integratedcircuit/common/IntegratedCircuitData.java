@@ -103,6 +103,6 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     integratedCircuit.setState(state);
   }
 
-  public abstract ICV create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader);
+  public abstract ICV create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

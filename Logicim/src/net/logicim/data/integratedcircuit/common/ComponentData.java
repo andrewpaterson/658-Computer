@@ -42,10 +42,17 @@ public abstract class ComponentData<T extends ComponentView<?>>
     this.ports = ports;
   }
 
-  public T createAndLoad(SubcircuitEditor subcircuitEditor, TraceLoader traceLoader, boolean createConnections, Simulation simulation, Circuit circuit)
+  public T createAndLoad(SubcircuitEditor subcircuitEditor,
+                         TraceLoader traceLoader,
+                         boolean fullLoad,
+                         Simulation simulation,
+                         Circuit circuit)
   {
-    T componentView = create(subcircuitEditor.getSubcircuitView(), circuit, traceLoader);
-    if (createConnections)
+    T componentView = create(subcircuitEditor.getSubcircuitView(),
+                             circuit,
+                             traceLoader,
+                             fullLoad);
+    if (fullLoad)
     {
       connectAndLoad(subcircuitEditor.getSubcircuitView(), simulation, traceLoader, componentView);
     }
@@ -114,6 +121,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader);
+  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

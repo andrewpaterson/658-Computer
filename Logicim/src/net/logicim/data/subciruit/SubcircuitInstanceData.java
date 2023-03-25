@@ -9,7 +9,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
@@ -51,7 +50,7 @@ public class SubcircuitInstanceData
   @Override
   public SubcircuitInstanceView createAndLoad(SubcircuitEditor subcircuitEditor,
                                               TraceLoader traceLoader,
-                                              boolean createConnections,
+                                              boolean fullLoad,
                                               Simulation simulation,
                                               Circuit circuit)
   {
@@ -82,7 +81,7 @@ public class SubcircuitInstanceData
   }
 
   @Override
-  protected SubcircuitInstanceView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  protected SubcircuitInstanceView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     throw new SimulatorException("Create should not be called from TunnelData.");
   }

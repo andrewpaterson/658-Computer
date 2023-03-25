@@ -51,7 +51,7 @@ public class InverterData
   }
 
   @Override
-  public InverterView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader)
+  public InverterView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     return new InverterView(subcircuitView,
                             circuit,

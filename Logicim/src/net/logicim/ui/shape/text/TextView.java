@@ -98,6 +98,13 @@ public class TextView
   public void calculateDimension()
   {
     Font font = getFont();
+
+    this.textOffset = calculateTextOffset(font, text);
+    this.textDimension = calculateTextDimension(font, text);
+  }
+
+  public static Float2D calculateTextOffset(Font font, String text)
+  {
     FontRenderContext fontRenderContext = Fonts.getInstance().getFontRenderContext();
 
     Rectangle2D stringBounds = font.getStringBounds(text, fontRenderContext);
@@ -115,8 +122,29 @@ public class TextView
     Float2D textDimension = new Float2D(bottomRight);
     textDimension.subtract(topLeft);
 
-    this.textOffset = topLeft.clone();
-    this.textDimension = textDimension;
+    return topLeft.clone();
+  }
+
+  public static Float2D calculateTextDimension(Font font, String text)
+  {
+    FontRenderContext fontRenderContext = Fonts.getInstance().getFontRenderContext();
+
+    Rectangle2D stringBounds = font.getStringBounds(text, fontRenderContext);
+    int height = (int) stringBounds.getHeight();
+    int width = (int) stringBounds.getWidth();
+    float halfHeight = (float) height / 2f;
+
+    Float2D topLeft = new Float2D(0, -halfHeight);
+    Float2D bottomRight = new Float2D(width, halfHeight);
+
+    float scale = Viewport.getScale();
+    topLeft.divide(scale);
+    bottomRight.divide(scale);
+
+    Float2D textDimension = new Float2D(bottomRight);
+    textDimension.subtract(topLeft);
+
+    return textDimension;
   }
 
   @Override

@@ -43,6 +43,20 @@ public class RectangleView
   }
 
   public RectangleView(ShapeHolder shapeHolder,
+                       Rectangle rectangle,
+                       boolean border,
+                       boolean fill)
+  {
+    super(shapeHolder);
+    this.border = border;
+    this.fill = fill;
+    this.dimension = rectangle.getDimension();
+    this.positionRelativeToIC = rectangle.getTopLeft().clone();
+
+    this.gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
+  }
+
+  public RectangleView(ShapeHolder shapeHolder,
                        Tuple2 topLeft,
                        Tuple2 bottomRight,
                        boolean border,

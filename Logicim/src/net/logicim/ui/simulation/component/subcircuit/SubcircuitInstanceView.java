@@ -13,12 +13,10 @@ import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.common.Colours;
-import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.shape.rectangle.Rectangle;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
@@ -31,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.awt.Font.SANS_SERIF;
-import static net.logicim.data.circuit.SubcircuitPinAlignment.LEFT;
+import static net.logicim.data.circuit.SubcircuitPinAlignment.*;
 
 public class SubcircuitInstanceView
     extends StaticView<SubcircuitInstanceProperties>
@@ -70,25 +68,65 @@ public class SubcircuitInstanceView
   protected void finaliseView(Circuit circuit)
   {
     finalised = true;
+
+    Rectangle rectangle = createTypeGraphics();
+    this.rectangle = new RectangleView(this, rectangle, true, true);
+
     PinPropertyHelper helper = new PinPropertyHelper(instanceSubcircuitView.findAllPins());
     Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> pinsLocations = helper.groupPinsByLocation();
 
-    Map<SubcircuitPinAnchour, List<PinView>> anchourMap = pinsLocations.get(LEFT);
+    PinViewLists leftViewLists = createPinViewLists(pinsLocations, LEFT);
+    PinViewLists rightViewLists = createPinViewLists(pinsLocations, RIGHT);
+    PinViewLists topViewLists = createPinViewLists(pinsLocations, TOP);
+    PinViewLists bottomViewLists = createPinViewLists(pinsLocations, BOTTOM);
+
+    updateBoundingBoxes();
+    createSubcircuitComponents(circuit);
+  }
+
+  private PinViewLists createPinViewLists(Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> pinsLocations, SubcircuitPinAlignment alignment)
+  {
+    Map<SubcircuitPinAnchour, List<PinView>> anchourMap = pinsLocations.get(alignment);
 
     List<PinView> centerPinViews = orderCenterPins(findAndSortPins(anchourMap, SubcircuitPinAnchour.CENTER));
     List<PinView> negativePinViews = orderNegativePins(findAndSortPins(anchourMap, SubcircuitPinAnchour.NEGATIVE));
     List<PinView> positivePinViews = orderPositivePins(findAndSortPins(anchourMap, SubcircuitPinAnchour.POSITIVE));
 
-    printPins(negativePinViews);
-    System.out.println();
-    printPins(centerPinViews);
-    System.out.println();
-    printPins(positivePinViews);
+    Font font = Fonts.getInstance().getFont(SANS_SERIF, 0, 10, false);
 
-    createGraphics();
-    updateBoundingBoxes();
-    createSubcircuitComponents(circuit);
-    createConnectionViews();
+    float maxWidest = 0;
+    float widest = getWidest(centerPinViews, font);
+    if (widest > maxWidest)
+    {
+      maxWidest = widest;
+    }
+    widest = getWidest(negativePinViews, font);
+    if (widest > maxWidest)
+    {
+      maxWidest = widest;
+    }
+    widest = getWidest(positivePinViews, font);
+    if (widest > maxWidest)
+    {
+      maxWidest = widest;
+    }
+
+    return new PinViewLists(negativePinViews, centerPinViews, positivePinViews, maxWidest);
+  }
+
+  private float getWidest(List<PinView> pinViews, Font font)
+  {
+    float widest = 0;
+    for (PinView pinView : pinViews)
+    {
+      String text = pinView.getName();
+      Float2D textDimension = TextView.calculateTextDimension(font, text);
+      if (textDimension.x > widest)
+      {
+        widest = textDimension.x;
+      }
+    }
+    return widest;
   }
 
   private void printPins(List<PinView> pinViews)
@@ -101,11 +139,20 @@ public class SubcircuitInstanceView
 
   private List<PinView> findAndSortPins(Map<SubcircuitPinAnchour, List<PinView>> anchourMap, SubcircuitPinAnchour anchour)
   {
-    List<PinView> centerPinViews = anchourMap.get(anchour);
-    List<PinView> sortedPinViews;
-    if (centerPinViews != null)
+    List<PinView> pinViews;
+    if (anchourMap != null)
     {
-      sortedPinViews = new ArrayList<>(centerPinViews);
+      pinViews = anchourMap.get(anchour);
+    }
+    else
+    {
+      pinViews = null;
+    }
+
+    List<PinView> sortedPinViews;
+    if (pinViews != null)
+    {
+      sortedPinViews = new ArrayList<>(pinViews);
       Collections.sort(sortedPinViews);
     }
     else
@@ -161,12 +208,7 @@ public class SubcircuitInstanceView
     return sortedPinViews;
   }
 
-  private void createConnectionViews()
-  {
-
-  }
-
-  private void createGraphics()
+  private Rectangle createTypeGraphics()
   {
     typeName = new TextView(this, new Float2D(0, 0), properties.subcircuitTypeName, SANS_SERIF, 13, true, HorizontalAlignment.CENTER);
 
@@ -195,7 +237,7 @@ public class SubcircuitInstanceView
     bottomRight.x = (float) Math.ceil(bottomRight.x + 0.5f);
     bottomRight.y = (float) Math.ceil(bottomRight.y + 0.5f);
 
-    rectangle = new RectangleView(this, new Int2D(topLeft), new Int2D(bottomRight), true, true);
+    return new Rectangle(new Int2D(topLeft), new Int2D(bottomRight));
   }
 
   private void createSubcircuitComponents(Circuit circuit)

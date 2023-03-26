@@ -49,7 +49,7 @@ public class PinViewFactory
                         PinProperties properties)
   {
     PinPropertyHelper helper = new PinPropertyHelper(circuitEditor.getCurrentSubcircuitView().findAllPins());
-    helper.updatePinProperties(properties);
+    helper.ensureUniquePinName(properties);
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     Circuit circuit = circuitEditor.getCircuit();
     return new PinView(subcircuitView,

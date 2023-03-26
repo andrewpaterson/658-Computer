@@ -336,7 +336,8 @@ public class CircuitEditor
 
   public List<View> duplicateViews(List<View> views)
   {
-    return currentSubcircuitEditor.duplicateViews(views);
+    ClipboardData clipboardData = copyViews(views);
+    return pasteClipboardViews(clipboardData.getTraces(), clipboardData.getComponents());
   }
 
   public void removeTraceView(TraceView traceView)

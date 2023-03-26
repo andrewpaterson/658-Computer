@@ -924,11 +924,6 @@ public class Logicim
     circuitEditor.replaceSelection(newView, oldView);
   }
 
-  private List<View> duplicateViews(List<View> views)
-  {
-    return circuitEditor.duplicateViews(views);
-  }
-
   public void editActionCopy()
   {
     if (editAction == null)
@@ -969,7 +964,7 @@ public class Logicim
       List<View> selection = circuitEditor.getCurrentSelection().getSelection();
       if (selection.size() > 0)
       {
-        List<View> duplicates = duplicateViews(selection);
+        List<View> duplicates = circuitEditor.duplicateViews(selection);
         Int2D center = Selection.getViewsCenter(duplicates);
         if (center != null)
         {

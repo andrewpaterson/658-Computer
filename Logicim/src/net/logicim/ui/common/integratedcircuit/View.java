@@ -47,7 +47,5 @@ public abstract class View
   public abstract void setPosition(int x, int y);
 
   public abstract List<ConnectionView> getConnections();
-
-  public abstract View duplicate(CircuitEditor circuitEditor);
 }
 

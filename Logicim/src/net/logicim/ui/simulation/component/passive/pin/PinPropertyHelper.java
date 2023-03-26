@@ -18,10 +18,14 @@ public class PinPropertyHelper
     this.subCircuitPins = subCircuitPins;
   }
 
-  public void updatePinProperties(PinProperties properties)
+  public void ensureUniquePinName(PinProperties properties)
+  {
+    properties.name = updatePinName(properties.name);
+  }
+
+  public void ensureNextWeight(PinProperties properties)
   {
     properties.weight = updatePinWeight(properties.alignment, properties.anchour, properties.weight);
-    properties.name = updatePinName(properties.name);
   }
 
   protected int updatePinWeight(SubcircuitPinAlignment alignment, SubcircuitPinAnchour anchour, int propertiesWeight)

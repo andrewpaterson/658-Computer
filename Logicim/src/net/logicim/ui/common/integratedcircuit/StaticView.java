@@ -248,12 +248,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     boundingBox.grow(0.5f);
   }
 
-  @Override
-  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor)
-  {
-    return duplicate(circuitEditor, (PROPERTIES) properties.duplicate());
-  }
-
   public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor, PROPERTIES properties)
   {
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) getClass();

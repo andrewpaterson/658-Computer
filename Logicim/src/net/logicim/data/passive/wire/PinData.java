@@ -77,7 +77,8 @@ public class PinData
     if (!fullLoad)
     {
       PinPropertyHelper helper = new PinPropertyHelper(subcircuitView.findAllPins());
-      helper.updatePinProperties(properties);
+      helper.ensureUniquePinName(properties);
+      helper.ensureNextWeight(properties);
     }
     return new PinView(subcircuitView,
                        circuit,

@@ -187,7 +187,7 @@ public class PinView
   public void clampProperties(PinProperties newProperties)
   {
     newProperties.bitWidth = PropertyClamp.clamp(newProperties.bitWidth, 1, PropertyClamp.MAX_WIDTH);
-    newProperties.weight = PropertyClamp.clamp(newProperties.weight, 1, 32);
+    newProperties.weight = PropertyClamp.clamp(newProperties.weight, 0, 8191);
   }
 
   @Override

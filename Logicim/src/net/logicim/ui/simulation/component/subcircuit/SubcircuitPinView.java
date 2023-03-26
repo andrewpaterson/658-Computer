@@ -1,12 +1,15 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
+import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.point.PointGridCache;
+import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.awt.*;
 
@@ -15,18 +18,27 @@ public class SubcircuitPinView
   protected ConnectionView connection;
 
   protected PinView pinView;
-  protected SubcircuitInstanceView subcircuitView;
+  protected SubcircuitInstanceView subcircuitInstanceView;
 
   protected Int2D positionRelativeToIC;
   protected PointGridCache positionCache;
 
-  public SubcircuitPinView(PinView pinView, SubcircuitInstanceView subcircuitView, Int2D positionRelativeToIC)
+  protected TextView textView;
+
+  public SubcircuitPinView(PinView pinView,
+                           SubcircuitInstanceView subcircuitInstanceView,
+                           Int2D positionRelativeToIC,
+                           String fontName,
+                           int size,
+                           HorizontalAlignment horizontalAlignment)
   {
     this.pinView = pinView;
-    this.subcircuitView = subcircuitView;
+    this.subcircuitInstanceView = subcircuitInstanceView;
+    SubcircuitView subcircuitView = subcircuitInstanceView.getSubcircuitView();
     this.connection = null;
     this.positionRelativeToIC = positionRelativeToIC.clone();
     this.positionCache = new PointGridCache(positionRelativeToIC);
+    this.textView = new TextView(subcircuitInstanceView, positionRelativeToIC, pinView.getName(), fontName, size, false, horizontalAlignment);
   }
 
   public ConnectionView getConnection()
@@ -43,14 +55,30 @@ public class SubcircuitPinView
   {
     if (!positionCache.isValid())
     {
-      positionCache.update(positionRelativeToIC, subcircuitView.getRotation(), subcircuitView.getPosition());
+      positionCache.update(positionRelativeToIC, subcircuitInstanceView.getRotation(), subcircuitInstanceView.getPosition());
     }
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
+    textView.paint(graphics, viewport);
+
     updateGridCache();
     Tuple2 transformedPosition = positionCache.getTransformedPosition();
+  }
+
+  public ConnectionView getOrAddConnection(SubcircuitView subcircuitView)
+  {
+    if (connection == null)
+    {
+      ConnectionView connection = subcircuitView.getOrAddConnection(positionRelativeToIC, subcircuitInstanceView);
+      this.connection = connection;
+      return connection;
+    }
+    else
+    {
+      throw new SimulatorException("Connection is already set.");
+    }
   }
 }
 

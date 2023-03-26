@@ -76,8 +76,8 @@ public class PinData
                                                  radix);
     if (!fullLoad)
     {
-      PinPropertyHelper pinPropertyHelper = new PinPropertyHelper(subcircuitView.findAllPins());
-      pinPropertyHelper.updatePinProperties(properties);
+      PinPropertyHelper helper = new PinPropertyHelper(subcircuitView.findAllPins());
+      helper.updatePinProperties(properties);
     }
     return new PinView(subcircuitView,
                        circuit,

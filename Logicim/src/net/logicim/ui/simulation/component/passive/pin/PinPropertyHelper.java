@@ -146,7 +146,7 @@ public class PinPropertyHelper
     }
   }
 
-  protected Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> groupPinsByLocation()
+  public Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> groupPinsByLocation()
   {
     Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> alignmentMap = new LinkedHashMap<>();
     for (PinView pinView : subCircuitPins)

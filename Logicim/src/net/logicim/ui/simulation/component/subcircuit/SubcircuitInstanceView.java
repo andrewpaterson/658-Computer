@@ -4,9 +4,12 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
+import net.logicim.data.circuit.SubcircuitPinAlignment;
+import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.ReflectiveData;
-import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
+import net.logicim.data.subciruit.SubcircuitInstanceData;
+import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -15,17 +18,20 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
-import net.logicim.ui.simulation.component.passive.pin.SubcircuitPinView;
+import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
+import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static java.awt.Font.SANS_SERIF;
+import static net.logicim.data.circuit.SubcircuitPinAlignment.LEFT;
 
 public class SubcircuitInstanceView
     extends StaticView<SubcircuitInstanceProperties>
@@ -57,7 +63,6 @@ public class SubcircuitInstanceView
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
     this.subcircuitView.addSubcircuitInstanceView(this);
-    createGraphics();
     finaliseView(circuit);
   }
 
@@ -65,8 +70,100 @@ public class SubcircuitInstanceView
   protected void finaliseView(Circuit circuit)
   {
     finalised = true;
+    PinPropertyHelper helper = new PinPropertyHelper(instanceSubcircuitView.findAllPins());
+    Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> pinsLocations = helper.groupPinsByLocation();
+
+    Map<SubcircuitPinAnchour, List<PinView>> anchourMap = pinsLocations.get(LEFT);
+
+    List<PinView> centerPinViews = orderCenterPins(findAndSortPins(anchourMap, SubcircuitPinAnchour.CENTER));
+    List<PinView> negativePinViews = orderNegativePins(findAndSortPins(anchourMap, SubcircuitPinAnchour.NEGATIVE));
+    List<PinView> positivePinViews = orderPositivePins(findAndSortPins(anchourMap, SubcircuitPinAnchour.POSITIVE));
+
+    printPins(negativePinViews);
+    System.out.println();
+    printPins(centerPinViews);
+    System.out.println();
+    printPins(positivePinViews);
+
+    createGraphics();
     updateBoundingBoxes();
     createSubcircuitComponents(circuit);
+    createConnectionViews();
+  }
+
+  private void printPins(List<PinView> pinViews)
+  {
+    for (PinView pinView : pinViews)
+    {
+      System.out.println(pinView.getName());
+    }
+  }
+
+  private List<PinView> findAndSortPins(Map<SubcircuitPinAnchour, List<PinView>> anchourMap, SubcircuitPinAnchour anchour)
+  {
+    List<PinView> centerPinViews = anchourMap.get(anchour);
+    List<PinView> sortedPinViews;
+    if (centerPinViews != null)
+    {
+      sortedPinViews = new ArrayList<>(centerPinViews);
+      Collections.sort(sortedPinViews);
+    }
+    else
+    {
+      sortedPinViews = new ArrayList<>();
+    }
+    return sortedPinViews;
+  }
+
+  private List<PinView> orderNegativePins(List<PinView> sortedPinViews)
+  {
+    return sortedPinViews;
+  }
+
+  private List<PinView> orderPositivePins(List<PinView> sortedPinViews)
+  {
+    Collections.reverse(sortedPinViews);
+    return sortedPinViews;
+  }
+
+  private List<PinView> orderCenterPins(List<PinView> sortedPinViews)
+  {
+    if (sortedPinViews.size() > 0)
+    {
+      PinView[] orderedPinViews = new PinView[sortedPinViews.size()];
+
+      int yEven = (sortedPinViews.size() - 1) / 2;
+      int yOdd = yEven + 1;
+      boolean even = true;
+      for (PinView pinView : sortedPinViews)
+      {
+        int index;
+        if (even)
+        {
+          index = yEven;
+          yEven--;
+        }
+        else
+        {
+          index = yOdd;
+          yOdd++;
+        }
+        orderedPinViews[index] = pinView;
+        even = !even;
+      }
+
+      for (int i = 0; i < orderedPinViews.length; i++)
+      {
+        PinView orderedPinView = orderedPinViews[i];
+        sortedPinViews.set(i, orderedPinView);
+      }
+    }
+    return sortedPinViews;
+  }
+
+  private void createConnectionViews()
+  {
+
   }
 
   private void createGraphics()

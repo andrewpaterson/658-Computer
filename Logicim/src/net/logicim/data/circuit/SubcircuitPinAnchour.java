@@ -2,8 +2,8 @@ package net.logicim.data.circuit;
 
 public enum SubcircuitPinAnchour
 {
-  POSITIVE,
+  NEGATIVE,
   CENTER,
-  NEGATIVE
+  POSITIVE
 }
 

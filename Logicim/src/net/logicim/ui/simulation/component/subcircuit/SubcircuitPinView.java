@@ -1,10 +1,11 @@
-package net.logicim.ui.simulation.component.passive.pin;
+package net.logicim.ui.simulation.component.subcircuit;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.point.PointGridCache;
+import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.awt.*;

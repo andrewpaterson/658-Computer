@@ -38,6 +38,7 @@ import static net.logicim.domain.common.wire.TraceValue.*;
 
 public class PinView
     extends PassiveView<Pin, PinProperties>
+    implements Comparable<PinView>
 {
   public static int FONT_SIZE = 10;
 
@@ -418,6 +419,19 @@ public class PinView
 
   protected void updateTextViews()
   {
+  }
+
+  @Override
+  public int compareTo(PinView o)
+  {
+    PinProperties otherProperties = o.properties;
+    int result = Integer.compare(properties.weight, otherProperties.weight);
+    if (result != 0)
+    {
+      return result;
+    }
+
+    return properties.name.compareTo(otherProperties.name);
   }
 }
 

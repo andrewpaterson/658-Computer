@@ -353,11 +353,11 @@ public class SubcircuitInstanceView
     BoundingBox.calculateBoundingBox(boundingBox, typeName, comment, name);
 
     Float2D topLeft = new Float2D(boundingBox.getTopLeft());
-    topLeft.x = (float) Math.floor(topLeft.x - 0.5f);
+    topLeft.x = (float) Math.floor(topLeft.x);
     topLeft.y = (float) Math.floor(topLeft.y - 0.5f);
 
     Float2D bottomRight = new Float2D(boundingBox.getBottomRight());
-    bottomRight.x = (float) Math.ceil(bottomRight.x + 0.5f);
+    bottomRight.x = (float) Math.ceil(bottomRight.x);
     bottomRight.y = (float) Math.ceil(bottomRight.y + 0.5f);
 
     Rectangle rectangle = new Rectangle(new Int2D(topLeft), new Int2D(bottomRight));

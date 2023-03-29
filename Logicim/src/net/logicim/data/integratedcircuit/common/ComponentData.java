@@ -48,7 +48,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
                          Simulation simulation,
                          Circuit circuit)
   {
-    T componentView = create(subcircuitEditor.getSubcircuitView(),
+    T componentView = create(subcircuitEditor,
                              circuit,
                              traceLoader,
                              fullLoad);
@@ -121,6 +121,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
+  protected abstract T create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

@@ -19,6 +19,7 @@ import net.logicim.domain.common.state.State;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -103,6 +104,6 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     integratedCircuit.setState(state);
   }
 
-  public abstract ICV create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
+  public abstract ICV create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

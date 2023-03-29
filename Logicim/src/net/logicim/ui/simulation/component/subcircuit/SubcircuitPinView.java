@@ -1,21 +1,23 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
-import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.port.TracePort;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.awt.*;
+import java.util.List;
 
 public class SubcircuitPinView
 {
-  protected ConnectionView connection;
+  protected PortView portView;
 
   protected PinView pinView;
   protected SubcircuitInstanceView subcircuitInstanceView;
@@ -34,7 +36,7 @@ public class SubcircuitPinView
   {
     this.pinView = pinView;
     this.subcircuitInstanceView = subcircuitInstanceView;
-    this.connection = null;
+    this.portView = null;
     this.positionRelativeToIC = positionRelativeToIC.clone();
     this.positionCache = new PointGridCache(positionRelativeToIC);
     this.textView = new TextView(subcircuitInstanceView,
@@ -44,11 +46,6 @@ public class SubcircuitPinView
                                  size,
                                  false,
                                  horizontalAlignment);
-  }
-
-  public ConnectionView getConnection()
-  {
-    return connection;
   }
 
   public Int2D getPinPosition()
@@ -72,25 +69,25 @@ public class SubcircuitPinView
     Tuple2 transformedPosition = positionCache.getTransformedPosition();
   }
 
-  public ConnectionView getOrAddConnection(SubcircuitView subcircuitView)
+  public void disconnect(Simulation simulation)
   {
-    if (connection == null)
-    {
-      updateGridCache();
-
-      ConnectionView connection = subcircuitView.getOrAddConnection((Int2D) positionCache.getTransformedPosition(), subcircuitInstanceView);
-      this.connection = connection;
-      return connection;
-    }
-    else
-    {
-      throw new SimulatorException("Connection is already set.");
-    }
+    portView.disconnect(simulation);
   }
 
-  public void disconnect()
+  protected PortView createPortView(List<TracePort> tracePorts)
   {
-    connection = null;
+    portView = new PortView(subcircuitInstanceView, tracePorts, positionRelativeToIC);
+    return portView;
+  }
+
+  public ConnectionView getConnection()
+  {
+    return portView.getConnection();
+  }
+
+  public String getPinName()
+  {
+    return pinView.getName();
   }
 }
 

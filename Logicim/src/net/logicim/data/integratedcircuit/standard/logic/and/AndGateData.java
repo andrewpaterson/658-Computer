@@ -9,8 +9,8 @@ import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 
@@ -49,9 +49,9 @@ public class AndGateData
   }
 
   @Override
-  public AndGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  public AndGateView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
-    return new AndGateView(subcircuitView,
+    return new AndGateView(subcircuitEditor.getSubcircuitView(),
                            circuit,
                            position,
                            rotation,

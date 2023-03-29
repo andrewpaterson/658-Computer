@@ -9,9 +9,9 @@ import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 
 import java.util.List;
@@ -49,9 +49,9 @@ public class XnorGateData
   }
 
   @Override
-  public XnorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  public XnorGateView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
-    return new XnorGateView(subcircuitView,
+    return new XnorGateView(subcircuitEditor.getSubcircuitView(),
                             circuit,
                             position,
                             rotation,

@@ -4,9 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.DecorativeData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.data.decorative.label.LabelProperties;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 
 public class LabelData
@@ -38,9 +38,9 @@ public class LabelData
   }
 
   @Override
-  protected LabelView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  protected LabelView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
-    return new LabelView(subcircuitView,
+    return new LabelView(subcircuitEditor.getSubcircuitView(),
                          circuit,
                          position,
                          rotation,

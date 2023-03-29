@@ -9,9 +9,9 @@ import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
 
 import java.util.List;
@@ -49,9 +49,9 @@ public class XorGateData
   }
 
   @Override
-  public XorGateView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  public XorGateView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
-    return new XorGateView(subcircuitView,
+    return new XorGateView(subcircuitEditor.getSubcircuitView(),
                            circuit,
                            position,
                            rotation,

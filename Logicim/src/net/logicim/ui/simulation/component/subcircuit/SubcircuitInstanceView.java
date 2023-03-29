@@ -6,15 +6,18 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
-import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.TracePort;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
-import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.rectangle.Rectangle;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -32,7 +35,7 @@ import static java.awt.Font.SANS_SERIF;
 import static net.logicim.data.circuit.SubcircuitPinAlignment.*;
 
 public class SubcircuitInstanceView
-    extends StaticView<SubcircuitInstanceProperties>
+    extends PassiveView<SubcircuitInstance, SubcircuitInstanceProperties>
 {
   protected boolean enabled;
   protected boolean subcircuitComponentsCreated;
@@ -61,14 +64,14 @@ public class SubcircuitInstanceView
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
     this.subcircuitView.addSubcircuitInstanceView(this);
+
+    kindaCreateGraphicsAndOtherStuff();
     finaliseView(circuit);
+    createSubcircuitComponents(circuit);
   }
 
-  @Override
-  protected void finaliseView(Circuit circuit)
+  private void kindaCreateGraphicsAndOtherStuff()
   {
-    finalised = true;
-
     Rectangle rectangle = createTypeGraphics();
 
     PinPropertyHelper helper = new PinPropertyHelper(instanceSubcircuitView.findAllPins());
@@ -93,9 +96,6 @@ public class SubcircuitInstanceView
                                        new Int2D(rectangle.getBottomRight().getY(), rectangle.getBottomRight().getX()),
                                        true,
                                        true);
-
-    updateBoundingBoxes();
-    createSubcircuitComponents(circuit);
   }
 
   private void leftRightPinPlacement(Rectangle rectangle, PinViewLists leftViewLists, int x, HorizontalAlignment alignment)
@@ -380,32 +380,46 @@ public class SubcircuitInstanceView
     validatePorts();
   }
 
-  private void validatePorts()
+  protected void validatePorts()
   {
   }
 
-  private void validateComponent()
-  {
-  }
-
-  @Override
-  public void clampProperties(SubcircuitInstanceProperties newProperties)
+  protected void validateComponent()
   {
   }
 
   @Override
-  public ReflectiveData save(boolean selected)
+  public SubcircuitInstanceData save(boolean selected)
   {
     return new SubcircuitInstanceData(getTypeName(),
                                       position,
                                       rotation,
                                       properties.name,
-                                      boundingBox.save(),
-                                      selectionBox.save(),
                                       selected,
+                                      new ArrayList<>(),
                                       properties.comment,
                                       properties.width,
                                       properties.height);
+  }
+
+  @Override
+  protected SubcircuitInstance createPassive(Circuit circuit)
+  {
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuit, properties.name);
+    List<PinView> pins = instanceSubcircuitView.findAllPins();
+    for (PinView pinView : pins)
+    {
+      PortView pinPortView = pinView.getPortView();
+      List<? extends Port> pinPorts = pinPortView.getPorts();
+      List<TracePort> tracePorts = new ArrayList<>();
+      for (Port pinPort : pinPorts)
+      {
+        TracePort tracePort = new TracePort(pinView.getName() + " " + pinPort.getName(), subcircuitInstance);
+        tracePorts.add(tracePort);
+      }
+      subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
+    }
+    return subcircuitInstance;
   }
 
   @Override
@@ -450,6 +464,11 @@ public class SubcircuitInstanceView
   }
 
   @Override
+  public void clampProperties(SubcircuitInstanceProperties newProperties)
+  {
+  }
+
+  @Override
   public List<ConnectionView> getConnections()
   {
     List<ConnectionView> connections = new ArrayList<>();
@@ -474,20 +493,18 @@ public class SubcircuitInstanceView
   {
     for (SubcircuitPinView pinView : pinViews)
     {
-      pinView.disconnect();
+      pinView.disconnect(simulation);
     }
   }
 
   @Override
-  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
+  protected void createPortViews()
   {
-    List<ConnectionView> connections = new ArrayList<>();
     for (SubcircuitPinView pinView : pinViews)
     {
-      ConnectionView connection = pinView.getOrAddConnection(subcircuitView);
-      connections.add(connection);
+      List<TracePort> tracePorts = passive.getTracePorts(pinView.getPinName());
+      pinView.createPortView(tracePorts);
     }
-    return connections;
   }
 
   @Override

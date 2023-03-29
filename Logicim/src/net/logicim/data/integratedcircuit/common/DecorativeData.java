@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
@@ -22,7 +21,7 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
                          Simulation simulation,
                          Circuit circuit)
   {
-    T componentView = create(subcircuitEditor.getSubcircuitView(),
+    T componentView = create(subcircuitEditor,
                              circuit,
                              traceLoader,
                              fullLoad);
@@ -40,6 +39,6 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
     super(name, position, rotation, null, null, selected);
   }
 
-  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
+  protected abstract T create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

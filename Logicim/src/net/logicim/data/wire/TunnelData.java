@@ -6,7 +6,6 @@ import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.ui.common.wire.TunnelView;
@@ -66,7 +65,7 @@ public class TunnelData
   }
 
   @Override
-  protected TunnelView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  protected TunnelView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
     throw new SimulatorException("Create should not be called from TunnelData.");
   }

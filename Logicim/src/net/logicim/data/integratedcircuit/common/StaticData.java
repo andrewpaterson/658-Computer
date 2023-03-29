@@ -5,7 +5,6 @@ import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -16,8 +15,8 @@ public abstract class StaticData<T extends StaticView<?>>
   protected String name;
   protected Int2D position;
   protected Rotation rotation;
-  protected BoundingBoxData boundingBox;
-  protected BoundingBoxData selectionBox;
+  protected BoundingBoxData boundingBox;  //Huh?
+  protected BoundingBoxData selectionBox;  //Huh?
   protected boolean selected;
 
   public StaticData()
@@ -45,6 +44,6 @@ public abstract class StaticData<T extends StaticView<?>>
                                   Simulation simulation,
                                   Circuit circuit);
 
-  protected abstract T create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
+  protected abstract T create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }
 

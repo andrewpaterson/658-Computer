@@ -9,8 +9,8 @@ import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 
@@ -52,9 +52,9 @@ public class ClockData
   }
 
   @Override
-  public ClockView create(SubcircuitView subcircuitView, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  public ClockView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
   {
-    return new ClockView(subcircuitView,
+    return new ClockView(subcircuitEditor.getSubcircuitView(),
                          circuit,
                          position,
                          rotation,

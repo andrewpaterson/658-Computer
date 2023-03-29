@@ -433,5 +433,10 @@ public class PinView
 
     return properties.name.compareTo(otherProperties.name);
   }
+
+  public PortView getPortView()
+  {
+    return port;
+  }
 }
 

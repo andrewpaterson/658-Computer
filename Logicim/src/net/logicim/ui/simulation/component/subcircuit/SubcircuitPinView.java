@@ -34,11 +34,16 @@ public class SubcircuitPinView
   {
     this.pinView = pinView;
     this.subcircuitInstanceView = subcircuitInstanceView;
-    SubcircuitView subcircuitView = subcircuitInstanceView.getSubcircuitView();
     this.connection = null;
     this.positionRelativeToIC = positionRelativeToIC.clone();
     this.positionCache = new PointGridCache(positionRelativeToIC);
-    this.textView = new TextView(subcircuitInstanceView, positionRelativeToIC, pinView.getName(), fontName, size, false, horizontalAlignment);
+    this.textView = new TextView(subcircuitInstanceView,
+                                 positionRelativeToIC,
+                                 pinView.getName(),
+                                 fontName,
+                                 size,
+                                 false,
+                                 horizontalAlignment);
   }
 
   public ConnectionView getConnection()
@@ -71,7 +76,9 @@ public class SubcircuitPinView
   {
     if (connection == null)
     {
-      ConnectionView connection = subcircuitView.getOrAddConnection(positionRelativeToIC, subcircuitInstanceView);
+      updateGridCache();
+
+      ConnectionView connection = subcircuitView.getOrAddConnection((Int2D) positionCache.getTransformedPosition(), subcircuitInstanceView);
       this.connection = connection;
       return connection;
     }
@@ -79,6 +86,11 @@ public class SubcircuitPinView
     {
       throw new SimulatorException("Connection is already set.");
     }
+  }
+
+  public void disconnect()
+  {
+    connection = null;
   }
 }
 

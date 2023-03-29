@@ -79,73 +79,65 @@ public class SubcircuitInstanceView
     PinViewLists topViewLists = createPinViewLists(pinsLocations, TOP);
     PinViewLists bottomViewLists = createPinViewLists(pinsLocations, BOTTOM);
 
-    rectangle = calculateRequiredRectangle(rectangle, leftViewLists, rightViewLists, topViewLists, bottomViewLists);
+    rectangle = calculateRequiredRectangle(rectangle,
+                                           leftViewLists,
+                                           rightViewLists,
+                                           topViewLists,
+                                           bottomViewLists);
 
-    leftViewShit(rectangle, leftViewLists);
-    rightViewShit(rectangle, rightViewLists);
+    leftRightPinPlacement(rectangle, leftViewLists, (int) rectangle.getBottomRight().getX(), HorizontalAlignment.LEFT);
+    leftRightPinPlacement(rectangle, rightViewLists, (int) rectangle.getTopLeft().getX(), HorizontalAlignment.RIGHT);
 
-    this.rectangle = new RectangleView(this, new Int2D(rectangle.getTopLeft().getY(), rectangle.getTopLeft().getX()), new Int2D(rectangle.getBottomRight().getY(), rectangle.getBottomRight().getX()), true, true);
+    this.rectangle = new RectangleView(this,
+                                       new Int2D(rectangle.getTopLeft().getY(), rectangle.getTopLeft().getX()),
+                                       new Int2D(rectangle.getBottomRight().getY(), rectangle.getBottomRight().getX()),
+                                       true,
+                                       true);
 
     updateBoundingBoxes();
     createSubcircuitComponents(circuit);
   }
 
-  private void leftViewShit(Rectangle rectangle, PinViewLists leftViewLists)
+  private void leftRightPinPlacement(Rectangle rectangle, PinViewLists leftViewLists, int x, HorizontalAlignment alignment)
   {
     int yNegative = (int) (rectangle.getTopLeft().getY() + 1);
-    int x = (int) rectangle.getBottomRight().getX();
     for (PinView pinView : leftViewLists.negativePinViews)
     {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yNegative, x), SANS_SERIF, 10, HorizontalAlignment.LEFT));
+      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yNegative, x), SANS_SERIF, 10, alignment));
       yNegative++;
     }
 
     int yPositive = (int) (rectangle.getBottomRight().getY() - 1);
     for (PinView pinView : leftViewLists.positivePinViews)
     {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yPositive, x), SANS_SERIF, 10, HorizontalAlignment.LEFT));
+      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yPositive, x), SANS_SERIF, 10, alignment));
       yPositive--;
     }
 
     int yCenter = -(leftViewLists.centerPinViews.size() / 2) + 1;
+    int yCenterEnd = yCenter + leftViewLists.centerPinViews.size() - 1;
+    if (yCenterEnd >= yPositive)
+    {
+      yCenter--;
+    }
+
     for (PinView pinView : leftViewLists.centerPinViews)
     {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yCenter, x), SANS_SERIF, 10, HorizontalAlignment.LEFT));
+      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yCenter, x), SANS_SERIF, 10, alignment));
       yCenter++;
     }
   }
 
-  private void rightViewShit(Rectangle rectangle, PinViewLists rightViewLists)
+  private Rectangle calculateRequiredRectangle(Rectangle rectangle,
+                                               PinViewLists leftViewLists,
+                                               PinViewLists rightViewLists,
+                                               PinViewLists topViewLists,
+                                               PinViewLists bottomViewLists)
   {
-    int yNegative = (int) (rectangle.getTopLeft().getY() + 1);
-    int x = (int) rectangle.getTopLeft().getX();
-    for (PinView pinView : rightViewLists.negativePinViews)
-    {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yNegative, x), SANS_SERIF, 10, HorizontalAlignment.RIGHT));
-      yNegative++;
-    }
-
-    int yPositive = (int) (rectangle.getBottomRight().getY() - 1);
-    for (PinView pinView : rightViewLists.positivePinViews)
-    {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yPositive, x), SANS_SERIF, 10, HorizontalAlignment.RIGHT));
-      yPositive--;
-    }
-
-    int yCenter = -(rightViewLists.centerPinViews.size() / 2) + 1;
-    for (PinView pinView : rightViewLists.centerPinViews)
-    {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yCenter, x), SANS_SERIF, 10, HorizontalAlignment.RIGHT));
-      yCenter++;
-    }
-  }
-
-  private Rectangle calculateRequiredRectangle(Rectangle rectangle, PinViewLists leftViewLists, PinViewLists rightViewLists, PinViewLists topViewLists, PinViewLists bottomViewLists)
-  {
-    int topX = (int) Math.floor(rectangle.getTopLeft().getX() - (leftViewLists.widestText));
-    int topY = (int) Math.floor(rectangle.getTopLeft().getY() - (topViewLists.widestText));
-    int bottomX = (int) Math.ceil(rectangle.getBottomRight().getX() + (rightViewLists.widestText));
-    int bottomY = (int) Math.ceil(rectangle.getBottomRight().getY() + (bottomViewLists.widestText));
+    int topX = (int) Math.floor(rectangle.getTopLeft().getX() - (topViewLists.widestText));
+    int topY = (int) Math.floor(rectangle.getTopLeft().getY() - (leftViewLists.widestText));
+    int bottomX = (int) Math.ceil(rectangle.getBottomRight().getX() + (bottomViewLists.widestText));
+    int bottomY = (int) Math.ceil(rectangle.getBottomRight().getY() + (rightViewLists.widestText));
 
     boolean updateMaxHeight = false;
     int maxHeight = bottomY - topY;
@@ -211,7 +203,7 @@ public class SubcircuitInstanceView
       }
     }
 
-    rectangle = new Rectangle(new Int2D(topX, topY), new Int2D(bottomX, bottomY));
+    rectangle = new Rectangle(new Int2D(topX, topY), new Int2D(bottomX - 1, bottomY - 1));
     return rectangle;
   }
 
@@ -368,7 +360,9 @@ public class SubcircuitInstanceView
     bottomRight.x = (float) Math.ceil(bottomRight.x + 0.5f);
     bottomRight.y = (float) Math.ceil(bottomRight.y + 0.5f);
 
-    return new Rectangle(new Int2D(topLeft), new Int2D(bottomRight));
+    Rectangle rectangle = new Rectangle(new Int2D(topLeft), new Int2D(bottomRight));
+    rectangle.rotateRight();
+    return rectangle;
   }
 
   private void createSubcircuitComponents(Circuit circuit)
@@ -478,6 +472,10 @@ public class SubcircuitInstanceView
   @Override
   public void disconnect(Simulation simulation)
   {
+    for (SubcircuitPinView pinView : pinViews)
+    {
+      pinView.disconnect();
+    }
   }
 
   @Override

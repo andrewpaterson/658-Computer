@@ -1,5 +1,7 @@
 package net.logicim.common.type;
 
+import net.logicim.common.SimulatorException;
+
 public class Float2D
     extends Tuple2
 {
@@ -203,6 +205,52 @@ public class Float2D
   {
     return this.x == x &&
            this.y == y;
+  }
+
+  @Override
+  public Tuple1 getXTuple()
+  {
+    return new Float1D(x);
+  }
+
+  @Override
+  public Tuple1 getYTuple()
+  {
+    return new Float1D(y);
+  }
+
+  @Override
+  public void setX(Tuple1 x)
+  {
+    if (x instanceof Float1D)
+    {
+      this.x = ((Float1D) x).f;
+    }
+    else if (x instanceof Int1D)
+    {
+      this.x = ((Int1D) x).i;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot call setX on unknown tuple.");
+    }
+  }
+
+  @Override
+  public void setY(Tuple1 y)
+  {
+    if (y instanceof Float1D)
+    {
+      this.y = ((Float1D) y).f;
+    }
+    else if (y instanceof Int1D)
+    {
+      this.y = ((Int1D) y).i;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot call setY on unknown tuple.");
+    }
   }
 
   public static Float2D safeClone(Float2D d)

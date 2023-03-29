@@ -48,5 +48,13 @@ public abstract class Tuple2
   public abstract boolean isZero();
 
   public abstract boolean equals(int x, int y);
+
+  public abstract Tuple1 getXTuple();
+
+  public abstract Tuple1 getYTuple();
+
+  public abstract void setX(Tuple1 x);
+
+  public abstract void setY(Tuple1 y);
 }
 

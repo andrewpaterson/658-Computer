@@ -1,5 +1,6 @@
 package net.logicim.ui.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
@@ -62,7 +63,22 @@ public enum Rotation
     }
   }
 
-  @SuppressWarnings("SuspiciousNameCombination")
+  public void transform(Tuple2 p)
+  {
+    if (p instanceof Int2D)
+    {
+      transform((Int2D)p);
+    }
+    else if (p instanceof Float2D)
+    {
+      transform((Float2D)p);
+    }
+    else
+    {
+      throw new SimulatorException();
+    }
+  }
+
   public void transform(Int2D p)
   {
     switch (this)
@@ -79,7 +95,6 @@ public enum Rotation
     }
   }
 
-  @SuppressWarnings("SuspiciousNameCombination")
   public void transform(Float2D p)
   {
     switch (this)

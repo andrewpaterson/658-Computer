@@ -396,7 +396,7 @@ public class SubcircuitInstanceView
                                       rotation,
                                       properties.name,
                                       selected,
-                                      new ArrayList<>(),
+                                      savePorts(),
                                       properties.comment,
                                       properties.width,
                                       properties.height);

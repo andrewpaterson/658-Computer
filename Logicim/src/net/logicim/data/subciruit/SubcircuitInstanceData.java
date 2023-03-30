@@ -9,7 +9,7 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SubcircuitInstanceData
     extends PassiveData<SubcircuitInstanceView>
@@ -28,7 +28,7 @@ public class SubcircuitInstanceData
                                 Rotation rotation,
                                 String name,
                                 boolean selected,
-                                ArrayList<MultiPortData> ports,
+                                List<MultiPortData> ports,
                                 String comment,
                                 int width,
                                 int height)

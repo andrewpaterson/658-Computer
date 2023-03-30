@@ -10,9 +10,7 @@ import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Timeline;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
@@ -186,7 +184,7 @@ public class CircuitEditor
         data.add(subcircuitData);
       }
 
-      TimelineData timelineData = getTimeline().save();
+      TimelineData timelineData = simulation.getSimulation().getTimeline().save();
       return new CircuitData(timelineData, data);
     }
     else
@@ -226,7 +224,7 @@ public class CircuitEditor
   public void load(CircuitData circuitData)
   {
     currentSubcircuitEditor = null;
-    getTimeline().load(circuitData.timeline);
+    simulation.getSimulation().getTimeline().load(circuitData.timeline);
 
     for (SubcircuitData subcircuitData : circuitData.subcircuit)
     {
@@ -245,16 +243,6 @@ public class CircuitEditor
   public List<View> pasteClipboardViews(List<TraceData> traces, List<StaticData<?>> components)
   {
     return currentSubcircuitEditor.pasteClipboardViews(traces, components, simulation);
-  }
-
-  public Timeline getTimeline()
-  {
-    return simulation.getSimulation().getTimeline();
-  }
-
-  public Simulation getSimulation()
-  {
-    return simulation.getSimulation();
   }
 
   public void placeComponentView(StaticView<?> staticView)

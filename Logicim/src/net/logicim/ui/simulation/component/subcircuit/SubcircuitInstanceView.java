@@ -63,7 +63,7 @@ public class SubcircuitInstanceView
     this.enabled = false;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
-    this.subcircuitView.addSubcircuitInstanceView(this);
+    this.subcircuitView.addPassiveView(this);
 
     kindaCreateGraphicsAndOtherStuff();
     finaliseView(circuit);

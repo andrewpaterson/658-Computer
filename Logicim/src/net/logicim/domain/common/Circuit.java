@@ -39,9 +39,9 @@ public class Circuit
     integratedCircuits.add(integratedCircuit);
   }
 
-  public void add(PowerSource powerSource)
+  public void add(Passive passive)
   {
-    passives.add(powerSource);
+    passives.add(passive);
   }
 
   public void remove(IntegratedCircuit<?, ?> integratedCircuit)

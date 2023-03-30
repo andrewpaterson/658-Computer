@@ -21,6 +21,7 @@ public abstract class Passive
     this.circuit = circuit;
     this.name = name;
     this.enabled = true;
+    circuit.add(this);
   }
 
   @Override

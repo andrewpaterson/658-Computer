@@ -4,7 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
-import net.logicim.domain.Simulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.common.Rotation;
 import net.logicim.data.passive.wire.TunnelProperties;
@@ -41,10 +41,13 @@ public class TunnelData
   }
 
   @Override
-  public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor, TraceLoader traceLoader, boolean fullLoad, Simulation simulation, Circuit circuit)
+  public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor,
+                                  TraceLoader traceLoader,
+                                  boolean fullLoad,
+                                  CircuitSimulation circuitSimulation)
   {
     TunnelView tunnelView = new TunnelView(subcircuitEditor.getSubcircuitView(),
-                                           circuit,
+                                           circuitSimulation.getCircuit(),
                                            position,
                                            rotation,
                                            boundingBox.create(),
@@ -54,13 +57,13 @@ public class TunnelData
     {
       tunnelView.createConnections(subcircuitEditor.getSubcircuitView());
       WireDataHelper.wireConnect(subcircuitEditor,
-                                 simulation,
+                                 circuitSimulation.getSimulation(),
                                  traceLoader,
                                  tunnelView,
                                  traceIds,
                                  selected);
     }
-    tunnelView.enable(simulation);
+    tunnelView.enable(circuitSimulation.getSimulation());
     return tunnelView;
   }
 

@@ -23,11 +23,11 @@ public class WirePull
   protected Int2D secondPosition;
   protected Int2D secondEnd;
 
-  private CircuitSimulation simulation;
+  private CircuitSimulation circuitSimulation;
 
-  public WirePull(CircuitSimulation simulation)
+  public WirePull(CircuitSimulation circuitSimulation)
   {
-    this.simulation = simulation;
+    this.circuitSimulation = circuitSimulation;
     resetStart();
   }
 
@@ -64,7 +64,7 @@ public class WirePull
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      editAction.getCircuitEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine), simulation);
+      editAction.getCircuitEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine), circuitSimulation);
 
       editAction.pushUndo();
     }

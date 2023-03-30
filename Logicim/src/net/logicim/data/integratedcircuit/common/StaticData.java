@@ -3,7 +3,7 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.Simulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
@@ -41,8 +41,7 @@ public abstract class StaticData<T extends StaticView<?>>
   public abstract T createAndLoad(SubcircuitEditor subcircuitEditor,
                                   TraceLoader traceLoader,
                                   boolean fullLoad,
-                                  Simulation simulation,
-                                  Circuit circuit);
+                                  CircuitSimulation circuitSimulation);
 
   protected abstract T create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
 }

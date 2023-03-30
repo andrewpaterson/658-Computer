@@ -13,12 +13,6 @@ public class CircuitSimulation
     this.simulation = circuit.resetSimulation();
   }
 
-  public CircuitSimulation(Circuit circuit, Simulation simulation)
-  {
-    this.circuit = circuit;
-    this.simulation = simulation;
-  }
-
   public Circuit getCircuit()
   {
     return circuit;

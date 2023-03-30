@@ -6,6 +6,7 @@ import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.LogicPort;
@@ -45,16 +46,18 @@ public abstract class ComponentData<T extends ComponentView<?>>
   public T createAndLoad(SubcircuitEditor subcircuitEditor,
                          TraceLoader traceLoader,
                          boolean fullLoad,
-                         Simulation simulation,
-                         Circuit circuit)
+                         CircuitSimulation circuitSimulation)
   {
     T componentView = create(subcircuitEditor,
-                             circuit,
+                             circuitSimulation.getCircuit(),
                              traceLoader,
                              fullLoad);
     if (fullLoad)
     {
-      connectAndLoad(subcircuitEditor.getSubcircuitView(), simulation, traceLoader, componentView);
+      connectAndLoad(subcircuitEditor.getSubcircuitView(),
+                     circuitSimulation.getSimulation(),
+                     traceLoader,
+                     componentView);
     }
 
     if (selected)

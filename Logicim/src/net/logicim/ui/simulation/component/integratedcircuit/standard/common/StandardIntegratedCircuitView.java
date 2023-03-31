@@ -51,17 +51,6 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
     }
   }
 
-  protected List<Port> getPortsInRange(String prefix, int portNumber, int inputWidth)
-  {
-    ArrayList<Port> ports1 = new ArrayList<>();
-    for (int i = portNumber * inputWidth; i < (portNumber + 1) * inputWidth; i++)
-    {
-      Port port = integratedCircuit.getPort(prefix + i);
-      ports1.add(port);
-    }
-    return ports1;
-  }
-
   @Override
   protected boolean mustIncludeExplicitPowerPorts(FamilyVoltageConfiguration familyVoltageConfiguration)
   {

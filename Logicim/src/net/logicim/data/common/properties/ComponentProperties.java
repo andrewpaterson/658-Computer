@@ -23,13 +23,16 @@ public abstract class ComponentProperties
   @Override
   public boolean equals(Object o)
   {
-    throw new SimulatorException(getClass().getSimpleName() + ".equals not implemented.");
-  }
-
-  @Override
-  public int hashCode()
-  {
-    return Objects.hash(name);
+    if (this == o)
+    {
+      return true;
+    }
+    if (!(o instanceof ComponentProperties))
+    {
+      return false;
+    }
+    ComponentProperties that = (ComponentProperties) o;
+    return Objects.equals(name, that.name);
   }
 
   public abstract ComponentProperties duplicate();

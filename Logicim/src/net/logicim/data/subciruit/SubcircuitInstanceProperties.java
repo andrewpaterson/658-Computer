@@ -46,16 +46,19 @@ public class SubcircuitInstanceProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof SubcircuitInstanceProperties))
     {
       return false;
     }
-    SubcircuitInstanceProperties other = (SubcircuitInstanceProperties) o;
-    return width == other.width &&
-           height == other.height &&
-           Objects.equals(subcircuitTypeName, other.subcircuitTypeName) &&
-           Objects.equals(comment, other.comment) &&
-           Objects.equals(name, other.name);
+    if (!super.equals(o))
+    {
+      return false;
+    }
+    SubcircuitInstanceProperties that = (SubcircuitInstanceProperties) o;
+    return width == that.width &&
+           height == that.height &&
+           Objects.equals(subcircuitTypeName, that.subcircuitTypeName) &&
+           Objects.equals(comment, that.comment);
   }
 }
 

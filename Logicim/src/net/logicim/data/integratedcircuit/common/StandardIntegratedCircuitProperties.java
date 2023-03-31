@@ -1,7 +1,8 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.data.family.Family;
-import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
+
+import java.util.Objects;
 
 public abstract class StandardIntegratedCircuitProperties
     extends IntegratedCircuitProperties
@@ -19,6 +20,25 @@ public abstract class StandardIntegratedCircuitProperties
   {
     super(name, family);
     this.explicitPowerPorts = explicitPowerPorts;
+  }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+    if (!(o instanceof StandardIntegratedCircuitProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
+    {
+      return false;
+    }
+    StandardIntegratedCircuitProperties that = (StandardIntegratedCircuitProperties) o;
+    return explicitPowerPorts == that.explicitPowerPorts;
   }
 }
 

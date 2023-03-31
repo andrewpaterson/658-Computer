@@ -60,10 +60,10 @@ public class ClockView
   {
     super.createPortViews();
 
-    new PortView(this, integratedCircuit.getPort("Output"), new Int2D(0, -1));
+    new PortView(this, getPort("Output"), new Int2D(0, -1));
     if (properties.inverseOut)
     {
-      new PortView(this, integratedCircuit.getPort("Output2"), new Int2D(2, -1));
+      new PortView(this, getPort("Output2"), new Int2D(2, -1));
     }
   }
 

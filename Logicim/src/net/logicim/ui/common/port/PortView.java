@@ -185,9 +185,16 @@ public class PortView
 
   protected static List<Port> singlePort(Port port)
   {
-    ArrayList<Port> ports = new ArrayList<>(1);
-    ports.add(port);
-    return ports;
+    if (port != null)
+    {
+      ArrayList<Port> ports = new ArrayList<>(1);
+      ports.add(port);
+      return ports;
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public void disconnect(Simulation simulation)

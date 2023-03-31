@@ -33,13 +33,16 @@ public class PositivePowerProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof PositivePowerProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
     PositivePowerProperties that = (PositivePowerProperties) o;
-    return Float.compare(that.voltage_V, voltage_V) == 0 &&
-           Objects.equals(name, that.name);
+    return Float.compare(that.voltage_V, voltage_V) == 0;
   }
 }
 

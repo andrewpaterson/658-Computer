@@ -4,12 +4,13 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
+import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
@@ -146,6 +147,36 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   public IC getComponent()
   {
     return integratedCircuit;
+  }
+
+  protected Port getPort(String portName)
+  {
+    if (integratedCircuit != null)
+    {
+      return integratedCircuit.getPort(portName);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  protected List<Port> getPortsInRange(String prefix, int portNumber, int inputWidth)
+  {
+    if (integratedCircuit != null)
+    {
+      ArrayList<Port> ports = new ArrayList<>();
+      for (int i = portNumber * inputWidth; i < (portNumber + 1) * inputWidth; i++)
+      {
+        Port port = integratedCircuit.getPort(prefix + i);
+        ports.add(port);
+      }
+      return ports;
+    }
+    else
+    {
+      return null;
+    }
   }
 
   protected abstract IC createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration);

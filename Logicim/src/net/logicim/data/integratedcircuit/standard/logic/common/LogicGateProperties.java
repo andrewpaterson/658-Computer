@@ -45,14 +45,17 @@ public class LogicGateProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof LogicGateProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
     LogicGateProperties that = (LogicGateProperties) o;
     return inputCount == that.inputCount &&
-           inputWidth == that.inputWidth &&
-           Objects.equals(name, that.name);
+           inputWidth == that.inputWidth;
   }
 }
 

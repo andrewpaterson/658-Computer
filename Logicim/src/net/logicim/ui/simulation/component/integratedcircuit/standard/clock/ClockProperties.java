@@ -45,14 +45,17 @@ public class ClockProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof ClockProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
     ClockProperties that = (ClockProperties) o;
     return Float.compare(that.frequency_Hz, frequency_Hz) == 0 &&
-           inverseOut == that.inverseOut &&
-           Objects.equals(name, that.name);
+           inverseOut == that.inverseOut;
   }
 }
 

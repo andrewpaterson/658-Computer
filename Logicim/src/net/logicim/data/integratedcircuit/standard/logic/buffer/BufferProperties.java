@@ -42,14 +42,17 @@ public class BufferProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof BufferProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
     BufferProperties that = (BufferProperties) o;
     return inputCount == that.inputCount &&
-           inputWidth == that.inputWidth &&
-           Objects.equals(name, that.name);
+           inputWidth == that.inputWidth;
   }
 }
 

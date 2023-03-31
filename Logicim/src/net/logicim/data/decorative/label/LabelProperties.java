@@ -47,7 +47,11 @@ public class LabelProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof LabelProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
@@ -55,8 +59,7 @@ public class LabelProperties
     return bold == that.bold &&
            fill == that.fill &&
            border == that.border &&
-           alignment == that.alignment &&
-           Objects.equals(name, that.name);
+           alignment == that.alignment;
   }
 }
 

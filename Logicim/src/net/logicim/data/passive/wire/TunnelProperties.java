@@ -2,8 +2,6 @@ package net.logicim.data.passive.wire;
 
 import net.logicim.data.common.properties.ComponentProperties;
 
-import java.util.Objects;
-
 public class TunnelProperties
     extends ComponentProperties
 {
@@ -32,13 +30,16 @@ public class TunnelProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof TunnelProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
     TunnelProperties that = (TunnelProperties) o;
-    return doubleSided == that.doubleSided &&
-           Objects.equals(name, that.name);
+    return doubleSided == that.doubleSided;
   }
 }
 

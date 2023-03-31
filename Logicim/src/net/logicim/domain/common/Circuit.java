@@ -3,7 +3,6 @@ package net.logicim.domain.common;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.passive.common.Passive;
-import net.logicim.domain.passive.power.PowerSource;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,6 +6,7 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
@@ -60,7 +61,7 @@ public class OscilloscopeView
   {
     for (int portNumber = 0; portNumber < properties.inputCount; portNumber++)
     {
-      new PortView(this, integratedCircuit.getPort("Input " + portNumber), new Int2D(0, portNumber * properties.divHeightInGrids));
+      new PortView(this, getPort("Input " + portNumber), new Int2D(0, portNumber * properties.divHeightInGrids));
     }
   }
 

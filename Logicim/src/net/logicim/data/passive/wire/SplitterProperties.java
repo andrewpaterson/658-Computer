@@ -4,7 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.common.properties.ComponentProperties;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class SplitterProperties
     extends ComponentProperties
@@ -100,7 +99,11 @@ public class SplitterProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof SplitterProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
@@ -110,8 +113,7 @@ public class SplitterProperties
            gridSpacing == that.gridSpacing &&
            endOffset == that.endOffset &&
            appearance == that.appearance &&
-           Arrays.equals(splitIndices, that.splitIndices) &&
-           Objects.equals(name, that.name);
+           Arrays.equals(splitIndices, that.splitIndices);
   }
 
   @Override

@@ -75,7 +75,11 @@ public class PinProperties
     {
       return true;
     }
-    if (o == null || getClass() != o.getClass())
+    if (!(o instanceof PinProperties))
+    {
+      return false;
+    }
+    if (!super.equals(o))
     {
       return false;
     }
@@ -90,8 +94,7 @@ public class PinProperties
            alignment == that.alignment &&
            anchour == that.anchour &&
            instanceDisplay == that.instanceDisplay &&
-           radix == that.radix &&
-           Objects.equals(name, that.name);
+           radix == that.radix;
   }
 }
 

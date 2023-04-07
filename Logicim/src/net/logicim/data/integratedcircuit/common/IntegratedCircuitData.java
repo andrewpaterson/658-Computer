@@ -4,12 +4,11 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.common.LogicPortData;
-import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
@@ -43,7 +42,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                String name,
                                Family family,
                                List<IntegratedCircuitEventData<?>> events,
-                               List<MultiPortData> ports,
+                               List<SimulationMultiPortData> ports,
                                boolean selected,
                                STATE state)
   {
@@ -54,7 +53,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void loadPort(Simulation simulation, PortData portData, Port port)
+  protected void loadPort(CircuitSimulation simulation, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -79,7 +78,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     }
   }
 
-  protected void loadEvents(Simulation simulation, ICV integratedCircuitView)
+  protected void loadEvents(CircuitSimulation simulation, ICV integratedCircuitView)
   {
     for (IntegratedCircuitEventData<?> event : events)
     {
@@ -88,7 +87,10 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(SubcircuitView subcircuitView, Simulation simulation, TraceLoader traceLoader, ICV integratedCircuitView)
+  protected void connectAndLoad(SubcircuitView subcircuitView,
+                                CircuitSimulation simulation,
+                                TraceLoader traceLoader,
+                                ICV integratedCircuitView)
   {
     integratedCircuitView.createConnections(subcircuitView);
     integratedCircuitView.enable(simulation);
@@ -104,6 +106,9 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     integratedCircuit.setState(state);
   }
 
-  public abstract ICV create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
+  public abstract ICV create(SubcircuitEditor subcircuitEditor,
+                             CircuitSimulation simulation,
+                             TraceLoader traceLoader,
+                             boolean fullLoad);
 }
 

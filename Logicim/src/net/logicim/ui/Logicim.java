@@ -180,7 +180,7 @@ public class Logicim
           }
           else if ((hoverConnectionView != null))
           {
-            edit = new StartEditInPort(keyboardButtons, getCircuitEditor().getCircuitSimulation());
+            edit = new StartEditInPort(keyboardButtons, getCircuitSimulation());
           }
           else
           {
@@ -190,6 +190,11 @@ public class Logicim
         }
       }
     }
+  }
+
+  protected CircuitSimulation getCircuitSimulation()
+  {
+    return circuitEditor.getCircuitSimulation();
   }
 
   protected EditAction createEdit(StatefulEdit edit, Float2D start)
@@ -422,7 +427,7 @@ public class Logicim
               y = 0;
             }
 
-            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(x, y);
+            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(circuitEditor.getCircuitSimulation(), x, y);
           }
 
           graphics.setFont(font);

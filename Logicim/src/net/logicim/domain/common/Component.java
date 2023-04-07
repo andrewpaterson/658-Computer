@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
@@ -13,7 +14,7 @@ public interface Component
 
   boolean isEnabled();
 
-  void enable(Simulation simulation);
+  void enable(CircuitSimulation simulation);
 
   void disable();
 

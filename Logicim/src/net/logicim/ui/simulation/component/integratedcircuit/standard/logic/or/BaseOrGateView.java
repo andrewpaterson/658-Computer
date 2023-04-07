@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -27,12 +28,11 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   protected PolygonView polygonViewFillLeft;
 
   public BaseOrGateView(SubcircuitView subcircuitView,
-                        Circuit circuit,
                         Int2D position,
                         Rotation rotation,
                         LogicGateProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     createGraphics();
   }
 
@@ -74,9 +74,9 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
     if ((arcViewRight != null) && (arcViewLeft != null) && (arcViewBottom != null))
     {
       Stroke stroke = graphics.getStroke();
@@ -89,7 +89,7 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
       arcViewLeft.paint(graphics, viewport);
       arcViewRight.paint(graphics, viewport);
       arcViewBottom.paint(graphics, viewport);
-      paintPorts(graphics, viewport, time);
+      paintPorts(graphics, viewport, simulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

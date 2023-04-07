@@ -5,8 +5,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
-import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.port.Port;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
@@ -33,14 +32,14 @@ public class OscilloscopeView
   protected float outerWidth;
 
   public OscilloscopeView(SubcircuitView subcircuitView,
-                          Circuit circuit,
+                          CircuitSimulation simulation,
                           Int2D position,
                           Rotation rotation,
                           OscilloscopeProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     createGraphics();
-    finaliseView(circuit);
+    finaliseView(simulation);
   }
 
   protected void createGraphics()
@@ -61,14 +60,14 @@ public class OscilloscopeView
   {
     for (int portNumber = 0; portNumber < properties.inputCount; portNumber++)
     {
-      new PortView(this, getPort("Input " + portNumber), new Int2D(0, portNumber * properties.divHeightInGrids));
+      new PortView(this, "Input " + portNumber, new Int2D(0, portNumber * properties.divHeightInGrids));
     }
   }
 
   @Override
-  protected Oscilloscope createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Oscilloscope createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Oscilloscope(circuit,
+    return new Oscilloscope(simulation.getCircuit(),
                             properties.name,
                             new OscilloscopePins(properties.inputCount),
                             properties.samplingFrequency_Hz,
@@ -78,9 +77,9 @@ public class OscilloscopeView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     if ((frameView != null))
     {
@@ -158,7 +157,7 @@ public class OscilloscopeView
           }
         }
       }
-      paintPorts(graphics, viewport, time);
+      paintPorts(graphics, viewport, simulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

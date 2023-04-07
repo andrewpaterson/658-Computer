@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -28,13 +28,12 @@ public class ClockView
   protected RectangleView rectangle;
 
   public ClockView(SubcircuitView subcircuitView,
-                   Circuit circuit,
+                   CircuitSimulation circuit,
                    Int2D position,
                    Rotation rotation,
                    ClockProperties properties)
   {
     super(subcircuitView,
-          circuit,
           position,
           rotation,
           properties);
@@ -60,17 +59,17 @@ public class ClockView
   {
     super.createPortViews();
 
-    new PortView(this, getPort("Output"), new Int2D(0, -1));
+    new PortView(this, "Output", new Int2D(0, -1));
     if (properties.inverseOut)
     {
-      new PortView(this, getPort("Output2"), new Int2D(2, -1));
+      new PortView(this, "Output2", new Int2D(2, -1));
     }
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(circuit,
+    return new ClockOscillator(simulation.getCircuit(),
                                properties.name,
                                new ClockOscillatorPins(familyVoltageConfiguration,
                                                        properties.inverseOut),
@@ -78,9 +77,9 @@ public class ClockView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -89,18 +88,19 @@ public class ClockView
     {
       rectangle.paint(graphics, viewport);
 
-      paintClockWaveform(graphics, viewport, time);
+      paintClockWaveform(graphics, viewport, simulation);
     }
-    paintPorts(graphics, viewport, time);
+    paintPorts(graphics, viewport, simulation);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, long time)
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
     ClockOscillatorState state = integratedCircuit.getState();
     Color clockColor;
+    long time = simulation.getTime();
     if (state != null)
     {
       float voltage = integratedCircuit.getInternalVoltage(time);

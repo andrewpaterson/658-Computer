@@ -15,22 +15,23 @@ public class Splitter
   public List<TracePort> startPorts;
   public List<TracePort> endPorts;
 
-  public Splitter(Circuit circuit, String name, int bitWidth)
+  public Splitter(Circuit circuit, String name, List<String> startPortNames, List<String> endPortNames)
   {
     super(circuit, name);
 
-    startPorts = new ArrayList<>(bitWidth);
-    for (int i = 0; i < bitWidth; i++)
+    startPorts = new ArrayList<>(startPorts.size());
+    for (String portName : startPortNames)
     {
-      startPorts.add(new TracePort("Start " + i, this));
+      startPorts.add(new TracePort(portName, this));
     }
 
-    endPorts = new ArrayList<>(bitWidth);
-    for (int i = 0; i < bitWidth; i++)
+    endPorts = new ArrayList<>(endPortNames.size());
+    for (String portName : endPortNames)
     {
-      endPorts.add(new TracePort("End " + i, this));
+      endPorts.add(new TracePort(portName, this));
     }
   }
+
 
   @Override
   public void traceConnected(Simulation simulation, Port port)

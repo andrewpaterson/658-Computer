@@ -1,6 +1,5 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
@@ -20,7 +19,6 @@ public class NewSubcircuitDialog
 {
   protected Logicim editor;
   protected SubcircuitPropertiesPanel propertiesPanel;
-  protected Circuit circuit;
 
   public NewSubcircuitDialog(Frame owner,
                              Logicim editor)
@@ -28,7 +26,6 @@ public class NewSubcircuitDialog
     super(owner, "Create subcircuit", true, new Dimension(392, 260));
 
     this.editor = editor;
-    this.circuit = this.editor.getCircuitEditor().getCircuit();
   }
 
   public void build()

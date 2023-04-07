@@ -4,10 +4,9 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
-import net.logicim.ui.common.Rotation;
 import net.logicim.data.passive.wire.TunnelProperties;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
@@ -44,10 +43,10 @@ public class TunnelData
   public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor,
                                   TraceLoader traceLoader,
                                   boolean fullLoad,
-                                  CircuitSimulation circuitSimulation)
+                                  CircuitSimulation simulation)
   {
     TunnelView tunnelView = new TunnelView(subcircuitEditor.getSubcircuitView(),
-                                           circuitSimulation.getCircuit(),
+                                           simulation,
                                            position,
                                            rotation,
                                            boundingBox.create(),
@@ -57,18 +56,18 @@ public class TunnelData
     {
       tunnelView.createConnections(subcircuitEditor.getSubcircuitView());
       WireDataHelper.wireConnect(subcircuitEditor,
-                                 circuitSimulation.getSimulation(),
+                                 simulation,
                                  traceLoader,
                                  tunnelView,
                                  traceIds,
                                  selected);
     }
-    tunnelView.enable(circuitSimulation.getSimulation());
+    tunnelView.enable(simulation);
     return tunnelView;
   }
 
   @Override
-  protected TunnelView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  protected TunnelView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
   {
     throw new SimulatorException("Create should not be called from TunnelData.");
   }

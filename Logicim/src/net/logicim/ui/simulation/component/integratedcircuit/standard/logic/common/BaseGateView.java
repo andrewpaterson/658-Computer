@@ -15,12 +15,11 @@ public abstract class BaseGateView<IC extends IntegratedCircuit<?, ?>, PROPERTIE
     extends StandardIntegratedCircuitView<IC, PROPERTIES>
 {
   public BaseGateView(SubcircuitView subcircuitView,
-                      Circuit circuit,
                       Int2D position,
                       Rotation rotation,
                       PROPERTIES properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
   }
 
   protected static List<Integer> calculatePortOffsets(int inputCount)

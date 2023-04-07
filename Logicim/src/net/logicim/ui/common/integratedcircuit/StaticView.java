@@ -5,8 +5,8 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -37,13 +37,11 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   protected boolean finalised;
 
   public StaticView(SubcircuitView subcircuitView,
-                    Circuit circuit,
                     Int2D position,
                     Rotation rotation,
                     PROPERTIES properties)
   {
     this(subcircuitView,
-         circuit,
          position,
          rotation,
          new BoundingBox(),
@@ -52,7 +50,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   }
 
   public StaticView(SubcircuitView subcircuitView,
-                    Circuit circuit,
                     Int2D position,
                     Rotation rotation,
                     BoundingBox boundingBox,
@@ -205,7 +202,9 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     destDimension.set(width, height);
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    CircuitSimulation simulation)
   {
     if (!finalised)
     {
@@ -262,7 +261,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     return subcircuitView;
   }
 
-  protected abstract void finaliseView(Circuit circuit);
+  protected abstract void finaliseView(CircuitSimulation simulation);
 
   public abstract boolean isEnabled();
 

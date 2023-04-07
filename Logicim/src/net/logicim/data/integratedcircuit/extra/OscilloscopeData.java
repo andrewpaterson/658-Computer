@@ -4,9 +4,9 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
-import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.common.Rotation;
@@ -33,7 +33,7 @@ public class OscilloscopeData
                           String name,
                           Family family,
                           List<IntegratedCircuitEventData<?>> events,
-                          List<MultiPortData> ports,
+                          List<SimulationMultiPortData> ports,
                           boolean selected,
                           OscilloscopeState state,
                           int inputCount,
@@ -51,10 +51,10 @@ public class OscilloscopeData
   }
 
   @Override
-  public OscilloscopeView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  public OscilloscopeView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
   {
     return new OscilloscopeView(subcircuitEditor.getSubcircuitView(),
-                                circuit,
+                                simulation,
                                 position,
                                 rotation,
                                 new OscilloscopeProperties(name,

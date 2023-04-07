@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.subcircuit;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -69,14 +68,14 @@ public class SubcircuitPinView
     Tuple2 transformedPosition = positionCache.getTransformedPosition();
   }
 
-  public void disconnect(Simulation simulation)
+  public void disconnect()
   {
-    portView.disconnect(simulation);
+    portView.disconnect();
   }
 
-  protected PortView createPortView(List<TracePort> tracePorts)
+  protected PortView createPortView(List<String> tracePortNames)
   {
-    portView = new PortView(subcircuitInstanceView, tracePorts, positionRelativeToIC);
+    portView = new PortView(subcircuitInstanceView, tracePortNames, positionRelativeToIC);
     return portView;
   }
 
@@ -85,9 +84,9 @@ public class SubcircuitPinView
     return portView.getConnection();
   }
 
-  public String getPinName()
+  public PinView getPinView()
   {
-    return pinView.getName();
+    return pinView;
   }
 }
 

@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.xor.XorGateData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGate;
@@ -14,13 +15,13 @@ public class XorGateView
     extends BaseXorGateView<XorGate>
 {
   public XorGateView(SubcircuitView subcircuitView,
-                     Circuit circuit,
+                     CircuitSimulation circuitSimulation,
                      Int2D position,
                      Rotation rotation,
                      LogicGateProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
-    finaliseView(circuit);
+    super(subcircuitView, position, rotation, properties);
+    finaliseView(circuitSimulation);
   }
 
   @Override
@@ -31,9 +32,9 @@ public class XorGateView
   }
 
   @Override
-  protected XorGate createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected XorGate createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XorGate(circuit,
+    return new XorGate(simulation.getCircuit(),
                        properties.name,
                        new XorGatePins(properties.inputWidth * properties.inputCount,
                                        familyVoltageConfiguration));

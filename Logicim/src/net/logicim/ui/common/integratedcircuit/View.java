@@ -1,10 +1,9 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.Simulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.List;
@@ -27,7 +26,7 @@ public abstract class View
 
   public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
 
-  public abstract void paint(Graphics2D graphics, Viewport viewport, long time);
+  public abstract void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation);
 
   public abstract String getName();
 
@@ -42,7 +41,7 @@ public abstract class View
     return getClass().getSimpleName() + " [" + getName() + "]";
   }
 
-  public abstract void enable(Simulation simulation);
+  public abstract void enable(CircuitSimulation simulation);
 
   public abstract void setPosition(int x, int y);
 

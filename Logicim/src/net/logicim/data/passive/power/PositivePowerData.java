@@ -3,8 +3,9 @@ package net.logicim.data.passive.power;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerView;
@@ -23,7 +24,7 @@ public class PositivePowerData
   public PositivePowerData(Int2D position,
                            Rotation rotation,
                            String name,
-                           List<MultiPortData> ports,
+                           List<SimulationMultiPortData> ports,
                            boolean selected,
                            float voltage)
   {
@@ -32,10 +33,13 @@ public class PositivePowerData
   }
 
   @Override
-  protected PositivePowerView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  protected PositivePowerView create(SubcircuitEditor subcircuitEditor,
+                                     CircuitSimulation simulation,
+                                     TraceLoader traceLoader,
+                                     boolean fullLoad)
   {
     return new PositivePowerView(subcircuitEditor.getSubcircuitView(),
-                                 circuit,
+                                 simulation,
                                  position,
                                  rotation,
                                  new PositivePowerProperties(name, voltage));

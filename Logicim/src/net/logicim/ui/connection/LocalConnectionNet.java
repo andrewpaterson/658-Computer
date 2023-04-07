@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
@@ -24,9 +25,11 @@ public class LocalConnectionNet
   protected List<PortConnection> portConnections;
 
   protected Set<Trace> traces = new LinkedHashSet<>();
+  protected CircuitSimulation simulation;
 
-  public LocalConnectionNet(ConnectionView inputConnectionView)
+  public LocalConnectionNet(CircuitSimulation simulation, ConnectionView inputConnectionView)
   {
+    this.simulation = simulation;
     connectedComponents = new ArrayList<>();
     connectedWires = new ArrayList<>();
     splitterViews = new ArrayList<>();
@@ -34,21 +37,21 @@ public class LocalConnectionNet
     ConnectionFinder connectionFinder = new ConnectionFinder();
     connectionFinder.addConnection(inputConnectionView);
     connectionFinder.process();
-    Set<ConnectionView> connections = connectionFinder.getConnections();
+    Set<ConnectionView> connectionViews = connectionFinder.getConnections();
 
-    int minimumPorts = calculateMinimumPorts(connections);
+    int minimumPorts = calculateMinimumPorts(connectionViews);
     if (isValid(minimumPorts))
     {
       portConnections = createPortConnections(minimumPorts);
 
-      findConnections(connections);
+      findConnections(connectionViews);
       traceConnections();
     }
     else
     {
       portConnections = new ArrayList<>();
 
-      findConnections(connections);
+      findConnections(connectionViews);
     }
   }
 
@@ -123,7 +126,7 @@ public class LocalConnectionNet
       for (int i = 0; i < portConnections.size(); i++)
       {
         PortConnection portConnection = portConnections.get(i);
-        Port port = portView.getPort(i);
+        Port port = portView.getPort(simulation, i);
         portConnection.addPort(port);
         if (isSplitter)
         {

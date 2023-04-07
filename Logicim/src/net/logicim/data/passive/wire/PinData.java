@@ -6,9 +6,9 @@ import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -37,7 +37,7 @@ public class PinData
   public PinData(Int2D position,
                  Rotation rotation,
                  String name,
-                 List<MultiPortData> ports,
+                 List<SimulationMultiPortData> ports,
                  boolean selected,
                  int bitWidth,
                  SubcircuitPinAlignment alignment,
@@ -62,7 +62,7 @@ public class PinData
   }
 
   @Override
-  protected PinView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  protected PinView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
   {
     PinProperties properties = new PinProperties(name,
                                                  bitWidth,
@@ -81,7 +81,7 @@ public class PinData
       helper.ensureNextWeight(properties);
     }
     return new PinView(subcircuitEditor.getSubcircuitView(),
-                       circuit,
+                       simulation,
                        position,
                        rotation,
                        properties);

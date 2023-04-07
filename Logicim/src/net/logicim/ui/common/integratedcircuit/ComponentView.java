@@ -3,11 +3,11 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
-import net.logicim.data.integratedcircuit.common.ComponentData;
-import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.common.properties.ComponentProperties;
+import net.logicim.data.integratedcircuit.common.ComponentData;
+import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -29,13 +29,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   protected List<PortView> portViews;
 
   public ComponentView(SubcircuitView subcircuitView,
-                       Circuit circuit,
                        Int2D position,
                        Rotation rotation,
                        PROPERTIES properties)
   {
     super(subcircuitView,
-          circuit,
           position,
           rotation,
           properties);
@@ -44,7 +42,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.portViews = new ArrayList<>();
   }
 
-  protected void finaliseView(Circuit circuit)
+  protected void finaliseView(CircuitSimulation simulation)
   {
     finalised = true;
 
@@ -113,11 +111,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return null;
   }
 
-  protected void paintPorts(Graphics2D graphics, Viewport viewport, long time)
+  protected void paintPorts(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
     for (PortView portView : portViews)
     {
-      portView.paint(graphics, viewport, time);
+      portView.paint(graphics, viewport, simulation);
     }
   }
 
@@ -146,12 +144,12 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return connectionViews;
   }
 
-  protected List<MultiPortData> savePorts()
+  protected List<SimulationMultiPortData> savePorts()
   {
-    List<MultiPortData> portDatas = new ArrayList<>(portViews.size());
+    List<SimulationMultiPortData> portDatas = new ArrayList<>(portViews.size());
     for (PortView port : portViews)
     {
-      MultiPortData portData = port.save();
+      SimulationMultiPortData portData = port.save();
       portDatas.add(portData);
     }
     return portDatas;
@@ -183,7 +181,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void enable(Simulation simulation)
+  public void enable(CircuitSimulation simulation)
   {
     getComponent().enable(simulation);
   }
@@ -204,8 +202,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     for (PortView portView : portViews)
     {
-      List<? extends Port> ports = portView.getPorts();
-      if (ports.size() < 1)
+      List<String> portNames = portView.getPortNames();
+      if (portNames.size() < 1)
       {
         throw new SimulatorException("PortView [%s] must have at lease one port on view [%s].", portView.getText(), getDescription());
       }
@@ -222,7 +220,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     for (PortView portView : portViews)
     {
-      portView.disconnect(simulation);
+      portView.disconnect();
       return;
     }
   }

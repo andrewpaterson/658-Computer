@@ -3,12 +3,11 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
-import net.logicim.domain.Simulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
-import net.logicim.ui.simulation.CircuitEditor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -138,7 +137,7 @@ public class TraceView
   }
 
   @Override
-  public void enable(Simulation simulation)
+  public void enable(CircuitSimulation simulation)
   {
   }
 
@@ -216,10 +215,10 @@ public class TraceView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
     graphics.setStroke(getTraceStroke(viewport));
-    Color color = getTraceColour(time);
+    Color color = getTraceColour(simulation.getTime());
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);

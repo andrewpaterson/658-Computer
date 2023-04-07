@@ -31,15 +31,19 @@ import java.util.Set;
 
 public class CircuitEditor
 {
-  protected CircuitSimulation circuitSimulation;
+  protected List<TopLevelSubcircuitSimulation> simulations;
+  protected TopLevelSubcircuitSimulation currentSimulation;
 
   protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
 
   public CircuitEditor()
   {
-    circuitSimulation = new CircuitSimulation();
+    simulations = new ArrayList<>();
+    currentSimulation = null;
+
     subcircuitEditors = new ArrayList<>();
+    currentSubcircuitEditor = null;
   }
 
   public CircuitEditor(String mainSubcircuitTypeName)
@@ -55,27 +59,22 @@ public class CircuitEditor
 
   public void paint(Graphics2D graphics, Viewport viewport)
   {
-    long time = getTime();
     List<View> views;
     synchronized (this)
     {
       views = getAllViews();
     }
 
+    CircuitSimulation circuitSimulation = getCircuitSimulation();
     for (View view : views)
     {
-      view.paint(graphics, viewport, time);
+      view.paint(graphics, viewport, circuitSimulation);
     }
-  }
-
-  protected long getTime()
-  {
-    return circuitSimulation.getTime();
   }
 
   public Circuit getCircuit()
   {
-    return circuitSimulation.getCircuit();
+    return currentSimulation.getCircuitSimulation().getCircuit();
   }
 
   public void editActionDeleteTraceView(ConnectionView connectionView, TraceView traceView)
@@ -84,7 +83,7 @@ public class CircuitEditor
     {
       Set<TraceView> traceViews = new LinkedHashSet<>();
       traceViews.add(traceView);
-      currentSubcircuitEditor.deleteTraceViews(traceViews, circuitSimulation);
+      currentSubcircuitEditor.deleteTraceViews(traceViews, getCircuitSimulation());
     }
     else
     {
@@ -106,7 +105,7 @@ public class CircuitEditor
 
     if (traceViews.size() > 0)
     {
-      currentSubcircuitEditor.deleteTraceViews(traceViews, circuitSimulation);
+      currentSubcircuitEditor.deleteTraceViews(traceViews, getCircuitSimulation());
       return true;
     }
     else
@@ -117,17 +116,17 @@ public class CircuitEditor
 
   public void reset()
   {
-    circuitSimulation.reset();
+    getCircuitSimulation().reset();
   }
 
   public void runSimultaneous()
   {
-    circuitSimulation.runSimultaneous();
+    getCircuitSimulation().runSimultaneous();
   }
 
   public void runToTime(long timeForward)
   {
-    circuitSimulation.runToTime(timeForward);
+    getCircuitSimulation().runToTime(timeForward);
   }
 
   public StaticView<?> getComponentViewInScreenSpace(Viewport viewport, Int2D screenPosition)
@@ -231,7 +230,7 @@ public class CircuitEditor
       SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitData.typeName);
       subcircuitEditors.add(subcircuitEditor);
 
-      subcircuitEditor.loadViews(subcircuitData, circuitSimulation);
+      subcircuitEditor.loadViews(subcircuitData, getCircuitSimulation());
 
       if (currentSubcircuitEditor == null)
       {
@@ -242,22 +241,22 @@ public class CircuitEditor
 
   public List<View> pasteClipboardViews(List<TraceData> traces, List<StaticData<?>> components)
   {
-    return currentSubcircuitEditor.pasteClipboardViews(traces, components, circuitSimulation);
+    return currentSubcircuitEditor.pasteClipboardViews(traces, components, getCircuitSimulation());
   }
 
   public void placeComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitEditor.placeComponentView(staticView, circuitSimulation);
+    currentSubcircuitEditor.placeComponentView(staticView, getCircuitSimulation());
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
-    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, circuitSimulation);
+    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, getCircuitSimulation());
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews)
   {
-    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, circuitSimulation);
+    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, getCircuitSimulation());
   }
 
   public Selection getCurrentSelection()
@@ -272,7 +271,7 @@ public class CircuitEditor
 
   public void deleteSelection()
   {
-    currentSubcircuitEditor.deleteSelection(circuitSimulation);
+    currentSubcircuitEditor.deleteSelection(getCircuitSimulation());
   }
 
   public SubcircuitEditor getCurrentSubcircuitEditor()
@@ -309,7 +308,7 @@ public class CircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitEditor.deleteComponentView(staticView, circuitSimulation);
+    currentSubcircuitEditor.deleteComponentView(staticView, getCircuitSimulation());
   }
 
   public void validateConsistency()
@@ -335,12 +334,12 @@ public class CircuitEditor
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitEditor.deleteComponentViews(staticViews, circuitSimulation);
+    currentSubcircuitEditor.deleteComponentViews(staticViews, getCircuitSimulation());
   }
 
   public CircuitSimulation getCircuitSimulation()
   {
-    return circuitSimulation;
+    return currentSimulation.getCircuitSimulation();
   }
 
   public SubcircuitView getCurrentSubcircuitView()

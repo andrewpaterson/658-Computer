@@ -2,6 +2,8 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -10,7 +12,6 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.polygon.PolygonView;
-import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateView;
 
 import java.awt.*;
@@ -28,12 +29,11 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   protected PolygonView polygonViewFillLeft;
 
   public BaseXorGateView(SubcircuitView subcircuitView,
-                         Circuit circuit,
                          Int2D position,
                          Rotation rotation,
                          LogicGateProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     createGraphics();
   }
 
@@ -76,9 +76,9 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
     if ((arcViewRight != null) && (arcViewLeft != null) && (arcViewBottom != null))
     {
       Stroke stroke = graphics.getStroke();
@@ -92,7 +92,7 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
       arcViewRight.paint(graphics, viewport);
       arcViewBottom.paint(graphics, viewport);
       arcViewSecondBottom.paint(graphics, viewport);
-      paintPorts(graphics, viewport, time);
+      paintPorts(graphics, viewport, simulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

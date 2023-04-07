@@ -2,13 +2,11 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.LogicPortData;
-import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
@@ -27,7 +25,7 @@ import java.util.Map;
 public abstract class ComponentData<T extends ComponentView<?>>
     extends StaticData<T>
 {
-  protected List<MultiPortData> ports;
+  protected List<SimulationMultiPortData> ports;
 
   public ComponentData()
   {
@@ -36,7 +34,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
   public ComponentData(Int2D position,
                        Rotation rotation,
                        String name,
-                       List<MultiPortData> ports,
+                       List<SimulationMultiPortData> ports,
                        boolean selected)
   {
     super(name, position, rotation, null, null, selected);
@@ -49,13 +47,13 @@ public abstract class ComponentData<T extends ComponentView<?>>
                          CircuitSimulation circuitSimulation)
   {
     T componentView = create(subcircuitEditor,
-                             circuitSimulation.getCircuit(),
+                             circuitSimulation,
                              traceLoader,
                              fullLoad);
     if (fullLoad)
     {
       connectAndLoad(subcircuitEditor.getSubcircuitView(),
-                     circuitSimulation.getSimulation(),
+                     circuitSimulation,
                      traceLoader,
                      componentView);
     }
@@ -67,7 +65,10 @@ public abstract class ComponentData<T extends ComponentView<?>>
     return componentView;
   }
 
-  protected void connectAndLoad(SubcircuitView subcircuitView, Simulation simulation, TraceLoader traceLoader, T componentView)
+  protected void connectAndLoad(SubcircuitView subcircuitView,
+                                CircuitSimulation simulation,
+                                TraceLoader traceLoader,
+                                T componentView)
   {
     componentView.createConnections(subcircuitView);
     componentView.enable(simulation);
@@ -75,15 +76,15 @@ public abstract class ComponentData<T extends ComponentView<?>>
     loadPorts(traceLoader, componentView, simulation);
   }
 
-  protected void loadPorts(TraceLoader traceLoader, T componentView, Simulation simulation)
+  protected void loadPorts(TraceLoader traceLoader, T componentView, CircuitSimulation simulation)
   {
     List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
     {
-      MultiPortData multiPortData = ports.get(i);
+      SimulationMultiPortData multiPortData = ports.get(i);
       PortView portView = portViews.get(i);
 
-      List<? extends Port> ports = portView.getPorts();
+      List<? extends Port> ports = portView.getPorts(simulation);
       for (int j = 0; j < ports.size(); j++)
       {
         Port port = ports.get(j);
@@ -99,7 +100,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected void loadPort(Simulation simulation, PortData portData, Port port)
+  protected void loadPort(CircuitSimulation simulation, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -124,6 +125,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected abstract T create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad);
+  protected abstract T create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad);
 }
 

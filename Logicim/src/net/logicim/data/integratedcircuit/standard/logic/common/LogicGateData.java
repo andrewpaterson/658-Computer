@@ -5,6 +5,7 @@ import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateView;
@@ -26,7 +27,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
                        String name,
                        Family family,
                        List<IntegratedCircuitEventData<?>> events,
-                       List<MultiPortData> ports,
+                       List<SimulationMultiPortData> ports,
                        boolean selected,
                        State state,
                        int inputCount,

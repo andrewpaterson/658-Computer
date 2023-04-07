@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.passive.splitter;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -46,9 +47,9 @@ public class SplitterViewFactory
                              SplitterProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    Circuit circuit = circuitEditor.getCircuit();
+    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new SplitterView(subcircuitView,
-                            circuit,
+                            simulation,
                             position,
                             rotation,
                             properties);

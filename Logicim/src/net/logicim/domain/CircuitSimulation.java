@@ -1,16 +1,24 @@
 package net.logicim.domain;
 
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Timeline;
 
 public class CircuitSimulation
 {
+  public static long nextId = 1L;
+
   protected Circuit circuit;
   protected Simulation simulation;
+  protected long id;
 
   public CircuitSimulation()
   {
+    id = nextId;
+    nextId++;
+
     this.circuit = new Circuit();
-    this.simulation = circuit.resetSimulation();
+    this.simulation = new Simulation();
+    circuit.resetSimulation(this);
   }
 
   public Circuit getCircuit()
@@ -30,7 +38,8 @@ public class CircuitSimulation
 
   public void reset()
   {
-    simulation = circuit.resetSimulation();
+    simulation = new Simulation();
+    circuit.resetSimulation(this);
   }
 
   public void runSimultaneous()
@@ -41,6 +50,16 @@ public class CircuitSimulation
   public void runToTime(long timeForward)
   {
     simulation.runToTime(timeForward);
+  }
+
+  public long getId()
+  {
+    return id;
+  }
+
+  public Timeline getTimeline()
+  {
+    return simulation.getTimeline();
   }
 }
 

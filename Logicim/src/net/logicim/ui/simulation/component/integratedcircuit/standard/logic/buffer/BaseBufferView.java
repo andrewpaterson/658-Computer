@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -24,12 +25,11 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   protected List<PolygonView> polygons;
 
   public BaseBufferView(SubcircuitView subcircuitView,
-                        Circuit circuit,
                         Int2D position,
                         Rotation rotation,
                         BufferProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     polygons = null;
     createGraphics();
   }
@@ -58,9 +58,9 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
     {
       int portOffset = portOffsets.get(portNumber);
       new PortView(this,
-                   getPortsInRange("Input ",
-                                   portNumber,
-                                   properties.inputWidth),
+                   getPortNames("Input ",
+                                portNumber,
+                                properties.inputWidth),
                    new Int2D(portOffset, 1));
     }
 
@@ -68,9 +68,9 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
     {
       int portOffset = portOffsets.get(portNumber);
       PortView outputPortView = new PortView(this,
-                                             getPortsInRange("Output ",
-                                                             portNumber,
-                                                             properties.inputWidth),
+                                             getPortNames("Output ",
+                                                          portNumber,
+                                                          properties.inputWidth),
                                              new Int2D(portOffset, -1));
       if (negateOutput)
       {
@@ -80,9 +80,9 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     if (polygons != null)
     {
@@ -93,7 +93,7 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
       {
         polygon.paint(graphics, viewport);
       }
-      paintPorts(graphics, viewport, time);
+      paintPorts(graphics, viewport, simulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

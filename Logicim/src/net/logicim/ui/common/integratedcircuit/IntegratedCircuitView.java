@@ -6,11 +6,11 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
@@ -32,12 +32,11 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   protected IC integratedCircuit;
 
   public IntegratedCircuitView(SubcircuitView subcircuitView,
-                               Circuit circuit,
                                Int2D position,
                                Rotation rotation,
                                PROPERTIES properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     if (properties.family == null)
     {
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
@@ -46,7 +45,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     subcircuitView.addIntegratedCircuitView(this);
   }
 
-  protected void createComponent(Circuit circuit)
+  protected void createComponent(CircuitSimulation circuit)
   {
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     integratedCircuit = createIntegratedCircuit(circuit, familyVoltageConfiguration);
@@ -68,9 +67,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
   }
 
   public IC getIntegratedCircuit()
@@ -85,20 +84,20 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  protected void finaliseView(Circuit circuit)
+  protected void finaliseView(CircuitSimulation simulation)
   {
-    createComponent(circuit);
+    createComponent(simulation);
     createPortViews();
-    super.finaliseView(circuit);
+    super.finaliseView(simulation);
     validateComponent();
     validatePorts();
   }
 
-  protected void createPowerPortsIfNecessary(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected void createPowerPortsIfNecessary(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
-      createPowerPorts(circuit, familyVoltageConfiguration);
+      createPowerPorts(simulation.getCircuit(), familyVoltageConfiguration);
     }
   }
 
@@ -149,37 +148,18 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return integratedCircuit;
   }
 
-  protected Port getPort(String portName)
+  protected List<String> getPortNames(String prefix, int portNumber, int inputWidth)
   {
-    if (integratedCircuit != null)
-    {
-      return integratedCircuit.getPort(portName);
-    }
-    else
-    {
-      return null;
-    }
-  }
-
-  protected List<Port> getPortsInRange(String prefix, int portNumber, int inputWidth)
-  {
-    if (integratedCircuit != null)
-    {
-      ArrayList<Port> ports = new ArrayList<>();
+      ArrayList<String> portNames = new ArrayList<>();
       for (int i = portNumber * inputWidth; i < (portNumber + 1) * inputWidth; i++)
       {
-        Port port = integratedCircuit.getPort(prefix + i);
-        ports.add(port);
+        String portName = prefix + i;
+        portNames.add(portName);
       }
-      return ports;
-    }
-    else
-    {
-      return null;
-    }
+      return portNames;
   }
 
-  protected abstract IC createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration);
+  protected abstract IC createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 

@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.decorative.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.decorative.common.DecorativeProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -19,17 +20,16 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   protected boolean enabled;
 
   public DecorativeView(SubcircuitView subcircuitView,
-                        Circuit circuit,
                         Int2D position,
                         Rotation rotation,
                         T properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     subcircuitView.addDecorativeView(this);
   }
 
   @Override
-  protected void finaliseView(Circuit circuit)
+  protected void finaliseView(CircuitSimulation simulation)
   {
     finalised = true;
     enabled = false;
@@ -67,7 +67,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void enable(Simulation simulation)
+  public void enable(CircuitSimulation simulation)
   {
     enabled = true;
   }

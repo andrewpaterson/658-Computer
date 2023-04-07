@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.wire.Trace;
@@ -47,13 +48,13 @@ public class TunnelView
   private Int2D startPosition;
 
   public TunnelView(SubcircuitView subcircuitView,
-                    Circuit circuit,
+                    CircuitSimulation simulation,
                     Int2D position,
                     Rotation rotation,
                     TunnelProperties properties)
   {
     this(subcircuitView,
-         circuit,
+         simulation,
          position,
          rotation,
          new BoundingBox(),
@@ -62,14 +63,14 @@ public class TunnelView
   }
 
   public TunnelView(SubcircuitView subcircuitView,
-                    Circuit circuit,
+                    CircuitSimulation circuitSimulation,
                     Int2D position,
                     Rotation rotation,
                     BoundingBox boundingBox,
                     BoundingBox selectionBox,
                     TunnelProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, boundingBox, selectionBox, properties);
+    super(subcircuitView, position, rotation, boundingBox, selectionBox, properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
     this.connections.add(null);
@@ -82,7 +83,7 @@ public class TunnelView
     this.startPosition = new Int2D(0, 0);
     this.endPosition = createGraphics();
 
-    finaliseView(circuit);
+    finaliseView(circuitSimulation);
   }
 
   protected String createSanitisedName(TunnelProperties properties)
@@ -181,9 +182,9 @@ public class TunnelView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -218,7 +219,7 @@ public class TunnelView
   }
 
   @Override
-  public void enable(Simulation simulation)
+  public void enable(CircuitSimulation simulation)
   {
     enabled = true;
   }
@@ -257,7 +258,7 @@ public class TunnelView
   }
 
   @Override
-  protected void finaliseView(Circuit circuit)
+  protected void finaliseView(CircuitSimulation simulation)
   {
     finalised = true;
     enabled = false;

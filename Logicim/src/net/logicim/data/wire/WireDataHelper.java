@@ -1,6 +1,6 @@
 package net.logicim.data.wire;
 
-import net.logicim.domain.Simulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class WireDataHelper
 {
   protected static void wireConnect(SubcircuitEditor subcircuitEditor,
-                                    Simulation simulation,
+                                    CircuitSimulation simulation,
                                     TraceLoader traceLoader,
                                     WireView wireView,
                                     long[] traceIds,

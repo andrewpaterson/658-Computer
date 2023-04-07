@@ -2,6 +2,7 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 
@@ -17,7 +18,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
   public PassiveData(Int2D position,
                      Rotation rotation,
                      String name,
-                     List<MultiPortData> ports,
+                     List<SimulationMultiPortData> ports,
                      boolean selected)
   {
     super(position,

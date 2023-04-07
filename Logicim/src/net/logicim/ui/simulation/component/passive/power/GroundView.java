@@ -4,7 +4,8 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.GroundData;
 import net.logicim.data.passive.power.GroundProperties;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -22,12 +23,12 @@ public class GroundView
   protected LineView line4;
 
   public GroundView(SubcircuitView subcircuitView,
-                    Circuit circuit,
+                    CircuitSimulation circuit,
                     Int2D position,
                     Rotation rotation,
                     GroundProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     createGraphics();
     finaliseView(circuit);
   }
@@ -50,7 +51,7 @@ public class GroundView
   @Override
   protected void createPortViews()
   {
-    new PortView(this, passive.getPort("Power"), new Int2D(0, 0));
+    new PortView(this, PowerPinNames.POWER, new Int2D(0, 0));
   }
 
   @Override
@@ -69,9 +70,9 @@ public class GroundView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -83,7 +84,7 @@ public class GroundView
       line3.paint(graphics, viewport);
       line4.paint(graphics, viewport);
     }
-    paintPorts(graphics, viewport, time);
+    paintPorts(graphics, viewport, simulation);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);

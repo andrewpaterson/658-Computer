@@ -160,7 +160,7 @@ public class SubcircuitView
     Set<PortView> portViews = getPortViews(connectionViews);
     for (PortView portView : portViews)
     {
-      portView.traceConnected(circuitSimulation.getSimulation());
+      portView.traceConnected(circuitSimulation);
     }
   }
 
@@ -495,7 +495,7 @@ public class SubcircuitView
     {
       if (!updatedConnectionViews.contains(connectionView))
       {
-        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation.getSimulation(), connectionView);
+        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, connectionView);
         updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
       }
     }
@@ -540,7 +540,7 @@ public class SubcircuitView
     Simulation simulation = circuitSimulation.getSimulation();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.enable(simulation);
+      staticView.enable(circuitSimulation);
       staticView.simulationStarted(simulation);
     }
   }
@@ -657,10 +657,9 @@ public class SubcircuitView
                                                         Set<ConnectionView> nonTraceConnectionViews)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    Simulation simulation = circuitSimulation.getSimulation();
     for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
     {
-      List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(simulation, nonTraceConnectionView);
+      List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, nonTraceConnectionView);
       updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
     }
     fireConnectionEvents(updatedConnectionViews, circuitSimulation);

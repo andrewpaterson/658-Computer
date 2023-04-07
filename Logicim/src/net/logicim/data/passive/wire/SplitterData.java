@@ -3,8 +3,9 @@ package net.logicim.data.passive.wire;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.common.MultiPortData;
+import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
@@ -28,7 +29,7 @@ public class SplitterData
   public SplitterData(Int2D position,
                       Rotation rotation,
                       String name,
-                      List<MultiPortData> ports,
+                      List<SimulationMultiPortData> ports,
                       boolean selected,
                       int bitWidth,
                       int fanOut,
@@ -47,10 +48,13 @@ public class SplitterData
   }
 
   @Override
-  protected SplitterView create(SubcircuitEditor subcircuitEditor, Circuit circuit, TraceLoader traceLoader, boolean fullLoad)
+  protected SplitterView create(SubcircuitEditor subcircuitEditor,
+                                CircuitSimulation simulation,
+                                TraceLoader traceLoader,
+                                boolean fullLoad)
   {
     return new SplitterView(subcircuitEditor.getSubcircuitView(),
-                            circuit,
+                            simulation,
                             position,
                             rotation,
                             new SplitterProperties(name,

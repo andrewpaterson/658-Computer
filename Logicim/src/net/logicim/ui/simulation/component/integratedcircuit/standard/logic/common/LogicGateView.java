@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.com
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -25,12 +24,11 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
   public static final int OR_ARC_FILL_OFFSET = 6;
 
   public LogicGateView(SubcircuitView subcircuitView,
-                       Circuit circuit,
                        Int2D position,
                        Rotation rotation,
                        LogicGateProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
   }
 
   protected void createPortViews(boolean negateOutput, int inputOffset)
@@ -40,13 +38,13 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     {
       Integer i = portOffsets.get(portNumber);
       new PortView(this,
-                   getPortsInRange("Input ",
-                                   portNumber,
-                                   properties.inputWidth),
+                   getPortNames("Input ",
+                                portNumber,
+                                properties.inputWidth),
                    new Int2D(i, 1 + inputOffset));
     }
 
-    PortView outputPortView = new PortView(this, getPort("Output"), new Int2D(0, -2));
+    PortView outputPortView = new PortView(this, "Output", new Int2D(0, -2));
     if (negateOutput)
     {
       outputPortView.setInverting(true, Rotation.North);

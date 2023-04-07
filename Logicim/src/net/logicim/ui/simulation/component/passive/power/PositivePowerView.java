@@ -4,8 +4,10 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.data.passive.power.PositivePowerProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.voltage.Voltage;
+import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
@@ -25,14 +27,14 @@ public class PositivePowerView
   protected PolygonView polygonView;
 
   public PositivePowerView(SubcircuitView subcircuitView,
-                           Circuit circuit,
+                           CircuitSimulation simulation,
                            Int2D position,
                            Rotation rotation,
                            PositivePowerProperties properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
     createGraphics();
-    finaliseView(circuit);
+    finaliseView(simulation);
   }
 
   protected void createGraphics()
@@ -65,7 +67,7 @@ public class PositivePowerView
   @Override
   protected void createPortViews()
   {
-    new PortView(this, passive.getPort("Power"), new Int2D(0, 1));
+    new PortView(this, PowerPinNames.POWER, new Int2D(0, 1));
   }
 
   @Override
@@ -86,9 +88,9 @@ public class PositivePowerView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -98,7 +100,7 @@ public class PositivePowerView
 
     drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
-    paintPorts(graphics, viewport, time);
+    paintPorts(graphics, viewport, simulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

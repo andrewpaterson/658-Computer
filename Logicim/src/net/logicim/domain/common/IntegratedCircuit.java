@@ -3,6 +3,7 @@ package net.logicim.domain.common;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
 import net.logicim.common.util.StringUtil;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.LogicPort;
@@ -133,13 +134,13 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public void enable(Simulation simulation)
+  public void enable(CircuitSimulation simulation)
   {
     enabled = true;
     reset(simulation);
   }
 
-  public void reset(Simulation simulation)
+  public void reset(CircuitSimulation simulation)
   {
     if (enabled)
     {
@@ -151,7 +152,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
       if (!isStateless())
       {
-        State state = createState(simulation);
+        State state = createState(simulation.getSimulation());
         setState(state);
       }
     }

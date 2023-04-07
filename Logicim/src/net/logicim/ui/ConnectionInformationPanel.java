@@ -1,6 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.common.util.StringUtil;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
@@ -37,7 +38,7 @@ public class ConnectionInformationPanel
     this.height = height;
   }
 
-  public void drawConnectionDetails(int left, int top)
+  public void drawConnectionDetails(CircuitSimulation simulation, int left, int top)
   {
     graphics.setColor(Colours.getInstance().getInfoBackground());
     graphics.fillRect(left, top, width, height);
@@ -62,7 +63,7 @@ public class ConnectionInformationPanel
     {
       String componentString = connectedComponent.getType() +
                                getComponentNameString(connectedComponent) +
-                               getComponentDetailString(connectedComponent);
+                               getComponentDetailString(simulation, connectedComponent);
 
       y = drawMultilineString(fontHeight,
                               xOffset,
@@ -97,7 +98,7 @@ public class ConnectionInformationPanel
     return y;
   }
 
-  private String getComponentDetailString(View connectedComponent)
+  private String getComponentDetailString(CircuitSimulation simulation, View connectedComponent)
   {
     if (connectedComponent instanceof TraceView)
     {
@@ -105,7 +106,7 @@ public class ConnectionInformationPanel
     }
     else if (connectedComponent instanceof ComponentView)
     {
-      return toComponentDetailString((ComponentView<?>) connectedComponent);
+      return toComponentDetailString(simulation, (ComponentView<?>) connectedComponent);
     }
     else if (connectedComponent instanceof TunnelView)
     {
@@ -114,7 +115,7 @@ public class ConnectionInformationPanel
     return "";
   }
 
-  private String toComponentDetailString(ComponentView<?> componentView)
+  private String toComponentDetailString(CircuitSimulation simulation, ComponentView<?> componentView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -126,7 +127,7 @@ public class ConnectionInformationPanel
       builder.append("\n" + padding + text);
       padding += "    ";
     }
-    for (Port port : portView.getPorts())
+    for (Port port : portView.getPorts(simulation))
     {
       String portName = port.getName();
       if (StringUtil.isEmptyOrNull(portName))

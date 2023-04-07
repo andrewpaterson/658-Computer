@@ -2,12 +2,13 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
+import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -18,8 +19,6 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.line.LineView;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends StandardIntegratedCircuitProperties>
     extends IntegratedCircuitView<IC, PROPERTIES>
@@ -28,12 +27,11 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   protected LineView gndLine;
 
   public StandardIntegratedCircuitView(SubcircuitView subcircuitView,
-                                       Circuit circuit,
                                        Int2D position,
                                        Rotation rotation,
                                        PROPERTIES properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
   }
 
   protected void createPortViews()
@@ -43,8 +41,8 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
       BoundingBox boundingBox = new BoundingBox();
       updateBoundingBoxFromShapes(boundingBox);
 
-      PortView vccPortView = new PortView(this, integratedCircuit.getVoltageCommon(), new Int2D((int) Math.floor(boundingBox.getLeft()), 0));
-      PortView gndPortView = new PortView(this, integratedCircuit.getVoltageGround(), new Int2D((int) Math.ceil(boundingBox.getRight()), 0));
+      PortView vccPortView = new PortView(this, PowerPinNames.VCC, new Int2D((int) Math.floor(boundingBox.getLeft()), 0));
+      PortView gndPortView = new PortView(this, PowerPinNames.GND, new Int2D((int) Math.ceil(boundingBox.getRight()), 0));
 
       vccLine = new LineView(this, vccPortView.getRelativePosition(), new Int2D(vccPortView.getRelativePosition().x + 1, vccPortView.getRelativePosition().y));
       gndLine = new LineView(this, gndPortView.getRelativePosition(), new Int2D(gndPortView.getRelativePosition().x - 1, gndPortView.getRelativePosition().y));
@@ -73,9 +71,9 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     if (vccLine != null)
     {

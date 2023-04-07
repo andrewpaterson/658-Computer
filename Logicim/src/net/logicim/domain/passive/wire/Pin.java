@@ -11,6 +11,9 @@ import net.logicim.domain.passive.common.Passive;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.logicim.domain.passive.power.PowerPinNames.GND;
+import static net.logicim.domain.passive.power.PowerPinNames.VCC;
+
 public class Pin
     extends Passive
 {
@@ -24,11 +27,12 @@ public class Pin
     tracePorts = new ArrayList<>();
     for (int i = 0; i < portCount; i++)
     {
-      tracePorts.add(new TracePort("Port " + i, this));
+      String portName = "Port " + i;
+      tracePorts.add(new TracePort(portName, this));
     }
 
-    vcc = new PowerInPort(PortType.PowerIn, "VCC", this);
-    vss = new PowerInPort(PortType.PowerIn, "GND", this);
+    vcc = new PowerInPort(PortType.PowerIn, VCC, this);
+    vss = new PowerInPort(PortType.PowerIn, GND, this);
   }
 
   @Override

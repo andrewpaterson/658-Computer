@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
@@ -16,6 +17,7 @@ import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
+import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -31,6 +33,8 @@ import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
@@ -53,13 +57,12 @@ public class PinView
   protected int maxDigits;
 
   public PinView(SubcircuitView subcircuitView,
-                 Circuit circuit,
+                 CircuitSimulation circuitSimulation,
                  Int2D position,
                  Rotation rotation,
                  PinProperties properties)
   {
     super(subcircuitView,
-          circuit,
           position,
           rotation,
           properties);
@@ -68,7 +71,7 @@ public class PinView
     maxDigits = calculateMaxDigits();
 
     createGraphics();
-    finaliseView(circuit);
+    finaliseView(circuitSimulation);
   }
 
   protected void createGraphics()
@@ -152,15 +155,27 @@ public class PinView
     return "Pin";
   }
 
+  public List<String> getPortNames()
+  {
+    List<String> portNames = new ArrayList<>();
+    for (int i = 0; i < properties.bitWidth; i++)
+    {
+      String portName = "Port " + i;
+      portNames.add(portName);
+    }
+    return portNames;
+  }
+
   @Override
   protected void createPortViews()
   {
-    port = new PortView(this, passive.getTracePorts(), new Int2D());
+    List<String> portNames = getPortNames();
+    port = new PortView(this, portNames, new Int2D());
 
     if (mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
-      new PortView(this, passive.getVoltageCommon(), new Int2D((int) Math.floor(1), -1));
-      new PortView(this, passive.getVoltageGround(), new Int2D((int) Math.ceil(-1), -1));
+      new PortView(this, PowerPinNames.VCC, new Int2D((int) Math.floor(1), -1));
+      new PortView(this, PowerPinNames.GND, new Int2D((int) Math.ceil(-1), -1));
     }
   }
 
@@ -196,14 +211,14 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive(Circuit circuit)
+  protected Pin createPassive(CircuitSimulation simulation)
   {
-    Pin pin = new Pin(circuit,
+    Pin pin = new Pin(simulation.getCircuit(),
                       properties.name,
                       properties.bitWidth);
     if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
-      createPowerPorts(circuit, familyVoltageConfiguration, pin);
+      createPowerPorts(simulation.getCircuit(), familyVoltageConfiguration, pin);
     }
     return pin;
   }
@@ -246,10 +261,9 @@ public class PinView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, long time)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    super.paint(graphics, viewport, time);
-    super.paint(graphics, viewport, time);
+    super.paint(graphics, viewport, simulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -266,13 +280,14 @@ public class PinView
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
-    TraceValue[] values = port.getValue(time, familyVoltageConfiguration, passive.getVCC(time));
+    long time = simulation.getTime();
+    TraceValue[] values = port.getValue(simulation, familyVoltageConfiguration, passive.getVCC(time));
 
     dataView.setText(getStringValue(values));
     dataView.paint(graphics, viewport);
     labelView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, time);
+    paintPorts(graphics, viewport, simulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

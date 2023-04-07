@@ -1,6 +1,7 @@
 package net.logicim.ui.circuit;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.Rotation;
@@ -53,16 +54,17 @@ public class SubcircuitInstanceViewFactory
   }
 
   @Override
-  public SubcircuitInstanceView create(CircuitEditor circuitEditor, Int2D position,
+  public SubcircuitInstanceView create(CircuitEditor circuitEditor,
+                                       Int2D position,
                                        Rotation rotation,
                                        SubcircuitInstanceProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    Circuit circuit = circuitEditor.getCircuit();
+    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     SubcircuitEditor instanceSubcircuitEditor = circuitEditor.getSubcircuitEditor(properties.subcircuitTypeName);
     return new SubcircuitInstanceView(subcircuitView,
                                       instanceSubcircuitEditor.getSubcircuitView(),
-                                      circuit,
+                                      simulation,
                                       position,
                                       rotation,
                                       properties);

@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -40,9 +41,9 @@ public class NorGateViewFactory
                             LogicGateProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    Circuit circuit = circuitEditor.getCircuit();
+    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new NorGateView(subcircuitView,
-                           circuit,
+                           simulation,
                            position,
                            rotation,
                            properties);

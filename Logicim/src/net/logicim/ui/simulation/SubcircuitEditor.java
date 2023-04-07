@@ -304,7 +304,7 @@ public class SubcircuitEditor
     for (TraceData traceData : traces)
     {
       TraceView traceView = traceData.create(this,
-                                             circuitSimulation.getSimulation(),
+                                             circuitSimulation,
                                              traceLoader,
                                              fullLoad);
       views.add(traceView);

@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.component.passive.power;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.power.PowerSource;
@@ -13,12 +14,11 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
     extends PassiveView<PowerSource, PROPERTIES>
 {
   public PowerSourceView(SubcircuitView subcircuitView,
-                         Circuit circuit,
                          Int2D position,
                          Rotation rotation,
                          PROPERTIES properties)
   {
-    super(subcircuitView, circuit, position, rotation, properties);
+    super(subcircuitView, position, rotation, properties);
   }
 
   @Override
@@ -27,9 +27,9 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  protected PowerSource createPassive(Circuit circuit)
+  protected PowerSource createPassive(CircuitSimulation circuit)
   {
-    return new PowerSource(circuit,
+    return new PowerSource(circuit.getCircuit(),
                            properties.name,
                            getVoltageOut());
   }

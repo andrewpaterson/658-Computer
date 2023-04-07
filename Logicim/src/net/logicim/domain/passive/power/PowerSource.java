@@ -6,6 +6,8 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.passive.common.Passive;
 
+import static net.logicim.domain.passive.power.PowerPinNames.POWER;
+
 public class PowerSource
     extends Passive
 {
@@ -14,7 +16,7 @@ public class PowerSource
   public PowerSource(Circuit circuit, String name, float voltage)
   {
     super(circuit, name);
-    powerOutPort = new PowerOutPort("Power", this, voltage);
+    powerOutPort = new PowerOutPort(POWER, this, voltage);
   }
 
   public PowerOutPort getPowerOutPort()

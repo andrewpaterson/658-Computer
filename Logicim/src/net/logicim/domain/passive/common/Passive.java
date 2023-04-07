@@ -1,5 +1,6 @@
 package net.logicim.domain.passive.common;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
@@ -46,7 +47,7 @@ public abstract class Passive
     return enabled;
   }
 
-  public void enable(Simulation simulation)
+  public void enable(CircuitSimulation simulation)
   {
     enabled = true;
     reset(simulation);
@@ -76,7 +77,7 @@ public abstract class Passive
   {
   }
 
-  public void reset(Simulation simulation)
+  public void reset(CircuitSimulation simulation)
   {
     if (enabled)
     {

@@ -54,7 +54,7 @@ public abstract class VoltageColour
 
   public static Color getColourForTraces(VoltageRepresentation colours, List<Trace> traces, long time)
   {
-    if ((traces.isEmpty()) || (time == -1))
+    if ((traces == null) || (traces.isEmpty()) || (time == -1))
     {
       return colours.getDisconnectedTrace();
     }

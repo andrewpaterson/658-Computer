@@ -290,7 +290,7 @@ public class TunnelView
   }
 
   @Override
-  public void disconnect(Simulation simulation)
+  public void disconnect()
   {
     for (int i = 0; i < connections.size(); i++)
     {

@@ -78,7 +78,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void disconnect(Simulation simulation)
+  public void disconnect()
   {
   }
 

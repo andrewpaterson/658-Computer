@@ -218,7 +218,7 @@ public class TraceView
   public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
     graphics.setStroke(getTraceStroke(viewport));
-    Color color = getTraceColour(simulation.getTime());
+    Color color = getTraceColour(simulation);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);
@@ -278,9 +278,16 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
-  protected Color getTraceColour(long time)
+  protected Color getTraceColour(CircuitSimulation simulation)
   {
-    return VoltageColour.getColourForTraces(Colours.getInstance(), traces, time);
+    if (simulation != null)
+    {
+      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, simulation.getTime());
+    }
+    else
+    {
+      return Colours.getInstance().getDisconnectedTrace();
+    }
   }
 
   public TraceData save(boolean selected)

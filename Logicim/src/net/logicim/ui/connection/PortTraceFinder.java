@@ -49,19 +49,22 @@ public abstract class PortTraceFinder
 
   private static void connectFullWires(CircuitSimulation circuitSimulation, List<FullWire> fullWires)
   {
-    Simulation simulation = circuitSimulation.getSimulation();
-    for (FullWire fullWire : fullWires)
+    if (circuitSimulation != null)
     {
-      Trace trace = new Trace();
-      Set<PortConnection> localWires = fullWire.getLocalWires();
-      for (PortConnection localWire : localWires)
+      Simulation simulation = circuitSimulation.getSimulation();
+      for (FullWire fullWire : fullWires)
       {
-        for (Port port : localWire.connectedPorts)
+        Trace trace = new Trace();
+        Set<PortConnection> localWires = fullWire.getLocalWires();
+        for (PortConnection localWire : localWires)
         {
-          port.disconnect(simulation);
-          port.connect(trace);
+          for (Port port : localWire.connectedPorts)
+          {
+            port.disconnect(simulation);
+            port.connect(trace);
+          }
+          localWire.localConnectionNet.addTrace(trace);
         }
-        localWire.localConnectionNet.addTrace(trace);
       }
     }
   }

@@ -496,7 +496,7 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void disconnect(Simulation simulation)
+  public void disconnect()
   {
     for (SubcircuitPinView pinView : pinViews)
     {

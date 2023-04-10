@@ -92,14 +92,14 @@ public class SubcircuitView
     }
 
     connectionViewCache.removeAll(staticView, connectionViews);
-    Simulation simulation = circuitSimulation.getSimulation();
-    staticView.disconnect(simulation);
+    staticView.disconnect();
 
     if (staticView instanceof ComponentView)
     {
       Component component = ((ComponentView<?>) staticView).getComponent(circuitSimulation);
       if (component != null)
       {
+        Simulation simulation = circuitSimulation.getSimulation();
         Circuit circuit = circuitSimulation.getCircuit();
         circuit.disconnectComponent(component, simulation);
       }
@@ -167,9 +167,12 @@ public class SubcircuitView
   protected void deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView,
                                          CircuitSimulation simulation)
   {
-    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
-    simulation.getCircuit().remove(integratedCircuit);
-    removeIntegratedCircuitView(integratedCircuitView);
+    if (simulation != null)
+    {
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
+      simulation.getCircuit().remove(integratedCircuit);
+      removeIntegratedCircuitView(integratedCircuitView);
+    }
   }
 
   protected void deletePassiveView(PassiveView<?, ?> passiveView,

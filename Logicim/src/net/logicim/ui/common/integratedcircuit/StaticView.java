@@ -275,7 +275,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disable(CircuitSimulation simulation);
 
-  public abstract void disconnect(Simulation simulation);
+  public abstract void disconnect();
 
   public abstract List<ConnectionView> createConnections(SubcircuitView subcircuitView);
 }

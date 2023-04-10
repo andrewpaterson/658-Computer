@@ -61,5 +61,10 @@ public abstract class Event
     String string = getClass().getSimpleName().replace("Event", "");
     return string + ": Time [" + time + "]";
   }
+
+  public static void resetNextId()
+  {
+    nextId = 1;
+  }
 }
 

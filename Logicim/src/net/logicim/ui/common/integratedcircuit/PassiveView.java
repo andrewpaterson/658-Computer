@@ -9,10 +9,13 @@ import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
 {
-  protected PASSIVE passive;
+  protected Map<CircuitSimulation, PASSIVE> simulationPassives;
 
   public PassiveView(SubcircuitView subcircuitView,
                      Int2D position,
@@ -23,17 +26,19 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
           position,
           rotation,
           properties);
+    this.simulationPassives = new LinkedHashMap<>();
   }
 
   protected void createComponent(CircuitSimulation simulation)
   {
-    this.passive = createPassive(simulation);
-    this.passive.disable();
+    PASSIVE passive = createPassive(simulation);
+    simulationPassives.put(simulation, passive);
+    passive.disable();
   }
 
-  protected void validateComponent()
+  protected void validateComponent(CircuitSimulation simulation)
   {
-    if (getComponent() == null)
+    if (getComponent(simulation) == null)
     {
       throw new SimulatorException("Component not configured on [%s].  Call create().", getClass().getSimpleName());
     }
@@ -46,18 +51,32 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     subcircuitView.addPassiveView(this);
     createPortViews();
     super.finaliseView(simulation);
-    validateComponent();
-    validatePorts();
+    validateComponent(simulation);
+    validatePorts(simulation);
   }
 
-  protected void validatePorts()
+  @Override
+  public String getComponentType()
   {
-    validatePorts(passive.getPorts(), portViews);
+    for (PASSIVE passive : simulationPassives.values())
+    {
+      return passive.getType();
+    }
+    return "";
   }
 
-  public PASSIVE getComponent()
+  protected void validatePorts(CircuitSimulation simulation)
   {
-    return passive;
+    PASSIVE passive = simulationPassives.get(simulation);
+    if (passive != null)
+    {
+      validatePorts(simulation, passive.getPorts(), portViews);
+    }
+  }
+
+  public PASSIVE getComponent(CircuitSimulation simulation)
+  {
+    return simulationPassives.get(simulation);
   }
 
   public abstract PassiveData<?> save(boolean selected);

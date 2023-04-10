@@ -6,7 +6,6 @@ import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
@@ -225,13 +224,13 @@ public class TunnelView
   }
 
   @Override
-  public void disable()
+  public void disable(CircuitSimulation simulation)
   {
     enabled = false;
   }
 
   @Override
-  public boolean isEnabled()
+  public boolean isEnabled(CircuitSimulation simulation)
   {
     return enabled;
   }
@@ -253,7 +252,7 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted(Simulation simulation)
+  public void simulationStarted(CircuitSimulation simulation)
   {
   }
 

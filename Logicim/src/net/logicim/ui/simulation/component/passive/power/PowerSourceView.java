@@ -2,8 +2,6 @@ package net.logicim.ui.simulation.component.passive.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -22,7 +20,7 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void simulationStarted(Simulation simulation)
+  public void simulationStarted(CircuitSimulation simulation)
   {
   }
 

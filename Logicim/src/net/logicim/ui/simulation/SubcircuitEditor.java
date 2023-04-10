@@ -25,14 +25,32 @@ import java.util.Set;
 
 public class SubcircuitEditor
 {
+  public static long nextId = 1L;
+
   protected Selection selection;
   protected SubcircuitView subcircuitView;
   protected CircuitEditor circuitEditor;
+  protected long id;
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
+
+    id = nextId;
+    nextId++;
+  }
+
+  public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, long id)
+  {
+    this(circuitEditor, new SubcircuitView());
+    this.setTypeName(typeName);
+
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
   }
 
   public SubcircuitEditor(CircuitEditor circuitEditor, SubcircuitView subcircuitView)
@@ -56,10 +74,10 @@ public class SubcircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  CircuitSimulation circuitSimulation)
   {
-    List<View> newSelection = subcircuitView.doneMoveComponents(staticViews,
+    List<View> newSelection = subcircuitView.doneMoveComponents(circuitSimulation, staticViews,
                                                                 traceViews,
-                                                                selectedViews,
-                                                                circuitSimulation);
+                                                                selectedViews
+    );
     this.selection.setSelection(newSelection);
   }
 
@@ -131,7 +149,7 @@ public class SubcircuitEditor
   public SubcircuitData save()
   {
     Set<View> selection = new HashSet<>(this.selection.getSelection());
-    return subcircuitView.save(selection);
+    return subcircuitView.save(selection, id);
   }
 
   public List<View> getAllViews()
@@ -150,14 +168,16 @@ public class SubcircuitEditor
     return subcircuitView.staticViewIterator();
   }
 
-  public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public List<StaticView<?>> getComponentViewsInScreenSpace(CircuitSimulation simulation,
+                                                            Viewport viewport,
+                                                            Int2D screenPosition)
   {
     List<StaticView<?>> selectedViews = new ArrayList<>();
     StaticViewIterator iterator = staticViewIterator();
     while (iterator.hasNext())
     {
       StaticView<?> view = iterator.next();
-      if (isInScreenSpaceBoundingBox(viewport, screenPosition, view))
+      if (isInScreenSpaceBoundingBox(simulation, viewport, screenPosition, view))
       {
         selectedViews.add(view);
       }
@@ -165,9 +185,12 @@ public class SubcircuitEditor
     return selectedViews;
   }
 
-  protected boolean isInScreenSpaceBoundingBox(Viewport viewport, Int2D screenPosition, StaticView<?> view)
+  protected boolean isInScreenSpaceBoundingBox(CircuitSimulation simulation,
+                                               Viewport viewport,
+                                               Int2D screenPosition,
+                                               StaticView<?> view)
   {
-    if (view.isEnabled())
+    if (view.isEnabled(simulation))
     {
       Int2D boundBoxPosition = new Int2D();
       Int2D boundBoxDimension = new Int2D();
@@ -237,7 +260,7 @@ public class SubcircuitEditor
                                         List<StaticData<?>> components,
                                         CircuitSimulation circuitSimulation)
   {
-    return loadViews(traces, components, circuitSimulation, false);
+    return loadViews(traces, components, circuitSimulation, null);
   }
 
   public void placeComponentView(StaticView<?> staticView,
@@ -253,9 +276,9 @@ public class SubcircuitEditor
     return selection;
   }
 
-  public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
+  public List<View> getSelectionFromRectangle(CircuitSimulation simulation, Float2D start, Float2D end)
   {
-    return subcircuitView.getSelectionFromRectangle(start, end);
+    return subcircuitView.getSelectionFromRectangle(simulation, start, end);
   }
 
   public ConnectionView getConnection(int x, int y)
@@ -281,32 +304,28 @@ public class SubcircuitEditor
   }
 
   public void loadViews(SubcircuitData subcircuitData,
-                        CircuitSimulation circuitSimulation)
+                        CircuitSimulation circuitSimulation,
+                        TraceLoader traceLoader)
   {
     loadViews(subcircuitData.traces,
               subcircuitData.components,
               circuitSimulation,
-              true);
+              traceLoader);
   }
 
   public List<View> loadViews(List<TraceData> traces,
                               List<StaticData<?>> components,
                               CircuitSimulation circuitSimulation,
-                              boolean fullLoad)
+                              TraceLoader traceLoader)
   {
     ArrayList<View> views = new ArrayList<>();
-    TraceLoader traceLoader = null;
-    if (fullLoad)
-    {
-      traceLoader = new TraceLoader();
-    }
 
     for (TraceData traceData : traces)
     {
       TraceView traceView = traceData.create(this,
                                              circuitSimulation,
                                              traceLoader,
-                                             fullLoad);
+                                             traceLoader != null);
       views.add(traceView);
     }
 
@@ -314,7 +333,7 @@ public class SubcircuitEditor
     {
       StaticView<?> staticView = staticData.createAndLoad(this,
                                                           traceLoader,
-                                                          fullLoad,
+                                                          traceLoader != null,
                                                           circuitSimulation);
       views.add(staticView);
     }
@@ -352,6 +371,16 @@ public class SubcircuitEditor
       names.add(subcircuitInstanceView.getTypeName());
     }
     return new ArrayList<>(names);
+  }
+
+  public long getId()
+  {
+    return id;
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1;
   }
 }
 

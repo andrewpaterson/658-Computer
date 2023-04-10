@@ -10,7 +10,6 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -206,7 +205,7 @@ public class PinView
   }
 
   @Override
-  public void simulationStarted(Simulation simulation)
+  public void simulationStarted(CircuitSimulation simulation)
   {
   }
 
@@ -281,7 +280,12 @@ public class PinView
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
     long time = simulation.getTime();
-    TraceValue[] values = port.getValue(simulation, familyVoltageConfiguration, passive.getVCC(time));
+    Pin passive = getComponent(simulation);
+    TraceValue[] values = null;
+    if (passive != null)
+    {
+      values = port.getValue(simulation, familyVoltageConfiguration, passive.getVCC(time));
+    }
 
     dataView.setText(getStringValue(values));
     dataView.paint(graphics, viewport);
@@ -295,6 +299,11 @@ public class PinView
 
   private String getStringValue(TraceValue[] values)
   {
+    if (values == null)
+    {
+      return "";
+    }
+
     if (properties.radix == Radix.BINARY)
     {
       return toBinaryString(values);

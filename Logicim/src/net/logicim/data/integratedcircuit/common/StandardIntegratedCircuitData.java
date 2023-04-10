@@ -3,9 +3,12 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 
@@ -24,10 +27,10 @@ public abstract class StandardIntegratedCircuitData<ICV extends IntegratedCircui
                                        Rotation rotation,
                                        String name,
                                        Family family,
-                                       List<IntegratedCircuitEventData<?>> events,
+                                       SimulationIntegratedCircuitEventData events,
                                        List<SimulationMultiPortData> ports,
                                        boolean selected,
-                                       STATE state,
+                                       SimulationState<STATE> state,
                                        boolean explicitPowerPorts)
   {
     super(position,

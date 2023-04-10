@@ -11,7 +11,6 @@ import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -374,15 +373,15 @@ public class SubcircuitInstanceView
       throw new SimulatorException("Subcircuit components already created.");
     }
 
-    validateComponent();
-    validatePorts();
+    validateComponent(simulation);
+    validatePorts(simulation);
   }
 
-  protected void validatePorts()
+  protected void validatePorts(CircuitSimulation simulation)
   {
   }
 
-  protected void validateComponent()
+  protected void validateComponent(CircuitSimulation simulation)
   {
   }
 
@@ -460,13 +459,13 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void disable()
+  public void disable(CircuitSimulation simulation)
   {
     enabled = false;
   }
 
   @Override
-  public boolean isEnabled()
+  public boolean isEnabled(CircuitSimulation simulation)
   {
     return enabled;
   }
@@ -492,7 +491,7 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void simulationStarted(Simulation simulation)
+  public void simulationStarted(CircuitSimulation simulation)
   {
   }
 

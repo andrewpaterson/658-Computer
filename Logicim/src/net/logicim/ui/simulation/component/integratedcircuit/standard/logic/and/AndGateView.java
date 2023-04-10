@@ -55,7 +55,7 @@ public class AndGateView
                            saveEvents(),
                            savePorts(),
                            selected,
-                           saveState(),
+                           saveSimulationState(),
                            properties.inputCount,
                            properties.inputWidth,
                            properties.explicitPowerPorts);

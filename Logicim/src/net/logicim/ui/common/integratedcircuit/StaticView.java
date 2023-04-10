@@ -263,7 +263,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   protected abstract void finaliseView(CircuitSimulation simulation);
 
-  public abstract boolean isEnabled();
+  public abstract boolean isEnabled(CircuitSimulation simulation);
 
   public abstract void clampProperties(PROPERTIES newProperties);
 
@@ -271,9 +271,9 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract void simulationStarted(Simulation simulation);
+  public abstract void simulationStarted(CircuitSimulation simulation);
 
-  public abstract void disable();
+  public abstract void disable(CircuitSimulation simulation);
 
   public abstract void disconnect(Simulation simulation);
 

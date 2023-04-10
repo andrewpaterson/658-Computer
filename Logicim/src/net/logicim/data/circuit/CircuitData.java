@@ -1,33 +1,31 @@
 package net.logicim.data.circuit;
 
 import net.logicim.data.common.ReflectiveData;
+import net.logicim.data.simulation.CircuitSimulationData;
 
 import java.util.List;
 
 public class CircuitData
     extends ReflectiveData
 {
-  public TimelineData timeline;
-  public List<SubcircuitData> subcircuit;
+  public List<SubcircuitData> subcircuits;
+  public List<CircuitSimulationData> circuitSimulationDatas;
+  public long currentSubcircuit;
+  public long currentSimulation;
 
   public CircuitData()
   {
   }
 
-  public CircuitData(TimelineData timeline, List<SubcircuitData> subcircuit)
+  public CircuitData(List<SubcircuitData> subcircuits,
+                     List<CircuitSimulationData> circuitSimulationDatas,
+                     long currentSubcircuit,
+                     long currentSimulation)
   {
-    this.timeline = timeline;
-    this.subcircuit = subcircuit;
-  }
-
-  public TimelineData getTimeline()
-  {
-    return timeline;
-  }
-
-  public void setTimeline(TimelineData timeline)
-  {
-    this.timeline = timeline;
+    this.subcircuits = subcircuits;
+    this.circuitSimulationDatas = circuitSimulationDatas;
+    this.currentSubcircuit = currentSubcircuit;
+    this.currentSimulation = currentSimulation;
   }
 }
 

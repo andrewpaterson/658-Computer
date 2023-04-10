@@ -4,11 +4,14 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
+import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
+import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
@@ -32,17 +35,24 @@ public class OscilloscopeData
                           Rotation rotation,
                           String name,
                           Family family,
-                          List<IntegratedCircuitEventData<?>> events,
+                          SimulationIntegratedCircuitEventData events,
                           List<SimulationMultiPortData> ports,
                           boolean selected,
-                          OscilloscopeState state,
+                          SimulationState<OscilloscopeState> simulationState,
                           int inputCount,
                           int numberOfDivsWide,
                           int samplesPerDiv,
                           int divHeightInGrids,
                           float sampleFrequency)
   {
-    super(position, rotation, name, family, events, ports, selected, state);
+    super(position,
+          rotation,
+          name,
+          family,
+          events,
+          ports,
+          selected,
+          simulationState);
     this.inputCount = inputCount;
     this.numberOfDivsWide = numberOfDivsWide;
     this.samplesPerDiv = samplesPerDiv;

@@ -7,7 +7,6 @@ import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.data.passive.wire.SplitterProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.BidirectionalPortMap;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
@@ -122,19 +121,19 @@ public class SplitterView
     return portViews;
   }
 
-  private List<Port> getEndPortsForIndices(List<Integer> portIndicesForFanOutIndex)
+  private List<Port> getEndPortsForIndices(List<Integer> portIndicesForFanOutIndex, Splitter splitter)
   {
     List<Port> portsForFanOutIndex = new ArrayList<>(portIndicesForFanOutIndex.size());
     for (Integer indicesForFanOutIndex : portIndicesForFanOutIndex)
     {
-      portsForFanOutIndex.add(getEndPort(indicesForFanOutIndex));
+      portsForFanOutIndex.add(getEndPort(indicesForFanOutIndex, splitter));
     }
     return portsForFanOutIndex;
   }
 
-  private Port getEndPort(int endPortIndex)
+  private Port getEndPort(int endPortIndex, Splitter splitter)
   {
-    return passive.endPorts.get(endPortIndex);
+    return splitter.endPorts.get(endPortIndex);
   }
 
   private String getEndPortName(List<String> endPortNames, int endPortIndex)
@@ -447,7 +446,7 @@ public class SplitterView
   }
 
   @Override
-  public void simulationStarted(Simulation simulation)
+  public void simulationStarted(CircuitSimulation simulation)
   {
   }
 
@@ -459,7 +458,7 @@ public class SplitterView
     int i = 0;
     for (int fanIndex = 0; fanIndex < properties.fanOut; fanIndex++)
     {
-      List<Port> portsForFanoutIndex = getPortsForFanOutIndex(fanIndex);
+      List<Port> portsForFanoutIndex = getPortsForFanOutIndex(fanIndex, splitter);
       for (Port endPort : portsForFanoutIndex)
       {
         Port startPort = startPorts.get(i);
@@ -472,10 +471,10 @@ public class SplitterView
     return result;
   }
 
-  private List<Port> getPortsForFanOutIndex(int fanIndex)
+  private List<Port> getPortsForFanOutIndex(int fanIndex, Splitter splitter)
   {
     List<Integer> portIndicesForFanOutIndex = getPortIndicesForFanoutIndex(fanIndex);
-    return getEndPortsForIndices(portIndicesForFanOutIndex);
+    return getEndPortsForIndices(portIndicesForFanOutIndex, splitter);
   }
 
   protected void updateTextViews()

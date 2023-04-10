@@ -1,8 +1,10 @@
 package net.logicim.data.integratedcircuit.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.LogicPortData;
 import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
@@ -14,6 +16,7 @@ import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
+import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -27,11 +30,10 @@ import java.util.Map;
 public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?, ?>, STATE extends State>
     extends ComponentData<ICV>
 {
-  protected Family family;
+  public Family family;
 
-  protected List<IntegratedCircuitEventData<?>> events;
-
-  protected STATE state;
+  public SimulationIntegratedCircuitEventData events;
+  public SimulationState<STATE> state;
 
   public IntegratedCircuitData()
   {
@@ -41,10 +43,10 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                Rotation rotation,
                                String name,
                                Family family,
-                               List<IntegratedCircuitEventData<?>> events,
+                               SimulationIntegratedCircuitEventData events,
                                List<SimulationMultiPortData> ports,
                                boolean selected,
-                               STATE state)
+                               SimulationState<STATE> state)
   {
     super(position, rotation, name, ports, selected);
     this.family = family;
@@ -80,10 +82,41 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
 
   protected void loadEvents(CircuitSimulation simulation, ICV integratedCircuitView)
   {
-    for (IntegratedCircuitEventData<?> event : events)
+    List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(simulation.getId());
+    if (integratedCircuitEventData == null)
     {
-      event.create(integratedCircuitView.getIntegratedCircuit(), simulation.getTimeline());
+      throw new SimulatorException("Cannot find IntegratedCircuitEventData for simulation ID [%s].", simulation.getId());
     }
+    for (IntegratedCircuitEventData<?> eventData : integratedCircuitEventData)
+    {
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
+      eventData.create(integratedCircuit, simulation.getTimeline());
+    }
+  }
+
+  protected List<? extends IntegratedCircuitEventData<?>> getIntegratedCircuitEventDataList(long simulationId)
+  {
+    for (Map.Entry<Long, List<IntegratedCircuitEventData<?>>> entry : events.simulationIntegratedCircuitEventData.entrySet())
+    {
+      if (simulationId == entry.getKey())
+      {
+        return entry.getValue();
+      }
+    }
+    return null;
+  }
+
+  protected STATE getState(long simulationId)
+  {
+    for (Map.Entry<Long, STATE> entry : state.simulationStateData.entrySet())
+    {
+
+      if (simulationId == entry.getKey())
+      {
+        return entry.getValue();
+      }
+    }
+    return null;
   }
 
   @Override
@@ -95,14 +128,15 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     integratedCircuitView.createConnections(subcircuitView);
     integratedCircuitView.enable(simulation);
 
-    loadState(integratedCircuitView);
+    loadState(simulation, integratedCircuitView);
     loadEvents(simulation, integratedCircuitView);
-    loadPorts(traceLoader, integratedCircuitView, simulation);
+    loadPorts(simulation, traceLoader, integratedCircuitView);
   }
 
-  private void loadState(ICV integratedCircuitView)
+  private void loadState(CircuitSimulation simulation, ICV integratedCircuitView)
   {
-    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getIntegratedCircuit();
+    STATE state = getState(simulation.getId());
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
     integratedCircuit.setState(state);
   }
 

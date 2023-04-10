@@ -1,7 +1,9 @@
 package net.logicim.data.integratedcircuit.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.LogicPortData;
+import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
@@ -73,16 +75,22 @@ public abstract class ComponentData<T extends ComponentView<?>>
     componentView.createConnections(subcircuitView);
     componentView.enable(simulation);
 
-    loadPorts(traceLoader, componentView, simulation);
+    loadPorts(simulation, traceLoader, componentView);
   }
 
-  protected void loadPorts(TraceLoader traceLoader, T componentView, CircuitSimulation simulation)
+  protected void loadPorts(CircuitSimulation simulation, TraceLoader traceLoader, T componentView)
   {
     List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
     {
-      SimulationMultiPortData multiPortData = ports.get(i);
+      SimulationMultiPortData simulationMultiPortData = ports.get(i);
       PortView portView = portViews.get(i);
+
+      MultiPortData multiPortData = getMultiPortDataForSimulationId(simulationMultiPortData, simulation.getId());
+      if (multiPortData == null)
+      {
+        throw new SimulatorException("Could not find MultiPortData for simulation ID [%s].", simulation.getId());
+      }
 
       List<? extends Port> ports = portView.getPorts(simulation);
       for (int j = 0; j < ports.size(); j++)
@@ -98,6 +106,20 @@ public abstract class ComponentData<T extends ComponentView<?>>
         }
       }
     }
+  }
+
+  private MultiPortData getMultiPortDataForSimulationId(SimulationMultiPortData simulationMultiPortData, long simulationId)
+  {
+    for (Map.Entry<Long, MultiPortData> entry : simulationMultiPortData.simulationMultiPortData.entrySet())
+    {
+      MultiPortData multiPortData = entry.getValue();
+      long circuitSimulationId = entry.getKey();
+      if (simulationId == circuitSimulationId)
+      {
+        return multiPortData;
+      }
+    }
+    return null;
   }
 
   protected void loadPort(CircuitSimulation simulation, PortData portData, Port port)

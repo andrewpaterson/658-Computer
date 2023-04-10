@@ -6,11 +6,13 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.SubcircuitData;
-import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.integratedcircuit.common.StaticData;
+import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.data.wire.TraceData;
+import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.event.Event;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
@@ -129,7 +131,8 @@ public class CircuitEditor
     getCircuitSimulation().runToTime(timeForward);
   }
 
-  public StaticView<?> getComponentViewInScreenSpace(Viewport viewport, Int2D screenPosition)
+  public StaticView<?> getComponentViewInScreenSpace(Viewport viewport,
+                                                     Int2D screenPosition)
   {
     List<StaticView<?>> selectedViews = getComponentViewsInScreenSpace(viewport, screenPosition);
 
@@ -166,7 +169,7 @@ public class CircuitEditor
 
   public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
-    return currentSubcircuitEditor.getComponentViewsInScreenSpace(viewport, screenPosition);
+    return currentSubcircuitEditor.getComponentViewsInScreenSpace(getCircuitSimulation(), viewport, screenPosition);
   }
 
   public CircuitData save()
@@ -176,19 +179,40 @@ public class CircuitEditor
 
     if (orderedSubcircuitEditors != null)
     {
-      ArrayList<SubcircuitData> data = new ArrayList<>();
+      List<SubcircuitData> subcircuitDatas = new ArrayList<>();
       for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
       {
         SubcircuitData subcircuitData = subcircuitEditor.save();
-        data.add(subcircuitData);
+        subcircuitDatas.add(subcircuitData);
       }
 
-      TimelineData timelineData = circuitSimulation.getSimulation().getTimeline().save();
-      return new CircuitData(timelineData, data);
+      List<CircuitSimulationData> circuitSimulationDatas = new ArrayList<>();
+      for (TopLevelSubcircuitSimulation topLevelSubcircuitSimulation : simulations)
+      {
+        CircuitSimulationData circuitSimulationData = topLevelSubcircuitSimulation.save();
+        circuitSimulationDatas.add(circuitSimulationData);
+      }
+
+      return new CircuitData(subcircuitDatas,
+                             circuitSimulationDatas,
+                             currentSubcircuitEditor.getId(),
+                             getCurrentSimulationId());
     }
     else
     {
       return null;
+    }
+  }
+
+  protected long getCurrentSimulationId()
+  {
+    if (currentSimulation != null)
+    {
+      return currentSimulation.getCircuitSimulation().getId();
+    }
+    else
+    {
+      return 0L;
     }
   }
 
@@ -223,19 +247,84 @@ public class CircuitEditor
   public void load(CircuitData circuitData)
   {
     currentSubcircuitEditor = null;
-    circuitSimulation.getSimulation().getTimeline().load(circuitData.timeline);
 
-    for (SubcircuitData subcircuitData : circuitData.subcircuit)
+    SubcircuitEditor.resetNextId();
+    Event.resetNextId();
+    CircuitSimulation.resetNextId();
+    TraceLoader traceLoader = new TraceLoader();
+
+    subcircuitEditors = new ArrayList<>();
+    for (SubcircuitData subcircuitData : circuitData.subcircuits)
     {
-      SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitData.typeName);
+      SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitData.typeName, subcircuitData.id);
       subcircuitEditors.add(subcircuitEditor);
+    }
 
-      subcircuitEditor.loadViews(subcircuitData, getCircuitSimulation());
+    simulations = new ArrayList<>();
+    for (CircuitSimulationData circuitSimulationData : circuitData.circuitSimulationDatas)
+    {
+      SubcircuitEditor subcircuitEditor = getSubcircuitEditor(circuitSimulationData.subcircuitId);
+      CircuitSimulation circuitSimulation = new CircuitSimulation(circuitSimulationData.circuitSimulationId, circuitSimulationData.circuitSimulationName);
+      simulations.add(new TopLevelSubcircuitSimulation(subcircuitEditor, circuitSimulation));
+      circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
+    }
 
-      if (currentSubcircuitEditor == null)
+    for (CircuitSimulationData circuitSimulationData : circuitData.circuitSimulationDatas)
+    {
+      TopLevelSubcircuitSimulation topLevelSimulation = getTopLevelSimulation(circuitSimulationData.circuitSimulationId);
+      if (topLevelSimulation == null)
       {
-        currentSubcircuitEditor = subcircuitEditor;
+        throw new SimulatorException("Could not find TopLevelSubcircuitSimulation with id [%s].", circuitSimulationData.circuitSimulationId);
       }
+      CircuitSimulation circuitSimulation = topLevelSimulation.getCircuitSimulation();
+
+      for (SubcircuitData subcircuitData : circuitData.subcircuits)
+      {
+        SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
+        subcircuitEditor.loadViews(subcircuitData, circuitSimulation, traceLoader);
+      }
+
+      circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
+    }
+
+    currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
+    currentSimulation = getTopLevelSimulation(circuitData.currentSimulation);
+  }
+
+  protected SubcircuitEditor getSubcircuitEditor(long id)
+  {
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      if (subcircuitEditor.getId() == id)
+      {
+        return subcircuitEditor;
+      }
+    }
+    return null;
+  }
+
+  private TopLevelSubcircuitSimulation getTopLevelSimulation(long simulationId)
+  {
+    for (TopLevelSubcircuitSimulation topLevelSubcircuitSimulation : simulations)
+    {
+      if (topLevelSubcircuitSimulation.getCircuitSimulation().getId() == simulationId)
+      {
+        return topLevelSubcircuitSimulation;
+      }
+    }
+    return null;
+  }
+
+  protected SubcircuitEditor getCurrentSubcircuitEditor(long subcircuitId)
+  {
+    SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitId);
+    if (subcircuitEditor != null)
+    {
+      return subcircuitEditor;
+    }
+    else
+    {
+      return subcircuitEditors.get(0);
     }
   }
 
@@ -266,7 +355,7 @@ public class CircuitEditor
 
   public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
   {
-    return currentSubcircuitEditor.getSelectionFromRectangle(start, end);
+    return currentSubcircuitEditor.getSelectionFromRectangle(getCircuitSimulation(), start, end);
   }
 
   public void deleteSelection()
@@ -339,7 +428,14 @@ public class CircuitEditor
 
   public CircuitSimulation getCircuitSimulation()
   {
-    return currentSimulation.getCircuitSimulation();
+    if (currentSimulation != null)
+    {
+      return currentSimulation.getCircuitSimulation();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public SubcircuitView getCurrentSubcircuitView()

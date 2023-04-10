@@ -1,18 +1,19 @@
 package net.logicim.ui.simulation;
 
+import net.logicim.data.circuit.TimelineData;
+import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Timeline;
 
 public class TopLevelSubcircuitSimulation
 {
   protected SubcircuitEditor subcircuitEditor;
   protected CircuitSimulation circuitSimulation;
-  protected String name;
 
   public TopLevelSubcircuitSimulation(SubcircuitEditor subcircuitEditor, CircuitSimulation circuitSimulation)
   {
     this.subcircuitEditor = subcircuitEditor;
     this.circuitSimulation = circuitSimulation;
-    this.name = "";
   }
 
   public SubcircuitEditor getSubcircuitEditor()
@@ -25,9 +26,14 @@ public class TopLevelSubcircuitSimulation
     return circuitSimulation;
   }
 
-  public String getName()
+  public CircuitSimulationData save()
   {
-    return name;
+    Timeline timeline = circuitSimulation.getTimeline();
+    TimelineData timelineData = timeline.save();
+    return new CircuitSimulationData(timelineData,
+                                     circuitSimulation.getId(),
+                                     circuitSimulation.getName(),
+                                     subcircuitEditor.getId());
   }
 }
 

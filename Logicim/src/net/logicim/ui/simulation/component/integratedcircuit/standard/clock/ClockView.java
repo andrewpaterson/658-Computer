@@ -98,13 +98,21 @@ public class ClockView
 
   private void paintClockWaveform(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
-    ClockOscillatorState state = integratedCircuit.getState();
+    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(simulation);
     Color clockColor;
     long time = simulation.getTime();
-    if (state != null)
+    if (integratedCircuit != null)
     {
-      float voltage = integratedCircuit.getInternalVoltage(time);
-      clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
+      ClockOscillatorState state = integratedCircuit.getState();
+      if (state != null)
+      {
+        float voltage = integratedCircuit.getInternalVoltage(time);
+        clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
+      }
+      else
+      {
+        clockColor = Colours.getInstance().getDisconnectedTrace();
+      }
     }
     else
     {
@@ -158,13 +166,13 @@ public class ClockView
                          saveEvents(),
                          savePorts(),
                          selected,
-                         saveState(),
+                         saveSimulationState(),
                          properties.inverseOut,
                          properties.explicitPowerPorts);
   }
 
   @Override
-  protected ClockOscillatorState saveState()
+  protected ClockOscillatorState saveState(ClockOscillator integratedCircuit)
   {
     return new ClockOscillatorState(integratedCircuit.getState().getState());
   }

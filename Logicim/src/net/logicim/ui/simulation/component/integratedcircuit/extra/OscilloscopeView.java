@@ -90,70 +90,74 @@ public class OscilloscopeView
 
       rectangleView.paint(graphics, viewport);
 
-      OscilloscopeState state = integratedCircuit.getState();
-      if (state != null)
+      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(simulation);
+      if (integratedCircuit != null)
       {
-        float[][] minimumVoltageGrid = state.getMinVoltage();
-        float[][] maximumVoltageGrid = state.getMaxVoltage();
-        int[][] colourGrid = state.getColour();
-        int tickPosition = state.getTickPosition();
-
-        int tickX = viewport.transformGridToScreenSpaceX(1 + ((float) tickPosition / properties.samplesPerDiv) + position.x);
-
-        graphics.setStroke(viewport.getAbsoluteStroke(viewport.getDefaultLineWidth() / 2));
-        Color oscilloscopeReferenceColour = new Color(232, 232, 232);
-        graphics.setColor(oscilloscopeReferenceColour);
-        float bottom = (properties.inputCount - 1) * properties.divHeightInGrids + outerWidth - 0.25f;
-        float top = -outerWidth * 3.0f + 0.25f;
-
-        graphics.drawLine(tickX, viewport.transformGridToScreenSpaceY(top + position.y), tickX, viewport.transformGridToScreenSpaceY(bottom + position.y));
-
-        for (int input = 0; input < minimumVoltageGrid.length; input++)
+        OscilloscopeState state = integratedCircuit.getState();
+        if (state != null)
         {
-          PortView port = getPortView(input);
-          float[] minimumVoltageLine = minimumVoltageGrid[input];
-          float[] maximumVoltageLine = maximumVoltageGrid[input];
-          int[] colourLine = colourGrid[input];
+          float[][] minimumVoltageGrid = state.getMinVoltage();
+          float[][] maximumVoltageGrid = state.getMaxVoltage();
+          int[][] colourGrid = state.getColour();
+          int tickPosition = state.getTickPosition();
 
-          int portX1 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1);
-          int portX2 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + properties.numberOfDivsWide);
-          int lineY = viewport.transformGridToScreenSpaceY(port.getGridPosition().y);
+          int tickX = viewport.transformGridToScreenSpaceX(1 + ((float) tickPosition / properties.samplesPerDiv) + position.x);
+
+          graphics.setStroke(viewport.getAbsoluteStroke(viewport.getDefaultLineWidth() / 2));
+          Color oscilloscopeReferenceColour = new Color(232, 232, 232);
           graphics.setColor(oscilloscopeReferenceColour);
-          graphics.drawLine(portX1, lineY, portX2, lineY);
+          float bottom = (properties.inputCount - 1) * properties.divHeightInGrids + outerWidth - 0.25f;
+          float top = -outerWidth * 3.0f + 0.25f;
 
-          for (int i = 0; i < minimumVoltageLine.length; i++)
+          graphics.drawLine(tickX, viewport.transformGridToScreenSpaceY(top + position.y), tickX, viewport.transformGridToScreenSpaceY(bottom + position.y));
+
+          for (int input = 0; input < minimumVoltageGrid.length; input++)
           {
-            float minimumVoltage = minimumVoltageLine[i];
-            float maximumVoltage = maximumVoltageLine[i];
-            int colour = colourLine[i];
+            PortView port = getPortView(input);
+            float[] minimumVoltageLine = minimumVoltageGrid[input];
+            float[] maximumVoltageLine = maximumVoltageGrid[input];
+            int[] colourLine = colourGrid[input];
 
-            float behind;
-            if (tickPosition >= i)
+            int portX1 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1);
+            int portX2 = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + properties.numberOfDivsWide);
+            int lineY = viewport.transformGridToScreenSpaceY(port.getGridPosition().y);
+            graphics.setColor(oscilloscopeReferenceColour);
+            graphics.drawLine(portX1, lineY, portX2, lineY);
+
+            for (int i = 0; i < minimumVoltageLine.length; i++)
             {
-              behind = tickPosition - i;
-            }
-            else
-            {
-              behind = tickPosition + minimumVoltageLine.length - i;
-            }
-            behind = minimumVoltageLine.length - behind;
+              float minimumVoltage = minimumVoltageLine[i];
+              float maximumVoltage = maximumVoltageLine[i];
+              int colour = colourLine[i];
 
-            Color c = new Color(colour);
-            if (behind < minimumVoltageLine.length / 4.0f)
-            {
-              float colourFraction = behind / (minimumVoltageLine.length / 4.0f);
-              float whiteFraction = 1.0f - colourFraction;
-              c = new Color(clamp((int) (c.getRed() * colourFraction + 255 * whiteFraction)),
-                            clamp((int) (c.getGreen() * colourFraction + 255 * whiteFraction)),
-                            clamp((int) (c.getBlue() * colourFraction + 255 * whiteFraction)));
+              float behind;
+              if (tickPosition >= i)
+              {
+                behind = tickPosition - i;
+              }
+              else
+              {
+                behind = tickPosition + minimumVoltageLine.length - i;
+              }
+              behind = minimumVoltageLine.length - behind;
+
+              Color c = new Color(colour);
+              if (behind < minimumVoltageLine.length / 4.0f)
+              {
+                float colourFraction = behind / (minimumVoltageLine.length / 4.0f);
+                float whiteFraction = 1.0f - colourFraction;
+                c = new Color(clamp((int) (c.getRed() * colourFraction + 255 * whiteFraction)),
+                              clamp((int) (c.getGreen() * colourFraction + 255 * whiteFraction)),
+                              clamp((int) (c.getBlue() * colourFraction + 255 * whiteFraction)));
+              }
+
+              int portX = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1 + ((float) i / properties.samplesPerDiv));
+              int portY1 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (minimumVoltage / 8.0f) * properties.divHeightInGrids);
+              int portY2 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (maximumVoltage / 8.0f) * properties.divHeightInGrids);
+
+              graphics.setColor(c);
+              graphics.drawRect(portX, portY2, 1, portY1 - portY2 + 1);
             }
-
-            int portX = viewport.transformGridToScreenSpaceX(port.getGridPosition().x + 1 + ((float) i / properties.samplesPerDiv));
-            int portY1 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (minimumVoltage / 8.0f) * properties.divHeightInGrids);
-            int portY2 = viewport.transformGridToScreenSpaceY(port.getGridPosition().y - (maximumVoltage / 8.0f) * properties.divHeightInGrids);
-
-            graphics.setColor(c);
-            graphics.drawRect(portX, portY2, 1, portY1 - portY2 + 1);
           }
         }
       }
@@ -194,7 +198,7 @@ public class OscilloscopeView
                                 saveEvents(),
                                 savePorts(),
                                 selected,
-                                saveState(),
+                                saveSimulationState(),
                                 properties.inputCount,
                                 properties.numberOfDivsWide,
                                 properties.samplesPerDiv,
@@ -208,9 +212,9 @@ public class OscilloscopeView
     return false;
   }
 
-  public OscilloscopeState saveState()
+  public OscilloscopeState saveSimulationState(Oscilloscope integratedCircuit)
   {
-    OscilloscopeState state = getIntegratedCircuit().getState();
+    OscilloscopeState state = integratedCircuit.getState();
     return new OscilloscopeState(properties.numberOfDivsWide * properties.samplesPerDiv,
                                  cloneFloat2DArray(state.getMinVoltage()),
                                  cloneFloat2DArray(state.getMaxVoltage()),

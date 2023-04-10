@@ -183,19 +183,19 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   @Override
   public void enable(CircuitSimulation simulation)
   {
-    getComponent().enable(simulation);
+    getComponent(simulation).enable(simulation);
   }
 
   @Override
-  public void disable()
+  public void disable(CircuitSimulation simulation)
   {
-    getComponent().disable();
+    getComponent(simulation).disable();
   }
 
   @Override
   public String getDescription()
   {
-    return getComponent().getType() + " " + getName() + " (" + getPosition() + ")";
+    return getComponentType() + " " + getName() + " (" + getPosition() + ")";
   }
 
   protected void validateAtLeastOnePort(List<PortView> portViews)
@@ -210,9 +210,9 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public boolean isEnabled()
+  public boolean isEnabled(CircuitSimulation simulation)
   {
-    return getComponent().isEnabled();
+    return getComponent(simulation).isEnabled();
   }
 
   @Override
@@ -225,7 +225,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validatePorts(List<Port> ports, List<PortView> portViews)
+  protected void validatePorts(CircuitSimulation simulation, List<Port> ports, List<PortView> portViews)
   {
     if ((ports.size() > 0) && (portViews.size() == 0))
     {
@@ -285,10 +285,12 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected abstract void createPortViews();
 
-  public abstract Component getComponent();
+  public abstract Component getComponent(CircuitSimulation simulation);
+
+  public abstract String getComponentType();
 
   public abstract ComponentData<?> save(boolean selected);
 
-  public abstract void simulationStarted(Simulation simulation);
+  public abstract void simulationStarted(CircuitSimulation simulation);
 }
 

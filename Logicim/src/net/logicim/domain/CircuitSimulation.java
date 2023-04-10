@@ -1,5 +1,6 @@
 package net.logicim.domain;
 
+import net.logicim.common.util.StringUtil;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
 
@@ -10,6 +11,7 @@ public class CircuitSimulation
   protected Circuit circuit;
   protected Simulation simulation;
   protected long id;
+  protected String name;
 
   public CircuitSimulation()
   {
@@ -18,7 +20,23 @@ public class CircuitSimulation
 
     this.circuit = new Circuit();
     this.simulation = new Simulation();
-    circuit.resetSimulation(this);
+    this.circuit.resetSimulation(this);
+    this.name = "";
+  }
+
+  public CircuitSimulation(long id, String name)
+  {
+    this.name = name;
+
+    this.circuit = new Circuit();
+    this.simulation = new Simulation();
+    this.circuit.resetSimulation(this);
+
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
   }
 
   public Circuit getCircuit()
@@ -60,6 +78,28 @@ public class CircuitSimulation
   public Timeline getTimeline()
   {
     return simulation.getTimeline();
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public String getDescription()
+  {
+    if (StringUtil.isEmptyOrNull(name))
+    {
+      return "ID (" + id + ")";
+    }
+    else
+    {
+      return name + " (" + id + ")";
+    }
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1;
   }
 }
 

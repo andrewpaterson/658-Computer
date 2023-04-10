@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.InverterData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
@@ -51,7 +50,7 @@ public class InverterView
                             saveEvents(),
                             savePorts(),
                             selected,
-                            saveState(),
+                            saveSimulationState(),
                             properties.inputCount,
                             properties.inputWidth,
                             properties.explicitPowerPorts);

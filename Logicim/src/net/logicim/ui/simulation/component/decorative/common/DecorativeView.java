@@ -4,7 +4,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.decorative.common.DecorativeProperties;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -38,13 +37,13 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public boolean isEnabled()
+  public boolean isEnabled(CircuitSimulation simulation)
   {
     return enabled;
   }
 
   @Override
-  public void simulationStarted(Simulation simulation)
+  public void simulationStarted(CircuitSimulation simulation)
   {
   }
 
@@ -73,7 +72,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void disable()
+  public void disable(CircuitSimulation simulation)
   {
     enabled = false;
   }

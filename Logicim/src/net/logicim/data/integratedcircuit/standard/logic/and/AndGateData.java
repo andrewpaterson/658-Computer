@@ -3,12 +3,14 @@ package net.logicim.data.integratedcircuit.standard.logic.and;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
+import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -27,10 +29,10 @@ public class AndGateData
                      Rotation rotation,
                      String name,
                      Family family,
-                     List<IntegratedCircuitEventData<?>> events,
+                     SimulationIntegratedCircuitEventData events,
                      List<SimulationMultiPortData> ports,
                      boolean selected,
-                     State state,
+                     SimulationState<State> simulationState,
                      int inputCount,
                      int inputWidth,
                      boolean explicitPowerPorts)
@@ -42,7 +44,7 @@ public class AndGateData
           events,
           ports,
           selected,
-          state,
+          simulationState,
           inputCount,
           inputWidth,
           explicitPowerPorts);

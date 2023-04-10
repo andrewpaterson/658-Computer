@@ -3,11 +3,12 @@ package net.logicim.data.integratedcircuit.standard.clock;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
+import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -31,10 +32,10 @@ public class ClockData
                    String name,
                    Family family,
                    float frequency,
-                   List<IntegratedCircuitEventData<?>> events,
+                   SimulationIntegratedCircuitEventData events,
                    List<SimulationMultiPortData> ports,
                    boolean selected,
-                   ClockOscillatorState state,
+                   SimulationState<ClockOscillatorState> simulationState,
                    boolean inverseOut,
                    boolean explicitPowerPorts)
   {
@@ -45,7 +46,7 @@ public class ClockData
           events,
           ports,
           selected,
-          state,
+          simulationState,
           explicitPowerPorts);
     this.frequency = frequency;
     this.inverseOut = inverseOut;

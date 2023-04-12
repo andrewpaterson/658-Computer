@@ -7,7 +7,6 @@ import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -94,7 +93,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     for (PortView portView : portViews)
     {
       Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = subcircuitView.getOrAddConnection(portPosition, this);
+      ConnectionView connectionView = subcircuitView.getOrAddConnectionView(portPosition, this);
       portView.setConnection(connectionView);
       connectionViews.add(connectionView);
     }

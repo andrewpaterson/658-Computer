@@ -88,7 +88,7 @@ public class MoveComponents
     editAction.getCircuitEditor().doneMoveComponents(getStaticViews(),
                                                      getTraces(),
                                                      getSelectedViews());
-    if (editAction.hasDiff())
+    if (editAction.hasDiff() || deleteOnDiscard)
     {
       editAction.pushUndo();
     }

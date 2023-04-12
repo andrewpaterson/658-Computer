@@ -183,9 +183,9 @@ public class SubcircuitView
     removePassiveView(passiveView);
   }
 
-  public ConnectionView getOrAddConnection(Int2D position, View view)
+  public ConnectionView getOrAddConnectionView(Int2D position, View view)
   {
-    return connectionViewCache.getOrAddConnection(position, view);
+    return connectionViewCache.getOrAddConnectionView(position, view);
   }
 
   public StaticViewIterator staticViewIterator()
@@ -251,7 +251,7 @@ public class SubcircuitView
           throw new SimulatorException("Position on connection on %s cannot be null.", staticView.toIdentifierString());
         }
 
-        ConnectionView cacheConnectionView = connectionViewCache.getConnection(connectionPosition);
+        ConnectionView cacheConnectionView = connectionViewCache.getConnectionView(connectionPosition);
         if (cacheConnectionView != connectionView)
         {
           throw new SimulatorException("%s connection (%s) must be equal to cache connection (%s).",
@@ -487,7 +487,7 @@ public class SubcircuitView
 
   public ConnectionView getConnection(int x, int y)
   {
-    return connectionViewCache.getConnection(x, y);
+    return connectionViewCache.getConnectionView(x, y);
   }
 
   public Set<ConnectionView> connectConnectionViews(Collection<ConnectionView> connectionViews,

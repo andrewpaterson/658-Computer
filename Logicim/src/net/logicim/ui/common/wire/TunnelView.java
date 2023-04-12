@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
@@ -152,12 +151,12 @@ public class TunnelView
     updateGridCache();
 
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    ConnectionView startConnection = subcircuitView.getOrAddConnection((Int2D) startCache.getTransformedPosition(), this);
+    ConnectionView startConnection = subcircuitView.getOrAddConnectionView((Int2D) startCache.getTransformedPosition(), this);
     this.connections.set(0, startConnection);
     connectionViews.add(startConnection);
     if (properties.doubleSided)
     {
-      ConnectionView endConnection = subcircuitView.getOrAddConnection((Int2D) endCache.getTransformedPosition(), this);
+      ConnectionView endConnection = subcircuitView.getOrAddConnectionView((Int2D) endCache.getTransformedPosition(), this);
       this.connections.set(1, endConnection);
       connectionViews.add(endConnection);
     }

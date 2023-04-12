@@ -18,9 +18,9 @@ public class ConnectionViewCache
     connectionViews = new LinkedHashMap<>();
   }
 
-  public ConnectionView getOrAddConnection(Int2D position, View view)
+  public ConnectionView getOrAddConnectionView(Int2D position, View view)
   {
-    ConnectionView connection = getConnection(position);
+    ConnectionView connection = getConnectionView(position);
     if (connection != null)
     {
       connection.add(view);
@@ -28,16 +28,16 @@ public class ConnectionViewCache
     }
     else
     {
-      return addConnection(position, view);
+      return addConnectionView(position, view);
     }
   }
 
-  public ConnectionView getConnection(Int2D position)
+  public ConnectionView getConnectionView(Int2D position)
   {
-    return getConnection(position.x, position.y);
+    return getConnectionView(position.x, position.y);
   }
 
-  protected ConnectionView addConnection(Int2D position, View view)
+  protected ConnectionView addConnectionView(Int2D position, View view)
   {
     Map<Integer, ConnectionView> connectionViewMap = connectionViews.get(position.x);
     if (connectionViewMap == null)
@@ -50,7 +50,7 @@ public class ConnectionViewCache
     return connectionView;
   }
 
-  public void remove(View view, ConnectionView connectionView)
+  public void removeConnectionView(View view, ConnectionView connectionView)
   {
     connectionView.remove(view);
     if (connectionView.isConnectedComponentsEmpty())
@@ -80,7 +80,7 @@ public class ConnectionViewCache
     }
   }
 
-  public ConnectionView getConnection(int x, int y)
+  public ConnectionView getConnectionView(int x, int y)
   {
     Map<Integer, ConnectionView> connectionViewMap = connectionViews.get(x);
     if (connectionViewMap != null)
@@ -113,7 +113,7 @@ public class ConnectionViewCache
   {
     for (ConnectionView connectionView : connectionViews)
     {
-      remove(view, connectionView);
+      removeConnectionView(view, connectionView);
     }
   }
 }

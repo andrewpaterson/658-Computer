@@ -38,8 +38,8 @@ public class TraceView
     connections = new ArrayList<>(2);
     if (addConnections)
     {
-      connections.add(subcircuitView.getOrAddConnection(start, this));
-      connections.add(subcircuitView.getOrAddConnection(end, this));
+      connections.add(subcircuitView.getOrAddConnectionView(start, this));
+      connections.add(subcircuitView.getOrAddConnectionView(end, this));
     }
     else
     {

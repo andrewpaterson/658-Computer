@@ -28,7 +28,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  protected void finaliseView(CircuitSimulation simulation)
+  protected void finaliseView()
   {
     finalised = true;
     enabled = false;
@@ -83,7 +83,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
+  public List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView)
   {
     return new ArrayList<>();
   }

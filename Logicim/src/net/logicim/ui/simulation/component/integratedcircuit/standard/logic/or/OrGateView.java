@@ -14,13 +14,12 @@ public class OrGateView
     extends BaseOrGateView<OrGate>
 {
   public OrGateView(SubcircuitView subcircuitView,
-                    CircuitSimulation simulation,
                     Int2D position,
                     Rotation rotation,
                     LogicGateProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    finaliseView(simulation);
+    finaliseView();
   }
 
   @Override
@@ -48,6 +47,7 @@ public class OrGateView
                           properties.family,
                           saveEvents(),
                           savePorts(),
+                          id,
                           selected,
                           saveSimulationState(),
                           properties.inputCount,

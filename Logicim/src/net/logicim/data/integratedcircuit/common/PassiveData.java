@@ -19,12 +19,14 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
                      Rotation rotation,
                      String name,
                      List<SimulationMultiPortData> ports,
+                     long id,
                      boolean selected)
   {
     super(position,
           rotation,
           name,
           ports,
+          id,
           selected);
   }
 }

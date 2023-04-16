@@ -15,13 +15,12 @@ public class BufferView
     extends BaseBufferView<Buffer>
 {
   public BufferView(SubcircuitView subcircuitView,
-                    CircuitSimulation circuit,
                     Int2D position,
                     Rotation rotation,
                     BufferProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    finaliseView(circuit);
+    finaliseView();
   }
 
   @Override
@@ -49,6 +48,7 @@ public class BufferView
                           properties.family,
                           saveEvents(),
                           savePorts(),
+                          id,
                           selected,
                           saveSimulationState(),
                           properties.inputCount,

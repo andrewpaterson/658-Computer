@@ -5,7 +5,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.data.passive.power.PositivePowerProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -27,14 +26,13 @@ public class PositivePowerView
   protected PolygonView polygonView;
 
   public PositivePowerView(SubcircuitView subcircuitView,
-                           CircuitSimulation simulation,
                            Int2D position,
                            Rotation rotation,
                            PositivePowerProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
-    finaliseView(simulation);
+    finaliseView();
   }
 
   protected void createGraphics()
@@ -77,6 +75,7 @@ public class PositivePowerView
                                  rotation,
                                  properties.name,
                                  savePorts(),
+                                 id,
                                  selected,
                                  properties.voltage_V);
   }

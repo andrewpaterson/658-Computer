@@ -15,13 +15,12 @@ public class InverterView
     extends BaseBufferView<Inverter>
 {
   public InverterView(SubcircuitView subcircuitView,
-                      CircuitSimulation circuit,
                       Int2D position,
                       Rotation rotation,
                       BufferProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    finaliseView(circuit);
+    finaliseView();
   }
 
   @Override
@@ -49,6 +48,7 @@ public class InverterView
                             properties.family,
                             saveEvents(),
                             savePorts(),
+                            id,
                             selected,
                             saveSimulationState(),
                             properties.inputCount,

@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.passive.power;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitEditor;
@@ -36,9 +35,7 @@ public class PositivePowerViewFactory
                                   PositivePowerProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new PositivePowerView(subcircuitView,
-                                 simulation,
                                  position,
                                  rotation,
                                  properties);

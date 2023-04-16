@@ -1,6 +1,5 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
@@ -10,7 +9,6 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -47,7 +45,6 @@ public class SubcircuitInstanceView
 
   public SubcircuitInstanceView(SubcircuitView subcircuitView,
                                 SubcircuitView instanceSubcircuitView,
-                                CircuitSimulation simulation,
                                 Int2D position,
                                 Rotation rotation,
                                 SubcircuitInstanceProperties properties)
@@ -63,8 +60,7 @@ public class SubcircuitInstanceView
     this.subcircuitView.addPassiveView(this);
 
     kindaCreateGraphicsAndOtherStuff();
-    finaliseView(simulation);
-    createSubcircuitComponents(simulation);
+    finaliseView();
   }
 
   private void kindaCreateGraphicsAndOtherStuff()
@@ -362,21 +358,6 @@ public class SubcircuitInstanceView
     return rectangle;
   }
 
-  private void createSubcircuitComponents(CircuitSimulation simulation)
-  {
-    if (!subcircuitComponentsCreated)
-    {
-      //This is where you create all the components in a subcircuit and add them into the main circuit simulation.
-    }
-    else
-    {
-      throw new SimulatorException("Subcircuit components already created.");
-    }
-
-    validateComponent(simulation);
-    validatePorts(simulation);
-  }
-
   protected void validatePorts(CircuitSimulation simulation)
   {
   }
@@ -392,6 +373,7 @@ public class SubcircuitInstanceView
                                       position,
                                       rotation,
                                       properties.name,
+                                      id,
                                       selected,
                                       savePorts(),
                                       properties.comment,

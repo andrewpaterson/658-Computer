@@ -14,13 +14,12 @@ public class XnorGateView
     extends BaseXorGateView<XnorGate>
 {
   public XnorGateView(SubcircuitView subcircuitView,
-                      CircuitSimulation simulation,
                       Int2D position,
                       Rotation rotation,
                       LogicGateProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    finaliseView(simulation);
+    finaliseView();
   }
 
   @Override
@@ -48,6 +47,7 @@ public class XnorGateView
                             properties.family,
                             saveEvents(),
                             savePorts(),
+                            id,
                             selected,
                             saveSimulationState(),
                             properties.inputCount,

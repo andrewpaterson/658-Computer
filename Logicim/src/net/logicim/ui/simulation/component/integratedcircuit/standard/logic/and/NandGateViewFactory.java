@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and
 
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.defaults.DefaultFamily;
@@ -41,9 +40,7 @@ public class NandGateViewFactory
                              LogicGateProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new NandGateView(subcircuitView,
-                            simulation,
                             position,
                             rotation,
                             properties);

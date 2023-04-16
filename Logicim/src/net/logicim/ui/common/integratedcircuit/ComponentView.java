@@ -37,13 +37,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
           position,
           rotation,
           properties);
-    this.properties = properties;
     this.enabled = false;
-
     this.portViews = new ArrayList<>();
   }
 
-  protected void finaliseView(CircuitSimulation simulation)
+  protected void finaliseView()
   {
     finalised = true;
 
@@ -86,7 +84,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.properties = properties;
   }
 
-  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
+  public List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = getPortViews();

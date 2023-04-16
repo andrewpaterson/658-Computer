@@ -18,7 +18,6 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -45,10 +44,11 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                Family family,
                                SimulationIntegratedCircuitEventData events,
                                List<SimulationMultiPortData> ports,
+                               long id,
                                boolean selected,
                                SimulationState<STATE> state)
   {
-    super(position, rotation, name, ports, selected);
+    super(position, rotation, name, ports, id, selected);
     this.family = family;
     this.events = events;
     this.state = state;
@@ -120,12 +120,11 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(SubcircuitView subcircuitView,
+  protected void connectAndLoad(SubcircuitEditor subcircuitEditor,
                                 CircuitSimulation simulation,
                                 TraceLoader traceLoader,
                                 ICV integratedCircuitView)
   {
-    integratedCircuitView.createConnections(subcircuitView);
     integratedCircuitView.enable(simulation);
 
     loadState(simulation, integratedCircuitView);
@@ -139,10 +138,5 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
     integratedCircuit.setState(state);
   }
-
-  public abstract ICV create(SubcircuitEditor subcircuitEditor,
-                             CircuitSimulation simulation,
-                             TraceLoader traceLoader,
-                             boolean fullLoad);
 }
 

@@ -1,8 +1,6 @@
 package net.logicim.data.wire;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.domain.CircuitSimulation;
@@ -23,8 +21,7 @@ public class TunnelData
   public TunnelData(String name,
                     Int2D position,
                     Rotation rotation,
-                    BoundingBoxData boundingBox,
-                    BoundingBoxData selectionBox,
+                    long id,
                     boolean selected,
                     long[] traceIds,
                     boolean doubleSided)
@@ -32,44 +29,34 @@ public class TunnelData
     super(name,
           position,
           rotation,
-          boundingBox,
-          selectionBox,
+          id,
           selected);
     this.traceIds = traceIds;
     this.doubleSided = doubleSided;
   }
 
-  @Override
-  public TunnelView createAndLoad(SubcircuitEditor subcircuitEditor,
-                                  TraceLoader traceLoader,
-                                  boolean fullLoad,
-                                  CircuitSimulation simulation)
+  public void connectAndLoad(SubcircuitEditor subcircuitEditor,
+                             CircuitSimulation simulation,
+                             TraceLoader traceLoader,
+                             TunnelView tunnelView)
   {
-    TunnelView tunnelView = new TunnelView(subcircuitEditor.getSubcircuitView(),
-                                           simulation,
-                                           position,
-                                           rotation,
-                                           boundingBox.create(),
-                                           selectionBox.create(),
-                                           new TunnelProperties(name, doubleSided));
-    if (fullLoad)
-    {
-      tunnelView.createConnections(subcircuitEditor.getSubcircuitView());
-      WireDataHelper.wireConnect(subcircuitEditor,
-                                 simulation,
-                                 traceLoader,
-                                 tunnelView,
-                                 traceIds,
-                                 selected);
-    }
+    tunnelView.createConnectionViews(subcircuitEditor.getSubcircuitView());
+    WireDataHelper.wireConnect(subcircuitEditor,
+                               simulation,
+                               traceLoader,
+                               tunnelView,
+                               traceIds,
+                               selected);
     tunnelView.enable(simulation);
-    return tunnelView;
   }
 
   @Override
-  protected TunnelView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  public TunnelView createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    throw new SimulatorException("Create should not be called from TunnelData.");
+    return new TunnelView(subcircuitEditor.getSubcircuitView(),
+                          position,
+                          rotation,
+                          new TunnelProperties(name, doubleSided));
   }
 }
 

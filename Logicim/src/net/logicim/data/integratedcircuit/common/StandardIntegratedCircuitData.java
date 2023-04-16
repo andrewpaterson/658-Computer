@@ -29,6 +29,7 @@ public abstract class StandardIntegratedCircuitData<ICV extends IntegratedCircui
                                        Family family,
                                        SimulationIntegratedCircuitEventData events,
                                        List<SimulationMultiPortData> ports,
+                                       long id,
                                        boolean selected,
                                        SimulationState<STATE> state,
                                        boolean explicitPowerPorts)
@@ -39,6 +40,7 @@ public abstract class StandardIntegratedCircuitData<ICV extends IntegratedCircui
           family,
           events,
           ports,
+          id,
           selected,
           state);
     this.explicitPowerPorts = explicitPowerPorts;

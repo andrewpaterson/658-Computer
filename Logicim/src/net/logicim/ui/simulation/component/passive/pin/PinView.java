@@ -56,7 +56,6 @@ public class PinView
   protected int maxDigits;
 
   public PinView(SubcircuitView subcircuitView,
-                 CircuitSimulation circuitSimulation,
                  Int2D position,
                  Rotation rotation,
                  PinProperties properties)
@@ -65,12 +64,12 @@ public class PinView
           position,
           rotation,
           properties);
-    this.familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
+    familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     relativeSubcircuitPosition = new Int2D();
     maxDigits = calculateMaxDigits();
 
     createGraphics();
-    finaliseView(circuitSimulation);
+    finaliseView();
   }
 
   protected void createGraphics()
@@ -185,6 +184,7 @@ public class PinView
                        rotation,
                        getName(),
                        savePorts(),
+                       id,
                        selected,
                        properties.bitWidth,
                        properties.alignment,

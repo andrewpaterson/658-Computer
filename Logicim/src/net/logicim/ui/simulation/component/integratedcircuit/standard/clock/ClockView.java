@@ -28,7 +28,6 @@ public class ClockView
   protected RectangleView rectangle;
 
   public ClockView(SubcircuitView subcircuitView,
-                   CircuitSimulation circuit,
                    Int2D position,
                    Rotation rotation,
                    ClockProperties properties)
@@ -37,9 +36,8 @@ public class ClockView
           position,
           rotation,
           properties);
-
     createGraphics();
-    finaliseView(circuit);
+    finaliseView();
   }
 
   protected void createGraphics()
@@ -165,6 +163,7 @@ public class ClockView
                          properties.frequency_Hz,
                          saveEvents(),
                          savePorts(),
+                         id,
                          selected,
                          saveSimulationState(),
                          properties.inverseOut,

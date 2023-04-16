@@ -14,13 +14,12 @@ public class NandGateView
     extends BaseAndGateView<NandGate>
 {
   public NandGateView(SubcircuitView subcircuitView,
-                      CircuitSimulation circuit,
                       Int2D position,
                       Rotation rotation,
                       LogicGateProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    finaliseView(circuit);
+    finaliseView();
   }
 
   @Override
@@ -48,6 +47,7 @@ public class NandGateView
                             properties.family,
                             saveEvents(),
                             savePorts(),
+                            id,
                             selected,
                             saveSimulationState(),
                             properties.inputCount,

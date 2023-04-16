@@ -14,7 +14,6 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.port.PortView;
@@ -37,42 +36,30 @@ public abstract class ComponentData<T extends ComponentView<?>>
                        Rotation rotation,
                        String name,
                        List<SimulationMultiPortData> ports,
+                       long id,
                        boolean selected)
   {
-    super(name, position, rotation, null, null, selected);
+    super(name,
+          position,
+          rotation,
+          id,
+          selected);
     this.ports = ports;
   }
 
-  public T createAndLoad(SubcircuitEditor subcircuitEditor,
-                         TraceLoader traceLoader,
-                         boolean fullLoad,
-                         CircuitSimulation circuitSimulation)
+  @Override
+  public T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    T componentView = create(subcircuitEditor,
-                             circuitSimulation,
-                             traceLoader,
-                             fullLoad);
-    if (fullLoad)
-    {
-      connectAndLoad(subcircuitEditor.getSubcircuitView(),
-                     circuitSimulation,
-                     traceLoader,
-                     componentView);
-    }
-
-    if (selected)
-    {
-      subcircuitEditor.select(componentView);
-    }
+    T componentView = createComponentView(subcircuitEditor, newComponentPropertyStep);
+    componentView.createConnectionViews(subcircuitEditor.getSubcircuitView());
     return componentView;
   }
 
-  protected void connectAndLoad(SubcircuitView subcircuitView,
+  protected void connectAndLoad(SubcircuitEditor subcircuitEditor,
                                 CircuitSimulation simulation,
                                 TraceLoader traceLoader,
                                 T componentView)
   {
-    componentView.createConnections(subcircuitView);
     componentView.enable(simulation);
 
     loadPorts(simulation, traceLoader, componentView);
@@ -147,6 +134,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected abstract T create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad);
+  protected abstract T createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
 }
 

@@ -3,15 +3,11 @@ package net.logicim.data.integratedcircuit.extra;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
-import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
@@ -37,6 +33,7 @@ public class OscilloscopeData
                           Family family,
                           SimulationIntegratedCircuitEventData events,
                           List<SimulationMultiPortData> ports,
+                          long id,
                           boolean selected,
                           SimulationState<OscilloscopeState> simulationState,
                           int inputCount,
@@ -51,6 +48,7 @@ public class OscilloscopeData
           family,
           events,
           ports,
+          id,
           selected,
           simulationState);
     this.inputCount = inputCount;
@@ -61,10 +59,9 @@ public class OscilloscopeData
   }
 
   @Override
-  public OscilloscopeView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  public OscilloscopeView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new OscilloscopeView(subcircuitEditor.getSubcircuitView(),
-                                simulation,
                                 position,
                                 rotation,
                                 new OscilloscopeProperties(name,

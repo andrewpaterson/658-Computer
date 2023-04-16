@@ -251,6 +251,7 @@ public class CircuitEditor
     SubcircuitEditor.resetNextId();
     Event.resetNextId();
     CircuitSimulation.resetNextId();
+    View.resetNextId();
     TraceLoader traceLoader = new TraceLoader();
 
     subcircuitEditors = new ArrayList<>();
@@ -269,6 +270,12 @@ public class CircuitEditor
       circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
     }
 
+    for (SubcircuitData subcircuitData : circuitData.subcircuits)
+    {
+      SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
+      subcircuitEditor.loadViews(subcircuitData.traces, subcircuitData.components, false, false);
+    }
+
     for (CircuitSimulationData circuitSimulationData : circuitData.circuitSimulationDatas)
     {
       TopLevelSubcircuitSimulation topLevelSimulation = getTopLevelSimulation(circuitSimulationData.circuitSimulationId);
@@ -281,7 +288,10 @@ public class CircuitEditor
       for (SubcircuitData subcircuitData : circuitData.subcircuits)
       {
         SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
-        subcircuitEditor.loadViews(subcircuitData, circuitSimulation, traceLoader);
+        subcircuitEditor.loadComponents(subcircuitData.traces,
+                                        subcircuitData.components,
+                                        circuitSimulation,
+                                        traceLoader);
       }
 
       circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
@@ -330,7 +340,7 @@ public class CircuitEditor
 
   public List<View> pasteClipboardViews(List<TraceData> traces, List<StaticData<?>> components)
   {
-    return currentSubcircuitEditor.pasteClipboardViews(traces, components, getCircuitSimulation());
+    return currentSubcircuitEditor.pasteClipboardViews(traces, components);
   }
 
   public void placeComponentView(StaticView<?> staticView)

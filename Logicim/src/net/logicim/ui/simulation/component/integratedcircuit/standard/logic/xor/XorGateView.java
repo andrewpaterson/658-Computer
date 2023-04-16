@@ -14,13 +14,12 @@ public class XorGateView
     extends BaseXorGateView<XorGate>
 {
   public XorGateView(SubcircuitView subcircuitView,
-                     CircuitSimulation circuitSimulation,
                      Int2D position,
                      Rotation rotation,
                      LogicGateProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    finaliseView(circuitSimulation);
+    finaliseView();
   }
 
   @Override
@@ -48,6 +47,7 @@ public class XorGateView
                            properties.family,
                            saveEvents(),
                            savePorts(),
+                           id,
                            selected,
                            saveSimulationState(),
                            properties.inputCount,

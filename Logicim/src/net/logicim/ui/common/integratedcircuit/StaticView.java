@@ -6,7 +6,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -56,6 +55,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
                     BoundingBox selectionBox,
                     PROPERTIES properties)
   {
+    super();
     this.properties = properties;
 
     this.subcircuitView = subcircuitView;
@@ -252,6 +252,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
     StaticView<PROPERTIES> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
+    newComponentView.updateId();
 
     return newComponentView;
   }
@@ -261,7 +262,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     return subcircuitView;
   }
 
-  protected abstract void finaliseView(CircuitSimulation simulation);
+  protected abstract void finaliseView();
 
   public abstract boolean isEnabled(CircuitSimulation simulation);
 
@@ -277,6 +278,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disconnect();
 
-  public abstract List<ConnectionView> createConnections(SubcircuitView subcircuitView);
+  public abstract List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView);
 }
 

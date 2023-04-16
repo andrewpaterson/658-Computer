@@ -1,11 +1,9 @@
 package net.logicim.data.integratedcircuit.decorative;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.integratedcircuit.common.DecorativeData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.ui.common.Rotation;
 import net.logicim.data.decorative.label.LabelProperties;
+import net.logicim.data.integratedcircuit.common.DecorativeData;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 
@@ -24,13 +22,18 @@ public class LabelData
   public LabelData(String name,
                    Int2D position,
                    Rotation rotation,
+                   long id,
                    boolean selected,
                    HorizontalAlignment alignment,
                    boolean bold,
                    boolean fill,
                    boolean border)
   {
-    super(name, position, rotation, selected);
+    super(name,
+          position,
+          rotation,
+          id,
+          selected);
     this.alignment = alignment;
     this.bold = bold;
     this.fill = fill;
@@ -38,10 +41,9 @@ public class LabelData
   }
 
   @Override
-  protected LabelView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  public LabelView createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new LabelView(subcircuitEditor.getSubcircuitView(),
-                         simulation,
                          position,
                          rotation,
                          new LabelProperties(name,

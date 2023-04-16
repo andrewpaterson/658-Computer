@@ -25,14 +25,13 @@ public class LabelView
   protected RectangleView rectangleView;
 
   public LabelView(SubcircuitView subcircuitView,
-                   CircuitSimulation simulation,
                    Int2D position,
                    Rotation rotation,
                    LabelProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
-    finaliseView(simulation);
+    finaliseView();
   }
 
   private void createGraphics()
@@ -64,6 +63,7 @@ public class LabelView
     return new LabelData(properties.name,
                          position,
                          rotation,
+                         id,
                          selected,
                          properties.alignment,
                          properties.bold,

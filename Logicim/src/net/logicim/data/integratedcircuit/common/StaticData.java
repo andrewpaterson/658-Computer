@@ -2,8 +2,6 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -14,8 +12,7 @@ public abstract class StaticData<T extends StaticView<?>>
   protected String name;
   protected Int2D position;
   protected Rotation rotation;
-  protected BoundingBoxData boundingBox;  //Huh?
-  protected BoundingBoxData selectionBox;  //Huh?
+  protected long id;
   protected boolean selected;
 
   public StaticData()
@@ -25,23 +22,27 @@ public abstract class StaticData<T extends StaticView<?>>
   public StaticData(String name,
                     Int2D position,
                     Rotation rotation,
-                    BoundingBoxData boundingBox,
-                    BoundingBoxData selectionBox,
+                    long id,
                     boolean selected)
   {
     this.name = name;
     this.position = position.clone();
     this.rotation = rotation;
-    this.boundingBox = boundingBox;
-    this.selectionBox = selectionBox;
+    this.id = id;
     this.selected = selected;
   }
 
-  public abstract T createAndLoad(SubcircuitEditor subcircuitEditor,
-                                  TraceLoader traceLoader,
-                                  boolean fullLoad,
-                                  CircuitSimulation circuitSimulation);
+  public T createAndLoad(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  {
+    T componentView = createStaticView(subcircuitEditor, newComponentPropertyStep);
 
-  protected abstract T create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad);
+    if (selected)
+    {
+      subcircuitEditor.select(componentView);
+    }
+    return componentView;
+  }
+
+  public abstract T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
 }
 

@@ -302,6 +302,7 @@ public class TraceView
     return new TraceData(ids,
                          getStartPosition(),
                          getEndPosition(),
+                         id,
                          selected);
   }
 

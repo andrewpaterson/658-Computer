@@ -533,7 +533,7 @@ public class SubcircuitView
     List<ConnectionView> connectionViews = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
-      connectionViews.addAll(staticView.createConnections(this));
+      connectionViews.addAll(staticView.createConnectionViews(this));
     }
     return connectionViews;
   }

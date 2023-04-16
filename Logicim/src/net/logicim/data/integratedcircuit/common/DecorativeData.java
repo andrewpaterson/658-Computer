@@ -14,32 +14,17 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
   {
   }
 
-  public T createAndLoad(SubcircuitEditor subcircuitEditor,
-                         TraceLoader traceLoader,
-                         boolean fullLoad,
-                         CircuitSimulation simulation)
+  public DecorativeData(String name,
+                        Int2D position,
+                        Rotation rotation,
+                        long id,
+                        boolean selected)
   {
-    T componentView = create(subcircuitEditor,
-                             simulation,
-                             traceLoader,
-                             fullLoad);
-    componentView.enable(simulation);
-
-    if (selected)
-    {
-      subcircuitEditor.select(componentView);
-    }
-    return componentView;
+    super(name,
+          position,
+          rotation,
+          id,
+          selected);
   }
-
-  public DecorativeData(String name, Int2D position, Rotation rotation, boolean selected)
-  {
-    super(name, position, rotation, null, null, selected);
-  }
-
-  protected abstract T create(SubcircuitEditor subcircuitEditor,
-                              CircuitSimulation simulation,
-                              TraceLoader traceLoader,
-                              boolean fullLoad);
 }
 

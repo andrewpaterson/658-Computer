@@ -45,12 +45,16 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  protected void finaliseView(CircuitSimulation simulation)
+  protected void finaliseView()
   {
-    createComponent(simulation);
     subcircuitView.addPassiveView(this);
     createPortViews();
-    super.finaliseView(simulation);
+    super.finaliseView();
+  }
+
+  private void finaliseComponent(CircuitSimulation simulation)
+  {
+    createComponent(simulation);
     validateComponent(simulation);
     validatePorts(simulation);
   }

@@ -3,8 +3,6 @@ package net.logicim.data.subciruit;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -27,6 +25,7 @@ public class SubcircuitInstanceData
                                 Int2D position,
                                 Rotation rotation,
                                 String name,
+                                long id,
                                 boolean selected,
                                 List<SimulationMultiPortData> ports,
                                 String comment,
@@ -37,6 +36,7 @@ public class SubcircuitInstanceData
           rotation,
           name,
           ports,
+          id,
           selected);
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;
@@ -45,12 +45,11 @@ public class SubcircuitInstanceData
   }
 
   @Override
-  protected SubcircuitInstanceView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  protected SubcircuitInstanceView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     SubcircuitEditor instanceSubcircuitEditor = subcircuitEditor.getSubcircuitEditor(subcircuitTypeName);
     return new SubcircuitInstanceView(subcircuitEditor.getSubcircuitView(),
                                       instanceSubcircuitEditor.getSubcircuitView(),
-                                      simulation,
                                       position,
                                       rotation,
                                       new SubcircuitInstanceProperties(name,

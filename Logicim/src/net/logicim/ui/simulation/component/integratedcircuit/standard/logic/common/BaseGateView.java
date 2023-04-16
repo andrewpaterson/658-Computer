@@ -1,11 +1,10 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.common.Circuit;
+import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.util.ArrayList;

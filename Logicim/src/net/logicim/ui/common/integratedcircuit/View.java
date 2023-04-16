@@ -10,6 +10,15 @@ import java.util.List;
 
 public abstract class View
 {
+  public static long nextId = 1L;
+
+  protected long id;
+
+  public View()
+  {
+    id = 0;
+  }
+
   protected void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
   {
     float zoom = viewport.getZoom();
@@ -41,10 +50,47 @@ public abstract class View
     return getClass().getSimpleName() + " [" + getName() + "]";
   }
 
+  protected void updateId()
+  {
+    id = nextId;
+    nextId++;
+  }
+
+  public void setId(long id)
+  {
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
+  }
+
+  public void updateId(boolean appendIds, long id)
+  {
+    if (appendIds)
+    {
+      updateId();
+    }
+    else
+    {
+      setId(id);
+    }
+  }
+
   public abstract void enable(CircuitSimulation simulation);
 
   public abstract void setPosition(int x, int y);
 
   public abstract List<ConnectionView> getConnections();
+
+  public long getId()
+  {
+    return id;
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1L;
+  }
 }
 

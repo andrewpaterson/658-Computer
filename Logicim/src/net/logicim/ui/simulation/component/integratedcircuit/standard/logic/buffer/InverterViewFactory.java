@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.defaults.DefaultFamily;
@@ -41,9 +40,7 @@ public class InverterViewFactory
                              BufferProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new InverterView(subcircuitView,
-                            simulation,
                             position,
                             rotation,
                             properties);

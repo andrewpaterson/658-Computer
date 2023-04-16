@@ -2,13 +2,9 @@ package net.logicim.data.integratedcircuit.standard.logic.xor;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
-import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
@@ -32,6 +28,7 @@ public class XorGateData
                      Family family,
                      SimulationIntegratedCircuitEventData simulationEvents,
                      List<SimulationMultiPortData> ports,
+                     long id,
                      boolean selected,
                      SimulationState<State> simulationState,
                      int inputCount,
@@ -44,6 +41,7 @@ public class XorGateData
           family,
           simulationEvents,
           ports,
+          id,
           selected,
           simulationState,
           inputCount,
@@ -52,13 +50,9 @@ public class XorGateData
   }
 
   @Override
-  public XorGateView create(SubcircuitEditor subcircuitEditor,
-                            CircuitSimulation simulation,
-                            TraceLoader traceLoader,
-                            boolean fullLoad)
+  public XorGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new XorGateView(subcircuitEditor.getSubcircuitView(),
-                           simulation,
                            position,
                            rotation,
                            new LogicGateProperties(name,

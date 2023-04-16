@@ -257,10 +257,9 @@ public class SubcircuitEditor
   }
 
   public List<View> pasteClipboardViews(List<TraceData> traces,
-                                        List<StaticData<?>> components,
-                                        CircuitSimulation circuitSimulation)
+                                        List<StaticData<?>> components)
   {
-    return loadViews(traces, components, circuitSimulation, null);
+    return loadViews(traces, components, true, true);
   }
 
   public void placeComponentView(StaticView<?> staticView,
@@ -303,41 +302,37 @@ public class SubcircuitEditor
     subcircuitView.createTraceViews(lines, circuitSimulation);
   }
 
-  public void loadViews(SubcircuitData subcircuitData,
-                        CircuitSimulation circuitSimulation,
-                        TraceLoader traceLoader)
-  {
-    loadViews(subcircuitData.traces,
-              subcircuitData.components,
-              circuitSimulation,
-              traceLoader);
-  }
-
-  public List<View> loadViews(List<TraceData> traces,
-                              List<StaticData<?>> components,
-                              CircuitSimulation circuitSimulation,
-                              TraceLoader traceLoader)
+  public List<View> loadViews(List<TraceData> traces, List<StaticData<?>> components, boolean appendIds, boolean newComponentPropertyStep)
   {
     ArrayList<View> views = new ArrayList<>();
 
     for (TraceData traceData : traces)
     {
-      TraceView traceView = traceData.create(this,
-                                             circuitSimulation,
-                                             traceLoader,
-                                             traceLoader != null);
+      TraceView traceView = traceData.create(this);
       views.add(traceView);
+      traceView.updateId(appendIds, traceData.id);
     }
 
     for (StaticData<?> staticData : components)
     {
-      StaticView<?> staticView = staticData.createAndLoad(this,
-                                                          traceLoader,
-                                                          traceLoader != null,
-                                                          circuitSimulation);
+      StaticView<?> staticView = staticData.createAndLoad(this, newComponentPropertyStep);
       views.add(staticView);
     }
     return views;
+  }
+
+  public void loadComponents(List<TraceData> traces,
+                             List<StaticData<?>> components,
+                             CircuitSimulation circuitSimulation,
+                             TraceLoader traceLoader)
+  {
+    for (TraceData traceData : traces)
+    {
+    }
+
+    for (StaticData<?> staticData : components)
+    {
+    }
   }
 
   public String getTypeName()

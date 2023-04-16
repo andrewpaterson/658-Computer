@@ -2,12 +2,9 @@ package net.logicim.data.integratedcircuit.standard.logic.and;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
@@ -31,6 +28,7 @@ public class NandGateData
                       Family family,
                       SimulationIntegratedCircuitEventData simulationEvents,
                       List<SimulationMultiPortData> ports,
+                      long id,
                       boolean selected,
                       SimulationState<State> simulationState,
                       int inputCount,
@@ -43,6 +41,7 @@ public class NandGateData
           family,
           simulationEvents,
           ports,
+          id,
           selected,
           simulationState,
           inputCount,
@@ -51,10 +50,9 @@ public class NandGateData
   }
 
   @Override
-  public NandGateView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  public NandGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new NandGateView(subcircuitEditor.getSubcircuitView(),
-                            simulation,
                             position,
                             rotation,
                             new LogicGateProperties(name,

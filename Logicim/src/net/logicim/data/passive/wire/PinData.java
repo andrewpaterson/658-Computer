@@ -7,8 +7,6 @@ import net.logicim.data.common.Radix;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -38,6 +36,7 @@ public class PinData
                  Rotation rotation,
                  String name,
                  List<SimulationMultiPortData> ports,
+                 long id,
                  boolean selected,
                  int bitWidth,
                  SubcircuitPinAlignment alignment,
@@ -49,7 +48,12 @@ public class PinData
                  boolean explicitPowerPorts,
                  Radix radix)
   {
-    super(position, rotation, name, ports, selected);
+    super(position,
+          rotation,
+          name,
+          ports,
+          id,
+          selected);
     this.bitWidth = bitWidth;
     this.alignment = alignment;
     this.offset = offset;
@@ -62,7 +66,7 @@ public class PinData
   }
 
   @Override
-  protected PinView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  protected PinView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     PinProperties properties = new PinProperties(name,
                                                  bitWidth,
@@ -74,14 +78,13 @@ public class PinData
                                                  FamilyStore.getInstance().get(family),
                                                  explicitPowerPorts,
                                                  radix);
-    if (!fullLoad)
+    if (!newComponentPropertyStep)
     {
       PinPropertyHelper helper = new PinPropertyHelper(subcircuitEditor.getSubcircuitView().findAllPins());
       helper.ensureUniquePinName(properties);
       helper.ensureNextWeight(properties);
     }
     return new PinView(subcircuitEditor.getSubcircuitView(),
-                       simulation,
                        position,
                        rotation,
                        properties);

@@ -39,12 +39,16 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
                                PROPERTIES properties)
   {
     super(subcircuitView, position, rotation, properties);
+    construct(properties);
+  }
+
+  protected void construct(PROPERTIES properties)
+  {
     if (properties.family == null)
     {
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
     }
 
-    subcircuitView.addIntegratedCircuitView(this);  //Shouldn't this be in finaliseView?
     simulationIntegratedCircuits = new LinkedHashMap<>();
   }
 
@@ -97,11 +101,16 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  protected void finaliseView(CircuitSimulation simulation)
+  protected void finaliseView()
+  {
+    createPortViews();
+    super.finaliseView();
+    subcircuitView.addIntegratedCircuitView(this);  //Shouldn't this be in finaliseView?
+  }
+
+  private void finaliseComponent(CircuitSimulation simulation)
   {
     createComponent(simulation);
-    createPortViews();
-    super.finaliseView(simulation);
     validateComponent(simulation);
     validatePorts(simulation);
   }

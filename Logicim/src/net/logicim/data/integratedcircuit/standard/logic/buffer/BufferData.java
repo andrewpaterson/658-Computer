@@ -3,11 +3,8 @@ package net.logicim.data.integratedcircuit.standard.logic.buffer;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
@@ -33,6 +30,7 @@ public class BufferData
                     Family family,
                     SimulationIntegratedCircuitEventData events,
                     List<SimulationMultiPortData> ports,
+                    long id,
                     boolean selected,
                     SimulationState<State> simulationState,
                     int inputCount,
@@ -45,6 +43,7 @@ public class BufferData
           family,
           events,
           ports,
+          id,
           selected,
           simulationState,
           explicitPowerPorts);
@@ -53,10 +52,9 @@ public class BufferData
   }
 
   @Override
-  public BufferView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  public BufferView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new BufferView(subcircuitEditor.getSubcircuitView(),
-                          simulation,
                           position,
                           rotation,
                           new BufferProperties(name,

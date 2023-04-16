@@ -2,13 +2,10 @@ package net.logicim.data.integratedcircuit.standard.logic.and;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.common.state.State;
@@ -31,6 +28,7 @@ public class AndGateData
                      Family family,
                      SimulationIntegratedCircuitEventData events,
                      List<SimulationMultiPortData> ports,
+                     long id,
                      boolean selected,
                      SimulationState<State> simulationState,
                      int inputCount,
@@ -43,6 +41,7 @@ public class AndGateData
           family,
           events,
           ports,
+          id,
           selected,
           simulationState,
           inputCount,
@@ -51,13 +50,9 @@ public class AndGateData
   }
 
   @Override
-  public AndGateView create(SubcircuitEditor subcircuitEditor,
-                            CircuitSimulation simulation,
-                            TraceLoader traceLoader,
-                            boolean fullLoad)
+  public AndGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new AndGateView(subcircuitEditor.getSubcircuitView(),
-                           simulation,
                            position,
                            rotation,
                            new LogicGateProperties(name,

@@ -60,11 +60,9 @@ public class SubcircuitInstanceViewFactory
                                        SubcircuitInstanceProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     SubcircuitEditor instanceSubcircuitEditor = circuitEditor.getSubcircuitEditor(properties.subcircuitTypeName);
     return new SubcircuitInstanceView(subcircuitView,
                                       instanceSubcircuitEditor.getSubcircuitView(),
-                                      simulation,
                                       position,
                                       rotation,
                                       properties);

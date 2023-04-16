@@ -43,7 +43,6 @@ public class SplitterView
   protected Map<CircuitSimulation, BidirectionalPortMap> simulationBidirectionalPorts;
 
   public SplitterView(SubcircuitView subcircuitView,
-                      CircuitSimulation circuit,
                       Int2D position,
                       Rotation rotation,
                       SplitterProperties properties)
@@ -51,7 +50,7 @@ public class SplitterView
     super(subcircuitView, position, rotation, properties);
     simulationBidirectionalPorts = new LinkedHashMap<>();
     createGraphics();
-    finaliseView(circuit);
+    finaliseView();
   }
 
   public List<String> getStartPortNames(int bitWidth)
@@ -369,6 +368,7 @@ public class SplitterView
                             rotation,
                             properties.name,
                             savePorts(),
+                            id,
                             selected,
                             properties.bitWidth,
                             properties.fanOut,

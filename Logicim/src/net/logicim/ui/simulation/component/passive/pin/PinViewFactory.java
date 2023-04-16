@@ -6,7 +6,6 @@ import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
 import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.defaults.DefaultFamily;
@@ -21,11 +20,10 @@ public class PinViewFactory
                         Int2D position,
                         Rotation rotation)
   {
-    PinProperties defaultProperties = createDefaultProperties(getViewClass());
     return create(circuitEditor,
                   position,
                   rotation,
-                  defaultProperties);
+                  createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -52,9 +50,7 @@ public class PinViewFactory
     PinPropertyHelper helper = new PinPropertyHelper(circuitEditor.getCurrentSubcircuitView().findAllPins());
     helper.ensureUniquePinName(properties);
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new PinView(subcircuitView,
-                       simulation,
                        position,
                        rotation,
                        properties);

@@ -32,14 +32,13 @@ public class OscilloscopeView
   protected float outerWidth;
 
   public OscilloscopeView(SubcircuitView subcircuitView,
-                          CircuitSimulation simulation,
                           Int2D position,
                           Rotation rotation,
                           OscilloscopeProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
-    finaliseView(simulation);
+    finaliseView();
   }
 
   protected void createGraphics()
@@ -197,6 +196,7 @@ public class OscilloscopeView
                                 properties.family,
                                 saveEvents(),
                                 savePorts(),
+                                id,
                                 selected,
                                 saveSimulationState(),
                                 properties.inputCount,

@@ -43,32 +43,17 @@ public class TunnelView
   protected PointGridCache endCache;
 
   protected String sanitisedName;
-  private Int2D startPosition;
+  protected Int2D startPosition;
 
   public TunnelView(SubcircuitView subcircuitView,
-                    CircuitSimulation simulation,
                     Int2D position,
                     Rotation rotation,
                     TunnelProperties properties)
   {
-    this(subcircuitView,
-         simulation,
-         position,
-         rotation,
-         new BoundingBox(),
-         new BoundingBox(),
-         properties);
-  }
-
-  public TunnelView(SubcircuitView subcircuitView,
-                    CircuitSimulation circuitSimulation,
-                    Int2D position,
-                    Rotation rotation,
-                    BoundingBox boundingBox,
-                    BoundingBox selectionBox,
-                    TunnelProperties properties)
-  {
-    super(subcircuitView, position, rotation, boundingBox, selectionBox, properties);
+    super(subcircuitView,
+          position,
+          rotation,
+          properties);
     this.enabled = false;
     this.connections = new ArrayList<>(2);
     this.connections.add(null);
@@ -81,7 +66,8 @@ public class TunnelView
     this.startPosition = new Int2D(0, 0);
     this.endPosition = createGraphics();
 
-    finaliseView(circuitSimulation);
+    //You probably broke bounding boxes on this.
+    finaliseView();
   }
 
   protected String createSanitisedName(TunnelProperties properties)
@@ -146,7 +132,7 @@ public class TunnelView
     return f;
   }
 
-  public List<ConnectionView> createConnections(SubcircuitView subcircuitView)
+  public List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView)
   {
     updateGridCache();
 
@@ -256,7 +242,7 @@ public class TunnelView
   }
 
   @Override
-  protected void finaliseView(CircuitSimulation simulation)
+  protected void finaliseView()
   {
     finalised = true;
     enabled = false;
@@ -276,8 +262,7 @@ public class TunnelView
     return new TunnelData(properties.name,
                           position,
                           rotation,
-                          boundingBox.save(),
-                          selectionBox.save(),
+                          id,
                           selected,
                           ids,
                           properties.doubleSided);

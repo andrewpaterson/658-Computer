@@ -3,7 +3,6 @@ package net.logicim.data.wire;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
@@ -14,6 +13,7 @@ public class TraceData
 
   public Int2D start;
   public Int2D end;
+  public long id;
 
   protected boolean selected;
 
@@ -24,12 +24,14 @@ public class TraceData
   public TraceData(long[] traceIds,
                    Int2D start,
                    Int2D end,
+                   long id,
                    boolean selected)
   {
     this.traceIds = traceIds;
 
     this.start = start.clone();
     this.end = end.clone();
+    this.id = id;
     this.selected = selected;
   }
 
@@ -52,6 +54,14 @@ public class TraceData
                                  selected);
     }
     return traceView;
+  }
+
+  public TraceView create(SubcircuitEditor subcircuitEditor)
+  {
+    return new TraceView(subcircuitEditor.getSubcircuitView(),
+                         start,
+                         end,
+                         true);
   }
 }
 

@@ -5,8 +5,6 @@ import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.SimulationState;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
@@ -34,6 +32,7 @@ public class ClockData
                    float frequency,
                    SimulationIntegratedCircuitEventData events,
                    List<SimulationMultiPortData> ports,
+                   long id,
                    boolean selected,
                    SimulationState<ClockOscillatorState> simulationState,
                    boolean inverseOut,
@@ -45,6 +44,7 @@ public class ClockData
           family,
           events,
           ports,
+          id,
           selected,
           simulationState,
           explicitPowerPorts);
@@ -53,10 +53,9 @@ public class ClockData
   }
 
   @Override
-  public ClockView create(SubcircuitEditor subcircuitEditor, CircuitSimulation simulation, TraceLoader traceLoader, boolean fullLoad)
+  public ClockView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     return new ClockView(subcircuitEditor.getSubcircuitView(),
-                         simulation,
                          position,
                          rotation,
                          new ClockProperties(name,

@@ -31,6 +31,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
                        Family family,
                        SimulationIntegratedCircuitEventData events,
                        List<SimulationMultiPortData> ports,
+                       long id,
                        boolean selected,
                        SimulationState<State> simulationState,
                        int inputCount,
@@ -43,6 +44,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
           family,
           events,
           ports,
+          id,
           selected,
           simulationState,
           explicitPowerPorts);

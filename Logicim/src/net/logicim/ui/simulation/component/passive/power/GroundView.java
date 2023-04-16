@@ -23,14 +23,13 @@ public class GroundView
   protected LineView line4;
 
   public GroundView(SubcircuitView subcircuitView,
-                    CircuitSimulation circuit,
                     Int2D position,
                     Rotation rotation,
                     GroundProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
-    finaliseView(circuit);
+    finaliseView();
   }
 
   protected void createGraphics()
@@ -61,6 +60,7 @@ public class GroundView
                           rotation,
                           properties.name,
                           savePorts(),
+                          id,
                           selected);
   }
 

@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.extra;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Units;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -23,10 +22,10 @@ public class OscilloscopeViewFactory
                                  Int2D position,
                                  Rotation rotation)
   {
-    return create(
-        circuitEditor, position,
-        Rotation.Cannot,
-        createDefaultProperties(getViewClass()));
+    return create(circuitEditor,
+                  position,
+                  Rotation.Cannot,
+                  createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -48,9 +47,7 @@ public class OscilloscopeViewFactory
                                  OscilloscopeProperties properties)
   {
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
-    CircuitSimulation simulation = circuitEditor.getCircuitSimulation();
     return new OscilloscopeView(subcircuitView,
-                                simulation,
                                 position,
                                 rotation,
                                 properties);

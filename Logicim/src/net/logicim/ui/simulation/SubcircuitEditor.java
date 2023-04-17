@@ -304,7 +304,7 @@ public class SubcircuitEditor
 
   public List<View> loadViews(List<TraceData> traces, List<StaticData<?>> components, boolean appendIds, boolean newComponentPropertyStep)
   {
-    ArrayList<View> views = new ArrayList<>();
+    List<View> views = new ArrayList<>();
 
     for (TraceData traceData : traces)
     {
@@ -313,11 +313,16 @@ public class SubcircuitEditor
       traceView.updateId(appendIds, traceData.id);
     }
 
+    List<StaticView<?>> staticViews = new ArrayList<>();
+
     for (StaticData<?> staticData : components)
     {
       StaticView<?> staticView = staticData.createAndLoad(this, newComponentPropertyStep);
       views.add(staticView);
+      staticViews.add(staticView);
     }
+
+    subcircuitView.enableStaticViews(staticViews, null);
     return views;
   }
 

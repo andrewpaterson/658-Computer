@@ -1,13 +1,14 @@
 package net.logicim.ui.property;
 
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.domain.common.Circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.common.Rotation;
-import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
+import net.logicim.ui.simulation.CircuitEditor;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -38,8 +39,22 @@ public abstract class PropertyEditorDialog
     super(owner, title, true, dimension);
 
     this.editor = editor;
-    this.circuit = this.editor.getCircuitEditor().getCircuit();
+    this.circuit = getCircuit(editor);
     this.componentView = componentView;
+  }
+
+  protected static Circuit getCircuit(Logicim editor)
+  {
+
+    CircuitEditor circuitEditor = editor.getCircuitEditor();
+    if (circuitEditor != null)
+    {
+      return circuitEditor.getCircuit();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public void build()

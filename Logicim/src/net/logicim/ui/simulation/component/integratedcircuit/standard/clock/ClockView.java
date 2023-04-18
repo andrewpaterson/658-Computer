@@ -97,24 +97,23 @@ public class ClockView
   private void paintClockWaveform(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
   {
     ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(simulation);
-    Color clockColor;
-    long time = simulation.getTime();
-    if (integratedCircuit != null)
+    Color clockColor = Colours.getInstance().getDisconnectedTrace();
+    if (simulation != null)
     {
-      ClockOscillatorState state = integratedCircuit.getState();
-      if (state != null)
+      long time = simulation.getTime();
+      if (integratedCircuit != null)
       {
-        float voltage = integratedCircuit.getInternalVoltage(time);
-        clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
+        ClockOscillatorState state = integratedCircuit.getState();
+        if (state != null)
+        {
+          float voltage = integratedCircuit.getInternalVoltage(time);
+          clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
+        }
+        else
+        {
+          clockColor = Colours.getInstance().getDisconnectedTrace();
+        }
       }
-      else
-      {
-        clockColor = Colours.getInstance().getDisconnectedTrace();
-      }
-    }
-    else
-    {
-      clockColor = Colours.getInstance().getDisconnectedTrace();
     }
     graphics.setColor(clockColor);
 

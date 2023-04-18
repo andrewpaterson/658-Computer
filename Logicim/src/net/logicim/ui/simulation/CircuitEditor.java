@@ -76,7 +76,14 @@ public class CircuitEditor
 
   public Circuit getCircuit()
   {
-    return currentSimulation.getCircuitSimulation().getCircuit();
+    if (currentSimulation != null)
+    {
+      return currentSimulation.getCircuitSimulation().getCircuit();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public void editActionDeleteTraceView(ConnectionView connectionView, TraceView traceView)

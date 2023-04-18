@@ -171,8 +171,8 @@ public class SubcircuitView
     {
       IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
       simulation.getCircuit().remove(integratedCircuit);
-      removeIntegratedCircuitView(integratedCircuitView);
     }
+    removeIntegratedCircuitView(integratedCircuitView);
   }
 
   protected void deletePassiveView(PassiveView<?, ?> passiveView,

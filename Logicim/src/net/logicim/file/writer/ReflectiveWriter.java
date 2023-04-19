@@ -5,7 +5,10 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
+import net.logicim.data.common.KeyData;
+import net.logicim.data.common.MapElementData;
 import net.logicim.data.common.ReflectiveData;
+import net.logicim.data.common.ValueData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import org.w3c.dom.Document;
@@ -14,6 +17,7 @@ import org.w3c.dom.Node;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ReflectiveWriter
 {
@@ -42,18 +46,20 @@ public abstract class ReflectiveWriter
     return node;
   }
 
-  public static Node writeLong(Document doc, String elementName, long value)
+  public static void writeLong(Document doc, Element parent, String elementName, long value)
   {
     Element node = doc.createElement(elementName);
-    node.appendChild(doc.createTextNode(Long.toString(value)));
-    return node;
+    node.setAttribute(TYPE, Long.class.getSimpleName());
+    node.setAttribute("x", Long.toString(value));
+    parent.appendChild(node);
   }
 
-  public static Node writeInt(Document doc, String elementName, int value)
+  public static void writeInt(Document doc, Element parent, String elementName, int value)
   {
     Element node = doc.createElement(elementName);
-    node.appendChild(doc.createTextNode(Integer.toString(value)));
-    return node;
+    node.setAttribute(TYPE, Integer.class.getSimpleName());
+    node.setAttribute("x", Integer.toString(value));
+    parent.appendChild(node);
   }
 
   public static Node writeFloat(Document doc, String elementName, float value)
@@ -296,12 +302,42 @@ public abstract class ReflectiveWriter
 
     for (int i = 0; i < size; i++)
     {
-      ReflectiveData saveData = (ReflectiveData) list.get(i);
+      Object saveData = list.get(i);
       Element element = doc.createElement("element");
       element.setAttribute(TYPE, getXMLTag(saveData));
       element.setAttribute("index", Integer.toString(i));
       listContainer.appendChild(element);
       writeData(saveData, doc, element);
+    }
+  }
+
+  public static void writeMap(Document doc, Element parent, String name, Map<?, ?> map)
+  {
+    int size = map.size();
+
+    Element listContainer = doc.createElement(name);
+    listContainer.setAttribute(TYPE, map.getClass().getSimpleName());
+    listContainer.setAttribute("size", Integer.toString(size));
+    parent.appendChild(listContainer);
+
+    int i = 0;
+    for (Map.Entry<?, ?> entry : map.entrySet())
+    {
+      Object keyData = entry.getKey();
+      Object valueData = entry.getValue();
+      Element entryElement = doc.createElement("element");
+      entryElement.setAttribute("index", Integer.toString(i));
+      entryElement.setAttribute(TYPE, getXMLTag(MapElementData.class));
+      Element keyElement = doc.createElement("key");
+      keyElement.setAttribute(TYPE, getXMLTag(KeyData.class));
+      entryElement.appendChild(keyElement);
+      writeData(keyData, doc, keyElement);
+      Element valueElement = doc.createElement("value");
+      valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
+      entryElement.appendChild(valueElement);
+      writeData(valueData, doc, valueElement);
+      listContainer.appendChild(entryElement);
+      i++;
     }
   }
 
@@ -332,11 +368,11 @@ public abstract class ReflectiveWriter
       }
       else if (Long.class.isAssignableFrom(fieldClass) || long.class.isAssignableFrom(fieldClass))
       {
-        parent.appendChild(writeLong(doc, fieldName, (Long) fieldValue));
+        writeLong(doc, parent, fieldName, (Long) fieldValue);
       }
       else if (Integer.class.isAssignableFrom(fieldClass) || int.class.isAssignableFrom(fieldClass))
       {
-        parent.appendChild(writeInt(doc, fieldName, (Integer) fieldValue));
+        writeInt(doc, parent, fieldName, (Integer) fieldValue);
       }
       else if (Float.class.isAssignableFrom(fieldClass) || float.class.isAssignableFrom(fieldClass))
       {
@@ -401,6 +437,10 @@ public abstract class ReflectiveWriter
       else if (Enum.class.isAssignableFrom(fieldClass))
       {
         writeEnum(doc, parent, fieldName, fieldClass, (Enum<?>) fieldValue);
+      }
+      else if (Map.class.isAssignableFrom(fieldClass))
+      {
+        writeMap(doc, parent, fieldName, (Map<?, ?>) fieldValue);
       }
       else
       {

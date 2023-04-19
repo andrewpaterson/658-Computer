@@ -78,7 +78,7 @@ public class InstanceInspector
     {
       field.set(instance, value);
     }
-    catch (IllegalAccessException e)
+    catch (IllegalAccessException | IllegalArgumentException e)
     {
       throw new SimulatorException(e.getMessage());
     }

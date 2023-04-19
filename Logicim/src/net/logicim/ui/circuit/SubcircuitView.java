@@ -178,8 +178,11 @@ public class SubcircuitView
   protected void deletePassiveView(PassiveView<?, ?> passiveView,
                                    CircuitSimulation simulation)
   {
-    Passive passive = passiveView.getComponent(simulation);
-    simulation.getCircuit().remove(passive);
+    if (simulation != null)
+    {
+      Passive passive = passiveView.getComponent(simulation);
+      simulation.getCircuit().remove(passive);
+    }
     removePassiveView(passiveView);
   }
 
@@ -494,15 +497,18 @@ public class SubcircuitView
                                                     CircuitSimulation circuitSimulation)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    for (ConnectionView connectionView : connectionViews)
+    if (circuitSimulation != null)
     {
-      if (!updatedConnectionViews.contains(connectionView))
+      for (ConnectionView connectionView : connectionViews)
       {
-        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, connectionView);
-        updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
+        if (!updatedConnectionViews.contains(connectionView))
+        {
+          List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, connectionView);
+          updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
+        }
       }
-    }
 
+    }
     return updatedConnectionViews;
   }
 
@@ -658,13 +664,16 @@ public class SubcircuitView
   protected void findAndConnectNonTraceViewsForDeletion(CircuitSimulation circuitSimulation,
                                                         Set<ConnectionView> nonTraceConnectionViews)
   {
-    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
+    if (circuitSimulation != null)
     {
-      List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, nonTraceConnectionView);
-      updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
+      Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+      for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
+      {
+        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, nonTraceConnectionView);
+        updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
+      }
+      fireConnectionEvents(updatedConnectionViews, circuitSimulation);
     }
-    fireConnectionEvents(updatedConnectionViews, circuitSimulation);
   }
 
   protected Set<ConnectionView> findNonTraceConnections(Set<TraceView> inputTraceViews)

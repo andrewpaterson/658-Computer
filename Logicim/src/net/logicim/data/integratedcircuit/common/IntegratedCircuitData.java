@@ -16,7 +16,7 @@ import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -32,7 +32,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   public Family family;
 
   public SimulationIntegratedCircuitEventData events;
-  public SimulationState<STATE> state;
+  public SimulationStateData<STATE> state;
 
   public IntegratedCircuitData()
   {
@@ -46,7 +46,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                List<SimulationMultiPortData> ports,
                                long id,
                                boolean selected,
-                               SimulationState<STATE> state)
+                               SimulationStateData<STATE> state)
   {
     super(position, rotation, name, ports, id, selected);
     this.family = family;

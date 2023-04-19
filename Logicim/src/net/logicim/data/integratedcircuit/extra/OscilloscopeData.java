@@ -6,7 +6,7 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.common.propagation.FamilyStore;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -35,7 +35,7 @@ public class OscilloscopeData
                           List<SimulationMultiPortData> ports,
                           long id,
                           boolean selected,
-                          SimulationState<OscilloscopeState> simulationState,
+                          SimulationStateData<OscilloscopeState> simulationState,
                           int inputCount,
                           int numberOfDivsWide,
                           int samplesPerDiv,

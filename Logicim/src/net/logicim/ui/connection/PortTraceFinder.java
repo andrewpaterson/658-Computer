@@ -150,19 +150,29 @@ public abstract class PortTraceFinder
 
   protected static Map<Port, Port> createSplitterPortMap(CircuitSimulation simulation, List<LocalConnectionNet> connectionNets)
   {
-    Map<Port, Port> totalSplitterPortMap = new HashMap<>();
-    for (LocalConnectionNet connectionNet : connectionNets)
+    if (simulation != null)
     {
-      List<ComponentConnection<SplitterView>> splitterViewConnections = connectionNet.getSplitterViews();
-      for (ComponentConnection<SplitterView> splitterViewConnection : splitterViewConnections)
+      Map<Port, Port> totalSplitterPortMap = new HashMap<>();
+      for (LocalConnectionNet connectionNet : connectionNets)
       {
-        SplitterView splitterView = splitterViewConnection.component;
-        Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(simulation);
-        totalSplitterPortMap.putAll(portMap);
+        List<ComponentConnection<SplitterView>> splitterViewConnections = connectionNet.getSplitterViews();
+        for (ComponentConnection<SplitterView> splitterViewConnection : splitterViewConnections)
+        {
+          SplitterView splitterView = splitterViewConnection.component;
+          Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(simulation);
+          if (portMap != null)
+          {
+            totalSplitterPortMap.putAll(portMap);
+          }
+        }
       }
-    }
 
-    return totalSplitterPortMap;
+      return totalSplitterPortMap;
+    }
+    else
+    {
+      return null;
+    }
   }
 
   protected static Map<Port, PortConnection> createPortWireMap(List<LocalConnectionNet> connectionNets)

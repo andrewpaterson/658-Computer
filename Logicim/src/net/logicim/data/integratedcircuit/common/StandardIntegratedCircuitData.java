@@ -2,13 +2,10 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
-import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 
@@ -31,7 +28,7 @@ public abstract class StandardIntegratedCircuitData<ICV extends IntegratedCircui
                                        List<SimulationMultiPortData> ports,
                                        long id,
                                        boolean selected,
-                                       SimulationState<STATE> state,
+                                       SimulationStateData<STATE> state,
                                        boolean explicitPowerPorts)
   {
     super(position,

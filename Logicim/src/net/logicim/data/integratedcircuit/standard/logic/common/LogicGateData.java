@@ -3,13 +3,10 @@ package net.logicim.data.integratedcircuit.standard.logic.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
-import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
-import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateView;
 
@@ -33,7 +30,7 @@ public abstract class LogicGateData<ICV extends LogicGateView<?>>
                        List<SimulationMultiPortData> ports,
                        long id,
                        boolean selected,
-                       SimulationState<State> simulationState,
+                       SimulationStateData<State> simulationState,
                        int inputCount,
                        int inputWidth,
                        boolean explicitPowerPorts)

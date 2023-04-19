@@ -6,7 +6,7 @@ import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.common.propagation.FamilyStore;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -34,7 +34,7 @@ public class ClockData
                    List<SimulationMultiPortData> ports,
                    long id,
                    boolean selected,
-                   SimulationState<ClockOscillatorState> simulationState,
+                   SimulationStateData<ClockOscillatorState> simulationState,
                    boolean inverseOut,
                    boolean explicitPowerPorts)
   {

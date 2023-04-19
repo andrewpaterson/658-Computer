@@ -31,5 +31,10 @@ public class ArrayListData
   {
     return list;
   }
+
+  public void set(int index, Object object)
+  {
+    list.set(index, object);
+  }
 }
 

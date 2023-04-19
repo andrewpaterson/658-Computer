@@ -13,7 +13,7 @@ import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
@@ -174,9 +174,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
   }
 
-  protected <STATE extends State> SimulationState<STATE> saveSimulationState()
+  protected <STATE extends State> SimulationStateData<STATE> saveSimulationState()
   {
-    SimulationState<STATE> simulationState = new SimulationState<>();
+    SimulationStateData<STATE> simulationState = new SimulationStateData<>();
     for (Map.Entry<CircuitSimulation, IC> entry : simulationIntegratedCircuits.entrySet())
     {
       IC integratedCircuit = entry.getValue();

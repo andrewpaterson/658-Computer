@@ -6,7 +6,7 @@ import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.common.propagation.FamilyStore;
-import net.logicim.domain.common.state.SimulationState;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -32,7 +32,7 @@ public class InverterData
                       List<SimulationMultiPortData> ports,
                       long id,
                       boolean selected,
-                      SimulationState<State> simulationState,
+                      SimulationStateData<State> simulationState,
                       int inputCount,
                       int inputWidth,
                       boolean explicitPowerPorts)

@@ -6,7 +6,7 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
-import net.logicim.data.*;
+import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.*;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.field.ProcessedXMLDataField;
@@ -26,10 +26,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.logicim.file.writer.ReflectiveWriter.*;
 
@@ -136,9 +133,45 @@ public class LogicimFileReader
     {
       return new EnumData();
     }
+    else if (KeyData.class.getSimpleName().equals(type))
+    {
+      return new KeyData();
+    }
+    else if (MapElementData.class.getSimpleName().equals(type))
+    {
+      return new MapElementData();
+    }
+    else if (ValueData.class.getSimpleName().equals(type))
+    {
+      return new ValueData();
+    }
+    else if (LinkedHashMap.class.getSimpleName().equals(type))
+    {
+      return new LinkedHashMapData();
+    }
+    else if (HashMap.class.getSimpleName().equals(type))
+    {
+      return new HashMapData();
+    }
+    else if (long.class.getSimpleName().equals(type) || Long.class.getSimpleName().equals(type))
+    {
+      return new LongData();
+    }
+    else if (int.class.getSimpleName().equals(type) || Integer.class.getSimpleName().equals(type))
+    {
+      return new IntData();
+    }
+    else if (float.class.getSimpleName().equals(type) || Float.class.getSimpleName().equals(type))
+    {
+      return new FloatData();
+    }
+    else if (double.class.getSimpleName().equals(type) || Double.class.getSimpleName().equals(type))
+    {
+      return new DoubleData();
+    }
     else
     {
-      Class aClass = SaveDataClassStore.getInstance().getClass(type);
+      Class<?> aClass = SaveDataClassStore.getInstance().getClass(type);
       if (aClass == null)
       {
         throw new SimulatorException("Cannot instantiate class [%s].", type);
@@ -179,41 +212,49 @@ public class LogicimFileReader
   {
     if (dataStack.size() - 2 >= 0)
     {
-      XMLDataField xmlDataField = dataStack.get(dataStack.size() - 1);
-      SaveXMLDataField containingClassField = (SaveXMLDataField) dataStack.get(dataStack.size() - 2);
-      InstanceInspector instanceInspector = new InstanceInspector(containingClassField.typeInstance);
-      boolean processed = true;
-      if (xmlDataField instanceof UnknownXMLDataField)
+      XMLDataField xmlDataFieldStackMinusOne = dataStack.get(dataStack.size() - 1);
+      XMLDataField xmlDataFieldStackMinusTwo = dataStack.get(dataStack.size() - 2);
+      if (xmlDataFieldStackMinusTwo instanceof SaveXMLDataField)
       {
-        UnknownXMLDataField unknownDataField = (UnknownXMLDataField) xmlDataField;
-        Object value = parsePrimitive(string.trim(), unknownDataField, containingClassField, instanceInspector);
-        setPrimitiveFieldValue(unknownDataField, containingClassField, instanceInspector, value);
+        SaveXMLDataField containingClassField = (SaveXMLDataField) xmlDataFieldStackMinusTwo;
+        InstanceInspector instanceInspector = new InstanceInspector(containingClassField.typeInstance);
+        boolean processed = true;
+        if (xmlDataFieldStackMinusOne instanceof UnknownXMLDataField)
+        {
+          UnknownXMLDataField unknownDataField = (UnknownXMLDataField) xmlDataFieldStackMinusOne;
+          Object value = parsePrimitive(string.trim(), unknownDataField, containingClassField, instanceInspector);
+          setPrimitiveFieldValue(unknownDataField, containingClassField, instanceInspector, value);
+        }
+        else if (xmlDataFieldStackMinusOne instanceof SaveXMLDataField)
+        {
+          processed = false;
+          SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataFieldStackMinusOne;
+          if (saveXMLDataField.typeInstance instanceof IntArrayData)
+          {
+            parseIntArray((IntArrayData) saveXMLDataField.typeInstance, string);
+          }
+          else if (saveXMLDataField.typeInstance instanceof LongArrayData)
+          {
+            parseLongArray((LongArrayData) saveXMLDataField.typeInstance, string);
+          }
+          else if (saveXMLDataField.typeInstance instanceof FloatArrayData)
+          {
+            parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, string);
+          }
+          else if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
+          {
+            parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, string);
+          }
+        }
+        if (processed)
+        {
+          dataStack.remove(dataStack.size() - 1);
+          dataStack.add(new ProcessedXMLDataField(xmlDataFieldStackMinusOne.fieldName, xmlDataFieldStackMinusOne.attributes));
+        }
       }
-      else if (xmlDataField instanceof SaveXMLDataField)
+      else
       {
-        processed = false;
-        SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataField;
-        if (saveXMLDataField.typeInstance instanceof IntArrayData)
-        {
-          parseIntArray((IntArrayData) saveXMLDataField.typeInstance, string);
-        }
-        else if (saveXMLDataField.typeInstance instanceof LongArrayData)
-        {
-          parseLongArray((LongArrayData) saveXMLDataField.typeInstance, string);
-        }
-        else if (saveXMLDataField.typeInstance instanceof FloatArrayData)
-        {
-          parseFloatArray((FloatArrayData) saveXMLDataField.typeInstance, string);
-        }
-        else if (saveXMLDataField.typeInstance instanceof DoubleArrayData)
-        {
-          parseDoubleArray((DoubleArrayData) saveXMLDataField.typeInstance, string);
-        }
-      }
-      if (processed)
-      {
-        dataStack.remove(dataStack.size() - 1);
-        dataStack.add(new ProcessedXMLDataField(xmlDataField.fieldName, xmlDataField.attributes));
+        throw new SimulatorException("Found class [%s] on stack.  Expected only [SaveXMLDataField].", xmlDataFieldStackMinusTwo.getClass().getSimpleName());
       }
     }
   }
@@ -416,6 +457,11 @@ public class LogicimFileReader
     arrayData.load(attributes);
   }
 
+  private void startMapElementData(MapElementData mapElementData, Map<String, String> attributes)
+  {
+    mapElementData.load(attributes);
+  }
+
   @Override
   public void startElement(String uri, String lName, String qName, Attributes attr)
   {
@@ -440,6 +486,10 @@ public class LogicimFileReader
           else if (o instanceof ArrayData)
           {
             startArrayData((ArrayData) o, attributeMap);
+          }
+          else if (o instanceof MapElementData)
+          {
+            startMapElementData((MapElementData) o, attributeMap);
           }
           else if (o instanceof ReflectiveData)
           {
@@ -493,58 +543,106 @@ public class LogicimFileReader
       {
         if (dataStack.size() - 2 >= 0)
         {
-          XMLDataField xmlDataField = dataStack.get(dataStack.size() - 1);
-          Map<String, String> attributes = xmlDataField.attributes;
-          SaveXMLDataField containingClassField = (SaveXMLDataField) dataStack.get(dataStack.size() - 2);
-          InstanceInspector instanceInspector = new InstanceInspector(containingClassField.typeInstance);
-
-          if (xmlDataField instanceof SaveXMLDataField)
-          {
-            SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataField;
-            if (containingClassField.typeInstance instanceof ArrayListData)
-            {
-              int index = Integer.parseInt(attributes.get(INDEX));
-              ArrayListData listData = (ArrayListData) containingClassField.typeInstance;
-              listData.list.set(index, saveXMLDataField.typeInstance.getObject());
-            }
-            else if (containingClassField.typeInstance instanceof IntArray2DData)
-            {
-              int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
-              IntArray2DData intArray2DData = (IntArray2DData) containingClassField.typeInstance;
-              intArray2DData.array[index] = ((IntArrayData) saveXMLDataField.typeInstance).array;
-            }
-            else if (containingClassField.typeInstance instanceof LongArray2DData)
-            {
-              int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
-              LongArray2DData longArray2DData = (LongArray2DData) containingClassField.typeInstance;
-              longArray2DData.array[index] = ((LongArrayData) saveXMLDataField.typeInstance).array;
-            }
-            else if (containingClassField.typeInstance instanceof FloatArray2DData)
-            {
-              int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
-              FloatArray2DData floatArray2DData = (FloatArray2DData) containingClassField.typeInstance;
-              floatArray2DData.array[index] = ((FloatArrayData) saveXMLDataField.typeInstance).array;
-            }
-            else if (containingClassField.typeInstance instanceof DoubleArray2DData)
-            {
-              int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
-              DoubleArray2DData doubleArray2DData = (DoubleArray2DData) containingClassField.typeInstance;
-              doubleArray2DData.array[index] = ((DoubleArrayData) saveXMLDataField.typeInstance).array;
-            }
-            else
-            {
-              instanceInspector.setFieldValue(saveXMLDataField.fieldName, saveXMLDataField.typeInstance.getObject());
-            }
-          }
-          else if (xmlDataField instanceof UnknownXMLDataField)
-          {
-          }
-          else if (xmlDataField instanceof ProcessedXMLDataField)
-          {
-          }
+          endElement();
         }
       }
       dataStack.remove(dataStack.size() - 1);
+    }
+  }
+
+  protected void endElement()
+  {
+    XMLDataField xmlDataFieldStackMinusOne = dataStack.get(dataStack.size() - 1);
+    Map<String, String> attributes = xmlDataFieldStackMinusOne.attributes;
+    XMLDataField xmlDataFieldStackMinusTwo = dataStack.get(dataStack.size() - 2);
+    if (xmlDataFieldStackMinusTwo instanceof SaveXMLDataField)
+    {
+      SaveXMLDataField containingClassField = (SaveXMLDataField) xmlDataFieldStackMinusTwo;
+      InstanceInspector instanceInspector = new InstanceInspector(containingClassField.typeInstance);
+
+      if (xmlDataFieldStackMinusOne instanceof SaveXMLDataField)
+      {
+        SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataFieldStackMinusOne;
+        if (containingClassField.typeInstance instanceof ArrayListData)
+        {
+          int index = Integer.parseInt(attributes.get(INDEX));
+          ArrayListData listData = (ArrayListData) containingClassField.typeInstance;
+          listData.set(index, saveXMLDataField.typeInstance.getObject());
+        }
+        else if (containingClassField.typeInstance instanceof LinkedHashMapData)
+        {
+          LinkedHashMapData mapData = (LinkedHashMapData) containingClassField.typeInstance;
+          mapData.set(saveXMLDataField.typeInstance.getObject());
+        }
+        else if (containingClassField.typeInstance instanceof HashMapData)
+        {
+          HashMapData mapData = (HashMapData) containingClassField.typeInstance;
+          mapData.set(saveXMLDataField.typeInstance.getObject());
+        }
+        else if (containingClassField.typeInstance instanceof IntArray2DData)
+        {
+          int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
+          IntArray2DData intArray2DData = (IntArray2DData) containingClassField.typeInstance;
+          intArray2DData.array[index] = ((IntArrayData) saveXMLDataField.typeInstance).array;
+        }
+        else if (containingClassField.typeInstance instanceof LongArray2DData)
+        {
+          int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
+          LongArray2DData longArray2DData = (LongArray2DData) containingClassField.typeInstance;
+          longArray2DData.array[index] = ((LongArrayData) saveXMLDataField.typeInstance).array;
+        }
+        else if (containingClassField.typeInstance instanceof FloatArray2DData)
+        {
+          int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
+          FloatArray2DData floatArray2DData = (FloatArray2DData) containingClassField.typeInstance;
+          floatArray2DData.array[index] = ((FloatArrayData) saveXMLDataField.typeInstance).array;
+        }
+        else if (containingClassField.typeInstance instanceof DoubleArray2DData)
+        {
+          int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
+          DoubleArray2DData doubleArray2DData = (DoubleArray2DData) containingClassField.typeInstance;
+          doubleArray2DData.array[index] = ((DoubleArrayData) saveXMLDataField.typeInstance).array;
+        }
+        else if (containingClassField.typeInstance instanceof IntData)
+        {
+          IntData data = (IntData) containingClassField.typeInstance;
+          instanceInspector.setFieldValue(saveXMLDataField.fieldName, data.x);
+        }
+        else if (containingClassField.typeInstance instanceof LongData)
+        {
+          LongData data = (LongData) containingClassField.typeInstance;
+          instanceInspector.setFieldValue(saveXMLDataField.fieldName, data.x);
+        }
+        else if (containingClassField.typeInstance instanceof MapElementData)
+        {
+          MapElementData data = (MapElementData) containingClassField.typeInstance;
+          data.set(((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance);
+        }
+        else if (containingClassField.typeInstance instanceof KeyData)
+        {
+          KeyData data = (KeyData) containingClassField.typeInstance;
+          data.value = ((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance.getObject();
+        }
+        else if (containingClassField.typeInstance instanceof ValueData)
+        {
+          ValueData data = (ValueData) containingClassField.typeInstance;
+          data.value = ((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance.getObject();
+        }
+        else
+        {
+          instanceInspector.setFieldValue(saveXMLDataField.fieldName, saveXMLDataField.typeInstance.getObject());
+        }
+      }
+      else if (xmlDataFieldStackMinusOne instanceof UnknownXMLDataField)
+      {
+      }
+      else if (xmlDataFieldStackMinusOne instanceof ProcessedXMLDataField)
+      {
+      }
+    }
+    else
+    {
+      throw new SimulatorException("Found class [%s] on stack.  Expected only [SaveXMLDataField].", xmlDataFieldStackMinusTwo.getClass().getSimpleName());
     }
   }
 }

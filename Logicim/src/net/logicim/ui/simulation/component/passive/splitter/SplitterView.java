@@ -496,8 +496,15 @@ public class SplitterView
 
   public Map<Port, Port> getSimulationBidirectionalPorts(CircuitSimulation simulation)
   {
-    BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(simulation);
-    return bidirectionalPortMap.getBidirectionalPortMap();
+    if (simulation != null)
+    {
+      BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(simulation);
+      if (bidirectionalPortMap != null)
+      {
+        return bidirectionalPortMap.getBidirectionalPortMap();
+      }
+    }
+    return null;
   }
 }
 

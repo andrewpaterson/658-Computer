@@ -1,16 +1,17 @@
-package net.logicim.domain.common.state;
+package net.logicim.data.simulation;
 
 import net.logicim.data.common.ReflectiveData;
+import net.logicim.domain.common.state.State;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class SimulationState<E extends State>
+public class SimulationStateData<E extends State>
     extends ReflectiveData
 {
   public Map<Long, E> simulationStateData;
 
-  public SimulationState()
+  public SimulationStateData()
   {
     simulationStateData = new LinkedHashMap<>();
   }

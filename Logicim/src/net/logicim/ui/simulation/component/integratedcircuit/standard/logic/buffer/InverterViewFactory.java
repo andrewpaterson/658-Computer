@@ -28,7 +28,7 @@ public class InverterViewFactory
   {
     return new BufferProperties("",
                                 DefaultFamily.get(),
-                                true,
+                                false,
                                 1,
                                 1);
   }

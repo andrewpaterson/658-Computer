@@ -28,7 +28,7 @@ public class BufferViewFactory
   {
     return new BufferProperties("",
                                 DefaultFamily.get(),
-                                true,
+                                false,
                                 1,
                                 1);
   }

@@ -11,7 +11,6 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.text.TextView;
@@ -33,7 +32,9 @@ public class TunnelView
 
   protected Set<TunnelView> tunnels;
   protected List<ConnectionView> connections;
+
   protected List<Trace> traces;
+
   protected boolean enabled;
   protected TextView textView;
   protected PolygonView polygonView;

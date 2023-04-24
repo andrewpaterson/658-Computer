@@ -30,6 +30,7 @@ import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.ConnectionViewCache;
 import net.logicim.ui.simulation.StaticViewIterator;
+import net.logicim.ui.simulation.TopLevelSubcircuitSimulation;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -194,6 +195,21 @@ public class SubcircuitView
   public StaticViewIterator staticViewIterator()
   {
     return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, decorativeViews);
+  }
+
+  public Set<IntegratedCircuitView<?, ?>> getIntegratedCircuitViews()
+  {
+    return integratedCircuitViews;
+  }
+
+  public Set<PassiveView<?, ?>> getPassiveViews()
+  {
+    return passiveViews;
+  }
+
+  public Set<TunnelView> getTunnelViews()
+  {
+    return tunnelViews;
   }
 
   public Set<TraceView> getTraceViews()
@@ -546,10 +562,13 @@ public class SubcircuitView
 
   public void enableStaticViews(List<StaticView<?>> staticViews, CircuitSimulation simulation)
   {
-    for (StaticView<?> staticView : staticViews)
+    if (simulation != null)
     {
-      staticView.enable(simulation);
-      staticView.simulationStarted(simulation);
+      for (StaticView<?> staticView : staticViews)
+      {
+        staticView.enable(simulation);
+        staticView.simulationStarted(simulation);
+      }
     }
   }
 
@@ -1006,6 +1025,15 @@ public class SubcircuitView
       }
     }
     return result;
+  }
+
+  public void ensureComponentsForSimulation(TopLevelSubcircuitSimulation topLevelSubcircuitSimulation)
+  {
+    CircuitSimulation circuitSimulation = topLevelSubcircuitSimulation.getCircuitSimulation();
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
+    {
+      integratedCircuitView.simulationStarted(circuitSimulation);
+    }
   }
 }
 

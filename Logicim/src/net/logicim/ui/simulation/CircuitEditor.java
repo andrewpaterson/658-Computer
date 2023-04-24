@@ -543,5 +543,10 @@ public class CircuitEditor
     }
     return null;
   }
+
+  public TopLevelSubcircuitSimulation getCurrentTopLevelSimulation()
+  {
+    return currentSimulation;
+  }
 }
 

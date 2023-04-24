@@ -7,13 +7,13 @@ import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
-import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
@@ -54,14 +54,17 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 
   protected void createComponent(CircuitSimulation simulation)
   {
-    FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    if (simulation != null)
+    if (simulation == null)
     {
-      IC integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
-      simulationIntegratedCircuits.put(simulation, integratedCircuit);
-      createPowerPortsIfNecessary(simulation, familyVoltageConfiguration);
-      integratedCircuit.disable();
+      throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
     }
+
+    FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
+    IC integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
+    simulationIntegratedCircuits.put(simulation, integratedCircuit);
+    createPowerPortsIfNecessary(simulation, familyVoltageConfiguration);
+    integratedCircuit.disable();
+
   }
 
   protected void validatePorts(CircuitSimulation simulation)
@@ -96,6 +99,10 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     if (simulation != null)
     {
       IC integratedCircuit = simulationIntegratedCircuits.get(simulation);
+      if (integratedCircuit == null)
+      {
+        finaliseComponent(simulation);
+      }
       integratedCircuit.simulationStarted(simulation.getSimulation());
     }
   }

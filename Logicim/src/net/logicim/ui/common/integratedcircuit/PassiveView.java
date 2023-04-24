@@ -31,6 +31,11 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
   protected void createComponent(CircuitSimulation simulation)
   {
+    if (simulation == null)
+    {
+      throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
+    }
+
     PASSIVE passive = createPassive(simulation);
     simulationPassives.put(simulation, passive);
     passive.disable();

@@ -34,6 +34,7 @@ import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.TopLevelSubcircuitSimulation;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -690,6 +691,16 @@ public class Logicim
   public void toggleTunSimulation()
   {
     running = !running;
+    if (running)
+    {
+      TopLevelSubcircuitSimulation simulation = circuitEditor.getCurrentTopLevelSimulation();
+      SubcircuitEditor subcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+      if (simulation == null)
+      {
+        simulation = new TopLevelSubcircuitSimulation(subcircuitEditor, new CircuitSimulation());
+      }
+      subcircuitEditor.ensureComponentsForSimulation(simulation);
+    }
   }
 
   public void editActionDelete()

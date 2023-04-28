@@ -1,7 +1,5 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -18,7 +16,7 @@ public interface WireView
 
   View getView();
 
-  void enable(CircuitSimulation simulation);
+  void enable();
 
   void clearTraces();
 }

@@ -1,7 +1,7 @@
 package net.logicim.data.editor;
 
-import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.circuit.CircuitData;
+import net.logicim.data.common.ReflectiveData;
 import net.logicim.ui.common.Rotation;
 
 import java.util.List;

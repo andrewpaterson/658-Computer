@@ -1,9 +1,9 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.ui.Logicim;
 import net.logicim.data.common.properties.ComponentProperties;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
+import net.logicim.ui.Logicim;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 

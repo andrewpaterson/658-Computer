@@ -1,8 +1,8 @@
 package net.logicim.ui.simulation.component.passive.splitter;
 
+import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.passive.wire.SplitterProperties;
 import net.logicim.ui.common.Rotation;
-import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.components.Label;
 import net.logicim.ui.components.form.Form;

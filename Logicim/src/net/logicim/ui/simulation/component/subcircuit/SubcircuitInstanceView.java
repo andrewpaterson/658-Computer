@@ -33,7 +33,6 @@ import static net.logicim.data.circuit.SubcircuitPinAlignment.*;
 public class SubcircuitInstanceView
     extends PassiveView<SubcircuitInstance, SubcircuitInstanceProperties>
 {
-  protected boolean enabled;
   protected boolean subcircuitComponentsCreated;
   protected List<SubcircuitPinView> pinViews;
   protected SubcircuitView instanceSubcircuitView;
@@ -54,7 +53,6 @@ public class SubcircuitInstanceView
           rotation,
           properties);
     this.instanceSubcircuitView = instanceSubcircuitView;
-    this.enabled = false;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
     this.subcircuitView.addPassiveView(this);
@@ -432,24 +430,6 @@ public class SubcircuitInstanceView
   public String getDescription()
   {
     return getType() + " " + getTypeName() + "(" + getName() + ") (" + getPosition() + ")";
-  }
-
-  @Override
-  public void enable(CircuitSimulation simulation)
-  {
-    enabled = true;
-  }
-
-  @Override
-  public void disable(CircuitSimulation simulation)
-  {
-    enabled = false;
-  }
-
-  @Override
-  public boolean isEnabled(CircuitSimulation simulation)
-  {
-    return enabled;
   }
 
   @Override

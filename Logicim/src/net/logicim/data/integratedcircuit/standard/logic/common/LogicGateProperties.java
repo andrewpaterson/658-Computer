@@ -3,8 +3,6 @@ package net.logicim.data.integratedcircuit.standard.logic.common;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 
-import java.util.Objects;
-
 public class LogicGateProperties
     extends StandardIntegratedCircuitProperties
 {

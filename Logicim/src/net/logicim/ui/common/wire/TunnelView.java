@@ -35,7 +35,6 @@ public class TunnelView
 
   protected List<Trace> traces;
 
-  protected boolean enabled;
   protected TextView textView;
   protected PolygonView polygonView;
 
@@ -55,7 +54,6 @@ public class TunnelView
           position,
           rotation,
           properties);
-    this.enabled = false;
     this.connections = new ArrayList<>(2);
     this.connections.add(null);
     this.connections.add(null);
@@ -201,24 +199,6 @@ public class TunnelView
   public String getDescription()
   {
     return "Tunnel [" + getName() + "] (" + position + ")";
-  }
-
-  @Override
-  public void enable(CircuitSimulation simulation)
-  {
-    enabled = true;
-  }
-
-  @Override
-  public void disable(CircuitSimulation simulation)
-  {
-    enabled = false;
-  }
-
-  @Override
-  public boolean isEnabled(CircuitSimulation simulation)
-  {
-    return enabled;
   }
 
   @Override

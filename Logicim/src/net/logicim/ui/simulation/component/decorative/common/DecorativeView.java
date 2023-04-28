@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.decorative.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.decorative.common.DecorativeProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -16,8 +15,6 @@ import java.util.List;
 public abstract class DecorativeView<T extends DecorativeProperties>
     extends StaticView<T>
 {
-  protected boolean enabled;
-
   public DecorativeView(SubcircuitView subcircuitView,
                         Int2D position,
                         Rotation rotation,
@@ -31,15 +28,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   protected void finaliseView()
   {
     finalised = true;
-    enabled = false;
-
     updateBoundingBoxes();
-  }
-
-  @Override
-  public boolean isEnabled(CircuitSimulation simulation)
-  {
-    return enabled;
   }
 
   @Override
@@ -63,18 +52,6 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   public String getDescription()
   {
     return getType() + " " + getName() + " (" + getPosition() + ")";
-  }
-
-  @Override
-  public void enable(CircuitSimulation simulation)
-  {
-    enabled = true;
-  }
-
-  @Override
-  public void disable(CircuitSimulation simulation)
-  {
-    enabled = false;
   }
 
   @Override

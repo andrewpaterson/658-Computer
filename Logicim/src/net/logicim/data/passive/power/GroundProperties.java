@@ -2,8 +2,6 @@ package net.logicim.data.passive.power;
 
 import net.logicim.data.common.properties.ComponentProperties;
 
-import java.util.Objects;
-
 public class GroundProperties
     extends ComponentProperties
 {

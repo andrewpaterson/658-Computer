@@ -1,6 +1,6 @@
 package net.logicim.data.common;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class HashMapData
     extends MapData

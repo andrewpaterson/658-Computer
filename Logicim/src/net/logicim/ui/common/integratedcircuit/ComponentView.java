@@ -26,7 +26,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     implements ShapeHolder
 {
   protected List<PortView> portViews;
-  protected boolean enabled;
 
   public ComponentView(SubcircuitView subcircuitView,
                        Int2D position,
@@ -37,7 +36,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
           position,
           rotation,
           properties);
-    this.enabled = false;
     this.portViews = new ArrayList<>();
   }
 
@@ -180,26 +178,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void enable(CircuitSimulation simulation)
-  {
-    if (simulation != null)
-    {
-      getComponent(simulation).enable(simulation);
-    }
-    enabled = true;
-  }
-
-  @Override
-  public void disable(CircuitSimulation simulation)
-  {
-    if (simulation != null)
-    {
-      getComponent(simulation).disable();
-    }
-    enabled = false;
-  }
-
-  @Override
   public String getDescription()
   {
     return getComponentType() + " " + getName() + " (" + getPosition() + ")";
@@ -215,11 +193,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
         throw new SimulatorException("PortView [%s] must have at lease one port on view [%s].", portView.getText(), getDescription());
       }
     }
-  }
-
-  public boolean isEnabled(CircuitSimulation simulation)
-  {
-    return enabled;
   }
 
   @Override

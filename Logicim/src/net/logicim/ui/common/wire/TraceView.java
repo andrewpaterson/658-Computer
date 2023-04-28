@@ -137,11 +137,6 @@ public class TraceView
   }
 
   @Override
-  public void enable(CircuitSimulation simulation)
-  {
-  }
-
-  @Override
   public void paintSelected(Graphics2D graphics, Viewport viewport)
   {
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);

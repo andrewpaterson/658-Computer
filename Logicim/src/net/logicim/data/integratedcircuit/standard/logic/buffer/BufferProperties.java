@@ -4,8 +4,6 @@ import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 
-import java.util.Objects;
-
 public class BufferProperties
     extends StandardIntegratedCircuitProperties
 {

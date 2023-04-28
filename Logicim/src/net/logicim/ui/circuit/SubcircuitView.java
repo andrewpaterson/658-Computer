@@ -562,11 +562,16 @@ public class SubcircuitView
 
   public void enableStaticViews(List<StaticView<?>> staticViews, CircuitSimulation simulation)
   {
+    for (StaticView<?> staticView : staticViews)
+    {
+      staticView.enable();
+      staticView.simulationStarted(simulation);
+    }
+
     if (simulation != null)
     {
       for (StaticView<?> staticView : staticViews)
       {
-        staticView.enable(simulation);
         staticView.simulationStarted(simulation);
       }
     }
@@ -809,7 +814,7 @@ public class SubcircuitView
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.disable(simulation);
+      staticView.disable();
       connectionViews.addAll(disconnectStaticView(staticView, simulation));
     }
 
@@ -918,8 +923,7 @@ public class SubcircuitView
     return junctions;
   }
 
-  public List<View> getSelectionFromRectangle(CircuitSimulation simulation,
-                                              Float2D start,
+  public List<View> getSelectionFromRectangle(Float2D start,
                                               Float2D end)
   {
     boolean includeIntersections = start.x > end.x;
@@ -931,7 +935,13 @@ public class SubcircuitView
     while (iterator.hasNext())
     {
       StaticView<?> staticView = iterator.next();
-      updateSelectedViews(simulation, start, end, includeIntersections, boundBoxPosition, boundBoxDimension, selectedViews, staticView);
+      updateSelectedViews(start,
+                          end,
+                          includeIntersections,
+                          boundBoxPosition,
+                          boundBoxDimension,
+                          selectedViews,
+                          staticView);
     }
 
     for (TraceView traceView : traceViews)
@@ -956,8 +966,7 @@ public class SubcircuitView
     return selectedViews;
   }
 
-  protected void updateSelectedViews(CircuitSimulation simulation,
-                                     Float2D start,
+  protected void updateSelectedViews(Float2D start,
                                      Float2D end,
                                      boolean includeIntersections,
                                      Float2D boundBoxPosition,
@@ -965,7 +974,7 @@ public class SubcircuitView
                                      List<View> selectedViews,
                                      StaticView<?> componentView)
   {
-    if (componentView.isEnabled(simulation))
+    if (componentView.isEnabled())
     {
       componentView.getBoundingBoxInGridSpace(boundBoxPosition, boundBoxDimension);
       if (isPoint(start, end))

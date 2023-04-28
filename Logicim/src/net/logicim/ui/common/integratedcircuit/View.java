@@ -13,10 +13,12 @@ public abstract class View
   public static long nextId = 1L;
 
   protected long id;
+  protected boolean enabled;
 
   public View()
   {
     id = 0;
+    enabled = false;
   }
 
   protected void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
@@ -77,7 +79,20 @@ public abstract class View
     }
   }
 
-  public abstract void enable(CircuitSimulation simulation);
+  public void enable()
+  {
+    enabled = true;
+  }
+
+  public void disable()
+  {
+    enabled = false;
+  }
+
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
 
   public abstract void setPosition(int x, int y);
 

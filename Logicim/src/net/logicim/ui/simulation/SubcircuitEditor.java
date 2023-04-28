@@ -168,8 +168,7 @@ public class SubcircuitEditor
     return subcircuitView.staticViewIterator();
   }
 
-  public List<StaticView<?>> getComponentViewsInScreenSpace(CircuitSimulation simulation,
-                                                            Viewport viewport,
+  public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport,
                                                             Int2D screenPosition)
   {
     List<StaticView<?>> selectedViews = new ArrayList<>();
@@ -177,7 +176,7 @@ public class SubcircuitEditor
     while (iterator.hasNext())
     {
       StaticView<?> view = iterator.next();
-      if (isInScreenSpaceBoundingBox(simulation, viewport, screenPosition, view))
+      if (isInScreenSpaceBoundingBox(viewport, screenPosition, view))
       {
         selectedViews.add(view);
       }
@@ -185,12 +184,11 @@ public class SubcircuitEditor
     return selectedViews;
   }
 
-  protected boolean isInScreenSpaceBoundingBox(CircuitSimulation simulation,
-                                               Viewport viewport,
+  protected boolean isInScreenSpaceBoundingBox(Viewport viewport,
                                                Int2D screenPosition,
                                                StaticView<?> view)
   {
-    if (view.isEnabled(simulation))
+    if (view.isEnabled())
     {
       Int2D boundBoxPosition = new Int2D();
       Int2D boundBoxDimension = new Int2D();
@@ -277,7 +275,7 @@ public class SubcircuitEditor
 
   public List<View> getSelectionFromRectangle(CircuitSimulation simulation, Float2D start, Float2D end)
   {
-    return subcircuitView.getSelectionFromRectangle(simulation, start, end);
+    return subcircuitView.getSelectionFromRectangle(start, end);
   }
 
   public ConnectionView getConnection(int x, int y)

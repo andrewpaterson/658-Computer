@@ -1,6 +1,5 @@
 package net.logicim.domain.common.port;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BidirectionalPortMap

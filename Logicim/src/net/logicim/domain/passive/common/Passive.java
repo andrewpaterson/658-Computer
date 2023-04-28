@@ -15,13 +15,11 @@ public abstract class Passive
 {
   protected Circuit circuit;
   protected String name;
-  protected boolean enabled;
 
   public Passive(Circuit circuit, String name)
   {
     this.circuit = circuit;
     this.name = name;
-    this.enabled = true;
     circuit.add(this);
   }
 
@@ -35,22 +33,6 @@ public abstract class Passive
   public String getName()
   {
     return name;
-  }
-
-  public void disable()
-  {
-    enabled = false;
-  }
-
-  public boolean isEnabled()
-  {
-    return enabled;
-  }
-
-  public void enable(CircuitSimulation simulation)
-  {
-    enabled = true;
-    reset(simulation);
   }
 
   public List<Port> getPorts()
@@ -79,12 +61,9 @@ public abstract class Passive
 
   public void reset(CircuitSimulation simulation)
   {
-    if (enabled)
+    for (Port port : getPorts())
     {
-      for (Port port : getPorts())
-      {
-        port.reset();
-      }
+      port.reset();
     }
   }
 }

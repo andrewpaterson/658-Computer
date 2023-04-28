@@ -42,12 +42,11 @@ public class TunnelData
   {
     tunnelView.createConnectionViews(subcircuitEditor.getSubcircuitView());
     WireDataHelper.wireConnect(subcircuitEditor,
-                               simulation,
                                traceLoader,
                                tunnelView,
                                traceIds,
                                selected);
-    tunnelView.enable(simulation);
+    tunnelView.enable();
   }
 
   @Override

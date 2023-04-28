@@ -176,7 +176,7 @@ public class CircuitEditor
 
   public List<StaticView<?>> getComponentViewsInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
-    return currentSubcircuitEditor.getComponentViewsInScreenSpace(getCircuitSimulation(), viewport, screenPosition);
+    return currentSubcircuitEditor.getComponentViewsInScreenSpace(viewport, screenPosition);
   }
 
   public CircuitData save()

@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.passive.power;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerProperties;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitEditor;

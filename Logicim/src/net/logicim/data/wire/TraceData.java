@@ -47,7 +47,6 @@ public class TraceData
     if (createConnections)
     {
       WireDataHelper.wireConnect(subcircuitEditor,
-                                 simulation,
                                  traceLoader,
                                  traceView,
                                  traceIds,

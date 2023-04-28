@@ -1,6 +1,5 @@
 package net.logicim.data.common.properties;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.data.common.ReflectiveData;
 
 import java.util.Objects;

@@ -38,7 +38,6 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
     PASSIVE passive = createPassive(simulation);
     simulationPassives.put(simulation, passive);
-    passive.disable();
   }
 
   protected void validateComponent(CircuitSimulation simulation)

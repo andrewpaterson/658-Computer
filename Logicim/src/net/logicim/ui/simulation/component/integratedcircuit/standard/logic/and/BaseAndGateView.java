@@ -2,8 +2,8 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -12,7 +12,6 @@ import net.logicim.ui.shape.arc.ArcView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.rectangle.RectangleView;
-import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.common.LogicGateView;
 
 import java.awt.*;

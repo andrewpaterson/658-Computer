@@ -63,8 +63,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     IC integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
     simulationIntegratedCircuits.put(simulation, integratedCircuit);
     createPowerPortsIfNecessary(simulation, familyVoltageConfiguration);
-    integratedCircuit.disable();
-
   }
 
   protected void validatePorts(CircuitSimulation simulation)

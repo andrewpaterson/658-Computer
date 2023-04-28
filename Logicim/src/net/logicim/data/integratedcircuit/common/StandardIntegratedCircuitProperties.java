@@ -2,8 +2,6 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.data.family.Family;
 
-import java.util.Objects;
-
 public abstract class StandardIntegratedCircuitProperties
     extends IntegratedCircuitProperties
 {

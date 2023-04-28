@@ -9,6 +9,7 @@ import net.logicim.data.port.common.LogicPortData;
 import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -16,7 +17,6 @@ import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
-import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -125,7 +125,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                 TraceLoader traceLoader,
                                 ICV integratedCircuitView)
   {
-    integratedCircuitView.enable(simulation);
+    integratedCircuitView.enable();
 
     loadState(simulation, integratedCircuitView);
     loadEvents(simulation, integratedCircuitView);

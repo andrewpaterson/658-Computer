@@ -12,11 +12,7 @@ public interface Component
 
   void disconnect(Simulation simulation);
 
-  boolean isEnabled();
-
-  void enable(CircuitSimulation simulation);
-
-  void disable();
+  void reset(CircuitSimulation simulation);
 
   String getType();
 }

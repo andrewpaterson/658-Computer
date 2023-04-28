@@ -20,7 +20,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   protected PINS pins;
   protected STATE state;
   protected String name;
-  protected boolean enabled;
 
   protected LinkedList<IntegratedCircuitEvent> events;
 
@@ -31,7 +30,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     this.pins = pins;
     this.pins.setIntegratedCircuit(this);
     this.state = null;
-    this.enabled = true;
     this.events = new LinkedList<>();
     circuit.add(this);
   }
@@ -117,44 +115,18 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     return pins.getVoltageGround();
   }
 
-  public boolean isEnabled()
-  {
-    return enabled;
-  }
-
-  public void disable()
-  {
-    if (enabled)
-    {
-      if (!isStateless())
-      {
-        state = null;
-      }
-      enabled = false;
-    }
-  }
-
-  public void enable(CircuitSimulation simulation)
-  {
-    enabled = true;
-    reset(simulation);
-  }
-
   public void reset(CircuitSimulation simulation)
   {
-    if (enabled)
+    events.clear();
+    for (Port port : pins.getPorts())
     {
-      events.clear();
-      for (Port port : pins.getPorts())
-      {
-        port.reset();
-      }
+      port.reset();
+    }
 
-      if (!isStateless())
-      {
-        State state = createState(simulation.getSimulation());
-        setState(state);
-      }
+    if (!isStateless())
+    {
+      State state = createState(simulation.getSimulation());
+      setState(state);
     }
   }
 

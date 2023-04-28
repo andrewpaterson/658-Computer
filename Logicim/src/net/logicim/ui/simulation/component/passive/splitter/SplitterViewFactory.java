@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.passive.splitter;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterProperties;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;

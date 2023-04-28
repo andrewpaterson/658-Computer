@@ -60,7 +60,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
                                 TraceLoader traceLoader,
                                 T componentView)
   {
-    componentView.enable(simulation);
+    componentView.enable();
 
     loadPorts(simulation, traceLoader, componentView);
   }

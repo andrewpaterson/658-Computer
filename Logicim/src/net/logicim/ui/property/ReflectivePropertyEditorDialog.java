@@ -1,8 +1,8 @@
 package net.logicim.ui.property;
 
 import net.logicim.common.reflect.InstanceInspector;
-import net.logicim.ui.Logicim;
 import net.logicim.data.common.properties.ComponentProperties;
+import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
 import javax.swing.*;

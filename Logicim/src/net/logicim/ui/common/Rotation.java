@@ -67,11 +67,11 @@ public enum Rotation
   {
     if (p instanceof Int2D)
     {
-      transform((Int2D)p);
+      transform((Int2D) p);
     }
     else if (p instanceof Float2D)
     {
-      transform((Float2D)p);
+      transform((Float2D) p);
     }
     else
     {

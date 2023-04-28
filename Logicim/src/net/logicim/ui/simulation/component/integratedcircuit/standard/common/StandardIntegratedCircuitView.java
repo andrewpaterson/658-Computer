@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;

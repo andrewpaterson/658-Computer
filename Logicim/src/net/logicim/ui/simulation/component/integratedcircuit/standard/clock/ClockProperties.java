@@ -3,8 +3,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 
-import java.util.Objects;
-
 public class ClockProperties
     extends StandardIntegratedCircuitProperties
 {

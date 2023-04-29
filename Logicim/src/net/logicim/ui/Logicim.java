@@ -697,7 +697,8 @@ public class Logicim
       SubcircuitEditor subcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
       if (simulation == null)
       {
-        simulation = new TopLevelSubcircuitSimulation(subcircuitEditor, new CircuitSimulation());
+        simulation = circuitEditor.addNewSimulation(subcircuitEditor);
+        circuitEditor.setCurrentSimulation(simulation);
       }
       subcircuitEditor.ensureComponentsForSimulation(simulation);
     }

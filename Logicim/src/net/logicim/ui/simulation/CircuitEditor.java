@@ -478,6 +478,11 @@ public class CircuitEditor
     return currentSubcircuitEditor.getTypeName();
   }
 
+  public void setCurrentSimulation(TopLevelSubcircuitSimulation currentSimulation)
+  {
+    this.currentSimulation = currentSimulation;
+  }
+
   public boolean hasMultipleSubcircuits()
   {
     return subcircuitEditors.size() > 1;
@@ -525,6 +530,15 @@ public class CircuitEditor
     subcircuitEditors.add(subcircuitEditor);
 
     currentSubcircuitEditor = subcircuitEditor;
+
+    currentSimulation = addNewSimulation(subcircuitEditor);
+  }
+
+  public TopLevelSubcircuitSimulation addNewSimulation(SubcircuitEditor subcircuitEditor)
+  {
+    TopLevelSubcircuitSimulation topLevelSubcircuitSimulation = new TopLevelSubcircuitSimulation(subcircuitEditor, new CircuitSimulation());
+    simulations.add(topLevelSubcircuitSimulation);
+    return topLevelSubcircuitSimulation;
   }
 
   public String getSubcircuitNameError(String subcircuitName)

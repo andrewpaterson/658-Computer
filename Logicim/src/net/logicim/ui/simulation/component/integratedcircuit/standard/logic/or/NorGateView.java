@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.data.integratedcircuit.standard.logic.or.NorGateData;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.or.NorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
@@ -30,9 +30,9 @@ public class NorGateView
   }
 
   @Override
-  protected NorGate createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected NorGate createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NorGate(simulation.getCircuit(),
+    return new NorGate(circuit,
                        properties.name,
                        new OrGatePins(properties.inputWidth * properties.inputCount,
                                       familyVoltageConfiguration));

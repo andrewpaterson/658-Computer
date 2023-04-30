@@ -370,17 +370,14 @@ public class PortView
     }
   }
 
-  public boolean containsPort(Port port)
+  public boolean containsPort(CircuitSimulation simulation, Port port)
   {
-    for (CircuitSimulation simulation : simulationPorts.keySet())
+    List<? extends Port> ports = simulationPorts.get(simulation);
+    for (Port otherPort : ports)
     {
-      List<? extends Port> ports = simulationPorts.get(simulation);
-      for (Port otherPort : ports)
+      if (otherPort == port)
       {
-        if (otherPort == port)
-        {
-          return true;
-        }
+        return true;
       }
     }
     return false;

@@ -96,11 +96,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return connectionViews;
   }
 
-  public PortView getPortView(Port port)
+  public PortView getPortView(CircuitSimulation simulation, Port port)
   {
     for (PortView portView : portViews)
     {
-      if (portView.containsPort(port))
+      if (portView.containsPort(simulation, port))
       {
         return portView;
       }
@@ -213,18 +213,18 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
 
     validateAtLeastOnePort(portViews);
-    validateNoMissingPorts(ports);
+    validateNoMissingPorts(simulation, ports);
     validateNoDuplicatePorts(ports);
   }
 
-  protected void validateNoMissingPorts(List<Port> ports)
+  protected void validateNoMissingPorts(CircuitSimulation simulation, List<Port> ports)
   {
     List<Port> missing = new ArrayList<>();
     for (Port port : ports)
     {
       if (port.isLogicPort())
       {
-        PortView portView = getPortView(port);
+        PortView portView = getPortView(simulation, port);
         if (portView == null)
         {
           missing.add(port);

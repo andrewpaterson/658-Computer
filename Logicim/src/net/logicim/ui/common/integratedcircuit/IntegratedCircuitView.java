@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
@@ -21,6 +22,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.defaults.DefaultLogicLevels;
+import net.logicim.ui.common.port.PortView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -60,9 +62,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    IC integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
+    IC integratedCircuit = createIntegratedCircuit(simulation.getCircuit(), familyVoltageConfiguration);
     simulationIntegratedCircuits.put(simulation, integratedCircuit);
     createPowerPortsIfNecessary(simulation, familyVoltageConfiguration);
+    List<PortView> portViews = getPortViews();
+    integratedCircuit.getPorts();
+    //You are here.
   }
 
   protected void validatePorts(CircuitSimulation simulation)
@@ -219,7 +224,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return portNames;
   }
 
-  protected abstract IC createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration);
+  protected abstract IC createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 

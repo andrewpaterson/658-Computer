@@ -18,18 +18,11 @@ public class AndGate
   public AndGate(Circuit circuit, String name, AndGatePins pins)
   {
     super(circuit, name, pins);
-    setState(new Stateless());
   }
 
   @Override
   public void simulationStarted(Simulation simulation)
   {
-  }
-
-  @Override
-  public State createState()
-  {
-    return null;
   }
 
   @Override

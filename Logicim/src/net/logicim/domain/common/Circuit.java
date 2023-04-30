@@ -30,6 +30,7 @@ public class Circuit
     for (Passive passive : passives)
     {
       passive.reset(circuitSimulation);
+      passive.simulationStarted(simulation);
     }
   }
 

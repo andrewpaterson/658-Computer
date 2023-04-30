@@ -9,7 +9,6 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.Port;
@@ -58,7 +57,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    IC integratedCircuit = createIntegratedCircuit(simulation.getCircuit(), familyVoltageConfiguration);
+    IC integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
     simulationIntegratedCircuits.put(simulation, integratedCircuit);
     createPowerPortsIfNecessary(simulation, familyVoltageConfiguration);
 
@@ -81,6 +80,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
       }
       portView.addPorts(simulation, ports);
     }
+    validateComponent(simulation);
+    validatePorts(simulation);
+    integratedCircuit.reset(simulation);
     return integratedCircuit;
   }
 
@@ -113,16 +115,17 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   @Override
   public void simulationStarted(CircuitSimulation simulation)
   {
-    if (simulation != null)
+    if (simulation == null)
     {
-      IC integratedCircuit = simulationIntegratedCircuits.get(simulation);
-      if (integratedCircuit == null)
-      {
-        integratedCircuit = finaliseComponent(simulation);
-
-      }
-      integratedCircuit.simulationStarted(simulation.getSimulation());
+      throw new SimulatorException("Cannot start a simulation with a [null] simulation.");
     }
+
+    IC integratedCircuit = simulationIntegratedCircuits.get(simulation);
+    if (integratedCircuit == null)
+    {
+      integratedCircuit = createComponent(simulation);
+    }
+    integratedCircuit.simulationStarted(simulation.getSimulation());
   }
 
   @Override
@@ -130,15 +133,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   {
     createPortViews();
     super.finaliseView();
-    subcircuitView.addIntegratedCircuitView(this);  //Shouldn't this be in finaliseView?
-  }
-
-  private IC finaliseComponent(CircuitSimulation simulation)
-  {
-    IC integratedCircuit = createComponent(simulation);
-    validateComponent(simulation);
-    validatePorts(simulation);
-    return integratedCircuit;
+    subcircuitView.addIntegratedCircuitView(this);
   }
 
   protected void createPowerPortsIfNecessary(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
@@ -240,7 +235,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return portNames;
   }
 
-  protected abstract IC createIntegratedCircuit(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration);
+  protected abstract IC createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 

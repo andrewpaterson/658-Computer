@@ -18,18 +18,11 @@ public class OrGate
   public OrGate(Circuit circuit, String name, OrGatePins pins)
   {
     super(circuit, name, pins);
-    setState(new Stateless());
   }
 
   @Override
   public void simulationStarted(Simulation simulation)
   {
-  }
-
-  @Override
-  public State createState()
-  {
-    return null;
   }
 
   @Override

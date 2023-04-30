@@ -29,7 +29,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     this.simulationPassives = new LinkedHashMap<>();
   }
 
-  protected void createComponent(CircuitSimulation simulation)
+  protected PASSIVE createComponent(CircuitSimulation simulation)
   {
     if (simulation == null)
     {
@@ -38,6 +38,10 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
     PASSIVE passive = createPassive(simulation);
     simulationPassives.put(simulation, passive);
+    validateComponent(simulation);
+    validatePorts(simulation);
+    passive.reset(simulation);
+    return passive;
   }
 
   protected void validateComponent(CircuitSimulation simulation)
@@ -51,16 +55,25 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   protected void finaliseView()
   {
-    subcircuitView.addPassiveView(this);
     createPortViews();
     super.finaliseView();
+    subcircuitView.addPassiveView(this);
   }
 
-  private void finaliseComponent(CircuitSimulation simulation)
+  @Override
+  public void simulationStarted(CircuitSimulation simulation)
   {
-    createComponent(simulation);
-    validateComponent(simulation);
-    validatePorts(simulation);
+    if (simulation == null)
+    {
+      throw new SimulatorException("Cannot start a simulation with a [null] simulation.");
+    }
+
+    Passive passive = simulationPassives.get(simulation);
+    if (passive == null)
+    {
+      passive = createComponent(simulation);
+    }
+    passive.simulationStarted(simulation.getSimulation());
   }
 
   @Override

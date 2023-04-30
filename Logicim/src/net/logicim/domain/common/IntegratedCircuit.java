@@ -10,6 +10,7 @@ import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.state.State;
+import net.logicim.domain.common.state.Stateless;
 
 import java.util.List;
 
@@ -87,16 +88,13 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public void setState(State state)
   {
-    if (!isStateless())
+    if (state != null)
     {
-      if (state != null)
-      {
-        this.state = (STATE) state;
-      }
-      else
-      {
-        throw new SimulatorException("Cannot set state to [null] on %s.", getDescription());
-      }
+      this.state = (STATE) state;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot set state to [null] on %s.", getDescription());
     }
   }
 
@@ -118,11 +116,8 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
       port.reset();
     }
 
-    if (!isStateless())
-    {
-      State state = createState();
-      setState(state);
-    }
+    State state = createState();
+    setState(state);
   }
 
   public void traceConnected(Simulation simulation, Port port)
@@ -188,7 +183,10 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     this.events.clear();
   }
 
-  public abstract State createState();
+  public State createState()
+  {
+    return new Stateless();
+  }
 
   public abstract void simulationStarted(Simulation simulation);
 

@@ -4,7 +4,6 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
-import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
 
@@ -18,18 +17,11 @@ public class XorGate
   public XorGate(Circuit circuit, String name, XorGatePins pins)
   {
     super(circuit, name, pins);
-    setState(new Stateless());
   }
 
   @Override
   public void simulationStarted(Simulation simulation)
   {
-  }
-
-  @Override
-  public State createState()
-  {
-    return null;
   }
 
   @Override

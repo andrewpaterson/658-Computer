@@ -445,11 +445,6 @@ public class SplitterView
     }
   }
 
-  @Override
-  public void simulationStarted(CircuitSimulation simulation)
-  {
-  }
-
   public Map<Port, Port> calculateBidirectionalPortMap(Splitter splitter)
   {
     List<TracePort> startPorts = splitter.getStartPorts();

@@ -55,7 +55,6 @@ public class SubcircuitInstanceView
     this.instanceSubcircuitView = instanceSubcircuitView;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
-    this.subcircuitView.addPassiveView(this);
 
     kindaCreateGraphicsAndOtherStuff();
     finaliseView();
@@ -450,11 +449,6 @@ public class SubcircuitInstanceView
       }
     }
     return connections;
-  }
-
-  @Override
-  public void simulationStarted(CircuitSimulation simulation)
-  {
   }
 
   @Override

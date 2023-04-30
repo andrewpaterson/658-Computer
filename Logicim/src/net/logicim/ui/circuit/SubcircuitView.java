@@ -523,7 +523,6 @@ public class SubcircuitView
           updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
         }
       }
-
     }
     return updatedConnectionViews;
   }
@@ -1033,7 +1032,10 @@ public class SubcircuitView
     CircuitSimulation circuitSimulation = topLevelSubcircuitSimulation.getCircuitSimulation();
     for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
     {
-      integratedCircuitView.simulationStarted(circuitSimulation);
+      if (integratedCircuitView.isEnabled())
+      {
+        integratedCircuitView.simulationStarted(circuitSimulation);
+      }
     }
   }
 }

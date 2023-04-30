@@ -6,6 +6,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
+import net.logicim.domain.common.state.State;
 
 import java.util.List;
 
@@ -65,6 +66,10 @@ public abstract class Passive
     {
       port.reset();
     }
+ }
+
+  public void simulationStarted(Simulation simulation)
+  {
   }
 }
 

@@ -20,11 +20,6 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void simulationStarted(CircuitSimulation simulation)
-  {
-  }
-
-  @Override
   protected PowerSource createPassive(CircuitSimulation circuit)
   {
     return new PowerSource(circuit.getCircuit(),

@@ -205,11 +205,6 @@ public class PinView
   }
 
   @Override
-  public void simulationStarted(CircuitSimulation simulation)
-  {
-  }
-
-  @Override
   protected Pin createPassive(CircuitSimulation simulation)
   {
     Pin pin = new Pin(simulation.getCircuit(),

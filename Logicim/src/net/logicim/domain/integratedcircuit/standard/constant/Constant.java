@@ -47,7 +47,7 @@ public class Constant
   }
 
   @Override
-  public State createState(Simulation simulation)
+  public State createState()
   {
     return new ConstantState(defaultValue);
   }

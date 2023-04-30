@@ -567,14 +567,6 @@ public class SubcircuitView
       staticView.enable();
       staticView.simulationStarted(simulation);
     }
-
-    if (simulation != null)
-    {
-      for (StaticView<?> staticView : staticViews)
-      {
-        staticView.simulationStarted(simulation);
-      }
-    }
   }
 
   public Set<PortView> getPortViews(Set<ConnectionView> connectionViews)

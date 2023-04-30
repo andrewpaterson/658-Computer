@@ -85,11 +85,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public List<Port> getPorts(String commonName)
-  {
-    return pins.getPorts(commonName);
-  }
-
   public void setState(State state)
   {
     if (!isStateless())
@@ -125,7 +120,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
     if (!isStateless())
     {
-      State state = createState(simulation.getSimulation());
+      State state = createState();
       setState(state);
     }
   }
@@ -193,7 +188,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     this.events.clear();
   }
 
-  public abstract State createState(Simulation simulation);
+  public abstract State createState();
 
   public abstract void simulationStarted(Simulation simulation);
 

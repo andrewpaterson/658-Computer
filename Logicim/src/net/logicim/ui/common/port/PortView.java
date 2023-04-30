@@ -435,5 +435,17 @@ public class PortView
   {
     return portNames;
   }
+
+  public void addPorts(CircuitSimulation simulation, List<Port> ports)
+  {
+    if (simulationPorts.containsKey(simulation))
+    {
+      throw new SimulatorException("Ports have already been added for simulation [%s].", simulation.getDescription());
+    }
+    else
+    {
+      simulationPorts.put(simulation, ports);
+    }
+  }
 }
 

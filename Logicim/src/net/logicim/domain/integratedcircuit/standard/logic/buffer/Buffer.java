@@ -27,7 +27,7 @@ public class Buffer
   }
 
   @Override
-  public State createState(Simulation simulation)
+  public State createState()
   {
     return null;
   }

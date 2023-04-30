@@ -213,7 +213,7 @@ public class OscilloscopeView
     return false;
   }
 
-  public OscilloscopeState saveSimulationState(Oscilloscope integratedCircuit)
+  public OscilloscopeState saveState(Oscilloscope integratedCircuit)
   {
     OscilloscopeState state = integratedCircuit.getState();
     return new OscilloscopeState(properties.numberOfDivsWide * properties.samplesPerDiv,

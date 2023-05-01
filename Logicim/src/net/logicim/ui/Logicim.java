@@ -694,13 +694,10 @@ public class Logicim
     if (running)
     {
       TopLevelSubcircuitSimulation simulation = circuitEditor.getCurrentTopLevelSimulation();
-      SubcircuitEditor subcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
       if (simulation == null)
       {
-        simulation = circuitEditor.addNewSimulation(subcircuitEditor);
-        circuitEditor.setCurrentSimulation(simulation);
+        throw new SimulatorException("Cannot run simulation with a [null] simulation.");
       }
-      subcircuitEditor.ensureComponentsForSimulation(simulation);
     }
   }
 

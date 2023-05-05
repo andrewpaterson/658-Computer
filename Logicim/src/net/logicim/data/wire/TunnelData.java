@@ -24,12 +24,14 @@ public class TunnelData
                     long id,
                     boolean selected,
                     long[] traceIds,
+                    boolean enabled,
                     boolean doubleSided)
   {
     super(name,
           position,
           rotation,
           id,
+          enabled,
           selected);
     this.traceIds = traceIds;
     this.doubleSided = doubleSided;

@@ -33,6 +33,7 @@ public class ClockData
                    SimulationIntegratedCircuitEventData events,
                    List<SimulationMultiPortData> ports,
                    long id,
+                   boolean enabled,
                    boolean selected,
                    SimulationStateData<ClockOscillatorState> simulationState,
                    boolean inverseOut,
@@ -45,6 +46,7 @@ public class ClockData
           events,
           ports,
           id,
+          enabled,
           selected,
           simulationState,
           explicitPowerPorts);

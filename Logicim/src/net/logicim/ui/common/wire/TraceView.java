@@ -298,6 +298,7 @@ public class TraceView
                          getStartPosition(),
                          getEndPosition(),
                          id,
+                         enabled,
                          selected);
   }
 

@@ -369,6 +369,7 @@ public class SplitterView
                             properties.name,
                             savePorts(),
                             id,
+                            enabled,
                             selected,
                             properties.bitWidth,
                             properties.fanOut,

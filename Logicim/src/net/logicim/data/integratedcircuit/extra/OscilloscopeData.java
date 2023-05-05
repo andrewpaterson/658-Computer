@@ -34,6 +34,7 @@ public class OscilloscopeData
                           SimulationIntegratedCircuitEventData events,
                           List<SimulationMultiPortData> ports,
                           long id,
+                          boolean enabled,
                           boolean selected,
                           SimulationStateData<OscilloscopeState> simulationState,
                           int inputCount,
@@ -49,6 +50,7 @@ public class OscilloscopeData
           events,
           ports,
           id,
+          enabled,
           selected,
           simulationState);
     this.inputCount = inputCount;

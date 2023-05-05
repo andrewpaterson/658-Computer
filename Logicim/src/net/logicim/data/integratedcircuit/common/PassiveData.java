@@ -19,6 +19,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
                      String name,
                      List<SimulationMultiPortData> ports,
                      long id,
+                     boolean enabled,
                      boolean selected)
   {
     super(position,
@@ -26,6 +27,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
           name,
           ports,
           id,
+          enabled,
           selected);
   }
 }

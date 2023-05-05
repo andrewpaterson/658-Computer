@@ -544,7 +544,8 @@ public class SubcircuitView
 
     List<ConnectionView> connectionViews = createStaticViewConnections(staticViews);
     Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews, circuitSimulation);
-    enableStaticViews(staticViews, circuitSimulation);
+    enableStaticViews(staticViews);
+    simulationStarted(staticViews, circuitSimulation);
 
     return updatedConnectionViews;
   }
@@ -559,11 +560,18 @@ public class SubcircuitView
     return connectionViews;
   }
 
-  public void enableStaticViews(List<StaticView<?>> staticViews, CircuitSimulation simulation)
+  public void enableStaticViews(List<StaticView<?>> staticViews)
   {
     for (StaticView<?> staticView : staticViews)
     {
       staticView.enable();
+    }
+  }
+
+  public void simulationStarted(List<StaticView<?>> staticViews, CircuitSimulation simulation)
+  {
+    for (StaticView<?> staticView : staticViews)
+    {
       staticView.simulationStarted(simulation);
     }
   }
@@ -849,7 +857,8 @@ public class SubcircuitView
     removeTraceViews(existingTraceViews);
 
     Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews, simulation);
-    enableStaticViews(staticViews, simulation);
+    enableStaticViews(staticViews);
+    simulationStarted(staticViews, simulation);
 
     Set<TraceView> existingTraces = createTraceViews(existingLines, simulation);
     updatedConnectionViews.addAll(connectCreatedTraces(existingTraces, simulation));

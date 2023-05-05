@@ -49,6 +49,7 @@ public class InverterView
                             saveEvents(),
                             savePorts(),
                             id,
+                            enabled,
                             selected,
                             saveSimulationState(),
                             properties.inputCount,

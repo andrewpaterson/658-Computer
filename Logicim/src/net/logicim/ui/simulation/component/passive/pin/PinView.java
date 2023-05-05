@@ -185,6 +185,7 @@ public class PinView
                        getName(),
                        savePorts(),
                        id,
+                       enabled,
                        selected,
                        properties.bitWidth,
                        properties.alignment,

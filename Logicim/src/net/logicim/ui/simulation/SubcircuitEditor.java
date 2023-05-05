@@ -311,16 +311,12 @@ public class SubcircuitEditor
       traceView.updateId(appendIds, traceData.id);
     }
 
-    List<StaticView<?>> staticViews = new ArrayList<>();
-
     for (StaticData<?> staticData : components)
     {
       StaticView<?> staticView = staticData.createAndLoad(this, newComponentPropertyStep);
       views.add(staticView);
-      staticViews.add(staticView);
     }
 
-    subcircuitView.enableStaticViews(staticViews, null);
     return views;
   }
 

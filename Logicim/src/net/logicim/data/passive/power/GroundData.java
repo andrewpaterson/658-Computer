@@ -21,6 +21,7 @@ public class GroundData
                     String name,
                     List<SimulationMultiPortData> ports,
                     long id,
+                    boolean enabled,
                     boolean selected)
   {
     super(position,
@@ -28,6 +29,7 @@ public class GroundData
           name,
           ports,
           id,
+          enabled,
           selected);
   }
 

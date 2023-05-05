@@ -371,6 +371,7 @@ public class SubcircuitInstanceView
                                       rotation,
                                       properties.name,
                                       id,
+                                      enabled,
                                       selected,
                                       savePorts(),
                                       properties.comment,

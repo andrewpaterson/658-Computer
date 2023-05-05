@@ -31,6 +31,7 @@ public class BufferData
                     SimulationIntegratedCircuitEventData events,
                     List<SimulationMultiPortData> ports,
                     long id,
+                    boolean enabled,
                     boolean selected,
                     SimulationStateData<State> simulationState,
                     int inputCount,
@@ -44,6 +45,7 @@ public class BufferData
           events,
           ports,
           id,
+          enabled,
           selected,
           simulationState,
           explicitPowerPorts);

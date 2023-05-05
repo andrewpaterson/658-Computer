@@ -26,6 +26,7 @@ public class SubcircuitInstanceData
                                 Rotation rotation,
                                 String name,
                                 long id,
+                                boolean enabled,
                                 boolean selected,
                                 List<SimulationMultiPortData> ports,
                                 String comment,
@@ -37,6 +38,7 @@ public class SubcircuitInstanceData
           name,
           ports,
           id,
+          enabled,
           selected);
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;

@@ -37,12 +37,14 @@ public abstract class ComponentData<T extends ComponentView<?>>
                        String name,
                        List<SimulationMultiPortData> ports,
                        long id,
+                       boolean enabled,
                        boolean selected)
   {
     super(name,
           position,
           rotation,
           id,
+          enabled,
           selected);
     this.ports = ports;
   }

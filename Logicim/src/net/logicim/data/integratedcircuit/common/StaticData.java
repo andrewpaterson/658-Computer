@@ -13,6 +13,7 @@ public abstract class StaticData<T extends StaticView<?>>
   protected Int2D position;
   protected Rotation rotation;
   protected long id;
+  protected boolean enabled;
   protected boolean selected;
 
   public StaticData()
@@ -23,24 +24,31 @@ public abstract class StaticData<T extends StaticView<?>>
                     Int2D position,
                     Rotation rotation,
                     long id,
+                    boolean enabled,
                     boolean selected)
   {
     this.name = name;
     this.position = position.clone();
     this.rotation = rotation;
     this.id = id;
+    this.enabled = enabled;
     this.selected = selected;
   }
 
   public T createAndLoad(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    T componentView = createStaticView(subcircuitEditor, newComponentPropertyStep);
+    T staticView = createStaticView(subcircuitEditor, newComponentPropertyStep);
+
+    if (enabled)
+    {
+      staticView.enable();
+    }
 
     if (selected)
     {
-      subcircuitEditor.select(componentView);
+      subcircuitEditor.select(staticView);
     }
-    return componentView;
+    return staticView;
   }
 
   public abstract T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);

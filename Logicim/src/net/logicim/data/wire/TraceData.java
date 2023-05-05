@@ -15,6 +15,7 @@ public class TraceData
   public Int2D end;
   public long id;
 
+  protected boolean enabled;
   protected boolean selected;
 
   public TraceData()
@@ -25,6 +26,7 @@ public class TraceData
                    Int2D start,
                    Int2D end,
                    long id,
+                   boolean enabled,
                    boolean selected)
   {
     this.traceIds = traceIds;
@@ -32,11 +34,11 @@ public class TraceData
     this.start = start.clone();
     this.end = end.clone();
     this.id = id;
+    this.enabled = enabled;
     this.selected = selected;
   }
 
   public TraceView create(SubcircuitEditor subcircuitEditor,
-                          CircuitSimulation simulation,
                           TraceLoader traceLoader,
                           boolean createConnections)
   {
@@ -44,6 +46,11 @@ public class TraceData
                                         start,
                                         end,
                                         createConnections);
+    if (enabled)
+    {
+      traceView.enable();
+    }
+
     if (createConnections)
     {
       WireDataHelper.wireConnect(subcircuitEditor,

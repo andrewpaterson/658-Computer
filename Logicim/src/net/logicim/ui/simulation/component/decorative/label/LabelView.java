@@ -64,6 +64,7 @@ public class LabelView
                          position,
                          rotation,
                          id,
+                         enabled,
                          selected,
                          properties.alignment,
                          properties.bold,

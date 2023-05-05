@@ -54,6 +54,7 @@ public class AndGateView
                            saveEvents(),
                            savePorts(),
                            id,
+                           enabled,
                            selected,
                            saveSimulationState(),
                            properties.inputCount,

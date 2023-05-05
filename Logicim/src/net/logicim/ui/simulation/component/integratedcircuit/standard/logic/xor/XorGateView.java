@@ -48,6 +48,7 @@ public class XorGateView
                            saveEvents(),
                            savePorts(),
                            id,
+                           enabled,
                            selected,
                            saveSimulationState(),
                            properties.inputCount,

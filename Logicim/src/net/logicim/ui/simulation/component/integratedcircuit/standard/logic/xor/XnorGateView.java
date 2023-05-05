@@ -48,6 +48,7 @@ public class XnorGateView
                             saveEvents(),
                             savePorts(),
                             id,
+                            enabled,
                             selected,
                             saveSimulationState(),
                             properties.inputCount,

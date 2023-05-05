@@ -61,6 +61,7 @@ public class GroundView
                           properties.name,
                           savePorts(),
                           id,
+                          enabled,
                           selected);
   }
 

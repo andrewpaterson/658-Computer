@@ -45,10 +45,17 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                SimulationIntegratedCircuitEventData events,
                                List<SimulationMultiPortData> ports,
                                long id,
+                               boolean enabled,
                                boolean selected,
                                SimulationStateData<STATE> state)
   {
-    super(position, rotation, name, ports, id, selected);
+    super(position,
+          rotation,
+          name,
+          ports,
+          id,
+          enabled,
+          selected);
     this.family = family;
     this.events = events;
     this.state = state;

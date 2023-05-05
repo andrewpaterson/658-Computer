@@ -163,6 +163,7 @@ public class ClockView
                          saveEvents(),
                          savePorts(),
                          id,
+                         enabled,
                          selected,
                          saveSimulationState(),
                          properties.inverseOut,

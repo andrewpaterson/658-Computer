@@ -15,12 +15,14 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
                         Int2D position,
                         Rotation rotation,
                         long id,
+                        boolean enabled,
                         boolean selected)
   {
     super(name,
           position,
           rotation,
           id,
+          enabled,
           selected);
   }
 }

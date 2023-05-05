@@ -23,6 +23,7 @@ public class PositivePowerData
                            String name,
                            List<SimulationMultiPortData> ports,
                            long id,
+                           boolean enabled,
                            boolean selected,
                            float voltage)
   {
@@ -31,6 +32,7 @@ public class PositivePowerData
           name,
           ports,
           id,
+          enabled,
           selected);
     this.voltage = voltage;
   }

@@ -37,6 +37,7 @@ public class PinData
                  String name,
                  List<SimulationMultiPortData> ports,
                  long id,
+                 boolean enabled,
                  boolean selected,
                  int bitWidth,
                  SubcircuitPinAlignment alignment,
@@ -53,6 +54,7 @@ public class PinData
           name,
           ports,
           id,
+          enabled,
           selected);
     this.bitWidth = bitWidth;
     this.alignment = alignment;

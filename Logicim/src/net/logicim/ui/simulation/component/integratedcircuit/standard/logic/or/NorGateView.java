@@ -48,6 +48,7 @@ public class NorGateView
                            saveEvents(),
                            savePorts(),
                            id,
+                           enabled,
                            selected,
                            saveSimulationState(),
                            properties.inputCount,

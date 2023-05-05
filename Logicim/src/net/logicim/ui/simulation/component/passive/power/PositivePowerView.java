@@ -76,6 +76,7 @@ public class PositivePowerView
                                  properties.name,
                                  savePorts(),
                                  id,
+                                 enabled,
                                  selected,
                                  properties.voltage_V);
   }

@@ -23,6 +23,7 @@ public class LabelData
                    Int2D position,
                    Rotation rotation,
                    long id,
+                   boolean enabled,
                    boolean selected,
                    HorizontalAlignment alignment,
                    boolean bold,
@@ -33,6 +34,7 @@ public class LabelData
           position,
           rotation,
           id,
+          enabled,
           selected);
     this.alignment = alignment;
     this.bold = bold;

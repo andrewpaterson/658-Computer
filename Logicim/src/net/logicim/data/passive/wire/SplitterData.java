@@ -28,6 +28,7 @@ public class SplitterData
                       String name,
                       List<SimulationMultiPortData> ports,
                       long id,
+                      boolean enabled,
                       boolean selected,
                       int bitWidth,
                       int fanOut,
@@ -41,6 +42,7 @@ public class SplitterData
           name,
           ports,
           id,
+          enabled,
           selected);
     this.bitWidth = bitWidth;
     this.fanOut = fanOut;

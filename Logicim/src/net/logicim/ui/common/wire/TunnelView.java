@@ -246,6 +246,7 @@ public class TunnelView
                           id,
                           selected,
                           ids,
+                          enabled,
                           properties.doubleSided);
   }
 

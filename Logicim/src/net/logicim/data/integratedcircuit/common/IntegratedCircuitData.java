@@ -127,12 +127,12 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void connectAndLoad(SubcircuitEditor subcircuitEditor,
-                                CircuitSimulation simulation,
-                                TraceLoader traceLoader,
-                                ICV integratedCircuitView)
+  public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
+                                        CircuitSimulation simulation,
+                                        TraceLoader traceLoader,
+                                        ICV integratedCircuitView)
   {
-    integratedCircuitView.enable();
+   integratedCircuitView.createComponent(simulation);
 
     loadState(simulation, integratedCircuitView);
     loadEvents(simulation, integratedCircuitView);

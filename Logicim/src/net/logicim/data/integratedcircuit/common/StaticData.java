@@ -1,13 +1,15 @@
 package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
-import net.logicim.data.common.ReflectiveData;
+import net.logicim.data.common.ViewData;
+import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
 public abstract class StaticData<T extends StaticView<?>>
-    extends ReflectiveData
+    extends ViewData
 {
   protected String name;
   protected Int2D position;
@@ -27,15 +29,15 @@ public abstract class StaticData<T extends StaticView<?>>
                     boolean enabled,
                     boolean selected)
   {
+    super(id);
     this.name = name;
     this.position = position.clone();
     this.rotation = rotation;
-    this.id = id;
     this.enabled = enabled;
     this.selected = selected;
   }
 
-  public T createAndLoad(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public T createView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     T staticView = createStaticView(subcircuitEditor, newComponentPropertyStep);
 
@@ -52,5 +54,10 @@ public abstract class StaticData<T extends StaticView<?>>
   }
 
   public abstract T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
+
+  public abstract void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
+                                                 CircuitSimulation simulation,
+                                                 TraceLoader traceLoader,
+                                                 T componentView);
 }
 

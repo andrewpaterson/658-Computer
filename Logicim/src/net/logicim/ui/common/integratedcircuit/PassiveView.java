@@ -29,7 +29,8 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     this.simulationPassives = new LinkedHashMap<>();
   }
 
-  protected PASSIVE createComponent(CircuitSimulation simulation)
+  @Override
+  public PASSIVE createComponent(CircuitSimulation simulation)
   {
     if (simulation == null)
     {

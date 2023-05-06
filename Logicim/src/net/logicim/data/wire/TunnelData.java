@@ -37,10 +37,10 @@ public class TunnelData
     this.doubleSided = doubleSided;
   }
 
-  public void connectAndLoad(SubcircuitEditor subcircuitEditor,
-                             CircuitSimulation simulation,
-                             TraceLoader traceLoader,
-                             TunnelView tunnelView)
+  public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
+                                        CircuitSimulation simulation,
+                                        TraceLoader traceLoader,
+                                        TunnelView tunnelView)
   {
     tunnelView.createConnectionViews(subcircuitEditor.getSubcircuitView());
     WireDataHelper.wireConnect(subcircuitEditor,

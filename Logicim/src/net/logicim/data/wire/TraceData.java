@@ -1,19 +1,20 @@
 package net.logicim.data.wire;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
+import net.logicim.data.common.ViewData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
 public class TraceData
-    extends ReflectiveData
+    extends ViewData
 {
-  public long[] traceIds;
+  public long[] traceIds;  //Shouldn't these be per simulation?
 
   public Int2D start;
   public Int2D end;
-  public long id;
 
   protected boolean enabled;
   protected boolean selected;
@@ -29,11 +30,11 @@ public class TraceData
                    boolean enabled,
                    boolean selected)
   {
+    super(id);
     this.traceIds = traceIds;
 
     this.start = start.clone();
     this.end = end.clone();
-    this.id = id;
     this.enabled = enabled;
     this.selected = selected;
   }
@@ -68,6 +69,14 @@ public class TraceData
                          start,
                          end,
                          true);
+  }
+
+  public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
+                                        CircuitSimulation circuitSimulation,
+                                        TraceLoader traceLoader,
+                                        TraceView traceView)
+  {
+    throw new SimulatorException();
   }
 }
 

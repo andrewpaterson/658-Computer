@@ -57,16 +57,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     return componentView;
   }
 
-  protected void connectAndLoad(SubcircuitEditor subcircuitEditor,
-                                CircuitSimulation simulation,
-                                TraceLoader traceLoader,
-                                T componentView)
-  {
-    componentView.enable();
-
-    loadPorts(simulation, traceLoader, componentView);
-  }
-
   protected void loadPorts(CircuitSimulation simulation, TraceLoader traceLoader, T componentView)
   {
     List<PortView> portViews = componentView.getPortViews();

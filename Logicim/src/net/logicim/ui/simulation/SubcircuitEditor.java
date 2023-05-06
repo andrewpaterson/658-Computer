@@ -1,9 +1,11 @@
 package net.logicim.ui.simulation;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.SubcircuitData;
+import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.data.wire.TraceLoader;
@@ -18,10 +20,7 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SubcircuitEditor
 {
@@ -257,7 +256,8 @@ public class SubcircuitEditor
   public List<View> pasteClipboardViews(List<TraceData> traces,
                                         List<StaticData<?>> components)
   {
-    return loadViews(traces, components, true, true);
+    Map<ViewData, View> views = loadViews(traces, components, true, true);
+    return new ArrayList<>(views.values());
   }
 
   public void placeComponentView(StaticView<?> staticView,
@@ -300,37 +300,53 @@ public class SubcircuitEditor
     subcircuitView.createTraceViews(lines, circuitSimulation);
   }
 
-  public List<View> loadViews(List<TraceData> traces, List<StaticData<?>> components, boolean appendIds, boolean newComponentPropertyStep)
+  public Map<ViewData, View> loadViews(List<TraceData> traces,
+                                       List<StaticData<?>> components,
+                                       boolean appendIds,
+                                       boolean newComponentPropertyStep)
   {
-    List<View> views = new ArrayList<>();
+    Map<ViewData, View> views = new LinkedHashMap<>();
 
     for (TraceData traceData : traces)
     {
       TraceView traceView = traceData.create(this);
-      views.add(traceView);
+      views.put(traceData, traceView);
       traceView.updateId(appendIds, traceData.id);
     }
 
     for (StaticData<?> staticData : components)
     {
-      StaticView<?> staticView = staticData.createAndLoad(this, newComponentPropertyStep);
-      views.add(staticView);
+      StaticView<?> staticView = staticData.createView(this, newComponentPropertyStep);
+      views.put(staticData, staticView);
     }
 
     return views;
   }
 
-  public void loadComponents(List<TraceData> traces,
-                             List<StaticData<?>> components,
+  public void loadComponents(Map<ViewData, View> dataViewMap,
                              CircuitSimulation circuitSimulation,
                              TraceLoader traceLoader)
   {
-    for (TraceData traceData : traces)
+    for (Map.Entry<ViewData, View> entry : dataViewMap.entrySet())
     {
-    }
-
-    for (StaticData<?> staticData : components)
-    {
+      ViewData data = entry.getKey();
+      View view = entry.getValue();
+      if (view instanceof StaticView)
+      {
+        StaticView staticView = (StaticView) view;
+        StaticData staticData = (StaticData) data;
+        staticData.createAndConnectComponent(this, circuitSimulation, traceLoader, staticView);
+     }
+      else if (view instanceof TraceView)
+      {
+        TraceView traceView = (TraceView) view;
+        TraceData traceData = (TraceData) data;
+        traceData.createAndConnectComponent(this, circuitSimulation, traceLoader, traceView);
+      }
+      else
+      {
+        throw new SimulatorException("Cannot load component of type [%s].", view);
+      }
     }
   }
 

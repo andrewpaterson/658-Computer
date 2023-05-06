@@ -6,6 +6,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.SubcircuitData;
+import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.data.wire.TraceData;
@@ -26,10 +27,8 @@ import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class CircuitEditor
 {
@@ -277,10 +276,15 @@ public class CircuitEditor
       circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
     }
 
+    Map<SubcircuitData, Map<ViewData, View>> maybe = new LinkedHashMap<>();
     for (SubcircuitData subcircuitData : circuitData.subcircuits)
     {
       SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
-      subcircuitEditor.loadViews(subcircuitData.traces, subcircuitData.components, false, false);
+      Map<ViewData, View> views = subcircuitEditor.loadViews(subcircuitData.traces,
+                                                             subcircuitData.components,
+                                                             false,
+                                                             false);
+      maybe.put(subcircuitData, views);
     }
 
     for (CircuitSimulationData circuitSimulationData : circuitData.circuitSimulationDatas)
@@ -294,9 +298,9 @@ public class CircuitEditor
 
       for (SubcircuitData subcircuitData : circuitData.subcircuits)
       {
+        Map<ViewData, View> views = maybe.get(subcircuitData);
         SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
-        subcircuitEditor.loadComponents(subcircuitData.traces,
-                                        subcircuitData.components,
+        subcircuitEditor.loadComponents(views,
                                         circuitSimulation,
                                         traceLoader);
       }

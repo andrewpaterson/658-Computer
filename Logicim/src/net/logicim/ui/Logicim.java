@@ -920,7 +920,9 @@ public class Logicim
     EditorData editorData = undoStack.pop();
     if (editorData != null)
     {
+      boolean running = this.running;
       load(editorData);
+      this.running = running;
     }
   }
 

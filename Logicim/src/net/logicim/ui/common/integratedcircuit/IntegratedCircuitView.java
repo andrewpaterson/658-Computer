@@ -49,15 +49,21 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     simulationIntegratedCircuits = new LinkedHashMap<>();
   }
 
-  protected IC createComponent(CircuitSimulation simulation)
+  public IC createComponent(CircuitSimulation simulation)
   {
     if (simulation == null)
     {
       throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
     }
 
+    IC integratedCircuit = simulationIntegratedCircuits.get(simulation);
+    if (integratedCircuit != null)
+    {
+      throw new SimulatorException("Integrated circuit has already been created.");
+    }
+
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    IC integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
+    integratedCircuit = createIntegratedCircuit(simulation, familyVoltageConfiguration);
     simulationIntegratedCircuits.put(simulation, integratedCircuit);
     createPowerPortsIfNecessary(simulation, familyVoltageConfiguration);
 

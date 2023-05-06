@@ -2,8 +2,11 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.data.wire.TraceLoader;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.simulation.SubcircuitEditor;
 
 import java.util.List;
 
@@ -29,6 +32,17 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
           id,
           enabled,
           selected);
+  }
+
+  @Override
+  public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
+                                        CircuitSimulation simulation,
+                                        TraceLoader traceLoader,
+                                        PASSIVE passiveView)
+  {
+    passiveView.createComponent(simulation);
+
+    loadPorts(simulation, traceLoader, passiveView);
   }
 }
 

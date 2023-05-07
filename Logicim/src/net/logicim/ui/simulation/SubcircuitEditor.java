@@ -309,14 +309,14 @@ public class SubcircuitEditor
 
     for (TraceData traceData : traces)
     {
-      TraceView traceView = traceData.create(this);
+      TraceView traceView = traceData.createAndEnableTraceView(this);
       views.put(traceData, traceView);
       traceView.updateId(appendIds, traceData.id);
     }
 
     for (StaticData<?> staticData : components)
     {
-      StaticView<?> staticView = staticData.createView(this, newComponentPropertyStep);
+      StaticView<?> staticView = staticData.createAndEnableStaticView(this, newComponentPropertyStep);
       views.put(staticData, staticView);
     }
 

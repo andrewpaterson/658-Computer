@@ -40,36 +40,22 @@ public class TraceData
     this.selected = selected;
   }
 
-  public TraceView create(SubcircuitEditor subcircuitEditor,
-                          TraceLoader traceLoader,
-                          boolean createConnections)
+  public TraceView createAndEnableTraceView(SubcircuitEditor subcircuitEditor)
   {
     TraceView traceView = new TraceView(subcircuitEditor.getSubcircuitView(),
                                         start,
                                         end,
-                                        createConnections);
+                                        true);
     if (enabled)
     {
       traceView.enable();
     }
-
-    if (createConnections)
+    if (selected)
     {
-      WireDataHelper.wireConnect(subcircuitEditor,
-                                 traceLoader,
-                                 traceView,
-                                 simulationTraces,
-                                 selected);
+      subcircuitEditor.select(traceView.getView());
     }
-    return traceView;
-  }
 
-  public TraceView create(SubcircuitEditor subcircuitEditor)
-  {
-    return new TraceView(subcircuitEditor.getSubcircuitView(),
-                         start,
-                         end,
-                         true);
+    return traceView;
   }
 
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
@@ -77,7 +63,19 @@ public class TraceData
                                         TraceLoader traceLoader,
                                         TraceView traceView)
   {
-    throw new SimulatorException();
+    long[] traceIDs = simulationTraces.get(circuitSimulation.getId());
+    if (traceIDs == null)
+    {
+      throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
+    }
+
+    WireDataHelper.wireConnect(subcircuitEditor,
+                               circuitSimulation,
+                               traceLoader,
+                               traceView,
+                               traceIDs,
+                               selected);
+
   }
 }
 

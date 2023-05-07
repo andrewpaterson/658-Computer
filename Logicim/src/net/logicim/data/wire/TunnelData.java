@@ -1,5 +1,6 @@
 package net.logicim.data.wire;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
@@ -40,17 +41,23 @@ public class TunnelData
   }
 
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        CircuitSimulation simulation,
+                                        CircuitSimulation circuitSimulation,
                                         TraceLoader traceLoader,
                                         TunnelView tunnelView)
   {
-    tunnelView.createConnectionViews(subcircuitEditor.getSubcircuitView());
+    long[] traceIDs = simulationTraces.get(circuitSimulation.getId());
+    if (traceIDs == null)
+    {
+      throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
+    }
+
+
     WireDataHelper.wireConnect(subcircuitEditor,
+                               circuitSimulation,
                                traceLoader,
                                tunnelView,
-                               simulationTraces,
+                               traceIDs,
                                selected);
-    tunnelView.enable();
   }
 
   @Override

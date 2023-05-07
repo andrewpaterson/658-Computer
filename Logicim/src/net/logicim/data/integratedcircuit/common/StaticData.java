@@ -37,7 +37,7 @@ public abstract class StaticData<T extends StaticView<?>>
     this.selected = selected;
   }
 
-  public T createView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public T createAndEnableStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     T staticView = createStaticView(subcircuitEditor, newComponentPropertyStep);
 

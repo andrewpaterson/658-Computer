@@ -25,11 +25,6 @@ public abstract class WireDataHelper
     }
     wireView.connectTraces(simulation, traces);
     wireView.enable();
-
-    if (selected)
-    {
-      subcircuitEditor.select(wireView.getView());
-    }
   }
 }
 

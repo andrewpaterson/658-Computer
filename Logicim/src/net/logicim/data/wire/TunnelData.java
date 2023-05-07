@@ -8,10 +8,12 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
+import java.util.Map;
+
 public class TunnelData
     extends StaticData<TunnelView>
 {
-  public long[] traceIds;
+  public Map<Long, long[]> simulationTraces;
   public boolean doubleSided;
 
   public TunnelData()
@@ -23,7 +25,7 @@ public class TunnelData
                     Rotation rotation,
                     long id,
                     boolean selected,
-                    long[] traceIds,
+                    Map<Long, long[]> simulationTraces,
                     boolean enabled,
                     boolean doubleSided)
   {
@@ -33,7 +35,7 @@ public class TunnelData
           id,
           enabled,
           selected);
-    this.traceIds = traceIds;
+    this.simulationTraces = simulationTraces;
     this.doubleSided = doubleSided;
   }
 
@@ -46,7 +48,7 @@ public class TunnelData
     WireDataHelper.wireConnect(subcircuitEditor,
                                traceLoader,
                                tunnelView,
-                               traceIds,
+                               simulationTraces,
                                selected);
     tunnelView.enable();
   }

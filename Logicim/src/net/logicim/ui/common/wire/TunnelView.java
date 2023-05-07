@@ -16,10 +16,8 @@ import net.logicim.ui.shape.polygon.PolygonView;
 import net.logicim.ui.shape.text.TextView;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.awt.Font.SANS_SERIF;
 import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.LEFT;
@@ -31,9 +29,8 @@ public class TunnelView
   public static final int FONT_SIZE = 11;
 
   protected Set<TunnelView> tunnels;
-  protected List<ConnectionView> connections;
 
-  protected List<Trace> traces;
+  protected WireViewComp wireView;
 
   protected TextView textView;
   protected PolygonView polygonView;
@@ -54,12 +51,9 @@ public class TunnelView
           position,
           rotation,
           properties);
-    this.connections = new ArrayList<>(2);
-    this.connections.add(null);
-    this.connections.add(null);
+    this.wireView = new WireViewComp();
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
-    this.traces = new ArrayList<>();
     this.sanitisedName = createSanitisedName(properties);
     this.tunnels = subcircuitView.addTunnel(this);
     this.startPosition = new Int2D(0, 0);
@@ -137,17 +131,17 @@ public class TunnelView
 
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
     ConnectionView startConnection = subcircuitView.getOrAddConnectionView((Int2D) startCache.getTransformedPosition(), this);
-    this.connections.set(0, startConnection);
+    wireView.setStart(startConnection);
     connectionViews.add(startConnection);
     if (properties.doubleSided)
     {
       ConnectionView endConnection = subcircuitView.getOrAddConnectionView((Int2D) endCache.getTransformedPosition(), this);
-      this.connections.set(1, endConnection);
+      wireView.setEnd(endConnection);
       connectionViews.add(endConnection);
     }
     else
     {
-      this.connections.set(1, null);
+      wireView.setEnd(null);
     }
     return connectionViews;
   }
@@ -233,67 +227,51 @@ public class TunnelView
 
   public TunnelData save(boolean selected)
   {
-    long[] ids = new long[traces.size()];
-    for (int i = 0; i < traces.size(); i++)
-    {
-      Trace trace = traces.get(i);
-      ids[i] = Trace.getId(trace);
-    }
+    Map<Long, long[]> simulationTraces = wireView.save();
 
     return new TunnelData(properties.name,
                           position,
                           rotation,
                           id,
                           selected,
-                          ids,
+                          simulationTraces,
                           enabled,
                           properties.doubleSided);
   }
 
-  public void connectTraces(List<Trace> traces)
+  public void connectTraces(CircuitSimulation simulation, List<Trace> traces)
   {
-    this.traces = traces;
+    wireView.connectTraces(simulation, traces);
   }
 
   @Override
   public void disconnect()
   {
-    for (int i = 0; i < connections.size(); i++)
-    {
-      connections.set(i, null);
-    }
-    clearTraces();
+    wireView.disconnect();
   }
 
   @Override
-  public void clearTraces()
+  public void clearTraces(CircuitSimulation simulation)
   {
-    traces.clear();
+    wireView.clearTraces(simulation);
   }
 
   @Override
-  public List<Trace> getTraces()
+  public List<Trace> getTraces(CircuitSimulation simulation)
   {
-    return traces;
+    return wireView.getTraces(simulation);
   }
 
   public boolean isRemoved()
   {
-    return connections.isEmpty();
+    //Can this ever be empty?
+    return wireView.getConnections().isEmpty();
   }
 
   @Override
   public List<ConnectionView> getConnections()
   {
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    for (ConnectionView connection : connections)
-    {
-      if (connection != null)
-      {
-        connectionViews.add(connection);
-      }
-    }
-    return connectionViews;
+    return wireView.getConnections();
   }
 
   @Override

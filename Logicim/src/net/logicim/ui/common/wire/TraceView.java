@@ -10,16 +10,16 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TraceView
     extends View
     implements WireView
 {
+  protected WireViewComp wireView;
+
   protected Line line;
-  protected List<ConnectionView> connections;
-  protected List<Trace> traces;
 
   public TraceView(SubcircuitView subcircuitView, Line line)
   {
@@ -35,18 +35,12 @@ public class TraceView
   {
     super();
     this.line = new Line(start, end);
-    connections = new ArrayList<>(2);
+    wireView = new WireViewComp();
     if (addConnections)
     {
-      connections.add(subcircuitView.getOrAddConnectionView(start, this));
-      connections.add(subcircuitView.getOrAddConnectionView(end, this));
+      wireView.setStart(subcircuitView.getOrAddConnectionView(start, this));
+      wireView.setEnd(subcircuitView.getOrAddConnectionView(end, this));
     }
-    else
-    {
-      connections.add(null);
-      connections.add(null);
-    }
-    this.traces = new ArrayList<>();
     subcircuitView.addTraceView(this);
   }
 
@@ -171,31 +165,23 @@ public class TraceView
 
   public ConnectionView getStartConnection()
   {
-    return connections.get(0);
+    return wireView.getStartConnection();
   }
 
   public ConnectionView getEndConnection()
   {
-    return connections.get(1);
+    return wireView.getEndConnection();
   }
 
   public boolean hasConnections()
   {
-    return getStartConnection() != null && getEndConnection() != null;
+    return wireView.hasConnections();
   }
 
   @Override
   public List<ConnectionView> getConnections()
   {
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    for (ConnectionView connection : connections)
-    {
-      if (connection != null)
-      {
-        connectionViews.add(connection);
-      }
-    }
-    return connectionViews;
+    return wireView.getConnections();
   }
 
   @Override
@@ -245,14 +231,7 @@ public class TraceView
 
   protected Stroke getTraceStroke(Viewport viewport)
   {
-    if (traces.size() == 1)
-    {
-      return viewport.getZoomableStroke();
-    }
-    else
-    {
-      return viewport.getZoomableStroke(3.0f);
-    }
+    return wireView.getTraceStroke(viewport);
   }
 
   @Override
@@ -275,26 +254,14 @@ public class TraceView
 
   protected Color getTraceColour(CircuitSimulation simulation)
   {
-    if (simulation != null)
-    {
-      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, simulation.getTime());
-    }
-    else
-    {
-      return Colours.getInstance().getDisconnectedTrace();
-    }
+    return wireView.getTraceColour(simulation);
   }
 
   public TraceData save(boolean selected)
   {
-    long[] ids = new long[traces.size()];
-    for (int i = 0; i < traces.size(); i++)
-    {
-      Trace trace = traces.get(i);
-      ids[i] = Trace.getId(trace);
-    }
+    Map<Long, long[]> simulationTraces = wireView.save();
 
-    return new TraceData(ids,
+    return new TraceData(simulationTraces,
                          getStartPosition(),
                          getEndPosition(),
                          id,
@@ -302,29 +269,25 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(List<Trace> traces)
+  public void connectTraces(CircuitSimulation simulation, List<Trace> traces)
   {
-    this.traces = traces;
+    wireView.connectTraces(simulation, traces);
   }
 
   public void disconnect()
   {
-    for (int i = 0; i < connections.size(); i++)
-    {
-      connections.set(i, null);
-    }
-    clearTraces();
+    wireView.disconnect();
   }
 
   @Override
-  public void clearTraces()
+  public void clearTraces(CircuitSimulation simulation)
   {
-    traces.clear();
+    wireView.clearTraces(simulation);
   }
 
-  public List<Trace> getTraces()
+  public List<Trace> getTraces(CircuitSimulation simulation)
   {
-    return traces;
+    return wireView.getTraces(simulation);
   }
 
   public void setLine(Int2D start, Int2D end)

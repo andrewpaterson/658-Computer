@@ -102,7 +102,7 @@ public class ConnectionInformationPanel
   {
     if (connectedComponent instanceof TraceView)
     {
-      return toTraceDetailString((TraceView) connectedComponent);
+      return toTraceDetailString(simulation, (TraceView) connectedComponent);
     }
     else if (connectedComponent instanceof ComponentView)
     {
@@ -110,7 +110,7 @@ public class ConnectionInformationPanel
     }
     else if (connectedComponent instanceof TunnelView)
     {
-      return toTunnelDetailString((TunnelView) connectedComponent);
+      return toTunnelDetailString(simulation, (TunnelView) connectedComponent);
     }
     return "";
   }
@@ -156,11 +156,11 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String toTraceDetailString(TraceView traceView)
+  private String toTraceDetailString(CircuitSimulation simulation, TraceView traceView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = traceView.getTraces();
+    List<Trace> traces = traceView.getTraces(simulation);
     boolean multiline = traces.size() > 8;
     if (multiline)
     {
@@ -184,11 +184,11 @@ public class ConnectionInformationPanel
     return builder.toString();
   }
 
-  private String toTunnelDetailString(TunnelView tunnelView)
+  private String toTunnelDetailString(CircuitSimulation simulation, TunnelView tunnelView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = tunnelView.getTraces();
+    List<Trace> traces = tunnelView.getTraces(simulation);
     boolean multiline = traces.size() > 8;
     if (multiline)
     {
@@ -238,3 +238,4 @@ public class ConnectionInformationPanel
     return first;
   }
 }
+

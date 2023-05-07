@@ -2,16 +2,17 @@ package net.logicim.data.wire;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.ViewData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
+import java.util.Map;
+
 public class TraceData
     extends ViewData
 {
-  public long[] traceIds;  //Shouldn't these be per simulation?
+  public Map<Long, long[]> simulationTraces;
 
   public Int2D start;
   public Int2D end;
@@ -23,7 +24,7 @@ public class TraceData
   {
   }
 
-  public TraceData(long[] traceIds,
+  public TraceData(Map<Long, long[]> simulationTraces,
                    Int2D start,
                    Int2D end,
                    long id,
@@ -31,7 +32,7 @@ public class TraceData
                    boolean selected)
   {
     super(id);
-    this.traceIds = traceIds;
+    this.simulationTraces = simulationTraces;
 
     this.start = start.clone();
     this.end = end.clone();
@@ -57,7 +58,7 @@ public class TraceData
       WireDataHelper.wireConnect(subcircuitEditor,
                                  traceLoader,
                                  traceView,
-                                 traceIds,
+                                 simulationTraces,
                                  selected);
     }
     return traceView;

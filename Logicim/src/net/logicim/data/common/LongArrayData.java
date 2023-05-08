@@ -12,6 +12,11 @@ public class LongArrayData
     array = null;
   }
 
+  public LongArrayData(long[] array)
+  {
+    this.array = array;
+  }
+
   @Override
   public void load(Map<String, String> fields)
   {

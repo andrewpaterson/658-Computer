@@ -621,12 +621,12 @@ public class LogicimFileReader
         else if (containingClassField.typeInstance instanceof KeyData)
         {
           KeyData data = (KeyData) containingClassField.typeInstance;
-          data.value = ((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance.getObject();
+          data.object = ((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance.getObject();
         }
         else if (containingClassField.typeInstance instanceof ValueData)
         {
           ValueData data = (ValueData) containingClassField.typeInstance;
-          data.value = ((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance.getObject();
+          data.object = ((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance.getObject();
         }
         else
         {

@@ -1,6 +1,7 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.common.SimulatorException;
+import net.logicim.data.common.LongArrayData;
+import net.logicim.data.common.LongData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
@@ -108,15 +109,15 @@ public class WireViewComp
     }
   }
 
-  protected Map<Long, long[]> save()
+  protected Map<LongData, LongArrayData> save()
   {
-    Map<Long, long[]> simulationTraces = new LinkedHashMap<>();
+    Map<LongData, LongArrayData> simulationTraces = new LinkedHashMap<>();
     for (Map.Entry<CircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
     {
       CircuitSimulation simulation = entry.getKey();
       List<Trace> traces = entry.getValue();
       long[] ids = new long[traces.size()];
-      simulationTraces.put(simulation.getId(), ids);
+      simulationTraces.put(new LongData( simulation.getId()), new LongArrayData(ids));
       for (int i = 0; i < traces.size(); i++)
       {
         Trace trace = traces.get(i);
@@ -128,15 +129,20 @@ public class WireViewComp
 
   public void connectTraces(CircuitSimulation simulation, List<Trace> traces)
   {
+    simulationTraces.put(simulation, traces);
+
+    width = Integer.MAX_VALUE;
     for (List<Trace> existing : simulationTraces.values())
     {
-      if (existing.size() != traces.size())
+      if (existing.size() < width)
       {
-        throw new SimulatorException("Connecting simulation traces width [%s] not equal to other existing trace widths [%s].", traces.size(), existing.size());
+        width = existing.size();
       }
     }
-    simulationTraces.put(simulation, traces);
-    width = traces.size();
+    if (width == Integer.MAX_VALUE)
+    {
+      width = 1;
+    }
   }
 
   public void disconnect()

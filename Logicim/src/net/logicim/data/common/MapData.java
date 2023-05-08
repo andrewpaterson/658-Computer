@@ -48,8 +48,8 @@ public abstract class MapData
   public void set(Object object)
   {
     MapElementData mapElement = (MapElementData) object;
-    keys.set(mapElement.index, mapElement.key.value);
-    values.set(mapElement.index, mapElement.value.value);
+    keys.set(mapElement.index, mapElement.key.object);
+    values.set(mapElement.index, mapElement.value.object);
   }
 }
 

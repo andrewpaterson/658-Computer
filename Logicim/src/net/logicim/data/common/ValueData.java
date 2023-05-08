@@ -3,7 +3,7 @@ package net.logicim.data.common;
 public class ValueData
     extends SaveData
 {
-  public Object value;
+  public Object object;
 
   public ValueData()
   {
@@ -12,7 +12,7 @@ public class ValueData
   @Override
   public Object getObject()
   {
-    return value;
+    return object;
   }
 }
 

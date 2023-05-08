@@ -2,6 +2,8 @@ package net.logicim.data.wire;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.common.LongArrayData;
+import net.logicim.data.common.LongData;
 import net.logicim.data.common.ViewData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.wire.TraceView;
@@ -12,7 +14,7 @@ import java.util.Map;
 public class TraceData
     extends ViewData
 {
-  public Map<Long, long[]> simulationTraces;
+  public Map<LongData, LongArrayData> simulationTraces;
 
   public Int2D start;
   public Int2D end;
@@ -24,7 +26,7 @@ public class TraceData
   {
   }
 
-  public TraceData(Map<Long, long[]> simulationTraces,
+  public TraceData(Map<LongData, LongArrayData> simulationTraces,
                    Int2D start,
                    Int2D end,
                    long id,
@@ -63,7 +65,7 @@ public class TraceData
                                         TraceLoader traceLoader,
                                         TraceView traceView)
   {
-    long[] traceIDs = simulationTraces.get(circuitSimulation.getId());
+    LongArrayData traceIDs = simulationTraces.get(new LongData(circuitSimulation.getId()));
     if (traceIDs == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
@@ -73,7 +75,7 @@ public class TraceData
                                circuitSimulation,
                                traceLoader,
                                traceView,
-                               traceIDs,
+                               traceIDs.array,
                                selected);
 
   }

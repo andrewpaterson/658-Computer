@@ -3,7 +3,7 @@ package net.logicim.data.common;
 public class KeyData
     extends SaveData
 {
-  public Object value;
+  public Object object;
 
   public KeyData()
   {
@@ -12,7 +12,7 @@ public class KeyData
   @Override
   public Object getObject()
   {
-    return value;
+    return object;
   }
 }
 

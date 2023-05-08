@@ -2,6 +2,8 @@ package net.logicim.ui.common.wire;
 
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.common.LongArrayData;
+import net.logicim.data.common.LongData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
@@ -259,7 +261,7 @@ public class TraceView
 
   public TraceData save(boolean selected)
   {
-    Map<Long, long[]> simulationTraces = wireView.save();
+    Map<LongData, LongArrayData> simulationTraces = wireView.save();
 
     return new TraceData(simulationTraces,
                          getStartPosition(),

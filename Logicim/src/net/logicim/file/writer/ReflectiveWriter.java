@@ -274,21 +274,13 @@ public abstract class ReflectiveWriter
     parent.appendChild(node);
   }
 
-  public static void writeXML(Object o, Document doc, Node parent)
-  {
-    Element element = doc.createElement(getXMLTag(o));
-    parent.appendChild(element);
-
-    writeData(o, doc, element);
-  }
-
   public static void writeXML(Object o, Document doc, String elementName, Node parent)
   {
     Element element = doc.createElement(elementName);
     element.setAttribute(TYPE, getXMLTag(o));
     parent.appendChild(element);
 
-    writeData(o, doc, element);
+    writeReflectiveData(o, doc, element);
   }
 
   public static void writeList(Document doc, Element parent, String name, List<?> list)
@@ -307,7 +299,7 @@ public abstract class ReflectiveWriter
       element.setAttribute(TYPE, getXMLTag(saveData));
       element.setAttribute("index", Integer.toString(i));
       listContainer.appendChild(element);
-      writeData(saveData, doc, element);
+      writeReflectiveData(saveData, doc, element);
     }
   }
 
@@ -331,19 +323,24 @@ public abstract class ReflectiveWriter
       Element keyElement = doc.createElement("key");
       keyElement.setAttribute(TYPE, getXMLTag(KeyData.class));
       entryElement.appendChild(keyElement);
-      writeData(keyData, doc, keyElement);
+
+      Element keyObjectElement = doc.createElement("object");
+      keyObjectElement.setAttribute(TYPE, getXMLTag(keyData));
+      keyElement.appendChild(keyObjectElement);
+      writeReflectiveData(keyData, doc, keyObjectElement);
+
       Element valueElement = doc.createElement("value");
       valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
       entryElement.appendChild(valueElement);
-      writeData(valueData, doc, valueElement);
+
+      Element valueObjectElement = doc.createElement("object");
+      valueObjectElement.setAttribute(TYPE, getXMLTag(valueData));
+      valueElement.appendChild(valueObjectElement);
+      writeReflectiveData(valueData, doc, valueObjectElement);
+
       listContainer.appendChild(entryElement);
       i++;
     }
-  }
-
-  public static void writeData(Object o, Document doc, Element parent)
-  {
-    writeReflectiveData(o, doc, parent);
   }
 
   public static void writeReflectiveData(Object o, Document doc, Element parent)

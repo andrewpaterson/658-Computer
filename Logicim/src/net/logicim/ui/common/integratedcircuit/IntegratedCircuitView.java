@@ -6,6 +6,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.MultiIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
@@ -184,7 +185,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
         IntegratedCircuitEventData<?> integratedCircuitEventData = event.save();
         eventDatas.add(integratedCircuitEventData);
       }
-      simulationEventData.add(simulation.getId(), eventDatas);
+      simulationEventData.add(simulation.getId(), new MultiIntegratedCircuitEventData(eventDatas));
     }
     return simulationEventData;
   }

@@ -4,6 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
+import net.logicim.data.integratedcircuit.event.MultiIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.port.common.LogicPortData;
 import net.logicim.data.port.common.PortData;
@@ -103,11 +104,11 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
 
   protected List<? extends IntegratedCircuitEventData<?>> getIntegratedCircuitEventDataList(long simulationId)
   {
-    for (Map.Entry<Long, List<IntegratedCircuitEventData<?>>> entry : events.simulationIntegratedCircuitEventData.entrySet())
+    for (Map.Entry<Long, MultiIntegratedCircuitEventData> entry : events.simulationIntegratedCircuitEventData.entrySet())
     {
       if (simulationId == entry.getKey())
       {
-        return entry.getValue();
+        return entry.getValue().integratedCircuitEventData;
       }
     }
     return null;
@@ -132,7 +133,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                         TraceLoader traceLoader,
                                         ICV integratedCircuitView)
   {
-   integratedCircuitView.createComponent(simulation);
+    integratedCircuitView.createComponent(simulation);
 
     loadState(simulation, integratedCircuitView);
     loadEvents(simulation, integratedCircuitView);

@@ -5,10 +5,7 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
-import net.logicim.data.common.KeyData;
-import net.logicim.data.common.MapElementData;
-import net.logicim.data.common.ReflectiveData;
-import net.logicim.data.common.ValueData;
+import net.logicim.data.common.*;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import org.w3c.dom.Document;
@@ -23,7 +20,7 @@ public abstract class ReflectiveWriter
 {
   public static final int ARRAY_ROW_LENGTH = 24;
 
-  public static final String LOGICIM_TAG_NAME = "Logicim";
+  public static final String LOGICIM_DOC_NAME = "Logicim";
   public static final String INDEX = "index";
   public static final String EDITOR_DATA_TAG_NAME = "editorData";
   public static final String TYPE = "type";
@@ -351,91 +348,91 @@ public abstract class ReflectiveWriter
     {
       Class<?> fieldClass = instanceInspector.getFieldClass(fieldName);
       Object fieldValue = instanceInspector.getFieldValue(fieldName);
-      if (ReflectiveData.class.isAssignableFrom(fieldClass))
+      if (ReflectiveData.class.isAssignableFrom(fieldClass) || fieldValue instanceof ReflectiveData)
       {
         writeReflectiveData(doc, parent, fieldName, (ReflectiveData) fieldValue);
       }
-      else if (State.class.isAssignableFrom(fieldClass))
+      else if (State.class.isAssignableFrom(fieldClass) || fieldValue instanceof State)
       {
         writeStateData(doc, parent, fieldName, (State) fieldValue);
       }
-      else if (String.class.isAssignableFrom(fieldClass))
+      else if (String.class.isAssignableFrom(fieldClass) || fieldValue instanceof String)
       {
         parent.appendChild(writeString(doc, fieldName, (String) fieldValue));
       }
-      else if (Long.class.isAssignableFrom(fieldClass) || long.class.isAssignableFrom(fieldClass))
+      else if (Long.class.isAssignableFrom(fieldClass) || long.class.isAssignableFrom(fieldClass) || fieldValue instanceof Long)
       {
         writeLong(doc, parent, fieldName, (Long) fieldValue);
       }
-      else if (Integer.class.isAssignableFrom(fieldClass) || int.class.isAssignableFrom(fieldClass))
+      else if (Integer.class.isAssignableFrom(fieldClass) || int.class.isAssignableFrom(fieldClass) || fieldValue instanceof Integer)
       {
         writeInt(doc, parent, fieldName, (Integer) fieldValue);
       }
-      else if (Float.class.isAssignableFrom(fieldClass) || float.class.isAssignableFrom(fieldClass))
+      else if (Float.class.isAssignableFrom(fieldClass) || float.class.isAssignableFrom(fieldClass) || fieldValue instanceof Float)
       {
         parent.appendChild(writeFloat(doc, fieldName, (Float) fieldValue));
       }
-      else if (Double.class.isAssignableFrom(fieldClass) || double.class.isAssignableFrom(fieldClass))
+      else if (Double.class.isAssignableFrom(fieldClass) || double.class.isAssignableFrom(fieldClass) || fieldValue instanceof Double)
       {
         parent.appendChild(writeDouble(doc, fieldName, (Double) fieldValue));
       }
-      else if (Boolean.class.isAssignableFrom(fieldClass) || boolean.class.isAssignableFrom(fieldClass))
+      else if (Boolean.class.isAssignableFrom(fieldClass) || boolean.class.isAssignableFrom(fieldClass) || fieldValue instanceof Boolean)
       {
         parent.appendChild(writeBoolean(doc, fieldName, (Boolean) fieldValue));
       }
-      else if (List.class.isAssignableFrom(fieldClass))
+      else if (List.class.isAssignableFrom(fieldClass) || fieldValue instanceof List)
       {
         writeList(doc, parent, fieldName, (List<?>) fieldValue);
       }
-      else if (Int2D.class.isAssignableFrom(fieldClass))
+      else if (Int2D.class.isAssignableFrom(fieldClass) || fieldValue instanceof Int2D)
       {
         writeInt2D(doc, parent, fieldName, (Int2D) fieldValue);
       }
-      else if (Float2D.class.isAssignableFrom(fieldClass))
+      else if (Float2D.class.isAssignableFrom(fieldClass) || fieldValue instanceof Float2D)
       {
         writeFloat2D(doc, parent, fieldName, (Float2D) fieldValue);
       }
-      else if (Rotation.class.isAssignableFrom(fieldClass))
+      else if (Rotation.class.isAssignableFrom(fieldClass) || fieldValue instanceof Rotation)
       {
         writeRotation(doc, parent, fieldName, (Rotation) fieldValue);
       }
-      else if (int[][].class.isAssignableFrom(fieldClass))
+      else if (int[][].class.isAssignableFrom(fieldClass) || fieldValue instanceof int[][])
       {
         writeInt2DArray(doc, parent, fieldName, (int[][]) fieldValue);
       }
-      else if (long[][].class.isAssignableFrom(fieldClass))
+      else if (long[][].class.isAssignableFrom(fieldClass) || fieldValue instanceof long[][])
       {
         writeLong2DArray(doc, parent, fieldName, (long[][]) fieldValue);
       }
-      else if (float[][].class.isAssignableFrom(fieldClass))
+      else if (float[][].class.isAssignableFrom(fieldClass) || fieldValue instanceof float[][])
       {
         writeFloat2DArray(doc, parent, fieldName, (float[][]) fieldValue);
       }
-      else if (double[][].class.isAssignableFrom(fieldClass))
+      else if (double[][].class.isAssignableFrom(fieldClass) || fieldValue instanceof double[][])
       {
         writeDouble2DArray(doc, parent, fieldName, (double[][]) fieldValue);
       }
-      else if (int[].class.isAssignableFrom(fieldClass))
+      else if (int[].class.isAssignableFrom(fieldClass) || fieldValue instanceof int[])
       {
         writeIntArray(doc, parent, fieldName, (int[]) fieldValue);
       }
-      else if (long[].class.isAssignableFrom(fieldClass))
+      else if (long[].class.isAssignableFrom(fieldClass) || fieldValue instanceof long[])
       {
         writeLongArray(doc, parent, fieldName, (long[]) fieldValue);
       }
-      else if (float[].class.isAssignableFrom(fieldClass))
+      else if (float[].class.isAssignableFrom(fieldClass) || fieldValue instanceof float[])
       {
         writeFloatArray(doc, parent, fieldName, (float[]) fieldValue);
       }
-      else if (double[].class.isAssignableFrom(fieldClass))
+      else if (double[].class.isAssignableFrom(fieldClass) || fieldValue instanceof double[])
       {
         writeDoubleArray(doc, parent, fieldName, (double[]) fieldValue);
       }
-      else if (Enum.class.isAssignableFrom(fieldClass))
+      else if (Enum.class.isAssignableFrom(fieldClass) || fieldValue instanceof Enum)
       {
         writeEnum(doc, parent, fieldName, fieldClass, (Enum<?>) fieldValue);
       }
-      else if (Map.class.isAssignableFrom(fieldClass))
+      else if (Map.class.isAssignableFrom(fieldClass) || fieldValue instanceof Map)
       {
         writeMap(doc, parent, fieldName, (Map<?, ?>) fieldValue);
       }
@@ -446,7 +443,7 @@ public abstract class ReflectiveWriter
     }
   }
 
-  protected static void writeReflectiveData(Document doc, Element parent, String fieldName, ReflectiveData reflectiveData)
+  protected static void writeReflectiveData(Document doc, Element parent, String fieldName, SaveData reflectiveData)
   {
     if (reflectiveData != null)
     {

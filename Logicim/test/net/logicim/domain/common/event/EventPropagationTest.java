@@ -16,14 +16,17 @@ import net.logicim.ui.simulation.CircuitEditor;
 
 import java.util.List;
 
+import static net.logicim.file.writer.ReflectiveWriter.EDITOR_DATA_TAG_NAME;
+import static net.logicim.file.writer.ReflectiveWriter.LOGICIM_DOC_NAME;
+
 public class EventPropagationTest
 {
   private static void testEventPropagation()
   {
     CircuitEditor circuitEditor = new CircuitEditor("Main");
 
-    LogicimFileReader fileReader = new LogicimFileReader();
-    EditorData editorData = fileReader.load(MultipleXORIntoAndSourceXML.xml);
+    LogicimFileReader fileReader = new LogicimFileReader(LOGICIM_DOC_NAME, EDITOR_DATA_TAG_NAME);
+    EditorData editorData = (EditorData) fileReader.load(MultipleXORIntoAndSourceXML.xml);
     circuitEditor.load(editorData.circuit);
     Circuit circuit = circuitEditor.getCircuit();
 

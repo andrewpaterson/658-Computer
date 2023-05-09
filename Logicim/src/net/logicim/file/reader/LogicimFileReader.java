@@ -8,7 +8,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.*;
-import net.logicim.data.editor.EditorData;
 import net.logicim.data.field.ProcessedXMLDataField;
 import net.logicim.data.field.SaveXMLDataField;
 import net.logicim.data.field.UnknownXMLDataField;
@@ -28,23 +27,28 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-import static net.logicim.file.writer.ReflectiveWriter.*;
+import static net.logicim.file.writer.ReflectiveWriter.INDEX;
+import static net.logicim.file.writer.ReflectiveWriter.TYPE;
 
 public class LogicimFileReader
     extends DefaultHandler
 {
-  protected EditorData circuitData;
+  protected SaveData circuitData;
   protected List<XMLDataField> dataStack;
 
   protected List<String> characters;
+  private String docName;
+  private String rootTagName;
 
-  public LogicimFileReader()
+  public LogicimFileReader(String docName, String rootTagName)
   {
-    circuitData = null;
-    characters = null;
+    this.circuitData = null;
+    this.characters = null;
+    this.docName = docName;
+    this.rootTagName = rootTagName;
   }
 
-  public EditorData load(File file)
+  public SaveData load(File file)
   {
     try
     {
@@ -59,7 +63,7 @@ public class LogicimFileReader
     return circuitData;
   }
 
-  public EditorData load(String contents)
+  public SaveData load(String contents)
   {
     try
     {
@@ -465,7 +469,7 @@ public class LogicimFileReader
   @Override
   public void startElement(String uri, String lName, String qName, Attributes attr)
   {
-    if (qName.equals(LOGICIM_TAG_NAME))
+    if (qName.equals(docName))
     {
       dataStack = new ArrayList<>();
     }
@@ -528,16 +532,16 @@ public class LogicimFileReader
       processCharacters(string);
     }
 
-    if (qName.equals(LOGICIM_TAG_NAME))
+    if (qName.equals(docName))
     {
       dataStack = null;
     }
     else
     {
-      if (qName.equals(EDITOR_DATA_TAG_NAME))
+      if (qName.equals(rootTagName))
       {
         SaveXMLDataField saveDataField = (SaveXMLDataField) dataStack.get(dataStack.size() - 1);
-        circuitData = (EditorData) saveDataField.typeInstance;
+        circuitData = saveDataField.typeInstance;
       }
       else
       {

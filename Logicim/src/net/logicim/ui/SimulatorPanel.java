@@ -37,6 +37,8 @@ import java.awt.event.*;
 import java.io.File;
 
 import static net.logicim.domain.common.Units.nS_IN_mS;
+import static net.logicim.file.writer.ReflectiveWriter.EDITOR_DATA_TAG_NAME;
+import static net.logicim.file.writer.ReflectiveWriter.LOGICIM_DOC_NAME;
 
 public class SimulatorPanel
     extends JPanel
@@ -268,7 +270,7 @@ public class SimulatorPanel
 
         try
         {
-          new LogicimFileWriter().writeXML(savedData, newFile);
+          LogicimFileWriter.writeXML(savedData, newFile);
         }
         catch (RuntimeException exception)
         {
@@ -293,7 +295,7 @@ public class SimulatorPanel
       File file = fileChooser.getSelectedFile();
       if (file != null)
       {
-        EditorData savedData = new LogicimFileReader().load(file);
+        EditorData savedData = (EditorData) new LogicimFileReader(LOGICIM_DOC_NAME, EDITOR_DATA_TAG_NAME).load(file);
         try
         {
           logicim.loadFile(savedData);

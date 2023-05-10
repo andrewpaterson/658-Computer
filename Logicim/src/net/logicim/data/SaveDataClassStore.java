@@ -29,6 +29,7 @@ public class SaveDataClassStore
     classMap = new HashMap<>();
     createPackageInspectors("net.logicim.data");
     createPackageInspectors("net.logicim.domain.integratedcircuit");
+    createPackageInspectors("net.logicim.domain.common.state");
   }
 
   protected void createPackageInspectors(String packageName)

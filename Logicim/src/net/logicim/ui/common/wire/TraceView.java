@@ -261,7 +261,7 @@ public class TraceView
 
   public TraceData save(boolean selected)
   {
-    Map<LongData, LongArrayData> simulationTraces = wireView.save();
+    Map<Long, LongArrayData> simulationTraces = wireView.save();
 
     return new TraceData(simulationTraces,
                          getStartPosition(),

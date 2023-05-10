@@ -86,7 +86,32 @@ public class ReflectiveWriterTest
     map.put("Tunnel", new TunnelProperties("Santa", true));
     LogicimFileWriter.writeXML(new ValueData(map), writer, "doc", "root");
 
-    validate("", writer.toString().replace("\r", ""));
+    validate("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+             "<doc>\n" +
+             "  <root type=\"ValueData\">\n" +
+             "    <object size=\"2\" type=\"LinkedHashMap\">\n" +
+             "      <element index=\"0\" type=\"MapElementData\">\n" +
+             "        <key type=\"KeyData\">\n" +
+             "          <object type=\"Integer\" x=\"91\"/>\n" +
+             "        </key>\n" +
+             "        <value type=\"ValueData\">\n" +
+             "          <object>World</object>\n" +
+             "        </value>\n" +
+             "      </element>\n" +
+             "      <element index=\"1\" type=\"MapElementData\">\n" +
+             "        <key type=\"KeyData\">\n" +
+             "          <object>Tunnel</object>\n" +
+             "        </key>\n" +
+             "        <value type=\"ValueData\">\n" +
+             "          <object type=\"TunnelProperties\">\n" +
+             "            <name>Santa</name>\n" +
+             "            <doubleSided>true</doubleSided>\n" +
+             "          </object>\n" +
+             "        </value>\n" +
+             "      </element>\n" +
+             "    </object>\n" +
+             "  </root>\n" +
+             "</doc>\n", writer.toString().replace("\r", ""));
   }
 
   public static void test()

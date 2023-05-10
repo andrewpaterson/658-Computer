@@ -1,7 +1,6 @@
 package net.logicim.ui.common.wire;
 
 import net.logicim.data.common.LongArrayData;
-import net.logicim.data.common.LongData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
@@ -109,15 +108,15 @@ public class WireViewComp
     }
   }
 
-  protected Map<LongData, LongArrayData> save()
+  protected Map<Long, LongArrayData> save()
   {
-    Map<LongData, LongArrayData> simulationTraces = new LinkedHashMap<>();
+    Map<Long, LongArrayData> simulationTraces = new LinkedHashMap<>();
     for (Map.Entry<CircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
     {
       CircuitSimulation simulation = entry.getKey();
       List<Trace> traces = entry.getValue();
       long[] ids = new long[traces.size()];
-      simulationTraces.put(new LongData( simulation.getId()), new LongArrayData(ids));
+      simulationTraces.put(simulation.getId(), new LongArrayData(ids));
       for (int i = 0; i < traces.size(); i++)
       {
         Trace trace = traces.get(i);

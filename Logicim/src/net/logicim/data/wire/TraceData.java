@@ -14,7 +14,7 @@ import java.util.Map;
 public class TraceData
     extends ViewData
 {
-  public Map<LongData, LongArrayData> simulationTraces;
+  public Map<Long, LongArrayData> simulationTraces;
 
   public Int2D start;
   public Int2D end;
@@ -26,7 +26,7 @@ public class TraceData
   {
   }
 
-  public TraceData(Map<LongData, LongArrayData> simulationTraces,
+  public TraceData(Map<Long, LongArrayData> simulationTraces,
                    Int2D start,
                    Int2D end,
                    long id,
@@ -65,7 +65,7 @@ public class TraceData
                                         TraceLoader traceLoader,
                                         TraceView traceView)
   {
-    LongArrayData traceIDs = simulationTraces.get(new LongData(circuitSimulation.getId()));
+    LongArrayData traceIDs = simulationTraces.get(circuitSimulation.getId());
     if (traceIDs == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());

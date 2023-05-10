@@ -3,7 +3,6 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.LongArrayData;
-import net.logicim.data.common.LongData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.CircuitSimulation;
@@ -229,7 +228,7 @@ public class TunnelView
 
   public TunnelData save(boolean selected)
   {
-    Map<LongData, LongArrayData> simulationTraces = wireView.save();
+    Map<Long, LongArrayData> simulationTraces = wireView.save();
 
     return new TunnelData(properties.name,
                           position,

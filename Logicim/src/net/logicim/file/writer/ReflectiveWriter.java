@@ -317,23 +317,16 @@ public abstract class ReflectiveWriter
       Element entryElement = doc.createElement("element");
       entryElement.setAttribute("index", Integer.toString(i));
       entryElement.setAttribute(TYPE, getXMLTag(MapElementData.class));
+
       Element keyElement = doc.createElement("key");
       keyElement.setAttribute(TYPE, getXMLTag(KeyData.class));
       entryElement.appendChild(keyElement);
-
-      Element keyObjectElement = doc.createElement("object");
-      keyObjectElement.setAttribute(TYPE, getXMLTag(keyData));
-      keyElement.appendChild(keyObjectElement);
-      writeReflectiveData(keyData, doc, keyObjectElement);
+      writeReflectiveData(new KeyData(keyData), doc, keyElement);
 
       Element valueElement = doc.createElement("value");
       valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
       entryElement.appendChild(valueElement);
-
-      Element valueObjectElement = doc.createElement("object");
-      valueObjectElement.setAttribute(TYPE, getXMLTag(valueData));
-      valueElement.appendChild(valueObjectElement);
-      writeReflectiveData(valueData, doc, valueObjectElement);
+      writeReflectiveData(new ValueData(valueData), doc, valueElement);
 
       listContainer.appendChild(entryElement);
       i++;
@@ -435,6 +428,18 @@ public abstract class ReflectiveWriter
       else if (Map.class.isAssignableFrom(fieldClass) || fieldValue instanceof Map)
       {
         writeMap(doc, parent, fieldName, (Map<?, ?>) fieldValue);
+      }
+      else if (fieldValue instanceof SaveData)
+      {
+        throw new SimulatorException("Field class [" + fieldValue.getClass().getSimpleName() + "] extends SaveDate.  Extend ReflectiveDate..");
+      }
+      else if (SaveData.class.isAssignableFrom(fieldClass))
+      {
+        throw new SimulatorException("Field class [" + fieldClass.getSimpleName() + "] extends SaveDate.  Extend ReflectiveDate..");
+      }
+      else if (fieldValue == null)
+      {
+        throw new SimulatorException("Unknown field class [" + fieldClass.getSimpleName() + "] writing field [" + o.getClass().getSimpleName() + "." + fieldName + "] with value [" + fieldValue + "].");
       }
       else
       {

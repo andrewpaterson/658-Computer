@@ -26,12 +26,6 @@ public class Buffer
   }
 
   @Override
-  public State createState()
-  {
-    return null;
-  }
-
-  @Override
   public void inputTransition(Simulation simulation, LogicPort port)
   {
     if (isPowered(simulation.getTime()))

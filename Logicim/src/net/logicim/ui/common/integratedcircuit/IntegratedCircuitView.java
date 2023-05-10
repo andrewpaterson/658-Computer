@@ -194,7 +194,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   {
     if (integratedCircuit.isStateless())
     {
-      return null;
+      return (STATE) integratedCircuit.getState();
     }
     else
     {

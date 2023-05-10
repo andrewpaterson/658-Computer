@@ -2,7 +2,6 @@ package net.logicim.data.wire;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.common.LongArrayData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.domain.CircuitSimulation;
@@ -15,7 +14,7 @@ import java.util.Map;
 public class TunnelData
     extends StaticData<TunnelView>
 {
-  public Map<Long, LongArrayData> simulationTraces;
+  public Map<Long, long[]> simulationTraces;
   public boolean doubleSided;
 
   public TunnelData()
@@ -27,7 +26,7 @@ public class TunnelData
                     Rotation rotation,
                     long id,
                     boolean selected,
-                    Map<Long, LongArrayData> simulationTraces,
+                    Map<Long, long[]> simulationTraces,
                     boolean enabled,
                     boolean doubleSided)
   {
@@ -46,7 +45,7 @@ public class TunnelData
                                         TraceLoader traceLoader,
                                         TunnelView tunnelView)
   {
-    LongArrayData traceIDs = simulationTraces.get(circuitSimulation.getId());
+    long[] traceIDs = simulationTraces.get(circuitSimulation.getId());
     if (traceIDs == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
@@ -56,7 +55,7 @@ public class TunnelData
                                circuitSimulation,
                                traceLoader,
                                tunnelView,
-                               traceIDs.array,
+                               traceIDs,
                                selected);
   }
 

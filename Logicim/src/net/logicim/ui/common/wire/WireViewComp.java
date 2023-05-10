@@ -108,15 +108,15 @@ public class WireViewComp
     }
   }
 
-  protected Map<Long, LongArrayData> save()
+  protected Map<Long, long[]> save()
   {
-    Map<Long, LongArrayData> simulationTraces = new LinkedHashMap<>();
+    Map<Long, long[]> simulationTraces = new LinkedHashMap<>();
     for (Map.Entry<CircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
     {
       CircuitSimulation simulation = entry.getKey();
       List<Trace> traces = entry.getValue();
       long[] ids = new long[traces.size()];
-      simulationTraces.put(simulation.getId(), new LongArrayData(ids));
+      simulationTraces.put(simulation.getId(), ids);
       for (int i = 0; i < traces.size(); i++)
       {
         Trace trace = traces.get(i);

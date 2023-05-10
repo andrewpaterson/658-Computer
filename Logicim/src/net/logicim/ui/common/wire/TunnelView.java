@@ -228,7 +228,7 @@ public class TunnelView
 
   public TunnelData save(boolean selected)
   {
-    Map<Long, LongArrayData> simulationTraces = wireView.save();
+    Map<Long, long[]> simulationTraces = wireView.save();
 
     return new TunnelData(properties.name,
                           position,

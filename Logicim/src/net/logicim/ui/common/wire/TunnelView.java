@@ -265,7 +265,6 @@ public class TunnelView
 
   public boolean isRemoved()
   {
-    //Can this ever be empty?
     return wireView.getConnections().isEmpty();
   }
 

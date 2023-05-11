@@ -1,6 +1,5 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.data.common.LongArrayData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
@@ -57,21 +56,6 @@ public class WireViewComp
 
   public List<ConnectionView> getConnections()
   {
-    boolean noneNull = true;
-    for (ConnectionView connection : connections)
-    {
-      if (connection == null)
-      {
-        noneNull = false;
-        break;
-      }
-    }
-
-    if (noneNull)
-    {
-      return connections;
-    }
-
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
     for (ConnectionView connection : connections)
     {

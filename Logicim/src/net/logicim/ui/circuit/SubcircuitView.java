@@ -128,7 +128,16 @@ public class SubcircuitView
         throw new SimulatorException("Cannot delete a [null] view.");
       }
 
-      connectionViews.addAll(disconnectStaticView(componentView, circuitSimulation));
+      List<ConnectionView> disconnectedConnectionViews = disconnectStaticView(componentView, circuitSimulation);
+      for (ConnectionView connectionView : disconnectedConnectionViews)
+      {
+        if (connectionView == null)
+        {
+          throw new SimulatorException("Disconnected connection may not be null from component [%s].", componentView.toIdentifierString());
+        }
+      }
+
+      connectionViews.addAll(disconnectedConnectionViews);
       if (componentView instanceof IntegratedCircuitView)
       {
         deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView, circuitSimulation);
@@ -517,6 +526,10 @@ public class SubcircuitView
     {
       for (ConnectionView connectionView : connectionViews)
       {
+        if (connectionView == null)
+        {
+          throw new SimulatorException("Connection may not be null.");
+        }
         if (!updatedConnectionViews.contains(connectionView))
         {
           List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitSimulation, connectionView);

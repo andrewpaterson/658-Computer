@@ -68,11 +68,9 @@ public class TraceData
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
     }
 
-    WireDataHelper.wireConnect(
-        circuitSimulation,
-                               traceLoader,
-                               traceView,
-                               traceIDs
+    traceView.wireConnect(circuitSimulation,
+                          traceLoader,
+                          traceIDs
     );
 
   }

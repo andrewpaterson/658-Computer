@@ -51,11 +51,9 @@ public class TunnelData
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
     }
 
-    WireDataHelper.wireConnect(
-        circuitSimulation,
-                               traceLoader,
-                               tunnelView,
-                               traceIDs
+    tunnelView.wireConnect(circuitSimulation,
+                           traceLoader,
+                           traceIDs
     );
   }
 
@@ -66,7 +64,6 @@ public class TunnelData
     componentView.createConnectionViews(subcircuitEditor.getSubcircuitView());
     return componentView;
   }
-
 
   public TunnelView createComponentView(SubcircuitEditor subcircuitEditor)
   {

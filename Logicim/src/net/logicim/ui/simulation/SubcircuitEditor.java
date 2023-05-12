@@ -341,7 +341,7 @@ public class SubcircuitEditor
       {
         TraceView traceView = (TraceView) view;
         TraceData traceData = (TraceData) data;
-        traceData.createAndConnectComponent(this, circuitSimulation, traceLoader, traceView);
+        traceData.createAndConnectComponent(circuitSimulation, traceLoader, traceView);
       }
       else
       {

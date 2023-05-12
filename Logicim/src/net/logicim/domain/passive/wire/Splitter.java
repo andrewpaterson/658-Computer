@@ -19,7 +19,7 @@ public class Splitter
   {
     super(circuit, name);
 
-    startPorts = new ArrayList<>(startPorts.size());
+    startPorts = new ArrayList<>(startPortNames.size());
     for (String portName : startPortNames)
     {
       startPorts.add(new TracePort(portName, this));

@@ -78,7 +78,6 @@ public class SplitterView
   {
     startPortView = new PortView(this, getStartPortNames(properties.bitWidth), new Int2D(createStartPosition()));
     endPortViews = createEndPorts(properties);
-
   }
 
   protected List<Integer> getPortIndicesForFanoutIndex(int fanIndex)

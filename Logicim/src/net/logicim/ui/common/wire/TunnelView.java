@@ -6,6 +6,7 @@ import net.logicim.data.common.LongArrayData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
@@ -213,8 +214,14 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted(CircuitSimulation simulation)
+  public void simulationStarted(CircuitSimulation circuitSimulation)
   {
+  }
+
+  @Override
+  public Component createComponent(CircuitSimulation circuitSimulation)
+  {
+    return null;
   }
 
   @Override

@@ -5,6 +5,7 @@ import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Component;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -55,6 +56,12 @@ public class LabelView
   @Override
   public void clampProperties(LabelProperties newProperties)
   {
+  }
+
+  @Override
+  public Component createComponent(CircuitSimulation circuitSimulation)
+  {
+    return null;
   }
 
   @Override

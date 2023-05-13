@@ -175,23 +175,23 @@ public class SubcircuitView
   }
 
   protected void deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView,
-                                         CircuitSimulation simulation)
+                                         CircuitSimulation circuitSimulation)
   {
-    if (simulation != null)
+    if (circuitSimulation != null)
     {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
-      simulation.getCircuit().remove(integratedCircuit);
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuitSimulation);
+      circuitSimulation.getCircuit().remove(integratedCircuit);
     }
     removeIntegratedCircuitView(integratedCircuitView);
   }
 
   protected void deletePassiveView(PassiveView<?, ?> passiveView,
-                                   CircuitSimulation simulation)
+                                   CircuitSimulation circuitSimulation)
   {
-    if (simulation != null)
+    if (circuitSimulation != null)
     {
-      Passive passive = passiveView.getComponent(simulation);
-      simulation.getCircuit().remove(passive);
+      Passive passive = passiveView.getComponent(circuitSimulation);
+      circuitSimulation.getCircuit().remove(passive);
     }
     removePassiveView(passiveView);
   }
@@ -568,6 +568,14 @@ public class SubcircuitView
     }
   }
 
+  private void createComponents(List<StaticView<?>> staticViews, CircuitSimulation circuitSimulation)
+  {
+    for (StaticView<?> staticView : staticViews)
+    {
+      staticView.createComponent(circuitSimulation);
+    }
+  }
+
   public void simulationStarted(List<StaticView<?>> staticViews, CircuitSimulation simulation)
   {
     for (StaticView<?> staticView : staticViews)
@@ -856,8 +864,11 @@ public class SubcircuitView
     }
     removeTraceViews(existingTraceViews);
 
-    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(createdConnectionViews, circuitSimulation);
     enableStaticViews(staticViews);
+
+    createComponents(staticViews, circuitSimulation);
+
+    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(createdConnectionViews, circuitSimulation);
     simulationStarted(staticViews, circuitSimulation);
 
     Set<TraceView> existingTraces = createTraceViews(existingLines, circuitSimulation);

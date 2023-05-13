@@ -32,7 +32,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void simulationStarted(CircuitSimulation simulation)
+  public void simulationStarted(CircuitSimulation circuitSimulation)
   {
   }
 

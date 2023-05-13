@@ -406,8 +406,7 @@ public class PortView
     }
     else
     {
-      return null;
-      //throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Ports returned null.", index, simulation.getDescription());
+      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Ports returned null.", index, simulation.getDescription());
     }
   }
 

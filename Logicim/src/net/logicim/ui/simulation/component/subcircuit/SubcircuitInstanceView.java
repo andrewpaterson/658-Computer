@@ -359,7 +359,7 @@ public class SubcircuitInstanceView
   {
   }
 
-  protected void validateComponent(CircuitSimulation simulation)
+  protected void validateComponent(CircuitSimulation circuitSimulation)
   {
   }
 

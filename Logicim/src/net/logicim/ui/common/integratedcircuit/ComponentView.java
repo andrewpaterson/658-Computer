@@ -271,8 +271,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public abstract ComponentData<?> save(boolean selected);
 
-  public abstract void simulationStarted(CircuitSimulation simulation);
-
   public abstract Component createComponent(CircuitSimulation simulation);
+
+  public abstract void simulationStarted(CircuitSimulation circuitSimulation);
 }
 

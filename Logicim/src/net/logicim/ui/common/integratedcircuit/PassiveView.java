@@ -8,6 +8,7 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.port.PortView;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -43,6 +44,16 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     validatePorts(circuitSimulation);
     passive.reset(circuitSimulation);
     return passive;
+  }
+
+  @Override
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+    for (PortView portView : portViews)
+    {
+      portView.removePorts(circuitSimulation);
+    }
+    simulationPassives.remove(circuitSimulation);
   }
 
   protected void validateComponent(CircuitSimulation circuitSimulation)

@@ -31,9 +31,9 @@ public class InverterView
   }
 
   @Override
-  protected Inverter createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Inverter createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Inverter(simulation.getCircuit(),
+    return new Inverter(circuitSimulation.getCircuit(),
                         properties.name,
                         new BufferPins(properties.inputWidth * properties.inputCount,
                                        familyVoltageConfiguration));

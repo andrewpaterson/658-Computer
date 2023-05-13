@@ -55,9 +55,9 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuitSimulation);
     if ((arcViewFront != null) && (rectangleViewBack != null))
     {
       Stroke stroke = graphics.getStroke();
@@ -68,7 +68,7 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
       lineView1.paint(graphics, viewport);
       lineView2.paint(graphics, viewport);
       lineView3.paint(graphics, viewport);
-      paintPorts(graphics, viewport, simulation);
+      paintPorts(graphics, viewport, circuitSimulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

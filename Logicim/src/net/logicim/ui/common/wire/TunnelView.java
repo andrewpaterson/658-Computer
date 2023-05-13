@@ -225,6 +225,11 @@ public class TunnelView
   }
 
   @Override
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+  }
+
+  @Override
   protected void finaliseView()
   {
     finalised = true;

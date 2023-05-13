@@ -79,9 +79,9 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuitSimulation);
 
     if (polygons != null)
     {
@@ -92,7 +92,7 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
       {
         polygon.paint(graphics, viewport);
       }
-      paintPorts(graphics, viewport, simulation);
+      paintPorts(graphics, viewport, circuitSimulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

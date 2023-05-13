@@ -147,7 +147,7 @@ public class PortView
     return relativePosition;
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
   {
     updateGridCache();
 
@@ -177,7 +177,7 @@ public class PortView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-      Color color = getPortColour(simulation);
+      Color color = getPortColour(circuitSimulation);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,
@@ -205,13 +205,13 @@ public class PortView
   {
     for (Map.Entry<CircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
     {
-      CircuitSimulation simulation = entry.getKey();
+      CircuitSimulation circuitSimulation = entry.getKey();
       List<? extends Port> ports = entry.getValue();
       if (ports != null)
       {
         for (Port port : ports)
         {
-          port.disconnect(simulation.getSimulation());
+          port.disconnect(circuitSimulation.getSimulation());
         }
       }
     }
@@ -224,7 +224,7 @@ public class PortView
 
     for (Map.Entry<CircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
     {
-      CircuitSimulation simulation = entry.getKey();
+      CircuitSimulation circuitSimulation = entry.getKey();
       List<? extends Port> ports = entry.getValue();
       ArrayList<PortData> portDatas = new ArrayList<>();
       for (Port port : ports)
@@ -250,7 +250,7 @@ public class PortView
           throw new SimulatorException("implement saving for [%s] ports.", port.getClass().getSimpleName());
         }
       }
-      simulationMultiPortData.add(simulation.getId(), new MultiPortData(portDatas));
+      simulationMultiPortData.add(circuitSimulation.getId(), new MultiPortData(portDatas));
     }
     return simulationMultiPortData;
   }
@@ -296,14 +296,14 @@ public class PortView
     return new LogicPortData(eventDatas, portOutputEventData, logicPort.getTraceId());
   }
 
-  protected Color getPortColour(CircuitSimulation simulation)
+  protected Color getPortColour(CircuitSimulation circuitSimulation)
   {
-    if (!allTracePorts(simulation))
+    if (!allTracePorts(circuitSimulation))
     {
-      List<? extends Port> ports = simulationPorts.get(simulation);
+      List<? extends Port> ports = simulationPorts.get(circuitSimulation);
       if (ports != null)
       {
-        return VoltageColour.getColorForPorts(Colours.getInstance(), ports, simulation.getTime());
+        return VoltageColour.getColorForPorts(Colours.getInstance(), ports, circuitSimulation.getTime());
       }
       else
       {
@@ -312,13 +312,13 @@ public class PortView
     }
     else
     {
-      return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(simulation), simulation.getTime());
+      return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(circuitSimulation), circuitSimulation.getTime());
     }
   }
 
-  private boolean allTracePorts(CircuitSimulation simulation)
+  private boolean allTracePorts(CircuitSimulation circuitSimulation)
   {
-    List<? extends Port> ports = simulationPorts.get(simulation);
+    List<? extends Port> ports = simulationPorts.get(circuitSimulation);
     if (ports != null)
     {
       for (Port port : ports)
@@ -333,9 +333,9 @@ public class PortView
     return false;
   }
 
-  private List<Trace> getTraces(CircuitSimulation simulation)
+  private List<Trace> getTraces(CircuitSimulation circuitSimulation)
   {
-    List<? extends Port> ports = simulationPorts.get(simulation);
+    List<? extends Port> ports = simulationPorts.get(circuitSimulation);
     if (ports != null)
     {
       List<Trace> traces = new ArrayList<>(ports.size());
@@ -355,24 +355,24 @@ public class PortView
     }
   }
 
-  public void traceConnected(CircuitSimulation simulation)
+  public void traceConnected(CircuitSimulation circuitSimulation)
   {
-    List<? extends Port> ports = simulationPorts.get(simulation);
+    List<? extends Port> ports = simulationPorts.get(circuitSimulation);
     if (ports != null)
     {
       for (Port port : ports)
       {
         if (port.getTrace() != null)
         {
-          port.traceConnected(simulation.getSimulation());
+          port.traceConnected(circuitSimulation.getSimulation());
         }
       }
     }
   }
 
-  public boolean containsPort(CircuitSimulation simulation, Port port)
+  public boolean containsPort(CircuitSimulation circuitSimulation, Port port)
   {
-    List<? extends Port> ports = simulationPorts.get(simulation);
+    List<? extends Port> ports = simulationPorts.get(circuitSimulation);
     for (Port otherPort : ports)
     {
       if (otherPort == port)
@@ -383,9 +383,9 @@ public class PortView
     return false;
   }
 
-  public List<? extends Port> getPorts(CircuitSimulation simulation)
+  public List<? extends Port> getPorts(CircuitSimulation circuitSimulation)
   {
-    return simulationPorts.get(simulation);
+    return simulationPorts.get(circuitSimulation);
   }
 
   public int numberOfPorts()
@@ -393,20 +393,20 @@ public class PortView
     return portNames.size();
   }
 
-  public Port getPort(CircuitSimulation simulation, int index)
+  public Port getPort(CircuitSimulation circuitSimulation, int index)
   {
-    List<? extends Port> ports = simulationPorts.get(simulation);
+    List<? extends Port> ports = simulationPorts.get(circuitSimulation);
     if (ports != null)
     {
       if (index < ports.size())
       {
         return ports.get(index);
       }
-      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Index greater than ports size [%s].", index, simulation.getDescription(), ports.size());
+      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Index greater than ports size [%s].", index, circuitSimulation.getDescription(), ports.size());
     }
     else
     {
-      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Ports returned null.", index, simulation.getDescription());
+      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Ports returned null.", index, circuitSimulation.getDescription());
     }
   }
 
@@ -415,16 +415,16 @@ public class PortView
     return text;
   }
 
-  public TraceValue[] getValue(CircuitSimulation simulation, FamilyVoltageConfiguration voltageConfiguration, float vcc)
+  public TraceValue[] getValue(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration voltageConfiguration, float vcc)
   {
-    List<? extends Port> ports = simulationPorts.get(simulation);
+    List<? extends Port> ports = simulationPorts.get(circuitSimulation);
     TraceValue[] traceValues = new TraceValue[ports.size()];
     for (int i = 0; i < ports.size(); i++)
     {
       Port port = ports.get(i);
       if (port != null && port.getTrace() != null)
       {
-        float voltage = port.getTrace().getVoltage(simulation.getTime());
+        float voltage = port.getTrace().getVoltage(circuitSimulation.getTime());
         traceValues[i] = voltageConfiguration.getValue(voltage, vcc);
       }
       else
@@ -440,16 +440,21 @@ public class PortView
     return portNames;
   }
 
-  public void addPorts(CircuitSimulation simulation, List<Port> ports)
+  public void addPorts(CircuitSimulation circuitSimulation, List<Port> ports)
   {
-    if (simulationPorts.containsKey(simulation))
+    if (simulationPorts.containsKey(circuitSimulation))
     {
-      throw new SimulatorException("Ports have already been added for simulation [%s].", simulation.getDescription());
+      throw new SimulatorException("Ports have already been added for simulation [%s].", circuitSimulation.getDescription());
     }
     else
     {
-      simulationPorts.put(simulation, ports);
+      simulationPorts.put(circuitSimulation, ports);
     }
+  }
+
+  public void removePorts(CircuitSimulation circuitSimulation)
+  {
+    simulationPorts.remove(circuitSimulation);
   }
 }
 

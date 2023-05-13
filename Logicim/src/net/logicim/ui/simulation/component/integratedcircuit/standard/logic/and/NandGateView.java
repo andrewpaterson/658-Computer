@@ -30,9 +30,9 @@ public class NandGateView
   }
 
   @Override
-  protected NandGate createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected NandGate createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new NandGate(simulation.getCircuit(),
+    return new NandGate(circuitSimulation.getCircuit(),
                         properties.name,
                         new AndGatePins(properties.inputWidth * properties.inputCount,
                                         familyVoltageConfiguration));

@@ -65,6 +65,11 @@ public class LabelView
   }
 
   @Override
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+  }
+
+  @Override
   public ReflectiveData save(boolean selected)
   {
     return new LabelData(properties.name,

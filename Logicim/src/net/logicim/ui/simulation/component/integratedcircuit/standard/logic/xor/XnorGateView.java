@@ -30,9 +30,9 @@ public class XnorGateView
   }
 
   @Override
-  protected XnorGate createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected XnorGate createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XnorGate(simulation.getCircuit(),
+    return new XnorGate(circuitSimulation.getCircuit(),
                         properties.name,
                         new XorGatePins(properties.inputWidth * properties.inputCount,
                                         familyVoltageConfiguration));

@@ -30,9 +30,9 @@ public class OrGateView
   }
 
   @Override
-  protected OrGate createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected OrGate createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new OrGate(simulation.getCircuit(),
+    return new OrGate(circuitSimulation.getCircuit(),
                       properties.name,
                       new OrGatePins(properties.inputWidth * properties.inputCount,
                                      familyVoltageConfiguration));

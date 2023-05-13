@@ -65,9 +65,9 @@ public class ClockView
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(CircuitSimulation simulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(simulation.getCircuit(),
+    return new ClockOscillator(circuitSimulation.getCircuit(),
                                properties.name,
                                new ClockOscillatorPins(familyVoltageConfiguration,
                                                        properties.inverseOut),
@@ -75,9 +75,9 @@ public class ClockView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuitSimulation);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -86,9 +86,9 @@ public class ClockView
     {
       rectangle.paint(graphics, viewport);
 
-      paintClockWaveform(graphics, viewport, simulation);
+      paintClockWaveform(graphics, viewport, circuitSimulation);
     }
-    paintPorts(graphics, viewport, simulation);
+    paintPorts(graphics, viewport, circuitSimulation);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);

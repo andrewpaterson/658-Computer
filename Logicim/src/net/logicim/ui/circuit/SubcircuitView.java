@@ -811,7 +811,7 @@ public class SubcircuitView
 
   public void startMoveComponents(List<StaticView<?>> staticViews,
                                   List<TraceView> traceViews,
-                                  CircuitSimulation simulation)
+                                  CircuitSimulation circuitSimulation)
   {
     List<TraceView> connectedTraceViews = findImmediateConnectedTraceViews(staticViews);
 
@@ -822,7 +822,8 @@ public class SubcircuitView
     for (StaticView<?> staticView : staticViews)
     {
       staticView.disable();
-      connectionViews.addAll(disconnectStaticView(staticView, simulation));
+      connectionViews.addAll(disconnectStaticView(staticView, circuitSimulation));
+      staticView.destroyComponent(circuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
@@ -831,9 +832,9 @@ public class SubcircuitView
       disconnectTraceView(traceView);
     }
 
-    connectConnectionViews(connectionViews, simulation);
+    connectConnectionViews(connectionViews, circuitSimulation);
 
-    recreateTraceViews(new HashSet<>(), allConnectedTraceViews, simulation);
+    recreateTraceViews(new HashSet<>(), allConnectedTraceViews, circuitSimulation);
   }
 
   public List<View> doneMoveComponents(CircuitSimulation circuitSimulation,

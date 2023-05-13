@@ -384,10 +384,5 @@ public class SubcircuitEditor
   {
     nextId = 1;
   }
-
-  public void ensureComponentsForSimulation(TopLevelSubcircuitSimulation topLevelSubcircuitSimulation)
-  {
-    subcircuitView.ensureComponentsForSimulation(topLevelSubcircuitSimulation);
-  }
 }
 

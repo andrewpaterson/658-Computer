@@ -550,20 +550,6 @@ public class SubcircuitView
     }
   }
 
-  public Set<ConnectionView> connectStaticView(StaticView<?> staticView,
-                                               CircuitSimulation circuitSimulation)
-  {
-    ArrayList<StaticView<?>> staticViews = new ArrayList<>();
-    staticViews.add(staticView);
-    List<ConnectionView> createdConnectionViews = createStaticViewConnections(staticViews);
-
-    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(createdConnectionViews, circuitSimulation);
-    enableStaticViews(staticViews);
-    simulationStarted(staticViews, circuitSimulation);
-
-    return updatedConnectionViews;
-  }
-
   public List<ConnectionView> createStaticViewConnections(List<StaticView<?>> staticViews)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
@@ -1049,18 +1035,6 @@ public class SubcircuitView
       }
     }
     return result;
-  }
-
-  public void ensureComponentsForSimulation(TopLevelSubcircuitSimulation topLevelSubcircuitSimulation)
-  {
-    CircuitSimulation circuitSimulation = topLevelSubcircuitSimulation.getCircuitSimulation();
-    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
-    {
-      if (integratedCircuitView.isEnabled())
-      {
-        integratedCircuitView.simulationStarted(circuitSimulation);
-      }
-    }
   }
 }
 

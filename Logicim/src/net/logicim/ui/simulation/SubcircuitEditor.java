@@ -73,10 +73,10 @@ public class SubcircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  CircuitSimulation circuitSimulation)
   {
-    List<View> newSelection = subcircuitView.doneMoveComponents(circuitSimulation, staticViews,
+    List<View> newSelection = subcircuitView.doneMoveComponents(circuitSimulation,
+                                                                staticViews,
                                                                 traceViews,
-                                                                selectedViews
-    );
+                                                                selectedViews);
     this.selection.setSelection(newSelection);
   }
 
@@ -260,20 +260,12 @@ public class SubcircuitEditor
     return new ArrayList<>(views.values());
   }
 
-  public void placeComponentView(StaticView<?> staticView,
-                                 CircuitSimulation circuitSimulation)
-  {
-    Set<ConnectionView> updatedConnectionViews = subcircuitView.connectStaticView(staticView, circuitSimulation);
-
-    subcircuitView.fireConnectionEvents(updatedConnectionViews, circuitSimulation);
-  }
-
   public Selection getSelection()
   {
     return selection;
   }
 
-  public List<View> getSelectionFromRectangle(CircuitSimulation simulation, Float2D start, Float2D end)
+  public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
   {
     return subcircuitView.getSelectionFromRectangle(start, end);
   }
@@ -336,7 +328,7 @@ public class SubcircuitEditor
         StaticView staticView = (StaticView) view;
         StaticData staticData = (StaticData) data;
         staticData.createAndConnectComponent(this, circuitSimulation, traceLoader, staticView);
-     }
+      }
       else if (view instanceof TraceView)
       {
         TraceView traceView = (TraceView) view;

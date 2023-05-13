@@ -402,8 +402,13 @@ public class PortView
       {
         return ports.get(index);
       }
+      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Index greater than ports size [%s].", index, simulation.getDescription(), ports.size());
     }
-    return null;
+    else
+    {
+      return null;
+      //throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Ports returned null.", index, simulation.getDescription());
+    }
   }
 
   public String getText()

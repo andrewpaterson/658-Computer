@@ -8,6 +8,9 @@ import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PropertyEditEvent
     extends SimulatorEditorEvent
 {
@@ -40,10 +43,13 @@ public class PropertyEditEvent
   {
     CircuitEditor circuitEditor = editor.getCircuitEditor();
     circuitEditor.deleteComponentView(this.componentView);
-    StaticView<?> newComponentView = componentView.duplicate(circuitEditor, properties);
-    circuitEditor.placeComponentView(newComponentView);
+    StaticView<?> staticView = componentView.duplicate(circuitEditor, properties);
+    List<StaticView<?>> staticViews = new ArrayList<>();
+    staticViews.add(staticView);
 
-    return newComponentView;
+    circuitEditor.placeComponentView(staticViews);
+
+    return staticView;
   }
 }
 

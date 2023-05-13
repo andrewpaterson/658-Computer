@@ -27,8 +27,8 @@ import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class CircuitEditor
 {
@@ -354,9 +354,9 @@ public class CircuitEditor
     return currentSubcircuitEditor.pasteClipboardViews(traces, components);
   }
 
-  public void placeComponentView(StaticView<?> staticView)
+  public void placeComponentView(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitEditor.placeComponentView(staticView, getCircuitSimulation());
+    currentSubcircuitEditor.doneMoveComponents(staticViews, new ArrayList<>(), new LinkedHashSet<>(), getCircuitSimulation());
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
@@ -376,7 +376,7 @@ public class CircuitEditor
 
   public List<View> getSelectionFromRectangle(Float2D start, Float2D end)
   {
-    return currentSubcircuitEditor.getSelectionFromRectangle(getCircuitSimulation(), start, end);
+    return currentSubcircuitEditor.getSelectionFromRectangle(start, end);
   }
 
   public void deleteSelection()
@@ -480,11 +480,6 @@ public class CircuitEditor
   {
     currentSubcircuitEditor = subcircuitEditor;
     return currentSubcircuitEditor.getTypeName();
-  }
-
-  public void setCurrentSimulation(TopLevelSubcircuitSimulation currentSimulation)
-  {
-    this.currentSimulation = currentSimulation;
   }
 
   public boolean hasMultipleSubcircuits()

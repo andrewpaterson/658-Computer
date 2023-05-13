@@ -555,9 +555,9 @@ public class SubcircuitView
   {
     ArrayList<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
+    List<ConnectionView> createdConnectionViews = createStaticViewConnections(staticViews);
 
-    List<ConnectionView> connectionViews = createStaticViewConnections(staticViews);
-    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews, circuitSimulation);
+    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(createdConnectionViews, circuitSimulation);
     enableStaticViews(staticViews);
     simulationStarted(staticViews, circuitSimulation);
 
@@ -842,7 +842,7 @@ public class SubcircuitView
     recreateTraceViews(new HashSet<>(), allConnectedTraceViews, simulation);
   }
 
-  public List<View> doneMoveComponents(CircuitSimulation simulation,
+  public List<View> doneMoveComponents(CircuitSimulation circuitSimulation,
                                        List<StaticView<?>> staticViews,
                                        List<TraceView> traceViews,
                                        Set<StaticView<?>> selectedViews)
@@ -854,7 +854,7 @@ public class SubcircuitView
     }
     removeTraceViews(new LinkedHashSet<>(traceViews));
 
-    List<ConnectionView> connectionViews = createStaticViewConnections(staticViews);
+    List<ConnectionView> createdConnectionViews = createStaticViewConnections(staticViews);
     Set<ConnectionView> junctions = getComponentConnectionPositions(staticViews);
     Set<TraceView> existingTraceViews = new LinkedHashSet<>();
     for (ConnectionView junction : junctions)
@@ -870,18 +870,18 @@ public class SubcircuitView
     }
     removeTraceViews(existingTraceViews);
 
-    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(connectionViews, simulation);
+    Set<ConnectionView> updatedConnectionViews = connectConnectionViews(createdConnectionViews, circuitSimulation);
     enableStaticViews(staticViews);
-    simulationStarted(staticViews, simulation);
+    simulationStarted(staticViews, circuitSimulation);
 
-    Set<TraceView> existingTraces = createTraceViews(existingLines, simulation);
-    Set<ConnectionView> updatedCreatedTraceConnectionViews = connectCreatedTraceViews(existingTraces, simulation);
+    Set<TraceView> existingTraces = createTraceViews(existingLines, circuitSimulation);
+    Set<ConnectionView> updatedCreatedTraceConnectionViews = connectCreatedTraceViews(existingTraces, circuitSimulation);
     updatedConnectionViews.addAll(updatedCreatedTraceConnectionViews);
 
-    Set<TraceView> newTraces = createTraceViews(newLines, simulation);
-    updatedConnectionViews.addAll(connectCreatedTraceViews(newTraces, simulation));
+    Set<TraceView> newTraces = createTraceViews(newLines, circuitSimulation);
+    updatedConnectionViews.addAll(connectCreatedTraceViews(newTraces, circuitSimulation));
 
-    fireConnectionEvents(updatedConnectionViews, simulation);
+    fireConnectionEvents(updatedConnectionViews, circuitSimulation);
 
     return calculateNewSelection(staticViews, selectedViews, newTraces);
   }

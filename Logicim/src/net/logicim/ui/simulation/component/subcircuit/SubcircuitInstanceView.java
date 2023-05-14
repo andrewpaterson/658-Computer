@@ -355,7 +355,7 @@ public class SubcircuitInstanceView
     return rectangle;
   }
 
-  protected void validatePorts(CircuitSimulation simulation)
+  protected void validatePorts(CircuitSimulation circuitSimulation)
   {
   }
 

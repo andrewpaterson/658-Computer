@@ -56,7 +56,7 @@ public abstract class Port
 
   public String getDescription()
   {
-    return getHolder().getDescription() + "." + getName();
+    return getHolder().getComponent().getDescription() + "." + getName();
   }
 
   public boolean isLogicPort()

@@ -1,6 +1,5 @@
 package net.logicim.ui.common.integratedcircuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
@@ -8,7 +7,6 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.port.PortView;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,35 +31,19 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   public PASSIVE createComponent(CircuitSimulation circuitSimulation)
   {
-    if (circuitSimulation == null)
-    {
-      throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
-    }
+    validateCanCreateComponent(circuitSimulation);
 
     PASSIVE passive = createPassive(circuitSimulation);
     simulationPassives.put(circuitSimulation, passive);
-    validateComponent(circuitSimulation);
-    validatePorts(circuitSimulation);
-    passive.reset(circuitSimulation);
+
+    postCreateComponent(circuitSimulation, passive);
     return passive;
   }
 
   @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  protected void removeComponent(CircuitSimulation circuitSimulation)
   {
-    for (PortView portView : portViews)
-    {
-      portView.removePorts(circuitSimulation);
-    }
     simulationPassives.remove(circuitSimulation);
-  }
-
-  protected void validateComponent(CircuitSimulation circuitSimulation)
-  {
-    if (getComponent(circuitSimulation) == null)
-    {
-      throw new SimulatorException("Component not configured on [%s].  Call create().", getClass().getSimpleName());
-    }
   }
 
   @Override
@@ -70,18 +52,6 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     createPortViews();
     super.finaliseView();
     subcircuitView.addPassiveView(this);
-  }
-
-  @Override
-  public void simulationStarted(CircuitSimulation circuitSimulation)
-  {
-    if (circuitSimulation == null)
-    {
-      throw new SimulatorException("Cannot start a simulation with a [null] simulation.");
-    }
-
-    Passive passive = simulationPassives.get(circuitSimulation);
-    passive.simulationStarted(circuitSimulation.getSimulation());
   }
 
   @Override
@@ -94,18 +64,9 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     return "";
   }
 
-  protected void validatePorts(CircuitSimulation simulation)
+  public PASSIVE getComponent(CircuitSimulation circuitSimulation)
   {
-    PASSIVE passive = simulationPassives.get(simulation);
-    if (passive != null)
-    {
-      validatePorts(simulation, passive.getPorts(), portViews);
-    }
-  }
-
-  public PASSIVE getComponent(CircuitSimulation simulation)
-  {
-    return simulationPassives.get(simulation);
+    return simulationPassives.get(circuitSimulation);
   }
 
   public abstract PassiveData<?> save(boolean selected);

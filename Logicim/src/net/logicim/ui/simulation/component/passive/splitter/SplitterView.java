@@ -381,9 +381,10 @@ public class SplitterView
   @Override
   protected Splitter createPassive(CircuitSimulation simulation)
   {
+    List<String> startPortNames = getStartPortNames(properties.bitWidth);
     Splitter splitter = new Splitter(simulation.getCircuit(),
                                      properties.name,
-                                     getStartPortNames(properties.bitWidth),
+                                     startPortNames,
                                      getEndPortNames(properties.bitWidth));
     Map<Port, Port> bidirectionalPortMap = calculateBidirectionalPortMap(splitter);
     simulationBidirectionalPorts.put(simulation, new BidirectionalPortMap(bidirectionalPortMap));
@@ -448,6 +449,7 @@ public class SplitterView
   public Map<Port, Port> calculateBidirectionalPortMap(Splitter splitter)
   {
     List<TracePort> startPorts = splitter.getStartPorts();
+
     HashMap<Port, Port> result = new HashMap<>();
 
     int i = 0;

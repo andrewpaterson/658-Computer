@@ -2,7 +2,6 @@ package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.common.util.StringUtil;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
@@ -45,18 +44,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     return name;
   }
 
-  public String getDescription()
-  {
-    if (StringUtil.isEmptyOrNull(name))
-    {
-      return getType();
-    }
-    else
-    {
-      return getType() + " \"" + name + "\"";
-    }
-  }
-
   public void executeTick(Simulation simulation)
   {
   }
@@ -96,16 +83,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     {
       throw new SimulatorException("Cannot set state to [null] on %s.", getDescription());
     }
-  }
-
-  public PowerInPort getVoltageCommon()
-  {
-    return pins.getVoltageCommon();
-  }
-
-  public PowerInPort getVoltageGround()
-  {
-    return pins.getVoltageGround();
   }
 
   public void reset(CircuitSimulation simulation)

@@ -48,11 +48,6 @@ public class Splitter
   {
   }
 
-  public TracePort getEndPort(int i)
-  {
-    return endPorts.get(i);
-  }
-
   public List<TracePort> getStartPorts()
   {
     return startPorts;

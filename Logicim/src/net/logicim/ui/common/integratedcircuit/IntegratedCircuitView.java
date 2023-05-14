@@ -12,7 +12,6 @@ import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
@@ -23,7 +22,6 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.defaults.DefaultLogicLevels;
-import net.logicim.ui.common.port.PortView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,74 +50,21 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 
   public IC createComponent(CircuitSimulation circuitSimulation)
   {
-    if (circuitSimulation == null)
-    {
-      throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
-    }
-
-    IC integratedCircuit = getComponent(circuitSimulation);
-    if (integratedCircuit != null)
-    {
-      throw new SimulatorException("Integrated circuit has already been created.");
-    }
+    validateCanCreateComponent(circuitSimulation);
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    integratedCircuit = createIntegratedCircuit(circuitSimulation, familyVoltageConfiguration);
+    IC integratedCircuit = createIntegratedCircuit(circuitSimulation, familyVoltageConfiguration);
     simulationIntegratedCircuits.put(circuitSimulation, integratedCircuit);
+
     createPowerPortsIfNecessary(circuitSimulation, familyVoltageConfiguration);
 
-    List<PortView> portViews = getPortViews();
-    for (PortView portView : portViews)
-    {
-      List<Port> ports = new ArrayList<>();
-      List<String> portNames = portView.getPortNames();
-      for (String portName : portNames)
-      {
-        Port port = integratedCircuit.getPort(portName);
-        if (port != null)
-        {
-          ports.add(port);
-        }
-        else
-        {
-          throw new SimulatorException("Cannot find port named [%s].", portName);
-        }
-      }
-      portView.addPorts(circuitSimulation, ports);
-    }
-    validateComponent(circuitSimulation);
-    validatePorts(circuitSimulation);
-    integratedCircuit.reset(circuitSimulation);
+    postCreateComponent(circuitSimulation, integratedCircuit);
     return integratedCircuit;
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  protected void removeComponent(CircuitSimulation circuitSimulation)
   {
-    for (PortView portView : portViews)
-    {
-      portView.removePorts(circuitSimulation);
-    }
     simulationIntegratedCircuits.remove(circuitSimulation);
-  }
-
-  protected void validatePorts(CircuitSimulation circuitSimulation)
-  {
-    IC integratedCircuit = getComponent(circuitSimulation);
-    if (integratedCircuit != null)
-    {
-      validatePorts(circuitSimulation, integratedCircuit.getPorts(), portViews);
-    }
-  }
-
-  private void validateComponent(CircuitSimulation circuitSimulation)
-  {
-    if (circuitSimulation != null)
-    {
-      if (getComponent(circuitSimulation) == null)
-      {
-        throw new SimulatorException("Integrated Circuit not configured in simulation [%s] on [%s].  Call create().", circuitSimulation.getDescription(), getClass().getSimpleName());
-      }
-    }
   }
 
   @Override

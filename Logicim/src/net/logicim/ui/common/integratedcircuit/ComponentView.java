@@ -263,14 +263,96 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
+  protected void validateCanCreateComponent(CircuitSimulation circuitSimulation)
+  {
+    if (circuitSimulation == null)
+    {
+      throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
+    }
+
+    Component component = getComponent(circuitSimulation);
+    if (component != null)
+    {
+      throw new SimulatorException("[%s] component has already been created.", component.getDescription());
+    }
+  }
+
+  protected void validateComponent(CircuitSimulation circuitSimulation)
+  {
+    if (circuitSimulation != null)
+    {
+      Component component = getComponent(circuitSimulation);
+      if (component == null)
+      {
+        throw new SimulatorException("Component configured in simulation [%s] on [%s].  Call create().", circuitSimulation.getDescription(), getClass().getSimpleName());
+      }
+    }
+  }
+
+  protected void validatePorts(CircuitSimulation circuitSimulation)
+  {
+    Component component = getComponent(circuitSimulation);
+    if (component != null)
+    {
+      validatePorts(circuitSimulation, component.getPorts(), portViews);
+    }
+  }
+
+  protected void postCreateComponent(CircuitSimulation circuitSimulation, Component component)
+  {
+    List<PortView> portViews = getPortViews();
+    for (PortView portView : portViews)
+    {
+      List<Port> ports = new ArrayList<>();
+      List<String> portNames = portView.getPortNames();
+      for (String portName : portNames)
+      {
+        Port port = component.getPort(portName);
+        if (port != null)
+        {
+          ports.add(port);
+        }
+        else
+        {
+          throw new SimulatorException("Cannot find port named [%s].", portName);
+        }
+      }
+      portView.addPorts(circuitSimulation, ports);
+    }
+    validateComponent(circuitSimulation);
+    validatePorts(circuitSimulation);
+    component.reset(circuitSimulation);
+  }
+
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+    for (PortView portView : portViews)
+    {
+      portView.removePorts(circuitSimulation);
+    }
+    removeComponent(circuitSimulation);
+  }
+
+  @Override
+  public void simulationStarted(CircuitSimulation circuitSimulation)
+  {
+    if (circuitSimulation == null)
+    {
+      throw new SimulatorException("Cannot start a simulation with a [null] simulation.");
+    }
+
+    Component integratedCircuit = getComponent(circuitSimulation);
+    integratedCircuit.simulationStarted(circuitSimulation.getSimulation());
+  }
+
   protected abstract void createPortViews();
 
   public abstract Component getComponent(CircuitSimulation simulation);
 
+  protected abstract void removeComponent(CircuitSimulation circuitSimulation);
+
   public abstract String getComponentType();
 
   public abstract ComponentData<?> save(boolean selected);
-
-  public abstract void simulationStarted(CircuitSimulation circuitSimulation);
 }
 

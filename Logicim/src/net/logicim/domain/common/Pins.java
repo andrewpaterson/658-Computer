@@ -73,5 +73,11 @@ public abstract class Pins
   {
     integratedCircuit.traceConnected(simulation, port);
   }
+
+  @Override
+  public Component getComponent()
+  {
+    return integratedCircuit;
+  }
 }
 

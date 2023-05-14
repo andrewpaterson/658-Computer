@@ -1,12 +1,12 @@
 package net.logicim.domain.passive.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
-import net.logicim.domain.common.state.State;
 
 import java.util.List;
 
@@ -25,12 +25,6 @@ public abstract class Passive
   }
 
   @Override
-  public String getDescription()
-  {
-    return getType() + " [" + getName() + "]";
-  }
-
-  @Override
   public String getName()
   {
     return name;
@@ -41,8 +35,6 @@ public abstract class Passive
     return ports;
   }
 
-  public abstract String getType();
-
   public Port getPort(String name)
   {
     for (Port port : ports)
@@ -52,7 +44,7 @@ public abstract class Passive
         return port;
       }
     }
-    return null;
+    throw new SimulatorException("Cannot get port named [%s] on %s [%s].", name, getClass().getSimpleName(), getName());
   }
 
   @Override
@@ -66,10 +58,18 @@ public abstract class Passive
     {
       port.reset();
     }
- }
+  }
 
   public void simulationStarted(Simulation simulation)
   {
   }
+
+  @Override
+  public Component getComponent()
+  {
+    return this;
+  }
+
+  public abstract String getType();
 }
 

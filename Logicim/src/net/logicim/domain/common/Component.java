@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.common.util.StringUtil;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
@@ -15,5 +16,24 @@ public interface Component
   void reset(CircuitSimulation simulation);
 
   String getType();
+
+  String getName();
+
+  Port getPort(String portName);
+
+  void simulationStarted(Simulation simulation);
+
+  default String getDescription()
+  {
+    String name = getName();
+    if (StringUtil.isEmptyOrNull(name))
+    {
+      return getType();
+    }
+    else
+    {
+      return getType() + " \"" + name + "\"";
+    }
+  }
 }
 

@@ -6,7 +6,6 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
-import net.logicim.ui.simulation.component.decorative.label.LabelView;
 
 public abstract class DecorativeData<T extends DecorativeView<?>>
     extends StaticData<T>

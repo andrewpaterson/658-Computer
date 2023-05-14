@@ -62,15 +62,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public Port getPort(String name)
   {
-    Port port = pins.getPort(name);
-    if (port != null)
-    {
-      return port;
-    }
-    else
-    {
-      throw new SimulatorException("Cannot get port named [%s] on %s [%s].", name, getClass().getSimpleName(), getName());
-    }
+    return pins.getPort(name);
   }
 
   public void setState(State state)

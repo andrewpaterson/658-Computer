@@ -1,5 +1,6 @@
 package net.logicim.domain.common.port;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 
@@ -30,7 +31,7 @@ public abstract class PortHolder
         return port;
       }
     }
-    return null;
+    throw new SimulatorException("Cannot get port named [%s] on %s [%s].", name, getClass().getSimpleName(), getName());
   }
 
   public List<Port> getPorts()

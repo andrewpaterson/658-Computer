@@ -37,7 +37,7 @@ public abstract class Passive
 
   public Port getPort(String name)
   {
-    for (Port port : ports)
+    for (Port port : getPorts())
     {
       if (port.getName().equals(name))
       {

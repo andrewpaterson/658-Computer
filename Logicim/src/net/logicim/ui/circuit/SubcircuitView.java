@@ -38,7 +38,7 @@ import java.util.*;
 
 public class SubcircuitView
 {
-  protected String typeName;  //The subcircuit instance name is on the StaticSubcircuitView.
+  protected String typeName;  //The subcircuit instance name is on the SubcircuitInstanceView.
 
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
   protected Set<PassiveView<?, ?>> passiveViews;
@@ -203,21 +203,6 @@ public class SubcircuitView
   public StaticViewIterator staticViewIterator()
   {
     return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, decorativeViews);
-  }
-
-  public Set<IntegratedCircuitView<?, ?>> getIntegratedCircuitViews()
-  {
-    return integratedCircuitViews;
-  }
-
-  public Set<PassiveView<?, ?>> getPassiveViews()
-  {
-    return passiveViews;
-  }
-
-  public Set<TunnelView> getTunnelViews()
-  {
-    return tunnelViews;
   }
 
   public Set<TraceView> getTraceViews()

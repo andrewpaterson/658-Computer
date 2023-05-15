@@ -380,9 +380,9 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  protected SubcircuitInstance createPassive(CircuitSimulation simulation)
+  protected SubcircuitInstance createPassive(CircuitSimulation circuitSimulation)
   {
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(simulation.getCircuit(), properties.name);
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
     {
@@ -498,6 +498,8 @@ public class SubcircuitInstanceView
     {
       name.paint(graphics, viewport);
     }
+
+    paintPorts(graphics, viewport, simulation);
 
     graphics.setFont(font);
     graphics.setColor(color);

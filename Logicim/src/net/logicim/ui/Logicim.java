@@ -1031,7 +1031,7 @@ public class Logicim
     setSubcircuitParameters(subcircuitTypeName);
   }
 
-  public void deleteSubcircuitAction(String subcircuitTypeName, CircuitSimulation simulation)
+  public void deleteSubcircuitAction(String subcircuitTypeName, CircuitSimulation circuitSimulation)
   {
     subcircuitViewParameters.remove(subcircuitTypeName);
     List<Integer> bookmarkIds = new ArrayList<>(subcircuitBookmarks.keySet());
@@ -1053,7 +1053,7 @@ public class Logicim
         if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
         {
           SubcircuitView subcircuitView = subcircuitInstanceView.getSubcircuitView();
-          subcircuitView.deleteComponentView(subcircuitInstanceView, simulation);
+          subcircuitView.deleteComponentView(subcircuitInstanceView, circuitSimulation);
         }
       }
     }

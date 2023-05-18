@@ -11,7 +11,8 @@ public class PinViewLists
   protected List<PinView> positivePinViews;
 
   protected float widestText;
-  protected int size;
+  protected int pinSize;
+  protected int extendedSize;
 
   public PinViewLists(List<PinView> negativePinViews,
                       List<PinView> centerPinViews,
@@ -22,10 +23,20 @@ public class PinViewLists
     this.negativePinViews = negativePinViews;
     this.positivePinViews = positivePinViews;
     this.widestText = widestText;
-    this.size = calculateSize();
+    this.pinSize = calculatePinSize();
+    this.extendedSize = calculateExtendedSize(pinSize);
   }
 
-  public int calculateSize()
+  private int calculateExtendedSize(int pinSize)
+  {
+    if (pinSize == 0)
+    {
+      return 0;
+    }
+    return pinSize + 2;
+  }
+
+  public int calculatePinSize()
   {
     int pins = 0;
     if (negativePinViews.size() > 0)
@@ -50,9 +61,17 @@ public class PinViewLists
     pins += centerPinViews.size();
     pins += positivePinViews.size();
 
-    pins += 2;  //Top and bottom spaces.
-
     return pins;
+  }
+
+  public int getPinSize()
+  {
+    return pinSize;
+  }
+
+  public int getExtendedSize()
+  {
+    return extendedSize;
   }
 }
 

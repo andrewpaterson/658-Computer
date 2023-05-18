@@ -454,6 +454,11 @@ public class PinView
     return properties.name.compareTo(otherProperties.name);
   }
 
+  public TextView getLabelView()
+  {
+    return labelView;
+  }
+
   public PortView getPortView()
   {
     return port;

@@ -1,7 +1,9 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
 import net.logicim.common.type.Float2D;
+import net.logicim.common.type.Int1D;
 import net.logicim.common.type.Int2D;
+import net.logicim.common.type.Tuple2;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
@@ -72,14 +74,27 @@ public class SubcircuitInstanceView
     PinViewLists topViewLists = createPinViewLists(pinsLocations, TOP);
     PinViewLists bottomViewLists = createPinViewLists(pinsLocations, BOTTOM);
 
-    rectangle = calculateRequiredRectangle(rectangle,
-                                           leftViewLists,
-                                           rightViewLists,
-                                           topViewLists,
-                                           bottomViewLists);
+    int leftSize = leftViewLists.getExtendedSize();
+    int rightSize = rightViewLists.getExtendedSize();
+    int maxGridHeight = Math.max(leftSize, rightSize);
+    List<PinViewOffset> leftPinViewOffsets;
+    List<PinViewOffset> rightPinViewOffsets;
+    leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, maxGridHeight);
+    rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, maxGridHeight);
 
-    leftRightPinPlacement(rectangle, leftViewLists, (int) rectangle.getBottomRight().getX(), HorizontalAlignment.LEFT);
-    leftRightPinPlacement(rectangle, rightViewLists, (int) rectangle.getTopLeft().getX(), HorizontalAlignment.RIGHT);
+    float maxWidth = calculateMaxWidth(leftPinViewOffsets);
+    int pos = (int) Math.floor(rectangle.getTopLeft().getX() - maxWidth);
+    createSubcircuitPinViews(leftPinViewOffsets, pos, HorizontalAlignment.RIGHT);
+    rectangle.getTopLeft().setX(new Int1D(pos));
+
+    maxWidth = calculateMaxWidth(rightPinViewOffsets);
+    pos = (int) Math.floor(rectangle.getBottomRight().getX() + maxWidth);
+    createSubcircuitPinViews(rightPinViewOffsets, pos, HorizontalAlignment.LEFT);
+    rectangle.getBottomRight().setX(new Int1D(pos));
+
+    int offset = (maxGridHeight / 2);
+    rectangle.getTopLeft().setY(new Int1D(-offset));
+    rectangle.getBottomRight().setY(new Int1D(maxGridHeight - offset));
 
     this.rectangle = new RectangleView(this,
                                        new Int2D(rectangle.getTopLeft().getY(), rectangle.getTopLeft().getX()),
@@ -88,113 +103,65 @@ public class SubcircuitInstanceView
                                        true);
   }
 
-  private void leftRightPinPlacement(Rectangle rectangle, PinViewLists leftViewLists, int x, HorizontalAlignment alignment)
+  private void createSubcircuitPinViews(List<PinViewOffset> rightPinViewOffsets, int offset, HorizontalAlignment alignment)
   {
-    int yNegative = (int) (rectangle.getTopLeft().getY() + 1);
-    for (PinView pinView : leftViewLists.negativePinViews)
+    for (PinViewOffset pinViewOffset : rightPinViewOffsets)
     {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yNegative, x), SANS_SERIF, 10, alignment));
-      yNegative++;
-    }
-
-    int yPositive = (int) (rectangle.getBottomRight().getY() - 1);
-    for (PinView pinView : leftViewLists.positivePinViews)
-    {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yPositive, x), SANS_SERIF, 10, alignment));
-      yPositive--;
-    }
-
-    int yCenter = -(leftViewLists.centerPinViews.size() / 2) + 1;
-    int yCenterEnd = yCenter + leftViewLists.centerPinViews.size() - 1;
-    if (yCenterEnd >= yPositive)
-    {
-      yCenter--;
-    }
-
-    for (PinView pinView : leftViewLists.centerPinViews)
-    {
-      pinViews.add(new SubcircuitPinView(pinView, this, new Int2D(yCenter, x), SANS_SERIF, 10, alignment));
-      yCenter++;
+      pinViews.add(new SubcircuitPinView(pinViewOffset.pinView,
+                                         this,
+                                         new Int2D(pinViewOffset.pinOffset, offset),
+                                         SANS_SERIF,
+                                         10,
+                                         alignment));
     }
   }
 
-  private Rectangle calculateRequiredRectangle(Rectangle rectangle,
-                                               PinViewLists leftViewLists,
-                                               PinViewLists rightViewLists,
-                                               PinViewLists topViewLists,
-                                               PinViewLists bottomViewLists)
+  private float calculateMaxWidth(List<PinViewOffset> pinViewOffsets)
   {
-    int topX = (int) Math.floor(rectangle.getTopLeft().getX() - (topViewLists.widestText));
-    int topY = (int) Math.floor(rectangle.getTopLeft().getY() - (leftViewLists.widestText));
-    int bottomX = (int) Math.ceil(rectangle.getBottomRight().getX() + (bottomViewLists.widestText));
-    int bottomY = (int) Math.ceil(rectangle.getBottomRight().getY() + (rightViewLists.widestText));
-
-    boolean updateMaxHeight = false;
-    int maxHeight = bottomY - topY;
-    if (leftViewLists.size > maxHeight)
+    float maxWidth = 0;
+    for (PinViewOffset pinViewOffset : pinViewOffsets)
     {
-      updateMaxHeight = true;
-      maxHeight = leftViewLists.size;
-    }
-    if (rightViewLists.size > maxHeight)
-    {
-      updateMaxHeight = true;
-      maxHeight = rightViewLists.size;
-    }
-    if (properties.height > maxHeight)
-    {
-      updateMaxHeight = true;
-      maxHeight = properties.height;
-    }
-
-    boolean updateMaxWidth = false;
-    int maxWidth = bottomX - topX;
-    if (topViewLists.size > maxWidth)
-    {
-      updateMaxWidth = true;
-      maxWidth = topViewLists.size;
-    }
-    if (bottomViewLists.size > maxWidth)
-    {
-      updateMaxWidth = true;
-      maxWidth = bottomViewLists.size;
-    }
-    if (properties.width > maxWidth)
-    {
-      updateMaxWidth = true;
-      maxWidth = properties.width;
-    }
-
-    if (updateMaxHeight)
-    {
-      int newTop = -(maxHeight / 2);
-      int newBottom = maxHeight / 2 + maxHeight % 2;
-      if (topY > newTop)
+      Tuple2 dimension = pinViewOffset.pinView.getLabelView().getTextDimension();
+      if (dimension.getX() > maxWidth)
       {
-        topY = newTop;
-      }
-      if (bottomY < newBottom)
-      {
-        bottomY = newBottom;
+        maxWidth = dimension.getX();
       }
     }
+    return maxWidth;
+  }
 
-    if (updateMaxWidth)
+  private List<PinViewOffset> calculatePinViewOffsets(PinViewLists pinViewLists, int extendedMaxGridSize)
+  {
+    ArrayList<PinViewOffset> pinViewOffsets = new ArrayList<>();
+    int missing = extendedMaxGridSize - pinViewLists.getPinSize();
+    int offset = -extendedMaxGridSize / 2;
+    int oppositeOffset = extendedMaxGridSize + offset;
+
+    int firstTopPinOffset = offset + 1;
+    int lastTopPinOffset = createPinViewOffsets(pinViewOffsets, firstTopPinOffset, pinViewLists.negativePinViews);
+
+    int firstBottomPinOffset = oppositeOffset - pinViewLists.positivePinViews.size();
+    createPinViewOffsets(pinViewOffsets, firstBottomPinOffset, pinViewLists.positivePinViews);
+
+    int firstCenterPinOffset = lastTopPinOffset + missing / 2;
+    createPinViewOffsets(pinViewOffsets, firstCenterPinOffset, pinViewLists.centerPinViews);
+
+    return pinViewOffsets;
+  }
+
+  private int createPinViewOffsets(ArrayList<PinViewOffset> pinViewOffsets, int offset, List<PinView> pinViews)
+  {
+    if (pinViews.size() > 0)
     {
-      int newLeft = -(maxWidth / 2);
-      int newRight = maxWidth / 2 + maxWidth % 2;
-      if (topX > newLeft)
+      for (PinView pinView : pinViews)
       {
-        topX = newLeft;
+        pinViewOffsets.add(new PinViewOffset(pinView, offset));
+        offset++;
       }
-      if (bottomX < newRight)
-      {
-        bottomX = newRight;
-      }
+      offset++;
     }
 
-    rectangle = new Rectangle(new Int2D(topX, topY), new Int2D(bottomX - 1, bottomY - 1));
-    return rectangle;
+    return offset;
   }
 
   private PinViewLists createPinViewLists(Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> pinsLocations, SubcircuitPinAlignment alignment)

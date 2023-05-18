@@ -76,6 +76,8 @@ public class SubcircuitInstanceView
 
     int leftSize = leftViewLists.getExtendedSize();
     int rightSize = rightViewLists.getExtendedSize();
+    leftSize = leftSize != 0 ? leftSize - 1 : 0;
+    rightSize = rightSize != 0 ? rightSize - 1 : 0;
     int maxGridHeight = Math.max(leftSize, rightSize);
     List<PinViewOffset> leftPinViewOffsets;
     List<PinViewOffset> rightPinViewOffsets;
@@ -83,18 +85,22 @@ public class SubcircuitInstanceView
     rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, maxGridHeight);
 
     float maxWidth = calculateMaxWidth(leftPinViewOffsets);
-    int pos = (int) Math.floor(rectangle.getTopLeft().getX() - maxWidth);
-    createSubcircuitPinViews(leftPinViewOffsets, pos, HorizontalAlignment.RIGHT);
-    rectangle.getTopLeft().setX(new Int1D(pos));
+    int leftPos = (int) Math.floor(rectangle.getBottomRight().getX() + maxWidth);
+    createSubcircuitPinViews(leftPinViewOffsets, leftPos, HorizontalAlignment.LEFT);
+    rectangle.getBottomRight().setX(new Int1D(leftPos));
 
     maxWidth = calculateMaxWidth(rightPinViewOffsets);
-    pos = (int) Math.floor(rectangle.getBottomRight().getX() + maxWidth);
-    createSubcircuitPinViews(rightPinViewOffsets, pos, HorizontalAlignment.LEFT);
-    rectangle.getBottomRight().setX(new Int1D(pos));
+    int rightPos = (int) Math.floor(rectangle.getTopLeft().getX() - maxWidth);
+    createSubcircuitPinViews(rightPinViewOffsets, rightPos, HorizontalAlignment.RIGHT);
+    rectangle.getTopLeft().setX(new Int1D(rightPos));
 
     int offset = (maxGridHeight / 2);
-    rectangle.getTopLeft().setY(new Int1D(-offset));
-    rectangle.getBottomRight().setY(new Int1D(maxGridHeight - offset));
+
+    float top = rectangle.getTopLeft().getY();
+    rectangle.getTopLeft().setY(new Int1D(Math.min(-offset, (int)top)));
+
+    float bottom = rectangle.getBottomRight().getY();
+    rectangle.getBottomRight().setY(new Int1D(Math.max(maxGridHeight - offset, (int)bottom)));
 
     this.rectangle = new RectangleView(this,
                                        new Int2D(rectangle.getTopLeft().getY(), rectangle.getTopLeft().getX()),
@@ -207,14 +213,6 @@ public class SubcircuitInstanceView
       }
     }
     return widest;
-  }
-
-  private void printPins(List<PinView> pinViews)
-  {
-    for (PinView pinView : pinViews)
-    {
-      System.out.println(pinView.getName());
-    }
   }
 
   private List<PinView> findAndSortPins(Map<SubcircuitPinAnchour, List<PinView>> anchourMap, SubcircuitPinAnchour anchour)

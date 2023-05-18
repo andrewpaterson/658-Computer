@@ -31,7 +31,7 @@ public class PinViewFactory
     return new PinProperties("Pin",
                              1,
                              SubcircuitPinAlignment.LEFT,
-                             SubcircuitPinAnchour.POSITIVE,
+                             SubcircuitPinAnchour.NEGATIVE,
                              0,
                              false,
                              false,

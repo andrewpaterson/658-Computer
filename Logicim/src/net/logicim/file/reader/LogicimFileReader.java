@@ -145,6 +145,10 @@ public class LogicimFileReader
     {
       return new MapElementData();
     }
+    else if (SetElementData.class.getSimpleName().equals(type))
+    {
+      return new SetElementData();
+    }
     else if (ValueData.class.getSimpleName().equals(type))
     {
       return new ValueData();
@@ -156,6 +160,14 @@ public class LogicimFileReader
     else if (HashMap.class.getSimpleName().equals(type))
     {
       return new HashMapData();
+    }
+    else if (LinkedHashSet.class.getSimpleName().equals(type))
+    {
+      return new LinkedHashSetData();
+    }
+    else if (HashSet.class.getSimpleName().equals(type))
+    {
+      return new HashSetData();
     }
     else if (long.class.getSimpleName().equals(type) || Long.class.getSimpleName().equals(type))
     {
@@ -466,6 +478,11 @@ public class LogicimFileReader
     mapElementData.load(attributes);
   }
 
+  private void startSetElementData(SetElementData setElementData, Map<String, String> attributes)
+  {
+    setElementData.load(attributes);
+  }
+
   @Override
   public void startElement(String uri, String lName, String qName, Attributes attr)
   {
@@ -494,6 +511,10 @@ public class LogicimFileReader
           else if (o instanceof MapElementData)
           {
             startMapElementData((MapElementData) o, attributeMap);
+          }
+          else if (o instanceof SetElementData)
+          {
+            startSetElementData((SetElementData) o, attributeMap);
           }
           else if (o instanceof ReflectiveData)
           {
@@ -583,6 +604,16 @@ public class LogicimFileReader
           HashMapData mapData = (HashMapData) containingClassField.typeInstance;
           mapData.set(saveXMLDataField.typeInstance.getObject());
         }
+        else if (containingClassField.typeInstance instanceof LinkedHashSetData)
+        {
+          LinkedHashSetData setData = (LinkedHashSetData) containingClassField.typeInstance;
+          setData.set(saveXMLDataField.typeInstance.getObject());
+        }
+        else if (containingClassField.typeInstance instanceof HashSetData)
+        {
+          HashSetData setData = (HashSetData) containingClassField.typeInstance;
+          setData.set(saveXMLDataField.typeInstance.getObject());
+        }
         else if (containingClassField.typeInstance instanceof IntArray2DData)
         {
           int index = Integer.parseInt(saveXMLDataField.fieldName.replace("array", ""));
@@ -620,6 +651,11 @@ public class LogicimFileReader
         else if (containingClassField.typeInstance instanceof MapElementData)
         {
           MapElementData data = (MapElementData) containingClassField.typeInstance;
+          data.set(((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance);
+        }
+        else if (containingClassField.typeInstance instanceof SetElementData)
+        {
+          SetElementData data = (SetElementData) containingClassField.typeInstance;
           data.set(((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance);
         }
         else if (containingClassField.typeInstance instanceof KeyData)

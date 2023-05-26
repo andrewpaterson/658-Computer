@@ -15,6 +15,7 @@ import org.w3c.dom.Node;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class ReflectiveWriter
 {
@@ -333,6 +334,32 @@ public abstract class ReflectiveWriter
     }
   }
 
+  public static void writeSet(Document doc, Element parent, String name, Set<?> set)
+  {
+    int size = set.size();
+
+    Element listContainer = doc.createElement(name);
+    listContainer.setAttribute(TYPE, set.getClass().getSimpleName());
+    listContainer.setAttribute("size", Integer.toString(size));
+    parent.appendChild(listContainer);
+
+    int i = 0;
+    for (Object valueData : set)
+    {
+      Element entryElement = doc.createElement("element");
+      entryElement.setAttribute("index", Integer.toString(i));
+      entryElement.setAttribute(TYPE, getXMLTag(SetElementData.class));
+
+      Element valueElement = doc.createElement("value");
+      valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
+      entryElement.appendChild(valueElement);
+      writeReflectiveData(new ValueData(valueData), doc, valueElement);
+
+      listContainer.appendChild(entryElement);
+      i++;
+    }
+  }
+
   public static void writeReflectiveData(Object o, Document doc, Element parent)
   {
     InstanceInspector instanceInspector = new InstanceInspector(o);
@@ -428,6 +455,10 @@ public abstract class ReflectiveWriter
       else if (Map.class.isAssignableFrom(fieldClass) || fieldValue instanceof Map)
       {
         writeMap(doc, parent, fieldName, (Map<?, ?>) fieldValue);
+      }
+      else if (Set.class.isAssignableFrom(fieldClass) || fieldValue instanceof Set)
+      {
+        writeSet(doc, parent, fieldName, (Set<?>) fieldValue);
       }
       else if (fieldValue instanceof SaveData)
       {

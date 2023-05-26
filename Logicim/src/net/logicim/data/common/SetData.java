@@ -3,16 +3,15 @@ package net.logicim.data.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public abstract class MapData
+public abstract class SetData
     extends ObjectData
 {
-  public List keys;
   public List values;
 
-  public MapData()
+  public SetData()
   {
-    keys = null;
     values = null;
   }
 
@@ -21,11 +20,9 @@ public abstract class MapData
   {
     String sizeString = fields.get("size");
     int size = Integer.parseInt(sizeString);
-    keys = new ArrayList<>(size);
     values = new ArrayList<>(size);
     for (int i = 0; i < size; i++)
     {
-      keys.add(null);
       values.add(null);
     }
   }
@@ -33,23 +30,21 @@ public abstract class MapData
   @Override
   public Object getObject()
   {
-    Map<Object, Object> map = createMap();
-    for (int i = 0; i < keys.size(); i++)
+    Set<Object> set = createSet();
+    for (int i = 0; i < values.size(); i++)
     {
-      Object key = keys.get(i);
       Object value = values.get(i);
-      map.put(key, value);
+      set.add(value);
     }
-    return map;
+    return set;
   }
 
   public void set(Object object)
   {
-    MapElementData mapElement = (MapElementData) object;
-    keys.set(mapElement.index, mapElement.key.object);
-    values.set(mapElement.index, mapElement.value.object);
+    SetElementData setElement = (SetElementData) object;
+    values.set(setElement.index, setElement.value.object);
   }
 
-  protected abstract Map<Object, Object> createMap();
+  protected abstract Set<Object> createSet();
 }
 

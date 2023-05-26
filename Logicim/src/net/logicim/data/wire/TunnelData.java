@@ -72,5 +72,11 @@ public class TunnelData
                           rotation,
                           new TunnelProperties(name, doubleSided));
   }
+
+  @Override
+  public boolean appliesToSimulation(long id)
+  {
+    return simulationTraces.containsKey(id);
+  }
 }
 

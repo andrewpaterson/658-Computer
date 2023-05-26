@@ -8,6 +8,7 @@ import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
 
 import java.util.List;
+import java.util.Set;
 
 public class GroundData
     extends PassiveData<GroundView>
@@ -19,6 +20,7 @@ public class GroundData
   public GroundData(Int2D position,
                     Rotation rotation,
                     String name,
+                    Set<Long> simulationIDs,
                     List<SimulationMultiPortData> ports,
                     long id,
                     boolean enabled,
@@ -27,6 +29,7 @@ public class GroundData
     super(position,
           rotation,
           name,
+          simulationIDs,
           ports,
           id,
           enabled,

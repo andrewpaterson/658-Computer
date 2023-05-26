@@ -116,15 +116,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
 
   protected STATE getState(long simulationId)
   {
-    for (Map.Entry<Long, STATE> entry : state.simulationStateData.entrySet())
-    {
-
-      if (simulationId == entry.getKey())
-      {
-        return entry.getValue();
-      }
-    }
-    return null;
+    return state.simulationStateData.get(simulationId);
   }
 
   @Override
@@ -145,6 +137,12 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     STATE state = getState(simulation.getId());
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
     integratedCircuit.setState(state);
+  }
+
+  @Override
+  public boolean appliesToSimulation(long id)
+  {
+    return state.simulationStateData.containsKey(id);
   }
 }
 

@@ -8,6 +8,7 @@ import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.util.List;
+import java.util.Set;
 
 public class SplitterData
     extends PassiveData<SplitterView>
@@ -26,6 +27,7 @@ public class SplitterData
   public SplitterData(Int2D position,
                       Rotation rotation,
                       String name,
+                      Set<Long> simulationIDs,
                       List<SimulationMultiPortData> ports,
                       long id,
                       boolean enabled,
@@ -40,6 +42,7 @@ public class SplitterData
     super(position,
           rotation,
           name,
+          simulationIDs,
           ports,
           id,
           enabled,

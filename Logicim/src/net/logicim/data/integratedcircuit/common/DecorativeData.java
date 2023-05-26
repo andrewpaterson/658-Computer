@@ -35,5 +35,11 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
                                         T componentView)
   {
   }
+
+  @Override
+  public boolean appliesToSimulation(long id)
+  {
+    return false;
+  }
 }
 

@@ -34,6 +34,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
@@ -183,6 +184,7 @@ public class PinView
     return new PinData(position,
                        rotation,
                        getName(),
+                       saveSimulations(),
                        savePorts(),
                        id,
                        enabled,

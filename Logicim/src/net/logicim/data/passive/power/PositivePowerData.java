@@ -8,6 +8,7 @@ import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerView;
 
 import java.util.List;
+import java.util.Set;
 
 public class PositivePowerData
     extends PassiveData<PositivePowerView>
@@ -21,6 +22,7 @@ public class PositivePowerData
   public PositivePowerData(Int2D position,
                            Rotation rotation,
                            String name,
+                           Set<Long> simulationIDs,
                            List<SimulationMultiPortData> ports,
                            long id,
                            boolean enabled,
@@ -30,6 +32,7 @@ public class PositivePowerData
     super(position,
           rotation,
           name,
+          simulationIDs,
           ports,
           id,
           enabled,

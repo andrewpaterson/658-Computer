@@ -8,6 +8,7 @@ import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.List;
+import java.util.Set;
 
 public class SubcircuitInstanceData
     extends PassiveData<SubcircuitInstanceView>
@@ -28,6 +29,7 @@ public class SubcircuitInstanceData
                                 long id,
                                 boolean enabled,
                                 boolean selected,
+                                Set<Long> simulationIDs,
                                 List<SimulationMultiPortData> ports,
                                 String comment,
                                 int width,
@@ -36,6 +38,7 @@ public class SubcircuitInstanceData
     super(position,
           rotation,
           name,
+          simulationIDs,
           ports,
           id,
           enabled,

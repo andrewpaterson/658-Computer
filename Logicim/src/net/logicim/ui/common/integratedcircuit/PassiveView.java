@@ -9,7 +9,9 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
@@ -67,6 +69,16 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   public PASSIVE getComponent(CircuitSimulation circuitSimulation)
   {
     return simulationPassives.get(circuitSimulation);
+  }
+
+  protected Set<Long> saveSimulations()
+  {
+    LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
+    for (CircuitSimulation circuitSimulation : simulationPassives.keySet())
+    {
+      simulationIDs.add(circuitSimulation.getId());
+    }
+    return simulationIDs;
   }
 
   public abstract PassiveData<?> save(boolean selected);

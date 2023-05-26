@@ -24,6 +24,12 @@ public class TraceData
   {
   }
 
+  @Override
+  public boolean appliesToSimulation(long id)
+  {
+    return simulationTraces.containsKey(id);
+  }
+
   public TraceData(Map<Long, long[]> simulationTraces,
                    Int2D start,
                    Int2D end,

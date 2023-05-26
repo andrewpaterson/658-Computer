@@ -338,6 +338,7 @@ public class SubcircuitInstanceView
                                       id,
                                       enabled,
                                       selected,
+                                      saveSimulations(),
                                       savePorts(),
                                       properties.comment,
                                       properties.width,

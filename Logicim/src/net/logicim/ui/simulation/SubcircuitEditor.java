@@ -322,22 +322,25 @@ public class SubcircuitEditor
     for (Map.Entry<ViewData, View> entry : dataViewMap.entrySet())
     {
       ViewData data = entry.getKey();
-      View view = entry.getValue();
-      if (view instanceof StaticView)
+      if (data.appliesToSimulation(circuitSimulation.getId()))
       {
-        StaticView staticView = (StaticView) view;
-        StaticData staticData = (StaticData) data;
-        staticData.createAndConnectComponent(this, circuitSimulation, traceLoader, staticView);
-      }
-      else if (view instanceof TraceView)
-      {
-        TraceView traceView = (TraceView) view;
-        TraceData traceData = (TraceData) data;
-        traceData.createAndConnectComponent(circuitSimulation, traceLoader, traceView);
-      }
-      else
-      {
-        throw new SimulatorException("Cannot load component of type [%s].", view);
+        View view = entry.getValue();
+        if (view instanceof StaticView)
+        {
+          StaticView staticView = (StaticView) view;
+          StaticData staticData = (StaticData) data;
+          staticData.createAndConnectComponent(this, circuitSimulation, traceLoader, staticView);
+        }
+        else if (view instanceof TraceView)
+        {
+          TraceView traceView = (TraceView) view;
+          TraceData traceData = (TraceData) data;
+          traceData.createAndConnectComponent(circuitSimulation, traceLoader, traceView);
+        }
+        else
+        {
+          throw new SimulatorException("Cannot load component of type [%s].", view);
+        }
       }
     }
   }

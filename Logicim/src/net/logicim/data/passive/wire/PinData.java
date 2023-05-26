@@ -13,7 +13,9 @@ import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PinData
     extends PassiveData<PinView>
@@ -35,6 +37,7 @@ public class PinData
   public PinData(Int2D position,
                  Rotation rotation,
                  String name,
+                 Set<Long> simulationIDs,
                  List<SimulationMultiPortData> ports,
                  long id,
                  boolean enabled,
@@ -52,6 +55,7 @@ public class PinData
     super(position,
           rotation,
           name,
+          simulationIDs,
           ports,
           id,
           enabled,

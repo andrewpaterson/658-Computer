@@ -1,6 +1,6 @@
 package net.logicim.data.common;
 
-public class ViewData
+public abstract class ViewData
     extends ReflectiveData
 {
   public long id;
@@ -13,5 +13,7 @@ public class ViewData
   {
     this.id = id;
   }
+
+  public abstract boolean appliesToSimulation(long id);
 }
 

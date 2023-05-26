@@ -9,10 +9,13 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.simulation.SubcircuitEditor;
 
 import java.util.List;
+import java.util.Set;
 
 public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
     extends ComponentData<PASSIVE>
 {
+  public Set<Long> simulation;
+
   public PassiveData()
   {
   }
@@ -20,6 +23,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
   public PassiveData(Int2D position,
                      Rotation rotation,
                      String name,
+                     Set<Long> simulationIDs,
                      List<SimulationMultiPortData> ports,
                      long id,
                      boolean enabled,
@@ -32,6 +36,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
           id,
           enabled,
           selected);
+    simulation = simulationIDs;
   }
 
   @Override
@@ -43,6 +48,12 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
     passiveView.createComponent(simulation);
 
     loadPorts(simulation, traceLoader, passiveView);
+  }
+
+  @Override
+  public boolean appliesToSimulation(long id)
+  {
+    return simulation.contains(id);
   }
 }
 

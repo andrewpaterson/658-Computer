@@ -30,7 +30,8 @@ public class SubcircuitPinView
                            Int2D positionRelativeToIC,
                            String fontName,
                            int size,
-                           HorizontalAlignment horizontalAlignment)
+                           HorizontalAlignment horizontalAlignment,
+                           int additionalRotations)
   {
     this.pinView = pinView;
     this.subcircuitInstanceView = subcircuitInstanceView;
@@ -44,6 +45,7 @@ public class SubcircuitPinView
                                  size,
                                  false,
                                  horizontalAlignment);
+    this.textView.setAdditionalRotations(additionalRotations);
   }
 
   public Int2D getPinPosition()

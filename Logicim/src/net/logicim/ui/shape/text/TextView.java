@@ -28,6 +28,7 @@ public class TextView
   protected boolean bold;
   protected HorizontalAlignment alignment;
   protected Color color;
+  protected int additionalRotations;
 
   protected PointGridCache gridCache;
 
@@ -43,6 +44,7 @@ public class TextView
     this.positionRelativeToIC = positionRelativeToIC;
     this.fontName = fontName;
     this.alignment = alignment;
+    this.additionalRotations = 0;
 
     this.text = text;
     this.size = size;
@@ -80,6 +82,11 @@ public class TextView
         offset += textView.getTextDimension().getY();
       }
     }
+  }
+
+  public void setAdditionalRotations(int additionalRotations)
+  {
+    this.additionalRotations = additionalRotations;
   }
 
   public void updateGridCache()
@@ -158,9 +165,10 @@ public class TextView
     float halfHeight = height / 3.5f;  //Some magic number.  Not half the height.
     float degrees;
 
-    float widthAdjust = getWidthAdjust() * factor;
+    float widthAdjust = getWidthAdjust(0.1f) * factor;
 
     Rotation rotation = shapeHolder.getRotation();
+    rotation = rotation.rotateRight(additionalRotations);
     if (rotation.isNorthSouth() || rotation.isCannot())
     {
       degrees = 90;
@@ -205,21 +213,21 @@ public class TextView
     graphics.drawString(text, x + xOffset, y + yOffset);
   }
 
-  public float getWidthAdjust()
+  public float getWidthAdjust(float offset)
   {
     float width = textDimension.getX();
 
     if (alignment == LEFT)
     {
-      return 0.1f;
+      return offset;
     }
     if (alignment == CENTER)
     {
-      return 0.1f - width / 2;
+      return offset - width / 2;
     }
     else if (alignment == RIGHT)
     {
-      return 0.1f - width;
+      return offset - width;
     }
     else
     {
@@ -276,7 +284,7 @@ public class TextView
     float height = bottomRight.y;
     bottomRight.add(topLeft);
 
-    float widthAdjust = getWidthAdjust();
+    float widthAdjust = getWidthAdjust(0.0f);
     topLeft.x += widthAdjust - height / 4f;
     bottomRight.x += widthAdjust + height / 4f;
 
@@ -293,7 +301,7 @@ public class TextView
     float height = bottomRight.y;
     bottomRight.add(topLeft);
 
-    float widthAdjust = getWidthAdjust();
+    float widthAdjust = getWidthAdjust(0.0f);
     bottomRight.x += widthAdjust + height / 4f;
 
     Rotation.East.rotate(bottomRight, bottomRight);

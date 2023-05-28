@@ -266,6 +266,30 @@ public class Int2D
     }
   }
 
+  @Override
+  public void setX(int x)
+  {
+    this.x = x;
+  }
+
+  @Override
+  public void setY(int y)
+  {
+    this.y = y;
+  }
+
+  @Override
+  public int getIntY()
+  {
+    return y;
+  }
+
+  @Override
+  public int getIntX()
+  {
+    return x;
+  }
+
   public static Int2D safeClone(Int2D d)
   {
     if (d != null)

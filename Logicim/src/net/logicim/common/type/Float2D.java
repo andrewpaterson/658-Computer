@@ -253,6 +253,30 @@ public class Float2D
     }
   }
 
+  @Override
+  public void setX(int x)
+  {
+    this.x = x;
+  }
+
+  @Override
+  public void setY(int y)
+  {
+    this.y = y;
+  }
+
+  @Override
+  public int getIntX()
+  {
+    return (int) x;
+  }
+
+  @Override
+  public int getIntY()
+  {
+    return (int) y;
+  }
+
   public static Float2D safeClone(Float2D d)
   {
     if (d != null)

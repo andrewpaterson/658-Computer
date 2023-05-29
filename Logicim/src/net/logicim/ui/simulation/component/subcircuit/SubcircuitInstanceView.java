@@ -77,14 +77,17 @@ public class SubcircuitInstanceView
 
     int maxGridWidth = calculateMaxSize(topViewLists.getExtendedSize(), bottomViewLists.getExtendedSize());
 
-    List<PinViewOffset> topPinViewOffsets = calculatePinViewOffsets(topViewLists, maxGridWidth);
-    List<PinViewOffset> bottomPinViewOffsets = calculatePinViewOffsets(bottomViewLists, maxGridWidth);
+    int left = -maxGridWidth / 2;
+    int right = maxGridWidth + left;
 
-    int bottomPos = (int) Math.ceil(rectangle.getTopLeft().getY() + calculateMaxSize(bottomPinViewOffsets));
-    int topPos = (int) Math.floor(rectangle.getBottomRight().getY() - calculateMaxSize(topPinViewOffsets));
+    List<PinViewOffset> topPinViewOffsets = calculatePinViewOffsets(topViewLists, left, right);
+    List<PinViewOffset> bottomPinViewOffsets = calculatePinViewOffsets(bottomViewLists, left, right);
 
-    rectangle.getBottomRight().setMaxY(topPos);
-    rectangle.getTopLeft().setMinY(bottomPos);
+    int top = (int) Math.ceil(rectangle.getTopLeft().getY() - calculateMaxSize(topPinViewOffsets));
+    int bottom = (int) Math.floor(rectangle.getBottomRight().getY() + calculateMaxSize(bottomPinViewOffsets));
+
+    rectangle.getTopLeft().setMinY(top);
+    rectangle.getBottomRight().setMaxY(bottom);
 
     int heightOffset = (maxGridWidth / 2);
     rectangle.getTopLeft().setMinX(-heightOffset);
@@ -93,9 +96,26 @@ public class SubcircuitInstanceView
     //Left / Right
 
     int maxGridHeight = calculateMaxSize(leftViewLists.getExtendedSize(), rightViewLists.getExtendedSize());
+    bottom = rectangle.getBottomRight().getIntY();
+    top = rectangle.getTopLeft().getIntY();
 
-    List<PinViewOffset> leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, maxGridHeight);
-    List<PinViewOffset> rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, maxGridHeight);
+    List<PinViewOffset> leftPinViewOffsets;
+    List<PinViewOffset> rightPinViewOffsets;
+    int size = bottom - top;
+    if (maxGridHeight < size)
+    {
+      leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, top, bottom);
+      rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, top, bottom);
+    }
+    else
+    {
+      int xxx1 = maxGridHeight - size;
+      top -= xxx1 / 2;
+      bottom += xxx1 - (xxx1 / 2);
+
+      leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, top, bottom);
+      rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, top, bottom);
+    }
 
     int leftPos = (int) Math.ceil(rectangle.getBottomRight().getX() + calculateMaxSize(leftPinViewOffsets));
     int rightPos = (int) Math.floor(rectangle.getTopLeft().getX() - calculateMaxSize(rightPinViewOffsets));
@@ -103,17 +123,16 @@ public class SubcircuitInstanceView
     rectangle.getBottomRight().setMaxX(leftPos);
     rectangle.getTopLeft().setMinX(rightPos);
 
-    int widthOffset = (maxGridHeight / 2);
-    rectangle.getTopLeft().setMinY(-widthOffset);
-    rectangle.getBottomRight().setMaxY(maxGridHeight - widthOffset);
+    rectangle.getTopLeft().setMinY(top);
+    rectangle.getBottomRight().setMaxY(bottom);
 
     // Pins
 
-    bottomPos = rectangle.getBottomRight().getIntY();
-    topPos = rectangle.getTopLeft().getIntY();
+    bottom = rectangle.getBottomRight().getIntY();
+    top = rectangle.getTopLeft().getIntY();
 
-    createTopBottomSubcircuitPinViews(topPinViewOffsets, topPos, HorizontalAlignment.LEFT);
-    createTopBottomSubcircuitPinViews(bottomPinViewOffsets, bottomPos, HorizontalAlignment.RIGHT);
+    createTopBottomSubcircuitPinViews(topPinViewOffsets, top, HorizontalAlignment.LEFT);
+    createTopBottomSubcircuitPinViews(bottomPinViewOffsets, bottom, HorizontalAlignment.RIGHT);
 
     createLeftRightSubcircuitPinViews(leftPinViewOffsets, leftPos, HorizontalAlignment.LEFT);
     createLeftRightSubcircuitPinViews(rightPinViewOffsets, rightPos, HorizontalAlignment.RIGHT);
@@ -176,13 +195,11 @@ public class SubcircuitInstanceView
     return maxWidth;
   }
 
-  private List<PinViewOffset> calculatePinViewOffsets(PinViewLists pinViewLists, int extendedMaxGridSize)
+  private List<PinViewOffset> calculatePinViewOffsets(PinViewLists pinViewLists, int offset, int oppositeOffset)
   {
-    ArrayList<PinViewOffset> pinViewOffsets = new ArrayList<>();
-    int missing = extendedMaxGridSize - pinViewLists.getPinSize();
-    int offset = -extendedMaxGridSize / 2;
-    int oppositeOffset = extendedMaxGridSize + offset;
+    int missing = (oppositeOffset - offset) - pinViewLists.getPinSize();
 
+    ArrayList<PinViewOffset> pinViewOffsets = new ArrayList<>();
     int firstTopPinOffset = offset + 1;
     int lastTopPinOffset = createPinViewOffsets(pinViewOffsets, firstTopPinOffset, pinViewLists.negativePinViews);
 

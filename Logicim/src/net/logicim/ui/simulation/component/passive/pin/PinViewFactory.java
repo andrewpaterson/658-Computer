@@ -46,8 +46,6 @@ public class PinViewFactory
                         Rotation rotation,
                         PinProperties properties)
   {
-    PinPropertyHelper helper = new PinPropertyHelper(circuitEditor.getCurrentSubcircuitView().findAllPins());
-    helper.ensureUniquePinName(properties);
     SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new PinView(subcircuitView,
                        position,

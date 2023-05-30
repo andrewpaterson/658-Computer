@@ -54,7 +54,7 @@ public class BufferData
   }
 
   @Override
-  public BufferView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public BufferView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new BufferView(subcircuitEditor.getSubcircuitView(),
                           position,

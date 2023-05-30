@@ -41,7 +41,7 @@ public class PositivePowerData
   }
 
   @Override
-  protected PositivePowerView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  protected PositivePowerView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new PositivePowerView(subcircuitEditor.getSubcircuitView(),
                                  position,

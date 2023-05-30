@@ -23,18 +23,18 @@ public class MoveComponents
   protected Map<StaticView<?>, Rotation> componentStartRotations;
   protected Map<TraceView, Line> traces;
   protected Set<StaticView<?>> selectedComponents;
-  protected boolean deleteOnDiscard;
+  protected boolean newComponents;
 
-  public MoveComponents(StaticView<?> componentView, boolean deleteOnDiscard)
+  public MoveComponents(StaticView<?> componentView, boolean newComponents)
   {
     ArrayList<View> views = new ArrayList<>();
     views.add(componentView);
-    constructor(views, deleteOnDiscard);
+    constructor(views, newComponents);
   }
 
-  public MoveComponents(List<View> views, boolean deleteOnDiscard)
+  public MoveComponents(List<View> views, boolean newComponents)
   {
-    constructor(views, deleteOnDiscard);
+    constructor(views, newComponents);
     for (View view : views)
     {
       if (view instanceof StaticView)
@@ -47,7 +47,7 @@ public class MoveComponents
 
   protected void constructor(List<View> views, boolean deleteOnDiscard)
   {
-    this.deleteOnDiscard = deleteOnDiscard;
+    this.newComponents = deleteOnDiscard;
 
     selectedComponents = new HashSet<>();
     componentStartPositions = new LinkedHashMap<>();
@@ -87,8 +87,9 @@ public class MoveComponents
   {
     editAction.getCircuitEditor().doneMoveComponents(getStaticViews(),
                                                      getTraces(),
-                                                     getSelectedViews());
-    if (editAction.hasDiff() || deleteOnDiscard)
+                                                     getSelectedViews(),
+                                                     newComponents);
+    if (editAction.hasDiff() || newComponents)
     {
       editAction.pushUndo();
     }
@@ -98,12 +99,13 @@ public class MoveComponents
   public void discard(EditAction editAction)
   {
     CircuitEditor circuitEditor = editAction.getCircuitEditor();
-    if (!deleteOnDiscard)
+    if (!newComponents)
     {
       moveComponents(0, editAction.getStart(), new Int2D());
       circuitEditor.doneMoveComponents(getStaticViews(),
                                        getTraces(),
-                                       getSelectedViews());
+                                       getSelectedViews(),
+                                       !newComponents);
     }
     else
     {

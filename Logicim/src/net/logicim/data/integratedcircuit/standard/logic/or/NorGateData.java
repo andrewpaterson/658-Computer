@@ -52,7 +52,7 @@ public class NorGateData
   }
 
   @Override
-  public NorGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public NorGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new NorGateView(subcircuitEditor.getSubcircuitView(),
                            position,

@@ -50,7 +50,7 @@ public class SubcircuitInstanceData
   }
 
   @Override
-  protected SubcircuitInstanceView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  protected SubcircuitInstanceView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     SubcircuitEditor instanceSubcircuitEditor = subcircuitEditor.getSubcircuitEditor(subcircuitTypeName);
     return new SubcircuitInstanceView(subcircuitEditor.getSubcircuitView(),

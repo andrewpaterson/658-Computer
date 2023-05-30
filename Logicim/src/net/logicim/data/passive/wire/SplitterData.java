@@ -56,7 +56,7 @@ public class SplitterData
   }
 
   @Override
-  protected SplitterView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  protected SplitterView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new SplitterView(subcircuitEditor.getSubcircuitView(),
                             position,

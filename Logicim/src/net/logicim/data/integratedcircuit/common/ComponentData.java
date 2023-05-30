@@ -52,7 +52,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
   @Override
   public T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    T componentView = createComponentView(subcircuitEditor, newComponentPropertyStep);
+    T componentView = createComponentView(subcircuitEditor);
     componentView.createConnectionViews(subcircuitEditor.getSubcircuitView());
     return componentView;
   }
@@ -126,6 +126,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected abstract T createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
+  protected abstract T createComponentView(SubcircuitEditor subcircuitEditor);
 }
 

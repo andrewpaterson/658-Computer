@@ -52,7 +52,7 @@ public class XnorGateData
   }
 
   @Override
-  public XnorGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public XnorGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new XnorGateView(subcircuitEditor.getSubcircuitView(),
                             position,

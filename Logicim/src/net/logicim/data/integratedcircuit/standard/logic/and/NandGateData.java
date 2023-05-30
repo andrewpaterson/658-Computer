@@ -52,7 +52,7 @@ public class NandGateData
   }
 
   @Override
-  public NandGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public NandGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new NandGateView(subcircuitEditor.getSubcircuitView(),
                             position,

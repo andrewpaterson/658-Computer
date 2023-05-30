@@ -61,7 +61,7 @@ public class OscilloscopeData
   }
 
   @Override
-  public OscilloscopeView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public OscilloscopeView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new OscilloscopeView(subcircuitEditor.getSubcircuitView(),
                                 position,

@@ -18,14 +18,18 @@ public class PinPropertyHelper
     this.subCircuitPins = subCircuitPins;
   }
 
-  public void ensureUniquePinName(PinProperties properties)
+  public boolean ensureUniquePinName(PinProperties properties)
   {
-    properties.name = updatePinName(properties.name);
+    String previousName = properties.name;
+    properties.name = updatePinName(previousName);
+    return !previousName.equals(properties.name);
   }
 
-  public void ensureNextWeight(PinProperties properties)
+  public boolean ensureNextWeight(PinProperties properties)
   {
-    properties.weight = updatePinWeight(properties.alignment, properties.anchour, properties.weight);
+    int previousWeight = properties.weight;
+    properties.weight = updatePinWeight(properties.alignment, properties.anchour, previousWeight);
+    return previousWeight != properties.weight;
   }
 
   protected int updatePinWeight(SubcircuitPinAlignment alignment, SubcircuitPinAnchour anchour, int propertiesWeight)
@@ -96,16 +100,19 @@ public class PinPropertyHelper
     LinkedHashMap<String, List<PinViewNumber>> pinNamesMap = new LinkedHashMap<>();
     for (PinView pinView : subCircuitPins)
     {
-      PinViewNumber pinViewNumber = createPinViewNumber(pinView, pinView.getProperties().name);
-
-      String name = pinViewNumber.name;
-      List<PinViewNumber> pinViews = pinNamesMap.get(name);
-      if (pinViews == null)
+      if (pinView.isEnabled())
       {
-        pinViews = new ArrayList<>();
-        pinNamesMap.put(name, pinViews);
+        PinViewNumber pinViewNumber = createPinViewNumber(pinView, pinView.getProperties().name);
+
+        String name = pinViewNumber.name;
+        List<PinViewNumber> pinViews = pinNamesMap.get(name);
+        if (pinViews == null)
+        {
+          pinViews = new ArrayList<>();
+          pinNamesMap.put(name, pinViews);
+        }
+        pinViews.add(pinViewNumber);
       }
-      pinViews.add(pinViewNumber);
     }
     return pinNamesMap;
   }

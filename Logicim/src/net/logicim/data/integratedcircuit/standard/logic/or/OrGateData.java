@@ -52,7 +52,7 @@ public class OrGateData
   }
 
   @Override
-  public OrGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public OrGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new OrGateView(subcircuitEditor.getSubcircuitView(),
                           position,

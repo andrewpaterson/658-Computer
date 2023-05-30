@@ -52,7 +52,7 @@ public class AndGateData
   }
 
   @Override
-  public AndGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public AndGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new AndGateView(subcircuitEditor.getSubcircuitView(),
                            position,

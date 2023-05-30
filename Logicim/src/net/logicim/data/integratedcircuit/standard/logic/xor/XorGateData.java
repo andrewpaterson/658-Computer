@@ -52,7 +52,7 @@ public class XorGateData
   }
 
   @Override
-  public XorGateView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public XorGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new XorGateView(subcircuitEditor.getSubcircuitView(),
                            position,

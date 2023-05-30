@@ -54,7 +54,7 @@ public class InverterData
   }
 
   @Override
-  public InverterView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public InverterView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new InverterView(subcircuitEditor.getSubcircuitView(),
                             position,

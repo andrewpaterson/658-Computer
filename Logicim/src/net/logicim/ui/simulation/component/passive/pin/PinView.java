@@ -34,7 +34,6 @@ import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
@@ -461,9 +460,18 @@ public class PinView
     return labelView;
   }
 
-  public PortView getPortView()
+  @Override
+  public void newPlaced(SubcircuitView subcircuitView)
   {
-    return port;
+    super.newPlaced(subcircuitView);
+    PinPropertyHelper helper = new PinPropertyHelper(subcircuitView.findAllPins());
+    boolean updatedName = helper.ensureUniquePinName(properties);
+    helper.ensureNextWeight(properties);
+
+    if (updatedName)
+    {
+      labelView.setText(properties.name);
+    }
   }
 }
 

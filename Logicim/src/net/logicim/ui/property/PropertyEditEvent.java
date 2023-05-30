@@ -47,7 +47,7 @@ public class PropertyEditEvent
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
 
-    circuitEditor.placeComponentView(staticViews);
+    circuitEditor.recreateComponentView(staticViews);
 
     return staticView;
   }

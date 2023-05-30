@@ -36,7 +36,7 @@ public class GroundData
           selected);
   }
 
-  protected GroundView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  protected GroundView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     return new GroundView(subcircuitEditor.getSubcircuitView(),
                           position,

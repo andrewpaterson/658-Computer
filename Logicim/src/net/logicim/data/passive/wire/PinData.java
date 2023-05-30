@@ -72,7 +72,7 @@ public class PinData
   }
 
   @Override
-  protected PinView createComponentView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  protected PinView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     PinProperties properties = new PinProperties(name,
                                                  bitWidth,
@@ -84,12 +84,6 @@ public class PinData
                                                  FamilyStore.getInstance().get(family),
                                                  explicitPowerPorts,
                                                  radix);
-    if (!newComponentPropertyStep)
-    {
-      PinPropertyHelper helper = new PinPropertyHelper(subcircuitEditor.getSubcircuitView().findAllPins());
-      helper.ensureUniquePinName(properties);
-      helper.ensureNextWeight(properties);
-    }
     return new PinView(subcircuitEditor.getSubcircuitView(),
                        position,
                        rotation,

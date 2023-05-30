@@ -71,8 +71,16 @@ public class SubcircuitEditor
   public void doneMoveComponents(List<StaticView<?>> staticViews,
                                  List<TraceView> traceViews,
                                  Set<StaticView<?>> selectedViews,
-                                 CircuitSimulation circuitSimulation)
+                                 CircuitSimulation circuitSimulation,
+                                 boolean newComponents)
   {
+    if (newComponents)
+    {
+      for (StaticView<?> staticView : staticViews)
+      {
+        staticView.newPlaced(subcircuitView);
+      }
+    }
     List<View> newSelection = subcircuitView.doneMoveComponents(circuitSimulation,
                                                                 staticViews,
                                                                 traceViews,

@@ -109,9 +109,9 @@ public class SubcircuitInstanceView
     }
     else
     {
-      int xxx1 = maxGridHeight - size;
-      top -= xxx1 / 2;
-      bottom += xxx1 - (xxx1 / 2);
+      int height = maxGridHeight - size;
+      top -= height / 2;
+      bottom += height - (height / 2);
 
       leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, top, bottom);
       rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, top, bottom);

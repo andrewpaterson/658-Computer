@@ -465,7 +465,7 @@ public class PinView
   {
     super.newPlaced(subcircuitView);
     PinPropertyHelper helper = new PinPropertyHelper(subcircuitView.findAllPins());
-    boolean updatedName = helper.ensureUniquePinName(properties);
+    boolean updatedName = helper.ensureUniquePinName(this);
     helper.ensureNextWeight(properties);
 
     if (updatedName)

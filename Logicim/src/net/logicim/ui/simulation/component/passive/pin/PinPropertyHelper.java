@@ -12,14 +12,19 @@ import java.util.Map;
 public class PinPropertyHelper
 {
   private List<PinView> subCircuitPins;
+  private PinView pinView;
 
   public PinPropertyHelper(List<PinView> subCircuitPins)
   {
     this.subCircuitPins = subCircuitPins;
   }
 
-  public boolean ensureUniquePinName(PinProperties properties)
+  public boolean ensureUniquePinName(PinView pinView)
   {
+    this.pinView = pinView;
+
+    PinProperties properties = this.pinView.getProperties();
+
     String previousName = properties.name;
     properties.name = updatePinName(previousName);
     return !previousName.equals(properties.name);
@@ -100,7 +105,7 @@ public class PinPropertyHelper
     LinkedHashMap<String, List<PinViewNumber>> pinNamesMap = new LinkedHashMap<>();
     for (PinView pinView : subCircuitPins)
     {
-      if (pinView.isEnabled())
+      if (pinView.isEnabled() && pinView != this.pinView)
       {
         PinViewNumber pinViewNumber = createPinViewNumber(pinView, pinView.getProperties().name);
 
@@ -162,23 +167,26 @@ public class PinPropertyHelper
     Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> alignmentMap = new LinkedHashMap<>();
     for (PinView pinView : subCircuitPins)
     {
-      SubcircuitPinAlignment alignment = pinView.getProperties().alignment;
-      Map<SubcircuitPinAnchour, List<PinView>> anchourMap = alignmentMap.get(alignment);
-      if (anchourMap == null)
+      if (pinView.isEnabled() && pinView != this.pinView)
       {
-        anchourMap = new LinkedHashMap<>();
-        alignmentMap.put(alignment, anchourMap);
-      }
+        SubcircuitPinAlignment alignment = pinView.getProperties().alignment;
+        Map<SubcircuitPinAnchour, List<PinView>> anchourMap = alignmentMap.get(alignment);
+        if (anchourMap == null)
+        {
+          anchourMap = new LinkedHashMap<>();
+          alignmentMap.put(alignment, anchourMap);
+        }
 
-      SubcircuitPinAnchour anchour = pinView.getProperties().anchour;
-      List<PinView> pinViews = anchourMap.get(anchour);
-      if (pinViews == null)
-      {
-        pinViews = new ArrayList<>();
-        anchourMap.put(anchour, pinViews);
-      }
+        SubcircuitPinAnchour anchour = pinView.getProperties().anchour;
+        List<PinView> pinViews = anchourMap.get(anchour);
+        if (pinViews == null)
+        {
+          pinViews = new ArrayList<>();
+          anchourMap.put(anchour, pinViews);
+        }
 
-      pinViews.add(pinView);
+        pinViews.add(pinView);
+      }
     }
     return alignmentMap;
   }

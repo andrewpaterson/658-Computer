@@ -91,7 +91,7 @@ public class MoveComponents
                                                      newComponents);
     if (editAction.hasDiff() || newComponents)
     {
-      editAction.pushUndo();
+      editAction.circuitUpdated();
     }
   }
 

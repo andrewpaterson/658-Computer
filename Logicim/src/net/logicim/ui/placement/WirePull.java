@@ -66,7 +66,7 @@ public class WirePull
 
       editAction.getCircuitEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine), circuitSimulation);
 
-      editAction.pushUndo();
+      editAction.circuitUpdated();
     }
   }
 

@@ -11,6 +11,7 @@ import net.logicim.ui.simulation.selection.SelectionEdit;
 
 import java.awt.*;
 import java.util.HashSet;
+import java.util.List;
 
 public class StartEditInPort
     extends StatefulEdit
@@ -46,7 +47,7 @@ public class StartEditInPort
   public void done(float x, float y, EditAction editAction)
   {
     CircuitEditor circuitEditor = editAction.getCircuitEditor();
-    java.util.List<View> previousSelection = circuitEditor.getCurrentSelection().getSelection();
+    List<View> previousSelection = circuitEditor.getCurrentSelection().getSelection();
     boolean hasSelectionChanged = SelectionEdit.calculateSelection(circuitEditor, new Float2D(x, y), new Float2D(x, y), keyboardButtons, new HashSet<>(previousSelection));
     if (hasSelectionChanged)
     {

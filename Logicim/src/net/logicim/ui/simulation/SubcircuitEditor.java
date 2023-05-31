@@ -68,6 +68,14 @@ public class SubcircuitEditor
     subcircuitView.startMoveComponents(staticViews, traceViews, circuitSimulation);
   }
 
+  public void recreateComponentView(StaticView<?> staticView, CircuitSimulation circuitSimulation)
+  {
+    List<StaticView<?>> staticViews = new ArrayList<>();
+    staticViews.add(staticView);
+
+    doneMoveComponents(staticViews, new ArrayList<>(), new LinkedHashSet<>(), circuitSimulation, true);
+  }
+
   public void doneMoveComponents(List<StaticView<?>> staticViews,
                                  List<TraceView> traceViews,
                                  Set<StaticView<?>> selectedViews,

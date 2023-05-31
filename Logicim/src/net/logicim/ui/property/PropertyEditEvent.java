@@ -44,10 +44,8 @@ public class PropertyEditEvent
     CircuitEditor circuitEditor = editor.getCircuitEditor();
     circuitEditor.deleteComponentView(this.componentView);
     StaticView<?> staticView = componentView.duplicate(circuitEditor, properties);
-    List<StaticView<?>> staticViews = new ArrayList<>();
-    staticViews.add(staticView);
 
-    circuitEditor.recreateComponentView(staticViews);
+    circuitEditor.recreateComponentView(staticView);
 
     return staticView;
   }

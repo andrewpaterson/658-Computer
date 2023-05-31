@@ -2,11 +2,19 @@ package net.logicim.ui.placement;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
+import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.undo.Undo;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class EditAction
 {
@@ -138,6 +146,47 @@ public class EditAction
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     edit.paint(graphics, viewport);
+  }
+
+  public void circuitUpdated()
+  {
+    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+    SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getSubcircuitView();
+
+    SubcircuitOrderer orderer = new SubcircuitOrderer(circuitEditor.getSubcircuitEditors());
+    List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
+
+    if (orderedSubcircuitEditors != null)
+    {
+      for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
+      {
+        if (subcircuitEditor != currentSubcircuitEditor)
+        {
+          Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().getSubcircuitInstanceViews();
+          List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
+          for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+          {
+            if (subcircuitInstanceView.getInstanceSubcircuitView() == currentSubcircuitView)
+            {
+              instanceViews.add(subcircuitInstanceView);
+            }
+          }
+
+          for (SubcircuitInstanceView instanceView : instanceViews)
+          {
+            CircuitSimulation circuitSimulation = circuitEditor.getCircuitSimulation();
+            circuitEditor.deleteComponentView(instanceView, subcircuitEditor, circuitSimulation);
+
+            instanceView = (SubcircuitInstanceView) instanceView.duplicate(circuitEditor, instanceView.getProperties());
+
+            subcircuitEditor.recreateComponentView(instanceView, circuitSimulation);
+          }
+        }
+      }
+    }
+
+    circuitEditor.validateConsistency();
+    pushUndo();
   }
 }
 

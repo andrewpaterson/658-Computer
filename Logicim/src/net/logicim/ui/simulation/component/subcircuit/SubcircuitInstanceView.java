@@ -544,5 +544,10 @@ public class SubcircuitInstanceView
   private void updateTextViews()
   {
   }
+
+  public SubcircuitView getInstanceSubcircuitView()
+  {
+    return instanceSubcircuitView;
+  }
 }
 

@@ -354,9 +354,9 @@ public class CircuitEditor
     return currentSubcircuitEditor.pasteClipboardViews(traces, components);
   }
 
-  public void recreateComponentView(List<StaticView<?>> staticViews)
+  public void recreateComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitEditor.doneMoveComponents(staticViews, new ArrayList<>(), new LinkedHashSet<>(), getCircuitSimulation(), true);
+    currentSubcircuitEditor.recreateComponentView(staticView, getCircuitSimulation());
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
@@ -418,7 +418,12 @@ public class CircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitEditor.deleteComponentView(staticView, getCircuitSimulation());
+    deleteComponentView(staticView, currentSubcircuitEditor, getCircuitSimulation());
+  }
+
+  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, CircuitSimulation circuitSimulation)
+  {
+    subcircuitEditor.deleteComponentView(staticView, circuitSimulation);
   }
 
   public void validateConsistency()

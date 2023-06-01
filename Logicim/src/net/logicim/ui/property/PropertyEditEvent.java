@@ -33,7 +33,10 @@ public class PropertyEditEvent
     componentView.clampProperties(newComponentProperties);
     StaticView<?> newComponentView = recreateComponentView(newComponentProperties, editor.getCircuitEditor());
     editor.replaceSelectionInCurrentSubcircuitView(newComponentView, componentView);
+
+    editor.getCircuitEditor().circuitUpdated();
     editor.pushUndo();
+    editor.updateHighlighted();
   }
 
   protected StaticView<?> recreateComponentView(ComponentProperties properties, CircuitEditor circuitEditor)

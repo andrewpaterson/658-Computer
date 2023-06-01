@@ -28,7 +28,7 @@ public class SubcircuitInstanceViewFactory
                                        Int2D position,
                                        Rotation rotation)
   {
-    SubcircuitInstanceProperties defaultProperties = createDefaultProperties(getViewClass());
+    SubcircuitInstanceProperties defaultProperties = createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(), getViewClass(), true);
     defaultProperties.subcircuitTypeName = subcircuitTypeName;
     return create(
         circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,

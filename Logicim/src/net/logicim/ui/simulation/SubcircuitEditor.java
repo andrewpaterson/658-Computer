@@ -386,7 +386,7 @@ public class SubcircuitEditor
   public List<String> getSubcircuitInstanceNames()
   {
     Set<String> names = new HashSet<>();
-    Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
+    Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
       names.add(subcircuitInstanceView.getTypeName());
@@ -397,6 +397,11 @@ public class SubcircuitEditor
   public long getId()
   {
     return id;
+  }
+
+  public Set<StaticView<?>> findAllViewsOfClass(Class<? extends StaticView<?>> viewClass)
+  {
+    return subcircuitView.findAllViewsOfClass(viewClass);
   }
 
   public static void resetNextId()

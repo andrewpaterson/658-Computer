@@ -1020,7 +1020,7 @@ public class SubcircuitView
     return pinViews;
   }
 
-  public Set<SubcircuitInstanceView> getSubcircuitInstanceViews()
+  public Set<SubcircuitInstanceView> findAllSubcircuitInstanceViews()
   {
     HashSet<SubcircuitInstanceView> result = new HashSet<>();
     for (PassiveView<?, ?> passiveView : passiveViews)
@@ -1031,6 +1031,42 @@ public class SubcircuitView
       }
     }
     return result;
+  }
+
+  public Set<StaticView<?>> findAllViewsOfClass(Class<? extends StaticView<?>> viewClass)
+  {
+    Set<StaticView<?>> views = new LinkedHashSet<>();
+    if (DecorativeView.class.isAssignableFrom(viewClass))
+    {
+      for (DecorativeView<?> decorativeView : decorativeViews)
+      {
+        if (viewClass.isAssignableFrom(decorativeView.getClass()))
+        {
+          views.add(decorativeView);
+        }
+      }
+    }
+    else if (IntegratedCircuitView.class.isAssignableFrom(viewClass))
+    {
+      for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
+      {
+        if (viewClass.isAssignableFrom(integratedCircuitView.getClass()))
+        {
+          views.add(integratedCircuitView);
+        }
+      }
+    }
+    else if (PassiveView.class.isAssignableFrom(viewClass))
+    {
+      for (PassiveView<?, ?> passiveView : passiveViews)
+      {
+        if (viewClass.isAssignableFrom(passiveView.getClass()))
+        {
+          views.add(passiveView);
+        }
+      }
+    }
+    return views;
   }
 }
 

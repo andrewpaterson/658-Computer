@@ -24,7 +24,7 @@ public class SplitterViewFactory
     return create(
         circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
         rotation,
-        createDefaultProperties(getViewClass()));
+        createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(), getViewClass(), true));
   }
 
   @Override

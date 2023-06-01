@@ -18,7 +18,7 @@ public class PositivePowerViewFactory
     return create(
         circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
         rotation,
-        createDefaultProperties(getViewClass()));
+        createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(), getViewClass(), true));
   }
 
   @Override

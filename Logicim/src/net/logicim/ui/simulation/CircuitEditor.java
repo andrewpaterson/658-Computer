@@ -620,7 +620,7 @@ public class CircuitEditor
 
   protected List<SubcircuitInstanceView> getSubcircuitInstanceView(SubcircuitView currentSubcircuitView, SubcircuitView containingSubcircuitView)
   {
-    Set<SubcircuitInstanceView> subcircuitInstanceViews = containingSubcircuitView.getSubcircuitInstanceViews();
+    Set<SubcircuitInstanceView> subcircuitInstanceViews = containingSubcircuitView.findAllSubcircuitInstanceViews();
 
     List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)

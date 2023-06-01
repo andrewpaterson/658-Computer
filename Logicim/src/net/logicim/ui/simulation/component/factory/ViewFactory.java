@@ -10,20 +10,25 @@ import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.property.ReflectivePropertyEditorDialog;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.component.passive.pin.ComponentNameHelper;
 
 import javax.swing.*;
+import java.util.Set;
 
 public abstract class ViewFactory<STATIC extends StaticView<PROPERTIES>, PROPERTIES extends ComponentProperties>
 {
-  public abstract STATIC create(CircuitEditor circuitEditor, Int2D position, Rotation rotation);
-
-  protected PROPERTIES createDefaultProperties(Class<STATIC> viewClass)
+  protected PROPERTIES createDefaultProperties(SubcircuitEditor subcircuitEditor, Class<STATIC> viewClass, boolean updateName)
   {
     PROPERTIES defaultProperties = DefaultComponentProperties.get(viewClass);
     if (defaultProperties != null)
     {
       PROPERTIES properties = (PROPERTIES) defaultProperties.duplicate();
-      properties.name = "";
+      if (updateName)
+      {
+        Set<StaticView<?>> staticViews = subcircuitEditor.findAllViewsOfClass(viewClass);
+        properties.name = new ComponentNameHelper().getUniqueName(staticViews, properties.name);
+      }
       return properties;
     }
     else
@@ -31,6 +36,8 @@ public abstract class ViewFactory<STATIC extends StaticView<PROPERTIES>, PROPERT
       return createInitialProperties();
     }
   }
+
+  public abstract STATIC create(CircuitEditor circuitEditor, Int2D position, Rotation rotation);
 
   public abstract PROPERTIES createInitialProperties();
 

@@ -25,7 +25,7 @@ public class OscilloscopeViewFactory
     return create(
         circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
         Rotation.Cannot,
-        createDefaultProperties(getViewClass()));
+        createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(), getViewClass(), true));
   }
 
   @Override

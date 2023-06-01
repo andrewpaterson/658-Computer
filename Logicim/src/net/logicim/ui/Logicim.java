@@ -1042,7 +1042,7 @@ public class Logicim
 
     for (SubcircuitEditor subcircuitEditor : circuitEditor.getSubcircuitEditors())
     {
-      Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().getSubcircuitInstanceViews();
+      Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().findAllSubcircuitInstanceViews();
       for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
       {
         if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
@@ -1067,7 +1067,7 @@ public class Logicim
 
       for (SubcircuitEditor subcircuitEditor : circuitEditor.getSubcircuitEditors())
       {
-        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().getSubcircuitInstanceViews();
+        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().findAllSubcircuitInstanceViews();
         for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
         {
           if (subcircuitInstanceView.getTypeName().equals(oldSubcircuitTypeName))

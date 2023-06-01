@@ -13,7 +13,14 @@ public class DeleteAction
   @Override
   public void executeEditorAction()
   {
-    editor.editActionDelete();
+    boolean componentDeleted = editor.editActionDeleteComponentIfPossible();
+    if (componentDeleted)
+    {
+      editor.getCircuitEditor().circuitUpdated();
+      editor.pushUndo();
+    }
+
+    editor.updateHighlighted();
   }
 
   @Override

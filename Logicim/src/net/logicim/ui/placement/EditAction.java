@@ -2,19 +2,11 @@ package net.logicim.ui.placement;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.SubcircuitEditor;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
-import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.undo.Undo;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class EditAction
 {
@@ -150,60 +142,8 @@ public class EditAction
 
   public void circuitUpdated()
   {
-    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
-    SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getSubcircuitView();
-
-    SubcircuitOrderer orderer = new SubcircuitOrderer(circuitEditor.getSubcircuitEditors());
-    List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
-
-    int numChanges = 0;
-    if (orderedSubcircuitEditors != null)
-    {
-      for (SubcircuitEditor containingSubcircuitEditor : orderedSubcircuitEditors)
-      {
-        if (containingSubcircuitEditor != currentSubcircuitEditor)
-        {
-          SubcircuitView containingSubcircuitView = containingSubcircuitEditor.getSubcircuitView();
-
-          List<SubcircuitInstanceView> instanceViews = getSubcircuitInstanceView(currentSubcircuitView, containingSubcircuitView);
-
-          for (SubcircuitInstanceView instanceView : instanceViews)
-          {
-            CircuitSimulation circuitSimulation = circuitEditor.getCircuitSimulation();
-            circuitEditor.deleteComponentView(instanceView, containingSubcircuitEditor, circuitSimulation);
-
-            instanceView = (SubcircuitInstanceView) instanceView.duplicate(circuitEditor,
-                                                                           containingSubcircuitView,
-                                                                           instanceView.getProperties());
-            containingSubcircuitEditor.recreateComponentView(instanceView, circuitSimulation);
-
-          }
-          numChanges += instanceViews.size();
-        }
-      }
-    }
-
-    if (numChanges > 0)
-    {
-      circuitEditor.validateConsistency();
-    }
-
+    circuitEditor.circuitUpdated();
     pushUndo();
-  }
-
-  protected List<SubcircuitInstanceView> getSubcircuitInstanceView(SubcircuitView currentSubcircuitView, SubcircuitView containingSubcircuitView)
-  {
-    Set<SubcircuitInstanceView> subcircuitInstanceViews = containingSubcircuitView.getSubcircuitInstanceViews();
-
-    List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
-    {
-      if (subcircuitInstanceView.getInstanceSubcircuitView() == currentSubcircuitView)
-      {
-        instanceViews.add(subcircuitInstanceView);
-      }
-    }
-    return instanceViews;
   }
 }
 

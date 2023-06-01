@@ -204,8 +204,15 @@ public class Logicim
                                            edit,
                                            circuitEditor,
                                            this);
-    clearHover();
+    updateHighlighted();
+
     return editAction;
+  }
+
+  public void updateHighlighted()
+  {
+    clearHover();
+    calculateHighlightedPort();
   }
 
   protected Float2D toFloatingGridPosition(float x, float y)
@@ -701,19 +708,7 @@ public class Logicim
     }
   }
 
-  public void editActionDelete()
-  {
-    boolean componentDeleted = editActionDeleteComponentIfPossible();
-    if (componentDeleted)
-    {
-      pushUndo();
-    }
-
-    clearHover();
-    calculateHighlightedPort();
-  }
-
-  protected boolean editActionDeleteComponentIfPossible()
+  public boolean editActionDeleteComponentIfPossible()
   {
     if (circuitEditor.getCurrentSelection().isSelectionEmpty())
     {

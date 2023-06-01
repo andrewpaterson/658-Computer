@@ -23,6 +23,7 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 
@@ -565,6 +566,71 @@ public class CircuitEditor
   public TopLevelSubcircuitSimulation getCurrentTopLevelSimulation()
   {
     return currentSimulation;
+  }
+
+  public void circuitUpdated()
+  {
+    SubcircuitEditor currentSubcircuitEditor = getCurrentSubcircuitEditor();
+    SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getSubcircuitView();
+
+    SubcircuitOrderer orderer = new SubcircuitOrderer(getSubcircuitEditors());
+    List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
+
+    Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = getSubcircuitInstanceViewsInSubcircuitEditor(currentSubcircuitEditor, currentSubcircuitView, orderedSubcircuitEditors);
+
+    recreateSubcircuitInstanceViews(map);
+  }
+
+  protected void recreateSubcircuitInstanceViews(Map<SubcircuitEditor, List<SubcircuitInstanceView>> map)
+  {
+    for (Map.Entry<SubcircuitEditor, List<SubcircuitInstanceView>> entry : map.entrySet())
+    {
+      SubcircuitEditor containingSubcircuitEditor = entry.getKey();
+      List<SubcircuitInstanceView> instanceViews = entry.getValue();
+      for (SubcircuitInstanceView instanceView : instanceViews)
+      {
+        CircuitSimulation currentSimulation = getCircuitSimulation();
+        deleteComponentView(instanceView, containingSubcircuitEditor, currentSimulation);
+
+        instanceView = (SubcircuitInstanceView) instanceView.duplicate(this,
+                                                                       containingSubcircuitEditor.getSubcircuitView(),
+                                                                       instanceView.getProperties());
+        containingSubcircuitEditor.recreateComponentView(instanceView, currentSimulation);
+      }
+    }
+  }
+
+  protected Map<SubcircuitEditor, List<SubcircuitInstanceView>> getSubcircuitInstanceViewsInSubcircuitEditor(SubcircuitEditor currentSubcircuitEditor, SubcircuitView currentSubcircuitView, List<SubcircuitEditor> orderedSubcircuitEditors)
+  {
+    Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = new LinkedHashMap<>();
+    if (orderedSubcircuitEditors != null)
+    {
+      for (SubcircuitEditor containingSubcircuitEditor : orderedSubcircuitEditors)
+      {
+        if (containingSubcircuitEditor != currentSubcircuitEditor)
+        {
+          List<SubcircuitInstanceView> instanceViews = getSubcircuitInstanceView(currentSubcircuitView,
+                                                                                 containingSubcircuitEditor.getSubcircuitView());
+          map.put(containingSubcircuitEditor, instanceViews);
+        }
+      }
+    }
+    return map;
+  }
+
+  protected List<SubcircuitInstanceView> getSubcircuitInstanceView(SubcircuitView currentSubcircuitView, SubcircuitView containingSubcircuitView)
+  {
+    Set<SubcircuitInstanceView> subcircuitInstanceViews = containingSubcircuitView.getSubcircuitInstanceViews();
+
+    List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      if (subcircuitInstanceView.getInstanceSubcircuitView() == currentSubcircuitView)
+      {
+        instanceViews.add(subcircuitInstanceView);
+      }
+    }
+    return instanceViews;
   }
 }
 

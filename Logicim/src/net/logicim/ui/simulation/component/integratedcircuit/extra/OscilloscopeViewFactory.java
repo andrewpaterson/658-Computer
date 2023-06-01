@@ -22,10 +22,10 @@ public class OscilloscopeViewFactory
                                  Int2D position,
                                  Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  Rotation.Cannot,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        Rotation.Cannot,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -42,11 +42,11 @@ public class OscilloscopeViewFactory
 
   @Override
   public OscilloscopeView create(CircuitEditor circuitEditor,
+                                 SubcircuitView subcircuitView,
                                  Int2D position,
                                  Rotation rotation,
                                  OscilloscopeProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new OscilloscopeView(subcircuitView,
                                 position,
                                 rotation,

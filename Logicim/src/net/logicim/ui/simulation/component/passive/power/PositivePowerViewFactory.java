@@ -15,10 +15,10 @@ public class PositivePowerViewFactory
                                   Int2D position,
                                   Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -29,11 +29,11 @@ public class PositivePowerViewFactory
 
   @Override
   public PositivePowerView create(CircuitEditor circuitEditor,
+                                  SubcircuitView subcircuitView,
                                   Int2D position,
                                   Rotation rotation,
                                   PositivePowerProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new PositivePowerView(subcircuitView,
                                  position,
                                  rotation,

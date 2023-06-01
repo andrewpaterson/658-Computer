@@ -248,12 +248,14 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     boundingBox.grow(0.5f);
   }
 
-  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor, PROPERTIES properties)
+  public StaticView<PROPERTIES> duplicate(CircuitEditor circuitEditor,
+                                          SubcircuitView subcircuitView,
+                                          PROPERTIES properties)
   {
     Class<? extends StaticView<?>> aClass = (Class<? extends StaticView<?>>) getClass();
     ViewFactory viewFactory = ViewFactoryStore.getInstance().get(aClass);
-    StaticView<PROPERTIES> newComponentView = viewFactory.create(circuitEditor, position, rotation, properties);
-    newComponentView.updateId();
+    StaticView<PROPERTIES> newComponentView = viewFactory.create(circuitEditor, subcircuitView, position, rotation, properties);
+    newComponentView.setId(id);
 
     return newComponentView;
   }

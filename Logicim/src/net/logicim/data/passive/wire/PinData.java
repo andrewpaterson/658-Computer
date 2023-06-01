@@ -10,10 +10,8 @@ import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.SubcircuitEditor;
-import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 

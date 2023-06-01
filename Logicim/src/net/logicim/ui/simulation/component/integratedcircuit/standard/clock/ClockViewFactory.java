@@ -17,10 +17,10 @@ public class ClockViewFactory
                           Int2D position,
                           Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -34,11 +34,12 @@ public class ClockViewFactory
   }
 
   @Override
-  public ClockView create(CircuitEditor circuitEditor, Int2D position,
+  public ClockView create(CircuitEditor circuitEditor,
+                          SubcircuitView subcircuitView,
+                          Int2D position,
                           Rotation rotation,
                           ClockProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new ClockView(subcircuitView,
                          position,
                          rotation,

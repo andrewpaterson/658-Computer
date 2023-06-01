@@ -19,10 +19,10 @@ public class PinViewFactory
                         Int2D position,
                         Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -42,11 +42,11 @@ public class PinViewFactory
 
   @Override
   public PinView create(CircuitEditor circuitEditor,
+                        SubcircuitView subcircuitView,
                         Int2D position,
                         Rotation rotation,
                         PinProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new PinView(subcircuitView,
                        position,
                        rotation,

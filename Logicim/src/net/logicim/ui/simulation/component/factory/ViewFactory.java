@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.factory;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.Logicim;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.DefaultComponentProperties;
@@ -33,7 +34,11 @@ public abstract class ViewFactory<STATIC extends StaticView<PROPERTIES>, PROPERT
 
   public abstract PROPERTIES createInitialProperties();
 
-  public abstract STATIC create(CircuitEditor circuitEditor, Int2D position, Rotation rotation, PROPERTIES properties);
+  public abstract STATIC create(CircuitEditor circuitEditor,
+                                SubcircuitView subcircuitView,
+                                Int2D position,
+                                Rotation rotation,
+                                PROPERTIES properties);
 
   public abstract Class<STATIC> getViewClass();
 

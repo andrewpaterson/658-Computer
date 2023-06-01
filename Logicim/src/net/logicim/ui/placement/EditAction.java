@@ -156,37 +156,54 @@ public class EditAction
     SubcircuitOrderer orderer = new SubcircuitOrderer(circuitEditor.getSubcircuitEditors());
     List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
 
+    int numChanges = 0;
     if (orderedSubcircuitEditors != null)
     {
-      for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
+      for (SubcircuitEditor containingSubcircuitEditor : orderedSubcircuitEditors)
       {
-        if (subcircuitEditor != currentSubcircuitEditor)
+        if (containingSubcircuitEditor != currentSubcircuitEditor)
         {
-          Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().getSubcircuitInstanceViews();
-          List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
-          for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
-          {
-            if (subcircuitInstanceView.getInstanceSubcircuitView() == currentSubcircuitView)
-            {
-              instanceViews.add(subcircuitInstanceView);
-            }
-          }
+          SubcircuitView containingSubcircuitView = containingSubcircuitEditor.getSubcircuitView();
+
+          List<SubcircuitInstanceView> instanceViews = getSubcircuitInstanceView(currentSubcircuitView, containingSubcircuitView);
 
           for (SubcircuitInstanceView instanceView : instanceViews)
           {
             CircuitSimulation circuitSimulation = circuitEditor.getCircuitSimulation();
-            circuitEditor.deleteComponentView(instanceView, subcircuitEditor, circuitSimulation);
+            circuitEditor.deleteComponentView(instanceView, containingSubcircuitEditor, circuitSimulation);
 
-            instanceView = (SubcircuitInstanceView) instanceView.duplicate(circuitEditor, instanceView.getProperties());
+            instanceView = (SubcircuitInstanceView) instanceView.duplicate(circuitEditor,
+                                                                           containingSubcircuitView,
+                                                                           instanceView.getProperties());
+            containingSubcircuitEditor.recreateComponentView(instanceView, circuitSimulation);
 
-            subcircuitEditor.recreateComponentView(instanceView, circuitSimulation);
           }
+          numChanges += instanceViews.size();
         }
       }
     }
 
-    circuitEditor.validateConsistency();
+    if (numChanges > 0)
+    {
+      circuitEditor.validateConsistency();
+    }
+
     pushUndo();
+  }
+
+  protected List<SubcircuitInstanceView> getSubcircuitInstanceView(SubcircuitView currentSubcircuitView, SubcircuitView containingSubcircuitView)
+  {
+    Set<SubcircuitInstanceView> subcircuitInstanceViews = containingSubcircuitView.getSubcircuitInstanceViews();
+
+    List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      if (subcircuitInstanceView.getInstanceSubcircuitView() == currentSubcircuitView)
+      {
+        instanceViews.add(subcircuitInstanceView);
+      }
+    }
+    return instanceViews;
   }
 }
 

@@ -16,10 +16,10 @@ public class AndGateViewFactory
                             Int2D position,
                             Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -34,11 +34,11 @@ public class AndGateViewFactory
 
   @Override
   public AndGateView create(CircuitEditor circuitEditor,
+                            SubcircuitView subcircuitView,
                             Int2D position,
                             Rotation rotation,
                             LogicGateProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new AndGateView(subcircuitView,
                            position,
                            rotation,

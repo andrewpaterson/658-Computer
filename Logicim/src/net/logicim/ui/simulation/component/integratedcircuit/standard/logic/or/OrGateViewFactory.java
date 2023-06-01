@@ -16,10 +16,10 @@ public class OrGateViewFactory
                            Int2D position,
                            Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -34,11 +34,11 @@ public class OrGateViewFactory
 
   @Override
   public OrGateView create(CircuitEditor circuitEditor,
+                           SubcircuitView subcircuitView,
                            Int2D position,
                            Rotation rotation,
                            LogicGateProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new OrGateView(subcircuitView,
                           position,
                           rotation,

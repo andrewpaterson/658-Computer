@@ -16,10 +16,10 @@ public class BufferViewFactory
                            Int2D position,
                            Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -34,11 +34,11 @@ public class BufferViewFactory
 
   @Override
   public BufferView create(CircuitEditor circuitEditor,
+                           SubcircuitView subcircuitView,
                            Int2D position,
                            Rotation rotation,
                            BufferProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new BufferView(subcircuitView,
                           position,
                           rotation,

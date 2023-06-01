@@ -16,10 +16,10 @@ public class LabelViewFactory
                           Int2D position,
                           Rotation rotation)
   {
-    return create(circuitEditor,
-                  position,
-                  rotation,
-                  createDefaultProperties(getViewClass()));
+    return create(
+        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
+        rotation,
+        createDefaultProperties(getViewClass()));
   }
 
   @Override
@@ -34,11 +34,11 @@ public class LabelViewFactory
 
   @Override
   public LabelView create(CircuitEditor circuitEditor,
+                          SubcircuitView subcircuitView,
                           Int2D position,
                           Rotation rotation,
                           LabelProperties properties)
   {
-    SubcircuitView subcircuitView = circuitEditor.getCurrentSubcircuitView();
     return new LabelView(subcircuitView,
                          position,
                          rotation,

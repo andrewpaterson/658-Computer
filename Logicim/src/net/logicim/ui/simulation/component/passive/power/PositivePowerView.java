@@ -41,7 +41,7 @@ public class PositivePowerView
     float yBottom = -1f;
     float radius = 0.9f;
     rectangle = new RectangleView(this, new Float2D(-radius, yBottom + 0.4f), new Float2D(radius, yTop), true, true);
-    polygonView = new PolygonView(this, getFillColour(), true, true, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
+    polygonView = new PolygonView(this, getFillColour(), true, true, 2.0f, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
   }
 
   private Color getFillColour()

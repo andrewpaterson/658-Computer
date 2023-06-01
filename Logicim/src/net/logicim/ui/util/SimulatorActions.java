@@ -60,6 +60,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Up, Up, Down));
     editor.addAction(new InputAction(new UndoAction(editor), KeyEvent.VK_Z, Up, Up, Down));
     editor.addAction(new InputAction(new RedoAction(editor), KeyEvent.VK_Y, Up, Up, Down));
+    editor.addAction(new InputAction(new ResetZoomAction(editor), KeyEvent.VK_0, Up, Up, Down));
 
     editor.addAction(new InputAction(new MoveAction(editor), KeyEvent.VK_M, Up, Up, Up));
     editor.addAction(new InputAction(new CopyAction(editor), KeyEvent.VK_C, Up, Up, Down));
@@ -75,7 +76,7 @@ public class SimulatorActions
     editor.addAction(new InputAction(new ReenterSubcircuitAction(editor), KeyEvent.VK_ENTER, Down, Up, Up));
     editor.addAction(new InputAction(new EditSubcircuitAction(editor, panel), KeyEvent.VK_E, Up, Down, Down));
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 1; i < 10; i++)
     {
       editor.addAction(new InputAction(new BookmarkSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Down));
       editor.addAction(new InputAction(new GotoSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Up));

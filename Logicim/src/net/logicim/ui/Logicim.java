@@ -1178,5 +1178,13 @@ public class Logicim
     Collections.sort(result);
     return result;
   }
+
+  public void resetZoom()
+  {
+    viewport.resetZoom(mousePosition.get());
+    setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
+
+    calculateHighlightedPort();
+  }
 }
 

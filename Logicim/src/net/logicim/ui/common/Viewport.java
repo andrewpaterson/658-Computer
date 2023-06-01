@@ -188,7 +188,12 @@ public class Viewport
   public void zoomTo(Int2D mousePosition, float zoom)
   {
     Float2D positionInGrid = transformScreenSpaceToGrid(mousePosition);
-    zoom(zoom);
+    relativeZoom(zoom);
+    centerOnZoom(mousePosition, positionInGrid);
+  }
+
+  protected void centerOnZoom(Int2D mousePosition, Float2D positionInGrid)
+  {
     Float2D positionInGridZoomed = transformScreenSpaceToGrid(mousePosition);
     positionInGrid.subtract(positionInGridZoomed);
     int width = transformGridToScreenWidth(positionInGrid.x);
@@ -196,7 +201,15 @@ public class Viewport
     position.subtract(width, height);
   }
 
-  public void zoom(float zoom)
+  public void setZoomTo(Int2D mousePosition, float zoom)
+  {
+    Float2D positionInGrid = transformScreenSpaceToGrid(mousePosition);
+    this.zoom = zoom;
+    relativeZoom(0);
+    centerOnZoom(mousePosition, positionInGrid);
+  }
+
+  public void relativeZoom(float zoom)
   {
     this.zoom -= zoom;
     if (this.zoom < 0.2f)
@@ -213,12 +226,6 @@ public class Viewport
   {
     return new Float2D(p.x * SCALE * zoom + size.getWidth() / 2.0f + position.x,
                        p.y * SCALE * zoom + size.getHeight() / 2.0f + position.y);
-  }
-
-  public Int2D transformGridToScreenSpace(Int2D p)
-  {
-    return new Int2D(Math.round(p.x * SCALE * zoom + size.getWidth() / 2.0f + position.x),
-                     Math.round((p.y * SCALE * zoom + size.getHeight() / 2.0f + position.y)));
   }
 
   public Float2D transformScreenSpaceToGrid(Int2D p)
@@ -380,6 +387,11 @@ public class Viewport
   public Float2D getPosition()
   {
     return position;
+  }
+
+  public void resetZoom(Int2D mousePosition)
+  {
+    setZoomTo(mousePosition, 1.0f);
   }
 }
 

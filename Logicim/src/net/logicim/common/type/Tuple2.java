@@ -85,5 +85,6 @@ public abstract class Tuple2
 
   public abstract int getIntX();
 
+  public abstract Int2D cloneAsInt2D();
 }
 

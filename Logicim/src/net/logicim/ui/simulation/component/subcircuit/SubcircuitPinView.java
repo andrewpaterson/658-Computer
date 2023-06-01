@@ -1,11 +1,15 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
+import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
+import net.logicim.ui.shape.circle.CircleView;
+import net.logicim.ui.shape.common.ShapeView;
+import net.logicim.ui.shape.line.LineView;
 import net.logicim.ui.shape.point.PointGridCache;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
@@ -24,6 +28,7 @@ public class SubcircuitPinView
   protected PointGridCache positionCache;
 
   protected TextView textView;
+  protected ShapeView shapeView;
 
   public SubcircuitPinView(PinView pinView,
                            SubcircuitInstanceView subcircuitInstanceView,
@@ -36,21 +41,40 @@ public class SubcircuitPinView
     this.pinView = pinView;
     this.subcircuitInstanceView = subcircuitInstanceView;
     this.portView = null;
-    this.positionRelativeToIC = positionRelativeToIC.clone();
+    this.positionRelativeToIC = calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, -1.0f).cloneAsInt2D();
     this.positionCache = new PointGridCache(positionRelativeToIC);
     this.textView = new TextView(subcircuitInstanceView,
-                                 positionRelativeToIC,
+                                 calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, 0.5f),
                                  pinView.getName(),
                                  fontName,
                                  size,
                                  false,
                                  horizontalAlignment);
     this.textView.setAdditionalRotations(additionalRotations);
+    this.shapeView = createPinShape(pinView, subcircuitInstanceView, positionRelativeToIC, horizontalAlignment, additionalRotations);
   }
 
-  public Int2D getPinPosition()
+  protected ShapeView createPinShape(PinView pinView, SubcircuitInstanceView subcircuitInstanceView, Int2D positionRelativeToIC, HorizontalAlignment horizontalAlignment, int additionalRotations)
   {
-    return pinView.getRelativeInstancePosition();
+    if (!pinView.getProperties().inverting)
+    {
+      return new LineView(subcircuitInstanceView, this.positionRelativeToIC, positionRelativeToIC);
+    }
+    else
+    {
+      return new CircleView(subcircuitInstanceView, calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, -0.5f), 0.5f, true, false);
+    }
+  }
+
+  protected Float2D calculatePosition(Int2D positionRelativeToIC, HorizontalAlignment horizontalAlignment, int additionalRotations, float offset)
+  {
+    Float2D clone = new Float2D(positionRelativeToIC);
+    Float2D offset2D = new Float2D(0.0f, offset * horizontalAlignment.getModifier());
+    Rotation rotation = Rotation.North;
+    rotation = rotation.rotateRight(additionalRotations);
+    rotation.transform(offset2D);
+    clone.add(offset2D);
+    return clone;
   }
 
   public void updateGridCache()
@@ -64,9 +88,7 @@ public class SubcircuitPinView
   public void paint(Graphics2D graphics, Viewport viewport)
   {
     textView.paint(graphics, viewport);
-
-    updateGridCache();
-    Tuple2 transformedPosition = positionCache.getTransformedPosition();
+    shapeView.paint(graphics, viewport);
   }
 
   public void disconnect()

@@ -272,6 +272,12 @@ public class Float2D
   }
 
   @Override
+  public Int2D cloneAsInt2D()
+  {
+    return new Int2D(x, y);
+  }
+
+  @Override
   public int getIntY()
   {
     return (int) y;

@@ -290,6 +290,12 @@ public class Int2D
     return x;
   }
 
+  @Override
+  public Int2D cloneAsInt2D()
+  {
+    return clone();
+  }
+
   public static Int2D safeClone(Int2D d)
   {
     if (d != null)

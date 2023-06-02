@@ -27,7 +27,7 @@ public class ButtonBarPanel
 
   protected Dimension defaultButtonBarSize()
   {
-    return new Dimension(32 + 4, 32 + 4);
+    return new Dimension(32 + 8, 32 + 8);
   }
 }
 

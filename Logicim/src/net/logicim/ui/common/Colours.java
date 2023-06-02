@@ -40,6 +40,11 @@ public class Colours
   protected Color panelBorder;
   protected Color panelInfoBorder;
 
+  protected Color buttonRolloverBackground;
+  protected Color buttonRolloverBorder;
+  protected Color buttonPressedBackground;
+  protected Color buttonPressedBorder;
+
   protected static Colours instance;
 
   public Colours()
@@ -83,6 +88,11 @@ public class Colours
     panelBackground = new Color(240, 240, 240);
     panelBorder = new Color(165, 165, 165);
     panelInfoBorder = new Color(215, 215, 215);
+
+    buttonRolloverBackground = new Color(216, 220, 243);
+    buttonRolloverBorder = new Color(192, 220, 243);
+    buttonPressedBackground = new Color(192, 220, 243);
+    buttonPressedBorder = new Color(144, 200, 246);
   }
 
   public static Colours getInstance()
@@ -220,6 +230,26 @@ public class Colours
   public Color getPanelInfoBorder()
   {
     return panelInfoBorder;
+  }
+
+  public Color getButtonRolloverBackground()
+  {
+    return buttonRolloverBackground;
+  }
+
+  public Color getButtonRolloverBorder()
+  {
+    return buttonRolloverBorder;
+  }
+
+  public Color getButtonPressedBackground()
+  {
+    return buttonPressedBackground;
+  }
+
+  public Color getButtonPressedBorder()
+  {
+    return buttonPressedBorder;
   }
 }
 

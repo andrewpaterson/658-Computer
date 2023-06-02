@@ -1,10 +1,10 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
 import net.logicim.ui.circuit.EditSubcircuitDialog;
 import net.logicim.ui.circuit.EditorDialogHelper;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.panels.SimulatorPanel;
 
 public class EditSubcircuitAction
     extends SimulatorEditorAction

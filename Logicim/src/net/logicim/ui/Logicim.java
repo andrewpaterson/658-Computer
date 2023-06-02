@@ -29,6 +29,7 @@ import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
+import net.logicim.ui.panels.SimulatorPanel;
 import net.logicim.ui.placement.*;
 import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -1185,6 +1186,11 @@ public class Logicim
     setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
 
     calculateHighlightedPort();
+  }
+
+  public void setRunning(boolean running)
+  {
+    this.running = running;
   }
 }
 

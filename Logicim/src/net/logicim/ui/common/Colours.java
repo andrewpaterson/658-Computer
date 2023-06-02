@@ -36,6 +36,10 @@ public class Colours
   protected Color infoBackground;
   protected Color infoBorder;
 
+  protected Color panelBackground;
+  protected Color panelBorder;
+  protected Color panelInfoBorder;
+
   protected static Colours instance;
 
   public Colours()
@@ -75,6 +79,10 @@ public class Colours
 
     infoBackground = new Color(220, 220, 220);
     infoBorder = new Color(128, 128, 128);
+
+    panelBackground = new Color(240, 240, 240);
+    panelBorder = new Color(165, 165, 165);
+    panelInfoBorder = new Color(192, 192, 192);
   }
 
   public static Colours getInstance()
@@ -197,6 +205,21 @@ public class Colours
   public Color getInfoBorder()
   {
     return infoBorder;
+  }
+
+  public Color getPanelBorder()
+  {
+    return panelBorder;
+  }
+
+  public Color getPanelBackground()
+  {
+    return panelBackground;
+  }
+
+  public Color getPanelInfoBorder()
+  {
+    return panelInfoBorder;
   }
 }
 

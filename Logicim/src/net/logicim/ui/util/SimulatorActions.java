@@ -1,7 +1,7 @@
 package net.logicim.ui.util;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.SimulatorPanel;
+import net.logicim.ui.panels.SimulatorPanel;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.action.InputAction;

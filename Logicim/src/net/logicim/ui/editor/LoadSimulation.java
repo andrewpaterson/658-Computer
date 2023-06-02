@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.ui.SimulatorPanel;
+import net.logicim.ui.panels.SimulatorPanel;
 
 public class LoadSimulation
     extends EditorAction

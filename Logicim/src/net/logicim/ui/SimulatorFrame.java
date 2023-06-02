@@ -4,6 +4,8 @@ import net.logicim.common.reflect.ClassInspector;
 import net.logicim.common.reflect.EnumStore;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.SaveData;
+import net.logicim.ui.panels.*;
+import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
@@ -11,17 +13,38 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
+import static java.awt.GridBagConstraints.*;
+
 public class SimulatorFrame
     extends JFrame
     implements WindowListener,
                KeyListener
 {
   private SimulatorPanel simulatorPanel;
+  private ToolbarPanel toolbarPanel;
+  private DisplayPanel displayPanel;
+  private CreationPanel creationPanel;
+  private SelectedInfoPanel selectedInfoPanel;
+  private CircuitInfoPanel circuitInfoPanel;
 
   public SimulatorFrame() throws HeadlessException
   {
     simulatorPanel = new SimulatorPanel(this);
-    add(simulatorPanel);
+    toolbarPanel = new ToolbarPanel(this);
+    displayPanel = new DisplayPanel(this);
+    creationPanel = new CreationPanel(this);
+    selectedInfoPanel = new SelectedInfoPanel(this);
+    circuitInfoPanel = new CircuitInfoPanel(this);
+
+    setLayout(new GridBagLayout());
+    add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row
+
+    add(displayPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 1, VERTICAL));          // Display settings
+    add(simulatorPanel, GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
+    add(creationPanel, GridBagUtil.gridBagConstraints(2, 1, 0, 1, VERTICAL));          // Object creation
+
+    add(selectedInfoPanel, GridBagUtil.gridBagConstraints(0, 2, 1, 0, HORIZONTAL, 3, 1));  // Selected object info row
+    add(circuitInfoPanel, GridBagUtil.gridBagConstraints(0, 3, 1, 0, HORIZONTAL, 3, 1));  // Simulation info row
 
     JMenuBar menuBar;
     JMenu menu;

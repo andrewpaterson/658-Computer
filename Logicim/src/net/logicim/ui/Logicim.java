@@ -1080,6 +1080,18 @@ public class Logicim
     }
   }
 
+  private void setViewportParameters(String subcircuitTypeName)
+  {
+    if (!StringUtil.isEmptyOrNull(subcircuitTypeName))
+    {
+      SubcircuitViewParameters parameters = this.subcircuitViewParameters.get(subcircuitTypeName);
+      if (parameters != null)
+      {
+        viewport.setParameters(parameters.getPosition(), parameters.getZoom());
+      }
+    }
+  }
+
   public void gotoSubcircuit(int bookmarkIndex)
   {
     SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkIndex);
@@ -1093,18 +1105,7 @@ public class Logicim
 
       String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor);
       setViewportParameters(subcircuitTypeName);
-    }
-  }
-
-  private void setViewportParameters(String subcircuitTypeName)
-  {
-    if (!StringUtil.isEmptyOrNull(subcircuitTypeName))
-    {
-      SubcircuitViewParameters parameters = this.subcircuitViewParameters.get(subcircuitTypeName);
-      if (parameters != null)
-      {
-        viewport.setParameters(parameters.getPosition(), parameters.getZoom());
-      }
+      updateHighlighted();
     }
   }
 
@@ -1120,6 +1121,7 @@ public class Logicim
 
       String subcircuitTypeName = circuitEditor.gotoPreviousSubcircuit();
       setViewportParameters(subcircuitTypeName);
+      updateHighlighted();
     }
   }
 
@@ -1135,6 +1137,7 @@ public class Logicim
 
       String subcircuitTypeName = circuitEditor.gotoNextSubcircuit();
       setViewportParameters(subcircuitTypeName);
+      updateHighlighted();
     }
   }
 
@@ -1146,11 +1149,13 @@ public class Logicim
 
   public void leaveSubcircuit()
   {
+    updateHighlighted();
     throw new SimulatorException();
   }
 
   public void reenterSubcircuit()
   {
+    updateHighlighted();
     throw new SimulatorException();
   }
 

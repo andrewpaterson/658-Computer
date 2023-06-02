@@ -20,11 +20,6 @@ public class ButtonBarPanel
     return Colours.getInstance().getPanelBackground();
   }
 
-  protected Color getPanelBorder()
-  {
-    return Colours.getInstance().getPanelBorder();
-  }
-
   protected Dimension defaultButtonBarSize()
   {
     return new Dimension(32 + 8, 32 + 8);

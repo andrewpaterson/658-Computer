@@ -225,7 +225,6 @@ public class IconLoader
     normalIcons.put(key, normalIcon);
     pressedIcons.put(key, pressedIcon);
     rolloverIcons.put(key, rolloverIcon);
-
   }
 
   private Color getButtonPressedBorder()

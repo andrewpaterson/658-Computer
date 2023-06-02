@@ -32,55 +32,55 @@ public class SimulatorActions
     editor.addAction(new InputAction(new StopEditAction(editor), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
     editor.addAction(new InputAction(new RunOneEvent(editor), KeyEvent.VK_T, Up, Up, Up));
 
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, ClockView.class), KeyEvent.VK_C, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, InverterView.class), KeyEvent.VK_N, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, OrGateView.class), KeyEvent.VK_O, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, NorGateView.class), KeyEvent.VK_O, Up, Down, Down));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, AndGateView.class), KeyEvent.VK_A, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, NandGateView.class), KeyEvent.VK_A, Up, Down, Down));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, XorGateView.class), KeyEvent.VK_X, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, XnorGateView.class), KeyEvent.VK_X, Up, Down, Down));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, BufferView.class), KeyEvent.VK_N, Up, Down, Down));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, OscilloscopeView.class), KeyEvent.VK_P, Up, Down, Up));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, ClockView.class), KeyEvent.VK_C, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, InverterView.class), KeyEvent.VK_N, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, OrGateView.class), KeyEvent.VK_O, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, NorGateView.class), KeyEvent.VK_O, Down, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, AndGateView.class), KeyEvent.VK_A, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, NandGateView.class), KeyEvent.VK_A, Down, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, XorGateView.class), KeyEvent.VK_X, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, XnorGateView.class), KeyEvent.VK_X, Down, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, BufferView.class), KeyEvent.VK_N, Down, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, OscilloscopeView.class), KeyEvent.VK_P, Up, Up, Down));
     editor.addAction(new InputAction(new PlaceComponentAction(editor, GroundView.class), KeyEvent.VK_G, Up, Up, Up));
     editor.addAction(new InputAction(new PlaceComponentAction(editor, PositivePowerView.class), KeyEvent.VK_V, Up, Up, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, SplitterView.class), KeyEvent.VK_S, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, TunnelView.class), KeyEvent.VK_T, Up, Down, Up));
-    editor.addAction(new InputAction(new PlaceComponentAction(editor, LabelView.class), KeyEvent.VK_L, Up, Down, Up));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, SplitterView.class), KeyEvent.VK_S, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, TunnelView.class), KeyEvent.VK_T, Up, Up, Down));
+    editor.addAction(new InputAction(new PlaceComponentAction(editor, LabelView.class), KeyEvent.VK_L, Up, Up, Down));
 
     editor.addAction(new InputAction(new EditPropertiesAction(editor, panel), KeyEvent.VK_E, Up, Up, Up));
-    editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Down, Up));
+    editor.addAction(new InputAction(new PlacementRotateLeft(editor), KeyEvent.VK_R, Up, Up, Down));
     editor.addAction(new InputAction(new PlacementRotateRight(editor), KeyEvent.VK_R, Up, Up, Up));
-    editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Down));
+    editor.addAction(new InputAction(new ToggleRunSimulation(editor), KeyEvent.VK_K, Up, Up, Up));
     editor.addAction(new InputAction(new DeleteAction(editor), KeyEvent.VK_DELETE, Up, Up, Up));
     editor.addAction(new InputAction(new IncreaseSimulationSpeed(editor), KeyEvent.VK_EQUALS, Up, Up, Up));
     editor.addAction(new InputAction(new DecreaseSimulationSpeed(editor), KeyEvent.VK_MINUS, Up, Up, Up));
-    editor.addAction(new InputAction(new ResetSimulation(editor), KeyEvent.VK_R, Up, Up, Down));
-    editor.addAction(new InputAction(new SaveSimulation(panel), KeyEvent.VK_S, Up, Up, Down));
-    editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Up, Up, Down));
-    editor.addAction(new InputAction(new UndoAction(editor), KeyEvent.VK_Z, Up, Up, Down));
-    editor.addAction(new InputAction(new RedoAction(editor), KeyEvent.VK_Y, Up, Up, Down));
-    editor.addAction(new InputAction(new ResetZoomAction(editor), KeyEvent.VK_0, Up, Up, Down));
+    editor.addAction(new InputAction(new ResetSimulation(editor), KeyEvent.VK_R, Down, Up, Up));
+    editor.addAction(new InputAction(new SaveSimulation(panel), KeyEvent.VK_S, Down, Up, Up));
+    editor.addAction(new InputAction(new LoadSimulation(panel), KeyEvent.VK_L, Down, Up, Up));
+    editor.addAction(new InputAction(new UndoAction(editor), KeyEvent.VK_Z, Down, Up, Up));
+    editor.addAction(new InputAction(new RedoAction(editor), KeyEvent.VK_Y, Down, Up, Up));
+    editor.addAction(new InputAction(new ResetZoomAction(editor), KeyEvent.VK_0, Down, Up, Up));
 
     editor.addAction(new InputAction(new MoveAction(editor), KeyEvent.VK_M, Up, Up, Up));
-    editor.addAction(new InputAction(new CopyAction(editor), KeyEvent.VK_C, Up, Up, Down));
-    editor.addAction(new InputAction(new PasteAction(editor), KeyEvent.VK_V, Up, Up, Down));
-    editor.addAction(new InputAction(new CutAction(editor), KeyEvent.VK_X, Up, Up, Down));
-    editor.addAction(new InputAction(new DuplicateAction(editor), KeyEvent.VK_D, Up, Up, Down));
+    editor.addAction(new InputAction(new CopyAction(editor), KeyEvent.VK_C, Down, Up, Up));
+    editor.addAction(new InputAction(new PasteAction(editor), KeyEvent.VK_V, Down, Up, Up));
+    editor.addAction(new InputAction(new CutAction(editor), KeyEvent.VK_X, Down, Up, Up));
+    editor.addAction(new InputAction(new DuplicateAction(editor), KeyEvent.VK_D, Down, Up, Up));
 
     editor.addAction(new InputAction(new PlaceComponentAction(editor, PinView.class), KeyEvent.VK_P, Up, Up, Up));
-    editor.addAction(new InputAction(new NewSubcircuitAction(editor, panel), KeyEvent.VK_ENTER, Up, Down, Up));
-    editor.addAction(new InputAction(new PreviousSubcircuitAction(editor), KeyEvent.VK_LEFT, Down, Up, Up));
-    editor.addAction(new InputAction(new NextSubcircuitAction(editor), KeyEvent.VK_RIGHT, Down, Up, Up));
-    editor.addAction(new InputAction(new LeaveSubcircuitAction(editor), KeyEvent.VK_BACK_SPACE, Down, Up, Up));
-    editor.addAction(new InputAction(new ReenterSubcircuitAction(editor), KeyEvent.VK_ENTER, Down, Up, Up));
-    editor.addAction(new InputAction(new EditSubcircuitAction(editor, panel), KeyEvent.VK_E, Up, Down, Down));
+    editor.addAction(new InputAction(new NewSubcircuitAction(editor, panel), KeyEvent.VK_ENTER, Up, Up, Down));
+    editor.addAction(new InputAction(new PreviousSubcircuitAction(editor), KeyEvent.VK_LEFT, Up, Down, Up));
+    editor.addAction(new InputAction(new NextSubcircuitAction(editor), KeyEvent.VK_RIGHT, Up, Down, Up));
+    editor.addAction(new InputAction(new LeaveSubcircuitAction(editor), KeyEvent.VK_BACK_SPACE, Up, Down, Up));
+    editor.addAction(new InputAction(new ReenterSubcircuitAction(editor), KeyEvent.VK_ENTER, Up, Down, Up));
+    editor.addAction(new InputAction(new EditSubcircuitAction(editor, panel), KeyEvent.VK_E, Down, Up, Down));
 
     for (int i = 1; i < 10; i++)
     {
-      editor.addAction(new InputAction(new BookmarkSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Down));
+      editor.addAction(new InputAction(new BookmarkSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Down, Up, Up));
       editor.addAction(new InputAction(new GotoSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Up));
-      editor.addAction(new InputAction(new PlaceSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Down, Up));
+      editor.addAction(new InputAction(new PlaceSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Down));
     }
   }
 }

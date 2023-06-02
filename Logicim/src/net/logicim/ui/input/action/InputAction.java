@@ -16,9 +16,9 @@ public class InputAction
 
   public InputAction(EditorAction action,
                      int keyPressedCode,
+                     ButtonState ctrlHeld,
                      ButtonState altHeld,
-                     ButtonState shiftHeld,
-                     ButtonState ctrlHeld)
+                     ButtonState shiftHeld)
   {
     this.action = action;
     this.altHeld = altHeld;

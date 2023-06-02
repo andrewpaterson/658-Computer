@@ -4,11 +4,13 @@ import net.logicim.common.reflect.ClassInspector;
 import net.logicim.common.reflect.EnumStore;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.SaveData;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.panels.*;
 import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
@@ -40,7 +42,7 @@ public class SimulatorFrame
     add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row
 
     add(displayPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 1, VERTICAL));          // Display settings
-    add(simulatorPanel, GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
+    add(createSurroundPanel(simulatorPanel), GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
     add(creationPanel, GridBagUtil.gridBagConstraints(2, 1, 0, 1, VERTICAL));          // Object creation
 
     add(selectedInfoPanel, GridBagUtil.gridBagConstraints(0, 2, 1, 0, HORIZONTAL, 3, 1));  // Selected object info row
@@ -64,6 +66,16 @@ public class SimulatorFrame
 
     addWindowListener(this);
     addKeyListener(this);
+  }
+
+  protected JPanel createSurroundPanel(JPanel insetPanel)
+  {
+    JPanel panel = new JPanel();
+    panel.setBorder(new MatteBorder(1, 1, 1, 1, Colours.getInstance().getPanelBorder()));
+    panel.setOpaque(false);
+    panel.setLayout(new GridBagLayout());
+    panel.add(insetPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 1, BOTH));
+    return panel;
   }
 
   public static void main(String[] args)

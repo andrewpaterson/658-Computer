@@ -20,9 +20,9 @@ public class InformationPanel
     return Colours.getInstance().getPanelBackground();
   }
 
-  protected Color getPanelBorder()
+  protected Color getPanelInfoBorder()
   {
-    return Colours.getInstance().getPanelBorder();
+    return Colours.getInstance().getPanelInfoBorder();
   }
 }
 

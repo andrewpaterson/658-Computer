@@ -82,7 +82,7 @@ public class Colours
 
     panelBackground = new Color(240, 240, 240);
     panelBorder = new Color(165, 165, 165);
-    panelInfoBorder = new Color(192, 192, 192);
+    panelInfoBorder = new Color(215, 215, 215);
   }
 
   public static Colours getInstance()

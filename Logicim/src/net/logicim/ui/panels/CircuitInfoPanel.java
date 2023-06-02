@@ -1,7 +1,5 @@
 package net.logicim.ui.panels;
 
-import net.logicim.ui.common.Colours;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +9,7 @@ public class CircuitInfoPanel
   public CircuitInfoPanel(JFrame frame)
   {
     super(frame);
-    setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Colours.getInstance().getPanelInfoBorder()));
+    setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, getPanelInfoBorder()));
     setBackground(getPanelBackground());
     setPreferredSize(new Dimension(16, 16));
   }

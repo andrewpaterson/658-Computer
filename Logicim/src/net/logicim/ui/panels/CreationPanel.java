@@ -8,7 +8,6 @@ public class CreationPanel
   public CreationPanel(JFrame frame)
   {
     super(frame);
-    setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, getPanelBorder()));
     setBackground(getPanelBackground());
     setPreferredSize(defaultButtonBarSize());
   }

@@ -8,7 +8,6 @@ public class ToolbarPanel
   public ToolbarPanel(JFrame frame)
   {
     super(frame);
-    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, getPanelBorder()));
     setBackground(getPanelBackground());
     setPreferredSize(defaultButtonBarSize());
   }

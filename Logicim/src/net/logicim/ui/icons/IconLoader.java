@@ -59,6 +59,10 @@ public class IconLoader
   public static final String SAVE = "save_24.png";
   public static final String SIMULATION_RUN = "sim_run_24.png";
   public static final String SIMULATION_PAUSE = "sim_stop_24.png";
+  public static final String SIMULATION_DEFAULT = "sim_default_24.png";
+  public static final String SIMULATION_FASTER = "sim_faster_24.png";
+  public static final String SIMULATION_SLOWER = "sim_slower_24.png";
+  public static final String SIMULATION_RESET = "sim_reset_24.png";
   public static final String TEXT = "text_24.png";
   public static final String DELETE = "trash_24.png";
   public static final String UNDO = "undo_24.png";
@@ -75,6 +79,7 @@ public class IconLoader
   private Map<String, Icon> normalIcons;
   private Map<String, Icon> pressedIcons;
   private Map<String, Icon> rolloverIcons;
+  private Map<String, Icon> disabledIcons;
 
   public IconLoader()
   {
@@ -89,6 +94,7 @@ public class IconLoader
     normalIcons = new LinkedHashMap<>();
     pressedIcons = new LinkedHashMap<>();
     rolloverIcons = new LinkedHashMap<>();
+    disabledIcons = new LinkedHashMap<>();
 
     createIcons(imageFileMap, ABOUT);
     createIcons(imageFileMap, ADD_COMPONENT);
@@ -127,6 +133,10 @@ public class IconLoader
     createIcons(imageFileMap, SAVE);
     createIcons(imageFileMap, SIMULATION_RUN);
     createIcons(imageFileMap, SIMULATION_PAUSE);
+    createIcons(imageFileMap, SIMULATION_DEFAULT);
+    createIcons(imageFileMap, SIMULATION_FASTER);
+    createIcons(imageFileMap, SIMULATION_SLOWER);
+    createIcons(imageFileMap, SIMULATION_RESET);
     createIcons(imageFileMap, TEXT);
     createIcons(imageFileMap, DELETE);
     createIcons(imageFileMap, UNDO);
@@ -148,6 +158,11 @@ public class IconLoader
     return getInstance().pressedIcons.get(key);
   }
 
+  public static Icon getDisabledIcon(String key)
+  {
+    return getInstance().disabledIcons.get(key);
+  }
+
   public static Icon getRolloverIcon(String key)
   {
     return getInstance().rolloverIcons.get(key);
@@ -159,7 +174,12 @@ public class IconLoader
     return graphicsEnvironment.getDefaultScreenDevice().getDefaultConfiguration();
   }
 
-  private BufferedImage convertToBufferedImage(BufferedImage image, int destWidth, int destHeight, Color background, Color border, int transparency)
+  private BufferedImage convertToBufferedImage(BufferedImage image,
+                                               int destWidth,
+                                               int destHeight,
+                                               Color background,
+                                               Color border,
+                                               int transparency)
   {
     int sourceWidth = image.getWidth();
     int sourceHeight = image.getHeight();
@@ -218,13 +238,21 @@ public class IconLoader
                                                        32,
                                                        null,
                                                        null, Transparency.TRANSLUCENT);
+    BufferedImage disabledImage = convertToBufferedImage(image,
+                                                         32,
+                                                         32,
+                                                         null,
+                                                         null, Transparency.TRANSLUCENT);
+    Image disabledImage2 = GrayFilter.createDisabledImage(disabledImage);
     Icon rolloverIcon = new ImageIcon(rolloverImage);
     Icon pressedIcon = new ImageIcon(pressedImage);
     Icon normalIcon = new ImageIcon(normalImage);
+    Icon disabledIcon = new ImageIcon(disabledImage2);
 
     normalIcons.put(key, normalIcon);
     pressedIcons.put(key, pressedIcon);
     rolloverIcons.put(key, rolloverIcon);
+    disabledIcons.put(key, disabledIcon);
   }
 
   private Color getButtonPressedBorder()

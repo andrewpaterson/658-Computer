@@ -24,8 +24,13 @@ public class ToolbarPanel
     components.add(createButton(LOAD));
     components.add(createButton(SAVE));
     components.add(new JSeparator(JSeparator.VERTICAL));
+    components.add(createButton(SIMULATION_RESET));
     components.add(createButton(SIMULATION_RUN));
     components.add(createButton(SIMULATION_PAUSE));
+    components.add(createButton(SIMULATION_DEFAULT));
+    components.add(createButton(SIMULATION_FASTER));
+    components.add(createButton(SIMULATION_SLOWER));
+    //Default speed
     components.add(new JSeparator(JSeparator.VERTICAL));
     components.add(createButton(ROTATE_LEFT));
     components.add(createButton(ROTATE_RIGHT));
@@ -48,6 +53,7 @@ public class ToolbarPanel
     button.setPreferredSize(new Dimension(40, 32));
     button.setRolloverIcon(IconLoader.getRolloverIcon(key));
     button.setPressedIcon(IconLoader.getPressedIcon(key));
+    button.setDisabledIcon(IconLoader.getDisabledIcon(key));
     button.setContentAreaFilled(false);
     button.setFocusPainted(false);
     button.setFocusable(false);

@@ -4,6 +4,7 @@ import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.editor.*;
+import net.logicim.ui.input.action.ButtonState;
 import net.logicim.ui.input.action.KeyInput;
 import net.logicim.ui.panels.SimulatorPanel;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
@@ -94,59 +95,64 @@ public class SimulatorActions
   {
     createEditActions(editor, panel);
 
-    editor.addKeyInput(new KeyInput(editor.getAction("Discard Current Edit"), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
-    editor.addKeyInput(new KeyInput(editor.getAction("Step Once"), KeyEvent.VK_T, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(StopEditAction.NAME), KeyEvent.VK_ESCAPE, DontCare, DontCare, DontCare));
+    editor.addKeyInput(new KeyInput(editor.getAction(RunOneEventAction.NAME), KeyEvent.VK_T, Up, Up, Up));
 
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, ClockView.class), KeyEvent.VK_C, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, InverterView.class), KeyEvent.VK_N, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, OrGateView.class), KeyEvent.VK_O, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, NorGateView.class), KeyEvent.VK_O, Down, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, AndGateView.class), KeyEvent.VK_A, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, NandGateView.class), KeyEvent.VK_A, Down, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, XorGateView.class), KeyEvent.VK_X, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, XnorGateView.class), KeyEvent.VK_X, Down, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, BufferView.class), KeyEvent.VK_N, Down, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, OscilloscopeView.class), KeyEvent.VK_P, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, GroundView.class), KeyEvent.VK_G, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, PositivePowerView.class), KeyEvent.VK_V, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, SplitterView.class), KeyEvent.VK_S, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, TunnelView.class), KeyEvent.VK_T, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, LabelView.class), KeyEvent.VK_L, Up, Up, Down));
+    placeComponentKeyInput(editor, ClockView.class, KeyEvent.VK_C, Up, Up, Down);
+    placeComponentKeyInput(editor, InverterView.class, KeyEvent.VK_N, Up, Up, Down);
+    placeComponentKeyInput(editor, OrGateView.class, KeyEvent.VK_O, Up, Up, Down);
+    placeComponentKeyInput(editor, NorGateView.class, KeyEvent.VK_O, Down, Up, Down);
+    placeComponentKeyInput(editor, AndGateView.class, KeyEvent.VK_A, Up, Up, Down);
+    placeComponentKeyInput(editor, NandGateView.class, KeyEvent.VK_A, Down, Up, Down);
+    placeComponentKeyInput(editor, XorGateView.class, KeyEvent.VK_X, Up, Up, Down);
+    placeComponentKeyInput(editor, XnorGateView.class, KeyEvent.VK_X, Down, Up, Down);
+    placeComponentKeyInput(editor, BufferView.class, KeyEvent.VK_N, Down, Up, Down);
+    placeComponentKeyInput(editor, OscilloscopeView.class, KeyEvent.VK_P, Up, Up, Down);
+    placeComponentKeyInput(editor, GroundView.class, KeyEvent.VK_G, Up, Up, Up);
+    placeComponentKeyInput(editor, PositivePowerView.class, KeyEvent.VK_V, Up, Up, Up);
+    placeComponentKeyInput(editor, SplitterView.class, KeyEvent.VK_S, Up, Up, Down);
+    placeComponentKeyInput(editor, TunnelView.class, KeyEvent.VK_T, Up, Up, Down);
+    placeComponentKeyInput(editor, LabelView.class, KeyEvent.VK_L, Up, Up, Down);
+    placeComponentKeyInput(editor, PinView.class, KeyEvent.VK_P, Up, Up, Up);
 
-    editor.addKeyInput(new KeyInput(new EditPropertiesAction(editor, panel), KeyEvent.VK_E, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new PlacementRotateLeftAction(editor), KeyEvent.VK_R, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PlacementRotateRightAction(editor), KeyEvent.VK_R, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new ToggleRunSimulationAction(editor), KeyEvent.VK_K, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new DeleteAction(editor), KeyEvent.VK_DELETE, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new IncreaseSimulationSpeedAction(editor), KeyEvent.VK_EQUALS, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new DecreaseSimulationSpeedAction(editor), KeyEvent.VK_MINUS, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new ResetSimulationAction(editor), KeyEvent.VK_R, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new SaveSimulationAction(panel), KeyEvent.VK_S, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new LoadSimulationAction(panel), KeyEvent.VK_L, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new UndoAction(editor), KeyEvent.VK_Z, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new RedoAction(editor), KeyEvent.VK_Y, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new ResetZoomAction(editor), KeyEvent.VK_0, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(EditPropertiesAction.NAME), KeyEvent.VK_E, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateLeftAction.NAME), KeyEvent.VK_R, Up, Up, Down));
+    editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateRightAction.NAME), KeyEvent.VK_R, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(ToggleRunSimulationAction.NAME), KeyEvent.VK_K, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(DeleteAction.NAME), KeyEvent.VK_DELETE, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(IncreaseSimulationSpeedAction.NAME), KeyEvent.VK_EQUALS, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(DecreaseSimulationSpeedAction.NAME), KeyEvent.VK_MINUS, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(ResetSimulationAction.NAME), KeyEvent.VK_R, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(SaveSimulationAction.NAME), KeyEvent.VK_S, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(LoadSimulationAction.NAME), KeyEvent.VK_L, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(UndoAction.NAME), KeyEvent.VK_Z, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(RedoAction.NAME), KeyEvent.VK_Y, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(ResetZoomAction.NAME), KeyEvent.VK_0, Down, Up, Up));
 
-    editor.addKeyInput(new KeyInput(new MoveAction(editor), KeyEvent.VK_M, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new CopyAction(editor), KeyEvent.VK_C, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new PasteAction(editor), KeyEvent.VK_V, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new CutAction(editor), KeyEvent.VK_X, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(new DuplicateAction(editor), KeyEvent.VK_D, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(MoveAction.NAME), KeyEvent.VK_M, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(CopyAction.NAME), KeyEvent.VK_C, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(PasteAction.NAME), KeyEvent.VK_V, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(CutAction.NAME), KeyEvent.VK_X, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(DuplicateAction.NAME), KeyEvent.VK_D, Down, Up, Up));
 
-    editor.addKeyInput(new KeyInput(new PlaceComponentAction(editor, PinView.class), KeyEvent.VK_P, Up, Up, Up));
-    editor.addKeyInput(new KeyInput(new NewSubcircuitAction(editor, panel), KeyEvent.VK_ENTER, Up, Up, Down));
-    editor.addKeyInput(new KeyInput(new PreviousSubcircuitAction(editor), KeyEvent.VK_LEFT, Up, Down, Up));
-    editor.addKeyInput(new KeyInput(new NextSubcircuitAction(editor), KeyEvent.VK_RIGHT, Up, Down, Up));
-    editor.addKeyInput(new KeyInput(new LeaveSubcircuitAction(editor), KeyEvent.VK_BACK_SPACE, Up, Down, Up));
-    editor.addKeyInput(new KeyInput(new ReenterSubcircuitAction(editor), KeyEvent.VK_ENTER, Up, Down, Up));
-    editor.addKeyInput(new KeyInput(new EditSubcircuitAction(editor, panel), KeyEvent.VK_E, Down, Up, Down));
+    editor.addKeyInput(new KeyInput(editor.getAction(NewSubcircuitAction.NAME), KeyEvent.VK_ENTER, Up, Up, Down));
+    editor.addKeyInput(new KeyInput(editor.getAction(PreviousSubcircuitAction.NAME), KeyEvent.VK_LEFT, Up, Down, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(NextSubcircuitAction.NAME), KeyEvent.VK_RIGHT, Up, Down, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(LeaveSubcircuitAction.NAME), KeyEvent.VK_BACK_SPACE, Up, Down, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(ReenterSubcircuitAction.NAME), KeyEvent.VK_ENTER, Up, Down, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(EditSubcircuitAction.NAME), KeyEvent.VK_E, Down, Up, Down));
 
     for (int i = 1; i < 10; i++)
     {
-      editor.addKeyInput(new KeyInput(new BookmarkSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Down, Up, Up));
-      editor.addKeyInput(new KeyInput(new GotoSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Up));
-      editor.addKeyInput(new KeyInput(new PlaceSubcircuitAction(editor, i), KeyEvent.VK_0 + i, Up, Up, Down));
+      editor.addKeyInput(new KeyInput(editor.getAction(BookmarkSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Down, Up, Up));
+      editor.addKeyInput(new KeyInput(editor.getAction(GotoSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Up, Up, Up));
+      editor.addKeyInput(new KeyInput(editor.getAction(PlaceSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Up, Up, Down));
     }
+  }
+
+  protected static void placeComponentKeyInput(Logicim editor, Class<? extends StaticView<?>> staticViewClass, int keyEvent, ButtonState ctrlHeld, ButtonState altHeld, ButtonState shiftHeld)
+  {
+    editor.addKeyInput(new KeyInput(editor.getAction(PlaceComponentAction.name(staticViewClass)), keyEvent, ctrlHeld, altHeld, shiftHeld));
   }
 }
 

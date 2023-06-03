@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class LeaveSubcircuitAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Leave Subcircuit";
+
   public LeaveSubcircuitAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class LeaveSubcircuitAction
   public void executeEditorAction()
   {
     editor.leaveSubcircuit();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Leave Subcircuit";
   }
 }
 

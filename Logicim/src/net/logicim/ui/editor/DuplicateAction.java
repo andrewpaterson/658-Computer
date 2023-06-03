@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class DuplicateAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Duplicate";
+
   public DuplicateAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class DuplicateAction
   public void executeEditorAction()
   {
     editor.editActionDuplicate();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Duplicate";
   }
 }
 

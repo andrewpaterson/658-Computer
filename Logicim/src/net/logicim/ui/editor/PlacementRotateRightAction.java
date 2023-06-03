@@ -2,12 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class NextSubcircuitAction
+public class PlacementRotateRightAction
     extends SimulatorEditorAction
 {
-  public static final String NAME = "Next Subcircuit";
+  public static final String NAME = "Rotate Right";
 
-  public NextSubcircuitAction(Logicim editor)
+  public PlacementRotateRightAction(Logicim editor)
   {
     super(editor);
   }
@@ -15,7 +15,7 @@ public class NextSubcircuitAction
   @Override
   public void executeEditorAction()
   {
-    editor.gotoNextSubcircuit();
+    editor.rotateRight();
   }
 }
 

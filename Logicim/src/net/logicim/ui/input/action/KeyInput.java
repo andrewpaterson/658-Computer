@@ -5,7 +5,7 @@ import net.logicim.ui.editor.EditorAction;
 
 import java.awt.event.KeyEvent;
 
-public class InputAction
+public class KeyInput
 {
   protected EditorAction action;
 
@@ -14,11 +14,11 @@ public class InputAction
   protected ButtonState ctrlHeld;
   protected int keyPressedCode;
 
-  public InputAction(EditorAction action,
-                     int keyPressedCode,
-                     ButtonState ctrlHeld,
-                     ButtonState altHeld,
-                     ButtonState shiftHeld)
+  public KeyInput(EditorAction action,
+                  int keyPressedCode,
+                  ButtonState ctrlHeld,
+                  ButtonState altHeld,
+                  ButtonState shiftHeld)
   {
     this.action = action;
     this.altHeld = altHeld;
@@ -80,7 +80,7 @@ public class InputAction
     return keyPressedCode;
   }
 
-  public boolean isSame(InputAction other)
+  public boolean isSame(KeyInput other)
   {
     if (this == other)
     {
@@ -132,9 +132,9 @@ public class InputAction
     throw new SimulatorException("Don't know how to convert modifier string.");
   }
 
-  public String toActionDescriptionString()
+  public String getActionName()
   {
-    return action.getDescription();
+    return action.getName();
   }
 }
 

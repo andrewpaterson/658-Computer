@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class RedoAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Redo";
+
   public RedoAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class RedoAction
   public void executeEditorAction()
   {
     editor.redo();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Redo";
   }
 }
 

@@ -2,10 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class ResetSimulation
+public class ToggleRunSimulationAction
     extends SimulatorEditorAction
 {
-  public ResetSimulation(Logicim editor)
+  public static final String NAME = "Toggle Simulation Run";
+
+  public ToggleRunSimulationAction(Logicim editor)
   {
     super(editor);
   }
@@ -13,13 +15,7 @@ public class ResetSimulation
   @Override
   public void executeEditorAction()
   {
-    editor.resetSimulation();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Reset";
+    editor.toggleTunSimulation();
   }
 }
 

@@ -2,10 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class IncreaseSimulationSpeed
+public class IncreaseSimulationSpeedAction
     extends SimulatorEditorAction
 {
-  public IncreaseSimulationSpeed(Logicim editor)
+  public static final String NAME = "Increase Simulation Speed";
+
+  public IncreaseSimulationSpeedAction(Logicim editor)
   {
     super(editor);
   }
@@ -14,11 +16,5 @@ public class IncreaseSimulationSpeed
   public void executeEditorAction()
   {
     editor.increaseSimulationSpeed();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Increase Simulation Speed";
   }
 }

@@ -311,6 +311,11 @@ public class SimulatorPanel
     logicim.clearButtons();
   }
 
+  public Logicim getEditor()
+  {
+    return logicim;
+  }
+
   public JFrame getFrame()
   {
     return frame;

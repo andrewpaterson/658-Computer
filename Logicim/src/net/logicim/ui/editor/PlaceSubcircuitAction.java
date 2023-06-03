@@ -18,11 +18,5 @@ public class PlaceSubcircuitAction
   {
     editor.startPlaceSubcircuit(index);
   }
-
-  @Override
-  public String getDescription()
-  {
-    return "Place Subcircuit";
-  }
 }
 

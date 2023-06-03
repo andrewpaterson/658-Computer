@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class PasteAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Paste";
+
   public PasteAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class PasteAction
   public void executeEditorAction()
   {
     editor.editActionPaste();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Paste";
   }
 }
 

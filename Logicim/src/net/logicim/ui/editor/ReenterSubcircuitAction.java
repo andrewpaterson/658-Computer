@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class ReenterSubcircuitAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Re-enter Subcircuit";
+
   public ReenterSubcircuitAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class ReenterSubcircuitAction
   public void executeEditorAction()
   {
     editor.reenterSubcircuit();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Re-enter Subcircuit";
   }
 }
 

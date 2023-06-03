@@ -18,11 +18,5 @@ public class BookmarkSubcircuitAction
   {
     editor.bookmarkSubcircuit(index);
   }
-
-  @Override
-  public String getDescription()
-  {
-    return "Bookmark Subcircuit";
-  }
 }
 

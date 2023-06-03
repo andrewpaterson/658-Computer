@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class DeleteAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Delete";
+
   public DeleteAction(Logicim editor)
   {
     super(editor);
@@ -21,12 +23,6 @@ public class DeleteAction
     }
 
     editor.updateHighlighted();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Delete";
   }
 }
 

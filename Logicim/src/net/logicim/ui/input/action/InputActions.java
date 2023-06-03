@@ -1,31 +1,25 @@
 package net.logicim.ui.input.action;
 
-import net.logicim.ui.input.mouse.MouseButtons;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputActions
 {
-  protected MouseButtons mouseButtons;
+  protected List<KeyInput> actions;
 
-  protected List<InputAction> actions;
-
-  public InputActions(MouseButtons mouseButtons)
+  public InputActions()
   {
-    this.mouseButtons = mouseButtons;
-
     actions = new ArrayList<>();
   }
 
-  public void add(InputAction inputAction)
+  public void add(KeyInput keyInput)
   {
-    actions.add(inputAction);
+    actions.add(keyInput);
   }
 
   public void keyPressed(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
   {
-    for (InputAction action : actions)
+    for (KeyInput action : actions)
     {
       if (action.matched(keyCode, altDown, shiftDown, controlDown))
       {
@@ -34,7 +28,7 @@ public class InputActions
     }
   }
 
-  public List<InputAction> getActions()
+  public List<KeyInput> getActions()
   {
     return actions;
   }

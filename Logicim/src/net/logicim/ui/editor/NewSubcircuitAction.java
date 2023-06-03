@@ -8,6 +8,8 @@ import net.logicim.ui.panels.SimulatorPanel;
 public class NewSubcircuitAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "New Subcircuit";
+
   protected SimulatorPanel simulatorPanel;
 
   public NewSubcircuitAction(Logicim editor, SimulatorPanel simulatorPanel)
@@ -21,12 +23,6 @@ public class NewSubcircuitAction
   {
     NewSubcircuitDialog subcircuitDialog = new NewSubcircuitDialog(simulatorPanel.getFrame(), editor);
     new EditorDialogHelper().showPropertyEditorDialog(subcircuitDialog);
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "New Subcircuit";
   }
 }
 

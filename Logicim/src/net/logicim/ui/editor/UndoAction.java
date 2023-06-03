@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class UndoAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Undo";
+
   public UndoAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class UndoAction
   public void executeEditorAction()
   {
     editor.undo();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Undo";
   }
 }
 

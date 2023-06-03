@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class StopEditAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Discard Current Edit";
+
   public StopEditAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class StopEditAction
   public void executeEditorAction()
   {
     editor.stopSimulatorEdit();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Discard Current Edit";
   }
 }
 

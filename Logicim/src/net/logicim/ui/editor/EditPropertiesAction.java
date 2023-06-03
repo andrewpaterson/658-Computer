@@ -8,6 +8,8 @@ import net.logicim.ui.property.EditPropertiesDialogHelper;
 public class EditPropertiesAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Edit Properties";
+
   protected SimulatorPanel simulatorPanel;
 
   public EditPropertiesAction(Logicim editor, SimulatorPanel simulatorPanel)
@@ -37,12 +39,6 @@ public class EditPropertiesAction
                                                                 editor,
                                                                 componentView);
     }
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Edit";
   }
 }
 

@@ -21,9 +21,10 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.editor.EditorAction;
 import net.logicim.ui.editor.SubcircuitViewParameters;
-import net.logicim.ui.input.action.InputAction;
 import net.logicim.ui.input.action.InputActions;
+import net.logicim.ui.input.action.KeyInput;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
@@ -66,7 +67,8 @@ public class Logicim
   private int height;
 
   protected Viewport viewport;
-  protected InputActions actions;
+  protected EditorActions actions;
+  protected InputActions inputActions;
 
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
@@ -106,7 +108,8 @@ public class Logicim
 
     this.keyboardButtons = new KeyboardButtons();
 
-    this.actions = new InputActions(mouseButtons);
+    this.actions = new EditorActions();
+    this.inputActions = new InputActions();
 
     this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
     this.editAction = null;
@@ -538,21 +541,21 @@ public class Logicim
 
   private void validateActionKeyBindings()
   {
-    Map<Integer, List<InputAction>> keyActionMap = getActionsByKeyCode();
-    for (List<InputAction> inputActions : keyActionMap.values())
+    Map<Integer, List<KeyInput>> keyActionMap = getActionsByKeyCode();
+    for (List<KeyInput> keyInputs : keyActionMap.values())
     {
-      for (InputAction inputActionOuter : inputActions)
+      for (KeyInput keyInputOuter : keyInputs)
       {
-        for (InputAction inputActionInner : inputActions)
+        for (KeyInput keyInputInner : keyInputs)
         {
-          if (inputActionInner != inputActionOuter)
+          if (keyInputInner != keyInputOuter)
           {
-            if (inputActionInner.isSame(inputActionOuter))
+            if (keyInputInner.isSame(keyInputOuter))
             {
-              String innerKeyString = inputActionInner.toKeyString();
-              String outerKeyString = inputActionOuter.toKeyString();
-              String innerActionString = inputActionInner.toActionDescriptionString();
-              String outerActionString = inputActionOuter.toActionDescriptionString();
+              String innerKeyString = keyInputInner.toKeyString();
+              String outerKeyString = keyInputOuter.toKeyString();
+              String innerActionString = keyInputInner.getActionName();
+              String outerActionString = keyInputOuter.getActionName();
               throw new SimulatorException("%s bound to action [%s] and also %s bound to action [%s].", innerKeyString, innerActionString, outerKeyString, outerActionString);
             }
           }
@@ -561,32 +564,32 @@ public class Logicim
     }
   }
 
-  private Map<Integer, List<InputAction>> getActionsByKeyCode()
+  private Map<Integer, List<KeyInput>> getActionsByKeyCode()
   {
-    Map<Integer, List<InputAction>> keyActionMap = new LinkedHashMap<>();
-    for (InputAction inputAction : actions.getActions())
+    Map<Integer, List<KeyInput>> keyActionMap = new LinkedHashMap<>();
+    for (KeyInput keyInput : inputActions.getActions())
     {
-      int keyPressedCode = inputAction.getKeyPressedCode();
-      List<InputAction> inputActionList = keyActionMap.get(keyPressedCode);
-      if (inputActionList == null)
+      int keyPressedCode = keyInput.getKeyPressedCode();
+      List<KeyInput> keyInputList = keyActionMap.get(keyPressedCode);
+      if (keyInputList == null)
       {
-        inputActionList = new ArrayList<>();
-        keyActionMap.put(keyPressedCode, inputActionList);
+        keyInputList = new ArrayList<>();
+        keyActionMap.put(keyPressedCode, keyInputList);
       }
-      inputActionList.add(inputAction);
+      keyInputList.add(keyInput);
     }
     return keyActionMap;
   }
 
-  public void addAction(InputAction inputAction)
+  public void addKeyInput(KeyInput keyInput)
   {
-    actions.add(inputAction);
+    inputActions.add(keyInput);
   }
 
   public void keyPressed(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
   {
     keyboardButtons.set(altDown, controlDown, shiftDown);
-    actions.keyPressed(keyCode, controlDown, altDown, shiftDown);
+    inputActions.keyPressed(keyCode, controlDown, altDown, shiftDown);
 
     mouseModifierKeys(keyCode);
   }
@@ -1196,6 +1199,17 @@ public class Logicim
   public void setRunning(boolean running)
   {
     this.running = running;
+  }
+
+  public void addAction(String name, EditorAction action)
+  {
+    actions.addAction(name, action);
+    action.setName(name);
+  }
+
+  public EditorAction getAction(String description)
+  {
+    return actions.getAction(description);
   }
 }
 

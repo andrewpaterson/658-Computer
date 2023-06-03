@@ -5,6 +5,8 @@ import net.logicim.ui.Logicim;
 public class CutAction
     extends SimulatorEditorAction
 {
+  public static final String NAME = "Cut";
+
   public CutAction(Logicim editor)
   {
     super(editor);
@@ -14,12 +16,6 @@ public class CutAction
   public void executeEditorAction()
   {
     editor.editActionCut();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Cut";
   }
 }
 

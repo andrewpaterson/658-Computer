@@ -2,10 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class RunOneEvent
+public class ResetSimulationAction
     extends SimulatorEditorAction
 {
-  public RunOneEvent(Logicim editor)
+  public static final String NAME = "Reset Simulation";
+
+  public ResetSimulationAction(Logicim editor)
   {
     super(editor);
   }
@@ -13,13 +15,7 @@ public class RunOneEvent
   @Override
   public void executeEditorAction()
   {
-    editor.runOneEvent();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Step Once";
+    editor.resetSimulation();
   }
 }
 

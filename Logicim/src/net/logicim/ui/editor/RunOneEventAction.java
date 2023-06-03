@@ -2,10 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class PlacementRotateRight
+public class RunOneEventAction
     extends SimulatorEditorAction
 {
-  public PlacementRotateRight(Logicim editor)
+  public static final String NAME = "Step Once";
+
+  public RunOneEventAction(Logicim editor)
   {
     super(editor);
   }
@@ -13,13 +15,7 @@ public class PlacementRotateRight
   @Override
   public void executeEditorAction()
   {
-    editor.rotateRight();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Rotate Right";
+    editor.runOneEvent();
   }
 }
 

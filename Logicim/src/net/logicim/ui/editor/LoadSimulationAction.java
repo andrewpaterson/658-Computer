@@ -2,13 +2,16 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.panels.SimulatorPanel;
 
-public class LoadSimulation
+public class LoadSimulationAction
     extends EditorAction
 {
+  public static final String NAME = "Load Project";
+
   private SimulatorPanel panel;
 
-  public LoadSimulation(SimulatorPanel panel)
+  public LoadSimulationAction(SimulatorPanel panel)
   {
+    super(panel.getEditor());
     this.panel = panel;
   }
 
@@ -16,12 +19,6 @@ public class LoadSimulation
   public void executeEditorAction()
   {
     panel.loadSimulation();
-  }
-
-  @Override
-  public String getDescription()
-  {
-    return "Load";
   }
 }
 

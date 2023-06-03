@@ -16,6 +16,14 @@ public class PlaceComponentAction
     this.staticViewClass = staticViewClass;
   }
 
+  public static String name(Class<? extends StaticView<?>> staticViewClass)
+  {
+    String viewName = staticViewClass.getSimpleName().replace("View", "");
+    viewName = StringUtil.javaNameToHumanReadable(viewName);
+
+    return "Place " + viewName;
+  }
+
   @Override
   public void executeEditorAction()
   {

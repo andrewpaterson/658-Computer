@@ -13,6 +13,11 @@ public class PlaceSubcircuitAction
     this.index = index;
   }
 
+  public static String name(int index)
+  {
+    return "Place Subcircuit " + index;
+  }
+
   @Override
   public void executeEditorAction()
   {

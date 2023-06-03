@@ -1,6 +1,5 @@
 package net.logicim.ui.util;
 
-import net.logicim.common.util.StringUtil;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelView;
@@ -80,18 +79,15 @@ public class SimulatorActions
 
     for (int i = 1; i < 10; i++)
     {
-      editor.addAction("Bookmark Subcircuit " + i, new BookmarkSubcircuitAction(editor, i));
-      editor.addAction("Goto Subcircuit Bookmark " + i, new GotoSubcircuitAction(editor, i));
-      editor.addAction("Place Subcircuit " + i, new PlaceSubcircuitAction(editor, i));
+      editor.addAction(BookmarkSubcircuitAction.name(i), new BookmarkSubcircuitAction(editor, i));
+      editor.addAction(GotoSubcircuitAction.name(i), new GotoSubcircuitAction(editor, i));
+      editor.addAction(PlaceSubcircuitAction.name(i), new PlaceSubcircuitAction(editor, i));
     }
   }
 
   private static void placeComponentAction(Logicim editor, Class<? extends StaticView<?>> staticViewClass)
   {
-    String viewName = staticViewClass.getSimpleName().replace("View", "");
-    viewName = StringUtil.javaNameToHumanReadable(viewName);
-
-    editor.addAction("Place " + viewName, new PlaceComponentAction(editor, staticViewClass));
+    editor.addAction(PlaceComponentAction.name(staticViewClass), new PlaceComponentAction(editor, staticViewClass));
   }
 
   public static void create(Logicim editor, SimulatorPanel panel)

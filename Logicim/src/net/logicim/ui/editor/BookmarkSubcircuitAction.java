@@ -13,6 +13,11 @@ public class BookmarkSubcircuitAction
     this.index = index;
   }
 
+  public static String name(int index)
+  {
+    return "Bookmark Subcircuit " + index;
+  }
+
   @Override
   public void executeEditorAction()
   {

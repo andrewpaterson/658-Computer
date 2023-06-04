@@ -145,5 +145,10 @@ public class EditAction
     circuitEditor.circuitUpdated();
     pushUndo();
   }
+
+  public boolean canTransformComponents()
+  {
+    return edit.canTransformComponents();
+  }
 }
 

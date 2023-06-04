@@ -1,6 +1,5 @@
 package net.logicim.ui.placement;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -37,7 +36,8 @@ public class StartEditInComponent
   @Override
   public StatefulEdit rotate(boolean right, EditAction editAction)
   {
-    throw new SimulatorException();
+//    moveComponents(editAction.getRightRotations(), editAction.getStart(), editAction.getDiff());
+    return this;
   }
 
   @Override
@@ -60,6 +60,12 @@ public class StartEditInComponent
   @Override
   public void paint(Graphics2D graphics, Viewport viewport)
   {
+  }
+
+  @Override
+  public boolean canTransformComponents()
+  {
+    return true;
   }
 }
 

@@ -64,5 +64,11 @@ public class StartEditInPort
   public void paint(Graphics2D graphics, Viewport viewport)
   {
   }
+
+  @Override
+  public boolean canTransformComponents()
+  {
+    return false;
+  }
 }
 

@@ -122,6 +122,12 @@ public class MoveComponents
   {
   }
 
+  @Override
+  public boolean canTransformComponents()
+  {
+    return true;
+  }
+
   public List<StaticView<?>> getStaticViews()
   {
     return new ArrayList<>(componentStartPositions.keySet());

@@ -17,5 +17,7 @@ public abstract class StatefulEdit
   public abstract void discard(EditAction editAction);
 
   public abstract void paint(Graphics2D graphics, Viewport viewport);
+
+  public abstract boolean canTransformComponents();
 }
 

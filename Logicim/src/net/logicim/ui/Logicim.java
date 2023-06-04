@@ -601,13 +601,23 @@ public class Logicim
 
   public boolean canTransformComponents()
   {
-    if (hoverComponentView != null)
+    if (editAction != null)
     {
-      return true;
+      if (editAction.canTransformComponents())
+      {
+        return true;
+      }
     }
-    else if (!getCurrentSelection().isEmpty())
+    else
     {
-      return true;
+      if (hoverComponentView != null)
+      {
+        return true;
+      }
+      else if (!getCurrentSelection().isEmpty())
+      {
+        return true;
+      }
     }
     return false;
   }

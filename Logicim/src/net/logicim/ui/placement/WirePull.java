@@ -220,6 +220,12 @@ public class WirePull
     }
   }
 
+  @Override
+  public boolean canTransformComponents()
+  {
+    return false;
+  }
+
   private void paintLine(Graphics2D graphics, Viewport viewport, Int2D startPosition, Int2D endPosition)
   {
     int x1 = viewport.transformGridToScreenSpaceX(startPosition.x);

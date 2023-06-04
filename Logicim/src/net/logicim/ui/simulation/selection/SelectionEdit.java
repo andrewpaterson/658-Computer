@@ -180,5 +180,11 @@ public class SelectionEdit
     SelectionMode mode = Selection.calculateSelectionMode(keyboardButtons);
     paint(graphics, viewport, mode);
   }
+
+  @Override
+  public boolean canTransformComponents()
+  {
+    return false;
+  }
 }
 

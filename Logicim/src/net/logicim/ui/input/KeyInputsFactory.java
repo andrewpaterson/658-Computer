@@ -6,7 +6,6 @@ import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.editor.*;
 import net.logicim.ui.input.action.ButtonState;
 import net.logicim.ui.input.action.KeyInput;
-import net.logicim.ui.panels.SimulatorPanel;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;

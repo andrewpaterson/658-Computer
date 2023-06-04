@@ -106,6 +106,7 @@ public class SimulatorPanel
       }
 
       logicim.updateButtonsEnabled();
+      logicim.updateLabels();
       render();
       paint();
 

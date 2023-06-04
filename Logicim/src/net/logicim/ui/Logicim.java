@@ -23,6 +23,7 @@ import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.editor.EditorAction;
 import net.logicim.ui.editor.SimulationSpeed;
 import net.logicim.ui.editor.SubcircuitViewParameters;
+import net.logicim.ui.info.InfoLabel;
 import net.logicim.ui.input.EditorActionsFactory;
 import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.action.InputActions;
@@ -71,6 +72,7 @@ public class Logicim
   protected Viewport viewport;
   protected EditorActions actions;
   protected InputActions inputActions;
+  protected List<InfoLabel> labels;
 
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
@@ -111,6 +113,7 @@ public class Logicim
 
     this.actions = new EditorActions();
     this.inputActions = new InputActions();
+    this.labels = new ArrayList<>();
 
     this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
     this.editAction = null;
@@ -657,7 +660,7 @@ public class Logicim
     calculateHighlightedPort();
   }
 
-  private Int2D getMousePositionOnGrid()
+  protected Int2D getMousePositionOnGrid()
   {
     Int2D position = mousePosition.get();
     if (position != null)
@@ -667,6 +670,32 @@ public class Logicim
     else
     {
       return null;
+    }
+  }
+
+  public float getMouseXOnGrid()
+  {
+    Int2D position = mousePosition.get();
+    if (position != null)
+    {
+      return viewport.transformScreenToGridX((float) position.x);
+    }
+    else
+    {
+      return Float.NaN;
+    }
+  }
+
+  public float getMouseYOnGrid()
+  {
+    Int2D position = mousePosition.get();
+    if (position != null)
+    {
+      return viewport.transformScreenToGridY((float) position.y);
+    }
+    else
+    {
+      return Float.NaN;
     }
   }
 
@@ -1296,6 +1325,14 @@ public class Logicim
     }
   }
 
+  public void updateLabels()
+  {
+    for (InfoLabel label : labels)
+    {
+      label.update();
+    }
+  }
+
   public boolean canPauseSimulation()
   {
     return simulationSpeed.isRunning();
@@ -1319,6 +1356,16 @@ public class Logicim
   public boolean canRunSimulation()
   {
     return !simulationSpeed.isRunning();
+  }
+
+  public float getZoom()
+  {
+    return viewport.getZoom();
+  }
+
+  public void addInfoLabel(InfoLabel infoLabel)
+  {
+    labels.add(infoLabel);
   }
 }
 

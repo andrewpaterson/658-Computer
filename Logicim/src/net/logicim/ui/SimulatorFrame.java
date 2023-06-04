@@ -36,7 +36,7 @@ public class SimulatorFrame
     displayPanel = new DisplayPanel(this);
     creationPanel = new CreationPanel(this);
     selectedInfoPanel = new SelectedInfoPanel(this);
-    circuitInfoPanel = new CircuitInfoPanel(this);
+    circuitInfoPanel = new CircuitInfoPanel(this, simulatorPanel.getEditor());
 
     setLayout(new GridBagLayout());
     add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row
@@ -59,7 +59,7 @@ public class SimulatorFrame
     menuBar.add(menu);
 
     menuItem = new JMenuItem("A text-only menu item", KeyEvent.VK_T);
-    menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+    menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_MASK));
     menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
     menu.add(menuItem);
     setJMenuBar(menuBar);

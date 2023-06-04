@@ -17,5 +17,11 @@ public class RedoAction
   {
     editor.redo();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canRedo();
+  }
 }
 

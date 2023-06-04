@@ -17,5 +17,11 @@ public class PreviousSubcircuitAction
   {
     editor.gotoPreviousSubcircuit();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canGotoNextSubcircuit();
+  }
 }
 

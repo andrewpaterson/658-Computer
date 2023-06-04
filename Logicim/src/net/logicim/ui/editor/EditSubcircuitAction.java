@@ -26,5 +26,11 @@ public class EditSubcircuitAction
     EditSubcircuitDialog subcircuitDialog = new EditSubcircuitDialog(simulatorPanel.getFrame(), editor, subcircuitView);
     new EditorDialogHelper().showPropertyEditorDialog(subcircuitDialog);
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

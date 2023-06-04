@@ -23,5 +23,11 @@ public class GotoSubcircuitAction
   {
     editor.gotoSubcircuit(index);
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canGotoSubcircuit(index);
+  }
 }
 

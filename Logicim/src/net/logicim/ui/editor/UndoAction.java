@@ -17,5 +17,11 @@ public class UndoAction
   {
     editor.undo();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canUndo();
+  }
 }
 

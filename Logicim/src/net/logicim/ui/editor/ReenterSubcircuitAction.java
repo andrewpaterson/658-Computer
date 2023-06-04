@@ -17,5 +17,11 @@ public class ReenterSubcircuitAction
   {
     editor.reenterSubcircuit();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return false;
+  }
 }
 

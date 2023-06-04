@@ -29,5 +29,11 @@ public class PlaceComponentAction
   {
     editor.startPlaceComponent(ViewFactoryStore.getInstance().get(staticViewClass));
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

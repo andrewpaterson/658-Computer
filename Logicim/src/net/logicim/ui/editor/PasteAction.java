@@ -17,5 +17,11 @@ public class PasteAction
   {
     editor.editActionPaste();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canPaste();
+  }
 }
 

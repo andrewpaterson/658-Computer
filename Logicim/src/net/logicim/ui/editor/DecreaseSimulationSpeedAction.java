@@ -17,5 +17,11 @@ public class DecreaseSimulationSpeedAction
   {
     editor.decreaseSimulationSpeed();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

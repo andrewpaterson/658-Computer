@@ -18,4 +18,10 @@ public class PlacementRotateLeftAction
   {
     editor.rotateLeft();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canTransformComponents();
+  }
 }

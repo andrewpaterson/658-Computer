@@ -17,5 +17,11 @@ public class ResetZoomAction
   {
     editor.resetZoom();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canResetZoom();
+  }
 }
 

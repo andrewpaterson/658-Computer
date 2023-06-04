@@ -17,5 +17,11 @@ public class RunSimulationAction
   {
     editor.setRunning(true);
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canRunSimulation();
+  }
 }
 

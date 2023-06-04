@@ -17,5 +17,11 @@ public class StopEditAction
   {
     editor.stopSimulatorEdit();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

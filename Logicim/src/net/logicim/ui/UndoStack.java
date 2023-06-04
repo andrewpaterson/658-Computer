@@ -90,5 +90,15 @@ public class UndoStack
       return null;
     }
   }
+
+  public boolean canUnpop()
+  {
+    return size < undoStack.size();
+  }
+
+  public boolean canPop()
+  {
+    return size > 0;
+  }
 }
 

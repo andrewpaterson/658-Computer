@@ -17,5 +17,11 @@ public class PauseSimulationAction
   {
     editor.setRunning(false);
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canPauseSimulation();
+  }
 }
 

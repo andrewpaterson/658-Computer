@@ -17,5 +17,11 @@ public class NormalSpeedSimulationAction
   {
     editor.setDefaultSimulationSpeed();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

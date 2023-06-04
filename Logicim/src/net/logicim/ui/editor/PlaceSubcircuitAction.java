@@ -23,5 +23,11 @@ public class PlaceSubcircuitAction
   {
     editor.startPlaceSubcircuit(index);
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

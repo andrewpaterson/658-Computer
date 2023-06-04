@@ -17,5 +17,11 @@ public class CopyAction
   {
     editor.editActionCopy();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canCopy();
+  }
 }
 

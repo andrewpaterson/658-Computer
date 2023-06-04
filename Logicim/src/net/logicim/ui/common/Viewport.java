@@ -393,5 +393,10 @@ public class Viewport
   {
     setZoomTo(mousePosition, 1.0f);
   }
+
+  public boolean canResetZoom()
+  {
+    return zoom != 1.0f;
+  }
 }
 

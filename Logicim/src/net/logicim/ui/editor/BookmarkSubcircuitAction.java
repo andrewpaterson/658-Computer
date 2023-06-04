@@ -23,5 +23,11 @@ public class BookmarkSubcircuitAction
   {
     editor.bookmarkSubcircuit(index);
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

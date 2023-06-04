@@ -27,6 +27,7 @@ import net.logicim.ui.input.EditorActionsFactory;
 import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.action.KeyInput;
+import net.logicim.ui.input.button.ButtonInput;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
@@ -295,7 +296,7 @@ public class Logicim
     Float2D boundBoxPosition = new Float2D();
     Float2D boundBoxDimension = new Float2D();
 
-    for (View view : circuitEditor.getCurrentSelection().getSelection())
+    for (View view : getCurrentSelection())
     {
       if (view instanceof StaticView)
       {
@@ -536,54 +537,17 @@ public class Logicim
   {
     EditorActionsFactory.create(this, simulatorPanel);
     KeyInputsFactory.create(this);
-    validateActionKeyBindings();
-  }
-
-  private void validateActionKeyBindings()
-  {
-    Map<Integer, List<KeyInput>> keyActionMap = getActionsByKeyCode();
-    for (List<KeyInput> keyInputs : keyActionMap.values())
-    {
-      for (KeyInput keyInputOuter : keyInputs)
-      {
-        for (KeyInput keyInputInner : keyInputs)
-        {
-          if (keyInputInner != keyInputOuter)
-          {
-            if (keyInputInner.isSame(keyInputOuter))
-            {
-              String innerKeyString = keyInputInner.toKeyString();
-              String outerKeyString = keyInputOuter.toKeyString();
-              String innerActionString = keyInputInner.getActionName();
-              String outerActionString = keyInputOuter.getActionName();
-              throw new SimulatorException("%s bound to action [%s] and also %s bound to action [%s].", innerKeyString, innerActionString, outerKeyString, outerActionString);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  private Map<Integer, List<KeyInput>> getActionsByKeyCode()
-  {
-    Map<Integer, List<KeyInput>> keyActionMap = new LinkedHashMap<>();
-    for (KeyInput keyInput : inputActions.getActions())
-    {
-      int keyPressedCode = keyInput.getKeyPressedCode();
-      List<KeyInput> keyInputList = keyActionMap.get(keyPressedCode);
-      if (keyInputList == null)
-      {
-        keyInputList = new ArrayList<>();
-        keyActionMap.put(keyPressedCode, keyInputList);
-      }
-      keyInputList.add(keyInput);
-    }
-    return keyActionMap;
+    inputActions.validate();
   }
 
   public void addKeyInput(KeyInput keyInput)
   {
-    inputActions.add(keyInput);
+    inputActions.addKeyInputs(keyInput);
+  }
+
+  public void addButtonInput(ButtonInput buttonInput)
+  {
+    inputActions.addButtonInput(buttonInput);
   }
 
   public void keyPressed(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
@@ -633,6 +597,19 @@ public class Logicim
   {
     rotateMoveComponents(false);
     creationRotation = creationRotation.rotateLeft();
+  }
+
+  public boolean canTransformComponents()
+  {
+    if (hoverComponentView != null)
+    {
+      return true;
+    }
+    else if (!getCurrentSelection().isEmpty())
+    {
+      return true;
+    }
+    return false;
   }
 
   protected void rotateMoveComponents(boolean right)
@@ -710,6 +687,29 @@ public class Logicim
         throw new SimulatorException("Cannot run simulation with a [null] simulation.");
       }
     }
+  }
+
+  public boolean canDelete()
+  {
+    if (circuitEditor.getCurrentSelection().isSelectionEmpty())
+    {
+      if (hoverConnectionView != null)
+      {
+        return true;
+      }
+      else if (hoverComponentView != null)
+      {
+        return true;
+      }
+    }
+    else
+    {
+      if (getCurrentSelection().size() > 0)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   public boolean editActionDeleteComponentIfPossible()
@@ -942,75 +942,99 @@ public class Logicim
     circuitEditor.replaceSelection(newView, oldView);
   }
 
-  public void editActionCopy()
+  public boolean canCopy()
   {
     if (editAction == null)
     {
       Int2D position = mousePosition.get();
       if (position != null)
       {
-        List<View> selection = circuitEditor.getCurrentSelection().getSelection();
+        List<View> selection = getCurrentSelection();
         if (selection.size() > 0)
         {
-          clipboard = circuitEditor.copyViews(selection);
+          return true;
         }
       }
+    }
+    return false;
+  }
+
+  public void editActionCopy()
+  {
+    if (canCopy())
+    {
+      clipboard = circuitEditor.copyViews(getCurrentSelection());
     }
   }
 
   public void editActionCut()
   {
+    if (canCopy())
+    {
+      clipboard = circuitEditor.copyViews(getCurrentSelection());
+      circuitEditor.deleteSelection();
+    }
+  }
+
+  protected List<View> getCurrentSelection()
+  {
+    return circuitEditor.getCurrentSelection().getSelection();
+  }
+
+  public boolean canDuplicate()
+  {
     if (editAction == null)
     {
-      Int2D position = mousePosition.get();
-      if (position != null)
+      List<View> selection = getCurrentSelection();
+      if (selection.size() > 0)
       {
-        List<View> selection = circuitEditor.getCurrentSelection().getSelection();
-        if (selection.size() > 0)
-        {
-          clipboard = circuitEditor.copyViews(selection);
-          circuitEditor.deleteSelection();
-        }
+        return true;
       }
     }
+    return false;
   }
 
   public void editActionDuplicate()
   {
-    if (editAction == null)
+    if (canDuplicate())
     {
-      List<View> selection = circuitEditor.getCurrentSelection().getSelection();
-      if (selection.size() > 0)
+      List<View> duplicates = circuitEditor.duplicateViews(getCurrentSelection());
+      Int2D center = Selection.getViewsCenter(duplicates);
+      if (center != null)
       {
-        List<View> duplicates = circuitEditor.duplicateViews(selection);
-        Int2D center = Selection.getViewsCenter(duplicates);
-        if (center != null)
-        {
-          Float2D floatingCenter = new Float2D(center);
-          editAction = createEdit(new MoveComponents(duplicates, true), floatingCenter);
-        }
+        Float2D floatingCenter = new Float2D(center);
+        editAction = createEdit(new MoveComponents(duplicates, true), floatingCenter);
       }
     }
   }
 
-  public void editActionPaste()
+  public boolean canPaste()
   {
     if (editAction == null)
     {
       if (clipboard != null)
       {
-        List<View> views = circuitEditor.pasteClipboardViews(clipboard.getTraces(), clipboard.getComponents());
-        Int2D center = Selection.getViewsCenter(views);
-        if (center != null)
-        {
-          Float2D floatingCenter = new Float2D(center);
-          editAction = createEdit(new MoveComponents(views, true), floatingCenter);
-        }
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void editActionPaste()
+  {
+    if (canPaste())
+    {
+      List<View> views = circuitEditor.pasteClipboardViews(clipboard.getTraces(), clipboard.getComponents());
+      Int2D center = Selection.getViewsCenter(views);
+      if (center != null)
+      {
+        Float2D floatingCenter = new Float2D(center);
+        editAction = createEdit(new MoveComponents(views, true), floatingCenter);
       }
     }
   }
 
-  public void editActionMove()
+  public boolean canMove()
   {
     if (editAction == null)
     {
@@ -1018,12 +1042,23 @@ public class Logicim
 
       if (position != null)
       {
-        List<View> selection = circuitEditor.getCurrentSelection().getSelection();
+        List<View> selection = getCurrentSelection();
         if (selection.size() > 0)
         {
-          editAction = createEdit(new MoveComponents(selection, false), toFloatingGridPosition(position.x, position.y));
+          return true;
         }
       }
+    }
+    return false;
+  }
+
+  public void editActionMove()
+  {
+    if (canMove())
+    {
+      List<View> selection = getCurrentSelection();
+      Int2D position = mousePosition.get();
+      editAction = createEdit(new MoveComponents(selection, false), toFloatingGridPosition(position.x, position.y));
     }
   }
 
@@ -1098,6 +1133,12 @@ public class Logicim
     }
   }
 
+  public boolean canGotoSubcircuit(int bookmarkIndex)
+  {
+    SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkIndex);
+    return subcircuitEditor != null;
+  }
+
   public void gotoSubcircuit(int bookmarkIndex)
   {
     SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkIndex);
@@ -1117,7 +1158,7 @@ public class Logicim
 
   public void gotoPreviousSubcircuit()
   {
-    if (circuitEditor.hasMultipleSubcircuits())
+    if (canGotoNextSubcircuit())
     {
       if (editAction != null)
       {
@@ -1133,7 +1174,7 @@ public class Logicim
 
   public void gotoNextSubcircuit()
   {
-    if (circuitEditor.hasMultipleSubcircuits())
+    if (canGotoNextSubcircuit())
     {
       if (editAction != null)
       {
@@ -1145,6 +1186,11 @@ public class Logicim
       setViewportParameters(subcircuitTypeName);
       updateHighlighted();
     }
+  }
+
+  public boolean canGotoNextSubcircuit()
+  {
+    return circuitEditor.hasMultipleSubcircuits();
   }
 
   public void bookmarkSubcircuit(int bookmarkIndex)
@@ -1170,7 +1216,8 @@ public class Logicim
     return circuitEditor.getSubcircuitEditors();
   }
 
-  public List<String> getAllowedSubcircuitTypeNamesForSubcircuitInstance(SubcircuitInstanceView subcircuitInstanceView)
+  public List<String> getAllowedSubcircuitTypeNamesForSubcircuitInstance(SubcircuitInstanceView
+                                                                             subcircuitInstanceView)
   {
     SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
     ArrayList<String> result = new ArrayList<>();
@@ -1228,6 +1275,40 @@ public class Logicim
   public void flipHorizontally()
   {
     throw new SimulatorException();
+  }
+
+  public void updateButtonsEnabled()
+  {
+    List<ButtonInput> buttonInputs = inputActions.getButtonInputs();
+    for (ButtonInput buttonInput : buttonInputs)
+    {
+      buttonInput.enable();
+    }
+  }
+
+  public boolean canPauseSimulation()
+  {
+    return simulationSpeed.isRunning();
+  }
+
+  public boolean canRedo()
+  {
+    return undoStack.canUnpop();
+  }
+
+  public boolean canUndo()
+  {
+    return undoStack.canPop();
+  }
+
+  public boolean canResetZoom()
+  {
+    return viewport.canResetZoom();
+  }
+
+  public boolean canRunSimulation()
+  {
+    return !simulationSpeed.isRunning();
   }
 }
 

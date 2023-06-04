@@ -17,5 +17,11 @@ public class PlacementFlipHorizontallyAction
   {
     editor.flipHorizontally();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canTransformComponents();
+  }
 }
 

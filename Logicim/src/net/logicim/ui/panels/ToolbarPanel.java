@@ -24,21 +24,21 @@ public class ToolbarPanel
     setPreferredSize(defaultButtonBarSize());
 
     List<JComponent> components = new ArrayList<>();
-    components.add(createButtonInput(editor, LOAD, LoadSimulationAction.NAME).getButton());
-    components.add(createButtonInput(editor, SAVE, SaveSimulationAction.NAME).getButton());
+    components.add(createButtonInput(editor, LOAD, LoadSimulationAction.NAME));
+    components.add(createButtonInput(editor, SAVE, SaveSimulationAction.NAME));
     components.add(new JSeparator(JSeparator.VERTICAL));
-    components.add(createButtonInput(editor, SIMULATION_RESET, ResetSimulationAction.NAME).getButton());
-    components.add(createButtonInput(editor, SIMULATION_RUN, RunSimulationAction.NAME).getButton());
-    components.add(createButtonInput(editor, SIMULATION_PAUSE, PauseSimulationAction.NAME).getButton());
-    components.add(createButtonInput(editor, SIMULATION_DEFAULT, NormalSpeedSimulationAction.NAME).getButton());
-    components.add(createButtonInput(editor, SIMULATION_FASTER, IncreaseSimulationSpeedAction.NAME).getButton());
-    components.add(createButtonInput(editor, SIMULATION_SLOWER, DecreaseSimulationSpeedAction.NAME).getButton());
+    components.add(createButtonInput(editor, SIMULATION_RESET, ResetSimulationAction.NAME));
+    components.add(createButtonInput(editor, SIMULATION_RUN, RunSimulationAction.NAME));
+    components.add(createButtonInput(editor, SIMULATION_PAUSE, PauseSimulationAction.NAME));
+    components.add(createButtonInput(editor, SIMULATION_DEFAULT, NormalSpeedSimulationAction.NAME));
+    components.add(createButtonInput(editor, SIMULATION_FASTER, IncreaseSimulationSpeedAction.NAME));
+    components.add(createButtonInput(editor, SIMULATION_SLOWER, DecreaseSimulationSpeedAction.NAME));
 
     components.add(new JSeparator(JSeparator.VERTICAL));
-    components.add(createButtonInput(editor, ROTATE_LEFT, PlacementRotateLeftAction.NAME).getButton());
-    components.add(createButtonInput(editor, ROTATE_RIGHT, PlacementRotateRightAction.NAME).getButton());
-    components.add(createButtonInput(editor, MIRROR_HORIZONTAL, PlacementFlipHorizontallyAction.NAME).getButton());
-    components.add(createButtonInput(editor, MIRROR_VERTICAL, PlacementFlipVerticallyAction.NAME).getButton());
+    components.add(createButtonInput(editor, ROTATE_LEFT, PlacementRotateLeftAction.NAME));
+    components.add(createButtonInput(editor, ROTATE_RIGHT, PlacementRotateRightAction.NAME));
+    components.add(createButtonInput(editor, MIRROR_HORIZONTAL, PlacementFlipHorizontallyAction.NAME));
+    components.add(createButtonInput(editor, MIRROR_VERTICAL, PlacementFlipVerticallyAction.NAME));
 
     int x = 0;
     for (JComponent component : components)
@@ -49,10 +49,12 @@ public class ToolbarPanel
     add(new JPanel(), GridBagUtil.gridBagConstraints(x, 0, 1, 0, GridBagConstraints.BOTH));
   }
 
-  protected ButtonInput createButtonInput(Logicim editor, String iconKey, String actionName)
+  protected JButton createButtonInput(Logicim editor, String iconKey, String actionName)
   {
     JButton button = createButton(iconKey);
-    return new ButtonInput(editor.getAction(actionName), button);
+    ButtonInput buttonInput = new ButtonInput(editor.getAction(actionName), button);
+    editor.addButtonInput(buttonInput);
+    return buttonInput.getButton();
   }
 
   protected JButton createButton(String iconKey)

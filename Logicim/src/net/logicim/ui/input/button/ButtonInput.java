@@ -30,5 +30,18 @@ public class ButtonInput
   {
     return button;
   }
+
+  public void enable()
+  {
+    boolean enabled = action.isAvailable();
+    if (button.isEnabled() && !enabled)
+    {
+      button.setEnabled(false);
+    }
+    else if (!button.isEnabled() && enabled)
+    {
+      button.setEnabled(true);
+    }
+  }
 }
 

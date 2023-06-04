@@ -17,5 +17,11 @@ public class RunOneEventAction
   {
     editor.runOneEvent();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

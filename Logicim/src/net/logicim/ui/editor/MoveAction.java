@@ -17,5 +17,11 @@ public class MoveAction
   {
     editor.editActionMove();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canMove();
+  }
 }
 

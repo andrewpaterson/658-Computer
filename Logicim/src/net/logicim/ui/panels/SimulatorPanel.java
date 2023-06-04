@@ -105,6 +105,7 @@ public class SimulatorPanel
         tickCount++;
       }
 
+      logicim.updateButtonsEnabled();
       render();
       paint();
 

@@ -17,5 +17,11 @@ public class ToggleRunSimulationAction
   {
     editor.toggleTunSimulation();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

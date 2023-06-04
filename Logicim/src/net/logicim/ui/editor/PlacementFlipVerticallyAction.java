@@ -17,5 +17,11 @@ public class PlacementFlipVerticallyAction
   {
     editor.flipVertically();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canTransformComponents();
+  }
 }
 

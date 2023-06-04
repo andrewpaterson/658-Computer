@@ -20,5 +20,11 @@ public class LoadSimulationAction
   {
     panel.loadSimulation();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

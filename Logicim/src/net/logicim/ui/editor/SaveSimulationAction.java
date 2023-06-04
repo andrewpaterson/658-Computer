@@ -20,5 +20,11 @@ public class SaveSimulationAction
   {
     panel.saveSimulation();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return true;
+  }
 }
 

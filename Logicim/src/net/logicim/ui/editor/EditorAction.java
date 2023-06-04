@@ -23,5 +23,7 @@ public abstract class EditorAction
   {
     return name;
   }
+
+  public abstract boolean isAvailable();
 }
 

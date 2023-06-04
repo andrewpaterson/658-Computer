@@ -24,5 +24,11 @@ public class DeleteAction
 
     editor.updateHighlighted();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canDelete();
+  }
 }
 

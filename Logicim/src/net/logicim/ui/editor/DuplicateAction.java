@@ -17,5 +17,11 @@ public class DuplicateAction
   {
     editor.editActionDuplicate();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canDuplicate();
+  }
 }
 

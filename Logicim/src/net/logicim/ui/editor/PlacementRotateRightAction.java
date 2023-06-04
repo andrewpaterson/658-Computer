@@ -17,5 +17,11 @@ public class PlacementRotateRightAction
   {
     editor.rotateRight();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canTransformComponents();
+  }
 }
 

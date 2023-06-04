@@ -17,5 +17,11 @@ public class LeaveSubcircuitAction
   {
     editor.leaveSubcircuit();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return false;
+  }
 }
 

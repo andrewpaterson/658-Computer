@@ -17,5 +17,11 @@ public class CutAction
   {
     editor.editActionCut();
   }
+
+  @Override
+  public boolean isAvailable()
+  {
+    return editor.canCopy();
+  }
 }
 

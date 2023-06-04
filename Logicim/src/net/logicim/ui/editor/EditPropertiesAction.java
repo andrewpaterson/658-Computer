@@ -32,13 +32,19 @@ public class EditPropertiesAction
   public void executeEditorAction()
   {
     StaticView<?> componentView = getComponent();
-
     if (componentView != null)
     {
       new EditPropertiesDialogHelper().showPropertyEditorDialog(simulatorPanel.getFrame(),
                                                                 editor,
                                                                 componentView);
     }
+  }
+
+  @Override
+  public boolean isAvailable()
+  {
+    StaticView<?> componentView = getComponent();
+    return componentView != null;
   }
 }
 

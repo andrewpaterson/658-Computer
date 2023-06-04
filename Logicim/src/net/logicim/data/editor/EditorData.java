@@ -10,8 +10,9 @@ public class EditorData
     extends ReflectiveData
 {
   public CircuitData circuit;
-  public boolean running;
+  public long defaultRunTimeStep;
   public long runTimeStep;
+  public boolean running;
   public Rotation creationRotation;
   public List<BookmarkData> subcircuitBookmarks;
   public List<SubcircuitParameterData> subcircuitParameters;
@@ -23,8 +24,9 @@ public class EditorData
   }
 
   public EditorData(CircuitData circuit,
-                    boolean running,
+                    long defaultRunTimeStep,
                     long runTimeStep,
+                    boolean running,
                     Rotation creationRotation,
                     List<BookmarkData> subcircuitBookmarks,
                     List<SubcircuitParameterData> subcircuitParameters,
@@ -32,6 +34,7 @@ public class EditorData
                     List<DefaultComponentPropertiesData> defaultProperties)
   {
     this.circuit = circuit;
+    this.defaultRunTimeStep = defaultRunTimeStep;
     this.running = running;
     this.runTimeStep = runTimeStep;
     this.creationRotation = creationRotation;

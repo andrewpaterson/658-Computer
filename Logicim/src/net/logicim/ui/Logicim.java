@@ -13,7 +13,6 @@ import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.LongTime;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -22,7 +21,10 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.editor.EditorAction;
+import net.logicim.ui.editor.SimulationSpeed;
 import net.logicim.ui.editor.SubcircuitViewParameters;
+import net.logicim.ui.input.EditorActionsFactory;
+import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.action.KeyInput;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
@@ -44,7 +46,6 @@ import net.logicim.ui.simulation.order.SubcircuitOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
-import net.logicim.ui.util.SimulatorActions;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -86,8 +87,7 @@ public class Logicim
 
   protected UndoStack undoStack;
 
-  protected boolean running;
-  protected long runTimeStep;
+  protected SimulationSpeed simulationSpeed;
 
   protected Rotation creationRotation;
 
@@ -115,8 +115,7 @@ public class Logicim
     this.editAction = null;
     this.creationRotation = Rotation.West;
 
-    this.running = false;
-    this.runTimeStep = LongTime.nanosecondsToTime(0.25f);
+    this.simulationSpeed = new SimulationSpeed();
 
     this.undoStack = new UndoStack();
     this.clipboard = null;
@@ -133,7 +132,7 @@ public class Logicim
 
   public void windowClosing()
   {
-    running = false;
+    simulationSpeed.setRunning(false);
     System.exit(0);
   }
 
@@ -148,9 +147,9 @@ public class Logicim
 
     if (tickCount == 0)
     {
-      if (running && canRun())
+      if (simulationSpeed.isRunning() && canRun())
       {
-        runToTime(runTimeStep);
+        runToTime(simulationSpeed.getRunTimeStep());
       }
     }
     return true;
@@ -535,7 +534,8 @@ public class Logicim
 
   private void addActions(SimulatorPanel simulatorPanel)
   {
-    SimulatorActions.create(this, simulatorPanel);
+    EditorActionsFactory.create(this, simulatorPanel);
+    KeyInputsFactory.create(this);
     validateActionKeyBindings();
   }
 
@@ -701,7 +701,7 @@ public class Logicim
 
   public void toggleTunSimulation()
   {
-    running = !running;
+    boolean running = simulationSpeed.toggleTunSimulation();
     if (running)
     {
       TopLevelSubcircuitSimulation simulation = circuitEditor.getCurrentTopLevelSimulation();
@@ -749,12 +749,12 @@ public class Logicim
 
   public void increaseSimulationSpeed()
   {
-    runTimeStep *= 2;
+    simulationSpeed.increaseSimulationSpeed();
   }
 
   public void decreaseSimulationSpeed()
   {
-    runTimeStep /= 2;
+    simulationSpeed.decreaseSimulationSpeed();
   }
 
   public void addEditorEvent(SimulatorEditorEvent event)
@@ -775,8 +775,9 @@ public class Logicim
     List<DefaultComponentPropertiesData> defaultProperties = saveDefaultComponentProperties();
     String currentSubcircuit = circuitEditor.getCurrentSubcircuitEditor().getTypeName();
     return new EditorData(circuitData,
-                          running,
-                          runTimeStep,
+                          simulationSpeed.getDefaultRunTimeStep(),
+                          simulationSpeed.getRunTimeStep(),
+                          simulationSpeed.isRunning(),
                           creationRotation,
                           subcircuitBookmarks,
                           subcircuitParameters,
@@ -832,8 +833,10 @@ public class Logicim
     circuitEditor = new CircuitEditor();
     circuitEditor.load(editorData.circuit);
 
-    running = editorData.running;
-    runTimeStep = editorData.runTimeStep;
+    simulationSpeed.setRunning(editorData.running);
+    simulationSpeed.setRunTimeStep(editorData.runTimeStep);
+    simulationSpeed.setDefaultRunTimeStep(editorData.defaultRunTimeStep);
+
     creationRotation = editorData.creationRotation;
     subcircuitViewParameters = loadSubcircuitViewParameters(editorData);
     subcircuitBookmarks = loadSubcircuitBookmarks(editorData);
@@ -919,9 +922,9 @@ public class Logicim
     EditorData editorData = undoStack.pop();
     if (editorData != null)
     {
-      boolean running = this.running;
+      boolean running = simulationSpeed.isRunning();
       load(editorData);
-      this.running = running;
+      simulationSpeed.setRunning(running);
     }
   }
 
@@ -1198,7 +1201,7 @@ public class Logicim
 
   public void setRunning(boolean running)
   {
-    this.running = running;
+    simulationSpeed.setRunning(running);
   }
 
   public void addAction(String name, EditorAction action)
@@ -1210,6 +1213,21 @@ public class Logicim
   public EditorAction getAction(String description)
   {
     return actions.getAction(description);
+  }
+
+  public void setDefaultSimulationSpeed()
+  {
+    this.simulationSpeed.setDefaultSimulationSpeed();
+  }
+
+  public void flipVertically()
+  {
+    throw new SimulatorException();
+  }
+
+  public void flipHorizontally()
+  {
+    throw new SimulatorException();
   }
 }
 

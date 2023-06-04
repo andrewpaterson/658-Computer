@@ -33,7 +33,7 @@ public class SimulatorFrame
   public SimulatorFrame() throws HeadlessException
   {
     simulatorPanel = new SimulatorPanel(this);
-    toolbarPanel = new ToolbarPanel(this);
+    toolbarPanel = new ToolbarPanel(this,simulatorPanel.getEditor());
     displayPanel = new DisplayPanel(this);
     creationPanel = new CreationPanel(this);
     selectedInfoPanel = new SelectedInfoPanel(this);

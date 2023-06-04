@@ -60,21 +60,6 @@ public class KeyInput
     return false;
   }
 
-  public ButtonState getAltHeld()
-  {
-    return altHeld;
-  }
-
-  public ButtonState getShiftHeld()
-  {
-    return shiftHeld;
-  }
-
-  public ButtonState getCtrlHeld()
-  {
-    return ctrlHeld;
-  }
-
   public int getKeyPressedCode()
   {
     return keyPressedCode;

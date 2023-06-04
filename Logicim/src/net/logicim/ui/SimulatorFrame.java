@@ -5,7 +5,6 @@ import net.logicim.common.reflect.EnumStore;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.SaveData;
 import net.logicim.ui.common.Colours;
-import net.logicim.ui.icons.IconLoader;
 import net.logicim.ui.panels.*;
 import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
@@ -33,7 +32,7 @@ public class SimulatorFrame
   public SimulatorFrame() throws HeadlessException
   {
     simulatorPanel = new SimulatorPanel(this);
-    toolbarPanel = new ToolbarPanel(this,simulatorPanel.getEditor());
+    toolbarPanel = new ToolbarPanel(this, simulatorPanel.getEditor());
     displayPanel = new DisplayPanel(this);
     creationPanel = new CreationPanel(this);
     selectedInfoPanel = new SelectedInfoPanel(this);
@@ -48,8 +47,6 @@ public class SimulatorFrame
 
     add(selectedInfoPanel, GridBagUtil.gridBagConstraints(0, 2, 1, 0, HORIZONTAL, 3, 1));  // Selected object info row
     add(circuitInfoPanel, GridBagUtil.gridBagConstraints(0, 3, 1, 0, HORIZONTAL, 3, 1));  // Simulation info row
-
-    Icon icon = IconLoader.getIcon(IconLoader.ABOUT);
 
     JMenuBar menuBar;
     JMenu menu;

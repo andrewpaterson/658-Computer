@@ -11,7 +11,7 @@ public class EditorDialogHelper
   {
   }
 
-  public void showPropertyEditorDialog(InputDialog inputDialog)
+  public void showDialog(InputDialog inputDialog)
   {
     Point mousePosition = MouseInfo.getPointerInfo().getLocation();
     inputDialog.build();

@@ -1311,6 +1311,11 @@ public class Logicim
     return circuitEditor.getSimulations().size();
   }
 
+  public List<TopLevelSubcircuitSimulation> getSimulations()
+  {
+    return circuitEditor.getSimulations();
+  }
+
   public void resetZoom()
   {
     viewport.resetZoom(mousePosition.get());

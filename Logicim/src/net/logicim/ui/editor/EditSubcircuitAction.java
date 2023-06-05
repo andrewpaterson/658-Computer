@@ -24,7 +24,7 @@ public class EditSubcircuitAction
   {
     SubcircuitView subcircuitView = editor.getCircuitEditor().getCurrentSubcircuitView();
     EditSubcircuitDialog subcircuitDialog = new EditSubcircuitDialog(simulatorPanel.getFrame(), editor, subcircuitView);
-    new EditorDialogHelper().showPropertyEditorDialog(subcircuitDialog);
+    new EditorDialogHelper().showDialog(subcircuitDialog);
   }
 
   @Override

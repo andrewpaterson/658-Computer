@@ -6,6 +6,7 @@ import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
 import net.logicim.ui.Logicim;
+import net.logicim.ui.circuit.EditorDialogHelper;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.common.Fonts;
 import net.logicim.ui.common.wire.TunnelViewFactory;
@@ -14,6 +15,7 @@ import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.MouseWheelEvent;
 import net.logicim.ui.input.event.*;
+import net.logicim.ui.simulation.ShowSimulationsDialog;
 import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
@@ -323,10 +325,15 @@ public class SimulatorPanel
     return frame;
   }
 
+  public void showSimulations()
+  {
+    ShowSimulationsDialog showSimulationsDialog = new ShowSimulationsDialog(getFrame(), logicim);
+    new EditorDialogHelper().showDialog(showSimulationsDialog);
+  }
+
   @Override
   public void mouseClicked(MouseEvent e)
   {
-
   }
 
   @Override

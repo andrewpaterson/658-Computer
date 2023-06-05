@@ -87,9 +87,11 @@ public class CircuitSimulation
 
   public String getDescription()
   {
+    String name = getName();
+    long id = getId();
     if (StringUtil.isEmptyOrNull(name))
     {
-      return "ID (" + id + ")";
+      return "" + id;
     }
     else
     {

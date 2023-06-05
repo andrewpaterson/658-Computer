@@ -19,7 +19,7 @@ public class ViewSimulationTreeAction
   @Override
   public void executeEditorAction()
   {
-
+    panel.showSimulations();
   }
 
   @Override

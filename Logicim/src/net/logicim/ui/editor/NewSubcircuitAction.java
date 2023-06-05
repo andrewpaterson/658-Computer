@@ -22,7 +22,7 @@ public class NewSubcircuitAction
   public void executeEditorAction()
   {
     NewSubcircuitDialog subcircuitDialog = new NewSubcircuitDialog(simulatorPanel.getFrame(), editor);
-    new EditorDialogHelper().showPropertyEditorDialog(subcircuitDialog);
+    new EditorDialogHelper().showDialog(subcircuitDialog);
   }
 
   @Override

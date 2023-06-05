@@ -1017,7 +1017,15 @@ public class Logicim
 
   protected List<View> getCurrentSelection()
   {
-    return circuitEditor.getCurrentSelection().getSelection();
+    Selection currentSelection = circuitEditor.getCurrentSelection();
+    if (currentSelection != null)
+    {
+      return currentSelection.getSelection();
+    }
+    else
+    {
+      return new ArrayList<>();
+    }
   }
 
   public boolean canDuplicate()

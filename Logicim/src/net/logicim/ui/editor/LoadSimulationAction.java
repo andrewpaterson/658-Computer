@@ -1,5 +1,6 @@
 package net.logicim.ui.editor;
 
+import net.logicim.ui.Logicim;
 import net.logicim.ui.panels.SimulatorPanel;
 
 public class LoadSimulationAction
@@ -9,9 +10,9 @@ public class LoadSimulationAction
 
   private SimulatorPanel panel;
 
-  public LoadSimulationAction(SimulatorPanel panel)
+  public LoadSimulationAction(Logicim editor, SimulatorPanel panel)
   {
-    super(panel.getEditor());
+    super(editor);
     this.panel = panel;
   }
 

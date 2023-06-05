@@ -56,7 +56,14 @@ public class CircuitEditor
 
   private List<View> getAllViews()
   {
-    return currentSubcircuitEditor.getAllViews();
+    if (currentSubcircuitEditor != null)
+    {
+      return currentSubcircuitEditor.getAllViews();
+    }
+    else
+    {
+      return new ArrayList<>();
+    }
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -372,7 +379,14 @@ public class CircuitEditor
 
   public Selection getCurrentSelection()
   {
-    return currentSubcircuitEditor.getSelection();
+    if (currentSubcircuitEditor != null)
+    {
+      return currentSubcircuitEditor.getSelection();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public List<View> getSelectionFromRectangle(Float2D start, Float2D end)

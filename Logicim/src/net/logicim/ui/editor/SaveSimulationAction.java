@@ -1,5 +1,6 @@
 package net.logicim.ui.editor;
 
+import net.logicim.ui.Logicim;
 import net.logicim.ui.panels.SimulatorPanel;
 
 public class SaveSimulationAction
@@ -9,9 +10,9 @@ public class SaveSimulationAction
 
   private SimulatorPanel panel;
 
-  public SaveSimulationAction(SimulatorPanel panel)
+  public SaveSimulationAction(Logicim editor, SimulatorPanel panel)
   {
-    super(panel.getEditor());
+    super(editor);
     this.panel = panel;
   }
 

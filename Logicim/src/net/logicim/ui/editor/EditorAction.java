@@ -1,5 +1,6 @@
 package net.logicim.ui.editor;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.ui.Logicim;
 
 public abstract class EditorAction
@@ -9,6 +10,10 @@ public abstract class EditorAction
 
   public EditorAction(Logicim editor)
   {
+    if (editor == null)
+    {
+      throw new SimulatorException("Editor may not be null.");
+    }
     this.editor = editor;
   }
 
@@ -25,5 +30,10 @@ public abstract class EditorAction
   }
 
   public abstract boolean isAvailable();
+
+  public Logicim getEditor()
+  {
+    return editor;
+  }
 }
 

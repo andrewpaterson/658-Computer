@@ -33,7 +33,7 @@ public class SimulatorFrame
   {
     simulatorPanel = new SimulatorPanel(this);
     toolbarPanel = new ToolbarPanel(this, simulatorPanel.getEditor());
-    displayPanel = new DisplayPanel(this);
+    displayPanel = new DisplayPanel(this, simulatorPanel.getEditor());
     creationPanel = new CreationPanel(this);
     selectedInfoPanel = new SelectedInfoPanel(this);
     circuitInfoPanel = new CircuitInfoPanel(this, simulatorPanel.getEditor());

@@ -83,6 +83,9 @@ public class EditorActionsFactory
       editor.addAction(GotoSubcircuitAction.name(i), new GotoSubcircuitAction(editor, i));
       editor.addAction(PlaceSubcircuitAction.name(i), new PlaceSubcircuitAction(editor, i));
     }
+
+    editor.addAction(TogglePointViewAction.NAME, new TogglePointViewAction(editor));
+    editor.addAction(ViewSimulationTreeAction.NAME, new ViewSimulationTreeAction(editor, panel));
   }
 
   private static void placeComponentAction(Logicim editor, Class<? extends StaticView<?>> staticViewClass)

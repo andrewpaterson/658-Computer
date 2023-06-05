@@ -18,6 +18,7 @@ public class EditorData
   public List<SubcircuitParameterData> subcircuitParameters;
   public String currentSubcircuit;
   public List<DefaultComponentPropertiesData> defaultProperties;
+  public boolean drawPointGrid;
 
   public EditorData()
   {
@@ -31,7 +32,8 @@ public class EditorData
                     List<BookmarkData> subcircuitBookmarks,
                     List<SubcircuitParameterData> subcircuitParameters,
                     String currentSubcircuit,
-                    List<DefaultComponentPropertiesData> defaultProperties)
+                    List<DefaultComponentPropertiesData> defaultProperties,
+                    boolean drawPointGrid)
   {
     this.circuit = circuit;
     this.defaultRunTimeStep = defaultRunTimeStep;
@@ -42,6 +44,7 @@ public class EditorData
     this.subcircuitParameters = subcircuitParameters;
     this.currentSubcircuit = currentSubcircuit;
     this.defaultProperties = defaultProperties;
+    this.drawPointGrid = drawPointGrid;
   }
 }
 

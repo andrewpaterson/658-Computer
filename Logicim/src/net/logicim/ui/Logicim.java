@@ -100,6 +100,8 @@ public class Logicim
   protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
   protected Map<String, SubcircuitViewParameters> subcircuitViewParameters;
 
+  protected boolean drawPointGrid;
+
   public Logicim(SimulatorPanel simulatorPanel)
   {
     this.inputEvents = new ConcurrentLinkedDeque<>();
@@ -127,6 +129,8 @@ public class Logicim
 
     this.subcircuitBookmarks = new LinkedHashMap<>();
     this.subcircuitViewParameters = new LinkedHashMap<>();
+
+    this.drawPointGrid = true;
 
     setSubcircuitParameters(MAIN_SUBCIRCUIT_TYPE_NAME);
 
@@ -382,7 +386,11 @@ public class Logicim
     graphics.setColor(Colours.getInstance().getBackground());
     graphics.fillRect(0, 0, width, height);
 
-    viewport.paintGrid(graphics);
+    if (drawPointGrid)
+    {
+      viewport.paintGrid(graphics);
+    }
+
     circuitEditor.paint(graphics, viewport);
 
     if ((hoverComponentView != null) && (hoverConnectionView == null))
@@ -822,7 +830,8 @@ public class Logicim
                           subcircuitBookmarks,
                           subcircuitParameters,
                           currentSubcircuit,
-                          defaultProperties);
+                          defaultProperties,
+                          drawPointGrid);
   }
 
   protected List<DefaultComponentPropertiesData> saveDefaultComponentProperties()
@@ -884,6 +893,8 @@ public class Logicim
     SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(editorData.currentSubcircuit);
     String subcircuitTypeName = circuitEditor.setCurrentSubcircuitEditor(subcircuitEditor);
     setViewportParameters(subcircuitTypeName);
+
+    drawPointGrid = editorData.drawPointGrid;
 
     PackageInspector packageInspector = PackageInspectorStore.getInstance().getPackageInspector("net.logicim.ui");
     for (DefaultComponentPropertiesData defaultProperty : editorData.defaultProperties)
@@ -1382,6 +1393,11 @@ public class Logicim
   public void addInfoLabel(InfoLabel infoLabel)
   {
     labels.add(infoLabel);
+  }
+
+  public void togglePointGrid()
+  {
+    drawPointGrid = !drawPointGrid;
   }
 }
 

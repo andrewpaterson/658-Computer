@@ -87,9 +87,12 @@ public class InputActions
     buttonInputs.add(buttonInput);
   }
 
-  public List<ButtonInput> getButtonInputs()
+  public void updateButtonsEnabled()
   {
-    return buttonInputs;
+    for (ButtonInput buttonInput : buttonInputs)
+    {
+      buttonInput.enable();
+    }
   }
 }
 

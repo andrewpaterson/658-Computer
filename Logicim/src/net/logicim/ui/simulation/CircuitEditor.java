@@ -344,6 +344,11 @@ public class CircuitEditor
     return null;
   }
 
+  public List<TopLevelSubcircuitSimulation> getSimulations()
+  {
+    return simulations;
+  }
+
   protected SubcircuitEditor getCurrentSubcircuitEditor(long subcircuitId)
   {
     SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitId);

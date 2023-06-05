@@ -24,6 +24,7 @@ import net.logicim.ui.editor.EditorAction;
 import net.logicim.ui.editor.SimulationSpeed;
 import net.logicim.ui.editor.SubcircuitViewParameters;
 import net.logicim.ui.info.InfoLabel;
+import net.logicim.ui.info.InfoLabels;
 import net.logicim.ui.input.EditorActionsFactory;
 import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.action.InputActions;
@@ -72,7 +73,7 @@ public class Logicim
   protected Viewport viewport;
   protected EditorActions actions;
   protected InputActions inputActions;
-  protected List<InfoLabel> labels;
+  protected InfoLabels labels;
 
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
@@ -113,7 +114,7 @@ public class Logicim
 
     this.actions = new EditorActions();
     this.inputActions = new InputActions();
-    this.labels = new ArrayList<>();
+    this.labels = new InfoLabels();
 
     this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
     this.editAction = null;
@@ -260,7 +261,7 @@ public class Logicim
       if (moved != null)
       {
         viewport.scroll(moved);
-        setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
+        setSubcircuitParameters(getCurrentSubcircuitEditor().getTypeName());
       }
     }
 
@@ -481,7 +482,7 @@ public class Logicim
     int rotation = mouseButtons.getRotation();
 
     viewport.zoomTo(mousePosition.get(), (float) rotation / 10.0f);
-    setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
+    setSubcircuitParameters(getCurrentSubcircuitEditor().getTypeName());
 
     calculateHighlightedPort();
   }
@@ -528,7 +529,7 @@ public class Logicim
 
   private TraceView getHoverTrace(Int2D mousePosition)
   {
-    return circuitEditor.getCurrentSubcircuitEditor().getTraceViewInScreenSpace(viewport, mousePosition);
+    return getCurrentSubcircuitEditor().getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
   private StaticView<?> calculateHoverView(Int2D mousePosition)
@@ -812,7 +813,7 @@ public class Logicim
     ArrayList<BookmarkData> subcircuitBookmarks = saveBookmarks();
     ArrayList<SubcircuitParameterData> subcircuitParameters = saveSubcircuitViewParameters();
     List<DefaultComponentPropertiesData> defaultProperties = saveDefaultComponentProperties();
-    String currentSubcircuit = circuitEditor.getCurrentSubcircuitEditor().getTypeName();
+    String currentSubcircuit = getCurrentSubcircuitEditor().getTypeName();
     return new EditorData(circuitData,
                           simulationSpeed.getDefaultRunTimeStep(),
                           simulationSpeed.getRunTimeStep(),
@@ -1242,7 +1243,7 @@ public class Logicim
 
   public void bookmarkSubcircuit(int bookmarkIndex)
   {
-    SubcircuitEditor subcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+    SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
     subcircuitBookmarks.put(bookmarkIndex, subcircuitEditor);
   }
 
@@ -1263,10 +1264,9 @@ public class Logicim
     return circuitEditor.getSubcircuitEditors();
   }
 
-  public List<String> getAllowedSubcircuitTypeNamesForSubcircuitInstance(SubcircuitInstanceView
-                                                                             subcircuitInstanceView)
+  public List<String> getAllowedSubcircuitTypeNamesForSubcircuitInstance()
   {
-    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+    SubcircuitEditor currentSubcircuitEditor = getCurrentSubcircuitEditor();
     ArrayList<String> result = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : getSubcircuitEditors())
     {
@@ -1285,10 +1285,25 @@ public class Logicim
     return result;
   }
 
+  public SubcircuitEditor getCurrentSubcircuitEditor()
+  {
+    return circuitEditor.getCurrentSubcircuitEditor();
+  }
+
+  public CircuitSimulation getCurrentSimulation()
+  {
+    return circuitEditor.getCircuitSimulation();
+  }
+
+  public int getSimulationCount()
+  {
+    return circuitEditor.getSimulations().size();
+  }
+
   public void resetZoom()
   {
     viewport.resetZoom(mousePosition.get());
-    setSubcircuitParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
+    setSubcircuitParameters(getCurrentSubcircuitEditor().getTypeName());
 
     calculateHighlightedPort();
   }
@@ -1326,19 +1341,12 @@ public class Logicim
 
   public void updateButtonsEnabled()
   {
-    List<ButtonInput> buttonInputs = inputActions.getButtonInputs();
-    for (ButtonInput buttonInput : buttonInputs)
-    {
-      buttonInput.enable();
-    }
+    inputActions.updateButtonsEnabled();
   }
 
   public void updateLabels()
   {
-    for (InfoLabel label : labels)
-    {
-      label.update();
-    }
+    labels.updateLabels();
   }
 
   public boolean canPauseSimulation()

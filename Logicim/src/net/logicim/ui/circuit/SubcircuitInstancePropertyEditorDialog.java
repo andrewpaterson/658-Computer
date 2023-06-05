@@ -29,7 +29,7 @@ public class SubcircuitInstancePropertyEditorDialog
   @Override
   protected JPanel createEditorPanel()
   {
-    List<String> subcircuitTypeNames = editor.getAllowedSubcircuitTypeNamesForSubcircuitInstance(componentView);
+    List<String> subcircuitTypeNames = editor.getAllowedSubcircuitTypeNamesForSubcircuitInstance();
     return new SubcircuitInstancePropertiesPanel(this,
                                                  componentViewProperties,
                                                  subcircuitTypeNames,

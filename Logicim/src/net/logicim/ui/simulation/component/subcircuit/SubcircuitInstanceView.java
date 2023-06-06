@@ -452,7 +452,21 @@ public class SubcircuitInstanceView
   @Override
   public String getDescription()
   {
-    return getType() + " " + getTypeName() + "(" + getName() + ") (" + getPosition() + ")";
+    return getType() + " " + getShortDescription();
+  }
+
+  public String getShortDescription()
+  {
+    String name = getName();
+    if (!StringUtil.isEmptyOrNull(name))
+    {
+      name = "(" + name + ") ";
+    }
+    else
+    {
+      name = "";
+    }
+    return getTypeName() + " " + name + "(" + getPosition() + ")";
   }
 
   @Override

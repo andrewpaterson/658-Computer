@@ -13,6 +13,7 @@ import net.logicim.data.field.SaveXMLDataField;
 import net.logicim.data.field.UnknownXMLDataField;
 import net.logicim.data.field.XMLDataField;
 import net.logicim.domain.common.state.State;
+import net.logicim.data.common.Divider;
 import net.logicim.ui.common.Rotation;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

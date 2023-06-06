@@ -5,7 +5,7 @@ import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.family.Family;
-import net.logicim.ui.simulation.component.ui.Divider;
+import net.logicim.data.common.Divider;
 
 import java.util.Objects;
 

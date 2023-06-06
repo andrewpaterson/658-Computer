@@ -180,7 +180,25 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   @Override
   public String getDescription()
   {
-    return getComponentType() + " " + getName() + " (" + getPosition() + ")";
+    String name = getName();
+    if (!StringUtil.isEmptyOrNull(name))
+    {
+      name = name + " ";
+    }
+    else
+    {
+      name = "";
+    }
+    String componentType = getComponentType();
+    if (StringUtil.isEmptyOrNull(componentType))
+    {
+      componentType = componentType + " ";
+    }
+    else
+    {
+      componentType = "";
+    }
+    return componentType + name + "(" + getPosition() + ")";
   }
 
   protected void validateAtLeastOnePort(List<PortView> portViews)

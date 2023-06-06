@@ -127,18 +127,22 @@ public class ConnectionInformationPanel
       builder.append("\n" + padding + text);
       padding += "    ";
     }
-    for (Port port : portView.getPorts(simulation))
+    List<? extends Port> ports = portView.getPorts(simulation);
+    if (ports != null)
     {
-      String portName = port.getName();
-      if (StringUtil.isEmptyOrNull(portName))
+      for (Port port : ports)
       {
-        portName = port.getType() + ": ";
+        String portName = port.getName();
+        if (StringUtil.isEmptyOrNull(portName))
+        {
+          portName = port.getType() + ": ";
+        }
+        else
+        {
+          portName = port.getType() + " \"" + portName + "\"" + ": ";
+        }
+        builder.append("\n" + padding + portName + toPortTraceIdString(port));
       }
-      else
-      {
-        portName = port.getType() + " \"" + portName + "\"" + ": ";
-      }
-      builder.append("\n" + padding + portName + toPortTraceIdString(port));
     }
     return builder.toString();
   }
@@ -161,24 +165,27 @@ public class ConnectionInformationPanel
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
     List<Trace> traces = traceView.getTraces(simulation);
-    boolean multiline = traces.size() > 8;
-    if (multiline)
+    if (traces != null)
     {
-      builder.append("\n  ");
-    }
-
-    boolean first = true;
-    int count = 0;
-    for (Trace trace : traces)
-    {
-      first = appendComma(builder, first);
-      builder.append(trace.getId());
-      count++;
-      if (count == 8)
+      boolean multiline = traces.size() > 8;
+      if (multiline)
       {
-        first = true;
-        count = 0;
         builder.append("\n  ");
+      }
+
+      boolean first = true;
+      int count = 0;
+      for (Trace trace : traces)
+      {
+        first = appendComma(builder, first);
+        builder.append(trace.getId());
+        count++;
+        if (count == 8)
+        {
+          first = true;
+          count = 0;
+          builder.append("\n  ");
+        }
       }
     }
     return builder.toString();

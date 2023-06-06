@@ -29,7 +29,7 @@ public class ShowSimulationsDialog
 
   public ShowSimulationsDialog(Frame owner, Logicim editor)
   {
-    super(owner, "Simulations", true, new Dimension(392, 260));
+    super(owner, "Simulations", true, new Dimension(480, owner.getHeight() - 24));
     this.editor = editor;
   }
 
@@ -55,6 +55,7 @@ public class ShowSimulationsDialog
       recurseFindChildCircuits(circuitNode, subcircuitView);
     }
 
+    tree.setRootVisible(false);
     tree.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
     contentPane.add(tree, gridBagConstraints(0, 0, 1, 1, BOTH, new Insets(5, 5, 5, 5)));
 
@@ -66,7 +67,6 @@ public class ShowSimulationsDialog
                                       new CancelButton("Cancel", this));
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-
   }
 
   protected void recurseFindChildCircuits(DefaultMutableTreeNode parentNode, SubcircuitView subcircuitView)

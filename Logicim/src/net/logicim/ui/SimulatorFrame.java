@@ -22,12 +22,12 @@ public class SimulatorFrame
     implements WindowListener,
                KeyListener
 {
-  private SimulatorPanel simulatorPanel;
-  private ToolbarPanel toolbarPanel;
-  private DisplayPanel displayPanel;
-  private CreationPanel creationPanel;
-  private SelectedInfoPanel selectedInfoPanel;
-  private CircuitInfoPanel circuitInfoPanel;
+  protected SimulatorPanel simulatorPanel;
+  protected ToolbarPanel toolbarPanel;
+  protected DisplayPanel displayPanel;
+  protected CreationPanel creationPanel;
+  protected SelectedInfoPanel selectedInfoPanel;
+  protected CircuitInfoPanel circuitInfoPanel;
 
   public SimulatorFrame() throws HeadlessException
   {

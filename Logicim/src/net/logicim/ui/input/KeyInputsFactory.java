@@ -83,6 +83,8 @@ public class KeyInputsFactory
       editor.addKeyInput(new KeyInput(editor.getAction(GotoSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Up, Up, Up));
       editor.addKeyInput(new KeyInput(editor.getAction(PlaceSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Up, Up, Down));
     }
+
+    editor.addKeyInput(new KeyInput(editor.getAction(SelectSimulationAction.NAME), KeyEvent.VK_S, Down, Up, Down));
   }
 
   protected static void placeComponentKeyInput(Logicim editor, Class<? extends StaticView<?>> staticViewClass, int keyEvent, ButtonState ctrlHeld, ButtonState altHeld, ButtonState shiftHeld)

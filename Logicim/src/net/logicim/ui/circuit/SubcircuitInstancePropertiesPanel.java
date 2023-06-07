@@ -41,11 +41,10 @@ public class SubcircuitInstancePropertiesPanel
                                            List<String> allowedSubcircuitTypeNames,
                                            Rotation rotation)
   {
-    super(new GridBagLayout());
+    super();
 
     this.dialog = dialog;
 
-    Form form = new Form();
     this.typeName = new ComboBoxPropertyEditor(this, TYPE_NAME, allowedSubcircuitTypeNames, properties.subcircuitTypeName);
     this.name = new TextPropertyEditor(this, NAME, properties.name);
     this.rotation = new RotationEditor(this, ROTATION, rotation);
@@ -53,14 +52,12 @@ public class SubcircuitInstancePropertiesPanel
     this.height = new IntegerPropertyEditor(this, HEIGHT, properties.height);
     this.comment = new TextPropertyEditor(this, COMMENT, properties.comment);
 
-    form.addComponents(new Label(TYPE_NAME), this.typeName.getComponent());
-    form.addComponents(new Label(NAME), this.name.getComponent());
-    form.addComponents(new Label(ROTATION), this.rotation.getComponent());
-    form.addComponents(new Label(WIDTH), this.width.getComponent());
-    form.addComponents(new Label(HEIGHT), this.height.getComponent());
-    form.addComponents(new Label(COMMENT), this.comment.getComponent());
-
-    addPropertyFormView(form);
+    addLabeledComponent(TYPE_NAME, this.typeName.getComponent());
+    addLabeledComponent(NAME, this.name.getComponent());
+    addLabeledComponent(ROTATION, this.rotation.getComponent());
+    addLabeledComponent(WIDTH, this.width.getComponent());
+    addLabeledComponent(HEIGHT, this.height.getComponent());
+    addLabeledComponent(COMMENT, this.comment.getComponent());
   }
 
   @Override

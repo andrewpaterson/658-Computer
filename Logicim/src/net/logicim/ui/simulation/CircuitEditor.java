@@ -484,6 +484,11 @@ public class CircuitEditor
     }
   }
 
+  public TopLevelSubcircuitSimulation getTopLevelSimulation()
+  {
+    return currentSimulation;
+  }
+
   public SubcircuitView getCurrentSubcircuitView()
   {
     return currentSubcircuitEditor.getSubcircuitView();
@@ -507,6 +512,63 @@ public class CircuitEditor
     return currentSubcircuitEditor.getTypeName();
   }
 
+  private void setCurrentSimulation(SubcircuitEditor subcircuitEditor)
+  {
+    TopLevelSubcircuitSimulation nextTopLevelSubcircuitSimulation = null;
+    for (TopLevelSubcircuitSimulation topLevelSubcircuitSimulation : simulations)
+    {
+      if (topLevelSubcircuitSimulation.subcircuitEditor == subcircuitEditor)
+      {
+        if (nextTopLevelSubcircuitSimulation == null)
+        {
+          nextTopLevelSubcircuitSimulation = topLevelSubcircuitSimulation;
+        }
+        else
+        {
+          throw new SimulatorException("More than one top level simulation found for subcircuit editor.");
+        }
+      }
+    }
+
+    if (nextTopLevelSubcircuitSimulation == null)
+    {
+      throw new SimulatorException("No top level simulation found for subcircuit editor.");
+    }
+
+    currentSimulation = nextTopLevelSubcircuitSimulation;
+  }
+
+  public void setCurrentSimulation(CircuitSimulation simulation)
+  {
+    TopLevelSubcircuitSimulation nextTopLevelSubcircuitSimulation = null;
+    for (TopLevelSubcircuitSimulation topLevelSubcircuitSimulation : simulations)
+    {
+      if (topLevelSubcircuitSimulation.circuitSimulation == simulation)
+      {
+        if (nextTopLevelSubcircuitSimulation == null)
+        {
+          nextTopLevelSubcircuitSimulation = topLevelSubcircuitSimulation;
+        }
+        else
+        {
+          throw new SimulatorException("More than one top level simulation found for simulation.");
+        }
+      }
+    }
+
+    if (nextTopLevelSubcircuitSimulation == null)
+    {
+      throw new SimulatorException("No top level simulation found for simulation.");
+    }
+
+    currentSimulation = nextTopLevelSubcircuitSimulation;
+  }
+
+  public void setCurrentSimulation(TopLevelSubcircuitSimulation simulation)
+  {
+    this.currentSimulation = simulation;
+  }
+
   public boolean hasMultipleSubcircuits()
   {
     return subcircuitEditors.size() > 1;
@@ -522,7 +584,9 @@ public class CircuitEditor
       {
         index = subcircuitEditors.size() - 1;
       }
-      return setCurrentSubcircuitEditor(subcircuitEditors.get(index));
+      SubcircuitEditor subcircuitEditor = subcircuitEditors.get(index);
+      setCurrentSimulation(subcircuitEditor);
+      return setCurrentSubcircuitEditor(subcircuitEditor);
     }
     return null;
   }
@@ -537,7 +601,9 @@ public class CircuitEditor
       {
         index = 0;
       }
-      return setCurrentSubcircuitEditor(subcircuitEditors.get(index));
+      SubcircuitEditor subcircuitEditor = subcircuitEditors.get(index);
+      setCurrentSimulation(subcircuitEditor);
+      return setCurrentSubcircuitEditor(subcircuitEditor);
     }
     return null;
   }

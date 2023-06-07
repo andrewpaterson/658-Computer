@@ -15,6 +15,7 @@ import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.error.ErrorFrame;
 import net.logicim.ui.input.event.MouseWheelEvent;
 import net.logicim.ui.input.event.*;
+import net.logicim.ui.simulation.SelectSimulationDialog;
 import net.logicim.ui.simulation.ShowSimulationsDialog;
 import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
@@ -330,6 +331,13 @@ public class SimulatorPanel
     ShowSimulationsDialog showSimulationsDialog = new ShowSimulationsDialog(getFrame(), logicim);
     new EditorDialogHelper().showDialog(showSimulationsDialog);
   }
+
+  public void selectSimulation()
+  {
+    SelectSimulationDialog selectSimulationDialog = new SelectSimulationDialog(getFrame(), logicim);
+    new EditorDialogHelper().showDialog(selectSimulationDialog);
+  }
+
 
   @Override
   public void mouseClicked(MouseEvent e)

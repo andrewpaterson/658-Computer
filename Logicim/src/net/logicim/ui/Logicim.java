@@ -1301,7 +1301,12 @@ public class Logicim
     return circuitEditor.getCurrentSubcircuitEditor();
   }
 
-  public CircuitSimulation getCurrentSimulation()
+  public TopLevelSubcircuitSimulation getCurrentTopLevelSimulation()
+  {
+    return circuitEditor.getTopLevelSimulation();
+  }
+
+  public CircuitSimulation getCurrentCircuitSimulation()
   {
     return circuitEditor.getCircuitSimulation();
   }
@@ -1327,6 +1332,11 @@ public class Logicim
   public void setRunning(boolean running)
   {
     simulationSpeed.setRunning(running);
+  }
+
+  public void setCurrentSimulation(TopLevelSubcircuitSimulation simulation)
+  {
+    this.circuitEditor.setCurrentSimulation(simulation);
   }
 
   public void addAction(String name, EditorAction action)

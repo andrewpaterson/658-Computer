@@ -63,8 +63,7 @@ public class ShowSimulationsDialog
     setNodeExpandedState(tree, node, true);
 
     JPanel bottomPanel = buildButtons(DEFAULT_WIDTH,
-                                      new ActionButton("Okay", this),
-                                      new CancelButton("Cancel", this));
+                                      new CancelButton("Close", this));
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
   }

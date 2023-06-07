@@ -3,11 +3,10 @@ package net.logicim.ui.circuit;
 import net.logicim.common.SimulatorException;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.components.Label;
-import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
 
-import java.awt.*;
+import javax.swing.*;
 
 public class SubcircuitPropertiesPanel
     extends PropertiesPanel
@@ -18,12 +17,9 @@ public class SubcircuitPropertiesPanel
 
   public SubcircuitPropertiesPanel(String name)
   {
-    super(new GridBagLayout());
-    Form form = new Form();
+    super();
     this.name = new TextPropertyEditor(this, TYPE_NAME, name);
-    form.addComponents(new Label(TYPE_NAME), this.name.getComponent());
-
-    addPropertyFormView(form);
+    addLabeledComponent(TYPE_NAME, this.name.getComponent());
   }
 
   public String getSubcircuitName()

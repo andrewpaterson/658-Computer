@@ -29,7 +29,7 @@ public class ReflectivePropertiesPanel
 
   public ReflectivePropertiesPanel(StaticView<?> componentView)
   {
-    super(new GridBagLayout());
+    super();
     ComponentProperties properties = componentView.getProperties();
 
     fieldProperties = new LinkedHashMap<>();
@@ -37,9 +37,8 @@ public class ReflectivePropertiesPanel
     InstanceInspector instanceInspector = new InstanceInspector(properties);
     List<Field> fields = new ArrayList<>(instanceInspector.getFields());
 
-    Form form = new Form();
     rotationEditor = new RotationEditor(this, "rotation", componentView.getRotation());
-    form.addComponents(new Label("Rotation"), rotationEditor.getComponent());
+    addLabeledComponent("Rotation", rotationEditor.getComponent());
     for (Field field : fields)
     {
       Class<?> fieldType = field.getType();
@@ -50,7 +49,7 @@ public class ReflectivePropertiesPanel
       PropertyEditor propertyEditor = TypeEditorFactory.getInstance().createEditor(this, fieldType, fieldName, fieldValue);
       if (!propertyEditor.isDivider())
       {
-        form.addComponents(new Label(name), propertyEditor.getComponent());
+        addLabeledComponent(name, propertyEditor.getComponent());
       }
       else
       {
@@ -63,8 +62,6 @@ public class ReflectivePropertiesPanel
       }
       fieldProperties.put(field, propertyEditor);
     }
-
-    addPropertyFormView(form);
   }
 
   public Map<Field, Object> getProperties()

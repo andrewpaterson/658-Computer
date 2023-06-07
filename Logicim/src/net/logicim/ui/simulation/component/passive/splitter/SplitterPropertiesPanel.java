@@ -5,7 +5,6 @@ import net.logicim.data.passive.wire.SplitterProperties;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.components.Label;
-import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
@@ -46,11 +45,10 @@ public class SplitterPropertiesPanel
                                  SplitterProperties properties,
                                  Rotation rotation)
   {
-    super(new GridBagLayout());
+    super();
 
     this.dialog = dialog;
 
-    Form form = new Form();
     this.rotation = new RotationEditor(this, ROTATION, rotation);
     name = new TextPropertyEditor(this, NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
@@ -59,12 +57,12 @@ public class SplitterPropertiesPanel
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);
     offset = new IntegerPropertyEditor(this, OFFSET, properties.endOffset);
 
-    form.addComponents(new Label(ROTATION), this.rotation.getComponent());
-    form.addComponents(new Label(NAME), name.getComponent());
-    form.addComponents(new Label(FAN_OUT), fanOut.getComponent());
-    form.addComponents(new Label(BIT_WIDTH), bitWidth.getComponent());
-    form.addComponents(new Label(SPACING), spacing.getComponent());
-    form.addComponents(new Label(APPEARANCE), appearance.getComponent());
+    addLabeledComponent(ROTATION, this.rotation.getComponent());
+    addLabeledComponent(NAME, name.getComponent());
+    addLabeledComponent(FAN_OUT, fanOut.getComponent());
+    addLabeledComponent(BIT_WIDTH, bitWidth.getComponent());
+    addLabeledComponent(SPACING, spacing.getComponent());
+    addLabeledComponent(APPEARANCE, appearance.getComponent());
     form.addComponents(new Label(OFFSET), offset.getComponent(), 5);
     form.addComponent(ButtonUtil.buildButtons(105,
                                               new SplitterOrderButton(this, "Descending"),
@@ -78,8 +76,6 @@ public class SplitterPropertiesPanel
       form.addComponents(new Label(name), bitEditor.getComponent(), 0);
       indices.add(bitEditor);
     }
-
-    addPropertyFormView(form);
   }
 
   @Override

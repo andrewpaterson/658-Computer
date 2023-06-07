@@ -35,5 +35,11 @@ public class TopLevelSubcircuitSimulation
                                      circuitSimulation.getName(),
                                      subcircuitEditor.getId());
   }
+
+  @Override
+  public String toString()
+  {
+    return circuitSimulation.getDescription();
+  }
 }
 

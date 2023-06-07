@@ -15,7 +15,7 @@ public class SimulationInfo
   @Override
   public String getInfo()
   {
-    CircuitSimulation currentSimulation = editor.getCurrentSimulation();
+    CircuitSimulation currentSimulation = editor.getCurrentCircuitSimulation();
     String description;
     if (currentSimulation != null)
     {

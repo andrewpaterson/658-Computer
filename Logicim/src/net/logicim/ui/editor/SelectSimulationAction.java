@@ -3,14 +3,14 @@ package net.logicim.ui.editor;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.panels.SimulatorPanel;
 
-public class ViewSimulationTreeAction
+public class SelectSimulationAction
     extends EditorAction
 {
-  public static final String NAME = "View Simulation Tree";
+  public static final String NAME = "Select Simulation";
 
   private SimulatorPanel panel;
 
-  public ViewSimulationTreeAction(Logicim editor, SimulatorPanel panel)
+  public SelectSimulationAction(Logicim editor, SimulatorPanel panel)
   {
     super(editor);
     this.panel = panel;
@@ -19,7 +19,7 @@ public class ViewSimulationTreeAction
   @Override
   public void executeEditorAction()
   {
-    panel.showSimulations();
+    panel.selectSimulation();
   }
 
   @Override

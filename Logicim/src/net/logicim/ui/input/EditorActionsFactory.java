@@ -86,6 +86,7 @@ public class EditorActionsFactory
 
     editor.addAction(TogglePointViewAction.NAME, new TogglePointViewAction(editor));
     editor.addAction(ViewSimulationTreeAction.NAME, new ViewSimulationTreeAction(editor, panel));
+    editor.addAction(SelectSimulationAction.NAME, new SelectSimulationAction(editor, panel));
   }
 
   private static void placeComponentAction(Logicim editor, Class<? extends StaticView<?>> staticViewClass)

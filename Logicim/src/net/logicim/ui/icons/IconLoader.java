@@ -24,6 +24,8 @@ public class IconLoader
   public static final String ADD_SPLITTER = "add_line2bus_24.png";
   public static final String ADD_TRACE = "add_line_24.png";
   public static final String ADD_GND = "add_power_24.png";
+  public static final String ADD_SUBCIRCUIT = "module_24.png";
+  public static final String NEW_SUBCIRCUIT = "new_footprint_24.png";
   public static final String BREAK_TRACE = "break_line_24.png";
   public static final String CANCEL = "cancel_24.png";
   public static final String TICK = "checked_ok_24.png";
@@ -107,6 +109,8 @@ public class IconLoader
     createIcons(imageFileMap, ADD_SPLITTER);
     createIcons(imageFileMap, ADD_TRACE);
     createIcons(imageFileMap, ADD_GND);
+    createIcons(imageFileMap, ADD_SUBCIRCUIT);
+    createIcons(imageFileMap, NEW_SUBCIRCUIT);
     createIcons(imageFileMap, BREAK_TRACE);
     createIcons(imageFileMap, CANCEL);
     createIcons(imageFileMap, TICK);

@@ -91,6 +91,15 @@ public class EditorActionsFactory
     editor.addAction(TogglePointViewAction.NAME, new TogglePointViewAction(editor));
     editor.addAction(ViewSimulationTreeAction.NAME, new ViewSimulationTreeAction(editor, panel));
     editor.addAction(SelectSimulationAction.NAME, new SelectSimulationAction(editor, panel));
+
+    editor.addAction(AddComponentAction.NAME, new AddComponentAction(editor, panel));
+    editor.addAction(AddConnectionAction.NAME, new AddConnectionAction(editor));
+    editor.addAction(AddLabelAction.NAME, new AddLabelAction(editor, panel));
+    editor.addAction(AddPowerAction.NAME, new AddPowerAction(editor, panel));
+    editor.addAction(AddSplitterAction.NAME, new AddSplitterAction(editor, panel));
+    editor.addAction(AddSubcircuitAction.NAME, new AddSubcircuitAction(editor, panel));
+    editor.addAction(AddTraceAction.NAME, new AddTraceAction(editor));
+    editor.addAction(AddTunnelAction.NAME, new AddTunnelAction(editor, panel));
   }
 
   private static void placeComponentAction(Logicim editor, Class<? extends StaticView<?>> staticViewClass)

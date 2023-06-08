@@ -1,8 +1,7 @@
 package net.logicim.ui.panels;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.editor.TogglePointViewAction;
-import net.logicim.ui.editor.ViewSimulationTreeAction;
+import net.logicim.ui.editor.*;
 import net.logicim.ui.util.GridBagUtil;
 
 import javax.swing.*;
@@ -10,8 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.logicim.ui.icons.IconLoader.POINT_VIEW;
-import static net.logicim.ui.icons.IconLoader.VIEW_SIMULATION_TREE;
+import static net.logicim.ui.icons.IconLoader.*;
 
 public class CreationPanel
     extends ButtonBarPanel
@@ -23,11 +21,16 @@ public class CreationPanel
     setPreferredSize(defaultButtonBarSize());
 
     List<JComponent> components = new ArrayList<>();
-    components.add(createVerticalButtonInput(editor, POINT_VIEW, TogglePointViewAction.NAME));
-    JSeparator separator = new JSeparator();
-    separator.setPreferredSize(new Dimension(32, 2));
-    components.add(separator);
-    components.add(createVerticalButtonInput(editor, VIEW_SIMULATION_TREE, ViewSimulationTreeAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_COMPONENT, AddComponentAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_TRACE, AddTraceAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_SPLITTER, AddSplitterAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_TUNNEL, AddTunnelAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_CONNECTION, AddConnectionAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_GND, AddPowerAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_LABEL, AddLabelAction.NAME));
+    components.add(createVerticalButtonInput(editor, ADD_SUBCIRCUIT, AddSubcircuitAction.NAME));
+    components.add(createHorizontalSeparator());
+    components.add(createVerticalButtonInput(editor, NEW_SUBCIRCUIT, NewSubcircuitAction.NAME));
 
     int y = 0;
     for (JComponent component : components)

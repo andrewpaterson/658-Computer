@@ -39,12 +39,5 @@ public class DisplayPanel
     }
     add(new JPanel(), GridBagUtil.gridBagConstraints(0, y, 1, 1, GridBagConstraints.BOTH));
   }
-
-  protected JSeparator createHorizontalSeparator()
-  {
-    JSeparator separator = new JSeparator();
-    separator.setPreferredSize(new Dimension(32, 2));
-    return separator;
-  }
 }
 

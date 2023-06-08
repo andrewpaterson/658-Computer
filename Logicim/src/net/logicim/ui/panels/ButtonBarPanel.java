@@ -57,5 +57,12 @@ public class ButtonBarPanel
     button.setFocusable(false);
     return button;
   }
+
+  protected JSeparator createHorizontalSeparator()
+  {
+    JSeparator separator = new JSeparator();
+    separator.setPreferredSize(new Dimension(32, 2));
+    return separator;
+  }
 }
 

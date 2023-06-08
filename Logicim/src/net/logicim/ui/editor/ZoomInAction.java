@@ -2,12 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class ResetZoomAction
+public class ZoomInAction
     extends SimulatorEditorAction
 {
-  public static final String NAME = "Reset Zoom";
+  public static final String NAME = "Zoom In";
 
-  public ResetZoomAction(Logicim editor)
+  public ZoomInAction(Logicim editor)
   {
     super(editor);
   }
@@ -15,13 +15,13 @@ public class ResetZoomAction
   @Override
   public void executeEditorAction()
   {
-    editor.resetZoom();
+    editor.zoomIn();
   }
 
   @Override
   public boolean isAvailable()
   {
-    return editor.canResetZoom();
+    return editor.canZoomIn();
   }
 }
 

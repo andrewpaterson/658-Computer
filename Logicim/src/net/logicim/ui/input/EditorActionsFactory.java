@@ -62,7 +62,11 @@ public class EditorActionsFactory
     editor.addAction(LoadSimulationAction.NAME, new LoadSimulationAction(editor, panel));
     editor.addAction(UndoAction.NAME, new UndoAction(editor));
     editor.addAction(RedoAction.NAME, new RedoAction(editor));
-    editor.addAction(ResetZoomAction.NAME, new ResetZoomAction(editor));
+    editor.addAction(ZoomResetAction.NAME, new ZoomResetAction(editor));
+    editor.addAction(ZoomFitSelectionAction.NAME, new ZoomFitSelectionAction(editor));
+    editor.addAction(ZoomFitAllAction.NAME, new ZoomFitAllAction(editor));
+    editor.addAction(ZoomInAction.NAME, new ZoomInAction(editor));
+    editor.addAction(ZoomOutAction.NAME, new ZoomOutAction(editor));
 
     editor.addAction(MoveAction.NAME, new MoveAction(editor));
     editor.addAction(CopyAction.NAME, new CopyAction(editor));

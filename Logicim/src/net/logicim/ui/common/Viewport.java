@@ -222,6 +222,16 @@ public class Viewport
     }
   }
 
+  public boolean canZoomIn()
+  {
+    return this.zoom > 0.2f;
+  }
+
+  public boolean canZoomOut()
+  {
+    return this.zoom < 6.0f;
+  }
+
   public Float2D transformGridToScreenSpace(Float2D p)
   {
     return new Float2D(p.x * SCALE * zoom + size.getWidth() / 2.0f + position.x,
@@ -392,6 +402,11 @@ public class Viewport
   public void resetZoom(Int2D mousePosition)
   {
     setZoomTo(mousePosition, 1.0f);
+  }
+
+  public void zoomFitAll(Int2D mousePosition)
+  {
+
   }
 
   public boolean canResetZoom()

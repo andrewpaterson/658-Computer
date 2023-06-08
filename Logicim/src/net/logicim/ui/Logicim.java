@@ -490,8 +490,13 @@ public class Logicim
     int rotation = mouseButtons.getRotation();
 
     viewport.zoomTo(mousePosition.get(), (float) rotation / 10.0f);
-    setSubcircuitParameters(getCurrentSubcircuitEditor().getTypeName());
 
+    zoomChanged();
+  }
+
+  protected void zoomChanged()
+  {
+    setSubcircuitParameters(getCurrentSubcircuitEditor().getTypeName());
     calculateHighlightedPort();
   }
 
@@ -1321,12 +1326,28 @@ public class Logicim
     return circuitEditor.getSimulations();
   }
 
-  public void resetZoom()
+  public void zoomReset()
   {
     viewport.resetZoom(mousePosition.get());
-    setSubcircuitParameters(getCurrentSubcircuitEditor().getTypeName());
+    zoomChanged();
+  }
 
-    calculateHighlightedPort();
+  public void zoomFitAll()
+  {
+    viewport.zoomFitAll(mousePosition.get());
+    zoomChanged();
+  }
+
+  public void zoomIn()
+  {
+    viewport.zoomTo(mousePosition.get(), -1.0f);
+    zoomChanged();
+  }
+
+  public void zoomOut()
+  {
+    viewport.zoomTo(mousePosition.get(), 1.0f);
+    zoomChanged();
   }
 
   public void setRunning(boolean running)
@@ -1390,7 +1411,7 @@ public class Logicim
     return undoStack.canPop();
   }
 
-  public boolean canResetZoom()
+  public boolean canZoomReset()
   {
     return viewport.canResetZoom();
   }
@@ -1413,6 +1434,21 @@ public class Logicim
   public void togglePointGrid()
   {
     drawPointGrid = !drawPointGrid;
+  }
+
+  public boolean canZoomIn()
+  {
+    return viewport.canZoomIn();
+  }
+
+  public boolean canZoomOut()
+  {
+    return viewport.canZoomOut();
+  }
+
+  public boolean canZoomSelection()
+  {
+    return getCurrentSelection().size() > 0;
   }
 }
 

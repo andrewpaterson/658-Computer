@@ -62,7 +62,7 @@ public class KeyInputsFactory
     editor.addKeyInput(new KeyInput(editor.getAction(LoadSimulationAction.NAME), KeyEvent.VK_L, Down, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(UndoAction.NAME), KeyEvent.VK_Z, Down, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(RedoAction.NAME), KeyEvent.VK_Y, Down, Up, Up));
-    editor.addKeyInput(new KeyInput(editor.getAction(ResetZoomAction.NAME), KeyEvent.VK_0, Down, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(ZoomResetAction.NAME), KeyEvent.VK_0, Down, Up, Up));
 
     editor.addKeyInput(new KeyInput(editor.getAction(MoveAction.NAME), KeyEvent.VK_M, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(CopyAction.NAME), KeyEvent.VK_C, Down, Up, Up));

@@ -4,8 +4,6 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
 import net.logicim.common.util.StringUtil;
-import net.logicim.data.circuit.SubcircuitPinAlignment;
-import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
@@ -13,7 +11,10 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.common.*;
+import net.logicim.ui.common.Colours;
+import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.rectangle.Rectangle;
@@ -24,12 +25,9 @@ import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import static java.awt.Font.SANS_SERIF;
-import static net.logicim.data.circuit.SubcircuitPinAlignment.*;
 
 public class SubcircuitInstanceView
     extends PassiveView<SubcircuitInstance, SubcircuitInstanceProperties>
@@ -57,76 +55,33 @@ public class SubcircuitInstanceView
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
 
-    kindaCreateGraphicsAndOtherStuff();
+    createPinsAndGraphics();
     finaliseView();
   }
 
-  private void kindaCreateGraphicsAndOtherStuff()
+  private void createPinsAndGraphics()
   {
     Rectangle rectangle = createTypeGraphics();
 
     PinPropertyHelper helper = new PinPropertyHelper(instanceSubcircuitView.findAllPins());
-    Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> pinsLocations = helper.groupPinsByLocation();
+    QuadPinViewLists pinLists = new QuadPinViewLists(helper);
 
-    PinViewLists leftViewLists = createPinViewLists(pinsLocations, LEFT);
-    PinViewLists rightViewLists = createPinViewLists(pinsLocations, RIGHT);
-    PinViewLists topViewLists = createPinViewLists(pinsLocations, TOP);
-    PinViewLists bottomViewLists = createPinViewLists(pinsLocations, BOTTOM);
+    LeftRightPinViewOffsets leftRightPinViewOffsets = new LeftRightPinViewOffsets(rectangle, pinLists.topViewLists, pinLists.bottomViewLists);
+    TopBottomPinViewOffsets topBottomPinViewOffsets = new TopBottomPinViewOffsets(rectangle, pinLists.leftViewLists, pinLists.rightViewLists);
 
-    // Top / Bottom
+    int left = (int) Math.ceil(rectangle.getBottomRight().getX() + calculateMaxSize(topBottomPinViewOffsets.leftPinViewOffsets));
+    int right = (int) Math.floor(rectangle.getTopLeft().getX() - calculateMaxSize(topBottomPinViewOffsets.rightPinViewOffsets));
 
-    int maxGridWidth = calculateMaxSize(topViewLists.getExtendedSize(), bottomViewLists.getExtendedSize());
+    rectangle.getBottomRight().setMaxX(left);
+    rectangle.getTopLeft().setMinX(right);
 
-    int left = -maxGridWidth / 2;
-    int right = maxGridWidth + left;
-
-    List<PinViewOffset> topPinViewOffsets = calculatePinViewOffsets(topViewLists, left, right);
-    List<PinViewOffset> bottomPinViewOffsets = calculatePinViewOffsets(bottomViewLists, left, right);
-
-    int top = (int) Math.ceil(rectangle.getTopLeft().getY() - calculateMaxSize(topPinViewOffsets));
-    int bottom = (int) Math.floor(rectangle.getBottomRight().getY() + calculateMaxSize(bottomPinViewOffsets));
-
-    rectangle.getTopLeft().setMinY(top);
-    rectangle.getBottomRight().setMaxY(bottom);
-
-    int heightOffset = (maxGridWidth / 2);
-    rectangle.getTopLeft().setMinX(-heightOffset);
-    rectangle.getBottomRight().setMaxX(maxGridWidth - heightOffset);
-
-    //Left / Right
-
-    int maxGridHeight = calculateMaxSize(leftViewLists.getExtendedSize(), rightViewLists.getExtendedSize());
-    bottom = rectangle.getBottomRight().getIntY();
-    top = rectangle.getTopLeft().getIntY();
-
-    List<PinViewOffset> leftPinViewOffsets;
-    List<PinViewOffset> rightPinViewOffsets;
-    int size = bottom - top;
-    if (maxGridHeight < size)
-    {
-      leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, top, bottom);
-      rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, top, bottom);
-    }
-    else
-    {
-      int height = maxGridHeight - size;
-      top -= height / 2;
-      bottom += height - (height / 2);
-
-      leftPinViewOffsets = calculatePinViewOffsets(leftViewLists, top, bottom);
-      rightPinViewOffsets = calculatePinViewOffsets(rightViewLists, top, bottom);
-    }
-
-    int leftPos = (int) Math.ceil(rectangle.getBottomRight().getX() + calculateMaxSize(leftPinViewOffsets));
-    int rightPos = (int) Math.floor(rectangle.getTopLeft().getX() - calculateMaxSize(rightPinViewOffsets));
-
-    rectangle.getBottomRight().setMaxX(leftPos);
-    rectangle.getTopLeft().setMinX(rightPos);
-
-    rectangle.getTopLeft().setMinY(top);
-    rectangle.getBottomRight().setMaxY(bottom);
-
-    createPins(rectangle, topPinViewOffsets, bottomPinViewOffsets, leftPinViewOffsets, rightPinViewOffsets, leftPos, rightPos);
+    createPins(rectangle,
+               leftRightPinViewOffsets.topPinViewOffsets,
+               leftRightPinViewOffsets.bottomPinViewOffsets,
+               topBottomPinViewOffsets.leftPinViewOffsets,
+               topBottomPinViewOffsets.rightPinViewOffsets,
+               left,
+               right);
 
     this.rectangle = createRectangleView(rectangle);
   }
@@ -156,13 +111,6 @@ public class SubcircuitInstanceView
 
     createLeftRightSubcircuitPinViews(leftPinViewOffsets, leftPos, HorizontalAlignment.LEFT);
     createLeftRightSubcircuitPinViews(rightPinViewOffsets, rightPos, HorizontalAlignment.RIGHT);
-  }
-
-  private int calculateMaxSize(int firstSize, int secondSize)
-  {
-    firstSize = firstSize != 0 ? firstSize - 1 : 0;
-    secondSize = secondSize != 0 ? secondSize - 1 : 0;
-    return Math.max(firstSize, secondSize);
   }
 
   private void createLeftRightSubcircuitPinViews(List<PinViewOffset> pinViewOffsets, int offset, HorizontalAlignment alignment)
@@ -205,154 +153,6 @@ public class SubcircuitInstanceView
       }
     }
     return maxWidth;
-  }
-
-  private List<PinViewOffset> calculatePinViewOffsets(PinViewLists pinViewLists, int offset, int oppositeOffset)
-  {
-    int missing = (oppositeOffset - offset) - pinViewLists.getPinSize();
-
-    ArrayList<PinViewOffset> pinViewOffsets = new ArrayList<>();
-    int firstTopPinOffset = offset + 1;
-    int lastTopPinOffset = createPinViewOffsets(pinViewOffsets, firstTopPinOffset, pinViewLists.negativePinViews);
-
-    int firstBottomPinOffset = oppositeOffset - pinViewLists.positivePinViews.size();
-    createPinViewOffsets(pinViewOffsets, firstBottomPinOffset, pinViewLists.positivePinViews);
-
-    int firstCenterPinOffset = lastTopPinOffset + missing / 2;
-    createPinViewOffsets(pinViewOffsets, firstCenterPinOffset, pinViewLists.centerPinViews);
-
-    return pinViewOffsets;
-  }
-
-  private int createPinViewOffsets(ArrayList<PinViewOffset> pinViewOffsets, int offset, List<PinView> pinViews)
-  {
-    if (pinViews.size() > 0)
-    {
-      for (PinView pinView : pinViews)
-      {
-        pinViewOffsets.add(new PinViewOffset(pinView, offset));
-        offset++;
-      }
-      offset++;
-    }
-
-    return offset;
-  }
-
-  private PinViewLists createPinViewLists(Map<SubcircuitPinAlignment, Map<SubcircuitPinAnchour, List<PinView>>> pinsLocations, SubcircuitPinAlignment alignment)
-  {
-    Map<SubcircuitPinAnchour, List<PinView>> anchourMap = pinsLocations.get(alignment);
-
-    List<PinView> centerPinViews = orderCenterPins(findAndSortPins(anchourMap, SubcircuitPinAnchour.CENTER));
-    List<PinView> negativePinViews = orderNegativePins(findAndSortPins(anchourMap, SubcircuitPinAnchour.NEGATIVE));
-    List<PinView> positivePinViews = orderPositivePins(findAndSortPins(anchourMap, SubcircuitPinAnchour.POSITIVE));
-
-    Font font = Fonts.getInstance().getFont(SANS_SERIF, 0, 10, false);
-
-    float maxWidest = 0;
-    float widest = getWidest(centerPinViews, font);
-    if (widest > maxWidest)
-    {
-      maxWidest = widest;
-    }
-    widest = getWidest(negativePinViews, font);
-    if (widest > maxWidest)
-    {
-      maxWidest = widest;
-    }
-    widest = getWidest(positivePinViews, font);
-    if (widest > maxWidest)
-    {
-      maxWidest = widest;
-    }
-
-    return new PinViewLists(negativePinViews, centerPinViews, positivePinViews, maxWidest);
-  }
-
-  private float getWidest(List<PinView> pinViews, Font font)
-  {
-    float widest = 0;
-    for (PinView pinView : pinViews)
-    {
-      String text = pinView.getName();
-      Float2D textDimension = TextView.calculateTextDimension(font, text);
-      if (textDimension.x > widest)
-      {
-        widest = textDimension.x;
-      }
-    }
-    return widest;
-  }
-
-  private List<PinView> findAndSortPins(Map<SubcircuitPinAnchour, List<PinView>> anchourMap, SubcircuitPinAnchour anchour)
-  {
-    List<PinView> pinViews;
-    if (anchourMap != null)
-    {
-      pinViews = anchourMap.get(anchour);
-    }
-    else
-    {
-      pinViews = null;
-    }
-
-    List<PinView> sortedPinViews;
-    if (pinViews != null)
-    {
-      sortedPinViews = new ArrayList<>(pinViews);
-      Collections.sort(sortedPinViews);
-    }
-    else
-    {
-      sortedPinViews = new ArrayList<>();
-    }
-    return sortedPinViews;
-  }
-
-  private List<PinView> orderNegativePins(List<PinView> sortedPinViews)
-  {
-    return sortedPinViews;
-  }
-
-  private List<PinView> orderPositivePins(List<PinView> sortedPinViews)
-  {
-    Collections.reverse(sortedPinViews);
-    return sortedPinViews;
-  }
-
-  private List<PinView> orderCenterPins(List<PinView> sortedPinViews)
-  {
-    if (sortedPinViews.size() > 0)
-    {
-      PinView[] orderedPinViews = new PinView[sortedPinViews.size()];
-
-      int yEven = (sortedPinViews.size() - 1) / 2;
-      int yOdd = yEven + 1;
-      boolean even = true;
-      for (PinView pinView : sortedPinViews)
-      {
-        int index;
-        if (even)
-        {
-          index = yEven;
-          yEven--;
-        }
-        else
-        {
-          index = yOdd;
-          yOdd++;
-        }
-        orderedPinViews[index] = pinView;
-        even = !even;
-      }
-
-      for (int i = 0; i < orderedPinViews.length; i++)
-      {
-        PinView orderedPinView = orderedPinViews[i];
-        sortedPinViews.set(i, orderedPinView);
-      }
-    }
-    return sortedPinViews;
   }
 
   private Rectangle createTypeGraphics()

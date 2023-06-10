@@ -318,6 +318,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void postCreateComponent(CircuitSimulation circuitSimulation, Component component)
   {
+    addPortsToPortViews(circuitSimulation, component);
+    validateComponent(circuitSimulation);
+    validatePorts(circuitSimulation);
+    component.reset(circuitSimulation);
+  }
+
+  private void addPortsToPortViews(CircuitSimulation circuitSimulation, Component component)
+  {
     List<PortView> portViews = getPortViews();
     for (PortView portView : portViews)
     {
@@ -337,9 +345,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       }
       portView.addPorts(circuitSimulation, ports);
     }
-    validateComponent(circuitSimulation);
-    validatePorts(circuitSimulation);
-    component.reset(circuitSimulation);
   }
 
   public void destroyComponent(CircuitSimulation circuitSimulation)

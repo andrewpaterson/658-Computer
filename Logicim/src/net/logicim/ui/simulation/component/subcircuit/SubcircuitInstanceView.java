@@ -126,24 +126,36 @@ public class SubcircuitInstanceView
     rectangle.getTopLeft().setMinY(top);
     rectangle.getBottomRight().setMaxY(bottom);
 
-    // Pins
+    createPins(rectangle, topPinViewOffsets, bottomPinViewOffsets, leftPinViewOffsets, rightPinViewOffsets, leftPos, rightPos);
 
-    bottom = rectangle.getBottomRight().getIntY();
-    top = rectangle.getTopLeft().getIntY();
+    this.rectangle = createRectangleView(rectangle);
+  }
+
+  private RectangleView createRectangleView(Rectangle rectangle)
+  {
+    return new RectangleView(this,
+                             new Int2D(rectangle.getTopLeft().getY(), rectangle.getTopLeft().getX()),
+                             new Int2D(rectangle.getBottomRight().getY(), rectangle.getBottomRight().getX()),
+                             true,
+                             true);
+  }
+
+  private void createPins(Rectangle rectangle,
+                          List<PinViewOffset> topPinViewOffsets,
+                          List<PinViewOffset> bottomPinViewOffsets,
+                          List<PinViewOffset> leftPinViewOffsets,
+                          List<PinViewOffset> rightPinViewOffsets,
+                          int leftPos,
+                          int rightPos)
+  {
+    int bottom = rectangle.getBottomRight().getIntY();
+    int top = rectangle.getTopLeft().getIntY();
 
     createTopBottomSubcircuitPinViews(topPinViewOffsets, top, HorizontalAlignment.LEFT);
     createTopBottomSubcircuitPinViews(bottomPinViewOffsets, bottom, HorizontalAlignment.RIGHT);
 
     createLeftRightSubcircuitPinViews(leftPinViewOffsets, leftPos, HorizontalAlignment.LEFT);
     createLeftRightSubcircuitPinViews(rightPinViewOffsets, rightPos, HorizontalAlignment.RIGHT);
-
-    // Done
-
-    this.rectangle = new RectangleView(this,
-                                       new Int2D(rectangle.getTopLeft().getY(), rectangle.getTopLeft().getX()),
-                                       new Int2D(rectangle.getBottomRight().getY(), rectangle.getBottomRight().getX()),
-                                       true,
-                                       true);
   }
 
   private int calculateMaxSize(int firstSize, int secondSize)

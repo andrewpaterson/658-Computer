@@ -368,9 +368,7 @@ public class SubcircuitEditor
 
   public List<String> getTypeNameAsList()
   {
-    ArrayList<String> list = new ArrayList<>();
-    list.add(getTypeName());
-    return list;
+    return subcircuitView.getTypeNameAsList();
   }
 
   public SubcircuitEditor getSubcircuitEditor(String subcircuitTypeName)
@@ -385,13 +383,7 @@ public class SubcircuitEditor
 
   public List<String> getSubcircuitInstanceNames()
   {
-    Set<String> names = new HashSet<>();
-    Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
-    {
-      names.add(subcircuitInstanceView.getTypeName());
-    }
-    return new ArrayList<>(names);
+    return subcircuitView.getSubcircuitInstanceNames();
   }
 
   public long getId()

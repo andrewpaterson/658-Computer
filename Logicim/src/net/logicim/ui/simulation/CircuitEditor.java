@@ -24,7 +24,7 @@ import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
-import net.logicim.ui.simulation.order.SubcircuitOrderer;
+import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.awt.*;
@@ -130,11 +130,6 @@ public class CircuitEditor
     }
   }
 
-  public void reset()
-  {
-    getCircuitSimulation().reset();
-  }
-
   public void runSimultaneous()
   {
     getCircuitSimulation().runSimultaneous();
@@ -188,7 +183,7 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    SubcircuitOrderer orderer = new SubcircuitOrderer(subcircuitEditors);
+    SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(subcircuitEditors);
     List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
 
     if (orderedSubcircuitEditors != null)
@@ -658,7 +653,7 @@ public class CircuitEditor
     SubcircuitEditor currentSubcircuitEditor = getCurrentSubcircuitEditor();
     SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getSubcircuitView();
 
-    SubcircuitOrderer orderer = new SubcircuitOrderer(getSubcircuitEditors());
+    SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(getSubcircuitEditors());
     List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
 
     Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = getSubcircuitInstanceViewsInSubcircuitEditor(currentSubcircuitEditor, currentSubcircuitView, orderedSubcircuitEditors);

@@ -231,6 +231,9 @@ public class SubcircuitInstanceView
 
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
+
+    //List<View> allViews = instanceSubcircuitView.getAllViews();
+
     return subcircuitInstance;
   }
 

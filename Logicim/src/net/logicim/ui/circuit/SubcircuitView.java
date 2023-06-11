@@ -1068,5 +1068,23 @@ public class SubcircuitView
     }
     return views;
   }
+
+  public List<String> getSubcircuitInstanceNames()
+  {
+    Set<String> names = new HashSet<>();
+    Set<SubcircuitInstanceView> subcircuitInstanceViews = findAllSubcircuitInstanceViews();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      names.add(subcircuitInstanceView.getTypeName());
+    }
+    return new ArrayList<>(names);
+  }
+
+  public List<String> getTypeNameAsList()
+  {
+    ArrayList<String> list = new ArrayList<>();
+    list.add(getTypeName());
+    return list;
+  }
 }
 

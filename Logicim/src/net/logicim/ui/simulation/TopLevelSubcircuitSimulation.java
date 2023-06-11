@@ -4,6 +4,12 @@ import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class TopLevelSubcircuitSimulation
 {
@@ -40,6 +46,25 @@ public class TopLevelSubcircuitSimulation
   public String toString()
   {
     return circuitSimulation.getDescription();
+  }
+
+  public List<SubcircuitView> getTopDownSubcircuitViews()
+  {
+    SubcircuitView subcircuitView = subcircuitEditor.getSubcircuitView();
+    List<SubcircuitView> subcircuitViews = new ArrayList<>();
+    recurseFindSubCircuitViews(subcircuitViews, subcircuitView);
+    return subcircuitViews;
+  }
+
+  protected void recurseFindSubCircuitViews(List<SubcircuitView> subcircuitViews, SubcircuitView subcircuitView)
+  {
+    subcircuitViews.add(subcircuitView);
+    Set<SubcircuitInstanceView> instanceViews = subcircuitView.findAllSubcircuitInstanceViews();
+    for (SubcircuitInstanceView instanceView : instanceViews)
+    {
+      SubcircuitView instanceSubcircuitView = instanceView.getInstanceSubcircuitView();
+      recurseFindSubCircuitViews(subcircuitViews, instanceSubcircuitView);
+    }
   }
 }
 

@@ -58,6 +58,7 @@ public class EditorActionsFactory
     editor.addAction(PauseSimulationAction.NAME, new PauseSimulationAction(editor));
     editor.addAction(RunSimulationAction.NAME, new RunSimulationAction(editor));
     editor.addAction(ResetSimulationAction.NAME, new ResetSimulationAction(editor));
+    editor.addAction(RecreateSimulationAction.NAME, new RecreateSimulationAction(editor));
     editor.addAction(SaveSimulationAction.NAME, new SaveSimulationAction(editor, panel));
     editor.addAction(LoadSimulationAction.NAME, new LoadSimulationAction(editor, panel));
     editor.addAction(UndoAction.NAME, new UndoAction(editor));

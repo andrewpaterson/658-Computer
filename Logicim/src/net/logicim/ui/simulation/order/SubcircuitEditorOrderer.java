@@ -8,12 +8,12 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class SubcircuitOrderer
+public class SubcircuitEditorOrderer
 {
   protected LinkedHashMap<SubcircuitEditor, List<String>> fulfillmentsMap;
   protected LinkedHashMap<SubcircuitEditor, List<String>> requirementsMap;
 
-  public SubcircuitOrderer(Collection<SubcircuitEditor> subcircuitEditors)
+  public SubcircuitEditorOrderer(Collection<SubcircuitEditor> subcircuitEditors)
   {
     fulfillmentsMap = new LinkedHashMap<>();
     requirementsMap = new LinkedHashMap<>();

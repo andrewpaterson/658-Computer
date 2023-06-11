@@ -45,7 +45,7 @@ import net.logicim.ui.simulation.TopLevelSubcircuitSimulation;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
-import net.logicim.ui.simulation.order.SubcircuitOrderer;
+import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.undo.Undo;
@@ -817,7 +817,17 @@ public class Logicim
 
   public void resetSimulation()
   {
-    circuitEditor.reset();
+    circuitEditor.getCircuitSimulation().reset();
+  }
+
+  public void recreateSimulation()
+  {
+    TopLevelSubcircuitSimulation topLevelSimulation = getCurrentTopLevelSimulation();
+    List<SubcircuitView> subcircuitViews = topLevelSimulation.getTopDownSubcircuitViews();
+    for (SubcircuitView orderedSubcircuitView : subcircuitViews)
+    {
+      System.out.println(orderedSubcircuitView.getTypeName());
+    }
   }
 
   public EditorData save()
@@ -1286,7 +1296,7 @@ public class Logicim
     ArrayList<String> result = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : getSubcircuitEditors())
     {
-      SubcircuitOrderer orderer = new SubcircuitOrderer(circuitEditor.getSubcircuitEditors());
+      SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(circuitEditor.getSubcircuitEditors());
       if (subcircuitEditor != currentSubcircuitEditor)
       {
         orderer.addRequirement(currentSubcircuitEditor, subcircuitEditor.getTypeName());

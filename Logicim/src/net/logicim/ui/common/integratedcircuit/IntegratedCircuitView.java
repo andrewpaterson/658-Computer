@@ -74,18 +74,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  public void simulationStarted(CircuitSimulation circuitSimulation)
-  {
-    if (circuitSimulation == null)
-    {
-      throw new SimulatorException("Cannot start a simulation with a [null] simulation.");
-    }
-
-    IC integratedCircuit = getComponent(circuitSimulation);
-    integratedCircuit.simulationStarted(circuitSimulation.getSimulation());
-  }
-
-  @Override
   protected void finaliseView()
   {
     createPortViews();

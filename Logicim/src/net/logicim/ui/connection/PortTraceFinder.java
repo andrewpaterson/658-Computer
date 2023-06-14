@@ -21,7 +21,7 @@ public abstract class PortTraceFinder
     return connectionNets;
   }
 
-  protected static void findAndConnectTraces(CircuitSimulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  private static void findAndConnectTraces(CircuitSimulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     WireList wireList = findWires(simulation, inputConnectionView, connectionNets);
 
@@ -69,7 +69,7 @@ public abstract class PortTraceFinder
     }
   }
 
-  protected static WireList findWires(CircuitSimulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  private static WireList findWires(CircuitSimulation simulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     if (inputConnectionView == null)
     {
@@ -97,7 +97,7 @@ public abstract class PortTraceFinder
     return createWireList(simulation, connectionNets);
   }
 
-  protected static WireList createWireList(CircuitSimulation simulation, List<LocalConnectionNet> connectionNets)
+  private static WireList createWireList(CircuitSimulation simulation, List<LocalConnectionNet> connectionNets)
   {
     Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(simulation, connectionNets);
     Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
@@ -148,7 +148,7 @@ public abstract class PortTraceFinder
     return wireList;
   }
 
-  protected static Map<Port, Port> createSplitterPortMap(CircuitSimulation simulation, List<LocalConnectionNet> connectionNets)
+  private static Map<Port, Port> createSplitterPortMap(CircuitSimulation simulation, List<LocalConnectionNet> connectionNets)
   {
     if (simulation != null)
     {
@@ -175,7 +175,7 @@ public abstract class PortTraceFinder
     }
   }
 
-  protected static Map<Port, PortConnection> createPortWireMap(List<LocalConnectionNet> connectionNets)
+  private static Map<Port, PortConnection> createPortWireMap(List<LocalConnectionNet> connectionNets)
   {
     Map<Port, PortConnection> totalPortWireMap = new HashMap<>();
     for (LocalConnectionNet connectionNet : connectionNets)
@@ -193,7 +193,7 @@ public abstract class PortTraceFinder
     return totalPortWireMap;
   }
 
-  protected static void processLocalConnections(CircuitSimulation simulation,
+  private static void processLocalConnections(CircuitSimulation simulation,
                                                 ConnectionView inputConnectionView,
                                                 List<LocalConnectionNet> connectionNets,
                                                 List<ComponentConnection<SplitterView>> splitterViewStack,

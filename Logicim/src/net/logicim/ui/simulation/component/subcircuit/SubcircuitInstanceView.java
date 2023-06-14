@@ -290,7 +290,7 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public List<ConnectionView> getConnections()
+  public List<ConnectionView> getConnectionViews()
   {
     List<ConnectionView> connections = new ArrayList<>();
     for (SubcircuitPinView pinView : pinViews)

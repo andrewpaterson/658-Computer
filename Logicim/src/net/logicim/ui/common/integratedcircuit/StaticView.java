@@ -285,6 +285,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disconnect();
 
-  public abstract List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView);
+  public abstract List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView);
 }
 

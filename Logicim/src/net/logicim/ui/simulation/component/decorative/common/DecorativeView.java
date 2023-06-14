@@ -37,7 +37,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public List<ConnectionView> getConnections()
+  public List<ConnectionView> getConnectionViews()
   {
     return Collections.emptyList();
   }
@@ -60,7 +60,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView)
+  public List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView)
   {
     return new ArrayList<>();
   }

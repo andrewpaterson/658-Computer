@@ -20,7 +20,7 @@ public class TraceFinder
   public void add(TraceView traceView)
   {
     traceViews.add(traceView);
-    connectionsToProcess.addAll(traceView.getConnections());
+    connectionsToProcess.addAll(traceView.getConnectionViews());
   }
 
   public Set<TraceView> getTraceViews()

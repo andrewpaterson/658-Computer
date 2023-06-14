@@ -82,7 +82,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.properties = properties;
   }
 
-  public List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView)
+  public List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = getPortViews();
@@ -127,7 +127,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public List<ConnectionView> getConnections()
+  public List<ConnectionView> getConnectionViews()
   {
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
     for (PortView port : portViews)

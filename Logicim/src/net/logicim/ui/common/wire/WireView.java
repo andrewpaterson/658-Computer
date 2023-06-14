@@ -15,7 +15,7 @@ public interface WireView
 
   List<Trace> getTraces(CircuitSimulation simulation);
 
-  List<ConnectionView> getConnections();
+  List<ConnectionView> getConnectionViews();
 
   View getView();
 

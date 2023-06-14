@@ -830,7 +830,13 @@ public class Logicim
     {
       subcircuitView.destroyCircuitSimulation(circuitSimulation);
     }
+
     circuitEditor.getCircuitSimulation().reset();
+
+    for (SubcircuitView subcircuitView : subcircuitViews)
+    {
+      subcircuitView.createCircuitSimulation(circuitSimulation);
+    }
   }
 
   public EditorData save()

@@ -179,7 +179,7 @@ public class TraceView
   }
 
   @Override
-  public List<ConnectionView> getConnections()
+  public List<ConnectionView> getConnectionViews()
   {
     return wireView.getConnections();
   }

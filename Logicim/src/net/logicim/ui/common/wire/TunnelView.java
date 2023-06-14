@@ -126,7 +126,7 @@ public class TunnelView
     return f;
   }
 
-  public List<ConnectionView> createConnectionViews(SubcircuitView subcircuitView)
+  public List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView)
   {
     updateGridCache();
 
@@ -281,7 +281,7 @@ public class TunnelView
   }
 
   @Override
-  public List<ConnectionView> getConnections()
+  public List<ConnectionView> getConnectionViews()
   {
     return wireView.getConnections();
   }
@@ -312,7 +312,7 @@ public class TunnelView
     {
       for (TunnelView tunnelView : tunnels)
       {
-        connectionViews.addAll(tunnelView.getConnections());
+        connectionViews.addAll(tunnelView.getConnectionViews());
       }
     }
     return new ArrayList<>(connectionViews);

@@ -150,5 +150,10 @@ public class WireViewComp
   {
     return simulationTraces.get(simulation);
   }
+
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+    simulationTraces.remove(circuitSimulation);
+  }
 }
 

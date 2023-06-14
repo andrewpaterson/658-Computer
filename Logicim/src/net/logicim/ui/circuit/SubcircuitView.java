@@ -1086,5 +1086,33 @@ public class SubcircuitView
     list.add(getTypeName());
     return list;
   }
+
+  public void destroyCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
+    {
+      integratedCircuitView.destroyComponent(circuitSimulation);
+    }
+
+    for (PassiveView<?, ?> passiveView : passiveViews)
+    {
+      passiveView.destroyComponent(circuitSimulation);
+    }
+
+    for (DecorativeView<?> decorativeView : decorativeViews)
+    {
+      decorativeView.destroyComponent(circuitSimulation);
+    }
+
+    for (TraceView traceView : traceViews)
+    {
+      traceView.destroyComponent(circuitSimulation);
+    }
+
+    for (TunnelView tunnelView : tunnelViews)
+    {
+      tunnelView.destroyComponent(circuitSimulation);
+    }
+  }
 }
 

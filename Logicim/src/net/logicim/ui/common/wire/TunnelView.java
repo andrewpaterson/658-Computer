@@ -226,6 +226,7 @@ public class TunnelView
   @Override
   public void destroyComponent(CircuitSimulation circuitSimulation)
   {
+    wireView.destroyComponent(circuitSimulation);
   }
 
   @Override

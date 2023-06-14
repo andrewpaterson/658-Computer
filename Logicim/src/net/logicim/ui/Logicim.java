@@ -823,11 +823,14 @@ public class Logicim
   public void recreateSimulation()
   {
     TopLevelSubcircuitSimulation topLevelSimulation = getCurrentTopLevelSimulation();
+    CircuitSimulation circuitSimulation = topLevelSimulation.getCircuitSimulation();
     List<SubcircuitView> subcircuitViews = topLevelSimulation.getTopDownSubcircuitViews();
-    for (SubcircuitView orderedSubcircuitView : subcircuitViews)
+
+    for (SubcircuitView subcircuitView : subcircuitViews)
     {
-      System.out.println(orderedSubcircuitView.getTypeName());
+      subcircuitView.destroyCircuitSimulation(circuitSimulation);
     }
+    circuitEditor.getCircuitSimulation().reset();
   }
 
   public EditorData save()

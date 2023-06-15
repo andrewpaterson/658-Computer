@@ -15,11 +15,18 @@ public class SubcircuitInstance
     extends Passive
 {
   protected Map<String, List<TracePort>> namedPins;
+  protected String subcircuitTypeName;
+  protected String comment;
 
-  public SubcircuitInstance(Circuit circuit, String name)
+  public SubcircuitInstance(Circuit circuit,
+                            String name,
+                            String subcircuitTypeName,
+                            String comment)
   {
     super(circuit, name);
-    namedPins = new LinkedHashMap<>();
+    this.subcircuitTypeName = subcircuitTypeName;
+    this.comment = comment;
+    this.namedPins = new LinkedHashMap<>();
   }
 
   @Override

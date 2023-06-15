@@ -1,7 +1,7 @@
 package net.logicim.domain.passive.common;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
@@ -52,7 +52,7 @@ public abstract class Passive
   {
   }
 
-  public void reset(CircuitSimulation simulation)
+  public void reset(InstanceCircuitSimulation circuit)
   {
     for (Port port : getPorts())
     {

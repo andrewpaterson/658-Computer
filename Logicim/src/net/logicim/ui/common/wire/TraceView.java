@@ -3,7 +3,7 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
@@ -196,10 +196,12 @@ public class TraceView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    InstanceCircuitSimulation circuit)
   {
     graphics.setStroke(getTraceStroke(viewport));
-    Color color = getTraceColour(simulation);
+    Color color = getTraceColour(circuit);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);
@@ -252,9 +254,9 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
-  protected Color getTraceColour(CircuitSimulation simulation)
+  protected Color getTraceColour(InstanceCircuitSimulation circuit)
   {
-    return wireView.getTraceColour(simulation);
+    return wireView.getTraceColour(circuit);
   }
 
   public TraceData save(boolean selected)
@@ -269,9 +271,9 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(CircuitSimulation simulation, List<Trace> traces)
+  public void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces)
   {
-    wireView.connectTraces(simulation, traces);
+    wireView.connectTraces(circuit, traces);
   }
 
   public void disconnect()
@@ -280,14 +282,14 @@ public class TraceView
   }
 
   @Override
-  public void clearTraces(CircuitSimulation simulation)
+  public void clearTraces(InstanceCircuitSimulation circuit)
   {
-    wireView.clearTraces(simulation);
+    wireView.clearTraces(circuit);
   }
 
-  public List<Trace> getTraces(CircuitSimulation simulation)
+  public List<Trace> getTraces(InstanceCircuitSimulation circuit)
   {
-    return wireView.getTraces(simulation);
+    return wireView.getTraces(circuit);
   }
 
   public void setLine(Int2D start, Int2D end)
@@ -313,9 +315,9 @@ public class TraceView
     return LineOverlap.None;
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent(InstanceCircuitSimulation circuit)
   {
-    wireView.destroyComponent(circuitSimulation);
+    wireView.destroyComponent(circuit);
   }
 }
 

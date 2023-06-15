@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.and.AndGateData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
@@ -36,9 +36,9 @@ public class AndGateView
   }
 
   @Override
-  protected AndGate createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected AndGate createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new AndGate(circuitSimulation.getCircuit(),
+    return new AndGate(circuit.getCircuit(),
                        properties.name,
                        new AndGatePins(properties.inputWidth * properties.inputCount,
                                        familyVoltageConfiguration));

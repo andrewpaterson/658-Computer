@@ -2,7 +2,7 @@ package net.logicim.ui.simulation;
 
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.Timeline;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -14,12 +14,12 @@ import java.util.Set;
 public class TopLevelSubcircuitSimulation
 {
   protected SubcircuitEditor subcircuitEditor;
-  protected CircuitSimulation circuitSimulation;
+  protected InstanceCircuitSimulation instanceCircuitSimulation;
 
-  public TopLevelSubcircuitSimulation(SubcircuitEditor subcircuitEditor, CircuitSimulation circuitSimulation)
+  public TopLevelSubcircuitSimulation(SubcircuitEditor subcircuitEditor, InstanceCircuitSimulation instanceCircuitSimulation)
   {
     this.subcircuitEditor = subcircuitEditor;
-    this.circuitSimulation = circuitSimulation;
+    this.instanceCircuitSimulation = instanceCircuitSimulation;
   }
 
   public SubcircuitEditor getSubcircuitEditor()
@@ -27,25 +27,25 @@ public class TopLevelSubcircuitSimulation
     return subcircuitEditor;
   }
 
-  public CircuitSimulation getCircuitSimulation()
+  public InstanceCircuitSimulation getInstanceCircuitSimulation()
   {
-    return circuitSimulation;
+    return instanceCircuitSimulation;
   }
 
   public CircuitSimulationData save()
   {
-    Timeline timeline = circuitSimulation.getTimeline();
+    Timeline timeline = instanceCircuitSimulation.getTimeline();
     TimelineData timelineData = timeline.save();
     return new CircuitSimulationData(timelineData,
-                                     circuitSimulation.getId(),
-                                     circuitSimulation.getName(),
+                                     instanceCircuitSimulation.getId(),
+                                     instanceCircuitSimulation.getName(),
                                      subcircuitEditor.getId());
   }
 
   @Override
   public String toString()
   {
-    return circuitSimulation.getDescription();
+    return instanceCircuitSimulation.getDescription();
   }
 
   public List<SubcircuitView> getTopDownSubcircuitViews()

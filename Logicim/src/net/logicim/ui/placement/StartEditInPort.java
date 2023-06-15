@@ -2,7 +2,7 @@ package net.logicim.ui.placement;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
@@ -17,13 +17,13 @@ public class StartEditInPort
     extends StatefulEdit
 {
   protected KeyboardButtons keyboardButtons;
-  protected CircuitSimulation circuitSimulation;
+  protected InstanceCircuitSimulation circuit;
 
   public StartEditInPort(KeyboardButtons keyboardButtons,
-                         CircuitSimulation circuitSimulation)
+                         InstanceCircuitSimulation circuit)
   {
     this.keyboardButtons = keyboardButtons;
-    this.circuitSimulation = circuitSimulation;
+    this.circuit = circuit;
   }
 
   @Override
@@ -34,7 +34,7 @@ public class StartEditInPort
   @Override
   public StatefulEdit move(float x, float y, EditAction editAction)
   {
-    return new WirePull(circuitSimulation);
+    return new WirePull(circuit);
   }
 
   @Override

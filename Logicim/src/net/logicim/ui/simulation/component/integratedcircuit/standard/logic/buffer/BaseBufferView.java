@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -79,7 +79,7 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuitSimulation)
   {
     super.paint(graphics, viewport, circuitSimulation);
 

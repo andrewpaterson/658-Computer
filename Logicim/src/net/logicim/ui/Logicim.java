@@ -13,6 +13,7 @@ import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -193,7 +194,7 @@ public class Logicim
           }
           else if ((hoverConnectionView != null))
           {
-            edit = new StartEditInPort(keyboardButtons, getCircuitSimulation());
+            edit = new StartEditInPort(keyboardButtons, getInstanceCircuitSimulation());
           }
           else
           {
@@ -205,9 +206,9 @@ public class Logicim
     }
   }
 
-  protected CircuitSimulation getCircuitSimulation()
+  public InstanceCircuitSimulation getInstanceCircuitSimulation()
   {
-    return circuitEditor.getCircuitSimulation();
+    return circuitEditor.getInstanceCircuitSimulation();
   }
 
   protected EditAction createEdit(StatefulEdit edit, Float2D start)
@@ -451,7 +452,7 @@ public class Logicim
               y = 0;
             }
 
-            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(circuitEditor.getCircuitSimulation(), x, y);
+            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(circuitEditor.getInstanceCircuitSimulation(), x, y);
           }
 
           graphics.setFont(font);
@@ -817,25 +818,27 @@ public class Logicim
 
   public void resetSimulation()
   {
-    circuitEditor.getCircuitSimulation().reset();
+    InstanceCircuitSimulation circuit = circuitEditor.getInstanceCircuitSimulation();
+    CircuitSimulation circuitSimulation = circuit.getCircuitSimulation();
+    circuitSimulation.reset(null);
   }
 
   public void recreateSimulation()
   {
     TopLevelSubcircuitSimulation topLevelSimulation = getCurrentTopLevelSimulation();
-    CircuitSimulation circuitSimulation = topLevelSimulation.getCircuitSimulation();
+    InstanceCircuitSimulation circuit = topLevelSimulation.getInstanceCircuitSimulation();
     List<SubcircuitView> subcircuitViews = topLevelSimulation.getTopDownSubcircuitViews();
 
     for (SubcircuitView subcircuitView : subcircuitViews)
     {
-      subcircuitView.destroyCircuitSimulation(circuitSimulation);
+      subcircuitView.destroyCircuitSimulation(circuit);
     }
 
-    circuitEditor.getCircuitSimulation().reset();
+    resetSimulation();
 
     for (SubcircuitView subcircuitView : subcircuitViews)
     {
-      subcircuitView.createCircuitSimulation(circuitSimulation);
+      subcircuitView.createCircuitSimulation(circuit);
     }
   }
 
@@ -1151,7 +1154,7 @@ public class Logicim
     setSubcircuitParameters(subcircuitTypeName);
   }
 
-  public void deleteSubcircuitAction(String subcircuitTypeName, CircuitSimulation circuitSimulation)
+  public void deleteSubcircuitAction(String subcircuitTypeName, InstanceCircuitSimulation circuit)
   {
     subcircuitViewParameters.remove(subcircuitTypeName);
     List<Integer> bookmarkIds = new ArrayList<>(subcircuitBookmarks.keySet());
@@ -1173,7 +1176,7 @@ public class Logicim
         if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
         {
           SubcircuitView subcircuitView = subcircuitInstanceView.getSubcircuitView();
-          subcircuitView.deleteComponentView(subcircuitInstanceView, circuitSimulation);
+          subcircuitView.deleteComponentView(subcircuitInstanceView, circuit);
         }
       }
     }
@@ -1328,11 +1331,6 @@ public class Logicim
   public TopLevelSubcircuitSimulation getCurrentTopLevelSimulation()
   {
     return circuitEditor.getTopLevelSimulation();
-  }
-
-  public CircuitSimulation getCurrentCircuitSimulation()
-  {
-    return circuitEditor.getCircuitSimulation();
   }
 
   public int getSimulationCount()

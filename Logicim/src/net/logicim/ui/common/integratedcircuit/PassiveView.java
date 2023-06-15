@@ -4,6 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -16,7 +17,7 @@ import java.util.Set;
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
 {
-  protected Map<CircuitSimulation, PASSIVE> simulationPassives;
+  protected Map<InstanceCircuitSimulation, PASSIVE> simulationPassives;
 
   public PassiveView(SubcircuitView subcircuitView,
                      Int2D position,
@@ -31,21 +32,21 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE createComponent(CircuitSimulation circuitSimulation)
+  public PASSIVE createComponent(InstanceCircuitSimulation instanceCircuitSimulation)
   {
-    validateCanCreateComponent(circuitSimulation);
+    validateCanCreateComponent(instanceCircuitSimulation);
 
-    PASSIVE passive = createPassive(circuitSimulation);
-    simulationPassives.put(circuitSimulation, passive);
+    PASSIVE passive = createPassive(instanceCircuitSimulation);
+    simulationPassives.put(instanceCircuitSimulation, passive);
 
-    postCreateComponent(circuitSimulation, passive);
+    postCreateComponent(instanceCircuitSimulation, passive);
     return passive;
   }
 
   @Override
-  protected void removeComponent(CircuitSimulation circuitSimulation)
+  protected void removeComponent(InstanceCircuitSimulation circuit)
   {
-    simulationPassives.remove(circuitSimulation);
+    simulationPassives.remove(circuit);
   }
 
   @Override
@@ -66,23 +67,23 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     return "";
   }
 
-  public PASSIVE getComponent(CircuitSimulation circuitSimulation)
+  public PASSIVE getComponent(InstanceCircuitSimulation circuit)
   {
-    return simulationPassives.get(circuitSimulation);
+    return simulationPassives.get(circuit);
   }
 
   protected Set<Long> saveSimulations()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
-    for (CircuitSimulation circuitSimulation : simulationPassives.keySet())
+    for (InstanceCircuitSimulation circuit : simulationPassives.keySet())
     {
-      simulationIDs.add(circuitSimulation.getId());
+      simulationIDs.add(circuit.getId());
     }
     return simulationIDs;
   }
 
   public abstract PassiveData<?> save(boolean selected);
 
-  protected abstract PASSIVE createPassive(CircuitSimulation circuit);
+  protected abstract PASSIVE createPassive(InstanceCircuitSimulation circuit);
 }
 

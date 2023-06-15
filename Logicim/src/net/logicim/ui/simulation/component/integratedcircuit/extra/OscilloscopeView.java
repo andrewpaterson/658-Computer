@@ -5,7 +5,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
@@ -64,9 +64,9 @@ public class OscilloscopeView
   }
 
   @Override
-  protected Oscilloscope createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Oscilloscope createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Oscilloscope(circuitSimulation.getCircuit(),
+    return new Oscilloscope(circuit.getCircuit(),
                             properties.name,
                             new OscilloscopePins(properties.inputCount),
                             properties.samplingFrequency_Hz,
@@ -76,7 +76,7 @@ public class OscilloscopeView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuitSimulation)
   {
     super.paint(graphics, viewport, circuitSimulation);
 

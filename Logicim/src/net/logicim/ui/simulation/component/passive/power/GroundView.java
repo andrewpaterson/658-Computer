@@ -4,7 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.GroundData;
 import net.logicim.data.passive.power.GroundProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -72,9 +72,9 @@ public class GroundView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuit);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -86,7 +86,7 @@ public class GroundView
       line3.paint(graphics, viewport);
       line4.paint(graphics, viewport);
     }
-    paintPorts(graphics, viewport, simulation);
+    paintPorts(graphics, viewport, circuit);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);

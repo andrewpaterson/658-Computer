@@ -4,7 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -160,9 +160,9 @@ public class TunnelView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuit);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -213,20 +213,20 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted(CircuitSimulation circuitSimulation)
+  public void simulationStarted(InstanceCircuitSimulation circuit)
   {
   }
 
   @Override
-  public Component createComponent(CircuitSimulation circuitSimulation)
+  public Component createComponent(InstanceCircuitSimulation circuit)
   {
     return null;
   }
 
   @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent(InstanceCircuitSimulation circuit)
   {
-    wireView.destroyComponent(circuitSimulation);
+    wireView.destroyComponent(circuit);
   }
 
   @Override
@@ -252,9 +252,9 @@ public class TunnelView
                           properties.doubleSided);
   }
 
-  public void connectTraces(CircuitSimulation simulation, List<Trace> traces)
+  public void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces)
   {
-    wireView.connectTraces(simulation, traces);
+    wireView.connectTraces(circuit, traces);
   }
 
   @Override
@@ -264,15 +264,15 @@ public class TunnelView
   }
 
   @Override
-  public void clearTraces(CircuitSimulation simulation)
+  public void clearTraces(InstanceCircuitSimulation circuit)
   {
-    wireView.clearTraces(simulation);
+    wireView.clearTraces(circuit);
   }
 
   @Override
-  public List<Trace> getTraces(CircuitSimulation simulation)
+  public List<Trace> getTraces(InstanceCircuitSimulation circuit)
   {
-    return wireView.getTraces(simulation);
+    return wireView.getTraces(circuit);
   }
 
   public boolean isRemoved()

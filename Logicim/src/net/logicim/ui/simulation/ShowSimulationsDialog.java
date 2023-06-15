@@ -3,7 +3,6 @@ package net.logicim.ui.simulation;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
@@ -45,7 +44,7 @@ public class ShowSimulationsDialog
 
     for (TopLevelSubcircuitSimulation simulation : editor.getSimulations())
     {
-      DefaultMutableTreeNode simulationNode = new DefaultMutableTreeNode(simulation.getCircuitSimulation().getDescription());
+      DefaultMutableTreeNode simulationNode = new DefaultMutableTreeNode(simulation.getInstanceCircuitSimulation().getDescription());
       rootNode.add(simulationNode);
       SubcircuitEditor subcircuitEditor = simulation.getSubcircuitEditor();
       DefaultMutableTreeNode circuitNode = new DefaultMutableTreeNode(subcircuitEditor.getTypeName());

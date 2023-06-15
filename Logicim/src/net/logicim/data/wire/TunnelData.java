@@ -4,7 +4,7 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.SubcircuitEditor;
@@ -41,7 +41,7 @@ public class TunnelData
   }
 
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        CircuitSimulation circuitSimulation,
+                                        InstanceCircuitSimulation circuitSimulation,
                                         TraceLoader traceLoader,
                                         TunnelView tunnelView)
   {

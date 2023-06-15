@@ -1,6 +1,6 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class WireViewComp
 {
   protected List<ConnectionView> connections;
-  protected Map<CircuitSimulation, List<Trace>> simulationTraces;
+  protected Map<InstanceCircuitSimulation, List<Trace>> simulationTraces;
 
   protected int width;
 
@@ -67,12 +67,12 @@ public class WireViewComp
     return connectionViews;
   }
 
-  protected Color getTraceColour(CircuitSimulation simulation)
+  protected Color getTraceColour(InstanceCircuitSimulation circuit)
   {
-    if (simulation != null)
+    if (circuit != null)
     {
-      List<Trace> traces = simulationTraces.get(simulation);
-      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, simulation.getTime());
+      List<Trace> traces = simulationTraces.get(circuit);
+      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, circuit.getTime());
     }
     else
     {
@@ -95,9 +95,9 @@ public class WireViewComp
   protected Map<Long, long[]> save()
   {
     Map<Long, long[]> simulationTraces = new LinkedHashMap<>();
-    for (Map.Entry<CircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
+    for (Map.Entry<InstanceCircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
     {
-      CircuitSimulation simulation = entry.getKey();
+      InstanceCircuitSimulation simulation = entry.getKey();
       List<Trace> traces = entry.getValue();
       long[] ids = new long[traces.size()];
       simulationTraces.put(simulation.getId(), ids);
@@ -110,9 +110,9 @@ public class WireViewComp
     return simulationTraces;
   }
 
-  public void connectTraces(CircuitSimulation simulation, List<Trace> traces)
+  public void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces)
   {
-    simulationTraces.put(simulation, traces);
+    simulationTraces.put(circuit, traces);
 
     width = Integer.MAX_VALUE;
     for (List<Trace> existing : simulationTraces.values())
@@ -135,25 +135,25 @@ public class WireViewComp
       connections.set(i, null);
     }
 
-    for (CircuitSimulation simulation : simulationTraces.keySet())
+    for (InstanceCircuitSimulation simulation : simulationTraces.keySet())
     {
       clearTraces(simulation);
     }
   }
 
-  public void clearTraces(CircuitSimulation simulation)
+  public void clearTraces(InstanceCircuitSimulation circuit)
   {
-    simulationTraces.remove(simulation);
+    simulationTraces.remove(circuit);
   }
 
-  public List<Trace> getTraces(CircuitSimulation simulation)
+  public List<Trace> getTraces(InstanceCircuitSimulation circuit)
   {
-    return simulationTraces.get(simulation);
+    return simulationTraces.get(circuit);
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent(InstanceCircuitSimulation circuit)
   {
-    simulationTraces.remove(circuitSimulation);
+    simulationTraces.remove(circuit);
   }
 }
 

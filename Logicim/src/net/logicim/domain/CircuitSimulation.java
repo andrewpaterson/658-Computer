@@ -3,6 +3,7 @@ package net.logicim.domain;
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 
 public class CircuitSimulation
 {
@@ -20,7 +21,6 @@ public class CircuitSimulation
 
     this.circuit = new Circuit();
     this.simulation = new Simulation();
-    this.circuit.resetSimulation(this);
     this.name = "";
   }
 
@@ -30,7 +30,6 @@ public class CircuitSimulation
 
     this.circuit = new Circuit();
     this.simulation = new Simulation();
-    this.circuit.resetSimulation(this);
 
     this.id = id;
     if (id >= nextId)
@@ -54,10 +53,12 @@ public class CircuitSimulation
     return simulation.getTime();
   }
 
-  public void reset()
+  public InstanceCircuitSimulation reset(SubcircuitInstance subcircuitInstance)
   {
     simulation = new Simulation();
-    circuit.resetSimulation(this);
+    InstanceCircuitSimulation instanceCircuitSimulation = new InstanceCircuitSimulation(this, subcircuitInstance);
+    this.circuit.resetSimulation(instanceCircuitSimulation);
+    return instanceCircuitSimulation;
   }
 
   public void runSimultaneous()

@@ -4,7 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.data.passive.power.PositivePowerProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -89,9 +89,9 @@ public class PositivePowerView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuit);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -101,7 +101,7 @@ public class PositivePowerView
 
     drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
-    paintPorts(graphics, viewport, simulation);
+    paintPorts(graphics, viewport, circuit);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

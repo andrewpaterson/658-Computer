@@ -2,6 +2,7 @@ package net.logicim.ui;
 
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
@@ -38,7 +39,7 @@ public class ConnectionInformationPanel
     this.height = height;
   }
 
-  public void drawConnectionDetails(CircuitSimulation simulation, int left, int top)
+  public void drawConnectionDetails(InstanceCircuitSimulation circuit, int left, int top)
   {
     graphics.setColor(Colours.getInstance().getInfoBackground());
     graphics.fillRect(left, top, width, height);
@@ -63,7 +64,7 @@ public class ConnectionInformationPanel
     {
       String componentString = connectedComponent.getType() +
                                getComponentNameString(connectedComponent) +
-                               getComponentDetailString(simulation, connectedComponent);
+                               getComponentDetailString(circuit, connectedComponent);
 
       y = drawMultilineString(fontHeight,
                               xOffset,
@@ -98,24 +99,24 @@ public class ConnectionInformationPanel
     return y;
   }
 
-  private String getComponentDetailString(CircuitSimulation simulation, View connectedComponent)
+  private String getComponentDetailString(InstanceCircuitSimulation circuit, View connectedComponent)
   {
     if (connectedComponent instanceof TraceView)
     {
-      return toTraceDetailString(simulation, (TraceView) connectedComponent);
+      return toTraceDetailString(circuit, (TraceView) connectedComponent);
     }
     else if (connectedComponent instanceof ComponentView)
     {
-      return toComponentDetailString(simulation, (ComponentView<?>) connectedComponent);
+      return toComponentDetailString(circuit, (ComponentView<?>) connectedComponent);
     }
     else if (connectedComponent instanceof TunnelView)
     {
-      return toTunnelDetailString(simulation, (TunnelView) connectedComponent);
+      return toTunnelDetailString(circuit, (TunnelView) connectedComponent);
     }
     return "";
   }
 
-  private String toComponentDetailString(CircuitSimulation simulation, ComponentView<?> componentView)
+  private String toComponentDetailString(InstanceCircuitSimulation circuit, ComponentView<?> componentView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -127,7 +128,7 @@ public class ConnectionInformationPanel
       builder.append("\n" + padding + text);
       padding += "    ";
     }
-    List<? extends Port> ports = portView.getPorts(simulation);
+    List<? extends Port> ports = portView.getPorts(circuit);
     if (ports != null)
     {
       for (Port port : ports)
@@ -160,11 +161,11 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String toTraceDetailString(CircuitSimulation simulation, TraceView traceView)
+  private String toTraceDetailString(InstanceCircuitSimulation circuit, TraceView traceView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = traceView.getTraces(simulation);
+    List<Trace> traces = traceView.getTraces(circuit);
     if (traces != null)
     {
       boolean multiline = traces.size() > 8;
@@ -191,11 +192,11 @@ public class ConnectionInformationPanel
     return builder.toString();
   }
 
-  private String toTunnelDetailString(CircuitSimulation simulation, TunnelView tunnelView)
+  private String toTunnelDetailString(InstanceCircuitSimulation circuit, TunnelView tunnelView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = tunnelView.getTraces(simulation);
+    List<Trace> traces = tunnelView.getTraces(circuit);
     boolean multiline = traces.size() > 8;
     if (multiline)
     {

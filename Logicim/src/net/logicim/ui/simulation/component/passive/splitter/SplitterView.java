@@ -6,7 +6,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.data.passive.wire.SplitterProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.port.BidirectionalPortMap;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
@@ -40,7 +40,7 @@ public class SplitterView
   protected List<PortView> endPortViews;
   protected PortView startPortView;
 
-  protected Map<CircuitSimulation, BidirectionalPortMap> simulationBidirectionalPorts;
+  protected Map<InstanceCircuitSimulation, BidirectionalPortMap> simulationBidirectionalPorts;
 
   public SplitterView(SubcircuitView subcircuitView,
                       Int2D position,
@@ -329,9 +329,9 @@ public class SplitterView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuit);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -343,7 +343,7 @@ public class SplitterView
     }
     rectangleView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, simulation);
+    paintPorts(graphics, viewport, circuit);
 
     for (TextView textView : textViews)
     {
@@ -380,7 +380,7 @@ public class SplitterView
   }
 
   @Override
-  protected Splitter createPassive(CircuitSimulation simulation)
+  protected Splitter createPassive(InstanceCircuitSimulation simulation)
   {
     List<String> startPortNames = getStartPortNames(properties.bitWidth);
     Splitter splitter = new Splitter(simulation.getCircuit(),
@@ -492,11 +492,11 @@ public class SplitterView
     updateTextViews();
   }
 
-  public Map<Port, Port> getSimulationBidirectionalPorts(CircuitSimulation simulation)
+  public Map<Port, Port> getSimulationBidirectionalPorts(InstanceCircuitSimulation circuit)
   {
-    if (simulation != null)
+    if (circuit != null)
     {
-      BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(simulation);
+      BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(circuit);
       if (bidirectionalPortMap != null)
       {
         return bidirectionalPortMap.getBidirectionalPortMap();

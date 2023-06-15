@@ -8,6 +8,7 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -189,7 +190,7 @@ public class SubcircuitInstanceView
     return rectangle;
   }
 
-  protected void validatePorts(CircuitSimulation circuitSimulation)
+  protected void validatePorts(InstanceCircuitSimulation circuit)
   {
   }
 
@@ -215,9 +216,12 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  protected SubcircuitInstance createPassive(CircuitSimulation circuitSimulation)
+  protected SubcircuitInstance createPassive(InstanceCircuitSimulation circuitSimulation)
   {
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
+                                                                   properties.name,
+                                                                   properties.subcircuitTypeName,
+                                                                   properties.comment);
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
     {
@@ -323,9 +327,9 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuit);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -351,7 +355,7 @@ public class SubcircuitInstanceView
       name.paint(graphics, viewport);
     }
 
-    paintPorts(graphics, viewport, simulation);
+    paintPorts(graphics, viewport, circuit);
 
     graphics.setFont(font);
     graphics.setColor(color);

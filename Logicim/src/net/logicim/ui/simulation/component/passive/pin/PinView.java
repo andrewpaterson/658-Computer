@@ -9,7 +9,7 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -207,7 +207,7 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive(CircuitSimulation simulation)
+  protected Pin createPassive(InstanceCircuitSimulation simulation)
   {
     Pin pin = new Pin(simulation.getCircuit(),
                       properties.name,
@@ -257,9 +257,9 @@ public class PinView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, simulation);
+    super.paint(graphics, viewport, circuit);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -276,19 +276,19 @@ public class PinView
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
-    long time = simulation.getTime();
-    Pin passive = getComponent(simulation);
+    long time = circuit.getTime();
+    Pin passive = getComponent(circuit);
     TraceValue[] values = null;
     if (passive != null)
     {
-      values = port.getValue(simulation, familyVoltageConfiguration, passive.getVCC(time));
+      values = port.getValue(circuit, familyVoltageConfiguration, passive.getVCC(time));
     }
 
     dataView.setText(getStringValue(values));
     dataView.paint(graphics, viewport);
     labelView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, simulation);
+    paintPorts(graphics, viewport, circuit);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

@@ -13,6 +13,7 @@ import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
@@ -63,7 +64,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void loadPort(CircuitSimulation simulation, PortData portData, Port port)
+  protected void loadPort(InstanceCircuitSimulation circuit, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -72,7 +73,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
       Map<Long, PortEvent> portEventMap = new HashMap<>();
       for (PortEventData<?> eventData : logicPortData.events)
       {
-        PortEvent portEvent = eventData.create(logicPort, simulation.getTimeline());
+        PortEvent portEvent = eventData.create(logicPort, circuit.getTimeline());
         portEventMap.put(eventData.id, portEvent);
       }
 
@@ -81,24 +82,24 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
         PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
         if (outputPortEvent == null)
         {
-          outputPortEvent = logicPortData.output.create(logicPort, simulation.getTimeline());
+          outputPortEvent = logicPortData.output.create(logicPort, circuit.getTimeline());
         }
         logicPort.setOutput(outputPortEvent);
       }
     }
   }
 
-  protected void loadEvents(CircuitSimulation simulation, ICV integratedCircuitView)
+  protected void loadEvents(InstanceCircuitSimulation circuit, ICV integratedCircuitView)
   {
-    List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(simulation.getId());
+    List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(circuit.getId());
     if (integratedCircuitEventData == null)
     {
-      throw new SimulatorException("Cannot find IntegratedCircuitEventData for simulation ID [%s].", simulation.getId());
+      throw new SimulatorException("Cannot find IntegratedCircuitEventData for simulation ID [%s].", circuit.getId());
     }
     for (IntegratedCircuitEventData<?> eventData : integratedCircuitEventData)
     {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
-      eventData.create(integratedCircuit, simulation.getTimeline());
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuit);
+      eventData.create(integratedCircuit, circuit.getTimeline());
     }
   }
 
@@ -121,21 +122,21 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
 
   @Override
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        CircuitSimulation simulation,
+                                        InstanceCircuitSimulation circuit,
                                         TraceLoader traceLoader,
                                         ICV integratedCircuitView)
   {
-    integratedCircuitView.createComponent(simulation);
+    integratedCircuitView.createComponent(circuit);
 
-    loadState(simulation, integratedCircuitView);
-    loadEvents(simulation, integratedCircuitView);
-    loadPorts(simulation, traceLoader, integratedCircuitView);
+    loadState(circuit, integratedCircuitView);
+    loadEvents(circuit, integratedCircuitView);
+    loadPorts(circuit, traceLoader, integratedCircuitView);
   }
 
-  private void loadState(CircuitSimulation simulation, ICV integratedCircuitView)
+  private void loadState(InstanceCircuitSimulation circuit, ICV integratedCircuitView)
   {
-    STATE state = getState(simulation.getId());
-    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(simulation);
+    STATE state = getState(circuit.getId());
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuit);
     integratedCircuit.setState(state);
   }
 

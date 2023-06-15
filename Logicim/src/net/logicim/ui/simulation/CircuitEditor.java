@@ -12,6 +12,7 @@ import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.event.Event;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -74,7 +75,7 @@ public class CircuitEditor
       views = getAllViews();
     }
 
-    CircuitSimulation circuitSimulation = getCircuitSimulation();
+    InstanceCircuitSimulation circuitSimulation = getInstanceCircuitSimulation();
     for (View view : views)
     {
       view.paint(graphics, viewport, circuitSimulation);
@@ -85,7 +86,7 @@ public class CircuitEditor
   {
     if (currentSimulation != null)
     {
-      return currentSimulation.getCircuitSimulation().getCircuit();
+      return currentSimulation.getInstanceCircuitSimulation().getCircuit();
     }
     else
     {
@@ -99,7 +100,7 @@ public class CircuitEditor
     {
       Set<TraceView> traceViews = new LinkedHashSet<>();
       traceViews.add(traceView);
-      currentSubcircuitEditor.deleteTraceViews(traceViews, getCircuitSimulation());
+      currentSubcircuitEditor.deleteTraceViews(traceViews, getInstanceCircuitSimulation());
     }
     else
     {
@@ -121,7 +122,7 @@ public class CircuitEditor
 
     if (traceViews.size() > 0)
     {
-      currentSubcircuitEditor.deleteTraceViews(traceViews, getCircuitSimulation());
+      currentSubcircuitEditor.deleteTraceViews(traceViews, getInstanceCircuitSimulation());
       return true;
     }
     else
@@ -132,12 +133,12 @@ public class CircuitEditor
 
   public void runSimultaneous()
   {
-    getCircuitSimulation().runSimultaneous();
+    getInstanceCircuitSimulation().runSimultaneous();
   }
 
   public void runToTime(long timeForward)
   {
-    getCircuitSimulation().runToTime(timeForward);
+    getInstanceCircuitSimulation().runToTime(timeForward);
   }
 
   public StaticView<?> getComponentViewInScreenSpace(Viewport viewport,
@@ -217,7 +218,7 @@ public class CircuitEditor
   {
     if (currentSimulation != null)
     {
-      return currentSimulation.getCircuitSimulation().getId();
+      return currentSimulation.getInstanceCircuitSimulation().getId();
     }
     else
     {
@@ -275,7 +276,8 @@ public class CircuitEditor
     {
       SubcircuitEditor subcircuitEditor = getSubcircuitEditor(circuitSimulationData.subcircuitId);
       CircuitSimulation circuitSimulation = new CircuitSimulation(circuitSimulationData.circuitSimulationId, circuitSimulationData.circuitSimulationName);
-      simulations.add(new TopLevelSubcircuitSimulation(subcircuitEditor, circuitSimulation));
+      InstanceCircuitSimulation instanceCircuitSimulation = circuitSimulation.reset(null);
+      simulations.add(new TopLevelSubcircuitSimulation(subcircuitEditor, instanceCircuitSimulation));
       circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
     }
 
@@ -297,18 +299,18 @@ public class CircuitEditor
       {
         throw new SimulatorException("Could not find TopLevelSubcircuitSimulation with id [%s].", circuitSimulationData.circuitSimulationId);
       }
-      CircuitSimulation circuitSimulation = topLevelSimulation.getCircuitSimulation();
+      InstanceCircuitSimulation circuit = topLevelSimulation.getInstanceCircuitSimulation();
 
       for (SubcircuitData subcircuitData : circuitData.subcircuits)
       {
         Map<ViewData, View> views = maybe.get(subcircuitData);
         SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
         subcircuitEditor.loadComponents(views,
-                                        circuitSimulation,
+                                        circuit,
                                         traceLoader);
       }
 
-      circuitSimulation.getSimulation().getTimeline().load(circuitSimulationData.timeline);
+      circuit.getSimulation().getTimeline().load(circuitSimulationData.timeline);
     }
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
@@ -331,7 +333,7 @@ public class CircuitEditor
   {
     for (TopLevelSubcircuitSimulation topLevelSubcircuitSimulation : simulations)
     {
-      if (topLevelSubcircuitSimulation.getCircuitSimulation().getId() == simulationId)
+      if (topLevelSubcircuitSimulation.getInstanceCircuitSimulation().getId() == simulationId)
       {
         return topLevelSubcircuitSimulation;
       }
@@ -364,17 +366,17 @@ public class CircuitEditor
 
   public void recreateComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitEditor.recreateComponentView(staticView, getCircuitSimulation());
+    currentSubcircuitEditor.recreateComponentView(staticView, getInstanceCircuitSimulation());
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
-    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, getCircuitSimulation());
+    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, getInstanceCircuitSimulation());
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews, boolean newComponents)
   {
-    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, getCircuitSimulation(), newComponents);
+    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, getInstanceCircuitSimulation(), newComponents);
   }
 
   public Selection getCurrentSelection()
@@ -396,7 +398,7 @@ public class CircuitEditor
 
   public void deleteSelection()
   {
-    currentSubcircuitEditor.deleteSelection(getCircuitSimulation());
+    currentSubcircuitEditor.deleteSelection(getInstanceCircuitSimulation());
   }
 
   public SubcircuitEditor getCurrentSubcircuitEditor()
@@ -433,12 +435,12 @@ public class CircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    deleteComponentView(staticView, currentSubcircuitEditor, getCircuitSimulation());
+    deleteComponentView(staticView, currentSubcircuitEditor, getInstanceCircuitSimulation());
   }
 
-  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, CircuitSimulation circuitSimulation)
+  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, InstanceCircuitSimulation circuit)
   {
-    subcircuitEditor.deleteComponentView(staticView, circuitSimulation);
+    subcircuitEditor.deleteComponentView(staticView, circuit);
   }
 
   public void validateConsistency()
@@ -464,14 +466,14 @@ public class CircuitEditor
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitEditor.deleteComponentViews(staticViews, getCircuitSimulation());
+    currentSubcircuitEditor.deleteComponentViews(staticViews, getInstanceCircuitSimulation());
   }
 
-  public CircuitSimulation getCircuitSimulation()
+  public InstanceCircuitSimulation getInstanceCircuitSimulation()
   {
     if (currentSimulation != null)
     {
-      return currentSimulation.getCircuitSimulation();
+      return currentSimulation.getInstanceCircuitSimulation();
     }
     else
     {
@@ -528,32 +530,6 @@ public class CircuitEditor
     if (nextTopLevelSubcircuitSimulation == null)
     {
       throw new SimulatorException("No top level simulation found for subcircuit editor.");
-    }
-
-    currentSimulation = nextTopLevelSubcircuitSimulation;
-  }
-
-  public void setCurrentSimulation(CircuitSimulation simulation)
-  {
-    TopLevelSubcircuitSimulation nextTopLevelSubcircuitSimulation = null;
-    for (TopLevelSubcircuitSimulation topLevelSubcircuitSimulation : simulations)
-    {
-      if (topLevelSubcircuitSimulation.circuitSimulation == simulation)
-      {
-        if (nextTopLevelSubcircuitSimulation == null)
-        {
-          nextTopLevelSubcircuitSimulation = topLevelSubcircuitSimulation;
-        }
-        else
-        {
-          throw new SimulatorException("More than one top level simulation found for simulation.");
-        }
-      }
-    }
-
-    if (nextTopLevelSubcircuitSimulation == null)
-    {
-      throw new SimulatorException("No top level simulation found for simulation.");
     }
 
     currentSimulation = nextTopLevelSubcircuitSimulation;
@@ -621,7 +597,9 @@ public class CircuitEditor
 
   public TopLevelSubcircuitSimulation addNewSimulation(SubcircuitEditor subcircuitEditor)
   {
-    TopLevelSubcircuitSimulation topLevelSubcircuitSimulation = new TopLevelSubcircuitSimulation(subcircuitEditor, new CircuitSimulation());
+    CircuitSimulation circuitSimulation = new CircuitSimulation();
+    InstanceCircuitSimulation circuit = circuitSimulation.reset(null);
+    TopLevelSubcircuitSimulation topLevelSubcircuitSimulation = new TopLevelSubcircuitSimulation(subcircuitEditor, circuit);
     simulations.add(topLevelSubcircuitSimulation);
     return topLevelSubcircuitSimulation;
   }
@@ -669,13 +647,13 @@ public class CircuitEditor
       List<SubcircuitInstanceView> instanceViews = entry.getValue();
       for (SubcircuitInstanceView instanceView : instanceViews)
       {
-        CircuitSimulation currentSimulation = getCircuitSimulation();
-        deleteComponentView(instanceView, containingSubcircuitEditor, currentSimulation);
+        InstanceCircuitSimulation circuit = getInstanceCircuitSimulation();
+        deleteComponentView(instanceView, containingSubcircuitEditor, circuit);
 
         instanceView = (SubcircuitInstanceView) instanceView.duplicate(this,
                                                                        containingSubcircuitEditor.getSubcircuitView(),
                                                                        instanceView.getProperties());
-        containingSubcircuitEditor.recreateComponentView(instanceView, currentSimulation);
+        containingSubcircuitEditor.recreateComponentView(instanceView, circuit);
       }
     }
   }

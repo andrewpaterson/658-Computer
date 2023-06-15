@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -65,9 +66,9 @@ public class ClockView
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(circuitSimulation.getCircuit(),
+    return new ClockOscillator(circuit.getCircuit(),
                                properties.name,
                                new ClockOscillatorPins(familyVoltageConfiguration,
                                                        properties.inverseOut),
@@ -75,9 +76,9 @@ public class ClockView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, CircuitSimulation circuitSimulation)
+  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, circuitSimulation);
+    super.paint(graphics, viewport, circuit);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -86,21 +87,21 @@ public class ClockView
     {
       rectangle.paint(graphics, viewport);
 
-      paintClockWaveform(graphics, viewport, circuitSimulation);
+      paintClockWaveform(graphics, viewport, circuit);
     }
-    paintPorts(graphics, viewport, circuitSimulation);
+    paintPorts(graphics, viewport, circuit);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, CircuitSimulation simulation)
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
   {
-    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(simulation);
+    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(circuit);
     Color clockColor = Colours.getInstance().getDisconnectedTrace();
-    if (simulation != null)
+    if (circuit != null)
     {
-      long time = simulation.getTime();
+      long time = circuit.getTime();
       if (integratedCircuit != null)
       {
         ClockOscillatorState state = integratedCircuit.getState();

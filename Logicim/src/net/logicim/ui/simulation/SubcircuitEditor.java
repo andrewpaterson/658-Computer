@@ -17,7 +17,6 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.util.*;
@@ -28,7 +27,6 @@ public class SubcircuitEditor
 
   protected Selection selection;
   protected SubcircuitView subcircuitView;
-  protected SubcircuitInstanceView subcircuitInstanceView;
   protected CircuitEditor circuitEditor;
   protected long id;
 

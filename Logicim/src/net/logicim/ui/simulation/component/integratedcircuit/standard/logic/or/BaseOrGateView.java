@@ -73,9 +73,11 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuitSimulation)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, circuitSimulation);
+    super.paint(graphics, viewport, circuit);
     if ((arcViewRight != null) && (arcViewLeft != null) && (arcViewBottom != null))
     {
       Stroke stroke = graphics.getStroke();
@@ -88,7 +90,7 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
       arcViewLeft.paint(graphics, viewport);
       arcViewRight.paint(graphics, viewport);
       arcViewBottom.paint(graphics, viewport);
-      paintPorts(graphics, viewport, circuitSimulation);
+      paintPorts(graphics, viewport, circuit);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

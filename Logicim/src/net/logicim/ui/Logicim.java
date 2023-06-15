@@ -820,7 +820,7 @@ public class Logicim
   {
     InstanceCircuitSimulation circuit = circuitEditor.getInstanceCircuitSimulation();
     CircuitSimulation circuitSimulation = circuit.getCircuitSimulation();
-    circuitSimulation.reset(null);
+    circuitSimulation.reset(circuit.getSubcircuitInstance());
   }
 
   public void recreateSimulation()

@@ -257,7 +257,9 @@ public class PinView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    InstanceCircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 

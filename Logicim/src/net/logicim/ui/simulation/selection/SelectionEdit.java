@@ -37,7 +37,9 @@ public class SelectionEdit
     this.previousSelection = null;
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport, SelectionMode selectionMode)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    SelectionMode selectionMode)
   {
     if ((start != null) && (end != null))
     {

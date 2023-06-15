@@ -64,5 +64,10 @@ public class InstanceCircuitSimulation
   {
     return circuitSimulation;
   }
+
+  public SubcircuitInstance getSubcircuitInstance()
+  {
+    return subcircuitInstance;
+  }
 }
 

@@ -147,7 +147,9 @@ public class PortView
     return relativePosition;
   }
 
-  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    InstanceCircuitSimulation circuit)
   {
     updateGridCache();
 

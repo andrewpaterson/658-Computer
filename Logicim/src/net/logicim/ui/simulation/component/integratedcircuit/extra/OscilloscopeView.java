@@ -76,9 +76,11 @@ public class OscilloscopeView
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuitSimulation)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    InstanceCircuitSimulation circuit)
   {
-    super.paint(graphics, viewport, circuitSimulation);
+    super.paint(graphics, viewport, circuit);
 
     if ((frameView != null))
     {
@@ -89,7 +91,7 @@ public class OscilloscopeView
 
       rectangleView.paint(graphics, viewport);
 
-      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(circuitSimulation);
+      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(circuit);
       if (integratedCircuit != null)
       {
         OscilloscopeState state = integratedCircuit.getState();
@@ -160,7 +162,7 @@ public class OscilloscopeView
           }
         }
       }
-      paintPorts(graphics, viewport, circuitSimulation);
+      paintPorts(graphics, viewport, circuit);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

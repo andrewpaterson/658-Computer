@@ -14,6 +14,7 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -827,19 +828,24 @@ public class Logicim
   {
     TopLevelSubcircuitSimulation topLevelSimulation = getCurrentTopLevelSimulation();
     InstanceCircuitSimulation circuit = topLevelSimulation.getInstanceCircuitSimulation();
-    List<SubcircuitView> subcircuitViews = topLevelSimulation.getTopDownSubcircuitViews();
+    List<CircuitInstanceViewPath> instanceViewPaths = topLevelSimulation.getTopDownSubcircuitViews();
 
-    for (SubcircuitView subcircuitView : subcircuitViews)
+    for (CircuitInstanceViewPath instanceViewPath : instanceViewPaths)
     {
-      subcircuitView.destroyCircuitSimulation(circuit);
+      System.out.println(instanceViewPath.toString());
     }
 
-    resetSimulation();
-
-    for (SubcircuitView subcircuitView : subcircuitViews)
-    {
-      subcircuitView.createCircuitSimulation(circuit);
-    }
+//    for (SubcircuitView subcircuitView : subcircuitViews)
+//    {
+//      subcircuitView.destroyCircuitSimulation(circuit);
+//    }
+//
+//    resetSimulation();
+//
+//    for (SubcircuitView subcircuitView : subcircuitViews)
+//    {
+//      subcircuitView.createCircuitSimulation(circuit);
+//    }
   }
 
   public EditorData save()

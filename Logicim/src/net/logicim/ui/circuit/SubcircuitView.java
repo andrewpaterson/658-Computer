@@ -11,7 +11,6 @@ import net.logicim.common.type.Positions;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
@@ -37,6 +36,7 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import java.util.*;
 
 public class SubcircuitView
+    implements CircuitInstanceView
 {
   protected String typeName;  //The subcircuit instance name is on the SubcircuitInstanceView.
 
@@ -1021,6 +1021,12 @@ public class SubcircuitView
   }
 
   public String getTypeName()
+  {
+    return typeName;
+  }
+
+  @Override
+  public String toString()
   {
     return typeName;
   }

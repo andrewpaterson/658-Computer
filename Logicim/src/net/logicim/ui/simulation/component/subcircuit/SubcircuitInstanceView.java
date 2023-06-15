@@ -11,6 +11,7 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
@@ -32,6 +33,7 @@ import static java.awt.Font.SANS_SERIF;
 
 public class SubcircuitInstanceView
     extends PassiveView<SubcircuitInstance, SubcircuitInstanceProperties>
+    implements CircuitInstanceView
 {
   protected boolean subcircuitComponentsCreated;
   protected List<SubcircuitPinView> pinViews;
@@ -286,6 +288,20 @@ public class SubcircuitInstanceView
       name = "";
     }
     return getTypeName() + " " + name + "(" + getPosition() + ")";
+  }
+
+  public String toString()
+  {
+    String name = getName();
+    if (!StringUtil.isEmptyOrNull(name))
+    {
+      name = "(" + name + ")";
+    }
+    else
+    {
+      name = "";
+    }
+    return getTypeName() + name;
   }
 
   @Override

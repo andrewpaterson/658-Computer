@@ -4,6 +4,8 @@ import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.common.Timeline;
+import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
@@ -16,7 +18,8 @@ public class TopLevelSubcircuitSimulation
   protected SubcircuitEditor subcircuitEditor;
   protected InstanceCircuitSimulation instanceCircuitSimulation;
 
-  public TopLevelSubcircuitSimulation(SubcircuitEditor subcircuitEditor, InstanceCircuitSimulation instanceCircuitSimulation)
+  public TopLevelSubcircuitSimulation(SubcircuitEditor subcircuitEditor,
+                                      InstanceCircuitSimulation instanceCircuitSimulation)
   {
     this.subcircuitEditor = subcircuitEditor;
     this.instanceCircuitSimulation = instanceCircuitSimulation;
@@ -48,22 +51,26 @@ public class TopLevelSubcircuitSimulation
     return instanceCircuitSimulation.getDescription();
   }
 
-  public List<SubcircuitView> getTopDownSubcircuitViews()
+  public List<CircuitInstanceViewPath> getTopDownSubcircuitViews()
   {
     SubcircuitView subcircuitView = subcircuitEditor.getSubcircuitView();
-    List<SubcircuitView> subcircuitViews = new ArrayList<>();
-    recurseFindSubCircuitViews(subcircuitViews, subcircuitView);
-    return subcircuitViews;
+    List<CircuitInstanceViewPath> circuitPaths = new ArrayList<>();
+    List<CircuitInstanceView> path = new ArrayList<>();
+    path.add(subcircuitView);
+    recurseFindSubCircuitViews(path, circuitPaths, subcircuitView);
+    return circuitPaths;
   }
 
-  protected void recurseFindSubCircuitViews(List<SubcircuitView> subcircuitViews, SubcircuitView subcircuitView)
+  protected void recurseFindSubCircuitViews(List<CircuitInstanceView> path, List<CircuitInstanceViewPath> circuitPaths, SubcircuitView subcircuitView)
   {
-    subcircuitViews.add(subcircuitView);
     Set<SubcircuitInstanceView> instanceViews = subcircuitView.findAllSubcircuitInstanceViews();
     for (SubcircuitInstanceView instanceView : instanceViews)
     {
+      path.add(instanceView);
+      circuitPaths.add(new CircuitInstanceViewPath(path));
       SubcircuitView instanceSubcircuitView = instanceView.getInstanceSubcircuitView();
-      recurseFindSubCircuitViews(subcircuitViews, instanceSubcircuitView);
+      recurseFindSubCircuitViews(path, circuitPaths, instanceSubcircuitView);
+      path.remove(path.size() - 1);
     }
   }
 }

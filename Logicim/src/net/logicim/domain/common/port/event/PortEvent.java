@@ -21,7 +21,7 @@ public abstract class PortEvent
 
   public PortEvent(LogicPort port, long time, long id, Timeline timeline)
   {
-    super(time, id, timeline);
+    super(time, timeline, id);
     this.port = port;
     this.port.add(this);
   }

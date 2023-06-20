@@ -2,7 +2,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -72,7 +72,7 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 

@@ -3,7 +3,7 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
@@ -198,7 +198,7 @@ public class TraceView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     graphics.setStroke(getTraceStroke(viewport));
     Color color = getTraceColour(circuit);
@@ -254,7 +254,7 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
-  protected Color getTraceColour(InstanceCircuitSimulation circuit)
+  protected Color getTraceColour(SubcircuitSimulation circuit)
   {
     return wireView.getTraceColour(circuit);
   }
@@ -271,7 +271,7 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces)
+  public void connectTraces(SubcircuitSimulation circuit, List<Trace> traces)
   {
     wireView.connectTraces(circuit, traces);
   }
@@ -282,12 +282,12 @@ public class TraceView
   }
 
   @Override
-  public void clearTraces(InstanceCircuitSimulation circuit)
+  public void clearTraces(SubcircuitSimulation circuit)
   {
     wireView.clearTraces(circuit);
   }
 
-  public List<Trace> getTraces(InstanceCircuitSimulation circuit)
+  public List<Trace> getTraces(SubcircuitSimulation circuit)
   {
     return wireView.getTraces(circuit);
   }
@@ -315,7 +315,7 @@ public class TraceView
     return LineOverlap.None;
   }
 
-  public void destroyComponent(InstanceCircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation circuit)
   {
     wireView.destroyComponent(circuit);
   }

@@ -2,14 +2,17 @@ package net.logicim.data.circuit;
 
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.simulation.CircuitSimulationData;
+import net.logicim.data.simulation.SubcircuitSimulationData;
+import net.logicim.data.simulation.SubcircuitTopSimulationData;
 
 import java.util.List;
 
 public class CircuitData
     extends ReflectiveData
 {
-  public List<SubcircuitData> subcircuits;
-  public List<CircuitSimulationData> circuitSimulationDatas;
+  public List<SubcircuitEditorData> subcircuits;
+  public List<CircuitSimulationData> circuitSimulations;
+  public List<SubcircuitSimulationData> subcircuitSimulations;
   public long currentSubcircuit;
   public long currentSimulation;
 
@@ -17,13 +20,15 @@ public class CircuitData
   {
   }
 
-  public CircuitData(List<SubcircuitData> subcircuits,
-                     List<CircuitSimulationData> circuitSimulationDatas,
+  public CircuitData(List<SubcircuitEditorData> subcircuits,
+                     List<CircuitSimulationData> circuitSimulations,
+                     List<SubcircuitSimulationData> subcircuitSimulations,
                      long currentSubcircuit,
                      long currentSimulation)
   {
     this.subcircuits = subcircuits;
-    this.circuitSimulationDatas = circuitSimulationDatas;
+    this.circuitSimulations = circuitSimulations;
+    this.subcircuitSimulations = subcircuitSimulations;
     this.currentSubcircuit = currentSubcircuit;
     this.currentSimulation = currentSimulation;
   }

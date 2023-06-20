@@ -4,10 +4,12 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelView;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.Map;
 
@@ -41,8 +43,8 @@ public class TunnelData
   }
 
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        InstanceCircuitSimulation circuitSimulation,
-                                        TraceLoader traceLoader,
+                                        SubcircuitSimulation circuitSimulation,
+                                        CircuitLoaders circuitLoaders,
                                         TunnelView tunnelView)
   {
     long[] traceIDs = simulationTraces.get(circuitSimulation.getId());
@@ -52,7 +54,7 @@ public class TunnelData
     }
 
     tunnelView.wireConnect(circuitSimulation,
-                           traceLoader,
+                           circuitLoaders.getTraceLoader(),
                            traceIDs
     );
   }

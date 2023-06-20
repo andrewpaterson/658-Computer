@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferData;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Buffer;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
@@ -31,7 +31,7 @@ public class BufferView
   }
 
   @Override
-  protected Buffer createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Buffer createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new Buffer(circuit.getCircuit(),
                       properties.name,

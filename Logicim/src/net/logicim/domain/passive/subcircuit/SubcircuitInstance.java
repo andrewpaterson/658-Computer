@@ -14,19 +14,37 @@ import java.util.Map;
 public class SubcircuitInstance
     extends Passive
 {
+  public static long nextId = 1L;
+
   protected Map<String, List<TracePort>> namedPins;
   protected String subcircuitTypeName;
   protected String comment;
+  protected long id;
 
   public SubcircuitInstance(Circuit circuit,
                             String name,
                             String subcircuitTypeName,
                             String comment)
   {
+    this(circuit, name, subcircuitTypeName, comment, nextId++);
+  }
+
+  public SubcircuitInstance(Circuit circuit,
+                            String name,
+                            String subcircuitTypeName,
+                            String comment,
+                            long id)
+  {
     super(circuit, name);
+    this.namedPins = new LinkedHashMap<>();
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;
-    this.namedPins = new LinkedHashMap<>();
+
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
   }
 
   @Override
@@ -63,6 +81,16 @@ public class SubcircuitInstance
     {
       throw new SimulatorException("Cannot get ports for pin named [%s].", pinName);
     }
+  }
+
+  public long getId()
+  {
+    return id;
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1;
   }
 }
 

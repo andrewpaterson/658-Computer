@@ -1,7 +1,7 @@
 package net.logicim.domain.common;
 
 import net.logicim.common.util.StringUtil;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 
@@ -13,7 +13,7 @@ public interface Component
 
   void disconnect(Simulation simulation);
 
-  void reset(InstanceCircuitSimulation circuit);
+  void reset(SubcircuitSimulation circuit);
 
   String getType();
 

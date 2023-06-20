@@ -11,9 +11,7 @@ import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.simulation.SimulationStateData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
@@ -22,7 +20,9 @@ import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +64,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void loadPort(InstanceCircuitSimulation circuit, PortData portData, Port port)
+  protected void loadPort(SubcircuitSimulation circuit, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -89,7 +89,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     }
   }
 
-  protected void loadEvents(InstanceCircuitSimulation circuit, ICV integratedCircuitView)
+  protected void loadEvents(SubcircuitSimulation circuit, ICV integratedCircuitView)
   {
     List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(circuit.getId());
     if (integratedCircuitEventData == null)
@@ -122,18 +122,18 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
 
   @Override
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        InstanceCircuitSimulation circuit,
-                                        TraceLoader traceLoader,
+                                        SubcircuitSimulation circuit,
+                                        CircuitLoaders circuitLoaders,
                                         ICV integratedCircuitView)
   {
     integratedCircuitView.createComponent(circuit);
 
     loadState(circuit, integratedCircuitView);
     loadEvents(circuit, integratedCircuitView);
-    loadPorts(circuit, traceLoader, integratedCircuitView);
+    loadPorts(circuit, circuitLoaders, integratedCircuitView);
   }
 
-  private void loadState(InstanceCircuitSimulation circuit, ICV integratedCircuitView)
+  private void loadState(SubcircuitSimulation circuit, ICV integratedCircuitView)
   {
     STATE state = getState(circuit.getId());
     IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuit);

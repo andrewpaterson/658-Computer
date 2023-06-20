@@ -1,6 +1,6 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class WireViewComp
 {
   protected List<ConnectionView> connections;
-  protected Map<InstanceCircuitSimulation, List<Trace>> simulationTraces;
+  protected Map<SubcircuitSimulation, List<Trace>> simulationTraces;
 
   protected int width;
 
@@ -67,7 +67,7 @@ public class WireViewComp
     return connectionViews;
   }
 
-  protected Color getTraceColour(InstanceCircuitSimulation circuit)
+  protected Color getTraceColour(SubcircuitSimulation circuit)
   {
     if (circuit != null)
     {
@@ -95,9 +95,9 @@ public class WireViewComp
   protected Map<Long, long[]> save()
   {
     Map<Long, long[]> simulationTraces = new LinkedHashMap<>();
-    for (Map.Entry<InstanceCircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
+    for (Map.Entry<SubcircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
     {
-      InstanceCircuitSimulation simulation = entry.getKey();
+      SubcircuitSimulation simulation = entry.getKey();
       List<Trace> traces = entry.getValue();
       long[] ids = new long[traces.size()];
       simulationTraces.put(simulation.getId(), ids);
@@ -110,7 +110,7 @@ public class WireViewComp
     return simulationTraces;
   }
 
-  public void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces)
+  public void connectTraces(SubcircuitSimulation circuit, List<Trace> traces)
   {
     simulationTraces.put(circuit, traces);
 
@@ -135,23 +135,23 @@ public class WireViewComp
       connections.set(i, null);
     }
 
-    for (InstanceCircuitSimulation simulation : simulationTraces.keySet())
+    for (SubcircuitSimulation simulation : simulationTraces.keySet())
     {
       clearTraces(simulation);
     }
   }
 
-  public void clearTraces(InstanceCircuitSimulation circuit)
+  public void clearTraces(SubcircuitSimulation circuit)
   {
     simulationTraces.remove(circuit);
   }
 
-  public List<Trace> getTraces(InstanceCircuitSimulation circuit)
+  public List<Trace> getTraces(SubcircuitSimulation circuit)
   {
     return simulationTraces.get(circuit);
   }
 
-  public void destroyComponent(InstanceCircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation circuit)
   {
     simulationTraces.remove(circuit);
   }

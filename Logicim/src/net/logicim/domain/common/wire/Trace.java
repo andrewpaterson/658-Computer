@@ -22,9 +22,7 @@ public class Trace
 
   public Trace()
   {
-    connectedPorts = new LinkedHashSet<>();
-    id = nextId;
-    nextId++;
+    this(nextId++);
   }
 
   public Trace(long id)

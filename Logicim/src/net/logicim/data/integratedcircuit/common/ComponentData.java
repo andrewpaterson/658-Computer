@@ -7,8 +7,7 @@ import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
@@ -17,7 +16,8 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +57,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
     return componentView;
   }
 
-  protected void loadPorts(InstanceCircuitSimulation circuit, TraceLoader traceLoader, T componentView)
+  protected void loadPorts(SubcircuitSimulation circuit, CircuitLoaders circuitLoaders, T componentView)
   {
     List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
@@ -78,7 +78,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
         if (j < multiPortData.ports.size())
         {
           PortData portData = multiPortData.ports.get(j);
-          Trace trace = traceLoader.create(portData.traceId);
+          Trace trace = circuitLoaders.getTraceLoader().create(portData.traceId);
           port.connect(trace);
 
           loadPort(circuit, portData, port);
@@ -101,7 +101,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
     return null;
   }
 
-  protected void loadPort(InstanceCircuitSimulation circuit, PortData portData, Port port)
+  protected void loadPort(SubcircuitSimulation circuit, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {

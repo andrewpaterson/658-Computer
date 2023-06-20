@@ -1,8 +1,7 @@
 package net.logicim.ui;
 
 import net.logicim.common.util.StringUtil;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.Colours;
@@ -39,7 +38,7 @@ public class ConnectionInformationPanel
     this.height = height;
   }
 
-  public void drawConnectionDetails(InstanceCircuitSimulation circuit, int left, int top)
+  public void drawConnectionDetails(SubcircuitSimulation circuit, int left, int top)
   {
     graphics.setColor(Colours.getInstance().getInfoBackground());
     graphics.fillRect(left, top, width, height);
@@ -99,7 +98,7 @@ public class ConnectionInformationPanel
     return y;
   }
 
-  private String getComponentDetailString(InstanceCircuitSimulation circuit, View connectedComponent)
+  private String getComponentDetailString(SubcircuitSimulation circuit, View connectedComponent)
   {
     if (connectedComponent instanceof TraceView)
     {
@@ -116,7 +115,7 @@ public class ConnectionInformationPanel
     return "";
   }
 
-  private String toComponentDetailString(InstanceCircuitSimulation circuit, ComponentView<?> componentView)
+  private String toComponentDetailString(SubcircuitSimulation circuit, ComponentView<?> componentView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -161,7 +160,7 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String toTraceDetailString(InstanceCircuitSimulation circuit, TraceView traceView)
+  private String toTraceDetailString(SubcircuitSimulation circuit, TraceView traceView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -192,7 +191,7 @@ public class ConnectionInformationPanel
     return builder.toString();
   }
 
-  private String toTunnelDetailString(InstanceCircuitSimulation circuit, TunnelView tunnelView)
+  private String toTunnelDetailString(SubcircuitSimulation circuit, TunnelView tunnelView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");

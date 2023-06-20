@@ -10,7 +10,7 @@ import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.property.PropertyEditorDialog;
 import net.logicim.ui.property.ReflectivePropertyEditorDialog;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.component.passive.pin.ComponentNameHelper;
 
 import javax.swing.*;

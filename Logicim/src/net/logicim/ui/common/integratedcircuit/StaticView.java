@@ -5,7 +5,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
@@ -205,7 +205,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     if (!finalised)
     {
@@ -277,11 +277,11 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract Component createComponent(InstanceCircuitSimulation circuit);
+  public abstract Component createComponent(SubcircuitSimulation circuit);
 
-  public abstract void destroyComponent(InstanceCircuitSimulation circuit);
+  public abstract void destroyComponent(SubcircuitSimulation circuit);
 
-  public abstract void simulationStarted(InstanceCircuitSimulation circuit);
+  public abstract void simulationStarted(SubcircuitSimulation circuit);
 
   public abstract void disconnect();
 

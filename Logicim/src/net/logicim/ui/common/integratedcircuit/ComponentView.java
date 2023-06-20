@@ -6,7 +6,7 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -96,7 +96,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return connectionViews;
   }
 
-  public PortView getPortView(InstanceCircuitSimulation circuit, Port port)
+  public PortView getPortView(SubcircuitSimulation circuit, Port port)
   {
     for (PortView portView : portViews)
     {
@@ -108,7 +108,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return null;
   }
 
-  protected void paintPorts(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
+  protected void paintPorts(Graphics2D graphics, Viewport viewport, SubcircuitSimulation circuit)
   {
     for (PortView portView : portViews)
     {
@@ -223,7 +223,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validatePorts(InstanceCircuitSimulation circuit, List<Port> ports, List<PortView> portViews)
+  protected void validatePorts(SubcircuitSimulation circuit, List<Port> ports, List<PortView> portViews)
   {
     if ((ports.size() > 0) && (portViews.size() == 0))
     {
@@ -235,7 +235,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     validateNoDuplicatePorts(ports);
   }
 
-  protected void validateNoMissingPorts(InstanceCircuitSimulation circuit, List<Port> ports)
+  protected void validateNoMissingPorts(SubcircuitSimulation circuit, List<Port> ports)
   {
     List<Port> missing = new ArrayList<>();
     for (Port port : ports)
@@ -281,7 +281,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validateCanCreateComponent(InstanceCircuitSimulation circuit)
+  protected void validateCanCreateComponent(SubcircuitSimulation circuit)
   {
     if (circuit == null)
     {
@@ -295,7 +295,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validateComponent(InstanceCircuitSimulation circuit)
+  protected void validateComponent(SubcircuitSimulation circuit)
   {
     if (circuit != null)
     {
@@ -309,7 +309,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validatePorts(InstanceCircuitSimulation circuit)
+  protected void validatePorts(SubcircuitSimulation circuit)
   {
     Component component = getComponent(circuit);
     if (component != null)
@@ -318,7 +318,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void postCreateComponent(InstanceCircuitSimulation circuit, Component component)
+  protected void postCreateComponent(SubcircuitSimulation circuit, Component component)
   {
     addPortsToPortViews(circuit, component);
     validateComponent(circuit);
@@ -326,7 +326,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     component.reset(circuit);
   }
 
-  private void addPortsToPortViews(InstanceCircuitSimulation circuit, Component component)
+  private void addPortsToPortViews(SubcircuitSimulation circuit, Component component)
   {
     List<PortView> portViews = getPortViews();
     for (PortView portView : portViews)
@@ -349,7 +349,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public void destroyComponent(InstanceCircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation circuit)
   {
     for (PortView portView : portViews)
     {
@@ -359,7 +359,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void simulationStarted(InstanceCircuitSimulation circuit)
+  public void simulationStarted(SubcircuitSimulation circuit)
   {
     if (circuit == null)
     {
@@ -372,9 +372,9 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected abstract void createPortViews();
 
-  public abstract Component getComponent(InstanceCircuitSimulation circuit);
+  public abstract Component getComponent(SubcircuitSimulation circuit);
 
-  protected abstract void removeComponent(InstanceCircuitSimulation circuit);
+  protected abstract void removeComponent(SubcircuitSimulation circuit);
 
   public abstract String getComponentType();
 

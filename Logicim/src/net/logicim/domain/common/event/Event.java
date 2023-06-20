@@ -16,14 +16,12 @@ public abstract class Event
   public Event(long time, Timeline timeline)
   {
     this.time = time;
-    id = nextId;
-    nextId++;
+    this.id = nextId++;
     removed = false;
-
     timeline.addFutureEvent(this);
   }
 
-  public Event(long time, long id, Timeline timeline)
+  public Event(long time, Timeline timeline, long id)
   {
     this.time = time;
     this.id = id;
@@ -31,7 +29,7 @@ public abstract class Event
     {
       nextId = id + 1;
     }
-
+    removed = false;
     timeline.addEvent(this);
   }
 

@@ -4,7 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -162,7 +162,7 @@ public class TunnelView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 
@@ -215,18 +215,18 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted(InstanceCircuitSimulation circuit)
+  public void simulationStarted(SubcircuitSimulation circuit)
   {
   }
 
   @Override
-  public Component createComponent(InstanceCircuitSimulation circuit)
+  public Component createComponent(SubcircuitSimulation circuit)
   {
     return null;
   }
 
   @Override
-  public void destroyComponent(InstanceCircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation circuit)
   {
     wireView.destroyComponent(circuit);
   }
@@ -254,7 +254,7 @@ public class TunnelView
                           properties.doubleSided);
   }
 
-  public void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces)
+  public void connectTraces(SubcircuitSimulation circuit, List<Trace> traces)
   {
     wireView.connectTraces(circuit, traces);
   }
@@ -266,13 +266,13 @@ public class TunnelView
   }
 
   @Override
-  public void clearTraces(InstanceCircuitSimulation circuit)
+  public void clearTraces(SubcircuitSimulation circuit)
   {
     wireView.clearTraces(circuit);
   }
 
   @Override
-  public List<Trace> getTraces(InstanceCircuitSimulation circuit)
+  public List<Trace> getTraces(SubcircuitSimulation circuit)
   {
     return wireView.getTraces(circuit);
   }

@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
@@ -25,9 +25,9 @@ public class LocalConnectionNet
   protected List<PortConnection> portConnections;
 
   protected Set<Trace> traces = new LinkedHashSet<>();
-  protected InstanceCircuitSimulation circuit;
+  protected SubcircuitSimulation circuit;
 
-  public LocalConnectionNet(InstanceCircuitSimulation circuit, ConnectionView inputConnectionView)
+  public LocalConnectionNet(SubcircuitSimulation circuit, ConnectionView inputConnectionView)
   {
     this.circuit = circuit;
     connectedComponents = new ArrayList<>();

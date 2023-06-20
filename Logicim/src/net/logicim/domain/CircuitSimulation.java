@@ -1,9 +1,11 @@
 package net.logicim.domain;
 
 import net.logicim.common.util.StringUtil;
+import net.logicim.data.circuit.TimelineData;
+import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
 
 public class CircuitSimulation
 {
@@ -16,12 +18,7 @@ public class CircuitSimulation
 
   public CircuitSimulation()
   {
-    id = nextId;
-    nextId++;
-
-    this.circuit = new Circuit();
-    this.simulation = new Simulation();
-    this.name = "";
+    this(nextId++, "");
   }
 
   public CircuitSimulation(long id, String name)
@@ -51,14 +48,6 @@ public class CircuitSimulation
   public long getTime()
   {
     return simulation.getTime();
-  }
-
-  public InstanceCircuitSimulation reset(SubcircuitInstance subcircuitInstance)
-  {
-    simulation = new Simulation();
-    InstanceCircuitSimulation instanceCircuitSimulation = new InstanceCircuitSimulation(this, subcircuitInstance);
-    this.circuit.resetSimulation(instanceCircuitSimulation);
-    return instanceCircuitSimulation;
   }
 
   public void runSimultaneous()
@@ -98,6 +87,18 @@ public class CircuitSimulation
     {
       return name + " (" + id + ")";
     }
+  }
+
+  public void reset(SubcircuitTopSimulation subcircuitSimulation)
+  {
+    this.simulation = new Simulation();
+    this.circuit.resetSimulation(subcircuitSimulation);
+  }
+
+  public CircuitSimulationData save()
+  {
+    TimelineData timelineData = getTimeline().save();
+    return new CircuitSimulationData(id, timelineData, name);
   }
 
   public static void resetNextId()

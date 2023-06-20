@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
@@ -65,7 +65,7 @@ public class ClockView
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new ClockOscillator(circuit.getCircuit(),
                                properties.name,
@@ -77,7 +77,7 @@ public class ClockView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 
@@ -96,7 +96,7 @@ public class ClockView
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, InstanceCircuitSimulation circuit)
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, SubcircuitSimulation circuit)
   {
     ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(circuit);
     Color clockColor = Colours.getInstance().getDisconnectedTrace();

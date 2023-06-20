@@ -2,7 +2,7 @@ package net.logicim.domain.common;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.port.LogicPort;
@@ -77,7 +77,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public void reset(InstanceCircuitSimulation circuit)
+  public void reset(SubcircuitSimulation circuit)
   {
     events.clear();
     for (Port port : pins.getPorts())

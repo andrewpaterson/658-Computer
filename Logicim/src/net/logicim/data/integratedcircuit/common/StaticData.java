@@ -2,11 +2,11 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ViewData;
-import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public abstract class StaticData<T extends StaticView<?>>
     extends ViewData
@@ -56,8 +56,8 @@ public abstract class StaticData<T extends StaticView<?>>
   public abstract T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
 
   public abstract void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                                 InstanceCircuitSimulation circuit,
-                                                 TraceLoader traceLoader,
+                                                 SubcircuitSimulation circuit,
+                                                 CircuitLoaders circuitLoaders,
                                                  T componentView);
 }
 

@@ -9,13 +9,14 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Positions;
 import net.logicim.data.circuit.SubcircuitData;
+import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
-import net.logicim.domain.InstanceCircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -36,7 +37,6 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import java.util.*;
 
 public class SubcircuitView
-    implements CircuitInstanceView
 {
   protected String typeName;  //The subcircuit instance name is on the SubcircuitInstanceView.
 
@@ -87,7 +87,7 @@ public class SubcircuitView
     traceView.disconnect();
   }
 
-  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView, InstanceCircuitSimulation circuit)
+  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView, SubcircuitSimulation circuit)
   {
     if (staticView == null)
     {
@@ -117,7 +117,7 @@ public class SubcircuitView
   }
 
   public void deleteComponentView(StaticView<?> staticView,
-                                  InstanceCircuitSimulation circuit)
+                                  SubcircuitSimulation circuit)
   {
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
@@ -125,7 +125,7 @@ public class SubcircuitView
   }
 
   public void deleteComponentViews(List<StaticView<?>> staticViews,
-                                   InstanceCircuitSimulation circuit)
+                                   SubcircuitSimulation circuit)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> componentView : staticViews)
@@ -172,7 +172,7 @@ public class SubcircuitView
   }
 
   public void fireConnectionEvents(Set<ConnectionView> connectionViews,
-                                   InstanceCircuitSimulation circuit)
+                                   SubcircuitSimulation circuit)
   {
     Set<PortView> portViews = getPortViews(connectionViews);
     for (PortView portView : portViews)
@@ -182,7 +182,7 @@ public class SubcircuitView
   }
 
   protected void deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView,
-                                         InstanceCircuitSimulation circuit)
+                                         SubcircuitSimulation circuit)
   {
     if (circuit != null)
     {
@@ -193,7 +193,7 @@ public class SubcircuitView
   }
 
   protected void deletePassiveView(PassiveView<?, ?> passiveView,
-                                   InstanceCircuitSimulation circuit)
+                                   SubcircuitSimulation circuit)
   {
     if (circuit != null)
     {
@@ -511,7 +511,7 @@ public class SubcircuitView
   }
 
   public Set<ConnectionView> createTracesForConnectionViews(Collection<ConnectionView> connectionViews,
-                                                            InstanceCircuitSimulation circuit)
+                                                            SubcircuitSimulation circuit)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     if (circuit != null)
@@ -575,7 +575,7 @@ public class SubcircuitView
     }
   }
 
-  private void createComponents(List<StaticView<?>> staticViews, InstanceCircuitSimulation circuit)
+  private void createComponents(List<StaticView<?>> staticViews, SubcircuitSimulation circuit)
   {
     for (StaticView<?> staticView : staticViews)
     {
@@ -583,7 +583,7 @@ public class SubcircuitView
     }
   }
 
-  public void simulationStarted(List<StaticView<?>> staticViews, InstanceCircuitSimulation simulation)
+  public void simulationStarted(List<StaticView<?>> staticViews, SubcircuitSimulation simulation)
   {
     for (StaticView<?> staticView : staticViews)
     {
@@ -637,7 +637,7 @@ public class SubcircuitView
     return overlaps;
   }
 
-  public Set<TraceView> createTraceViews(List<Line> inputLines, InstanceCircuitSimulation circuit)
+  public Set<TraceView> createTraceViews(List<Line> inputLines, SubcircuitSimulation circuit)
   {
     Set<Line> lines = new LinkedHashSet<>(inputLines);
     TraceFinder traceFinder = new TraceFinder();
@@ -657,7 +657,7 @@ public class SubcircuitView
 
   protected Set<TraceView> recreateTraceViews(Set<Line> lines,
                                               Set<TraceView> touchingTraceViews,
-                                              InstanceCircuitSimulation circuit)
+                                              SubcircuitSimulation circuit)
   {
     for (TraceView traceView : touchingTraceViews)
     {
@@ -672,7 +672,7 @@ public class SubcircuitView
   }
 
   public void deleteTraceViews(Set<TraceView> inputTraceViews,
-                               InstanceCircuitSimulation circuit)
+                               SubcircuitSimulation circuit)
   {
     TraceFinder traceFinder = new TraceFinder();
     for (TraceView traceView : inputTraceViews)
@@ -699,7 +699,7 @@ public class SubcircuitView
     findAndConnectNonTraceViewsForDeletion(circuit, nonTraceConnectionViews);
   }
 
-  protected void findAndConnectNonTraceViewsForDeletion(InstanceCircuitSimulation circuit,
+  protected void findAndConnectNonTraceViewsForDeletion(SubcircuitSimulation circuit,
                                                         Set<ConnectionView> nonTraceConnectionViews)
   {
     if (circuit != null)
@@ -769,7 +769,7 @@ public class SubcircuitView
   }
 
   public Set<ConnectionView> connectCreatedTraceViews(Set<TraceView> traceViews,
-                                                      InstanceCircuitSimulation circuit)
+                                                      SubcircuitSimulation circuit)
   {
     Set<ConnectionView> connectionViews = new HashSet<>();
     Set<ConnectionView> updatedConnectionViews;
@@ -787,7 +787,7 @@ public class SubcircuitView
     return updatedConnectionViews;
   }
 
-  public SubcircuitData save(Set<View> selection, long id)
+  public SubcircuitEditorData save(Set<View> selection, long id)
   {
     ArrayList<StaticData<?>> componentDatas = new ArrayList<>();
     StaticViewIterator iterator = staticViewIterator();
@@ -810,15 +810,13 @@ public class SubcircuitView
       traceDatas.add(traceData);
     }
 
-    return new SubcircuitData(componentDatas,
-                              traceDatas,
-                              typeName,
-                              id);
+    SubcircuitData subcircuitData = new SubcircuitData(componentDatas, traceDatas);
+    return new SubcircuitEditorData(subcircuitData, typeName, id);
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews,
                                   List<TraceView> traceViews,
-                                  InstanceCircuitSimulation circuit)
+                                  SubcircuitSimulation circuit)
   {
     List<TraceView> connectedTraceViews = findImmediateConnectedTraceViews(staticViews);
 
@@ -844,7 +842,7 @@ public class SubcircuitView
     recreateTraceViews(new HashSet<>(), allConnectedTraceViews, circuit);
   }
 
-  public List<View> doneMoveComponents(InstanceCircuitSimulation circuit,
+  public List<View> doneMoveComponents(SubcircuitSimulation circuit,
                                        List<StaticView<?>> staticViews,
                                        List<TraceView> traceViews,
                                        Set<StaticView<?>> selectedViews)
@@ -1116,7 +1114,7 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyCircuitSimulation(InstanceCircuitSimulation circuit)
+  public void destroyCircuitSimulation(SubcircuitSimulation circuit)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     for (StaticView<?> staticView : staticViews)
@@ -1130,7 +1128,7 @@ public class SubcircuitView
     }
   }
 
-  public void createCircuitSimulation(InstanceCircuitSimulation circuit)
+  public void createCircuitSimulation(SubcircuitSimulation circuit)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     createComponents(staticViews, circuit);

@@ -2,7 +2,7 @@ package net.logicim.ui.placement;
 
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -23,9 +23,9 @@ public class WirePull
   protected Int2D secondPosition;
   protected Int2D secondEnd;
 
-  private InstanceCircuitSimulation circuit;
+  private SubcircuitSimulation circuit;
 
-  public WirePull(InstanceCircuitSimulation circuit)
+  public WirePull(SubcircuitSimulation circuit)
   {
     this.circuit = circuit;
     resetStart();

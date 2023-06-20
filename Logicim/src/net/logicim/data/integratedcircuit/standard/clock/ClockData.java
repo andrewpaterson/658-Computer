@@ -9,7 +9,7 @@ import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 

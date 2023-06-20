@@ -1,0 +1,87 @@
+package net.logicim.data.simulation;
+
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class SimulationLoader
+{
+  protected Map<Long, SubcircuitSimulation> subcircuitSimulationsById;
+  protected Map<Long, CircuitSimulation> circuitSimulationsById;
+
+  public SimulationLoader()
+  {
+    SubcircuitSimulation.resetNextId();
+    subcircuitSimulationsById = new HashMap<>();
+    circuitSimulationsById = new HashMap<>();
+  }
+
+  public CircuitSimulation create(String name, long circuitSimulationId)
+  {
+    if (circuitSimulationId > 0)
+    {
+      return new CircuitSimulation(circuitSimulationId, name);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public SubcircuitInstanceSimulation create(CircuitSimulation circuitSimulation,
+                                             SubcircuitInstance subcircuitInstance,
+                                             long subcircuitSimulationId)
+  {
+    if (subcircuitSimulationId > 0)
+    {
+      SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) subcircuitSimulationsById.get(subcircuitSimulationId);
+      if (subcircuitSimulation == null)
+      {
+        subcircuitSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
+        subcircuitSimulationsById.put(subcircuitSimulationId, subcircuitSimulation);
+      }
+      return subcircuitSimulation;
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public SubcircuitTopSimulation create(CircuitSimulation circuitSimulation,
+                                        SubcircuitEditor subcircuitEditor,
+                                        long subcircuitSimulationId)
+  {
+    if (subcircuitSimulationId > 0)
+    {
+      SubcircuitTopSimulation subcircuitSimulation = (SubcircuitTopSimulation) subcircuitSimulationsById.get(subcircuitSimulationId);
+      if (subcircuitSimulation == null)
+      {
+        subcircuitSimulation = new SubcircuitTopSimulation(circuitSimulation, subcircuitEditor);
+        subcircuitSimulationsById.put(subcircuitSimulationId, subcircuitSimulation);
+      }
+      return subcircuitSimulation;
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public CircuitSimulation getCircuitSimulation(long id)
+  {
+    return circuitSimulationsById.get(id);
+  }
+
+  public SubcircuitSimulation getSubcircuitSimulation(long id)
+  {
+    return subcircuitSimulationsById.get(id);
+  }
+}
+

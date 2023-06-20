@@ -9,7 +9,7 @@ import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 
 import java.util.List;

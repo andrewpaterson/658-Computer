@@ -9,7 +9,7 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -207,7 +207,7 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive(InstanceCircuitSimulation simulation)
+  protected Pin createPassive(SubcircuitSimulation simulation)
   {
     Pin pin = new Pin(simulation.getCircuit(),
                       properties.name,
@@ -259,7 +259,7 @@ public class PinView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 

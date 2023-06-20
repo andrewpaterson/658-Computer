@@ -1,15 +1,16 @@
-package net.logicim.ui.simulation;
+package net.logicim.ui.simulation.subcircuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.data.circuit.SubcircuitData;
+import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -17,23 +18,31 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.StaticViewIterator;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.util.*;
 
 public class SubcircuitEditor
+    implements CircuitInstanceView
 {
   public static long nextId = 1L;
 
   protected Selection selection;
   protected SubcircuitView subcircuitView;
   protected CircuitEditor circuitEditor;
+  protected Map<CircuitSimulation, SubcircuitSimulation> simulations;
   protected long id;
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
+    this.simulations = new LinkedHashMap<>();
+    CircuitSimulation circuitSimulation = new CircuitSimulation();
+    this.simulations.put(circuitSimulation, new SubcircuitTopSimulation(circuitSimulation, this));
 
     id = nextId;
     nextId++;
@@ -43,6 +52,7 @@ public class SubcircuitEditor
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
+    this.simulations = new LinkedHashMap<>();
 
     this.id = id;
     if (id >= nextId)
@@ -60,14 +70,14 @@ public class SubcircuitEditor
 
   public void startMoveComponents(List<StaticView<?>> staticViews,
                                   List<TraceView> traceViews,
-                                  InstanceCircuitSimulation circuit)
+                                  SubcircuitSimulation circuit)
   {
     clearSelection();
 
     subcircuitView.startMoveComponents(staticViews, traceViews, circuit);
   }
 
-  public void recreateComponentView(StaticView<?> staticView, InstanceCircuitSimulation circuit)
+  public void recreateComponentView(StaticView<?> staticView, SubcircuitSimulation circuit)
   {
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
@@ -78,7 +88,7 @@ public class SubcircuitEditor
   public void doneMoveComponents(List<StaticView<?>> staticViews,
                                  List<TraceView> traceViews,
                                  Set<StaticView<?>> selectedViews,
-                                 InstanceCircuitSimulation circuit,
+                                 SubcircuitSimulation circuit,
                                  boolean newComponents)
   {
     List<View> newSelection = subcircuitView.doneMoveComponents(circuit,
@@ -95,7 +105,7 @@ public class SubcircuitEditor
     this.selection.setSelection(newSelection);
   }
 
-  public void deleteSelection(InstanceCircuitSimulation circuit)
+  public void deleteSelection(SubcircuitSimulation circuit)
   {
     Set<TraceView> traceViews = new HashSet<>();
     List<View> selectedViews = selection.getSelection();
@@ -160,7 +170,7 @@ public class SubcircuitEditor
     return componentView;
   }
 
-  public SubcircuitData save()
+  public SubcircuitEditorData save()
   {
     Set<View> selection = new HashSet<>(this.selection.getSelection());
     return subcircuitView.save(selection, id);
@@ -172,7 +182,7 @@ public class SubcircuitEditor
   }
 
   public void deleteTraceViews(Set<TraceView> traceViews,
-                               InstanceCircuitSimulation circuit)
+                               SubcircuitSimulation circuit)
   {
     subcircuitView.deleteTraceViews(traceViews, circuit);
   }
@@ -263,7 +273,7 @@ public class SubcircuitEditor
     subcircuitView.removeTraceView(traceView);
   }
 
-  public void deleteComponentViews(List<StaticView<?>> staticViews, InstanceCircuitSimulation circuit)
+  public void deleteComponentViews(List<StaticView<?>> staticViews, SubcircuitSimulation circuit)
   {
     subcircuitView.deleteComponentViews(staticViews, circuit);
   }
@@ -291,7 +301,7 @@ public class SubcircuitEditor
   }
 
   public void deleteComponentView(StaticView<?> staticView,
-                                  InstanceCircuitSimulation circuit)
+                                  SubcircuitSimulation circuit)
   {
     subcircuitView.deleteComponentView(staticView, circuit);
   }
@@ -302,7 +312,7 @@ public class SubcircuitEditor
   }
 
   public void createTraceViews(List<Line> lines,
-                               InstanceCircuitSimulation circuit)
+                               SubcircuitSimulation circuit)
   {
     subcircuitView.createTraceViews(lines, circuit);
   }
@@ -331,31 +341,19 @@ public class SubcircuitEditor
   }
 
   public void loadComponents(Map<ViewData, View> dataViewMap,
-                             InstanceCircuitSimulation circuit,
-                             TraceLoader traceLoader)
+                             SubcircuitSimulation circuit,
+                             CircuitLoaders circuitLoaders)
   {
     for (Map.Entry<ViewData, View> entry : dataViewMap.entrySet())
     {
       ViewData data = entry.getKey();
       if (data.appliesToSimulation(circuit.getId()))
       {
-        View view = entry.getValue();
-        if (view instanceof StaticView)
-        {
-          StaticView staticView = (StaticView) view;
-          StaticData staticData = (StaticData) data;
-          staticData.createAndConnectComponent(this, circuit, traceLoader, staticView);
-        }
-        else if (view instanceof TraceView)
-        {
-          TraceView traceView = (TraceView) view;
-          TraceData traceData = (TraceData) data;
-          traceData.createAndConnectComponent(circuit, traceLoader, traceView);
-        }
-        else
-        {
-          throw new SimulatorException("Cannot load component of type [%s].", view);
-        }
+        SubcircuitEditorLoadDataHelper.loadViewData(this,
+                                                    entry.getValue(),
+                                                    data,
+                                                    circuit,
+                                                    circuitLoaders);
       }
     }
   }
@@ -395,9 +393,44 @@ public class SubcircuitEditor
     return subcircuitView.findAllViewsOfClass(viewClass);
   }
 
+  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    return simulations.get(circuitSimulation);
+  }
+
+  public SubcircuitSimulation getSubcircuitSimulation(long simulationId)
+  {
+    for (SubcircuitSimulation subcircuitSimulation : simulations.values())
+    {
+      if (subcircuitSimulation.getId() == simulationId)
+      {
+        return subcircuitSimulation;
+      }
+    }
+    return null;
+  }
+
+  public Map<CircuitSimulation, SubcircuitSimulation> getSimulations()
+  {
+    return simulations;
+  }
+
   public static void resetNextId()
   {
     nextId = 1;
+  }
+
+  public List<SubcircuitTopSimulation> getTopSimulations()
+  {
+    List<SubcircuitTopSimulation> list = new ArrayList<>();
+    for (SubcircuitSimulation subcircuitSimulation : simulations.values())
+    {
+      if (subcircuitSimulation instanceof SubcircuitTopSimulation)
+      {
+        list.add((SubcircuitTopSimulation) subcircuitSimulation);
+      }
+    }
+    return list;
   }
 }
 

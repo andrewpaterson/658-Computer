@@ -1,9 +1,9 @@
-package net.logicim.ui.simulation;
+package net.logicim.ui.simulation.subcircuit;
 
-import net.logicim.data.circuit.TimelineData;
-import net.logicim.data.simulation.CircuitSimulationData;
-import net.logicim.domain.InstanceCircuitSimulation;
-import net.logicim.domain.common.Timeline;
+import net.logicim.data.simulation.SubcircuitTopSimulationData;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TopLevelSubcircuitSimulation
+public class SubcircuitTopSimulation
+    extends SubcircuitSimulation
 {
   protected SubcircuitEditor subcircuitEditor;
-  protected InstanceCircuitSimulation instanceCircuitSimulation;
 
-  public TopLevelSubcircuitSimulation(SubcircuitEditor subcircuitEditor,
-                                      InstanceCircuitSimulation instanceCircuitSimulation)
+  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation,
+                                 SubcircuitEditor subcircuitEditor)
   {
+    super(circuitSimulation);
     this.subcircuitEditor = subcircuitEditor;
-    this.instanceCircuitSimulation = instanceCircuitSimulation;
   }
 
   public SubcircuitEditor getSubcircuitEditor()
@@ -30,34 +30,20 @@ public class TopLevelSubcircuitSimulation
     return subcircuitEditor;
   }
 
-  public InstanceCircuitSimulation getInstanceCircuitSimulation()
-  {
-    return instanceCircuitSimulation;
-  }
-
-  public CircuitSimulationData save()
-  {
-    Timeline timeline = instanceCircuitSimulation.getTimeline();
-    TimelineData timelineData = timeline.save();
-    return new CircuitSimulationData(timelineData,
-                                     instanceCircuitSimulation.getId(),
-                                     instanceCircuitSimulation.getName(),
-                                     subcircuitEditor.getId());
-  }
-
   @Override
-  public String toString()
+  public SubcircuitTopSimulationData save()
   {
-    return instanceCircuitSimulation.getDescription();
+    return new SubcircuitTopSimulationData(circuitSimulation.getId(), subcircuitEditor.getId());
   }
 
   public List<CircuitInstanceViewPath> getTopDownSubcircuitViews()
   {
-    SubcircuitView subcircuitView = subcircuitEditor.getSubcircuitView();
     List<CircuitInstanceViewPath> circuitPaths = new ArrayList<>();
     List<CircuitInstanceView> path = new ArrayList<>();
-    path.add(subcircuitView);
-    recurseFindSubCircuitViews(path, circuitPaths, subcircuitView);
+    path.add(subcircuitEditor);
+    recurseFindSubCircuitViews(path,
+                               circuitPaths,
+                               subcircuitEditor.getSubcircuitView());
     return circuitPaths;
   }
 
@@ -72,6 +58,23 @@ public class TopLevelSubcircuitSimulation
       recurseFindSubCircuitViews(path, circuitPaths, instanceSubcircuitView);
       path.remove(path.size() - 1);
     }
+  }
+
+  @Override
+  public String toString()
+  {
+    return circuitSimulation.getDescription();
+  }
+
+  @Override
+  public SubcircuitInstance getSubcircuitInstance()
+  {
+    return null;
+  }
+
+  public void reset()
+  {
+
   }
 }
 

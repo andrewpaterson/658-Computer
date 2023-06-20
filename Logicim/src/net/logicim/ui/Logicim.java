@@ -13,7 +13,7 @@ import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -42,8 +42,8 @@ import net.logicim.ui.placement.*;
 import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.SubcircuitEditor;
-import net.logicim.ui.simulation.TopLevelSubcircuitSimulation;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -195,7 +195,7 @@ public class Logicim
           }
           else if ((hoverConnectionView != null))
           {
-            edit = new StartEditInPort(keyboardButtons, getInstanceCircuitSimulation());
+            edit = new StartEditInPort(keyboardButtons, getSubcircuitSimulation());
           }
           else
           {
@@ -205,11 +205,6 @@ public class Logicim
         }
       }
     }
-  }
-
-  public InstanceCircuitSimulation getInstanceCircuitSimulation()
-  {
-    return circuitEditor.getInstanceCircuitSimulation();
   }
 
   protected EditAction createEdit(StatefulEdit edit, Float2D start)
@@ -453,7 +448,7 @@ public class Logicim
               y = 0;
             }
 
-            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(circuitEditor.getInstanceCircuitSimulation(), x, y);
+            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(circuitEditor.getSubcircuitSimulation(), x, y);
           }
 
           graphics.setFont(font);
@@ -736,7 +731,7 @@ public class Logicim
     boolean running = simulationSpeed.toggleTunSimulation();
     if (running)
     {
-      TopLevelSubcircuitSimulation simulation = circuitEditor.getCurrentTopLevelSimulation();
+      SubcircuitSimulation simulation = circuitEditor.getSubcircuitSimulation();
       if (simulation == null)
       {
         throw new SimulatorException("Cannot run simulation with a [null] simulation.");
@@ -819,17 +814,18 @@ public class Logicim
 
   public void resetSimulation()
   {
-    InstanceCircuitSimulation circuit = circuitEditor.getInstanceCircuitSimulation();
-    CircuitSimulation circuitSimulation = circuit.getCircuitSimulation();
-    circuitSimulation.reset(circuit.getSubcircuitInstance());
+    CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
+    SubcircuitTopSimulation subcircuitTopSimulation = circuitEditor.getCurrentSubcircuitTopSimulation();
+    subcircuitTopSimulation.reset();
+    circuitSimulation.reset(subcircuitTopSimulation);
   }
 
   public void recreateSimulation()
   {
-    TopLevelSubcircuitSimulation topLevelSimulation = getCurrentTopLevelSimulation();
-    InstanceCircuitSimulation circuit = topLevelSimulation.getInstanceCircuitSimulation();
+    SubcircuitTopSimulation topLevelSimulation = getCurrentTopLevelSimulation();
+    CircuitSimulation circuitSimulation = topLevelSimulation.getCircuitSimulation();
     List<CircuitInstanceViewPath> instanceViewPaths = topLevelSimulation.getTopDownSubcircuitViews();
-
+    List<SubcircuitTopSimulation> subcircuitTopSimulations = circuitEditor.getSimulations();
     for (CircuitInstanceViewPath instanceViewPath : instanceViewPaths)
     {
       System.out.println(instanceViewPath.toString());
@@ -1160,7 +1156,7 @@ public class Logicim
     setSubcircuitParameters(subcircuitTypeName);
   }
 
-  public void deleteSubcircuitAction(String subcircuitTypeName, InstanceCircuitSimulation circuit)
+  public void deleteSubcircuitAction(String subcircuitTypeName, SubcircuitSimulation circuit)
   {
     subcircuitViewParameters.remove(subcircuitTypeName);
     List<Integer> bookmarkIds = new ArrayList<>(subcircuitBookmarks.keySet());
@@ -1334,19 +1330,29 @@ public class Logicim
     return circuitEditor.getCurrentSubcircuitEditor();
   }
 
-  public TopLevelSubcircuitSimulation getCurrentTopLevelSimulation()
+  public CircuitSimulation getCurrentCircuitSimulation()
   {
-    return circuitEditor.getTopLevelSimulation();
+    return circuitEditor.getCurrentCircuitSimulation();
+  }
+
+  public SubcircuitSimulation getSubcircuitSimulation()
+  {
+    return circuitEditor.getSubcircuitSimulation();
   }
 
   public int getSimulationCount()
   {
-    return circuitEditor.getSimulations().size();
+    return circuitEditor.getCircuitSimulations().size();
   }
 
-  public List<TopLevelSubcircuitSimulation> getSimulations()
+  public List<CircuitSimulation> getCircuitSimulations()
   {
-    return circuitEditor.getSimulations();
+    return circuitEditor.getCircuitSimulations();
+  }
+
+  public List<SubcircuitTopSimulation> getSubcircuitTopSimulations()
+  {
+    return circuitEditor.getSubcircuitTopSimulations();
   }
 
   public void zoomReset()
@@ -1378,9 +1384,9 @@ public class Logicim
     simulationSpeed.setRunning(running);
   }
 
-  public void setCurrentSimulation(TopLevelSubcircuitSimulation simulation)
+  public void setCurrentSimulation(CircuitSimulation simulation)
   {
-    this.circuitEditor.setCurrentSimulation(simulation);
+    this.circuitEditor.setCurrentCircuitSimulation(simulation);
   }
 
   public void addAction(String name, EditorAction action)

@@ -6,7 +6,7 @@ import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.input.event.SimulatorEditorEvent;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class PropertyEditEvent
     extends SimulatorEditorEvent

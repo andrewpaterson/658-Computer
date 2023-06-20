@@ -1,7 +1,7 @@
 package net.logicim.ui.info;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class SubcircuitInfo
     extends InfoLabel

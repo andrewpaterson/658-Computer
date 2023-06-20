@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation.order;
 
 import net.logicim.common.dependency.Orderer;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.ArrayList;
 import java.util.Collection;

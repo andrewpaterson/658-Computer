@@ -1,7 +1,7 @@
 package net.logicim.ui.common.wire;
 
 import net.logicim.data.wire.TraceLoader;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface WireView
 {
-  void connectTraces(InstanceCircuitSimulation circuit, List<Trace> traces);
+  void connectTraces(SubcircuitSimulation circuit, List<Trace> traces);
 
-  List<Trace> getTraces(InstanceCircuitSimulation circuit);
+  List<Trace> getTraces(SubcircuitSimulation circuit);
 
   List<ConnectionView> getConnectionViews();
 
@@ -21,9 +21,9 @@ public interface WireView
 
   void enable();
 
-  void clearTraces(InstanceCircuitSimulation circuit);
+  void clearTraces(SubcircuitSimulation circuit);
 
-  default void wireConnect(InstanceCircuitSimulation circuit,
+  default void wireConnect(SubcircuitSimulation circuit,
                            TraceLoader traceLoader,
                            long[] traceIds)
   {

@@ -6,7 +6,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.data.passive.wire.SplitterProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.BidirectionalPortMap;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
@@ -40,7 +40,7 @@ public class SplitterView
   protected List<PortView> endPortViews;
   protected PortView startPortView;
 
-  protected Map<InstanceCircuitSimulation, BidirectionalPortMap> simulationBidirectionalPorts;
+  protected Map<SubcircuitSimulation, BidirectionalPortMap> simulationBidirectionalPorts;
 
   public SplitterView(SubcircuitView subcircuitView,
                       Int2D position,
@@ -331,7 +331,7 @@ public class SplitterView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 
@@ -382,7 +382,7 @@ public class SplitterView
   }
 
   @Override
-  protected Splitter createPassive(InstanceCircuitSimulation simulation)
+  protected Splitter createPassive(SubcircuitSimulation simulation)
   {
     List<String> startPortNames = getStartPortNames(properties.bitWidth);
     Splitter splitter = new Splitter(simulation.getCircuit(),
@@ -494,7 +494,7 @@ public class SplitterView
     updateTextViews();
   }
 
-  public Map<Port, Port> getSimulationBidirectionalPorts(InstanceCircuitSimulation circuit)
+  public Map<Port, Port> getSimulationBidirectionalPorts(SubcircuitSimulation circuit)
   {
     if (circuit != null)
     {

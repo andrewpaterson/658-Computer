@@ -6,24 +6,15 @@ import net.logicim.data.common.ReflectiveData;
 public class CircuitSimulationData
     extends ReflectiveData
 {
+  public long id;
   public TimelineData timeline;
-  public long circuitSimulationId;
-  public long subcircuitId;
-  public String circuitSimulationName;
+  public String name;
 
-  public CircuitSimulationData()
+  public CircuitSimulationData(long id, TimelineData timeline, String name)
   {
-  }
-
-  public CircuitSimulationData(TimelineData timeline,
-                               long circuitSimulationId,
-                               String circuitSimulationName,
-                               long subcircuitId)
-  {
+    this.id = id;
     this.timeline = timeline;
-    this.circuitSimulationId = circuitSimulationId;
-    this.circuitSimulationName = circuitSimulationName;
-    this.subcircuitId = subcircuitId;
+    this.name = name;
   }
 }
 

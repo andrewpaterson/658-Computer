@@ -3,9 +3,10 @@ package net.logicim.data.wire;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ViewData;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.wire.TraceView;
-import net.logicim.ui.simulation.SubcircuitEditor;
+import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.Map;
 
@@ -64,8 +65,8 @@ public class TraceData
     return traceView;
   }
 
-  public void createAndConnectComponent(InstanceCircuitSimulation circuit,
-                                        TraceLoader traceLoader,
+  public void createAndConnectComponent(SubcircuitSimulation circuit,
+                                        CircuitLoaders circuitLoaders,
                                         TraceView traceView)
   {
     long[] traceIDs = simulationTraces.get(circuit.getId());
@@ -75,7 +76,7 @@ public class TraceData
     }
 
     traceView.wireConnect(circuit,
-                          traceLoader,
+                          circuitLoaders.getTraceLoader(),
                           traceIDs
     );
   }

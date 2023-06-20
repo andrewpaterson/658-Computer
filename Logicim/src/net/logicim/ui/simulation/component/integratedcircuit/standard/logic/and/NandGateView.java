@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.and.NandGateData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGatePins;
 import net.logicim.domain.integratedcircuit.standard.logic.and.NandGate;
@@ -30,7 +30,7 @@ public class NandGateView
   }
 
   @Override
-  protected NandGate createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected NandGate createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new NandGate(circuit.getCircuit(),
                         properties.name,

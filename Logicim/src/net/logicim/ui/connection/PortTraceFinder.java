@@ -1,7 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
@@ -14,14 +14,14 @@ import java.util.*;
 
 public abstract class PortTraceFinder
 {
-  public static List<LocalConnectionNet> findAndConnectTraces(InstanceCircuitSimulation circuit, ConnectionView inputConnectionView)
+  public static List<LocalConnectionNet> findAndConnectTraces(SubcircuitSimulation circuit, ConnectionView inputConnectionView)
   {
     List<LocalConnectionNet> connectionNets = new ArrayList<>();
     findAndConnectTraces(circuit, inputConnectionView, connectionNets);
     return connectionNets;
   }
 
-  private static void findAndConnectTraces(InstanceCircuitSimulation circuit, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  private static void findAndConnectTraces(SubcircuitSimulation circuit, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     WireList wireList = findWires(circuit, inputConnectionView, connectionNets);
 
@@ -47,7 +47,7 @@ public abstract class PortTraceFinder
     }
   }
 
-  private static void connectFullWires(InstanceCircuitSimulation circuit, List<FullWire> fullWires)
+  private static void connectFullWires(SubcircuitSimulation circuit, List<FullWire> fullWires)
   {
     if (circuit != null)
     {
@@ -69,7 +69,7 @@ public abstract class PortTraceFinder
     }
   }
 
-  private static WireList findWires(InstanceCircuitSimulation circuit, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  private static WireList findWires(SubcircuitSimulation circuit, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
     if (inputConnectionView == null)
     {
@@ -97,7 +97,7 @@ public abstract class PortTraceFinder
     return createWireList(circuit, connectionNets);
   }
 
-  private static WireList createWireList(InstanceCircuitSimulation circuit, List<LocalConnectionNet> connectionNets)
+  private static WireList createWireList(SubcircuitSimulation circuit, List<LocalConnectionNet> connectionNets)
   {
     Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(circuit, connectionNets);
     Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
@@ -148,7 +148,7 @@ public abstract class PortTraceFinder
     return wireList;
   }
 
-  private static Map<Port, Port> createSplitterPortMap(InstanceCircuitSimulation circuit, List<LocalConnectionNet> connectionNets)
+  private static Map<Port, Port> createSplitterPortMap(SubcircuitSimulation circuit, List<LocalConnectionNet> connectionNets)
   {
     if (circuit != null)
     {
@@ -193,7 +193,7 @@ public abstract class PortTraceFinder
     return totalPortWireMap;
   }
 
-  private static void processLocalConnections(InstanceCircuitSimulation circuit,
+  private static void processLocalConnections(SubcircuitSimulation circuit,
                                               ConnectionView inputConnectionView,
                                               List<LocalConnectionNet> connectionNets,
                                               List<ComponentConnection<SplitterView>> splitterViewStack,

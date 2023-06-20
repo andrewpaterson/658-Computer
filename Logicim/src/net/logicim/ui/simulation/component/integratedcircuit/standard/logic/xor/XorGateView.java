@@ -3,7 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateProperties;
 import net.logicim.data.integratedcircuit.standard.logic.xor.XorGateData;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGate;
 import net.logicim.domain.integratedcircuit.standard.logic.xor.XorGatePins;
@@ -30,7 +30,7 @@ public class XorGateView
   }
 
   @Override
-  protected XorGate createIntegratedCircuit(InstanceCircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected XorGate createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     return new XorGate(circuit.getCircuit(),
                        properties.name,

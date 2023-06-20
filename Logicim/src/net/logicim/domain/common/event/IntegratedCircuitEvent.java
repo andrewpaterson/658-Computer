@@ -21,7 +21,7 @@ public abstract class IntegratedCircuitEvent
 
   public IntegratedCircuitEvent(long time, long id, IntegratedCircuit<?, ?> integratedCircuit, Timeline timeline)
   {
-    super(time, id, timeline);
+    super(time, timeline, id);
     this.integratedCircuit = integratedCircuit;
     this.integratedCircuit.add(this);
   }

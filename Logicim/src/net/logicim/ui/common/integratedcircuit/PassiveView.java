@@ -3,8 +3,7 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -17,7 +16,7 @@ import java.util.Set;
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
 {
-  protected Map<InstanceCircuitSimulation, PASSIVE> simulationPassives;
+  protected Map<SubcircuitSimulation, PASSIVE> simulationPassives;
 
   public PassiveView(SubcircuitView subcircuitView,
                      Int2D position,
@@ -32,19 +31,19 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE createComponent(InstanceCircuitSimulation instanceCircuitSimulation)
+  public PASSIVE createComponent(SubcircuitSimulation subcircuitInstanceSimulation)
   {
-    validateCanCreateComponent(instanceCircuitSimulation);
+    validateCanCreateComponent(subcircuitInstanceSimulation);
 
-    PASSIVE passive = createPassive(instanceCircuitSimulation);
-    simulationPassives.put(instanceCircuitSimulation, passive);
+    PASSIVE passive = createPassive(subcircuitInstanceSimulation);
+    simulationPassives.put(subcircuitInstanceSimulation, passive);
 
-    postCreateComponent(instanceCircuitSimulation, passive);
+    postCreateComponent(subcircuitInstanceSimulation, passive);
     return passive;
   }
 
   @Override
-  protected void removeComponent(InstanceCircuitSimulation circuit)
+  protected void removeComponent(SubcircuitSimulation circuit)
   {
     simulationPassives.remove(circuit);
   }
@@ -67,7 +66,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     return "";
   }
 
-  public PASSIVE getComponent(InstanceCircuitSimulation circuit)
+  public PASSIVE getComponent(SubcircuitSimulation circuit)
   {
     return simulationPassives.get(circuit);
   }
@@ -75,7 +74,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   protected Set<Long> saveSimulations()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
-    for (InstanceCircuitSimulation circuit : simulationPassives.keySet())
+    for (SubcircuitSimulation circuit : simulationPassives.keySet())
     {
       simulationIDs.add(circuit.getId());
     }
@@ -84,6 +83,6 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
   public abstract PassiveData<?> save(boolean selected);
 
-  protected abstract PASSIVE createPassive(InstanceCircuitSimulation circuit);
+  protected abstract PASSIVE createPassive(SubcircuitSimulation circuit);
 }
 

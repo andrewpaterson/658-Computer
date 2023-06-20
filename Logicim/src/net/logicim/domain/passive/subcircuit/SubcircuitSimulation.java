@@ -1,18 +1,32 @@
-package net.logicim.domain;
+package net.logicim.domain.passive.subcircuit;
 
+import net.logicim.data.simulation.SubcircuitSimulationData;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 
-public class InstanceCircuitSimulation
+public abstract class SubcircuitSimulation
 {
-  protected CircuitSimulation circuitSimulation;
-  protected SubcircuitInstance subcircuitInstance;
+  public static long nextId = 1L;
 
-  public InstanceCircuitSimulation(CircuitSimulation circuitSimulation, SubcircuitInstance subcircuitInstance)
+  protected CircuitSimulation circuitSimulation;
+  protected long id;
+
+  public SubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    this(circuitSimulation, nextId++);
+  }
+
+  public SubcircuitSimulation(CircuitSimulation circuitSimulation, long id)
   {
     this.circuitSimulation = circuitSimulation;
-    this.subcircuitInstance = subcircuitInstance;
+
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
   }
 
   public Circuit getCircuit()
@@ -22,7 +36,7 @@ public class InstanceCircuitSimulation
 
   public long getId()
   {
-    return circuitSimulation.getId();
+    return id;
   }
 
   public String getDescription()
@@ -65,9 +79,13 @@ public class InstanceCircuitSimulation
     return circuitSimulation;
   }
 
-  public SubcircuitInstance getSubcircuitInstance()
+  public static void resetNextId()
   {
-    return subcircuitInstance;
+    nextId = 1;
   }
+
+  public abstract SubcircuitSimulationData save();
+
+  public abstract SubcircuitInstance getSubcircuitInstance();
 }
 

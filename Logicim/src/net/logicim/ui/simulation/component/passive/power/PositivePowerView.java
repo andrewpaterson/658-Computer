@@ -4,7 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.data.passive.power.PositivePowerProperties;
-import net.logicim.domain.InstanceCircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -91,7 +91,7 @@ public class PositivePowerView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    InstanceCircuitSimulation circuit)
+                    SubcircuitSimulation circuit)
   {
     super.paint(graphics, viewport, circuit);
 

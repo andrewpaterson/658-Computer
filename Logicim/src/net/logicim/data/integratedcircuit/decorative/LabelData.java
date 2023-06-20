@@ -4,8 +4,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.common.DecorativeData;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class LabelData
     extends DecorativeData<LabelView>

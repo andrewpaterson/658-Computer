@@ -12,6 +12,10 @@ public class SubcircuitData
   public List<StaticData<?>> components;
   public List<TraceData> traces;
 
+  public SubcircuitData()
+  {
+  }
+
   public SubcircuitData(List<StaticData<?>> components, List<TraceData> traces)
   {
     this.components = components;

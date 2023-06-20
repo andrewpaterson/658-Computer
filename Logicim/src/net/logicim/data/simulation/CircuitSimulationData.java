@@ -10,6 +10,10 @@ public class CircuitSimulationData
   public TimelineData timeline;
   public String name;
 
+  public CircuitSimulationData()
+  {
+  }
+
   public CircuitSimulationData(long id, TimelineData timeline, String name)
   {
     this.id = id;

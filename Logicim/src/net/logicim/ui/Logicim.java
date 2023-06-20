@@ -42,14 +42,14 @@ import net.logicim.ui.placement.*;
 import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
-import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.undo.Undo;
 
 import java.awt.*;
@@ -822,10 +822,10 @@ public class Logicim
 
   public void recreateSimulation()
   {
-    SubcircuitTopSimulation topLevelSimulation = getCurrentTopLevelSimulation();
-    CircuitSimulation circuitSimulation = topLevelSimulation.getCircuitSimulation();
+    CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
+    SubcircuitTopSimulation topLevelSimulation = circuitEditor.getCurrentSubcircuitTopSimulation();
     List<CircuitInstanceViewPath> instanceViewPaths = topLevelSimulation.getTopDownSubcircuitViews();
-    List<SubcircuitTopSimulation> subcircuitTopSimulations = circuitEditor.getSimulations();
+
     for (CircuitInstanceViewPath instanceViewPath : instanceViewPaths)
     {
       System.out.println(instanceViewPath.toString());

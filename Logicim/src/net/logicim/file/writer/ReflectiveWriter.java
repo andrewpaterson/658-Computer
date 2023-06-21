@@ -283,21 +283,28 @@ public abstract class ReflectiveWriter
 
   public static void writeList(Document doc, Element parent, String name, List<?> list)
   {
-    int size = list.size();
-
-    Element listContainer = doc.createElement(name);
-    listContainer.setAttribute(TYPE, list.getClass().getSimpleName());
-    listContainer.setAttribute("size", Integer.toString(size));
-    parent.appendChild(listContainer);
-
-    for (int i = 0; i < size; i++)
+    if (list == null)
     {
-      Object saveData = list.get(i);
-      Element element = doc.createElement("element");
-      element.setAttribute(TYPE, getXMLTag(saveData));
-      element.setAttribute("index", Integer.toString(i));
-      listContainer.appendChild(element);
-      writeReflectiveData(saveData, doc, element);
+      System.out.println("ReflectiveWriter.writeList");
+    }
+    else
+    {
+      int size = list.size();
+
+      Element listContainer = doc.createElement(name);
+      listContainer.setAttribute(TYPE, list.getClass().getSimpleName());
+      listContainer.setAttribute("size", Integer.toString(size));
+      parent.appendChild(listContainer);
+
+      for (int i = 0; i < size; i++)
+      {
+        Object saveData = list.get(i);
+        Element element = doc.createElement("element");
+        element.setAttribute(TYPE, getXMLTag(saveData));
+        element.setAttribute("index", Integer.toString(i));
+        listContainer.appendChild(element);
+        writeReflectiveData(saveData, doc, element);
+      }
     }
   }
 

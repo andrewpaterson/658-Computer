@@ -1,9 +1,6 @@
 package net.logicim.data.circuit;
 
 import net.logicim.data.common.ReflectiveData;
-import net.logicim.data.simulation.SubcircuitSimulationData;
-
-import java.util.List;
 
 public class SubcircuitEditorData
     extends ReflectiveData
@@ -11,7 +8,6 @@ public class SubcircuitEditorData
   public SubcircuitData subcircuit;
   public String typeName;
   public long id;
-  public List<SubcircuitSimulationData> subcircuitSimulations;
 
   public SubcircuitEditorData()
   {

@@ -338,7 +338,6 @@ public class CircuitEditor
     CircuitLoaders loaders = new CircuitLoaders();
     SubcircuitEditor.resetNextId();
     Event.resetNextId();
-    CircuitSimulation.resetNextId();
     View.resetNextId();
 
     subcircuitEditors = new ArrayList<>();
@@ -365,18 +364,23 @@ public class CircuitEditor
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
       CircuitSimulation circuitSimulation = loaders.getCircuitSimulation(subcircuitSimulationData.circuitSimulationId);
+      if (circuitSimulation == null)
+      {
+        throw new SimulatorException("Cannot find a circuit simulation with id [%s].", subcircuitSimulationData.circuitSimulationId);
+      }
+
       if (subcircuitSimulationData instanceof SubcircuitTopSimulationData)
       {
         SubcircuitTopSimulationData subcircuitTopSimulationData = (SubcircuitTopSimulationData) subcircuitSimulationData;
         SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitTopSimulationData.subcircuitEditorId);
-        SubcircuitTopSimulation subcircuitTopSimulation = loaders.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.id);
+        SubcircuitTopSimulation subcircuitTopSimulation = loaders.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
         circuitSimulation.reset(subcircuitTopSimulation);
       }
       else if (subcircuitSimulationData instanceof SubcircuitInstanceSimulationData)
       {
         SubcircuitInstanceSimulationData subcircuitInstanceSimulationData = (SubcircuitInstanceSimulationData) subcircuitSimulationData;
         SubcircuitInstance subcircuitInstance = loaders.getSubcircuitInstance(subcircuitInstanceSimulationData.subcircuitInstanceId);
-        loaders.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance, subcircuitSimulationData.id);
+        loaders.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance, subcircuitSimulationData.subcircuitSimulationId);
       }
       else
       {
@@ -390,7 +394,7 @@ public class CircuitEditor
       {
         Map<ViewData, View> viewDataViewMap = subcircuitEditorViews.get(subcircuitData);
         SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
-        SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.id);
+        SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
         subcircuitEditor.loadComponents(viewDataViewMap,
                                         subcircuitSimulation,
                                         loaders);

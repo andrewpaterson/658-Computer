@@ -5,16 +5,17 @@ import net.logicim.data.common.ReflectiveData;
 public abstract class SubcircuitSimulationData
     extends ReflectiveData
 {
-  public long id;
+  public long subcircuitSimulationId;
   public long circuitSimulationId;
 
   public SubcircuitSimulationData()
   {
   }
 
-  public SubcircuitSimulationData(long id)
+  public SubcircuitSimulationData(long subcircuitSimulationId, long circuitSimulationId)
   {
-    this.id = id;
+    this.subcircuitSimulationId = subcircuitSimulationId;
+    this.circuitSimulationId = circuitSimulationId;
   }
 }
 

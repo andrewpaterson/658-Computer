@@ -18,7 +18,7 @@ public class SubcircuitInstanceSimulation
   @Override
   public SubcircuitInstanceSimulationData save()
   {
-    return new SubcircuitInstanceSimulationData(circuitSimulation.getId(), subcircuitInstance.getId());
+    return new SubcircuitInstanceSimulationData(getId(), circuitSimulation.getId(), subcircuitInstance.getId());
   }
 
   @Override

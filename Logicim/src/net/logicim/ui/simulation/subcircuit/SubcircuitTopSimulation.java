@@ -33,7 +33,7 @@ public class SubcircuitTopSimulation
   @Override
   public SubcircuitTopSimulationData save()
   {
-    return new SubcircuitTopSimulationData(circuitSimulation.getId(), subcircuitEditor.getId());
+    return new SubcircuitTopSimulationData(getId(), circuitSimulation.getId(), subcircuitEditor.getId());
   }
 
   public List<CircuitInstanceViewPath> getTopDownSubcircuitViews()
@@ -63,7 +63,14 @@ public class SubcircuitTopSimulation
   @Override
   public String toString()
   {
-    return circuitSimulation.getDescription();
+    if (circuitSimulation != null)
+    {
+      return circuitSimulation.getDescription();
+    }
+    else
+    {
+      return "";
+    }
   }
 
   @Override

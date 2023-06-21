@@ -18,6 +18,7 @@ public class SimulationLoader
   public SimulationLoader()
   {
     SubcircuitSimulation.resetNextId();
+    CircuitSimulation.resetNextId();
     subcircuitSimulationsById = new HashMap<>();
     circuitSimulationsById = new HashMap<>();
   }
@@ -26,7 +27,13 @@ public class SimulationLoader
   {
     if (circuitSimulationId > 0)
     {
-      return new CircuitSimulation(circuitSimulationId, name);
+      CircuitSimulation circuitSimulation = circuitSimulationsById.get(circuitSimulationId);
+      if (circuitSimulation == null)
+      {
+        circuitSimulation = new CircuitSimulation(circuitSimulationId, name);
+        circuitSimulationsById.put(circuitSimulation.getId(), circuitSimulation);
+      }
+      return circuitSimulation;
     }
     else
     {
@@ -44,7 +51,7 @@ public class SimulationLoader
       if (subcircuitSimulation == null)
       {
         subcircuitSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
-        subcircuitSimulationsById.put(subcircuitSimulationId, subcircuitSimulation);
+        subcircuitSimulationsById.put(subcircuitSimulation.getId(), subcircuitSimulation);
       }
       return subcircuitSimulation;
     }

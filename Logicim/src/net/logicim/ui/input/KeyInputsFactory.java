@@ -54,6 +54,7 @@ public class KeyInputsFactory
     editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateLeftAction.NAME), KeyEvent.VK_R, Up, Up, Down));
     editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateRightAction.NAME), KeyEvent.VK_R, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(ToggleRunSimulationAction.NAME), KeyEvent.VK_K, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(ToggleRunSimulationAction.NAME), KeyEvent.VK_K, Down, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(DeleteAction.NAME), KeyEvent.VK_DELETE, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(IncreaseSimulationSpeedAction.NAME), KeyEvent.VK_EQUALS, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(DecreaseSimulationSpeedAction.NAME), KeyEvent.VK_MINUS, Up, Up, Up));

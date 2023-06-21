@@ -5,22 +5,25 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public abstract class SubcircuitSimulation
 {
   public static long nextId = 1L;
 
   protected CircuitSimulation circuitSimulation;
+  protected SubcircuitEditor subcircuitEditor;
   protected long id;
 
-  public SubcircuitSimulation(CircuitSimulation circuitSimulation)
+  public SubcircuitSimulation(CircuitSimulation circuitSimulation, SubcircuitEditor subcircuitEditor)
   {
-    this(circuitSimulation, nextId++);
+    this(circuitSimulation, subcircuitEditor,  nextId++);
   }
 
-  public SubcircuitSimulation(CircuitSimulation circuitSimulation, long id)
+  public SubcircuitSimulation(CircuitSimulation circuitSimulation, SubcircuitEditor subcircuitEditor, long id)
   {
     this.circuitSimulation = circuitSimulation;
+    this.subcircuitEditor = subcircuitEditor;
 
     this.id = id;
     if (id >= nextId)
@@ -82,6 +85,11 @@ public abstract class SubcircuitSimulation
   public static void resetNextId()
   {
     nextId = 1;
+  }
+
+  public SubcircuitEditor getSubcircuitEditor()
+  {
+    return subcircuitEditor;
   }
 
   public abstract SubcircuitSimulationData save();

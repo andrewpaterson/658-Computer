@@ -6,15 +6,17 @@ public abstract class SubcircuitSimulationData
     extends ReflectiveData
 {
   public long subcircuitSimulationId;
+  public long subcircuitEditorId;
   public long circuitSimulationId;
 
   public SubcircuitSimulationData()
   {
   }
 
-  public SubcircuitSimulationData(long subcircuitSimulationId, long circuitSimulationId)
+  public SubcircuitSimulationData(long subcircuitSimulationId, long subcircuitEditorId, long circuitSimulationId)
   {
     this.subcircuitSimulationId = subcircuitSimulationId;
+    this.subcircuitEditorId = subcircuitEditorId;
     this.circuitSimulationId = circuitSimulationId;
   }
 }

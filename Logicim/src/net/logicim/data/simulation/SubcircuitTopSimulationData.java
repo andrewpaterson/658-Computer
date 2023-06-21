@@ -3,8 +3,6 @@ package net.logicim.data.simulation;
 public class SubcircuitTopSimulationData
     extends SubcircuitSimulationData
 {
-  public long subcircuitEditorId;
-
   public SubcircuitTopSimulationData()
   {
   }
@@ -13,8 +11,7 @@ public class SubcircuitTopSimulationData
                                      long circuitSimulationId,
                                      long subcircuitEditorId)
   {
-    super(subcircuitSimulationId, circuitSimulationId);
-    this.subcircuitEditorId = subcircuitEditorId;
+    super(subcircuitSimulationId, subcircuitEditorId, circuitSimulationId);
   }
 }
 

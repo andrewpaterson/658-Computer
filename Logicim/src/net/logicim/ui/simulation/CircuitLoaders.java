@@ -1,6 +1,5 @@
 package net.logicim.ui.simulation;
 
-import net.logicim.data.integratedcircuit.common.BoundingBoxData;
 import net.logicim.data.simulation.SimulationLoader;
 import net.logicim.data.subciruit.SubcircuitInstanceLoader;
 import net.logicim.data.wire.TraceLoader;
@@ -42,10 +41,11 @@ public class CircuitLoaders
   }
 
   public SubcircuitInstanceSimulation createSubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                                                         SubcircuitInstance subcircuitInstance,
-                                                                         long subcircuitSimulationId)
+                                                                         SubcircuitEditor subcircuitEditor,
+                                                                         long subcircuitSimulationId,
+                                                                         SubcircuitInstance subcircuitInstance)
   {
-    return simulationLoader.create(circuitSimulation, subcircuitInstance, subcircuitSimulationId);
+    return simulationLoader.create(circuitSimulation, subcircuitInstance, subcircuitEditor, subcircuitSimulationId);
   }
 
   public SubcircuitInstance getSubcircuitInstance(long subcircuitInstanceId)

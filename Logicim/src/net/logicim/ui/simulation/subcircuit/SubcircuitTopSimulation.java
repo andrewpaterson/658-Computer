@@ -16,24 +16,22 @@ import java.util.Set;
 public class SubcircuitTopSimulation
     extends SubcircuitSimulation
 {
-  protected SubcircuitEditor subcircuitEditor;
-
-  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation,
-                                 SubcircuitEditor subcircuitEditor)
+  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation, SubcircuitEditor subcircuitEditor)
   {
-    super(circuitSimulation);
-    this.subcircuitEditor = subcircuitEditor;
+    super(circuitSimulation, subcircuitEditor);
   }
 
-  public SubcircuitEditor getSubcircuitEditor()
+  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation, SubcircuitEditor subcircuitEditor, long id)
   {
-    return subcircuitEditor;
+    super(circuitSimulation, subcircuitEditor, id);
   }
 
   @Override
   public SubcircuitTopSimulationData save()
   {
-    return new SubcircuitTopSimulationData(getId(), circuitSimulation.getId(), subcircuitEditor.getId());
+    return new SubcircuitTopSimulationData(getId(),
+                                           circuitSimulation.getId(),
+                                           subcircuitEditor.getId());
   }
 
   public List<CircuitInstanceViewPath> getTopDownSubcircuitViews()

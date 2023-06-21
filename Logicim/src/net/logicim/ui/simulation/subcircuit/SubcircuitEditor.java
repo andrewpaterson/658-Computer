@@ -397,18 +397,6 @@ public class SubcircuitEditor
     return simulations.get(circuitSimulation);
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation(long simulationId)
-  {
-    for (SubcircuitSimulation subcircuitSimulation : simulations.values())
-    {
-      if (subcircuitSimulation.getId() == simulationId)
-      {
-        return subcircuitSimulation;
-      }
-    }
-    return null;
-  }
-
   public Map<CircuitSimulation, SubcircuitSimulation> getSimulations()
   {
     return simulations;
@@ -430,6 +418,11 @@ public class SubcircuitEditor
       }
     }
     return list;
+  }
+
+  public void addSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
+  {
+    simulations.put(subcircuitSimulation.getCircuitSimulation(), subcircuitSimulation);
   }
 }
 

@@ -4,7 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
-import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;

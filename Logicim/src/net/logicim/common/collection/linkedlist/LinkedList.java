@@ -6,8 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LinkedList<E>
-    implements
-    Iterable<E>
+    implements Iterable<E>
 {
   protected LinkedListNode<E> terminal;
   protected transient int modifications;
@@ -52,7 +51,6 @@ public class LinkedList<E>
     return result;
   }
 
-  // Getters
   public E getFirstOrNull()
   {
     LinkedListNode<E> result = terminal.getNext();

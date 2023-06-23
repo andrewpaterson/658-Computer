@@ -71,11 +71,12 @@ public abstract class ComponentData<T extends ComponentView<?>>
         throw new SimulatorException("Could not find MultiPortData for simulation ID [%s].", circuit.getId());
       }
 
+      int multiPortSize = multiPortData.ports.size();
       List<? extends Port> ports = portView.getPorts(circuit);
       for (int j = 0; j < ports.size(); j++)
       {
         Port port = ports.get(j);
-        if (j < multiPortData.ports.size())
+        if (j < multiPortSize)
         {
           PortData portData = multiPortData.ports.get(j);
           Trace trace = circuitLoaders.getTraceLoader().create(portData.traceId);

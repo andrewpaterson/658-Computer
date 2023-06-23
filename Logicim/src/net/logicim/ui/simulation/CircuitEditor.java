@@ -376,8 +376,7 @@ public class CircuitEditor
 
       if (subcircuitSimulationData instanceof SubcircuitTopSimulationData)
       {
-        SubcircuitTopSimulation subcircuitTopSimulation = loaders.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
-        circuitSimulation.reset(subcircuitTopSimulation);
+        loaders.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
       }
       else if (subcircuitSimulationData instanceof SubcircuitInstanceSimulationData)
       {
@@ -395,8 +394,8 @@ public class CircuitEditor
     {
       for (SubcircuitEditorData subcircuitData : circuitData.subcircuits)
       {
+        SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitData.id);
         Map<ViewData, View> viewDataViewMap = subcircuitEditorViews.get(subcircuitData);
-        SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitData.id);
         SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
         subcircuitEditor.loadComponents(viewDataViewMap,
                                         subcircuitSimulation,

@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface WireView
 {
-  void connectTraces(SubcircuitSimulation circuit, List<Trace> traces);
+  void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces);
 
-  List<Trace> getTraces(SubcircuitSimulation circuit);
+  List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation);
 
   List<ConnectionView> getConnectionViews();
 
@@ -21,9 +21,9 @@ public interface WireView
 
   void enable();
 
-  void clearTraces(SubcircuitSimulation circuit);
+  void clearTraces(SubcircuitSimulation subcircuitSimulation);
 
-  default void wireConnect(SubcircuitSimulation circuit,
+  default void wireConnect(SubcircuitSimulation subcircuitSimulation,
                            TraceLoader traceLoader,
                            long[] traceIds)
   {
@@ -33,7 +33,7 @@ public interface WireView
       Trace trace = traceLoader.create(id);
       traces.add(trace);
     }
-    this.connectTraces(circuit, traces);
+    this.connectTraces(subcircuitSimulation, traces);
     this.enable();
   }
 }

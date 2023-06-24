@@ -121,6 +121,7 @@ public class SubcircuitInstanceView
     for (PinViewOffset pinViewOffset : pinViewOffsets)
     {
       pinViews.add(new SubcircuitPinView(pinViewOffset.pinView,
+                                         containingSubcircuitView,
                                          this,
                                          new Int2D(pinViewOffset.pinOffset, offset),
                                          SANS_SERIF,
@@ -135,6 +136,7 @@ public class SubcircuitInstanceView
     for (PinViewOffset pinViewOffset : pinViewOffsets)
     {
       pinViews.add(new SubcircuitPinView(pinViewOffset.pinView,
+                                         containingSubcircuitView,
                                          this,
                                          new Int2D(offset, pinViewOffset.pinOffset),
                                          SANS_SERIF,
@@ -192,7 +194,7 @@ public class SubcircuitInstanceView
     return rectangle;
   }
 
-  protected void validatePorts(SubcircuitSimulation circuit)
+  protected void validatePorts(SubcircuitSimulation subcircuitSimulation)
   {
   }
 
@@ -218,9 +220,9 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  protected SubcircuitInstance createPassive(SubcircuitSimulation circuitSimulation)
+  protected SubcircuitInstance createPassive(SubcircuitSimulation subcircuitSimulation)
   {
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation.getCircuit(),
                                                                    properties.name,
                                                                    properties.subcircuitTypeName,
                                                                    properties.comment);
@@ -345,9 +347,9 @@ public class SubcircuitInstanceView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -373,7 +375,7 @@ public class SubcircuitInstanceView
       name.paint(graphics, viewport);
     }
 
-    paintPorts(graphics, viewport, circuit);
+    paintPorts(graphics, viewport, subcircuitSimulation);
 
     graphics.setFont(font);
     graphics.setColor(color);

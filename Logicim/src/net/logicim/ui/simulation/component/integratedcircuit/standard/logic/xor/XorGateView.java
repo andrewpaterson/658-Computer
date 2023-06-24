@@ -30,9 +30,9 @@ public class XorGateView
   }
 
   @Override
-  protected XorGate createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected XorGate createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new XorGate(circuit.getCircuit(),
+    return new XorGate(subcircuitSimulation.getCircuit(),
                        properties.name,
                        new XorGatePins(properties.inputWidth * properties.inputCount,
                                        familyVoltageConfiguration));

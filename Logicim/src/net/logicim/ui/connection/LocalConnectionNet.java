@@ -25,11 +25,11 @@ public class LocalConnectionNet
   protected List<PortConnection> portConnections;
 
   protected Set<Trace> traces = new LinkedHashSet<>();
-  protected SubcircuitSimulation circuit;
+  protected SubcircuitSimulation subcircuitSimulation;
 
-  public LocalConnectionNet(SubcircuitSimulation circuit, ConnectionView inputConnectionView)
+  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, ConnectionView inputConnectionView)
   {
-    this.circuit = circuit;
+    this.subcircuitSimulation = subcircuitSimulation;
     connectedComponents = new ArrayList<>();
     connectedWires = new ArrayList<>();
     splitterViews = new ArrayList<>();
@@ -126,7 +126,7 @@ public class LocalConnectionNet
       for (int i = 0; i < portConnections.size(); i++)
       {
         PortConnection portConnection = portConnections.get(i);
-        Port port = portView.getPort(circuit, i);
+        Port port = portView.getPort(subcircuitSimulation, i);
         portConnection.addPort(port);
         if (isSplitter)
         {

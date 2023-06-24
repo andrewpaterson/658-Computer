@@ -14,18 +14,18 @@ import java.util.*;
 
 public abstract class PortTraceFinder
 {
-  public static List<LocalConnectionNet> findAndConnectTraces(SubcircuitSimulation circuit, ConnectionView inputConnectionView)
+  public static List<LocalConnectionNet> findAndConnectTraces(SubcircuitSimulation subcircuitSimulation, ConnectionView inputConnectionView)
   {
     List<LocalConnectionNet> connectionNets = new ArrayList<>();
-    findAndConnectTraces(circuit, inputConnectionView, connectionNets);
+    findAndConnectTraces(subcircuitSimulation, inputConnectionView, connectionNets);
     return connectionNets;
   }
 
-  private static void findAndConnectTraces(SubcircuitSimulation circuit, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  private static void findAndConnectTraces(SubcircuitSimulation subcircuitSimulation, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
   {
-    WireList wireList = findWires(circuit, inputConnectionView, connectionNets);
+    WireList wireList = findWires(subcircuitSimulation, inputConnectionView, connectionNets);
 
-    connectFullWires(circuit, wireList.getFullWires());
+    connectFullWires(subcircuitSimulation, wireList.getFullWires());
 
     List<PartialWire> partialWires = wireList.getPartialWires();
     for (PartialWire partialWire : partialWires)
@@ -33,7 +33,7 @@ public abstract class PortTraceFinder
       for (WireConnection wireConnection : partialWire.connectedWires)
       {
         WireView wireView = wireConnection.getWireView();
-        wireView.clearTraces(circuit);
+        wireView.clearTraces(subcircuitSimulation);
       }
     }
 
@@ -42,16 +42,16 @@ public abstract class PortTraceFinder
       for (WireConnection connectedWire : connectionNet.getConnectedWires())
       {
         WireView wireView = connectedWire.wireView;
-        wireView.connectTraces(circuit, connectionNet.getTraces());
+        wireView.connectTraces(subcircuitSimulation, connectionNet.getTraces());
       }
     }
   }
 
-  private static void connectFullWires(SubcircuitSimulation circuit, List<FullWire> fullWires)
+  private static void connectFullWires(SubcircuitSimulation subcircuitSimulation, List<FullWire> fullWires)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
-      Simulation simulation = circuit.getSimulation();
+      Simulation simulation = subcircuitSimulation.getSimulation();
       for (FullWire fullWire : fullWires)
       {
         Trace trace = new Trace();
@@ -69,7 +69,9 @@ public abstract class PortTraceFinder
     }
   }
 
-  private static WireList findWires(SubcircuitSimulation circuit, ConnectionView inputConnectionView, List<LocalConnectionNet> connectionNets)
+  private static WireList findWires(SubcircuitSimulation subcircuitSimulation,
+                                    ConnectionView inputConnectionView,
+                                    List<LocalConnectionNet> connectionNets)
   {
     if (inputConnectionView == null)
     {
@@ -79,7 +81,7 @@ public abstract class PortTraceFinder
     List<ComponentConnection<SplitterView>> splitterViewStack = new ArrayList<>();
     Map<ConnectionView, SplitterView> processedSplitterViewConnections = new HashMap<>();
 
-    processLocalConnections(circuit, inputConnectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
+    processLocalConnections(subcircuitSimulation, inputConnectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
 
     int stackIndex = 0;
     while (stackIndex < splitterViewStack.size())
@@ -88,18 +90,18 @@ public abstract class PortTraceFinder
       ConnectionView connectionView = splitterViewConnection.connection;
       if (!processedSplitterViewConnections.containsKey(connectionView))
       {
-        processLocalConnections(circuit, connectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
+        processLocalConnections(subcircuitSimulation, connectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
       }
 
       stackIndex++;
     }
 
-    return createWireList(circuit, connectionNets);
+    return createWireList(subcircuitSimulation, connectionNets);
   }
 
-  private static WireList createWireList(SubcircuitSimulation circuit, List<LocalConnectionNet> connectionNets)
+  private static WireList createWireList(SubcircuitSimulation subcircuitSimulation, List<LocalConnectionNet> connectionNets)
   {
-    Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(circuit, connectionNets);
+    Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(subcircuitSimulation, connectionNets);
     Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
 
     Set<PortConnection> processedWires = new HashSet<>();
@@ -148,9 +150,9 @@ public abstract class PortTraceFinder
     return wireList;
   }
 
-  private static Map<Port, Port> createSplitterPortMap(SubcircuitSimulation circuit, List<LocalConnectionNet> connectionNets)
+  private static Map<Port, Port> createSplitterPortMap(SubcircuitSimulation subcircuitSimulation, List<LocalConnectionNet> connectionNets)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
       Map<Port, Port> totalSplitterPortMap = new HashMap<>();
       for (LocalConnectionNet connectionNet : connectionNets)
@@ -159,7 +161,7 @@ public abstract class PortTraceFinder
         for (ComponentConnection<SplitterView> splitterViewConnection : splitterViewConnections)
         {
           SplitterView splitterView = splitterViewConnection.component;
-          Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(circuit);
+          Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(subcircuitSimulation);
           if (portMap != null)
           {
             totalSplitterPortMap.putAll(portMap);
@@ -193,13 +195,13 @@ public abstract class PortTraceFinder
     return totalPortWireMap;
   }
 
-  private static void processLocalConnections(SubcircuitSimulation circuit,
+  private static void processLocalConnections(SubcircuitSimulation subcircuitSimulation,
                                               ConnectionView inputConnectionView,
                                               List<LocalConnectionNet> connectionNets,
                                               List<ComponentConnection<SplitterView>> splitterViewStack,
                                               Map<ConnectionView, SplitterView> processedSplitterViewConnections)
   {
-    LocalConnectionNet connectionNet = new LocalConnectionNet(circuit, inputConnectionView);
+    LocalConnectionNet connectionNet = new LocalConnectionNet(subcircuitSimulation, inputConnectionView);
     connectionNets.add(connectionNet);
 
     List<ComponentConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();

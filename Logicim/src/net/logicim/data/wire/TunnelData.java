@@ -43,17 +43,17 @@ public class TunnelData
   }
 
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        SubcircuitSimulation circuitSimulation,
+                                        SubcircuitSimulation subcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         TunnelView tunnelView)
   {
-    long[] traceIDs = simulationTraces.get(circuitSimulation.getId());
+    long[] traceIDs = simulationTraces.get(subcircuitSimulation.getId());
     if (traceIDs == null)
     {
-      throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuitSimulation.getDescription());
+      throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", subcircuitSimulation.getDescription());
     }
 
-    tunnelView.wireConnect(circuitSimulation,
+    tunnelView.wireConnect(subcircuitSimulation,
                            circuitLoaders.getTraceLoader(),
                            traceIDs
     );

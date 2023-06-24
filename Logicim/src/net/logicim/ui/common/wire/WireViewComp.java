@@ -67,12 +67,12 @@ public class WireViewComp
     return connectionViews;
   }
 
-  protected Color getTraceColour(SubcircuitSimulation circuit)
+  protected Color getTraceColour(SubcircuitSimulation subcircuitSimulation)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
-      List<Trace> traces = simulationTraces.get(circuit);
-      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, circuit.getTime());
+      List<Trace> traces = simulationTraces.get(subcircuitSimulation);
+      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, subcircuitSimulation.getTime());
     }
     else
     {
@@ -110,9 +110,9 @@ public class WireViewComp
     return simulationTraces;
   }
 
-  public void connectTraces(SubcircuitSimulation circuit, List<Trace> traces)
+  public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
   {
-    simulationTraces.put(circuit, traces);
+    simulationTraces.put(subcircuitSimulation, traces);
 
     width = Integer.MAX_VALUE;
     for (List<Trace> existing : simulationTraces.values())
@@ -141,19 +141,19 @@ public class WireViewComp
     }
   }
 
-  public void clearTraces(SubcircuitSimulation circuit)
+  public void clearTraces(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationTraces.remove(circuit);
+    simulationTraces.remove(subcircuitSimulation);
   }
 
-  public List<Trace> getTraces(SubcircuitSimulation circuit)
+  public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
   {
-    return simulationTraces.get(circuit);
+    return simulationTraces.get(subcircuitSimulation);
   }
 
-  public void destroyComponent(SubcircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationTraces.remove(circuit);
+    simulationTraces.remove(subcircuitSimulation);
   }
 }
 

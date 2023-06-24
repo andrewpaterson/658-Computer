@@ -38,7 +38,7 @@ public class ConnectionInformationPanel
     this.height = height;
   }
 
-  public void drawConnectionDetails(SubcircuitSimulation circuit, int left, int top)
+  public void drawConnectionDetails(SubcircuitSimulation subcircuitSimulation, int left, int top)
   {
     graphics.setColor(Colours.getInstance().getInfoBackground());
     graphics.fillRect(left, top, width, height);
@@ -63,7 +63,7 @@ public class ConnectionInformationPanel
     {
       String componentString = connectedComponent.getType() +
                                getComponentNameString(connectedComponent) +
-                               getComponentDetailString(circuit, connectedComponent);
+                               getComponentDetailString(subcircuitSimulation, connectedComponent);
 
       y = drawMultilineString(fontHeight,
                               xOffset,
@@ -98,24 +98,24 @@ public class ConnectionInformationPanel
     return y;
   }
 
-  private String getComponentDetailString(SubcircuitSimulation circuit, View connectedComponent)
+  private String getComponentDetailString(SubcircuitSimulation subcircuitSimulation, View connectedComponent)
   {
     if (connectedComponent instanceof TraceView)
     {
-      return toTraceDetailString(circuit, (TraceView) connectedComponent);
+      return toTraceDetailString(subcircuitSimulation, (TraceView) connectedComponent);
     }
     else if (connectedComponent instanceof ComponentView)
     {
-      return toComponentDetailString(circuit, (ComponentView<?>) connectedComponent);
+      return toComponentDetailString(subcircuitSimulation, (ComponentView<?>) connectedComponent);
     }
     else if (connectedComponent instanceof TunnelView)
     {
-      return toTunnelDetailString(circuit, (TunnelView) connectedComponent);
+      return toTunnelDetailString(subcircuitSimulation, (TunnelView) connectedComponent);
     }
     return "";
   }
 
-  private String toComponentDetailString(SubcircuitSimulation circuit, ComponentView<?> componentView)
+  private String toComponentDetailString(SubcircuitSimulation subcircuitSimulation, ComponentView<?> componentView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -127,7 +127,7 @@ public class ConnectionInformationPanel
       builder.append("\n" + padding + text);
       padding += "    ";
     }
-    List<? extends Port> ports = portView.getPorts(circuit);
+    List<? extends Port> ports = portView.getPorts(subcircuitSimulation);
     if (ports != null)
     {
       for (Port port : ports)
@@ -160,11 +160,11 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String toTraceDetailString(SubcircuitSimulation circuit, TraceView traceView)
+  private String toTraceDetailString(SubcircuitSimulation subcircuitSimulation, TraceView traceView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = traceView.getTraces(circuit);
+    List<Trace> traces = traceView.getTraces(subcircuitSimulation);
     if (traces != null)
     {
       boolean multiline = traces.size() > 8;
@@ -191,11 +191,11 @@ public class ConnectionInformationPanel
     return builder.toString();
   }
 
-  private String toTunnelDetailString(SubcircuitSimulation circuit, TunnelView tunnelView)
+  private String toTunnelDetailString(SubcircuitSimulation subcircuitSimulation, TunnelView tunnelView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = tunnelView.getTraces(circuit);
+    List<Trace> traces = tunnelView.getTraces(subcircuitSimulation);
     boolean multiline = traces.size() > 8;
     if (multiline)
     {

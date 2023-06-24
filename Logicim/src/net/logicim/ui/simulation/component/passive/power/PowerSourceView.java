@@ -20,9 +20,9 @@ public abstract class PowerSourceView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  protected PowerSource createPassive(SubcircuitSimulation circuit)
+  protected PowerSource createPassive(SubcircuitSimulation subcircuitSimulation)
   {
-    return new PowerSource(circuit.getCircuit(),
+    return new PowerSource(subcircuitSimulation.getCircuit(),
                            properties.name,
                            getVoltageOut());
   }

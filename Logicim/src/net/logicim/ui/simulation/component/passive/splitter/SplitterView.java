@@ -331,9 +331,9 @@ public class SplitterView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -345,7 +345,7 @@ public class SplitterView
     }
     rectangleView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, circuit);
+    paintPorts(graphics, viewport, subcircuitSimulation);
 
     for (TextView textView : textViews)
     {
@@ -382,15 +382,15 @@ public class SplitterView
   }
 
   @Override
-  protected Splitter createPassive(SubcircuitSimulation simulation)
+  protected Splitter createPassive(SubcircuitSimulation subcircuitSimulation)
   {
     List<String> startPortNames = getStartPortNames(properties.bitWidth);
-    Splitter splitter = new Splitter(simulation.getCircuit(),
+    Splitter splitter = new Splitter(subcircuitSimulation.getCircuit(),
                                      properties.name,
                                      startPortNames,
                                      getEndPortNames(properties.bitWidth));
     Map<Port, Port> bidirectionalPortMap = calculateBidirectionalPortMap(splitter);
-    simulationBidirectionalPorts.put(simulation, new BidirectionalPortMap(bidirectionalPortMap));
+    simulationBidirectionalPorts.put(subcircuitSimulation, new BidirectionalPortMap(bidirectionalPortMap));
     return splitter;
   }
 
@@ -494,11 +494,11 @@ public class SplitterView
     updateTextViews();
   }
 
-  public Map<Port, Port> getSimulationBidirectionalPorts(SubcircuitSimulation circuit)
+  public Map<Port, Port> getSimulationBidirectionalPorts(SubcircuitSimulation subcircuitSimulation)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
-      BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(circuit);
+      BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(subcircuitSimulation);
       if (bidirectionalPortMap != null)
       {
         return bidirectionalPortMap.getBidirectionalPortMap();

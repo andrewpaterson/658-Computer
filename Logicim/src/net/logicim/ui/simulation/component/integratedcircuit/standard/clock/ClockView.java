@@ -65,9 +65,9 @@ public class ClockView
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(circuit.getCircuit(),
+    return new ClockOscillator(subcircuitSimulation.getCircuit(),
                                properties.name,
                                new ClockOscillatorPins(familyVoltageConfiguration,
                                                        properties.inverseOut),
@@ -77,9 +77,9 @@ public class ClockView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -88,21 +88,21 @@ public class ClockView
     {
       rectangle.paint(graphics, viewport);
 
-      paintClockWaveform(graphics, viewport, circuit);
+      paintClockWaveform(graphics, viewport, subcircuitSimulation);
     }
-    paintPorts(graphics, viewport, circuit);
+    paintPorts(graphics, viewport, subcircuitSimulation);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, SubcircuitSimulation circuit)
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, SubcircuitSimulation subcircuitSimulation)
   {
-    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(circuit);
+    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(subcircuitSimulation);
     Color clockColor = Colours.getInstance().getDisconnectedTrace();
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
-      long time = circuit.getTime();
+      long time = subcircuitSimulation.getTime();
       if (integratedCircuit != null)
       {
         ClockOscillatorState state = integratedCircuit.getState();

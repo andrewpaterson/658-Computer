@@ -91,9 +91,9 @@ public class PositivePowerView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -103,7 +103,7 @@ public class PositivePowerView
 
     drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
-    paintPorts(graphics, viewport, circuit);
+    paintPorts(graphics, viewport, subcircuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

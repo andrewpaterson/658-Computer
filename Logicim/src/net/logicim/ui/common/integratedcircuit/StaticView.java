@@ -27,7 +27,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 {
   protected PROPERTIES properties;
 
-  protected SubcircuitView subcircuitView;
+  protected SubcircuitView containingSubcircuitView;
   protected Int2D position;
   protected Rotation rotation;
   protected BoundingBox boundingBox;
@@ -36,12 +36,12 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   protected boolean finalised;
 
-  public StaticView(SubcircuitView subcircuitView,
+  public StaticView(SubcircuitView containingSubcircuitView,
                     Int2D position,
                     Rotation rotation,
                     PROPERTIES properties)
   {
-    this(subcircuitView,
+    this(containingSubcircuitView,
          position,
          rotation,
          new BoundingBox(),
@@ -49,7 +49,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
          properties);
   }
 
-  public StaticView(SubcircuitView subcircuitView,
+  public StaticView(SubcircuitView containingSubcircuitView,
                     Int2D position,
                     Rotation rotation,
                     BoundingBox boundingBox,
@@ -59,7 +59,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     super();
     this.properties = properties;
 
-    this.subcircuitView = subcircuitView;
+    this.containingSubcircuitView = containingSubcircuitView;
     this.position = position.clone();
     this.rotation = rotation;
     this.boundingBox = boundingBox;
@@ -205,7 +205,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
     if (!finalised)
     {
@@ -264,9 +264,9 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   {
   }
 
-  public SubcircuitView getSubcircuitView()
+  public SubcircuitView getContainingSubcircuitView()
   {
-    return subcircuitView;
+    return containingSubcircuitView;
   }
 
   protected abstract void finaliseView();
@@ -277,11 +277,11 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract Component createComponent(SubcircuitSimulation circuit);
+  public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 
-  public abstract void destroyComponent(SubcircuitSimulation circuit);
+  public abstract void destroyComponent(SubcircuitSimulation subcircuitSimulation);
 
-  public abstract void simulationStarted(SubcircuitSimulation circuit);
+  public abstract void simulationStarted(SubcircuitSimulation subcircuitSimulation);
 
   public abstract void disconnect();
 

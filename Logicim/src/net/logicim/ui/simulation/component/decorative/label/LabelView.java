@@ -59,13 +59,13 @@ public class LabelView
   }
 
   @Override
-  public Component createComponent(SubcircuitSimulation circuit)
+  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     return null;
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
   }
 
@@ -93,9 +93,9 @@ public class LabelView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();

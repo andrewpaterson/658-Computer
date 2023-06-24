@@ -57,7 +57,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
     return componentView;
   }
 
-  protected void loadPorts(SubcircuitSimulation circuit, CircuitLoaders circuitLoaders, T componentView)
+  protected void loadPorts(SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders, T componentView)
   {
     List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
@@ -65,14 +65,14 @@ public abstract class ComponentData<T extends ComponentView<?>>
       SimulationMultiPortData simulationMultiPortData = ports.get(i);
       PortView portView = portViews.get(i);
 
-      MultiPortData multiPortData = getMultiPortDataForSimulationId(simulationMultiPortData, circuit.getId());
+      MultiPortData multiPortData = getMultiPortDataForSimulationId(simulationMultiPortData, subcircuitSimulation.getId());
       if (multiPortData == null)
       {
-        throw new SimulatorException("Could not find MultiPortData for simulation ID [%s].", circuit.getId());
+        throw new SimulatorException("Could not find MultiPortData for simulation ID [%s].", subcircuitSimulation.getId());
       }
 
       int multiPortSize = multiPortData.ports.size();
-      List<? extends Port> ports = portView.getPorts(circuit);
+      List<? extends Port> ports = portView.getPorts(subcircuitSimulation);
       for (int j = 0; j < ports.size(); j++)
       {
         Port port = ports.get(j);
@@ -82,7 +82,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
           Trace trace = circuitLoaders.getTraceLoader().create(portData.traceId);
           port.connect(trace);
 
-          loadPort(circuit, portData, port);
+          loadPort(subcircuitSimulation, portData, port);
         }
       }
     }
@@ -102,7 +102,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
     return null;
   }
 
-  protected void loadPort(SubcircuitSimulation circuit, PortData portData, Port port)
+  protected void loadPort(SubcircuitSimulation subcircuitSimulation, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -111,7 +111,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
       Map<Long, PortEvent> portEventMap = new HashMap<>();
       for (PortEventData<?> eventData : logicPortData.events)
       {
-        PortEvent portEvent = eventData.create(logicPort, circuit.getTimeline());
+        PortEvent portEvent = eventData.create(logicPort, subcircuitSimulation.getTimeline());
         portEventMap.put(eventData.id, portEvent);
       }
 
@@ -120,7 +120,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
         PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
         if (outputPortEvent == null)
         {
-          outputPortEvent = logicPortData.output.create(logicPort, circuit.getTimeline());
+          outputPortEvent = logicPortData.output.create(logicPort, subcircuitSimulation.getTimeline());
         }
         logicPort.setOutput(outputPortEvent);
       }

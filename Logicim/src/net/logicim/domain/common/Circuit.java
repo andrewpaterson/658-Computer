@@ -19,17 +19,17 @@ public class Circuit
     passives = new ArrayList<>();
   }
 
-  public void resetSimulation(SubcircuitSimulation circuit)
+  public void resetSimulation(SubcircuitSimulation subcircuitSimulation)
   {
-    Simulation simulation = circuit.getSimulation();
+    Simulation simulation = subcircuitSimulation.getSimulation();
     for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
     {
-      integratedCircuit.reset(circuit);
+      integratedCircuit.reset(subcircuitSimulation);
       integratedCircuit.simulationStarted(simulation);
     }
     for (Passive passive : passives)
     {
-      passive.reset(circuit);
+      passive.reset(subcircuitSimulation);
       passive.simulationStarted(simulation);
     }
   }

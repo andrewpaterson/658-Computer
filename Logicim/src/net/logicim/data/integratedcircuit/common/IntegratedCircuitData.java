@@ -64,7 +64,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  protected void loadPort(SubcircuitSimulation circuit, PortData portData, Port port)
+  protected void loadPort(SubcircuitSimulation subcircuitSimulation, PortData portData, Port port)
   {
     if (port.isLogicPort())
     {
@@ -73,7 +73,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
       Map<Long, PortEvent> portEventMap = new HashMap<>();
       for (PortEventData<?> eventData : logicPortData.events)
       {
-        PortEvent portEvent = eventData.create(logicPort, circuit.getTimeline());
+        PortEvent portEvent = eventData.create(logicPort, subcircuitSimulation.getTimeline());
         portEventMap.put(eventData.id, portEvent);
       }
 
@@ -82,24 +82,24 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
         PortOutputEvent outputPortEvent = (PortOutputEvent) portEventMap.get(logicPortData.output.id);
         if (outputPortEvent == null)
         {
-          outputPortEvent = logicPortData.output.create(logicPort, circuit.getTimeline());
+          outputPortEvent = logicPortData.output.create(logicPort, subcircuitSimulation.getTimeline());
         }
         logicPort.setOutput(outputPortEvent);
       }
     }
   }
 
-  protected void loadEvents(SubcircuitSimulation circuit, ICV integratedCircuitView)
+  protected void loadEvents(SubcircuitSimulation subcircuitSimulation, ICV integratedCircuitView)
   {
-    List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(circuit.getId());
+    List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(subcircuitSimulation.getId());
     if (integratedCircuitEventData == null)
     {
-      throw new SimulatorException("Cannot find IntegratedCircuitEventData for simulation ID [%s].", circuit.getId());
+      throw new SimulatorException("Cannot find IntegratedCircuitEventData for simulation ID [%s].", subcircuitSimulation.getId());
     }
     for (IntegratedCircuitEventData<?> eventData : integratedCircuitEventData)
     {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuit);
-      eventData.create(integratedCircuit, circuit.getTimeline());
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(subcircuitSimulation);
+      eventData.create(integratedCircuit, subcircuitSimulation.getTimeline());
     }
   }
 
@@ -122,21 +122,21 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
 
   @Override
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        SubcircuitSimulation circuit,
+                                        SubcircuitSimulation subcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         ICV integratedCircuitView)
   {
-    integratedCircuitView.createComponent(circuit);
+    integratedCircuitView.createComponent(subcircuitSimulation);
 
-    loadState(circuit, integratedCircuitView);
-    loadEvents(circuit, integratedCircuitView);
-    loadPorts(circuit, circuitLoaders, integratedCircuitView);
+    loadState(subcircuitSimulation, integratedCircuitView);
+    loadEvents(subcircuitSimulation, integratedCircuitView);
+    loadPorts(subcircuitSimulation, circuitLoaders, integratedCircuitView);
   }
 
-  private void loadState(SubcircuitSimulation circuit, ICV integratedCircuitView)
+  private void loadState(SubcircuitSimulation subcircuitSimulation, ICV integratedCircuitView)
   {
-    STATE state = getState(circuit.getId());
-    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuit);
+    STATE state = getState(subcircuitSimulation.getId());
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(subcircuitSimulation);
     integratedCircuit.setState(state);
   }
 

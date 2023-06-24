@@ -13,7 +13,7 @@ public interface Component
 
   void disconnect(Simulation simulation);
 
-  void reset(SubcircuitSimulation circuit);
+  void reset(SubcircuitSimulation subcircuitSimulation);
 
   String getType();
 

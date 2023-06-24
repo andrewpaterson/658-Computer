@@ -31,7 +31,7 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
   }
 
   public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        SubcircuitSimulation circuit,
+                                        SubcircuitSimulation subcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         T componentView)
   {

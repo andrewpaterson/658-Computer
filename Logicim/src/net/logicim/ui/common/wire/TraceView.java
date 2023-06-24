@@ -198,10 +198,10 @@ public class TraceView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
     graphics.setStroke(getTraceStroke(viewport));
-    Color color = getTraceColour(circuit);
+    Color color = getTraceColour(subcircuitSimulation);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
     int y1 = viewport.transformGridToScreenSpaceY(line.getStart().y);
@@ -254,9 +254,9 @@ public class TraceView
     return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
   }
 
-  protected Color getTraceColour(SubcircuitSimulation circuit)
+  protected Color getTraceColour(SubcircuitSimulation subcircuitSimulation)
   {
-    return wireView.getTraceColour(circuit);
+    return wireView.getTraceColour(subcircuitSimulation);
   }
 
   public TraceData save(boolean selected)
@@ -271,9 +271,9 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(SubcircuitSimulation circuit, List<Trace> traces)
+  public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
   {
-    wireView.connectTraces(circuit, traces);
+    wireView.connectTraces(subcircuitSimulation, traces);
   }
 
   public void disconnect()
@@ -282,14 +282,14 @@ public class TraceView
   }
 
   @Override
-  public void clearTraces(SubcircuitSimulation circuit)
+  public void clearTraces(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.clearTraces(circuit);
+    wireView.clearTraces(subcircuitSimulation);
   }
 
-  public List<Trace> getTraces(SubcircuitSimulation circuit)
+  public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
   {
-    return wireView.getTraces(circuit);
+    return wireView.getTraces(subcircuitSimulation);
   }
 
   public void setLine(Int2D start, Int2D end)
@@ -315,9 +315,9 @@ public class TraceView
     return LineOverlap.None;
   }
 
-  public void destroyComponent(SubcircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.destroyComponent(circuit);
+    wireView.destroyComponent(subcircuitSimulation);
   }
 }
 

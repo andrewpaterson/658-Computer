@@ -31,21 +31,21 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE createComponent(SubcircuitSimulation subcircuitInstanceSimulation)
+  public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    validateCanCreateComponent(subcircuitInstanceSimulation);
+    validateCanCreateComponent(subcircuitSimulation);
 
-    PASSIVE passive = createPassive(subcircuitInstanceSimulation);
-    simulationPassives.put(subcircuitInstanceSimulation, passive);
+    PASSIVE passive = createPassive(subcircuitSimulation);
+    simulationPassives.put(subcircuitSimulation, passive);
 
-    postCreateComponent(subcircuitInstanceSimulation, passive);
+    postCreateComponent(subcircuitSimulation, passive);
     return passive;
   }
 
   @Override
-  protected void removeComponent(SubcircuitSimulation circuit)
+  protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationPassives.remove(circuit);
+    simulationPassives.remove(subcircuitSimulation);
   }
 
   @Override
@@ -53,7 +53,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   {
     createPortViews();
     super.finaliseView();
-    subcircuitView.addPassiveView(this);
+    containingSubcircuitView.addPassiveView(this);
   }
 
   @Override
@@ -66,23 +66,23 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     return "";
   }
 
-  public PASSIVE getComponent(SubcircuitSimulation circuit)
+  public PASSIVE getComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    return simulationPassives.get(circuit);
+    return simulationPassives.get(subcircuitSimulation);
   }
 
   protected Set<Long> saveSimulations()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
-    for (SubcircuitSimulation circuit : simulationPassives.keySet())
+    for (SubcircuitSimulation subcircuitSimulation : simulationPassives.keySet())
     {
-      simulationIDs.add(circuit.getId());
+      simulationIDs.add(subcircuitSimulation.getId());
     }
     return simulationIDs;
   }
 
   public abstract PassiveData<?> save(boolean selected);
 
-  protected abstract PASSIVE createPassive(SubcircuitSimulation circuit);
+  protected abstract PASSIVE createPassive(SubcircuitSimulation subcircuitSimulation);
 }
 

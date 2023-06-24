@@ -162,9 +162,9 @@ public class TunnelView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -215,20 +215,20 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted(SubcircuitSimulation circuit)
+  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
   {
   }
 
   @Override
-  public Component createComponent(SubcircuitSimulation circuit)
+  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     return null;
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation circuit)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.destroyComponent(circuit);
+    wireView.destroyComponent(subcircuitSimulation);
   }
 
   @Override
@@ -254,9 +254,9 @@ public class TunnelView
                           properties.doubleSided);
   }
 
-  public void connectTraces(SubcircuitSimulation circuit, List<Trace> traces)
+  public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
   {
-    wireView.connectTraces(circuit, traces);
+    wireView.connectTraces(subcircuitSimulation, traces);
   }
 
   @Override
@@ -266,15 +266,15 @@ public class TunnelView
   }
 
   @Override
-  public void clearTraces(SubcircuitSimulation circuit)
+  public void clearTraces(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.clearTraces(circuit);
+    wireView.clearTraces(subcircuitSimulation);
   }
 
   @Override
-  public List<Trace> getTraces(SubcircuitSimulation circuit)
+  public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
   {
-    return wireView.getTraces(circuit);
+    return wireView.getTraces(subcircuitSimulation);
   }
 
   public boolean isRemoved()

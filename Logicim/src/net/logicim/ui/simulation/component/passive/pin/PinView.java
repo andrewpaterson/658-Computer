@@ -207,14 +207,14 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive(SubcircuitSimulation simulation)
+  protected Pin createPassive(SubcircuitSimulation subcircuitSimulation)
   {
-    Pin pin = new Pin(simulation.getCircuit(),
+    Pin pin = new Pin(subcircuitSimulation.getCircuit(),
                       properties.name,
                       properties.bitWidth);
     if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
-      createPowerPorts(simulation.getCircuit(), familyVoltageConfiguration, pin);
+      createPowerPorts(subcircuitSimulation.getCircuit(), familyVoltageConfiguration, pin);
     }
     return pin;
   }
@@ -259,9 +259,9 @@ public class PinView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -278,19 +278,19 @@ public class PinView
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
-    long time = circuit.getTime();
-    Pin passive = getComponent(circuit);
+    long time = subcircuitSimulation.getTime();
+    Pin passive = getComponent(subcircuitSimulation);
     TraceValue[] values = null;
     if (passive != null)
     {
-      values = port.getValue(circuit, familyVoltageConfiguration, passive.getVCC(time));
+      values = port.getValue(subcircuitSimulation, familyVoltageConfiguration, passive.getVCC(time));
     }
 
     dataView.setText(getStringValue(values));
     dataView.paint(graphics, viewport);
     labelView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, circuit);
+    paintPorts(graphics, viewport, subcircuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

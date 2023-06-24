@@ -76,10 +76,10 @@ public class CircuitEditor
       views = getAllViews();
     }
 
-    SubcircuitSimulation circuitSimulation = getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
     for (View view : views)
     {
-      view.paint(graphics, viewport, circuitSimulation);
+      view.paint(graphics, viewport, subcircuitSimulation);
     }
   }
 
@@ -341,7 +341,7 @@ public class CircuitEditor
 
     subcircuitEditors = new ArrayList<>();
     Map<Long, SubcircuitEditor> subcircuitEditorMap = new HashMap<>();
-    Map<SubcircuitEditorData, Map<ViewData, View>> subcircuitEditorViews = new LinkedHashMap<>();
+    Map<SubcircuitEditor, Map<ViewData, View>> subcircuitEditorViews = new LinkedHashMap<>();
     for (SubcircuitEditorData subcircuitEditorData : circuitData.subcircuits)
     {
       SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitEditorData.typeName, subcircuitEditorData.id);
@@ -351,7 +351,7 @@ public class CircuitEditor
                                                              subcircuitEditorData.subcircuit.components,
                                                              false,
                                                              false);
-      subcircuitEditorViews.put(subcircuitEditorData, views);
+      subcircuitEditorViews.put(subcircuitEditor, views);
     }
 
     for (CircuitSimulationData circuitSimulationData : circuitData.circuitSimulations)
@@ -392,15 +392,13 @@ public class CircuitEditor
 
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
-      for (SubcircuitEditorData subcircuitData : circuitData.subcircuits)
-      {
-        SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitData.id);
-        Map<ViewData, View> viewDataViewMap = subcircuitEditorViews.get(subcircuitData);
-        SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
-        subcircuitEditor.loadComponents(viewDataViewMap,
-                                        subcircuitSimulation,
-                                        loaders);
-      }
+      SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
+      SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
+
+      Map<ViewData, View> viewDataViewMap = subcircuitEditorViews.get(subcircuitEditor);
+      subcircuitEditor.loadComponents(viewDataViewMap,
+                                      subcircuitSimulation,
+                                      loaders);
     }
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
@@ -511,9 +509,9 @@ public class CircuitEditor
     deleteComponentView(staticView, currentSubcircuitEditor, getSubcircuitSimulation());
   }
 
-  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, SubcircuitSimulation circuit)
+  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, SubcircuitSimulation subcircuitSimulation)
   {
-    subcircuitEditor.deleteComponentView(staticView, circuit);
+    subcircuitEditor.deleteComponentView(staticView, subcircuitSimulation);
   }
 
   public void validateConsistency()
@@ -679,13 +677,13 @@ public class CircuitEditor
       List<SubcircuitInstanceView> instanceViews = entry.getValue();
       for (SubcircuitInstanceView instanceView : instanceViews)
       {
-        SubcircuitSimulation circuit = getSubcircuitSimulation();
-        deleteComponentView(instanceView, containingSubcircuitEditor, circuit);
+        SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+        deleteComponentView(instanceView, containingSubcircuitEditor, subcircuitSimulation);
 
         instanceView = (SubcircuitInstanceView) instanceView.duplicate(this,
                                                                        containingSubcircuitEditor.getSubcircuitView(),
                                                                        instanceView.getProperties());
-        containingSubcircuitEditor.recreateComponentView(instanceView, circuit);
+        containingSubcircuitEditor.recreateComponentView(instanceView, subcircuitSimulation);
       }
     }
   }

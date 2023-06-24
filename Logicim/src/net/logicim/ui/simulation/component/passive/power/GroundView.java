@@ -74,9 +74,9 @@ public class GroundView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -88,7 +88,7 @@ public class GroundView
       line3.paint(graphics, viewport);
       line4.paint(graphics, viewport);
     }
-    paintPorts(graphics, viewport, circuit);
+    paintPorts(graphics, viewport, subcircuitSimulation);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);

@@ -15,20 +15,20 @@ public abstract class SubcircuitEditorLoadDataHelper
   public static void loadViewData(SubcircuitEditor subcircuitEditor,
                                   View view,
                                   ViewData data,
-                                  SubcircuitSimulation circuit,
+                                  SubcircuitSimulation subcircuitSimulation,
                                   CircuitLoaders circuitLoaders)
   {
     if (view instanceof StaticView)
     {
       StaticView staticView = (StaticView) view;
       StaticData staticData = (StaticData) data;
-      staticData.createAndConnectComponent(subcircuitEditor, circuit, circuitLoaders, staticView);
+      staticData.createAndConnectComponent(subcircuitEditor, subcircuitSimulation, circuitLoaders, staticView);
     }
     else if (view instanceof TraceView)
     {
       TraceView traceView = (TraceView) view;
       TraceData traceData = (TraceData) data;
-      traceData.createAndConnectComponent(circuit, circuitLoaders, traceView);
+      traceData.createAndConnectComponent(subcircuitSimulation, circuitLoaders, traceView);
     }
     else
     {

@@ -77,7 +77,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public void reset(SubcircuitSimulation circuit)
+  public void reset(SubcircuitSimulation subcircuitSimulation)
   {
     events.clear();
     for (Port port : pins.getPorts())

@@ -31,9 +31,9 @@ public class BufferView
   }
 
   @Override
-  protected Buffer createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Buffer createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Buffer(circuit.getCircuit(),
+    return new Buffer(subcircuitSimulation.getCircuit(),
                       properties.name,
                       new BufferPins(properties.inputWidth * properties.inputCount,
                                      familyVoltageConfiguration));

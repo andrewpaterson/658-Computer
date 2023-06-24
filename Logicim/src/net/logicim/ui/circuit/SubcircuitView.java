@@ -87,7 +87,7 @@ public class SubcircuitView
     traceView.disconnect();
   }
 
-  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView, SubcircuitSimulation circuit)
+  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView, SubcircuitSimulation subcircuitSimulation)
   {
     if (staticView == null)
     {
@@ -105,11 +105,11 @@ public class SubcircuitView
 
     if (staticView instanceof ComponentView)
     {
-      Component component = ((ComponentView<?>) staticView).getComponent(circuit);
+      Component component = ((ComponentView<?>) staticView).getComponent(subcircuitSimulation);
       if (component != null)
       {
-        Simulation simulation = circuit.getSimulation();
-        circuit.getCircuit().disconnectComponent(component, simulation);
+        Simulation simulation = subcircuitSimulation.getSimulation();
+        subcircuitSimulation.getCircuit().disconnectComponent(component, simulation);
       }
     }
 
@@ -117,15 +117,15 @@ public class SubcircuitView
   }
 
   public void deleteComponentView(StaticView<?> staticView,
-                                  SubcircuitSimulation circuit)
+                                  SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
-    deleteComponentViews(staticViews, circuit);
+    deleteComponentViews(staticViews, subcircuitSimulation);
   }
 
   public void deleteComponentViews(List<StaticView<?>> staticViews,
-                                   SubcircuitSimulation circuit)
+                                   SubcircuitSimulation subcircuitSimulation)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> componentView : staticViews)
@@ -135,7 +135,7 @@ public class SubcircuitView
         throw new SimulatorException("Cannot delete a [null] view.");
       }
 
-      List<ConnectionView> disconnectedConnectionViews = disconnectStaticView(componentView, circuit);
+      List<ConnectionView> disconnectedConnectionViews = disconnectStaticView(componentView, subcircuitSimulation);
       for (ConnectionView connectionView : disconnectedConnectionViews)
       {
         if (connectionView == null)
@@ -147,11 +147,11 @@ public class SubcircuitView
       connectionViews.addAll(disconnectedConnectionViews);
       if (componentView instanceof IntegratedCircuitView)
       {
-        deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView, circuit);
+        deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView, subcircuitSimulation);
       }
       else if (componentView instanceof PassiveView)
       {
-        deletePassiveView((PassiveView<?, ?>) componentView, circuit);
+        deletePassiveView((PassiveView<?, ?>) componentView, subcircuitSimulation);
       }
       else if (componentView instanceof DecorativeView)
       {
@@ -167,38 +167,38 @@ public class SubcircuitView
       }
     }
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews, circuit);
-    fireConnectionEvents(updatedConnectionViews, circuit);
+    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews, subcircuitSimulation);
+    fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
   }
 
   public void fireConnectionEvents(Set<ConnectionView> connectionViews,
-                                   SubcircuitSimulation circuit)
+                                   SubcircuitSimulation subcircuitSimulation)
   {
     Set<PortView> portViews = getPortViews(connectionViews);
     for (PortView portView : portViews)
     {
-      portView.traceConnected(circuit);
+      portView.traceConnected(subcircuitSimulation);
     }
   }
 
   protected void deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView,
-                                         SubcircuitSimulation circuit)
+                                         SubcircuitSimulation subcircuitSimulation)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(circuit);
-      circuit.getCircuit().remove(integratedCircuit);
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(subcircuitSimulation);
+      subcircuitSimulation.getCircuit().remove(integratedCircuit);
     }
     removeIntegratedCircuitView(integratedCircuitView);
   }
 
   protected void deletePassiveView(PassiveView<?, ?> passiveView,
-                                   SubcircuitSimulation circuit)
+                                   SubcircuitSimulation subcircuitSimulation)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
-      Passive passive = passiveView.getComponent(circuit);
-      circuit.getCircuit().remove(passive);
+      Passive passive = passiveView.getComponent(subcircuitSimulation);
+      subcircuitSimulation.getCircuit().remove(passive);
     }
     removePassiveView(passiveView);
   }
@@ -511,10 +511,10 @@ public class SubcircuitView
   }
 
   public Set<ConnectionView> createTracesForConnectionViews(Collection<ConnectionView> connectionViews,
-                                                            SubcircuitSimulation circuit)
+                                                            SubcircuitSimulation subcircuitSimulation)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
       for (ConnectionView connectionView : connectionViews)
       {
@@ -525,7 +525,7 @@ public class SubcircuitView
 
         if (!updatedConnectionViews.contains(connectionView))
         {
-          List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuit, connectionView);
+          List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, connectionView);
           List<ConnectionView> connectionNetConnectionViews = PortTraceFinder.getConnectionViews(connectionNets);
           updatedConnectionViews.addAll(connectionNetConnectionViews);
         }
@@ -575,11 +575,11 @@ public class SubcircuitView
     }
   }
 
-  private void createComponents(List<StaticView<?>> staticViews, SubcircuitSimulation circuit)
+  private void createComponents(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
   {
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.createComponent(circuit);
+      staticView.createComponent(subcircuitSimulation);
     }
   }
 
@@ -637,7 +637,7 @@ public class SubcircuitView
     return overlaps;
   }
 
-  public Set<TraceView> createTraceViews(List<Line> inputLines, SubcircuitSimulation circuit)
+  public Set<TraceView> createTraceViews(List<Line> inputLines, SubcircuitSimulation subcircuitSimulation)
   {
     Set<Line> lines = new LinkedHashSet<>(inputLines);
     TraceFinder traceFinder = new TraceFinder();
@@ -652,12 +652,12 @@ public class SubcircuitView
 
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    return recreateTraceViews(lines, touchingTraceViews, circuit);
+    return recreateTraceViews(lines, touchingTraceViews, subcircuitSimulation);
   }
 
   protected Set<TraceView> recreateTraceViews(Set<Line> lines,
                                               Set<TraceView> touchingTraceViews,
-                                              SubcircuitSimulation circuit)
+                                              SubcircuitSimulation subcircuitSimulation)
   {
     for (TraceView traceView : touchingTraceViews)
     {
@@ -666,13 +666,13 @@ public class SubcircuitView
     removeTraceViews(touchingTraceViews);
     Set<TraceView> traceViews = generateNewTraces(lines);
 
-    Set<ConnectionView> updatedConnectionViews = connectCreatedTraceViews(traceViews, circuit);
-    fireConnectionEvents(updatedConnectionViews, circuit);
+    Set<ConnectionView> updatedConnectionViews = connectCreatedTraceViews(traceViews, subcircuitSimulation);
+    fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
     return traceViews;
   }
 
   public void deleteTraceViews(Set<TraceView> inputTraceViews,
-                               SubcircuitSimulation circuit)
+                               SubcircuitSimulation subcircuitSimulation)
   {
     TraceFinder traceFinder = new TraceFinder();
     for (TraceView traceView : inputTraceViews)
@@ -694,23 +694,23 @@ public class SubcircuitView
     Set<Line> lines = new LinkedHashSet<>();
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    recreateTraceViews(lines, touchingTraceViews, circuit);
+    recreateTraceViews(lines, touchingTraceViews, subcircuitSimulation);
 
-    findAndConnectNonTraceViewsForDeletion(circuit, nonTraceConnectionViews);
+    findAndConnectNonTraceViewsForDeletion(subcircuitSimulation, nonTraceConnectionViews);
   }
 
-  protected void findAndConnectNonTraceViewsForDeletion(SubcircuitSimulation circuit,
+  protected void findAndConnectNonTraceViewsForDeletion(SubcircuitSimulation subcircuitSimulation,
                                                         Set<ConnectionView> nonTraceConnectionViews)
   {
-    if (circuit != null)
+    if (subcircuitSimulation != null)
     {
       Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
       for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
       {
-        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuit, nonTraceConnectionView);
+        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, nonTraceConnectionView);
         updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
       }
-      fireConnectionEvents(updatedConnectionViews, circuit);
+      fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
     }
   }
 
@@ -769,7 +769,7 @@ public class SubcircuitView
   }
 
   public Set<ConnectionView> connectCreatedTraceViews(Set<TraceView> traceViews,
-                                                      SubcircuitSimulation circuit)
+                                                      SubcircuitSimulation subcircuitSimulation)
   {
     Set<ConnectionView> connectionViews = new HashSet<>();
     Set<ConnectionView> updatedConnectionViews;
@@ -783,7 +783,7 @@ public class SubcircuitView
       connectionViews.add(traceView.getStartConnection());
       i++;
     }
-    updatedConnectionViews = createTracesForConnectionViews(connectionViews, circuit);
+    updatedConnectionViews = createTracesForConnectionViews(connectionViews, subcircuitSimulation);
     return updatedConnectionViews;
   }
 
@@ -816,7 +816,7 @@ public class SubcircuitView
 
   public void startMoveComponents(List<StaticView<?>> staticViews,
                                   List<TraceView> traceViews,
-                                  SubcircuitSimulation circuit)
+                                  SubcircuitSimulation subcircuitSimulation)
   {
     List<TraceView> connectedTraceViews = findImmediateConnectedTraceViews(staticViews);
 
@@ -827,8 +827,8 @@ public class SubcircuitView
     for (StaticView<?> staticView : staticViews)
     {
       staticView.disable();
-      connectionViews.addAll(disconnectStaticView(staticView, circuit));
-      staticView.destroyComponent(circuit);
+      connectionViews.addAll(disconnectStaticView(staticView, subcircuitSimulation));
+      staticView.destroyComponent(subcircuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
@@ -837,12 +837,12 @@ public class SubcircuitView
       disconnectTraceView(traceView);
     }
 
-    createTracesForConnectionViews(connectionViews, circuit);
+    createTracesForConnectionViews(connectionViews, subcircuitSimulation);
 
-    recreateTraceViews(new HashSet<>(), allConnectedTraceViews, circuit);
+    recreateTraceViews(new HashSet<>(), allConnectedTraceViews, subcircuitSimulation);
   }
 
-  public List<View> doneMoveComponents(SubcircuitSimulation circuit,
+  public List<View> doneMoveComponents(SubcircuitSimulation subcircuitSimulation,
                                        List<StaticView<?>> staticViews,
                                        List<TraceView> traceViews,
                                        Set<StaticView<?>> selectedViews)
@@ -872,19 +872,19 @@ public class SubcircuitView
 
     enableStaticViews(staticViews);
 
-    createComponents(staticViews, circuit);
+    createComponents(staticViews, subcircuitSimulation);
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(createdConnectionViews, circuit);
-    simulationStarted(staticViews, circuit);
+    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(createdConnectionViews, subcircuitSimulation);
+    simulationStarted(staticViews, subcircuitSimulation);
 
-    Set<TraceView> existingTraces = createTraceViews(existingLines, circuit);
-    Set<ConnectionView> updatedCreatedTraceConnectionViews = connectCreatedTraceViews(existingTraces, circuit);
+    Set<TraceView> existingTraces = createTraceViews(existingLines, subcircuitSimulation);
+    Set<ConnectionView> updatedCreatedTraceConnectionViews = connectCreatedTraceViews(existingTraces, subcircuitSimulation);
     updatedConnectionViews.addAll(updatedCreatedTraceConnectionViews);
 
-    Set<TraceView> newTraces = createTraceViews(newLines, circuit);
-    updatedConnectionViews.addAll(connectCreatedTraceViews(newTraces, circuit));
+    Set<TraceView> newTraces = createTraceViews(newLines, subcircuitSimulation);
+    updatedConnectionViews.addAll(connectCreatedTraceViews(newTraces, subcircuitSimulation));
 
-    fireConnectionEvents(updatedConnectionViews, circuit);
+    fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
 
     return calculateNewSelection(staticViews, selectedViews, newTraces);
   }
@@ -1114,32 +1114,32 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyCircuitSimulation(SubcircuitSimulation circuit)
+  public void destroyCircuitSimulation(SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.destroyComponent(circuit);
+      staticView.destroyComponent(subcircuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.destroyComponent(circuit);
+      traceView.destroyComponent(subcircuitSimulation);
     }
   }
 
-  public void createCircuitSimulation(SubcircuitSimulation circuit)
+  public void createCircuitSimulation(SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
-    createComponents(staticViews, circuit);
+    createComponents(staticViews, subcircuitSimulation);
 
-    simulationStarted(staticViews, circuit);
+    simulationStarted(staticViews, subcircuitSimulation);
 
     List<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews, circuit);
+    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews, subcircuitSimulation);
 
-    fireConnectionEvents(updatedConnectionViews, circuit);
+    fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
   }
 }
 

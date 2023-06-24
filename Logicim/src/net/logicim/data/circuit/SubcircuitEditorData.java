@@ -5,9 +5,9 @@ import net.logicim.data.common.ReflectiveData;
 public class SubcircuitEditorData
     extends ReflectiveData
 {
+  public long id;
   public SubcircuitData subcircuit;
   public String typeName;
-  public long id;
 
   public SubcircuitEditorData()
   {

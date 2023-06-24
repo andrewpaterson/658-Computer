@@ -56,7 +56,7 @@ public abstract class StaticData<T extends StaticView<?>>
   public abstract T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
 
   public abstract void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                                 SubcircuitSimulation circuit,
+                                                 SubcircuitSimulation subcircuitSimulation,
                                                  CircuitLoaders circuitLoaders,
                                                  T componentView);
 }

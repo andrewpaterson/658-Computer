@@ -17,13 +17,12 @@ public class StartEditInPort
     extends StatefulEdit
 {
   protected KeyboardButtons keyboardButtons;
-  protected SubcircuitSimulation circuit;
+  protected SubcircuitSimulation subcircuitSimulation;
 
-  public StartEditInPort(KeyboardButtons keyboardButtons,
-                         SubcircuitSimulation circuit)
+  public StartEditInPort(KeyboardButtons keyboardButtons, SubcircuitSimulation subcircuitSimulation)
   {
     this.keyboardButtons = keyboardButtons;
-    this.circuit = circuit;
+    this.subcircuitSimulation = subcircuitSimulation;
   }
 
   @Override
@@ -34,7 +33,7 @@ public class StartEditInPort
   @Override
   public StatefulEdit move(float x, float y, EditAction editAction)
   {
-    return new WirePull(circuit);
+    return new WirePull(subcircuitSimulation);
   }
 
   @Override

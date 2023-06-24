@@ -77,9 +77,9 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
     if ((arcViewRight != null) && (arcViewLeft != null) && (arcViewBottom != null))
     {
       Stroke stroke = graphics.getStroke();
@@ -93,7 +93,7 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
       arcViewRight.paint(graphics, viewport);
       arcViewBottom.paint(graphics, viewport);
       arcViewSecondBottom.paint(graphics, viewport);
-      paintPorts(graphics, viewport, circuit);
+      paintPorts(graphics, viewport, subcircuitSimulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

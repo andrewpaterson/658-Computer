@@ -48,31 +48,31 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     simulationIntegratedCircuits = new LinkedHashMap<>();
   }
 
-  public IC createComponent(SubcircuitSimulation circuit)
+  public IC createComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    validateCanCreateComponent(circuit);
+    validateCanCreateComponent(subcircuitSimulation);
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
-    IC integratedCircuit = createIntegratedCircuit(circuit, familyVoltageConfiguration);
-    simulationIntegratedCircuits.put(circuit, integratedCircuit);
+    IC integratedCircuit = createIntegratedCircuit(subcircuitSimulation, familyVoltageConfiguration);
+    simulationIntegratedCircuits.put(subcircuitSimulation, integratedCircuit);
 
-    createPowerPortsIfNecessary(circuit, familyVoltageConfiguration);
+    createPowerPortsIfNecessary(subcircuitSimulation, familyVoltageConfiguration);
 
-    postCreateComponent(circuit, integratedCircuit);
+    postCreateComponent(subcircuitSimulation, integratedCircuit);
     return integratedCircuit;
   }
 
-  protected void removeComponent(SubcircuitSimulation circuit)
+  protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationIntegratedCircuits.remove(circuit);
+    simulationIntegratedCircuits.remove(subcircuitSimulation);
   }
 
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation circuit)
+                    SubcircuitSimulation subcircuitSimulation)
   {
-    super.paint(graphics, viewport, circuit);
+    super.paint(graphics, viewport, subcircuitSimulation);
   }
 
   @Override
@@ -80,33 +80,33 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   {
     createPortViews();
     super.finaliseView();
-    subcircuitView.addIntegratedCircuitView(this);
+    containingSubcircuitView.addIntegratedCircuitView(this);
   }
 
-  protected void createPowerPortsIfNecessary(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected void createPowerPortsIfNecessary(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
-      createPowerPorts(circuit, familyVoltageConfiguration);
+      createPowerPorts(subcircuitSimulation, familyVoltageConfiguration);
     }
   }
 
-  protected void createPowerPorts(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected void createPowerPorts(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
     VoltageConfiguration voltageConfiguration = familyVoltageConfiguration.getDefaultVoltageConfiguration(DefaultLogicLevels.get());
-    IC integratedCircuit = getComponent(circuit);
+    IC integratedCircuit = getComponent(subcircuitSimulation);
     if (integratedCircuit != null)
     {
       Trace vccTrace = new Trace();
       integratedCircuit.getPins().getVoltageCommon().connect(vccTrace);
 
-      PowerSource vccPowerSource = new PowerSource(circuit.getCircuit(), "", voltageConfiguration.getVcc());
+      PowerSource vccPowerSource = new PowerSource(subcircuitSimulation.getCircuit(), "", voltageConfiguration.getVcc());
       vccPowerSource.getPowerOutPort().connect(vccTrace);
 
       Trace gndTrace = new Trace();
       integratedCircuit.getPins().getVoltageGround().connect(gndTrace);
 
-      PowerSource gndPowerSource = new PowerSource(circuit.getCircuit(), "", 0);
+      PowerSource gndPowerSource = new PowerSource(subcircuitSimulation.getCircuit(), "", 0);
       gndPowerSource.getPowerOutPort().connect(gndTrace);
     }
   }
@@ -117,7 +117,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     for (Map.Entry<SubcircuitSimulation, IC> entry : simulationIntegratedCircuits.entrySet())
     {
       IC integratedCircuit = entry.getValue();
-      SubcircuitSimulation circuit = entry.getKey();
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
       LinkedList<IntegratedCircuitEvent> integratedCircuitEvents = integratedCircuit.getEvents();
       List<IntegratedCircuitEventData<?>> eventDatas = new ArrayList<>(integratedCircuitEvents.size());
       for (IntegratedCircuitEvent event : integratedCircuitEvents)
@@ -125,7 +125,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
         IntegratedCircuitEventData<?> integratedCircuitEventData = event.save();
         eventDatas.add(integratedCircuitEventData);
       }
-      simulationEventData.add(circuit.getId(), new MultiIntegratedCircuitEventData(eventDatas));
+      simulationEventData.add(subcircuitSimulation.getId(), new MultiIntegratedCircuitEventData(eventDatas));
     }
     return simulationEventData;
   }
@@ -148,17 +148,17 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     for (Map.Entry<SubcircuitSimulation, IC> entry : simulationIntegratedCircuits.entrySet())
     {
       IC integratedCircuit = entry.getValue();
-      SubcircuitSimulation circuitSimulation = entry.getKey();
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
       STATE state = saveState(integratedCircuit);
-      simulationState.add(circuitSimulation.getId(), state);
+      simulationState.add(subcircuitSimulation.getId(), state);
     }
     return simulationState;
   }
 
   @Override
-  public IC getComponent(SubcircuitSimulation circuitSimulation)
+  public IC getComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    return simulationIntegratedCircuits.get(circuitSimulation);
+    return simulationIntegratedCircuits.get(subcircuitSimulation);
   }
 
   @Override
@@ -182,7 +182,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return portNames;
   }
 
-  protected abstract IC createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration);
+  protected abstract IC createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration);
 
   public abstract IntegratedCircuitData<?, ?> save(boolean selected);
 

@@ -36,9 +36,9 @@ public class AndGateView
   }
 
   @Override
-  protected AndGate createIntegratedCircuit(SubcircuitSimulation circuit, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected AndGate createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new AndGate(circuit.getCircuit(),
+    return new AndGate(subcircuitSimulation.getCircuit(),
                        properties.name,
                        new AndGatePins(properties.inputWidth * properties.inputCount,
                                        familyVoltageConfiguration));

@@ -37,7 +37,7 @@ public abstract class View
 
   public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
 
-  public abstract void paint(Graphics2D graphics, Viewport viewport, SubcircuitSimulation circuit);
+  public abstract void paint(Graphics2D graphics, Viewport viewport, SubcircuitSimulation subcircuitSimulation);
 
   public abstract String getName();
 

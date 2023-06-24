@@ -65,17 +65,17 @@ public class TraceData
     return traceView;
   }
 
-  public void createAndConnectComponent(SubcircuitSimulation circuit,
+  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         TraceView traceView)
   {
-    long[] traceIDs = simulationTraces.get(circuit.getId());
+    long[] traceIDs = simulationTraces.get(subcircuitSimulation.getId());
     if (traceIDs == null)
     {
-      throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", circuit.getDescription());
+      throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", subcircuitSimulation.getDescription());
     }
 
-    traceView.wireConnect(circuit,
+    traceView.wireConnect(subcircuitSimulation,
                           circuitLoaders.getTraceLoader(),
                           traceIDs
     );

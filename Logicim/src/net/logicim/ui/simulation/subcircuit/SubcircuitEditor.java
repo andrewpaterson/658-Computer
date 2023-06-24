@@ -422,5 +422,11 @@ public class SubcircuitEditor
   {
     simulations.put(subcircuitSimulation.getCircuitSimulation(), subcircuitSimulation);
   }
+
+  @Override
+  public String toString()
+  {
+    return subcircuitView.getTypeName();
+  }
 }
 

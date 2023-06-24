@@ -121,7 +121,6 @@ public class SubcircuitInstanceView
     for (PinViewOffset pinViewOffset : pinViewOffsets)
     {
       pinViews.add(new SubcircuitPinView(pinViewOffset.pinView,
-                                         containingSubcircuitView,
                                          this,
                                          new Int2D(pinViewOffset.pinOffset, offset),
                                          SANS_SERIF,
@@ -136,7 +135,6 @@ public class SubcircuitInstanceView
     for (PinViewOffset pinViewOffset : pinViewOffsets)
     {
       pinViews.add(new SubcircuitPinView(pinViewOffset.pinView,
-                                         containingSubcircuitView,
                                          this,
                                          new Int2D(offset, pinViewOffset.pinOffset),
                                          SANS_SERIF,

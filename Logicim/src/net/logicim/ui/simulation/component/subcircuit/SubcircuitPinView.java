@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.subcircuit;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
-import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -24,7 +23,6 @@ public class SubcircuitPinView
   protected PortView portView;
 
   protected PinView pinView;
-  protected SubcircuitView containingSubcircuitView;
   protected SubcircuitInstanceView subcircuitInstanceView;
 
   protected Int2D positionRelativeToIC;
@@ -35,7 +33,6 @@ public class SubcircuitPinView
   protected PolygonView clockView;
 
   public SubcircuitPinView(PinView pinView,
-                           SubcircuitView containingSubcircuitView,
                            SubcircuitInstanceView subcircuitInstanceView,
                            Int2D positionRelativeToIC,
                            String fontName,
@@ -44,7 +41,6 @@ public class SubcircuitPinView
                            int additionalRotations)
   {
     this.pinView = pinView;
-    this.containingSubcircuitView = containingSubcircuitView;
     this.subcircuitInstanceView = subcircuitInstanceView;
     this.portView = null;
     this.positionRelativeToIC = calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, 0.0f, -1.0f).cloneAsInt2D();

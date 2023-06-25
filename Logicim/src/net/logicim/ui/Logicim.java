@@ -14,10 +14,7 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceOrderer;
-import net.logicim.ui.circuit.CircuitInstanceViewParent;
-import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
-import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.*;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
@@ -824,18 +821,14 @@ public class Logicim
   public void recreateSimulation()
   {
     CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
-    SubcircuitTopSimulation topLevelSimulation = circuitEditor.getCurrentSubcircuitTopSimulation();
-    List<CircuitInstanceViewParent> viewParents = topLevelSimulation.getTopDownSubcircuitViews();
+    List<CircuitInstanceView> circuitInstanceViews = findCircuitInstanceViewsInInstanceCreationOrder();
 
-    CircuitInstanceOrderer orderer = new CircuitInstanceOrderer(viewParents);
-    List<CircuitInstanceViewParent> ordered = orderer.order();
-    Collections.reverse(ordered);
-    for (CircuitInstanceViewParent circuitInstanceViewParent : ordered)
+    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
     {
-      System.out.println(circuitInstanceViewParent.get());
+      System.out.println(circuitInstanceView.toString());
     }
 
-//    for (SubcircuitView subcircuitView : subcircuitViews)
+    //    for (SubcircuitView subcircuitView : subcircuitViews)
 //    {
 //      subcircuitView.destroyCircuitSimulation(circuit);
 //    }
@@ -846,6 +839,23 @@ public class Logicim
 //    {
 //      subcircuitView.createCircuitSimulation(circuit);
 //    }
+  }
+
+  protected List<CircuitInstanceView> findCircuitInstanceViewsInInstanceCreationOrder()
+  {
+    SubcircuitTopSimulation topLevelSimulation = circuitEditor.getCurrentSubcircuitTopSimulation();
+    List<CircuitInstanceViewParent> viewParents = topLevelSimulation.getTopDownSubcircuitViews();
+
+    CircuitInstanceOrderer orderer = new CircuitInstanceOrderer(viewParents);
+    List<CircuitInstanceViewParent> ordered = orderer.order();
+    List<CircuitInstanceView> circuitInstanceViews = new ArrayList<>();
+    for (int i = ordered.size() - 1; i >= 0; i--)
+    {
+      CircuitInstanceViewParent circuitInstanceViewParent = ordered.get(i);
+      CircuitInstanceView view = circuitInstanceViewParent.getView();
+      circuitInstanceViews.add(view);
+    }
+    return circuitInstanceViews;
   }
 
   public EditorData save()

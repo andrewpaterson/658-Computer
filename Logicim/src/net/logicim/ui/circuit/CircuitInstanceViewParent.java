@@ -3,19 +3,19 @@ package net.logicim.ui.circuit;
 public class CircuitInstanceViewParent
 {
   protected CircuitInstanceViewParent parent;
-  protected CircuitInstanceView circuitInstanceView;
+  protected CircuitInstanceView view;
   protected String id;
 
-  public CircuitInstanceViewParent(CircuitInstanceViewParent parent, CircuitInstanceView circuitInstanceView, long id)
+  public CircuitInstanceViewParent(CircuitInstanceViewParent parent, CircuitInstanceView view, long id)
   {
     this.parent = parent;
-    this.circuitInstanceView = circuitInstanceView;
+    this.view = view;
     this.id = Long.toHexString(id);
   }
 
   public SubcircuitView getCircuitSubcircuitView()
   {
-    return circuitInstanceView.getCircuitSubcircuitView();
+    return view.getCircuitSubcircuitView();
   }
 
   public String getId()
@@ -28,9 +28,9 @@ public class CircuitInstanceViewParent
     return parent;
   }
 
-  public String get()
+  public CircuitInstanceView getView()
   {
-    return circuitInstanceView.toString();
+    return view;
   }
 }
 

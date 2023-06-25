@@ -12,6 +12,7 @@ import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
@@ -1114,17 +1115,17 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyCircuitSimulation(SubcircuitSimulation subcircuitSimulation)
+  public void destroyCircuitSimulation(CircuitSimulation circuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.destroyComponent(subcircuitSimulation);
+      staticView.destroyComponent(circuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.destroyComponent(subcircuitSimulation);
+      traceView.destroyComponent(circuitSimulation);
     }
   }
 

@@ -4,6 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -62,6 +63,11 @@ public class LabelView
   public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     return null;
+  }
+
+  @Override
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
   }
 
   @Override

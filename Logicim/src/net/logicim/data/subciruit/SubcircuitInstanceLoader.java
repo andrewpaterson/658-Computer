@@ -1,6 +1,5 @@
 package net.logicim.data.subciruit;
 
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 
 import java.util.HashMap;
@@ -19,19 +18,6 @@ public class SubcircuitInstanceLoader
   public SubcircuitInstance get(long subcircuitInstanceId)
   {
     return subcircuitInstancesById.get(subcircuitInstanceId);
-  }
-
-  public SubcircuitInstance create(Circuit circuit,
-                                   String name,
-                                   String subcircuitTypeName,
-                                   String comment,
-                                   long id)
-  {
-    return new SubcircuitInstance(circuit,
-                                  name,
-                                  subcircuitTypeName,
-                                  comment,
-                                  id);
   }
 }
 

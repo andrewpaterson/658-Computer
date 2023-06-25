@@ -6,6 +6,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
 
 import javax.swing.*;
@@ -44,11 +45,13 @@ public class ShowSimulationsDialog
     JTree tree = new JTree(rootNode);
     tree.setRootVisible(true);
 
-    for (SubcircuitTopSimulation subcircuitSimulation : editor.getSubcircuitTopSimulations())
+    for (SubcircuitTopEditorSimulation subcircuitTopEditorSimulation : editor.getSubcircuitTopSimulations())
     {
-      DefaultMutableTreeNode simulationNode = new DefaultMutableTreeNode(subcircuitSimulation.getDescription());
+      SubcircuitEditor subcircuitEditor = subcircuitTopEditorSimulation.getSubcircuitEditor();
+      SubcircuitTopSimulation subcircuitTopSimulation = subcircuitTopEditorSimulation.getSubcircuitTopSimulation();
+      DefaultMutableTreeNode simulationNode = new DefaultMutableTreeNode(subcircuitTopSimulation.getDescription());
       rootNode.add(simulationNode);
-      SubcircuitEditor subcircuitEditor = subcircuitSimulation.getSubcircuitEditor();
+
       DefaultMutableTreeNode circuitNode = new DefaultMutableTreeNode(subcircuitEditor.getTypeName());
       simulationNode.add(circuitNode);
 

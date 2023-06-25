@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.MultiIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.simulation.SimulationStateData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
@@ -62,6 +63,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return integratedCircuit;
   }
 
+  protected void removeComponent(CircuitSimulation circuitSimulation)
+  {
+    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationIntegratedCircuits.keySet()));
+  }
+
+  @Override
   protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
     simulationIntegratedCircuits.remove(subcircuitSimulation);

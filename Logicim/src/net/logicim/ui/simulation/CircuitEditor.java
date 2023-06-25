@@ -31,6 +31,7 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
 
 import java.awt.*;
@@ -90,12 +91,12 @@ public class CircuitEditor
 
   public SubcircuitTopSimulation getCurrentSubcircuitTopSimulation()
   {
-    List<SubcircuitTopSimulation> subcircuitTopSimulations = getSubcircuitTopSimulations();
-    for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
+    List<SubcircuitTopEditorSimulation> subcircuitTopEditorSimulations = getSubcircuitTopSimulations();
+    for (SubcircuitTopEditorSimulation subcircuitTopEditorSimulation : subcircuitTopEditorSimulations)
     {
-      if (subcircuitTopSimulation.getCircuitSimulation() == currentCircuitSimulation)
+      if (subcircuitTopEditorSimulation.getCircuitSimulation() == currentCircuitSimulation)
       {
-        return subcircuitTopSimulation;
+        return subcircuitTopEditorSimulation.getSubcircuitTopSimulation();
       }
     }
     return null;
@@ -640,7 +641,7 @@ public class CircuitEditor
       throw new SimulatorException(error);
     }
 
-    SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
+    SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName, new CircuitSimulation());
     subcircuitEditors.add(subcircuitEditor);
 
     currentSubcircuitEditor = subcircuitEditor;
@@ -729,20 +730,9 @@ public class CircuitEditor
     return instanceViews;
   }
 
-  public List<CircuitSimulation> getCircuitSimulations()
+  public List<SubcircuitTopEditorSimulation> getSubcircuitTopSimulations()
   {
-    ArrayList<CircuitSimulation> result = new ArrayList<>();
-    List<SubcircuitTopSimulation> subcircuitTopSimulations = getSubcircuitTopSimulations();
-    for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
-    {
-      result.add(subcircuitTopSimulation.getCircuitSimulation());
-    }
-    return result;
-  }
-
-  public List<SubcircuitTopSimulation> getSubcircuitTopSimulations()
-  {
-    ArrayList<SubcircuitTopSimulation> result = new ArrayList<>();
+    ArrayList<SubcircuitTopEditorSimulation> result = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
       Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSimulations().values();
@@ -750,7 +740,7 @@ public class CircuitEditor
       {
         if (subcircuitSimulation instanceof SubcircuitTopSimulation)
         {
-          result.add((SubcircuitTopSimulation) subcircuitSimulation);
+          result.add(new SubcircuitTopEditorSimulation(subcircuitEditor, (SubcircuitTopSimulation) subcircuitSimulation));
         }
       }
     }

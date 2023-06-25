@@ -1,7 +1,8 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -149,6 +150,11 @@ public class WireViewComp
   public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
   {
     return simulationTraces.get(subcircuitSimulation);
+  }
+
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+    destroyComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationTraces.keySet()));
   }
 
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)

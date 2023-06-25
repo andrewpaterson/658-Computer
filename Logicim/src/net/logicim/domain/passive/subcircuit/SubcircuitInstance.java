@@ -20,16 +20,24 @@ public class SubcircuitInstance
   protected String subcircuitTypeName;
   protected String comment;
   protected long id;
+  protected SubcircuitInstanceSimulation subcircuitSimulation;
 
-  public SubcircuitInstance(Circuit circuit,
+  public SubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation,
                             String name,
                             String subcircuitTypeName,
                             String comment)
   {
-    this(circuit, name, subcircuitTypeName, comment, nextId++);
+    super(containingSubcircuitSimulation.getCircuit(), name);
+    this.namedPins = new LinkedHashMap<>();
+    this.subcircuitTypeName = subcircuitTypeName;
+    this.comment = comment;
+    this.subcircuitSimulation = new SubcircuitInstanceSimulation(containingSubcircuitSimulation.getCircuitSimulation(), null, this);
+
+    updateId(nextId++);
   }
 
   public SubcircuitInstance(Circuit circuit,
+                            SubcircuitInstanceSimulation subcircuitSimulation,
                             String name,
                             String subcircuitTypeName,
                             String comment,
@@ -39,7 +47,13 @@ public class SubcircuitInstance
     this.namedPins = new LinkedHashMap<>();
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;
+    this.subcircuitSimulation = subcircuitSimulation;
 
+    updateId(id);
+  }
+
+  protected void updateId(long id)
+  {
     this.id = id;
     if (id >= nextId)
     {
@@ -81,6 +95,11 @@ public class SubcircuitInstance
     {
       throw new SimulatorException("Cannot get ports for pin named [%s].", pinName);
     }
+  }
+
+  public SubcircuitInstanceSimulation getSubcircuitSimulation()
+  {
+    return subcircuitSimulation;
   }
 
   public long getId()

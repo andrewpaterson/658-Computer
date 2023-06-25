@@ -7,13 +7,14 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -454,9 +455,19 @@ public class PortView
     }
   }
 
+  public void removePorts(CircuitSimulation circuitSimulation)
+  {
+    removePorts(getSubcircuitSimulation(circuitSimulation));
+  }
+
   public void removePorts(SubcircuitSimulation subcircuitSimulation)
   {
     simulationPorts.remove(subcircuitSimulation);
+  }
+
+  private SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    return CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationPorts.keySet());
   }
 }
 

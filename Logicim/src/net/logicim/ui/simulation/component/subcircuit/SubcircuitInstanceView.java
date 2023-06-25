@@ -8,9 +8,10 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
@@ -196,10 +197,6 @@ public class SubcircuitInstanceView
   {
   }
 
-  protected void validateComponent(CircuitSimulation circuitSimulation)
-  {
-  }
-
   @Override
   public SubcircuitInstanceData save(boolean selected)
   {
@@ -220,7 +217,7 @@ public class SubcircuitInstanceView
   @Override
   protected SubcircuitInstance createPassive(SubcircuitSimulation subcircuitSimulation)
   {
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation.getCircuit(),
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation,
                                                                    properties.name,
                                                                    properties.subcircuitTypeName,
                                                                    properties.comment);
@@ -237,8 +234,6 @@ public class SubcircuitInstanceView
 
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
-
-    //List<View> allViews = instanceSubcircuitView.getAllViews();
 
     return subcircuitInstance;
   }
@@ -405,6 +400,12 @@ public class SubcircuitInstanceView
   public SubcircuitView getCircuitSubcircuitView()
   {
     return instanceSubcircuitView;
+  }
+
+  @Override
+  public void destroyCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    instanceSubcircuitView.destroyCircuitSimulation(circuitSimulation);
   }
 }
 

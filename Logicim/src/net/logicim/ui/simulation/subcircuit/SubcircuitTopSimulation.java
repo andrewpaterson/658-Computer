@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.subcircuit;
 import net.logicim.common.util.Counter;
 import net.logicim.data.simulation.SubcircuitTopSimulationData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewParent;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -71,15 +70,5 @@ public class SubcircuitTopSimulation
     }
   }
 
-  @Override
-  public SubcircuitInstance getSubcircuitInstance()
-  {
-    return null;
-  }
-
-  public void reset()
-  {
-
-  }
 }
 

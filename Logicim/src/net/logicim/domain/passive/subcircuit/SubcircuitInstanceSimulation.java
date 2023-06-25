@@ -35,10 +35,5 @@ public class SubcircuitInstanceSimulation
                                                 subcircuitInstance.getId());
   }
 
-  @Override
-  public SubcircuitInstance getSubcircuitInstance()
-  {
-    return subcircuitInstance;
-  }
 }
 

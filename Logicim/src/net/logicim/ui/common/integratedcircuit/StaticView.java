@@ -5,6 +5,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -278,6 +279,8 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract String getType();
 
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
+
+  public abstract void destroyComponent(CircuitSimulation circuitSimulation);
 
   public abstract void destroyComponent(SubcircuitSimulation subcircuitSimulation);
 

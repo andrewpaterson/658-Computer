@@ -35,13 +35,12 @@ public class SubcircuitEditor
   protected Map<CircuitSimulation, SubcircuitSimulation> simulations;
   protected long id;
 
-  public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
+  public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, CircuitSimulation circuitSimulation)
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
     this.simulations = new LinkedHashMap<>();
-    CircuitSimulation circuitSimulation = new CircuitSimulation();
-    this.simulations.put(circuitSimulation, new SubcircuitTopSimulation(circuitSimulation, this));
+    this.simulations.put(circuitSimulation, createSubcircuitSimulation(circuitSimulation));
 
     id = nextId;
     nextId++;
@@ -227,6 +226,18 @@ public class SubcircuitEditor
   public SubcircuitView getCircuitSubcircuitView()
   {
     return subcircuitView;
+  }
+
+  public SubcircuitTopSimulation createSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    return new SubcircuitTopSimulation(circuitSimulation, this);
+  }
+
+  @Override
+  public void destroyCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    subcircuitView.destroyCircuitSimulation(circuitSimulation);
+    simulations.remove(circuitSimulation);
   }
 
   public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)

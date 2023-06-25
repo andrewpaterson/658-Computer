@@ -3,6 +3,7 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -40,6 +41,12 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
     postCreateComponent(subcircuitSimulation, passive);
     return passive;
+  }
+
+  @Override
+  protected void removeComponent(CircuitSimulation circuitSimulation)
+  {
+    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationPassives.keySet()));
   }
 
   @Override

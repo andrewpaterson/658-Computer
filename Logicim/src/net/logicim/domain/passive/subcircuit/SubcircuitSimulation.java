@@ -87,13 +87,6 @@ public abstract class SubcircuitSimulation
     nextId = 1;
   }
 
-  public SubcircuitEditor getSubcircuitEditor()
-  {
-    return subcircuitEditor;
-  }
-
   public abstract SubcircuitSimulationData save();
-
-  public abstract SubcircuitInstance getSubcircuitInstance();
 }
 

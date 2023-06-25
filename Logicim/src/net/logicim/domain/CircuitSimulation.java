@@ -105,5 +105,11 @@ public class CircuitSimulation
   {
     nextId = 1;
   }
+
+  @Override
+  public String toString()
+  {
+    return getDescription();
+  }
 }
 

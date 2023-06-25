@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
+import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
@@ -23,6 +24,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.VoltageColour;
 import net.logicim.ui.common.defaults.DefaultLogicLevels;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
@@ -278,12 +280,15 @@ public class PinView
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
-    long time = subcircuitSimulation.getTime();
-    Pin passive = getComponent(subcircuitSimulation);
     TraceValue[] values = null;
-    if (passive != null)
+    if (subcircuitSimulation != null)
     {
-      values = port.getValue(subcircuitSimulation, familyVoltageConfiguration, passive.getVCC(time));
+      long time = subcircuitSimulation.getTime();
+      Pin passive = getComponent(subcircuitSimulation);
+      if (passive != null)
+      {
+        values = port.getValue(subcircuitSimulation, familyVoltageConfiguration, passive.getVCC(time));
+      }
     }
 
     dataView.setText(getStringValue(values));

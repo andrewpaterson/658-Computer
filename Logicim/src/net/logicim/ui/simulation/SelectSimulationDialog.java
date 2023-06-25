@@ -6,11 +6,12 @@ import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.property.FormPanel;
-import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.awt.GridBagConstraints.BOTH;
@@ -40,7 +41,8 @@ public class SelectSimulationDialog
     contentPane.add(formPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
     comboBox = new JComboBox<>();
-    List<CircuitSimulation> simulations = editor.getCircuitSimulations();
+    SubcircuitEditor currentSubcircuitEditor = editor.getCurrentSubcircuitEditor();
+    List<CircuitSimulation> simulations = new ArrayList<>(currentSubcircuitEditor.getSimulations().keySet());
     CircuitSimulation currentSimulation = editor.getCurrentCircuitSimulation();
     for (CircuitSimulation simulation : simulations)
     {

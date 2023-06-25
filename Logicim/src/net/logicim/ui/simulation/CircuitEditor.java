@@ -153,12 +153,20 @@ public class CircuitEditor
 
   public void runSimultaneous()
   {
-    getSubcircuitSimulation().runSimultaneous();
+    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+    if (subcircuitSimulation != null)
+    {
+      subcircuitSimulation.runSimultaneous();
+    }
   }
 
   public void runToTime(long timeForward)
   {
-    getSubcircuitSimulation().runToTime(timeForward);
+    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+    if (subcircuitSimulation != null)
+    {
+      getSubcircuitSimulation().runToTime(timeForward);
+    }
   }
 
   public StaticView<?> getComponentViewInScreenSpace(Viewport viewport,

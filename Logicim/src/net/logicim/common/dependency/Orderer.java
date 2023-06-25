@@ -43,6 +43,11 @@ public class Orderer
 
   private static <T> boolean requirementsAreFulfilled(List<String> requirements, List<T> satisfied, Map<T, List<String>> holderFulfillments)
   {
+    if (requirements == null)
+    {
+      return true;
+    }
+
     List<String> fulfilled = new ArrayList<>();
 
     for (T relationHolder : satisfied)

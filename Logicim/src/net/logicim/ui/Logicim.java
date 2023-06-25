@@ -14,7 +14,8 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.CircuitInstanceOrderer;
+import net.logicim.ui.circuit.CircuitInstanceViewParent;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -364,7 +365,7 @@ public class Logicim
       }
 
       circuitEditor.getCurrentSelection().clearSelection();
-      SubcircuitView instanceSubcircuitView = subcircuitEditor.getSubcircuitView();
+      SubcircuitView instanceSubcircuitView = subcircuitEditor.getCircuitSubcircuitView();
       SubcircuitInstanceViewFactory viewFactory = (SubcircuitInstanceViewFactory) ViewFactoryStore.getInstance().get(SubcircuitInstanceView.class);
       viewFactory.setSubcircuitTypeName(instanceSubcircuitView.getTypeName());
       SubcircuitInstanceView subcircuitInstanceView = viewFactory.create(circuitEditor, toIntegerGridPosition(position.x, position.y), creationRotation);
@@ -824,11 +825,14 @@ public class Logicim
   {
     CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
     SubcircuitTopSimulation topLevelSimulation = circuitEditor.getCurrentSubcircuitTopSimulation();
-    List<CircuitInstanceViewPath> instanceViewPaths = topLevelSimulation.getTopDownSubcircuitViews();
+    List<CircuitInstanceViewParent> viewParents = topLevelSimulation.getTopDownSubcircuitViews();
 
-    for (CircuitInstanceViewPath instanceViewPath : instanceViewPaths)
+    CircuitInstanceOrderer orderer = new CircuitInstanceOrderer(viewParents);
+    List<CircuitInstanceViewParent> ordered = orderer.order();
+    Collections.reverse(ordered);
+    for (CircuitInstanceViewParent circuitInstanceViewParent : ordered)
     {
-      System.out.println(instanceViewPath.toString());
+      System.out.println(circuitInstanceViewParent.get());
     }
 
 //    for (SubcircuitView subcircuitView : subcircuitViews)
@@ -1172,7 +1176,7 @@ public class Logicim
 
     for (SubcircuitEditor subcircuitEditor : circuitEditor.getSubcircuitEditors())
     {
-      Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().findAllSubcircuitInstanceViews();
+      Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getCircuitSubcircuitView().findAllSubcircuitInstanceViews();
       for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
       {
         if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
@@ -1197,7 +1201,7 @@ public class Logicim
 
       for (SubcircuitEditor subcircuitEditor : circuitEditor.getSubcircuitEditors())
       {
-        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getSubcircuitView().findAllSubcircuitInstanceViews();
+        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getCircuitSubcircuitView().findAllSubcircuitInstanceViews();
         for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
         {
           if (subcircuitInstanceView.getTypeName().equals(oldSubcircuitTypeName))
@@ -1343,11 +1347,6 @@ public class Logicim
   public int getSimulationCount()
   {
     return circuitEditor.getCircuitSimulations().size();
-  }
-
-  public List<CircuitSimulation> getCircuitSimulations()
-  {
-    return circuitEditor.getCircuitSimulations();
   }
 
   public List<SubcircuitTopSimulation> getSubcircuitTopSimulations()

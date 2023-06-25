@@ -54,7 +54,7 @@ public class OrGateData
   @Override
   public OrGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new OrGateView(subcircuitEditor.getSubcircuitView(),
+    return new OrGateView(subcircuitEditor.getCircuitSubcircuitView(),
                           position,
                           rotation,
                           new LogicGateProperties(name,

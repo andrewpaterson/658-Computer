@@ -400,5 +400,11 @@ public class SubcircuitInstanceView
   {
     return instanceSubcircuitView;
   }
+
+  @Override
+  public SubcircuitView getCircuitSubcircuitView()
+  {
+    return instanceSubcircuitView;
+  }
 }
 

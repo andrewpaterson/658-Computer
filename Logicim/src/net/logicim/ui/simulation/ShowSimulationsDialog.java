@@ -52,7 +52,7 @@ public class ShowSimulationsDialog
       DefaultMutableTreeNode circuitNode = new DefaultMutableTreeNode(subcircuitEditor.getTypeName());
       simulationNode.add(circuitNode);
 
-      SubcircuitView subcircuitView = subcircuitEditor.getSubcircuitView();
+      SubcircuitView subcircuitView = subcircuitEditor.getCircuitSubcircuitView();
       recurseFindChildCircuits(circuitNode, subcircuitView);
     }
 

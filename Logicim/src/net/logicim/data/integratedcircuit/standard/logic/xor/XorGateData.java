@@ -54,7 +54,7 @@ public class XorGateData
   @Override
   public XorGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new XorGateView(subcircuitEditor.getSubcircuitView(),
+    return new XorGateView(subcircuitEditor.getCircuitSubcircuitView(),
                            position,
                            rotation,
                            new LogicGateProperties(name,

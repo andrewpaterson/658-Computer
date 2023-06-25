@@ -82,7 +82,7 @@ public class PinData
                                                  FamilyStore.getInstance().get(family),
                                                  explicitPowerPorts,
                                                  radix);
-    return new PinView(subcircuitEditor.getSubcircuitView(),
+    return new PinView(subcircuitEditor.getCircuitSubcircuitView(),
                        position,
                        rotation,
                        properties);

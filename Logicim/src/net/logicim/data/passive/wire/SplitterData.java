@@ -58,7 +58,7 @@ public class SplitterData
   @Override
   protected SplitterView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new SplitterView(subcircuitEditor.getSubcircuitView(),
+    return new SplitterView(subcircuitEditor.getCircuitSubcircuitView(),
                             position,
                             rotation,
                             new SplitterProperties(name,

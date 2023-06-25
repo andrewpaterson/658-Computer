@@ -56,7 +56,7 @@ public class InverterData
   @Override
   public InverterView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new InverterView(subcircuitEditor.getSubcircuitView(),
+    return new InverterView(subcircuitEditor.getCircuitSubcircuitView(),
                             position,
                             rotation,
                             new BufferProperties(name,

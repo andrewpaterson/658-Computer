@@ -555,7 +555,7 @@ public class CircuitEditor
 
   public SubcircuitView getCurrentSubcircuitView()
   {
-    return currentSubcircuitEditor.getSubcircuitView();
+    return currentSubcircuitEditor.getCircuitSubcircuitView();
   }
 
   public String gotoSubcircuit(SubcircuitEditor subcircuitEditor)
@@ -667,7 +667,7 @@ public class CircuitEditor
   public void circuitUpdated()
   {
     SubcircuitEditor currentSubcircuitEditor = getCurrentSubcircuitEditor();
-    SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getSubcircuitView();
+    SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getCircuitSubcircuitView();
 
     SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(getSubcircuitEditors());
     List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
@@ -689,7 +689,7 @@ public class CircuitEditor
         deleteComponentView(instanceView, containingSubcircuitEditor, subcircuitSimulation);
 
         instanceView = (SubcircuitInstanceView) instanceView.duplicate(this,
-                                                                       containingSubcircuitEditor.getSubcircuitView(),
+                                                                       containingSubcircuitEditor.getCircuitSubcircuitView(),
                                                                        instanceView.getProperties());
         containingSubcircuitEditor.recreateComponentView(instanceView, subcircuitSimulation);
       }
@@ -706,7 +706,7 @@ public class CircuitEditor
         if (containingSubcircuitEditor != currentSubcircuitEditor)
         {
           List<SubcircuitInstanceView> instanceViews = getSubcircuitInstanceView(currentSubcircuitView,
-                                                                                 containingSubcircuitEditor.getSubcircuitView());
+                                                                                 containingSubcircuitEditor.getCircuitSubcircuitView());
           map.put(containingSubcircuitEditor, instanceViews);
         }
       }

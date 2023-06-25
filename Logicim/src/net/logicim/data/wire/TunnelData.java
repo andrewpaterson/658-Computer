@@ -6,7 +6,6 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.CircuitLoaders;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
@@ -63,13 +62,13 @@ public class TunnelData
   public TunnelView createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     TunnelView componentView = createComponentView(subcircuitEditor);
-    componentView.getOrCreateConnectionViews(subcircuitEditor.getSubcircuitView());
+    componentView.getOrCreateConnectionViews(subcircuitEditor.getCircuitSubcircuitView());
     return componentView;
   }
 
   public TunnelView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new TunnelView(subcircuitEditor.getSubcircuitView(),
+    return new TunnelView(subcircuitEditor.getCircuitSubcircuitView(),
                           position,
                           rotation,
                           new TunnelProperties(name, doubleSided));

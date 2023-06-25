@@ -38,7 +38,7 @@ public class GroundData
 
   protected GroundView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new GroundView(subcircuitEditor.getSubcircuitView(),
+    return new GroundView(subcircuitEditor.getCircuitSubcircuitView(),
                           position,
                           rotation,
                           new GroundProperties(name));

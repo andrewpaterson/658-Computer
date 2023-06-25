@@ -53,7 +53,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
   public T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     T componentView = createComponentView(subcircuitEditor);
-    componentView.getOrCreateConnectionViews(subcircuitEditor.getSubcircuitView());
+    componentView.getOrCreateConnectionViews(subcircuitEditor.getCircuitSubcircuitView());
     return componentView;
   }
 

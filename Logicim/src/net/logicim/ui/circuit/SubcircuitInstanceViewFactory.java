@@ -60,7 +60,7 @@ public class SubcircuitInstanceViewFactory
   {
     SubcircuitEditor instanceSubcircuitEditor = circuitEditor.getSubcircuitEditor(properties.subcircuitTypeName);
     return new SubcircuitInstanceView(subcircuitView,
-                                      instanceSubcircuitEditor.getSubcircuitView(),
+                                      instanceSubcircuitEditor.getCircuitSubcircuitView(),
                                       position,
                                       rotation,
                                       properties);

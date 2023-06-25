@@ -224,7 +224,7 @@ public class SubcircuitEditor
     return false;
   }
 
-  public SubcircuitView getSubcircuitView()
+  public SubcircuitView getCircuitSubcircuitView()
   {
     return subcircuitView;
   }
@@ -428,5 +428,6 @@ public class SubcircuitEditor
   {
     return subcircuitView.getTypeName();
   }
+
 }
 

@@ -19,7 +19,7 @@ public class SubcircuitInstance
   protected Map<String, List<TracePort>> namedPins;
   protected String subcircuitTypeName;
   protected String comment;
-  protected long id;  //Doesn't seem to be required.
+  protected long id;
   protected SubcircuitInstanceSimulation subcircuitSimulation;
 
   public SubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation,

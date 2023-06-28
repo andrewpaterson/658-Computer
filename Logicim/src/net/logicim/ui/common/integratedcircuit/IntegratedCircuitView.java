@@ -35,12 +35,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 {
   protected Map<SubcircuitSimulation, IC> simulationIntegratedCircuits;
 
-  public IntegratedCircuitView(SubcircuitView subcircuitView,
+  public IntegratedCircuitView(SubcircuitView containingSubcircuitView,
                                Int2D position,
                                Rotation rotation,
                                PROPERTIES properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(containingSubcircuitView, position, rotation, properties);
     if (properties.family == null)
     {
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());

@@ -28,12 +28,12 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 {
   protected List<PortView> portViews;
 
-  public ComponentView(SubcircuitView subcircuitView,
+  public ComponentView(SubcircuitView containingSubcircuitView,
                        Int2D position,
                        Rotation rotation,
                        PROPERTIES properties)
   {
-    super(subcircuitView,
+    super(containingSubcircuitView,
           position,
           rotation,
           properties);
@@ -284,7 +284,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void validateCanCreateComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    if (subcircuitSimulation == null)
+     if (subcircuitSimulation == null)
     {
       throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
     }

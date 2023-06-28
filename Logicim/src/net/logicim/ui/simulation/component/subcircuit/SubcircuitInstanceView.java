@@ -45,13 +45,13 @@ public class SubcircuitInstanceView
   protected TextView name;
   protected TextView comment;
 
-  public SubcircuitInstanceView(SubcircuitView subcircuitView,
+  public SubcircuitInstanceView(SubcircuitView containingSubcircuitView,
                                 SubcircuitView instanceSubcircuitView,
                                 Int2D position,
                                 Rotation rotation,
                                 SubcircuitInstanceProperties properties)
   {
-    super(subcircuitView,
+    super(containingSubcircuitView,
           position,
           rotation,
           properties);
@@ -217,10 +217,14 @@ public class SubcircuitInstanceView
   @Override
   protected SubcircuitInstance createPassive(SubcircuitSimulation subcircuitSimulation)
   {
+    instanceSubcircuitView.createComponents(subcircuitSimulation);
+
+    SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(subcircuitSimulation.getCircuitSimulation(), null);
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation,
                                                                    properties.name,
                                                                    properties.subcircuitTypeName,
                                                                    properties.comment);
+    subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
     {
@@ -403,9 +407,9 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void destroyCircuitSimulation(CircuitSimulation circuitSimulation)
+  public void destroyComponents(CircuitSimulation circuitSimulation)
   {
-    instanceSubcircuitView.destroyCircuitSimulation(circuitSimulation);
+    instanceSubcircuitView.destroyComponents(circuitSimulation);
   }
 }
 

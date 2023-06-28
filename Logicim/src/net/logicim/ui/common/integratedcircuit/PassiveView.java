@@ -19,12 +19,12 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 {
   protected Map<SubcircuitSimulation, PASSIVE> simulationPassives;
 
-  public PassiveView(SubcircuitView subcircuitView,
+  public PassiveView(SubcircuitView containingSubcircuitView,
                      Int2D position,
                      Rotation rotation,
                      PROPERTIES properties)
   {
-    super(subcircuitView,
+    super(containingSubcircuitView,
           position,
           rotation,
           properties);

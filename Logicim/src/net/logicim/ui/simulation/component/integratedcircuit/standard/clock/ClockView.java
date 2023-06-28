@@ -27,12 +27,12 @@ public class ClockView
 {
   protected RectangleView rectangle;
 
-  public ClockView(SubcircuitView subcircuitView,
+  public ClockView(SubcircuitView containingSubcircuitView,
                    Int2D position,
                    Rotation rotation,
                    ClockProperties properties)
   {
-    super(subcircuitView,
+    super(containingSubcircuitView,
           position,
           rotation,
           properties);

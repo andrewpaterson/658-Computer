@@ -31,12 +31,12 @@ public class OscilloscopeView
   protected FrameView frameView;
   protected float outerWidth;
 
-  public OscilloscopeView(SubcircuitView subcircuitView,
+  public OscilloscopeView(SubcircuitView containingSubcircuitView,
                           Int2D position,
                           Rotation rotation,
                           OscilloscopeProperties properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(containingSubcircuitView, position, rotation, properties);
     createGraphics();
     finaliseView();
   }

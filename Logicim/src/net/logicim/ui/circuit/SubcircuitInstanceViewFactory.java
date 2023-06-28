@@ -53,13 +53,13 @@ public class SubcircuitInstanceViewFactory
 
   @Override
   public SubcircuitInstanceView create(CircuitEditor circuitEditor,
-                                       SubcircuitView subcircuitView,
+                                       SubcircuitView containingSubcircuitView,
                                        Int2D position,
                                        Rotation rotation,
                                        SubcircuitInstanceProperties properties)
   {
     SubcircuitEditor instanceSubcircuitEditor = circuitEditor.getSubcircuitEditor(properties.subcircuitTypeName);
-    return new SubcircuitInstanceView(subcircuitView,
+    return new SubcircuitInstanceView(containingSubcircuitView,
                                       instanceSubcircuitEditor.getCircuitSubcircuitView(),
                                       position,
                                       rotation,

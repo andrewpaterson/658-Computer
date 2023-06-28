@@ -13,12 +13,12 @@ import java.util.List;
 public abstract class BaseGateView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends StandardIntegratedCircuitProperties>
     extends StandardIntegratedCircuitView<IC, PROPERTIES>
 {
-  public BaseGateView(SubcircuitView subcircuitView,
+  public BaseGateView(SubcircuitView containingSubcircuitView,
                       Int2D position,
                       Rotation rotation,
                       PROPERTIES properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(containingSubcircuitView, position, rotation, properties);
   }
 
   protected static List<Integer> calculatePortOffsets(int inputCount)

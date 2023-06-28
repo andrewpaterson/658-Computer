@@ -8,10 +8,13 @@ public class SubcircuitTopSimulationData
   }
 
   public SubcircuitTopSimulationData(long subcircuitSimulationId,
-                                     long circuitSimulationId,
-                                     long subcircuitEditorId)
+                                     long subcircuitEditorId,
+                                     long circuitSimulationId)
   {
-    super(subcircuitSimulationId, subcircuitEditorId, circuitSimulationId);
+    super(subcircuitSimulationId,
+          subcircuitEditorId,
+          circuitSimulationId);
+    this.subcircuitEditorId = subcircuitEditorId;
   }
 }
 

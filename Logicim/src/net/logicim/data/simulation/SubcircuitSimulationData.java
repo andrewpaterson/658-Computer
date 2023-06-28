@@ -13,7 +13,9 @@ public abstract class SubcircuitSimulationData
   {
   }
 
-  public SubcircuitSimulationData(long subcircuitSimulationId, long subcircuitEditorId, long circuitSimulationId)
+  public SubcircuitSimulationData(long subcircuitSimulationId,
+                                  long subcircuitEditorId,
+                                  long circuitSimulationId)
   {
     this.subcircuitSimulationId = subcircuitSimulationId;
     this.subcircuitEditorId = subcircuitEditorId;

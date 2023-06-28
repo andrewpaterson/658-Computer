@@ -12,8 +12,7 @@ import net.logicim.ui.simulation.CircuitLoaders;
 
 public abstract class SubcircuitEditorLoadDataHelper
 {
-  public static void loadViewData(SubcircuitEditor subcircuitEditor,
-                                  View view,
+  public static void loadViewData(View view,
                                   ViewData data,
                                   SubcircuitSimulation subcircuitSimulation,
                                   CircuitLoaders circuitLoaders)
@@ -22,7 +21,7 @@ public abstract class SubcircuitEditorLoadDataHelper
     {
       StaticView staticView = (StaticView) view;
       StaticData staticData = (StaticData) data;
-      staticData.createAndConnectComponent(subcircuitEditor, subcircuitSimulation, circuitLoaders, staticView);
+      staticData.createAndConnectComponent(subcircuitSimulation, circuitLoaders, staticView);
     }
     else if (view instanceof TraceView)
     {

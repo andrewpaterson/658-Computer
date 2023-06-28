@@ -14,7 +14,9 @@ public class SubcircuitInstanceSimulationData
                                           long circuitSimulationId,
                                           long subcircuitInstanceId)
   {
-    super(subcircuitSimulationId, subcircuitEditorId, circuitSimulationId);
+    super(subcircuitSimulationId,
+          subcircuitEditorId,
+          circuitSimulationId);
     this.subcircuitInstanceId = subcircuitInstanceId;
   }
 }

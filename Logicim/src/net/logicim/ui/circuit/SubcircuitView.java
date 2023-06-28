@@ -1115,7 +1115,7 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyCircuitSimulation(CircuitSimulation circuitSimulation)
+  public void destroyComponents(CircuitSimulation circuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     for (StaticView<?> staticView : staticViews)
@@ -1129,7 +1129,7 @@ public class SubcircuitView
     }
   }
 
-  public void createCircuitSimulation(SubcircuitSimulation subcircuitSimulation)
+  public void createComponents(SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     createComponents(staticViews, subcircuitSimulation);

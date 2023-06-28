@@ -221,10 +221,8 @@ public class CircuitEditor
       Set<CircuitSimulation> circuitSimulations = getCircuitSimulationsForSave(orderedSubcircuitEditors);
       List<CircuitSimulationData> circuitSimulationDatas = saveCircuitSimulations(circuitSimulations);
 
-      Set<SubcircuitSimulation> subcircuitSimulations = getSubcircuitSimulationsForSave(orderedSubcircuitEditors);
-      List<SubcircuitSimulationData> subcircuitSimulationDatas = saveSubcircuitSimulations(subcircuitSimulations);
-
-      List<SubcircuitEditorData> subcircuitEditorDatas = saveSubcircuitEditor(orderedSubcircuitEditors);
+      List<SubcircuitSimulationData> subcircuitSimulationDatas = saveSubcircuitSimulations(orderedSubcircuitEditors);
+      List<SubcircuitEditorData> subcircuitEditorDatas = saveSubcircuitEditors(orderedSubcircuitEditors);
 
       return new CircuitData(subcircuitEditorDatas,
                              circuitSimulationDatas,
@@ -238,7 +236,7 @@ public class CircuitEditor
     }
   }
 
-  protected List<SubcircuitEditorData> saveSubcircuitEditor(List<SubcircuitEditor> orderedSubcircuitEditors)
+  protected List<SubcircuitEditorData> saveSubcircuitEditors(List<SubcircuitEditor> orderedSubcircuitEditors)
   {
     List<SubcircuitEditorData> subcircuitEditorDatas = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
@@ -247,17 +245,6 @@ public class CircuitEditor
       subcircuitEditorDatas.add(subcircuitEditorData);
     }
     return subcircuitEditorDatas;
-  }
-
-  protected List<SubcircuitSimulationData> saveSubcircuitSimulations(Set<SubcircuitSimulation> subcircuitSimulations)
-  {
-    List<SubcircuitSimulationData> subcircuitSimulationDatas = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
-    {
-      SubcircuitSimulationData subcircuitSimulationData = subcircuitSimulation.save();
-      subcircuitSimulationDatas.add(subcircuitSimulationData);
-    }
-    return subcircuitSimulationDatas;
   }
 
   protected List<CircuitSimulationData> saveCircuitSimulations(Set<CircuitSimulation> circuitSimulations)
@@ -285,18 +272,19 @@ public class CircuitEditor
     return circuitSimulations;
   }
 
-  protected Set<SubcircuitSimulation> getSubcircuitSimulationsForSave(List<SubcircuitEditor> orderedSubcircuitEditors)
+  protected List<SubcircuitSimulationData> saveSubcircuitSimulations(List<SubcircuitEditor> orderedSubcircuitEditors)
   {
-    Set<SubcircuitSimulation> subcircuitSimulations = new LinkedHashSet<>();
+    List<SubcircuitSimulationData> subcircuitSimulationDatas = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
     {
       Map<CircuitSimulation, SubcircuitSimulation> simulations = subcircuitEditor.getSimulations();
       for (SubcircuitSimulation subcircuitSimulation : simulations.values())
       {
-        subcircuitSimulations.add(subcircuitSimulation);
+        SubcircuitSimulationData subcircuitSimulationData = subcircuitSimulation.save(subcircuitEditor.getId());
+        subcircuitSimulationDatas.add(subcircuitSimulationData);
       }
     }
-    return subcircuitSimulations;
+    return subcircuitSimulationDatas;
   }
 
   protected long getCurrentSimulationId()
@@ -377,21 +365,21 @@ public class CircuitEditor
         throw new SimulatorException("Cannot find a circuit simulation with id [%s].", subcircuitSimulationData.circuitSimulationId);
       }
 
-      SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
-      if (subcircuitEditor == null)
-      {
-        throw new SimulatorException("Cannot find a subcircuit editor with id [%s].", subcircuitSimulationData.subcircuitEditorId);
-      }
-
       if (subcircuitSimulationData instanceof SubcircuitTopSimulationData)
       {
+        SubcircuitTopSimulationData subcircuitTopSimulationData = (SubcircuitTopSimulationData) subcircuitSimulationData;
+        SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitTopSimulationData.subcircuitEditorId);
+        if (subcircuitEditor == null)
+        {
+          throw new SimulatorException("Cannot find a subcircuit editor with id [%s].", subcircuitTopSimulationData.subcircuitEditorId);
+        }
         loaders.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
       }
       else if (subcircuitSimulationData instanceof SubcircuitInstanceSimulationData)
       {
         SubcircuitInstanceSimulationData subcircuitInstanceSimulationData = (SubcircuitInstanceSimulationData) subcircuitSimulationData;
         SubcircuitInstance subcircuitInstance = loaders.getSubcircuitInstance(subcircuitInstanceSimulationData.subcircuitInstanceId);
-        loaders.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId, subcircuitInstance);
+        loaders.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitSimulationData.subcircuitSimulationId, subcircuitInstance);
       }
       else
       {

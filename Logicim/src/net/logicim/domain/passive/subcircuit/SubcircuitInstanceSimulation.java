@@ -10,30 +10,32 @@ public class SubcircuitInstanceSimulation
   protected SubcircuitInstance subcircuitInstance;
 
   public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                      SubcircuitEditor subcircuitEditor,
                                       SubcircuitInstance subcircuitInstance)
   {
-    super(circuitSimulation, subcircuitEditor);
+    super(circuitSimulation);
     this.subcircuitInstance = subcircuitInstance;
   }
 
   public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                      SubcircuitEditor subcircuitEditor,
                                       long id,
                                       SubcircuitInstance subcircuitInstance)
   {
-    super(circuitSimulation, subcircuitEditor, id);
+    super(circuitSimulation, id);
     this.subcircuitInstance = subcircuitInstance;
   }
 
   @Override
-  public SubcircuitInstanceSimulationData save()
+  public SubcircuitInstanceSimulationData save(long subcircuitEditorId)
   {
     return new SubcircuitInstanceSimulationData(getId(),
-                                                subcircuitEditor.getId(),
+                                                subcircuitEditorId,
                                                 circuitSimulation.getId(),
                                                 subcircuitInstance.getId());
   }
 
+  public void setSubcircuitInstance(SubcircuitInstance subcircuitInstance)
+  {
+    this.subcircuitInstance = subcircuitInstance;
+  }
 }
 

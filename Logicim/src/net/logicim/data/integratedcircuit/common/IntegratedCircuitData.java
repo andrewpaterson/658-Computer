@@ -121,8 +121,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  public void createAndConnectComponent(SubcircuitEditor subcircuitEditor,
-                                        SubcircuitSimulation subcircuitSimulation,
+  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         ICV integratedCircuitView)
   {

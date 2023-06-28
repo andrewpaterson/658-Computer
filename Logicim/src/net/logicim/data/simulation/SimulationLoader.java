@@ -43,7 +43,6 @@ public class SimulationLoader
 
   public SubcircuitInstanceSimulation create(CircuitSimulation circuitSimulation,
                                              SubcircuitInstance subcircuitInstance,
-                                             SubcircuitEditor subcircuitEditor,
                                              long subcircuitSimulationId)
   {
     if (subcircuitSimulationId > 0)
@@ -51,7 +50,7 @@ public class SimulationLoader
       SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) subcircuitSimulationsById.get(subcircuitSimulationId);
       if (subcircuitSimulation == null)
       {
-        subcircuitSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationId, subcircuitInstance);
+        subcircuitSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitSimulationId, subcircuitInstance);
         //This needs to be put into the correct SubcircuitEditor.
         subcircuitSimulationsById.put(subcircuitSimulation.getId(), subcircuitSimulation);
       }
@@ -72,7 +71,7 @@ public class SimulationLoader
       SubcircuitTopSimulation subcircuitSimulation = (SubcircuitTopSimulation) subcircuitSimulationsById.get(subcircuitSimulationId);
       if (subcircuitSimulation == null)
       {
-        subcircuitSimulation = new SubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationId);
+        subcircuitSimulation = new SubcircuitTopSimulation(circuitSimulation, subcircuitSimulationId);
         subcircuitEditor.addSubcircuitSimulation(subcircuitSimulation);
         subcircuitSimulationsById.put(subcircuitSimulationId, subcircuitSimulation);
       }

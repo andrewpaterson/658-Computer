@@ -19,7 +19,7 @@ public class SubcircuitInstance
   protected Map<String, List<TracePort>> namedPins;
   protected String subcircuitTypeName;
   protected String comment;
-  protected long id;
+  protected long id;  //Doesn't seem to be required.
   protected SubcircuitInstanceSimulation subcircuitSimulation;
 
   public SubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation,
@@ -31,7 +31,7 @@ public class SubcircuitInstance
     this.namedPins = new LinkedHashMap<>();
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;
-    this.subcircuitSimulation = new SubcircuitInstanceSimulation(containingSubcircuitSimulation.getCircuitSimulation(), null, this);
+    this.subcircuitSimulation = new SubcircuitInstanceSimulation(containingSubcircuitSimulation.getCircuitSimulation(), this);
 
     updateId(nextId++);
   }

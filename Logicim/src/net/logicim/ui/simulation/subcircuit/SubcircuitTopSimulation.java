@@ -1,60 +1,28 @@
 package net.logicim.ui.simulation.subcircuit;
 
-import net.logicim.common.util.Counter;
 import net.logicim.data.simulation.SubcircuitTopSimulationData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewParent;
-import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class SubcircuitTopSimulation
     extends SubcircuitSimulation
 {
-  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation, SubcircuitEditor subcircuitEditor)
+  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation)
   {
-    super(circuitSimulation, subcircuitEditor);
+    super(circuitSimulation);
   }
 
-  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation, SubcircuitEditor subcircuitEditor, long id)
+  public SubcircuitTopSimulation(CircuitSimulation circuitSimulation, long id)
   {
-    super(circuitSimulation, subcircuitEditor, id);
+    super(circuitSimulation, id);
   }
 
   @Override
-  public SubcircuitTopSimulationData save()
+  public SubcircuitTopSimulationData save(long subcircuitEditorId)
   {
     return new SubcircuitTopSimulationData(getId(),
-                                           circuitSimulation.getId(),
-                                           subcircuitEditor.getId());
-  }
-
-
-  public List<CircuitInstanceViewParent> getTopDownSubcircuitViews()
-  {
-    List<CircuitInstanceViewParent> circuitInstanceViewParents = new ArrayList<>();
-
-    Counter counter = new Counter();
-    CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(null, subcircuitEditor, counter.tick());
-    circuitInstanceViewParents.add(instanceViewParent);
-    recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
-    return circuitInstanceViewParents;
-  }
-
-  protected void recurseFindSubCircuitViews(CircuitInstanceViewParent circuitInstanceViewParent, List<CircuitInstanceViewParent> circuitInstanceViewParents, Counter counter)
-  {
-    SubcircuitView subcircuitView = circuitInstanceViewParent.getCircuitSubcircuitView();
-    Set<SubcircuitInstanceView> instanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-    for (SubcircuitInstanceView instanceView : instanceViews)
-    {
-      CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(circuitInstanceViewParent, instanceView, counter.tick());
-      circuitInstanceViewParents.add(instanceViewParent);
-      recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
-    }
+                                           subcircuitEditorId,
+                                           circuitSimulation.getId());
   }
 
   @Override
@@ -69,6 +37,5 @@ public class SubcircuitTopSimulation
       return "";
     }
   }
-
 }
 

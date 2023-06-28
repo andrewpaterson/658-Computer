@@ -25,12 +25,12 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   protected LineView vccLine;
   protected LineView gndLine;
 
-  public StandardIntegratedCircuitView(SubcircuitView subcircuitView,
+  public StandardIntegratedCircuitView(SubcircuitView containingSubcircuitView,
                                        Int2D position,
                                        Rotation rotation,
                                        PROPERTIES properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(containingSubcircuitView, position, rotation, properties);
   }
 
   protected void createPortViews()

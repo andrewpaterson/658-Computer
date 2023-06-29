@@ -12,7 +12,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.VoltageColour;
+import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;

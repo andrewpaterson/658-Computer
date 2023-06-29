@@ -6,7 +6,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.VoltageColour;
+import net.logicim.domain.common.voltage.VoltageColour;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -12,6 +12,7 @@ import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
+import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

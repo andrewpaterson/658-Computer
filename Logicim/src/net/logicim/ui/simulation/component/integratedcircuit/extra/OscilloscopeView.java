@@ -21,7 +21,7 @@ import net.logicim.ui.shape.rectangle.RectangleView;
 import java.awt.*;
 
 import static net.logicim.domain.common.Units.GHz;
-import static net.logicim.ui.common.VoltageColour.clamp;
+import static net.logicim.domain.common.voltage.VoltageColour.clamp;
 import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
 
 public class OscilloscopeView

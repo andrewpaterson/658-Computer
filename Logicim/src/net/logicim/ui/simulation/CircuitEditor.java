@@ -18,6 +18,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
@@ -32,7 +33,6 @@ import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 import java.awt.*;
 import java.util.List;
@@ -263,11 +263,7 @@ public class CircuitEditor
     Set<CircuitSimulation> circuitSimulations = new LinkedHashSet<>();
     for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
     {
-      Map<CircuitSimulation, SubcircuitSimulation> simulations = subcircuitEditor.getSimulations();
-      for (SubcircuitSimulation subcircuitSimulation : simulations.values())
-      {
-        circuitSimulations.add(subcircuitSimulation.getCircuitSimulation());
-      }
+      circuitSimulations.addAll(subcircuitEditor.getSimulations().getCircuitSimulations());
     }
     return circuitSimulations;
   }
@@ -277,8 +273,7 @@ public class CircuitEditor
     List<SubcircuitSimulationData> subcircuitSimulationDatas = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
     {
-      Map<CircuitSimulation, SubcircuitSimulation> simulations = subcircuitEditor.getSimulations();
-      for (SubcircuitSimulation subcircuitSimulation : simulations.values())
+      for (SubcircuitSimulation subcircuitSimulation : subcircuitEditor.getSimulations().getSubcircuitSimulations())
       {
         SubcircuitSimulationData subcircuitSimulationData = subcircuitSimulation.save(subcircuitEditor.getId());
         subcircuitSimulationDatas.add(subcircuitSimulationData);
@@ -723,7 +718,7 @@ public class CircuitEditor
     ArrayList<SubcircuitTopEditorSimulation> result = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSimulations().values();
+      Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSimulations().getSubcircuitSimulations();
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
       {
         if (subcircuitSimulation instanceof SubcircuitTopSimulation)

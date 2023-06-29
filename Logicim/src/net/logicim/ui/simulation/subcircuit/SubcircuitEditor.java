@@ -11,6 +11,7 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.CircuitInstanceOrderer;
 import net.logicim.ui.circuit.CircuitInstanceView;
@@ -38,15 +39,15 @@ public class SubcircuitEditor
   protected Selection selection;
   protected SubcircuitView subcircuitView;
   protected CircuitEditor circuitEditor;
-  protected Map<CircuitSimulation, SubcircuitSimulation> simulations;
+  protected SubcircuitSimulations simulations;
   protected long id;
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, CircuitSimulation circuitSimulation)
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
-    this.simulations = new LinkedHashMap<>();
-    this.simulations.put(circuitSimulation, createSubcircuitSimulation(circuitSimulation));
+    this.simulations = new SubcircuitSimulations();
+    this.simulations.add(createSubcircuitSimulation(circuitSimulation));
 
     id = nextId;
     nextId++;
@@ -56,7 +57,7 @@ public class SubcircuitEditor
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
-    this.simulations = new LinkedHashMap<>();
+    this.simulations = new SubcircuitSimulations();
 
     this.id = id;
     if (id >= nextId)
@@ -365,9 +366,9 @@ public class SubcircuitEditor
       {
         SubcircuitEditorLoadDataHelper.loadViewData(
             entry.getValue(),
-                                                    data,
-                                                    subcircuitSimulation,
-                                                    circuitLoaders);
+            data,
+            subcircuitSimulation,
+            circuitLoaders);
       }
     }
   }
@@ -412,7 +413,7 @@ public class SubcircuitEditor
     return simulations.get(circuitSimulation);
   }
 
-  public Map<CircuitSimulation, SubcircuitSimulation> getSimulations()
+  public SubcircuitSimulations getSimulations()
   {
     return simulations;
   }
@@ -425,7 +426,7 @@ public class SubcircuitEditor
   public List<SubcircuitTopSimulation> getTopSimulations()
   {
     List<SubcircuitTopSimulation> list = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.values())
+    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
       if (subcircuitSimulation instanceof SubcircuitTopSimulation)
       {
@@ -437,7 +438,7 @@ public class SubcircuitEditor
 
   public void addSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
   {
-    simulations.put(subcircuitSimulation.getCircuitSimulation(), subcircuitSimulation);
+    simulations.add(subcircuitSimulation);
   }
 
   @Override
@@ -481,7 +482,7 @@ public class SubcircuitEditor
       CircuitInstanceView view = circuitInstanceViewParent.getView();
       circuitInstanceViews.add(view);
     }
-     return circuitInstanceViews;
+    return circuitInstanceViews;
   }
 
   public void validateOnlyThisSubcircuitEditor(List<CircuitInstanceView> circuitInstanceViews)

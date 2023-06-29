@@ -4,8 +4,8 @@ import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,7 +72,7 @@ public class SimulationLoader
       if (subcircuitSimulation == null)
       {
         subcircuitSimulation = new SubcircuitTopSimulation(circuitSimulation, subcircuitSimulationId);
-        subcircuitEditor.addSubcircuitSimulation(subcircuitSimulation);
+        subcircuitEditor.getCircuitSubcircuitView().addSubcircuitSimulation(subcircuitSimulation);
         subcircuitSimulationsById.put(subcircuitSimulationId, subcircuitSimulation);
       }
       return subcircuitSimulation;

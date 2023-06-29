@@ -39,15 +39,12 @@ public class SubcircuitEditor
   protected Selection selection;
   protected SubcircuitView subcircuitView;
   protected CircuitEditor circuitEditor;
-  protected SubcircuitSimulations simulations;
   protected long id;
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, CircuitSimulation circuitSimulation)
   {
-    this(circuitEditor, new SubcircuitView());
+    this(circuitEditor, new SubcircuitView(circuitSimulation));
     this.setTypeName(typeName);
-    this.simulations = new SubcircuitSimulations();
-    this.simulations.add(createSubcircuitSimulation(circuitSimulation));
 
     id = nextId;
     nextId++;
@@ -57,7 +54,6 @@ public class SubcircuitEditor
   {
     this(circuitEditor, new SubcircuitView());
     this.setTypeName(typeName);
-    this.simulations = new SubcircuitSimulations();
 
     this.id = id;
     if (id >= nextId)
@@ -235,16 +231,10 @@ public class SubcircuitEditor
     return subcircuitView;
   }
 
-  public SubcircuitTopSimulation createSubcircuitSimulation(CircuitSimulation circuitSimulation)
-  {
-    return new SubcircuitTopSimulation(circuitSimulation);
-  }
-
   @Override
   public void destroyComponents(CircuitSimulation circuitSimulation)
   {
     subcircuitView.destroyComponents(circuitSimulation);
-    simulations.remove(circuitSimulation);
   }
 
   public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)
@@ -408,37 +398,9 @@ public class SubcircuitEditor
     return subcircuitView.findAllViewsOfClass(viewClass);
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
-  {
-    return simulations.get(circuitSimulation);
-  }
-
-  public SubcircuitSimulations getSimulations()
-  {
-    return simulations;
-  }
-
   public static void resetNextId()
   {
     nextId = 1;
-  }
-
-  public List<SubcircuitTopSimulation> getTopSimulations()
-  {
-    List<SubcircuitTopSimulation> list = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
-    {
-      if (subcircuitSimulation instanceof SubcircuitTopSimulation)
-      {
-        list.add((SubcircuitTopSimulation) subcircuitSimulation);
-      }
-    }
-    return list;
-  }
-
-  public void addSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
-  {
-    simulations.add(subcircuitSimulation);
   }
 
   @Override
@@ -500,6 +462,26 @@ public class SubcircuitEditor
         topCount++;
       }
     }
+  }
+
+  public Collection<CircuitSimulation> getCircuitSimulations()
+  {
+    return subcircuitView.getSimulations().getCircuitSimulations();
+  }
+
+  public Collection<SubcircuitSimulation> getSubcircuitSimulations()
+  {
+    return subcircuitView.getSimulations().getSubcircuitSimulations();
+  }
+
+  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation subcircuitSimulation)
+  {
+    return subcircuitView.getSubcircuitSimulation(subcircuitSimulation);
+  }
+
+  public List<SubcircuitTopSimulation> getTopSimulations()
+  {
+    return subcircuitView.getTopSimulations();
   }
 }
 

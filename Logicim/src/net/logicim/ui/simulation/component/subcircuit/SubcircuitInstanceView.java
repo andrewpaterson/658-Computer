@@ -225,6 +225,8 @@ public class SubcircuitInstanceView
 
     instanceSubcircuitView.createComponents(subcircuitSimulation);
 
+    SubcircuitView circuitSubcircuitView = getCircuitSubcircuitView();
+
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(subcircuitSimulation.getCircuitSimulation(), null);
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation,
                                                                    properties.name,

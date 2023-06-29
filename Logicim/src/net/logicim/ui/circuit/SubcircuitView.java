@@ -17,7 +17,10 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -50,6 +53,8 @@ public class SubcircuitView
   protected Set<TunnelView> tunnelViews;
   protected Map<String, Set<TunnelView>> tunnelViewsMap;
 
+  protected SubcircuitSimulations simulations;
+
   protected ConnectionViewCache connectionViewCache;
 
   public SubcircuitView()
@@ -62,6 +67,14 @@ public class SubcircuitView
     this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
     this.connectionViewCache = new ConnectionViewCache();
+
+    this.simulations = new SubcircuitSimulations();
+  }
+
+  public SubcircuitView(CircuitSimulation circuitSimulation)
+  {
+    this();
+    this.simulations.add(createSubcircuitSimulation(circuitSimulation));
   }
 
   public List<View> getAllViews()
@@ -158,6 +171,10 @@ public class SubcircuitView
       {
         deletePassiveView((PassiveView<?, ?>) componentView, subcircuitSimulation);
       }
+      else if (componentView instanceof SubcircuitInstanceView)
+      {
+        deleteSubcircuitInstanceView((SubcircuitInstanceView) componentView, subcircuitSimulation);
+      }
       else if (componentView instanceof DecorativeView)
       {
         removeDecorativeView((DecorativeView<?>) componentView);
@@ -206,6 +223,17 @@ public class SubcircuitView
       subcircuitSimulation.getCircuit().remove(passive);
     }
     removePassiveView(passiveView);
+  }
+
+  protected void deleteSubcircuitInstanceView(SubcircuitInstanceView subcircuitInstanceView,
+                                              SubcircuitSimulation subcircuitSimulation)
+  {
+    if (subcircuitSimulation != null)
+    {
+      SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(subcircuitSimulation);
+      subcircuitSimulation.getCircuit().remove(subcircuitInstance);
+    }
+    removeSubcircuitInstanceView(subcircuitInstanceView);
   }
 
   public ConnectionView getOrAddConnectionView(Int2D position, View view)
@@ -453,7 +481,7 @@ public class SubcircuitView
   {
     synchronized (this)
     {
-      return passiveViews.remove(subcircuitInstanceView);
+      return subcircuitInstanceViews.remove(subcircuitInstanceView);
     }
   }
 
@@ -1159,6 +1187,8 @@ public class SubcircuitView
     {
       traceView.destroyComponent(circuitSimulation);
     }
+
+    simulations.remove(circuitSimulation);
   }
 
   public List<Component> createComponents(SubcircuitSimulation subcircuitSimulation)
@@ -1175,6 +1205,39 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
 
     return components;
+  }
+
+  public SubcircuitTopSimulation createSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    return new SubcircuitTopSimulation(circuitSimulation);
+  }
+
+  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    return simulations.get(circuitSimulation);
+  }
+
+  public SubcircuitSimulations getSimulations()
+  {
+    return simulations;
+  }
+
+  public List<SubcircuitTopSimulation> getTopSimulations()
+  {
+    List<SubcircuitTopSimulation> list = new ArrayList<>();
+    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+    {
+      if (subcircuitSimulation instanceof SubcircuitTopSimulation)
+      {
+        list.add((SubcircuitTopSimulation) subcircuitSimulation);
+      }
+    }
+    return list;
+  }
+
+  public void addSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
+  {
+    simulations.add(subcircuitSimulation);
   }
 }
 

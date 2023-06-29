@@ -843,8 +843,8 @@ public class Logicim
       if (circuitInstanceView instanceof SubcircuitEditor)
       {
         SubcircuitEditor subcircuitEditor = (SubcircuitEditor) circuitInstanceView;
-        SubcircuitTopSimulation newSubcircuitTopSimulation = subcircuitEditor.createSubcircuitSimulation(newCircuitSimulation);
         SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
+        SubcircuitTopSimulation newSubcircuitTopSimulation = subcircuitView.createSubcircuitSimulation(newCircuitSimulation);
         subcircuitView.createComponents(newSubcircuitTopSimulation);
         Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
         for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)

@@ -263,7 +263,7 @@ public class CircuitEditor
     Set<CircuitSimulation> circuitSimulations = new LinkedHashSet<>();
     for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
     {
-      circuitSimulations.addAll(subcircuitEditor.getSimulations().getCircuitSimulations());
+      circuitSimulations.addAll(subcircuitEditor.getCircuitSimulations());
     }
     return circuitSimulations;
   }
@@ -273,7 +273,7 @@ public class CircuitEditor
     List<SubcircuitSimulationData> subcircuitSimulationDatas = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : orderedSubcircuitEditors)
     {
-      for (SubcircuitSimulation subcircuitSimulation : subcircuitEditor.getSimulations().getSubcircuitSimulations())
+      for (SubcircuitSimulation subcircuitSimulation : subcircuitEditor.getSubcircuitSimulations())
       {
         SubcircuitSimulationData subcircuitSimulationData = subcircuitSimulation.save(subcircuitEditor.getId());
         subcircuitSimulationDatas.add(subcircuitSimulationData);
@@ -718,7 +718,7 @@ public class CircuitEditor
     ArrayList<SubcircuitTopEditorSimulation> result = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSimulations().getSubcircuitSimulations();
+      Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSubcircuitSimulations();
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
       {
         if (subcircuitSimulation instanceof SubcircuitTopSimulation)

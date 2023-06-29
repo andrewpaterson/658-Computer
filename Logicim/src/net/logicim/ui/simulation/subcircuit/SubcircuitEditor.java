@@ -478,10 +478,5 @@ public class SubcircuitEditor
   {
     return subcircuitView.getSubcircuitSimulation(subcircuitSimulation);
   }
-
-  public List<SubcircuitTopSimulation> getTopSimulations()
-  {
-    return subcircuitView.getTopSimulations();
-  }
 }
 

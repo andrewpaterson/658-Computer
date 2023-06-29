@@ -225,14 +225,16 @@ public class SubcircuitInstanceView
 
     instanceSubcircuitView.createComponents(subcircuitSimulation);
 
-    SubcircuitView circuitSubcircuitView = getCircuitSubcircuitView();
+    SubcircuitView subcircuitView = getCircuitSubcircuitView();
 
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(subcircuitSimulation.getCircuitSimulation(), null);
+    subcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation,
                                                                    properties.name,
                                                                    properties.subcircuitTypeName,
                                                                    properties.comment);
     subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
+
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
     {

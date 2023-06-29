@@ -1,5 +1,7 @@
 package net.logicim.ui.simulation;
 
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -7,7 +9,6 @@ import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -49,6 +50,8 @@ public class ShowSimulationsDialog
     {
       SubcircuitEditor subcircuitEditor = subcircuitTopEditorSimulation.getSubcircuitEditor();
       SubcircuitTopSimulation subcircuitTopSimulation = subcircuitTopEditorSimulation.getSubcircuitTopSimulation();
+      CircuitSimulation circuitSimulation = subcircuitTopEditorSimulation.getCircuitSimulation();
+
       DefaultMutableTreeNode simulationNode = new DefaultMutableTreeNode(subcircuitTopSimulation.getDescription());
       rootNode.add(simulationNode);
 
@@ -56,7 +59,7 @@ public class ShowSimulationsDialog
       simulationNode.add(circuitNode);
 
       SubcircuitView subcircuitView = subcircuitEditor.getCircuitSubcircuitView();
-      recurseFindChildCircuits(circuitNode, subcircuitView);
+      recurseFindChildCircuits(circuitNode, subcircuitView, circuitSimulation);
     }
 
     tree.setRootVisible(false);
@@ -72,7 +75,7 @@ public class ShowSimulationsDialog
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
   }
 
-  protected void recurseFindChildCircuits(DefaultMutableTreeNode parentNode, SubcircuitView subcircuitView)
+  protected void recurseFindChildCircuits(DefaultMutableTreeNode parentNode, SubcircuitView subcircuitView, CircuitSimulation circuitSimulation)
   {
     Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
@@ -80,7 +83,11 @@ public class ShowSimulationsDialog
       String description = subcircuitInstanceView.getShortDescription();
       DefaultMutableTreeNode child = new DefaultMutableTreeNode(description);
       parentNode.add(child);
-      recurseFindChildCircuits(child, subcircuitInstanceView.getInstanceSubcircuitView());
+      SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
+      if (instanceSubcircuitView.getSubcircuitSimulation(circuitSimulation) != null)
+      {
+        recurseFindChildCircuits(child, instanceSubcircuitView, circuitSimulation);
+      }
     }
   }
 

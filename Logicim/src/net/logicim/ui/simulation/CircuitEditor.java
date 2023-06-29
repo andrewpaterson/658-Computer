@@ -565,7 +565,7 @@ public class CircuitEditor
     SubcircuitSimulation subcircuitSimulation = subcircuitEditor.getSubcircuitSimulation(currentCircuitSimulation);
     if (subcircuitSimulation == null)
     {
-      List<SubcircuitTopSimulation> simulations = subcircuitEditor.getTopSimulations();
+      List<SubcircuitTopSimulation> simulations = subcircuitEditor.getCircuitSubcircuitView().getTopSimulations();
       if (!simulations.isEmpty())
       {
         currentCircuitSimulation = simulations.get(0).getCircuitSimulation();

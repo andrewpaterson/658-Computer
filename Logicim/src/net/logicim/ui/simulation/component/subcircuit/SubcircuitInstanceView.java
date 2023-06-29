@@ -8,6 +8,7 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
@@ -18,7 +19,7 @@ import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.integratedcircuit.PassiveView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.rectangle.Rectangle;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -27,13 +28,13 @@ import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 import static java.awt.Font.SANS_SERIF;
 
 public class SubcircuitInstanceView
-    extends PassiveView<SubcircuitInstance, SubcircuitInstanceProperties>
+    extends ComponentView<SubcircuitInstanceProperties>
     implements CircuitInstanceView
 {
   protected boolean subcircuitComponentsCreated;
@@ -44,6 +45,8 @@ public class SubcircuitInstanceView
   protected TextView typeName;
   protected TextView name;
   protected TextView comment;
+
+  protected Map<SubcircuitSimulation, SubcircuitInstance> simulationSubcircuits;
 
   public SubcircuitInstanceView(SubcircuitView containingSubcircuitView,
                                 SubcircuitView instanceSubcircuitView,
@@ -58,6 +61,7 @@ public class SubcircuitInstanceView
     this.instanceSubcircuitView = instanceSubcircuitView;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
+    this.simulationSubcircuits = new LinkedHashMap<>();
 
     createPinsAndGraphics();
     finaliseView();
@@ -215,8 +219,10 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  protected SubcircuitInstance createPassive(SubcircuitSimulation subcircuitSimulation)
+  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
+    validateCanCreateComponent(subcircuitSimulation);
+
     instanceSubcircuitView.createComponents(subcircuitSimulation);
 
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(subcircuitSimulation.getCircuitSimulation(), null);
@@ -238,6 +244,10 @@ public class SubcircuitInstanceView
 
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
+
+    simulationSubcircuits.put(subcircuitSimulation, subcircuitInstance);
+
+    postCreateComponent(subcircuitSimulation, subcircuitInstance);
 
     return subcircuitInstance;
   }
@@ -341,6 +351,41 @@ public class SubcircuitInstanceView
     }
   }
 
+  public SubcircuitInstance getComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+    return simulationSubcircuits.get(subcircuitSimulation);
+  }
+
+  @Override
+  protected void removeComponent(CircuitSimulation circuitSimulation)
+  {
+    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationSubcircuits.keySet()));
+  }
+
+  @Override
+  protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+    simulationSubcircuits.remove(subcircuitSimulation);
+  }
+
+  @Override
+  protected void finaliseView()
+  {
+    createPortViews();
+    super.finaliseView();
+    containingSubcircuitView.addSubcircuitInstanceView(this);
+  }
+
+  @Override
+  public String getComponentType()
+  {
+    for (SubcircuitInstance passive : simulationSubcircuits.values())
+    {
+      return passive.getType();
+    }
+    return "";
+  }
+
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
@@ -410,6 +455,16 @@ public class SubcircuitInstanceView
   public void destroyComponents(CircuitSimulation circuitSimulation)
   {
     instanceSubcircuitView.destroyComponents(circuitSimulation);
+  }
+
+  protected Set<Long> saveSimulations()
+  {
+    LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
+    for (SubcircuitSimulation subcircuitSimulation : simulationSubcircuits.keySet())
+    {
+      simulationIDs.add(subcircuitSimulation.getId());
+    }
+    return simulationIDs;
   }
 }
 

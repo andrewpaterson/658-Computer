@@ -44,6 +44,7 @@ public class SubcircuitView
   protected Set<IntegratedCircuitView<?, ?>> integratedCircuitViews;
   protected Set<PassiveView<?, ?>> passiveViews;
   protected Set<DecorativeView<?>> decorativeViews;
+  protected Set<SubcircuitInstanceView> subcircuitInstanceViews;
 
   protected Set<TraceView> traceViews;
   protected Set<TunnelView> tunnelViews;
@@ -57,6 +58,7 @@ public class SubcircuitView
     this.traceViews = new LinkedHashSet<>();
     this.tunnelViewsMap = new LinkedHashMap<>();
     this.passiveViews = new LinkedHashSet<>();
+    this.subcircuitInstanceViews = new LinkedHashSet<>();
     this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
     this.connectionViewCache = new ConnectionViewCache();
@@ -68,6 +70,7 @@ public class SubcircuitView
     views.addAll(tunnelViews);
     views.addAll(decorativeViews);
     views.addAll(passiveViews);
+    views.addAll(subcircuitInstanceViews);
     views.addAll(integratedCircuitViews);
     return views;
   }
@@ -77,6 +80,7 @@ public class SubcircuitView
     List<StaticView<?>> views = new ArrayList<>(tunnelViews);
     views.addAll(decorativeViews);
     views.addAll(passiveViews);
+    views.addAll(subcircuitInstanceViews);
     views.addAll(integratedCircuitViews);
     return views;
   }
@@ -211,7 +215,7 @@ public class SubcircuitView
 
   public StaticViewIterator staticViewIterator()
   {
-    return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, decorativeViews);
+    return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, subcircuitInstanceViews, decorativeViews);
   }
 
   public Set<TraceView> getTraceViews()
@@ -358,6 +362,13 @@ public class SubcircuitView
               contained = false;
             }
           }
+          else if (view instanceof SubcircuitInstanceView)
+          {
+            if (!subcircuitInstanceViews.contains(view))
+            {
+              contained = false;
+            }
+          }
           else if (view instanceof DecorativeView)
           {
             if (!decorativeViews.contains(view))
@@ -414,6 +425,14 @@ public class SubcircuitView
     }
   }
 
+  public void addSubcircuitInstanceView(SubcircuitInstanceView view)
+  {
+    synchronized (this)
+    {
+      subcircuitInstanceViews.add(view);
+    }
+  }
+
   public void addDecorativeView(DecorativeView<?> view)
   {
     synchronized (this)
@@ -427,6 +446,14 @@ public class SubcircuitView
     synchronized (this)
     {
       return passiveViews.remove(passiveView);
+    }
+  }
+
+  protected boolean removeSubcircuitInstanceView(SubcircuitInstanceView subcircuitInstanceView)
+  {
+    synchronized (this)
+    {
+      return passiveViews.remove(subcircuitInstanceView);
     }
   }
 
@@ -1053,15 +1080,7 @@ public class SubcircuitView
 
   public Set<SubcircuitInstanceView> findAllSubcircuitInstanceViews()
   {
-    HashSet<SubcircuitInstanceView> result = new HashSet<>();
-    for (PassiveView<?, ?> passiveView : passiveViews)
-    {
-      if (passiveView instanceof SubcircuitInstanceView)
-      {
-        result.add((SubcircuitInstanceView) passiveView);
-      }
-    }
-    return result;
+    return subcircuitInstanceViews;
   }
 
   public Set<StaticView<?>> findAllViewsOfClass(Class<? extends StaticView<?>> viewClass)
@@ -1094,6 +1113,16 @@ public class SubcircuitView
         if (viewClass.isAssignableFrom(passiveView.getClass()))
         {
           views.add(passiveView);
+        }
+      }
+    }
+    else if (SubcircuitInstanceView.class.isAssignableFrom(viewClass))
+    {
+      for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+      {
+        if (viewClass.isAssignableFrom(subcircuitInstanceView.getClass()))
+        {
+          views.add(subcircuitInstanceView);
         }
       }
     }

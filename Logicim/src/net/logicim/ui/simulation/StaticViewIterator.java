@@ -5,6 +5,7 @@ import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,12 +21,14 @@ public class StaticViewIterator
   public StaticViewIterator(Set<TunnelView> tunnelViews,
                             Set<IntegratedCircuitView<?, ?>> integratedCircuitViews,
                             Set<PassiveView<?, ?>> passiveViews,
+                            Set<SubcircuitInstanceView> subcircuitInstanceViews,
                             Set<DecorativeView<?>> decorativeViews)
   {
     iterators = new ArrayList<>();
     addIterator(tunnelViews);
     addIterator(integratedCircuitViews);
     addIterator(passiveViews);
+    addIterator(subcircuitInstanceViews);
     addIterator(decorativeViews);
 
     iteratorIndex = 0;

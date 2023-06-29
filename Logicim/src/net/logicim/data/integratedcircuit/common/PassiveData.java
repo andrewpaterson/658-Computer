@@ -5,9 +5,7 @@ import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitLoaders;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.List;
 import java.util.Set;
@@ -37,7 +35,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
           id,
           enabled,
           selected);
-    simulation = simulationIDs;
+    this.simulation = simulationIDs;
   }
 
   @Override

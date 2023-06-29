@@ -229,6 +229,7 @@ public class SubcircuitInstanceView
 
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(subcircuitSimulation.getCircuitSimulation(), null);
     subcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
+
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(subcircuitSimulation,
                                                                    properties.name,
                                                                    properties.subcircuitTypeName,
@@ -370,6 +371,20 @@ public class SubcircuitInstanceView
   protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
     simulationSubcircuits.remove(subcircuitSimulation);
+  }
+
+  @Override
+  public void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+    super.destroyComponent(circuitSimulation);
+    destroyComponents(circuitSimulation);
+  }
+
+  @Override
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+    super.destroyComponent(subcircuitSimulation);
+    destroyComponents(subcircuitSimulation.getCircuitSimulation());
   }
 
   @Override

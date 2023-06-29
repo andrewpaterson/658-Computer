@@ -7,7 +7,7 @@ import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;

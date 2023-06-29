@@ -576,12 +576,15 @@ public class SubcircuitView
     }
   }
 
-  private void createComponents(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
+  private List<Component> createComponents(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
   {
+    List<Component> components = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.createComponent(subcircuitSimulation);
+      Component component = staticView.createComponent(subcircuitSimulation);
+      components.add(component);
     }
+    return components;
   }
 
   public void simulationStarted(List<StaticView<?>> staticViews, SubcircuitSimulation simulation)
@@ -1129,10 +1132,10 @@ public class SubcircuitView
     }
   }
 
-  public void createComponents(SubcircuitSimulation subcircuitSimulation)
+  public List<Component> createComponents(SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
-    createComponents(staticViews, subcircuitSimulation);
+    List<Component> components = createComponents(staticViews, subcircuitSimulation);
 
     simulationStarted(staticViews, subcircuitSimulation);
 
@@ -1141,6 +1144,8 @@ public class SubcircuitView
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews, subcircuitSimulation);
 
     fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
+
+    return components;
   }
 }
 

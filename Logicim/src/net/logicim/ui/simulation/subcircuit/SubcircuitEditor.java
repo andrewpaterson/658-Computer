@@ -11,6 +11,7 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.CircuitInstanceOrderer;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewParent;
@@ -499,6 +500,5 @@ public class SubcircuitEditor
       }
     }
   }
-
 }
 

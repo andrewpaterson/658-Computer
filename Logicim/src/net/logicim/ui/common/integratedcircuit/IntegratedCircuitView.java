@@ -22,7 +22,7 @@ import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.defaults.DefaultLogicLevels;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 
 import java.awt.*;
 import java.util.ArrayList;

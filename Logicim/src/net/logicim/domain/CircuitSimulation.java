@@ -1,13 +1,12 @@
 package net.logicim.domain;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 import java.util.Collection;
 

@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation.subcircuit;
 
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 public class SubcircuitTopEditorSimulation
 {

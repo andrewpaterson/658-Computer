@@ -2,7 +2,6 @@ package net.logicim.domain.passive.subcircuit;
 
 import net.logicim.data.simulation.SubcircuitInstanceSimulationData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class SubcircuitInstanceSimulation
     extends SubcircuitSimulation

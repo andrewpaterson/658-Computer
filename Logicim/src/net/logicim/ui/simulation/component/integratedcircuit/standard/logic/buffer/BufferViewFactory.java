@@ -4,7 +4,7 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.defaults.DefaultFamily;
+import net.logicim.domain.common.defaults.DefaultFamily;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 

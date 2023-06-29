@@ -32,7 +32,7 @@ import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 import java.awt.*;
 import java.util.List;

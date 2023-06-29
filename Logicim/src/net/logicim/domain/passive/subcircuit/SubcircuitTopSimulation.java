@@ -1,8 +1,7 @@
-package net.logicim.ui.simulation.subcircuit;
+package net.logicim.domain.passive.subcircuit;
 
 import net.logicim.data.simulation.SubcircuitTopSimulationData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 public class SubcircuitTopSimulation
     extends SubcircuitSimulation

@@ -4,14 +4,14 @@ import net.logicim.common.SimulatorException;
 import net.logicim.data.family.Family;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.wire.TraceValue;
-import net.logicim.ui.common.defaults.DefaultLogicLevels;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.logicim.ui.common.defaults.DefaultLogicLevels.CMOS;
-import static net.logicim.ui.common.defaults.DefaultLogicLevels.TTL;
+import static net.logicim.domain.common.defaults.DefaultLogicLevels.CMOS;
+import static net.logicim.domain.common.defaults.DefaultLogicLevels.TTL;
 
 public class FamilyVoltageConfiguration
     extends VoltageConfigurationSource

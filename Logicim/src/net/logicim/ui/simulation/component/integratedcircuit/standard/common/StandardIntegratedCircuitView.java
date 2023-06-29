@@ -11,7 +11,7 @@ import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.ui.common.defaults.DefaultLogicLevels;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;

@@ -1,4 +1,4 @@
-package net.logicim.ui.common.defaults;
+package net.logicim.domain.common.defaults;
 
 import net.logicim.data.family.Family;
 import net.logicim.domain.common.propagation.FamilyStore;

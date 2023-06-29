@@ -1,4 +1,4 @@
-package net.logicim.ui.common.defaults;
+package net.logicim.domain.common.defaults;
 
 public class DefaultLogicLevels
 {

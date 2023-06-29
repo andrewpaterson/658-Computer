@@ -7,7 +7,7 @@ import net.logicim.data.common.Radix;
 import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.defaults.DefaultFamily;
+import net.logicim.domain.common.defaults.DefaultFamily;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 

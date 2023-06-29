@@ -8,7 +8,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
-import net.logicim.ui.simulation.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 public class CircuitLoaders
 {

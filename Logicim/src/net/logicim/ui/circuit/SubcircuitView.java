@@ -1252,23 +1252,30 @@ public class SubcircuitView
       throw new SimulatorException("First circuit instance view");
     }
 
-    Collection<SubcircuitSimulation> expectedSubcircuitSimulations = simulations.getSubcircuitSimulations();
+    Collection<SubcircuitTopSimulation> subcircuitTopSimulations = simulations.getSubcircuitTopSimulations();
+    for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
+    {
+      validateSubcircuitTopSimulation(subcircuitTopSimulation, circuitInstanceViews);
+    }
+  }
 
+  protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> circuitInstanceViews)
+  {
+    CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
+
+    int depth = 0;
     for (CircuitInstanceView instanceView : circuitInstanceViews)
     {
-      Collection<SubcircuitSimulation> simulations = instanceView.getSubcircuitSimulations();
-      List<SubcircuitSimulation> missingSimulations = new ArrayList<>();
-      for (SubcircuitSimulation expectedSubcircuitSimulation : expectedSubcircuitSimulations)
+      SubcircuitSimulation subcircuitSimulation = instanceView.getSubcircuitSimulation(circuitSimulation);
+      if (depth > 0)
       {
-        if (!simulations.contains(expectedSubcircuitSimulation))
+        if (subcircuitSimulation instanceof SubcircuitTopSimulation)
         {
-          missingSimulations.add(expectedSubcircuitSimulation);
+          throw new SimulatorException("Subcircuit simulation [%s] at depth [%s] may not be a top simulation.", subcircuitSimulation.getDescription(), depth);
         }
       }
-      if (missingSimulations.size() > 0)
-      {
-        throw new SimulatorException("Expected simulations [%s] were not found in circuit instance [%s].", missingSimulations.size(), instanceView.getDescription());
-      }
+
+      depth++;
     }
   }
 }

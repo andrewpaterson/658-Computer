@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
@@ -250,11 +251,24 @@ public class SubcircuitInstanceView
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
 
-    simulationSubcircuits.put(subcircuitSimulation, subcircuitInstance);
+    putSubcircuitSimulation(subcircuitSimulation, subcircuitInstance);
 
     postCreateComponent(subcircuitSimulation, subcircuitInstance);
 
     return subcircuitInstance;
+  }
+
+  protected void putSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation, SubcircuitInstance subcircuitInstance)
+  {
+    for (SubcircuitSimulation currentSubcircuitSimulation : simulationSubcircuits.keySet())
+    {
+      if (currentSubcircuitSimulation.getCircuitSimulation() == subcircuitSimulation.getCircuitSimulation())
+      {
+        throw new SimulatorException("A simulation [%s] for circuit [%s] already exists.", currentSubcircuitSimulation.getDescription(), currentSubcircuitSimulation.getCircuitSimulation().getDescription());
+      }
+    }
+
+    simulationSubcircuits.put(subcircuitSimulation, subcircuitInstance);
   }
 
   private List<String> getPinPortNames(PinView pinView)
@@ -288,6 +302,19 @@ public class SubcircuitInstanceView
   public String getDescription()
   {
     return getType() + " " + getShortDescription();
+  }
+
+  @Override
+  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    for (SubcircuitSimulation subcircuitSimulation : simulationSubcircuits.keySet())
+    {
+      if (subcircuitSimulation.getCircuitSimulation() == circuitSimulation)
+      {
+        return subcircuitSimulation;
+      }
+    }
+    return null;
   }
 
   public String getShortDescription()

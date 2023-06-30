@@ -476,6 +476,12 @@ public class SubcircuitInstanceView
     instanceSubcircuitView.destroyComponents(circuitSimulation);
   }
 
+  @Override
+  public Collection<SubcircuitSimulation> getSubcircuitSimulations()
+  {
+    return simulationSubcircuits.keySet();
+  }
+
   protected Set<Long> saveSimulations()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();

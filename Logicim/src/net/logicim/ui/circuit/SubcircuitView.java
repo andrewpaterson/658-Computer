@@ -1239,5 +1239,37 @@ public class SubcircuitView
   {
     simulations.add(subcircuitSimulation);
   }
+
+  public void validateSimulations(List<CircuitInstanceView> circuitInstanceViews)
+  {
+    if (circuitInstanceViews.size() == 0)
+    {
+      throw new SimulatorException("Expected at least one circuit instance view.");
+    }
+    CircuitInstanceView circuitInstanceView = circuitInstanceViews.get(0);
+    if (circuitInstanceView.getCircuitSubcircuitView() != this)
+    {
+      throw new SimulatorException("First circuit instance view");
+    }
+
+    Collection<SubcircuitSimulation> expectedSubcircuitSimulations = simulations.getSubcircuitSimulations();
+
+    for (CircuitInstanceView instanceView : circuitInstanceViews)
+    {
+      Collection<SubcircuitSimulation> simulations = instanceView.getSubcircuitSimulations();
+      List<SubcircuitSimulation> missingSimulations = new ArrayList<>();
+      for (SubcircuitSimulation expectedSubcircuitSimulation : expectedSubcircuitSimulations)
+      {
+        if (!simulations.contains(expectedSubcircuitSimulation))
+        {
+          missingSimulations.add(expectedSubcircuitSimulation);
+        }
+      }
+      if (missingSimulations.size() > 0)
+      {
+        throw new SimulatorException("Expected simulations [%s] were not found in circuit instance [%s].", missingSimulations.size(), instanceView.getDescription());
+      }
+    }
+  }
 }
 

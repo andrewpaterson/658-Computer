@@ -4,18 +4,13 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.common.util.Counter;
 import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.CircuitInstanceOrderer;
 import net.logicim.ui.circuit.CircuitInstanceView;
-import net.logicim.ui.circuit.CircuitInstanceViewParent;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -26,7 +21,6 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.CircuitLoaders;
 import net.logicim.ui.simulation.StaticViewIterator;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.util.*;
@@ -409,44 +403,6 @@ public class SubcircuitEditor
     return subcircuitView.getTypeName();
   }
 
-  public List<CircuitInstanceViewParent> getCircuitInstanceViews()
-  {
-    List<CircuitInstanceViewParent> circuitInstanceViewParents = new ArrayList<>();
-
-    Counter counter = new Counter();
-    CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(null, this, counter.tick());
-    circuitInstanceViewParents.add(instanceViewParent);
-    recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
-    return circuitInstanceViewParents;
-  }
-
-  protected void recurseFindSubCircuitViews(CircuitInstanceViewParent circuitInstanceViewParent, List<CircuitInstanceViewParent> circuitInstanceViewParents, Counter counter)
-  {
-    SubcircuitView subcircuitView = circuitInstanceViewParent.getCircuitSubcircuitView();
-    Set<SubcircuitInstanceView> instanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-    for (SubcircuitInstanceView instanceView : instanceViews)
-    {
-      CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(circuitInstanceViewParent, instanceView, counter.tick());
-      circuitInstanceViewParents.add(instanceViewParent);
-      recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
-    }
-  }
-
-  public List<CircuitInstanceView> getOrderedCircuitInstanceViews()
-  {
-    List<CircuitInstanceViewParent> viewParents = getCircuitInstanceViews();
-
-    CircuitInstanceOrderer orderer = new CircuitInstanceOrderer(viewParents);
-    List<CircuitInstanceViewParent> ordered = orderer.order();
-    List<CircuitInstanceView> circuitInstanceViews = new ArrayList<>();
-    for (CircuitInstanceViewParent circuitInstanceViewParent : ordered)
-    {
-      CircuitInstanceView view = circuitInstanceViewParent.getView();
-      circuitInstanceViews.add(view);
-    }
-    return circuitInstanceViews;
-  }
-
   public void validateOnlyThisSubcircuitEditor(List<CircuitInstanceView> circuitInstanceViews)
   {
     int topCount = 0;
@@ -474,9 +430,21 @@ public class SubcircuitEditor
     return subcircuitView.getSimulations().getSubcircuitSimulations();
   }
 
+  @Override
+  public String getDescription()
+  {
+    return "Editor" + " " + getTypeName();
+  }
+
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation subcircuitSimulation)
   {
     return subcircuitView.getSubcircuitSimulation(subcircuitSimulation);
+  }
+
+  public void validateSimulations()
+  {
+    List<CircuitInstanceView> circuitInstanceViews = getOrderedCircuitInstanceViews();
+    subcircuitView.validateSimulations(circuitInstanceViews);
   }
 }
 

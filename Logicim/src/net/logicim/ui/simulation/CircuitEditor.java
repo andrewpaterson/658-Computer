@@ -509,6 +509,16 @@ public class CircuitEditor
   public void validateConsistency()
   {
     currentSubcircuitEditor.validateConsistency();
+
+    validateSimulations();
+  }
+
+  private void validateSimulations()
+  {
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      subcircuitEditor.validateSimulations();
+    }
   }
 
   public void replaceSelection(View newView, View oldView)

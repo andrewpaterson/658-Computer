@@ -731,14 +731,6 @@ public class Logicim
   public void toggleTunSimulation()
   {
     boolean running = simulationSpeed.toggleTunSimulation();
-    if (running)
-    {
-      SubcircuitSimulation simulation = circuitEditor.getSubcircuitSimulation();
-      if (simulation == null)
-      {
-        throw new SimulatorException("Cannot run simulation with a [null] simulation.");
-      }
-    }
   }
 
   public boolean canDelete()
@@ -856,7 +848,7 @@ public class Logicim
       {
         SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) circuitInstanceView;
         SubcircuitInstance subcircuitInstance = map.get(subcircuitInstanceView);
-        SubcircuitSimulation subcircuitSimulation = subcircuitInstance.getSubcircuitSimulation();
+        SubcircuitSimulation subcircuitSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
         SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
         subcircuitView.createComponents(subcircuitSimulation);
         Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();

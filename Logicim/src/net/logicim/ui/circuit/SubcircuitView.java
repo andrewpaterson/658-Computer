@@ -17,10 +17,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.passive.common.Passive;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.*;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -1262,19 +1259,14 @@ public class SubcircuitView
   protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> circuitInstanceViews)
   {
     CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
-
     int depth = 0;
-    for (CircuitInstanceView instanceView : circuitInstanceViews)
+    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
     {
-      SubcircuitSimulation subcircuitSimulation = instanceView.getSubcircuitSimulation(circuitSimulation);
-      if (depth > 0)
+      List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
+      if (innerSubcircuitSimulations.size() == 0 && depth > 0)
       {
-        if (subcircuitSimulation instanceof SubcircuitTopSimulation)
-        {
-          throw new SimulatorException("Subcircuit simulation [%s] at depth [%s] may not be a top simulation.", subcircuitSimulation.getDescription(), depth);
-        }
+        throw new SimulatorException("Expected at least one simulation");
       }
-
       depth++;
     }
   }

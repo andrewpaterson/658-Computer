@@ -324,7 +324,6 @@ public class InstructionCycles
     return new DoneInstruction();
   }
 
-  @SuppressWarnings("SameParameterValue")
   protected static SetProgramBank PBR_e(int bank)
   {
     return new SetProgramBank(bank);

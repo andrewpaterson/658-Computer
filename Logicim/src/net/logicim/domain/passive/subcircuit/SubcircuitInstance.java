@@ -1,6 +1,7 @@
 package net.logicim.domain.passive.subcircuit;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
@@ -20,24 +21,24 @@ public class SubcircuitInstance
   protected String subcircuitTypeName;
   protected String comment;
   protected long id;
-  protected SubcircuitInstanceSimulation subcircuitSimulation;
+  protected SubcircuitInstanceSimulation subcircuitInstanceSimulation;
 
-  public SubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation,
+  public SubcircuitInstance(CircuitSimulation circuitSimulation,
                             String name,
                             String subcircuitTypeName,
                             String comment)
   {
-    super(containingSubcircuitSimulation.getCircuit(), name);
+    super(circuitSimulation.getCircuit(), name);
     this.namedPins = new LinkedHashMap<>();
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;
-    this.subcircuitSimulation = new SubcircuitInstanceSimulation(containingSubcircuitSimulation.getCircuitSimulation(), this);
+    this.subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, this);
 
     updateId(nextId++);
   }
 
   public SubcircuitInstance(Circuit circuit,
-                            SubcircuitInstanceSimulation subcircuitSimulation,
+                            SubcircuitInstanceSimulation subcircuitInstanceSimulation,
                             String name,
                             String subcircuitTypeName,
                             String comment,
@@ -47,7 +48,7 @@ public class SubcircuitInstance
     this.namedPins = new LinkedHashMap<>();
     this.subcircuitTypeName = subcircuitTypeName;
     this.comment = comment;
-    this.subcircuitSimulation = subcircuitSimulation;
+    this.subcircuitInstanceSimulation = subcircuitInstanceSimulation;
 
     updateId(id);
   }
@@ -97,9 +98,9 @@ public class SubcircuitInstance
     }
   }
 
-  public SubcircuitInstanceSimulation getSubcircuitSimulation()
+  public SubcircuitInstanceSimulation getSubcircuitInstanceSimulation()
   {
-    return subcircuitSimulation;
+    return subcircuitInstanceSimulation;
   }
 
   public long getId()

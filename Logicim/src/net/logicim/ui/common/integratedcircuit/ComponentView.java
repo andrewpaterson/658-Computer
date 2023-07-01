@@ -7,9 +7,9 @@ import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -284,15 +284,15 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void validateCanCreateComponent(SubcircuitSimulation subcircuitSimulation)
   {
-     if (subcircuitSimulation == null)
+    if (subcircuitSimulation == null)
     {
-      throw new SimulatorException("Cannot create %s component with [null] simulation.", getClass().getSimpleName());
+      throw new SimulatorException("Cannot create component with simulation [null] for %s, [%s].", getClass().getSimpleName(), getDescription());
     }
 
     Component component = getComponent(subcircuitSimulation);
     if (component != null)
     {
-      throw new SimulatorException("[%s] component has already been created.", component.getDescription());
+      throw new SimulatorException("[%s] component has already been created for simulation [%s] for %s [%s].", component.getDescription(), subcircuitSimulation.getDescription(), getClass().getSimpleName(), getDescription());
     }
   }
 

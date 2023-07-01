@@ -827,7 +827,6 @@ public class Logicim
     }
 
     Map<SubcircuitInstanceView, SubcircuitInstance> map = new LinkedHashMap<>();
-    CircuitSimulation newCircuitSimulation = new CircuitSimulation();
     for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
     {
       System.out.println(circuitInstanceView.toString());
@@ -836,7 +835,7 @@ public class Logicim
       {
         SubcircuitEditor subcircuitEditor = (SubcircuitEditor) circuitInstanceView;
         SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
-        SubcircuitTopSimulation newSubcircuitTopSimulation = subcircuitView.createSubcircuitSimulation(newCircuitSimulation);
+        SubcircuitTopSimulation newSubcircuitTopSimulation = subcircuitView.createSubcircuitSimulation();
         subcircuitView.createComponents(newSubcircuitTopSimulation);
         Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
         for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)

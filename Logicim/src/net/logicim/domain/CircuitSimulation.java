@@ -1,5 +1,6 @@
 package net.logicim.domain;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
@@ -124,8 +125,7 @@ public class CircuitSimulation
         return subcircuitSimulation;
       }
     }
-    return null;
-    //throw new SimulatorException("Cannot find SubcircuitSimulation for CircuitSimulation [%s].", circuitSimulation.getDescription());
+    throw new SimulatorException("Cannot find SubcircuitSimulation for CircuitSimulation [%s].", circuitSimulation.getDescription());
   }
 }
 

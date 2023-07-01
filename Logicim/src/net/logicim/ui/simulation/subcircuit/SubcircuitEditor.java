@@ -9,7 +9,6 @@ import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -36,9 +35,11 @@ public class SubcircuitEditor
   protected CircuitEditor circuitEditor;
   protected long id;
 
-  public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, CircuitSimulation circuitSimulation)
+  public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
-    this(circuitEditor, new SubcircuitView(circuitSimulation));
+    this(circuitEditor, new SubcircuitView());
+    this.subcircuitView.createSubcircuitSimulation();
+
     this.setTypeName(typeName);
 
     id = nextId;
@@ -442,7 +443,7 @@ public class SubcircuitEditor
     return subcircuitView.getSubcircuitSimulation(circuitSimulation);
   }
 
-  public List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
+  public List<SubcircuitSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
     return new ArrayList<>();
   }

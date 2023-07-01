@@ -17,7 +17,10 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.passive.common.Passive;
-import net.logicim.domain.passive.subcircuit.*;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -64,14 +67,7 @@ public class SubcircuitView
     this.tunnelViews = new LinkedHashSet<>();
     this.decorativeViews = new LinkedHashSet<>();
     this.connectionViewCache = new ConnectionViewCache();
-
     this.simulations = new SubcircuitSimulations();
-  }
-
-  public SubcircuitView(CircuitSimulation circuitSimulation)
-  {
-    this();
-    this.simulations.add(createSubcircuitSimulation(circuitSimulation));
   }
 
   public List<View> getAllViews()
@@ -1204,9 +1200,11 @@ public class SubcircuitView
     return components;
   }
 
-  public SubcircuitTopSimulation createSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  public SubcircuitTopSimulation createSubcircuitSimulation()
   {
-    return new SubcircuitTopSimulation(circuitSimulation);
+    SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(new CircuitSimulation());
+    simulations.add(subcircuitTopSimulation);
+    return subcircuitTopSimulation;
   }
 
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
@@ -1262,10 +1260,18 @@ public class SubcircuitView
     int depth = 0;
     for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
     {
-      List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
+      List<SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
+      for (SubcircuitSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
+      {
+        if (innerSubcircuitSimulation instanceof SubcircuitTopSimulation)
+        {
+          throw new SimulatorException("Expected only instance subcircuit simulations in inner simulations.");
+        }
+      }
+
       if (innerSubcircuitSimulations.size() == 0 && depth > 0)
       {
-        throw new SimulatorException("Expected at least one simulation");
+        throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
       }
       depth++;
     }

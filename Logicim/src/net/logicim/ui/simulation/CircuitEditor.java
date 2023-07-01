@@ -437,7 +437,10 @@ public class CircuitEditor
     currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, getSubcircuitSimulation());
   }
 
-  public void doneMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews, Set<StaticView<?>> selectedViews, boolean newComponents)
+  public void doneMoveComponents(List<StaticView<?>> staticViews,
+                                 List<TraceView> traceViews,
+                                 Set<StaticView<?>> selectedViews,
+                                 boolean newComponents)
   {
     currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, getSubcircuitSimulation(), newComponents);
   }
@@ -634,7 +637,7 @@ public class CircuitEditor
       throw new SimulatorException(error);
     }
 
-    SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName, new CircuitSimulation());
+    SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
     subcircuitEditors.add(subcircuitEditor);
 
     currentSubcircuitEditor = subcircuitEditor;

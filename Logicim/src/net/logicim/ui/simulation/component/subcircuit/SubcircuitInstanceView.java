@@ -47,8 +47,7 @@ public class SubcircuitInstanceView
   protected TextView name;
   protected TextView comment;
 
-  protected Map<SubcircuitSimulation, SubcircuitInstance> containingSubcircuitSimulations;
-  protected Map<SubcircuitInstanceSimulation, SubcircuitInstance> subcircuitInstances;
+  protected Map<SubcircuitSimulation, SubcircuitInstance> simulationSubcircuitInstances;
 
   public SubcircuitInstanceView(SubcircuitView containingSubcircuitView,
                                 SubcircuitView instanceSubcircuitView,
@@ -63,8 +62,7 @@ public class SubcircuitInstanceView
     this.instanceSubcircuitView = instanceSubcircuitView;
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
-    this.containingSubcircuitSimulations = new LinkedHashMap<>();
-    this.subcircuitInstances = new LinkedHashMap<>();
+    this.simulationSubcircuitInstances = new LinkedHashMap<>();
 
     createPinsAndGraphics();
     finaliseView();
@@ -252,13 +250,13 @@ public class SubcircuitInstanceView
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
 
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
-    subcircuitInstances.put(subcircuitInstance.getSubcircuitInstanceSimulation(), subcircuitInstance);
+    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
     return subcircuitInstance;
   }
 
   protected void putContainingSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation, SubcircuitInstance subcircuitInstance)
   {
-    for (SubcircuitSimulation currentSubcircuitSimulation : containingSubcircuitSimulations.keySet())
+    for (SubcircuitSimulation currentSubcircuitSimulation : simulationSubcircuitInstances.keySet())
     {
       if (currentSubcircuitSimulation.getCircuitSimulation() == subcircuitSimulation.getCircuitSimulation())
       {
@@ -266,7 +264,7 @@ public class SubcircuitInstanceView
       }
     }
 
-    containingSubcircuitSimulations.put(subcircuitSimulation, subcircuitInstance);
+    simulationSubcircuitInstances.put(subcircuitSimulation, subcircuitInstance);
   }
 
   private List<String> getPinPortNames(PinView pinView)
@@ -303,11 +301,12 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
+  public List<SubcircuitSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
-    ArrayList<SubcircuitInstanceSimulation> result = new ArrayList<>();
-    for (SubcircuitInstanceSimulation subcircuitInstanceSimulation : subcircuitInstances.keySet())
+    ArrayList<SubcircuitSimulation> result = new ArrayList<>();
+    for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
     {
+      SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
       if (subcircuitInstanceSimulation.getCircuitSimulation() == circuitSimulation)
       {
         result.add(subcircuitInstanceSimulation);
@@ -384,19 +383,19 @@ public class SubcircuitInstanceView
 
   public SubcircuitInstance getComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    return containingSubcircuitSimulations.get(subcircuitSimulation);
+    return simulationSubcircuitInstances.get(subcircuitSimulation);
   }
 
   @Override
   protected void removeComponent(CircuitSimulation circuitSimulation)
   {
-    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, containingSubcircuitSimulations.keySet()));
+    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationSubcircuitInstances.keySet()));
   }
 
   @Override
   protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    containingSubcircuitSimulations.remove(subcircuitSimulation);
+    simulationSubcircuitInstances.remove(subcircuitSimulation);
   }
 
   @Override
@@ -424,7 +423,7 @@ public class SubcircuitInstanceView
   @Override
   public String getComponentType()
   {
-    for (SubcircuitInstance passive : containingSubcircuitSimulations.values())
+    for (SubcircuitInstance passive : simulationSubcircuitInstances.values())
     {
       return passive.getType();
     }
@@ -505,13 +504,13 @@ public class SubcircuitInstanceView
   @Override
   public Collection<SubcircuitSimulation> getSubcircuitSimulations()
   {
-    return containingSubcircuitSimulations.keySet();
+    return simulationSubcircuitInstances.keySet();
   }
 
   protected Set<Long> saveSimulations()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
-    for (SubcircuitSimulation subcircuitSimulation : containingSubcircuitSimulations.keySet())
+    for (SubcircuitSimulation subcircuitSimulation : simulationSubcircuitInstances.keySet())
     {
       simulationIDs.add(subcircuitSimulation.getId());
     }

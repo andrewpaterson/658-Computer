@@ -224,14 +224,13 @@ public class SubcircuitInstanceView
   {
     validateCanCreateComponent(containingSubcircuitSimulation);
 
-    instanceSubcircuitView.createComponents(containingSubcircuitSimulation);
-
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(containingSubcircuitSimulation.getCircuitSimulation(),
                                                                    properties.name,
                                                                    properties.subcircuitTypeName,
                                                                    properties.comment);
 
-    instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstance.getSubcircuitInstanceSimulation());
+    SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+    instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
 
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
@@ -247,10 +246,11 @@ public class SubcircuitInstanceView
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
 
-    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
-
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
+
+    instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
+
     return subcircuitInstance;
   }
 

@@ -125,7 +125,7 @@ public class CircuitSimulation
         return subcircuitSimulation;
       }
     }
-    throw new SimulatorException("Cannot find SubcircuitSimulation for CircuitSimulation [%s].", circuitSimulation.getDescription());
+    return null;
   }
 }
 

@@ -246,10 +246,10 @@ public class SubcircuitInstanceView
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
 
-    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
-
     instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
+
+    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
 
     return subcircuitInstance;
   }

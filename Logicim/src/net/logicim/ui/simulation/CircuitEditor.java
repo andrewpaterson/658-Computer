@@ -374,7 +374,7 @@ public class CircuitEditor
       {
         SubcircuitInstanceSimulationData subcircuitInstanceSimulationData = (SubcircuitInstanceSimulationData) subcircuitSimulationData;
         SubcircuitInstance subcircuitInstance = loaders.getSubcircuitInstance(subcircuitInstanceSimulationData.subcircuitInstanceId);
-        loaders.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitSimulationData.subcircuitSimulationId, subcircuitInstance);
+        loaders.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance, subcircuitSimulationData.subcircuitSimulationId);
       }
       else
       {

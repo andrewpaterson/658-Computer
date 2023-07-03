@@ -28,8 +28,7 @@ public class SubcircuitInstanceSimulation
   {
     return new SubcircuitInstanceSimulationData(getId(),
                                                 subcircuitEditorId,
-                                                circuitSimulation.getId(),
-                                                subcircuitInstance.getId());
+                                                circuitSimulation.getId());
   }
 }
 

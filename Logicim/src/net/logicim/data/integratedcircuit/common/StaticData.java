@@ -11,12 +11,11 @@ import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 public abstract class StaticData<T extends StaticView<?>>
     extends ViewData
 {
-  protected String name;
-  protected Int2D position;
-  protected Rotation rotation;
-  protected long id;
-  protected boolean enabled;
-  protected boolean selected;
+  public String name;
+  public Int2D position;
+  public Rotation rotation;
+  public boolean enabled;
+  public boolean selected;
 
   public StaticData()
   {

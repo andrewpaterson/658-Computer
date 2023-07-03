@@ -59,7 +59,7 @@ public class SimulatorFrame
     menuBar.add(menu);
 
     menuItem = new JMenuItem("A text-only menu item", KeyEvent.VK_T);
-    menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_MASK));
+    menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_DOWN_MASK));
     menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
     menu.add(menuItem);
     setJMenuBar(menuBar);

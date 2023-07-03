@@ -4,8 +4,8 @@ import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -24,25 +24,30 @@ public class TraceView
 
   public TraceView(SubcircuitView subcircuitView, Line line)
   {
-    this(subcircuitView, line.getStart(), line.getEnd());
-  }
-
-  public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end)
-  {
-    this(subcircuitView, start, end, true);
+    this(subcircuitView, line.getStart(), line.getEnd(), true);
   }
 
   public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end, boolean addConnections)
   {
-    super();
+    this(subcircuitView, start, end, addConnections, nextId++);
+  }
+
+  public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end, boolean addConnections, long id)
+  {
+    super(id);
     this.line = new Line(start, end);
-    wireView = new WireViewComp();
+    this.wireView = new WireViewComp();
     if (addConnections)
     {
-      wireView.setStart(subcircuitView.getOrAddConnectionView(start, this));
-      wireView.setEnd(subcircuitView.getOrAddConnectionView(end, this));
+      addConnections(subcircuitView, start, end);
     }
     subcircuitView.addTraceView(this);
+  }
+
+  protected void addConnections(SubcircuitView subcircuitView, Int2D start, Int2D end)
+  {
+    wireView.setStart(subcircuitView.getOrAddConnectionView(start, this));
+    wireView.setEnd(subcircuitView.getOrAddConnectionView(end, this));
   }
 
   public ConnectionView getConnectionsInGrid(int x, int y)

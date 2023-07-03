@@ -78,7 +78,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     return simulationPassives.get(subcircuitSimulation);
   }
 
-  protected Set<Long> saveSimulations()
+  protected Set<Long> saveSimulationPassiveIDs()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
     for (SubcircuitSimulation subcircuitSimulation : simulationPassives.keySet())

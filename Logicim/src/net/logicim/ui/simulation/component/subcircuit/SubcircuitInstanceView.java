@@ -9,7 +9,6 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
@@ -212,7 +211,7 @@ public class SubcircuitInstanceView
                                       id,
                                       enabled,
                                       selected,
-                                      saveSimulations(),
+                                      savSimulationSubcircuitInstanceIDs(),
                                       savePorts(),
                                       properties.comment,
                                       properties.width,
@@ -220,16 +219,13 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public Component createComponent(SubcircuitSimulation containingSubcircuitSimulation)
+  public SubcircuitInstance createComponent(SubcircuitSimulation containingSubcircuitSimulation)
   {
     validateCanCreateComponent(containingSubcircuitSimulation);
 
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(containingSubcircuitSimulation.getCircuitSimulation(),
-                                                                   properties.name,
-                                                                   properties.subcircuitTypeName,
-                                                                   properties.comment);
-
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(containingSubcircuitSimulation.getCircuitSimulation(), properties.name);
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
 
     List<PinView> pins = instanceSubcircuitView.findAllPins();
@@ -507,7 +503,7 @@ public class SubcircuitInstanceView
     return simulationSubcircuitInstances.keySet();
   }
 
-  protected Set<Long> saveSimulations()
+  protected Set<Long> savSimulationSubcircuitInstanceIDs()
   {
     LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
     for (SubcircuitSimulation subcircuitSimulation : simulationSubcircuitInstances.keySet())

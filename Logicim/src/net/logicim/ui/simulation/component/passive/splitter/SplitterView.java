@@ -368,7 +368,7 @@ public class SplitterView
     return new SplitterData(position,
                             rotation,
                             properties.name,
-                            saveSimulations(),
+                            saveSimulationPassiveIDs(),
                             savePorts(),
                             id,
                             enabled,

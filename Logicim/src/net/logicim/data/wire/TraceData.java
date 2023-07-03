@@ -18,8 +18,8 @@ public class TraceData
   public Int2D start;
   public Int2D end;
 
-  protected boolean enabled;
-  protected boolean selected;
+  public boolean enabled;
+  public boolean selected;
 
   public TraceData()
   {

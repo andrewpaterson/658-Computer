@@ -59,7 +59,7 @@ public class GroundView
     return new GroundData(position,
                           rotation,
                           properties.name,
-                          saveSimulations(),
+                          saveSimulationPassiveIDs(),
                           savePorts(),
                           id,
                           enabled,

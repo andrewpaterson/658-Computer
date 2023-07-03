@@ -17,8 +17,16 @@ public abstract class View
 
   public View()
   {
-    id = 0;
-    enabled = false;
+    this(nextId++);
+  }
+
+  public View(long id)
+  {
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
   }
 
   protected void paintSelectionRectangle(Graphics2D graphics, Viewport viewport, int x, int y, Color viewHover)
@@ -52,30 +60,12 @@ public abstract class View
     return getClass().getSimpleName() + " [" + getName() + "]";
   }
 
-  protected void updateId()
-  {
-    id = nextId;
-    nextId++;
-  }
-
   public void setId(long id)
   {
     this.id = id;
     if (id >= nextId)
     {
       nextId = id + 1;
-    }
-  }
-
-  public void updateId(boolean appendIds, long id)
-  {
-    if (appendIds)
-    {
-      updateId();
-    }
-    else
-    {
-      setId(id);
     }
   }
 

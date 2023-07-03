@@ -80,6 +80,15 @@ public abstract class SubcircuitSimulation
     return circuitSimulation;
   }
 
+  public void setId(long id)
+  {
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
+  }
+
   public static void resetNextId()
   {
     nextId = 1;

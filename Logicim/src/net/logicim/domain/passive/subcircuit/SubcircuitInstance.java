@@ -1,8 +1,8 @@
 package net.logicim.domain.passive.subcircuit;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.common.Passive;
@@ -17,12 +17,15 @@ public class SubcircuitInstance
   protected Map<String, List<TracePort>> namedPins;
   protected SubcircuitInstanceSimulation subcircuitInstanceSimulation;
 
-  public SubcircuitInstance(CircuitSimulation circuitSimulation,
-                            String name)
+  public SubcircuitInstance(Circuit circuit, String name)
   {
-    super(circuitSimulation.getCircuit(), name);
+    super(circuit, name);
     this.namedPins = new LinkedHashMap<>();
-    this.subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, this);
+  }
+
+  public void setSubcircuitInstanceSimulation(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  {
+    this.subcircuitInstanceSimulation = subcircuitInstanceSimulation;
   }
 
   @Override

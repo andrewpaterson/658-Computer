@@ -4,9 +4,10 @@ import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
+import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.circuit.SubcircuitEditorData;
-import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
+import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -20,7 +21,9 @@ import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.CircuitLoaders;
+import net.logicim.ui.simulation.DataViewMap;
 import net.logicim.ui.simulation.StaticViewIterator;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 
 import java.util.*;
@@ -284,8 +287,20 @@ public class SubcircuitEditor
   public List<View> pasteClipboardViews(List<TraceData> traces,
                                         List<StaticData<?>> components)
   {
-    Map<ViewData, View> views = loadViews(traces, components, true, true);
-    return new ArrayList<>(views.values());
+    List<StaticData<?>> statics = new ArrayList<>();
+    List<SubcircuitInstanceData> subcircuitInstances = new ArrayList<>();
+    for (StaticData<?> component : components)
+    {
+      if (component instanceof SubcircuitInstanceData)
+      {
+        subcircuitInstances.add((SubcircuitInstanceData) component);
+      }
+      else
+      {
+        statics.add(component);
+      }
+    }
+    return loadViews(traces, subcircuitInstances, statics, true, true);
   }
 
   public Selection getSelection()
@@ -318,50 +333,114 @@ public class SubcircuitEditor
     subcircuitView.createTraceViews(lines, subcircuitSimulation);
   }
 
-  public Map<ViewData, View> loadViews(List<TraceData> traces,
-                                       List<StaticData<?>> components,
-                                       boolean appendIds,
-                                       boolean newComponentPropertyStep)
+  public List<View> loadViews(List<TraceData> traces,
+                              List<SubcircuitInstanceData> subcircuitInstances,
+                              List<StaticData<?>> staticDatas,
+                              boolean appendIds,
+                              boolean newComponentPropertyStep)
   {
-    Map<ViewData, View> views = new LinkedHashMap<>();
+    Map<TraceData, TraceView> traceViews = loadTraceViews(traces, appendIds);
+    Map<StaticData<?>, StaticView<?>> staticViews = loadStaticViews(staticDatas, appendIds, newComponentPropertyStep);
+    Map<SubcircuitInstanceData, SubcircuitInstanceView> subcircuitInstanceViews = loadSubcircuitInstances(subcircuitInstances, appendIds, newComponentPropertyStep);
 
-    for (TraceData traceData : traces)
+    ArrayList<View> views = new ArrayList<>();
+    views.addAll(traceViews.values());
+    views.addAll(staticViews.values());
+    views.addAll(subcircuitInstanceViews.values());
+    return views;
+  }
+
+  public Map<SubcircuitInstanceData, SubcircuitInstanceView> loadSubcircuitInstances(List<SubcircuitInstanceData> subcircuitInstances,
+                                                                                     boolean appendIds,
+                                                                                     boolean newComponentPropertyStep)
+  {
+    Map<SubcircuitInstanceData, SubcircuitInstanceView> subcircuitInstanceViews = new LinkedHashMap<>();
+    for (SubcircuitInstanceData subcircuitInstance : subcircuitInstances)
     {
-      TraceView traceView = traceData.createAndEnableTraceView(this);
-      views.put(traceData, traceView);
+      SubcircuitInstanceView subcircuitInstanceView = subcircuitInstance.createAndEnableStaticView(this, newComponentPropertyStep);
+      subcircuitInstanceViews.put(subcircuitInstance, subcircuitInstanceView);
       if (!appendIds)
       {
-        traceView.setId(traceData.id);
+        subcircuitInstanceView.setId(subcircuitInstance.id);
       }
     }
+    return subcircuitInstanceViews;
+  }
 
-    for (StaticData<?> staticData : components)
+  public Map<StaticData<?>, StaticView<?>> loadStaticViews(List<StaticData<?>> staticDatas,
+                                                           boolean appendIds,
+                                                           boolean newComponentPropertyStep)
+  {
+    Map<StaticData<?>, StaticView<?>> staticViews = new LinkedHashMap<>();
+    for (StaticData<?> staticData : staticDatas)
     {
       StaticView<?> staticView = staticData.createAndEnableStaticView(this, newComponentPropertyStep);
-      views.put(staticData, staticView);
+      staticViews.put(staticData, staticView);
       if (!appendIds)
       {
         staticView.setId(staticData.id);
       }
     }
-
-    return views;
+    return staticViews;
   }
 
-  public void loadComponents(Map<ViewData, View> dataViewMap,
+  public Map<TraceData, TraceView> loadTraceViews(List<TraceData> traces,
+                                                  boolean appendIds)
+  {
+    Map<TraceData, TraceView> traceViews = new LinkedHashMap<>();
+    for (TraceData traceData : traces)
+    {
+      TraceView traceView = traceData.createAndEnableTraceView(this);
+      traceViews.put(traceData, traceView);
+      if (!appendIds)
+      {
+        traceView.setId(traceData.id);
+      }
+    }
+    return traceViews;
+  }
+
+  public DataViewMap loadSubcircuit(SubcircuitData subcircuitData,
+                                    boolean appendIds,
+                                    boolean newComponentPropertyStep)
+  {
+    Map<TraceData, TraceView> traceViews = loadTraceViews(subcircuitData.traces, appendIds);
+    Map<StaticData<?>, StaticView<?>> staticViews = loadStaticViews(subcircuitData.statics, appendIds, newComponentPropertyStep);
+    Map<SubcircuitInstanceData, SubcircuitInstanceView> subcircuitInstanceViews = loadSubcircuitInstances(subcircuitData.subcircuitInstances, appendIds, newComponentPropertyStep);
+
+    return new DataViewMap(traceViews, staticViews, subcircuitInstanceViews);
+  }
+
+  public void loadComponents(DataViewMap dataViewMap,
                              SubcircuitSimulation subcircuitSimulation,
                              CircuitLoaders circuitLoaders)
   {
-    for (Map.Entry<ViewData, View> entry : dataViewMap.entrySet())
+    Map<StaticData<?>, StaticView<?>> staticViews = dataViewMap.staticViews;
+    Map<TraceData, TraceView> traceViews = dataViewMap.traceViews;
+    for (Map.Entry<StaticData<?>, StaticView<?>> entry : staticViews.entrySet())
     {
-      ViewData data = entry.getKey();
+      StaticData<?> data = entry.getKey();
       if (data.appliesToSimulation(subcircuitSimulation.getId()))
       {
-        SubcircuitEditorLoadDataHelper.loadViewData(
-            entry.getValue(),
-            data,
-            subcircuitSimulation,
-            circuitLoaders);
+        StaticView<?> staticView = entry.getValue();
+        SubcircuitEditorLoadDataHelper.loadViewData(staticView,
+                                                    data,
+                                                    subcircuitSimulation,
+                                                    circuitLoaders);
+      }
+
+    }
+
+    for (Map.Entry<TraceData, TraceView> entry : traceViews.entrySet())
+    {
+      TraceData data = entry.getKey();
+      if (data.appliesToSimulation(subcircuitSimulation.getId()))
+      {
+        TraceView traceView = entry.getValue();
+        SubcircuitEditorLoadDataHelper.loadViewData(traceView,
+                                                    data,
+                                                    subcircuitSimulation,
+                                                    circuitLoaders);
       }
     }
   }

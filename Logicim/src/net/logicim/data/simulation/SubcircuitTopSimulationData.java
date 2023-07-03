@@ -14,7 +14,6 @@ public class SubcircuitTopSimulationData
     super(subcircuitSimulationId,
           subcircuitEditorId,
           circuitSimulationId);
-    this.subcircuitEditorId = subcircuitEditorId;
   }
 }
 

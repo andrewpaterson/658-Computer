@@ -47,6 +47,7 @@ public class SubcircuitInstanceView
   protected TextView comment;
 
   protected Map<SubcircuitSimulation, SubcircuitInstance> simulationSubcircuitInstances;
+  protected List<SubcircuitInstanceSimulation> subcircuitInstanceSimulations;
 
   public SubcircuitInstanceView(SubcircuitView containingSubcircuitView,
                                 SubcircuitView instanceSubcircuitView,
@@ -62,6 +63,7 @@ public class SubcircuitInstanceView
     this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
     this.simulationSubcircuitInstances = new LinkedHashMap<>();
+    this.subcircuitInstanceSimulations = new ArrayList<>();
 
     createPinsAndGraphics();
     finaliseView();
@@ -223,8 +225,10 @@ public class SubcircuitInstanceView
   {
     validateCanCreateComponent(containingSubcircuitSimulation);
 
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(containingSubcircuitSimulation.getCircuitSimulation(), properties.name);
-    SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
+    subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
 
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
 
@@ -243,6 +247,8 @@ public class SubcircuitInstanceView
     }
 
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
+    subcircuitInstanceSimulations.add(subcircuitInstanceSimulation);
+
     instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
 
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);

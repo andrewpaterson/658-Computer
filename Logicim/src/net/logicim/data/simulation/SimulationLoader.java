@@ -41,9 +41,9 @@ public class SimulationLoader
     }
   }
 
-  public SubcircuitInstanceSimulation create(CircuitSimulation circuitSimulation,
-                                             SubcircuitInstance subcircuitInstance,
-                                             long subcircuitSimulationId)
+  public SubcircuitInstanceSimulation doStuff(CircuitSimulation circuitSimulation,
+                                              SubcircuitInstance subcircuitInstance,
+                                              long subcircuitSimulationId)
   {
     if (subcircuitSimulationId > 0)
     {

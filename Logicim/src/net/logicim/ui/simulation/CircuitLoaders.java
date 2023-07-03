@@ -37,13 +37,6 @@ public class CircuitLoaders
     return simulationLoader.create(circuitSimulation, subcircuitEditor, subcircuitSimulationId);
   }
 
-  public SubcircuitInstanceSimulation createSubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                                                         SubcircuitInstance subcircuitInstance,
-                                                                         long subcircuitSimulationId)
-  {
-    return simulationLoader.create(circuitSimulation, subcircuitInstance, subcircuitSimulationId);
-  }
-
   public SubcircuitSimulation getSubcircuitSimulation(long subcircuitSimulationId)
   {
     return simulationLoader.getSubcircuitSimulation(subcircuitSimulationId);

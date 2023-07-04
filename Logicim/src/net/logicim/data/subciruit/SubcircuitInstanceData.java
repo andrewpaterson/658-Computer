@@ -20,7 +20,9 @@ public class SubcircuitInstanceData
   public int width;
   public int height;
 
-  public Set<Long> simulation;
+  public Set<Long> simulationSubcircuitInstances;
+  public List<Long> subcircuitInstanceSimulations;
+
 
   public SubcircuitInstanceData()
   {
@@ -33,7 +35,8 @@ public class SubcircuitInstanceData
                                 long id,
                                 boolean enabled,
                                 boolean selected,
-                                Set<Long> simulationIDs,
+                                Set<Long> simulationSubcircuitInstances,
+                                List<Long> subcircuitInstanceSimulations,
                                 List<SimulationMultiPortData> ports,
                                 String comment,
                                 int width,
@@ -46,8 +49,9 @@ public class SubcircuitInstanceData
           id,
           enabled,
           selected);
-    this.simulation = simulationIDs;
     this.subcircuitTypeName = subcircuitTypeName;
+    this.simulationSubcircuitInstances = simulationSubcircuitInstances;
+    this.subcircuitInstanceSimulations = subcircuitInstanceSimulations;
     this.comment = comment;
     this.width = width;
     this.height = height;
@@ -71,7 +75,7 @@ public class SubcircuitInstanceData
   @Override
   public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
   {
-    componentView.createComponent(subcircuitSimulation);
+    componentView.createSubcircuitInstance(subcircuitSimulation);
 
     loadPorts(subcircuitSimulation, circuitLoaders, componentView);
   }
@@ -79,7 +83,7 @@ public class SubcircuitInstanceData
   @Override
   public boolean appliesToSimulation(long id)
   {
-    return simulation.contains(id);
+    return simulationSubcircuitInstances.contains(id);
   }
 }
 

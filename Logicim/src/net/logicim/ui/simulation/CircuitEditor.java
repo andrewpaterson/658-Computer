@@ -6,18 +6,16 @@ import net.logicim.common.type.Int2D;
 import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.SubcircuitEditorData;
-import net.logicim.data.common.ViewData;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.data.simulation.SubcircuitInstanceSimulationData;
 import net.logicim.data.simulation.SubcircuitSimulationData;
 import net.logicim.data.simulation.SubcircuitTopSimulationData;
+import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.event.Event;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -348,7 +346,7 @@ public class CircuitEditor
 
     for (CircuitSimulationData circuitSimulationData : circuitData.circuitSimulations)
     {
-      CircuitSimulation circuitSimulation = loaders.createCircuitSimulation(circuitSimulationData.name, circuitSimulationData.id);
+      CircuitSimulation circuitSimulation = loaders.simulationLoader.createCircuitSimulation(circuitSimulationData.name, circuitSimulationData.id);
       circuitSimulation.getTimeline().load(circuitSimulationData.timeline);
     }
 
@@ -360,22 +358,14 @@ public class CircuitEditor
         throw new SimulatorException("Cannot find a circuit simulation with id [%s].", subcircuitSimulationData.circuitSimulationId);
       }
 
+      SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitEditorMap, subcircuitSimulationData.subcircuitEditorId);
       if (subcircuitSimulationData instanceof SubcircuitTopSimulationData)
       {
-        SubcircuitTopSimulationData subcircuitTopSimulationData = (SubcircuitTopSimulationData) subcircuitSimulationData;
-        SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitTopSimulationData.subcircuitEditorId);
-        if (subcircuitEditor == null)
-        {
-          throw new SimulatorException("Cannot find a subcircuit editor with id [%s].", subcircuitTopSimulationData.subcircuitEditorId);
-        }
-        loaders.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
+        loaders.getSimulationLoader().createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
       }
       else if (subcircuitSimulationData instanceof SubcircuitInstanceSimulationData)
       {
-        SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), null);
-        SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
-        subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
-        subcircuitInstanceSimulation.setId(subcircuitSimulationData.subcircuitSimulationId);
+        loaders.getSimulationLoader().createSubcircuitInstanceSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
       }
       else
       {
@@ -386,16 +376,46 @@ public class CircuitEditor
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
       SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
+      SubcircuitSimulation containingSubcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
+
+      DataViewMap dataViewMap = subcircuitEditorViews.get(subcircuitEditor);
+      for (Map.Entry<SubcircuitInstanceData, SubcircuitInstanceView> entry : dataViewMap.subcircuitInstanceViews.entrySet())
+      {
+        SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
+        SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
+
+        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
+        {
+          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
+          subcircuitInstanceData.createAndConnectComponent(subcircuitSimulation, loaders, subcircuitInstanceView);
+        }
+
+        // subcircuitInstanceData.subcircuitInstanceSimulations
+      }
+    }
+
+    for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
+    {
+      SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
       SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
 
       DataViewMap dataViewMap = subcircuitEditorViews.get(subcircuitEditor);
-      subcircuitEditor.loadComponents(dataViewMap,
-                                      subcircuitSimulation,
-                                      loaders);
+      subcircuitEditor.loadStatics(dataViewMap, subcircuitSimulation, loaders);
+      subcircuitEditor.loadTraces(dataViewMap, subcircuitSimulation, loaders);
     }
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
     currentCircuitSimulation = loaders.getCircuitSimulation(circuitData.currentSimulation);
+  }
+
+  protected SubcircuitEditor getSubcircuitEditor(Map<Long, SubcircuitEditor> subcircuitEditorMap, long subcircuitEditorId)
+  {
+    SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitEditorId);
+    if (subcircuitEditor == null)
+    {
+      throw new SimulatorException("Cannot find a subcircuit editor with id [%s].", subcircuitEditorId);
+    }
+    return subcircuitEditor;
   }
 
   protected SubcircuitEditor getSubcircuitEditor(long subcircuitId)

@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
@@ -213,7 +214,8 @@ public class SubcircuitInstanceView
                                       id,
                                       enabled,
                                       selected,
-                                      savSimulationSubcircuitInstanceIDs(),
+                                      saveSimulationSubcircuitInstanceIDs(),
+                                      saveSubcircuitInstanceSimulationsIDs(),
                                       savePorts(),
                                       properties.comment,
                                       properties.width,
@@ -221,7 +223,12 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public SubcircuitInstance createComponent(SubcircuitSimulation containingSubcircuitSimulation)
+  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+    throw new SimulatorException("SubcircuitInstanceView.createComponent() is not implemented.  Call createSubcircuitInstance() instead.");
+  }
+
+  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation)
   {
     validateCanCreateComponent(containingSubcircuitSimulation);
 
@@ -509,14 +516,24 @@ public class SubcircuitInstanceView
     return simulationSubcircuitInstances.keySet();
   }
 
-  protected Set<Long> savSimulationSubcircuitInstanceIDs()
+  protected Set<Long> saveSimulationSubcircuitInstanceIDs()
   {
-    LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
+    LinkedHashSet<Long> result = new LinkedHashSet<>(simulationSubcircuitInstances.size());
     for (SubcircuitSimulation subcircuitSimulation : simulationSubcircuitInstances.keySet())
     {
-      simulationIDs.add(subcircuitSimulation.getId());
+      result.add(subcircuitSimulation.getId());
     }
-    return simulationIDs;
+    return result;
+  }
+
+  protected List<Long> saveSubcircuitInstanceSimulationsIDs()
+  {
+    ArrayList<Long> result = new ArrayList<>(subcircuitInstanceSimulations.size());
+    for (SubcircuitSimulation subcircuitSimulation : subcircuitInstanceSimulations)
+    {
+      result.add(subcircuitSimulation.getId());
+    }
+    return result;
   }
 }
 

@@ -646,7 +646,7 @@ public class SubcircuitView
 
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      Component component = subcircuitInstanceView.createComponent(subcircuitSimulation);
+      Component component = subcircuitInstanceView.createSubcircuitInstance(subcircuitSimulation);
       components.add(component);
     }
     return components;

@@ -16,11 +16,10 @@ public class SubcircuitInstanceSimulation
   }
 
   public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                      long id,
-                                      SubcircuitInstance subcircuitInstance)
+                                      long id)
   {
     super(circuitSimulation, id);
-    this.subcircuitInstance = subcircuitInstance;
+    this.subcircuitInstance = null;
   }
 
   @Override

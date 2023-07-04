@@ -411,26 +411,9 @@ public class SubcircuitEditor
     return new DataViewMap(traceViews, staticViews, subcircuitInstanceViews);
   }
 
-  public void loadComponents(DataViewMap dataViewMap,
-                             SubcircuitSimulation subcircuitSimulation,
-                             CircuitLoaders circuitLoaders)
+  public void loadTraces(DataViewMap dataViewMap, SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders)
   {
-    Map<StaticData<?>, StaticView<?>> staticViews = dataViewMap.staticViews;
     Map<TraceData, TraceView> traceViews = dataViewMap.traceViews;
-    for (Map.Entry<StaticData<?>, StaticView<?>> entry : staticViews.entrySet())
-    {
-      StaticData<?> data = entry.getKey();
-      if (data.appliesToSimulation(subcircuitSimulation.getId()))
-      {
-        StaticView<?> staticView = entry.getValue();
-        SubcircuitEditorLoadDataHelper.loadViewData(staticView,
-                                                    data,
-                                                    subcircuitSimulation,
-                                                    circuitLoaders);
-      }
-
-    }
-
     for (Map.Entry<TraceData, TraceView> entry : traceViews.entrySet())
     {
       TraceData data = entry.getKey();
@@ -438,6 +421,23 @@ public class SubcircuitEditor
       {
         TraceView traceView = entry.getValue();
         SubcircuitEditorLoadDataHelper.loadViewData(traceView,
+                                                    data,
+                                                    subcircuitSimulation,
+                                                    circuitLoaders.getTraceLoader());
+      }
+    }
+  }
+
+  public void loadStatics(DataViewMap dataViewMap, SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders)
+  {
+    Map<StaticData<?>, StaticView<?>> staticViews = dataViewMap.staticViews;
+    for (Map.Entry<StaticData<?>, StaticView<?>> entry : staticViews.entrySet())
+    {
+      StaticData<?> data = entry.getKey();
+      if (data.appliesToSimulation(subcircuitSimulation.getId()))
+      {
+        StaticView<?> staticView = entry.getValue();
+        SubcircuitEditorLoadDataHelper.loadViewData(staticView,
                                                     data,
                                                     subcircuitSimulation,
                                                     circuitLoaders);

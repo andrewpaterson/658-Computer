@@ -150,6 +150,10 @@ public class LogicimFileReader
     {
       return new SetElementData();
     }
+    else if (ListElementData.class.getSimpleName().equals(type))
+    {
+      return new ListElementData();
+    }
     else if (ValueData.class.getSimpleName().equals(type))
     {
       return new ValueData();
@@ -484,6 +488,11 @@ public class LogicimFileReader
     setElementData.load(attributes);
   }
 
+  private void startListElementData(ListElementData listElementData, Map<String, String> attributes)
+  {
+    listElementData.load(attributes);
+  }
+
   @Override
   public void startElement(String uri, String lName, String qName, Attributes attr)
   {
@@ -516,6 +525,10 @@ public class LogicimFileReader
           else if (o instanceof SetElementData)
           {
             startSetElementData((SetElementData) o, attributeMap);
+          }
+          else if (o instanceof ListElementData)
+          {
+            startListElementData((ListElementData) o, attributeMap);
           }
           else if (o instanceof ReflectiveData)
           {
@@ -591,9 +604,8 @@ public class LogicimFileReader
         SaveXMLDataField saveXMLDataField = (SaveXMLDataField) xmlDataFieldStackMinusOne;
         if (containingClassField.typeInstance instanceof ArrayListData)
         {
-          int index = Integer.parseInt(attributes.get(INDEX));
           ArrayListData listData = (ArrayListData) containingClassField.typeInstance;
-          listData.set(index, saveXMLDataField.typeInstance.getObject());
+          listData.set(saveXMLDataField.typeInstance.getObject());
         }
         else if (containingClassField.typeInstance instanceof LinkedHashMapData)
         {
@@ -657,6 +669,11 @@ public class LogicimFileReader
         else if (containingClassField.typeInstance instanceof SetElementData)
         {
           SetElementData data = (SetElementData) containingClassField.typeInstance;
+          data.set(((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance);
+        }
+        else if (containingClassField.typeInstance instanceof ListElementData)
+        {
+          ListElementData data = (ListElementData) containingClassField.typeInstance;
           data.set(((SaveXMLDataField) xmlDataFieldStackMinusOne).typeInstance);
         }
         else if (containingClassField.typeInstance instanceof KeyData)

@@ -535,5 +535,10 @@ public class SubcircuitInstanceView
     }
     return result;
   }
+
+  public void add(SubcircuitInstanceSimulation subcircuitSimulation)
+  {
+    subcircuitInstanceSimulations.add(subcircuitSimulation);
+  }
 }
 

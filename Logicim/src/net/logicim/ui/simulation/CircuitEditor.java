@@ -16,6 +16,7 @@ import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.event.Event;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -390,7 +391,11 @@ public class CircuitEditor
           subcircuitInstanceData.createAndConnectComponent(subcircuitSimulation, loaders, subcircuitInstanceView);
         }
 
-        // subcircuitInstanceData.subcircuitInstanceSimulations
+        for (Long simulationId : subcircuitInstanceData.subcircuitInstanceSimulations)
+        {
+          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
+          subcircuitInstanceView.add((SubcircuitInstanceSimulation) subcircuitSimulation);
+        }
       }
     }
 

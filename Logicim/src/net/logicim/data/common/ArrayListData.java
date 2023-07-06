@@ -32,9 +32,10 @@ public class ArrayListData
     return list;
   }
 
-  public void set(int index, Object object)
+  public void set(Object object)
   {
-    list.set(index, object);
+    ListElementData setElement = (ListElementData) object;
+    list.set(setElement.index, setElement.value.object);
   }
 }
 

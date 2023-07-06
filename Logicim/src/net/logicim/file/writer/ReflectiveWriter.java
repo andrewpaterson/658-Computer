@@ -298,13 +298,44 @@ public abstract class ReflectiveWriter
 
       for (int i = 0; i < size; i++)
       {
-        Object saveData = list.get(i);
-        Element element = doc.createElement("element");
-        element.setAttribute(TYPE, getXMLTag(saveData));
-        element.setAttribute("index", Integer.toString(i));
-        listContainer.appendChild(element);
-        writeReflectiveData(saveData, doc, element);
+        Object valueData = list.get(i);
+        Element entryElement = doc.createElement("element");
+        entryElement.setAttribute("index", Integer.toString(i));
+        entryElement.setAttribute(TYPE, getXMLTag(ListElementData.class));
+
+        Element valueElement = doc.createElement("value");
+        valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
+        entryElement.appendChild(valueElement);
+        writeReflectiveData(new ValueData(valueData), doc, valueElement);
+
+        listContainer.appendChild(entryElement);
       }
+    }
+  }
+
+  public static void writeSet(Document doc, Element parent, String name, Set<?> set)
+  {
+    int size = set.size();
+
+    Element listContainer = doc.createElement(name);
+    listContainer.setAttribute(TYPE, set.getClass().getSimpleName());
+    listContainer.setAttribute("size", Integer.toString(size));
+    parent.appendChild(listContainer);
+
+    int i = 0;
+    for (Object valueData : set)
+    {
+      Element entryElement = doc.createElement("element");
+      entryElement.setAttribute("index", Integer.toString(i));
+      entryElement.setAttribute(TYPE, getXMLTag(SetElementData.class));
+
+      Element valueElement = doc.createElement("value");
+      valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
+      entryElement.appendChild(valueElement);
+      writeReflectiveData(new ValueData(valueData), doc, valueElement);
+
+      listContainer.appendChild(entryElement);
+      i++;
     }
   }
 
@@ -330,32 +361,6 @@ public abstract class ReflectiveWriter
       keyElement.setAttribute(TYPE, getXMLTag(KeyData.class));
       entryElement.appendChild(keyElement);
       writeReflectiveData(new KeyData(keyData), doc, keyElement);
-
-      Element valueElement = doc.createElement("value");
-      valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));
-      entryElement.appendChild(valueElement);
-      writeReflectiveData(new ValueData(valueData), doc, valueElement);
-
-      listContainer.appendChild(entryElement);
-      i++;
-    }
-  }
-
-  public static void writeSet(Document doc, Element parent, String name, Set<?> set)
-  {
-    int size = set.size();
-
-    Element listContainer = doc.createElement(name);
-    listContainer.setAttribute(TYPE, set.getClass().getSimpleName());
-    listContainer.setAttribute("size", Integer.toString(size));
-    parent.appendChild(listContainer);
-
-    int i = 0;
-    for (Object valueData : set)
-    {
-      Element entryElement = doc.createElement("element");
-      entryElement.setAttribute("index", Integer.toString(i));
-      entryElement.setAttribute(TYPE, getXMLTag(SetElementData.class));
 
       Element valueElement = doc.createElement("value");
       valueElement.setAttribute(TYPE, getXMLTag(ValueData.class));

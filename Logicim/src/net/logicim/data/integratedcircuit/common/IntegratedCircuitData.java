@@ -20,9 +20,7 @@ import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitLoaders;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -121,15 +119,15 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation,
+  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         ICV integratedCircuitView)
   {
-    integratedCircuitView.createComponent(subcircuitSimulation);
+    integratedCircuitView.createComponent(containingSubcircuitSimulation);
 
-    loadState(subcircuitSimulation, integratedCircuitView);
-    loadEvents(subcircuitSimulation, integratedCircuitView);
-    loadPorts(subcircuitSimulation, circuitLoaders, integratedCircuitView);
+    loadState(containingSubcircuitSimulation, integratedCircuitView);
+    loadEvents(containingSubcircuitSimulation, integratedCircuitView);
+    loadPorts(containingSubcircuitSimulation, circuitLoaders, integratedCircuitView);
   }
 
   private void loadState(SubcircuitSimulation subcircuitSimulation, ICV integratedCircuitView)

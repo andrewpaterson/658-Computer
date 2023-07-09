@@ -1,8 +1,10 @@
 package net.logicim.data.subciruit;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitLoaders;
@@ -73,11 +75,16 @@ public class SubcircuitInstanceData
   }
 
   @Override
-  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
+  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
   {
-    componentView.createSubcircuitInstance(subcircuitSimulation);
+    throw new SimulatorException("SubcircuitInstanceData.createAndConnectComponent() is not implemented.  Call createAndConnectComponent2() instead.");
+  }
 
-    loadPorts(subcircuitSimulation, circuitLoaders, componentView);
+  public void createAndConnectComponent2(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
+  {
+    componentView.createSubcircuitInstance(containingSubcircuitSimulation, subcircuitInstanceSimulation);
+
+    loadPorts(containingSubcircuitSimulation, circuitLoaders, componentView);
   }
 
   @Override

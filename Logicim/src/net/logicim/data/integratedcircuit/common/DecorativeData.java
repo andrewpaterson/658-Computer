@@ -3,9 +3,7 @@ package net.logicim.data.integratedcircuit.common;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitLoaders;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 
 public abstract class DecorativeData<T extends DecorativeView<?>>
@@ -30,7 +28,7 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
           selected);
   }
 
-  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation,
+  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         T componentView)
   {

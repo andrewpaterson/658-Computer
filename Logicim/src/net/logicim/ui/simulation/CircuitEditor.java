@@ -7,10 +7,7 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.integratedcircuit.common.StaticData;
-import net.logicim.data.simulation.CircuitSimulationData;
-import net.logicim.data.simulation.SubcircuitInstanceSimulationData;
-import net.logicim.data.simulation.SubcircuitSimulationData;
-import net.logicim.data.simulation.SubcircuitTopSimulationData;
+import net.logicim.data.simulation.*;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
@@ -327,6 +324,7 @@ public class CircuitEditor
     currentSubcircuitEditor = null;
 
     CircuitLoaders loaders = new CircuitLoaders();
+    SimulationLoader simulationLoader = loaders.getSimulationLoader();
     SubcircuitEditor.resetNextId();
     Event.resetNextId();
     View.resetNextId();
@@ -362,11 +360,11 @@ public class CircuitEditor
       SubcircuitEditor subcircuitEditor = getSubcircuitEditor(subcircuitEditorMap, subcircuitSimulationData.subcircuitEditorId);
       if (subcircuitSimulationData instanceof SubcircuitTopSimulationData)
       {
-        loaders.getSimulationLoader().createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
+        simulationLoader.createSubcircuitTopSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
       }
       else if (subcircuitSimulationData instanceof SubcircuitInstanceSimulationData)
       {
-        loaders.getSimulationLoader().createSubcircuitInstanceSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
+        simulationLoader.createSubcircuitInstanceSimulation(circuitSimulation, subcircuitEditor, subcircuitSimulationData.subcircuitSimulationId);
       }
       else
       {
@@ -385,16 +383,17 @@ public class CircuitEditor
         SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
         SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
 
-        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
-        {
-          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
-          subcircuitInstanceData.createAndConnectComponent(subcircuitSimulation, loaders, subcircuitInstanceView);
-        }
+//        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
+//        {
+//          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
+//          subcircuitInstanceData.createAndConnectComponent2(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
+//        }
 
         for (Long simulationId : subcircuitInstanceData.subcircuitInstanceSimulations)
         {
-          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
-          subcircuitInstanceView.add((SubcircuitInstanceSimulation) subcircuitSimulation);
+          SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) loaders.getSubcircuitSimulation(simulationId);
+          subcircuitInstanceView.add(subcircuitSimulation);
+          subcircuitInstanceData.createAndConnectComponent2(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
         }
       }
     }
@@ -402,11 +401,11 @@ public class CircuitEditor
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
       SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
-      SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
+      SubcircuitSimulation containingSubcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationData.subcircuitSimulationId);
 
       DataViewMap dataViewMap = subcircuitEditorViews.get(subcircuitEditor);
-      subcircuitEditor.loadStatics(dataViewMap, subcircuitSimulation, loaders);
-      subcircuitEditor.loadTraces(dataViewMap, subcircuitSimulation, loaders);
+      subcircuitEditor.loadStatics(dataViewMap, containingSubcircuitSimulation, loaders);
+      subcircuitEditor.loadTraces(dataViewMap, containingSubcircuitSimulation, loaders);
     }
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);

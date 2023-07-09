@@ -239,6 +239,25 @@ public class SubcircuitInstanceView
 
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
 
+     subcircuitInstance = createAndAddComponents(containingSubcircuitSimulation, subcircuitInstanceSimulation, subcircuitInstance);
+
+     instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
+
+    return subcircuitInstance;
+  }
+
+  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  {
+    CircuitSimulation circuitSimulation = subcircuitInstanceSimulation.getCircuitSimulation();
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
+    subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
+
+    return createAndAddComponents(containingSubcircuitSimulation, subcircuitInstanceSimulation, subcircuitInstance);
+  }
+
+  protected SubcircuitInstance createAndAddComponents(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation, SubcircuitInstance subcircuitInstance)
+  {
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
     {
@@ -255,8 +274,6 @@ public class SubcircuitInstanceView
 
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
     subcircuitInstanceSimulations.add(subcircuitInstanceSimulation);
-
-    instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
 
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
 

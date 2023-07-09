@@ -29,5 +29,10 @@ public class SubcircuitInstanceSimulation
                                                 subcircuitEditorId,
                                                 circuitSimulation.getId());
   }
+
+  public void setSubcircuitInstance(SubcircuitInstance subcircuitInstance)
+  {
+    this.subcircuitInstance = subcircuitInstance;
+  }
 }
 

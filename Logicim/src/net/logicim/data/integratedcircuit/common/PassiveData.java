@@ -39,13 +39,13 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
   }
 
   @Override
-  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation,
+  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation,
                                         CircuitLoaders circuitLoaders,
                                         PASSIVE passive)
   {
-    passive.createComponent(subcircuitSimulation);
+    passive.createComponent(containingSubcircuitSimulation);
 
-    loadPorts(subcircuitSimulation, circuitLoaders, passive);
+    loadPorts(containingSubcircuitSimulation, circuitLoaders, passive);
   }
 
   @Override

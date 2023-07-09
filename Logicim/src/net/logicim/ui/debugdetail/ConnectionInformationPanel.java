@@ -32,14 +32,14 @@ public class ConnectionInformationPanel
   }
 
   @Override
-  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int xOffset, int yOffset)
+  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int x, int y)
   {
-    int y = 0;
     int ySpacing = fontHeight / 2;
 
     List<View> connectedComponents = connectionView.getConnectedComponents();
     String hover = connectionView instanceof HoverConnectionView ? "(hover) " : "";
-    graphics.drawString("  < Position: " + connectionView.getGridPosition().x + ", " + connectionView.getGridPosition().y + " " + hover + ">", xOffset, y + yOffset);
+
+    graphics.drawString("  < Position: " + connectionView.getGridPosition().x + ", " + connectionView.getGridPosition().y + " " + hover + ">", x, y);
     y += fontHeight + ySpacing;
     View previousComponent = null;
     for (View connectedComponent : connectedComponents)
@@ -49,9 +49,8 @@ public class ConnectionInformationPanel
                                getComponentDetailString(subcircuitSimulation, connectedComponent);
 
       y = drawMultilineString(fontHeight,
-                              xOffset,
+                              x,
                               y,
-                              yOffset,
                               componentString);
 
       if (!((previousComponent instanceof TraceView || previousComponent == null) &&
@@ -197,6 +196,5 @@ public class ConnectionInformationPanel
       return "";
     }
   }
-
 }
 

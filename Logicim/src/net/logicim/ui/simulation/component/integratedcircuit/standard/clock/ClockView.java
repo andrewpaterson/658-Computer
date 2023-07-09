@@ -189,5 +189,11 @@ public class ClockView
   {
     newProperties.frequency_Hz = clamp(newProperties.frequency_Hz, 0, 999 * GHz);
   }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Frequency [%.0f]\nInverse Out [%s]\n", properties.frequency_Hz, properties.inverseOut);
+  }
 }
 

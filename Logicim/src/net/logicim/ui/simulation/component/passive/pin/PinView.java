@@ -9,8 +9,8 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
@@ -18,12 +18,12 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.domain.passive.power.PowerSource;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
@@ -477,6 +477,21 @@ public class PinView
     {
       labelView.setText(properties.name);
     }
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Bit Width [%s]\nFamily [%s]\nExplicit Power [%s]\nPin Alignment [%s]\nPin Anchour [%s]\nWeight [%s]\nInverting [%s]\nClock Notch [%s]\nRadix [%s]\n",
+                                                 properties.bitWidth,
+                                                 properties.family.toString(),
+                                                 properties.explicitPowerPorts,
+                                                 properties.alignment,
+                                                 properties.anchour,
+                                                 properties.weight,
+                                                 properties.inverting,
+                                                 properties.clockNotch,
+                                                 properties.radix);
   }
 }
 

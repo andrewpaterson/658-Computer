@@ -6,10 +6,10 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.data.passive.wire.SplitterProperties;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.BidirectionalPortMap;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.wire.Splitter;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
@@ -505,6 +505,31 @@ public class SplitterView
       }
     }
     return null;
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < properties.splitIndices.length; i++)
+    {
+      int splitIndex = properties.splitIndices[i];
+      builder.append("Split [");
+      builder.append(i);
+      builder.append(" -> ");
+      builder.append(splitIndex);
+      builder.append("]\n");
+    }
+
+    return super.toDebugString() +
+           String.format("Bit Width [%s]\nFan Out [%s]\nSpacing [%s]\nAppearance [%s]\nEnd Offset[%s]\n",
+                         properties.bitWidth,
+                         properties.fanOut,
+                         properties.gridSpacing,
+                         properties.appearance,
+                         properties.endOffset) +
+           builder.toString() +
+           toSimulationsDebugString(simulationBidirectionalPorts.keySet());
   }
 }
 

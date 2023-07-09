@@ -100,5 +100,11 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
       graphics.setColor(color);
     }
   }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Input Count [%s]\nInput Width [%s]\n", properties.inputCount, properties.inputWidth);
+  }
 }
 

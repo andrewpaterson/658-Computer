@@ -289,5 +289,10 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract void disconnect();
 
   public abstract List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView);
+
+  public String toDebugString()
+  {
+    return String.format("SubcircuitView [%s]\nPosition [%s]\nRotation [%s]\nFinalised [%s]\n", containingSubcircuitView.getTypeName(), position.toString(), rotation.toString(), finalised);
+  }
 }
 

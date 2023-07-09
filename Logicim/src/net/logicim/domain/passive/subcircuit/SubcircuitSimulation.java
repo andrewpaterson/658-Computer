@@ -20,7 +20,6 @@ public abstract class SubcircuitSimulation
 
   public SubcircuitSimulation(CircuitSimulation circuitSimulation, long id)
   {
-    System.out.println(String.format("%s(circuitSimulation{%s}, id{%s})", getClass().getSimpleName(), circuitSimulation.getDescription(), id));
     this.circuitSimulation = circuitSimulation;
 
     this.id = id;
@@ -42,7 +41,7 @@ public abstract class SubcircuitSimulation
 
   public String getDescription()
   {
-    return "ID [" + id + "], CircuitSimulation [" + circuitSimulation.getDescription() + "]";
+    return "Type [" + getType() + "] ID [" + id + "], CircuitSimulation [" + circuitSimulation.getDescription() + "]";
   }
 
   public Simulation getSimulation()
@@ -93,6 +92,8 @@ public abstract class SubcircuitSimulation
   {
     nextId = 1;
   }
+
+  protected abstract String getType();
 
   public abstract SubcircuitSimulationData save(long subcircuitEditorId);
 }

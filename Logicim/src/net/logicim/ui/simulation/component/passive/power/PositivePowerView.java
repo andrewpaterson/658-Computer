@@ -4,9 +4,9 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.data.passive.power.PositivePowerProperties;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.power.PowerPinNames;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
@@ -133,6 +133,12 @@ public class PositivePowerView
   public String getType()
   {
     return "Positive Power";
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Voltage [%.2fs]\n", properties.voltage_V);
   }
 }
 

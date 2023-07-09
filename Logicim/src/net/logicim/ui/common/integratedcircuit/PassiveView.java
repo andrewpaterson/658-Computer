@@ -4,8 +4,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 
@@ -86,6 +86,12 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
       simulationIDs.add(subcircuitSimulation.getId());
     }
     return simulationIDs;
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Name [%s]\n", properties.name);
   }
 
   public abstract PassiveData<?> save(boolean selected);

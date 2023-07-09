@@ -18,8 +18,11 @@ public class ComponentInformationPanel
   }
 
   @Override
-  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int xOffset, int yOffset)
+  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int x, int y)
   {
+
+    y = drawMultilineString(fontHeight, x, y, " < " + componentView.getClass().getSimpleName() + " >");
+    drawMultilineString(fontHeight, x, y, componentView.toDebugString());
   }
 }
 

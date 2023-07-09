@@ -5,8 +5,8 @@ import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.Component;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -121,6 +121,17 @@ public class LabelView
     graphics.setFont(font);
     graphics.setColor(color);
     graphics.setStroke(stroke);
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Label [%s]\nAlignment [%s]\nBold [%s]\nFill [%s]\nBorder[%s]\n" +
+                                                 properties.name,
+                                                 properties.alignment,
+                                                 properties.bold,
+                                                 properties.fill,
+                                                 properties.border);
   }
 }
 

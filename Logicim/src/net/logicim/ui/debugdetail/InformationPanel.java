@@ -41,7 +41,7 @@ public abstract class InformationPanel
     graphics.setClip(clip);
   }
 
-  protected int drawMultilineString(int fontHeight, int x, int y, int yOffset, String string)
+  protected int drawMultilineString(int fontHeight, int x, int y, String string)
   {
     String[] strings = string.split("\n");
     for (int i = 0; i < strings.length; i++)
@@ -49,7 +49,7 @@ public abstract class InformationPanel
       String s = strings[i];
       if (!((i == (strings.length - 1)) && ((s == null) || s.trim().isEmpty())))
       {
-        graphics.drawString(s, x, y + yOffset);
+        graphics.drawString(s, x, y);
         y += fontHeight;
       }
     }
@@ -69,5 +69,5 @@ public abstract class InformationPanel
     return first;
   }
 
-  protected abstract void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int xOffset, int yOffset);
+  protected abstract void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int x, int y);
 }

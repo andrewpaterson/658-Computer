@@ -17,6 +17,12 @@ public class SubcircuitTopSimulation
   }
 
   @Override
+  protected String getType()
+  {
+    return "Top";
+  }
+
+  @Override
   public SubcircuitTopSimulationData save(long subcircuitEditorId)
   {
     return new SubcircuitTopSimulationData(getId(),

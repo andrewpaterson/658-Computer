@@ -10,8 +10,8 @@ import net.logicim.data.integratedcircuit.event.MultiIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -19,16 +19,14 @@ import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.domain.common.defaults.DefaultLogicLevels;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends IntegratedCircuitProperties>
     extends ComponentView<PROPERTIES>
@@ -187,6 +185,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
       portNames.add(portName);
     }
     return portNames;
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + toSimulationsDebugString(simulationIntegratedCircuits.keySet());
   }
 
   protected abstract IC createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration);

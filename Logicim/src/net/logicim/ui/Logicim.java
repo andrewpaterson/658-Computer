@@ -422,7 +422,7 @@ public class Logicim
   {
     if (keyboardButtons.isAltDown())
     {
-      int infoWidth = 300;
+      int infoWidth = 500;
       int infoHeight = 300;
       Int2D mousePosition = this.mousePosition.get();
       if (width > infoWidth &&

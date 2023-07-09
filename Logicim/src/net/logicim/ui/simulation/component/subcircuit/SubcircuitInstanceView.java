@@ -239,9 +239,9 @@ public class SubcircuitInstanceView
 
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
 
-     subcircuitInstance = createAndAddComponents(containingSubcircuitSimulation, subcircuitInstanceSimulation, subcircuitInstance);
+    subcircuitInstance = createAndAddComponents(containingSubcircuitSimulation, subcircuitInstanceSimulation, subcircuitInstance);
 
-     instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
+    instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
 
     return subcircuitInstance;
   }
@@ -568,6 +568,20 @@ public class SubcircuitInstanceView
       }
     }
     return null;
+  }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Subcircuit Type Name [%s]\nComment [%s]\nWidth [%s]\nHeight [%s]\n",
+                                                 properties.subcircuitTypeName,
+                                                 properties.comment,
+                                                 properties.width,
+                                                 properties.height) +
+           "- Simulation Subcircuit Instances -\n" +
+           toSimulationsDebugString(simulationSubcircuitInstances.keySet()) +
+           "- Subcircuit Instance Simulations -\n" +
+           toSimulationsDebugString(subcircuitInstanceSimulations);
   }
 }
 

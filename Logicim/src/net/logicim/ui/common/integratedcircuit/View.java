@@ -6,6 +6,7 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class View
@@ -96,6 +97,18 @@ public abstract class View
   public static void resetNextId()
   {
     nextId = 1L;
+  }
+
+  protected String toSimulationsDebugString(Collection<? extends SubcircuitSimulation> subcircuitSimulations)
+  {
+    StringBuilder builder = new StringBuilder();
+    for (SubcircuitSimulation simulation : subcircuitSimulations)
+    {
+      builder.append("Simulation [");
+      builder.append(simulation.getDescription());
+      builder.append("]\n");
+    }
+    return builder.toString();
   }
 }
 

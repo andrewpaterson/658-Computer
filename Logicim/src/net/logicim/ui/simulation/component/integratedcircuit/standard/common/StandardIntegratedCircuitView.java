@@ -86,5 +86,11 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
       gndLine.paint(graphics, viewport);
     }
   }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Name [%s]\nFamily [%s]\nExplicit Power [%s]\n", properties.name, properties.family.toString(), properties.explicitPowerPorts);
+  }
 }
 

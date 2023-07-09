@@ -57,5 +57,11 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
     newProperties.inputCount = clamp(newProperties.inputCount, 1, PropertyClamp.MAX_WIDTH);
     newProperties.inputWidth = clamp(newProperties.inputWidth, 1, PropertyClamp.MAX_WIDTH);
   }
+
+  @Override
+  public String toDebugString()
+  {
+    return super.toDebugString() + String.format("Input Count [%s]\nInput Width [%s]\n", properties.inputCount, properties.inputWidth);
+  }
 }
 

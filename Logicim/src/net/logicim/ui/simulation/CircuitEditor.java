@@ -372,7 +372,6 @@ public class CircuitEditor
       }
     }
 
-    List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
       SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
@@ -384,8 +383,6 @@ public class CircuitEditor
         SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
         SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
 
-        subcircuitInstanceViews.add(subcircuitInstanceView);
-
         for (Long simulationId : subcircuitInstanceData.subcircuitInstanceSimulations)
         {
           SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) loaders.getSubcircuitSimulation(simulationId);
@@ -394,28 +391,7 @@ public class CircuitEditor
       }
     }
 
-    for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
-    {
-      SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
-
-      DataViewMap dataViewMap = subcircuitEditorViews.get(subcircuitEditor);
-      for (Map.Entry<SubcircuitInstanceData, SubcircuitInstanceView> entry : dataViewMap.subcircuitInstanceViews.entrySet())
-      {
-        SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
-        SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
-
-        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
-        {
-          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
-          SubcircuitInstanceSimulation simulationSubcircuitInstance = subcircuitInstanceView.getSimulationSubcircuitInstance(simulationId);
-          if (subcircuitSimulation != simulationSubcircuitInstance)
-          {
-            throw new SimulatorException("Where simulation?");
-          }
-        }
-      }
-    }
-
+    validateLoadSimulationSubcircuitInstances(circuitData.subcircuitSimulations, loaders, subcircuitEditorMap, subcircuitEditorViews);
 
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
@@ -429,6 +405,31 @@ public class CircuitEditor
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
     currentCircuitSimulation = loaders.getCircuitSimulation(circuitData.currentSimulation);
+  }
+
+  protected void validateLoadSimulationSubcircuitInstances(List<SubcircuitSimulationData> subcircuitSimulations, CircuitLoaders loaders, Map<Long, SubcircuitEditor> subcircuitEditorMap, Map<SubcircuitEditor, DataViewMap> subcircuitEditorViews)
+  {
+    for (SubcircuitSimulationData subcircuitSimulationData : subcircuitSimulations)
+    {
+      SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
+
+      DataViewMap dataViewMap = subcircuitEditorViews.get(subcircuitEditor);
+      for (Map.Entry<SubcircuitInstanceData, SubcircuitInstanceView> entry : dataViewMap.subcircuitInstanceViews.entrySet())
+      {
+        SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
+        SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
+
+        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
+        {
+          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
+          SubcircuitSimulation simulationSubcircuitInstance = subcircuitInstanceView.getSimulationSubcircuitInstance(simulationId);
+          if (subcircuitSimulation != simulationSubcircuitInstance)
+          {
+            throw new SimulatorException("Subcircuit instance simulation [%s] loaded on view does not match subcircuit instance in data [%s].", simulationSubcircuitInstance.getDescription(), subcircuitSimulation.getDescription());
+          }
+        }
+      }
+    }
   }
 
   protected SubcircuitEditor getSubcircuitEditor(Map<Long, SubcircuitEditor> subcircuitEditorMap, long subcircuitEditorId)

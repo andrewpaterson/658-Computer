@@ -34,5 +34,11 @@ public class SubcircuitInstanceSimulation
   {
     this.subcircuitInstance = subcircuitInstance;
   }
+
+  @Override
+  public String getDescription()
+  {
+    return super.getDescription() + ", SubcircuitInstance [" + subcircuitInstance.getDescription() + "]";
+  }
 }
 

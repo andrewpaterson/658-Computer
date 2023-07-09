@@ -558,9 +558,9 @@ public class SubcircuitInstanceView
     subcircuitInstanceSimulations.add(subcircuitSimulation);
   }
 
-  public SubcircuitInstanceSimulation getSimulationSubcircuitInstance(long simulationId)
+  public SubcircuitSimulation getSimulationSubcircuitInstance(long simulationId)
   {
-    for (SubcircuitInstanceSimulation subcircuitInstanceSimulation : subcircuitInstanceSimulations)
+    for (SubcircuitSimulation subcircuitInstanceSimulation : simulationSubcircuitInstances.keySet())
     {
       if (subcircuitInstanceSimulation.getId() == simulationId)
       {

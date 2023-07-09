@@ -42,7 +42,7 @@ public abstract class SubcircuitSimulation
 
   public String getDescription()
   {
-    return circuitSimulation.getDescription();
+    return "ID [" + id + "], CircuitSimulation [" + circuitSimulation.getDescription() + "]";
   }
 
   public Simulation getSimulation()

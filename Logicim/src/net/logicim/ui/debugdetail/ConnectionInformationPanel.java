@@ -1,10 +1,9 @@
-package net.logicim.ui;
+package net.logicim.ui.debugdetail;
 
 import net.logicim.common.util.StringUtil;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.common.Colours;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.HoverConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -18,12 +17,9 @@ import java.awt.*;
 import java.util.List;
 
 public class ConnectionInformationPanel
+    extends InformationPanel
 {
   protected ConnectionView connectionView;
-  protected Graphics2D graphics;
-  protected Viewport viewport;
-  private int width;
-  private int height;
 
   public ConnectionInformationPanel(ConnectionView connectionView,
                                     Graphics2D graphics,
@@ -31,30 +27,17 @@ public class ConnectionInformationPanel
                                     int width,
                                     int height)
   {
+    super(graphics, viewport, width, height);
     this.connectionView = connectionView;
-    this.graphics = graphics;
-    this.viewport = viewport;
-    this.width = width;
-    this.height = height;
   }
 
-  public void drawConnectionDetails(SubcircuitSimulation subcircuitSimulation, int left, int top)
+  @Override
+  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int xOffset, int yOffset)
   {
-    graphics.setColor(Colours.getInstance().getInfoBackground());
-    graphics.fillRect(left, top, width, height);
-    graphics.setColor(Colours.getInstance().getInfoBorder());
-    graphics.drawRect(left, top, width, height);
-    Shape clip = graphics.getClip();
-
-    graphics.setClip(left, top, width, height);
-    Font font = viewport.getFont(10, false);
-    FontMetrics metrics = graphics.getFontMetrics(font);
-    List<View> connectedComponents = connectionView.getConnectedComponents();
-    int fontHeight = metrics.getHeight();
-    int ySpacing = fontHeight / 2;
-    int yOffset = top + 10 + metrics.getAscent();
     int y = 0;
-    int xOffset = left + 10;
+    int ySpacing = fontHeight / 2;
+
+    List<View> connectedComponents = connectionView.getConnectedComponents();
     String hover = connectionView instanceof HoverConnectionView ? "(hover) " : "";
     graphics.drawString("  < Position: " + connectionView.getGridPosition().x + ", " + connectionView.getGridPosition().y + " " + hover + ">", xOffset, y + yOffset);
     y += fontHeight + ySpacing;
@@ -79,23 +62,6 @@ public class ConnectionInformationPanel
 
       previousComponent = connectedComponent;
     }
-
-    graphics.setClip(clip);
-  }
-
-  protected int drawMultilineString(int fontHeight, int x, int y, int yOffset, String string)
-  {
-    String[] strings = string.split("\n");
-    for (int i = 0; i < strings.length; i++)
-    {
-      String s = strings[i];
-      if (!((i == (strings.length - 1)) && ((s == null) || s.trim().isEmpty())))
-      {
-        graphics.drawString(s, x, y + yOffset);
-        y += fontHeight;
-      }
-    }
-    return y;
   }
 
   private String getComponentDetailString(SubcircuitSimulation subcircuitSimulation, View connectedComponent)
@@ -232,17 +198,5 @@ public class ConnectionInformationPanel
     }
   }
 
-  private boolean appendComma(StringBuilder builder, boolean first)
-  {
-    if (first)
-    {
-      first = false;
-    }
-    else
-    {
-      builder.append(", ");
-    }
-    return first;
-  }
 }
 

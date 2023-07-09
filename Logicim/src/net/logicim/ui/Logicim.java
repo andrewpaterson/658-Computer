@@ -15,6 +15,7 @@ import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -23,6 +24,10 @@ import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.debugdetail.ComponentInformationPanelFactory;
+import net.logicim.ui.debugdetail.ConnectionInformationPanelFactory;
+import net.logicim.ui.debugdetail.InformationPanel;
+import net.logicim.ui.debugdetail.InformationPanelFactory;
 import net.logicim.ui.editor.EditorAction;
 import net.logicim.ui.editor.SimulationSpeed;
 import net.logicim.ui.editor.SubcircuitViewParameters;
@@ -51,7 +56,6 @@ import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.undo.Undo;
 
 import java.awt.*;
@@ -395,13 +399,15 @@ public class Logicim
     if ((hoverComponentView != null) && (hoverConnectionView == null))
     {
       hoverComponentView.paintHover(graphics, viewport);
+
+      debugDetails(graphics, new ComponentInformationPanelFactory(hoverComponentView));
     }
 
     if (hoverConnectionView != null)
     {
       hoverConnectionView.paintHoverPort(graphics, viewport);
 
-      drawConnectionDetails(graphics);
+      debugDetails(graphics, new ConnectionInformationPanelFactory(hoverConnectionView));
     }
 
     if (editAction != null)
@@ -412,50 +418,48 @@ public class Logicim
     circuitEditor.getCurrentSelection().paint(graphics, viewport);
   }
 
-  protected void drawConnectionDetails(Graphics2D graphics)
+  protected void debugDetails(Graphics2D graphics, InformationPanelFactory informationPanelFactory)
   {
     if (keyboardButtons.isAltDown())
     {
       int infoWidth = 300;
       int infoHeight = 300;
+      Int2D mousePosition = this.mousePosition.get();
       if (width > infoWidth &&
-          height > infoHeight)
+          height > infoHeight && mousePosition != null)
       {
-        Int2D mousePosition = this.mousePosition.get();
-        if (mousePosition != null)
+        Font font = graphics.getFont();
+        Color color = graphics.getColor();
+
+        Int2D mousePositionOnGrid = getMousePositionOnGrid();
+        if (mousePositionOnGrid != null)
         {
-          Font font = graphics.getFont();
-          Color color = graphics.getColor();
-
-          Int2D mousePositionOnGrid = getMousePositionOnGrid();
-          if (mousePositionOnGrid != null)
+          int x = mousePosition.x - infoWidth / 2;
+          int y = mousePosition.y;
+          if (x < 0)
           {
-            int x = mousePosition.x - infoWidth / 2;
-            int y = mousePosition.y;
-            if (x < 0)
-            {
-              x = 0;
-            }
-            if (x > width - infoWidth)
-            {
-              x = width - infoWidth;
-            }
-
-            if (y < height / 2)
-            {
-              y = height - infoHeight;
-            }
-            else
-            {
-              y = 0;
-            }
-
-            new ConnectionInformationPanel(hoverConnectionView, graphics, viewport, infoWidth, infoHeight).drawConnectionDetails(circuitEditor.getSubcircuitSimulation(), x, y);
+            x = 0;
+          }
+          if (x > width - infoWidth)
+          {
+            x = width - infoWidth;
           }
 
-          graphics.setFont(font);
-          graphics.setColor(color);
+          if (y < height / 2)
+          {
+            y = height - infoHeight;
+          }
+          else
+          {
+            y = 0;
+          }
+
+          InformationPanel informationPanel = informationPanelFactory.createInformationPanel(graphics, viewport, infoWidth, infoHeight);
+          informationPanel.drawDetails(circuitEditor.getSubcircuitSimulation(), x, y);
         }
+
+        graphics.setFont(font);
+        graphics.setColor(color);
       }
     }
   }

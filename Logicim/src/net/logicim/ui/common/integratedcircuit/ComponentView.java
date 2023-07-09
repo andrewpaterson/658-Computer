@@ -308,6 +308,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
                                      getClass().getSimpleName());
       }
     }
+
+    validatePorts(subcircuitSimulation);
   }
 
   protected void validatePorts(SubcircuitSimulation subcircuitSimulation)
@@ -323,7 +325,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     addPortsToPortViews(subcircuitSimulation, component);
     validateComponent(subcircuitSimulation);
-    validatePorts(subcircuitSimulation);
     component.reset(subcircuitSimulation);
   }
 

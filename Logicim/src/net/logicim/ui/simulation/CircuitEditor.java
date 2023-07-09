@@ -372,6 +372,7 @@ public class CircuitEditor
       }
     }
 
+    List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
       SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
@@ -383,20 +384,38 @@ public class CircuitEditor
         SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
         SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
 
-//        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
-//        {
-//          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
-//          subcircuitInstanceData.createAndConnectComponent2(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
-//        }
+        subcircuitInstanceViews.add(subcircuitInstanceView);
 
         for (Long simulationId : subcircuitInstanceData.subcircuitInstanceSimulations)
         {
           SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) loaders.getSubcircuitSimulation(simulationId);
-          subcircuitInstanceView.add(subcircuitSimulation);
           subcircuitInstanceData.createAndConnectComponent2(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
         }
       }
     }
+
+    for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
+    {
+      SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(subcircuitSimulationData.subcircuitEditorId);
+
+      DataViewMap dataViewMap = subcircuitEditorViews.get(subcircuitEditor);
+      for (Map.Entry<SubcircuitInstanceData, SubcircuitInstanceView> entry : dataViewMap.subcircuitInstanceViews.entrySet())
+      {
+        SubcircuitInstanceData subcircuitInstanceData = entry.getKey();
+        SubcircuitInstanceView subcircuitInstanceView = entry.getValue();
+
+        for (Long simulationId : subcircuitInstanceData.simulationSubcircuitInstances)
+        {
+          SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(simulationId);
+          SubcircuitInstanceSimulation simulationSubcircuitInstance = subcircuitInstanceView.getSimulationSubcircuitInstance(simulationId);
+          if (subcircuitSimulation != simulationSubcircuitInstance)
+          {
+            throw new SimulatorException("Where simulation?");
+          }
+        }
+      }
+    }
+
 
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {

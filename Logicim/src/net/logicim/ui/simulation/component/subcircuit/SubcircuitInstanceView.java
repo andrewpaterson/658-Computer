@@ -525,6 +525,24 @@ public class SubcircuitInstanceView
   public void destroyComponents(CircuitSimulation circuitSimulation)
   {
     instanceSubcircuitView.destroyComponents(circuitSimulation);
+    ArrayList<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>(simulationSubcircuitInstances.keySet());
+    for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
+    {
+      if (subcircuitSimulation.getCircuitSimulation() == circuitSimulation)
+      {
+        simulationSubcircuitInstances.remove(subcircuitSimulation);
+      }
+    }
+
+    ArrayList<SubcircuitInstanceSimulation> subcircuitInstanceSimulations = new ArrayList<>();
+    for (SubcircuitInstanceSimulation subcircuitInstanceSimulation : this.subcircuitInstanceSimulations)
+    {
+      if (subcircuitInstanceSimulation.getCircuitSimulation() != circuitSimulation)
+      {
+        subcircuitInstanceSimulations.add(subcircuitInstanceSimulation);
+      }
+    }
+    this.subcircuitInstanceSimulations = subcircuitInstanceSimulations;
   }
 
   @Override

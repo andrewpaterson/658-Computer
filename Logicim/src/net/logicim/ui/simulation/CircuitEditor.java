@@ -607,7 +607,7 @@ public class CircuitEditor
 
   private void setCurrentSubcircuitSimulation(SubcircuitEditor subcircuitEditor)
   {
-    if (currentSubcircuitSimulation == null)
+    if (!isValidSimulation(subcircuitEditor.getCircuitSubcircuitView(), currentSubcircuitSimulation))
     {
       List<SubcircuitTopSimulation> simulations = subcircuitEditor.getCircuitSubcircuitView().getTopSimulations();
       if (!simulations.isEmpty())
@@ -619,6 +619,11 @@ public class CircuitEditor
         throw new SimulatorException("No top level simulation found for subcircuit editor.");
       }
     }
+  }
+
+  private boolean isValidSimulation(SubcircuitView subcircuitView, SubcircuitSimulation subcircuitSimulation)
+  {
+    return subcircuitView.getSimulations().contains(subcircuitSimulation);
   }
 
   public boolean hasMultipleSubcircuits()

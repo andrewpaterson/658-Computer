@@ -108,5 +108,23 @@ public class SubcircuitSimulations
       depth++;
     }
   }
+
+  public boolean contains(SubcircuitSimulation subcircuitSimulation)
+  {
+    if (subcircuitSimulation == null)
+    {
+      return false;
+    }
+
+    List<SubcircuitSimulation> subcircuitSimulations = simulations.get(subcircuitSimulation.getCircuitSimulation());
+    if (subcircuitSimulations != null)
+    {
+      return subcircuitSimulations.contains(subcircuitSimulation);
+    }
+    else
+    {
+      return false;
+    }
+  }
 }
 

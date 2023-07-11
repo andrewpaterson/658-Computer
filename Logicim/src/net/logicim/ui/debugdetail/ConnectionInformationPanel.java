@@ -41,25 +41,42 @@ public class ConnectionInformationPanel
 
     graphics.drawString("  < Position: " + connectionView.getGridPosition().x + ", " + connectionView.getGridPosition().y + " " + hover + ">", x, y);
     y += fontHeight + ySpacing;
-    View previousComponent = null;
-    for (View connectedComponent : connectedComponents)
+    View previousView = null;
+    for (View connectedView : connectedComponents)
     {
-      String componentString = connectedComponent.getType() +
-                               getComponentNameString(connectedComponent) +
-                               getComponentDetailString(subcircuitSimulation, connectedComponent);
+      String componentString = connectedView.getType() +
+                               getComponentNameString(connectedView) +
+                               getComponentDetailString(subcircuitSimulation, connectedView);
 
       y = drawMultilineString(fontHeight,
                               x,
                               y,
                               componentString);
 
-      if (!((previousComponent instanceof TraceView || previousComponent == null) &&
-            connectedComponent instanceof TraceView))
+      if (!((previousView instanceof TraceView || previousView == null) &&
+            connectedView instanceof TraceView))
       {
         y += ySpacing;
       }
 
-      previousComponent = connectedComponent;
+      previousView = connectedView;
+    }
+
+    for (View connectedView : connectedComponents)
+    {
+      if (connectedView instanceof ComponentView<?>)
+      {
+        ComponentView<?> componentView = (ComponentView<?>) connectedView;
+        PortView portView = componentView.getPort(connectionView);
+        if (portView != null)
+        {
+          String simulationsString = componentView.toSimulationsDebugString(portView.getPorts().keySet());
+          y = drawMultilineString(fontHeight,
+                                  x,
+                                  y,
+                                  simulationsString);
+        }
+      }
     }
   }
 

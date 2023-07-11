@@ -1012,7 +1012,7 @@ public class Logicim
   public void pushUndo()
   {
     undoStack.push(save());
-    circuitEditor.validateConsistency();
+    circuitEditor.validate();
   }
 
   @Override

@@ -323,9 +323,9 @@ public class SubcircuitEditor
     subcircuitView.deleteComponentView(staticView, subcircuitSimulation);
   }
 
-  public void validateConsistency()
+  public void validate()
   {
-    subcircuitView.validateConsistency();
+    subcircuitView.validate();
   }
 
   public void createTraceViews(List<Line> lines, SubcircuitSimulation subcircuitSimulation)

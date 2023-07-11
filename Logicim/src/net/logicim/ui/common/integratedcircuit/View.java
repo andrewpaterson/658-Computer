@@ -99,7 +99,7 @@ public abstract class View
     nextId = 1L;
   }
 
-  protected String toSimulationsDebugString(Collection<? extends SubcircuitSimulation> subcircuitSimulations)
+  public String toSimulationsDebugString(Collection<? extends SubcircuitSimulation> subcircuitSimulations)
   {
     StringBuilder builder = new StringBuilder();
     for (SubcircuitSimulation simulation : subcircuitSimulations)

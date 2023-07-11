@@ -249,7 +249,7 @@ public class SubcircuitView
     return traceViews;
   }
 
-  public void validateConsistency()
+  public void validate()
   {
     validateConnectionViews();
     validateTracesContainOnlyCurrentViews();

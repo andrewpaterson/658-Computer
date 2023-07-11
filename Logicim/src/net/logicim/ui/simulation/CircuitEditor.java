@@ -541,9 +541,9 @@ public class CircuitEditor
     subcircuitEditor.deleteComponentView(staticView, subcircuitSimulation);
   }
 
-  public void validateConsistency()
+  public void validate()
   {
-    currentSubcircuitEditor.validateConsistency();
+    currentSubcircuitEditor.validate();
 
     validateSimulations();
   }

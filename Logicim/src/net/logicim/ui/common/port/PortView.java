@@ -392,6 +392,11 @@ public class PortView
     return simulationPorts.get(subcircuitSimulation);
   }
 
+  public Map<SubcircuitSimulation, List<? extends Port>> getPorts()
+  {
+    return simulationPorts;
+  }
+
   public int numberOfPorts()
   {
     return portNames.size();

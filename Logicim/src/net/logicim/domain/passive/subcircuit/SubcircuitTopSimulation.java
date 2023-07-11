@@ -29,18 +29,5 @@ public class SubcircuitTopSimulation
                                            subcircuitEditorId,
                                            circuitSimulation.getId());
   }
-
-  @Override
-  public String toString()
-  {
-    if (circuitSimulation != null)
-    {
-      return circuitSimulation.getDescription();
-    }
-    else
-    {
-      return "";
-    }
-  }
 }
 

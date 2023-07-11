@@ -1,5 +1,6 @@
 package net.logicim.domain.common;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
@@ -19,17 +20,17 @@ public class Circuit
     passives = new ArrayList<>();
   }
 
-  public void resetSimulation(SubcircuitSimulation subcircuitSimulation)
+  public void resetSimulation(CircuitSimulation circuitSimulation)
   {
-    Simulation simulation = subcircuitSimulation.getSimulation();
+    Simulation simulation = circuitSimulation.getSimulation();
     for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
     {
-      integratedCircuit.reset(subcircuitSimulation);
+      integratedCircuit.reset();
       integratedCircuit.simulationStarted(simulation);
     }
     for (Passive passive : passives)
     {
-      passive.reset(subcircuitSimulation);
+      passive.reset();
       passive.simulationStarted(simulation);
     }
   }

@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation;
 
-import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.components.button.ActionButton;
@@ -23,7 +23,7 @@ public class SelectSimulationDialog
     extends InputDialog
 {
   private Logicim editor;
-  private JComboBox<CircuitSimulation> comboBox;
+  private JComboBox<SubcircuitSimulation> comboBox;
 
   public SelectSimulationDialog(Frame owner, Logicim editor)
   {
@@ -42,9 +42,9 @@ public class SelectSimulationDialog
 
     comboBox = new JComboBox<>();
     SubcircuitEditor currentSubcircuitEditor = editor.getCurrentSubcircuitEditor();
-    List<CircuitSimulation> simulations = new ArrayList<>(currentSubcircuitEditor.getCircuitSimulations());
-    CircuitSimulation currentSimulation = editor.getCurrentCircuitSimulation();
-    for (CircuitSimulation simulation : simulations)
+    List<SubcircuitSimulation> simulations = new ArrayList<>(currentSubcircuitEditor.getSubcircuitSimulations());
+    SubcircuitSimulation currentSimulation = editor.getSubcircuitSimulation();
+    for (SubcircuitSimulation simulation : simulations)
     {
       comboBox.addItem(simulation);
     }
@@ -64,7 +64,7 @@ public class SelectSimulationDialog
   @Override
   public void okay()
   {
-    CircuitSimulation simulation = (CircuitSimulation) comboBox.getSelectedItem();
+    SubcircuitSimulation simulation = (SubcircuitSimulation) comboBox.getSelectedItem();
     editor.setCurrentSimulation(simulation);
 
     close();

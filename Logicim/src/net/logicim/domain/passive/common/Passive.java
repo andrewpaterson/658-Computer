@@ -52,7 +52,7 @@ public abstract class Passive
   {
   }
 
-  public void reset(SubcircuitSimulation subcircuitSimulation)
+  public void reset()
   {
     for (Port port : getPorts())
     {

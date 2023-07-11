@@ -325,7 +325,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     addPortsToPortViews(subcircuitSimulation, component);
     validateComponent(subcircuitSimulation);
-    component.reset(subcircuitSimulation);
+    component.reset();
   }
 
   private void addPortsToPortViews(SubcircuitSimulation subcircuitSimulation, Component component)

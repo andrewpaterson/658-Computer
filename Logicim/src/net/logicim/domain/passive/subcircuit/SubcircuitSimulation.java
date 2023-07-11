@@ -96,5 +96,18 @@ public abstract class SubcircuitSimulation
   protected abstract String getType();
 
   public abstract SubcircuitSimulationData save(long subcircuitEditorId);
+
+  @Override
+  public String toString()
+  {
+    if (circuitSimulation != null)
+    {
+      return circuitSimulation.getDescription();
+    }
+    else
+    {
+      return "";
+    }
+  }
 }
 

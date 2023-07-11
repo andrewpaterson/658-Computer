@@ -84,7 +84,7 @@ public class ShowSimulationsDialog
       DefaultMutableTreeNode child = new DefaultMutableTreeNode(description);
       parentNode.add(child);
       SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
-      if (instanceSubcircuitView.getSubcircuitSimulation(circuitSimulation) != null)
+      if (instanceSubcircuitView.getSubcircuitSimulations(circuitSimulation) != null)
       {
         recurseFindChildCircuits(child, instanceSubcircuitView, circuitSimulation);
       }

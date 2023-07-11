@@ -3,7 +3,6 @@ package net.logicim.data.circuit;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.data.simulation.SubcircuitSimulationData;
-import net.logicim.data.simulation.SubcircuitTopSimulationData;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class CircuitData
   public List<CircuitSimulationData> circuitSimulations;
   public List<SubcircuitSimulationData> subcircuitSimulations;
   public long currentSubcircuit;
-  public long currentSimulation;
+  public long currentSubcircuitSimulation;
 
   public CircuitData()
   {
@@ -24,13 +23,13 @@ public class CircuitData
                      List<CircuitSimulationData> circuitSimulations,
                      List<SubcircuitSimulationData> subcircuitSimulations,
                      long currentSubcircuit,
-                     long currentSimulation)
+                     long currentSubcircuitSimulation)
   {
     this.subcircuits = subcircuits;
     this.circuitSimulations = circuitSimulations;
     this.subcircuitSimulations = subcircuitSimulations;
     this.currentSubcircuit = currentSubcircuit;
-    this.currentSimulation = currentSimulation;
+    this.currentSubcircuitSimulation = currentSubcircuitSimulation;
   }
 }
 

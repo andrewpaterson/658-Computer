@@ -1251,9 +1251,9 @@ public class SubcircuitView
     return subcircuitTopSimulation;
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
-    return simulations.get(circuitSimulation);
+    return simulations.getSubcircuitSimulations(circuitSimulation);
   }
 
   public SubcircuitSimulations getSimulations()
@@ -1264,12 +1264,9 @@ public class SubcircuitView
   public List<SubcircuitTopSimulation> getTopSimulations()
   {
     List<SubcircuitTopSimulation> list = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+    for (SubcircuitTopSimulation subcircuitSimulation : simulations.getSubcircuitTopSimulations())
     {
-      if (subcircuitSimulation instanceof SubcircuitTopSimulation)
-      {
-        list.add((SubcircuitTopSimulation) subcircuitSimulation);
-      }
+      list.add(subcircuitSimulation);
     }
     return list;
   }
@@ -1291,34 +1288,7 @@ public class SubcircuitView
       throw new SimulatorException("First circuit instance view");
     }
 
-    Collection<SubcircuitTopSimulation> subcircuitTopSimulations = simulations.getSubcircuitTopSimulations();
-    for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
-    {
-      validateSubcircuitTopSimulation(subcircuitTopSimulation, circuitInstanceViews);
-    }
-  }
-
-  protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> circuitInstanceViews)
-  {
-    CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
-    int depth = 0;
-    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-    {
-      List<SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
-      for (SubcircuitSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
-      {
-        if (innerSubcircuitSimulation instanceof SubcircuitTopSimulation)
-        {
-          throw new SimulatorException("Expected only instance subcircuit simulations in inner simulations.");
-        }
-      }
-
-      if (innerSubcircuitSimulations.size() == 0 && depth > 0)
-      {
-        throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
-      }
-      depth++;
-    }
+    simulations.validate(circuitInstanceViews);
   }
 }
 

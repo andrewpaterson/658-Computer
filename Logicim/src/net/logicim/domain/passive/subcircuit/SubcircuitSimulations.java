@@ -2,12 +2,13 @@ package net.logicim.domain.passive.subcircuit;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.circuit.CircuitInstanceView;
 
 import java.util.*;
 
 public class SubcircuitSimulations
 {
-  protected Map<CircuitSimulation, SubcircuitSimulation> simulations;
+  protected Map<CircuitSimulation, List<SubcircuitSimulation>> simulations;
 
   public SubcircuitSimulations()
   {
@@ -16,13 +17,21 @@ public class SubcircuitSimulations
 
   public void add(SubcircuitSimulation subcircuitSimulation)
   {
-    SubcircuitSimulation existing = simulations.get(subcircuitSimulation.circuitSimulation);
-    if (existing != null)
+    List<SubcircuitSimulation> subcircuitSimulations = simulations.get(subcircuitSimulation.circuitSimulation);
+    if (subcircuitSimulations != null)
     {
-      throw new SimulatorException("A simulation [%s] for circuit [%s] already exists.", existing.getDescription(), subcircuitSimulation.getCircuitSimulation().getDescription());
+      if (subcircuitSimulations.contains(subcircuitSimulation))
+      {
+        throw new SimulatorException("A simulation [%s] for circuit [%s] already exists.", subcircuitSimulation.getDescription(), subcircuitSimulation.getCircuitSimulation().getDescription());
+      }
+    }
+    else
+    {
+      subcircuitSimulations = new ArrayList<>();
+      simulations.put(subcircuitSimulation.circuitSimulation, subcircuitSimulations);
     }
 
-    simulations.put(subcircuitSimulation.circuitSimulation, subcircuitSimulation);
+    subcircuitSimulations.add(subcircuitSimulation);
   }
 
   public void remove(CircuitSimulation circuitSimulation)
@@ -30,7 +39,7 @@ public class SubcircuitSimulations
     simulations.remove(circuitSimulation);
   }
 
-  public SubcircuitSimulation get(CircuitSimulation circuitSimulation)
+  public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
     return simulations.get(circuitSimulation);
   }
@@ -38,11 +47,14 @@ public class SubcircuitSimulations
   public Collection<SubcircuitTopSimulation> getSubcircuitTopSimulations()
   {
     ArrayList<SubcircuitTopSimulation> subcircuitTopSimulations = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.values())
+    for (List<SubcircuitSimulation> subcircuitSimulations : simulations.values())
     {
-      if (subcircuitSimulation instanceof SubcircuitTopSimulation)
+      for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
       {
-        subcircuitTopSimulations.add((SubcircuitTopSimulation) subcircuitSimulation);
+        if (subcircuitSimulation instanceof SubcircuitTopSimulation)
+        {
+          subcircuitTopSimulations.add((SubcircuitTopSimulation) subcircuitSimulation);
+        }
       }
     }
     return subcircuitTopSimulations;
@@ -50,12 +62,51 @@ public class SubcircuitSimulations
 
   public Collection<SubcircuitSimulation> getSubcircuitSimulations()
   {
-    return simulations.values();
+    ArrayList<SubcircuitSimulation> result = new ArrayList<>();
+    Collection<List<SubcircuitSimulation>> collection = simulations.values();
+    for (List<SubcircuitSimulation> subcircuitSimulations : collection)
+    {
+      result.addAll(subcircuitSimulations);
+    }
+    return result;
   }
 
   public Set<CircuitSimulation> getCircuitSimulations()
   {
     return simulations.keySet();
+  }
+
+  public void validate(List<CircuitInstanceView> circuitInstanceViews)
+  {
+    Collection<SubcircuitTopSimulation> subcircuitTopSimulations = getSubcircuitTopSimulations();
+    for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
+    {
+      validateSubcircuitTopSimulation(subcircuitTopSimulation, circuitInstanceViews);
+    }
+
+  }
+
+  protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> circuitInstanceViews)
+  {
+    CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
+    int depth = 0;
+    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
+    {
+      List<SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
+      for (SubcircuitSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
+      {
+        if (innerSubcircuitSimulation instanceof SubcircuitTopSimulation)
+        {
+          throw new SimulatorException("Expected only instance subcircuit simulations in inner simulations.");
+        }
+      }
+
+      if (innerSubcircuitSimulations.size() == 0 && depth > 0)
+      {
+        throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
+      }
+      depth++;
+    }
   }
 }
 

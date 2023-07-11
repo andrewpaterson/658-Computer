@@ -812,14 +812,14 @@ public class Logicim
 
   public void resetCurrentSimulation()
   {
-    CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
-    SubcircuitTopSimulation subcircuitTopSimulation = circuitEditor.getCurrentSubcircuitTopSimulation();
-    circuitSimulation.reset(subcircuitTopSimulation);
+    SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
+    CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
+    circuitSimulation.reset(circuitSimulation);
   }
 
   public void recreateCurrentSimulation()
   {
-    CircuitSimulation currentCircuitSimulation = circuitEditor.getCurrentCircuitSimulation();
+    SubcircuitSimulation currentSubcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
     SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
 
     List<CircuitInstanceView> circuitInstanceViews = currentSubcircuitEditor.getOrderedCircuitInstanceViews();
@@ -827,7 +827,7 @@ public class Logicim
 
     for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
     {
-      circuitInstanceView.destroyComponents(currentCircuitSimulation);
+      circuitInstanceView.destroyComponents(currentSubcircuitSimulation.getCircuitSimulation());
     }
 
     Map<SubcircuitInstanceView, SubcircuitInstance> map = new LinkedHashMap<>();
@@ -1349,11 +1349,6 @@ public class Logicim
     return circuitEditor.getCurrentSubcircuitEditor();
   }
 
-  public CircuitSimulation getCurrentCircuitSimulation()
-  {
-    return circuitEditor.getCurrentCircuitSimulation();
-  }
-
   public SubcircuitSimulation getSubcircuitSimulation()
   {
     return circuitEditor.getSubcircuitSimulation();
@@ -1398,9 +1393,9 @@ public class Logicim
     simulationSpeed.setRunning(running);
   }
 
-  public void setCurrentSimulation(CircuitSimulation simulation)
+  public void setCurrentSimulation(SubcircuitSimulation subcircuitSimulation)
   {
-    this.circuitEditor.setCurrentCircuitSimulation(simulation);
+    this.circuitEditor.setCurrentCircuitSimulation(subcircuitSimulation);
   }
 
   public void addAction(String name, EditorAction action)

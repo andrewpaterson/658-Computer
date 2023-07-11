@@ -524,9 +524,9 @@ public class SubcircuitEditor
     return "Editor" + " " + getTypeName();
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
-    return subcircuitView.getSubcircuitSimulation(circuitSimulation);
+    return subcircuitView.getSubcircuitSimulations(circuitSimulation);
   }
 
   public List<SubcircuitSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)

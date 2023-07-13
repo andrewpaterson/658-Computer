@@ -4,7 +4,6 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -224,12 +223,6 @@ public class TunnelView
   public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     return null;
-  }
-
-  @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
-  {
-    wireView.destroyComponent(circuitSimulation);
   }
 
   @Override

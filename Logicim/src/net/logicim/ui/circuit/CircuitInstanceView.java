@@ -14,7 +14,7 @@ public interface CircuitInstanceView
 {
   SubcircuitView getCircuitSubcircuitView();
 
-  void destroyComponents(CircuitSimulation circuitSimulation);
+  void destroyComponents(SubcircuitSimulation subcircuitSimulation);
 
   Collection<SubcircuitSimulation> getSubcircuitSimulations();
 

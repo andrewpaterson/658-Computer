@@ -1,9 +1,9 @@
 package net.logicim.ui.common.integratedcircuit;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -44,15 +44,13 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  protected void removeComponent(CircuitSimulation circuitSimulation)
-  {
-    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationPassives.keySet()));
-  }
-
-  @Override
   protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationPassives.remove(subcircuitSimulation);
+    PASSIVE removed = simulationPassives.remove(subcircuitSimulation);
+    if (removed == null)
+    {
+      throw new SimulatorException("Could not remove Passive in [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
+    }
   }
 
   @Override
@@ -91,7 +89,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   public String toDebugString()
   {
-    return super.toDebugString() + String.format("Name [%s]\n", properties.name);
+    return super.toDebugString() + String.format("Name [%s]\n", properties.name) + toSimulationsDebugString(simulationPassives.keySet());
   }
 
   public abstract PassiveData<?> save(boolean selected);

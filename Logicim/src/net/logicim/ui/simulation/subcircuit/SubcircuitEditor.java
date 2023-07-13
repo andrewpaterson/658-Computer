@@ -231,9 +231,9 @@ public class SubcircuitEditor
   }
 
   @Override
-  public void destroyComponents(CircuitSimulation circuitSimulation)
+  public void destroyComponents(SubcircuitSimulation subcircuitSimulation)
   {
-    subcircuitView.destroyComponents(circuitSimulation);
+    subcircuitView.destroyComponents(subcircuitSimulation);
   }
 
   public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)

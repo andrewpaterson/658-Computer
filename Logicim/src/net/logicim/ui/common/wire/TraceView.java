@@ -321,9 +321,9 @@ public class TraceView
     return LineOverlap.None;
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.destroyComponent(circuitSimulation);
+    wireView.destroyComponent(subcircuitSimulation);
   }
 }
 

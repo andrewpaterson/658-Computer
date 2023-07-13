@@ -16,7 +16,10 @@ import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.common.*;
+import net.logicim.ui.common.Colours;
+import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.Rotation;
+import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
 
@@ -461,14 +464,18 @@ public class PortView
     }
   }
 
-  public void removePorts(CircuitSimulation circuitSimulation)
-  {
-    removePorts(getSubcircuitSimulation(circuitSimulation));
-  }
-
   public void removePorts(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationPorts.remove(subcircuitSimulation);
+    List<? extends Port> removed = simulationPorts.remove(subcircuitSimulation);
+    if (removed == null)
+    {
+      throw new SimulatorException("Could not remove Port in Port View [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
+    }
+  }
+
+  private String getDescription()
+  {
+    return text;
   }
 
   private SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)

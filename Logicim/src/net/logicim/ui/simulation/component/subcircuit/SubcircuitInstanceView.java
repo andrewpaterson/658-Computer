@@ -413,29 +413,20 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  protected void removeComponent(CircuitSimulation circuitSimulation)
-  {
-    removeComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationSubcircuitInstances.keySet()));
-  }
-
-  @Override
   protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    simulationSubcircuitInstances.remove(subcircuitSimulation);
-  }
-
-  @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
-  {
-    super.destroyComponent(circuitSimulation);
-    destroyComponents(circuitSimulation);
+    SubcircuitInstance removed = simulationSubcircuitInstances.remove(subcircuitSimulation);
+    if (removed == null)
+    {
+      throw new SimulatorException("Could not remove Subcircuit Instance in [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
+    }
   }
 
   @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
     super.destroyComponent(subcircuitSimulation);
-    destroyComponents(subcircuitSimulation.getCircuitSimulation());
+    destroyComponents(subcircuitSimulation);
   }
 
   @Override
@@ -522,27 +513,15 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void destroyComponents(CircuitSimulation circuitSimulation)
+  public void destroyComponents(SubcircuitSimulation subcircuitSimulation)
   {
-    instanceSubcircuitView.destroyComponents(circuitSimulation);
-    ArrayList<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>(simulationSubcircuitInstances.keySet());
-    for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
-    {
-      if (subcircuitSimulation.getCircuitSimulation() == circuitSimulation)
-      {
-        simulationSubcircuitInstances.remove(subcircuitSimulation);
-      }
-    }
+    instanceSubcircuitView.destroyComponents(subcircuitSimulation);
+    simulationSubcircuitInstances.remove(subcircuitSimulation);
 
-    ArrayList<SubcircuitInstanceSimulation> subcircuitInstanceSimulations = new ArrayList<>();
-    for (SubcircuitInstanceSimulation subcircuitInstanceSimulation : this.subcircuitInstanceSimulations)
+    if (subcircuitSimulation instanceof SubcircuitInstanceSimulation)
     {
-      if (subcircuitInstanceSimulation.getCircuitSimulation() != circuitSimulation)
-      {
-        subcircuitInstanceSimulations.add(subcircuitInstanceSimulation);
-      }
+      subcircuitInstanceSimulations.remove(subcircuitSimulation);
     }
-    this.subcircuitInstanceSimulations = subcircuitInstanceSimulations;
   }
 
   @Override

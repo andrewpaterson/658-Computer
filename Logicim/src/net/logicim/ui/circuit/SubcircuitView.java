@@ -1206,25 +1206,28 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyComponents(CircuitSimulation circuitSimulation)
+  public void destroyComponents(SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.destroyComponent(circuitSimulation);
+      staticView.destroyComponent(subcircuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.destroyComponent(circuitSimulation);
+      traceView.destroyComponent(subcircuitSimulation);
     }
 
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      subcircuitInstanceView.destroyComponent(circuitSimulation);
+      subcircuitInstanceView.destroyComponent(subcircuitSimulation);
     }
 
-    simulations.remove(circuitSimulation);
+    if (simulations.hasSimulation(subcircuitSimulation))
+    {
+      simulations.remove(subcircuitSimulation);
+    }
   }
 
   public List<Component> createComponents(SubcircuitSimulation subcircuitSimulation)

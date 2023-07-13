@@ -34,9 +34,19 @@ public class SubcircuitSimulations
     subcircuitSimulations.add(subcircuitSimulation);
   }
 
-  public void remove(CircuitSimulation circuitSimulation)
+  public void remove(SubcircuitSimulation subcircuitSimulation)
   {
-    simulations.remove(circuitSimulation);
+    List<SubcircuitSimulation> subcircuitSimulations = simulations.get(subcircuitSimulation.getCircuitSimulation());
+    if (subcircuitSimulations == null)
+    {
+      throw new SimulatorException("Could not remove Subcircuit Simulation [%s] it's Circuit Simulation could not be found.", subcircuitSimulation.getDescription());
+    }
+    boolean removed = subcircuitSimulations.remove(subcircuitSimulation);
+    if (!removed)
+    {
+      throw new SimulatorException("Could not remove Subcircuit Simulation [%s] from Circuit Simulation [%s].", subcircuitSimulation.getDescription(), subcircuitSimulation.getCircuitSimulation().getDescription());
+    }
+
   }
 
   public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
@@ -109,7 +119,7 @@ public class SubcircuitSimulations
     }
   }
 
-  public boolean contains(SubcircuitSimulation subcircuitSimulation)
+  public boolean hasSimulation(SubcircuitSimulation subcircuitSimulation)
   {
     if (subcircuitSimulation == null)
     {

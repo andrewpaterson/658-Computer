@@ -827,7 +827,7 @@ public class Logicim
 
     for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
     {
-      circuitInstanceView.destroyComponents(currentSubcircuitSimulation.getCircuitSimulation());
+      circuitInstanceView.destroyComponents(currentSubcircuitSimulation);
     }
 
     Map<SubcircuitInstanceView, SubcircuitInstance> map = new LinkedHashMap<>();

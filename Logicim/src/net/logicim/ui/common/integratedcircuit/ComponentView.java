@@ -6,7 +6,6 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -351,23 +350,21 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    for (PortView portView : portViews)
+    if (hasComponent(subcircuitSimulation))
     {
-      portView.removePorts(subcircuitSimulation);
+      for (PortView portView : portViews)
+      {
+        portView.removePorts(subcircuitSimulation);
+      }
+      removeComponent(subcircuitSimulation);
     }
-    removeComponent(subcircuitSimulation);
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  private boolean hasComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    for (PortView portView : portViews)
-    {
-      portView.removePorts(circuitSimulation);
-    }
-    removeComponent(circuitSimulation);
+    return getComponent(subcircuitSimulation) != null;
   }
 
   @Override
@@ -385,8 +382,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   protected abstract void createPortViews();
 
   public abstract Component getComponent(SubcircuitSimulation subcircuitSimulation);
-
-  protected abstract void removeComponent(CircuitSimulation circuitSimulation);
 
   protected abstract void removeComponent(SubcircuitSimulation subcircuitSimulation);
 

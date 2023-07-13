@@ -153,11 +153,6 @@ public class WireViewComp
     return simulationTraces.get(subcircuitSimulation);
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
-  {
-    destroyComponent(CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationTraces.keySet()));
-  }
-
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
     simulationTraces.remove(subcircuitSimulation);

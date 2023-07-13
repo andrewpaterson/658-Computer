@@ -623,7 +623,7 @@ public class CircuitEditor
 
   private boolean isValidSimulation(SubcircuitView subcircuitView, SubcircuitSimulation subcircuitSimulation)
   {
-    return subcircuitView.getSimulations().contains(subcircuitSimulation);
+    return subcircuitView.getSimulations().hasSimulation(subcircuitSimulation);
   }
 
   public boolean hasMultipleSubcircuits()

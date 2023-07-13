@@ -1,7 +1,7 @@
 package net.logicim.domain.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.passive.common.Passive;
@@ -45,14 +45,27 @@ public class Circuit
     passives.add(passive);
   }
 
+  protected String getDescription()
+  {
+    return "?";
+  }
+
   public void remove(IntegratedCircuit<?, ?> integratedCircuit)
   {
-    integratedCircuits.remove(integratedCircuit);
+    boolean removed = integratedCircuits.remove(integratedCircuit);
+    if (!removed)
+    {
+      throw new SimulatorException("Could not remove Integrated Circuit [%s] from Circuit [%s].", integratedCircuit.getDescription(), getDescription());
+    }
   }
 
   public void remove(Passive passive)
   {
-    passives.remove(passive);
+    boolean removed = passives.remove(passive);
+    if (!removed)
+    {
+      throw new SimulatorException("Could not remove Passive [%s] from Circuit [%s].", passive.getDescription(), getDescription());
+    }
   }
 
   public void disconnectComponent(Component component, Simulation simulation)

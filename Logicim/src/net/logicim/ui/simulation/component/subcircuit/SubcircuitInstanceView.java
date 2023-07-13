@@ -422,7 +422,12 @@ public class SubcircuitInstanceView
   @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    destroyInnerComponents(subcircuitSimulation);
+    SubcircuitInstance subcircuitInstance = simulationSubcircuitInstances.get(subcircuitSimulation);
+    if (subcircuitInstance != null)
+    {
+      instanceSubcircuitView.destroyComponentsAndSimulation(subcircuitInstance.getSubcircuitInstanceSimulation());
+      removeComponent(subcircuitSimulation);
+    }
     super.destroyComponent(subcircuitSimulation);
   }
 
@@ -507,16 +512,6 @@ public class SubcircuitInstanceView
   public SubcircuitView getCircuitSubcircuitView()
   {
     return instanceSubcircuitView;
-  }
-
-  public void destroyInnerComponents(SubcircuitSimulation subcircuitSimulation)
-  {
-    SubcircuitInstance subcircuitInstance = simulationSubcircuitInstances.get(subcircuitSimulation);
-    if (subcircuitInstance != null)
-    {
-      instanceSubcircuitView.destroyComponents(subcircuitInstance.getSubcircuitInstanceSimulation());
-      removeComponent(subcircuitSimulation);
-    }
   }
 
   protected Set<Long> saveSimulationSubcircuitInstanceIDs()

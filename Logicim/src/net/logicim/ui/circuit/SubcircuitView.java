@@ -140,8 +140,7 @@ public class SubcircuitView
     deleteComponentViews(staticViews, subcircuitSimulation);
   }
 
-  public void deleteComponentViews(List<StaticView<?>> staticViews,
-                                   SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentViews(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> componentView : staticViews)
@@ -163,7 +162,7 @@ public class SubcircuitView
       connectionViews.addAll(disconnectedConnectionViews);
       if (componentView instanceof IntegratedCircuitView)
       {
-        deleteIntegratedCircuit((IntegratedCircuitView<?, ?>) componentView, subcircuitSimulation);
+        deleteIntegratedCircuitView((IntegratedCircuitView<?, ?>) componentView, subcircuitSimulation);
       }
       else if (componentView instanceof PassiveView)
       {
@@ -201,8 +200,8 @@ public class SubcircuitView
     }
   }
 
-  protected void deleteIntegratedCircuit(IntegratedCircuitView<?, ?> integratedCircuitView,
-                                         SubcircuitSimulation subcircuitSimulation)
+  protected void deleteIntegratedCircuitView(IntegratedCircuitView<?, ?> integratedCircuitView,
+                                             SubcircuitSimulation subcircuitSimulation)
   {
     if (subcircuitSimulation != null)
     {
@@ -1206,9 +1205,21 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyComponents(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponentsAndSimulation(SubcircuitSimulation subcircuitSimulation)
   {
-    List<StaticView<?>> staticViews = getStaticViews();
+    destroyComponents(subcircuitSimulation, getStaticViews(), traceViews, subcircuitInstanceViews);
+
+    if (simulations.hasSimulation(subcircuitSimulation))
+    {
+      simulations.remove(subcircuitSimulation);
+    }
+  }
+
+  protected void destroyComponents(SubcircuitSimulation subcircuitSimulation,
+                                   Collection<StaticView<?>> staticViews,
+                                   Collection<TraceView> traceViews,
+                                   Collection<SubcircuitInstanceView> subcircuitInstanceViews)
+  {
     for (StaticView<?> staticView : staticViews)
     {
       staticView.destroyComponent(subcircuitSimulation);
@@ -1222,11 +1233,6 @@ public class SubcircuitView
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
       subcircuitInstanceView.destroyComponent(subcircuitSimulation);
-    }
-
-    if (simulations.hasSimulation(subcircuitSimulation))
-    {
-      simulations.remove(subcircuitSimulation);
     }
   }
 

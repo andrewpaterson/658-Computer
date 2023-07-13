@@ -477,10 +477,5 @@ public class PortView
   {
     return text;
   }
-
-  private SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
-  {
-    return CircuitSimulation.getSubcircuitSimulation(circuitSimulation, simulationPorts.keySet());
-  }
 }
 

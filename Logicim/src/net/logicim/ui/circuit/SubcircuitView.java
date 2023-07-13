@@ -203,34 +203,50 @@ public class SubcircuitView
   protected void deleteIntegratedCircuitView(IntegratedCircuitView<?, ?> integratedCircuitView,
                                              SubcircuitSimulation subcircuitSimulation)
   {
-    if (subcircuitSimulation != null)
-    {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(subcircuitSimulation);
-      subcircuitSimulation.getCircuit().remove(integratedCircuit);
-    }
+    integratedCircuitView.destroyComponent(subcircuitSimulation);
     removeIntegratedCircuitView(integratedCircuitView);
   }
 
   protected void deletePassiveView(PassiveView<?, ?> passiveView,
                                    SubcircuitSimulation subcircuitSimulation)
   {
-    if (subcircuitSimulation != null)
-    {
-      Passive passive = passiveView.getComponent(subcircuitSimulation);
-      subcircuitSimulation.getCircuit().remove(passive);
-    }
+    passiveView.destroyComponent(subcircuitSimulation);
     removePassiveView(passiveView);
   }
 
   protected void deleteSubcircuitInstanceView(SubcircuitInstanceView subcircuitInstanceView,
                                               SubcircuitSimulation subcircuitSimulation)
   {
-    if (subcircuitSimulation != null)
-    {
-      SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(subcircuitSimulation);
-      subcircuitSimulation.getCircuit().remove(subcircuitInstance);
-    }
+    subcircuitInstanceView.destroyComponent(subcircuitSimulation);
     removeSubcircuitInstanceView(subcircuitInstanceView);
+  }
+
+  public void deleteTraceViews(Set<TraceView> inputTraceViews,
+                               SubcircuitSimulation subcircuitSimulation)
+  {
+    TraceFinder traceFinder = new TraceFinder();
+    for (TraceView traceView : inputTraceViews)
+    {
+      List<TraceOverlap> tracesTouching = getTracesTouching(traceView.getLine());
+      for (TraceOverlap traceOverlap : tracesTouching)
+      {
+        TraceView touchingTraceView = traceOverlap.getTraceView();
+        if (!inputTraceViews.contains(touchingTraceView))
+        {
+          traceFinder.add(touchingTraceView);
+        }
+      }
+    }
+
+    Set<ConnectionView> nonTraceConnectionViews = findNonTraceConnections(inputTraceViews);
+    removeTraceViews(inputTraceViews);
+
+    Set<Line> lines = new LinkedHashSet<>();
+    traceFinder.process();
+    Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
+    recreateTraceViews(lines, touchingTraceViews, subcircuitSimulation);
+
+    findAndConnectNonTraceViewsForDeletion(subcircuitSimulation, nonTraceConnectionViews);
   }
 
   public ConnectionView getOrAddConnectionView(Int2D position, View view)
@@ -737,34 +753,6 @@ public class SubcircuitView
     Set<ConnectionView> updatedConnectionViews = connectCreatedTraceViews(traceViews, subcircuitSimulation);
     fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
     return traceViews;
-  }
-
-  public void deleteTraceViews(Set<TraceView> inputTraceViews,
-                               SubcircuitSimulation subcircuitSimulation)
-  {
-    TraceFinder traceFinder = new TraceFinder();
-    for (TraceView traceView : inputTraceViews)
-    {
-      List<TraceOverlap> tracesTouching = getTracesTouching(traceView.getLine());
-      for (TraceOverlap traceOverlap : tracesTouching)
-      {
-        TraceView touchingTraceView = traceOverlap.getTraceView();
-        if (!inputTraceViews.contains(touchingTraceView))
-        {
-          traceFinder.add(touchingTraceView);
-        }
-      }
-    }
-
-    Set<ConnectionView> nonTraceConnectionViews = findNonTraceConnections(inputTraceViews);
-    removeTraceViews(inputTraceViews);
-
-    Set<Line> lines = new LinkedHashSet<>();
-    traceFinder.process();
-    Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    recreateTraceViews(lines, touchingTraceViews, subcircuitSimulation);
-
-    findAndConnectNonTraceViewsForDeletion(subcircuitSimulation, nonTraceConnectionViews);
   }
 
   protected void findAndConnectNonTraceViewsForDeletion(SubcircuitSimulation subcircuitSimulation,

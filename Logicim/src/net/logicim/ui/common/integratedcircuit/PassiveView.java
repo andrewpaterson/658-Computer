@@ -51,6 +51,8 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
     {
       throw new SimulatorException("Could not remove Passive in [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
+
+    subcircuitSimulation.getCircuit().remove(removed);
   }
 
   @Override

@@ -68,6 +68,8 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     {
       throw new SimulatorException("Could not remove Integrated Circuit in [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
+
+    subcircuitSimulation.getCircuit().remove(removed);
   }
 
   @Override

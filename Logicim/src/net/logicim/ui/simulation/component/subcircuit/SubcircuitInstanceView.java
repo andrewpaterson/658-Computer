@@ -417,6 +417,8 @@ public class SubcircuitInstanceView
     {
       throw new SimulatorException("Could not remove Subcircuit Instance in [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
+
+    subcircuitSimulation.getCircuit().remove(removed);
   }
 
   @Override
@@ -426,7 +428,6 @@ public class SubcircuitInstanceView
     if (subcircuitInstance != null)
     {
       instanceSubcircuitView.destroyComponentsAndSimulation(subcircuitInstance.getSubcircuitInstanceSimulation());
-      removeComponent(subcircuitSimulation);
     }
     super.destroyComponent(subcircuitSimulation);
   }

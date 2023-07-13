@@ -511,16 +511,12 @@ public class SubcircuitInstanceView
 
   public void destroyInnerComponents(SubcircuitSimulation subcircuitSimulation)
   {
-    if (hasSimulation(subcircuitSimulation))
+    SubcircuitInstance subcircuitInstance = simulationSubcircuitInstances.get(subcircuitSimulation);
+    if (subcircuitInstance != null)
     {
-      instanceSubcircuitView.destroyComponents(subcircuitSimulation);
+      instanceSubcircuitView.destroyComponents(subcircuitInstance.getSubcircuitInstanceSimulation());
       removeComponent(subcircuitSimulation);
     }
-  }
-
-  private boolean hasSimulation(SubcircuitSimulation subcircuitSimulation)
-  {
-    return simulationSubcircuitInstances.containsKey(subcircuitSimulation);
   }
 
   protected Set<Long> saveSimulationSubcircuitInstanceIDs()

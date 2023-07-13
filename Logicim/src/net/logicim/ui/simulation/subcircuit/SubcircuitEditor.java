@@ -230,12 +230,6 @@ public class SubcircuitEditor
     return subcircuitView;
   }
 
-  @Override
-  public void destroyComponents(SubcircuitSimulation subcircuitSimulation)
-  {
-    subcircuitView.destroyComponents(subcircuitSimulation);
-  }
-
   public TraceView getTraceViewInScreenSpace(Viewport viewport, Int2D screenPosition)
   {
     List<TraceView> selectedViews = getTraceViewsInScreenSpace(viewport, screenPosition);

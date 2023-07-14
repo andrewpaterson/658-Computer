@@ -16,9 +16,6 @@ import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
-import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.passive.common.Passive;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
@@ -686,7 +683,7 @@ public class SubcircuitView
         if (view instanceof ComponentView)
         {
           ComponentView<?> componentView = (ComponentView<?>) view;
-          PortView portView = componentView.getPort(connectionView);
+          PortView portView = componentView.getPortView(connectionView);
           portViews.add(portView);
         }
       }

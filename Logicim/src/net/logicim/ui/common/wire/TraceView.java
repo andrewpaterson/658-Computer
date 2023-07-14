@@ -18,6 +18,7 @@ public class TraceView
     extends View
     implements WireView
 {
+  protected SubcircuitView containingSubcircuitView;
   protected WireViewComp wireView;
 
   protected Line line;
@@ -35,6 +36,7 @@ public class TraceView
   public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end, boolean addConnections, long id)
   {
     super(id);
+    this.containingSubcircuitView = subcircuitView;
     this.line = new Line(start, end);
     this.wireView = new WireViewComp();
     if (addConnections)

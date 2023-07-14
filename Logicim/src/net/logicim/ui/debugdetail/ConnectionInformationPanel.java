@@ -67,7 +67,7 @@ public class ConnectionInformationPanel
       if (connectedView instanceof ComponentView<?>)
       {
         ComponentView<?> componentView = (ComponentView<?>) connectedView;
-        PortView portView = componentView.getPort(connectionView);
+        PortView portView = componentView.getPortView(connectionView);
         if (portView != null)
         {
           String simulationsString = componentView.toSimulationsDebugString(portView.getPorts().keySet());
@@ -101,7 +101,7 @@ public class ConnectionInformationPanel
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    PortView portView = componentView.getPort(connectionView);
+    PortView portView = componentView.getPortView(connectionView);
     String padding = "  ";
     String text = portView.getText();
     if (!StringUtil.isEmptyOrNull(text))

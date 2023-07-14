@@ -21,7 +21,7 @@ public class PortViewFinder
         if (connectedView instanceof ComponentView)
         {
           ComponentView<?> componentView = (ComponentView<?>) connectedView;
-          PortView portView = componentView.getPort(connectionView);
+          PortView portView = componentView.getPortView(connectionView);
           if (portView != null)
           {
             portViews.add(portView);

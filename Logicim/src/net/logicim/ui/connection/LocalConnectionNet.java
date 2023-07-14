@@ -121,7 +121,7 @@ public class LocalConnectionNet
       ConnectionView connection = connectedComponent.connection;
 
       boolean isSplitter = componentView instanceof SplitterView;
-      PortView portView = componentView.getPort(connection);
+      PortView portView = componentView.getPortView(connection);
 
       for (int i = 0; i < portConnections.size(); i++)
       {

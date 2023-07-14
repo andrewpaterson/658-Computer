@@ -4,6 +4,8 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.simulation.component.passive.pin.PinView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -48,14 +50,22 @@ public class ConnectionFinder
           }
           else if (view instanceof TunnelView)
           {
-            processTunnel(currentConnection, (TunnelView) view);
+            processTunnelView(currentConnection, (TunnelView) view);
+          }
+          else if (view instanceof SubcircuitInstanceView)
+          {
+            processTraceSubcircuitInstanceView(currentConnection, (SubcircuitInstanceView) view);
+          }
+          else if (view instanceof PinView)
+          {
+            processPinView(currentConnection, (PinView) view);
           }
         }
       }
     }
   }
 
-  protected void processTunnel(ConnectionView currentConnection, TunnelView tunnelView)
+  protected void processTunnelView(ConnectionView currentConnection, TunnelView tunnelView)
   {
     List<ConnectionView> tunnelConnections = tunnelView.getAllConnectedTunnelConnections();
     for (ConnectionView connectionView : tunnelConnections)
@@ -79,6 +89,16 @@ public class ConnectionFinder
     {
       connectionsToProcess.add(connection);
     }
+  }
+
+  private void processTraceSubcircuitInstanceView(ConnectionView currentConnection, SubcircuitInstanceView subcircuitInstanceView)
+  {
+    PinView pinView = subcircuitInstanceView.getPinView(currentConnection);
+    addConnectionToProcess(pinView.getPortView().getConnection());
+  }
+
+  private void processPinView(ConnectionView currentConnection, PinView pinView)
+  {
   }
 
   public Set<ConnectionView> getConnections()

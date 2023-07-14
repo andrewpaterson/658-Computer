@@ -431,9 +431,9 @@ public class PinView
     }
   }
 
-  public Int2D getRelativeInstancePosition()
+  public PortView getPortView()
   {
-    return relativeSubcircuitPosition;
+    return port;
   }
 
   @Override

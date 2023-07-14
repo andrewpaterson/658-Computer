@@ -558,5 +558,30 @@ public class SubcircuitInstanceView
                                                  properties.height) +
            toSimulationsDebugString(simulationSubcircuitInstances.keySet());
   }
+
+  public PinView getPinView(ConnectionView connection)
+  {
+    SubcircuitPinView subcircuitPinView = getSubcircuitPinView(connection);
+    if (subcircuitPinView != null)
+    {
+      return subcircuitPinView.getPinView();
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public SubcircuitPinView getSubcircuitPinView(ConnectionView connection)
+  {
+    for (SubcircuitPinView subcircuitPinView : pinViews)
+    {
+      if (subcircuitPinView.getConnection() == connection)
+      {
+        return subcircuitPinView;
+      }
+    }
+    return null;
+  }
 }
 

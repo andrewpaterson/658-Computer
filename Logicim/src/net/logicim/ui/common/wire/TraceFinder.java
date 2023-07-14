@@ -36,7 +36,7 @@ public class TraceFinder
   }
 
   @Override
-  protected void processTunnel(ConnectionView currentConnection, TunnelView tunnelView)
+  protected void processTunnelView(ConnectionView currentConnection, TunnelView tunnelView)
   {
   }
 }

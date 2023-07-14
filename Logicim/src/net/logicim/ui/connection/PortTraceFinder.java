@@ -81,7 +81,11 @@ public abstract class PortTraceFinder
     List<ComponentConnection<SplitterView>> splitterViewStack = new ArrayList<>();
     Map<ConnectionView, SplitterView> processedSplitterViewConnections = new HashMap<>();
 
-    processLocalConnections(subcircuitSimulation, inputConnectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
+    processLocalConnections(subcircuitSimulation,
+                            inputConnectionView,
+                            connectionNets,
+                            splitterViewStack,
+                            processedSplitterViewConnections);
 
     int stackIndex = 0;
     while (stackIndex < splitterViewStack.size())
@@ -90,7 +94,11 @@ public abstract class PortTraceFinder
       ConnectionView connectionView = splitterViewConnection.connection;
       if (!processedSplitterViewConnections.containsKey(connectionView))
       {
-        processLocalConnections(subcircuitSimulation, connectionView, connectionNets, splitterViewStack, processedSplitterViewConnections);
+        processLocalConnections(subcircuitSimulation,
+                                connectionView,
+                                connectionNets,
+                                splitterViewStack,
+                                processedSplitterViewConnections);
       }
 
       stackIndex++;

@@ -1,15 +1,17 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.port.PortViewFinder;
 import net.logicim.ui.common.wire.WireView;
+import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -21,6 +23,8 @@ public class LocalConnectionNet
   protected List<ComponentConnection<ComponentView<?>>> connectedComponents;
   protected List<WireConnection> connectedWires;
   protected List<ComponentConnection<SplitterView>> splitterViews;
+  protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
+  protected List<ComponentConnection<PinView>> pinViews;
 
   protected List<PortConnection> portConnections;
 
@@ -33,6 +37,8 @@ public class LocalConnectionNet
     connectedComponents = new ArrayList<>();
     connectedWires = new ArrayList<>();
     splitterViews = new ArrayList<>();
+    subcircuitInstanceViews = new ArrayList<>();
+    pinViews = new ArrayList<>();
 
     ConnectionFinder connectionFinder = new ConnectionFinder();
     connectionFinder.addConnection(inputConnectionView);
@@ -102,8 +108,16 @@ public class LocalConnectionNet
           {
             splitterViews.add(new ComponentConnection<>((SplitterView) componentView, connectionView));
           }
-          connectedComponents.add(new ComponentConnection<>(componentView, connectionView));
+          else if (connectedView instanceof PinView)
+          {
+            pinViews.add(new ComponentConnection<>((PinView) connectedView, connectionView));
+          }
+          else if (connectedView instanceof SubcircuitInstanceView)
+          {
+            subcircuitInstanceViews.add(new ComponentConnection<>((SubcircuitInstanceView) connectedView, connectionView));
+          }
 
+          connectedComponents.add(new ComponentConnection<>(componentView, connectionView));
         }
         else if (connectedView instanceof WireView)
         {

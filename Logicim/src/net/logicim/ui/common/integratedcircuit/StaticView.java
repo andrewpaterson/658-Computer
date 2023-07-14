@@ -129,7 +129,14 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     Int2D s = new Int2D();
     if (getBoundingBoxInScreenSpace(viewport, p, s))
     {
-      viewport.paintRectangle(graphics, p.x, p.y, s.x, s.y, viewport.getAbsoluteStroke(1), null, Color.ORANGE);
+      viewport.paintRectangle(graphics,
+                              p.x,
+                              p.y,
+                              s.x,
+                              s.y,
+                              viewport.getAbsoluteStroke(1),
+                              null,
+                              Color.ORANGE);
     }
   }
 
@@ -289,7 +296,12 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public String toDebugString()
   {
-    return String.format("SubcircuitView [%s]\nPosition [%s]\nRotation [%s]\nFinalised [%s]\n", containingSubcircuitView.getTypeName(), position.toString(), rotation.toString(), finalised);
+    return String.format("Name [%s]\nContaining SubcircuitView [%s]\nPosition [%s]\nRotation [%s]\nFinalised [%s]\n",
+                         properties.name,
+                         containingSubcircuitView.getTypeName(),
+                         position.toString(),
+                         rotation.toString(),
+                         finalised);
   }
 }
 

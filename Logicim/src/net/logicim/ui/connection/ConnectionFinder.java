@@ -52,14 +52,6 @@ public class ConnectionFinder
           {
             processTunnelView(currentConnection, (TunnelView) view);
           }
-          else if (view instanceof SubcircuitInstanceView)
-          {
-            processTraceSubcircuitInstanceView(currentConnection, (SubcircuitInstanceView) view);
-          }
-          else if (view instanceof PinView)
-          {
-            processPinView(currentConnection, (PinView) view);
-          }
         }
       }
     }
@@ -89,16 +81,6 @@ public class ConnectionFinder
     {
       connectionsToProcess.add(connection);
     }
-  }
-
-  private void processTraceSubcircuitInstanceView(ConnectionView currentConnection, SubcircuitInstanceView subcircuitInstanceView)
-  {
-    PinView pinView = subcircuitInstanceView.getPinView(currentConnection);
-    addConnectionToProcess(pinView.getPortView().getConnection());
-  }
-
-  private void processPinView(ConnectionView currentConnection, PinView pinView)
-  {
   }
 
   public Set<ConnectionView> getConnections()

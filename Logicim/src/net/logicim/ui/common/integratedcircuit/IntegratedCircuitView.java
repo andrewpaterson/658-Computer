@@ -24,8 +24,10 @@ import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 
 public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends IntegratedCircuitProperties>
     extends ComponentView<PROPERTIES>

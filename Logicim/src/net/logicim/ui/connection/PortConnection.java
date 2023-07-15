@@ -9,12 +9,12 @@ import java.util.Set;
 
 public class PortConnection
 {
-  protected LocalConnectionNet localConnectionNet;
+  protected LocalMultiSimulationConnectionNet localConnectionNet;
 
   protected List<Port> connectedPorts;
   protected Set<Port> splitterPorts;
 
-  public PortConnection(LocalConnectionNet localConnectionNet)
+  public PortConnection(LocalMultiSimulationConnectionNet localConnectionNet)
   {
     this.localConnectionNet = localConnectionNet;
     this.connectedPorts = new ArrayList<>();

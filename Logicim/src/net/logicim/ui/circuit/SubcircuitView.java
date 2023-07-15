@@ -28,6 +28,7 @@ import net.logicim.ui.common.wire.TraceFinder;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.connection.LocalConnectionNet;
+import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.ConnectionViewCache;
@@ -591,7 +592,7 @@ public class SubcircuitView
 
         if (!updatedConnectionViews.contains(connectionView))
         {
-          List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, connectionView);
+          List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, connectionView);
           List<ConnectionView> connectionNetConnectionViews = PortTraceFinder.getConnectionViews(connectionNets);
           updatedConnectionViews.addAll(connectionNetConnectionViews);
         }
@@ -760,7 +761,7 @@ public class SubcircuitView
       Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
       for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
       {
-        List<LocalConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, nonTraceConnectionView);
+        List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, nonTraceConnectionView);
         updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
       }
       fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);

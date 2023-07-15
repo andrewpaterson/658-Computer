@@ -1,7 +1,6 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -14,7 +13,6 @@ import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,17 +26,20 @@ public class LocalConnectionNet
 
   protected List<PortConnection> portConnections;
 
-  protected Set<Trace> traces = new LinkedHashSet<>();
+  protected LocalMultiSimulationConnectionNet multiSimulationNet;
   protected SubcircuitSimulation subcircuitSimulation;
 
-  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, ConnectionView inputConnectionView)
+  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, LocalMultiSimulationConnectionNet multiSimulationNet, ConnectionView inputConnectionView)
   {
     this.subcircuitSimulation = subcircuitSimulation;
-    connectedComponents = new ArrayList<>();
-    connectedWires = new ArrayList<>();
-    splitterViews = new ArrayList<>();
-    subcircuitInstanceViews = new ArrayList<>();
-    pinViews = new ArrayList<>();
+    this.multiSimulationNet = multiSimulationNet;
+    this.multiSimulationNet.add(this);
+
+    this.connectedComponents = new ArrayList<>();
+    this.connectedWires = new ArrayList<>();
+    this.splitterViews = new ArrayList<>();
+    this.subcircuitInstanceViews = new ArrayList<>();
+    this.pinViews = new ArrayList<>();
 
     ConnectionFinder connectionFinder = new ConnectionFinder();
     connectionFinder.addConnection(inputConnectionView);
@@ -71,7 +72,7 @@ public class LocalConnectionNet
     List<PortConnection> portConnections = new ArrayList<>(minimumPorts);
     for (int i = 0; i < minimumPorts; i++)
     {
-      portConnections.add(new PortConnection(this));
+      portConnections.add(new PortConnection(multiSimulationNet));
     }
     return portConnections;
   }
@@ -187,16 +188,6 @@ public class LocalConnectionNet
       builder.append(component.getType() + " (" + connection.getGridPosition() + ")@" + System.identityHashCode(connection) + "\n");
     }
     return builder.toString();
-  }
-
-  public void addTrace(Trace trace)
-  {
-    traces.add(trace);
-  }
-
-  public List<Trace> getTraces()
-  {
-    return new ArrayList<>(traces);
   }
 }
 

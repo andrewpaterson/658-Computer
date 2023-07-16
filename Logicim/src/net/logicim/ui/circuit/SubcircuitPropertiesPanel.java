@@ -2,11 +2,8 @@ package net.logicim.ui.circuit;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.data.common.properties.ComponentProperties;
-import net.logicim.ui.components.Label;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
-
-import javax.swing.*;
 
 public class SubcircuitPropertiesPanel
     extends PropertiesPanel

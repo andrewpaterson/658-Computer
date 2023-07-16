@@ -1,7 +1,6 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
 
 public class AddTraceAction
     extends SimulatorEditorAction

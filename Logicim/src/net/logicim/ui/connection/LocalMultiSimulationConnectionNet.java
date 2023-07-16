@@ -188,15 +188,9 @@ public class LocalMultiSimulationConnectionNet
     return portConnections;
   }
 
-  public List<ComponentConnection<SplitterView>> getSplitterViews()
+  public List<LocalConnectionNet> getLocalConnectionNets()
   {
-    List<ComponentConnection<SplitterView>> result = new ArrayList<>();
-    for (LocalConnectionNet localConnectionNet : localConnectionNets)
-    {
-      List<ComponentConnection<SplitterView>> splitterViews = localConnectionNet.getSplitterViews();
-      result.addAll(splitterViews);
-    }
-    return result;
+    return localConnectionNets;
   }
 
   public List<ConnectionView> getConnectionViews()

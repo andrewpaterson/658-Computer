@@ -3,9 +3,9 @@ package net.logicim.ui.simulation.component.integratedcircuit.extra;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
 import net.logicim.domain.common.Units;
+import net.logicim.domain.common.defaults.DefaultFamily;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
-import net.logicim.domain.common.defaults.DefaultFamily;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 

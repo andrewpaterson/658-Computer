@@ -7,6 +7,6 @@ public enum LineOverlap
   End,
   Center, //overlapped somewhere in the center including neither the start nor the end position.
   Orthogonal,
-  None;
+  None
 }
 

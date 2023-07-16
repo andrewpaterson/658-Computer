@@ -1,9 +1,9 @@
 package net.logicim.ui.components.typeeditor;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.data.common.Divider;
 import net.logicim.ui.property.DividerPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;
-import net.logicim.data.common.Divider;
 
 import java.util.ArrayList;
 import java.util.List;

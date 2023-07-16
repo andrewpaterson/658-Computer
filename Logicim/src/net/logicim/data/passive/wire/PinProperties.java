@@ -2,10 +2,10 @@ package net.logicim.data.passive.wire;
 
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
+import net.logicim.data.common.Divider;
 import net.logicim.data.common.Radix;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.family.Family;
-import net.logicim.data.common.Divider;
 
 import java.util.Objects;
 

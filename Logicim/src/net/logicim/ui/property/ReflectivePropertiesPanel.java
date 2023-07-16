@@ -5,13 +5,10 @@ import net.logicim.common.reflect.InstanceInspector;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.components.Label;
-import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.PropertyEditor;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.util.SeparatorUtil;
 
-import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

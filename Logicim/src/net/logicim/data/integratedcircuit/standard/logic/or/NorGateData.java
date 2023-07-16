@@ -10,8 +10,8 @@ import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.common.propagation.FamilyStore;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.NorGateView;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.List;
 

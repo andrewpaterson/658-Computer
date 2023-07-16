@@ -2,16 +2,16 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.passive.power.PowerPinNames;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
-import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;

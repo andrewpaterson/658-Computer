@@ -27,7 +27,7 @@ public class DisplayPanel
     components.add(createVerticalButtonInput(editor, ZOOM_OUT, ZoomOutAction.NAME));
     components.add(createVerticalButtonInput(editor, ZOOM_TO_DEFAULT, ZoomResetAction.NAME));
     components.add(createVerticalButtonInput(editor, ZOOM_FIT_ALL, ZoomFitAllAction.NAME));
-    components.add(createVerticalButtonInput(editor, ZOOM_FIT_SELECTION, ZoomFitSelectionAction.NAME ));
+    components.add(createVerticalButtonInput(editor, ZOOM_FIT_SELECTION, ZoomFitSelectionAction.NAME));
     components.add(createHorizontalSeparator());
     components.add(createVerticalButtonInput(editor, VIEW_SIMULATION_TREE, ViewSimulationTreeAction.NAME));
 

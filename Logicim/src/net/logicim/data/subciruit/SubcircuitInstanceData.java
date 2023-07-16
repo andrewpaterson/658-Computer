@@ -25,7 +25,6 @@ public class SubcircuitInstanceData
   public Set<Long> simulationSubcircuitInstances;
   public List<Long> subcircuitInstanceSimulations;
 
-
   public SubcircuitInstanceData()
   {
   }

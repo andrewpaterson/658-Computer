@@ -3,8 +3,6 @@ package net.logicim.ui.circuit;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.common.Rotation;
-import net.logicim.ui.components.Label;
-import net.logicim.ui.components.form.Form;
 import net.logicim.ui.components.typeeditor.ComboBoxPropertyEditor;
 import net.logicim.ui.components.typeeditor.IntegerPropertyEditor;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
@@ -12,7 +10,6 @@ import net.logicim.ui.property.PropertiesPanel;
 import net.logicim.ui.property.RotationEditor;
 import net.logicim.ui.property.RotationEditorHolder;
 
-import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.util.List;
 

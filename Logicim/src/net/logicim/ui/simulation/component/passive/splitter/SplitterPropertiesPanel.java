@@ -12,7 +12,6 @@ import net.logicim.ui.property.RotationEditor;
 import net.logicim.ui.property.RotationEditorHolder;
 import net.logicim.ui.util.ButtonUtil;
 
-import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.List;

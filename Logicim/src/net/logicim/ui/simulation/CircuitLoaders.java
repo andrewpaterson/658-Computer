@@ -3,10 +3,7 @@ package net.logicim.ui.simulation;
 import net.logicim.data.simulation.SimulationLoader;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class CircuitLoaders
 {

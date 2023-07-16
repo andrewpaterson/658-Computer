@@ -2,9 +2,9 @@ package net.logicim.domain.common.propagation;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.data.family.Family;
+import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.common.wire.TraceValue;
-import net.logicim.domain.common.defaults.DefaultLogicLevels;
 
 import java.util.ArrayList;
 import java.util.Collections;

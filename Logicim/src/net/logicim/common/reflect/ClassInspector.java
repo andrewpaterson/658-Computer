@@ -456,7 +456,7 @@ public class ClassInspector
 
   public <A extends Annotation> A getAnnotationOrNull(Class<A> annotationClass)
   {
-    return (A) aClass.getAnnotation(annotationClass);
+    return aClass.getAnnotation(annotationClass);
   }
 
   private void assertIsStatic(Method method, String methodName)

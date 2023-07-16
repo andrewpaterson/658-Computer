@@ -338,7 +338,6 @@ public class SimulatorPanel
     new EditorDialogHelper().showDialog(selectSimulationDialog);
   }
 
-
   @Override
   public void mouseClicked(MouseEvent e)
   {

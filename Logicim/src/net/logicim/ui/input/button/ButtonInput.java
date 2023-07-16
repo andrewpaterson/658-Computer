@@ -2,7 +2,6 @@ package net.logicim.ui.input.button;
 
 import net.logicim.ui.editor.EditorAction;
 import net.logicim.ui.input.event.ButtonPressedEvent;
-import net.logicim.ui.input.event.KeyPressedEvent;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +24,7 @@ public class ButtonInput
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    action.getEditor() .addEditorEvent(new ButtonPressedEvent(action));
+    action.getEditor().addEditorEvent(new ButtonPressedEvent(action));
   }
 
   public JButton getButton()

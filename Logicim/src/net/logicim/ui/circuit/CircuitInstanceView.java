@@ -6,7 +6,6 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 

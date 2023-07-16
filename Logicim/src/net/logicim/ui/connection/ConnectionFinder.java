@@ -4,8 +4,6 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
-import net.logicim.ui.simulation.component.passive.pin.PinView;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

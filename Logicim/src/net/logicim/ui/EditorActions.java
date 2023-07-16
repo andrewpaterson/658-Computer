@@ -24,7 +24,7 @@ public class EditorActions
     }
     else
     {
-      throw new SimulatorException("Cannot add Editor Action [%s].  It already exists.",  description);
+      throw new SimulatorException("Cannot add Editor Action [%s].  It already exists.", description);
     }
   }
 

@@ -32,7 +32,7 @@ public abstract class PortTraceFinder
       for (WireConnection wireConnection : partialWire.connectedWires)
       {
         WireView wireView = wireConnection.getWireView();
-        //xxx // This is wrong.  It can't be the starting simulation.  It must be the simulation form the subcircuit the wire is in.
+       //xxx // This is wrong.  It can't be the starting simulation.  It must be the simulation form the subcircuit the wire is in.
         wireView.clearTraces(startingSubcircuitSimulation);
       }
     }
@@ -42,6 +42,7 @@ public abstract class PortTraceFinder
       for (WireConnection connectedWire : connectionNet.getConnectedWires())
       {
         WireView wireView = connectedWire.wireView;
+        //xxx // This is wrong.  It can't be the starting simulation.  It must be the simulation form the subcircuit the wire is in.
         wireView.connectTraces(startingSubcircuitSimulation, connectionNet.getTraces());
       }
     }
@@ -114,12 +115,12 @@ public abstract class PortTraceFinder
       connectionNet.process();
     }
 
-    return createWireList(startingSubcircuitSimulation, connectionNets);
+    return createWireList(connectionNets);
   }
 
-  private static WireList createWireList(SubcircuitSimulation subcircuitSimulation, List<LocalMultiSimulationConnectionNet> connectionNets)
+  private static WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
-    Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(subcircuitSimulation, connectionNets);
+    Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(connectionNets);
     Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
 
     Set<PortConnection> processedWires = new HashSet<>();
@@ -168,31 +169,27 @@ public abstract class PortTraceFinder
     return wireList;
   }
 
-  private static Map<Port, Port> createSplitterPortMap(SubcircuitSimulation subcircuitSimulation, List<LocalMultiSimulationConnectionNet> connectionNets)
+  private static Map<Port, Port> createSplitterPortMap(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
-    if (subcircuitSimulation != null)
+    Map<Port, Port> totalSplitterPortMap = new HashMap<>();
+    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
-      Map<Port, Port> totalSplitterPortMap = new HashMap<>();
-      for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+      for (LocalConnectionNet localConnectionNet : connectionNet.getLocalConnectionNets())
       {
-        List<ComponentConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();
+        List<ComponentConnection<SplitterView>> splitterViews = localConnectionNet.getSplitterViews();
         for (ComponentConnection<SplitterView> componentConnection : splitterViews)
         {
           SplitterView splitterView = componentConnection.component;
-          Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(subcircuitSimulation);
+          Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(localConnectionNet.getSubcircuitSimulation());
           if (portMap != null)
           {
             totalSplitterPortMap.putAll(portMap);
           }
         }
       }
+    }
 
-      return totalSplitterPortMap;
-    }
-    else
-    {
-      return null;
-    }
+    return totalSplitterPortMap;
   }
 
   private static Map<Port, PortConnection> createPortWireMap(List<LocalMultiSimulationConnectionNet> connectionNets)

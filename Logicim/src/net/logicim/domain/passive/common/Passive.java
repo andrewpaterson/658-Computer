@@ -1,7 +1,6 @@
 package net.logicim.domain.passive.common;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;

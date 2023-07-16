@@ -27,7 +27,6 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceFinder;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
-import net.logicim.ui.connection.LocalConnectionNet;
 import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;

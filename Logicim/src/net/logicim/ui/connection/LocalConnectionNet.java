@@ -12,17 +12,17 @@ import java.util.Set;
 
 public class LocalConnectionNet
 {
-  protected LocalMultiSimulationConnectionNet multiSimulationNet;
+  protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
   protected SubcircuitSimulation subcircuitSimulation;
   protected Set<ConnectionView> connectionViews;
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, LocalMultiSimulationConnectionNet multiSimulationNet, ConnectionView inputConnectionView)
+  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, LocalMultiSimulationConnectionNet multiSimulationConnectionNet, ConnectionView inputConnectionView)
   {
     this.subcircuitSimulation = subcircuitSimulation;
-    this.multiSimulationNet = multiSimulationNet;
-    this.multiSimulationNet.add(this);
+    this.multiSimulationConnectionNet = multiSimulationConnectionNet;
+    this.multiSimulationConnectionNet.add(this);
 
     ConnectionFinder connectionFinder = new ConnectionFinder();
     connectionFinder.addConnection(inputConnectionView);
@@ -62,6 +62,11 @@ public class LocalConnectionNet
   public List<ComponentConnection<SplitterView>> getSplitterViews()
   {
     return splitterViews;
+  }
+
+  public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
+  {
+    return multiSimulationConnectionNet;
   }
 }
 

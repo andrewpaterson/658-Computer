@@ -1,32 +1,33 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PortConnection
 {
-  protected LocalMultiSimulationConnectionNet localConnectionNet;
+  protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
 
-  protected List<Port> connectedPorts;
+  protected Map<SubcircuitSimulation, List<Port>> connectedPorts;
   protected Set<Port> splitterPorts;
 
-  public PortConnection(LocalMultiSimulationConnectionNet localConnectionNet)
+  public PortConnection(LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
   {
-    this.localConnectionNet = localConnectionNet;
-    this.connectedPorts = new ArrayList<>();
+    this.multiSimulationConnectionNet = multiSimulationConnectionNet;
+    this.connectedPorts = new LinkedHashMap<>();
     this.splitterPorts = new HashSet<>();
   }
 
-  public void addPort(Port port)
+  public void addPort(SubcircuitSimulation subcircuitSimulation, Port port)
   {
-    if (port != null)
+    List<Port> ports = connectedPorts.get(subcircuitSimulation);
+    if (ports == null)
     {
-      connectedPorts.add(port);
+      ports = new ArrayList<>();
+      connectedPorts.put(subcircuitSimulation, ports);
     }
+    ports.add(port);
   }
 
   public void addSplitterPort(Port port)
@@ -40,6 +41,16 @@ public class PortConnection
   public Set<Port> getSplitterPorts()
   {
     return splitterPorts;
+  }
+
+  public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
+  {
+    return multiSimulationConnectionNet;
+  }
+
+  public Map<SubcircuitSimulation, List<Port>> getConnectedPorts()
+  {
+    return connectedPorts;
   }
 }
 

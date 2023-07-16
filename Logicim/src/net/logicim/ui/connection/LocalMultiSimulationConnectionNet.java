@@ -168,7 +168,7 @@ public class LocalMultiSimulationConnectionNet
         {
           PortConnection portConnection = portConnections.get(i);
           Port port = portView.getPort(subcircuitSimulation, i);
-          portConnection.addPort(port);
+          portConnection.addPort(subcircuitSimulation, port);
           if (isSplitter)
           {
             portConnection.addSplitterPort(port);

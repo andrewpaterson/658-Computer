@@ -578,10 +578,10 @@ public class SubcircuitView
   }
 
   public Set<ConnectionView> createTracesForConnectionViews(Collection<ConnectionView> connectionViews,
-                                                            SubcircuitSimulation subcircuitSimulation)
+                                                            SubcircuitSimulation startingSubcircuitSimulation)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    if (subcircuitSimulation != null)
+    if (startingSubcircuitSimulation != null)
     {
       for (ConnectionView connectionView : connectionViews)
       {
@@ -592,7 +592,7 @@ public class SubcircuitView
 
         if (!updatedConnectionViews.contains(connectionView))
         {
-          List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, connectionView);
+          List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(startingSubcircuitSimulation, connectionView);
           List<ConnectionView> connectionNetConnectionViews = PortTraceFinder.getConnectionViews(connectionNets);
           updatedConnectionViews.addAll(connectionNetConnectionViews);
         }

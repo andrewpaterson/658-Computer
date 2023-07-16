@@ -1,6 +1,5 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

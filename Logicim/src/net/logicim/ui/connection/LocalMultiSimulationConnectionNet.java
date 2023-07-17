@@ -20,7 +20,7 @@ public class LocalMultiSimulationConnectionNet
 
   protected Set<Trace> traces = new LinkedHashSet<>();
   protected Map<SubcircuitSimulation, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
-  protected List<WireConnection> connectedWires;
+  protected Map<SubcircuitSimulation, List<WireConnection>> connectedWires;
   protected List<ComponentConnection<PinView>> pinViews;
 
   protected List<PortConnection> portConnections;
@@ -29,7 +29,7 @@ public class LocalMultiSimulationConnectionNet
   {
     this.localConnectionNets = new ArrayList<>();
     this.connectedComponents = new LinkedHashMap<>();
-    this.connectedWires = new ArrayList<>();
+    this.connectedWires = new LinkedHashMap<>();
     this.pinViews = new ArrayList<>();
   }
 
@@ -132,21 +132,37 @@ public class LocalMultiSimulationConnectionNet
               pinViews.add(new ComponentConnection<>((PinView) connectedView, connectionView));
             }
 
-            List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(subcircuitSimulation);
-            if (componentConnections == null)
-            {
-              componentConnections = new ArrayList<>();
-              connectedComponents.put(subcircuitSimulation, componentConnections);
-            }
-            componentConnections.add(new ComponentConnection<>(componentView, connectionView));
+            addConnectedComponent(subcircuitSimulation, connectionView, componentView);
           }
           else if (connectedView instanceof WireView)
           {
-            connectedWires.add(new WireConnection((WireView) connectedView, connectionView));
+            addConnectedWire(subcircuitSimulation, connectionView, (WireView) connectedView);
           }
         }
       }
     }
+  }
+
+  private void addConnectedWire(SubcircuitSimulation subcircuitSimulation, ConnectionView connectionView, WireView connectedView)
+  {
+    List<WireConnection> wireConnections = connectedWires.get(subcircuitSimulation);
+    if (wireConnections == null)
+    {
+      wireConnections = new ArrayList<>();
+      connectedWires.put(subcircuitSimulation, wireConnections);
+    }
+    wireConnections.add(new WireConnection(connectedView, connectionView));
+  }
+
+  private void addConnectedComponent(SubcircuitSimulation subcircuitSimulation, ConnectionView connectionView, ComponentView<?> componentView)
+  {
+    List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(subcircuitSimulation);
+    if (componentConnections == null)
+    {
+      componentConnections = new ArrayList<>();
+      connectedComponents.put(subcircuitSimulation, componentConnections);
+    }
+    componentConnections.add(new ComponentConnection<>(componentView, connectionView));
   }
 
   protected void traceConnections()
@@ -178,7 +194,7 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  public List<WireConnection> getConnectedWires()
+  public Map<SubcircuitSimulation, List<WireConnection>> getConnectedWires()
   {
     return connectedWires;
   }

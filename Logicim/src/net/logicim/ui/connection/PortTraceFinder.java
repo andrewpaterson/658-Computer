@@ -29,21 +29,30 @@ public abstract class PortTraceFinder
     List<PartialWire> partialWires = wireList.getPartialWires();
     for (PartialWire partialWire : partialWires)
     {
-      for (WireConnection wireConnection : partialWire.connectedWires)
+      Map<SubcircuitSimulation, List<WireConnection>> connectedWires = partialWire.connectedWires;
+      for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectedWires.entrySet())
       {
-        WireView wireView = wireConnection.getWireView();
-       //xxx // This is wrong.  It can't be the starting simulation.  It must be the simulation form the subcircuit the wire is in.
-        wireView.clearTraces(startingSubcircuitSimulation);
+        SubcircuitSimulation subcircuitSimulation = entry.getKey();
+        List<WireConnection> wireConnections = entry.getValue();
+        for (WireConnection wireConnection : wireConnections)
+        {
+          WireView wireView = wireConnection.getWireView();
+          wireView.clearTraces(subcircuitSimulation);
+        }
       }
     }
 
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
-      for (WireConnection connectedWire : connectionNet.getConnectedWires())
+      for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
       {
-        WireView wireView = connectedWire.wireView;
-        //xxx // This is wrong.  It can't be the starting simulation.  It must be the simulation form the subcircuit the wire is in.
-        wireView.connectTraces(startingSubcircuitSimulation, connectionNet.getTraces());
+        SubcircuitSimulation subcircuitSimulation = entry.getKey();
+        List<WireConnection> wireConnections = entry.getValue();
+        for (WireConnection connectedWire : wireConnections)
+        {
+          WireView wireView = connectedWire.wireView;
+          wireView.connectTraces(subcircuitSimulation, connectionNet.getTraces());
+        }
       }
     }
     return connectionNets;

@@ -142,7 +142,7 @@ public class EditAction
 
   public void circuitUpdated()
   {
-    circuitEditor.circuitUpdated();
+    circuitEditor.circuitUpdated(circuitEditor.getCurrentSubcircuitEditor());
     pushUndo();
   }
 

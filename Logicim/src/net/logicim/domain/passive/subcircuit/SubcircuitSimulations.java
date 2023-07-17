@@ -36,7 +36,8 @@ public class SubcircuitSimulations
 
   public void remove(SubcircuitSimulation subcircuitSimulation)
   {
-    List<SubcircuitSimulation> subcircuitSimulations = simulations.get(subcircuitSimulation.getCircuitSimulation());
+    CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
+    List<SubcircuitSimulation> subcircuitSimulations = simulations.get(circuitSimulation);
     if (subcircuitSimulations == null)
     {
       throw new SimulatorException("Could not remove Subcircuit Simulation [%s] it's Circuit Simulation could not be found.", subcircuitSimulation.getDescription());
@@ -44,9 +45,13 @@ public class SubcircuitSimulations
     boolean removed = subcircuitSimulations.remove(subcircuitSimulation);
     if (!removed)
     {
-      throw new SimulatorException("Could not remove Subcircuit Simulation [%s] from Circuit Simulation [%s].", subcircuitSimulation.getDescription(), subcircuitSimulation.getCircuitSimulation().getDescription());
+      throw new SimulatorException("Could not remove Subcircuit Simulation [%s] from Circuit Simulation [%s].", subcircuitSimulation.getDescription(), circuitSimulation.getDescription());
     }
 
+    if (subcircuitSimulations.isEmpty())
+    {
+      simulations.remove(circuitSimulation);
+    }
   }
 
   public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
@@ -86,21 +91,25 @@ public class SubcircuitSimulations
     return simulations.keySet();
   }
 
-  public void validate(List<CircuitInstanceView> circuitInstanceViews)
+  public void validate(List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
     Collection<SubcircuitTopSimulation> subcircuitTopSimulations = getSubcircuitTopSimulations();
+    if (subcircuitTopSimulations.size() < 1)
+    {
+      throw new SimulatorException("Expected at least one top subcircuit simulation.");
+
+    }
     for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
     {
-      validateSubcircuitTopSimulation(subcircuitTopSimulation, circuitInstanceViews);
+      validateSubcircuitTopSimulation(subcircuitTopSimulation, orderedTopDownCircuitInstanceViews);
     }
-
   }
 
-  protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> circuitInstanceViews)
+  protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
     CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
     int depth = 0;
-    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
+    for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
     {
       List<SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
       for (SubcircuitSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)

@@ -697,17 +697,11 @@ public class CircuitEditor
     return null;
   }
 
-  public void circuitUpdated()
+  public void circuitUpdated(SubcircuitEditor updatedSubcircuitEditor)
   {
-    SubcircuitEditor currentSubcircuitEditor = getCurrentSubcircuitEditor();
-    SubcircuitView currentSubcircuitView = currentSubcircuitEditor.getCircuitSubcircuitView();
+    Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = getSubcircuitInstanceViewsInSubcircuitEditor(updatedSubcircuitEditor);
 
-    SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(getSubcircuitEditors());
-    List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
-
-    Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = getSubcircuitInstanceViewsInSubcircuitEditor(currentSubcircuitEditor, currentSubcircuitView, orderedSubcircuitEditors);
-
-    recreateSubcircuitInstanceViews(map);
+    //recreateSubcircuitInstanceViews(map);
   }
 
   protected void recreateSubcircuitInstanceViews(Map<SubcircuitEditor, List<SubcircuitInstanceView>> map)
@@ -729,37 +723,32 @@ public class CircuitEditor
     }
   }
 
-  protected Map<SubcircuitEditor, List<SubcircuitInstanceView>> getSubcircuitInstanceViewsInSubcircuitEditor(SubcircuitEditor currentSubcircuitEditor, SubcircuitView currentSubcircuitView, List<SubcircuitEditor> orderedSubcircuitEditors)
+  protected Map<SubcircuitEditor, List<SubcircuitInstanceView>> getSubcircuitInstanceViewsInSubcircuitEditor(SubcircuitEditor currentSubcircuitEditor)
   {
+    List<SubcircuitEditor> subcircuitEditors = getSubcircuitEditors();
     Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = new LinkedHashMap<>();
-    if (orderedSubcircuitEditors != null)
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      for (SubcircuitEditor containingSubcircuitEditor : orderedSubcircuitEditors)
+      List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getCircuitSubcircuitView().getSubcircuitInstanceViews(currentSubcircuitEditor.getCircuitSubcircuitView());
+      if (subcircuitInstanceViews.size() > 0)
       {
-        if (containingSubcircuitEditor != currentSubcircuitEditor)
-        {
-          List<SubcircuitInstanceView> instanceViews = getSubcircuitInstanceView(currentSubcircuitView,
-                                                                                 containingSubcircuitEditor.getCircuitSubcircuitView());
-          map.put(containingSubcircuitEditor, instanceViews);
-        }
+        map.put(subcircuitEditor, subcircuitInstanceViews);
       }
     }
+
     return map;
   }
 
-  protected List<SubcircuitInstanceView> getSubcircuitInstanceView(SubcircuitView currentSubcircuitView, SubcircuitView containingSubcircuitView)
+  private SubcircuitEditor getSubcircuitEditor(SubcircuitView subcircuitView)
   {
-    Set<SubcircuitInstanceView> subcircuitInstanceViews = containingSubcircuitView.findAllSubcircuitInstanceViews();
-
-    List<SubcircuitInstanceView> instanceViews = new ArrayList<>();
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      if (subcircuitInstanceView.getInstanceSubcircuitView() == currentSubcircuitView)
+      if (subcircuitEditor.getCircuitSubcircuitView() == subcircuitView)
       {
-        instanceViews.add(subcircuitInstanceView);
+        return subcircuitEditor;
       }
     }
-    return instanceViews;
+    throw new SimulatorException("Could not get subcircuit editor for subcircuit view [%s].", subcircuitView.getTypeName());
   }
 
   public List<SubcircuitTopEditorSimulation> getSubcircuitTopSimulations()

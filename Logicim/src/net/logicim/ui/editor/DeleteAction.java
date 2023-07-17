@@ -1,6 +1,7 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
+import net.logicim.ui.simulation.CircuitEditor;
 
 public class DeleteAction
     extends SimulatorEditorAction
@@ -18,7 +19,8 @@ public class DeleteAction
     boolean componentDeleted = editor.editActionDeleteComponentIfPossible();
     if (componentDeleted)
     {
-      editor.getCircuitEditor().circuitUpdated();
+      CircuitEditor circuitEditor = editor.getCircuitEditor();
+      circuitEditor.circuitUpdated(circuitEditor.getCurrentSubcircuitEditor());
       editor.pushUndo();
     }
 

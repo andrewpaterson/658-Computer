@@ -518,11 +518,6 @@ public class SubcircuitEditor
     return "Editor" + " " + getTypeName();
   }
 
-  public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
-  {
-    return subcircuitView.getSubcircuitSimulations(circuitSimulation);
-  }
-
   public List<SubcircuitSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
     return new ArrayList<>();
@@ -530,8 +525,8 @@ public class SubcircuitEditor
 
   public void validateSimulations()
   {
-    List<CircuitInstanceView> circuitInstanceViews = getOrderedCircuitInstanceViews();
-    subcircuitView.validateSimulations(circuitInstanceViews);
+    List<CircuitInstanceView> orderedTopDownCircuitInstanceViews = getOrderedCircuitInstanceViews();
+    subcircuitView.validateSimulations(orderedTopDownCircuitInstanceViews);
   }
 }
 

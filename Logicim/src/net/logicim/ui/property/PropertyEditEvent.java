@@ -31,10 +31,11 @@ public class PropertyEditEvent
   public void execute(Logicim editor)
   {
     componentView.clampProperties(newComponentProperties);
-    StaticView<?> newComponentView = recreateComponentView(newComponentProperties, editor.getCircuitEditor());
+    CircuitEditor circuitEditor = editor.getCircuitEditor();
+    StaticView<?> newComponentView = recreateComponentView(newComponentProperties, circuitEditor);
     editor.replaceSelectionInCurrentSubcircuitView(newComponentView, componentView);
 
-    editor.getCircuitEditor().circuitUpdated();
+    circuitEditor.circuitUpdated(circuitEditor.getCurrentSubcircuitEditor());
     editor.pushUndo();
     editor.updateHighlighted();
   }

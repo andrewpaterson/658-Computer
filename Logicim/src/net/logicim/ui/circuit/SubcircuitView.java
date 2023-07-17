@@ -93,6 +93,19 @@ public class SubcircuitView
     return new ArrayList<>(subcircuitInstanceViews);
   }
 
+  public List<SubcircuitInstanceView> getSubcircuitInstanceViews(SubcircuitView instanceSubcircuitView)
+  {
+    ArrayList<SubcircuitInstanceView> result = new ArrayList<>();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      if (subcircuitInstanceView.getInstanceSubcircuitView() == instanceSubcircuitView)
+      {
+        result.add(subcircuitInstanceView);
+      }
+    }
+    return result;
+  }
+
   public void disconnectTraceView(TraceView traceView)
   {
     List<ConnectionView> connectionViews = traceView.getConnectionViews();
@@ -129,8 +142,7 @@ public class SubcircuitView
     return connectionViews;
   }
 
-  public void deleteComponentView(StaticView<?> staticView,
-                                  SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentView(StaticView<?> staticView, SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
@@ -1270,19 +1282,19 @@ public class SubcircuitView
     simulations.add(subcircuitSimulation);
   }
 
-  public void validateSimulations(List<CircuitInstanceView> circuitInstanceViews)
+  public void validateSimulations(List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
-    if (circuitInstanceViews.size() == 0)
+    if (orderedTopDownCircuitInstanceViews.size() == 0)
     {
       throw new SimulatorException("Expected at least one circuit instance view.");
     }
-    CircuitInstanceView circuitInstanceView = circuitInstanceViews.get(0);
+    CircuitInstanceView circuitInstanceView = orderedTopDownCircuitInstanceViews.get(0);
     if (circuitInstanceView.getCircuitSubcircuitView() != this)
     {
       throw new SimulatorException("First circuit instance view");
     }
 
-    simulations.validate(circuitInstanceViews);
+    simulations.validate(orderedTopDownCircuitInstanceViews);
   }
 }
 

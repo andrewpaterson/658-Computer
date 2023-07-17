@@ -3,6 +3,7 @@ package net.logicim.ui.placement;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.Edit;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -32,46 +33,46 @@ public class WirePull
   }
 
   @Override
-  public void start(float x, float y, EditAction editAction)
+  public void start(float x, float y, Edit edit)
   {
     firstPosition = new Int2D(x, y);
   }
 
   @Override
-  public StatefulEdit move(float x, float y, EditAction editAction)
+  public StatefulEdit move(float x, float y, Edit edit)
   {
     update(Math.round(x), Math.round(y));
 
     if (!isEmpty())
     {
-      editAction.getCircuitEditor().getCurrentSelection().clearSelection();
+      edit.getEditor().getCurrentSelection().clearSelection();
     }
 
     return this;
   }
 
   @Override
-  public StatefulEdit rotate(boolean right, EditAction editAction)
+  public StatefulEdit rotate(boolean right, Edit edit)
   {
     return this;
   }
 
   @Override
-  public void done(float x, float y, EditAction editAction)
+  public void done(float x, float y, Edit edit)
   {
     if (!isEmpty())
     {
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      editAction.getCircuitEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine), subcircuitSimulation);
+      edit.getEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine), subcircuitSimulation);
 
-      editAction.circuitUpdated();
+      edit.circuitUpdated();
     }
   }
 
   @Override
-  public void discard(EditAction editAction)
+  public void discard(Edit edit)
   {
   }
 

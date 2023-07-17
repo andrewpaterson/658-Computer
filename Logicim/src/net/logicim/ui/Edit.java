@@ -1,34 +1,31 @@
-package net.logicim.ui.placement;
+package net.logicim.ui;
 
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.placement.StatefulEdit;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.undo.Undo;
 
 import java.awt.*;
 
-public class EditAction
+public class Edit
 {
   protected StatefulEdit edit;
 
   protected Int2D start;
-  protected CircuitEditor circuitEditor;
-  protected Undo undo;
+  protected Logicim editor;
   protected Int2D end;
   protected Int2D diff;
   protected boolean hadDiff;
   protected boolean previousHadDiff;
   protected int rightRotations;
 
-  public EditAction(Float2D start,
-                    StatefulEdit edit,
-                    CircuitEditor circuitEditor,
-                    Undo undo)
+  public Edit(Float2D start,
+              StatefulEdit edit,
+              Logicim editor)
   {
     this.edit = edit;
-    this.circuitEditor = circuitEditor;
-    this.undo = undo;
+    this.editor = editor;
 
     this.start = new Int2D(start);
     this.end = new Int2D(this.start);
@@ -125,14 +122,14 @@ public class EditAction
     return diff;
   }
 
-  public CircuitEditor getCircuitEditor()
+  public CircuitEditor getEditor()
   {
-    return circuitEditor;
+    return editor.getCircuitEditor();
   }
 
   public void pushUndo()
   {
-    undo.pushUndo();
+    editor.pushUndo();
   }
 
   public void paint(Graphics2D graphics, Viewport viewport)
@@ -142,8 +139,9 @@ public class EditAction
 
   public void circuitUpdated()
   {
-    circuitEditor.circuitUpdated(circuitEditor.getCurrentSubcircuitEditor());
-    pushUndo();
+    editor.getCircuitEditor().circuitUpdated(editor.getCurrentSubcircuitEditor());
+    editor.pushUndo();
+    editor.updateHighlighted();
   }
 
   public boolean canTransformComponents()

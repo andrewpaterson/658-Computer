@@ -7,7 +7,7 @@ import net.logicim.ui.common.Strokes;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
-import net.logicim.ui.placement.EditAction;
+import net.logicim.ui.Edit;
 import net.logicim.ui.placement.StatefulEdit;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.util.RectangleUtil;
@@ -108,9 +108,9 @@ public class SelectionEdit
     start(x, y);
   }
 
-  public boolean doneSelection(EditAction editAction)
+  public boolean doneSelection(Edit edit)
   {
-    CircuitEditor circuitEditor = editAction.getCircuitEditor();
+    CircuitEditor circuitEditor = edit.getEditor();
     boolean hasSelectionChanged = calculateSelection(circuitEditor, start, end, keyboardButtons, previousSelection);
     previousSelection = null;
     return hasSelectionChanged;
@@ -136,16 +136,16 @@ public class SelectionEdit
   }
 
   @Override
-  public void start(float x, float y, EditAction editAction)
+  public void start(float x, float y, Edit edit)
   {
-    CircuitEditor circuitEditor = editAction.getCircuitEditor();
+    CircuitEditor circuitEditor = edit.getEditor();
     startSelection(x, y, circuitEditor.getCurrentSelection().getSelection());
   }
 
   @Override
-  public StatefulEdit move(float x, float y, EditAction editAction)
+  public StatefulEdit move(float x, float y, Edit edit)
   {
-    CircuitEditor circuitEditor = editAction.getCircuitEditor();
+    CircuitEditor circuitEditor = edit.getEditor();
     drag(x, y);
     List<View> views = circuitEditor.getSelectionFromRectangle(start, end);
     SelectionMode selectionMode = Selection.calculateSelectionMode(keyboardButtons);
@@ -155,23 +155,23 @@ public class SelectionEdit
   }
 
   @Override
-  public StatefulEdit rotate(boolean right, EditAction editAction)
+  public StatefulEdit rotate(boolean right, Edit edit)
   {
     return this;
   }
 
   @Override
-  public void done(float x, float y, EditAction editAction)
+  public void done(float x, float y, Edit edit)
   {
-    boolean hasSelectionChanged = doneSelection(editAction);
+    boolean hasSelectionChanged = doneSelection(edit);
     if (hasSelectionChanged)
     {
-      editAction.pushUndo();
+      edit.pushUndo();
     }
   }
 
   @Override
-  public void discard(EditAction editAction)
+  public void discard(Edit edit)
   {
     throw new SimulatorException();
   }

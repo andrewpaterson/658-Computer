@@ -3,6 +3,7 @@ package net.logicim.ui.placement;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.Edit;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.input.keyboard.KeyboardButtons;
@@ -26,36 +27,36 @@ public class StartEditInPort
   }
 
   @Override
-  public void start(float x, float y, EditAction editAction)
+  public void start(float x, float y, Edit edit)
   {
   }
 
   @Override
-  public StatefulEdit move(float x, float y, EditAction editAction)
+  public StatefulEdit move(float x, float y, Edit edit)
   {
     return new WirePull(subcircuitSimulation);
   }
 
   @Override
-  public StatefulEdit rotate(boolean right, EditAction editAction)
+  public StatefulEdit rotate(boolean right, Edit edit)
   {
     throw new SimulatorException();
   }
 
   @Override
-  public void done(float x, float y, EditAction editAction)
+  public void done(float x, float y, Edit edit)
   {
-    CircuitEditor circuitEditor = editAction.getCircuitEditor();
+    CircuitEditor circuitEditor = edit.getEditor();
     List<View> previousSelection = circuitEditor.getCurrentSelection().getSelection();
     boolean hasSelectionChanged = SelectionEdit.calculateSelection(circuitEditor, new Float2D(x, y), new Float2D(x, y), keyboardButtons, new HashSet<>(previousSelection));
     if (hasSelectionChanged)
     {
-      editAction.pushUndo();
+      edit.pushUndo();
     }
   }
 
   @Override
-  public void discard(EditAction editAction)
+  public void discard(Edit edit)
   {
   }
 

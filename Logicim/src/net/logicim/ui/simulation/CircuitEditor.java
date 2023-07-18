@@ -461,7 +461,7 @@ public class CircuitEditor
 
   public void recreateComponentView(StaticView<?> staticView)
   {
-    currentSubcircuitEditor.recreateComponentView(staticView, getSubcircuitSimulation());
+    currentSubcircuitEditor.recreateComponentView(staticView);
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
@@ -474,7 +474,7 @@ public class CircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  boolean newComponents)
   {
-    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, getSubcircuitSimulation(), newComponents);
+    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, newComponents);
   }
 
   public Selection getCurrentSelection()
@@ -496,7 +496,7 @@ public class CircuitEditor
 
   public void deleteSelection()
   {
-    currentSubcircuitEditor.deleteSelection(currentSubcircuitSimulation.getCircuitSimulation());
+    currentSubcircuitEditor.deleteSelection();
   }
 
   public SubcircuitEditor getCurrentSubcircuitEditor()
@@ -533,12 +533,12 @@ public class CircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    deleteComponentView(staticView, currentSubcircuitEditor, getSubcircuitSimulation());
+    deleteComponentView(staticView, currentSubcircuitEditor);
   }
 
-  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor)
   {
-    subcircuitEditor.deleteComponentView(staticView, subcircuitSimulation.getCircuitSimulation());
+    subcircuitEditor.deleteComponentView(staticView);
   }
 
   public void validate()
@@ -564,7 +564,7 @@ public class CircuitEditor
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitEditor.deleteComponentViews(staticViews, currentSubcircuitSimulation.getCircuitSimulation());
+    currentSubcircuitEditor.deleteComponentViews(staticViews);
   }
 
   public SubcircuitSimulation getSubcircuitSimulation()

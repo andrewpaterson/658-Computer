@@ -162,6 +162,11 @@ public class SubcircuitSimulations
     }
   }
 
+  public Map<CircuitSimulation, List<SubcircuitSimulation>> getSimulations()
+  {
+    return simulations;
+  }
+
   public void clear()
   {
     simulations.clear();

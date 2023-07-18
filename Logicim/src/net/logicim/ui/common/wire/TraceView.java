@@ -6,6 +6,7 @@ import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -319,9 +320,9 @@ public class TraceView
     return LineOverlap.None;
   }
 
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent()
   {
-    wireView.simulationTraces.clear();
+    wireView.destroyComponent();
   }
 
   public WireViewComp getWireViewComp()

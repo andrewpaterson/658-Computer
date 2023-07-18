@@ -10,11 +10,11 @@ import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
@@ -222,9 +222,24 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
+  public SubcircuitInstance createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     throw new SimulatorException("SubcircuitInstanceView.createComponent() is not implemented.  Call createSubcircuitInstance() instead.");
+  }
+
+  @Override
+  public void createComponent(SubcircuitSimulations simulations)
+  {
+    throw new SimulatorException("SubcircuitInstanceView.createComponents() is not implemented.  Call createSubcircuitInstances() instead.");
+  }
+
+  public void createSubcircuitInstance(SubcircuitSimulations simulations)
+  {
+    validateNoComponents();
+    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+    {
+      createSubcircuitInstance(subcircuitSimulation);
+    }
   }
 
   public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation)
@@ -240,7 +255,7 @@ public class SubcircuitInstanceView
 
     subcircuitInstance = createAndAddComponents(containingSubcircuitSimulation, subcircuitInstance);
 
-    instanceSubcircuitView.createComponents(subcircuitInstanceSimulation);
+    instanceSubcircuitView.createComponents();
 
     return subcircuitInstance;
   }
@@ -388,14 +403,14 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void disconnectView(CircuitSimulation circuitSimulation)
+  public void disconnectView()
   {
     for (SubcircuitPinView pinView : pinViews)
     {
-      pinView.disconnectView(circuitSimulation);
+      pinView.disconnectView();
     }
 
-    destroyComponent(circuitSimulation);
+    destroyComponent();
   }
 
   @Override
@@ -413,13 +428,15 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent()
   {
-    instanceSubcircuitView.destroyComponentsAndSimulations(circuitSimulation);
+    instanceSubcircuitView.destroyComponentsAndSimulations();
 
-    Circuit circuit = circuitSimulation.getCircuit();
-    for (SubcircuitInstance removed : simulationSubcircuitInstances.values())
+    for (Map.Entry<SubcircuitSimulation, SubcircuitInstance> entry : simulationSubcircuitInstances.entrySet())
     {
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
+      SubcircuitInstance removed = entry.getValue();
+      Circuit circuit = subcircuitSimulation.getCircuit();
       circuit.remove(removed);
     }
     simulationSubcircuitInstances.clear();
@@ -579,7 +596,7 @@ public class SubcircuitInstanceView
 
   public Set<SubcircuitSimulation> getComponentSubcircuitSimulations()
   {
-    return new LinkedHashSet<>(simulationSubcircuitInstances.keySet());
+    return simulationSubcircuitInstances.keySet();
   }
 }
 

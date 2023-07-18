@@ -5,9 +5,9 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -285,13 +285,18 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
+  //Remove this
+  public abstract void createComponent(SubcircuitSimulations simulations);
+
+  //Remove this
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 
-  public abstract void destroyComponent(CircuitSimulation circuitSimulation);
+  //Remove this
+  public abstract void destroyComponent();
 
-  public abstract void simulationStarted(SubcircuitSimulation subcircuitSimulation);
+  public abstract void simulationStarted();
 
-  public abstract void disconnectView(CircuitSimulation circuitSimulation);
+  public abstract void disconnectView();
 
   public abstract List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView);
 

@@ -114,9 +114,9 @@ public class SubcircuitPinView
     }
   }
 
-  public void disconnectView(CircuitSimulation circuitSimulation)
+  public void disconnectView()
   {
-    portView.disconnectView(circuitSimulation);
+    portView.disconnectView();
   }
 
   protected PortView createPortView(List<String> tracePortNames)

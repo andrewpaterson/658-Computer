@@ -4,6 +4,7 @@ import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 
@@ -23,7 +24,7 @@ public interface WireView
 
   void enable();
 
-  void destroyComponent(CircuitSimulation circuitSimulation);
+  void destroyComponent();
 
   String getDescription();
 

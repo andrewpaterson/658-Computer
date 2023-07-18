@@ -3,10 +3,10 @@ package net.logicim.ui.common.integratedcircuit;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 
@@ -45,11 +45,13 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent()
   {
-    Circuit circuit = circuitSimulation.getCircuit();
-    for (PASSIVE removed : simulationPassives.values())
+    for (Map.Entry<SubcircuitSimulation, PASSIVE> entry : simulationPassives.entrySet())
     {
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
+      PASSIVE removed = entry.getValue();
+      Circuit circuit = subcircuitSimulation.getCircuit();
       circuit.remove(removed);
     }
     simulationPassives.clear();
@@ -76,7 +78,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   public Set<SubcircuitSimulation> getComponentSubcircuitSimulations()
   {
-    return new LinkedHashSet<>(simulationPassives.keySet());
+    return simulationPassives.keySet();
   }
 
   public PASSIVE getComponent(SubcircuitSimulation subcircuitSimulation)

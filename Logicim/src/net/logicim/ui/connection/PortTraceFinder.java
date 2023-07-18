@@ -1,7 +1,6 @@
 package net.logicim.ui.connection;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
@@ -22,8 +21,6 @@ public abstract class PortTraceFinder
   public static List<LocalMultiSimulationConnectionNet> findAndConnectTraces(SubcircuitSimulation startingSubcircuitSimulation,
                                                                              ConnectionView inputConnectionView)
   {
-    CircuitSimulation circuitSimulation = startingSubcircuitSimulation.getCircuitSimulation();
-
     List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
     WireList wireList = findWires(startingSubcircuitSimulation, inputConnectionView, connectionNets);
 
@@ -39,7 +36,7 @@ public abstract class PortTraceFinder
         for (WireConnection wireConnection : wireConnections)
         {
           WireView wireView = wireConnection.getWireView();
-          wireView.destroyComponent(circuitSimulation);
+          wireView.destroyComponent();
         }
       }
     }

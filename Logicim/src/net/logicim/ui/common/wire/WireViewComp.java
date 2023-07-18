@@ -133,7 +133,7 @@ public class WireViewComp
       connections.set(i, null);
     }
 
-    simulationTraces.clear();
+    destroyComponent();
   }
 
   public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
@@ -144,6 +144,11 @@ public class WireViewComp
   public Set<SubcircuitSimulation> getWireSubcircuitSimulations()
   {
     return new LinkedHashSet<>(simulationTraces.keySet());
+  }
+
+  public void destroyComponent()
+  {
+    simulationTraces.clear();
   }
 }
 

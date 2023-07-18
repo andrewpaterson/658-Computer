@@ -9,7 +9,6 @@ import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.MultiIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.simulation.SimulationStateData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.defaults.DefaultLogicLevels;
@@ -21,6 +20,7 @@ import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -63,11 +63,13 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  public void destroyComponent(CircuitSimulation circuitSimulation)
+  public void destroyComponent()
   {
-    for (IC removed : simulationIntegratedCircuits.values())
+    for (Map.Entry<SubcircuitSimulation, IC> entry : simulationIntegratedCircuits.entrySet())
     {
-      Circuit circuit = circuitSimulation.getCircuit();
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
+      IC removed = entry.getValue();
+      Circuit circuit = subcircuitSimulation.getCircuit();
       circuit.remove(removed);
     }
     simulationIntegratedCircuits.clear();
@@ -197,7 +199,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   @Override
   public Set<SubcircuitSimulation> getComponentSubcircuitSimulations()
   {
-    return new LinkedHashSet<>(simulationIntegratedCircuits.keySet());
+    return simulationIntegratedCircuits.keySet();
   }
 
   protected abstract IC createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration);

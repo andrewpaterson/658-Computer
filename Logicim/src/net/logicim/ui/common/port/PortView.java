@@ -7,8 +7,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
-import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
@@ -207,24 +205,24 @@ public class PortView
     }
   }
 
-  public void disconnectView(CircuitSimulation circuitSimulation)
+  public void disconnectView()
   {
-    destroyComponent(circuitSimulation);
+    destroyComponent();
 
     connection = null;
   }
 
-  protected void destroyComponent(CircuitSimulation circuitSimulation)
+  protected void destroyComponent()
   {
-    Simulation simulation = circuitSimulation.getSimulation();
     for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
     {
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
       List<? extends Port> ports = entry.getValue();
       if (ports != null)
       {
         for (Port port : ports)
         {
-          port.disconnect(simulation);
+          port.disconnect(subcircuitSimulation.getSimulation());
         }
       }
     }
@@ -368,16 +366,20 @@ public class PortView
     }
   }
 
-  public void traceConnected(SubcircuitSimulation subcircuitSimulation)
+  public void traceConnected()
   {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
-    if (ports != null)
+    for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
     {
-      for (Port port : ports)
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
+      List<? extends Port> ports = entry.getValue();
+      if (ports != null)
       {
-        if (port.getTrace() != null)
+        for (Port port : ports)
         {
-          port.traceConnected(subcircuitSimulation.getSimulation());
+          if (port.getTrace() != null)
+          {
+            port.traceConnected(subcircuitSimulation.getSimulation());
+          }
         }
       }
     }

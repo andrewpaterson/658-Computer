@@ -6,10 +6,10 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -342,30 +342,45 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void disconnectView(CircuitSimulation circuitSimulation)
+  public void disconnectView()
   {
     for (PortView portView : portViews)
     {
-      portView.disconnectView(circuitSimulation);
+      portView.disconnectView();
     }
-    destroyComponent(circuitSimulation);
+    destroyComponent();
   }
 
   @Override
-  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  public void simulationStarted()
   {
-    if (subcircuitSimulation == null)
+    for (SubcircuitSimulation subcircuitSimulation : getComponentSubcircuitSimulations())
     {
-      throw new SimulatorException("Cannot start a simulation with a [null] simulation.");
+      Component integratedCircuit = getComponent(subcircuitSimulation);
+      integratedCircuit.simulationStarted(subcircuitSimulation.getSimulation());
     }
-
-    Component integratedCircuit = getComponent(subcircuitSimulation);
-    integratedCircuit.simulationStarted(subcircuitSimulation.getSimulation());
   }
 
   public abstract Component getComponent(SubcircuitSimulation subcircuitSimulation);
 
-  public abstract void destroyComponent(CircuitSimulation circuitSimulation);
+  protected void validateNoComponents()
+  {
+    if (getComponentSubcircuitSimulations().size() > 0)
+    {
+      throw new SimulatorException("Expected no components.");
+    }
+  }
+
+  public void createComponent(SubcircuitSimulations simulations)
+  {
+    validateNoComponents();
+    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+    {
+      createComponent(subcircuitSimulation);
+    }
+  }
+
+  public abstract void destroyComponent();
 
   public abstract String getComponentType();
 

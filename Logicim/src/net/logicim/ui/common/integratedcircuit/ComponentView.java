@@ -6,6 +6,7 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -213,16 +214,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  @Override
-  public void disconnect()
-  {
-    for (PortView portView : portViews)
-    {
-      portView.disconnect();
-      return;
-    }
-  }
-
   protected void validatePorts(SubcircuitSimulation subcircuitSimulation, List<Port> ports, List<PortView> portViews)
   {
     if ((ports.size() > 0) && (portViews.size() == 0))
@@ -350,21 +341,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  @Override
+  public void disconnectView(CircuitSimulation circuitSimulation)
   {
-    if (hasComponent(subcircuitSimulation))
+    for (PortView portView : portViews)
     {
-      for (PortView portView : portViews)
-      {
-        portView.removePorts(subcircuitSimulation);
-      }
-      removeComponent(subcircuitSimulation);
+      portView.disconnectView(circuitSimulation);
     }
-  }
-
-  private boolean hasComponent(SubcircuitSimulation subcircuitSimulation)
-  {
-    return getComponent(subcircuitSimulation) != null;
+    destroyComponent(circuitSimulation);
   }
 
   @Override
@@ -379,14 +363,16 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     integratedCircuit.simulationStarted(subcircuitSimulation.getSimulation());
   }
 
-  protected abstract void createPortViews();
-
   public abstract Component getComponent(SubcircuitSimulation subcircuitSimulation);
 
-  protected abstract void removeComponent(SubcircuitSimulation subcircuitSimulation);
+  public abstract void destroyComponent(CircuitSimulation circuitSimulation);
 
   public abstract String getComponentType();
 
+  public abstract Set<SubcircuitSimulation> getComponentSubcircuitSimulations();
+
   public abstract ComponentData<?> save(boolean selected);
+
+  protected abstract void createPortViews();
 }
 

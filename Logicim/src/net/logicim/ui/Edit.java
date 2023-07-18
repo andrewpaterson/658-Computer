@@ -139,7 +139,7 @@ public class Edit
 
   public void circuitUpdated()
   {
-    editor.getCircuitEditor().circuitUpdated(editor.getCurrentSubcircuitEditor());
+    editor.getCircuitEditor().circuitUpdated();
     editor.pushUndo();
     editor.updateHighlighted();
   }

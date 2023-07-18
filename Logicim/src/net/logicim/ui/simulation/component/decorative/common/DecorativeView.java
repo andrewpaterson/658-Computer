@@ -2,6 +2,7 @@ package net.logicim.ui.simulation.component.decorative.common;
 
 import net.logicim.common.type.Int2D;
 import net.logicim.data.decorative.common.DecorativeProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
@@ -55,7 +56,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void disconnect()
+  public void disconnectView(CircuitSimulation circuitSimulation)
   {
   }
 

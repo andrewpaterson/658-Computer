@@ -1,6 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
@@ -21,6 +22,8 @@ public abstract class PortTraceFinder
   public static List<LocalMultiSimulationConnectionNet> findAndConnectTraces(SubcircuitSimulation startingSubcircuitSimulation,
                                                                              ConnectionView inputConnectionView)
   {
+    CircuitSimulation circuitSimulation = startingSubcircuitSimulation.getCircuitSimulation();
+
     List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
     WireList wireList = findWires(startingSubcircuitSimulation, inputConnectionView, connectionNets);
 
@@ -32,12 +35,11 @@ public abstract class PortTraceFinder
       Map<SubcircuitSimulation, List<WireConnection>> connectedWires = partialWire.connectedWires;
       for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectedWires.entrySet())
       {
-        SubcircuitSimulation subcircuitSimulation = entry.getKey();
         List<WireConnection> wireConnections = entry.getValue();
         for (WireConnection wireConnection : wireConnections)
         {
           WireView wireView = wireConnection.getWireView();
-          wireView.clearTraces(subcircuitSimulation);
+          wireView.destroyComponent(circuitSimulation);
         }
       }
     }
@@ -219,7 +221,7 @@ public abstract class PortTraceFinder
     return totalPortWireMap;
   }
 
-  private static void processLocalMultiSimulationConnections(SubcircuitSimulation subcircuitSimulation,
+  private static void processLocalMultiSimulationConnections(SubcircuitSimulation startingSubcircuitSimulation,
                                                              ConnectionView inputConnectionView,
                                                              List<LocalMultiSimulationConnectionNet> connectionNets,
                                                              List<ComponentConnection<SplitterView>> splitterViewStack,
@@ -228,7 +230,7 @@ public abstract class PortTraceFinder
     LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
     connectionNets.add(localMultiSimulationConnectionNet);
 
-    processLocalConnections(subcircuitSimulation, inputConnectionView, localMultiSimulationConnectionNet, splitterViewStack, processedSplitterViewConnections);
+    processLocalConnections(startingSubcircuitSimulation, inputConnectionView, localMultiSimulationConnectionNet, splitterViewStack, processedSplitterViewConnections);
   }
 
   private static void processLocalConnections(SubcircuitSimulation subcircuitSimulation,

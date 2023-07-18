@@ -1,6 +1,5 @@
 package net.logicim.ui.simulation.subcircuit;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
@@ -105,7 +104,7 @@ public class SubcircuitEditor
     this.selection.setSelection(newSelection);
   }
 
-  public void deleteSelection(SubcircuitSimulation subcircuitSimulation)
+  public void deleteSelection(CircuitSimulation circuitSimulation)
   {
     Set<TraceView> traceViews = new HashSet<>();
     List<View> selectedViews = selection.getSelection();
@@ -116,7 +115,7 @@ public class SubcircuitEditor
         traceViews.add((TraceView) view);
       }
     }
-    subcircuitView.deleteTraceViews(traceViews, subcircuitSimulation);
+    subcircuitView.deleteTraceViews(traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();
     for (View view : selectedViews)
@@ -126,7 +125,7 @@ public class SubcircuitEditor
         staticViews.add((StaticView<?>) view);
       }
     }
-    subcircuitView.deleteComponentViews(staticViews, subcircuitSimulation);
+    subcircuitView.deleteComponentViews(staticViews, circuitSimulation);
     selection.clearSelection();
   }
 
@@ -181,10 +180,9 @@ public class SubcircuitEditor
     return subcircuitView.getAllViews();
   }
 
-  public void deleteTraceViews(Set<TraceView> traceViews,
-                               SubcircuitSimulation subcircuitSimulation)
+  public void deleteTraceViews(Set<TraceView> traceViews)
   {
-    subcircuitView.deleteTraceViews(traceViews, subcircuitSimulation);
+    subcircuitView.deleteTraceViews(traceViews);
   }
 
   public StaticViewIterator staticViewIterator()
@@ -273,9 +271,9 @@ public class SubcircuitEditor
     subcircuitView.removeTraceView(traceView);
   }
 
-  public void deleteComponentViews(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentViews(List<StaticView<?>> staticViews, CircuitSimulation circuitSimulation)
   {
-    subcircuitView.deleteComponentViews(staticViews, subcircuitSimulation);
+    subcircuitView.deleteComponentViews(staticViews, circuitSimulation);
   }
 
   public List<View> pasteClipboardViews(List<TraceData> traces,
@@ -312,9 +310,9 @@ public class SubcircuitEditor
     return subcircuitView.getConnection(x, y);
   }
 
-  public void deleteComponentView(StaticView<?> staticView, SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentView(StaticView<?> staticView, CircuitSimulation circuitSimulation)
   {
-    subcircuitView.deleteComponentView(staticView, subcircuitSimulation);
+    subcircuitView.deleteComponentView(staticView, circuitSimulation);
   }
 
   public void validate()
@@ -483,23 +481,6 @@ public class SubcircuitEditor
   public String toString()
   {
     return subcircuitView.getTypeName();
-  }
-
-  public void validateOnlyThisSubcircuitEditor(List<CircuitInstanceView> circuitInstanceViews)
-  {
-    int topCount = 0;
-    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-    {
-      if (circuitInstanceView instanceof SubcircuitEditor)
-      {
-        SubcircuitEditor subcircuitEditor = (SubcircuitEditor) circuitInstanceView;
-        if (this != subcircuitEditor || topCount > 1)
-        {
-          throw new SimulatorException("Expected at most one SubcircuitEditor == current.");
-        }
-        topCount++;
-      }
-    }
   }
 
   public Collection<CircuitSimulation> getCircuitSimulations()

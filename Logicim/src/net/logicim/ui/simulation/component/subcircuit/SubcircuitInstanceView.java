@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
@@ -47,7 +48,7 @@ public class SubcircuitInstanceView
   protected TextView name;
   protected TextView comment;
 
-  protected Map<SubcircuitSimulation, SubcircuitInstance> simulationSubcircuitInstances;
+  protected Map<SubcircuitSimulation, SubcircuitInstance> simulationSubcircuitInstances;  //These are the simulations from the containing subcircuit view.
 
   public SubcircuitInstanceView(SubcircuitView containingSubcircuitView,
                                 SubcircuitView instanceSubcircuitView,
@@ -387,12 +388,14 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void disconnect()
+  public void disconnectView(CircuitSimulation circuitSimulation)
   {
     for (SubcircuitPinView pinView : pinViews)
     {
-      pinView.disconnect();
+      pinView.disconnectView(circuitSimulation);
     }
+
+    destroyComponent(circuitSimulation);
   }
 
   @Override
@@ -410,26 +413,16 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  protected void removeComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(CircuitSimulation circuitSimulation)
   {
-    SubcircuitInstance removed = simulationSubcircuitInstances.remove(subcircuitSimulation);
-    if (removed == null)
-    {
-      throw new SimulatorException("Could not remove Subcircuit Instance in [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
-    }
+    instanceSubcircuitView.destroyComponentsAndSimulations(circuitSimulation);
 
-    subcircuitSimulation.getCircuit().remove(removed);
-  }
-
-  @Override
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
-  {
-    SubcircuitInstance subcircuitInstance = simulationSubcircuitInstances.get(subcircuitSimulation);
-    if (subcircuitInstance != null)
+    Circuit circuit = circuitSimulation.getCircuit();
+    for (SubcircuitInstance removed : simulationSubcircuitInstances.values())
     {
-      instanceSubcircuitView.destroyComponentsAndSimulation(subcircuitInstance.getSubcircuitInstanceSimulation());
+      circuit.remove(removed);
     }
-    super.destroyComponent(subcircuitSimulation);
+    simulationSubcircuitInstances.clear();
   }
 
   @Override
@@ -582,6 +575,11 @@ public class SubcircuitInstanceView
       }
     }
     return null;
+  }
+
+  public Set<SubcircuitSimulation> getComponentSubcircuitSimulations()
+  {
+    return new LinkedHashSet<>(simulationSubcircuitInstances.keySet());
   }
 }
 

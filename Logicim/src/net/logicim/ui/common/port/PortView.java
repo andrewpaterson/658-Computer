@@ -7,6 +7,8 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.port.common.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
@@ -23,10 +25,8 @@ import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.shape.common.BoundingBox;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PortView
 {
@@ -207,21 +207,28 @@ public class PortView
     }
   }
 
-  public void disconnect()
+  public void disconnectView(CircuitSimulation circuitSimulation)
   {
+    destroyComponent(circuitSimulation);
+
+    connection = null;
+  }
+
+  protected void destroyComponent(CircuitSimulation circuitSimulation)
+  {
+    Simulation simulation = circuitSimulation.getSimulation();
     for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
     {
-      SubcircuitSimulation subcircuitSimulation = entry.getKey();
       List<? extends Port> ports = entry.getValue();
       if (ports != null)
       {
         for (Port port : ports)
         {
-          port.disconnect(subcircuitSimulation.getSimulation());
+          port.disconnect(simulation);
         }
       }
     }
-    connection = null;
+    simulationPorts.clear();
   }
 
   public SimulationMultiPortData save()
@@ -463,18 +470,14 @@ public class PortView
     }
   }
 
-  public void removePorts(SubcircuitSimulation subcircuitSimulation)
-  {
-    List<? extends Port> removed = simulationPorts.remove(subcircuitSimulation);
-    if (removed == null)
-    {
-      throw new SimulatorException("Could not remove Port in Port View [%s] for Subcircuit Simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
-    }
-  }
-
-  private String getDescription()
+  public String getDescription()
   {
     return text;
+  }
+
+  public Set<SubcircuitSimulation> getPortSubcircuitSimulations()
+  {
+    return new LinkedHashSet<>(simulationPorts.keySet());
   }
 }
 

@@ -105,7 +105,7 @@ public class CircuitEditor
     {
       Set<TraceView> traceViews = new LinkedHashSet<>();
       traceViews.add(traceView);
-      currentSubcircuitEditor.deleteTraceViews(traceViews, getSubcircuitSimulation());
+      currentSubcircuitEditor.deleteTraceViews(traceViews);
     }
     else
     {
@@ -127,7 +127,7 @@ public class CircuitEditor
 
     if (traceViews.size() > 0)
     {
-      currentSubcircuitEditor.deleteTraceViews(traceViews, getSubcircuitSimulation());
+      currentSubcircuitEditor.deleteTraceViews(traceViews);
       return true;
     }
     else
@@ -496,7 +496,7 @@ public class CircuitEditor
 
   public void deleteSelection()
   {
-    currentSubcircuitEditor.deleteSelection(getSubcircuitSimulation());
+    currentSubcircuitEditor.deleteSelection(currentSubcircuitSimulation.getCircuitSimulation());
   }
 
   public SubcircuitEditor getCurrentSubcircuitEditor()
@@ -538,7 +538,7 @@ public class CircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor, SubcircuitSimulation subcircuitSimulation)
   {
-    subcircuitEditor.deleteComponentView(staticView, subcircuitSimulation);
+    subcircuitEditor.deleteComponentView(staticView, subcircuitSimulation.getCircuitSimulation());
   }
 
   public void validate()
@@ -574,7 +574,7 @@ public class CircuitEditor
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitEditor.deleteComponentViews(staticViews, getSubcircuitSimulation());
+    currentSubcircuitEditor.deleteComponentViews(staticViews, currentSubcircuitSimulation.getCircuitSimulation());
   }
 
   public SubcircuitSimulation getSubcircuitSimulation()
@@ -697,30 +697,8 @@ public class CircuitEditor
     return null;
   }
 
-  public void circuitUpdated(SubcircuitEditor updatedSubcircuitEditor)
+  public void circuitUpdated()
   {
-    Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = getSubcircuitInstanceViewsInSubcircuitEditor(updatedSubcircuitEditor);
-
-    //recreateSubcircuitInstanceViews(map);
-  }
-
-  protected void recreateSubcircuitInstanceViews(Map<SubcircuitEditor, List<SubcircuitInstanceView>> map)
-  {
-    for (Map.Entry<SubcircuitEditor, List<SubcircuitInstanceView>> entry : map.entrySet())
-    {
-      SubcircuitEditor containingSubcircuitEditor = entry.getKey();
-      List<SubcircuitInstanceView> instanceViews = entry.getValue();
-      for (SubcircuitInstanceView instanceView : instanceViews)
-      {
-        SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
-        deleteComponentView(instanceView, containingSubcircuitEditor, subcircuitSimulation);
-
-        instanceView = (SubcircuitInstanceView) instanceView.duplicate(this,
-                                                                       containingSubcircuitEditor.getCircuitSubcircuitView(),
-                                                                       instanceView.getProperties());
-        containingSubcircuitEditor.recreateComponentView(instanceView, subcircuitSimulation);
-      }
-    }
   }
 
   protected Map<SubcircuitEditor, List<SubcircuitInstanceView>> getSubcircuitInstanceViewsInSubcircuitEditor(SubcircuitEditor currentSubcircuitEditor)

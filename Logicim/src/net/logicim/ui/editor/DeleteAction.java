@@ -20,7 +20,7 @@ public class DeleteAction
     if (componentDeleted)
     {
       CircuitEditor circuitEditor = editor.getCircuitEditor();
-      circuitEditor.circuitUpdated(circuitEditor.getCurrentSubcircuitEditor());
+      circuitEditor.circuitUpdated();
       editor.pushUndo();
     }
 

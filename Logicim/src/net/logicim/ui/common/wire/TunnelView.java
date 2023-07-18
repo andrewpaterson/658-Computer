@@ -4,6 +4,7 @@ import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -226,9 +227,9 @@ public class TunnelView
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(CircuitSimulation circuitSimulation)
   {
-    wireView.destroyComponent(subcircuitSimulation);
+    wireView.simulationTraces.clear();
   }
 
   @Override
@@ -260,15 +261,9 @@ public class TunnelView
   }
 
   @Override
-  public void disconnect()
+  public void disconnectView(CircuitSimulation circuitSimulation)
   {
-    wireView.disconnect();
-  }
-
-  @Override
-  public void clearTraces(SubcircuitSimulation subcircuitSimulation)
-  {
-    wireView.clearTraces(subcircuitSimulation);
+    wireView.disconnectViews();
   }
 
   @Override
@@ -328,6 +323,11 @@ public class TunnelView
                                                  startPosition,
                                                  endPosition,
                                                  sanitisedName);
+  }
+
+  public WireViewComp getWireViewComp()
+  {
+    return wireView;
   }
 }
 

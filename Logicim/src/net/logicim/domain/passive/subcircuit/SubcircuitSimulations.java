@@ -75,6 +75,22 @@ public class SubcircuitSimulations
     return subcircuitTopSimulations;
   }
 
+  public Collection<SubcircuitInstanceSimulation> getSubcircuitInstanceSimulations()
+  {
+    ArrayList<SubcircuitInstanceSimulation> subcircuitTopSimulations = new ArrayList<>();
+    for (List<SubcircuitSimulation> subcircuitSimulations : simulations.values())
+    {
+      for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
+      {
+        if (subcircuitSimulation instanceof SubcircuitInstanceSimulation)
+        {
+          subcircuitTopSimulations.add((SubcircuitInstanceSimulation) subcircuitSimulation);
+        }
+      }
+    }
+    return subcircuitTopSimulations;
+  }
+
   public Collection<SubcircuitSimulation> getSubcircuitSimulations()
   {
     ArrayList<SubcircuitSimulation> result = new ArrayList<>();
@@ -144,6 +160,11 @@ public class SubcircuitSimulations
     {
       return false;
     }
+  }
+
+  public void clear()
+  {
+    simulations.clear();
   }
 }
 

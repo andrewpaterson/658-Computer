@@ -14,8 +14,8 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
@@ -27,6 +27,7 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.TraceFinder;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.TunnelView;
+import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -110,10 +111,10 @@ public class SubcircuitView
   {
     List<ConnectionView> connectionViews = traceView.getConnectionViews();
     connectionViewCache.removeAll(traceView, connectionViews);
-    traceView.disconnect();
+    traceView.disconnectViews();
   }
 
-  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView, SubcircuitSimulation subcircuitSimulation)
+  public List<ConnectionView> disconnectStaticView(StaticView<?> staticView, CircuitSimulation circuitSimulation)
   {
     if (staticView == null)
     {
@@ -127,29 +128,19 @@ public class SubcircuitView
     }
 
     connectionViewCache.removeAll(staticView, connectionViews);
-    staticView.disconnect();
-
-    if (staticView instanceof ComponentView)
-    {
-      Component component = ((ComponentView<?>) staticView).getComponent(subcircuitSimulation);
-      if (component != null)
-      {
-        Simulation simulation = subcircuitSimulation.getSimulation();
-        subcircuitSimulation.getCircuit().disconnectComponent(component, simulation);
-      }
-    }
+    staticView.disconnectView(circuitSimulation);
 
     return connectionViews;
   }
 
-  public void deleteComponentView(StaticView<?> staticView, SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentView(StaticView<?> staticView, CircuitSimulation circuitSimulation, SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
-    deleteComponentViews(staticViews, subcircuitSimulation);
+    deleteComponentViews(staticViews, circuitSimulation, subcircuitSimulation);
   }
 
-  public void deleteComponentViews(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
+  public void deleteComponentViews(List<StaticView<?>> staticViews, CircuitSimulation circuitSimulation, SubcircuitSimulation subcircuitSimulation)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> componentView : staticViews)
@@ -159,7 +150,7 @@ public class SubcircuitView
         throw new SimulatorException("Cannot delete a [null] view.");
       }
 
-      List<ConnectionView> disconnectedConnectionViews = disconnectStaticView(componentView, subcircuitSimulation);
+      List<ConnectionView> disconnectedConnectionViews = disconnectStaticView(componentView, circuitSimulation);
       for (ConnectionView connectionView : disconnectedConnectionViews)
       {
         if (connectionView == null)
@@ -171,15 +162,15 @@ public class SubcircuitView
       connectionViews.addAll(disconnectedConnectionViews);
       if (componentView instanceof IntegratedCircuitView)
       {
-        deleteIntegratedCircuitView((IntegratedCircuitView<?, ?>) componentView, subcircuitSimulation);
+        removeIntegratedCircuitView((IntegratedCircuitView<?, ?>) componentView);
       }
       else if (componentView instanceof PassiveView)
       {
-        deletePassiveView((PassiveView<?, ?>) componentView, subcircuitSimulation);
+        removePassiveView((PassiveView<?, ?>) componentView);
       }
       else if (componentView instanceof SubcircuitInstanceView)
       {
-        deleteSubcircuitInstanceView((SubcircuitInstanceView) componentView, subcircuitSimulation);
+        removeSubcircuitInstanceView((SubcircuitInstanceView) componentView);
       }
       else if (componentView instanceof DecorativeView)
       {
@@ -209,29 +200,7 @@ public class SubcircuitView
     }
   }
 
-  protected void deleteIntegratedCircuitView(IntegratedCircuitView<?, ?> integratedCircuitView,
-                                             SubcircuitSimulation subcircuitSimulation)
-  {
-    integratedCircuitView.destroyComponent(subcircuitSimulation);
-    removeIntegratedCircuitView(integratedCircuitView);
-  }
-
-  protected void deletePassiveView(PassiveView<?, ?> passiveView,
-                                   SubcircuitSimulation subcircuitSimulation)
-  {
-    passiveView.destroyComponent(subcircuitSimulation);
-    removePassiveView(passiveView);
-  }
-
-  protected void deleteSubcircuitInstanceView(SubcircuitInstanceView subcircuitInstanceView,
-                                              SubcircuitSimulation subcircuitSimulation)
-  {
-    subcircuitInstanceView.destroyComponent(subcircuitSimulation);
-    removeSubcircuitInstanceView(subcircuitInstanceView);
-  }
-
-  public void deleteTraceViews(Set<TraceView> inputTraceViews,
-                               SubcircuitSimulation subcircuitSimulation)
+  public void deleteTraceViews(Set<TraceView> inputTraceViews, SubcircuitSimulation subcircuitSimulation)
   {
     TraceFinder traceFinder = new TraceFinder();
     for (TraceView traceView : inputTraceViews)
@@ -278,6 +247,69 @@ public class SubcircuitView
     validateConnectionViews();
     validateTracesContainOnlyCurrentViews();
     validateTunnelViews();
+
+    validateComponentSimulations(subcircuitInstanceViews, "subcircuit instance view");
+    validateComponentSimulations(integratedCircuitViews, "integrated circuit view");
+    validateComponentSimulations(passiveViews, "passive view");
+
+    validateWireSimulations(traceViews, "trace view");
+    validateWireSimulations(tunnelViews, "tunnel view");
+  }
+
+  protected void validateComponentSimulations(Set<? extends ComponentView<?>> componentViews, String type)
+  {
+    for (ComponentView<?> componentView : componentViews)
+    {
+      Set<SubcircuitInstanceSimulation> simulationSubcircuitSimulations = new HashSet<>(simulations.getSubcircuitInstanceSimulations());
+      Set<SubcircuitSimulation> componentSubcircuitSimulations = componentView.getComponentSubcircuitSimulations();
+      if (!simulationSubcircuitSimulations.containsAll(componentSubcircuitSimulations))
+      {
+        throw new SimulatorException("Subcircuit view [%s] simulations (of count [%s]) do not contain all %s [%s] simulations (of count [%s]).",
+                                     getTypeName(),
+                                     simulationSubcircuitSimulations.size(),
+                                     type,
+                                     componentView.getDescription(),
+                                     componentSubcircuitSimulations);
+      }
+
+      validatePortSimulations(componentView.getPortViews());
+    }
+
+  }
+
+  protected void validatePortSimulations(List<PortView> portViews)
+  {
+    for (PortView portView : portViews)
+    {
+      Set<SubcircuitInstanceSimulation> simulationSubcircuitSimulations = new HashSet<>(simulations.getSubcircuitInstanceSimulations());
+      Set<SubcircuitSimulation> componentSubcircuitSimulations = portView.getPortSubcircuitSimulations();
+      if (!simulationSubcircuitSimulations.containsAll(componentSubcircuitSimulations))
+      {
+        throw new SimulatorException("Subcircuit view [%s] simulations (of count [%s]) do not contain all port view [%s] simulations (of count [%s]).",
+                                     getTypeName(),
+                                     simulationSubcircuitSimulations.size(),
+                                     portView.getDescription(),
+                                     componentSubcircuitSimulations);
+      }
+    }
+  }
+
+  protected void validateWireSimulations(Set<? extends WireView> wireViews, String type)
+  {
+    for (WireView wireView : wireViews)
+    {
+      Set<SubcircuitInstanceSimulation> simulationSubcircuitSimulations = new HashSet<>(simulations.getSubcircuitInstanceSimulations());
+      Set<SubcircuitSimulation> componentSubcircuitSimulations = wireView.getWireSubcircuitSimulations();
+      if (!simulationSubcircuitSimulations.containsAll(componentSubcircuitSimulations))
+      {
+        throw new SimulatorException("Subcircuit view [%s] simulations (of count [%s]) do not contain all %s [%s] simulations (of count [%s]).",
+                                     getTypeName(),
+                                     simulationSubcircuitSimulations.size(),
+                                     type,
+                                     wireView.getDescription(),
+                                     componentSubcircuitSimulations);
+      }
+    }
   }
 
   private void validateConnectionViews()
@@ -767,16 +799,13 @@ public class SubcircuitView
   protected void findAndConnectNonTraceViewsForDeletion(SubcircuitSimulation subcircuitSimulation,
                                                         Set<ConnectionView> nonTraceConnectionViews)
   {
-    if (subcircuitSimulation != null)
+    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+    for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
     {
-      Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-      for (ConnectionView nonTraceConnectionView : nonTraceConnectionViews)
-      {
-        List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, nonTraceConnectionView);
-        updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
-      }
-      fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
+      List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, nonTraceConnectionView);
+      updatedConnectionViews.addAll(PortTraceFinder.getConnectionViews(connectionNets));
     }
+    fireConnectionEvents(updatedConnectionViews, subcircuitSimulation);
   }
 
   protected Set<ConnectionView> findNonTraceConnections(Set<TraceView> inputTraceViews)
@@ -896,11 +925,12 @@ public class SubcircuitView
     allConnectedTraceViews.removeAll(traceViews);
 
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
+    CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
     for (StaticView<?> staticView : staticViews)
     {
       staticView.disable();
-      connectionViews.addAll(disconnectStaticView(staticView, subcircuitSimulation));
-      staticView.destroyComponent(subcircuitSimulation);
+      connectionViews.addAll(disconnectStaticView(staticView, circuitSimulation));
+      staticView.destroyComponent(circuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
@@ -1202,34 +1232,31 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyComponentsAndSimulation(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponentsAndSimulations(CircuitSimulation circuitSimulation)
   {
-    destroyComponents(subcircuitSimulation, getStaticViews(), traceViews, subcircuitInstanceViews);
+    destroyComponents(circuitSimulation, getStaticViews(), traceViews, subcircuitInstanceViews);
 
-    if (simulations.hasSimulation(subcircuitSimulation))
-    {
-      simulations.remove(subcircuitSimulation);
-    }
+    simulations.clear();
   }
 
-  protected void destroyComponents(SubcircuitSimulation subcircuitSimulation,
+  protected void destroyComponents(CircuitSimulation circuitSimulation,
                                    Collection<StaticView<?>> staticViews,
                                    Collection<TraceView> traceViews,
                                    Collection<SubcircuitInstanceView> subcircuitInstanceViews)
   {
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.destroyComponent(subcircuitSimulation);
+      staticView.destroyComponent(circuitSimulation);
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.destroyComponent(subcircuitSimulation);
+      traceView.destroyComponent(circuitSimulation);
     }
 
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      subcircuitInstanceView.destroyComponent(subcircuitSimulation);
+      subcircuitInstanceView.destroyComponent(circuitSimulation);
     }
   }
 

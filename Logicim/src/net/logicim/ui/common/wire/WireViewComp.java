@@ -8,10 +8,8 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WireViewComp
 {
@@ -128,23 +126,14 @@ public class WireViewComp
     }
   }
 
-  public void disconnect()
+  public void disconnectViews()
   {
     for (int i = 0; i < connections.size(); i++)
     {
       connections.set(i, null);
     }
 
-    List<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>(simulationTraces.keySet());
-    for (SubcircuitSimulation simulation : subcircuitSimulations)
-    {
-      clearTraces(simulation);
-    }
-  }
-
-  public void clearTraces(SubcircuitSimulation subcircuitSimulation)
-  {
-    simulationTraces.remove(subcircuitSimulation);
+    simulationTraces.clear();
   }
 
   public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
@@ -152,9 +141,9 @@ public class WireViewComp
     return simulationTraces.get(subcircuitSimulation);
   }
 
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public Set<SubcircuitSimulation> getWireSubcircuitSimulations()
   {
-    simulationTraces.remove(subcircuitSimulation);
+    return new LinkedHashSet<>(simulationTraces.keySet());
   }
 }
 

@@ -248,6 +248,11 @@ public class SubcircuitView
     validateTracesContainOnlyCurrentViews();
     validateTunnelViews();
 
+    validateComponentSimulations();
+  }
+
+  protected void validateComponentSimulations()
+  {
     validateComponentSimulations(subcircuitInstanceViews, "subcircuit instance view");
     validateComponentSimulations(integratedCircuitViews, "integrated circuit view");
     validateComponentSimulations(passiveViews, "passive view");

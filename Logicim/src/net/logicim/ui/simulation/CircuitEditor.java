@@ -544,16 +544,6 @@ public class CircuitEditor
   public void validate()
   {
     currentSubcircuitEditor.validate();
-
-    validateSimulations();
-  }
-
-  private void validateSimulations()
-  {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      subcircuitEditor.validateSimulations();
-    }
   }
 
   public void replaceSelection(View newView, View oldView)

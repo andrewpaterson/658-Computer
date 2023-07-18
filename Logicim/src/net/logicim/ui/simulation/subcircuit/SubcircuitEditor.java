@@ -115,6 +115,7 @@ public class SubcircuitEditor
         traceViews.add((TraceView) view);
       }
     }
+    subcircuitView.getSimulations().
     subcircuitView.deleteTraceViews(traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();
@@ -318,6 +319,7 @@ public class SubcircuitEditor
   public void validate()
   {
     subcircuitView.validate();
+    validateSimulations();
   }
 
   public void createTraceViews(List<Line> lines, SubcircuitSimulation subcircuitSimulation)

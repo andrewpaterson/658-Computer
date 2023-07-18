@@ -1282,10 +1282,10 @@ public class SubcircuitView
     return components;
   }
 
-  public SubcircuitTopSimulation createSubcircuitSimulation()
+  public SubcircuitTopSimulation createSubcircuitTopSimulation()
   {
     SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(new CircuitSimulation());
-    simulations.add(subcircuitTopSimulation);
+    addSubcircuitSimulation(subcircuitTopSimulation);
     return subcircuitTopSimulation;
   }
 

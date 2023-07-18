@@ -40,7 +40,7 @@ public class SubcircuitEditor
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
     this(circuitEditor, new SubcircuitView());
-    this.subcircuitView.createSubcircuitSimulation();
+    this.subcircuitView.createSubcircuitTopSimulation();
 
     this.setTypeName(typeName);
 
@@ -115,7 +115,6 @@ public class SubcircuitEditor
         traceViews.add((TraceView) view);
       }
     }
-    subcircuitView.getSimulations().
     subcircuitView.deleteTraceViews(traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();

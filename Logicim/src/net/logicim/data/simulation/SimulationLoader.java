@@ -39,42 +39,46 @@ public class SimulationLoader
     return circuitSimulation;
   }
 
-  public SubcircuitInstanceSimulation createSubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                                                         SubcircuitEditor subcircuitEditor,
-                                                                         long subcircuitSimulationId)
+  public SubcircuitSimulation createSubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
+                                                                 SubcircuitEditor subcircuitEditor,
+                                                                 long subcircuitSimulationId)
   {
     if (subcircuitSimulationId <= 0)
     {
       throw new SimulatorException();
     }
 
-    SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) subcircuitSimulationsById.get(subcircuitSimulationId);
+    SubcircuitSimulation subcircuitSimulation = subcircuitSimulationsById.get(subcircuitSimulationId);
     if (subcircuitSimulation == null)
     {
       subcircuitSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitSimulationId);
-      subcircuitEditor.getCircuitSubcircuitView().addSubcircuitSimulation(subcircuitSimulation);
-      subcircuitSimulationsById.put(subcircuitSimulation.getId(), subcircuitSimulation);
+      addSubcircuitSimulation(subcircuitEditor, subcircuitSimulation);
     }
     return subcircuitSimulation;
   }
 
-  public SubcircuitTopSimulation createSubcircuitTopSimulation(CircuitSimulation circuitSimulation,
-                                                               SubcircuitEditor subcircuitEditor,
-                                                               long subcircuitSimulationId)
+  public SubcircuitSimulation createSubcircuitTopSimulation(CircuitSimulation circuitSimulation,
+                                                            SubcircuitEditor subcircuitEditor,
+                                                            long subcircuitSimulationId)
   {
     if (subcircuitSimulationId <= 0)
     {
       throw new SimulatorException();
     }
 
-    SubcircuitTopSimulation subcircuitSimulation = (SubcircuitTopSimulation) subcircuitSimulationsById.get(subcircuitSimulationId);
+    SubcircuitSimulation subcircuitSimulation = subcircuitSimulationsById.get(subcircuitSimulationId);
     if (subcircuitSimulation == null)
     {
       subcircuitSimulation = new SubcircuitTopSimulation(circuitSimulation, subcircuitSimulationId);
-      subcircuitEditor.getCircuitSubcircuitView().addSubcircuitSimulation(subcircuitSimulation);
-      subcircuitSimulationsById.put(subcircuitSimulationId, subcircuitSimulation);
+      addSubcircuitSimulation(subcircuitEditor, subcircuitSimulation);
     }
     return subcircuitSimulation;
+  }
+
+  protected void addSubcircuitSimulation(SubcircuitEditor subcircuitEditor, SubcircuitSimulation subcircuitSimulation)
+  {
+    subcircuitEditor.getCircuitSubcircuitView().addSubcircuitSimulation(subcircuitSimulation);
+    subcircuitSimulationsById.put(subcircuitSimulation.getId(), subcircuitSimulation);
   }
 
   public CircuitSimulation getCircuitSimulation(long id)

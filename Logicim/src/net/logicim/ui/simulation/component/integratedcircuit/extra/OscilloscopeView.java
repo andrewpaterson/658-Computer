@@ -215,6 +215,7 @@ public class OscilloscopeView
     return false;
   }
 
+  @SuppressWarnings("unchecked")
   public OscilloscopeState saveState(Oscilloscope integratedCircuit)
   {
     OscilloscopeState state = integratedCircuit.getState();

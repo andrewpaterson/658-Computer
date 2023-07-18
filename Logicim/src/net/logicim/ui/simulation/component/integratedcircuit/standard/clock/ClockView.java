@@ -131,6 +131,7 @@ public class ClockView
     }
   }
 
+  @SuppressWarnings("SuspiciousNameCombination")
   private List<LineView> createClockWaveform()
   {
     float xOffset = 0.5f;
@@ -190,6 +191,7 @@ public class ClockView
                          properties.explicitPowerPorts);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   protected ClockOscillatorState saveState(ClockOscillator integratedCircuit)
   {

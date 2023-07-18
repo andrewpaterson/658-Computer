@@ -20,7 +20,6 @@ import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -138,6 +137,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return simulationEventData;
   }
 
+  @SuppressWarnings("unchecked")
   protected <STATE extends State> STATE saveState(IC integratedCircuit)
   {
     if (integratedCircuit.isStateless())

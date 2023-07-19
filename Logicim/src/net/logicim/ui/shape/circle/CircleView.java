@@ -69,8 +69,8 @@ public class CircleView
   {
     float x = circleCenter.getX();
     float y = circleCenter.getY();
-    boundingBox.include(x - width, y - height);
-    boundingBox.include(x + width, y + height);
+    BoundingBox localBox = new BoundingBox(x - width, y - height, x + width, y + height);
+    transformAndIncludeLocalBox(boundingBox, localBox);
   }
 
   @Override
@@ -83,7 +83,10 @@ public class CircleView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(circleCenter, width, height, shapeHolder.getRotation(),
+      gridCache.update(circleCenter,
+                       width,
+                       height,
+                       getShapeHolderRotation(),
                        shapeHolder.getPosition()
       );
     }

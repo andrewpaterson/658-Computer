@@ -87,7 +87,7 @@ public class ArcView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(shapeHolder.getRotation(),
+      gridCache.update(getShapeHolderRotation(),
                        shapeHolder.getPosition(),
                        circleCenter,
                        width,

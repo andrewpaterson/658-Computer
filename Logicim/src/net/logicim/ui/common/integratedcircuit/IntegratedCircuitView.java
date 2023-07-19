@@ -85,7 +85,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   @Override
   protected void finaliseView()
   {
-    createPortViews();
     super.finaliseView();
     containingSubcircuitView.addIntegratedCircuitView(this);
   }

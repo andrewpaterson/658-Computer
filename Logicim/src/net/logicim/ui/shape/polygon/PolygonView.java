@@ -85,10 +85,12 @@ public class PolygonView
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
+    BoundingBox localBox = new BoundingBox();
     for (Tuple2 point : points)
     {
-      boundingBox.include(point);
+      localBox.include(point);
     }
+    transformAndIncludeLocalBox(boundingBox, localBox);
   }
 
   @Override
@@ -101,7 +103,9 @@ public class PolygonView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(points, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(points,
+                       getShapeHolderRotation(),
+                       shapeHolder.getPosition());
     }
   }
 }

@@ -68,5 +68,22 @@ public class FrameView
       lineView.paint(graphics, viewport);
     }
   }
+
+  public void setRelativeRightRotations(int relativeRightRotations)
+  {
+    for (RectangleView rectangleView : frameRectangleViews)
+    {
+      rectangleView.setRelativeRightRotations(relativeRightRotations);
+    }
+    for (ArcView arcView : frameArcViews)
+    {
+      arcView.setRelativeRightRotations(relativeRightRotations);
+    }
+    for (LineView lineView : frameLineViews)
+    {
+      lineView.setRelativeRightRotations(relativeRightRotations);
+    }
+
+  }
 }
 

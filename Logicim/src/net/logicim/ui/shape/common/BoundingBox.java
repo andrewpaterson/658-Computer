@@ -1,5 +1,6 @@
 package net.logicim.ui.shape.common;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.common.type.Tuple2;
@@ -24,12 +25,31 @@ public class BoundingBox
     this(null, null);
   }
 
+  public BoundingBox(float x1, float y1, float x2, float y2)
+  {
+    this();
+    include(x1, y1);
+    include(x2, y2);
+  }
+
   public BoundingBox(Float2D topLeft, Float2D bottomRight)
   {
     this.topLeft = topLeft;
     this.bottomRight = bottomRight;
     transformedTopLeft = new Float2D();
     transformedBottomRight = new Float2D();
+
+    if (topLeft != null && bottomRight != null)
+    {
+      if (topLeft.x > bottomRight.x)
+      {
+        throw new SimulatorException("Bounding box left [%s] must be less than right [%s].", topLeft.x, bottomRight.x);
+      }
+      if (topLeft.y > bottomRight.y)
+      {
+        throw new SimulatorException("Bounding box top [%s] must be less than bottom [%s].", topLeft.y, bottomRight.y);
+      }
+    }
   }
 
   public static boolean containsPoint(Int2D position, Int2D boundBoxPosition, Int2D boundBoxDimension)
@@ -207,7 +227,7 @@ public class BoundingBox
     return bottomRight.x;
   }
 
-  protected Float2D getTransformedBottomRight()
+  public Float2D getTransformedBottomRight()
   {
     return transformedBottomRight;
   }

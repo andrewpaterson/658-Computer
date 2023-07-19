@@ -21,6 +21,7 @@ public class CircleGridCache
     this.transformedHeightDiameter = (int) (height * 2.0f);
   }
 
+  @SuppressWarnings("SuspiciousNameCombination")
   public void update(Float2D circleCenter,
                      float width,
                      float height,

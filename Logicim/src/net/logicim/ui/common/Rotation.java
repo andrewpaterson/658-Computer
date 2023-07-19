@@ -79,6 +79,7 @@ public enum Rotation
     }
   }
 
+  @SuppressWarnings("SuspiciousNameCombination")
   public void transform(Int2D p)
   {
     switch (this)
@@ -95,6 +96,7 @@ public enum Rotation
     }
   }
 
+  @SuppressWarnings("SuspiciousNameCombination")
   public void transform(Float2D p)
   {
     switch (this)

@@ -34,6 +34,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   protected BoundingBox boundingBox;
   protected BoundingBox selectionBox;
   protected List<ShapeView> shapes;
+  protected int relativeRightRotations;
 
   protected boolean finalised;
 
@@ -66,6 +67,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     this.boundingBox = boundingBox;
     this.selectionBox = selectionBox;
     this.shapes = new ArrayList<>();
+    this.relativeRightRotations = 0;
 
     this.finalised = false;
   }
@@ -272,12 +274,20 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   {
   }
 
+  protected void finaliseView()
+  {
+    for (ShapeView shape : shapes)
+    {
+      shape.setRelativeRightRotations(relativeRightRotations);
+    }
+    finalised = true;
+    updateBoundingBoxes();
+  }
+
   public SubcircuitView getContainingSubcircuitView()
   {
     return containingSubcircuitView;
   }
-
-  protected abstract void finaliseView();
 
   public abstract void clampProperties(PROPERTIES newProperties);
 

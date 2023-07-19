@@ -29,8 +29,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   @Override
   protected void finaliseView()
   {
-    finalised = true;
-    updateBoundingBoxes();
+    super.finaliseView();
   }
 
   @Override

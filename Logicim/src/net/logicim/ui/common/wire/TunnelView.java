@@ -240,10 +240,8 @@ public class TunnelView
   @Override
   protected void finaliseView()
   {
-    finalised = true;
+    super.finaliseView();
     enabled = false;
-
-    updateBoundingBoxes();
   }
 
   public TunnelData save(boolean selected)

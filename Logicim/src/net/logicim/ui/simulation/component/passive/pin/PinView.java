@@ -67,6 +67,7 @@ public class PinView
     familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     relativeSubcircuitPosition = new Int2D();
     maxDigits = calculateMaxDigits();
+    relativeRightRotations = 2;
 
     createGraphics();
     finaliseView();

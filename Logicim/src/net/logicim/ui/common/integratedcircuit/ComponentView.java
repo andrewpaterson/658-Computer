@@ -42,9 +42,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void finaliseView()
   {
-    finalised = true;
-
-    updateBoundingBoxes();
+    createPortViews();
+    super.finaliseView();
   }
 
   @Override

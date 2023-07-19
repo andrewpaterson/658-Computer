@@ -28,7 +28,6 @@ public class TextView
   protected boolean bold;
   protected HorizontalAlignment alignment;
   protected Color color;
-  protected int additionalRotations;
 
   protected PointGridCache gridCache;
 
@@ -44,7 +43,6 @@ public class TextView
     this.positionRelativeToIC = positionRelativeToIC;
     this.fontName = fontName;
     this.alignment = alignment;
-    this.additionalRotations = 0;
 
     this.text = text;
     this.size = size;
@@ -84,16 +82,13 @@ public class TextView
     }
   }
 
-  public void setAdditionalRotations(int additionalRotations)
-  {
-    this.additionalRotations = additionalRotations;
-  }
-
   public void updateGridCache()
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(positionRelativeToIC, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(positionRelativeToIC,
+                       getShapeHolderRotation(),
+                       shapeHolder.getPosition());
     }
   }
 
@@ -168,7 +163,7 @@ public class TextView
     float widthAdjust = getWidthAdjust(0.1f) * factor;
 
     Rotation rotation = shapeHolder.getRotation();
-    rotation = rotation.rotateRight(additionalRotations);
+    rotation = rotation.rotateRight(relativeRightRotations);
     if (rotation.isNorthSouth() || rotation.isCannot())
     {
       degrees = 90;
@@ -238,8 +233,10 @@ public class TextView
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
-    boundingBox.include(calculateTopLeft());
-    boundingBox.include(calculateBottomRight());
+    BoundingBox localBox = new BoundingBox();
+    localBox.include(calculateTopLeft());
+    localBox.include(calculateBottomRight());
+    transformAndIncludeLocalBox(boundingBox, localBox);
   }
 
   @Override

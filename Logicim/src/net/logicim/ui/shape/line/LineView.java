@@ -55,15 +55,18 @@ public class LineView
   {
     if (!gridCache.isValid())
     {
-      gridCache.update(start, end, shapeHolder.getRotation(), shapeHolder.getPosition());
+      gridCache.update(start,
+                       end,
+                       getShapeHolderRotation(),
+                       shapeHolder.getPosition());
     }
   }
 
   @Override
   public void boundingBoxInclude(BoundingBox boundingBox)
   {
-    boundingBox.include(start);
-    boundingBox.include(end);
+    BoundingBox localBox = new BoundingBox(start.getX(), start.getY(), end.getX(), end.getY());
+    transformAndIncludeLocalBox(boundingBox, localBox);
   }
 
   @Override

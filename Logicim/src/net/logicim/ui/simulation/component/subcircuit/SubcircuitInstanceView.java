@@ -445,7 +445,6 @@ public class SubcircuitInstanceView
   @Override
   protected void finaliseView()
   {
-    createPortViews();
     super.finaliseView();
     containingSubcircuitView.addSubcircuitInstanceView(this);
   }

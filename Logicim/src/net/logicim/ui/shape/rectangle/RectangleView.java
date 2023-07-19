@@ -106,7 +106,7 @@ public class RectangleView
     {
       gridCache.update(positionRelativeToIC,
                        dimension,
-                       shapeHolder.getRotation(),
+                       getShapeHolderRotation(),
                        shapeHolder.getPosition());
     }
   }
@@ -116,8 +116,8 @@ public class RectangleView
   {
     float x = positionRelativeToIC.getX();
     float y = positionRelativeToIC.getY();
-    boundingBox.include(x, y);
-    boundingBox.include(x + dimension.getX(), y + dimension.getY());
+    BoundingBox localBox = new BoundingBox(x, y, x + dimension.getX(), y + dimension.getY());
+    transformAndIncludeLocalBox(boundingBox, localBox);
   }
 
   @Override

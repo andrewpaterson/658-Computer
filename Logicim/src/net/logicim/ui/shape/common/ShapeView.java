@@ -1,6 +1,7 @@
 package net.logicim.ui.shape.common;
 
 import net.logicim.ui.common.Colours;
+import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 
@@ -11,6 +12,7 @@ public abstract class ShapeView
   protected ShapeHolder shapeHolder;
   protected Color fillColour;
   protected Color borderColour;
+  protected int relativeRightRotations;
 
   public ShapeView(ShapeHolder shapeHolder)
   {
@@ -18,6 +20,7 @@ public abstract class ShapeView
     shapeHolder.add(this);
     this.fillColour = null;
     this.borderColour = null;
+    this.relativeRightRotations = 0;
   }
 
   public ShapeView(ShapeHolder shapeHolder, Color fillColour, Color borderColour)
@@ -26,9 +29,8 @@ public abstract class ShapeView
     shapeHolder.add(this);
     this.fillColour = fillColour;
     this.borderColour = borderColour;
+    this.relativeRightRotations = 0;
   }
-
-  public abstract void paint(Graphics2D graphics, Viewport viewport);
 
   protected Color getFillColour()
   {
@@ -53,6 +55,32 @@ public abstract class ShapeView
       return borderColour;
     }
   }
+
+  protected Rotation getShapeHolderRotation()
+  {
+    if (relativeRightRotations == 0)
+    {
+      return shapeHolder.getRotation();
+    }
+    else
+    {
+      return shapeHolder.getRotation().rotateRight(relativeRightRotations);
+    }
+  }
+
+  protected void transformAndIncludeLocalBox(BoundingBox boundingBox, BoundingBox localBox)
+  {
+    localBox.transform(Rotation.North.rotateRight(relativeRightRotations));
+    boundingBox.include(localBox.getTransformedTopLeft());
+    boundingBox.include(localBox.getTransformedBottomRight());
+  }
+
+  public void setRelativeRightRotations(int relativeRightRotations)
+  {
+    this.relativeRightRotations = relativeRightRotations;
+  }
+
+  public abstract void paint(Graphics2D graphics, Viewport viewport);
 
   public void setFillColour(Color fillColour)
   {

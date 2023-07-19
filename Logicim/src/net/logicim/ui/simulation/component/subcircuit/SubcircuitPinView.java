@@ -53,7 +53,7 @@ public class SubcircuitPinView
                                  size,
                                  false,
                                  horizontalAlignment);
-    this.textView.setAdditionalRotations(additionalRotations);
+    this.textView.setRelativeRightRotations(additionalRotations);
     this.shapeView = createPinShape(pinView, subcircuitInstanceView, positionRelativeToIC, horizontalAlignment, additionalRotations);
 
     if (pinView.getProperties().clockNotch)

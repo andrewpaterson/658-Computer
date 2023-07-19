@@ -60,7 +60,6 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   protected void finaliseView()
   {
-    createPortViews();
     super.finaliseView();
     containingSubcircuitView.addPassiveView(this);
   }

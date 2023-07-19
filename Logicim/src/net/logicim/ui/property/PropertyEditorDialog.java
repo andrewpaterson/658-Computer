@@ -9,21 +9,19 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.util.ButtonUtil;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 import static java.awt.GridBagConstraints.BOTH;
-import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
 public abstract class PropertyEditorDialog
     extends InputDialog
 {
-  protected static final int DEFAULT_PROPERTY_DIALOG_WIDTH = 440;
-
   protected Logicim editor;
   protected StaticView<ComponentProperties> componentView;
   protected PropertiesPanel propertiesPanel;
@@ -71,7 +69,7 @@ public abstract class PropertyEditorDialog
 
     saveAsDefaultButton = new ActionButton("Save Defaults", this);
     JPanel bottomPanel = buildButtons(1,
-                                      DEFAULT_WIDTH,
+                                      ButtonUtil.DEFAULT_WIDTH,
                                       saveAsDefaultButton,
                                       okayButton,
                                       new CancelButton("Cancel", this));

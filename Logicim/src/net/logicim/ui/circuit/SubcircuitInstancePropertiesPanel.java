@@ -42,12 +42,12 @@ public class SubcircuitInstancePropertiesPanel
 
     this.dialog = dialog;
 
-    this.typeName = new ComboBoxPropertyEditor(this, TYPE_NAME, allowedSubcircuitTypeNames, properties.subcircuitTypeName);
-    this.name = new TextPropertyEditor(this, NAME, properties.name);
-    this.rotation = new RotationEditor(this, ROTATION, rotation);
+    this.typeName = new ComboBoxPropertyEditor(TYPE_NAME, allowedSubcircuitTypeNames, properties.subcircuitTypeName);
+    this.name = new TextPropertyEditor(NAME, properties.name);
+    this.rotation = new RotationEditor(ROTATION, rotation);
     this.width = new IntegerPropertyEditor(this, WIDTH, properties.width);
     this.height = new IntegerPropertyEditor(this, HEIGHT, properties.height);
-    this.comment = new TextPropertyEditor(this, COMMENT, properties.comment);
+    this.comment = new TextPropertyEditor(COMMENT, properties.comment);
 
     addLabeledComponent(TYPE_NAME, this.typeName.getComponent());
     addLabeledComponent(NAME, this.name.getComponent());

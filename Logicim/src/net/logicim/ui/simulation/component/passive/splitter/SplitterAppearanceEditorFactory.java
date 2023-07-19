@@ -18,7 +18,7 @@ public class SplitterAppearanceEditorFactory
   @Override
   public PropertyEditor createEditor(PropertiesPanel propertiesPanel, String fieldName, Object fieldValue)
   {
-    return new SplitterAppearanceEditor(propertiesPanel, fieldName, (SplitterAppearance) fieldValue);
+    return new SplitterAppearanceEditor(fieldName, (SplitterAppearance) fieldValue);
   }
 }
 

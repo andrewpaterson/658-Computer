@@ -10,12 +10,9 @@ public class ComboBoxPropertyEditor
     implements PropertyEditor
 {
   protected JComboBox<String> comboBox;
-  protected PropertiesPanel propertiesPanel;
 
-  public ComboBoxPropertyEditor(PropertiesPanel propertiesPanel, String name, List<String> items, String current)
+  public ComboBoxPropertyEditor(String name, List<String> items, String current)
   {
-    this.propertiesPanel = propertiesPanel;
-
     comboBox = new JComboBox<>();
     comboBox.setName(name);
     for (String item : items)
@@ -41,12 +38,6 @@ public class ComboBoxPropertyEditor
   public JComponent getComponent()
   {
     return comboBox;
-  }
-
-  @Override
-  public PropertiesPanel getPropertiesPanel()
-  {
-    return propertiesPanel;
   }
 }
 

@@ -1306,6 +1306,12 @@ public class SubcircuitView
 
   public void validateSimulations(List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
+    Collection<SubcircuitTopSimulation> subcircuitTopSimulations = simulations.getSubcircuitTopSimulations();
+    if ((subcircuitTopSimulations.isEmpty()))
+    {
+      throw new SimulatorException("Expected at least one subcircuit top simulation.");
+    }
+
     if (orderedTopDownCircuitInstanceViews.size() == 0)
     {
       throw new SimulatorException("Expected at least one circuit instance view.");

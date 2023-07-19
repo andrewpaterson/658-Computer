@@ -17,6 +17,9 @@ public abstract class InputDialog
                ContainerListener
 
 {
+  protected static final int DEFAULT_WIDTH = 440;
+  protected static final int SMALL_HEIGHT = 130;
+
   protected Dimension dimension;
   protected ActionButton okayButton;
 

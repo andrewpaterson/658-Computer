@@ -32,7 +32,7 @@ public class ShowSimulationsDialog
 
   public ShowSimulationsDialog(Frame owner, Logicim editor)
   {
-    super(owner, "Simulations", true, new Dimension(480, owner.getHeight() - 24));
+    super(owner, "Simulations", true, new Dimension(DEFAULT_WIDTH, owner.getHeight() - 24));
     this.editor = editor;
   }
 

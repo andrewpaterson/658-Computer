@@ -8,9 +8,9 @@ public class SplitterAppearanceEditor
     extends EnumPropertyEditor<SplitterAppearance>
 {
 
-  public SplitterAppearanceEditor(PropertiesPanel propertiesPanel, String name, SplitterAppearance current)
+  public SplitterAppearanceEditor(String name, SplitterAppearance current)
   {
-    super(propertiesPanel, name, SplitterAppearance.class, current);
+    super(name, SplitterAppearance.class, current);
   }
 }
 

@@ -15,7 +15,7 @@ public class FamilyPropertyEditorFactory
   @Override
   public PropertyEditor createEditor(PropertiesPanel propertiesPanel, String fieldName, Object fieldValue)
   {
-    return new FamilyPropertyEditor(propertiesPanel, fieldName, (Family) fieldValue);
+    return new FamilyPropertyEditor(fieldName, (Family) fieldValue);
   }
 }
 

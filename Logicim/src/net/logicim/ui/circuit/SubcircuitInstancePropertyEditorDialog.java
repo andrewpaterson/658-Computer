@@ -21,7 +21,7 @@ public class SubcircuitInstancePropertyEditorDialog
                                                 Logicim editor,
                                                 SubcircuitInstanceView componentView)
   {
-    super(owner, componentView.getType() + " Properties", new Dimension(DEFAULT_PROPERTY_DIALOG_WIDTH, 260), editor, (StaticView) componentView);
+    super(owner, componentView.getType() + " Properties", new Dimension(DEFAULT_WIDTH, 260), editor, (StaticView) componentView);
     this.componentView = componentView;
     componentViewProperties = this.componentView.getProperties();
   }

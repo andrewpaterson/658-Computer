@@ -22,7 +22,7 @@ public class SplitterPropertyEditorDialog
   {
     super(owner,
           componentView.getType() + " Properties",
-          new Dimension(DEFAULT_PROPERTY_DIALOG_WIDTH, 460),
+          new Dimension(DEFAULT_WIDTH, 460),
           editor,
           (StaticView) componentView);
     this.componentView = componentView;

@@ -17,7 +17,7 @@ public class ReflectivePropertyEditorDialog
   {
     super(owner,
           componentView.getType() + " Properties",
-          new Dimension(DEFAULT_PROPERTY_DIALOG_WIDTH, getPropertiesFieldCount(componentView) * 26 + 32 + 32 + 32),
+          new Dimension(DEFAULT_WIDTH, getPropertiesFieldCount(componentView) * 26 + 32 + 32 + 32),
           editor,
           (StaticView) componentView);
   }

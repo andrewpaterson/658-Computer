@@ -14,18 +14,16 @@ public abstract class EnumPropertyEditor<T extends Enum<?>>
     implements PropertyEditor
 {
   protected JComboBox<String> comboBox;
-  protected PropertiesPanel propertiesPanel;
   protected Class<T> enumClass;
   protected Set<T> ignored;
 
-  public EnumPropertyEditor(PropertiesPanel propertiesPanel, String name, Class<T> enumClass, T current)
+  public EnumPropertyEditor(String name, Class<T> enumClass, T current)
   {
-    this(propertiesPanel, name, enumClass, current, new HashSet<>());
+    this(name, enumClass, current, new HashSet<>());
   }
 
-  public EnumPropertyEditor(PropertiesPanel propertiesPanel, String name, Class<T> enumClass, T current, Set<T> ignored)
+  public EnumPropertyEditor(String name, Class<T> enumClass, T current, Set<T> ignored)
   {
-    this.propertiesPanel = propertiesPanel;
     this.enumClass = enumClass;
     this.ignored = ignored;
 
@@ -75,10 +73,5 @@ public abstract class EnumPropertyEditor<T extends Enum<?>>
     return comboBox;
   }
 
-  @Override
-  public PropertiesPanel getPropertiesPanel()
-  {
-    return propertiesPanel;
-  }
 }
 

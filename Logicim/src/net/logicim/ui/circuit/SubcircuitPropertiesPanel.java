@@ -15,7 +15,7 @@ public class SubcircuitPropertiesPanel
   public SubcircuitPropertiesPanel(String name)
   {
     super();
-    this.name = new TextPropertyEditor(this, TYPE_NAME, name);
+    this.name = new TextPropertyEditor(TYPE_NAME, name);
     addLabeledComponent(TYPE_NAME, this.name.getComponent());
   }
 

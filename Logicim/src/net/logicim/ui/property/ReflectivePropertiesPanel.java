@@ -34,7 +34,7 @@ public class ReflectivePropertiesPanel
     InstanceInspector instanceInspector = new InstanceInspector(properties);
     List<Field> fields = new ArrayList<>(instanceInspector.getFields());
 
-    rotationEditor = new RotationEditor(this, "rotation", componentView.getRotation());
+    rotationEditor = new RotationEditor("rotation", componentView.getRotation());
     addLabeledComponent("Rotation", rotationEditor.getComponent());
     for (Field field : fields)
     {

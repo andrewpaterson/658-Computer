@@ -8,13 +8,10 @@ public class DividerPropertyEditor
     extends JLabel
     implements PropertyEditor
 {
-  protected PropertiesPanel propertiesPanel;
-
-  public DividerPropertyEditor(PropertiesPanel propertiesPanel, String name)
+  public DividerPropertyEditor(String name)
   {
     super(FieldNameHelper.calculateHumanReadableName(name));
     setName(name);
-    this.propertiesPanel = propertiesPanel;
   }
 
   @Override
@@ -27,12 +24,6 @@ public class DividerPropertyEditor
   public JComponent getComponent()
   {
     return this;
-  }
-
-  @Override
-  public PropertiesPanel getPropertiesPanel()
-  {
-    return propertiesPanel;
   }
 
   @Override

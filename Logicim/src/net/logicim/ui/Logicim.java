@@ -1195,6 +1195,10 @@ public class Logicim
     }
   }
 
+  public void newSimulationAction(String simulationName)
+  {
+  }
+
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)
   {
     if (!oldSubcircuitTypeName.equals(newSubcircuitTypeName))

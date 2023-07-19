@@ -27,7 +27,7 @@ public class SelectSimulationDialog
 
   public SelectSimulationDialog(Frame owner, Logicim editor)
   {
-    super(owner, "Select Simulation", true, new Dimension(392, 130));
+        super(owner, "Select Simulation", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT));
     this.editor = editor;
   }
 

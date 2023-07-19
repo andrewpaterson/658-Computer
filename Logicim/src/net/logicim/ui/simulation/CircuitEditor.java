@@ -543,7 +543,10 @@ public class CircuitEditor
 
   public void validate()
   {
-    currentSubcircuitEditor.validate();
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      subcircuitEditor.validate();
+    }
   }
 
   public void replaceSelection(View newView, View oldView)

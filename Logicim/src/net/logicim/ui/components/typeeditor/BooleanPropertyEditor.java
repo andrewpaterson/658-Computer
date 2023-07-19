@@ -8,14 +8,10 @@ public class BooleanPropertyEditor
     extends JCheckBox
     implements PropertyEditor
 {
-  protected PropertiesPanel propertiesPanel;
-
-  public BooleanPropertyEditor(PropertiesPanel propertiesPanel, String name, Boolean selected)
+  public BooleanPropertyEditor(String name, Boolean selected)
   {
     super();
     setName(name);
-    this.propertiesPanel = propertiesPanel;
-
     setSelected(selected);
   }
 
@@ -29,12 +25,6 @@ public class BooleanPropertyEditor
   public JComponent getComponent()
   {
     return this;
-  }
-
-  @Override
-  public PropertiesPanel getPropertiesPanel()
-  {
-    return propertiesPanel;
   }
 }
 

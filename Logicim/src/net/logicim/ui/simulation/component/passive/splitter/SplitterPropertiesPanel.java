@@ -48,11 +48,11 @@ public class SplitterPropertiesPanel
 
     this.dialog = dialog;
 
-    this.rotation = new RotationEditor(this, ROTATION, rotation);
-    name = new TextPropertyEditor(this, NAME, properties.name);
+    this.rotation = new RotationEditor(ROTATION, rotation);
+    name = new TextPropertyEditor(NAME, properties.name);
     bitWidth = new IntegerPropertyEditor(this, BIT_WIDTH, properties.bitWidth);
     fanOut = new IntegerPropertyEditor(this, FAN_OUT, properties.fanOut);
-    appearance = new SplitterAppearanceEditor(this, APPEARANCE, properties.appearance);
+    appearance = new SplitterAppearanceEditor(APPEARANCE, properties.appearance);
     spacing = new IntegerPropertyEditor(this, SPACING, properties.gridSpacing);
     offset = new IntegerPropertyEditor(this, OFFSET, properties.endOffset);
 

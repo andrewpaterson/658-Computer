@@ -9,9 +9,9 @@ import java.util.Set;
 public class RotationEditor
     extends EnumPropertyEditor<Rotation>
 {
-  public RotationEditor(PropertiesPanel propertiesPanel, String name, Rotation current)
+  public RotationEditor(String name, Rotation current)
   {
-    super(propertiesPanel, name, Rotation.class, current, toIgnored(current));
+    super(name, Rotation.class, current, toIgnored(current));
     addIgnored(Rotation.Cannot);
   }
 

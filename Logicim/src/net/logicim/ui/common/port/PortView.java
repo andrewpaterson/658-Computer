@@ -474,7 +474,14 @@ public class PortView
 
   public String getDescription()
   {
-    return text;
+    if (text != null)
+    {
+      return text + " on " + owner.getDescription();
+    }
+    else
+    {
+      return "on " + owner.getDescription();
+    }
   }
 
   public Set<SubcircuitSimulation> getPortSubcircuitSimulations()

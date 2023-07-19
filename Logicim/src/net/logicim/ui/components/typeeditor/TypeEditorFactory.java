@@ -32,19 +32,19 @@ public class TypeEditorFactory
   {
     if (String.class.equals(fieldClass))
     {
-      return new TextPropertyEditor(propertiesPanel, fieldName, (String) fieldValue);
+      return new TextPropertyEditor(fieldName, (String) fieldValue);
     }
     if (Divider.class.equals(fieldClass))
     {
-      return new DividerPropertyEditor(propertiesPanel, fieldName);
+      return new DividerPropertyEditor(fieldName);
     }
     else if (Boolean.class.equals(fieldClass) || boolean.class.equals(fieldClass))
     {
-      return new BooleanPropertyEditor(propertiesPanel, fieldName, (Boolean) fieldValue);
+      return new BooleanPropertyEditor(fieldName, (Boolean) fieldValue);
     }
     else if (Float.class.equals(fieldClass) || float.class.equals(fieldClass))
     {
-      return new FloatPropertyEditor(propertiesPanel, fieldName, (float) fieldValue, getUnit(fieldName));
+      return new FloatPropertyEditor(fieldName, (float) fieldValue, getUnit(fieldName));
     }
     else if (Integer.class.equals(fieldClass) || int.class.equals(fieldClass))
     {
@@ -52,7 +52,7 @@ public class TypeEditorFactory
     }
     else if (Enum.class.isAssignableFrom(fieldClass))
     {
-      return new GeneralEnumPropertyEditor(propertiesPanel, fieldName, (Class<Enum<?>>) fieldClass, (Enum<?>) fieldValue);
+      return new GeneralEnumPropertyEditor(fieldName, (Class<Enum<?>>) fieldClass, (Enum<?>) fieldValue);
     }
     else
     {

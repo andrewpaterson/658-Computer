@@ -276,12 +276,17 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   protected void finaliseView()
   {
+    setShapeRelativeRights();
+    finalised = true;
+    updateBoundingBoxes();
+  }
+
+  private void setShapeRelativeRights()
+  {
     for (ShapeView shape : shapes)
     {
       shape.setRelativeRightRotations(relativeRightRotations);
     }
-    finalised = true;
-    updateBoundingBoxes();
   }
 
   public SubcircuitView getContainingSubcircuitView()

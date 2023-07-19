@@ -43,7 +43,22 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   protected void finaliseView()
   {
     createPortViews();
+    rotatePortsByRelativeRight();
+
     super.finaliseView();
+  }
+
+  private void rotatePortsByRelativeRight()
+  {
+    for (PortView portView : portViews)
+    {
+      if (relativeRightRotations != 0)
+      {
+        Int2D relativePosition = portView.getRelativePosition();
+        Rotation rotation = Rotation.North.rotateRight(relativeRightRotations);
+        rotation.transform(relativePosition);
+      }
+    }
   }
 
   @Override

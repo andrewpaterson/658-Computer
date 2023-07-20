@@ -340,15 +340,22 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public List<SubcircuitSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
+  public SubcircuitInstanceSimulation getInnerSubcircuitSimulation(CircuitSimulation circuitSimulation)
   {
-    ArrayList<SubcircuitSimulation> result = new ArrayList<>();
+    SubcircuitInstanceSimulation result = null;
     for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
     {
       SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
       if (subcircuitInstanceSimulation.getCircuitSimulation() == circuitSimulation)
       {
-        result.add(subcircuitInstanceSimulation);
+        if (result == null)
+        {
+          result = subcircuitInstanceSimulation;
+        }
+        else
+        {
+          throw new SimulatorException("%s has more than one subcircuit instance simulation for circuit simulation [%s].", getDescription(), circuitSimulation.getDescription());
+        }
       }
     }
     return result;

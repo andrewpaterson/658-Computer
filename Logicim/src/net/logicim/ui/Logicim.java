@@ -14,6 +14,7 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -1197,6 +1198,8 @@ public class Logicim
 
   public void newSimulationAction(String simulationName)
   {
+    SubcircuitTopSimulation topSimulation = circuitEditor.addNewSimulation(simulationName);
+    circuitEditor.setCurrentCircuitSimulation(topSimulation);
   }
 
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)

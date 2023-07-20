@@ -104,16 +104,16 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     if (integratedCircuit != null)
     {
       Trace vccTrace = new Trace();
-      integratedCircuit.getPins().getVoltageCommon().connect(vccTrace);
+      integratedCircuit.getPins().getVoltageCommon().connect(vccTrace, false);
 
       PowerSource vccPowerSource = new PowerSource(subcircuitSimulation.getCircuit(), "", voltageConfiguration.getVcc());
-      vccPowerSource.getPowerOutPort().connect(vccTrace);
+      vccPowerSource.getPowerOutPort().connect(vccTrace, false);
 
       Trace gndTrace = new Trace();
-      integratedCircuit.getPins().getVoltageGround().connect(gndTrace);
+      integratedCircuit.getPins().getVoltageGround().connect(gndTrace, false);
 
       PowerSource gndPowerSource = new PowerSource(subcircuitSimulation.getCircuit(), "", 0);
-      gndPowerSource.getPowerOutPort().connect(gndTrace);
+      gndPowerSource.getPowerOutPort().connect(gndTrace, false);
     }
   }
 

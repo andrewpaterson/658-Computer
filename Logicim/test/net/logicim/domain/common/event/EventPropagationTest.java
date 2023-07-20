@@ -39,7 +39,7 @@ public class EventPropagationTest
     Validator.validate(clocks.size(), 1);
     ClockOscillator clock = clocks.get(0);
 
-    CircuitSimulation circuitSimulation = new CircuitSimulation();
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
     Simulation simulation = circuitSimulation.getSimulation();
 
     while (true)

@@ -4,10 +4,12 @@ import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.InputDialog;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
+import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.List;
 
 import static java.awt.GridBagConstraints.BOTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
@@ -56,7 +58,8 @@ public class NewSimulationDialog
 
   protected JPanel createEditorPanel()
   {
-    return new SimulationPropertiesPanel("");
+    List<SubcircuitTopEditorSimulation> subcircuitTopSimulations = editor.getSubcircuitTopSimulations();
+    return new SimulationPropertiesPanel(editor.getCurrentSubcircuitEditor().getTypeName() + " " + (subcircuitTopSimulations.size() + 1));
   }
 }
 

@@ -12,13 +12,18 @@ public abstract class Port
   protected String name;
   protected Trace trace;
   protected PortHolder holder;
+  protected boolean explicit;
 
-  public Port(PortType type, String name, PortHolder holder)
+  public Port(PortType type,
+              String name,
+              PortHolder holder)
   {
     this.type = type;
     this.name = name;
     this.holder = holder;
+    this.trace = null;
     this.holder.addPort(this);
+    this.explicit = true;
   }
 
   public String getName()
@@ -69,6 +74,12 @@ public abstract class Port
     return false;
   }
 
+  public void connect(Trace trace, boolean explicit)
+  {
+    this.explicit = explicit;
+    connect(trace);
+  }
+
   public void connect(Trace trace)
   {
     if (this.trace == null)
@@ -114,6 +125,11 @@ public abstract class Port
   public String getType()
   {
     return getClass().getSimpleName().replace("Port", "");
+  }
+
+  public boolean isExplicit()
+  {
+    return explicit;
   }
 }
 

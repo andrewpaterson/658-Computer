@@ -71,7 +71,7 @@ public class SimulationTest
     orGate.getPins().getInput(1).connect(clock2Trace);
     orGate.getPins().getOutput().connect(outputTrace);
 
-    CircuitSimulation circuitSimulation = new CircuitSimulation();
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
     Simulation simulation = circuitSimulation.getSimulation();
 
     while (true)
@@ -238,7 +238,7 @@ public class SimulationTest
     LogicPort inverterInput = (LogicPort) inverter.getPort("Input");
     LogicPort inverterOutput = (LogicPort) inverter.getPort("Output");
 
-    CircuitSimulation circuitSimulation = new CircuitSimulation();
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
     Simulation simulation = circuitSimulation.getSimulation();
 
     Map<Long, SimultaneousEvents> events = simulation.getTimeline().getAllEvents();
@@ -358,7 +358,7 @@ public class SimulationTest
     inverter.getPins().getInputs().get(0).connect(connectingTrace);
     inverter.getPins().getOutputs().get(0).connect(outputTrace);
 
-    CircuitSimulation circuitSimulation = new CircuitSimulation();
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
     Simulation simulation = circuitSimulation.getSimulation();
 
     boolean processedEvent = true;

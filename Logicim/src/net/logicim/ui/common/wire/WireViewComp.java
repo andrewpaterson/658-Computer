@@ -1,5 +1,6 @@
 package net.logicim.ui.common.wire;
 
+import net.logicim.common.SimulatorException;
 import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -110,6 +111,11 @@ public class WireViewComp
 
   public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
   {
+    if (simulationTraces.get(subcircuitSimulation) != null)
+    {
+      throw new SimulatorException("Cannot connect traces.  Already connected.");
+    }
+
     simulationTraces.put(subcircuitSimulation, traces);
 
     width = Integer.MAX_VALUE;

@@ -18,9 +18,9 @@ public class CircuitSimulation
   protected long id;
   protected String name;
 
-  public CircuitSimulation()
+  public CircuitSimulation(String name)
   {
-    this(nextId++, "");
+    this(nextId++, name);
   }
 
   public CircuitSimulation(long id, String name)

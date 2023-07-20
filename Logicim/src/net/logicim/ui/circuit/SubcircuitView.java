@@ -14,6 +14,11 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
@@ -22,10 +27,7 @@ import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
-import net.logicim.ui.common.wire.TraceFinder;
-import net.logicim.ui.common.wire.TraceView;
-import net.logicim.ui.common.wire.TunnelView;
-import net.logicim.ui.common.wire.WireView;
+import net.logicim.ui.common.wire.*;
 import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
 import net.logicim.ui.connection.PortTraceFinder;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -69,21 +71,31 @@ public class SubcircuitView
 
   public List<View> getAllViews()
   {
-    List<View> views = new ArrayList<>(traceViews);
+    List<View> views = new ArrayList<>();
+    views.addAll(traceViews);
     views.addAll(tunnelViews);
     views.addAll(decorativeViews);
     views.addAll(passiveViews);
-    views.addAll(subcircuitInstanceViews);
     views.addAll(integratedCircuitViews);
+    views.addAll(subcircuitInstanceViews);
     return views;
   }
 
   public List<StaticView<?>> getStaticViews()
   {
-    List<StaticView<?>> views = new ArrayList<>(tunnelViews);
+    List<StaticView<?>> views = new ArrayList<>();
+    views.addAll(tunnelViews);
     views.addAll(decorativeViews);
     views.addAll(passiveViews);
     views.addAll(integratedCircuitViews);
+    return views;
+  }
+
+  public List<WireView> getWireViews()
+  {
+    List<WireView> views = new ArrayList<>();
+    views.addAll(traceViews);
+    views.addAll(tunnelViews);
     return views;
   }
 
@@ -1272,9 +1284,9 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews);
   }
 
-  public SubcircuitTopSimulation createSubcircuitTopSimulation()
+  public SubcircuitTopSimulation createSubcircuitTopSimulation(String name)
   {
-    SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(new CircuitSimulation());
+    SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(new CircuitSimulation(name));
     addSubcircuitSimulation(subcircuitTopSimulation);
     return subcircuitTopSimulation;
   }
@@ -1323,6 +1335,91 @@ public class SubcircuitView
     }
 
     simulations.validate(orderedTopDownCircuitInstanceViews);
+  }
+
+  public SubcircuitTopSimulation addNewSimulation(String simulationName)
+  {
+    List<SubcircuitTopSimulation> existingTopSimulations = getTopSimulations();
+    SubcircuitTopSimulation startTopSimulation = existingTopSimulations.get(0);
+
+    TraceToTraceMap traceMap = new TraceToTraceMap();
+    SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(simulationName);
+    recurseAddNewSimulation(startTopSimulation, newSubcircuitTopSimulation, traceMap);
+
+    return newSubcircuitTopSimulation;
+  }
+
+  protected void recurseAddNewSimulation(SubcircuitSimulation existingSimulation, SubcircuitSimulation newSimulation, TraceToTraceMap traceMap)
+  {
+    addSimulationToWires(existingSimulation, newSimulation, traceMap);
+    addSimulationToPassives(existingSimulation, newSimulation, traceMap);
+    addSimulationToIntegratedCircuits(existingSimulation, newSimulation, traceMap);
+    addSimulationToSubcircuitInstances(existingSimulation, newSimulation, traceMap);
+  }
+
+  private void addSimulationToSubcircuitInstances(SubcircuitSimulation existingSimulation, SubcircuitSimulation newSimulation, TraceToTraceMap traceMap)
+  {
+    CircuitSimulation existingCircuitSimulation = existingSimulation.getCircuitSimulation();
+    List<SubcircuitInstanceView> subcircuitInstanceViews = getSubcircuitInstanceViews();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      existingSimulation = subcircuitInstanceView.getInnerSubcircuitSimulation(existingCircuitSimulation);
+      SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createSubcircuitInstance(newSimulation);
+      newSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+
+      SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
+
+      instanceSubcircuitView.recurseAddNewSimulation(existingSimulation, newSimulation, traceMap);
+    }
+  }
+
+  private void addSimulationToIntegratedCircuits(SubcircuitSimulation existingSimulation, SubcircuitSimulation newSimulation, TraceToTraceMap traceMap)
+  {
+    for (IntegratedCircuitView<?, ?> integratedCircuitView : integratedCircuitViews)
+    {
+      IntegratedCircuit<?, ?> existingIntegratedCircuit = integratedCircuitView.getComponent(existingSimulation);
+      IntegratedCircuit<?, ?> newIntegratedCircuit = integratedCircuitView.createComponent(newSimulation);
+      connectPorts(existingIntegratedCircuit.getPorts(), newIntegratedCircuit.getPorts(), traceMap);
+      newIntegratedCircuit.simulationStarted(newSimulation.getSimulation());
+    }
+  }
+
+  private void addSimulationToPassives(SubcircuitSimulation existingSimulation, SubcircuitSimulation newSimulation, TraceToTraceMap traceMap)
+  {
+    for (PassiveView<?, ?> passiveView : passiveViews)
+    {
+      Passive existingPassive = passiveView.getComponent(existingSimulation);
+      Passive newPassive = passiveView.createComponent(newSimulation);
+      connectPorts(existingPassive.getPorts(), newPassive.getPorts(), traceMap);
+      newPassive.simulationStarted(newSimulation.getSimulation());
+    }
+  }
+
+  private void addSimulationToWires(SubcircuitSimulation existingSimulation, SubcircuitSimulation newSimulation, TraceToTraceMap traceMap)
+  {
+    List<WireView> wireViews = getWireViews();
+    for (WireView wireView : wireViews)
+    {
+      WireViewComp wireViewComp = wireView.getWireViewComp();
+      List<Trace> existingTraces = wireViewComp.getTraces(existingSimulation);
+      List<Trace> newTraces = traceMap.makeTraces(existingTraces);
+      wireViewComp.connectTraces(newSimulation, newTraces);
+    }
+  }
+
+  private void connectPorts(List<Port> existingPorts, List<Port> newPorts, TraceToTraceMap traceMap)
+  {
+    for (int i = 0; i < newPorts.size(); i++)
+    {
+      Port existingPort = existingPorts.get(i);
+      if (existingPort.isExplicit())
+      {
+        Port newPort = newPorts.get(i);
+        Trace existingTrace = existingPort.getTrace();
+        Trace newTrace = traceMap.makeTrace(existingTrace);
+        newPort.connect(newTrace);
+      }
+    }
   }
 }
 

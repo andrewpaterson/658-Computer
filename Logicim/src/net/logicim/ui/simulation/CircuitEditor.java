@@ -466,7 +466,7 @@ public class CircuitEditor
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
-    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews, getSubcircuitSimulation());
+    currentSubcircuitEditor.startMoveComponents(staticViews, traceViews);
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews,
@@ -742,6 +742,11 @@ public class CircuitEditor
   public void setCurrentCircuitSimulation(SubcircuitSimulation subcircuitSimulation)
   {
     this.currentSubcircuitSimulation = subcircuitSimulation;
+  }
+
+  public SubcircuitTopSimulation addNewSimulation(String simulationName)
+  {
+    return currentSubcircuitEditor.getCircuitSubcircuitView().addNewSimulation(simulationName);
   }
 }
 

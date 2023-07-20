@@ -127,16 +127,9 @@ public class SubcircuitSimulations
     int depth = 0;
     for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
     {
-      List<SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
-      for (SubcircuitSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
-      {
-        if (innerSubcircuitSimulation instanceof SubcircuitTopSimulation)
-        {
-          throw new SimulatorException("Expected only instance subcircuit simulations in inner simulations.");
-        }
-      }
+      SubcircuitInstanceSimulation innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulation(circuitSimulation);
 
-      if (innerSubcircuitSimulations.size() == 0 && depth > 0)
+      if (innerSubcircuitSimulations == null && depth > 0)
       {
         throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
       }

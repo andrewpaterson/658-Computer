@@ -325,6 +325,12 @@ public class TraceView
     wireView.destroyComponent();
   }
 
+  @Override
+  public void disconnect(SubcircuitSimulation subcircuitSimulation)
+  {
+    wireView.disconnect(subcircuitSimulation);
+  }
+
   public WireViewComp getWireViewComp()
   {
     return wireView;

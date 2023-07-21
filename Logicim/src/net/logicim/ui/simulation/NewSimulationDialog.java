@@ -59,7 +59,7 @@ public class NewSimulationDialog
   protected JPanel createEditorPanel()
   {
     List<SubcircuitTopEditorSimulation> subcircuitTopSimulations = editor.getSubcircuitTopSimulations();
-    return new SimulationPropertiesPanel(editor.getCurrentSubcircuitEditor().getTypeName() + " " + (subcircuitTopSimulations.size() + 1));
+    return new SimulationPropertiesPanel("Top " + editor.getCurrentSubcircuitEditor().getTypeName() + " " + (subcircuitTopSimulations.size() + 1));
   }
 }
 

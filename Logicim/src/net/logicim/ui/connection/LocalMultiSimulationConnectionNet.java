@@ -19,6 +19,7 @@ public class LocalMultiSimulationConnectionNet
   protected List<LocalConnectionNet> localConnectionNets;
 
   protected Set<Trace> traces = new LinkedHashSet<>();
+
   protected Map<SubcircuitSimulation, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
   protected Map<SubcircuitSimulation, List<WireConnection>> connectedWires;
   protected List<ComponentConnection<PinView>> pinViews;
@@ -47,7 +48,7 @@ public class LocalMultiSimulationConnectionNet
       portConnections = createPortConnections(minimumPorts);
 
       findConnections(localConnectionNets);
-      traceConnections();
+      addSplitterPorts();
     }
     else
     {
@@ -165,7 +166,7 @@ public class LocalMultiSimulationConnectionNet
     componentConnections.add(new ComponentConnection<>(componentView, connectionView));
   }
 
-  protected void traceConnections()
+  protected void addSplitterPorts()
   {
     for (Map.Entry<SubcircuitSimulation, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {

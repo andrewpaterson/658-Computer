@@ -82,17 +82,20 @@ public abstract class Port
 
   public void connect(Trace trace)
   {
-    if (this.trace == null)
+    if (this.trace != null)
     {
-      if (trace != null)
-      {
-        this.trace = trace;
-        this.trace.connect(this);
-      }
+      throw new SimulatorException("Port [%s] is already connected.", getName());
     }
-    else
+
+    if (trace == null)
     {
-      throw new SimulatorException("Port [" + getName() + "] is already connected.");
+      throw new SimulatorException("Cannot connect null Trace to Port [%s].", getName());
+    }
+
+    if (trace != null)
+    {
+      this.trace = trace;
+      this.trace.connect(this);
     }
   }
 

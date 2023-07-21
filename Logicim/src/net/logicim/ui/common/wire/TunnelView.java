@@ -238,6 +238,12 @@ public class TunnelView
   }
 
   @Override
+  public void disconnect(SubcircuitSimulation subcircuitSimulation)
+  {
+    wireView.disconnect(subcircuitSimulation);
+  }
+
+  @Override
   protected void finaliseView()
   {
     super.finaliseView();

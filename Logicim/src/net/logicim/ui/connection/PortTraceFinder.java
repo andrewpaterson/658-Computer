@@ -21,27 +21,55 @@ public abstract class PortTraceFinder
   public static List<LocalMultiSimulationConnectionNet> findAndConnectTraces(SubcircuitSimulation startingSubcircuitSimulation,
                                                                              ConnectionView inputConnectionView)
   {
-    List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
-    WireList wireList = findWires(startingSubcircuitSimulation, inputConnectionView, connectionNets);
+    WireList wireList = findWires(startingSubcircuitSimulation, inputConnectionView);
 
-    connectFullWires(wireList.getFullWires());
+    createTracesAndConnectPorts(wireList.getFullWires());
+    disconnectWireViews(wireList);
+    connectWireViews(wireList);
 
-    List<PartialWire> partialWires = wireList.getPartialWires();
-    for (PartialWire partialWire : partialWires)
+    return wireList.getConnectionNets();
+  }
+
+  protected static void connectWireViews(WireList wireList)
+  {
+    for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
+    {
+      Set<WireView> processedWireViews = new HashSet<>();
+      for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
+      {
+        SubcircuitSimulation subcircuitSimulation = entry.getKey();
+        List<WireConnection> wireConnections = entry.getValue();
+        for (WireConnection connectedWire : wireConnections)
+        {
+          WireView wireView = connectedWire.wireView;
+          if (!processedWireViews.contains(wireView))
+          {
+            wireView.connectTraces(subcircuitSimulation, connectionNet.getTraces());
+            processedWireViews.add(wireView);
+          }
+        }
+      }
+    }
+  }
+
+  protected static void disconnectWireViews(WireList wireList)
+  {
+    for (PartialWire partialWire : wireList.getPartialWires())
     {
       Map<SubcircuitSimulation, List<WireConnection>> connectedWires = partialWire.connectedWires;
       for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectedWires.entrySet())
       {
-        List<WireConnection> wireConnections = entry.getValue();
-        for (WireConnection wireConnection : wireConnections)
+        SubcircuitSimulation subcircuitSimulation = entry.getKey();
+        List<WireConnection> wireConnections1 = entry.getValue();
+        for (WireConnection wireConnection : wireConnections1)
         {
           WireView wireView = wireConnection.getWireView();
-          wireView.destroyComponent();
+          wireView.disconnect(subcircuitSimulation);
         }
       }
     }
 
-    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+    for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
     {
       for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
       {
@@ -50,14 +78,13 @@ public abstract class PortTraceFinder
         for (WireConnection connectedWire : wireConnections)
         {
           WireView wireView = connectedWire.wireView;
-          wireView.connectTraces(subcircuitSimulation, connectionNet.getTraces());
+          wireView.disconnect(subcircuitSimulation);
         }
       }
     }
-    return connectionNets;
   }
 
-  private static void connectFullWires(List<FullWire> fullWires)
+  private static void createTracesAndConnectPorts(List<FullWire> fullWires)
   {
     for (FullWire fullWire : fullWires)
     {
@@ -83,10 +110,10 @@ public abstract class PortTraceFinder
     }
   }
 
-  private static WireList findWires(SubcircuitSimulation startingSubcircuitSimulation,
-                                    ConnectionView inputConnectionView,
-                                    List<LocalMultiSimulationConnectionNet> connectionNets)
+  private static WireList findWires(SubcircuitSimulation startingSubcircuitSimulation, ConnectionView inputConnectionView)
   {
+    List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
+
     if (inputConnectionView == null)
     {
       throw new SimulatorException("Input connection may not be null.");
@@ -132,7 +159,7 @@ public abstract class PortTraceFinder
     Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
 
     Set<PortConnection> processedWires = new HashSet<>();
-    WireList wireList = new WireList();
+    WireList wireList = new WireList(connectionNets);
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
       List<PortConnection> portConnections = connectionNet.getPortConnections();

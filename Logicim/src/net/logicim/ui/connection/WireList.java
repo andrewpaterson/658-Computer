@@ -8,10 +8,14 @@ public class WireList
   protected List<FullWire> fullWires;
   protected List<PartialWire> partialWires;
 
-  public WireList()
+  protected List<LocalMultiSimulationConnectionNet> connectionNets;
+
+  public WireList(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
     fullWires = new ArrayList<>();
     partialWires = new ArrayList<>();
+
+    this.connectionNets = connectionNets;
   }
 
   public void add(FullWire fullWire)
@@ -32,6 +36,11 @@ public class WireList
   public List<PartialWire> getPartialWires()
   {
     return partialWires;
+  }
+
+  public List<LocalMultiSimulationConnectionNet> getConnectionNets()
+  {
+    return connectionNets;
   }
 }
 

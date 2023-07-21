@@ -156,5 +156,10 @@ public class WireViewComp
   {
     simulationTraces.clear();
   }
+
+  public void disconnect(SubcircuitSimulation subcircuitSimulation)
+  {
+    simulationTraces.remove(subcircuitSimulation);
+  }
 }
 

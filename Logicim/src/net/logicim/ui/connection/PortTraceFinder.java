@@ -119,7 +119,7 @@ public abstract class PortTraceFinder
       throw new SimulatorException("Input connection may not be null.");
     }
 
-    List<ComponentConnection<SplitterView>> splitterViewStack = new ArrayList<>();
+    List<ComponentSimulationConnection<SplitterView>> splitterViewStack = new ArrayList<>();
     Map<ConnectionView, SplitterView> processedSplitterViewConnections = new HashMap<>();
 
     processLocalMultiSimulationConnections(startingSubcircuitSimulation,
@@ -131,11 +131,11 @@ public abstract class PortTraceFinder
     int stackIndex = 0;
     while (stackIndex < splitterViewStack.size())
     {
-      ComponentConnection<SplitterView> splitterViewConnection = splitterViewStack.get(stackIndex);
+      ComponentSimulationConnection<SplitterView> splitterViewConnection = splitterViewStack.get(stackIndex);
       ConnectionView connectionView = splitterViewConnection.connection;
       if (!processedSplitterViewConnections.containsKey(connectionView))
       {
-        processLocalMultiSimulationConnections(startingSubcircuitSimulation,
+        processLocalMultiSimulationConnections(splitterViewConnection.subcircuitSimulation,
                                                connectionView,
                                                connectionNets,
                                                splitterViewStack,
@@ -211,8 +211,8 @@ public abstract class PortTraceFinder
     {
       for (LocalConnectionNet localConnectionNet : connectionNet.getLocalConnectionNets())
       {
-        List<ComponentConnection<SplitterView>> splitterViews = localConnectionNet.getSplitterViews();
-        for (ComponentConnection<SplitterView> componentConnection : splitterViews)
+        List<ComponentSimulationConnection<SplitterView>> splitterViews = localConnectionNet.getSplitterViews();
+        for (ComponentSimulationConnection<SplitterView> componentConnection : splitterViews)
         {
           SplitterView splitterView = componentConnection.component;
           Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(localConnectionNet.getSubcircuitSimulation());
@@ -248,19 +248,23 @@ public abstract class PortTraceFinder
   private static void processLocalMultiSimulationConnections(SubcircuitSimulation startingSubcircuitSimulation,
                                                              ConnectionView inputConnectionView,
                                                              List<LocalMultiSimulationConnectionNet> connectionNets,
-                                                             List<ComponentConnection<SplitterView>> splitterViewStack,
+                                                             List<ComponentSimulationConnection<SplitterView>> splitterViewStack,
                                                              Map<ConnectionView, SplitterView> processedSplitterViewConnections)
   {
     LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
     connectionNets.add(localMultiSimulationConnectionNet);
 
-    processLocalConnections(startingSubcircuitSimulation, inputConnectionView, localMultiSimulationConnectionNet, splitterViewStack, processedSplitterViewConnections);
+    processLocalConnections(startingSubcircuitSimulation,
+                            inputConnectionView,
+                            localMultiSimulationConnectionNet,
+                            splitterViewStack,
+                            processedSplitterViewConnections);
   }
 
   private static void processLocalConnections(SubcircuitSimulation subcircuitSimulation,
                                               ConnectionView inputConnectionView,
                                               LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet,
-                                              List<ComponentConnection<SplitterView>> splitterViewStack,
+                                              List<ComponentSimulationConnection<SplitterView>> splitterViewStack,
                                               Map<ConnectionView, SplitterView> processedSplitterViewConnections)
   {
     LocalConnectionNet connectionNet = new LocalConnectionNet(subcircuitSimulation, localMultiSimulationConnectionNet, inputConnectionView);
@@ -291,22 +295,23 @@ public abstract class PortTraceFinder
     return portView.getConnection();
   }
 
-  private static List<ComponentConnection<SplitterView>> createSplitterViewComponentConnections(LocalConnectionNet connectionNet, Map<ConnectionView, SplitterView> processedSplitterViewConnections)
+  private static List<ComponentSimulationConnection<SplitterView>> createSplitterViewComponentConnections(LocalConnectionNet connectionNet, Map<ConnectionView, SplitterView> processedSplitterViewConnections)
   {
-    List<ComponentConnection<SplitterView>> splitterComponentsConnections = new ArrayList<>();
-    List<ComponentConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();
+    List<ComponentSimulationConnection<SplitterView>> splitterComponentsConnections = new ArrayList<>();
+    List<ComponentSimulationConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();
     if (splitterViews.size() > 0)
     {
-      for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
+      for (ComponentSimulationConnection<SplitterView> splitterViewConnection : splitterViews)
       {
         SplitterView splitterView = splitterViewConnection.component;
         ConnectionView connection = splitterViewConnection.connection;
         processedSplitterViewConnections.put(connection, splitterView);
       }
 
-      for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
+      for (ComponentSimulationConnection<SplitterView> splitterViewConnection : splitterViews)
       {
         SplitterView splitterView = splitterViewConnection.component;
+        SubcircuitSimulation subcircuitSimulation = splitterViewConnection.subcircuitSimulation;
 
         List<PortView> portViews = splitterView.getPortViews();
         for (PortView portView : portViews)
@@ -314,7 +319,7 @@ public abstract class PortTraceFinder
           ConnectionView connectionView = portView.getConnection();
           if (!processedSplitterViewConnections.containsKey(connectionView))
           {
-            splitterComponentsConnections.add(new ComponentConnection<>(splitterView, connectionView));
+            splitterComponentsConnections.add(new ComponentSimulationConnection<>(splitterView, subcircuitSimulation, connectionView));
           }
         }
       }

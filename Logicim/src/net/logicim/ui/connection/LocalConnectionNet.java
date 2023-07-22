@@ -16,7 +16,7 @@ public class LocalConnectionNet
   protected SubcircuitSimulation subcircuitSimulation;
   protected Set<ConnectionView> connectionViews;
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
-  protected List<ComponentConnection<SplitterView>> splitterViews;
+  protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
   public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, LocalMultiSimulationConnectionNet multiSimulationConnectionNet, ConnectionView inputConnectionView)
   {
@@ -43,7 +43,7 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof SplitterView)
         {
-          splitterViews.add(new ComponentConnection<>((SplitterView) connectedView, connectionView));
+          splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView, subcircuitSimulation, connectionView));
         }
       }
     }
@@ -59,14 +59,9 @@ public class LocalConnectionNet
     return subcircuitSimulation;
   }
 
-  public List<ComponentConnection<SplitterView>> getSplitterViews()
+  public List<ComponentSimulationConnection<SplitterView>> getSplitterViews()
   {
     return splitterViews;
-  }
-
-  public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
-  {
-    return multiSimulationConnectionNet;
   }
 }
 

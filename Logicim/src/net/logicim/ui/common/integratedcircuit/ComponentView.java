@@ -381,7 +381,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     if (getComponentSubcircuitSimulations().size() > 0)
     {
-      throw new SimulatorException("Expected no components.");
+      throw new SimulatorException("Expected no simulations or components on [%s] but found [%s].", getDescription(), getComponentSubcircuitSimulations().size());
     }
   }
 

@@ -1244,28 +1244,28 @@ public class SubcircuitView
 
   public void destroyComponentsAndSimulations()
   {
-    destroyComponents(getStaticViews(), traceViews, subcircuitInstanceViews);
+    disconnectViews(getStaticViews(), traceViews, subcircuitInstanceViews);
 
     simulations.clear();
   }
 
-  protected void destroyComponents(Collection<StaticView<?>> staticViews,
-                                   Collection<TraceView> traceViews,
-                                   Collection<SubcircuitInstanceView> subcircuitInstanceViews)
+  protected void disconnectViews(Collection<StaticView<?>> staticViews,
+                                 Collection<TraceView> traceViews,
+                                 Collection<SubcircuitInstanceView> subcircuitInstanceViews)
   {
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.destroyComponent();
+      staticView.disconnectView();
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.destroyComponent();
+      traceView.disconnectViews();
     }
 
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      subcircuitInstanceView.destroyComponent();
+      subcircuitInstanceView.disconnectView();
     }
   }
 

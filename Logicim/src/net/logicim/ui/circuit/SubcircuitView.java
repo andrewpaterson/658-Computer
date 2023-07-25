@@ -88,6 +88,7 @@ public class SubcircuitView
     views.addAll(decorativeViews);
     views.addAll(passiveViews);
     views.addAll(integratedCircuitViews);
+    views.addAll(subcircuitInstanceViews);
     return views;
   }
 
@@ -686,17 +687,12 @@ public class SubcircuitView
   }
 
   public List<ConnectionView> getConnectionViews(List<StaticView<?>> staticViews,
-                                                 List<SubcircuitInstanceView> subcircuitInstanceViews,
                                                  Set<TraceView> traceViews)
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
       connectionViews.addAll(staticView.getConnectionViews());
-    }
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
-    {
-      connectionViews.addAll(subcircuitInstanceView.getConnectionViews());
     }
     for (TraceView traceView : traceViews)
     {
@@ -713,17 +709,18 @@ public class SubcircuitView
     }
   }
 
-  private void createComponents(List<StaticView<?>> staticViews,
-                                List<SubcircuitInstanceView> subcircuitInstanceViews)
+  private void createComponents(List<StaticView<?>> staticViews)
   {
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.createComponent(simulations);
-    }
-
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
-    {
-      subcircuitInstanceView.createSubcircuitInstance(simulations);
+      if (!(staticView instanceof SubcircuitInstanceView))
+      {
+        staticView.createComponent(simulations);
+      }
+      else
+      {
+        ((SubcircuitInstanceView) staticView).createSubcircuitInstance(simulations);
+      }
     }
   }
 
@@ -984,21 +981,7 @@ public class SubcircuitView
 
     enableStaticViews(componentViews);
 
-    List<StaticView<?>> staticViews = new ArrayList<>();
-    List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
-    for (StaticView<?> componentView : componentViews)
-    {
-      if (componentView instanceof SubcircuitInstanceView)
-      {
-        subcircuitInstanceViews.add((SubcircuitInstanceView) componentView);
-      }
-      else
-      {
-        staticViews.add(componentView);
-      }
-    }
-
-    createComponents(staticViews, subcircuitInstanceViews);
+    createComponents(componentViews);
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(createdConnectionViews);
     simulationStarted(componentViews);
@@ -1244,18 +1227,20 @@ public class SubcircuitView
 
   public void destroyComponentsAndSimulations()
   {
-    disconnectViews(getStaticViews(), traceViews, subcircuitInstanceViews);
+    disconnectViews(getStaticViews(), traceViews);
 
     simulations.clear();
   }
 
   protected void disconnectViews(Collection<StaticView<?>> staticViews,
-                                 Collection<TraceView> traceViews,
-                                 Collection<SubcircuitInstanceView> subcircuitInstanceViews)
+                                 Collection<TraceView> traceViews)
   {
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.disconnectView();
+      if (!(staticView instanceof SubcircuitInstanceView))
+      {
+        staticView.disconnectView();
+      }
     }
 
     for (TraceView traceView : traceViews)
@@ -1263,21 +1248,23 @@ public class SubcircuitView
       traceView.disconnectViews();
     }
 
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    for (StaticView<?> staticView : staticViews)
     {
-      subcircuitInstanceView.disconnectView();
+      if (staticView instanceof SubcircuitInstanceView)
+      {
+        staticView.disconnectView();
+      }
     }
   }
 
   public void createComponents()
   {
     List<StaticView<?>> staticViews = getStaticViews();
-    List<SubcircuitInstanceView> subcircuitInstanceViews = getSubcircuitInstanceViews();
-    createComponents(staticViews, subcircuitInstanceViews);
+    createComponents(staticViews);
 
     simulationStarted(staticViews);
 
-    List<ConnectionView> connectionViews = getConnectionViews(staticViews, subcircuitInstanceViews, traceViews);
+    List<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews);
 

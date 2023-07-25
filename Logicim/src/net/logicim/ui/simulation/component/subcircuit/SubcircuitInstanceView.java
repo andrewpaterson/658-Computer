@@ -416,7 +416,6 @@ public class SubcircuitInstanceView
     {
       pinView.disconnectView();
     }
-
     destroyComponent();
   }
 

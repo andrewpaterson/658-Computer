@@ -567,7 +567,7 @@ public class CircuitEditor
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)
   {
-    currentSubcircuitEditor.deleteComponentViews(staticViews);
+    currentSubcircuitEditor.deleteStaticViews(staticViews);
   }
 
   public SubcircuitSimulation getSubcircuitSimulation()

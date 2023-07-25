@@ -120,7 +120,7 @@ public class SubcircuitEditor
         staticViews.add((StaticView<?>) view);
       }
     }
-    subcircuitView.deleteComponentViews(staticViews);
+    subcircuitView.deleteStaticViews(staticViews);
     selection.clearSelection();
   }
 
@@ -266,9 +266,9 @@ public class SubcircuitEditor
     subcircuitView.removeTraceView(traceView);
   }
 
-  public void deleteComponentViews(List<StaticView<?>> staticViews)
+  public void deleteStaticViews(List<StaticView<?>> staticViews)
   {
-    subcircuitView.deleteComponentViews(staticViews);
+    subcircuitView.deleteStaticViews(staticViews);
   }
 
   public List<View> pasteClipboardViews(List<TraceData> traces,
@@ -307,7 +307,7 @@ public class SubcircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    subcircuitView.deleteComponentView(staticView);
+    subcircuitView.deleteStaticView(staticView);
   }
 
   public void validate()

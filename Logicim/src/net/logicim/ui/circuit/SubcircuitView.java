@@ -18,10 +18,7 @@ import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.common.Passive;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.*;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -145,14 +142,14 @@ public class SubcircuitView
     return connectionViews;
   }
 
-  public void deleteComponentView(StaticView<?> staticView)
+  public void deleteStaticView(StaticView<?> staticView)
   {
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
-    deleteComponentViews(staticViews);
+    deleteStaticViews(staticViews);
   }
 
-  public void deleteComponentViews(List<StaticView<?>> staticViews)
+  public void deleteStaticViews(List<StaticView<?>> staticViews)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> componentView : staticViews)
@@ -1225,15 +1222,16 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyComponentsAndSimulations()
+  public void destroyComponentsAndSimulations(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
-    disconnectViews(getStaticViews(), traceViews);
+    disconnectViews(getStaticViews(), traceViews, subcircuitInstanceSimulation);
 
-    simulations.clear();
+    simulations.remove(subcircuitInstanceSimulation);
   }
 
   protected void disconnectViews(Collection<StaticView<?>> staticViews,
-                                 Collection<TraceView> traceViews)
+                                 Collection<TraceView> traceViews,
+                                 SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     for (StaticView<?> staticView : staticViews)
     {

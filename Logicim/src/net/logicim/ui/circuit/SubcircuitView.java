@@ -117,11 +117,12 @@ public class SubcircuitView
     return result;
   }
 
-  public void disconnectTraceView(TraceView traceView)
+  public List<ConnectionView> disconnectTraceView(TraceView traceView)
   {
     List<ConnectionView> connectionViews = traceView.getConnectionViews();
     connectionViewCache.removeAll(traceView, connectionViews);
     traceView.disconnectViews();
+    return connectionViews;
   }
 
   public List<ConnectionView> disconnectStaticView(StaticView<?> staticView)
@@ -941,13 +942,12 @@ public class SubcircuitView
     {
       staticView.disable();
       connectionViews.addAll(disconnectStaticView(staticView));
-      staticView.destroyComponent();
     }
 
     for (TraceView traceView : traceViews)
     {
-      connectionViews.addAll(traceView.getConnectionViews());
-      disconnectTraceView(traceView);
+      traceView.disable();
+      connectionViews.addAll(disconnectTraceView(traceView));
     }
 
     createTracesForConnectionViews(connectionViews);

@@ -439,7 +439,7 @@ public class SubcircuitInstanceView
   {
     //Whoah! This is way out of hand!
     //Only destroy your own subcircuit instance (component) not all its internal simulations.
-    instanceSubcircuitView.destroyComponentsAndSimulations();
+    ///instanceSubcircuitView.destroyComponentsAndSimulations();
 
     for (Map.Entry<SubcircuitSimulation, SubcircuitInstance> entry : simulationSubcircuitInstances.entrySet())
     {

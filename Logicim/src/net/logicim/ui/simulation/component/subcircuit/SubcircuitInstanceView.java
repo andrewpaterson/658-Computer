@@ -410,16 +410,6 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void disconnectView()
-  {
-    for (SubcircuitPinView pinView : pinViews)
-    {
-      pinView.disconnectView();
-    }
-    destroyComponent();
-  }
-
-  @Override
   protected void createPortViews()
   {
     for (SubcircuitPinView pinView : pinViews)

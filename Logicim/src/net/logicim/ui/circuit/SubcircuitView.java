@@ -721,6 +721,21 @@ public class SubcircuitView
     }
   }
 
+  private void createComponents2(List<StaticView<?>> staticViews, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  {
+    for (StaticView<?> staticView : staticViews)
+    {
+      if (!(staticView instanceof SubcircuitInstanceView))
+      {
+        staticView.createComponent(subcircuitInstanceSimulation);
+      }
+      else
+      {
+        ((SubcircuitInstanceView) staticView).createSubcircuitInstance(subcircuitInstanceSimulation);
+      }
+    }
+  }
+
   public void simulationStarted(List<StaticView<?>> staticViews)
   {
     for (StaticView<?> staticView : staticViews)
@@ -1255,10 +1270,10 @@ public class SubcircuitView
     }
   }
 
-  public void createComponents()
+  public void createComponentsForSubcircuitInstanceView(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
-    createComponents(staticViews);
+    createComponents2(staticViews, subcircuitInstanceSimulation);
 
     simulationStarted(staticViews);
 

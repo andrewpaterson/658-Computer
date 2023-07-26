@@ -254,7 +254,7 @@ public class SubcircuitInstanceView
 
     subcircuitInstance = createSubcircuitInstanceSecondHalf(containingSubcircuitSimulation, subcircuitInstance);
 
-    instanceSubcircuitView.createComponents();
+    instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
 
     return subcircuitInstance;
   }

@@ -9,7 +9,7 @@ public class MouseButtons
 
   public MouseButtons()
   {
-    buttons = new boolean[4];
+    buttons = new boolean[12];
   }
 
   public void set(int button)

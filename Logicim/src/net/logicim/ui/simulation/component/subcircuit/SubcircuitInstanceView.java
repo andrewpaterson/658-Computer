@@ -249,11 +249,10 @@ public class SubcircuitInstanceView
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
+    instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
 
-    instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
-
-    subcircuitInstance = createAndAddComponents(containingSubcircuitSimulation, subcircuitInstance);
+    subcircuitInstance = createSubcircuitInstanceSecondHalf(containingSubcircuitSimulation, subcircuitInstance);
 
     instanceSubcircuitView.createComponents();
 
@@ -262,15 +261,15 @@ public class SubcircuitInstanceView
 
   public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
-    CircuitSimulation circuitSimulation = subcircuitInstanceSimulation.getCircuitSimulation();
+    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
     subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
 
-    return createAndAddComponents(containingSubcircuitSimulation, subcircuitInstance);
+    return createSubcircuitInstanceSecondHalf(containingSubcircuitSimulation, subcircuitInstance);
   }
 
-  protected SubcircuitInstance createAndAddComponents(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance)
+  protected SubcircuitInstance createSubcircuitInstanceSecondHalf(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance)
   {
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
@@ -342,6 +341,7 @@ public class SubcircuitInstanceView
   @Override
   public SubcircuitInstanceSimulation getInnerSubcircuitSimulation(CircuitSimulation circuitSimulation)
   {
+    //I think there can be more than one SubcircuitInstanceSimulation for a CircuitSimulation.
     SubcircuitInstanceSimulation result = null;
     for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
     {

@@ -400,7 +400,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public void createComponent(SubcircuitSimulations simulations)
   {
-    validateNoComponents();
+    //validateNoComponents();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
       createComponent(subcircuitSimulation);

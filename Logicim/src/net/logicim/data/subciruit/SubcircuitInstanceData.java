@@ -79,7 +79,10 @@ public class SubcircuitInstanceData
     throw new SimulatorException("SubcircuitInstanceData.createAndConnectComponent() is not implemented.  Call createAndConnectComponent2() instead.");
   }
 
-  public void createAndConnectComponent2(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
+  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation,
+                                        SubcircuitInstanceSimulation subcircuitInstanceSimulation,
+                                        CircuitLoaders circuitLoaders,
+                                        SubcircuitInstanceView componentView)
   {
     componentView.createSubcircuitInstance(containingSubcircuitSimulation, subcircuitInstanceSimulation);
 

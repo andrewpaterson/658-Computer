@@ -80,7 +80,10 @@ public class SubcircuitEditor
     List<StaticView<?>> staticViews = new ArrayList<>();
     staticViews.add(staticView);
 
-    doneMoveComponents(staticViews, new ArrayList<>(), new LinkedHashSet<>(), true);
+    doneMoveComponents(staticViews,
+                       new ArrayList<>(),
+                       new LinkedHashSet<>(),
+                       true);
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews,
@@ -88,7 +91,9 @@ public class SubcircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  boolean newComponents)
   {
-    List<View> newSelection = subcircuitView.doneMoveComponents(staticViews, traceViews, selectedViews);
+    List<View> newSelection = subcircuitView.doneMoveComponents(staticViews,
+                                                                traceViews,
+                                                                selectedViews);
     if (newComponents)
     {
       for (StaticView<?> staticView : staticViews)

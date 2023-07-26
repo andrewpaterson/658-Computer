@@ -373,7 +373,7 @@ public class CircuitEditor
         for (Long simulationId : subcircuitInstanceData.subcircuitInstanceSimulations)
         {
           SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) loaders.getSubcircuitSimulation(simulationId);
-          subcircuitInstanceData.createAndConnectComponent2(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
+          subcircuitInstanceData.createAndConnectComponent(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
         }
       }
     }
@@ -474,7 +474,10 @@ public class CircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  boolean newComponents)
   {
-    currentSubcircuitEditor.doneMoveComponents(staticViews, traceViews, selectedViews, newComponents);
+    currentSubcircuitEditor.doneMoveComponents(staticViews,
+                                               traceViews,
+                                               selectedViews,
+                                               newComponents);
   }
 
   public Selection getCurrentSelection()

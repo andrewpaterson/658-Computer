@@ -205,14 +205,13 @@ public class PortView
     }
   }
 
-  public void disconnectView()
+  public void disconnectViewAndDestroyAllComponents()
   {
-    destroyComponent();
-
+    destroyAllComponents();
     connection = null;
   }
 
-  protected void destroyComponent()
+  protected void destroyAllComponents()
   {
     for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
     {
@@ -227,6 +226,19 @@ public class PortView
       }
     }
     simulationPorts.clear();
+  }
+
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
+    if (ports != null)
+    {
+      for (Port port : ports)
+      {
+        port.disconnect(subcircuitSimulation.getSimulation());
+      }
+      simulationPorts.remove(subcircuitSimulation);
+    }
   }
 
   public SimulationMultiPortData save()

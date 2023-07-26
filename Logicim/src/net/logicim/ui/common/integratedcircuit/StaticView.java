@@ -300,18 +300,17 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  //Remove this
   public abstract void createComponent(SubcircuitSimulations simulations);
 
-  //Remove this
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 
-  //Remove this
-  public abstract void destroyComponent();
+  public abstract void disconnectViewAndDestroyAllComponents();
+
+  public abstract void destroyComponent(SubcircuitSimulation subcircuitSimulation);
+
+  public abstract void destroyAllComponents();
 
   public abstract void simulationStarted();
-
-  public abstract void disconnectView();
 
   public abstract List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView);
 

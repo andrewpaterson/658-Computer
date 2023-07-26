@@ -132,14 +132,14 @@ public class WireViewComp
     }
   }
 
-  public void disconnectViews()
+  public void disconnectViewAndDestroyComponents()
   {
     for (int i = 0; i < connections.size(); i++)
     {
       connections.set(i, null);
     }
 
-    destroyComponent();
+    destroyAllComponents();
   }
 
   public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
@@ -152,7 +152,7 @@ public class WireViewComp
     return new LinkedHashSet<>(simulationTraces.keySet());
   }
 
-  public void destroyComponent()
+  public void destroyAllComponents()
   {
     simulationTraces.clear();
   }

@@ -3,7 +3,6 @@ package net.logicim.ui.simulation.component.subcircuit;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -112,11 +111,6 @@ public class SubcircuitPinView
     {
       clockView.paint(graphics, viewport);
     }
-  }
-
-  public void disconnectView()
-  {
-    portView.disconnectView();
   }
 
   protected PortView createPortView(List<String> tracePortNames)

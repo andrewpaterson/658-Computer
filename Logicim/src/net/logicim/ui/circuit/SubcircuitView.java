@@ -115,11 +115,11 @@ public class SubcircuitView
     return result;
   }
 
-  public List<ConnectionView> disconnectTraceView(TraceView traceView)
+  public List<ConnectionView> disconnectTraceViewAndDestroyComponents(TraceView traceView)
   {
     List<ConnectionView> connectionViews = traceView.getConnectionViews();
     connectionViewCache.removeAll(traceView, connectionViews);
-    traceView.disconnectViews();
+    traceView.disconnectViewAndDestroyComponents();
     return connectionViews;
   }
 
@@ -137,7 +137,7 @@ public class SubcircuitView
     }
 
     connectionViewCache.removeAll(staticView, connectionViews);
-    staticView.disconnectView();
+    staticView.disconnectViewAndDestroyAllComponents();
 
     return connectionViews;
   }
@@ -668,7 +668,7 @@ public class SubcircuitView
   {
     for (TraceView traceView : traceViews)
     {
-      disconnectTraceView(traceView);
+      disconnectTraceViewAndDestroyComponents(traceView);
       removeTraceView(traceView);
     }
   }
@@ -941,7 +941,7 @@ public class SubcircuitView
     for (TraceView traceView : traceViews)
     {
       traceView.disable();
-      connectionViews.addAll(disconnectTraceView(traceView));
+      connectionViews.addAll(disconnectTraceViewAndDestroyComponents(traceView));
     }
 
     createTracesForConnectionViews(connectionViews);
@@ -1222,35 +1222,35 @@ public class SubcircuitView
     return list;
   }
 
-  public void destroyComponentsAndSimulations(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  public void destroySubciruitInstanceComponentsAndSimulations(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
-    disconnectViews(getStaticViews(), traceViews, subcircuitInstanceSimulation);
+    destroyComponents(getStaticViews(), traceViews, subcircuitInstanceSimulation);
 
     simulations.remove(subcircuitInstanceSimulation);
   }
 
-  protected void disconnectViews(Collection<StaticView<?>> staticViews,
-                                 Collection<TraceView> traceViews,
-                                 SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  protected void destroyComponents(Collection<StaticView<?>> staticViews,
+                                   Collection<TraceView> traceViews,
+                                   SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     for (StaticView<?> staticView : staticViews)
     {
       if (!(staticView instanceof SubcircuitInstanceView))
       {
-        staticView.disconnectView();
+        staticView.destroyComponent(subcircuitInstanceSimulation);
       }
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.disconnectViews();
+      traceView.disconnectViewAndDestroyComponents();
     }
 
     for (StaticView<?> staticView : staticViews)
     {
       if (staticView instanceof SubcircuitInstanceView)
       {
-        staticView.disconnectView();
+        staticView.destroyComponent(subcircuitInstanceSimulation);
       }
     }
   }

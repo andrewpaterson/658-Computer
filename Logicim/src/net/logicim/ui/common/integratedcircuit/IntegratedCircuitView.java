@@ -62,7 +62,21 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   }
 
   @Override
-  public void destroyComponent()
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+    IC removed = simulationIntegratedCircuits.get(subcircuitSimulation);
+    if (removed == null)
+    {
+      throw new SimulatorException("[%s] could not find a component for simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
+    }
+    destroyPortViewComponents(subcircuitSimulation);
+    Circuit circuit = subcircuitSimulation.getCircuit();
+    circuit.remove(removed);
+    simulationIntegratedCircuits.remove(subcircuitSimulation);
+  }
+
+  @Override
+  public void destroyAllComponents()
   {
     for (Map.Entry<SubcircuitSimulation, IC> entry : simulationIntegratedCircuits.entrySet())
     {

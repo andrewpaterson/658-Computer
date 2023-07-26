@@ -3,19 +3,15 @@ package net.logicim.ui.common.wire;
 import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
 
 import java.awt.*;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class TraceView
     extends View
@@ -287,9 +283,9 @@ public class TraceView
     wireView.connectTraces(subcircuitSimulation, traces);
   }
 
-  public void disconnectViews()
+  public void disconnectViewAndDestroyComponents()
   {
-    wireView.disconnectViews();
+    wireView.disconnectViewAndDestroyComponents();
   }
 
   public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
@@ -320,9 +316,10 @@ public class TraceView
     return LineOverlap.None;
   }
 
-  public void destroyComponent()
+  @Override
+  public void destroyAllComponents()
   {
-    wireView.destroyComponent();
+    wireView.destroyAllComponents();
   }
 
   @Override

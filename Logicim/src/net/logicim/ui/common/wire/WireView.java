@@ -24,7 +24,7 @@ public interface WireView
 
   void enable();
 
-  void destroyComponent();
+  void destroyAllComponents();
 
   void disconnect(SubcircuitSimulation subcircuitSimulation);
 

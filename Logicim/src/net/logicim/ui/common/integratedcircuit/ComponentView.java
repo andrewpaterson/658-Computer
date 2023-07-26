@@ -356,13 +356,26 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void disconnectView()
+  public void disconnectViewAndDestroyAllComponents()
+  {
+    disconnectAndDestroyPortViewComponents();
+    destroyAllComponents();
+  }
+
+  protected void disconnectAndDestroyPortViewComponents()
   {
     for (PortView portView : portViews)
     {
-      portView.disconnectView();
+      portView.disconnectViewAndDestroyAllComponents();
     }
-    destroyComponent();
+  }
+
+  protected void destroyPortViewComponents(SubcircuitSimulation subcircuitSimulation)
+  {
+    for (PortView portView : portViews)
+    {
+      portView.destroyComponent(subcircuitSimulation);
+    }
   }
 
   @Override
@@ -393,8 +406,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       createComponent(subcircuitSimulation);
     }
   }
-
-  public abstract void destroyComponent();
 
   public abstract String getComponentType();
 

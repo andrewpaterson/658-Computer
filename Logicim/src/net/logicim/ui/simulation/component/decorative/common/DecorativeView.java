@@ -56,7 +56,17 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void disconnectView()
+  public void disconnectViewAndDestroyAllComponents()
+  {
+  }
+
+  @Override
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  {
+  }
+
+  @Override
+  public void destroyAllComponents()
   {
   }
 
@@ -66,7 +76,6 @@ public abstract class DecorativeView<T extends DecorativeProperties>
     return new ArrayList<>();
   }
 
-
   @Override
   public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
@@ -75,11 +84,6 @@ public abstract class DecorativeView<T extends DecorativeProperties>
 
   @Override
   public void createComponent(SubcircuitSimulations simulations)
-  {
-  }
-
-  @Override
-  public void destroyComponent()
   {
   }
 }

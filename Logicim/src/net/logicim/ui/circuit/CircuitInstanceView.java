@@ -15,7 +15,7 @@ public interface CircuitInstanceView
 
   String getDescription();
 
-  SubcircuitInstanceSimulation getInnerSubcircuitSimulation(CircuitSimulation circuitSimulation);
+  List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation);
 
   default List<CircuitInstanceView> getOrderedCircuitInstanceViews()
   {

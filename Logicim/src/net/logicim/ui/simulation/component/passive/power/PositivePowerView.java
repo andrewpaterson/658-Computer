@@ -74,7 +74,7 @@ public class PositivePowerView
     return new PositivePowerData(position,
                                  rotation,
                                  properties.name,
-                                 saveSimulationPassiveIDs(),
+                                 saveSimulationPassives(),
                                  savePorts(),
                                  id,
                                  enabled,

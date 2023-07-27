@@ -8,6 +8,7 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
+import net.logicim.data.subciruit.SubcircuitInstanceSimulationSimulationData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.TracePort;
@@ -213,8 +214,7 @@ public class SubcircuitInstanceView
                                       id,
                                       enabled,
                                       selected,
-                                      saveSimulationSubcircuitInstanceIDs(),
-                                      saveSubcircuitInstanceSimulationsIDs(),
+                                      saveSimulationSubcircuitInstances(),
                                       savePorts(),
                                       properties.comment,
                                       properties.width,
@@ -294,12 +294,9 @@ public class SubcircuitInstanceView
 
   protected void putContainingSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation, SubcircuitInstance subcircuitInstance)
   {
-    for (SubcircuitSimulation currentSubcircuitSimulation : simulationSubcircuitInstances.keySet())
+    if (simulationSubcircuitInstances.get(subcircuitSimulation) != null)
     {
-      if (currentSubcircuitSimulation.getCircuitSimulation() == subcircuitSimulation.getCircuitSimulation())
-      {
-        throw new SimulatorException("A simulation [%s] for circuit [%s] already exists.", currentSubcircuitSimulation.getDescription(), currentSubcircuitSimulation.getCircuitSimulation().getDescription());
-      }
+      throw new SimulatorException("A subcircuit instance [%s] for simulation [%s] already exists.", subcircuitInstance.getDescription(), subcircuitSimulation.getDescription());
     }
 
     simulationSubcircuitInstances.put(subcircuitSimulation, subcircuitInstance);
@@ -339,23 +336,15 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public SubcircuitInstanceSimulation getInnerSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  public List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
-    //I think there can be more than one SubcircuitInstanceSimulation for a CircuitSimulation.
-    SubcircuitInstanceSimulation result = null;
+    List<SubcircuitInstanceSimulation> result = new ArrayList<>();
     for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
     {
       SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
       if (subcircuitInstanceSimulation.getCircuitSimulation() == circuitSimulation)
       {
-        if (result == null)
-        {
-          result = subcircuitInstanceSimulation;
-        }
-        else
-        {
-          throw new SimulatorException("%s has more than one subcircuit instance simulation for circuit simulation [%s].", getDescription(), circuitSimulation.getDescription());
-        }
+        result.add(subcircuitInstanceSimulation);
       }
     }
     return result;
@@ -541,31 +530,36 @@ public class SubcircuitInstanceView
     return instanceSubcircuitView;
   }
 
-  protected Set<Long> saveSimulationSubcircuitInstanceIDs()
+  protected List<SubcircuitInstanceSimulationSimulationData> saveSimulationSubcircuitInstances()
   {
-    LinkedHashSet<Long> result = new LinkedHashSet<>(simulationSubcircuitInstances.size());
-    for (SubcircuitSimulation subcircuitSimulation : simulationSubcircuitInstances.keySet())
+    ArrayList<SubcircuitInstanceSimulationSimulationData> result = new ArrayList<>();
+    for (Map.Entry<SubcircuitSimulation, SubcircuitInstance> entry : simulationSubcircuitInstances.entrySet())
     {
-      result.add(subcircuitSimulation.getId());
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
+      SubcircuitInstance subcircuitInstance = entry.getValue();
+      result.add(new SubcircuitInstanceSimulationSimulationData(subcircuitSimulation.getId(),
+                                                                subcircuitInstance.getSubcircuitInstanceSimulation().getId()));
     }
     return result;
   }
 
-  protected List<Long> saveSubcircuitInstanceSimulationsIDs()
-  {
-    ArrayList<Long> result = new ArrayList<>();
-    for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
-    {
-      SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
-      result.add(subcircuitInstanceSimulation.getId());
-    }
-    return result;
-  }
-
-  public SubcircuitSimulation getSimulationSubcircuitInstance(long simulationId)
+  public SubcircuitSimulation getContainingSubcircuitSimulation(long simulationId)
   {
     for (SubcircuitSimulation subcircuitInstanceSimulation : simulationSubcircuitInstances.keySet())
     {
+      if (subcircuitInstanceSimulation.getId() == simulationId)
+      {
+        return subcircuitInstanceSimulation;
+      }
+    }
+    return null;
+  }
+
+  public SubcircuitInstanceSimulation getInstanceSubcircuitSimulation(long simulationId)
+  {
+    for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
+    {
+      SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
       if (subcircuitInstanceSimulation.getId() == simulationId)
       {
         return subcircuitInstanceSimulation;

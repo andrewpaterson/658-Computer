@@ -4,9 +4,13 @@ import net.logicim.data.simulation.SubcircuitSimulationData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Described;
 import net.logicim.domain.common.Timeline;
 
+import javax.management.Descriptor;
+
 public abstract class SubcircuitSimulation
+    implements Described
 {
   public static long nextId = 1L;
 

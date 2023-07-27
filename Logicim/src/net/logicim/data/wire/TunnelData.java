@@ -45,16 +45,15 @@ public class TunnelData
                                         CircuitLoaders circuitLoaders,
                                         TunnelView tunnelView)
   {
-    long[] traceIDs = simulationTraces.get(containingSubcircuitSimulation.getId());
-    if (traceIDs == null)
+    long[] traces = simulationTraces.get(containingSubcircuitSimulation.getId());
+    if (traces == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", containingSubcircuitSimulation.getDescription());
     }
 
     tunnelView.wireConnect(containingSubcircuitSimulation,
                            circuitLoaders.getTraceLoader(),
-                           traceIDs
-    );
+                           traces);
   }
 
   @Override

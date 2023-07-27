@@ -12,7 +12,6 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.List;
-import java.util.Set;
 
 public class SubcircuitInstanceData
     extends ComponentData<SubcircuitInstanceView>
@@ -22,8 +21,7 @@ public class SubcircuitInstanceData
   public int width;
   public int height;
 
-  public Set<Long> simulationSubcircuitInstances;
-  public List<Long> subcircuitInstanceSimulations;
+  public List<SubcircuitInstanceSimulationSimulationData> subcircuitInstanceSimulations;
 
   public SubcircuitInstanceData()
   {
@@ -36,8 +34,7 @@ public class SubcircuitInstanceData
                                 long id,
                                 boolean enabled,
                                 boolean selected,
-                                Set<Long> simulationSubcircuitInstances,
-                                List<Long> subcircuitInstanceSimulations,
+                                List<SubcircuitInstanceSimulationSimulationData> subcircuitInstanceSimulations,
                                 List<SimulationMultiPortData> ports,
                                 String comment,
                                 int width,
@@ -51,7 +48,6 @@ public class SubcircuitInstanceData
           enabled,
           selected);
     this.subcircuitTypeName = subcircuitTypeName;
-    this.simulationSubcircuitInstances = simulationSubcircuitInstances;
     this.subcircuitInstanceSimulations = subcircuitInstanceSimulations;
     this.comment = comment;
     this.width = width;
@@ -92,7 +88,15 @@ public class SubcircuitInstanceData
   @Override
   public boolean appliesToSimulation(long id)
   {
-    return simulationSubcircuitInstances.contains(id);
+    //Might want to optimise this a bit.
+    for (SubcircuitInstanceSimulationSimulationData subcircuitInstanceSimulation : subcircuitInstanceSimulations)
+    {
+      if (subcircuitInstanceSimulation.containingSimulation == id)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

@@ -500,9 +500,9 @@ public class SubcircuitEditor
     return "Editor" + " " + getTypeName();
   }
 
-  public SubcircuitInstanceSimulation getInnerSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  public List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
-    return null;
+    return new ArrayList<>();
   }
 
   public void validateSimulations()

@@ -1363,13 +1363,16 @@ public class SubcircuitView
     List<SubcircuitInstanceView> subcircuitInstanceViews = getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      SubcircuitInstanceSimulation innerSubcircuitSimulation = subcircuitInstanceView.getInnerSubcircuitSimulation(existingCircuitSimulation);
-      SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createSubcircuitInstance(newSimulation);
-      newSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+      List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = subcircuitInstanceView.getInnerSubcircuitSimulations(existingCircuitSimulation);
+      for (SubcircuitInstanceSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
+      {
+        SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createSubcircuitInstance(newSimulation);
+        newSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
 
-      SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
+        SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
 
-      instanceSubcircuitView.recurseAddNewSimulation(innerSubcircuitSimulation, newSimulation, traceMap);
+        instanceSubcircuitView.recurseAddNewSimulation(innerSubcircuitSimulation, newSimulation, traceMap);
+      }
     }
   }
 

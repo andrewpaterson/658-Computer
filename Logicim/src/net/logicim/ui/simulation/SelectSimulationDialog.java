@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.awt.GridBagConstraints.BOTH;
-import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 
@@ -27,7 +26,7 @@ public class SelectSimulationDialog
 
   public SelectSimulationDialog(Frame owner, Logicim editor)
   {
-        super(owner, "Select Simulation", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT));
+    super(owner, "Select Simulation", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT));
     this.editor = editor;
   }
 

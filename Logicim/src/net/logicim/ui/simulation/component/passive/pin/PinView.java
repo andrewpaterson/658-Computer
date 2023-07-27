@@ -184,7 +184,7 @@ public class PinView
     return new PinData(position,
                        rotation,
                        getName(),
-                       saveSimulationPassiveIDs(),
+                       saveSimulationPassives(),
                        savePorts(),
                        id,
                        enabled,

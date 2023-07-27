@@ -22,7 +22,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
   public PassiveData(Int2D position,
                      Rotation rotation,
                      String name,
-                     Set<Long> simulationIDs,
+                     Set<Long> simulations,
                      List<SimulationMultiPortData> ports,
                      long id,
                      boolean enabled,
@@ -35,7 +35,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
           id,
           enabled,
           selected);
-    this.simulation = simulationIDs;
+    this.simulation = simulations;
   }
 
   @Override

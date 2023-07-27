@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 
 import static java.awt.GridBagConstraints.BOTH;
-import static net.logicim.ui.util.ButtonUtil.DEFAULT_WIDTH;
 import static net.logicim.ui.util.ButtonUtil.buildButtons;
 import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 

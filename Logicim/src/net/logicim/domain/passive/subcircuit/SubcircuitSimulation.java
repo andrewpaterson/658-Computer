@@ -7,8 +7,6 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.Timeline;
 
-import javax.management.Descriptor;
-
 public abstract class SubcircuitSimulation
     implements Described
 {

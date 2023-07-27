@@ -2,11 +2,13 @@ package net.logicim.domain.common.port;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Described;
 import net.logicim.domain.common.wire.Trace;
 
 import java.util.Set;
 
 public abstract class Port
+    implements Described
 {
   protected PortType type;
   protected String name;

@@ -4,12 +4,14 @@ import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Described;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.Collection;
 
 public class CircuitSimulation
+    implements Described
 {
   public static long nextId = 1L;
 

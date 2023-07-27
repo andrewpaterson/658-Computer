@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Described;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
@@ -29,7 +30,8 @@ import net.logicim.ui.simulation.selection.Selection;
 import java.util.*;
 
 public class SubcircuitEditor
-    implements CircuitInstanceView
+    implements CircuitInstanceView,
+               Described
 {
   public static long nextId = 1L;
 

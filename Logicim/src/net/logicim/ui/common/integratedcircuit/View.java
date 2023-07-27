@@ -1,6 +1,7 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.logicim.common.type.Int2D;
+import net.logicim.domain.common.Described;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class View
+    implements Described
 {
   public static long nextId = 1L;
 

@@ -3,11 +3,13 @@ package net.logicim.domain.common.port;
 import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Component;
+import net.logicim.domain.common.Described;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PortHolder
+    implements Described
 {
   protected List<Port> ports;
 

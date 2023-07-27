@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Circuit
+    implements Described
 {
   protected List<IntegratedCircuit<? extends Pins, ? extends State>> integratedCircuits;
   protected List<Passive> passives;
@@ -45,7 +46,7 @@ public class Circuit
     passives.add(passive);
   }
 
-  protected String getDescription()
+  public String getDescription()
   {
     return "?";
   }

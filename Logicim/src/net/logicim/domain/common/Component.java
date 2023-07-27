@@ -7,6 +7,7 @@ import net.logicim.domain.common.port.Port;
 import java.util.List;
 
 public interface Component
+    extends Described
 {
   List<Port> getPorts();
 

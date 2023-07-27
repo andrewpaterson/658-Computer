@@ -1,7 +1,5 @@
 package net.logicim.ui.components.typeeditor;
 
-import net.logicim.ui.property.PropertiesPanel;
-
 import javax.swing.*;
 
 public class BooleanPropertyEditor

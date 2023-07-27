@@ -12,6 +12,7 @@ public class CircuitData
   public List<SubcircuitEditorData> subcircuits;
   public List<CircuitSimulationData> circuitSimulations;
   public List<SubcircuitSimulationData> subcircuitSimulations;
+  public List<LastSubcircuitSimulationData> lastSubcircuitSimulationDatas;
   public long currentSubcircuit;
   public long currentSubcircuitSimulation;
 
@@ -22,12 +23,14 @@ public class CircuitData
   public CircuitData(List<SubcircuitEditorData> subcircuits,
                      List<CircuitSimulationData> circuitSimulations,
                      List<SubcircuitSimulationData> subcircuitSimulations,
+                     List<LastSubcircuitSimulationData> lastSubcircuitSimulationDatas,
                      long currentSubcircuit,
                      long currentSubcircuitSimulation)
   {
     this.subcircuits = subcircuits;
     this.circuitSimulations = circuitSimulations;
     this.subcircuitSimulations = subcircuitSimulations;
+    this.lastSubcircuitSimulationDatas = lastSubcircuitSimulationDatas;
     this.currentSubcircuit = currentSubcircuit;
     this.currentSubcircuitSimulation = currentSubcircuitSimulation;
   }

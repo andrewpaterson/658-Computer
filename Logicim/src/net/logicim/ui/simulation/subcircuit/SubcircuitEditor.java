@@ -496,6 +496,11 @@ public class SubcircuitEditor
     return subcircuitView.getSimulations().getSubcircuitSimulations();
   }
 
+  public Collection<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
+  {
+    return subcircuitView.getSimulations().getSubcircuitSimulations(circuitSimulation);
+  }
+
   @Override
   public String getDescription()
   {

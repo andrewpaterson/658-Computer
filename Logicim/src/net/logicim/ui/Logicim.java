@@ -1199,7 +1199,7 @@ public class Logicim
   public void newSimulationAction(String simulationName)
   {
     SubcircuitTopSimulation topSimulation = circuitEditor.addNewSimulation(simulationName);
-    circuitEditor.setCurrentCircuitSimulation(topSimulation);
+    circuitEditor.setLastSubcircuitSimulation(topSimulation);
   }
 
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)
@@ -1394,7 +1394,7 @@ public class Logicim
 
   public void setCurrentSimulation(SubcircuitSimulation subcircuitSimulation)
   {
-    this.circuitEditor.setCurrentCircuitSimulation(subcircuitSimulation);
+    this.circuitEditor.setLastSubcircuitSimulation(subcircuitSimulation);
   }
 
   public void addAction(String name, EditorAction action)

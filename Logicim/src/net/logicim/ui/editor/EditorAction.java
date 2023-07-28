@@ -17,8 +17,6 @@ public abstract class EditorAction
     this.editor = editor;
   }
 
-  public abstract void executeEditorAction();
-
   public void setName(String name)
   {
     this.name = name;
@@ -29,11 +27,13 @@ public abstract class EditorAction
     return name;
   }
 
-  public abstract boolean isAvailable();
-
   public Logicim getEditor()
   {
     return editor;
   }
+
+  public abstract void executeEditorAction();
+
+  public abstract boolean isAvailable();
 }
 

@@ -18,20 +18,10 @@ public class EditPropertiesAction
     this.simulatorPanel = simulatorPanel;
   }
 
-  protected StaticView<?> getComponent()
-  {
-    StaticView<?> componentView = editor.getHoverComponentView();
-    if (componentView == null)
-    {
-      componentView = editor.getCircuitEditor().getCurrentSubcircuitEditor().getSingleSelectionStaticView();
-    }
-    return componentView;
-  }
-
   @Override
   public void executeEditorAction()
   {
-    StaticView<?> componentView = getComponent();
+    StaticView<?> componentView = editor.getComponent();
     if (componentView != null)
     {
       new EditPropertiesDialogHelper().showPropertyEditorDialog(simulatorPanel.getFrame(),
@@ -43,7 +33,7 @@ public class EditPropertiesAction
   @Override
   public boolean isAvailable()
   {
-    StaticView<?> componentView = getComponent();
+    StaticView<?> componentView = editor.getComponent();
     return componentView != null;
   }
 }

@@ -210,9 +210,9 @@ public class SimulatorPanel
     logicim.addEditorEvent(new MousePressedEvent(x, y, button, clickCount));
   }
 
-  public void mouseReleased(int x, int y, int button)
+  public void mouseReleased(int x, int y, int button, int clickCount)
   {
-    logicim.addEditorEvent(new MouseReleasedEvent(x, y, button));
+    logicim.addEditorEvent(new MouseReleasedEvent(x, y, button, clickCount));
   }
 
   public void mouseMoved(int x, int y)
@@ -359,7 +359,7 @@ public class SimulatorPanel
   @Override
   public void mouseReleased(MouseEvent e)
   {
-    mouseReleased(e.getX(), e.getY(), e.getButton());
+    mouseReleased(e.getX(), e.getY(), e.getButton(), e.getClickCount());
   }
 
   @Override

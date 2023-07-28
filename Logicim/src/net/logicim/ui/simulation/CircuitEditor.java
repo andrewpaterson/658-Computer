@@ -86,11 +86,6 @@ public class CircuitEditor
     }
   }
 
-  public SubcircuitSimulation getCurrentSubcircuitSimulation()
-  {
-    return currentSubcircuitSimulation;
-  }
-
   public Circuit getCircuit()
   {
     SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
@@ -749,11 +744,16 @@ public class CircuitEditor
 
   protected String gotoSubcircuit(int index)
   {
-    SubcircuitEditor lastSubcircuitEditor = this.currentSubcircuitEditor;
     SubcircuitSimulation lastSubcircuitSimulation = this.currentSubcircuitSimulation;
 
     SubcircuitEditor newSubcircuitEditor = subcircuitEditors.get(index);
     setCurrentSubcircuitSimulation(newSubcircuitEditor, lastSubcircuitSimulation);
+    return setCurrentSubcircuitEditor(newSubcircuitEditor);
+  }
+
+  public String gotoSubcircuit(SubcircuitEditor newSubcircuitEditor, SubcircuitInstanceSimulation instanceSimulation)
+  {
+    setLastSubcircuitSimulation(newSubcircuitEditor, instanceSimulation);
     return setCurrentSubcircuitEditor(newSubcircuitEditor);
   }
 

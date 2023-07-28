@@ -1,6 +1,9 @@
 package net.logicim.ui.input.action;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.editor.EditorAction;
 import net.logicim.ui.input.button.ButtonInput;
 
 import java.util.ArrayList;
@@ -11,12 +14,14 @@ import java.util.Map;
 public class InputActions
 {
   protected List<KeyInput> keyInputs;
-  protected List<ButtonInput> buttonInputs;
+  protected List<ButtonInput> mouseButtonInputs;
+  protected Map<Class<? extends ComponentView<?>>, EditorAction> componentDoubleClickInputs;
 
   public InputActions()
   {
     keyInputs = new ArrayList<>();
-    buttonInputs = new ArrayList<>();
+    mouseButtonInputs = new ArrayList<>();
+    componentDoubleClickInputs = new LinkedHashMap<>();
   }
 
   public void addKeyInputs(KeyInput keyInput)
@@ -84,14 +89,28 @@ public class InputActions
 
   public void addButtonInput(ButtonInput buttonInput)
   {
-    buttonInputs.add(buttonInput);
+    mouseButtonInputs.add(buttonInput);
   }
 
   public void updateButtonsEnabled()
   {
-    for (ButtonInput buttonInput : buttonInputs)
+    for (ButtonInput buttonInput : mouseButtonInputs)
     {
       buttonInput.enable();
+    }
+  }
+
+  public void addComponentDoubleClickInput(Class<? extends ComponentView<?>> componentViewClass, EditorAction action)
+  {
+    componentDoubleClickInputs.put(componentViewClass, action);
+  }
+
+  public void componentViewDoubleClicked(StaticView<?> staticView)
+  {
+    EditorAction action = componentDoubleClickInputs.get(staticView.getClass());
+    if (action != null)
+    {
+      action.executeEditorAction();
     }
   }
 }

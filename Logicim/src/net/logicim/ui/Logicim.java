@@ -13,12 +13,15 @@ import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
@@ -31,6 +34,7 @@ import net.logicim.ui.editor.SimulationSpeed;
 import net.logicim.ui.editor.SubcircuitViewParameters;
 import net.logicim.ui.info.InfoLabel;
 import net.logicim.ui.info.InfoLabels;
+import net.logicim.ui.input.ComponentDoubleClickInputsFactory;
 import net.logicim.ui.input.EditorActionsFactory;
 import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.action.InputActions;
@@ -95,6 +99,7 @@ public class Logicim
   protected ConnectionView hoverConnectionView;
 
   protected Edit edit;
+  protected boolean editDoneWaiting;
 
   protected UndoStack undoStack;
 
@@ -103,6 +108,7 @@ public class Logicim
   protected Rotation creationRotation;
 
   protected ClipboardData clipboard;
+  protected long doubleClickInterval;
 
   protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
   protected Map<String, SubcircuitViewParameters> subcircuitViewParameters;
@@ -133,6 +139,8 @@ public class Logicim
 
     this.undoStack = new UndoStack();
     this.clipboard = null;
+    this.editDoneWaiting = false;
+    this.doubleClickInterval = calculateDoubleClickInterval();
 
     this.subcircuitBookmarks = new LinkedHashMap<>();
     this.subcircuitViewParameters = new LinkedHashMap<>();
@@ -144,6 +152,16 @@ public class Logicim
     addActions(simulatorPanel);
 
     pushUndo();
+  }
+
+  protected long calculateDoubleClickInterval()
+  {
+    long l = ((Integer) Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval"));
+    if (l == 0)
+    {
+      l = 500;
+    }
+    return l;
   }
 
   public void windowClosing()
@@ -180,36 +198,121 @@ public class Logicim
   {
     mouseButtons.set(button);
 
-    if (clickCount == 1 || clickCount == 2)
+    if (clickCount == 1)
     {
       if (button == BUTTON1)
       {
-        if (edit != null)
+        if ((edit != null))
         {
-          edit.done(viewport.transformScreenToGridX(x),
-                    viewport.transformScreenToGridY(y));
-          edit = null;
-          calculateHighlightedPort();
+          editDone(x, y);
         }
         else
         {
-          StatefulEdit edit;
+          if (clickCount == 1)
+          {
+            StatefulEdit edit = null;
+            if (isInSelectedComponent(x, y))
+            {
+            }
+            else if ((hoverConnectionView != null))
+            {
+              edit = new StartEditInPort(keyboardButtons, getSubcircuitSimulation());
+            }
+            else
+            {
+              edit = new SelectionEdit(keyboardButtons);
+            }
+
+            if (edit != null)
+            {
+              this.edit = createEdit(edit, toFloatingGridPosition(x, y));
+            }
+          }
+        }
+      }
+    }
+    else if (clickCount == 2)
+    {
+      discardWaitingEdit();
+    }
+  }
+
+  protected void discardEdit()
+  {
+    if (edit != null)
+    {
+      edit.discard();
+      edit = null;
+    }
+  }
+
+  public void mouseReleased(int x, int y, int button, int clickCount)
+  {
+    mouseButtons.unset(button);
+
+    if (button == BUTTON1)
+    {
+      if (edit != null)
+      {
+        waitForClick(x, y);
+      }
+      else
+      {
+        if (clickCount == 1)
+        {
+          StatefulEdit edit = null;
           if (isInSelectedComponent(x, y))
           {
             edit = new StartEditInComponent(keyboardButtons);
           }
           else if ((hoverConnectionView != null))
           {
-            edit = new StartEditInPort(keyboardButtons, getSubcircuitSimulation());
           }
           else
           {
-            edit = new SelectionEdit(keyboardButtons);
           }
-          this.edit = createEdit(edit, toFloatingGridPosition(x, y));
+          if (edit != null)
+          {
+            this.edit = createEdit(edit, toFloatingGridPosition(x, y));
+          }
+        }
+        else if (clickCount == 2)
+        {
+          discardWaitingEdit();
+
+          StaticView<?> component = getComponent();
+          inputActions.componentViewDoubleClicked(component);
         }
       }
     }
+  }
+
+  protected void discardWaitingEdit()
+  {
+    if (editDoneWaiting)
+    {
+      discardEdit();
+      editDoneWaiting = false;
+    }
+  }
+
+  protected void waitForClick(int x, int y)
+  {
+    editDoneWaiting = true;
+
+    Timer timer = new Timer();
+    timer.schedule(new TimerTask()
+    {
+      @Override
+      public void run()
+      {
+        if (editDoneWaiting)
+        {
+          editDone(x, y);
+          editDoneWaiting = false;
+        }
+      }
+    }, doubleClickInterval + doubleClickInterval >> 2);
   }
 
   protected Edit createEdit(StatefulEdit edit, Float2D start)
@@ -238,24 +341,25 @@ public class Logicim
                      viewport.transformScreenToGridY(y));
   }
 
-  public void mouseReleased(int x, int y, int button)
+  protected void editDone(int x, int y)
   {
-    mouseButtons.unset(button);
-
-    if (button == BUTTON1)
+    if (edit != null)
     {
-      if (edit != null)
-      {
-        edit.done(viewport.transformScreenToGridX(x),
-                  viewport.transformScreenToGridY(y));
-        edit = null;
-        calculateHighlightedPort();
-      }
+      edit.done(viewport.transformScreenToGridX(x),
+                viewport.transformScreenToGridY(y));
+      edit = null;
     }
+    calculateHighlightedPort();
   }
 
   public void mouseMoved(int x, int y)
   {
+    if (editDoneWaiting)
+    {
+      editDone(x, y);
+      editDoneWaiting = false;
+    }
+
     mousePosition.set(x, y);
 
     Int2D moved = mouseMotion.moved(x, y);
@@ -332,11 +436,7 @@ public class Logicim
 
     if (position != null)
     {
-      if (edit != null)
-      {
-        edit.discard();
-        edit = null;
-      }
+      discardEdit();
 
       circuitEditor.getCurrentSelection().clearSelection();
       StaticView<?> staticView = viewFactory.create(circuitEditor, toIntegerGridPosition(position.x, position.y), creationRotation);
@@ -359,11 +459,7 @@ public class Logicim
 
     if (position != null)
     {
-      if (edit != null)
-      {
-        edit.discard();
-        edit = null;
-      }
+      discardEdit();
 
       circuitEditor.getCurrentSelection().clearSelection();
       SubcircuitView instanceSubcircuitView = subcircuitEditor.getCircuitSubcircuitView();
@@ -553,6 +649,7 @@ public class Logicim
   {
     EditorActionsFactory.create(this, simulatorPanel);
     KeyInputsFactory.create(this);
+    ComponentDoubleClickInputsFactory.create(this);
     inputActions.validate();
   }
 
@@ -564,6 +661,11 @@ public class Logicim
   public void addButtonInput(ButtonInput buttonInput)
   {
     inputActions.addButtonInput(buttonInput);
+  }
+
+  public void addComponentDoubleClickedInput(Class<? extends ComponentView<?>> componentViewClass, EditorAction action)
+  {
+    inputActions.addComponentDoubleClickInput(componentViewClass, action);
   }
 
   public void keyPressed(int keyCode, boolean controlDown, boolean altDown, boolean shiftDown)
@@ -667,10 +769,7 @@ public class Logicim
 
     edit = createEdit(moveComponents, toFloatingGridPosition(position.x, position.y));
     edit.rotate(right);
-    edit.done(viewport.transformScreenToGridX(position.x),
-              viewport.transformScreenToGridY(position.y));
-    edit = null;
-    calculateHighlightedPort();
+    editDone(position.x, position.y);
   }
 
   protected Int2D getMousePositionOnGrid()
@@ -714,11 +813,7 @@ public class Logicim
 
   public void stopSimulatorEdit()
   {
-    if (edit != null)
-    {
-      edit.discard();
-      edit = null;
-    }
+    discardEdit();
     clearSelection();
     calculateHighlightedPort();
   }
@@ -808,7 +903,7 @@ public class Logicim
 
   public void resetCurrentSimulation()
   {
-    SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = circuitEditor.getSubcircuitSimulation();
     CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
     circuitSimulation.reset(circuitSimulation);
   }
@@ -991,6 +1086,16 @@ public class Logicim
   public StaticView<?> getHoverComponentView()
   {
     return hoverComponentView;
+  }
+
+  public StaticView<?> getComponent()
+  {
+    StaticView<?> componentView = getHoverComponentView();
+    if (componentView == null)
+    {
+      componentView = getCircuitEditor().getCurrentSubcircuitEditor().getSingleSelectionStaticView();
+    }
+    return componentView;
   }
 
   public CircuitEditor getCircuitEditor()
@@ -1250,11 +1355,7 @@ public class Logicim
     SubcircuitEditor subcircuitEditor = subcircuitBookmarks.get(bookmarkIndex);
     if (subcircuitEditor != null)
     {
-      if (edit != null)
-      {
-        edit.discard();
-        edit = null;
-      }
+      discardEdit();
 
       String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor);
       setViewportParameters(subcircuitTypeName);
@@ -1266,11 +1367,7 @@ public class Logicim
   {
     if (canGotoNextSubcircuit())
     {
-      if (edit != null)
-      {
-        edit.discard();
-        edit = null;
-      }
+      discardEdit();
 
       String subcircuitTypeName = circuitEditor.gotoPreviousSubcircuit();
       setViewportParameters(subcircuitTypeName);
@@ -1282,11 +1379,7 @@ public class Logicim
   {
     if (canGotoNextSubcircuit())
     {
-      if (edit != null)
-      {
-        edit.discard();
-        edit = null;
-      }
+      discardEdit();
 
       String subcircuitTypeName = circuitEditor.gotoNextSubcircuit();
       setViewportParameters(subcircuitTypeName);
@@ -1315,6 +1408,27 @@ public class Logicim
   {
     updateHighlighted();
     throw new SimulatorException();
+  }
+
+  public void enterSubcircuit()
+  {
+    StaticView<?> staticView = getComponent();
+    if (staticView != null)
+    {
+      if (staticView instanceof SubcircuitInstanceView)
+      {
+        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
+        SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(circuitEditor.getSubcircuitSimulation());
+        SubcircuitInstanceSimulation instanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+        SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
+        discardEdit();
+
+        SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(instanceSubcircuitView.getTypeName());
+        String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor, instanceSimulation);
+        setViewportParameters(subcircuitTypeName);
+        updateHighlighted();
+      }
+    }
   }
 
   public List<SubcircuitEditor> getSubcircuitEditors()

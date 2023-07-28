@@ -80,6 +80,7 @@ public class EditorActionsFactory
     editor.addAction(NextSubcircuitAction.NAME, new NextSubcircuitAction(editor));
     editor.addAction(LeaveSubcircuitAction.NAME, new LeaveSubcircuitAction(editor));
     editor.addAction(ReenterSubcircuitAction.NAME, new ReenterSubcircuitAction(editor));
+    editor.addAction(EnterSubcircuitAction.NAME, new EnterSubcircuitAction(editor));
     editor.addAction(EditSubcircuitAction.NAME, new EditSubcircuitAction(editor, panel));
 
     for (int i = 1; i < 10; i++)

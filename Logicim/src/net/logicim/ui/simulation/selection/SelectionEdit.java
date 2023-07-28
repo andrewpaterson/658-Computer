@@ -173,7 +173,6 @@ public class SelectionEdit
   @Override
   public void discard(Edit edit)
   {
-    throw new SimulatorException();
   }
 
   @Override

@@ -2,6 +2,7 @@ package net.logicim.ui.info;
 
 import net.logicim.common.util.StringUtil;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.Logicim;
 
 public class SimulationInfo
@@ -15,7 +16,13 @@ public class SimulationInfo
   @Override
   public String getInfo()
   {
-    CircuitSimulation currentSimulation = editor.getSubcircuitSimulation().getCircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = editor.getSubcircuitSimulation();
+    CircuitSimulation currentSimulation = null;
+    if (subcircuitSimulation != null)
+    {
+      currentSimulation = subcircuitSimulation.getCircuitSimulation();
+    }
+
     String description;
     if (currentSimulation != null)
     {

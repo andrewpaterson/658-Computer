@@ -16,7 +16,6 @@ public class EditorData
   public Rotation creationRotation;
   public List<BookmarkData> subcircuitBookmarks;
   public List<SubcircuitParameterData> subcircuitParameters;
-  public String currentSubcircuit;
   public List<DefaultComponentPropertiesData> defaultProperties;
   public boolean drawPointGrid;
 
@@ -31,7 +30,6 @@ public class EditorData
                     Rotation creationRotation,
                     List<BookmarkData> subcircuitBookmarks,
                     List<SubcircuitParameterData> subcircuitParameters,
-                    String currentSubcircuit,
                     List<DefaultComponentPropertiesData> defaultProperties,
                     boolean drawPointGrid)
   {
@@ -42,7 +40,6 @@ public class EditorData
     this.creationRotation = creationRotation;
     this.subcircuitBookmarks = subcircuitBookmarks;
     this.subcircuitParameters = subcircuitParameters;
-    this.currentSubcircuit = currentSubcircuit;
     this.defaultProperties = defaultProperties;
     this.drawPointGrid = drawPointGrid;
   }

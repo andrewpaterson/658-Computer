@@ -8,13 +8,13 @@ import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubcircuitList
+public class SubcircuitEditorList
 {
   protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
   protected SubcircuitListChangedNotifier changedNotifier;
 
-  public SubcircuitList()
+  public SubcircuitEditorList()
   {
     subcircuitEditors = new ArrayList<>();
     currentSubcircuitEditor = null;

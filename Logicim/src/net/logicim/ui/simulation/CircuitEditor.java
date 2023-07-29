@@ -28,11 +28,13 @@ import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
+import net.logicim.ui.simulation.navigation.NavigationStack;
+import net.logicim.ui.simulation.navigation.SubcircuitSimulationPair;
 import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.ui.subcircuit.SubcircuitList;
+import net.logicim.ui.subcircuit.SubcircuitEditorList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,23 +43,27 @@ import java.util.*;
 
 public class CircuitEditor
 {
-  protected SubcircuitList subcircuitEditors;
+  protected SubcircuitEditorList subcircuitEditors;
 
   protected SubcircuitSimulation currentSubcircuitSimulation;
   protected Map<SubcircuitEditor, SubcircuitSimulation> lastSubcircuitEditorSimulation;
 
-  public CircuitEditor(SubcircuitList subcircuitList)
+  protected NavigationStack navigationStack;
+
+  public CircuitEditor(SubcircuitEditorList subcircuitEditorList)
   {
-    subcircuitEditors = subcircuitList;
-    subcircuitList.clear(true);
+    subcircuitEditors = subcircuitEditorList;
+    subcircuitEditorList.clear(true);
 
     currentSubcircuitSimulation = null;
     lastSubcircuitEditorSimulation = new LinkedHashMap<>();
+
+    navigationStack = new NavigationStack();
   }
 
-  public CircuitEditor(String mainSubcircuitTypeName, SubcircuitList subcircuitList)
+  public CircuitEditor(String mainSubcircuitTypeName, SubcircuitEditorList subcircuitEditorList)
   {
-    this(subcircuitList);
+    this(subcircuitEditorList);
     addNewSubcircuit(mainSubcircuitTypeName);
   }
 
@@ -653,7 +659,9 @@ public class CircuitEditor
 
   public String setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
-    return subcircuitEditors.setSubcircuitEditor(subcircuitEditor, true);
+    String editor = subcircuitEditors.setSubcircuitEditor(subcircuitEditor, true);
+    navigationStack.push(new SubcircuitSimulationPair(subcircuitEditor, currentSubcircuitSimulation));
+    return editor;
   }
 
   private void setCurrentSubcircuitSimulation(SubcircuitEditor newSubcircuitEditor, SubcircuitSimulation lastSubcircuitSimulation)
@@ -731,8 +739,8 @@ public class CircuitEditor
     SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
     subcircuitEditors.add(subcircuitEditor, true);
 
-    setCurrentSubcircuitEditor(subcircuitEditor);
     setCurrentSubcircuitSimulation(subcircuitEditor, null);
+    setCurrentSubcircuitEditor(subcircuitEditor);
   }
 
   public void circuitUpdated()
@@ -780,6 +788,28 @@ public class CircuitEditor
   public String getSubcircuitNameError(String subcircuitName)
   {
     return subcircuitEditors.getSubcircuitNameError(subcircuitName);
+  }
+
+  public boolean navigateBackwardSubcircuit()
+  {
+    SubcircuitSimulationPair pair = navigationStack.pop();
+    if (pair != null)
+    {
+      setSubcircuitSimulation(pair.subcircuitEditor, pair.subcircuitSimulation);
+      subcircuitEditors.setSubcircuitEditor(pair.subcircuitEditor, true);
+    }
+    return false;
+  }
+
+  public boolean navigateForwardSubcircuit()
+  {
+    SubcircuitSimulationPair pair = navigationStack.unpop();
+    if (pair != null)
+    {
+      setSubcircuitSimulation(pair.subcircuitEditor, pair.subcircuitSimulation);
+      subcircuitEditors.setSubcircuitEditor(pair.subcircuitEditor, true);
+    }
+    return false;
   }
 }
 

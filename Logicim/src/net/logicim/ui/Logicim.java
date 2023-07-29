@@ -61,7 +61,7 @@ import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
-import net.logicim.ui.subcircuit.SubcircuitList;
+import net.logicim.ui.subcircuit.SubcircuitEditorList;
 import net.logicim.ui.subcircuit.SubcircuitListChangedNotifier;
 
 import java.awt.*;
@@ -95,7 +95,7 @@ public class Logicim
   protected KeyboardButtons keyboardButtons;
 
   protected CircuitEditor circuitEditor;
-  protected SubcircuitList subcircuits;
+  protected SubcircuitEditorList subcircuits;
 
   protected TraceView hoverTraceView;
   protected StaticView<?> hoverComponentView;
@@ -120,7 +120,7 @@ public class Logicim
 
   public Logicim(SimulatorPanel simulatorPanel)
   {
-    this.subcircuits = new SubcircuitList();
+    this.subcircuits = new SubcircuitEditorList();
     this.inputEvents = new ConcurrentLinkedDeque<>();
 
     this.viewport = new Viewport(this);
@@ -971,7 +971,6 @@ public class Logicim
                           creationRotation,
                           subcircuitBookmarks,
                           subcircuitParameters,
-                          currentSubcircuit,
                           defaultProperties,
                           drawPointGrid);
   }
@@ -1032,9 +1031,7 @@ public class Logicim
     subcircuitViewParameters = loadSubcircuitViewParameters(editorData);
     subcircuitBookmarks = loadSubcircuitBookmarks(editorData);
 
-    SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(editorData.currentSubcircuit);
-    String subcircuitTypeName = circuitEditor.setCurrentSubcircuitEditor(subcircuitEditor);
-    setViewportParameters(subcircuitTypeName);
+    setViewportParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
 
     drawPointGrid = editorData.drawPointGrid;
 
@@ -1409,14 +1406,18 @@ public class Logicim
 
   public void navigateBackwardSubcircuit()
   {
-    updateHighlighted();
-    throw new SimulatorException();
+    if (circuitEditor.navigateBackwardSubcircuit())
+    {
+      updateHighlighted();
+    }
   }
 
   public void navigateForwardSubcircuit()
   {
-    updateHighlighted();
-    throw new SimulatorException();
+    if (circuitEditor.navigateForwardSubcircuit())
+    {
+      updateHighlighted();
+    }
   }
 
   public void enterSubcircuit()
@@ -1611,7 +1612,7 @@ public class Logicim
     return getCurrentSelection().size() > 0;
   }
 
-  public SubcircuitList getSubcircuitList()
+  public SubcircuitEditorList getSubcircuitList()
   {
     return subcircuits;
   }

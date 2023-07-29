@@ -107,10 +107,13 @@ public class InputActions
 
   public void componentViewDoubleClicked(StaticView<?> staticView)
   {
-    EditorAction action = componentDoubleClickInputs.get(staticView.getClass());
-    if (action != null)
+    if (staticView != null)
     {
-      action.executeEditorAction();
+      EditorAction action = componentDoubleClickInputs.get(staticView.getClass());
+      if (action != null)
+      {
+        action.executeEditorAction();
+      }
     }
   }
 }

@@ -7,23 +7,23 @@ import javax.swing.*;
 public class SubcircuitListModel
     extends AbstractListModel<SubcircuitEditor>
 {
-  protected SubcircuitList subcircuitList;
+  protected SubcircuitEditorList subcircuitEditorList;
 
-  public SubcircuitListModel(SubcircuitList subcircuitList)
+  public SubcircuitListModel(SubcircuitEditorList subcircuitEditorList)
   {
-    this.subcircuitList = subcircuitList;
+    this.subcircuitEditorList = subcircuitEditorList;
   }
 
   @Override
   public int getSize()
   {
-    return subcircuitList.size();
+    return subcircuitEditorList.size();
   }
 
   @Override
   public SubcircuitEditor getElementAt(int index)
   {
-    return subcircuitList.get(index);
+    return subcircuitEditorList.get(index);
   }
 
   @Override
@@ -34,8 +34,8 @@ public class SubcircuitListModel
 
   public int getSubcircuitEditorIndex()
   {
-    SubcircuitEditor subcircuitEditor = subcircuitList.getSubcircuitEditor();
-    return subcircuitList.indexOf(subcircuitEditor);
+    SubcircuitEditor subcircuitEditor = subcircuitEditorList.getSubcircuitEditor();
+    return subcircuitEditorList.indexOf(subcircuitEditor);
   }
 }
 

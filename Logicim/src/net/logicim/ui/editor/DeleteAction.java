@@ -23,7 +23,6 @@ public class DeleteAction
       circuitEditor.circuitUpdated();
       editor.pushUndo();
     }
-
     editor.updateHighlighted();
   }
 

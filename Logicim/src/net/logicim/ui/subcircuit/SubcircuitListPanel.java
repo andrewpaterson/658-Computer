@@ -1,7 +1,6 @@
 package net.logicim.ui.subcircuit;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.SimulatorFrame;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
@@ -13,9 +12,9 @@ public class SubcircuitListPanel
     extends JList<SubcircuitEditor>
     implements SubcircuitListChangedNotifier
 {
-  public SubcircuitListPanel(Logicim editor, SubcircuitList subcircuitList, ListSelectionListener simulatorFrame)
+  public SubcircuitListPanel(Logicim editor, SubcircuitEditorList subcircuitEditorList, ListSelectionListener simulatorFrame)
   {
-    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(subcircuitList);
+    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(subcircuitEditorList);
     editor.setSubcircuitListChangedNotifier(this);
     setModel(subcircuitListModel);
     setMinimumSize(new Dimension(0, 0));

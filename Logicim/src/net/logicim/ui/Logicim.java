@@ -61,6 +61,8 @@ import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
+import net.logicim.ui.subcircuit.SubcircuitList;
+import net.logicim.ui.subcircuit.SubcircuitListChangedNotifier;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -93,6 +95,7 @@ public class Logicim
   protected KeyboardButtons keyboardButtons;
 
   protected CircuitEditor circuitEditor;
+  protected SubcircuitList subcircuits;
 
   protected TraceView hoverTraceView;
   protected StaticView<?> hoverComponentView;
@@ -117,6 +120,7 @@ public class Logicim
 
   public Logicim(SimulatorPanel simulatorPanel)
   {
+    this.subcircuits = new SubcircuitList();
     this.inputEvents = new ConcurrentLinkedDeque<>();
 
     this.viewport = new Viewport(this);
@@ -131,7 +135,7 @@ public class Logicim
     this.inputActions = new InputActions();
     this.labels = new InfoLabels();
 
-    this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
+    this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME, subcircuits);
     this.edit = null;
     this.creationRotation = Rotation.West;
 
@@ -1017,7 +1021,7 @@ public class Logicim
 
     clearHover();
 
-    circuitEditor = new CircuitEditor();
+    circuitEditor = new CircuitEditor(subcircuits);
     circuitEditor.load(editorData.circuit);
 
     simulationSpeed.setRunning(editorData.running);
@@ -1398,13 +1402,13 @@ public class Logicim
     subcircuitBookmarks.put(bookmarkIndex, subcircuitEditor);
   }
 
-  public void leaveSubcircuit()
+  public void navigateBackwardSubcircuit()
   {
     updateHighlighted();
     throw new SimulatorException();
   }
 
-  public void reenterSubcircuit()
+  public void navigateForwardSubcircuit()
   {
     updateHighlighted();
     throw new SimulatorException();
@@ -1600,6 +1604,16 @@ public class Logicim
   public boolean canZoomSelection()
   {
     return getCurrentSelection().size() > 0;
+  }
+
+  public SubcircuitList getSubcircuitList()
+  {
+    return subcircuits;
+  }
+
+  public void setSubcircuitListChangedNotifier(SubcircuitListChangedNotifier changedNotifier)
+  {
+    subcircuits.setChangedNotifier(changedNotifier);
   }
 }
 

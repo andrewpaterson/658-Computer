@@ -3,7 +3,6 @@ package net.logicim.ui.simulation;
 import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
-import net.logicim.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.LastSubcircuitSimulationData;
 import net.logicim.data.circuit.SubcircuitEditorData;
@@ -33,29 +32,34 @@ import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
+import net.logicim.ui.subcircuit.SubcircuitList;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
 
 public class CircuitEditor
 {
-  protected List<SubcircuitEditor> subcircuitEditors;
+  protected SubcircuitList subcircuitEditors;
+
   protected SubcircuitEditor currentSubcircuitEditor;
   protected SubcircuitSimulation currentSubcircuitSimulation;
   protected Map<SubcircuitEditor, SubcircuitSimulation> lastSubcircuitEditorSimulation;
 
-  public CircuitEditor()
+  public CircuitEditor(SubcircuitList subcircuitList)
   {
-    subcircuitEditors = new ArrayList<>();
+    subcircuitEditors = subcircuitList;
+    subcircuitList.clear(true);
+
     currentSubcircuitEditor = null;
     currentSubcircuitSimulation = null;
     lastSubcircuitEditorSimulation = new LinkedHashMap<>();
   }
 
-  public CircuitEditor(String mainSubcircuitTypeName)
+  public CircuitEditor(String mainSubcircuitTypeName, SubcircuitList subcircuitList)
   {
-    this();
+    this(subcircuitList);
     addNewSubcircuit(mainSubcircuitTypeName);
   }
 
@@ -197,7 +201,7 @@ public class CircuitEditor
 
   public CircuitData save()
   {
-    SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(subcircuitEditors);
+    SubcircuitEditorOrderer orderer = new SubcircuitEditorOrderer(subcircuitEditors.findAll());
     List<SubcircuitEditor> orderedSubcircuitEditors = orderer.order();
 
     if (orderedSubcircuitEditors != null)
@@ -331,7 +335,7 @@ public class CircuitEditor
     Event.resetNextId();
     View.resetNextId();
 
-    subcircuitEditors = new ArrayList<>();
+    subcircuitEditors.clear(false);
     Map<Long, SubcircuitEditor> subcircuitEditorMap = new HashMap<>();
     Map<SubcircuitEditor, DataViewMap> subcircuitEditorViews = new LinkedHashMap<>();
 
@@ -347,6 +351,15 @@ public class CircuitEditor
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
     setLastSubcircuitSimulation(loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    
+    SwingUtilities.invokeLater(new Runnable()
+    {
+      @Override
+      public void run()
+      {
+        subcircuitEditors.notifyChange();
+      }
+    });
   }
 
   protected void loadLastSubcircuitEditorSimulation(CircuitData circuitData, CircuitLoaders loaders, Map<Long, SubcircuitEditor> subcircuitEditorMap)
@@ -370,7 +383,7 @@ public class CircuitEditor
     for (SubcircuitEditorData subcircuitEditorData : circuitData.subcircuits)
     {
       SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitEditorData.typeName, subcircuitEditorData.id);
-      subcircuitEditors.add(subcircuitEditor);
+      subcircuitEditors.add(subcircuitEditor, false);
       subcircuitEditorMap.put(subcircuitEditor.getId(), subcircuitEditor);
 
       DataViewMap views = subcircuitEditor.loadSubcircuit(subcircuitEditorData.subcircuit, false, false);
@@ -504,7 +517,7 @@ public class CircuitEditor
 
   protected SubcircuitEditor getSubcircuitEditor(long subcircuitId)
   {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors.findAll())
     {
       if (subcircuitEditor.getId() == subcircuitId)
       {
@@ -582,7 +595,7 @@ public class CircuitEditor
 
   public SubcircuitEditor getSubcircuitEditor(String subcircuitTypeName)
   {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors.findAll())
     {
       if (subcircuitEditor.getTypeName().equals(subcircuitTypeName))
       {
@@ -594,7 +607,7 @@ public class CircuitEditor
 
   public List<SubcircuitEditor> getSubcircuitEditors()
   {
-    return new ArrayList<>(subcircuitEditors);
+    return new ArrayList<>(subcircuitEditors.findAll());
   }
 
   public boolean isCurrentSelectionEmpty()
@@ -619,7 +632,7 @@ public class CircuitEditor
 
   public void validate()
   {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors.findAll())
     {
       subcircuitEditor.validate();
     }
@@ -759,34 +772,17 @@ public class CircuitEditor
 
   public void addNewSubcircuit(String subcircuitName)
   {
-    String error = getSubcircuitNameError(subcircuitName);
+    String error = subcircuitEditors.getSubcircuitNameError(subcircuitName);
     if (error != null)
     {
       throw new SimulatorException(error);
     }
 
     SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
-    subcircuitEditors.add(subcircuitEditor);
+    subcircuitEditors.add(subcircuitEditor, true);
 
     currentSubcircuitEditor = subcircuitEditor;
     setCurrentSubcircuitSimulation(subcircuitEditor, null);
-  }
-
-  public String getSubcircuitNameError(String subcircuitName)
-  {
-    if (StringUtil.isEmptyOrNull(subcircuitName))
-    {
-      return "Cannot add a subcircuit type named [].";
-    }
-
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      if (subcircuitEditor.getTypeName().equals(subcircuitName))
-      {
-        return "Cannot add a subcircuit type named [%s], it is already in use.";
-      }
-    }
-    return null;
   }
 
   public void circuitUpdated()
@@ -809,22 +805,10 @@ public class CircuitEditor
     return map;
   }
 
-  private SubcircuitEditor getSubcircuitEditor(SubcircuitView subcircuitView)
-  {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      if (subcircuitEditor.getCircuitSubcircuitView() == subcircuitView)
-      {
-        return subcircuitEditor;
-      }
-    }
-    throw new SimulatorException("Could not get subcircuit editor for subcircuit view [%s].", subcircuitView.getTypeName());
-  }
-
   public List<SubcircuitTopEditorSimulation> getSubcircuitTopSimulations()
   {
     ArrayList<SubcircuitTopEditorSimulation> result = new ArrayList<>();
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors.findAll())
     {
       Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSubcircuitSimulations();
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
@@ -841,6 +825,11 @@ public class CircuitEditor
   public SubcircuitTopSimulation addNewSimulation(String simulationName)
   {
     return currentSubcircuitEditor.getCircuitSubcircuitView().addNewSimulation(simulationName);
+  }
+
+  public String getSubcircuitNameError(String subcircuitName)
+  {
+    return subcircuitEditors.getSubcircuitNameError(subcircuitName);
   }
 }
 

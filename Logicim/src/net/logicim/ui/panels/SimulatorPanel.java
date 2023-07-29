@@ -34,6 +34,8 @@ import net.logicim.ui.simulation.component.passive.pin.PinViewFactory;
 import net.logicim.ui.simulation.component.passive.power.GroundViewFactory;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerViewFactory;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterViewFactory;
+import net.logicim.ui.subcircuit.SubcircuitList;
+import net.logicim.ui.subcircuit.SubcircuitListChangedNotifier;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -411,6 +413,11 @@ public class SimulatorPanel
   public void mouseWheelMoved(java.awt.event.MouseWheelEvent e)
   {
     mouseWheel(e.getWheelRotation());
+  }
+
+  public SubcircuitList getSubcircuitList()
+  {
+    return logicim.getSubcircuitList();
   }
 }
 

@@ -76,8 +76,8 @@ public class KeyInputsFactory
     editor.addKeyInput(new KeyInput(editor.getAction(NewSubcircuitAction.NAME), KeyEvent.VK_ENTER, Up, Up, Down));
     editor.addKeyInput(new KeyInput(editor.getAction(PreviousSubcircuitAction.NAME), KeyEvent.VK_LEFT, Up, Down, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(NextSubcircuitAction.NAME), KeyEvent.VK_RIGHT, Up, Down, Up));
-    editor.addKeyInput(new KeyInput(editor.getAction(LeaveSubcircuitAction.NAME), KeyEvent.VK_BACK_SPACE, Up, Down, Up));
-    editor.addKeyInput(new KeyInput(editor.getAction(ReenterSubcircuitAction.NAME), KeyEvent.VK_ENTER, Up, Down, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(NavigateBackwardSubcircuitAction.NAME), KeyEvent.VK_LEFT, Down, Down, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(NavigateForwardSubcircuitAction.NAME), KeyEvent.VK_RIGHT, Down, Down, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(EditSubcircuitAction.NAME), KeyEvent.VK_E, Down, Up, Down));
 
     for (int i = 1; i < 10; i++)

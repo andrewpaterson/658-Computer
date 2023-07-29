@@ -78,8 +78,8 @@ public class EditorActionsFactory
     editor.addAction(NewSubcircuitAction.NAME, new NewSubcircuitAction(editor, panel));
     editor.addAction(PreviousSubcircuitAction.NAME, new PreviousSubcircuitAction(editor));
     editor.addAction(NextSubcircuitAction.NAME, new NextSubcircuitAction(editor));
-    editor.addAction(LeaveSubcircuitAction.NAME, new LeaveSubcircuitAction(editor));
-    editor.addAction(ReenterSubcircuitAction.NAME, new ReenterSubcircuitAction(editor));
+    editor.addAction(NavigateBackwardSubcircuitAction.NAME, new NavigateBackwardSubcircuitAction(editor));
+    editor.addAction(NavigateForwardSubcircuitAction.NAME, new NavigateForwardSubcircuitAction(editor));
     editor.addAction(EnterSubcircuitAction.NAME, new EnterSubcircuitAction(editor));
     editor.addAction(EditSubcircuitAction.NAME, new EditSubcircuitAction(editor, panel));
 

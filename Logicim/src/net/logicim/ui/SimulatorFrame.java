@@ -6,6 +6,8 @@ import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.SaveData;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.panels.*;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.subcircuit.SubcircuitListModel;
 import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
 
@@ -42,7 +44,18 @@ public class SimulatorFrame
     add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row
 
     add(displayPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 1, VERTICAL));          // Display settings
-    add(createSurroundPanel(simulatorPanel), GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
+    JList<SubcircuitEditor> table = new JList<>();
+    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(simulatorPanel.getSubcircuitList(), table);
+    simulatorPanel.getEditor().setSubcircuitListChangedNotifier(subcircuitListModel);
+    table.setModel(subcircuitListModel);
+    JScrollPane scrollPane = new JScrollPane(table);
+    scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+    table.setBackground(Colours.getInstance().getPanelBackground());
+    JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, simulatorPanel);
+    splitPane.setDividerLocation(100);
+    JPanel surroundPanel = createSurroundPanel(splitPane);
+    add(surroundPanel, GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
     add(creationPanel, GridBagUtil.gridBagConstraints(2, 1, 0, 1, VERTICAL));          // Object creation
 
     add(selectedInfoPanel, GridBagUtil.gridBagConstraints(0, 2, 1, 0, HORIZONTAL, 3, 1));  // Selected object info row
@@ -66,9 +79,12 @@ public class SimulatorFrame
 
     addWindowListener(this);
     addKeyListener(this);
+    table.addKeyListener(this);
+    splitPane.addKeyListener(this);
+    surroundPanel.addKeyListener(this);
   }
 
-  protected JPanel createSurroundPanel(JPanel insetPanel)
+  protected JPanel createSurroundPanel(JComponent insetPanel)
   {
     JPanel panel = new JPanel();
     panel.setBorder(new MatteBorder(1, 1, 1, 1, Colours.getInstance().getPanelBorder()));

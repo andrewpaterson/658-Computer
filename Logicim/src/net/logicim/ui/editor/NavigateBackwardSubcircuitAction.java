@@ -2,12 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class ReenterSubcircuitAction
+public class NavigateBackwardSubcircuitAction
     extends SimulatorEditorAction
 {
-  public static final String NAME = "Re-enter Subcircuit";
+  public static final String NAME = "Navigate Backward";
 
-  public ReenterSubcircuitAction(Logicim editor)
+  public NavigateBackwardSubcircuitAction(Logicim editor)
   {
     super(editor);
   }
@@ -15,7 +15,7 @@ public class ReenterSubcircuitAction
   @Override
   public void executeEditorAction()
   {
-    editor.reenterSubcircuit();
+    editor.navigateBackwardSubcircuit();
   }
 
   @Override

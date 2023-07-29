@@ -2,12 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class LeaveSubcircuitAction
+public class NavigateForwardSubcircuitAction
     extends SimulatorEditorAction
 {
-  public static final String NAME = "Leave Subcircuit";
+  public static final String NAME = "Navigate Forward";
 
-  public LeaveSubcircuitAction(Logicim editor)
+  public NavigateForwardSubcircuitAction(Logicim editor)
   {
     super(editor);
   }
@@ -15,7 +15,7 @@ public class LeaveSubcircuitAction
   @Override
   public void executeEditorAction()
   {
-    editor.leaveSubcircuit();
+    editor.navigateForwardSubcircuit();
   }
 
   @Override

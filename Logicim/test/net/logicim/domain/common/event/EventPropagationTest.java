@@ -13,6 +13,7 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
 import net.logicim.domain.integratedcircuit.standard.logic.and.AndGate;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.subcircuit.SubcircuitList;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class EventPropagationTest
 {
   private static void testEventPropagation()
   {
-    CircuitEditor circuitEditor = new CircuitEditor("Main");
+    CircuitEditor circuitEditor = new CircuitEditor("Main", new SubcircuitList());
 
     LogicimFileReader fileReader = new LogicimFileReader(LOGICIM_DOC_NAME, EDITOR_DATA_TAG_NAME);
     EditorData editorData = (EditorData) fileReader.load(MultipleXORIntoAndSourceXML.xml);

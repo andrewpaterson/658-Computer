@@ -18,11 +18,13 @@ import java.awt.event.*;
 import java.util.List;
 
 import static java.awt.GridBagConstraints.*;
+import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 
 public class SimulatorFrame
     extends JFrame
     implements WindowListener,
-               KeyListener
+               KeyListener,
+               ContainerListener
 {
   protected SimulatorPanel simulatorPanel;
   protected ToolbarPanel toolbarPanel;
@@ -39,22 +41,12 @@ public class SimulatorFrame
     creationPanel = new CreationPanel(this, simulatorPanel.getEditor());
     selectedInfoPanel = new SelectedInfoPanel(this);
     circuitInfoPanel = new CircuitInfoPanel(this, simulatorPanel.getEditor());
+    JPanel surroundPanel = createSubcircuitPanel(simulatorPanel);
 
     setLayout(new GridBagLayout());
     add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row
 
     add(displayPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 1, VERTICAL));          // Display settings
-    JList<SubcircuitEditor> table = new JList<>();
-    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(simulatorPanel.getSubcircuitList(), table);
-    simulatorPanel.getEditor().setSubcircuitListChangedNotifier(subcircuitListModel);
-    table.setModel(subcircuitListModel);
-    JScrollPane scrollPane = new JScrollPane(table);
-    scrollPane.setBorder(BorderFactory.createEmptyBorder());
-
-    table.setBackground(Colours.getInstance().getPanelBackground());
-    JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, simulatorPanel);
-    splitPane.setDividerLocation(100);
-    JPanel surroundPanel = createSurroundPanel(splitPane);
     add(surroundPanel, GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
     add(creationPanel, GridBagUtil.gridBagConstraints(2, 1, 0, 1, VERTICAL));          // Object creation
 
@@ -78,10 +70,25 @@ public class SimulatorFrame
     setJMenuBar(menuBar);
 
     addWindowListener(this);
-    addKeyListener(this);
-    table.addKeyListener(this);
-    splitPane.addKeyListener(this);
-    surroundPanel.addKeyListener(this);
+
+    ListenerHelper.addKeyAndContainerListenerRecursively(this, this, this);
+  }
+
+  protected JPanel createSubcircuitPanel(SimulatorPanel simulatorPanel)
+  {
+    JList<SubcircuitEditor> table = new JList<>();
+    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(simulatorPanel.getSubcircuitList(), table);
+    simulatorPanel.getEditor().setSubcircuitListChangedNotifier(subcircuitListModel);
+    table.setModel(subcircuitListModel);
+    table.setMinimumSize(new Dimension(0, 0));
+    JScrollPane scrollPane = new JScrollPane(table);
+    scrollPane.setBorder(BorderFactory.createEmptyBorder());
+    scrollPane.setMinimumSize(new Dimension(0, 0));
+
+    table.setBackground(Colours.getInstance().getPanelBackground());
+    JSplitPane splitPane = new JSplitPane(HORIZONTAL_SPLIT, scrollPane, simulatorPanel);
+    splitPane.setDividerLocation(200);
+    return createSurroundPanel(splitPane);
   }
 
   protected JPanel createSurroundPanel(JComponent insetPanel)
@@ -182,6 +189,17 @@ public class SimulatorFrame
   @Override
   public void windowDeactivated(WindowEvent e)
   {
+  }
+
+  @Override
+  public void componentAdded(ContainerEvent e)
+  {
+  }
+
+  @Override
+  public void componentRemoved(ContainerEvent e)
+  {
+
   }
 }
 

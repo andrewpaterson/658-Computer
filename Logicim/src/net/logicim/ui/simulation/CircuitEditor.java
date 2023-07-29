@@ -351,7 +351,7 @@ public class CircuitEditor
 
     currentSubcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
     setLastSubcircuitSimulation(loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
-    
+
     SwingUtilities.invokeLater(new Runnable()
     {
       @Override

@@ -12,9 +12,9 @@ public class SubcircuitListPanel
     extends JList<SubcircuitEditor>
     implements SubcircuitListChangedNotifier
 {
-  public SubcircuitListPanel(Logicim editor, SubcircuitEditorList subcircuitEditorList, ListSelectionListener simulatorFrame)
+  public SubcircuitListPanel(Logicim editor, ListSelectionListener simulatorFrame)
   {
-    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(subcircuitEditorList);
+    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(editor.getSubcircuitList());
     editor.setSubcircuitListChangedNotifier(this);
     setModel(subcircuitListModel);
     setMinimumSize(new Dimension(0, 0));

@@ -1,5 +1,6 @@
 package net.logicim.ui.circuit;
 
+import net.logicim.ui.Logicim;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.ButtonAction;
 
@@ -22,16 +23,18 @@ public abstract class InputDialog
 
   protected Dimension dimension;
   protected ActionButton okayButton;
+  protected Logicim editor;
 
   public InputDialog(Frame owner,
                      String title,
                      boolean modal,
-                     Dimension dimension)
+                     Dimension dimension, Logicim editor)
   {
     super(owner, title, modal);
     this.dimension = dimension;
     setSize(dimension);
     addKeyAndContainerListenerRecursively(this);
+    this.editor = editor;
   }
 
   public Dimension getDimension()
@@ -48,6 +51,7 @@ public abstract class InputDialog
   {
     setVisible(false);
     dispose();
+    editor.notifySubcircuitListChanged();
   }
 
   public boolean executeButtonAction(ActionButton actionButton)

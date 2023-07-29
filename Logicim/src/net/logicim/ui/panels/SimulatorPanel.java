@@ -13,6 +13,9 @@ import net.logicim.ui.common.wire.TunnelViewFactory;
 import net.logicim.ui.components.typeeditor.FamilyPropertyEditorFactory;
 import net.logicim.ui.components.typeeditor.TypeEditorFactory;
 import net.logicim.ui.error.ErrorFrame;
+import net.logicim.ui.input.ComponentDoubleClickInputsFactory;
+import net.logicim.ui.input.EditorActionsFactory;
+import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.event.MouseWheelEvent;
 import net.logicim.ui.input.event.*;
 import net.logicim.ui.simulation.NewSimulationDialog;
@@ -62,13 +65,16 @@ public class SimulatorPanel
   protected Logicim logicim;
   protected JFrame frame;
 
-  public SimulatorPanel(JFrame frame)
+  public SimulatorPanel(JFrame frame, Logicim logicim)
   {
     this.frame = frame;
     running = false;
     period = 16 * nS_IN_mS;
 
-    logicim = new Logicim(this);
+    this.logicim = logicim;
+
+    addActions(this);
+
     FamilyVoltageConfigurationStore.getInstance();
 
     TypeEditorFactory.getInstance().addAll(new FamilyPropertyEditorFactory());
@@ -95,6 +101,14 @@ public class SimulatorPanel
     addMouseListener(this);
     addMouseMotionListener(this);
     addMouseWheelListener(this);
+  }
+
+  private void addActions(SimulatorPanel simulatorPanel)
+  {
+    EditorActionsFactory.create(logicim, simulatorPanel);
+    KeyInputsFactory.create(logicim);
+    ComponentDoubleClickInputsFactory.create(logicim);
+    logicim.validateInputActions();
   }
 
   public void loop()

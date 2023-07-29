@@ -27,12 +27,9 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public class ShowSimulationsDialog
     extends InputDialog
 {
-  private Logicim editor;
-
   public ShowSimulationsDialog(Frame owner, Logicim editor)
   {
-    super(owner, "Simulations", true, new Dimension(DEFAULT_WIDTH, owner.getHeight() - 24));
-    this.editor = editor;
+    super(owner, "Simulations", true, new Dimension(DEFAULT_WIDTH, owner.getHeight() - 24), editor);
   }
 
   @Override

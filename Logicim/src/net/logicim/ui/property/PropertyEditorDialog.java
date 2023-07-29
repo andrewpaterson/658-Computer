@@ -22,7 +22,6 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public abstract class PropertyEditorDialog
     extends InputDialog
 {
-  protected Logicim editor;
   protected StaticView<ComponentProperties> componentView;
   protected PropertiesPanel propertiesPanel;
   protected Circuit circuit;
@@ -34,9 +33,12 @@ public abstract class PropertyEditorDialog
                               Logicim editor,
                               StaticView<ComponentProperties> componentView)
   {
-    super(owner, title, true, dimension);
+    super(owner,
+          title,
+          true,
+          dimension,
+          editor);
 
-    this.editor = editor;
     this.circuit = getCircuit(editor);
     this.componentView = componentView;
   }

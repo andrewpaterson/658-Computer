@@ -34,9 +34,6 @@ import net.logicim.ui.editor.SimulationSpeed;
 import net.logicim.ui.editor.SubcircuitViewParameters;
 import net.logicim.ui.info.InfoLabel;
 import net.logicim.ui.info.InfoLabels;
-import net.logicim.ui.input.ComponentDoubleClickInputsFactory;
-import net.logicim.ui.input.EditorActionsFactory;
-import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.action.InputActions;
 import net.logicim.ui.input.action.KeyInput;
 import net.logicim.ui.input.button.ButtonInput;
@@ -45,7 +42,6 @@ import net.logicim.ui.input.keyboard.KeyboardButtons;
 import net.logicim.ui.input.mouse.MouseButtons;
 import net.logicim.ui.input.mouse.MouseMotion;
 import net.logicim.ui.input.mouse.MousePosition;
-import net.logicim.ui.panels.SimulatorPanel;
 import net.logicim.ui.placement.MoveComponents;
 import net.logicim.ui.placement.StartEditInComponent;
 import net.logicim.ui.placement.StartEditInPort;
@@ -117,7 +113,7 @@ public class Logicim
 
   protected boolean drawPointGrid;
 
-  public Logicim(SimulatorPanel simulatorPanel)
+  public Logicim()
   {
     this.subcircuits = new SubcircuitEditorList();
     this.inputEvents = new ConcurrentLinkedDeque<>();
@@ -150,8 +146,6 @@ public class Logicim
     this.drawPointGrid = true;
 
     setSubcircuitParameters(MAIN_SUBCIRCUIT_TYPE_NAME);
-
-    addActions(simulatorPanel);
 
     pushUndo();
   }
@@ -583,14 +577,6 @@ public class Logicim
   private StaticView<?> calculateHoverView(Int2D mousePosition)
   {
     return circuitEditor.getComponentViewInScreenSpace(viewport, mousePosition);
-  }
-
-  private void addActions(SimulatorPanel simulatorPanel)
-  {
-    EditorActionsFactory.create(this, simulatorPanel);
-    KeyInputsFactory.create(this);
-    ComponentDoubleClickInputsFactory.create(this);
-    inputActions.validate();
   }
 
   public void addKeyInput(KeyInput keyInput)
@@ -1556,6 +1542,16 @@ public class Logicim
   public void setSubcircuitListChangedNotifier(SubcircuitListChangedNotifier changedNotifier)
   {
     subcircuits.setChangedNotifier(changedNotifier);
+  }
+
+  public void notifySubcircuitListChanged()
+  {
+    subcircuits.getChangedNotifier().subcircuitListChanged();
+  }
+
+  public void validateInputActions()
+  {
+    inputActions.validate();
   }
 }
 

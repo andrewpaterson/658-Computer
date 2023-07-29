@@ -21,13 +21,11 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public class SelectSimulationDialog
     extends InputDialog
 {
-  private Logicim editor;
   private JComboBox<SubcircuitSimulation> comboBox;
 
   public SelectSimulationDialog(Frame owner, Logicim editor)
   {
-    super(owner, "Select Simulation", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT));
-    this.editor = editor;
+    super(owner, "Select Simulation", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT), editor);
   }
 
   @Override

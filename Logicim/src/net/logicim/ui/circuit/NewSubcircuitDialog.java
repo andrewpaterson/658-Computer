@@ -16,15 +16,16 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public class NewSubcircuitDialog
     extends InputDialog
 {
-  protected Logicim editor;
   protected SubcircuitPropertiesPanel propertiesPanel;
 
   public NewSubcircuitDialog(Frame owner,
                              Logicim editor)
   {
-    super(owner, "Create subcircuit", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT));
-
-    this.editor = editor;
+    super(owner,
+          "Create subcircuit",
+          true,
+          new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT),
+          editor);
   }
 
   public void build()

@@ -39,15 +39,18 @@ public class SimulatorFrame
 
   public SimulatorFrame() throws HeadlessException
   {
-    simulatorPanel = new SimulatorPanel(this);
-    toolbarPanel = new ToolbarPanel(this, simulatorPanel.getEditor());
-    displayPanel = new DisplayPanel(this, simulatorPanel.getEditor());
-    creationPanel = new CreationPanel(this, simulatorPanel.getEditor());
-    selectedInfoPanel = new SelectedInfoPanel(this);
-    circuitInfoPanel = new CircuitInfoPanel(this, simulatorPanel.getEditor());
-    subcircuitListPanel = new SubcircuitListPanel(simulatorPanel.getEditor(), simulatorPanel.getSubcircuitList(), this);
+    Logicim logicim = new Logicim();
 
-    JSplitPane splitPane = new JSplitPane(HORIZONTAL_SPLIT, createScrollPane(subcircuitListPanel), simulatorPanel);
+    simulatorPanel = new SimulatorPanel(this, logicim);
+    toolbarPanel = new ToolbarPanel(this, logicim);
+    displayPanel = new DisplayPanel(this, logicim);
+    creationPanel = new CreationPanel(this, logicim);
+    selectedInfoPanel = new SelectedInfoPanel(this);
+    circuitInfoPanel = new CircuitInfoPanel(this, logicim);
+    subcircuitListPanel = new SubcircuitListPanel(logicim, this);
+
+    JSplitPane splitPane = new JSplitPane(HORIZONTAL_SPLIT, createSurroundPanel(createScrollPane(subcircuitListPanel)), createSurroundPanel(simulatorPanel));
+    splitPane.setBorder(BorderFactory.createEmptyBorder());
     splitPane.setDividerLocation(200);
 
     setLayout(new GridBagLayout());
@@ -79,6 +82,8 @@ public class SimulatorFrame
     addWindowListener(this);
 
     ListenerHelper.addKeyAndContainerListenerRecursively(this, this, this);
+
+    logicim.notifySubcircuitListChanged();
   }
 
   private JScrollPane createScrollPane(SubcircuitListPanel listPanel)

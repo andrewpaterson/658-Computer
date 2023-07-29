@@ -145,5 +145,10 @@ public class SubcircuitEditorList
   {
     changedNotifier.subcircuitListChanged();
   }
+
+  public SubcircuitListChangedNotifier getChangedNotifier()
+  {
+    return changedNotifier;
+  }
 }
 

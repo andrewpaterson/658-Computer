@@ -18,15 +18,16 @@ import static net.logicim.ui.util.GridBagUtil.gridBagConstraints;
 public class NewSimulationDialog
     extends InputDialog
 {
-  protected Logicim editor;
   protected SimulationPropertiesPanel propertiesPanel;
 
   public NewSimulationDialog(Frame owner,
                              Logicim editor)
   {
-    super(owner, "Create simulation", true, new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT));
-
-    this.editor = editor;
+    super(owner,
+          "Create simulation",
+          true,
+          new Dimension(DEFAULT_WIDTH, SMALL_HEIGHT),
+          editor);
   }
 
   public void build()

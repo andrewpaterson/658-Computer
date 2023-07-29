@@ -12,6 +12,11 @@ public class Stack<T>
 
   public Stack()
   {
+    clear();
+  }
+
+  public void clear()
+  {
     undoStack = new ArrayList<>();
     size = 0;
     lastPop = false;

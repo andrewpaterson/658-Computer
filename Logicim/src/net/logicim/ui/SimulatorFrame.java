@@ -208,8 +208,11 @@ public class SimulatorFrame
   @Override
   public void valueChanged(ListSelectionEvent e)
   {
-    SubcircuitEditor editor = subcircuitListPanel.getSelectedValue();
-    simulatorPanel.setCurrentSubcircuitEditor(editor);
+    if (!e.getValueIsAdjusting())
+    {
+      SubcircuitEditor editor = subcircuitListPanel.getSelectedValue();
+      simulatorPanel.setCurrentSubcircuitEditor(editor);
+    }
   }
 }
 

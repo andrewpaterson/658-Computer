@@ -885,7 +885,6 @@ public class Logicim
     ArrayList<BookmarkData> subcircuitBookmarks = saveBookmarks();
     ArrayList<SubcircuitParameterData> subcircuitParameters = saveSubcircuitViewParameters();
     List<DefaultComponentPropertiesData> defaultProperties = saveDefaultComponentProperties();
-    String currentSubcircuit = getCurrentSubcircuitEditor().getTypeName();
     return new EditorData(circuitData,
                           simulationSpeed.getDefaultRunTimeStep(),
                           simulationSpeed.getRunTimeStep(),
@@ -1227,7 +1226,7 @@ public class Logicim
   public void newSimulationAction(String simulationName)
   {
     SubcircuitTopSimulation topSimulation = circuitEditor.addNewSimulation(simulationName);
-    circuitEditor.setSubcircuitSimulation(topSimulation);
+    circuitEditor.setSubcircuitSimulation(getCurrentSubcircuitEditor(), topSimulation);
   }
 
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)

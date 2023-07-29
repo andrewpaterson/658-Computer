@@ -330,6 +330,7 @@ public class CircuitEditor
     Event.resetNextId();
     View.resetNextId();
 
+    navigationStack.clear();
     subcircuitEditors.clear(false);
     Map<Long, SubcircuitEditor> subcircuitEditorMap = new HashMap<>();
     Map<SubcircuitEditor, DataViewMap> subcircuitEditorViews = new LinkedHashMap<>();
@@ -344,8 +345,9 @@ public class CircuitEditor
     lastSubcircuitEditorSimulation = new LinkedHashMap<>();
     loadLastSubcircuitEditorSimulation(circuitData, loaders, subcircuitEditorMap);
 
-    setCurrentSubcircuitEditor(getCurrentSubcircuitEditor(circuitData.currentSubcircuit));
-    setSubcircuitSimulation(loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
+    setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    setCurrentSubcircuitEditor(subcircuitEditor);
 
     SwingUtilities.invokeLater(new Runnable()
     {

@@ -102,7 +102,6 @@ public class Logicim
   protected ConnectionView hoverConnectionView;
 
   protected Edit edit;
-  protected boolean editDoneWaiting;
 
   protected UndoStack undoStack;
 
@@ -143,7 +142,6 @@ public class Logicim
 
     this.undoStack = new UndoStack();
     this.clipboard = null;
-    this.editDoneWaiting = false;
     this.doubleClickInterval = calculateDoubleClickInterval();
 
     this.subcircuitBookmarks = new LinkedHashMap<>();
@@ -202,7 +200,7 @@ public class Logicim
   {
     mouseButtons.set(button);
 
-    if (clickCount == 1)
+    if ((clickCount == 1) || (clickCount == 2))
     {
       if (button == BUTTON1)
       {
@@ -217,6 +215,7 @@ public class Logicim
             StatefulEdit edit = null;
             if (isInSelectedComponent(x, y))
             {
+              edit = new StartEditInComponent(keyboardButtons);
             }
             else if ((hoverConnectionView != null))
             {
@@ -235,9 +234,21 @@ public class Logicim
         }
       }
     }
-    else if (clickCount == 2)
+  }
+
+  public void mouseReleased(int x, int y, int button, int clickCount)
+  {
+    mouseButtons.unset(button);
+
+    if (button == BUTTON1)
     {
-      discardWaitingEdit();
+      editDone(x, y);
+
+      if (clickCount == 2)
+      {
+        StaticView<?> component = getComponent();
+        inputActions.componentViewDoubleClicked(component);
+      }
     }
   }
 
@@ -248,75 +259,6 @@ public class Logicim
       edit.discard();
       edit = null;
     }
-  }
-
-  public void mouseReleased(int x, int y, int button, int clickCount)
-  {
-    mouseButtons.unset(button);
-
-    if (button == BUTTON1)
-    {
-      if (edit != null)
-      {
-        waitForClick(x, y);
-      }
-      else
-      {
-        if (clickCount == 1)
-        {
-          StatefulEdit edit = null;
-          if (isInSelectedComponent(x, y))
-          {
-            edit = new StartEditInComponent(keyboardButtons);
-          }
-          else if ((hoverConnectionView != null))
-          {
-          }
-          else
-          {
-          }
-          if (edit != null)
-          {
-            this.edit = createEdit(edit, toFloatingGridPosition(x, y));
-          }
-        }
-        else if (clickCount == 2)
-        {
-          discardWaitingEdit();
-
-          StaticView<?> component = getComponent();
-          inputActions.componentViewDoubleClicked(component);
-        }
-      }
-    }
-  }
-
-  protected void discardWaitingEdit()
-  {
-    if (editDoneWaiting)
-    {
-      discardEdit();
-      editDoneWaiting = false;
-    }
-  }
-
-  protected void waitForClick(int x, int y)
-  {
-    editDoneWaiting = true;
-
-    Timer timer = new Timer();
-    timer.schedule(new TimerTask()
-    {
-      @Override
-      public void run()
-      {
-        if (editDoneWaiting)
-        {
-          editDone(x, y);
-          editDoneWaiting = false;
-        }
-      }
-    }, doubleClickInterval + doubleClickInterval >> 2);
   }
 
   protected Edit createEdit(StatefulEdit edit, Float2D start)
@@ -358,12 +300,6 @@ public class Logicim
 
   public void mouseMoved(int x, int y)
   {
-    if (editDoneWaiting)
-    {
-      editDone(x, y);
-      editDoneWaiting = false;
-    }
-
     mousePosition.set(x, y);
 
     Int2D moved = mouseMotion.moved(x, y);

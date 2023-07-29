@@ -119,3 +119,4 @@ public abstract class InputDialog
 
   public abstract void okay();
 }
+

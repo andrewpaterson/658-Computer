@@ -52,11 +52,6 @@ public class NewSubcircuitDialog
     close();
   }
 
-  public PropertiesPanel getPropertiesPanel()
-  {
-    return propertiesPanel;
-  }
-
   protected JPanel createEditorPanel()
   {
     return new SubcircuitPropertiesPanel("");

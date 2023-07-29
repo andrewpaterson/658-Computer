@@ -6,15 +6,12 @@ import javax.swing.*;
 
 public class SubcircuitListModel
     extends AbstractListModel<SubcircuitEditor>
-    implements SubcircuitListChangedNotifier
 {
   protected SubcircuitList subcircuitList;
-  protected JList<SubcircuitEditor> list;
 
-  public SubcircuitListModel(SubcircuitList subcircuitList, JList<SubcircuitEditor> list)
+  public SubcircuitListModel(SubcircuitList subcircuitList)
   {
     this.subcircuitList = subcircuitList;
-    this.list = list;
   }
 
   @Override
@@ -35,10 +32,10 @@ public class SubcircuitListModel
     super.fireContentsChanged(source, index0, index1);
   }
 
-  @Override
-  public void subcircuitListChanged()
+  public int getSubcircuitEditorIndex()
   {
-    list.updateUI();
+    SubcircuitEditor subcircuitEditor = subcircuitList.getSubcircuitEditor();
+    return subcircuitList.indexOf(subcircuitEditor);
   }
 }
 

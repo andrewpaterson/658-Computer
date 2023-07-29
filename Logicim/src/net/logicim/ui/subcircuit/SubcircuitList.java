@@ -11,11 +11,13 @@ import java.util.List;
 public class SubcircuitList
 {
   protected List<SubcircuitEditor> subcircuitEditors;
+  protected SubcircuitEditor currentSubcircuitEditor;
   protected SubcircuitListChangedNotifier changedNotifier;
 
   public SubcircuitList()
   {
     subcircuitEditors = new ArrayList<>();
+    currentSubcircuitEditor = null;
     changedNotifier = null;
   }
 
@@ -27,19 +29,14 @@ public class SubcircuitList
   public void clear(boolean notifyChange)
   {
     subcircuitEditors = new ArrayList<>();
-    if ((notifyChange && (changedNotifier != null)))
-    {
-      changedNotifier.subcircuitListChanged();
-    }
+    notifyChange(notifyChange);
+    currentSubcircuitEditor = null;
   }
 
   public void add(SubcircuitEditor subcircuitEditor, boolean notifyChange)
   {
     subcircuitEditors.add(subcircuitEditor);
-    if ((notifyChange && (changedNotifier != null)))
-    {
-      changedNotifier.subcircuitListChanged();
-    }
+    notifyChange(notifyChange);
   }
 
   public SubcircuitEditor get(int index)
@@ -89,6 +86,59 @@ public class SubcircuitList
       }
     }
     return null;
+  }
+
+  public SubcircuitEditor getPreviousSubcircuit()
+  {
+    SubcircuitEditor newSubcircuitEditor = null;
+    int index = subcircuitEditors.indexOf(currentSubcircuitEditor);
+    if (index != -1)
+    {
+      index--;
+      if (index < 0)
+      {
+        index = subcircuitEditors.size() - 1;
+      }
+      newSubcircuitEditor = subcircuitEditors.get(index);
+    }
+    return newSubcircuitEditor;
+  }
+
+  public SubcircuitEditor getNextSubcircuit()
+  {
+    SubcircuitEditor newSubcircuitEditor = null;
+    int index = subcircuitEditors.indexOf(currentSubcircuitEditor);
+    if (index != -1)
+    {
+      index++;
+      if (index > subcircuitEditors.size() - 1)
+      {
+        index = 0;
+      }
+      newSubcircuitEditor = subcircuitEditors.get(index);
+    }
+
+    return newSubcircuitEditor;
+  }
+
+  public SubcircuitEditor getSubcircuitEditor()
+  {
+    return currentSubcircuitEditor;
+  }
+
+  public String setSubcircuitEditor(SubcircuitEditor subcircuitEditor, boolean notifyChange)
+  {
+    currentSubcircuitEditor = subcircuitEditor;
+    notifyChange(notifyChange);
+    return currentSubcircuitEditor.getTypeName();
+  }
+
+  protected void notifyChange(boolean notifyChange)
+  {
+    if ((notifyChange && (changedNotifier != null)))
+    {
+      notifyChange();
+    }
   }
 
   public void notifyChange()

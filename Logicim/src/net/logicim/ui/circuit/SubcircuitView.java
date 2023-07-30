@@ -705,7 +705,7 @@ public class SubcircuitView
     }
   }
 
-  private void createComponents(List<StaticView<?>> staticViews)
+  private void createComponentsForAllSimulations(List<StaticView<?>> staticViews)
   {
     for (StaticView<?> staticView : staticViews)
     {
@@ -720,7 +720,7 @@ public class SubcircuitView
     }
   }
 
-  private void createComponents2(List<StaticView<?>> staticViews, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  private void createComponentsForSimulation(List<StaticView<?>> staticViews, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     for (StaticView<?> staticView : staticViews)
     {
@@ -808,7 +808,7 @@ public class SubcircuitView
   protected Set<TraceView> createTraceViews(Collection<Line> newTraceViewLines, Collection<TraceView> touchingTraceViews)
   {
     Set<Line> traceLines = new LinkedHashSet<>(newTraceViewLines);
-    traceLines.addAll(createNewTraceViewLines(touchingTraceViews));
+    traceLines.addAll(getTraceViewLines(touchingTraceViews));
     removeTraceViews(touchingTraceViews);
     Set<TraceView> traceViews = generateNewTraces(traceLines);
 
@@ -817,7 +817,7 @@ public class SubcircuitView
     return traceViews;
   }
 
-  public static List<Line> createNewTraceViewLines(Collection<TraceView> traceViews)
+  public static List<Line> getTraceViewLines(Collection<TraceView> traceViews)
   {
     List<Line> newLines = new ArrayList<>();
     for (TraceView traceView : traceViews)
@@ -972,12 +972,12 @@ public class SubcircuitView
     List<ConnectionView> createdConnectionViews = getOrCreateStaticViewConnections(componentViews);
     Set<TraceView> existingTraceViews = getComponentConnectionTraceViews(componentViews);
 
-    List<Line> existingLines = createNewTraceViewLines(existingTraceViews);
+    List<Line> existingLines = getTraceViewLines(existingTraceViews);
     removeTraceViews(existingTraceViews);
 
     enableStaticViews(componentViews);
 
-    createComponents(componentViews);
+    createComponentsForAllSimulations(componentViews);
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(createdConnectionViews);
     simulationStarted(componentViews);
@@ -1269,7 +1269,7 @@ public class SubcircuitView
   public void createComponentsForSubcircuitInstanceView(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
-    createComponents2(staticViews, subcircuitInstanceSimulation);
+    createComponentsForSimulation(staticViews, subcircuitInstanceSimulation);
 
     simulationStarted(staticViews);
 

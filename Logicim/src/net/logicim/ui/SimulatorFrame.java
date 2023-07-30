@@ -51,7 +51,7 @@ public class SimulatorFrame
 
     JSplitPane splitPane = new JSplitPane(HORIZONTAL_SPLIT, createSurroundPanel(createScrollPane(subcircuitListPanel)), createSurroundPanel(simulatorPanel));
     splitPane.setBorder(BorderFactory.createEmptyBorder());
-    splitPane.setDividerLocation(200);
+    splitPane.setDividerLocation(120);
 
     setLayout(new GridBagLayout());
     add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row

@@ -22,7 +22,7 @@ public class MoveComponents
 {
   protected Map<StaticView<?>, Int2D> componentStartPositions;
   protected Map<StaticView<?>, Rotation> componentStartRotations;
-  protected Map<TraceView, Line> traces;
+  protected Map<TraceView, Line> traceViews;
   protected Set<StaticView<?>> selectedComponents;
   protected boolean newComponents;
 
@@ -53,7 +53,7 @@ public class MoveComponents
     selectedComponents = new HashSet<>();
     componentStartPositions = new LinkedHashMap<>();
     componentStartRotations = new LinkedHashMap<>();
-    traces = new LinkedHashMap<>();
+    traceViews = new LinkedHashMap<>();
     for (View view : views)
     {
       if (view instanceof StaticView)
@@ -65,7 +65,7 @@ public class MoveComponents
       else if (view instanceof TraceView)
       {
         TraceView traceView = (TraceView) view;
-        traces.put(traceView, traceView.getLine().clone());
+        traceViews.put(traceView, traceView.getLine().clone());
       }
     }
   }
@@ -73,7 +73,7 @@ public class MoveComponents
   @Override
   public void start(float x, float y, Edit edit)
   {
-    edit.getEditor().startMoveComponents(getStaticViews(), getTraces());
+    edit.getEditor().startMoveComponents(getStaticViews(), getTraceViews());
   }
 
   @Override
@@ -87,7 +87,7 @@ public class MoveComponents
   public void done(float x, float y, Edit edit)
   {
     edit.getEditor().doneMoveComponents(getStaticViews(),
-                                        getTraces(),
+                                        getTraceViews(),
                                         getSelectedViews(),
                                         newComponents);
     if (edit.hasDiff() || newComponents)
@@ -104,16 +104,13 @@ public class MoveComponents
     {
       moveComponents(0, edit.getStart(), new Int2D());
       circuitEditor.doneMoveComponents(getStaticViews(),
-                                       getTraces(),
+                                       getTraceViews(),
                                        getSelectedViews(),
                                        !newComponents);
     }
     else
     {
-      for (TraceView traceView : traces.keySet())
-      {
-        circuitEditor.removeTraceView(traceView);
-      }
+      circuitEditor.deleteTraceViews(traceViews.keySet());
       circuitEditor.deleteComponentViews(getStaticViews());
     }
   }
@@ -139,9 +136,9 @@ public class MoveComponents
     return selectedComponents;
   }
 
-  public List<TraceView> getTraces()
+  public List<TraceView> getTraceViews()
   {
-    return new ArrayList<>(traces.keySet());
+    return new ArrayList<>(traceViews.keySet());
   }
 
   @Override
@@ -177,7 +174,7 @@ public class MoveComponents
       }
     }
 
-    for (Map.Entry<TraceView, Line> traceViewLineEntry : traces.entrySet())
+    for (Map.Entry<TraceView, Line> traceViewLineEntry : traceViews.entrySet())
     {
       TraceView traceView = traceViewLineEntry.getKey();
       Line line = traceViewLineEntry.getValue();

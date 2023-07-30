@@ -1,6 +1,7 @@
 package net.logicim.ui.simulation;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.common.geometry.Line;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
@@ -553,14 +554,26 @@ public class CircuitEditor
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews,
-                                 List<TraceView> traceViews,
+                                 List<TraceView> removeTraceViews,
                                  Set<StaticView<?>> selectedViews,
                                  boolean newComponents)
   {
+    List<Line> newTraceViewLines = createNewTraceViewLines(removeTraceViews);
     subcircuitEditors.getSubcircuitEditor().doneMoveComponents(staticViews,
-                                                               traceViews,
+                                                               newTraceViewLines,
+                                                               removeTraceViews,
                                                                selectedViews,
                                                                newComponents);
+  }
+
+  public List<Line> createNewTraceViewLines(List<TraceView> traceViews)
+  {
+    List<Line> newLines = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      newLines.add(traceView.getLine());
+    }
+    return newLines;
   }
 
   public Selection getCurrentSelection()
@@ -639,9 +652,9 @@ public class CircuitEditor
     return pasteClipboardViews(clipboardData.getTraces(), clipboardData.getComponents());
   }
 
-  public void removeTraceView(TraceView traceView)
+  public void deleteTraceViews(Collection<TraceView> traceViews)
   {
-    subcircuitEditors.getSubcircuitEditor().removeTraceView(traceView);
+    subcircuitEditors.getSubcircuitEditor().removeTraceViews(traceViews);
   }
 
   public void deleteComponentViews(List<StaticView<?>> staticViews)

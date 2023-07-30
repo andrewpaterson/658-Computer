@@ -270,7 +270,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     return newComponentView;
   }
 
-  public void newPlaced(SubcircuitView subcircuitView)
+  public void recalculatePropertiesAfterNew(SubcircuitView subcircuitView)
   {
   }
 

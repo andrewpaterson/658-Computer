@@ -79,31 +79,41 @@ public class SubcircuitEditor
 
   public void recreateComponentView(StaticView<?> staticView)
   {
-    List<StaticView<?>> staticViews = new ArrayList<>();
-    staticViews.add(staticView);
+    List<StaticView<?>> singleStaticView = new ArrayList<>();
+    singleStaticView.add(staticView);
 
-    doneMoveComponents(staticViews,
+    doneMoveComponents(singleStaticView,
                        new ArrayList<>(),
-                       new LinkedHashSet<>(),
+                       new ArrayList<>(),
+                       new HashSet<>(),
                        true);
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews,
-                                 List<TraceView> traceViews,
+                                 List<Line> newTraceViewLines,
+                                 List<TraceView> removeTraceViews,
                                  Set<StaticView<?>> selectedViews,
-                                 boolean newComponents)
+                                 boolean newComponents
+  )
   {
     List<View> newSelection = subcircuitView.doneMoveComponents(staticViews,
-                                                                traceViews,
+                                                                newTraceViewLines,
+                                                                removeTraceViews,
                                                                 selectedViews);
+
+    recalculateViewPropertiesAfterNew(staticViews, newComponents);
+    selection.setSelection(newSelection);
+  }
+
+  protected void recalculateViewPropertiesAfterNew(List<StaticView<?>> staticViews, boolean newComponents)
+  {
     if (newComponents)
     {
       for (StaticView<?> staticView : staticViews)
       {
-        staticView.newPlaced(subcircuitView);
+        staticView.recalculatePropertiesAfterNew(subcircuitView);
       }
     }
-    this.selection.setSelection(newSelection);
   }
 
   public void deleteSelection()
@@ -268,9 +278,9 @@ public class SubcircuitEditor
     return subcircuitView.getTraceViewsInGridSpace(x, y);
   }
 
-  public void removeTraceView(TraceView traceView)
+  public void removeTraceViews(Collection<TraceView> traceViews)
   {
-    subcircuitView.removeTraceView(traceView);
+    subcircuitView.removeTraceViews(traceViews);
   }
 
   public void deleteStaticViews(List<StaticView<?>> staticViews)
@@ -323,9 +333,9 @@ public class SubcircuitEditor
     validateSimulations();
   }
 
-  public void createTraceViews(List<Line> lines)
+  public void createTraceViews(List<Line> newTraceViewLines)
   {
-    subcircuitView.createTraceViews(lines);
+    subcircuitView.createTraceViews(newTraceViewLines);
   }
 
   public List<View> loadViews(List<TraceData> traces,

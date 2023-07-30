@@ -467,9 +467,9 @@ public class PinView
   }
 
   @Override
-  public void newPlaced(SubcircuitView subcircuitView)
+  public void recalculatePropertiesAfterNew(SubcircuitView subcircuitView)
   {
-    super.newPlaced(subcircuitView);
+    super.recalculatePropertiesAfterNew(subcircuitView);
     PinPropertyHelper helper = new PinPropertyHelper(subcircuitView.findAllPins());
     boolean updatedName = helper.ensureUniquePinName(this);
     helper.ensureNextWeight(properties);

@@ -654,6 +654,7 @@ public class SubcircuitView
       }
       allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
+    // allUpdatedConnectionViews are returned for fireConnectionEvents.  Simulations that were already connected (is that possible?) should not fireConnectionEvents.
     return allUpdatedConnectionViews;
   }
 

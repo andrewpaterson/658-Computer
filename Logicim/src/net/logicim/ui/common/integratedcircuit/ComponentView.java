@@ -400,7 +400,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public void createComponent(SubcircuitSimulations simulations)
   {
-    //validateNoComponents();
+    //validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
       createComponent(subcircuitSimulation);

@@ -235,11 +235,25 @@ public class SubcircuitInstanceView
 
   public void createSubcircuitInstance(SubcircuitSimulations simulations)
   {
-    validateNoComponents();
+    validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
       createSubcircuitInstance(subcircuitSimulation);
     }
+  }
+
+  //Called from SubcircuitInstanceData.
+  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  {
+    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
+    subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
+
+    createTracePorts(subcircuitInstance);
+    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
+    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
+    return subcircuitInstance;
   }
 
   public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation)
@@ -252,24 +266,16 @@ public class SubcircuitInstanceView
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
 
-    subcircuitInstance = createSubcircuitInstanceSecondHalf(containingSubcircuitSimulation, subcircuitInstance);
+    createTracePorts(subcircuitInstance);
+    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
+    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
 
     return subcircuitInstance;
   }
 
-  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
-  {
-    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
-    subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
-    subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
-
-    return createSubcircuitInstanceSecondHalf(containingSubcircuitSimulation, subcircuitInstance);
-  }
-
-  protected SubcircuitInstance createSubcircuitInstanceSecondHalf(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance)
+  private void createTracePorts(SubcircuitInstance subcircuitInstance)
   {
     List<PinView> pins = instanceSubcircuitView.findAllPins();
     for (PinView pinView : pins)
@@ -284,12 +290,6 @@ public class SubcircuitInstanceView
 
       subcircuitInstance.addTracePorts(pinView.getName(), tracePorts);
     }
-
-    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
-
-    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
-
-    return subcircuitInstance;
   }
 
   protected void putContainingSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation, SubcircuitInstance subcircuitInstance)

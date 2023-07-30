@@ -565,23 +565,13 @@ public class CircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  boolean newComponents)
   {
-    List<Line> newTraceViewLines = createNewTraceViewLines(removeTraceViews);
+    List<Line> newTraceViewLines = SubcircuitView.createNewTraceViewLines(removeTraceViews);
 
     subcircuitEditors.getSubcircuitEditor().doneMoveComponents(staticViews,
                                                                newTraceViewLines,
                                                                removeTraceViews,
                                                                selectedViews,
                                                                newComponents);
-  }
-
-  public List<Line> createNewTraceViewLines(List<TraceView> traceViews)
-  {
-    List<Line> newLines = new ArrayList<>();
-    for (TraceView traceView : traceViews)
-    {
-      newLines.add(traceView.getLine());
-    }
-    return newLines;
   }
 
   public Selection getCurrentSelection()

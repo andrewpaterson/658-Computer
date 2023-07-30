@@ -1,13 +1,10 @@
 package net.logicim.common.geometry;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LineMinimiser
 {
-  public static Set<Line> minimise(Set<Line> inputLines)
+  public static Set<Line> minimise(Collection<Line> inputLines)
   {
     List<LineBucket> lineBuckets = new ArrayList<>();
     for (Line line : inputLines)

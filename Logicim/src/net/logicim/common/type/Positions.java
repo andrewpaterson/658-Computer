@@ -8,7 +8,7 @@ public class Positions
 {
   protected Map<Integer, Set<Integer>> xes;
 
-  public Positions(Set<Line> lines)
+  public Positions(Collection<Line> lines)
   {
     xes = new LinkedHashMap<>();
     for (Line line : lines)

@@ -227,10 +227,9 @@ public class SubcircuitView
     Set<ConnectionView> nonTraceConnectionViews = findNonTraceConnections(inputTraceViews);
     removeTraceViews(inputTraceViews);
 
-    Set<Line> lines = new LinkedHashSet<>();
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    recreateTraceViews(lines, touchingTraceViews);
+    recreateTraceViews(new HashSet<>(), touchingTraceViews);
 
     findAndConnectNonTraceViewsForDeletion(nonTraceConnectionViews);
   }
@@ -790,9 +789,8 @@ public class SubcircuitView
     return overlaps;
   }
 
-  public Set<TraceView> createTraceViews(List<Line> newTraceViewLines)
+  public Set<TraceView> createTraceViews(Collection<Line> newTraceViewLines)
   {
-    Set<Line> lines = new LinkedHashSet<>(newTraceViewLines);
     TraceFinder traceFinder = new TraceFinder();
     for (Line line : newTraceViewLines)
     {
@@ -805,21 +803,29 @@ public class SubcircuitView
 
     traceFinder.process();
     Set<TraceView> touchingTraceViews = traceFinder.getTraceViews();
-    return recreateTraceViews(lines, touchingTraceViews);
+    return recreateTraceViews(newTraceViewLines, touchingTraceViews);
   }
 
-  protected Set<TraceView> recreateTraceViews(Set<Line> lines, Set<TraceView> touchingTraceViews)
+  protected Set<TraceView> recreateTraceViews(Collection<Line> newTraceViewLines, Collection<TraceView> touchingTraceViews)
   {
-    for (TraceView traceView : touchingTraceViews)
-    {
-      lines.add(traceView.getLine());
-    }
+    Set<Line> traceLines = new LinkedHashSet<>(newTraceViewLines);
+    traceLines.addAll(createNewTraceViewLines(touchingTraceViews));
     removeTraceViews(touchingTraceViews);
-    Set<TraceView> traceViews = generateNewTraces(lines);
+    Set<TraceView> traceViews = generateNewTraces(traceLines);
 
     Set<ConnectionView> updatedConnectionViews = connectCreatedTraceViews(traceViews);
     fireConnectionEvents(updatedConnectionViews);
     return traceViews;
+  }
+
+  public static List<Line> createNewTraceViewLines(Collection<TraceView> traceViews)
+  {
+    List<Line> newLines = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      newLines.add(traceView.getLine());
+    }
+    return newLines;
   }
 
   protected void findAndConnectNonTraceViewsForDeletion(Set<ConnectionView> nonTraceConnectionViews)
@@ -853,7 +859,7 @@ public class SubcircuitView
     return nonTraceConnectionViews;
   }
 
-  private Set<TraceView> generateNewTraces(Set<Line> lines)
+  private Set<TraceView> generateNewTraces(Collection<Line> lines)
   {
     Set<Line> mergedLines = LineMinimiser.minimise(lines);
     Positions positionMap = new Positions(lines);
@@ -888,20 +894,24 @@ public class SubcircuitView
 
   public Set<ConnectionView> connectCreatedTraceViews(Set<TraceView> traceViews)
   {
+    Set<ConnectionView> startConnectionViews = getTraceStartConnectionViews(traceViews);
+    return createTracesForConnectionViews(startConnectionViews);
+  }
+
+  protected Set<ConnectionView> getTraceStartConnectionViews(Set<TraceView> traceViews)
+  {
     Set<ConnectionView> connectionViews = new HashSet<>();
-    Set<ConnectionView> updatedConnectionViews;
     int i = 0;
     for (TraceView traceView : traceViews)
     {
       if (!traceView.hasConnections())
       {
-        throw new SimulatorException("Cannot finalise a removed Trace.  Iteration [%s].", i);
+        throw new SimulatorException("Cannot get a connection for a removed Trace.  Iteration [%s].", i);
       }
       connectionViews.add(traceView.getStartConnection());
       i++;
     }
-    updatedConnectionViews = createTracesForConnectionViews(connectionViews);
-    return updatedConnectionViews;
+    return connectionViews;
   }
 
   public SubcircuitEditorData save(Set<View> selection, long id)
@@ -974,11 +984,7 @@ public class SubcircuitView
     List<ConnectionView> createdConnectionViews = getOrCreateStaticViewConnections(componentViews);
     Set<TraceView> existingTraceViews = getComponentConnectionTraceViews(componentViews);
 
-    List<Line> existingLines = new ArrayList<>();
-    for (TraceView existingTraceView : existingTraceViews)
-    {
-      existingLines.add(existingTraceView.getLine());
-    }
+    List<Line> existingLines = createNewTraceViewLines(existingTraceViews);
     removeTraceViews(existingTraceViews);
 
     enableStaticViews(componentViews);

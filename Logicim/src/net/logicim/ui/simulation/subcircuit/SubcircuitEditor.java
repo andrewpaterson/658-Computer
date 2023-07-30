@@ -77,18 +77,6 @@ public class SubcircuitEditor
     subcircuitView.startMoveComponents(staticViews, traceViews);
   }
 
-  public void recreateComponentView(StaticView<?> staticView)
-  {
-    List<StaticView<?>> singleStaticView = new ArrayList<>();
-    singleStaticView.add(staticView);
-
-    doneMoveComponents(singleStaticView,
-                       new ArrayList<>(),
-                       new ArrayList<>(),
-                       new HashSet<>(),
-                       true);
-  }
-
   public void doneMoveComponents(List<StaticView<?>> staticViews,
                                  List<Line> newTraceViewLines,
                                  List<TraceView> removeTraceViews,

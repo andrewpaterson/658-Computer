@@ -545,7 +545,14 @@ public class CircuitEditor
 
   public void recreateComponentView(StaticView<?> staticView)
   {
-    subcircuitEditors.getSubcircuitEditor().recreateComponentView(staticView);
+    List<StaticView<?>> singleStaticView = new ArrayList<>();
+    singleStaticView.add(staticView);
+
+    subcircuitEditors.getSubcircuitEditor().doneMoveComponents(singleStaticView,
+                                                               new ArrayList<>(),
+                                                               new ArrayList<>(),
+                                                               new HashSet<>(),
+                                                               true);
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
@@ -559,6 +566,7 @@ public class CircuitEditor
                                  boolean newComponents)
   {
     List<Line> newTraceViewLines = createNewTraceViewLines(removeTraceViews);
+
     subcircuitEditors.getSubcircuitEditor().doneMoveComponents(staticViews,
                                                                newTraceViewLines,
                                                                removeTraceViews,

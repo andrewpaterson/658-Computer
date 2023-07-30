@@ -18,7 +18,9 @@ public class LocalConnectionNet
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation, LocalMultiSimulationConnectionNet multiSimulationConnectionNet, ConnectionView inputConnectionView)
+  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation,
+                            LocalMultiSimulationConnectionNet multiSimulationConnectionNet,
+                            ConnectionView inputConnectionView)
   {
     this.subcircuitSimulation = subcircuitSimulation;
     this.multiSimulationConnectionNet = multiSimulationConnectionNet;

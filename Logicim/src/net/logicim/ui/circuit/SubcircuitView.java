@@ -636,31 +636,32 @@ public class SubcircuitView
 
   public Set<ConnectionView> createTracesForConnectionViews(Collection<ConnectionView> connectionViews)
   {
-    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    for (ConnectionView connectionView : connectionViews)
-    {
-      if (connectionView == null)
-      {
-        throw new SimulatorException("Connection View may not be null.");
-      }
-
-      if (!updatedConnectionViews.contains(connectionView))
-      {
-        findAndConnectTraces(updatedConnectionViews, connectionView);
-      }
-    }
-    return updatedConnectionViews;
-  }
-
-  protected void findAndConnectTraces(Set<ConnectionView> updatedConnectionViews, ConnectionView connectionView)
-  {
-    //This does not feel right.  The PortTraceFinder should do the simulations looping work.
+    Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
-      List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, connectionView);
-      List<ConnectionView> connectionNetConnectionViews = PortTraceFinder.getConnectionViews(connectionNets);
-      updatedConnectionViews.addAll(connectionNetConnectionViews);
+      Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+      for (ConnectionView connectionView : connectionViews)
+      {
+        if (connectionView == null)
+        {
+          throw new SimulatorException("Connection View may not be null.");
+        }
+
+        if (!updatedConnectionViews.contains(connectionView))
+        {
+          findAndConnectTraces(updatedConnectionViews, connectionView, subcircuitSimulation);
+        }
+      }
+      allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
+    return allUpdatedConnectionViews;
+  }
+
+  protected void findAndConnectTraces(Set<ConnectionView> updatedConnectionViews, ConnectionView connectionView, SubcircuitSimulation subcircuitSimulation)
+  {
+    List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(subcircuitSimulation, connectionView);
+    List<ConnectionView> connectionNetConnectionViews = PortTraceFinder.getConnectionViews(connectionNets);
+    updatedConnectionViews.addAll(connectionNetConnectionViews);
   }
 
   public void removeTraceViews(Collection<TraceView> traceViews)

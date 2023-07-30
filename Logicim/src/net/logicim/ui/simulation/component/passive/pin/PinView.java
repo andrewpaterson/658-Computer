@@ -20,6 +20,7 @@ import net.logicim.domain.passive.power.PowerPinNames;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.wire.Pin;
+import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
@@ -30,6 +31,8 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.circle.CircleView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitPinView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -46,6 +49,7 @@ public class PinView
   public static int FONT_SIZE = 10;
 
   protected PortView port;
+  protected SubcircuitInstanceViewFinder subcircuitInstanceViewFinder;
   protected Int2D relativeSubcircuitPosition;
   protected FamilyVoltageConfiguration familyVoltageConfiguration;
 
@@ -56,6 +60,7 @@ public class PinView
   protected int maxDigits;
 
   public PinView(SubcircuitView subcircuitView,
+                 SubcircuitInstanceViewFinder subcircuitInstanceViewFinder,
                  Int2D position,
                  Rotation rotation,
                  PinProperties properties)
@@ -64,6 +69,7 @@ public class PinView
           position,
           rotation,
           properties);
+    this.subcircuitInstanceViewFinder = subcircuitInstanceViewFinder;
     familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     relativeSubcircuitPosition = new Int2D();
     maxDigits = calculateMaxDigits();
@@ -478,6 +484,18 @@ public class PinView
     {
       labelView.setText(properties.name);
     }
+  }
+
+  public List<SubcircuitPinView> getSubcircuitPinViews()
+  {
+    ArrayList<SubcircuitPinView> subcircuitPinViews = new ArrayList<>();
+    List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitInstanceViewFinder.getSubcircuitInstanceViews(getContainingSubcircuitView());
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      SubcircuitPinView subcircuitPinView = subcircuitInstanceView.getSubcircuitPinView(this);
+      subcircuitPinViews.add(subcircuitPinView);
+    }
+    return subcircuitPinViews;
   }
 
   @Override

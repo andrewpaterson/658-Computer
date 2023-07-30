@@ -33,8 +33,7 @@ public class ConnectionFinder
   {
     while (connectionsToProcess.size() > 0)
     {
-      ConnectionView currentConnection = connectionsToProcess.get(0);
-      connectionsToProcess.remove(0);
+      ConnectionView currentConnection = connectionsToProcess.remove(0);
       connectionsNet.add(currentConnection);
 
       List<View> components = currentConnection.getConnectedComponents();

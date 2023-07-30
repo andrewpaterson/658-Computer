@@ -129,6 +129,11 @@ public class SubcircuitEditor
     selection.clearSelection();
   }
 
+  public CircuitEditor getCircuitEditor()
+  {
+    return circuitEditor;
+  }
+
   public void clearSelection()
   {
     selection.clearSelection();

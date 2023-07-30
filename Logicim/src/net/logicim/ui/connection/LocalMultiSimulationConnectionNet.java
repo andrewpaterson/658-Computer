@@ -58,6 +58,21 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
+  private boolean isValid(int minimumPorts)
+  {
+    return minimumPorts != Integer.MAX_VALUE;
+  }
+
+  protected List<PortConnection> createPortConnections(int minimumPorts)
+  {
+    List<PortConnection> portConnections = new ArrayList<>(minimumPorts);
+    for (int i = 0; i < minimumPorts; i++)
+    {
+      portConnections.add(new PortConnection(this));
+    }
+    return portConnections;
+  }
+
   private int calculateMinimumPorts(List<LocalConnectionNet> localConnectionNets)
   {
     int minimumPorts = Integer.MAX_VALUE;
@@ -79,21 +94,6 @@ public class LocalMultiSimulationConnectionNet
       }
     }
     return minimumPorts;
-  }
-
-  private boolean isValid(int minimumPorts)
-  {
-    return minimumPorts != Integer.MAX_VALUE;
-  }
-
-  protected List<PortConnection> createPortConnections(int minimumPorts)
-  {
-    List<PortConnection> portConnections = new ArrayList<>(minimumPorts);
-    for (int i = 0; i < minimumPorts; i++)
-    {
-      portConnections.add(new PortConnection(this));
-    }
-    return portConnections;
   }
 
   protected int calculateMinimumPorts(Collection<ConnectionView> connections)

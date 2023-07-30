@@ -2,13 +2,16 @@ package net.logicim.ui.subcircuit;
 
 import net.logicim.common.SimulatorException;
 import net.logicim.common.util.StringUtil;
+import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SubcircuitEditorList
+    implements SubcircuitInstanceViewFinder
 {
   protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
@@ -149,6 +152,18 @@ public class SubcircuitEditorList
   public SubcircuitListChangedNotifier getChangedNotifier()
   {
     return changedNotifier;
+  }
+
+  @Override
+  public List<SubcircuitInstanceView> getSubcircuitInstanceViews(SubcircuitView instanceSubcircuitView)
+  {
+    List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      SubcircuitView circuitSubcircuitView = subcircuitEditor.getCircuitSubcircuitView();
+      subcircuitInstanceViews.addAll(circuitSubcircuitView.getSubcircuitInstanceViews(instanceSubcircuitView));
+    }
+    return subcircuitInstanceViews;
   }
 }
 

@@ -3,6 +3,7 @@ package net.logicim.ui.connection;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
@@ -16,6 +17,7 @@ public class LocalConnectionNet
   protected SubcircuitSimulation subcircuitSimulation;
   protected Set<ConnectionView> connectionViews;
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
+  protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
   public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation,
@@ -32,6 +34,7 @@ public class LocalConnectionNet
     this.connectionViews = connectionFinder.getConnections();
 
     this.subcircuitInstanceViews = new ArrayList<>();
+    this.pinViews = new ArrayList<>();
     this.splitterViews = new ArrayList<>();
 
     for (ConnectionView connectionView : connectionViews)
@@ -46,6 +49,10 @@ public class LocalConnectionNet
         else if (connectedView instanceof SplitterView)
         {
           splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView, subcircuitSimulation, connectionView));
+        }
+        else if (connectedView instanceof PinView)
+        {
+          pinViews.add(new ComponentConnection<>((PinView)connectedView, connectionView));
         }
       }
     }

@@ -634,13 +634,13 @@ public class SubcircuitView
     return connectionViewCache.getConnectionView(x, y);
   }
 
-  public Set<ConnectionView> createTracesForConnectionViews(Collection<ConnectionView> connectionViews)
+  public Set<ConnectionView> createTracesForConnectionViews(Collection<ConnectionView> tracesConnectionViews)
   {
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
       Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-      for (ConnectionView connectionView : connectionViews)
+      for (ConnectionView connectionView : tracesConnectionViews)
       {
         if (connectionView == null)
         {
@@ -885,11 +885,11 @@ public class SubcircuitView
 
   public Set<ConnectionView> connectCreatedTraceViews(Set<TraceView> traceViews)
   {
-    Set<ConnectionView> startConnectionViews = getTraceStartConnectionViews(traceViews);
-    return createTracesForConnectionViews(startConnectionViews);
+    Set<ConnectionView> tracesConnectionViews = getTracesConnectionViews(traceViews);
+    return createTracesForConnectionViews(tracesConnectionViews);
   }
 
-  protected Set<ConnectionView> getTraceStartConnectionViews(Set<TraceView> traceViews)
+  protected Set<ConnectionView> getTracesConnectionViews(Set<TraceView> traceViews)
   {
     Set<ConnectionView> connectionViews = new HashSet<>();
     int i = 0;
@@ -900,6 +900,7 @@ public class SubcircuitView
         throw new SimulatorException("Cannot get a connection for a removed Trace.  Iteration [%s].", i);
       }
       connectionViews.add(traceView.getStartConnection());
+      connectionViews.add(traceView.getEndConnection());
       i++;
     }
     return connectionViews;

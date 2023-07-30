@@ -19,6 +19,7 @@ import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
@@ -823,6 +824,11 @@ public class CircuitEditor
       subcircuitEditors.setSubcircuitEditor(pair.subcircuitEditor, true);
     }
     return false;
+  }
+
+  public SubcircuitInstanceViewFinder getSubcircuitInstanceViewFinder()
+  {
+    return subcircuitEditors;
   }
 }
 

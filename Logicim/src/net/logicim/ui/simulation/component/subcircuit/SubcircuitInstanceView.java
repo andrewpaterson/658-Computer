@@ -604,6 +604,18 @@ public class SubcircuitInstanceView
     return null;
   }
 
+  public SubcircuitPinView getSubcircuitPinView(PinView pinView)
+  {
+    for (SubcircuitPinView subcircuitPinView : pinViews)
+    {
+      if (subcircuitPinView.getPinView() == pinView)
+      {
+        return subcircuitPinView;
+      }
+    }
+    return null;
+  }
+
   public Set<SubcircuitSimulation> getComponentSubcircuitSimulations()
   {
     return simulationSubcircuitInstances.keySet();

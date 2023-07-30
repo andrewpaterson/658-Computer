@@ -128,5 +128,10 @@ public class SubcircuitPinView
   {
     return pinView;
   }
+
+  public SubcircuitInstanceView getSubcircuitInstanceView()
+  {
+    return subcircuitInstanceView;
+  }
 }
 

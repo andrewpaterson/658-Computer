@@ -83,6 +83,7 @@ public class PinData
                                                  explicitPowerPorts,
                                                  radix);
     return new PinView(subcircuitEditor.getCircuitSubcircuitView(),
+                       subcircuitEditor.getCircuitEditor().getSubcircuitInstanceViewFinder(),
                        position,
                        rotation,
                        properties);

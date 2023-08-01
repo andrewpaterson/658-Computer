@@ -83,6 +83,7 @@ public class SimulatorFrame
 
     ListenerHelper.addKeyAndContainerListenerRecursively(this, this, this);
 
+    splitPane.requestFocus();
     logicim.notifySubcircuitListChanged();
   }
 

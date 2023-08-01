@@ -711,14 +711,7 @@ public class SubcircuitView
   {
     for (StaticView<?> staticView : staticViews)
     {
-      if (!(staticView instanceof SubcircuitInstanceView))
-      {
-        staticView.createComponent(simulations);
-      }
-      else
-      {
-        ((SubcircuitInstanceView) staticView).createSubcircuitInstance(simulations);
-      }
+      staticView.createComponents(simulations);
     }
   }
 
@@ -726,14 +719,7 @@ public class SubcircuitView
   {
     for (StaticView<?> staticView : staticViews)
     {
-      if (!(staticView instanceof SubcircuitInstanceView))
-      {
-        staticView.createComponent(subcircuitInstanceSimulation);
-      }
-      else
-      {
-        ((SubcircuitInstanceView) staticView).createSubcircuitInstance(subcircuitInstanceSimulation);
-      }
+      staticView.createComponent(subcircuitInstanceSimulation);
     }
   }
 
@@ -1282,6 +1268,15 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews);
   }
 
+  public void createTracesForSubcircuitInstanceView()
+  {
+    List<StaticView<?>> staticViews = getStaticViews();
+    List<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
+
+    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(connectionViews);
+    fireConnectionEvents(updatedConnectionViews);
+  }
+
   public SubcircuitTopSimulation createSubcircuitTopSimulation(String name)
   {
     SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(new CircuitSimulation(name));
@@ -1364,7 +1359,7 @@ public class SubcircuitView
       List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = subcircuitInstanceView.getInnerSubcircuitSimulations(existingCircuitSimulation);
       for (SubcircuitInstanceSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
       {
-        SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createSubcircuitInstance(newSimulation);
+        SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createComponent(newSimulation);
         newSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
 
         SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();

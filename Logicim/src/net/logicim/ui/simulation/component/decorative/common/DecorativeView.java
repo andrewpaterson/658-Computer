@@ -83,7 +83,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void createComponent(SubcircuitSimulations simulations)
+  public void createComponents(SubcircuitSimulations simulations)
   {
   }
 }

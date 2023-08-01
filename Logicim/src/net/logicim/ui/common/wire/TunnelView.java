@@ -227,7 +227,7 @@ public class TunnelView
   }
 
   @Override
-  public void createComponent(SubcircuitSimulations simulations)
+  public void createComponents(SubcircuitSimulations simulations)
   {
   }
 

@@ -300,7 +300,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract void createComponent(SubcircuitSimulations simulations);
+  public abstract void createComponents(SubcircuitSimulations simulations);
 
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 

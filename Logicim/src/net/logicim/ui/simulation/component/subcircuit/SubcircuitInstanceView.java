@@ -222,41 +222,7 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public SubcircuitInstance createComponent(SubcircuitSimulation subcircuitSimulation)
-  {
-    throw new SimulatorException("SubcircuitInstanceView.createComponent() is not implemented.  Call createSubcircuitInstance() instead.");
-  }
-
-  @Override
-  public void createComponent(SubcircuitSimulations simulations)
-  {
-    throw new SimulatorException("SubcircuitInstanceView.createComponents() is not implemented.  Call createSubcircuitInstances() instead.");
-  }
-
-  public void createSubcircuitInstance(SubcircuitSimulations simulations)
-  {
-    validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
-    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
-    {
-      createSubcircuitInstance(subcircuitSimulation);
-    }
-  }
-
-  //Called from SubcircuitInstanceData.
-  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
-  {
-    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
-    subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
-    subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
-
-    createTracePorts(subcircuitInstance);
-    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
-    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
-    return subcircuitInstance;
-  }
-
-  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation)
+  public SubcircuitInstance createComponent(SubcircuitSimulation containingSubcircuitSimulation)
   {
     validateCanCreateComponent(containingSubcircuitSimulation);
 
@@ -271,9 +237,35 @@ public class SubcircuitInstanceView
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
+    instanceSubcircuitView.createTracesForSubcircuitInstanceView();  //This does not feel right but it works.
 
     return subcircuitInstance;
   }
+
+  @Override
+  public void createComponents(SubcircuitSimulations simulations)
+  {
+    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+    {
+      createComponent(subcircuitSimulation);
+    }
+  }
+
+   //Called from SubcircuitInstanceData.
+  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  {
+    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
+    subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
+
+    createTracePorts(subcircuitInstance);
+    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
+    postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
+
+    return subcircuitInstance;
+  }
+
 
   private void createTracePorts(SubcircuitInstance subcircuitInstance)
   {

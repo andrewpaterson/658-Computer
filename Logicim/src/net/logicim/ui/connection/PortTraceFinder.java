@@ -280,11 +280,11 @@ public abstract class PortTraceFinder
                                               Map<ConnectionView, SplitterView> processedSplitterViewConnections,
                                               Set<SubcircuitPinView> processedSubcircuitPinViews)
   {
-    // WHY DO WE NEED THE SIMULATION?
-    // The set of connections should be good enough.
     LocalConnectionNet localConnectionNet = new LocalConnectionNet(localConnectionToProcess.subcircuitSimulation,
-                                                                   localMultiSimulationConnectionNet,
-                                                                   localConnectionToProcess.inputConnectionView);
+                                                                   localMultiSimulationConnectionNet
+    );
+    localConnectionNet.process(localConnectionToProcess.inputConnectionView);
+
     splitterViewStack.addAll(createSplitterViewComponentConnections(localConnectionNet, processedSplitterViewConnections));
 
     for (ComponentConnection<SubcircuitInstanceView> componentConnection : localConnectionNet.subcircuitInstanceViews)

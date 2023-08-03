@@ -8,6 +8,7 @@ import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,21 +22,25 @@ public class LocalConnectionNet
   protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
   public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation,
-                            LocalMultiSimulationConnectionNet multiSimulationConnectionNet,
-                            ConnectionView inputConnectionView)
+                            LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
   {
     this.subcircuitSimulation = subcircuitSimulation;
     this.multiSimulationConnectionNet = multiSimulationConnectionNet;
     this.multiSimulationConnectionNet.add(this);
 
-    ConnectionFinder connectionFinder = new ConnectionFinder();
-    connectionFinder.addConnection(inputConnectionView);
-    connectionFinder.process();
-    this.connectionViews = connectionFinder.getConnections();
-
     this.subcircuitInstanceViews = new ArrayList<>();
     this.pinViews = new ArrayList<>();
     this.splitterViews = new ArrayList<>();
+
+    this.connectionViews = new LinkedHashSet<>();
+  }
+
+  protected void process(ConnectionView inputConnectionView)
+  {
+    ConnectionFinder connectionFinder = new ConnectionFinder();
+    connectionFinder.addConnection(inputConnectionView);
+    connectionFinder.process();
+    this.connectionViews.addAll(connectionFinder.getConnections());
 
     for (ConnectionView connectionView : connectionViews)
     {
@@ -48,6 +53,7 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof SplitterView)
         {
+          //This subcircuitSimulation is problematic.
           splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView, subcircuitSimulation, connectionView));
         }
         else if (connectedView instanceof PinView)

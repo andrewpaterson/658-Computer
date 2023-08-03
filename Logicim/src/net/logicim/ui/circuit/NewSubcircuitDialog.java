@@ -3,7 +3,6 @@ package net.logicim.ui.circuit;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.components.button.ActionButton;
 import net.logicim.ui.components.button.CancelButton;
-import net.logicim.ui.property.PropertiesPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

@@ -52,7 +52,7 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof PinView)
         {
-          pinViews.add(new ComponentConnection<>((PinView)connectedView, connectionView));
+          pinViews.add(new ComponentConnection<>((PinView) connectedView, connectionView));
         }
       }
     }

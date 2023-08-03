@@ -155,13 +155,13 @@ public class SubcircuitEditorList
   }
 
   @Override
-  public List<SubcircuitInstanceView> getSubcircuitInstanceViews(SubcircuitView instanceSubcircuitView)
+  public List<SubcircuitInstanceView> getSubcircuitInstanceViews(SubcircuitView subcircuitView)
   {
     List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
       SubcircuitView circuitSubcircuitView = subcircuitEditor.getCircuitSubcircuitView();
-      subcircuitInstanceViews.addAll(circuitSubcircuitView.getSubcircuitInstanceViews(instanceSubcircuitView));
+      subcircuitInstanceViews.addAll(circuitSubcircuitView.getSubcircuitInstanceViews(subcircuitView));
     }
     return subcircuitInstanceViews;
   }

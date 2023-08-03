@@ -251,7 +251,7 @@ public class SubcircuitInstanceView
     }
   }
 
-   //Called from SubcircuitInstanceData.
+  //Called from SubcircuitInstanceData.
   public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
@@ -265,7 +265,6 @@ public class SubcircuitInstanceView
 
     return subcircuitInstance;
   }
-
 
   private void createTracePorts(SubcircuitInstance subcircuitInstance)
   {

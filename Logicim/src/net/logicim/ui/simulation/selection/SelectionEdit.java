@@ -1,6 +1,5 @@
 package net.logicim.ui.simulation.selection;
 
-import net.logicim.common.SimulatorException;
 import net.logicim.common.type.Float2D;
 import net.logicim.common.type.Int2D;
 import net.logicim.ui.Edit;

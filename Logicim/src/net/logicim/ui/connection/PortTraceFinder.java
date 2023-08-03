@@ -117,6 +117,7 @@ public abstract class PortTraceFinder
       throw new SimulatorException("Input connection may not be null.");
     }
 
+    //Rewrite this to be non-retarded.
     List<ComponentSimulationConnection<SplitterView>> splitterViewStack = new ArrayList<>();
     Map<ConnectionView, SplitterView> processedSplitterViewConnections = new HashMap<>();
     Set<SubcircuitPinView> processedSubcircuitInstanceViews = new HashSet<>();
@@ -252,7 +253,7 @@ public abstract class PortTraceFinder
                                                              List<LocalMultiSimulationConnectionNet> connectionNets,
                                                              List<ComponentSimulationConnection<SplitterView>> splitterViewStack,
                                                              Map<ConnectionView, SplitterView> processedSplitterViewConnections,
-                                                             Set<SubcircuitPinView> processedSubcircuitInstanceViews)
+                                                             Set<SubcircuitPinView> processedSubcircuitPinViews)
   {
     LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
     connectionNets.add(localMultiSimulationConnectionNet);
@@ -268,7 +269,7 @@ public abstract class PortTraceFinder
                               localMultiSimulationConnectionNet,
                               splitterViewStack,
                               processedSplitterViewConnections,
-                              processedSubcircuitInstanceViews);
+                              processedSubcircuitPinViews);
     }
   }
 
@@ -279,12 +280,14 @@ public abstract class PortTraceFinder
                                               Map<ConnectionView, SplitterView> processedSplitterViewConnections,
                                               Set<SubcircuitPinView> processedSubcircuitPinViews)
   {
-    LocalConnectionNet connectionNet = new LocalConnectionNet(localConnectionToProcess.subcircuitSimulation,
-                                                              localMultiSimulationConnectionNet,
-                                                              localConnectionToProcess.inputConnectionView);
-    splitterViewStack.addAll(createSplitterViewComponentConnections(connectionNet, processedSplitterViewConnections));
+    // WHY DO WE NEED THE SIMULATION?
+    // The set of connections should be good enough.
+    LocalConnectionNet localConnectionNet = new LocalConnectionNet(localConnectionToProcess.subcircuitSimulation,
+                                                                   localMultiSimulationConnectionNet,
+                                                                   localConnectionToProcess.inputConnectionView);
+    splitterViewStack.addAll(createSplitterViewComponentConnections(localConnectionNet, processedSplitterViewConnections));
 
-    for (ComponentConnection<SubcircuitInstanceView> componentConnection : connectionNet.subcircuitInstanceViews)
+    for (ComponentConnection<SubcircuitInstanceView> componentConnection : localConnectionNet.subcircuitInstanceViews)
     {
       SubcircuitInstanceView subcircuitInstanceView = componentConnection.component;
 
@@ -310,17 +313,18 @@ public abstract class PortTraceFinder
       localConnectionsToProcess.add(new LocalConnectionToProcess(subcircuitInstanceSimulation, pinConnection));
     }
 
-    for (ComponentConnection<PinView> componentConnection : connectionNet.pinViews)
+    for (ComponentConnection<PinView> componentConnection : localConnectionNet.pinViews)
     {
       PinView pinView = componentConnection.component;
       List<SubcircuitPinView> subcircuitPinViews = pinView.getSubcircuitPinViews();
       for (SubcircuitPinView subcircuitPinView : subcircuitPinViews)
       {
-        SubcircuitInstanceView subcircuitInstanceView = subcircuitPinView.getSubcircuitInstanceView();
         //I'm not sure this check is good enough for partial wires and splitter views.
         if (!processedSubcircuitPinViews.contains(subcircuitPinView))
         {
           processedSubcircuitPinViews.add(subcircuitPinView);
+
+          SubcircuitInstanceView subcircuitInstanceView = subcircuitPinView.getSubcircuitInstanceView();
           SubcircuitSimulation outerSubcircuitSimulation = subcircuitInstanceView.getComponentSubcircuitSimulation(localConnectionToProcess.subcircuitSimulation.getCircuitSimulation());
           if (outerSubcircuitSimulation != null)
           {

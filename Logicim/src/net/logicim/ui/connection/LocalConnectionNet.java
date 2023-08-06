@@ -1,6 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
@@ -16,15 +17,18 @@ public class LocalConnectionNet
 {
   protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
   protected SubcircuitSimulation subcircuitSimulation;
+  protected CircuitInstanceView circuitInstanceView;
   protected Set<ConnectionView> connectionViews;
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
   public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation,
+                            CircuitInstanceView circuitInstanceView,
                             LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
   {
     this.subcircuitSimulation = subcircuitSimulation;
+    this.circuitInstanceView = circuitInstanceView;
     this.multiSimulationConnectionNet = multiSimulationConnectionNet;
     this.multiSimulationConnectionNet.add(this);
 
@@ -54,7 +58,10 @@ public class LocalConnectionNet
         else if (connectedView instanceof SplitterView)
         {
           //This subcircuitSimulation is problematic.
-          splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView, subcircuitSimulation, connectionView));
+          splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView,
+                                                                subcircuitSimulation,
+                                                                circuitInstanceView,
+                                                                connectionView));
         }
         else if (connectedView instanceof PinView)
         {

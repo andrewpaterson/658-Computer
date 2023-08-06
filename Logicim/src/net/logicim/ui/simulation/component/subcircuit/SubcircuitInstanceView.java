@@ -237,7 +237,7 @@ public class SubcircuitInstanceView
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
-    instanceSubcircuitView.createTracesForSubcircuitInstanceView();  //This does not feel right but it works.
+    instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
 
     return subcircuitInstance;
   }
@@ -412,7 +412,7 @@ public class SubcircuitInstanceView
       throw new SimulatorException("[%s] could not find a component for simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = removed.getSubcircuitInstanceSimulation();
-    instanceSubcircuitView.destroySubciruitInstanceComponentsAndSimulations(subcircuitInstanceSimulation);
+    instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(subcircuitInstanceSimulation);
 
     Circuit circuit = subcircuitSimulation.getCircuit();
     circuit.remove(removed);
@@ -426,7 +426,7 @@ public class SubcircuitInstanceView
     {
       SubcircuitInstance subcircuitInstance = entry.getValue();
       SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
-      instanceSubcircuitView.destroySubciruitInstanceComponentsAndSimulations(subcircuitInstanceSimulation);
+      instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(subcircuitInstanceSimulation);
     }
 
     for (Map.Entry<SubcircuitSimulation, SubcircuitInstance> entry : simulationSubcircuitInstances.entrySet())

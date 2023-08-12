@@ -10,7 +10,9 @@ public class LocalConnectionToProcess
   public SubcircuitSimulation subcircuitSimulation;
   public ConnectionView inputConnectionView;
 
-  public LocalConnectionToProcess(CircuitInstanceView circuitInstanceView, SubcircuitSimulation subcircuitSimulation, ConnectionView inputConnectionView)
+  public LocalConnectionToProcess(CircuitInstanceView circuitInstanceView,
+                                  SubcircuitSimulation subcircuitSimulation,
+                                  ConnectionView inputConnectionView)
   {
     this.circuitInstanceView = circuitInstanceView;
     this.subcircuitSimulation = subcircuitSimulation;

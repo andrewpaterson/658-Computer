@@ -153,7 +153,9 @@ public class LocalMultiSimulationConnectionNet
     wireConnections.add(new WireConnection(connectedView, connectionView));
   }
 
-  private void addConnectedComponent(SubcircuitSimulation subcircuitSimulation, ConnectionView connectionView, ComponentView<?> componentView)
+  private void addConnectedComponent(SubcircuitSimulation subcircuitSimulation,
+                                     ConnectionView connectionView,
+                                     ComponentView<?> componentView)
   {
     List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(subcircuitSimulation);
     if (componentConnections == null)

@@ -1,6 +1,7 @@
 package net.logicim.ui.connection;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class WireList
@@ -18,9 +19,9 @@ public class WireList
     this.connectionNets = connectionNets;
   }
 
-  public void add(FullWire fullWire)
+  public void add(Collection<FullWire> fullWires)
   {
-    fullWires.add(fullWire);
+    this.fullWires.addAll(fullWires);
   }
 
   public void add(PartialWire partialWire)

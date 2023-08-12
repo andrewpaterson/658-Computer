@@ -166,8 +166,6 @@ public abstract class PortTraceFinder
 
   private static WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
-    //CLEAN ME UP PLEASE!
-
     Map<ComponentViewPortName, PortConnection> totalPortWireMap = createSplitterPortMap(connectionNets);
 
     Set<PortConnection> processedPortConnections = new HashSet<>();
@@ -177,40 +175,8 @@ public abstract class PortTraceFinder
       List<PortConnection> portConnections = connectionNet.getPortConnections();
       if (!portConnections.isEmpty())
       {
-        for (PortConnection portConnection : portConnections)
-        {
-          if (!processedPortConnections.contains(portConnection))
-          {
-            List<ComponentViewPortName> portIndexStack = new ArrayList<>();
-            int portStackIndex = 0;
-
-            FullWire fullWire = new FullWire();
-            fullWire.process(portConnection, portIndexStack);
-            processedPortConnections.add(portConnection);
-            while (portStackIndex < portIndexStack.size())
-            {
-              ComponentViewPortName componentViewPortName = portIndexStack.get(portStackIndex);
-              portStackIndex++;
-
-              SplitterView splitterView = (SplitterView) componentViewPortName.componentView;
-              String oppositeSplitterPort = splitterView.getOpposite(componentViewPortName.portName);
-
-              if (oppositeSplitterPort == null)
-              {
-                throw new SimulatorException("Could not find opposite port for splitter.");
-              }
-
-              PortConnection oppositePortConnection = getOppositePortConnection(totalPortWireMap, splitterView, oppositeSplitterPort);
-
-              if (!processedPortConnections.contains(oppositePortConnection) && oppositePortConnection != null)
-              {
-                fullWire.process(oppositePortConnection, portIndexStack);
-                processedPortConnections.add(oppositePortConnection);
-              }
-            }
-            wireList.add(fullWire);
-          }
-        }
+        List<FullWire> fullWires = createFullWires(totalPortWireMap, processedPortConnections, portConnections);
+        wireList.add(fullWires);
       }
       else
       {
@@ -218,6 +184,57 @@ public abstract class PortTraceFinder
       }
     }
     return wireList;
+  }
+
+  private static List<FullWire> createFullWires(Map<ComponentViewPortName, PortConnection> totalPortWireMap,
+                                                Set<PortConnection> processedPortConnections,
+                                                List<PortConnection> portConnections)
+  {
+    List<FullWire> fullWires = new ArrayList<>();
+    for (PortConnection portConnection : portConnections)
+    {
+      if (!processedPortConnections.contains(portConnection))
+      {
+        FullWire fullWire = createFullWire(totalPortWireMap, processedPortConnections, portConnection);
+        fullWires.add(fullWire);
+      }
+    }
+    return fullWires;
+  }
+
+  private static FullWire createFullWire(Map<ComponentViewPortName, PortConnection> totalPortWireMap,
+                                         Set<PortConnection> processedPortConnections,
+                                         PortConnection portConnection)
+  {
+    List<ComponentViewPortName> portIndexStack = new ArrayList<>();
+    FullWire fullWire = new FullWire();
+    fullWire.process(portConnection, portIndexStack);
+    processedPortConnections.add(portConnection);
+    int portStackIndex = 0;
+    while (portStackIndex < portIndexStack.size())
+    {
+      ComponentViewPortName componentViewPortName = portIndexStack.get(portStackIndex);
+      portStackIndex++;
+
+      SplitterView splitterView = (SplitterView) componentViewPortName.componentView;
+      String oppositeSplitterPort = splitterView.getOpposite(componentViewPortName.portName);
+
+      if (oppositeSplitterPort == null)
+      {
+        throw new SimulatorException("Could not find opposite port of [%s] for Splitter View[%s].",
+                                     componentViewPortName.portName,
+                                     splitterView.getDescription());
+      }
+
+      PortConnection oppositePortConnection = getOppositePortConnection(totalPortWireMap, splitterView, oppositeSplitterPort);
+
+      if (!processedPortConnections.contains(oppositePortConnection) && oppositePortConnection != null)
+      {
+        fullWire.process(oppositePortConnection, portIndexStack);
+        processedPortConnections.add(oppositePortConnection);
+      }
+    }
+    return fullWire;
   }
 
   private static PortConnection getOppositePortConnection(Map<ComponentViewPortName, PortConnection> totalPortWireMap, SplitterView splitterView, String oppositeSplitterPort)

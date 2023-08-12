@@ -1,46 +1,35 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PortConnection
 {
   protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
 
-  protected Map<SubcircuitSimulation, List<Port>> connectedPorts;
-  protected Set<Port> splitterPorts;
+  protected List<ComponentViewPortName> connectedPortIndices;
+  protected List<ComponentViewPortName> splitterPortIndices;
 
   public PortConnection(LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
   {
     this.multiSimulationConnectionNet = multiSimulationConnectionNet;
-    this.connectedPorts = new LinkedHashMap<>();
-    this.splitterPorts = new HashSet<>();
+    this.connectedPortIndices = new ArrayList<>();
+    this.splitterPortIndices = new ArrayList<>();
   }
 
-  public void addPort(SubcircuitSimulation subcircuitSimulation, Port port)
+  public void addPort(ComponentView<?> componentView, String portName)
   {
-    List<Port> ports = connectedPorts.get(subcircuitSimulation);
-    if (ports == null)
+    ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName);
+    connectedPortIndices.add(componentViewPortName);
+
+    boolean isSplitter = componentView instanceof SplitterView;
+    if (isSplitter)
     {
-      ports = new ArrayList<>();
-      connectedPorts.put(subcircuitSimulation, ports);
+      splitterPortIndices.add(componentViewPortName);
     }
-    ports.add(port);
-  }
-
-  public void addSplitterPort(Port port)
-  {
-    if (port != null)
-    {
-      splitterPorts.add(port);
-    }
-  }
-
-  public Set<Port> getSplitterPorts()
-  {
-    return splitterPorts;
   }
 
   public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
@@ -48,9 +37,14 @@ public class PortConnection
     return multiSimulationConnectionNet;
   }
 
-  public Map<SubcircuitSimulation, List<Port>> getConnectedPorts()
+  public List<ComponentViewPortName> getConnectedPortIndices()
   {
-    return connectedPorts;
+    return connectedPortIndices;
+  }
+
+  public List<ComponentViewPortName> getSplitterPortIndices()
+  {
+    return splitterPortIndices;
   }
 }
 

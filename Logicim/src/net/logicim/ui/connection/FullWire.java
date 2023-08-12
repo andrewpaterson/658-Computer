@@ -1,7 +1,6 @@
 package net.logicim.ui.connection;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.common.port.Port;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +15,7 @@ public class FullWire
     localWires = new HashSet<>();
   }
 
-  public void process(PortConnection portConnection, List<Port> portStack)
+  public void process(PortConnection portConnection, List<ComponentViewPortName> portIndexStack)
   {
     if (portConnection == null)
     {
@@ -24,11 +23,7 @@ public class FullWire
     }
 
     localWires.add(portConnection);
-    Set<Port> splitterPorts = portConnection.getSplitterPorts();
-    for (Port splitterPort : splitterPorts)
-    {
-      portStack.add(splitterPort);
-    }
+    portIndexStack.addAll(portConnection.getSplitterPortIndices());
   }
 
   public Set<PortConnection> getLocalWires()

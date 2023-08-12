@@ -6,9 +6,6 @@ import net.logicim.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.data.passive.wire.SplitterProperties;
-import net.logicim.domain.common.port.BidirectionalPortMap;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.wire.Splitter;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -40,7 +37,7 @@ public class SplitterView
   protected List<PortView> endPortViews;
   protected PortView startPortView;
 
-  protected Map<SubcircuitSimulation, BidirectionalPortMap> simulationBidirectionalPorts;
+  protected Map<String, String> bidirectionalPortMap;
 
   public SplitterView(SubcircuitView subcircuitView,
                       Int2D position,
@@ -48,25 +45,25 @@ public class SplitterView
                       SplitterProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
-    simulationBidirectionalPorts = new LinkedHashMap<>();
+    bidirectionalPortMap = calculateBidirectionalPortMap();
     createGraphics();
     finaliseView();
   }
 
-  public List<String> getStartPortNames(int bitWidth)
+  public List<String> getStartPortNames()
   {
-    ArrayList<String> result = new ArrayList<>(bitWidth);
-    for (int i = 0; i < bitWidth; i++)
+    ArrayList<String> result = new ArrayList<>(properties.bitWidth);
+    for (int i = 0; i < properties.bitWidth; i++)
     {
       result.add("Start " + i);
     }
     return result;
   }
 
-  public List<String> getEndPortNames(int bitWidth)
+  public List<String> getEndPortNames()
   {
-    ArrayList<String> result = new ArrayList<>(bitWidth);
-    for (int i = 0; i < bitWidth; i++)
+    ArrayList<String> result = new ArrayList<>(properties.bitWidth);
+    for (int i = 0; i < properties.bitWidth; i++)
     {
       result.add("End " + i);
     }
@@ -76,11 +73,11 @@ public class SplitterView
   @Override
   protected void createPortViews()
   {
-    startPortView = new PortView(this, getStartPortNames(properties.bitWidth), new Int2D(createStartPosition()));
-    endPortViews = createEndPorts(properties);
+    startPortView = new PortView(this, getStartPortNames(), new Int2D(createStartPosition()));
+    endPortViews = createEndPorts();
   }
 
-  protected List<Integer> getPortIndicesForFanoutIndex(int fanIndex)
+  protected List<Integer> getPortIndicesForFanoutIndex(SplitterProperties properties, int fanIndex)
   {
     List<Integer> ports = new ArrayList<>();
     for (int i = 0; i < properties.splitIndices.length; i++)
@@ -94,14 +91,14 @@ public class SplitterView
     return ports;
   }
 
-  protected List<PortView> createEndPorts(SplitterProperties properties)
+  protected List<PortView> createEndPorts()
   {
     List<PortView> portViews = new ArrayList<>();
     int portIndex = 0;
-    List<String> endPortNames = getEndPortNames(properties.bitWidth);
+    List<String> endPortNames = getEndPortNames();
     for (int fanOutIndex = 0; fanOutIndex < properties.fanOut; fanOutIndex++)
     {
-      List<Integer> portIndicesForFanOutIndex = getPortIndicesForFanoutIndex(fanOutIndex);
+      List<Integer> portIndicesForFanOutIndex = getPortIndicesForFanoutIndex(properties, fanOutIndex);
       if (portIndicesForFanOutIndex.size() > 0)
       {
         List<String> portNamesForFanOutIndex = new ArrayList<>();
@@ -117,21 +114,6 @@ public class SplitterView
       }
     }
     return portViews;
-  }
-
-  private List<Port> getEndPortsForIndices(List<Integer> portIndicesForFanOutIndex, Splitter splitter)
-  {
-    List<Port> portsForFanOutIndex = new ArrayList<>(portIndicesForFanOutIndex.size());
-    for (Integer indicesForFanOutIndex : portIndicesForFanOutIndex)
-    {
-      portsForFanOutIndex.add(getEndPort(indicesForFanOutIndex, splitter));
-    }
-    return portsForFanOutIndex;
-  }
-
-  private Port getEndPort(int endPortIndex, Splitter splitter)
-  {
-    return splitter.endPorts.get(endPortIndex);
   }
 
   private String getEndPortName(List<String> endPortNames, int endPortIndex)
@@ -156,7 +138,7 @@ public class SplitterView
     List<TextView> textViews = new ArrayList<>();
     for (int endIndex = 0; endIndex < properties.fanOut; endIndex++)
     {
-      List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(endIndex);
+      List<Integer> portIndicesForFanoutIndex = getPortIndicesForFanoutIndex(properties, endIndex);
       String text = toText(portIndicesForFanoutIndex);
       Float2D position = createMidPosition(endIndex);
       TextView textView = new TextView(this,
@@ -384,14 +366,11 @@ public class SplitterView
   @Override
   protected Splitter createPassive(SubcircuitSimulation subcircuitSimulation)
   {
-    List<String> startPortNames = getStartPortNames(properties.bitWidth);
-    Splitter splitter = new Splitter(subcircuitSimulation.getCircuit(),
-                                     properties.name,
-                                     startPortNames,
-                                     getEndPortNames(properties.bitWidth));
-    Map<Port, Port> bidirectionalPortMap = calculateBidirectionalPortMap(splitter);
-    simulationBidirectionalPorts.put(subcircuitSimulation, new BidirectionalPortMap(bidirectionalPortMap));
-    return splitter;
+    List<String> startPortNames = getStartPortNames();
+    return new Splitter(subcircuitSimulation.getCircuit(),
+                        properties.name,
+                        startPortNames,
+                        getEndPortNames());
   }
 
   private Float2D createStartPosition()
@@ -449,32 +428,28 @@ public class SplitterView
     }
   }
 
-  public Map<Port, Port> calculateBidirectionalPortMap(Splitter splitter)
+  public Map<String, String> calculateBidirectionalPortMap()
   {
-    List<TracePort> startPorts = splitter.getStartPorts();
+    HashMap<String, String> result = new HashMap<>();
 
-    HashMap<Port, Port> result = new HashMap<>();
+    List<String> startPortNames = getStartPortNames();
+    List<String> endPortNames = getEndPortNames();
 
     int i = 0;
     for (int fanIndex = 0; fanIndex < properties.fanOut; fanIndex++)
     {
-      List<Port> portsForFanoutIndex = getPortsForFanOutIndex(fanIndex, splitter);
-      for (Port endPort : portsForFanoutIndex)
+      List<Integer> portsForFanoutIndex = getPortIndicesForFanoutIndex(properties, fanIndex);
+      for (Integer endPortIndex : portsForFanoutIndex)
       {
-        Port startPort = startPorts.get(i);
-        result.put(startPort, endPort);
-        result.put(endPort, startPort);
+        String endPortName = endPortNames.get(endPortIndex);
+        String startPortName = startPortNames.get(i);
+        result.put(startPortName, endPortName);
+        result.put(endPortName, startPortName);
         i++;
       }
     }
 
     return result;
-  }
-
-  private List<Port> getPortsForFanOutIndex(int fanIndex, Splitter splitter)
-  {
-    List<Integer> portIndicesForFanOutIndex = getPortIndicesForFanoutIndex(fanIndex);
-    return getEndPortsForIndices(portIndicesForFanOutIndex, splitter);
   }
 
   protected void updateTextViews()
@@ -492,19 +467,6 @@ public class SplitterView
   {
     super.setRotation(rotation);
     updateTextViews();
-  }
-
-  public Map<Port, Port> getSimulationBidirectionalPorts(SubcircuitSimulation subcircuitSimulation)
-  {
-    if (subcircuitSimulation != null)
-    {
-      BidirectionalPortMap bidirectionalPortMap = simulationBidirectionalPorts.get(subcircuitSimulation);
-      if (bidirectionalPortMap != null)
-      {
-        return bidirectionalPortMap.getBidirectionalPortMap();
-      }
-    }
-    return null;
   }
 
   @Override
@@ -528,8 +490,12 @@ public class SplitterView
                          properties.gridSpacing,
                          properties.appearance,
                          properties.endOffset) +
-           builder.toString() +
-           toSimulationsDebugString(simulationBidirectionalPorts.keySet());
+           builder.toString();
+  }
+
+  public String getOpposite(String portName)
+  {
+    return bidirectionalPortMap.get(portName);
   }
 }
 

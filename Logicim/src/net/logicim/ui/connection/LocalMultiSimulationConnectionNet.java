@@ -1,6 +1,5 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;
@@ -10,7 +9,6 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.port.PortViewFinder;
 import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
-import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 import java.util.*;
 
@@ -48,7 +46,7 @@ public class LocalMultiSimulationConnectionNet
       portConnections = createPortConnections(minimumPorts);
 
       findConnections(localConnectionNets);
-      addSplitterPorts();
+      addWirePortIndices();
     }
     else
     {
@@ -166,30 +164,24 @@ public class LocalMultiSimulationConnectionNet
     componentConnections.add(new ComponentConnection<>(componentView, connectionView));
   }
 
-  protected void addSplitterPorts()
+  protected void addWirePortIndices()
   {
     for (Map.Entry<SubcircuitSimulation, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
-      SubcircuitSimulation subcircuitSimulation = entry.getKey();
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
 
       for (ComponentConnection<ComponentView<?>> connectedComponent : componentConnections)
       {
         ComponentView<?> componentView = connectedComponent.component;
-        ConnectionView connection = connectedComponent.connection;
-
-        boolean isSplitter = componentView instanceof SplitterView;
-        PortView portView = componentView.getPortView(connection);
+        ConnectionView connectionView = connectedComponent.connection;
+        PortView portView = componentView.getPortView(connectionView);
+        List<String> portNames = portView.getPortNames();
 
         for (int i = 0; i < portConnections.size(); i++)
         {
+          String portName = portNames.get(i);
           PortConnection portConnection = portConnections.get(i);
-          Port port = portView.getPort(subcircuitSimulation, i);
-          portConnection.addPort(subcircuitSimulation, port);
-          if (isSplitter)
-          {
-            portConnection.addSplitterPort(port);
-          }
+          portConnection.addPort(componentView, portName);
         }
       }
     }

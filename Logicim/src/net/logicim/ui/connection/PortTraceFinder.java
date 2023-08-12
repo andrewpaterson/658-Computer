@@ -1,6 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.common.SimulatorException;
+import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
@@ -8,6 +9,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.WireView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
@@ -25,7 +27,7 @@ public abstract class PortTraceFinder
   {
     WireList wireList = findWires(startingCircuitInstanceView, startingSubcircuitSimulation, inputConnectionView);
 
-    createTracesAndConnectPorts(wireList);
+    createTracesAndConnectPorts(startingSubcircuitSimulation, wireList);
     disconnectWireViews(wireList);
     connectWireViews(wireList);
 
@@ -86,8 +88,10 @@ public abstract class PortTraceFinder
     }
   }
 
-  private static void createTracesAndConnectPorts(WireList wireList)
+  private static void createTracesAndConnectPorts(SubcircuitSimulation startingSubcircuitSimulation, WireList wireList)
   {
+    Simulation simulation = startingSubcircuitSimulation.getSimulation();
+
     List<FullWire> fullWires = wireList.getFullWires();
     for (FullWire fullWire : fullWires)
     {
@@ -97,17 +101,16 @@ public abstract class PortTraceFinder
       {
         LocalMultiSimulationConnectionNet multiSimulationConnectionNet = localWire.getMultiSimulationConnectionNet();
 
-        Map<SubcircuitSimulation, List<Port>> connectedPorts = localWire.getConnectedPorts();
-        for (Map.Entry<SubcircuitSimulation, List<Port>> entry : connectedPorts.entrySet())
+        List<ComponentViewPortName> connectedPortIndices = localWire.getConnectedPortIndices();
+        for (ComponentViewPortName connectedPortIndex : connectedPortIndices)
         {
-          SubcircuitSimulation subcircuitSimulation = entry.getKey();
-          List<Port> ports = entry.getValue();
-          for (Port port : ports)
-          {
-            port.disconnect(subcircuitSimulation.getSimulation());
-            port.connect(trace);
-          }
+          ComponentView<?> componentView = connectedPortIndex.componentView;
+          String portName = connectedPortIndex.portName;
+          Port port = componentView.getPort(startingSubcircuitSimulation, portName);
+          port.disconnect(simulation);
+          port.connect(trace);
         }
+
         multiSimulationConnectionNet.addTrace(trace);
       }
     }
@@ -163,10 +166,11 @@ public abstract class PortTraceFinder
 
   private static WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
-    Map<Port, Port> totalSplitterPortMap = createSplitterPortMap(connectionNets);
-    Map<Port, PortConnection> totalPortWireMap = createPortWireMap(connectionNets);
+    //CLEAN ME UP PLEASE!
 
-    Set<PortConnection> processedWires = new HashSet<>();
+    Map<ComponentViewPortName, PortConnection> totalPortWireMap = createSplitterPortMap(connectionNets);
+
+    Set<PortConnection> processedPortConnections = new HashSet<>();
     WireList wireList = new WireList(connectionNets);
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
@@ -175,29 +179,33 @@ public abstract class PortTraceFinder
       {
         for (PortConnection portConnection : portConnections)
         {
-          if (!processedWires.contains(portConnection))
+          if (!processedPortConnections.contains(portConnection))
           {
-            List<Port> portStack = new ArrayList<>();
+            List<ComponentViewPortName> portIndexStack = new ArrayList<>();
             int portStackIndex = 0;
 
             FullWire fullWire = new FullWire();
-            fullWire.process(portConnection, portStack);
-            processedWires.add(portConnection);
-            while (portStackIndex < portStack.size())
+            fullWire.process(portConnection, portIndexStack);
+            processedPortConnections.add(portConnection);
+            while (portStackIndex < portIndexStack.size())
             {
-              Port port = portStack.get(portStackIndex);
+              ComponentViewPortName componentViewPortName = portIndexStack.get(portStackIndex);
               portStackIndex++;
 
-              Port oppositeSplitterPort = totalSplitterPortMap.get(port);
+              SplitterView splitterView = (SplitterView) componentViewPortName.componentView;
+              String oppositeSplitterPort = splitterView.getOpposite(componentViewPortName.portName);
+
               if (oppositeSplitterPort == null)
               {
                 throw new SimulatorException("Could not find opposite port for splitter.");
               }
-              PortConnection oppositePortConnection = totalPortWireMap.get(oppositeSplitterPort);
-              if (!processedWires.contains(oppositePortConnection) && oppositePortConnection != null)
+
+              PortConnection oppositePortConnection = getOppositePortConnection(totalPortWireMap, splitterView, oppositeSplitterPort);
+
+              if (!processedPortConnections.contains(oppositePortConnection) && oppositePortConnection != null)
               {
-                fullWire.process(oppositePortConnection, portStack);
-                processedWires.add(oppositePortConnection);
+                fullWire.process(oppositePortConnection, portIndexStack);
+                processedPortConnections.add(oppositePortConnection);
               }
             }
             wireList.add(fullWire);
@@ -212,41 +220,39 @@ public abstract class PortTraceFinder
     return wireList;
   }
 
-  private static Map<Port, Port> createSplitterPortMap(List<LocalMultiSimulationConnectionNet> connectionNets)
+  private static PortConnection getOppositePortConnection(Map<ComponentViewPortName, PortConnection> totalPortWireMap, SplitterView splitterView, String oppositeSplitterPort)
   {
-    Map<Port, Port> totalSplitterPortMap = new HashMap<>();
-    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+    PortConnection oppositePortConnection = null;
+    for (Map.Entry<ComponentViewPortName, PortConnection> entry : totalPortWireMap.entrySet())
     {
-      for (LocalConnectionNet localConnectionNet : connectionNet.getLocalConnectionNets())
+      ComponentViewPortName key = entry.getKey();
+      if (key.componentView == splitterView)
       {
-        List<ComponentSimulationConnection<SplitterView>> splitterViews = localConnectionNet.getSplitterViews();
-        for (ComponentSimulationConnection<SplitterView> componentConnection : splitterViews)
+        if (key.portName.equals(oppositeSplitterPort))
         {
-          SplitterView splitterView = componentConnection.component;
-          Map<Port, Port> portMap = splitterView.getSimulationBidirectionalPorts(localConnectionNet.getSubcircuitSimulation());
-          if (portMap != null)
-          {
-            totalSplitterPortMap.putAll(portMap);
-          }
+          oppositePortConnection = entry.getValue();
         }
       }
     }
-
-    return totalSplitterPortMap;
+    return oppositePortConnection;
   }
 
-  private static Map<Port, PortConnection> createPortWireMap(List<LocalMultiSimulationConnectionNet> connectionNets)
+  private static Map<ComponentViewPortName, PortConnection> createSplitterPortMap(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
-    Map<Port, PortConnection> totalPortWireMap = new HashMap<>();
+    Map<ComponentViewPortName, PortConnection> totalPortWireMap = new HashMap<>();
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
       List<PortConnection> portConnections = connectionNet.getPortConnections();
       for (PortConnection portConnection : portConnections)
       {
-        Set<Port> splitterPorts = portConnection.splitterPorts;
-        for (Port splitterPort : splitterPorts)
+        List<ComponentViewPortName> splitterPortIndices = portConnection.getSplitterPortIndices();
+        for (ComponentViewPortName splitterPortIndex : splitterPortIndices)
         {
-          totalPortWireMap.put(splitterPort, portConnection);
+          PortConnection existing = totalPortWireMap.put(splitterPortIndex, portConnection);
+          if (existing != null)
+          {
+            throw new SimulatorException("A port connection already existed for splitter port index.");
+          }
         }
       }
     }

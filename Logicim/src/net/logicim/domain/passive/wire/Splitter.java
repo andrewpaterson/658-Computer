@@ -15,7 +15,10 @@ public class Splitter
   public List<TracePort> startPorts;
   public List<TracePort> endPorts;
 
-  public Splitter(Circuit circuit, String name, List<String> startPortNames, List<String> endPortNames)
+  public Splitter(Circuit circuit,
+                  String name,
+                  List<String> startPortNames,
+                  List<String> endPortNames)
   {
     super(circuit, name);
 

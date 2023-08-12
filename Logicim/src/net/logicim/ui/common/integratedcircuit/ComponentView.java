@@ -435,6 +435,12 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
+  public Port getPort(SubcircuitSimulation subcircuitSimulation, String portName)
+  {
+    Component component = getComponent(subcircuitSimulation);
+    return component.getPort(portName);
+  }
+
   public abstract String getComponentType();
 
   public abstract Set<SubcircuitSimulation> getComponentSubcircuitSimulations();

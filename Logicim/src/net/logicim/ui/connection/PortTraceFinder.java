@@ -4,8 +4,6 @@ import net.logicim.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.common.ConnectionView;
@@ -25,7 +23,7 @@ public abstract class PortTraceFinder
                                                                              SubcircuitSimulation startingSubcircuitSimulation,
                                                                              ConnectionView inputConnectionView)
   {
-    WireList wireList = findWires(startingCircuitInstanceView, startingSubcircuitSimulation, inputConnectionView);
+    WireList wireList = findWires(startingCircuitInstanceView, inputConnectionView);
 
     createTracesAndConnectPorts(startingSubcircuitSimulation, wireList);
     disconnectWireViews(wireList);
@@ -39,9 +37,9 @@ public abstract class PortTraceFinder
     for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
     {
       Set<WireView> processedWireViews = new HashSet<>();
-      for (Map.Entry<SubcircuitSimulation, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
+      for (Map.Entry<CircuitInstanceView, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
       {
-        SubcircuitSimulation subcircuitSimulation = entry.getKey();
+        CircuitInstanceView subcircuitSimulation = entry.getKey();
         List<WireConnection> wireConnections = entry.getValue();
         for (WireConnection connectedWire : wireConnections)
         {
@@ -117,7 +115,6 @@ public abstract class PortTraceFinder
   }
 
   private static WireList findWires(CircuitInstanceView startingCircuitInstanceView,
-                                    SubcircuitSimulation startingSubcircuitSimulation,
                                     ConnectionView startingConnectionView)
   {
     if (startingConnectionView == null)
@@ -126,7 +123,7 @@ public abstract class PortTraceFinder
     }
 
     List<ComponentSimulationConnection<SplitterView>> splitterViewStack = new ArrayList<>();
-    ComponentSimulationConnection<SplitterView> startingSplitterlessConnection = new ComponentSimulationConnection<>(null, startingSubcircuitSimulation, startingCircuitInstanceView, startingConnectionView);
+    ComponentSimulationConnection<SplitterView> startingSplitterlessConnection = new ComponentSimulationConnection<>(null, startingCircuitInstanceView, startingConnectionView);
     splitterViewStack.add(startingSplitterlessConnection);
 
     Set<ConnectionView> processedSplitterViewConnections = new HashSet<>();
@@ -140,7 +137,6 @@ public abstract class PortTraceFinder
       if (!processedSplitterViewConnections.contains(connectionView))
       {
         processLocalMultiSimulationConnections(splitterViewConnection.circuitInstanceView,
-                                               splitterViewConnection.subcircuitSimulation,
                                                connectionView,
                                                connectionNets,
                                                splitterViewStack,
@@ -270,7 +266,6 @@ public abstract class PortTraceFinder
   }
 
   private static void processLocalMultiSimulationConnections(CircuitInstanceView startingCircuitInstanceView,
-                                                             SubcircuitSimulation startingSubcircuitSimulation,
                                                              ConnectionView inputConnectionView,
                                                              List<LocalMultiSimulationConnectionNet> connectionNets,
                                                              List<ComponentSimulationConnection<SplitterView>> splitterViewStack,
@@ -281,7 +276,7 @@ public abstract class PortTraceFinder
     connectionNets.add(localMultiSimulationConnectionNet);
 
     List<LocalConnectionToProcess> localConnectionsToProcess = new ArrayList<>();
-    localConnectionsToProcess.add(new LocalConnectionToProcess(startingCircuitInstanceView, startingSubcircuitSimulation, inputConnectionView));
+    localConnectionsToProcess.add(new LocalConnectionToProcess(startingCircuitInstanceView, inputConnectionView));
 
     while (localConnectionsToProcess.size() > 0)
     {
@@ -302,9 +297,9 @@ public abstract class PortTraceFinder
                                               Set<ConnectionView> processedSplitterViewConnections,
                                               Set<SubcircuitPinView> processedSubcircuitPinViews)
   {
-    LocalConnectionNet localConnectionNet = new LocalConnectionNet(localConnectionToProcess.subcircuitSimulation,
-                                                                   localConnectionToProcess.circuitInstanceView,
-                                                                   localMultiSimulationConnectionNet
+    LocalConnectionNet localConnectionNet = new LocalConnectionNet(
+        localConnectionToProcess.circuitInstanceView,
+        localMultiSimulationConnectionNet
     );
     localConnectionNet.process(localConnectionToProcess.inputConnectionView);
 
@@ -325,16 +320,7 @@ public abstract class PortTraceFinder
 
       ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, componentConnection.connection);
 
-      SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(localConnectionToProcess.subcircuitSimulation);
-      if (subcircuitInstance == null)
-      {
-        throw new SimulatorException("Subcircuit instance view [%s] component is [null] for simulation [%s].",
-                                     subcircuitInstanceView.getDescription(),
-                                     localConnectionToProcess.subcircuitSimulation.getDescription());
-      }
-      SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
       localConnectionsToProcess.add(new LocalConnectionToProcess(localConnectionToProcess.circuitInstanceView,
-                                                                 subcircuitInstanceSimulation,
                                                                  pinConnection));
     }
 
@@ -350,14 +336,9 @@ public abstract class PortTraceFinder
           processedSubcircuitPinViews.add(subcircuitPinView);
 
           SubcircuitInstanceView subcircuitInstanceView = subcircuitPinView.getSubcircuitInstanceView();
-          SubcircuitSimulation outerSubcircuitSimulation = subcircuitInstanceView.getComponentSubcircuitSimulation(localConnectionToProcess.subcircuitSimulation.getCircuitSimulation());
-          if (outerSubcircuitSimulation != null)
-          {
-            ConnectionView subcircuitInstanceConnection = subcircuitPinView.getConnection();
-            localConnectionsToProcess.add(new LocalConnectionToProcess(subcircuitInstanceView,
-                                                                       outerSubcircuitSimulation,
-                                                                       subcircuitInstanceConnection));
-          }
+          ConnectionView subcircuitInstanceConnection = subcircuitPinView.getConnection();
+          localConnectionsToProcess.add(new LocalConnectionToProcess(subcircuitInstanceView,
+                                                                     subcircuitInstanceConnection));
         }
       }
     }
@@ -383,7 +364,6 @@ public abstract class PortTraceFinder
     {
       List<ComponentSimulationConnection<SplitterView>> splitterViewConnectionList = createSplitterViewConnections(processedSplitterViewConnections,
                                                                                                                    splitterViewConnection.component,
-                                                                                                                   splitterViewConnection.subcircuitSimulation,
                                                                                                                    splitterViewConnection.circuitInstanceView);
       splitterComponentsConnections.addAll(splitterViewConnectionList);
     }
@@ -393,7 +373,6 @@ public abstract class PortTraceFinder
 
   private static List<ComponentSimulationConnection<SplitterView>> createSplitterViewConnections(Set<ConnectionView> processedSplitterViewConnections,
                                                                                                  SplitterView splitterView,
-                                                                                                 SubcircuitSimulation subcircuitSimulation,
                                                                                                  CircuitInstanceView circuitInstanceView)
   {
     List<ComponentSimulationConnection<SplitterView>> splitterComponentsConnections = new ArrayList<>();
@@ -405,7 +384,6 @@ public abstract class PortTraceFinder
       if (!processedSplitterViewConnections.contains(portConnectionView))
       {
         splitterComponentsConnections.add(new ComponentSimulationConnection<>(splitterView,
-                                                                              subcircuitSimulation,
                                                                               circuitInstanceView,
                                                                               portConnectionView));
       }

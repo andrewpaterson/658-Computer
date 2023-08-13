@@ -1,6 +1,5 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -16,18 +15,17 @@ import java.util.Set;
 public class LocalConnectionNet
 {
   protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
-  protected SubcircuitSimulation subcircuitSimulation;
+
+  //This is not specific enough.  The circuitInstanceView could be duplicated if Main -> A -> C and Main -> B -> C.  C is the same CircuitInstanceView in both cases but does not follow the same connections.
   protected CircuitInstanceView circuitInstanceView;
   protected Set<ConnectionView> connectionViews;
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(SubcircuitSimulation subcircuitSimulation,
-                            CircuitInstanceView circuitInstanceView,
+  public LocalConnectionNet(CircuitInstanceView circuitInstanceView,
                             LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
   {
-    this.subcircuitSimulation = subcircuitSimulation;
     this.circuitInstanceView = circuitInstanceView;
     this.multiSimulationConnectionNet = multiSimulationConnectionNet;
     this.multiSimulationConnectionNet.add(this);
@@ -59,7 +57,6 @@ public class LocalConnectionNet
         {
           //This subcircuitSimulation is problematic.
           splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView,
-                                                                subcircuitSimulation,
                                                                 circuitInstanceView,
                                                                 connectionView));
         }
@@ -76,14 +73,14 @@ public class LocalConnectionNet
     return connectionViews;
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation()
-  {
-    return subcircuitSimulation;
-  }
-
   public List<ComponentSimulationConnection<SplitterView>> getSplitterViews()
   {
     return splitterViews;
+  }
+
+  public CircuitInstanceView getCircuitInstanceView()
+  {
+    return circuitInstanceView;
   }
 }
 

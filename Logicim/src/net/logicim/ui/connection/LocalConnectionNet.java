@@ -14,8 +14,6 @@ import java.util.Set;
 
 public class LocalConnectionNet
 {
-  protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
-
   //This is not specific enough.  The circuitInstanceView could be duplicated if Main -> A -> C and Main -> B -> C.  C is the same CircuitInstanceView in both cases but does not follow the same connections.
   protected CircuitInstanceView circuitInstanceView;
   protected Set<ConnectionView> connectionViews;
@@ -23,12 +21,9 @@ public class LocalConnectionNet
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(CircuitInstanceView circuitInstanceView,
-                            LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
+  public LocalConnectionNet(CircuitInstanceView circuitInstanceView)
   {
     this.circuitInstanceView = circuitInstanceView;
-    this.multiSimulationConnectionNet = multiSimulationConnectionNet;
-    this.multiSimulationConnectionNet.add(this);
 
     this.subcircuitInstanceViews = new ArrayList<>();
     this.pinViews = new ArrayList<>();

@@ -297,10 +297,8 @@ public abstract class PortTraceFinder
                                               Set<ConnectionView> processedSplitterViewConnections,
                                               Set<SubcircuitPinView> processedSubcircuitPinViews)
   {
-    LocalConnectionNet localConnectionNet = new LocalConnectionNet(
-        localConnectionToProcess.circuitInstanceView,
-        localMultiSimulationConnectionNet
-    );
+    LocalConnectionNet localConnectionNet = new LocalConnectionNet(localConnectionToProcess.circuitInstanceView);
+    localMultiSimulationConnectionNet.add(localConnectionNet);
     localConnectionNet.process(localConnectionToProcess.inputConnectionView);
 
     splitterViewStack.addAll(createSplitterViewComponentConnections(localConnectionNet, processedSplitterViewConnections));
@@ -320,8 +318,7 @@ public abstract class PortTraceFinder
 
       ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, componentConnection.connection);
 
-      localConnectionsToProcess.add(new LocalConnectionToProcess(localConnectionToProcess.circuitInstanceView,
-                                                                 pinConnection));
+      localConnectionsToProcess.add(new LocalConnectionToProcess(localConnectionToProcess.circuitInstanceView, pinConnection));
     }
 
     for (ComponentConnection<PinView> componentConnection : localConnectionNet.pinViews)

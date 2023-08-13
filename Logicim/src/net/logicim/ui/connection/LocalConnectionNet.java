@@ -20,7 +20,7 @@ public class LocalConnectionNet
 
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
-  protected List<SplitterProcessStackItem> splitterViews;
+  protected List<ComponentConnection<SplitterView>> splitterViews;
 
   public LocalConnectionNet(CircuitInstanceView circuitInstanceView)
   {
@@ -51,9 +51,7 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof SplitterView)
         {
-          splitterViews.add(new SplitterProcessStackItem((SplitterView) connectedView,
-                                                           circuitInstanceView,
-                                                           connectionView));
+          splitterViews.add(new ComponentConnection<>((SplitterView) connectedView, connectionView));
         }
         else if (connectedView instanceof PinView)
         {
@@ -68,7 +66,7 @@ public class LocalConnectionNet
     return connectionViews;
   }
 
-  public List<SplitterProcessStackItem> getSplitterViews()
+  public List<ComponentConnection<SplitterView>> getSplitterViews()
   {
     return splitterViews;
   }

@@ -353,15 +353,15 @@ public abstract class PortTraceFinder
                                                                                        Set<ConnectionView> processedSplitterViewConnections)
   {
     List<SplitterProcessStackItem> splitterComponentsConnections = new ArrayList<>();
-    List<SplitterProcessStackItem> splitterViews = connectionNet.getSplitterViews();
+    List<ComponentConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();
 
     updatedProcessedSplitterViewConnections(processedSplitterViewConnections, splitterViews);
 
-    for (SplitterProcessStackItem splitterViewConnection : splitterViews)
+    for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
       List<SplitterProcessStackItem> splitterViewConnectionList = createSplitterViewConnections(processedSplitterViewConnections,
                                                                                                 splitterViewConnection.component,
-                                                                                                splitterViewConnection.circuitInstanceView);
+                                                                                                connectionNet.circuitInstanceView);
       splitterComponentsConnections.addAll(splitterViewConnectionList);
     }
 
@@ -389,13 +389,11 @@ public abstract class PortTraceFinder
   }
 
   private static void updatedProcessedSplitterViewConnections(Set<ConnectionView> processedSplitterViewConnections,
-                                                              List<SplitterProcessStackItem> splitterViews)
+                                                              List<ComponentConnection<SplitterView>> splitterViews)
   {
-    for (SplitterProcessStackItem splitterViewConnection : splitterViews)
+    for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
-      ConnectionView connectionView = splitterViewConnection.connection;
-
-      processedSplitterViewConnections.add(connectionView);
+      processedSplitterViewConnections.add(splitterViewConnection.connection);
     }
   }
 

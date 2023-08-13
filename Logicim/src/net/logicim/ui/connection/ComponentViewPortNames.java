@@ -6,35 +6,19 @@ import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PortConnection
+public class ComponentViewPortNames
 {
-  protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
-
   protected List<ComponentViewPortName> connectedPortIndices;
-  protected List<ComponentViewPortName> splitterPortIndices;
 
-  public PortConnection(LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
+  public ComponentViewPortNames()
   {
-    this.multiSimulationConnectionNet = multiSimulationConnectionNet;
     this.connectedPortIndices = new ArrayList<>();
-    this.splitterPortIndices = new ArrayList<>();
   }
 
   public void addPort(ComponentView<?> componentView, String portName)
   {
     ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName);
     connectedPortIndices.add(componentViewPortName);
-
-    boolean isSplitter = componentView instanceof SplitterView;
-    if (isSplitter)
-    {
-      splitterPortIndices.add(componentViewPortName);
-    }
-  }
-
-  public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
-  {
-    return multiSimulationConnectionNet;
   }
 
   public List<ComponentViewPortName> getConnectedPortIndices()
@@ -44,6 +28,17 @@ public class PortConnection
 
   public List<ComponentViewPortName> getSplitterPortIndices()
   {
+    List<ComponentViewPortName> splitterPortIndices= new ArrayList<>();
+    for (ComponentViewPortName componentViewPortName : connectedPortIndices)
+    {
+      ComponentView<?> componentView = componentViewPortName.componentView;
+      boolean isSplitter = componentView instanceof SplitterView;
+      if (isSplitter)
+      {
+        splitterPortIndices.add(componentViewPortName);
+      }
+
+    }
     return splitterPortIndices;
   }
 }

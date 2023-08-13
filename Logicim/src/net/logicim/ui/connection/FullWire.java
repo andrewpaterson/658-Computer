@@ -8,25 +8,25 @@ import java.util.Set;
 
 public class FullWire
 {
-  protected Set<PortConnection> localWires;
+  protected Set<ComponentViewPortNames> localWires;
 
   public FullWire()
   {
     localWires = new HashSet<>();
   }
 
-  public void process(PortConnection portConnection, List<ComponentViewPortName> portIndexStack)
+  public void process(ComponentViewPortNames componentViewPortNames, List<ComponentViewPortName> portIndexStack)
   {
-    if (portConnection == null)
+    if (componentViewPortNames == null)
     {
       throw new SimulatorException("PortConnection may not be null.");
     }
 
-    localWires.add(portConnection);
-    portIndexStack.addAll(portConnection.getSplitterPortIndices());
+    localWires.add(componentViewPortNames);
+    portIndexStack.addAll(componentViewPortNames.getSplitterPortIndices());
   }
 
-  public Set<PortConnection> getLocalWires()
+  public Set<ComponentViewPortNames> getLocalWires()
   {
     return localWires;
   }

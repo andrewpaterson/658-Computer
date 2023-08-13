@@ -55,7 +55,6 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof SplitterView)
         {
-          //This subcircuitSimulation is problematic.
           splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView,
                                                                 circuitInstanceView,
                                                                 connectionView));

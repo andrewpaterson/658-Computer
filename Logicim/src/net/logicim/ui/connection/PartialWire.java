@@ -1,6 +1,5 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 
 import java.util.List;

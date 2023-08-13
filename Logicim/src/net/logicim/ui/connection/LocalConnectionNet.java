@@ -17,9 +17,10 @@ public class LocalConnectionNet
   //This is not specific enough.  The circuitInstanceView could be duplicated if Main -> A -> C and Main -> B -> C.  C is the same CircuitInstanceView in both cases but does not follow the same connections.
   protected CircuitInstanceView circuitInstanceView;
   protected Set<ConnectionView> connectionViews;
+
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
-  protected List<ComponentSimulationConnection<SplitterView>> splitterViews;
+  protected List<SplitterProcessStackItem> splitterViews;
 
   public LocalConnectionNet(CircuitInstanceView circuitInstanceView)
   {
@@ -50,9 +51,9 @@ public class LocalConnectionNet
         }
         else if (connectedView instanceof SplitterView)
         {
-          splitterViews.add(new ComponentSimulationConnection<>((SplitterView) connectedView,
-                                                                circuitInstanceView,
-                                                                connectionView));
+          splitterViews.add(new SplitterProcessStackItem((SplitterView) connectedView,
+                                                           circuitInstanceView,
+                                                           connectionView));
         }
         else if (connectedView instanceof PinView)
         {
@@ -67,7 +68,7 @@ public class LocalConnectionNet
     return connectionViews;
   }
 
-  public List<ComponentSimulationConnection<SplitterView>> getSplitterViews()
+  public List<SplitterProcessStackItem> getSplitterViews()
   {
     return splitterViews;
   }

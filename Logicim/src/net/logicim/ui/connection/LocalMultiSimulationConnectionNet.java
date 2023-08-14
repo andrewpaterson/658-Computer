@@ -1,7 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -18,8 +18,8 @@ public class LocalMultiSimulationConnectionNet
 
   protected Set<Trace> traces = new LinkedHashSet<>();
 
-  protected Map<CircuitInstanceView, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
-  protected Map<CircuitInstanceView, List<WireConnection>> connectedWires;
+  protected Map<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
+  protected Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires;
   protected List<ComponentConnection<PinView>> pinViews;
 
   protected List<ComponentViewPortNames> componentViewPortNames;  //These are the editor 'traces'.
@@ -117,7 +117,7 @@ public class LocalMultiSimulationConnectionNet
     for (LocalConnectionNet localConnectionNet : localConnectionNets)
     {
       Set<ConnectionView> connections = localConnectionNet.getConnectionViews();
-      CircuitInstanceView circuitInstanceView = localConnectionNet.getCircuitInstanceView();
+      CircuitInstanceViewPath path = localConnectionNet.getPath();
       for (ConnectionView connectionView : connections)
       {
         List<View> localConnected = connectionView.getConnectedComponents();
@@ -131,29 +131,29 @@ public class LocalMultiSimulationConnectionNet
               pinViews.add(new ComponentConnection<>((PinView) connectedView, connectionView));
             }
 
-            addConnectedComponent(circuitInstanceView, connectionView, componentView);
+            addConnectedComponent(path, connectionView, componentView);
           }
           else if (connectedView instanceof WireView)
           {
-            addConnectedWire(circuitInstanceView, connectionView, (WireView) connectedView);
+            addConnectedWire(path, connectionView, (WireView) connectedView);
           }
         }
       }
     }
   }
 
-  private void addConnectedWire(CircuitInstanceView circuitInstanceView, ConnectionView connectionView, WireView connectedView)
+  private void addConnectedWire(CircuitInstanceViewPath path, ConnectionView connectionView, WireView connectedView)
   {
-    List<WireConnection> wireConnections = connectedWires.get(circuitInstanceView);
+    List<WireConnection> wireConnections = connectedWires.get(path);
     if (wireConnections == null)
     {
       wireConnections = new ArrayList<>();
-      connectedWires.put(circuitInstanceView, wireConnections);
+      connectedWires.put(path, wireConnections);
     }
     wireConnections.add(new WireConnection(connectedView, connectionView));
   }
 
-  private void addConnectedComponent(CircuitInstanceView circuitInstanceView,
+  private void addConnectedComponent(CircuitInstanceViewPath circuitInstanceView,
                                      ConnectionView connectionView,
                                      ComponentView<?> componentView)
   {
@@ -168,7 +168,7 @@ public class LocalMultiSimulationConnectionNet
 
   protected void addWirePortIndices()
   {
-    for (Map.Entry<CircuitInstanceView, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
+    for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
 
@@ -189,7 +189,7 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  public Map<CircuitInstanceView, List<WireConnection>> getConnectedWires()
+  public Map<CircuitInstanceViewPath, List<WireConnection>> getConnectedWires()
   {
     return connectedWires;
   }
@@ -202,7 +202,7 @@ public class LocalMultiSimulationConnectionNet
   public List<ConnectionView> getConnectionViews()
   {
     List<ConnectionView> connectionViews = new ArrayList<>(connectedComponents.size());
-    for (Map.Entry<CircuitInstanceView, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
+    for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)
@@ -228,7 +228,7 @@ public class LocalMultiSimulationConnectionNet
   {
     StringBuilder builder = new StringBuilder();
 
-    for (Map.Entry<CircuitInstanceView, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
+    for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)

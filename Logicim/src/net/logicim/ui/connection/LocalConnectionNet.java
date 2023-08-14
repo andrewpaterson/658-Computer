@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
@@ -14,17 +14,16 @@ import java.util.Set;
 
 public class LocalConnectionNet
 {
-  //This is not specific enough.  The circuitInstanceView could be duplicated if Main -> A -> C and Main -> B -> C.  C is the same CircuitInstanceView in both cases but does not follow the same connections.
-  protected CircuitInstanceView circuitInstanceView;
+  protected CircuitInstanceViewPath path;
   protected Set<ConnectionView> connectionViews;
 
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(CircuitInstanceView circuitInstanceView)
+  public LocalConnectionNet(CircuitInstanceViewPath path)
   {
-    this.circuitInstanceView = circuitInstanceView;
+    this.path = path;
 
     this.subcircuitInstanceViews = new ArrayList<>();
     this.pinViews = new ArrayList<>();
@@ -71,9 +70,9 @@ public class LocalConnectionNet
     return splitterViews;
   }
 
-  public CircuitInstanceView getCircuitInstanceView()
+  public CircuitInstanceViewPath getPath()
   {
-    return circuitInstanceView;
+    return path;
   }
 }
 

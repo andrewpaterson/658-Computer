@@ -1,22 +1,21 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
-import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 public class SplitterViewProcessStackItem
 {
-  protected SplitterView component;
-  protected CircuitInstanceView circuitInstanceView;
+  protected SplitterView splitterView;
+  protected CircuitInstanceViewPath path;
   protected ConnectionView connection;
 
-  public SplitterViewProcessStackItem(SplitterView component,
-                                      CircuitInstanceView circuitInstanceView,
+  public SplitterViewProcessStackItem(SplitterView splitterView,
+                                      CircuitInstanceViewPath path,
                                       ConnectionView connection)
   {
-    this.component = component;
-    this.circuitInstanceView = circuitInstanceView;
+    this.splitterView = splitterView;
+    this.path = path;
     this.connection = connection;
   }
 }

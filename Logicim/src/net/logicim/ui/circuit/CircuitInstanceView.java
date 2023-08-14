@@ -33,13 +33,13 @@ public interface CircuitInstanceView
 
   private List<CircuitInstanceViewParent> getCircuitInstanceViews()
   {
-    List<CircuitInstanceViewParent> circuitInstanceViewParents = new ArrayList<>();
+    List<CircuitInstanceViewParent> circuitInstanceViews = new ArrayList<>();
 
     Counter counter = new Counter();
     CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(null, this, counter.tick());
-    circuitInstanceViewParents.add(instanceViewParent);
-    recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
-    return circuitInstanceViewParents;
+    circuitInstanceViews.add(instanceViewParent);
+    recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViews, counter);
+    return circuitInstanceViews;
   }
 
   private void recurseFindSubCircuitViews(CircuitInstanceViewParent circuitInstanceViewParent, List<CircuitInstanceViewParent> circuitInstanceViewParents, Counter counter)

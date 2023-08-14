@@ -1,16 +1,16 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 
 public class ConnectionViewProcessStackItem
 {
-  public CircuitInstanceView circuitInstanceView;
+  public CircuitInstanceViewPath circuitInstanceViewPath;
   public ConnectionView inputConnectionView;
 
-  public ConnectionViewProcessStackItem(CircuitInstanceView circuitInstanceView, ConnectionView inputConnectionView)
+  public ConnectionViewProcessStackItem(CircuitInstanceViewPath circuitInstanceViewPath, ConnectionView inputConnectionView)
   {
-    this.circuitInstanceView = circuitInstanceView;
+    this.circuitInstanceViewPath = circuitInstanceViewPath;
     this.inputConnectionView = inputConnectionView;
   }
 }

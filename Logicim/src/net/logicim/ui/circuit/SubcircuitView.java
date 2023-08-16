@@ -26,7 +26,9 @@ import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.*;
 import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
-import net.logicim.ui.connection.PortTraceFinder;
+import net.logicim.ui.connection.WireList;
+import net.logicim.ui.connection.WireListFinder;
+import net.logicim.ui.connection.WireTraceConverter;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.ConnectionViewCache;
 import net.logicim.ui.simulation.StaticViewIterator;
@@ -649,8 +651,10 @@ public class SubcircuitView
 
         if (!updatedConnectionViews.contains(connectionView))
         {
-          List<LocalMultiSimulationConnectionNet> connectionNets = PortTraceFinder.findAndConnectTraces(circuitInstanceView, subcircuitSimulation, connectionView);
-          List<ConnectionView> connectionNetConnectionViews = PortTraceFinder.getConnectionViews(connectionNets);
+          WireList wireList = WireListFinder.findAndConnectTraces(circuitInstanceView, connectionView);
+          WireTraceConverter.createTracesAndConnectPorts(wireList, subcircuitSimulation);
+          List<LocalMultiSimulationConnectionNet> connectionNets = wireList.getConnectionNets();
+          List<ConnectionView> connectionNetConnectionViews = WireListFinder.getConnectionViews(connectionNets);
           updatedConnectionViews.addAll(connectionNetConnectionViews);
         }
       }

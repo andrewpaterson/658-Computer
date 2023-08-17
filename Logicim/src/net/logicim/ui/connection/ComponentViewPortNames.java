@@ -8,10 +8,12 @@ import java.util.List;
 
 public class ComponentViewPortNames
 {
+  protected LocalMultiSimulationConnectionNet multiSimulationConnectionNet;
   protected List<ComponentViewPortName> connectedPortIndices;
 
-  public ComponentViewPortNames()
+  public ComponentViewPortNames(LocalMultiSimulationConnectionNet multiSimulationConnectionNet)
   {
+    this.multiSimulationConnectionNet = multiSimulationConnectionNet;
     this.connectedPortIndices = new ArrayList<>();
   }
 
@@ -40,6 +42,11 @@ public class ComponentViewPortNames
 
     }
     return splitterPortIndices;
+  }
+
+  public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
+  {
+    return multiSimulationConnectionNet;
   }
 }
 

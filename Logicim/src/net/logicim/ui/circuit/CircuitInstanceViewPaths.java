@@ -12,9 +12,13 @@ public class CircuitInstanceViewPaths
 {
   protected Set<CircuitInstanceViewPath> paths;
 
-  public CircuitInstanceViewPaths(CircuitInstanceView circuitInstanceView)
+  public CircuitInstanceViewPaths()
   {
     paths = new LinkedHashSet<>();
+  }
+
+  public void process(CircuitInstanceView circuitInstanceView)
+  {
     List<CircuitInstanceView> path = new ArrayList<>();
     recurseFindPaths(circuitInstanceView, path);
   }
@@ -72,6 +76,11 @@ public class CircuitInstanceViewPaths
     }
 
     throw new SimulatorException("Cannot find a path matching path");
+  }
+
+  public Set<CircuitInstanceViewPath> getPaths()
+  {
+    return paths;
   }
 }
 

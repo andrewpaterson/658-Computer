@@ -4,79 +4,41 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
-import net.logicim.ui.common.wire.WireView;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public abstract class WireTraceConverter
+public class WireTraceConverter
 {
-  public static void createTracesAndConnectPorts(WireList wireList, SubcircuitSimulation startingSubcircuitSimulation)
-  {
-    createTracesAndConnectPorts(startingSubcircuitSimulation, wireList);
-    disconnectWireViews(wireList);
-    connectWireViews(wireList);
-  }
+  protected Map<LocalMultiSimulationConnectionNet, List<Trace>> localMultiSimulationConnectionNetMap;
 
-  protected static void connectWireViews(WireList wireList)
+  public WireTraceConverter(CircuitInstanceViewPaths circuitInstanceViewPaths, SubcircuitSimulation startingSubcircuitSimulation)
   {
-    for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
+    localMultiSimulationConnectionNetMap = new HashMap<>();
+
+    for (CircuitInstanceViewPath circuitInstanceViewPath : circuitInstanceViewPaths.getPaths())
     {
-      Set<WireView> processedWireViews = new HashSet<>();
-      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
+      List<CircuitInstanceView> path = circuitInstanceViewPath.getPath();
+      SubcircuitSimulation subcircuitSimulation =startingSubcircuitSimulation;
+      for (CircuitInstanceView circuitInstanceView : path)
       {
-        CircuitInstanceViewPath path = entry.getKey();
-        List<WireConnection> wireConnections = entry.getValue();
-        for (WireConnection connectedWire : wireConnections)
-        {
-          WireView wireView = connectedWire.wireView;
-          if (!processedWireViews.contains(wireView))
-          {
-            wireView.connectTraces(path, connectionNet.getTraces());
-            processedWireViews.add(wireView);
-          }
-        }
+        circuitInstanceView.getDescription();
       }
     }
   }
 
-  protected static void disconnectWireViews(WireList wireList)
+  public void createTracesAndConnectPorts(WireList wireList, SubcircuitSimulation verySuspect)
   {
-    for (PartialWire partialWire : wireList.getPartialWires())
-    {
-      Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires = partialWire.connectedWires;
-      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectedWires.entrySet())
-      {
-        SubcircuitSimulation subcircuitSimulation = entry.getKey();
-        List<WireConnection> wireConnections1 = entry.getValue();
-        for (WireConnection wireConnection : wireConnections1)
-        {
-          WireView wireView = wireConnection.getWireView();
-          wireView.disconnect(subcircuitSimulation);
-        }
-      }
-    }
+    createTracesAndConnectPorts(verySuspect, wireList);
 
-    for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
-    {
-      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
-      {
-        CircuitInstanceViewPath subcircuitSimulation = entry.getKey();
-        List<WireConnection> wireConnections = entry.getValue();
-        for (WireConnection connectedWire : wireConnections)
-        {
-          WireView wireView = connectedWire.wireView;
-          wireView.disconnect(subcircuitSimulation);
-        }
-      }
-    }
+//    disconnectWireViews(wireList);
+//    connectWireViews(wireList);
   }
 
-  private static void createTracesAndConnectPorts(SubcircuitSimulation startingSubcircuitSimulation, WireList wireList)
+  private void createTracesAndConnectPorts(SubcircuitSimulation startingSubcircuitSimulation, WireList wireList)
   {
     Simulation simulation = startingSubcircuitSimulation.getSimulation();
 
@@ -99,8 +61,74 @@ public abstract class WireTraceConverter
           port.connect(trace);
         }
 
-        multiSimulationConnectionNet.addTrace(trace);
+        addTrace(multiSimulationConnectionNet, trace);
       }
     }
   }
+
+//  protected void connectWireViews(WireList wireList)
+//  {
+//    for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
+//    {
+//      Set<WireView> processedWireViews = new HashSet<>();
+//      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
+//      {
+//        CircuitInstanceViewPath path = entry.getKey();
+//        List<WireConnection> wireConnections = entry.getValue();
+//        for (WireConnection connectedWire : wireConnections)
+//        {
+//          WireView wireView = connectedWire.wireView;
+//          if (!processedWireViews.contains(wireView))
+//          {
+//            wireView.connectTraces(path, connectionNet.getTraces());
+//            processedWireViews.add(wireView);
+//          }
+//        }
+//      }
+//    }
+//  }
+//
+//  protected void disconnectWireViews(WireList wireList)
+//  {
+//    for (PartialWire partialWire : wireList.getPartialWires())
+//    {
+//      Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires = partialWire.connectedWires;
+//      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectedWires.entrySet())
+//      {
+//        SubcircuitSimulation subcircuitSimulation = entry.getKey();
+//        List<WireConnection> wireConnections1 = entry.getValue();
+//        for (WireConnection wireConnection : wireConnections1)
+//        {
+//          WireView wireView = wireConnection.getWireView();
+//          wireView.disconnect(subcircuitSimulation);
+//        }
+//      }
+//    }
+//
+//    for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets())
+//    {
+//      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectionNet.getConnectedWires().entrySet())
+//      {
+//        CircuitInstanceViewPath subcircuitSimulation = entry.getKey();
+//        List<WireConnection> wireConnections = entry.getValue();
+//        for (WireConnection connectedWire : wireConnections)
+//        {
+//          WireView wireView = connectedWire.wireView;
+//          wireView.disconnect(subcircuitSimulation);
+//        }
+//      }
+//    }
+//  }
+
+  private void addTrace(LocalMultiSimulationConnectionNet multiSimulationConnectionNet, Trace trace)
+  {
+    List<Trace> traces = localMultiSimulationConnectionNetMap.get(multiSimulationConnectionNet);
+    if (traces == null)
+    {
+      traces = new ArrayList<>();
+      localMultiSimulationConnectionNetMap.put(multiSimulationConnectionNet, traces);
+    }
+    traces.add(trace);
+  }
 }
+

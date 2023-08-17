@@ -13,6 +13,7 @@ import net.logicim.domain.common.Described;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -74,7 +75,10 @@ public class SubcircuitEditor
   {
     clearSelection();
 
-    subcircuitView.startMoveComponents(this, staticViews, traceViews);
+    subcircuitView.startMoveComponents(this,
+                                       createCircuitInstanceViewPaths(),
+                                       staticViews,
+                                       traceViews);
   }
 
   public void doneMoveComponents(List<StaticView<?>> staticViews,
@@ -85,6 +89,7 @@ public class SubcircuitEditor
   )
   {
     List<View> newSelection = subcircuitView.doneMoveComponents(this,
+                                                                createCircuitInstanceViewPaths(),
                                                                 staticViews,
                                                                 newTraceViewLines,
                                                                 removeTraceViews,
@@ -116,7 +121,9 @@ public class SubcircuitEditor
         traceViews.add((TraceView) view);
       }
     }
-    subcircuitView.deleteTraceViews(this, traceViews);
+    subcircuitView.deleteTraceViews(this,
+                                    createCircuitInstanceViewPaths(),
+                                    traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();
     for (View view : selectedViews)
@@ -126,7 +133,9 @@ public class SubcircuitEditor
         staticViews.add((StaticView<?>) view);
       }
     }
-    subcircuitView.deleteStaticViews(this, staticViews);
+    subcircuitView.deleteStaticViews(this,
+                                     createCircuitInstanceViewPaths(),
+                                     staticViews);
     selection.clearSelection();
   }
 
@@ -188,7 +197,9 @@ public class SubcircuitEditor
 
   public void deleteTraceViews(Set<TraceView> traceViews)
   {
-    subcircuitView.deleteTraceViews(this, traceViews);
+    subcircuitView.deleteTraceViews(this,
+                                    createCircuitInstanceViewPaths(),
+                                    traceViews);
   }
 
   public StaticViewIterator staticViewIterator()
@@ -279,7 +290,9 @@ public class SubcircuitEditor
 
   public void deleteStaticViews(List<StaticView<?>> staticViews)
   {
-    subcircuitView.deleteStaticViews(this, staticViews);
+    subcircuitView.deleteStaticViews(this,
+                                     createCircuitInstanceViewPaths(),
+                                     staticViews);
   }
 
   public List<View> pasteClipboardViews(List<TraceData> traces,
@@ -318,7 +331,9 @@ public class SubcircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    subcircuitView.deleteStaticView(this, staticView);
+    subcircuitView.deleteStaticView(this,
+                                    createCircuitInstanceViewPaths(),
+                                    staticView);
   }
 
   public void validate()
@@ -329,7 +344,9 @@ public class SubcircuitEditor
 
   public void createTraceViews(List<Line> newTraceViewLines)
   {
-    subcircuitView.createTraceViews(this, newTraceViewLines);
+    subcircuitView.createTraceViews(this,
+                                    createCircuitInstanceViewPaths(),
+                                    newTraceViewLines);
   }
 
   public List<View> loadViews(List<TraceData> traces,
@@ -520,6 +537,11 @@ public class SubcircuitEditor
   {
     List<CircuitInstanceView> orderedTopDownCircuitInstanceViews = getOrderedCircuitInstanceViews();
     subcircuitView.validateSimulations(orderedTopDownCircuitInstanceViews);
+  }
+
+  public CircuitInstanceViewPaths createCircuitInstanceViewPaths()
+  {
+    return circuitEditor.createCircuitInstanceViewPaths();
   }
 }
 

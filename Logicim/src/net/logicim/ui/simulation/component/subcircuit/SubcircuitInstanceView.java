@@ -237,7 +237,7 @@ public class SubcircuitInstanceView
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
-    instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
+    //instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
 
     return subcircuitInstance;
   }

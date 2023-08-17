@@ -1,8 +1,6 @@
 package net.logicim.ui.connection;
 
 import net.logicim.common.SimulatorException;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.common.ConnectionView;
@@ -16,10 +14,8 @@ import java.util.*;
 
 public abstract class WireListFinder
 {
-  public static WireList findAndConnectTraces(CircuitInstanceView startingCircuitInstanceView,
-                                              ConnectionView inputConnectionView)
+  public static WireList findAndConnectTraces(ConnectionView inputConnectionView, CircuitInstanceViewPaths paths)
   {
-    CircuitInstanceViewPaths paths = new CircuitInstanceViewPaths(startingCircuitInstanceView);
     return findWires(inputConnectionView, paths);
   }
 
@@ -35,7 +31,7 @@ public abstract class WireListFinder
     splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(), startingConnectionView));
 
     Set<ConnectionView> processedSplitterViewConnections = new HashSet<>();
-    Set<SubcircuitPinView> processedSubcircuitInstanceViews = new HashSet<>();
+    Set<SubcircuitPinView> processedSubcircuitPinViews = new HashSet<>();
     List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
 
     while (splitterViewStack.size() > 0)
@@ -49,7 +45,7 @@ public abstract class WireListFinder
                                                connectionNets,
                                                splitterViewStack,
                                                processedSplitterViewConnections,
-                                               processedSubcircuitInstanceViews,
+                                               processedSubcircuitPinViews,
                                                paths);
       }
     }

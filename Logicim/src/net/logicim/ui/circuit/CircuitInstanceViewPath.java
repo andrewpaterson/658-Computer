@@ -30,4 +30,10 @@ public class CircuitInstanceViewPath
       return true;
     }
   }
+
+  public List<CircuitInstanceView> getPath()
+  {
+    return path;
+  }
 }
+

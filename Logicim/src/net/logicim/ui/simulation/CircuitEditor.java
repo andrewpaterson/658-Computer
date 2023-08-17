@@ -19,6 +19,7 @@ import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -829,6 +830,16 @@ public class CircuitEditor
   public SubcircuitInstanceViewFinder getSubcircuitInstanceViewFinder()
   {
     return subcircuitEditors;
+  }
+
+  public CircuitInstanceViewPaths createCircuitInstanceViewPaths()
+  {
+    CircuitInstanceViewPaths circuitInstanceViewPaths = new CircuitInstanceViewPaths();
+    for (SubcircuitEditor subcircuitEditor : getSubcircuitEditors())
+    {
+      circuitInstanceViewPaths.process(subcircuitEditor);
+    }
+    return circuitInstanceViewPaths;
   }
 }
 

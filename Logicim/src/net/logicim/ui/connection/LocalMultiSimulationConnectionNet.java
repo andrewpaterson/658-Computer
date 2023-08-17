@@ -1,6 +1,5 @@
 package net.logicim.ui.connection;
 
-import net.logicim.domain.common.wire.Trace;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -15,8 +14,6 @@ import java.util.*;
 public class LocalMultiSimulationConnectionNet
 {
   protected List<LocalConnectionNet> localConnectionNets;
-
-  protected Set<Trace> traces = new LinkedHashSet<>();
 
   protected Map<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
   protected Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires;
@@ -66,7 +63,7 @@ public class LocalMultiSimulationConnectionNet
     List<ComponentViewPortNames> componentViewPortNames = new ArrayList<>(minimumPorts);
     for (int i = 0; i < minimumPorts; i++)
     {
-      componentViewPortNames.add(new ComponentViewPortNames());
+      componentViewPortNames.add(new ComponentViewPortNames(this));
     }
     return componentViewPortNames;
   }
@@ -212,16 +209,6 @@ public class LocalMultiSimulationConnectionNet
       }
     }
     return connectionViews;
-  }
-
-  public void addTrace(Trace trace)
-  {
-    traces.add(trace);
-  }
-
-  public List<Trace> getTraces()
-  {
-    return new ArrayList<>(traces);
   }
 
   public String toString()

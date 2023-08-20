@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 public class FileUtil
 {
+  private static final int EOF = -1;
+
   public static File createTemporaryFile(String prefix, String suffix)
   {
     try
@@ -829,4 +831,48 @@ public class FileUtil
     path = path + noExtension;
     return new File(path);
   }
+
+  public static long copyLarge(final InputStream input, final OutputStream output, final byte[] buffer)
+      throws IOException
+  {
+    long count = 0;
+    int n;
+    while (EOF != (n = input.read(buffer)))
+    {
+      output.write(buffer, 0, n);
+      count += n;
+    }
+    return count;
+  }
+
+  public static int copy(final InputStream input, final OutputStream output) throws IOException
+  {
+    final long count = copyLarge(input, output, new byte[4 * 1024]);
+    if (count > Integer.MAX_VALUE)
+    {
+      return -1;
+    }
+    return (int) count;
+  }
+
+  public static byte[] toByteArray(final InputStream input) throws IOException
+  {
+    final ByteArrayOutputStream output = new ByteArrayOutputStream();
+    int copy = copy(input, output);
+    return output.toByteArray();
+  }
+
+  public static byte[] readBytes(File file)
+  {
+    try
+    {
+      BufferedInputStream inputStream = openInputStream(file);
+      return toByteArray(inputStream);
+    }
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 }
+

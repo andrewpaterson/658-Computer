@@ -1,5 +1,6 @@
 package net.common.parser;
 
+import net.common.SimulatorException;
 import net.common.parser.primitive.CharPointer;
 import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
@@ -24,9 +25,16 @@ public class TextParser
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
     text = new StringZero((int) file.length() + 1);
-    bufferedReader.read(text.getValues());
-    text.setEnd((int) file.length());
-    initialise();
+    int read = bufferedReader.read(text.getValues());
+    if (read == -1)
+    {
+      text.setEnd((int) file.length());
+      initialise();
+    }
+    else
+    {
+      throw new SimulatorException("Could not fully read file [%s].", file.getName());
+    }
   }
 
   public TextParser(char[] text)
@@ -897,14 +905,14 @@ public class TextParser
   {
     TextParserPosition textPosition = new TextParserPosition();
     textPosition.position = position;
-    textPosition.positions = new ArrayList<Integer>(mcPositions);
+    textPosition.positions = new ArrayList<>(mcPositions);
     return textPosition;
   }
 
   public void loadSettings(TextParserPosition textPosition)
   {
     position = textPosition.position;
-    mcPositions = new ArrayList<Integer>(textPosition.positions);
+    mcPositions = new ArrayList<>(textPosition.positions);
     testEnd();
   }
 

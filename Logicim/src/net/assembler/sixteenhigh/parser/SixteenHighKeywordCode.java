@@ -51,10 +51,14 @@ public enum SixteenHighKeywordCode
   not_assign,         // ~=
   increment,          // ++
   decrement,          // --
-  go,                 // go
+  go,
+  go_sub,             // gosub
   subtract_compare,   // ?-
   and_compare,        // ?&
-  test_set,           // TS
-  test_reset,         // TR
+  is_true,            // ?
+  is_false,           // ?!
+  test_set,           // ts
+  test_reset,         // tr
+  ret,                // return
 }
 

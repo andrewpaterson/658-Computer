@@ -1,9 +1,9 @@
 package net.logicim.ui.simulation;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.geometry.Line;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.geometry.Line;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.LastSubcircuitSimulationData;
 import net.logicim.data.circuit.SubcircuitEditorData;

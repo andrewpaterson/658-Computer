@@ -1,6 +1,6 @@
 package net.logicim.ui.info;
 
-import net.logicim.common.util.StringUtil;
+import net.common.util.StringUtil;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.Logicim;

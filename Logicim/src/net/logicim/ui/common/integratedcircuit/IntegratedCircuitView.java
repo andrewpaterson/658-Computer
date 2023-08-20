@@ -1,8 +1,8 @@
 package net.logicim.ui.common.integratedcircuit;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.collection.linkedlist.LinkedList;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitProperties;
 import net.logicim.data.integratedcircuit.event.IntegratedCircuitEventData;

@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.type.Int2D;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 

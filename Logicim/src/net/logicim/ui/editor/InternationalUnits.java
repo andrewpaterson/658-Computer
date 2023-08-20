@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
 public class InternationalUnits
 {

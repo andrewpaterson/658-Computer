@@ -1,7 +1,7 @@
 package net.logicim.ui.placement;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Float2D;
+import net.common.SimulatorException;
+import net.common.type.Float2D;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.Edit;
 import net.logicim.ui.common.Viewport;

@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.common.type.Float2D;
+import net.common.type.Float2D;
 
 public class SubcircuitViewParameters
 {

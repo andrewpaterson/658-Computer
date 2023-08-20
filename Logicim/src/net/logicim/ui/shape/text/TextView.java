@@ -1,8 +1,8 @@
 package net.logicim.ui.shape.text;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Tuple2;
+import net.common.SimulatorException;
+import net.common.type.Float2D;
+import net.common.type.Tuple2;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;

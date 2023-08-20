@@ -1,12 +1,11 @@
 package net.logicim;
 
 
-import net.logicim.common.geometry.LineMinimiserTest;
-import net.logicim.common.geometry.LineSplitterTest;
+import net.common.geometry.LineMinimiserTest;
+import net.common.geometry.LineSplitterTest;
 import net.logicim.domain.SimulationTest;
 import net.logicim.domain.common.event.EventPropagationTest;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationTest;
-import net.logicim.file.writer.ReflectiveWriter;
 import net.logicim.file.writer.ReflectiveWriterTest;
 import net.logicim.ui.editor.InternationalUnitsTest;
 

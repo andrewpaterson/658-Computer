@@ -1,7 +1,7 @@
 package net.logicim.data.subciruit;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;

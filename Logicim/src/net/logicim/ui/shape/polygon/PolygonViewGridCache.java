@@ -1,6 +1,6 @@
 package net.logicim.ui.shape.polygon;
 
-import net.logicim.common.type.Tuple2;
+import net.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.shape.common.GridCache;
 

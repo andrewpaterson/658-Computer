@@ -2,7 +2,7 @@ package net.logicim.domain;
 
 import net.logicim.assertions.SmoothVoltage;
 import net.logicim.assertions.TraceSmoothVoltage;
-import net.logicim.common.collection.linkedlist.LinkedList;
+import net.common.collection.linkedlist.LinkedList;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.SimultaneousEvents;

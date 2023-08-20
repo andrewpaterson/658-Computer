@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.common.ConnectionView;

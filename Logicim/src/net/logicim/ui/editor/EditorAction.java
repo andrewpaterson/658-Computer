@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.ui.Logicim;
 
 public abstract class EditorAction

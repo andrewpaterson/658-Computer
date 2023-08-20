@@ -1,6 +1,6 @@
 package net.logicim.data.integratedcircuit.decorative;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.common.DecorativeData;
 import net.logicim.ui.common.Rotation;

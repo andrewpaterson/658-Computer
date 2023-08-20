@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.integratedcircuit.extra;
 
-import net.logicim.common.type.Float2D;
+import net.common.type.Float2D;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.arc.ArcView;

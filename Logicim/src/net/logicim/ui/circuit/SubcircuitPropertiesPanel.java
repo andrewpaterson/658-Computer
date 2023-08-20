@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.components.typeeditor.TextPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;

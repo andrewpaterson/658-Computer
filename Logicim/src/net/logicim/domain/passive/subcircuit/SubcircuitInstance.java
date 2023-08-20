@@ -1,6 +1,6 @@
 package net.logicim.domain.passive.subcircuit;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;

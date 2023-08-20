@@ -1,6 +1,6 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

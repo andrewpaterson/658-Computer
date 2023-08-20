@@ -1,6 +1,6 @@
 package net.logicim.ui.common.wire;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;

@@ -1,6 +1,6 @@
 package net.logicim.data.passive.power;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.ui.common.Rotation;

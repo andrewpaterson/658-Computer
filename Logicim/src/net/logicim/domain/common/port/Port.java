@@ -1,6 +1,6 @@
 package net.logicim.domain.common.port;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.wire.Trace;

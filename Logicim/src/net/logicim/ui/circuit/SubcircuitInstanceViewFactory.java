@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.Rotation;

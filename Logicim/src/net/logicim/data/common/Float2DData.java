@@ -1,6 +1,6 @@
 package net.logicim.data.common;
 
-import net.logicim.common.type.Float2D;
+import net.common.type.Float2D;
 
 import java.util.Map;
 

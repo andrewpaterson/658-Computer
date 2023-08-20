@@ -1,6 +1,6 @@
 package net.logicim.ui.input.mouse;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 
 public class MousePosition
 {

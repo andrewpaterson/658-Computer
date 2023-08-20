@@ -1,6 +1,6 @@
 package net.logicim.data.simulation;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

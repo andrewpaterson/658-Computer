@@ -1,7 +1,7 @@
 package net.logicim.ui.shape.rectangle;
 
-import net.logicim.common.type.Tuple1;
-import net.logicim.common.type.Tuple2;
+import net.common.type.Tuple1;
+import net.common.type.Tuple2;
 import net.logicim.ui.common.Rotation;
 
 public class Rectangle

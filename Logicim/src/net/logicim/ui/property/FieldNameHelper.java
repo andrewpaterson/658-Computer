@@ -1,6 +1,6 @@
 package net.logicim.ui.property;
 
-import static net.logicim.common.util.StringUtil.javaNameToHumanReadable;
+import static net.common.util.StringUtil.javaNameToHumanReadable;
 
 public class FieldNameHelper
 {

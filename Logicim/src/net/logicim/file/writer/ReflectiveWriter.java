@@ -1,10 +1,10 @@
 package net.logicim.file.writer;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.reflect.InstanceInspector;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
-import net.logicim.common.util.StringUtil;
+import net.common.SimulatorException;
+import net.common.reflect.InstanceInspector;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
+import net.common.util.StringUtil;
 import net.logicim.data.common.*;
 import net.logicim.domain.common.state.State;
 import net.logicim.ui.common.Rotation;

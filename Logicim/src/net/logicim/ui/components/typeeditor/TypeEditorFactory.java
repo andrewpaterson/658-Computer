@@ -1,6 +1,6 @@
 package net.logicim.ui.components.typeeditor;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.data.common.Divider;
 import net.logicim.ui.property.DividerPropertyEditor;
 import net.logicim.ui.property.PropertiesPanel;

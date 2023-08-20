@@ -1,6 +1,6 @@
 package net.logicim.data.common;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
 import java.util.Map;
 

@@ -1,7 +1,7 @@
 package net.logicim.ui.subcircuit;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.util.StringUtil;
+import net.common.SimulatorException;
+import net.common.util.StringUtil;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;

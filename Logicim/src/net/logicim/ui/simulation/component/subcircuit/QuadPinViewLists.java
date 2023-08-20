@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
-import net.logicim.common.type.Float2D;
+import net.common.type.Float2D;
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.ui.common.Fonts;

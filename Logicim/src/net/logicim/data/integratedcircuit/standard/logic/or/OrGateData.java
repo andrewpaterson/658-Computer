@@ -1,6 +1,6 @@
 package net.logicim.data.integratedcircuit.standard.logic.or;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.family.Family;
 import net.logicim.data.integratedcircuit.event.SimulationIntegratedCircuitEventData;
 import net.logicim.data.integratedcircuit.standard.logic.common.LogicGateData;

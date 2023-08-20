@@ -1,10 +1,10 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
-import net.logicim.common.type.Tuple2;
-import net.logicim.common.util.StringUtil;
+import net.common.SimulatorException;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
+import net.common.type.Tuple2;
+import net.common.util.StringUtil;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;

@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;

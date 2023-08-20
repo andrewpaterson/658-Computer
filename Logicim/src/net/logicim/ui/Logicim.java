@@ -1,11 +1,11 @@
 package net.logicim.ui;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.reflect.PackageInspector;
-import net.logicim.common.reflect.PackageInspectorStore;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
-import net.logicim.common.util.StringUtil;
+import net.common.SimulatorException;
+import net.common.reflect.PackageInspector;
+import net.common.reflect.PackageInspectorStore;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
+import net.common.util.StringUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.editor.BookmarkData;

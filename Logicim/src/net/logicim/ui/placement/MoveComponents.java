@@ -1,8 +1,8 @@
 package net.logicim.ui.placement;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.geometry.Line;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.geometry.Line;
+import net.common.type.Int2D;
 import net.logicim.ui.Edit;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;

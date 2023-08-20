@@ -1,6 +1,6 @@
 package net.logicim.ui.components.typeeditor;
 
-import net.logicim.common.util.EnumUtil;
+import net.common.util.EnumUtil;
 
 import javax.swing.*;
 import java.awt.*;

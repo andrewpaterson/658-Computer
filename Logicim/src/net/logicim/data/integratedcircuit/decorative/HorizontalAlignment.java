@@ -1,6 +1,6 @@
 package net.logicim.data.integratedcircuit.decorative;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
 public enum HorizontalAlignment
 {

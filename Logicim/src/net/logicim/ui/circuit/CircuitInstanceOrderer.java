@@ -1,12 +1,12 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.dependency.Orderer;
+import net.common.dependency.Orderer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import static net.logicim.common.util.CollectionUtil.newList;
+import static net.common.util.CollectionUtil.newList;
 
 public class CircuitInstanceOrderer
 {

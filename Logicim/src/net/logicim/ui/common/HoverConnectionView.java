@@ -1,6 +1,6 @@
 package net.logicim.ui.common;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.ui.common.integratedcircuit.View;
 
 public class HoverConnectionView

@@ -1,7 +1,7 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.util.IntUtil;
+import net.common.SimulatorException;
+import net.common.util.IntUtil;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.Instruction;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.InstructionFactory;
@@ -9,8 +9,8 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.Ins
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.DataOperation;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.Operation;
 
-import static net.logicim.common.util.IntUtil.*;
-import static net.logicim.common.util.StringUtil.*;
+import static net.common.util.IntUtil.*;
+import static net.common.util.StringUtil.*;
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.CpuFlags.*;
 
 public class W65C816

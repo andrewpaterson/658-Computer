@@ -1,6 +1,6 @@
 package net.logicim.domain;
 
-import net.logicim.common.util.StringUtil;
+import net.common.util.StringUtil;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.common.Circuit;

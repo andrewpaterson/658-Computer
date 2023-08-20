@@ -1,6 +1,6 @@
 package net.logicim.domain.common.port.event;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.data.port.event.SlewEventData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Timeline;

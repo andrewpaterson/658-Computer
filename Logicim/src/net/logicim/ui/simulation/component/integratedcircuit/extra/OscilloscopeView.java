@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation.component.integratedcircuit.extra;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;

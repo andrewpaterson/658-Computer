@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
 public abstract class OffsetAddressCycle
     extends BaseAddressCycle

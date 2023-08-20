@@ -1,8 +1,8 @@
 package net.logicim.domain.common;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.collection.redblacktree.RedBlackNode;
-import net.logicim.common.collection.redblacktree.RedBlackTree;
+import net.common.SimulatorException;
+import net.common.collection.redblacktree.RedBlackNode;
+import net.common.collection.redblacktree.RedBlackTree;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.event.Event;

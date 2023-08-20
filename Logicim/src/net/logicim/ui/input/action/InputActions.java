@@ -1,6 +1,6 @@
 package net.logicim.ui.input.action;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.editor.EditorAction;

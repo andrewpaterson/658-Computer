@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.factory;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.circuit.SubcircuitView;

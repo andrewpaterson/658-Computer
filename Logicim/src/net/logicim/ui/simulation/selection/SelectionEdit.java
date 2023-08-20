@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation.selection;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.ui.Edit;
 import net.logicim.ui.common.Strokes;
 import net.logicim.ui.common.Viewport;

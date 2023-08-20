@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;

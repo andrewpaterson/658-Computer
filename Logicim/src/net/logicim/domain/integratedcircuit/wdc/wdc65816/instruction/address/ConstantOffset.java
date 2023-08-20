@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 
 public class ConstantOffset

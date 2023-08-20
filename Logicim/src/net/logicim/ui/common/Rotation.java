@@ -1,9 +1,9 @@
 package net.logicim.ui.common;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
-import net.logicim.common.type.Tuple2;
+import net.common.SimulatorException;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
+import net.common.type.Tuple2;
 
 public enum Rotation
 {

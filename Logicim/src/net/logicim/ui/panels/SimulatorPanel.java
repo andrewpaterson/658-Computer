@@ -1,6 +1,6 @@
 package net.logicim.ui.panels;
 
-import net.logicim.common.util.FileUtil;
+import net.common.util.FileUtil;
 import net.logicim.data.editor.EditorData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.file.reader.LogicimFileReader;

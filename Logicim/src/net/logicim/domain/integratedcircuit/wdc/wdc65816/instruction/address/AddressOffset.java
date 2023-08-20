@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address;
 
-import net.logicim.common.util.IntUtil;
+import net.common.util.IntUtil;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.Address;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycleParameter;

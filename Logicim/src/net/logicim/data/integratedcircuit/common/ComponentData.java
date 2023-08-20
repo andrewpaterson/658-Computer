@@ -1,7 +1,7 @@
 package net.logicim.data.integratedcircuit.common;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.type.Int2D;
 import net.logicim.data.port.common.LogicPortData;
 import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;

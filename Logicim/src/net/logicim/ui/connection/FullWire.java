@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
 import java.util.HashSet;
 import java.util.List;

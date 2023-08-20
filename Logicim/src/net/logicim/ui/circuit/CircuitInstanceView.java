@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.util.Counter;
+import net.common.util.Counter;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;

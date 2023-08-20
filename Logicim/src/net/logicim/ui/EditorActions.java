@@ -1,6 +1,6 @@
 package net.logicim.ui;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.ui.editor.EditorAction;
 
 import java.util.LinkedHashMap;

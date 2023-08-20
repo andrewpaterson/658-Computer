@@ -1,7 +1,7 @@
 package net.logicim.data.wire;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.type.Int2D;
+import net.common.SimulatorException;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

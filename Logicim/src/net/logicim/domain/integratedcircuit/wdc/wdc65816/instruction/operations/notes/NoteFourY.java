@@ -3,7 +3,7 @@ package net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.Operation;
 
-import static net.logicim.common.util.IntUtil.getLowByte;
+import static net.common.util.IntUtil.getLowByte;
 
 public class NoteFourY
     extends Operation

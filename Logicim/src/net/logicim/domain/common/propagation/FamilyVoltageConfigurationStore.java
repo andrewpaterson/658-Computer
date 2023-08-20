@@ -1,10 +1,10 @@
 package net.logicim.domain.common.propagation;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.csv.CSVFileReader;
-import net.logicim.common.csv.CSVRow;
-import net.logicim.common.util.EnvironmentInspector;
-import net.logicim.common.util.StringUtil;
+import net.common.SimulatorException;
+import net.common.csv.CSVFileReader;
+import net.common.csv.CSVRow;
+import net.common.util.EnvironmentInspector;
+import net.common.util.StringUtil;
 import net.logicim.data.family.Family;
 
 import java.io.File;

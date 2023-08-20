@@ -1,6 +1,6 @@
 package net.logicim.ui.property;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactory;

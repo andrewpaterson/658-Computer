@@ -1,6 +1,6 @@
 package net.logicim.data.editor;
 
-import net.logicim.common.type.Float2D;
+import net.common.type.Float2D;
 import net.logicim.data.common.ReflectiveData;
 
 public class SubcircuitParameterData

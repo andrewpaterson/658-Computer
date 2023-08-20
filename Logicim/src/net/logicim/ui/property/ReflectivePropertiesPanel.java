@@ -1,7 +1,7 @@
 package net.logicim.ui.property;
 
-import net.logicim.common.reflect.ClassInspector;
-import net.logicim.common.reflect.InstanceInspector;
+import net.common.reflect.ClassInspector;
+import net.common.reflect.InstanceInspector;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;

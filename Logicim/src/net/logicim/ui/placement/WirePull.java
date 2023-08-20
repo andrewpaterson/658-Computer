@@ -1,7 +1,7 @@
 package net.logicim.ui.placement;
 
-import net.logicim.common.geometry.Line;
-import net.logicim.common.type.Int2D;
+import net.common.geometry.Line;
+import net.common.type.Int2D;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.Edit;
 import net.logicim.ui.common.Colours;

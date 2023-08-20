@@ -1,8 +1,8 @@
 package net.logicim.data.common;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.reflect.EnumStore;
-import net.logicim.common.util.EnumUtil;
+import net.common.SimulatorException;
+import net.common.reflect.EnumStore;
+import net.common.util.EnumUtil;
 
 import java.util.Map;
 

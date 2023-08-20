@@ -1,7 +1,7 @@
 package net.logicim.ui.icons;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.util.FileUtil;
+import net.common.SimulatorException;
+import net.common.util.FileUtil;
 import net.logicim.ui.common.Colours;
 
 import javax.imageio.ImageIO;

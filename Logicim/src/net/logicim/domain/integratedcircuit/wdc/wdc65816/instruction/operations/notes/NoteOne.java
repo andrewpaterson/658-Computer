@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.notes;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.WidthFromRegister;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.Operation;

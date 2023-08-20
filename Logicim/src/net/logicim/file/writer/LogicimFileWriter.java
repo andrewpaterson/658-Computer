@@ -1,6 +1,6 @@
 package net.logicim.file.writer;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.data.common.SaveData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

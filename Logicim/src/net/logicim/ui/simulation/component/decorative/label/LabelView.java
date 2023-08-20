@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.decorative.label;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.decorative.LabelData;

@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;

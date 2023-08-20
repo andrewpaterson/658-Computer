@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.selection;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;

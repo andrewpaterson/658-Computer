@@ -1,13 +1,13 @@
 package net.logicim.ui.circuit;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.geometry.Line;
-import net.logicim.common.geometry.LineMinimiser;
-import net.logicim.common.geometry.LinePositionCache;
-import net.logicim.common.geometry.LineSplitter;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
-import net.logicim.common.type.Positions;
+import net.common.SimulatorException;
+import net.common.geometry.Line;
+import net.common.geometry.LineMinimiser;
+import net.common.geometry.LinePositionCache;
+import net.common.geometry.LineSplitter;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
+import net.common.type.Positions;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.integratedcircuit.common.StaticData;

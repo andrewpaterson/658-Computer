@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.circuit.SubcircuitPinAnchour;
 import net.logicim.data.common.Radix;

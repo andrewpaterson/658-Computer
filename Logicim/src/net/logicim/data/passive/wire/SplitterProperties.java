@@ -1,6 +1,6 @@
 package net.logicim.data.passive.wire;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.data.common.properties.ComponentProperties;
 
 import java.util.Arrays;

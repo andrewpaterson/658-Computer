@@ -1,6 +1,6 @@
 package net.logicim.ui.editor;
 
-import net.logicim.common.util.StringUtil;
+import net.common.util.StringUtil;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;

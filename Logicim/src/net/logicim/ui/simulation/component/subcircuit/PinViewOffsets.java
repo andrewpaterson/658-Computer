@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.subcircuit;
 
-import net.logicim.common.type.Tuple2;
+import net.common.type.Tuple2;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.util.ArrayList;

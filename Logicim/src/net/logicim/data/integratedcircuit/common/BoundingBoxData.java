@@ -1,6 +1,6 @@
 package net.logicim.data.integratedcircuit.common;
 
-import net.logicim.common.type.Float2D;
+import net.common.type.Float2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.ui.shape.common.BoundingBox;
 

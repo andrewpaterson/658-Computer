@@ -1,6 +1,6 @@
 package net.logicim.ui.common.integratedcircuit;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.ConnectionView;

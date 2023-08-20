@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.InstructionCycles;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.interrupt.*;

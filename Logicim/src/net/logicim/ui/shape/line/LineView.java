@@ -1,6 +1,6 @@
 package net.logicim.ui.shape.line;
 
-import net.logicim.common.type.Tuple2;
+import net.common.type.Tuple2;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.common.BoundingBox;

@@ -1,8 +1,8 @@
 package net.logicim.domain.common.port;
 
-import net.logicim.common.SimulatorException;
-import net.logicim.common.collection.linkedlist.LinkedList;
-import net.logicim.common.collection.linkedlist.LinkedListIterator;
+import net.common.SimulatorException;
+import net.common.collection.linkedlist.LinkedList;
+import net.common.collection.linkedlist.LinkedListIterator;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.Pins;

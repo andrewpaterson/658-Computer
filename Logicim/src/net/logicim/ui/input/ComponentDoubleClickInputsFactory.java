@@ -1,7 +1,7 @@
 package net.logicim.ui.input;
 
-import net.logicim.common.reflect.PackageInspector;
-import net.logicim.common.reflect.PackageInspectorStore;
+import net.common.reflect.PackageInspector;
+import net.common.reflect.PackageInspectorStore;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.editor.EditPropertiesAction;

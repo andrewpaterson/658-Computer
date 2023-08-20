@@ -1,10 +1,10 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
-import net.logicim.common.SimulatorException;
+import net.common.SimulatorException;
 
-import static net.logicim.common.util.IntUtil.*;
-import static net.logicim.common.util.StringUtil.to16BitHex;
-import static net.logicim.common.util.StringUtil.to8BitHex;
+import static net.common.util.IntUtil.*;
+import static net.common.util.StringUtil.to16BitHex;
+import static net.common.util.StringUtil.to8BitHex;
 
 public class Address
 {

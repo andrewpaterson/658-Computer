@@ -1,7 +1,7 @@
 package net.logicim.ui;
 
-import net.logicim.common.reflect.ClassInspector;
-import net.logicim.common.reflect.EnumStore;
+import net.common.reflect.ClassInspector;
+import net.common.reflect.EnumStore;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.SaveData;
 import net.logicim.ui.common.Colours;

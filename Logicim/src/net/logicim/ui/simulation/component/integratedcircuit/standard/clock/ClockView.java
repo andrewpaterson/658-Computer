@@ -1,7 +1,7 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.voltage.VoltageColour;

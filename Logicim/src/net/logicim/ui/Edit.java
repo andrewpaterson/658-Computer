@@ -1,7 +1,7 @@
 package net.logicim.ui;
 
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.placement.StatefulEdit;
 import net.logicim.ui.simulation.CircuitEditor;

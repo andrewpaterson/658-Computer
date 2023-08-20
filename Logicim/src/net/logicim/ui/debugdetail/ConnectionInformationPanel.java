@@ -1,6 +1,6 @@
 package net.logicim.ui.debugdetail;
 
-import net.logicim.common.util.StringUtil;
+import net.common.util.StringUtil;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

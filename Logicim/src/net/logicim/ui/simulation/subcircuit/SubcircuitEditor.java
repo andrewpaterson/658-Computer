@@ -1,8 +1,8 @@
 package net.logicim.ui.simulation.subcircuit;
 
-import net.logicim.common.geometry.Line;
-import net.logicim.common.type.Float2D;
-import net.logicim.common.type.Int2D;
+import net.common.geometry.Line;
+import net.common.type.Float2D;
+import net.common.type.Int2D;
 import net.logicim.data.circuit.SubcircuitData;
 import net.logicim.data.circuit.SubcircuitEditorData;
 import net.logicim.data.integratedcircuit.common.StaticData;

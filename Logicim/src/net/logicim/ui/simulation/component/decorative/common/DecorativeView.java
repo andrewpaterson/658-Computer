@@ -1,6 +1,6 @@
 package net.logicim.ui.simulation.component.decorative.common;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.data.decorative.common.DecorativeProperties;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;

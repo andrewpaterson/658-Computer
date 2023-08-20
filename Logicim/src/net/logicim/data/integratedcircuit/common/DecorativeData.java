@@ -1,6 +1,6 @@
 package net.logicim.data.integratedcircuit.common;
 
-import net.logicim.common.type.Int2D;
+import net.common.type.Int2D;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitLoaders;

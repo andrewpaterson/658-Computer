@@ -1,10 +1,12 @@
 package net.common.parser;
 
+import net.assembler.sixteenhigh.parser.TextParserLog;
 import net.common.SimulatorException;
 import net.common.parser.primitive.CharPointer;
 import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.util.StringUtil;
+import net.logicim.ui.Logicim;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,8 +21,10 @@ public class TextParser
   private int position;
   private boolean outsideText;
   private List<Integer> mcPositions;
+  private TextParserLog log;
+  private String filename;
 
-  public TextParser(File file) throws IOException
+  public TextParser(File file, TextParserLog log) throws IOException
   {
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -29,30 +33,32 @@ public class TextParser
     if (read == -1)
     {
       text.setEnd((int) file.length());
-      initialise();
+      initialise(log, file.getName());
     }
     else
     {
       throw new SimulatorException("Could not fully read file [%s].", file.getName());
     }
   }
-
-  public TextParser(char[] text)
+  
+  public TextParser(char[] text, TextParserLog log, String filename)
   {
     this.text = new StringZero(text);
-    initialise();
+    initialise(log, filename);
   }
 
-  public TextParser(String s)
+  public TextParser(String s, TextParserLog log, String filename)
   {
     text = new StringZero(s);
-    initialise();
+    initialise(log, filename);
   }
 
-  private void initialise()
+  private void initialise(TextParserLog log, String name)
   {
     position = 0;
-    mcPositions = new ArrayList<Integer>();
+    this.log = log;
+    this.filename = filename;
+    mcPositions = new ArrayList<>();
   }
 
   private int textLength()
@@ -424,7 +430,7 @@ public class TextParser
     }
   }
 
-  public Tristate getExactIdentifier(String szIdentifier)
+  public Tristate getExactIdentifier(String identifier)
   {
     CharPointer cCurrent = new CharPointer();
     int iPos;
@@ -438,6 +444,7 @@ public class TextParser
     if (outsideText)
     {
       popPosition();
+      log.logFatal(filename, position, "Expected exact identifier %s.  Instead outside text.", identifier);
       return Tristate.ERROR;
     }
 
@@ -446,7 +453,7 @@ public class TextParser
       if (!outsideText)
       {
         cCurrent.value = text.get(position);
-        if (iPos == szIdentifier.length())
+        if (iPos == identifier.length())
         {
           //Got all the way to the NULL character.
           //If there are additional identifier characters then we do not have the right identifier.
@@ -460,7 +467,7 @@ public class TextParser
           passPosition();
           return Tristate.TRUE;
         }
-        if (cCurrent.value == szIdentifier.charAt(iPos))
+        if (cCurrent.value == identifier.charAt(iPos))
         {
           stepRight();
           iPos++;
@@ -481,7 +488,7 @@ public class TextParser
     }
   }
 
-  public Tristate getIdentifier(StringZero szIdentifier)
+  public Tristate getIdentifier(StringZero identifier)
   {
     CharPointer c = new CharPointer();
     boolean bFirst;
@@ -507,20 +514,20 @@ public class TextParser
         {
           if (bFirst)
           {
-            szIdentifier.setEnd(iPos);
+            identifier.setEnd(iPos);
             popPosition();
             return Tristate.FALSE;
           }
           else
           {
-            szIdentifier.setEnd(iPos);
+            identifier.setEnd(iPos);
             passPosition();
             return Tristate.TRUE;
           }
         }
         else
         {
-          szIdentifier.set(iPos, c.value);
+          identifier.set(iPos, c.value);
         }
       }
       else
@@ -532,7 +539,7 @@ public class TextParser
         }
         else
         {
-          szIdentifier.setEnd(iPos);
+          identifier.setEnd(iPos);
           passPosition();
           return Tristate.TRUE;
         }
@@ -916,7 +923,7 @@ public class TextParser
     testEnd();
   }
 
-  public Tristate findExactIdentifier(String szIdentifier)
+  public Tristate findExactIdentifier(String identifier)
   {
     int szPosition;
     Tristate result;
@@ -927,7 +934,7 @@ public class TextParser
     for (; ; )
     {
       szPosition = position;
-      result = getExactIdentifier(szIdentifier);
+      result = getExactIdentifier(identifier);
       if (result == Tristate.ERROR)
       {
         //We've reached the end of the file without finding the identifier.
@@ -984,7 +991,7 @@ public class TextParser
 
   public void restart()
   {
-    initialise();
+    initialise(log, filename);
     pushPosition();
     testEnd();
   }
@@ -1044,13 +1051,13 @@ public class TextParser
 
 // ----------------------- Helper Functions ------------------------------
 
-  public Tristate getHFExactIdentifierAndInteger(String szIdentifier, IntegerPointer piInt)
+  public Tristate getHFExactIdentifierAndInteger(String identifier, IntegerPointer piInt)
   {
     Tristate tReturn;
 
     pushPosition();
 
-    tReturn = getExactIdentifier(szIdentifier);
+    tReturn = getExactIdentifier(identifier);
     if ((tReturn == Tristate.ERROR) || (tReturn == Tristate.FALSE))
     {
       popPosition();
@@ -1067,13 +1074,13 @@ public class TextParser
     return Tristate.TRUE;
   }
 
-  public Tristate getHFExactIdentifierAndString(String szIdentifier, StringZero szString)
+  public Tristate getHFExactIdentifierAndString(String identifier, StringZero szString)
   {
     Tristate tReturn;
 
     pushPosition();
 
-    tReturn = getExactIdentifier(szIdentifier);
+    tReturn = getExactIdentifier(identifier);
     if ((tReturn == Tristate.ERROR) || (tReturn == Tristate.FALSE))
     {
       popPosition();
@@ -1154,6 +1161,16 @@ public class TextParser
     s = s + StringUtil.pad(" ", position - 1);
     s = s + "^";
     return "position [" + position + "] " + "text: \n" + s + "";
+  }
+
+  public TextParserLog getLog()
+  {
+    return log;
+  }
+
+  public int getPosition()
+  {
+    return position;
   }
 }
 

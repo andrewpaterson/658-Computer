@@ -2,10 +2,10 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 
-public abstract class Instruction
+public class Go
     extends Statement
 {
-  public Instruction(Code code, int index)
+  public Go(Code code, int index)
   {
     super(code, index);
   }

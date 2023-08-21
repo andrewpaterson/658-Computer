@@ -4,8 +4,10 @@ public class AssemblerTest
 {
   public static void main(String[] args)
   {
-    new SixteenHighParser("" +
-                          "sub @sum_even_and_odd\n" +
+    TextParserLog log = new TextParserLog();
+    SixteenHighContext context = new SixteenHighContext();
+    new SixteenHighParser(log, "test", context,
+                          "@sum_even_and_odd:\n" +
                           "int16  i; int16 number; int16 even; int16 odd\n" +
                           "       number = 10; i = 0; even = 0; odd = 0\n" +
                           "bool   b\n" +
@@ -20,8 +22,10 @@ public class AssemblerTest
                           "done:\n" +
                           "       i++; number ?- i\n" +
                           "       if> go loop\n" +
+                          "       push odd\n" +
+                          "       push even\n" +
+                          "       gosub @print_pair\n" +
                           "       return");
-
   }
 }
 

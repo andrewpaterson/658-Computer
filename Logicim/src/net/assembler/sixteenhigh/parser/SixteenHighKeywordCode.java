@@ -59,6 +59,8 @@ public enum SixteenHighKeywordCode
   is_false,           // ?!
   test_set,           // ts
   test_reset,         // tr
+  pull,
+  push,
   ret,                // return
 }
 

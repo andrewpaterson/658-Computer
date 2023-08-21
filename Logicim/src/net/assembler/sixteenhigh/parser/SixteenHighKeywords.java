@@ -11,6 +11,8 @@ import static net.assembler.sixteenhigh.parser.SixteenHighKeywordCode.*;
 
 public class SixteenHighKeywords
 {
+  protected String GO = "go";
+
   protected List<KeywordPair> keywords;
   protected List<String> firstIdentifiers;
   protected List<String> secondIdentifiers;
@@ -74,7 +76,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(not_assign, "~="));
     keywords.add(new KeywordPair(increment, "++"));
     keywords.add(new KeywordPair(decrement, "--"));
-    keywords.add(new KeywordPair(go, "go"));
+    keywords.add(new KeywordPair(go, GO));
     keywords.add(new KeywordPair(go_sub, "gosub"));
     keywords.add(new KeywordPair(subtract_compare, "?-"));
     keywords.add(new KeywordPair(and_compare, "?&"));
@@ -82,6 +84,8 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(test_set, "ts"));
     keywords.add(new KeywordPair(test_reset, "tr"));
     keywords.add(new KeywordPair(ret, "return"));
+    keywords.add(new KeywordPair(push, "push"));
+    keywords.add(new KeywordPair(pull, "pull"));
     return keywords;
   }
 
@@ -114,6 +118,8 @@ public class SixteenHighKeywords
     firstIdentifiers.add(codeToStringMap.get(if_not_equals));
     firstIdentifiers.add(codeToStringMap.get(go));
     firstIdentifiers.add(codeToStringMap.get(go_sub));
+    firstIdentifiers.add(codeToStringMap.get(pull));
+    firstIdentifiers.add(codeToStringMap.get(push));
     firstIdentifiers.add(codeToStringMap.get(ret));
     return firstIdentifiers;
   }
@@ -175,5 +181,23 @@ public class SixteenHighKeywords
     KeywordPair keywordPair = keywords.get(index.value);
     return keywordPair.code;
   }
+
+  public SixteenHighKeywordCode getKeyword(String name)
+  {
+    for (KeywordPair keyword : keywords)
+    {
+      if (keyword.name.equals(name))
+      {
+        return keyword.code;
+      }
+    }
+    return null;
+  }
+
+  public String go()
+  {
+    return GO;
+  }
 }
+
 

@@ -7,8 +7,7 @@ public class StringZero
 
   public StringZero()
   {
-    values = new char[0];
-    offset = 0;
+    reset(0);
   }
 
   public StringZero(StringZero szString, int offset)
@@ -18,6 +17,11 @@ public class StringZero
   }
 
   public StringZero(int length)
+  {
+    reset(length);
+  }
+
+  protected void reset(int length)
   {
     values = new char[length];
     offset = 0;
@@ -34,6 +38,11 @@ public class StringZero
   public StringZero(String s)
   {
     this(s.length() + 1);
+    _set(s);
+  }
+
+  protected void _set(String s)
+  {
     for (int i = 0; i < s.length(); i++)
     {
       set(i, s.charAt(i));
@@ -103,6 +112,12 @@ public class StringZero
     values = new char[length + 1];
     System.arraycopy(source.getValues(), start, values, 0, length);
     setEnd(length);
+  }
+
+  public void set(String s)
+  {
+    reset(s.length());
+    _set(s);
   }
 }
 

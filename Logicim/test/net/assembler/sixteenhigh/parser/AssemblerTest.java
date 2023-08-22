@@ -25,7 +25,12 @@ public class AssemblerTest
                           "       push odd\n" +
                           "       push even\n" +
                           "       gosub @print_pair\n" +
-                          "       return");
+                          "       return\n" +
+                          "\n" +
+                          "@@main:\n" +
+                          "       gosub @sum_even_and_odd\n" +
+                          "       return 0"
+    );
   }
 }
 

@@ -1,6 +1,8 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.common.SimulatorException;
 import net.common.parser.primitive.IntegerPointer;
+import net.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -81,6 +83,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(subtract_compare, "?-"));
     keywords.add(new KeywordPair(and_compare, "?&"));
     keywords.add(new KeywordPair(is_true, "?"));
+    keywords.add(new KeywordPair(is_false, "?!"));
     keywords.add(new KeywordPair(test_set, "ts"));
     keywords.add(new KeywordPair(test_reset, "tr"));
     keywords.add(new KeywordPair(ret, "return"));
@@ -94,34 +97,47 @@ public class SixteenHighKeywords
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
     List<String> firstIdentifiers = new ArrayList<>();
-    firstIdentifiers.add(codeToStringMap.get(int8));
-    firstIdentifiers.add(codeToStringMap.get(uint8));
-    firstIdentifiers.add(codeToStringMap.get(int16));
-    firstIdentifiers.add(codeToStringMap.get(uint16));
-    firstIdentifiers.add(codeToStringMap.get(int24));
-    firstIdentifiers.add(codeToStringMap.get(uint24));
-    firstIdentifiers.add(codeToStringMap.get(int32));
-    firstIdentifiers.add(codeToStringMap.get(uint32));
-    firstIdentifiers.add(codeToStringMap.get(int64));
-    firstIdentifiers.add(codeToStringMap.get(uint64));
-    firstIdentifiers.add(codeToStringMap.get(float8));
-    firstIdentifiers.add(codeToStringMap.get(float16));
-    firstIdentifiers.add(codeToStringMap.get(float32));
-    firstIdentifiers.add(codeToStringMap.get(float64));
-    firstIdentifiers.add(codeToStringMap.get(float128));
-    firstIdentifiers.add(codeToStringMap.get(bool));
-    firstIdentifiers.add(codeToStringMap.get(if_equals));
-    firstIdentifiers.add(codeToStringMap.get(if_greater));
-    firstIdentifiers.add(codeToStringMap.get(if_greater_equals));
-    firstIdentifiers.add(codeToStringMap.get(if_less));
-    firstIdentifiers.add(codeToStringMap.get(if_less_equals));
-    firstIdentifiers.add(codeToStringMap.get(if_not_equals));
-    firstIdentifiers.add(codeToStringMap.get(go));
-    firstIdentifiers.add(codeToStringMap.get(go_sub));
-    firstIdentifiers.add(codeToStringMap.get(pull));
-    firstIdentifiers.add(codeToStringMap.get(push));
-    firstIdentifiers.add(codeToStringMap.get(ret));
+    xxx(codeToStringMap, firstIdentifiers, int8);
+    xxx(codeToStringMap, firstIdentifiers, uint8);
+    xxx(codeToStringMap, firstIdentifiers, int16);
+    xxx(codeToStringMap, firstIdentifiers, uint16);
+    xxx(codeToStringMap, firstIdentifiers, int24);
+    xxx(codeToStringMap, firstIdentifiers, uint24);
+    xxx(codeToStringMap, firstIdentifiers, int32);
+    xxx(codeToStringMap, firstIdentifiers, uint32);
+    xxx(codeToStringMap, firstIdentifiers, int64);
+    xxx(codeToStringMap, firstIdentifiers, uint64);
+    xxx(codeToStringMap, firstIdentifiers, float8);
+    xxx(codeToStringMap, firstIdentifiers, float16);
+    xxx(codeToStringMap, firstIdentifiers, float32);
+    xxx(codeToStringMap, firstIdentifiers, float64);
+    xxx(codeToStringMap, firstIdentifiers, float128);
+    xxx(codeToStringMap, firstIdentifiers, bool);
+    xxx(codeToStringMap, firstIdentifiers, if_equals);
+    xxx(codeToStringMap, firstIdentifiers, if_greater);
+    xxx(codeToStringMap, firstIdentifiers, if_greater_equals);
+    xxx(codeToStringMap, firstIdentifiers, if_less);
+    xxx(codeToStringMap, firstIdentifiers, if_less_equals);
+    xxx(codeToStringMap, firstIdentifiers, if_not_equals);
+    xxx(codeToStringMap, firstIdentifiers, go);
+    xxx(codeToStringMap, firstIdentifiers, go_sub);
+    xxx(codeToStringMap, firstIdentifiers, pull);
+    xxx(codeToStringMap, firstIdentifiers, push);
+    xxx(codeToStringMap, firstIdentifiers, ret);
     return firstIdentifiers;
+  }
+
+  private boolean xxx(Map<SixteenHighKeywordCode, String> codeToStringMap, List<String> identifiers, SixteenHighKeywordCode keywordCode)
+  {
+    String name = codeToStringMap.get(keywordCode);
+    if (name != null)
+    {
+      return identifiers.add(name);
+    }
+    else
+    {
+      throw new SimulatorException("Cannot get name for keyword code [%s].", StringUtil.toEnumString(keywordCode));
+    }
   }
 
   private List<String> defineSecondIdentifiers()
@@ -129,40 +145,40 @@ public class SixteenHighKeywords
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
     List<String> secondIdentifiers = new ArrayList<>();
-    firstIdentifiers.add(codeToStringMap.get(assign));
-    firstIdentifiers.add(codeToStringMap.get(add));
-    firstIdentifiers.add(codeToStringMap.get(subtract));
-    firstIdentifiers.add(codeToStringMap.get(multiply));
-    firstIdentifiers.add(codeToStringMap.get(divide));
-    firstIdentifiers.add(codeToStringMap.get(modulus));
-    firstIdentifiers.add(codeToStringMap.get(shift_left));
-    firstIdentifiers.add(codeToStringMap.get(shift_right));
-    firstIdentifiers.add(codeToStringMap.get(ushift_right));
-    firstIdentifiers.add(codeToStringMap.get(and));
-    firstIdentifiers.add(codeToStringMap.get(or));
-    firstIdentifiers.add(codeToStringMap.get(xor));
-    firstIdentifiers.add(codeToStringMap.get(not));
-    firstIdentifiers.add(codeToStringMap.get(add_assign));
-    firstIdentifiers.add(codeToStringMap.get(subtract_assign));
-    firstIdentifiers.add(codeToStringMap.get(multiply_assign));
-    firstIdentifiers.add(codeToStringMap.get(divide_assign));
-    firstIdentifiers.add(codeToStringMap.get(modulus_assign));
-    firstIdentifiers.add(codeToStringMap.get(shift_left_assign));
-    firstIdentifiers.add(codeToStringMap.get(shift_right_assign));
-    firstIdentifiers.add(codeToStringMap.get(ushift_right_assign));
-    firstIdentifiers.add(codeToStringMap.get(and_assign));
-    firstIdentifiers.add(codeToStringMap.get(or_assign));
-    firstIdentifiers.add(codeToStringMap.get(xor_assign));
-    firstIdentifiers.add(codeToStringMap.get(not_assign));
-    firstIdentifiers.add(codeToStringMap.get(increment));
-    firstIdentifiers.add(codeToStringMap.get(decrement));
-    firstIdentifiers.add(codeToStringMap.get(go));
-    firstIdentifiers.add(codeToStringMap.get(subtract_compare));
-    firstIdentifiers.add(codeToStringMap.get(and_compare));
-    firstIdentifiers.add(codeToStringMap.get(is_true));
-    firstIdentifiers.add(codeToStringMap.get(is_false));
-    firstIdentifiers.add(codeToStringMap.get(test_set));
-    firstIdentifiers.add(codeToStringMap.get(test_reset));
+    xxx(codeToStringMap, firstIdentifiers, assign);
+    xxx(codeToStringMap, firstIdentifiers, add);
+    xxx(codeToStringMap, firstIdentifiers, subtract);
+    xxx(codeToStringMap, firstIdentifiers, multiply);
+    xxx(codeToStringMap, firstIdentifiers, divide);
+    xxx(codeToStringMap, firstIdentifiers, modulus);
+    xxx(codeToStringMap, firstIdentifiers, shift_left);
+    xxx(codeToStringMap, firstIdentifiers, shift_right);
+    xxx(codeToStringMap, firstIdentifiers, ushift_right);
+    xxx(codeToStringMap, firstIdentifiers, and);
+    xxx(codeToStringMap, firstIdentifiers, or);
+    xxx(codeToStringMap, firstIdentifiers, xor);
+    xxx(codeToStringMap, firstIdentifiers, not);
+    xxx(codeToStringMap, firstIdentifiers, add_assign);
+    xxx(codeToStringMap, firstIdentifiers, subtract_assign);
+    xxx(codeToStringMap, firstIdentifiers, multiply_assign);
+    xxx(codeToStringMap, firstIdentifiers, divide_assign);
+    xxx(codeToStringMap, firstIdentifiers, modulus_assign);
+    xxx(codeToStringMap, firstIdentifiers, shift_left_assign);
+    xxx(codeToStringMap, firstIdentifiers, shift_right_assign);
+    xxx(codeToStringMap, firstIdentifiers, ushift_right_assign);
+    xxx(codeToStringMap, firstIdentifiers, and_assign);
+    xxx(codeToStringMap, firstIdentifiers, or_assign);
+    xxx(codeToStringMap, firstIdentifiers, xor_assign);
+    xxx(codeToStringMap, firstIdentifiers, not_assign);
+    xxx(codeToStringMap, firstIdentifiers, increment);
+    xxx(codeToStringMap, firstIdentifiers, decrement);
+    xxx(codeToStringMap, firstIdentifiers, go);
+    xxx(codeToStringMap, firstIdentifiers, subtract_compare);
+    xxx(codeToStringMap, firstIdentifiers, and_compare);
+    xxx(codeToStringMap, firstIdentifiers, is_true);
+    xxx(codeToStringMap, firstIdentifiers, is_false);
+    xxx(codeToStringMap, firstIdentifiers, test_set);
+    xxx(codeToStringMap, firstIdentifiers, test_reset);
     return secondIdentifiers;
   }
 

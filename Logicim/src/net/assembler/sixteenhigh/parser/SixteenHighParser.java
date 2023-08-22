@@ -1,8 +1,6 @@
 package net.assembler.sixteenhigh.parser;
 
-import net.assembler.sixteenhigh.parser.statment.GlobalVariable;
-import net.assembler.sixteenhigh.parser.statment.Go;
-import net.assembler.sixteenhigh.parser.statment.If;
+import net.assembler.sixteenhigh.parser.statment.*;
 import net.common.SimulatorException;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
@@ -62,7 +60,6 @@ public class SixteenHighParser
       {
         break;
       }
-
     }
   }
 
@@ -204,61 +201,33 @@ public class SixteenHighParser
       case float64:
       case float128:
       case bool:
-        int at = 0;
-        Tristate state = textParser.getExactCharacter('@');
-        if (state == ERROR)
+        StringZero zeroIdentifier = new StringZero();
+        Tristate state = blockIdentifier(zeroIdentifier);
+        if (state == FALSE)
         {
-          return ERROR;
-        }
-        if (state == TRUE)
-        {
-          at++;
-        }
-
-        state = textParser.getExactCharacter('@');
-        if (state == ERROR)
-        {
-          return ERROR;
-        }
-        if (state == TRUE)
-        {
-          at++;
-        }
-
-        StringZero identifier = new StringZero();
-        state = textParser.getIdentifier(identifier);
-        if (state == ERROR)
-        {
-          return ERROR;
-        }
-        else if (state == FALSE)
-        {
-          if (at != 0)
-          {
-            textParser.getLog().logError(filename, textParser.getPosition(), "Expected identifier after @ or @@.");
-            return ERROR;
-          }
           return FALSE;
         }
-        if (at == 0)
+        else if (state == ERROR)
         {
-          code.addLocalVariable(keyword, identifier.toString());
-          return TRUE;
-        }
-        else if (at == 1)
-        {
-          code.addFileVariable(keyword, "@" + identifier.toString());
-          return TRUE;
-        }
-        else if (at == 2)
-        {
-          GlobalVariable globalVariable = code.addGlobalVariable(keyword, "@@" + identifier.toString());
-          context.addGlobalVariable(globalVariable);
-          return TRUE;
+          return ERROR;
         }
         else
         {
-          throw new SimulatorException("Can't have more than two '@' symbols.");
+          String identifier = zeroIdentifier.toString();
+          if (identifier.startsWith("@@"))
+          {
+            GlobalVariable globalVariable = code.addGlobalVariable(keyword, identifier);
+            context.addGlobalVariable(globalVariable);
+          }
+          else if (identifier.startsWith("@"))
+          {
+            code.addFileVariable(keyword, identifier);
+          }
+          else
+          {
+            code.addLocalVariable(keyword, identifier);
+          }
+          return TRUE;
         }
 
       default:
@@ -269,8 +238,8 @@ public class SixteenHighParser
   private Tristate parseLabel()
   {
     TextParserPosition position = textParser.saveSettings();
-    StringZero identifier = new StringZero();
-    Tristate state = textParser.getIdentifier(identifier);
+    StringZero zeroIdentifier = new StringZero();
+    Tristate state = blockIdentifier(zeroIdentifier);
     if (state == ERROR)
     {
       return ERROR;
@@ -291,8 +260,88 @@ public class SixteenHighParser
       return FALSE;
     }
 
-    code.addLocalLabel(identifier.toString());
+    String identifier = zeroIdentifier.toString();
+    if (identifier.startsWith("@@"))
+    {
+      if (identifier.equalsIgnoreCase("@@main"))
+      {
+        MainRoutine mainRoutine = code.addMainRoutine(identifier);
+        context.addMainRoutine(mainRoutine);
+      }
+      else
+      {
+        GlobalSubroutine globalSubroutine = code.addGlobalSubroutine(identifier);
+        context.addGlobalSubroutine(globalSubroutine);
+      }
+    }
+    else if (identifier.startsWith("@"))
+    {
+      code.addLocalSubroutine(identifier);
+    }
+    else
+    {
+      code.addLocalLabel(identifier);
+    }
     return TRUE;
+  }
+
+  private Tristate blockIdentifier(StringZero fullIdentifier)
+  {
+    int at = 0;
+    Tristate state = textParser.getExactCharacter('@');
+    if (state == ERROR)
+    {
+      return ERROR;
+    }
+    if (state == TRUE)
+    {
+      at++;
+    }
+
+    state = textParser.getExactCharacter('@');
+    if (state == ERROR)
+    {
+      return ERROR;
+    }
+    if (state == TRUE)
+    {
+      at++;
+    }
+
+    StringZero identifier = new StringZero();
+    state = textParser.getIdentifier(identifier);
+    if (state == ERROR)
+    {
+      return ERROR;
+    }
+    else if (state == FALSE)
+    {
+      if (at != 0)
+      {
+        textParser.getLog().logError(filename, textParser.getPosition(), "Expected identifier after @ or @@.");
+        return ERROR;
+      }
+      return FALSE;
+    }
+    if (at == 0)
+    {
+      fullIdentifier.set(identifier.toString());
+      return TRUE;
+    }
+    else if (at == 1)
+    {
+      fullIdentifier.set("@" + identifier.toString());
+      return TRUE;
+    }
+    else if (at == 2)
+    {
+      fullIdentifier.set("@@" + identifier.toString());
+      return TRUE;
+    }
+    else
+    {
+      throw new SimulatorException("Can't have more than two '@' symbols.");
+    }
   }
 
   private Tristate parseStatementStyle2()

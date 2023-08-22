@@ -432,6 +432,10 @@ public class TextParser
 
   public Tristate getExactIdentifier(String identifier)
   {
+    if (identifier == null)
+    {
+      throw new SimulatorException("Identifier may not be null.");
+    }
     CharPointer cCurrent = new CharPointer();
     int iPos;
     Tristate tResult;

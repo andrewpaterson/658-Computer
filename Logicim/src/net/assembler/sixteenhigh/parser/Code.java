@@ -37,7 +37,7 @@ public class Code
   {
     LocalVariable variable = new LocalVariable(this, statementIndex++, keyword, name);
     statements.add(variable);
-    currentRoutine.add(variable);
+    currentRoutine.addLocalVariable(variable);
   }
 
   public void addFileVariable(SixteenHighKeywordCode keyword, String name)
@@ -45,14 +45,6 @@ public class Code
     FileVariable variable = new FileVariable(this, statementIndex++, keyword, name);
     statements.add(variable);
     fileVariables.add(variable);
-  }
-
-  public void addSubroutine(String name)
-  {
-    Subroutine subroutine = new Subroutine(this, statementIndex++, name);
-    statements.add(subroutine);
-    routines.add(subroutine);
-    currentRoutine = subroutine;
   }
 
   public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword, String name)
@@ -67,6 +59,30 @@ public class Code
     If anIf = new If(this, statementIndex++, keyword);
     statements.add(anIf);
     return anIf;
+  }
+
+  public void addLocalSubroutine(String name)
+  {
+    LocalSubroutine subroutine = new LocalSubroutine(this, statementIndex++, name);
+    statements.add(subroutine);
+    routines.add(subroutine);
+    currentRoutine = subroutine;
+  }
+
+  public GlobalSubroutine addGlobalSubroutine(String name)
+  {
+    GlobalSubroutine subroutine = new GlobalSubroutine(this, statementIndex++, name);
+    statements.add(subroutine);
+    currentRoutine = subroutine;
+    return subroutine;
+  }
+
+  public MainRoutine addMainRoutine(String name)
+  {
+    MainRoutine routine = new MainRoutine(this, statementIndex++, name);
+    statements.add(routine);
+    currentRoutine = routine;
+    return routine;
   }
 
   public Statement getLast()

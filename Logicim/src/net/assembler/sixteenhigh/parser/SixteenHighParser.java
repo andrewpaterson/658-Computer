@@ -8,6 +8,7 @@ import net.common.parser.TextParserPosition;
 import net.common.parser.Tristate;
 import net.common.parser.primitive.IntegerPointer;
 
+import static net.assembler.sixteenhigh.parser.SixteenHighKeywordCode.*;
 import static net.common.parser.Tristate.*;
 
 public class SixteenHighParser
@@ -30,6 +31,11 @@ public class SixteenHighParser
     statementIndex = 0;
     for (; ; )
     {
+      if (parseInterStatement() == ERROR)
+      {
+        break;
+      }
+
       Tristate result;
       result = parseStatementStyle1();
       if (result == TRUE)
@@ -44,6 +50,7 @@ public class SixteenHighParser
       result = parseLabel();
       if (result == TRUE)
       {
+        parseInterStatement();
         continue;
       }
       else if (result == ERROR)
@@ -54,11 +61,28 @@ public class SixteenHighParser
       result = parseStatementStyle2();
       if (result == TRUE)
       {
+        parseInterStatement();
         continue;
       }
       else if (result == ERROR)
       {
         break;
+      }
+    }
+  }
+
+  private Tristate parseInterStatement()
+  {
+    for (; ; )
+    {
+      Tristate state = textParser.getExactCharacter(';', true);
+      if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else if (state == FALSE)
+      {
+        return TRUE;
       }
     }
   }
@@ -93,7 +117,7 @@ public class SixteenHighParser
         return ERROR;
       }
 
-      state = goStatement(keyword);
+      state = flowStatement(keyword);
       if (state == TRUE)
       {
         return TRUE;
@@ -115,11 +139,67 @@ public class SixteenHighParser
         return ERROR;
       }
 
+
+      state = pushPullStatement(keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        //error
+        return ERROR;
+      }
+
       return FALSE;
     }
     else if (result == ERROR)
     {
       return ERROR;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+
+  private Tristate pushPullStatement(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == push)
+    {
+      StringZero stringZero = new StringZero();
+      Tristate state = textParser.getIdentifier(stringZero);
+      if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else if (state == FALSE)
+      {
+        return ERROR;
+      }
+      else
+      {
+        code.addPush(stringZero.toString());
+        return TRUE;
+      }
+    }
+    else if (keyword == pull)
+    {
+      StringZero stringZero = new StringZero();
+      Tristate state = textParser.getIdentifier(stringZero);
+      if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else if (state == FALSE)
+      {
+        return ERROR;
+      }
+      else
+      {
+        code.addPull(stringZero.toString());
+        return TRUE;
+      }
     }
     else
     {
@@ -150,7 +230,7 @@ public class SixteenHighParser
         }
         else
         {
-          Tristate result = goStatement(keywords.getKeyword(keywords.go()));
+          Tristate result = flowStatement(keywords.getKeyword(keywords.go()));
           if (result == ERROR)
           {
             //error
@@ -173,12 +253,59 @@ public class SixteenHighParser
 
   private Tristate returnStatement(SixteenHighKeywordCode keyword)
   {
-    throw new SimulatorException();
+    if (keyword == ret)
+    {
+      code.addReturn();
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
   }
 
-  private Tristate goStatement(SixteenHighKeywordCode keyword)
+  private Tristate flowStatement(SixteenHighKeywordCode keyword)
   {
-    throw new SimulatorException();
+    if (keyword == go)
+    {
+      StringZero stringZero = new StringZero();
+      Tristate state = textParser.getIdentifier(stringZero);
+      if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else if (state == FALSE)
+      {
+        return ERROR;
+      }
+      else
+      {
+        code.addGo(stringZero.toString());
+        return TRUE;
+      }
+    }
+    else if (keyword == gosub)
+    {
+      StringZero stringZero = new StringZero();
+      Tristate state = blockIdentifier(stringZero);
+      if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else if (state == FALSE)
+      {
+        return ERROR;
+      }
+      else
+      {
+        code.addGosub(stringZero.toString());
+        return TRUE;
+      }
+    }
+    else
+    {
+      return FALSE;
+    }
   }
 
   private Tristate registerDeclaration(SixteenHighKeywordCode keyword)
@@ -346,6 +473,7 @@ public class SixteenHighParser
 
   private Tristate parseStatementStyle2()
   {
+
     return null;
   }
 }

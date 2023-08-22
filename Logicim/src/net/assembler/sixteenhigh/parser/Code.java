@@ -89,5 +89,30 @@ public class Code
   {
     return statements.get(statements.size() - 1);
   }
+
+  public void addGo(String label)
+  {
+    statements.add(new Go(this, statementIndex++, label));
+  }
+
+  public void addGosub(String label)
+  {
+    statements.add(new Gosub(this, statementIndex++, label));
+  }
+
+  public void addReturn()
+  {
+    statements.add(new Ret(this, statementIndex++));
+  }
+
+  public void addPush(String register)
+  {
+    statements.add(new Push(this, statementIndex++, register));
+  }
+
+  public void addPull(String register)
+  {
+    statements.add(new Pull(this, statementIndex++, register));
+  }
 }
 

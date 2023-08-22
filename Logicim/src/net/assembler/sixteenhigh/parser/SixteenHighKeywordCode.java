@@ -52,7 +52,7 @@ public enum SixteenHighKeywordCode
   increment,          // ++
   decrement,          // --
   go,
-  go_sub,             // gosub
+  gosub,             // gosub
   subtract_compare,   // ?-
   and_compare,        // ?&
   is_true,            // ?

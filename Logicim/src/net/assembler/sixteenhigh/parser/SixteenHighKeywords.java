@@ -79,7 +79,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(increment, "++"));
     keywords.add(new KeywordPair(decrement, "--"));
     keywords.add(new KeywordPair(go, GO));
-    keywords.add(new KeywordPair(go_sub, "gosub"));
+    keywords.add(new KeywordPair(gosub, "gosub"));
     keywords.add(new KeywordPair(subtract_compare, "?-"));
     keywords.add(new KeywordPair(and_compare, "?&"));
     keywords.add(new KeywordPair(is_true, "?"));
@@ -120,7 +120,7 @@ public class SixteenHighKeywords
     xxx(codeToStringMap, firstIdentifiers, if_less_equals);
     xxx(codeToStringMap, firstIdentifiers, if_not_equals);
     xxx(codeToStringMap, firstIdentifiers, go);
-    xxx(codeToStringMap, firstIdentifiers, go_sub);
+    xxx(codeToStringMap, firstIdentifiers, gosub);
     xxx(codeToStringMap, firstIdentifiers, pull);
     xxx(codeToStringMap, firstIdentifiers, push);
     xxx(codeToStringMap, firstIdentifiers, ret);

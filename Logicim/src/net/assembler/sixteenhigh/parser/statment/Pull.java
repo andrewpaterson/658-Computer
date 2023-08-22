@@ -2,15 +2,15 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 
-public class Go
+public class Pull
     extends Statement
 {
-  protected String label;
+  protected String register;
 
-  public Go(Code code, int index, String label)
+  public Pull(Code code, int index, String register)
   {
     super(code, index);
-    this.label = label;
+    this.register = register;
   }
 }
 

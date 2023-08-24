@@ -97,37 +97,79 @@ public class SixteenHighKeywords
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
     List<String> firstIdentifiers = new ArrayList<>();
-    xxx(codeToStringMap, firstIdentifiers, int8);
-    xxx(codeToStringMap, firstIdentifiers, uint8);
-    xxx(codeToStringMap, firstIdentifiers, int16);
-    xxx(codeToStringMap, firstIdentifiers, uint16);
-    xxx(codeToStringMap, firstIdentifiers, int24);
-    xxx(codeToStringMap, firstIdentifiers, uint24);
-    xxx(codeToStringMap, firstIdentifiers, int32);
-    xxx(codeToStringMap, firstIdentifiers, uint32);
-    xxx(codeToStringMap, firstIdentifiers, int64);
-    xxx(codeToStringMap, firstIdentifiers, uint64);
-    xxx(codeToStringMap, firstIdentifiers, float8);
-    xxx(codeToStringMap, firstIdentifiers, float16);
-    xxx(codeToStringMap, firstIdentifiers, float32);
-    xxx(codeToStringMap, firstIdentifiers, float64);
-    xxx(codeToStringMap, firstIdentifiers, float128);
-    xxx(codeToStringMap, firstIdentifiers, bool);
-    xxx(codeToStringMap, firstIdentifiers, if_equals);
-    xxx(codeToStringMap, firstIdentifiers, if_greater);
-    xxx(codeToStringMap, firstIdentifiers, if_greater_equals);
-    xxx(codeToStringMap, firstIdentifiers, if_less);
-    xxx(codeToStringMap, firstIdentifiers, if_less_equals);
-    xxx(codeToStringMap, firstIdentifiers, if_not_equals);
-    xxx(codeToStringMap, firstIdentifiers, go);
-    xxx(codeToStringMap, firstIdentifiers, gosub);
-    xxx(codeToStringMap, firstIdentifiers, pull);
-    xxx(codeToStringMap, firstIdentifiers, push);
-    xxx(codeToStringMap, firstIdentifiers, ret);
+    add(codeToStringMap, firstIdentifiers, int8);
+    add(codeToStringMap, firstIdentifiers, uint8);
+    add(codeToStringMap, firstIdentifiers, int16);
+    add(codeToStringMap, firstIdentifiers, uint16);
+    add(codeToStringMap, firstIdentifiers, int24);
+    add(codeToStringMap, firstIdentifiers, uint24);
+    add(codeToStringMap, firstIdentifiers, int32);
+    add(codeToStringMap, firstIdentifiers, uint32);
+    add(codeToStringMap, firstIdentifiers, int64);
+    add(codeToStringMap, firstIdentifiers, uint64);
+    add(codeToStringMap, firstIdentifiers, float8);
+    add(codeToStringMap, firstIdentifiers, float16);
+    add(codeToStringMap, firstIdentifiers, float32);
+    add(codeToStringMap, firstIdentifiers, float64);
+    add(codeToStringMap, firstIdentifiers, float128);
+    add(codeToStringMap, firstIdentifiers, bool);
+    add(codeToStringMap, firstIdentifiers, if_equals);
+    add(codeToStringMap, firstIdentifiers, if_greater);
+    add(codeToStringMap, firstIdentifiers, if_greater_equals);
+    add(codeToStringMap, firstIdentifiers, if_less);
+    add(codeToStringMap, firstIdentifiers, if_less_equals);
+    add(codeToStringMap, firstIdentifiers, if_not_equals);
+    add(codeToStringMap, firstIdentifiers, go);
+    add(codeToStringMap, firstIdentifiers, gosub);
+    add(codeToStringMap, firstIdentifiers, pull);
+    add(codeToStringMap, firstIdentifiers, push);
+    add(codeToStringMap, firstIdentifiers, ret);
     return firstIdentifiers;
   }
 
-  private boolean xxx(Map<SixteenHighKeywordCode, String> codeToStringMap, List<String> identifiers, SixteenHighKeywordCode keywordCode)
+  private List<String> defineSecondIdentifiers()
+  {
+    Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
+
+    List<String> secondIdentifiers = new ArrayList<>();
+    add(codeToStringMap, firstIdentifiers, assign);
+    add(codeToStringMap, firstIdentifiers, add);
+    add(codeToStringMap, firstIdentifiers, subtract);
+    add(codeToStringMap, firstIdentifiers, multiply);
+    add(codeToStringMap, firstIdentifiers, divide);
+    add(codeToStringMap, firstIdentifiers, modulus);
+    add(codeToStringMap, firstIdentifiers, shift_left);
+    add(codeToStringMap, firstIdentifiers, shift_right);
+    add(codeToStringMap, firstIdentifiers, ushift_right);
+    add(codeToStringMap, firstIdentifiers, and);
+    add(codeToStringMap, firstIdentifiers, or);
+    add(codeToStringMap, firstIdentifiers, xor);
+    add(codeToStringMap, firstIdentifiers, not);
+    add(codeToStringMap, firstIdentifiers, add_assign);
+    add(codeToStringMap, firstIdentifiers, subtract_assign);
+    add(codeToStringMap, firstIdentifiers, multiply_assign);
+    add(codeToStringMap, firstIdentifiers, divide_assign);
+    add(codeToStringMap, firstIdentifiers, modulus_assign);
+    add(codeToStringMap, firstIdentifiers, shift_left_assign);
+    add(codeToStringMap, firstIdentifiers, shift_right_assign);
+    add(codeToStringMap, firstIdentifiers, ushift_right_assign);
+    add(codeToStringMap, firstIdentifiers, and_assign);
+    add(codeToStringMap, firstIdentifiers, or_assign);
+    add(codeToStringMap, firstIdentifiers, xor_assign);
+    add(codeToStringMap, firstIdentifiers, not_assign);
+    add(codeToStringMap, firstIdentifiers, increment);
+    add(codeToStringMap, firstIdentifiers, decrement);
+    add(codeToStringMap, firstIdentifiers, go);
+    add(codeToStringMap, firstIdentifiers, subtract_compare);
+    add(codeToStringMap, firstIdentifiers, and_compare);
+    add(codeToStringMap, firstIdentifiers, is_true);
+    add(codeToStringMap, firstIdentifiers, is_false);
+    add(codeToStringMap, firstIdentifiers, test_set);
+    add(codeToStringMap, firstIdentifiers, test_reset);
+    return secondIdentifiers;
+  }
+
+  private boolean add(Map<SixteenHighKeywordCode, String> codeToStringMap, List<String> identifiers, SixteenHighKeywordCode keywordCode)
   {
     String name = codeToStringMap.get(keywordCode);
     if (name != null)
@@ -138,48 +180,6 @@ public class SixteenHighKeywords
     {
       throw new SimulatorException("Cannot get name for keyword code [%s].", StringUtil.toEnumString(keywordCode));
     }
-  }
-
-  private List<String> defineSecondIdentifiers()
-  {
-    Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
-
-    List<String> secondIdentifiers = new ArrayList<>();
-    xxx(codeToStringMap, firstIdentifiers, assign);
-    xxx(codeToStringMap, firstIdentifiers, add);
-    xxx(codeToStringMap, firstIdentifiers, subtract);
-    xxx(codeToStringMap, firstIdentifiers, multiply);
-    xxx(codeToStringMap, firstIdentifiers, divide);
-    xxx(codeToStringMap, firstIdentifiers, modulus);
-    xxx(codeToStringMap, firstIdentifiers, shift_left);
-    xxx(codeToStringMap, firstIdentifiers, shift_right);
-    xxx(codeToStringMap, firstIdentifiers, ushift_right);
-    xxx(codeToStringMap, firstIdentifiers, and);
-    xxx(codeToStringMap, firstIdentifiers, or);
-    xxx(codeToStringMap, firstIdentifiers, xor);
-    xxx(codeToStringMap, firstIdentifiers, not);
-    xxx(codeToStringMap, firstIdentifiers, add_assign);
-    xxx(codeToStringMap, firstIdentifiers, subtract_assign);
-    xxx(codeToStringMap, firstIdentifiers, multiply_assign);
-    xxx(codeToStringMap, firstIdentifiers, divide_assign);
-    xxx(codeToStringMap, firstIdentifiers, modulus_assign);
-    xxx(codeToStringMap, firstIdentifiers, shift_left_assign);
-    xxx(codeToStringMap, firstIdentifiers, shift_right_assign);
-    xxx(codeToStringMap, firstIdentifiers, ushift_right_assign);
-    xxx(codeToStringMap, firstIdentifiers, and_assign);
-    xxx(codeToStringMap, firstIdentifiers, or_assign);
-    xxx(codeToStringMap, firstIdentifiers, xor_assign);
-    xxx(codeToStringMap, firstIdentifiers, not_assign);
-    xxx(codeToStringMap, firstIdentifiers, increment);
-    xxx(codeToStringMap, firstIdentifiers, decrement);
-    xxx(codeToStringMap, firstIdentifiers, go);
-    xxx(codeToStringMap, firstIdentifiers, subtract_compare);
-    xxx(codeToStringMap, firstIdentifiers, and_compare);
-    xxx(codeToStringMap, firstIdentifiers, is_true);
-    xxx(codeToStringMap, firstIdentifiers, is_false);
-    xxx(codeToStringMap, firstIdentifiers, test_set);
-    xxx(codeToStringMap, firstIdentifiers, test_reset);
-    return secondIdentifiers;
   }
 
   public Map<SixteenHighKeywordCode, String> getCodeToStringMap()

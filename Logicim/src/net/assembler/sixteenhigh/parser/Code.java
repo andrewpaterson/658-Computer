@@ -114,5 +114,20 @@ public class Code
   {
     statements.add(new Pull(this, statementIndex++, register));
   }
+
+  public void addBitCompare(String register, SixteenHighKeywordCode keyword)
+  {
+    statements.add(new BitCompare(this, statementIndex++, register, keyword));
+  }
+
+  public void addNumberCompare(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
+  {
+    statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
+  }
+
+  public void addAssignmentOperator(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
+  {
+    statements.add(new AssignmentOperator(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
+  }
 }
 

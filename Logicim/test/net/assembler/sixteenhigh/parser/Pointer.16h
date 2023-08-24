@@ -1,0 +1,30 @@
+@routine:
+     int16 a; ptr b; int8 d;
+
+     d = 5;
+     a = 10
+     b = 0x001000
+     int8 c
+     c = 0
+label:
+     b[c] = a
+     c++
+     c ?- d
+     if< go label
+
+     b = 0x000000
+     b[2] = (int8)7
+end
+
+$int8 hello = \"Hello\"
+$int8 ten_numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+@another
+     ptr p;
+
+     p = ten_numbers
+     p = *p[5]
+@@main:
+     gosub @sum_even_and_odd
+     return 0
+end

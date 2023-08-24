@@ -305,8 +305,7 @@ public class FileUtil
   public static File getClasspathFile(String filename)
   {
     ClassLoader classLoader = FileUtil.class.getClassLoader();
-    File file = new File(Thread.currentThread().getContextClassLoader().getResource(filename).getFile());
-    return file;
+    return new File(Thread.currentThread().getContextClassLoader().getResource(filename).getFile());
   }
 
   public static Reader openClasspathReader(String filename)
@@ -873,6 +872,17 @@ public class FileUtil
     {
       throw new RuntimeException(e);
     }
+  }
+
+  public static String readFile(File file)
+  {
+    StringBuilder builder = new StringBuilder()
+    List<String> strings = readLines(file);
+    for (String string : strings)
+    {
+      builder.append(string + "\n");
+    }
+    return builder.toString();
   }
 }
 

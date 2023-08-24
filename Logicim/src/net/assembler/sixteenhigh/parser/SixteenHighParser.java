@@ -29,6 +29,11 @@ public class SixteenHighParser
 
     code = context.addCode(filename);
     statementIndex = 0;
+    parse();
+  }
+
+  protected Tristate parse()
+  {
     for (; ; )
     {
       if (parseInterStatement() == ERROR)
@@ -44,7 +49,7 @@ public class SixteenHighParser
       }
       else if (result == ERROR)
       {
-        break;
+        return ERROR;
       }
 
       result = parseLabel();
@@ -55,7 +60,7 @@ public class SixteenHighParser
       }
       else if (result == ERROR)
       {
-        break;
+        return ERROR;
       }
 
       result = parseStatementStyle2();
@@ -66,7 +71,11 @@ public class SixteenHighParser
       }
       else if (result == ERROR)
       {
-        break;
+        return ERROR;
+      }
+      else
+      {
+        return TRUE;
       }
     }
   }
@@ -90,8 +99,8 @@ public class SixteenHighParser
   private Tristate parseStatementStyle1()
   {
     IntegerPointer index = new IntegerPointer();
-    SixteenHighKeywordCode keyword = keywords.getKeyword(index);
     Tristate result = textParser.getIdentifier(keywords.firstIdentifiers, index);
+    SixteenHighKeywordCode keyword = keywords.getKeyword(index);
     if (result == TRUE)
     {
       Tristate state;
@@ -138,7 +147,6 @@ public class SixteenHighParser
         //error
         return ERROR;
       }
-
 
       state = pushPullStatement(keyword);
       if (state == TRUE)
@@ -473,8 +481,144 @@ public class SixteenHighParser
 
   private Tristate parseStatementStyle2()
   {
+    StringZero zeroIdentifier = new StringZero();
+    Tristate result = textParser.getIdentifier(zeroIdentifier);
+    if (result == ERROR)
+    {
+      return ERROR;
+    }
+    else if (result == FALSE)
+    {
+      return FALSE;
+    }
 
-    return null;
+    String identifier = zeroIdentifier.toString();
+    IntegerPointer index = new IntegerPointer();
+    result = textParser.getIdentifier(keywords.secondIdentifiers, index);
+    SixteenHighKeywordCode keyword = keywords.getKeyword(index);
+    if (result == TRUE)
+    {
+      Tristate state;
+      state = bitCompare(identifier, keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        //error
+        return ERROR;
+      }
+
+      state = numberCompare(identifier, keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        //error
+        return ERROR;
+      }
+
+      state = assignmentOperator(identifier, keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        //error
+        return ERROR;
+      }
+
+      return TRUE;
+    }
+    else if (result == ERROR)
+    {
+      return ERROR;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+
+  private Tristate assignmentOperator(String leftIdentifier, SixteenHighKeywordCode keyword)
+  {
+    switch (keyword)
+    {
+      case add_assign:
+      case subtract_assign:
+      case multiply_assign:
+      case divide_assign:
+      case modulus_assign:
+      case shift_left_assign:
+      case shift_right_assign:
+      case ushift_right_assign:
+      case and_assign:
+      case or_assign:
+      case xor_assign:
+      case not_assign:
+        StringZero zeroIdentifier = new StringZero();
+        Tristate result = textParser.getIdentifier(zeroIdentifier);
+        if (result == ERROR)
+        {
+          return ERROR;
+        }
+        else if (result == FALSE)
+        {
+          return ERROR;
+        }
+
+        String rightIdentifier = zeroIdentifier.toString();
+        code.addAssignmentOperator(leftIdentifier, rightIdentifier, keyword);
+        return TRUE;
+
+      default:
+        return FALSE;
+    }
+
+  }
+
+  private Tristate bitCompare(String identifier, SixteenHighKeywordCode keyword)
+  {
+    switch (keyword)
+    {
+      case is_true:
+      case is_false:
+        code.addBitCompare(identifier, keyword);
+        return TRUE;
+
+      default:
+        return FALSE;
+    }
+  }
+
+  private Tristate numberCompare(String leftIdentifier, SixteenHighKeywordCode keyword)
+  {
+    switch (keyword)
+    {
+      case subtract_compare:
+      case and_compare:
+        StringZero zeroIdentifier = new StringZero();
+        Tristate result = textParser.getIdentifier(zeroIdentifier);
+        if (result == ERROR)
+        {
+          return ERROR;
+        }
+        else if (result == FALSE)
+        {
+          return ERROR;
+        }
+
+        String rightIdentifier = zeroIdentifier.toString();
+        code.addNumberCompare(leftIdentifier, rightIdentifier, keyword);
+        return TRUE;
+
+      default:
+        return FALSE;
+    }
   }
 }
 

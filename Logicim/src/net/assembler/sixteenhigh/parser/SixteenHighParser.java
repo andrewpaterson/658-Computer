@@ -7,6 +7,7 @@ import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
 import net.common.parser.Tristate;
 import net.common.parser.primitive.IntegerPointer;
+import net.common.parser.primitive.LongPointer;
 
 import static net.assembler.sixteenhigh.parser.SixteenHighKeywordCode.*;
 import static net.common.parser.Tristate.*;
@@ -29,22 +30,42 @@ public class SixteenHighParser
 
     code = context.addCode(filename);
     statementIndex = 0;
-    parse();
   }
 
   protected Tristate parse()
   {
-    for (; ; )
+    boolean canParseInterStatement = false;
+    while (textParser.hasMoreText())
     {
-      if (parseInterStatement() == ERROR)
+      if (canParseInterStatement)
       {
-        break;
+        if (parseInterStatement() == ERROR)
+        {
+          return ERROR;
+        }
+        else
+        {
+          canParseInterStatement = false;
+          continue;
+        }
       }
 
       Tristate result;
-      result = parseStatementStyle1();
+      result = parseDirective();
       if (result == TRUE)
       {
+        canParseInterStatement = true;
+        continue;
+      }
+      else if (result == ERROR)
+      {
+        return ERROR;
+      }
+
+      result = parseStatementBeginningWithIdentifier();
+      if (result == TRUE)
+      {
+        canParseInterStatement = true;
         continue;
       }
       else if (result == ERROR)
@@ -55,7 +76,7 @@ public class SixteenHighParser
       result = parseLabel();
       if (result == TRUE)
       {
-        parseInterStatement();
+        canParseInterStatement = true;
         continue;
       }
       else if (result == ERROR)
@@ -66,7 +87,7 @@ public class SixteenHighParser
       result = parseStatementStyle2();
       if (result == TRUE)
       {
-        parseInterStatement();
+        canParseInterStatement = true;
         continue;
       }
       else if (result == ERROR)
@@ -78,6 +99,7 @@ public class SixteenHighParser
         return TRUE;
       }
     }
+    return TRUE;
   }
 
   private Tristate parseInterStatement()
@@ -96,13 +118,54 @@ public class SixteenHighParser
     }
   }
 
-  private Tristate parseStatementStyle1()
+  private Tristate parseDirective()
+  {
+    IntegerPointer index = new IntegerPointer();
+    Tristate result = textParser.getIdentifier(keywords.directiveIdentifiers, index);
+    if (result == TRUE)
+    {
+      SixteenHighKeywordCode keyword = keywords.getKeyword(index);
+      Tristate state = startAddress(keyword);
+    }
+    else if (result == ERROR)
+    {
+      return ERROR;
+    }
+    else
+    {
+      return FALSE;
+    }
+    return null;
+  }
+
+  private Tristate startAddress(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == start_address)
+    {
+      LongPointer integerValue = new LongPointer();
+      IntegerPointer base = new IntegerPointer();
+      IntegerPointer suffix = new IntegerPointer();
+      IntegerPointer numDigits = new IntegerPointer();
+      textParser.getIntegerLiteral(integerValue,
+                                   TextParser.INTEGER_PREFIX_ALL,
+                                   base,
+                                   TextParser.INTEGER_SUFFIX_CPP,
+                                   suffix,
+                                   TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                   numDigits,
+                                   true);
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  private Tristate parseStatementBeginningWithIdentifier()
   {
     IntegerPointer index = new IntegerPointer();
     Tristate result = textParser.getIdentifier(keywords.firstIdentifiers, index);
-    SixteenHighKeywordCode keyword = keywords.getKeyword(index);
     if (result == TRUE)
     {
+      SixteenHighKeywordCode keyword = keywords.getKeyword(index);
       Tristate state;
       state = registerDeclaration(keyword);
       if (state == TRUE)

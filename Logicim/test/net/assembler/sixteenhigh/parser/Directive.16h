@@ -1,0 +1,13 @@
+$start_address 0x800;
+$access_mode read-only; $access_time 1
+$start_of_code:
+
+@@main
+end
+
+$end_address 0xFFF
+
+$start_address 0x1000;
+$access_mode read-write; $access_time 1
+$end_address 0xFFFF
+

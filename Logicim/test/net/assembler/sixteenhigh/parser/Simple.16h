@@ -1,25 +1,25 @@
 @sum_even_and_odd:
-int16  i; int16 number; int16 even; int16 odd
-       number = 10; i = 0; even = 0; odd = 0
-bool   b
+    int16 i; int16 number; int16 even; int16 odd
+    number = 10; i = 0; even = 0; odd = 0
+bool    b
 loop:
-       b = i % 2
-       b ?
-       if= go even_
-       odd += i
-       go done
+    b = i % 2
+    b ?
+    if= go even_
+    odd += i
+    go done
 even_:
-       even += i
+    even += i
 done:
-       i++; number ?- i
-       if> go loop
-       push odd
-       push even
-       gosub @print_pair
-       return
+    i++; number ?- i
+    if> go loop
+    push odd
+    push even
+    gosub @print_pair
+    return
 end
 
 @@main:
-       gosub @sum_even_and_odd
-       return 0
+    gosub @sum_even_and_odd
+    return 0
 end

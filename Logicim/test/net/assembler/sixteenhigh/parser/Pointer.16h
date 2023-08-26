@@ -1,30 +1,41 @@
 @routine:
-     int16 a; ptr b; int8 d;
+    int16 a; int16* b; int8 d;
 
-     d = 5;
-     a = 10
-     b = 0x001000
-     int8 c
-     c = 0
+    d = 5;
+    a = 10
+    b = 0x001000
+    int8 c
+    c = 0
 label:
-     b[c] = a
-     c++
-     c ?- d
-     if< go label
+    b[c] = a
+    c++
+    c ?- d
+    if< go label
 
-     b = 0x000000
-     b[2] = (int8)7
+    b = 0x000000
+    b[2] = 7  // 0x000004 = 7, 0x000005 = 0
 end
 
-$int8 hello = \"Hello\"
-$int8 ten_numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+$int8*	hello = "Hello"
+$int8* 	ten_numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+$int8* 	vid_mem = 0x00C000
 
 @another
-     ptr p;
+    int8* p;
 
-     p = ten_numbers
-     p = *p[5]
-@@main:
-     gosub @sum_even_and_odd
-     return 0
+    p = ten_numbers
+    p = &p[5]
+
+    int8 a
+    a = p[0]
+
+    int32 b
+    b = ten_numbers
 end
+
+@@main:
+   gosub @routine
+   gosub @another
+   return 0
+end
+

@@ -59,8 +59,14 @@ public enum SixteenHighKeywordCode
   is_false,           // ?!
   test_set,           // ts
   test_reset,         // tr
-  pull,
-  push,
+  pull,               // <
+  push,               // >
   ret,                // return
+  start_address,
+  access_mode,
+  read_only,
+  write_only,
+  read_write,
+  access_time,
 }
 

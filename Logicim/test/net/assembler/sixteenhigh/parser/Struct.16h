@@ -1,0 +1,28 @@
+#!address 0x800
+
+#party_address
+    int8* line1
+    int8* line2
+    int16 country_number
+end
+
+#person
+    int8* name
+    int8 age
+    party_address address
+end
+
+$person henry
+
+@run_me
+    person* person = &henry
+    int8* address_line;
+
+    address_line = person.address.line1
+end
+
+@@main:
+   gosub @run_me
+   return 0
+end
+

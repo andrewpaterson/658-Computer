@@ -18,12 +18,18 @@ public class SixteenHighKeywords
   protected List<KeywordPair> keywords;
   protected List<String> firstIdentifiers;
   protected List<String> secondIdentifiers;
+  protected List<String> thirdIdentifiers;
+  protected List<String> directiveIdentifiers;
+  protected List<String> accessMode;
 
   public SixteenHighKeywords()
   {
     keywords = defineKeywords();
     firstIdentifiers = defineFirstIdentifiers();
     secondIdentifiers = defineSecondIdentifiers();
+    thirdIdentifiers = defineThirdIdentifiers();
+    directiveIdentifiers = defineDirectiveIdentifiers();
+    accessMode = defineAccessMode();
   }
 
   protected List<KeywordPair> defineKeywords()
@@ -87,8 +93,15 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(test_set, "ts"));
     keywords.add(new KeywordPair(test_reset, "tr"));
     keywords.add(new KeywordPair(ret, "return"));
-    keywords.add(new KeywordPair(push, "push"));
-    keywords.add(new KeywordPair(pull, "pull"));
+    keywords.add(new KeywordPair(push, ">"));
+    keywords.add(new KeywordPair(pull, "<"));
+    keywords.add(new KeywordPair(start_address, "$start_address"));
+    keywords.add(new KeywordPair(access_mode, "$access_mode"));
+    keywords.add(new KeywordPair(read_only, "read-only"));
+    keywords.add(new KeywordPair(write_only, "write-only"));
+    keywords.add(new KeywordPair(read_write, "read_write"));
+    keywords.add(new KeywordPair(access_time, "$access_time"));
+
     return keywords;
   }
 
@@ -132,41 +145,74 @@ public class SixteenHighKeywords
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
     List<String> secondIdentifiers = new ArrayList<>();
-    add(codeToStringMap, firstIdentifiers, assign);
-    add(codeToStringMap, firstIdentifiers, add);
-    add(codeToStringMap, firstIdentifiers, subtract);
-    add(codeToStringMap, firstIdentifiers, multiply);
-    add(codeToStringMap, firstIdentifiers, divide);
-    add(codeToStringMap, firstIdentifiers, modulus);
-    add(codeToStringMap, firstIdentifiers, shift_left);
-    add(codeToStringMap, firstIdentifiers, shift_right);
-    add(codeToStringMap, firstIdentifiers, ushift_right);
-    add(codeToStringMap, firstIdentifiers, and);
-    add(codeToStringMap, firstIdentifiers, or);
-    add(codeToStringMap, firstIdentifiers, xor);
-    add(codeToStringMap, firstIdentifiers, not);
-    add(codeToStringMap, firstIdentifiers, add_assign);
-    add(codeToStringMap, firstIdentifiers, subtract_assign);
-    add(codeToStringMap, firstIdentifiers, multiply_assign);
-    add(codeToStringMap, firstIdentifiers, divide_assign);
-    add(codeToStringMap, firstIdentifiers, modulus_assign);
-    add(codeToStringMap, firstIdentifiers, shift_left_assign);
-    add(codeToStringMap, firstIdentifiers, shift_right_assign);
-    add(codeToStringMap, firstIdentifiers, ushift_right_assign);
-    add(codeToStringMap, firstIdentifiers, and_assign);
-    add(codeToStringMap, firstIdentifiers, or_assign);
-    add(codeToStringMap, firstIdentifiers, xor_assign);
-    add(codeToStringMap, firstIdentifiers, not_assign);
-    add(codeToStringMap, firstIdentifiers, increment);
-    add(codeToStringMap, firstIdentifiers, decrement);
-    add(codeToStringMap, firstIdentifiers, go);
-    add(codeToStringMap, firstIdentifiers, subtract_compare);
-    add(codeToStringMap, firstIdentifiers, and_compare);
-    add(codeToStringMap, firstIdentifiers, is_true);
-    add(codeToStringMap, firstIdentifiers, is_false);
-    add(codeToStringMap, firstIdentifiers, test_set);
-    add(codeToStringMap, firstIdentifiers, test_reset);
+    add(codeToStringMap, secondIdentifiers, assign);
+    add(codeToStringMap, secondIdentifiers, add_assign);
+    add(codeToStringMap, secondIdentifiers, subtract_assign);
+    add(codeToStringMap, secondIdentifiers, multiply_assign);
+    add(codeToStringMap, secondIdentifiers, divide_assign);
+    add(codeToStringMap, secondIdentifiers, modulus_assign);
+    add(codeToStringMap, secondIdentifiers, shift_left_assign);
+    add(codeToStringMap, secondIdentifiers, shift_right_assign);
+    add(codeToStringMap, secondIdentifiers, ushift_right_assign);
+    add(codeToStringMap, secondIdentifiers, and_assign);
+    add(codeToStringMap, secondIdentifiers, or_assign);
+    add(codeToStringMap, secondIdentifiers, xor_assign);
+    add(codeToStringMap, secondIdentifiers, not_assign);
+    add(codeToStringMap, secondIdentifiers, increment);
+    add(codeToStringMap, secondIdentifiers, decrement);
+    add(codeToStringMap, secondIdentifiers, go);
+    add(codeToStringMap, secondIdentifiers, subtract_compare);
+    add(codeToStringMap, secondIdentifiers, and_compare);
+    add(codeToStringMap, secondIdentifiers, is_true);
+    add(codeToStringMap, secondIdentifiers, is_false);
+    add(codeToStringMap, secondIdentifiers, test_set);
+    add(codeToStringMap, secondIdentifiers, test_reset);
     return secondIdentifiers;
+  }
+
+  private List<String> defineThirdIdentifiers()
+  {
+    Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
+
+    List<String> thirdIdentifiers = new ArrayList<>();
+    add(codeToStringMap, thirdIdentifiers, add);
+    add(codeToStringMap, thirdIdentifiers, subtract);
+    add(codeToStringMap, thirdIdentifiers, multiply);
+    add(codeToStringMap, thirdIdentifiers, divide);
+    add(codeToStringMap, thirdIdentifiers, modulus);
+    add(codeToStringMap, thirdIdentifiers, shift_left);
+    add(codeToStringMap, thirdIdentifiers, shift_right);
+    add(codeToStringMap, thirdIdentifiers, ushift_right);
+    add(codeToStringMap, thirdIdentifiers, and);
+    add(codeToStringMap, thirdIdentifiers, or);
+    add(codeToStringMap, thirdIdentifiers, xor);
+    add(codeToStringMap, thirdIdentifiers, not);
+    return thirdIdentifiers;
+  }
+
+  private List<String> defineDirectiveIdentifiers()
+  {
+    Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
+
+    List<String> directiveIdentifiers = new ArrayList<>();
+    add(codeToStringMap, directiveIdentifiers, start_address);
+    add(codeToStringMap, directiveIdentifiers, access_mode);
+    add(codeToStringMap, directiveIdentifiers, read_only);
+    add(codeToStringMap, directiveIdentifiers, write_only);
+    add(codeToStringMap, directiveIdentifiers, read_write);
+    add(codeToStringMap, directiveIdentifiers, access_time);
+    return directiveIdentifiers;
+  }
+
+  private List<String> defineAccessMode()
+  {
+    Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
+
+    List<String> accessMode = new ArrayList<>();
+    add(codeToStringMap, accessMode, read_only);
+    add(codeToStringMap, accessMode, write_only);
+    add(codeToStringMap, accessMode, read_write);
+    return accessMode;
   }
 
   private boolean add(Map<SixteenHighKeywordCode, String> codeToStringMap, List<String> identifiers, SixteenHighKeywordCode keywordCode)

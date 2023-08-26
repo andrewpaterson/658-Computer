@@ -876,7 +876,7 @@ public class FileUtil
 
   public static String readFile(File file)
   {
-    StringBuilder builder = new StringBuilder()
+    StringBuilder builder = new StringBuilder();
     List<String> strings = readLines(file);
     for (String string : strings)
     {

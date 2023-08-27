@@ -20,7 +20,7 @@ public class SixteenHighKeywords
   protected List<String> secondIdentifiers;
   protected List<String> thirdIdentifiers;
   protected List<String> directiveIdentifiers;
-  protected List<String> accessMode;
+  protected List<String> accessModes;
 
   public SixteenHighKeywords()
   {
@@ -29,7 +29,7 @@ public class SixteenHighKeywords
     secondIdentifiers = defineSecondIdentifiers();
     thirdIdentifiers = defineThirdIdentifiers();
     directiveIdentifiers = defineDirectiveIdentifiers();
-    accessMode = defineAccessMode();
+    accessModes = defineAccessMode();
   }
 
   protected List<KeywordPair> defineKeywords()
@@ -96,6 +96,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(push, ">"));
     keywords.add(new KeywordPair(pull, "<"));
     keywords.add(new KeywordPair(start_address, "$start_address"));
+    keywords.add(new KeywordPair(end_address, "$end_address"));
     keywords.add(new KeywordPair(access_mode, "$access_mode"));
     keywords.add(new KeywordPair(read_only, "read-only"));
     keywords.add(new KeywordPair(write_only, "write-only"));
@@ -196,6 +197,7 @@ public class SixteenHighKeywords
 
     List<String> directiveIdentifiers = new ArrayList<>();
     add(codeToStringMap, directiveIdentifiers, start_address);
+    add(codeToStringMap, directiveIdentifiers, end_address);
     add(codeToStringMap, directiveIdentifiers, access_mode);
     add(codeToStringMap, directiveIdentifiers, read_only);
     add(codeToStringMap, directiveIdentifiers, write_only);

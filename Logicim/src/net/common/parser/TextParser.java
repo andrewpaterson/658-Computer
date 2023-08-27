@@ -2124,7 +2124,7 @@ public class TextParser
 
                 if (!outsideText)
                 {
-                  tResult = getDigits(lliExponentNumber, iSign, iNumExponentDigits, false, true, iBase, iAllowedSeparator);
+                  tResult = getDigits(lliExponentNumber, iSign, iNumExponentDigits, false, true, 10, iAllowedSeparator);
                   if (tResult == ERROR)
                   {
                     passPosition();
@@ -2142,6 +2142,8 @@ public class TextParser
               {
                 lliExponentNumber.value = 0;
                 iNumExponentDigits.value = 0;
+                passPosition();
+                return ERROR;
               }
             }
 
@@ -2214,7 +2216,20 @@ public class TextParser
     }
     else if (iBase == 16)
     {
-      return 0;
+      ldf = ulliWholeNumber;
+      ldfPow = 1 / Math.pow(16, iNumDecimalDigits);
+      ldf += ulliDecimalNumber * ldfPow;
+      if (lliExponentNumber > 0)
+      {
+        ldfExp = Math.pow(16, lliExponentNumber);
+        ldf *= ldfExp;
+      }
+      else if (lliExponentNumber < 0)
+      {
+        ldfExp = 1 / Math.pow(16, -(lliExponentNumber));
+        ldf *= ldfExp;
+      }
+      return ldf;
     }
     else
     {

@@ -1,5 +1,9 @@
 package net.logicim.assertions;
 
+import net.common.parser.Tristate;
+
+import static net.common.parser.Tristate.*;
+
 public abstract class Validator
 {
   private static final String NULL = "null";
@@ -21,6 +25,29 @@ public abstract class Validator
   public static void validateFalse(boolean actual)
   {
     validate(false, actual);
+  }
+
+  public static void validate(Tristate expected, Tristate actual)
+  {
+    if (expected != actual)
+    {
+      throw new ValidationException(toFailureString(Tristate.toString(expected), Tristate.toString(actual)));
+    }
+  }
+
+  public static void validateTrue(Tristate actual)
+  {
+    validate(TRUE, actual);
+  }
+
+  public static void validateFalse(Tristate actual)
+  {
+    validate(FALSE, actual);
+  }
+
+  public static void validateError(Tristate actual)
+  {
+    validate(ERROR, actual);
   }
 
   public static void validate(int expected, int actual)

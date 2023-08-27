@@ -1,6 +1,10 @@
 package net.assembler.sixteenhigh.parser;
 
 import net.assembler.sixteenhigh.parser.statment.*;
+import net.assembler.sixteenhigh.parser.statment.directive.AccessMode;
+import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
+import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
+import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +132,27 @@ public class Code
   public void addAssignmentOperator(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
   {
     statements.add(new AssignmentOperator(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
+  }
+
+  public void addStartAddress(int address)
+  {
+    statements.add(new StartAddress(this, statementIndex, address));
+  }
+
+  public void addEndAddress(int address)
+  {
+    statements.add(new EndAddress(this, statementIndex, address));
+  }
+
+  public void addAccessMode(SixteenHighKeywordCode mode)
+  {
+
+    statements.add(new AccessMode(this, statementIndex, mode));
+  }
+
+  public void addAccessTime(int cycles)
+  {
+    statements.add(new AccessTime(this, statementIndex, cycles));
   }
 }
 

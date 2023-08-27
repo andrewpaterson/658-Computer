@@ -126,6 +126,46 @@ public class SixteenHighParser
     {
       SixteenHighKeywordCode keyword = keywords.getKeyword(index);
       Tristate state = startAddress(keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+
+      state = endAddress(keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+
+      state = accessMode(keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+
+      state = accessTime(keyword);
+      if (state == TRUE)
+      {
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+
+      return FALSE;
     }
     else if (result == ERROR)
     {
@@ -135,7 +175,6 @@ public class SixteenHighParser
     {
       return FALSE;
     }
-    return null;
   }
 
   private Tristate startAddress(SixteenHighKeywordCode keyword)
@@ -146,15 +185,117 @@ public class SixteenHighParser
       IntegerPointer base = new IntegerPointer();
       IntegerPointer suffix = new IntegerPointer();
       IntegerPointer numDigits = new IntegerPointer();
-      textParser.getIntegerLiteral(integerValue,
-                                   TextParser.INTEGER_PREFIX_ALL,
-                                   base,
-                                   TextParser.INTEGER_SUFFIX_CPP,
-                                   suffix,
-                                   TextParser.NUMBER_SEPARATOR_APOSTROPHE,
-                                   numDigits,
-                                   true);
-      return TRUE;
+      Tristate state = textParser.getIntegerLiteral(integerValue,
+                                                    TextParser.INTEGER_PREFIX_ALL,
+                                                    base,
+                                                    TextParser.INTEGER_SUFFIX_CPP,
+                                                    suffix,
+                                                    TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                                    numDigits,
+                                                    true);
+      if (state == TRUE)
+      {
+        code.addStartAddress((int) integerValue.value);
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else
+      {
+        return ERROR;
+      }
+    }
+    return FALSE;
+  }
+
+  private Tristate endAddress(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == end_address)
+    {
+      LongPointer integerValue = new LongPointer();
+      IntegerPointer base = new IntegerPointer();
+      IntegerPointer suffix = new IntegerPointer();
+      IntegerPointer numDigits = new IntegerPointer();
+      Tristate state = textParser.getIntegerLiteral(integerValue,
+                                                    TextParser.INTEGER_PREFIX_ALL,
+                                                    base,
+                                                    TextParser.INTEGER_SUFFIX_CPP,
+                                                    suffix,
+                                                    TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                                    numDigits,
+                                                    true);
+      if (state == TRUE)
+      {
+        code.addEndAddress((int) integerValue.value);
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else
+      {
+        return ERROR;
+      }
+    }
+    return FALSE;
+  }
+
+  private Tristate accessMode(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == access_mode)
+    {
+      IntegerPointer index = new IntegerPointer();
+      Tristate state = textParser.getIdentifier(keywords.accessModes, index);
+      if (state == TRUE)
+      {
+        SixteenHighKeywordCode accessMode = keywords.getKeyword(index);
+        code.addAccessMode(accessMode);
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else
+      {
+        return ERROR;
+      }
+    }
+    return FALSE;
+  }
+
+  private Tristate accessTime(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == access_time)
+    {
+      LongPointer integerValue = new LongPointer();
+      IntegerPointer base = new IntegerPointer();
+      IntegerPointer suffix = new IntegerPointer();
+      IntegerPointer numDigits = new IntegerPointer();
+      Tristate state = textParser.getIntegerLiteral(integerValue,
+                                                    TextParser.INTEGER_PREFIX_ALL,
+                                                    base,
+                                                    TextParser.INTEGER_SUFFIX_CPP,
+                                                    suffix,
+                                                    TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                                    numDigits,
+                                                    true);
+      if (state == TRUE)
+      {
+        code.addAccessTime((int) integerValue.value);
+        return TRUE;
+      }
+      else if (state == ERROR)
+      {
+        return ERROR;
+      }
+      else
+      {
+        return ERROR;
+      }
     }
     return FALSE;
   }
@@ -682,6 +823,11 @@ public class SixteenHighParser
       default:
         return FALSE;
     }
+  }
+
+  public Code getCode()
+  {
+    return code;
   }
 }
 

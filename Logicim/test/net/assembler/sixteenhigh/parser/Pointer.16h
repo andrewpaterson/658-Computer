@@ -16,11 +16,11 @@ label:
     b[2] = 7  // 0x000004 = 7, 0x000005 = 0
 end
 
-$int8*	hello = "Hello"
-$int8* 	ten_numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-$int8* 	vid_mem = 0x00C000
+@int8*	hello = "Hello"
+@int8* 	ten_numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+@int8* 	vid_mem = 0x00C000
 
-@another
+@another:
     int8* p;
 
     p = ten_numbers

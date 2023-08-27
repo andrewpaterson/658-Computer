@@ -1,4 +1,4 @@
-#!address 0x800
+#!$start_address 0x800
 
 @count_pointless:
     int16 start
@@ -17,8 +17,6 @@ loop:
     > i
     return
 end
-
-.go(subroutine, args...) for arg in args (> arg;) go subroutine;
 
 @@main
     > 9

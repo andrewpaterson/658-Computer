@@ -1,4 +1,4 @@
-#!address 0x800
+$start_address 0x800
 
 #party_address
     int8* line1
@@ -12,9 +12,13 @@ end
     party_address address
 end
 
-$person henry
+int8*	henry_name = "Hello"
 
-@run_me
+@person henry
+henry.age = 6
+henry.name = henry_name
+
+@run_me:
     person* person = &henry
     int8* address_line;
 

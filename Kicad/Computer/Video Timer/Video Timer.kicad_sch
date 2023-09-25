@@ -29,7 +29,7 @@
     (stroke (width 0.1524) (type solid))
     (fill (color 0 0 0 0.0000))
     (uuid 662feba9-2017-4e89-b774-f7d895f327d7)
-    (property "Sheetname" "Row Position" (at 59.69 75.4884 0)
+    (property "Sheetname" "Horizontal Position" (at 59.69 75.4884 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
     (property "Sheetfile" "Row Counter.kicad_sch" (at 59.69 80.5946 0)
@@ -38,6 +38,23 @@
     (instances
       (project "Video Timer"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431" (page "3"))
+      )
+    )
+  )
+
+  (sheet (at 59.69 91.44) (size 41.275 3.81) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid caddd2e8-648a-419e-bcd6-73bf11c1d49f)
+    (property "Sheetname" "Vertical Position" (at 59.69 90.7284 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "Vertical Position.kicad_sch" (at 59.69 95.8346 0)
+      (effects (font (size 1.27 1.27)) (justify left top) hide)
+    )
+    (instances
+      (project "Video Timer"
+        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431" (page "4"))
       )
     )
   )

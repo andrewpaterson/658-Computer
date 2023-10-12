@@ -240,10 +240,17 @@ public class SixteenHighKeywords
     return result;
   }
 
-  public SixteenHighKeywordCode getKeyword(IntegerPointer index)
+  public SixteenHighKeywordCode getKeyword(List<String> allowedIdentifiers, IntegerPointer index)
   {
-    KeywordPair keywordPair = keywords.get(index.value);
-    return keywordPair.code;
+    if ((index.value >= 0) && (index.value < allowedIdentifiers.size()))
+    {
+      String keywordString = allowedIdentifiers.get(index.value);
+      return getKeyword(keywordString);
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public SixteenHighKeywordCode getKeyword(String name)

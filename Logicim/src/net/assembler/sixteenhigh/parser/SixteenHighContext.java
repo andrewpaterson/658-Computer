@@ -45,5 +45,10 @@ public class SixteenHighContext
   {
     globalSubroutines.add(globalSubroutine);
   }
+
+  public List<Code> getCodeList()
+  {
+    return codeList;
+  }
 }
 

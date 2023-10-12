@@ -4,7 +4,6 @@ import net.common.parser.Tristate;
 import net.common.reflect.ClassInspector;
 import net.common.util.EnvironmentInspector;
 import net.common.util.FileUtil;
-import net.logicim.assertions.Validator;
 
 import java.io.File;
 
@@ -22,6 +21,7 @@ public class AssemblerTest
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
+
   }
 
   protected static void testPointers()

@@ -124,7 +124,7 @@ public class SixteenHighParser
     Tristate result = textParser.getIdentifier(keywords.directiveIdentifiers, index);
     if (result == TRUE)
     {
-      SixteenHighKeywordCode keyword = keywords.getKeyword(index);
+      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.directiveIdentifiers, index);
       Tristate state = startAddress(keyword);
       if (state == TRUE)
       {
@@ -251,7 +251,7 @@ public class SixteenHighParser
       Tristate state = textParser.getIdentifier(keywords.accessModes, index);
       if (state == TRUE)
       {
-        SixteenHighKeywordCode accessMode = keywords.getKeyword(index);
+        SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.accessModes, index);
         code.addAccessMode(accessMode);
         return TRUE;
       }
@@ -306,7 +306,7 @@ public class SixteenHighParser
     Tristate result = textParser.getIdentifier(keywords.firstIdentifiers, index);
     if (result == TRUE)
     {
-      SixteenHighKeywordCode keyword = keywords.getKeyword(index);
+      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.firstIdentifiers, index);
       Tristate state;
       state = registerDeclaration(keyword);
       if (state == TRUE)
@@ -699,7 +699,7 @@ public class SixteenHighParser
     String identifier = zeroIdentifier.toString();
     IntegerPointer index = new IntegerPointer();
     result = textParser.getIdentifier(keywords.secondIdentifiers, index);
-    SixteenHighKeywordCode keyword = keywords.getKeyword(index);
+    SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.secondIdentifiers, index);
     if (result == TRUE)
     {
       Tristate state;
@@ -752,6 +752,7 @@ public class SixteenHighParser
   {
     switch (keyword)
     {
+      case assign:
       case add_assign:
       case subtract_assign:
       case multiply_assign:
@@ -765,6 +766,7 @@ public class SixteenHighParser
       case xor_assign:
       case not_assign:
         StringZero zeroIdentifier = new StringZero();
+        //Could be a literal!
         Tristate result = textParser.getIdentifier(zeroIdentifier);
         if (result == ERROR)
         {

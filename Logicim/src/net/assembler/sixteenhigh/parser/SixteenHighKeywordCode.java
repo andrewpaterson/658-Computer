@@ -69,5 +69,7 @@ public enum SixteenHighKeywordCode
   write_only,
   read_write,
   access_time,
+
+  UNKNOWN
 }
 

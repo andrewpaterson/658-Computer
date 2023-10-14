@@ -21,7 +21,6 @@ public class AssemblerTest
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
-
   }
 
   protected static void testPointers()

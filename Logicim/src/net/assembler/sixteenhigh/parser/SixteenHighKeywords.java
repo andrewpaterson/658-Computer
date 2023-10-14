@@ -2,6 +2,7 @@ package net.assembler.sixteenhigh.parser;
 
 import net.common.SimulatorException;
 import net.common.parser.primitive.IntegerPointer;
+import net.common.util.CollectionUtil;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
@@ -265,10 +266,50 @@ public class SixteenHighKeywords
     return null;
   }
 
+  public String getKeyword(SixteenHighKeywordCode keywordCode)
+  {
+    for (KeywordPair keyword : keywords)
+    {
+      if (keyword.code.equals(keywordCode))
+      {
+        return keyword.name;
+      }
+    }
+    return "";
+  }
+
   public String go()
   {
     return GO;
   }
-}
 
+  public List<SixteenHighKeywordCode> getBitCompares()
+  {
+    return CollectionUtil.newList(is_true,
+                                  is_false);
+  }
+
+  public List<SixteenHighKeywordCode> getNumberCompares()
+  {
+    return CollectionUtil.newList(subtract_compare,
+                                  and_compare);
+  }
+
+  public List<SixteenHighKeywordCode> getAssignmentOperators()
+  {
+    return CollectionUtil.newList(assign,
+                                  add_assign,
+                                  subtract_assign,
+                                  multiply_assign,
+                                  divide_assign,
+                                  modulus_assign,
+                                  shift_left_assign,
+                                  shift_right_assign,
+                                  ushift_right_assign,
+                                  and_assign,
+                                  or_assign,
+                                  xor_assign,
+                                  not_assign);
+  }
+}
 

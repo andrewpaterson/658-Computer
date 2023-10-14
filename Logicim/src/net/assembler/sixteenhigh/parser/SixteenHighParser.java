@@ -28,14 +28,14 @@ public class SixteenHighParser
   {
     this.filename = filename;
     this.context = context;
-    keywords = new SixteenHighKeywords();
-    textParser = new TextParser(source, log, filename);
+    this.keywords = new SixteenHighKeywords();
+    this.textParser = new TextParser(source, log, filename);
 
-    code = context.addCode(filename);
-    statementIndex = 0;
+    this.code = context.addCode(filename);
+    this.statementIndex = 0;
   }
 
-  protected Tristate parse()
+  protected ParseResult parse()
   {
     boolean canParseInterStatement = false;
     while (textParser.hasMoreText())
@@ -44,7 +44,7 @@ public class SixteenHighParser
       {
         if (parseInterStatement() == ERROR)
         {
-          return ERROR;
+          return _error();
         }
         else
         {
@@ -53,19 +53,18 @@ public class SixteenHighParser
         }
       }
 
-      Tristate result;
-      result = parseDirective();
-      if (result == TRUE)
+      ParseResult parseResult;
+      parseResult = parseDirective();
+      if (parseResult.isTrue())
       {
         canParseInterStatement = true;
         continue;
       }
-      else if (result == ERROR)
+      else if (parseResult.isError())
       {
-        return ERROR;
+        return parseResult;
       }
 
-      ParseResult parseResult;
       parseResult = parseStatementBeginningWithIdentifier();
       if (parseResult.isTrue())
       {
@@ -74,36 +73,36 @@ public class SixteenHighParser
       }
       else if (parseResult.isError())
       {
-        return ERROR;
+        return parseResult;
       }
 
       parseResult = parseLabel();
-      if (result == TRUE)
+      if (parseResult.isTrue())
       {
         canParseInterStatement = true;
         continue;
       }
-      else if (result == ERROR)
+      else if (parseResult.isError())
       {
-        return ERROR;
+        return parseResult;
       }
 
       parseResult = parseStatementStyle2();
-      if (result == TRUE)
+      if (parseResult.isTrue())
       {
         canParseInterStatement = true;
         continue;
       }
-      else if (result == ERROR)
+      else if (parseResult.isError())
       {
-        return ERROR;
+        return parseResult;
       }
       else
       {
-        return TRUE;
+        return _true();
       }
     }
-    return TRUE;
+    return _true();
   }
 
   private Tristate parseInterStatement()
@@ -122,7 +121,7 @@ public class SixteenHighParser
     }
   }
 
-  private Tristate parseDirective()
+  private ParseResult parseDirective()
   {
     IntegerPointer index = new IntegerPointer();
     Tristate result = textParser.getIdentifier(keywords.directiveIdentifiers, index);
@@ -132,52 +131,52 @@ public class SixteenHighParser
       Tristate state = startAddress(keyword);
       if (state == TRUE)
       {
-        return TRUE;
+        return _true();
       }
       else if (state == ERROR)
       {
-        return ERROR;
+        return _error();
       }
 
       state = endAddress(keyword);
       if (state == TRUE)
       {
-        return TRUE;
+        return _true();
       }
       else if (state == ERROR)
       {
-        return ERROR;
+        return _error();
       }
 
       state = accessMode(keyword);
       if (state == TRUE)
       {
-        return TRUE;
+        return _true();
       }
       else if (state == ERROR)
       {
-        return ERROR;
+        return _error();
       }
 
       state = accessTime(keyword);
       if (state == TRUE)
       {
-        return TRUE;
+        return _true();
       }
       else if (state == ERROR)
       {
-        return ERROR;
+        return _error();
       }
 
-      return FALSE;
+      return _false();
     }
     else if (result == ERROR)
     {
-      return ERROR;
+      return _error();
     }
     else
     {
-      return FALSE;
+      return _false();
     }
   }
 
@@ -426,7 +425,7 @@ public class SixteenHighParser
         }
         else if (parseResult.isFalse())
         {
-          return _error("Expected float statement.");
+          return _error("Expected flow statement.");
         }
         else
         {

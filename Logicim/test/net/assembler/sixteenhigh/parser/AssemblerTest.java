@@ -17,7 +17,8 @@ public class AssemblerTest
     TextParserLog log = new TextParserLog();
     SixteenHighContext context = new SixteenHighContext();
     SixteenHighParser parser = createParser("Simple.16h", log, context);
-    Tristate result = parser.parse();
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
@@ -28,7 +29,8 @@ public class AssemblerTest
     TextParserLog log = new TextParserLog();
     SixteenHighContext context = new SixteenHighContext();
     SixteenHighParser parser = createParser("Pointer.16h", log, context);
-    Tristate result = parser.parse();
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);

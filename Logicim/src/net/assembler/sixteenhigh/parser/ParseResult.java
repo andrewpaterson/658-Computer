@@ -1,7 +1,6 @@
 package net.assembler.sixteenhigh.parser;
 
 import net.common.parser.Tristate;
-import net.logicim.ui.Edit;
 
 import static net.common.parser.Tristate.*;
 
@@ -39,6 +38,36 @@ public class ParseResult
   public boolean isTrue()
   {
     return state == TRUE;
+  }
+
+  public Tristate getState()
+  {
+    return state;
+  }
+
+  @Override
+  public String toString()
+  {
+    if (state == null)
+    {
+      return "null";
+    }
+    else if (state == TRUE)
+    {
+      return "true";
+    }
+    else if (state == FALSE)
+    {
+      return "false";
+    }
+    else if (state == ERROR)
+    {
+      return "error";
+    }
+    else
+    {
+      return "unknown";
+    }
   }
 }
 

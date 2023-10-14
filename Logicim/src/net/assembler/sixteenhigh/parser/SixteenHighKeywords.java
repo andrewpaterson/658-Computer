@@ -295,7 +295,7 @@ public class SixteenHighKeywords
                                   and_compare);
   }
 
-  public List<SixteenHighKeywordCode> getAssignmentOperators()
+  public List<SixteenHighKeywordCode> getAssignments()
   {
     return CollectionUtil.newList(assign,
                                   add_assign,
@@ -310,6 +310,36 @@ public class SixteenHighKeywords
                                   or_assign,
                                   xor_assign,
                                   not_assign);
+  }
+
+  public List<SixteenHighKeywordCode> getIfs()
+  {
+    return CollectionUtil.newList(if_greater,
+                                  if_equals,
+                                  if_less,
+                                  if_greater_equals,
+                                  if_less_equals,
+                                  if_not_equals);
+  }
+
+  public List<SixteenHighKeywordCode> getRegisters()
+  {
+    return CollectionUtil.newList(int8,
+                                  uint8,
+                                  int16,
+                                  uint16,
+                                  int24,
+                                  uint24,
+                                  int32,
+                                  uint32,
+                                  int64,
+                                  uint64,
+                                  float8,
+                                  float16,
+                                  float32,
+                                  float64,
+                                  float128,
+                                  bool);
   }
 }
 

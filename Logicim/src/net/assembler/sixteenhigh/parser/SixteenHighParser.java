@@ -399,42 +399,32 @@ public class SixteenHighParser
 
   private ParseResult ifStatement(SixteenHighKeywordCode keyword)
   {
-    switch (keyword)
+    if (keywords.getIfs().contains(keyword))
     {
-      case if_greater:
-      case if_equals:
-      case if_less:
-      case if_greater_equals:
-      case if_less_equals:
-      case if_not_equals:
-        If anIf = code.addIf(keyword);
-        Tristate state = textParser.getExactIdentifier(keywords.go());
-        if (state == ERROR)
-        {
-          return _error();
-        }
-        else if (state == FALSE)
-        {
-          return _error("Expected keyword 'go'.");
-        }
+      If anIf = code.addIf(keyword);
+      Tristate state = textParser.getExactIdentifier(keywords.go());
+      if (state == ERROR)
+      {
+        return _error();
+      }
+      else if (state == FALSE)
+      {
+        return _error("Expected keyword 'go'.");
+      }
 
-        ParseResult parseResult = flowStatement(keywords.getKeyword(keywords.go()));
-        if (parseResult.isError())
-        {
-          return parseResult;
-        }
-        else if (parseResult.isFalse())
-        {
-          return _error("Expected flow statement.");
-        }
-        else
-        {
-          anIf.setGo((Go) code.getLast());
-        }
-
-      default:
-        return _false();
+      ParseResult parseResult = flowStatement(keywords.getKeyword(keywords.go()));
+      if (parseResult.isError())
+      {
+        return parseResult;
+      }
+      else if (parseResult.isFalse())
+      {
+        return _error("Expected flow statement.");
+      }
+      anIf.setGo((Go) code.getLast());
+      return _true();
     }
+    return _false();
   }
 
   private ParseResult returnStatement(SixteenHighKeywordCode keyword)
@@ -496,50 +486,32 @@ public class SixteenHighParser
 
   private ParseResult registerDeclaration(SixteenHighKeywordCode keyword)
   {
-    switch (keyword)
+    if (keywords.getRegisters().contains(keyword))
     {
-      case int8:
-      case uint8:
-      case int16:
-      case uint16:
-      case int24:
-      case uint24:
-      case int32:
-      case uint32:
-      case int64:
-      case uint64:
-      case float8:
-      case float16:
-      case float32:
-      case float64:
-      case float128:
-      case bool:
-        StringZero zeroIdentifier = new StringZero();
-        ParseResult parseResult = blockIdentifier(zeroIdentifier);
-        if (parseResult.isFalseOrError())
-        {
-          return parseResult;
-        }
+      StringZero zeroIdentifier = new StringZero();
+      ParseResult parseResult = blockIdentifier(zeroIdentifier);
+      if (parseResult.isFalseOrError())
+      {
+        return parseResult;
+      }
 
-        String identifier = zeroIdentifier.toString();
-        if (identifier.startsWith("@@"))
-        {
-          GlobalVariable globalVariable = code.addGlobalVariable(keyword, identifier);
-          context.addGlobalVariable(globalVariable);
-        }
-        else if (identifier.startsWith("@"))
-        {
-          code.addFileVariable(keyword, identifier);
-        }
-        else
-        {
-          code.addLocalVariable(keyword, identifier);
-        }
-        return _true();
-
-      default:
-        return _false();
+      String identifier = zeroIdentifier.toString();
+      if (identifier.startsWith("@@"))
+      {
+        GlobalVariable globalVariable = code.addGlobalVariable(keyword, identifier);
+        context.addGlobalVariable(globalVariable);
+      }
+      else if (identifier.startsWith("@"))
+      {
+        code.addFileVariable(keyword, identifier);
+      }
+      else
+      {
+        code.addLocalVariable(keyword, identifier);
+      }
+      return _true();
     }
+    return _false();
   }
 
   private ParseResult parseLabel()
@@ -739,7 +711,7 @@ public class SixteenHighParser
 
   private ParseResult assignmentOperator(String leftIdentifier, SixteenHighKeywordCode keyword)
   {
-    if (keywords.getAssignmentOperators().contains(keyword))
+    if (keywords.getAssignments().contains(keyword))
     {
       StringZero zeroIdentifier = new StringZero();
       //Could be a literal!

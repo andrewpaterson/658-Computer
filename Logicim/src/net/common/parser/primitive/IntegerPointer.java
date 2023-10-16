@@ -1,6 +1,7 @@
 package net.common.parser.primitive;
 
 public class IntegerPointer
+    extends PrimitivePointer
 {
   public int value;
 

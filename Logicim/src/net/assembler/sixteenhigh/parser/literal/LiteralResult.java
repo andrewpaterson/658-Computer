@@ -1,0 +1,44 @@
+package net.assembler.sixteenhigh.parser.literal;
+
+import net.common.parser.Tristate;
+
+import static net.common.parser.Tristate.*;
+
+public class LiteralResult
+{
+  Tristate state;
+  CTLiteral literal;
+
+  public LiteralResult(Tristate state)
+  {
+    this.state = state;
+    this.literal = null;
+  }
+
+  public LiteralResult(CTLiteral literal)
+  {
+    this.state = TRUE;
+    this.literal = literal;
+  }
+
+  public boolean isTrue()
+  {
+    return state == TRUE;
+  }
+
+  public boolean isFalse()
+  {
+    return state == FALSE;
+  }
+
+  public boolean isError()
+  {
+    return state == ERROR;
+  }
+
+  public CTLiteral getLiteral()
+  {
+    return literal;
+  }
+}
+

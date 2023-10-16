@@ -670,7 +670,7 @@ public class TextParser
     }
   }
 
-  public Tristate getExactIdentifier(String identifier)
+  public Tristate getExactIdentifier(String identifier, boolean skipWhiteSpace)
   {
     if (identifier == null)
     {
@@ -682,7 +682,10 @@ public class TextParser
 
     iPos = 0;
     pushPosition();
-    skipWhiteSpace();
+    if (skipWhiteSpace)
+    {
+      skipWhiteSpace();
+    }
 
     //Make sure we're not off the end of the file.
     if (outsideText)
@@ -732,7 +735,7 @@ public class TextParser
     }
   }
 
-  public Tristate getIdentifier(StringZero identifier)
+  public Tristate getIdentifier(StringZero identifier, boolean skipWhiteSpace)
   {
     CharPointer c = new CharPointer();
     boolean bFirst;
@@ -741,7 +744,11 @@ public class TextParser
     bFirst = true;
     iPos = 0;
     pushPosition();
-    skipWhiteSpace();
+
+    if (skipWhiteSpace)
+    {
+      skipWhiteSpace();
+    }
 
     //Make sure we're not off the end of the file.
     if (outsideText)
@@ -793,12 +800,17 @@ public class TextParser
     }
   }
 
-  public Tristate getIdentifier(List<String> allowedIdentifiers, IntegerPointer index)
+  public Tristate getIdentifier(List<String> allowedIdentifiers, IntegerPointer index, boolean skipWhiteSpace)
   {
+    if (skipWhiteSpace)
+    {
+      skipWhiteSpace();
+    }
+
     for (int i = 0; i < allowedIdentifiers.size(); i++)
     {
       String identifier = allowedIdentifiers.get(i);
-      Tristate state = getExactIdentifier(identifier);
+      Tristate state = getExactIdentifier(identifier, false);
       if (state == TRUE)
       {
         index.value = i;
@@ -812,7 +824,13 @@ public class TextParser
     return FALSE;
   }
 
-  public Tristate getQuotedCharacterSequence(char cOpenQuote, char cCloseQuote, StringZero szString, IntegerPointer piLength, boolean bPassOnTest, boolean skipWhiteSpace, boolean bAllowEscapeCharacters)
+  public Tristate getQuotedCharacterSequence(char openQuote,
+                                             char closeQuote,
+                                             StringZero stringZero,
+                                             IntegerPointer length,
+                                             boolean passOnTest,
+                                             boolean skipWhiteSpace,
+                                             boolean allowEscapeCharacters)
   {
     int iPos;
     char cCurrent;
@@ -829,7 +847,7 @@ public class TextParser
 
     if (!outsideText)
     {
-      tResult = getExactCharacter(cOpenQuote, false);
+      tResult = getExactCharacter(openQuote, false);
       if (tResult == TRUE)
       {
         iPos = 0;
@@ -838,16 +856,16 @@ public class TextParser
           if (!outsideText)
           {
             cCurrent = text.get(position);
-            if (cCurrent == cCloseQuote)
+            if (cCurrent == closeQuote)
             {
-              if (szString != null)
+              if (stringZero != null)
               {
-                szString.set(iPos, '\0');
+                stringZero.set(iPos, '\0');
               }
 
               stepRight();
 
-              if (szString != null || bPassOnTest)
+              if (stringZero != null || passOnTest)
               {
                 passPosition();
               }
@@ -856,17 +874,17 @@ public class TextParser
                 popPosition();
               }
 
-              safeAssign(piLength, iPos);
+              safeAssign(length, iPos);
               return TRUE;
             }
             //We have an escape character...
-            else if (cCurrent == '\\' && bAllowEscapeCharacters)
+            else if (cCurrent == '\\' && allowEscapeCharacters)
             {
               stepRight();
               tReturn = getEscapeCode(cEscape);
-              if (szString != null)
+              if (stringZero != null)
               {
-                szString.set(iPos, cEscape.value);
+                stringZero.set(iPos, cEscape.value);
               }
 
               iPos++;
@@ -890,9 +908,9 @@ public class TextParser
             }
             else
             {
-              if (szString != null)
+              if (stringZero != null)
               {
-                szString.set(iPos, cCurrent);
+                stringZero.set(iPos, cCurrent);
               }
 
               iPos++;
@@ -1096,37 +1114,6 @@ public class TextParser
     }
   }
 
-  public Tristate getInteger(IntegerPointer pi, IntegerPointer iNumDigits)
-  {
-    Tristate tResult;
-
-    pushPosition();
-    skipWhiteSpace();
-
-    //Make sure we're not off the end of the file.
-    if (outsideText)
-    {
-      popPosition();
-      return ERROR;
-    }
-
-    tResult = getDigits(pi, iNumDigits);
-    if (tResult == TRUE)
-    {
-      //Make sure there are no decimals.
-      if (text.get(position) == '.')
-      {
-        popPosition();
-        return FALSE;
-      }
-
-      passPosition();
-      return TRUE;
-    }
-    popPosition();
-    return tResult;
-  }
-
   public Tristate getDigits(IntegerPointer pi, IntegerPointer iNumDigits)
   {
     int iNum;
@@ -1317,7 +1304,7 @@ public class TextParser
     for (; ; )
     {
       szPosition = position;
-      result = getExactIdentifier(identifier);
+      result = getExactIdentifier(identifier, false);
       if (result == ERROR)
       {
         //We've reached the end of the file without finding the identifier.
@@ -1415,19 +1402,19 @@ public class TextParser
     }
   }
 
-  private void pushPosition()
+  public void pushPosition()
   {
     mcPositions.add(position);
   }
 
-  private void popPosition()
+  public void popPosition()
   {
     position = mcPositions.get(mcPositions.size() - 1);
     mcPositions.remove(mcPositions.size() - 1);
     testEnd();
   }
 
-  private void passPosition()
+  public void passPosition()
   {
     mcPositions.remove(mcPositions.size() - 1);
   }
@@ -1763,7 +1750,7 @@ public class TextParser
     }
   }
 
-  public Tristate getInteger(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, boolean skipWhiteSpace)
+  public Tristate getInteger(LongPointer integerPointer, IntegerPointer signPointer, IntegerPointer numDigitsPointer, boolean skipWhiteSpace)
   {
     Tristate tResult;
 
@@ -1782,7 +1769,7 @@ public class TextParser
       return ERROR;
     }
 
-    tResult = getDigits(pulli, piSign, piNumDigits, skipWhiteSpace);
+    tResult = getDigits(integerPointer, signPointer, numDigitsPointer, skipWhiteSpace);
     if (tResult == TRUE)
     {
       //Make sure there are no decimals.
@@ -1799,15 +1786,46 @@ public class TextParser
     return tResult;
   }
 
-  Tristate getInteger(IntegerPointer pi, IntegerPointer piNumDigits, boolean skipWhiteSpace)
+  public Tristate getInteger(IntegerPointer integerPointer, IntegerPointer numDigitsPointer, boolean skipWhiteSpace)
   {
-    LongPointer ulliTemp = new LongPointer();
+    LongPointer tempPointer = new LongPointer();
     Tristate tReturn;
     IntegerPointer iSign = new IntegerPointer();
 
-    tReturn = getInteger(ulliTemp, iSign, piNumDigits, skipWhiteSpace);
-    pi.value = (int) (ulliTemp.value * iSign.value);
+    tReturn = getInteger(tempPointer, iSign, numDigitsPointer, skipWhiteSpace);
+    integerPointer.value = (int) (tempPointer.value * iSign.value);
     return tReturn;
+  }
+
+  public Tristate getInteger(IntegerPointer integerPointer, IntegerPointer numDigitsPointer)
+  {
+    Tristate tResult;
+
+    pushPosition();
+    skipWhiteSpace();
+
+    //Make sure we're not off the end of the file.
+    if (outsideText)
+    {
+      popPosition();
+      return ERROR;
+    }
+
+    tResult = getDigits(integerPointer, numDigitsPointer);
+    if (tResult == TRUE)
+    {
+      //Make sure there are no decimals.
+      if (text.get(position) == '.')
+      {
+        popPosition();
+        return FALSE;
+      }
+
+      passPosition();
+      return TRUE;
+    }
+    popPosition();
+    return tResult;
   }
 
   public Tristate getIntegerLiteral(LongPointer integerValue,
@@ -2424,7 +2442,7 @@ public class TextParser
     }
   }
 
-  public Tristate getHexadecimal(LongPointer pulli, IntegerPointer piNumDigits, boolean skipWhiteSpace)
+  public Tristate getHexadecimal(LongPointer longPointer, IntegerPointer signPointer, IntegerPointer piNumDigits, boolean skipWhiteSpace)
   {
     Tristate tReturn;
 
@@ -2449,7 +2467,7 @@ public class TextParser
       return tReturn;
     }
 
-    tReturn = getHexadecimalPart(pulli, piNumDigits);
+    tReturn = getHexadecimalPart(longPointer, piNumDigits);
     if (tReturn != TRUE)
     {
       popPosition();
@@ -2521,7 +2539,7 @@ public class TextParser
     }
   }
 
-  public Tristate getOctal(LongPointer pulli, IntegerPointer piNumDigits, boolean skipWhiteSpace)
+  public Tristate getOctal(LongPointer pulli, IntegerPointer signPointer, IntegerPointer piNumDigits, boolean skipWhiteSpace)
   {
     long iNum;
     IntegerPointer iTemp = new IntegerPointer();
@@ -2712,7 +2730,7 @@ public class TextParser
 
     pushPosition();
 
-    tReturn = getExactIdentifier(identifier);
+    tReturn = getExactIdentifier(identifier, true);
     if ((tReturn == ERROR) || (tReturn == FALSE))
     {
       popPosition();
@@ -2735,7 +2753,7 @@ public class TextParser
 
     pushPosition();
 
-    tReturn = getExactIdentifier(identifier);
+    tReturn = getExactIdentifier(identifier, true);
     if ((tReturn == ERROR) || (tReturn == FALSE))
     {
       popPosition();
@@ -2757,9 +2775,10 @@ public class TextParser
     Tristate tReturn;
     StringZero stringZero = new StringZero();
 
+    skipWhiteSpace();
     for (int i = 0; ; i++)
     {
-      tReturn = getIdentifier(stringZero);
+      tReturn = getIdentifier(stringZero, false);
       if (tReturn == ERROR)
       {
         return ERROR;

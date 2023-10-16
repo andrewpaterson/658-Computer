@@ -1,10 +1,13 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.assembler.sixteenhigh.parser.literal.LiteralParser;
+import net.assembler.sixteenhigh.parser.literal.LiteralResult;
 import net.assembler.sixteenhigh.parser.statment.*;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
 import net.common.parser.Tristate;
+import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.parser.primitive.LongPointer;
 import net.common.util.StringUtil;
@@ -23,13 +26,18 @@ public class SixteenHighParser
   protected Code code;
   protected String filename;
   protected SixteenHighContext context;
+  protected LiteralParser literalParser;
 
-  public SixteenHighParser(TextParserLog log, String filename, SixteenHighContext context, String source)
+  public SixteenHighParser(TextParserLog log,
+                           String filename,
+                           SixteenHighContext context,
+                           String source)
   {
     this.filename = filename;
     this.context = context;
     this.keywords = new SixteenHighKeywords();
     this.textParser = new TextParser(source, log, filename);
+    this.literalParser = new LiteralParser(textParser);
 
     this.code = context.addCode(filename);
     this.statementIndex = 0;
@@ -124,7 +132,7 @@ public class SixteenHighParser
   private ParseResult parseDirective()
   {
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getIdentifier(keywords.directiveIdentifiers, index);
+    Tristate result = textParser.getIdentifier(keywords.directiveIdentifiers, index, true);
     if (result == TRUE)
     {
       SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.directiveIdentifiers, index);
@@ -251,7 +259,7 @@ public class SixteenHighParser
     if (keyword == access_mode)
     {
       IntegerPointer index = new IntegerPointer();
-      Tristate state = textParser.getIdentifier(keywords.accessModes, index);
+      Tristate state = textParser.getIdentifier(keywords.accessModes, index, true);
       if (state == TRUE)
       {
         SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.accessModes, index);
@@ -306,7 +314,7 @@ public class SixteenHighParser
   private ParseResult parseStatementBeginningWithIdentifier()
   {
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getIdentifier(keywords.firstIdentifiers, index);
+    Tristate result = textParser.getIdentifier(keywords.firstIdentifiers, index, true);
     if (result == TRUE)
     {
       SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.firstIdentifiers, index);
@@ -358,7 +366,7 @@ public class SixteenHighParser
     if (keyword == push)
     {
       StringZero stringZero = new StringZero();
-      Tristate state = textParser.getIdentifier(stringZero);
+      Tristate state = textParser.getIdentifier(stringZero, true);
       if (state == ERROR)
       {
         return _error();
@@ -376,7 +384,7 @@ public class SixteenHighParser
     else if (keyword == pull)
     {
       StringZero stringZero = new StringZero();
-      Tristate state = textParser.getIdentifier(stringZero);
+      Tristate state = textParser.getIdentifier(stringZero, true);
       if (state == ERROR)
       {
         return _error();
@@ -402,7 +410,7 @@ public class SixteenHighParser
     if (keywords.getIfs().contains(keyword))
     {
       If anIf = code.addIf(keyword);
-      Tristate state = textParser.getExactIdentifier(keywords.go());
+      Tristate state = textParser.getExactIdentifier(keywords.go(), true);
       if (state == ERROR)
       {
         return _error();
@@ -445,7 +453,7 @@ public class SixteenHighParser
     if (keyword == go)
     {
       StringZero stringZero = new StringZero();
-      Tristate state = textParser.getIdentifier(stringZero);
+      Tristate state = textParser.getIdentifier(stringZero, true);
       if (state == ERROR)
       {
         return _error();
@@ -605,7 +613,7 @@ public class SixteenHighParser
     }
 
     StringZero identifier = new StringZero();
-    state = textParser.getIdentifier(identifier);
+    state = textParser.getIdentifier(identifier, true);
     if (state == ERROR)
     {
       return _error();
@@ -642,7 +650,7 @@ public class SixteenHighParser
   private ParseResult parseStatementStyle2()
   {
     StringZero zeroIdentifier = new StringZero();
-    Tristate result = textParser.getIdentifier(zeroIdentifier);
+    Tristate result = textParser.getIdentifier(zeroIdentifier, true);
     if (result == ERROR)
     {
       return _error();
@@ -654,7 +662,7 @@ public class SixteenHighParser
 
     String identifier = zeroIdentifier.toString();
     IntegerPointer index = new IntegerPointer();
-    result = textParser.getIdentifier(keywords.secondIdentifiers, index);
+    result = textParser.getIdentifier(keywords.secondIdentifiers, index, true);
     SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.secondIdentifiers, index);
     if (result == TRUE)
     {
@@ -709,13 +717,29 @@ public class SixteenHighParser
     return strings;
   }
 
+  private LiteralResult literal()
+  {
+    LiteralResult literalResult = literalParser.parseLiteral();
+return literalResult;
+  }
+
   private ParseResult assignmentOperator(String leftIdentifier, SixteenHighKeywordCode keyword)
   {
     if (keywords.getAssignments().contains(keyword))
     {
+      LiteralResult literalResult = literal();
+      if (literalResult.isTrue())
+      {
+        code.addAssignmentOperator(leftIdentifier, literalResult.getLiteral());
+        return _true();
+      }
+      else if (parseResult.isError())
+      {
+        return _error();
+      }
+
       StringZero zeroIdentifier = new StringZero();
-      //Could be a literal!
-      Tristate result = textParser.getIdentifier(zeroIdentifier);
+      Tristate result = textParser.getIdentifier(zeroIdentifier, true);
       if (result == ERROR)
       {
         return _error();
@@ -747,7 +771,7 @@ public class SixteenHighParser
     if (keywords.getNumberCompares().contains(keyword))
     {
       StringZero zeroIdentifier = new StringZero();
-      Tristate result = textParser.getIdentifier(zeroIdentifier);
+      Tristate result = textParser.getIdentifier(zeroIdentifier, true);
       if (result == ERROR)
       {
         return _error();

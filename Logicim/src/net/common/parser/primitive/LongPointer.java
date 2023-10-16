@@ -1,6 +1,7 @@
 package net.common.parser.primitive;
 
 public class LongPointer
+    extends PrimitivePointer
 {
   public long value;
 

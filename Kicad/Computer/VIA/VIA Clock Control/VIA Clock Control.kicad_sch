@@ -941,23 +941,23 @@
     (uuid f19b03d8-df91-4a22-a917-9605cf732673)
   )
 
-  (no_connect (at 4.445 48.26) (uuid 047e7508-2f5c-4752-b454-910b5dbbd721))
+  (no_connect (at 4.445 50.8) (uuid 047e7508-2f5c-4752-b454-910b5dbbd721))
   (no_connect (at 4.445 76.2) (uuid 0763e2e1-b6c2-4699-849b-152831aa2f5f))
-  (no_connect (at 4.445 78.74) (uuid 1310164a-e6ab-4521-ad96-279f1a728ed1))
+  (no_connect (at 4.445 83.82) (uuid 1310164a-e6ab-4521-ad96-279f1a728ed1))
   (no_connect (at 4.445 86.36) (uuid 13572765-fa25-44b2-b73d-bc846dd5f342))
   (no_connect (at 17.145 48.26) (uuid 1ee06e56-5a6c-47cb-a7bd-249e32b18e31))
   (no_connect (at 17.145 73.66) (uuid 2095c5d6-644c-46f5-a365-5fcd1e316900))
   (no_connect (at 4.445 71.12) (uuid 2dd3cd7b-aaec-485e-b784-fe7c076990ce))
-  (no_connect (at 17.145 78.74) (uuid 5e34998c-d6a3-4f24-9c58-6f55ef903519))
+  (no_connect (at 17.145 68.58) (uuid 5e34998c-d6a3-4f24-9c58-6f55ef903519))
   (no_connect (at 17.145 63.5) (uuid 647727c0-bb75-448b-ac00-890e909c600d))
   (no_connect (at 17.145 81.28) (uuid 698f6d14-b8ec-495c-a8dd-b56a07505032))
-  (no_connect (at 17.145 86.36) (uuid 7749b6ab-4ead-486d-8aa9-5a092517bcb4))
+  (no_connect (at 17.145 83.82) (uuid 7749b6ab-4ead-486d-8aa9-5a092517bcb4))
   (no_connect (at 17.145 60.96) (uuid 8f542032-250f-4a19-8732-78869bd0909e))
   (no_connect (at 4.445 81.28) (uuid 9113e74f-8ae7-4818-8bef-4511a4dc5d51))
   (no_connect (at 94.615 66.04) (uuid 9b09989d-5007-481e-8bd3-bdfd4dd8a5b7))
   (no_connect (at 128.27 139.7) (uuid a71e7703-9b32-4daa-a907-f6bc613b4996))
   (no_connect (at 94.615 63.5) (uuid a8cf29c7-b0c7-4b0d-a762-d902ce934cf2))
-  (no_connect (at 4.445 58.42) (uuid b3f668ce-b884-414b-b92a-732a5b64e907))
+  (no_connect (at 4.445 66.04) (uuid b3f668ce-b884-414b-b92a-732a5b64e907))
   (no_connect (at 4.445 73.66) (uuid b932a34a-5caa-4aad-9960-bc47460ef45c))
   (no_connect (at 222.25 64.135) (uuid bf0b49ca-f53c-42fe-ae01-846fd6e485c3))
   (no_connect (at 4.445 55.88) (uuid c3224d99-6b93-4d72-b042-44106a22e997))
@@ -1089,7 +1089,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 0dd2bc9c-523a-4089-96b6-deaa21fb6725)
   )
-  (label "CH0_{OUT}" (at 17.145 58.42 0) (fields_autoplaced)
+  (label "CH0_{OUT}" (at 17.145 55.88 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0eee9bfa-10c3-43a5-a8ed-4a7e3c40673c)
   )
@@ -1112,6 +1112,10 @@
   (label "CH0_{OUT}" (at 128.27 132.08 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 1c97770b-9155-44a0-b3fc-7de2a779b5d5)
+  )
+  (label "GND" (at 4.445 78.74 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 1d1ffa6a-1e90-4e7f-8110-d62d69d88a14)
   )
   (label "CLK÷2" (at 56.515 96.52 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -1149,9 +1153,13 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 425a2183-ae1b-4555-877f-a9f7ce3b3e09)
   )
-  (label "CH1_{OUT}" (at 17.145 55.88 0) (fields_autoplaced)
+  (label "CH1_{OUT}" (at 17.145 53.34 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 43406642-cac7-4c8c-940a-d123ebccc07a)
+  )
+  (label "GND" (at 4.445 58.42 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 43f0dccd-0e75-4a9e-83ed-9f17254bf33f)
   )
   (label "GND" (at 56.515 121.92 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -1165,6 +1173,10 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 4b400d2e-2bab-4aae-a0b3-6e3ab0e14457)
   )
+  (label "GND" (at 17.145 58.42 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 4eab87b3-a0cc-42f6-891d-9de349ea51f6)
+  )
   (label "GND" (at 104.775 71.755 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 4f01bace-5969-44b4-a7fe-5c7a3f3a5dc7)
@@ -1177,9 +1189,9 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 5e9c9a05-b42f-487c-94e7-552190e1a94f)
   )
-  (label "GND" (at 4.445 83.82 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 6022b5b2-cce8-4e3f-8c64-f47102ce7c43)
+  (label "GND" (at 17.145 78.74 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 5f7a8aeb-21a3-4a57-b696-fbd91116d4d7)
   )
   (label "GND" (at 69.215 60.96 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -1229,9 +1241,9 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 8d766cdc-73ea-4cb4-a005-8812a3fe2b61)
   )
-  (label "5V" (at 4.445 66.04 180) (fields_autoplaced)
+  (label "5V" (at 4.445 48.26 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 9846de9b-4191-4b8f-8ecd-66c563b7dbad)
+    (uuid 95451ef5-69f0-41be-a432-daec4f87d814)
   )
   (label "CLK" (at 69.215 50.8 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -1265,14 +1277,6 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a7392a53-69cf-416c-a715-51a1de4b108e)
   )
-  (label "GND" (at 17.145 83.82 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid aa18a0f7-fb3e-43d0-9f04-e2b0f9371ba5)
-  )
-  (label "5V" (at 17.145 68.58 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid abff74ca-1bcf-4962-a937-65eaa158c5e8)
-  )
   (label "Select CLK÷2" (at 29.21 124.46 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b1ad68c7-25d4-43ea-a6ea-5f1a26e76443)
@@ -1285,9 +1289,9 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b45f8113-31fd-4e23-b498-cfad3529cb15)
   )
-  (label "GND" (at 17.145 50.8 0) (fields_autoplaced)
+  (label "5V" (at 17.145 86.36 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid b50d491c-a3e0-4a82-b808-576408df68b7)
+    (uuid b6319d2f-0dc5-4a4a-9293-b8283d1e361b)
   )
   (label "GND" (at 187.96 64.135 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1301,7 +1305,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid cae82f99-c8e9-4608-bb4c-03bc9786e42b)
   )
-  (label "CH2_{OUT}" (at 17.145 53.34 0) (fields_autoplaced)
+  (label "CH2_{OUT}" (at 17.145 50.8 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid cbb89d5c-e8bc-4bf7-af72-8b6418de73f5)
   )
@@ -1325,10 +1329,6 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid d26eb5d3-d9dc-424a-866a-8356691d0a7b)
   )
-  (label "GND" (at 4.445 50.8 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid e63e7d19-0585-4a0f-b3a5-b7277d7fcc96)
-  )
   (label "~{Reset}" (at 69.215 68.58 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid e646a012-e752-4115-92da-a5fd1ef5cfc1)
@@ -1345,7 +1345,7 @@
   (symbol (lib_id "HCP65:R_0805") (at 26.035 118.11 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 056f8194-b84d-4b8e-9d04-3d8700edbc0a)
-    (property "Reference" "R1" (at 27.813 120.65 0)
+    (property "Reference" "R2" (at 27.813 120.65 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10KΩ" (at 24.13 120.65 0)
@@ -1360,7 +1360,7 @@
     (pin "1" (uuid 18fddc1f-7839-470b-a7be-86f1692ea561))
     (pin "2" (uuid 642a1151-6549-48b7-8347-0a8e32ac5956))
     (instances
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "R2") (unit 1)
         )
@@ -1396,7 +1396,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "C1") (unit 1)
         )
@@ -1468,7 +1468,7 @@
           (reference "IC2") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "IC5") (unit 1)
         )
@@ -1510,7 +1510,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "C2") (unit 1)
         )
@@ -1576,7 +1576,7 @@
     (pin "N1" (uuid 16ce76e1-0662-499d-b653-6d2417d1f118))
     (pin "N2" (uuid c0dbc8d2-33c0-4b39-9cf6-64e2dd4c43f2))
     (instances
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "S1") (unit 1)
         )
@@ -1607,7 +1607,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "C4") (unit 1)
         )
@@ -1649,7 +1649,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "C6") (unit 1)
         )
@@ -1718,7 +1718,7 @@
     (pin "9" (uuid d13a7585-d57f-4047-ae39-b1c4214d4283))
     (pin "15" (uuid 483c66d3-ff7f-4ebf-886b-99bf747c67ed))
     (instances
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "IC8") (unit 1)
         )
@@ -1735,7 +1735,7 @@
     (property "Value" "Conn_02x16_Counter_Clockwise" (at 10.795 88.9 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "SamacSys_Parts:DIP-32_Board_W22.86mm" (at 9.525 66.04 0)
+    (property "Footprint" "SamacSys_Parts:DIP-32_Board_W15.24mm" (at 9.525 66.04 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 9.525 66.04 0)
@@ -1779,7 +1779,7 @@
           (reference "J1") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "J3") (unit 1)
         )
@@ -1837,7 +1837,7 @@
     (pin "9" (uuid 5df2e236-a461-47e4-8c8e-9fee0121a9bb))
     (pin "15" (uuid 46e5170b-17eb-41c5-811e-e32707edd7c8))
     (instances
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "IC9") (unit 1)
         )
@@ -1894,7 +1894,7 @@
     (pin "6" (uuid c1221d95-195d-4fef-9274-448434cba870))
     (pin "5" (uuid 69634d2e-50ab-4043-b2af-3927533da148))
     (instances
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "IC10") (unit 1)
         )
@@ -1953,7 +1953,7 @@
     (pin "8" (uuid 0c038f47-5172-4902-9021-0408830d0c7b))
     (pin "9" (uuid f272bcbe-43fe-4904-b241-62751431bee0))
     (instances
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "IC7") (unit 1)
         )
@@ -1992,7 +1992,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "C5") (unit 1)
         )
@@ -2034,7 +2034,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "Via Clock Control"
+      (project "VIA Clock Control"
         (path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
           (reference "C3") (unit 1)
         )

@@ -10,7 +10,7 @@ import java.io.File;
 import static net.logicim.assertions.Validator.validate;
 import static net.logicim.assertions.Validator.validateNotNull;
 
-public class AssemblerTest
+public class ParserTest
 {
   protected static void testSimple()
   {
@@ -38,7 +38,7 @@ public class AssemblerTest
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
   {
-    ClassInspector classInspector = ClassInspector.forClass(AssemblerTest.class);
+    ClassInspector classInspector = ClassInspector.forClass(ParserTest.class);
     String packageName = classInspector.getPackageName();
     String programDir = EnvironmentInspector.getProgramDir();
     String fullFilename = programDir.replace('\\', '/') + "/test/" + packageName.replace('.', '/') + "/" + filename;
@@ -46,7 +46,7 @@ public class AssemblerTest
     return new SixteenHighParser(log, filename, context, contents);
   }
 
-  public static void main(String[] args)
+  public static void test()
   {
     testSimple();
     testPointers();

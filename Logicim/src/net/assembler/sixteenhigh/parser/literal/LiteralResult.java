@@ -6,8 +6,8 @@ import static net.common.parser.Tristate.*;
 
 public class LiteralResult
 {
-  Tristate state;
-  CTLiteral literal;
+  protected Tristate state;
+  protected CTLiteral literal;
 
   public LiteralResult(Tristate state)
   {
@@ -39,6 +39,11 @@ public class LiteralResult
   public CTLiteral getLiteral()
   {
     return literal;
+  }
+
+  public CTInt getInt()
+  {
+    return (CTInt) literal;
   }
 }
 

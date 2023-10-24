@@ -36,7 +36,7 @@ public class LiteralParser
         {
           double ten = 10.0;
           f.value = Math.pow(ten, exponent.value) * f.value;
-          LiteralResult literalResult = DoubleType(f.value);
+          LiteralResult literalResult = doubleType(f.value);
           textParser.passPosition();
           return literalResult;
         }
@@ -53,7 +53,7 @@ public class LiteralParser
       }
       else
       {
-        LiteralResult literalResult = DoubleType(f.value);
+        LiteralResult literalResult = doubleType(f.value);
         textParser.passPosition();
         return literalResult;
       }
@@ -214,7 +214,7 @@ public class LiteralParser
     }
   }
 
-  public LiteralResult decimalInteger()
+  private LiteralResult decimalInteger()
   {
     textParser.pushPosition();
 
@@ -322,7 +322,7 @@ public class LiteralParser
     }
   }
 
-  public LiteralResult integerType(long value)
+  private LiteralResult integerType(long value)
   {
     Tristate result;
     boolean unsigned;
@@ -405,12 +405,9 @@ public class LiteralParser
     }
   }
 
-  public LiteralResult DoubleType(double ldValue)
+  public LiteralResult doubleType(double ldValue)
   {
     Tristate bResult;
-    CTFloat pcFloat;
-    CTDouble pcDouble;
-    CTLongDouble pcLongDouble;
 
     bResult = textParser.getExactIdentifier("L", false);
     if (bResult == TRUE)

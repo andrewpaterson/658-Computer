@@ -16,6 +16,22 @@ public abstract class Validator
       throw new ValidationException(toFailureString(Boolean.toString(expected), Boolean.toString(actual)));
     }
   }
+  public static void validate(Class<?> expected, Class<?> actual)
+  {
+    if (expected != actual)
+    {
+      throw new ValidationException(toFailureString(toClassString(expected), toClassString(actual)));
+    }
+  }
+
+  private static String toClassString(Class<?> aClass)
+  {
+    if (aClass != null)
+    {
+      return aClass.getSimpleName();
+    }
+    return NULL;
+  }
 
   public static void validateTrue(boolean actual)
   {

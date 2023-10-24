@@ -1,5 +1,6 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.assembler.sixteenhigh.parser.literal.CTLiteral;
 import net.assembler.sixteenhigh.parser.statment.*;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessMode;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
@@ -131,7 +132,12 @@ public class Code
 
   public void addAssignmentOperator(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
   {
-    statements.add(new AssignmentOperator(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
+    statements.add(new AssignmentFromIdentifier(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
+  }
+
+  public void addAssignmentOperator(String leftIdentifier, CTLiteral rightLiteral, SixteenHighKeywordCode keyword)
+  {
+    statements.add(new AssignmentFromLiteral(this, statementIndex++, leftIdentifier, rightLiteral, keyword));
   }
 
   public void addStartAddress(int address)

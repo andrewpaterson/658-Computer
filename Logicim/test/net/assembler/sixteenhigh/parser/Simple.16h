@@ -3,7 +3,8 @@
     number = 10; i = 0; even = 0; odd = 0
 bool    b
 loop:
-    b = i % 2
+    b = i
+	b %= 2
     b ?
     if= go even_
     odd += i

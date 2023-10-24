@@ -1,5 +1,6 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.assembler.sixteenhigh.parser.literal.CTLiteral;
 import net.assembler.sixteenhigh.parser.literal.LiteralParser;
 import net.assembler.sixteenhigh.parser.literal.LiteralResult;
 import net.assembler.sixteenhigh.parser.statment.*;
@@ -7,7 +8,6 @@ import net.common.parser.StringZero;
 import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
 import net.common.parser.Tristate;
-import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.parser.primitive.LongPointer;
 import net.common.util.StringUtil;
@@ -720,7 +720,7 @@ public class SixteenHighParser
   private LiteralResult literal()
   {
     LiteralResult literalResult = literalParser.parseLiteral();
-return literalResult;
+    return literalResult;
   }
 
   private ParseResult assignmentOperator(String leftIdentifier, SixteenHighKeywordCode keyword)
@@ -730,10 +730,11 @@ return literalResult;
       LiteralResult literalResult = literal();
       if (literalResult.isTrue())
       {
-        code.addAssignmentOperator(leftIdentifier, literalResult.getLiteral());
+        CTLiteral literal = literalResult.getLiteral();
+        code.addAssignmentOperator(leftIdentifier, literal, keyword);
         return _true();
       }
-      else if (parseResult.isError())
+      else if (literalResult.isError())
       {
         return _error();
       }

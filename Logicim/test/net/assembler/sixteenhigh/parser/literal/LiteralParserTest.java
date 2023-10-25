@@ -5,6 +5,7 @@ import net.common.parser.TextParser;
 
 import static net.common.parser.Tristate.TRUE;
 import static net.logicim.assertions.Validator.validate;
+import static net.logicim.assertions.Validator.validateTrue;
 
 public class LiteralParserTest
 {
@@ -20,6 +21,7 @@ public class LiteralParserTest
     validate(TRUE, integerLiteral.state);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());
     validate(5, integerLiteral.getInt().value);
+    validateTrue(integerLiteral.getInt().isPositive());
 
     literalParser = new LiteralParser(createTextParser("5L"));
     integerLiteral = literalParser.getIntegerLiteral();
@@ -28,6 +30,12 @@ public class LiteralParserTest
     validate(5, integerLiteral.getInt().value);
 
     literalParser = new LiteralParser(createTextParser("-5"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(5, integerLiteral.getInt().value);
+
+    literalParser = new LiteralParser(createTextParser("−2147483647"));
     integerLiteral = literalParser.getIntegerLiteral();
     validate(TRUE, integerLiteral.state);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());

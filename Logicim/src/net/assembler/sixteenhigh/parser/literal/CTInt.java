@@ -21,5 +21,10 @@ public class CTInt
   {
     return unsigned;
   }
+
+  public boolean isPositive()
+  {
+    return false;
+  }
 }
 

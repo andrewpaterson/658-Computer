@@ -573,7 +573,7 @@ public class SixteenHighParser
     return new ParseResult(ERROR);
   }
 
-  private ParseResult _error(String error, String... parameters)
+  private ParseResult _error(String error, Object... parameters)
   {
     textParser.getLog().logError(filename, textParser.getPosition(), String.format(error, parameters));
     return new ParseResult(ERROR);

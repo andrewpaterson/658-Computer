@@ -174,7 +174,8 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38
+        0.38,
+        0.45
       ],
       "via_dimensions": [
         {
@@ -192,7 +193,9 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "no_connect_connected|3467100|1384300|276f2340-8b4e-4f03-b52e-72e3f350dd9a|540c05ac-9787-4bf9-b57e-650c3f6f8f61|||"
+    ],
     "meta": {
       "version": 0
     },
@@ -466,6 +469,10 @@
       {
         "netclass": "Power",
         "pattern": "/GND"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/12V"
       }
     ]
   },

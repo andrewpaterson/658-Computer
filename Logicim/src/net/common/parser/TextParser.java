@@ -1091,7 +1091,7 @@ public class TextParser
     {
       pi.value = 1;
       cCurrent = text.get(position);
-      if (cCurrent == '-')
+      if (cCurrent == '-' || cCurrent == '−')
       {
         pi.value = -1;
         stepRight();
@@ -1750,7 +1750,10 @@ public class TextParser
     }
   }
 
-  public Tristate getInteger(LongPointer integerPointer, IntegerPointer signPointer, IntegerPointer numDigitsPointer, boolean skipWhiteSpace)
+  public Tristate getInteger(LongPointer integerPointer,
+                             IntegerPointer signPointer,
+                             IntegerPointer numDigitsPointer,
+                             boolean skipWhiteSpace)
   {
     Tristate tResult;
 
@@ -2293,7 +2296,13 @@ public class TextParser
     return getDigits(pulli, piSign, piNumDigits, true, true, 10, NUMBER_SEPARATOR_NONE);
   }
 
-  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, boolean skipWhiteSpace, boolean bTestSign, int iBase, int iAllowedSeparator)
+  public Tristate getDigits(LongPointer pulli,
+                            IntegerPointer piSign,
+                            IntegerPointer piNumDigits,
+                            boolean skipWhiteSpace,
+                            boolean bTestSign,
+                            int iBase,
+                            int iAllowedSeparator)
   {
     LongPointer ulliValue = new LongPointer();
     IntegerPointer iSign = new IntegerPointer();

@@ -1,25 +1,25 @@
 package net.assembler.sixteenhigh.parser.literal;
 
 public class CTLong
-    extends CTLiteral
+    extends CTIntegerLiteral
 {
-  protected long value;
-  protected boolean unsigned;
+  protected long rawValue;
 
-  public CTLong(long value, boolean unsigned)
+  public CTLong(long rawValue, boolean unsigned, boolean negative)
   {
-    this.value = value;
-    this.unsigned = unsigned;
+    super(unsigned, negative);
+    this.rawValue = rawValue;
   }
 
-  public long getValue()
+  public long getRawValue()
   {
-    return value;
+    return rawValue;
   }
 
-  public boolean isUnsigned()
+  @Override
+  public boolean isValid()
   {
-    return unsigned;
+    return true;
   }
 }
 

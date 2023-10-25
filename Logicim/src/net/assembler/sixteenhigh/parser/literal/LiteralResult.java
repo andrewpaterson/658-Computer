@@ -45,5 +45,10 @@ public class LiteralResult
   {
     return (CTInt) literal;
   }
+
+  public CTLong getLong()
+  {
+    return (CTLong) literal;
+  }
 }
 

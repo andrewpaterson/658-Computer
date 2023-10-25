@@ -1,24 +1,47 @@
 package net.assembler.sixteenhigh.parser.literal;
 
-public class CTShort extends CTLiteral
+public class CTShort
+    extends CTIntegerLiteral
 {
-  protected long value;
-  protected boolean unsigned;
+  public static final long MAX_USHORT = 0xffff;
+  public static final long MIN_USHORT = 0x0;
+  public static final long MAX_SHORT = 0x7fff;
+  public static final long MIN_SHORT = -0x8000;
 
-  public CTShort(long value, boolean unsigned)
+  protected long rawValue;
+
+  public CTShort(long rawValue, boolean unsigned, boolean negative)
   {
-    this.value = value;
-    this.unsigned = unsigned;
+    super(unsigned, negative);
+    this.rawValue = rawValue;
   }
 
-  public long getValue()
+  @Override
+  public long getRawValue()
   {
-    return value;
+    return rawValue;
   }
 
-  public boolean isUnsigned()
+  @Override
+  public boolean isValid()
   {
-    return unsigned;
+    long value = getValue();
+    if (isUnsigned())
+    {
+      if ((value >= MIN_USHORT) && (value <= MAX_USHORT))
+      {
+        return true;
+      }
+      return false;
+    }
+    else
+    {
+      if ((value >= MIN_SHORT) && (value <= MAX_SHORT))
+      {
+        return true;
+      }
+      return false;
+    }
   }
 }
 

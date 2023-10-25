@@ -1,25 +1,47 @@
 package net.assembler.sixteenhigh.parser.literal;
 
 public class CTChar
-    extends CTLiteral
+    extends CTIntegerLiteral
 {
-  protected char value;
-  protected boolean unsigned;
+  public static final long MAX_UCHAR = 0xff;
+  public static final long MIN_UCHAR = 0x0;
+  public static final long MAX_CHAR = 0x7f;
+  public static final long MIN_CHAR = -0x80;
 
-  public CTChar(char value, boolean unsigned)
+  protected long rawValue;
+
+  public CTChar(long rawValue, boolean unsigned, boolean negative)
   {
-    this.value = value;
-    this.unsigned = unsigned;
+    super(unsigned, negative);
+    this.rawValue = rawValue;
   }
 
-  public char getValue()
+  @Override
+  public long getRawValue()
   {
-    return value;
+    return rawValue;
   }
 
-  public boolean isUnsigned()
+  @Override
+  public boolean isValid()
   {
-    return unsigned;
+    long value = getValue();
+    if (isUnsigned())
+    {
+      if ((value >= MIN_UCHAR) && (value <= MAX_UCHAR))
+      {
+        return true;
+      }
+      return false;
+    }
+    else
+    {
+      if ((value >= MIN_CHAR) && (value <= MAX_CHAR))
+      {
+        return true;
+      }
+      return false;
+    }
   }
 }
 

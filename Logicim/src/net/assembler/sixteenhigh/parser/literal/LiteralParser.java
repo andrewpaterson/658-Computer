@@ -127,13 +127,13 @@ public class LiteralParser
       {
         if (!shortValue)
         {
-          character = new CTChar(stringZero.get(0), false);
+          character = new CTChar(stringZero.get(0), false, false);
           textParser.passPosition();
           return new LiteralResult(character);
         }
         else
         {
-          shortInteger = new CTShort(stringZero.get(0), false);
+          shortInteger = new CTShort(stringZero.get(0), false, false);
           textParser.passPosition();
           return new LiteralResult(shortInteger);
         }
@@ -143,13 +143,13 @@ public class LiteralParser
       {
         if (!shortValue)
         {
-          integer = new CTInt(stringZero.get(1) + (stringZero.get(0) << 8), false);
+          integer = new CTInt(stringZero.get(1) + (stringZero.get(0) << 8), false, false);
           textParser.passPosition();
           return new LiteralResult(integer);
         }
         else
         {
-          shortInteger = new CTShort(stringZero.get(1) + (stringZero.get(0) << 8), false);
+          shortInteger = new CTShort(stringZero.get(1) + (stringZero.get(0) << 8), false, false);
           textParser.passPosition();
           return new LiteralResult(shortInteger);
         }
@@ -157,14 +157,14 @@ public class LiteralParser
 
       if (stringZero.length() == 3)
       {
-        integer = new CTInt(stringZero.get(2) + (stringZero.get(1) << 8) + (stringZero.get(0) << 16), false);
+        integer = new CTInt(stringZero.get(2) + (stringZero.get(1) << 8) + (stringZero.get(0) << 16), false, false);
         textParser.passPosition();
         return new LiteralResult(integer);
       }
 
       if (stringZero.length() == 4)
       {
-        integer = new CTInt(stringZero.get(3) + (stringZero.get(2) << 8) + (stringZero.get(1) << 16) + (stringZero.get(1) << 24), false);
+        integer = new CTInt(stringZero.get(3) + (stringZero.get(2) << 8) + (stringZero.get(1) << 16) + (stringZero.get(1) << 24), false, false);
         textParser.passPosition();
         return new LiteralResult(integer);
       }
@@ -224,7 +224,7 @@ public class LiteralParser
     Tristate result = textParser.getInteger(longPointer, signPointer, numDigitsPointer, true);
     if (result == TRUE)
     {
-      LiteralResult literalResult = integerType(longPointer.value);
+      LiteralResult literalResult = integerType(longPointer.value, signPointer.value);
       textParser.passPosition();
       return literalResult;
     }
@@ -254,7 +254,7 @@ public class LiteralParser
       result = textParser.getHexadecimal(longPointer, signPointer, numDigitsPointer, true);
       if (result == TRUE)
       {
-        literalResult = integerType(longPointer.value);
+        literalResult = integerType(longPointer.value, signPointer.value);
         return literalResult;
       }
       else
@@ -262,7 +262,7 @@ public class LiteralParser
         result = textParser.getOctal(longPointer, signPointer, numDigitsPointer, true);
         if (result == TRUE)
         {
-          literalResult = integerType(longPointer.value);
+          literalResult = integerType(longPointer.value, signPointer.value);
           return literalResult;
         }
         else
@@ -322,14 +322,12 @@ public class LiteralParser
     }
   }
 
-  private LiteralResult integerType(long value)
+  private LiteralResult integerType(long value, int sign)
   {
     Tristate result;
     boolean unsigned;
     boolean bLong;
     boolean bLongLong;
-    CTInt pcInt;
-    CTLong pcLongLong;
 
 	/*
 	U
@@ -397,11 +395,11 @@ public class LiteralParser
 
     if (bLongLong)
     {
-      return new LiteralResult(new CTLong(value, unsigned));
+      return new LiteralResult(new CTLong(value, unsigned, sign < 0));
     }
     else
     {
-      return new LiteralResult(new CTInt(value, unsigned));
+      return new LiteralResult(new CTInt(value, unsigned, sign < 0));
     }
   }
 

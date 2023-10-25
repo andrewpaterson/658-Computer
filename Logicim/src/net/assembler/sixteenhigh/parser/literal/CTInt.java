@@ -1,30 +1,46 @@
 package net.assembler.sixteenhigh.parser.literal;
 
 public class CTInt
-    extends CTLiteral
+    extends CTIntegerLiteral
 {
-  protected long value;
-  protected boolean unsigned;
+  public static final long MAX_UINT = 0xffffffffL;
+  public static final long MIN_UINT = 0x0;
+  public static final long MAX_INT = 0x7fffffffL;
+  public static final long MIN_INT = -0x80000000L;
 
-  public CTInt(long value, boolean unsigned)
+  protected long rawValue;
+
+  public CTInt(long rawValue, boolean unsigned, boolean negative)
   {
-    this.value = value;
-    this.unsigned = unsigned;
+    super(unsigned, negative);
+    this.rawValue = rawValue;
   }
 
-  public long getValue()
+  public long getRawValue()
   {
-    return value;
+    return rawValue;
   }
 
-  public boolean isUnsigned()
+  @Override
+  public boolean isValid()
   {
-    return unsigned;
-  }
-
-  public boolean isPositive()
-  {
-    return false;
+    long value = getValue();
+    if (isUnsigned())
+    {
+      if ((value >= MIN_UINT) && (value <= MAX_UINT))
+      {
+        return true;
+      }
+      return false;
+    }
+    else
+    {
+      if ((value >= MIN_INT) && (value <= MAX_INT))
+      {
+        return true;
+      }
+      return false;
+    }
   }
 }
 

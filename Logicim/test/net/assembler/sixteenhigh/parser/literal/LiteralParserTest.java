@@ -3,16 +3,12 @@ package net.assembler.sixteenhigh.parser.literal;
 import net.assembler.sixteenhigh.parser.TextParserLog;
 import net.common.parser.TextParser;
 
+import static net.common.parser.Tristate.FALSE;
 import static net.common.parser.Tristate.TRUE;
 import static net.logicim.assertions.Validator.*;
 
 public class LiteralParserTest
 {
-  public static void test()
-  {
-    testIntegerLiterals();
-  }
-
   protected static void testIntegerLiterals()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("5"));
@@ -76,6 +72,35 @@ public class LiteralParserTest
     validate(TRUE, integerLiteral.state);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());
     validateFalse(integerLiteral.getInt().isValid());
+
+    literalParser = new LiteralParser(createTextParser("5.0"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(FALSE, integerLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("5."));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(FALSE, integerLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("5e10"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(FALSE, integerLiteral.state);
+  }
+
+  private static void testFloatingLiterals()
+  {
+    LiteralParser literalParser = new LiteralParser(createTextParser("5.0"));
+    LiteralResult floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTInt.class, floatingLiteral.getLiteral().getClass());
+    validate(5, floatingLiteral.getInt().rawValue);
+    validateTrue(floatingLiteral.getInt().isPositive());
+    validateTrue(floatingLiteral.getInt().isValid());
+  }
+
+  public static void test()
+  {
+    testIntegerLiterals();
+    testFloatingLiterals();
   }
 
   protected static TextParser createTextParser(String contents)

@@ -160,7 +160,7 @@ public class TextParser
 
   private void testEnd()
   {
-    if ((position >= 0) && (position <= textLength()))
+    if ((position >= 0) && (position < textLength()))
     {
       outsideText = false;
       return;
@@ -168,7 +168,7 @@ public class TextParser
     outsideText = true;
   }
 
-  private boolean isWhiteSpace(char cCurrent)
+  public static boolean isWhiteSpace(char cCurrent)
   {
     return ((cCurrent == ' ') || (cCurrent == '\n') || (cCurrent == '\t'));
   }
@@ -691,8 +691,7 @@ public class TextParser
     if (outsideText)
     {
       popPosition();
-      log.logFatal(filename, position, "Expected exact identifier %s.  Instead outside text.", identifier);
-      return ERROR;
+      return FALSE;
     }
 
     for (; ; )
@@ -707,7 +706,6 @@ public class TextParser
           tResult = getIdentifierCharacter(cCurrent, iPos == 0);
           if (tResult == TRUE)
           {
-            //Put the parser back where it was.
             popPosition();
             return FALSE;
           }
@@ -721,14 +719,17 @@ public class TextParser
         }
         else
         {
-          //Put the parser back where it was.
           popPosition();
           return FALSE;
         }
       }
       else
       {
-        //Put the parser back where it was.
+        if (iPos == identifier.length())
+        {
+          passPosition();
+          return TRUE;
+        }
         popPosition();
         return FALSE;
       }
@@ -1764,7 +1765,6 @@ public class TextParser
       skipWhiteSpace();
     }
 
-    //Make sure we're not off the end of the file.
     if (outsideText)
     {
       popPosition();
@@ -1772,16 +1772,15 @@ public class TextParser
       return ERROR;
     }
 
-    tResult = getDigits(integerPointer, signPointer, numDigitsPointer, skipWhiteSpace);
+    tResult = getDigits(integerPointer,
+                        signPointer,
+                        numDigitsPointer,
+                        skipWhiteSpace,
+                        true,
+                        10,
+                        NUMBER_SEPARATOR_NONE);
     if (tResult == TRUE)
     {
-      //Make sure there are no decimals.
-      if (text.get(position) == '.')
-      {
-        popPosition();
-        return FALSE;
-      }
-
       passPosition();
       return TRUE;
     }
@@ -2276,24 +2275,9 @@ public class TextParser
     }
   }
 
-  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, boolean skipWhiteSpace, boolean bTestSign, int iBase)
+  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, int allowedSeparator)
   {
-    return getDigits(pulli, piSign, piNumDigits, skipWhiteSpace, bTestSign, iBase, NUMBER_SEPARATOR_NONE);
-  }
-
-  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, boolean skipWhiteSpace, boolean bTestSign)
-  {
-    return getDigits(pulli, piSign, piNumDigits, skipWhiteSpace, bTestSign, 10, NUMBER_SEPARATOR_NONE);
-  }
-
-  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, boolean skipWhiteSpace)
-  {
-    return getDigits(pulli, piSign, piNumDigits, skipWhiteSpace, true, 10, NUMBER_SEPARATOR_NONE);
-  }
-
-  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits)
-  {
-    return getDigits(pulli, piSign, piNumDigits, true, true, 10, NUMBER_SEPARATOR_NONE);
+    return getDigits(pulli, piSign, piNumDigits, true, true, 10, allowedSeparator);
   }
 
   public Tristate getDigits(LongPointer pulli,
@@ -2308,10 +2292,7 @@ public class TextParser
     IntegerPointer iSign = new IntegerPointer();
     IntegerPointer iTemp = new IntegerPointer();
     Tristate tReturn;
-    boolean bFirstDigit;
-    int i;
 
-    //This still needs to be failed on the case where the number is larger than MAX_ULONG.
     pushPosition();
 
     if (skipWhiteSpace)
@@ -2320,7 +2301,7 @@ public class TextParser
     }
 
     pulli.value = 0;
-    i = 0;
+    int i = 0;
     if (!outsideText)
     {
       ulliValue.value = 0;
@@ -2334,7 +2315,7 @@ public class TextParser
         iSign.value = 1;
       }
 
-      bFirstDigit = true;
+      boolean bFirstDigit = true;
       boolean bSeparator = false;
       for (; ; )
       {
@@ -2618,7 +2599,7 @@ public class TextParser
     }
   }
 
-  public Tristate getFloat(FloatPointer pf, boolean skipWhiteSpace)
+  public Tristate getFloat(FloatPointer pf, boolean skipWhiteSpace, int allowedSeparator)
   {
     LongPointer ulliLeft = new LongPointer();
     LongPointer ulliRight = new LongPointer();
@@ -2641,7 +2622,7 @@ public class TextParser
     if (!outsideText)
     {
       //Try and get the mantissa.
-      tReturn = getDigits(ulliLeft, iSign, null);
+      tReturn = getDigits(ulliLeft, iSign, null, allowedSeparator);
       bLeft = true;
 
       //Just return on errors an non-numbers.
@@ -2662,7 +2643,7 @@ public class TextParser
       tReturn = getExactCharacter('.', false);
       if (tReturn == TRUE)
       {
-        tReturn = getDigits(ulliRight, iSign, iNumDecimals);
+        tReturn = getDigits(ulliRight, iSign, iNumDecimals, allowedSeparator);
         if (tReturn == TRUE)
         {
           if (iSign.value <= 0)
@@ -2833,6 +2814,16 @@ public class TextParser
       }
     }
     return result;
+  }
+
+  public boolean isOutsideText()
+  {
+    return outsideText;
+  }
+
+  public char peekCurrent()
+  {
+    return text.get(position);
   }
 }
 

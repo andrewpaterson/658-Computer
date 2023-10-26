@@ -329,14 +329,6 @@ public class LiteralParser
     boolean bLong;
     boolean bLongLong;
 
-	/*
-	U
-	L
-	UL
-	LL
-	ULL
-	*/
-
     unsigned = false;
     bLongLong = false;
     bLong = false;
@@ -393,6 +385,16 @@ public class LiteralParser
       return new LiteralResult(ERROR);
     }
 
+    char c = textParser.peekCurrent();
+    if (!textParser.isOutsideText())
+    {
+      if (!isValidCharacterFollowingInteger(c))
+      {
+        error(String.format("Integer cannot be followed by character [%s].", c));
+        return new LiteralResult(ERROR);
+      }
+    }
+
     if (bLongLong)
     {
       return new LiteralResult(new CTLong(value, unsigned, sign < 0));
@@ -400,6 +402,30 @@ public class LiteralParser
     else
     {
       return new LiteralResult(new CTInt(value, unsigned, sign < 0));
+    }
+  }
+
+  private boolean isValidCharacterFollowingInteger(char c)
+  {
+    if (TextParser.isWhiteSpace(c))
+    {
+      return true;
+    }
+    switch (c)
+    {
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+      case '}':
+      case ')':
+      case ']':
+      case ';':
+      case '|':
+      case '&':
+        return true;
+      default:
+        return false;
     }
   }
 
@@ -432,6 +458,11 @@ public class LiteralParser
     {
       return new LiteralResult(ERROR);
     }
+  }
+
+  public LiteralResult getFloatingLiteral()
+  {
+    return doubleLiteral();
   }
 
   public LiteralResult parseLiteral()

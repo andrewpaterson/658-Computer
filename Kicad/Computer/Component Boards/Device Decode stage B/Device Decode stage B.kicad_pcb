@@ -761,7 +761,7 @@
     (property "ki_keywords" "capacitor cap")
     (path "/ca8a3ba5-4963-4a20-bcbe-311314889adc")
     (attr smd)
-    (fp_text reference "C11" (at 0.027 -2.075 180) (layer "F.SilkS")
+    (fp_text reference "C11" (at 0.027 -2.075 180) (layer "F.SilkS") hide
         (effects (font (size 0.635 0.635) (thickness 0.15)))
       (tstamp f3462a77-2013-433c-a4c7-054facbdc61e)
     )
@@ -1228,6 +1228,9 @@
   )
   (gr_text "Y7_{W}" (at 102.997 91.44) (layer "F.SilkS") (tstamp f31c1673-6c29-4e50-abfa-bd487942b330)
     (effects (font (size 0.635 0.635) (thickness 0.15) bold) (justify right))
+  )
+  (gr_text "V0" (at 99.949 93.853) (layer "F.SilkS" knockout) (tstamp f32a0d03-de69-45bd-91e5-33e4b6cdbad2)
+    (effects (font (size 1 1) (thickness 0.2) bold))
   )
   (gr_text "GND" (at 90.043 88.9) (layer "F.SilkS") (tstamp f43fd862-3063-4097-855f-2ebd7a133126)
     (effects (font (size 0.635 0.635) (thickness 0.15) bold) (justify left))

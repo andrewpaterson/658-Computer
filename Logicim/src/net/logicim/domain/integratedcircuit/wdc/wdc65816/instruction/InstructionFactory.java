@@ -86,7 +86,7 @@ public class InstructionFactory
     opCodes.add(createAND(AND_AbsoluteLongIndexedWithX, createAbsoluteLongIndexedWithXCycles(W65C816::AND)));
     opCodes.add(createRTI(RTI_StackImplied, createStackRTICycles()));
     opCodes.add(createEOR(EOR_DirectPageIndexedIndirectWithX, createDirectIndexedIndirectWithXCycles(W65C816::EOR)));
-    opCodes.add(createWDM(WDM_Implied, createImpliedCycles(W65C816::WDM)));
+    opCodes.add(createWDM(WDM_Implied, createWDMImpliedCycles(W65C816::WDM)));
     opCodes.add(createEOR(EOR_StackRelative, createStackRelativeCycles(W65C816::EOR)));
     opCodes.add(createMVP(MVP_BlockMove, createBlockMoveCycles(W65C816::MVP)));
     opCodes.add(createEOR(EOR_DirectPage, createDirectCycles(W65C816::EOR, M)));

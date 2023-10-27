@@ -573,8 +573,13 @@ public class TextParser
     }
   }
 
-  public Tristate getExactCaseInsensitiveCharacterSequence(String szSequence, boolean skipWhiteSpace)
+  public Tristate getExactCaseInsensitiveCharacterSequence(String identifier, boolean skipWhiteSpace)
   {
+    if (identifier == null)
+    {
+      throw new SimulatorException("Identifier may not be null.");
+    }
+
     int iPos;
     char c1, c2;
 
@@ -597,7 +602,7 @@ public class TextParser
 
     for (; ; )
     {
-      if (iPos == szSequence.length())
+      if (iPos == identifier.length())
       {
         //Got all the way to the null character.
         passPosition();
@@ -606,7 +611,7 @@ public class TextParser
       if (!outsideText)
       {
         c1 = Character.toUpperCase(text.get(position));
-        c2 = Character.toUpperCase(szSequence.charAt(iPos));
+        c2 = Character.toUpperCase(identifier.charAt(iPos));
         if (c1 == c2)
         {
           stepRight();
@@ -677,10 +682,7 @@ public class TextParser
       throw new SimulatorException("Identifier may not be null.");
     }
     CharPointer cCurrent = new CharPointer();
-    int iPos;
-    Tristate tResult;
 
-    iPos = 0;
     pushPosition();
     if (skipWhiteSpace)
     {
@@ -694,6 +696,7 @@ public class TextParser
       return FALSE;
     }
 
+    int iPos = 0;
     for (; ; )
     {
       if (!outsideText)
@@ -703,7 +706,7 @@ public class TextParser
         {
           //Got all the way to the null character.
           //If there are additional identifier characters then we do not have the right identifier.
-          tResult = getIdentifierCharacter(cCurrent, iPos == 0);
+          Tristate tResult = getIdentifierCharacter(cCurrent, iPos == 0);
           if (tResult == TRUE)
           {
             popPosition();
@@ -1140,17 +1143,22 @@ public class TextParser
         if (!outsideText)
         {
           tReturn = getDigit(iTemp);
+          if (tReturn == ERROR)
+          {
+            passPosition();
+            return ERROR;
+          }
+
           if (tReturn == TRUE)
           {
             i++;
             iNum *= 10;
             iNum += iTemp.value;
           }
-          else if ((tReturn == FALSE) || (tReturn == ERROR))
+          else if (tReturn == FALSE)
           {
             if (bFirstDigit)
             {
-              //might already have got a sign...  so reset the parser.
               popPosition();
               return FALSE;
             }
@@ -1167,9 +1175,22 @@ public class TextParser
         }
         else
         {
-          //Got only a sign then end of file.
-          popPosition();
-          return ERROR;
+          if (bFirstDigit)
+          {
+            popPosition();
+            return FALSE;
+          }
+          else
+          {
+            iNum *= iSign.value;
+            pi.value = iNum;
+            if (iNumDigits != null)
+            {
+              iNumDigits.value = i;
+            }
+            passPosition();
+            return TRUE;
+          }
         }
       }
     }
@@ -1182,12 +1203,9 @@ public class TextParser
 
   public Tristate getFloat(FloatPointer pf)
   {
-    IntegerPointer iLeft = new IntegerPointer();
-    IntegerPointer iRight = new IntegerPointer();
-    Tristate tReturn;
     IntegerPointer iNumDecimals = new IntegerPointer();
-    double fLeft;
-    double fRight;
+    double characteristic;
+    double mantissa;
     double fTemp;
     boolean bLeft;
 
@@ -1197,37 +1215,44 @@ public class TextParser
     pf.value = 0.0;
     if (!outsideText)
     {
-      //Try and get the mantissa.
-      tReturn = getDigits(iLeft, null);
+      IntegerPointer characteristicPointer = new IntegerPointer();
+      Tristate tReturn = getDigits(characteristicPointer, null);
       bLeft = true;
 
-      //Just return on errors an non-numbers.
+      //Just return on errors and non-numbers.
       if (tReturn == FALSE)
       {
         //There may still be a decimal point...
-        iLeft.value = 0;
+        characteristicPointer.value = 0;
         bLeft = false;
       }
       else if (tReturn == ERROR)
       {
-        popPosition();
+        passPosition();
         return ERROR;
       }
 
-      fLeft = iLeft.value;
+      characteristic = characteristicPointer.value;
       if (!outsideText)
       {
         tReturn = getExactCharacter('.', false);
         if (tReturn == TRUE)
         {
-          tReturn = getDigits(iRight, iNumDecimals);
+          IntegerPointer mantissaPointer = new IntegerPointer();
+          tReturn = getDigits(mantissaPointer, iNumDecimals);
           if (tReturn == TRUE)
           {
-            fRight = iRight.value;
-            fTemp = Math.pow(10.0f, (-iNumDecimals.value));
-            fRight *= fTemp;
+            if (mantissaPointer.value < 0)
+            {
+              passPosition();
+              return ERROR;
+            }
 
-            pf.value = fLeft + fRight;
+            mantissa = mantissaPointer.value;
+            fTemp = Math.pow(10.0f, (-iNumDecimals.value));
+            mantissa *= fTemp;
+
+            pf.value = characteristic + mantissa;
             passPosition();
             return TRUE;
           }
@@ -1249,7 +1274,7 @@ public class TextParser
           }
           else
           {
-            pf.value = fLeft;
+            pf.value = characteristic;
             passPosition();
             return TRUE;
           }
@@ -1266,7 +1291,7 @@ public class TextParser
         }
         else
         {
-          pf.value = fLeft;
+          pf.value = characteristic;
           passPosition();
           return TRUE;
         }

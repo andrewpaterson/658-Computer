@@ -50,5 +50,15 @@ public class LiteralResult
   {
     return (CTLong) literal;
   }
+
+  public CTDouble getDouble()
+  {
+    return (CTDouble) literal;
+  }
+
+  public CTFloat getFloat()
+  {
+    return (CTFloat) literal;
+  }
 }
 

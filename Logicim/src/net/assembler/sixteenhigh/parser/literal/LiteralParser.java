@@ -18,58 +18,6 @@ public class LiteralParser
     this.textParser = textParser;
   }
 
-  public LiteralResult doubleLiteral()
-  {
-    textParser.pushPosition();
-
-    FloatPointer f = new FloatPointer();
-    IntegerPointer exponent = new IntegerPointer();
-
-    Tristate result = textParser.getFloat(f);
-    if (result == TRUE)
-    {
-      result = textParser.getExactIdentifier("e", false);
-      if (result == TRUE)
-      {
-        result = textParser.getInteger(exponent, null, true);
-        if (result == TRUE)
-        {
-          double ten = 10.0;
-          f.value = Math.pow(ten, exponent.value) * f.value;
-          LiteralResult literalResult = doubleType(f.value);
-          textParser.passPosition();
-          return literalResult;
-        }
-        else if (result == FALSE)
-        {
-          textParser.popPosition();
-          return new LiteralResult(FALSE);
-        }
-        else
-        {
-          textParser.passPosition();
-          return new LiteralResult(ERROR);
-        }
-      }
-      else
-      {
-        LiteralResult literalResult = doubleType(f.value);
-        textParser.passPosition();
-        return literalResult;
-      }
-    }
-    else if (result == FALSE)
-    {
-      textParser.popPosition();
-      return new LiteralResult(FALSE);
-    }
-    else
-    {
-      textParser.passPosition();
-      return new LiteralResult(ERROR);
-    }
-  }
-
   public LiteralResult booleanLiteral()
   {
     Tristate result;
@@ -462,7 +410,53 @@ public class LiteralParser
 
   public LiteralResult getFloatingLiteral()
   {
-    return doubleLiteral();
+    textParser.pushPosition();
+
+    FloatPointer number = new FloatPointer();
+    Tristate result = textParser.getFloat(number);
+    if (result == TRUE)
+    {
+      result = textParser.getExactIdentifier("e", false);
+      if (result == TRUE)
+      {
+        IntegerPointer exponent = new IntegerPointer();
+        result = textParser.getInteger(exponent, null, true);
+        if (result == TRUE)
+        {
+          double ten = 10.0;
+          number.value = Math.pow(ten, exponent.value) * number.value;
+          LiteralResult literalResult = doubleType(number.value);
+          textParser.passPosition();
+          return literalResult;
+        }
+        else if (result == FALSE)
+        {
+          textParser.popPosition();
+          return new LiteralResult(FALSE);
+        }
+        else
+        {
+          textParser.passPosition();
+          return new LiteralResult(ERROR);
+        }
+      }
+      else
+      {
+        LiteralResult literalResult = doubleType(number.value);
+        textParser.passPosition();
+        return literalResult;
+      }
+    }
+    else if (result == FALSE)
+    {
+      textParser.popPosition();
+      return new LiteralResult(FALSE);
+    }
+    else
+    {
+      textParser.passPosition();
+      return new LiteralResult(ERROR);
+    }
   }
 
   public LiteralResult parseLiteral()

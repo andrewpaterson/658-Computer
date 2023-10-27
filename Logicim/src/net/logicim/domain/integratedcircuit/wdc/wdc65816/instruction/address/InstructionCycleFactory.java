@@ -549,6 +549,13 @@ public class InstructionCycleFactory
                                  new BusCycle(Address(PBR(), PC()), IO(), E(operation), DONE()));
   }
 
+  public static InstructionCycles createWDMImpliedCycles(Executor<W65C816> operation)
+  {
+    return new InstructionCycles(Implied,
+                                 new BusCycle(Address(PBR(), PC()), OpCode(), PC_inc()),
+                                 new BusCycle(Address(PBR(), PC()), PC_inc(), IO(), E(operation), DONE()));
+  }
+
   public static InstructionCycles createImpliedXBACycles(Executor<W65C816> operation)
   {
     //19b

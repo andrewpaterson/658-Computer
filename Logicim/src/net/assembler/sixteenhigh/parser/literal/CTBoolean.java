@@ -14,4 +14,10 @@ public class CTBoolean
   {
     return value;
   }
+
+  public boolean getValue()
+  {
+    return value;
+  }
 }
+

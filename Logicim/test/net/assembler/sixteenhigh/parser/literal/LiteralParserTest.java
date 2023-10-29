@@ -66,7 +66,6 @@ public class LiteralParserTest
     validateTrue(integerLiteral.getLong().isPositive());
     validateTrue(integerLiteral.getLong().isValid());
 
-
     literalParser = new LiteralParser(createTextParser("18446744073709551615ll"));
     integerLiteral = literalParser.getIntegerLiteral();
     validate(TRUE, integerLiteral.state);
@@ -74,6 +73,7 @@ public class LiteralParserTest
     validate(-1, integerLiteral.getLong().rawValue);
     validateTrue(integerLiteral.getLong().isPositive());
     validateTrue(integerLiteral.getLong().isValid());
+
     literalParser = new LiteralParser(createTextParser("2147483648"));
     integerLiteral = literalParser.getIntegerLiteral();
     validate(TRUE, integerLiteral.state);
@@ -91,9 +91,40 @@ public class LiteralParserTest
     literalParser = new LiteralParser(createTextParser("5e10"));
     integerLiteral = literalParser.getIntegerLiteral();
     validate(FALSE, integerLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("-5-"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(-5, integerLiteral.getInt().getValue());
+
+    literalParser = new LiteralParser(createTextParser("-5)"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(-5, integerLiteral.getInt().getValue());
+
+    literalParser = new LiteralParser(createTextParser("-5X"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(FALSE, integerLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("-5 "));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(-5, integerLiteral.getInt().getValue());
+
+
+    literalParser = new LiteralParser(createTextParser("0xA"));
+    integerLiteral = literalParser.getIntegerLiteral();
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(0xA, integerLiteral.getInt().rawValue);
+    validateTrue(integerLiteral.getInt().isPositive());
+    validateTrue(integerLiteral.getInt().isValid());
   }
 
-  private static void testFloatingLiterals()
+  private static void testFloatingLiteral()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("5.3"));
     LiteralResult floatingLiteral = literalParser.getFloatingLiteral();
@@ -135,12 +166,125 @@ public class LiteralParserTest
     validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
     validate(.2, floatingLiteral.getFloat().getValue());
     validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("1e10"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTDouble.class, floatingLiteral.getLiteral().getClass());
+    validate(1e10, floatingLiteral.getDouble().getValue());
+    validateTrue(floatingLiteral.getDouble().isValid());
+    //
+    literalParser = new LiteralParser(createTextParser("1e10f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(1e10f, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("1e+10f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(1e10f, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("1e-2f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(0.01, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("3.4028235e+37f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(3.4028235e37, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("3.4028235e+38f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(3.4028235000000003e38, floatingLiteral.getFloat().getValue());
+    validateFalse(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("3.40282345e+38f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(3.40282345e38, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+//    literalParser = new LiteralParser(createTextParser("0x1.fffffeP+127f"));
+//    floatingLiteral = literalParser.getFloatingLiteral();
+//    validate(TRUE, floatingLiteral.state);
+//    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+//    validate(3.40282345e38, floatingLiteral.getFloat().getValue());
+//    validateTrue(floatingLiteral.getFloat().isValid());
+  }
+
+  private static void testBooleanLiteral()
+  {
+    LiteralParser literalParser = new LiteralParser(createTextParser("whee"));
+    LiteralResult booleanLiteral = literalParser.getBooleanLiteral();
+    validate(FALSE, booleanLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("true"));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(TRUE, booleanLiteral.state);
+    validate(CTBoolean.class, booleanLiteral.getLiteral().getClass());
+    validate(true, booleanLiteral.getBoolean().getValue());
+
+    literalParser = new LiteralParser(createTextParser("false"));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(TRUE, booleanLiteral.state);
+    validate(CTBoolean.class, booleanLiteral.getLiteral().getClass());
+    validate(false, booleanLiteral.getBoolean().getValue());
+
+    literalParser = new LiteralParser(createTextParser("True"));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(FALSE, booleanLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("falsE"));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(FALSE, booleanLiteral.state);
+
+    literalParser = new LiteralParser(createTextParser("false)"));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(TRUE, booleanLiteral.state);
+    validate(CTBoolean.class, booleanLiteral.getLiteral().getClass());
+    validate(false, booleanLiteral.getBoolean().getValue());
+
+    literalParser = new LiteralParser(createTextParser("false/"));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(TRUE, booleanLiteral.state);
+    validate(CTBoolean.class, booleanLiteral.getLiteral().getClass());
+    validate(false, booleanLiteral.getBoolean().getValue());
+
+    literalParser = new LiteralParser(createTextParser("false "));
+    booleanLiteral = literalParser.getBooleanLiteral();
+    validate(TRUE, booleanLiteral.state);
+    validate(CTBoolean.class, booleanLiteral.getLiteral().getClass());
+    validate(false, booleanLiteral.getBoolean().getValue());
+  }
+
+  private static void testCharacterLiteral()
+  {
+    LiteralParser literalParser = new LiteralParser(createTextParser("'c'"));
+    LiteralResult characterLiteral = literalParser.getCharacterLiteral();
+    validate(TRUE, characterLiteral.state);
+    validate(CTChar.class, characterLiteral.getLiteral().getClass());
+    validate('c', characterLiteral.getChar().rawValue);
+    validateTrue(characterLiteral.getChar().isValid());
   }
 
   public static void test()
   {
     testIntegerLiterals();
-    testFloatingLiterals();
+    testFloatingLiteral();
+    testBooleanLiteral();
+    testCharacterLiteral();
   }
 
   protected static TextParser createTextParser(String contents)

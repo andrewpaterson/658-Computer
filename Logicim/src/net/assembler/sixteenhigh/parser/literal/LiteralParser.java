@@ -6,7 +6,9 @@ import net.common.parser.Tristate;
 import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.parser.primitive.LongPointer;
+import net.logicim.data.family.Family;
 
+import static net.common.parser.TextParser.NUMBER_SEPARATOR_APOSTROPHE;
 import static net.common.parser.Tristate.*;
 
 public class LiteralParser
@@ -18,7 +20,7 @@ public class LiteralParser
     this.textParser = textParser;
   }
 
-  public LiteralResult booleanLiteral()
+  public LiteralResult getBooleanLiteral()
   {
     Tristate result;
 
@@ -162,63 +164,94 @@ public class LiteralParser
     }
   }
 
-  private LiteralResult decimalInteger()
+  public LiteralResult getIntegerLiteral()
   {
     textParser.pushPosition();
 
-    LongPointer longPointer = new LongPointer();
-    IntegerPointer numDigitsPointer = new IntegerPointer();
+    textParser.skipWhiteSpace();
+
     IntegerPointer signPointer = new IntegerPointer();
-    Tristate result = textParser.getInteger(longPointer, signPointer, numDigitsPointer, true);
-    if (result == TRUE)
-    {
-      LiteralResult literalResult = integerType(longPointer.value, signPointer.value);
-      textParser.passPosition();
-      return literalResult;
-    }
-    else if (result == ERROR)
+    Tristate result = textParser.getSign(signPointer);
+    if (result == ERROR)
     {
       textParser.passPosition();
       return new LiteralResult(ERROR);
-
     }
-    textParser.popPosition();
-    return new LiteralResult(FALSE);
-  }
-
-  public LiteralResult getIntegerLiteral()
-  {
-    LiteralResult literalResult = decimalInteger();
-    if (literalResult.isTrue())
+    IntegerPointer basePointer = new IntegerPointer();
+    result = integerPrefix(basePointer);
+    if (result == ERROR)
     {
+      textParser.passPosition();
+      return new LiteralResult(ERROR);
+    }
+    else if (result == FALSE)
+    {
+      basePointer.value = 10;
+    }
+
+    LongPointer longPointer = new LongPointer();
+    IntegerPointer numDigitsPointer = new IntegerPointer();
+
+    result = textParser.getDigits(longPointer,
+                                  null,
+                                  numDigitsPointer,
+                                  false,
+                                  false,
+                                  basePointer.value,
+                                  NUMBER_SEPARATOR_APOSTROPHE);
+    if (result == TRUE)
+    {
+      LiteralResult literalResult = integerType(longPointer.value, signPointer.value);
+      textParser.popPosition();
       return literalResult;
     }
     else
     {
-      LongPointer longPointer = new LongPointer();
-      IntegerPointer numDigitsPointer = new IntegerPointer();
-      IntegerPointer signPointer = new IntegerPointer();
-      Tristate result;
-      result = textParser.getHexadecimal(longPointer, signPointer, numDigitsPointer, true);
-      if (result == TRUE)
-      {
-        literalResult = integerType(longPointer.value, signPointer.value);
-        return literalResult;
-      }
-      else
-      {
-        result = textParser.getOctal(longPointer, signPointer, numDigitsPointer, true);
-        if (result == TRUE)
-        {
-          literalResult = integerType(longPointer.value, signPointer.value);
-          return literalResult;
-        }
-        else
-        {
-          return new LiteralResult(result);
-        }
-      }
+      textParser.passPosition();
+      return new LiteralResult(ERROR);
     }
+  }
+
+  protected Tristate integerPrefix(IntegerPointer basePointer)
+  {
+    Tristate result = textParser.getExactCaseInsensitiveCharacterSequence("0x", false);
+    if (result == TRUE)
+    {
+      basePointer.value = 16;
+      return TRUE;
+    }
+    else if (result == ERROR)
+    {
+      return FALSE;
+    }
+
+    result = textParser.getExactCaseInsensitiveCharacterSequence("0b", false);
+    if (result == TRUE)
+    {
+      basePointer.value = 2;
+      return TRUE;
+    }
+    else if (result == ERROR)
+    {
+      return FALSE;
+    }
+
+    result = textParser.getExactCaseInsensitiveCharacterSequence("0", false);
+    if (result == TRUE)
+    {
+      basePointer.value = 8;
+      return TRUE;
+    }
+    else if (result == ERROR)
+    {
+      return FALSE;
+    }
+    return FALSE;
+  }
+
+  public LiteralResult getCharacterLiteral()
+  {
+    return singleQuotedLiteral(false);
   }
 
   public LiteralResult shortLiteral()
@@ -281,7 +314,7 @@ public class LiteralParser
     bLongLong = false;
     bLong = false;
 
-    result = textParser.getExactIdentifier("ULL", false);
+    result = textParser.getExactCaseInsensitiveCharacterSequence("ULL", false);
     if (result == TRUE)
     {
       bLongLong = true;
@@ -292,7 +325,7 @@ public class LiteralParser
       return new LiteralResult(ERROR);
     }
 
-    result = textParser.getExactIdentifier("UL", false);
+    result = textParser.getExactCaseInsensitiveCharacterSequence("UL", false);
     if (result == TRUE)
     {
       bLong = true;
@@ -303,7 +336,7 @@ public class LiteralParser
       return new LiteralResult(ERROR);
     }
 
-    result = textParser.getExactIdentifier("LL", false);
+    result = textParser.getExactCaseInsensitiveCharacterSequence("LL", false);
     if (result == TRUE)
     {
       bLongLong = true;
@@ -313,7 +346,7 @@ public class LiteralParser
       return new LiteralResult(ERROR);
     }
 
-    result = textParser.getExactIdentifier("L", false);
+    result = textParser.getExactCaseInsensitiveCharacterSequence("L", false);
     if (result == TRUE)
     {
       bLong = true;
@@ -323,7 +356,7 @@ public class LiteralParser
       return new LiteralResult(ERROR);
     }
 
-    result = textParser.getExactIdentifier("U", false);
+    result = textParser.getExactCaseInsensitiveCharacterSequence("U", false);
     if (result == TRUE)
     {
       unsigned = true;
@@ -338,8 +371,7 @@ public class LiteralParser
     {
       if (!isValidCharacterFollowingInteger(c))
       {
-        error(String.format("Integer cannot be followed by character [%s].", c));
-        return new LiteralResult(ERROR);
+        return new LiteralResult(FALSE);
       }
     }
 
@@ -381,14 +413,14 @@ public class LiteralParser
   {
     Tristate bResult;
 
-    bResult = textParser.getExactIdentifier("L", false);
+    bResult = textParser.getExactCaseInsensitiveCharacterSequence("L", false);
     if (bResult == TRUE)
     {
       return new LiteralResult(new CTLongDouble(ldValue));
     }
     else if (bResult == FALSE)
     {
-      bResult = textParser.getExactIdentifier("F", false);
+      bResult = textParser.getExactCaseInsensitiveCharacterSequence("F", false);
       if (bResult == TRUE)
       {
         return new LiteralResult(new CTFloat(ldValue));
@@ -416,11 +448,11 @@ public class LiteralParser
     Tristate result = textParser.getFloat(number);
     if (result == TRUE)
     {
-      result = textParser.getExactIdentifier("e", false);
+      result = textParser.getExactCaseInsensitiveCharacterSequence("e", false);
       if (result == TRUE)
       {
         IntegerPointer exponent = new IntegerPointer();
-        result = textParser.getInteger(exponent, null, true);
+        result = textParser.getInteger(exponent, null, 10, true);
         if (result == TRUE)
         {
           double ten = 10.0;

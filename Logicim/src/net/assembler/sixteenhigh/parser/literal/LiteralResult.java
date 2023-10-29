@@ -46,6 +46,11 @@ public class LiteralResult
     return (CTInt) literal;
   }
 
+  public CTChar getChar()
+  {
+    return (CTChar) literal;
+  }
+
   public CTLong getLong()
   {
     return (CTLong) literal;
@@ -59,6 +64,11 @@ public class LiteralResult
   public CTFloat getFloat()
   {
     return (CTFloat) literal;
+  }
+
+  public CTBoolean getBoolean()
+  {
+    return (CTBoolean) literal;
   }
 }
 

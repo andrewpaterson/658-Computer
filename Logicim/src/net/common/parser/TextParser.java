@@ -596,8 +596,7 @@ public class TextParser
     if (outsideText)
     {
       popPosition();
-      setErrorEndOfFile();
-      return ERROR;
+      return FALSE;
     }
 
     for (; ; )
@@ -1087,7 +1086,7 @@ public class TextParser
     }
   }
 
-  private Tristate getSign(IntegerPointer pi)
+  public Tristate getSign(IntegerPointer pi)
   {
     char cCurrent;
 
@@ -1121,7 +1120,7 @@ public class TextParser
   public Tristate getDigits(IntegerPointer pi, IntegerPointer iNumDigits)
   {
     int iNum;
-    IntegerPointer iSign = new IntegerPointer();
+    IntegerPointer signPointer = new IntegerPointer();
     IntegerPointer iTemp = new IntegerPointer();
     Tristate tReturn;
     boolean bFirstDigit;
@@ -1136,7 +1135,7 @@ public class TextParser
     {
       iNum = 0;
 
-      getSign(iSign);
+      getSign(signPointer);
       bFirstDigit = true;
       for (; ; )
       {
@@ -1162,7 +1161,7 @@ public class TextParser
               popPosition();
               return FALSE;
             }
-            iNum *= iSign.value;
+            iNum *= signPointer.value;
             pi.value = iNum;
             if (iNumDigits != null)
             {
@@ -1182,7 +1181,7 @@ public class TextParser
           }
           else
           {
-            iNum *= iSign.value;
+            iNum *= signPointer.value;
             pi.value = iNum;
             if (iNumDigits != null)
             {
@@ -1779,6 +1778,7 @@ public class TextParser
   public Tristate getInteger(LongPointer integerPointer,
                              IntegerPointer signPointer,
                              IntegerPointer numDigitsPointer,
+                             int base,
                              boolean skipWhiteSpace)
   {
     Tristate tResult;
@@ -1802,7 +1802,7 @@ public class TextParser
                         numDigitsPointer,
                         skipWhiteSpace,
                         true,
-                        10,
+                        base,
                         NUMBER_SEPARATOR_NONE);
     if (tResult == TRUE)
     {
@@ -1813,13 +1813,16 @@ public class TextParser
     return tResult;
   }
 
-  public Tristate getInteger(IntegerPointer integerPointer, IntegerPointer numDigitsPointer, boolean skipWhiteSpace)
+  public Tristate getInteger(IntegerPointer integerPointer,
+                             IntegerPointer numDigitsPointer,
+                             int base,
+                             boolean skipWhiteSpace)
   {
     LongPointer tempPointer = new LongPointer();
     Tristate tReturn;
     IntegerPointer iSign = new IntegerPointer();
 
-    tReturn = getInteger(tempPointer, iSign, numDigitsPointer, skipWhiteSpace);
+    tReturn = getInteger(tempPointer, iSign, numDigitsPointer, base, skipWhiteSpace);
     integerPointer.value = (int) (tempPointer.value * iSign.value);
     return tReturn;
   }
@@ -2305,7 +2308,7 @@ public class TextParser
     return getDigits(pulli, piSign, piNumDigits, true, true, 10, allowedSeparator);
   }
 
-  public Tristate getDigits(LongPointer pulli,
+  public Tristate getDigits(LongPointer resultPointer,
                             IntegerPointer piSign,
                             IntegerPointer piNumDigits,
                             boolean skipWhiteSpace,
@@ -2313,10 +2316,9 @@ public class TextParser
                             int iBase,
                             int iAllowedSeparator)
   {
-    LongPointer ulliValue = new LongPointer();
-    IntegerPointer iSign = new IntegerPointer();
-    IntegerPointer iTemp = new IntegerPointer();
-    Tristate tReturn;
+    LongPointer longPointer = new LongPointer();
+    IntegerPointer signPointer = new IntegerPointer();
+    IntegerPointer tempPointer = new IntegerPointer();
 
     pushPosition();
 
@@ -2325,19 +2327,19 @@ public class TextParser
       skipWhiteSpace();
     }
 
-    pulli.value = 0;
+    resultPointer.value = 0;
     int i = 0;
     if (!outsideText)
     {
-      ulliValue.value = 0;
+      longPointer.value = 0;
 
       if (bTestSign)
       {
-        getSign(iSign);
+        getSign(signPointer);
       }
       else
       {
-        iSign.value = 1;
+        signPointer.value = 1;
       }
 
       boolean bFirstDigit = true;
@@ -2346,12 +2348,12 @@ public class TextParser
       {
         if (!outsideText)
         {
-          tReturn = getDigit(iTemp, iBase);
+          Tristate tReturn = getDigit(tempPointer, iBase);
           if (tReturn == TRUE)
           {
             i++;
-            ulliValue.value *= iBase;
-            ulliValue.value += iTemp.value;
+            longPointer.value *= iBase;
+            longPointer.value += tempPointer.value;
             bSeparator = false;
           }
           else if (tReturn == FALSE)
@@ -2399,8 +2401,8 @@ public class TextParser
       else
       {
         passPosition();
-        safeAssign(piSign, iSign.value);
-        safeAssign(pulli, ulliValue.value);
+        safeAssign(piSign, signPointer.value);
+        safeAssign(resultPointer, longPointer.value);
         safeAssign(piNumDigits, i);
         return TRUE;
       }
@@ -2457,56 +2459,16 @@ public class TextParser
     }
   }
 
-  public Tristate getHexadecimal(LongPointer longPointer, IntegerPointer signPointer, IntegerPointer piNumDigits, boolean skipWhiteSpace)
-  {
-    Tristate tReturn;
-
-    pushPosition();
-
-    if (skipWhiteSpace)
-    {
-      skipWhiteSpace();
-    }
-
-    tReturn = getExactCharacter('0', false);
-    if (tReturn != TRUE)
-    {
-      popPosition();
-      return tReturn;
-    }
-
-    tReturn = getExactCaseInsensitiveCharacter('X', false);
-    if (tReturn != TRUE)
-    {
-      popPosition();
-      return tReturn;
-    }
-
-    tReturn = getHexadecimalPart(longPointer, piNumDigits);
-    if (tReturn != TRUE)
-    {
-      popPosition();
-    }
-    else
-    {
-      passPosition();
-    }
-    return tReturn;
-  }
-
-  private Tristate getHexadecimalPart(LongPointer pulli, IntegerPointer piNumDigits)
-  {
-    return getHexadecimalPart(pulli, piNumDigits, 16);
-  }
-
-  private Tristate getHexadecimalPart(LongPointer pulli, IntegerPointer piNumDigits, int iMaxDigits)
+  public Tristate getHexadecimalPart(LongPointer longPointer,
+                                     IntegerPointer piNumDigits,
+                                     int iMaxDigits)
   {
     long iNum;
     IntegerPointer iTemp = new IntegerPointer();
     Tristate tReturn;
     int i;
 
-    pulli.value = 0;
+    longPointer.value = 0;
     if (!outsideText)
     {
       iNum = 0;
@@ -2523,7 +2485,7 @@ public class TextParser
             iNum += iTemp.value;
             if (i == iMaxDigits)
             {
-              pulli.value = iNum;
+              longPointer.value = iNum;
               safeAssign(piNumDigits, i);
               return TRUE;
             }
@@ -2554,7 +2516,9 @@ public class TextParser
     }
   }
 
-  public Tristate getOctal(LongPointer pulli, IntegerPointer signPointer, IntegerPointer piNumDigits, boolean skipWhiteSpace)
+  public Tristate getOctal(LongPointer longPointer,
+                           IntegerPointer piNumDigits,
+                           boolean skipWhiteSpace)
   {
     long iNum;
     IntegerPointer iTemp = new IntegerPointer();
@@ -2575,7 +2539,7 @@ public class TextParser
       return tReturn;
     }
 
-    pulli.value = 0;
+    longPointer.value = 0;
     i = 0;
     if (!outsideText)
     {
@@ -2594,7 +2558,7 @@ public class TextParser
           }
           else if ((tReturn == FALSE) || (tReturn == ERROR))
           {
-            pulli.value = iNum;
+            longPointer.value = iNum;
             safeAssign(piNumDigits, i);
             passPosition();
             return TRUE;
@@ -2604,7 +2568,7 @@ public class TextParser
         {
           if (i > 0)
           {
-            pulli.value = iNum;
+            longPointer.value = iNum;
             safeAssign(piNumDigits, i);
             passPosition();
             return TRUE;

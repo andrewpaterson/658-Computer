@@ -1871,7 +1871,6 @@ public class TextParser
     char cNext;
     boolean bFirstZero;
     int iBase;
-    boolean bDone;
     Tristate tResult;
     IntegerPointer iSuffix;
     boolean bSeparator;
@@ -1884,7 +1883,6 @@ public class TextParser
     }
 
     iBase = 10;
-    bDone = false;
 
     if (!outsideText)
     {
@@ -2083,12 +2081,8 @@ public class TextParser
           {
             iBase = 16;
             stepRight();
-            cNext = text.get(position);
           }
         }
-
-        bSeparator = (((cNext == '_') && ((iAllowedSeparator & NUMBER_SEPARATOR_UNDERSCORE) != 0)) ||
-                      ((cNext == '\'') && ((iAllowedSeparator & NUMBER_SEPARATOR_APOSTROPHE) != 0)));
 
         if (iBase != 16)
         {
@@ -2303,11 +2297,6 @@ public class TextParser
     }
   }
 
-  public Tristate getDigits(LongPointer pulli, IntegerPointer piSign, IntegerPointer piNumDigits, int allowedSeparator)
-  {
-    return getDigits(pulli, piSign, piNumDigits, true, true, 10, allowedSeparator);
-  }
-
   public Tristate getDigits(LongPointer resultPointer,
                             IntegerPointer piSign,
                             IntegerPointer piNumDigits,
@@ -2415,13 +2404,13 @@ public class TextParser
     }
   }
 
-  private Tristate getIntegerSeparator(int iAllowedSeparator)
+  private Tristate getIntegerSeparator(int allowedSeparator)
   {
     char cCurrent;
 
     if (!outsideText)
     {
-      if ((iAllowedSeparator & NUMBER_SEPARATOR_APOSTROPHE) != 0)
+      if ((allowedSeparator & NUMBER_SEPARATOR_APOSTROPHE) != 0)
       {
         cCurrent = text.get(position);
         if (cCurrent == '\'')
@@ -2434,7 +2423,7 @@ public class TextParser
           return FALSE;
         }
       }
-      if ((iAllowedSeparator & NUMBER_SEPARATOR_UNDERSCORE) != 0)
+      if ((allowedSeparator & NUMBER_SEPARATOR_UNDERSCORE) != 0)
       {
         cCurrent = text.get(position);
         if (cCurrent == '_')
@@ -2454,238 +2443,6 @@ public class TextParser
     }
     else
     {
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
-  public Tristate getHexadecimalPart(LongPointer longPointer,
-                                     IntegerPointer piNumDigits,
-                                     int iMaxDigits)
-  {
-    long iNum;
-    IntegerPointer iTemp = new IntegerPointer();
-    Tristate tReturn;
-    int i;
-
-    longPointer.value = 0;
-    if (!outsideText)
-    {
-      iNum = 0;
-      i = 0;
-      for (; ; )
-      {
-        if (!outsideText)
-        {
-          tReturn = getDigit(iTemp, 16);
-          if (tReturn == TRUE)
-          {
-            i++;
-            iNum *= 16;
-            iNum += iTemp.value;
-            if (i == iMaxDigits)
-            {
-              longPointer.value = iNum;
-              safeAssign(piNumDigits, i);
-              return TRUE;
-            }
-          }
-          else if ((tReturn == FALSE) || (tReturn == ERROR))
-          {
-            safeAssign(piNumDigits, i);
-            return TRUE;
-          }
-        }
-        else
-        {
-          if (i > 0)
-          {
-            safeAssign(piNumDigits, i);
-            return TRUE;
-          }
-
-          setErrorSyntaxError();
-          return ERROR;
-        }
-      }
-    }
-    else
-    {
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
-  public Tristate getOctal(LongPointer longPointer,
-                           IntegerPointer piNumDigits,
-                           boolean skipWhiteSpace)
-  {
-    long iNum;
-    IntegerPointer iTemp = new IntegerPointer();
-    Tristate tReturn;
-    int i;
-
-    pushPosition();
-
-    if (skipWhiteSpace)
-    {
-      skipWhiteSpace();
-    }
-
-    tReturn = getExactCharacter('0', false);
-    if (tReturn != TRUE)
-    {
-      popPosition();
-      return tReturn;
-    }
-
-    longPointer.value = 0;
-    i = 0;
-    if (!outsideText)
-    {
-      iNum = 0;
-
-      for (; ; )
-      {
-        if (!outsideText)
-        {
-          tReturn = getDigit(iTemp, 8);
-          if (tReturn == TRUE)
-          {
-            i++;
-            iNum *= 8;
-            iNum += iTemp.value;
-          }
-          else if ((tReturn == FALSE) || (tReturn == ERROR))
-          {
-            longPointer.value = iNum;
-            safeAssign(piNumDigits, i);
-            passPosition();
-            return TRUE;
-          }
-        }
-        else
-        {
-          if (i > 0)
-          {
-            longPointer.value = iNum;
-            safeAssign(piNumDigits, i);
-            passPosition();
-            return TRUE;
-          }
-
-          popPosition();
-          setErrorSyntaxError();
-          return ERROR;
-        }
-      }
-    }
-    else
-    {
-      popPosition();
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
-  public Tristate getFloat(FloatPointer pf, boolean skipWhiteSpace, int allowedSeparator)
-  {
-    LongPointer ulliLeft = new LongPointer();
-    LongPointer ulliRight = new LongPointer();
-    Tristate tReturn;
-    IntegerPointer iNumDecimals = new IntegerPointer();
-    double fLeft;
-    double fRight;
-    double fTemp;
-    boolean bLeft;
-    IntegerPointer iSign = new IntegerPointer();
-
-    pushPosition();
-
-    if (skipWhiteSpace)
-    {
-      skipWhiteSpace();
-    }
-
-    pf.value = 0.0f;
-    if (!outsideText)
-    {
-      //Try and get the mantissa.
-      tReturn = getDigits(ulliLeft, iSign, null, allowedSeparator);
-      bLeft = true;
-
-      //Just return on errors an non-numbers.
-      if (tReturn == FALSE)
-      {
-        //There may still be a decimal point...
-        ulliLeft.value = 0;
-        bLeft = false;
-      }
-      else if (tReturn == ERROR)
-      {
-        popPosition();
-        setErrorSyntaxError();
-        return ERROR;
-      }
-
-      fLeft = ((double) ulliLeft.value) * iSign.value;
-      tReturn = getExactCharacter('.', false);
-      if (tReturn == TRUE)
-      {
-        tReturn = getDigits(ulliRight, iSign, iNumDecimals, allowedSeparator);
-        if (tReturn == TRUE)
-        {
-          if (iSign.value <= 0)
-          {
-            //Cant have: 34.-342 but -34.342 would be fine.
-            popPosition();
-            setErrorSyntaxError();
-            return ERROR;
-          }
-
-          fRight = (double) ulliRight.value;
-          fTemp = Math.pow(10.0, -iNumDecimals.value);
-          fRight *= fTemp;
-
-          if (fLeft >= 0)
-          {
-            pf.value = fLeft + fRight;
-          }
-          else
-          {
-            pf.value = fLeft - fRight;
-          }
-          passPosition();
-          return TRUE;
-        }
-        else
-        {
-          //A decimal point must be followed by a number.
-          popPosition();
-          setErrorSyntaxError();
-          return ERROR;
-        }
-      }
-      else
-      {
-        //No decimal point...
-        if (!bLeft)
-        {
-          //No digits and no point...
-          popPosition();
-          return FALSE;
-        }
-        else
-        {
-          pf.value = fLeft;
-          passPosition();
-          return TRUE;
-        }
-      }
-    }
-    else
-    {
-      popPosition();
       setErrorEndOfFile();
       return ERROR;
     }

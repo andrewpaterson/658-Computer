@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.assembler.sixteenhigh.parser.SixteenHighKeywordCode.*;
+import static net.common.parser.TextParser.NUMBER_SEPARATOR_APOSTROPHE;
 import static net.common.parser.Tristate.*;
 
 public class SixteenHighParser
@@ -27,6 +28,7 @@ public class SixteenHighParser
   protected String filename;
   protected SixteenHighContext context;
   protected LiteralParser literalParser;
+  protected int allowedSeparator;
 
   public SixteenHighParser(TextParserLog log,
                            String filename,
@@ -41,6 +43,7 @@ public class SixteenHighParser
 
     this.code = context.addCode(filename);
     this.statementIndex = 0;
+    this.allowedSeparator = NUMBER_SEPARATOR_APOSTROPHE;
   }
 
   protected ParseResult parse()
@@ -201,7 +204,7 @@ public class SixteenHighParser
                                                     base,
                                                     TextParser.INTEGER_SUFFIX_CPP,
                                                     suffix,
-                                                    TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                                    allowedSeparator,
                                                     numDigits,
                                                     true);
       if (state == TRUE)
@@ -234,7 +237,7 @@ public class SixteenHighParser
                                                     base,
                                                     TextParser.INTEGER_SUFFIX_CPP,
                                                     suffix,
-                                                    TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                                    allowedSeparator,
                                                     numDigits,
                                                     true);
       if (state == TRUE)
@@ -291,7 +294,7 @@ public class SixteenHighParser
                                                     base,
                                                     TextParser.INTEGER_SUFFIX_CPP,
                                                     suffix,
-                                                    TextParser.NUMBER_SEPARATOR_APOSTROPHE,
+                                                    allowedSeparator,
                                                     numDigits,
                                                     true);
       if (state == TRUE)

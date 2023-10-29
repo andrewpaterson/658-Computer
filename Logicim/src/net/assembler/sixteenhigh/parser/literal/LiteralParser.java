@@ -6,9 +6,7 @@ import net.common.parser.Tristate;
 import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.parser.primitive.LongPointer;
-import net.logicim.data.family.Family;
 
-import static net.common.parser.TextParser.NUMBER_SEPARATOR_APOSTROPHE;
 import static net.common.parser.Tristate.*;
 
 public class LiteralParser
@@ -164,7 +162,7 @@ public class LiteralParser
     }
   }
 
-  public LiteralResult getIntegerLiteral()
+  public LiteralResult getIntegerLiteral(int allowedSeparator)
   {
     textParser.pushPosition();
 
@@ -198,7 +196,7 @@ public class LiteralParser
                                   false,
                                   false,
                                   basePointer.value,
-                                  NUMBER_SEPARATOR_APOSTROPHE);
+                                  allowedSeparator);
     if (result == TRUE)
     {
       LiteralResult literalResult = integerType(longPointer.value, signPointer.value);

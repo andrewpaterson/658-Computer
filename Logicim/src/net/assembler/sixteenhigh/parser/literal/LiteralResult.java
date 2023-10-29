@@ -51,6 +51,11 @@ public class LiteralResult
     return (CTChar) literal;
   }
 
+  public CTShort getShort()
+  {
+    return (CTShort) literal;
+  }
+
   public CTLong getLong()
   {
     return (CTLong) literal;
@@ -69,6 +74,16 @@ public class LiteralResult
   public CTBoolean getBoolean()
   {
     return (CTBoolean) literal;
+  }
+
+  public CTString getString()
+  {
+    return (CTString) literal;
+  }
+
+  public boolean isTrueOrError()
+  {
+    return isTrue() || isError();
   }
 }
 

@@ -722,7 +722,7 @@ public class SixteenHighParser
 
   private LiteralResult literal()
   {
-    LiteralResult literalResult = literalParser.parseLiteral();
+    LiteralResult literalResult = literalParser.parseLiteral(allowedSeparator);
     return literalResult;
   }
 

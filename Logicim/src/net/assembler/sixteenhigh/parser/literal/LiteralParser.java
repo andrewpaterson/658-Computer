@@ -45,7 +45,7 @@ public class LiteralParser
     }
   }
 
-  public LiteralResult singleQuotedLiteral(boolean shortValue)
+  private LiteralResult singleQuotedLiteral(boolean shortValue)
   {
     Tristate result;
     CTChar character;
@@ -132,7 +132,7 @@ public class LiteralParser
   {
   }
 
-  public LiteralResult stringLiteral()
+  public LiteralResult getStringLiteral()
   {
     StringZero stringZero = new StringZero();
     Tristate result = textParser.getQuotedCharacterSequence('\"', '"', stringZero, null, true, true, true);
@@ -200,8 +200,31 @@ public class LiteralParser
     if (result == TRUE)
     {
       LiteralResult literalResult = integerType(longPointer.value, signPointer.value);
-      textParser.popPosition();
+      if (literalResult.isFalse())
+      {
+        textParser.popPosition();
+        return literalResult;
+      }
+      else if (literalResult.isError())
+      {
+        textParser.passPosition();
+        return literalResult;
+      }
+      textParser.passPosition();
       return literalResult;
+    }
+    else if (result == FALSE)
+    {
+      if (basePointer.value == 10)
+      {
+        textParser.popPosition();
+        return new LiteralResult(FALSE);
+      }
+      else
+      {
+        textParser.passPosition();
+        return new LiteralResult(ERROR);
+      }
     }
     else
     {
@@ -249,7 +272,12 @@ public class LiteralParser
 
   public LiteralResult getCharacterLiteral()
   {
-    return singleQuotedLiteral(false);
+    LiteralResult literalResult = shortLiteral();
+    if (literalResult.isFalse())
+    {
+      return singleQuotedLiteral(false);
+    }
+    return literalResult;
   }
 
   public LiteralResult shortLiteral()
@@ -489,9 +517,44 @@ public class LiteralParser
     }
   }
 
-  public LiteralResult parseLiteral()
+  public LiteralResult parseLiteral(int allowedSeparator)
   {
-    return null;
+    LiteralResult integerLiteral = getIntegerLiteral(allowedSeparator);
+    if (integerLiteral.isTrueOrError())
+    {
+      return integerLiteral;
+    }
+
+    LiteralResult floatingLiteral = getFloatingLiteral();
+    if (floatingLiteral.isTrueOrError())
+    {
+      return floatingLiteral;
+    }
+
+    LiteralResult booleanLiteral = getBooleanLiteral();
+    if (booleanLiteral.isTrueOrError())
+    {
+      return booleanLiteral;
+    }
+
+    LiteralResult characterLiteral = getCharacterLiteral();
+    if (characterLiteral.isTrueOrError())
+    {
+      return characterLiteral;
+    }
+
+    LiteralResult stringLiteral = getStringLiteral();
+    if (stringLiteral.isTrueOrError())
+    {
+      return stringLiteral;
+    }
+
+    return stringLiteral;
+  }
+
+  public int getPosition()
+  {
+    return textParser.getPosition();
   }
 }
 

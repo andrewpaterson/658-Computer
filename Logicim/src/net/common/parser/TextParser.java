@@ -1117,7 +1117,7 @@ public class TextParser
     }
   }
 
-  public Tristate getDigits(IntegerPointer pi, IntegerPointer iNumDigits)
+  public Tristate getDigits(IntegerPointer integerPointer, IntegerPointer iNumDigits)
   {
     int iNum;
     IntegerPointer signPointer = new IntegerPointer();
@@ -1127,9 +1127,8 @@ public class TextParser
     int i;
 
     pushPosition();
-    skipWhiteSpace();
 
-    pi.value = 0;
+    integerPointer.value = 0;
     i = 0;
     if (!outsideText)
     {
@@ -1162,7 +1161,7 @@ public class TextParser
               return FALSE;
             }
             iNum *= signPointer.value;
-            pi.value = iNum;
+            integerPointer.value = iNum;
             if (iNumDigits != null)
             {
               iNumDigits.value = i;
@@ -1182,7 +1181,7 @@ public class TextParser
           else
           {
             iNum *= signPointer.value;
-            pi.value = iNum;
+            integerPointer.value = iNum;
             if (iNumDigits != null)
             {
               iNumDigits.value = i;

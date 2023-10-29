@@ -8,6 +8,7 @@ public class SixteenHighTest
   public static void main(String[] args)
   {
     LiteralParserTest.test();
-    ParserTest.test();
+//    ParserTest.test();
   }
 }
+

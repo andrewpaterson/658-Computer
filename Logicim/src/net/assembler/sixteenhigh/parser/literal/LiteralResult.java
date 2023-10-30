@@ -81,6 +81,11 @@ public class LiteralResult
     return (CTString) literal;
   }
 
+  public CTIntegerLiteral getIntegerLiteral()
+  {
+    return (CTIntegerLiteral) literal;
+  }
+
   public boolean isTrueOrError()
   {
     return isTrue() || isError();

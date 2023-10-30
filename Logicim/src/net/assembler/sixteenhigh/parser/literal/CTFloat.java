@@ -22,10 +22,6 @@ public class CTFloat
     {
       return false;
     }
-    if ((Math.abs(value) < Float.MIN_NORMAL))
-    {
-      return false;
-    }
     return true;
   }
 }

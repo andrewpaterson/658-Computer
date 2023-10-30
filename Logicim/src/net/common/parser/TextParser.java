@@ -6,7 +6,6 @@ import net.common.parser.primitive.CharPointer;
 import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.parser.primitive.LongPointer;
-import net.common.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,7 +36,6 @@ public class TextParser
   public static final int INTEGER_SUFFIX_CPP = (INTEGER_SUFFIX_L | INTEGER_SUFFIX_LL | INTEGER_SUFFIX_U | INTEGER_SUFFIX_UL | INTEGER_SUFFIX_ULL);
   public static final int INTEGER_SUFFIX_JAVA = INTEGER_SUFFIX_L;
 
-  public static final int FLOAT_SUFFIX_NONE = 0x0000;
   public static final int FLOAT_SUFFIX_F = 0x0100;
   public static final int FLOAT_SUFFIX_D = 0x0200;
   public static final int FLOAT_SUFFIX_L = 0x0400;
@@ -45,7 +43,6 @@ public class TextParser
   public static final int FLOAT_SUFFIX_CPP = (FLOAT_SUFFIX_F | FLOAT_SUFFIX_D | FLOAT_SUFFIX_L);
   public static final int FLOAT_SUFFIX_JAVA = (FLOAT_SUFFIX_F | FLOAT_SUFFIX_D);
 
-  public static final int FLOAT_EXPONENT_DEFAULT = 0x000000;
   public static final int FLOAT_EXPONENT_DECIMAL = 0x100000;
   public static final int FLOAT_EXPONENT_BINARY = 0x200000;
   public static final int FLOAT_EXPONENT_ALL = (FLOAT_EXPONENT_DECIMAL | FLOAT_EXPONENT_BINARY);
@@ -1446,12 +1443,9 @@ public class TextParser
   @Override
   public String toString()
   {
-    String s = text.toString();
-    s = s.replaceAll("\\r\\n|\\r|\\n", " ");
-    s = s + "\n";
-    s = s + StringUtil.pad(" ", position - 1);
-    s = s + "^";
-    return "position [" + position + "] " + "text: \n" + s + "";
+    String substring = text.toString().substring(position);
+    substring = substring.substring(0, Math.min(substring.length(), 100));
+    return "position [" + position + "] " + "text: " + substring;
   }
 
   public TextParserLog getLog()
@@ -1528,252 +1522,6 @@ public class TextParser
     }
   }
 
-  private boolean isDigit(char cCurrent, int iBase)
-  {
-    if (iBase <= 10)
-    {
-      if ((cCurrent >= '0') && (cCurrent <= ('0' + iBase - 1)))
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
-    }
-    else
-    {
-      cCurrent = Character.toUpperCase(cCurrent);
-
-      if ((cCurrent >= '0') && (cCurrent <= '9'))
-      {
-        return true;
-      }
-      else if ((cCurrent >= 'A') && (cCurrent <= ('A' + iBase - 11)))
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
-    }
-  }
-
-  private Tristate getIntegerSuffix(IntegerPointer piSuffix, int iAllowedSuffix)
-  {
-    char cCurrent;
-    boolean bU;
-    boolean bL;
-
-    if (!outsideText)
-    {
-      bU = false;
-      bL = false;
-
-      pushPosition();
-
-      cCurrent = text.get(position);
-      if (((iAllowedSuffix & INTEGER_SUFFIX_ULL) != 0) || ((iAllowedSuffix & INTEGER_SUFFIX_UL) != 0) || ((iAllowedSuffix & INTEGER_SUFFIX_U) != 0))
-      {
-        if ((cCurrent == 'u') || (cCurrent == 'U'))
-        {
-          bU = true;
-          stepRight();
-
-          if (outsideText)
-          {
-            piSuffix.value = INTEGER_SUFFIX_U;
-            passPosition();
-            return TRUE;
-          }
-        }
-        else if ((cCurrent == 'l') || (cCurrent == 'L'))
-        {
-        }
-        else
-        {
-          popPosition();
-          return FALSE;
-        }
-      }
-
-      cCurrent = text.get(position);
-      if (((iAllowedSuffix & INTEGER_SUFFIX_ULL) != 0) || ((iAllowedSuffix & INTEGER_SUFFIX_UL) != 0) || ((iAllowedSuffix & INTEGER_SUFFIX_LL) != 0) || ((iAllowedSuffix & INTEGER_SUFFIX_L) != 0))
-      {
-        if ((cCurrent == 'l') || (cCurrent == 'L'))
-        {
-          bL = true;
-          stepRight();
-
-          if (outsideText)
-          {
-            if (bU)
-            {
-              piSuffix.value = INTEGER_SUFFIX_UL;
-            }
-            else
-            {
-              piSuffix.value = INTEGER_SUFFIX_L;
-            }
-            passPosition();
-            return TRUE;
-          }
-        }
-        else
-        {
-          if (bU && bL)
-          {
-            piSuffix.value = INTEGER_SUFFIX_UL;
-          }
-          else if (bL && !bU)
-          {
-            piSuffix.value = INTEGER_SUFFIX_L;
-          }
-          else if (!bL && !bU)
-          {
-            piSuffix.value = INTEGER_SUFFIX_NONE;
-          }
-          passPosition();
-          return TRUE;
-        }
-      }
-
-      cCurrent = text.get(position);
-      if (((iAllowedSuffix & INTEGER_SUFFIX_ULL) != 0) || ((iAllowedSuffix & INTEGER_SUFFIX_LL) != 0))
-      {
-        if ((cCurrent == 'l') || (cCurrent == 'L'))
-        {
-          stepRight();
-
-          if (outsideText)
-          {
-            if (bU && bL)
-            {
-              piSuffix.value = INTEGER_SUFFIX_ULL;
-            }
-            else if (!bU && bL)
-            {
-              piSuffix.value = INTEGER_SUFFIX_LL;
-            }
-            else
-            {
-              popPosition();
-              return FALSE;
-            }
-            passPosition();
-            return TRUE;
-          }
-          else
-          {
-            if (bU && bL)
-            {
-              piSuffix.value = INTEGER_SUFFIX_ULL;
-            }
-            else if (!bU && bL)
-            {
-              piSuffix.value = INTEGER_SUFFIX_LL;
-            }
-            else
-            {
-              popPosition();
-              return FALSE;
-            }
-            passPosition();
-            return TRUE;
-          }
-        }
-        else
-        {
-          if (bU && bL)
-          {
-            piSuffix.value = INTEGER_SUFFIX_UL;
-          }
-          else if (!bU && bL)
-          {
-            piSuffix.value = INTEGER_SUFFIX_L;
-          }
-          else
-          {
-            popPosition();
-            return FALSE;
-          }
-          passPosition();
-          return TRUE;
-        }
-      }
-      else
-      {
-        if (bU && bL)
-        {
-          piSuffix.value = INTEGER_SUFFIX_UL;
-        }
-        else if (!bU && bL)
-        {
-          piSuffix.value = INTEGER_SUFFIX_L;
-        }
-        else
-        {
-          popPosition();
-          return FALSE;
-        }
-        passPosition();
-        return TRUE;
-      }
-    }
-    else
-    {
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
-  private Tristate getFloatSuffix(IntegerPointer piSuffix, int iAllowedSuffix)
-  {
-    char cCurrent;
-
-    if (!outsideText)
-    {
-      pushPosition();
-
-      cCurrent = text.get(position);
-      if (((iAllowedSuffix & FLOAT_SUFFIX_F) != 0) && ((cCurrent == 'f') || (cCurrent == 'F')))
-      {
-        stepRight();
-
-        piSuffix.value = FLOAT_SUFFIX_F;
-        passPosition();
-        return TRUE;
-      }
-
-      if (((iAllowedSuffix & FLOAT_SUFFIX_D) != 0) && ((cCurrent == 'd') || (cCurrent == 'D')))
-      {
-        stepRight();
-
-        piSuffix.value = FLOAT_SUFFIX_D;
-        passPosition();
-        return TRUE;
-      }
-
-      if (((iAllowedSuffix & FLOAT_SUFFIX_L) != 0) && ((cCurrent == 'l') || (cCurrent == 'L')))
-      {
-        stepRight();
-
-        piSuffix.value = FLOAT_SUFFIX_D;
-        passPosition();
-        return TRUE;
-      }
-
-      popPosition();
-      return FALSE;
-    }
-    else
-    {
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
   public Tristate getInteger(LongPointer integerPointer,
                              IntegerPointer signPointer,
                              IntegerPointer numDigitsPointer,
@@ -1802,7 +1550,8 @@ public class TextParser
                         skipWhiteSpace,
                         true,
                         base,
-                        NUMBER_SEPARATOR_NONE);
+                        NUMBER_SEPARATOR_NONE,
+                        true);
     if (tResult == TRUE)
     {
       passPosition();
@@ -1818,10 +1567,9 @@ public class TextParser
                              boolean skipWhiteSpace)
   {
     LongPointer tempPointer = new LongPointer();
-    Tristate tReturn;
     IntegerPointer iSign = new IntegerPointer();
 
-    tReturn = getInteger(tempPointer, iSign, numDigitsPointer, base, skipWhiteSpace);
+    Tristate tReturn = getInteger(tempPointer, iSign, numDigitsPointer, base, skipWhiteSpace);
     integerPointer.value = (int) (tempPointer.value * iSign.value);
     return tReturn;
   }
@@ -1857,133 +1605,6 @@ public class TextParser
     return tResult;
   }
 
-  public Tristate getIntegerLiteral(LongPointer integerValue,
-                                    int iAllowedPrefix,
-                                    IntegerPointer base,
-                                    int iAllowedSuffix,
-                                    IntegerPointer suffix,
-                                    int iAllowedSeparator,
-                                    IntegerPointer numDigits,
-                                    boolean skipWhiteSpace)
-  {
-    char cCurrent;
-    char cNext;
-    boolean bFirstZero;
-    int iBase;
-    Tristate tResult;
-    IntegerPointer iSuffix;
-    boolean bSeparator;
-
-    pushPosition();
-
-    if (skipWhiteSpace)
-    {
-      skipWhiteSpace();
-    }
-
-    iBase = 10;
-
-    if (!outsideText)
-    {
-      cCurrent = text.get(position);
-
-      stepRight();
-
-      if (outsideText)
-      {
-        safeAssign(suffix, INTEGER_SUFFIX_NONE);
-        return getSingleInteger(cCurrent, integerValue, base, numDigits);
-      }
-      else
-      {
-        bFirstZero = cCurrent == '0';
-
-        cNext = text.get(position);
-
-        if (bFirstZero)
-        {
-          if (((cNext == 'x') || (cNext == 'X')) && ((iAllowedPrefix & NUMBER_PREFIX_HEXADECIMAL) != 0))
-          {
-            iBase = 16;
-          }
-          else if (((cNext == 'b') || (cNext == 'B')) && ((iAllowedPrefix & NUMBER_PREFIX_BINARY) != 0))
-          {
-            iBase = 2;
-          }
-        }
-
-        bSeparator = (((cNext == '_') && ((iAllowedSeparator & NUMBER_SEPARATOR_UNDERSCORE) != 0)) ||
-                      ((cNext == '\'') && ((iAllowedSeparator & NUMBER_SEPARATOR_APOSTROPHE) != 0)));
-
-        if (!isDigit(cNext, iBase) && iBase == 10 && !bSeparator)
-        {
-          iSuffix = new IntegerPointer(INTEGER_SUFFIX_NONE);
-          tResult = getIntegerSuffix(iSuffix, iAllowedSuffix);
-          if (tResult == TRUE || tResult == FALSE)
-          {
-            safeAssign(suffix, iSuffix.value);
-            return getSingleInteger(cCurrent, integerValue, base, numDigits);
-          }
-          else
-          {
-            passPosition();
-            return FALSE;
-          }
-        }
-
-        if (bFirstZero)
-        {
-          if (iBase == 10)
-          {
-            if (cNext >= '0' && cNext <= '7')
-            {
-              iBase = 8;
-            }
-          }
-          else
-          {
-            stepRight();
-          }
-        }
-        else
-        {
-          stepLeft();
-        }
-
-        tResult = getDigits(integerValue, null, numDigits, false, false, iBase, iAllowedSeparator);
-        if (tResult == TRUE)
-        {
-          iSuffix = new IntegerPointer(INTEGER_SUFFIX_NONE);
-          if (!outsideText)
-          {
-            tResult = getIntegerSuffix(iSuffix, iAllowedSuffix);
-            if (tResult == ERROR)
-            {
-              passPosition();
-              return ERROR;
-            }
-          }
-
-          passPosition();
-          safeAssign(suffix, iSuffix.value);
-          safeAssign(base, iBase);
-          return TRUE;
-        }
-        else
-        {
-          popPosition();
-          return tResult;
-        }
-      }
-    }
-    else
-    {
-      popPosition();
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
   private void safeAssign(IntegerPointer pointer, int value)
   {
     if (pointer != null)
@@ -2000,299 +1621,11 @@ public class TextParser
     }
   }
 
-  private void safeAssign(FloatPointer pointer, double value)
-  {
-    if (pointer != null)
-    {
-      pointer.value = value;
-    }
-  }
-
   private void safeAssign(CharPointer pointer, char value)
   {
     if (pointer != null)
     {
       pointer.value = value;
-    }
-  }
-
-  public Tristate getFloatLiteral(FloatPointer pldf,
-                                  int iAllowedPrefix,
-                                  IntegerPointer piBase,
-                                  int iAllowedSuffix,
-                                  IntegerPointer piSuffix,
-                                  int iAllowedExponent,
-                                  IntegerPointer piExponent,
-                                  int iAllowedSeparator,
-                                  IntegerPointer piNumWholeDigits,
-                                  IntegerPointer piNumDecinalDigits,
-                                  IntegerPointer piNumExponentDigits,
-                                  boolean skipWhiteSpace)
-  {
-    char cCurrent;
-    char cNext;
-    boolean bFirstZero;
-    int iBase;
-    boolean bDone;
-    Tristate tResult;
-    IntegerPointer iSuffix = new IntegerPointer();
-    int iExponent;
-    boolean bSeparator;
-    LongPointer ulliWholeNumber = new LongPointer();
-    LongPointer ulliDecimalNumber = new LongPointer();
-    LongPointer lliExponentNumber = new LongPointer();
-    double ldf;
-    IntegerPointer iNumWholeDigits = new IntegerPointer();
-    IntegerPointer iNumDecimalDigits = new IntegerPointer();
-    IntegerPointer iNumExponentDigits = new IntegerPointer();
-    IntegerPointer iSign = new IntegerPointer();
-
-    pushPosition();
-
-    if (skipWhiteSpace)
-    {
-      skipWhiteSpace();
-    }
-
-    iBase = 10;
-    bDone = false;
-
-    if (!outsideText)
-    {
-      cCurrent = text.get(position);
-
-      stepRight();
-
-      if (outsideText)
-      {
-        popPosition();
-        return FALSE;
-      }
-      else
-      {
-        bFirstZero = cCurrent == '0';
-
-        cNext = text.get(position);
-
-        if (bFirstZero)
-        {
-          if (((cNext == 'x') || (cNext == 'X')) && ((iAllowedPrefix & NUMBER_PREFIX_HEXADECIMAL) != 0))
-          {
-            iBase = 16;
-            stepRight();
-          }
-        }
-
-        if (iBase != 16)
-        {
-          stepLeft();
-        }
-
-        tResult = getDigits(ulliWholeNumber, null, iNumWholeDigits, false, false, iBase, iAllowedSeparator);
-        if (tResult == TRUE)
-        {
-          cCurrent = text.get(position);
-          if (cCurrent == '.')
-          {
-            stepRight();
-
-            if (outsideText)
-            {
-              passPosition();
-              iExponent = 0;
-              iNumDecimalDigits.value = 0;
-              ulliDecimalNumber.value = 0;
-              lliExponentNumber.value = 0;
-              iNumExponentDigits.value = 0;
-              iSuffix.value = FLOAT_SUFFIX_NONE;
-              ldf = MakeLongDouble(iBase, ulliWholeNumber.value, ulliDecimalNumber.value, iNumDecimalDigits.value, lliExponentNumber.value);
-              safeAssign(pldf, ldf);
-              safeAssign(piExponent, iExponent);
-              safeAssign(piNumWholeDigits, iNumWholeDigits.value);
-              safeAssign(piNumDecinalDigits, iNumDecimalDigits.value);
-              safeAssign(piNumExponentDigits, iNumExponentDigits.value);
-              safeAssign(piSuffix, iSuffix.value);
-              safeAssign(piBase, iBase);
-              return TRUE;
-            }
-
-            iNumDecimalDigits.value = 0;
-            ulliDecimalNumber.value = 0;
-            tResult = getDigits(ulliDecimalNumber, null, iNumDecimalDigits, false, false, iBase, iAllowedSeparator);
-            if (tResult == ERROR)
-            {
-              passPosition();
-              return ERROR;
-            }
-
-            iExponent = FLOAT_EXPONENT_DEFAULT;
-            if (iBase == 10)
-            {
-              cCurrent = text.get(position);
-              if (cCurrent == 'E' || cCurrent == 'e')
-              {
-                iExponent = FLOAT_EXPONENT_DECIMAL;
-                stepRight();
-
-                if (!outsideText)
-                {
-                  tResult = getDigits(lliExponentNumber, iSign, iNumExponentDigits, false, true, iBase, iAllowedSeparator);
-                  if (tResult == ERROR)
-                  {
-                    passPosition();
-                    return ERROR;
-                  }
-                }
-                else
-                {
-                  passPosition();
-                  return ERROR;
-                }
-              }
-              else
-              {
-                lliExponentNumber.value = 0;
-                iNumExponentDigits.value = 0;
-              }
-            }
-            else if (iBase == 16)
-            {
-              cCurrent = text.get(position);
-              if (cCurrent == 'P' || cCurrent == 'p')
-              {
-                iExponent = FLOAT_EXPONENT_BINARY;
-                stepRight();
-
-                if (!outsideText)
-                {
-                  tResult = getDigits(lliExponentNumber, iSign, iNumExponentDigits, false, true, 10, iAllowedSeparator);
-                  if (tResult == ERROR)
-                  {
-                    passPosition();
-                    return ERROR;
-                  }
-                  lliExponentNumber.value *= iSign.value;
-                }
-                else
-                {
-                  passPosition();
-                  return ERROR;
-                }
-              }
-              else
-              {
-                lliExponentNumber.value = 0;
-                iNumExponentDigits.value = 0;
-                passPosition();
-                return ERROR;
-              }
-            }
-
-            iSuffix.value = FLOAT_SUFFIX_NONE;
-            if (!outsideText)
-            {
-              tResult = getFloatSuffix(iSuffix, iAllowedSuffix);
-              if (tResult == ERROR)
-              {
-                passPosition();
-                return ERROR;
-              }
-            }
-
-            passPosition();
-            ldf = MakeLongDouble(iBase, ulliWholeNumber.value, ulliDecimalNumber.value, iNumDecimalDigits.value, lliExponentNumber.value);
-            safeAssign(pldf, ldf);
-            safeAssign(piExponent, iExponent);
-            safeAssign(piNumWholeDigits, iNumWholeDigits.value);
-            safeAssign(piNumDecinalDigits, iNumDecimalDigits.value);
-            safeAssign(piNumExponentDigits, iNumExponentDigits.value);
-            safeAssign(piSuffix, iSuffix.value);
-            safeAssign(piBase, iBase);
-            return TRUE;
-          }
-          else
-          {
-            popPosition();
-            return FALSE;
-          }
-        }
-        else
-        {
-          popPosition();
-          return tResult;
-        }
-
-      }
-    }
-    else
-    {
-      popPosition();
-      setErrorEndOfFile();
-      return ERROR;
-    }
-  }
-
-  private double MakeLongDouble(int iBase, long ulliWholeNumber, long ulliDecimalNumber, int iNumDecimalDigits, long lliExponentNumber)
-  {
-    double ldf;
-    double ldfPow;
-    double ldfExp;
-
-    if (iBase == 10)
-    {
-      ldf = ulliWholeNumber;
-      ldfPow = 1 / Math.pow(10, iNumDecimalDigits);
-      ldf += ulliDecimalNumber * ldfPow;
-      if (lliExponentNumber > 0)
-      {
-        ldfExp = Math.pow(10, lliExponentNumber);
-        ldf *= ldfExp;
-      }
-      else if (lliExponentNumber < 0)
-      {
-        ldfExp = 1 / Math.pow(10, -((double) lliExponentNumber));
-        ldf *= ldfExp;
-      }
-      return ldf;
-    }
-    else if (iBase == 16)
-    {
-      ldf = ulliWholeNumber;
-      ldfPow = 1 / Math.pow(16, iNumDecimalDigits);
-      ldf += ulliDecimalNumber * ldfPow;
-      if (lliExponentNumber > 0)
-      {
-        ldfExp = Math.pow(16, lliExponentNumber);
-        ldf *= ldfExp;
-      }
-      else if (lliExponentNumber < 0)
-      {
-        ldfExp = 1 / Math.pow(16, -(lliExponentNumber));
-        ldf *= ldfExp;
-      }
-      return ldf;
-    }
-    else
-    {
-      log.logError(filename, position, "Cannot make double with base [%s].", iBase);
-      return 0;
-    }
-  }
-
-  private Tristate getSingleInteger(char cCurrent, LongPointer pulli, IntegerPointer piBase, IntegerPointer piNumDigits)
-  {
-    if (cCurrent >= '0' && cCurrent <= '9')
-    {
-      passPosition();
-      safeAssign(pulli, cCurrent - '0');
-      safeAssign(piBase, 10);
-      safeAssign(piNumDigits, 1);
-      return TRUE;
-    }
-    else
-    {
-      popPosition();
-      return FALSE;
     }
   }
 
@@ -2302,7 +1635,8 @@ public class TextParser
                             boolean skipWhiteSpace,
                             boolean bTestSign,
                             int iBase,
-                            int iAllowedSeparator)
+                            int iAllowedSeparator,
+                            boolean errorOnEndOfFile)
   {
     LongPointer longPointer = new LongPointer();
     IntegerPointer signPointer = new IntegerPointer();
@@ -2397,9 +1731,17 @@ public class TextParser
     }
     else
     {
-      popPosition();
-      setErrorEndOfFile();
-      return ERROR;
+      if (errorOnEndOfFile)
+      {
+        passPosition();
+        setErrorEndOfFile();
+        return ERROR;
+      }
+      else
+      {
+        popPosition();
+        return FALSE;
+      }
     }
   }
 

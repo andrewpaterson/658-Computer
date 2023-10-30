@@ -12,6 +12,16 @@ import static net.logicim.assertions.Validator.validateNotNull;
 
 public class ParserTest
 {
+  protected static void testStatements()
+  {
+    SixteenHighParser parser = createParser("i = 0");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validate(Tristate.TRUE, result);
+    Code code = parser.getCode();
+    validateNotNull(code);
+  }
+
   protected static void testSimple()
   {
     TextParserLog log = new TextParserLog();
@@ -46,8 +56,14 @@ public class ParserTest
     return new SixteenHighParser(log, filename, context, contents);
   }
 
+  private static SixteenHighParser createParser(String contents)
+  {
+    return new SixteenHighParser(new TextParserLog(), "", new SixteenHighContext(), contents);
+  }
+
   public static void test()
   {
+    testStatements();
     testSimple();
     testPointers();
   }

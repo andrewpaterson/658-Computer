@@ -188,6 +188,33 @@ public class LiteralParserTest
     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
     validate(FALSE, integerLiteral.state);
     validate(0, literalParser.getPosition());
+
+    literalParser = new LiteralParser(createTextParser("0 "));
+    validate(0, literalParser.getPosition());
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(TRUE, integerLiteral.state);
+    validate(1, literalParser.getPosition());
+
+    literalParser = new LiteralParser(createTextParser("0"));
+    validate(0, literalParser.getPosition());
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(TRUE, integerLiteral.state);
+    validate(1, literalParser.getPosition());
+    validateFalse(integerLiteral.getInt().isUnsigned());
+
+    literalParser = new LiteralParser(createTextParser("0LL"));
+    validate(0, literalParser.getPosition());
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(CTLong.class, integerLiteral.getLiteral().getClass());
+    validate(TRUE, integerLiteral.state);
+    validateFalse(integerLiteral.getLong().isUnsigned());
+
+    literalParser = new LiteralParser(createTextParser("0U"));
+    validate(0, literalParser.getPosition());
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(TRUE, integerLiteral.state);
+    validateTrue(integerLiteral.getInt().isUnsigned());
   }
 
   private static void testFloatingLiteral()
@@ -288,6 +315,28 @@ public class LiteralParserTest
 //    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
 //    validate(3.40282345e38, floatingLiteral.getFloat().getValue());
 //    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("0.0"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTDouble.class, floatingLiteral.getLiteral().getClass());
+    validate(0.0, floatingLiteral.getDouble().getValue());
+    validateTrue(floatingLiteral.getDouble().isValid());
+
+    literalParser = new LiteralParser(createTextParser("0.0f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(0.0, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("0f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(0.0, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
   }
 
   private static void testBooleanLiteral()

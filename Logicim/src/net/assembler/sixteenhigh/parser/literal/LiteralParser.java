@@ -196,7 +196,8 @@ public class LiteralParser
                                   false,
                                   false,
                                   basePointer.value,
-                                  allowedSeparator);
+                                  allowedSeparator,
+                                  false);
     if (result == TRUE)
     {
       LiteralResult literalResult = integerType(longPointer.value, signPointer.value);
@@ -257,11 +258,23 @@ public class LiteralParser
       return FALSE;
     }
 
+    textParser.pushPosition();
     result = textParser.getExactCaseInsensitiveCharacterSequence("0", false);
     if (result == TRUE)
     {
-      basePointer.value = 8;
-      return TRUE;
+      result = textParser.getDigit(new IntegerPointer());
+      if (result == TRUE)
+      {
+        textParser.popPosition();
+        textParser.getExactCaseInsensitiveCharacterSequence("0", false);
+        basePointer.value = 8;
+        return TRUE;
+      }
+      else
+      {
+        textParser.popPosition();
+        return FALSE;
+      }
     }
     else if (result == ERROR)
     {

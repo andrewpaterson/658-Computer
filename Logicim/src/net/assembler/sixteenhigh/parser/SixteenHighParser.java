@@ -9,7 +9,6 @@ import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
 import net.common.parser.Tristate;
 import net.common.parser.primitive.IntegerPointer;
-import net.common.parser.primitive.LongPointer;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
@@ -195,24 +194,13 @@ public class SixteenHighParser
   {
     if (keyword == start_address)
     {
-      LongPointer integerValue = new LongPointer();
-      IntegerPointer base = new IntegerPointer();
-      IntegerPointer suffix = new IntegerPointer();
-      IntegerPointer numDigits = new IntegerPointer();
-      Tristate state = textParser.getIntegerLiteral(integerValue,
-                                                    TextParser.INTEGER_PREFIX_ALL,
-                                                    base,
-                                                    TextParser.INTEGER_SUFFIX_CPP,
-                                                    suffix,
-                                                    allowedSeparator,
-                                                    numDigits,
-                                                    true);
-      if (state == TRUE)
+      LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
+      if (integerLiteral.isTrue())
       {
-        code.addStartAddress((int) integerValue.value);
+        code.addStartAddress((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
-      else if (state == ERROR)
+      else if (integerLiteral.isError())
       {
         return ERROR;
       }
@@ -228,24 +216,13 @@ public class SixteenHighParser
   {
     if (keyword == end_address)
     {
-      LongPointer integerValue = new LongPointer();
-      IntegerPointer base = new IntegerPointer();
-      IntegerPointer suffix = new IntegerPointer();
-      IntegerPointer numDigits = new IntegerPointer();
-      Tristate state = textParser.getIntegerLiteral(integerValue,
-                                                    TextParser.INTEGER_PREFIX_ALL,
-                                                    base,
-                                                    TextParser.INTEGER_SUFFIX_CPP,
-                                                    suffix,
-                                                    allowedSeparator,
-                                                    numDigits,
-                                                    true);
-      if (state == TRUE)
+      LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
+      if (integerLiteral.isTrue())
       {
-        code.addEndAddress((int) integerValue.value);
+        code.addEndAddress((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
-      else if (state == ERROR)
+      else if (integerLiteral.isError())
       {
         return ERROR;
       }
@@ -285,24 +262,13 @@ public class SixteenHighParser
   {
     if (keyword == access_time)
     {
-      LongPointer integerValue = new LongPointer();
-      IntegerPointer base = new IntegerPointer();
-      IntegerPointer suffix = new IntegerPointer();
-      IntegerPointer numDigits = new IntegerPointer();
-      Tristate state = textParser.getIntegerLiteral(integerValue,
-                                                    TextParser.INTEGER_PREFIX_ALL,
-                                                    base,
-                                                    TextParser.INTEGER_SUFFIX_CPP,
-                                                    suffix,
-                                                    allowedSeparator,
-                                                    numDigits,
-                                                    true);
-      if (state == TRUE)
+      LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
+      if (integerLiteral.isTrue())
       {
-        code.addAccessTime((int) integerValue.value);
+        code.addAccessTime((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
-      else if (state == ERROR)
+      else if (integerLiteral.isError())
       {
         return ERROR;
       }

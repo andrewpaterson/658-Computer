@@ -6,5 +6,11 @@ public abstract class CTFloatingLiteral
   public abstract double getValue();
 
   public abstract boolean isValid();
+
+  @Override
+  public String print()
+  {
+    return Double.toString(getValue());
+  }
 }
 

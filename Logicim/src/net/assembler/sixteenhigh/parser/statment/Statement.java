@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
 public abstract class Statement
 {
@@ -12,5 +13,7 @@ public abstract class Statement
     this.code = code;
     this.index = index;
   }
+
+  public abstract String print(SixteenHighKeywords sixteenHighKeywords);
 }
 

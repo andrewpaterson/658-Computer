@@ -2,6 +2,7 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
 public class BitCompare
     extends Statement
@@ -14,6 +15,12 @@ public class BitCompare
     super(code, index);
     this.register = register;
     this.keyword = keyword;
+  }
+
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
+  {
+    return register + " " + sixteenHighKeywords.getKeyword(keyword);
   }
 }
 

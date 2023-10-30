@@ -19,5 +19,18 @@ public class CTBoolean
   {
     return value;
   }
+
+  @Override
+  public String print()
+  {
+    if (value)
+    {
+      return "true";
+    }
+    else
+    {
+      return "false";
+    }
+  }
 }
 

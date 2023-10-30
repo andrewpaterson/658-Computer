@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.parser.literal;
 
-public class CTLiteral
+public abstract class CTLiteral
 {
+  public abstract String print();
 }
 

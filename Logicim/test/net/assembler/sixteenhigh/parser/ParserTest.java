@@ -32,6 +32,7 @@ public class ParserTest
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
+    code.dump(parser.getKeywords());
   }
 
   protected static void testPointers()

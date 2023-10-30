@@ -9,5 +9,11 @@ public class CTString
   {
     this.value = value;
   }
+
+  @Override
+  public String print()
+  {
+    return "\"" + value + "\"";
+  }
 }
 

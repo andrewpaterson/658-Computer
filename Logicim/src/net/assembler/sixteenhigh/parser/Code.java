@@ -160,5 +160,16 @@ public class Code
   {
     statements.add(new AccessTime(this, statementIndex, cycles));
   }
+
+  public void dump(SixteenHighKeywords sixteenHighKeywords)
+  {
+    StringBuilder builder = new StringBuilder();
+    for (Statement statement : statements)
+    {
+      builder.append(statement.print(sixteenHighKeywords));
+      builder.append("\n");
+    }
+    System.out.println(builder.toString());
+  }
 }
 

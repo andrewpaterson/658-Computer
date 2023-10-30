@@ -2,6 +2,7 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.literal.CTLiteral;
 
 public class AssignmentFromLiteral
@@ -21,6 +22,12 @@ public class AssignmentFromLiteral
     this.leftRegister = leftRegister;
     this.rightLiteral = rightLiteral;
     this.keyword = keyword;
+  }
+
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
+  {
+    return leftRegister + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightLiteral.print();
   }
 }
 

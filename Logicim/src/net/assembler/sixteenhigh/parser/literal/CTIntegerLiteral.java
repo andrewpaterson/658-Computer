@@ -42,6 +42,12 @@ public abstract class CTIntegerLiteral
     }
   }
 
+  @Override
+  public String print()
+  {
+    return Long.toString(getValue());
+  }
+
   public abstract long getRawValue();
 
   public abstract boolean isValid();

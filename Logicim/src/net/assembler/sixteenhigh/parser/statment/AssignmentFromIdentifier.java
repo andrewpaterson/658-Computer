@@ -2,6 +2,7 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
 public class AssignmentFromIdentifier
     extends Statement
@@ -20,6 +21,12 @@ public class AssignmentFromIdentifier
     this.leftRegister = leftRegister;
     this.rightRegister = rightRegister;
     this.keyword = keyword;
+  }
+
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
+  {
+    return leftRegister + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightRegister;
   }
 }
 

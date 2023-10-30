@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
 public class Pull
     extends Statement
@@ -11,6 +12,12 @@ public class Pull
   {
     super(code, index);
     this.register = register;
+  }
+
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
+  {
+    return "< " + register;
   }
 }
 

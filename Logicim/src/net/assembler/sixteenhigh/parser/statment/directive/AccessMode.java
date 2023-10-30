@@ -2,6 +2,7 @@ package net.assembler.sixteenhigh.parser.statment.directive;
 
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.Statement;
 
 public class AccessMode
@@ -13,6 +14,12 @@ public class AccessMode
   {
     super(code, index);
     this.mode = mode;
+  }
+
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
+  {
+    return "$access_mode " +sixteenHighKeywords.getKeyword(mode);
   }
 }
 

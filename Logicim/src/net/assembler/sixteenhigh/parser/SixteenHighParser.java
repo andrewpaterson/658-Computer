@@ -688,8 +688,7 @@ public class SixteenHighParser
 
   private LiteralResult literal()
   {
-    LiteralResult literalResult = literalParser.parseLiteral(allowedSeparator);
-    return literalResult;
+    return literalParser.parseLiteral(allowedSeparator);
   }
 
   private ParseResult assignmentOperator(String leftIdentifier, SixteenHighKeywordCode keyword)
@@ -761,6 +760,16 @@ public class SixteenHighParser
   public Code getCode()
   {
     return code;
+  }
+
+  public SixteenHighKeywords getKeywords()
+  {
+    return keywords;
+  }
+
+  public TextParser getTextParser()
+  {
+    return textParser;
   }
 }
 

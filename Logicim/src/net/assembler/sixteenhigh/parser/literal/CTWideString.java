@@ -9,4 +9,11 @@ public class CTWideString
   {
     this.value = value;
   }
+
+  @Override
+  public String print()
+  {
+    return "\"" + value + "\"";
+  }
 }
+

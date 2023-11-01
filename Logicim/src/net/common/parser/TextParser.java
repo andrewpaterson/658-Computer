@@ -434,7 +434,7 @@ public class TextParser
     }
     else
     {
-      return ERROR;
+      return FALSE;
     }
   }
 
@@ -477,38 +477,6 @@ public class TextParser
       setErrorEndOfFile();
       return ERROR;
     }
-  }
-
-  public Tristate getEnumeratedCharacter(String szCharacters, CharPointer c, boolean skipWhiteSpace)
-  {
-    int iNumCharacters;
-    char cCurrent;
-    Tristate tResult;
-
-    if (skipWhiteSpace)
-    {
-      skipWhiteSpace();
-    }
-
-    iNumCharacters = szCharacters.length();
-    for (int i = 0; i < iNumCharacters; i++)
-    {
-      cCurrent = szCharacters.charAt(i);
-      tResult = getExactCharacter(cCurrent, false);
-      if (tResult == ERROR)
-      {
-        return ERROR;
-      }
-      else if (tResult == TRUE)
-      {
-        if (c != null)
-        {
-          c.value = cCurrent;
-          return TRUE;
-        }
-      }
-    }
-    return FALSE;
   }
 
   public Tristate getExactCharacterSequence(String szSequence)
@@ -941,74 +909,6 @@ public class TextParser
     }
   }
 
-  public Tristate getString(StringZero szString)
-  {
-    int iPos;
-    char cCurrent;
-    Tristate tReturn;
-
-    pushPosition();
-    skipWhiteSpace();
-
-    if (!outsideText)
-    {
-      if (getExactCharacter('\"', false) == TRUE)
-      {
-        iPos = 0;
-        for (; ; )
-        {
-          if (!outsideText)
-          {
-            cCurrent = text.get(position);
-            switch (cCurrent)
-            {
-              case '\"':
-                szString.setEnd(iPos);
-                stepRight();
-                passPosition();
-                return TRUE;
-
-              //We have an escape character...
-              case '\\':
-                tReturn = getEscapeCode();
-                iPos++;
-                if ((tReturn == FALSE) || (tReturn == ERROR))
-                {
-                  popPosition();
-                  return ERROR;
-                }
-                break;
-              case '\n':
-                //Just ignore new lines.
-                stepRight();
-                break;
-              case '\r':
-                //Just ignore carriage returns.
-                stepRight();
-                break;
-              default:
-                szString.set(iPos, cCurrent);
-                iPos++;
-                stepRight();
-                break;
-            }
-          }
-        }
-      }
-      else
-      {
-        //No quote so not a string.
-        popPosition();
-        return FALSE;
-      }
-    }
-    else
-    {
-      popPosition();
-      return ERROR;
-    }
-  }
-
   public Tristate getEscapeCode()
   {
     return getEscapeCode(null);
@@ -1198,11 +1098,11 @@ public class TextParser
 
   public Tristate getFloat(FloatPointer pf)
   {
-    IntegerPointer iNumDecimals = new IntegerPointer();
     double characteristic;
     double mantissa;
     double fTemp;
     boolean bLeft;
+    IntegerPointer numDecimalsPointer = new IntegerPointer();
 
     pushPosition();
     skipWhiteSpace();
@@ -1234,7 +1134,7 @@ public class TextParser
         if (tReturn == TRUE)
         {
           IntegerPointer mantissaPointer = new IntegerPointer();
-          tReturn = getDigits(mantissaPointer, iNumDecimals);
+          tReturn = getDigits(mantissaPointer, numDecimalsPointer);
           if (tReturn == TRUE)
           {
             if (mantissaPointer.value < 0)
@@ -1244,7 +1144,7 @@ public class TextParser
             }
 
             mantissa = mantissaPointer.value;
-            fTemp = Math.pow(10.0f, (-iNumDecimals.value));
+            fTemp = Math.pow(10.0f, (-numDecimalsPointer.value));
             mantissa *= fTemp;
 
             pf.value = characteristic + mantissa;
@@ -1326,39 +1226,6 @@ public class TextParser
     {
       szPosition = position;
       result = getExactIdentifier(identifier, false);
-      if (result == ERROR)
-      {
-        //We've reached the end of the file without finding the identifier.
-        popPosition();
-        return FALSE;
-      }
-      else if (result == FALSE)
-      {
-        //Try the next actual character along.
-        stepRight();
-        skipWhiteSpace();
-      }
-      else if (result == TRUE)
-      {
-        position = szPosition;
-        passPosition();
-        return TRUE;
-      }
-    }
-  }
-
-  public Tristate findExactCharacterSequence(String szSequence)
-  {
-    int szPosition;
-    Tristate result;
-
-    pushPosition();
-    skipWhiteSpace();
-
-    for (; ; )
-    {
-      szPosition = position;
-      result = getExactCharacterSequence(szSequence);
       if (result == ERROR)
       {
         //We've reached the end of the file without finding the identifier.
@@ -1574,37 +1441,6 @@ public class TextParser
     return tReturn;
   }
 
-  public Tristate getInteger(IntegerPointer integerPointer, IntegerPointer numDigitsPointer)
-  {
-    Tristate tResult;
-
-    pushPosition();
-    skipWhiteSpace();
-
-    //Make sure we're not off the end of the file.
-    if (outsideText)
-    {
-      popPosition();
-      return ERROR;
-    }
-
-    tResult = getDigits(integerPointer, numDigitsPointer);
-    if (tResult == TRUE)
-    {
-      //Make sure there are no decimals.
-      if (text.get(position) == '.')
-      {
-        popPosition();
-        return FALSE;
-      }
-
-      passPosition();
-      return TRUE;
-    }
-    popPosition();
-    return tResult;
-  }
-
   private void safeAssign(IntegerPointer pointer, int value)
   {
     if (pointer != null)
@@ -1797,110 +1633,6 @@ public class TextParser
   void setErrorSyntaxError()
   {
     meError = SyntaxError;
-  }
-
-// ----------------------- Helper Functions ------------------------------
-
-  public Tristate getHFExactIdentifierAndInteger(String identifier, IntegerPointer piInt)
-  {
-    Tristate tReturn;
-
-    pushPosition();
-
-    tReturn = getExactIdentifier(identifier, true);
-    if ((tReturn == ERROR) || (tReturn == FALSE))
-    {
-      popPosition();
-      return tReturn;
-    }
-    tReturn = getInteger(piInt, null);
-    if ((tReturn == ERROR) || (tReturn == FALSE))
-    {
-      popPosition();
-      return tReturn;
-    }
-
-    passPosition();
-    return TRUE;
-  }
-
-  public Tristate getHFExactIdentifierAndString(String identifier, StringZero szString)
-  {
-    Tristate tReturn;
-
-    pushPosition();
-
-    tReturn = getExactIdentifier(identifier, true);
-    if ((tReturn == ERROR) || (tReturn == FALSE))
-    {
-      popPosition();
-      return tReturn;
-    }
-    tReturn = getString(szString);
-    if ((tReturn == ERROR) || (tReturn == FALSE))
-    {
-      popPosition();
-      return tReturn;
-    }
-
-    passPosition();
-    return TRUE;
-  }
-
-  public Tristate getHFDotDelimitedIdentifier(StringBuffer identifier)
-  {
-    Tristate tReturn;
-    StringZero stringZero = new StringZero();
-
-    skipWhiteSpace();
-    for (int i = 0; ; i++)
-    {
-      tReturn = getIdentifier(stringZero, false);
-      if (tReturn == ERROR)
-      {
-        return ERROR;
-      }
-      if (tReturn == FALSE)
-      {
-        if (i == 0)
-        {
-          return FALSE;
-        }
-        return TRUE;
-      }
-      identifier.append(stringZero.toString());
-
-      tReturn = getExactCharacter('.', false);
-      if (tReturn == ERROR)
-      {
-        return ERROR;
-      }
-      if (tReturn == FALSE)
-      {
-        return TRUE;
-      }
-      identifier.append('.');
-    }
-  }
-
-  public Tristate getHFCharacterSequenceBetweenTags(StringZero destination, String startTag, String endTag)
-  {
-    Tristate result;
-
-    result = findExactCharacterSequence(startTag);
-    if (result.equals(TRUE))
-    {
-      TextParserPosition start = saveSettings();
-      result = findExactCharacterSequence(endTag);
-      if (result.equals(TRUE))
-      {
-        TextParserPosition end = saveSettings();
-
-        destination.copy(text, start.position, end.position + endTag.length());
-        return TRUE;
-      }
-    }
-    return result;
   }
 
   public boolean isOutsideText()

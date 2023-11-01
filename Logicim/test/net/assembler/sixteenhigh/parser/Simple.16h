@@ -14,13 +14,13 @@ even_:
 done:
     i++; number ?- i
     if> go loop
-    push odd
-    push even
+    > odd
+    > even
     gosub @print_pair
     return
 end
 
 @@main:
     gosub @sum_even_and_odd
-    return 0
+    return
 end

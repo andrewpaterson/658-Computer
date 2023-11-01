@@ -75,7 +75,7 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      parseResult = parseStatementBeginningWithIdentifier();
+      parseResult = parseEnd();
       if (parseResult.isTrue())
       {
         canParseInterStatement = true;
@@ -97,7 +97,7 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      parseResult = parseStatementStyle2();
+      parseResult = parseStatement();
       if (parseResult.isTrue())
       {
         canParseInterStatement = true;
@@ -113,6 +113,50 @@ public class SixteenHighParser
       }
     }
     return _true();
+  }
+
+  private ParseResult parseEnd()
+  {
+    IntegerPointer index = new IntegerPointer();
+    Tristate result = textParser.getExactIdentifier(keywords.end(), true);
+    if (result == TRUE)
+    {
+      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.endIdentifiers, index);
+      result = end(keyword);
+      if (result == TRUE)
+      {
+        return _true();
+      }
+      else if (result == ERROR)
+      {
+        return _error();
+      }
+      else
+      {
+        return _false();
+      }
+    }
+    else if (result == ERROR)
+    {
+      return _error();
+    }
+    else
+    {
+      return _false();
+    }
+  }
+
+  private Tristate end(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == end)
+    {
+      code.addEnd();
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
   }
 
   private Tristate parseInterStatement()
@@ -280,13 +324,13 @@ public class SixteenHighParser
     return FALSE;
   }
 
-  private ParseResult parseStatementBeginningWithIdentifier()
+  private ParseResult parseStatement()
   {
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getIdentifier(keywords.firstIdentifiers, index, true);
+    Tristate result = textParser.getIdentifier(keywords.leadingIdentifiers, index, true);
     if (result == TRUE)
     {
-      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.firstIdentifiers, index);
+      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.leadingIdentifiers, index);
       ParseResult parseResult;
       parseResult = registerDeclaration(keyword);
       if (parseResult.isTrueOrError())
@@ -312,7 +356,7 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      parseResult = pushPullStatement(keyword);
+      parseResult = pushStatement(keyword);
       if (parseResult.isTrueOrError())
       {
         return parseResult;
@@ -326,11 +370,24 @@ public class SixteenHighParser
     }
     else
     {
-      return _false();
+      ParseResult parseResult;
+      parseResult = parseStatementStartingWithRegister();
+      if (parseResult.isTrue())
+      {
+        return parseResult;
+      }
+      else if (parseResult.isError())
+      {
+        return parseResult;
+      }
+      else
+      {
+        return parseResult;
+      }
     }
   }
 
-  private ParseResult pushPullStatement(SixteenHighKeywordCode keyword)
+  private ParseResult pushStatement(SixteenHighKeywordCode keyword)
   {
     if (keyword == push)
     {
@@ -350,7 +407,15 @@ public class SixteenHighParser
         return _true();
       }
     }
-    else if (keyword == pull)
+    else
+    {
+      return _false();
+    }
+  }
+
+  private ParseResult pullStatement(SixteenHighKeywordCode keyword)
+  {
+    if (keyword == pull)
     {
       StringZero stringZero = new StringZero();
       Tristate state = textParser.getIdentifier(stringZero, true);
@@ -616,10 +681,10 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseStatementStyle2()
+  private ParseResult parseStatementStartingWithRegister()
   {
-    StringZero zeroIdentifier = new StringZero();
-    Tristate result = textParser.getIdentifier(zeroIdentifier, true);
+    StringZero registerIdentifier = new StringZero();
+    Tristate result = textParser.getIdentifier(registerIdentifier, true);
     if (result == ERROR)
     {
       return _error();
@@ -629,10 +694,10 @@ public class SixteenHighParser
       return _false();
     }
 
-    String identifier = zeroIdentifier.toString();
+    String identifier = registerIdentifier.toString();
     IntegerPointer index = new IntegerPointer();
-    result = textParser.getIdentifier(keywords.secondIdentifiers, index, true);
-    SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.secondIdentifiers, index);
+    result = textParser.getIdentifier(keywords.followingIdentifiers, index, true);
+    SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.followingIdentifiers, index);
     if (result == TRUE)
     {
       ParseResult parseResult;
@@ -644,6 +709,16 @@ public class SixteenHighParser
       else if (parseResult.isError())
       {
         return _error("Expected %s.", getKeywordNames(keywords.getBitCompares()));
+      }
+
+      parseResult = crement(identifier, keyword);
+      if (parseResult.isTrue())
+      {
+        return _true();
+      }
+      else if (parseResult.isError())
+      {
+        return _error("Expected %s.", getKeywordNames(keywords.getCrements()));
       }
 
       parseResult = numberCompare(identifier, keyword);
@@ -730,6 +805,16 @@ public class SixteenHighParser
     if (keywords.getBitCompares().contains(keyword))
     {
       code.addBitCompare(identifier, keyword);
+      return _true();
+    }
+    return _false();
+  }
+
+  private ParseResult crement(String identifier, SixteenHighKeywordCode keyword)
+  {
+    if (keywords.getCrements().contains(keyword))
+    {
+      code.addCrement(identifier, keyword);
       return _true();
     }
     return _false();

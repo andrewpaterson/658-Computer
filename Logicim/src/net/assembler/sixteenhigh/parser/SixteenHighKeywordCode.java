@@ -62,6 +62,7 @@ public enum SixteenHighKeywordCode
   pull,               // <
   push,               // >
   ret,                // return
+  end,
   start_address,
   end_address,
   access_mode,

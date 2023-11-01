@@ -11,7 +11,7 @@ $start_address 0x800
 loop:
     address[i] = value
     i++
-    i ?- end
+    i ?- end + 3
     if<= go loop
     i -= start
     > i
@@ -26,6 +26,7 @@ end
     int16 count <
 
     .count = count_pointless 9, 23, 0
+	>9 >23 >0 count_pointless count<
     int32 number; int32 another
     number = 5
     another  6

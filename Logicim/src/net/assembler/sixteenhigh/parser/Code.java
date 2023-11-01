@@ -125,6 +125,11 @@ public class Code
     statements.add(new BitCompare(this, statementIndex++, register, keyword));
   }
 
+  public void addCrement(String register, SixteenHighKeywordCode keyword)
+  {
+    statements.add(new Crement(this, statementIndex++, register, keyword));
+  }
+
   public void addNumberCompare(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
   {
     statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
@@ -159,6 +164,11 @@ public class Code
   public void addAccessTime(int cycles)
   {
     statements.add(new AccessTime(this, statementIndex, cycles));
+  }
+
+  public void addEnd()
+  {
+    statements.add(new End(this, statementIndex));
   }
 
   public void dump(SixteenHighKeywords sixteenHighKeywords)

@@ -15,22 +15,34 @@ import static net.assembler.sixteenhigh.parser.SixteenHighKeywordCode.*;
 public class SixteenHighKeywords
 {
   protected String GO = "go";
+  protected String END = "end";
 
   protected List<KeywordPair> keywords;
-  protected List<String> firstIdentifiers;
-  protected List<String> secondIdentifiers;
-  protected List<String> thirdIdentifiers;
+  protected List<String> leadingIdentifiers;
+  protected List<String> followingIdentifiers;
+  protected List<String> secondFollowingIdentifiers;
   protected List<String> directiveIdentifiers;
   protected List<String> accessModes;
+  protected List<String> endIdentifiers;
 
   public SixteenHighKeywords()
   {
     keywords = defineKeywords();
-    firstIdentifiers = defineFirstIdentifiers();
-    secondIdentifiers = defineSecondIdentifiers();
-    thirdIdentifiers = defineThirdIdentifiers();
+    leadingIdentifiers = defineLeadingIdentifiers();
+    followingIdentifiers = defineFollowingIdentifiers();
+    secondFollowingIdentifiers = defineSecondFollowingIdentifiers();
     directiveIdentifiers = defineDirectiveIdentifiers();
     accessModes = defineAccessMode();
+    endIdentifiers = defineEndIdentifiers();
+  }
+
+  private List<String> defineEndIdentifiers()
+  {
+    Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
+
+    List<String> endIdentifiers = new ArrayList<>();
+    add(codeToStringMap, endIdentifiers, end);
+    return endIdentifiers;
   }
 
   protected List<KeywordPair> defineKeywords()
@@ -53,18 +65,18 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(float128, "float128"));
     keywords.add(new KeywordPair(bool, "bool"));
     keywords.add(new KeywordPair(assign, "="));
-    keywords.add(new KeywordPair(add, "+"));
-    keywords.add(new KeywordPair(subtract, "-"));
-    keywords.add(new KeywordPair(multiply, "*"));
-    keywords.add(new KeywordPair(divide, "/"));
-    keywords.add(new KeywordPair(modulus, "%"));
+    keywords.add(new KeywordPair(add, "+"));        //?
+    keywords.add(new KeywordPair(subtract, "-"));   //?
+    keywords.add(new KeywordPair(multiply, "*"));   //?
+    keywords.add(new KeywordPair(divide, "/"));     //?
+    keywords.add(new KeywordPair(modulus, "%"));    //?
     keywords.add(new KeywordPair(shift_left, "<<"));
     keywords.add(new KeywordPair(shift_right, ">>"));
     keywords.add(new KeywordPair(ushift_right, ">>>"));
-    keywords.add(new KeywordPair(and, "&"));
-    keywords.add(new KeywordPair(or, "|"));
-    keywords.add(new KeywordPair(xor, "^"));
-    keywords.add(new KeywordPair(not, "~"));
+    keywords.add(new KeywordPair(and, "&"));        //?
+    keywords.add(new KeywordPair(or, "|"));         //?
+    keywords.add(new KeywordPair(xor, "^"));        //?
+    keywords.add(new KeywordPair(not, "~"));        //?
     keywords.add(new KeywordPair(if_greater, "if>"));
     keywords.add(new KeywordPair(if_equals, "if="));
     keywords.add(new KeywordPair(if_less, "if<"));
@@ -96,6 +108,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(ret, "return"));
     keywords.add(new KeywordPair(push, ">"));
     keywords.add(new KeywordPair(pull, "<"));
+    keywords.add(new KeywordPair(end, END));
     keywords.add(new KeywordPair(start_address, "$start_address"));
     keywords.add(new KeywordPair(end_address, "$end_address"));
     keywords.add(new KeywordPair(access_mode, "$access_mode"));
@@ -107,7 +120,7 @@ public class SixteenHighKeywords
     return keywords;
   }
 
-  protected List<String> defineFirstIdentifiers()
+  protected List<String> defineLeadingIdentifiers()
   {
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
@@ -136,13 +149,12 @@ public class SixteenHighKeywords
     add(codeToStringMap, firstIdentifiers, if_not_equals);
     add(codeToStringMap, firstIdentifiers, go);
     add(codeToStringMap, firstIdentifiers, gosub);
-    add(codeToStringMap, firstIdentifiers, pull);
     add(codeToStringMap, firstIdentifiers, push);
     add(codeToStringMap, firstIdentifiers, ret);
     return firstIdentifiers;
   }
 
-  private List<String> defineSecondIdentifiers()
+  private List<String> defineFollowingIdentifiers()
   {
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
@@ -169,10 +181,11 @@ public class SixteenHighKeywords
     add(codeToStringMap, secondIdentifiers, is_false);
     add(codeToStringMap, secondIdentifiers, test_set);
     add(codeToStringMap, secondIdentifiers, test_reset);
+    add(codeToStringMap, secondIdentifiers, pull);
     return secondIdentifiers;
   }
 
-  private List<String> defineThirdIdentifiers()
+  private List<String> defineSecondFollowingIdentifiers()
   {
     Map<SixteenHighKeywordCode, String> codeToStringMap = getCodeToStringMap();
 
@@ -283,10 +296,21 @@ public class SixteenHighKeywords
     return GO;
   }
 
+  public String end()
+  {
+    return END;
+  }
+
   public List<SixteenHighKeywordCode> getBitCompares()
   {
     return CollectionUtil.newList(is_true,
                                   is_false);
+  }
+
+  public List<SixteenHighKeywordCode> getCrements()
+  {
+    return CollectionUtil.newList(increment,
+                                  decrement);
   }
 
   public List<SixteenHighKeywordCode> getNumberCompares()

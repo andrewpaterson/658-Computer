@@ -19,34 +19,6 @@ import static net.common.parser.Tristate.*;
 
 public class TextParser
 {
-  public static final int NUMBER_PREFIX_DEFAULT = 0x00;
-  public static final int NUMBER_PREFIX_BINARY = 0x01;
-  public static final int NUMBER_PREFIX_OCTAL = 0x02;
-  public static final int NUMBER_PREFIX_HEXADECIMAL = 0x04;
-
-  public static final int INTEGER_PREFIX_ALL = (NUMBER_PREFIX_BINARY | NUMBER_PREFIX_OCTAL | NUMBER_PREFIX_HEXADECIMAL);
-  public static final int FLOAT_PREFIX_ALL = NUMBER_PREFIX_HEXADECIMAL;
-
-  public static final int INTEGER_SUFFIX_NONE = 0x0000;
-  public static final int INTEGER_SUFFIX_L = 0x0100;
-  public static final int INTEGER_SUFFIX_LL = 0x0200;
-  public static final int INTEGER_SUFFIX_U = 0x0400;
-  public static final int INTEGER_SUFFIX_UL = 0x0800;
-  public static final int INTEGER_SUFFIX_ULL = 0x1000;
-  public static final int INTEGER_SUFFIX_CPP = (INTEGER_SUFFIX_L | INTEGER_SUFFIX_LL | INTEGER_SUFFIX_U | INTEGER_SUFFIX_UL | INTEGER_SUFFIX_ULL);
-  public static final int INTEGER_SUFFIX_JAVA = INTEGER_SUFFIX_L;
-
-  public static final int FLOAT_SUFFIX_F = 0x0100;
-  public static final int FLOAT_SUFFIX_D = 0x0200;
-  public static final int FLOAT_SUFFIX_L = 0x0400;
-
-  public static final int FLOAT_SUFFIX_CPP = (FLOAT_SUFFIX_F | FLOAT_SUFFIX_D | FLOAT_SUFFIX_L);
-  public static final int FLOAT_SUFFIX_JAVA = (FLOAT_SUFFIX_F | FLOAT_SUFFIX_D);
-
-  public static final int FLOAT_EXPONENT_DECIMAL = 0x100000;
-  public static final int FLOAT_EXPONENT_BINARY = 0x200000;
-  public static final int FLOAT_EXPONENT_ALL = (FLOAT_EXPONENT_DECIMAL | FLOAT_EXPONENT_BINARY);
-
   public static final int NUMBER_SEPARATOR_UNDERSCORE = 0x10000000;
   public static final int NUMBER_SEPARATOR_APOSTROPHE = 0x20000000;
   public static final int NUMBER_SEPARATOR_NONE = 0x00000000;
@@ -249,11 +221,6 @@ public class TextParser
     return skipCStyleComment(null, null);
   }
 
-  private boolean skipCStyleComment(IntegerPointer begin)
-  {
-    return skipCStyleComment(begin, null);
-  }
-
   private boolean skipCStyleComment(IntegerPointer begin, IntegerPointer end)
   {
     char cCurrent;
@@ -336,11 +303,6 @@ public class TextParser
   private boolean skipCPPStyleComment()
   {
     return skipCStyleComment(null, null);
-  }
-
-  private boolean skipCPPStyleComment(IntegerPointer begin)
-  {
-    return skipCStyleComment(begin, null);
   }
 
   private boolean skipCPPStyleComment(IntegerPointer begin, IntegerPointer end)
@@ -448,7 +410,7 @@ public class TextParser
     }
     else
     {
-      return ERROR;
+      return FALSE;
     }
   }
 

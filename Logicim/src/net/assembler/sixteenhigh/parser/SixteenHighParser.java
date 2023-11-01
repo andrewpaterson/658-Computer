@@ -425,7 +425,7 @@ public class SixteenHighParser
       }
       else if (state == FALSE)
       {
-        return _error("Expected identifer.");
+        return _error("Expected identifier.");
       }
       else
       {
@@ -852,9 +852,5 @@ public class SixteenHighParser
     return keywords;
   }
 
-  public TextParser getTextParser()
-  {
-    return textParser;
-  }
 }
 

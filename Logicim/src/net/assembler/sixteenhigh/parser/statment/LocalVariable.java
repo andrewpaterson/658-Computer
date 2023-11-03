@@ -7,9 +7,17 @@ import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 public class LocalVariable
     extends Variable
 {
-  public LocalVariable(Code code, int index, SixteenHighKeywordCode type, String name)
+  public LocalVariable(Code code,
+                       int index,
+                       SixteenHighKeywordCode type,
+                       String name,
+                       int asteriskCount)
   {
-    super(code, index, type, name);
+    super(code,
+          index,
+          type,
+          name,
+          asteriskCount);
   }
 
   @Override

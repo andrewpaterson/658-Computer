@@ -754,6 +754,11 @@ public class TextParser
     return FALSE;
   }
 
+  public Tristate getIdentifier(String identifier, boolean skipWhiteSpace)
+  {
+    return getExactIdentifier(identifier, skipWhiteSpace);
+  }
+
   public Tristate getQuotedCharacterSequence(char openQuote,
                                              char closeQuote,
                                              StringZero stringZero,
@@ -976,10 +981,9 @@ public class TextParser
     }
   }
 
-  public Tristate getDigits(IntegerPointer integerPointer, IntegerPointer iNumDigits)
+  public Tristate getDigits(IntegerPointer integerPointer, IntegerPointer iNumDigits, IntegerPointer signPointer)
   {
     int iNum;
-    IntegerPointer signPointer = new IntegerPointer();
     IntegerPointer iTemp = new IntegerPointer();
     Tristate tReturn;
     boolean bFirstDigit;
@@ -993,7 +997,14 @@ public class TextParser
     {
       iNum = 0;
 
-      getSign(signPointer);
+      tReturn = getSign(signPointer);
+      if (tReturn == ERROR)
+      {
+        passPosition();
+        return ERROR;
+      }
+      boolean signSupplied = tReturn == TRUE;
+
       bFirstDigit = true;
       for (; ; )
       {
@@ -1014,7 +1025,7 @@ public class TextParser
           }
           else if (tReturn == FALSE)
           {
-            if (bFirstDigit)
+            if (bFirstDigit && !signSupplied)
             {
               popPosition();
               return FALSE;
@@ -1064,7 +1075,6 @@ public class TextParser
     double mantissa;
     double fTemp;
     boolean bLeft;
-    IntegerPointer numDecimalsPointer = new IntegerPointer();
 
     pushPosition();
     skipWhiteSpace();
@@ -1073,7 +1083,9 @@ public class TextParser
     if (!outsideText)
     {
       IntegerPointer characteristicPointer = new IntegerPointer();
-      Tristate tReturn = getDigits(characteristicPointer, null);
+      IntegerPointer numDecimalsPointer = new IntegerPointer();
+      IntegerPointer signPointer = new IntegerPointer();
+      Tristate tReturn = getDigits(characteristicPointer, numDecimalsPointer, signPointer);
       bLeft = true;
 
       //Just return on errors and non-numbers.
@@ -1096,7 +1108,8 @@ public class TextParser
         if (tReturn == TRUE)
         {
           IntegerPointer mantissaPointer = new IntegerPointer();
-          tReturn = getDigits(mantissaPointer, numDecimalsPointer);
+          IntegerPointer mantissaSignPointer = new IntegerPointer();
+          tReturn = getDigits(mantissaPointer, numDecimalsPointer, mantissaSignPointer);
           if (tReturn == TRUE)
           {
             if (mantissaPointer.value < 0)
@@ -1110,14 +1123,18 @@ public class TextParser
             mantissa *= fTemp;
 
             pf.value = characteristic + mantissa;
+            if ((signPointer.value == -1) && (pf.value > 0))
+            {
+              pf.value *= -1;
+            }
             passPosition();
             return TRUE;
           }
           else
           {
-            //A decimal point must be followed by a number.
-            popPosition();
-            return ERROR;
+            pf.value = characteristic;
+            passPosition();
+            return TRUE;
           }
         }
         else

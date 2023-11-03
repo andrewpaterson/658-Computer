@@ -1,0 +1,22 @@
+package net.assembler.sixteenhigh.parser.statment.expression;
+
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.parser.literal.CTLiteral;
+
+public class LiteralExpression
+    implements Expressable
+{
+  public CTLiteral literal;
+
+  public LiteralExpression(CTLiteral literal)
+  {
+    this.literal = literal;
+  }
+
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
+  {
+    return literal.print();
+  }
+}
+

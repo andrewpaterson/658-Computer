@@ -52,7 +52,7 @@ public enum SixteenHighKeywordCode
   increment,          // ++
   decrement,          // --
   go,
-  gosub,             // gosub
+  gosub,              // gosub
   subtract_compare,   // ?-
   and_compare,        // ?&
   is_true,            // ?
@@ -70,6 +70,10 @@ public enum SixteenHighKeywordCode
   write_only,
   read_write,
   access_time,
+  open_round,         // (
+  close_round,        // )
+  open_square,        // [
+  close_square,       // ]
 
   UNKNOWN
 }

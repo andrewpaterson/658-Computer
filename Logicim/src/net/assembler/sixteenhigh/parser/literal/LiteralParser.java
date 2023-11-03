@@ -175,6 +175,7 @@ public class LiteralParser
       textParser.passPosition();
       return new LiteralResult(ERROR);
     }
+
     IntegerPointer basePointer = new IntegerPointer();
     result = integerPrefix(basePointer);
     if (result == ERROR)

@@ -19,7 +19,23 @@ public class LiteralParserTest
     validateTrue(integerLiteral.getInt().isPositive());
     validateTrue(integerLiteral.getInt().isValid());
 
+     literalParser = new LiteralParser(createTextParser("+5"));
+     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(5, integerLiteral.getInt().rawValue);
+    validateTrue(integerLiteral.getInt().isPositive());
+    validateTrue(integerLiteral.getInt().isValid());
+
     literalParser = new LiteralParser(createTextParser("5L"));
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(5, integerLiteral.getInt().rawValue);
+    validateTrue(integerLiteral.getInt().isPositive());
+    validateTrue(integerLiteral.getInt().isValid());
+
+    literalParser = new LiteralParser(createTextParser("+5L"));
     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
     validate(TRUE, integerLiteral.state);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());
@@ -258,6 +274,34 @@ public class LiteralParserTest
     validate(TRUE, floatingLiteral.state);
     validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
     validate(.2, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("-.2f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(-.2, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("-2.f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(-2.f, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("+.2f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(+.2, floatingLiteral.getFloat().getValue());
+    validateTrue(floatingLiteral.getFloat().isValid());
+
+    literalParser = new LiteralParser(createTextParser("+2.f"));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(TRUE, floatingLiteral.state);
+    validate(CTFloat.class, floatingLiteral.getLiteral().getClass());
+    validate(+2.f, floatingLiteral.getFloat().getValue());
     validateTrue(floatingLiteral.getFloat().isValid());
 
     literalParser = new LiteralParser(createTextParser("1e10"));

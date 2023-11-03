@@ -1,12 +1,27 @@
 @@main:
-	int c; int d;
-	int x = c + d;
-	x += ~5;
-	c = -d;
+	int c; int d
+	int x = (c + d)
+	int @@q
+	x += ~5
+	c = -d
 	c ++;
-	x = ~x;
-	d <<= d;
+	x = ~x
+	d <<= d
 	c = d>>>;
 	d = c++;
-    return x
+	@@q = (d * c)
+	d = (c + (5 * x) - 1)
+	<x <c <d
+    return
+end
+
+array:
+	uint8* xxx
+	int32 y = 3
+	y = (y + y - y + y - y)
+	xxx[0] = 1
+	xxx[1] = 2
+	xxx[2] = 3
+	xxx[3] = 0
+	xxx[(xxx[y] + y)] = 2
 end

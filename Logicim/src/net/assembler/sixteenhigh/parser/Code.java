@@ -1,11 +1,11 @@
 package net.assembler.sixteenhigh.parser;
 
-import net.assembler.sixteenhigh.parser.literal.CTLiteral;
 import net.assembler.sixteenhigh.parser.statment.*;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessMode;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
+import net.assembler.sixteenhigh.parser.statment.expression.Expression;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,23 +38,38 @@ public class Code
     labels.add(label);
   }
 
-  public void addLocalVariable(SixteenHighKeywordCode keyword, String name)
+  public void addLocalVariable(SixteenHighKeywordCode keyword, String name, int asteriskCount)
   {
-    LocalVariable variable = new LocalVariable(this, statementIndex++, keyword, name);
+    LocalVariable variable = new LocalVariable(this,
+                                               statementIndex++,
+                                               keyword,
+                                               name,
+                                               asteriskCount);
     statements.add(variable);
-    currentRoutine.addLocalVariable(variable);
+    if (currentRoutine != null)
+    {
+      currentRoutine.addLocalVariable(variable);
+    }
   }
 
-  public void addFileVariable(SixteenHighKeywordCode keyword, String name)
+  public void addFileVariable(SixteenHighKeywordCode keyword, String name, int asteriskCount)
   {
-    FileVariable variable = new FileVariable(this, statementIndex++, keyword, name);
+    FileVariable variable = new FileVariable(this,
+                                             statementIndex++,
+                                             keyword,
+                                             name,
+                                             asteriskCount);
     statements.add(variable);
     fileVariables.add(variable);
   }
 
-  public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword, String name)
+  public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword, String name, int asteriskCount)
   {
-    GlobalVariable variable = new GlobalVariable(this, statementIndex++, keyword, name);
+    GlobalVariable variable = new GlobalVariable(this,
+                                                 statementIndex++,
+                                                 keyword,
+                                                 name,
+                                                 asteriskCount);
     statements.add(variable);
     return variable;
   }
@@ -135,14 +150,9 @@ public class Code
     statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
   }
 
-  public void addAssignmentOperator(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
+  public void addAssignment(String leftIdentifier, SixteenHighKeywordCode keyword, Expression expression)
   {
-    statements.add(new AssignmentFromIdentifier(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
-  }
-
-  public void addAssignmentOperator(String leftIdentifier, CTLiteral rightLiteral, SixteenHighKeywordCode keyword)
-  {
-    statements.add(new AssignmentFromLiteral(this, statementIndex++, leftIdentifier, rightLiteral, keyword));
+    statements.add(new Assignment(this, statementIndex++, leftIdentifier, keyword, expression));
   }
 
   public void addStartAddress(int address)

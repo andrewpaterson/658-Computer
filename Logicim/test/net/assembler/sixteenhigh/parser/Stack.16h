@@ -7,11 +7,11 @@ $start_address 0x800
     start <
     end <
     int8* address <
-    int16 i = start
+    int16 i = start;
 loop:
-    address[i] = value
+    address[i] = value;
     i++
-    i ?- end + 3
+    i ?- (end + 3)
     if<= go loop
     i -= start
     > i
@@ -30,8 +30,8 @@ end
     int32 number; int32 another
     number = 5
     another  6
-    .number = number + ((3 + 6) * another) / 2
-    int32 temp1 = 3; temp1 += 6; temp1 *= another; temp1 /= 2;
+    number = (number + ((3 + 6) * another) / 2)
+    //int32 temp1 = 3; temp1 += 6; temp1 *= another; temp1 /= 2;
     number = number + temp1
 end
 

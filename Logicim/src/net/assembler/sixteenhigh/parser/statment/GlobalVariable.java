@@ -7,9 +7,17 @@ import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 public class GlobalVariable
     extends Variable
 {
-  public GlobalVariable(Code code, int index, SixteenHighKeywordCode type, String name)
+  public GlobalVariable(Code code,
+                        int index,
+                        SixteenHighKeywordCode type,
+                        String name,
+                        int asteriskCount)
   {
-    super(code, index, type, name);
+    super(code,
+          index,
+          type,
+          name,
+          asteriskCount);
   }
 
   @Override

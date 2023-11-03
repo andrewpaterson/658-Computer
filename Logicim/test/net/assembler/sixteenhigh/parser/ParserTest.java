@@ -12,9 +12,19 @@ import static net.logicim.assertions.Validator.validateNotNull;
 
 public class ParserTest
 {
-  protected static void testStatements()
+  protected static void testStatementAssignment()
   {
     SixteenHighParser parser = createParser("i = 0");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validate(Tristate.TRUE, result);
+    Code code = parser.getCode();
+    validateNotNull(code);
+  }
+
+  protected static void testStatementDeclaration()
+  {
+    SixteenHighParser parser = createParser("int16 i; int16 number;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validate(Tristate.TRUE, result);
@@ -29,10 +39,10 @@ public class ParserTest
     SixteenHighParser parser = createParser("Simple.16h", log, context);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
-    validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
     code.dump(parser.getKeywords());
+    validate(Tristate.TRUE, result);
   }
 
   protected static void testPointers()
@@ -45,6 +55,7 @@ public class ParserTest
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
+    code.dump(parser.getKeywords());
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -64,7 +75,9 @@ public class ParserTest
 
   public static void test()
   {
-    testStatements();
+    testStatementAssignment();
+    testStatementDeclaration();
+
     testSimple();
     testPointers();
   }

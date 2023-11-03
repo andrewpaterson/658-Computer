@@ -41,7 +41,6 @@ public class ParserTest
     Tristate result = parseResult.getState();
     Code code = parser.getCode();
     validateNotNull(code);
-    code.dump(parser.getKeywords());
     validate(Tristate.TRUE, result);
   }
 
@@ -56,6 +55,21 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     code.dump(parser.getKeywords());
+  }
+
+  private static void testArrayDeclaration()
+  {
+    TextParserLog log = new TextParserLog();
+    SixteenHighContext context = new SixteenHighContext();
+    SixteenHighParser parser = createParser("Array.16h", log, context);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    Code code = parser.getCode();
+    validateNotNull(code);
+    code.dump(parser.getKeywords());
+    String error = parser.getError();
+    System.out.println(error);
+    validate(Tristate.TRUE, result);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -79,6 +93,7 @@ public class ParserTest
     testStatementDeclaration();
 
     testSimple();
+    testArrayDeclaration();
     testPointers();
   }
 }

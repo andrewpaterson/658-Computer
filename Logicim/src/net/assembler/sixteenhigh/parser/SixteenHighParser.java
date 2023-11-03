@@ -113,7 +113,15 @@ public class SixteenHighParser
       }
       else
       {
-        return _true();
+        boolean endOfFile = textParser.skipWhiteSpace();
+        if (endOfFile)
+        {
+          return _true();
+        }
+        else
+        {
+          return _error();
+        }
       }
     }
     return _true();
@@ -458,6 +466,13 @@ public class SixteenHighParser
   {
     if (keywords.getRegisterTypes().contains(keyword))
     {
+      RegisterArrayDeclaration arrayDeclaration = new RegisterArrayDeclaration();
+      ParseResult parseResult = parseArrayDeclaration(arrayDeclaration);
+      if (parseResult.isError())
+      {
+        return parseResult;
+      }
+
       int asteriskCount = 0;
       for (; ; )
       {
@@ -473,7 +488,7 @@ public class SixteenHighParser
       }
 
       StringZero registerNameZero = new StringZero();
-      ParseResult parseResult = blockIdentifier(registerNameZero);
+      parseResult = blockIdentifier(registerNameZero);
       if (parseResult.isFalseOrError())
       {
         return parseResult;
@@ -482,16 +497,16 @@ public class SixteenHighParser
       String registerName = registerNameZero.toString();
       if (registerName.startsWith("@@"))
       {
-        GlobalVariable globalVariable = code.addGlobalVariable(keyword, registerName, asteriskCount);
+        GlobalVariable globalVariable = code.addGlobalVariable(keyword, registerName, arrayDeclaration.arrayMatrix, asteriskCount);
         context.addGlobalVariable(globalVariable);
       }
       else if (registerName.startsWith("@"))
       {
-        code.addFileVariable(keyword, registerName, asteriskCount);
+        code.addFileVariable(keyword, registerName, arrayDeclaration.arrayMatrix, asteriskCount);
       }
       else
       {
-        code.addLocalVariable(keyword, registerName, asteriskCount);
+        code.addLocalVariable(keyword, registerName, arrayDeclaration.arrayMatrix, asteriskCount);
       }
       return _true();
     }
@@ -678,7 +693,23 @@ public class SixteenHighParser
     }
     else
     {
-      return parseStatementStartingWithRegister();
+      textParser.pushPosition();
+      ParseResult parseResult = parseStatementStartingWithRegister();
+      if (parseResult.isTrue())
+      {
+        textParser.passPosition();
+        return parseResult;
+      }
+      else if (parseResult.isError())
+      {
+        textParser.popPosition();
+        return parseResult;
+      }
+      else
+      {
+        textParser.popPosition();
+        return parseResult;
+      }
     }
   }
 
@@ -788,11 +819,46 @@ public class SixteenHighParser
         return _error();
       }
       expression.add(new RegisterExpression(registerName.toString()));
+
       return _true();
     }
     else
     {
       return _error();
+    }
+  }
+
+  private ParseResult parseArrayDeclaration(RegisterArrayDeclaration registerArrayDeclaration)
+  {
+    Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
+    if (result == TRUE)
+    {
+      LiteralResult literal = literalParser.getIntegerLiteral(allowedSeparator);
+      if (literal.isTrue())
+      {
+        result = textParser.getExactCharacterSequence(keywords.closeSquare());
+        if (result == TRUE)
+        {
+          registerArrayDeclaration.addArray(literal.getIntegerLiteral().getValue());
+          return parseArrayDeclaration(registerArrayDeclaration);
+        }
+        else
+        {
+          return _error("Expected ']'.");
+        }
+      }
+      else
+      {
+        return _error("Expected integer.");
+      }
+    }
+    else if (result == ERROR)
+    {
+      return _false();
+    }
+    else
+    {
+      return _false();
     }
   }
 
@@ -1047,6 +1113,37 @@ public class SixteenHighParser
   public SixteenHighKeywords getKeywords()
   {
     return keywords;
+  }
+
+  public String getError()
+  {
+    if (textParser.isOutsideText())
+    {
+      return "";
+    }
+
+    TextParserPosition textParserPosition = textParser.saveSettings();
+    Tristate result = textParser.findStartOfLine();
+    int startOfLine = textParser.getPosition();
+    textParser.loadSettings(textParserPosition);
+    textParserPosition = textParser.saveSettings();
+    result = textParser.findEndOfLine();
+    int endOfLine = textParser.getPosition();
+    textParser.loadSettings(textParserPosition);
+    String text = textParser.getText();
+    String errorLine = text.substring(startOfLine, endOfLine + 1);
+    errorLine = errorLine.replace("\t", "  ");
+    String errorPosition = text.substring(textParser.getPosition(), endOfLine + 1);
+    errorPosition = errorPosition.replace("\t", "  ");
+    int index = errorPosition.indexOf(' ');
+    if (index != -1)
+    {
+      errorPosition = errorPosition.substring(0, index);
+    }
+    StringBuilder pad = StringUtil.pad(" ", textParser.getPosition() - startOfLine + 1);
+    pad.append("^");
+
+    return "Error at position [" + textParser.getPosition() + "]: Unexpected: " + errorPosition + "\n" + errorLine + "\n" + pad.toString();
   }
 }
 

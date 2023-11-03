@@ -4,6 +4,8 @@ import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
+import java.util.List;
+
 public class GlobalVariable
     extends Variable
 {
@@ -11,12 +13,14 @@ public class GlobalVariable
                         int index,
                         SixteenHighKeywordCode type,
                         String name,
+                        List<Long> arrayMatrix,
                         int asteriskCount)
   {
     super(code,
           index,
           type,
           name,
+          arrayMatrix,
           asteriskCount);
   }
 

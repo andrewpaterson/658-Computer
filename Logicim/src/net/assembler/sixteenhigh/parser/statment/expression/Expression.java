@@ -18,7 +18,22 @@ public class Expression
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
+    boolean expression = false;
+    for (Expressable expressable : expressables)
+    {
+      if (expressable.isExpression())
+      {
+        expression = true;
+        break;
+      }
+    }
+
+
     StringBuilder builder = new StringBuilder();
+    if (expression)
+    {
+      builder.append("(");
+    }
     boolean isFirst = true;
     for (Expressable expressable : expressables)
     {
@@ -32,7 +47,17 @@ public class Expression
       }
       builder.append(expressable.print(sixteenHighKeywords));
     }
+    if (expression)
+    {
+      builder.append(")");
+    }
     return builder.toString();
+  }
+
+  @Override
+  public boolean isExpression()
+  {
+    return true;
   }
 
   public void add(Expressable expressable)

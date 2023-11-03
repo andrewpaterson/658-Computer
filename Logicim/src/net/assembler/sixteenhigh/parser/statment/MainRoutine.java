@@ -14,7 +14,7 @@ public class MainRoutine
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "@@" + name;
+    return name;
   }
 }
 

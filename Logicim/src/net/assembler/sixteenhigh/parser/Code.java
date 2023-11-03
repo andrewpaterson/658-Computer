@@ -38,12 +38,16 @@ public class Code
     labels.add(label);
   }
 
-  public void addLocalVariable(SixteenHighKeywordCode keyword, String name, int asteriskCount)
+  public void addLocalVariable(SixteenHighKeywordCode keyword,
+                               String name,
+                               List<Long> arrayMatrix,
+                               int asteriskCount)
   {
     LocalVariable variable = new LocalVariable(this,
                                                statementIndex++,
                                                keyword,
                                                name,
+                                               arrayMatrix,
                                                asteriskCount);
     statements.add(variable);
     if (currentRoutine != null)
@@ -52,23 +56,31 @@ public class Code
     }
   }
 
-  public void addFileVariable(SixteenHighKeywordCode keyword, String name, int asteriskCount)
+  public void addFileVariable(SixteenHighKeywordCode keyword,
+                              String name,
+                              List<Long> arrayMatrix,
+                              int asteriskCount)
   {
     FileVariable variable = new FileVariable(this,
                                              statementIndex++,
                                              keyword,
                                              name,
+                                             arrayMatrix,
                                              asteriskCount);
     statements.add(variable);
     fileVariables.add(variable);
   }
 
-  public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword, String name, int asteriskCount)
+  public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword,
+                                          String name,
+                                          List<Long> arrayMatrix,
+                                          int asteriskCount)
   {
     GlobalVariable variable = new GlobalVariable(this,
                                                  statementIndex++,
                                                  keyword,
                                                  name,
+                                                 arrayMatrix,
                                                  asteriskCount);
     statements.add(variable);
     return variable;

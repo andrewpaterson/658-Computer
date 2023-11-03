@@ -142,12 +142,12 @@ public class TextParser
     return ((cCurrent == ' ') || (cCurrent == '\n') || (cCurrent == '\t'));
   }
 
-  public void skipWhiteSpace()
+  public boolean skipWhiteSpace()
   {
-    skipWhiteSpace(true);
+    return skipWhiteSpace(true);
   }
 
-  public void skipWhiteSpace(boolean bSkipComments)
+  public boolean skipWhiteSpace(boolean bSkipComments)
   {
     char cCurrent;
 
@@ -155,7 +155,7 @@ public class TextParser
     {
       if (outsideText)
       {
-        return;
+        return true;
       }
 
       cCurrent = text.get(position);
@@ -214,6 +214,7 @@ public class TextParser
         break;
       }
     }
+    return false;
   }
 
   private boolean skipCStyleComment()
@@ -1268,6 +1269,41 @@ public class TextParser
       }
     }
   }
+  public Tristate findEndOfLine()
+  {
+    char cCurrent;
+
+    pushPosition();
+
+    //If we're off the end of the file we can't return the beginning of the line.
+    if (outsideText)
+    {
+      popPosition();
+      return ERROR;
+    }
+
+    for (; ; )
+    {
+      stepRight();
+
+      //If we have no more text then the start of the line is the start of the text.
+      if (outsideText)
+      {
+        position = 0;
+        passPosition();
+        return TRUE;
+      }
+
+      //If we get find an end of line character we've gone to far, go right again.
+      cCurrent = text.get(position);
+      if ((cCurrent == '\n') || (cCurrent == '\r'))
+      {
+        stepLeft();
+        passPosition();
+        return TRUE;
+      }
+    }
+  }
 
   public void pushPosition()
   {
@@ -1622,6 +1658,11 @@ public class TextParser
   public char peekCurrent()
   {
     return text.get(position);
+  }
+
+  public String getText()
+  {
+    return text.toString();
   }
 }
 

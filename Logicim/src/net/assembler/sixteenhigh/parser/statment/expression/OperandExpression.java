@@ -18,5 +18,11 @@ public class OperandExpression
   {
     return sixteenHighKeywords.getKeyword(operand);
   }
+
+  @Override
+  public boolean isExpression()
+  {
+    return false;
+  }
 }
 

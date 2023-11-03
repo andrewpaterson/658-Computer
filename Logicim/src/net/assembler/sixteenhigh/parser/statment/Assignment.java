@@ -27,7 +27,7 @@ public class Assignment
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return leftRegister + " " + sixteenHighKeywords.getKeyword(keyword);
+    return leftRegister + " " + sixteenHighKeywords.getKeyword(keyword) + " " + expression.print(sixteenHighKeywords);
   }
 }
 

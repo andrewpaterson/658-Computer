@@ -18,5 +18,11 @@ public class LiteralExpression
   {
     return literal.print();
   }
+
+  @Override
+  public boolean isExpression()
+  {
+    return false;
+  }
 }
 

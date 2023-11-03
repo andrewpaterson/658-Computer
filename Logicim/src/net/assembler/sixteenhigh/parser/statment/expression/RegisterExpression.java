@@ -17,5 +17,11 @@ public class RegisterExpression
   {
     return registerName;
   }
+
+  @Override
+  public boolean isExpression()
+  {
+    return false;
+  }
 }
 

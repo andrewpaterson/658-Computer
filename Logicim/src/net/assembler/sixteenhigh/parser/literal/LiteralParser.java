@@ -118,7 +118,7 @@ public class LiteralParser
       }
 
       error("Should never fall through to this statement.");
-      textParser.passPosition();
+      textParser.popPosition();
       return new LiteralResult(ERROR);
     }
     else
@@ -172,7 +172,7 @@ public class LiteralParser
     Tristate result = textParser.getSign(signPointer);
     if (result == ERROR)
     {
-      textParser.passPosition();
+      textParser.popPosition();
       return new LiteralResult(ERROR);
     }
 
@@ -180,7 +180,7 @@ public class LiteralParser
     result = integerPrefix(basePointer);
     if (result == ERROR)
     {
-      textParser.passPosition();
+      textParser.popPosition();
       return new LiteralResult(ERROR);
     }
     else if (result == FALSE)
@@ -209,7 +209,7 @@ public class LiteralParser
       }
       else if (literalResult.isError())
       {
-        textParser.passPosition();
+        textParser.popPosition();
         return literalResult;
       }
       textParser.passPosition();
@@ -224,13 +224,13 @@ public class LiteralParser
       }
       else
       {
-        textParser.passPosition();
+        textParser.popPosition();
         return new LiteralResult(ERROR);
       }
     }
     else
     {
-      textParser.passPosition();
+      textParser.popPosition();
       return new LiteralResult(ERROR);
     }
   }
@@ -312,7 +312,7 @@ public class LiteralParser
       }
       else if (literalResult.isError())
       {
-        textParser.passPosition();
+        textParser.popPosition();
         return literalResult;
       }
 
@@ -324,7 +324,7 @@ public class LiteralParser
       }
       else if (literalResult.isError())
       {
-        textParser.passPosition();
+        textParser.popPosition();
         return literalResult;
       }
 
@@ -333,7 +333,7 @@ public class LiteralParser
     }
     else if (result == ERROR)
     {
-      textParser.passPosition();
+      textParser.popPosition();
       return new LiteralResult(ERROR);
     }
     else
@@ -508,15 +508,23 @@ public class LiteralParser
         }
         else
         {
-          textParser.passPosition();
+          textParser.popPosition();
           return new LiteralResult(ERROR);
         }
       }
       else
       {
         LiteralResult literalResult = doubleType(number.value);
-        textParser.passPosition();
-        return literalResult;
+        if (literalResult.isTrue())
+        {
+          textParser.passPosition();
+          return literalResult;
+        }
+        else
+        {
+          textParser.popPosition();
+          return literalResult;
+        }
       }
     }
     else if (result == FALSE)
@@ -526,7 +534,7 @@ public class LiteralParser
     }
     else
     {
-      textParser.passPosition();
+      textParser.popPosition();
       return new LiteralResult(ERROR);
     }
   }

@@ -5,5 +5,7 @@ import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 public interface Expressable
 {
   String print(SixteenHighKeywords sixteenHighKeywords);
+
+  boolean isExpression();
 }
 

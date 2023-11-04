@@ -3,6 +3,7 @@ package net.assembler.sixteenhigh.parser.statment;
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 import net.common.util.StringUtil;
 
 import java.util.List;
@@ -14,19 +15,22 @@ public class Variable
   public String name;
   public List<Long> arrayMatrix;
   public int asteriskCount;
+  public BaseExpression initialiserExpression;
 
   public Variable(Code code,
                   int index,
                   SixteenHighKeywordCode type,
                   String name,
                   List<Long> arrayMatrix,
-                  int asteriskCount)
+                  int asteriskCount,
+                  BaseExpression initialiserExpression)
   {
     super(code, index);
     this.type = type;
     this.name = name;
     this.arrayMatrix = arrayMatrix;
     this.asteriskCount = asteriskCount;
+    this.initialiserExpression = initialiserExpression;
   }
 
   @Override
@@ -40,7 +44,15 @@ public class Variable
       arrays.append("]");
     }
     StringBuilder asterisks = StringUtil.pad("*", asteriskCount);
-    return sixteenHighKeywords.getKeyword(type) + arrays.toString() + asterisks.toString() + " " + name;
+
+    StringBuilder initialiser = new StringBuilder();
+    if (initialiserExpression != null)
+    {
+      initialiser.append(" = ");
+      initialiser.append(initialiserExpression.print(sixteenHighKeywords));
+    }
+
+    return sixteenHighKeywords.getKeyword(type) + arrays.toString() + asterisks.toString() + " " + name + initialiser.toString();
   }
 }
 

@@ -3,10 +3,7 @@ package net.assembler.sixteenhigh.parser;
 import net.assembler.sixteenhigh.parser.literal.LiteralParser;
 import net.assembler.sixteenhigh.parser.literal.LiteralResult;
 import net.assembler.sixteenhigh.parser.statment.*;
-import net.assembler.sixteenhigh.parser.statment.expression.Expression;
-import net.assembler.sixteenhigh.parser.statment.expression.LiteralExpression;
-import net.assembler.sixteenhigh.parser.statment.expression.OperandExpression;
-import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.assembler.sixteenhigh.parser.statment.expression.*;
 import net.common.SimulatorException;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
@@ -494,19 +491,39 @@ public class SixteenHighParser
         return parseResult;
       }
 
+      ArrayExpressionInitialiser initialiser = new ArrayExpressionInitialiser();
+      parseResult = parseRegisterInitialiser(initialiser);
+      if (parseResult.isError())
+      {
+        return parseResult;
+      }
+
+
       String registerName = registerNameZero.toString();
       if (registerName.startsWith("@@"))
       {
-        GlobalVariable globalVariable = code.addGlobalVariable(keyword, registerName, arrayDeclaration.arrayMatrix, asteriskCount);
+        GlobalVariable globalVariable = code.addGlobalVariable(keyword,
+                                                               registerName,
+                                                               arrayDeclaration.arrayMatrix,
+                                                               asteriskCount,
+                                                               initialiser);
         context.addGlobalVariable(globalVariable);
       }
       else if (registerName.startsWith("@"))
       {
-        code.addFileVariable(keyword, registerName, arrayDeclaration.arrayMatrix, asteriskCount);
+        code.addFileVariable(keyword,
+                             registerName,
+                             arrayDeclaration.arrayMatrix,
+                             asteriskCount,
+                             initialiser);
       }
       else
       {
-        code.addLocalVariable(keyword, registerName, arrayDeclaration.arrayMatrix, asteriskCount);
+        code.addLocalVariable(keyword,
+                              registerName,
+                              arrayDeclaration.arrayMatrix,
+                              asteriskCount,
+                              initialiser);
       }
       return _true();
     }
@@ -647,16 +664,7 @@ public class SixteenHighParser
       SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.leadingIdentifiers, index);
       ParseResult parseResult;
       parseResult = registerDeclaration(keyword);
-      if (parseResult.isTrue())
-      {
-        parseResult = parseRegisterInitialiser();
-        if (parseResult.isFalse() || parseResult.isTrue())
-        {
-          return _true();
-        }
-        return parseResult;
-      }
-      if (parseResult.isError())
+      if (parseResult.isTrueOrError())
       {
         return parseResult;
       }
@@ -713,12 +721,12 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseRegisterInitialiser()
+  private ParseResult parseRegisterInitialiser(ArrayExpressionInitialiser arrayExpressionInitialiser)
   {
-    Tristate result = textParser.getExactCharacterSequence(keywords.assign(), true);
+    Tristate result = textParser.getExactCharacterSequence(keywords.assign());
     if (result == TRUE)
     {
-      ParseResult parseResult = parseArrayInitialiser();
+      ParseResult parseResult = parseArrayInitialiser(arrayExpressionInitialiser);
       if (parseResult.isTrue())
       {
         return parseResult;
@@ -728,7 +736,8 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      parseResult = parseInitialExpression(new Expression());
+      Expression expression = new Expression();
+      parseResult = parseInitialExpression(expression);
       return parseResult;
     }
     else if (result == ERROR)
@@ -927,12 +936,53 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseArrayInitialiser()
+  private ParseResult parseArrayInitialiser(ArrayExpressionInitialiser arrayExpressionInitialiser)
   {
     Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
     if (result == TRUE)
     {
+      for (; ; )
+      {
+        ArrayExpressionInitialiser innerArrayExpressionInitialiser = new ArrayExpressionInitialiser();
+        ParseResult parseResult = parseArrayInitialiser(innerArrayExpressionInitialiser);
+        if (parseResult.isTrue())
+        {
+          arrayExpressionInitialiser.add(innerArrayExpressionInitialiser);
+          continue;
+        }
+        else if (parseResult.isError())
+        {
+          return parseResult;
+        }
 
+        Expression expression = new Expression();
+        parseResult = parseInitialExpression(expression);
+        if (parseResult.isTrue())
+        {
+          arrayExpressionInitialiser.add(expression);
+        }
+        result = textParser.getExactCharacterSequence(",");
+        if (result == ERROR)
+        {
+          return _error();
+        }
+        else if (result == FALSE)
+        {
+          result = textParser.getExactCharacterSequence(keywords.closeSquare());
+          if (result == TRUE)
+          {
+            return _true();
+          }
+          else if (result == ERROR)
+          {
+            return _error();
+          }
+          else
+          {
+            return _error("Expected ']'.");
+          }
+        }
+      }
     }
     else if (result == ERROR)
     {
@@ -940,9 +990,8 @@ public class SixteenHighParser
     }
     else
     {
-
+      return _false();
     }
-    return _false();
   }
 
   private ParseResult parseStatementStartingWithRegister()

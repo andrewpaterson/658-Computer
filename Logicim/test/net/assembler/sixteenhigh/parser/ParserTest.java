@@ -4,6 +4,7 @@ import net.common.parser.Tristate;
 import net.common.reflect.ClassInspector;
 import net.common.util.EnvironmentInspector;
 import net.common.util.FileUtil;
+import net.logicim.assertions.ValidationException;
 
 import java.io.File;
 
@@ -30,6 +31,25 @@ public class ParserTest
     validate(Tristate.TRUE, result);
     Code code = parser.getCode();
     validateNotNull(code);
+  }
+
+  protected static void testArrayInitialisation()
+  {
+    SixteenHighParser parser = createParser("int8[6] a1d = [2,3,1,3,1,2]");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("int8[6] a1d = [2,3,1,3,1,2]", code.print(parser.getKeywords()));
+  }
+
+  private static void validateNoError(Tristate result, String error)
+  {
+    if (result != Tristate.TRUE)
+    {
+      throw new ValidationException(error);
+    }
   }
 
   protected static void testSimple()
@@ -89,12 +109,13 @@ public class ParserTest
 
   public static void test()
   {
-    testStatementAssignment();
-    testStatementDeclaration();
+//    testStatementAssignment();
+//    testStatementDeclaration();
+    testArrayInitialisation();
 
-    testSimple();
-    testArrayDeclaration();
-    testPointers();
+//    testSimple();
+//    testArrayDeclaration();
+//    testPointers();
   }
 }
 

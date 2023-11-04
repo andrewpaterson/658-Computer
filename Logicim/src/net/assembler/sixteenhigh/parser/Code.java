@@ -5,6 +5,7 @@ import net.assembler.sixteenhigh.parser.statment.directive.AccessMode;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
+import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
 
 import java.util.ArrayList;
@@ -41,14 +42,16 @@ public class Code
   public void addLocalVariable(SixteenHighKeywordCode keyword,
                                String name,
                                List<Long> arrayMatrix,
-                               int asteriskCount)
+                               int asteriskCount,
+                               BaseExpression initialiserExpression)
   {
     LocalVariable variable = new LocalVariable(this,
                                                statementIndex++,
                                                keyword,
                                                name,
                                                arrayMatrix,
-                                               asteriskCount);
+                                               asteriskCount,
+                                               initialiserExpression);
     statements.add(variable);
     if (currentRoutine != null)
     {
@@ -59,14 +62,16 @@ public class Code
   public void addFileVariable(SixteenHighKeywordCode keyword,
                               String name,
                               List<Long> arrayMatrix,
-                              int asteriskCount)
+                              int asteriskCount,
+                              BaseExpression initialiserExpression)
   {
     FileVariable variable = new FileVariable(this,
                                              statementIndex++,
                                              keyword,
                                              name,
                                              arrayMatrix,
-                                             asteriskCount);
+                                             asteriskCount,
+                                             initialiserExpression);
     statements.add(variable);
     fileVariables.add(variable);
   }
@@ -74,14 +79,16 @@ public class Code
   public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword,
                                           String name,
                                           List<Long> arrayMatrix,
-                                          int asteriskCount)
+                                          int asteriskCount,
+                                          BaseExpression initialiserExpression)
   {
     GlobalVariable variable = new GlobalVariable(this,
                                                  statementIndex++,
                                                  keyword,
                                                  name,
                                                  arrayMatrix,
-                                                 asteriskCount);
+                                                 asteriskCount,
+                                                 initialiserExpression);
     statements.add(variable);
     return variable;
   }
@@ -179,7 +186,6 @@ public class Code
 
   public void addAccessMode(SixteenHighKeywordCode mode)
   {
-
     statements.add(new AccessMode(this, statementIndex, mode));
   }
 
@@ -195,13 +201,18 @@ public class Code
 
   public void dump(SixteenHighKeywords sixteenHighKeywords)
   {
+    System.out.println(print(sixteenHighKeywords));
+  }
+
+  protected String print(SixteenHighKeywords sixteenHighKeywords)
+  {
     StringBuilder builder = new StringBuilder();
     for (Statement statement : statements)
     {
       builder.append(statement.print(sixteenHighKeywords));
       builder.append("\n");
     }
-    System.out.println(builder.toString());
+    return builder.toString();
   }
 }
 

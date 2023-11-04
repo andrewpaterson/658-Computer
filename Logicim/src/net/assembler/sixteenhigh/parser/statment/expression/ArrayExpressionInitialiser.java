@@ -2,10 +2,10 @@ package net.assembler.sixteenhigh.parser.statment.expression;
 
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
-public class Expression
+public class ArrayExpressionInitialiser
     extends BaseExpression
 {
-  public Expression()
+  public ArrayExpressionInitialiser()
   {
     super();
   }
@@ -13,34 +13,17 @@ public class Expression
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    boolean hasExpression = false;
-    for (Expressable expressable : expressions)
-    {
-      if (expressable.isExpression())
-      {
-        hasExpression = true;
-        break;
-      }
-    }
-
     StringBuilder builder = new StringBuilder();
-    if (hasExpression)
-    {
-      builder.append("(");
-    }
+    builder.append("[");
     printExpressions(sixteenHighKeywords, builder);
-    if (hasExpression)
-    {
-      builder.append(")");
-    }
+    builder.append("]");
     return builder.toString();
   }
 
   @Override
   public boolean isExpression()
   {
-    return true;
+    return false;
   }
-
 }
 

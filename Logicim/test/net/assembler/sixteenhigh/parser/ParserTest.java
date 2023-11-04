@@ -18,9 +18,10 @@ public class ParserTest
     SixteenHighParser parser = createParser("i = 0");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
-    validate(Tristate.TRUE, result);
+    validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
+    validate("i = 0", code.print(parser.getKeywords()));
   }
 
   protected static void testStatementDeclaration()
@@ -28,9 +29,10 @@ public class ParserTest
     SixteenHighParser parser = createParser("int16 i; int16 number;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
-    validate(Tristate.TRUE, result);
+    validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
+    validate("int16 i\nint16 number\n", code.print(parser.getKeywords()));
   }
 
   protected static void testArrayInitialisation()
@@ -41,15 +43,18 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    validate("int8[6] a1d = [2,3,1,3,1,2]", code.print(parser.getKeywords()));
+    validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", code.print(parser.getKeywords()));
   }
 
-  private static void validateNoError(Tristate result, String error)
+  protected static void testSingleInitialisation()
   {
-    if (result != Tristate.TRUE)
-    {
-      throw new ValidationException(error);
-    }
+    SixteenHighParser parser = createParser("int8 i = 5");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("int8 i = 5", code.print(parser.getKeywords()));
   }
 
   protected static void testSimple()
@@ -59,9 +64,9 @@ public class ParserTest
     SixteenHighParser parser = createParser("Simple.16h", log, context);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    validate(Tristate.TRUE, result);
   }
 
   protected static void testPointers()
@@ -71,10 +76,9 @@ public class ParserTest
     SixteenHighParser parser = createParser("Pointer.16h", log, context);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
-    validate(Tristate.TRUE, result);
+    validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    code.dump(parser.getKeywords());
   }
 
   private static void testArrayDeclaration()
@@ -84,12 +88,9 @@ public class ParserTest
     SixteenHighParser parser = createParser("Array.16h", log, context);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    code.dump(parser.getKeywords());
-    String error = parser.getError();
-    System.out.println(error);
-    validate(Tristate.TRUE, result);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -107,15 +108,24 @@ public class ParserTest
     return new SixteenHighParser(new TextParserLog(), "", new SixteenHighContext(), contents);
   }
 
+  private static void validateNoError(Tristate result, String error)
+  {
+    if (result != Tristate.TRUE)
+    {
+      throw new ValidationException(error);
+    }
+  }
+
   public static void test()
   {
-//    testStatementAssignment();
-//    testStatementDeclaration();
+    testStatementAssignment();
+    testStatementDeclaration();
+    testSingleInitialisation();
     testArrayInitialisation();
 
-//    testSimple();
-//    testArrayDeclaration();
-//    testPointers();
+    testSimple();
+    testArrayDeclaration();
+    testPointers();
   }
 }
 

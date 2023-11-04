@@ -518,6 +518,17 @@ public class LiteralParserTest
     validate(false, literalResult.getBoolean().getValue());
   }
 
+  private static void testIntegerComma()
+  {
+    LiteralParser literalParser = new LiteralParser(createTextParser("5,5"));
+    LiteralResult integerLiteral = literalParser.parseLiteral(NUMBER_SEPARATOR_NONE);
+    validate(TRUE, integerLiteral.state);
+    validate(CTInt.class, integerLiteral.getLiteral().getClass());
+    validate(5, integerLiteral.getInt().rawValue);
+    validateTrue(integerLiteral.getInt().isPositive());
+    validateTrue(integerLiteral.getInt().isValid());
+  }
+
   public static void test()
   {
     testIntegerLiterals();
@@ -526,6 +537,7 @@ public class LiteralParserTest
     testCharacterLiteral();
     testStringLiteral();
     testAnyLiteral();
+    testIntegerComma();
   }
 
   protected static TextParser createTextParser(String contents)

@@ -207,10 +207,17 @@ public class Code
   protected String print(SixteenHighKeywords sixteenHighKeywords)
   {
     StringBuilder builder = new StringBuilder();
+    int lines = 0;
     for (Statement statement : statements)
     {
       builder.append(statement.print(sixteenHighKeywords));
       builder.append("\n");
+      lines++;
+    }
+
+    if (lines == 1)
+    {
+      builder.delete(builder.length() - 1, builder.length());
     }
     return builder.toString();
   }

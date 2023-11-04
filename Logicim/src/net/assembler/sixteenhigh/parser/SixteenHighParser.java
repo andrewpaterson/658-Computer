@@ -491,13 +491,12 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      ArrayExpressionInitialiser initialiser = new ArrayExpressionInitialiser();
-      parseResult = parseRegisterInitialiser(initialiser);
+      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      parseResult = parseRegisterInitialiser(expressionPointer);
       if (parseResult.isError())
       {
         return parseResult;
       }
-
 
       String registerName = registerNameZero.toString();
       if (registerName.startsWith("@@"))
@@ -506,7 +505,7 @@ public class SixteenHighParser
                                                                registerName,
                                                                arrayDeclaration.arrayMatrix,
                                                                asteriskCount,
-                                                               initialiser);
+                                                               expressionPointer.expression);
         context.addGlobalVariable(globalVariable);
       }
       else if (registerName.startsWith("@"))
@@ -515,7 +514,7 @@ public class SixteenHighParser
                              registerName,
                              arrayDeclaration.arrayMatrix,
                              asteriskCount,
-                             initialiser);
+                             expressionPointer.expression);
       }
       else
       {
@@ -523,7 +522,7 @@ public class SixteenHighParser
                               registerName,
                               arrayDeclaration.arrayMatrix,
                               asteriskCount,
-                              initialiser);
+                              expressionPointer.expression);
       }
       return _true();
     }
@@ -721,14 +720,16 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseRegisterInitialiser(ArrayExpressionInitialiser arrayExpressionInitialiser)
+  private ParseResult parseRegisterInitialiser(BaseExpressionPointer expressionPointer)
   {
     Tristate result = textParser.getExactCharacterSequence(keywords.assign());
     if (result == TRUE)
     {
+      ArrayExpressionInitialiser arrayExpressionInitialiser = new ArrayExpressionInitialiser();
       ParseResult parseResult = parseArrayInitialiser(arrayExpressionInitialiser);
       if (parseResult.isTrue())
       {
+        expressionPointer.setExpression(arrayExpressionInitialiser);
         return parseResult;
       }
       else if (parseResult.isError())
@@ -738,6 +739,11 @@ public class SixteenHighParser
 
       Expression expression = new Expression();
       parseResult = parseInitialExpression(expression);
+      if (parseResult.isTrue())
+      {
+        expressionPointer.setExpression(expression);
+        return parseResult;
+      }
       return parseResult;
     }
     else if (result == ERROR)

@@ -13,7 +13,7 @@ import static net.logicim.assertions.Validator.validateNotNull;
 
 public class ParserTest
 {
-  protected static void testStatementAssignment()
+  protected static void testStatementAssignment1()
   {
     SixteenHighParser parser = createParser("i = 0");
     ParseResult parseResult = parser.parse();
@@ -22,6 +22,28 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("i = 0", code.print(parser.getKeywords()));
+  }
+
+  protected static void testStatementAssignment2()
+  {
+    SixteenHighParser parser = createParser("i = (c * 3)");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("i = (c * 3)", code.print(parser.getKeywords()));
+  }
+
+  protected static void testStatementAssignment3()
+  {
+    SixteenHighParser parser = createParser("i = -(0x230L * +((-.4f) % 3))");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("i = -(560 * +(-0.4F % 3))", code.print(parser.getKeywords()));
   }
 
   protected static void testStatementDeclaration()
@@ -118,7 +140,9 @@ public class ParserTest
 
   public static void test()
   {
-    testStatementAssignment();
+    testStatementAssignment1();
+    testStatementAssignment2();
+    testStatementAssignment3();
     testStatementDeclaration();
     testSingleInitialisation();
     testArrayInitialisation();

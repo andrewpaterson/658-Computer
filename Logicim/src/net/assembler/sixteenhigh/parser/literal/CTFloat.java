@@ -24,5 +24,11 @@ public class CTFloat
     }
     return true;
   }
+
+  @Override
+  public String print()
+  {
+    return super.print() + "F";
+  }
 }
 

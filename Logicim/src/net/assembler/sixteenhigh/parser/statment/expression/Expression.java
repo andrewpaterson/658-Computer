@@ -13,23 +13,13 @@ public class Expression
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    boolean hasExpression = false;
-    for (Expressable expressable : expressions)
-    {
-      if (expressable.isExpression())
-      {
-        hasExpression = true;
-        break;
-      }
-    }
-
     StringBuilder builder = new StringBuilder();
-    if (hasExpression)
+    if (expressions.size() > 1)
     {
       builder.append("(");
     }
     printExpressions(sixteenHighKeywords, builder);
-    if (hasExpression)
+    if (expressions.size() > 1)
     {
       builder.append(")");
     }

@@ -6,6 +6,9 @@ public interface Expressable
 {
   String print(SixteenHighKeywords sixteenHighKeywords);
 
-  boolean isExpression();
+  default boolean isExpression()
+  {
+    return false;
+  }
 }
 

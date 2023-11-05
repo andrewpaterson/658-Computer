@@ -15,7 +15,7 @@ public abstract class BaseExpression
     expressions = new ArrayList<>();
   }
 
-  protected void printExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printCommaSeparatedExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
     for (Expressable expressable : expressions)
@@ -27,6 +27,23 @@ public abstract class BaseExpression
       else
       {
         builder.append(", ");
+      }
+      builder.append(expressable.print(sixteenHighKeywords));
+    }
+  }
+
+  protected void printExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  {
+    boolean isFirst = true;
+    for (Expressable expressable : expressions)
+    {
+      if (isFirst)
+      {
+        isFirst = false;
+      }
+      else
+      {
+        builder.append(" ");
       }
       builder.append(expressable.print(sixteenHighKeywords));
     }

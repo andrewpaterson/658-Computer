@@ -21,5 +21,11 @@ public class CTLongDouble
   {
     return true;
   }
+
+  @Override
+  public String print()
+  {
+    return super.print() + "L";
+  }
 }
 

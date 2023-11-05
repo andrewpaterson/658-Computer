@@ -4,7 +4,6 @@ import net.assembler.sixteenhigh.parser.literal.LiteralParser;
 import net.assembler.sixteenhigh.parser.literal.LiteralResult;
 import net.assembler.sixteenhigh.parser.statment.*;
 import net.assembler.sixteenhigh.parser.statment.expression.*;
-import net.common.SimulatorException;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
@@ -737,11 +736,11 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      Expression expression = new Expression();
-      parseResult = parseInitialExpression(expression);
+      BaseExpressionPointer expressablePointer = new BaseExpressionPointer();
+      parseResult = parseInitialExpression(expressablePointer);
       if (parseResult.isTrue())
       {
-        expressionPointer.setExpression(expression);
+        expressionPointer.setExpression(expressablePointer.expression);
         return parseResult;
       }
       return parseResult;
@@ -754,92 +753,86 @@ public class SixteenHighParser
     {
       return _false();
     }
-
   }
 
-  private ParseResult parseInitialExpression(Expression expression)
+  private ParseResult parseUnaryComponent(ExpressablePointer expressablePointer)
   {
-    Tristate result = textParser.getExactCharacterSequence(keywords.openRound());
+    LiteralResult literalResult = literal();
+    if (literalResult.isTrue())
+    {
+      expressablePointer.setExpressable(new LiteralExpression(literalResult.getLiteral()));
+      return _true();
+    }
+    else if (literalResult.isError())
+    {
+      return _error();
+    }
+
+    IntegerPointer index = new IntegerPointer();
+    Tristate result = textParser.getIdentifier(keywords.unaryOperators, index, true);
+    SixteenHighKeywordCode keyword;
     if (result == TRUE)
     {
-      ParseResult parseResult = parseExpression(new Expression());
-      if (parseResult.isError())
-      {
-        return parseResult;
-      }
-
-      result = textParser.getExactCharacterSequence(keywords.closeRound());
-      if (result == TRUE)
-      {
-        return _true();
-      }
-      else if (result == ERROR)
-      {
-        return _error();
-      }
-      else
-      {
-        return _error("Expected ')'.");
-      }
+      keyword = keywords.getKeyword(keywords.unaryOperators, index);
     }
-    else if (result == FALSE)
+    else if (result == ERROR)
     {
-      LiteralResult literalResult = literal();
-      if (literalResult.isTrue())
-      {
-        expression.add(new LiteralExpression(literalResult.getLiteral()));
-        return _true();
-      }
-      else if (literalResult.isError())
-      {
-        return _error();
-      }
-
-      IntegerPointer index = new IntegerPointer();
-      result = textParser.getIdentifier(keywords.unaryOperators, index, true);
-      SixteenHighKeywordCode keyword;
-      if (result == TRUE)
-      {
-        keyword = keywords.getKeyword(keywords.unaryOperators, index);
-        Expression plusMinusExpression = new Expression();
-        plusMinusExpression.add(new OperandExpression(keyword));
-        ParseResult parseResult = parseExpression(plusMinusExpression);
-        if (parseResult.isError())
-        {
-          return parseResult;
-        }
-      }
-      else if (result == ERROR)
-      {
-        return _error();
-      }
-      else
-      {
-        keyword = UNKNOWN;
-      }
-
-      if (keyword != UNKNOWN)
-      {
-        expression.add(new OperandExpression(keyword));
-      }
-
-      StringZero registerName = new StringZero();
-      result = textParser.getIdentifier(registerName, true);
-      if (result == FALSE)
-      {
-        return _error("Expected register name.");
-      }
-      else if (result == ERROR)
-      {
-        return _error();
-      }
-      expression.add(new RegisterExpression(registerName.toString()));
-
-      return _true();
+      return _error();
     }
     else
     {
-      return _error();
+      keyword = UNKNOWN;
+    }
+
+    ExpressablePointer childExpressablePointer = new ExpressablePointer();
+    ParseResult parseResult = parseComponent(childExpressablePointer);
+    if (parseResult.isTrue())
+    {
+      if (keyword != UNKNOWN)
+      {
+        expressablePointer.setExpressable(new UnaryExpression(keyword, childExpressablePointer.expressable));
+      }
+      else
+      {
+        expressablePointer.setExpressable(childExpressablePointer.expressable);
+      }
+      return parseResult;
+    }
+    else if (parseResult.isError())
+    {
+      return parseResult;
+    }
+    else
+    {
+      return parseResult;
+    }
+  }
+
+  private ParseResult parseInitialExpression(BaseExpressionPointer expressionPointer)
+  {
+    ExpressablePointer expressablePointer = new ExpressablePointer();
+    ParseResult parseResult = parseUnaryComponent(expressablePointer);
+    if (parseResult.isError())
+    {
+      return parseResult;
+    }
+    else if (parseResult.isTrue())
+    {
+      if (expressablePointer.expressable.isExpression())
+      {
+        expressionPointer.setExpression((BaseExpression) expressablePointer.expressable);
+      }
+      else
+      {
+        Expression expression = new Expression();
+        expression.add(expressablePointer.expressable);
+        expressionPointer.setExpression(expression);
+      }
+      return parseResult;
+    }
+    else
+    {
+      return parseResult;
     }
   }
 
@@ -877,53 +870,108 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseExpression(Expression expression)
+  private ParseResult parseComponent(ExpressablePointer expressablePointer)
   {
-    Tristate result = textParser.getExactCharacterSequence(keywords.openRound());
+    BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+    ParseResult parseResult = parseExpression(expressionPointer);
+    if (parseResult.isTrue())
+    {
+      expressablePointer.setExpressable(expressionPointer.expression);
+      return parseResult;
+    }
+    else if (parseResult.isError())
+    {
+      return parseResult;
+    }
+
+    StringZero registerZero = new StringZero();
+    Tristate result = textParser.getIdentifier(registerZero, true);
     if (result == TRUE)
     {
-      ParseResult parseResult = parseExpression(new Expression());
-      if (parseResult.isError())
-      {
-        return parseResult;
-      }
-
-      result = textParser.getExactCharacterSequence(keywords.closeRound());
-      if (result == TRUE)
-      {
-        return _true();
-      }
-      else if (result == ERROR)
-      {
-        return _error();
-      }
-      else
-      {
-        return _error("Expected ')'.");
-      }
+      expressablePointer.setExpressable(new RegisterExpression(registerZero.toString()));
+      return _true();
     }
-    else if (result == FALSE)
-    {
-      LiteralResult literalResult = literal();
-      if (literalResult.isTrue())
-      {
-        expression.add(new LiteralExpression(literalResult.getLiteral()));
-      }
-      else if (literalResult.isError())
-      {
-        return _error();
-      }
-      else
-      {
-        return _false();
-      }
-    }
-    else
+    else if (result == ERROR)
     {
       return _error();
     }
+    return _false();
+  }
 
-    throw new SimulatorException("Should not get able to get here.");
+  private ParseResult parseExpression(BaseExpressionPointer expressionPointer)
+  {
+    // Component: Expresion | Register
+    // UnaryComponent: Literal | UnaryOperator Component
+    // Expression: ( UnaryComponent BinaryOperator ...  UnaryComponent BinaryOperator ... UnaryComponent )
+
+    Tristate result = textParser.getExactCharacterSequence(keywords.openRound());
+    if (result == TRUE)
+    {
+      Expression expression = new Expression();
+      expressionPointer.setExpression(expression);
+      for (; ; )
+      {
+        ExpressablePointer childExpressablePointer = new ExpressablePointer();
+        ParseResult parseResult = parseUnaryComponent(childExpressablePointer);
+        if (parseResult.isTrue())
+        {
+          expression.add(childExpressablePointer.expressable);
+        }
+
+        result = textParser.getExactCharacterSequence(keywords.closeRound());
+        if (result == TRUE)
+        {
+          return _true();
+        }
+        else if (result == ERROR)
+        {
+          return _error();
+        }
+
+        parseResult = parseBinaryOperator(childExpressablePointer);
+        if (parseResult.isTrue())
+        {
+          expression.add(childExpressablePointer.expressable);
+        }
+        else if (parseResult.isError())
+        {
+          return _error();
+        }
+        else
+        {
+          return _error("Expected ')'.");
+        }
+      }
+    }
+    else if (result == ERROR)
+    {
+      return _error();
+    }
+    else
+    {
+      return _false();
+    }
+  }
+
+  private ParseResult parseBinaryOperator(ExpressablePointer expressablePointer)
+  {
+    IntegerPointer index = new IntegerPointer();
+    Tristate result = textParser.getIdentifier(keywords.binaryOperators, index, true);
+    SixteenHighKeywordCode keyword;
+    if (result == TRUE)
+    {
+      keyword = keywords.getKeyword(keywords.binaryOperators, index);
+      expressablePointer.setExpressable(new OperandExpression(keyword));
+      return _true();
+    }
+    else if (result == ERROR)
+    {
+      return _error();
+    }
+    else
+    {
+      return _false();
+    }
   }
 
   private ParseResult parseResult(Tristate result)
@@ -961,11 +1009,11 @@ public class SixteenHighParser
           return parseResult;
         }
 
-        Expression expression = new Expression();
-        parseResult = parseInitialExpression(expression);
+        BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+        parseResult = parseInitialExpression(expressionPointer);
         if (parseResult.isTrue())
         {
-          arrayExpressionInitialiser.add(expression);
+          arrayExpressionInitialiser.add(expressionPointer.expression);
         }
         result = textParser.getExactCharacterSequence(",");
         if (result == ERROR)
@@ -1099,11 +1147,11 @@ public class SixteenHighParser
   {
     if (keywords.getAssignments().contains(keyword))
     {
-      Expression expression = new Expression();
-      ParseResult parseResult = parseInitialExpression(expression);
+      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
-        code.addAssignment(leftIdentifier, keyword, expression);
+        code.addAssignment(leftIdentifier, keyword, (Expression) expressionPointer.expression);
         return _true();
       }
       else if (parseResult.isError())
@@ -1178,11 +1226,11 @@ public class SixteenHighParser
     }
 
     TextParserPosition textParserPosition = textParser.saveSettings();
-    Tristate result = textParser.findStartOfLine();
+    textParser.findStartOfLine();
     int startOfLine = textParser.getPosition();
     textParser.loadSettings(textParserPosition);
     textParserPosition = textParser.saveSettings();
-    result = textParser.findEndOfLine();
+    textParser.findEndOfLine();
     int endOfLine = textParser.getPosition();
     textParser.loadSettings(textParserPosition);
     String text = textParser.getText();

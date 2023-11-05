@@ -279,8 +279,10 @@ public class LiteralParser
     }
     else if (result == ERROR)
     {
+      textParser.popPosition();
       return FALSE;
     }
+    textParser.popPosition();
     return FALSE;
   }
 

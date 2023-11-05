@@ -219,18 +219,20 @@ public class LiteralParserTest
     validateFalse(integerLiteral.getInt().isUnsigned());
 
     literalParser = new LiteralParser(createTextParser("0LL"));
-    validate(0, literalParser.getPosition());
     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
     validate(CTLong.class, integerLiteral.getLiteral().getClass());
     validate(TRUE, integerLiteral.state);
     validateFalse(integerLiteral.getLong().isUnsigned());
 
     literalParser = new LiteralParser(createTextParser("0U"));
-    validate(0, literalParser.getPosition());
     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());
     validate(TRUE, integerLiteral.state);
     validateTrue(integerLiteral.getInt().isUnsigned());
+
+    literalParser = new LiteralParser(createTextParser("-("));
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    validate(FALSE, integerLiteral.state);
   }
 
   private static void testFloatingLiteral()
@@ -381,6 +383,9 @@ public class LiteralParserTest
     validate(0.0, floatingLiteral.getFloat().getValue());
     validateTrue(floatingLiteral.getFloat().isValid());
 
+    literalParser = new LiteralParser(createTextParser("-("));
+    floatingLiteral = literalParser.getFloatingLiteral();
+    validate(FALSE, floatingLiteral.state);
   }
 
   private static void testBooleanLiteral()

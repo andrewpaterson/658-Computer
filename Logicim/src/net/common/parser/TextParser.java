@@ -104,7 +104,7 @@ public class TextParser
     if (position >= 0)
     {
       position--;
-      if (text.get(position) == '\n')
+      if ((position >= 0) && (text.get(position) == '\n'))
       {
         miLine--;
 
@@ -1084,9 +1084,9 @@ public class TextParser
     if (!outsideText)
     {
       IntegerPointer characteristicPointer = new IntegerPointer();
-      IntegerPointer numDecimalsPointer = new IntegerPointer();
+      IntegerPointer numCharacteristicsPointer = new IntegerPointer();
       IntegerPointer signPointer = new IntegerPointer();
-      Tristate tReturn = getDigits(characteristicPointer, numDecimalsPointer, signPointer);
+      Tristate tReturn = getDigits(characteristicPointer, numCharacteristicsPointer, signPointer);
       bLeft = true;
 
       //Just return on errors and non-numbers.
@@ -1110,7 +1110,8 @@ public class TextParser
         {
           IntegerPointer mantissaPointer = new IntegerPointer();
           IntegerPointer mantissaSignPointer = new IntegerPointer();
-          tReturn = getDigits(mantissaPointer, numDecimalsPointer, mantissaSignPointer);
+          IntegerPointer numMantissasPointer = new IntegerPointer();
+          tReturn = getDigits(mantissaPointer, numMantissasPointer, mantissaSignPointer);
           if (tReturn == TRUE)
           {
             if (mantissaPointer.value < 0)
@@ -1120,7 +1121,7 @@ public class TextParser
             }
 
             mantissa = mantissaPointer.value;
-            fTemp = Math.pow(10.0f, (-numDecimalsPointer.value));
+            fTemp = Math.pow(10.0f, (-numMantissasPointer.value));
             mantissa *= fTemp;
 
             pf.value = characteristic + mantissa;
@@ -1141,7 +1142,7 @@ public class TextParser
         else
         {
           //No decimal point...
-          if (!bLeft)
+          if (!bLeft || (numCharacteristicsPointer.value == 0))
           {
             //No digits and no point...
             popPosition();
@@ -1269,6 +1270,7 @@ public class TextParser
       }
     }
   }
+
   public Tristate findEndOfLine()
   {
     char cCurrent;
@@ -1289,7 +1291,7 @@ public class TextParser
       //If we have no more text then the start of the line is the start of the text.
       if (outsideText)
       {
-        position = 0;
+        position = text.length() - 1;
         passPosition();
         return TRUE;
       }

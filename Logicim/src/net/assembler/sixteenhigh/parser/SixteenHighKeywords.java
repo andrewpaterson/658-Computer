@@ -25,6 +25,8 @@ public class SixteenHighKeywords
   protected String ASSIGN = "=";
 
   protected List<KeywordPair> keywords;
+  protected Map<SixteenHighKeywordCode, String> codeToStringMap;
+
   protected List<String> leadingIdentifiers;
   protected List<String> followingIdentifiers;
   protected List<String> secondFollowingIdentifiers;
@@ -35,6 +37,8 @@ public class SixteenHighKeywords
 
   public SixteenHighKeywords()
   {
+    codeToStringMap = null;
+
     keywords = defineKeywords();
     leadingIdentifiers = defineLeadingIdentifiers();
     followingIdentifiers = defineFollowingIdentifiers();
@@ -280,12 +284,17 @@ public class SixteenHighKeywords
 
   public Map<SixteenHighKeywordCode, String> getCodeToStringMap()
   {
-    LinkedHashMap<SixteenHighKeywordCode, String> result = new LinkedHashMap<>();
-    for (KeywordPair keyword : keywords)
+    if (codeToStringMap == null)
     {
-      result.put(keyword.code, keyword.name);
+      LinkedHashMap<SixteenHighKeywordCode, String> result = new LinkedHashMap<>();
+      for (KeywordPair keyword : keywords)
+      {
+        result.put(keyword.code, keyword.name);
+      }
+      codeToStringMap = result;
     }
-    return result;
+
+    return codeToStringMap;
   }
 
   public SixteenHighKeywordCode getKeyword(List<String> allowedIdentifiers, IntegerPointer index)

@@ -442,6 +442,31 @@ public class TextParser
     }
   }
 
+  public Tristate getExactCharacterSequence(List<String> strings, IntegerPointer index, boolean skipWhiteSpace)
+  {
+    if (skipWhiteSpace)
+    {
+      skipWhiteSpace();
+    }
+
+    for (int i = 0; i < strings.size(); i++)
+    {
+      String string = strings.get(i);
+      Tristate result = getExactCharacterSequence(string, false);
+      if (result == TRUE)
+      {
+        index.value = i;
+        return TRUE;
+      }
+      else if (result == ERROR)
+      {
+        return ERROR;
+      }
+    }
+
+    return FALSE;
+  }
+
   public Tristate getExactCharacterSequence(String szSequence)
   {
     return getExactCharacterSequence(szSequence, true);
@@ -465,7 +490,7 @@ public class TextParser
     {
       popPosition();
       setErrorEndOfFile();
-      return ERROR;
+      return FALSE;
     }
 
     for (; ; )
@@ -685,7 +710,7 @@ public class TextParser
     if (outsideText)
     {
       popPosition();
-      return ERROR;
+      return FALSE;
     }
 
     for (; ; )
@@ -717,7 +742,7 @@ public class TextParser
         if (bFirst)
         {
           popPosition();
-          return ERROR;
+          return FALSE;
         }
         else
         {

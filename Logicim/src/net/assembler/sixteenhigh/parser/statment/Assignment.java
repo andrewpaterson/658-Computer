@@ -4,30 +4,31 @@ import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
+import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
 
 public class Assignment
     extends Statement
 {
-  protected String leftRegister;
+  protected RegisterExpression leftRegister;
   protected SixteenHighKeywordCode keyword;
-  protected Expression expression;
+  protected Expression right;
 
   public Assignment(Code code,
                     int index,
-                    String leftRegister,
+                    RegisterExpression leftRegister,
                     SixteenHighKeywordCode keyword,
-                    Expression expression)
+                    Expression right)
   {
     super(code, index);
     this.leftRegister = leftRegister;
     this.keyword = keyword;
-    this.expression = expression;
+    this.right = right;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return leftRegister + " " + sixteenHighKeywords.getKeyword(keyword) + " " + expression.print(sixteenHighKeywords);
+    return leftRegister.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + right.print(sixteenHighKeywords) + semicolon();
   }
 }
 

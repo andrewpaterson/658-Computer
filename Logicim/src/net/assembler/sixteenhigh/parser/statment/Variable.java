@@ -52,7 +52,7 @@ public class Variable
       initialiser.append(initialiserExpression.print(sixteenHighKeywords));
     }
 
-    return sixteenHighKeywords.getKeyword(type) + arrays.toString() + asterisks.toString() + " " + name + initialiser.toString();
+    return sixteenHighKeywords.getKeyword(type) + arrays.toString() + asterisks.toString() + " " + name + initialiser.toString() + semicolon();
   }
 }
 

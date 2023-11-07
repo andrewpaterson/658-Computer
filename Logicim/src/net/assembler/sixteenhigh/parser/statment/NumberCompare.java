@@ -3,26 +3,32 @@ package net.assembler.sixteenhigh.parser.statment;
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.parser.statment.expression.Expression;
+import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
 
 public class NumberCompare
     extends Statement
 {
-  protected String leftRegister;
-  protected String rightRegister;
+  protected RegisterExpression leftRegister;
+  protected Expression right;
   protected SixteenHighKeywordCode keyword;
 
-  public NumberCompare(Code code, int index, String leftRegister, String rightRegister, SixteenHighKeywordCode keyword)
+  public NumberCompare(Code code,
+                       int index,
+                       RegisterExpression leftRegister,
+                       Expression right,
+                       SixteenHighKeywordCode keyword)
   {
     super(code, index);
     this.leftRegister = leftRegister;
-    this.rightRegister = rightRegister;
+    this.right = right;
     this.keyword = keyword;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return leftRegister + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightRegister;
+    return leftRegister.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + right.print(sixteenHighKeywords) + semicolon();
   }
 }
 

@@ -7,6 +7,7 @@ import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
 import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
+import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,24 +155,24 @@ public class Code
     statements.add(new Pull(this, statementIndex++, register));
   }
 
-  public void addBitCompare(String register, SixteenHighKeywordCode keyword)
+  public void addBitCompare(RegisterExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new BitCompare(this, statementIndex++, register, keyword));
   }
 
-  public void addCrement(String register, SixteenHighKeywordCode keyword)
+  public void addCrement(RegisterExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new Crement(this, statementIndex++, register, keyword));
   }
 
-  public void addNumberCompare(String leftIdentifier, String rightIdentifier, SixteenHighKeywordCode keyword)
+  public void addNumberCompare(RegisterExpression leftIdentifier, Expression right, SixteenHighKeywordCode keyword)
   {
-    statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, rightIdentifier, keyword));
+    statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, right, keyword));
   }
 
-  public void addAssignment(String leftIdentifier, SixteenHighKeywordCode keyword, Expression expression)
+  public void addAssignment(RegisterExpression leftIdentifier, SixteenHighKeywordCode keyword, Expression right)
   {
-    statements.add(new Assignment(this, statementIndex++, leftIdentifier, keyword, expression));
+    statements.add(new Assignment(this, statementIndex++, leftIdentifier, keyword, right));
   }
 
   public void addStartAddress(int address)

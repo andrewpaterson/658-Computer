@@ -17,7 +17,7 @@ public class Pull
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "< " + register;
+    return "< " + register + semicolon();
   }
 }
 

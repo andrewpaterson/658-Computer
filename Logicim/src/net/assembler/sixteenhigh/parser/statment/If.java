@@ -24,7 +24,7 @@ public class If
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return sixteenHighKeywords.getKeyword(type);
+    return sixteenHighKeywords.getKeyword(type) + semicolon();
   }
 }
 

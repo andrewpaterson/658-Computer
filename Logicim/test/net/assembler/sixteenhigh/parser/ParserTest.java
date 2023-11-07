@@ -54,7 +54,7 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    validate("int16 i\nint16 number\n", code.print(parser.getKeywords()));
+    validate("int16 i;\nint16 number;\n", code.print(parser.getKeywords()));
   }
 
   protected static void testArrayInitialisation()
@@ -68,6 +68,17 @@ public class ParserTest
     validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", code.print(parser.getKeywords()));
   }
 
+  protected static void testArrayIndices()
+  {
+    SixteenHighParser parser = createParser("a[2] = b[3]");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("a[2] = b[3]", code.print(parser.getKeywords()));
+  }
+
   protected static void testSingleInitialisation()
   {
     SixteenHighParser parser = createParser("int8 i = 5");
@@ -77,6 +88,28 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("int8 i = 5", code.print(parser.getKeywords()));
+  }
+
+  private static void testComplexArrayIndices()
+  {
+    SixteenHighParser parser = createParser("int32 c = (a2d[y][a1d[y]] * 3);");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("int32 c = (a2d[y][a1d[y]] * 3);", code.print(parser.getKeywords()));
+  }
+
+  private static void testIdentifierContainingNumber()
+  {
+    SixteenHighParser parser = createParser("a1d[2] =66;");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("a1d[2] = 66;", code.print(parser.getKeywords()));
   }
 
   protected static void testSimple()
@@ -146,6 +179,9 @@ public class ParserTest
     testStatementDeclaration();
     testSingleInitialisation();
     testArrayInitialisation();
+    testArrayIndices();
+    testComplexArrayIndices();
+    testIdentifierContainingNumber();
 
     testSimple();
     testArrayDeclaration();

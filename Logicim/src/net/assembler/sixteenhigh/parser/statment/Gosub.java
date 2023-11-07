@@ -17,7 +17,7 @@ public class Gosub
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "gosub " + label;
+    return "gosub " + label + semicolon();
   }
 }
 

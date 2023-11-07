@@ -14,7 +14,7 @@ public class Ret
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "return";
+    return "return" + semicolon();
   }
 }
 

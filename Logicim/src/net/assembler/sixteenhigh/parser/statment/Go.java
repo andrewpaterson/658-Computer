@@ -17,7 +17,7 @@ public class Go
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "go " + label;
+    return "go " + label + semicolon();
   }
 }
 

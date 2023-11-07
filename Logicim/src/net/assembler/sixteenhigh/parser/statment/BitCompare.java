@@ -3,14 +3,18 @@ package net.assembler.sixteenhigh.parser.statment;
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
 
 public class BitCompare
     extends Statement
 {
-  protected String register;
+  protected RegisterExpression register;
   protected SixteenHighKeywordCode keyword;
 
-  public BitCompare(Code code, int index, String register, SixteenHighKeywordCode keyword)
+  public BitCompare(Code code,
+                    int index,
+                    RegisterExpression register,
+                    SixteenHighKeywordCode keyword)
   {
     super(code, index);
     this.register = register;
@@ -20,7 +24,7 @@ public class BitCompare
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return register + " " + sixteenHighKeywords.getKeyword(keyword);
+    return register.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword)  + semicolon();
   }
 }
 

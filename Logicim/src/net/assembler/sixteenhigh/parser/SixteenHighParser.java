@@ -1118,7 +1118,7 @@ public class SixteenHighParser
       if (result == TRUE)
       {
         ExpressablePointer expressablePointer = new ExpressablePointer();
-         parseResult = parseUnaryComponent(expressablePointer);
+        parseResult = parseUnaryComponent(expressablePointer);
         if (parseResult.isTrue())
         {
           result = textParser.getExactCharacterSequence(keywords.closeSquare());
@@ -1341,6 +1341,11 @@ public class SixteenHighParser
     pad.append("^");
 
     return "Error at position [" + textParser.getPosition() + "]: Unexpected: " + errorPosition + "\n" + errorLine + "\n" + pad.toString();
+  }
+
+  public boolean isCompleted()
+  {
+    return textParser.getPositions().size() == 0;
   }
 }
 

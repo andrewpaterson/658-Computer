@@ -1691,5 +1691,10 @@ public class TextParser
   {
     return text.toString();
   }
+
+  public List<Integer> getPositions()
+  {
+    return mcPositions;
+  }
 }
 

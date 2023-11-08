@@ -8,8 +8,7 @@ import net.logicim.assertions.ValidationException;
 
 import java.io.File;
 
-import static net.logicim.assertions.Validator.validate;
-import static net.logicim.assertions.Validator.validateNotNull;
+import static net.logicim.assertions.Validator.*;
 
 public class ParserTest
 {
@@ -22,6 +21,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("i = 0", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementAssignment2()
@@ -33,6 +33,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("i = (c * 3)", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementAssignment3()
@@ -44,6 +45,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("i = -(560 * +(-0.4F % 3))", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementDeclaration()
@@ -55,6 +57,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("int16 i;\nint16 number;\n", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testArrayInitialisation()
@@ -66,6 +69,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testArrayIndices()
@@ -77,6 +81,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("a[2] = b[3]", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testSingleInitialisation()
@@ -88,6 +93,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("int8 i = 5", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   private static void testComplexArrayIndices()
@@ -99,6 +105,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("int32 c = (a2d[y][a1d[y]] * 3);", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   private static void testIdentifierContainingNumber()
@@ -110,6 +117,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("a1d[2] = 66;", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   private static void testGlobalAndFileVariables()
@@ -122,6 +130,7 @@ public class ParserTest
     validateNotNull(code);
     validate("int8* @hello;\n" +
              "int8 @@world;\n", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   private static void testReferenceOperator()
@@ -133,6 +142,7 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validate("", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testSimple()
@@ -145,6 +155,7 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
+    validateTrue(parser.isCompleted());
   }
 
   protected static void testPointers()
@@ -157,6 +168,7 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
+    validateTrue(parser.isCompleted());
   }
 
   private static void testArrayDeclaration()
@@ -169,6 +181,7 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
+    validateTrue(parser.isCompleted());
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -196,16 +209,16 @@ public class ParserTest
 
   public static void test()
   {
-//    testStatementAssignment1();
-//    testStatementAssignment2();
-//    testStatementAssignment3();
-//    testStatementDeclaration();
-//    testSingleInitialisation();
-//    testArrayInitialisation();
-//    testArrayIndices();
-//    testComplexArrayIndices();
-//    testIdentifierContainingNumber();
-//    testGlobalAndFileVariables();
+    testStatementAssignment1();
+    testStatementAssignment2();
+    testStatementAssignment3();
+    testStatementDeclaration();
+    testSingleInitialisation();
+    testArrayInitialisation();
+    testArrayIndices();
+    testComplexArrayIndices();
+    testIdentifierContainingNumber();
+    testGlobalAndFileVariables();
     testReferenceOperator();
 
     testSimple();

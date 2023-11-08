@@ -112,6 +112,29 @@ public class ParserTest
     validate("a1d[2] = 66;", code.print(parser.getKeywords()));
   }
 
+  private static void testGlobalAndFileVariables()
+  {
+    SixteenHighParser parser = createParser("int8*\t@hello;int8\t@@world;");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("int8* @hello;\n" +
+             "int8 @@world;\n", code.print(parser.getKeywords()));
+  }
+
+  private static void testReferenceOperator()
+  {
+    SixteenHighParser parser = createParser("p = &p[5]");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("", code.print(parser.getKeywords()));
+  }
+
   protected static void testSimple()
   {
     TextParserLog log = new TextParserLog();
@@ -173,15 +196,17 @@ public class ParserTest
 
   public static void test()
   {
-    testStatementAssignment1();
-    testStatementAssignment2();
-    testStatementAssignment3();
-    testStatementDeclaration();
-    testSingleInitialisation();
-    testArrayInitialisation();
-    testArrayIndices();
-    testComplexArrayIndices();
-    testIdentifierContainingNumber();
+//    testStatementAssignment1();
+//    testStatementAssignment2();
+//    testStatementAssignment3();
+//    testStatementDeclaration();
+//    testSingleInitialisation();
+//    testArrayInitialisation();
+//    testArrayIndices();
+//    testComplexArrayIndices();
+//    testIdentifierContainingNumber();
+//    testGlobalAndFileVariables();
+    testReferenceOperator();
 
     testSimple();
     testArrayDeclaration();

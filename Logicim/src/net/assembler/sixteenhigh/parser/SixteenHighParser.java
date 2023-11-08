@@ -761,7 +761,7 @@ public class SixteenHighParser
       }
       else if (parseResult.isError())
       {
-        textParser.popPosition();
+        textParser.passPosition();
         return parseResult;
       }
       else
@@ -1104,24 +1104,21 @@ public class SixteenHighParser
   private ParseResult parseRegister(RegisterExpressionPointer expressionPointer)
   {
     StringZero registerNameZero = new StringZero();
-    Tristate result = textParser.getIdentifier(registerNameZero, true);
-    if (result == ERROR)
+    ParseResult parseResult = blockIdentifier(registerNameZero);
+    if (parseResult.isFalseOrError())
     {
-      return _error();
+      return parseResult;
     }
-    else if (result == FALSE)
-    {
-      return _false();
-    }
+
     String registerName = registerNameZero.toString();
     RegisterExpression registerExpression = new RegisterExpression(registerName);
     for (; ; )
     {
-      result = textParser.getExactCharacterSequence(keywords.openSquare());
+      Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
       if (result == TRUE)
       {
         ExpressablePointer expressablePointer = new ExpressablePointer();
-        ParseResult parseResult = parseUnaryComponent(expressablePointer);
+         parseResult = parseUnaryComponent(expressablePointer);
         if (parseResult.isTrue())
         {
           result = textParser.getExactCharacterSequence(keywords.closeSquare());

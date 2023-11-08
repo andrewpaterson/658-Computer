@@ -19,5 +19,11 @@ public class Label
   {
     return name + ":";
   }
+
+  @Override
+  public boolean isLabel()
+  {
+    return true;
+  }
 }
 

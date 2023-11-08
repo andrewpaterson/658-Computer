@@ -14,7 +14,7 @@ public class Variable
   public SixteenHighKeywordCode type;
   public String name;
   public List<Long> arrayMatrix;
-  public int asteriskCount;
+  public int pointerCount;
   public BaseExpression initialiserExpression;
 
   public Variable(Code code,
@@ -22,14 +22,14 @@ public class Variable
                   SixteenHighKeywordCode type,
                   String name,
                   List<Long> arrayMatrix,
-                  int asteriskCount,
+                  int pointerCount,
                   BaseExpression initialiserExpression)
   {
     super(code, index);
     this.type = type;
     this.name = name;
     this.arrayMatrix = arrayMatrix;
-    this.asteriskCount = asteriskCount;
+    this.pointerCount = pointerCount;
     this.initialiserExpression = initialiserExpression;
   }
 
@@ -43,7 +43,7 @@ public class Variable
       arrays.append(arrayLength.longValue());
       arrays.append("]");
     }
-    StringBuilder asterisks = StringUtil.pad("*", asteriskCount);
+    StringBuilder asterisks = StringUtil.pad("*", pointerCount);
 
     StringBuilder initialiser = new StringBuilder();
     if (initialiserExpression != null)

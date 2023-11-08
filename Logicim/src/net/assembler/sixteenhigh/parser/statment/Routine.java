@@ -29,5 +29,10 @@ public abstract class Routine
   {
     localLabels.add(label);
   }
+
+  public boolean isRoutine()
+  {
+    return true;
+  }
 }
 

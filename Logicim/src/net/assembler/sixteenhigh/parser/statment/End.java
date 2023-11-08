@@ -14,7 +14,12 @@ public class End
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "end";
+    return "end\n";
+  }
+
+  public boolean isEnd()
+  {
+    return true;
   }
 }
 

@@ -8,6 +8,7 @@ import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
 import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
 import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class Code
   public void addLocalVariable(SixteenHighKeywordCode keyword,
                                String name,
                                List<Long> arrayMatrix,
-                               int asteriskCount,
+                               int pointerCount,
                                BaseExpression initialiserExpression)
   {
     LocalVariable variable = new LocalVariable(this,
@@ -51,7 +52,7 @@ public class Code
                                                keyword,
                                                name,
                                                arrayMatrix,
-                                               asteriskCount,
+                                               pointerCount,
                                                initialiserExpression);
     statements.add(variable);
     if (currentRoutine != null)
@@ -63,7 +64,7 @@ public class Code
   public void addFileVariable(SixteenHighKeywordCode keyword,
                               String name,
                               List<Long> arrayMatrix,
-                              int asteriskCount,
+                              int pointerCount,
                               BaseExpression initialiserExpression)
   {
     FileVariable variable = new FileVariable(this,
@@ -71,7 +72,7 @@ public class Code
                                              keyword,
                                              name,
                                              arrayMatrix,
-                                             asteriskCount,
+                                             pointerCount,
                                              initialiserExpression);
     statements.add(variable);
     fileVariables.add(variable);
@@ -80,7 +81,7 @@ public class Code
   public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword,
                                           String name,
                                           List<Long> arrayMatrix,
-                                          int asteriskCount,
+                                          int pointerCount,
                                           BaseExpression initialiserExpression)
   {
     GlobalVariable variable = new GlobalVariable(this,
@@ -88,7 +89,7 @@ public class Code
                                                  keyword,
                                                  name,
                                                  arrayMatrix,
-                                                 asteriskCount,
+                                                 pointerCount,
                                                  initialiserExpression);
     statements.add(variable);
     return variable;
@@ -128,6 +129,13 @@ public class Code
   public Statement getLast()
   {
     return statements.get(statements.size() - 1);
+  }
+
+  public Statement popLast()
+  {
+    Statement last = getLast();
+    statements.remove(statements.size() - 1);
+    return last;
   }
 
   public void addGo(String label)
@@ -209,18 +217,46 @@ public class Code
   {
     StringBuilder builder = new StringBuilder();
     int lines = 0;
+    int depth = 0;
     for (Statement statement : statements)
     {
+      if (statement.isEnd())
+      {
+        depth--;
+        if (depth < 0)
+        {
+          depth = 0;
+        }
+      }
+
+      int apparentDepth = depth;
+      if (statement.isLabel() && depth > 0)
+      {
+        apparentDepth--;
+      }
+
+      StringBuilder tabs = StringUtil.pad("   ", apparentDepth);
+      builder.append(tabs);
       builder.append(statement.print(sixteenHighKeywords));
       builder.append("\n");
       lines++;
+
+      if (statement.isRoutine())
+      {
+        depth++;
+      }
     }
 
     if (lines == 1)
     {
       builder.delete(builder.length() - 1, builder.length());
     }
-    return builder.toString();
+    String s = builder.toString();
+    if (s.endsWith("\n\n"))
+    {
+      s = s.substring(0, s.length() - 1);
+    }
+    return s;
   }
 }
 

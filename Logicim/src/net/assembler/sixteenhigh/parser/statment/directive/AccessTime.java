@@ -1,7 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment.directive;
 
 import net.assembler.sixteenhigh.parser.Code;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.Statement;
 

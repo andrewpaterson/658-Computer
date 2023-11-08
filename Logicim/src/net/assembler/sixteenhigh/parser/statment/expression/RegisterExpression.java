@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.parser.statment.expression;
 
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +9,16 @@ import java.util.List;
 public class RegisterExpression
     implements Expressable
 {
+  public int dereferenceCount;
+  public boolean reference;
   public String registerName;
   public List<Expressable> arrayIndices;
 
-  public RegisterExpression(String registerName)
+  public RegisterExpression(String registerName, int dereferenceCount, boolean reference)
   {
     this.registerName = registerName;
+    this.dereferenceCount = dereferenceCount;
+    this.reference = reference;
     this.arrayIndices = new ArrayList<>();
   }
 
@@ -25,6 +30,8 @@ public class RegisterExpression
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
+    String reference = this.reference ? "&" : "";
+    StringBuilder asterisks = StringUtil.pad("*", dereferenceCount);
     StringBuilder array = new StringBuilder();
     for (Expressable arrayIndex : arrayIndices)
     {
@@ -32,7 +39,7 @@ public class RegisterExpression
       array.append(arrayIndex.print(sixteenHighKeywords));
       array.append("]");
     }
-    return registerName + array.toString();
+    return asterisks + reference + registerName + array.toString();
   }
 }
 

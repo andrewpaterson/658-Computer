@@ -141,7 +141,7 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    validate("", code.print(parser.getKeywords()));
+    validate("p = &p[5]", code.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -156,6 +156,40 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validateTrue(parser.isCompleted());
+    String s = code.print(parser.getKeywords());
+    validate("@sum_even_and_odd\n" +
+             "   int16 i;\n" +
+             "   int16 number;\n" +
+             "   int16 even;\n" +
+             "   int16 odd\n" +
+             "   number = 10;\n" +
+             "   i = 0;\n" +
+             "   even = 0;\n" +
+             "   odd = 0\n" +
+             "   bool b\n" +
+             "loop:\n" +
+             "   b = i\n" +
+             "   b %= 2\n" +
+             "   b ?\n" +
+             "   if= go even_\n" +
+             "   odd += i\n" +
+             "   go done\n" +
+             "even_:\n" +
+             "   even += i\n" +
+             "done:\n" +
+             "   i++;\n" +
+             "   number ?- i\n" +
+             "   if> go loop\n" +
+             "   > odd\n" +
+             "   > even\n" +
+             "   gosub @print_pair\n" +
+             "   return\n" +
+             "end\n" +
+             "\n" +
+             "@@main\n" +
+             "   gosub @sum_even_and_odd\n" +
+             "   return\n" +
+             "end\n", s);
   }
 
   protected static void testPointers()
@@ -169,6 +203,45 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validateTrue(parser.isCompleted());
+    String s = code.print(parser.getKeywords());
+    validate("@routine\n" +
+             "   int16 a;\n" +
+             "   int16* b;\n" +
+             "   int8 d;\n" +
+             "   uint32 e = 85;\n" +
+             "   d = 5;\n" +
+             "   a = 10\n" +
+             "   b = 4096\n" +
+             "   int8 c\n" +
+             "   c = 0\n" +
+             "label:\n" +
+             "   b[c] = a\n" +
+             "   c++\n" +
+             "   c ?- d\n" +
+             "   if< go label\n" +
+             "   b = 0\n" +
+             "   b[2] = 7\n" +
+             "end\n" +
+             "\n" +
+             "int8* @hello = \"Hello\"\n" +
+             "int8* @ten_numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n" +
+             "int8* @vid_mem = 49152\n" +
+             "@another\n" +
+             "   int8* p;\n" +
+             "   p = ten_numbers\n" +
+             "   p = &p[5]\n" +
+             "   int8 a\n" +
+             "   a = p[0]\n" +
+             "   a = *p\n" +
+             "   int32 b\n" +
+             "   b = ten_numbers\n" +
+             "end\n" +
+             "\n" +
+             "@@main\n" +
+             "   gosub @routine\n" +
+             "   gosub @another\n" +
+             "   return\n" +
+             "end\n", s);
   }
 
   private static void testArrayDeclaration()
@@ -182,6 +255,8 @@ public class ParserTest
     Code code = parser.getCode();
     validateNotNull(code);
     validateTrue(parser.isCompleted());
+    String s = code.print(parser.getKeywords());
+    System.out.print(s);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)

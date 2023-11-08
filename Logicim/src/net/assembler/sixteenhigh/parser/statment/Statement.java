@@ -34,5 +34,20 @@ public abstract class Statement
       return "";
     }
   }
+
+  public boolean isRoutine()
+  {
+    return false;
+  }
+
+  public boolean isEnd()
+  {
+    return false;
+  }
+
+  public boolean isLabel()
+  {
+    return false;
+  }
 }
 

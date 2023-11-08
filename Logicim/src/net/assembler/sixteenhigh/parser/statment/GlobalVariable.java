@@ -14,7 +14,7 @@ public class GlobalVariable
                         SixteenHighKeywordCode type,
                         String name,
                         List<Long> arrayMatrix,
-                        int asteriskCount,
+                        int pointerCount,
                         BaseExpression initialiserExpression)
   {
     super(code,
@@ -22,7 +22,7 @@ public class GlobalVariable
           type,
           name,
           arrayMatrix,
-          asteriskCount,
+          pointerCount,
           initialiserExpression);
   }
 }

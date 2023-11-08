@@ -24,7 +24,7 @@ public class BitCompare
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return register.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword)  + semicolon();
+    return register.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + semicolon();
   }
 }
 

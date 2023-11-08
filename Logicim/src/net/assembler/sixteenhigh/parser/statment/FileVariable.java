@@ -2,7 +2,6 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class FileVariable
                       SixteenHighKeywordCode type,
                       String name,
                       List<Long> arrayMatrix,
-                      int asteriskCount,
+                      int pointerCount,
                       BaseExpression initialiserExpression)
   {
     super(code,
@@ -23,7 +22,7 @@ public class FileVariable
           type,
           name,
           arrayMatrix,
-          asteriskCount,
+          pointerCount,
           initialiserExpression);
   }
 }

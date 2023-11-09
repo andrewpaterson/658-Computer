@@ -18,8 +18,19 @@ public class UnaryExpression
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
+    String leftBracket = "";
+    String rightBracket = "";
+
     String keyword = sixteenHighKeywords.getKeyword(operator);
-    return keyword + expressable.print(sixteenHighKeywords);
+    if (operator == SixteenHighKeywordCode.not)
+    {
+      if (expressable.isLiteral())
+      {
+        leftBracket = "(";
+        rightBracket = ")";
+      }
+    }
+    return keyword + leftBracket + expressable.print(sixteenHighKeywords) + rightBracket;
   }
 }
 

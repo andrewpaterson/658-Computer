@@ -10,5 +10,15 @@ public interface Expressable
   {
     return false;
   }
+
+  default boolean isArrayExpressionInitialiser()
+  {
+    return false;
+  }
+
+  default boolean isLiteral()
+  {
+    return false;
+  }
 }
 

@@ -32,6 +32,26 @@ public abstract class BaseExpression
     }
   }
 
+  protected void printSeparatedExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  {
+    for (Expressable expressable : expressions)
+    {
+      builder.append(expressable.print(sixteenHighKeywords));
+    }
+  }
+
+  protected boolean containsArrayExpressionInitialiser()
+  {
+    for (Expressable expressable : expressions)
+    {
+      if (expressable.isArrayExpressionInitialiser())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   protected void printExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
@@ -53,4 +73,15 @@ public abstract class BaseExpression
   {
     expressions.add(expressable);
   }
+
+  @Override
+  public boolean isLiteral()
+  {
+    if (expressions.size() == 1)
+    {
+      return expressions.get(0).isLiteral();
+    }
+    return false;
+  }
 }
+

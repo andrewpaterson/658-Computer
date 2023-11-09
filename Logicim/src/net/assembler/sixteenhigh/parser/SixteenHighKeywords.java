@@ -188,86 +188,88 @@ public class SixteenHighKeywords
 
   private List<String> defineFollowingIdentifiers()
   {
-    List<String> followingIdentifiers = new ArrayList<>();
-    add(codeToStringMap, followingIdentifiers, go);
-    add(codeToStringMap, followingIdentifiers, test_set);
-    add(codeToStringMap, followingIdentifiers, test_reset);
-    return followingIdentifiers;
+    List<String> list = new ArrayList<>();
+    add(codeToStringMap, list, go);
+    add(codeToStringMap, list, test_set);
+    add(codeToStringMap, list, test_reset);
+    return list;
   }
 
   private List<String> defineFollowingStrings()
   {
-    List<String> followingIdentifiers = new ArrayList<>();
-    add(codeToStringMap, followingIdentifiers, assign);
-    add(codeToStringMap, followingIdentifiers, add_assign);
-    add(codeToStringMap, followingIdentifiers, subtract_assign);
-    add(codeToStringMap, followingIdentifiers, multiply_assign);
-    add(codeToStringMap, followingIdentifiers, divide_assign);
-    add(codeToStringMap, followingIdentifiers, modulus_assign);
-    add(codeToStringMap, followingIdentifiers, shift_left_assign);
-    add(codeToStringMap, followingIdentifiers, shift_right_assign);
-    add(codeToStringMap, followingIdentifiers, ushift_right_assign);
-    add(codeToStringMap, followingIdentifiers, and_assign);
-    add(codeToStringMap, followingIdentifiers, or_assign);
-    add(codeToStringMap, followingIdentifiers, xor_assign);
-    add(codeToStringMap, followingIdentifiers, not_assign);
-    add(codeToStringMap, followingIdentifiers, increment);
-    add(codeToStringMap, followingIdentifiers, decrement);
-    add(codeToStringMap, followingIdentifiers, subtract_compare);
-    add(codeToStringMap, followingIdentifiers, and_compare);
-    add(codeToStringMap, followingIdentifiers, is_true);
-    add(codeToStringMap, followingIdentifiers, is_false);
-    add(codeToStringMap, followingIdentifiers, pull);
-    sortLongestToShortest(followingIdentifiers);
-    return followingIdentifiers;
+    List<String> list = new ArrayList<>();
+    add(codeToStringMap, list, assign);
+    add(codeToStringMap, list, add_assign);
+    add(codeToStringMap, list, subtract_assign);
+    add(codeToStringMap, list, multiply_assign);
+    add(codeToStringMap, list, divide_assign);
+    add(codeToStringMap, list, modulus_assign);
+    add(codeToStringMap, list, shift_left_assign);
+    add(codeToStringMap, list, shift_right_assign);
+    add(codeToStringMap, list, ushift_right_assign);
+    add(codeToStringMap, list, and_assign);
+    add(codeToStringMap, list, or_assign);
+    add(codeToStringMap, list, xor_assign);
+    add(codeToStringMap, list, not_assign);
+    add(codeToStringMap, list, increment);
+    add(codeToStringMap, list, decrement);
+    add(codeToStringMap, list, subtract_compare);
+    add(codeToStringMap, list, and_compare);
+    add(codeToStringMap, list, is_true);
+    add(codeToStringMap, list, is_false);
+    add(codeToStringMap, list, pull);
+    sortLongestToShortest(list);
+    return list;
   }
 
   private List<String> defineDirectiveIdentifiers()
   {
-    List<String> directiveIdentifiers = new ArrayList<>();
-    add(codeToStringMap, directiveIdentifiers, start_address);
-    add(codeToStringMap, directiveIdentifiers, end_address);
-    add(codeToStringMap, directiveIdentifiers, access_mode);
-    add(codeToStringMap, directiveIdentifiers, read_only);
-    add(codeToStringMap, directiveIdentifiers, write_only);
-    add(codeToStringMap, directiveIdentifiers, read_write);
-    add(codeToStringMap, directiveIdentifiers, access_time);
-    return directiveIdentifiers;
+    List<String> list = new ArrayList<>();
+    add(codeToStringMap, list, start_address);
+    add(codeToStringMap, list, end_address);
+    add(codeToStringMap, list, access_mode);
+    add(codeToStringMap, list, read_only);
+    add(codeToStringMap, list, write_only);
+    add(codeToStringMap, list, read_write);
+    add(codeToStringMap, list, access_time);
+    return list;
   }
 
   private List<String> defineAccessMode()
   {
-    List<String> accessMode = new ArrayList<>();
-    add(codeToStringMap, accessMode, read_only);
-    add(codeToStringMap, accessMode, write_only);
-    add(codeToStringMap, accessMode, read_write);
-    return accessMode;
+    List<String> list = new ArrayList<>();
+    add(codeToStringMap, list, read_only);
+    add(codeToStringMap, list, write_only);
+    add(codeToStringMap, list, read_write);
+    return list;
   }
 
   private List<String> defineUnaryOperators()
   {
-    List<String> unaryOperators = new ArrayList<>();
-    add(codeToStringMap, unaryOperators, add);
-    add(codeToStringMap, unaryOperators, subtract);
-    add(codeToStringMap, unaryOperators, not);
-    return unaryOperators;
+    List<String> list = new ArrayList<>();
+    add(codeToStringMap, list, add);
+    add(codeToStringMap, list, subtract);
+    add(codeToStringMap, list, not);
+    add(codeToStringMap, list, shift_left);
+    add(codeToStringMap, list, shift_right);
+    add(codeToStringMap, list, ushift_right);
+    sortLongestToShortest(list);
+    return list;
   }
 
   private List<String> defineBinaryOperators()
   {
-    List<String> binaryOperators = new ArrayList<>();
-    add(codeToStringMap, binaryOperators, add);
-    add(codeToStringMap, binaryOperators, subtract);
-    add(codeToStringMap, binaryOperators, multiply);
-    add(codeToStringMap, binaryOperators, divide);
-    add(codeToStringMap, binaryOperators, modulus);
-    add(codeToStringMap, binaryOperators, shift_left);
-    add(codeToStringMap, binaryOperators, shift_right);
-    add(codeToStringMap, binaryOperators, ushift_right);
-    add(codeToStringMap, binaryOperators, and);
-    add(codeToStringMap, binaryOperators, or);
-    add(codeToStringMap, binaryOperators, xor);
-    return binaryOperators;
+    List<String> list = new ArrayList<>();
+    add(codeToStringMap, list, add);
+    add(codeToStringMap, list, subtract);
+    add(codeToStringMap, list, multiply);
+    add(codeToStringMap, list, divide);
+    add(codeToStringMap, list, modulus);
+    add(codeToStringMap, list, and);
+    add(codeToStringMap, list, or);
+    add(codeToStringMap, list, xor);
+    sortLongestToShortest(list);
+    return list;
   }
 
   private boolean add(Map<SixteenHighKeywordCode, String> codeToStringMap, List<String> identifiers, SixteenHighKeywordCode keywordCode)

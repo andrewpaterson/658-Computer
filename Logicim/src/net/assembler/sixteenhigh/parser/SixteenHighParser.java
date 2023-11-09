@@ -838,7 +838,7 @@ public class SixteenHighParser
     }
 
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getIdentifier(keywords.unaryStrings, index, true);
+    Tristate result = textParser.getExactCharacterSequence(keywords.unaryStrings, index, true);
     SixteenHighKeywordCode keyword;
     if (result == TRUE)
     {
@@ -1025,7 +1025,7 @@ public class SixteenHighParser
   private ParseResult parseBinaryOperator(ExpressablePointer expressablePointer)
   {
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getIdentifier(keywords.binaryString, index, true);
+    Tristate result = textParser.getExactCharacterSequence(keywords.binaryString, index, true);
     SixteenHighKeywordCode keyword;
     if (result == TRUE)
     {

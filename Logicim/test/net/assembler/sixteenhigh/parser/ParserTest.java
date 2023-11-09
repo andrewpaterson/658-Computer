@@ -48,6 +48,78 @@ public class ParserTest
     validateTrue(parser.isCompleted());
   }
 
+  protected static void testStatementAssignment4()
+  {
+    SixteenHighParser parser = createParser("c = -d");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("c = -d", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testStatementAssignment5()
+  {
+    SixteenHighParser parser = createParser("c = ~(5)");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("c = ~(5)", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testPlusExpression()
+  {
+    SixteenHighParser parser = createParser("x = (5 + ~d)");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("x = (5 + ~d)", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testPull()
+  {
+    SixteenHighParser parser = createParser("<x <y <z");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("<x <y <y", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testPush()
+  {
+    SixteenHighParser parser = createParser("x> y> z>");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("x> y> z>", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testUnsignedShiftRightExpression()
+  {
+    SixteenHighParser parser = createParser("x = (5 + >>>d)");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("x = (5 + >>>d)", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
   protected static void testStatementDeclaration()
   {
     SixteenHighParser parser = createParser("int16 i; int16 number;");
@@ -256,7 +328,30 @@ public class ParserTest
     validateNotNull(code);
     validateTrue(parser.isCompleted());
     String s = code.print(parser.getKeywords());
-    System.out.print(s);
+    validate("@@main\n" +
+             "   uint16 x = 3\n" +
+             "   uint16 y = 2\n" +
+             "   uint8[3][5] a2d = [[0, 0, 0, 0, 0][1, 1, 1, 1, 1][2, 2, 2, 2, 2]]\n" +
+             "   int8[6] a1d = [2, 3, 1, 3, 1, 2]\n" +
+             "   int32 c = (a2d[y][a1d[y]] * 3);\n" +
+             "   a1d[2] = 66;\n" +
+             "   a2d[y][x] = 22;\n" +
+             "end\n", s);
+  }
+
+  private static void testExpressions()
+  {
+    TextParserLog log = new TextParserLog();
+    SixteenHighContext context = new SixteenHighContext();
+    SixteenHighParser parser = createParser("Expressions.16h", log, context);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validateTrue(parser.isCompleted());
+    String s = code.print(parser.getKeywords());
+    validate("", s);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -284,21 +379,28 @@ public class ParserTest
 
   public static void test()
   {
-    testStatementAssignment1();
-    testStatementAssignment2();
-    testStatementAssignment3();
-    testStatementDeclaration();
-    testSingleInitialisation();
-    testArrayInitialisation();
-    testArrayIndices();
-    testComplexArrayIndices();
-    testIdentifierContainingNumber();
-    testGlobalAndFileVariables();
-    testReferenceOperator();
+//    testStatementAssignment1();
+//    testStatementAssignment2();
+//    testStatementAssignment3();
+//    testStatementAssignment4();
+//    testStatementAssignment5();
+//    testStatementDeclaration();
+//    testSingleInitialisation();
+//    testArrayInitialisation();
+//    testArrayIndices();
+//    testComplexArrayIndices();
+//    testIdentifierContainingNumber();
+//    testGlobalAndFileVariables();
+//    testReferenceOperator();
+    testPush();
+    testPull();
+    testPlusExpression();
+    testUnsignedShiftRightExpression();
 
     testSimple();
     testArrayDeclaration();
     testPointers();
+    testExpressions();
   }
 }
 

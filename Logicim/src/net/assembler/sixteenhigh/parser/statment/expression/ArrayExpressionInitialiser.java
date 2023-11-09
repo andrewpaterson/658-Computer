@@ -15,9 +15,22 @@ public class ArrayExpressionInitialiser
   {
     StringBuilder builder = new StringBuilder();
     builder.append("[");
-    printCommaSeparatedExpressions(sixteenHighKeywords, builder);
+    if (containsArrayExpressionInitialiser())
+    {
+      printSeparatedExpressions(sixteenHighKeywords, builder);
+    }
+    else
+    {
+      printCommaSeparatedExpressions(sixteenHighKeywords, builder);
+    }
     builder.append("]");
     return builder.toString();
+  }
+
+  @Override
+  public boolean isArrayExpressionInitialiser()
+  {
+    return true;
   }
 }
 

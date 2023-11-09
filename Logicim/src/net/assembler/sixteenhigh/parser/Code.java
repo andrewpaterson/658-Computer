@@ -7,6 +7,7 @@ import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
 import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
+import net.assembler.sixteenhigh.parser.statment.expression.PullExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
 import net.common.util.StringUtil;
 
@@ -160,7 +161,7 @@ public class Code
 
   public void addPull(RegisterExpression identifier)
   {
-    statements.add(new Pull(this, statementIndex++, identifier));
+    statements.add(new Pull(this, statementIndex++, identifier, new PullExpression()));
   }
 
   public void addBitCompare(RegisterExpression register, SixteenHighKeywordCode keyword)

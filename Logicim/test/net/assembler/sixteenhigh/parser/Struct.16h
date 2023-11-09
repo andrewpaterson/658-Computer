@@ -1,20 +1,23 @@
 $start_address 0x800
 
-#party_address
+struct party_address
     int8* line1
     int8* line2
     int16 country_number
 end
 
-#person
+struct person
     int8* name
     int8 age
     party_address address
+	int[20] guid
 end
 
-int8*	henry_name = "Hello"
+int8*	henry_name = "Henry"
 
-@person henry
+@person[3] three_people
+
+person* henry = &person[0]
 henry.age = 6
 henry.name = henry_name
 
@@ -27,6 +30,6 @@ end
 
 @@main:
    gosub @run_me
-   return 0
+   return
 end
 

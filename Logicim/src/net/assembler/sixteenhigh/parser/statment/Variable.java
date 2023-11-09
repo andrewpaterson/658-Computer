@@ -48,7 +48,10 @@ public class Variable
     StringBuilder initialiser = new StringBuilder();
     if (initialiserExpression != null)
     {
-      initialiser.append(" = ");
+      if (initialiserExpression.isAssignment())
+      {
+        initialiser.append(" = ");
+      }
       initialiser.append(initialiserExpression.print(sixteenHighKeywords));
     }
 

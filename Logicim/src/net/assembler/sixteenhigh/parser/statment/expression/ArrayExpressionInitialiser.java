@@ -2,12 +2,18 @@ package net.assembler.sixteenhigh.parser.statment.expression;
 
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArrayExpressionInitialiser
     extends BaseExpression
 {
+  public List<Expressable> expressions;
+
   public ArrayExpressionInitialiser()
   {
     super();
+    expressions = new ArrayList<>();
   }
 
   @Override
@@ -15,13 +21,13 @@ public class ArrayExpressionInitialiser
   {
     StringBuilder builder = new StringBuilder();
     builder.append("[");
-    if (containsArrayExpressionInitialiser())
+    if (containsArrayExpressionInitialiser(expressions))
     {
-      printSeparatedExpressions(sixteenHighKeywords, builder);
+      printSeparatedExpressions(expressions, sixteenHighKeywords, builder);
     }
     else
     {
-      printCommaSeparatedExpressions(sixteenHighKeywords, builder);
+      printCommaSeparatedExpressions(expressions, sixteenHighKeywords, builder);
     }
     builder.append("]");
     return builder.toString();
@@ -29,6 +35,27 @@ public class ArrayExpressionInitialiser
 
   @Override
   public boolean isArrayExpressionInitialiser()
+  {
+    return true;
+  }
+
+  public void add(Expressable expressable)
+  {
+    expressions.add(expressable);
+  }
+
+  @Override
+  public boolean isLiteral()
+  {
+    if (expressions.size() == 1)
+    {
+      return expressions.get(0).isLiteral();
+    }
+    return false;
+  }
+
+  @Override
+  public boolean isAssignment()
   {
     return true;
   }

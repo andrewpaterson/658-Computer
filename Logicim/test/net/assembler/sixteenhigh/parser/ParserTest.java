@@ -222,6 +222,18 @@ public class ParserTest
     validateTrue(parser.isCompleted());
   }
 
+  private static void testPullAfterRegisterDeclaration()
+  {
+    SixteenHighParser parser = createParser("int8* address <");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validate("int8* address<", code.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
   protected static void testSimple()
   {
     TextParserLog log = new TextParserLog();
@@ -389,6 +401,57 @@ public class ParserTest
              "end\n", s);
   }
 
+  private static void testStack()
+  {
+    TextParserLog log = new TextParserLog();
+    SixteenHighContext context = new SixteenHighContext();
+    SixteenHighParser parser = createParser("Stack.16h", log, context);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Code code = parser.getCode();
+    validateNotNull(code);
+    validateTrue(parser.isCompleted());
+    String s = code.print(parser.getKeywords());
+    validate("$start_address 0x800\n" +
+             "@count_pointless\n" +
+             "   int16 start\n" +
+             "   int16 _end\n" +
+             "   int8 value\n" +
+             "   start<\n" +
+             "   _end<\n" +
+             "   int8* address<\n" +
+             "   int16 i = start;\n" +
+             "loop:\n" +
+             "   address[i] = value;\n" +
+             "   i++\n" +
+             "   i ?- (_end + 3)\n" +
+             "   if<= go loop\n" +
+             "   i -= start\n" +
+             "   > i\n" +
+             "   return\n" +
+             "end\n" +
+             "\n" +
+             "@@main\n" +
+             "   > 9\n" +
+             "   > 23\n" +
+             "   > 0\n" +
+             "   gosub count_pointless\n" +
+             "   int16 count<\n" +
+             "   > 9\n" +
+             "   > 23\n" +
+             "   > 0\n" +
+             "   gosub count_pointless\n" +
+             "   count<\n" +
+             "   int32 number;\n" +
+             "   int32 another\n" +
+             "   number = 5\n" +
+             "   another = 6\n" +
+             "   number = (number + ((3 + 6) * another) / 2)\n" +
+             "   number = (number + temp1)\n" +
+             "end\n", s);
+  }
+
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
   {
     ClassInspector classInspector = ClassInspector.forClass(ParserTest.class);
@@ -431,11 +494,13 @@ public class ParserTest
     testPull();
     testPlusExpression();
     testUnsignedShiftRightExpression();
+    testPullAfterRegisterDeclaration();
 
     testSimple();
     testArrayDeclaration();
     testPointers();
     testExpressions();
+    testStack();
   }
 }
 

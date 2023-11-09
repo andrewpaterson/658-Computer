@@ -2,20 +2,16 @@ package net.assembler.sixteenhigh.parser.statment.expression;
 
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseExpression
     implements Expressable
 {
-  public List<Expressable> expressions;
-
   public BaseExpression()
   {
-    expressions = new ArrayList<>();
   }
 
-  protected void printCommaSeparatedExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printCommaSeparatedExpressions(List<Expressable> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
     for (Expressable expressable : expressions)
@@ -32,7 +28,7 @@ public abstract class BaseExpression
     }
   }
 
-  protected void printSeparatedExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printSeparatedExpressions(List<Expressable> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     for (Expressable expressable : expressions)
     {
@@ -40,7 +36,7 @@ public abstract class BaseExpression
     }
   }
 
-  protected boolean containsArrayExpressionInitialiser()
+  protected boolean containsArrayExpressionInitialiser(List<Expressable> expressions)
   {
     for (Expressable expressable : expressions)
     {
@@ -52,7 +48,7 @@ public abstract class BaseExpression
     return false;
   }
 
-  protected void printExpressions(SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printExpressions(List<Expressable> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
     for (Expressable expressable : expressions)
@@ -69,19 +65,11 @@ public abstract class BaseExpression
     }
   }
 
-  public void add(Expressable expressable)
-  {
-    expressions.add(expressable);
-  }
+  public abstract void add(Expressable expressable);
 
   @Override
-  public boolean isLiteral()
-  {
-    if (expressions.size() == 1)
-    {
-      return expressions.get(0).isLiteral();
-    }
-    return false;
-  }
+  public abstract boolean isLiteral();
+
+  public abstract boolean isAssignment();
 }
 

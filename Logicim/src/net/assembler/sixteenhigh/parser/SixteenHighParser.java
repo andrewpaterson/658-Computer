@@ -790,6 +790,17 @@ public class SixteenHighParser
     {
       return _error();
     }
+
+    result = textParser.getExactCharacterSequence(keywords.pull());
+    if (result == TRUE)
+    {
+      expressionPointer.setExpression(new PullExpression());
+      return _true();
+    }
+    else if (result == ERROR)
+    {
+      return _error();
+    }
     else
     {
       return _false();

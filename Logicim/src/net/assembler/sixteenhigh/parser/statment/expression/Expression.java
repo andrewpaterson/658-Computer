@@ -2,12 +2,18 @@ package net.assembler.sixteenhigh.parser.statment.expression;
 
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Expression
     extends BaseExpression
 {
+  public List<Expressable> expressions;
+
   public Expression()
   {
     super();
+    expressions = new ArrayList<>();
   }
 
   @Override
@@ -18,7 +24,7 @@ public class Expression
     {
       builder.append("(");
     }
-    printExpressions(sixteenHighKeywords, builder);
+    printExpressions(expressions, sixteenHighKeywords, builder);
     if (expressions.size() > 1)
     {
       builder.append(")");
@@ -32,5 +38,25 @@ public class Expression
     return true;
   }
 
+  public void add(Expressable expressable)
+  {
+    expressions.add(expressable);
+  }
+
+  @Override
+  public boolean isLiteral()
+  {
+    if (expressions.size() == 1)
+    {
+      return expressions.get(0).isLiteral();
+    }
+    return false;
+  }
+
+  @Override
+  public boolean isAssignment()
+  {
+    return true;
+  }
 }
 

@@ -153,14 +153,14 @@ public class Code
     statements.add(new Ret(this, statementIndex++));
   }
 
-  public void addPush(RegisterExpression identifier)
+  public void addPush(Expression identifier)
   {
     statements.add(new Push(this, statementIndex++, identifier));
   }
 
-  public void addPull(String register)
+  public void addPull(RegisterExpression identifier)
   {
-    statements.add(new Pull(this, statementIndex++, register));
+    statements.add(new Pull(this, statementIndex++, identifier));
   }
 
   public void addBitCompare(RegisterExpression register, SixteenHighKeywordCode keyword)

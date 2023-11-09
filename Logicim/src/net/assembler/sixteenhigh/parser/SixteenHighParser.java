@@ -108,6 +108,7 @@ public class SixteenHighParser
       {
         lastStatement = code.getLast();
         canParseInterStatement = true;
+        //noinspection UnnecessaryContinue
         continue;
       }
       else if (parseResult.isError())
@@ -135,8 +136,8 @@ public class SixteenHighParser
     Tristate result = textParser.getExactIdentifier(keywords.end(), true);
     if (result == TRUE)
     {
-      result = end(end);
-      return parseResult(result);
+      code.addEnd();
+      return _true();
     }
     else if (result == ERROR)
     {
@@ -145,19 +146,6 @@ public class SixteenHighParser
     else
     {
       return _false();
-    }
-  }
-
-  private Tristate end(SixteenHighKeywordCode keyword)
-  {
-    if (keyword == end)
-    {
-      code.addEnd();
-      return TRUE;
-    }
-    else
-    {
-      return FALSE;
     }
   }
 
@@ -342,20 +330,20 @@ public class SixteenHighParser
   {
     if (keyword == push)
     {
-      RegisterExpressionPointer expressionPointer = new RegisterExpressionPointer();
-      ParseResult parseResult = parseRegister(expressionPointer);
-      if (parseResult.isError())
+      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      ParseResult parseResult = parseInitialExpression(expressionPointer);
+      if (parseResult.isTrue())
       {
-        return parseResult;
+        code.addPush((Expression) expressionPointer.expression);
+        return _true();
       }
-      else if (parseResult.isFalse())
+      else if (parseResult.isError())
       {
-        return _error("Expected identifier.");
+        return _error();
       }
       else
       {
-        code.addPush(expressionPointer.registerExpression);
-        return _true();
+        return _error("Expected expression.");
       }
     }
     else
@@ -364,25 +352,12 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult pullStatement(SixteenHighKeywordCode keyword)
+  private ParseResult pullExpression(RegisterExpression registerExpression, SixteenHighKeywordCode keyword)
   {
     if (keyword == pull)
     {
-      StringZero stringZero = new StringZero();
-      Tristate state = textParser.getIdentifier(stringZero, true);
-      if (state == ERROR)
-      {
-        return _error();
-      }
-      else if (state == FALSE)
-      {
-        return _error("Expected identifier.");
-      }
-      else
-      {
-        code.addPull(stringZero.toString());
-        return _true();
-      }
+      code.addPull(registerExpression);
+      return _true();
     }
     else
     {
@@ -488,7 +463,7 @@ public class SixteenHighParser
         return parseResult;
       }
 
-      int pointerCount = asteriskCount(true);
+      int pointerCount = asteriskCount();
 
       StringZero registerNameZero = new StringZero();
       parseResult = blockIdentifier(registerNameZero, true);
@@ -535,12 +510,9 @@ public class SixteenHighParser
     return _false();
   }
 
-  private int asteriskCount(boolean skipWhiteSpace)
+  private int asteriskCount()
   {
-    if (skipWhiteSpace)
-    {
-      textParser.skipWhiteSpace();
-    }
+    textParser.skipWhiteSpace();
 
     int asteriskCount = 0;
     for (; ; )
@@ -1043,22 +1015,6 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseResult(Tristate result)
-  {
-    if (result == TRUE)
-    {
-      return _true();
-    }
-    else if (result == ERROR)
-    {
-      return _error();
-    }
-    else
-    {
-      return _false();
-    }
-  }
-
   private ParseResult parseArrayInitialiser(ArrayExpressionInitialiser arrayExpressionInitialiser)
   {
     Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
@@ -1119,7 +1075,7 @@ public class SixteenHighParser
 
   private ParseResult parseRegister(RegisterExpressionPointer expressionPointer)
   {
-    int dereferenceCount = asteriskCount(true);
+    int dereferenceCount = asteriskCount();
 
     boolean reference = false;
     if (dereferenceCount == 0)
@@ -1221,6 +1177,16 @@ public class SixteenHighParser
       }
 
       parseResult = numberCompare(registerExpression, keyword);
+      if (parseResult.isTrue())
+      {
+        return _true();
+      }
+      else if (parseResult.isError())
+      {
+        return _error("Expected %s.", getKeywordNames(keywords.getNumberCompares()));
+      }
+
+      parseResult = pullExpression(registerExpression, keyword);
       if (parseResult.isTrue())
       {
         return _true();

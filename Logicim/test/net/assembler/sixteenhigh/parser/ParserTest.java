@@ -86,19 +86,21 @@ public class ParserTest
 
   protected static void testPull()
   {
-    SixteenHighParser parser = createParser("x< y< z<");
+    SixteenHighParser parser = createParser("x< *p[2]< z<;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    validate("<x <y <y", code.print(parser.getKeywords()));
+    validate("x<\n" +
+             "*p[2]<\n" +
+             "z<;\n", code.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
   protected static void testPush()
   {
-    SixteenHighParser parser = createParser(">x >*p[2] >y;");
+    SixteenHighParser parser = createParser(">x >*p[2] >y >1;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -106,7 +108,8 @@ public class ParserTest
     validateNotNull(code);
     validate("> x\n" +
              "> *p[2]\n" +
-             "> y;\n", code.print(parser.getKeywords()));
+             "> y\n" +
+             "> 1;\n", code.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -353,7 +356,37 @@ public class ParserTest
     validateNotNull(code);
     validateTrue(parser.isCompleted());
     String s = code.print(parser.getKeywords());
-    validate("", s);
+    validate("@@main\n" +
+             "   uint16 c;\n" +
+             "   uint16 d\n" +
+             "   int32 x = (c + d)\n" +
+             "   int64 @@q\n" +
+             "   x += ~(5)\n" +
+             "   c = -d\n" +
+             "   c++;\n" +
+             "   x = ~x\n" +
+             "   x = (5 + ~d)\n" +
+             "   x = (5 + >>>d)\n" +
+             "   d <<= d\n" +
+             "   c >>>= d;\n" +
+             "   @@q = (d * c)\n" +
+             "   d = (c + (5 * x) - 1)\n" +
+             "   > x\n" +
+             "   > c\n" +
+             "   > d\n" +
+             "   return\n" +
+             "end\n" +
+             "\n" +
+             "@array\n" +
+             "   uint8* xxx\n" +
+             "   int32 y = 3\n" +
+             "   y = (y + y - y + y - y)\n" +
+             "   xxx[0] = 1\n" +
+             "   xxx[1] = 2\n" +
+             "   xxx[2] = 3\n" +
+             "   xxx[3] = 0\n" +
+             "   xxx[(xxx[y] + y)] = 2\n" +
+             "end\n", s);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -381,19 +414,19 @@ public class ParserTest
 
   public static void test()
   {
-//    testStatementAssignment1();
-//    testStatementAssignment2();
-//    testStatementAssignment3();
-//    testStatementAssignment4();
-//    testStatementAssignment5();
-//    testStatementDeclaration();
-//    testSingleInitialisation();
-//    testArrayInitialisation();
-//    testArrayIndices();
-//    testComplexArrayIndices();
-//    testIdentifierContainingNumber();
-//    testGlobalAndFileVariables();
-//    testReferenceOperator();
+    testStatementAssignment1();
+    testStatementAssignment2();
+    testStatementAssignment3();
+    testStatementAssignment4();
+    testStatementAssignment5();
+    testStatementDeclaration();
+    testSingleInitialisation();
+    testArrayInitialisation();
+    testArrayIndices();
+    testComplexArrayIndices();
+    testIdentifierContainingNumber();
+    testGlobalAndFileVariables();
+    testReferenceOperator();
     testPush();
     testPull();
     testPlusExpression();

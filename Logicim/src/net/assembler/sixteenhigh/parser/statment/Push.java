@@ -2,23 +2,23 @@ package net.assembler.sixteenhigh.parser.statment;
 
 import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
-import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.assembler.sixteenhigh.parser.statment.expression.Expression;
 
 public class Push
     extends Statement
 {
-  protected RegisterExpression register;
+  protected Expression expression;
 
-  public Push(Code code, int index, RegisterExpression register)
+  public Push(Code code, int index, Expression expression)
   {
     super(code, index);
-    this.register = register;
+    this.expression = expression;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "> " + register.print(sixteenHighKeywords) + semicolon();
+    return "> " + expression.print(sixteenHighKeywords) + semicolon();
   }
 }
 

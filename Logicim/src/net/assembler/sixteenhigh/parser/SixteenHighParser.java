@@ -342,19 +342,19 @@ public class SixteenHighParser
   {
     if (keyword == push)
     {
-      StringZero stringZero = new StringZero();
-      Tristate state = textParser.getIdentifier(stringZero, true);
-      if (state == ERROR)
+      RegisterExpressionPointer expressionPointer = new RegisterExpressionPointer();
+      ParseResult parseResult = parseRegister(expressionPointer);
+      if (parseResult.isError())
       {
-        return _error();
+        return parseResult;
       }
-      else if (state == FALSE)
+      else if (parseResult.isFalse())
       {
         return _error("Expected identifier.");
       }
       else
       {
-        code.addPush(stringZero.toString());
+        code.addPush(expressionPointer.registerExpression);
         return _true();
       }
     }

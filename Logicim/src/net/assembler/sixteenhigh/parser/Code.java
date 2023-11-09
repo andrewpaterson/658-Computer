@@ -153,9 +153,9 @@ public class Code
     statements.add(new Ret(this, statementIndex++));
   }
 
-  public void addPush(String register)
+  public void addPush(RegisterExpression identifier)
   {
-    statements.add(new Push(this, statementIndex++, register));
+    statements.add(new Push(this, statementIndex++, identifier));
   }
 
   public void addPull(String register)

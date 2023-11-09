@@ -86,7 +86,7 @@ public class ParserTest
 
   protected static void testPull()
   {
-    SixteenHighParser parser = createParser("<x <y <z");
+    SixteenHighParser parser = createParser("x< y< z<");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -98,13 +98,15 @@ public class ParserTest
 
   protected static void testPush()
   {
-    SixteenHighParser parser = createParser("x> y> z>");
+    SixteenHighParser parser = createParser(">x >*p[2] >y;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     Code code = parser.getCode();
     validateNotNull(code);
-    validate("x> y> z>", code.print(parser.getKeywords()));
+    validate("> x\n" +
+             "> *p[2]\n" +
+             "> y;\n", code.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 

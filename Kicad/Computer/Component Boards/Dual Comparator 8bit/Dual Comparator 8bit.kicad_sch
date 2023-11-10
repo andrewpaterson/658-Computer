@@ -1035,10 +1035,6 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 307fd782-817b-4b12-a037-d8148e58baed)
   )
-  (label "GND" (at 168.91 154.305 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 3377b337-9d55-43c6-874e-e15bcfdf290e)
-  )
   (label "GND" (at 104.14 113.665 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 37cc8d73-0f3c-4776-892a-784928dc5f89)
@@ -1442,10 +1438,6 @@
   (label "D5" (at 40.64 130.81 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid ecc3f887-b966-477f-9977-d2eaed4361bd)
-  )
-  (label "3.3V" (at 163.83 154.305 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid edd64632-4e6c-4285-8200-f85f5b7f71c0)
   )
   (label "GND" (at 104.14 108.585 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -2094,50 +2086,6 @@
       (project "Dual Comparator 8bit"
         (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
           (reference "C1") (unit 1)
-        )
-      )
-      (project "Pico Sound"
-        (path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-          (reference "C23") (unit 1)
-        )
-      )
-      (project "Video Timer"
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-          (reference "C?") (unit 1)
-        )
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-          (reference "C42") (unit 1)
-        )
-      )
-      (project "Sound"
-        (path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
-          (reference "C52") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "HCP65:C_0805") (at 163.83 154.305 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid d9f57b76-1905-4c98-ba04-c35131ce9db2)
-    (property "Reference" "C5" (at 166.116 151.765 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "1μF" (at 166.37 156.845 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "SamacSys_Parts:C_0805" (at 180.594 161.925 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 166.0525 153.9875 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid a06093c9-befb-45b2-99a6-0ede9cacfdb9))
-    (pin "2" (uuid 12fefa91-b3b4-4d5e-a8b8-d1f9b90d4b3c))
-    (instances
-      (project "Dual Comparator 8bit"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "C5") (unit 1)
         )
       )
       (project "Pico Sound"

@@ -92,6 +92,17 @@ public class SixteenHighParser
         return parseResult;
       }
 
+      parseResult = parseStruct();
+      if (parseResult.isTrue())
+      {
+        canParseInterStatement = true;
+        continue;
+      }
+      else if (parseResult.isError())
+      {
+        return parseResult;
+      }
+
       parseResult = parseLabel();
       if (parseResult.isTrue())
       {
@@ -137,6 +148,24 @@ public class SixteenHighParser
     if (result == TRUE)
     {
       code.addEnd();
+      return _true();
+    }
+    else if (result == ERROR)
+    {
+      return _error();
+    }
+    else
+    {
+      return _false();
+    }
+  }
+
+  private ParseResult parseStruct()
+  {
+    Tristate result = textParser.getExactIdentifier(keywords.struct(), true);
+    if (result == TRUE)
+    {
+      code.addStruct();
       return _true();
     }
     else if (result == ERROR)

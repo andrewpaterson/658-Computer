@@ -63,6 +63,7 @@ public enum SixteenHighKeywordCode
   push,               // >
   ret,                // return
   end,
+  struct,
   start_address,
   end_address,
   access_mode,

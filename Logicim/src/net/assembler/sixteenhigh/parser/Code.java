@@ -9,6 +9,7 @@ import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
 import net.assembler.sixteenhigh.parser.statment.expression.PullExpression;
 import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.assembler.sixteenhigh.parser.types.Struct;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
@@ -22,7 +23,9 @@ public class Code
   protected String filename;
   protected int statementIndex;
   protected List<Routine> routines;
+  protected List<Struct> structs;
   protected Routine currentRoutine;
+  protected Struct currentStruct;
 
   public Code(String filename)
   {
@@ -32,7 +35,9 @@ public class Code
     this.labels = new ArrayList<>();
     this.fileVariables = new ArrayList<>();
     this.routines = new ArrayList<>();
+    this.structs = new ArrayList<>();
     this.currentRoutine = null;
+    this.currentStruct = null;
   }
 
   public void addLocalLabel(String name)

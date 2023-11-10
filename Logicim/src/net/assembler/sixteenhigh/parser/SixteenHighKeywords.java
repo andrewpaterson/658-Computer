@@ -13,6 +13,7 @@ public class SixteenHighKeywords
 {
   protected String GO = "go";
   protected String END = "end";
+  protected String STRUCT = "struct";
   protected String OPEN_ROUND = "(";
   protected String CLOSE_ROUND = ")";
   protected String OPEN_SQUARE = "[";
@@ -112,6 +113,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(push, PUSH));
     keywords.add(new KeywordPair(pull, PULL));
     keywords.add(new KeywordPair(end, END));
+    keywords.add(new KeywordPair(struct, STRUCT));
     keywords.add(new KeywordPair(start_address, "$start_address"));
     keywords.add(new KeywordPair(end_address, "$end_address"));
     keywords.add(new KeywordPair(access_mode, "$access_mode"));
@@ -340,6 +342,11 @@ public class SixteenHighKeywords
   public String end()
   {
     return END;
+  }
+
+  public String struct()
+  {
+    return STRUCT;
   }
 
   public String openRound()

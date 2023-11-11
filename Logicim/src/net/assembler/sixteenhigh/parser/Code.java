@@ -23,9 +23,9 @@ public class Code
   protected String filename;
   protected int statementIndex;
   protected List<Routine> routines;
-  protected List<Struct> structs;
+  protected List<StructStatement> structs;
   protected Routine currentRoutine;
-  protected Struct currentStruct;
+  protected StructStatement currentStruct;
 
   public Code(String filename)
   {
@@ -263,6 +263,13 @@ public class Code
       s = s.substring(0, s.length() - 1);
     }
     return s;
+  }
+
+  public void addStruct(Struct struct)
+  {
+    StructStatement structStatement = new StructStatement(this, statementIndex++, struct);
+    structs.add(structStatement);
+    currentStruct = structStatement;
   }
 }
 

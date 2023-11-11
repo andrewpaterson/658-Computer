@@ -4,6 +4,7 @@ import net.assembler.sixteenhigh.parser.literal.LiteralParser;
 import net.assembler.sixteenhigh.parser.literal.LiteralResult;
 import net.assembler.sixteenhigh.parser.statment.*;
 import net.assembler.sixteenhigh.parser.statment.expression.*;
+import net.assembler.sixteenhigh.parser.types.Struct;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
@@ -165,7 +166,7 @@ public class SixteenHighParser
     Tristate result = textParser.getExactIdentifier(keywords.struct(), true);
     if (result == TRUE)
     {
-      code.addStruct();
+      code.addStruct(new Struct());
       return _true();
     }
     else if (result == ERROR)

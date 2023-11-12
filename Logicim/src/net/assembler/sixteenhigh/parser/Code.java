@@ -5,10 +5,7 @@ import net.assembler.sixteenhigh.parser.statment.directive.AccessMode;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
-import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
-import net.assembler.sixteenhigh.parser.statment.expression.Expression;
-import net.assembler.sixteenhigh.parser.statment.expression.PullExpression;
-import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.assembler.sixteenhigh.parser.statment.expression.*;
 import net.assembler.sixteenhigh.parser.types.Struct;
 import net.common.util.StringUtil;
 
@@ -101,11 +98,11 @@ public class Code
     return variable;
   }
 
-  public If addIf(SixteenHighKeywordCode keyword)
+  public IfStatement addIf(SixteenHighKeywordCode keyword)
   {
-    If anIf = new If(this, statementIndex++, keyword);
-    statements.add(anIf);
-    return anIf;
+    IfStatement ifStatement = new IfStatement(this, statementIndex++, keyword);
+    statements.add(ifStatement);
+    return ifStatement;
   }
 
   public void addLocalSubroutine(String name)
@@ -137,21 +134,9 @@ public class Code
     return statements.get(statements.size() - 1);
   }
 
-  public Statement popLast()
+  public void addFlow(FlowExpression flowExpression)
   {
-    Statement last = getLast();
-    statements.remove(statements.size() - 1);
-    return last;
-  }
-
-  public void addGo(String label)
-  {
-    statements.add(new Go(this, statementIndex++, label));
-  }
-
-  public void addGosub(String label)
-  {
-    statements.add(new Gosub(this, statementIndex++, label));
+    statements.add(new FlowStatement(this, statementIndex++, flowExpression));
   }
 
   public void addReturn()

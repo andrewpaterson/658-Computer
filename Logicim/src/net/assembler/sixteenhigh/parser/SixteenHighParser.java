@@ -399,7 +399,7 @@ public class SixteenHighParser
   {
     if (keywords.getIfs().contains(keyword))
     {
-      If anIf = code.addIf(keyword);
+      IfStatement ifStatement = code.addIf(keyword);
       Tristate state = textParser.getExactIdentifier(keywords.go(), true);
       if (state == ERROR)
       {
@@ -410,7 +410,8 @@ public class SixteenHighParser
         return _error("Expected keyword 'go'.");
       }
 
-      ParseResult parseResult = flowStatement(keywords.getKeyword(keywords.go()));
+      FlowExpressionPointer expressionPointer = new FlowExpressionPointer();
+      ParseResult parseResult = parseFlowExpression(keywords.getKeyword(keywords.go()), expressionPointer);
       if (parseResult.isError())
       {
         return parseResult;
@@ -419,7 +420,7 @@ public class SixteenHighParser
       {
         return _error("Expected flow statement.");
       }
-      anIf.setGo((Go) code.popLast());
+      ifStatement.setGo(expressionPointer.flowExpression);
       return _true();
     }
     return _false();
@@ -440,10 +441,25 @@ public class SixteenHighParser
 
   private ParseResult flowStatement(SixteenHighKeywordCode keyword)
   {
+    FlowExpressionPointer expressionPointer = new FlowExpressionPointer();
+    ParseResult parseResult = parseFlowExpression(keyword, expressionPointer);
+    if (parseResult.isTrue())
+    {
+      code.addFlow(expressionPointer.flowExpression);
+      return parseResult;
+    }
+    else
+    {
+      return parseResult;
+    }
+  }
+
+  private ParseResult parseFlowExpression(SixteenHighKeywordCode keyword, FlowExpressionPointer expressionPointer)
+  {
     if (keyword == go)
     {
-      StringZero goLabel = new StringZero();
-      Tristate state = textParser.getIdentifier(goLabel, true);
+      StringZero goLabelZero = new StringZero();
+      Tristate state = textParser.getIdentifier(goLabelZero, true);
       if (state == ERROR)
       {
         return _error();
@@ -454,14 +470,14 @@ public class SixteenHighParser
       }
       else
       {
-        code.addGo(goLabel.toString());
+        expressionPointer.setFlowExpression(new GoExpression(goLabelZero.toString()));
         return _true();
       }
     }
     else if (keyword == gosub)
     {
-      StringZero stringZero = new StringZero();
-      ParseResult parseResult = blockIdentifier(stringZero, true);
+      StringZero gosubLabelZero = new StringZero();
+      ParseResult parseResult = blockIdentifier(gosubLabelZero, true);
       if (parseResult.isError())
       {
         return parseResult;
@@ -472,7 +488,7 @@ public class SixteenHighParser
       }
       else
       {
-        code.addGosub(stringZero.toString());
+        expressionPointer.setFlowExpression(new GosubExpression(gosubLabelZero.toString()));
         return _true();
       }
     }

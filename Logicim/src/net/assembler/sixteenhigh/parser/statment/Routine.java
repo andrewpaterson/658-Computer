@@ -1,33 +1,26 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.parser.Statements;
+import net.assembler.sixteenhigh.parser.statment.scope.VariableScope;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class Routine
+public class Routine
     extends Statement
 {
   protected String name;
-  protected List<LocalVariable> localVariables;
-  protected List<Label> localLabels;
+  protected VariableScope scope;
 
-  public Routine(Code code, int index, String name)
+  public Routine(Statements statements, int index, String name, VariableScope scope)
   {
-    super(code, index);
+    super(statements, index);
     this.name = name;
-    this.localVariables = new ArrayList<>();
-    this.localLabels = new ArrayList<>();
+    this.scope = scope;
   }
 
-  public void addLocalVariable(LocalVariable variable)
+  @Override
+  public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    localVariables.add(variable);
-  }
-
-  public void addLocalLabel(Label label)
-  {
-    localLabels.add(label);
+    return name + ":";
   }
 
   public boolean isRoutine()

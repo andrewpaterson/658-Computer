@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment.directive;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.Statement;
 
@@ -9,9 +9,9 @@ public class StartAddress
 {
   protected int address;
 
-  public StartAddress(Code code, int index, int address)
+  public StartAddress(Statements statements, int index, int address)
   {
-    super(code, index);
+    super(statements, index);
     this.address = address;
   }
 

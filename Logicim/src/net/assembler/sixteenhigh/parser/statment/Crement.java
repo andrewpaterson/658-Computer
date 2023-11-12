@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
@@ -11,12 +11,12 @@ public class Crement
   protected RegisterExpression register;
   protected SixteenHighKeywordCode keyword;
 
-  public Crement(Code code,
+  public Crement(Statements statements,
                  int index,
                  RegisterExpression register,
                  SixteenHighKeywordCode keyword)
   {
-    super(code, index);
+    super(statements, index);
     this.register = register;
     this.keyword = keyword;
   }

@@ -1,14 +1,14 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
 public class End
     extends Statement
 {
-  public End(Code code, int index)
+  public End(Statements statements, int index)
   {
-    super(code, index);
+    super(statements, index);
   }
 
   @Override

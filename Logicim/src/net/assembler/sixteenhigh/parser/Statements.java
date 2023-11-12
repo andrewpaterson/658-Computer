@@ -6,96 +6,65 @@ import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
 import net.assembler.sixteenhigh.parser.statment.expression.*;
-import net.assembler.sixteenhigh.parser.types.Struct;
+import net.assembler.sixteenhigh.parser.statment.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Code
+public class Statements
 {
   protected List<Statement> statements;
-  protected List<Label> labels;
-  protected List<FileVariable> fileVariables;
   protected String filename;
   protected int statementIndex;
-  protected List<Routine> routines;
-  protected List<StructStatement> structs;
-  protected Routine currentRoutine;
-  protected StructStatement currentStruct;
 
-  public Code(String filename)
+  public Statements(String filename)
   {
     this.filename = filename;
     this.statements = new ArrayList<>();
     this.statementIndex = 0;
-    this.labels = new ArrayList<>();
-    this.fileVariables = new ArrayList<>();
-    this.routines = new ArrayList<>();
-    this.structs = new ArrayList<>();
-    this.currentRoutine = null;
-    this.currentStruct = null;
   }
 
   public void addLocalLabel(String name)
   {
     Label label = new Label(this, statementIndex++, name);
     statements.add(label);
-    labels.add(label);
   }
 
-  public void addLocalVariable(SixteenHighKeywordCode keyword,
-                               String name,
-                               List<Long> arrayMatrix,
-                               int pointerCount,
-                               BaseExpression initialiserExpression)
+  public void addPrimitiveVariable(SixteenHighKeywordCode keyword,
+                                   String name,
+                                   VariableScope scope,
+                                   List<Long> arrayMatrix,
+                                   int pointerCount,
+                                   BaseExpression initialiserExpression)
   {
-    LocalVariable variable = new LocalVariable(this,
-                                               statementIndex++,
-                                               keyword,
-                                               name,
-                                               arrayMatrix,
-                                               pointerCount,
-                                               initialiserExpression);
+    Variable variable = new PrimitiveVariable(this,
+                                              statementIndex++,
+                                              keyword,
+                                              name,
+                                              scope,
+                                              arrayMatrix,
+                                              pointerCount,
+                                              initialiserExpression);
     statements.add(variable);
-    if (currentRoutine != null)
-    {
-      currentRoutine.addLocalVariable(variable);
-    }
   }
 
-  public void addFileVariable(SixteenHighKeywordCode keyword,
-                              String name,
-                              List<Long> arrayMatrix,
-                              int pointerCount,
-                              BaseExpression initialiserExpression)
+  public void addStructVariable(String structIdentifier,
+                                String name,
+                                VariableScope scope,
+                                List<Long> arrayMatrix,
+                                int pointerCount,
+                                BaseExpression initialiserExpression)
   {
-    FileVariable variable = new FileVariable(this,
-                                             statementIndex++,
-                                             keyword,
-                                             name,
-                                             arrayMatrix,
-                                             pointerCount,
-                                             initialiserExpression);
+    Variable variable = new StructVariable(this,
+                                           statementIndex++,
+                                           structIdentifier,
+                                           name,
+                                           scope,
+                                           arrayMatrix,
+                                           pointerCount,
+                                           initialiserExpression);
     statements.add(variable);
-    fileVariables.add(variable);
-  }
-
-  public GlobalVariable addGlobalVariable(SixteenHighKeywordCode keyword,
-                                          String name,
-                                          List<Long> arrayMatrix,
-                                          int pointerCount,
-                                          BaseExpression initialiserExpression)
-  {
-    GlobalVariable variable = new GlobalVariable(this,
-                                                 statementIndex++,
-                                                 keyword,
-                                                 name,
-                                                 arrayMatrix,
-                                                 pointerCount,
-                                                 initialiserExpression);
-    statements.add(variable);
-    return variable;
   }
 
   public IfStatement addIf(SixteenHighKeywordCode keyword)
@@ -105,28 +74,10 @@ public class Code
     return ifStatement;
   }
 
-  public void addLocalSubroutine(String name)
+  public void addRoutine(String name, VariableScope scope)
   {
-    LocalSubroutine subroutine = new LocalSubroutine(this, statementIndex++, name);
+    Routine subroutine = new Routine(this, statementIndex++, name, scope);
     statements.add(subroutine);
-    routines.add(subroutine);
-    currentRoutine = subroutine;
-  }
-
-  public GlobalSubroutine addGlobalSubroutine(String name)
-  {
-    GlobalSubroutine subroutine = new GlobalSubroutine(this, statementIndex++, name);
-    statements.add(subroutine);
-    currentRoutine = subroutine;
-    return subroutine;
-  }
-
-  public MainRoutine addMainRoutine(String name)
-  {
-    MainRoutine routine = new MainRoutine(this, statementIndex++, name);
-    statements.add(routine);
-    currentRoutine = routine;
-    return routine;
   }
 
   public Statement getLast()
@@ -232,7 +183,7 @@ public class Code
       builder.append("\n");
       lines++;
 
-      if (statement.isRoutine())
+      if (statement.isRoutine() || statement.isStruct())
       {
         depth++;
       }
@@ -250,11 +201,10 @@ public class Code
     return s;
   }
 
-  public void addStruct(Struct struct)
+  public void addStruct(String structName)
   {
-    StructStatement structStatement = new StructStatement(this, statementIndex++, struct);
-    structs.add(structStatement);
-    currentStruct = structStatement;
+    StructStatement structStatement = new StructStatement(this, statementIndex++, structName);
+    statements.add(structStatement);
   }
 }
 

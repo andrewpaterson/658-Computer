@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.FlowExpression;
 
@@ -9,9 +9,9 @@ public class FlowStatement
 {
   protected FlowExpression flowExpression;
 
-  public FlowStatement(Code code, int index, FlowExpression flowExpression)
+  public FlowStatement(Statements statements, int index, FlowExpression flowExpression)
   {
-    super(code, index);
+    super(statements, index);
     this.flowExpression = flowExpression;
   }
 

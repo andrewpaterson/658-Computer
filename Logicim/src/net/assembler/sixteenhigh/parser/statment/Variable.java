@@ -1,33 +1,33 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.statment.expression.BaseExpression;
+import net.assembler.sixteenhigh.parser.statment.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.List;
 
-public class Variable
+public abstract class Variable
     extends Statement
 {
-  public SixteenHighKeywordCode type;
   public String name;
+  public VariableScope scope;
   public List<Long> arrayMatrix;
   public int pointerCount;
   public BaseExpression initialiserExpression;
 
-  public Variable(Code code,
+  public Variable(Statements statements,
                   int index,
-                  SixteenHighKeywordCode type,
                   String name,
+                  VariableScope scope,
                   List<Long> arrayMatrix,
                   int pointerCount,
                   BaseExpression initialiserExpression)
   {
-    super(code, index);
-    this.type = type;
+    super(statements, index);
     this.name = name;
+    this.scope = scope;
     this.arrayMatrix = arrayMatrix;
     this.pointerCount = pointerCount;
     this.initialiserExpression = initialiserExpression;
@@ -55,7 +55,9 @@ public class Variable
       initialiser.append(initialiserExpression.print(sixteenHighKeywords));
     }
 
-    return sixteenHighKeywords.getKeyword(type) + arrays.toString() + asterisks.toString() + " " + name + initialiser.toString() + semicolon();
+    return getIdentifierString(sixteenHighKeywords) + arrays.toString() + asterisks.toString() + " " + name + initialiser.toString() + semicolon();
   }
+
+  protected abstract String getIdentifierString(SixteenHighKeywords sixteenHighKeywords);
 }
 

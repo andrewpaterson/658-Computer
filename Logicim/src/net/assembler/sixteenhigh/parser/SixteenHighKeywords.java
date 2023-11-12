@@ -429,7 +429,7 @@ public class SixteenHighKeywords
                                   if_not_equals);
   }
 
-  public List<SixteenHighKeywordCode> getRegisterTypes()
+  public List<SixteenHighKeywordCode> getPrimitiveTypes()
   {
     return CollectionUtil.newList(int8,
                                   uint8,

@@ -1,31 +1,41 @@
 $start_address 0x800
 
-struct party_address
+struct @party_address
     int8* line1
     int8* line2
     int16 country_number
 end
 
-struct person
+int8*	@hello = "Hello"
+
+@i_use_structs:
+	@party_address address = 0;
+	@party_address.line1 = @hello
+end
+
+struct @@person
     int8* name
     int8 age
-    party_address address
+    @party_address address
 	int[20] guid
 end
 
 int8*	henry_name = "Henry"
 
-@person[3] three_people
+@@person[3] @three_people
 
-person* henry = &person[0]
+@@person* henry = &three_people[0]
 henry.age = 6
 henry.name = henry_name
 
 @run_me:
-    person* person = &henry
+    @@person* person = henry
     int8* address_line;
 
     address_line = person.address.line1
+	
+	@@person george
+	person = &george
 end
 
 @@main:

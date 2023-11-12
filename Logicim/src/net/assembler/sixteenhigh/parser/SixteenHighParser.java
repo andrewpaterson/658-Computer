@@ -2,9 +2,11 @@ package net.assembler.sixteenhigh.parser;
 
 import net.assembler.sixteenhigh.parser.literal.LiteralParser;
 import net.assembler.sixteenhigh.parser.literal.LiteralResult;
-import net.assembler.sixteenhigh.parser.statment.*;
+import net.assembler.sixteenhigh.parser.statment.ArrayDeclaration;
+import net.assembler.sixteenhigh.parser.statment.IfStatement;
+import net.assembler.sixteenhigh.parser.statment.Statement;
 import net.assembler.sixteenhigh.parser.statment.expression.*;
-import net.assembler.sixteenhigh.parser.types.Struct;
+import net.assembler.sixteenhigh.parser.statment.scope.VariableScope;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
@@ -24,7 +26,7 @@ public class SixteenHighParser
   protected SixteenHighKeywords keywords;
   protected TextParser textParser;
   protected int statementIndex;
-  protected Code code;
+  protected Statements statements;
   protected String filename;
   protected SixteenHighContext context;
   protected LiteralParser literalParser;
@@ -41,7 +43,7 @@ public class SixteenHighParser
     this.textParser = new TextParser(source, log, filename);
     this.literalParser = new LiteralParser(textParser);
 
-    this.code = context.addCode(filename);
+    this.statements = context.addCode(filename);
     this.statementIndex = 0;
     this.allowedSeparator = NUMBER_SEPARATOR_APOSTROPHE;
   }
@@ -118,7 +120,7 @@ public class SixteenHighParser
       parseResult = parseStatement();
       if (parseResult.isTrue())
       {
-        lastStatement = code.getLast();
+        lastStatement = statements.getLast();
         canParseInterStatement = true;
         //noinspection UnnecessaryContinue
         continue;
@@ -148,7 +150,7 @@ public class SixteenHighParser
     Tristate result = textParser.getExactIdentifier(keywords.end(), true);
     if (result == TRUE)
     {
-      code.addEnd();
+      statements.addEnd();
       return _true();
     }
     else if (result == ERROR)
@@ -166,7 +168,18 @@ public class SixteenHighParser
     Tristate result = textParser.getExactIdentifier(keywords.struct(), true);
     if (result == TRUE)
     {
-      code.addStruct(new Struct());
+      StringZero structIdentifierZero = new StringZero();
+      ParseResult parseResult = structIdentifier(structIdentifierZero);
+      if (parseResult.isError())
+      {
+        return _error();
+      }
+      else if (parseResult.isFalse())
+      {
+        return _error("Expected identifier.");
+      }
+
+      statements.addStruct(structIdentifierZero.toString());
       return _true();
     }
     else if (result == ERROR)
@@ -273,7 +286,7 @@ public class SixteenHighParser
       LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
       if (integerLiteral.isTrue())
       {
-        code.addStartAddress((int) integerLiteral.getIntegerLiteral().getValue());
+        statements.addStartAddress((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
       else if (integerLiteral.isError())
@@ -295,7 +308,7 @@ public class SixteenHighParser
       LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
       if (integerLiteral.isTrue())
       {
-        code.addEndAddress((int) integerLiteral.getIntegerLiteral().getValue());
+        statements.addEndAddress((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
       else if (integerLiteral.isError())
@@ -319,7 +332,7 @@ public class SixteenHighParser
       if (state == TRUE)
       {
         SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.accessModes, index);
-        code.addAccessMode(accessMode);
+        statements.addAccessMode(accessMode);
         return TRUE;
       }
       else if (state == ERROR)
@@ -341,7 +354,7 @@ public class SixteenHighParser
       LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
       if (integerLiteral.isTrue())
       {
-        code.addAccessTime((int) integerLiteral.getIntegerLiteral().getValue());
+        statements.addAccessTime((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
       else if (integerLiteral.isError())
@@ -364,7 +377,7 @@ public class SixteenHighParser
       ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
-        code.addPush((Expression) expressionPointer.expression);
+        statements.addPush((Expression) expressionPointer.expression);
         return _true();
       }
       else if (parseResult.isError())
@@ -386,7 +399,7 @@ public class SixteenHighParser
   {
     if (keyword == pull)
     {
-      code.addPull(registerExpression);
+      statements.addPull(registerExpression);
       return _true();
     }
     else
@@ -399,7 +412,7 @@ public class SixteenHighParser
   {
     if (keywords.getIfs().contains(keyword))
     {
-      IfStatement ifStatement = code.addIf(keyword);
+      IfStatement ifStatement = statements.addIf(keyword);
       Tristate state = textParser.getExactIdentifier(keywords.go(), true);
       if (state == ERROR)
       {
@@ -430,7 +443,7 @@ public class SixteenHighParser
   {
     if (keyword == ret)
     {
-      code.addReturn();
+      statements.addReturn();
       return _true();
     }
     else
@@ -445,7 +458,7 @@ public class SixteenHighParser
     ParseResult parseResult = parseFlowExpression(keyword, expressionPointer);
     if (parseResult.isTrue())
     {
-      code.addFlow(expressionPointer.flowExpression);
+      statements.addFlow(expressionPointer.flowExpression);
       return parseResult;
     }
     else
@@ -498,11 +511,11 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult registerDeclaration(SixteenHighKeywordCode keyword)
+  private ParseResult primitiveDeclaration(SixteenHighKeywordCode keyword)
   {
-    if (keywords.getRegisterTypes().contains(keyword))
+    if (keywords.getPrimitiveTypes().contains(keyword))
     {
-      RegisterArrayDeclaration arrayDeclaration = new RegisterArrayDeclaration();
+      ArrayDeclaration arrayDeclaration = new ArrayDeclaration();
       ParseResult parseResult = parseArrayDeclaration(arrayDeclaration);
       if (parseResult.isError())
       {
@@ -528,32 +541,98 @@ public class SixteenHighParser
 
       if (registerName.startsWith("@@"))
       {
-        GlobalVariable globalVariable = code.addGlobalVariable(keyword,
-                                                               registerName,
-                                                               arrayDeclaration.arrayMatrix,
-                                                               pointerCount,
-                                                               expressionPointer.expression);
-        context.addGlobalVariable(globalVariable);
+        statements.addPrimitiveVariable(keyword,
+                                        registerName,
+                                        VariableScope.global,
+                                        arrayDeclaration.arrayMatrix,
+                                        pointerCount,
+                                        expressionPointer.expression);
       }
       else if (registerName.startsWith("@"))
       {
-        code.addFileVariable(keyword,
-                             registerName,
-                             arrayDeclaration.arrayMatrix,
-                             pointerCount,
-                             expressionPointer.expression);
+        statements.addPrimitiveVariable(keyword,
+                                        registerName,
+                                        VariableScope.file,
+                                        arrayDeclaration.arrayMatrix,
+                                        pointerCount,
+                                        expressionPointer.expression);
       }
       else
       {
-        code.addLocalVariable(keyword,
-                              registerName,
-                              arrayDeclaration.arrayMatrix,
-                              pointerCount,
-                              expressionPointer.expression);
+        statements.addPrimitiveVariable(keyword,
+                                        registerName,
+                                        VariableScope.routine,
+                                        arrayDeclaration.arrayMatrix,
+                                        pointerCount,
+                                        expressionPointer.expression);
       }
       return _true();
     }
     return _false();
+  }
+
+  private ParseResult structDeclaration()
+  {
+    StringZero structIdentifierZero = new StringZero();
+    ParseResult parseResult = structIdentifier(structIdentifierZero);
+    if (parseResult.isFalseOrError())
+    {
+      return parseResult;
+    }
+
+    ArrayDeclaration arrayDeclaration = new ArrayDeclaration();
+    parseResult = parseArrayDeclaration(arrayDeclaration);
+    if (parseResult.isError())
+    {
+      return parseResult;
+    }
+
+    int pointerCount = asteriskCount();
+
+    StringZero registerNameZero = new StringZero();
+    parseResult = blockIdentifier(registerNameZero, true);
+    if (parseResult.isFalseOrError())
+    {
+      return parseResult;
+    }
+    String registerName = registerNameZero.toString();
+
+    BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+    parseResult = parseRegisterInitialiser(expressionPointer);
+    if (parseResult.isError())
+    {
+      return parseResult;
+    }
+
+    String structIdentifier = structIdentifierZero.toString();
+    if (registerName.startsWith("@@"))
+    {
+      statements.addStructVariable(structIdentifier,
+                                   registerName,
+                                   VariableScope.global,
+                                   arrayDeclaration.arrayMatrix,
+                                   pointerCount,
+                                   expressionPointer.expression);
+    }
+    else if (registerName.startsWith("@"))
+    {
+      statements.addStructVariable(structIdentifier,
+                                   registerName,
+                                   VariableScope.file,
+                                   arrayDeclaration.arrayMatrix,
+                                   pointerCount,
+                                   expressionPointer.expression);
+    }
+    else
+    {
+      statements.addStructVariable(structIdentifier,
+                                   registerName,
+                                   VariableScope.routine,
+                                   arrayDeclaration.arrayMatrix,
+                                   pointerCount,
+                                   expressionPointer.expression);
+    }
+    return _true();
   }
 
   private int asteriskCount()
@@ -600,24 +679,15 @@ public class SixteenHighParser
     String identifier = zeroIdentifier.toString();
     if (identifier.startsWith("@@"))
     {
-      if (identifier.equalsIgnoreCase("@@main"))
-      {
-        MainRoutine mainRoutine = code.addMainRoutine(identifier);
-        context.addMainRoutine(mainRoutine);
-      }
-      else
-      {
-        GlobalSubroutine globalSubroutine = code.addGlobalSubroutine(identifier);
-        context.addGlobalSubroutine(globalSubroutine);
-      }
+      statements.addRoutine(identifier, VariableScope.global);
     }
     else if (identifier.startsWith("@"))
     {
-      code.addLocalSubroutine(identifier);
+      statements.addRoutine(identifier, VariableScope.file);
     }
     else
     {
-      code.addLocalLabel(identifier);
+      statements.addLocalLabel(identifier);
     }
     return _true();
   }
@@ -706,6 +776,59 @@ public class SixteenHighParser
     }
   }
 
+  private ParseResult structIdentifier(StringZero fullIdentifier)
+  {
+    int at = 0;
+    Tristate state = textParser.getExactCharacter('@', true);
+    if (state == ERROR)
+    {
+      return _error();
+    }
+    else if (state == TRUE)
+    {
+      at++;
+    }
+    else
+    {
+      return _false();
+    }
+
+    state = textParser.getExactCharacter('@', false);
+    if (state == ERROR)
+    {
+      return _error();
+    }
+    if (state == TRUE)
+    {
+      at++;
+    }
+
+    StringZero identifier = new StringZero();
+    state = textParser.getIdentifier(identifier, false);
+    if (state == ERROR)
+    {
+      return _error();
+    }
+    else if (state == FALSE)
+    {
+      return _error("Expected identifier.");
+    }
+    if (at == 1)
+    {
+      fullIdentifier.set("@" + identifier.toString());
+      return _true();
+    }
+    else if (at == 2)
+    {
+      fullIdentifier.set("@@" + identifier.toString());
+      return _true();
+    }
+    else
+    {
+      return _error("Expected identifier.");
+    }
+  }
+
   public Tristate getIdentifier(List<String> allowedIdentifiers,
                                 List<String> allowedStrings,
                                 SixteenHighKeywordCodePointer keywordPointer)
@@ -746,64 +869,78 @@ public class SixteenHighParser
     Tristate result = getIdentifier(keywords.leadingIdentifiers, keywords.leadingStrings, keywordPointer);
     if (result == TRUE)
     {
-      ParseResult parseResult;
-      SixteenHighKeywordCode keyword = keywordPointer.keyword;
-      parseResult = registerDeclaration(keyword);
-      if (parseResult.isTrueOrError())
-      {
-        return parseResult;
-      }
-
-      parseResult = ifStatement(keyword);
-      if (parseResult.isTrueOrError())
-      {
-        return parseResult;
-      }
-
-      parseResult = flowStatement(keyword);
-      if (parseResult.isTrueOrError())
-      {
-        return parseResult;
-      }
-
-      parseResult = returnStatement(keyword);
-      if (parseResult.isTrueOrError())
-      {
-        return parseResult;
-      }
-
-      parseResult = pushStatement(keyword);
-      if (parseResult.isTrueOrError())
-      {
-        return parseResult;
-      }
-
-      return _false();
+      return parseLeadingKeywordStatement(keywordPointer);
     }
     else if (result == ERROR)
     {
       return _error();
     }
-    else
+
+    textParser.pushPosition();
+    ParseResult parseResult = parseStatementStartingWithRegister();
+    if (parseResult.isTrue())
     {
-      textParser.pushPosition();
-      ParseResult parseResult = parseStatementStartingWithRegister();
-      if (parseResult.isTrue())
-      {
-        textParser.passPosition();
-        return parseResult;
-      }
-      else if (parseResult.isError())
-      {
-        textParser.passPosition();
-        return parseResult;
-      }
-      else
-      {
-        textParser.popPosition();
-        return parseResult;
-      }
+      textParser.passPosition();
+      return parseResult;
     }
+    else if (parseResult.isError())
+    {
+      textParser.passPosition();
+      return parseResult;
+    }
+    textParser.popPosition();
+
+    textParser.pushPosition();
+    parseResult = structDeclaration();
+    if (parseResult.isTrue())
+    {
+      textParser.passPosition();
+      return parseResult;
+    }
+    else if (parseResult.isError())
+    {
+      textParser.passPosition();
+      return parseResult;
+    }
+    textParser.popPosition();
+    return parseResult;
+  }
+
+  private ParseResult parseLeadingKeywordStatement(SixteenHighKeywordCodePointer keywordPointer)
+  {
+    ParseResult parseResult;
+    SixteenHighKeywordCode keyword = keywordPointer.keyword;
+    parseResult = primitiveDeclaration(keyword);
+    if (parseResult.isTrueOrError())
+    {
+      return parseResult;
+    }
+
+    parseResult = ifStatement(keyword);
+    if (parseResult.isTrueOrError())
+    {
+      return parseResult;
+    }
+
+    parseResult = flowStatement(keyword);
+    if (parseResult.isTrueOrError())
+    {
+      return parseResult;
+    }
+
+    parseResult = returnStatement(keyword);
+    if (parseResult.isTrueOrError())
+    {
+      return parseResult;
+    }
+
+    parseResult = pushStatement(keyword);
+    if (parseResult.isTrueOrError())
+    {
+      return parseResult;
+    }
+
+    return _false();
   }
 
   private ParseResult parseRegisterInitialiser(BaseExpressionPointer expressionPointer)
@@ -934,7 +1071,7 @@ public class SixteenHighParser
     }
   }
 
-  private ParseResult parseArrayDeclaration(RegisterArrayDeclaration registerArrayDeclaration)
+  private ParseResult parseArrayDeclaration(ArrayDeclaration arrayDeclaration)
   {
     Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
     if (result == TRUE)
@@ -945,8 +1082,8 @@ public class SixteenHighParser
         result = textParser.getExactCharacterSequence(keywords.closeSquare());
         if (result == TRUE)
         {
-          registerArrayDeclaration.addArray(literal.getIntegerLiteral().getValue());
-          return parseArrayDeclaration(registerArrayDeclaration);
+          arrayDeclaration.addArray(literal.getIntegerLiteral().getValue());
+          return parseArrayDeclaration(arrayDeclaration);
         }
         else
         {
@@ -1296,7 +1433,7 @@ public class SixteenHighParser
       ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
-        code.addAssignment(leftExpression, keyword, (Expression) expressionPointer.expression);
+        statements.addAssignment(leftExpression, keyword, (Expression) expressionPointer.expression);
         return _true();
       }
       else if (parseResult.isError())
@@ -1315,7 +1452,7 @@ public class SixteenHighParser
   {
     if (keywords.getBitCompares().contains(keyword))
     {
-      code.addBitCompare(registerExpression, keyword);
+      statements.addBitCompare(registerExpression, keyword);
       return _true();
     }
     return _false();
@@ -1325,7 +1462,7 @@ public class SixteenHighParser
   {
     if (keywords.getCrements().contains(keyword))
     {
-      code.addCrement(registerExpression, keyword);
+      statements.addCrement(registerExpression, keyword);
       return _true();
     }
     return _false();
@@ -1347,15 +1484,15 @@ public class SixteenHighParser
         return _error("Expected Expression.");
       }
 
-      code.addNumberCompare(leftRegisterExpression, (Expression) expressionPointer.expression, keyword);
+      statements.addNumberCompare(leftRegisterExpression, (Expression) expressionPointer.expression, keyword);
       return _true();
     }
     return _false();
   }
 
-  public Code getCode()
+  public Statements getStatements()
   {
-    return code;
+    return statements;
   }
 
   public SixteenHighKeywords getKeywords()
@@ -1388,7 +1525,7 @@ public class SixteenHighParser
     {
       errorPosition = errorPosition.substring(0, index);
     }
-    StringBuilder pad = StringUtil.pad(" ", textParser.getPosition() - startOfLine + 1);
+    StringBuilder pad = StringUtil.pad(" ", textParser.getPosition() - startOfLine);
     pad.append("^");
 
     return "Error at position [" + textParser.getPosition() + "]: Unexpected: " + errorPosition + "\n" + errorLine + "\n" + pad.toString();

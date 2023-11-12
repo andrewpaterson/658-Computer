@@ -1,17 +1,17 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 
 public abstract class Statement
 {
-  protected Code code;
+  protected Statements statements;
   protected int index;
   protected boolean semicolon;
 
-  public Statement(Code code, int index)
+  public Statement(Statements statements, int index)
   {
-    this.code = code;
+    this.statements = statements;
     this.index = index;
     this.semicolon = false;
   }
@@ -36,6 +36,11 @@ public abstract class Statement
   }
 
   public boolean isRoutine()
+  {
+    return false;
+  }
+
+  public boolean isStruct()
   {
     return false;
   }

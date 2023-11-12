@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.FlowExpression;
@@ -11,9 +11,9 @@ public class IfStatement
   protected SixteenHighKeywordCode type;
   protected FlowExpression go;
 
-  public IfStatement(Code code, int index, SixteenHighKeywordCode type)
+  public IfStatement(Statements statements, int index, SixteenHighKeywordCode type)
   {
-    super(code, index);
+    super(statements, index);
     this.type = type;
   }
 

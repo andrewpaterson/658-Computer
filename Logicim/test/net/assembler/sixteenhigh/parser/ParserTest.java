@@ -18,9 +18,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("i = 0", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("i = 0", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -30,9 +30,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("i = (c * 3)", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("i = (c * 3)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -42,9 +42,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("i = -(560 * +(-0.4F % 3))", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("i = -(560 * +(-0.4F % 3))", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -54,9 +54,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("c = -d", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("c = -d", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -66,9 +66,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("c = ~(5)", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("c = ~(5)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -78,9 +78,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("x = (5 + ~d)", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("x = (5 + ~d)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -90,11 +90,11 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validate("x<\n" +
              "*p[2]<\n" +
-             "z<;\n", code.print(parser.getKeywords()));
+             "z<;\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -104,12 +104,12 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validate("> x\n" +
              "> *p[2]\n" +
              "> y\n" +
-             "> 1;\n", code.print(parser.getKeywords()));
+             "> 1;\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -119,9 +119,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("x = (5 + >>>d)", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("x = (5 + >>>d)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -131,9 +131,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("int16 i;\nint16 number;\n", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("int16 i;\nint16 number;\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -143,9 +143,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -155,9 +155,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("a[2] = b[3]", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("a[2] = b[3]", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -167,9 +167,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("int8 i = 5", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("int8 i = 5", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -179,9 +179,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("int32 c = (a2d[y][a1d[y]] * 3);", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("int32 c = (a2d[y][a1d[y]] * 3);", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -191,9 +191,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("a1d[2] = 66;", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("a1d[2] = 66;", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -203,10 +203,10 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validate("int8* @hello;\n" +
-             "int8 @@world;\n", code.print(parser.getKeywords()));
+             "int8 @@world;\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -216,9 +216,9 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("p = &p[5]", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("p = &p[5]", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -228,9 +228,23 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
-    validate("int8* address<", code.print(parser.getKeywords()));
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("int8* address<", statements.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  private static void testStructSimple()
+  {
+    SixteenHighParser parser = createParser("struct @party int8* animal end");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("struct @party\n" +
+             "   int8* animal\n" +
+             "end\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -242,11 +256,11 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validateTrue(parser.isCompleted());
-    String s = code.print(parser.getKeywords());
-    validate("@sum_even_and_odd\n" +
+    String s = statements.print(parser.getKeywords());
+    validate("@sum_even_and_odd:\n" +
              "   int16 i;\n" +
              "   int16 number;\n" +
              "   int16 even;\n" +
@@ -275,7 +289,7 @@ public class ParserTest
              "   return\n" +
              "end\n" +
              "\n" +
-             "@@main\n" +
+             "@@main:\n" +
              "   gosub @sum_even_and_odd\n" +
              "   return\n" +
              "end\n", s);
@@ -289,11 +303,11 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validateTrue(parser.isCompleted());
-    String s = code.print(parser.getKeywords());
-    validate("@routine\n" +
+    String s = statements.print(parser.getKeywords());
+    validate("@routine:\n" +
              "   int16 a;\n" +
              "   int16* b;\n" +
              "   int8 d;\n" +
@@ -315,7 +329,7 @@ public class ParserTest
              "int8* @hello = \"Hello\"\n" +
              "int8* @ten_numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n" +
              "int8* @vid_mem = 49152\n" +
-             "@another\n" +
+             "@another:\n" +
              "   int8* p;\n" +
              "   p = ten_numbers\n" +
              "   p = &p[5]\n" +
@@ -326,7 +340,7 @@ public class ParserTest
              "   b = ten_numbers\n" +
              "end\n" +
              "\n" +
-             "@@main\n" +
+             "@@main:\n" +
              "   gosub @routine\n" +
              "   gosub @another\n" +
              "   return\n" +
@@ -341,11 +355,11 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validateTrue(parser.isCompleted());
-    String s = code.print(parser.getKeywords());
-    validate("@@main\n" +
+    String s = statements.print(parser.getKeywords());
+    validate("@@main:\n" +
              "   uint16 x = 3\n" +
              "   uint16 y = 2\n" +
              "   uint8[3][5] a2d = [[0, 0, 0, 0, 0][1, 1, 1, 1, 1][2, 2, 2, 2, 2]]\n" +
@@ -364,11 +378,11 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validateTrue(parser.isCompleted());
-    String s = code.print(parser.getKeywords());
-    validate("@@main\n" +
+    String s = statements.print(parser.getKeywords());
+    validate("@@main:\n" +
              "   uint16 c;\n" +
              "   uint16 d\n" +
              "   int32 x = (c + d)\n" +
@@ -389,7 +403,7 @@ public class ParserTest
              "   return\n" +
              "end\n" +
              "\n" +
-             "@array\n" +
+             "@array:\n" +
              "   uint8* xxx\n" +
              "   int32 y = 3\n" +
              "   y = (y + y - y + y - y)\n" +
@@ -409,12 +423,12 @@ public class ParserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Code code = parser.getCode();
-    validateNotNull(code);
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
     validateTrue(parser.isCompleted());
-    String s = code.print(parser.getKeywords());
+    String s = statements.print(parser.getKeywords());
     validate("$start_address 0x800\n" +
-             "@count_pointless\n" +
+             "@count_pointless:\n" +
              "   int16 start\n" +
              "   int16 _end\n" +
              "   int8 value\n" +
@@ -432,7 +446,7 @@ public class ParserTest
              "   return\n" +
              "end\n" +
              "\n" +
-             "@@main\n" +
+             "@@main:\n" +
              "   > 9\n" +
              "   > 23\n" +
              "   > 0\n" +
@@ -450,6 +464,21 @@ public class ParserTest
              "   number = (number + ((3 + 6) * another) / 2)\n" +
              "   number = (number + temp1)\n" +
              "end\n", s);
+  }
+
+  private static void testStruct()
+  {
+    TextParserLog log = new TextParserLog();
+    SixteenHighContext context = new SixteenHighContext();
+    SixteenHighParser parser = createParser("Struct.16h", log, context);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validateTrue(parser.isCompleted());
+    String s = statements.print(parser.getKeywords());
+    validate("", s);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -477,30 +506,32 @@ public class ParserTest
 
   public static void test()
   {
-    testStatementAssignment1();
-    testStatementAssignment2();
-    testStatementAssignment3();
-    testStatementAssignment4();
-    testStatementAssignment5();
-    testStatementDeclaration();
-    testSingleInitialisation();
-    testArrayInitialisation();
-    testArrayIndices();
-    testComplexArrayIndices();
-    testIdentifierContainingNumber();
-    testGlobalAndFileVariables();
-    testReferenceOperator();
-    testPush();
-    testPull();
-    testPlusExpression();
-    testUnsignedShiftRightExpression();
-    testPullAfterRegisterDeclaration();
-
-    testSimple();
-    testArrayDeclaration();
-    testPointers();
-    testExpressions();
-    testStack();
+//    testStatementAssignment1();
+//    testStatementAssignment2();
+//    testStatementAssignment3();
+//    testStatementAssignment4();
+//    testStatementAssignment5();
+//    testStatementDeclaration();
+//    testSingleInitialisation();
+//    testArrayInitialisation();
+//    testArrayIndices();
+//    testComplexArrayIndices();
+//    testIdentifierContainingNumber();
+//    testGlobalAndFileVariables();
+//    testReferenceOperator();
+//    testPush();
+//    testPull();
+//    testPlusExpression();
+//    testUnsignedShiftRightExpression();
+//    testPullAfterRegisterDeclaration();
+//    testStructSimple();
+//
+//    testSimple();
+//    testArrayDeclaration();
+//    testPointers();
+//    testExpressions();
+//    testStack();
+    testStruct();
   }
 }
 

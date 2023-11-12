@@ -1,24 +1,29 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
-import net.assembler.sixteenhigh.parser.types.Struct;
+import net.assembler.sixteenhigh.parser.Statements;
 
 public class StructStatement
     extends Statement
 {
-  public Struct struct;
+  public String structName;
 
-  public StructStatement(Code code, int index, Struct struct)
+  public StructStatement(Statements statements, int index, String structName)
   {
-    super(code, index);
-    this.struct = struct;
+    super(statements, index);
+    this.structName = structName;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return null;
+    return "struct " + structName + semicolon();
+  }
+
+  @Override
+  public boolean isStruct()
+  {
+    return true;
   }
 }
 

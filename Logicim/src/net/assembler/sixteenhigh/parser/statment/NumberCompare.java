@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
@@ -13,13 +13,13 @@ public class NumberCompare
   protected Expression right;
   protected SixteenHighKeywordCode keyword;
 
-  public NumberCompare(Code code,
+  public NumberCompare(Statements statements,
                        int index,
                        RegisterExpression leftRegister,
                        Expression right,
                        SixteenHighKeywordCode keyword)
   {
-    super(code, index);
+    super(statements, index);
     this.leftRegister = leftRegister;
     this.right = right;
     this.keyword = keyword;

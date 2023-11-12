@@ -3,11 +3,11 @@ package net.assembler.sixteenhigh.parser.statment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterArrayDeclaration
+public class ArrayDeclaration
 {
   public List<Long> arrayMatrix;
 
-  public RegisterArrayDeclaration()
+  public ArrayDeclaration()
   {
     this.arrayMatrix = new ArrayList<>();
   }

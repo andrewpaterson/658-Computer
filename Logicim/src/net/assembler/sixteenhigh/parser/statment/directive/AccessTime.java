@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment.directive;
 
-import net.assembler.sixteenhigh.parser.Code;
+import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.Statement;
 
@@ -9,9 +9,9 @@ public class AccessTime
 {
   protected int cycles;
 
-  public AccessTime(Code code, int index, int cycles)
+  public AccessTime(Statements statements, int index, int cycles)
   {
-    super(code, index);
+    super(statements, index);
     this.cycles = cycles;
   }
 

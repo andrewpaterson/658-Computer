@@ -1289,37 +1289,69 @@ public class SixteenHighParser
     }
 
     String registerName = registerNameZero.toString();
-    VariableExpression variableExpression = new VariableExpression(registerName, dereferenceCount, reference);
+    VariableMember variableMember = new VariableMember(registerName);
+    VariableExpression variableExpression = new VariableExpression(variableMember, dereferenceCount, reference);
     for (; ; )
     {
-      Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
-      if (result == TRUE)
+      for (; ; )
       {
-        ExpressablePointer expressablePointer = new ExpressablePointer();
-        parseResult = parseUnaryComponent(expressablePointer);
-        if (parseResult.isTrue())
+        Tristate result = textParser.getExactCharacterSequence(keywords.openSquare());
+        if (result == TRUE)
         {
-          result = textParser.getExactCharacterSequence(keywords.closeSquare());
-          if (result == TRUE)
+          ExpressablePointer expressablePointer = new ExpressablePointer();
+          parseResult = parseUnaryComponent(expressablePointer);
+          if (parseResult.isTrue())
           {
-            variableExpression.addArrayIndex(expressablePointer.expressable);
+            result = textParser.getExactCharacterSequence(keywords.closeSquare());
+            if (result == TRUE)
+            {
+              variableMember.addArrayIndex(expressablePointer.expressable);
+            }
+            else if (result == ERROR)
+            {
+              return _error();
+            }
+            else
+            {
+              return _error("Expected: '].");
+            }
           }
-          else if (result == ERROR)
+          else if (parseResult.isError())
           {
-            return _error();
+            return parseResult;
           }
           else
           {
-            return _error("Expected: '].");
+            return _error("Expected Expression.");
           }
         }
-        else if (parseResult.isError())
+        else if (result == ERROR)
         {
-          return parseResult;
+          return _error();
         }
         else
         {
-          return _error("Expected Expression.");
+          break;
+        }
+      }
+
+      Tristate result = textParser.getExactCharacter('.');
+      if (result == TRUE)
+      {
+        StringZero memberNameZero = new StringZero();
+        result = textParser.getIdentifier(memberNameZero, true);
+        if (result == TRUE)
+        {
+          variableMember = new VariableMember(memberNameZero.toString());
+          variableExpression.addMember(variableMember);
+        }
+        else if (result == ERROR)
+        {
+          return _error();
+        }
+        else
+        {
+          return _error("Expected identifier.");
         }
       }
       else if (result == ERROR)

@@ -256,11 +256,8 @@ public class ParserTest
     validateNoError(result, parser.getError());
     Statements statements = parser.getStatements();
     validateNotNull(statements);
-    validate("struct @party\n" +
-             "   int8* animal\n" +
-             "end\n", statements.print(parser.getKeywords()));
+    validate("@party_address.line[1] = @hello", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
-
   }
 
   protected static void testSimple()
@@ -493,7 +490,43 @@ public class ParserTest
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
-    validate("", s);
+    validate("$start_address 0x800\n" +
+             "struct @party_address\n" +
+             "   int8* line1\n" +
+             "   int8* line2\n" +
+             "   int16 country_number\n" +
+             "end\n" +
+             "\n" +
+             "int8* @hello = \"Hello\"\n" +
+             "@i_use_structs:\n" +
+             "   @party_address address = 0;\n" +
+             "   @party_address.line1 = @hello\n" +
+             "end\n" +
+             "\n" +
+             "struct @@person\n" +
+             "   int8* name\n" +
+             "   int8 age\n" +
+             "   @party_address address\n" +
+             "   int32[20] guid\n" +
+             "end\n" +
+             "\n" +
+             "int8* henry_name = \"Henry\"\n" +
+             "@@person[3] @three_people\n" +
+             "@@person* henry = &three_people[0]\n" +
+             "henry.age = 6\n" +
+             "henry.name = henry_name\n" +
+             "@run_me:\n" +
+             "   @@person* person = henry\n" +
+             "   int8* address_line;\n" +
+             "   address_line = person.address.line1\n" +
+             "   @@person george\n" +
+             "   person = &george\n" +
+             "end\n" +
+             "\n" +
+             "@@main:\n" +
+             "   gosub @run_me\n" +
+             "   return\n" +
+             "end\n", s);
   }
 
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
@@ -521,32 +554,32 @@ public class ParserTest
 
   public static void test()
   {
-//    testStatementAssignment1();
-//    testStatementAssignment2();
-//    testStatementAssignment3();
-//    testStatementAssignment4();
-//    testStatementAssignment5();
-//    testStatementDeclaration();
-//    testSingleInitialisation();
-//    testArrayInitialisation();
-//    testArrayIndices();
-//    testComplexArrayIndices();
-//    testIdentifierContainingNumber();
-//    testGlobalAndFileVariables();
-//    testReferenceOperator();
-//    testPush();
-//    testPull();
-//    testPlusExpression();
-//    testUnsignedShiftRightExpression();
-//    testPullAfterRegisterDeclaration();
-//      testStructSimpleDeclaration();
-      testStructFieldSelection();
-//
-//    testSimple();
-//    testArrayDeclaration();
-//    testPointers();
-//    testExpressions();
-//    testStack();
+    testStatementAssignment1();
+    testStatementAssignment2();
+    testStatementAssignment3();
+    testStatementAssignment4();
+    testStatementAssignment5();
+    testStatementDeclaration();
+    testSingleInitialisation();
+    testArrayInitialisation();
+    testArrayIndices();
+    testComplexArrayIndices();
+    testIdentifierContainingNumber();
+    testGlobalAndFileVariables();
+    testReferenceOperator();
+    testPush();
+    testPull();
+    testPlusExpression();
+    testUnsignedShiftRightExpression();
+    testPullAfterRegisterDeclaration();
+    testStructSimpleDeclaration();
+    testStructFieldSelection();
+
+    testSimple();
+    testArrayDeclaration();
+    testPointers();
+    testExpressions();
+    testStack();
     testStruct();
   }
 }

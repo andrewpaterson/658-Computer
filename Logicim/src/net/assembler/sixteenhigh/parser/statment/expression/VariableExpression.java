@@ -11,20 +11,14 @@ public class VariableExpression
 {
   public int dereferenceCount;
   public boolean reference;
-  public String identifier;
-  public List<Expressable> arrayIndices;
+  public List<VariableMember> members;
 
-  public VariableExpression(String identifier, int dereferenceCount, boolean reference)
+  public VariableExpression(VariableMember variableMember, int dereferenceCount, boolean reference)
   {
-    this.identifier = identifier;
     this.dereferenceCount = dereferenceCount;
     this.reference = reference;
-    this.arrayIndices = new ArrayList<>();
-  }
-
-  public void addArrayIndex(Expressable expressable)
-  {
-    arrayIndices.add(expressable);
+    this.members = new ArrayList<>();
+    this.members.add(variableMember);
   }
 
   @Override
@@ -32,14 +26,27 @@ public class VariableExpression
   {
     String reference = this.reference ? "&" : "";
     StringBuilder asterisks = StringUtil.pad("*", dereferenceCount);
-    StringBuilder array = new StringBuilder();
-    for (Expressable arrayIndex : arrayIndices)
+    StringBuilder memberBuilder = new StringBuilder();
+    boolean first = true;
+    for (VariableMember member : members)
     {
-      array.append("[");
-      array.append(arrayIndex.print(sixteenHighKeywords));
-      array.append("]");
+      if (first)
+      {
+        first = false;
+      }
+      else
+      {
+        memberBuilder.append('.');
+      }
+
+      memberBuilder.append(member.print(sixteenHighKeywords));
     }
-    return asterisks + reference + identifier + array.toString();
+    return asterisks + reference + memberBuilder.toString();
+  }
+
+  public void addMember(VariableMember member)
+  {
+    members.add(member);
   }
 }
 

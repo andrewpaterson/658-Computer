@@ -100,27 +100,27 @@ public class Statements
     statements.add(new Push(this, statementIndex++, identifier));
   }
 
-  public void addPull(RegisterExpression identifier)
+  public void addPull(VariableExpression identifier)
   {
     statements.add(new Pull(this, statementIndex++, identifier, new PullExpression()));
   }
 
-  public void addBitCompare(RegisterExpression register, SixteenHighKeywordCode keyword)
+  public void addBitCompare(VariableExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new BitCompare(this, statementIndex++, register, keyword));
   }
 
-  public void addCrement(RegisterExpression register, SixteenHighKeywordCode keyword)
+  public void addCrement(VariableExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new Crement(this, statementIndex++, register, keyword));
   }
 
-  public void addNumberCompare(RegisterExpression leftIdentifier, Expression right, SixteenHighKeywordCode keyword)
+  public void addNumberCompare(VariableExpression leftIdentifier, Expression right, SixteenHighKeywordCode keyword)
   {
     statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, right, keyword));
   }
 
-  public void addAssignment(RegisterExpression leftIdentifier, SixteenHighKeywordCode keyword, Expression right)
+  public void addAssignment(VariableExpression leftIdentifier, SixteenHighKeywordCode keyword, Expression right)
   {
     statements.add(new Assignment(this, statementIndex++, leftIdentifier, keyword, right));
   }

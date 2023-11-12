@@ -4,31 +4,31 @@ import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.expression.Expression;
-import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.assembler.sixteenhigh.parser.statment.expression.VariableExpression;
 
 public class NumberCompare
     extends Statement
 {
-  protected RegisterExpression leftRegister;
-  protected Expression right;
+  protected VariableExpression leftVariableExpression;
+  protected Expression rightExpression;
   protected SixteenHighKeywordCode keyword;
 
   public NumberCompare(Statements statements,
                        int index,
-                       RegisterExpression leftRegister,
-                       Expression right,
+                       VariableExpression leftVariableExpression,
+                       Expression rightExpression,
                        SixteenHighKeywordCode keyword)
   {
     super(statements, index);
-    this.leftRegister = leftRegister;
-    this.right = right;
+    this.leftVariableExpression = leftVariableExpression;
+    this.rightExpression = rightExpression;
     this.keyword = keyword;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return leftRegister.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + right.print(sixteenHighKeywords) + semicolon();
+    return leftVariableExpression.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightExpression.print(sixteenHighKeywords) + semicolon();
   }
 }
 

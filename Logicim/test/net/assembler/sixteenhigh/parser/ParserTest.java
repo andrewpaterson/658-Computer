@@ -234,7 +234,7 @@ public class ParserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testStructSimple()
+  private static void testStructSimpleDeclaration()
   {
     SixteenHighParser parser = createParser("struct @party int8* animal end");
     ParseResult parseResult = parser.parse();
@@ -246,6 +246,21 @@ public class ParserTest
              "   int8* animal\n" +
              "end\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
+  }
+
+  private static void testStructFieldSelection()
+  {
+    SixteenHighParser parser = createParser("@party_address.line[1] = @hello");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("struct @party\n" +
+             "   int8* animal\n" +
+             "end\n", statements.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+
   }
 
   protected static void testSimple()
@@ -524,7 +539,8 @@ public class ParserTest
 //    testPlusExpression();
 //    testUnsignedShiftRightExpression();
 //    testPullAfterRegisterDeclaration();
-//    testStructSimple();
+//      testStructSimpleDeclaration();
+      testStructFieldSelection();
 //
 //    testSimple();
 //    testArrayDeclaration();

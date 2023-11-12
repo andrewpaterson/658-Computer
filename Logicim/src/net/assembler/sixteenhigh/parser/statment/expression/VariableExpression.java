@@ -6,17 +6,17 @@ import net.common.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterExpression
+public class VariableExpression
     implements Expressable
 {
   public int dereferenceCount;
   public boolean reference;
-  public String registerName;
+  public String identifier;
   public List<Expressable> arrayIndices;
 
-  public RegisterExpression(String registerName, int dereferenceCount, boolean reference)
+  public VariableExpression(String identifier, int dereferenceCount, boolean reference)
   {
-    this.registerName = registerName;
+    this.identifier = identifier;
     this.dereferenceCount = dereferenceCount;
     this.reference = reference;
     this.arrayIndices = new ArrayList<>();
@@ -39,7 +39,7 @@ public class RegisterExpression
       array.append(arrayIndex.print(sixteenHighKeywords));
       array.append("]");
     }
-    return asterisks + reference + registerName + array.toString();
+    return asterisks + reference + identifier + array.toString();
   }
 }
 

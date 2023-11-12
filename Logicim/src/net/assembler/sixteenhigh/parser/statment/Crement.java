@@ -3,28 +3,28 @@ package net.assembler.sixteenhigh.parser.statment;
 import net.assembler.sixteenhigh.parser.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
-import net.assembler.sixteenhigh.parser.statment.expression.RegisterExpression;
+import net.assembler.sixteenhigh.parser.statment.expression.VariableExpression;
 
 public class Crement
     extends Statement
 {
-  protected RegisterExpression register;
+  protected VariableExpression variableExpression;
   protected SixteenHighKeywordCode keyword;
 
   public Crement(Statements statements,
                  int index,
-                 RegisterExpression register,
+                 VariableExpression variableExpression,
                  SixteenHighKeywordCode keyword)
   {
     super(statements, index);
-    this.register = register;
+    this.variableExpression = variableExpression;
     this.keyword = keyword;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return register.print(sixteenHighKeywords) + sixteenHighKeywords.getKeyword(keyword) + semicolon();
+    return variableExpression.print(sixteenHighKeywords) + sixteenHighKeywords.getKeyword(keyword) + semicolon();
   }
 }
 

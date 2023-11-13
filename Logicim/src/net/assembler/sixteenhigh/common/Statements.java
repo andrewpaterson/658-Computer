@@ -1,13 +1,13 @@
 package net.assembler.sixteenhigh.common;
 
-import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.parser.statment.*;
-import net.assembler.sixteenhigh.parser.statment.directive.AccessModeStatement;
-import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
-import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
-import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
-import net.assembler.sixteenhigh.parser.statment.expression.*;
-import net.assembler.sixteenhigh.parser.statment.scope.VariableScope;
+import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.tokeniser.statment.*;
+import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessModeStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessTime;
+import net.assembler.sixteenhigh.tokeniser.statment.directive.EndAddress;
+import net.assembler.sixteenhigh.tokeniser.statment.directive.StartAddress;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
+import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;

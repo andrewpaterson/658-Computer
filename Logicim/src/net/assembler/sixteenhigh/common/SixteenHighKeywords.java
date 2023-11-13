@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh.common;
 
-import net.assembler.sixteenhigh.parser.KeywordPair;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.tokeniser.KeywordPair;
+import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.common.SimulatorException;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.util.CollectionUtil;
@@ -9,7 +9,7 @@ import net.common.util.StringUtil;
 
 import java.util.*;
 
-import static net.assembler.sixteenhigh.parser.SixteenHighKeywordCode.*;
+import static net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode.*;
 
 public class SixteenHighKeywords
 {

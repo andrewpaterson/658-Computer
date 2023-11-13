@@ -30,7 +30,7 @@ public class ComponentViewPortNames
 
   public List<ComponentViewPortName> getSplitterPortIndices()
   {
-    List<ComponentViewPortName> splitterPortIndices= new ArrayList<>();
+    List<ComponentViewPortName> splitterPortIndices = new ArrayList<>();
     for (ComponentViewPortName componentViewPortName : connectedPortIndices)
     {
       ComponentView<?> componentView = componentViewPortName.componentView;

@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.Statements;
-import net.assembler.sixteenhigh.parser.statment.Statement;
+import net.assembler.sixteenhigh.tokeniser.statment.Statement;
 
 import java.util.ArrayList;
 import java.util.List;

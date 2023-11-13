@@ -1,6 +1,5 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 
 import java.util.List;

@@ -22,7 +22,7 @@ public class WireTraceConverter
     for (CircuitInstanceViewPath circuitInstanceViewPath : circuitInstanceViewPaths.getPaths())
     {
       List<CircuitInstanceView> path = circuitInstanceViewPath.getPath();
-      SubcircuitSimulation subcircuitSimulation =startingSubcircuitSimulation;
+      SubcircuitSimulation subcircuitSimulation = startingSubcircuitSimulation;
       for (CircuitInstanceView circuitInstanceView : path)
       {
         circuitInstanceView.getDescription();

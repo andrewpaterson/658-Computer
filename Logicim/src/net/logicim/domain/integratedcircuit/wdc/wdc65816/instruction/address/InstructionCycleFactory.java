@@ -13,6 +13,7 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.
 
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.WidthFromRegister.M;
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.AddressingMode.*;
+import static net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.InstructionCycles.OpCode;
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.InstructionCycles.*;
 
 public class InstructionCycleFactory

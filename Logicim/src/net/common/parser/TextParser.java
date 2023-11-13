@@ -1,6 +1,6 @@
 package net.common.parser;
 
-import net.assembler.sixteenhigh.parser.TextParserLog;
+import net.assembler.sixteenhigh.tokeniser.TextParserLog;
 import net.common.SimulatorException;
 import net.common.parser.primitive.CharPointer;
 import net.common.parser.primitive.FloatPointer;

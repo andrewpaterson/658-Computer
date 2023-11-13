@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh;
 
-import net.assembler.sixteenhigh.parser.ParserTest;
-import net.assembler.sixteenhigh.parser.literal.LiteralParserTest;
+import net.assembler.sixteenhigh.tokeniser.ParserTest;
+import net.assembler.sixteenhigh.tokeniser.literal.LiteralParserTest;
 
 public class SixteenHighTest
 {

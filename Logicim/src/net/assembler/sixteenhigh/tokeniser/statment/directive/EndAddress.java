@@ -19,5 +19,10 @@ public class EndAddress
   {
     return "$end_address 0x" + Integer.toHexString(address);
   }
+
+  public int getAddress()
+  {
+    return address;
+  }
 }
 

@@ -8,7 +8,7 @@ import net.common.util.StringUtil;
 
 import java.util.List;
 
-public abstract class Variable
+public abstract class VariableStatement
     extends Statement
 {
   public String name;
@@ -17,13 +17,13 @@ public abstract class Variable
   public int pointerCount;
   public BaseExpression initialiserExpression;
 
-  public Variable(Statements statements,
-                  int index,
-                  String name,
-                  VariableScope scope,
-                  List<Long> arrayMatrix,
-                  int pointerCount,
-                  BaseExpression initialiserExpression)
+  public VariableStatement(Statements statements,
+                           int index,
+                           String name,
+                           VariableScope scope,
+                           List<Long> arrayMatrix,
+                           int pointerCount,
+                           BaseExpression initialiserExpression)
   {
     super(statements, index);
     this.name = name;

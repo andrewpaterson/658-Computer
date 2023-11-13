@@ -7,7 +7,7 @@ import static net.common.parser.TextParser.*;
 import static net.common.parser.Tristate.*;
 import static net.logicim.assertions.Validator.*;
 
-public class LiteralParserTest
+public abstract class LiteralParserTest
 {
   protected static void testIntegerLiterals()
   {

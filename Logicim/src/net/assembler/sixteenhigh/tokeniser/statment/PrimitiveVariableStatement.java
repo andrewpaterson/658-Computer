@@ -8,19 +8,19 @@ import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
 
 import java.util.List;
 
-public class PrimitiveVariable
-    extends Variable
+public class PrimitiveVariableStatement
+    extends VariableStatement
 {
   public SixteenHighKeywordCode type;
 
-  public PrimitiveVariable(Statements statements,
-                           int index,
-                           SixteenHighKeywordCode type,
-                           String name,
-                           VariableScope scope,
-                           List<Long> arrayMatrix,
-                           int pointerCount,
-                           BaseExpression initialiserExpression)
+  public PrimitiveVariableStatement(Statements statements,
+                                    int index,
+                                    SixteenHighKeywordCode type,
+                                    String name,
+                                    VariableScope scope,
+                                    List<Long> arrayMatrix,
+                                    int pointerCount,
+                                    BaseExpression initialiserExpression)
   {
     super(statements,
           index,

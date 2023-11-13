@@ -1,5 +1,6 @@
 package net.common.util;
 
+import net.assembler.sixteenhigh.tokeniser.statment.directive.DirectiveStatement;
 import net.common.SimulatorException;
 
 import java.util.ArrayList;
@@ -492,6 +493,18 @@ public abstract class StringUtil
       padding.append(padder);
     }
     return padding;
+  }
+
+  public static String getClassSimpleName(Object o)
+  {
+    if (o == null)
+    {
+      return "null";
+    }
+    else
+    {
+      return o.getClass().getSimpleName();
+    }
   }
 }
 

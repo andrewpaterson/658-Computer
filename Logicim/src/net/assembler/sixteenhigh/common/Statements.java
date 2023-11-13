@@ -39,14 +39,14 @@ public class Statements
                                    int pointerCount,
                                    BaseExpression initialiserExpression)
   {
-    Variable variable = new PrimitiveVariable(this,
-                                              statementIndex++,
-                                              keyword,
-                                              name,
-                                              scope,
-                                              arrayMatrix,
-                                              pointerCount,
-                                              initialiserExpression);
+    VariableStatement variable = new PrimitiveVariableStatement(this,
+                                                                statementIndex++,
+                                                                keyword,
+                                                                name,
+                                                                scope,
+                                                                arrayMatrix,
+                                                                pointerCount,
+                                                                initialiserExpression);
     statements.add(variable);
   }
 
@@ -57,14 +57,14 @@ public class Statements
                                 int pointerCount,
                                 BaseExpression initialiserExpression)
   {
-    Variable variable = new StructVariable(this,
-                                           statementIndex++,
-                                           structIdentifier,
-                                           name,
-                                           scope,
-                                           arrayMatrix,
-                                           pointerCount,
-                                           initialiserExpression);
+    VariableStatement variable = new StructVariableStatement(this,
+                                                             statementIndex++,
+                                                             structIdentifier,
+                                                             name,
+                                                             scope,
+                                                             arrayMatrix,
+                                                             pointerCount,
+                                                             initialiserExpression);
     statements.add(variable);
   }
 
@@ -77,7 +77,7 @@ public class Statements
 
   public void addRoutine(String name, VariableScope scope)
   {
-    Routine subroutine = new Routine(this, statementIndex++, name, scope);
+    RoutineStatement subroutine = new RoutineStatement(this, statementIndex++, name, scope);
     statements.add(subroutine);
   }
 

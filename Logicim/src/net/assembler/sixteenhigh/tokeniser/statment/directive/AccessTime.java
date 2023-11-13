@@ -19,5 +19,10 @@ public class AccessTime
   {
     return "$access_time " + cycles;
   }
+
+  public int getTime()
+  {
+    return cycles;
+  }
 }
 

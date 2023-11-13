@@ -7,19 +7,19 @@ import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
 
 import java.util.List;
 
-public class StructVariable
-    extends Variable
+public class StructVariableStatement
+    extends VariableStatement
 {
   public String structIdentifier;
 
-  public StructVariable(Statements statements,
-                        int index,
-                        String structIdentifier,
-                        String name,
-                        VariableScope scope,
-                        List<Long> arrayMatrix,
-                        int pointerCount,
-                        BaseExpression initialiserExpression)
+  public StructVariableStatement(Statements statements,
+                                 int index,
+                                 String structIdentifier,
+                                 String name,
+                                 VariableScope scope,
+                                 List<Long> arrayMatrix,
+                                 int pointerCount,
+                                 BaseExpression initialiserExpression)
   {
     super(statements,
           index,

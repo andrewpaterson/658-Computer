@@ -1,5 +1,6 @@
 package net.assembler.sixteenhigh.tokeniser;
 
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 import net.common.parser.Tristate;
 import net.common.reflect.ClassInspector;
@@ -11,11 +12,11 @@ import java.io.File;
 
 import static net.logicim.assertions.Validator.*;
 
-public class ParserTest
+public abstract class TokeniserTest
 {
   protected static void testStatementAssignment1()
   {
-    SixteenHighParser parser = createParser("i = 0");
+    SixteenHighTokeniser parser = createParser("i = 0");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -27,7 +28,7 @@ public class ParserTest
 
   protected static void testStatementAssignment2()
   {
-    SixteenHighParser parser = createParser("i = (c * 3)");
+    SixteenHighTokeniser parser = createParser("i = (c * 3)");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -39,7 +40,7 @@ public class ParserTest
 
   protected static void testStatementAssignment3()
   {
-    SixteenHighParser parser = createParser("i = -(0x230L * +((-.4f) % 3))");
+    SixteenHighTokeniser parser = createParser("i = -(0x230L * +((-.4f) % 3))");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -51,7 +52,7 @@ public class ParserTest
 
   protected static void testStatementAssignment4()
   {
-    SixteenHighParser parser = createParser("c = -d");
+    SixteenHighTokeniser parser = createParser("c = -d");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -63,7 +64,7 @@ public class ParserTest
 
   protected static void testStatementAssignment5()
   {
-    SixteenHighParser parser = createParser("c = ~(5)");
+    SixteenHighTokeniser parser = createParser("c = ~(5)");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -75,7 +76,7 @@ public class ParserTest
 
   protected static void testPlusExpression()
   {
-    SixteenHighParser parser = createParser("x = (5 + ~d)");
+    SixteenHighTokeniser parser = createParser("x = (5 + ~d)");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -87,7 +88,7 @@ public class ParserTest
 
   protected static void testPull()
   {
-    SixteenHighParser parser = createParser("x< *p[2]< z<;");
+    SixteenHighTokeniser parser = createParser("x< *p[2]< z<;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -101,7 +102,7 @@ public class ParserTest
 
   protected static void testPush()
   {
-    SixteenHighParser parser = createParser(">x >*p[2] >y >1;");
+    SixteenHighTokeniser parser = createParser(">x >*p[2] >y >1;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -116,7 +117,7 @@ public class ParserTest
 
   protected static void testUnsignedShiftRightExpression()
   {
-    SixteenHighParser parser = createParser("x = (5 + >>>d)");
+    SixteenHighTokeniser parser = createParser("x = (5 + >>>d)");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -128,7 +129,7 @@ public class ParserTest
 
   protected static void testStatementDeclaration()
   {
-    SixteenHighParser parser = createParser("int16 i; int16 number;");
+    SixteenHighTokeniser parser = createParser("int16 i; int16 number;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -140,7 +141,7 @@ public class ParserTest
 
   protected static void testStatementDirective()
   {
-    SixteenHighParser parser = createParser("$access_mode read-write; $access_time 0x3");
+    SixteenHighTokeniser parser = createParser("$access_mode read-write; $access_time 0x3");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -153,7 +154,7 @@ public class ParserTest
 
   protected static void testArrayInitialisation()
   {
-    SixteenHighParser parser = createParser("int8[6] a1d = [2,3,1,3,1,2]");
+    SixteenHighTokeniser parser = createParser("int8[6] a1d = [2,3,1,3,1,2]");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -165,7 +166,7 @@ public class ParserTest
 
   protected static void testArrayIndices()
   {
-    SixteenHighParser parser = createParser("a[2] = b[3]");
+    SixteenHighTokeniser parser = createParser("a[2] = b[3]");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -177,7 +178,7 @@ public class ParserTest
 
   protected static void testSingleInitialisation()
   {
-    SixteenHighParser parser = createParser("int8 i = 5");
+    SixteenHighTokeniser parser = createParser("int8 i = 5");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -189,7 +190,7 @@ public class ParserTest
 
   private static void testComplexArrayIndices()
   {
-    SixteenHighParser parser = createParser("int32 c = (a2d[y][a1d[y]] * 3);");
+    SixteenHighTokeniser parser = createParser("int32 c = (a2d[y][a1d[y]] * 3);");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -201,7 +202,7 @@ public class ParserTest
 
   private static void testIdentifierContainingNumber()
   {
-    SixteenHighParser parser = createParser("a1d[2] =66;");
+    SixteenHighTokeniser parser = createParser("a1d[2] =66;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -213,7 +214,7 @@ public class ParserTest
 
   private static void testGlobalAndFileVariables()
   {
-    SixteenHighParser parser = createParser("int8*\t@hello;int8\t@@world;");
+    SixteenHighTokeniser parser = createParser("int8*\t@hello;int8\t@@world;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -226,7 +227,7 @@ public class ParserTest
 
   private static void testReferenceOperator()
   {
-    SixteenHighParser parser = createParser("p = &p[5]");
+    SixteenHighTokeniser parser = createParser("p = &p[5]");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -238,7 +239,7 @@ public class ParserTest
 
   private static void testPullAfterRegisterDeclaration()
   {
-    SixteenHighParser parser = createParser("int8* address <");
+    SixteenHighTokeniser parser = createParser("int8* address <");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -250,7 +251,7 @@ public class ParserTest
 
   private static void testStructSimpleDeclaration()
   {
-    SixteenHighParser parser = createParser("struct @party int8* animal end");
+    SixteenHighTokeniser parser = createParser("struct @party int8* animal end");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -264,7 +265,7 @@ public class ParserTest
 
   private static void testStructFieldSelection()
   {
-    SixteenHighParser parser = createParser("@party_address.line[1] = @hello");
+    SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -277,7 +278,7 @@ public class ParserTest
   protected static void testSimple()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Simple.16h", log);
+    SixteenHighTokeniser parser = createParser("Simple.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -323,7 +324,7 @@ public class ParserTest
   protected static void testPointers()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Pointer.16h", log);
+    SixteenHighTokeniser parser = createParser("Pointer.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -374,7 +375,7 @@ public class ParserTest
   private static void testArrayDeclaration()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Array.16h", log);
+    SixteenHighTokeniser parser = createParser("Array.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -396,7 +397,7 @@ public class ParserTest
   private static void testExpressions()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Expressions.16h", log);
+    SixteenHighTokeniser parser = createParser("Expressions.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -440,7 +441,7 @@ public class ParserTest
   private static void testStack()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Stack.16h", log);
+    SixteenHighTokeniser parser = createParser("Stack.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -491,7 +492,7 @@ public class ParserTest
   private static void testStruct()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Struct.16h", log);
+    SixteenHighTokeniser parser = createParser("Struct.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -542,7 +543,7 @@ public class ParserTest
   private static void testDirectives()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighParser parser = createParser("Directive.16h", log);
+    SixteenHighTokeniser parser = createParser("Directive.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -566,19 +567,27 @@ public class ParserTest
              "@@uint8[8192] lookup_table = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]\n", s);
   }
 
-  private static SixteenHighParser createParser(String filename, TextParserLog log)
+  private static SixteenHighTokeniser createParser(String filename, TextParserLog log)
   {
-    ClassInspector classInspector = ClassInspector.forClass(ParserTest.class);
+    ClassInspector classInspector = ClassInspector.forClass(TokeniserTest.class);
     String packageName = classInspector.getPackageName();
     String programDir = EnvironmentInspector.getProgramDir();
     String fullFilename = programDir.replace('\\', '/') + "/test/" + packageName.replace('.', '/') + "/" + filename;
     String contents = FileUtil.readFile(new File(fullFilename));
-    return new SixteenHighParser(log, filename, new Statements(filename), contents);
+    return new SixteenHighTokeniser(log,
+                                    new SixteenHighKeywords(),
+                                    filename,
+                                    new Statements(filename),
+                                    contents);
   }
 
-  private static SixteenHighParser createParser(String contents)
+  private static SixteenHighTokeniser createParser(String contents)
   {
-    return new SixteenHighParser(new TextParserLog(), "", new Statements(""), contents);
+    return new SixteenHighTokeniser(new TextParserLog(),
+                                    new SixteenHighKeywords(),
+                                    "",
+                                    new Statements(""),
+                                    contents);
   }
 
   private static void validateNoError(Tristate result, String error)

@@ -23,7 +23,7 @@ import static net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode.*;
 import static net.common.parser.TextParser.NUMBER_SEPARATOR_APOSTROPHE;
 import static net.common.parser.Tristate.*;
 
-public class SixteenHighParser
+public class SixteenHighTokeniser
 {
   protected SixteenHighKeywords keywords;
   protected TextParser textParser;
@@ -33,13 +33,14 @@ public class SixteenHighParser
   protected LiteralParser literalParser;
   protected int allowedSeparator;
 
-  public SixteenHighParser(TextParserLog log,
-                           String filename,
-                           Statements statements,
-                           String source)
+  public SixteenHighTokeniser(TextParserLog log,
+                              SixteenHighKeywords keywords,
+                              String filename,
+                              Statements statements,
+                              String source)
   {
     this.filename = filename;
-    this.keywords = new SixteenHighKeywords();
+    this.keywords = keywords;
     this.textParser = new TextParser(source, log, filename);
     this.literalParser = new LiteralParser(textParser);
 
@@ -48,7 +49,7 @@ public class SixteenHighParser
     this.allowedSeparator = NUMBER_SEPARATOR_APOSTROPHE;
   }
 
-  protected ParseResult parse()
+  public ParseResult parse()
   {
     Statement lastStatement = null;
     boolean canParseInterStatement = false;

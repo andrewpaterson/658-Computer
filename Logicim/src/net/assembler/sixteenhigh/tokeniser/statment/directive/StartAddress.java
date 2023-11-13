@@ -19,5 +19,10 @@ public class StartAddress
   {
     return "$start_address 0x" + Integer.toHexString(address);
   }
+
+  public int getAddress()
+  {
+    return address;
+  }
 }
 

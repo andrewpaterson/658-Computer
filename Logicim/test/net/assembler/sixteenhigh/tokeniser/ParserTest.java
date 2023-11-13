@@ -277,8 +277,7 @@ public class ParserTest
   protected static void testSimple()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Simple.16h", log, context);
+    SixteenHighParser parser = createParser("Simple.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -324,8 +323,7 @@ public class ParserTest
   protected static void testPointers()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Pointer.16h", log, context);
+    SixteenHighParser parser = createParser("Pointer.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -376,8 +374,7 @@ public class ParserTest
   private static void testArrayDeclaration()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Array.16h", log, context);
+    SixteenHighParser parser = createParser("Array.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -399,8 +396,7 @@ public class ParserTest
   private static void testExpressions()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Expressions.16h", log, context);
+    SixteenHighParser parser = createParser("Expressions.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -444,8 +440,7 @@ public class ParserTest
   private static void testStack()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Stack.16h", log, context);
+    SixteenHighParser parser = createParser("Stack.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -496,8 +491,7 @@ public class ParserTest
   private static void testStruct()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Struct.16h", log, context);
+    SixteenHighParser parser = createParser("Struct.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -548,8 +542,7 @@ public class ParserTest
   private static void testDirectives()
   {
     TextParserLog log = new TextParserLog();
-    SixteenHighContext context = new SixteenHighContext();
-    SixteenHighParser parser = createParser("Directive.16h", log, context);
+    SixteenHighParser parser = createParser("Directive.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -573,19 +566,19 @@ public class ParserTest
              "@@uint8[8192] lookup_table = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]\n", s);
   }
 
-  private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
+  private static SixteenHighParser createParser(String filename, TextParserLog log)
   {
     ClassInspector classInspector = ClassInspector.forClass(ParserTest.class);
     String packageName = classInspector.getPackageName();
     String programDir = EnvironmentInspector.getProgramDir();
     String fullFilename = programDir.replace('\\', '/') + "/test/" + packageName.replace('.', '/') + "/" + filename;
     String contents = FileUtil.readFile(new File(fullFilename));
-    return new SixteenHighParser(log, filename, context, contents);
+    return new SixteenHighParser(log, filename, new Statements(filename), contents);
   }
 
   private static SixteenHighParser createParser(String contents)
   {
-    return new SixteenHighParser(new TextParserLog(), "", new SixteenHighContext(), contents);
+    return new SixteenHighParser(new TextParserLog(), "", new Statements(""), contents);
   }
 
   private static void validateNoError(Tristate result, String error)

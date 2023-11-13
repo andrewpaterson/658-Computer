@@ -30,22 +30,20 @@ public class SixteenHighParser
   protected int statementIndex;
   protected Statements statements;
   protected String filename;
-  protected SixteenHighContext context;
   protected LiteralParser literalParser;
   protected int allowedSeparator;
 
   public SixteenHighParser(TextParserLog log,
                            String filename,
-                           SixteenHighContext context,
+                           Statements statements,
                            String source)
   {
     this.filename = filename;
-    this.context = context;
     this.keywords = new SixteenHighKeywords();
     this.textParser = new TextParser(source, log, filename);
     this.literalParser = new LiteralParser(textParser);
 
-    this.statements = context.addCode(filename);
+    this.statements = statements;
     this.statementIndex = 0;
     this.allowedSeparator = NUMBER_SEPARATOR_APOSTROPHE;
   }

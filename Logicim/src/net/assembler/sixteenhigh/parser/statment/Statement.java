@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh.parser.statment;
 
-import net.assembler.sixteenhigh.parser.Statements;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 
 public abstract class Statement
 {
@@ -51,6 +51,11 @@ public abstract class Statement
   }
 
   public boolean isLabel()
+  {
+    return false;
+  }
+
+  public boolean isDirective()
   {
     return false;
   }

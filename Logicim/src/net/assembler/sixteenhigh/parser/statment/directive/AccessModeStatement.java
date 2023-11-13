@@ -1,16 +1,16 @@
 package net.assembler.sixteenhigh.parser.statment.directive;
 
-import net.assembler.sixteenhigh.parser.Statements;
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
+import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.Statement;
 
-public class AccessMode
-    extends Statement
+public class AccessModeStatement
+    extends DirectiveStatement
 {
   protected SixteenHighKeywordCode mode;
 
-  public AccessMode(Statements statements, int index, SixteenHighKeywordCode mode)
+  public AccessModeStatement(Statements statements, int index, SixteenHighKeywordCode mode)
   {
     super(statements, index);
     this.mode = mode;

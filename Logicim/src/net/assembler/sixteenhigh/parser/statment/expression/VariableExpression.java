@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.parser.statment.expression;
 
-import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;

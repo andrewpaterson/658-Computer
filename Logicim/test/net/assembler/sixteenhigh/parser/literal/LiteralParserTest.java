@@ -19,8 +19,8 @@ public class LiteralParserTest
     validateTrue(integerLiteral.getInt().isPositive());
     validateTrue(integerLiteral.getInt().isValid());
 
-     literalParser = new LiteralParser(createTextParser("+5"));
-     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
+    literalParser = new LiteralParser(createTextParser("+5"));
+    integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
     validate(TRUE, integerLiteral.state);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());
     validate(5, integerLiteral.getInt().rawValue);
@@ -191,7 +191,7 @@ public class LiteralParserTest
     validateTrue(integerLiteral.getInt().isPositive());
     validateFalse(integerLiteral.getInt().isValid());
 
-    literalParser = new LiteralParser(createTextParser("0b11111111\'11111111\'11111111\'11111111"));
+    literalParser = new LiteralParser(createTextParser("0b11111111'11111111'11111111'11111111"));
     integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_APOSTROPHE);
     validate(TRUE, integerLiteral.state);
     validate(CTInt.class, integerLiteral.getLiteral().getClass());

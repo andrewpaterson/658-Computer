@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh.parser.statment.expression;
 
 import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 
 public class OperandExpression
     implements Expressable

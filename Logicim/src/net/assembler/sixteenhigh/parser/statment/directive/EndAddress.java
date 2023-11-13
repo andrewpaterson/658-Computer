@@ -1,11 +1,11 @@
 package net.assembler.sixteenhigh.parser.statment.directive;
 
-import net.assembler.sixteenhigh.parser.Statements;
-import net.assembler.sixteenhigh.parser.SixteenHighKeywords;
+import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.parser.statment.Statement;
 
 public class EndAddress
-    extends Statement
+    extends DirectiveStatement
 {
   protected int address;
 

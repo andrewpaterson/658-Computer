@@ -1,7 +1,8 @@
-package net.assembler.sixteenhigh.parser;
+package net.assembler.sixteenhigh.common;
 
+import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.parser.statment.*;
-import net.assembler.sixteenhigh.parser.statment.directive.AccessMode;
+import net.assembler.sixteenhigh.parser.statment.directive.AccessModeStatement;
 import net.assembler.sixteenhigh.parser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.parser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.parser.statment.directive.StartAddress;
@@ -137,7 +138,7 @@ public class Statements
 
   public void addAccessMode(SixteenHighKeywordCode mode)
   {
-    statements.add(new AccessMode(this, statementIndex, mode));
+    statements.add(new AccessModeStatement(this, statementIndex, mode));
   }
 
   public void addAccessTime(int cycles)
@@ -155,11 +156,12 @@ public class Statements
     System.out.println(print(sixteenHighKeywords));
   }
 
-  protected String print(SixteenHighKeywords sixteenHighKeywords)
+  public String print(SixteenHighKeywords sixteenHighKeywords)
   {
     StringBuilder builder = new StringBuilder();
     int lines = 0;
     int depth = 0;
+    boolean previousDirectiveStatement = false;
     for (Statement statement : statements)
     {
       if (statement.isEnd())
@@ -169,6 +171,12 @@ public class Statements
         {
           depth = 0;
         }
+      }
+
+      if (previousDirectiveStatement && !statement.isDirective())
+      {
+        builder.append("\n");
+        lines++;
       }
 
       int apparentDepth = depth;
@@ -187,6 +195,7 @@ public class Statements
       {
         depth++;
       }
+      previousDirectiveStatement = statement.isDirective();
     }
 
     if (lines == 1)
@@ -205,6 +214,16 @@ public class Statements
   {
     StructStatement structStatement = new StructStatement(this, statementIndex++, structName);
     statements.add(structStatement);
+  }
+
+  public List<Statement> getStatements()
+  {
+    return statements;
+  }
+
+  public String getFilename()
+  {
+    return filename;
   }
 }
 

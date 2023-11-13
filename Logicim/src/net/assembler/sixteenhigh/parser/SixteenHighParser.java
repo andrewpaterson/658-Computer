@@ -1,5 +1,7 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
+import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.parser.literal.LiteralParser;
 import net.assembler.sixteenhigh.parser.literal.LiteralResult;
 import net.assembler.sixteenhigh.parser.statment.ArrayDeclaration;
@@ -223,10 +225,10 @@ public class SixteenHighParser
   private ParseResult parseDirective()
   {
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getIdentifier(keywords.directiveIdentifiers, index, true);
+    Tristate result = textParser.getIdentifier(keywords.getDirectiveIdentifiers(), index, true);
     if (result == TRUE)
     {
-      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.directiveIdentifiers, index);
+      SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.getDirectiveIdentifiers(), index);
       Tristate state = startAddress(keyword);
       if (state == TRUE)
       {
@@ -328,10 +330,10 @@ public class SixteenHighParser
     if (keyword == access_mode)
     {
       IntegerPointer index = new IntegerPointer();
-      Tristate state = textParser.getIdentifier(keywords.accessModes, index, true);
+      Tristate state = textParser.getIdentifier(keywords.getAccessModes(), index, true);
       if (state == TRUE)
       {
-        SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.accessModes, index);
+        SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.getAccessModes(), index);
         statements.addAccessMode(accessMode);
         return TRUE;
       }
@@ -866,7 +868,7 @@ public class SixteenHighParser
   private ParseResult parseStatement()
   {
     SixteenHighKeywordCodePointer keywordPointer = new SixteenHighKeywordCodePointer();
-    Tristate result = getIdentifier(keywords.leadingIdentifiers, keywords.leadingStrings, keywordPointer);
+    Tristate result = getIdentifier(keywords.getLeadingIdentifiers(), keywords.getLeadingStrings(), keywordPointer);
     if (result == TRUE)
     {
       return parseLeadingKeywordStatement(keywordPointer);
@@ -1004,11 +1006,11 @@ public class SixteenHighParser
     }
 
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getExactCharacterSequence(keywords.unaryStrings, index, true);
+    Tristate result = textParser.getExactCharacterSequence(keywords.getUnaryStrings(), index, true);
     SixteenHighKeywordCode keyword;
     if (result == TRUE)
     {
-      keyword = keywords.getKeyword(keywords.unaryStrings, index);
+      keyword = keywords.getKeyword(keywords.getUnaryStrings(), index);
     }
     else if (result == ERROR)
     {
@@ -1191,11 +1193,11 @@ public class SixteenHighParser
   private ParseResult parseBinaryOperator(ExpressablePointer expressablePointer)
   {
     IntegerPointer index = new IntegerPointer();
-    Tristate result = textParser.getExactCharacterSequence(keywords.binaryString, index, true);
+    Tristate result = textParser.getExactCharacterSequence(keywords.getBinaryString(), index, true);
     SixteenHighKeywordCode keyword;
     if (result == TRUE)
     {
-      keyword = keywords.getKeyword(keywords.binaryString, index);
+      keyword = keywords.getKeyword(keywords.getBinaryString(), index);
       expressablePointer.setExpressable(new OperandExpression(keyword));
       return _true();
     }
@@ -1378,7 +1380,7 @@ public class SixteenHighParser
     VariableExpression variableExpression = expressionPointer.variableExpression;
 
     SixteenHighKeywordCodePointer keywordPointer = new SixteenHighKeywordCodePointer();
-    Tristate result = getIdentifier(keywords.followingIdentifiers, keywords.followingStrings, keywordPointer);
+    Tristate result = getIdentifier(keywords.getFollowingIdentifiers(), keywords.getFollowingStrings(), keywordPointer);
     if (result == TRUE)
     {
       SixteenHighKeywordCode keyword = keywordPointer.keyword;

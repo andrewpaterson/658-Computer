@@ -1,5 +1,7 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.assembler.sixteenhigh.common.Statements;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,7 @@
-package net.assembler.sixteenhigh.parser;
+package net.assembler.sixteenhigh.common;
 
+import net.assembler.sixteenhigh.parser.KeywordPair;
+import net.assembler.sixteenhigh.parser.SixteenHighKeywordCode;
 import net.common.SimulatorException;
 import net.common.parser.primitive.IntegerPointer;
 import net.common.util.CollectionUtil;
@@ -119,7 +121,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(access_mode, "$access_mode"));
     keywords.add(new KeywordPair(read_only, "read-only"));
     keywords.add(new KeywordPair(write_only, "write-only"));
-    keywords.add(new KeywordPair(read_write, "read_write"));
+    keywords.add(new KeywordPair(read_write, "read-write"));
     keywords.add(new KeywordPair(access_time, "$access_time"));
     keywords.add(new KeywordPair(open_round, OPEN_ROUND));
     keywords.add(new KeywordPair(close_round, CLOSE_ROUND));
@@ -447,6 +449,46 @@ public class SixteenHighKeywords
                                   float64,
                                   float128,
                                   bool);
+  }
+
+  public List<String> getLeadingIdentifiers()
+  {
+    return leadingIdentifiers;
+  }
+
+  public List<String> getLeadingStrings()
+  {
+    return leadingStrings;
+  }
+
+  public List<String> getFollowingIdentifiers()
+  {
+    return followingIdentifiers;
+  }
+
+  public List<String> getFollowingStrings()
+  {
+    return followingStrings;
+  }
+
+  public List<String> getDirectiveIdentifiers()
+  {
+    return directiveIdentifiers;
+  }
+
+  public List<String> getAccessModes()
+  {
+    return accessModes;
+  }
+
+  public List<String> getUnaryStrings()
+  {
+    return unaryStrings;
+  }
+
+  public List<String> getBinaryString()
+  {
+    return binaryString;
   }
 }
 

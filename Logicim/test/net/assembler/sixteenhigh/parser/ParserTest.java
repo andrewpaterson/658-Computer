@@ -1,5 +1,6 @@
 package net.assembler.sixteenhigh.parser;
 
+import net.assembler.sixteenhigh.common.Statements;
 import net.common.parser.Tristate;
 import net.common.reflect.ClassInspector;
 import net.common.util.EnvironmentInspector;
@@ -134,6 +135,19 @@ public class ParserTest
     Statements statements = parser.getStatements();
     validateNotNull(statements);
     validate("int16 i;\nint16 number;\n", statements.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testStatementDirective()
+  {
+    SixteenHighParser parser = createParser("$access_mode read-write; $access_time 0x3");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validate("$access_mode read-write\n" +
+             "$access_time 3\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -440,6 +454,7 @@ public class ParserTest
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
     validate("$start_address 0x800\n" +
+             "\n" +
              "@count_pointless:\n" +
              "   int16 start\n" +
              "   int16 _end\n" +
@@ -491,6 +506,7 @@ public class ParserTest
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
     validate("$start_address 0x800\n" +
+             "\n" +
              "struct @party_address\n" +
              "   int8* line1\n" +
              "   int8* line2\n" +
@@ -529,6 +545,34 @@ public class ParserTest
              "end\n", s);
   }
 
+  private static void testDirectives()
+  {
+    TextParserLog log = new TextParserLog();
+    SixteenHighContext context = new SixteenHighContext();
+    SixteenHighParser parser = createParser("Directive.16h", log, context);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    Statements statements = parser.getStatements();
+    validateNotNull(statements);
+    validateTrue(parser.isCompleted());
+    String s = statements.print(parser.getKeywords());
+    validate("$start_address 0x800\n" +
+             "$end_address 0xfff\n" +
+             "$access_mode read-write\n" +
+             "$access_time 1\n" +
+             "\n" +
+             "@@main:\n" +
+             "end\n" +
+             "\n" +
+             "$start_address 0x1000\n" +
+             "$end_address 0x7fff\n" +
+             "$access_mode read-only\n" +
+             "$access_time 1\n" +
+             "\n" +
+             "@@uint8[8192] lookup_table = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]\n", s);
+  }
+
   private static SixteenHighParser createParser(String filename, TextParserLog log, SixteenHighContext context)
   {
     ClassInspector classInspector = ClassInspector.forClass(ParserTest.class);
@@ -560,6 +604,7 @@ public class ParserTest
     testStatementAssignment4();
     testStatementAssignment5();
     testStatementDeclaration();
+    testStatementDirective();
     testSingleInitialisation();
     testArrayInitialisation();
     testArrayIndices();
@@ -581,6 +626,7 @@ public class ParserTest
     testExpressions();
     testStack();
     testStruct();
+    testDirectives();
   }
 }
 

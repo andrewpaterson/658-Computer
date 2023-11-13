@@ -1,13 +1,10 @@
-$start_address 0x800;
-$access_mode read-only; $access_time 1
-$start_of_code:
+$start_address 0x800; $end_address 0xFFF
+$access_mode read-write; $access_time 1
 
-@@main
+@@main:
 end
 
-$end_address 0xFFF
+$start_address 0x1000; $end_address 0x7FFF
+$access_mode read-only; $access_time 1
 
-$start_address 0x1000;
-$access_mode read-write; $access_time 1
-$end_address 0xFFFF
-
+@@uint8[0x2000] lookup_table = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]

@@ -1,14 +1,17 @@
-package net.assembler.sixteenhigh.tokeniser;
+package net.common.logger;
+
+import net.assembler.sixteenhigh.semanticiser.LogResult;
+import net.common.SimulatorException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextParserLog
+public class Logger
 {
-  protected static final String FATAL = "FATAL";
-  protected static final String ERROR = "ERROR";
-  protected static final String WARNING = "WARNING";
-  protected static final String INFO = "INFO";
+  public static final String FATAL = "FATAL";
+  public static final String ERROR = "ERROR";
+  public static final String WARNING = "WARNING";
+  public static final String INFO = "INFO";
 
   public List<String> messages;
   public int errors;
@@ -16,7 +19,7 @@ public class TextParserLog
 
   public int maxErrors;
 
-  public TextParserLog()
+  public Logger()
   {
     messages = new ArrayList<>();
     errors = 0;
@@ -69,6 +72,32 @@ public class TextParserLog
       builder.append("\n");
     }
     return builder.toString();
+  }
+
+  public boolean log(String filename, int index, LogResult logResult)
+  {
+    if (logResult.is(FATAL))
+    {
+      return logFatal(filename, index, logResult.message);
+    }
+    else if (logResult.is(ERROR))
+    {
+      return logError(filename, index, logResult.message);
+    }
+    else if (logResult.is(WARNING))
+    {
+      logWarning(filename, index, logResult.message);
+      return true;
+    }
+    else if (logResult.is(INFO))
+    {
+      logInfo(filename, index, logResult.message);
+      return true;
+    }
+    else
+    {
+      throw new SimulatorException("Unknown log level [%s].", logResult.level);
+    }
   }
 }
 

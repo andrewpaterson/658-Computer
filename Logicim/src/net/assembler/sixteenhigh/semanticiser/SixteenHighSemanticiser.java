@@ -2,24 +2,31 @@ package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
 import net.assembler.sixteenhigh.tokeniser.statment.Statement;
-import net.assembler.sixteenhigh.tokeniser.statment.directive.DirectiveStatement;
-import net.common.parser.StringZero;
+import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
+import net.common.SimulatorException;
+import net.common.logger.Logger;
+import net.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.assembler.sixteenhigh.semanticiser.LogResult.success;
 
 public class SixteenHighSemanticiser
 {
   protected List<Statements> statementsList;
   protected SixteenHighKeywords keywords;
+  protected Logger logger;
 
   public SixteenHighSemanticiser(Statements statements, SixteenHighKeywords keywords)
   {
     this.keywords = keywords;
     this.statementsList = new ArrayList<>();
     this.statementsList.add(statements);
+    this.logger = new Logger();
   }
 
   public SixteenHighSemanticiser(List<Statements> statementsList, SixteenHighKeywords keywords)
@@ -41,20 +48,27 @@ public class SixteenHighSemanticiser
     parseStatements(statements.getStatements(), statements.getFilename());
   }
 
-  private void parseStatements(List<Statement> statements, String filename)
+  private boolean parseStatements(List<Statement> statements, String filename)
   {
     SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(filename);
 
     boolean previousDirectiveStatement = true;
     context.setCurrentDirectiveBlock(new DirectiveBlock());
-    StringZero errorZero = new StringZero();
     for (Statement statement : statements)
     {
       if (statement.isDirective())
       {
         if (previousDirectiveStatement)
         {
-          context.getCurrentDirectiveBlock().set((DirectiveStatement) statement, errorZero, keywords);
+          DirectiveBlock directiveBlock = context.getCurrentDirectiveBlock();
+          LogResult logResult = set(directiveBlock, (DirectiveStatement) statement, keywords);
+          if (logResult.isFailure())
+          {
+            if (!logger.log(filename, statement.getIndex(), logResult))
+            {
+              return false;
+            }
+          }
         }
         else
         {
@@ -67,17 +81,72 @@ public class SixteenHighSemanticiser
         previousDirectiveStatement = true;
       }
     }
+    return true;
+  }
+
+  public LogResult set(DirectiveBlock directiveBlock, DirectiveStatement directiveStatement, SixteenHighKeywords sixteenHighKeywords)
+  {
+    if (directiveStatement instanceof AccessModeStatement)
+    {
+      AccessMode accessMode = ((AccessModeStatement) directiveStatement).getAccessMode();
+      if (accessMode == null)
+      {
+        return new LogResult((directiveStatement).print(sixteenHighKeywords) + " not allowed.");
+      }
+      directiveBlock.setAccessMode(accessMode);
+      return success();
+    }
+    else if (directiveStatement instanceof AccessTime)
+    {
+      int accessTime = ((AccessTime) directiveStatement).getTime();
+      if ((accessTime <= 0) || (accessTime > 32000))
+      {
+        return new LogResult((directiveStatement).print(sixteenHighKeywords) + " out of bounds.  Expected (> 0, <= 32000).");
+      }
+      directiveBlock.setAccessTime(accessTime);
+      return success();
+    }
+    else if (directiveStatement instanceof StartAddress)
+    {
+      int address = ((StartAddress) directiveStatement).getAddress();
+      if (address < 0)
+      {
+        return new LogResult((directiveStatement).print(sixteenHighKeywords) + " out of bounds.  Expected >= 0.");
+      }
+      directiveBlock.setStartAddress(address);
+      return success();
+    }
+    else if (directiveStatement instanceof EndAddress)
+    {
+      int address = ((EndAddress) directiveStatement).getAddress();
+      if (address < 0)
+      {
+        return new LogResult((directiveStatement).print(sixteenHighKeywords) + " out of bounds.  Expected >= 0.");
+      }
+      directiveBlock.setEndAddress(address);
+      return success();
+    }
+    else
+    {
+      throw new SimulatorException(StringUtil.getClassSimpleName(directiveStatement) + " unexpected.");
+    }
   }
 
   private void parseNonDirectiveStatements(Statement statement, SixteenHighSemanticiserContext context)
   {
     if (statement.isRoutine())
     {
-      context.setCurrentRoutine(new Routine());
+      Routine routine = new Routine();
+
+      context.setCurrentRoutine(routine);
     }
     else if (statement.isStruct())
     {
       context.setCurrentStruct(new Struct());
+    }
+    else if (statement.isEnd())
+    {
+      context.setEnd();
     }
   }
 }

@@ -3,7 +3,7 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseExpression;
-import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.List;

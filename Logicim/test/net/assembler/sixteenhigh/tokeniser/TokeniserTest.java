@@ -2,6 +2,7 @@ package net.assembler.sixteenhigh.tokeniser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
+import net.common.logger.Logger;
 import net.common.parser.Tristate;
 import net.common.reflect.ClassInspector;
 import net.common.util.EnvironmentInspector;
@@ -277,7 +278,7 @@ public abstract class TokeniserTest
 
   protected static void testSimple()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Simple.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -323,7 +324,7 @@ public abstract class TokeniserTest
 
   protected static void testPointers()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Pointer.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -374,7 +375,7 @@ public abstract class TokeniserTest
 
   private static void testArrayDeclaration()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Array.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -396,7 +397,7 @@ public abstract class TokeniserTest
 
   private static void testExpressions()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Expressions.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -440,7 +441,7 @@ public abstract class TokeniserTest
 
   private static void testStack()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Stack.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -491,7 +492,7 @@ public abstract class TokeniserTest
 
   private static void testStruct()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Struct.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -542,7 +543,7 @@ public abstract class TokeniserTest
 
   private static void testDirectives()
   {
-    TextParserLog log = new TextParserLog();
+    Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Directive.16h", log);
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
@@ -567,7 +568,7 @@ public abstract class TokeniserTest
              "@@uint8[8192] lookup_table = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]\n", s);
   }
 
-  private static SixteenHighTokeniser createParser(String filename, TextParserLog log)
+  private static SixteenHighTokeniser createParser(String filename, Logger log)
   {
     ClassInspector classInspector = ClassInspector.forClass(TokeniserTest.class);
     String packageName = classInspector.getPackageName();
@@ -583,7 +584,7 @@ public abstract class TokeniserTest
 
   private static SixteenHighTokeniser createParser(String contents)
   {
-    return new SixteenHighTokeniser(new TextParserLog(),
+    return new SixteenHighTokeniser(new Logger(),
                                     new SixteenHighKeywords(),
                                     "",
                                     new Statements(""),

@@ -8,7 +8,8 @@ import net.assembler.sixteenhigh.tokeniser.statment.ArrayDeclaration;
 import net.assembler.sixteenhigh.tokeniser.statment.IfStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.Statement;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
-import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.common.logger.Logger;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
 import net.common.parser.TextParserPosition;
@@ -33,7 +34,7 @@ public class SixteenHighTokeniser
   protected LiteralParser literalParser;
   protected int allowedSeparator;
 
-  public SixteenHighTokeniser(TextParserLog log,
+  public SixteenHighTokeniser(Logger log,
                               SixteenHighKeywords keywords,
                               String filename,
                               Statements statements,

@@ -3,10 +3,10 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 
-public class Ret
+public class ReturnStatement
     extends Statement
 {
-  public Ret(Statements statements, int index)
+  public ReturnStatement(Statements statements, int index)
   {
     super(statements, index);
   }

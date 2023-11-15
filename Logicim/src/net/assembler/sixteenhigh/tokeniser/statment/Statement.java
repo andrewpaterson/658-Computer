@@ -59,5 +59,10 @@ public abstract class Statement
   {
     return false;
   }
+
+  public int getIndex()
+  {
+    return index;
+  }
 }
 

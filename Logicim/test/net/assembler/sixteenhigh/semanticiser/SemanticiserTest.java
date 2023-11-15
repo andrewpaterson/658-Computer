@@ -4,7 +4,7 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.tokeniser.ParseResult;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighTokeniser;
-import net.assembler.sixteenhigh.tokeniser.TextParserLog;
+import net.common.logger.Logger;
 
 import static net.logicim.assertions.Validator.*;
 
@@ -22,7 +22,7 @@ public abstract class SemanticiserTest
 
   private static SixteenHighTokeniser createParser(String contents, SixteenHighKeywords keywords)
   {
-    return new SixteenHighTokeniser(new TextParserLog(),
+    return new SixteenHighTokeniser(new Logger(),
                                     keywords,
                                     "",
                                     new Statements(""),

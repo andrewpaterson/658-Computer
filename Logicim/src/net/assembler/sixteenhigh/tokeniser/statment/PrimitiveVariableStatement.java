@@ -4,7 +4,7 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseExpression;
-import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 
 import java.util.List;
 

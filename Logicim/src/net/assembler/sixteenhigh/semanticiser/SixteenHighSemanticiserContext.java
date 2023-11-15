@@ -8,11 +8,14 @@ public class SixteenHighSemanticiserContext
   protected DirectiveBlock currentDirectiveBlock;
   protected Routine currentRoutine;
   protected Struct currentStruct;
+  protected Unit currentUnit;
 
   public SixteenHighSemanticiserContext(String filename)
   {
     this.filename = filename;
     this.currentDirectiveBlock = null;
+    this.currentStruct = null;
+    this.currentUnit = null;
   }
 
   public DirectiveBlock getCurrentDirectiveBlock()

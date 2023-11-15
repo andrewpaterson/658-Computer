@@ -2,7 +2,7 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
-import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 
 public class RoutineStatement
     extends Statement
@@ -26,6 +26,16 @@ public class RoutineStatement
   public boolean isRoutine()
   {
     return true;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public VariableScope getScope()
+  {
+    return scope;
   }
 }
 

@@ -6,18 +6,18 @@ import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.Expression;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
 
-public class NumberCompare
+public class CompareStatement
     extends Statement
 {
   protected VariableExpression leftVariableExpression;
   protected Expression rightExpression;
   protected SixteenHighKeywordCode keyword;
 
-  public NumberCompare(Statements statements,
-                       int index,
-                       VariableExpression leftVariableExpression,
-                       Expression rightExpression,
-                       SixteenHighKeywordCode keyword)
+  public CompareStatement(Statements statements,
+                          int index,
+                          VariableExpression leftVariableExpression,
+                          Expression rightExpression,
+                          SixteenHighKeywordCode keyword)
   {
     super(statements, index);
     this.leftVariableExpression = leftVariableExpression;

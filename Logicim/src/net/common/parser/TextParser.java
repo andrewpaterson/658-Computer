@@ -1,6 +1,6 @@
 package net.common.parser;
 
-import net.assembler.sixteenhigh.tokeniser.TextParserLog;
+import net.common.logger.Logger;
 import net.common.SimulatorException;
 import net.common.parser.primitive.CharPointer;
 import net.common.parser.primitive.FloatPointer;
@@ -27,13 +27,13 @@ public class TextParser
   private int position;
   private boolean outsideText;
   private List<Integer> mcPositions;
-  private TextParserLog log;
+  private Logger log;
   private String filename;
   private int miLine;
   private int miColumn;
   private TextParseError meError;
 
-  public TextParser(File file, TextParserLog log) throws IOException
+  public TextParser(File file, Logger log) throws IOException
   {
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -50,19 +50,19 @@ public class TextParser
     }
   }
 
-  public TextParser(char[] text, TextParserLog log, String filename)
+  public TextParser(char[] text, Logger log, String filename)
   {
     this.text = new StringZero(text);
     initialise(log, filename);
   }
 
-  public TextParser(String s, TextParserLog log, String filename)
+  public TextParser(String s, Logger log, String filename)
   {
     text = new StringZero(s);
     initialise(log, filename);
   }
 
-  private void initialise(TextParserLog log, String filename)
+  private void initialise(Logger log, String filename)
   {
     this.meError = NotSet;
     this.miLine = 0;
@@ -1357,7 +1357,7 @@ public class TextParser
     return "position [" + position + "] " + "text: " + substring;
   }
 
-  public TextParserLog getLog()
+  public Logger getLog()
   {
     return log;
   }

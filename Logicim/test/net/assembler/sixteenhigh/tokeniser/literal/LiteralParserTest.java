@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.tokeniser.literal;
 
-import net.assembler.sixteenhigh.tokeniser.TextParserLog;
+import net.common.logger.Logger;
 import net.common.parser.TextParser;
 
 import static net.common.parser.TextParser.*;
@@ -547,7 +547,7 @@ public abstract class LiteralParserTest
 
   protected static TextParser createTextParser(String contents)
   {
-    return new TextParser(contents, new TextParserLog(), "");
+    return new TextParser(contents, new Logger(), "");
   }
 }
 

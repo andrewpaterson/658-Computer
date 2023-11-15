@@ -1,4 +1,4 @@
-package net.assembler.sixteenhigh.tokeniser.statment.scope;
+package net.assembler.sixteenhigh.common.scope;
 
 public enum VariableScope
 {

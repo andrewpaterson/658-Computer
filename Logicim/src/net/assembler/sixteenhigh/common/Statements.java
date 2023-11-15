@@ -7,7 +7,7 @@ import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.StartAddress;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
-import net.assembler.sixteenhigh.tokeniser.statment.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public class Statements
 
   public void addReturn()
   {
-    statements.add(new Ret(this, statementIndex++));
+    statements.add(new ReturnStatement(this, statementIndex++));
   }
 
   public void addPush(Expression identifier)
@@ -118,7 +118,7 @@ public class Statements
 
   public void addNumberCompare(VariableExpression leftIdentifier, Expression right, SixteenHighKeywordCode keyword)
   {
-    statements.add(new NumberCompare(this, statementIndex++, leftIdentifier, right, keyword));
+    statements.add(new CompareStatement(this, statementIndex++, leftIdentifier, right, keyword));
   }
 
   public void addAssignment(VariableExpression leftIdentifier, SixteenHighKeywordCode keyword, Expression right)

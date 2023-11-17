@@ -2,19 +2,20 @@ package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 
-public class Routine
+public class RoutineDefinition
 {
   protected String name;
   protected VariableScope scope;
 
-  public void setName(String name)
+  public RoutineDefinition(String name, VariableScope scope)
   {
     this.name = name;
+    this.scope = scope;
   }
 
-  public void setScope(VariableScope scope)
+  public boolean is(String name)
   {
-    this.scope = scope;
+    return this.name.equals(name);
   }
 }
 

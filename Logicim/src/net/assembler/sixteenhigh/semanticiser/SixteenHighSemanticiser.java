@@ -22,13 +22,13 @@ import static net.assembler.sixteenhigh.semanticiser.LogResult.success;
 public class SixteenHighSemanticiser
 {
   protected List<Statements> statementsList;
-  protected SixteenHighDefinition sixteenHighDefinition;
+  protected SixteenHighDefinition definition;
   protected SixteenHighKeywords keywords;
   protected Logger logger;
 
-  public SixteenHighSemanticiser(SixteenHighDefinition sixteenHighDefinition, Statements statements, SixteenHighKeywords keywords)
+  public SixteenHighSemanticiser(SixteenHighDefinition definition, Statements statements, SixteenHighKeywords keywords)
   {
-    this.sixteenHighDefinition = sixteenHighDefinition;
+    this.definition = definition;
     this.keywords = keywords;
     this.statementsList = new ArrayList<>();
     this.statementsList.add(statements);
@@ -56,7 +56,7 @@ public class SixteenHighSemanticiser
 
   private boolean parseStatements(List<Statement> statements, String filename)
   {
-    SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(sixteenHighDefinition, filename);
+    SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(filename);
 
     boolean previousDirectiveStatement = true;
     context.setCurrentDirectiveBlock(new DirectiveBlock());
@@ -64,21 +64,9 @@ public class SixteenHighSemanticiser
     {
       if (statement.isDirective())
       {
-        if (previousDirectiveStatement)
+        if (!parseDirectiveStatement(filename, context, previousDirectiveStatement, statement))
         {
-          DirectiveBlock directiveBlock = context.getCurrentDirectiveBlock();
-          LogResult logResult = set(directiveBlock, (DirectiveStatement) statement, keywords);
-          if (logResult.isFailure())
-          {
-            if (!logger.log(filename, statement.getIndex(), logResult))
-            {
-              return false;
-            }
-          }
-        }
-        else
-        {
-          context.setCurrentDirectiveBlock(new DirectiveBlock(context.getCurrentDirectiveBlock()));
+          return false;
         }
       }
       else
@@ -90,7 +78,28 @@ public class SixteenHighSemanticiser
     return true;
   }
 
-  public LogResult set(DirectiveBlock directiveBlock, DirectiveStatement directiveStatement, SixteenHighKeywords sixteenHighKeywords)
+  private boolean parseDirectiveStatement(String filename, SixteenHighSemanticiserContext context, boolean previousDirectiveStatement, Statement statement)
+  {
+    if (previousDirectiveStatement)
+    {
+      DirectiveBlock directiveBlock = context.getCurrentDirectiveBlock();
+      LogResult logResult = parseDirectiveStatement(directiveBlock, (DirectiveStatement) statement, keywords);
+      if (logResult.isFailure())
+      {
+        if (!logger.log(filename, statement.getIndex(), logResult))
+        {
+          return false;
+        }
+      }
+    }
+    else
+    {
+      context.setCurrentDirectiveBlock(new DirectiveBlock(context.getCurrentDirectiveBlock()));
+    }
+    return true;
+  }
+
+  public LogResult parseDirectiveStatement(DirectiveBlock directiveBlock, DirectiveStatement directiveStatement, SixteenHighKeywords sixteenHighKeywords)
   {
     if (directiveStatement instanceof AccessModeStatement)
     {
@@ -127,7 +136,7 @@ public class SixteenHighSemanticiser
       int address = ((EndAddress) directiveStatement).getAddress();
       if (address < 0)
       {
-        return new LogResult((directiveStatement).print(sixteenHighKeywords) + " out of bounds.  Expected >= 0.");
+        return error((directiveStatement).print(sixteenHighKeywords) + " out of bounds.  Expected >= 0.");
       }
       directiveBlock.setEndAddress(address);
       return success();
@@ -138,12 +147,13 @@ public class SixteenHighSemanticiser
     }
   }
 
-  private void parseNonDirectiveStatements(Statement statement, SixteenHighSemanticiserContext context)
+  private boolean parseNonDirectiveStatements(Statement statement, SixteenHighSemanticiserContext context)
   {
     if (statement.isRoutine())
     {
       RoutineStatement routineStatement = (RoutineStatement) statement;
-      parseRoutineStatement(routineStatement, context);
+      LogResult logResult = parseRoutineStatement(routineStatement, context);
+      return logResult.isFailure();
     }
     else if (statement.isStruct())
     {
@@ -153,20 +163,58 @@ public class SixteenHighSemanticiser
     {
       context.setEnd();
     }
+    return false;
   }
 
-  private void parseRoutineStatement(RoutineStatement routineStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseRoutineStatement(RoutineStatement routineStatement, SixteenHighSemanticiserContext context)
   {
+    String routineName = routineStatement.getName();
+    VariableScope routineScope = routineStatement.getScope();
     if (context.currentRoutine == null)
     {
-      if (routineStatement.getScope() == VariableScope.file)
+      RoutineDefinition existingGlobalRoutine = definition.getGlobalRoutine(routineName);
+      if (existingGlobalRoutine != null)
       {
-        Routine existingRoutine = context.getRoutine(routineStatement.getName());
-        Routine routine = new Routine();
+        return error("A global routine [%s] is already defined.", routineName);
+      }
+
+      RoutineDefinition existingUnitRoutine = context.getCurrentUnit().getRoutine(routineName);
+      if (existingUnitRoutine != null)
+      {
+        return error("A unit routine [%s] is already defined.", routineName);
+      }
+      if (routineScope == VariableScope.routine)
+      {
+        return error("Routine [%s] may not have [routine] scope.", routineName);
+      }
+
+      if (routineScope == VariableScope.file)
+      {
+        RoutineDefinition routine = definition.createUnitRoutine(context.getCurrentUnit(), routineName, routineScope);
         context.setCurrentRoutine(routine);
+        return success();
+      }
+      else if (routineScope == VariableScope.global)
+      {
+        RoutineDefinition routine = definition.createGlobalRoutine(routineName, routineScope);
+        context.setCurrentRoutine(routine);
+        return success();
+      }
+      else
+      {
+        throw new SimulatorException("Unknown Variable Scope [%s] for Routine [%s].", routineScope, routineName);
       }
     }
+    else
+    {
+      return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, context.currentRoutine.name);
+    }
 
+  }
+
+  private LogResult error(String message, Object... parameters)
+  {
+    return new LogResult(String.format(message, parameters));
   }
 }
 

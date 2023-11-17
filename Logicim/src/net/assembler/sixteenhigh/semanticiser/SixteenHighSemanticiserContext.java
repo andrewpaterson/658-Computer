@@ -1,6 +1,5 @@
 package net.assembler.sixteenhigh.semanticiser;
 
-import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
 
@@ -8,14 +7,12 @@ public class SixteenHighSemanticiserContext
 {
   protected String filename;
   protected DirectiveBlock currentDirectiveBlock;
-  protected Routine currentRoutine;
+  protected RoutineDefinition currentRoutine;
   protected StructDefinition currentStruct;
   protected UnitDefinition currentUnit;
-  protected SixteenHighDefinition sixteenHighDefinition;
 
-  public SixteenHighSemanticiserContext(SixteenHighDefinition sixteenHighDefinition, String filename)
+  public SixteenHighSemanticiserContext(String filename)
   {
-    this.sixteenHighDefinition = sixteenHighDefinition;
     this.filename = filename;
     this.currentDirectiveBlock = null;
     this.currentStruct = null;
@@ -32,7 +29,7 @@ public class SixteenHighSemanticiserContext
     this.currentDirectiveBlock = directiveBlock;
   }
 
-  public void setCurrentRoutine(Routine routine)
+  public void setCurrentRoutine(RoutineDefinition routine)
   {
     currentRoutine = routine;
   }
@@ -53,7 +50,7 @@ public class SixteenHighSemanticiserContext
     return filename;
   }
 
-  public Routine getCurrentRoutine()
+  public RoutineDefinition getCurrentRoutine()
   {
     return currentRoutine;
   }
@@ -68,7 +65,7 @@ public class SixteenHighSemanticiserContext
     return currentUnit;
   }
 
-  public Routine getRoutine(String name)
+  public RoutineDefinition getRoutine(String name)
   {
     return null;
   }

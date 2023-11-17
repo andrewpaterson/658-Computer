@@ -2,8 +2,12 @@ package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
+import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.assembler.sixteenhigh.tokeniser.statment.RoutineStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.Statement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
 import net.common.SimulatorException;
@@ -18,11 +22,13 @@ import static net.assembler.sixteenhigh.semanticiser.LogResult.success;
 public class SixteenHighSemanticiser
 {
   protected List<Statements> statementsList;
+  protected SixteenHighDefinition sixteenHighDefinition;
   protected SixteenHighKeywords keywords;
   protected Logger logger;
 
-  public SixteenHighSemanticiser(Statements statements, SixteenHighKeywords keywords)
+  public SixteenHighSemanticiser(SixteenHighDefinition sixteenHighDefinition, Statements statements, SixteenHighKeywords keywords)
   {
+    this.sixteenHighDefinition = sixteenHighDefinition;
     this.keywords = keywords;
     this.statementsList = new ArrayList<>();
     this.statementsList.add(statements);
@@ -50,7 +56,7 @@ public class SixteenHighSemanticiser
 
   private boolean parseStatements(List<Statement> statements, String filename)
   {
-    SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(filename);
+    SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(sixteenHighDefinition, filename);
 
     boolean previousDirectiveStatement = true;
     context.setCurrentDirectiveBlock(new DirectiveBlock());
@@ -136,18 +142,31 @@ public class SixteenHighSemanticiser
   {
     if (statement.isRoutine())
     {
-      Routine routine = new Routine();
-
-      context.setCurrentRoutine(routine);
+      RoutineStatement routineStatement = (RoutineStatement) statement;
+      parseRoutineStatement(routineStatement, context);
     }
     else if (statement.isStruct())
     {
-      context.setCurrentStruct(new Struct());
+      context.setCurrentStruct(new StructDefinition());
     }
     else if (statement.isEnd())
     {
       context.setEnd();
     }
+  }
+
+  private void parseRoutineStatement(RoutineStatement routineStatement, SixteenHighSemanticiserContext context)
+  {
+    if (context.currentRoutine == null)
+    {
+      if (routineStatement.getScope() == VariableScope.file)
+      {
+        Routine existingRoutine = context.getRoutine(routineStatement.getName());
+        Routine routine = new Routine();
+        context.setCurrentRoutine(routine);
+      }
+    }
+
   }
 }
 

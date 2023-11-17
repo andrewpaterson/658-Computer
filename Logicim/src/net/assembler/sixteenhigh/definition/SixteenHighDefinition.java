@@ -1,13 +1,17 @@
 package net.assembler.sixteenhigh.definition;
 
-import net.assembler.sixteenhigh.semanticiser.Unit;
+import net.assembler.sixteenhigh.semanticiser.Routine;
+import net.assembler.sixteenhigh.semanticiser.UnitDefinition;
+import net.assembler.sixteenhigh.semanticiser.VariableDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SixteenHighDefinition
 {
-  protected List<Unit> units;
+  protected List<Routine> globalRoutines;
+  protected List<VariableDefinition> globalVariables;
+  protected List<UnitDefinition> units;
 
   public SixteenHighDefinition()
   {

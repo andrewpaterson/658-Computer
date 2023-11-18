@@ -209,7 +209,6 @@ public class SixteenHighSemanticiser
     {
       return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, context.currentRoutine.name);
     }
-
   }
 
   private LogResult error(String message, Object... parameters)

@@ -55,7 +55,10 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_overlap|130772738|71786963|cd2f1153-429e-4879-b680-11ce41b25eaf|61e20005-a0d8-4b33-9963-43c3fb099c57",
+        "silk_overlap|132617262|71272915|cd2f1153-429e-4879-b680-11ce41b25eaf|29490415-38cc-4bb9-8312-48c72bfa2876"
+      ],
       "meta": {
         "version": 2
       },
@@ -113,7 +116,7 @@
         "max_error": 0.005,
         "min_clearance": 0.0,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.0,
+        "min_copper_edge_clearance": 0.25,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.19999999999999998,
@@ -444,7 +447,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "Audio DAC.step",
+      "step": "PS2 FIFO.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""

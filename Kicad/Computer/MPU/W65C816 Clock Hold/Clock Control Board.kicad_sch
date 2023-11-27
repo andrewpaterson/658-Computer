@@ -420,6 +420,23 @@
         )
       )
     )
+    (symbol "HCP65:Pin_Header_01x16" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 1.27 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "Pin_Header_01x16" (at 0 -1.27 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical" (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "~" (at -5.08 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "Connector*:*_1x??_*" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+    )
     (symbol "Nexperia:74LVC157APW,118" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
       (property "Reference" "IC" (at 12.7 5.08 0)
         (effects (font (size 1.27 1.27)))
@@ -3689,7 +3706,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -3742,7 +3759,7 @@
     (pin "4" (uuid 0dacfba8-cf21-4eae-8407-326cd23be82f))
     (pin "5" (uuid 124620e8-9ad3-4772-970e-dd6014219c9f))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC28") (unit 1)
         )
@@ -3801,7 +3818,7 @@
     (pin "12" (uuid 11f5d6cb-8ee6-4387-b1cc-8fb0f8f62cab))
     (pin "13" (uuid 166c7f8a-9342-430a-8792-4a93126186a8))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC26") (unit 3)
         )
@@ -3860,7 +3877,7 @@
     (pin "12" (uuid b7e46143-726f-4ed5-bb72-db3082f09b06))
     (pin "13" (uuid 66d5f6bb-c3d8-4674-8cb1-51d6c40038d9))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC26") (unit 1)
         )
@@ -3911,7 +3928,7 @@
     (pin "5" (uuid 236aaa7f-3e14-4c4b-ad32-ae13cc806a50))
     (pin "6" (uuid dd282772-847a-473f-8e64-f8722b9853d3))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC47") (unit 1)
         )
@@ -3942,7 +3959,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -3995,7 +4012,7 @@
     (pin "4" (uuid b3f97326-1798-45c2-997f-f3a96759b06c))
     (pin "5" (uuid eec1e159-cc13-420e-bca0-e2a5874c3e28))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC24") (unit 1)
         )
@@ -4029,7 +4046,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4091,9 +4108,33 @@
     (pin "12" (uuid fb1260b9-823c-4e33-8183-78a7ef879001))
     (pin "13" (uuid 51c004e3-4315-4f2b-b890-625d18299829))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC26") (unit 2)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "HCP65:Pin_Header_01x16") (at 38.1 52.705 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 49ea41c8-0689-4354-b1e8-5911a874e56c)
+    (property "Reference" "J2" (at 38.1 51.435 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "Pin_Header_01x16" (at 38.1 53.975 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical" (at 38.1 56.515 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 33.02 52.705 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (instances
+      (project "W65C816 Clock Hold"
+        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
+          (reference "J2") (unit 1)
         )
       )
     )
@@ -4147,9 +4188,33 @@
     (pin "8" (uuid a22e1692-0b27-42e9-aaa4-fb036791d424))
     (pin "9" (uuid 4ad8176f-f657-4cbb-b815-755224fb8426))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "J1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "HCP65:Pin_Header_01x16") (at -27.305 52.705 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 4cbe8bb9-9976-4bc2-8a48-cc9820d4ee3c)
+    (property "Reference" "J3" (at -27.305 51.435 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "Pin_Header_01x16" (at -27.305 53.975 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical" (at -27.305 56.515 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at -32.385 52.705 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (instances
+      (project "W65C816 Clock Hold"
+        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
+          (reference "J3") (unit 1)
         )
       )
     )
@@ -4203,7 +4268,7 @@
     (pin "4" (uuid 64c6ec86-e827-4ece-9217-02415098bd0b))
     (pin "5" (uuid e12a7829-3141-433d-a0f4-5f7dc98bd8d1))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC44") (unit 1)
         )
@@ -4234,7 +4299,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C7") (unit 1)
         )
@@ -4296,7 +4361,7 @@
     (pin "12" (uuid bf31667e-9727-4d3f-9df1-17cd0f2d0633))
     (pin "13" (uuid 2d0dd838-8813-42b5-b823-b9b1bde0627e))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC26") (unit 4)
         )
@@ -4327,7 +4392,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4361,7 +4426,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4425,7 +4490,7 @@
           (reference "IC2") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC7") (unit 1)
         )
@@ -4459,7 +4524,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C7") (unit 1)
         )
@@ -4521,7 +4586,7 @@
     (pin "12" (uuid c66ada52-d5f4-4847-bbbb-855348df6187))
     (pin "13" (uuid c3cd2b1e-77a6-414e-9b0d-7545ff42f3cb))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 5)
         )
@@ -4555,7 +4620,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4589,7 +4654,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4623,7 +4688,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4657,7 +4722,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4719,7 +4784,7 @@
     (pin "12" (uuid 9e4a0854-b986-4133-bfff-623a6325fae7))
     (pin "13" (uuid f9076202-dae8-4876-be28-79edca1d318a))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 6)
         )
@@ -4753,7 +4818,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4787,7 +4852,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4849,7 +4914,7 @@
     (pin "8" (uuid adc330a3-a09c-4b43-897a-d62443b01bc0))
     (pin "9" (uuid 9874b8ed-a19b-4d12-990d-a0d7b54e1024))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC7") (unit 1)
         )
@@ -4883,7 +4948,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -4947,7 +5012,7 @@
     (pin "9" (uuid a5f168d7-fb4b-4956-8e13-357632148411))
     (pin "15" (uuid fca0bcd0-62ac-4185-a469-698224090adc))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC39") (unit 1)
         )
@@ -5009,7 +5074,7 @@
     (pin "12" (uuid 5d32de75-d4c8-4eee-91c0-aacfa5bef713))
     (pin "13" (uuid 7d424420-421e-43ae-b5f3-347e77a05f98))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 3)
         )
@@ -5068,7 +5133,7 @@
     (pin "4" (uuid f0f972c7-b3ba-4236-b6a1-476da5518005))
     (pin "5" (uuid 4908d9eb-2ced-409d-98fb-9911288688d7))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC51") (unit 1)
         )
@@ -5127,7 +5192,7 @@
     (pin "12" (uuid cb041c12-3653-47c1-b6c3-8ba5c9a89d43))
     (pin "13" (uuid 5c826705-ffb6-4aaf-8db8-01b4088e0f5c))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 2)
         )
@@ -5181,7 +5246,7 @@
     (pin "3" (uuid d5b39541-778e-49aa-8620-32a2aacd20d7))
     (pin "4" (uuid 69875ab7-bac5-43e6-a5e3-03c3eda5e7b1))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC43") (unit 1)
         )
@@ -5243,7 +5308,7 @@
     (pin "12" (uuid 033c14f0-bd6c-419b-903b-6aadcd74b426))
     (pin "13" (uuid 39ba96bd-011e-4186-9aec-ec71ab5191d5))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 4)
         )
@@ -5311,7 +5376,7 @@
     (pin "8" (uuid a931da62-ebe6-499a-ae53-df7eb6d18408))
     (pin "9" (uuid 5931d873-2576-4371-8da9-c45b76df3da1))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC37") (unit 1)
         )
@@ -5373,7 +5438,7 @@
     (pin "8" (uuid ba37898b-7f41-440a-bcce-fdc9e95a9901))
     (pin "9" (uuid 5b064e42-9cd1-451c-879d-cb070286ee3b))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC29") (unit 1)
         )
@@ -5407,7 +5472,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -5469,7 +5534,7 @@
     (pin "12" (uuid 205f9f98-70dd-47df-bcfc-42fd49b69f6b))
     (pin "13" (uuid 43f46492-8118-423a-ab06-2f35b07c4d97))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 1)
         )
@@ -5522,7 +5587,7 @@
     (pin "4" (uuid 4304d000-0828-4152-9145-0a3ef374ae27))
     (pin "5" (uuid 0a391edd-3993-4761-b51b-fe855a64eff5))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC19") (unit 1)
         )
@@ -5576,7 +5641,7 @@
     (pin "3" (uuid 97678360-4d6c-45ba-837c-695ef0f4acaa))
     (pin "4" (uuid eca06039-50e7-4ab8-b195-387a77564a57))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC43") (unit 2)
         )
@@ -5610,7 +5675,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -5674,7 +5739,7 @@
     (pin "8" (uuid dc2ef2f5-ef19-4a9f-b808-83357992b582))
     (pin "9" (uuid 51764eae-eb06-44b9-97f4-14b7b7ac7811))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC35") (unit 1)
         )
@@ -5708,7 +5773,7 @@
           (reference "C23") (unit 1)
         )
       )
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -5762,7 +5827,7 @@
     (pin "2" (uuid 790a7197-1a6e-4c61-bc1d-93f7fae88491))
     (pin "5" (uuid 4f1d4fa5-846c-4425-91d9-19ae256a8eab))
     (instances
-      (project "W65C816 Clock Control"
+      (project "W65C816 Clock Hold"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/159f3fa8-2dec-425b-bcc5-5cd8c301c885"
           (reference "IC43") (unit 1)
         )

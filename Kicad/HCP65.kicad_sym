@@ -3211,7 +3211,7 @@
     (property "Datasheet" "" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Silkscreen" "Blank 64 Pin" (at 15.24 -53.34 0)
+    (property "Silkscreen" "Kernal Mode" (at 15.24 -53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Description" "Kernal Mode" (at 15.24 -30.48 0)
@@ -6630,7 +6630,15 @@
         (fill (type background))
       )
     )
+    (symbol "W65C816_Clock_Hold_1_0"
+      (text "(~{PHI2})" (at 22.86 -17.78 0)
+        (effects (font (size 1.27 1.27)))
+      )
+    )
     (symbol "W65C816_Clock_Hold_1_1"
+      (text "(PHI2)" (at 22.86 -15.24 0)
+        (effects (font (size 1.27 1.27)))
+      )
       (pin passive line (at -5.08 -50.8 0) (length 5.08) hide
         (name "5V" (effects (font (size 1.27 1.27))))
         (number "1" (effects (font (size 1.27 1.27))))

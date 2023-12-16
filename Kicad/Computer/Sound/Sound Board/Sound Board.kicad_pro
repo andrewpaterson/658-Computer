@@ -56,7 +56,7 @@
         }
       ],
       "drc_exclusions": [
-        "courtyards_overlap|33160001|153501866|d2b40004-4777-4df8-b05a-13ca69925935|adc0d331-5a08-41d9-a7f4-bc5dd2debc99",
+        "courtyards_overlap|33160001|153501866|adc0d331-5a08-41d9-a7f4-bc5dd2debc99|d2b40004-4777-4df8-b05a-13ca69925935",
         "silk_overlap|31252795|50562695|933c89f0-5b42-4795-8025-c096d3bbe007|bea9aaf6-16b6-42be-bd55-b367d0921e5f"
       ],
       "meta": {
@@ -177,8 +177,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38,
-        0.45
+        0.38
       ],
       "via_dimensions": [
         {
@@ -435,6 +434,23 @@
       },
       {
         "bus_width": 12,
+        "clearance": 0.5,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "12V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "via_diameter": 1.3,
+        "via_drill": 1.0,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
@@ -470,8 +486,12 @@
         "pattern": "/GND"
       },
       {
-        "netclass": "Power",
+        "netclass": "12V",
         "pattern": "/12V"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/5V"
       }
     ]
   },

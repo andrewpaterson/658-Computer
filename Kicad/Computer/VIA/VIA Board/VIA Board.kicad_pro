@@ -56,7 +56,7 @@
         }
       ],
       "drc_exclusions": [
-        "courtyards_overlap|57290001|154796042|adc0d331-5a08-41d9-a7f4-bc5dd2debc99|82648607-e320-405a-b6db-d002f3d7b7c3",
+        "courtyards_overlap|57290001|154796042|82648607-e320-405a-b6db-d002f3d7b7c3|adc0d331-5a08-41d9-a7f4-bc5dd2debc99",
         "silk_overlap|56652795|53102695|37cd291e-71a2-4a08-afa8-ef5e74d873f7|92cf6c81-ae92-47fd-b3e1-4eee82aadbbb"
       ],
       "meta": {
@@ -177,8 +177,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38,
-        0.45
+        0.38
       ],
       "via_dimensions": [
         {
@@ -446,8 +445,8 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
+        "via_diameter": 1.3,
+        "via_drill": 1.0,
         "wire_width": 6
       },
       {
@@ -491,6 +490,10 @@
       {
         "netclass": "12V",
         "pattern": "/12V*"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/5V"
       }
     ]
   },

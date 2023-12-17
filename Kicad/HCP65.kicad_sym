@@ -6645,11 +6645,11 @@
       )
     )
   )
-  (symbol "SNES Clock" (in_bom yes) (on_board yes)
+  (symbol "SNES Controller Clock" (in_bom yes) (on_board yes)
     (property "Reference" "B" (at 15.875 5.08 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "SNES Clock" (at 15.24 3.175 0)
+    (property "Value" "SNES Controller Clock" (at 15.24 3.175 0)
       (effects (font (size 1.27 1.27) bold))
     )
     (property "Footprint" "HCP65_Parts:HCP65_SNES_Clock" (at 15.24 -53.975 0)
@@ -6658,13 +6658,13 @@
     (property "Datasheet" "" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Silkscreen" "SNES Clock" (at 16.51 -25.4 0)
+    (property "Silkscreen" "SNES Controller Clock" (at 15.24 -27.94 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Description" "SNES Clock" (at 16.51 -22.86 0)
+    (property "Description" "SNES Controller Clock" (at 15.24 -25.4 0)
       (effects (font (size 1.27 1.27)))
     )
-    (symbol "SNES Clock_0_1"
+    (symbol "SNES Controller Clock_0_1"
       (polyline
         (pts
           (xy 0 1.905)
@@ -6677,13 +6677,13 @@
         (fill (type background))
       )
     )
-    (symbol "SNES Clock_1_0"
+    (symbol "SNES Controller Clock_1_0"
       (pin no_connect line (at 35.56 -48.26 180) (length 5.08) hide
         (name "N.C." (effects (font (size 1.27 1.27))))
         (number "32" (effects (font (size 1.27 1.27))))
       )
     )
-    (symbol "SNES Clock_1_1"
+    (symbol "SNES Controller Clock_1_1"
       (pin passive line (at -5.08 -48.26 0) (length 5.08) hide
         (name "5V" (effects (font (size 1.27 1.27))))
         (number "1" (effects (font (size 1.27 1.27))))

@@ -64,5 +64,10 @@ public abstract class Statement
   {
     return index;
   }
+
+  public boolean isVariable()
+  {
+    return false;
+  }
 }
 

@@ -7,10 +7,22 @@ public class StructDefinition
     extends TypeDefinition
 {
   protected List<TypeDefinition> members;
+  protected String name;
 
-  public StructDefinition()
+  public StructDefinition(String name)
   {
     this.members = new ArrayList<>();
+    this.name = name;
+  }
+
+  public List<TypeDefinition> getMembers()
+  {
+    return members;
+  }
+
+  public String getName()
+  {
+    return name;
   }
 }
 

@@ -9,6 +9,8 @@ import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
 import net.assembler.sixteenhigh.tokeniser.statment.RoutineStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.Statement;
+import net.assembler.sixteenhigh.tokeniser.statment.StructStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.VariableStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
 import net.common.SimulatorException;
 import net.common.logger.Logger;
@@ -71,14 +73,20 @@ public class SixteenHighSemanticiser
       }
       else
       {
-        parseNonDirectiveStatements(statement, context);
+        if (!parseNonDirectiveStatements(statement, context))
+        {
+          return false;
+        }
         previousDirectiveStatement = true;
       }
     }
     return true;
   }
 
-  private boolean parseDirectiveStatement(String filename, SixteenHighSemanticiserContext context, boolean previousDirectiveStatement, Statement statement)
+  private boolean parseDirectiveStatement(String filename,
+                                          SixteenHighSemanticiserContext context,
+                                          boolean previousDirectiveStatement,
+                                          Statement statement)
   {
     if (previousDirectiveStatement)
     {
@@ -99,7 +107,9 @@ public class SixteenHighSemanticiser
     return true;
   }
 
-  public LogResult parseDirectiveStatement(DirectiveBlock directiveBlock, DirectiveStatement directiveStatement, SixteenHighKeywords sixteenHighKeywords)
+  public LogResult parseDirectiveStatement(DirectiveBlock directiveBlock,
+                                           DirectiveStatement directiveStatement,
+                                           SixteenHighKeywords sixteenHighKeywords)
   {
     if (directiveStatement instanceof AccessModeStatement)
     {
@@ -157,57 +167,88 @@ public class SixteenHighSemanticiser
     }
     else if (statement.isStruct())
     {
-      context.setCurrentStruct(new StructDefinition());
+      StructStatement structStatement = (StructStatement) statement;
+      LogResult logResult = parseStructStatement(structStatement, context);
+      return logResult.isFailure();
     }
     else if (statement.isEnd())
     {
       context.setEnd();
     }
+    else if (statement.isVariable())
+    {
+      VariableStatement variableStatement = (VariableStatement) statement;
+      LogResult logResult = parseVariableStatement(variableStatement, context);
+      return logResult.isFailure();
+    }
     return false;
+  }
+
+  private LogResult parseVariableStatement(VariableStatement variableStatement, SixteenHighSemanticiserContext context)
+  {
+    return null;
+  }
+
+  private LogResult parseStructStatement(StructStatement structStatement, SixteenHighSemanticiserContext context)
+  {
+    StructDefinition structName = new StructDefinition(structStatement.getName());
+    if (context.getCurrentStruct() != null)
+    {
+      return error("Struct [%s] nested in struct [%s] is not allowed.", structName, context.getCurrentStruct().getName());
+    }
+    if (context.getCurrentRoutine() != null)
+    {
+      return error("Struct [%s] nested in routine [%s] is not allowed.", structName, context.getCurrentRoutine().getName());
+    }
+
+    context.setCurrentStruct(structName);
+    return success();
   }
 
   private LogResult parseRoutineStatement(RoutineStatement routineStatement, SixteenHighSemanticiserContext context)
   {
     String routineName = routineStatement.getName();
-    VariableScope routineScope = routineStatement.getScope();
-    if (context.currentRoutine == null)
+    if (context.getCurrentRoutine() != null)
     {
-      RoutineDefinition existingGlobalRoutine = definition.getGlobalRoutine(routineName);
-      if (existingGlobalRoutine != null)
-      {
-        return error("A global routine [%s] is already defined.", routineName);
-      }
+      return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, context.getCurrentRoutine().getName());
+    }
+    if (context.getCurrentStruct() != null)
+    {
+      return error("Routine [%s] nested in struct [%s] is not allowed.", routineName, context.getCurrentStruct().getName());
+    }
 
-      RoutineDefinition existingUnitRoutine = context.getCurrentUnit().getRoutine(routineName);
-      if (existingUnitRoutine != null)
-      {
-        return error("A unit routine [%s] is already defined.", routineName);
-      }
-      if (routineScope == VariableScope.routine)
-      {
-        return error("Routine [%s] may not have [routine] scope.", routineName);
-      }
+    VariableScope routineScope = routineStatement.getScope();
+    RoutineDefinition existingGlobalRoutine = definition.getGlobalRoutine(routineName);
+    if (existingGlobalRoutine != null)
+    {
+      return error("A global routine [%s] is already defined.", routineName);
+    }
 
-      if (routineScope == VariableScope.file)
-      {
-        RoutineDefinition routine = definition.createUnitRoutine(context.getCurrentUnit(), routineName, routineScope);
-        context.setCurrentRoutine(routine);
-        return success();
-      }
-      else if (routineScope == VariableScope.global)
-      {
-        RoutineDefinition routine = definition.createGlobalRoutine(routineName, routineScope);
-        context.setCurrentRoutine(routine);
-        return success();
-      }
-      else
-      {
-        throw new SimulatorException("Unknown Variable Scope [%s] for Routine [%s].", routineScope, routineName);
-      }
+    RoutineDefinition existingUnitRoutine = context.getCurrentUnit().getRoutine(routineName);
+    if (existingUnitRoutine != null)
+    {
+      return error("A unit routine [%s] is already defined.", routineName);
+    }
+    if (routineScope == VariableScope.routine)
+    {
+      return error("Routine [%s] may not have [routine] scope.", routineName);
+    }
+
+    if (routineScope == VariableScope.file)
+    {
+      RoutineDefinition routine = definition.createUnitRoutine(context.getCurrentUnit(), routineName, routineScope);
+      context.setCurrentRoutine(routine);
+      return success();
+    }
+    else if (routineScope == VariableScope.global)
+    {
+      RoutineDefinition routine = definition.createGlobalRoutine(routineName, routineScope);
+      context.setCurrentRoutine(routine);
+      return success();
     }
     else
     {
-      return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, context.currentRoutine.name);
+      throw new SimulatorException("Unknown Variable Scope [%s] for Routine [%s].", routineScope, routineName);
     }
   }
 

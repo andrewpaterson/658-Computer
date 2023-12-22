@@ -3,6 +3,9 @@ package net.assembler.sixteenhigh.semanticiser;
 import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SixteenHighSemanticiserContext
 {
   protected String filename;
@@ -10,6 +13,7 @@ public class SixteenHighSemanticiserContext
   protected RoutineDefinition currentRoutine;
   protected StructDefinition currentStruct;
   protected UnitDefinition currentUnit;
+  protected List<Block> blockStack;
 
   public SixteenHighSemanticiserContext(String filename)
   {
@@ -17,6 +21,8 @@ public class SixteenHighSemanticiserContext
     this.currentDirectiveBlock = null;
     this.currentStruct = null;
     this.currentUnit = null;
+    this.blockStack = new ArrayList<>();
+
   }
 
   public DirectiveBlock getCurrentDirectiveBlock()

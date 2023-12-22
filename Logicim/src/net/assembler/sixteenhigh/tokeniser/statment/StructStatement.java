@@ -25,5 +25,10 @@ public class StructStatement
   {
     return true;
   }
+
+  public String getName()
+  {
+    return structName;
+  }
 }
 

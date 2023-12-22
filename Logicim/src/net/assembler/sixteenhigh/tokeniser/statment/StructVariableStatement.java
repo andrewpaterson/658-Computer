@@ -36,5 +36,11 @@ public class StructVariableStatement
   {
     return structIdentifier;
   }
+
+  @Override
+  public boolean isVariable()
+  {
+    return true;
+  }
 }
 

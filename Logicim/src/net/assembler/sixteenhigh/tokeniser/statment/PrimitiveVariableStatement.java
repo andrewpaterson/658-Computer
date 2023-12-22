@@ -36,5 +36,11 @@ public class PrimitiveVariableStatement
   {
     return sixteenHighKeywords.getKeyword(type);
   }
+
+  @Override
+  public boolean isVariable()
+  {
+    return true;
+  }
 }
 

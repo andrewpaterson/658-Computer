@@ -1,25 +1,25 @@
 package net.assembler.sixteenhigh.common;
 
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.*;
-import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessModeStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessModeTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.StartAddress;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Statements
+public class TokenUnit
 {
-  protected List<Statement> statements;
+  protected List<TokenStatement> statements;
   protected String filename;
   protected int statementIndex;
 
-  public Statements(String filename)
+  public TokenUnit(String filename)
   {
     this.filename = filename;
     this.statements = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Statements
 
   public void addLocalLabel(String name)
   {
-    LabelStatement label = new LabelStatement(this, statementIndex++, name);
+    LabelTokenStatement label = new LabelTokenStatement(this, statementIndex++, name);
     statements.add(label);
   }
 
@@ -39,14 +39,14 @@ public class Statements
                                    int pointerCount,
                                    BaseExpression initialiserExpression)
   {
-    VariableStatement variable = new PrimitiveVariableStatement(this,
-                                                                statementIndex++,
-                                                                keyword,
-                                                                name,
-                                                                scope,
-                                                                arrayMatrix,
-                                                                pointerCount,
-                                                                initialiserExpression);
+    VariableTokenStatement variable = new PrimitiveVariableTokenStatement(this,
+                                                                          statementIndex++,
+                                                                          keyword,
+                                                                          name,
+                                                                          scope,
+                                                                          arrayMatrix,
+                                                                          pointerCount,
+                                                                          initialiserExpression);
     statements.add(variable);
   }
 
@@ -57,73 +57,73 @@ public class Statements
                                 int pointerCount,
                                 BaseExpression initialiserExpression)
   {
-    VariableStatement variable = new StructVariableStatement(this,
-                                                             statementIndex++,
-                                                             structIdentifier,
-                                                             name,
-                                                             scope,
-                                                             arrayMatrix,
-                                                             pointerCount,
-                                                             initialiserExpression);
+    VariableTokenStatement variable = new StructVariableTokenStatement(this,
+                                                                       statementIndex++,
+                                                                       structIdentifier,
+                                                                       name,
+                                                                       scope,
+                                                                       arrayMatrix,
+                                                                       pointerCount,
+                                                                       initialiserExpression);
     statements.add(variable);
   }
 
-  public IfStatement addIf(SixteenHighKeywordCode keyword)
+  public IfTokenStatement addIf(SixteenHighKeywordCode keyword)
   {
-    IfStatement ifStatement = new IfStatement(this, statementIndex++, keyword);
+    IfTokenStatement ifStatement = new IfTokenStatement(this, statementIndex++, keyword);
     statements.add(ifStatement);
     return ifStatement;
   }
 
   public void addRoutine(String name, VariableScope scope)
   {
-    RoutineStatement subroutine = new RoutineStatement(this, statementIndex++, name, scope);
+    RoutineTokenStatement subroutine = new RoutineTokenStatement(this, statementIndex++, name, scope);
     statements.add(subroutine);
   }
 
-  public Statement getLast()
+  public TokenStatement getLast()
   {
     return statements.get(statements.size() - 1);
   }
 
   public void addFlow(FlowExpression flowExpression)
   {
-    statements.add(new FlowStatement(this, statementIndex++, flowExpression));
+    statements.add(new FlowTokenStatement(this, statementIndex++, flowExpression));
   }
 
   public void addReturn()
   {
-    statements.add(new ReturnStatement(this, statementIndex++));
+    statements.add(new ReturnTokenStatement(this, statementIndex++));
   }
 
   public void addPush(ExpressionList expressions)
   {
-    statements.add(new PushStatement(this, statementIndex++, expressions));
+    statements.add(new PushTokenStatement(this, statementIndex++, expressions));
   }
 
   public void addPull(VariableExpression expression)
   {
-    statements.add(new PullStatement(this, statementIndex++, expression, new PullExpression()));
+    statements.add(new PullTokenStatement(this, statementIndex++, expression, new PullExpression()));
   }
 
   public void addBitCompare(VariableExpression register, SixteenHighKeywordCode keyword)
   {
-    statements.add(new BitCompareStatement(this, statementIndex++, register, keyword));
+    statements.add(new BitCompareTokenStatement(this, statementIndex++, register, keyword));
   }
 
   public void addCrement(VariableExpression register, SixteenHighKeywordCode keyword)
   {
-    statements.add(new CrementStatement(this, statementIndex++, register, keyword));
+    statements.add(new CrementTokenStatement(this, statementIndex++, register, keyword));
   }
 
   public void addNumberCompare(VariableExpression leftExpression, ExpressionList right, SixteenHighKeywordCode keyword)
   {
-    statements.add(new CompareStatement(this, statementIndex++, leftExpression, right, keyword));
+    statements.add(new CompareTokenStatement(this, statementIndex++, leftExpression, right, keyword));
   }
 
   public void addAssignment(VariableExpression leftExpression, SixteenHighKeywordCode keyword, ExpressionList rightExpressions)
   {
-    statements.add(new AssignmentStatement(this, statementIndex++, leftExpression, keyword, rightExpressions));
+    statements.add(new AssignmentTokenStatement(this, statementIndex++, leftExpression, keyword, rightExpressions));
   }
 
   public void addStartAddress(int address)
@@ -138,7 +138,7 @@ public class Statements
 
   public void addAccessMode(SixteenHighKeywordCode mode)
   {
-    statements.add(new AccessModeStatement(this, statementIndex, mode));
+    statements.add(new AccessModeTokenStatement(this, statementIndex, mode));
   }
 
   public void addAccessTime(int cycles)
@@ -148,7 +148,7 @@ public class Statements
 
   public void addEnd()
   {
-    statements.add(new EndStatement(this, statementIndex));
+    statements.add(new EndTokenStatement(this, statementIndex));
   }
 
   public void dump(SixteenHighKeywords sixteenHighKeywords)
@@ -162,7 +162,7 @@ public class Statements
     int lines = 0;
     int depth = 0;
     boolean previousDirectiveStatement = false;
-    for (Statement statement : statements)
+    for (TokenStatement statement : statements)
     {
       if (statement.isEnd())
       {
@@ -212,11 +212,11 @@ public class Statements
 
   public void addStruct(String structName)
   {
-    StructStatement structStatement = new StructStatement(this, statementIndex++, structName);
+    StructTokenStatement structStatement = new StructTokenStatement(this, statementIndex++, structName);
     statements.add(structStatement);
   }
 
-  public List<Statement> getStatements()
+  public List<TokenStatement> getStatements()
   {
     return statements;
   }

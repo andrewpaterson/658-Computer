@@ -1,14 +1,14 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 
-public class StructStatement
-    extends Statement
+public class StructTokenStatement
+    extends TokenStatement
 {
   public String structName;
 
-  public StructStatement(Statements statements, int index, String structName)
+  public StructTokenStatement(TokenUnit statements, int index, String structName)
   {
     super(statements, index);
     this.structName = structName;

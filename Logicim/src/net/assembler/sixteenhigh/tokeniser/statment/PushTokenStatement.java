@@ -1,15 +1,15 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.ExpressionList;
 
-public class PushStatement
-    extends Statement
+public class PushTokenStatement
+    extends TokenStatement
 {
   protected ExpressionList expressions;
 
-  public PushStatement(Statements statements, int index, ExpressionList expressions)
+  public PushTokenStatement(TokenUnit statements, int index, ExpressionList expressions)
   {
     super(statements, index);
     this.expressions = expressions;

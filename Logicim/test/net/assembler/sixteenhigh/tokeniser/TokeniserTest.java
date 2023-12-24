@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh.tokeniser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.common.logger.Logger;
 import net.common.parser.Tristate;
 import net.common.reflect.ClassInspector;
@@ -21,7 +21,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("i = 0", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -33,7 +33,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("i = (c * 3)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -45,7 +45,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("i = -(560 * +(-0.4F % 3))", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -57,7 +57,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("c = -d", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -69,7 +69,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("c = ~(5)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -81,7 +81,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("x = (5 + ~d)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -93,7 +93,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("x<\n" +
              "*p[2]<\n" +
@@ -107,7 +107,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("> x\n" +
              "> *p[2]\n" +
@@ -122,7 +122,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("x = (5 + >>>d)", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -134,7 +134,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("int16 i;\nint16 number;\n", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -146,7 +146,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("$access_mode read-write\n" +
              "$access_time 3\n", statements.print(parser.getKeywords()));
@@ -159,7 +159,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -171,7 +171,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("a[2] = b[3]", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -183,7 +183,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("int8 i = 5", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -195,7 +195,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("int32 c = (a2d[y][a1d[y]] * 3);", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -207,7 +207,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("a1d[2] = 66;", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -219,7 +219,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("int8* @hello;\n" +
              "int8 @@world;\n", statements.print(parser.getKeywords()));
@@ -232,7 +232,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("p = &p[5]", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -244,7 +244,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("int8* address<", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -256,7 +256,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("struct @party\n" +
              "   int8* animal\n" +
@@ -270,7 +270,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validate("@party_address.line[1] = @hello", statements.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
@@ -283,7 +283,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -329,7 +329,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -380,7 +380,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -402,7 +402,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -446,7 +446,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -497,7 +497,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -548,7 +548,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
-    Statements statements = parser.getStatements();
+    TokenUnit statements = parser.getStatements();
     validateNotNull(statements);
     validateTrue(parser.isCompleted());
     String s = statements.print(parser.getKeywords());
@@ -578,7 +578,7 @@ public abstract class TokeniserTest
     return new SixteenHighTokeniser(log,
                                     new SixteenHighKeywords(),
                                     filename,
-                                    new Statements(filename),
+                                    new TokenUnit(filename),
                                     contents);
   }
 
@@ -587,7 +587,7 @@ public abstract class TokeniserTest
     return new SixteenHighTokeniser(new Logger(),
                                     new SixteenHighKeywords(),
                                     "",
-                                    new Statements(""),
+                                    new TokenUnit(""),
                                     contents);
   }
 

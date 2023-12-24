@@ -1,15 +1,15 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.FlowExpression;
 
-public class FlowStatement
-    extends Statement
+public class FlowTokenStatement
+    extends TokenStatement
 {
   protected FlowExpression flowExpression;
 
-  public FlowStatement(Statements statements, int index, FlowExpression flowExpression)
+  public FlowTokenStatement(TokenUnit statements, int index, FlowExpression flowExpression)
   {
     super(statements, index);
     this.flowExpression = flowExpression;

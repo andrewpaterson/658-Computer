@@ -1,16 +1,16 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 
-public class RoutineStatement
-    extends Statement
+public class RoutineTokenStatement
+    extends TokenStatement
 {
   protected String name;
   protected VariableScope scope;
 
-  public RoutineStatement(Statements statements, int index, String name, VariableScope scope)
+  public RoutineTokenStatement(TokenUnit statements, int index, String name, VariableScope scope)
   {
     super(statements, index);
     this.name = name;

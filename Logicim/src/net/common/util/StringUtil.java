@@ -1,6 +1,5 @@
 package net.common.util;
 
-import net.assembler.sixteenhigh.tokeniser.statment.directive.DirectiveStatement;
 import net.common.SimulatorException;
 
 import java.util.ArrayList;

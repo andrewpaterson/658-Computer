@@ -1,16 +1,16 @@
 package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
-import net.assembler.sixteenhigh.tokeniser.statment.RoutineStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.Statement;
-import net.assembler.sixteenhigh.tokeniser.statment.StructStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.VariableStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.RoutineTokenStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.StructTokenStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.VariableTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
 import net.common.SimulatorException;
 import net.common.logger.Logger;
@@ -23,40 +23,42 @@ import static net.assembler.sixteenhigh.semanticiser.LogResult.success;
 
 public class SixteenHighSemanticiser
 {
-  protected List<Statements> statementsList;
+  protected List<TokenUnit> units;
   protected SixteenHighDefinition definition;
   protected SixteenHighKeywords keywords;
   protected Logger logger;
 
-  public SixteenHighSemanticiser(SixteenHighDefinition definition, Statements statements, SixteenHighKeywords keywords)
+  public SixteenHighSemanticiser(SixteenHighDefinition definition,
+                                 TokenUnit unit,
+                                 SixteenHighKeywords keywords)
   {
     this.definition = definition;
     this.keywords = keywords;
-    this.statementsList = new ArrayList<>();
-    this.statementsList.add(statements);
+    this.units = new ArrayList<>();
+    this.units.add(unit);
     this.logger = new Logger();
   }
 
   public void parse()
   {
-    for (Statements statements : statementsList)
+    for (TokenUnit unit : units)
     {
-      parseStatements(statements);
+      parseUnit(unit);
     }
   }
 
-  private void parseStatements(Statements statements)
+  private void parseUnit(TokenUnit unit)
   {
-    parseStatements(statements.getStatements(), statements.getFilename());
+    parseStatements(unit.getStatements(), unit.getFilename());
   }
 
-  private boolean parseStatements(List<Statement> statements, String filename)
+  private boolean parseStatements(List<TokenStatement> statements, String filename)
   {
     SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(filename);
 
     boolean previousDirectiveStatement = true;
     context.setCurrentDirectiveBlock(new DirectiveBlock());
-    for (Statement statement : statements)
+    for (TokenStatement statement : statements)
     {
       if (statement.isDirective())
       {
@@ -80,12 +82,12 @@ public class SixteenHighSemanticiser
   private boolean parseDirectiveStatement(String filename,
                                           SixteenHighSemanticiserContext context,
                                           boolean previousDirectiveStatement,
-                                          Statement statement)
+                                          TokenStatement statement)
   {
     if (previousDirectiveStatement)
     {
       DirectiveBlock directiveBlock = context.getCurrentDirectiveBlock();
-      LogResult logResult = parseDirectiveStatement(directiveBlock, (DirectiveStatement) statement, keywords);
+      LogResult logResult = parseDirectiveStatement(directiveBlock, (DirectiveTokenStatement) statement, keywords);
       if (logResult.isFailure())
       {
         if (!logger.log(filename, statement.getIndex(), logResult))
@@ -102,12 +104,12 @@ public class SixteenHighSemanticiser
   }
 
   public LogResult parseDirectiveStatement(DirectiveBlock directiveBlock,
-                                           DirectiveStatement directiveStatement,
+                                           DirectiveTokenStatement directiveStatement,
                                            SixteenHighKeywords sixteenHighKeywords)
   {
-    if (directiveStatement instanceof AccessModeStatement)
+    if (directiveStatement instanceof AccessModeTokenStatement)
     {
-      AccessMode accessMode = ((AccessModeStatement) directiveStatement).getAccessMode();
+      AccessMode accessMode = ((AccessModeTokenStatement) directiveStatement).getAccessMode();
       if (accessMode == null)
       {
         return new LogResult((directiveStatement).print(sixteenHighKeywords) + " not allowed.");
@@ -151,17 +153,17 @@ public class SixteenHighSemanticiser
     }
   }
 
-  private boolean parseNonDirectiveStatements(Statement statement, SixteenHighSemanticiserContext context)
+  private boolean parseNonDirectiveStatements(TokenStatement statement, SixteenHighSemanticiserContext context)
   {
     if (statement.isRoutine())
     {
-      RoutineStatement routineStatement = (RoutineStatement) statement;
+      RoutineTokenStatement routineStatement = (RoutineTokenStatement) statement;
       LogResult logResult = parseRoutineStatement(routineStatement, context);
       return logResult.isFailure();
     }
     else if (statement.isStruct())
     {
-      StructStatement structStatement = (StructStatement) statement;
+      StructTokenStatement structStatement = (StructTokenStatement) statement;
       LogResult logResult = parseStructStatement(structStatement, context);
       return logResult.isFailure();
     }
@@ -171,19 +173,19 @@ public class SixteenHighSemanticiser
     }
     else if (statement.isVariable())
     {
-      VariableStatement variableStatement = (VariableStatement) statement;
+      VariableTokenStatement variableStatement = (VariableTokenStatement) statement;
       LogResult logResult = parseVariableStatement(variableStatement, context);
       return logResult.isFailure();
     }
     return false;
   }
 
-  private LogResult parseVariableStatement(VariableStatement variableStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseVariableStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
   {
     return null;
   }
 
-  private LogResult parseStructStatement(StructStatement structStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)
   {
     StructDefinition structName = new StructDefinition(structStatement.getName());
     if (context.getCurrentStruct() != null)
@@ -199,7 +201,7 @@ public class SixteenHighSemanticiser
     return success();
   }
 
-  private LogResult parseRoutineStatement(RoutineStatement routineStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseRoutineStatement(RoutineTokenStatement routineStatement, SixteenHighSemanticiserContext context)
   {
     String routineName = routineStatement.getName();
     if (context.getCurrentRoutine() != null)

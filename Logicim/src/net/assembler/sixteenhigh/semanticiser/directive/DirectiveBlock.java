@@ -1,13 +1,5 @@
 package net.assembler.sixteenhigh.semanticiser.directive;
 
-import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.semanticiser.LogResult;
-import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
-import net.common.SimulatorException;
-import net.common.util.StringUtil;
-
-import static net.assembler.sixteenhigh.semanticiser.LogResult.success;
-
 public class DirectiveBlock
 {
   public long startAddress;

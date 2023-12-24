@@ -1,15 +1,15 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 
-public abstract class Statement
+public abstract class TokenStatement
 {
-  protected Statements statements;
+  protected TokenUnit statements;
   protected int index;
   protected boolean semicolon;
 
-  public Statement(Statements statements, int index)
+  public TokenStatement(TokenUnit statements, int index)
   {
     this.statements = statements;
     this.index = index;

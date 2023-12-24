@@ -1,20 +1,20 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
 
-public class BitCompareStatement
-    extends Statement
+public class CrementTokenStatement
+    extends TokenStatement
 {
   protected VariableExpression variableExpression;
   protected SixteenHighKeywordCode keyword;
 
-  public BitCompareStatement(Statements statements,
-                             int index,
-                             VariableExpression variableExpression,
-                             SixteenHighKeywordCode keyword)
+  public CrementTokenStatement(TokenUnit statements,
+                               int index,
+                               VariableExpression variableExpression,
+                               SixteenHighKeywordCode keyword)
   {
     super(statements, index);
     this.variableExpression = variableExpression;
@@ -24,7 +24,7 @@ public class BitCompareStatement
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return variableExpression.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + semicolon();
+    return variableExpression.print(sixteenHighKeywords) + sixteenHighKeywords.getKeyword(keyword) + semicolon();
   }
 }
 

@@ -1,14 +1,14 @@
 package net.assembler.sixteenhigh.tokeniser.statment.directive;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 
 public class AccessTime
-    extends DirectiveStatement
+    extends DirectiveTokenStatement
 {
   protected int cycles;
 
-  public AccessTime(Statements statements, int index, int cycles)
+  public AccessTime(TokenUnit statements, int index, int cycles)
   {
     super(statements, index);
     this.cycles = cycles;

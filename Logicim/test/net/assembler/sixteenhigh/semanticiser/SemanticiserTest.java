@@ -1,7 +1,7 @@
 package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.tokeniser.ParseResult;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighTokeniser;
@@ -27,7 +27,7 @@ public abstract class SemanticiserTest
     return new SixteenHighTokeniser(new Logger(),
                                     keywords,
                                     "",
-                                    new Statements(""),
+                                    new TokenUnit(""),
                                     contents);
   }
 

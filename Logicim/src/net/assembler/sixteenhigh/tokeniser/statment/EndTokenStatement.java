@@ -1,12 +1,12 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 
-public class EndStatement
-    extends Statement
+public class EndTokenStatement
+    extends TokenStatement
 {
-  public EndStatement(Statements statements, int index)
+  public EndTokenStatement(TokenUnit statements, int index)
   {
     super(statements, index);
   }

@@ -1,14 +1,14 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 
-public class LabelStatement
-    extends Statement
+public class LabelTokenStatement
+    extends TokenStatement
 {
   protected String name;
 
-  public LabelStatement(Statements statements, int index, String name)
+  public LabelTokenStatement(TokenUnit statements, int index, String name)
   {
     super(statements, index);
     this.name = name;

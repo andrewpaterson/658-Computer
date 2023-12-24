@@ -1,12 +1,12 @@
 package net.assembler.sixteenhigh.tokeniser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralParser;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralResult;
 import net.assembler.sixteenhigh.tokeniser.statment.ArrayDeclaration;
-import net.assembler.sixteenhigh.tokeniser.statment.IfStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.Statement;
+import net.assembler.sixteenhigh.tokeniser.statment.IfTokenStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.logger.Logger;
@@ -29,7 +29,7 @@ public class SixteenHighTokeniser
   protected SixteenHighKeywords keywords;
   protected TextParser textParser;
   protected int statementIndex;
-  protected Statements statements;
+  protected TokenUnit statements;
   protected String filename;
   protected LiteralParser literalParser;
   protected int allowedSeparator;
@@ -37,7 +37,7 @@ public class SixteenHighTokeniser
   public SixteenHighTokeniser(Logger log,
                               SixteenHighKeywords keywords,
                               String filename,
-                              Statements statements,
+                              TokenUnit statements,
                               String source)
   {
     this.filename = filename;
@@ -52,7 +52,7 @@ public class SixteenHighTokeniser
 
   public ParseResult parse()
   {
-    Statement lastStatement = null;
+    TokenStatement lastStatement = null;
     boolean canParseInterStatement = false;
     while (textParser.hasMoreText())
     {
@@ -414,7 +414,7 @@ public class SixteenHighTokeniser
   {
     if (keywords.getIfs().contains(keyword))
     {
-      IfStatement ifStatement = statements.addIf(keyword);
+      IfTokenStatement ifStatement = statements.addIf(keyword);
       Tristate state = textParser.getExactIdentifier(keywords.go(), true);
       if (state == ERROR)
       {
@@ -1524,7 +1524,7 @@ public class SixteenHighTokeniser
     return _false();
   }
 
-  public Statements getStatements()
+  public TokenUnit getStatements()
   {
     return statements;
   }

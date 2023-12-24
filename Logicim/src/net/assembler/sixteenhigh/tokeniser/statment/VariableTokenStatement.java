@@ -1,15 +1,15 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseExpression;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.util.StringUtil;
 
 import java.util.List;
 
-public abstract class VariableStatement
-    extends Statement
+public abstract class VariableTokenStatement
+    extends TokenStatement
 {
   public String name;
   public VariableScope scope;
@@ -17,13 +17,13 @@ public abstract class VariableStatement
   public int pointerCount;
   public BaseExpression initialiserExpression;
 
-  public VariableStatement(Statements statements,
-                           int index,
-                           String name,
-                           VariableScope scope,
-                           List<Long> arrayMatrix,
-                           int pointerCount,
-                           BaseExpression initialiserExpression)
+  public VariableTokenStatement(TokenUnit statements,
+                                int index,
+                                String name,
+                                VariableScope scope,
+                                List<Long> arrayMatrix,
+                                int pointerCount,
+                                BaseExpression initialiserExpression)
   {
     super(statements, index);
     this.name = name;

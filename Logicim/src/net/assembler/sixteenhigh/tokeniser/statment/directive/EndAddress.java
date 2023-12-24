@@ -1,14 +1,14 @@
 package net.assembler.sixteenhigh.tokeniser.statment.directive;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 
 public class EndAddress
-    extends DirectiveStatement
+    extends DirectiveTokenStatement
 {
   protected int address;
 
-  public EndAddress(Statements statements, int index, int address)
+  public EndAddress(TokenUnit statements, int index, int address)
   {
     super(statements, index);
     this.address = address;

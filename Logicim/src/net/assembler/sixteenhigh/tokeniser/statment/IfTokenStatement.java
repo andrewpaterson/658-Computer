@@ -1,17 +1,17 @@
 package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
-import net.assembler.sixteenhigh.common.Statements;
+import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.FlowExpression;
 
-public class IfStatement
-    extends Statement
+public class IfTokenStatement
+    extends TokenStatement
 {
   protected SixteenHighKeywordCode type;
   protected FlowExpression go;
 
-  public IfStatement(Statements statements, int index, SixteenHighKeywordCode type)
+  public IfTokenStatement(TokenUnit statements, int index, SixteenHighKeywordCode type)
   {
     super(statements, index);
     this.type = type;

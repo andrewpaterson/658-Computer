@@ -28,7 +28,7 @@ public class Statements
 
   public void addLocalLabel(String name)
   {
-    Label label = new Label(this, statementIndex++, name);
+    LabelStatement label = new LabelStatement(this, statementIndex++, name);
     statements.add(label);
   }
 
@@ -98,22 +98,22 @@ public class Statements
 
   public void addPush(Expression identifier)
   {
-    statements.add(new Push(this, statementIndex++, identifier));
+    statements.add(new PushStatement(this, statementIndex++, identifier));
   }
 
   public void addPull(VariableExpression identifier)
   {
-    statements.add(new Pull(this, statementIndex++, identifier, new PullExpression()));
+    statements.add(new PullStatement(this, statementIndex++, identifier, new PullExpression()));
   }
 
   public void addBitCompare(VariableExpression register, SixteenHighKeywordCode keyword)
   {
-    statements.add(new BitCompare(this, statementIndex++, register, keyword));
+    statements.add(new BitCompareStatement(this, statementIndex++, register, keyword));
   }
 
   public void addCrement(VariableExpression register, SixteenHighKeywordCode keyword)
   {
-    statements.add(new Crement(this, statementIndex++, register, keyword));
+    statements.add(new CrementStatement(this, statementIndex++, register, keyword));
   }
 
   public void addNumberCompare(VariableExpression leftIdentifier, Expression right, SixteenHighKeywordCode keyword)
@@ -123,7 +123,7 @@ public class Statements
 
   public void addAssignment(VariableExpression leftIdentifier, SixteenHighKeywordCode keyword, Expression right)
   {
-    statements.add(new Assignment(this, statementIndex++, leftIdentifier, keyword, right));
+    statements.add(new AssignmentStatement(this, statementIndex++, leftIdentifier, keyword, right));
   }
 
   public void addStartAddress(int address)
@@ -148,7 +148,7 @@ public class Statements
 
   public void addEnd()
   {
-    statements.add(new End(this, statementIndex));
+    statements.add(new EndStatement(this, statementIndex));
   }
 
   public void dump(SixteenHighKeywords sixteenHighKeywords)

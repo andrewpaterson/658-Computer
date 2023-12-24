@@ -3,21 +3,25 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 
-public class End
+public class LabelStatement
     extends Statement
 {
-  public End(Statements statements, int index)
+  protected String name;
+
+  public LabelStatement(Statements statements, int index, String name)
   {
     super(statements, index);
+    this.name = name;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "end\n";
+    return name + ":";
   }
 
-  public boolean isEnd()
+  @Override
+  public boolean isLabel()
   {
     return true;
   }

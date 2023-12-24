@@ -2,29 +2,26 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
-import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.PullExpression;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
 
-public class BitCompare
+public class PullStatement
     extends Statement
 {
   protected VariableExpression variableExpression;
-  protected SixteenHighKeywordCode keyword;
+  protected PullExpression pull;
 
-  public BitCompare(Statements statements,
-                    int index,
-                    VariableExpression variableExpression,
-                    SixteenHighKeywordCode keyword)
+  public PullStatement(Statements statements, int index, VariableExpression variableExpression, PullExpression pull)
   {
     super(statements, index);
     this.variableExpression = variableExpression;
-    this.keyword = keyword;
+    this.pull = pull;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return variableExpression.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + semicolon();
+    return variableExpression.print(sixteenHighKeywords) + pull.print(sixteenHighKeywords) + semicolon();
   }
 }
 

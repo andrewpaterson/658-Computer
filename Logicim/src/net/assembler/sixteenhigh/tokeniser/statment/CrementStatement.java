@@ -5,16 +5,16 @@ import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
 
-public class Crement
+public class CrementStatement
     extends Statement
 {
   protected VariableExpression variableExpression;
   protected SixteenHighKeywordCode keyword;
 
-  public Crement(Statements statements,
-                 int index,
-                 VariableExpression variableExpression,
-                 SixteenHighKeywordCode keyword)
+  public CrementStatement(Statements statements,
+                          int index,
+                          VariableExpression variableExpression,
+                          SixteenHighKeywordCode keyword)
   {
     super(statements, index);
     this.variableExpression = variableExpression;

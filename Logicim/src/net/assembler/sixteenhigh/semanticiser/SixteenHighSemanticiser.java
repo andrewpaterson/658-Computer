@@ -37,12 +37,6 @@ public class SixteenHighSemanticiser
     this.logger = new Logger();
   }
 
-  public SixteenHighSemanticiser(List<Statements> statementsList, SixteenHighKeywords keywords)
-  {
-    this.keywords = keywords;
-    this.statementsList = statementsList;
-  }
-
   public void parse()
   {
     for (Statements statements : statementsList)

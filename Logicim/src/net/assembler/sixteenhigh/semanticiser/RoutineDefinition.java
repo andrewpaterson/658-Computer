@@ -6,13 +6,11 @@ public class RoutineDefinition
 {
   protected String name;
   protected VariableScope scope;
-  protected Block block;
 
-  public RoutineDefinition(String name, VariableScope scope, Block block)
+  public RoutineDefinition(String name, VariableScope scope)
   {
     this.name = name;
     this.scope = scope;
-    this.block = block
   }
 
   public boolean is(String name)
@@ -28,11 +26,6 @@ public class RoutineDefinition
   public VariableScope getScope()
   {
     return scope;
-  }
-
-  public Block getBlock()
-  {
-    return block;
   }
 }
 

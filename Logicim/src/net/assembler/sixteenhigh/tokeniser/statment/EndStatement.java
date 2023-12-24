@@ -2,23 +2,24 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.Expression;
 
-public class Push
+public class EndStatement
     extends Statement
 {
-  protected Expression expression;
-
-  public Push(Statements statements, int index, Expression expression)
+  public EndStatement(Statements statements, int index)
   {
     super(statements, index);
-    this.expression = expression;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "> " + expression.print(sixteenHighKeywords) + semicolon();
+    return "end\n";
+  }
+
+  public boolean isEnd()
+  {
+    return true;
   }
 }
 

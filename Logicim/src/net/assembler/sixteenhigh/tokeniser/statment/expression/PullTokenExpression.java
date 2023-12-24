@@ -3,8 +3,8 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.common.SimulatorException;
 
-public class PullExpression
-    extends BaseExpression
+public class PullTokenExpression
+    extends BaseTokenExpression
 {
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
@@ -13,7 +13,7 @@ public class PullExpression
   }
 
   @Override
-  public void add(Expression expression)
+  public void add(TokenExpression expression)
   {
     throw new SimulatorException();
   }

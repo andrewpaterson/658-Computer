@@ -3,13 +3,13 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.FlowExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.FlowTokenExpression;
 
 public class IfTokenStatement
     extends TokenStatement
 {
   protected SixteenHighKeywordCode type;
-  protected FlowExpression go;
+  protected FlowTokenExpression go;
 
   public IfTokenStatement(TokenUnit statements, int index, SixteenHighKeywordCode type)
   {
@@ -17,7 +17,7 @@ public class IfTokenStatement
     this.type = type;
   }
 
-  public void setGo(FlowExpression go)
+  public void setGo(FlowTokenExpression go)
   {
     this.go = go;
   }

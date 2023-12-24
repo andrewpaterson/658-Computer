@@ -2,7 +2,7 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 
-public interface Expression
+public interface TokenExpression
 {
   String print(SixteenHighKeywords sixteenHighKeywords);
 

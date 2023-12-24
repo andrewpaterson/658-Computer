@@ -5,12 +5,12 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionList
-    extends BaseExpression
+public class TokenExpressionList
+    extends BaseTokenExpression
 {
-  public List<Expression> expressions;
+  public List<TokenExpression> expressions;
 
-  public ExpressionList()
+  public TokenExpressionList()
   {
     super();
     expressions = new ArrayList<>();
@@ -38,7 +38,7 @@ public class ExpressionList
     return true;
   }
 
-  public void add(Expression expression)
+  public void add(TokenExpression expression)
   {
     expressions.add(expression);
   }

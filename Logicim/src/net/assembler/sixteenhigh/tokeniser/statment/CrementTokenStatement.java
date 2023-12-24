@@ -3,17 +3,17 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableTokenExpression;
 
 public class CrementTokenStatement
     extends TokenStatement
 {
-  protected VariableExpression variableExpression;
+  protected VariableTokenExpression variableExpression;
   protected SixteenHighKeywordCode keyword;
 
   public CrementTokenStatement(TokenUnit statements,
                                int index,
-                               VariableExpression variableExpression,
+                               VariableTokenExpression variableExpression,
                                SixteenHighKeywordCode keyword)
   {
     super(statements, index);

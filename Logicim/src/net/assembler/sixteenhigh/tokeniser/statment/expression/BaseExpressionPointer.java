@@ -2,14 +2,14 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 
 public class BaseExpressionPointer
 {
-  public BaseExpression expression;
+  public BaseTokenExpression expression;
 
   public BaseExpressionPointer()
   {
     expression = null;
   }
 
-  public void setExpression(BaseExpression expression)
+  public void setExpression(BaseTokenExpression expression)
   {
     this.expression = expression;
   }

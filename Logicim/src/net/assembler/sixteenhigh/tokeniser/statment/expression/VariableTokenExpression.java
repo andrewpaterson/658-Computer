@@ -6,14 +6,14 @@ import net.common.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VariableExpression
-    implements Expression
+public class VariableTokenExpression
+    implements TokenExpression
 {
   public int dereferenceCount;
   public boolean reference;
   public List<VariableMember> members;
 
-  public VariableExpression(VariableMember variableMember, int dereferenceCount, boolean reference)
+  public VariableTokenExpression(VariableMember variableMember, int dereferenceCount, boolean reference)
   {
     this.dereferenceCount = dereferenceCount;
     this.reference = reference;

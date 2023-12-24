@@ -2,7 +2,7 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.util.StringUtil;
 
@@ -15,7 +15,7 @@ public abstract class VariableTokenStatement
   public VariableScope scope;
   public List<Long> arrayMatrix;
   public int pointerCount;
-  public BaseExpression initialiserExpression;
+  public BaseTokenExpression initialiserExpression;
 
   public VariableTokenStatement(TokenUnit statements,
                                 int index,
@@ -23,7 +23,7 @@ public abstract class VariableTokenStatement
                                 VariableScope scope,
                                 List<Long> arrayMatrix,
                                 int pointerCount,
-                                BaseExpression initialiserExpression)
+                                BaseTokenExpression initialiserExpression)
   {
     super(statements, index);
     this.name = name;

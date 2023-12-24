@@ -3,20 +3,20 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.ExpressionList;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpressionList;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableTokenExpression;
 
 public class CompareTokenStatement
     extends TokenStatement
 {
-  protected VariableExpression leftVariableExpression;
-  protected ExpressionList rightExpressions;
+  protected VariableTokenExpression leftVariableExpression;
+  protected TokenExpressionList rightExpressions;
   protected SixteenHighKeywordCode keyword;
 
   public CompareTokenStatement(TokenUnit statements,
                                int index,
-                               VariableExpression leftVariableExpression,
-                               ExpressionList rightExpressions,
+                               VariableTokenExpression leftVariableExpression,
+                               TokenExpressionList rightExpressions,
                                SixteenHighKeywordCode keyword)
   {
     super(statements, index);

@@ -3,13 +3,13 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 
-public class UnaryExpression
-    implements Expression
+public class UnaryTokenExpression
+    implements TokenExpression
 {
   public SixteenHighKeywordCode operator;
-  public Expression expression;
+  public TokenExpression expression;
 
-  public UnaryExpression(SixteenHighKeywordCode operator, Expression expression)
+  public UnaryTokenExpression(SixteenHighKeywordCode operator, TokenExpression expression)
   {
     this.operator = operator;
     this.expression = expression;

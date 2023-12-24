@@ -4,17 +4,17 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 
 import java.util.List;
 
-public abstract class BaseExpression
-    implements Expression
+public abstract class BaseTokenExpression
+    implements TokenExpression
 {
-  public BaseExpression()
+  public BaseTokenExpression()
   {
   }
 
-  protected void printCommaSeparatedExpressions(List<Expression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printCommaSeparatedExpressions(List<TokenExpression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
-    for (Expression expression : expressions)
+    for (TokenExpression expression : expressions)
     {
       if (isFirst)
       {
@@ -28,17 +28,17 @@ public abstract class BaseExpression
     }
   }
 
-  protected void printSeparatedExpressions(List<Expression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printSeparatedExpressions(List<TokenExpression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
-    for (Expression expression : expressions)
+    for (TokenExpression expression : expressions)
     {
       builder.append(expression.print(sixteenHighKeywords));
     }
   }
 
-  protected boolean containsArrayExpressionInitialiser(List<Expression> expressions)
+  protected boolean containsArrayExpressionInitialiser(List<TokenExpression> expressions)
   {
-    for (Expression expression : expressions)
+    for (TokenExpression expression : expressions)
     {
       if (expression.isArrayExpressionInitialiser())
       {
@@ -48,10 +48,10 @@ public abstract class BaseExpression
     return false;
   }
 
-  protected void printExpressions(List<Expression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printExpressions(List<TokenExpression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
-    for (Expression expression : expressions)
+    for (TokenExpression expression : expressions)
     {
       if (isFirst)
       {
@@ -65,7 +65,7 @@ public abstract class BaseExpression
     }
   }
 
-  public abstract void add(Expression expression);
+  public abstract void add(TokenExpression expression);
 
   @Override
   public abstract boolean isLiteral();

@@ -2,8 +2,8 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 
-public class StructExpression
-    implements Expression
+public class StructTokenExpression
+    implements TokenExpression
 {
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)

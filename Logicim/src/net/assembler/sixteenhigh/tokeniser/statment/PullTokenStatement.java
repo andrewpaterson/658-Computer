@@ -2,16 +2,16 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.PullExpression;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.PullTokenExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableTokenExpression;
 
 public class PullTokenStatement
     extends TokenStatement
 {
-  protected VariableExpression variableExpression;
-  protected PullExpression pull;
+  protected VariableTokenExpression variableExpression;
+  protected PullTokenExpression pull;
 
-  public PullTokenStatement(TokenUnit statements, int index, VariableExpression variableExpression, PullExpression pull)
+  public PullTokenStatement(TokenUnit statements, int index, VariableTokenExpression variableExpression, PullTokenExpression pull)
   {
     super(statements, index);
     this.variableExpression = variableExpression;

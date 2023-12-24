@@ -2,12 +2,12 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 
-public class GosubExpression
-    extends FlowExpression
+public class GosubTokenExpression
+    extends FlowTokenExpression
 {
   protected String label;
 
-  public GosubExpression(String label)
+  public GosubTokenExpression(String label)
   {
     this.label = label;
   }

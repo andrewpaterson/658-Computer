@@ -3,21 +3,21 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.ExpressionList;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpressionList;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableTokenExpression;
 
 public class AssignmentTokenStatement
     extends TokenStatement
 {
-  protected VariableExpression leftVariableExpression;
+  protected VariableTokenExpression leftVariableExpression;
   protected SixteenHighKeywordCode keyword;
-  protected ExpressionList rightExpressions;
+  protected TokenExpressionList rightExpressions;
 
   public AssignmentTokenStatement(TokenUnit statements,
                                   int index,
-                                  VariableExpression leftVariableExpression,
+                                  VariableTokenExpression leftVariableExpression,
                                   SixteenHighKeywordCode keyword,
-                                  ExpressionList rightExpressions)
+                                  TokenExpressionList rightExpressions)
   {
     super(statements, index);
     this.leftVariableExpression = leftVariableExpression;

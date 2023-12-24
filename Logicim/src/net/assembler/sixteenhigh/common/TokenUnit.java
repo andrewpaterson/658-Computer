@@ -37,7 +37,7 @@ public class TokenUnit
                                    VariableScope scope,
                                    List<Long> arrayMatrix,
                                    int pointerCount,
-                                   BaseExpression initialiserExpression)
+                                   BaseTokenExpression initialiserExpression)
   {
     VariableTokenStatement variable = new PrimitiveVariableTokenStatement(this,
                                                                           statementIndex++,
@@ -55,7 +55,7 @@ public class TokenUnit
                                 VariableScope scope,
                                 List<Long> arrayMatrix,
                                 int pointerCount,
-                                BaseExpression initialiserExpression)
+                                BaseTokenExpression initialiserExpression)
   {
     VariableTokenStatement variable = new StructVariableTokenStatement(this,
                                                                        statementIndex++,
@@ -86,7 +86,7 @@ public class TokenUnit
     return statements.get(statements.size() - 1);
   }
 
-  public void addFlow(FlowExpression flowExpression)
+  public void addFlow(FlowTokenExpression flowExpression)
   {
     statements.add(new FlowTokenStatement(this, statementIndex++, flowExpression));
   }
@@ -96,32 +96,32 @@ public class TokenUnit
     statements.add(new ReturnTokenStatement(this, statementIndex++));
   }
 
-  public void addPush(ExpressionList expressions)
+  public void addPush(TokenExpressionList expressions)
   {
     statements.add(new PushTokenStatement(this, statementIndex++, expressions));
   }
 
-  public void addPull(VariableExpression expression)
+  public void addPull(VariableTokenExpression expression)
   {
-    statements.add(new PullTokenStatement(this, statementIndex++, expression, new PullExpression()));
+    statements.add(new PullTokenStatement(this, statementIndex++, expression, new PullTokenExpression()));
   }
 
-  public void addBitCompare(VariableExpression register, SixteenHighKeywordCode keyword)
+  public void addBitCompare(VariableTokenExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new BitCompareTokenStatement(this, statementIndex++, register, keyword));
   }
 
-  public void addCrement(VariableExpression register, SixteenHighKeywordCode keyword)
+  public void addCrement(VariableTokenExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new CrementTokenStatement(this, statementIndex++, register, keyword));
   }
 
-  public void addNumberCompare(VariableExpression leftExpression, ExpressionList right, SixteenHighKeywordCode keyword)
+  public void addNumberCompare(VariableTokenExpression leftExpression, TokenExpressionList right, SixteenHighKeywordCode keyword)
   {
     statements.add(new CompareTokenStatement(this, statementIndex++, leftExpression, right, keyword));
   }
 
-  public void addAssignment(VariableExpression leftExpression, SixteenHighKeywordCode keyword, ExpressionList rightExpressions)
+  public void addAssignment(VariableTokenExpression leftExpression, SixteenHighKeywordCode keyword, TokenExpressionList rightExpressions)
   {
     statements.add(new AssignmentTokenStatement(this, statementIndex++, leftExpression, keyword, rightExpressions));
   }

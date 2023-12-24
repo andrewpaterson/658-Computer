@@ -5,16 +5,16 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import java.util.List;
 
 public abstract class BaseExpression
-    implements Expressable
+    implements Expression
 {
   public BaseExpression()
   {
   }
 
-  protected void printCommaSeparatedExpressions(List<Expressable> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printCommaSeparatedExpressions(List<Expression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
-    for (Expressable expressable : expressions)
+    for (Expression expression : expressions)
     {
       if (isFirst)
       {
@@ -24,23 +24,23 @@ public abstract class BaseExpression
       {
         builder.append(", ");
       }
-      builder.append(expressable.print(sixteenHighKeywords));
+      builder.append(expression.print(sixteenHighKeywords));
     }
   }
 
-  protected void printSeparatedExpressions(List<Expressable> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printSeparatedExpressions(List<Expression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
-    for (Expressable expressable : expressions)
+    for (Expression expression : expressions)
     {
-      builder.append(expressable.print(sixteenHighKeywords));
+      builder.append(expression.print(sixteenHighKeywords));
     }
   }
 
-  protected boolean containsArrayExpressionInitialiser(List<Expressable> expressions)
+  protected boolean containsArrayExpressionInitialiser(List<Expression> expressions)
   {
-    for (Expressable expressable : expressions)
+    for (Expression expression : expressions)
     {
-      if (expressable.isArrayExpressionInitialiser())
+      if (expression.isArrayExpressionInitialiser())
       {
         return true;
       }
@@ -48,10 +48,10 @@ public abstract class BaseExpression
     return false;
   }
 
-  protected void printExpressions(List<Expressable> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
+  protected void printExpressions(List<Expression> expressions, SixteenHighKeywords sixteenHighKeywords, StringBuilder builder)
   {
     boolean isFirst = true;
-    for (Expressable expressable : expressions)
+    for (Expression expression : expressions)
     {
       if (isFirst)
       {
@@ -61,11 +61,11 @@ public abstract class BaseExpression
       {
         builder.append(" ");
       }
-      builder.append(expressable.print(sixteenHighKeywords));
+      builder.append(expression.print(sixteenHighKeywords));
     }
   }
 
-  public abstract void add(Expressable expressable);
+  public abstract void add(Expression expression);
 
   @Override
   public abstract boolean isLiteral();

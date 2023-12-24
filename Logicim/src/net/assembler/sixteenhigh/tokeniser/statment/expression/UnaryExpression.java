@@ -4,15 +4,15 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 
 public class UnaryExpression
-    implements Expressable
+    implements Expression
 {
   public SixteenHighKeywordCode operator;
-  public Expressable expressable;
+  public Expression expression;
 
-  public UnaryExpression(SixteenHighKeywordCode operator, Expressable expressable)
+  public UnaryExpression(SixteenHighKeywordCode operator, Expression expression)
   {
     this.operator = operator;
-    this.expressable = expressable;
+    this.expression = expression;
   }
 
   @Override
@@ -24,13 +24,13 @@ public class UnaryExpression
     String keyword = sixteenHighKeywords.getKeyword(operator);
     if (operator == SixteenHighKeywordCode.not)
     {
-      if (expressable.isLiteral())
+      if (expression.isLiteral())
       {
         leftBracket = "(";
         rightBracket = ")";
       }
     }
-    return keyword + leftBracket + expressable.print(sixteenHighKeywords) + rightBracket;
+    return keyword + leftBracket + expression.print(sixteenHighKeywords) + rightBracket;
   }
 }
 

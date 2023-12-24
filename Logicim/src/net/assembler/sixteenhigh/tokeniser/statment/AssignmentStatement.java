@@ -3,7 +3,7 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.Statements;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.Expression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.ExpressionList;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableExpression;
 
 public class AssignmentStatement
@@ -11,24 +11,24 @@ public class AssignmentStatement
 {
   protected VariableExpression leftVariableExpression;
   protected SixteenHighKeywordCode keyword;
-  protected Expression rightExpression;
+  protected ExpressionList rightExpressions;
 
   public AssignmentStatement(Statements statements,
                              int index,
                              VariableExpression leftVariableExpression,
                              SixteenHighKeywordCode keyword,
-                             Expression rightExpression)
+                             ExpressionList rightExpressions)
   {
     super(statements, index);
     this.leftVariableExpression = leftVariableExpression;
     this.keyword = keyword;
-    this.rightExpression = rightExpression;
+    this.rightExpressions = rightExpressions;
   }
 
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return leftVariableExpression.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightExpression.print(sixteenHighKeywords) + semicolon();
+    return leftVariableExpression.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightExpressions.print(sixteenHighKeywords) + semicolon();
   }
 }
 

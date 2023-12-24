@@ -13,7 +13,7 @@ public class PullExpression
   }
 
   @Override
-  public void add(Expressable expressable)
+  public void add(Expression expression)
   {
     throw new SimulatorException();
   }

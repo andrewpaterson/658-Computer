@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VariableExpression
-    implements Expressable
+    implements Expression
 {
   public int dereferenceCount;
   public boolean reference;

@@ -2,16 +2,16 @@ package net.assembler.sixteenhigh.tokeniser.statment.expression;
 
 public class ExpressablePointer
 {
-  public Expressable expressable;
+  public Expression expression;
 
   public ExpressablePointer()
   {
-    expressable = null;
+    expression = null;
   }
 
-  public void setExpressable(Expressable expressable)
+  public void setExpression(Expression expression)
   {
-    this.expressable = expressable;
+    this.expression = expression;
   }
 }
 

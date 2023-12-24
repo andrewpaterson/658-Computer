@@ -4,7 +4,7 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 
 public class OperandExpression
-    implements Expressable
+    implements Expression
 {
   public SixteenHighKeywordCode operand;
 

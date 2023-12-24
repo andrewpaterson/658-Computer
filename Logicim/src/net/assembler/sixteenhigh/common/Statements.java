@@ -96,14 +96,14 @@ public class Statements
     statements.add(new ReturnStatement(this, statementIndex++));
   }
 
-  public void addPush(Expression identifier)
+  public void addPush(ExpressionList expressions)
   {
-    statements.add(new PushStatement(this, statementIndex++, identifier));
+    statements.add(new PushStatement(this, statementIndex++, expressions));
   }
 
-  public void addPull(VariableExpression identifier)
+  public void addPull(VariableExpression expression)
   {
-    statements.add(new PullStatement(this, statementIndex++, identifier, new PullExpression()));
+    statements.add(new PullStatement(this, statementIndex++, expression, new PullExpression()));
   }
 
   public void addBitCompare(VariableExpression register, SixteenHighKeywordCode keyword)
@@ -116,14 +116,14 @@ public class Statements
     statements.add(new CrementStatement(this, statementIndex++, register, keyword));
   }
 
-  public void addNumberCompare(VariableExpression leftIdentifier, Expression right, SixteenHighKeywordCode keyword)
+  public void addNumberCompare(VariableExpression leftExpression, ExpressionList right, SixteenHighKeywordCode keyword)
   {
-    statements.add(new CompareStatement(this, statementIndex++, leftIdentifier, right, keyword));
+    statements.add(new CompareStatement(this, statementIndex++, leftExpression, right, keyword));
   }
 
-  public void addAssignment(VariableExpression leftIdentifier, SixteenHighKeywordCode keyword, Expression right)
+  public void addAssignment(VariableExpression leftExpression, SixteenHighKeywordCode keyword, ExpressionList rightExpressions)
   {
-    statements.add(new AssignmentStatement(this, statementIndex++, leftIdentifier, keyword, right));
+    statements.add(new AssignmentStatement(this, statementIndex++, leftExpression, keyword, rightExpressions));
   }
 
   public void addStartAddress(int address)

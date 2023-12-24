@@ -4,7 +4,7 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.tokeniser.literal.CTLiteral;
 
 public class LiteralExpression
-    implements Expressable
+    implements Expression
 {
   public CTLiteral literal;
 

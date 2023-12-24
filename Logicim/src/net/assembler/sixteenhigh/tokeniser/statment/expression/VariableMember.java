@@ -8,7 +8,7 @@ import java.util.List;
 public class VariableMember
 {
   public String identifier;
-  public List<Expressable> arrayIndices;
+  public List<Expression> arrayIndices;
 
   public VariableMember(String identifier)
   {
@@ -16,15 +16,15 @@ public class VariableMember
     this.arrayIndices = new ArrayList<>();
   }
 
-  public void addArrayIndex(Expressable expressable)
+  public void addArrayIndex(Expression expression)
   {
-    arrayIndices.add(expressable);
+    arrayIndices.add(expression);
   }
 
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
     StringBuilder array = new StringBuilder();
-    for (Expressable arrayIndex : arrayIndices)
+    for (Expression arrayIndex : arrayIndices)
     {
       array.append("[");
       array.append(arrayIndex.print(sixteenHighKeywords));

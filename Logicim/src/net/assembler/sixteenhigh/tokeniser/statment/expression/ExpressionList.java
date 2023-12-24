@@ -5,12 +5,12 @@ import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayExpressionInitialiser
+public class ExpressionList
     extends BaseExpression
 {
   public List<Expression> expressions;
 
-  public ArrayExpressionInitialiser()
+  public ExpressionList()
   {
     super();
     expressions = new ArrayList<>();
@@ -20,21 +20,20 @@ public class ArrayExpressionInitialiser
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
     StringBuilder builder = new StringBuilder();
-    builder.append("[");
-    if (containsArrayExpressionInitialiser(expressions))
+    if (expressions.size() > 1)
     {
-      printSeparatedExpressions(expressions, sixteenHighKeywords, builder);
+      builder.append("(");
     }
-    else
+    printExpressions(expressions, sixteenHighKeywords, builder);
+    if (expressions.size() > 1)
     {
-      printCommaSeparatedExpressions(expressions, sixteenHighKeywords, builder);
+      builder.append(")");
     }
-    builder.append("]");
     return builder.toString();
   }
 
   @Override
-  public boolean isArrayExpressionInitialiser()
+  public boolean isExpression()
   {
     return true;
   }

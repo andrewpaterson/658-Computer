@@ -1,13 +1,13 @@
 package net.assembler.sixteenhigh.semanticiser.directive;
 
-public class DirectiveBlock
+public class Directive
 {
   public long startAddress;
   public long endAddress;
   public AccessMode accessMode;
   public int accessTime;
 
-  public DirectiveBlock()
+  public Directive()
   {
     startAddress = 0;
     endAddress = Long.MAX_VALUE;
@@ -15,12 +15,12 @@ public class DirectiveBlock
     accessMode = AccessMode.READ_WRITE;
   }
 
-  public DirectiveBlock(DirectiveBlock directiveBlock)
+  public Directive(Directive directive)
   {
-    startAddress = directiveBlock.startAddress;
-    endAddress = directiveBlock.endAddress;
-    accessTime = directiveBlock.accessTime;
-    accessMode = directiveBlock.accessMode;
+    startAddress = directive.startAddress;
+    endAddress = directive.endAddress;
+    accessTime = directive.accessTime;
+    accessMode = directive.accessMode;
   }
 
   public void setStartAddress(long startAddress)

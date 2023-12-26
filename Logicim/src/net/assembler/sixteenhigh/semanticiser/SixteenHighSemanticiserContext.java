@@ -1,12 +1,14 @@
 package net.assembler.sixteenhigh.semanticiser;
 
-import net.assembler.sixteenhigh.semanticiser.directive.DirectiveBlock;
+import net.assembler.sixteenhigh.semanticiser.directive.Directive;
+import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.common.SimulatorException;
 
 public class SixteenHighSemanticiserContext
 {
   protected String filename;
-  protected DirectiveBlock currentDirectiveBlock;
+  protected Directive currentDirective;
   protected RoutineDefinition currentRoutine;
   protected StructDefinition currentStruct;
   protected UnitDefinition currentUnit;
@@ -14,19 +16,19 @@ public class SixteenHighSemanticiserContext
   public SixteenHighSemanticiserContext(String filename)
   {
     this.filename = filename;
-    this.currentDirectiveBlock = null;
+    this.currentDirective = null;
     this.currentStruct = null;
     this.currentUnit = null;
   }
 
-  public DirectiveBlock getCurrentDirectiveBlock()
+  public Directive getCurrentDirective()
   {
-    return currentDirectiveBlock;
+    return currentDirective;
   }
 
-  public void setCurrentDirectiveBlock(DirectiveBlock directiveBlock)
+  public void setCurrentDirective(Directive directive)
   {
-    this.currentDirectiveBlock = directiveBlock;
+    this.currentDirective = directive;
   }
 
   public void setCurrentRoutine(RoutineDefinition routine)
@@ -37,6 +39,11 @@ public class SixteenHighSemanticiserContext
   public void setCurrentStruct(StructDefinition struct)
   {
     currentStruct = struct;
+  }
+
+  public void setCurrentUnit(UnitDefinition unit)
+  {
+    currentUnit = unit;
   }
 
   public void setEnd()
@@ -58,6 +65,22 @@ public class SixteenHighSemanticiserContext
   public UnitDefinition getCurrentUnit()
   {
     return currentUnit;
+  }
+
+  public Block getCurrentBlock()
+  {
+    if (currentRoutine != null)
+    {
+      return currentRoutine.getBlock();
+    }
+    else if (currentUnit != null)
+    {
+      return currentUnit.getBlock();
+    }
+    else
+    {
+      throw new SimulatorException("Cannot get current block.");
+    }
   }
 }
 

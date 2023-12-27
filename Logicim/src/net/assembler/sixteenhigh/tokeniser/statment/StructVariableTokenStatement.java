@@ -10,7 +10,7 @@ import java.util.List;
 public class StructVariableTokenStatement
     extends VariableTokenStatement
 {
-  public String structIdentifier;
+  protected String structIdentifier;
 
   public StructVariableTokenStatement(TokenUnit statements,
                                       int index,

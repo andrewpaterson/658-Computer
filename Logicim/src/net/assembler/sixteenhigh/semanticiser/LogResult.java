@@ -25,11 +25,6 @@ public class LogResult
     this.level = level;
   }
 
-  public boolean isSuccess()
-  {
-    return message == null;
-  }
-
   public boolean isFailure()
   {
     return message != null;

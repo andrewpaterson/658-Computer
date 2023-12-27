@@ -6,7 +6,7 @@ import net.assembler.sixteenhigh.common.TokenUnit;
 public class StructTokenStatement
     extends TokenStatement
 {
-  public String structName;
+  protected String structName;
 
   public StructTokenStatement(TokenUnit statements, int index, String structName)
   {

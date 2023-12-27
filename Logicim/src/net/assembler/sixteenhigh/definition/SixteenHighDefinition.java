@@ -38,11 +38,11 @@ public class SixteenHighDefinition
 
   public RoutineDefinition createUnitRoutine(UnitDefinition unit, String routineName, VariableScope routineScope)
   {
-    if (routineScope != VariableScope.file)
+    if (routineScope != VariableScope.unit)
     {
       throw new SimulatorException("Expected Unit Routine scope to be [file].");
     }
-    return unit.createUnitRoutine(routineName);
+    return unit.createRoutine(routineName);
   }
 
   public RoutineDefinition createGlobalRoutine(String routineName, VariableScope routineScope)

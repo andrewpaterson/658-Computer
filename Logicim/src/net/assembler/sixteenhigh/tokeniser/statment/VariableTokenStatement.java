@@ -11,11 +11,11 @@ import java.util.List;
 public abstract class VariableTokenStatement
     extends TokenStatement
 {
-  public String name;
-  public VariableScope scope;
-  public List<Long> arrayMatrix;
-  public int pointerCount;
-  public BaseTokenExpression initialiserExpression;
+  protected String name;
+  protected VariableScope scope;
+  protected List<Long> arrayMatrix;
+  protected int pointerCount;
+  protected BaseTokenExpression initialiserExpression;
 
   public VariableTokenStatement(TokenUnit statements,
                                 int index,
@@ -59,5 +59,20 @@ public abstract class VariableTokenStatement
   }
 
   protected abstract String getIdentifierString(SixteenHighKeywords sixteenHighKeywords);
+
+  public boolean hasInitialiser()
+  {
+    return initialiserExpression != null;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public VariableScope getScope()
+  {
+    return scope;
+  }
 }
 

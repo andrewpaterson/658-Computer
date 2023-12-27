@@ -11,7 +11,7 @@ import java.util.List;
 public class PrimitiveVariableTokenStatement
     extends VariableTokenStatement
 {
-  public SixteenHighKeywordCode type;
+  protected SixteenHighKeywordCode type;
 
   public PrimitiveVariableTokenStatement(TokenUnit statements,
                                          int index,

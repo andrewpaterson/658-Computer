@@ -14,7 +14,7 @@ public abstract class SemanticiserTest
   protected static void testSimple()
   {
     SixteenHighKeywords keywords = new SixteenHighKeywords();
-    SixteenHighTokeniser tokeniser = createParser("int32 a = 5;", keywords);
+    SixteenHighTokeniser tokeniser = createParser("int32 @a = 5;", keywords);
     ParseResult parseResult = tokeniser.parse();
     validateTrue(parseResult.isTrue());
     SixteenHighDefinition sixteenHighDefinition = new SixteenHighDefinition();

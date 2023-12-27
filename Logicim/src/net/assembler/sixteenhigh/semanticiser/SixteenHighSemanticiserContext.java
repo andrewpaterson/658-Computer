@@ -1,9 +1,14 @@
 package net.assembler.sixteenhigh.semanticiser;
 
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
+import net.assembler.sixteenhigh.semanticiser.expression.Variables;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
 import net.common.SimulatorException;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SixteenHighSemanticiserContext
 {
@@ -13,12 +18,18 @@ public class SixteenHighSemanticiserContext
   protected StructDefinition currentStruct;
   protected UnitDefinition currentUnit;
 
+  protected Variables globalVariables;
+  protected Map<String, RoutineDefinition> globalRoutines;
+
   public SixteenHighSemanticiserContext(String filename)
   {
     this.filename = filename;
     this.currentDirective = null;
     this.currentStruct = null;
     this.currentUnit = null;
+
+    this.globalVariables = new Variables(VariableScope.global, "Global");
+    this.globalRoutines = new LinkedHashMap<>();
   }
 
   public Directive getCurrentDirective()
@@ -81,6 +92,35 @@ public class SixteenHighSemanticiserContext
     {
       throw new SimulatorException("Cannot get current block.");
     }
+  }
+
+  public VariableDefinition getVariable(String name)
+  {
+    if (currentRoutine != null)
+    {
+      VariableDefinition variable = currentRoutine.getVariable(name);
+      if (variable != null)
+      {
+        return variable;
+      }
+    }
+
+    if (currentUnit != null)
+    {
+      VariableDefinition variable = currentUnit.getVariable(name);
+      if (variable != null)
+      {
+        return variable;
+      }
+    }
+
+    VariableDefinition variable = globalVariables.get(name);
+    if (variable != null)
+    {
+      return variable;
+    }
+
+    return null;
   }
 }
 

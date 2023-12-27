@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.semanticiser.expression.Variables;
 import net.assembler.sixteenhigh.semanticiser.expression.block.RoutineBlock;
 
 public class RoutineDefinition
@@ -9,11 +10,15 @@ public class RoutineDefinition
   protected VariableScope scope;
   protected RoutineBlock block;
 
+  protected Variables variables;
+
   public RoutineDefinition(String name, VariableScope scope)
   {
     this.name = name;
     this.scope = scope;
     this.block = new RoutineBlock(this);
+
+    this.variables = new Variables(VariableScope.routine, "Routine");
   }
 
   public boolean is(String name)
@@ -34,6 +39,16 @@ public class RoutineDefinition
   public RoutineBlock getBlock()
   {
     return block;
+  }
+
+  public VariableDefinition getVariable(String name)
+  {
+    return variables.get(name);
+  }
+
+  public VariableDefinition createVariable(String name)
+  {
+    return variables.create(name);
   }
 }
 

@@ -2,41 +2,50 @@ package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.semanticiser.expression.UnitBlock;
+import net.assembler.sixteenhigh.semanticiser.expression.Variables;
+import net.common.SimulatorException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class UnitDefinition
 {
-  protected List<RoutineDefinition> routines;
-  protected List<VariableDefinition> variables;
+  protected Map<String, RoutineDefinition> routines;
+  protected Variables variables;
   protected UnitBlock block;
 
   public UnitDefinition()
   {
-    routines = new ArrayList<>();
-    variables = new ArrayList<>();
-    block = new UnitBlock(this);
+    this.routines = new LinkedHashMap<>();
+    this.variables = new Variables(VariableScope.unit, "Unit");
+    this.block = new UnitBlock(this);
   }
 
-  public RoutineDefinition getRoutine(String routineName)
+  public RoutineDefinition getRoutine(String name)
   {
-    for (RoutineDefinition globalRoutine : routines)
+    return routines.get(name);
+  }
+
+  public VariableDefinition getVariable(String name)
+  {
+    return variables.get(name);
+  }
+
+  public RoutineDefinition createRoutine(String name)
+  {
+    RoutineDefinition routine = getRoutine(name);
+    if (routine != null)
     {
-      if (globalRoutine.is(routineName))
-      {
-        return globalRoutine;
-      }
+      throw new SimulatorException("Unit Routine Definition [%s] already exists.", name);
     }
-
-    return null;
-  }
-
-  public RoutineDefinition createUnitRoutine(String routineName)
-  {
-    RoutineDefinition routine = new RoutineDefinition(routineName, VariableScope.file);
-    routines.add(routine);
+    routine = new RoutineDefinition(name, VariableScope.unit);
+    routines.put(name, routine);
     return routine;
+  }
+  
+  public VariableDefinition createVariable(String name)
+  {
+    return variables.create(name);
   }
 
   public UnitBlock getBlock()

@@ -15,3 +15,4 @@ public enum OperatorCode
   xor,
   not
 }
+

@@ -7,6 +7,7 @@ import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
+import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
 import net.assembler.sixteenhigh.tokeniser.statment.RoutineTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
@@ -179,9 +180,24 @@ public class SixteenHighSemanticiser
 
   private LogResult parseVariableStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
   {
+    VariableDefinition variable = context.getVariable(variableStatement.getName());
+    if (variable != null)
+    {
+      return error("Variable [%s] already defined.", variable.getName());
+    }
+
+    variable = new VariableDefinition(variableStatement.getName(), variableStatement.getScope());
+
     Block block = context.getCurrentBlock();
-    variableStatement.
-    return null;
+
+
+    if (variableStatement.hasInitialiser())
+    {
+      AddressableVariableExpression addressableVariableExpression = new AddressableVariableExpression(variable);
+      block.pushAssignment(addressableVariableExpression);
+    }
+
+    return new LogResult();
   }
 
   private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)
@@ -229,7 +245,7 @@ public class SixteenHighSemanticiser
       return error("Routine [%s] may not have [routine] scope.", routineName);
     }
 
-    if (routineScope == VariableScope.file)
+    if (routineScope == VariableScope.unit)
     {
       RoutineDefinition routine = definition.createUnitRoutine(context.getCurrentUnit(), routineName, routineScope);
       context.setCurrentRoutine(routine);

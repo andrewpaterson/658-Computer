@@ -375,7 +375,7 @@ public class SixteenHighTokeniser
   {
     if (keyword == push)
     {
-      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
       ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
@@ -534,7 +534,7 @@ public class SixteenHighTokeniser
       }
       String registerName = registerNameZero.toString();
 
-      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
       parseResult = parseVariableInitialiser(expressionPointer);
       if (parseResult.isError())
       {
@@ -554,7 +554,7 @@ public class SixteenHighTokeniser
       {
         statements.addPrimitiveVariable(keyword,
                                         registerName,
-                                        VariableScope.file,
+                                        VariableScope.unit,
                                         arrayDeclaration.arrayMatrix,
                                         pointerCount,
                                         expressionPointer.expression);
@@ -599,7 +599,7 @@ public class SixteenHighTokeniser
     }
     String registerName = registerNameZero.toString();
 
-    BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+    BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
     parseResult = parseVariableInitialiser(expressionPointer);
     if (parseResult.isError())
     {
@@ -620,7 +620,7 @@ public class SixteenHighTokeniser
     {
       statements.addStructVariable(structIdentifier,
                                    registerName,
-                                   VariableScope.file,
+                                   VariableScope.unit,
                                    arrayDeclaration.arrayMatrix,
                                    pointerCount,
                                    expressionPointer.expression);
@@ -685,7 +685,7 @@ public class SixteenHighTokeniser
     }
     else if (identifier.startsWith("@"))
     {
-      statements.addRoutine(identifier, VariableScope.file);
+      statements.addRoutine(identifier, VariableScope.unit);
     }
     else
     {
@@ -945,7 +945,7 @@ public class SixteenHighTokeniser
     return _false();
   }
 
-  private ParseResult parseVariableInitialiser(BaseExpressionPointer expressionPointer)
+  private ParseResult parseVariableInitialiser(BaseTokenExpressionPointer expressionPointer)
   {
     Tristate result = textParser.getExactCharacterSequence(keywords.assign());
     if (result == TRUE)
@@ -962,7 +962,7 @@ public class SixteenHighTokeniser
         return parseResult;
       }
 
-      BaseExpressionPointer expressablePointer = new BaseExpressionPointer();
+      BaseTokenExpressionPointer expressablePointer = new BaseTokenExpressionPointer();
       parseResult = parseInitialExpression(expressablePointer);
       if (parseResult.isTrue())
       {
@@ -1045,7 +1045,7 @@ public class SixteenHighTokeniser
     }
   }
 
-  private ParseResult parseInitialExpression(BaseExpressionPointer expressionPointer)
+  private ParseResult parseInitialExpression(BaseTokenExpressionPointer expressionPointer)
   {
     ExpressablePointer expressablePointer = new ExpressablePointer();
     ParseResult parseResult = parseUnaryComponent(expressablePointer);
@@ -1109,7 +1109,7 @@ public class SixteenHighTokeniser
 
   private ParseResult parseComponent(ExpressablePointer expressablePointer)
   {
-    BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+    BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
     ParseResult parseResult = parseExpression(expressionPointer);
     if (parseResult.isTrue())
     {
@@ -1134,7 +1134,7 @@ public class SixteenHighTokeniser
     }
   }
 
-  private ParseResult parseExpression(BaseExpressionPointer expressionPointer)
+  private ParseResult parseExpression(BaseTokenExpressionPointer expressionPointer)
   {
     // Component: Expresion | Register
     // UnaryComponent: Literal | UnaryOperator Component
@@ -1230,7 +1230,7 @@ public class SixteenHighTokeniser
           return parseResult;
         }
 
-        BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+        BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
         parseResult = parseInitialExpression(expressionPointer);
         if (parseResult.isTrue())
         {
@@ -1463,7 +1463,7 @@ public class SixteenHighTokeniser
   {
     if (keywords.getAssignments().contains(keyword))
     {
-      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
       ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
@@ -1506,7 +1506,7 @@ public class SixteenHighTokeniser
   {
     if (keywords.getNumberCompares().contains(keyword))
     {
-      BaseExpressionPointer expressionPointer = new BaseExpressionPointer();
+      BaseTokenExpressionPointer expressionPointer = new BaseTokenExpressionPointer();
       ParseResult parseResult = parseInitialExpression(expressionPointer);
 
       if (parseResult.isError())

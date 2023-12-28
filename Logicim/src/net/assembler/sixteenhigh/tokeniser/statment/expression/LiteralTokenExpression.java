@@ -6,7 +6,7 @@ import net.assembler.sixteenhigh.tokeniser.literal.CTLiteral;
 public class LiteralTokenExpression
     implements TokenExpression
 {
-  public CTLiteral literal;
+  protected CTLiteral literal;
 
   public LiteralTokenExpression(CTLiteral literal)
   {
@@ -23,6 +23,11 @@ public class LiteralTokenExpression
   public boolean isLiteral()
   {
     return true;
+  }
+
+  public CTLiteral getLiteral()
+  {
+    return literal;
   }
 }
 

@@ -29,7 +29,7 @@ public class SixteenHighTokeniser
   protected SixteenHighKeywords keywords;
   protected TextParser textParser;
   protected int statementIndex;
-  protected TokenUnit statements;
+  protected TokenUnit unit;
   protected String filename;
   protected LiteralParser literalParser;
   protected int allowedSeparator;
@@ -37,7 +37,7 @@ public class SixteenHighTokeniser
   public SixteenHighTokeniser(Logger log,
                               SixteenHighKeywords keywords,
                               String filename,
-                              TokenUnit statements,
+                              TokenUnit unit,
                               String source)
   {
     this.filename = filename;
@@ -45,7 +45,7 @@ public class SixteenHighTokeniser
     this.textParser = new TextParser(source, log, filename);
     this.literalParser = new LiteralParser(textParser);
 
-    this.statements = statements;
+    this.unit = unit;
     this.statementIndex = 0;
     this.allowedSeparator = NUMBER_SEPARATOR_APOSTROPHE;
   }
@@ -122,7 +122,7 @@ public class SixteenHighTokeniser
       parseResult = parseStatement();
       if (parseResult.isTrue())
       {
-        lastStatement = statements.getLast();
+        lastStatement = unit.getLast();
         canParseInterStatement = true;
         //noinspection UnnecessaryContinue
         continue;
@@ -152,7 +152,7 @@ public class SixteenHighTokeniser
     Tristate result = textParser.getExactIdentifier(keywords.end(), true);
     if (result == TRUE)
     {
-      statements.addEnd();
+      unit.addEnd();
       return _true();
     }
     else if (result == ERROR)
@@ -181,7 +181,7 @@ public class SixteenHighTokeniser
         return _error("Expected identifier.");
       }
 
-      statements.addStruct(structIdentifierZero.toString());
+      unit.addStruct(structIdentifierZero.toString());
       return _true();
     }
     else if (result == ERROR)
@@ -288,7 +288,7 @@ public class SixteenHighTokeniser
       LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
       if (integerLiteral.isTrue())
       {
-        statements.addStartAddress((int) integerLiteral.getIntegerLiteral().getValue());
+        unit.addStartAddress((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
       else if (integerLiteral.isError())
@@ -310,7 +310,7 @@ public class SixteenHighTokeniser
       LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
       if (integerLiteral.isTrue())
       {
-        statements.addEndAddress((int) integerLiteral.getIntegerLiteral().getValue());
+        unit.addEndAddress((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
       else if (integerLiteral.isError())
@@ -334,7 +334,7 @@ public class SixteenHighTokeniser
       if (state == TRUE)
       {
         SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.getAccessModes(), index);
-        statements.addAccessMode(accessMode);
+        unit.addAccessMode(accessMode);
         return TRUE;
       }
       else if (state == ERROR)
@@ -356,7 +356,7 @@ public class SixteenHighTokeniser
       LiteralResult integerLiteral = literalParser.getIntegerLiteral(allowedSeparator);
       if (integerLiteral.isTrue())
       {
-        statements.addAccessTime((int) integerLiteral.getIntegerLiteral().getValue());
+        unit.addAccessTime((int) integerLiteral.getIntegerLiteral().getValue());
         return TRUE;
       }
       else if (integerLiteral.isError())
@@ -379,7 +379,7 @@ public class SixteenHighTokeniser
       ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
-        statements.addPush((TokenExpressionList) expressionPointer.expression);
+        unit.addPush((TokenExpressionList) expressionPointer.expression);
         return _true();
       }
       else if (parseResult.isError())
@@ -401,7 +401,7 @@ public class SixteenHighTokeniser
   {
     if (keyword == pull)
     {
-      statements.addPull(variableExpression);
+      unit.addPull(variableExpression);
       return _true();
     }
     else
@@ -414,7 +414,7 @@ public class SixteenHighTokeniser
   {
     if (keywords.getIfs().contains(keyword))
     {
-      IfTokenStatement ifStatement = statements.addIf(keyword);
+      IfTokenStatement ifStatement = unit.addIf(keyword);
       Tristate state = textParser.getExactIdentifier(keywords.go(), true);
       if (state == ERROR)
       {
@@ -445,7 +445,7 @@ public class SixteenHighTokeniser
   {
     if (keyword == ret)
     {
-      statements.addReturn();
+      unit.addReturn();
       return _true();
     }
     else
@@ -460,7 +460,7 @@ public class SixteenHighTokeniser
     ParseResult parseResult = parseFlowExpression(keyword, expressionPointer);
     if (parseResult.isTrue())
     {
-      statements.addFlow(expressionPointer.flowExpression);
+      unit.addFlow(expressionPointer.flowExpression);
       return parseResult;
     }
     else
@@ -543,30 +543,30 @@ public class SixteenHighTokeniser
 
       if (registerName.startsWith("@@"))
       {
-        statements.addPrimitiveVariable(keyword,
-                                        registerName,
-                                        VariableScope.global,
-                                        arrayDeclaration.arrayMatrix,
-                                        pointerCount,
-                                        expressionPointer.expression);
+        unit.addPrimitiveVariable(keyword,
+                                  registerName,
+                                  VariableScope.global,
+                                  arrayDeclaration.arrayMatrix,
+                                  pointerCount,
+                                  expressionPointer.expression);
       }
       else if (registerName.startsWith("@"))
       {
-        statements.addPrimitiveVariable(keyword,
-                                        registerName,
-                                        VariableScope.unit,
-                                        arrayDeclaration.arrayMatrix,
-                                        pointerCount,
-                                        expressionPointer.expression);
+        unit.addPrimitiveVariable(keyword,
+                                  registerName,
+                                  VariableScope.unit,
+                                  arrayDeclaration.arrayMatrix,
+                                  pointerCount,
+                                  expressionPointer.expression);
       }
       else
       {
-        statements.addPrimitiveVariable(keyword,
-                                        registerName,
-                                        VariableScope.routine,
-                                        arrayDeclaration.arrayMatrix,
-                                        pointerCount,
-                                        expressionPointer.expression);
+        unit.addPrimitiveVariable(keyword,
+                                  registerName,
+                                  VariableScope.routine,
+                                  arrayDeclaration.arrayMatrix,
+                                  pointerCount,
+                                  expressionPointer.expression);
       }
       return _true();
     }
@@ -609,30 +609,30 @@ public class SixteenHighTokeniser
     String structIdentifier = structIdentifierZero.toString();
     if (registerName.startsWith("@@"))
     {
-      statements.addStructVariable(structIdentifier,
-                                   registerName,
-                                   VariableScope.global,
-                                   arrayDeclaration.arrayMatrix,
-                                   pointerCount,
-                                   expressionPointer.expression);
+      unit.addStructVariable(structIdentifier,
+                             registerName,
+                             VariableScope.global,
+                             arrayDeclaration.arrayMatrix,
+                             pointerCount,
+                             expressionPointer.expression);
     }
     else if (registerName.startsWith("@"))
     {
-      statements.addStructVariable(structIdentifier,
-                                   registerName,
-                                   VariableScope.unit,
-                                   arrayDeclaration.arrayMatrix,
-                                   pointerCount,
-                                   expressionPointer.expression);
+      unit.addStructVariable(structIdentifier,
+                             registerName,
+                             VariableScope.unit,
+                             arrayDeclaration.arrayMatrix,
+                             pointerCount,
+                             expressionPointer.expression);
     }
     else
     {
-      statements.addStructVariable(structIdentifier,
-                                   registerName,
-                                   VariableScope.routine,
-                                   arrayDeclaration.arrayMatrix,
-                                   pointerCount,
-                                   expressionPointer.expression);
+      unit.addStructVariable(structIdentifier,
+                             registerName,
+                             VariableScope.routine,
+                             arrayDeclaration.arrayMatrix,
+                             pointerCount,
+                             expressionPointer.expression);
     }
     return _true();
   }
@@ -681,15 +681,15 @@ public class SixteenHighTokeniser
     String identifier = zeroIdentifier.toString();
     if (identifier.startsWith("@@"))
     {
-      statements.addRoutine(identifier, VariableScope.global);
+      unit.addRoutine(identifier, VariableScope.global);
     }
     else if (identifier.startsWith("@"))
     {
-      statements.addRoutine(identifier, VariableScope.unit);
+      unit.addRoutine(identifier, VariableScope.unit);
     }
     else
     {
-      statements.addLocalLabel(identifier);
+      unit.addLocalLabel(identifier);
     }
     return _true();
   }
@@ -1467,7 +1467,7 @@ public class SixteenHighTokeniser
       ParseResult parseResult = parseInitialExpression(expressionPointer);
       if (parseResult.isTrue())
       {
-        statements.addAssignment(leftExpression, keyword, (TokenExpressionList) expressionPointer.expression);
+        unit.addAssignment(leftExpression, keyword, (TokenExpressionList) expressionPointer.expression);
         return _true();
       }
       else if (parseResult.isError())
@@ -1486,7 +1486,7 @@ public class SixteenHighTokeniser
   {
     if (keywords.getBitCompares().contains(keyword))
     {
-      statements.addBitCompare(variableExpression, keyword);
+      unit.addBitCompare(variableExpression, keyword);
       return _true();
     }
     return _false();
@@ -1496,7 +1496,7 @@ public class SixteenHighTokeniser
   {
     if (keywords.getCrements().contains(keyword))
     {
-      statements.addCrement(variableExpression, keyword);
+      unit.addCrement(variableExpression, keyword);
       return _true();
     }
     return _false();
@@ -1518,15 +1518,15 @@ public class SixteenHighTokeniser
         return _error("Expected Expression.");
       }
 
-      statements.addNumberCompare(leftVariableExpression, (TokenExpressionList) expressionPointer.expression, keyword);
+      unit.addNumberCompare(leftVariableExpression, (TokenExpressionList) expressionPointer.expression, keyword);
       return _true();
     }
     return _false();
   }
 
-  public TokenUnit getStatements()
+  public TokenUnit getUnit()
   {
-    return statements;
+    return unit;
   }
 
   public SixteenHighKeywords getKeywords()

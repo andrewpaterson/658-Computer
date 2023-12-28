@@ -18,7 +18,7 @@ public abstract class SemanticiserTest
     ParseResult parseResult = tokeniser.parse();
     validateTrue(parseResult.isTrue());
     SixteenHighDefinition sixteenHighDefinition = new SixteenHighDefinition();
-    SixteenHighSemanticiser semanticiser = new SixteenHighSemanticiser(sixteenHighDefinition, tokeniser.getStatements(), keywords);
+    SixteenHighSemanticiser semanticiser = new SixteenHighSemanticiser(sixteenHighDefinition, tokeniser.getUnit(), keywords);
     semanticiser.parse();
   }
 

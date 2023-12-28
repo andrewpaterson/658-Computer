@@ -8,8 +8,8 @@ public class SixteenHighTest
 {
   public static void main(String[] args)
   {
-//    LiteralParserTest.test();
-//    TokeniserTest.test();
+    LiteralParserTest.test();
+    TokeniserTest.test();
     SemanticiserTest.test();
   }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class TokenExpressionList
     extends BaseTokenExpression
 {
-  public List<TokenExpression> expressions;
+  protected List<TokenExpression> expressions;
 
   public TokenExpressionList()
   {
@@ -57,6 +57,11 @@ public class TokenExpressionList
   public boolean isAssignment()
   {
     return true;
+  }
+
+  public List<TokenExpression> getExpressions()
+  {
+    return expressions;
   }
 }
 

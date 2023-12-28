@@ -6,7 +6,7 @@ import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 public class OperandTokenExpression
     implements TokenExpression
 {
-  public SixteenHighKeywordCode operand;
+  protected SixteenHighKeywordCode operand;
 
   public OperandTokenExpression(SixteenHighKeywordCode operand)
   {
@@ -17,6 +17,11 @@ public class OperandTokenExpression
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
     return sixteenHighKeywords.getKeyword(operand);
+  }
+
+  public SixteenHighKeywordCode getOperand()
+  {
+    return operand;
   }
 }
 

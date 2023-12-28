@@ -65,6 +65,11 @@ public abstract class VariableTokenStatement
     return initialiserExpression != null;
   }
 
+  public BaseTokenExpression getInitialiserExpression()
+  {
+    return initialiserExpression;
+  }
+
   public String getName()
   {
     return name;

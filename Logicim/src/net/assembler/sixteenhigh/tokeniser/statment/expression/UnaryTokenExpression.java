@@ -6,8 +6,8 @@ import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 public class UnaryTokenExpression
     implements TokenExpression
 {
-  public SixteenHighKeywordCode operator;
-  public TokenExpression expression;
+  protected SixteenHighKeywordCode operator;
+  protected TokenExpression expression;
 
   public UnaryTokenExpression(SixteenHighKeywordCode operator, TokenExpression expression)
   {

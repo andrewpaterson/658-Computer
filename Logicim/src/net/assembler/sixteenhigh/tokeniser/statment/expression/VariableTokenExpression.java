@@ -9,9 +9,9 @@ import java.util.List;
 public class VariableTokenExpression
     implements TokenExpression
 {
-  public int dereferenceCount;
-  public boolean reference;
-  public List<VariableMember> members;
+  protected int dereferenceCount;
+  protected boolean reference;
+  protected List<VariableMember> members;
 
   public VariableTokenExpression(VariableMember variableMember, int dereferenceCount, boolean reference)
   {
@@ -47,6 +47,21 @@ public class VariableTokenExpression
   public void addMember(VariableMember member)
   {
     members.add(member);
+  }
+
+  public int getDereferenceCount()
+  {
+    return dereferenceCount;
+  }
+
+  public boolean isReference()
+  {
+    return reference;
+  }
+
+  public List<VariableMember> getMembers()
+  {
+    return members;
   }
 }
 

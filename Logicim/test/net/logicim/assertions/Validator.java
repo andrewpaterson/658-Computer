@@ -16,6 +16,7 @@ public abstract class Validator
       throw new ValidationException(toFailureString(Boolean.toString(expected), Boolean.toString(actual)));
     }
   }
+
   public static void validate(Class<?> expected, Class<?> actual)
   {
     if (expected != actual)
@@ -133,7 +134,23 @@ public abstract class Validator
 
     if (!expected.equals(actual))
     {
-      throw new ValidationException(toFailureString(expected.toString(), actual.toString()));
+      throw new ValidationException(toFailureString(toString(expected), toString(actual)));
+    }
+  }
+
+  private static String toString(Object o)
+  {
+    if (o == null)
+    {
+      return NULL;
+    }
+    else if (o instanceof Long)
+    {
+      return o.toString() + "L";
+    }
+    else
+    {
+      return o.toString();
     }
   }
 

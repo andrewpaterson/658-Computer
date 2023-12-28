@@ -7,8 +7,8 @@ import java.util.List;
 
 public class VariableMember
 {
-  public String identifier;
-  public List<TokenExpression> arrayIndices;
+  protected String identifier;
+  protected List<TokenExpression> arrayIndices;
 
   public VariableMember(String identifier)
   {
@@ -31,6 +31,16 @@ public class VariableMember
       array.append("]");
     }
     return identifier + array.toString();
+  }
+
+  public String getIdentifier()
+  {
+    return identifier;
+  }
+
+  public List<TokenExpression> getArrayIndices()
+  {
+    return arrayIndices;
   }
 }
 

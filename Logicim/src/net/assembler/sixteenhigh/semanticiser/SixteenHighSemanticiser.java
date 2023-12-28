@@ -10,10 +10,11 @@ import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
 import net.assembler.sixteenhigh.tokeniser.statment.RoutineTokenStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.StructTokenStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.VariableTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
 import net.common.SimulatorException;
 import net.common.logger.Logger;
 import net.common.util.StringUtil;
@@ -47,6 +48,7 @@ public class SixteenHighSemanticiser
     {
       parseUnit(unit);
     }
+    units.clear();
   }
 
   private void parseUnit(TokenUnit unit)
@@ -168,6 +170,7 @@ public class SixteenHighSemanticiser
     else if (statement.isEnd())
     {
       context.setEnd();
+      return true;
     }
     else if (statement.isVariable())
     {
@@ -180,24 +183,54 @@ public class SixteenHighSemanticiser
 
   private LogResult parseVariableStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
   {
-    VariableDefinition variable = context.getVariable(variableStatement.getName());
+    String name = variableStatement.getName();
+    VariableDefinition variable = context.getVariable(name);
     if (variable != null)
     {
       return error("Variable [%s] already defined.", variable.getName());
     }
 
-    variable = new VariableDefinition(variableStatement.getName(), variableStatement.getScope());
-
-    Block block = context.getCurrentBlock();
-
+    VariableScope scope = variableStatement.getScope();
+    variable = new VariableDefinition(name, scope);
+    if (scope == VariableScope.global)
+    {
+      variable = context.createGlobalVariable(name);
+    }
+    else if (scope == VariableScope.unit)
+    {
+      UnitDefinition unit = context.getCurrentUnit();
+      if (unit == null)
+      {
+        return error("Variable [%s] with unit scope cannot be added without a current Unit.", variable.getName());
+      }
+      variable = unit.createVariable(name);
+    }
+    else if (scope == VariableScope.routine)
+    {
+      RoutineDefinition routine = context.getCurrentRoutine();
+      if (routine == null)
+      {
+        return error("Variable [%s] with routine scope cannot be added without a current Routine.", variable.getName());
+      }
+      variable = routine.createVariable(name);
+    }
 
     if (variableStatement.hasInitialiser())
     {
+      Block block = context.getCurrentBlock();
       AddressableVariableExpression addressableVariableExpression = new AddressableVariableExpression(variable);
+
+      parseTokenExpression(variableStatement.getInitialiserExpression());
+
       block.pushAssignment(addressableVariableExpression);
     }
 
-    return new LogResult();
+    return success();
+  }
+
+  private void parseTokenExpression(BaseTokenExpression tokenExpression)
+  {
+
   }
 
   private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)

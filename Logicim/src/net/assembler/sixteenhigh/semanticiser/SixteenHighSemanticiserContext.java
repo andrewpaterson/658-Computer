@@ -114,13 +114,22 @@ public class SixteenHighSemanticiserContext
       }
     }
 
+    return getGlobalVariable(name);
+  }
+
+  public VariableDefinition getGlobalVariable(String name)
+  {
     VariableDefinition variable = globalVariables.get(name);
     if (variable != null)
     {
       return variable;
     }
-
     return null;
+  }
+
+  public VariableDefinition createGlobalVariable(String name)
+  {
+    return globalVariables.create(name);
   }
 }
 

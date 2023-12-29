@@ -57,7 +57,8 @@
         }
       ],
       "drc_exclusions": [
-        "silk_overlap|104614738|115347963|827d640e-2cfd-4d1f-ad07-20f3fac79bbb|40f5bf8d-90be-487a-91a8-ebf460bb0343"
+        "silk_overlap|96146000|83597963|0754674c-8653-465c-a5dd-e487bb86692d|400a56d5-5653-42c8-af4f-660f7fd9ce0b",
+        "silk_overlap|96177000|116617963|565861de-5d49-4b9f-8d4c-3f0184a01d45|4f4612d0-373c-4d1e-99ea-50a8c1a3670d"
       ],
       "meta": {
         "version": 2
@@ -179,7 +180,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38
+        0.37
       ],
       "via_dimensions": [
         {
@@ -447,7 +448,7 @@
         "name": "Power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.38,
+        "track_width": 0.37,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -461,15 +462,15 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "/*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "/*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "/*GND"
       }
     ]
   },
@@ -479,7 +480,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "HCP65 Address Decode.step",
+      "step": "HCP65 MPU Address Decode.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""

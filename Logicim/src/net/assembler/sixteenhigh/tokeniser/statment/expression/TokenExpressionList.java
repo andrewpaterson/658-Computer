@@ -63,5 +63,11 @@ public class TokenExpressionList
   {
     return expressions;
   }
+
+  @Override
+  public boolean isExpressionList()
+  {
+    return true;
+  }
 }
 

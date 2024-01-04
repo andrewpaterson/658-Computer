@@ -65,11 +65,15 @@ public abstract class BaseTokenExpression
     }
   }
 
+  public boolean isAssignment()
+  {
+    return false;
+  }
+
   public abstract void add(TokenExpression expression);
 
   @Override
   public abstract boolean isLiteral();
 
-  public abstract boolean isAssignment();
 }
 

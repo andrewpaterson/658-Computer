@@ -126,6 +126,101 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
+  protected static void testStatementAssignment6()
+  {
+    SixteenHighTokeniser parser = createParser("i = (c * 3 + (x - y))");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("i = (c * 3 + (x - y))", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+
+    List<TokenStatement> statements = unit.getStatements();
+    validate(1, statements.size());
+    TokenStatement tokenStatement = statements.get(0);
+    validateClass(AssignmentTokenStatement.class, tokenStatement);
+    AssignmentTokenStatement assignmentTokenStatement = (AssignmentTokenStatement) tokenStatement;
+
+    VariableTokenExpression leftExpression = assignmentTokenStatement.getLeftVariableExpression();
+    validateEquals(0, leftExpression.getDereferenceCount());
+    validateFalse(leftExpression.isReference());
+    List<VariableMember> members = leftExpression.getMembers();
+    validateEquals(1, members.size());
+    VariableMember variableMember = members.get(0);
+    validateEquals("i", variableMember.getIdentifier());
+    validateEquals(0, variableMember.getArrayIndices().size());
+
+    validateEquals(SixteenHighKeywordCode.assign, assignmentTokenStatement.getKeyword());
+
+    TokenExpressionList rightExpressions = assignmentTokenStatement.getRightExpressions();
+    List<TokenExpression> expressions = rightExpressions.getExpressions();
+    validateEquals(5, expressions.size());
+
+    TokenExpression firstRightExpression = expressions.get(0);
+    validateClass(VariableTokenExpression.class, firstRightExpression);
+    VariableTokenExpression variableTokenExpression = (VariableTokenExpression) firstRightExpression;
+    validateEquals(0, variableTokenExpression.getDereferenceCount());
+    validateFalse(variableTokenExpression.isReference());
+    List<VariableMember> members2 = variableTokenExpression.getMembers();
+    validateEquals(1, members2.size());
+    VariableMember variableMember2 = members2.get(0);
+    validateEquals("c", variableMember2.getIdentifier());
+    validateEquals(0, variableMember2.getArrayIndices().size());
+
+    TokenExpression secondRightExpression = expressions.get(1);
+    validateClass(OperandTokenExpression.class, secondRightExpression);
+    OperandTokenExpression firstOperandTokenExpression = (OperandTokenExpression) secondRightExpression;
+    validateEquals(SixteenHighKeywordCode.multiply, firstOperandTokenExpression.getOperand());
+
+    TokenExpression thirdRightExpression = expressions.get(2);
+    validateClass(LiteralTokenExpression.class, thirdRightExpression);
+    LiteralTokenExpression literalTokenExpression = (LiteralTokenExpression) thirdRightExpression;
+    CTLiteral literal = literalTokenExpression.getLiteral();
+    validateClass(CTInt.class, literal);
+    CTInt ctInt = (CTInt) literal;
+    validateEquals(3L, ctInt.getValue());
+
+    TokenExpression fourthRightExpression = expressions.get(3);
+    validateClass(OperandTokenExpression.class, fourthRightExpression);
+    OperandTokenExpression fourthOperandTokenExpression = (OperandTokenExpression) secondRightExpression;
+    validateEquals(SixteenHighKeywordCode.multiply, fourthOperandTokenExpression.getOperand());
+
+    TokenExpression fifthRightExpression = expressions.get(4);
+    validateClass(TokenExpressionList.class, fifthRightExpression);
+    TokenExpressionList fifthOperandTokenExpression = (TokenExpressionList) fifthRightExpression;
+    List<TokenExpression> subExpressions = fifthOperandTokenExpression.getExpressions();
+    validateEquals(3, subExpressions.size());
+
+    TokenExpression firstSubExpression = subExpressions.get(0);
+    validateClass(VariableTokenExpression.class, firstSubExpression);
+    VariableTokenExpression variableTokenExpression2 = (VariableTokenExpression) firstSubExpression;
+    validateEquals(0, variableTokenExpression2.getDereferenceCount());
+    validateFalse(variableTokenExpression2.isReference());
+    List<VariableMember> members3 = variableTokenExpression2.getMembers();
+    validateEquals(1, members3.size());
+    VariableMember variableMember4 = members3.get(0);
+    validateEquals("x", variableMember4.getIdentifier());
+    validateEquals(0, variableMember4.getArrayIndices().size());
+
+    TokenExpression secondSubExpression = subExpressions.get(1);
+    validateClass(OperandTokenExpression.class, secondSubExpression);
+    OperandTokenExpression firstOperandSubTokenExpression = (OperandTokenExpression) secondSubExpression;
+    validateEquals(SixteenHighKeywordCode.subtract, firstOperandSubTokenExpression.getOperand());
+
+    TokenExpression thirdSubExpression = subExpressions.get(2);
+    validateClass(VariableTokenExpression.class, thirdSubExpression);
+    VariableTokenExpression variableTokenExpression3 = (VariableTokenExpression) thirdSubExpression;
+    validateEquals(0, variableTokenExpression3.getDereferenceCount());
+    validateFalse(variableTokenExpression3.isReference());
+    List<VariableMember> members4 = variableTokenExpression3.getMembers();
+    validateEquals(1, members4.size());
+    VariableMember variableMember5 = members4.get(0);
+    validateEquals("y", variableMember5.getIdentifier());
+    validateEquals(0, variableMember5.getArrayIndices().size());
+  }
+
   protected static void testPlusExpression()
   {
     SixteenHighTokeniser parser = createParser("x = (5 + ~d)");
@@ -657,6 +752,7 @@ public abstract class TokeniserTest
     testStatementAssignment3();
     testStatementAssignment4();
     testStatementAssignment5();
+    testStatementAssignment6();
     testStatementDeclaration();
     testStatementDirective();
     testSingleInitialisation();

@@ -16,6 +16,16 @@ public interface TokenExpression
     return false;
   }
 
+  default boolean isExpressionList()
+  {
+    return false;
+  }
+
+  default boolean isPullExpression()
+  {
+    return false;
+  }
+
   default boolean isLiteral()
   {
     return false;

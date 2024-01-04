@@ -25,7 +25,7 @@ public class PullTokenExpression
   }
 
   @Override
-  public boolean isAssignment()
+  public boolean isPullExpression()
   {
     return false;
   }

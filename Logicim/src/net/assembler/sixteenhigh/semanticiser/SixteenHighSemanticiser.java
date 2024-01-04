@@ -6,6 +6,7 @@ import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
+import net.assembler.sixteenhigh.semanticiser.expression.Expression;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
@@ -15,6 +16,8 @@ import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.VariableTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpressionList;
 import net.common.SimulatorException;
 import net.common.logger.Logger;
 import net.common.util.StringUtil;
@@ -228,9 +231,34 @@ public class SixteenHighSemanticiser
     return success();
   }
 
-  private void parseTokenExpression(BaseTokenExpression tokenExpression)
+  private LogResult parseTokenExpression(BaseTokenExpression baseTokenExpression)
   {
+    if (baseTokenExpression.isArrayExpressionInitialiser())
+    {
+      return success();
+    }
+    else if (baseTokenExpression.isExpressionList())
+    {
+      TokenExpressionList expressionList = (TokenExpressionList) baseTokenExpression;
+      List<TokenExpression> expressions = expressionList.getExpressions();
 
+      //You need to think about turning Token Expressions into Semantic Expressions.  And what to do about block.push.
+
+      // e.g. (c * 3 + (x - y))
+      for (TokenExpression tokenExpression : expressions)
+      {
+        Expression expression;
+      }
+      return success();
+    }
+    else if (baseTokenExpression.isPullExpression())
+    {
+      return success();
+    }
+    else
+    {
+      throw new SimulatorException("Cannot parse unknown token expression [%s].", baseTokenExpression.getClass().getSimpleName());
+    }
   }
 
   private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)

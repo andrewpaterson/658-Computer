@@ -75,5 +75,10 @@ public abstract class BaseTokenExpression
   @Override
   public abstract boolean isLiteral();
 
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
 }
 

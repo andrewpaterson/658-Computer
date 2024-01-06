@@ -36,6 +36,8 @@ public class SixteenHighKeywords
   protected List<String> unaryStrings;
   protected List<String> binaryString;
 
+  private static SixteenHighKeywords instance;
+
   public SixteenHighKeywords()
   {
     keywords = defineKeywords();
@@ -49,6 +51,15 @@ public class SixteenHighKeywords
     accessModes = defineAccessMode();
     unaryStrings = defineUnaryOperators();
     binaryString = defineBinaryOperators();
+  }
+
+  public static SixteenHighKeywords getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new SixteenHighKeywords();
+    }
+    return instance;
   }
 
   protected List<KeywordPair> defineKeywords()

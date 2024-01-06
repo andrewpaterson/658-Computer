@@ -6,7 +6,6 @@ import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
-import net.assembler.sixteenhigh.semanticiser.expression.Expression;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
@@ -247,7 +246,7 @@ public class SixteenHighSemanticiser
       // e.g. (c * 3 + (x - y))
       for (TokenExpression tokenExpression : expressions)
       {
-        Expression expression;
+        System.out.println(tokenExpression);
       }
       return success();
     }

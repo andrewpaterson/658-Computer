@@ -23,5 +23,11 @@ public class OperandTokenExpression
   {
     return operand;
   }
+
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
 }
 

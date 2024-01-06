@@ -32,5 +32,11 @@ public class UnaryTokenExpression
     }
     return keyword + leftBracket + expression.print(sixteenHighKeywords) + rightBracket;
   }
+
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
 }
 

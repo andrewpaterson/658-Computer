@@ -15,6 +15,5 @@ public enum CType
   float32,
   float64,
   float128,
-  bool,
 }
 

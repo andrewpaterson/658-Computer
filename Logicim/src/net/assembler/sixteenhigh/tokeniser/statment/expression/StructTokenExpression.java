@@ -10,4 +10,11 @@ public class StructTokenExpression
   {
     return null;
   }
+
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
 }
+

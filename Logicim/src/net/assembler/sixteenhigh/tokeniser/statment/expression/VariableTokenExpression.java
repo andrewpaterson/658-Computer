@@ -63,5 +63,11 @@ public class VariableTokenExpression
   {
     return members;
   }
+
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
 }
 

@@ -29,5 +29,11 @@ public class LiteralTokenExpression
   {
     return literal;
   }
+
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
 }
 

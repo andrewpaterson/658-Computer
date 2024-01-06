@@ -53,10 +53,14 @@ public enum SixteenHighKeywordCode
   decrement,          // --
   go,
   gosub,              // gosub
+
+/* Remove these.  For comparisons do unassigned arithmetic operations.  e.g.  (a - b); if<.  Or introduce an explicit 'flags' type.*/
   subtract_compare,   // ?-
   and_compare,        // ?&
   is_true,            // ?
   is_false,           // ?!
+/* ------------- */
+
   test_set,           // ts
   test_reset,         // tr
   pull,               // <

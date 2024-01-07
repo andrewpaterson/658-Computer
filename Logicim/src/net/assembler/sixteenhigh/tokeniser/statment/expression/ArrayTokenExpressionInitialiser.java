@@ -34,7 +34,7 @@ public class ArrayTokenExpressionInitialiser
   }
 
   @Override
-  public boolean isArrayExpressionInitialiser()
+  public boolean isArrayInitialiser()
   {
     return true;
   }

@@ -2,13 +2,13 @@ package net.assembler.sixteenhigh.tokeniser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralParser;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralResult;
 import net.assembler.sixteenhigh.tokeniser.statment.ArrayDeclaration;
 import net.assembler.sixteenhigh.tokeniser.statment.IfTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.common.logger.Logger;
 import net.common.parser.StringZero;
 import net.common.parser.TextParser;
@@ -1055,7 +1055,7 @@ public class SixteenHighTokeniser
     }
     else if (parseResult.isTrue())
     {
-      if (expressablePointer.expression.isExpression())
+      if (expressablePointer.expression.isList())
       {
         expressionPointer.setExpression((BaseTokenExpression) expressablePointer.expression);
       }

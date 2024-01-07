@@ -9,6 +9,7 @@ import net.assembler.sixteenhigh.semanticiser.directive.Directive;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.assembler.sixteenhigh.tokeniser.precedence.TokenPrecedence;
 import net.assembler.sixteenhigh.tokeniser.statment.RoutineTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.StructTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
@@ -232,25 +233,20 @@ public class SixteenHighSemanticiser
 
   private LogResult parseTokenExpression(BaseTokenExpression baseTokenExpression)
   {
-    if (baseTokenExpression.isArrayExpressionInitialiser())
+    if (baseTokenExpression.isArrayInitialiser())
     {
       return success();
     }
-    else if (baseTokenExpression.isExpressionList())
+    else if (baseTokenExpression.isList())
     {
       TokenExpressionList expressionList = (TokenExpressionList) baseTokenExpression;
-      List<TokenExpression> expressions = expressionList.getExpressions();
+      TokenExpression expression = TokenPrecedence.getInstance().orderByPrecedence(expressionList);
 
       //You need to think about turning Token Expressions into Semantic Expressions.  And what to do about block.push.
 
-      // e.g. (c * 3 + (x - y))
-      for (TokenExpression tokenExpression : expressions)
-      {
-        System.out.println(tokenExpression);
-      }
       return success();
     }
-    else if (baseTokenExpression.isPullExpression())
+    else if (baseTokenExpression.isPull())
     {
       return success();
     }

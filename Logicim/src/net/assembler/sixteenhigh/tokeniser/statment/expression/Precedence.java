@@ -51,16 +51,16 @@ public class Precedence
 //    szStart.Init();
 //    Print( & szStart, pcArray);
 //
-//    iOldUsedElements = pcArray -> NumElements();
-//    while (pcArray -> NumElements() > 1)
+//    iOldUsedElements = pcArray->NumElements();
+//    while (pcArray->NumElements() > 1)
 //    {
-//      if (pcArray -> NumElements() > iOldUsedElements)
+//      if (pcArray->NumElements() > iOldUsedElements)
 //      {
 //        return SetError( & szStart,
 //        pcArray, ppcExpression, "Number of elements in expression INCREASED from [", "] to [", "] which should not be possible.")
 //        ;
 //      }
-//      iOldUsedElements = pcArray -> NumElements();
+//      iOldUsedElements = pcArray->NumElements();
 //
 //      iIndex = GetMinPrecedence(pcArray);
 //      if (iIndex == -1)
@@ -68,11 +68,11 @@ public class Precedence
 //        return SetError( & szStart,
 //        pcArray, ppcExpression, "Confused trying to find order of precedence for inital [", "] with current [", "].");
 //      }
-//      pcOperator = (CCalcOperator *) pcArray -> GetPtr(iIndex);
+//      pcOperator = (CCalcOperator *) pcArray->GetPtr(iIndex);
 //
-//      if (pcOperator -> IsAmbiguous())
+//      if (pcOperator->IsAmbiguous())
 //      {
-//        pcObject = (CCalcObject *) pcArray -> SafeGetPtr(iIndex - 1);
+//        pcObject = (CCalcObject *) pcArray->SafeGetPtr(iIndex - 1);
 //        bUnary = false;
 //        if (pcObject == NULL)
 //        {
@@ -80,7 +80,7 @@ public class Precedence
 //        }
 //        else
 //        {
-//          if (pcObject -> IsOperator())
+//          if (pcObject->IsOperator())
 //          {
 //            bUnary = true;
 //          }
@@ -88,19 +88,19 @@ public class Precedence
 //        ResolveAmbiguity(pcOperator, bUnary);
 //      }
 //
-//      if (pcOperator -> IsUnary())
+//      if (pcOperator->IsUnary())
 //      {
 //        //For the time being always assume Right-to-Left associativity.
-//        pcObject = (CCalcObject *) pcArray -> SafeGetPtr(iIndex + 1);
+//        pcObject = (CCalcObject *) pcArray->SafeGetPtr(iIndex + 1);
 //        if (pcObject)
 //        {
-//          if (pcObject -> IsExpression())
+//          if (pcObject->IsExpression())
 //          {
 //            pcOperand = (CCalcExpression *) pcObject;
 //            pcUnary = NewMalloc < CCalcUnaryExpression > ();
-//            pcUnary -> Set(pcOperand, pcOperator);
-//            pcArray -> RemoveAt(iIndex + 1);
-//            pcArray -> Set(iIndex, pcUnary, 0);
+//            pcUnary->Set(pcOperand, pcOperator);
+//            pcArray->RemoveAt(iIndex + 1);
+//            pcArray->Set(iIndex, pcUnary, 0);
 //          }
 //          else
 //          {
@@ -114,23 +114,23 @@ public class Precedence
 //          pcArray, ppcExpression, "Unary operator needs right hand operand for inital [", "] with current [", "].");
 //        }
 //      }
-//      else if (pcOperator -> IsBinary())
+//      else if (pcOperator->IsBinary())
 //      {
-//        pcObjectLeft = (CCalcObject *) pcArray -> SafeGetPtr(iIndex - 1);
+//        pcObjectLeft = (CCalcObject *) pcArray->SafeGetPtr(iIndex - 1);
 //        if (pcObjectLeft)
 //        {
-//          pcObjectRight = (CCalcObject *) pcArray -> SafeGetPtr(iIndex + 1);
+//          pcObjectRight = (CCalcObject *) pcArray->SafeGetPtr(iIndex + 1);
 //          if (pcObjectRight)
 //          {
-//            if (pcObjectLeft -> IsExpression() && pcObjectRight -> IsExpression())
+//            if (pcObjectLeft->IsExpression() && pcObjectRight->IsExpression())
 //            {
 //              pcOperandLeft = (CCalcExpression *) pcObjectLeft;
 //              pcOperandRight = (CCalcExpression *) pcObjectRight;
 //              pcBinary = NewMalloc < CCalcBinaryExpression > ();
-//              pcBinary -> Set(pcOperandLeft, pcOperator, pcOperandRight);
-//              pcArray -> RemoveAt(iIndex + 1);
-//              pcArray -> Set(iIndex, pcBinary, 0);
-//              pcArray -> RemoveAt(iIndex - 1);
+//              pcBinary->Set(pcOperandLeft, pcOperator, pcOperandRight);
+//              pcArray->RemoveAt(iIndex + 1);
+//              pcArray->Set(iIndex, pcBinary, 0);
+//              pcArray->RemoveAt(iIndex - 1);
 //            }
 //            else
 //            {
@@ -158,7 +158,7 @@ public class Precedence
 //        pcArray, ppcExpression, "Don't know what style of operator this is [", "] with current [", "].");
 //      }
 //    }
-//	*ppcExpression = (CCalcExpression *) pcArray -> GetPtr(0);
+//	*ppcExpression = (CCalcExpression *) pcArray->GetPtr(0);
 //    szStart.Kill();
 //    return true;
 //  }

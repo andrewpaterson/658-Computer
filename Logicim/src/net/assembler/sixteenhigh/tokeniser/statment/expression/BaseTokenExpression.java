@@ -40,7 +40,7 @@ public abstract class BaseTokenExpression
   {
     for (TokenExpression expression : expressions)
     {
-      if (expression.isArrayExpressionInitialiser())
+      if (expression.isArrayInitialiser())
       {
         return true;
       }

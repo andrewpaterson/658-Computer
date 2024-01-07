@@ -16,6 +16,11 @@ public class TokenExpressionList
     expressions = new ArrayList<>();
   }
 
+  public TokenExpressionList(List<TokenExpression> expressions)
+  {
+    this.expressions = expressions;
+  }
+
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
@@ -30,12 +35,6 @@ public class TokenExpressionList
       builder.append(")");
     }
     return builder.toString();
-  }
-
-  @Override
-  public boolean isExpression()
-  {
-    return true;
   }
 
   public void add(TokenExpression expression)
@@ -65,7 +64,7 @@ public class TokenExpressionList
   }
 
   @Override
-  public boolean isExpressionList()
+  public boolean isList()
   {
     return true;
   }

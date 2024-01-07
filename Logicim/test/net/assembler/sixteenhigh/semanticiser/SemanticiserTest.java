@@ -44,7 +44,7 @@ public abstract class SemanticiserTest
 
   public static void test()
   {
-//    testSimple();
+    testSimple();
     testComplex();
   }
 }

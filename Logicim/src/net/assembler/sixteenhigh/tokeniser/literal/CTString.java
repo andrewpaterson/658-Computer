@@ -15,5 +15,10 @@ public class CTString
   {
     return "\"" + value + "\"";
   }
+
+  public String getValue()
+  {
+    return value;
+  }
 }
 

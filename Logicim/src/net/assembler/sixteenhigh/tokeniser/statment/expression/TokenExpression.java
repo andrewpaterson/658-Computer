@@ -6,27 +6,37 @@ public interface TokenExpression
 {
   String print(SixteenHighKeywords sixteenHighKeywords);
 
-  default boolean isExpression()
+  default boolean isArrayInitialiser()
   {
     return false;
   }
 
-  default boolean isArrayExpressionInitialiser()
+  default boolean isList()
   {
     return false;
   }
 
-  default boolean isExpressionList()
-  {
-    return false;
-  }
-
-  default boolean isPullExpression()
+  default boolean isPull()
   {
     return false;
   }
 
   default boolean isLiteral()
+  {
+    return false;
+  }
+
+  default boolean isOperand()
+  {
+    return false;
+  }
+
+  default boolean isBinary()
+  {
+    return false;
+  }
+
+  default boolean isVariable()
   {
     return false;
   }

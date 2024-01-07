@@ -44,6 +44,12 @@ public class VariableTokenExpression
     return asterisks + reference + memberBuilder.toString();
   }
 
+  @Override
+  public boolean isVariable()
+  {
+    return true;
+  }
+
   public void addMember(VariableMember member)
   {
     members.add(member);

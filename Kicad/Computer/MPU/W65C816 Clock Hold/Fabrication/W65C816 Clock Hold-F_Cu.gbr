@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,7.0.5*%
-%TF.CreationDate,2023-12-18T11:01:32+02:00*%
+%TF.CreationDate,2024-01-10T18:16:31+02:00*%
 %TF.ProjectId,W65C816 Clock Hold,57363543-3831-4362-9043-6c6f636b2048,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Copper,L1,Top*%
 %TF.FilePolarity,Positive*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.5) date 2023-12-18 11:01:32*
+G04 Created by KiCad (PCBNEW 7.0.5) date 2024-01-10 18:16:31*
 %MOMM*%
 %LPD*%
 G01*
@@ -30,28 +30,28 @@ G04 Aperture macros list*
 20,1,$1+$1,$8,$9,$2,$3,0*%
 G04 Aperture macros list end*
 %TA.AperFunction,SMDPad,CuDef*%
-%ADD10R,0.875000X0.450000*%
+%ADD10R,1.250000X0.600000*%
+%TD*%
+%TA.AperFunction,SMDPad,CuDef*%
+%ADD11R,0.875000X0.450000*%
+%TD*%
+%TA.AperFunction,SMDPad,CuDef*%
+%ADD12R,1.150000X0.600000*%
+%TD*%
+%TA.AperFunction,SMDPad,CuDef*%
+%ADD13R,1.475000X0.450000*%
+%TD*%
+%TA.AperFunction,SMDPad,CuDef*%
+%ADD14R,1.450000X0.450000*%
 %TD*%
 %TA.AperFunction,ComponentPad*%
-%ADD11RoundRect,0.400000X-0.400000X-0.400000X0.400000X-0.400000X0.400000X0.400000X-0.400000X0.400000X0*%
+%ADD15RoundRect,0.400000X-0.400000X-0.400000X0.400000X-0.400000X0.400000X0.400000X-0.400000X0.400000X0*%
 %TD*%
 %TA.AperFunction,ComponentPad*%
-%ADD12O,1.600000X1.600000*%
+%ADD16O,1.600000X1.600000*%
 %TD*%
 %TA.AperFunction,ComponentPad*%
-%ADD13R,1.600000X1.600000*%
-%TD*%
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD14R,1.250000X0.600000*%
-%TD*%
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD15R,1.475000X0.450000*%
-%TD*%
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD16R,1.150000X0.600000*%
-%TD*%
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD17R,1.450000X0.450000*%
+%ADD17R,1.600000X1.600000*%
 %TD*%
 %TA.AperFunction,SMDPad,CuDef*%
 %ADD18RoundRect,0.250000X0.475000X-0.250000X0.475000X0.250000X-0.475000X0.250000X-0.475000X-0.250000X0*%
@@ -67,6 +67,23 @@ G04 Aperture macros list end*
 %TD*%
 G04 APERTURE END LIST*
 D10*
+%TO.P,IC51,1,B*%
+%TO.N,/Clock Control Board/HC=CC*%
+X103271000Y-100904000D03*
+%TO.P,IC51,2,A*%
+%TO.N,/Clock Control Board/CLK*%
+X103271000Y-101854000D03*
+%TO.P,IC51,3,GND*%
+%TO.N,/Clock Control Board/GND*%
+X103271000Y-102804000D03*
+%TO.P,IC51,4,Y*%
+%TO.N,/Clock Control Board/Latch CHC*%
+X105771000Y-102804000D03*
+%TO.P,IC51,5,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X105771000Y-100904000D03*
+%TD*%
+D11*
 %TO.P,IC47,1,n.c.*%
 %TO.N,unconnected-(IC47-n.c.-Pad1)*%
 X90124000Y-79487000D03*
@@ -86,176 +103,24 @@ X92248000Y-80137000D03*
 %TO.N,/Clock Control Board/CLK*%
 X92248000Y-79487000D03*
 %TD*%
-D11*
-%TO.P,J1,1,Pin_1*%
-%TO.N,/Clock Control Board/5V*%
-X86360000Y-71120000D03*
-D12*
-%TO.P,J1,2,Pin_2*%
-%TO.N,/Clock Control Board/~{Hold Low}*%
-X86360000Y-73660000D03*
-%TO.P,J1,3,Pin_3*%
-%TO.N,/Clock Control Board/~{Hold High}*%
-X86360000Y-76200000D03*
-%TO.P,J1,4,Pin_4*%
-%TO.N,/Clock Control Board/CLK*%
-X86360000Y-78740000D03*
-D13*
-%TO.P,J1,5,Pin_5*%
-%TO.N,/Clock Control Board/GND*%
-X86360000Y-81280000D03*
-D12*
-%TO.P,J1,6,Pin_6*%
-%TO.N,/Clock Control Board/~{CLK}*%
-X86360000Y-83820000D03*
-%TO.P,J1,7,Pin_7*%
-%TO.N,/Clock Control Board/CLK_{IN}*%
-X86360000Y-86360000D03*
-%TO.P,J1,8,Pin_8*%
-%TO.N,/Clock Control Board/~{Reset}*%
-X86360000Y-88900000D03*
-%TO.P,J1,9,Pin_9*%
-%TO.N,/Clock Control Board/Hold Count_{0}D*%
-X86360000Y-91440000D03*
-%TO.P,J1,10,Pin_10*%
-%TO.N,/Clock Control Board/Hold Count_{1}D*%
-X86360000Y-93980000D03*
-%TO.P,J1,11,Pin_11*%
-%TO.N,/Clock Control Board/Hold Count_{2}D*%
-X86360000Y-96520000D03*
-D13*
-%TO.P,J1,12,Pin_12*%
-%TO.N,/Clock Control Board/GND*%
-X86360000Y-99060000D03*
-D12*
-%TO.P,J1,13,Pin_13*%
-%TO.N,/Clock Control Board/Hold Count_{3}D*%
-X86360000Y-101600000D03*
-%TO.P,J1,14,Pin_14*%
-%TO.N,/Clock Control Board/HC Latch_{2}*%
-X86360000Y-104140000D03*
-%TO.P,J1,15,Pin_15*%
-%TO.N,/Clock Control Board/HC Latch_{3}*%
-X86360000Y-106680000D03*
-%TO.P,J1,16,Pin_16*%
-%TO.N,unconnected-(J1-Pin_16-Pad16)*%
-X86360000Y-109220000D03*
-D11*
-%TO.P,J1,17,Pin_17*%
-%TO.N,/Clock Control Board/5V*%
-X109220000Y-109220000D03*
-D12*
-%TO.P,J1,18,Pin_18*%
-%TO.N,/Clock Control Board/CLK High Pulse*%
-X109220000Y-106680000D03*
-%TO.P,J1,19,Pin_19*%
-%TO.N,/Clock Control Board/~{HC=CC}*%
-X109220000Y-104140000D03*
-%TO.P,J1,20,Pin_20*%
-%TO.N,/Clock Control Board/HC=CC*%
-X109220000Y-101600000D03*
-D13*
-%TO.P,J1,21,Pin_21*%
-%TO.N,/Clock Control Board/GND*%
-X109220000Y-99060000D03*
-D12*
-%TO.P,J1,22,Pin_22*%
-%TO.N,/Clock Control Board/HC Latch_{1}*%
-X109220000Y-96520000D03*
-%TO.P,J1,23,Pin_23*%
-%TO.N,/Clock Control Board/HC Latch_{0}*%
-X109220000Y-93980000D03*
-%TO.P,J1,24,Pin_24*%
-%TO.N,/Clock Control Board/~{PHI2}*%
-X109220000Y-91440000D03*
-%TO.P,J1,25,Pin_25*%
-%TO.N,/Clock Control Board/Reset*%
-X109220000Y-88900000D03*
-%TO.P,J1,26,Pin_26*%
-%TO.N,/Clock Control Board/Clk Count_{3}*%
-X109220000Y-86360000D03*
-%TO.P,J1,27,Pin_27*%
-%TO.N,/Clock Control Board/Clk Count_{2}*%
-X109220000Y-83820000D03*
-D13*
-%TO.P,J1,28,Pin_28*%
-%TO.N,/Clock Control Board/GND*%
-X109220000Y-81280000D03*
-D12*
-%TO.P,J1,29,Pin_29*%
-%TO.N,/Clock Control Board/Clk Count_{1}*%
-X109220000Y-78740000D03*
-%TO.P,J1,30,Pin_30*%
-%TO.N,/Clock Control Board/Clk Count_{0}*%
-X109220000Y-76200000D03*
-%TO.P,J1,31,Pin_31*%
+D10*
+%TO.P,IC44,1,B*%
 %TO.N,/Clock Control Board/CLK Low Pulse*%
-X109220000Y-73660000D03*
-%TO.P,J1,32,Pin_32*%
-%TO.N,/Clock Control Board/PHI2*%
-X109220000Y-71120000D03*
-%TD*%
-D14*
-%TO.P,IC28,1,B*%
-%TO.N,/Clock Control Board/~{HC_{L}=CC_{L}}*%
-X98318000Y-99253000D03*
-%TO.P,IC28,2,A*%
-%TO.N,/Clock Control Board/~{HC_{H}=CC_{H}}*%
-X98318000Y-100203000D03*
-%TO.P,IC28,3,GND*%
+X90063000Y-67503000D03*
+%TO.P,IC44,2,A*%
+%TO.N,/Clock Control Board/~{Hold Low}*%
+X90063000Y-68453000D03*
+%TO.P,IC44,3,GND*%
 %TO.N,/Clock Control Board/GND*%
-X98318000Y-101153000D03*
-%TO.P,IC28,4,Y*%
-%TO.N,/Clock Control Board/HC=CC*%
-X100818000Y-101153000D03*
-%TO.P,IC28,5,3V*%
+X90063000Y-69403000D03*
+%TO.P,IC44,4,Y*%
+%TO.N,/Clock Control Board/~{Hold Low}\u00B7CLK Low Pulse*%
+X92563000Y-69403000D03*
+%TO.P,IC44,5,3V*%
 %TO.N,/Clock Control Board/3.3V*%
-X100818000Y-99253000D03*
+X92563000Y-67503000D03*
 %TD*%
-D15*
-%TO.P,IC26,1,1A*%
-%TO.N,/Clock Control Board/~{HC_{3}=CC_{3}}*%
-X98408000Y-108794000D03*
-%TO.P,IC26,2,1B*%
-%TO.N,/Clock Control Board/~{HC_{2}=CC_{2}}*%
-X98408000Y-109444000D03*
-%TO.P,IC26,3,1Y*%
-%TO.N,/Clock Control Board/~{HC_{H}=CC_{H}}*%
-X98408000Y-110094000D03*
-%TO.P,IC26,4,2A*%
-%TO.N,/Clock Control Board/~{HC_{1}=CC_{1}}*%
-X98408000Y-110744000D03*
-%TO.P,IC26,5,2B*%
-%TO.N,/Clock Control Board/~{HC_{0}=CC_{0}}*%
-X98408000Y-111394000D03*
-%TO.P,IC26,6,2Y*%
-%TO.N,/Clock Control Board/~{HC_{L}=CC_{L}}*%
-X98408000Y-112044000D03*
-%TO.P,IC26,7,GND*%
-%TO.N,/Clock Control Board/GND*%
-X98408000Y-112694000D03*
-%TO.P,IC26,8,3Y*%
-%TO.N,/Clock Control Board/~{HC=CC}*%
-X104284000Y-112694000D03*
-%TO.P,IC26,9,3A*%
-%TO.N,/Clock Control Board/~{HC_{H}=CC_{H}}*%
-X104284000Y-112044000D03*
-%TO.P,IC26,10,3B*%
-%TO.N,/Clock Control Board/~{HC_{L}=CC_{L}}*%
-X104284000Y-111394000D03*
-%TO.P,IC26,11,4Y*%
-%TO.N,unconnected-(IC26D-4Y-Pad11)*%
-X104284000Y-110744000D03*
-%TO.P,IC26,12,4A*%
-%TO.N,/Clock Control Board/GND*%
-X104284000Y-110094000D03*
-%TO.P,IC26,13,4B*%
-X104284000Y-109444000D03*
-%TO.P,IC26,14,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X104284000Y-108794000D03*
-%TD*%
-D16*
+D12*
 %TO.P,IC41,1,VIN*%
 %TO.N,/Clock Control Board/5V*%
 X91156000Y-108524000D03*
@@ -272,7 +137,7 @@ X93756000Y-110424000D03*
 %TO.N,/Clock Control Board/3.3V*%
 X93756000Y-108524000D03*
 %TD*%
-D15*
+D13*
 %TO.P,IC31,1,~{1RD}*%
 %TO.N,/Clock Control Board/~{CLK High Reset Pulse}*%
 X100059000Y-74758000D03*
@@ -316,7 +181,7 @@ X105935000Y-75408000D03*
 %TO.N,/Clock Control Board/3.3V*%
 X105935000Y-74758000D03*
 %TD*%
-D17*
+D14*
 %TO.P,IC30,1,S*%
 %TO.N,/Clock Control Board/~{Reset}*%
 X90166000Y-91451000D03*
@@ -365,7 +230,188 @@ X96016000Y-92101000D03*
 %TO.N,/Clock Control Board/3.3V*%
 X96016000Y-91451000D03*
 %TD*%
-D15*
+D10*
+%TO.P,IC29,1,D*%
+%TO.N,/Clock Control Board/CLK*%
+X102128000Y-67376000D03*
+%TO.P,IC29,2,CP*%
+%TO.N,/Clock Control Board/High Pulse+Low Pulse*%
+X102128000Y-68326000D03*
+%TO.P,IC29,3,GND*%
+%TO.N,/Clock Control Board/GND*%
+X102128000Y-69276000D03*
+%TO.P,IC29,4,Q*%
+%TO.N,/Clock Control Board/PHI2*%
+X104628000Y-69276000D03*
+%TO.P,IC29,5,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X104628000Y-67376000D03*
+%TD*%
+%TO.P,IC28,1,B*%
+%TO.N,/Clock Control Board/~{HC_{L}=CC_{L}}*%
+X98318000Y-99253000D03*
+%TO.P,IC28,2,A*%
+%TO.N,/Clock Control Board/~{HC_{H}=CC_{H}}*%
+X98318000Y-100203000D03*
+%TO.P,IC28,3,GND*%
+%TO.N,/Clock Control Board/GND*%
+X98318000Y-101153000D03*
+%TO.P,IC28,4,Y*%
+%TO.N,/Clock Control Board/HC=CC*%
+X100818000Y-101153000D03*
+%TO.P,IC28,5,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X100818000Y-99253000D03*
+%TD*%
+%TO.P,IC27,1,B*%
+%TO.N,/Clock Control Board/~{Hold High}\u00B7CLK High Pulse\u00B7HC=CC*%
+X96413000Y-67376000D03*
+%TO.P,IC27,2,A*%
+%TO.N,/Clock Control Board/~{Hold Low}\u00B7CLK Low Pulse*%
+X96413000Y-68326000D03*
+%TO.P,IC27,3,GND*%
+%TO.N,/Clock Control Board/GND*%
+X96413000Y-69276000D03*
+%TO.P,IC27,4,Y*%
+%TO.N,/Clock Control Board/High Pulse+Low Pulse*%
+X98913000Y-69276000D03*
+%TO.P,IC27,5,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X98913000Y-67376000D03*
+%TD*%
+D13*
+%TO.P,IC26,1,1A*%
+%TO.N,/Clock Control Board/~{HC_{3}=CC_{3}}*%
+X98408000Y-108794000D03*
+%TO.P,IC26,2,1B*%
+%TO.N,/Clock Control Board/~{HC_{2}=CC_{2}}*%
+X98408000Y-109444000D03*
+%TO.P,IC26,3,1Y*%
+%TO.N,/Clock Control Board/~{HC_{H}=CC_{H}}*%
+X98408000Y-110094000D03*
+%TO.P,IC26,4,2A*%
+%TO.N,/Clock Control Board/~{HC_{1}=CC_{1}}*%
+X98408000Y-110744000D03*
+%TO.P,IC26,5,2B*%
+%TO.N,/Clock Control Board/~{HC_{0}=CC_{0}}*%
+X98408000Y-111394000D03*
+%TO.P,IC26,6,2Y*%
+%TO.N,/Clock Control Board/~{HC_{L}=CC_{L}}*%
+X98408000Y-112044000D03*
+%TO.P,IC26,7,GND*%
+%TO.N,/Clock Control Board/GND*%
+X98408000Y-112694000D03*
+%TO.P,IC26,8,3Y*%
+%TO.N,/Clock Control Board/~{HC=CC}*%
+X104284000Y-112694000D03*
+%TO.P,IC26,9,3A*%
+%TO.N,/Clock Control Board/~{HC_{H}=CC_{H}}*%
+X104284000Y-112044000D03*
+%TO.P,IC26,10,3B*%
+%TO.N,/Clock Control Board/~{HC_{L}=CC_{L}}*%
+X104284000Y-111394000D03*
+%TO.P,IC26,11,4Y*%
+%TO.N,unconnected-(IC26D-4Y-Pad11)*%
+X104284000Y-110744000D03*
+%TO.P,IC26,12,4A*%
+%TO.N,/Clock Control Board/GND*%
+X104284000Y-110094000D03*
+%TO.P,IC26,13,4B*%
+X104284000Y-109444000D03*
+%TO.P,IC26,14,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X104284000Y-108794000D03*
+%TD*%
+%TO.P,IC24,1,1A*%
+%TO.N,/Clock Control Board/HC Latch_{3}*%
+X99568000Y-91440000D03*
+%TO.P,IC24,2,1B*%
+%TO.N,/Clock Control Board/Clk Count_{3}*%
+X99568000Y-92090000D03*
+%TO.P,IC24,3,1Y*%
+%TO.N,/Clock Control Board/~{HC_{3}=CC_{3}}*%
+X99568000Y-92740000D03*
+%TO.P,IC24,4,2A*%
+%TO.N,/Clock Control Board/HC Latch_{2}*%
+X99568000Y-93390000D03*
+%TO.P,IC24,5,2B*%
+%TO.N,/Clock Control Board/Clk Count_{2}*%
+X99568000Y-94040000D03*
+%TO.P,IC24,6,2Y*%
+%TO.N,/Clock Control Board/~{HC_{2}=CC_{2}}*%
+X99568000Y-94690000D03*
+%TO.P,IC24,7,GND*%
+%TO.N,/Clock Control Board/GND*%
+X99568000Y-95340000D03*
+%TO.P,IC24,8,3Y*%
+%TO.N,/Clock Control Board/~{HC_{1}=CC_{1}}*%
+X105444000Y-95340000D03*
+%TO.P,IC24,9,3A*%
+%TO.N,/Clock Control Board/HC Latch_{1}*%
+X105444000Y-94690000D03*
+%TO.P,IC24,10,3B*%
+%TO.N,/Clock Control Board/Clk Count_{1}*%
+X105444000Y-94040000D03*
+%TO.P,IC24,11,4Y*%
+%TO.N,/Clock Control Board/~{HC_{0}=CC_{0}}*%
+X105444000Y-93390000D03*
+%TO.P,IC24,12,4A*%
+%TO.N,/Clock Control Board/HC Latch_{0}*%
+X105444000Y-92740000D03*
+%TO.P,IC24,13,4B*%
+%TO.N,/Clock Control Board/Clk Count_{0}*%
+X105444000Y-92090000D03*
+%TO.P,IC24,14,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X105444000Y-91440000D03*
+%TD*%
+D14*
+%TO.P,IC23,1,~{MR}*%
+%TO.N,/Clock Control Board/~{HC=CC}*%
+X99437000Y-83069000D03*
+%TO.P,IC23,2,CP*%
+%TO.N,/Clock Control Board/~{CLK}_{DRAGGED}*%
+X99437000Y-83719000D03*
+%TO.P,IC23,3,D0*%
+%TO.N,/Clock Control Board/GND*%
+X99437000Y-84369000D03*
+%TO.P,IC23,4,D1*%
+X99437000Y-85019000D03*
+%TO.P,IC23,5,D2*%
+X99437000Y-85669000D03*
+%TO.P,IC23,6,D3*%
+X99437000Y-86319000D03*
+%TO.P,IC23,7,CEP*%
+%TO.N,/Clock Control Board/3.3V*%
+X99437000Y-86969000D03*
+%TO.P,IC23,8,GND*%
+%TO.N,/Clock Control Board/GND*%
+X99437000Y-87619000D03*
+%TO.P,IC23,9,~{PE}*%
+%TO.N,/Clock Control Board/3.3V*%
+X105287000Y-87619000D03*
+%TO.P,IC23,10,CET*%
+X105287000Y-86969000D03*
+%TO.P,IC23,11,Q3*%
+%TO.N,/Clock Control Board/Clk Count_{3}*%
+X105287000Y-86319000D03*
+%TO.P,IC23,12,Q2*%
+%TO.N,/Clock Control Board/Clk Count_{2}*%
+X105287000Y-85669000D03*
+%TO.P,IC23,13,Q1*%
+%TO.N,/Clock Control Board/Clk Count_{1}*%
+X105287000Y-85019000D03*
+%TO.P,IC23,14,Q0*%
+%TO.N,/Clock Control Board/Clk Count_{0}*%
+X105287000Y-84369000D03*
+%TO.P,IC23,15,TC*%
+%TO.N,unconnected-(IC23-TC-Pad15)*%
+X105287000Y-83719000D03*
+%TO.P,IC23,16,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X105287000Y-83069000D03*
+%TD*%
+D13*
 %TO.P,IC22,1,~{OE}*%
 %TO.N,/Clock Control Board/GND*%
 X90280000Y-99437000D03*
@@ -423,7 +469,7 @@ X96156000Y-100087000D03*
 %TO.N,/Clock Control Board/3.3V*%
 X96156000Y-99437000D03*
 %TD*%
-D10*
+D11*
 %TO.P,IC21,1,1A*%
 %TO.N,/Clock Control Board/~{CLK}*%
 X93934000Y-78598000D03*
@@ -443,68 +489,7 @@ X96058000Y-79248000D03*
 %TO.N,Net-(IC21A-1Y)*%
 X96058000Y-78598000D03*
 %TD*%
-D14*
-%TO.P,IC29,1,D*%
-%TO.N,/Clock Control Board/CLK*%
-X102128000Y-67376000D03*
-%TO.P,IC29,2,CP*%
-%TO.N,/Clock Control Board/High Pulse+Low Pulse*%
-X102128000Y-68326000D03*
-%TO.P,IC29,3,GND*%
-%TO.N,/Clock Control Board/GND*%
-X102128000Y-69276000D03*
-%TO.P,IC29,4,Q*%
-%TO.N,/Clock Control Board/PHI2*%
-X104628000Y-69276000D03*
-%TO.P,IC29,5,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X104628000Y-67376000D03*
-%TD*%
-%TO.P,IC27,1,B*%
-%TO.N,/Clock Control Board/~{Hold High}\u00B7CLK High Pulse\u00B7HC=CC*%
-X96413000Y-67376000D03*
-%TO.P,IC27,2,A*%
-%TO.N,/Clock Control Board/~{Hold Low}\u00B7CLK Low Pulse*%
-X96413000Y-68326000D03*
-%TO.P,IC27,3,GND*%
-%TO.N,/Clock Control Board/GND*%
-X96413000Y-69276000D03*
-%TO.P,IC27,4,Y*%
-%TO.N,/Clock Control Board/High Pulse+Low Pulse*%
-X98913000Y-69276000D03*
-%TO.P,IC27,5,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X98913000Y-67376000D03*
-%TD*%
-D18*
-%TO.P,C44,1*%
-%TO.N,/Clock Control Board/3.3V*%
-X95758000Y-110535000D03*
-%TO.P,C44,2*%
-%TO.N,/Clock Control Board/GND*%
-X95758000Y-108635000D03*
-%TD*%
-D10*
-%TO.P,IC43,1,A*%
-%TO.N,/Clock Control Board/~{Hold High}*%
-X90632000Y-73772000D03*
-%TO.P,IC43,2,GND*%
-%TO.N,/Clock Control Board/GND*%
-X90632000Y-74422000D03*
-%TO.P,IC43,3,B*%
-%TO.N,/Clock Control Board/CLK High Pulse*%
-X90632000Y-75072000D03*
-%TO.P,IC43,4,Y*%
-%TO.N,/Clock Control Board/~{Hold High}\u00B7CLK High Pulse\u00B7HC=CC*%
-X92756000Y-75072000D03*
-%TO.P,IC43,5,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X92756000Y-74422000D03*
-%TO.P,IC43,6,C*%
-%TO.N,/Clock Control Board/HC=CC*%
-X92756000Y-73772000D03*
-%TD*%
-D15*
+D13*
 %TO.P,IC7,1,1A*%
 %TO.N,/Clock Control Board/PHI2*%
 X90788000Y-83394000D03*
@@ -547,65 +532,142 @@ X96664000Y-84044000D03*
 %TO.N,/Clock Control Board/3.3V*%
 X96664000Y-83394000D03*
 %TD*%
-%TO.P,IC24,1,1A*%
-%TO.N,/Clock Control Board/HC Latch_{3}*%
-X99568000Y-91440000D03*
-%TO.P,IC24,2,1B*%
-%TO.N,/Clock Control Board/Clk Count_{3}*%
-X99568000Y-92090000D03*
-%TO.P,IC24,3,1Y*%
-%TO.N,/Clock Control Board/~{HC_{3}=CC_{3}}*%
-X99568000Y-92740000D03*
-%TO.P,IC24,4,2A*%
-%TO.N,/Clock Control Board/HC Latch_{2}*%
-X99568000Y-93390000D03*
-%TO.P,IC24,5,2B*%
-%TO.N,/Clock Control Board/Clk Count_{2}*%
-X99568000Y-94040000D03*
-%TO.P,IC24,6,2Y*%
-%TO.N,/Clock Control Board/~{HC_{2}=CC_{2}}*%
-X99568000Y-94690000D03*
-%TO.P,IC24,7,GND*%
-%TO.N,/Clock Control Board/GND*%
-X99568000Y-95340000D03*
-%TO.P,IC24,8,3Y*%
-%TO.N,/Clock Control Board/~{HC_{1}=CC_{1}}*%
-X105444000Y-95340000D03*
-%TO.P,IC24,9,3A*%
-%TO.N,/Clock Control Board/HC Latch_{1}*%
-X105444000Y-94690000D03*
-%TO.P,IC24,10,3B*%
-%TO.N,/Clock Control Board/Clk Count_{1}*%
-X105444000Y-94040000D03*
-%TO.P,IC24,11,4Y*%
-%TO.N,/Clock Control Board/~{HC_{0}=CC_{0}}*%
-X105444000Y-93390000D03*
-%TO.P,IC24,12,4A*%
-%TO.N,/Clock Control Board/HC Latch_{0}*%
-X105444000Y-92740000D03*
-%TO.P,IC24,13,4B*%
-%TO.N,/Clock Control Board/Clk Count_{0}*%
-X105444000Y-92090000D03*
-%TO.P,IC24,14,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X105444000Y-91440000D03*
-%TD*%
-D14*
-%TO.P,IC51,1,B*%
-%TO.N,/Clock Control Board/HC=CC*%
-X103271000Y-100904000D03*
-%TO.P,IC51,2,A*%
+D15*
+%TO.P,J1,1,Pin_1*%
+%TO.N,/Clock Control Board/5V*%
+X86360000Y-71120000D03*
+D16*
+%TO.P,J1,2,Pin_2*%
+%TO.N,/Clock Control Board/~{Hold Low}*%
+X86360000Y-73660000D03*
+%TO.P,J1,3,Pin_3*%
+%TO.N,/Clock Control Board/~{Hold High}*%
+X86360000Y-76200000D03*
+%TO.P,J1,4,Pin_4*%
 %TO.N,/Clock Control Board/CLK*%
-X103271000Y-101854000D03*
-%TO.P,IC51,3,GND*%
+X86360000Y-78740000D03*
+D17*
+%TO.P,J1,5,Pin_5*%
 %TO.N,/Clock Control Board/GND*%
-X103271000Y-102804000D03*
-%TO.P,IC51,4,Y*%
-%TO.N,/Clock Control Board/Latch CHC*%
-X105771000Y-102804000D03*
-%TO.P,IC51,5,3V*%
+X86360000Y-81280000D03*
+D16*
+%TO.P,J1,6,Pin_6*%
+%TO.N,/Clock Control Board/~{CLK}*%
+X86360000Y-83820000D03*
+%TO.P,J1,7,Pin_7*%
+%TO.N,/Clock Control Board/CLK_{IN}*%
+X86360000Y-86360000D03*
+%TO.P,J1,8,Pin_8*%
+%TO.N,/Clock Control Board/~{Reset}*%
+X86360000Y-88900000D03*
+%TO.P,J1,9,Pin_9*%
+%TO.N,/Clock Control Board/Hold Count_{0}D*%
+X86360000Y-91440000D03*
+%TO.P,J1,10,Pin_10*%
+%TO.N,/Clock Control Board/Hold Count_{1}D*%
+X86360000Y-93980000D03*
+%TO.P,J1,11,Pin_11*%
+%TO.N,/Clock Control Board/Hold Count_{2}D*%
+X86360000Y-96520000D03*
+D17*
+%TO.P,J1,12,Pin_12*%
+%TO.N,/Clock Control Board/GND*%
+X86360000Y-99060000D03*
+D16*
+%TO.P,J1,13,Pin_13*%
+%TO.N,/Clock Control Board/Hold Count_{3}D*%
+X86360000Y-101600000D03*
+%TO.P,J1,14,Pin_14*%
+%TO.N,/Clock Control Board/HC Latch_{2}*%
+X86360000Y-104140000D03*
+%TO.P,J1,15,Pin_15*%
+%TO.N,/Clock Control Board/HC Latch_{3}*%
+X86360000Y-106680000D03*
+%TO.P,J1,16,Pin_16*%
+%TO.N,unconnected-(J1-Pin_16-Pad16)*%
+X86360000Y-109220000D03*
+D15*
+%TO.P,J1,17,Pin_17*%
+%TO.N,/Clock Control Board/5V*%
+X109220000Y-109220000D03*
+D16*
+%TO.P,J1,18,Pin_18*%
+%TO.N,/Clock Control Board/CLK High Pulse*%
+X109220000Y-106680000D03*
+%TO.P,J1,19,Pin_19*%
+%TO.N,/Clock Control Board/~{HC=CC}*%
+X109220000Y-104140000D03*
+%TO.P,J1,20,Pin_20*%
+%TO.N,/Clock Control Board/HC=CC*%
+X109220000Y-101600000D03*
+D17*
+%TO.P,J1,21,Pin_21*%
+%TO.N,/Clock Control Board/GND*%
+X109220000Y-99060000D03*
+D16*
+%TO.P,J1,22,Pin_22*%
+%TO.N,/Clock Control Board/HC Latch_{1}*%
+X109220000Y-96520000D03*
+%TO.P,J1,23,Pin_23*%
+%TO.N,/Clock Control Board/HC Latch_{0}*%
+X109220000Y-93980000D03*
+%TO.P,J1,24,Pin_24*%
+%TO.N,/Clock Control Board/~{PHI2}*%
+X109220000Y-91440000D03*
+%TO.P,J1,25,Pin_25*%
+%TO.N,/Clock Control Board/Reset*%
+X109220000Y-88900000D03*
+%TO.P,J1,26,Pin_26*%
+%TO.N,/Clock Control Board/Clk Count_{3}*%
+X109220000Y-86360000D03*
+%TO.P,J1,27,Pin_27*%
+%TO.N,/Clock Control Board/Clk Count_{2}*%
+X109220000Y-83820000D03*
+D17*
+%TO.P,J1,28,Pin_28*%
+%TO.N,/Clock Control Board/GND*%
+X109220000Y-81280000D03*
+D16*
+%TO.P,J1,29,Pin_29*%
+%TO.N,/Clock Control Board/Clk Count_{1}*%
+X109220000Y-78740000D03*
+%TO.P,J1,30,Pin_30*%
+%TO.N,/Clock Control Board/Clk Count_{0}*%
+X109220000Y-76200000D03*
+%TO.P,J1,31,Pin_31*%
+%TO.N,/Clock Control Board/CLK Low Pulse*%
+X109220000Y-73660000D03*
+%TO.P,J1,32,Pin_32*%
+%TO.N,/Clock Control Board/PHI2*%
+X109220000Y-71120000D03*
+%TD*%
+D18*
+%TO.P,C44,1*%
 %TO.N,/Clock Control Board/3.3V*%
-X105771000Y-100904000D03*
+X95758000Y-110535000D03*
+%TO.P,C44,2*%
+%TO.N,/Clock Control Board/GND*%
+X95758000Y-108635000D03*
+%TD*%
+D11*
+%TO.P,IC43,1,A*%
+%TO.N,/Clock Control Board/~{Hold High}*%
+X90632000Y-73772000D03*
+%TO.P,IC43,2,GND*%
+%TO.N,/Clock Control Board/GND*%
+X90632000Y-74422000D03*
+%TO.P,IC43,3,B*%
+%TO.N,/Clock Control Board/CLK High Pulse*%
+X90632000Y-75072000D03*
+%TO.P,IC43,4,Y*%
+%TO.N,/Clock Control Board/~{Hold High}\u00B7CLK High Pulse\u00B7HC=CC*%
+X92756000Y-75072000D03*
+%TO.P,IC43,5,3V*%
+%TO.N,/Clock Control Board/3.3V*%
+X92756000Y-74422000D03*
+%TO.P,IC43,6,C*%
+%TO.N,/Clock Control Board/HC=CC*%
+X92756000Y-73772000D03*
 %TD*%
 D18*
 %TO.P,C43,1*%
@@ -614,69 +676,6 @@ X89154000Y-110662000D03*
 %TO.P,C43,2*%
 %TO.N,/Clock Control Board/GND*%
 X89154000Y-108762000D03*
-%TD*%
-D17*
-%TO.P,IC23,1,~{MR}*%
-%TO.N,/Clock Control Board/~{HC=CC}*%
-X99437000Y-83069000D03*
-%TO.P,IC23,2,CP*%
-%TO.N,/Clock Control Board/~{CLK}_{DRAGGED}*%
-X99437000Y-83719000D03*
-%TO.P,IC23,3,D0*%
-%TO.N,/Clock Control Board/GND*%
-X99437000Y-84369000D03*
-%TO.P,IC23,4,D1*%
-X99437000Y-85019000D03*
-%TO.P,IC23,5,D2*%
-X99437000Y-85669000D03*
-%TO.P,IC23,6,D3*%
-X99437000Y-86319000D03*
-%TO.P,IC23,7,CEP*%
-%TO.N,/Clock Control Board/3.3V*%
-X99437000Y-86969000D03*
-%TO.P,IC23,8,GND*%
-%TO.N,/Clock Control Board/GND*%
-X99437000Y-87619000D03*
-%TO.P,IC23,9,~{PE}*%
-%TO.N,/Clock Control Board/3.3V*%
-X105287000Y-87619000D03*
-%TO.P,IC23,10,CET*%
-X105287000Y-86969000D03*
-%TO.P,IC23,11,Q3*%
-%TO.N,/Clock Control Board/Clk Count_{3}*%
-X105287000Y-86319000D03*
-%TO.P,IC23,12,Q2*%
-%TO.N,/Clock Control Board/Clk Count_{2}*%
-X105287000Y-85669000D03*
-%TO.P,IC23,13,Q1*%
-%TO.N,/Clock Control Board/Clk Count_{1}*%
-X105287000Y-85019000D03*
-%TO.P,IC23,14,Q0*%
-%TO.N,/Clock Control Board/Clk Count_{0}*%
-X105287000Y-84369000D03*
-%TO.P,IC23,15,TC*%
-%TO.N,unconnected-(IC23-TC-Pad15)*%
-X105287000Y-83719000D03*
-%TO.P,IC23,16,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X105287000Y-83069000D03*
-%TD*%
-D14*
-%TO.P,IC44,1,B*%
-%TO.N,/Clock Control Board/CLK Low Pulse*%
-X90063000Y-67503000D03*
-%TO.P,IC44,2,A*%
-%TO.N,/Clock Control Board/~{Hold Low}*%
-X90063000Y-68453000D03*
-%TO.P,IC44,3,GND*%
-%TO.N,/Clock Control Board/GND*%
-X90063000Y-69403000D03*
-%TO.P,IC44,4,Y*%
-%TO.N,/Clock Control Board/~{Hold Low}\u00B7CLK Low Pulse*%
-X92563000Y-69403000D03*
-%TO.P,IC44,5,3V*%
-%TO.N,/Clock Control Board/3.3V*%
-X92563000Y-67503000D03*
 %TD*%
 D19*
 %TO.N,/Clock Control Board/Hold Count_{2}D*%

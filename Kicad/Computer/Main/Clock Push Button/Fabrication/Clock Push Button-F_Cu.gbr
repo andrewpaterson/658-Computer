@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,7.0.5*%
-%TF.CreationDate,2023-12-18T16:39:59+02:00*%
+%TF.CreationDate,2024-01-10T20:03:32+02:00*%
 %TF.ProjectId,Clock Push Button,436c6f63-6b20-4507-9573-682042757474,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Copper,L1,Top*%
 %TF.FilePolarity,Positive*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.5) date 2023-12-18 16:39:59*
+G04 Created by KiCad (PCBNEW 7.0.5) date 2024-01-10 20:03:32*
 %MOMM*%
 %LPD*%
 G01*
@@ -29,20 +29,20 @@ G04 Aperture macros list*
 20,1,$1+$1,$6,$7,$8,$9,0*
 20,1,$1+$1,$8,$9,$2,$3,0*%
 G04 Aperture macros list end*
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD10R,1.310000X0.940000*%
-%TD*%
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD11R,1.310000X0.550000*%
+%TA.AperFunction,ComponentPad*%
+%ADD10R,1.575000X1.575000*%
 %TD*%
 %TA.AperFunction,ComponentPad*%
-%ADD12R,1.575000X1.575000*%
-%TD*%
-%TA.AperFunction,ComponentPad*%
-%ADD13C,1.575000*%
+%ADD11C,1.575000*%
 %TD*%
 %TA.AperFunction,SMDPad,CuDef*%
-%ADD14R,0.950000X0.450000*%
+%ADD12R,0.950000X0.450000*%
+%TD*%
+%TA.AperFunction,SMDPad,CuDef*%
+%ADD13R,1.310000X0.940000*%
+%TD*%
+%TA.AperFunction,SMDPad,CuDef*%
+%ADD14R,1.310000X0.550000*%
 %TD*%
 %TA.AperFunction,SMDPad,CuDef*%
 %ADD15RoundRect,0.250000X-0.250000X-0.475000X0.250000X-0.475000X0.250000X0.475000X-0.250000X0.475000X0*%
@@ -58,25 +58,10 @@ G04 Aperture macros list end*
 %TD*%
 G04 APERTURE END LIST*
 D10*
-%TO.P,IC2,1,GND*%
-%TO.N,/GND*%
-X128767500Y-52200000D03*
-D11*
-%TO.P,IC2,2,IN*%
-%TO.N,Net-(IC2-IN)*%
-X128767500Y-50475000D03*
-%TO.P,IC2,3,OUT*%
-%TO.N,Net-(IC2-OUT)*%
-X126767500Y-50475000D03*
-%TO.P,IC2,4,VCC*%
-%TO.N,/3.3V*%
-X126767500Y-52395000D03*
-%TD*%
-D12*
 %TO.P,S2,1,C1*%
 %TO.N,/3.3V*%
 X118298400Y-58977600D03*
-D13*
+D11*
 %TO.P,S2,2,C2*%
 %TO.N,unconnected-(S2-C2-Pad2)*%
 X118298400Y-52477600D03*
@@ -87,7 +72,7 @@ X122798400Y-58977600D03*
 %TO.N,unconnected-(S2-N2-Pad4)*%
 X122798400Y-52477600D03*
 %TD*%
-D14*
+D12*
 %TO.P,IC3,1,CP*%
 %TO.N,Net-(IC2-OUT)*%
 X129760765Y-59268000D03*
@@ -110,6 +95,21 @@ X125810765Y-57968000D03*
 X125810765Y-58618000D03*
 %TO.P,IC3,8,3V*%
 X125810765Y-59268000D03*
+%TD*%
+D13*
+%TO.P,IC2,1,GND*%
+%TO.N,/GND*%
+X128767500Y-52200000D03*
+D14*
+%TO.P,IC2,2,IN*%
+%TO.N,Net-(IC2-IN)*%
+X128767500Y-50475000D03*
+%TO.P,IC2,3,OUT*%
+%TO.N,Net-(IC2-OUT)*%
+X126767500Y-50475000D03*
+%TO.P,IC2,4,VCC*%
+%TO.N,/3.3V*%
+X126767500Y-52395000D03*
 %TD*%
 D15*
 %TO.P,C2,1*%

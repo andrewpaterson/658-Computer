@@ -311,6 +311,18 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
+  protected static void testArrayStuff()
+  {
+    SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3L))] = (5 + b * c + 99 * 1.05)");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("@a[(c * (b + 3))] = (5 + b * c + 99 * 1.05)", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
   protected static void testArrayIndices()
   {
     SixteenHighTokeniser parser = createParser("a[2] = b[3]");
@@ -757,6 +769,7 @@ public abstract class TokeniserTest
     testStatementDirective();
     testSingleInitialisation();
     testArrayInitialisation();
+    testArrayStuff();
     testArrayIndices();
     testComplexArrayIndices();
     testIdentifierContainingNumber();

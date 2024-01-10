@@ -38,7 +38,7 @@ public class PrimitiveVariableTokenStatement
   }
 
   @Override
-  public boolean isVariable()
+  public boolean isVariableDefinition()
   {
     return true;
   }

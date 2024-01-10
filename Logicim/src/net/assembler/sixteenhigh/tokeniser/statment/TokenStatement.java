@@ -65,7 +65,12 @@ public abstract class TokenStatement
     return index;
   }
 
-  public boolean isVariable()
+  public boolean isVariableDefinition()
+  {
+    return false;
+  }
+
+  public boolean isAssignment()
   {
     return false;
   }

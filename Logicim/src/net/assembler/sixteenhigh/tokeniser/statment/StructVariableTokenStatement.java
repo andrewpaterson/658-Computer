@@ -38,7 +38,7 @@ public class StructVariableTokenStatement
   }
 
   @Override
-  public boolean isVariable()
+  public boolean isVariableDefinition()
   {
     return true;
   }

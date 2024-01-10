@@ -15,9 +15,7 @@ import net.assembler.sixteenhigh.tokeniser.statment.StructTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.VariableTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpression;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpressionList;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
 import net.common.SimulatorException;
 import net.common.logger.Logger;
 import net.common.util.StringUtil;
@@ -43,6 +41,11 @@ public class SixteenHighSemanticiser
     this.units = new ArrayList<>();
     this.units.add(unit);
     this.logger = new Logger();
+  }
+
+  public SixteenHighDefinition getDefinition()
+  {
+    return definition;
   }
 
   public void parse()
@@ -175,16 +178,24 @@ public class SixteenHighSemanticiser
       context.setEnd();
       return true;
     }
-    else if (statement.isVariable())
+    else if (statement.isVariableDefinition())
     {
       VariableTokenStatement variableStatement = (VariableTokenStatement) statement;
-      LogResult logResult = parseVariableStatement(variableStatement, context);
+      LogResult logResult = parseVariableDefinitionStatement(variableStatement, context);
       return logResult.isFailure();
     }
-    return false;
+    else if (statement.isAssignment())
+    {
+      int xxx = 0;
+      return false;
+    }
+    else
+    {
+      throw new SimulatorException();
+    }
   }
 
-  private LogResult parseVariableStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseVariableDefinitionStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
   {
     String name = variableStatement.getName();
     VariableDefinition variable = context.getVariable(name);
@@ -242,6 +253,8 @@ public class SixteenHighSemanticiser
       TokenExpressionList expressionList = (TokenExpressionList) baseTokenExpression;
       TokenExpression expression = TokenPrecedence.getInstance().orderByPrecedence(expressionList);
 
+      List<Triple> triples = new ArrayList<>();
+      recurseTokenExpression(expression, triples);
       //You need to think about turning Token Expressions into Semantic Expressions.  And what to do about block.push.
 
       return success();
@@ -254,6 +267,29 @@ public class SixteenHighSemanticiser
     {
       throw new SimulatorException("Cannot parse unknown token expression [%s].", baseTokenExpression.getClass().getSimpleName());
     }
+  }
+
+  private void recurseTokenExpression(TokenExpression expression, List<Triple> triples)
+  {
+    if (expression.isBinary())
+    {
+      BinaryTokenExpression binaryTokenExpression = (BinaryTokenExpression) expression;
+      TokenExpression leftExpression = binaryTokenExpression.getLeftExpression();
+      if (leftExpression.isLiteral())
+      {
+        LiteralTokenExpression literalTokenExpression = (LiteralTokenExpression) leftExpression;
+      }
+      else if (leftExpression.isVariable())
+      {
+        VariableTokenExpression variableTokenExpression = (VariableTokenExpression) leftExpression;
+        recurseVariableExpression(variableTokenExpression, triples);
+      }
+    }
+  }
+
+  private void recurseVariableExpression(VariableTokenExpression variableTokenExpression, List<Triple> triples)
+  {
+    
   }
 
   private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)

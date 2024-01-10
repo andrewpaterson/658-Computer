@@ -31,6 +31,12 @@ public class AssignmentTokenStatement
     return leftVariableExpression.print(sixteenHighKeywords) + " " + sixteenHighKeywords.getKeyword(keyword) + " " + rightExpressions.print(sixteenHighKeywords) + semicolon();
   }
 
+  @Override
+  public boolean isAssignment()
+  {
+    return true;
+  }
+
   public VariableTokenExpression getLeftVariableExpression()
   {
     return leftVariableExpression;

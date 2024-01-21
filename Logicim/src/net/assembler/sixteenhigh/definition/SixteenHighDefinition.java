@@ -15,7 +15,6 @@ public class SixteenHighDefinition
   protected List<VariableDefinition> globalVariables;
   protected List<UnitDefinition> units;
 
-
   public SixteenHighDefinition()
   {
     globalRoutines = new ArrayList<>();

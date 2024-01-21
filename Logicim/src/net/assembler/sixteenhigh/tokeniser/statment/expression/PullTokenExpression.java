@@ -27,7 +27,7 @@ public class PullTokenExpression
   @Override
   public boolean isPull()
   {
-    return false;
+    return true;
   }
 }
 

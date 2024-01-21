@@ -1,10 +1,29 @@
 package net.assembler.sixteenhigh.semanticiser.types;
 
-import net.assembler.sixteenhigh.tokeniser.literal.CType;
+import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
+
+import java.util.List;
 
 public class PrimitiveDefinition
     extends TypeDefinition
 {
-  public CType type;
+  public PrimitiveTypeCode type;
+  public long[] arrayMatrix;
+  public int pointerCount;
+
+  public PrimitiveDefinition(PrimitiveTypeCode type, List<Long> arrayMatrix, int pointerCount)
+  {
+    super();
+
+    this.pointerCount = pointerCount;
+    this.arrayMatrix = new long[arrayMatrix.size()];
+    for (int i = 0; i < arrayMatrix.size(); i++)
+    {
+      long matrix = arrayMatrix.get(i);
+      this.arrayMatrix[i] = matrix;
+    }
+
+    this.type = type;
+  }
 }
 

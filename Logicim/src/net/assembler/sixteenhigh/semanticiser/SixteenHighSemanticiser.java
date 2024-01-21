@@ -8,12 +8,20 @@ import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
+import net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode;
+import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighOperatorMap;
+import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighTypeMap;
+import net.assembler.sixteenhigh.semanticiser.triple.Triple;
+import net.assembler.sixteenhigh.semanticiser.triple.TripleLiteral;
+import net.assembler.sixteenhigh.semanticiser.triple.TripleResult;
+import net.assembler.sixteenhigh.semanticiser.triple.TripleVariable;
+import net.assembler.sixteenhigh.semanticiser.types.PrimitiveDefinition;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
+import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
+import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
 import net.assembler.sixteenhigh.tokeniser.precedence.TokenPrecedence;
-import net.assembler.sixteenhigh.tokeniser.statment.RoutineTokenStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.StructTokenStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.TokenStatement;
-import net.assembler.sixteenhigh.tokeniser.statment.VariableTokenStatement;
+import net.assembler.sixteenhigh.tokeniser.statment.*;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.*;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
 import net.common.SimulatorException;
@@ -30,6 +38,7 @@ public class SixteenHighSemanticiser
   protected List<TokenUnit> units;
   protected SixteenHighDefinition definition;
   protected SixteenHighKeywords keywords;
+  protected TypeModifierMap typeModifierMap;
   protected Logger logger;
 
   public SixteenHighSemanticiser(SixteenHighDefinition definition,
@@ -41,6 +50,7 @@ public class SixteenHighSemanticiser
     this.units = new ArrayList<>();
     this.units.add(unit);
     this.logger = new Logger();
+    this.typeModifierMap = new TypeModifierMap();
   }
 
   public SixteenHighDefinition getDefinition()
@@ -198,6 +208,7 @@ public class SixteenHighSemanticiser
   private LogResult parseVariableDefinitionStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
   {
     String name = variableStatement.getName();
+    TypeDefinition typeDefinition = getTypeDefinition(variableStatement);
     VariableDefinition variable = context.getVariable(name);
     if (variable != null)
     {
@@ -205,10 +216,11 @@ public class SixteenHighSemanticiser
     }
 
     VariableScope scope = variableStatement.getScope();
-    variable = new VariableDefinition(name, scope);
+    variable = null;
     if (scope == VariableScope.global)
     {
-      variable = context.createGlobalVariable(name);
+
+      variable = context.createGlobalVariable(name, typeDefinition);
     }
     else if (scope == VariableScope.unit)
     {
@@ -217,7 +229,7 @@ public class SixteenHighSemanticiser
       {
         return error("Variable [%s] with unit scope cannot be added without a current Unit.", variable.getName());
       }
-      variable = unit.createVariable(name);
+      variable = unit.createVariable(name, typeDefinition);
     }
     else if (scope == VariableScope.routine)
     {
@@ -226,7 +238,7 @@ public class SixteenHighSemanticiser
       {
         return error("Variable [%s] with routine scope cannot be added without a current Routine.", variable.getName());
       }
-      variable = routine.createVariable(name);
+      variable = routine.createVariable(name, typeDefinition);
     }
 
     if (variableStatement.hasInitialiser())
@@ -234,7 +246,21 @@ public class SixteenHighSemanticiser
       Block block = context.getCurrentBlock();
       AddressableVariableExpression addressableVariableExpression = new AddressableVariableExpression(variable);
 
-      parseTokenExpression(variableStatement.getInitialiserExpression());
+      List<Triple> triples = new ArrayList<>();
+      TripleResult tripleResult = parseTokenExpression(variableStatement.getInitialiserExpression(), triples);
+      if (tripleResult.logResult.isFailure())
+      {
+        return tripleResult.logResult;
+      }
+
+      Triple triple = tripleResult.triple;
+      if (triple.getLeft() != null)
+      {
+        throw new SimulatorException("Triple already has Left operand [%s] set.", triple.getLeft().toString());
+      }
+
+      PrimitiveDefinition primitiveDefinition = (PrimitiveDefinition) typeDefinition;
+      triple.setLeft(new TripleVariable(primitiveDefinition.type, variable.name));
 
       block.pushAssignment(addressableVariableExpression);
     }
@@ -242,26 +268,48 @@ public class SixteenHighSemanticiser
     return success();
   }
 
-  private LogResult parseTokenExpression(BaseTokenExpression baseTokenExpression)
+  private TypeDefinition getTypeDefinition(VariableTokenStatement variableStatement)
+  {
+    if (variableStatement.isPrimitiveVariable())
+    {
+      PrimitiveVariableTokenStatement primitiveStatement = (PrimitiveVariableTokenStatement) variableStatement;
+      SixteenHighKeywordCode typeCode = primitiveStatement.getType();
+      PrimitiveTypeCode type = SixteenHighTypeMap.getInstance().get(typeCode);
+
+      return typeModifierMap.addPrimitiveDefinition(type, primitiveStatement.getArrayMatrix(), primitiveStatement.getPointerCount());
+    }
+    else if (variableStatement.isStructVariable())
+    {
+      StructVariableTokenStatement structStatement = (StructVariableTokenStatement) variableStatement;
+      String name = structStatement.getName();
+      throw new SimulatorException();
+    }
+    else
+    {
+      throw new SimulatorException("Cannot get VariableDefinition for unknown VariableStatement class [%s].", variableStatement.getClass().getSimpleName());
+    }
+  }
+
+  private TripleResult parseTokenExpression(BaseTokenExpression baseTokenExpression, List<Triple> triples)
   {
     if (baseTokenExpression.isArrayInitialiser())
     {
-      return success();
+      return new TripleResult(null, success());
     }
     else if (baseTokenExpression.isList())
     {
       TokenExpressionList expressionList = (TokenExpressionList) baseTokenExpression;
       TokenExpression expression = TokenPrecedence.getInstance().orderByPrecedence(expressionList);
 
-      List<Triple> triples = new ArrayList<>();
-      recurseTokenExpression(expression, triples);
+      Triple triple = recurseTokenExpression(expression, triples);
+
       //You need to think about turning Token Expressions into Semantic Expressions.  And what to do about block.push.
 
-      return success();
+      return new TripleResult(triple, success());
     }
     else if (baseTokenExpression.isPull())
     {
-      return success();
+      return new TripleResult(null, success());
     }
     else
     {
@@ -269,7 +317,7 @@ public class SixteenHighSemanticiser
     }
   }
 
-  private void recurseTokenExpression(TokenExpression expression, List<Triple> triples)
+  private Triple recurseTokenExpression(TokenExpression expression, List<Triple> triples)
   {
     if (expression.isBinary())
     {
@@ -278,6 +326,15 @@ public class SixteenHighSemanticiser
       if (leftExpression.isLiteral())
       {
         LiteralTokenExpression literalTokenExpression = (LiteralTokenExpression) leftExpression;
+        Triple triple = new Triple();
+        triple.setRight1(new TripleLiteral(literalTokenExpression.getLiteral()));
+        OperatorCode operator = SixteenHighOperatorMap.getInstance().get(binaryTokenExpression.getOperator());
+        triple.setOperator(operator);
+
+        // Do Better.
+
+        triples.add(triple);
+        return triple;
       }
       else if (leftExpression.isVariable())
       {
@@ -285,11 +342,22 @@ public class SixteenHighSemanticiser
         recurseVariableExpression(variableTokenExpression, triples);
       }
     }
+    else if (expression.isLiteral())
+    {
+      LiteralTokenExpression literalTokenExpression = (LiteralTokenExpression) expression;
+      Triple triple = new Triple();
+      triple.setRight1(new TripleLiteral(literalTokenExpression.getLiteral()));
+      triple.setOperator(OperatorCode.none);
+
+      triples.add(triple);
+      return triple;
+    }
+    return null;
   }
 
   private void recurseVariableExpression(VariableTokenExpression variableTokenExpression, List<Triple> triples)
   {
-    
+
   }
 
   private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)

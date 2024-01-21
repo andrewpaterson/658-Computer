@@ -3,6 +3,7 @@ package net.assembler.sixteenhigh.semanticiser;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.semanticiser.expression.Variables;
 import net.assembler.sixteenhigh.semanticiser.expression.block.RoutineBlock;
+import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 
 public class RoutineDefinition
 {
@@ -46,9 +47,9 @@ public class RoutineDefinition
     return variables.get(name);
   }
 
-  public VariableDefinition createVariable(String name)
+  public VariableDefinition createVariable(String name, TypeDefinition type)
   {
-    return variables.create(name);
+    return variables.create(name, type);
   }
 }
 

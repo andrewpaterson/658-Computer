@@ -5,6 +5,7 @@ import net.assembler.sixteenhigh.semanticiser.directive.Directive;
 import net.assembler.sixteenhigh.semanticiser.expression.Variables;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
 
 import java.util.LinkedHashMap;
@@ -127,9 +128,9 @@ public class SixteenHighSemanticiserContext
     return null;
   }
 
-  public VariableDefinition createGlobalVariable(String name)
+  public VariableDefinition createGlobalVariable(String name, TypeDefinition type)
   {
-    return globalVariables.create(name);
+    return globalVariables.create(name, type);
   }
 }
 

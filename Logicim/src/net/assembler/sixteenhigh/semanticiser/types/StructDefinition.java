@@ -11,6 +11,8 @@ public class StructDefinition
 
   public StructDefinition(String name)
   {
+    super();
+
     this.members = new ArrayList<>();
     this.name = name;
   }

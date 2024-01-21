@@ -9,16 +9,26 @@ public class VariableDefinition
   protected VariableScope scope;
   protected TypeDefinition type;
 
-  public VariableDefinition(String name, VariableScope scope)
+  public VariableDefinition(String name, VariableScope scope, TypeDefinition type)
   {
     this.name = name;
     this.scope = scope;
-    this.type = null;
+    this.type = type;
   }
 
   public String getName()
   {
     return name;
+  }
+
+  public TypeDefinition getType()
+  {
+    return type;
+  }
+
+  public VariableScope getScope()
+  {
+    return scope;
   }
 }
 

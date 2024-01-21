@@ -648,6 +648,23 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
+  private static void testStructVariable()
+  {
+    SixteenHighTokeniser parser = createParser("@use_structs:\n" +
+                                               "   @party_address address = 0;\n" +
+                                               "end");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validateTrue(parser.isCompleted());
+    String s = unit.print(parser.getKeywords());
+    validate("@use_structs:\n" +
+             "   @party_address address = 0;\n" +
+             "end\n", s);
+  }
+
   private static void testStruct()
   {
     Logger log = new Logger();
@@ -788,6 +805,7 @@ public abstract class TokeniserTest
     testPointers();
     testExpressions();
     testStack();
+    testStructVariable();
     testStruct();
     testDirectives();
   }

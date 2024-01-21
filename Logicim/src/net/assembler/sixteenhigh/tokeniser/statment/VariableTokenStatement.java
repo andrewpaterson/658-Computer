@@ -2,8 +2,8 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
 import net.common.util.StringUtil;
 
 import java.util.List;
@@ -70,6 +70,16 @@ public abstract class VariableTokenStatement
     return initialiserExpression;
   }
 
+  public List<Long> getArrayMatrix()
+  {
+    return arrayMatrix;
+  }
+
+  public int getPointerCount()
+  {
+    return pointerCount;
+  }
+
   public String getName()
   {
     return name;
@@ -78,6 +88,16 @@ public abstract class VariableTokenStatement
   public VariableScope getScope()
   {
     return scope;
+  }
+
+  public boolean isPrimitiveVariable()
+  {
+    return false;
+  }
+
+  public boolean isStructVariable()
+  {
+    return false;
   }
 }
 

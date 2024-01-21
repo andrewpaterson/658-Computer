@@ -2,6 +2,8 @@ package net.assembler.sixteenhigh.semanticiser.expression;
 
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.semanticiser.VariableDefinition;
+import net.assembler.sixteenhigh.semanticiser.types.PrimitiveDefinition;
+import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
 
 import java.util.LinkedHashMap;
@@ -25,14 +27,14 @@ public class Variables
     return variables.get(name);
   }
 
-  public VariableDefinition create(String name)
+  public VariableDefinition create(String name, TypeDefinition type)
   {
     VariableDefinition variable = get(name);
     if (variable != null)
     {
       throw new SimulatorException("%s Variable Definition [%s] already exists.", description, name);
     }
-    variable = new VariableDefinition(name, scope);
+    variable = new VariableDefinition(name, scope, type);
     variables.put(name, variable);
     return variable;
   }

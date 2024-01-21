@@ -14,5 +14,15 @@ public class AddressableVariableExpression  //lvalue for the C'ers
     this.variable = variable;
     this.access = null;
   }
+
+  public VariableDefinition getVariable()
+  {
+    return variable;
+  }
+
+  public AccessExpression getAccess()
+  {
+    return access;
+  }
 }
 

@@ -3,6 +3,7 @@ package net.assembler.sixteenhigh.semanticiser;
 import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.semanticiser.expression.UnitBlock;
 import net.assembler.sixteenhigh.semanticiser.expression.Variables;
+import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
 
 import java.util.LinkedHashMap;
@@ -43,9 +44,9 @@ public class UnitDefinition
     return routine;
   }
   
-  public VariableDefinition createVariable(String name)
+  public VariableDefinition createVariable(String name, TypeDefinition type)
   {
-    return variables.create(name);
+    return variables.create(name, type);
   }
 
   public UnitBlock getBlock()

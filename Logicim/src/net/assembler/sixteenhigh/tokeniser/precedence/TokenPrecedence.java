@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.tokeniser.precedence;
 
 import net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode;
+import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighOperatorMap;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BinaryTokenExpression;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.OperandTokenExpression;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class TokenPrecedence
 {
-  protected Map<SixteenHighKeywordCode, OperatorCode> keywordToOperator;
+  protected SixteenHighOperatorMap codeMap;
   protected Map<OperatorCode, Integer> operatorPrecedence;
   protected int lowestPrecedence;
 
@@ -22,11 +23,20 @@ public class TokenPrecedence
 
   public TokenPrecedence()
   {
+    codeMap = SixteenHighOperatorMap.getInstance();
+
     createOperatorPrecedenceMap();
 
     calculateLowestOperatorPrecedence();
+  }
 
-    createKeywordToOperatorMap();
+  public static TokenPrecedence getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new TokenPrecedence();
+    }
+    return instance;
   }
 
   protected void createOperatorPrecedenceMap()
@@ -70,34 +80,6 @@ public class TokenPrecedence
     lowestPrecedence++;
   }
 
-  protected void createKeywordToOperatorMap()
-  {
-    keywordToOperator = new LinkedHashMap<>();
-    keywordToOperator.put(SixteenHighKeywordCode.add, OperatorCode.add);
-    keywordToOperator.put(SixteenHighKeywordCode.subtract, OperatorCode.subtract);
-    keywordToOperator.put(SixteenHighKeywordCode.multiply, OperatorCode.multiply);
-    keywordToOperator.put(SixteenHighKeywordCode.divide, OperatorCode.divide);
-    keywordToOperator.put(SixteenHighKeywordCode.modulus, OperatorCode.modulus);
-    keywordToOperator.put(SixteenHighKeywordCode.shift_left, OperatorCode.shiftLeft);
-    keywordToOperator.put(SixteenHighKeywordCode.shift_right, OperatorCode.shiftRight);
-    keywordToOperator.put(SixteenHighKeywordCode.ushift_right, OperatorCode.ushiftRight);
-    keywordToOperator.put(SixteenHighKeywordCode.and, OperatorCode.bitwiseAnd);
-    keywordToOperator.put(SixteenHighKeywordCode.or, OperatorCode.bitwiseOr);
-    keywordToOperator.put(SixteenHighKeywordCode.xor, OperatorCode.bitwiseXor);
-    keywordToOperator.put(SixteenHighKeywordCode.not, OperatorCode.bitwiseNot);
-    keywordToOperator.put(SixteenHighKeywordCode.increment, OperatorCode.increment);
-    keywordToOperator.put(SixteenHighKeywordCode.decrement, OperatorCode.decrement);
-  }
-
-  public static TokenPrecedence getInstance()
-  {
-    if (instance == null)
-    {
-      instance = new TokenPrecedence();
-    }
-    return instance;
-  }
-
   public TokenExpression orderByPrecedence(TokenExpressionList tokenExpressionList)
   {
     List<TokenExpression> expressions = tokenExpressionList.getExpressions();
@@ -124,7 +106,7 @@ public class TokenPrecedence
       {
         throw new SimulatorException("Less than one Left tokens returned.");
       }
-      
+
       if (left.isList())
       {
         TokenExpressionList tokenExpressionList = (TokenExpressionList) left;
@@ -179,7 +161,7 @@ public class TokenPrecedence
       {
         OperandTokenExpression operandTokenExpression = (OperandTokenExpression) tokenExpression;
         SixteenHighKeywordCode operand = operandTokenExpression.getOperand();
-        OperatorCode operatorCode = keywordToOperator.get(operand);
+        OperatorCode operatorCode = codeMap.get(operand);
         int precedence = operatorPrecedence.get(operatorCode);
         if (precedence > leastPrecedence)
         {

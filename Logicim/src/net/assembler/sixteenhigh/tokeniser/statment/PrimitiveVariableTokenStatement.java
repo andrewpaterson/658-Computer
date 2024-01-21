@@ -2,9 +2,9 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
+import net.assembler.sixteenhigh.common.scope.VariableScope;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
 
 import java.util.List;
 
@@ -35,6 +35,17 @@ public class PrimitiveVariableTokenStatement
   protected String getIdentifierString(SixteenHighKeywords sixteenHighKeywords)
   {
     return sixteenHighKeywords.getKeyword(type);
+  }
+
+  @Override
+  public boolean isPrimitiveVariable()
+  {
+    return true;
+  }
+
+  public SixteenHighKeywordCode getType()
+  {
+    return type;
   }
 
   @Override

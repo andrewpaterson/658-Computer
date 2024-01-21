@@ -25,5 +25,6 @@ public enum OperatorCode
   lessThan,
   greaterThan,
   bitwiseNot,
+  none
 }
 

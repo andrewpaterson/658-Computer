@@ -1,25 +1,22 @@
 package net.assembler.sixteenhigh.semanticiser.expression.block;
 
-import net.assembler.sixteenhigh.semanticiser.expression.Expression;
-import net.assembler.sixteenhigh.semanticiser.expression.assignment.AssignmentExpression;
-import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
+import net.assembler.sixteenhigh.semanticiser.triple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Block
-    extends Expression
 {
-  public List<Expression> expressions;
+  public List<Triple> triples;
 
   public Block()
   {
-    expressions = new ArrayList<>();
+    triples = new ArrayList<>();
   }
 
-  public void pushAssignment(AddressableVariableExpression variable)
+  public void pushTriples(List<Triple> triples)
   {
-    expressions.add(new AssignmentExpression(variable));
+    this.triples.addAll(triples);
   }
 }
 

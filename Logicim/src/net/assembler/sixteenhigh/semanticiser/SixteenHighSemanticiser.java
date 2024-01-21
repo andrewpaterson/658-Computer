@@ -7,7 +7,6 @@ import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
-import net.assembler.sixteenhigh.semanticiser.expression.evaluable.AddressableVariableExpression;
 import net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode;
 import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighOperatorMap;
 import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighTypeMap;
@@ -208,18 +207,18 @@ public class SixteenHighSemanticiser
   private LogResult parseVariableDefinitionStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
   {
     String name = variableStatement.getName();
-    TypeDefinition typeDefinition = getTypeDefinition(variableStatement);
     VariableDefinition variable = context.getVariable(name);
     if (variable != null)
     {
       return error("Variable [%s] already defined.", variable.getName());
     }
 
+    TypeDefinition typeDefinition = getTypeDefinition(variableStatement);
+
     VariableScope scope = variableStatement.getScope();
     variable = null;
     if (scope == VariableScope.global)
     {
-
       variable = context.createGlobalVariable(name, typeDefinition);
     }
     else if (scope == VariableScope.unit)
@@ -244,7 +243,6 @@ public class SixteenHighSemanticiser
     if (variableStatement.hasInitialiser())
     {
       Block block = context.getCurrentBlock();
-      AddressableVariableExpression addressableVariableExpression = new AddressableVariableExpression(variable);
 
       List<Triple> triples = new ArrayList<>();
       TripleResult tripleResult = parseTokenExpression(variableStatement.getInitialiserExpression(), triples);
@@ -259,10 +257,12 @@ public class SixteenHighSemanticiser
         throw new SimulatorException("Triple already has Left operand [%s] set.", triple.getLeft().toString());
       }
 
+      triple.setOperator(OperatorCode.none);
+
       PrimitiveDefinition primitiveDefinition = (PrimitiveDefinition) typeDefinition;
       triple.setLeft(new TripleVariable(primitiveDefinition.type, variable.name));
 
-      block.pushAssignment(addressableVariableExpression);
+      block.pushTriples(triples);
     }
 
     return success();
@@ -327,7 +327,7 @@ public class SixteenHighSemanticiser
       {
         LiteralTokenExpression literalTokenExpression = (LiteralTokenExpression) leftExpression;
         Triple triple = new Triple();
-        triple.setRight1(new TripleLiteral(literalTokenExpression.getLiteral()));
+        triple.setRightOne(new TripleLiteral(literalTokenExpression.getLiteral()));
         OperatorCode operator = SixteenHighOperatorMap.getInstance().get(binaryTokenExpression.getOperator());
         triple.setOperator(operator);
 
@@ -346,7 +346,7 @@ public class SixteenHighSemanticiser
     {
       LiteralTokenExpression literalTokenExpression = (LiteralTokenExpression) expression;
       Triple triple = new Triple();
-      triple.setRight1(new TripleLiteral(literalTokenExpression.getLiteral()));
+      triple.setRightOne(new TripleLiteral(literalTokenExpression.getLiteral()));
       triple.setOperator(OperatorCode.none);
 
       triples.add(triple);

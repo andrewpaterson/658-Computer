@@ -5,9 +5,9 @@ import net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode;
 public class Triple
 {
   protected TripleValue left;
-  protected TripleValue right1;
+  protected TripleValue rightOne;
   protected OperatorCode operator;
-  protected TripleValue right2;
+  protected TripleValue rightTwo;
 
   public Triple()
   {
@@ -18,9 +18,9 @@ public class Triple
     this.left = left;
   }
 
-  public void setRight1(TripleValue right1)
+  public void setRightOne(TripleValue right1)
   {
-    this.right1 = right1;
+    this.rightOne = right1;
   }
 
   public void setOperator(OperatorCode operator)
@@ -28,9 +28,9 @@ public class Triple
     this.operator = operator;
   }
 
-  public void setRight2(TripleValue right2)
+  public void setRightTwo(TripleValue rightTwo)
   {
-    this.right2 = right2;
+    this.rightTwo = rightTwo;
   }
 
   public TripleValue getLeft()
@@ -38,9 +38,9 @@ public class Triple
     return left;
   }
 
-  public TripleValue getRight1()
+  public TripleValue getRightOne()
   {
-    return right1;
+    return rightOne;
   }
 
   public OperatorCode getOperator()
@@ -48,9 +48,9 @@ public class Triple
     return operator;
   }
 
-  public TripleValue getRight2()
+  public TripleValue getRightTwo()
   {
-    return right2;
+    return rightTwo;
   }
 }
 

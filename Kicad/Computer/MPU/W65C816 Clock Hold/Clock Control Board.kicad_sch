@@ -4,6 +4,12 @@
 
   (paper "A4")
 
+  (title_block
+    (title "W65C816 Clock Hold")
+    (date "2024-01-30")
+    (rev "V1")
+  )
+
   (lib_symbols
     (symbol "Connector_Generic:Conn_02x16_Counter_Clockwise" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "J" (at 1.27 20.32 0)
@@ -4126,19 +4132,19 @@
     )
   )
 
-  (symbol (lib_id "HCP65:Pin_Header_01x16") (at 38.1 52.705 0) (unit 1)
+  (symbol (lib_id "HCP65:Pin_Header_01x16") (at -26.67 58.42 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 49ea41c8-0689-4354-b1e8-5911a874e56c)
-    (property "Reference" "J2" (at 38.1 51.435 0)
+    (property "Reference" "J2" (at -26.67 57.15 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "Pin_Header_01x16" (at 38.1 53.975 0)
+    (property "Value" "Pin_Header_01x16" (at -26.67 59.69 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical" (at 38.1 56.515 0)
+    (property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical" (at -26.67 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 33.02 52.705 0)
+    (property "Datasheet" "~" (at -31.75 58.42 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (instances

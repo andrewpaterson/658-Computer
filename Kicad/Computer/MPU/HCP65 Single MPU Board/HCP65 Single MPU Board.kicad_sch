@@ -1856,8 +1856,8 @@
         (text "~{OTHER} (~{Kernal_Mode})\n200000..FFFFFF\n~{OTHER} (Kernal_Mode)\n000000..FFFFFF" (at 1.27 -52.07 0)
           (effects (font (size 1.27 1.27)) (justify left))
         )
-        (pin no_connect line (at 35.56 -10.16 180) (length 5.08) hide
-          (name "N.C." (effects (font (size 1.27 1.27))))
+        (pin output line (at 35.56 -48.26 180) (length 5.08)
+          (name "~{Device}" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
         (pin passive line (at 35.56 0 180) (length 5.08) hide
@@ -4846,6 +4846,10 @@
   (label "GND" (at -97.79 248.92 270) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 232c7d77-f83a-475b-ba91-88f91a2f95e4)
+  )
+  (label "~{Device}" (at 143.51 118.11 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 233e5a4b-5703-488d-8cb0-cf2414e7147a)
   )
   (label "GND" (at -85.09 207.01 270) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))

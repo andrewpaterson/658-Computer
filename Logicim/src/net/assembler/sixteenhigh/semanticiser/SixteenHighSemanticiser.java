@@ -352,7 +352,7 @@ public class SixteenHighSemanticiser
       triples.add(triple);
       return triple;
     }
-    return null;
+    throw new SimulatorException();
   }
 
   private void recurseVariableExpression(VariableTokenExpression variableTokenExpression, List<Triple> triples)

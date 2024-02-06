@@ -3,11 +3,11 @@
   (descr "40-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils)")
   (tags "THT DIP DIL PDIP 2.54mm 15.24mm 600mil")
   (attr through_hole)
-  (fp_text reference "REF**" (at 7.62 -2.33) (layer "F.SilkS") hide
+  (fp_text reference "REF**" (at 7.62 0) (layer "F.SilkS") hide
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 8af88394-879a-4932-9165-23464805ef7d)
   )
-  (fp_text value "DIP-40_Board_W15.24mm" (at 7.62 50.8) (layer "F.Fab") hide
+  (fp_text value "DIP-40_Board_W15.24mm" (at 7.62 52.07) (layer "F.Fab") hide
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp b5d08301-5718-4db3-b01e-6d171f438392)
   )
@@ -17,8 +17,10 @@
   )
   (fp_line (start -1.778 48.26) (end -1.778 0)
     (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 78321d1d-99ce-4437-ad1b-e15953cccc6c))
-  (fp_line (start 0.835732 -2.613732) (end 14.404267 -2.613733)
-    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 39626af7-97e4-4543-b550-b60ba33661fd))
+  (fp_line (start 6.731 -2.6162) (end 0.835732 -2.613732)
+    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 8ffd5883-3c6b-49ff-8b7a-59b75458ebc6))
+  (fp_line (start 14.404267 -2.613733) (end 8.509 -2.6162)
+    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 67922458-4f65-4134-85b0-c7aed5994540))
   (fp_line (start 14.404268 50.873732) (end 0.835733 50.873733)
     (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 567d75d4-00c4-4e87-850a-94d04cc5852b))
   (fp_line (start 17.018 48.26) (end 17.017999 -0.000001)
@@ -27,6 +29,8 @@
     (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 6460a293-53fa-4b98-a8de-e7d37e167f29))
   (fp_arc (start 0.835733 50.873733) (mid -1.012456 50.108189) (end -1.778 48.26)
     (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp d291df33-c8a4-4db6-b571-a6fa4a3b87a6))
+  (fp_arc (start 8.509 -2.6162) (mid 7.62 -1.7272) (end 6.731 -2.6162)
+    (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp b86d7be7-3997-4af0-b054-e6ca7066a74f))
   (fp_arc (start 14.404267 -2.613733) (mid 16.252455 -1.848189) (end 17.017999 -0.000001)
     (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 9802a8ae-3bfb-41f8-963b-9a832161a628))
   (fp_arc (start 17.018 48.26) (mid 16.252455 50.108187) (end 14.404268 50.873732)

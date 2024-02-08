@@ -5119,6 +5119,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 45a265e9-5c07-4e54-a44f-b7fdbee8e754)
   )
+  (label "GND" (at 144.78 153.67 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 45bcc1f4-1d12-4890-b8c2-c3753ffeba66)
+  )
   (label "GND" (at 247.65 -39.37 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 45d98435-3674-43d5-bc94-9abc39a5cfb3)
@@ -6679,6 +6683,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid d747049a-2619-4a63-923c-00fe0b7c24e2)
   )
+  (label "3.3V" (at 139.7 153.67 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid d75071e6-3de8-426e-a330-67d9166b0258)
+  )
   (label "~{Enable}_{Device}18" (at 331.47 360.68 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid d76c0a11-a592-456d-90ef-43b91ac3147c)
@@ -7165,6 +7173,53 @@
       (project "Processor Board"
         (path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
           (reference "B12") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "HCP65:C_0805") (at 139.7 153.67 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 0ac4dcf9-76ac-4969-b1c5-7fd0982c212a)
+    (property "Reference" "C5" (at 141.986 151.13 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "1μF" (at 142.24 156.21 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "SamacSys_Parts:C_0805" (at 156.464 161.29 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 141.9225 153.3525 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 66af22b8-1b7e-4677-8d22-d783cc841ffa))
+    (pin "2" (uuid 3f435b14-fc46-4f86-95ae-919dde0ed98b))
+    (instances
+      (project "HCP65 MPU Timer"
+        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+          (reference "C5") (unit 1)
+        )
+      )
+      (project "Pico Sound"
+        (path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
+          (reference "C23") (unit 1)
+        )
+      )
+      (project "Video Timer"
+        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+          (reference "C?") (unit 1)
+        )
+        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+          (reference "C30") (unit 1)
+        )
+        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
+          (reference "C99") (unit 1)
+        )
+      )
+      (project "Processor Board"
+        (path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+          (reference "C5") (unit 1)
         )
       )
     )

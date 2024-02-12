@@ -1,0 +1,96 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,7.0.5*%
+%TF.CreationDate,2024-02-12T20:36:51+02:00*%
+%TF.ProjectId,Desk Lamp,4465736b-204c-4616-9d70-2e6b69636164,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Soldermask,Bot*%
+%TF.FilePolarity,Negative*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 7.0.5) date 2024-02-12 20:36:51*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+G04 Aperture macros list*
+%AMHorizOval*
+0 Thick line with rounded ends*
+0 $1 width*
+0 $2 $3 position (X,Y) of the first rounded end (center of the circle)*
+0 $4 $5 position (X,Y) of the second rounded end (center of the circle)*
+0 Add line between two ends*
+20,1,$1,$2,$3,$4,$5,0*
+0 Add two circle primitives to create the rounded ends*
+1,1,$1,$2,$3*
+1,1,$1,$4,$5*%
+%AMRotRect*
+0 Rectangle, with rotation*
+0 The origin of the aperture is its center*
+0 $1 length*
+0 $2 width*
+0 $3 Rotation angle, in degrees counterclockwise*
+0 Add horizontal line*
+21,1,$1,$2,0,0,$3*%
+G04 Aperture macros list end*
+%ADD10R,1.700000X1.700000*%
+%ADD11O,1.700000X1.700000*%
+%ADD12RotRect,1.700000X1.700000X45.000000*%
+%ADD13HorizOval,1.700000X0.000000X0.000000X0.000000X0.000000X0*%
+%ADD14RotRect,1.700000X1.700000X315.000000*%
+%ADD15HorizOval,1.700000X0.000000X0.000000X0.000000X0.000000X0*%
+%ADD16R,1.400000X1.400000*%
+%ADD17C,1.400000*%
+%ADD18C,3.450000*%
+%ADD19C,3.200000*%
+G04 APERTURE END LIST*
+D10*
+%TO.C,J_{Battery+}1*%
+X129336973Y-114853000D03*
+D11*
+X129336973Y-117393000D03*
+%TD*%
+D10*
+%TO.C,J_{VUSB+}1*%
+X115241973Y-114721000D03*
+D11*
+X115241973Y-117261000D03*
+%TD*%
+D12*
+%TO.C,J_{VOUT}1*%
+X117005412Y-106077439D03*
+D13*
+X118801463Y-107873490D03*
+%TD*%
+D14*
+%TO.C,J_{Switch}1*%
+X127698535Y-106077439D03*
+D15*
+X125902484Y-107873490D03*
+%TD*%
+D16*
+%TO.C,J2*%
+X117728000Y-88996000D03*
+D17*
+X117728000Y-91496000D03*
+X119728000Y-91496000D03*
+X119728000Y-88996000D03*
+D18*
+X122428000Y-84226000D03*
+X122428000Y-96266000D03*
+%TD*%
+D10*
+%TO.C,J_{VIN}1*%
+X86873523Y-101997424D03*
+D11*
+X86873523Y-104537424D03*
+%TD*%
+D19*
+%TO.C,H1*%
+X122351973Y-112059000D03*
+%TD*%
+D10*
+%TO.C,J5*%
+X111710576Y-91521523D03*
+D11*
+X111710576Y-88981523D03*
+%TD*%
+M02*

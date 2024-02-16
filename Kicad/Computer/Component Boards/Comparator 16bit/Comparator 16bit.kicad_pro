@@ -56,9 +56,8 @@
         }
       ],
       "drc_exclusions": [
-        "silk_over_copper|97904000|59873000|83ca292d-6b36-461a-a6b0-5372b0148abc|00000000-0000-0000-0000-000000000000",
-        "silk_overlap|97417000|59633391|da588106-0467-4f7b-b88a-bbc741c7ea0d|83ca292d-6b36-461a-a6b0-5372b0148abc",
-        "silk_overlap|97425156|59617078|83ca292d-6b36-461a-a6b0-5372b0148abc|34922d4b-6362-424c-b100-02e46fa4ab9d"
+        "silk_overlap|93423666|72294963|48d6f993-77ff-4722-9b47-0600fabcacad|fc34cba3-fe78-4d30-b058-f5b615372b61",
+        "silk_overlap|97294095|73977000|486da21c-5699-4d39-b0cd-1e6e7eb328a5|ce0e4b01-c440-46b3-b3ff-392750ae1552"
       ],
       "meta": {
         "version": 2
@@ -178,7 +177,6 @@
       "track_widths": [
         0.0,
         0.2,
-        0.35,
         0.38
       ],
       "via_dimensions": [
@@ -429,7 +427,41 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.25,
+        "track_width": 0.2,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.5,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "12V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "via_diameter": 1.3,
+        "via_drill": 1.0,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Power",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.38,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -440,7 +472,24 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Power",
+        "pattern": "*/3.3V"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*/5V"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*/GND"
+      },
+      {
+        "netclass": "12V",
+        "pattern": "*/12V*"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {

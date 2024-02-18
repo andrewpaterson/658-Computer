@@ -1,4 +1,4 @@
-  Sun Jan  7 2024  8:25                                                Page 1
+  Sat Feb 17 2024 15:07                                                Page 1
 
 
                      ***************************************
@@ -59,7 +59,7 @@
     49 00:E146: A2 2E 40     	LDX 	#IRQ_STRING
     50 00:E149: A0 01 00     	LDY 	#PROGRESS
     51 00:E14C: 20 1D 40     	JSR 	WRITE_STRING
-  Sun Jan  7 2024  8:25                                                Page 2
+  Sat Feb 17 2024 15:07                                                Page 2
 
 
     52                        	
@@ -120,7 +120,7 @@
    107                        	LONGI 	ON
    108                        	LONGA	ON
    109 00:E18B: 48           	PHA				;save A
-  Sun Jan  7 2024  8:25                                                Page 3
+  Sat Feb 17 2024 15:07                                                Page 3
 
 
    110 00:E18C: DA           	PHX				;save X
@@ -181,7 +181,7 @@
    164 00:4013: 99 00 00     	STA 	0,Y
    165 00:4016: C8           	INY
    166 00:4017: C0 16 00     	CPY 	#ENDPROGRESS
-  Sun Jan  7 2024  8:25                                                Page 4
+  Sat Feb 17 2024 15:07                                                Page 4
 
 
    167 00:401A: D0 F7        	BNE 	LOOP_DOT
@@ -242,7 +242,7 @@
    217 00:FFF6: 00 00        E_RSRVD DW    0
    218 00:FFF8: 99 E1        E_ABORT DW    EMU
    219 00:FFFA: 99 E1        E_NMI   DW    EMU
-  Sun Jan  7 2024  8:25                                                Page 5
+  Sat Feb 17 2024 15:07                                                Page 5
 
 
    220 00:FFFC: 2B E1        E_RESET DW    RESET

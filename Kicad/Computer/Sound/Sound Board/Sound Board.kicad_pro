@@ -56,8 +56,7 @@
         }
       ],
       "drc_exclusions": [
-        "courtyards_overlap|33160001|153501866|adc0d331-5a08-41d9-a7f4-bc5dd2debc99|d2b40004-4777-4df8-b05a-13ca69925935",
-        "silk_overlap|31252795|50562695|933c89f0-5b42-4795-8025-c096d3bbe007|8056bf69-10c4-4f65-9ae5-2d9c058b421b"
+        "courtyards_overlap|28158789|25908001|60c76cce-885b-4a50-a262-68064dc648a6|d03271c5-8547-4d13-a89d-f1d7695f70dc"
       ],
       "meta": {
         "version": 2
@@ -81,7 +80,7 @@
         "invalid_outline": "error",
         "isolated_copper": "ignore",
         "item_on_disabled_layer": "error",
-        "items_not_allowed": "error",
+        "items_not_allowed": "ignore",
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
         "lib_footprint_mismatch": "warning",
@@ -177,7 +176,8 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38
+        0.38,
+        1.0
       ],
       "via_dimensions": [
         {
@@ -532,7 +532,7 @@
       "version": 1
     },
     "net_format_name": "",
-    "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks",
+    "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",

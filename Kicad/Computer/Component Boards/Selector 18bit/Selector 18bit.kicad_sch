@@ -815,6 +815,7 @@
   (no_connect (at 55.88 135.89) (uuid 796a2b6e-fca9-4988-8f19-b0e81f6d986f))
   (no_connect (at 250.19 198.12) (uuid 8dd3e476-a56c-4e34-b659-3db82437b99f))
   (no_connect (at 55.88 133.35) (uuid c7f82ce9-7866-487b-9794-0f5b2f84d59d))
+  (no_connect (at 43.18 115.57) (uuid ca9dba3d-4e10-4881-8e23-b027e1063b74))
 
   (wire (pts (xy 36.83 107.95) (xy 43.18 107.95))
     (stroke (width 0) (type default))
@@ -927,10 +928,6 @@
   (wire (pts (xy 36.83 92.71) (xy 43.18 92.71))
     (stroke (width 0) (type default))
     (uuid 779cecd6-634b-4a5d-ba4d-ebe747708498)
-  )
-  (wire (pts (xy 36.83 115.57) (xy 43.18 115.57))
-    (stroke (width 0) (type default))
-    (uuid 7c71f01a-dc2a-43a9-acc1-ff89dcd724af)
   )
   (wire (pts (xy 63.5 90.17) (xy 55.88 90.17))
     (stroke (width 0) (type default))
@@ -1715,13 +1712,6 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "~{E}" (shape input) (at 36.83 115.57 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right))
-    (uuid aefc5599-edee-46f9-b998-468f36b0a8d4)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 32.7752 115.57 0)
-      (effects (font (size 1.27 1.27)) (justify right) hide)
-    )
-  )
   (global_label "Y15" (shape output) (at 63.5 87.63 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid bfd3bf7a-baa1-426a-aa46-9dd02d3ef7e4)
@@ -1900,7 +1890,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C45") (unit 1)
         )
@@ -1961,7 +1951,7 @@
     (pin "9" (uuid 95fed84a-c8d7-4520-a8e2-4229fc1f5eb2))
     (pin "15" (uuid a9af27ee-f067-47a4-a37f-20035c49313b))
     (instances
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC1") (unit 1)
         )
@@ -1992,7 +1982,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C46") (unit 1)
         )
@@ -2053,7 +2043,7 @@
     (pin "9" (uuid d6341eac-249e-42cb-b010-9427f5c4cb16))
     (pin "15" (uuid f91e2ec4-77d5-4f7c-b2bb-d5cf1550c2f4))
     (instances
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC4") (unit 1)
         )
@@ -2114,7 +2104,7 @@
     (pin "9" (uuid 0b277aed-fa88-4d89-9c8b-ff89352e24ee))
     (pin "15" (uuid 45f7dd28-3934-4d91-9ae6-fa4dafb7b89e))
     (instances
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC5") (unit 1)
         )
@@ -2175,7 +2165,7 @@
     (pin "9" (uuid c01d800f-b025-4f48-96c8-d92e9e6d8327))
     (pin "15" (uuid 0d480170-0b69-4b67-a2c3-5dd8ef922b1a))
     (instances
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC2") (unit 1)
         )
@@ -2206,7 +2196,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C5") (unit 1)
         )
@@ -2267,7 +2257,7 @@
     (pin "9" (uuid 82a24c16-36d4-4460-9805-90a171108c7d))
     (pin "15" (uuid 6325f450-981a-4758-ac53-2e3bd2721a69))
     (instances
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC3") (unit 1)
         )
@@ -2298,7 +2288,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C2") (unit 1)
         )
@@ -2386,7 +2376,7 @@
     (pin "8" (uuid 2919bc2c-60d7-4171-b48b-9df72cd0d811))
     (pin "9" (uuid b19fccad-416f-40d1-b4dd-fad6c0e08c01))
     (instances
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "J2") (unit 1)
         )
@@ -2417,7 +2407,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C3") (unit 1)
         )
@@ -2448,7 +2438,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C1") (unit 1)
         )
@@ -2479,7 +2469,7 @@
           (reference "C27") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "C4") (unit 1)
         )
@@ -2540,7 +2530,7 @@
           (reference "IC2") (unit 1)
         )
       )
-      (project "Selector 17bit"
+      (project "Selector 18bit"
         (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
           (reference "IC42") (unit 1)
         )

@@ -55,7 +55,10 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "solder_mask_bridge|84840000|155567000|acbac7f4-3fa1-49ff-ac27-e3143003c43a|c66ada99-a3fc-4bfc-b6b7-933a0c9a5fa1",
+        "solder_mask_bridge|87380000|155567000|aa423f2e-22c6-4c07-9895-af1af113a337|f8b72212-4caa-4493-b1c9-89c581fd9a36"
+      ],
       "meta": {
         "version": 2
       },
@@ -78,7 +81,7 @@
         "invalid_outline": "error",
         "isolated_copper": "ignore",
         "item_on_disabled_layer": "error",
-        "items_not_allowed": "error",
+        "items_not_allowed": "ignore",
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
         "lib_footprint_mismatch": "warning",
@@ -174,12 +177,17 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38
+        0.38,
+        1.0
       ],
       "via_dimensions": [
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.3,
+          "drill": 1.0
         }
       ],
       "zones_allow_external_fillets": false

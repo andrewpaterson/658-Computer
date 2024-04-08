@@ -25,7 +25,6 @@ RESET:
 	LDA		#$01FF  ;get the stack address
 	TCS	     		;and set the stack to it
 
-
 	SEP		#$20	;8 bit accumulator
 	LONGA 	OFF
 	LDA 	#$00	;get bank of data
@@ -34,6 +33,10 @@ RESET:
 	REP		#$20    ;back to 16 bit mode
 	LONGA	ON
 
+ACIA_CONTROL    EQU        $300003
+	LDA    #$10                ; 115200,N,8,1
+	STA >ACIA_CONTROL
+	
 	JML  	START	;long jump in case not bank 0
 
 IRQ:

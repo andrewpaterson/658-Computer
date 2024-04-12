@@ -6063,7 +6063,7 @@
         (name "D0" (effects (font (size 1.27 1.27))))
         (number "14" (effects (font (size 1.27 1.27))))
       )
-      (pin no_connect line (at -5.08 -7.62 0) (length 5.08) hide
+      (pin no_connect line (at 35.56 -25.4 180) (length 5.08) hide
         (name "N.C." (effects (font (size 1.27 1.27))))
         (number "15" (effects (font (size 1.27 1.27))))
       )
@@ -6083,8 +6083,8 @@
         (name "N.C." (effects (font (size 1.27 1.27))))
         (number "19" (effects (font (size 1.27 1.27))))
       )
-      (pin input line (at -5.08 -2.54 0) (length 5.08)
-        (name "Read" (effects (font (size 1.27 1.27))))
+      (pin input line (at -5.08 -5.08 0) (length 5.08)
+        (name "Read_GD__{0..3}" (effects (font (size 1.27 1.27))))
         (number "2" (effects (font (size 1.27 1.27))))
       )
       (pin tri_state line (at 35.56 -17.78 180) (length 5.08)
@@ -6127,16 +6127,16 @@
         (name "GPIO0" (effects (font (size 1.27 1.27))))
         (number "29" (effects (font (size 1.27 1.27))))
       )
-      (pin input line (at -5.08 -5.08 0) (length 5.08)
-        (name "Write" (effects (font (size 1.27 1.27))))
+      (pin input line (at -5.08 -7.62 0) (length 5.08)
+        (name "Write_GD__{0..3}" (effects (font (size 1.27 1.27))))
         (number "3" (effects (font (size 1.27 1.27))))
       )
       (pin no_connect line (at 35.56 -22.86 180) (length 5.08) hide
         (name "N.C." (effects (font (size 1.27 1.27))))
         (number "30" (effects (font (size 1.27 1.27))))
       )
-      (pin no_connect line (at 35.56 -25.4 180) (length 5.08) hide
-        (name "N.C." (effects (font (size 1.27 1.27))))
+      (pin input line (at -5.08 -2.54 0) (length 5.08)
+        (name "Read" (effects (font (size 1.27 1.27))))
         (number "31" (effects (font (size 1.27 1.27))))
       )
       (pin no_connect line (at 35.56 -27.94 180) (length 5.08) hide

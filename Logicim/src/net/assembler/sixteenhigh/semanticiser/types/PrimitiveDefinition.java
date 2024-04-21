@@ -25,5 +25,11 @@ public class PrimitiveDefinition
 
     this.type = type;
   }
+
+  @Override
+  public PrimitiveTypeCode getType()
+  {
+    return type;
+  }
 }
 

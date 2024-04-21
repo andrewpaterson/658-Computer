@@ -36,6 +36,11 @@ public interface TokenExpression
     return false;
   }
 
+  default boolean isUnary()
+  {
+    return false;
+  }
+
   default boolean isVariable()
   {
     return false;

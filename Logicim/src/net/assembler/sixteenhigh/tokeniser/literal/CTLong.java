@@ -21,5 +21,18 @@ public class CTLong
   {
     return true;
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    if (isUnsigned())
+    {
+      return PrimitiveTypeCode.uint64;
+    }
+    else
+    {
+      return PrimitiveTypeCode.int64;
+    }
+  }
 }
 

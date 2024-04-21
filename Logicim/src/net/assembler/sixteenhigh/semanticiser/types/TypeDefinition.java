@@ -1,8 +1,9 @@
 package net.assembler.sixteenhigh.semanticiser.types;
 
-import java.util.List;
+import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
 
 public abstract class TypeDefinition
 {
+  public abstract PrimitiveTypeCode getType();
 }
 

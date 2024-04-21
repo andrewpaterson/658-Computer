@@ -27,5 +27,11 @@ public class CTLongDouble
   {
     return super.print() + "L";
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    return PrimitiveTypeCode.float128;
+  }
 }
 

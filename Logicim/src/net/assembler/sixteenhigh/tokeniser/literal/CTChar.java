@@ -43,5 +43,18 @@ public class CTChar
       return false;
     }
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    if (isUnsigned())
+    {
+      return PrimitiveTypeCode.uint8;
+    }
+    else
+    {
+      return PrimitiveTypeCode.int8;
+    }
+  }
 }
 

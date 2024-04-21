@@ -51,5 +51,10 @@ public class RoutineDefinition
   {
     return variables.create(name, type);
   }
+
+  public Variables getVariables()
+  {
+    return variables;
+  }
 }
 

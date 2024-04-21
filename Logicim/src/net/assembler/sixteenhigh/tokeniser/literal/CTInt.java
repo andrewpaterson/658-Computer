@@ -42,5 +42,18 @@ public class CTInt
       return false;
     }
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    if (isUnsigned())
+    {
+      return PrimitiveTypeCode.uint32;
+    }
+    else
+    {
+      return PrimitiveTypeCode.int32;
+    }
+  }
 }
 

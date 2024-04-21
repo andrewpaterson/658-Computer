@@ -15,5 +15,11 @@ public class CTWideString
   {
     return "\"" + value + "\"";
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    return PrimitiveTypeCode.string16;
+  }
 }
 

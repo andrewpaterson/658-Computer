@@ -16,6 +16,12 @@ public class CTString
     return "\"" + value + "\"";
   }
 
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    return PrimitiveTypeCode.string8;
+  }
+
   public String getValue()
   {
     return value;

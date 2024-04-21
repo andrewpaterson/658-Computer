@@ -69,13 +69,10 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(uint8, "uint8"));
     keywords.add(new KeywordPair(int16, "int16"));
     keywords.add(new KeywordPair(uint16, "uint16"));
-    keywords.add(new KeywordPair(int24, "int24"));
-    keywords.add(new KeywordPair(uint24, "uint24"));
     keywords.add(new KeywordPair(int32, "int32"));
     keywords.add(new KeywordPair(uint32, "uint32"));
     keywords.add(new KeywordPair(int64, "int64"));
     keywords.add(new KeywordPair(uint64, "uint64"));
-    keywords.add(new KeywordPair(float8, "float8"));
     keywords.add(new KeywordPair(float16, "float16"));
     keywords.add(new KeywordPair(float32, "float32"));
     keywords.add(new KeywordPair(float64, "float64"));
@@ -149,13 +146,10 @@ public class SixteenHighKeywords
     add(codeToStringMap, leadingIdentifiers, uint8);
     add(codeToStringMap, leadingIdentifiers, int16);
     add(codeToStringMap, leadingIdentifiers, uint16);
-    add(codeToStringMap, leadingIdentifiers, int24);
-    add(codeToStringMap, leadingIdentifiers, uint24);
     add(codeToStringMap, leadingIdentifiers, int32);
     add(codeToStringMap, leadingIdentifiers, uint32);
     add(codeToStringMap, leadingIdentifiers, int64);
     add(codeToStringMap, leadingIdentifiers, uint64);
-    add(codeToStringMap, leadingIdentifiers, float8);
     add(codeToStringMap, leadingIdentifiers, float16);
     add(codeToStringMap, leadingIdentifiers, float32);
     add(codeToStringMap, leadingIdentifiers, float64);
@@ -448,13 +442,10 @@ public class SixteenHighKeywords
                                   uint8,
                                   int16,
                                   uint16,
-                                  int24,
-                                  uint24,
                                   int32,
                                   uint32,
                                   int64,
                                   uint64,
-                                  float8,
                                   float16,
                                   float32,
                                   float64,

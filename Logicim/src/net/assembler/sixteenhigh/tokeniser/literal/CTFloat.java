@@ -30,5 +30,11 @@ public class CTFloat
   {
     return super.print() + "F";
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    return PrimitiveTypeCode.float32;
+  }
 }
 

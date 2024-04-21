@@ -11,5 +11,10 @@ public class RoutineBlock
   {
     this.definition = definition;
   }
+
+  public RoutineDefinition getDefinition()
+  {
+    return definition;
+  }
 }
 

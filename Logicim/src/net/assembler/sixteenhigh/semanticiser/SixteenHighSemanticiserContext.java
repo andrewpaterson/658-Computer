@@ -132,5 +132,10 @@ public class SixteenHighSemanticiserContext
   {
     return globalVariables.create(name, type);
   }
+
+  public Variables getGlobalVariables()
+  {
+    return globalVariables;
+  }
 }
 

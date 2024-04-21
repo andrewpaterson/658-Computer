@@ -43,5 +43,18 @@ public class CTShort
       return false;
     }
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    if (isUnsigned())
+    {
+      return PrimitiveTypeCode.uint16;
+    }
+    else
+    {
+      return PrimitiveTypeCode.int16;
+    }
+  }
 }
 

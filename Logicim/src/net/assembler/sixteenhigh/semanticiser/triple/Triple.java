@@ -13,23 +13,24 @@ public class Triple
   {
   }
 
-  public void setLeft(TripleValue left)
+  public Triple(TripleValue left,
+                OperatorCode operator,
+                TripleValue right)
   {
     this.left = left;
-  }
-
-  public void setRightOne(TripleValue right1)
-  {
-    this.rightOne = right1;
-  }
-
-  public void setOperator(OperatorCode operator)
-  {
+    this.rightOne = null;
     this.operator = operator;
+    this.rightTwo = right;
   }
 
-  public void setRightTwo(TripleValue rightTwo)
+  public Triple(TripleValue left,
+                TripleValue rightOne,
+                OperatorCode operator,
+                TripleValue rightTwo)
   {
+    this.left = left;
+    this.rightOne = rightOne;
+    this.operator = operator;
     this.rightTwo = rightTwo;
   }
 

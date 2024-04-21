@@ -1,5 +1,8 @@
 package net.assembler.sixteenhigh.semanticiser.types;
 
+import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
+import net.common.SimulatorException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,12 @@ public class StructDefinition
   public String getName()
   {
     return name;
+  }
+
+  @Override
+  public PrimitiveTypeCode getType()
+  {
+    throw new SimulatorException("StructDefinition cannot answer getType().");
   }
 }
 

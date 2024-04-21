@@ -12,5 +12,10 @@ public class UnitBlock
   {
     this.definition = definition;
   }
+
+  public UnitDefinition getDefinition()
+  {
+    return definition;
+  }
 }
 

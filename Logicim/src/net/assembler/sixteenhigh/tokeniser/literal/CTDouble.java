@@ -20,5 +20,11 @@ public class CTDouble
   {
     return true;
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    return PrimitiveTypeCode.float64;
+  }
 }
 

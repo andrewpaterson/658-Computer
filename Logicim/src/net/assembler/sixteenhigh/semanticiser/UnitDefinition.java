@@ -53,5 +53,10 @@ public class UnitDefinition
   {
     return block;
   }
+
+  public Variables getVariables()
+  {
+    return variables;
+  }
 }
 

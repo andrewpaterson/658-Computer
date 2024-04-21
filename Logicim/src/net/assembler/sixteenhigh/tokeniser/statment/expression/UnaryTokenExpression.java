@@ -34,6 +34,22 @@ public class UnaryTokenExpression
   }
 
   @Override
+  public boolean isUnary()
+  {
+    return true;
+  }
+
+  public SixteenHighKeywordCode getOperator()
+  {
+    return operator;
+  }
+
+  public TokenExpression getExpression()
+  {
+    return expression;
+  }
+
+  @Override
   public String toString()
   {
     return print(SixteenHighKeywords.getInstance());

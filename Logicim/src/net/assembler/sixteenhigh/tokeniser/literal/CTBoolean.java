@@ -32,5 +32,11 @@ public class CTBoolean
       return "false";
     }
   }
+
+  @Override
+  public PrimitiveTypeCode getPrimitiveTypeCode()
+  {
+    return PrimitiveTypeCode.bool;
+  }
 }
 

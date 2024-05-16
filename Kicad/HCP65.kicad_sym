@@ -12050,8 +12050,8 @@
         (name "GND" (effects (font (size 1.27 1.27))))
         (number "14" (effects (font (size 1.27 1.27))))
       )
-      (pin no_connect line (at 35.56 -22.86 180) (length 5.08) hide
-        (name "N.C." (effects (font (size 1.27 1.27))))
+      (pin input inverted (at -5.08 0 0) (length 5.08)
+        (name "~{Reset}" (effects (font (size 1.27 1.27))))
         (number "15" (effects (font (size 1.27 1.27))))
       )
       (pin no_connect line (at 35.56 -25.4 180) (length 5.08) hide
@@ -12094,8 +12094,8 @@
         (name "H2" (effects (font (size 1.27 1.27))))
         (number "24" (effects (font (size 1.27 1.27))))
       )
-      (pin input inverted (at -5.08 0 0) (length 5.08)
-        (name "~{Reset}" (effects (font (size 1.27 1.27))))
+      (pin no_connect line (at 35.56 -22.86 180) (length 5.08) hide
+        (name "N.C." (effects (font (size 1.27 1.27))))
         (number "25" (effects (font (size 1.27 1.27))))
       )
       (pin tri_state line (at 24.13 -45.72 90) (length 5.08)

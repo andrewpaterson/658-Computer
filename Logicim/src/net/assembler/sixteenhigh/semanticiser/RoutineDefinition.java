@@ -1,25 +1,30 @@
 package net.assembler.sixteenhigh.semanticiser;
 
-import net.assembler.sixteenhigh.common.scope.VariableScope;
-import net.assembler.sixteenhigh.semanticiser.expression.Variables;
+import net.assembler.sixteenhigh.common.scope.Scope;
+import net.assembler.sixteenhigh.semanticiser.expression.RoutineDefinitions;
+import net.assembler.sixteenhigh.semanticiser.expression.VariableDefinitions;
 import net.assembler.sixteenhigh.semanticiser.expression.block.RoutineBlock;
 import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 
 public class RoutineDefinition
 {
   protected String name;
-  protected VariableScope scope;
+  protected Scope scope;
   protected RoutineBlock block;
 
-  protected Variables variables;
+  protected VariableDefinitions variables;
 
-  public RoutineDefinition(String name, VariableScope scope)
+  protected RoutineDefinitions parent;
+
+  public RoutineDefinition(String name, Scope scope, RoutineDefinitions parent)
   {
     this.name = name;
     this.scope = scope;
-    this.block = new RoutineBlock(this);
 
-    this.variables = new Variables(VariableScope.routine, "Routine");
+    this.parent = parent;
+
+    this.block = new RoutineBlock(this);
+    this.variables = VariableDefinitions.createRoutineVariables();
   }
 
   public boolean is(String name)
@@ -32,7 +37,7 @@ public class RoutineDefinition
     return name;
   }
 
-  public VariableScope getScope()
+  public Scope getScope()
   {
     return scope;
   }
@@ -49,10 +54,10 @@ public class RoutineDefinition
 
   public VariableDefinition createVariable(String name, TypeDefinition type)
   {
-    return variables.create(name, type);
+    return variables.create(name, type, false);
   }
 
-  public Variables getVariables()
+  public VariableDefinitions getVariables()
   {
     return variables;
   }

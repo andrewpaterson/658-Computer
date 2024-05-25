@@ -1,6 +1,6 @@
 package net.assembler.sixteenhigh.common;
 
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.statment.*;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessModeTokenStatement;
@@ -34,7 +34,7 @@ public class TokenUnit
 
   public void addPrimitiveVariable(SixteenHighKeywordCode keyword,
                                    String name,
-                                   VariableScope scope,
+                                   Scope scope,
                                    List<Long> arrayMatrix,
                                    int pointerCount,
                                    BaseTokenExpression initialiserExpression)
@@ -52,7 +52,7 @@ public class TokenUnit
 
   public void addStructVariable(String structIdentifier,
                                 String name,
-                                VariableScope scope,
+                                Scope scope,
                                 List<Long> arrayMatrix,
                                 int pointerCount,
                                 BaseTokenExpression initialiserExpression)
@@ -75,7 +75,7 @@ public class TokenUnit
     return ifStatement;
   }
 
-  public void addRoutine(String name, VariableScope scope)
+  public void addRoutine(String name, Scope scope)
   {
     RoutineTokenStatement subroutine = new RoutineTokenStatement(this, statementIndex++, name, scope);
     statements.add(subroutine);

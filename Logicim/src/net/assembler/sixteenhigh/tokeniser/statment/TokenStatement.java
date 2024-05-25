@@ -35,6 +35,12 @@ public abstract class TokenStatement
     }
   }
 
+  @Override
+  public String toString()
+  {
+    return print(SixteenHighKeywords.getInstance());
+  }
+
   public boolean isRoutine()
   {
     return false;

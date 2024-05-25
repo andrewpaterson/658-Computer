@@ -6,22 +6,33 @@ import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
 public class TripleVariable
     extends TripleValue
 {
-  protected VariableDefinition type;
+  protected VariableDefinition variable;
 
-  public TripleVariable(VariableDefinition type)
+  public TripleVariable(VariableDefinition variable)
   {
-    this.type = type;
+    this.variable = variable;
   }
 
   @Override
   public PrimitiveTypeCode getTypeCode()
   {
-    return type.getType().getType();
+    return variable.getType().getType();
+  }
+
+  @Override
+  public String print()
+  {
+    return variable.print();
   }
 
   public String getTypeName()
   {
-    return type.getName();
+    return variable.getName();
+  }
+
+  public String toString()
+  {
+    return variable.toString();
   }
 }
 

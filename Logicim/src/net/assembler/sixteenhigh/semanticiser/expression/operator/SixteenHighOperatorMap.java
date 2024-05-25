@@ -1,6 +1,8 @@
 package net.assembler.sixteenhigh.semanticiser.expression.operator;
 
+import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
+import net.common.SimulatorException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,12 +10,14 @@ import java.util.Map;
 public class SixteenHighOperatorMap
 {
   protected Map<SixteenHighKeywordCode, OperatorCode> keywordToOperator;
+  protected Map<OperatorCode, String> operatorToString;
 
   private static SixteenHighOperatorMap instance;
 
   public SixteenHighOperatorMap()
   {
     createKeywordToOperatorMap();
+    createOperatorToString();
   }
 
   public static SixteenHighOperatorMap getInstance()
@@ -44,9 +48,53 @@ public class SixteenHighOperatorMap
     keywordToOperator.put(SixteenHighKeywordCode.decrement, OperatorCode.decrement);
   }
 
+  protected void createOperatorToString()
+  {
+    operatorToString = new LinkedHashMap<>();
+    SixteenHighKeywords keywords = SixteenHighKeywords.getInstance();
+    for (Map.Entry<SixteenHighKeywordCode, OperatorCode> entry : keywordToOperator.entrySet())
+    {
+      OperatorCode code = entry.getValue();
+      SixteenHighKeywordCode key = entry.getKey();
+      String keyword = keywords.getKeyword(key);
+      if (keyword == null)
+      {
+        throw new SimulatorException("Missing Keyword [%s].", key);
+      }
+      operatorToString.put(code, keyword);
+    }
+  }
+
   public OperatorCode get(SixteenHighKeywordCode sixteenHighKeywordCode)
   {
-    return keywordToOperator.get(sixteenHighKeywordCode);
+    if (sixteenHighKeywordCode != null)
+    {
+      return keywordToOperator.get(sixteenHighKeywordCode);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public String get(OperatorCode code)
+  {
+    if (code != null)
+    {
+      String s = operatorToString.get(code);
+      if (s != null)
+      {
+        return s;
+      }
+      else
+      {
+        return "Unknown";
+      }
+    }
+    else
+    {
+      return "";
+    }
   }
 }
 

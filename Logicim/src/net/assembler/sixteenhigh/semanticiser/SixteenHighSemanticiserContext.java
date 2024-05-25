@@ -1,36 +1,26 @@
 package net.assembler.sixteenhigh.semanticiser;
 
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
-import net.assembler.sixteenhigh.semanticiser.expression.Variables;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
 import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
-import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class SixteenHighSemanticiserContext
 {
-  protected String filename;
   protected Directive currentDirective;
   protected RoutineDefinition currentRoutine;
   protected StructDefinition currentStruct;
-  protected UnitDefinition currentUnit;
+  protected UnitDefinition unit;
 
-  protected Variables globalVariables;
-  protected Map<String, RoutineDefinition> globalRoutines;
+  protected SixteenHighDefinition sixteenHighDefinition;
 
-  public SixteenHighSemanticiserContext(String filename)
+  public SixteenHighSemanticiserContext(UnitDefinition unit, SixteenHighDefinition sixteenHighDefinition)
   {
-    this.filename = filename;
+    this.unit = unit;
+    this.sixteenHighDefinition = sixteenHighDefinition;
     this.currentDirective = null;
     this.currentStruct = null;
-    this.currentUnit = null;
-
-    this.globalVariables = new Variables(VariableScope.global, "Global");
-    this.globalRoutines = new LinkedHashMap<>();
   }
 
   public Directive getCurrentDirective()
@@ -53,9 +43,9 @@ public class SixteenHighSemanticiserContext
     currentStruct = struct;
   }
 
-  public void setCurrentUnit(UnitDefinition unit)
+  public void setUnit(UnitDefinition unit)
   {
-    currentUnit = unit;
+    this.unit = unit;
   }
 
   public void setEnd()
@@ -74,9 +64,9 @@ public class SixteenHighSemanticiserContext
     return currentStruct;
   }
 
-  public UnitDefinition getCurrentUnit()
+  public UnitDefinition getUnit()
   {
-    return currentUnit;
+    return unit;
   }
 
   public Block getCurrentBlock()
@@ -85,9 +75,9 @@ public class SixteenHighSemanticiserContext
     {
       return currentRoutine.getBlock();
     }
-    else if (currentUnit != null)
+    else if (unit != null)
     {
-      return currentUnit.getBlock();
+      return unit.getBlock();
     }
     else
     {
@@ -106,36 +96,16 @@ public class SixteenHighSemanticiserContext
       }
     }
 
-    if (currentUnit != null)
+    if (unit != null)
     {
-      VariableDefinition variable = currentUnit.getVariable(name);
+      VariableDefinition variable = unit.getVariable(name);
       if (variable != null)
       {
         return variable;
       }
     }
 
-    return getGlobalVariable(name);
-  }
-
-  public VariableDefinition getGlobalVariable(String name)
-  {
-    VariableDefinition variable = globalVariables.get(name);
-    if (variable != null)
-    {
-      return variable;
-    }
-    return null;
-  }
-
-  public VariableDefinition createGlobalVariable(String name, TypeDefinition type)
-  {
-    return globalVariables.create(name, type);
-  }
-
-  public Variables getGlobalVariables()
-  {
-    return globalVariables;
+    return sixteenHighDefinition.getGlobalVariable(name);
   }
 }
 

@@ -35,5 +35,25 @@ public class StructDefinition
   {
     throw new SimulatorException("StructDefinition cannot answer getType().");
   }
+
+  @Override
+  public String print()
+  {
+    StringBuilder builder = new StringBuilder();
+    boolean first = true;
+    for (TypeDefinition member : members)
+    {
+      if (!first)
+      {
+        builder.append('.');
+      }
+      else
+      {
+        first = false;
+      }
+      builder.append(member.print());
+    }
+    return builder.toString();
+  }
 }
 

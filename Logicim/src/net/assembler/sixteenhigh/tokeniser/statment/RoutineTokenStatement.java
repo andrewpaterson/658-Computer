@@ -2,15 +2,15 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.Scope;
 
 public class RoutineTokenStatement
     extends TokenStatement
 {
   protected String name;
-  protected VariableScope scope;
+  protected Scope scope;
 
-  public RoutineTokenStatement(TokenUnit statements, int index, String name, VariableScope scope)
+  public RoutineTokenStatement(TokenUnit statements, int index, String name, Scope scope)
   {
     super(statements, index);
     this.name = name;
@@ -33,7 +33,7 @@ public class RoutineTokenStatement
     return name;
   }
 
-  public VariableScope getScope()
+  public Scope getScope()
   {
     return scope;
   }

@@ -2,7 +2,7 @@ package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.AccessMode;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
@@ -52,56 +52,59 @@ public class SixteenHighSemanticiser
     this.typeModifierMap = new TypeModifierMap();
   }
 
-  public SixteenHighDefinition getDefinition()
+  public boolean parse()
   {
-    return definition;
-  }
-
-  public void parse()
-  {
+    boolean success = true;
     for (TokenUnit unit : units)
     {
-      parseUnit(unit);
+      boolean result = parseUnit(unit);
+      if (!result)
+      {
+        success = false;
+        break;
+      }
     }
     units.clear();
+    return success;
   }
 
-  private void parseUnit(TokenUnit unit)
+  private boolean parseUnit(TokenUnit tokenUnit)
   {
-    String filename = unit.getFilename();
-    SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(filename);
-    context.setCurrentUnit(new UnitDefinition());
+    String filename = tokenUnit.getFilename();
+    UnitDefinition unitDefinition = definition.createUnit(filename);
+    SixteenHighSemanticiserContext context = new SixteenHighSemanticiserContext(unitDefinition, definition);
 
     boolean previousDirectiveStatement = true;
     context.setCurrentDirective(new Directive());
-    for (TokenStatement statement : unit.getStatements())
+    for (TokenStatement statement : tokenUnit.getStatements())
     {
       if (statement.isDirective())
       {
         if (!parseDirectiveStatement(filename, context, previousDirectiveStatement, statement))
         {
-          return;
+          return false;
         }
       }
       else
       {
         if (!parseNonDirectiveStatements(statement, context))
         {
-          return;
+          return false;
         }
         previousDirectiveStatement = true;
       }
     }
+    return true;
   }
 
   private boolean parseDirectiveStatement(String filename,
-                                          SixteenHighSemanticiserContext context,
+                                          SixteenHighSemanticiserContext semanticContext,
                                           boolean previousDirectiveStatement,
                                           TokenStatement statement)
   {
     if (previousDirectiveStatement)
     {
-      Directive directive = context.getCurrentDirective();
+      Directive directive = semanticContext.getCurrentDirective();
       LogResult logResult = parseDirectiveStatement(directive, (DirectiveTokenStatement) statement, keywords);
       if (logResult.isFailure())
       {
@@ -113,7 +116,7 @@ public class SixteenHighSemanticiser
     }
     else
     {
-      context.setCurrentDirective(new Directive(context.getCurrentDirective()));
+      semanticContext.setCurrentDirective(new Directive(semanticContext.getCurrentDirective()));
     }
     return true;
   }
@@ -168,30 +171,30 @@ public class SixteenHighSemanticiser
     }
   }
 
-  private boolean parseNonDirectiveStatements(TokenStatement statement, SixteenHighSemanticiserContext context)
+  private boolean parseNonDirectiveStatements(TokenStatement statement, SixteenHighSemanticiserContext semanticContext)
   {
     if (statement.isRoutine())
     {
       RoutineTokenStatement routineStatement = (RoutineTokenStatement) statement;
-      LogResult logResult = parseRoutineStatement(routineStatement, context);
-      return logResult.isFailure();
+      LogResult logResult = parseRoutineStatement(routineStatement, semanticContext);
+      return logResult.isSuccess();
     }
     else if (statement.isStruct())
     {
       StructTokenStatement structStatement = (StructTokenStatement) statement;
-      LogResult logResult = parseStructStatement(structStatement, context);
-      return logResult.isFailure();
+      LogResult logResult = parseStructStatement(structStatement, semanticContext);
+      return logResult.isSuccess();
     }
     else if (statement.isEnd())
     {
-      context.setEnd();
+      semanticContext.setEnd();
       return true;
     }
     else if (statement.isVariableDefinition())
     {
       VariableTokenStatement variableStatement = (VariableTokenStatement) statement;
-      LogResult logResult = parseVariableDefinitionStatement(variableStatement, context);
-      return logResult.isFailure();
+      LogResult logResult = parseVariableDefinitionStatement(variableStatement, semanticContext);
+      return logResult.isSuccess();
     }
     else if (statement.isAssignment())
     {
@@ -204,10 +207,10 @@ public class SixteenHighSemanticiser
     }
   }
 
-  private LogResult parseVariableDefinitionStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseVariableDefinitionStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext semanticContext)
   {
     String name = variableStatement.getName();
-    VariableDefinition variable = context.getVariable(name);
+    VariableDefinition variable = semanticContext.getVariable(name);
     if (variable != null)
     {
       return error("Variable [%s] already defined.", variable.getName());
@@ -215,33 +218,32 @@ public class SixteenHighSemanticiser
 
     TypeDefinition typeDefinition = getTypeDefinition(variableStatement);
 
-    VariableScope scope = variableStatement.getScope();
-    variable = null;
-    TripleVariablesStruct variablesStruct;
-    if (scope == VariableScope.global)
+    Scope scope = variableStatement.getScope();
+    AutoVariableContext variableContext;
+    if (scope == Scope.global)
     {
-      variable = context.createGlobalVariable(name, typeDefinition);
-      variablesStruct = new TripleVariablesStruct(name, context.getGlobalVariables());
+      variable = definition.createGlobalVariable(name, typeDefinition);
+      variableContext = new AutoVariableContext(name, variable.getVariables());
     }
-    else if (scope == VariableScope.unit)
+    else if (scope == Scope.unit)
     {
-      UnitDefinition unit = context.getCurrentUnit();
+      UnitDefinition unit = semanticContext.getUnit();
       if (unit == null)
       {
-        return error("Variable [%s] with unit scope cannot be added without a current Unit.", variable.getName());
+        return error("Variable [%s] with unit scope cannot be added without a current Unit.", variableStatement.getName());
       }
       variable = unit.createVariable(name, typeDefinition);
-      variablesStruct = new TripleVariablesStruct(name, unit.getVariables());
+      variableContext = new AutoVariableContext(name, variable.getVariables());
     }
-    else if (scope == VariableScope.routine)
+    else if (scope == Scope.routine)
     {
-      RoutineDefinition routine = context.getCurrentRoutine();
+      RoutineDefinition routine = semanticContext.getCurrentRoutine();
       if (routine == null)
       {
-        return error("Variable [%s] with routine scope cannot be added without a current Routine.", variable.getName());
+        return error("Variable [%s] with routine scope cannot be added without a current Routine.", variableStatement.getName());
       }
       variable = routine.createVariable(name, typeDefinition);
-      variablesStruct = new TripleVariablesStruct(name, routine.getVariables());
+      variableContext = new AutoVariableContext(name, variable.getVariables());
     }
     else
     {
@@ -250,20 +252,18 @@ public class SixteenHighSemanticiser
 
     if (variableStatement.hasInitialiser())
     {
-      Block block = context.getCurrentBlock();
+      Block block = semanticContext.getCurrentBlock();
 
       List<Triple> triples = new ArrayList<>();
-      LogResult result = parseTokenExpression(variableStatement.getInitialiserExpression(), triples, variablesStruct);
+      LogResult result = parseTokenExpression(variable,
+                                              variableStatement.getInitialiserExpression(),
+                                              triples,
+                                              variableContext,
+                                              semanticContext);
       if (result.isFailure())
       {
         return result;
       }
-
-//      SixteenHighOperatorMap.getInstance().get(op)
-//      triple.setOperator();
-//
-//      PrimitiveDefinition primitiveDefinition = (PrimitiveDefinition) typeDefinition;
-//      triple.setLeft(new TripleVariable(primitiveDefinition.type, variable.name));
 
       block.pushTriples(triples);
     }
@@ -303,7 +303,11 @@ public class SixteenHighSemanticiser
     return typeModifierMap.addPrimitiveDefinition(type, new ArrayList<>(), 0);
   }
 
-  private LogResult parseTokenExpression(BaseTokenExpression expression, List<Triple> triples, TripleVariablesStruct variables)
+  private LogResult parseTokenExpression(VariableDefinition destinationVariable,
+                                         BaseTokenExpression expression,
+                                         List<Triple> triples,
+                                         AutoVariableContext variables,
+                                         SixteenHighSemanticiserContext semanticContext)
   {
     if (expression.isArrayInitialiser())
     {
@@ -314,9 +318,8 @@ public class SixteenHighSemanticiser
       TokenExpressionList expressionList = (TokenExpressionList) expression;
       TokenExpression orderedExpression = TokenPrecedence.getInstance().orderByPrecedence(expressionList);
 
-      TripleValue tripleValue = tokenExpression(orderedExpression, triples, variables);
-
-      //You need to think about turning Token Expressions into Semantic Expressions.  And what to do about block.push.
+      TripleValue expressionTripleValue = tokenExpression(orderedExpression, triples, variables, semanticContext);
+      addTriple(triples, new TripleVariable(destinationVariable), null, expressionTripleValue);
 
       return success();
     }
@@ -330,11 +333,14 @@ public class SixteenHighSemanticiser
     }
   }
 
-  private TripleValue tokenExpression(TokenExpression expression, List<Triple> triples, TripleVariablesStruct variables)
+  private TripleValue tokenExpression(TokenExpression expression,
+                                      List<Triple> triples,
+                                      AutoVariableContext variables,
+                                      SixteenHighSemanticiserContext semanticContext)
   {
     if (expression.isBinary())
     {
-      return binaryTokenExpression((BinaryTokenExpression) expression, triples, variables);
+      return binaryTokenExpression((BinaryTokenExpression) expression, triples, variables, semanticContext);
     }
     else if (expression.isLiteral())
     {
@@ -342,32 +348,37 @@ public class SixteenHighSemanticiser
     }
     else if (expression.isVariable())
     {
-      return variableTokenExpression((VariableTokenExpression) expression, triples, variables);
+      return variableTokenExpression((VariableTokenExpression) expression, triples, variables, semanticContext);
     }
     else if (expression.isUnary())
     {
-      return unaryTokenExpression((UnaryTokenExpression) expression, triples, variables);
+      return unaryTokenExpression((UnaryTokenExpression) expression, triples, variables, semanticContext);
     }
 
     throw new SimulatorException();
   }
 
-  private TripleValue binaryTokenExpression(BinaryTokenExpression expression, List<Triple> triples, TripleVariablesStruct variables)
+  private TripleValue binaryTokenExpression(BinaryTokenExpression expression,
+                                            List<Triple> triples,
+                                            AutoVariableContext variables,
+                                            SixteenHighSemanticiserContext semanticContext)
   {
     TokenExpression leftExpression = expression.getLeftExpression();
     SixteenHighKeywordCode operator = expression.getOperator();
     TokenExpression rightExpression = expression.getRightExpression();
 
-    TripleValue rightValue1 = tokenExpression(leftExpression, triples, variables);
-    TripleValue rightValue2 = tokenExpression(rightExpression, triples, variables);
+    TripleValue rightValue1 = tokenExpression(leftExpression, triples, variables, semanticContext);
+    TripleValue rightValue2 = tokenExpression(rightExpression, triples, variables, semanticContext);
 
     PrimitiveTypeCode rightValue1Type = rightValue1.getTypeCode();
     PrimitiveTypeCode rightValue2Type = rightValue2.getTypeCode();
 
-    PrimitiveDefinition leftPrimitiveDefinition = getPrimitiveDefinition(rightValue1Type);
+    PrimitiveDefinition rightPrimitive1Definition = getPrimitiveDefinition(rightValue1Type);
+    PrimitiveDefinition rightPrimitive2Definition = getPrimitiveDefinition(rightValue2Type);
 
-    PrimitiveDefinition rightPrimitiveDefinition = getPrimitiveDefinition(rightValue2Type);
-    VariableDefinition rightVariableDefinition = variables.create(rightPrimitiveDefinition);
+    PrimitiveTypeCode primitiveTypeCode = SixteenHighTypeMap.getInstance().getAutoCast(rightPrimitive1Definition.getType(), rightPrimitive2Definition.getType());
+    PrimitiveDefinition leftPrimitiveDefinition = typeModifierMap.addPrimitiveDefinition(primitiveTypeCode, new ArrayList<>(), 0);
+    VariableDefinition rightVariableDefinition = variables.create(leftPrimitiveDefinition);
     TripleVariable variable = new TripleVariable(rightVariableDefinition);
 
     OperatorCode operatorCode = SixteenHighOperatorMap.getInstance().get(operator);
@@ -375,12 +386,15 @@ public class SixteenHighSemanticiser
     return variable;
   }
 
-  private TripleValue unaryTokenExpression(UnaryTokenExpression expression, List<Triple> triples, TripleVariablesStruct variables)
+  private TripleValue unaryTokenExpression(UnaryTokenExpression expression,
+                                           List<Triple> triples,
+                                           AutoVariableContext variables,
+                                           SixteenHighSemanticiserContext semanticContext)
   {
     SixteenHighKeywordCode operator = expression.getOperator();
     TokenExpression rightExpression = expression.getExpression();
 
-    TripleValue rightValue = tokenExpression(rightExpression, triples, variables);
+    TripleValue rightValue = tokenExpression(rightExpression, triples, variables, semanticContext);
     if (operator == SixteenHighKeywordCode.add)
     {
       return rightValue;
@@ -421,7 +435,10 @@ public class SixteenHighSemanticiser
     return new TripleLiteral(expression.getLiteral());
   }
 
-  private TripleValue variableTokenExpression(VariableTokenExpression expression, List<Triple> triples, TripleVariablesStruct variables)
+  private TripleValue variableTokenExpression(VariableTokenExpression expression,
+                                              List<Triple> triples,
+                                              AutoVariableContext variableContext,
+                                              SixteenHighSemanticiserContext semanticContext)
   {
     //Handle, &, *, x.y.z and [][]
     int dereferenceCount = expression.getDereferenceCount();
@@ -435,7 +452,7 @@ public class SixteenHighSemanticiser
       String name = member.getIdentifier();
       if (i == 0)
       {
-        VariableDefinition variableDefinition = getVariable(name);
+        VariableDefinition variableDefinition = getVariable(semanticContext, name);
         firstVariableDefinition = variableDefinition;
       }
 
@@ -443,73 +460,79 @@ public class SixteenHighSemanticiser
     return new TripleVariable(firstVariableDefinition);
   }
 
-  private VariableDefinition getVariable(String name)
+  private VariableDefinition getVariable(SixteenHighSemanticiserContext semanticContext, String name)
   {
-
-    return null;
+    return semanticContext.getVariable(name);
   }
 
-  private LogResult parseStructStatement(StructTokenStatement structStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseStructStatement(StructTokenStatement structStatement,
+                                         SixteenHighSemanticiserContext semanticContext)
   {
     StructDefinition structName = new StructDefinition(structStatement.getName());
-    if (context.getCurrentStruct() != null)
+    if (semanticContext.getCurrentStruct() != null)
     {
-      return error("Struct [%s] nested in struct [%s] is not allowed.", structName, context.getCurrentStruct().getName());
+      return error("Struct [%s] nested in struct [%s] is not allowed.", structName, semanticContext.getCurrentStruct().getName());
     }
-    if (context.getCurrentRoutine() != null)
+    if (semanticContext.getCurrentRoutine() != null)
     {
-      return error("Struct [%s] nested in routine [%s] is not allowed.", structName, context.getCurrentRoutine().getName());
+      return error("Struct [%s] nested in routine [%s] is not allowed.", structName, semanticContext.getCurrentRoutine().getName());
     }
 
-    context.setCurrentStruct(structName);
+    semanticContext.setCurrentStruct(structName);
     return success();
   }
 
-  private LogResult parseRoutineStatement(RoutineTokenStatement routineStatement, SixteenHighSemanticiserContext context)
+  private LogResult parseRoutineStatement(RoutineTokenStatement routineStatement,
+                                          SixteenHighSemanticiserContext semanticContext)
   {
     String routineName = routineStatement.getName();
-    if (context.getCurrentRoutine() != null)
+    if (semanticContext.getCurrentRoutine() != null)
     {
-      return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, context.getCurrentRoutine().getName());
+      return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, semanticContext.getCurrentRoutine().getName());
     }
-    if (context.getCurrentStruct() != null)
+    if (semanticContext.getCurrentStruct() != null)
     {
-      return error("Routine [%s] nested in struct [%s] is not allowed.", routineName, context.getCurrentStruct().getName());
+      return error("Routine [%s] nested in struct [%s] is not allowed.", routineName, semanticContext.getCurrentStruct().getName());
     }
 
-    VariableScope routineScope = routineStatement.getScope();
+    Scope routineScope = routineStatement.getScope();
     RoutineDefinition existingGlobalRoutine = definition.getGlobalRoutine(routineName);
     if (existingGlobalRoutine != null)
     {
       return error("A global routine [%s] is already defined.", routineName);
     }
 
-    RoutineDefinition existingUnitRoutine = context.getCurrentUnit().getRoutine(routineName);
+    RoutineDefinition existingUnitRoutine = semanticContext.getUnit().getRoutine(routineName);
     if (existingUnitRoutine != null)
     {
       return error("A unit routine [%s] is already defined.", routineName);
     }
-    if (routineScope == VariableScope.routine)
+    if (routineScope == Scope.routine)
     {
       return error("Routine [%s] may not have [routine] scope.", routineName);
     }
 
-    if (routineScope == VariableScope.unit)
+    if (routineScope == Scope.unit)
     {
-      RoutineDefinition routine = definition.createUnitRoutine(context.getCurrentUnit(), routineName, routineScope);
-      context.setCurrentRoutine(routine);
+      RoutineDefinition routine = definition.createUnitRoutine(semanticContext.getUnit(), routineName, routineScope);
+      semanticContext.setCurrentRoutine(routine);
       return success();
     }
-    else if (routineScope == VariableScope.global)
+    else if (routineScope == Scope.global)
     {
       RoutineDefinition routine = definition.createGlobalRoutine(routineName, routineScope);
-      context.setCurrentRoutine(routine);
+      semanticContext.setCurrentRoutine(routine);
       return success();
     }
     else
     {
       throw new SimulatorException("Unknown Variable Scope [%s] for Routine [%s].", routineScope, routineName);
     }
+  }
+
+  public SixteenHighDefinition getDefinition()
+  {
+    return definition;
   }
 
   private LogResult error(String message, Object... parameters)

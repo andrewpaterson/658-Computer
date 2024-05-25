@@ -20,38 +20,45 @@ public abstract class SemanticiserTest
 {
   protected static void testSimple()
   {
-    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("int32 @a = 5;");
-    semanticiser.parse();
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testSimple", "int32 @@a = 5;");
+    validateTrue(semanticiser.parse());
+    SixteenHighDefinition definition = semanticiser.getDefinition();
+    VariableDefinition globalVariable = definition.getGlobalVariable("@@a");
+    validateNotNull(globalVariable);
   }
 
   protected static void testComplex()
   {
-    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("int32 @a = (+c * 3 + (x - y));");
-    semanticiser.parse();
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int32 @c; int32 @x; int32 @y; int32 @a = (+@c * 3 + (@x - @y));");
+    validateTrue(semanticiser.parse());
+    SixteenHighDefinition definition = semanticiser.getDefinition();
+    UnitDefinition unit = definition.getUnit("testComplex");
+    unit.getVariable("@c");
+    xxx
   }
 
   protected static void testArray()
   {
-    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("@a[(c * (b + 0x3L))] = (5 + b * c + 99 * 1.05);");
-    semanticiser.parse();
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testArray", "int32 @[100]; int32 @b; int 32 @c; @a[(@c * (@b + 0x3L))] = (5 + @b * @c + 99 * 1.05);");
+    validateTrue(semanticiser.parse());
   }
 
-  private static SixteenHighSemanticiser createSixteenHighSemanticiser(String s)
+  private static SixteenHighSemanticiser createSixteenHighSemanticiser(String filename, String fileContents)
   {
     SixteenHighKeywords keywords = new SixteenHighKeywords();
-    SixteenHighTokeniser tokeniser = createParser(s, keywords);
+    SixteenHighTokeniser tokeniser = createParser(filename, fileContents, keywords);
     ParseResult parseResult = tokeniser.parse();
     validateTrue(parseResult.isTrue());
     SixteenHighDefinition sixteenHighDefinition = new SixteenHighDefinition();
     return new SixteenHighSemanticiser(sixteenHighDefinition, tokeniser.getUnit(), keywords);
   }
 
-  private static SixteenHighTokeniser createParser(String contents, SixteenHighKeywords keywords)
+  private static SixteenHighTokeniser createParser(String filename, String contents, SixteenHighKeywords keywords)
   {
     return new SixteenHighTokeniser(new Logger(),
                                     keywords,
-                                    "",
-                                    new TokenUnit(""),
+                                    filename,
+                                    new TokenUnit(filename),
                                     contents);
   }
 
@@ -83,10 +90,10 @@ public abstract class SemanticiserTest
 
   public static void test()
   {
-    testAutoCast();
+//    testAutoCast();
 //    testSimple();
     testComplex();
-    testArray();
+//    testArray();
   }
 }
 

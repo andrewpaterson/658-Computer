@@ -1,6 +1,7 @@
 package net.assembler.sixteenhigh.semanticiser.triple;
 
 import net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode;
+import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighOperatorMap;
 
 public class Triple
 {
@@ -52,6 +53,24 @@ public class Triple
   public TripleValue getRightTwo()
   {
     return rightTwo;
+  }
+
+  public String print()
+  {
+    if (rightOne != null)
+    {
+      return left.print() + " = " + rightOne.print() + " " + SixteenHighOperatorMap.getInstance().get(operator) + " " + rightTwo.print();
+    }
+    else
+    {
+      return left.print() + " = " + SixteenHighOperatorMap.getInstance().get(operator) + rightTwo.print();
+    }
+  }
+
+  @Override
+  public String toString()
+  {
+    return print();
   }
 }
 

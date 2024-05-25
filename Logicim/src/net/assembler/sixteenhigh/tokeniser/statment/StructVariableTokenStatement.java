@@ -2,7 +2,7 @@ package net.assembler.sixteenhigh.tokeniser.statment;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class StructVariableTokenStatement
                                       int index,
                                       String structIdentifier,
                                       String name,
-                                      VariableScope scope,
+                                      Scope scope,
                                       List<Long> arrayMatrix,
                                       int pointerCount,
                                       BaseTokenExpression initialiserExpression)

@@ -1,25 +1,24 @@
 package net.assembler.sixteenhigh.semanticiser;
 
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.semanticiser.expression.RoutineDefinitions;
 import net.assembler.sixteenhigh.semanticiser.expression.UnitBlock;
-import net.assembler.sixteenhigh.semanticiser.expression.Variables;
+import net.assembler.sixteenhigh.semanticiser.expression.VariableDefinitions;
 import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class UnitDefinition
 {
-  protected Map<String, RoutineDefinition> routines;
-  protected Variables variables;
+  protected RoutineDefinitions routines;
+  protected VariableDefinitions variables;
   protected UnitBlock block;
+  protected String filename;
 
-  public UnitDefinition()
+  public UnitDefinition(String filename)
   {
-    this.routines = new LinkedHashMap<>();
-    this.variables = new Variables(VariableScope.unit, "Unit");
+    this.routines = RoutineDefinitions.createUnitRoutines();
+    this.variables = VariableDefinitions.createUnitVariables();
     this.block = new UnitBlock(this);
+    this.filename = filename;
   }
 
   public RoutineDefinition getRoutine(String name)
@@ -39,14 +38,12 @@ public class UnitDefinition
     {
       throw new SimulatorException("Unit Routine Definition [%s] already exists.", name);
     }
-    routine = new RoutineDefinition(name, VariableScope.unit);
-    routines.put(name, routine);
-    return routine;
+    return routines.create(name);
   }
-  
+
   public VariableDefinition createVariable(String name, TypeDefinition type)
   {
-    return variables.create(name, type);
+    return variables.create(name, type, false);
   }
 
   public UnitBlock getBlock()
@@ -54,7 +51,7 @@ public class UnitDefinition
     return block;
   }
 
-  public Variables getVariables()
+  public VariableDefinitions getVariables()
   {
     return variables;
   }

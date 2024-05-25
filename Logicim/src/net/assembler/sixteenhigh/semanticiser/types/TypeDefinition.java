@@ -5,5 +5,7 @@ import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
 public abstract class TypeDefinition
 {
   public abstract PrimitiveTypeCode getType();
+
+  public abstract String print();
 }
 

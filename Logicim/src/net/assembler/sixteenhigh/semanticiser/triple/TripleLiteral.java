@@ -18,5 +18,11 @@ public class TripleLiteral
   {
     return literal.getPrimitiveTypeCode();
   }
+
+  @Override
+  public String print()
+  {
+    return literal.print();
+  }
 }
 

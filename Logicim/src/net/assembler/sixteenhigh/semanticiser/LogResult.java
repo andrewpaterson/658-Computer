@@ -30,6 +30,11 @@ public class LogResult
     return message != null;
   }
 
+  public boolean isSuccess()
+  {
+    return message == null;
+  }
+
   public static LogResult success()
   {
     return success;

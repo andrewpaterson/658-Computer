@@ -1,59 +1,74 @@
 package net.assembler.sixteenhigh.definition;
 
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.semanticiser.RoutineDefinition;
 import net.assembler.sixteenhigh.semanticiser.UnitDefinition;
 import net.assembler.sixteenhigh.semanticiser.VariableDefinition;
+import net.assembler.sixteenhigh.semanticiser.expression.RoutineDefinitions;
+import net.assembler.sixteenhigh.semanticiser.expression.VariableDefinitions;
+import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SixteenHighDefinition
 {
-  protected List<RoutineDefinition> globalRoutines;
-  protected List<VariableDefinition> globalVariables;
-  protected List<UnitDefinition> units;
+  protected RoutineDefinitions globalRoutines;
+  protected VariableDefinitions globalVariables;
+  protected UnitDefinitions units;
 
   public SixteenHighDefinition()
   {
-    globalRoutines = new ArrayList<>();
-    globalVariables = new ArrayList<>();
-    units = new ArrayList<>();
+    globalRoutines = RoutineDefinitions.createGlobalRoutines();
+    globalVariables = VariableDefinitions.createGlobalVariables();
+    units = new UnitDefinitions();
   }
 
   public RoutineDefinition getGlobalRoutine(String routineName)
   {
-    for (RoutineDefinition globalRoutine : globalRoutines)
-    {
-      if (globalRoutine.is(routineName))
-      {
-        return globalRoutine;
-      }
-    }
-
-    return null;
+    return globalRoutines.get(routineName);
   }
 
-  public RoutineDefinition createUnitRoutine(UnitDefinition unit, String routineName, VariableScope routineScope)
+  public RoutineDefinition createUnitRoutine(UnitDefinition unit, String routineName, Scope routineScope)
   {
-    if (routineScope != VariableScope.unit)
+    if (routineScope != Scope.unit)
     {
       throw new SimulatorException("Expected Unit Routine scope to be [file].");
     }
     return unit.createRoutine(routineName);
   }
 
-  public RoutineDefinition createGlobalRoutine(String routineName, VariableScope routineScope)
+  public RoutineDefinition createGlobalRoutine(String routineName, Scope routineScope)
   {
-    if (routineScope != VariableScope.global)
+    if (routineScope != Scope.global)
     {
       throw new SimulatorException("Expected Global Routine scope to be [global].");
     }
 
-    RoutineDefinition routine = new RoutineDefinition(routineName, VariableScope.global);
-    globalRoutines.add(routine);
-    return routine;
+    return globalRoutines.create(routineName);
+  }
+
+  public VariableDefinition getGlobalVariable(String name)
+  {
+    VariableDefinition variable = globalVariables.get(name);
+    if (variable != null)
+    {
+      return variable;
+    }
+    return null;
+  }
+
+  public VariableDefinition createGlobalVariable(String name, TypeDefinition type)
+  {
+    return globalVariables.create(name, type, false);
+  }
+
+  public UnitDefinition getUnit(String filename)
+  {
+    return units.get(filename);
+  }
+
+  public UnitDefinition createUnit(String filename)
+  {
+    return units.createUnit(filename);
   }
 }
 

@@ -2,7 +2,7 @@ package net.assembler.sixteenhigh.tokeniser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
-import net.assembler.sixteenhigh.common.scope.VariableScope;
+import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralParser;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralResult;
 import net.assembler.sixteenhigh.tokeniser.statment.ArrayDeclaration;
@@ -545,7 +545,7 @@ public class SixteenHighTokeniser
       {
         unit.addPrimitiveVariable(keyword,
                                   registerName,
-                                  VariableScope.global,
+                                  Scope.global,
                                   arrayDeclaration.arrayMatrix,
                                   pointerCount,
                                   expressionPointer.expression);
@@ -554,7 +554,7 @@ public class SixteenHighTokeniser
       {
         unit.addPrimitiveVariable(keyword,
                                   registerName,
-                                  VariableScope.unit,
+                                  Scope.unit,
                                   arrayDeclaration.arrayMatrix,
                                   pointerCount,
                                   expressionPointer.expression);
@@ -563,7 +563,7 @@ public class SixteenHighTokeniser
       {
         unit.addPrimitiveVariable(keyword,
                                   registerName,
-                                  VariableScope.routine,
+                                  Scope.routine,
                                   arrayDeclaration.arrayMatrix,
                                   pointerCount,
                                   expressionPointer.expression);
@@ -611,7 +611,7 @@ public class SixteenHighTokeniser
     {
       unit.addStructVariable(structIdentifier,
                              registerName,
-                             VariableScope.global,
+                             Scope.global,
                              arrayDeclaration.arrayMatrix,
                              pointerCount,
                              expressionPointer.expression);
@@ -620,7 +620,7 @@ public class SixteenHighTokeniser
     {
       unit.addStructVariable(structIdentifier,
                              registerName,
-                             VariableScope.unit,
+                             Scope.unit,
                              arrayDeclaration.arrayMatrix,
                              pointerCount,
                              expressionPointer.expression);
@@ -629,7 +629,7 @@ public class SixteenHighTokeniser
     {
       unit.addStructVariable(structIdentifier,
                              registerName,
-                             VariableScope.routine,
+                             Scope.routine,
                              arrayDeclaration.arrayMatrix,
                              pointerCount,
                              expressionPointer.expression);
@@ -681,11 +681,11 @@ public class SixteenHighTokeniser
     String identifier = zeroIdentifier.toString();
     if (identifier.startsWith("@@"))
     {
-      unit.addRoutine(identifier, VariableScope.global);
+      unit.addRoutine(identifier, Scope.global);
     }
     else if (identifier.startsWith("@"))
     {
-      unit.addRoutine(identifier, VariableScope.unit);
+      unit.addRoutine(identifier, Scope.unit);
     }
     else
     {

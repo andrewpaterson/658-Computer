@@ -1,15 +1,15 @@
 package net.assembler.sixteenhigh.semanticiser;
 
-import net.assembler.sixteenhigh.semanticiser.expression.Variables;
+import net.assembler.sixteenhigh.semanticiser.expression.VariableDefinitions;
 import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 
-public class TripleVariablesStruct
+public class AutoVariableContext
 {
   protected String baseName;
-  protected Variables variables;
+  protected VariableDefinitions variables;
   protected int index;
 
-  public TripleVariablesStruct(String baseName, Variables variables)
+  public AutoVariableContext(String baseName, VariableDefinitions variables)
   {
     this.baseName = baseName;
     this.variables = variables;
@@ -21,16 +21,15 @@ public class TripleVariablesStruct
     String name;
     for (; ; )
     {
-      name = baseName + "_" + index;
+      name = baseName + "~" + index;
       VariableDefinition existing = variables.get(name);
       if (existing == null)
       {
         break;
       }
+      index++;
     }
-    VariableDefinition variable = variables.create(name, typeDefinition);
-    index++;
-    return variable;
+    return variables.create(name, typeDefinition, true);
   }
 }
 

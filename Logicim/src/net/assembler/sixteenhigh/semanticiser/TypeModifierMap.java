@@ -40,6 +40,7 @@ public class TypeModifierMap
     if (typeDefinition == null)
     {
       typeDefinition = new PrimitiveDefinition(primitiveTypeCode, arrayMatrix, pointerCount);
+      typeModifierMap.put(typeModifier, typeDefinition);
     }
     return typeDefinition;
   }

@@ -18,5 +18,10 @@ public abstract class Block
   {
     this.triples.addAll(triples);
   }
+
+  public List<Triple> getTriples()
+  {
+    return triples;
+  }
 }
 

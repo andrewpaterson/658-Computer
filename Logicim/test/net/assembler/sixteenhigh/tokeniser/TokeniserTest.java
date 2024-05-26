@@ -92,7 +92,7 @@ public abstract class TokeniserTest
 
   protected static void testStatementAssignment3()
   {
-    SixteenHighTokeniser parser = createParser("i = -(0x230L * +((-.4f) % 3))");
+    SixteenHighTokeniser parser = createParser("i = -(0x230LL * +((-.4f) % 3))");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -313,7 +313,7 @@ public abstract class TokeniserTest
 
   protected static void testArrayStuff()
   {
-    SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3L))] = (5 + b * c + 99 * 1.05)");
+    SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3LL))] = (5 + b * c + 99 * 1.05)");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());

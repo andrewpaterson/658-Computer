@@ -7,5 +7,14 @@ public abstract class TripleValue
   public abstract PrimitiveTypeCode getTypeCode();
 
   public abstract String print();
+
+  public TripleVariable getVariable()
+  {
+    return null;
+  }
+  public TripleLiteral getLiteral()
+  {
+    return null;
+  }
 }
 

@@ -349,28 +349,19 @@ public class LiteralParser
   {
     Tristate result;
     boolean unsigned;
-    boolean bLong;
     boolean bLongLong;
+    boolean bShort;
+    boolean bByte;
 
     unsigned = false;
     bLongLong = false;
-    bLong = false;
+    bShort = false;
+    bByte = false;
 
     result = textParser.getExactCaseInsensitiveCharacterSequence("ULL", false);
     if (result == TRUE)
     {
       bLongLong = true;
-      unsigned = true;
-    }
-    else if (result == ERROR)
-    {
-      return new LiteralResult(ERROR);
-    }
-
-    result = textParser.getExactCaseInsensitiveCharacterSequence("UL", false);
-    if (result == TRUE)
-    {
-      bLong = true;
       unsigned = true;
     }
     else if (result == ERROR)
@@ -388,10 +379,42 @@ public class LiteralParser
       return new LiteralResult(ERROR);
     }
 
-    result = textParser.getExactCaseInsensitiveCharacterSequence("L", false);
+    result = textParser.getExactCaseInsensitiveCharacterSequence("US", false);
     if (result == TRUE)
     {
-      bLong = true;
+      bShort = true;
+      unsigned = true;
+    }
+    else if (result == ERROR)
+    {
+      return new LiteralResult(ERROR);
+    }
+
+    result = textParser.getExactCaseInsensitiveCharacterSequence("S", false);
+    if (result == TRUE)
+    {
+      bShort = true;
+    }
+    else if (result == ERROR)
+    {
+      return new LiteralResult(ERROR);
+    }
+
+    result = textParser.getExactCaseInsensitiveCharacterSequence("UB", false);
+    if (result == TRUE)
+    {
+      bByte = true;
+      unsigned = true;
+    }
+    else if (result == ERROR)
+    {
+      return new LiteralResult(ERROR);
+    }
+
+    result = textParser.getExactCaseInsensitiveCharacterSequence("B", false);
+    if (result == TRUE)
+    {
+      bByte = true;
     }
     else if (result == ERROR)
     {
@@ -420,6 +443,14 @@ public class LiteralParser
     if (bLongLong)
     {
       return new LiteralResult(new CTLong(value, unsigned, sign < 0));
+    }
+    else if (bShort)
+    {
+      return new LiteralResult(new CTShort(value, unsigned, sign < 0));
+    }
+    else if (bByte)
+    {
+      return new LiteralResult(new CTChar(value, unsigned, sign < 0));
     }
     else
     {

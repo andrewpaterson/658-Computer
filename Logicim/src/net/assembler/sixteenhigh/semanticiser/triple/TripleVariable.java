@@ -25,6 +25,12 @@ public class TripleVariable
     return variable.print();
   }
 
+  @Override
+  public TripleVariable getVariable()
+  {
+    return this;
+  }
+
   public String getTypeName()
   {
     return variable.getName();

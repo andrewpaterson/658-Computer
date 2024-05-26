@@ -54,5 +54,38 @@ public class VariableDefinitions
     variables.put(name, variable);
     return variable;
   }
+
+  public int numVariables(boolean includeAuto)
+  {
+    if (includeAuto)
+    {
+      return variables.size();
+    }
+    else
+    {
+      int count = 0;
+      for (VariableDefinition value : variables.values())
+      {
+        if (!value.isAuto())
+        {
+          count++;
+        }
+      }
+      return count;
+    }
+  }
+
+  public int numAutoVariables()
+  {
+    int count = 0;
+    for (VariableDefinition value : variables.values())
+    {
+      if (value.isAuto())
+      {
+        count++;
+      }
+    }
+    return count;
+  }
 }
 

@@ -174,6 +174,14 @@ public abstract class Validator
     }
   }
 
+  public static void validateNull(Object o)
+  {
+    if (o != null)
+    {
+      throw new ValidationException(toFailureString(NULL, NOT_NULL));
+    }
+  }
+
   public static void validateClass(Class<?> aClass, Object o)
   {
     if (o != null)

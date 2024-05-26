@@ -3,8 +3,11 @@ package net.assembler.sixteenhigh.semanticiser;
 import net.assembler.sixteenhigh.semanticiser.expression.RoutineDefinitions;
 import net.assembler.sixteenhigh.semanticiser.expression.UnitBlock;
 import net.assembler.sixteenhigh.semanticiser.expression.VariableDefinitions;
+import net.assembler.sixteenhigh.semanticiser.triple.Triple;
 import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.common.SimulatorException;
+
+import java.util.List;
 
 public class UnitDefinition
 {
@@ -54,6 +57,21 @@ public class UnitDefinition
   public VariableDefinitions getVariables()
   {
     return variables;
+  }
+
+  public int numVariables(boolean includeAuto)
+  {
+    return variables.numVariables(includeAuto);
+  }
+
+  public int numAutoVariables()
+  {
+    return variables.numAutoVariables();
+  }
+
+  public List<Triple> getTriples()
+  {
+    return block.getTriples();
   }
 }
 

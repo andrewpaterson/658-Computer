@@ -461,12 +461,8 @@ public class SixteenHighTokeniser
     if (parseResult.isTrue())
     {
       unit.addFlow(expressionPointer.flowExpression);
-      return parseResult;
     }
-    else
-    {
-      return parseResult;
-    }
+    return parseResult;
   }
 
   private ParseResult parseFlowExpression(SixteenHighKeywordCode keyword, FlowExpressionPointer expressionPointer)

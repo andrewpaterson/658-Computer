@@ -41,6 +41,11 @@ public class VariableDefinition
     return variables;
   }
 
+  public boolean isAuto()
+  {
+    return auto;
+  }
+
   public String print()
   {
     return "(" + type.print() + ")" + name;

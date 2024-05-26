@@ -24,5 +24,11 @@ public class TripleLiteral
   {
     return literal.print();
   }
+
+  @Override
+  public TripleLiteral getLiteral()
+  {
+    return this;
+  }
 }
 

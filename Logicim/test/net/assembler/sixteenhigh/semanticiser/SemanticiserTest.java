@@ -2,8 +2,14 @@ package net.assembler.sixteenhigh.semanticiser;
 
 import net.assembler.sixteenhigh.common.SixteenHighKeywords;
 import net.assembler.sixteenhigh.common.TokenUnit;
+import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
+import net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode;
 import net.assembler.sixteenhigh.semanticiser.expression.operator.SixteenHighTypeMap;
+import net.assembler.sixteenhigh.semanticiser.triple.Triple;
+import net.assembler.sixteenhigh.semanticiser.triple.TripleLiteral;
+import net.assembler.sixteenhigh.semanticiser.triple.TripleValue;
+import net.assembler.sixteenhigh.semanticiser.triple.TripleVariable;
 import net.assembler.sixteenhigh.tokeniser.ParseResult;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighTokeniser;
 import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
@@ -12,9 +18,10 @@ import net.common.util.CollectionUtil;
 
 import java.util.List;
 
+import static net.assembler.sixteenhigh.common.scope.Scope.unit;
+import static net.assembler.sixteenhigh.semanticiser.expression.operator.OperatorCode.*;
 import static net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode.*;
-import static net.logicim.assertions.Validator.validateNotNull;
-import static net.logicim.assertions.Validator.validateTrue;
+import static net.logicim.assertions.Validator.*;
 
 public abstract class SemanticiserTest
 {
@@ -29,12 +36,111 @@ public abstract class SemanticiserTest
 
   protected static void testComplex()
   {
-    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int32 @c; int32 @x; int32 @y; int32 @a = (+@c * 3 + (@x - @y));");
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int16 @c; int8 @x; int8 @y; int32 @a = (+@c * 3b + (@x - @y));");
     validateTrue(semanticiser.parse());
     SixteenHighDefinition definition = semanticiser.getDefinition();
-    UnitDefinition unit = definition.getUnit("testComplex");
-    unit.getVariable("@c");
-    xxx
+    UnitDefinition unitDefinition = definition.getUnit("testComplex");
+
+    validateEquals(7, unitDefinition.numVariables(true));
+    validateEquals(4, unitDefinition.numVariables(false));
+    validateEquals(3, unitDefinition.numAutoVariables());
+
+    validateVariable(unitDefinition.getVariable("@c"), "@c", unit, false, int16);
+    validateVariable(unitDefinition.getVariable("@x"), "@x", unit, false, int8);
+    validateVariable(unitDefinition.getVariable("@y"), "@y", unit, false, int8);
+    validateVariable(unitDefinition.getVariable("@a"), "@a", unit, false, int32);
+    validateVariable(unitDefinition.getVariable("@a~0"), "@a~0", unit, true, int16);
+    validateVariable(unitDefinition.getVariable("@a~1"), "@a~1", unit, true, int8);
+    validateVariable(unitDefinition.getVariable("@a~2"), "@a~2", unit, true, int16);
+
+    List<Triple> triples = unitDefinition.getTriples();
+    validateEquals(4, triples.size());
+    validateTripleVariableLiteral(triples.get(0), int16, "@a~0", int16, "@c", multiply, int8, "3");
+    validateTripleVariableVariable(triples.get(1), int8, "@a~1", int8, "@x", subtract, int8, "@y");
+    validateTripleVariableVariable(triples.get(2), int16, "@a~2", int16, "@a~0", add, int8, "@a~1");
+    validateTripleVariableVariable(triples.get(3), int32, "@a", null, null, null, int16, "@a~2");
+  }
+
+  private static void validateTripleVariableLiteral(Triple triple,
+                                                    PrimitiveTypeCode leftType,
+                                                    String leftVariableName,
+                                                    PrimitiveTypeCode rightOneType,
+                                                    String rightOneVariableName,
+                                                    OperatorCode operator,
+                                                    PrimitiveTypeCode rightTwoType,
+                                                    String rightTwoLiteralString)
+  {
+    validateVariable(leftType, leftVariableName, triple.getLeft());
+    validateVariableOrNull(rightOneType, rightOneVariableName, triple.getRightOne());
+    validateOperatorOrNull(triple, operator);
+    validateLiteral(rightTwoType, rightTwoLiteralString, triple.getRightTwo());
+  }
+
+  private static void validateOperatorOrNull(Triple triple, OperatorCode operator)
+  {
+    if (operator != null)
+    {
+      validateEquals(operator, triple.getOperator());
+    }
+    else
+    {
+      validateNull(operator);
+    }
+  }
+
+  private static void validateVariable(PrimitiveTypeCode type, String name, TripleValue tripleValue)
+  {
+    TripleVariable variable = tripleValue.getVariable();
+    validateNotNull(variable);
+    validateEquals(name, variable.getTypeName());
+    validateEquals(type, variable.getTypeCode());
+  }
+
+  private static void validateVariableOrNull(PrimitiveTypeCode rightOneType, String rightOneVariableName, TripleValue tripleValue)
+  {
+    if (rightOneVariableName != null)
+    {
+      validateVariable(rightOneType, rightOneVariableName, tripleValue);
+    }
+    else
+    {
+      validateNull(tripleValue);
+    }
+  }
+
+  private static void validateLiteral(PrimitiveTypeCode type, String value, TripleValue tripleValue)
+  {
+    TripleLiteral literal = tripleValue.getLiteral();
+    validateNotNull(literal);
+    validateEquals(value, literal.print());
+    validateEquals(type, literal.getTypeCode());
+  }
+
+  private static void validateTripleVariableVariable(Triple triple,
+                                                     PrimitiveTypeCode leftType,
+                                                     String leftVariableName,
+                                                     PrimitiveTypeCode rightOneType,
+                                                     String rightOneVariableName,
+                                                     OperatorCode operator,
+                                                     PrimitiveTypeCode rightTwoType,
+                                                     String rightTwoVariableName)
+  {
+    validateVariable(leftType, leftVariableName, triple.getLeft());
+    validateVariableOrNull(rightOneType, rightOneVariableName, triple.getRightOne());
+    validateOperatorOrNull(triple, operator);
+    validateVariable(rightTwoType, rightTwoVariableName, triple.getRightTwo());
+  }
+
+  private static void validateVariable(VariableDefinition variable,
+                                       String name,
+                                       Scope unit,
+                                       boolean auto,
+                                       PrimitiveTypeCode typeCode)
+  {
+    validateEquals(name, variable.name);
+    validateEquals(unit, variable.scope);
+    validateEquals(auto, variable.auto);
+    validateEquals(typeCode, variable.type.getType());
   }
 
   protected static void testArray()

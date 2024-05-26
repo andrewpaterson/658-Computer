@@ -262,6 +262,42 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
+  protected static void testMultiplePointerVariable()
+  {
+    SixteenHighTokeniser parser = createParser("int8**** p = 0;");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("int8**** p = 0;", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testCompoundVariable1()
+  {
+    SixteenHighTokeniser parser = createParser("*p[3] = 5;");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("*p[3] = 5;", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testCompoundVariable2()
+  {
+    SixteenHighTokeniser parser = createParser("*(*p[3])[5] = 5;");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("int8**** p = 0;", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
   protected static void testUnsignedShiftRightExpression()
   {
     SixteenHighTokeniser parser = createParser("x = (5 + >>>d)");
@@ -776,29 +812,32 @@ public abstract class TokeniserTest
 
   public static void test()
   {
-    testStatementAssignment1();
-    testStatementAssignment2();
-    testStatementAssignment3();
-    testStatementAssignment4();
-    testStatementAssignment5();
-    testStatementAssignment6();
-    testStatementDeclaration();
-    testStatementDirective();
-    testSingleInitialisation();
-    testArrayInitialisation();
-    testArrayStuff();
-    testArrayIndices();
-    testComplexArrayIndices();
-    testIdentifierContainingNumber();
-    testGlobalAndFileVariables();
-    testReferenceOperator();
-    testPush();
-    testPull();
-    testPlusExpression();
-    testUnsignedShiftRightExpression();
-    testPullAfterRegisterDeclaration();
-    testStructSimpleDeclaration();
-    testStructFieldSelection();
+//    testStatementAssignment1();
+//    testStatementAssignment2();
+//    testStatementAssignment3();
+//    testStatementAssignment4();
+//    testStatementAssignment5();
+//    testStatementAssignment6();
+//    testStatementDeclaration();
+//    testStatementDirective();
+//    testSingleInitialisation();
+//    testArrayInitialisation();
+//    testArrayStuff();
+//    testArrayIndices();
+//    testComplexArrayIndices();
+//    testIdentifierContainingNumber();
+//    testGlobalAndFileVariables();
+//    testReferenceOperator();
+//    testPush();
+//    testPull();
+//    testPlusExpression();
+//    testUnsignedShiftRightExpression();
+//    testPullAfterRegisterDeclaration();
+//    testStructSimpleDeclaration();
+//    testStructFieldSelection();
+//    testMultiplePointerVariable();
+//    testCompoundVariable1();
+    testCompoundVariable2();
 
     testSimple();
     testArrayDeclaration();

@@ -6,29 +6,34 @@ import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
 public class TripleLiteral
     extends TripleValue
 {
-  private CTLiteral literal;
+  private CTLiteral ctLiteral;
 
   public TripleLiteral(CTLiteral literal)
   {
-    this.literal = literal;
+    this.ctLiteral = literal;
   }
 
   @Override
   public PrimitiveTypeCode getTypeCode()
   {
-    return literal.getPrimitiveTypeCode();
+    return ctLiteral.getPrimitiveTypeCode();
   }
 
   @Override
   public String print()
   {
-    return literal.print();
+    return ctLiteral.print();
   }
 
   @Override
   public TripleLiteral getLiteral()
   {
     return this;
+  }
+
+  public CTLiteral getCTLiteral()
+  {
+    return ctLiteral;
   }
 }
 

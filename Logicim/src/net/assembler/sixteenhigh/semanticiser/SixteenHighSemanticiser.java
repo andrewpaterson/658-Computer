@@ -198,13 +198,43 @@ public class SixteenHighSemanticiser
     }
     else if (statement.isAssignment())
     {
-      int xxx = 0;
-      return false;
+      AssignmentTokenStatement assignmentStatement = (AssignmentTokenStatement) statement;
+      LogResult logResult = parseAssignmentStatement(assignmentStatement, semanticContext);
+      return logResult.isSuccess();
     }
     else
     {
       throw new SimulatorException();
     }
+  }
+
+  private LogResult parseAssignmentStatement(AssignmentTokenStatement variableStatement, SixteenHighSemanticiserContext semanticContext)
+  {
+    // &a[5].s[77] = 0;
+    // *(*p[3])[5]
+
+//    String name = variableStatement.getName();
+//    Block block = semanticContext.getCurrentBlock();
+//    VariableDefinition variable = semanticContext.getVariable(name);
+//    if (variable == null)
+//    {
+//      return error("Variable [%s] not defined.", variable.getName());
+//    }
+//
+//    AutoVariableContext variableContext = new AutoVariableContext(name, variable.getVariables());
+//    List<Triple> triples = new ArrayList<>();
+//    LogResult result = parseTokenExpression(variable,
+//                                            variableStatement,
+//                                            triples,
+//                                            variableContext,
+//                                            semanticContext);
+//    if (result.isFailure())
+//    {
+//      return result;
+//    }
+//
+//    block.pushTriples(triples);
+    return success();
   }
 
   private LogResult parseVariableDefinitionStatement(VariableTokenStatement variableStatement, SixteenHighSemanticiserContext semanticContext)
@@ -219,11 +249,9 @@ public class SixteenHighSemanticiser
     TypeDefinition typeDefinition = getTypeDefinition(variableStatement);
 
     Scope scope = variableStatement.getScope();
-    AutoVariableContext variableContext;
     if (scope == Scope.global)
     {
       variable = definition.createGlobalVariable(name, typeDefinition);
-      variableContext = new AutoVariableContext(name, variable.getVariables());
     }
     else if (scope == Scope.unit)
     {
@@ -233,7 +261,6 @@ public class SixteenHighSemanticiser
         return error("Variable [%s] with unit scope cannot be added without a current Unit.", variableStatement.getName());
       }
       variable = unit.createVariable(name, typeDefinition);
-      variableContext = new AutoVariableContext(name, variable.getVariables());
     }
     else if (scope == Scope.routine)
     {
@@ -243,7 +270,6 @@ public class SixteenHighSemanticiser
         return error("Variable [%s] with routine scope cannot be added without a current Routine.", variableStatement.getName());
       }
       variable = routine.createVariable(name, typeDefinition);
-      variableContext = new AutoVariableContext(name, variable.getVariables());
     }
     else
     {
@@ -252,6 +278,7 @@ public class SixteenHighSemanticiser
 
     if (variableStatement.hasInitialiser())
     {
+      AutoVariableContext variableContext = new AutoVariableContext(name, variable.getVariables());
       Block block = semanticContext.getCurrentBlock();
 
       List<Triple> triples = new ArrayList<>();

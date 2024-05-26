@@ -72,5 +72,85 @@ public class Triple
   {
     return print();
   }
+
+  public String printValidationCode(int index)
+  {
+    StringBuilder builder = new StringBuilder("validateTriple");
+    boolean isRightOneVariable = rightOne == null || rightOne.getVariable() != null;
+    boolean isRightTwoVariable = rightTwo == null || rightTwo.getVariable() != null;
+    if (isRightOneVariable)
+    {
+      builder.append("Variable");
+    }
+    else
+    {
+      builder.append("Literal");
+    }
+    if (isRightTwoVariable)
+    {
+      builder.append("Variable");
+    }
+    else
+    {
+      builder.append("Literal");
+    }
+
+    builder.append("(triples.get(");
+    builder.append(index);
+    builder.append("), ");
+
+    TripleVariable leftVariable = left.getVariable();
+    builder.append(leftVariable.getVariableDefinition().getType().getType().toString());
+    builder.append(", ");
+    builder.append("\"");
+    builder.append(leftVariable.getName());
+    builder.append("\", ");
+
+    if (rightOne == null)
+    {
+      builder.append("null, null, ");
+    }
+    else if (isRightOneVariable)
+    {
+      TripleVariable rightOneVariable = rightOne.getVariable();
+      builder.append(rightOneVariable.getVariableDefinition().getType().getType().toString());
+      builder.append(", ");
+      builder.append("\"");
+      builder.append(rightOneVariable.getName());
+      builder.append("\", ");
+    }
+    else
+    {
+      TripleLiteral rightOneLiteral = rightOne.getLiteral();
+      builder.append(rightOneLiteral.getCTLiteral().getPrimitiveTypeCode().toString());
+      builder.append(", ");
+      builder.append("\"");
+      builder.append(rightOneLiteral.print());
+      builder.append("\", ");
+    }    
+    
+    if (isRightTwoVariable)
+    {
+      TripleVariable rightTwoVariable = rightTwo.getVariable();
+      builder.append(rightTwoVariable.getVariableDefinition().getType().getType().toString());
+      builder.append(", ");
+      builder.append("\"");
+      builder.append(rightTwoVariable.getName());
+      builder.append("\"");
+    }
+    else
+    {
+      TripleLiteral rightTwoLiteral = rightTwo.getLiteral();
+      builder.append(rightTwoLiteral.getCTLiteral().getPrimitiveTypeCode().toString());
+      builder.append(", ");
+      builder.append("\"");
+      builder.append(rightTwoLiteral.print());
+      builder.append("\"");
+    }
+    builder.append(");");
+
+    //validateTripleVariableLiteral(triples.get(0), int8, "@a", int8, "-2", multiply, int8, "3");
+    return builder.toString();
+  }
 }
 

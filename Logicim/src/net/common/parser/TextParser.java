@@ -1,7 +1,7 @@
 package net.common.parser;
 
-import net.common.logger.Logger;
 import net.common.SimulatorException;
+import net.common.logger.Logger;
 import net.common.parser.primitive.CharPointer;
 import net.common.parser.primitive.FloatPointer;
 import net.common.parser.primitive.IntegerPointer;

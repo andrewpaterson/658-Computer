@@ -25,16 +25,47 @@ import static net.logicim.assertions.Validator.*;
 
 public abstract class SemanticiserTest
 {
-  protected static void testSimple()
+  protected static void testSimple1()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testSimple", "int32 @@a = 5;");
     validateTrue(semanticiser.parse());
     SixteenHighDefinition definition = semanticiser.getDefinition();
+    UnitDefinition unitDefinition = definition.getUnit("testSimple");
+
     VariableDefinition globalVariable = definition.getGlobalVariable("@@a");
     validateNotNull(globalVariable);
+
+    validateEquals(0, unitDefinition.numVariables(true));
+    validateEquals(0, unitDefinition.numVariables(false));
+    validateEquals(0, unitDefinition.numAutoVariables());
+
+    List<Triple> triples = unitDefinition.getTriples();
+    validateEquals(1, triples.size());
+
+    validateTripleVariableLiteral(triples.get(0), int32, "@@a", null, null, null, int32, "5");
   }
 
-  protected static void testComplex()
+  protected static void testSimple2()
+  {
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testSimple", "int32 @@a = 2; @@a /= 5;");
+    validateTrue(semanticiser.parse());
+    SixteenHighDefinition definition = semanticiser.getDefinition();
+    UnitDefinition unitDefinition = definition.getUnit("testSimple");
+
+    VariableDefinition globalVariable = definition.getGlobalVariable("@@a");
+    validateNotNull(globalVariable);
+
+    validateEquals(0, unitDefinition.numVariables(true));
+    validateEquals(0, unitDefinition.numVariables(false));
+    validateEquals(0, unitDefinition.numAutoVariables());
+
+    List<Triple> triples = unitDefinition.getTriples();
+    validateEquals(1, triples.size());
+
+    validateTripleVariableLiteral(triples.get(0), int32, "@@a", null, null, null, int32, "5");
+  }
+
+  protected static void testComplex1()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int16 @c; int8 @x; int8 @y; int32 @a = (+@c * 3b + (@x - @y));");
     validateTrue(semanticiser.parse());
@@ -61,6 +92,68 @@ public abstract class SemanticiserTest
     validateTripleVariableVariable(triples.get(3), int32, "@a", null, null, null, int16, "@a~2");
   }
 
+  protected static void testComplex2()
+  {
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int8 @y; int32 @a = (-0b10b * 3b + @y % @y)");
+    validateTrue(semanticiser.parse());
+    SixteenHighDefinition definition = semanticiser.getDefinition();
+    UnitDefinition unitDefinition = definition.getUnit("testComplex");
+
+    validateEquals(5, unitDefinition.numVariables(true));
+    validateEquals(2, unitDefinition.numVariables(false));
+    validateEquals(3, unitDefinition.numAutoVariables());
+
+    validateVariable(unitDefinition.getVariable("@y"), "@y", unit, false, int8);
+    validateVariable(unitDefinition.getVariable("@a"), "@a", unit, false, int32);
+    validateVariable(unitDefinition.getVariable("@a~0"), "@a~0", unit, true, int8);
+    validateVariable(unitDefinition.getVariable("@a~1"), "@a~1", unit, true, int8);
+    validateVariable(unitDefinition.getVariable("@a~2"), "@a~2", unit, true, int8);
+
+    List<Triple> triples = unitDefinition.getTriples();
+    validateEquals(4, triples.size());
+    validateTripleLiteralLiteral(triples.get(0), int8, "@a~0", int8, "-2", multiply, int8, "3");
+    validateTripleVariableVariable(triples.get(1), int8, "@a~1", int8, "@y", modulus, int8, "@y");
+    validateTripleVariableVariable(triples.get(2), int8, "@a~2", int8, "@a~0", add, int8, "@a~1");
+    validateTripleVariableVariable(triples.get(3), int32, "@a", null, null, null, int8, "@a~2");
+  }
+
+  protected static void testComplex3()
+  {
+    SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int32 @a = 5; int32 @b = (@a + 0x1us - 0); int16 @c = (0xABCDull + 1 - 2 * 5 / 7 % 9 + @a + @b); int @d /= @a;");
+    validateTrue(semanticiser.parse());
+    SixteenHighDefinition definition = semanticiser.getDefinition();
+    UnitDefinition unitDefinition = definition.getUnit("testComplex");
+
+    validateEquals(12, unitDefinition.numVariables(true));
+    validateEquals(3, unitDefinition.numVariables(false));
+    validateEquals(9, unitDefinition.numAutoVariables());
+
+    validateVariable(unitDefinition.getVariable("@a"), "@a", unit, false, int32);
+    validateVariable(unitDefinition.getVariable("@b"), "@b", unit, false, int32);
+    validateVariable(unitDefinition.getVariable("@b~0"), "@b~0", unit, true, int32);
+    validateVariable(unitDefinition.getVariable("@b~1"), "@b~1", unit, true, int32);
+    validateVariable(unitDefinition.getVariable("@c"), "@c", unit, false, int16);
+    validateVariable(unitDefinition.getVariable("@c~0"), "@c~0", unit, true, int64);
+    validateVariable(unitDefinition.getVariable("@c~1"), "@c~1", unit, true, int32);
+    validateVariable(unitDefinition.getVariable("@c~2"), "@c~2", unit, true, int32);
+    validateVariable(unitDefinition.getVariable("@c~3"), "@c~3", unit, true, int32);
+    validateVariable(unitDefinition.getVariable("@c~4"), "@c~4", unit, true, int64);
+    validateVariable(unitDefinition.getVariable("@c~5"), "@c~5", unit, true, int64);
+    validateVariable(unitDefinition.getVariable("@c~6"), "@c~6", unit, true, int64);
+
+    List<Triple> triples = unitDefinition.getTriples();
+    validateEquals(12, triples.size());
+    for (int i = 0; i < triples.size(); i++)
+    {
+      Triple triple = triples.get(i);
+      System.out.println(triple.printValidationCode(i));
+    }
+    validateTripleVariableLiteral(triples.get(0), int8, "@a", int8, "-2", multiply, int8, "3");
+    validateTripleVariableVariable(triples.get(1), int8, "@a~1", int8, "@y", modulus, int8, "@y");
+    validateTripleVariableVariable(triples.get(2), int8, "@a~2", int8, "@a~0", add, int8, "@a~1");
+    validateTripleVariableVariable(triples.get(3), int32, "@a", null, null, null, int8, "@a~2");
+  }
+
   private static void validateTripleVariableLiteral(Triple triple,
                                                     PrimitiveTypeCode leftType,
                                                     String leftVariableName,
@@ -72,6 +165,21 @@ public abstract class SemanticiserTest
   {
     validateVariable(leftType, leftVariableName, triple.getLeft());
     validateVariableOrNull(rightOneType, rightOneVariableName, triple.getRightOne());
+    validateOperatorOrNull(triple, operator);
+    validateLiteral(rightTwoType, rightTwoLiteralString, triple.getRightTwo());
+  }
+
+  private static void validateTripleLiteralLiteral(Triple triple,
+                                                    PrimitiveTypeCode leftType,
+                                                    String leftVariableName,
+                                                    PrimitiveTypeCode rightOneType,
+                                                    String rightOneVariableName,
+                                                    OperatorCode operator,
+                                                    PrimitiveTypeCode rightTwoType,
+                                                    String rightTwoLiteralString)
+  {
+    validateVariable(leftType, leftVariableName, triple.getLeft());
+    validateLiteral(rightOneType, rightOneVariableName, triple.getRightOne());
     validateOperatorOrNull(triple, operator);
     validateLiteral(rightTwoType, rightTwoLiteralString, triple.getRightTwo());
   }
@@ -92,7 +200,7 @@ public abstract class SemanticiserTest
   {
     TripleVariable variable = tripleValue.getVariable();
     validateNotNull(variable);
-    validateEquals(name, variable.getTypeName());
+    validateEquals(name, variable.getName());
     validateEquals(type, variable.getTypeCode());
   }
 
@@ -196,10 +304,13 @@ public abstract class SemanticiserTest
 
   public static void test()
   {
-//    testAutoCast();
-//    testSimple();
-    testComplex();
-//    testArray();
+    testAutoCast();
+    testSimple1();
+    testSimple2();
+    testComplex1();
+    testComplex2();
+    testComplex3();
+    testArray();
   }
 }
 

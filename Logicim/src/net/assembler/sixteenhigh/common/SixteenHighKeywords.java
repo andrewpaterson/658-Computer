@@ -16,13 +16,21 @@ public class SixteenHighKeywords
   protected String GO = "go";
   protected String END = "end";
   protected String STRUCT = "struct";
-  protected String OPEN_ROUND = "(";
-  protected String CLOSE_ROUND = ")";
-  protected String OPEN_SQUARE = "[";
-  protected String CLOSE_SQUARE = "]";
-  protected String PUSH = ">";
-  protected String PULL = "<";
-  protected String ASSIGN = "=";
+  protected char OPEN_ROUND = '(';
+  protected char CLOSE_ROUND = ')';
+  protected char OPEN_SQUARE = '[';
+  protected char CLOSE_SQUARE = ']';
+  protected char PUSH = '>';
+  protected char PULL = '<';
+  protected char ASSIGN = '=';
+  protected char DEREFERENCE = '*';
+  protected char REFERENCE = '&';
+  protected char DOT = '.';
+  protected char AT = '@';
+  protected char INTER_STATEMENT = ';';
+  protected char LABEL = ':';
+  protected char ARRAY_SEPARATOR = ',';
+  protected String GLOBAL = "@@";
 
   protected List<KeywordPair> keywords;
   protected Map<SixteenHighKeywordCode, String> codeToStringMap;
@@ -78,7 +86,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(float64, "float64"));
     keywords.add(new KeywordPair(float128, "float128"));
     keywords.add(new KeywordPair(bool, "bool"));
-    keywords.add(new KeywordPair(assign, ASSIGN));
+    keywords.add(new KeywordPair(assign, str(ASSIGN)));
     keywords.add(new KeywordPair(add, "+"));
     keywords.add(new KeywordPair(subtract, "-"));
     keywords.add(new KeywordPair(multiply, "*"));
@@ -120,8 +128,8 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(test_set, "ts"));
     keywords.add(new KeywordPair(test_reset, "tr"));
     keywords.add(new KeywordPair(ret, "return"));
-    keywords.add(new KeywordPair(push, PUSH));
-    keywords.add(new KeywordPair(pull, PULL));
+    keywords.add(new KeywordPair(push, str(PUSH)));
+    keywords.add(new KeywordPair(pull, str(PULL)));
     keywords.add(new KeywordPair(end, END));
     keywords.add(new KeywordPair(struct, STRUCT));
     keywords.add(new KeywordPair(start_address, "$start_address"));
@@ -131,12 +139,17 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(write_only, "write-only"));
     keywords.add(new KeywordPair(read_write, "read-write"));
     keywords.add(new KeywordPair(access_time, "$access_time"));
-    keywords.add(new KeywordPair(open_round, OPEN_ROUND));
-    keywords.add(new KeywordPair(close_round, CLOSE_ROUND));
-    keywords.add(new KeywordPair(open_square, OPEN_SQUARE));
-    keywords.add(new KeywordPair(close_square, CLOSE_SQUARE));
+    keywords.add(new KeywordPair(open_round, str(OPEN_ROUND)));
+    keywords.add(new KeywordPair(close_round, str(CLOSE_ROUND)));
+    keywords.add(new KeywordPair(open_square, str(OPEN_SQUARE)));
+    keywords.add(new KeywordPair(close_square, str(CLOSE_SQUARE)));
 
     return keywords;
+  }
+
+  private String str(char c)
+  {
+    return Character.toString(c);
   }
 
   protected List<String> defineLeadingIdentifiers()
@@ -356,39 +369,84 @@ public class SixteenHighKeywords
     return STRUCT;
   }
 
-  public String openRound()
+  public char openRound()
   {
     return OPEN_ROUND;
   }
 
-  public String closeRound()
+  public char closeRound()
   {
     return CLOSE_ROUND;
   }
 
-  public String openSquare()
+  public char openSquare()
   {
     return OPEN_SQUARE;
   }
 
-  public String closeSquare()
+  public char closeSquare()
   {
     return CLOSE_SQUARE;
   }
+  
+  public char reference()
+  {
+    return REFERENCE;
+  }
 
-  public String push()
+  public char dereference()
+  {
+    return DEREFERENCE;
+  }
+
+  public char push()
   {
     return PUSH;
   }
 
-  public String pull()
+  public char pull()
   {
     return PULL;
   }
 
-  public String assign()
+  public char assign()
   {
     return ASSIGN;
+  }
+
+  public char dot()
+  {
+    return DOT;
+  }
+
+  public char at()
+  {
+    return AT;
+  }
+
+  public char interstatement()
+  {
+    return INTER_STATEMENT;
+  }
+
+  public char label()
+  {
+    return LABEL;
+  }
+
+  public String global()
+  {
+    return GLOBAL;
+  }
+
+  public char arraySeparator()
+  {
+    return ARRAY_SEPARATOR;
+  }
+
+  public String unit()
+  {
+    return Character.toString(AT);
   }
 
   public List<SixteenHighKeywordCode> getBitCompares()

@@ -298,6 +298,24 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
+  protected static void testCompoundVariable3()
+  {
+    String s = "struct @Struct\n" +
+               "    int**** x;\n" +
+               "end\n" +
+               "@Struct s\n" +
+               "*(*s[2].x[5])[4] = 6;\n";
+
+    SixteenHighTokeniser parser = createParser(s);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("int8**** p = 0;", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
   protected static void testUnsignedShiftRightExpression()
   {
     SixteenHighTokeniser parser = createParser("x = (5 + >>>d)");
@@ -838,6 +856,7 @@ public abstract class TokeniserTest
 //    testMultiplePointerVariable();
 //    testCompoundVariable1();
     testCompoundVariable2();
+    testCompoundVariable3();
 
     testSimple();
     testArrayDeclaration();

@@ -1265,7 +1265,7 @@ public class SixteenHighTokeniser
     }
   }
 
-  private ParseResult parseVariable(VariableExpressionPointer expressionPointer)
+  private ParseResult parseVariable2(VariableExpressionPointer expressionPointer)
   {
     int dereferenceCount = asteriskCount();
 
@@ -1281,16 +1281,21 @@ public class SixteenHighTokeniser
 
     if ((dereferenceCount > 0) || reference)
     {
-
       Tristate result = textParser.getExactCharacter(keywords.openRound());
       if (result == TRUE)
       {
-        VariableExpressionPointer variableExpressionPointer = new VariableExpressionPointer();
-        ParseResult parseResult = parseVariable(variableExpressionPointer);
+        ParseResult parseResult = parseVariable2(expressionPointer);
         if (parseResult.isTrue())
         {
-          expressablePointer.setExpression(variableExpressionPointer.variableExpression);
-          return _true();
+          result = textParser.getExactCharacter(keywords.closeRound());
+          if (result == TRUE)
+          {
+            return _true();
+          }
+          else if (result == ERROR)
+          {
+            return _error("Expected: '%s.", keywords.closeRound());
+          }
         }
         else
         {
@@ -1299,8 +1304,133 @@ public class SixteenHighTokeniser
       }
     }
 
+    return parseVariable2(expressionPointer, dereferenceCount, reference);
+  }
+
+  private ParseResult parseVariable2(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
+  {
+    StringZero registerNameZero = new StringZero();
+    ParseResult parseResult = blockIdentifier(registerNameZero, false);
+    if (parseResult.isFalseOrError())
+    {
+      return parseResult;
+    }
+
+    String registerName = registerNameZero.toString();
+    VariableMember variableMember = new VariableMember(registerName);
+    VariableTokenExpression variableExpression = new VariableTokenExpression(variableMember, dereferenceCount, reference);
+    for (; ; )
+    {
+      for (; ; )
+      {
+        Tristate result = textParser.getExactCharacter(keywords.openSquare());
+        if (result == TRUE)
+        {
+          ExpressablePointer expressablePointer = new ExpressablePointer();
+          parseResult = parseUnaryComponent(expressablePointer);
+          if (parseResult.isTrue())
+          {
+            result = textParser.getExactCharacter(keywords.closeSquare());
+            if (result == TRUE)
+            {
+              variableMember.addArrayIndex(expressablePointer.expression);
+            }
+            else if (result == ERROR)
+            {
+              return _error();
+            }
+            else
+            {
+              return _error("Expected: '%s'.", keywords.closeSquare());
+            }
+          }
+          else if (parseResult.isError())
+          {
+            return parseResult;
+          }
+          else
+          {
+            return _error("Expected Expression.");
+          }
+        }
+        else if (result == ERROR)
+        {
+          return _error();
+        }
+        else
+        {
+          break;
+        }
+      }
+
+      Tristate result = textParser.getExactCharacter(keywords.dot());
+      if (result == TRUE)
+      {
+        StringZero memberNameZero = new StringZero();
+        result = textParser.getIdentifier(memberNameZero, true);
+        if (result == TRUE)
+        {
+          variableMember = new VariableMember(memberNameZero.toString());
+          variableExpression.addMember(variableMember);
+        }
+        else if (result == ERROR)
+        {
+          return _error();
+        }
+        else
+        {
+          return _error("Expected identifier.");
+        }
+      }
+      else if (result == ERROR)
+      {
+        return _error();
+      }
+      else
+      {
+        break;
+      }
+    }
+    expressionPointer.setVariableExpression(variableExpression);
+    return _true();
+  }
+
+  private ParseResult parseVariable(VariableExpressionPointer expressionPointer)
+  {
+    int dereferenceCount = asteriskCount();
+
+    boolean reference = false;
+    if (dereferenceCount == 0)
+    {
+      Tristate result = textParser.getExactCharacter(keywords.reference(), false);
+      if (result == TRUE)
+      {
+        reference = true;
+      }
+    }
+
     return parseVariable(expressionPointer, dereferenceCount, reference);
   }
+
+/*
+
+struct SXX
+{
+    int**** a;
+};
+
+struct SYY
+{
+    SXX* x;
+};
+
+void test(void)
+{
+    SYY yy[3];
+    *(**(yy[2].x[5].a))[4] = 6;
+}
+
+ */
 
   private ParseResult parseVariable(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
   {
@@ -1336,7 +1466,7 @@ public class SixteenHighTokeniser
             }
             else
             {
-              return _error("Expected: '].");
+              return _error("Expected: '%s.", keywords.closeSquare());
             }
           }
           else if (parseResult.isError())
@@ -1393,7 +1523,7 @@ public class SixteenHighTokeniser
   private ParseResult parseStatementStartingWithVariable()
   {
     VariableExpressionPointer expressionPointer = new VariableExpressionPointer();
-    ParseResult parseResult = parseVariable(expressionPointer);
+    ParseResult parseResult = parseVariable2(expressionPointer);
     if (parseResult.isFalseOrError())
     {
       return parseResult;

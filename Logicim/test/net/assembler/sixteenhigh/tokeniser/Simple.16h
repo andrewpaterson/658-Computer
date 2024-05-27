@@ -1,27 +1,33 @@
-@sum_even_and_odd:
-	int16 i; int16 number; int16 even; int16 odd
-	number = 10; i = 0; even = 0; odd = 0
-	bool b
-loop:
-	b = i
-	b %= 2
-	b ?
-	if= go even_
-	odd += i
-	go done
-even_:
-	even += i
-done:
-	i++; number ?- i
-	if> go loop
-	> odd
-	> even
-	gosub @print_pair
-	return
+func @print_pair(int16 odd, int16 even):uint16
 end
 
-@@main:
-	gosub @sum_even_and_odd
-	return
+func @sum_even_and_odd()
+	int16 i; int16 number; int16 even; int16 odd;
+	number = 10; i = 0; even = 0; odd = 0;
+	bool b;
+	flag p;
+#loop:
+	b = i;
+	p:b %= 2;
+	if p.z #even;
+	odd += i
+	#done;
+#even:
+	even += i
+#done:
+	i++;
+	p:number - i;
+	if !p.n go #loop
+	
+	p.v:1;
+	if !p.n go loop
+	
+	uint16 result;
+	result = @print_pair(odd, even);
+end
+
+func @@main(char** szArguments, uint16 uiArguments):int32
+	@sum_even_and_odd
+	return 0
 end
 

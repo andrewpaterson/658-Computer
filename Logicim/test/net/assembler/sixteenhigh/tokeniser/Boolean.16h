@@ -1,5 +1,12 @@
 func @@main()
+	flag p;
+	bool b1; bool b2; bool b3;
+	b1 = true;
+	b2 = false;
+	p:b3 = b1 & b2;
+	if(p)=0 go label;
 	uint16 x = 3;
+#label:
 	uint16 y = 2;
 	flag q;
 	uint8[3][5] a2d = [[0,0,0,0,0][1,1,1,1,1][2,2,2,2,2]];
@@ -7,6 +14,7 @@ func @@main()
 	int32 c = (a2d[y][a1d[y]] * 3);
 	a1d[2] = 66;
 	a2d[y][x]= 22;
-	q.v=0;
+	q.c = 1; q.z = 1;
+	#label;
 end
 

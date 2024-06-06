@@ -19797,16 +19797,17 @@
 			)
 		)
 		(property "Garbage" "74LVC125A - Quad buffer/line driver with 5 V tolerant input/outputs; 3-state@en-us"
-			(at 0 0 0)
+			(at 19.558 -33.274 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
 		(symbol "74LVC125AD,112_0_0"
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -17.78 180)
 				(length 5.08)
 				(name "4Y"
@@ -19860,7 +19861,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -2.54 180)
 				(length 5.08)
 				(name "1Y"
@@ -19896,7 +19897,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -7.62 180)
 				(length 5.08)
 				(name "2Y"
@@ -19914,7 +19915,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -12.7 180)
 				(length 5.08)
 				(name "3Y"
@@ -20374,16 +20375,17 @@
 			)
 		)
 		(property "Garbage" "74LVC125A-Q100 - Quad buffer/line driver with 5 V tolerant input/outputs; 3-state@en-us"
-			(at 0 0 0)
+			(at 6.096 -32.512 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
 		(symbol "74LVC125APW-Q100J_0_0"
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -17.78 180)
 				(length 5.08)
 				(name "4Y"
@@ -20437,7 +20439,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -2.54 180)
 				(length 5.08)
 				(name "1Y"
@@ -20473,7 +20475,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -7.62 180)
 				(length 5.08)
 				(name "2Y"
@@ -20491,7 +20493,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 25.4 -12.7 180)
 				(length 5.08)
 				(name "3Y"
@@ -20944,52 +20946,17 @@
 			)
 		)
 		(property "Garbage" "74LVC126A-Q100 - Quad buffer/line driver with 5 V tolerant input/outputs; 3-state@en-us"
-			(at 0 0 0)
+			(at 24.638 -46.736 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
 		(symbol "74LVC126AD-Q100J_0_0"
-			(pin input line
-				(at 0 0 0)
-				(length 5.08)
-				(name "~{1OE}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at 0 -10.16 0)
-				(length 5.08)
-				(name "~{3OE}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
+			(pin tri_state line
 				(at 27.94 -17.78 180)
 				(length 5.08)
 				(name "4Y"
@@ -21026,24 +20993,6 @@
 				)
 			)
 			(pin input line
-				(at 0 -15.24 0)
-				(length 5.08)
-				(name "~{4OE}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "13"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
 				(at 0 -2.54 0)
 				(length 5.08)
 				(name "1A"
@@ -21061,7 +21010,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 27.94 -2.54 180)
 				(length 5.08)
 				(name "1Y"
@@ -21072,24 +21021,6 @@
 					)
 				)
 				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at 0 -5.08 0)
-				(length 5.08)
-				(name "~{2OE}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -21115,7 +21046,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 27.94 -7.62 180)
 				(length 5.08)
 				(name "2Y"
@@ -21133,7 +21064,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin tri_state line
 				(at 27.94 -12.7 180)
 				(length 5.08)
 				(name "3Y"
@@ -21373,6 +21304,60 @@
 			)
 		)
 		(symbol "74LVC126AD-Q100J_1_0"
+			(pin input line
+				(at 0 0 0)
+				(length 5.08)
+				(name "1OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "3OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -15.24 0)
+				(length 5.08)
+				(name "4OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin passive line
 				(at 27.94 0 180)
 				(length 5.08) hide
@@ -21384,6 +21369,594 @@
 					)
 				)
 				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "2OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -20.32 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol "74LVC126APW-Q100J "
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 13.97 5.715 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC126APW-Q100J "
+			(at 13.97 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
+			(at 23.495 -26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 23.495 -28.575 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "4-bit line driver"
+			(at 13.97 -23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.75"
+			(at 23.495 -33.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "771-74LVC126APW-Q100J "
+			(at 23.495 -36.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.za/ProductDetail/Nexperia/74LVC126APW-Q100J?qs=8qdoF%2F2f1vq42K5FSPkajw%3D%3D"
+			(at 23.495 -38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 23.495 -41.275 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "74LVC126APW-Q100J "
+			(at 23.495 -43.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "74LVC126"
+			(at 13.716 -25.908 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "74LVC126APW-Q100J _0_0"
+			(pin tri_state line
+				(at 27.94 -17.78 180)
+				(length 5.08)
+				(name "4Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -17.78 0)
+				(length 5.08)
+				(name "4A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "1A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 27.94 -2.54 180)
+				(length 5.08)
+				(name "1Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -7.62 0)
+				(length 5.08)
+				(name "2A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 27.94 -7.62 180)
+				(length 5.08)
+				(name "2Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 27.94 -12.7 180)
+				(length 5.08)
+				(name "3Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -12.7 0)
+				(length 5.08)
+				(name "3A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "74LVC126APW-Q100J _0_1"
+			(polyline
+				(pts
+					(xy 10.795 -17.78) (xy 12.7 -17.78)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 10.795 -12.7) (xy 12.7 -12.7)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 10.795 -7.62) (xy 12.7 -7.62)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 10.795 -2.54) (xy 12.7 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 15.24 -17.78) (xy 17.145 -17.78)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 15.24 -12.7) (xy 17.145 -12.7)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 15.24 -7.62) (xy 17.145 -7.62)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 15.24 -2.54) (xy 17.145 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 12.7 -18.796) (xy 15.24 -17.78) (xy 12.7 -16.764)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 12.7 -13.716) (xy 15.24 -12.7) (xy 12.7 -11.684)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 12.7 -8.636) (xy 15.24 -7.62) (xy 12.7 -6.604)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 12.7 -3.556) (xy 15.24 -2.54) (xy 12.7 -1.524)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 22.86 1.905) (xy 22.86 -22.225) (xy 5.08 -22.225) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start 12.7 -16.764)
+				(end 12.7 -18.796)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start 12.7 -11.684)
+				(end 12.7 -13.716)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start 12.7 -6.604)
+				(end 12.7 -8.636)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start 12.7 -1.524)
+				(end 12.7 -3.556)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LVC126APW-Q100J _1_0"
+			(pin input line
+				(at 0 0 0)
+				(length 5.08)
+				(name "1OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "3OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -15.24 0)
+				(length 5.08)
+				(name "4OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 27.94 0 180)
+				(length 5.08) hide
+				(name "3V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "2OE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -29342,7 +29915,7 @@
 			)
 		)
 		(property "Garbage" "74LVC16244A; 74LVCH16244A - 16-bit buffer/line driver; 5 V input/output tolerant; 3-state@en-us"
-			(at 0 0 0)
+			(at 9.144 -32.512 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34647,15 +35220,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "NXP 74LVC1G04GV,125 Inverter, 1.65  5.5 V, 5-Pin SC-74A"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "74LVC1G04GV,125_0_0"
 			(pin no_connect line
 				(at 25.4 -5.08 180)
@@ -38289,11 +38853,12 @@
 			)
 		)
 		(property "Garbage" "74LVC1G79 - Single D-type flip-flop; positive-edge trigger@en-us"
-			(at 0 0 0)
+			(at 24.13 -31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -39585,11 +40150,12 @@
 			)
 		)
 		(property "Garbage" "74LVC257A - Quad 2-input multiplexer with 5 V tolerant inputs/outputs; 3-state@en-us"
-			(at 0 0 0)
+			(at 23.876 -52.832 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -39641,24 +40207,6 @@
 					)
 				)
 				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 25.4 -17.78 180)
-				(length 5.08)
-				(name "4Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "12"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -39774,24 +40322,6 @@
 					)
 				)
 			)
-			(pin output line
-				(at 25.4 -10.16 180)
-				(length 5.08)
-				(name "1Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin input line
 				(at 0 -7.62 0)
 				(length 5.08)
@@ -39828,24 +40358,6 @@
 					)
 				)
 			)
-			(pin output line
-				(at 25.4 -12.7 180)
-				(length 5.08)
-				(name "2Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin passive line
 				(at 0 -25.4 0)
 				(length 5.08) hide
@@ -39857,24 +40369,6 @@
 					)
 				)
 				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 25.4 -15.24 180)
-				(length 5.08)
-				(name "3Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -39894,6 +40388,80 @@
 				)
 				(fill
 					(type background)
+				)
+			)
+		)
+		(symbol "74LVC257AD,118_1_0"
+			(pin tri_state line
+				(at 25.4 -17.78 180)
+				(length 5.08)
+				(name "4Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -10.16 180)
+				(length 5.08)
+				(name "1Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -12.7 180)
+				(length 5.08)
+				(name "2Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -15.24 180)
+				(length 5.08)
+				(name "3Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
 				)
 			)
 		)
@@ -40000,11 +40568,12 @@
 			)
 		)
 		(property "Garbage" "NEXPERIA - 74LVC157APW,118 - MUX, QUAD, 8 I/P, TSSOP-16"
-			(at 0 0 0)
+			(at 24.13 -53.848 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -40056,24 +40625,6 @@
 					)
 				)
 				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 25.4 -17.78 180)
-				(length 5.08)
-				(name "4Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "12"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -40171,24 +40722,6 @@
 					)
 				)
 			)
-			(pin output line
-				(at 25.4 -10.16 180)
-				(length 5.08)
-				(name "1Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin input line
 				(at 0 -7.62 0)
 				(length 5.08)
@@ -40225,24 +40758,6 @@
 					)
 				)
 			)
-			(pin output line
-				(at 25.4 -12.7 180)
-				(length 5.08)
-				(name "2Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin passive line
 				(at 0 -25.4 0)
 				(length 5.08) hide
@@ -40254,24 +40769,6 @@
 					)
 				)
 				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 25.4 -15.24 180)
-				(length 5.08)
-				(name "3Y"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -40295,6 +40792,24 @@
 			)
 		)
 		(symbol "74LVC257APW,118_1_0"
+			(pin tri_state line
+				(at 25.4 -17.78 180)
+				(length 5.08)
+				(name "4Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input inverted
 				(at 0 0 0)
 				(length 5.08)
@@ -40306,6 +40821,60 @@
 					)
 				)
 				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -10.16 180)
+				(length 5.08)
+				(name "1Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -12.7 180)
+				(length 5.08)
+				(name "2Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -15.24 180)
+				(length 5.08)
+				(name "3Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)

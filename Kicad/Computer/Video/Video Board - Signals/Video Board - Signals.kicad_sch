@@ -28639,6 +28639,17 @@
 		)
 		(uuid "2a32615b-dfae-40ab-9b38-4e97cb90a098")
 	)
+	(label "GND"
+		(at -368.3 161.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2a3c5b77-e2f5-4737-bd10-6ae91f3c600d")
+	)
 	(label "Horizontal Sync"
 		(at 46.99 383.54 180)
 		(fields_autoplaced yes)
@@ -29299,6 +29310,17 @@
 		)
 		(uuid "37ecff81-03e4-445e-803a-ca27c0b0dcf0")
 	)
+	(label "GND"
+		(at -368.3 176.53 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3875c873-908b-4ecf-9de1-ec14fc3e994e")
+	)
 	(label "D1"
 		(at -229.87 -10.16 270)
 		(fields_autoplaced yes)
@@ -29584,6 +29606,17 @@
 			(justify right bottom)
 		)
 		(uuid "3f71c56d-6b97-4ab8-beb5-23d4babb53ea")
+	)
+	(label "GND"
+		(at -368.3 171.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3f82056a-cd67-44c2-bc3c-79a8b67a690b")
 	)
 	(label "Row6"
 		(at -57.15 414.02 180)
@@ -31620,6 +31653,17 @@
 		)
 		(uuid "72bb7e33-b24e-4166-af84-a55105d40da8")
 	)
+	(label "GND"
+		(at -368.3 163.83 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7318a918-f08e-471e-8347-ac6e2b785ab2")
+	)
 	(label "~{RD}_{M}"
 		(at -224.79 177.8 180)
 		(fields_autoplaced yes)
@@ -33050,6 +33094,17 @@
 		)
 		(uuid "95a174e8-6034-4f08-8bac-9b77e9ebe123")
 	)
+	(label "GND"
+		(at -368.3 166.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "961a817f-ed6b-48e5-9b95-cb7e63369fc6")
+	)
 	(label "A19_{M}"
 		(at -201.93 165.1 0)
 		(fields_autoplaced yes)
@@ -34403,6 +34458,17 @@
 		)
 		(uuid "b7a00793-e114-46a3-ab21-01e80c487f1d")
 	)
+	(label "GND"
+		(at -368.3 168.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7ab3e6c-b6a6-445f-a937-92343a1f2b16")
+	)
 	(label "Memory Frame"
 		(at -332.74 176.53 0)
 		(fields_autoplaced yes)
@@ -35690,6 +35756,17 @@
 		)
 		(uuid "d8d85019-b881-49e4-ba74-e85ff248de30")
 	)
+	(label "GND"
+		(at -368.3 173.99 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d992437b-958a-4cff-a1b9-01e376eabb73")
+	)
 	(label "Read Flags"
 		(at 66.04 76.2 0)
 		(fields_autoplaced yes)
@@ -35920,6 +35997,17 @@
 			(justify right bottom)
 		)
 		(uuid "de6ef65a-314f-4fc6-99c9-dea01dd53dc5")
+	)
+	(label "GND"
+		(at -368.3 158.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "de8db0ec-79a1-4699-ac41-5cce2fe88b18")
 	)
 	(label "~{Horizontal Back Porch Start} _{CMP}"
 		(at -161.29 351.79 180)
@@ -38535,7 +38623,7 @@
 				)
 			)
 		)
-		(property "Value" "?μF"
+		(property "Value" "1μF"
 			(at 160.02 205.74 0)
 			(effects
 				(font
@@ -43723,6 +43811,91 @@
 			(project "Video Board - Signals"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x08_Pin")
+		(at -373.38 166.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f166cee1-f171-464a-8ccf-e135d2c057d5")
+		(property "Reference" "J6"
+			(at -373.38 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x08_Pin"
+			(at -373.38 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical"
+			(at -373.38 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at -373.38 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at -373.38 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "002f4525-0392-49b7-9b44-307da7219b1c")
+		)
+		(pin "2"
+			(uuid "414bc0df-aef3-4a93-98c6-691ec5614d78")
+		)
+		(pin "3"
+			(uuid "2848cd67-57da-4c83-95c1-1498502de1e0")
+		)
+		(pin "4"
+			(uuid "e0cf2e37-f2cf-46f7-96c4-09f92c3d8047")
+		)
+		(pin "5"
+			(uuid "a47a3234-1b62-475f-bda6-c2d969b4df6a")
+		)
+		(pin "6"
+			(uuid "70cb8f85-c254-4572-82a7-0dfac1de0e0e")
+		)
+		(pin "7"
+			(uuid "54fe4dcc-5bf3-4007-a714-2751d06a9f53")
+		)
+		(pin "8"
+			(uuid "97351459-47cb-430d-93f2-3fe32ed50462")
+		)
+		(instances
+			(project "Video Board - Signals"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J6")
 					(unit 1)
 				)
 			)

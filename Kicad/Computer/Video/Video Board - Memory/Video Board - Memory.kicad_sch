@@ -13524,6 +13524,17 @@
 		)
 		(uuid "0bb5f20d-aeaf-4a13-a775-4928e5cb7552")
 	)
+	(label "GND"
+		(at 57.15 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0be79846-b84b-4b06-8d9a-a12be32990cf")
+	)
 	(label "5V"
 		(at 378.46 -45.72 180)
 		(fields_autoplaced yes)
@@ -13765,6 +13776,17 @@
 			(justify right bottom)
 		)
 		(uuid "1139475b-9ab9-4b90-affe-7b8547189765")
+	)
+	(label "GND"
+		(at 57.15 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1148aca3-57fe-48da-b4ce-36a299c59f87")
 	)
 	(label "Memory Frame"
 		(at 88.9 93.98 0)
@@ -14823,6 +14845,17 @@
 		(uuid "2b0277c6-4b07-4ff8-81f1-f8d0e6f960ab")
 	)
 	(label "GND"
+		(at 57.15 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2b0cc5a7-0403-4adb-8142-5ecb74c933a8")
+	)
+	(label "GND"
 		(at 598.17 -172.72 0)
 		(fields_autoplaced yes)
 		(effects
@@ -15261,6 +15294,17 @@
 			(justify right bottom)
 		)
 		(uuid "374f3825-c60e-47e6-b1f9-a6a740250952")
+	)
+	(label "GND"
+		(at 57.15 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "375c2530-6cf1-434d-bdd0-42668b7b701e")
 	)
 	(label "A1"
 		(at 298.45 41.91 180)
@@ -18749,6 +18793,17 @@
 		)
 		(uuid "8770bba7-bb2a-46ff-97e1-39123126bbb4")
 	)
+	(label "GND"
+		(at 57.15 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8783a585-8f30-4366-b9d7-f9595feee38d")
+	)
 	(label "Blue7"
 		(at 123.19 60.96 0)
 		(fields_autoplaced yes)
@@ -19727,6 +19782,17 @@
 			(justify right bottom)
 		)
 		(uuid "a0048274-47c7-422d-adca-d54cee0bfcad")
+	)
+	(label "GND"
+		(at 57.15 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a03c37e0-7d41-4e74-9353-d9de72b4de1a")
 	)
 	(label "A13_{M}"
 		(at 438.15 -144.78 180)
@@ -21048,6 +21114,17 @@
 		)
 		(uuid "c395af73-8793-4569-a8f9-483a3be23827")
 	)
+	(label "GND"
+		(at 57.15 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c3abe84f-ccd7-45db-ab98-169f049818c8")
+	)
 	(label "~{EP1}"
 		(at 679.45 21.59 0)
 		(fields_autoplaced yes)
@@ -21685,6 +21762,17 @@
 			(justify left bottom)
 		)
 		(uuid "d2d4a325-f6e8-4da6-89c3-d23473e240d1")
+	)
+	(label "GND"
+		(at 57.15 99.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d2f406e3-13bd-4db3-aaee-86566e1f91b0")
 	)
 	(label "~{EG0}"
 		(at 378.46 -175.26 180)
@@ -28623,6 +28711,91 @@
 			(project "Video Board - Memory"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x08_Pin")
+		(at 52.07 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dedd2925-c652-4600-8262-e763f8ad009c")
+		(property "Reference" "J5"
+			(at 52.07 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x08_Pin"
+			(at 52.07 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x04_P2.54mm_Vertical"
+			(at 52.07 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 52.07 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at 52.07 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bb888209-f6b9-4294-9176-d0750b70a460")
+		)
+		(pin "2"
+			(uuid "46e8479f-d323-4f0f-bc31-1ce9fb198efe")
+		)
+		(pin "3"
+			(uuid "9a08937f-e922-4ef4-811b-2665d5c10396")
+		)
+		(pin "4"
+			(uuid "ce59fa78-2246-41e0-8930-7f8c0d983a19")
+		)
+		(pin "5"
+			(uuid "bed0dde1-b90a-4bd9-a361-0c543dcb3642")
+		)
+		(pin "6"
+			(uuid "eb73ab39-3258-4663-bf85-9b6af30cbb37")
+		)
+		(pin "7"
+			(uuid "c9a0fec0-3410-46c2-b84f-a65bd90361d9")
+		)
+		(pin "8"
+			(uuid "9d2fcb63-c0de-4a28-8451-ec3df537d751")
+		)
+		(instances
+			(project "Video Board - Memory"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J5")
 					(unit 1)
 				)
 			)

@@ -452,11 +452,12 @@
 				)
 			)
 			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 0 0 0)
+				(at 21.59 -37.592 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -13406,10 +13407,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -48.26 180)
+				(pin no_connect line
+					(at -5.08 -48.26 0)
 					(length 5.08) hide
-					(name "HC_Latch_{2}"
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13425,9 +13426,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -45.72 180)
+					(at 35.56 -25.4 180)
 					(length 5.08) hide
-					(name "HC_Latch_{3}"
+					(name "CLK_Low_Pulse"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13442,10 +13443,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at -5.08 -48.26 0)
-					(length 5.08) hide
-					(name "N.C."
+				(pin input inverted
+					(at -5.08 -5.08 0)
+					(length 5.08)
+					(name "~{Hold_Low}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13478,10 +13479,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -22.86 180)
+				(pin output inverted
+					(at 35.56 -33.02 180)
 					(length 5.08) hide
-					(name "CLK_High_Pulse"
+					(name "~{HC=CC}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13496,10 +13497,10 @@
 						)
 					)
 				)
-				(pin output inverted
-					(at 35.56 -33.02 180)
+				(pin output line
+					(at 35.56 -30.48 180)
 					(length 5.08) hide
-					(name "~{HC=CC}"
+					(name "HC=CC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13514,10 +13515,10 @@
 						)
 					)
 				)
-				(pin input inverted
-					(at -5.08 -5.08 0)
-					(length 5.08)
-					(name "~{Hold_Low}"
+				(pin output line
+					(at 35.56 -22.86 180)
+					(length 5.08) hide
+					(name "CLK_High_Pulse"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13533,9 +13534,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -30.48 180)
+					(at 35.56 -35.56 180)
 					(length 5.08) hide
-					(name "HC=CC"
+					(name "Clk_Count_{3}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13569,9 +13570,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -50.8 180)
+					(at 35.56 -38.1 180)
 					(length 5.08) hide
-					(name "HC_Latch_{1}"
+					(name "Clk_Count_{2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13587,9 +13588,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -53.34 180)
+					(at 35.56 -40.64 180)
 					(length 5.08) hide
-					(name "HC_Latch_{0}"
+					(name "Clk_Count_{1}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13604,10 +13605,10 @@
 						)
 					)
 				)
-				(pin output inverted_clock
-					(at 35.56 -15.24 180)
-					(length 5.08)
-					(name "~{PHI2}"
+				(pin output line
+					(at 35.56 -43.18 180)
+					(length 5.08) hide
+					(name "Clk_Count_{0}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13640,10 +13641,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -35.56 180)
-					(length 5.08) hide
-					(name "Clk_Count_{3}"
+				(pin output inverted_clock
+					(at 35.56 -15.24 180)
+					(length 5.08)
+					(name "~{PHI2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13659,9 +13660,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -38.1 180)
+					(at 35.56 -45.72 180)
 					(length 5.08) hide
-					(name "Clk_Count_{2}"
+					(name "HC_Latch_{3}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13695,9 +13696,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -40.64 180)
+					(at 35.56 -48.26 180)
 					(length 5.08) hide
-					(name "Clk_Count_{1}"
+					(name "HC_Latch_{2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13712,10 +13713,10 @@
 						)
 					)
 				)
-				(pin input inverted
-					(at -5.08 -7.62 0)
+				(pin output clock
+					(at 35.56 -17.78 180)
 					(length 5.08)
-					(name "~{Hold_High}"
+					(name "CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13731,9 +13732,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -43.18 180)
+					(at 35.56 -50.8 180)
 					(length 5.08) hide
-					(name "Clk_Count_{0}"
+					(name "HC_Latch_{1}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13749,9 +13750,9 @@
 					)
 				)
 				(pin output line
-					(at 35.56 -25.4 180)
+					(at 35.56 -53.34 180)
 					(length 5.08) hide
-					(name "CLK_Low_Pulse"
+					(name "HC_Latch_{0}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13766,10 +13767,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -12.7 180)
+				(pin input inverted
+					(at -5.08 0 0)
 					(length 5.08)
-					(name "PHI2"
+					(name "~{Reset}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13784,10 +13785,10 @@
 						)
 					)
 				)
-				(pin output clock
-					(at 35.56 -17.78 180)
+				(pin input inverted
+					(at -5.08 -7.62 0)
 					(length 5.08)
-					(name "CLK"
+					(name "~{Hold_High}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13820,10 +13821,10 @@
 						)
 					)
 				)
-				(pin output inverted_clock
-					(at 35.56 -20.32 180)
+				(pin input inverted
+					(at -5.08 -2.54 0)
 					(length 5.08)
-					(name "~{CLK}"
+					(name "~{CLK}_{IN}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13838,10 +13839,10 @@
 						)
 					)
 				)
-				(pin input inverted
-					(at -5.08 -2.54 0)
+				(pin output inverted_clock
+					(at 35.56 -20.32 180)
 					(length 5.08)
-					(name "~{CLK}_{IN}"
+					(name "~{CLK}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13856,10 +13857,10 @@
 						)
 					)
 				)
-				(pin input inverted
-					(at -5.08 0 0)
+				(pin output line
+					(at 35.56 -12.7 180)
 					(length 5.08)
-					(name "~{Reset}"
+					(name "PHI2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -16194,11 +16195,12 @@
 				)
 			)
 			(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-				(at 0 0 0)
+				(at 27.94 -32.004 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -28747,11 +28749,12 @@
 			)
 		)
 		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at -91.44 213.36 0)
+			(at -69.85 250.952 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -31072,7 +31075,7 @@
 		(dnp no)
 		(uuid "f01bd135-5e8c-4a0f-b3fb-a8d9c5ac2af3")
 		(property "Reference" "IC3"
-			(at -78.105 177.8 0)
+			(at -78.74 178.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31158,11 +31161,12 @@
 			)
 		)
 		(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-			(at -86.36 182.88 0)
+			(at -58.42 214.884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)

@@ -1,12 +1,12 @@
-%TF.GenerationSoftware,KiCad,Pcbnew,7.0.5*%
-%TF.CreationDate,2024-02-15T21:19:00+02:00*%
+%TF.GenerationSoftware,KiCad,Pcbnew,8.0.2*%
+%TF.CreationDate,2024-06-06T17:24:42+02:00*%
 %TF.ProjectId,HCP65 MPU Address Decode,48435036-3520-44d5-9055-204164647265,V1*%
 %TF.SameCoordinates,PX525bfc0PY43d3480*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.5) date 2024-02-15 21:19:00*
+G04 Created by KiCad (PCBNEW 8.0.2) date 2024-06-06 17:24:42*
 %MOMM*%
 %LPD*%
 G01*

@@ -34,7 +34,7 @@
 					)
 				)
 			)
-			(property "Footprint" "395098520350"
+			(property "Footprint" "SamacSys_Parts:395098520350"
 				(at 44.45 -129.54 0)
 				(effects
 					(font
@@ -2631,15 +2631,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "capacitor cap"
 				(at 0 0 0)
 				(effects
@@ -2723,7 +2714,7 @@
 				)
 			)
 		)
-		(symbol "HCP65:C_Polarized"
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -2740,35 +2731,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "C_Polarized"
-				(at 4.445 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "?μF"
+			(property "Value" "?μF"
 				(at 0.635 -2.54 0)
 				(effects
 					(font
@@ -2777,8 +2740,8 @@
 					(justify left)
 				)
 			)
-			(property "Garbage" "Polarized capacitor"
-				(at 0 0 0)
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2786,7 +2749,26 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "cap capacitor"
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2804,7 +2786,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_Polarized_0_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
 				(rectangle
 					(start -2.286 0.508)
 					(end 2.286 1.016)
@@ -2852,7 +2834,7 @@
 					)
 				)
 			)
-			(symbol "C_Polarized_1_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -8354,34 +8336,31 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "LED"
-				(at -1.27 3.175 0)
+				(at 0 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "LED"
-				(at 5.715 -5.715 0)
+			(property "Value" "Colour"
+				(at 0 -2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
 					(hide yes)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
+			(property "Datasheet" ""
 				(at 6.35 -7.62 90)
 				(effects
 					(font
@@ -8390,16 +8369,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Colour"
+			(property "Description" ""
 				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Garbage" "Light emitting diode, small symbol, filled shape"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -9564,7 +9535,7 @@
 				)
 			)
 			(property "Description" "Selector 12bit"
-				(at 15.24 -29.845 0)
+				(at 15.24 -30.48 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -9572,7 +9543,7 @@
 				)
 			)
 			(property "Silkscreen" "Selector 12bit"
-				(at 15.24 -32.385 0)
+				(at 15.24 -33.02 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -11497,7 +11468,7 @@
 					)
 				)
 			)
-			(property "Footprint" "5408803224008"
+			(property "Footprint" "SamacSys_Parts:5408803224008"
 				(at 41.275 -69.215 0)
 				(effects
 					(font
@@ -11585,11 +11556,12 @@
 				)
 			)
 			(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
-				(at 0 0 0)
+				(at 41.402 -79.502 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -12212,7 +12184,7 @@
 					)
 				)
 			)
-			(property "Footprint" "LD1117S33C"
+			(property "Footprint" "SamacSys_Parts:LD1117S33C"
 				(at 27.94 -16.51 0)
 				(effects
 					(font
@@ -12282,11 +12254,12 @@
 				)
 			)
 			(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-				(at 0 0 0)
+				(at 27.94 -32.004 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -27288,6 +27261,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Mounting Hole with connection"
+			(at 45.72 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "86c18491-ec7a-4c51-9fa8-d023f31496b3")
 		)
@@ -27899,6 +27881,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Mounting Hole with connection"
+			(at 58.42 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "58b14ab9-4115-4e25-b3fc-9a4893d9e7f0")
 		)
@@ -28111,7 +28102,7 @@
 		(dnp no)
 		(uuid "3da60c97-788a-4a9a-9ddd-40507a98e200")
 		(property "Reference" "IC1"
-			(at 43.815 255.27 0)
+			(at 43.18 255.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28127,7 +28118,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LD1117S33C"
+		(property "Footprint" "SamacSys_Parts:LD1117S33C"
 			(at 63.5 276.86 0)
 			(effects
 				(font
@@ -28193,6 +28184,16 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
+			(at 63.5 292.354 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -28351,6 +28352,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Flags Interrupt"
+			(at 187.96 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0e7fcfbb-3bcc-4681-8af0-3ebf84f454b1")
 		)
@@ -28501,7 +28511,7 @@
 			)
 		)
 		(property "Description" "Selector 12bit"
-			(at 388.62 89.535 0)
+			(at 388.62 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28509,7 +28519,7 @@
 			)
 		)
 		(property "Silkscreen" "Selector 12bit"
-			(at 388.62 92.075 0)
+			(at 388.62 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28873,6 +28883,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Clock Hold Standard"
+			(at 97.79 335.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "43ecbec4-6d97-460b-8308-dddc8028aa69")
 		)
@@ -29145,7 +29164,7 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at 26.67 264.16 0)
 		(mirror y)
 		(unit 1)
@@ -29155,7 +29174,7 @@
 		(dnp no)
 		(uuid "85428728-7473-4a3b-b4e8-4fe206cb3e51")
 		(property "Reference" "C12"
-			(at 30.48 265.43 90)
+			(at 26.035 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29163,18 +29182,17 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C_Polarized"
-			(at 22.225 272.415 0)
+		(property "Value" "10μF"
+			(at 26.035 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at 25.7048 267.97 0)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 26.67 275.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29182,7 +29200,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 21.59 269.24 0)
 			(effects
 				(font
@@ -29191,13 +29209,14 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10μF"
+		(property "Description" ""
 			(at 26.035 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -29228,7 +29247,7 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at 59.69 264.16 0)
 		(mirror y)
 		(unit 1)
@@ -29238,7 +29257,7 @@
 		(dnp no)
 		(uuid "879c2e11-355e-4246-b6f5-18cb2c2e7cea")
 		(property "Reference" "C12"
-			(at 63.5 265.43 90)
+			(at 59.055 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29246,18 +29265,17 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C_Polarized"
-			(at 55.245 272.415 0)
+		(property "Value" "100μF"
+			(at 59.055 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at 58.7248 267.97 0)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 59.69 275.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29265,7 +29283,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 54.61 269.24 0)
 			(effects
 				(font
@@ -29274,13 +29292,14 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "100μF"
+		(property "Description" ""
 			(at 59.055 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -29561,6 +29580,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Device Buffer"
+			(at 97.79 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "42"
 			(uuid "2369b5e0-e74d-4944-9a30-15f679a81bbc")
 		)
@@ -29823,6 +29851,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Device Decode Stage B"
+			(at 373.38 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7eb775af-49be-47de-af40-ff0af9e31fae")
 		)
@@ -29981,6 +30018,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Mounting Hole with connection"
+			(at 33.02 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8b2700ea-3bda-49bb-b3ae-0cc35e7dc802")
 		)
@@ -30019,7 +30065,7 @@
 				)
 			)
 		)
-		(property "Footprint" "5408803224008"
+		(property "Footprint" "SamacSys_Parts:5408803224008"
 			(at 224.155 352.425 0)
 			(effects
 				(font
@@ -30103,6 +30149,16 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
+			(at 224.282 362.712 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -30256,7 +30312,7 @@
 			)
 		)
 		(property "Description" "Selector 12bit"
-			(at 388.62 173.355 0)
+			(at 388.62 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30264,7 +30320,7 @@
 			)
 		)
 		(property "Silkscreen" "Selector 12bit"
-			(at 388.62 175.895 0)
+			(at 388.62 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30524,6 +30580,15 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 35.56 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
@@ -31215,34 +31280,31 @@
 		(dnp no)
 		(uuid "f3a9aa58-1af1-4a06-ac33-4b9b32762902")
 		(property "Reference" "LED1"
-			(at 74.295 267.97 0)
+			(at 74.295 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "LED"
-			(at 65.405 276.225 0)
+		(property "Value" "Red"
+			(at 68.58 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+			(at 66.04 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
-			(at 71.12 270.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 63.5 276.86 90)
 			(effects
 				(font
@@ -31251,12 +31313,13 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Colour"
+		(property "Description" ""
 			(at 68.58 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "1"

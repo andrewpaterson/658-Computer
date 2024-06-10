@@ -10,7 +10,7 @@
 		(rev "V0")
 	)
 	(lib_symbols
-		(symbol "Bourns:4609X-101-472LF"
+		(symbol "Bourns:4609X-101-682LF"
 			(pin_names
 				(offset 0.762)
 			)
@@ -25,7 +25,7 @@
 					)
 				)
 			)
-			(property "Value" "4609X-101-472LF"
+			(property "Value" "4609X-101-682LF"
 				(at 8.255 3.175 0)
 				(effects
 					(font
@@ -53,7 +53,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "4.7KΩ 8-bus resistor"
+			(property "Description" "6.8KΩ 8-bus resistor"
 				(at 8.255 -23.495 0)
 				(effects
 					(font
@@ -72,7 +72,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Bourns"
-				(at 16.51 -37.465 0)
+				(at 16.51 -33.02 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -81,8 +81,8 @@
 					(hide yes)
 				)
 			)
-			(property "Manufacturer_Part_Number" "4609X-101-472LF"
-				(at 16.51 -40.005 0)
+			(property "Manufacturer_Part_Number" "4609X-101-682LF"
+				(at 16.51 -35.56 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -91,8 +91,8 @@
 					(hide yes)
 				)
 			)
-			(property "Mouser Part Number" "652-4609X-1LF-4.7K"
-				(at 16.51 -42.545 0)
+			(property "Mouser Part Number" "652-4609X-1LF-6.8K"
+				(at 16.51 -38.1 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -102,7 +102,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-472LF/?qs=6yLoizYthp6x52D9SeHB4A%3D%3D"
-				(at 16.51 -45.085 0)
+				(at 16.51 -40.64 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -111,36 +111,7 @@
 					(hide yes)
 				)
 			)
-			(property "Arrow Part Number" "4609X-101-472LF"
-				(at 16.51 -47.625 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/4609x-101-472lf/bourns"
-				(at 16.51 -50.165 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "8-bussed thick film resistor,4K7 1.13W Bourns Bussed Resistor Network 4.7k +/-2% 8 Resistors, 1.13W Total, SIP package 4600X Through Hole"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "4609X-101-472LF_0_0"
+			(symbol "4609X-101-682LF_0_0"
 				(pin passive line
 					(at 0 0 0)
 					(length 5.08)
@@ -304,7 +275,7 @@
 					)
 				)
 			)
-			(symbol "4609X-101-472LF_0_1"
+			(symbol "4609X-101-682LF_0_1"
 				(polyline
 					(pts
 						(xy 5.08 1.905) (xy 10.795 1.905) (xy 10.795 -22.225) (xy 5.08 -22.225) (xy 5.08 1.905)
@@ -3353,15 +3324,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "capacitor cap"
 				(at 0 0 0)
 				(effects
@@ -3445,7 +3407,7 @@
 				)
 			)
 		)
-		(symbol "HCP65:C_Polarized"
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -3462,35 +3424,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "C_Polarized"
-				(at 4.445 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "?μF"
+			(property "Value" "?μF"
 				(at 0.635 -2.54 0)
 				(effects
 					(font
@@ -3499,8 +3433,8 @@
 					(justify left)
 				)
 			)
-			(property "Garbage" "Polarized capacitor"
-				(at 0 0 0)
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3508,7 +3442,26 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "cap capacitor"
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3526,7 +3479,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_Polarized_0_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
 				(rectangle
 					(start -2.286 0.508)
 					(end 2.286 1.016)
@@ -3574,7 +3527,7 @@
 					)
 				)
 			)
-			(symbol "C_Polarized_1_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -8541,34 +8494,31 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "LED"
-				(at -1.27 3.175 0)
+				(at 0 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "LED"
-				(at 5.715 -5.715 0)
+			(property "Value" "Colour"
+				(at 0 -2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
 					(hide yes)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
+			(property "Datasheet" ""
 				(at 6.35 -7.62 90)
 				(effects
 					(font
@@ -8577,16 +8527,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Colour"
+			(property "Description" ""
 				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Garbage" "Light emitting diode, small symbol, filled shape"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -22254,16 +22196,6 @@
 		)
 		(uuid "fdb600a9-9754-476a-a4ad-f3c70096319c")
 	)
-	(text "These should probably be 6.8K"
-		(exclude_from_sim no)
-		(at 462.534 171.196 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "27b82d86-763e-471a-8f1c-42823178e4d8")
-	)
 	(label "GND"
 		(at -100.33 218.44 0)
 		(fields_autoplaced yes)
@@ -24453,6 +24385,17 @@
 		)
 		(uuid "3c3cdb7b-2f6e-4722-b38c-476ad4813e48")
 	)
+	(label "3.3V"
+		(at 427.99 116.84 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3cab8cef-9ea2-43fd-bf0a-e0bf46da32a8")
+	)
 	(label "D7"
 		(at 124.46 158.75 180)
 		(fields_autoplaced yes)
@@ -25739,6 +25682,17 @@
 			(justify right bottom)
 		)
 		(uuid "619f55e2-e6aa-4ceb-92e7-e74f9231328d")
+	)
+	(label "GND"
+		(at 433.07 116.84 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "621ed4f3-883d-4827-b317-145083b2c1de")
 	)
 	(label "~{Device Interrupt}_{ 1..7}"
 		(at 165.1 52.07 0)
@@ -34129,15 +34083,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 10.16 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "9410b96e-0275-407a-9de8-df9bb46374b9")
 		)
@@ -34584,7 +34529,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Bourns:4609X-101-472LF")
+		(lib_id "Bourns:4609X-101-682LF")
 		(at 427.99 162.56 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -34600,7 +34545,7 @@
 				)
 			)
 		)
-		(property "Value" "4609X-101-472LF"
+		(property "Value" "4609X-101-682LF"
 			(at 436.245 159.385 0)
 			(effects
 				(font
@@ -34628,7 +34573,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "4.7KΩ 8-bus resistor"
+		(property "Description" "6.8KΩ 8-bus resistor"
 			(at 436.245 186.055 0)
 			(effects
 				(font
@@ -34647,7 +34592,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 444.5 200.025 0)
+			(at 444.5 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34656,8 +34601,8 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "4609X-101-472LF"
-			(at 444.5 202.565 0)
+		(property "Manufacturer_Part_Number" "4609X-101-682LF"
+			(at 444.5 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34666,8 +34611,8 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "652-4609X-1LF-4.7K"
-			(at 444.5 205.105 0)
+		(property "Mouser Part Number" "652-4609X-1LF-6.8K"
+			(at 444.5 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34677,41 +34622,12 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-472LF/?qs=6yLoizYthp6x52D9SeHB4A%3D%3D"
-			(at 444.5 207.645 0)
+			(at 444.5 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "4609X-101-472LF"
-			(at 444.5 210.185 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/4609x-101-472lf/bourns"
-			(at 444.5 212.725 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "8-bussed thick film resistor,4K7 1.13W Bourns Bussed Resistor Network 4.7k +/-2% 8 Resistors, 1.13W Total, SIP package 4600X Through Hole"
-			(at 427.99 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -35887,7 +35803,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Bourns:4609X-101-472LF")
+		(lib_id "Bourns:4609X-101-682LF")
 		(at 427.99 194.31 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -35903,7 +35819,7 @@
 				)
 			)
 		)
-		(property "Value" "4609X-101-472LF"
+		(property "Value" "4609X-101-682LF"
 			(at 436.245 191.135 0)
 			(effects
 				(font
@@ -35931,7 +35847,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "4.7KΩ 8-bus resistor"
+		(property "Description" "6.8KΩ 8-bus resistor"
 			(at 436.245 217.805 0)
 			(effects
 				(font
@@ -35950,7 +35866,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 444.5 231.775 0)
+			(at 444.5 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35959,8 +35875,8 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "4609X-101-472LF"
-			(at 444.5 234.315 0)
+		(property "Manufacturer_Part_Number" "4609X-101-682LF"
+			(at 444.5 229.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35969,8 +35885,8 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "652-4609X-1LF-4.7K"
-			(at 444.5 236.855 0)
+		(property "Mouser Part Number" "652-4609X-1LF-6.8K"
+			(at 444.5 232.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35980,41 +35896,12 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-472LF/?qs=6yLoizYthp6x52D9SeHB4A%3D%3D"
-			(at 444.5 239.395 0)
+			(at 444.5 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "4609X-101-472LF"
-			(at 444.5 241.935 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/4609x-101-472lf/bourns"
-			(at 444.5 244.475 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "8-bussed thick film resistor,4K7 1.13W Bourns Bussed Resistor Network 4.7k +/-2% 8 Resistors, 1.13W Total, SIP package 4600X Through Hole"
-			(at 427.99 194.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -36284,34 +36171,31 @@
 		(dnp no)
 		(uuid "3f48aefe-e907-4f92-bc82-9f5bc89098a4")
 		(property "Reference" "LED1"
-			(at -42.545 190.5 0)
+			(at -42.545 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "LED"
-			(at -51.435 198.755 0)
+		(property "Value" "Red"
+			(at -48.26 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+			(at -50.8 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
-			(at -45.72 193.04 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at -53.34 199.39 90)
 			(effects
 				(font
@@ -36320,16 +36204,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Colour"
+		(property "Description" ""
 			(at -48.26 193.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Garbage" "Light emitting diode, small symbol, filled shape"
-			(at -45.72 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38118,6 +37994,73 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 427.99 116.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6c8280da-dbe0-42f4-bf29-3a6b93289a7a")
+		(property "Reference" "C11"
+			(at 430.276 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 430.53 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 444.754 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 430.2125 116.5225 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 427.99 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6a77f8e5-c930-4f23-bf41-ebdf24016104")
+		)
+		(pin "2"
+			(uuid "8d65feed-f945-4f1b-b6fa-ec14f43d6bff")
+		)
+		(instances
+			(project "Processor Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:NetTie")
 		(at -87.63 -40.64 0)
 		(unit 1)
@@ -38589,7 +38532,7 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at -62.23 186.69 0)
 		(mirror y)
 		(unit 1)
@@ -38599,7 +38542,7 @@
 		(dnp no)
 		(uuid "86e9d84a-77db-41f7-9f1d-71ee0a68b660")
 		(property "Reference" "C12"
-			(at -58.42 187.96 90)
+			(at -62.865 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38607,35 +38550,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C_Polarized"
-			(at -66.675 194.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at -63.1952 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at -67.31 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "?μF"
+		(property "Value" "100μF"
 			(at -62.865 189.23 0)
 			(effects
 				(font
@@ -38644,12 +38559,31 @@
 				(justify left)
 			)
 		)
-		(property "Garbage" "Polarized capacitor"
-			(at -62.23 186.69 0)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at -62.23 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at -67.31 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at -62.865 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -38733,15 +38667,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at -62.23 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "d22289bb-9ef6-4b51-b08b-c2ab85d48a9f")
 		)
@@ -38784,7 +38709,7 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at -95.25 186.69 0)
 		(mirror y)
 		(unit 1)
@@ -38794,7 +38719,7 @@
 		(dnp no)
 		(uuid "8a644332-8077-463d-adae-43e687482df9")
 		(property "Reference" "C12"
-			(at -91.44 187.96 90)
+			(at -95.885 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38802,35 +38727,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C_Polarized"
-			(at -99.695 194.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at -96.2152 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at -100.33 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "?μF"
+		(property "Value" "10μF"
 			(at -95.885 189.23 0)
 			(effects
 				(font
@@ -38839,12 +38736,31 @@
 				(justify left)
 			)
 		)
-		(property "Garbage" "Polarized capacitor"
-			(at -95.25 186.69 0)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at -95.25 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at -100.33 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at -95.885 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -40394,15 +40310,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 106.68 -77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "161d819e-a47e-447e-8cf2-b11bf1fa08c9")
 		)
@@ -40489,15 +40396,6 @@
 			)
 		)
 		(property "Description" ""
-			(at -105.41 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at -105.41 218.44 0)
 			(effects
 				(font
@@ -41186,7 +41084,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Bourns:4609X-101-472LF")
+		(lib_id "Bourns:4609X-101-682LF")
 		(at 427.99 130.81 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -41202,7 +41100,7 @@
 				)
 			)
 		)
-		(property "Value" "4609X-101-472LF"
+		(property "Value" "4609X-101-682LF"
 			(at 436.245 127.635 0)
 			(effects
 				(font
@@ -41230,7 +41128,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "4.7KΩ 8-bus resistor"
+		(property "Description" "6.8KΩ 8-bus resistor"
 			(at 436.245 154.305 0)
 			(effects
 				(font
@@ -41249,7 +41147,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 444.5 168.275 0)
+			(at 444.5 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41258,8 +41156,8 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "4609X-101-472LF"
-			(at 444.5 170.815 0)
+		(property "Manufacturer_Part_Number" "4609X-101-682LF"
+			(at 444.5 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41268,8 +41166,8 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "652-4609X-1LF-4.7K"
-			(at 444.5 173.355 0)
+		(property "Mouser Part Number" "652-4609X-1LF-6.8K"
+			(at 444.5 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41279,41 +41177,12 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-472LF/?qs=6yLoizYthp6x52D9SeHB4A%3D%3D"
-			(at 444.5 175.895 0)
+			(at 444.5 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "4609X-101-472LF"
-			(at 444.5 178.435 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/4609x-101-472lf/bourns"
-			(at 444.5 180.975 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "8-bussed thick film resistor,4K7 1.13W Bourns Bussed Resistor Network 4.7k +/-2% 8 Resistors, 1.13W Total, SIP package 4600X Through Hole"
-			(at 427.99 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -41848,15 +41717,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 81.28 -93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "9ec3856d-a93c-45bf-b93b-323052973ec8")
 		)
@@ -41942,15 +41802,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 106.68 -62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 106.68 -62.23 0)
 			(effects
 				(font
@@ -42511,15 +42362,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 106.68 -85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "6926317f-ffdf-44ba-a936-6ba4f1097605")
 		)
@@ -42927,15 +42769,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 106.68 -69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 106.68 -69.85 0)
 			(effects
 				(font

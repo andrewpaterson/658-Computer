@@ -18826,23 +18826,20 @@
 				)
 			)
 		)
-		(symbol "Nexperia:74LVC08APW,112"
-			(pin_names
-				(offset 0.762)
-			)
+		(symbol "HCP65:W65C816_Latch_Time"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "IC"
-				(at 12.7 6.35 0)
+			(property "Reference" "B"
+				(at 15.875 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "74LVC08APW,112"
-				(at 12.7 4.445 0)
+			(property "Value" "W65C816_Latch_Time"
+				(at 15.24 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -18850,86 +18847,8 @@
 					)
 				)
 			)
-			(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
-				(at 30.48 -31.115 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC08A.pdf"
-				(at 30.48 -33.655 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "2-input AND gate"
-				(at 12.7 -23.495 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.1"
-				(at 30.48 -36.195 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Nexperia"
-				(at 30.48 -38.735 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "74LVC08APW,112"
-				(at 30.48 -41.275 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "771-74LVC08APW"
-				(at 30.48 -43.815 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=771-74LVC08APW"
-				(at 30.48 -46.355 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "74LVC08"
-				(at 12.7 -25.4 0)
+			(property "Footprint" "HCP65_Parts:HCP65_W65C816_Latch_Time"
+				(at 15.24 -59.69 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -18937,7 +18856,7 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
+			(property "Datasheet" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -18946,11 +18865,51 @@
 					(hide yes)
 				)
 			)
-			(symbol "74LVC08APW,112_0_0"
-				(pin input line
-					(at 0 0 0)
-					(length 5.08)
-					(name "1A"
+			(property "Description" "W65C816 Latch Time"
+				(at 15.24 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Silkscreen" "W65C816 Latch Time"
+				(at 15.24 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "HCP65 W65C816 Latch Time"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "W65C816_Latch_Time_0_1"
+				(polyline
+					(pts
+						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -21.59) (xy 0 -21.59) (xy 0 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "W65C816_Latch_Time_1_1"
+				(pin no_connect line
+					(at -5.08 -2.54 0)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -18965,10 +18924,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -12.7 0)
+				(pin output line
+					(at 35.56 -5.08 180)
 					(length 5.08)
-					(name "3B"
+					(name "Bank_Latch"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -18983,10 +18942,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 25.4 -16.51 180)
-					(length 5.08)
-					(name "4Y"
+				(pin no_connect line
+					(at 35.56 -15.24 180)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19001,10 +18960,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -15.24 0)
-					(length 5.08)
-					(name "4A"
+				(pin passive line
+					(at 35.56 0 180)
+					(length 5.08) hide
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19019,46 +18978,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -17.78 0)
-					(length 5.08)
-					(name "4B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 1.27 180)
+				(pin no_connect line
+					(at -5.08 -5.08 0)
 					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "1B"
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19073,10 +18996,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 -1.27 180)
+				(pin input inverted
+					(at -5.08 0 0)
 					(length 5.08)
-					(name "1Y"
+					(name "~{PHI2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19091,10 +19014,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "2A"
+				(pin no_connect line
+					(at -5.08 -10.16 0)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19109,10 +19032,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "2B"
+				(pin no_connect line
+					(at -5.08 -12.7 0)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19127,10 +19050,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 25.4 -6.35 180)
-					(length 5.08)
-					(name "2Y"
+				(pin passive line
+					(at -5.08 -19.05 0)
+					(length 5.08) hide
+					(name "3.3V"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19145,10 +19068,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 0 -20.32 0)
+				(pin no_connect line
+					(at 35.56 -10.16 180)
 					(length 5.08) hide
-					(name "GND"
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19163,10 +19086,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 25.4 -11.43 180)
-					(length 5.08)
-					(name "3Y"
+				(pin no_connect line
+					(at 35.56 -12.7 180)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19181,10 +19104,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -10.16 0)
+				(pin output inverted
+					(at 35.56 -2.54 180)
 					(length 5.08)
-					(name "3A"
+					(name "~{Trans_Out}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -19197,404 +19120,6 @@
 								(size 1.27 1.27)
 							)
 						)
-					)
-				)
-			)
-			(symbol "74LVC08APW,112_0_1"
-				(polyline
-					(pts
-						(xy 8.89 -17.78) (xy 10.1599 -17.78)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -15.24) (xy 10.1599 -15.24)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -12.7) (xy 10.1599 -12.7)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -10.16) (xy 10.1599 -10.16)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -7.62) (xy 10.1599 -7.62)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -5.08) (xy 10.1599 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -2.54) (xy 10.1599 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 0) (xy 10.1599 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.248 -14.605) (xy 10.248 -18.415)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.248 -9.525) (xy 10.248 -13.335)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.248 -4.445) (xy 10.248 -8.255)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.248 0.635) (xy 10.248 -3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -18.415) (xy 10.248 -18.415)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -14.605) (xy 10.248 -14.605)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -13.335) (xy 10.248 -13.335)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -9.525) (xy 10.248 -9.525)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -8.255) (xy 10.248 -8.255)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -4.445) (xy 10.248 -4.445)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -3.175) (xy 10.248 -3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 0.635) (xy 10.248 0.635)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.605 -16.51) (xy 17.145 -16.51)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.605 -11.43) (xy 17.145 -11.43)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.605 -6.35) (xy 17.145 -6.35)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.605 -1.27) (xy 17.145 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -22.225) (xy 5.08 -22.225) (xy 5.08 3.175)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 12.065 -18.415)
-					(mid 13.6634 -17.9004)
-					(end 14.605 -16.51)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 12.065 -13.335)
-					(mid 13.6634 -12.8204)
-					(end 14.605 -11.43)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 12.065 -8.255)
-					(mid 13.6634 -7.7404)
-					(end 14.605 -6.35)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 12.065 -3.175)
-					(mid 13.6634 -2.6604)
-					(end 14.605 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.605 -16.51)
-					(mid 13.6646 -15.118)
-					(end 12.065 -14.605)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.605 -11.43)
-					(mid 13.6646 -10.038)
-					(end 12.065 -9.525)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.605 -6.35)
-					(mid 13.6646 -4.958)
-					(end 12.065 -4.445)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.605 -1.27)
-					(mid 13.6646 0.122)
-					(end 12.065 0.635)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
 					)
 				)
 			)
@@ -21004,16 +20529,6 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 -69.85) (xy 88.9 -69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "12f0881c-ac4e-4d95-9a46-9f985e352a25")
-	)
-	(wire
-		(pts
 			(xy -64.77 -35.56) (xy -63.5 -35.56)
 		)
 		(stroke
@@ -21131,16 +20646,6 @@
 			(type default)
 		)
 		(uuid "27a0a203-9121-4fcb-91c8-9e054b431cd3")
-	)
-	(wire
-		(pts
-			(xy 93.98 -62.23) (xy 106.68 -62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2803f8fb-b13a-48d2-9bfd-95f444268db2")
 	)
 	(wire
 		(pts
@@ -21334,16 +20839,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 -86.36) (xy 83.82 -85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4da2fb82-30d1-4153-a4aa-0fb73a6ed7be")
-	)
-	(wire
-		(pts
 			(xy -64.77 53.34) (xy -63.5 53.34)
 		)
 		(stroke
@@ -21504,16 +20999,6 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 -85.09) (xy 87.63 -82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7ba71c94-6b0d-483b-8995-8dab6d7ac52a")
-	)
-	(wire
-		(pts
 			(xy -39.37 66.04) (xy -40.64 66.04)
 		)
 		(stroke
@@ -21531,16 +21016,6 @@
 			(type default)
 		)
 		(uuid "7d0ab2e9-58dd-4706-b9c8-fc3527ea53bb")
-	)
-	(wire
-		(pts
-			(xy 93.98 -77.47) (xy 106.68 -77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7e7f3e2e-a1b9-44c1-9c2e-d171205e97f9")
 	)
 	(wire
 		(pts
@@ -21571,16 +21046,6 @@
 			(type default)
 		)
 		(uuid "8170238a-aa00-40b2-8bdd-b486b11d7e02")
-	)
-	(wire
-		(pts
-			(xy 87.63 -72.39) (xy 87.63 -69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8385b12b-ae25-4733-baf5-0e5ab1c3e1e1")
 	)
 	(wire
 		(pts
@@ -21704,16 +21169,6 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 -69.85) (xy 106.68 -69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9b0177cf-2196-4f78-9a87-c24502bf22e1")
-	)
-	(wire
-		(pts
 			(xy 217.17 283.21) (xy 219.71 283.21)
 		)
 		(stroke
@@ -21721,16 +21176,6 @@
 			(type default)
 		)
 		(uuid "9b130d60-16fd-4b40-b38c-f78c2b37b0ba")
-	)
-	(wire
-		(pts
-			(xy 87.63 -82.55) (xy 83.82 -82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9c27fb4c-9dda-4c55-bfd3-027edcfcdbdc")
 	)
 	(wire
 		(pts
@@ -21791,16 +21236,6 @@
 			(type default)
 		)
 		(uuid "9e696119-dc01-4cea-ac17-c659cbf0f168")
-	)
-	(wire
-		(pts
-			(xy 87.63 -85.09) (xy 88.9 -85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a1a309c5-be13-4edd-894e-7c4cb3ea1445")
 	)
 	(wire
 		(pts
@@ -21884,16 +21319,6 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 -62.23) (xy 88.9 -62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b1c5b30c-2d98-4d8e-8020-0b8b5b5c81ba")
-	)
-	(wire
-		(pts
 			(xy -64.77 60.96) (xy -63.5 60.96)
 		)
 		(stroke
@@ -21971,16 +21396,6 @@
 			(type default)
 		)
 		(uuid "c4b478ad-15bb-4309-a9c2-9e5b12189c9c")
-	)
-	(wire
-		(pts
-			(xy 83.82 -72.39) (xy 87.63 -72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c57b5ef5-f53c-428a-be86-6f943083e793")
 	)
 	(wire
 		(pts
@@ -22091,16 +21506,6 @@
 			(type default)
 		)
 		(uuid "da0f41fc-b536-444a-8979-0c5344ed7b57")
-	)
-	(wire
-		(pts
-			(xy 83.82 -67.31) (xy 86.36 -67.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dc8ae446-0640-43e1-9fe2-782bb8276686")
 	)
 	(wire
 		(pts
@@ -22264,16 +21669,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 -77.47) (xy 88.9 -77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f2df4fd6-d27a-422a-a845-5e3e79d9f4f1")
-	)
-	(wire
-		(pts
 			(xy 217.17 327.66) (xy 219.71 327.66)
 		)
 		(stroke
@@ -22324,16 +21719,6 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 -67.31) (xy 86.36 -62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f8cb07ca-0956-4504-aa8e-2724ba93cfeb")
-	)
-	(wire
-		(pts
 			(xy -39.37 -10.16) (xy -40.64 -10.16)
 		)
 		(stroke
@@ -22362,15 +21747,16 @@
 		)
 		(uuid "f9afac1b-1d86-46ad-b4f7-d8906339ab2a")
 	)
-	(wire
-		(pts
-			(xy 93.98 -85.09) (xy 106.68 -85.09)
+	(label "~{Trans Out}"
+		(at 29.21 31.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fdb600a9-9754-476a-a4ad-f3c70096319c")
+		(uuid "000eb905-f589-4c24-a01e-2201082495ed")
 	)
 	(label "GND"
 		(at -100.33 218.44 0)
@@ -23626,17 +23012,6 @@
 		)
 		(uuid "1f4d7952-0c72-4535-90e1-7048665d3f4f")
 	)
-	(label "~{PHI2}_{2}"
-		(at 93.98 -85.09 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1f654b12-5335-4980-8bf5-88150bc1226b")
-	)
 	(label "A21"
 		(at 426.72 -8.89 180)
 		(fields_autoplaced yes)
@@ -23713,17 +23088,6 @@
 			(justify right bottom)
 		)
 		(uuid "21e402ac-e77f-4d53-adb0-40e26d14e7c8")
-	)
-	(label "~{PHI2}"
-		(at 58.42 -83.82 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "225e08d4-7161-44f7-97a6-e540d10b1a58")
 	)
 	(label "A16_{M}"
 		(at 237.49 189.23 0)
@@ -23989,17 +23353,6 @@
 		)
 		(uuid "2860b340-40e1-40c4-8de4-1753b7c8f554")
 	)
-	(label "GND"
-		(at 86.36 -93.98 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "28d1fcc0-7e11-4cd9-a0ed-8b1e27a43b1e")
-	)
 	(label "A13"
 		(at 426.72 11.43 180)
 		(fields_autoplaced yes)
@@ -24054,6 +23407,17 @@
 			(justify right bottom)
 		)
 		(uuid "2ac6f8b8-abba-43ba-ba32-01b4edea1bc6")
+	)
+	(label "GND"
+		(at 29.21 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2ad3727a-680c-4d95-8d62-6e876609a984")
 	)
 	(label "~{Interrupt}_{Device}16"
 		(at 356.87 163.83 180)
@@ -24120,17 +23484,6 @@
 			(justify left bottom)
 		)
 		(uuid "2d28e044-3839-49cd-9c97-2ff9ade07660")
-	)
-	(label "3.3V"
-		(at 81.28 -93.98 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2d2fadfe-9b81-4f86-a958-74683e822e61")
 	)
 	(label "UP3"
 		(at 93.98 255.27 0)
@@ -24418,6 +23771,17 @@
 		)
 		(uuid "34297c5d-4fa7-48b6-a5a6-be35ccc08075")
 	)
+	(label "Bank Latch"
+		(at 29.21 34.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "345b9ef6-f139-4b03-b59e-88686f60bab0")
+	)
 	(label "~{Count Access}_{0}"
 		(at 165.1 82.55 0)
 		(fields_autoplaced yes)
@@ -24538,17 +23902,6 @@
 			(justify right bottom)
 		)
 		(uuid "39369acd-1eca-4454-bd11-101aafaf94aa")
-	)
-	(label "~{PHI2}"
-		(at 58.42 -73.66 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "393d8efa-0a49-45f4-8535-623e5168eb8d")
 	)
 	(label "UP1"
 		(at 124.46 293.37 180)
@@ -25925,17 +25278,6 @@
 		)
 		(uuid "5efce753-0d02-4d57-ba1a-87f62e2ba973")
 	)
-	(label "GND"
-		(at 111.76 -85.09 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5f0932bf-2a43-4be7-a85d-1aa9786b6c18")
-	)
 	(label "~{Interrupt}_{Device}2"
 		(at 427.99 135.89 180)
 		(fields_autoplaced yes)
@@ -25946,17 +25288,6 @@
 			(justify right bottom)
 		)
 		(uuid "5f1ee30d-d846-44ed-b90f-eb09069b80d2")
-	)
-	(label "GND"
-		(at 58.42 -63.5 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "5fb8c116-df57-4498-b0bb-c38b59d7db64")
 	)
 	(label "~{NMI State}"
 		(at 165.1 69.85 0)
@@ -26111,17 +25442,6 @@
 			(justify left bottom)
 		)
 		(uuid "65b28178-3bd8-45f5-87cf-0e0a89b19ef9")
-	)
-	(label "~{PHI2}"
-		(at 58.42 -81.28 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "662ef520-64f3-45d5-bcc9-a98a546a15f9")
 	)
 	(label "GND"
 		(at 237.49 135.89 0)
@@ -26585,6 +25905,17 @@
 		)
 		(uuid "74f6664f-18a9-4194-ae1a-d8716f047b5f")
 	)
+	(label "~{PHI2}"
+		(at -11.43 29.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "752e1fd5-7ca4-4135-aa12-80f3cadaee4a")
+	)
 	(label "M"
 		(at 426.72 59.69 180)
 		(fields_autoplaced yes)
@@ -26694,17 +26025,6 @@
 			(justify right bottom)
 		)
 		(uuid "7a2ba9d8-d8c8-4164-9341-841538c99ba3")
-	)
-	(label "~{PHI2}_{3}"
-		(at 58.42 -66.04 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7a55e713-c182-4a04-b764-b9ae828a733a")
 	)
 	(label "~{WD}"
 		(at 90.17 31.75 0)
@@ -27035,17 +26355,6 @@
 			(justify left bottom)
 		)
 		(uuid "821dd32f-19f6-4083-b52f-395c5bf37306")
-	)
-	(label "~{PHI2}_{2}"
-		(at 58.42 -76.2 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "822a49c4-8281-4c65-b99d-d0915e227ad4")
 	)
 	(label "~{ROM_{CS}}"
 		(at 209.55 364.49 180)
@@ -27509,17 +26818,6 @@
 		)
 		(uuid "8c968e6b-aa25-456d-b5d9-1973f3d13d8f")
 	)
-	(label "Bank Latch"
-		(at 93.98 -69.85 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8ca68e94-8d2d-4f80-8ac1-3b38234ee8ca")
-	)
 	(label "IC6"
 		(at 314.96 331.47 0)
 		(fields_autoplaced yes)
@@ -27684,17 +26982,6 @@
 			(justify right bottom)
 		)
 		(uuid "9060c00c-c7cb-4fe4-9952-28adf177f388")
-	)
-	(label "~{PHI2}_{2}"
-		(at 58.42 -78.74 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "90adeecd-fc90-4d27-94f5-e72405cc2c3b")
 	)
 	(label "~{Device}"
 		(at 165.1 1.27 0)
@@ -28268,17 +27555,6 @@
 		)
 		(uuid "9fd2e535-5c9a-4547-81cb-d9272858d36f")
 	)
-	(label "GND"
-		(at 111.76 -62.23 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a05a091d-f9ae-419a-81bb-210efef2e352")
-	)
 	(label "OP0"
 		(at 463.55 17.78 180)
 		(fields_autoplaced yes)
@@ -28444,17 +27720,6 @@
 		)
 		(uuid "a41d522c-6117-4a40-88d9-52b43ac23d82")
 	)
-	(label "~{PHI2}_{3}"
-		(at 58.42 -71.12 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a48d23b2-a0bc-4f24-8c52-5b2b605612c5")
-	)
 	(label "IC3"
 		(at 463.55 53.34 180)
 		(fields_autoplaced yes)
@@ -28476,17 +27741,6 @@
 			(justify left bottom)
 		)
 		(uuid "a5621141-fd69-4260-8b5a-ad4df92e8442")
-	)
-	(label "~{Trans Out}"
-		(at 93.98 -62.23 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a6035baf-e04c-428e-b3da-93398d18ca71")
 	)
 	(label "D5"
 		(at 290.83 354.33 270)
@@ -28531,17 +27785,6 @@
 			(justify left bottom)
 		)
 		(uuid "a6c5519e-d80d-404b-b514-677d1b1c6f77")
-	)
-	(label "GND"
-		(at 111.76 -69.85 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a8275461-676a-4c34-8d30-16e0e6eaf0b9")
 	)
 	(label "D5"
 		(at 223.52 29.21 270)
@@ -29313,17 +28556,6 @@
 		)
 		(uuid "c1843d8f-966d-4b05-a17d-c2a0f17ac229")
 	)
-	(label "GND"
-		(at 111.76 -77.47 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c1cce26c-35a0-4416-b936-dc3fff37e4ea")
-	)
 	(label "~{ROM_{CS}}"
 		(at 124.46 341.63 180)
 		(fields_autoplaced yes)
@@ -30006,17 +29238,6 @@
 		)
 		(uuid "d5fc9b1d-ae8b-4318-a900-ec04fe81811f")
 	)
-	(label "3.3V"
-		(at 83.82 -86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d613ce3d-9660-4e03-8d0b-0466409dd50d")
-	)
 	(label "H2"
 		(at -11.43 -31.75 180)
 		(fields_autoplaced yes)
@@ -30060,17 +29281,6 @@
 			(justify right bottom)
 		)
 		(uuid "d6e8263a-abe2-415a-8870-8a0f5e934a92")
-	)
-	(label "~{PHI2}_{3}"
-		(at 93.98 -77.47 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d730dcbf-f848-4225-ac99-c3721bf18402")
 	)
 	(label "~{Enable}_{Device}18"
 		(at 427.99 207.01 180)
@@ -30357,6 +29567,17 @@
 			(justify right bottom)
 		)
 		(uuid "de97ed22-74de-4df7-a828-b90474d8d55c")
+	)
+	(label "3.3V"
+		(at -11.43 48.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "debe7c70-cc5c-4ff7-81dd-3196612e5bcf")
 	)
 	(label "GND"
 		(at -91.44 218.44 180)
@@ -30940,17 +30161,6 @@
 			(justify left bottom)
 		)
 		(uuid "efe51a9f-8f38-4d68-bb95-f54c811eb272")
-	)
-	(label "~{PHI2}_{3}"
-		(at 58.42 -68.58 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f00b375c-786c-423d-97d7-0874dd56ebb2")
 	)
 	(label "5V"
 		(at 53.34 184.15 180)
@@ -34361,6 +33571,112 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:W65C816_Latch_Time")
+		(at -6.35 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0037b9cb-7c84-44df-8a98-0335beb11302")
+		(property "Reference" "B19"
+			(at 9.525 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "W65C816_Latch_Time"
+			(at 8.89 26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_W65C816_Latch_Time"
+			(at 8.89 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at -6.35 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "W65C816 Latch Time"
+			(at 8.89 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "W65C816 Latch Time"
+			(at 8.89 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "b47e0b84-f567-45f2-8c6a-76f5bb497f85")
+		)
+		(pin "12"
+			(uuid "8817d90b-5a9d-4862-a367-940e61014081")
+		)
+		(pin "2"
+			(uuid "1d46515b-d0f8-4fd4-87c6-ceec07605532")
+		)
+		(pin "4"
+			(uuid "20654067-53a9-4efb-8a4a-b4f9cff07970")
+		)
+		(pin "6"
+			(uuid "05245c3d-0bc7-4ea2-b66e-dfadb8783257")
+		)
+		(pin "8"
+			(uuid "28bf180f-0cad-4acd-badf-9c88064b67ae")
+		)
+		(pin "1"
+			(uuid "67078978-8def-4efb-a18c-7ebede63cc60")
+		)
+		(pin "10"
+			(uuid "0ed72455-c1bb-422d-918e-e0a8305497ac")
+		)
+		(pin "3"
+			(uuid "2b2c4029-2286-4746-97f8-151c7a4c5a31")
+		)
+		(pin "11"
+			(uuid "1beb995d-1f43-4a35-8bac-85af44c80f08")
+		)
+		(pin "9"
+			(uuid "6988f168-f3f5-417a-83e5-0b8366f191d5")
+		)
+		(pin "5"
+			(uuid "fa3465ea-c217-45b9-b217-850677200356")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:Device_Interrupts")
 		(at 361.95 130.81 0)
 		(unit 1)
@@ -34621,79 +33937,6 @@
 			(project "Processor Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "R13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 93.98 -69.85 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1501d359-0ecb-45cf-8491-405f04d21911")
-		(property "Reference" "R3"
-			(at 91.44 -68.072 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47Ω"
-			(at 91.44 -72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 76.454 -77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 93.98 -69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 93.98 -69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "245a53d2-45e3-4c2f-a73c-4fe4f03dacac")
-		)
-		(pin "2"
-			(uuid "d057bad9-65bc-40c2-a6d9-4f8427dcf863")
-		)
-		(instances
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -35572,79 +34815,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 93.98 -85.09 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2ad5a515-1a50-4a41-a8b6-0a0992fc1428")
-		(property "Reference" "R3"
-			(at 91.44 -83.312 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47Ω"
-			(at 91.44 -87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 76.454 -92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 93.98 -85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 93.98 -85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6a659d27-0c2d-4b93-9c23-776e079b2361")
-		)
-		(pin "2"
-			(uuid "13d92ed0-b42b-4921-abdc-4f95def7496a")
-		)
-		(instances
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:Data_and_Signal Buffer")
 		(at -10.16 130.81 0)
 		(unit 1)
@@ -36490,152 +35660,6 @@
 			(project "Processor Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "H8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 93.98 -62.23 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3ba8ece4-bbc4-4b4d-bcc0-0011a37524ef")
-		(property "Reference" "R3"
-			(at 91.44 -60.452 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47Ω"
-			(at 91.44 -64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 76.454 -69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 93.98 -62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 93.98 -62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "de3eede2-8133-45d3-935c-82311fea78cd")
-		)
-		(pin "2"
-			(uuid "8ee82a39-cba7-411e-a207-d0be9ff0ae32")
-		)
-		(instances
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 93.98 -77.47 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3d2f1f89-69df-4283-936b-6de59227b87e")
-		(property "Reference" "R3"
-			(at 91.44 -75.692 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "47Ω"
-			(at 91.44 -79.375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 76.454 -85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 93.98 -77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 93.98 -77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a1ec0770-cfa2-4eb1-ad22-e35737705f46")
-		)
-		(pin "2"
-			(uuid "74a193e6-d283-47d7-8608-cc3e49aa13d7")
-		)
-		(instances
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -37828,179 +36852,6 @@
 			(project "Processor Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Nexperia:74LVC08APW,112")
-		(at 58.42 -83.82 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5d805ce0-1ea3-4134-9255-060a281efb98")
-		(property "Reference" "IC4"
-			(at 71.12 -90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LVC08APW,112"
-			(at 71.12 -88.265 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
-			(at 88.9 -52.705 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC08A.pdf"
-			(at 88.9 -50.165 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "2-input AND gate"
-			(at 71.12 -60.325 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 88.9 -47.625 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-74LVC08APW"
-			(at 88.9 -40.005 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=771-74LVC08APW"
-			(at 88.9 -37.465 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 88.9 -45.085 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC08APW,112"
-			(at 88.9 -42.545 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74LVC08"
-			(at 71.12 -58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
-			(at 58.42 -83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d0b24ff6-9e67-4a6b-bd8d-3d552c351b07")
-		)
-		(pin "10"
-			(uuid "e275ec93-70b4-45cc-a856-33e5c16a1ad2")
-		)
-		(pin "11"
-			(uuid "60648fa4-c9c8-4e70-af81-7e3d7ca777a2")
-		)
-		(pin "12"
-			(uuid "7a6532f0-7805-41a0-99e0-36c10a2c8619")
-		)
-		(pin "13"
-			(uuid "5d9225ab-c9aa-4de3-b71d-87ed38dd38e6")
-		)
-		(pin "14"
-			(uuid "bcd18ced-abe5-49c4-8f03-7ba767c275e6")
-		)
-		(pin "2"
-			(uuid "3a0ca1fb-cab1-4fbe-89d0-4618d63dd06c")
-		)
-		(pin "3"
-			(uuid "ecbfbe3b-ad78-41b1-87a6-ab14d0d692ff")
-		)
-		(pin "4"
-			(uuid "d720a062-38da-4b25-9833-4f3c63004385")
-		)
-		(pin "5"
-			(uuid "28178d46-7b1b-4a71-adef-a092d7f0b969")
-		)
-		(pin "6"
-			(uuid "27851a06-93d2-442d-a22d-80b942acbe57")
-		)
-		(pin "7"
-			(uuid "4e2d872b-6dc8-4593-9836-5a7124e344c4")
-		)
-		(pin "8"
-			(uuid "02a484aa-d476-4cb5-9282-75acb9b92355")
-		)
-		(pin "9"
-			(uuid "29accd5c-d00b-43c4-873b-85cd87252f8e")
-		)
-		(instances
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "IC4")
 					(unit 1)
 				)
 			)
@@ -40870,99 +39721,6 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 106.68 -77.47 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ae2a63af-486d-45b8-88b9-7758b2d15c34")
-		(property "Reference" "C5"
-			(at 108.966 -80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5pF"
-			(at 109.22 -74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 123.444 -69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 108.9025 -77.7875 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 106.68 -77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "161d819e-a47e-447e-8cf2-b11bf1fa08c9")
-		)
-		(pin "2"
-			(uuid "d8033b4e-d0cd-4461-9405-10e0a52d3574")
-		)
-		(instances
-			(project "HCP65 MPU Timer"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C?")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C30")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-					(reference "C99")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
 		(at -105.41 218.44 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -42077,192 +40835,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 81.28 -93.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e7c1d343-db11-4f81-bc23-51838af0169f")
-		(property "Reference" "C5"
-			(at 83.566 -96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 83.82 -91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 98.044 -86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 83.5025 -94.2975 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 81.28 -93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9ec3856d-a93c-45bf-b93b-323052973ec8")
-		)
-		(pin "2"
-			(uuid "639f4a23-6210-45a3-b49a-77dd247c58ab")
-		)
-		(instances
-			(project "HCP65 MPU Timer"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C?")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C30")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-					(reference "C99")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 106.68 -62.23 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ecafaeac-840f-4089-981b-eb3a57dcb240")
-		(property "Reference" "C5"
-			(at 108.966 -64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5pF"
-			(at 109.22 -59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 123.444 -54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 108.9025 -62.5475 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 106.68 -62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5eb6d795-b344-4a28-8740-7b7cfac2d936")
-		)
-		(pin "2"
-			(uuid "7c6e6db5-9f51-4998-a506-143d20508bf3")
-		)
-		(instances
-			(project "HCP65 MPU Timer"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C?")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C30")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-					(reference "C99")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:R_0805")
 		(at 212.09 295.91 0)
 		(unit 1)
@@ -42722,99 +41294,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 106.68 -85.09 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f689a83f-254b-460a-ae88-d9956be871dd")
-		(property "Reference" "C5"
-			(at 108.966 -87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5pF"
-			(at 109.22 -82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 123.444 -77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 108.9025 -85.4075 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 106.68 -85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6926317f-ffdf-44ba-a936-6ba4f1097605")
-		)
-		(pin "2"
-			(uuid "8217437a-a7d2-4436-8bc2-f9ab733a6609")
-		)
-		(instances
-			(project "HCP65 MPU Timer"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C?")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C30")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-					(reference "C99")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "TE_Connectivity:2-5530843-7")
 		(at -40.64 85.09 0)
 		(mirror y)
@@ -43131,99 +41610,6 @@
 			(project "Processor Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "NT1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 106.68 -69.85 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fd925ed8-a729-46e9-8901-66dbc0c8ea9c")
-		(property "Reference" "C5"
-			(at 108.966 -72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5pF"
-			(at 109.22 -67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 123.444 -62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 108.9025 -70.1675 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 106.68 -69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "30b73a87-6a14-4bfc-9c8c-9e8fdf3ca620")
-		)
-		(pin "2"
-			(uuid "bf417832-156a-4255-a147-d562d8405fef")
-		)
-		(instances
-			(project "HCP65 MPU Timer"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C?")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C30")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-					(reference "C99")
-					(unit 1)
-				)
-			)
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C9")
 					(unit 1)
 				)
 			)

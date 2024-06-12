@@ -1,0 +1,119 @@
+(footprint "PinHeader_1x06_P2.54mm_Vertical"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "Through hole straight pin header, 1x06, 2.54mm pitch, single row")
+	(tags "Through hole pin header THT 1x06 2.54mm single row")
+	(property "Reference" "REF**"
+		(at 0 -2.54 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "ab9cd3e2-394d-4fc7-a195-d91a24b4b000")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "PinHeader_1x06_P2.54mm_Vertical"
+		(at 0 15.367 0)
+		(layer "F.Fab")
+		(uuid "3e99e2c0-2cf7-4e1d-8a8e-40aef3851620")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c6f8ff86-3289-4a39-a44b-d7eaac069a05")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "305ed937-3cd9-4590-b204-e07a5df316ee")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "39012a66-a5c5-456b-a3b7-7405cbccadae")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -1.778 -1.778)
+		(end -1.778 14.522)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "2053f3b2-155c-4429-bce7-51cb2e701581")
+	)
+	(fp_line
+		(start -1.778 14.522)
+		(end 1.822 14.522)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b946f89b-67e6-43da-bdb9-e5af6fdda2b6")
+	)
+	(fp_line
+		(start 1.822 -1.778)
+		(end -1.778 -1.778)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "664a6f0a-082f-40b4-a478-5c3374a25037")
+	)
+	(fp_line
+		(start 1.822 14.522)
+		(end 1.822 -1.778)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "0a551b3c-616c-49cb-992d-473f05d0aeef")
+	)
+	(model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

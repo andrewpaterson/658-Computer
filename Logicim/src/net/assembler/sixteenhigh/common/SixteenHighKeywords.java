@@ -13,31 +13,28 @@ import static net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode.*;
 
 public class SixteenHighKeywords
 {
-  protected String GO = "go";
+  protected String REC = "rec";
+  protected String SUB = "sub";
   protected String END = "end";
-  protected String STRUCT = "struct";
+  protected String IF = "if";
   protected char OPEN_ROUND = '(';
   protected char CLOSE_ROUND = ')';
   protected char OPEN_SQUARE = '[';
   protected char CLOSE_SQUARE = ']';
-  protected char PUSH = '>';
-  protected char PULL = '<';
   protected char ASSIGN = '=';
   protected char DEREFERENCE = '*';
   protected char REFERENCE = '&';
   protected char DOT = '.';
   protected char AT = '@';
   protected char INTER_STATEMENT = ';';
-  protected char LABEL = ':';
+  protected char LABEL = '#';
   protected char ARRAY_SEPARATOR = ',';
   protected String GLOBAL = "@@";
 
   protected List<KeywordPair> keywords;
   protected Map<SixteenHighKeywordCode, String> codeToStringMap;
 
-  protected List<String> leadingIdentifiers;
-  protected List<String> leadingStrings;
-  protected List<String> followingIdentifiers;
+  protected List<String> leadingStatementIdentifiers;
   protected List<String> followingStrings;
   protected List<String> directiveIdentifiers;
   protected List<String> accessModes;
@@ -51,9 +48,7 @@ public class SixteenHighKeywords
     keywords = defineKeywords();
     codeToStringMap = createCodeToStringMap();
 
-    leadingIdentifiers = defineLeadingIdentifiers();
-    leadingStrings = defineLeadingStrings();
-    followingIdentifiers = defineFollowingIdentifiers();
+    leadingStatementIdentifiers = defineLeadingStatementIdentifiers();
     followingStrings = defineFollowingStrings();
     directiveIdentifiers = defineDirectiveIdentifiers();
     accessModes = defineAccessMode();
@@ -99,12 +94,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(or, "|"));
     keywords.add(new KeywordPair(xor, "^"));
     keywords.add(new KeywordPair(not, "~"));
-    keywords.add(new KeywordPair(if_greater, "if>"));
-    keywords.add(new KeywordPair(if_equals, "if="));
-    keywords.add(new KeywordPair(if_less, "if<"));
-    keywords.add(new KeywordPair(if_greater_equals, "if>="));
-    keywords.add(new KeywordPair(if_less_equals, "if<="));
-    keywords.add(new KeywordPair(if_not_equals, "if!="));
+    keywords.add(new KeywordPair(if_, "if"));
     keywords.add(new KeywordPair(add_assign, "+="));
     keywords.add(new KeywordPair(subtract_assign, "-="));
     keywords.add(new KeywordPair(multiply_assign, "*="));
@@ -119,19 +109,12 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(not_assign, "~="));
     keywords.add(new KeywordPair(increment, "++"));
     keywords.add(new KeywordPair(decrement, "--"));
-    keywords.add(new KeywordPair(go, GO));
-    keywords.add(new KeywordPair(gosub, "gosub"));
-    keywords.add(new KeywordPair(subtract_compare, "?-"));
-    keywords.add(new KeywordPair(and_compare, "?&"));
-    keywords.add(new KeywordPair(is_true, "?"));
-    keywords.add(new KeywordPair(is_false, "?!"));
+    keywords.add(new KeywordPair(rec, REC));
+    keywords.add(new KeywordPair(sub, SUB));
     keywords.add(new KeywordPair(test_set, "ts"));
     keywords.add(new KeywordPair(test_reset, "tr"));
-    keywords.add(new KeywordPair(ret, "return"));
-    keywords.add(new KeywordPair(push, str(PUSH)));
-    keywords.add(new KeywordPair(pull, str(PULL)));
+    keywords.add(new KeywordPair(return_, "return"));
     keywords.add(new KeywordPair(end, END));
-    keywords.add(new KeywordPair(struct, STRUCT));
     keywords.add(new KeywordPair(start_address, "$start_address"));
     keywords.add(new KeywordPair(end_address, "$end_address"));
     keywords.add(new KeywordPair(access_mode, "$access_mode"));
@@ -152,40 +135,26 @@ public class SixteenHighKeywords
     return Character.toString(c);
   }
 
-  protected List<String> defineLeadingIdentifiers()
+  protected List<String> defineLeadingStatementIdentifiers()
   {
-    List<String> leadingIdentifiers = new ArrayList<>();
-    add(codeToStringMap, leadingIdentifiers, int8);
-    add(codeToStringMap, leadingIdentifiers, uint8);
-    add(codeToStringMap, leadingIdentifiers, int16);
-    add(codeToStringMap, leadingIdentifiers, uint16);
-    add(codeToStringMap, leadingIdentifiers, int32);
-    add(codeToStringMap, leadingIdentifiers, uint32);
-    add(codeToStringMap, leadingIdentifiers, int64);
-    add(codeToStringMap, leadingIdentifiers, uint64);
-    add(codeToStringMap, leadingIdentifiers, float16);
-    add(codeToStringMap, leadingIdentifiers, float32);
-    add(codeToStringMap, leadingIdentifiers, float64);
-    add(codeToStringMap, leadingIdentifiers, float128);
-    add(codeToStringMap, leadingIdentifiers, bool);
-    add(codeToStringMap, leadingIdentifiers, go);
-    add(codeToStringMap, leadingIdentifiers, gosub);
-    add(codeToStringMap, leadingIdentifiers, ret);
-    return leadingIdentifiers;
-  }
-
-  protected List<String> defineLeadingStrings()
-  {
-    List<String> leadingStrings = new ArrayList<>();
-    add(codeToStringMap, leadingStrings, if_equals);
-    add(codeToStringMap, leadingStrings, if_greater);
-    add(codeToStringMap, leadingStrings, if_greater_equals);
-    add(codeToStringMap, leadingStrings, if_less);
-    add(codeToStringMap, leadingStrings, if_less_equals);
-    add(codeToStringMap, leadingStrings, if_not_equals);
-    add(codeToStringMap, leadingStrings, push);
-    sortLongestToShortest(leadingStrings);
-    return leadingStrings;
+    List<String> identifiers = new ArrayList<>();
+    add(codeToStringMap, identifiers, int8);
+    add(codeToStringMap, identifiers, uint8);
+    add(codeToStringMap, identifiers, int16);
+    add(codeToStringMap, identifiers, uint16);
+    add(codeToStringMap, identifiers, int32);
+    add(codeToStringMap, identifiers, uint32);
+    add(codeToStringMap, identifiers, int64);
+    add(codeToStringMap, identifiers, uint64);
+    add(codeToStringMap, identifiers, float16);
+    add(codeToStringMap, identifiers, float32);
+    add(codeToStringMap, identifiers, float64);
+    add(codeToStringMap, identifiers, float128);
+    add(codeToStringMap, identifiers, bool);
+    add(codeToStringMap, identifiers, flag);
+    add(codeToStringMap, identifiers, if_);
+    add(codeToStringMap, identifiers, return_);
+    return identifiers;
   }
 
   private void sortLongestToShortest(List<String> leadingStrings)
@@ -208,15 +177,6 @@ public class SixteenHighKeywords
     });
   }
 
-  private List<String> defineFollowingIdentifiers()
-  {
-    List<String> list = new ArrayList<>();
-    add(codeToStringMap, list, go);
-    add(codeToStringMap, list, test_set);
-    add(codeToStringMap, list, test_reset);
-    return list;
-  }
-
   private List<String> defineFollowingStrings()
   {
     List<String> list = new ArrayList<>();
@@ -235,11 +195,8 @@ public class SixteenHighKeywords
     add(codeToStringMap, list, not_assign);
     add(codeToStringMap, list, increment);
     add(codeToStringMap, list, decrement);
-    add(codeToStringMap, list, subtract_compare);
-    add(codeToStringMap, list, and_compare);
-    add(codeToStringMap, list, is_true);
-    add(codeToStringMap, list, is_false);
-    add(codeToStringMap, list, pull);
+    add(codeToStringMap, list, test_set);
+    add(codeToStringMap, list, test_reset);
     sortLongestToShortest(list);
     return list;
   }
@@ -354,19 +311,24 @@ public class SixteenHighKeywords
     return "";
   }
 
-  public String go()
-  {
-    return GO;
-  }
-
   public String end()
   {
     return END;
   }
 
-  public String struct()
+  public String rec()
   {
-    return STRUCT;
+    return REC;
+  }
+
+  public String if_()
+  {
+    return IF;
+  }
+
+  public String sub()
+  {
+    return SUB;
   }
 
   public char openRound()
@@ -388,7 +350,7 @@ public class SixteenHighKeywords
   {
     return CLOSE_SQUARE;
   }
-  
+
   public char reference()
   {
     return REFERENCE;
@@ -397,16 +359,6 @@ public class SixteenHighKeywords
   public char dereference()
   {
     return DEREFERENCE;
-  }
-
-  public char push()
-  {
-    return PUSH;
-  }
-
-  public char pull()
-  {
-    return PULL;
   }
 
   public char assign()
@@ -449,22 +401,10 @@ public class SixteenHighKeywords
     return Character.toString(AT);
   }
 
-  public List<SixteenHighKeywordCode> getBitCompares()
-  {
-    return CollectionUtil.newList(is_true,
-                                  is_false);
-  }
-
   public List<SixteenHighKeywordCode> getCrements()
   {
     return CollectionUtil.newList(increment,
                                   decrement);
-  }
-
-  public List<SixteenHighKeywordCode> getNumberCompares()
-  {
-    return CollectionUtil.newList(subtract_compare,
-                                  and_compare);
   }
 
   public List<SixteenHighKeywordCode> getAssignments()
@@ -484,16 +424,6 @@ public class SixteenHighKeywords
                                   not_assign);
   }
 
-  public List<SixteenHighKeywordCode> getIfs()
-  {
-    return CollectionUtil.newList(if_greater,
-                                  if_equals,
-                                  if_less,
-                                  if_greater_equals,
-                                  if_less_equals,
-                                  if_not_equals);
-  }
-
   public List<SixteenHighKeywordCode> getPrimitiveTypes()
   {
     return CollectionUtil.newList(int8,
@@ -511,19 +441,9 @@ public class SixteenHighKeywords
                                   bool);
   }
 
-  public List<String> getLeadingIdentifiers()
+  public List<String> getLeadingStatementIdentifiers()
   {
-    return leadingIdentifiers;
-  }
-
-  public List<String> getLeadingStrings()
-  {
-    return leadingStrings;
-  }
-
-  public List<String> getFollowingIdentifiers()
-  {
-    return followingIdentifiers;
+    return leadingStatementIdentifiers;
   }
 
   public List<String> getFollowingStrings()

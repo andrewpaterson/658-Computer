@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|27913606|25908001|d03271c5-8547-4d13-a89d-f1d7695f70dc|60c76cce-885b-4a50-a262-68064dc648a6"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -81,6 +79,7 @@
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "ignore",
         "item_on_disabled_layer": "error",
@@ -553,6 +552,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",

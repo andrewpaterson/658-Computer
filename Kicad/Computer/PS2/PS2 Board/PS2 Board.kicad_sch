@@ -1977,15 +1977,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "capacitor cap"
 				(at 0 0 0)
 				(effects
@@ -2069,7 +2060,7 @@
 				)
 			)
 		)
-		(symbol "HCP65:C_Polarized"
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -2086,35 +2077,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "C_Polarized"
-				(at 4.445 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "?μF"
+			(property "Value" "?μF"
 				(at 0.635 -2.54 0)
 				(effects
 					(font
@@ -2123,8 +2086,8 @@
 					(justify left)
 				)
 			)
-			(property "Garbage" "Polarized capacitor"
-				(at 0 0 0)
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2132,7 +2095,26 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "cap capacitor"
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2150,7 +2132,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_Polarized_0_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
 				(rectangle
 					(start -2.286 0.508)
 					(end 2.286 1.016)
@@ -2198,7 +2180,7 @@
 					)
 				)
 			)
-			(symbol "C_Polarized_1_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -6777,34 +6759,31 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "LED"
-				(at -1.27 3.175 0)
+				(at 0 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "LED"
-				(at 5.715 -5.715 0)
+			(property "Value" "Colour"
+				(at 0 -2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
 					(hide yes)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
+			(property "Datasheet" ""
 				(at 6.35 -7.62 90)
 				(effects
 					(font
@@ -6813,16 +6792,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Colour"
+			(property "Description" ""
 				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Garbage" "Light emitting diode, small symbol, filled shape"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -9227,11 +9198,12 @@
 				)
 			)
 			(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
-				(at 0 0 0)
+				(at 41.402 -79.502 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -10505,7 +10477,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "IC"
-				(at 7.62 4.445 0)
+				(at 7.62 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -10513,7 +10485,7 @@
 				)
 			)
 			(property "Value" "LD1117S50C"
-				(at 7.62 2.54 0)
+				(at 7.62 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -10591,11 +10563,12 @@
 				)
 			)
 			(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-				(at 0 0 0)
+				(at 27.94 -32.004 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -12375,17 +12348,6 @@
 		)
 		(uuid "49e1ee96-3a78-40c9-b943-2bea446a28b9")
 	)
-	(label "GND"
-		(at -158.75 318.77 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4a5cd48d-96fa-4aa6-af16-834b000cf814")
-	)
 	(label "A11"
 		(at -31.75 142.24 0)
 		(fields_autoplaced yes)
@@ -13876,17 +13838,6 @@
 			(justify right bottom)
 		)
 		(uuid "a35df00f-a201-49d9-9696-681ae31f93ab")
-	)
-	(label "GND"
-		(at -146.05 318.77 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a3769aa2-4e4f-4176-b9ea-ddd8e0f92098")
 	)
 	(label "Write Flags"
 		(at 45.72 153.67 0)
@@ -15570,80 +15521,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:MountingHole_Pad")
-		(at -146.05 316.23 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1c979e13-743f-472d-b8c7-9280c9e72553")
-		(property "Reference" "H8"
-			(at -146.05 311.785 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at -146.05 309.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
-			(at -146.05 326.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at -138.43 330.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at -146.05 316.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
-			(at -146.05 316.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c284b860-913e-4e7f-8009-f0b728a05b3f")
-		)
-		(instances
-			(project "PS2 Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "H8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:R_0805")
 		(at -124.46 294.64 90)
 		(unit 1)
@@ -15733,13 +15610,12 @@
 				)
 			)
 		)
-		(property "Value" "1µF"
-			(at 36.83 308.61 0)
+		(property "Value" "1μF"
+			(at 39.37 308.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
@@ -15761,15 +15637,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 36.83 306.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 36.83 306.07 0)
 			(effects
 				(font
@@ -15802,92 +15669,18 @@
 					(reference "C2")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C8")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C20")
 					(unit 1)
 				)
 			)
 			(project "PS2 Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:MountingHole_Pad")
-		(at -158.75 316.23 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "33126762-0a92-4861-824d-ecd2a8de8ab5")
-		(property "Reference" "H5"
-			(at -158.75 311.785 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at -158.75 309.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
-			(at -158.75 326.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at -151.13 330.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at -158.75 316.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
-			(at -158.75 316.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9137cb11-40a2-4445-83e0-21421971348c")
-		)
-		(instances
-			(project "PS2 Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "H5")
 					(unit 1)
 				)
 			)
@@ -15903,7 +15696,7 @@
 		(dnp no)
 		(uuid "37a74024-c882-46b7-ba59-a2867ee6755a")
 		(property "Reference" "IC3"
-			(at -151.765 283.21 0)
+			(at -152.4 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15911,7 +15704,7 @@
 			)
 		)
 		(property "Value" "LD1117S50C"
-			(at -152.4 285.75 0)
+			(at -152.4 285.115 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15989,11 +15782,12 @@
 			)
 		)
 		(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-			(at -160.02 288.29 0)
+			(at -132.08 320.294 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -16425,7 +16219,7 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at -135.89 292.1 0)
 		(mirror y)
 		(unit 1)
@@ -16435,7 +16229,7 @@
 		(dnp no)
 		(uuid "6b48f5cc-6716-40a1-a3ac-65b1c6328141")
 		(property "Reference" "C12"
-			(at -132.08 293.37 90)
+			(at -136.525 289.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16452,8 +16246,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at -136.8552 295.91 0)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at -135.89 303.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16461,7 +16255,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at -140.97 297.18 0)
 			(effects
 				(font
@@ -16470,31 +16264,13 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10μF"
+		(property "Description" ""
 			(at -136.525 294.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Polarized capacitor"
-			(at -135.89 292.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Field6" ""
-			(at -135.89 292.1 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -16708,13 +16484,12 @@
 				)
 			)
 		)
-		(property "Value" "1µF"
-			(at 21.59 308.61 0)
+		(property "Value" "1μF"
+			(at 24.13 308.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
@@ -16736,15 +16511,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 21.59 306.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 21.59 306.07 0)
 			(effects
 				(font
@@ -16777,12 +16543,12 @@
 					(reference "C2")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C8")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -17074,11 +16840,12 @@
 			)
 		)
 		(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
-			(at -77.47 223.52 0)
+			(at -36.068 303.022 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -17204,13 +16971,12 @@
 				)
 			)
 		)
-		(property "Value" "1µF"
-			(at -77.47 308.61 0)
+		(property "Value" "1μF"
+			(at -74.93 308.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
@@ -17232,15 +16998,6 @@
 			)
 		)
 		(property "Description" ""
-			(at -77.47 306.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at -77.47 306.07 0)
 			(effects
 				(font
@@ -17273,12 +17030,12 @@
 					(reference "C2")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C8")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -17883,7 +17640,7 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at -168.91 292.1 0)
 		(mirror y)
 		(unit 1)
@@ -17893,7 +17650,7 @@
 		(dnp no)
 		(uuid "a1157d19-373e-4574-9015-16d6d615942d")
 		(property "Reference" "C12"
-			(at -165.1 293.37 90)
+			(at -169.545 289.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17910,8 +17667,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at -169.8752 295.91 0)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at -168.91 303.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17919,7 +17676,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at -173.99 297.18 0)
 			(effects
 				(font
@@ -17928,22 +17685,13 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10μF"
+		(property "Description" ""
 			(at -169.545 294.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Polarized capacitor"
-			(at -168.91 292.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -18135,34 +17883,31 @@
 		(dnp no)
 		(uuid "cf09e1bf-2b8b-4277-982b-2e210b9a09cd")
 		(property "Reference" "LED1"
-			(at -121.285 295.91 0)
+			(at -121.285 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "LED"
-			(at -130.175 304.165 0)
+		(property "Value" "Colour"
+			(at -127 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+			(at -129.54 298.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
-			(at -124.46 298.45 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at -132.08 304.8 90)
 			(effects
 				(font
@@ -18171,16 +17916,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Colour"
+		(property "Description" ""
 			(at -127 298.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Garbage" "Light emitting diode, small symbol, filled shape"
-			(at -124.46 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19254,7 +18991,7 @@
 				)
 			)
 		)
-		(property "Value" "Flags Interrupt"
+		(property "Value" "Flags & Interrupt"
 			(at 95.25 198.755 0)
 			(effects
 				(font

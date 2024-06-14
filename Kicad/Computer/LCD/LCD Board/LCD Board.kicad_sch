@@ -2186,7 +2186,7 @@
 				)
 			)
 		)
-		(symbol "HCP65:C_Polarized"
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -2203,35 +2203,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "C_Polarized"
-				(at 4.445 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "?μF"
+			(property "Value" "?μF"
 				(at 0.635 -2.54 0)
 				(effects
 					(font
@@ -2240,8 +2212,8 @@
 					(justify left)
 				)
 			)
-			(property "Garbage" "Polarized capacitor"
-				(at 0 0 0)
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2249,7 +2221,26 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "cap capacitor"
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2267,7 +2258,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_Polarized_0_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
 				(rectangle
 					(start -2.286 0.508)
 					(end 2.286 1.016)
@@ -2315,7 +2306,7 @@
 					)
 				)
 			)
-			(symbol "C_Polarized_1_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -7672,7 +7663,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "IC"
-				(at 7.62 4.445 0)
+				(at 7.62 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -7680,7 +7671,7 @@
 				)
 			)
 			(property "Value" "LD1117S50C"
-				(at 7.62 2.54 0)
+				(at 7.62 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -7860,16 +7851,16 @@
 		)
 	)
 	(junction
+		(at 34.29 207.01)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8170ae3f-5b99-47a5-87d6-1eb86b1dfb23")
+	)
+	(junction
 		(at 228.6 95.25)
 		(diameter 0)
 		(color 24 199 56 1)
 		(uuid "886a596d-b7d6-4f6b-887a-f339fee15d96")
-	)
-	(junction
-		(at 67.31 207.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a809a983-db40-4871-ae12-8811f9db4f4c")
 	)
 	(junction
 		(at 78.74 207.01)
@@ -7878,10 +7869,10 @@
 		(uuid "a8666f11-e730-4c93-aae6-07f194a8ab8e")
 	)
 	(junction
-		(at 34.29 207.01)
+		(at 67.31 207.01)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d3dfe322-9460-4ca0-906f-f91e2e175ea1")
+		(uuid "f3762d76-5dca-4f11-98bc-7d981f37ef4c")
 	)
 	(no_connect
 		(at 54.61 96.52)
@@ -8848,7 +8839,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 207.01) (xy 78.74 207.01)
+			(xy 63.5 207.01) (xy 67.31 207.01)
 		)
 		(stroke
 			(width 0)
@@ -8942,6 +8933,16 @@
 			(type default)
 		)
 		(uuid "16d43ad9-c8d6-4ea4-99f0-88bc3afcbd0d")
+	)
+	(wire
+		(pts
+			(xy 67.31 207.01) (xy 78.74 207.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "173f15dc-97ed-4739-bc0c-765ddebdb580")
 	)
 	(wire
 		(pts
@@ -9400,6 +9401,16 @@
 			(color 36 156 255 1)
 		)
 		(uuid "62527660-45a9-40f3-b30e-53542ca3276d")
+	)
+	(wire
+		(pts
+			(xy 34.29 207.01) (xy 38.1 207.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "62e59e39-e897-4138-9ffb-d847e502f9d4")
 	)
 	(wire
 		(pts
@@ -10000,16 +10011,6 @@
 		)
 		(uuid "c1a203dc-d350-46d8-af40-2e39d7a36945")
 	)
-	(wire
-		(pts
-			(xy 34.29 207.01) (xy 38.1 207.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c651d285-8552-4978-b436-b88bfd022a02")
-	)
 	(bus
 		(pts
 			(xy 321.31 213.36) (xy 321.31 215.9)
@@ -10226,16 +10227,6 @@
 			(color 24 199 56 1)
 		)
 		(uuid "f3b28344-c510-4905-bb62-6753c93b6852")
-	)
-	(wire
-		(pts
-			(xy 67.31 207.01) (xy 63.5 207.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f71833f5-75e8-4863-bd74-20732247a104")
 	)
 	(bus
 		(pts
@@ -10952,17 +10943,6 @@
 		)
 		(uuid "32a3170d-77a9-4c6a-8b0a-03ffa227ea4e")
 	)
-	(label "GND"
-		(at 50.8 180.34 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "33468240-6538-46a4-87fd-7087c0f30fbf")
-	)
 	(label "A3"
 		(at 200.66 39.37 180)
 		(fields_autoplaced yes)
@@ -11567,17 +11547,6 @@
 			(justify right bottom)
 		)
 		(uuid "64dfc53e-8519-4b11-885f-f7f85a536b82")
-	)
-	(label "GND"
-		(at 63.5 180.34 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "66ff27fb-d226-4eca-a493-5a6342f2ce5d")
 	)
 	(label "A7"
 		(at 336.55 200.66 180)
@@ -13670,89 +13639,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
-		(at 67.31 210.82 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2ed5515f-63b3-4dc4-9b02-334044d50fc9")
-		(property "Reference" "C12"
-			(at 71.12 212.09 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C_Polarized"
-			(at 62.865 219.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at 66.3448 214.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 62.23 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "100μF"
-			(at 66.675 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "1"
-			(uuid "cc0999b9-13c4-4728-b2d5-35d072094466")
-		)
-		(pin "2"
-			(uuid "ad9f488d-8035-4573-af71-df372a54113a")
-		)
-		(instances
-			(project "Audio DAC"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "LCD Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:LED")
 		(at 78.74 217.17 270)
 		(unit 1)
@@ -13769,18 +13655,16 @@
 				)
 			)
 		)
-		(property "Value" "LED"
-			(at 73.025 222.885 0)
+		(property "Value" "Colour"
+			(at 76.2 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
-			(at 78.74 217.17 90)
+		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+			(at 73.66 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14195,6 +14079,76 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at 67.31 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6c08c357-1420-406c-9b01-f5d79cde59d8")
+		(property "Reference" "C3"
+			(at 67.945 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10μF"
+			(at 67.945 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 67.31 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 72.39 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 67.945 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "56b3fd05-601c-48ae-9298-3cb6946a9403")
+		)
+		(pin "2"
+			(uuid "c66db690-2e3d-4a9c-a22e-7594b0098015")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:LCD_Display")
 		(at 251.46 173.99 0)
 		(unit 1)
@@ -14536,7 +14490,7 @@
 		(dnp no)
 		(uuid "7dcbaabe-369f-44ad-9833-4238cefe4114")
 		(property "Reference" "IC3"
-			(at 50.8 202.565 0)
+			(at 50.8 201.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14544,7 +14498,7 @@
 			)
 		)
 		(property "Value" "LD1117S50C"
-			(at 50.8 204.47 0)
+			(at 50.8 203.835 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14552,7 +14506,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LD1117S33C"
+		(property "Footprint" "SamacSys_Parts:LD1117S33C"
 			(at 71.12 223.52 0)
 			(effects
 				(font
@@ -14653,80 +14607,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:MountingHole_Pad")
-		(at 50.8 177.8 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8b528e1f-e373-487c-9e73-55559c1cbd41")
-		(property "Reference" "H5"
-			(at 50.8 173.355 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 50.8 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
-			(at 50.8 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 58.42 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 50.8 177.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
-			(at 50.8 177.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "00df7d7d-587f-49e1-9a1e-2dc1aad88729")
-		)
-		(instances
-			(project "LCD Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "H5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:NetTie_2")
 		(at 148.59 50.8 0)
 		(unit 1)
@@ -14788,89 +14668,6 @@
 			(project "LCD Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "NT3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_Polarized")
-		(at 34.29 210.82 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "976883ce-a669-4e7a-8112-87cb66dafc1f")
-		(property "Reference" "C12"
-			(at 38.1 212.09 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C_Polarized"
-			(at 29.845 219.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at 33.3248 214.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 29.21 215.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "10μF"
-			(at 33.655 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "1"
-			(uuid "9cf917df-0193-4788-b65b-f00a4837cc5e")
-		)
-		(pin "2"
-			(uuid "7a353f17-58f1-4610-b4e0-44af05f9eabf")
-		)
-		(instances
-			(project "Audio DAC"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "LCD Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -15240,7 +15037,7 @@
 				)
 			)
 		)
-		(property "Footprint" "5408803224008"
+		(property "Footprint" "SamacSys_Parts:5408803224008"
 			(at 377.825 239.395 0)
 			(effects
 				(font
@@ -15579,80 +15376,6 @@
 			(project "LCD Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:MountingHole_Pad")
-		(at 63.5 177.8 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d1e42d9b-ff10-49b4-8cf9-029ed50f78df")
-		(property "Reference" "H8"
-			(at 63.5 173.355 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 63.5 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
-			(at 63.5 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 71.12 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 63.5 177.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
-			(at 63.5 177.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fb76509f-c80c-4634-9152-3dec6e488fd7")
-		)
-		(instances
-			(project "LCD Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "H8")
 					(unit 1)
 				)
 			)
@@ -16165,6 +15888,76 @@
 			(project "LCD Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at 34.29 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e9a78c2e-d7d9-4b2b-8f6e-7f03495bfb58")
+		(property "Reference" "C4"
+			(at 34.925 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10μF"
+			(at 34.925 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 34.29 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 34.925 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ba352bda-fba8-4edd-b2ed-0b8576088de1")
+		)
+		(pin "2"
+			(uuid "2b47113f-1fef-4b62-b216-a3ab4d7e634b")
+		)
+		(instances
+			(project "LCD Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C4")
 					(unit 1)
 				)
 			)

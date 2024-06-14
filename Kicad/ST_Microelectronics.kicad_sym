@@ -27,7 +27,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:DIOAD1414W86L464D238"
-			(at 11.43 0 0)
+			(at 12.065 -7.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37,7 +37,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.st.com/web/en/resource/technical/document/datasheet/CD00001625.pdf"
-			(at 11.43 -2.54 0)
+			(at 12.065 -10.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -65,7 +65,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "STMicroelectronics"
-			(at 11.43 -10.16 0)
+			(at 12.065 -17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -75,7 +75,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "1N5819RL"
-			(at 11.43 -12.7 0)
+			(at 12.065 -20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -85,7 +85,7 @@
 			)
 		)
 		(property "Mouser Part Number" "511-1N5819-TR"
-			(at 11.43 -15.24 0)
+			(at 12.065 -22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -95,41 +95,12 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/1N5819RL?qs=mRqUSD7FX17%2FYMiCEfKDjA%3D%3D"
-			(at 11.43 -17.78 0)
+			(at 12.065 -25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "1N5819RL"
-			(at 11.43 -20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/1n5819rl/stmicroelectronics?region=europe"
-			(at 11.43 -22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Diode Schottky 1A 40V DO41 STMicroelectronics 1N5819RL, Schottky Diode, 40V 1A, 2-Pin DO-41"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -238,7 +209,7 @@
 			)
 		)
 		(property "Value" "LD1117S33C"
-			(at 7.62 2.54 0)
+			(at 7.62 3.175 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -315,15 +286,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 3.3V; 0.95A; SOT223; SMD"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "LD1117S33C_0_0"
 			(pin passive line
 				(at 7.62 -12.7 90)
@@ -347,7 +309,7 @@
 		(symbol "LD1117S33C_0_1"
 			(polyline
 				(pts
-					(xy 0 1.27) (xy 15.24 1.27) (xy 15.24 -7.62) (xy 0 -7.62) (xy 0 1.27)
+					(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -7.62) (xy 0 -7.62) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -423,7 +385,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "IC"
-			(at 7.62 4.445 0)
+			(at 7.62 5.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -431,7 +393,7 @@
 			)
 		)
 		(property "Value" "LD1117S50C"
-			(at 7.62 2.54 0)
+			(at 7.62 3.175 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -600,6 +562,408 @@
 					)
 				)
 				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol "LK112M50TR"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 12.7 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LK112M50TR"
+			(at 12.7 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
+			(at 21.59 -14.605 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.mouser.co.za/datasheet/2/389/lk112-1849761.pdf"
+			(at 21.59 -17.145 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "5.0V LDO voltage regulator"
+			(at 12.7 -8.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.0"
+			(at 21.59 -19.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "ST Microelectronics"
+			(at 21.59 -22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "LK112M50TR"
+			(at 21.59 -24.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "LK112M50"
+			(at 21.59 -12.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(symbol "LK112M50TR_0_0"
+			(pin passive line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "LK112M50TR_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "LK112M50TR_1_0"
+			(pin input inverted
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "~{SHDN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -5.08 180)
+				(length 5.08)
+				(name "Bypass"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08)
+				(name "5.0VOut"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "14VIn"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol "LK112M60TR"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 12.7 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LK112M60TR"
+			(at 12.7 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
+			(at 21.59 -14.605 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.mouser.co.za/datasheet/2/389/lk112-1849761.pdf"
+			(at 21.59 -17.145 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "6.0V LDO voltage regulator"
+			(at 12.7 -8.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.0"
+			(at 21.59 -19.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "ST Microelectronics"
+			(at 21.59 -22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "LK112M60TR"
+			(at 21.59 -24.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "LK112M60"
+			(at 21.59 -12.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(symbol "LK112M60TR_0_0"
+			(pin passive line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "LK112M60TR_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "LK112M60TR_1_0"
+			(pin input inverted
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "~{SHDN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -5.08 180)
+				(length 5.08)
+				(name "Bypass"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08)
+				(name "5.0VOut"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "14VIn"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)

@@ -11794,15 +11794,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "MPU Timer"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "MPU Timer"
 				(at 0 0 0)
 				(effects
@@ -12009,10 +12000,10 @@
 						)
 					)
 				)
-				(pin no_connect line
+				(pin input inverted
 					(at -5.08 -12.7 0)
-					(length 5.08) hide
-					(name "N.C."
+					(length 5.08)
+					(name "~{Hold}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -22905,6 +22896,17 @@
 			(justify right bottom)
 		)
 		(uuid "12cb0099-5b64-4201-950a-4c8413a28d63")
+	)
+	(label "Native Latch"
+		(at 278.13 -34.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "13353150-9979-4091-874e-73fb6fea5233")
 	)
 	(label "~{RD}"
 		(at 356.87 130.81 180)
@@ -39676,15 +39678,6 @@
 		)
 		(property "Silkscreen" "MPU Timer"
 			(at 297.815 -31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "MPU Timer"
-			(at 283.21 -46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)

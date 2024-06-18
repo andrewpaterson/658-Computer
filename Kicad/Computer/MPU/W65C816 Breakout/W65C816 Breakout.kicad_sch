@@ -6,7 +6,7 @@
 	(paper "A2")
 	(title_block
 		(title "HCP65 W65C816 Breakout")
-		(date "2024-05-11")
+		(date "2024-06-18")
 		(rev "V2")
 	)
 	(lib_symbols
@@ -2643,24 +2643,6 @@
 			)
 			(symbol "AP7365-33WG-7_0_0"
 				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 -5.08 0)
 					(length 5.08)
 					(name "GND"
@@ -2714,24 +2696,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "AP7365-33WG-7_0_1"
 				(polyline
@@ -2744,6 +2708,44 @@
 					)
 					(fill
 						(type background)
+					)
+				)
+			)
+			(symbol "AP7365-33WG-7_1_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "6VIn"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "3.3VOut"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -2790,15 +2792,6 @@
 				)
 			)
 			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
 				(at 0 0 0)
 				(effects
 					(font
@@ -13612,6 +13605,17 @@
 		)
 		(uuid "3b42d462-ab59-4fad-847a-6bab99c22797")
 	)
+	(label "5V"
+		(at 53.34 252.73 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3d8edc0c-8518-48fc-9edc-562a816d51d5")
+	)
 	(label "D1_{65}"
 		(at 433.07 118.11 180)
 		(fields_autoplaced yes)
@@ -14228,6 +14232,17 @@
 		)
 		(uuid "6bb3a56d-68b6-4d49-85b8-a613566ae91c")
 	)
+	(label "5V"
+		(at 72.39 252.73 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6d75243a-398e-49a5-bce0-615602fd7e4d")
+	)
 	(label "VDA"
 		(at 368.3 97.79 180)
 		(fields_autoplaced yes)
@@ -14590,6 +14605,17 @@
 			(justify left bottom)
 		)
 		(uuid "8446d926-3042-47d2-843f-efd5c2351784")
+	)
+	(label "GND"
+		(at 77.47 252.73 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "84ce1b13-ab2b-4e15-99d9-47c0c8562ec8")
 	)
 	(label "5V"
 		(at 314.96 154.94 0)
@@ -15976,6 +16002,17 @@
 			(justify left bottom)
 		)
 		(uuid "f13f3cf7-f1c1-44dd-9c52-c5a6c1cb8eaf")
+	)
+	(label "GND"
+		(at 58.42 252.73 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f1af6066-ddeb-4252-8b0d-ed8cb24dbb92")
 	)
 	(label "D5_{65}"
 		(at 128.27 158.75 180)
@@ -17738,7 +17775,7 @@
 		(dnp no)
 		(uuid "06ba3bc9-5a9e-46bb-846c-632ab2d796c1")
 		(property "Reference" "J2"
-			(at 36.83 182.245 0)
+			(at 36.83 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18133,15 +18170,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 186.69 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "fdbffcbf-26c5-4671-bb48-e46d3f5a61cf")
 		)
@@ -18215,15 +18243,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 233.68 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "82cfa443-95cc-449b-9b9c-fbb9dce2edd1")
 		)
@@ -18289,15 +18308,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 360.68 303.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 360.68 303.53 0)
 			(effects
 				(font
@@ -18527,15 +18537,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 388.62 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "86a01d4f-1f31-4534-ab65-3ad7b907d215")
 		)
@@ -18609,15 +18610,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 386.08 303.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "80b9f239-528a-4c8c-b0d9-b7512876c8bd")
 		)
@@ -18634,6 +18626,73 @@
 			(project "W65C816 Breakout"
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
 					(reference "C16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 53.34 252.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3a335c7e-0f62-481c-b840-634cb4aa96f4")
+		(property "Reference" "C20"
+			(at 55.626 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10μF"
+			(at 55.88 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 70.104 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.5625 252.4125 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 53.34 252.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9796162d-d4f6-40a6-aaf4-c65ff6f99849")
+		)
+		(pin "2"
+			(uuid "3910c727-4854-4608-b91b-7547932f3c26")
+		)
+		(instances
+			(project "W65C816 Breakout"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -19809,15 +19868,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 220.98 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "2c6b9d93-dee2-4b35-a729-ed87ab5ed026")
 		)
@@ -19959,15 +20009,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 218.44 302.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "3dc2d309-95df-4118-92b3-224e386a0bc8")
 		)
@@ -20041,15 +20082,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 143.51 278.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "3e6ea7af-e87f-4a7e-b3af-9ab41f287bef")
 		)
@@ -20115,15 +20147,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 539.75 303.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 539.75 303.53 0)
 			(effects
 				(font
@@ -20371,15 +20394,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 496.57 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 496.57 243.84 0)
 			(effects
 				(font
@@ -20685,7 +20699,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "776b3560-e570-41a3-9d1e-312673053ff7")
-		(property "Reference" "IC17"
+		(property "Reference" "IC7"
 			(at 323.85 102.87 0)
 			(effects
 				(font
@@ -20827,7 +20841,7 @@
 		(instances
 			(project "W65C816 Breakout"
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "IC17")
+					(reference "IC7")
 					(unit 1)
 				)
 			)
@@ -20877,15 +20891,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 524.51 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 524.51 243.84 0)
 			(effects
 				(font
@@ -21614,15 +21619,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 356.87 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "0d16f954-5d4f-49b3-bd19-40747ba0a667")
 		)
@@ -21696,15 +21692,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 510.54 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "fcee2db8-1316-4e80-831f-936420d91191")
 		)
@@ -21770,15 +21757,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 358.14 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 358.14 185.42 0)
 			(effects
 				(font
@@ -22034,15 +22012,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 373.38 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "6fcb6d64-9575-4666-b854-a92baee9552e")
 		)
@@ -22108,15 +22077,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 347.98 303.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 347.98 303.53 0)
 			(effects
 				(font
@@ -22461,15 +22421,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 388.62 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "e3b45fbc-c2fd-4683-9f38-022791630228")
 		)
@@ -22535,15 +22486,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 388.62 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 388.62 124.46 0)
 			(effects
 				(font
@@ -23070,7 +23012,7 @@
 		(dnp no)
 		(uuid "e2240be1-8b22-4b04-8175-c1d02eb7e339")
 		(property "Reference" "J1"
-			(at 36.83 187.325 0)
+			(at 36.83 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23165,15 +23107,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 233.68 302.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 233.68 302.26 0)
 			(effects
 				(font
@@ -23679,15 +23612,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 538.48 243.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "639bf24f-ffed-48ba-96fc-014a42c58440")
 		)
@@ -23704,6 +23628,73 @@
 			(project "W65C816 Breakout"
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
 					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 72.39 252.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ee76e625-cb95-4a4c-957c-57edfe9e9385")
+		(property "Reference" "C21"
+			(at 74.676 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10μF"
+			(at 74.93 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 89.154 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.6125 252.4125 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 72.39 252.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "29be33a5-cc8a-4ee8-b732-934e23e9e74c")
+		)
+		(pin "2"
+			(uuid "dbce5707-3c0c-45d9-bae9-d12892a567c7")
+		)
+		(instances
+			(project "W65C816 Breakout"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(reference "C21")
 					(unit 1)
 				)
 			)
@@ -24227,15 +24218,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 373.38 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "d0e8d5da-0776-4732-9605-579886c9ede2")
 		)
@@ -24267,12 +24249,11 @@
 		(dnp no)
 		(uuid "f9ffa1b8-d3f9-4f94-b4b8-34dd1e83b0b8")
 		(property "Reference" "IC20"
-			(at 516.89 180.34 0)
+			(at 516.89 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify top)
 			)
 		)
 		(property "Value" "SN74CBT3244CPWR"
@@ -24667,15 +24648,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 373.38 303.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 373.38 303.53 0)
 			(effects
 				(font

@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "W65C816 High Speed Board")
-		(date "2024-06-18")
+		(date "2024-06-24")
 		(rev "V0")
 	)
 	(lib_symbols
@@ -3829,6 +3829,33 @@
 				)
 			)
 			(symbol "LCD_Display_1_1"
+				(text "E"
+					(at 3.81 -12.7 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
+				(text "RS"
+					(at 3.81 -10.16 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
+				(text "R~{W}"
+					(at 3.81 -7.62 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
 				(pin passive line
 					(at -5.08 -40.64 0)
 					(length 5.08) hide
@@ -4336,7 +4363,7 @@
 				(pin input inverted
 					(at -5.08 0 0)
 					(length 5.08)
-					(name "Device_~{CS}"
+					(name "~{CS}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7157,20 +7184,22 @@
 				)
 			)
 			(symbol "W65C816_Breakout_1_1"
-				(text "(~{PHI2})"
-					(at 15.875 -22.86 0)
+				(text "~{PHI2}"
+					(at 13.97 -22.86 0)
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
+						(justify left)
 					)
 				)
-				(text "(~{PHI2})"
-					(at 15.875 -20.32 0)
+				(text "~{PHI2}"
+					(at 13.97 -20.32 0)
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
+						(justify left)
 					)
 				)
 				(pin output line

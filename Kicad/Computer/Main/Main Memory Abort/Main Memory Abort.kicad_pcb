@@ -149,7 +149,7 @@
 	(net 38 "~{Main}_{1}")
 	(net 39 "~{Main}_{2}")
 	(net 40 "~{Reset}")
-	(net 41 "~{ABORT}")
+	(net 41 "~{Contention}")
 	(net 42 "~{Main}_{M}")
 	(footprint "SamacSys_Parts:C_0805"
 		(layer "F.Cu")
@@ -3154,7 +3154,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252453 -1.848189)
+			(mid 16.25245 -1.848186)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -3472,7 +3472,7 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "~{ABORT}")
+			(net 41 "~{Contention}")
 			(pinfunction "Pin_19")
 			(pintype "passive")
 			(uuid "9e29a15d-8dcf-423c-add3-b4ecc75e688a")
@@ -4682,7 +4682,7 @@
 			(at -2.938 1.3 90)
 			(size 0.45 1.475)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 41 "~{ABORT}")
+			(net 41 "~{Contention}")
 			(pinfunction "~{1Q}")
 			(pintype "output")
 			(uuid "99db1c0f-6d36-41e4-9507-8df434bad690")
@@ -4900,7 +4900,7 @@
 			(justify left)
 		)
 	)
-	(gr_text "~{ABORT}"
+	(gr_text "~{FAIL}"
 		(at 103.124 91.44 0)
 		(layer "F.SilkS")
 		(uuid "d1c28810-d723-4103-b4d8-0e973c4f0e0e")

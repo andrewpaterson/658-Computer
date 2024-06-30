@@ -1,48 +1,91 @@
-(kicad_sch (version 20230121) (generator eeschema)
-
-  (uuid 5ce90b85-49a2-4937-86c7-662b0d6f8431)
-
-  (paper "A4")
-
-  (lib_symbols
-  )
-
-
-  (sheet (at 59.69 67.945) (size 41.275 3.81) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid 8930aa9e-22ee-479a-920b-e4fb74738864)
-    (property "Sheetname" "Asynchronous Write (FIFO)" (at 59.69 67.2334 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "Asyncronous Write FIFO.kicad_sch" (at 59.69 72.3396 0)
-      (effects (font (size 1.27 1.27)) (justify left top) hide)
-    )
-    (instances
-      (project "Video 400x600 single"
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431" (page "2"))
-      )
-    )
-  )
-
-  (sheet (at 59.69 59.69) (size 41.275 3.81) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid 90fe8a5f-d100-4cf8-aea0-fc349bbfd69e)
-    (property "Sheetname" "Asynchronous Write (PHI2 Hold)" (at 59.69 58.9784 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "Asyncronous Write PHI2 Hold.kicad_sch" (at 59.69 64.0846 0)
-      (effects (font (size 1.27 1.27)) (justify left top) hide)
-    )
-    (instances
-      (project "Video 400x600 single"
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431" (page "4"))
-      )
-    )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
-  )
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "5ce90b85-49a2-4937-86c7-662b0d6f8431")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 59.69 67.945)
+		(size 41.275 3.81)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "8930aa9e-22ee-479a-920b-e4fb74738864")
+		(property "Sheetname" "Asynchronous Write (FIFO)"
+			(at 59.69 67.2334 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Asyncronous Write FIFO.kicad_sch"
+			(at 59.69 72.3396 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Async FIFO Write"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 59.69 59.69)
+		(size 41.275 3.81)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "90fe8a5f-d100-4cf8-aea0-fc349bbfd69e")
+		(property "Sheetname" "Asynchronous Write (PHI2 Hold)"
+			(at 59.69 58.9784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Asyncronous Write PHI2 Hold.kicad_sch"
+			(at 59.69 64.0846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Async FIFO Write"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
 )

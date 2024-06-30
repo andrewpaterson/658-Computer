@@ -2025,7 +2025,7 @@
 				)
 			)
 		)
-		(symbol "HCP65:C_Polarized"
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -2042,35 +2042,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "C_Polarized"
-				(at 4.445 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Polarized capacitor"
+			(property "Value" "?μF"
 				(at 0.635 -2.54 0)
 				(effects
 					(font
@@ -2079,7 +2051,35 @@
 					(justify left)
 				)
 			)
-			(property "ki_keywords" "cap capacitor"
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2097,7 +2097,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_Polarized_0_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
 				(rectangle
 					(start -2.286 0.508)
 					(end 2.286 1.016)
@@ -2145,7 +2145,7 @@
 					)
 				)
 			)
-			(symbol "C_Polarized_1_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -8626,19 +8626,19 @@
 		(at 538.48 196.85)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "48fbd298-9081-4302-949e-d7eb0209d540")
+		(uuid "bf19b299-c959-44cc-9269-f48353a7484c")
+	)
+	(junction
+		(at 571.5 196.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c1306fe1-c091-473c-a3ae-22547a67afde")
 	)
 	(junction
 		(at 581.66 196.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c5a31978-5a0d-427f-a6e2-39036de48dac")
-	)
-	(junction
-		(at 571.5 196.85)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ed8ef4b3-c24f-40d4-9536-97485a298652")
 	)
 	(no_connect
 		(at 93.98 105.41)
@@ -8713,16 +8713,8 @@
 		(uuid "29466188-326f-4304-986d-967a56a4bf84")
 	)
 	(no_connect
-		(at 213.36 102.87)
-		(uuid "2cb2d078-06b9-4eaa-a3e5-efaa6dcb7ff3")
-	)
-	(no_connect
 		(at 345.44 95.25)
 		(uuid "2db4e218-f68f-43bc-8adf-278515cfd585")
-	)
-	(no_connect
-		(at 154.94 82.55)
-		(uuid "2f7b33cb-a88f-4059-84bd-ba27639b715c")
 	)
 	(no_connect
 		(at 35.56 143.51)
@@ -8789,12 +8781,20 @@
 		(uuid "4f4923f8-b251-4518-8ca1-e950cf293b58")
 	)
 	(no_connect
+		(at 93.98 82.55)
+		(uuid "504c142c-501a-4e95-b1f8-2e1efc8125d0")
+	)
+	(no_connect
 		(at 403.86 120.65)
 		(uuid "52ca933f-2f16-4505-93eb-05f70100c911")
 	)
 	(no_connect
 		(at 93.98 133.35)
 		(uuid "53a33866-fc49-4075-a956-912b283b419c")
+	)
+	(no_connect
+		(at 35.56 82.55)
+		(uuid "53bb7e59-77c8-4bc1-a630-647a14595661")
 	)
 	(no_connect
 		(at 316.23 326.39)
@@ -8845,10 +8845,6 @@
 		(uuid "6cf3fcaf-28f0-4ceb-8d53-cf84cdde3238")
 	)
 	(no_connect
-		(at 403.86 82.55)
-		(uuid "72709f57-185f-4a0b-97f8-6e99b74363cb")
-	)
-	(no_connect
 		(at 316.23 283.21)
 		(uuid "73d48b25-028d-424a-a85b-781a376d9077")
 	)
@@ -8877,10 +8873,6 @@
 		(uuid "84b3c733-7a17-4e30-b859-ec42ec128fb1")
 	)
 	(no_connect
-		(at 93.98 82.55)
-		(uuid "856fb108-1b70-4c56-82db-591cff6b75df")
-	)
-	(no_connect
 		(at 154.94 133.35)
 		(uuid "85ace6dd-2d27-4566-a03f-2fa1b08bab92")
 	)
@@ -8897,6 +8889,10 @@
 		(uuid "8e681626-4d36-4304-ad1a-0fb0c30692e5")
 	)
 	(no_connect
+		(at 403.86 82.55)
+		(uuid "906df5a9-b7ab-48be-91b4-23a1267d22a0")
+	)
+	(no_connect
 		(at 213.36 95.25)
 		(uuid "92f32d87-096d-4497-bbb0-ae55fcca6ba4")
 	)
@@ -8907,10 +8903,6 @@
 	(no_connect
 		(at 499.11 279.4)
 		(uuid "939994c9-9a2e-4b2b-b97a-bbb47c99679e")
-	)
-	(no_connect
-		(at 213.36 82.55)
-		(uuid "94e22379-ca3b-4e1a-bd2b-f9325a331317")
 	)
 	(no_connect
 		(at 213.36 85.09)
@@ -8925,12 +8917,12 @@
 		(uuid "9aa224bb-3027-4b7b-b66b-f56831b21818")
 	)
 	(no_connect
-		(at 35.56 82.55)
-		(uuid "9d76edb3-f111-4491-8201-f3eb08ac0083")
-	)
-	(no_connect
 		(at 345.44 138.43)
 		(uuid "9de78659-f685-4efe-904a-d47995cb8666")
+	)
+	(no_connect
+		(at 345.44 82.55)
+		(uuid "9dee9544-a768-4b23-9aed-a780642e6666")
 	)
 	(no_connect
 		(at 93.98 90.17)
@@ -9081,20 +9073,12 @@
 		(uuid "e8ac3a0c-798d-441a-ba82-8a90a341934c")
 	)
 	(no_connect
-		(at 345.44 82.55)
-		(uuid "e8e5cd1a-df8c-40a5-b878-e06f94b134bf")
-	)
-	(no_connect
 		(at 236.22 80.01)
 		(uuid "eae28632-753a-46d8-b977-44bb029a9049")
 	)
 	(no_connect
 		(at 35.56 105.41)
 		(uuid "ef6296d4-4891-4bd3-956d-39f6994b097f")
-	)
-	(no_connect
-		(at 154.94 102.87)
-		(uuid "efbeea05-d24f-41a4-8373-5fe0ce42e559")
 	)
 	(no_connect
 		(at 213.36 90.17)
@@ -9214,7 +9198,7 @@
 	)
 	(wire
 		(pts
-			(xy 538.48 196.85) (xy 542.29 196.85)
+			(xy 529.59 196.85) (xy 538.48 196.85)
 		)
 		(stroke
 			(width 0)
@@ -9254,16 +9238,6 @@
 	)
 	(wire
 		(pts
-			(xy 571.5 196.85) (xy 581.66 196.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "612542e6-b0cd-4b62-8549-3143186c9697")
-	)
-	(wire
-		(pts
 			(xy 506.73 196.85) (xy 519.43 196.85)
 		)
 		(stroke
@@ -9294,23 +9268,13 @@
 	)
 	(wire
 		(pts
-			(xy 571.5 196.85) (xy 567.69 196.85)
+			(xy 567.69 196.85) (xy 571.5 196.85)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "81364686-8256-4169-aa1c-d1a06245a7f3")
-	)
-	(wire
-		(pts
-			(xy 529.59 196.85) (xy 538.48 196.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "831745a8-4c3b-4f45-911b-71d5be645276")
 	)
 	(wire
 		(pts
@@ -9454,6 +9418,16 @@
 	)
 	(wire
 		(pts
+			(xy 538.48 196.85) (xy 542.29 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2f618c6-2351-4174-9e27-75da5d989141")
+	)
+	(wire
+		(pts
 			(xy 269.24 85.09) (xy 284.48 85.09)
 		)
 		(stroke
@@ -9461,6 +9435,16 @@
 			(type default)
 		)
 		(uuid "e8202d46-b0c1-42ad-b33a-7eb00b950d56")
+	)
+	(wire
+		(pts
+			(xy 571.5 196.85) (xy 581.66 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8288fff-2bf8-4fe7-b7fb-d959a5cfcb2a")
 	)
 	(wire
 		(pts
@@ -10209,7 +10193,7 @@
 		)
 		(uuid "1508c6f9-7788-4ee5-9d4c-a5f8cadc8a7d")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Access}_{M0}"
 		(at 499.11 264.16 0)
 		(fields_autoplaced yes)
 		(effects
@@ -10395,6 +10379,17 @@
 			(justify left bottom)
 		)
 		(uuid "1b3e2022-0196-486f-be00-08752d7a7ae8")
+	)
+	(label "CLK_{M0}"
+		(at 213.36 82.55 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1b7dccbe-ac4f-45de-95d8-9187035bd2fe")
 	)
 	(label "A0_{D}"
 		(at 119.38 316.23 180)
@@ -11100,6 +11095,17 @@
 		)
 		(uuid "2e1c9f93-b9ae-412d-a6af-40b2933f7d40")
 	)
+	(label "~{Main Access}_{M0}"
+		(at 213.36 102.87 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2e5ec63e-f3bc-4883-92f8-d9dac5abf279")
+	)
 	(label "A5_{M}"
 		(at 213.36 184.15 180)
 		(fields_autoplaced yes)
@@ -11792,6 +11798,17 @@
 			(justify left bottom)
 		)
 		(uuid "423e9113-0030-410c-930c-a9e3185d3f17")
+	)
+	(label "CLK_{M0}"
+		(at 154.94 82.55 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4289eac2-6805-4f73-9ba7-e11f42d04e3c")
 	)
 	(label "H1_{D}"
 		(at 236.22 151.13 0)
@@ -13135,7 +13152,7 @@
 		)
 		(uuid "663309cd-1daa-443b-88fd-2492e5b71246")
 	)
-	(label "CLK_{IN}"
+	(label "CLK_{M0}"
 		(at 284.48 82.55 180)
 		(fields_autoplaced yes)
 		(effects
@@ -14477,7 +14494,7 @@
 		)
 		(uuid "8e6c24bd-a7f7-4b9d-8a5d-cdd9bf423581")
 	)
-	(label "CLK_{IN}"
+	(label "CLK_{M0}"
 		(at 499.11 261.62 0)
 		(fields_autoplaced yes)
 		(effects
@@ -16655,7 +16672,7 @@
 		)
 		(uuid "d737aa36-a2d8-43fb-9265-b68af9fffa3a")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Access}_{M0}"
 		(at 284.48 102.87 180)
 		(fields_autoplaced yes)
 		(effects
@@ -17028,6 +17045,17 @@
 			(justify right bottom)
 		)
 		(uuid "e3f8ad3d-af31-4a12-b21f-d88c3a985902")
+	)
+	(label "~{Main Access}_{M0}"
+		(at 154.94 102.87 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e42b754b-fe21-485f-b597-3437f42de152")
 	)
 	(label "GND"
 		(at 35.56 153.67 180)
@@ -18497,6 +18525,77 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at 538.48 200.66 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0b55ad10-5e46-4857-85c4-3bbcfaafd7e3")
+		(property "Reference" "C4"
+			(at 537.845 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10μF"
+			(at 534.67 203.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 538.48 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 533.4 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 537.845 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ebd91815-cf91-4e89-a1e2-5c9b02265277")
+		)
+		(pin "2"
+			(uuid "8252145f-8cb2-49ea-8a16-850962a8e9f8")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -20405,6 +20504,77 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at 571.5 200.66 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "787e32fa-1f94-4b9d-b85a-da83743029cb")
+		(property "Reference" "C3"
+			(at 570.865 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100μF"
+			(at 567.69 203.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 571.5 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 566.42 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 570.865 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d806f0b4-ab42-489f-ac4d-ef8d00b07dfb")
+		)
+		(pin "2"
+			(uuid "740f40f6-eee6-4108-9921-26ce3f8a8a5f")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:R_0805")
 		(at 261.62 77.47 0)
 		(unit 1)
@@ -20545,172 +20715,6 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_Polarized")
-		(at 571.5 200.66 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "86e9d84a-77db-41f7-9f1d-71ee0a68b660")
-		(property "Reference" "C12"
-			(at 575.31 201.93 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C_Polarized"
-			(at 567.055 208.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at 570.5348 204.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 566.42 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "100μF"
-			(at 570.865 203.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "1"
-			(uuid "659f81ca-cb94-4083-8926-0dd8a783b708")
-		)
-		(pin "2"
-			(uuid "6fd0ad0d-7362-442f-b405-564c962f3bd7")
-		)
-		(instances
-			(project "Audio DAC"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "Mainboard Small"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_Polarized")
-		(at 538.48 200.66 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8a644332-8077-463d-adae-43e687482df9")
-		(property "Reference" "C12"
-			(at 542.29 201.93 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C_Polarized"
-			(at 534.035 208.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at 537.5148 204.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 533.4 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "10μF"
-			(at 537.845 203.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "1"
-			(uuid "a96bd221-6c8b-405c-ae13-74ebab5864cc")
-		)
-		(pin "2"
-			(uuid "e5a14b41-7fc2-404f-a4c7-244daa431b94")
-		)
-		(instances
-			(project "Audio DAC"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "Mainboard Small"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C4")
 					(unit 1)
 				)
 			)

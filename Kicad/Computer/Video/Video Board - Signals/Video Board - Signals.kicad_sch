@@ -5202,15 +5202,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "capacitor cap"
 				(at 0 0 0)
 				(effects
@@ -5294,7 +5285,7 @@
 				)
 			)
 		)
-		(symbol "HCP65:C_Polarized"
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -5311,35 +5302,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "C_Polarized"
-				(at 4.445 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "?μF"
+			(property "Value" "?μF"
 				(at 0.635 -2.54 0)
 				(effects
 					(font
@@ -5348,8 +5311,8 @@
 					(justify left)
 				)
 			)
-			(property "Garbage" "Polarized capacitor"
-				(at 0 0 0)
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -5357,7 +5320,26 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "cap capacitor"
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -5375,7 +5357,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_Polarized_0_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
 				(rectangle
 					(start -2.286 0.508)
 					(end 2.286 1.016)
@@ -5423,7 +5405,7 @@
 					)
 				)
 			)
-			(symbol "C_Polarized_1_1"
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -10817,34 +10799,31 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "LED"
-				(at -1.27 3.175 0)
+				(at 0 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "LED"
-				(at 5.715 -5.715 0)
+			(property "Value" "Colour"
+				(at 0 -2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
 					(hide yes)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
+			(property "Datasheet" ""
 				(at 6.35 -7.62 90)
 				(effects
 					(font
@@ -10853,16 +10832,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Colour"
+			(property "Description" ""
 				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Garbage" "Light emitting diode, small symbol, filled shape"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -17773,7 +17744,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "IC"
-				(at 7.62 4.445 0)
+				(at 7.62 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -17781,7 +17752,7 @@
 				)
 			)
 			(property "Value" "LD1117S50C"
-				(at 7.62 2.54 0)
+				(at 7.62 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -18795,7 +18766,7 @@
 		(at -292.1 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7789f76e-5f34-485c-8455-95b3465e6194")
+		(uuid "83a7f78e-bc59-4369-a44e-a6e3ab20bdc1")
 	)
 	(junction
 		(at -101.6 -1.27)
@@ -18810,16 +18781,16 @@
 		(uuid "a4503480-b7d5-4f39-a2dc-81e8b6ccd37a")
 	)
 	(junction
-		(at -259.08 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cb17b6bd-1a69-4857-ba45-bf137a0ac66a")
-	)
-	(junction
 		(at -101.6 323.85)
 		(diameter 0)
 		(color 36 156 255 1)
 		(uuid "db1816db-05fb-45f1-8c55-a228f47aa2de")
+	)
+	(junction
+		(at -259.08 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e3c252d2-0187-4d5e-a08f-7677e5c76374")
 	)
 	(junction
 		(at -101.6 393.7)
@@ -23099,16 +23070,6 @@
 	)
 	(wire
 		(pts
-			(xy -295.91 58.42) (xy -292.1 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5053bbcf-4ff8-4b53-a072-b9ba03395beb")
-	)
-	(wire
-		(pts
 			(xy -93.98 167.64) (xy -73.66 167.64)
 		)
 		(stroke
@@ -23610,7 +23571,7 @@
 	)
 	(wire
 		(pts
-			(xy -292.1 58.42) (xy -288.29 58.42)
+			(xy -295.91 58.42) (xy -292.1 58.42)
 		)
 		(stroke
 			(width 0)
@@ -23814,16 +23775,6 @@
 			(color 24 199 56 1)
 		)
 		(uuid "7474e54b-036a-4f0a-b30a-b309f0efa92a")
-	)
-	(wire
-		(pts
-			(xy -259.08 58.42) (xy -262.89 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74d7178e-35e1-4a20-9d39-bc1c759bddf7")
 	)
 	(bus
 		(pts
@@ -24178,7 +24129,7 @@
 	)
 	(wire
 		(pts
-			(xy -259.08 58.42) (xy -247.65 58.42)
+			(xy -262.89 58.42) (xy -259.08 58.42)
 		)
 		(stroke
 			(width 0)
@@ -24305,6 +24256,16 @@
 			(color 255 81 171 1)
 		)
 		(uuid "8da470a6-5f57-47a1-b816-fbdedc917124")
+	)
+	(wire
+		(pts
+			(xy -292.1 58.42) (xy -288.29 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8dab29b6-40cd-431e-8f8d-8af97958a9ec")
 	)
 	(wire
 		(pts
@@ -26528,6 +26489,16 @@
 			(color 255 176 47 1)
 		)
 		(uuid "ed5ef920-c703-4580-8ac0-bf4db6d6d413")
+	)
+	(wire
+		(pts
+			(xy -259.08 58.42) (xy -247.65 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed7539fc-2350-4ae9-9d42-fb2b6198f772")
 	)
 	(wire
 		(pts
@@ -38658,15 +38629,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 157.48 203.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "2"
 			(uuid "981a5616-f594-4c2e-af94-ddda6a6c839e")
 		)
@@ -39557,89 +39519,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
-		(at -292.1 62.23 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "353f8a22-cb17-433d-a35a-8f13f8d0f23c")
-		(property "Reference" "C12"
-			(at -288.29 63.5 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C_Polarized"
-			(at -296.545 70.485 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at -293.0652 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at -297.18 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "10μF"
-			(at -292.735 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "1"
-			(uuid "36efb5ef-6310-4072-8d4a-149b85281622")
-		)
-		(pin "2"
-			(uuid "213600fb-cd29-4330-95e7-bf16e9588aca")
-		)
-		(instances
-			(project "Audio DAC"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "Video Board - Signals"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:NetTie")
 		(at -236.22 111.76 0)
 		(mirror y)
@@ -39869,6 +39748,76 @@
 			(project "Video Board - Signals"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at -259.08 62.23 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4334c217-5d97-41dd-b96a-922713763a81")
+		(property "Reference" "C2"
+			(at -258.445 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100μF"
+			(at -258.445 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at -259.08 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at -254 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at -258.445 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b0f7b35a-0dad-4e46-b3ca-7238b852dc2b")
+		)
+		(pin "2"
+			(uuid "d88e4ad8-ce00-4961-8e20-a2224e05acf8")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -40216,12 +40165,11 @@
 		(dnp no)
 		(uuid "50229e86-1aec-4f69-96be-26ec0a1d87b5")
 		(property "Reference" "LED1"
-			(at -244.475 66.04 0)
+			(at -244.475 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "LED"
@@ -40234,8 +40182,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
-			(at -247.65 68.58 90)
+		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+			(at -252.73 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40243,7 +40191,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at -255.27 74.93 90)
 			(effects
 				(font
@@ -40252,12 +40200,13 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Colour"
+		(property "Description" ""
 			(at -250.19 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -41439,89 +41388,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_Polarized")
-		(at -259.08 62.23 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "712e8b87-a1a4-4aca-84b8-d61e225ba8ed")
-		(property "Reference" "C12"
-			(at -255.27 63.5 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C_Polarized"
-			(at -263.525 70.485 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D4.0mm_P2.00mm"
-			(at -260.0452 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at -264.16 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "100μF"
-			(at -259.715 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "1"
-			(uuid "ca9d5f11-fd16-4606-ae30-df04e3a60efe")
-		)
-		(pin "2"
-			(uuid "123e432e-f9b2-49f1-9aa7-46e91cc55725")
-		)
-		(instances
-			(project "Audio DAC"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "Video Board - Signals"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:Comparator_10bit")
 		(at -52.07 459.74 0)
 		(unit 1)
@@ -42201,6 +42067,76 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at -292.1 62.23 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a0f6805f-40dc-4d98-90b2-9f3310755cd0")
+		(property "Reference" "C1"
+			(at -291.465 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10μF"
+			(at -291.465 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at -292.1 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at -287.02 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at -291.465 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fc571d2d-a969-4b1b-9094-de758df32417")
+		)
+		(pin "2"
+			(uuid "e32eaf8b-9509-4afb-80ad-e5c708e1564f")
+		)
+		(instances
+			(project "Video Board - Signals"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:Device_Buffer")
 		(at -156.21 76.2 0)
 		(unit 1)
@@ -42707,7 +42643,7 @@
 		(dnp no)
 		(uuid "baed6955-8ed3-4d29-8ba7-ec892b51aba4")
 		(property "Reference" "IC1"
-			(at -274.955 53.34 0)
+			(at -275.59 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)

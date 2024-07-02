@@ -114,15 +114,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Maxim DS1813R-10+T&R, Voltage Supervisor 4.25  4.49 V, Reset Input, 3-Pin SOT-23"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "DS1813R-10+T&R_0_0"
 			(pin output inverted
 				(at 25.4 0 180)
@@ -323,15 +314,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Maxim DS1834S+, Voltage Supervisor, 3.3  5 V, Reset Input, 8-Pin SOIC"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -602,15 +584,6 @@
 		)
 		(property "Silkscreen" "GPTS203211B"
 			(at 5.08 -2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Pushbutton Switches SPST ON-OFF"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1223,15 +1196,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Digital to Analog Converters - DAC +2.7V to +5.5V, Low-Power, Dual, Parallel 8-Bit DAC with Rail-to-Rail Voltage Outputs"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "MAX5102BEUE+T_0_0"
 			(pin passive line
 				(at 25.4 0 180)
@@ -1640,26 +1604,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "MAX6816EUS+T"
-			(at 20.955 -30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/max6816eust/maxim-integrated?region=nac"
-			(at 20.955 -33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 		(property "Silkscreen" "MAX6816"
 			(at 20.955 -15.24 0)
 			(effects
@@ -1667,15 +1611,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Maxim MAX6816EUS+T, Bounce Eliminator Circuit, 2.7 V to 5.5 V, 4-Pin SOT-143"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -1761,6 +1696,245 @@
 				(stroke
 					(width 0.1524)
 					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "MAX9010EXT+T"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 13.97 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MAX9010EXT+T"
+			(at 13.97 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SOT65P210X110-6N"
+			(at 19.685 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://componentsearchengine.com/Datasheets/2/MAX9010EXT+T.pdf"
+			(at 19.685 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "comparator"
+			(at 13.97 -8.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 29.21 -25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Analog Devices"
+			(at 19.685 -29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "MAX9010EXT+T"
+			(at 19.685 -31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "700-MAX9010EXTT"
+			(at 19.685 -34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX9010EXT%2bT?qs=1eQvB6Dk1viCD4qUbzbvUg%3D%3D"
+			(at 19.685 -36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "MAX9010"
+			(at 19.685 -24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(symbol "MAX9010EXT+T_0_0"
+			(pin passive line
+				(at 27.94 -5.08 180)
+				(length 5.08)
+				(name "OUT"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "IN+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "IN-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "MAX9010EXT+T_1_0"
+			(pin passive line
+				(at 0 -5.08 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 27.94 -2.54 180)
+				(length 5.08) hide
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 27.94 0 180)
+				(length 5.08) hide
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "MAX9010EXT+T_1_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 22.86 1.905) (xy 22.86 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type solid)
 				)
 				(fill
 					(type background)

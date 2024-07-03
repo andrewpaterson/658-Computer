@@ -28,7 +28,7 @@
 			)
 		)
 	)
-	(property "Footprint" "HCP65_24Pad_Board_W15.24mm"
+	(property "Footprint" ""
 		(at 7.366 35.179 0)
 		(unlocked yes)
 		(layer "F.Fab")
@@ -50,20 +50,20 @@
 		(uuid "62429ee5-c568-477d-95f1-87ec96a5c7c8")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
 				(thickness 0.15)
 			)
 		)
 	)
 	(property "Description" "HCP65 SD Card Read Data"
-		(at 7.493 37.719 0)
+		(at 7.366 35.306 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "d13920d4-ea9e-4e9e-b913-25371f7e00f0")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
 				(thickness 0.15)
 			)
 		)
@@ -373,6 +373,14 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "97c075a3-6135-4c07-8d87-0d99d7764da9")
+	)
+	(pad "17" thru_hole circle
+		(at 15.24 17.78)
+		(size 1.5 1.5)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "977e58ee-119e-4849-b8b1-c4d7a4d1319e")
 	)
 	(pad "18" thru_hole circle
 		(at 15.24 15.24)

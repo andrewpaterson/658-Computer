@@ -919,16 +919,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
 				(pin passive line
 					(at 0 -5.08 0)
@@ -2611,16 +2601,6 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 116.84) (xy 152.4 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c3cb5c6c-7bdc-44a5-a773-2e493e4123d2")
-	)
-	(wire
-		(pts
 			(xy 64.77 116.84) (xy 63.5 116.84)
 		)
 		(stroke
@@ -2731,16 +2711,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 116.84) (xy 152.4 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f278d5e2-cea1-4f1a-975e-b44e3ca67a42")
-	)
-	(wire
-		(pts
 			(xy 88.9 170.18) (xy 93.98 170.18)
 		)
 		(stroke
@@ -2771,7 +2741,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 116.84) (xy 142.24 116.84)
+			(xy 123.19 116.84) (xy 152.4 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3022,17 +2992,6 @@
 		(uuid "c3d3e33a-88aa-4c70-867b-94e0804a2243")
 	)
 	(label "GND"
-		(at 152.4 123.19 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c9bf3a5a-ca60-4c91-ac1b-d8d9aa039c4d")
-	)
-	(label "GND"
 		(at 210.82 96.52 0)
 		(fields_autoplaced yes)
 		(effects
@@ -3064,6 +3023,17 @@
 			(justify left bottom)
 		)
 		(uuid "ed1960b5-d0eb-4093-ac57-bbd9bd99d06b")
+	)
+	(label "1.6V"
+		(at 142.24 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fee8f3e4-3082-4683-9fd2-2a3b81d73ae5")
 	)
 	(global_label "GND"
 		(shape passive)
@@ -3458,73 +3428,6 @@
 			(project "Clock Doubler"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "IC3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 147.32 116.84 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4c30a5e1-2c7c-42f2-bf38-16a590f8575c")
-		(property "Reference" "R4"
-			(at 144.78 118.618 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "500Ω"
-			(at 144.78 114.935 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 129.794 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 147.32 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "87b03e03-dce8-4881-86b9-8e36f4b58763")
-		)
-		(pin "1"
-			(uuid "af382621-3fac-4cf6-9af5-5d5a8586dfdd")
-		)
-		(instances
-			(project "Clock Doubler"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -3947,7 +3850,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8b55e928-49d6-4a96-a679-c6fcc424ffae")
-		(property "Reference" "C1"
+		(property "Reference" "C5"
 			(at 145.796 173.99 0)
 			(effects
 				(font
@@ -3999,7 +3902,7 @@
 		(instances
 			(project "Clock Hold Standard"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C1")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -4026,73 +3929,6 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "C30")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 152.4 123.19 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "916c26fc-c94d-4dc2-ae1b-435cbdc0ac54")
-		(property "Reference" "C6"
-			(at 149.86 120.904 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10pF"
-			(at 154.94 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 160.02 106.426 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 152.0825 120.9675 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 152.4 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "51ddc091-18da-49a5-9ed7-ab6f48618648")
-		)
-		(pin "2"
-			(uuid "b600d61c-ff06-4884-81e3-0c8f4fbe6f36")
-		)
-		(instances
-			(project "Clock Doubler"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -4294,7 +4130,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "af9d816d-6c57-4360-a6e5-63814a4d0a62")
-		(property "Reference" "C5"
+		(property "Reference" "C1"
 			(at 160.02 103.124 0)
 			(effects
 				(font
@@ -4302,7 +4138,7 @@
 				)
 			)
 		)
-		(property "Value" "10pF"
+		(property "Value" "16pF"
 			(at 165.1 102.87 0)
 			(effects
 				(font
@@ -4346,7 +4182,7 @@
 		(instances
 			(project "Clock Doubler"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C5")
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -4486,16 +4322,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at 81.28 207.772 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f7b9c6a5-a9f9-4b2a-a7a1-65c5775433e6")
 		)
@@ -4555,7 +4381,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b88107d7-f302-4a59-9102-7433b5b8dfa0")
-		(property "Reference" "R1"
+		(property "Reference" "R2"
 			(at 140.462 91.44 0)
 			(effects
 				(font
@@ -4607,7 +4433,7 @@
 		(instances
 			(project "Clock Doubler"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "R1")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -4622,7 +4448,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c9104bcc-de0b-49a7-aadc-d142b0822e63")
-		(property "Reference" "R2"
+		(property "Reference" "R1"
 			(at 154.178 102.87 0)
 			(effects
 				(font
@@ -4630,7 +4456,7 @@
 				)
 			)
 		)
-		(property "Value" "500Ω"
+		(property "Value" "750Ω"
 			(at 150.495 102.87 0)
 			(effects
 				(font
@@ -4674,7 +4500,7 @@
 		(instances
 			(project "Clock Doubler"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "R2")
+					(reference "R1")
 					(unit 1)
 				)
 			)

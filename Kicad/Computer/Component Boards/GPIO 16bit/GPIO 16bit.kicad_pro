@@ -58,11 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "silk_overlap|91790000|93630963|43262e4d-854a-4746-824b-211c9e69eaa0|019aa267-6648-4609-9f86-810b2cd3e1a5",
-        "silk_overlap|91914737|94265963|43262e4d-854a-4746-824b-211c9e69eaa0|4587e782-4ccc-4dea-acbb-f14cd7d1da0b",
-        "silk_overlap|96390000|93630963|34fbeaac-8144-4998-b3f0-11945aee402a|43262e4d-854a-4746-824b-211c9e69eaa0"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -500,15 +496,15 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       }
     ]
   },

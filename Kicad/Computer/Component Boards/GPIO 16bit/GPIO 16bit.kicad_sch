@@ -29,6 +29,7 @@
 				(effects
 					(font
 						(size 1.27 1.27)
+						(bold yes)
 					)
 				)
 			)
@@ -349,16 +350,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Generic connector, single row, 01x20, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(property "Description" "Generic connector, single row, 01x20, script generated (kicad-library-utils/schlib/autogen/connector/)"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1003,7 +995,7 @@
 					)
 				)
 			)
-			(property "Footprint" "SOT95P285X130-5N"
+			(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
 				(at 21.59 -14.605 0)
 				(effects
 					(font
@@ -1111,34 +1103,7 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin passive line
 					(at 0 -5.08 0)
 					(length 5.08)
@@ -1193,24 +1158,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "AP7365-33WG-7_0_1"
 				(polyline
@@ -1223,6 +1170,44 @@
 					)
 					(fill
 						(type background)
+					)
+				)
+			)
+			(symbol "AP7365-33WG-7_1_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "6VIn"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "3.3VOut"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -1269,15 +1254,6 @@
 				)
 			)
 			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1394,7 +1370,7 @@
 					)
 				)
 			)
-			(property "Footprint" "SOP65P210X110-6N"
+			(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
 				(at 21.59 -12.065 0)
 				(effects
 					(font
@@ -1701,7 +1677,7 @@
 					)
 				)
 			)
-			(property "Footprint" "SOP65P640X110-20N"
+			(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
 				(at 26.035 -33.655 0)
 				(effects
 					(font
@@ -2587,7 +2563,7 @@
 					)
 				)
 			)
-			(property "Footprint" "SOP65P640X120-14N"
+			(property "Footprint" "SamacSys_Parts:SOP65P640X120-14N"
 				(at 27.305 -28.575 0)
 				(effects
 					(font
@@ -3406,7 +3382,7 @@
 					)
 				)
 			)
-			(property "Footprint" "SOP65P640X120-20N"
+			(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 				(at 22.225 -31.75 0)
 				(effects
 					(font
@@ -3923,7 +3899,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "10pF 4-array resistor"
+			(property "Description" "10pF 4-array capacitor"
 				(at 10.16 -10.795 0)
 				(effects
 					(font
@@ -3983,15 +3959,6 @@
 			)
 			(property "Silkscreen" "10pF"
 				(at 10.16 -12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Capacitor,ceramic,multilayer,SMT,50V,10pF"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -4463,6 +4430,16 @@
 	)
 	(wire
 		(pts
+			(xy -96.52 144.78) (xy -95.25 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "372cf8fb-0a4c-471b-bf98-c6d53554db92")
+	)
+	(wire
+		(pts
 			(xy 26.67 121.92) (xy 41.91 121.92)
 		)
 		(stroke
@@ -4793,6 +4770,16 @@
 	)
 	(wire
 		(pts
+			(xy -96.52 162.56) (xy -95.25 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80cbc118-cea4-428f-9eae-349d1684a4f5")
+	)
+	(wire
+		(pts
 			(xy 167.64 127) (xy 163.83 127)
 		)
 		(stroke
@@ -4920,6 +4907,16 @@
 			(type default)
 		)
 		(uuid "a99f0110-ed53-4de0-8076-64034080e396")
+	)
+	(wire
+		(pts
+			(xy -96.52 134.62) (xy -95.25 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abd81625-9581-4ab5-88c8-fc2f043ca98f")
 	)
 	(wire
 		(pts
@@ -5133,6 +5130,16 @@
 	)
 	(wire
 		(pts
+			(xy -54.61 162.56) (xy -55.88 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d33c9128-d360-4cc5-a55d-f9eff8046705")
+	)
+	(wire
+		(pts
 			(xy 191.77 160.02) (xy 203.2 160.02)
 		)
 		(stroke
@@ -5243,6 +5250,26 @@
 	)
 	(wire
 		(pts
+			(xy -54.61 144.78) (xy -55.88 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee9397b4-6ff4-4529-b9a5-66e391d651f8")
+	)
+	(wire
+		(pts
+			(xy -54.61 172.72) (xy -55.88 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eef65138-8600-4317-be11-9cbeb6ff51f0")
+	)
+	(wire
+		(pts
 			(xy 26.67 157.48) (xy 41.91 157.48)
 		)
 		(stroke
@@ -5322,17 +5349,6 @@
 		)
 		(uuid "00d507b9-cb22-4e66-8d7f-dce7ccae8093")
 	)
-	(label "D1"
-		(at -95.25 165.1 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0125fa9e-5fd6-427c-a856-2f1284f571c6")
-	)
 	(label "GPIO0"
 		(at 191.77 116.84 0)
 		(fields_autoplaced yes)
@@ -5354,17 +5370,6 @@
 			(justify right bottom)
 		)
 		(uuid "01f00a3b-1d68-4aa7-8e01-6281924682a1")
-	)
-	(label "GPIO4"
-		(at -55.88 160.02 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "060b2ce7-9fd6-48d3-b2d0-fcdab22c4c52")
 	)
 	(label "D7"
 		(at 306.07 217.17 0)
@@ -5465,17 +5470,6 @@
 		)
 		(uuid "0c642de4-e724-4b72-82c7-7028142442b7")
 	)
-	(label "Read GD _{0..7}"
-		(at -95.25 129.54 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0e6cef58-72ea-473e-8524-cf759d2c70d9")
-	)
 	(label "Enable"
 		(at 93.98 232.41 180)
 		(fields_autoplaced yes)
@@ -5553,17 +5547,6 @@
 		)
 		(uuid "1425bc88-66f8-4161-86ad-8e3b0de43774")
 	)
-	(label "Write GD _{8..15}"
-		(at -95.25 172.72 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1576c43b-a74b-4ee5-9ca1-4f450bd29f32")
-	)
 	(label "D1"
 		(at 306.07 125.73 0)
 		(fields_autoplaced yes)
@@ -5608,17 +5591,6 @@
 		)
 		(uuid "1a82897d-69e0-455d-a775-8525a8bc8693")
 	)
-	(label "D0"
-		(at -95.25 167.64 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1ae82565-35b1-42af-8f0b-99f757cd325c")
-	)
 	(label "GND"
 		(at 223.52 154.94 0)
 		(fields_autoplaced yes)
@@ -5640,17 +5612,6 @@
 			(justify left bottom)
 		)
 		(uuid "1baaf443-700a-4b27-b177-285df45e9b73")
-	)
-	(label "5V"
-		(at -95.25 134.62 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1bb05f68-7cc7-4f37-b986-131f667c91e7")
 	)
 	(label "GND"
 		(at 1.27 213.36 180)
@@ -5728,17 +5689,6 @@
 			(justify right bottom)
 		)
 		(uuid "21d2b80c-dbe9-4e9d-84ae-9638cfe5a3a7")
-	)
-	(label "Write OE _{8..15}"
-		(at -95.25 177.8 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "21df4366-5a3e-4dc6-82a8-5905b3188ef4")
 	)
 	(label "GND"
 		(at 223.52 200.66 0)
@@ -5894,17 +5844,6 @@
 		)
 		(uuid "2d8460b8-0a0d-44ad-8a39-56ccfcc56885")
 	)
-	(label "D6"
-		(at -95.25 149.86 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2ec05495-10aa-4928-867f-6a6f16983158")
-	)
 	(label "GND"
 		(at 1.27 111.76 180)
 		(fields_autoplaced yes)
@@ -5982,28 +5921,6 @@
 		)
 		(uuid "353bcb58-7117-41e7-828e-a2f196922524")
 	)
-	(label "Read GD _{8..15}"
-		(at -95.25 132.08 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3602d88a-edd7-4efc-be05-bc5322795e82")
-	)
-	(label "GPIO6"
-		(at -55.88 154.94 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "37c73aa3-c976-41ca-89c8-ca86243e98cf")
-	)
 	(label "GPIO14"
 		(at 280.67 214.63 180)
 		(fields_autoplaced yes)
@@ -6037,17 +5954,6 @@
 		)
 		(uuid "3d697bb5-e221-47ce-bfc9-c43eea90196d")
 	)
-	(label "GPIO5"
-		(at -55.88 157.48 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3e7e7976-007f-4601-bd66-0dd850bf7054")
-	)
 	(label "OE5"
 		(at 93.98 158.75 180)
 		(fields_autoplaced yes)
@@ -6058,17 +5964,6 @@
 			(justify right bottom)
 		)
 		(uuid "4250ec4e-80f7-4cd6-a632-59cafbd48a3d")
-	)
-	(label "GPIO10"
-		(at -55.88 142.24 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4295dad0-4565-4dd1-a038-395e632d1e08")
 	)
 	(label "D2"
 		(at 306.07 204.47 0)
@@ -6091,17 +5986,6 @@
 			(justify right bottom)
 		)
 		(uuid "43a2b32a-75dc-48ed-b507-07242dd4b68b")
-	)
-	(label "Write OE _{0..7}"
-		(at -95.25 175.26 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "448ebea0-2ddc-4fa9-8e8c-a01219776d24")
 	)
 	(label "5V"
 		(at 67.31 149.86 0)
@@ -6135,17 +6019,6 @@
 			(justify left bottom)
 		)
 		(uuid "47baa1ea-c44b-405e-81f0-62c9c10aa242")
-	)
-	(label "D5"
-		(at -95.25 152.4 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "47cb67f6-5cac-46f6-bdd1-2e39ff0ea94f")
 	)
 	(label "Write"
 		(at 41.91 228.6 180)
@@ -6190,17 +6063,6 @@
 			(justify left bottom)
 		)
 		(uuid "4a41c8f1-7842-4247-b0f8-f2f0a36375f7")
-	)
-	(label "GPIO2"
-		(at -55.88 167.64 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4a57ed29-87d0-4c29-b040-7ca80090a3ab")
 	)
 	(label "GD11"
 		(at 138.43 208.28 180)
@@ -6268,17 +6130,6 @@
 		)
 		(uuid "4eb9b52b-5f0a-42f6-973c-25f94caafb7a")
 	)
-	(label "GPIO15"
-		(at -55.88 129.54 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4f79ead0-710c-46c8-a898-d767164ec078")
-	)
 	(label "GND"
 		(at 41.91 137.16 180)
 		(fields_autoplaced yes)
@@ -6289,17 +6140,6 @@
 			(justify right bottom)
 		)
 		(uuid "4ffd5ee9-7be1-486d-aa99-c92887a9c047")
-	)
-	(label "D7"
-		(at -95.25 147.32 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "50d8ab1a-ae71-4694-9cf4-1dc1e6caff52")
 	)
 	(label "OE15"
 		(at 67.31 248.92 0)
@@ -6620,17 +6460,6 @@
 		)
 		(uuid "63125102-9a9c-4d7e-a669-2d76de25d272")
 	)
-	(label "GPIO0"
-		(at -55.88 175.26 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "63212791-1f53-40a5-8ad5-7f0dcedeea62")
-	)
 	(label "3.3V"
 		(at 274.32 115.57 0)
 		(fields_autoplaced yes)
@@ -6773,17 +6602,6 @@
 			(justify right bottom)
 		)
 		(uuid "6ae853dc-9bc4-4d50-9f7d-84d397812e0c")
-	)
-	(label "D3"
-		(at -95.25 157.48 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6b3eb797-e228-4b8c-9381-f2d6a7c2bb29")
 	)
 	(label "GPIO1"
 		(at 280.67 125.73 180)
@@ -6961,17 +6779,6 @@
 		)
 		(uuid "7b6b52e4-5cad-457f-ba3c-a8b7f369c167")
 	)
-	(label "GPIO3"
-		(at -55.88 165.1 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7c51133d-3a9a-43df-a99e-bc8903af2b0c")
-	)
 	(label "OE4"
 		(at 93.98 153.67 180)
 		(fields_autoplaced yes)
@@ -7004,17 +6811,6 @@
 			(justify right bottom)
 		)
 		(uuid "7d632752-afd4-4b51-ae3c-ad1873c151ef")
-	)
-	(label "GPIO8"
-		(at -55.88 149.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7e45a505-6d95-480c-b8f0-de2255c11064")
 	)
 	(label "GD4"
 		(at 67.31 127 0)
@@ -7137,17 +6933,6 @@
 		)
 		(uuid "857bb1bf-81b3-459f-b192-a9bc1a511878")
 	)
-	(label "GPIO14"
-		(at -55.88 132.08 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "85ed9446-0ddd-4c48-b250-62561ce91a64")
-	)
 	(label "Read GD _{8..15}"
 		(at 248.92 194.31 180)
 		(fields_autoplaced yes)
@@ -7169,17 +6954,6 @@
 			(justify right bottom)
 		)
 		(uuid "86f08926-679c-4019-869a-18860b419de8")
-	)
-	(label "GPIO13"
-		(at -55.88 134.62 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "87cda911-81c0-4e5c-9060-7dfcc8f2e700")
 	)
 	(label "GND"
 		(at 93.98 171.45 180)
@@ -7334,17 +7108,6 @@
 			(justify left bottom)
 		)
 		(uuid "939f64e0-478f-413b-8a33-158ae1a0c7a3")
-	)
-	(label "D4"
-		(at -95.25 154.94 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "93ba1165-aeb5-4413-b564-1cf69f3f0213")
 	)
 	(label "GPIO1"
 		(at 191.77 119.38 0)
@@ -7665,17 +7428,6 @@
 		)
 		(uuid "ac46a39c-6b66-4a67-b0d9-febd70fc6e88")
 	)
-	(label "GND"
-		(at -95.25 144.78 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ac4ff0b5-85db-468d-b5d5-41876e29a103")
-	)
 	(label "GPIO5"
 		(at 191.77 157.48 0)
 		(fields_autoplaced yes)
@@ -7697,17 +7449,6 @@
 			(justify left bottom)
 		)
 		(uuid "aeb2ab10-482c-45a1-b59f-6b090bdbb954")
-	)
-	(label "Write"
-		(at -95.25 139.7 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "aebc9d80-993b-45ff-b9e5-ac49f2c79152")
 	)
 	(label "GND"
 		(at -53.34 219.71 0)
@@ -7741,17 +7482,6 @@
 			(justify left bottom)
 		)
 		(uuid "b12ef91b-5382-4c9a-9ee6-d9a48617e8d9")
-	)
-	(label "Write GD _{0..7}"
-		(at -95.25 170.18 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b1736304-3af5-45db-a867-b36b64ad02fd")
 	)
 	(label "D2"
 		(at 1.27 198.12 180)
@@ -7807,17 +7537,6 @@
 			(justify left bottom)
 		)
 		(uuid "b49cc3d5-323a-4a6e-ad5f-59464b249eaf")
-	)
-	(label "GPIO7"
-		(at -55.88 152.4 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b540cf99-20fd-4d34-b5b6-5cf0da3cb48f")
 	)
 	(label "5V"
 		(at -58.42 255.27 180)
@@ -8061,17 +7780,6 @@
 		)
 		(uuid "c46e4fa8-94c6-4c4c-a1f0-3822179bd254")
 	)
-	(label "GPIO1"
-		(at -55.88 170.18 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c47eee90-ecbd-4d82-9695-391a6349cbfb")
-	)
 	(label "GD12"
 		(at 67.31 203.2 0)
 		(fields_autoplaced yes)
@@ -8082,17 +7790,6 @@
 			(justify left bottom)
 		)
 		(uuid "c57a75c9-a110-43ce-9f54-c4c95f2c5151")
-	)
-	(label "Read"
-		(at -95.25 137.16 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c7e0b234-cfad-4e27-956b-c630ca994a7b")
 	)
 	(label "GND"
 		(at -53.34 228.6 0)
@@ -8115,17 +7812,6 @@
 			(justify left bottom)
 		)
 		(uuid "c8fc15a6-ebdd-4125-bb14-d5459f5778cd")
-	)
-	(label "D2"
-		(at -95.25 160.02 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ca49ab26-293b-4827-bed0-c1f9509150e0")
 	)
 	(label "GND"
 		(at 223.52 160.02 0)
@@ -8193,17 +7879,6 @@
 		)
 		(uuid "ce624c99-aa9e-46db-8f47-4105468334be")
 	)
-	(label "GPIO11"
-		(at -55.88 139.7 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cf80d3aa-8991-46a6-a77c-2afc508ed7c3")
-	)
 	(label "GND"
 		(at 93.98 133.35 180)
 		(fields_autoplaced yes)
@@ -8226,17 +7901,6 @@
 		)
 		(uuid "d0c9bb54-9bbf-4254-b165-0f1fb362e7e4")
 	)
-	(label "Enable"
-		(at -95.25 142.24 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d16f928e-ebfa-40be-a24c-be51fe8e3277")
-	)
 	(label "Write"
 		(at 41.91 152.4 180)
 		(fields_autoplaced yes)
@@ -8247,17 +7911,6 @@
 			(justify right bottom)
 		)
 		(uuid "d2247d4e-3d15-4ad0-85d8-6da1135d6a6a")
-	)
-	(label "5V"
-		(at -55.88 172.72 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d467f256-ba50-43e3-8b1f-73d0cadfd752")
 	)
 	(label "GPIO2"
 		(at 280.67 128.27 180)
@@ -8369,17 +8022,6 @@
 		)
 		(uuid "d6f81410-94ff-497d-bc1b-a0a1358f09d1")
 	)
-	(label "GPIO9"
-		(at -55.88 147.32 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d896f386-0f01-47ec-a893-d0d2be5e6995")
-	)
 	(label "5V"
 		(at -58.42 237.49 180)
 		(fields_autoplaced yes)
@@ -8390,17 +8032,6 @@
 			(justify right bottom)
 		)
 		(uuid "d9fa9b6d-2ce7-4f37-adbf-c90b74f5fd08")
-	)
-	(label "GND"
-		(at -95.25 162.56 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "da7d0520-d59c-4149-9617-1425c26ee801")
 	)
 	(label "Enable"
 		(at 93.98 194.31 180)
@@ -8524,17 +8155,6 @@
 		(uuid "e6c11cfe-2883-42b5-89d0-8a08710a2b50")
 	)
 	(label "GND"
-		(at -55.88 144.78 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e776a699-e869-469b-ac9e-de0db920ca0b")
-	)
-	(label "GND"
 		(at -67.31 255.27 0)
 		(fields_autoplaced yes)
 		(effects
@@ -8577,28 +8197,6 @@
 			(justify left bottom)
 		)
 		(uuid "ea1b4aa8-b8eb-471e-bfde-979bff84924f")
-	)
-	(label "GND"
-		(at -55.88 162.56 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "eaaae123-71f9-4667-9217-c298121ab5de")
-	)
-	(label "GPIO12"
-		(at -55.88 137.16 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ec1fd0e7-da20-49cb-95bf-363d04a158d4")
 	)
 	(label "GND"
 		(at 93.98 247.65 180)
@@ -8809,6 +8407,864 @@
 		)
 		(uuid "ff8691e6-b8be-48e3-9cc2-7129a9a364ca")
 	)
+	(global_label "5V"
+		(shape passive)
+		(at -96.52 134.62 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "005c4cee-77ba-48c4-98a8-759d613f010b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -100.692 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape passive)
+		(at -54.61 144.78 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "019d94fb-1ef9-4bda-8a97-ceef30a36f7c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -48.8656 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Read GD _{8..15}"
+		(shape input)
+		(at -95.25 132.08 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "04f0ed5c-b0a5-444b-b740-63b1be3a7f89")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -111.2882 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D3"
+		(shape tri_state)
+		(at -95.25 157.48 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "17abc835-566f-4870-9478-6bfd30425501")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO7"
+		(shape tri_state)
+		(at -55.88 152.4 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "191b9143-bc7f-4455-9fe9-f10d0cac3a0c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Write"
+		(shape input)
+		(at -95.25 139.7 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1aea547a-a2df-443a-9d77-ca6cd1ac53d8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -102.8919 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO6"
+		(shape tri_state)
+		(at -55.88 154.94 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1bfaf629-9590-4ef0-97b1-e5325e48601e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO10"
+		(shape tri_state)
+		(at -55.88 142.24 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "205f4c6d-d72a-4054-8be0-097ce3c7f62d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -44.8892 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO13"
+		(shape tri_state)
+		(at -55.88 134.62 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2bb617f3-60f6-4f25-ad0b-9d8dc5834053")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -44.8892 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape passive)
+		(at -54.61 162.56 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2e92e980-5413-4d72-ac1b-9af69b0ae31d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -48.8656 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Write GD _{8..15}"
+		(shape input)
+		(at -95.25 172.72 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "3d94c15b-e108-4c52-a3ad-b393c43ffda1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -111.2883 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Read GD _{0..7}"
+		(shape input)
+		(at -95.25 129.54 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "402f4238-a0a0-40ca-8fdd-7dab16149b93")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -110.3206 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D0"
+		(shape tri_state)
+		(at -95.25 167.64 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4595a5eb-3f55-4bc9-9813-07f037fa8eba")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D5"
+		(shape tri_state)
+		(at -95.25 152.4 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4634b5c5-0e0d-416e-99fc-77a3220f7a35")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO3"
+		(shape tri_state)
+		(at -55.88 165.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4849bf83-dc96-45cc-a471-2b0632453cb3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape passive)
+		(at -96.52 162.56 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4e9e8df2-1f06-466a-8a44-8380d1f654b6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -102.2644 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO0"
+		(shape tri_state)
+		(at -55.88 175.26 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "52d762ad-1b61-4117-8173-70085ea0328d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO1"
+		(shape tri_state)
+		(at -55.88 170.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "63f95f05-8542-4165-b758-a8b3b4f00b37")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO4"
+		(shape tri_state)
+		(at -55.88 160.02 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6f1c6714-9ecb-48b3-b2d0-0ccbd568f143")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Enable"
+		(shape input)
+		(at -95.25 142.24 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "726324f0-037b-4f5f-b130-97a83797f142")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -104.585 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D6"
+		(shape tri_state)
+		(at -95.25 149.86 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "727d3c36-b811-4c8f-ab60-6bc792ba66fc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO14"
+		(shape tri_state)
+		(at -55.88 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "75dc4d63-5028-4a02-a306-5f3e70261542")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -44.8892 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Write GD _{0..7}"
+		(shape input)
+		(at -95.25 170.18 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "77559664-b10a-4018-97e2-2c82b419b1b3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -110.3207 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D1"
+		(shape tri_state)
+		(at -95.25 165.1 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8852d062-3c8f-4c87-bf32-ad68fe5ed7fd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Write OE _{0..7}"
+		(shape input)
+		(at -95.25 175.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "908826e2-db23-4c4d-b457-3a4dd583155b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -110.2602 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO2"
+		(shape tri_state)
+		(at -55.88 167.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9b1f4bf9-401c-4ccf-bd99-a8189e8797ba")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO15"
+		(shape tri_state)
+		(at -55.88 129.54 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9bc6cacc-c7b8-413b-a1eb-e9db11bc5180")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -44.8892 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D2"
+		(shape tri_state)
+		(at -95.25 160.02 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a99daf44-ede1-475f-a42b-8b8018584c46")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO5"
+		(shape tri_state)
+		(at -55.88 157.48 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b32da0b6-0c42-428c-8811-679c5ecb4898")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape passive)
+		(at -96.52 144.78 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b55480ab-315d-46d5-8cc5-dc81225f6857")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -102.2644 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Write OE _{8..15}"
+		(shape input)
+		(at -95.25 177.8 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b6921fce-7716-4303-bb65-d8bb6e0af669")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -111.2278 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D7"
+		(shape tri_state)
+		(at -95.25 147.32 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ba336422-c7b0-4947-9191-2c10b3a5424f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO11"
+		(shape tri_state)
+		(at -55.88 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cb34e7ea-5a04-4ce8-acce-43129d7aec26")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -44.8892 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Read"
+		(shape input)
+		(at -95.25 137.16 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cb6ea068-e134-46e9-b983-70e812bd6d49")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -102.8918 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO9"
+		(shape tri_state)
+		(at -55.88 147.32 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "dc90c9fe-7fb8-4fe8-8895-fbbaf55bf4e2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D4"
+		(shape tri_state)
+		(at -95.25 154.94 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e2dac525-3212-482d-a83a-f0958f2a4967")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -101.826 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO8"
+		(shape tri_state)
+		(at -55.88 149.86 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e6bd7e66-d660-4bcf-a545-5e6bf29e30ea")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -46.0987 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "5V"
+		(shape passive)
+		(at -54.61 172.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e8672570-d015-4d8b-ac19-68ecc92071ea")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -50.438 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPIO12"
+		(shape tri_state)
+		(at -55.88 137.16 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fc8edab6-d611-412c-af7e-597fe401288f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at -44.8892 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(symbol
 		(lib_id "Toshiba:74VHCT573AFT")
 		(at 1.27 226.06 0)
@@ -8835,7 +9291,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 23.495 257.81 0)
 			(effects
 				(font
@@ -8915,6 +9371,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 13.97 257.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 1.27 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9104,6 +9569,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "QUADRUPLE 3-STATE BUFFERS OE LOW"
+			(at 138.43 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6a96bd13-db44-415d-ac07-0a4346cdf3ba")
 		)
@@ -9181,7 +9655,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 23.495 219.71 0)
 			(effects
 				(font
@@ -9261,6 +9735,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 13.97 219.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 1.27 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9380,7 +9863,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Generic connector, single row, 01x20, script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at -90.17 152.4 0)
 			(effects
 				(font
@@ -9598,7 +10081,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10pF 4-array resistor"
+		(property "Description" "10pF 4-array capacitor"
 			(at 215.9 127.635 0)
 			(effects
 				(font
@@ -9724,7 +10207,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X110-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
 			(at 306.705 151.765 0)
 			(effects
 				(font
@@ -9804,6 +10287,15 @@
 		)
 		(property "Silkscreen" "74LVC573"
 			(at 293.37 149.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us"
+			(at 280.67 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9907,7 +10399,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P210X110-6N"
+		(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
 			(at 270.51 130.175 0)
 			(effects
 				(font
@@ -9987,6 +10479,15 @@
 		)
 		(property "Silkscreen" "'2G04"
 			(at 261.62 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "74LVC2G04-Q100 - Dual inverter@en-us"
+			(at 248.92 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10233,7 +10734,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 23.495 181.61 0)
 			(effects
 				(font
@@ -10313,6 +10814,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 13.97 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 1.27 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10601,7 +11111,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-14N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-14N"
 			(at 121.285 179.705 0)
 			(effects
 				(font
@@ -10681,6 +11191,15 @@
 		)
 		(property "Silkscreen" "74AHCT132"
 			(at 106.68 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Texas Instruments SN74AHCT132PWR, NAND Quad 2 Input NAND Schmitt Trigger, 4.5  5.5 V, 14-Pin TSSOP"
+			(at 93.98 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10865,6 +11384,15 @@
 		)
 		(property "Silkscreen" "150Ω"
 			(at 181.61 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 171.45 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11211,7 +11739,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 64.135 143.51 0)
 			(effects
 				(font
@@ -11291,6 +11819,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 54.61 142.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 41.91 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11486,7 +12023,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 64.135 181.61 0)
 			(effects
 				(font
@@ -11566,6 +12103,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 54.61 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 41.91 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11668,7 +12214,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-14N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-14N"
 			(at 121.285 141.605 0)
 			(effects
 				(font
@@ -11748,6 +12294,15 @@
 		)
 		(property "Silkscreen" "74AHCT132"
 			(at 106.68 139.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Texas Instruments SN74AHCT132PWR, NAND Quad 2 Input NAND Schmitt Trigger, 4.5  5.5 V, 14-Pin TSSOP"
+			(at 93.98 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12018,7 +12573,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 64.135 219.71 0)
 			(effects
 				(font
@@ -12098,6 +12653,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 54.61 219.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 41.91 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12293,7 +12857,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 23.495 143.51 0)
 			(effects
 				(font
@@ -12373,6 +12937,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 13.97 142.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 1.27 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12492,7 +13065,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Generic connector, single row, 01x20, script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at -60.96 154.94 0)
 			(effects
 				(font
@@ -12689,7 +13262,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
 			(at 64.135 257.81 0)
 			(effects
 				(font
@@ -12769,6 +13342,15 @@
 		)
 		(property "Silkscreen" "74VHCT573AF"
 			(at 54.61 257.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Toshiba 74VHCT573AFT 8bit-Bit Octal D Type Latch, Transparent D Type, 20-Pin TSSOP"
+			(at 41.91 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12964,7 +13546,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X110-20N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
 			(at 306.705 227.965 0)
 			(effects
 				(font
@@ -13044,6 +13626,15 @@
 		)
 		(property "Silkscreen" "74LVC573"
 			(at 293.37 225.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us"
+			(at 280.67 194.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13233,6 +13824,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "QUADRUPLE 3-STATE BUFFERS OE LOW"
+			(at 138.43 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1237c2f3-9a01-45c0-8b49-6d9521642e00")
 		)
@@ -13311,7 +13911,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P210X110-6N"
+		(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
 			(at 270.51 206.375 0)
 			(effects
 				(font
@@ -13391,6 +13991,15 @@
 		)
 		(property "Silkscreen" "'2G04"
 			(at 261.62 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "74LVC2G04-Q100 - Dual inverter@en-us"
+			(at 248.92 194.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13657,7 +14266,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10pF 4-array resistor"
+		(property "Description" "10pF 4-array capacitor"
 			(at 213.36 241.935 0)
 			(effects
 				(font
@@ -13876,7 +14485,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOT95P285X130-5N"
+		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
 			(at -12.7 299.085 0)
 			(effects
 				(font
@@ -14060,7 +14669,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-14N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-14N"
 			(at 121.285 217.805 0)
 			(effects
 				(font
@@ -14140,6 +14749,15 @@
 		)
 		(property "Silkscreen" "74AHCT132"
 			(at 106.68 215.265 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Texas Instruments SN74AHCT132PWR, NAND Quad 2 Input NAND Schmitt Trigger, 4.5  5.5 V, 14-Pin TSSOP"
+			(at 93.98 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14304,6 +14922,15 @@
 		)
 		(property "Silkscreen" "74AHC125"
 			(at 151.13 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "QUADRUPLE 3-STATE BUFFERS OE LOW"
+			(at 138.43 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14501,7 +15128,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10pF 4-array resistor"
+		(property "Description" "10pF 4-array capacitor"
 			(at 213.36 203.835 0)
 			(effects
 				(font
@@ -14827,6 +15454,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 171.45 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6d66d43b-23dd-4d90-b878-bb54ce45dbd7")
 		)
@@ -14979,7 +15615,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP65P640X120-14N"
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-14N"
 			(at 121.285 255.905 0)
 			(effects
 				(font
@@ -15059,6 +15695,15 @@
 		)
 		(property "Silkscreen" "74AHCT132"
 			(at 106.68 253.365 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Texas Instruments SN74AHCT132PWR, NAND Quad 2 Input NAND Schmitt Trigger, 4.5  5.5 V, 14-Pin TSSOP"
+			(at 93.98 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15256,7 +15901,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10pF 4-array resistor"
+		(property "Description" "10pF 4-array capacitor"
 			(at 213.36 165.735 0)
 			(effects
 				(font
@@ -15489,6 +16134,15 @@
 				(hide yes)
 			)
 		)
+		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 171.45 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e04e72cc-b11a-4b45-8f93-d3024ffcd065")
 		)
@@ -15628,6 +16282,15 @@
 		)
 		(property "Silkscreen" "74AHC125"
 			(at 151.13 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "QUADRUPLE 3-STATE BUFFERS OE LOW"
+			(at 138.43 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15812,6 +16475,15 @@
 		)
 		(property "Silkscreen" "150Ω"
 			(at 181.61 149.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 171.45 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)

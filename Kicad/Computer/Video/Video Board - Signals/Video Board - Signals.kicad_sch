@@ -11060,109 +11060,6 @@
 				)
 			)
 		)
-		(symbol "HCP65:NetTie"
-			(pin_numbers hide)
-			(pin_names hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "NT"
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "NetTie"
-				(at 2.54 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:NetTie:NetTie-2_SMD_Pad0.5mm"
-				(at 20.955 -6.985 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "NetTie_0_1"
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 3.81 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "NetTie_1_1"
-				(pin passive line
-					(at 0 0 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "HCP65:R_0805"
 			(pin_numbers hide)
 			(pin_names hide)
@@ -22126,6 +22023,16 @@
 	)
 	(wire
 		(pts
+			(xy -241.3 114.3) (xy -224.79 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "248829a2-14e4-4e7a-bd7b-d088a06e650c")
+	)
+	(wire
+		(pts
 			(xy 3.81 38.1) (xy 25.4 38.1)
 		)
 		(stroke
@@ -23633,6 +23540,16 @@
 			(color 24 199 56 1)
 		)
 		(uuid "6cb2f7d8-37ae-4c7a-9f85-b503f0e46276")
+	)
+	(wire
+		(pts
+			(xy -241.3 111.76) (xy -224.79 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d2c331e-32e5-4fac-923c-241b254da6f6")
 	)
 	(wire
 		(pts
@@ -29160,17 +29077,6 @@
 		)
 		(uuid "3560c003-ddbf-424b-87ec-45e507d07f37")
 	)
-	(label "~{CLK}_{D}"
-		(at -236.22 114.3 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "35e364b9-3819-42f3-ac34-4c7571263671")
-	)
 	(label "Row0"
 		(at -57.15 299.72 180)
 		(fields_autoplaced yes)
@@ -34506,17 +34412,6 @@
 		)
 		(uuid "ba15f8c3-1b48-4bfc-95d3-05787f0ae5d4")
 	)
-	(label "CLK_{D}"
-		(at -236.22 111.76 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ba23e063-d022-4211-8731-1cdc50d9ec76")
-	)
 	(label "3.3V"
 		(at 157.48 218.44 0)
 		(fields_autoplaced yes)
@@ -39519,75 +39414,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:NetTie")
-		(at -236.22 111.76 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3ae85611-e0bd-402c-b9b5-818daf006803")
-		(property "Reference" "NT1"
-			(at -238.76 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at -238.76 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at -257.175 118.745 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at -238.76 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at -236.22 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "899b3c9c-dedb-43cc-a2ff-c12ed7108afb")
-		)
-		(pin "2"
-			(uuid "91201134-1ef2-4515-bb0c-ceeb43febde7")
-		)
-		(instances
-			(project "Video Board - Signals"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:Video_Signals_Output")
 		(at 52.07 375.92 0)
 		(unit 1)
@@ -42559,75 +42385,6 @@
 			(project "Video Board - Signals"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B15")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at -236.22 114.3 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ba103972-b9e8-48e3-8947-6642ae7a6ba6")
-		(property "Reference" "NT2"
-			(at -238.76 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at -238.76 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at -257.175 121.285 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at -238.76 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at -236.22 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "11e96878-142d-422d-b475-2d96a50b933a")
-		)
-		(pin "2"
-			(uuid "404150ba-8d4e-4955-87b2-fea2985515b0")
-		)
-		(instances
-			(project "Video Board - Signals"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT2")
 					(unit 1)
 				)
 			)

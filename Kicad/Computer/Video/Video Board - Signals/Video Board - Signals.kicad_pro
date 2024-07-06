@@ -58,10 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "solder_mask_bridge|84840000|155567000|938ba1a6-4261-4c64-83d4-329adf08d080|8e818761-d623-4c4a-abc5-9c9a21cd01aa",
-        "solder_mask_bridge|87380000|155567000|628ec133-bb87-432c-a0c3-a80ce28d151e|dbd342f7-b1c6-423e-940e-a5d0f2cc00c7"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -82,6 +79,7 @@
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "ignore",
         "item_on_disabled_layer": "error",
@@ -558,6 +556,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",

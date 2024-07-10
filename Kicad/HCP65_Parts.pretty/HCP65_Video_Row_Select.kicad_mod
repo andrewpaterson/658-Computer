@@ -6,13 +6,13 @@
 	(descr "HCP65 Video Row Select")
 	(tags "HCP65 Video Row Select")
 	(property "Reference" "REF**"
-		(at 7.62 -0.762 0)
+		(at 7.62 -0.4064 0)
 		(layer "F.SilkS")
 		(uuid "8af88394-879a-4932-9165-23464805ef7d")
 		(effects
 			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -29,7 +29,7 @@
 		)
 	)
 	(property "Footprint" "HCP65_Video_Row_Select"
-		(at 7.239 35.306 0)
+		(at 7.3152 35.1536 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -51,6 +51,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -63,6 +64,18 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 7.62 31.496 0)
+		(layer "F.SilkS")
+		(uuid "e7b05a70-c636-4069-9aaa-7499342f78d6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -232,18 +245,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "aa136522-97fe-4c53-8094-5e9258117daa")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 6.985 31.496 0)
-		(layer "F.SilkS")
-		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

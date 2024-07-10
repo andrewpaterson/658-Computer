@@ -6,13 +6,13 @@
 	(descr "HCP65 W65C816 Breakout")
 	(tags "HCP65 W65C816 Breakout")
 	(property "Reference" "REF**"
-		(at 11.43 -3.81 0)
+		(at 11.43 -3.4544 0)
 		(layer "F.SilkS")
 		(uuid "8af88394-879a-4932-9165-23464805ef7d")
 		(effects
 			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -29,14 +29,15 @@
 		)
 	)
 	(property "Footprint" "HCP65_W65C816_Breakout"
-		(at 0 0 0)
+		(at 11.43 88.646 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "d2165f65-9d62-4de9-aa5c-4fc959c4a9ca")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -48,7 +49,8 @@
 		(uuid "ddcb4529-a774-4361-8d5d-66d11a2228a3")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -60,7 +62,19 @@
 		(uuid "f6743050-d41c-4be9-8013-1ef1018a50b7")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 11.43 85.4456 0)
+		(layer "F.SilkS")
+		(uuid "40618961-2663-4e33-9697-11afea1f74cf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -230,18 +244,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "13c77043-d702-44af-8e60-96bc68d8b5c3")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 11.43 85.471 0)
-		(layer "F.SilkS")
-		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

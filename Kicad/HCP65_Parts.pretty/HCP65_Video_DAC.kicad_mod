@@ -6,18 +6,18 @@
 	(descr "HCP65 Video DAC")
 	(tags "HCP65 Video DAC")
 	(property "Reference" "REF**"
-		(at 11.43 -19.641 0)
+		(at 11.4808 -13.97 0)
 		(layer "F.SilkS")
 		(uuid "8af88394-879a-4932-9165-23464805ef7d")
 		(effects
 			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
 	(property "Value" "HCP65 Video DAC"
-		(at 11.43 56.515 0)
+		(at 11.43 56.7436 0)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
@@ -29,14 +29,15 @@
 		)
 	)
 	(property "Footprint" "HCP65_Video_DAC"
-		(at 0 0 0)
+		(at 11.2776 58.42 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "953064c9-69ad-48b6-8aa6-8b1ad2085ce3")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -48,7 +49,8 @@
 		(uuid "78dc0a5c-0347-43a8-bf35-20a5bc4ca635")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -60,7 +62,19 @@
 		(uuid "1dbfd3f9-a1ef-46be-8550-01b733a8a175")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 11.43 55.0164 0)
+		(layer "F.SilkS")
+		(uuid "062fa541-130b-4d6c-91cc-f493df46d5d2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -418,18 +432,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "35330d68-ad2b-4297-9627-e8b23253b7a7")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 11.43 54.991 0)
-		(layer "F.SilkS")
-		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "" np_thru_hole circle
 		(at -1.070001 -7.366 180)

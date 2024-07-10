@@ -6,13 +6,13 @@
 	(descr "HCP65 Video Data Select")
 	(tags "HCP65 Video Data Select")
 	(property "Reference" "REF**"
-		(at 7.62 -0.762 0)
+		(at 7.62 -0.3048 0)
 		(layer "F.SilkS")
 		(uuid "8af88394-879a-4932-9165-23464805ef7d")
 		(effects
 			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -29,14 +29,15 @@
 		)
 	)
 	(property "Footprint" "HCP65_Video_Data_Select"
-		(at 0 0 0)
+		(at 7.2136 55.372 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "a54a52c6-dbe8-4728-81fa-c98c2abbe3ee")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -48,7 +49,8 @@
 		(uuid "c1403215-2b19-466f-8cbd-2c6e546c061e")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -60,7 +62,19 @@
 		(uuid "a6e55772-422b-4595-9cc1-e8fe53246044")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 7.0104 51.816 0)
+		(layer "F.SilkS")
+		(uuid "9ceaa368-aba2-4918-b7b0-09582bde617f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -230,18 +244,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "aa136522-97fe-4c53-8094-5e9258117daa")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 6.985 51.816 0)
-		(layer "F.SilkS")
-		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

@@ -6,13 +6,13 @@
 	(descr "HCP65 W65C816 Clock Hold")
 	(tags "HCP65 W65C816 Clock Hold")
 	(property "Reference" "REF**"
-		(at 11.43 -3.81 0)
+		(at 11.43 -3.4036 0)
 		(layer "F.SilkS")
 		(uuid "8af88394-879a-4932-9165-23464805ef7d")
 		(effects
 			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -29,14 +29,15 @@
 		)
 	)
 	(property "Footprint" "HCP65_W65C816_Clock_Hold"
-		(at 0 0 0)
+		(at 11.43 48.0568 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "465a7483-8f17-495c-bbb7-eeb5cd3f15f4")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -48,7 +49,8 @@
 		(uuid "cca34371-a384-48df-b5e4-0ff497deee93")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -60,7 +62,19 @@
 		(uuid "879a9f44-53b0-4d14-b81b-17eec5f15fe1")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 11.43 44.8056 0)
+		(layer "F.SilkS")
+		(uuid "b3e61076-fe60-4f77-826f-e6c07531f177")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -230,18 +244,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "f1f968f9-33da-433b-be14-dc0d7f8be8d4")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 11.43 44.831 0)
-		(layer "F.SilkS")
-		(uuid "0bc242d9-ff7e-4b8b-a5cd-4bd49bcde257")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

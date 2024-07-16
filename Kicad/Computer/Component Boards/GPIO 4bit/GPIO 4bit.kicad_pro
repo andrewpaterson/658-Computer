@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "silk_overlap|115674731|54895963|c98bd61d-c51f-4e79-bd08-bcf8b8dea406|10b07f9f-d8de-41fd-b6ee-8d64030be7c5"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -474,23 +472,6 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.5,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "12V",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 1.0,
-        "via_diameter": 1.3,
-        "via_drill": 1.0,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
@@ -515,19 +496,15 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "*/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "*/5V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "*/GND"
-      },
-      {
-        "netclass": "12V",
-        "pattern": "*/12V*"
+        "pattern": "*GND"
       }
     ]
   },

@@ -1,4 +1,4 @@
-func @@main()
+sub @@main()
 	uint16 c; uint16 d;
 	int32 x = (c + d);
 	int64 @@q;
@@ -14,7 +14,7 @@ func @@main()
 	d = (c + (5 * x) - 1);
 end
 
-func @array():int16
+sub @array():int16
 	uint8* xxx;
 	int32 y = 3;
 	y = (y + y - y + y - y);

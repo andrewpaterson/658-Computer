@@ -1,6 +1,6 @@
 $start_address 0x800
 
-func @count_pointless(int16 start, int16 _end, int8* address):int16
+sub @count_pointless(int16 start, int16 _end, int8* address):int16
 	flag p;
 	int8 value;
 	int16 i = start;
@@ -13,7 +13,7 @@ func @count_pointless(int16 start, int16 _end, int8* address):int16
 	return i;
 end
 
-func @@main:
+sub @@main:
 	int16 count = @count_pointless(0, 23, 9);
 		
 	int32 number; int32 another;

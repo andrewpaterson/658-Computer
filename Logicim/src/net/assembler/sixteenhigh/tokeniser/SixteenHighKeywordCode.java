@@ -14,6 +14,7 @@ public enum SixteenHighKeywordCode
   float32,
   float64,
   float128,
+  flag,
   bool,
   assign,             // =
   add,                // +
@@ -28,12 +29,7 @@ public enum SixteenHighKeywordCode
   or,                 // |
   xor,                // ^
   not,                // ~
-  if_greater,         // if>
-  if_equals,          // if=
-  if_less,            // if<
-  if_greater_equals,  // if>=
-  if_less_equals,     // if<=
-  if_not_equals,      // if!=
+  if_,                // if
   add_assign,         // +=
   subtract_assign,    // -=
   multiply_assign,    // *=
@@ -48,23 +44,13 @@ public enum SixteenHighKeywordCode
   not_assign,         // ~=
   increment,          // ++
   decrement,          // --
-  go,
-  gosub,              // gosub
-
-/* Remove these.  For comparisons do unassigned arithmetic operations.  e.g.  (a - b); if<.  Or introduce an explicit 'flags' type.*/
-  subtract_compare,   // ?-
-  and_compare,        // ?&
-  is_true,            // ?
-  is_false,           // ?!
-/* ------------- */
 
   test_set,           // ts
   test_reset,         // tr
-  pull,               // <
-  push,               // >
-  ret,                // return
+  return_,            // return
+  sub,                // sub
+  rec,                // rec
   end,
-  struct,
   start_address,
   end_address,
   access_mode,

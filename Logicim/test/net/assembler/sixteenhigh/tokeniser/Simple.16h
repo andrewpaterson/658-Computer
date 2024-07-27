@@ -1,7 +1,7 @@
-func @print_pair(int16 odd, int16 even):uint16
+sub @print_pair(int16 odd, int16 even):uint16
 end
 
-func @sum_even_and_odd()
+sub @sum_even_and_odd()
 	int16 i; int16 number; int16 even; int16 odd;
 	number = 10; i = 0; even = 0; odd = 0;
 	bool b;
@@ -26,7 +26,7 @@ func @sum_even_and_odd()
 	result = @print_pair(odd, even);
 end
 
-func @@main(char** szArguments, uint16 uiArguments):int32
+sub @@main(char** szArguments, uint16 uiArguments):int32
 	@sum_even_and_odd
 	return 0
 end

@@ -96,29 +96,9 @@ public class TokenUnit
     statements.add(new ReturnTokenStatement(this, statementIndex++));
   }
 
-  public void addPush(TokenExpressionList expressions)
-  {
-    statements.add(new PushTokenStatement(this, statementIndex++, expressions));
-  }
-
-  public void addPull(VariableTokenExpression expression)
-  {
-    statements.add(new PullTokenStatement(this, statementIndex++, expression, new PullTokenExpression()));
-  }
-
-  public void addBitCompare(VariableTokenExpression register, SixteenHighKeywordCode keyword)
-  {
-    statements.add(new BitCompareTokenStatement(this, statementIndex++, register, keyword));
-  }
-
   public void addCrement(VariableTokenExpression register, SixteenHighKeywordCode keyword)
   {
     statements.add(new CrementTokenStatement(this, statementIndex++, register, keyword));
-  }
-
-  public void addNumberCompare(VariableTokenExpression leftExpression, TokenExpressionList right, SixteenHighKeywordCode keyword)
-  {
-    statements.add(new CompareTokenStatement(this, statementIndex++, leftExpression, right, keyword));
   }
 
   public void addAssignment(VariableTokenExpression leftExpression, SixteenHighKeywordCode keyword, TokenExpressionList rightExpressions)

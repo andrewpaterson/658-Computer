@@ -98,7 +98,6 @@ public class SixteenHighTokeniser
       parseResult = parseStatement();
       if (parseResult.isTrue())
       {
-        //noinspection UnnecessaryContinue
         continue;
       }
       else if (parseResult.isError())
@@ -168,16 +167,37 @@ public class SixteenHighTokeniser
     }
   }
 
-  private Tristate parseInterStatement()
+  private ParseResult parseEndStatement(boolean optional)
   {
-    Tristate state = textParser.getExactCharacter(keywords.interstatement(), true);
-    if ((state == ERROR) || (state == FALSE))
+    Tristate state = textParser.getExactCharacter(keywords.endStatement(), true);
+    if ((state == ERROR) || ((state == FALSE) && !optional))
     {
-      return ERROR;
+      return _error("Expected '%s'.", keywords.endStatement());
+    }
+    else if (state == FALSE && optional)
+    {
+      return _false();
     }
     else if (state == TRUE)
     {
-      return TRUE;
+      return _true();
+    }
+    else
+    {
+      throw new SimulatorException("Expected Tristate [%s] to be allowed.", state.toString());
+    }
+  }
+
+  private ParseResult parseEndLabel()
+  {
+    Tristate state = textParser.getExactCharacter(keywords.endLabel(), true);
+    if ((state == ERROR) || (state == FALSE))
+    {
+      return _error("Expected '%s'.", keywords.endLabel());
+    }
+    else if (state == TRUE)
+    {
+      return _true();
     }
     else
     {
@@ -423,7 +443,8 @@ public class SixteenHighTokeniser
                                   pointerCount,
                                   expressionPointer.expression);
       }
-      return _true();
+
+      return parseEndStatement(false);
     }
     return _false();
   }
@@ -562,12 +583,7 @@ public class SixteenHighTokeniser
     }
 
     unit.addLocalLabel(zeroIdentifier.toString());
-    Tristate result = parseInterStatement();
-    if (result == ERROR)
-    {
-      return _error();
-    }
-    return _true();
+    return parseEndLabel();
   }
 
   public ParseResult _error()
@@ -1141,7 +1157,7 @@ public class SixteenHighTokeniser
     }
   }
 
-  private ParseResult parseVariable2(VariableExpressionPointer expressionPointer)
+  private ParseResult recurseParseVariable(VariableExpressionPointer expressionPointer)
   {
     int dereferenceCount = asteriskCount();
 
@@ -1160,7 +1176,7 @@ public class SixteenHighTokeniser
       Tristate result = textParser.getExactCharacter(keywords.openRound());
       if (result == TRUE)
       {
-        ParseResult parseResult = parseVariable2(expressionPointer);
+        ParseResult parseResult = recurseParseVariable(expressionPointer);
         if (parseResult.isTrue())
         {
           result = textParser.getExactCharacter(keywords.closeRound());
@@ -1399,7 +1415,7 @@ void test(void)
   private ParseResult parseStatementStartingWithVariable()
   {
     VariableExpressionPointer expressionPointer = new VariableExpressionPointer();
-    ParseResult parseResult = parseVariable2(expressionPointer);
+    ParseResult parseResult = recurseParseVariable(expressionPointer);
     if (parseResult.isFalseOrError())
     {
       return parseResult;
@@ -1414,7 +1430,7 @@ void test(void)
       parseResult = crement(variableExpression, keyword);
       if (parseResult.isTrue())
       {
-        return _true();
+        return parseEndStatement(false);
       }
       else if (parseResult.isError())
       {
@@ -1422,6 +1438,10 @@ void test(void)
       }
 
       parseResult = assignmentOperator(variableExpression, keyword);
+      if (parseResult.isTrue())
+      {
+        return parseEndStatement(false);
+      }
       return parseResult;
     }
     else if (result == ERROR)
@@ -1501,9 +1521,10 @@ void test(void)
 
   public String getError()
   {
+    String errorMessages =  textParser.getLog().getErrorMessages();
     if (textParser.isOutsideText())
     {
-      return "";
+      return errorMessages;
     }
 
     TextParserPosition textParserPosition = textParser.saveSettings();
@@ -1527,7 +1548,7 @@ void test(void)
     StringBuilder pad = StringUtil.pad(" ", textParser.getPosition() - startOfLine);
     pad.append("^");
 
-    return "Error at position [" + textParser.getPosition() + "]: Unexpected: " + errorPosition + "\n" + errorLine + "\n" + pad.toString();
+    return errorMessages + "Error at position [" + textParser.getPosition() + "]: Unexpected: " + errorPosition + "\n" + errorLine + "\n" + pad.toString();
   }
 
   public boolean isCompleted()

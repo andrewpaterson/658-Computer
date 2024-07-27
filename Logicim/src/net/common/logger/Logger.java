@@ -99,5 +99,22 @@ public class Logger
       throw new SimulatorException("Unknown log level [%s].", logResult.level);
     }
   }
+
+  public String getErrorMessages()
+  {
+    StringBuilder builder = new StringBuilder();
+    for (String message : messages)
+    {
+      if (message.startsWith(ERROR))
+      {
+        builder.append(message);
+        if (messages.size() > 1)
+        {
+          builder.append("\n");
+        }
+      }
+    }
+    return builder.toString();
+  }
 }
 

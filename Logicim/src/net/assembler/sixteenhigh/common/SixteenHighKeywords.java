@@ -26,7 +26,8 @@ public class SixteenHighKeywords
   protected char REFERENCE = '&';
   protected char DOT = '.';
   protected char AT = '@';
-  protected char INTER_STATEMENT = ';';
+  protected char END_STATEMENT = ';';
+  protected char END_LABEL = ':';
   protected char LABEL = '#';
   protected char ARRAY_SEPARATOR = ',';
   protected String GLOBAL = "@@";
@@ -81,6 +82,7 @@ public class SixteenHighKeywords
     keywords.add(new KeywordPair(float64, "float64"));
     keywords.add(new KeywordPair(float128, "float128"));
     keywords.add(new KeywordPair(bool, "bool"));
+    keywords.add(new KeywordPair(flag, "flag"));
     keywords.add(new KeywordPair(assign, str(ASSIGN)));
     keywords.add(new KeywordPair(add, "+"));
     keywords.add(new KeywordPair(subtract, "-"));
@@ -376,9 +378,14 @@ public class SixteenHighKeywords
     return AT;
   }
 
-  public char interstatement()
+  public char endStatement()
   {
-    return INTER_STATEMENT;
+    return END_STATEMENT;
+  }
+
+  public char endLabel()
+  {
+    return END_LABEL;
   }
 
   public char label()
@@ -438,7 +445,8 @@ public class SixteenHighKeywords
                                   float32,
                                   float64,
                                   float128,
-                                  bool);
+                                  bool,
+                                  flag);
   }
 
   public List<String> getLeadingStatementIdentifiers()

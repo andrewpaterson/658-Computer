@@ -23,25 +23,25 @@ public abstract class TokeniserTest
 {
   protected static void testStatementAssignment1()
   {
-    SixteenHighTokeniser parser = createParser("i = 0");
+    SixteenHighTokeniser parser = createParser("i = 0;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("i = 0", unit.print(parser.getKeywords()));
+    validate("i = 0;", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementAssignment2()
   {
-    SixteenHighTokeniser parser = createParser("i = (c * 3)");
+    SixteenHighTokeniser parser = createParser("i = (c * 3);");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("i = (c * 3)", unit.print(parser.getKeywords()));
+    validate("i = (c * 3);", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
 
     List<TokenStatement> statements = unit.getStatements();
@@ -90,51 +90,60 @@ public abstract class TokeniserTest
     validateEquals(3L, ctInt.getValue());
   }
 
+  protected static void testStatementAssignment2MissingSemicolon()
+  {
+    SixteenHighTokeniser parser = createParser("i = (c * 3)");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateError(result);
+    validate("ERROR  [11]: Expected ';'.", parser.getError());
+  }
+
   protected static void testStatementAssignment3()
   {
-    SixteenHighTokeniser parser = createParser("i = -(0x230LL * +((-.4f) % 3))");
+    SixteenHighTokeniser parser = createParser("i = -(0x230LL * +((-.4f) % 3));");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("i = -(560 * +(-0.4F % 3))", unit.print(parser.getKeywords()));
+    validate("i = -(560 * +(-0.4F % 3));", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementAssignment4()
   {
-    SixteenHighTokeniser parser = createParser("c = -d");
+    SixteenHighTokeniser parser = createParser("c = -d;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("c = -d", unit.print(parser.getKeywords()));
+    validate("c = -d;", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementAssignment5()
   {
-    SixteenHighTokeniser parser = createParser("c = ~(5)");
+    SixteenHighTokeniser parser = createParser("c = ~(5);");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("c = ~(5)", unit.print(parser.getKeywords()));
+    validate("c = ~(5);", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
   protected static void testStatementAssignment6()
   {
-    SixteenHighTokeniser parser = createParser("i = (c * 3 + (x - y))");
+    SixteenHighTokeniser parser = createParser("i = (c * 3 + (x - y));");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("i = (c * 3 + (x - y))", unit.print(parser.getKeywords()));
+    validate("i = (c * 3 + (x - y));", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
 
     List<TokenStatement> statements = unit.getStatements();
@@ -223,42 +232,13 @@ public abstract class TokeniserTest
 
   protected static void testPlusExpression()
   {
-    SixteenHighTokeniser parser = createParser("x = (5 + ~d)");
+    SixteenHighTokeniser parser = createParser("x = (5 + ~d);");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("x = (5 + ~d)", unit.print(parser.getKeywords()));
-    validateTrue(parser.isCompleted());
-  }
-
-  protected static void testPull()
-  {
-    SixteenHighTokeniser parser = createParser("x< *p[2]< z<;");
-    ParseResult parseResult = parser.parse();
-    Tristate result = parseResult.getState();
-    validateNoError(result, parser.getError());
-    TokenUnit unit = parser.getUnit();
-    validateNotNull(unit);
-    validate("x<\n" +
-             "*p[2]<\n" +
-             "z<;\n", unit.print(parser.getKeywords()));
-    validateTrue(parser.isCompleted());
-  }
-
-  protected static void testPush()
-  {
-    SixteenHighTokeniser parser = createParser(">x >*p[2] >y >1;");
-    ParseResult parseResult = parser.parse();
-    Tristate result = parseResult.getState();
-    validateNoError(result, parser.getError());
-    TokenUnit unit = parser.getUnit();
-    validateNotNull(unit);
-    validate("> x\n" +
-             "> *p[2]\n" +
-             "> y\n" +
-             "> 1;\n", unit.print(parser.getKeywords()));
+    validate("x = (5 + ~d);", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -355,7 +335,7 @@ public abstract class TokeniserTest
 
   protected static void testArrayInitialisation()
   {
-    SixteenHighTokeniser parser = createParser("int8[6] a1d = [2,3,1,3,1,2]");
+    SixteenHighTokeniser parser = createParser("int8[6] a1d = [2,3,1,3,1,2];");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
@@ -365,39 +345,58 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
+  protected static void testArrayInitialisationMissingSemicolon()
+  {
+    SixteenHighTokeniser parser = createParser("int8[6] a1d = [2,3,1,3,1,2]");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateError(result);
+    validate("ERROR  [11]: Expected ';'.", parser.getError());
+  }
+
   protected static void testArrayStuff()
+  {
+    SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3LL))] = (5 + b * c + 99 * 1.05);");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("@a[(c * (b + 3))] = (5 + b * c + 99 * 1.05);", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+
+  protected static void testArrayStuffMissingSemicolon()
   {
     SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3LL))] = (5 + b * c + 99 * 1.05)");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
-    validateNoError(result, parser.getError());
-    TokenUnit unit = parser.getUnit();
-    validateNotNull(unit);
-    validate("@a[(c * (b + 3))] = (5 + b * c + 99 * 1.05)", unit.print(parser.getKeywords()));
-    validateTrue(parser.isCompleted());
+    validateError(result);
+    validate("ERROR  [11]: Expected ';'.", parser.getError());
   }
 
   protected static void testArrayIndices()
   {
-    SixteenHighTokeniser parser = createParser("a[2] = b[3]");
+    SixteenHighTokeniser parser = createParser("a[2] = b[3];");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("a[2] = b[3]", unit.print(parser.getKeywords()));
+    validate("a[2] = b[3];", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
   protected static void testSingleInitialisation()
   {
-    SixteenHighTokeniser parser = createParser("int8 i = 5");
+    SixteenHighTokeniser parser = createParser("int8 i = 5;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("int8 i = 5", unit.print(parser.getKeywords()));
+    validate("int8 i = 5;", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -440,25 +439,13 @@ public abstract class TokeniserTest
 
   private static void testReferenceOperator()
   {
-    SixteenHighTokeniser parser = createParser("p = &p[5]");
+    SixteenHighTokeniser parser = createParser("p = &p[5];");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("p = &p[5]", unit.print(parser.getKeywords()));
-    validateTrue(parser.isCompleted());
-  }
-
-  private static void testPullAfterRegisterDeclaration()
-  {
-    SixteenHighTokeniser parser = createParser("int8* address <");
-    ParseResult parseResult = parser.parse();
-    Tristate result = parseResult.getState();
-    validateNoError(result, parser.getError());
-    TokenUnit unit = parser.getUnit();
-    validateNotNull(unit);
-    validate("int8* address<", unit.print(parser.getKeywords()));
+    validate("p = &p[5];", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -478,14 +465,23 @@ public abstract class TokeniserTest
 
   private static void testStructFieldSelection()
   {
-    SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello");
+    SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("@party_address.line[1] = @hello", unit.print(parser.getKeywords()));
+    validate("@party_address.line[1] = @hello;", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
+  }
+
+  private static void testStructFieldSelectionMissingSemicolon()
+  {
+    SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello");
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateError(result);
+    validate("ERROR  [11]: Expected ';'.", parser.getError());
   }
 
   protected static void testSimple()
@@ -830,31 +826,32 @@ public abstract class TokeniserTest
 
   public static void test()
   {
-//    testStatementAssignment1();
-//    testStatementAssignment2();
-//    testStatementAssignment3();
-//    testStatementAssignment4();
-//    testStatementAssignment5();
-//    testStatementAssignment6();
-//    testStatementDeclaration();
-//    testStatementDirective();
-//    testSingleInitialisation();
-//    testArrayInitialisation();
-//    testArrayStuff();
-//    testArrayIndices();
-//    testComplexArrayIndices();
-//    testIdentifierContainingNumber();
-//    testGlobalAndFileVariables();
-//    testReferenceOperator();
-//    testPush();
-//    testPull();
-//    testPlusExpression();
-//    testUnsignedShiftRightExpression();
-//    testPullAfterRegisterDeclaration();
-//    testStructSimpleDeclaration();
-//    testStructFieldSelection();
-//    testMultiplePointerVariable();
-//    testCompoundVariable1();
+    testStatementAssignment1();
+    testStatementAssignment2();
+    testStatementAssignment2MissingSemicolon();
+    testStatementAssignment3();
+    testStatementAssignment4();
+    testStatementAssignment5();
+    testStatementAssignment6();
+    testStatementDeclaration();
+    testStatementDirective();
+    testSingleInitialisation();
+    testArrayInitialisation();
+    testArrayInitialisationMissingSemicolon();
+    testArrayStuff();
+    testArrayStuffMissingSemicolon();
+    testArrayIndices();
+    testComplexArrayIndices();
+    testIdentifierContainingNumber();
+    testGlobalAndFileVariables();
+    testReferenceOperator();
+    testPlusExpression();
+    testUnsignedShiftRightExpression();
+    testStructSimpleDeclaration();
+    testStructFieldSelection();
+    testStructFieldSelectionMissingSemicolon();
+    testMultiplePointerVariable();
+    testCompoundVariable1();
     testCompoundVariable2();
     testCompoundVariable3();
 

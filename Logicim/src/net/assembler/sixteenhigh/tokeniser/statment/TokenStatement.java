@@ -7,32 +7,18 @@ public abstract class TokenStatement
 {
   protected TokenUnit statements;
   protected int index;
-  protected boolean semicolon;
 
   public TokenStatement(TokenUnit statements, int index)
   {
     this.statements = statements;
     this.index = index;
-    this.semicolon = false;
   }
 
   public abstract String print(SixteenHighKeywords sixteenHighKeywords);
 
-  public void appendSemicolon()
-  {
-    semicolon = true;
-  }
-
   protected String semicolon()
   {
-    if (semicolon)
-    {
-      return ";";
-    }
-    else
-    {
-      return "";
-    }
+    return ";";
   }
 
   @Override

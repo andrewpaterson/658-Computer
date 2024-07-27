@@ -17,5 +17,6 @@ public enum PrimitiveTypeCode
   bool,
   string8,
   string16,
+  flag,
 }
 

@@ -350,10 +350,6 @@ public class SixteenHighSemanticiser
 
       return success();
     }
-    else if (expression.isPull())
-    {
-      return success();
-    }
     else
     {
       throw new SimulatorException("Cannot parse unknown token expression [%s].", expression.getClass().getSimpleName());

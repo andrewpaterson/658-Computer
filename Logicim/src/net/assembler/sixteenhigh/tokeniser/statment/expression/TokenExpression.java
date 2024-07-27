@@ -16,11 +16,6 @@ public interface TokenExpression
     return false;
   }
 
-  default boolean isPull()
-  {
-    return false;
-  }
-
   default boolean isLiteral()
   {
     return false;

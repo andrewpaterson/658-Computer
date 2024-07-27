@@ -195,6 +195,7 @@ public class SixteenHighTypeMap
     keywordToType.put(SixteenHighKeywordCode.float64, float64);
     keywordToType.put(SixteenHighKeywordCode.float128, float128);
     keywordToType.put(SixteenHighKeywordCode.bool, bool);
+    keywordToType.put(SixteenHighKeywordCode.flag, flag);
   }
 
   public PrimitiveTypeCode getPrimitiveTypeForKeyword(SixteenHighKeywordCode sixteenHighKeywordCode)

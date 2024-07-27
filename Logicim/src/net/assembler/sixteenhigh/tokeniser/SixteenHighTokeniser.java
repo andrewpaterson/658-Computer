@@ -7,7 +7,6 @@ import net.assembler.sixteenhigh.common.scope.Scope;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralParser;
 import net.assembler.sixteenhigh.tokeniser.literal.LiteralResult;
 import net.assembler.sixteenhigh.tokeniser.statment.ArrayDeclaration;
-import net.assembler.sixteenhigh.tokeniser.statment.IfTokenStatement;
 import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
 import net.common.SimulatorException;
 import net.common.logger.Logger;
@@ -337,32 +336,6 @@ public class SixteenHighTokeniser
 
   private ParseResult ifStatement(SixteenHighKeywordCode keyword)
   {
-    if (keyword == if_)
-    {
-      IfTokenStatement ifStatement = unit.addIf(keyword);
-      Tristate state = textParser.getExactIdentifier(keywords.go(), true);
-      if (state == ERROR)
-      {
-        return _error();
-      }
-      else if (state == FALSE)
-      {
-        return _error("Expected keyword '%s'.", keywords.go());
-      }
-
-      FlowExpressionPointer expressionPointer = new FlowExpressionPointer();
-      ParseResult parseResult = parseFlowExpression(keywords.getKeyword(keywords.go()), expressionPointer);
-      if (parseResult.isError())
-      {
-        return parseResult;
-      }
-      else if (parseResult.isFalse())
-      {
-        return _error("Expected flow statement.");
-      }
-      ifStatement.setGo(expressionPointer.flowExpression);
-      return _true();
-    }
     return _false();
   }
 
@@ -392,46 +365,7 @@ public class SixteenHighTokeniser
 
   private ParseResult parseFlowExpression(SixteenHighKeywordCode keyword, FlowExpressionPointer expressionPointer)
   {
-    if (keyword == go)
-    {
-      StringZero goLabelZero = new StringZero();
-      Tristate state = textParser.getIdentifier(goLabelZero, true);
-      if (state == ERROR)
-      {
-        return _error();
-      }
-      else if (state == FALSE)
-      {
-        return _error("Expected identifier.");
-      }
-      else
-      {
-        expressionPointer.setFlowExpression(new GoTokenExpression(goLabelZero.toString()));
-        return _true();
-      }
-    }
-    else if (keyword == gosub)
-    {
-      StringZero gosubLabelZero = new StringZero();
-      ParseResult parseResult = blockIdentifier(gosubLabelZero, true);
-      if (parseResult.isError())
-      {
-        return parseResult;
-      }
-      else if (parseResult.isFalse())
-      {
-        return _error("Expected block identifier.");
-      }
-      else
-      {
-        expressionPointer.setFlowExpression(new GosubTokenExpression(gosubLabelZero.toString()));
-        return _true();
-      }
-    }
-    else
-    {
-      return _false();
-    }
+    return _false();
   }
 
   private ParseResult primitiveDeclaration(SixteenHighKeywordCode keyword)
@@ -597,7 +531,8 @@ public class SixteenHighTokeniser
     {
       unit.addRoutine(identifier, Scope.unit);
     }
-    xxx
+    //xxx
+    return _false();
   }
 
   private ParseResult parseLabel()

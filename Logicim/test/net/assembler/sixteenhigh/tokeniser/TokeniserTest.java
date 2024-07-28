@@ -280,11 +280,36 @@ public abstract class TokeniserTest
 
   protected static void testCompoundVariable3()
   {
-    String s = "struct @Struct\n" +
+    String s = "rec @Struct\n" +
                "    int**** x;\n" +
                "end\n" +
                "@Struct s\n" +
                "*(*s[2].x[5])[4] = 6;\n";
+
+    SixteenHighTokeniser parser = createParser(s);
+    ParseResult parseResult = parser.parse();
+    Tristate result = parseResult.getState();
+    validateNoError(result, parser.getError());
+    TokenUnit unit = parser.getUnit();
+    validateNotNull(unit);
+    validate("int8**** p = 0;", unit.print(parser.getKeywords()));
+    validateTrue(parser.isCompleted());
+  }
+
+  protected static void testCompoundVariable4()
+  {
+    String s = "rec @SXX\n" +
+               "    int**** a;\n" +
+               "end\n" +
+               "\n" +
+               "rec SYY\n" +
+               "    SXX* x;\n" +
+               "end\n" +
+               "\n" +
+               "@test:\n" +
+               "    SYY yy[3];\n" +
+               "    *(**(yy[2].x[5].a))[4] = 6;\n" +
+               "end\n";
 
     SixteenHighTokeniser parser = createParser(s);
     ParseResult parseResult = parser.parse();
@@ -728,7 +753,7 @@ public abstract class TokeniserTest
     String s = unit.print(parser.getKeywords());
     validate("$start_address 0x800\n" +
              "\n" +
-             "struct @party_address\n" +
+             "rec @party_address\n" +
              "   int8* line1\n" +
              "   int8* line2\n" +
              "   int16 country_number\n" +
@@ -740,7 +765,7 @@ public abstract class TokeniserTest
              "   @party_address.line1 = @hello\n" +
              "end\n" +
              "\n" +
-             "struct @@person\n" +
+             "rec @@person\n" +
              "   int8* name\n" +
              "   int8 age\n" +
              "   @party_address address\n" +
@@ -854,6 +879,7 @@ public abstract class TokeniserTest
     testCompoundVariable1();
     testCompoundVariable2();
     testCompoundVariable3();
+    testCompoundVariable4();
 
     testSimple();
     testArrayDeclaration();

@@ -1180,10 +1180,10 @@ public class SixteenHighTokeniser
       }
     }
 
-    return recurseParseVariable(expressionPointer, dereferenceCount, reference);
+    return parseVariableIdentifierAndDots(expressionPointer, dereferenceCount, reference);
   }
 
-  private ParseResult recurseParseVariable(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
+  private ParseResult parseVariableIdentifierAndDots(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
   {
     StringZero registerNameZero = new StringZero();
     ParseResult parseResult = blockIdentifier(registerNameZero, false, false);
@@ -1195,48 +1195,71 @@ public class SixteenHighTokeniser
     String registerName = registerNameZero.toString();
     VariableMember variableMember = new VariableMember(registerName);
     VariableTokenExpression variableExpression = new VariableTokenExpression(variableMember, dereferenceCount, reference);
+    parseResult = parseVariableDots(variableMember, variableExpression);
+    if (parseResult.isFalseOrError())
+    {
+      return parseResult;
+    }
+
+    expressionPointer.setVariableExpression(variableExpression);
+    return _true();
+  }
+
+  private ParseResult parseVariableSquareBrackets(VariableMember variableMember)
+  {
+    ParseResult parseResult;
     for (; ; )
     {
-      for (; ; )
+      Tristate result = textParser.getExactCharacter(keywords.openSquare());
+      if (result == TRUE)
       {
-        Tristate result = textParser.getExactCharacter(keywords.openSquare());
-        if (result == TRUE)
+        ExpressablePointer expressablePointer = new ExpressablePointer();
+        parseResult = parseUnaryComponent(expressablePointer);
+        if (parseResult.isTrue())
         {
-          ExpressablePointer expressablePointer = new ExpressablePointer();
-          parseResult = parseUnaryComponent(expressablePointer);
-          if (parseResult.isTrue())
+          result = textParser.getExactCharacter(keywords.closeSquare());
+          if (result == TRUE)
           {
-            result = textParser.getExactCharacter(keywords.closeSquare());
-            if (result == TRUE)
-            {
-              variableMember.addArrayIndex(expressablePointer.expression);
-            }
-            else if (result == ERROR)
-            {
-              return _error();
-            }
-            else
-            {
-              return _error("Expected: '%s'.", keywords.closeSquare());
-            }
+            variableMember.addArrayIndex(expressablePointer.expression);
           }
-          else if (parseResult.isError())
+          else if (result == ERROR)
           {
-            return parseResult;
+            return _error();
           }
           else
           {
-            return _error("Expected Expression.");
+            return _error("Expected: '%s'.", keywords.closeSquare());
           }
         }
-        else if (result == ERROR)
+        else if (parseResult.isError())
         {
-          return _error();
+          return parseResult;
         }
         else
         {
-          break;
+          return _error("Expected Expression.");
         }
+      }
+      else if (result == ERROR)
+      {
+        return _error();
+      }
+      else
+      {
+        break;
+      }
+    }
+    return _true();
+  }
+
+  private ParseResult parseVariableDots(VariableMember variableMember, VariableTokenExpression variableExpression)
+  {
+    for (; ; )
+    {
+      ParseResult parseResult = parseVariableSquareBrackets(variableMember);
+      if (parseResult.isFalseOrError())
+      {
+        return parseResult;
       }
 
       Tristate result = textParser.getExactCharacter(keywords.dot());
@@ -1267,7 +1290,7 @@ public class SixteenHighTokeniser
         break;
       }
     }
-    expressionPointer.setVariableExpression(variableExpression);
+
     return _true();
   }
 
@@ -1287,26 +1310,6 @@ public class SixteenHighTokeniser
 
     return parseVariable(expressionPointer, dereferenceCount, reference);
   }
-
-/*
-
-struct SXX
-{
-    int**** a;
-};
-
-struct SYY
-{
-    SXX* x;
-};
-
-void test(void)
-{
-    SYY yy[3];
-    *(**(yy[2].x[5].a))[4] = 6;
-}
-
- */
 
   private ParseResult parseVariable(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
   {

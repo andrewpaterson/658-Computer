@@ -144,7 +144,7 @@ public class SixteenHighTokeniser
     if (result == TRUE)
     {
       StringZero structIdentifierZero = new StringZero();
-      ParseResult parseResult = structIdentifier(structIdentifierZero);
+      ParseResult parseResult = recordIdentifier(structIdentifierZero);
       if (parseResult.isError())
       {
         return _error();
@@ -154,7 +154,7 @@ public class SixteenHighTokeniser
         return _error("Expected identifier.");
       }
 
-      unit.addStruct(structIdentifierZero.toString());
+      unit.addRecord(structIdentifierZero.toString());
       return _true();
     }
     else if (result == ERROR)
@@ -212,44 +212,28 @@ public class SixteenHighTokeniser
     if (result == TRUE)
     {
       SixteenHighKeywordCode keyword = keywords.getKeyword(keywords.getDirectiveIdentifiers(), index);
-      Tristate state = startAddress(keyword);
-      if (state == TRUE)
+      ParseResult parseResult = startAddress(keyword);
+      if (parseResult.isTrueOrError())
       {
-        return _true();
-      }
-      else if (state == ERROR)
-      {
-        return _error();
+        return parseResult;
       }
 
-      state = endAddress(keyword);
-      if (state == TRUE)
+      parseResult = endAddress(keyword);
+      if (parseResult.isTrueOrError())
       {
-        return _true();
-      }
-      else if (state == ERROR)
-      {
-        return _error();
+        return parseResult;
       }
 
-      state = accessMode(keyword);
-      if (state == TRUE)
+      parseResult = accessMode(keyword);
+      if (parseResult.isTrueOrError())
       {
-        return _true();
-      }
-      else if (state == ERROR)
-      {
-        return _error();
+        return parseResult;
       }
 
-      state = accessTime(keyword);
-      if (state == TRUE)
+      parseResult = accessTime(keyword);
+      if (parseResult.isTrueOrError())
       {
-        return _true();
-      }
-      else if (state == ERROR)
-      {
-        return _error();
+        return parseResult;
       }
 
       return _false();
@@ -264,7 +248,7 @@ public class SixteenHighTokeniser
     }
   }
 
-  private Tristate startAddress(SixteenHighKeywordCode keyword)
+  private ParseResult startAddress(SixteenHighKeywordCode keyword)
   {
     if (keyword == start_address)
     {
@@ -272,21 +256,21 @@ public class SixteenHighTokeniser
       if (integerLiteral.isTrue())
       {
         unit.addStartAddress((int) integerLiteral.getIntegerLiteral().getValue());
-        return TRUE;
+        return parseEndStatement(false);
       }
       else if (integerLiteral.isError())
       {
-        return ERROR;
+        return _error("Expected integer.");
       }
       else
       {
-        return ERROR;
+        return _error();
       }
     }
-    return FALSE;
+    return _false();
   }
 
-  private Tristate endAddress(SixteenHighKeywordCode keyword)
+  private ParseResult endAddress(SixteenHighKeywordCode keyword)
   {
     if (keyword == end_address)
     {
@@ -294,21 +278,21 @@ public class SixteenHighTokeniser
       if (integerLiteral.isTrue())
       {
         unit.addEndAddress((int) integerLiteral.getIntegerLiteral().getValue());
-        return TRUE;
+        return parseEndStatement(false);
       }
       else if (integerLiteral.isError())
       {
-        return ERROR;
+        return _error("Expected integer.");
       }
       else
       {
-        return ERROR;
+        return _error();
       }
     }
-    return FALSE;
+    return _false();
   }
 
-  private Tristate accessMode(SixteenHighKeywordCode keyword)
+  private ParseResult accessMode(SixteenHighKeywordCode keyword)
   {
     if (keyword == access_mode)
     {
@@ -318,21 +302,21 @@ public class SixteenHighTokeniser
       {
         SixteenHighKeywordCode accessMode = keywords.getKeyword(keywords.getAccessModes(), index);
         unit.addAccessMode(accessMode);
-        return TRUE;
+        return parseEndStatement(false);
       }
       else if (state == ERROR)
       {
-        return ERROR;
+        return _error("Expected [%s]", StringUtil.commaSeparateList(keywords.getAccessModes()));
       }
       else
       {
-        return ERROR;
+        return _error();
       }
     }
-    return FALSE;
+    return _false();
   }
 
-  private Tristate accessTime(SixteenHighKeywordCode keyword)
+  private ParseResult accessTime(SixteenHighKeywordCode keyword)
   {
     if (keyword == access_time)
     {
@@ -340,18 +324,18 @@ public class SixteenHighTokeniser
       if (integerLiteral.isTrue())
       {
         unit.addAccessTime((int) integerLiteral.getIntegerLiteral().getValue());
-        return TRUE;
+        return parseEndStatement(false);
       }
       else if (integerLiteral.isError())
       {
-        return ERROR;
+        return _error("Expected integer.");
       }
       else
       {
-        return ERROR;
+        return _error();
       }
     }
-    return FALSE;
+    return _false();
   }
 
   private ParseResult ifStatement(SixteenHighKeywordCode keyword)
@@ -452,7 +436,7 @@ public class SixteenHighTokeniser
   private ParseResult recordDeclaration()
   {
     StringZero structIdentifierZero = new StringZero();
-    ParseResult parseResult = structIdentifier(structIdentifierZero);
+    ParseResult parseResult = recordIdentifier(structIdentifierZero);
     if (parseResult.isFalseOrError())
     {
       return parseResult;
@@ -485,7 +469,7 @@ public class SixteenHighTokeniser
     String structIdentifier = structIdentifierZero.toString();
     if (registerName.startsWith(keywords.global()))
     {
-      unit.addStructVariable(structIdentifier,
+      unit.addRecordVariable(structIdentifier,
                              registerName,
                              Scope.global,
                              arrayDeclaration.arrayMatrix,
@@ -494,7 +478,7 @@ public class SixteenHighTokeniser
     }
     else if (registerName.startsWith(keywords.unit()))
     {
-      unit.addStructVariable(structIdentifier,
+      unit.addRecordVariable(structIdentifier,
                              registerName,
                              Scope.unit,
                              arrayDeclaration.arrayMatrix,
@@ -503,7 +487,7 @@ public class SixteenHighTokeniser
     }
     else
     {
-      unit.addStructVariable(structIdentifier,
+      unit.addRecordVariable(structIdentifier,
                              registerName,
                              Scope.routine,
                              arrayDeclaration.arrayMatrix,
@@ -675,7 +659,7 @@ public class SixteenHighTokeniser
     }
   }
 
-  private ParseResult structIdentifier(StringZero fullIdentifier)
+  private ParseResult recordIdentifier(StringZero fullIdentifier)
   {
     int at = 0;
     Tristate state = textParser.getExactCharacter(keywords.at(), true);
@@ -1196,10 +1180,10 @@ public class SixteenHighTokeniser
       }
     }
 
-    return parseVariable2(expressionPointer, dereferenceCount, reference);
+    return recurseParseVariable(expressionPointer, dereferenceCount, reference);
   }
 
-  private ParseResult parseVariable2(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
+  private ParseResult recurseParseVariable(VariableExpressionPointer expressionPointer, int dereferenceCount, boolean reference)
   {
     StringZero registerNameZero = new StringZero();
     ParseResult parseResult = blockIdentifier(registerNameZero, false, false);
@@ -1423,7 +1407,7 @@ void test(void)
     VariableTokenExpression variableExpression = expressionPointer.variableExpression;
 
     SixteenHighKeywordCodePointer keywordPointer = new SixteenHighKeywordCodePointer();
-    Tristate result = getIdentifier(keywords.getFollowingStrings(), keywordPointer);
+    Tristate result = getString(keywords.getFollowingStrings(), keywordPointer);
     if (result == TRUE)
     {
       SixteenHighKeywordCode keyword = keywordPointer.keyword;

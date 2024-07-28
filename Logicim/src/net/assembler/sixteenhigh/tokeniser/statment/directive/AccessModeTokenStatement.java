@@ -19,7 +19,7 @@ public class AccessModeTokenStatement
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "$access_mode " + sixteenHighKeywords.getKeyword(mode);
+    return "$access_mode " + sixteenHighKeywords.getKeyword(mode) + semicolon();
   }
 
   public AccessMode getAccessMode()

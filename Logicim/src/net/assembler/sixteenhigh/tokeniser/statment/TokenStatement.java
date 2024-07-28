@@ -32,7 +32,7 @@ public abstract class TokenStatement
     return false;
   }
 
-  public boolean isStruct()
+  public boolean isRecord()
   {
     return false;
   }

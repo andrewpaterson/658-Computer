@@ -17,7 +17,7 @@ public class AccessTime
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "$access_time " + cycles;
+    return "$access_time " + cycles + semicolon();
   }
 
   public int getTime()

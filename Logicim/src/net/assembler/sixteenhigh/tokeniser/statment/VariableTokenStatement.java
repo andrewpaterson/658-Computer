@@ -95,7 +95,7 @@ public abstract class VariableTokenStatement
     return false;
   }
 
-  public boolean isStructVariable()
+  public boolean isRecordVariable()
   {
     return false;
   }

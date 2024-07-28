@@ -15,7 +15,7 @@ import net.assembler.sixteenhigh.semanticiser.triple.TripleLiteral;
 import net.assembler.sixteenhigh.semanticiser.triple.TripleValue;
 import net.assembler.sixteenhigh.semanticiser.triple.TripleVariable;
 import net.assembler.sixteenhigh.semanticiser.types.PrimitiveDefinition;
-import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.assembler.sixteenhigh.semanticiser.types.RecordDefinition;
 import net.assembler.sixteenhigh.semanticiser.types.TypeDefinition;
 import net.assembler.sixteenhigh.tokeniser.SixteenHighKeywordCode;
 import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
@@ -179,10 +179,10 @@ public class SixteenHighSemanticiser
       LogResult logResult = parseRoutineStatement(routineStatement, semanticContext);
       return logResult.isSuccess();
     }
-    else if (statement.isStruct())
+    else if (statement.isRecord())
     {
-      StructTokenStatement structStatement = (StructTokenStatement) statement;
-      LogResult logResult = parseStructStatement(structStatement, semanticContext);
+      RecordTokenStatement structStatement = (RecordTokenStatement) statement;
+      LogResult logResult = parseRecordStatement(structStatement, semanticContext);
       return logResult.isSuccess();
     }
     else if (statement.isEnd())
@@ -308,9 +308,9 @@ public class SixteenHighSemanticiser
 
       return getPrimitiveDefinition(primitiveStatement, type);
     }
-    else if (variableStatement.isStructVariable())
+    else if (variableStatement.isRecordVariable())
     {
-      StructVariableTokenStatement structStatement = (StructVariableTokenStatement) variableStatement;
+      RecordVariableTokenStatement structStatement = (RecordVariableTokenStatement) variableStatement;
       String name = structStatement.getName();
       throw new SimulatorException();
     }
@@ -488,20 +488,20 @@ public class SixteenHighSemanticiser
     return semanticContext.getVariable(name);
   }
 
-  private LogResult parseStructStatement(StructTokenStatement structStatement,
+  private LogResult parseRecordStatement(RecordTokenStatement recordStatement,
                                          SixteenHighSemanticiserContext semanticContext)
   {
-    StructDefinition structName = new StructDefinition(structStatement.getName());
-    if (semanticContext.getCurrentStruct() != null)
+    RecordDefinition structName = new RecordDefinition(recordStatement.getName());
+    if (semanticContext.getCurrentRecord() != null)
     {
-      return error("Struct [%s] nested in struct [%s] is not allowed.", structName, semanticContext.getCurrentStruct().getName());
+      return error("Struct [%s] nested in struct [%s] is not allowed.", structName, semanticContext.getCurrentRecord().getName());
     }
     if (semanticContext.getCurrentRoutine() != null)
     {
       return error("Struct [%s] nested in routine [%s] is not allowed.", structName, semanticContext.getCurrentRoutine().getName());
     }
 
-    semanticContext.setCurrentStruct(structName);
+    semanticContext.setCurrentRecord(structName);
     return success();
   }
 
@@ -513,9 +513,9 @@ public class SixteenHighSemanticiser
     {
       return error("Routine [%s] nested in routine [%s] is not allowed.", routineName, semanticContext.getCurrentRoutine().getName());
     }
-    if (semanticContext.getCurrentStruct() != null)
+    if (semanticContext.getCurrentRecord() != null)
     {
-      return error("Routine [%s] nested in struct [%s] is not allowed.", routineName, semanticContext.getCurrentStruct().getName());
+      return error("Routine [%s] nested in struct [%s] is not allowed.", routineName, semanticContext.getCurrentRecord().getName());
     }
 
     Scope routineScope = routineStatement.getScope();

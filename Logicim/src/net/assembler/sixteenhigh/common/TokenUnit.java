@@ -7,7 +7,10 @@ import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessModeTokenSta
 import net.assembler.sixteenhigh.tokeniser.statment.directive.AccessTime;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.EndAddress;
 import net.assembler.sixteenhigh.tokeniser.statment.directive.StartAddress;
-import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.BaseTokenExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.FlowTokenExpression;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.TokenExpressionList;
+import net.assembler.sixteenhigh.tokeniser.statment.expression.VariableTokenExpression;
 import net.common.util.StringUtil;
 
 import java.util.ArrayList;
@@ -50,16 +53,16 @@ public class TokenUnit
     statements.add(variable);
   }
 
-  public void addStructVariable(String structIdentifier,
+  public void addRecordVariable(String recordIdentifier,
                                 String name,
                                 Scope scope,
                                 List<Long> arrayMatrix,
                                 int pointerCount,
                                 BaseTokenExpression initialiserExpression)
   {
-    VariableTokenStatement variable = new StructVariableTokenStatement(this,
+    VariableTokenStatement variable = new RecordVariableTokenStatement(this,
                                                                        statementIndex++,
-                                                                       structIdentifier,
+                                                                       recordIdentifier,
                                                                        name,
                                                                        scope,
                                                                        arrayMatrix,
@@ -171,7 +174,7 @@ public class TokenUnit
       builder.append("\n");
       lines++;
 
-      if (statement.isRoutine() || statement.isStruct())
+      if (statement.isRoutine() || statement.isRecord())
       {
         depth++;
       }
@@ -190,10 +193,10 @@ public class TokenUnit
     return s;
   }
 
-  public void addStruct(String structName)
+  public void addRecord(String structName)
   {
-    StructTokenStatement structStatement = new StructTokenStatement(this, statementIndex++, structName);
-    statements.add(structStatement);
+    RecordTokenStatement recordStatement = new RecordTokenStatement(this, statementIndex++, structName);
+    statements.add(recordStatement);
   }
 
   public List<TokenStatement> getStatements()

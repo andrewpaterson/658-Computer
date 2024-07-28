@@ -17,7 +17,7 @@ public class StartAddress
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "$start_address 0x" + Integer.toHexString(address);
+    return "$start_address 0x" + Integer.toHexString(address) + semicolon();
   }
 
   public int getAddress()

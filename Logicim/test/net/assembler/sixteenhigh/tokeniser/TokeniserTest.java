@@ -298,13 +298,13 @@ public abstract class TokeniserTest
 
   protected static void testUnsignedShiftRightExpression()
   {
-    SixteenHighTokeniser parser = createParser("x = (5 + >>>d)");
+    SixteenHighTokeniser parser = createParser("x = (5 + >>>d);");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("x = (5 + >>>d)", unit.print(parser.getKeywords()));
+    validate("x = (5 + >>>d);", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -322,14 +322,14 @@ public abstract class TokeniserTest
 
   protected static void testStatementDirective()
   {
-    SixteenHighTokeniser parser = createParser("$access_mode read-write; $access_time 0x3");
+    SixteenHighTokeniser parser = createParser("$access_mode read-write; $access_time 0x3;");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("$access_mode read-write\n" +
-             "$access_time 3\n", unit.print(parser.getKeywords()));
+    validate("$access_mode read-write;\n" +
+             "$access_time 3;\n", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -341,7 +341,7 @@ public abstract class TokeniserTest
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("int8[6] a1d = [2, 3, 1, 3, 1, 2]", unit.print(parser.getKeywords()));
+    validate("int8[6] a1d = [2, 3, 1, 3, 1, 2];", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
@@ -351,7 +351,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateError(result);
-    validate("ERROR  [11]: Expected ';'.", parser.getError());
+    validate("ERROR  [27]: Expected ';'.", parser.getError());
   }
 
   protected static void testArrayStuff()
@@ -373,7 +373,7 @@ public abstract class TokeniserTest
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateError(result);
-    validate("ERROR  [11]: Expected ';'.", parser.getError());
+    validate("ERROR  [47]: Expected ';'.", parser.getError());
   }
 
   protected static void testArrayIndices()
@@ -449,21 +449,21 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testStructSimpleDeclaration()
+  private static void testRecordSimpleDeclaration()
   {
-    SixteenHighTokeniser parser = createParser("struct @party int8* animal end");
+    SixteenHighTokeniser parser = createParser("rec @party int8* animal; end");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateNoError(result, parser.getError());
     TokenUnit unit = parser.getUnit();
     validateNotNull(unit);
-    validate("struct @party\n" +
-             "   int8* animal\n" +
+    validate("rec @party\n" +
+             "   int8* animal;\n" +
              "end\n", unit.print(parser.getKeywords()));
     validateTrue(parser.isCompleted());
   }
 
-  private static void testStructFieldSelection()
+  private static void testRecordFieldSelection()
   {
     SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello;");
     ParseResult parseResult = parser.parse();
@@ -475,13 +475,13 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testStructFieldSelectionMissingSemicolon()
+  private static void testRecordFieldSelectionMissingSemicolon()
   {
     SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello");
     ParseResult parseResult = parser.parse();
     Tristate result = parseResult.getState();
     validateError(result);
-    validate("ERROR  [11]: Expected ';'.", parser.getError());
+    validate("ERROR  [31]: Expected ';'.", parser.getError());
   }
 
   protected static void testSimple()
@@ -698,7 +698,7 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testStructVariable()
+  private static void testRecordVariable()
   {
     SixteenHighTokeniser parser = createParser("@use_structs:\n" +
                                                "   @party_address address = 0;\n" +
@@ -715,7 +715,7 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testStruct()
+  private static void testRecord()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Struct.16h", log);
@@ -847,9 +847,9 @@ public abstract class TokeniserTest
     testReferenceOperator();
     testPlusExpression();
     testUnsignedShiftRightExpression();
-    testStructSimpleDeclaration();
-    testStructFieldSelection();
-    testStructFieldSelectionMissingSemicolon();
+    testRecordSimpleDeclaration();
+    testRecordFieldSelection();
+    testRecordFieldSelectionMissingSemicolon();
     testMultiplePointerVariable();
     testCompoundVariable1();
     testCompoundVariable2();
@@ -860,8 +860,8 @@ public abstract class TokeniserTest
     testPointers();
     testExpressions();
     testStack();
-    testStructVariable();
-    testStruct();
+    testRecordVariable();
+    testRecord();
     testDirectives();
   }
 }

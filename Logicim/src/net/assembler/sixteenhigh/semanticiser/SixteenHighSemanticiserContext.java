@@ -3,14 +3,14 @@ package net.assembler.sixteenhigh.semanticiser;
 import net.assembler.sixteenhigh.definition.SixteenHighDefinition;
 import net.assembler.sixteenhigh.semanticiser.directive.Directive;
 import net.assembler.sixteenhigh.semanticiser.expression.block.Block;
-import net.assembler.sixteenhigh.semanticiser.types.StructDefinition;
+import net.assembler.sixteenhigh.semanticiser.types.RecordDefinition;
 import net.common.SimulatorException;
 
 public class SixteenHighSemanticiserContext
 {
   protected Directive currentDirective;
   protected RoutineDefinition currentRoutine;
-  protected StructDefinition currentStruct;
+  protected RecordDefinition currentRecord;
   protected UnitDefinition unit;
 
   protected SixteenHighDefinition sixteenHighDefinition;
@@ -20,7 +20,7 @@ public class SixteenHighSemanticiserContext
     this.unit = unit;
     this.sixteenHighDefinition = sixteenHighDefinition;
     this.currentDirective = null;
-    this.currentStruct = null;
+    this.currentRecord = null;
   }
 
   public Directive getCurrentDirective()
@@ -38,9 +38,9 @@ public class SixteenHighSemanticiserContext
     currentRoutine = routine;
   }
 
-  public void setCurrentStruct(StructDefinition struct)
+  public void setCurrentRecord(RecordDefinition struct)
   {
-    currentStruct = struct;
+    currentRecord = struct;
   }
 
   public void setUnit(UnitDefinition unit)
@@ -51,7 +51,7 @@ public class SixteenHighSemanticiserContext
   public void setEnd()
   {
     currentRoutine = null;
-    currentStruct = null;
+    currentRecord = null;
   }
 
   public RoutineDefinition getCurrentRoutine()
@@ -59,9 +59,9 @@ public class SixteenHighSemanticiserContext
     return currentRoutine;
   }
 
-  public StructDefinition getCurrentStruct()
+  public RecordDefinition getCurrentRecord()
   {
-    return currentStruct;
+    return currentRecord;
   }
 
   public UnitDefinition getUnit()

@@ -17,7 +17,7 @@ public class EndAddress
   @Override
   public String print(SixteenHighKeywords sixteenHighKeywords)
   {
-    return "$end_address 0x" + Integer.toHexString(address);
+    return "$end_address 0x" + Integer.toHexString(address) + semicolon();
   }
 
   public int getAddress()

@@ -422,16 +422,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
 				(pin passive line
 					(at 0 -5.08 0)
@@ -22017,6 +22007,83 @@
 		)
 		(uuid "f9afac1b-1d86-46ad-b4f7-d8906339ab2a")
 	)
+	(text "If Main Memory Mode is required then include:\n  Main Memory Data (B15)\n  Main Memory Address (B7)\n\nIf Main Memory Mode is not required then ommit:\n  Main Memory Data (B15)\n  Main Memory Address (B7)\n\n\nMain memory must not be read from if ommitted"
+		(exclude_from_sim no)
+		(at 129.54 190.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "17329237-6097-4cd2-b293-53c766ed3b68")
+	)
+	(text "MPU Timer can be ommitted"
+		(exclude_from_sim no)
+		(at 284.48 -3.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "1d7eb55d-d8bd-46b6-99d2-5fd35e6d5926")
+	)
+	(text "MPU NMI can be ommitted"
+		(exclude_from_sim no)
+		(at 351.79 6.35 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "274e2939-4484-4df8-8379-576cb2a9d762")
+	)
+	(text "Device Reset can be ommitted"
+		(exclude_from_sim no)
+		(at 280.67 201.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "2a073b1d-521c-421d-b6c6-bfe6a4bbd0a9")
+	)
+	(text "Device Interrupts can be ommitted"
+		(exclude_from_sim no)
+		(at 363.22 217.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "c58a8a87-cf51-46b8-853b-05b4b4275650")
+	)
+	(text "If Kernam Mode is required then include:\n  Kernal Mode (B6)\n  Selector 12bit (B14)\n  Selector 12bit (B16)\nand ommit:\n  resistors typing A0 to SA0 ... ~{RAM_{CS}} to S~{RAM_{CS}}\n\nIf Kernam Mode is not required then include:\n  resistors typing A0 to SA0 ... ~{RAM_{CS}} to S~{RAM_{CS}}\nand ommit:\n  Kernal Mode (B6)\n  Selector 12bit (B14)\n  Selector 12bit (B16)"
+		(exclude_from_sim no)
+		(at 58.42 367.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "dea66503-0a53-423b-9224-169f782545d9")
+	)
+	(text "Instruction Code can be ommitted"
+		(exclude_from_sim no)
+		(at 280.67 359.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "e5b74459-60e5-4f33-ad65-ba99307e903d")
+	)
 	(label "~{Trans Out}"
 		(at 29.21 31.75 0)
 		(fields_autoplaced yes)
@@ -22027,6 +22094,17 @@
 			(justify left bottom)
 		)
 		(uuid "000eb905-f589-4c24-a01e-2201082495ed")
+	)
+	(label "GND"
+		(at 77.47 356.87 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "00204c49-0fc8-4b39-81f2-1e7294614219")
 	)
 	(label "GND"
 		(at -100.33 218.44 0)
@@ -23470,7 +23548,7 @@
 		(uuid "234b3aee-8750-4b65-b538-e313dc84de5d")
 	)
 	(label "~{Special}"
-		(at 207.01 -39.37 180)
+		(at 207.01 -41.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23501,17 +23579,6 @@
 			(justify right bottom)
 		)
 		(uuid "24346984-44d7-4816-9f75-fb636dea3027")
-	)
-	(label "3.3V"
-		(at -87.63 -45.72 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "24639cfa-efee-4b86-b046-153a3b2923a1")
 	)
 	(label "D2_{M}"
 		(at 165.1 146.05 0)
@@ -23809,17 +23876,6 @@
 			(justify left bottom)
 		)
 		(uuid "2d7fcccf-3883-4e46-928c-680332e2d3c7")
-	)
-	(label "Kernal"
-		(at -82.55 -45.72 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2d88ea0b-4f5f-45e5-aa72-39416885f5a9")
 	)
 	(label "~{Trans Out}"
 		(at 49.53 -24.13 180)
@@ -24273,7 +24329,7 @@
 		(uuid "3abdab33-0ffe-4574-9cf2-af5094f593e3")
 	)
 	(label "~{Main}"
-		(at 207.01 -41.91 180)
+		(at 207.01 -39.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24383,7 +24439,7 @@
 		(uuid "3d9f73f1-da27-436b-8f77-9ee40f7f7b12")
 	)
 	(label "RTI"
-		(at 331.47 19.05 180)
+		(at 72.39 350.52 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25129,17 +25185,6 @@
 			(justify right bottom)
 		)
 		(uuid "4fff126c-feb6-4a19-8089-a2744cd736ea")
-	)
-	(label "Kernal Mode"
-		(at 140.97 -68.58 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "510317c9-4809-4299-ba1a-b0ca7fddf95f")
 	)
 	(label "D3_{M}"
 		(at 165.1 148.59 0)
@@ -28156,7 +28201,7 @@
 		(uuid "a9848400-278b-41c5-8cff-87642baee102")
 	)
 	(label "Enter Interrupt"
-		(at 331.47 12.7 180)
+		(at 72.39 344.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28475,7 +28520,7 @@
 		(uuid "b427d4ba-921c-42e2-99dc-c59ca613f095")
 	)
 	(label "S~{WD}"
-		(at 207.01 -36.83 180)
+		(at 207.01 -34.29 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28860,7 +28905,7 @@
 		(uuid "c07484de-f131-4cda-b178-b8bc5f775828")
 	)
 	(label "GND"
-		(at 336.55 19.05 0)
+		(at 77.47 350.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -29563,7 +29608,7 @@
 		)
 		(uuid "d5047418-6af7-426b-9f48-16fde5c74a0d")
 	)
-	(label "Kernal Mode"
+	(label "Kernal"
 		(at 93.98 290.83 0)
 		(fields_autoplaced yes)
 		(effects
@@ -29773,7 +29818,7 @@
 		(uuid "dc0777cf-7990-4b4a-a4d3-918ed7912536")
 	)
 	(label "S~{RD}"
-		(at 207.01 -34.29 180)
+		(at 207.01 -36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -30268,7 +30313,7 @@
 		(uuid "e8a15f0f-0c6e-4de6-a7dc-3aa9d6390b89")
 	)
 	(label "GND"
-		(at 336.55 12.7 0)
+		(at 77.47 344.17 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -30850,6 +30895,17 @@
 		)
 		(uuid "f90c0758-a6d6-4004-8f61-10db66651d3a")
 	)
+	(label "Kernal"
+		(at 72.39 356.87 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f94e98c4-0538-44d9-9f61-365eff1c635f")
+	)
 	(label "A22"
 		(at 196.85 204.47 180)
 		(fields_autoplaced yes)
@@ -30893,17 +30949,6 @@
 			(justify left bottom)
 		)
 		(uuid "fb26b576-7eac-4d92-a55f-3d0a752dee31")
-	)
-	(label "3.3V"
-		(at 146.05 -68.58 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fb493e7a-8697-403b-bec8-0fe8169cfce1")
 	)
 	(label "D4"
 		(at 426.72 -29.21 180)
@@ -36157,6 +36202,73 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:R_0805")
+		(at 72.39 356.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40aeac5f-4ab1-46b7-98a4-bd86f68489bb")
+		(property "Reference" "R1"
+			(at 74.93 355.092 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "6.8KΩ"
+			(at 74.93 358.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:R_0805"
+			(at 89.916 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 72.39 356.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 72.39 356.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "35c52f55-6e73-4725-a556-b900ed7dfc54")
+		)
+		(pin "2"
+			(uuid "83bd09a4-27eb-4dee-81ec-1f0e7916ea44")
+		)
+		(instances
+			(project "Processor Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:W65C816_Debug_Display")
 		(at 429.26 -36.83 0)
 		(unit 1)
@@ -38018,7 +38130,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 331.47 12.7 0)
+		(at 72.39 344.17 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -38026,7 +38138,7 @@
 		(dnp no)
 		(uuid "6fa81e0c-bbe2-4f72-9f69-40d2dbc46855")
 		(property "Reference" "R6"
-			(at 334.01 10.922 0)
+			(at 74.93 342.392 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38034,7 +38146,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 334.01 14.605 0)
+			(at 74.93 346.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38042,7 +38154,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 348.996 20.32 0)
+			(at 89.916 351.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38051,7 +38163,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 331.47 12.7 0)
+			(at 72.39 344.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38060,7 +38172,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 331.47 12.7 0)
+			(at 72.39 344.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39084,16 +39196,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at -69.85 250.952 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "3407a42e-9dcd-41ee-b574-8b0db0f36b63")
 		)
@@ -39785,73 +39887,6 @@
 			(project "Processor Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 140.97 -68.58 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "aab29fb2-26b6-4853-80b6-7a834916267a")
-		(property "Reference" "R8"
-			(at 143.51 -70.358 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "6.8KΩ"
-			(at 143.51 -66.675 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 158.496 -60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 -68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 140.97 -68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "824ba5ae-ed5d-43b9-affe-107e07c56786")
-		)
-		(pin "2"
-			(uuid "98136dad-342a-46ff-8703-3e1579bbdb2e")
-		)
-		(instances
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -41364,7 +41399,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 331.47 19.05 0)
+		(at 72.39 350.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41372,7 +41407,7 @@
 		(dnp no)
 		(uuid "e0ede250-b088-4b4b-9208-8dd2346edf2a")
 		(property "Reference" "R7"
-			(at 334.01 17.272 0)
+			(at 74.93 348.742 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41380,7 +41415,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 334.01 20.955 0)
+			(at 74.93 352.425 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41388,7 +41423,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 348.996 26.67 0)
+			(at 89.916 358.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41397,7 +41432,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 331.47 19.05 0)
+			(at 72.39 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41406,7 +41441,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 331.47 19.05 0)
+			(at 72.39 350.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42136,75 +42171,6 @@
 			(project "Processor Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "J1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at -82.55 -45.72 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fb14431a-722a-40e7-99f7-e9847f953609")
-		(property "Reference" "NT1"
-			(at -85.09 -46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at -85.09 -44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at -103.505 -38.735 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at -85.09 -46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at -82.55 -45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "635b8c6e-3edf-482f-9882-cf92c06f5b31")
-		)
-		(pin "2"
-			(uuid "b6144fc5-597e-48d2-b466-1f99b7d4dbb8")
-		)
-		(instances
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT1")
 					(unit 1)
 				)
 			)

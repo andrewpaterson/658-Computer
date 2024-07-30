@@ -33,6 +33,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816ViewFactory;
 import net.logicim.ui.simulation.component.passive.pin.PinViewFactory;
 import net.logicim.ui.simulation.component.passive.power.GroundViewFactory;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerViewFactory;
@@ -95,6 +96,7 @@ public class SimulatorPanel
                                           new TunnelViewFactory(),
                                           new LabelViewFactory(),
                                           new PinViewFactory(),
+                                          new W65C816ViewFactory(),
                                           new SubcircuitInstanceViewFactory());
 
     addComponentListener(this);

@@ -33,7 +33,7 @@ public class ClockOscillatorPins
     return output;
   }
 
-  public LogicPort getOutput2()
+  public LogicPort getOutputInverse()
   {
     return output2;
   }

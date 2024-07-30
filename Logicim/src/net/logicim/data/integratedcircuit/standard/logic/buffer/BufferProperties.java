@@ -12,6 +12,7 @@ public class BufferProperties
 
   public BufferProperties()
   {
+    super();
     inputCount = 0;
     inputWidth = 0;
   }

@@ -16,6 +16,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerView;
@@ -44,6 +45,7 @@ public class EditorActionsFactory
     placeComponentAction(editor, TunnelView.class);
     placeComponentAction(editor, LabelView.class);
     placeComponentAction(editor, PinView.class);
+    placeComponentAction(editor, W65C816View.class);
 
     editor.addAction(EditPropertiesAction.NAME, new EditPropertiesAction(editor, panel));
     editor.addAction(PlacementRotateLeftAction.NAME, new PlacementRotateLeftAction(editor));

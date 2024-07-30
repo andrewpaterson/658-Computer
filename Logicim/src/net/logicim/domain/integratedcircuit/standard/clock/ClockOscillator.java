@@ -51,9 +51,9 @@ public class ClockOscillator
 
       createTickEvent(simulation, halfCycleTime);
       pins.getOutput().writeBool(simulation.getTimeline(), state.getState());
-      if (pins.getOutput2() != null)
+      if (pins.getOutputInverse() != null)
       {
-        pins.getOutput2().writeBool(simulation.getTimeline(), !state.getState());
+        pins.getOutputInverse().writeBool(simulation.getTimeline(), !state.getState());
       }
     }
   }
@@ -116,9 +116,9 @@ public class ClockOscillator
       {
         LogicPort output = pins.getOutput();
         output.writeImpedance(simulation.getTimeline());
-        if (pins.getOutput2() != null)
+        if (pins.getOutputInverse() != null)
         {
-          pins.getOutput2().writeImpedance(simulation.getTimeline());
+          pins.getOutputInverse().writeImpedance(simulation.getTimeline());
         }
       }
     }

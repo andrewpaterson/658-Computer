@@ -16,10 +16,13 @@ public class AndGateViewFactory
                             Int2D position,
                             Rotation rotation)
   {
-    return create(
-        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
-        rotation,
-        createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(), getViewClass(), true));
+    return create(circuitEditor,
+                  circuitEditor.getCurrentSubcircuitView(),
+                  position,
+                  rotation,
+                  createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(),
+                                          getViewClass(),
+                                          true));
   }
 
   @Override

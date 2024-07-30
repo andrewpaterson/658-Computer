@@ -2,6 +2,12 @@ package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
 import net.common.SimulatorException;
 import net.common.util.IntUtil;
+import net.logicim.domain.Simulation;
+import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
+import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.Instruction;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.InstructionFactory;
@@ -14,8 +20,9 @@ import static net.common.util.StringUtil.*;
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.CpuFlags.*;
 
 public class W65C816
+    extends IntegratedCircuit<W65C816Pins, W65C816State>
 {
-  public static final String TYPE = "Microprocessor";
+  public static final String TYPE = "W65C816 Microprocessor";
 
   protected static Instruction[] opCodeTable;
   protected static Instruction resetOpcode;
@@ -64,28 +71,17 @@ public class W65C816
   protected int directOffset;
   protected Address newProgramCounter;
   protected boolean busEnable;
+  protected boolean irq;
+  protected boolean abort;
   protected boolean nextInstruction;
   protected int data;
-  protected boolean previousNMI;
-  protected boolean nmiLatch;
+  protected boolean nmi;
 
-  protected boolean clock;
-  protected boolean fallingEdge;
-  protected boolean risingEdge;
-
-  //Values that will be written (or read) from the pins.
-  protected W65C816PinValues pinValues;
-
-  protected int time;
-  protected boolean timingClock;
-
-  protected W65C816Pins pins;
   protected String name;
 
-  public W65C816(String name, W65C816Pins pins)
+  public W65C816(Circuit circuit, String name, W65C816Pins pins)
   {
-    this.pins = pins;
-    this.name = name;
+    super(circuit, name, pins);
 
     programCounter = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
@@ -112,24 +108,18 @@ public class W65C816
     overflowFlag = false;
     breakFlag = false;
 
-    pinValues = new W65C816PinValues();
-
     stopped = false;
     busEnable = true;
     nextInstruction = false;
 
     data = 0;
-    clock = false;
     cycle = 0;
     opCode = resetOpcode;
     internal16BitData = 0;
     directOffset = 0;
     newProgramCounter = new Address();
     address = new Address();
-    previousNMI = false;
-    nmiLatch = false;
-
-    time = 0;
+    nmi = false;
 
     createAbortValues();
   }
@@ -343,141 +333,149 @@ public class W65C816
     return programCounter;
   }
 
-  public void tick()
-  {
-    boolean timeMustTick = updateTimingValues();
-
-    boolean currentClock = getPins().isClock();
-
-    fallingEdge = !currentClock && this.clock;
-    risingEdge = currentClock && !this.clock;
-    clock = currentClock;
-
-    pinValues.reset = getPins().isReset();
-    busEnable = getPins().isBusEnable();
-
-    if (pinValues.reset)
-    {
-      reset();
-    }
-
-    if (!busEnable)
-    {
-      getPins().disableBuses();
-    }
-
-    tickWithDisconnectedTiming();
-
-    if (timeMustTick)
-    {
-      if (fallingEdge)
-      {
-        time = 0;
-      }
-      else
-      {
-        time++;
-      }
-    }
-  }
-
   public W65C816Pins getPins()
   {
     return pins;
   }
 
-  private void reset()
+  public void reset()
   {
-    pinValues.nmi = false;
-    previousNMI = false;
-    nmiLatch = false;
-    pinValues.irq = false;
+    super.reset();
+    resetPulled();
+  }
+
+  public void resetPulled()
+  {
+    abort = false;
+    nmi = false;
     opCode = resetOpcode;
     stopped = false;
     cycle = 0;
   }
 
-  private void tickWithDisconnectedTiming()
+  @Override
+  public void simulationStarted(Simulation simulation)
   {
-    if ((fallingEdge || risingEdge) && !stopped)
+
+  }
+
+  @Override
+  public void inputTransition(Simulation simulation, LogicPort port)
+  {
+    long simulationTime = simulation.getTime();
+
+    LogicPort res = getPins().getResB();
+    if (port == res)
     {
-      latchNMI();
-
-      if (fallingEdge)
+      boolean reset = !res.readValue(simulationTime).isLow();
+      if (reset)
       {
-        pinValues.abort = getPins().isAbort() || pinValues.abort;
-        pinValues.irq = getPins().isIRQ() || pinValues.irq;
-
-        executeFirstHalf();
+        resetPulled();
       }
+    }
 
-      if (risingEdge)
+    LogicPort clock = getPins().getPhi2();
+    LogicPort nmi = getPins().getNmiB();
+    LogicPort irq = getPins().getIrqB();
+    LogicPort abort = getPins().getAbortB();
+    LogicPort be = getPins().getBe();
+
+    if (clock == port)
+    {
+      TraceValue clockValue = clock.readValue(simulationTime);
+      if (clockValue.isHigh() || clockValue.isLow())
       {
-        pinValues.irq = getPins().isIRQ() || pinValues.irq;
+        boolean currentClock = clockValue.isHigh();
+        boolean fallingEdge = !currentClock;
 
-        executeSecondHalf();
+        if (!busEnable)
+        {
+          disableBuses();
+        }
+
+        if (!stopped)
+        {
+          if (fallingEdge)
+          {
+            executeLowHalf(simulation.getTimeline());
+          }
+
+          if (currentClock)
+          {
+            executeHighHalf(simulation.getTimeline());
+          }
+        }
       }
+    }
+    else if (port == nmi)
+    {
+      this.nmi = !nmi.readValue(simulationTime).isLow();
+    }
+    else if (port == irq)
+    {
+      this.irq = !irq.readValue(simulationTime).isLow();
+    }
+    else if (port == abort)
+    {
+      this.abort = !abort.readValue(simulationTime).isLow();
+    }
+    else if (port == be)
+    {
+      this.busEnable = be.readValue(simulationTime).isLow();
     }
   }
 
-  private void latchNMI()
+  private void disableBuses()
   {
-    previousNMI = pinValues.nmi;
-    pinValues.nmi = getPins().isNMI();
-    if (!previousNMI && pinValues.nmi)
-    {
-      nmiLatch = true;
-    }
+
   }
 
-  public final void executeFirstHalf()
+  public final void executeLowHalf(Timeline timeline)
   {
     DataOperation dataOperation = getDataOperation();
     BusCycle busCycle = getBusCycle();
     boolean read = dataOperation.isRead();
-    W65C816Pins pins = getPins();
     Address address = busCycle.getAddress(this);
 
-    pins.setRWB(read);
-    pins.setMX(isIndex8Bit());
-    pins.setValidDataAddress(dataOperation.isValidDataAddress());
-    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setEmulation(isEmulation());
-    pins.setRdy(dataOperation.isReady());
-    pins.setAddress(address.getOffset());
-    pins.setBank(address.getBank());
+    pins.getRwb().writeBool(timeline, read);
+    pins.getMx().writeBool(timeline, isIndex8Bit());
+    pins.getVda().writeBool(timeline, dataOperation.isValidDataAddress());
+    pins.getVpa().writeBool(timeline, dataOperation.isValidProgramAddress());
+    pins.getMlB().writeBool(timeline, dataOperation.isNotMemoryLock());
+    pins.getVpB().writeBool(timeline, dataOperation.isNotVectorPull());
+    pins.getE().writeBool(timeline, isEmulation());
+    //pins.getRdy().writeBool(timeline, dataOperation.isReady());
+    pins.writeAddress(timeline, address.getOffset());
+    pins.writeData(timeline, address.getBank());
   }
 
-  public final void executeSecondHalf()
+  public final void executeHighHalf(Timeline timeline)
   {
     DataOperation dataOperation = getDataOperation();
     BusCycle busCycle = getBusCycle();
     boolean read = dataOperation.isRead();
-    W65C816Pins pins = getPins();
     Address address = busCycle.getAddress(this);
 
     if (read)
     {
-      data = pins.getData();
+      data = pins.readData(timeline);
     }
 
-    pins.setRWB(read);
-    pins.setMemoryLockB(dataOperation.isNotMemoryLock());
-    pins.setMX(isMemory8Bit());
-    pins.setEmulation(isEmulation());
-    pins.setRdy(dataOperation.isReady());
-    pins.setValidDataAddress(dataOperation.isValidDataAddress());
-    pins.setValidProgramAddress(dataOperation.isValidProgramAddress());
-    pins.setVectorPullB(dataOperation.isNotVectorPull());
-    pins.setAddress(address.getOffset());
+//    pins.getRwb().writeBool(timeline, read);
+//    pins.getMlB().writeBool(timeline, dataOperation.isNotMemoryLock());
+    pins.getMx().writeBool(timeline, isMemory8Bit());
+//    pins.getE().writeBool(timeline, isEmulation());
+//    //pins.getRdy().writeBool(timeline, dataOperation.isReady());
+//    pins.getVda().writeBool(timeline, dataOperation.isValidDataAddress());
+//    pins.getVpa().writeBool(timeline, dataOperation.isValidProgramAddress());
+//    pins.getVpB().writeBool(timeline, dataOperation.isNotVectorPull());
+//    pins.writeAddress(timeline, address.getOffset());
 
     executeOperation();
 
     if (!read)
     {
-      pins.setData(data);
+      pins.writeData(timeline, data);
     }
 
     cycle();
@@ -507,18 +505,6 @@ public class W65C816
     {
       operation.execute(this);
     }
-  }
-
-  private boolean updateTimingValues()
-  {
-    //@todo - This used to be the timing values update.
-    //        All we really need to know is if the clock started rising or falling.
-    boolean timingClock = getPins().isTimingClock();
-    boolean risingEdge = timingClock && !this.timingClock;
-    boolean fallingEdge = !timingClock && this.timingClock;
-    this.timingClock = timingClock;
-
-    return risingEdge || fallingEdge;
   }
 
   public BusCycle getBusCycle()
@@ -702,30 +688,24 @@ public class W65C816
 
   private void nextInstruction()
   {
-    if (!pinValues.abort)
+    if (!abort)
     {
       createAbortValues();
     }
 
-    if (pinValues.irq && interruptDisableFlag)
-    {
-      pinValues.irq = false;
-    }
-
-    if (nmiLatch)
+    if (nmi)
     {
       opCode = nmiOpcode;
-      nmiLatch = false;
+      nmi = false;
     }
-    else if (pinValues.abort)
+    else if (abort)
     {
       opCode = abortOpcode;
-      pinValues.abort = false;
+      abort = false;
     }
-    else if (pinValues.irq)
+    else if (irq && !interruptDisableFlag)
     {
       opCode = irqOpcode;
-      pinValues.irq = false;
     }
     else
     {
@@ -740,7 +720,7 @@ public class W65C816
 
   public int getCycle()
   {
-    return this.cycle;
+    return cycle;
   }
 
   public void setOpCode(int data)
@@ -2059,14 +2039,12 @@ public class W65C816
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
-    pinValues.abort = false;
   }
 
   public void IRQ()
   {
     setInterruptDisableFlag(true);
     setDecimalFlag(false);
-    pinValues.irq = false;
   }
 
   public void NMI()
@@ -2081,7 +2059,6 @@ public class W65C816
     dataBank = 0;
     directPage = 0;
     programCounter.setBank(0);
-    stopped = false;
     setDecimalFlag(false);
     setInterruptDisableFlag(true);
   }
@@ -2189,11 +2166,6 @@ public class W65C816
     return busEnable;
   }
 
-  public boolean isClock()
-  {
-    return clock;
-  }
-
   public String getType()
   {
     return TYPE;
@@ -2212,11 +2184,6 @@ public class W65C816
   public int getData()
   {
     return data;
-  }
-
-  public String getTiming()
-  {
-    return Integer.toString(time);
   }
 }
 

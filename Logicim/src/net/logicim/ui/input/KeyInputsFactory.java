@@ -17,6 +17,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerView;
@@ -49,6 +50,7 @@ public class KeyInputsFactory
     placeComponentKeyInput(editor, TunnelView.class, KeyEvent.VK_T, Up, Up, Down);
     placeComponentKeyInput(editor, LabelView.class, KeyEvent.VK_L, Up, Up, Down);
     placeComponentKeyInput(editor, PinView.class, KeyEvent.VK_P, Up, Up, Up);
+    placeComponentKeyInput(editor, W65C816View.class, KeyEvent.VK_W, Up, Up, Up);
 
     editor.addKeyInput(new KeyInput(editor.getAction(EditPropertiesAction.NAME), KeyEvent.VK_E, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateLeftAction.NAME), KeyEvent.VK_R, Up, Up, Down));
@@ -91,9 +93,18 @@ public class KeyInputsFactory
     editor.addKeyInput(new KeyInput(editor.getAction(NewSimulationAction.NAME), KeyEvent.VK_S, Down, Down, Down));
   }
 
-  protected static void placeComponentKeyInput(Logicim editor, Class<? extends StaticView<?>> staticViewClass, int keyEvent, ButtonState ctrlHeld, ButtonState altHeld, ButtonState shiftHeld)
+  protected static void placeComponentKeyInput(Logicim editor,
+                                               Class<? extends StaticView<?>> staticViewClass,
+                                               int keyEvent,
+                                               ButtonState ctrlHeld,
+                                               ButtonState altHeld,
+                                               ButtonState shiftHeld)
   {
-    editor.addKeyInput(new KeyInput(editor.getAction(PlaceComponentAction.name(staticViewClass)), keyEvent, ctrlHeld, altHeld, shiftHeld));
+    editor.addKeyInput(new KeyInput(editor.getAction(PlaceComponentAction.name(staticViewClass)),
+                                    keyEvent,
+                                    ctrlHeld,
+                                    altHeld,
+                                    shiftHeld));
   }
 }
 

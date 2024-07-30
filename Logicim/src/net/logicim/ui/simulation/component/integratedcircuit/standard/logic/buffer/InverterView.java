@@ -20,6 +20,7 @@ public class InverterView
                       BufferProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
+    createPortViews();
     finaliseView();
   }
 

@@ -47,6 +47,7 @@ public class SplitterView
     super(subcircuitView, position, rotation, properties);
     bidirectionalPortMap = calculateBidirectionalPortMap();
     createGraphics();
+    createPortViews();
     finaliseView();
   }
 

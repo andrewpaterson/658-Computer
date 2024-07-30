@@ -19,6 +19,7 @@ public class XorGateView
                      LogicGateProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
+    createPortViews();
     finaliseView();
   }
 

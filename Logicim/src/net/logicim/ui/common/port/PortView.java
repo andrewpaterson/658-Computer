@@ -500,5 +500,11 @@ public class PortView
   {
     return new LinkedHashSet<>(simulationPorts.keySet());
   }
+
+  public PortView placate()
+  {
+    return this;
+    //This method does nothing and exists only to placate IntelliJ Idea.
+  }
 }
 

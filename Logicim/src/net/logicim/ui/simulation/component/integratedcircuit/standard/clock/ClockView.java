@@ -41,6 +41,7 @@ public class ClockView
           rotation,
           properties);
     createGraphics();
+    createPortViews();
     finaliseView();
   }
 

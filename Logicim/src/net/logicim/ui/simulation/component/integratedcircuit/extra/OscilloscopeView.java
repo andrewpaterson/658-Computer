@@ -38,6 +38,7 @@ public class OscilloscopeView
   {
     super(containingSubcircuitView, position, rotation, properties);
     createGraphics();
+    createPortViews();
     finaliseView();
   }
 

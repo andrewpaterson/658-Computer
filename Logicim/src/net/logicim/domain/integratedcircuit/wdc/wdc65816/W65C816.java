@@ -7,6 +7,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
+import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.Instruction;
@@ -2184,6 +2185,12 @@ public class W65C816
   public int getData()
   {
     return data;
+  }
+
+  @Override
+  public State createState()
+  {
+    return new W65C816State();
   }
 }
 

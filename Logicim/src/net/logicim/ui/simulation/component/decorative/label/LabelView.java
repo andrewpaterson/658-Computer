@@ -36,12 +36,11 @@ public class LabelView
 
   private void createGraphics()
   {
-    int size = FONT_SIZE;
     textView = new TextView(this,
                             new Int2D(0, 0),
                             properties.name,
                             SANS_SERIF,
-                            size,
+                            FONT_SIZE,
                             properties.bold,
                             properties.alignment);
 

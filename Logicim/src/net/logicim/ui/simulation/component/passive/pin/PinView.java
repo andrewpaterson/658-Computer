@@ -76,6 +76,7 @@ public class PinView
     relativeRightRotations = 2;
 
     createGraphics();
+    createPortViews();
     finaliseView();
   }
 

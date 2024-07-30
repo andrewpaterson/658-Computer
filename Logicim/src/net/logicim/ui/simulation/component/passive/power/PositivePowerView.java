@@ -32,6 +32,7 @@ public class PositivePowerView
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
+    createPortViews();
     finaliseView();
   }
 

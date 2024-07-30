@@ -19,6 +19,7 @@ public class NorGateView
                      LogicGateProperties properties)
   {
     super(subcircuitView, position, rotation, properties);
+    createPortViews();
     finaliseView();
   }
 

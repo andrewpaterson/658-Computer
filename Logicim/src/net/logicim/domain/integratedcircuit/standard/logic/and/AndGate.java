@@ -4,10 +4,8 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
-import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816State;
 
 import java.util.List;
 
@@ -65,12 +63,6 @@ public class AndGate
   public String getType()
   {
     return TYPE;
-  }
-
-  @Override
-  public State createState()
-  {
-    return new W65C816State();
   }
 }
 

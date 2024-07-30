@@ -67,6 +67,7 @@ public class SubcircuitInstanceView
     this.simulationSubcircuitInstances = new LinkedHashMap<>();
 
     createPinsAndGraphics();
+    createPortViews();
     finaliseView();
   }
 
@@ -442,6 +443,7 @@ public class SubcircuitInstanceView
   @Override
   protected void finaliseView()
   {
+    createPortViews();
     super.finaliseView();
     containingSubcircuitView.addSubcircuitInstanceView(this);
   }

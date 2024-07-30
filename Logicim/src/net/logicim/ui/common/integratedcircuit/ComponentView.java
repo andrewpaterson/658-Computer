@@ -43,7 +43,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void finaliseView()
   {
-    createPortViews();
     rotatePortsByRelativeRight();
 
     super.finaliseView();

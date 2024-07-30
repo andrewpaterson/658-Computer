@@ -29,6 +29,7 @@ public class GroundView
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
+    createPortViews();
     finaliseView();
   }
 

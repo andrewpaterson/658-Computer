@@ -47,14 +47,6 @@ public class OscilloscopeState
     tickPosition = 0;
   }
 
-  public void tick()
-  {
-    tickPosition++;
-    if (tickPosition >= sampleCount)
-    {
-      tickPosition = 0;
-    }
-  }
 
   public OscilloscopeState(int sampleCount, float[][] minVoltage, float[][] maxVoltage, int[][] colour, int tickPosition)
   {
@@ -63,6 +55,15 @@ public class OscilloscopeState
     this.maxVoltage = maxVoltage;
     this.colour = colour;
     this.tickPosition = tickPosition;
+  }
+
+  public void tick()
+  {
+    tickPosition++;
+    if (tickPosition >= sampleCount)
+    {
+      tickPosition = 0;
+    }
   }
 
   public void sample(int input, Trace trace, VoltageRepresentation colours, long time)

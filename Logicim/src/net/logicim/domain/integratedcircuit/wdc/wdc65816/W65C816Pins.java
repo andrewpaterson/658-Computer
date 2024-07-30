@@ -49,7 +49,7 @@ public class W65C816Pins
     {
       LogicPort dataPort = new LogicPort(Bidirectional,
                                          this,
-                                         "Address " + i,
+                                         "Data " + i,
                                          voltageConfiguration);
       data.add(dataPort);
     }

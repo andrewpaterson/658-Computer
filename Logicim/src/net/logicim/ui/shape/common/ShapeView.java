@@ -4,6 +4,7 @@ import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.shape.rectangle.RectangleView;
 
 import java.awt.*;
 
@@ -82,9 +83,10 @@ public abstract class ShapeView
 
   public abstract void paint(Graphics2D graphics, Viewport viewport);
 
-  public void setFillColour(Color fillColour)
+  public RectangleView setFillColour(Color fillColour)
   {
     this.fillColour = fillColour;
+    return null;
   }
 
   public void setBorderColour(Color borderColour)

@@ -30,6 +30,7 @@ public class TextView
   protected Color color;
 
   protected PointGridCache gridCache;
+  private boolean visible;
 
   public TextView(ShapeHolder shapeHolder,
                   Tuple2 positionRelativeToIC,
@@ -50,6 +51,7 @@ public class TextView
     this.color = Colours.getInstance().getText();
 
     this.gridCache = new PointGridCache(positionRelativeToIC);
+    this.visible = true;
 
     calculateDimension();
   }
@@ -92,9 +94,10 @@ public class TextView
     }
   }
 
-  public void setColor(Color color)
+  public TextView setColor(Color color)
   {
     this.color = color;
+    return this;
   }
 
   public void calculateDimension()
@@ -154,58 +157,61 @@ public class TextView
   {
     updateGridCache();
 
-    float factor = viewport.getScaledZoom();
-    float width = textDimension.getX() * factor;
-    float height = textDimension.getY() * factor;
-    float halfHeight = height / 3.5f;  //Some magic number.  Not half the height.
-    float degrees;
-
-    float widthAdjust = getWidthAdjust(0.1f) * factor;
-
-    Rotation rotation = shapeHolder.getRotation();
-    rotation = rotation.rotateRight(relativeRightRotations);
-    if (rotation.isNorthSouth() || rotation.isCannot())
+    if (visible)
     {
-      degrees = 90;
-    }
-    else
-    {
-      degrees = 0;
-    }
+      float factor = viewport.getScaledZoom();
+      float width = textDimension.getX() * factor;
+      float height = textDimension.getY() * factor;
+      float halfHeight = height / 3.5f;  //Some magic number.  Not half the height.
+      float degrees;
 
-    float xOffset = Float.NaN;
-    float yOffset = Float.NaN;
+      float widthAdjust = getWidthAdjust(0.1f) * factor;
 
-    if (rotation.isNorth() || rotation.isCannot())
-    {
-      xOffset = -halfHeight;
-      yOffset = -width - widthAdjust;
-    }
-    else if (rotation.isSouth())
-    {
-      xOffset = -halfHeight;
-      yOffset = 0 + widthAdjust;
-    }
-    else if (rotation.isEast())
-    {
-      xOffset = -width - widthAdjust;
-      yOffset = halfHeight;
-    }
-    else if (rotation.isWest())
-    {
-      xOffset = 0 + widthAdjust;
-      yOffset = halfHeight;
-    }
+      Rotation rotation = shapeHolder.getRotation();
+      rotation = rotation.rotateRight(relativeRightRotations);
+      if (rotation.isNorthSouth() || rotation.isCannot())
+      {
+        degrees = 90;
+      }
+      else
+      {
+        degrees = 0;
+      }
 
-    Font font = Fonts.getInstance().getFont(fontName, degrees, size * viewport.getZoom(), bold);
-    graphics.setFont(font);
+      float xOffset = Float.NaN;
+      float yOffset = Float.NaN;
 
-    Tuple2 transformedPosition = gridCache.getTransformedPosition();
-    int x = viewport.transformGridToScreenSpaceX(transformedPosition);
-    int y = viewport.transformGridToScreenSpaceY(transformedPosition);
+      if (rotation.isNorth() || rotation.isCannot())
+      {
+        xOffset = -halfHeight;
+        yOffset = -width - widthAdjust;
+      }
+      else if (rotation.isSouth())
+      {
+        xOffset = -halfHeight;
+        yOffset = 0 + widthAdjust;
+      }
+      else if (rotation.isEast())
+      {
+        xOffset = -width - widthAdjust;
+        yOffset = halfHeight;
+      }
+      else if (rotation.isWest())
+      {
+        xOffset = 0 + widthAdjust;
+        yOffset = halfHeight;
+      }
 
-    graphics.setColor(color);
-    graphics.drawString(text, x + xOffset, y + yOffset);
+      Font font = Fonts.getInstance().getFont(fontName, degrees, size * viewport.getZoom(), bold);
+      graphics.setFont(font);
+
+      Tuple2 transformedPosition = gridCache.getTransformedPosition();
+      int x = viewport.transformGridToScreenSpaceX(transformedPosition);
+      int y = viewport.transformGridToScreenSpaceY(transformedPosition);
+
+      graphics.setColor(color);
+      graphics.drawString(text, x + xOffset, y + yOffset);
+    }
   }
 
   public float getWidthAdjust(float offset)
@@ -305,6 +311,12 @@ public class TextView
     bottomRight.add(positionRelativeToIC);
 
     return bottomRight;
+  }
+
+  public TextView setVisible(boolean visible)
+  {
+    this.visible = visible;
+    return this;
   }
 }
 

@@ -10,6 +10,7 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816Pins;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816State;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
@@ -21,7 +22,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.*;
 
 public class W65C816View
     extends StandardIntegratedCircuitView<W65C816, W65C816Properties>
@@ -31,11 +34,20 @@ public class W65C816View
   protected int yOffset = -8;  //Remember the component is rotated 90 degrees.
   protected int left = 11;
   protected int right = -11;
-  protected RectangleView rectangle;
-  protected List<PortView> inputs;
-  protected List<PortView> outputs;
-  protected List<PortView> data;
+  protected List<PortView> leftPorts;
+  protected List<PortView> rightPorts;
   protected List<TextView> labels;
+  protected List<RectangleView> rectangles;
+  private TextView opCodeName;
+  private TextView opCodeNumber;
+  private TextView cycle;
+  private TextView accumulator;
+  private TextView xIndex;
+  private TextView yIndex;
+  private TextView stack;
+  private TextView directPage;
+  private TextView programCounter;
+  private TextView dataBank;
 
   public W65C816View(SubcircuitView subcircuitView,
                      Int2D position,
@@ -44,9 +56,8 @@ public class W65C816View
   {
     super(subcircuitView, position, rotation, properties);
 
-    inputs = new ArrayList<>();
-    outputs = new ArrayList<>();
-    data = new ArrayList<>();
+    leftPorts = new ArrayList<>();
+    rightPorts = new ArrayList<>();
 
     createPortViews();
     createGraphics();
@@ -55,12 +66,14 @@ public class W65C816View
 
   private void createGraphics()
   {
-    rectangle = new RectangleView(this, 18, right - left, true, true);
+    rectangles = new ArrayList<>();
+    rectangles.add(new RectangleView(this, 26, right - left, true, true));
+
     labels = new ArrayList<>();
-    for (PortView portView : inputs)
+    for (PortView portView : leftPorts)
     {
       labels.add(new TextView(this,
-                              new Float2D(portView.getRelativePosition().x, left - 0.5f),
+                              new Float2D(portView.getRelativePosition().x, left - 0.6f),
                               portView.getText(),
                               SANS_SERIF,
                               FONT_SIZE,
@@ -68,33 +81,165 @@ public class W65C816View
                               HorizontalAlignment.LEFT));
     }
 
-    for (PortView portView : outputs)
+    for (PortView portView : rightPorts)
     {
       labels.add(new TextView(this,
-                              new Float2D(portView.getRelativePosition().x, right + 0.5f),
+                              new Float2D(portView.getRelativePosition().x, right + 0.6f),
                               portView.getText(),
                               SANS_SERIF,
                               FONT_SIZE,
                               false,
-                              HorizontalAlignment.RIGHT));
+                              RIGHT));
     }
 
-    for (PortView portView : data)
+    float y = -12;
+    float yStep = 2;
+    labels.add(new TextView(this,
+                            new Float2D(y, 0),
+                            "Microprocessor",
+                            SANS_SERIF,
+                            FONT_SIZE,
+                            true,
+                            CENTER));
+
+    y += yStep;
+    opCodeName = createDetail(y, 3, "Op-code", "RES");
+
+    y += yStep;
+    opCodeNumber = createDetail(y, 3, "Op-code", "###");
+
+    y += yStep;
+    cycle = createDetail(y, 3, "Cycle", "0");
+
+    y += yStep;
+    accumulator = createDetail(y, 5, "Accumulator", "0x0000");
+
+    y += yStep;
+    xIndex = createDetail(y, 5, "X Index", "0x0000");
+
+    y += yStep;
+    yIndex = createDetail(y, 5, "Y Index", "0x0000");
+
+    y += yStep;
+    stack = createDetail(y, 5, "Stack", "0x01ff");
+
+    y += yStep;
+    directPage = createDetail(y, 5, "Direct page", "0x0000");
+
+    y += yStep;
+    programCounter = createDetail(y, 7, "P-Counter", "0x00:0000");
+
+    y += yStep;
+    dataBank = createDetail(y, 3, "Data Bank", "0x00");
+
+    float x = 5.5f;
+    float xStep = -1.4f;
+    y += yStep;
+    TextView emulationFlag = createFlag("E", x, y, true, true);
+    x += xStep;
+    TextView carryFlag = createFlag("C", x, y, false, true);
+    x += xStep;
+    TextView zeroFlag = createFlag("Z", x, y, false, true);
+    x += xStep;
+    TextView memoryWidthFlag = createFlag("M", x, y, false, false);
+    x += xStep;
+    TextView indexWidthOrBreakFlag = createFlag("B", x, y, false, true);
+    x += xStep;
+    TextView decimalModeFlag = createFlag("D", x, y, false, true);
+    x += xStep;
+    TextView interruptDisableFlag = createFlag("I", x, y, false, true);
+    x += xStep;
+    TextView negativeFlag = createFlag("N", x, y, false, true);
+    x += xStep;
+    TextView overflowFlag = createFlag("V", x, y, false, true);
+
+    y += yStep;
+    labels.add(new TextView(this,
+                            new Float2D(y, 0),
+                            "W65C816",
+                            SANS_SERIF,
+                            FONT_SIZE,
+                            true,
+                            CENTER));
+  }
+
+  private TextView createFlag(String name, float x, float y, boolean set, boolean visible)
+  {
+    TextView flag = new TextView(this,
+                                 new Float2D(y, x),
+                                 name,
+                                 SANS_SERIF,
+                                 FONT_SIZE,
+                                 false,
+                                 CENTER).setVisible(visible);
+    if (set)
     {
-      labels.add(new TextView(this,
-                              new Float2D(portView.getRelativePosition().x - 0.75f, 0),
-                              portView.getText(),
-                              SANS_SERIF,
-                              FONT_SIZE,
-                              false,
-                              HorizontalAlignment.CENTER));
+      flag.setColor(Colours.getInstance().getText());
     }
+    else
+    {
+      flag.setColor(Colours.getInstance().getHiddenText());
+    }
+
+    labels.add(flag);
+    rectangles.add(new RectangleView(this,
+                                     new Float2D(y - 0.6f, x - 0.6f),
+                                     new Float2D(y + 0.6f, x + 0.6f),
+                                     true,
+                                     true)
+                       .setLineWidth(1)
+                       .setFillColour(Colours.getInstance().getBackground())
+                       .setVisible(visible));
+    return flag;
+  }
+
+  private TextView createDetail(float y, int width, String name, String value)
+  {
+    createDetailLabel(name, y);
+    createDetailRectangle(y, width);
+    return createDetailValue(value, y);
+  }
+
+  private RectangleView createDetailRectangle(float y, int width)
+  {
+    RectangleView rectangle = new RectangleView(this,
+                                                new Float2D(y - 0.6f, 0),
+                                                new Float2D(y + 0.6f, -width),
+                                                true,
+                                                true).setLineWidth(1).setFillColour(Colours.getInstance().getBackground());
+    rectangles.add(rectangle);
+    return rectangle;
+  }
+
+  private TextView createDetailLabel(String label, float y)
+  {
+    TextView textView = new TextView(this,
+                                     new Float2D(y, 0),
+                                     label + ": ",
+                                     SANS_SERIF,
+                                     FONT_SIZE,
+                                     false,
+                                     RIGHT);
+    labels.add(textView);
+    return textView;
+  }
+
+  private TextView createDetailValue(String value, float y)
+  {
+    TextView textView = new TextView(this,
+                                     new Float2D(y, -0.6f),
+                                     value,
+                                     MONOSPACED,
+                                     FONT_SIZE,
+                                     false,
+                                     LEFT).setColor(Colours.getInstance().getCommentText());
+    labels.add(textView);
+    return textView;
   }
 
   @Override
   public void clampProperties(W65C816Properties newProperties)
   {
-
   }
 
   @Override
@@ -105,71 +250,71 @@ public class W65C816View
     int yStep = 2;
 
     //Inputs
-    int y = 1;
+    int y = 2;
     PortView phi2PortView = createPortView(y, "PHI2", left).setDrawClock(true);
-    inputs.add(phi2PortView);
+    leftPorts.add(phi2PortView);
 
     y += yStep;
     PortView resetPortView = createPortView(y, "RESB", left).setInverting(true, Rotation.South);
-    inputs.add(resetPortView);
+    leftPorts.add(resetPortView);
 
     y += yStep;
     PortView nonMaskableInterruptPortView = createPortView(y, "NMIB", left).setInverting(true, Rotation.South);
-    inputs.add(nonMaskableInterruptPortView);
+    leftPorts.add(nonMaskableInterruptPortView);
 
     y += yStep;
     PortView interruptRequestPortView = createPortView(y, "IRQB", left).setInverting(true, Rotation.South);
-    inputs.add(interruptRequestPortView);
+    leftPorts.add(interruptRequestPortView);
 
     y += yStep;
     PortView abortPortView = createPortView(y, "ABORTB", left).setInverting(true, Rotation.South);
-    inputs.add(abortPortView);
+    leftPorts.add(abortPortView);
 
     y += yStep;
     PortView readyPortView = createPortView(y, "RDY", left);
-    inputs.add(readyPortView);
+    leftPorts.add(readyPortView);
 
     y += yStep;
     PortView busEnablePortView = createPortView(y, "BE", left);
-    inputs.add(busEnablePortView);
+    leftPorts.add(busEnablePortView);
 
     //Outputs
-    y = 1;
+    y = 0;
     PortView readWritePortView = createPortView(y, "RWB", right);
-    outputs.add(readWritePortView);
+    rightPorts.add(readWritePortView);
 
     y += yStep;
     PortView validDataAddressPortView = createPortView(y, "VDA", right);
-    outputs.add(validDataAddressPortView);
+    rightPorts.add(validDataAddressPortView);
 
     y += yStep;
     PortView validProgramAddressPortView = createPortView(y, "VPA", right);
-    outputs.add(validProgramAddressPortView);
+    rightPorts.add(validProgramAddressPortView);
 
     y += yStep;
     PortView vectorPullPortView = createPortView(y, "VPB", right).setInverting(true, Rotation.North);
-    outputs.add(vectorPullPortView);
+    rightPorts.add(vectorPullPortView);
 
     y += yStep;
     PortView addressPortView = createPortView(y, "Address ", 16, right);
-    outputs.add(addressPortView);
+    rightPorts.add(addressPortView);
 
     y += yStep;
     PortView memoryLockPortView = createPortView(y, "MLB", right).setInverting(true, Rotation.North);
-    outputs.add(memoryLockPortView);
+    rightPorts.add(memoryLockPortView);
 
     y += yStep;
     PortView emulationPortView = createPortView(y, "E", right);
-    outputs.add(emulationPortView);
+    rightPorts.add(emulationPortView);
 
     y += yStep;
     PortView memoryIndexWidthPortView = createPortView(y, "MX", right);
-    outputs.add(memoryIndexWidthPortView);
+    rightPorts.add(memoryIndexWidthPortView);
 
     //Bidirectional
     y += yStep;
-    PortView dataPortView = createPortView(y, "Data ", 8, 0);
-    data.add(dataPortView);
+    PortView dataPortView = createPortView(y, "Data ", 8, right);
+    rightPorts.add(dataPortView);
   }
 
   private PortView createPortView(int x, String portName, int i, int y)
@@ -194,7 +339,7 @@ public class W65C816View
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
 
-    if (rectangle != null)
+    for (RectangleView rectangle : rectangles)
     {
       rectangle.paint(graphics, viewport);
     }

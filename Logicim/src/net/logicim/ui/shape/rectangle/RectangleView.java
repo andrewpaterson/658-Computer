@@ -17,8 +17,10 @@ public class RectangleView
   protected Tuple2 positionRelativeToIC;
   protected boolean border;
   protected boolean fill;
+  protected float lineWidth;
 
   protected RectangleGridCache gridCache;
+  protected boolean visible;
 
   public RectangleView(ShapeHolder shapeHolder,
                        int width,
@@ -29,7 +31,9 @@ public class RectangleView
     super(shapeHolder);
     this.border = border;
     this.fill = fill;
+    this.lineWidth = 2.0f;
     this.dimension = new Int2D(width, height);
+
     if ((width % 2 == 0) && (height % 2 == 0))
     {
       positionRelativeToIC = new Int2D(-(width / 2), -(height / 2));
@@ -40,6 +44,7 @@ public class RectangleView
     }
 
     gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
+    this.visible = true;
   }
 
   public RectangleView(ShapeHolder shapeHolder,
@@ -77,26 +82,30 @@ public class RectangleView
   {
     updateGridCache();
 
-    Tuple2 transformedDimension = gridCache.getTransformedDimension();
-    Tuple2 transformedPosition = gridCache.getTransformedPosition();
-
-    int x = viewport.transformGridToScreenSpaceX(transformedPosition);
-    int y = viewport.transformGridToScreenSpaceY(transformedPosition);
-    int width = viewport.transformGridToScreenWidth(transformedDimension);
-    int height = viewport.transformGridToScreenHeight(transformedDimension);
-
-    graphics.setStroke(viewport.getZoomableStroke());
-    if (fill)
+    if (visible)
     {
-      Color shapeFill = getFillColour();
-      graphics.setColor(shapeFill);
-      graphics.fillRect(x, y, width, height);
-    }
-    if (border)
-    {
-      Color shapeBorder = getBorderColour();
-      graphics.setColor(shapeBorder);
-      graphics.drawRect(x, y, width, height);
+      Tuple2 transformedDimension = gridCache.getTransformedDimension();
+      Tuple2 transformedPosition = gridCache.getTransformedPosition();
+
+      int x = viewport.transformGridToScreenSpaceX(transformedPosition);
+      int y = viewport.transformGridToScreenSpaceY(transformedPosition);
+      int width = viewport.transformGridToScreenWidth(transformedDimension);
+      int height = viewport.transformGridToScreenHeight(transformedDimension);
+
+      graphics.setStroke(viewport.getZoomableStroke(lineWidth));
+
+      if (fill)
+      {
+        Color shapeFill = getFillColour();
+        graphics.setColor(shapeFill);
+        graphics.fillRect(x, y, width, height);
+      }
+      if (border)
+      {
+        Color shapeBorder = getBorderColour();
+        graphics.setColor(shapeBorder);
+        graphics.drawRect(x, y, width, height);
+      }
     }
   }
 
@@ -134,6 +143,24 @@ public class RectangleView
   public Tuple2 getTransformedDimension()
   {
     return gridCache.transformedDimension;
+  }
+
+  public RectangleView setLineWidth(float lineWidth)
+  {
+    this.lineWidth = lineWidth;
+    return this;
+  }
+
+  public RectangleView setFillColour(Color fillColour)
+  {
+    super.setFillColour(fillColour);
+    return this;
+  }
+
+  public RectangleView setVisible(boolean visible)
+  {
+    this.visible = visible;
+    return this;
   }
 }
 

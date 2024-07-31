@@ -32,6 +32,7 @@ public class Colours
 
   protected Color text;
   protected Color commentText;
+  protected Color hiddenText;
 
   protected Color infoBackground;
   protected Color infoBorder;
@@ -81,6 +82,7 @@ public class Colours
 
     text = new Color(0, 0, 0);
     commentText = new Color(64, 64, 64);
+    hiddenText = new Color(192, 192, 192);
 
     infoBackground = new Color(220, 220, 220);
     infoBorder = new Color(128, 128, 128);
@@ -205,6 +207,11 @@ public class Colours
   public Color getCommentText()
   {
     return commentText;
+  }
+
+  public Color getHiddenText()
+  {
+    return hiddenText;
   }
 
   public Color getInfoBackground()

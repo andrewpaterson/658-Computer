@@ -572,11 +572,6 @@ public class W65C816
     return !isIndex8Bit();
   }
 
-  public boolean isCarrySet()
-  {
-    return isCarry();
-  }
-
   protected int getCarry()
   {
     return isCarrySet() ? 1 : 0;
@@ -584,7 +579,7 @@ public class W65C816
 
   private boolean isSignSet()
   {
-    return isNegative();
+    return isNegativeSet();
   }
 
   private boolean isOverflowSet()
@@ -1260,12 +1255,12 @@ public class W65C816
     this.emulationFlag = emulationFlag;
   }
 
-  public boolean isZeroFlag()
+  public boolean isZeroFlagSet()
   {
     return zeroFlag;
   }
 
-  public boolean isNegative()
+  public boolean isNegativeSet()
   {
     return negativeFlag;
   }
@@ -1280,7 +1275,7 @@ public class W65C816
     return interruptDisableFlag;
   }
 
-  public boolean isCarry()
+  public boolean isCarrySet()
   {
     return carryFlag;
   }
@@ -1313,11 +1308,11 @@ public class W65C816
   public int getProcessorRegisterValue()
   {
     int value = 0;
-    if (isCarry())
+    if (isCarrySet())
     {
       value |= STATUS_CARRY;
     }
-    if (isZeroFlag())
+    if (isZeroFlagSet())
     {
       value |= STATUS_ZERO;
     }
@@ -1345,7 +1340,7 @@ public class W65C816
     {
       value |= STATUS_OVERFLOW;
     }
-    if (isNegative())
+    if (isNegativeSet())
     {
       value |= STATUS_NEGATIVE;
     }
@@ -1766,7 +1761,7 @@ public class W65C816
 
   public void BCC()
   {
-    branch(!isCarry());
+    branch(!isCarrySet());
   }
 
   public void LDY()
@@ -1800,7 +1795,7 @@ public class W65C816
 
   public void BCS()
   {
-    branch(isCarry());
+    branch(isCarrySet());
   }
 
   public void CLV()
@@ -1937,7 +1932,7 @@ public class W65C816
 
   public void BNE()
   {
-    branch(!isZeroFlag());
+    branch(!isZeroFlagSet());
   }
 
   public void CLD()
@@ -2012,7 +2007,7 @@ public class W65C816
 
   public void BEQ()
   {
-    branch(isZeroFlag());
+    branch(isZeroFlagSet());
   }
 
   public void SED()
@@ -2027,7 +2022,7 @@ public class W65C816
 
   public void XCE()
   {
-    boolean oldCarry = isCarry();
+    boolean oldCarry = isCarrySet();
     boolean oldEmulation = isEmulation();
     setEmulationMode(oldCarry);
     setCarryFlag(oldEmulation);
@@ -2141,8 +2136,8 @@ public class W65C816
 
   private String getStatusString()
   {
-    String z = isZeroFlag() ? "Z:1 " : "Z:0 ";
-    String n = isNegative() ? "N:1 " : "N:0 ";
+    String z = isZeroFlagSet() ? "Z:1 " : "Z:0 ";
+    String n = isNegativeSet() ? "N:1 " : "N:0 ";
     String d = isDecimal() ? "D:1 " : "D:0 ";
     String i = isInterruptDisable() ? "I:1 " : "I:0 ";
     String m = isMemory8Bit() ? "M8  " : "M16 ";
@@ -2151,7 +2146,7 @@ public class W65C816
     {
       x = isIndex8Bit() ? "X8  " : "X16 ";
     }
-    String c = isCarry() ? "C1 " : "C0 ";
+    String c = isCarrySet() ? "C1 " : "C0 ";
     String e = isEmulation() ? "E1 " : "E0 ";
     String o = isOverflowFlag() ? "O1 " : "O0 ";
     String b = "";

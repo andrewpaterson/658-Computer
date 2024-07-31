@@ -33,6 +33,7 @@ public class RectangleView
     this.fill = fill;
     this.lineWidth = 2.0f;
     this.dimension = new Int2D(width, height);
+    this.visible = true;
 
     if ((width % 2 == 0) && (height % 2 == 0))
     {
@@ -44,7 +45,6 @@ public class RectangleView
     }
 
     gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
-    this.visible = true;
   }
 
   public RectangleView(ShapeHolder shapeHolder,
@@ -57,6 +57,7 @@ public class RectangleView
     this.fill = fill;
     this.dimension = rectangle.getDimension();
     this.positionRelativeToIC = rectangle.getTopLeft().clone();
+    this.visible = true;
 
     this.gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
   }
@@ -73,6 +74,7 @@ public class RectangleView
     this.dimension = bottomRight.clone();
     this.dimension.subtract(topLeft);
     this.positionRelativeToIC = topLeft.clone();
+    this.visible = true;
 
     this.gridCache = new RectangleGridCache(positionRelativeToIC, dimension);
   }

@@ -48,6 +48,16 @@ public class W65C816View
   private TextView directPage;
   private TextView programCounter;
   private TextView dataBank;
+  private TextView emulationFlag;
+  private TextView carryFlag;
+  private TextView zeroFlag;
+  private TextView memoryWidthFlag;
+  private TextView indexWidthOrBreakFlag;
+  private TextView decimalModeFlag;
+  private TextView interruptDisableFlag;
+  private TextView negativeFlag;
+  private TextView overflowFlag;
+  private RectangleView memoryWidthRectangle;
 
   public W65C816View(SubcircuitView subcircuitView,
                      Int2D position,
@@ -130,28 +140,29 @@ public class W65C816View
     programCounter = createDetail(y, 7, "P-Counter", "0x00:0000");
 
     y += yStep;
-    dataBank = createDetail(y, 3, "Data Bank", "0x00");
+    dataBank = createDetail(y, 4, "Data Bank", "0x00");
 
     float x = 5.5f;
     float xStep = -1.4f;
     y += yStep;
-    TextView emulationFlag = createFlag("E", x, y, true, true);
+    emulationFlag = createFlag("E", x, y, true, true);
     x += xStep;
-    TextView carryFlag = createFlag("C", x, y, false, true);
+    carryFlag = createFlag("C", x, y, false, true);
     x += xStep;
-    TextView zeroFlag = createFlag("Z", x, y, false, true);
+    zeroFlag = createFlag("Z", x, y, false, true);
     x += xStep;
-    TextView memoryWidthFlag = createFlag("M", x, y, false, false);
+    memoryWidthFlag = createFlag("M", x, y, false, false);
+    memoryWidthRectangle = rectangles.get(rectangles.size() - 1);
     x += xStep;
-    TextView indexWidthOrBreakFlag = createFlag("B", x, y, false, true);
+    indexWidthOrBreakFlag = createFlag("B", x, y, false, true);
     x += xStep;
-    TextView decimalModeFlag = createFlag("D", x, y, false, true);
+    decimalModeFlag = createFlag("D", x, y, false, true);
     x += xStep;
-    TextView interruptDisableFlag = createFlag("I", x, y, false, true);
+    interruptDisableFlag = createFlag("I", x, y, false, true);
     x += xStep;
-    TextView negativeFlag = createFlag("N", x, y, false, true);
+    negativeFlag = createFlag("N", x, y, false, true);
     x += xStep;
-    TextView overflowFlag = createFlag("V", x, y, false, true);
+    overflowFlag = createFlag("V", x, y, false, true);
 
     y += yStep;
     labels.add(new TextView(this,
@@ -339,6 +350,48 @@ public class W65C816View
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
 
+    W65C816 w65c816 = getComponent(subcircuitSimulation);
+    if (w65c816 != null)
+    {
+      opCodeName.setText(w65c816.getOpcodeMnemonicString());
+      opCodeNumber.setText(w65c816.getOpcodeValueHex());
+      cycle.setText(w65c816.getCycleString());
+      accumulator.setText(w65c816.getAccumulatorValueHex());
+      xIndex.setText(w65c816.getXValueHex());
+      yIndex.setText(w65c816.getYValueHex());
+      stack.setText(w65c816.getStackValueHex());
+      directPage.setText(w65c816.getDirectPageValueHex());
+      programCounter.setText(w65c816.getProgramCounterValueHex());
+      dataBank.setText(w65c816.getDataBankValueHex());
+
+      boolean emulation = w65c816.isEmulation();
+      emulationFlag.setColor(getFlagColour(emulation));
+      carryFlag.setColor(getFlagColour(w65c816.isCarrySet()));
+      zeroFlag.setColor(getFlagColour(w65c816.isZeroFlagSet()));
+      decimalModeFlag.setColor(getFlagColour(w65c816.isDecimal()));
+      interruptDisableFlag.setColor(getFlagColour(w65c816.isInterruptDisable()));
+      negativeFlag.setColor(getFlagColour(w65c816.isNegativeSet()));
+      overflowFlag.setColor(getFlagColour(w65c816.isOverflowFlag()));
+
+      if (emulation)
+      {
+        indexWidthOrBreakFlag.setText("B");
+        indexWidthOrBreakFlag.setColor(getFlagColour(w65c816.isBreak()));
+
+        memoryWidthFlag.setVisible(false);
+        memoryWidthRectangle.setVisible(false);
+      }
+      else
+      {
+        indexWidthOrBreakFlag.setText("X");
+        indexWidthOrBreakFlag.setColor(getFlagColour(w65c816.isIndex8Bit()));
+
+        memoryWidthFlag.setVisible(true);
+        memoryWidthFlag.setColor(getFlagColour(w65c816.isMemory8Bit()));
+        memoryWidthRectangle.setVisible(true);
+      }
+    }
+
     for (RectangleView rectangle : rectangles)
     {
       rectangle.paint(graphics, viewport);
@@ -353,6 +406,19 @@ public class W65C816View
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);
+  }
+
+  protected Color getFlagColour(boolean b)
+  {
+    Colours instance = Colours.getInstance();
+    if (b)
+    {
+      return instance.getText();
+    }
+    else
+    {
+      return instance.getHiddenText();
+    }
   }
 
   @Override

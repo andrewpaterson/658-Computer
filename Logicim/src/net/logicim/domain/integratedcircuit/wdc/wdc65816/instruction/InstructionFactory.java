@@ -16,7 +16,65 @@ import static net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.addr
 @SuppressWarnings({"SameParameterValue"})
 public class InstructionFactory
 {
-  public static Instruction[] createInstructions()
+  protected Instruction[] instructions;
+  protected Instruction reset;
+  protected Instruction irq;
+  protected Instruction nmi;
+  protected Instruction abort;
+  protected Instruction fetchNext;
+
+  private static InstructionFactory instance;
+
+  public static InstructionFactory getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new InstructionFactory();
+    }
+    return instance;
+  }
+
+  public InstructionFactory()
+  {
+    instructions = createInstructions();
+    reset = createReset();
+    irq = createIRQ();
+    nmi = createNMI();
+    abort = createAbort();
+    fetchNext = createFetchNext();
+  }
+
+  public Instruction[] getInstructions()
+  {
+    return instructions;
+  }
+
+  public Instruction getReset()
+  {
+    return reset;
+  }
+
+  public Instruction getIRQ()
+  {
+    return irq;
+  }
+
+  public Instruction getNMI()
+  {
+    return nmi;
+  }
+
+  public Instruction getAbort()
+  {
+    return abort;
+  }
+
+  public Instruction getFetchNext()
+  {
+    return fetchNext;
+  }
+
+  private Instruction[] createInstructions()
   {
     List<Instruction> opCodes = new ArrayList<>();
 
@@ -289,608 +347,608 @@ public class InstructionFactory
     return opCodes.toArray(new Instruction[0]);
   }
 
-  private static Instruction createBEQ(int code, InstructionCycles instructionCycles)
+  private Instruction createBEQ(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BEQ",
                            "Branch if Equal (Z=1)");
   }
 
-  private static Instruction createXBA(int code, InstructionCycles instructionCycles)
+  private Instruction createXBA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "XBA",
                            "Exchange B and A Accumulator");
   }
 
-  private static Instruction createNOP(int code, InstructionCycles instructionCycles)
+  private Instruction createNOP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "NOP",
                            "No Operation for two cycles.");
   }
 
-  private static Instruction createINX(int code, InstructionCycles instructionCycles)
+  private Instruction createINX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "INX",
                            "Increment Index X by One");
   }
 
-  private static Instruction createSEP(int code, InstructionCycles instructionCycles)
+  private Instruction createSEP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "SEP",
                            "Set Processor Status Bit");
   }
 
-  private static Instruction createBNE(int code, InstructionCycles instructionCycles)
+  private Instruction createBNE(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BNE",
                            "Branch if Not Equal (Z=0)");
   }
 
-  private static Instruction createWAI(int code, InstructionCycles instructionCycles)
+  private Instruction createWAI(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "WAI",
                            "Wait for Interrupt");
   }
 
-  private static Instruction createDEX(int code, InstructionCycles instructionCycles)
+  private Instruction createDEX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "DEX",
                            "Decrement Index X by One.");
   }
 
-  private static Instruction createINY(int code, InstructionCycles instructionCycles)
+  private Instruction createINY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "INY",
                            "Increment Index Y by One");
   }
 
-  private static Instruction createPEA(int code, InstructionCycles instructionCycles)
+  private Instruction createPEA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PEA",
                            "Push Absolute Address");
   }
 
-  private static Instruction createINC(int code, InstructionCycles instructionCycles)
+  private Instruction createINC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "INC",
                            "Increment memory; result in memory and update NZ.");
   }
 
-  private static Instruction createXCE(int code, InstructionCycles instructionCycles)
+  private Instruction createXCE(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "XCE",
                            "Exchange Carry and Emulation Bits");
   }
 
-  private static Instruction createPLX(int code, InstructionCycles instructionCycles)
+  private Instruction createPLX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PLX",
                            "Pull Index X from Stack");
   }
 
-  private static Instruction createSED(int code, InstructionCycles instructionCycles)
+  private Instruction createSED(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles,
                            "SED", "Set Decimal Mode");
   }
 
-  private static Instruction createSBC(int code, InstructionCycles instructionCycles)
+  private Instruction createSBC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "SBC",
                            "Subtract memory and carry from A; result in A and update NZC.");
   }
 
-  private static Instruction createCPX(int code, InstructionCycles instructionCycles)
+  private Instruction createCPX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CPX",
                            "Compare Memory and Index X");
   }
 
-  private static Instruction createSTP(int code, InstructionCycles instructionCycles)
+  private Instruction createSTP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "STP",
                            "Stop the Clock");
   }
 
-  private static Instruction createPHX(int code, InstructionCycles instructionCycles)
+  private Instruction createPHX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHX",
                            "Push Index X on Stack");
   }
 
-  private static Instruction createCLD(int code, InstructionCycles instructionCycles)
+  private Instruction createCLD(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CLD",
                            "Clear Decimal Mode");
   }
 
-  private static Instruction createPEI(int code, InstructionCycles instructionCycles)
+  private Instruction createPEI(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PEI",
                            "Push Indirect Address");
   }
 
-  private static Instruction createDEC(int code, InstructionCycles instructionCycles)
+  private Instruction createDEC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "DEC",
                            "Decrement memory; result in memory and update NZ.");
   }
 
-  private static Instruction createREP(int code, InstructionCycles instructionCycles)
+  private Instruction createREP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "REP",
                            "Reset Status Bits");
   }
 
-  private static Instruction createCMP(int code, InstructionCycles instructionCycles)
+  private Instruction createCMP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CMP",
                            "Compare Memory and Accumulator");
   }
 
-  private static Instruction createCPY(int code, InstructionCycles instructionCycles)
+  private Instruction createCPY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CPY",
                            "Compare Memory and Index Y");
   }
 
-  private static Instruction createTYX(int code, InstructionCycles instructionCycles)
+  private Instruction createTYX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TYX",
                            "Transfer Index Y to Index X");
   }
 
-  private static Instruction createTSX(int code, InstructionCycles instructionCycles)
+  private Instruction createTSX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TSX",
                            "Transfer Stack Pointer Register to Index X");
   }
 
-  private static Instruction createCLV(int code, InstructionCycles instructionCycles)
+  private Instruction createCLV(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CLV",
                            "Clear Overflow Flag");
   }
 
-  private static Instruction createBCS(int code, InstructionCycles instructionCycles)
+  private Instruction createBCS(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BCS",
                            "Branch on Carry Set (C=1)");
   }
 
-  private static Instruction createPLB(int code, InstructionCycles instructionCycles)
+  private Instruction createPLB(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PLB",
                            "Pull Data Bank Register from Stack");
   }
 
-  private static Instruction createTAX(int code, InstructionCycles instructionCycles)
+  private Instruction createTAX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TAX",
                            "Transfer Accumulator in Index X");
   }
 
-  private static Instruction createTAY(int code, InstructionCycles instructionCycles)
+  private Instruction createTAY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TAY",
                            "Transfer Accumulator in Index Y");
   }
 
-  private static Instruction createLDX(int code, InstructionCycles instructionCycles)
+  private Instruction createLDX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "LDX", "Load Index X with Memory");
   }
 
-  private static Instruction createBRL(int code, InstructionCycles instructionCycles)
+  private Instruction createBRL(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BRL",
                            "Branch Always Long");
   }
 
-  private static Instruction createBRA(int code, InstructionCycles instructionCycles)
+  private Instruction createBRA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BRA",
                            "Branch Always");
   }
 
-  private static Instruction createTDC(int code, InstructionCycles instructionCycles)
+  private Instruction createTDC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TDC",
                            "Transfer Direct Register to C Accumulator");
   }
 
-  private static Instruction createPLY(int code, InstructionCycles instructionCycles)
+  private Instruction createPLY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PLY",
                            "Pull Index Y from Stack");
   }
 
-  private static Instruction createSEI(int code, InstructionCycles instructionCycles)
+  private Instruction createSEI(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "SEI",
                            "Set Interrupt Disable Status");
   }
 
-  private static Instruction createBVS(int code, InstructionCycles instructionCycles)
+  private Instruction createBVS(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BVS", "Branch on Overflow Set (V=1)");
   }
 
-  private static Instruction createRTL(int code, InstructionCycles instructionCycles)
+  private Instruction createRTL(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "RTL",
                            "Return from Subroutine Long");
   }
 
-  private static Instruction createRRA(int code, InstructionCycles instructionCycles)
+  private Instruction createRRA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "ROR",
                            "Rotate accumulator right one bit; update NZC.");
   }
 
-  private static Instruction createPLA(int code, InstructionCycles instructionCycles)
+  private Instruction createPLA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PLA",
                            "Pull Accumulator from Stack");
   }
 
-  private static Instruction createROR(int code, InstructionCycles instructionCycles)
+  private Instruction createROR(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "ROR",
                            "Rotate memory right one bit; update NZC.");
   }
 
-  private static Instruction createPER(int code, InstructionCycles instructionCycles)
+  private Instruction createPER(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PER",
                            "Push Program Counter Relative Address");
   }
 
-  private static Instruction createADC(int code, InstructionCycles instructionCycles)
+  private Instruction createADC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "ADC",
                            "Add memory and carry to A; result in A and update NZC.");
   }
 
-  private static Instruction createRTS(int code, InstructionCycles instructionCycles)
+  private Instruction createRTS(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "RTS",
                            "Return from Subroutine");
   }
 
-  private static Instruction createTCD(int code, InstructionCycles instructionCycles)
+  private Instruction createTCD(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TCD",
                            "Transfer C Accumulator to Direct Register");
   }
 
-  private static Instruction createPHY(int code, InstructionCycles instructionCycles)
+  private Instruction createPHY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHY",
                            "Push Index Y on Stack");
   }
 
-  private static Instruction createCLI(int code, InstructionCycles instructionCycles)
+  private Instruction createCLI(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CLI",
                            "Clear Interrupt Disable Bit");
   }
 
-  private static Instruction createMVN(int code, InstructionCycles instructionCycles)
+  private Instruction createMVN(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "MVN",
                            "Block move next...");
   }
 
-  private static Instruction createBVC(int code, InstructionCycles instructionCycles)
+  private Instruction createBVC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BVC",
                            "Branch on Overflow Clear (V=0)");
   }
 
-  private static Instruction createJMP(int code, InstructionCycles instructionCycles)
+  private Instruction createJMP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "JMP",
                            "Jump to New Location");
   }
 
-  private static Instruction createPHK(int code, InstructionCycles instructionCycles)
+  private Instruction createPHK(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHK",
                            "Push Program Bank Register on Stack");
   }
 
-  private static Instruction createSRA(int code, InstructionCycles instructionCycles)
+  private Instruction createSRA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "LSR",
                            "Shift accumulator right one bit; update NZC.");
   }
 
-  private static Instruction createPHA(int code, InstructionCycles instructionCycles)
+  private Instruction createPHA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHA",
                            "Push Accumulator onto Stack");
   }
 
-  private static Instruction createLSR(int code_lsr, InstructionCycles instructionCycles)
+  private Instruction createLSR(int code_lsr, InstructionCycles instructionCycles)
   {
     return new Instruction(code_lsr, instructionCycles,
                            "LSR", "Shift memory right one bit; update NZC.");
   }
 
-  private static Instruction createMVP(int code, InstructionCycles instructionCycles)
+  private Instruction createMVP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "MVP",
                            "Block move previous...");
   }
 
-  private static Instruction createWDM(int code, InstructionCycles instructionCycles)
+  private Instruction createWDM(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "WDM",
                            "Reserved for future use");
   }
 
-  private static Instruction createEOR(int code, InstructionCycles instructionCycles)
+  private Instruction createEOR(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "EOR",
                            "'Exclusive OR' Memory with Accumulator");
   }
 
-  private static Instruction createRTI(int code, InstructionCycles instructionCycles)
+  private Instruction createRTI(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "RTI",
                            "Return from Interrupt");
   }
 
-  private static Instruction createTSC(int code, InstructionCycles instructionCycles)
+  private Instruction createTSC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TSC",
                            "Transfer Stack Pointer to C Accumulator");
   }
 
-  private static Instruction createDEA(int code, InstructionCycles instructionCycles)
+  private Instruction createDEA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "DEC",
                            "Decrement accumulator; update NZ.");
   }
 
-  private static Instruction createSEC(int code, InstructionCycles instructionCycles)
+  private Instruction createSEC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "SEC",
                            "Set Carry Flag");
   }
 
-  private static Instruction createBMI(int code, InstructionCycles instructionCycles)
+  private Instruction createBMI(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BMI",
                            "Branch if Result Minus (N=1)");
   }
 
-  private static Instruction createPLP(int code, InstructionCycles instructionCycles)
+  private Instruction createPLP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PLP",
                            "Pull Processor Status from Stack");
   }
 
-  private static Instruction createRLA(int code, InstructionCycles instructionCycles)
+  private Instruction createRLA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "ROL",
                            "Rotate Accumulator One Bit Left.");
   }
 
-  private static Instruction createPLD(int code, InstructionCycles instructionCycles)
+  private Instruction createPLD(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PLD",
                            "Pull Direct Register from Stack");
   }
 
-  private static Instruction createROL(int code, InstructionCycles instructionCycles)
+  private Instruction createROL(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "ROL",
                            "Rotate Memory One Bit Left.");
   }
 
-  private static Instruction createLDA(int code, InstructionCycles instructionCycles)
+  private Instruction createLDA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "LDA",
                            "Load Accumulator with Memory");
   }
 
-  private static Instruction createLDY(int code, InstructionCycles immediateCycles)
+  private Instruction createLDY(int code, InstructionCycles immediateCycles)
   {
     return new Instruction(code, immediateCycles, "LDY",
                            "Load Index Y with Memory");
   }
 
-  private static Instruction createPHB(int code, InstructionCycles instructionCycles)
+  private Instruction createPHB(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHB",
                            "Push Data Bank Register on Stack");
   }
 
-  private static Instruction createTXA(int code, InstructionCycles instructionCycles)
+  private Instruction createTXA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TXA",
                            "Transfer Index X to Accumulator");
   }
 
-  private static Instruction createSTY(int code, InstructionCycles instructionCycles)
+  private Instruction createSTY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "STY",
                            "Store Index Y in Memory");
   }
 
-  private static Instruction createBCC(int code, InstructionCycles instructionCycles)
+  private Instruction createBCC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BCC",
                            "Branch on Carry Clear (C=0)");
   }
 
-  private static Instruction createSTX(int code, InstructionCycles instructionCycles)
+  private Instruction createSTX(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "STX",
                            "Store Index X in Memory");
   }
 
-  private static Instruction createTYA(int code, InstructionCycles instructionCycles)
+  private Instruction createTYA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TYA",
                            "Transfer Index Y to Accumulator");
   }
 
-  private static Instruction createTXS(int code, InstructionCycles instructionCycles)
+  private Instruction createTXS(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TXS",
                            "Transfer Index X to Stack Pointer Register");
   }
 
-  private static Instruction createTXY(int code, InstructionCycles instructionCycles)
+  private Instruction createTXY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TXY",
                            "Transfer Index X to Index Y");
   }
 
-  private static Instruction createSTZ(int stz_absolute, InstructionCycles absoluteWriteCycles)
+  private Instruction createSTZ(int stz_absolute, InstructionCycles absoluteWriteCycles)
   {
     return new Instruction(stz_absolute, absoluteWriteCycles,
                            "STZ", "Store Zero in Memory");
   }
 
-  private static Instruction createSTA(int code, InstructionCycles instructionCycles)
+  private Instruction createSTA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "STA",
                            "Store Accumulator in Memory");
   }
 
-  private static Instruction createDEY(int code, InstructionCycles instructionCycles)
+  private Instruction createDEY(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "DEY", "Decrement Index Y by One");
   }
 
-  private static Instruction createBIT(int code, InstructionCycles instructionCycles)
+  private Instruction createBIT(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BIT",
                            "Bit Test");
   }
 
-  private static Instruction createJSL(int code, InstructionCycles instructionCycles)
+  private Instruction createJSL(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "JSL",
                            "Jump long to new location save return address on Stack.");
   }
 
-  private static Instruction createAND(int code, InstructionCycles instructionCycles)
+  private Instruction createAND(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "AND",
                            "Bitwise AND memory with A; result in A and update NZ.");
   }
 
-  private static Instruction createJSR(int code, InstructionCycles instructionCycles)
+  private Instruction createJSR(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "JSR",
                            "Jump to new location save return address on Stack.");
   }
 
-  private static Instruction createTCS(int code, InstructionCycles instructionCycles)
+  private Instruction createTCS(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TCS",
                            "Transfer C Accumulator to Stack Pointer");
   }
 
-  private static Instruction createINA(int code, InstructionCycles busCycles)
+  private Instruction createINA(int code, InstructionCycles busCycles)
   {
     return new Instruction(code, busCycles, "INC",
                            "Increment accumulator; update NZ.");
   }
 
-  private static Instruction createCLC(int code, InstructionCycles instructionCycles)
+  private Instruction createCLC(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "CLC",
                            "Clear Carry Flag");
   }
 
-  private static Instruction createTRB(int code, InstructionCycles instructionCycles)
+  private Instruction createTRB(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "TRB",
                            "Test and Reset Bit");
   }
 
-  private static Instruction createBPL(int code, InstructionCycles instructionCycles)
+  private Instruction createBPL(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BPL",
                            "Branch if Result Plus (N=0)");
   }
 
-  private static Instruction createPHD(int code, InstructionCycles instructionCycles)
+  private Instruction createPHD(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHD",
                            "Push Direct Register on Stack");
   }
 
-  private static Instruction createSLA(int code, InstructionCycles instructionCycles)
+  private Instruction createSLA(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "ASL",
                            "Shift accumulator left one bit; update NZC.");
   }
 
-  private static Instruction createASL(int code, InstructionCycles directRMWCycles)
+  private Instruction createASL(int code, InstructionCycles directRMWCycles)
   {
     return new Instruction(code, directRMWCycles, "ASL", "Shift memory left 1 bit; result in memory and update NZC.");
   }
 
-  private static Instruction createPHP(int code, InstructionCycles instructionCycles)
+  private Instruction createPHP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "PHP", "Push Processor Status on Stack");
   }
 
-  private static Instruction createTSB(int code, InstructionCycles instructionCycles)
+  private Instruction createTSB(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles,
                            "TSB", "Test and Set Bit");
   }
 
-  private static Instruction createCOP(int code, InstructionCycles instructionCycles)
+  private Instruction createCOP(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "COP",
                            "Force co-processor software interrupt.");
   }
 
-  private static Instruction createORA(int code, InstructionCycles directIndexedIndirectWithXCycles)
+  private Instruction createORA(int code, InstructionCycles directIndexedIndirectWithXCycles)
   {
     return new Instruction(code, directIndexedIndirectWithXCycles,
                            "ORA", "'OR' memory with A; result in A and update NZ.");
   }
 
-  private static Instruction createBrk(int code, InstructionCycles instructionCycles)
+  private Instruction createBrk(int code, InstructionCycles instructionCycles)
   {
     return new Instruction(code, instructionCycles, "BRK",
                            "Force break software interrupt.");
   }
 
-  public static Instruction createReset()
+  private Instruction createReset()
   {
     return new Instruction(-1, createStackResetCycles(new ResetVector(), W65C816::RES), "RES",
                            "Reset the CPU.");
   }
 
-  public static Instruction createIRQ()
+  private Instruction createIRQ()
   {
     return new Instruction(-1, createStackHardwareInterruptCycles(new IRQVector(), W65C816::IRQ), "IRQ",
                            "Interrupt request.");
   }
 
-  public static Instruction createNMI()
+  private Instruction createNMI()
   {
     return new Instruction(-1, createStackHardwareInterruptCycles(new NMIVector(), W65C816::NMI), "NMI",
                            "Non-maskable interrupt.");
   }
 
-  public static Instruction createAbort()
+  private Instruction createAbort()
   {
     return new Instruction(-1, createStackAbortInterruptCycles(new AbortVector(), W65C816::ABORT), "ABORT",
                            "Stop the current instruction and return processor status to what it was prior to the current instruction.");
   }
 
-  public static Instruction createFetchNext()
+  private Instruction createFetchNext()
   {
     return new Instruction(-1, createFetchOpCodeCycles(), "NEXT",
                            "Fetch Opcode from address in program counter.");

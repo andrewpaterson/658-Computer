@@ -86,12 +86,12 @@ public class W65C816
 
     programCounter = new Address(0x00, 0x0000);
     stackPointer = 0x01FF;
-    opCodeTable = InstructionFactory.createInstructions();
-    resetOpcode = InstructionFactory.createReset();
-    irqOpcode = InstructionFactory.createIRQ();
-    nmiOpcode = InstructionFactory.createNMI();
-    abortOpcode = InstructionFactory.createAbort();
-    fetchNextOpcode = InstructionFactory.createFetchNext();
+    opCodeTable = InstructionFactory.getInstance().getInstructions();
+    resetOpcode = InstructionFactory.getInstance().getReset();
+    irqOpcode = InstructionFactory.getInstance().getIRQ();
+    nmiOpcode = InstructionFactory.getInstance().getNMI();
+    abortOpcode = InstructionFactory.getInstance().getAbort();
+    fetchNextOpcode = InstructionFactory.getInstance().getFetchNext();
     accumulator = 0;
     xIndex = 0;
     yIndex = 0;

@@ -13,7 +13,7 @@ public class ReadDataBank
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setDataBank(cpu.getData());
+    cpu.getState().setDataBank(cpu.getState().getData());
   }
 
   @Override

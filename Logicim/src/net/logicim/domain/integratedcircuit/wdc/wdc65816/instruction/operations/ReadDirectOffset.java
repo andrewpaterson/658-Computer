@@ -13,7 +13,7 @@ public class ReadDirectOffset
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setDirectOffset(cpu.getData());
+    cpu.getState().setDirectOffset(cpu.getData());
   }
 
   @Override

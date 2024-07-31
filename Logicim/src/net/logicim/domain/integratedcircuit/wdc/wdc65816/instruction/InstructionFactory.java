@@ -36,12 +36,13 @@ public class InstructionFactory
 
   public InstructionFactory()
   {
-    instructions = createInstructions();
-    reset = createReset();
-    irq = createIRQ();
-    nmi = createNMI();
-    abort = createAbort();
-    fetchNext = createFetchNext();
+    List<Instruction> opCodes = createInstructions();
+    reset = createReset(opCodes);
+    irq = createIRQ(opCodes);
+    nmi = createNMI(opCodes);
+    abort = createAbort(opCodes);
+    fetchNext = createFetchNext(opCodes);
+    instructions = opCodes.toArray(new Instruction[0]);
   }
 
   public Instruction[] getInstructions()
@@ -74,7 +75,7 @@ public class InstructionFactory
     return fetchNext;
   }
 
-  private Instruction[] createInstructions()
+  private List<Instruction> createInstructions()
   {
     List<Instruction> opCodes = new ArrayList<>();
 
@@ -344,7 +345,7 @@ public class InstructionFactory
       }
     }
 
-    return opCodes.toArray(new Instruction[0]);
+    return opCodes;
   }
 
   private Instruction createBEQ(int code, InstructionCycles instructionCycles)
@@ -924,34 +925,44 @@ public class InstructionFactory
                            "Force break software interrupt.");
   }
 
-  private Instruction createReset()
+  private Instruction createReset(List<Instruction> opCodes)
   {
-    return new Instruction(-1, createStackResetCycles(new ResetVector(), W65C816::RES), "RES",
-                           "Reset the CPU.");
+    Instruction opCode = new Instruction(opCodes.size(), createStackResetCycles(new ResetVector(), W65C816::RES), "RES",
+                                         "Reset the CPU.");
+    opCodes.add(opCode);
+    return opCode;
   }
 
-  private Instruction createIRQ()
+  private Instruction createIRQ(List<Instruction> opCodes)
   {
-    return new Instruction(-1, createStackHardwareInterruptCycles(new IRQVector(), W65C816::IRQ), "IRQ",
-                           "Interrupt request.");
+    Instruction opCode = new Instruction(opCodes.size(), createStackHardwareInterruptCycles(new IRQVector(), W65C816::IRQ), "IRQ",
+                                         "Interrupt request.");
+    opCodes.add(opCode);
+    return opCode;
   }
 
-  private Instruction createNMI()
+  private Instruction createNMI(List<Instruction> opCodes)
   {
-    return new Instruction(-1, createStackHardwareInterruptCycles(new NMIVector(), W65C816::NMI), "NMI",
-                           "Non-maskable interrupt.");
+    Instruction opCode = new Instruction(opCodes.size(), createStackHardwareInterruptCycles(new NMIVector(), W65C816::NMI), "NMI",
+                                         "Non-maskable interrupt.");
+    opCodes.add(opCode);
+    return opCode;
   }
 
-  private Instruction createAbort()
+  private Instruction createAbort(List<Instruction> opCodes)
   {
-    return new Instruction(-1, createStackAbortInterruptCycles(new AbortVector(), W65C816::ABORT), "ABORT",
-                           "Stop the current instruction and return processor status to what it was prior to the current instruction.");
+    Instruction opCode = new Instruction(opCodes.size(), createStackAbortInterruptCycles(new AbortVector(), W65C816::ABORT), "ABORT",
+                                         "Stop the current instruction and return processor status to what it was prior to the current instruction.");
+    opCodes.add(opCode);
+    return opCode;
   }
 
-  private Instruction createFetchNext()
+  private Instruction createFetchNext(List<Instruction> opCodes)
   {
-    return new Instruction(-1, createFetchOpCodeCycles(), "NEXT",
-                           "Fetch Opcode from address in program counter.");
+    Instruction opCode = new Instruction(opCodes.size(), createFetchOpCodeCycles(), "NEXT",
+                                         "Fetch Opcode from address in program counter.");
+    opCodes.add(opCode);
+    return opCode;
   }
 }
 

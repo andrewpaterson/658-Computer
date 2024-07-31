@@ -23,10 +23,9 @@ public class NoteFourY
   @Override
   public boolean mustExecute(W65C816 cpu)
   {
-    return (getLowByte(cpu.getAddress().getOffset()) + getLowByte(cpu.getY())) > 0xFF ||
-           !nextWillRead ||
-           cpu.isIndex16Bit();
+    return cpu.getState().noteFourY(nextWillRead);
   }
+
 
   @Override
   public String toString()

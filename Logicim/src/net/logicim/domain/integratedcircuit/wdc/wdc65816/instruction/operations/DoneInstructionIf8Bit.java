@@ -22,17 +22,11 @@ public class DoneInstructionIf8Bit
   {
     if (width == M)
     {
-      if (cpu.isMemory8Bit())
-      {
-        cpu.doneInstruction();
-      }
+      cpu.getState().doneIfMemory8Bit();
     }
     else if (width == XY)
     {
-      if (cpu.isIndex8Bit())
-      {
-        cpu.doneInstruction();
-      }
+      cpu.getState().doneIfIndex8Bit();
     }
     else
     {

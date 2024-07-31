@@ -14,7 +14,7 @@ public class WriteAbsoluteAddressHigh
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setData(IntUtil.getHighByte(cpu.getAddress().getOffset()));
+    cpu.setData(IntUtil.getHighByte(cpu.getState().getAddress().getOffset()));
   }
 
   @Override

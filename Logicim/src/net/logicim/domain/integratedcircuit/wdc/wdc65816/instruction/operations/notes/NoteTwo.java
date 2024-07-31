@@ -11,7 +11,7 @@ public class NoteTwo
   @Override
   public boolean mustExecute(W65C816 cpu)
   {
-    return toByte(cpu.getDirectPage()) == 0;
+    return toByte(cpu.getState().getDirectPage()) == 0;
   }
 
   @Override

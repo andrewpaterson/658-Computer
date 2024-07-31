@@ -15,7 +15,7 @@ public class SetProgramBank
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setProgramAddressBank(bank);
+    cpu.getState().setProgramAddressBank(bank);
   }
 
   @Override

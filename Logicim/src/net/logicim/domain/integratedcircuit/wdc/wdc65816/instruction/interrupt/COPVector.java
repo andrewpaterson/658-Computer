@@ -8,7 +8,7 @@ public class COPVector
   @Override
   public int getAddress(W65C816 cpu)
   {
-    if (cpu.isEmulation())
+    if (cpu.getState().isEmulation())
     {
       return 0xfff4;
     }

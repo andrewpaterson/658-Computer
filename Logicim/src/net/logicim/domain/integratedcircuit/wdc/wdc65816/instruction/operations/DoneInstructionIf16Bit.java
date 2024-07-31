@@ -22,17 +22,11 @@ public class DoneInstructionIf16Bit
   {
     if (width == M)
     {
-      if (cpu.isMemory16Bit())
-      {
-        cpu.doneInstruction();
-      }
+      cpu.getState().doneIfMemory16Bit();
     }
     else if (width == XY)
     {
-      if (cpu.isIndex16Bit())
-      {
-        cpu.doneInstruction();
-      }
+      cpu.getState().doneIfIndex16Bit();
     }
     else
     {

@@ -19,7 +19,7 @@ public class SetProgramCounter
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setProgramCounter(AddressOffset.getAddress(cpu, addressOffsets));
+    cpu.getState().setProgramCounter(AddressOffset.getAddress(cpu, addressOffsets));
   }
 
   @Override

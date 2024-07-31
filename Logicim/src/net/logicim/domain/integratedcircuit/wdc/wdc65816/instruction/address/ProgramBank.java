@@ -14,7 +14,7 @@ public class ProgramBank
   @Override
   public int getBank(W65C816 cpu)
   {
-    return cpu.getProgramCounter().getBank();
+    return cpu.getState().getProgramCounter().getBank();
   }
 
   @Override

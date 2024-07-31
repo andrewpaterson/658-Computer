@@ -8,7 +8,7 @@ public class XIndex
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return cpu.getX();
+    return cpu.getState().getX();
   }
 
   @Override
@@ -17,3 +17,4 @@ public class XIndex
     return "X";
   }
 }
+

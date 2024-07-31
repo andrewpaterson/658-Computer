@@ -8,7 +8,7 @@ public class DoneInstruction
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.doneInstruction();
+    cpu.getState().doneInstruction();
   }
 
   @Override

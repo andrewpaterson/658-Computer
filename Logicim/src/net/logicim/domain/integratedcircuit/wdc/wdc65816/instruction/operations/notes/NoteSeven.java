@@ -14,7 +14,7 @@ public class NoteSeven
   @Override
   public boolean mustExecute(W65C816 cpu)
   {
-    return !cpu.isEmulation();
+    return !cpu.getState().isEmulation();
   }
 
   @Override

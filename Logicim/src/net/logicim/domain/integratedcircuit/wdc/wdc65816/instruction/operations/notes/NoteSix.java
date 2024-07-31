@@ -15,12 +15,7 @@ public class NoteSix
   @Override
   public boolean mustExecute(W65C816 cpu)
   {
-    if (cpu.isEmulation())
-    {
-      int pcOffset = cpu.getProgramCounter().getOffset();
-      return Address.areOffsetsAreOnDifferentPages(pcOffset, pcOffset + cpu.getData16Bit());
-    }
-    return false;
+    return cpu.getState().noteSix();
   }
 
   @Override

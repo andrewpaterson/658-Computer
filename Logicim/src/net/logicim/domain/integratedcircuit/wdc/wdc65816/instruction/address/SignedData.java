@@ -8,15 +8,7 @@ public class SignedData
   @Override
   public int getOffset(W65C816 cpu)
   {
-    int dataLow = cpu.getData16Bit();
-    if (cpu.is16bitValueNegative(dataLow))
-    {
-      return dataLow | 0xffff0000;
-    }
-    else
-    {
-      return dataLow;
-    }
+    return cpu.getState().getData16BitOffset();
   }
 
   @Override
@@ -25,3 +17,4 @@ public class SignedData
     return "R";
   }
 }
+

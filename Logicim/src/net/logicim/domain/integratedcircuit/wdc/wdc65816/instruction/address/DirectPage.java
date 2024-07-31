@@ -8,7 +8,7 @@ public class DirectPage
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return cpu.getDirectPage();
+    return cpu.getState().getDirectPage();
   }
 
   @Override

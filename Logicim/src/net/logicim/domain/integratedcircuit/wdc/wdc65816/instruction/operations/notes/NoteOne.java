@@ -32,7 +32,7 @@ public class NoteOne
     }
     else if (width == XY)
     {
-      return cpu.isIndex16Bit();
+      return cpu.getState().isIndex16Bit();
     }
     else
     {

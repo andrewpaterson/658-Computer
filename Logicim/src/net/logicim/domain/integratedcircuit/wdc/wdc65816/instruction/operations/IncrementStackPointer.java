@@ -8,7 +8,7 @@ public class IncrementStackPointer
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.incrementStackPointer();
+    cpu.getState().incrementStackPointer();
   }
 
   @Override

@@ -8,7 +8,7 @@ public class NMIVector
   @Override
   public int getAddress(W65C816 cpu)
   {
-    if (cpu.isEmulation())
+    if (cpu.getState().isEmulation())
     {
       return 0xfffa;
     }

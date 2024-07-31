@@ -8,7 +8,7 @@ public class AbsoluteAddressHigh
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return cpu.getAddress().getOffset() & 0xff00;
+    return cpu.getState().getAddress().getOffset() & 0xff00;
   }
 
   @Override

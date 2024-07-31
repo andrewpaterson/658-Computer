@@ -14,7 +14,7 @@ public class DataBank
   @Override
   public int getBank(W65C816 cpu)
   {
-    return cpu.getDataBank();
+    return cpu.getState().getDataBank();
   }
 
   @Override

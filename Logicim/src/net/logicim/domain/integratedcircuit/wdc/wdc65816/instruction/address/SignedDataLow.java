@@ -8,15 +8,7 @@ public class SignedDataLow
   @Override
   public int getOffset(W65C816 cpu)
   {
-    int dataLow = cpu.getDataLow();
-    if (cpu.is8bitValueNegative(dataLow))
-    {
-      return dataLow | 0xffffff00;
-    }
-    else
-    {
-      return dataLow;
-    }
+    return cpu.getState().getData8BitOffset();
   }
 
   @Override

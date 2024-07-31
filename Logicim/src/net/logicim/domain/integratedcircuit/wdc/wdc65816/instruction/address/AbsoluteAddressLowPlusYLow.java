@@ -11,7 +11,7 @@ public class AbsoluteAddressLowPlusYLow
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return toByte(getLowByte(cpu.getAddress().getOffset()) + getLowByte(cpu.getY()));
+    return cpu.getState().getAddressOffsetY();
   }
 
   @Override

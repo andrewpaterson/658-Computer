@@ -9,7 +9,7 @@ public class RestoreAbortValues
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.restoreAbortValues();
+    cpu.getState().restoreAbortValues();
   }
 }
 

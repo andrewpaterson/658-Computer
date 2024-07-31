@@ -13,7 +13,7 @@ public class ProgramCounter
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return cpu.getProgramCounter().getOffset();
+    return cpu.getState().getProgramCounter().getOffset();
   }
 
   @Override

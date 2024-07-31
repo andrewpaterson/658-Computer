@@ -8,7 +8,7 @@ public class DecrementStackPointer
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.decrementStackPointer();
+    cpu.getState().decrementStackPointer();
   }
 
   @Override

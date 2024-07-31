@@ -14,7 +14,7 @@ public class AddressBank
   @Override
   public int getBank(W65C816 cpu)
   {
-    return cpu.getAddress().getBank();
+    return cpu.getState().getAddress().getBank();
   }
 
   @Override

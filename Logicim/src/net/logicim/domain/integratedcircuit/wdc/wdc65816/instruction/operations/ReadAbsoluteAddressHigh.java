@@ -13,7 +13,7 @@ public class ReadAbsoluteAddressHigh
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setAddressHigh(cpu.getData());
+    cpu.getState().setAddressHigh(cpu.getState().getData());
   }
 
   @Override

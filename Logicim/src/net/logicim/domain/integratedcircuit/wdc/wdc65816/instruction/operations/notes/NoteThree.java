@@ -9,7 +9,7 @@ public class NoteThree
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.createPartialAbortValues();
+    cpu.getState().createPartialAbortValues();
   }
 
   @Override

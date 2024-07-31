@@ -13,7 +13,7 @@ public class ReadNewProgramCounterHigh
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setNewProgramCounterHigh(cpu.getData());
+    cpu.getState().setNewProgramCounterHigh(cpu.getData());
   }
 
   @Override

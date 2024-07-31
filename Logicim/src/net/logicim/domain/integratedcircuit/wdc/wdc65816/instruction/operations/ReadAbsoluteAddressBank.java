@@ -13,7 +13,7 @@ public class ReadAbsoluteAddressBank
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setAddressBank(cpu.getData());
+    cpu.getState().setAddressBank(cpu.getState().getData());
   }
 
   @Override

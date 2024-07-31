@@ -8,7 +8,7 @@ public class StackPointer
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return cpu.getStackPointer();
+    return cpu.getState().getStackPointer();
   }
 
   @Override

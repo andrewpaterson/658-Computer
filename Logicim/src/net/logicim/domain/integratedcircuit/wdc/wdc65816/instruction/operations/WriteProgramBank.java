@@ -13,7 +13,7 @@ public class WriteProgramBank
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setData(cpu.getProgramCounter().getBank());
+    cpu.getState().writeProgramBank();
   }
 
   @Override

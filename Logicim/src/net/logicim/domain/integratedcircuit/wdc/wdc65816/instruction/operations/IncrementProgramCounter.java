@@ -8,7 +8,7 @@ public class IncrementProgramCounter
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.incrementProgramAddress();
+    cpu.getState().incrementProgramAddress();
   }
 
   @Override

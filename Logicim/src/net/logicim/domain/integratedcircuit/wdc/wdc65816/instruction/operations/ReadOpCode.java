@@ -13,7 +13,7 @@ public class ReadOpCode
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setOpCode(cpu.getData());
+    cpu.getState().readOpCode();
   }
 
   @Override

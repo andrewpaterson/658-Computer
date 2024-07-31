@@ -366,19 +366,20 @@ public class W65C816View
       programCounter.setText(w65c816.getProgramCounterValueHex());
       dataBank.setText(w65c816.getDataBankValueHex());
 
-      boolean emulation = w65c816.isEmulation();
+      W65C816State state = w65c816.getState();
+      boolean emulation = state.isEmulation();
       emulationFlag.setColor(getFlagColour(emulation));
-      carryFlag.setColor(getFlagColour(w65c816.isCarrySet()));
-      zeroFlag.setColor(getFlagColour(w65c816.isZeroFlagSet()));
-      decimalModeFlag.setColor(getFlagColour(w65c816.isDecimal()));
-      interruptDisableFlag.setColor(getFlagColour(w65c816.isInterruptDisable()));
-      negativeFlag.setColor(getFlagColour(w65c816.isNegativeSet()));
-      overflowFlag.setColor(getFlagColour(w65c816.isOverflowFlag()));
+      carryFlag.setColor(getFlagColour(state.isCarrySet()));
+      zeroFlag.setColor(getFlagColour(state.isZeroFlagSet()));
+      decimalModeFlag.setColor(getFlagColour(state.isDecimal()));
+      interruptDisableFlag.setColor(getFlagColour(state.isInterruptDisable()));
+      negativeFlag.setColor(getFlagColour(state.isNegativeSet()));
+      overflowFlag.setColor(getFlagColour(state.isOverflowFlag()));
 
       if (emulation)
       {
         indexWidthOrBreakFlag.setText("B");
-        indexWidthOrBreakFlag.setColor(getFlagColour(w65c816.isBreak()));
+        indexWidthOrBreakFlag.setColor(getFlagColour(state.isBreak()));
 
         memoryWidthFlag.setVisible(false);
         memoryWidthRectangle.setVisible(false);
@@ -386,10 +387,10 @@ public class W65C816View
       else
       {
         indexWidthOrBreakFlag.setText("X");
-        indexWidthOrBreakFlag.setColor(getFlagColour(w65c816.isIndex8Bit()));
+        indexWidthOrBreakFlag.setColor(getFlagColour(state.isIndex8Bit()));
 
         memoryWidthFlag.setVisible(true);
-        memoryWidthFlag.setColor(getFlagColour(w65c816.isMemory8Bit()));
+        memoryWidthFlag.setColor(getFlagColour(state.isMemory8Bit()));
         memoryWidthRectangle.setVisible(true);
       }
     }
@@ -458,7 +459,7 @@ public class W65C816View
   protected W65C816State saveState(W65C816 integratedCircuit)
   {
     W65C816State state = integratedCircuit.getState();
-    return new W65C816State();
+    return new W65C816State(state);
   }
 }
 

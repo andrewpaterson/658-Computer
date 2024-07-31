@@ -8,7 +8,7 @@ public class DirectOffset
   @Override
   public int getOffset(W65C816 cpu)
   {
-    return cpu.getDirectOffset();
+    return cpu.getState().getDirectOffset();
   }
 
   @Override

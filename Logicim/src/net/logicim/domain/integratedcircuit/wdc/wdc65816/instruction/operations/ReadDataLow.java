@@ -13,7 +13,7 @@ public class ReadDataLow
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setDataLow(cpu.getData());
+    cpu.getState().setDataLow(cpu.getData());
   }
 
   @Override

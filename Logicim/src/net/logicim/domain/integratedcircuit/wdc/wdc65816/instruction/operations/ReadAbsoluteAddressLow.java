@@ -13,7 +13,7 @@ public class ReadAbsoluteAddressLow
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.setAddressLow(cpu.getData());
+    cpu.getState().setAddressLow(cpu.getState().getData());
   }
 
   @Override

@@ -26,14 +26,14 @@ public class ExecuteIf16Bit
   {
     if (width == M)
     {
-      if (cpu.isMemory16Bit())
+      if (cpu.getState().isMemory16Bit())
       {
         function.accept(cpu);
       }
     }
     else if (width == XY)
     {
-      if (cpu.isIndex16Bit())
+      if (cpu.getState().isIndex16Bit())
       {
         function.accept(cpu);
       }

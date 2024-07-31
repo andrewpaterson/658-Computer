@@ -8,7 +8,7 @@ public class DecrementProgramCounter
   @Override
   public void execute(W65C816 cpu)
   {
-    cpu.decrementProgramCounter();
+    cpu.getState().decrementProgramCounter();
   }
 
   @Override

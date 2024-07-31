@@ -38,26 +38,28 @@ public class W65C816View
   protected List<PortView> rightPorts;
   protected List<TextView> labels;
   protected List<RectangleView> rectangles;
-  private TextView opCodeName;
-  private TextView opCodeNumber;
-  private TextView cycle;
-  private TextView accumulator;
-  private TextView xIndex;
-  private TextView yIndex;
-  private TextView stack;
-  private TextView directPage;
-  private TextView programCounter;
-  private TextView dataBank;
-  private TextView emulationFlag;
-  private TextView carryFlag;
-  private TextView zeroFlag;
-  private TextView memoryWidthFlag;
-  private TextView indexWidthOrBreakFlag;
-  private TextView decimalModeFlag;
-  private TextView interruptDisableFlag;
-  private TextView negativeFlag;
-  private TextView overflowFlag;
-  private RectangleView memoryWidthRectangle;
+  
+  protected TextView opCodeName;
+  protected TextView opCodeNumber;
+  protected TextView cycle;
+  protected TextView accumulator;
+  protected TextView xIndex;
+  protected TextView yIndex;
+  protected TextView stack;
+  protected TextView directPage;
+  protected TextView programCounter;
+  protected TextView dataBank;
+  protected TextView emulationFlag;
+  protected TextView carryFlag;
+  protected TextView zeroFlag;
+  protected TextView memoryWidthFlag;
+  protected TextView indexWidthOrBreakFlag;
+  protected TextView decimalModeFlag;
+  protected TextView interruptDisableFlag;
+  protected TextView negativeFlag;
+  protected TextView overflowFlag;
+
+  protected RectangleView memoryWidthRectangle;
 
   public W65C816View(SubcircuitView subcircuitView,
                      Int2D position,

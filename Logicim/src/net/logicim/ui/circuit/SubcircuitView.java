@@ -243,7 +243,11 @@ public class SubcircuitView
 
   public StaticViewIterator staticViewIterator()
   {
-    return new StaticViewIterator(tunnelViews, integratedCircuitViews, passiveViews, subcircuitInstanceViews, decorativeViews);
+    return new StaticViewIterator(tunnelViews,
+                                  integratedCircuitViews,
+                                  passiveViews,
+                                  subcircuitInstanceViews,
+                                  decorativeViews);
   }
 
   public Set<TraceView> getTraceViews()

@@ -1217,8 +1217,8 @@ public class Logicim
         if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
         {
           SubcircuitView subcircuitView = subcircuitInstanceView.getContainingSubcircuitView();
-          subcircuitView.deleteStaticView(subcircuitEditor,
-                                          subcircuitEditor.createCircuitInstanceViewPaths(),
+          subcircuitView.deleteStaticView(
+              subcircuitEditor.createCircuitInstanceViewPaths(),
                                           subcircuitInstanceView);
         }
       }

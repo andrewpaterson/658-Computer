@@ -474,7 +474,7 @@ public abstract class ReflectiveWriter
       }
       else if (fieldValue instanceof SaveData)
       {
-        throw new SimulatorException("Field class [" + fieldValue.getClass().getSimpleName() + "] extends SaveDate.  Extend ReflectiveDate..");
+        throw new SimulatorException("Field class [" + fieldValue.getClass().getSimpleName() + "] extends SaveData.  Extend ReflectiveData..");
       }
       else if (SaveData.class.isAssignableFrom(fieldClass))
       {

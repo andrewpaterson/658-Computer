@@ -1,12 +1,14 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
 import net.common.SimulatorException;
+import net.logicim.data.common.ReflectiveData;
 
 import static net.common.util.IntUtil.*;
 import static net.common.util.StringUtil.to16BitHex;
 import static net.common.util.StringUtil.to8BitHex;
 
 public class Address
+    extends ReflectiveData
 {
   public static final int BANK_SIZE_BYTES = 0x10000;
   public static final int PAGE_SIZE_BYTES = 0x100;

@@ -1006,6 +1006,208 @@ public class W65C816State
     }
   }
 
+  protected void execute8BitADC()
+  {
+    int operand = getInternal16BitData();
+    int accumulator = getA();
+    int carryValue = getCarry();
+
+    int result = accumulator + operand + carryValue;
+
+    accumulator &= 0x7F;
+    operand &= 0x7F;
+    boolean carryOutOfPenultimateBit = isMemoryNegative(trimMemory(accumulator + operand + carryValue));
+
+    boolean carry = (result & 0x0100) != 0;
+    setCarryFlag(carry);
+    setOverflowFlag(carry ^ carryOutOfPenultimateBit);
+    setA(trimMemory(result));
+  }
+
+  protected void execute16BitADC()
+  {
+    int operand = getInternal16BitData();
+    int accumulator = getA();
+    int carryValue = getCarry();
+
+    int result = accumulator + operand + carryValue;
+
+    accumulator &= 0x7FFF;
+    operand &= 0x7FFF;
+    boolean carryOutOfPenultimateBit = isMemoryNegative(trimMemory(accumulator + operand + carryValue));
+
+    boolean carry = (result & 0x010000) != 0;
+    setCarryFlag(carry);
+    setOverflowFlag(carry ^ carryOutOfPenultimateBit);
+    setA(trimMemory(result));
+  }
+
+  protected void execute8BitBCDADC()
+  {
+    int operand = getDataLow();
+    int accumulator = getA();
+
+    BCDResult bcdResult = bcdAdd8Bit(operand, accumulator, isCarrySet());
+    setCarryFlag(bcdResult.carry);
+    setA(bcdResult.value);
+  }
+
+  protected void execute16BitBCDADC()
+  {
+    int operand = getInternal16BitData();
+    int accumulator = getA();
+
+    BCDResult bcdResult = bcdAdd16Bit(operand, accumulator, isCarrySet());
+    setCarryFlag(bcdResult.carry);
+    setA(bcdResult.value);
+  }
+
+  public void execute8BitSBC()
+  {
+    int value = getInternal16BitData();
+    int accumulator = getA();
+    int borrowValue = 1 - getCarry();
+
+    int result = accumulator - value - borrowValue;
+
+    accumulator &= 0x7F;
+    value &= 0x7F;
+    boolean borrowFromPenultimateBit = isMemoryNegative(trimMemory(accumulator - value - borrowValue));
+    boolean borrow = (result & 0x0100) != 0;
+
+    setCarryFlag(!borrow);
+    setOverflowFlag(borrow ^ borrowFromPenultimateBit);
+    setA(trimMemory(result));
+  }
+
+  protected void execute16BitSBC()
+  {
+    int value = getInternal16BitData();
+    int accumulator = getA();
+    int borrowValue = 1 - getCarry();
+
+    int result = accumulator - value - borrowValue;
+
+    accumulator &= 0x7FFF;
+    value &= 0x7FFF;
+    boolean borrowFromPenultimateBit = isMemoryNegative(trimMemory(accumulator - value - borrowValue));
+    boolean borrow = (result & 0x010000) != 0;
+
+    setCarryFlag(!borrow);
+    setOverflowFlag(borrow ^ borrowFromPenultimateBit);
+    setA(trimMemory(result));
+  }
+
+  protected void execute8BitBCDSBC()
+  {
+    int value = getDataLow();
+    int accumulator = getLowByte(getA());
+
+    BCDResult bcdResult = bcdSubtract8Bit(value, accumulator, !isCarrySet());
+    setCarryFlag(!bcdResult.carry);
+    setA(bcdResult.value);
+  }
+
+  protected void execute16BitBCDSBC()
+  {
+    int value = getInternal16BitData();
+    int accumulator = getA();
+
+    BCDResult bcdResult = bcdSubtract16Bit(value, accumulator, !isCarrySet());
+    setCarryFlag(!bcdResult.carry);
+    setA(bcdResult.value);
+  }
+
+  public BCDResult bcdAdd8Bit(int bcdFirst, int bcdSecond, boolean carry)
+  {
+    int shift = 0;
+    int result = 0;
+
+    while (shift < 8)
+    {
+      int digitOfFirst = (bcdFirst & 0xF);
+      int digitOfSecond = (bcdSecond & 0xF);
+      int sumOfDigits = toByte(digitOfFirst + digitOfSecond + (carry ? 1 : 0));
+      carry = sumOfDigits > 9;
+      if (carry)
+      {
+        sumOfDigits += 6;
+      }
+      sumOfDigits &= 0xF;
+      result |= sumOfDigits << shift;
+
+      shift += 4;
+      bcdFirst >>= shift;
+      bcdSecond >>= shift;
+    }
+
+    return new BCDResult(result, carry);
+  }
+
+  public BCDResult bcdAdd16Bit(int bcdFirst, int bcdSecond, boolean carry)
+  {
+    int result = 0;
+    int shift = 0;
+    while (shift < 16)
+    {
+      int digitOfFirst = (bcdFirst & 0xFF);
+      int digitOfSecond = (bcdSecond & 0xFF);
+      BCDResult bcd8BitResult = bcdAdd8Bit(digitOfFirst, digitOfSecond, carry);
+      carry = bcd8BitResult.carry;
+      int partialResult = bcd8BitResult.value;
+      result = toShort(result | (partialResult << shift));
+      shift += 8;
+      bcdFirst = toShort(bcdFirst >> shift);
+      bcdSecond = toShort(bcdSecond >> shift);
+    }
+    return new BCDResult(result, carry);
+  }
+
+  public BCDResult bcdSubtract8Bit(int bcdFirst, int bcdSecond, boolean borrow)
+  {
+    int shift = 0;
+    int result = 0;
+
+    while (shift < 8)
+    {
+      int digitOfFirst = (bcdFirst & 0xF);
+      int digitOfSecond = (bcdSecond & 0xF);
+      int diffOfDigits = toByte(digitOfFirst - digitOfSecond - (borrow ? 1 : 0));
+      borrow = diffOfDigits > 9;
+      if (borrow)
+      {
+        diffOfDigits -= 6;
+      }
+      diffOfDigits &= 0xF;
+      result |= diffOfDigits << shift;
+
+      shift += 4;
+      bcdFirst >>= shift;
+      bcdSecond >>= shift;
+    }
+
+    return new BCDResult(result, borrow);
+  }
+
+  public BCDResult bcdSubtract16Bit(int bcdFirst, int bcdSecond, boolean borrow)
+  {
+    int result = 0;
+    int shift = 0;
+    while (shift < 16)
+    {
+      int digitOfFirst = (bcdFirst & 0xFF);
+      int digitOfSecond = (bcdSecond & 0xFF);
+      BCDResult bcd8BitResult = bcdSubtract8Bit(digitOfFirst, digitOfSecond, borrow);
+      borrow = bcd8BitResult.carry;
+      int partialResult = bcd8BitResult.value;
+      result = toShort(result | (partialResult << shift));
+      shift += 8;
+      bcdFirst = toShort(bcdFirst >> shift);
+      bcdSecond = toShort(bcdSecond >> shift);
+    }
+    return new BCDResult(result, borrow);
+  }
+
   private int setBit(int value, boolean bitValue, int bitNumber)
   {
     if (bitValue)
@@ -1276,208 +1478,6 @@ public class W65C816State
         execute8BitBCDADC();
       }
     }
-  }
-
-  protected void execute8BitADC()
-  {
-    int operand = getInternal16BitData();
-    int accumulator = getA();
-    int carryValue = getCarry();
-
-    int result = accumulator + operand + carryValue;
-
-    accumulator &= 0x7F;
-    operand &= 0x7F;
-    boolean carryOutOfPenultimateBit = isMemoryNegative(trimMemory(accumulator + operand + carryValue));
-
-    boolean carry = (result & 0x0100) != 0;
-    setCarryFlag(carry);
-    setOverflowFlag(carry ^ carryOutOfPenultimateBit);
-    setA(trimMemory(result));
-  }
-
-  protected void execute16BitADC()
-  {
-    int operand = getInternal16BitData();
-    int accumulator = getA();
-    int carryValue = getCarry();
-
-    int result = accumulator + operand + carryValue;
-
-    accumulator &= 0x7FFF;
-    operand &= 0x7FFF;
-    boolean carryOutOfPenultimateBit = isMemoryNegative(trimMemory(accumulator + operand + carryValue));
-
-    boolean carry = (result & 0x010000) != 0;
-    setCarryFlag(carry);
-    setOverflowFlag(carry ^ carryOutOfPenultimateBit);
-    setA(trimMemory(result));
-  }
-
-  protected void execute8BitBCDADC()
-  {
-    int operand = getDataLow();
-    int accumulator = getA();
-
-    BCDResult bcdResult = bcdAdd8Bit(operand, accumulator, isCarrySet());
-    setCarryFlag(bcdResult.carry);
-    setA(bcdResult.value);
-  }
-
-  protected void execute16BitBCDADC()
-  {
-    int operand = getInternal16BitData();
-    int accumulator = getA();
-
-    BCDResult bcdResult = bcdAdd16Bit(operand, accumulator, isCarrySet());
-    setCarryFlag(bcdResult.carry);
-    setA(bcdResult.value);
-  }
-
-  public void execute8BitSBC()
-  {
-    int value = getInternal16BitData();
-    int accumulator = getA();
-    int borrowValue = 1 - getCarry();
-
-    int result = accumulator - value - borrowValue;
-
-    accumulator &= 0x7F;
-    value &= 0x7F;
-    boolean borrowFromPenultimateBit = isMemoryNegative(trimMemory(accumulator - value - borrowValue));
-    boolean borrow = (result & 0x0100) != 0;
-
-    setCarryFlag(!borrow);
-    setOverflowFlag(borrow ^ borrowFromPenultimateBit);
-    setA(trimMemory(result));
-  }
-
-  protected void execute16BitSBC()
-  {
-    int value = getInternal16BitData();
-    int accumulator = getA();
-    int borrowValue = 1 - getCarry();
-
-    int result = accumulator - value - borrowValue;
-
-    accumulator &= 0x7FFF;
-    value &= 0x7FFF;
-    boolean borrowFromPenultimateBit = isMemoryNegative(trimMemory(accumulator - value - borrowValue));
-    boolean borrow = (result & 0x010000) != 0;
-
-    setCarryFlag(!borrow);
-    setOverflowFlag(borrow ^ borrowFromPenultimateBit);
-    setA(trimMemory(result));
-  }
-
-  protected void execute8BitBCDSBC()
-  {
-    int value = getDataLow();
-    int accumulator = getLowByte(getA());
-
-    BCDResult bcdResult = bcdSubtract8Bit(value, accumulator, !isCarrySet());
-    setCarryFlag(!bcdResult.carry);
-    setA(bcdResult.value);
-  }
-
-  protected void execute16BitBCDSBC()
-  {
-    int value = getInternal16BitData();
-    int accumulator = getA();
-
-    BCDResult bcdResult = bcdSubtract16Bit(value, accumulator, !isCarrySet());
-    setCarryFlag(!bcdResult.carry);
-    setA(bcdResult.value);
-  }
-
-  public BCDResult bcdAdd8Bit(int bcdFirst, int bcdSecond, boolean carry)
-  {
-    int shift = 0;
-    int result = 0;
-
-    while (shift < 8)
-    {
-      int digitOfFirst = (bcdFirst & 0xF);
-      int digitOfSecond = (bcdSecond & 0xF);
-      int sumOfDigits = toByte(digitOfFirst + digitOfSecond + (carry ? 1 : 0));
-      carry = sumOfDigits > 9;
-      if (carry)
-      {
-        sumOfDigits += 6;
-      }
-      sumOfDigits &= 0xF;
-      result |= sumOfDigits << shift;
-
-      shift += 4;
-      bcdFirst >>= shift;
-      bcdSecond >>= shift;
-    }
-
-    return new BCDResult(result, carry);
-  }
-
-  public BCDResult bcdAdd16Bit(int bcdFirst, int bcdSecond, boolean carry)
-  {
-    int result = 0;
-    int shift = 0;
-    while (shift < 16)
-    {
-      int digitOfFirst = (bcdFirst & 0xFF);
-      int digitOfSecond = (bcdSecond & 0xFF);
-      BCDResult bcd8BitResult = bcdAdd8Bit(digitOfFirst, digitOfSecond, carry);
-      carry = bcd8BitResult.carry;
-      int partialResult = bcd8BitResult.value;
-      result = toShort(result | (partialResult << shift));
-      shift += 8;
-      bcdFirst = toShort(bcdFirst >> shift);
-      bcdSecond = toShort(bcdSecond >> shift);
-    }
-    return new BCDResult(result, carry);
-  }
-
-  public BCDResult bcdSubtract8Bit(int bcdFirst, int bcdSecond, boolean borrow)
-  {
-    int shift = 0;
-    int result = 0;
-
-    while (shift < 8)
-    {
-      int digitOfFirst = (bcdFirst & 0xF);
-      int digitOfSecond = (bcdSecond & 0xF);
-      int diffOfDigits = toByte(digitOfFirst - digitOfSecond - (borrow ? 1 : 0));
-      borrow = diffOfDigits > 9;
-      if (borrow)
-      {
-        diffOfDigits -= 6;
-      }
-      diffOfDigits &= 0xF;
-      result |= diffOfDigits << shift;
-
-      shift += 4;
-      bcdFirst >>= shift;
-      bcdSecond >>= shift;
-    }
-
-    return new BCDResult(result, borrow);
-  }
-
-  public BCDResult bcdSubtract16Bit(int bcdFirst, int bcdSecond, boolean borrow)
-  {
-    int result = 0;
-    int shift = 0;
-    while (shift < 16)
-    {
-      int digitOfFirst = (bcdFirst & 0xFF);
-      int digitOfSecond = (bcdSecond & 0xFF);
-      BCDResult bcd8BitResult = bcdSubtract8Bit(digitOfFirst, digitOfSecond, borrow);
-      borrow = bcd8BitResult.carry;
-      int partialResult = bcd8BitResult.value;
-      result = toShort(result | (partialResult << shift));
-      shift += 8;
-      bcdFirst = toShort(bcdFirst >> shift);
-      bcdSecond = toShort(bcdSecond >> shift);
-    }
-    return new BCDResult(result, borrow);
   }
 
   protected void txaInternal()

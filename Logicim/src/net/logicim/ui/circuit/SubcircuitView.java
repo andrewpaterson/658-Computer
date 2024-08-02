@@ -643,28 +643,31 @@ public class SubcircuitView
   public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView, CircuitInstanceViewPaths paths, Collection<ConnectionView> tracesConnectionViews)
   {
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+    if (tracesConnectionViews.size() > 0)
     {
-      Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-      for (ConnectionView connectionView : tracesConnectionViews)
+      for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
       {
-        if (connectionView == null)
+        Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+        for (ConnectionView connectionView : tracesConnectionViews)
         {
-          throw new SimulatorException("Connection View may not be null.");
-        }
+          if (connectionView == null)
+          {
+            throw new SimulatorException("Connection View may not be null.");
+          }
 
-        if (!updatedConnectionViews.contains(connectionView))
-        {
-          WireList wireList = WireListFinder.findAndConnectTraces(connectionView, paths);
+          if (!updatedConnectionViews.contains(connectionView))
+          {
+            WireList wireList = WireListFinder.findAndConnectTraces(connectionView, paths);
 
-          WireTraceConverter wireTraceConverter = new WireTraceConverter(paths, subcircuitSimulation);
-          wireTraceConverter.createTracesAndConnectPorts(wireList, subcircuitSimulation);
-          List<LocalMultiSimulationConnectionNet> connectionNets = wireList.getConnectionNets();
-          List<ConnectionView> connectionNetConnectionViews = WireListFinder.getConnectionViews(connectionNets);
-          updatedConnectionViews.addAll(connectionNetConnectionViews);
+            WireTraceConverter wireTraceConverter = new WireTraceConverter(paths, subcircuitSimulation);
+            wireTraceConverter.createTracesAndConnectPorts(wireList, subcircuitSimulation);
+            List<LocalMultiSimulationConnectionNet> connectionNets = wireList.getConnectionNets();
+            List<ConnectionView> connectionNetConnectionViews = WireListFinder.getConnectionViews(connectionNets);
+            updatedConnectionViews.addAll(connectionNetConnectionViews);
+          }
         }
+        allUpdatedConnectionViews.addAll(updatedConnectionViews);
       }
-      allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
 
     // allUpdatedConnectionViews are returned for fireConnectionEvents.  Simulations that were already connected (is that possible?) should not fireConnectionEvents.  You should validate this on firing.

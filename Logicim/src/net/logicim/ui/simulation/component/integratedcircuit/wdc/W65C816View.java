@@ -115,13 +115,13 @@ public class W65C816View
                             CENTER));
 
     y += yStep;
-    opCodeName = createDetail(y, 4, "Op-code", "RES");
+    opCodeName = createDetail(y, 3, "Op-code", "RES");
 
     y += yStep;
-    opCodeNumber = createDetail(y, 4, "Op-code", "###");
+    opCodeNumber = createDetail(y, 3, "Op-code", "###");
 
     y += yStep;
-    cycle = createDetail(y, 2, "Cycle", "0");
+    cycle = createDetail(y, 3, "Cycle", "0");
 
     y += yStep;
     accumulator = createDetail(y, 5, "Accumulator", "0x0000");

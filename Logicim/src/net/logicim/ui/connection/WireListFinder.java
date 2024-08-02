@@ -16,19 +16,13 @@ public abstract class WireListFinder
 {
   public static WireList findAndConnectTraces(ConnectionView inputConnectionView, CircuitInstanceViewPaths paths)
   {
-    return findWires(inputConnectionView, paths);
-  }
-
-  private static WireList findWires(ConnectionView startingConnectionView,
-                                    CircuitInstanceViewPaths paths)
-  {
-    if (startingConnectionView == null)
+    if (inputConnectionView == null)
     {
       throw new SimulatorException("Input connection may not be null.");
     }
 
     List<SplitterViewProcessStackItem> splitterViewStack = new ArrayList<>();
-    splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(), startingConnectionView));
+    splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(), inputConnectionView));
 
     Set<ConnectionView> processedSplitterViewConnections = new HashSet<>();
     Set<SubcircuitPinView> processedSubcircuitPinViews = new HashSet<>();

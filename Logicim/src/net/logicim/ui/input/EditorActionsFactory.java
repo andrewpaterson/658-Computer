@@ -85,6 +85,8 @@ public class EditorActionsFactory
     editor.addAction(EnterSubcircuitAction.NAME, new EnterSubcircuitAction(editor));
     editor.addAction(EditSubcircuitAction.NAME, new EditSubcircuitAction(editor, panel));
 
+    editor.addAction(RegeneratePathsAction.NAME, new RegeneratePathsAction(editor));
+
     for (int i = 1; i < 10; i++)
     {
       editor.addAction(BookmarkSubcircuitAction.name(i), new BookmarkSubcircuitAction(editor, i));

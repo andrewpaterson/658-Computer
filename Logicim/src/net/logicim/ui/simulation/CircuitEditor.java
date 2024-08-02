@@ -19,9 +19,7 @@ import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewPaths;
-import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
-import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.*;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.HoverConnectionView;
@@ -839,7 +837,30 @@ public class CircuitEditor
     {
       circuitInstanceViewPaths.process(subcircuitEditor);
     }
+    printCircuitInstanceViewPaths(circuitInstanceViewPaths);
     return circuitInstanceViewPaths;
+  }
+
+  protected void printCircuitInstanceViewPaths(CircuitInstanceViewPaths circuitInstanceViewPaths)
+  {
+    for (CircuitInstanceViewPath path : circuitInstanceViewPaths.getPaths())
+    {
+      StringBuilder builder = new StringBuilder();
+      boolean first = true;
+      for (CircuitInstanceView circuitInstanceView : path.getPath())
+      {
+        if (!first)
+        {
+          builder.append(" - ");
+        }
+        else
+        {
+          first = false;
+        }
+        builder.append(circuitInstanceView.getDescription());
+      }
+      System.out.println(builder.toString());
+    }
   }
 }
 

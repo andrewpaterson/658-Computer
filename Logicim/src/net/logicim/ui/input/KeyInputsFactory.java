@@ -82,6 +82,8 @@ public class KeyInputsFactory
     editor.addKeyInput(new KeyInput(editor.getAction(NavigateForwardSubcircuitAction.NAME), KeyEvent.VK_RIGHT, Down, Down, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(EditSubcircuitAction.NAME), KeyEvent.VK_E, Down, Up, Down));
 
+    editor.addKeyInput(new KeyInput(editor.getAction(RegeneratePathsAction.NAME), KeyEvent.VK_BACK_QUOTE, Up, Up, Up));
+
     for (int i = 1; i < 10; i++)
     {
       editor.addKeyInput(new KeyInput(editor.getAction(BookmarkSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Down, Up, Up));

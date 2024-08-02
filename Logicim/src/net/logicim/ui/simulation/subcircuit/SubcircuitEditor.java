@@ -38,12 +38,11 @@ public class SubcircuitEditor
 
   protected Selection selection;
   protected SubcircuitView subcircuitView;
-  protected CircuitEditor circuitEditor;
   protected long id;
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
-    this(circuitEditor, new SubcircuitView());
+    this(new SubcircuitView(circuitEditor));
     this.subcircuitView.createSubcircuitTopSimulation("Top " + typeName);
 
     this.setTypeName(typeName);
@@ -54,7 +53,7 @@ public class SubcircuitEditor
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, long id)
   {
-    this(circuitEditor, new SubcircuitView());
+    this(new SubcircuitView(circuitEditor));
     this.setTypeName(typeName);
 
     this.id = id;
@@ -64,9 +63,8 @@ public class SubcircuitEditor
     }
   }
 
-  public SubcircuitEditor(CircuitEditor circuitEditor, SubcircuitView subcircuitView)
+  public SubcircuitEditor(SubcircuitView subcircuitView)
   {
-    this.circuitEditor = circuitEditor;
     this.subcircuitView = subcircuitView;
     this.selection = new Selection();
   }
@@ -76,7 +74,6 @@ public class SubcircuitEditor
     clearSelection();
 
     subcircuitView.startMoveComponents(this,
-                                       createCircuitInstanceViewPaths(),
                                        staticViews,
                                        traceViews);
   }
@@ -89,7 +86,6 @@ public class SubcircuitEditor
   )
   {
     List<View> newSelection = subcircuitView.doneMoveComponents(this,
-                                                                createCircuitInstanceViewPaths(),
                                                                 staticViews,
                                                                 newTraceViewLines,
                                                                 removeTraceViews,
@@ -122,7 +118,6 @@ public class SubcircuitEditor
       }
     }
     subcircuitView.deleteTraceViews(this,
-                                    createCircuitInstanceViewPaths(),
                                     traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();
@@ -134,14 +129,13 @@ public class SubcircuitEditor
       }
     }
     subcircuitView.deleteStaticViews(this,
-                                     createCircuitInstanceViewPaths(),
                                      staticViews);
     selection.clearSelection();
   }
 
   public CircuitEditor getCircuitEditor()
   {
-    return circuitEditor;
+    return subcircuitView.getCircuitEditor();
   }
 
   public void clearSelection()
@@ -198,7 +192,6 @@ public class SubcircuitEditor
   public void deleteTraceViews(Set<TraceView> traceViews)
   {
     subcircuitView.deleteTraceViews(this,
-                                    createCircuitInstanceViewPaths(),
                                     traceViews);
   }
 
@@ -291,7 +284,6 @@ public class SubcircuitEditor
   public void deleteStaticViews(List<StaticView<?>> staticViews)
   {
     subcircuitView.deleteStaticViews(this,
-                                     createCircuitInstanceViewPaths(),
                                      staticViews);
   }
 
@@ -332,7 +324,6 @@ public class SubcircuitEditor
   public void deleteComponentView(StaticView<?> staticView)
   {
     subcircuitView.deleteStaticView(this,
-                                    createCircuitInstanceViewPaths(),
                                     staticView);
   }
 
@@ -345,7 +336,7 @@ public class SubcircuitEditor
   public void createTraceViews(List<Line> newTraceViewLines)
   {
     subcircuitView.createTraceViews(this,
-                                    createCircuitInstanceViewPaths(),
+
                                     newTraceViewLines);
   }
 
@@ -473,7 +464,7 @@ public class SubcircuitEditor
 
   public SubcircuitEditor getSubcircuitEditor(String subcircuitTypeName)
   {
-    return circuitEditor.getSubcircuitEditor(subcircuitTypeName);
+    return getCircuitEditor().getSubcircuitEditor(subcircuitTypeName);
   }
 
   public void setTypeName(String subcircuitName)
@@ -539,9 +530,5 @@ public class SubcircuitEditor
     subcircuitView.validateSimulations(orderedTopDownCircuitInstanceViews);
   }
 
-  public CircuitInstanceViewPaths createCircuitInstanceViewPaths()
-  {
-    return circuitEditor.createCircuitInstanceViewPaths();
-  }
 }
 

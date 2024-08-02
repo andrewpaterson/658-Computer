@@ -75,7 +75,8 @@ public class SubcircuitEditor
   {
     clearSelection();
 
-    subcircuitView.startMoveComponents(createCircuitInstanceViewPaths(),
+    subcircuitView.startMoveComponents(this,
+                                       createCircuitInstanceViewPaths(),
                                        staticViews,
                                        traceViews);
   }
@@ -87,7 +88,8 @@ public class SubcircuitEditor
                                  boolean newComponents
   )
   {
-    List<View> newSelection = subcircuitView.doneMoveComponents(createCircuitInstanceViewPaths(),
+    List<View> newSelection = subcircuitView.doneMoveComponents(this,
+                                                                createCircuitInstanceViewPaths(),
                                                                 staticViews,
                                                                 newTraceViewLines,
                                                                 removeTraceViews,
@@ -119,7 +121,8 @@ public class SubcircuitEditor
         traceViews.add((TraceView) view);
       }
     }
-    subcircuitView.deleteTraceViews(createCircuitInstanceViewPaths(),
+    subcircuitView.deleteTraceViews(this,
+                                    createCircuitInstanceViewPaths(),
                                     traceViews);
 
     List<StaticView<?>> staticViews = new ArrayList<>();
@@ -130,7 +133,8 @@ public class SubcircuitEditor
         staticViews.add((StaticView<?>) view);
       }
     }
-    subcircuitView.deleteStaticViews(createCircuitInstanceViewPaths(),
+    subcircuitView.deleteStaticViews(this,
+                                     createCircuitInstanceViewPaths(),
                                      staticViews);
     selection.clearSelection();
   }
@@ -193,9 +197,9 @@ public class SubcircuitEditor
 
   public void deleteTraceViews(Set<TraceView> traceViews)
   {
-    subcircuitView.deleteTraceViews(
-        createCircuitInstanceViewPaths(),
-        traceViews);
+    subcircuitView.deleteTraceViews(this,
+                                    createCircuitInstanceViewPaths(),
+                                    traceViews);
   }
 
   public StaticViewIterator staticViewIterator()
@@ -286,9 +290,9 @@ public class SubcircuitEditor
 
   public void deleteStaticViews(List<StaticView<?>> staticViews)
   {
-    subcircuitView.deleteStaticViews(
-        createCircuitInstanceViewPaths(),
-        staticViews);
+    subcircuitView.deleteStaticViews(this,
+                                     createCircuitInstanceViewPaths(),
+                                     staticViews);
   }
 
   public List<View> pasteClipboardViews(List<TraceData> traces,
@@ -327,9 +331,9 @@ public class SubcircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    subcircuitView.deleteStaticView(
-        createCircuitInstanceViewPaths(),
-        staticView);
+    subcircuitView.deleteStaticView(this,
+                                    createCircuitInstanceViewPaths(),
+                                    staticView);
   }
 
   public void validate()
@@ -340,9 +344,9 @@ public class SubcircuitEditor
 
   public void createTraceViews(List<Line> newTraceViewLines)
   {
-    subcircuitView.createTraceViews(
-        createCircuitInstanceViewPaths(),
-        newTraceViewLines);
+    subcircuitView.createTraceViews(this,
+                                    createCircuitInstanceViewPaths(),
+                                    newTraceViewLines);
   }
 
   public List<View> loadViews(List<TraceData> traces,

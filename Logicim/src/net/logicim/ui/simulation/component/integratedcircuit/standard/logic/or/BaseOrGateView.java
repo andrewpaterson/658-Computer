@@ -33,6 +33,8 @@ public abstract class BaseOrGateView<IC extends IntegratedCircuit<?, ?>>
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
+    createPortViews();
+    finaliseView();
   }
 
   protected void createGraphics()

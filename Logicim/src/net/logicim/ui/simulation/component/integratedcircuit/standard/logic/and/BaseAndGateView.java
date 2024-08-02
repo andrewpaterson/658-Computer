@@ -32,6 +32,8 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
+    createPortViews();
+    finaliseView();
   }
 
   protected void createGraphics()

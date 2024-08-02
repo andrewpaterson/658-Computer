@@ -34,6 +34,8 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
   {
     super(subcircuitView, position, rotation, properties);
     createGraphics();
+    createPortViews();
+    finaliseView();
   }
 
   protected void createGraphics()

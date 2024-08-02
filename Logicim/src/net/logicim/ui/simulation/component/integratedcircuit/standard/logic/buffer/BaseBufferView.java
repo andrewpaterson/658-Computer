@@ -31,6 +31,8 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
     super(subcircuitView, position, rotation, properties);
     polygons = null;
     createGraphics();
+    createPortViews();
+    finaliseView();
   }
 
   protected void createGraphics()

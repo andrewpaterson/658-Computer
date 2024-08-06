@@ -4286,6 +4286,12 @@
 		(uuid "19a7e201-ca0e-4d9e-9109-3b97ed70425c")
 	)
 	(junction
+		(at 212.09 33.02)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1bdceb00-5736-4a77-a357-349206bce201")
+	)
+	(junction
 		(at 111.76 168.91)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4310,22 +4316,28 @@
 		(uuid "4a5f8061-7a3d-4b2a-be92-e1c6c9abbfd7")
 	)
 	(junction
+		(at 247.65 33.02)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8b726938-211e-40a5-a25a-8686f1e1d85e")
+	)
+	(junction
 		(at 260.35 33.02)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9e49afe4-1e96-4310-aa53-b5f4a20ed555")
 	)
 	(junction
-		(at 242.57 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "abdd656e-6248-4aee-8463-e8c211846bf0")
-	)
-	(junction
 		(at 257.81 33.02)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b005ef3b-2b0c-42b2-a5f9-e3a9e2f5567f")
+	)
+	(junction
+		(at 247.65 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4530fdc-2d23-44b8-b10e-93612a4d89ef")
 	)
 	(junction
 		(at 196.85 33.02)
@@ -4402,6 +4414,16 @@
 			(type default)
 		)
 		(uuid "04c70911-0dfb-4e66-af99-264d52c83942")
+	)
+	(wire
+		(pts
+			(xy 247.65 57.15) (xy 242.57 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a605e09-340f-4b89-a262-8af0084af60a")
 	)
 	(wire
 		(pts
@@ -4565,16 +4587,6 @@
 	)
 	(wire
 		(pts
-			(xy 247.65 54.61) (xy 242.57 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4b0c6d33-bee4-4a8b-94d9-d8cc05bb5042")
-	)
-	(wire
-		(pts
 			(xy 257.81 33.02) (xy 255.27 33.02)
 		)
 		(stroke
@@ -4635,7 +4647,7 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 54.61) (xy 242.57 57.15)
+			(xy 247.65 54.61) (xy 247.65 57.15)
 		)
 		(stroke
 			(width 0)
@@ -4893,6 +4905,16 @@
 		)
 		(uuid "f7939b58-5b7a-4232-8768-6f91e8187e76")
 	)
+	(wire
+		(pts
+			(xy 247.65 54.61) (xy 242.57 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbbba287-9d67-42e6-81c3-7fb60f1aa32e")
+	)
 	(label "GND"
 		(at 116.84 173.99 0)
 		(fields_autoplaced yes)
@@ -4991,6 +5013,17 @@
 			(justify left bottom)
 		)
 		(uuid "16d9fa8b-1b2e-4f3b-8ae4-49f27768bc60")
+	)
+	(label "GND"
+		(at 217.17 33.02 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "175a7b70-a4da-42e7-9b94-b5139d1548e4")
 	)
 	(label "GND"
 		(at 82.55 173.99 180)
@@ -5112,6 +5145,17 @@
 			(justify right bottom)
 		)
 		(uuid "2a115e74-8622-47d0-ab1c-8fceb277cf2b")
+	)
+	(label "GND"
+		(at 242.57 33.02 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2a959014-e346-40b8-b028-9fb82d136960")
 	)
 	(label "5V"
 		(at 43.18 185.42 0)
@@ -6973,6 +7017,74 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
+		(at 247.65 33.02 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "82fbda8d-3628-4f99-bbfb-1531a62b9ff7")
+		(property "Reference" "C3"
+			(at 245.364 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 245.11 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 230.886 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 245.4275 32.7025 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 247.65 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "72f25086-b951-466f-a47a-673419dae0e8")
+		)
+		(pin "2"
+			(uuid "d6d54d13-f719-458c-a36f-68eec6c7ec43")
+		)
+		(instances
+			(project "TTL5V"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
 		(at 165.1 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7336,6 +7448,73 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "IC6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 212.09 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bace5b2f-b579-44fc-bab5-786607bd239b")
+		(property "Reference" "C2"
+			(at 214.376 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 214.63 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 228.854 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 214.3125 32.7025 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 212.09 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ac181a8b-b440-4af6-bde8-5ba6522e5ea9")
+		)
+		(pin "2"
+			(uuid "d29285f1-4b87-4b0f-a7b9-0be4bc585beb")
+		)
+		(instances
+			(project "TTL5V"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "C2")
 					(unit 1)
 				)
 			)

@@ -9271,7 +9271,7 @@
 	(junction
 		(at 199.39 261.62)
 		(diameter 0)
-		(color 0 0 0 0)
+		(color 36 156 255 1)
 		(uuid "537b869f-3a89-4b12-8433-bc2961d3a71f")
 	)
 	(junction
@@ -9283,7 +9283,7 @@
 	(junction
 		(at -2.54 246.38)
 		(diameter 0)
-		(color 0 0 0 0)
+		(color 36 156 255 1)
 		(uuid "85e4554b-442c-4b8a-805c-87265727abb0")
 	)
 	(junction
@@ -9295,19 +9295,19 @@
 	(junction
 		(at 115.57 116.84)
 		(diameter 0)
-		(color 0 0 0 0)
+		(color 24 199 56 1)
 		(uuid "886a596d-b7d6-4f6b-887a-f339fee15d96")
 	)
 	(junction
 		(at 29.21 116.84)
 		(diameter 0)
-		(color 0 0 0 0)
+		(color 24 199 56 1)
 		(uuid "a1bf80db-0842-4bf2-8d40-c2fff1b890b5")
 	)
 	(junction
 		(at 110.49 113.03)
 		(diameter 0)
-		(color 0 0 0 0)
+		(color 36 156 255 1)
 		(uuid "a8732e34-a235-42f2-8ad7-00750ce0337d")
 	)
 	(junction
@@ -9325,7 +9325,7 @@
 	(junction
 		(at 110.49 261.62)
 		(diameter 0)
-		(color 0 0 0 0)
+		(color 36 156 255 1)
 		(uuid "f7edba42-0dd2-4c60-b87b-ddf21563efd0")
 	)
 	(no_connect
@@ -11114,7 +11114,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 222.25) (xy 48.26 222.25)
+			(xy 24.13 222.25) (xy 48.26 222.25)
 		)
 		(stroke
 			(width 0)
@@ -11694,7 +11694,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 214.63) (xy 48.26 214.63)
+			(xy 24.13 214.63) (xy 48.26 214.63)
 		)
 		(stroke
 			(width 0)
@@ -11748,7 +11748,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 212.09) (xy 48.26 212.09)
+			(xy 24.13 212.09) (xy 48.26 212.09)
 		)
 		(stroke
 			(width 0)
@@ -12599,7 +12599,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 209.55) (xy 48.26 209.55)
+			(xy 24.13 209.55) (xy 48.26 209.55)
 		)
 		(stroke
 			(width 0)
@@ -12927,7 +12927,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 204.47) (xy 48.26 204.47)
+			(xy 24.13 204.47) (xy 48.26 204.47)
 		)
 		(stroke
 			(width 0)
@@ -12937,7 +12937,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 207.01) (xy 48.26 207.01)
+			(xy 24.13 207.01) (xy 48.26 207.01)
 		)
 		(stroke
 			(width 0)
@@ -13262,7 +13262,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 217.17) (xy 48.26 217.17)
+			(xy 24.13 217.17) (xy 48.26 217.17)
 		)
 		(stroke
 			(width 0)
@@ -13457,7 +13457,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 219.71) (xy 48.26 219.71)
+			(xy 24.13 219.71) (xy 48.26 219.71)
 		)
 		(stroke
 			(width 0)
@@ -13541,6 +13541,50 @@
 			(color 24 199 56 1)
 		)
 		(uuid "fee2fdf5-5c4f-49d0-b055-686fb3fd47ef")
+	)
+	(text "Device Buffer\nsignals are 5V."
+		(exclude_from_sim no)
+		(at -19.05 193.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "00f9d2ef-b645-4095-a776-963fc7b59718")
+	)
+	(text "~{CS} signals\nare 5V."
+		(exclude_from_sim no)
+		(at 93.98 193.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "1810d8c8-ed7d-4ce3-a450-af0141d530f1")
+	)
+	(text "~{Reset} is 5V."
+		(exclude_from_sim no)
+		(at 95.25 172.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "4b89848a-3cee-41f6-acea-bb7278c78efb")
+	)
+	(text "PHI2 is 5V."
+		(exclude_from_sim no)
+		(at 93.98 185.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "e140cb19-cee4-4491-8afb-3d76bce31955")
 	)
 	(label "A13"
 		(at 48.26 283.21 180)
@@ -15753,8 +15797,8 @@
 		)
 		(uuid "52d0d3b9-1ff8-4a47-bf69-ea4b274dd6a2")
 	)
-	(label "5V"
-		(at 25.4 201.93 0)
+	(label "3.3V"
+		(at 24.13 201.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22656,7 +22700,7 @@
 	)
 	(symbol
 		(lib_id "Bourns:4609X-101-682LF")
-		(at 25.4 201.93 0)
+		(at 24.13 201.93 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -22665,7 +22709,7 @@
 		(dnp no)
 		(uuid "570c82d3-c4de-466d-b687-f981c3b48fd4")
 		(property "Reference" "RN1"
-			(at 17.145 196.85 0)
+			(at 15.875 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22673,7 +22717,7 @@
 			)
 		)
 		(property "Value" "4609X-101-682LF"
-			(at 17.145 198.755 0)
+			(at 15.875 198.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22681,7 +22725,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:4609X"
-			(at 8.89 229.235 0)
+			(at 7.62 229.235 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22691,7 +22735,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.bourns.com/pdfs/4600X.pdf"
-			(at 8.89 231.775 0)
+			(at 7.62 231.775 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22701,7 +22745,7 @@
 			)
 		)
 		(property "Description" "6.8KΩ 8-bus resistor"
-			(at 17.145 225.425 0)
+			(at 15.875 225.425 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22709,7 +22753,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 8.89 207.01 0)
+			(at 7.62 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22719,7 +22763,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 8.89 234.95 0)
+			(at 7.62 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22729,7 +22773,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "4609X-101-682LF"
-			(at 8.89 237.49 0)
+			(at 7.62 237.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22739,7 +22783,7 @@
 			)
 		)
 		(property "Mouser Part Number" "652-4609X-1LF-6.8K"
-			(at 8.89 240.03 0)
+			(at 7.62 240.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22749,7 +22793,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-472LF/?qs=6yLoizYthp6x52D9SeHB4A%3D%3D"
-			(at 8.89 242.57 0)
+			(at 7.62 242.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)

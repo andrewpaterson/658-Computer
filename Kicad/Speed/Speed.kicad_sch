@@ -388,16 +388,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
 				(pin passive line
 					(at 0 -5.08 0)
@@ -6457,7 +6447,7 @@
 				)
 			)
 			(property "Footprint" "HCP65_Parts:HCP65_RS232_UART"
-				(at 15.24 -44.45 0)
+				(at 15.24 -46.99 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -6503,7 +6493,7 @@
 			(symbol "UART RS232_0_1"
 				(polyline
 					(pts
-						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -30.48) (xy 0 -30.48) (xy 0 1.905)
+						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -33.02) (xy 0 -33.02) (xy 0 1.905)
 					)
 					(stroke
 						(width 0.1524)
@@ -6536,7 +6526,7 @@
 			)
 			(symbol "UART RS232_1_1"
 				(pin passive line
-					(at -5.08 -25.4 0)
+					(at -5.08 -27.94 0)
 					(length 5.08) hide
 					(name "5V"
 						(effects
@@ -6554,7 +6544,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 11.43 -35.56 90)
+					(at 11.43 -38.1 90)
 					(length 5.08)
 					(name "D5"
 						(effects
@@ -6572,7 +6562,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 13.97 -35.56 90)
+					(at 13.97 -38.1 90)
 					(length 5.08)
 					(name "D4"
 						(effects
@@ -6608,7 +6598,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 16.51 -35.56 90)
+					(at 16.51 -38.1 90)
 					(length 5.08)
 					(name "D3"
 						(effects
@@ -6626,7 +6616,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 19.05 -35.56 90)
+					(at 19.05 -38.1 90)
 					(length 5.08)
 					(name "D2"
 						(effects
@@ -6644,7 +6634,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 21.59 -35.56 90)
+					(at 21.59 -38.1 90)
 					(length 5.08)
 					(name "D1"
 						(effects
@@ -6662,7 +6652,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 24.13 -35.56 90)
+					(at 24.13 -38.1 90)
 					(length 5.08)
 					(name "D0"
 						(effects
@@ -6680,7 +6670,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -27.94 0)
+					(at -5.08 -30.48 0)
 					(length 5.08) hide
 					(name "5V"
 						(effects
@@ -6697,10 +6687,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -5.08 -10.16 0)
+				(pin passive line
+					(at 35.56 -27.94 180)
 					(length 5.08)
-					(name "A0"
+					(name "1.8432Mhz"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6716,9 +6706,9 @@
 					)
 				)
 				(pin input line
-					(at -5.08 -12.7 0)
+					(at -5.08 -15.24 0)
 					(length 5.08)
-					(name "A1"
+					(name "A0"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6734,7 +6724,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -27.94 180)
+					(at -5.08 -25.4 0)
 					(length 5.08) hide
 					(name "N.C."
 						(effects
@@ -6752,9 +6742,9 @@
 					)
 				)
 				(pin input line
-					(at -5.08 -15.24 0)
+					(at -5.08 -12.7 0)
 					(length 5.08)
-					(name "A2"
+					(name "A1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6787,10 +6777,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 35.56 -25.4 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin input line
+					(at -5.08 -10.16 0)
+					(length 5.08)
+					(name "A2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7058,7 +7048,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 6.35 -35.56 90)
+					(at 6.35 -38.1 90)
 					(length 5.08)
 					(name "D7"
 						(effects
@@ -7076,7 +7066,7 @@
 					)
 				)
 				(pin tri_state line
-					(at 8.89 -35.56 90)
+					(at 8.89 -38.1 90)
 					(length 5.08)
 					(name "D6"
 						(effects
@@ -9698,15 +9688,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Maxim DS1813R-10+T&R, Voltage Supervisor 4.25  4.49 V, Reset Input, 3-Pin SOT-23"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "DS1813R-10+T&R_0_0"
 				(pin output inverted
 					(at 25.4 0 180)
@@ -9884,15 +9865,6 @@
 			)
 			(property "Silkscreen" "GPTS203211B"
 				(at 5.08 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Pushbutton Switches SPST ON-OFF"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -13091,6 +13063,10 @@
 		(uuid "a3f2b039-1e55-4eda-86b7-6f7f3147650d")
 	)
 	(no_connect
+		(at 264.16 146.05)
+		(uuid "a85ece19-1a89-4ef6-a7ea-812263dc1295")
+	)
+	(no_connect
 		(at 66.04 99.06)
 		(uuid "b188b192-f034-4190-adc3-a5a8d9a88aac")
 	)
@@ -14768,7 +14744,7 @@
 		(uuid "147c4849-03ea-4ba3-83f6-56f604d96109")
 	)
 	(label "D2"
-		(at 247.65 153.67 270)
+		(at 247.65 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14801,7 +14777,7 @@
 		(uuid "17d0ce8c-fe2a-44e0-b6df-95fa879b55cf")
 	)
 	(label "D1"
-		(at 250.19 153.67 270)
+		(at 250.19 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14933,7 +14909,7 @@
 		(uuid "1e5d5b0c-ad91-4d61-8627-81664c2a5451")
 	)
 	(label "D6"
-		(at 237.49 153.67 270)
+		(at 237.49 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15197,7 +15173,7 @@
 		(uuid "2ad3727a-680c-4d95-8d62-6e876609a984")
 	)
 	(label "D5"
-		(at 240.03 153.67 270)
+		(at 240.03 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15560,7 +15536,7 @@
 		(uuid "40df8f51-863d-4710-91c2-64d2bf00057a")
 	)
 	(label "5V"
-		(at 223.52 143.51 180)
+		(at 223.52 146.05 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -16297,7 +16273,7 @@
 		(uuid "6cfa21ad-d0e2-4aec-9b34-7ea0a245a655")
 	)
 	(label "D7"
-		(at 234.95 153.67 270)
+		(at 234.95 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -16517,7 +16493,7 @@
 		(uuid "79356c19-1b86-41d3-b2a1-b3b979ab55d5")
 	)
 	(label "D3"
-		(at 245.11 153.67 270)
+		(at 245.11 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -17298,7 +17274,7 @@
 		(uuid "bf91bdb2-366b-41c9-85ed-f57377f41a22")
 	)
 	(label "D0"
-		(at 252.73 153.67 270)
+		(at 252.73 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -17419,7 +17395,7 @@
 		(uuid "c3808e2c-93e4-4f62-a9eb-f156e473cd11")
 	)
 	(label "D4"
-		(at 242.57 153.67 270)
+		(at 242.57 156.21 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -17463,7 +17439,7 @@
 		(uuid "c545c465-9af4-46ac-bae9-c5c2df3c775f")
 	)
 	(label "5V"
-		(at 223.52 146.05 180)
+		(at 223.52 148.59 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23023,15 +22999,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Pushbutton Switches SPST ON-OFF"
-			(at 85.09 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "0324b11d-4857-497d-85ea-b6707f840407")
 		)
@@ -23173,16 +23140,6 @@
 		)
 		(property "Silkscreen" "AP7365"
 			(at 62.23 227.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at 62.23 253.492 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23352,15 +23309,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Maxim DS1813R-10+T&R, Voltage Supervisor 4.25  4.49 V, Reset Input, 3-Pin SOT-23"
-			(at 209.55 257.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -24422,7 +24370,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c418c339-e967-4946-a158-b1a8bba36145")
+		(uuid "ea827e95-862b-4166-a246-247bffd4a5c1")
 		(property "Reference" "B2"
 			(at 244.475 113.03 0)
 			(effects
@@ -24441,7 +24389,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_RS232_UART"
-			(at 243.84 162.56 0)
+			(at 243.84 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24475,101 +24423,101 @@
 				(hide yes)
 			)
 		)
-		(pin "30"
-			(uuid "a1dc4728-de4e-4c37-97b7-98aaac9a926e")
-		)
-		(pin "3"
-			(uuid "35797178-f8ec-40f6-96fd-53e60fb800a7")
-		)
-		(pin "6"
-			(uuid "1698e926-f0b9-4401-aa5b-e2d8a575d9f5")
-		)
-		(pin "4"
-			(uuid "d0f338d0-9f9f-4002-8f1a-6c84a89a9b63")
-		)
-		(pin "8"
-			(uuid "263b4b03-0f16-4b25-967a-fd7fbd751526")
-		)
-		(pin "7"
-			(uuid "d9fa959b-7f65-45f8-9dd1-ad0343a35e38")
-		)
-		(pin "5"
-			(uuid "e7ccd20b-033f-4c32-af5a-391e4a6272fc")
-		)
-		(pin "31"
-			(uuid "61c0f773-8811-4d69-96b0-6461a7cccd1d")
-		)
-		(pin "9"
-			(uuid "7d7d2d1f-a719-40b7-94ac-fe722207dc96")
-		)
-		(pin "21"
-			(uuid "43e81818-8d20-4278-acc4-554a36d5380a")
+		(pin "15"
+			(uuid "dbf436d4-765a-4a36-a64a-60b5ffb5b1ef")
 		)
 		(pin "23"
-			(uuid "b740addc-6911-403c-8827-eda5d09b6297")
-		)
-		(pin "27"
-			(uuid "10b8f48c-5c66-4ea7-a947-29cb16992dcd")
-		)
-		(pin "10"
-			(uuid "ea2fd76a-313c-4046-a219-963b2cc5c35b")
-		)
-		(pin "12"
-			(uuid "9198f34e-5fa7-4cfc-a052-4b288052d731")
-		)
-		(pin "16"
-			(uuid "a4b1bbed-1794-47b8-bc1a-2cd0d7428b9a")
-		)
-		(pin "14"
-			(uuid "99119319-1317-4958-83ae-bedd878554ef")
-		)
-		(pin "11"
-			(uuid "32788338-b33a-4302-a6c8-5d2e89504ac8")
-		)
-		(pin "15"
-			(uuid "3cd3c177-8a08-4ad5-9239-10a5aff53faa")
-		)
-		(pin "20"
-			(uuid "a01aecc2-7340-403f-92b6-ba11a604baaf")
-		)
-		(pin "25"
-			(uuid "2aa243bf-79a0-4530-b220-f4996d914645")
-		)
-		(pin "1"
-			(uuid "20c0f20e-5338-4659-9bb0-0d7acc6aa729")
-		)
-		(pin "17"
-			(uuid "fda40aa1-2cfc-4cc6-ab49-51c75207d843")
-		)
-		(pin "28"
-			(uuid "1d0b5e6d-3466-4096-b921-f319e99e282c")
-		)
-		(pin "32"
-			(uuid "40c32838-b23b-435d-98df-1dbf61cc0a8f")
+			(uuid "2e618e65-dd7c-4b21-a630-f4343893fd09")
 		)
 		(pin "29"
-			(uuid "ffc2d3ac-9bb0-40d4-9721-bc5af1c25a05")
+			(uuid "5c3159a3-9388-45f2-886c-bbf7a3ea3ed8")
 		)
 		(pin "13"
-			(uuid "8d7fa8c2-0bc2-4307-b2ce-122803328a91")
-		)
-		(pin "19"
-			(uuid "8eccaea0-67f0-496c-874a-84a035daa8e9")
+			(uuid "52b17915-1fb0-42c8-baab-3f7898f3070d")
 		)
 		(pin "22"
-			(uuid "642c2eab-4830-49df-8d96-da5d77a5e74c")
+			(uuid "417a5f2b-1a10-4fa4-9a32-7a11c979fc81")
 		)
-		(pin "24"
-			(uuid "74b44bd4-6122-4ce9-a3fd-e3c74e441993")
+		(pin "10"
+			(uuid "5e9b357e-9deb-4550-ad66-2260c1533c96")
 		)
-		(pin "26"
-			(uuid "a26c7195-da30-4556-a415-320b17431b54")
+		(pin "11"
+			(uuid "7190bff9-22ea-48a2-abb1-fcc4da97ff27")
+		)
+		(pin "32"
+			(uuid "3aba1a45-2a1b-4d3c-bdb9-47b06fbe2637")
+		)
+		(pin "12"
+			(uuid "8816756f-e95b-4879-8ba6-5674dab3dc26")
+		)
+		(pin "5"
+			(uuid "ef928d72-9fc2-4ab2-85b4-d0aee0af79b3")
+		)
+		(pin "6"
+			(uuid "54683144-a256-4850-b7c8-f3f144fff20c")
 		)
 		(pin "18"
-			(uuid "97defcf9-7430-47cd-a74f-e0294324cd47")
+			(uuid "acff3269-0005-4c6a-9990-7a1841428de4")
+		)
+		(pin "30"
+			(uuid "4d1b35ef-48f2-4d9f-906a-381ed8539b57")
+		)
+		(pin "17"
+			(uuid "c49ad25c-569c-4316-ac21-45be23f3aecb")
+		)
+		(pin "25"
+			(uuid "6f4ee7cf-bf66-41cb-8836-19415c73e100")
+		)
+		(pin "14"
+			(uuid "e3e225c9-7c37-412f-84fd-22f6cfa12e21")
+		)
+		(pin "31"
+			(uuid "3ba0bb62-a36c-48ab-88cd-ff4cfc9662bb")
+		)
+		(pin "7"
+			(uuid "62f3e995-d287-4ed6-9fa6-15b263dfb09e")
+		)
+		(pin "16"
+			(uuid "03106b7e-662e-465b-9dab-c58135eacddd")
 		)
 		(pin "2"
-			(uuid "6bec0743-7388-47e7-915b-8b150949a40d")
+			(uuid "acfa23cd-a611-4ed9-b218-ed7439f94d26")
+		)
+		(pin "20"
+			(uuid "144d9122-0faa-418d-8459-b380b0158012")
+		)
+		(pin "28"
+			(uuid "ab93e726-26f6-4e6a-a02d-066b753fe173")
+		)
+		(pin "26"
+			(uuid "9a1dfb4d-5e9e-4588-90fb-f716bd302ff6")
+		)
+		(pin "24"
+			(uuid "b8465fe3-82a6-40f9-9168-8b88b2ce9a15")
+		)
+		(pin "19"
+			(uuid "2e824ffe-592d-428d-8f86-669e8b5cd93a")
+		)
+		(pin "9"
+			(uuid "68a2040d-4365-4ad3-857d-760cb087ffa2")
+		)
+		(pin "8"
+			(uuid "0c753af1-0843-4b69-8c2c-898ca8e1d8ab")
+		)
+		(pin "3"
+			(uuid "eb519503-847a-46d6-adff-5b387e8b234a")
+		)
+		(pin "1"
+			(uuid "c5f7a8c3-13e3-4eb2-a415-b887b2585154")
+		)
+		(pin "27"
+			(uuid "acfc547d-f01c-4d9a-ade3-ce95e415cba5")
+		)
+		(pin "21"
+			(uuid "e04fdf06-3da7-427c-b562-d6b0f8f87a61")
+		)
+		(pin "4"
+			(uuid "6b77cb1d-050c-447f-893c-93aef97e9225")
 		)
 		(instances
 			(project ""

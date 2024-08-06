@@ -1,4 +1,4 @@
-24138347493557951
+24262553868996323
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -2305,7 +2305,7 @@ tactile switch Omron B3F right angle through hole
 Button_Switch_THT
 SW_Slide-03_Wuerth-WS-SLTV_10x2.5x6.4_P2.54mm
 Wuerth, WS-SLTV, 450301014042, https://www.we-online.com/components/products/datasheet/450301014042.pdf
-switch single-pole double-throw SPDT würth wurth
+switch single-pole opposite-side-connection double-throw SPDT würth wurth
 0
 3
 3
@@ -8315,6 +8315,13 @@ Combo Connector microSD and microSIM
 0
 25
 18
+Connector_Card
+SD_Card_Device_16mm_SlotDepth
+SD card device PCB layout, contacts and mechanicalm, 16mm slot depth. Manufacture with PCB thickness of 1.4mm, http://www.convict.lu/pdf/ProdManualSDCardv1.9.pdf
+SD Card
+0
+9
+9
 Connector_Card
 SD_Hirose_DM1AA_SF_PEJ82
 SD, SMD, top-mount, push-push (https://www.hirose.com/product/document?clcode=CL0609-0004-8-82&productname=DM1AA-SF-PEJ(82)&series=DM1&documenttype=2DDrawing&lang=en&documentid=0000915301)
@@ -49371,6 +49378,13 @@ usb usb-c 2.0 pd
 20
 17
 Connector_USB
+USB_C_Receptacle_HRO_TYPE-C-31-M-17
+USB Type-C receptacle for USB 2.0, 6 pin, https://omo-oss-file.thefastfile.com/portal-saas/new2023011311465142457/cms/file/134891b2-9b01-4104-89d3-96207243f692.pdf
+usb usb-c 2.0 pd
+0
+10
+7
+Connector_USB
 USB_C_Receptacle_JAE_DX07S016JA1R1500
 USB TYPE C, USB 2.0, SMT, https://www.jae.com/en/connectors/series/detail/product/id=91780
 USB C Type-C Receptacle SMD USB 2.0
@@ -57547,6 +57561,13 @@ HCP65 Audio DAC 2.54mm 22.86mm
 32
 32
 HCP65_Parts
+HCP65_Clock_Doubler
+HCP65 Clock Doubler
+HCP65 Clock Doubler
+0
+24
+24
+HCP65_Parts
 HCP65_Clock_Generator
 HCP65 Clock Generator
 HCP65 Clock Generator
@@ -57589,6 +57610,13 @@ HCP65 Clock Pushbutton
 6
 6
 HCP65_Parts
+HCP65_Clock_Transition
+HCP65 Clock Transition
+HCP65 Clock Transition
+0
+12
+12
+HCP65_Parts
 HCP65_Comparator_10bit
 HCP65 Comparator 10bit
 HCP65 Comparator 10bit
@@ -57609,6 +57637,13 @@ HCP65 Counter 16bit DIO 2.54mm 22.86mm
 0
 40
 40
+HCP65_Parts
+HCP65_Counter_24bit
+HCP65 Counter 24bit
+HCP65 Counter 24bit
+0
+56
+56
 HCP65_Parts
 HCP65_Counter_24bit_with_IO
 HCP65 Counter 24bit with IO
@@ -57841,6 +57876,69 @@ HCP65 Pico Power
 40
 40
 HCP65_Parts
+HCP65_RS232_UART
+HCP65 RS232 UART
+HCP65 RS232 UART
+0
+32
+32
+HCP65_Parts
+HCP65_SD_Card_Clock
+HCP65 SD Card Clock
+HCP65 SD Card Clock
+0
+24
+24
+HCP65_Parts
+HCP65_SD_Card_Full_Socket
+HCP65 SD Card Full Socket
+HCP65 SD Card Full Socket
+0
+40
+40
+HCP65_Parts
+HCP65_SD_Card_Micro_Socket
+HCP65 SD Card Micro Socket
+HCP65 SD Card Micro Socket
+0
+24
+24
+HCP65_Parts
+HCP65_SD_Card_Read_Data
+HCP65 SD Card Read Data
+HCP65 SD Card Read Data
+0
+24
+24
+HCP65_Parts
+HCP65_SD_Card_Read_Function
+HCP65 SD Card Read Function
+HCP65 SD Card Read Function
+0
+40
+40
+HCP65_Parts
+HCP65_SD_Card_Read_Signals
+HCP65 SD Card Read Signals
+HCP65 SD Card Read Signals
+0
+32
+32
+HCP65_Parts
+HCP65_SD_Card_Write_Data
+HCP65 SD Card Write Data
+HCP65 SD Card Write Data
+0
+24
+24
+HCP65_Parts
+HCP65_SD_Card_Write_Signals
+HCP65 SD Card Write Signals
+HCP65 SD Card Write Signals
+0
+32
+32
+HCP65_Parts
 HCP65_SNES_Controller_Clock
 HCP65 SNES Controller Clock
 HCP65 SNES Controller Clock
@@ -57932,19 +58030,19 @@ HCP65 VIA Clock Control
 32
 32
 HCP65_Parts
+HCP65_VIA_Control
+HCP65 VIA Control
+HCP65 VIA Control
+0
+56
+56
+HCP65_Parts
 HCP65_VIA_Standard_Clock
 HCP65 VIA Standard Clock
 HCP65 VIA Standard Clock
 0
 24
 24
-HCP65_Parts
-HCP65_Video_Address_Counter
-HCP65 Video Address Counter
-HCP65 Video Address Counter
-0
-56
-56
 HCP65_Parts
 HCP65_Video_Address_Reader
 HCP65 Video Address Reader
@@ -71528,7 +71626,7 @@ DFN NoLead
 Package_DFN_QFN
 DFN-8-1EP_2x3mm_P0.5mm_EP0.61x2.2mm
 DFN, 8 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/ltc-legacy-dfn/05081702_c_ddb8.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
-DFN NoLead Linear-DDB
+DFN NoLead
 0
 11
 9
@@ -74759,6 +74857,13 @@ ti vqfn-hr rnn0018a
 0
 26
 18
+Package_DFN_QFN
+Texas_RPU0010A_VQFN-HR-10_2x2mm_P0.5mm
+VQFN-HR, 10 Pin (https://www.ti.com/lit/ds/symlink/tps62912.pdf#page=39)
+VQFN-HR NO LEAD
+0
+10
+10
 Package_DFN_QFN
 Texas_RSA_VQFN-16-1EP_4x4mm_P0.65mm_EP2.7x2.7mm
 Texas RSA VQFN, 16 Pin (http://www.ti.com/lit/ds/symlink/msp430g2001.pdf#page=44), generated with kicad-footprint-generator ipc_noLead_generator.py
@@ -87297,6 +87402,13 @@ DPDT relay, Finder 40.52, 8A, 250V, body size 29x12.4mm, height 25mm, pitch 5x7.
 8
 8
 Relay_THT
+Relay_DPDT_Finder_40.62
+DPDT relay, Finder 40.62, 10A, 250V, body size 29x12.4mm, height 25mm, pitch 5x7.5mm, https://cdn.findernet.com/app/uploads/S40EN.pdf
+2-Form-C
+0
+8
+8
+Relay_THT
 Relay_DPDT_Fujitsu_FTR-F1C
 https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf
 relay dpdt fujitsu tht
@@ -87499,6 +87611,13 @@ SPDT relay, Finder 40.52, 10/12A, 250V, body size 29x12.4mm, height 25mm, pitch 
 0
 5
 5
+Relay_THT
+Relay_SPDT_Finder_40.61
+SPDT relay, Finder 40.61, 16A, 250V, body size 29x12.4mm, height 25mm, pitch 5x7.5mm, https://cdn.findernet.com/app/uploads/S40EN.pdf
+2-Form-C
+0
+8
+8
 Relay_THT
 Relay_SPDT_Fujitsu_FTR-LYCA005x_FormC_Vertical
 Relay, SPDT Form C, vertical mount, 6A, 5-60V, https://www.fujitsu.com/sg/imagesgig5/ftr-ly.pdf
@@ -90349,6 +90468,13 @@ Connector
 21
 21
 SamacSys_Parts
+SDK9BNSK13GSTBLFSN1
+SDK-9BNS-K13-GS-TB(LF)(SN)1-2
+Connector
+0
+16
+16
+SamacSys_Parts
 SG7050CCN25000000MHJGA3
 SG7050CCN 25.000000M-HJGA3-1
 Crystal or Oscillator
@@ -91314,6 +91440,13 @@ hall current
 0
 6
 6
+Sensor_Current
+LEM_LA25-NP
+LEM LA 25-NP Current Transducer (https://www.lem.com/sites/default/files/products_datasheets/la%2025-np.pdf)
+Current sensor LEM
+0
+13
+13
 Sensor_Current
 LEM_LA25-P
 LEM Current Transducer (https://www.lem.com/sites/default/files/products_datasheets/la_25-p.pdf)

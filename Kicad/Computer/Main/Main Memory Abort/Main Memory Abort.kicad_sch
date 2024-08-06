@@ -1151,16 +1151,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
 				(pin passive line
 					(at 0 -5.08 0)
@@ -2324,15 +2314,6 @@
 			)
 			(property "Silkscreen" "74LVC32"
 				(at 12.7 -25.4 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC32A - Quad 2-input OR gate@en-us"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -4125,7 +4106,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 101.6) (xy 223.52 111.76)
+			(xy 223.52 99.06) (xy 223.52 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4215,7 +4196,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 101.6) (xy 231.14 101.6)
+			(xy 223.52 99.06) (xy 231.14 99.06)
 		)
 		(stroke
 			(width 0)
@@ -4551,6 +4532,17 @@
 		)
 		(uuid "5bb6814b-2df3-48f8-9f79-11ccbb8ed7f6")
 	)
+	(label "~{Main}_{1}+~{Main}_{2}"
+		(at 128.27 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5c334300-40cb-4137-8b94-ad3feaa3a6ae")
+	)
 	(label "GND"
 		(at 100.33 97.79 180)
 		(fields_autoplaced yes)
@@ -4640,7 +4632,7 @@
 		(uuid "8815a287-f254-4585-99cb-e7a426a54896")
 	)
 	(label "GND"
-		(at 231.14 99.06 180)
+		(at 231.14 101.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4749,6 +4741,17 @@
 		)
 		(uuid "a640b2d5-ce9d-4fa0-a117-f9261ac01e7a")
 	)
+	(label "~{Main}+~{Main}_{2}"
+		(at 128.27 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a7bce616-29da-4d3b-84f7-da21a8e78458")
+	)
 	(label "3.3V"
 		(at 189.23 99.06 180)
 		(fields_autoplaced yes)
@@ -4847,6 +4850,17 @@
 			(justify right bottom)
 		)
 		(uuid "d0f68fad-a2ef-42e3-9451-3ae3510f0aa4")
+	)
+	(label "~{Main}+~{Main}_{1}"
+		(at 128.27 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d37ca7e8-186f-4e10-8941-1bff0e066c2b")
 	)
 	(label "GND"
 		(at 231.14 111.76 180)
@@ -5339,15 +5353,6 @@
 		)
 		(property "Silkscreen" "74LVC32"
 			(at 113.03 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC32A - Quad 2-input OR gate@en-us"
-			(at 100.33 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6595,16 +6600,6 @@
 		)
 		(property "Silkscreen" "AP7365"
 			(at 81.28 182.245 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at 81.28 207.772 0)
 			(effects
 				(font
 					(size 1.27 1.27)

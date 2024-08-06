@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "HCP65 RS232 UART"
-		(at 11.43 46.736 0)
+		(at 11.43 47.405 0)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
@@ -29,7 +29,7 @@
 		)
 	)
 	(property "Footprint" "HCP65 RS232 UART"
-		(at 11.43 48.514 0)
+		(at 11.43 49.183 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -91,7 +91,7 @@
 	)
 	(fp_line
 		(start -1.903183 -0.127001)
-		(end -1.905 38.735)
+		(end -1.908632 39.243)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -100,8 +100,8 @@
 		(uuid "9b3b2736-8add-4def-91a9-7b24d4d91965")
 	)
 	(fp_line
-		(start 19.685 43.815)
-		(end 3.175 43.815)
+		(start 19.681368 44.323)
+		(end 3.171368 44.323)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -110,14 +110,14 @@
 		(uuid "fb00a33e-c047-4d8d-894d-9e0c3f9cca9f")
 	)
 	(fp_line
-		(start 24.765 38.735)
-		(end 24.763184 -0.127)
+		(start 24.763184 -0.127)
+		(end 24.761368 39.243)
 		(stroke
 			(width 0.1)
-			(type solid)
+			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "0df31f2f-9bb9-42a0-b402-37fddcc01bca")
+		(uuid "e0f0003e-6c28-4c53-b835-a5b8a154fa35")
 	)
 	(fp_line
 		(start 28.244422 -3.608238)
@@ -163,15 +163,26 @@
 		(uuid "79cbfc43-93d9-44b3-8006-2e69b9cd0a5e")
 	)
 	(fp_arc
-		(start 3.175 43.815)
-		(mid -0.417102 42.327102)
-		(end -1.905 38.735)
+		(start 3.171368 44.323)
+		(mid -0.420734 42.835102)
+		(end -1.908632 39.243)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "716e83d3-32b3-4467-9d63-9c9b2b63d625")
+	)
+	(fp_arc
+		(start 24.761368 39.243)
+		(mid 23.27347 42.835102)
+		(end 19.681368 44.323)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "06e3585c-7306-4c7d-81f2-5f7e0daec102")
 	)
 	(fp_arc
 		(start 24.763184 -0.127)
@@ -183,17 +194,6 @@
 		)
 		(layer "F.SilkS")
 		(uuid "a3a56be2-af64-454a-aa49-ba84666b286b")
-	)
-	(fp_arc
-		(start 24.765 38.735)
-		(mid 23.277102 42.327102)
-		(end 19.685 43.815)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.SilkS")
-		(uuid "06e3585c-7306-4c7d-81f2-5f7e0daec102")
 	)
 	(fp_arc
 		(start 26.503803 -16.293381)
@@ -249,7 +249,7 @@
 		(uuid "498ee85f-9c4d-4a91-91a1-a9fdb2125305")
 	)
 	(fp_line
-		(start -2.286 44.196)
+		(start -2.286 44.75)
 		(end -2.286 0)
 		(stroke
 			(width 0.05)
@@ -259,8 +259,8 @@
 		(uuid "15587d96-8f01-4fcb-8677-8a53ff417441")
 	)
 	(fp_line
-		(start -2.286 44.196)
-		(end 25.146 44.196)
+		(start -2.286 44.75)
+		(end 25.146 44.75)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -279,7 +279,7 @@
 		(uuid "c832744b-ec90-4a97-b571-0f125c4f4e9a")
 	)
 	(fp_line
-		(start 25.146 44.196)
+		(start 25.146 44.75)
 		(end 25.146 0)
 		(stroke
 			(width 0.05)
@@ -309,7 +309,7 @@
 		(uuid "4d2b70b5-7cb7-4241-bb50-ca8ba590a728")
 	)
 	(fp_text user "${Silkscreen}"
-		(at 11.43 44.831 0)
+		(at 11.43 45.5 0)
 		(layer "F.SilkS")
 		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
 		(effects

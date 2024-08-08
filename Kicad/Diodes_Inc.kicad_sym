@@ -1600,7 +1600,7 @@
 			)
 		)
 		(property "Description" "5V Digital Power Switch"
-			(at 12.7 -10.795 0)
+			(at 12.7 -8.255 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1657,18 +1657,9 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "DiodesZetex AP2151AW-7, 0.5A SINGLE CHANNEL CURRENT-LIMITED POWER SWITCH"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "AP2151AW-7_0_0"
 			(pin passive line
-				(at 0 -7.62 0)
+				(at 0 -5.08 0)
 				(length 5.08)
 				(name "GND"
 					(effects
@@ -1689,7 +1680,7 @@
 		(symbol "AP2151AW-7_0_1"
 			(polyline
 				(pts
-					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -9.525) (xy 5.08 -9.525) (xy 5.08 1.905)
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
 				)
 				(stroke
 					(width 0)
@@ -1719,8 +1710,8 @@
 					)
 				)
 			)
-			(pin input line
-				(at 0 -2.54 0)
+			(pin output line
+				(at 25.4 -5.08 180)
 				(length 5.08)
 				(name "FLG"
 					(effects
@@ -1738,7 +1729,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -5.08 0)
+				(at 0 -2.54 0)
 				(length 5.08)
 				(name "EN"
 					(effects

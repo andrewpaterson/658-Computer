@@ -59,7 +59,24 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_overlap|127892500|93087500|ddd06857-2938-4742-8160-f01a282d50dd|5babb705-d9ee-45c6-ae19-1c32fa1fd59e",
+        "silk_overlap|127892500|93087500|e7953ec5-00f2-4306-b57c-5c2ef2dcea44|5babb705-d9ee-45c6-ae19-1c32fa1fd59e",
+        "silk_overlap|127952500|93087500|920f9100-b483-49bf-a107-131a3de05f55|5babb705-d9ee-45c6-ae19-1c32fa1fd59e",
+        "silk_overlap|127952500|93087500|920f9100-b483-49bf-a107-131a3de05f55|daa02ef9-5a87-4280-911d-9e4461d17ccd",
+        "silk_overlap|127952500|93087500|ddd06857-2938-4742-8160-f01a282d50dd|daa02ef9-5a87-4280-911d-9e4461d17ccd",
+        "silk_overlap|130432500|93087500|32d438c4-840d-4a92-b63a-4f408a1d8587|0312247c-dcfd-46fe-84e2-90f0488b6d3c",
+        "silk_overlap|130432500|93087500|5f216ce2-b1ec-4dad-8893-0916c4f0ad2d|0312247c-dcfd-46fe-84e2-90f0488b6d3c",
+        "silk_overlap|130552500|93087500|5f216ce2-b1ec-4dad-8893-0916c4f0ad2d|656898de-813f-4d7f-878d-6ca90831a013",
+        "silk_overlap|64392500|93087500|3eeb7340-b1cd-43c5-b71d-cd9547dd212d|0a73c69f-f64b-4d30-9c28-f0da6fe6d197",
+        "silk_overlap|64392500|93087500|e0b55a6c-c166-4657-8a3a-9edb93054ba2|0a73c69f-f64b-4d30-9c28-f0da6fe6d197",
+        "silk_overlap|64452500|93087500|3eeb7340-b1cd-43c5-b71d-cd9547dd212d|86da0e34-52b5-4427-8dc1-41c00595ea13",
+        "silk_overlap|64452500|93087500|f385753d-b5e6-49e9-b273-fc98754d3dd8|0a73c69f-f64b-4d30-9c28-f0da6fe6d197",
+        "silk_overlap|64452500|93087500|f385753d-b5e6-49e9-b273-fc98754d3dd8|86da0e34-52b5-4427-8dc1-41c00595ea13",
+        "silk_overlap|66932500|93087500|7ffc3806-0de8-4645-be43-f9f0c3a83040|f7ffd518-3fab-414c-889d-ba4e87d4bd60",
+        "silk_overlap|66932500|93087500|f7ffd518-3fab-414c-889d-ba4e87d4bd60|6502142d-1fff-48f0-9af8-00daa7820c8d",
+        "silk_overlap|67052500|93087500|64f51dd1-eb35-424a-85e6-d0ac746071f1|7ffc3806-0de8-4645-be43-f9f0c3a83040"
+      ],
       "meta": {
         "version": 2
       },
@@ -80,6 +97,7 @@
         "footprint_type_mismatch": "error",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "ignore",
         "item_on_disabled_layer": "error",
@@ -184,7 +202,8 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38
+        0.38,
+        1.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -216,6 +235,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.6,
+          "drill": 1.0
         }
       ],
       "zones_allow_external_fillets": false,
@@ -537,7 +560,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "W65C816 Debug Display",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "W65C816 Debug Display.step",
@@ -548,6 +571,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",

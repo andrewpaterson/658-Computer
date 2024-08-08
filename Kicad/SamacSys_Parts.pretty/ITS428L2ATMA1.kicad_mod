@@ -1,0 +1,242 @@
+(footprint "ITS428L2ATMA1"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "ITS428L2ATMA1-4")
+	(tags "MOSFET (N-Channel)")
+	(property "Reference" "Q**"
+		(at 0 4.5 90)
+		(layer "F.SilkS")
+		(uuid "51392439-435a-4e9f-9e31-834d1ec1a92b")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+				(bold yes)
+			)
+		)
+	)
+	(property "Value" "ITS428L2ATMA1"
+		(at 0.25 7.5 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "d6314a93-2c19-4703-b164-dd34fc724386")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6a2d2d79-99a6-4eb3-bab2-b79a6c7d478a")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "77c37c14-ee64-4a6e-b66d-5fa64188f860")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4a184483-7094-48b6-a549-a012bc1bcead")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -3.25 1.58)
+		(end -3.25 1.92)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "53eba065-881b-44c0-ae78-12252e665f3a")
+	)
+	(fp_line
+		(start -3.25 1.92)
+		(end 3.25 1.92)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "a71ce52a-63e2-4b6d-8eab-cba5f7c51636")
+	)
+	(fp_line
+		(start 3.25 1.92)
+		(end 3.25 1.58)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "cdf96629-9919-46aa-8949-71c273d93092")
+	)
+	(fp_circle
+		(center -3 4.25)
+		(end -2.9 4.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill solid)
+		(layer "F.SilkS")
+		(uuid "2d70609b-2a8b-4a82-b509-38759581192d")
+	)
+	(fp_line
+		(start -4.25 -6.3)
+		(end 4.25 -6.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "0bd16387-d1bc-4830-a2a3-ffc9289601e4")
+	)
+	(fp_line
+		(start -4.25 6.3)
+		(end -4.25 -6.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "2bd96908-8cb7-4946-8409-d119cb0715a6")
+	)
+	(fp_line
+		(start 4.25 -6.3)
+		(end 4.25 6.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "edef69fd-7821-4919-9fd0-419cfe0a9aa7")
+	)
+	(fp_line
+		(start 4.25 6.3)
+		(end -4.25 6.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "6b188a6d-3870-46b1-b17c-96dc924804bd")
+	)
+	(fp_line
+		(start -3.25 -4.3)
+		(end 3.25 -4.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "e4010e7e-0df5-46e9-84e7-c9905214ea01")
+	)
+	(fp_line
+		(start -3.25 1.92)
+		(end -3.25 -4.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1bc0ef49-d855-4cf8-929a-e2154c1dd62f")
+	)
+	(fp_line
+		(start 3.25 -4.3)
+		(end 3.25 1.92)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "446f31e6-3ecb-42a2-8134-b8aeebaef909")
+	)
+	(fp_line
+		(start 3.25 1.92)
+		(end -3.25 1.92)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6faec9b5-a830-4ab6-b016-7ff248ca148d")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.25 9.25 0)
+		(layer "F.Fab")
+		(uuid "bd82dcf1-91c4-48a4-8aba-858c33669044")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -2.28 4.2)
+		(size 0.8 2.2)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "13d828f7-0fff-4eb1-9d7b-743061950e2d")
+	)
+	(pad "2" smd rect
+		(at -1.14 4.2)
+		(size 0.8 2.2)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "1e95ac45-b084-405f-9cd2-4e9aac1898cf")
+	)
+	(pad "3" smd rect
+		(at 0 -2.1)
+		(size 5.8 6.4)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "780df8b7-bd71-42a1-a87d-27e19f789b94")
+	)
+	(pad "4" smd rect
+		(at 1.14 4.2)
+		(size 0.8 2.2)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "efd75cba-87a8-4d26-9608-57d615abd46f")
+	)
+	(pad "5" smd rect
+		(at 2.28 4.2)
+		(size 0.8 2.2)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "8989bddd-a78b-45db-a4ae-b4ce40edb9aa")
+	)
+	(model "${_658_COMPUTER_}/SamacSys_Parts.3dshapes/PG-TO252-5-11-1.STEP"
+		(offset
+			(xyz 0 1 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
